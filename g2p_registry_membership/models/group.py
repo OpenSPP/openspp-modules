@@ -17,7 +17,7 @@ class G2PMembershipGroup(models.Model):
     def count_individuals(self, kinds=None, criteria=None):
         """Count individuals based on kinds and criterias
 
-        This returns the total number of rows produced by the SQL query 
+        This returns the total number of rows produced by the SQL query
         from the query_members_aggregate function.
 
         :param kinds: membership kinds
@@ -30,10 +30,10 @@ class G2PMembershipGroup(models.Model):
         :Example:
 
             var = self.count_individuals(
-                kinds=["Head of Household","Alternate Recipient"], 
+                kinds=["Head of Household","Alternate Recipient"],
                 criteria="[('gender','=','Female')]"
             )
-        
+
         """
         self.ensure_one()
         membership_kind_domain = None
