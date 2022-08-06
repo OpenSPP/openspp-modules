@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+g2p_group_membership_admin,Membership Admin Access,g2p_registry_membership.model_g2p_group_membership,g2p_registry_base.group_g2p_admin,1,1,1,1
+g2p_group_membership_kind_admin,Group Membership Kind Admin Access,g2p_registry_membership.model_g2p_group_membership_kind,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+g2p_group_membership_registrar,Group Membership Registrar Access,g2p_registry_membership.model_g2p_group_membership,g2p_registry_base.group_g2p_registrar,1,1,1,0
+g2p_group_membership_kind_registrar,Group Membership Kind Registrar Access,g2p_registry_membership.model_g2p_group_membership_kind,g2p_registry_base.group_g2p_registrar,1,1,1,0

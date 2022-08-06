@@ -1,0 +1,11 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Group Membership Kinds -->
+        <record id="group_kind_household" model="g2p.group.kind">
+            <field name="name">Household</field>
+        </record>
+        <record id="group_kind_family" model="g2p.group.kind">
+            <field name="name">Family</field>
+        </record>
+    </data>
+</odoo>

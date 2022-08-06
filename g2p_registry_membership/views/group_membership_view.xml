@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2022 Newlogic
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<odoo>
+    <record id="view_group_membership_tree" model="ir.ui.view">
+        <field name="name">view_group_membership_tree</field>
+        <field name="model">g2p.group.membership</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="Group Memberships">
+                <field name="group" />
+                <field name="individual" />
+                <field name="kind" widget="many2many_tags" options="{'no_create_edit':True,'no_open':True}" />
+                <field name="start_date" />
+                <field name="end_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_group_membership_form" model="ir.ui.view">
+        <field name="name">view_group_membership_form</field>
+        <field name="model">g2p.group.membership</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Group Membership">
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title mb24">
+                        <label for="group" string="Group:" />
+                        <h1>
+                            <field
+                                id="group"
+                                name="group"
+                                placeholder="Select a Group..."
+                                options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                            />
+                        </h1>
+                        <label for="individual" string="Individual:" />
+                        <h1>
+                            <field
+                                id="individual"
+                                name="individual"
+                                placeholder="Select an Individual..."
+                                options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                            />
+                        </h1>
+                        <div class="o_row">
+                            <label for="kind" string="Kind:" />
+                            <field
+                                name="kind"
+                                widget="many2many_tags"
+                                options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
+                            />
+                        </div>
+                    </div>
+                    <group string="Date Range" colspan="4" col="4">
+                        <field name="start_date" />
+                        <field name="end_date" />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="group_membership_filter" model="ir.ui.view">
+        <field name="name">group_membership_filter</field>
+        <field name="model">g2p.group.membership</field>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <search string="Search Group Memberships">
+                <field name="group" />
+                <field name="individual" />
+                <field name="kind" />
+                <group expand="0" string="Group By">
+                    <filter string="Group" name="grp_group" context="{'group_by': 'group'}" />
+                    <filter string="Individual" name="grp_individual" context="{'group_by': 'individual'}" />
+                </group>
+                <!-- <searchpanel>
+                    <field name="group" icon="fa-users"/>
+                </searchpanel> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_group_membership" model="ir.actions.act_window">
+        <field name="name">Group Membership</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">g2p.group.membership</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="group_membership_filter" />
+        <field name="context">{'search_default_grp_group':1}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add an individual to a group!
+            </p><p>
+                Click the create button to enter the new group information.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_group_membership_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_group_membership_tree" />
+        <field name="act_window_id" ref="action_group_membership" />
+    </record>
+
+    <record id="action_group_membership_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_group_membership_form" />
+        <field name="act_window_id" ref="action_group_membership" />
+    </record>
+
+</odoo>

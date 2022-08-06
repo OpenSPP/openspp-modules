@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+  <t t-inherit="web.Legacy.SearchPanel.Category" t-inherit-mode="extension">
+    <xpath expr="//li[@class='o_search_panel_category_value list-group-item border-0']" position="replace">
+      <t t-if="valueId">
+      <li class="o_search_panel_category_value list-group-item border-0">
+          <header
+                        class="list-group-item-action"
+                        t-att-class="{ active: state.active[section.id] === valueId }"
+                        t-on-click="_toggleCategory(section, value)"
+                    >
+              <label
+                            class="o_search_panel_label mb0"
+                            t-att-class="{ o_with_counters: section.enableCounters }"
+                        >
+                  <div class="o_toggle_fold">
+                      <i
+                                    t-if="value.childrenIds.length"
+                                    t-attf-class="fa fa-caret-{{ state.expanded[section.id][valueId] ? 'down' : 'right' }}"
+                                />
+                  </div>
+                  <b t-if="value.bold" class="o_search_panel_label_title" t-esc="value.display_name" />
+                  <span t-else="" class="o_search_panel_label_title" t-esc="value.display_name" />
+              </label>
+              <span
+                            t-if="section.enableCounters and value.__count gt 0"
+                            class="o_search_panel_counter text-muted ml-2 small"
+                            t-esc="value.__count"
+                        />
+          </header>
+          <ul
+                        t-if="value.childrenIds.length and state.expanded[section.id][valueId]"
+                        class="list-group d-block"
+                    >
+              <t t-call="web.Legacy.SearchPanel.Category">
+                  <t t-set="values" t-value="value.childrenIds" />
+              </t>
+          </ul>
+      </li>
+      </t>
+    </xpath>
+  </t>
+</templates>

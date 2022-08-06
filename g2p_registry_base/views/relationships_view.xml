@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2022 Newlogic
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<odoo>
+    <record id="view_relationship_tree" model="ir.ui.view">
+        <field name="name">view_relationship_tree</field>
+        <field name="model">g2p.relationship</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="ID Types" editable="bottom">
+                <field name="name" />
+                <field name="name_inverse" />
+                <field name="bidirectional" />
+                <field name="registrant_type_1" />
+                <field name="registrant_type_2" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_relationship" model="ir.actions.act_window">
+        <field name="name">Relationship</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">g2p.relationship</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a Relationship!
+            </p><p>
+                Click the create button to enter a new relationship.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_relationship_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_relationship_tree" />
+        <field name="act_window_id" ref="action_relationship" />
+    </record>
+
+   <menuitem
+        id="menu_relationship"
+        name="Relationships"
+        action="action_relationship"
+        parent="g2p_configuration_menu_root"
+        sequence="20"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+
+</odoo>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2022 Newlogic
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<odoo>
+    <record id="view_reg_rel_tree" model="ir.ui.view">
+        <field name="name">view_reg_rel_tree</field>
+        <field name="model">g2p.reg.rel</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="Registrant's Relationships" decoration-danger="disabled != False">
+                <field name="registrant1" string="Registrant" />
+                <field name="registrant2" string="Is Related to" />
+                <field name="relation" />
+                <field name="disabled" />
+                <field name="disabled_by" widget="many2one_avatar_user" />
+                <field name="start_date" />
+                <field name="end_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_reg_rel_form" model="ir.ui.view">
+        <field name="name">view_reg_rel_form</field>
+        <field name="model">g2p.reg.rel</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Registrant Relationship">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-ban"
+                            name="disable_relationship"
+                            attrs="{'invisible':[('disabled','!=',False)]}"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Disable</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check"
+                            name="enable_relationship"
+                            attrs="{'invisible':[('disabled','=',False)]}"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Enable</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title mb24">
+                        <label for="registrant1" string="Registrant: " />
+                        <h1>
+                            <field
+                                id="registrant1"
+                                name="registrant1"
+                                placeholder="Select Registrant 1..."
+                                attrs="{'readonly':[('disabled','!=',False)]}"
+                                options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                            />
+                        </h1>
+                        <label for="registrant2" string="Is Related to: " />
+                        <h1>
+                            <field
+                                id="registrant2"
+                                name="registrant2"
+                                placeholder="Select Registrant 2..."
+                                attrs="{'readonly':[('disabled','!=',False)]}"
+                                options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                            />
+                        </h1>
+                        <div class="o_row">
+                            <label for="relation" string="Relation:" />
+                            <field
+                                id="relation"
+                                name="relation"
+                                placeholder="Select Relationship..."
+                                attrs="{'readonly':[('disabled','!=',False)]}"
+                                options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                            />
+                        </div>
+                    </div>
+                    <group string="Date Range" colspan="4" col="4">
+                        <field name="start_date" attrs="{'readonly':[('disabled','!=',False)]}" />
+                        <field name="end_date" attrs="{'readonly':[('disabled','!=',False)]}" />
+                    </group>
+                    <group string="Disable Info" colspan="4" col="4">
+                        <field name="disabled" readonly="1" />
+                        <field
+                            name="disabled_by"
+                            readonly="1"
+                            options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                        />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="reg_rel_filter" model="ir.ui.view">
+        <field name="name">reg_rel_filter</field>
+        <field name="model">g2p.reg.rel</field>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <search string="Search Registrant Relationships">
+                <field
+                    name="registrant1"
+                    string="Registrant"
+                    filter_domain="['|', ('registrant1', 'ilike', self), ('registrant2', 'ilike', self)]"
+                />
+                <field name="relation" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Registrant 1"
+                        name="grp_registrant1"
+                        context="{'group_by': 'registrant1'}"
+                    />
+                    <filter
+                        string="Registrant 2"
+                        name="grp_registrant2"
+                        context="{'group_by': 'registrant2'}"
+                    />
+                    <filter string="Relation" name="grp_relation" context="{'group_by': 'relation'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_reg_rel" model="ir.actions.act_window">
+        <field name="name">Registrant Relationships</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">g2p.reg.rel</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="reg_rel_filter" />
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a Registrant Relationship!
+            </p><p>
+                Click the create button to enter the new registrant's relationship information.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_reg_rel_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_reg_rel_tree" />
+        <field name="act_window_id" ref="action_reg_rel" />
+    </record>
+
+    <record id="action_reg_rel_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_reg_rel_form" />
+        <field name="act_window_id" ref="action_reg_rel" />
+    </record>
+
+</odoo>
