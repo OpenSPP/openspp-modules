@@ -10,15 +10,28 @@ class OpenSPPConsentMixin(models.AbstractModel):
 
     consent_ids = fields.Many2many("spp.consent", string="Consent IDS")
 
-    def open_create_consent_wizard(self):
-        view = self.env.ref("spp_consent.create_consent_wizard_form_view")
-        wiz = self.env["spp.create.consent.wizard"].create({"signatory_id": self.id})
+    def open_record_consent_wizard(self):
+        """
+        This method is used to open the consent wizard.
+        :param view: The View ID.
+        :param wiz: The Wizard.
+        :return: This will return the action based on the params.
+        """
+        view = self.env.ref("spp_consent.record_consent_wizard_form_view")
+        wiz = self.env["spp.record.consent.wizard"].create({"signatory_id": self.id})
+
+        if self.is_group:
+            view = self.env.ref("spp_consent.record_consent_wizard_form_view")
+            wiz = self.env["spp.record.consent.wizard"].create(
+                {"group_id": self.id, "is_group": True}
+            )
+
         return {
-            "name": _("Create Consent"),
+            "name": _("Record Consent"),
             "type": "ir.actions.act_window",
             "view_type": "form",
             "view_mode": "form",
-            "res_model": "spp.create.consent.wizard",
+            "res_model": "spp.record.consent.wizard",
             "views": [(view.id, "form")],
             "view_id": view.id,
             "target": "new",

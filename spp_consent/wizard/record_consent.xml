@@ -13,18 +13,28 @@
 -->
 <odoo>
     <data>
-        <record id="create_consent_wizard_form_view" model="ir.ui.view">
-            <field name="name">create_consent_wizard_form_view</field>
-            <field name="model">spp.create.consent.wizard</field>
+        <record id="record_consent_wizard_form_view" model="ir.ui.view">
+            <field name="name">record_consent_wizard_form_view</field>
+            <field name="model">spp.record.consent.wizard</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <field name="is_group" invisible="1" />
                         <div class="oe_title">
+                            <h1 attrs="{'invisible':[('is_group','!=',True)]}">
+                                <label for="group_id" string="Group" />
+                            </h1>
+                            <h1 attrs="{'invisible':[('is_group','!=',True)]}">
+                                <field name="group_id" readonly="1" />
+                            </h1>
                             <h1>
                                 <label for="signatory_id" string="Signatory" />
                             </h1>
                             <h1>
-                                <field name="signatory_id" readonly="1" />
+                                <field
+                                    name="signatory_id"
+                                    attrs="{'readonly':[('is_group','!=',True)], 'required':[('is_group', '=', True)]}"
+                                />
                             </h1>
                             <div class="o_row">
                             </div>
@@ -40,7 +50,7 @@
                     </sheet>
                     <footer>
                         <button
-                            name="create_consent"
+                            name="record_consent"
                             string="Create Consent"
                             type="object"
                             class="oe_highlight"

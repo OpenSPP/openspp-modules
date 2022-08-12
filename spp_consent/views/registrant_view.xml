@@ -36,10 +36,44 @@
                     type="object"
                     class="oe_stat_button"
                     icon="fa-sticky-note-o"
-                    name="open_create_consent_wizard"
+                    name="open_record_consent_wizard"
                 >
                       <div class="o_form_field o_stat_info">
-                          <span class="o_stat_text">Create</span>
+                          <span class="o_stat_text">Record</span>
+                          <span class="o_stat_text">Consent</span>
+                      </div>
+              </button>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_registrant_consent_group_form" model="ir.ui.view">
+        <field name="name">view_registrant_consent_group_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other']" position="before">
+                <page string="Consents">
+                  <field name="consent_ids" nolabel="1" readonly="1">
+                    <tree>
+                        <field name="name" />
+                        <field name="signatory_id" />
+                        <field name="expiry" />
+                    </tree>
+                  </field>
+                </page>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+              <button
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-sticky-note-o"
+                    name="open_record_consent_wizard"
+                >
+                      <div class="o_form_field o_stat_info">
+                          <span class="o_stat_text">Record</span>
                           <span class="o_stat_text">Consent</span>
                       </div>
               </button>

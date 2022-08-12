@@ -1,1 +1,1 @@
-from . import create_consent
+from . import record_consent
