@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!-- Add area field to Group registrant form view -->
+    <record id="view_area_groups_form" model="ir.ui.view">
+        <field name="name">view_area_groups_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//span[@name='address_name']" position="before">
+                <field
+                    name="area_id"
+                    placeholder="Area"
+                    options="{'no_open': True, 'no_create': True}"
+                    attrs="{'readonly':[('disabled','!=',False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
