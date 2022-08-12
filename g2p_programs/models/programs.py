@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 
 
 class G2PProgram(models.Model):
-    _inherit = ["mail.thread", "mail.activity.mixin", "g2p.job.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _name = "g2p.program"
     _description = "Program"
     _order = "id desc"

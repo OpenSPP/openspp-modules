@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__)
 
 
 class G2PCycle(models.Model):
-    _inherit = ["mail.thread", "mail.activity.mixin", "g2p.job.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _name = "g2p.cycle"
     _description = "Cycle"
     _order = "sequence asc"
