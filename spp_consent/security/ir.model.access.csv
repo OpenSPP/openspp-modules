@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_consent_spp_admin,OpenSPP Consent Admin Access,spp_consent.model_spp_consent,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_create_consent_wizard_spp_admin,OpenSPP Create Consent Wizard Admin Access,spp_consent.model_spp_create_consent_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_consent_config_spp_admin,OpenSPP Consent Config Admin Access,spp_consent.model_spp_consent_config,g2p_registry_base.group_g2p_admin,1,1,1,1

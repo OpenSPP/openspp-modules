@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2022 Newlogic
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<odoo>
+    <!-- individuals view-->
+
+    <record id="view_registrant_consent_form" model="ir.ui.view">
+        <field name="name">view_registrant_consent_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other']" position="before">
+                <page string="Consents">
+                  <field name="consent_ids" nolabel="1" readonly="1">
+                    <tree>
+                        <field name="name" />
+                        <field name="signatory_id" invisible="1" />
+                        <field name="expiry" />
+                    </tree>
+                  </field>
+                </page>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+              <button
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-sticky-note-o"
+                    name="open_create_consent_wizard"
+                >
+                      <div class="o_form_field o_stat_info">
+                          <span class="o_stat_text">Create</span>
+                          <span class="o_stat_text">Consent</span>
+                      </div>
+              </button>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

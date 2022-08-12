@@ -1,0 +1,44 @@
+<odoo>
+    <record id="view_spp_expired_consent_tree" model="ir.ui.view">
+        <field name="name">view_spp_expired_consent_tree</field>
+        <field name="model">spp.consent</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="Expired Consents">
+                <field name="signatory_id" />
+                <field name="name" />
+                <field name="expiry" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_spp_expired_consent" model="ir.actions.act_window">
+        <field name="name">Expired Consents</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.consent</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'create': False}</field>
+        <field name="domain">[('expiry', '&lt;=', context_today())]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Expired Consents
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_expired_consent_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_spp_expired_consent_tree" />
+        <field name="act_window_id" ref="action_spp_expired_consent" />
+    </record>
+
+    <menuitem
+        id="menu_spp_expired_consent"
+        name="Expired Consents"
+        action="action_spp_expired_consent"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="34"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+</odoo>
