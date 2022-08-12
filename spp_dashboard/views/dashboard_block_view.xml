@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2022 Newlogic
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<odoo>
+
+    <record id="dashboard_block_form_view_spp" model="ir.ui.view">
+        <field name="name">dashboard_block_form_view_spp</field>
+        <field name="model">dashboard.block</field>
+        <field name="inherit_id" ref="odoo_dynamic_dashboard.dashboard_block_form_view" />
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="replace">
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title mb24">
+                        <label for="name" string="Name:" />
+                        <h1>
+                            <field id="name" name="name" placeholder="Block Name" required="1" />
+                        </h1>
+                        <div class="o_row">
+                        </div>
+                    </div>
+                    <group colspan="4" col="4">
+                        <group colspan="2" col="2">
+                            <field
+                                name="model_id"
+                                attrs="{'required':[('edit_mode','=', True)]}"
+                                options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                            />
+                            <field name="use_func" attrs="{'required':[('edit_mode','=', True)]}" />
+                            <field
+                                name="func"
+                                attrs="{'required':['&amp;',('edit_mode','=', True),('use_func','=',True)],'invisible':[('use_func','=',False)]}"
+                            />
+                            <field
+                                name="args"
+                                placeholder="e.g.'abc',['def','xyz']"
+                                attrs="{'required':['&amp;',('edit_mode','=', True),('use_func','=',True)],'invisible':[('use_func','=',False)]}"
+                            />
+                        </group>
+                        <group colspan="2" col="2">
+                            <field name="result_type" attrs="{'required':[('edit_mode','=', True)]}" />
+                            <field
+                                name="operation"
+                                attrs="{'required':[('edit_mode','=', True),('use_func','=',False)],'invisible':[('use_func','=',True)]}"
+                            />
+                            <field
+                                name="measured_field"
+                                domain="[('model_id','=',model_id), ('ttype','in',['float','integer','monetary']), ('store', '=', True)]"
+                                attrs="{'required':[('edit_mode','=', True),('use_func','=',False)],'invisible':[('use_func','=',True)]}"
+                                options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                            />
+                        </group>
+                        <group colspan="4" col="4" attrs="{'invisible':[('use_func','=',True)]}">
+                            <field name="filter" widget="domain" options="{'model': 'model_name'}" />
+                        </group>
+                    </group>
+                    <group string="Block Information" colspan="4" col="4">
+                        <group colspan="2" col="2">
+                            <field name="type" required="1" />
+                            <field name="graph_type" attrs="{'invisible': [('type','not in', 'graph')]}" />
+                            <field name="graph_size" attrs="{'invisible': [('type','not in', 'graph')]}" />
+                            <field name="fa_icon" attrs="{'invisible': [('type','not in', 'tile')]}" />
+                            <field
+                                name="group_by"
+                                attrs="{'invisible': [('type','not in', 'graph')], 'required':[('edit_mode','=', True),('type','=','graph')]}"
+                                domain="[('model_id','=',model_id), ('ttype','!=','one2many'), ('store', '=', True)]"
+                                options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                            />
+                        </group>
+                        <group colspan="2" col="2">
+                            <field
+                                name="tile_color"
+                                attrs="{'invisible': [('type','not in', 'tile')]}"
+                                widget="color"
+                            />
+                            <field
+                                name="text_color"
+                                attrs="{'invisible': [('type','not in', 'tile')]}"
+                                widget="color"
+                            />
+                        </group>
+                    </group>
+                    <field name="client_action" invisible="1" />
+                    <field name="model_name" invisible="1" />
+                    <field name="sequence" invisible="1" />
+                    <field name="edit_mode" invisible="1" />
+                </sheet>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

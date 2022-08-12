@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2022 Newlogic
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<odoo>
+    <record id="view_cycle_tree_dashboard" model="ir.ui.view">
+        <field name="name">view_cycle_tree_dashboard</field>
+        <field name="model">g2p.cycle</field>
+        <field name="inherit_id" ref="g2p_programs.view_cycle_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <button
+                    name="open_dashboard"
+                    type="object"
+                    class="btn-primary"
+                    icon="fa-tachometer"
+                    help="Open Dashboard"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_cycle_form_dashboard" model="ir.ui.view">
+        <field name="name">view_cycle_form_dashboard</field>
+        <field name="model">g2p.cycle</field>
+        <field name="inherit_id" ref="g2p_programs.view_cycle_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div/button[@name='open_entitlements_form']" position="after">
+                <button type="object" class="oe_stat_button" icon="fa-tachometer" name="open_dashboard">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Open</span>
+                        <span class="o_stat_text">Dashboard</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//page[@name='configuration']" position="inside">
+                <group string="Dashboard" colspan="4" col="4">
+                    <field
+                        name="dashboard_id"
+                        string="Cycle Dashboard"
+                        options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                        attrs="{'readonly':[('state','=','ended')]}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
