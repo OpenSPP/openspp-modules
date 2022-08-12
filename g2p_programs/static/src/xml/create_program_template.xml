@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template xml:space="preserve">
+
+    <t t-extend="ListView.buttons">
+        <t t-jquery="button.o_list_button_add" t-operation="before">
+            <button
+                t-if="widget.modelName == 'g2p.program'"
+                type="button"
+                class="btn btn-primary o_list_button_add_program"
+                accesskey="p"
+                title="Create a New Program"
+            >Create Program</button>
+        </t>
+        <t t-jquery="button.o_list_button_add" t-operation="replace">
+            <button
+                t-if="widget.modelName != 'g2p.program'"
+                type="button"
+                class="btn btn-primary o_list_button_add"
+                title="Create record"
+                accesskey="c"
+            >
+                Create
+            </button>
+        </t>
+    </t>
+
+    <t t-extend="FormView.buttons">
+        <!-- <t t-jquery="button.o_form_button_create" t-operation="before">
+            <button t-if="widget.modelName == 'g2p.program' and widget.is_action_enabled('create')" type="button"
+                class="btn btn-secondary o_form_button_create_program" title="Create a New Program" accesskey="p">
+                Create Program
+            </button>
+        </t> -->
+        <t t-jquery="button.o_form_button_create" t-operation="replace">
+            <button
+                t-if="widget.modelName != 'g2p.program' and widget.is_action_enabled('create')"
+                type="button"
+                class="btn btn-secondary o_form_button_create"
+                title="Create record"
+                accesskey="c"
+            >
+                Create
+            </button>
+
+        </t>
+    </t>
+
+</template>

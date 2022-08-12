@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2022 Newlogic
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<odoo>
+    <record id="view_entitlement_tree" model="ir.ui.view">
+        <field name="name">view_entitlement_tree</field>
+        <field name="model">g2p.entitlement</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="Entitlement" create="0">
+                <field name="name" />
+                <field name="code" />
+                <field name="partner_id" />
+                <field name="program_id" />
+                <field name="cycle_id" />
+                <field name="valid_from" />
+                <field name="valid_until" />
+                <field
+                    name="state"
+                    decoration-primary="state=='pending_validation'"
+                    decoration-success="state=='approved'"
+                    decoration-warning="state=='cancelled'"
+                    decoration-danger="state=='expired'"
+                    widget="badge"
+                    string="State"
+                />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_entitlement_form" model="ir.ui.view">
+        <field name="name">view_entitlement_form</field>
+        <field name="model">g2p.entitlement</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Entitlement">
+                <header>
+                    <button
+                        type="object"
+                        class="btn-success"
+                        icon="fa-thumbs-o-up"
+                        name="approve_entitlement"
+                        attrs="{'invisible':[('state','not in',('draft','pending_validation'))]}"
+                        string="Approve Entitlement"
+                        groups="g2p_programs.g2p_finance_validator"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,pending_validation,approved,expired"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-folder-open-o"
+                            name="open_disb_form"
+                            attrs="{'invisible':[('state','!=','approved')]}"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Disbursement</span>
+                                <span class="o_stat_text">Form</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title mb24">
+                        <label for="name" string="Entitlement:" />
+                        <h1>
+                            <field id="name" name="name" placeholder="Enter the program name..." />
+                        </h1>
+                        <label for="code" string="Code:" />
+                        <h2>
+                            <field id="code" name="code" placeholder="code..." />
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field
+                                name="partner_id"
+                                attrs="{'readonly':[('state','!=','draft')]}"
+                                options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                            />
+                            <field
+                                name="program_id"
+                                options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                            />
+                            <field
+                                name="cycle_id"
+                                attrs="{'readonly':[('state','!=','draft')]}"
+                                options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                            />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                options="{'no_create': True}"
+                                force_save="1"
+                                attrs="{'readonly':[('state','!=','draft')]}"
+                            />
+                        </group>
+                        <group>
+                            <field name="valid_from" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field name="valid_until" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field name="date_approved" readonly="1" />
+                        </group>
+                    </group>
+                    <group string="Disbursement" colspan="4" col="4">
+                        <field name="is_cash_entitlement" colspan="4" invisible="1" />
+                        <field name="initial_amount" attrs="{'readonly':[('state','!=','draft')]}" />
+                        <field
+                            name="currency_id"
+                            options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                            attrs="{'readonly':[('state','!=','draft')]}"
+                        />
+                        <field name="journal_id" string="Journal" options="{'no_open':True}" readonly="1" />
+                        <field
+                            name="disbursement_id"
+                            options="{'no_open':True}"
+                            string="Journal Entry"
+                            readonly="1"
+                        />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="entitlement_filter" model="ir.ui.view">
+        <field name="name">entitlement_filter</field>
+        <field name="model">g2p.entitlement</field>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <search string="Search Entitlements">
+                <field name="partner_id" />
+                <field name="code" />
+                <field name="cycle_id" />
+                <separator />
+                <filter name="filter_valid_from" date="valid_from" />
+                <filter name="filter_valid_until" date="valid_until" />
+                <separator />
+                <filter name="draft_state" string="Draft" domain="[('state','=','draft')]" />
+                <filter
+                    name="pending_validation_state"
+                    string="Pending Validation"
+                    domain="[('state','=','pending_validation')]"
+                />
+                <filter name="approved_state" string="Approved" domain="[('state','=','approved')]" />
+                <filter name="cancelled_state" string="Cancelled" domain="[('state','=','cancelled')]" />
+                <filter name="expired_state" string="Exited" domain="[('state','=','expired')]" />
+                <group expand="0" string="Group By">
+                    <filter string="Valid From" name="valid_from" context="{'group_by':'valid_from'}" />
+                    <filter string="Valid Until" name="valid_until" context="{'group_by':'valid_until'}" />
+                    <separator orientation="vertical" />
+                    <filter string="State" name="grp_state" context="{'group_by': 'state'}" />
+                    <filter string="Company" name="grp_company_id" context="{'group_by': 'company_id'}" />
+                </group>
+                <!-- <searchpanel>
+                    <field name="group" icon="fa-users"/>
+                </searchpanel> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_entitlement" model="ir.actions.act_window">
+        <field name="name">Entitlements</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">g2p.entitlement</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="entitlement_filter" />
+        <field name="context">{'default_is_cash_entitlement':True}</field>
+        <field name="domain">[('is_cash_entitlement','=',True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new entitlement!
+            </p><p>
+                Click the create button to enter the new entitlement.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_entitlement_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_entitlement_tree" />
+        <field name="act_window_id" ref="action_entitlement" />
+    </record>
+
+    <record id="action_entitlement_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_entitlement_form" />
+        <field name="act_window_id" ref="action_entitlement" />
+    </record>
+
+    <record model="ir.actions.server" id="multiple_entitlement_approval">
+      <field name="name">Approve</field>
+      <field name="model_id" ref="g2p_programs.model_g2p_multi_entitlement_approval_wizard" />
+      <field name="binding_model_id" ref="g2p_programs.model_g2p_entitlement" />
+      <field name="binding_view_types">list,form</field>
+      <field name="state">code</field>
+      <field name="code">action = model.open_wizard()</field>
+    </record>
+
+    <menuitem
+        id="menu_entitlement"
+        name="Entitlements"
+        action="action_entitlement"
+        parent="g2p_accounting_root"
+        sequence="20"
+        groups="g2p_registry_base.group_g2p_admin,g2p_programs.g2p_program_manager,g2p_programs.g2p_finance_validator"
+    />
+
+</odoo>

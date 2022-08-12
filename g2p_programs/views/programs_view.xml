@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2022 Newlogic
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<odoo>
+    <record id="view_program_list_tree" model="ir.ui.view">
+        <field name="name">view_program_list_tree</field>
+        <field name="model">g2p.program</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="Programs" sample="1">
+                <field name="name" />
+                <field name="target_type" />
+                <field name="eligible_beneficiaries_count" string="# Beneficiaries" />
+                <field name="cycles_count" string="# Cycles" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field
+                    name="state"
+                    decoration-success="state=='active'"
+                    decoration-warning="state=='ended'"
+                    widget="badge"
+                    string="State"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_program_list_form" model="ir.ui.view">
+        <field name="name">view_program_list_form</field>
+        <field name="model">g2p.program</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Program">
+                <header>
+                    <button
+                        name="enroll_eligible_registrants"
+                        type="object"
+                        string="Enroll Eligible Registrants"
+                        icon="fa-download"
+                        class="btn-primary"
+                        states="active"
+                    />
+                    <button
+                        name="notify_eligible_beneficiaries"
+                        type="object"
+                        string="Notify Registrants"
+                        icon="fa-envelope-o"
+                        class="btn-primary"
+                        states="active"
+                    />
+                    <button
+                        name="create_new_cycle"
+                        type="object"
+                        string="Create New Cycle"
+                        icon="fa-undo"
+                        class="btn-primary"
+                        states="active"
+                    />
+                    <button
+                        name="deduplicate_beneficiaries"
+                        type="object"
+                        string="Deduplicate"
+                        icon="fa-download"
+                        class="btn-primary"
+                        states="active"
+                    />
+                    <field name="state" widget="statusbar" statusbar_visible="active,ended" />
+                </header>
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    style="margin-bottom:0px;"
+                    attrs="{'invisible': [('journal_id', '!=', False)]}"
+                >
+                    A journal must be defined for this program. Select a journal in the <bold
+                    >'Accounting'</bold> section of the <bold>'Configuration'</bold> tab.
+                    You can also create a new journal by clicking this
+                    <button
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-plus"
+                        name="create_journal"
+                        string="Create New Journal"
+                    />
+                    button.
+                </div>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-clone"
+                            name="open_duplicate_membership_form"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <field name="duplicate_membership_count" class="o_stat_value" />
+                                <span class="o_stat_text">Duplicates</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-users"
+                            name="open_eligible_beneficiaries_form"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <field name="eligible_beneficiaries_count" class="o_stat_value" />
+                                <span class="o_stat_text">Beneficiaries</span>
+                            </div>
+                        </button>
+                        <button type="object" class="oe_stat_button" icon="fa-undo" name="open_cycles_form">
+                            <div class="o_form_field o_stat_info">
+                                <field name="cycles_count" class="o_stat_value" />
+                                <span class="o_stat_text">Cycles</span>
+                            </div>
+                        </button>
+
+                    </div>
+                    <div class="oe_title mb24">
+                        <label for="name" string="Program:" />
+                        <h1>
+                            <field
+                                id="name"
+                                name="name"
+                                placeholder="Enter the program name..."
+                                attrs="{'readonly':[('state','=','ended')]}"
+                            />
+                        </h1>
+                        <div class="o_row">
+                            <field name="have_members" invisible="1" />
+                            <label for="target_type" string="Target Type:" />
+                            <field
+                                name="target_type"
+                                attrs="{'readonly':['|', ('state','=','ended'), ('have_members', '=', True)]}"
+                                widget="radio"
+                            />
+                            <label for="company_id" string=" | Company: " groups="base.group_multi_company" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                options="{'no_create': True}"
+                                force_save="1"
+                                attrs="{'readonly':[('state','=','ended')]}"
+                            />
+                        </div>
+                    </div>
+                    <notebook>
+                        <!-- <page string="Dashboard" name="dashboard">
+                        </page>
+                        <page string="Beneficiaries">
+                            <header>
+                                <button
+                                    name="enroll_eligible_registrants"
+                                    type="object"
+                                    string="Enroll Eligible Registrants"
+                                    icon="fa-download"
+                                    class="btn-primary"
+                                />
+                            </header>
+                            <field
+                                name="program_membership_ids"
+                                nolabel="1"
+                                context="{'target_type':target_type,'default_program_id':active_id}"
+                            >
+                                <tree string="Program Memberships">
+                                    <button
+                                        name="open_beneficiaries_form"
+                                        type="object"
+                                        icon="fa-external-link"
+                                        class="btn-success"
+                                    />
+                                    <field name="partner_id" />
+                                    <field
+                                        name="state"
+                                        widget="badge"
+                                        decoration-info="state == 'draft'"
+                                        decoration-warning="state == 'paused'"
+                                        decoration-success="state == 'enrolled'"
+                                        decoration-danger="state == 'exited'"
+                                        optional="show"
+                                    />
+                                    <field name="enrollment_date" />
+                                </tree>
+                            </field>
+                        </page> -->
+
+                        <page string="Cycles">
+                            <!-- <header>
+                                <button
+                                    name="create_new_cycle"
+                                    type="object"
+                                    string="Create New Cycle"
+                                    icon="fa-undo"
+                                    class="btn-primary"
+                                />
+                            </header> -->
+                            <field
+                                name="cycle_ids"
+                                nolabel="1"
+                                context="{'default_program_id':active_id}"
+                                readonly="1"
+                            >
+                                <tree string="Program Cycles">
+                                    <button
+                                        name="open_cycle_form"
+                                        type="object"
+                                        icon="fa-external-link"
+                                        class="btn-success"
+                                    />
+                                    <field name="name" />
+                                    <field
+                                        name="state"
+                                        decoration-primary="state=='draft'"
+                                        decoration-success="state=='active'"
+                                        decoration-danger="state=='ended'"
+                                        widget="badge"
+                                        optional="show"
+                                    />
+                                    <field name="cycle_membership_ids" string="Beneficiaries" />
+                                    <field name="entitlement_ids" string="Entitlements" />
+<!--                                    <button-->
+<!--                                        name="copy_beneficiaries_from_program"-->
+<!--                                        type="object"-->
+<!--                                        string="Add Beneficiaries"-->
+<!--                                        icon="fa-plus-square"-->
+<!--                                        class="btn-success"-->
+<!--                                        attrs="{'invisible':[('state','!=','draft')]}"-->
+<!--                                    />-->
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Configuration">
+                            <group colspan="4" col="4">
+                                <group colspan="2" string="Eligibility Managers">
+                                    <group colspan="2">
+                                        <field
+                                            name="eligibility_managers"
+                                            nolabel="1"
+                                            context="{'default_program_id':active_id}"
+                                            domain="[('program_id','=',active_id)]"
+                                            attrs="{'readonly':[('state','=','ended')]}"
+                                        >
+                                            <tree string="Eligibility Managers" editable="top">
+                                                <button
+                                                    name="open_manager_form"
+                                                    type="object"
+                                                    icon="fa-external-link"
+                                                    class="btn-success"
+                                                    attrs="{'invisible':[('manager_ref_id','=',False)]}"
+                                                    context="{'default_program_id':active_id, 'create': False}"
+                                                />
+                                                <field
+                                                    name="manager_ref_id"
+                                                    options="{'no_quick_create':True}"
+                                                    string="Managers"
+                                                    context="{'default_program_id':active_id}"
+                                                />
+                                                <field name="manager_id" invisible="1" />
+                                            </tree>
+                                            <form string="Eligibility Manager">
+                                                <sheet>
+                                                    <group colspan="4" col="4">
+                                                        <field
+                                                            name="manager_ref_id"
+                                                            options="{'no_quick_create':True}"
+                                                            colspan="4"
+                                                            context="{'default_program_id':program_id}"
+                                                        />
+                                                        <field name="program_id" invisible="1" />
+                                                    </group>
+                                                </sheet>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </group>
+                                <group colspan="2" string="Deduplication Managers">
+                                    <group colspan="2">
+                                        <field
+                                            name="deduplication_managers"
+                                            nolabel="1"
+                                            context="{'default_program_id':active_id}"
+                                            domain="[('program_id','=',active_id)]"
+                                            attrs="{'readonly':[('state','=','ended')]}"
+                                        >
+                                            <tree string="Deduplication Managers" editable="top">
+                                                <button
+                                                    name="open_manager_form"
+                                                    type="object"
+                                                    icon="fa-external-link"
+                                                    class="btn-success"
+                                                    attrs="{'invisible':[('manager_ref_id','=',False)]}"
+                                                    context="{'default_program_id':active_id, 'create': False}"
+                                                />
+                                                <field
+                                                    name="manager_ref_id"
+                                                    options="{'no_quick_create':True}"
+                                                    string="Managers"
+                                                    context="{'default_program_id':active_id}"
+                                                />
+                                                <field name="manager_id" invisible="1" />
+                                            </tree>
+                                            <form string="Deduplication Manager">
+                                                <sheet>
+                                                    <group colspan="4" col="4">
+                                                        <field
+                                                            name="manager_ref_id"
+                                                            options="{'no_quick_create':True}"
+                                                            colspan="4"
+                                                            context="{'default_program_id':program_id}"
+                                                        />
+                                                        <field name="program_id" invisible="1" />
+                                                    </group>
+                                                </sheet>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </group>
+                            </group>
+                            <group colspan="4" col="4">
+                                <group colspan="2" string="Notification Managers">
+                                    <group colspan="2">
+                                        <field
+                                            name="notification_managers"
+                                            nolabel="1"
+                                            context="{'default_program_id':active_id}"
+                                            domain="[('program_id','=',active_id)]"
+                                            attrs="{'readonly':[('state','=','ended')]}"
+                                        >
+                                            <tree string="Notification Managers" editable="top">
+                                                <button
+                                                    name="open_manager_form"
+                                                    type="object"
+                                                    icon="fa-external-link"
+                                                    class="btn-success"
+                                                    attrs="{'invisible':[('manager_ref_id','=',False)]}"
+                                                    context="{'default_program_id':active_id, 'create': False}"
+                                                />
+                                                <field
+                                                    name="manager_ref_id"
+                                                    options="{'no_quick_create':True}"
+                                                    string="Managers"
+                                                    context="{'default_program_id':active_id}"
+                                                />
+                                                <field name="manager_id" invisible="1" />
+                                            </tree>
+                                            <form string="Notification Manager">
+                                                <sheet>
+                                                    <group colspan="4" col="4">
+                                                        <field
+                                                            name="manager_ref_id"
+                                                            options="{'no_quick_create':True}"
+                                                            colspan="4"
+                                                            context="{'default_program_id':program_id}"
+                                                        />
+                                                        <field name="program_id" invisible="1" />
+                                                    </group>
+                                                </sheet>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </group>
+                                <group colspan="2" string="Program Managers">
+                                    <group colspan="2">
+                                        <field
+                                            name="program_managers"
+                                            nolabel="1"
+                                            context="{'default_program_id':active_id}"
+                                            domain="[('program_id','=',active_id)]"
+                                            attrs="{'readonly':[('state','=','ended')]}"
+                                        >
+                                            <tree string="Program Managers" editable="top">
+                                                <button
+                                                    name="open_manager_form"
+                                                    type="object"
+                                                    icon="fa-external-link"
+                                                    class="btn-success"
+                                                    attrs="{'invisible':[('manager_ref_id','=',False)]}"
+                                                    context="{'default_program_id':active_id, 'create': False}"
+                                                />
+                                                <field
+                                                    name="manager_ref_id"
+                                                    options="{'no_quick_create':True}"
+                                                    string="Managers"
+                                                    context="{'default_program_id':active_id}"
+                                                />
+                                                <field name="manager_id" invisible="1" />
+                                            </tree>
+                                            <form string="Program Manager">
+                                                <sheet>
+                                                    <group colspan="4" col="4">
+                                                        <field
+                                                            name="manager_ref_id"
+                                                            options="{'no_quick_create':True}"
+                                                            colspan="4"
+                                                            context="{'default_program_id':program_id}"
+                                                        />
+                                                        <field name="program_id" invisible="1" />
+                                                    </group>
+                                                </sheet>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </group>
+                            </group>
+                            <group colspan="4" col="4">
+                                <group colspan="2" string="Cycle Managers">
+                                    <group colspan="2">
+                                        <field
+                                            name="cycle_managers"
+                                            nolabel="1"
+                                            context="{'default_program_id':active_id}"
+                                            domain="[('program_id','=',active_id)]"
+                                            attrs="{'readonly':[('state','=','ended')]}"
+                                        >
+                                            <tree string="Cycle Managers" editable="top">
+                                                <button
+                                                    name="open_manager_form"
+                                                    type="object"
+                                                    icon="fa-external-link"
+                                                    class="btn-success"
+                                                    attrs="{'invisible':[('manager_ref_id','=',False)]}"
+                                                    context="{'default_program_id':active_id, 'create': False}"
+                                                />
+                                                <field
+                                                    name="manager_ref_id"
+                                                    options="{'no_quick_create':True}"
+                                                    string="Managers"
+                                                    context="{'default_program_id':active_id}"
+                                                />
+                                                <field name="manager_id" invisible="1" />
+                                            </tree>
+                                            <form string="Cycle Manager">
+                                                <sheet>
+                                                    <group colspan="4" col="4">
+                                                        <field
+                                                            name="manager_ref_id"
+                                                            options="{'no_quick_create':True}"
+                                                            colspan="4"
+                                                            context="{'default_program_id':program_id}"
+                                                        />
+                                                        <field name="program_id" invisible="1" />
+                                                    </group>
+                                                </sheet>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </group>
+                                <group colspan="2" string="Entitlement Managers">
+                                    <group colspan="2">
+                                        <field
+                                            name="entitlement_managers"
+                                            nolabel="1"
+                                            context="{'default_program_id':active_id}"
+                                            domain="[('program_id','=',active_id)]"
+                                            attrs="{'readonly':[('state','=','ended')]}"
+                                        >
+                                            <tree string="Entitlement Managers" editable="top">
+                                                <button
+                                                    name="open_manager_form"
+                                                    type="object"
+                                                    icon="fa-external-link"
+                                                    class="btn-success"
+                                                    attrs="{'invisible':[('manager_ref_id','=',False)]}"
+                                                    context="{'default_program_id':active_id, 'create': False}"
+                                                />
+                                                <field
+                                                    name="manager_ref_id"
+                                                    options="{'no_quick_create':True}"
+                                                    string="Managers"
+                                                    context="{'default_program_id':active_id}"
+                                                />
+                                                <field name="manager_id" invisible="1" />
+                                            </tree>
+                                            <form string="Entitlement Manager">
+                                                <sheet>
+                                                    <group colspan="4" col="4">
+                                                        <field
+                                                            name="manager_ref_id"
+                                                            options="{'no_quick_create':True}"
+                                                            colspan="4"
+                                                            context="{'default_program_id':program_id}"
+                                                        />
+                                                        <field name="program_id" invisible="1" />
+                                                    </group>
+                                                </sheet>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </group>
+                            </group>
+                            <group string="Accounting" name="accounting" colspan="4" col="4">
+                                <field
+                                    name="journal_id"
+                                    string="Journal"
+                                    options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                                    attrs="{'readonly':[('state','=','ended')]}"
+                                />
+                                <button
+                                    type="object"
+                                    class="btn-primary"
+                                    icon="fa-plus"
+                                    name="create_journal"
+                                    string="Create New Journal"
+                                    states="active"
+                                />
+                            </group>
+                        </page>
+                        <field name="date_ended" invisible="1" />
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="program_list_filter" model="ir.ui.view">
+        <field name="name">program_list_filter</field>
+        <field name="model">g2p.program</field>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <search string="Search Programs">
+                <field name="name" />
+                <field name="target_type" />
+                <group expand="0" string="Group By">
+                    <filter string="Company" name="grp_company_id" context="{'group_by': 'company_id'}" />
+                </group>
+                <!-- <searchpanel>
+                    <field name="group" icon="fa-users"/>
+                </searchpanel> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_program_list" model="ir.actions.act_window">
+        <field name="name">Programs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">g2p.program</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="program_list_filter" />
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new program!
+            </p><p>
+                Click the create button to enter the new program information.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_program_list_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_program_list_tree" />
+        <field name="act_window_id" ref="action_program_list" />
+    </record>
+
+    <record id="action_program_list_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_program_list_form" />
+        <field name="act_window_id" ref="action_program_list" />
+    </record>
+
+    <menuitem
+        id="menu_program_list"
+        name="Programs"
+        action="action_program_list"
+        parent="g2p_program_menu_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin,g2p_programs.g2p_program_manager,g2p_programs.g2p_program_validator"
+    />
+
+    <record model="ir.actions.server" id="end_program">
+      <field name="name">End Program</field>
+      <field name="model_id" ref="g2p_programs.model_g2p_program" />
+      <field name="binding_model_id" ref="g2p_programs.model_g2p_program" />
+      <field name="binding_view_types">form</field>
+      <field name="state">code</field>
+      <field name="code">action = model.end_program()</field>
+    </record>
+
+    <record model="ir.actions.server" id="reactivate_program">
+      <field name="name">Re-activate Program</field>
+      <field name="model_id" ref="g2p_programs.model_g2p_program" />
+      <field name="binding_model_id" ref="g2p_programs.model_g2p_program" />
+      <field name="binding_view_types">form</field>
+      <field name="state">code</field>
+      <field name="code">action = model.reactivate_program()</field>
+    </record>
+
+</odoo>
