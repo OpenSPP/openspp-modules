@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2022 Newlogic
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<odoo>
+    <record id="view_entitlement_inkind_form" model="ir.ui.view">
+        <field name="name">view_entitlement_inkind_form</field>
+        <field name="model">g2p.entitlement</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <form string="In-Kind Entitlement">
+                <header>
+                    <button
+                        type="object"
+                        class="btn-success"
+                        icon="fa-thumbs-o-up"
+                        name="approve_entitlement"
+                        attrs="{'invisible':[('state','not in',('draft','pending_validation'))]}"
+                        string="Approve Entitlement"
+                        groups="g2p_programs.g2p_finance_validator"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,pending_validation,approved,expired"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title mb24">
+                        <label for="name" string="Entitlement:" />
+                        <h1>
+                            <field id="name" name="name" placeholder="Enter the program name..." />
+                        </h1>
+                        <label for="code" string="Code:" />
+                        <h2>
+                            <field id="code" name="code" placeholder="code..." />
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field
+                                name="partner_id"
+                                attrs="{'readonly':[('state','!=','draft')]}"
+                                options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                            />
+                            <field
+                                name="program_id"
+                                options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                            />
+                            <field
+                                name="cycle_id"
+                                attrs="{'readonly':[('state','!=','draft')]}"
+                                options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                            />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                options="{'no_create': True}"
+                                force_save="1"
+                                attrs="{'readonly':[('state','!=','draft')]}"
+                            />
+                        </group>
+                        <group>
+                            <field name="valid_from" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field name="valid_until" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field name="date_approved" readonly="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="In-Kind Item">
+                            <group colspan="4" col="4">
+                                <field
+                                    name="product_id"
+                                    options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    colspan="4"
+                                    required="1"
+                                />
+                                <field
+                                    name="qty"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    required="1"
+                                />
+                                <field
+                                    name="uom_id"
+                                    options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    required="1"
+                                />
+                            </group>
+                        </page>
+                        <page string="Inventory" attrs="{'invisible':[('manage_inventory','=',False)]}">
+                            <group colspan="4" col="4">
+                                <field name="warehouse_id" options="{'no_open':True}" readonly="1" />
+                                <field name="route_id" options="{'no_open':True}" readonly="1" />
+                                <field name="move_ids" readonly="1" colspan="4" nolabel="1" />
+                            </group>
+                        </page>
+                    </notebook>
+                    <field name="manage_inventory" invisible="1" />
+                    <field name="is_cash_entitlement" invisible="1" />
+                    <field name="initial_amount" invisible="1" />
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_entitlement_inkind" model="ir.actions.act_window">
+        <field name="name">In-kind Entitlements</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">g2p.entitlement</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="g2p_programs.entitlement_filter" />
+        <field name="context">{'default_is_cash_entitlement':False}</field>
+        <field name="domain">[('is_cash_entitlement','=',False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new entitlement!
+            </p><p>
+                Click the create button to enter the new In-kind entitlement.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_entitlement_inkind_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="g2p_programs.view_entitlement_tree" />
+        <field name="act_window_id" ref="action_entitlement_inkind" />
+    </record>
+
+    <record id="action_entitlement_inkind_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_entitlement_inkind_form" />
+        <field name="act_window_id" ref="action_entitlement_inkind" />
+    </record>
+
+    <menuitem
+        id="menu_entitlement_inkind"
+        name="Entitlements"
+        action="action_entitlement_inkind"
+        parent="g2p_inkind_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin,g2p_programs.g2p_program_manager,g2p_programs.g2p_finance_validator"
+    />
+
+</odoo>
