@@ -94,7 +94,7 @@
         <!-- Dashboard/Program Template Menu -->
         <record id="dashboard_menu_program" model="dashboard.menu">
             <field name="name">Program</field>
-            <field name="menu_id" ref="spp_dashboard.g2p_program_dashboard_root" />
+            <field name="menu_id" ref="spp_dashboard.spp_program_dashboard_root" />
             <field name="sequence">1</field>
             <field name="client_action" ref="spp_dashboard.action_program_dashboard" />
             <field name="action_menu_id" ref="spp_dashboard.menu_program_dashboard" />
@@ -258,7 +258,7 @@
         <!-- Dashboard/Cycle Template Menu -->
         <record id="dashboard_menu_cycle" model="dashboard.menu">
             <field name="name">Cycle</field>
-            <field name="menu_id" ref="spp_dashboard.g2p_program_dashboard_root" />
+            <field name="menu_id" ref="spp_dashboard.spp_program_dashboard_root" />
             <field name="sequence">2</field>
             <field name="client_action" ref="spp_dashboard.action_cycle_dashboard" />
             <field name="action_menu_id" ref="spp_dashboard.menu_cycle_dashboard" />

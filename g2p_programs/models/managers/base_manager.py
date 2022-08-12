@@ -1,4 +1,4 @@
-# Part of Newlogic G2P. See LICENSE file for full copyright and licensing details.
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 from odoo import models
 from odoo.tools import safe_eval
 

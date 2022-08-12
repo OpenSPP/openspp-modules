@@ -1,4 +1,4 @@
-# Part of Newlogic G2P. See LICENSE file for full copyright and licensing details.
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import collections
 import itertools
 import logging
