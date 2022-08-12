@@ -1,0 +1,8 @@
+<odoo>
+    <data noupdate="1">
+        <!-- ID Type: ID Pass -->
+        <record id="id_type_idpass" model="spp.id.pass">
+            <field name="name">ID PASS Lite</field>
+        </record>
+    </data>
+</odoo>

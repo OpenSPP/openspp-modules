@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_idpass_admin,ID Pass Admin Access,spp_idpass.model_spp_id_pass,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_issue_idpass_wizard_admin,Issue ID Pass Wizard Admin Access,spp_idpass.model_spp_issue_idpass_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2022 Newlogic
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<odoo>
+    <data>
+        <record id="issue_id_pass_wizard_form_view" model="ir.ui.view">
+            <field name="name">issue_id_pass_wizard_form_view</field>
+            <field name="model">spp.issue.idpass.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <label for="registrant_id" string="Registrant" />
+                            </h1>
+                            <h1>
+                                <field name="registrant_id" readonly="1" />
+                            </h1>
+                            <div class="o_row">
+                            </div>
+                        </div>
+                        <label for="idpass_id" string="Template" />
+                        <field
+                            name="idpass_id"
+                            options="{'no_create_edit':True,'no_open':True,'no_create':True}"
+                        />
+                    </sheet>
+                    <footer>
+                        <button
+                            name="issue_idpass"
+                            string="Issue IDPass"
+                            type="object"
+                            class="oe_highlight"
+                        />
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
