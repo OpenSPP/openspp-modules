@@ -6,7 +6,7 @@
     "sequence": 1,
     "author": "Newlogic",
     "website": "https://newlogic.com/",
-    "license": "AGPL-3",
+    "license": "LGPL-3",
     "depends": ["base", "point_of_sale", "g2p_registry_base", "g2p_programs"],
     "assets": {
         "point_of_sale.assets": [
