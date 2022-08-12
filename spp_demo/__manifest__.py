@@ -33,7 +33,6 @@
         "spp_idpass",
         "spp_helpdesk",
         "spp_area",
-        "g2p_importer_odk",
         "theme_openspp",
         "spp_photo",
         "spp_pos",
