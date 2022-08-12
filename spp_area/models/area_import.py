@@ -1,4 +1,4 @@
-# Part of Newlogic OpenSPP. See LICENSE file for full copyright and licensing details.
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import base64
 import logging
 from io import BytesIO
