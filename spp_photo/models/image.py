@@ -28,5 +28,10 @@ class Image(models.Model):
 
     @api.onchange("storage_select")
     def _onchange_storage_select(self):
+        """
+        This method is used to write storage field based on storage_select.
+        :param storage: The Storage.
+        :return: storage
+        """
         if self.storage_select:
             self.storage = self.storage_select

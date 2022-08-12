@@ -3,7 +3,7 @@
 from odoo import fields, models
 
 
-class G2PPhotoCategory(models.Model):
+class OpenSPPPhotoCategory(models.Model):
     _name = "spp.photo.category"
     _description = "Photo Category"
 
