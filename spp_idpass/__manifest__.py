@@ -9,12 +9,7 @@
     "author": "Newlogic",
     "website": "https://newlogic.com/",
     "license": "LGPL-3",
-    "depends": [
-        "base",
-        "g2p_registry_base",
-        "g2p_registry_individual",
-        "g2p_registry_group",
-    ],
+    "depends": ["base", "g2p_registry_base"],
     "data": [
         "data/id_pass.xml",
         "views/registrant.xml",
