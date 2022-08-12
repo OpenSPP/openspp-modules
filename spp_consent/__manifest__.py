@@ -6,7 +6,7 @@
     "sequence": 1,
     "author": "Newlogic",
     "website": "https://newlogic.com/",
-    "license": "AGPL-3",
+    "license": "LGPL-3",
     "depends": ["base", "g2p_registry_base", "g2p_registry_individual"],
     "data": [
         "security/ir.model.access.csv",
