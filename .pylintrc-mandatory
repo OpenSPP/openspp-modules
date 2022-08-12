@@ -4,10 +4,10 @@ score=n
 
 [ODOOLINT]
 readme_template_url="https://github.com/OCA/maintainer-tools/blob/master/template/module/README.rst"
-manifest_required_authors=Newlogic
+manifest_required_authors=OpenSPP.org
 manifest_required_keys=license
 manifest_deprecated_keys=description,active
-license_allowed=LGPL-3,AGPL-3,OPL-1
+license_allowed=LGPL-3,AGPL-3
 valid_odoo_versions=15.0
 
 [MESSAGES CONTROL]

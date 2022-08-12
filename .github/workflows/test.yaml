@@ -3,12 +3,10 @@ name: tests
 on:
   pull_request:
     branches:
-      - "182-integrate-in-kind-entitlement-to-the-inventory-module"
-      - "openg2p/openg2p-ng-from-newlogic-g2p"
+      - "main"
   push:
     branches:
-      - "182-integrate-in-kind-entitlement-to-the-inventory-module"
-      - "openg2p/openg2p-ng-from-newlogic-g2p"
+      - "main"
 
 jobs:
   unreleased-deps:
@@ -63,9 +61,9 @@ jobs:
         run: manifestoo -d . check-dev-status --default-dev-status=Beta
       - name: Initialize test db
         run: oca_init_test_database
-      - name: Run tests
-        run: oca_run_tests
+#      - name: Run tests
+#        run: oca_run_tests
 #      - uses: codecov/codecov-action@v1
 #      - name: Update .pot files
 #        run: oca_export_and_push_pot https://x-access-token:${{ secrets.GIT_PUSH_TOKEN }}@github.com/${{ github.repository }}
-#        if: ${{ matrix.makepot == 'true' && github.event_name == 'push' && github.repository_owner == 'newlogic' }}
+#        if: ${{ matrix.makepot == 'true' && github.event_name == 'push' && github.repository_owner == 'openspp_project' }}
