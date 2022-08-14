@@ -8,6 +8,7 @@
     "website": "https://github.com/openspp-project/openspp-registry",
     "license": "LGPL-3",
     "development_status": "Beta",
+    "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": ["base", "g2p_registry_base"],
     "data": [],
     "assets": {},

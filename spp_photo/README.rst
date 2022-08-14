@@ -47,6 +47,17 @@ Authors
 Maintainers
 ~~~~~~~~~~~
 
+.. |maintainer-jeremi| image:: https://github.com/jeremi.png?size=40px
+    :target: https://github.com/jeremi
+    :alt: jeremi
+.. |maintainer-gonzalesedwin1123| image:: https://github.com/gonzalesedwin1123.png?size=40px
+    :target: https://github.com/gonzalesedwin1123
+    :alt: gonzalesedwin1123
+
+Current maintainers:
+
+|maintainer-jeremi| |maintainer-gonzalesedwin1123| 
+
 This module is part of the `openspp-project/openspp-registry <https://github.com/openspp-project/openspp-registry/tree/15.0/spp_photo>`_ project on GitHub.
 
 You are welcome to contribute.
