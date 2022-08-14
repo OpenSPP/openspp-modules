@@ -1,7 +1,7 @@
 
 <!-- /!\ Non OCA Context : Set here the badge of your runbot / runboat instance. -->
 [![Pre-commit Status](https://github.com/openspp-project/openspp-registry/actions/workflows/pre-commit.yml/badge.svg?branch=15.0)](https://github.com/openspp-project/openspp-registry/actions/workflows/pre-commit.yml?query=branch%3A15.0)
-[![Build Status](https://github.com/openspp-project/openspp-registry/actions/workflows/test.yml/badge.svg?branch=15.0)](https://github.com/openspp-project/openspp-registry/actions/workflows/test.yml?query=branch%3A15.0)
+<!-- [![Build Status](https://github.com/openspp-project/openspp-registry/actions/workflows/test.yml/badge.svg?branch=15.0)](https://github.com/openspp-project/openspp-registry/actions/workflows/test.yml?query=branch%3A15.0) -->
 [![codecov](https://codecov.io/gh/openspp-project/openspp-registry/branch/15.0/graph/badge.svg)](https://codecov.io/gh/openspp-project/openspp-registry)
 <!-- /!\ Non OCA Context : Set here the badge of your translation instance. -->
 
@@ -17,7 +17,16 @@ OpenSPP’s key feature is a 360-degree view of the registrant and beneficiary. 
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[spp_area](spp_area/) | 15.0.0.0.1 |  | OpenSPP Area
+[spp_consent](spp_consent/) | 15.0.0.0.1 |  | OpenSPP Consent
+[spp_custom_field](spp_custom_field/) | 15.0.0.0.1 |  | OpenSPP Custom Field
+[spp_custom_fields_ui](spp_custom_fields_ui/) | 15.0.0.0.1 |  | OpenSPP Custom Fields UI
+[spp_idpass](spp_idpass/) | 15.0.0.0.1 |  | ID PASS
+[spp_photo](spp_photo/) | 15.0.0.0.1 |  | OpenSPP Photo
 
 [//]: # (end addons)
 
