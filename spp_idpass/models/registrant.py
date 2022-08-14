@@ -5,6 +5,7 @@ from datetime import datetime
 
 import requests
 from dateutil.relativedelta import relativedelta
+
 from odoo import _, fields, models
 from odoo.exceptions import ValidationError
 

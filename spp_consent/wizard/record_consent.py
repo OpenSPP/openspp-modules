@@ -2,6 +2,7 @@
 import logging
 
 from lxml import etree
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 

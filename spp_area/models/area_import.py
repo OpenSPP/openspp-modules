@@ -3,9 +3,10 @@ import base64
 import logging
 from io import BytesIO
 
+from xlrd import open_workbook
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-from xlrd import open_workbook
 
 _logger = logging.getLogger(__name__)
 
@@ -91,7 +92,7 @@ class OpenSPPAreaImport(models.Model):
                 inputx.write(base64.decodebytes(rec.excel_file))
                 book = open_workbook(file_contents=inputx.getvalue())
             except TypeError as e:
-                raise ValidationError(_("ERROR: {}").format(e))  # noqa: C901
+                raise ValidationError(_("ERROR: {}").format(e))  # noqa: C901, B904
             sheet = book.sheets()[0]
             vals = []
             _logger.info("Area Import: Parsing Excel File: %s" % fields.Datetime.now())
