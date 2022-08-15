@@ -12,19 +12,19 @@ jobs:
       - name: "CLA Assistant"
         if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
         # Beta Release
-        uses: cla-assistant/github-action@v2.1.3-beta
+        uses: contributor-assistant/github-action@v2.2.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # the below token should have repo scope and must be manually added by you in the repository's secret
           PERSONAL_ACCESS_TOKEN : ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
           path-to-signatures: 'signatures/version1/cla.json'
-          path-to-document: 'https://github.com/newlogic/newlogic-g2p-cla/tree/main' # e.g. a CLA or a DCO document
+          path-to-document: 'https://github.com/openspp-project/openspp-cla/tree/main' # e.g. a CLA or a DCO document
           # branch should not be protected
           branch: 'main'
           allowlist: dependabot-preview[bot],greenkeeper[bot]
-          remote-organization-name: newlogic
-          remote-repository-name: newlogic-g2p-cla
+          remote-organization-name: openspp-project
+          remote-repository-name: openspp-cla
          #below are the optional inputs - If the optional inputs are not given, then default values will be taken
           #remote-organization-name: enter the remote organization name where the signatures should be stored (Default is storing the signatures in the same repository)
           #remote-repository-name:  enter the  remote repository name where the signatures should be stored (Default is storing the signatures in the same repository)
