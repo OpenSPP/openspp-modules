@@ -42,16 +42,16 @@ odoo.define("spp_pos.EntitlementPopup", function (require) {
                     },
                 ],
             }).then(function (data) {
-                if (data["status"] == "QR Doesn't Exist") {
-                    console.log("Returned: " + data["status"]);
-                    alert(data["status"]);
+                if (data.status == "QR Doesn't Exist") {
+                    console.log("Returned: " + data.status);
+                    alert(data.status);
                 } else {
-                    console.log("Entitlement Amount: " + data["amount"]);
-                    console.log("Trying to Add Product with Entitlement:" + data["code"]);
+                    console.log("Entitlement Amount: " + data.amount);
+                    console.log("Trying to Add Product with Entitlement:" + data.code);
                     console.log(productid[0]);
                     const product = productid[0];
-                    let total_price = data["amount"] * -1;
-                    let description = data["code"];
+                    const total_price = data.amount * -1;
+                    const description = data.code;
 
                     console.log(description);
                     // Add the product after having the extra information.
@@ -64,7 +64,7 @@ odoo.define("spp_pos.EntitlementPopup", function (require) {
             });
         }
     }
-    //Create entitlement popup
+    // Create entitlement popup
     EntitlementPopup.template = "EntitlementPopup";
     EntitlementPopup.defaultProps = {
         confirmText: "Ok",

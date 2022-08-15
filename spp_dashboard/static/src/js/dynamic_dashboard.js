@@ -9,9 +9,9 @@ odoo.define("spp_dashboard.Dashboard", function (require) {
     odoo_dynamic_dashboard.include({
         init: function (parent, context) {
             ctx = context;
-            //console.log('Context: '+ctx);
-            if (ctx["context"]["active_id"]) {
-                this.active_id = ctx["context"]["active_id"];
+            // Console.log('Context: '+ctx);
+            if (ctx.context.active_id) {
+                this.active_id = ctx.context.active_id;
             } else {
                 this.active_id = false;
             }
@@ -20,7 +20,7 @@ odoo.define("spp_dashboard.Dashboard", function (require) {
 
         fetch_data: function () {
             var self = this;
-            //console.log('Context2: ' +ctx.id);
+            // Console.log('Context2: ' +ctx.id);
             var def1 = this._rpc({
                 model: "dashboard.block",
                 method: "get_dashboard_vals",
@@ -40,15 +40,15 @@ odoo.define("spp_dashboard.Dashboard", function (require) {
                 active_id: this.active_id,
             }).then(function (result) {
                 self.do_action({
-                    name: result["model_name"],
+                    name: result.model_name,
                     type: "ir.actions.act_window",
-                    res_model: result["model"],
+                    res_model: result.model,
                     view_mode: "tree,form",
                     views: [
                         [false, "list"],
                         [false, "form"],
                     ],
-                    domain: result["filter"],
+                    domain: result.filter,
                 });
             });
         },

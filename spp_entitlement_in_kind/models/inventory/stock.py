@@ -31,6 +31,7 @@ class StockMove(models.Model):
                     values={"self": picking_id, "origin": entitlement_id},
                     subtype_id=self.env.ref("mail.mt_note").id,
                 )
+        return
 
 
 class ProcurementGroup(models.Model):

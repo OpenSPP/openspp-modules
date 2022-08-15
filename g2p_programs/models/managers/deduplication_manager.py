@@ -5,6 +5,7 @@ import logging
 from datetime import date
 
 from odoo import api, fields, models
+
 from odoo.addons.phone_validation.tools import phone_validation
 
 _logger = logging.getLogger(__name__)
