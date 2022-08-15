@@ -1,1 +1,0 @@
-# OpenSPP Point of Sales

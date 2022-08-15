@@ -1,3 +1,5 @@
+
+
 [MASTER]
 load-plugins=pylint_odoo
 score=n
@@ -7,7 +9,7 @@ readme_template_url="https://github.com/OCA/maintainer-tools/blob/master/templat
 manifest_required_authors=OpenSPP.org
 manifest_required_keys=license
 manifest_deprecated_keys=description,active
-license_allowed=AGPL-3,LGPL-3
+license_allowed=AGPL-3,GPL-2,GPL-2 or any later version,GPL-3,GPL-3 or any later version,LGPL-3
 valid_odoo_versions=15.0
 
 [MESSAGES CONTROL]
@@ -20,7 +22,6 @@ disable=all
 # .pylintrc-mandatory containing only mandatory checks is used the pre-commit
 # config as a blocking check.
 
-# redundant-modulename-xml,
 enable=anomalous-backslash-in-string,
     api-one-deprecated,
     api-one-multi-together,
@@ -52,6 +53,7 @@ enable=anomalous-backslash-in-string,
     pointless-string-statement,
     print-used,
     redundant-keyword-arg,
+    redundant-modulename-xml,
     reimported,
     relative-import,
     return-in-init,
@@ -64,6 +66,40 @@ enable=anomalous-backslash-in-string,
     use-vim-comment,
     wrong-tabs-instead-of-spaces,
     xml-syntax-error,
+    character-not-valid-in-resource-link,
+    consider-merging-classes-inherited,
+    context-overridden,
+    create-user-wo-reset-password,
+    dangerous-filter-wo-user,
+    dangerous-qweb-replace-wo-priority,
+    deprecated-openerp-xml-node,
+    duplicate-po-message-definition,
+    except-pass,
+    invalid-commit,
+    manifest-maintainers-list,
+    missing-newline-extrafiles,
+    missing-readme,
+    missing-return,
+    odoo-addons-relative-import,
+    old-api7-method-defined,
+    po-msgstr-variables,
+    po-syntax-error,
+    renamed-field-parameter,
+    resource-not-exist,
+    str-format-used,
+    test-folder-imported,
+    unnecessary-utf8-coding-comment,
+    website-manifest-key-not-valid-uri,
+    xml-attribute-translatable,
+    xml-deprecated-qweb-directive,
+    # Things that are temporaly optional
+    attribute-string-redundant,
+    xml-deprecated-tree-attribute,
+    deprecated-data-xml-node,
+    translation-positional-used,
+    translation-contains-variable,
+    file-not-used,
+
     # messages that do not cause the lint step to fail
     consider-merging-classes-inherited,
     create-user-wo-reset-password,
