@@ -5,8 +5,10 @@
     "version": "15.0.0.0.1",
     "sequence": 1,
     "author": "OpenSPP.org",
-    "website": "https://openspp.org/",
+    "website": "https://github.com/openspp-project/openspp-demo",
     "license": "AGPL-3",
+    "development_status": "Beta",
+    "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "spp_base_demo",
         "g2p_registry_base",

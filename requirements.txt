@@ -1,2 +1,2 @@
-twilio==7.9.2
-boto3==1.24.2
+# generated from manifests external_dependencies
+faker
