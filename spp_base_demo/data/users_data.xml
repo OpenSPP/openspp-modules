@@ -1,3 +1,4 @@
+<!-- pylint:disable=create-user-wo-reset-password -->
 <odoo>
     <data noupdate="0">
         <record id="demo_access_registrar" model="res.users">
