@@ -33,13 +33,13 @@ class OpenSPPResPartner(models.Model):
             if basic_info_page:
                 is_group = self._context.get("default_is_group", False)
                 custom_page = etree.Element("page", {"string": "Addtional Details"})
-                criteria_page = etree.Element("page", {"string": "Criteria"})
+                indicator_page = etree.Element("page", {"string": "Indicator"})
 
                 custom_group = etree.SubElement(
                     custom_page, "group", {"col": "4", "colspan": "4"}
                 )
-                criteria_group = etree.SubElement(
-                    criteria_page, "group", {"col": "4", "colspan": "4"}
+                indicator_group = etree.SubElement(
+                    indicator_page, "group", {"col": "4", "colspan": "4"}
                 )
 
                 for rec in model_fields_id:
@@ -52,7 +52,7 @@ class OpenSPPResPartner(models.Model):
                         etree.SubElement(custom_group, "field", {"name": rec.name})
                     elif len(els) >= 2 and els[1] == "crt":
                         new_field = etree.SubElement(
-                            criteria_group,
+                            indicator_group,
                             "field",
                             {
                                 "name": rec.name,
@@ -66,8 +66,8 @@ class OpenSPPResPartner(models.Model):
 
                 if custom_group.getchildren():
                     basic_info_page[0].addnext(custom_page)
-                if criteria_group.getchildren():
-                    basic_info_page[0].addnext(criteria_page)
+                if indicator_group.getchildren():
+                    basic_info_page[0].addnext(indicator_page)
 
                 res["arch"] = etree.tostring(doc, encoding="unicode")
 
