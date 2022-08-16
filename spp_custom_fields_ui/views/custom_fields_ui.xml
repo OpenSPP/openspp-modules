@@ -41,15 +41,15 @@
                           </group>
                       </group>
                       <notebook>
-                          <page name="base" string="Properties">
-                              <group string="Base Properties">
+                          <page
+                            name="base"
+                            string="Properties"
+                            attrs="{'invisible': [('field_category','not in',['crt'])]}"
+                        >
+                              <group string="Base Properties" invisible="1">
                                   <group>
                                       <field name="required" />
                                       <field name="readonly" />
-                                      <field
-                                        name="store"
-                                        attrs="{'invisible': [('field_category','not in',['crt'])]}"
-                                    />
                                       <field name="index" groups="base.group_no_one" />
                                       <field name="copied" groups="base.group_no_one" />
                                   </group>
@@ -118,12 +118,14 @@
                                 string="Advanced Properties"
                                 attrs="{'invisible': [('field_category','not in',['crt'])]}"
                             >
+
+                                  <field name="store" />
                                   <field name="kinds" widget="many2many_tags" />
                                   <field name="related" />
                                   <field name="depends" />
                                   <field name="compute" widget="ace" options="{'mode': 'python'}" />
                               </group>
-                              <div attrs="{'invisible': [('field_category','not in',['crt'])]}">
+                              <div invisible="1">
                                   <h3>How to define a computed field</h3>
                                   <p>Computed fields are defined with the fields
                                   <strong>Dependencies</strong> and <strong>Compute</strong>.</p>
@@ -154,7 +156,7 @@
                           <!--<page name="groups" string="Access Rights">
                               <field name="groups"/>
                           </page>-->
-                          <page name="misc" string="Miscellaneous" groups="base.group_no_one">
+                          <page name="misc" string="Miscellaneous" groups="base.group_no_one" invisible="1">
                               <group>
                                   <field name="state" />
                                   <field name="modules" />
