@@ -91,11 +91,11 @@ class G2PEntitlement(models.Model):
             view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
         )
 
-        group_g2p_admin = self.env.user.has_group("g2p_registrant.group_g2p_admin")
+        group_g2p_admin = self.env.user.has_group("g2p_registry_base.group_g2p_admin")
         if not group_g2p_admin:
             if view_type != "search":
                 group_g2p_registrar = self.env.user.has_group(
-                    "g2p_registrant.group_g2p_registrar"
+                    "g2p_registry_base.group_g2p_registrar"
                 )
                 g2p_program_validator = self.env.user.has_group(
                     "g2p_programs.g2p_program_validator"
