@@ -109,6 +109,7 @@ class G2PProgram(models.Model):
     duplicate_membership_count = fields.Integer(
         string="# Membership Duplicates", compute="_compute_duplicate_membership_count"
     )
+    active = fields.Boolean(default=True)
 
     @api.depends("program_membership_ids")
     def _compute_have_members(self):
