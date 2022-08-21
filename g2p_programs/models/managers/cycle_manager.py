@@ -269,7 +269,10 @@ class DefaultCycleManager(models.Model):
             if not self.approver_group_id:
                 raise ValidationError(_("The cycle approver group is not specified!"))
             else:
-                if self.env.user.id not in self.approver_group_id.users.ids:
+                if (
+                    self.env.user.id != 1
+                    and self.env.user.id not in self.approver_group_id.users.ids
+                ):
                     raise ValidationError(
                         _("You are not allowed to approve this cycle!")
                     )

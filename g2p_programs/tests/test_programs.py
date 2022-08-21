@@ -108,6 +108,31 @@ class ProgramTest(TransactionCase):
 
     def test_02_cycle_approve(self):
         # To Approve
+        user = self.env.user
+
+        # Add Super User to Cycle Approver Group
+        approver_group = self.env["res.groups"].search(
+            [("id", "=", self.env.ref("g2p_programs.g2p_program_cycle_approver").id)]
+        )
+
+        approver_group.write({"users": [(4, user.id)]})
+
+        manager_ref_id = str(self.program_1.cycle_managers[0].manager_ref_id)
+        s = manager_ref_id.find("(")
+        res_model = manager_ref_id[:s]
+        res_id = self.program_1.cycle_managers[0].manager_ref_id.id
+        approver = self.env[res_model].search([("id", "=", res_id)])
+        group = self.env.ref("g2p_programs.g2p_program_cycle_approver").id
+        approver.approver_group_id = group
+
+        manager_ref_id = str(self.program_2.cycle_managers[0].manager_ref_id)
+        s = manager_ref_id.find("(")
+        res_model = manager_ref_id[:s]
+        res_id = self.program_2.cycle_managers[0].manager_ref_id.id
+        approver = self.env[res_model].search([("id", "=", res_id)])
+        group = self.env.ref("g2p_programs.g2p_program_cycle_approver").id
+        approver.approver_group_id = group
+
         self.cycle1.to_approve()
         message1 = (
             "Program Testing: Program: %s, Cycle: %s, Setting State 'to_approve' FAILED (EXPECTED %s but RESULT is %s)"
