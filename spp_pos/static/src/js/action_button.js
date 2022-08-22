@@ -3,9 +3,7 @@ odoo.define("spp_pos.EntitlementButton", function (require) {
 
     const {Gui} = require("point_of_sale.Gui");
     const PosComponent = require("point_of_sale.PosComponent");
-    const AbstractAwaitablePopup = require("point_of_sale.AbstractAwaitablePopup");
     const Registries = require("point_of_sale.Registries");
-    const ProductItem = require("point_of_sale.ProductItem");
     const ProductScreen = require("point_of_sale.ProductScreen");
     class OrderLineEntitlement extends PosComponent {
         display_popup_entitlement() {

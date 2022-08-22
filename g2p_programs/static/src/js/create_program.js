@@ -24,7 +24,7 @@ odoo.define("g2p_programs.create_program_button", function (require) {
                 view_mode: "form",
                 target: "new",
             });
-            window.location;
+            // Window.location;
         },
 
         load_wizard2: function () {
@@ -43,7 +43,7 @@ odoo.define("g2p_programs.create_program_button", function (require) {
                     view_mode: "form",
                     target: "new",
                 });
-                window.location;
+                // Window.location;
             });
         },
     });
