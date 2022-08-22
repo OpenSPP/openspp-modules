@@ -187,9 +187,14 @@ class G2PEntitlement(models.Model):
                 else:
                     raise UserError(
                         _(
-                            "The fund for the program: %s [%.2f] is insufficient for the entitlement: %s"
+                            "The fund for the program: %(program)s [%(fund).2f] "
+                            + "is insufficient for the entitlement: %(entitlement)s"
                         )
-                        % (rec.cycle_id.program_id.name, fund_balance, rec.code)
+                        % {
+                            "program": rec.cycle_id.program_id.name,
+                            "fund": fund_balance,
+                            "entitlement": rec.code,
+                        }
                     )
             else:
                 state_err += 1
@@ -198,10 +203,10 @@ class G2PEntitlement(models.Model):
                     message = _(
                         "<b>Entitle State Error! Entitlements not in 'pending validation' state:</b>\n"
                     )
-                message += _("Program: %s, Beneficiary: %s.\n") % (
-                    rec.cycle_id.program_id.name,
-                    rec.partner_id.name,
-                )
+                message += _("Program: %(prg)s, Beneficiary: %(partner)s.\n") % {
+                    "prg": rec.cycle_id.program_id.name,
+                    "partner": rec.partner_id.name,
+                }
 
         if state_err > 0:
             kind = "danger"

@@ -39,7 +39,7 @@ class G2PInKindEntitlementManager(models.Model):
     )
 
     # Inventory integration fields
-    manage_inventory = fields.Boolean("Manage Inventory", default=False)
+    manage_inventory = fields.Boolean(default=False)
     warehouse_id = fields.Many2one(
         "stock.warehouse",
         string="Warehouse",
@@ -154,7 +154,7 @@ class G2PInKindEntitlementItem(models.Model):
     _description = "In-Kind Entitlement Manager Items"
     _order = "sequence,id"
 
-    sequence = fields.Integer("Sequence", default=1000)
+    sequence = fields.Integer(default=1000)
     entitlement_id = fields.Many2one(
         "g2p.program.entitlement.manager.inkind", "In-kind Entitlement", required=True
     )

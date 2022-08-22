@@ -21,7 +21,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     </div>
                     <!-- <newline /> -->
                     <field name="entitlement_cash_item_ids" nolabel="1" colspan="4">
-                        <tree string="Cash Entitlement Items">
+                        <tree>
                             <field name='sequence' widget='handle' />
                             <field name="amount" />
                             <field name="currency_id" />

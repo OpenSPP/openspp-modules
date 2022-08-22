@@ -9,7 +9,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.program.entitlement.manager.inkind</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="In-Kind Entitlement Managers" sample="1">
+            <tree sample="1">
                 <field name="name" />
                 <field name="program_id" />
                 <field name="entitlement_item_ids" string="Rules" />
@@ -58,7 +58,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <page string="Items">
                             <group colspan="4" col="4">
                                 <field name="entitlement_item_ids" nolabel="1" colspan="4">
-                                    <tree string="Entitlement Items">
+                                    <tree>
                                         <field name='sequence' widget='handle' />
                                         <field name="product_id" />
                                         <field name="qty" />

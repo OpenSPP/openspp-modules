@@ -21,7 +21,7 @@ class G2PInKindEntitlement(models.Model):
     )
 
     # Inventory integration fields
-    manage_inventory = fields.Boolean("Manage Inventory", default=False)
+    manage_inventory = fields.Boolean(default=False)
     warehouse_id = fields.Many2one(
         "stock.warehouse",
         string="Warehouse",
@@ -79,9 +79,14 @@ class G2PInKindEntitlement(models.Model):
                     else:
                         raise UserError(
                             _(
-                                "The fund for the program: %s[%.2f] is insufficient for the entitlement: %s"
+                                "The fund for the program: %(program)s[%(fund).2f] "
+                                + "is insufficient for the entitlement: %(entitlement)s"
                             )
-                            % (rec.cycle_id.program_id.name, fund_balance, rec.code)
+                            % {
+                                "program": rec.cycle_id.program_id.name,
+                                "fund": fund_balance,
+                                "entitlement": rec.code,
+                            }
                         )
                 else:  # In-Kind Entitlements
                     if rec.manage_inventory:
@@ -100,10 +105,10 @@ class G2PInKindEntitlement(models.Model):
                     message = _(
                         "<b>Entitle State Error! Entitlements not in 'pending validation' state:</b>\n"
                     )
-                message += _(
-                    "Program: %s, Beneficiary: %s.\n"
-                    % (rec.cycle_id.program_id.name, rec.partner_id.name)
-                )
+                message += _("Program: %(program)s, Beneficiary: %(partner)s.\n") % {
+                    "program": rec.cycle_id.program_id.name,
+                    "partner": rec.partner_id.name,
+                }
 
         if state_err > 0:
             kind = "danger"
