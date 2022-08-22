@@ -9,7 +9,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.cycle.manager</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Cycle Managers">
+            <tree>
                 <field name="manager_ref_id" />
                 <field name="program_id" />
                 <field name="manager_id" invisible="1" />
@@ -50,7 +50,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.cycle.manager.default</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Default Cycle Managers" sample="1">
+            <tree sample="1">
                 <field name="name" />
                 <field name="program_id" />
                 <field name="cycle_duration" />

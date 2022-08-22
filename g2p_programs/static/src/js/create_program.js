@@ -6,7 +6,7 @@ odoo.define("g2p_programs.create_program_button", function (require) {
     var session = require("web.session");
     var _t = core._t;
     ListController.include({
-        renderButtons: function ($node) {
+        renderButtons: function () {
             this._super.apply(this, arguments);
             if (this.$buttons) {
                 this.$buttons.find(".o_list_button_add_program").click(this.proxy("load_wizard"));
@@ -15,7 +15,7 @@ odoo.define("g2p_programs.create_program_button", function (require) {
 
         load_wizard: function () {
             var self = this;
-            var user = session.uid;
+            // Var user = session.uid;
             self.do_action({
                 name: "Set Program Settings",
                 type: "ir.actions.act_window",
@@ -34,7 +34,7 @@ odoo.define("g2p_programs.create_program_button", function (require) {
                 model: "g2p.program",
                 method: "get_values",
                 args: [[user], {id: user}],
-            }).then(function (e) {
+            }).then(function () {
                 self.do_action({
                     name: _t("action_invoices"),
                     type: "ir.actions.act_window",

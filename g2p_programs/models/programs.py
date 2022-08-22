@@ -50,23 +50,17 @@ class G2PProgram(models.Model):
     # TODO: for those, we should allow to have multiple managers and
     #  the order of the steps should be defined by the user
     eligibility_managers = fields.Many2many(
-        "g2p.eligibility.manager", string="Eligibility Managers"
+        "g2p.eligibility.manager"
     )  # All will be run
     deduplication_managers = fields.Many2many(
-        "g2p.deduplication.manager", string="Deduplication Managers"
+        "g2p.deduplication.manager"
     )  # All will be run
     # for each beneficiary, their preferred will be used or the first one that works.
-    notification_managers = fields.Many2many(
-        "g2p.program.notification.manager", string="Notification Managers"
-    )
-    program_managers = fields.Many2many(
-        "g2p.program.manager", string="Program Managers"
-    )
+    notification_managers = fields.Many2many("g2p.program.notification.manager")
+    program_managers = fields.Many2many("g2p.program.manager")
     # Cycle steps
-    cycle_managers = fields.Many2many("g2p.cycle.manager", string="Cycle Managers")
-    entitlement_managers = fields.Many2many(
-        "g2p.program.entitlement.manager", string="Entitlement Managers"
-    )
+    cycle_managers = fields.Many2many("g2p.cycle.manager")
+    entitlement_managers = fields.Many2many("g2p.program.entitlement.manager")
 
     reconciliation_managers = fields.Selection([])
 
@@ -81,7 +75,7 @@ class G2PProgram(models.Model):
     )
     cycle_ids = fields.One2many("g2p.cycle", "program_id", "Cycles")
 
-    date_ended = fields.Date("Date Ended")
+    date_ended = fields.Date()
     state = fields.Selection(
         [("active", "Active"), ("ended", "Ended")],
         "Status",
@@ -256,7 +250,7 @@ class G2PProgram(models.Model):
                     }
                 )
                 if len(not_enrolled) > 0:
-                    message = _("%s Beneficiaries enrolled." % len(not_enrolled))
+                    message = _("%s Beneficiaries enrolled.") % len(not_enrolled)
                     kind = "success"
                 else:
                     message = _("No Beneficiaries enrolled.")
@@ -305,7 +299,7 @@ class G2PProgram(models.Model):
                     duplicates += el.deduplicate_beneficiaries(states)
 
                 if duplicates > 0:
-                    message = _("%s Beneficiaries duplicate." % duplicates)
+                    message = _("%s Beneficiaries duplicate.") % duplicates
                     kind = "warning"
             else:
                 message = _("No Deduplication Manager defined.")
@@ -357,7 +351,7 @@ class G2PProgram(models.Model):
             _logger.info("-" * 80)
             _logger.info("pm: %s", program_manager)
             new_cycle = program_manager.new_cycle()
-            message = _("New cycle %s created." % new_cycle.name)
+            message = _("New cycle %s created.") % new_cycle.name
             return {
                 "type": "ir.actions.client",
                 "tag": "display_notification",

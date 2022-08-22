@@ -35,11 +35,9 @@ class G2PProgramMembership(models.Model):
         copy=False,
     )
 
-    enrollment_date = fields.Date(
-        "Enrollment Date", default=lambda self: fields.Datetime.now()
-    )
+    enrollment_date = fields.Date(default=lambda self: fields.Datetime.now())
     last_deduplication = fields.Date("Last Deduplication Date")
-    exit_date = fields.Date("Exit Date")
+    exit_date = fields.Date()
 
     _sql_constraints = [
         (
@@ -59,7 +57,7 @@ class G2PProgramMembership(models.Model):
     # TODO: Add a field delivery_mechanism_id
     # delivery_mechanism_id = fields.Many2one("Delivery mechanism type", help="Delivery mechanism")
     # the phone number, bank account, etc.
-    delivery_mechanism_value = fields.Char("Delivery Mechanism Value")
+    delivery_mechanism_value = fields.Char()
 
     # TODO: JJ - Add a field for the preferred notification method
 

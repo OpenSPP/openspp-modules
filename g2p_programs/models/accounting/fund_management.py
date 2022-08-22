@@ -29,8 +29,8 @@ class ProgramFundManagement(models.Model):
         related="program_id.journal_id.currency_id",
         store=True,
     )
-    remarks = fields.Text("Remarks")
-    date_posted = fields.Date("Date Posted", required=True, default=fields.Date.today)
+    remarks = fields.Text()
+    date_posted = fields.Date(required=True, default=fields.Date.today)
     state = fields.Selection(
         [("draft", "Draft"), ("posted", "Posted"), ("cancelled", "Cancelled")],
         "Status",

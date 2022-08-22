@@ -8,7 +8,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.program.fund</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Program Funds" sample="1">
+            <tree sample="1">
                 <field name="name" />
                 <field name="program_id" />
                 <field name="journal_id" />

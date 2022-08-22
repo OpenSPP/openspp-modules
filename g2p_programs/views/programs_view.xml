@@ -8,7 +8,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.program</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Programs" sample="1">
+            <tree sample="1">
                 <field name="name" />
                 <field name="target_type" />
                 <field name="eligible_beneficiaries_count" string="# Beneficiaries" />
@@ -162,7 +162,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 nolabel="1"
                                 context="{'target_type':target_type,'default_program_id':active_id}"
                             >
-                                <tree string="Program Memberships">
+                                <tree>
                                     <button
                                         name="open_beneficiaries_form"
                                         type="object"
@@ -200,7 +200,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 context="{'default_program_id':active_id}"
                                 readonly="1"
                             >
-                                <tree string="Program Cycles">
+                                <tree>
                                     <button
                                         name="open_cycle_form"
                                         type="object"
@@ -241,7 +241,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                             domain="[('program_id','=',active_id)]"
                                             attrs="{'readonly':[('state','=','ended')]}"
                                         >
-                                            <tree string="Eligibility Managers" editable="top">
+                                            <tree editable="top">
                                                 <button
                                                     name="open_manager_form"
                                                     type="object"
@@ -283,7 +283,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                             domain="[('program_id','=',active_id)]"
                                             attrs="{'readonly':[('state','=','ended')]}"
                                         >
-                                            <tree string="Deduplication Managers" editable="top">
+                                            <tree editable="top">
                                                 <button
                                                     name="open_manager_form"
                                                     type="object"
@@ -327,7 +327,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                             domain="[('program_id','=',active_id)]"
                                             attrs="{'readonly':[('state','=','ended')]}"
                                         >
-                                            <tree string="Notification Managers" editable="top">
+                                            <tree editable="top">
                                                 <button
                                                     name="open_manager_form"
                                                     type="object"
@@ -369,7 +369,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                             domain="[('program_id','=',active_id)]"
                                             attrs="{'readonly':[('state','=','ended')]}"
                                         >
-                                            <tree string="Program Managers" editable="top">
+                                            <tree editable="top">
                                                 <button
                                                     name="open_manager_form"
                                                     type="object"
@@ -413,7 +413,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                             domain="[('program_id','=',active_id)]"
                                             attrs="{'readonly':[('state','=','ended')]}"
                                         >
-                                            <tree string="Cycle Managers" editable="top">
+                                            <tree editable="top">
                                                 <button
                                                     name="open_manager_form"
                                                     type="object"
@@ -455,7 +455,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                             domain="[('program_id','=',active_id)]"
                                             attrs="{'readonly':[('state','=','ended')]}"
                                         >
-                                            <tree string="Entitlement Managers" editable="top">
+                                            <tree editable="top">
                                                 <button
                                                     name="open_manager_form"
                                                     type="object"

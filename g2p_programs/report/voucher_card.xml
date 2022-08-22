@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
     <template id="print_entitlement_card">
         <t t-call="web.basic_layout">
             <t t-set="i" t-value="0" />
@@ -16,10 +15,10 @@
                         <!-- style="height: 50mm" -->
                         <td rowspan="3" style="min-width: 50mm; max-width: 50mm; overflow: hidden;">
                             <div style="vertical-align:middle; text-align: center"><img
-                                                style=" display: block; margin-left: auto;
+                                            style=" display: block; margin-left: auto;
                                 margin-right: auto; min-width: 45mm; max-width: 45mm; overflow: hidden;"
-                                                t-att-src="image_data_uri(doc.company_id.logo)"
-                                            /></div>
+                                            t-att-src="image_data_uri(doc.company_id.logo)"
+                                        /></div>
                         </td>
                     </tr>
 
@@ -31,23 +30,23 @@
                     <tr>
                         <div style="overflow:hidden;">
                             <td colspan="3" style="padding-left: 20px;">Name:<h3
-                                                style="margin: 0px 2px 0px 2px;"
-                                            ><span t-field="doc.partner_id.name" /></h3></td>
+                                            style="margin: 0px 2px 0px 2px;"
+                                        ><span t-field="doc.partner_id.name" /></h3></td>
                         </div>
                     </tr>
                     <tr>
                         <div style="overflow:hidden;">
                             <td colspan="3" rowspan="2" style="padding-left: 20px;">Address: <h5><span
-                                                    t-field="doc.partner_id.address"
-                                                /></h5></td>
+                                                t-field="doc.partner_id.address"
+                                            /></h5></td>
                         </div>
                         <td rowspan="3" style="width: 250px; vertical-align:middle"><center><br /><img
-                                                alt="barcode"
-                                                t-if="doc.code"
-                                                t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', doc.code, 500, 500)"
-                                                style="height:100pt;width:100pt;margin:1pt;"
-                                                align="center"
-                                            /></center></td>
+                                            alt="barcode"
+                                            t-if="doc.code"
+                                            t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', doc.code, 500, 500)"
+                                            style="height:100pt;width:100pt;margin:1pt;"
+                                            align="center"
+                                        /></center></td>
                     </tr>
                     <tr>
                         <!-- reserved -->
@@ -55,13 +54,13 @@
                     <tr>
 
                         <td style="padding-top: 10px; padding-left: 30px;">Valid From: <span
-                                            t-field="doc.valid_from"
-                                            t-options='{"format": "MMM. dd, yyyy"}'
-                                        /></td>
+                                        t-field="doc.valid_from"
+                                        t-options='{"format": "MMM. dd, yyyy"}'
+                                    /></td>
                         <td style="padding-top: 10px">Valid To: <span
-                                            t-field="doc.valid_until"
-                                            t-options='{"format": "MMM. dd, yyyy"}'
-                                        /></td>
+                                        t-field="doc.valid_until"
+                                        t-options='{"format": "MMM. dd, yyyy"}'
+                                    /></td>
                     </tr>
                     </table>
                 </div>
@@ -74,5 +73,4 @@
             </t>
         </t>
     </template>
-    </data>
 </odoo>

@@ -28,11 +28,9 @@ class BaseNotificationManager(models.AbstractModel):
 
     name = fields.Char("Manager Name", required=True)
     program_id = fields.Many2one("g2p.program", string="Program", required=True)
-    on_enrolled_in_program = fields.Boolean(
-        string="On Enrolled In Program", default=True
-    )
-    on_cycle_started = fields.Boolean(string="On Cycle Started", default=True)
-    on_cycle_ended = fields.Boolean(string="On Cycle Ended", default=True)
+    on_enrolled_in_program = fields.Boolean(default=True)
+    on_cycle_started = fields.Boolean(default=True)
+    on_cycle_ended = fields.Boolean(default=True)
 
     def on_enrolled_in_program(self, program_memberships):
         return
@@ -49,15 +47,9 @@ class SMSNotificationManager(models.Model):
     _inherit = ["g2p.base.program.notification.manager", "g2p.manager.source.mixin"]
     _description = "SMS Program Notification Manager"
 
-    on_enrolled_in_program_template = fields.One2many(
-        "sms.template", "g2p_sms_id", string="On Enrolled In Program Template"
-    )
-    on_cycle_started_template = fields.One2many(
-        "sms.template", "g2p_sms_id", string="On Cycle Started Template"
-    )
-    on_cycle_ended_template = fields.One2many(
-        "sms.template", "g2p_sms_id", string="On Cycle Ended Template"
-    )
+    on_enrolled_in_program_template = fields.One2many("sms.template", "g2p_sms_id")
+    on_cycle_started_template = fields.One2many("sms.template", "g2p_sms_id")
+    on_cycle_ended_template = fields.One2many("sms.template", "g2p_sms_id")
 
     # TODO: render the templates and send the sms using a job
     def on_enrolled_in_program(self, program_memberships):
