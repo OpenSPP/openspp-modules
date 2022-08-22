@@ -21,6 +21,7 @@
     "data": [
         "security/program_security.xml",
         "security/ir.model.access.csv",
+        "security/registrant_rule.xml",
         "data/sequences.xml",
         "report/voucher_card.xml",
         "report/report_format.xml",
