@@ -95,8 +95,8 @@ class OpenSPPCustomFieldsUI(models.Model):
             if self.prefix and self.draft_name:
                 name = self.prefix + "_" + self.draft_name
                 self.name = name
-            self.compute = "indicator = []\n"
-            self.compute += "self._compute_count_and_set('%s', None, indicator)" % name
+            self.compute = "indicators = []\n"
+            self.compute += "self._compute_count_and_set('%s', None, indicators)" % name
 
     @api.onchange("kinds")
     def _onchange_kinds(self):
@@ -117,5 +117,7 @@ class OpenSPPCustomFieldsUI(models.Model):
             if self.prefix and self.draft_name:
                 name = self.prefix + "_" + self.draft_name
             self.compute = "kinds = %s \n" % kind_ids
-            self.compute += "indicator = []\n"
-            self.compute += "self._compute_count_and_set('%s', kinds, indicator)" % name
+            self.compute += "indicators = []\n"
+            self.compute += (
+                "self._compute_count_and_set('%s', kinds, indicators)" % name
+            )
