@@ -8,7 +8,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.program.membership.duplicate</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Program Membership Duplicate" sample="1">
+            <tree sample="1">
                 <field name="deduplication_manager_id" invisible="1" />
                 <field name="beneficiary_ids" widget="many2many_tags" />
                 <field name="reason" string="Reason" />
@@ -48,7 +48,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     <notebook>
                         <page string="Beneficiaries">
                             <field name="beneficiary_ids" nolabel="1">
-                                <tree string="Beneficiaries" delete="0" editable="bottom">
+                                <tree delete="0" editable="bottom">
                                     <button
                                         name="open_registrant_form"
                                         type="object"

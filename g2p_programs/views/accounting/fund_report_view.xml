@@ -9,7 +9,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <tree
-                string="Program Fund Report"
                 sample="1"
                 create="0"
                 edit="0"

@@ -41,7 +41,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
     auto_approve_entitlements = fields.Boolean(
         string="Auto-approve Entitlements", default=False
     )
-    cycle_duration = fields.Integer("Cycle Duration", default=30, required=True)
+    cycle_duration = fields.Integer(default=30, required=True)
     approver_group_id = fields.Many2one(
         comodel_name="res.groups",
         string="Approver Group",
@@ -52,13 +52,11 @@ class G2PCreateNewProgramWiz(models.TransientModel):
         currency_field="currency_id",
         group_operator="sum",
         default=0.0,
-        string="Amount per cycle",
     )
     amount_per_individual_in_group = fields.Monetary(
         currency_field="currency_id",
         group_operator="sum",
         default=0.0,
-        string="Amount per individual in group",
     )
     max_individual_in_group = fields.Integer(
         default=0,
@@ -67,7 +65,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
     )
     entitlement_kind = fields.Selection(
         [("default", "Default")],
-        "Applied For",
+        "Manager",
         default="default",
     )
     entitlement_validation_group_id = fields.Many2one(
@@ -76,7 +74,6 @@ class G2PCreateNewProgramWiz(models.TransientModel):
 
     target_type = fields.Selection(
         [("group", "Group"), ("individual", "Individual")],
-        "Target Type",
         default="group",
     )
     gen_benificiaries = fields.Selection(

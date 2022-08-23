@@ -25,7 +25,7 @@ class G2PCashEntitlementManager(models.Model):
     _description = "Cash Entitlement Manager"
 
     # Cash Entitlement Manager
-    evaluate_one_item = fields.Boolean("Evaluate one item", default=False)
+    evaluate_one_item = fields.Boolean(default=False)
     entitlement_item_ids = fields.One2many(
         "g2p.program.entitlement.manager.cash.item",
         "entitlement_id",
@@ -131,7 +131,7 @@ class G2PCashEntitlementItem(models.Model):
     _description = "Cash Entitlement Manager Items"
     _order = "sequence,id"
 
-    sequence = fields.Integer("Sequence", default=1000)
+    sequence = fields.Integer(default=1000)
     entitlement_id = fields.Many2one(
         "g2p.program.entitlement.manager.cash", "Cash Entitlement", required=True
     )

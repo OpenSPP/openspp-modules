@@ -56,7 +56,7 @@ class DefaultProgramManager(models.Model):
     _inherit = ["g2p.base.program.manager", "g2p.manager.source.mixin"]
     _description = "Default Program Manager"
 
-    number_of_cycles = fields.Integer(string="Number of cycles", default=1)
+    number_of_cycles = fields.Integer(default=1)
     copy_last_cycle_on_new_cycle = fields.Boolean(
         string="Copy previous cycle", default=True
     )

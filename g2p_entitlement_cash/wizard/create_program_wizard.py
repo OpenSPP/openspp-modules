@@ -13,7 +13,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
     _inherit = "g2p.program.create.wizard"
 
     # Cash Entitlement Manager
-    evaluate_one_item = fields.Boolean("Evaluate one item", default=False)
+    evaluate_one_item = fields.Boolean(default=False)
     entitlement_kind = fields.Selection(selection_add=[("cash", "Cash")])
 
     entitlement_cash_item_ids = fields.One2many(
@@ -77,7 +77,7 @@ class G2PCreateNewProgramWizCashItem(models.TransientModel):
     _description = "Create a New Program Wizard Entitlement Cash Items"
     _order = "sequence,id"
 
-    sequence = fields.Integer("Sequence", default=1000)
+    sequence = fields.Integer(default=1000)
     program_id = fields.Many2one(
         "g2p.program.create.wizard", "New Program", required=True
     )

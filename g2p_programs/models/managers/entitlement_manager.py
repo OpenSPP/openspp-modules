@@ -54,13 +54,11 @@ class DefaultCashEntitlementManager(models.Model):
         currency_field="currency_id",
         group_operator="sum",
         default=0.0,
-        string="Amount per cycle",
     )
     amount_per_individual_in_group = fields.Monetary(
         currency_field="currency_id",
         group_operator="sum",
         default=0.0,
-        string="Amount per individual in group",
     )
     max_individual_in_group = fields.Integer(
         default=0,

@@ -6,7 +6,7 @@ from odoo import api, fields, models
 class DashBoardMenu(models.Model):
     _inherit = "dashboard.menu"
 
-    sequence = fields.Integer("Sequence", default=10)
+    sequence = fields.Integer(default=10)
     menu_id = fields.Many2one("ir.ui.menu", string="Parent Menu")
     action_menu_id = fields.Many2one("ir.ui.menu", string="Menu", ondelete="cascade")
     client_action = fields.Many2one("ir.actions.client", ondelete="cascade")

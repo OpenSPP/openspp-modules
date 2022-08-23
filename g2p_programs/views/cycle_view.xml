@@ -8,7 +8,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.cycle</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Cycle">
+            <tree>
                 <field name="name" />
                 <field name="program_id" />
                 <field name="members_count" string="# Beneficiaries" />

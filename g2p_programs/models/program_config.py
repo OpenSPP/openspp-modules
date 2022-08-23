@@ -16,22 +16,17 @@ class ProgramConfig(models.TransientModel):
     )
     deduplication_managers = fields.Many2many(
         "g2p.deduplication.manager",
-        string="Deduplication Managers",
         default_model="g2p.program",
     )
     notification_managers = fields.Many2many(
         "g2p.program.notification.manager",
-        string="Notification Managers",
         default_model="g2p.program",
     )
     program_managers = fields.Many2many(
-        "g2p.program.manager", string="Program Managers", default_model="g2p.program"
+        "g2p.program.manager", default_model="g2p.program"
     )
-    cycle_managers = fields.Many2many(
-        "g2p.cycle.manager", string="Cycle Managers", default_model="g2p.program"
-    )
+    cycle_managers = fields.Many2many("g2p.cycle.manager", default_model="g2p.program")
     entitlement_managers = fields.Many2many(
         "g2p.program.entitlement.manager",
-        string="Entitlement Managers",
         default_model="g2p.program",
     )

@@ -9,7 +9,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.program.notification.manager</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Notification Managers">
+            <tree>
                 <field name="manager_ref_id" />
                 <field name="program_id" />
                 <field name="manager_id" invisible="1" />
@@ -48,7 +48,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.program.notification.manager.sms</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="SMS Notification Managers" sample="1">
+            <tree sample="1">
                 <field name="name" />
                 <field name="program_id" />
             </tree>
@@ -89,7 +89,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <notebook>
                             <page string="Enrolled Programs">
                                 <field name="on_enrolled_in_program_template" nolabel="1">
-                                    <tree string="Enrolled Program Templates">
+                                    <tree>
                                         <field name="name" />
                                         <field name="model" />
                                     </tree>
@@ -97,7 +97,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             </page>
                             <page string="Cycles Started">
                                 <field name="on_cycle_started_template" nolabel="1">
-                                    <tree string="Cycles Started Templates">
+                                    <tree>
                                         <field name="name" />
                                         <field name="model" />
                                     </tree>
@@ -105,7 +105,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             </page>
                             <page string="Cycles Ended">
                                 <field name="on_cycle_ended_template" nolabel="1">
-                                    <tree string="Cycles Ended Templates">
+                                    <tree>
                                         <field name="name" />
                                         <field name="model" />
                                     </tree>

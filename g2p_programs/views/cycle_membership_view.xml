@@ -8,7 +8,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.cycle.membership</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Cycle Membership">
+            <tree>
                 <button
                     name="open_registrant_form"
                     type="object"
