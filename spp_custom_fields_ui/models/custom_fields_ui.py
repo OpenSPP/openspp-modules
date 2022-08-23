@@ -97,6 +97,7 @@ class OpenSPPCustomFieldsUI(models.Model):
                 self.name = name
             self.compute = "indicators = []\n"
             self.compute += "self._compute_count_and_set('%s', None, indicators)" % name
+            self.ttype = "integer"
 
     @api.onchange("kinds")
     def _onchange_kinds(self):
