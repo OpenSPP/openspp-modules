@@ -271,7 +271,7 @@ class IDDocumentDeduplication(models.Model):
         duplicated_doc_ids = self.env["g2p.reg.id"].search(
             [("id", "in", duplicate_ids)]
         )
-        individual_ids = [x.registrant.id for x in duplicated_doc_ids]
+        individual_ids = [x.partner_id.id for x in duplicated_doc_ids]
         individual_ids = list(dict.fromkeys(individual_ids))
 
         group_with_duplicates = self.env["g2p.group.membership"].search(
@@ -357,7 +357,7 @@ class IDDocumentDeduplication(models.Model):
         duplicated_doc_ids = self.env["g2p.reg.id"].search(
             [("id", "in", duplicate_ids)]
         )
-        individual_ids = [x.registrant.id for x in duplicated_doc_ids]
+        individual_ids = [x.partner_id.id for x in duplicated_doc_ids]
         individual_ids = list(dict.fromkeys(individual_ids))
         _logger.info("Individual IDS with Duplicated ID Documents: %s", individual_ids)
         individual_program_membership = self.env["g2p.program_membership"].search(

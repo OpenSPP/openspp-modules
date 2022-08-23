@@ -10,7 +10,6 @@ _logger = logging.getLogger(__name__)
 class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        _logger.info("Program Testing: SETUP INITIALIZED")
         super(ProgramTestPhoneEligibilityDeduplicate, cls).setUpClass()
 
         # Initial Setup of Variables
@@ -62,10 +61,6 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
         program_1_form = cls.program_1_id.create_program()
         program_1_id = program_1_form["res_id"]
         cls.program_1 = cls.env["g2p.program"].search([("id", "=", program_1_id)])
-        if cls.program_1:
-            _logger.info(
-                "Program Testing: Created Program 1 with ID: %s" % cls.program_1.id
-            )
         cls.program_2_id = cls.env["g2p.program.create.wizard"].create(
             {
                 "name": "Test Program 2",
@@ -77,37 +72,15 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
         program_2_form = cls.program_2_id.create_program()
         program_2_id = program_2_form["res_id"]
         cls.program_2 = cls.env["g2p.program"].search([("id", "=", program_2_id)])
-        if cls.program_2:
-            _logger.info(
-                "Program Testing: Created Program 2 with ID: %s" % cls.program_2.id
-            )
-
         cls.program_1.write({"target_type": "individual"})
         cls.program_2.write({"target_type": "group"})
 
         # Add Beneficiaries
-        _logger.info(
-            "Program Testing: Adding Program: %s, Beneficiaries: %s"
-            % (cls.program_1.name, cls.registrant_1.name)
-        )
         cls.program_1.write(
             {"program_membership_ids": [(0, 0, {"partner_id": cls.registrant_1.id})]}
         )
         cls.program_1.write(
             {"program_membership_ids": [(0, 0, {"partner_id": cls.registrant_2.id})]}
-        )
-        if cls.program_1.program_membership_ids:
-            _logger.info(
-                "Program Testing: Added Program: %s, Beneficiaries: %s"
-                % (
-                    cls.program_1.name,
-                    cls.program_1.program_membership_ids[0].partner_id.name,
-                )
-            )
-
-        _logger.info(
-            "Program Testing: Adding Program: %s, Beneficiaries (Group): %s"
-            % (cls.program_2.name, cls.group_1.name)
         )
         cls.program_2.write(
             {"program_membership_ids": [(0, 0, {"partner_id": cls.group_1.id})]}
@@ -115,20 +88,7 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
         cls.program_2.write(
             {"program_membership_ids": [(0, 0, {"partner_id": cls.group_2.id})]}
         )
-        if cls.program_2.program_membership_ids:
-            _logger.info(
-                "Program Testing: Added Program: %s, Beneficiaries: %s"
-                % (
-                    cls.program_2.name,
-                    cls.program_2.program_membership_ids[0].partner_id.name,
-                )
-            )
         # Add Phone Eligibility Manager
-        _logger.info(
-            "Program Testing: Adding Phone Eligibility Manager For Program %s"
-            % cls.program_1.name
-        )
-
         cls.manager_1 = cls.env["g2p.program_membership.manager.phone_number"].create(
             {
                 "name": "Phone Manager 1",
@@ -151,20 +111,6 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
                 ]
             }
         )
-        if cls.program_1.eligibility_managers:
-            _logger.info(
-                "Program Testing: Added Program: %s, Eligibility Manager: %s"
-                % (
-                    cls.program_1.name,
-                    cls.program_1.eligibility_managers[1].display_name,
-                )
-            )
-
-        _logger.info(
-            "Program Testing: Adding Phone Eligibility Manager For Program %s"
-            % cls.program_2.name
-        )
-
         cls.manager_2 = cls.env["g2p.program_membership.manager.phone_number"].create(
             {
                 "name": "Phone Manager 2",
@@ -187,56 +133,11 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
                 ]
             }
         )
-        if cls.program_2.eligibility_managers:
-            _logger.info(
-                "Program Testing: Added Program: %s, Eligibility Manager: %s"
-                % (
-                    cls.program_2.name,
-                    cls.program_2.eligibility_managers[1].display_name,
-                )
-            )
-
         # Enroll Beneficiaries without Phones expecting NONE will be enrolled
-        _logger.info(
-            "Program Testing: Program %s Beneficiaries Enrollment: %s Expecting NONE will be enrolled"
-            % (
-                cls.program_1.name,
-                cls.program_1.program_membership_ids[0].partner_id.name,
-            )
-        )
         cls.program_1.enroll_eligible_registrants()
-        if cls.program_1.program_membership_ids[0].state == "enrolled":
-            _logger.info(
-                "Program Testing: Program %s Beneficiaries Enrolled: %s"
-                % (
-                    cls.program_1.name,
-                    cls.program_1.program_membership_ids[0].partner_id.name,
-                )
-            )
-        else:
-            _logger.info("Program Testing: NONE Enrolled in %s" % cls.program_1.name)
-        _logger.info(
-            "Program Testing: Program %s Beneficiaries Enrollment: %s Expecting NONE will be enrolled"
-            % (
-                cls.program_2.name,
-                cls.program_2.program_membership_ids[0].partner_id.name,
-            )
-        )
         cls.program_2.enroll_eligible_registrants()
-        if cls.program_2.program_membership_ids[0].state == "enrolled":
-            _logger.info(
-                "Program Testing: Program %s Beneficiaries Enrolled: %s"
-                % (
-                    cls.program_2.name,
-                    cls.program_2.program_membership_ids[0].partner_id.name,
-                )
-            )
-        else:
-            _logger.info("Program Testing: NONE Enrolled in %s" % cls.program_2.name)
-
         # Beneficiaries Add IDS
 
-        _logger.info("Program Testing: Adding PHONE for %s" % cls.registrant_1.name)
         cls.registrant_1.write(
             {
                 "phone_number_ids": [
@@ -251,13 +152,6 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
                 ]
             }
         )
-        if len(cls.registrant_1.phone_number_ids) > 0:
-            _logger.info("Program Testing: PHONE for %s: ADDED" % cls.registrant_1.name)
-        else:
-            _logger.info(
-                "Program Testing: PHONE for %s: FAILED" % cls.registrant_1.name
-            )
-        _logger.info("Program Testing: Adding IDS for %s" % cls.registrant_2.name)
         cls.registrant_2.write(
             {
                 "phone_number_ids": [
@@ -272,13 +166,6 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
                 ]
             }
         )
-        if len(cls.registrant_2.phone_number_ids) > 0:
-            _logger.info("Program Testing: PHONE for %s: ADDED" % cls.registrant_2.name)
-        else:
-            _logger.info(
-                "Program Testing: PHONE for %s: FAILED" % cls.registrant_2.name
-            )
-        _logger.info("Program Testing: Adding PHONE for %s" % cls.group_1.name)
         cls.group_1.write(
             {
                 "phone_number_ids": [
@@ -293,11 +180,6 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
                 ]
             }
         )
-        if len(cls.group_1.phone_number_ids) > 0:
-            _logger.info("Program Testing: PHONE for %s: ADDED" % cls.group_1.name)
-        else:
-            _logger.info("Program Testing: PHONE for %s: FAILED" % cls.group_1.name)
-        _logger.info("Program Testing: Adding PHONE for %s" % cls.group_2.name)
         cls.group_2.write(
             {
                 "phone_number_ids": [
@@ -312,60 +194,15 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
                 ]
             }
         )
-        if len(cls.group_2.phone_number_ids) > 0:
-            _logger.info("Program Testing: PHONE for %s: ADDED" % cls.group_2.name)
-        else:
-            _logger.info("Program Testing: PHONE for %s: FAILED" % cls.group_2.name)
 
         # Try Enrolling now when Phones has been ADDED
-        _logger.info(
-            "Program Testing: RETRY Program %s Beneficiaries Enrollment: %s Expecting %s to be enrolled"
-            % (
-                cls.program_1.name,
-                cls.program_1.program_membership_ids,
-                cls.program_1.program_membership_ids,
-            )
-        )
         cls.program_1.enroll_eligible_registrants()
-        if cls.program_1.program_membership_ids[0].state == "enrolled":
-            _logger.info(
-                "Program Testing: Program %s Beneficiaries Enrolled: %s"
-                % (
-                    cls.program_1.name,
-                    cls.program_1.program_membership_ids,
-                )
-            )
-        else:
-            _logger.info("Program Testing: NONE Enrolled in %s" % cls.program_1.name)
-        _logger.info(
-            "Program Testing: RETRY Program %s Beneficiaries Enrollment: %s Expecting %s to be enrolled"
-            % (
-                cls.program_2.name,
-                cls.program_2.program_membership_ids,
-                cls.program_2.program_membership_ids,
-            )
-        )
         cls.program_2.enroll_eligible_registrants()
-        if cls.program_2.program_membership_ids[0].state == "enrolled":
-            _logger.info(
-                "Program Testing: Program %s Beneficiaries Enrolled: %s"
-                % (
-                    cls.program_2.name,
-                    cls.program_2.program_membership_ids,
-                )
-            )
-        else:
-            _logger.info("Program Testing: NONE Enrolled in %s" % cls.program_2.name)
 
     def test_01_deduplication(self):
         # Test the Deduplication on the Programs now with ID Deduplication Managers
 
-        # Add first the Phone Deduplication Manager
-        _logger.info(
-            "Program Testing: Adding Phone Deduplication Manager For Program %s"
-            % self.program_1.name
-        )
-
+        # Add first the Phone Deduplication
         self.manager_1 = self.env["g2p.deduplication.manager.phone_number"].create(
             {
                 "name": "Phone Manager 1",
@@ -373,15 +210,6 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
             }
         )
         if self.manager_1:
-            _logger.info(
-                "Program Testing: Deduplication Manager For Program %s ADDED"
-                % self.program_1.name
-            )
-            _logger.info(
-                "Program Testing: Assigining Deduplication Manager %s For Program %s"
-                % (self.manager_1.name, self.program_1.name)
-            )
-
             self.program_1.write(
                 {
                     "deduplication_managers": [
@@ -399,37 +227,13 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
                 }
             )
             if len(self.program_1.deduplication_managers) > 0:
-                _logger.info(
-                    "Program Testing: Deduplication Manager For Program %s ASSIGNED"
-                    % self.program_1.name
-                )
-                _logger.info(
-                    "Program Testing: Program: %s, Checking Deduplication"
-                    % self.program_1.name
-                )
                 self.program_1.deduplicate_beneficiaries()
-                _logger.info(
-                    "Program Testing: Program: %s, Deduplications Count: %s"
-                    % (self.program_1.name, self.program_1.duplicate_membership_count)
+                self.assertEqual(
+                    self.program_1.duplicate_membership_count,
+                    2,
+                    "Program Testing: Expected Duplicate count exceeded",
                 )
-            else:
-                _logger.info(
-                    "Program Testing: Adding Deduplication Manager For Program %s FAILED"
-                    % self.program_1.name
-                )
-
-        else:
-            _logger.info(
-                "Program Testing: Adding Deduplication Manager For Program %s FAILED"
-                % self.program_1.name
-            )
-
         # Add first the Phone Deduplication Manager
-
-        _logger.info(
-            "Program Testing: Adding Phone Deduplication Manager For Program %s"
-            % self.program_2.name
-        )
 
         self.manager_2 = self.env["g2p.deduplication.manager.phone_number"].create(
             {
@@ -438,15 +242,6 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
             }
         )
         if self.manager_2:
-            _logger.info(
-                "Program Testing: Deduplication Manager For Program %s ADDED"
-                % self.program_2.name
-            )
-            _logger.info(
-                "Program Testing: Assigining Deduplication Manager %s For Program %s"
-                % (self.manager_2.name, self.program_2.name)
-            )
-
             self.program_2.write(
                 {
                     "deduplication_managers": [
@@ -471,27 +266,9 @@ class ProgramTestPhoneEligibilityDeduplicate(TransactionCase):
                 {"group_membership_ids": [(0, 0, {"individual": self.registrant_2.id})]}
             )
             if len(self.program_2.deduplication_managers) > 0:
-                _logger.info(
-                    "Program Testing: Deduplication Manager For Program %s ASSIGNED"
-                    % self.program_2.name
-                )
-                _logger.info(
-                    "Program Testing: Program: %s, Checking Deduplication"
-                    % self.program_2.name
-                )
                 self.program_2.deduplicate_beneficiaries()
-                _logger.info(
-                    "Program Testing: Program: %s, Deduplications Count: %s"
-                    % (self.program_2.name, self.program_2.duplicate_membership_count)
+                self.assertEqual(
+                    self.program_2.duplicate_membership_count,
+                    0,
+                    "Program Testing: Expected Duplicate count exceeded",
                 )
-            else:
-                _logger.info(
-                    "Program Testing: Adding Deduplication Manager For Program %s FAILED"
-                    % self.program_2.name
-                )
-
-        else:
-            _logger.info(
-                "Program Testing: Adding Deduplication Manager For Program %s FAILED"
-                % self.program_2.name
-            )
