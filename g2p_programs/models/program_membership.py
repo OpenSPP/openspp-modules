@@ -135,7 +135,7 @@ class G2PProgramMembership(models.Model):
                 "view_mode": "form",
                 "res_model": "res.partner",
                 "res_id": self.partner_id.id,
-                "view_id": self.env.ref("g2p_registrant.view_groups_form").id,
+                "view_id": self.env.ref("g2p_registry_group.view_groups_form").id,
                 "type": "ir.actions.act_window",
                 "target": "new",
                 "context": {"default_is_group": True},
@@ -147,7 +147,9 @@ class G2PProgramMembership(models.Model):
                 "view_mode": "form",
                 "res_model": "res.partner",
                 "res_id": self.partner_id.id,
-                "view_id": self.env.ref("g2p_registrant.view_individuals_form").id,
+                "view_id": self.env.ref(
+                    "g2p_registry_individual.view_individuals_form"
+                ).id,
                 "type": "ir.actions.act_window",
                 "target": "new",
                 "context": {"default_is_group": False},

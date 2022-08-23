@@ -3,7 +3,6 @@ odoo.define("spp_dashboard.Dashboard", function (require) {
 
     var odoo_dynamic_dashboard = require("odoo_dynamic_dashboard.Dashboard");
     var ajax = require("web.ajax");
-    // Var rpc = require("web.rpc");
     var ctx = {};
 
     odoo_dynamic_dashboard.include({

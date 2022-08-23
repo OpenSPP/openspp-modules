@@ -15,7 +15,6 @@ odoo.define("g2p_programs.create_program_button", function (require) {
 
         load_wizard: function () {
             var self = this;
-            // Var user = session.uid;
             self.do_action({
                 name: "Set Program Settings",
                 type: "ir.actions.act_window",
@@ -24,7 +23,7 @@ odoo.define("g2p_programs.create_program_button", function (require) {
                 view_mode: "form",
                 target: "new",
             });
-            // Window.location;
+            return window.location;
         },
 
         load_wizard2: function () {
@@ -43,7 +42,7 @@ odoo.define("g2p_programs.create_program_button", function (require) {
                     view_mode: "form",
                     target: "new",
                 });
-                // Window.location;
+                return window.location;
             });
         },
     });
