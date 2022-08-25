@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <data>
+        <record id="request_id_wizard_form_view" model="ir.ui.view">
+            <field name="name">request_id_wizard_form_view</field>
+            <field name="model">spp.request.id.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <label for="registrant_id" string="Registrant" />
+                            </h1>
+                            <h1>
+                                <field name="registrant_id" readonly="1" />
+                            </h1>
+                            <div class="o_row">
+                            </div>
+                        </div>
+                        <group>
+                          <field
+                                name="template_id"
+                                options="{'no_create_edit':True,'no_open':True,'no_create':True}"
+                                attrs="{'required':[('registrant_id','=', True)]}"
+                            />
+                          <field name="is_idpass" invisible="1" />
+                          <field
+                                name="idpass_id"
+                                string="ID Pass Template"
+                                options="{'no_create_edit':True,'no_open':True,'no_create':True}"
+                                attrs="{'invisible':[('is_idpass','!=', True)], 'required':[('is_idpass','=', True)]}"
+                            />
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="request_id" string="Request ID" type="object" class="oe_highlight" />
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

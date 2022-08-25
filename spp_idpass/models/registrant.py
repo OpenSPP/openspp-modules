@@ -176,10 +176,10 @@ class OpenSPPRegistrant(models.Model):
                 model_id.message_post(body=msg_body, attachment_ids=attachment_id)
 
                 external_identifier = self.env["ir.model.data"].search(
-                    [("name", "=", "id_type_idpass"), ("model", "=", "spp.id.type")]
+                    [("name", "=", "id_type_idpass"), ("model", "=", "g2p.id.type")]
                 )
                 _logger.info("External Identifier: %s" % external_identifier.res_id)
-                has_existing_idpass = self.env["spp.reg.id"].search(
+                has_existing_idpass = self.env["g2p.reg.id"].search(
                     [
                         ("registrant", "=", self.id),
                         ("id_type", "=", external_identifier.res_id),

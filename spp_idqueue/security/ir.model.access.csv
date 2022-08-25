@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_idqueue_admin,ID Queue Admin Access,spp_idqueue.model_spp_id_queue,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_request_id_wizard_admin,Request ID Wizard Admin Access,spp_idqueue.model_spp_request_id_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
