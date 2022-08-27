@@ -21,12 +21,12 @@ class G2PGroup(models.Model):
     OK ➢ Households (HH) with children - extracted from demographic data of HH adult members plus child members
     OK ➢ single-headed HH - extracted from demographic data of HH adult members
     OK ➢ female-headed HH - extracted from demographic data of HH adult members
-    OK ➢ HH with pregnant/lactating women - extracted from vulnerability criteria
+    OK ➢ HH with pregnant/lactating women - extracted from vulnerability indicator
     OK ➢ HH with elderly (including single / elderly-headed HHs) - extracted from demographic
     data of HH adult members
-    OK ➢ HHs with disabled (mental or physical) members - extracted from vulnerability criteria
+    OK ➢ HHs with disabled (mental or physical) members - extracted from vulnerability indicator
     OK ➢ HHs with members that have chronic illness/medical conditions - extracted from
-    vulnerability criteria
+    vulnerability indicator
 """
     z_crt_grp_num_children = fields.Integer(
         "Number of children",
@@ -118,8 +118,8 @@ class G2PGroup(models.Model):
         """
         now = datetime.datetime.now()
         children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
-        criteria = [("birthdate", ">=", children)]
-        self._compute_count_and_set("z_crt_grp_num_children", None, criteria)
+        indicator = [("birthdate", ">=", children)]
+        self._compute_count_and_set("z_crt_grp_num_children", None, indicator)
 
     def _compute_crt_grp_num_eldery(self):
         """
@@ -128,8 +128,8 @@ class G2PGroup(models.Model):
 
         """
         now = datetime.datetime.now()
-        criteria = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
-        self._compute_count_and_set("z_crt_grp_num_elderly", None, criteria)
+        indicator = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
+        self._compute_count_and_set("z_crt_grp_num_elderly", None, indicator)
 
     def _compute_crt_grp_num_members(self):
         """
@@ -146,8 +146,8 @@ class G2PGroup(models.Model):
 
         """
         now = datetime.datetime.now()
-        criteria = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
-        self._compute_count_and_set("z_crt_grp_num_adults", None, criteria)
+        indicator = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
+        self._compute_count_and_set("z_crt_grp_num_adults", None, indicator)
 
     def _compute_crt_grp_num_adults_woman(self):
         """
@@ -156,11 +156,11 @@ class G2PGroup(models.Model):
 
         """
         now = datetime.datetime.now()
-        criteria = [
+        indicator = [
             ("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT)),
             ("gender", "=", "Female"),
         ]
-        self._compute_count_and_set("z_crt_grp_num_adults_woman", None, criteria)
+        self._compute_count_and_set("z_crt_grp_num_adults_woman", None, indicator)
 
     def _compute_crt_grp_is_single_head_hh(self):
         """
@@ -170,10 +170,10 @@ class G2PGroup(models.Model):
         """
         # TODO: Should we exclude eldery?
         now = datetime.datetime.now()
-        criteria = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
+        indicator = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, criteria=criteria)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record["z_crt_grp_is_single_head_hh"] = cnt > 0
             else:
                 record["z_crt_grp_is_single_head_hh"] = None
@@ -188,13 +188,13 @@ class G2PGroup(models.Model):
         _logger.info("_compute_crt_grp_is_woman_head_hh")
         _logger.info("self: %s", self)
         now = datetime.datetime.now()
-        criteria = [
+        indicator = [
             ("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT)),
             ("gender", "=", "Female"),
         ]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=["Head"], criteria=criteria)
+                cnt = record.count_individuals(kinds=["Head"], indicators=indicator)
                 _logger.info(cnt)
                 record["z_crt_grp_is_woman_head_hh"] = cnt > 0
             else:
@@ -211,10 +211,10 @@ class G2PGroup(models.Model):
         _logger.info("_compute_crt_grp_is_eldery_head_hh")
         _logger.info("self: %s", self)
         now = datetime.datetime.now()
-        criteria = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
+        indicator = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=["Head"], criteria=criteria)
+                cnt = record.count_individuals(kinds=["Head"], indicators=indicator)
                 _logger.info("cnt: %s", cnt)
                 record.z_crt_grp_is_elderly_head_hh = cnt > 0
             else:
@@ -227,10 +227,10 @@ class G2PGroup(models.Model):
         """
         now = datetime.datetime.now()
         children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
-        criteria = [("birthdate", ">=", children)]
+        indicator = [("birthdate", ">=", children)]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, criteria=criteria)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record["z_crt_grp_is_hh_with_children"] = cnt > 0
             else:
                 record["z_crt_grp_is_hh_with_children"] = None
@@ -240,14 +240,14 @@ class G2PGroup(models.Model):
         Households (HH) with pregnant and lactating
         """
         datetime.datetime.now()
-        criteria = [
+        indicator = [
             "|",
             ("z_cst_ind_pregnancy_start", "!=", None),
             ("z_cst_ind_lactation_start", "=", None),
         ]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, criteria=criteria)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record.z_crt_grp_is_hh_with_pregnant_lactating = cnt > 0
             else:
                 record.z_crt_grp_is_hh_with_pregnant_lactating = None
@@ -256,10 +256,10 @@ class G2PGroup(models.Model):
         """
         HHs with disabled (mental or physical) members
         """
-        criteria = [("z_cst_ind_disability_level", ">", 0)]
+        indicator = [("z_cst_ind_disability_level", ">", 0)]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, criteria=criteria)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record.z_crt_grp_is_hh_with_disabled = cnt > 0
             else:
                 record.z_crt_grp_is_hh_with_disabled = None
@@ -268,10 +268,10 @@ class G2PGroup(models.Model):
         """
         HHs with members that have chronic illness/medical conditions
         """
-        criteria = [("z_cst_ind_medical_condition", ">", 0)]
+        indicator = [("z_cst_ind_medical_condition", ">", 0)]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, criteria=criteria)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record.z_crt_grp_is_hh_with_medical_condition = cnt > 0
             else:
                 record.z_crt_grp_is_hh_with_medical_condition = None
@@ -282,19 +282,19 @@ class G2PGroup(models.Model):
         plus elderly members from personal data
         """
         now = datetime.datetime.now()
-        criteria = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
+        indicator = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, criteria=criteria)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record.z_crt_grp_is_hh_with_elderly = cnt > 0
             else:
                 record.z_crt_grp_is_hh_with_elderly = None
 
-    def _compute_count_and_set(self, field_name, kinds, criteria):
+    def _compute_count_and_set(self, field_name, kinds, indicator):
         for record in self:
             if record["is_group"]:
                 record[field_name] = record.count_individuals(
-                    kinds=kinds, criteria=criteria
+                    kinds=kinds, indicators=indicator
                 )
             else:
                 record[field_name] = None

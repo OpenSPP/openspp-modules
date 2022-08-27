@@ -63,7 +63,7 @@ class OpenSPPGenerateProgramData(models.Model):
                 f"program--- {create_program_id}: {create_program_id.target_type}"
             )
 
-            #  Default Enrollment Criteria
+            #  Default Enrollment indicator
 
             domain = [("is_registrant", "=", True)]
             eligibility_domain = ["&", ["is_registrant", "=", True]]
