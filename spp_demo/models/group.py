@@ -173,7 +173,7 @@ class G2PGroup(models.Model):
         indicator = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, indicator=indicator)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record["z_crt_grp_is_single_head_hh"] = cnt > 0
             else:
                 record["z_crt_grp_is_single_head_hh"] = None
@@ -194,7 +194,7 @@ class G2PGroup(models.Model):
         ]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=["Head"], indicator=indicator)
+                cnt = record.count_individuals(kinds=["Head"], indicators=indicator)
                 _logger.info(cnt)
                 record["z_crt_grp_is_woman_head_hh"] = cnt > 0
             else:
@@ -214,7 +214,7 @@ class G2PGroup(models.Model):
         indicator = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=["Head"], indicator=indicator)
+                cnt = record.count_individuals(kinds=["Head"], indicators=indicator)
                 _logger.info("cnt: %s", cnt)
                 record.z_crt_grp_is_elderly_head_hh = cnt > 0
             else:
@@ -230,7 +230,7 @@ class G2PGroup(models.Model):
         indicator = [("birthdate", ">=", children)]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, indicator=indicator)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record["z_crt_grp_is_hh_with_children"] = cnt > 0
             else:
                 record["z_crt_grp_is_hh_with_children"] = None
@@ -247,7 +247,7 @@ class G2PGroup(models.Model):
         ]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, indicator=indicator)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record.z_crt_grp_is_hh_with_pregnant_lactating = cnt > 0
             else:
                 record.z_crt_grp_is_hh_with_pregnant_lactating = None
@@ -259,7 +259,7 @@ class G2PGroup(models.Model):
         indicator = [("z_cst_ind_disability_level", ">", 0)]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, indicator=indicator)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record.z_crt_grp_is_hh_with_disabled = cnt > 0
             else:
                 record.z_crt_grp_is_hh_with_disabled = None
@@ -271,7 +271,7 @@ class G2PGroup(models.Model):
         indicator = [("z_cst_ind_medical_condition", ">", 0)]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, indicator=indicator)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record.z_crt_grp_is_hh_with_medical_condition = cnt > 0
             else:
                 record.z_crt_grp_is_hh_with_medical_condition = None
@@ -285,7 +285,7 @@ class G2PGroup(models.Model):
         indicator = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, indicator=indicator)
+                cnt = record.count_individuals(kinds=None, indicators=indicator)
                 record.z_crt_grp_is_hh_with_elderly = cnt > 0
             else:
                 record.z_crt_grp_is_hh_with_elderly = None
@@ -294,7 +294,7 @@ class G2PGroup(models.Model):
         for record in self:
             if record["is_group"]:
                 record[field_name] = record.count_individuals(
-                    kinds=kinds, indicator=indicator
+                    kinds=kinds, indicators=indicator
                 )
             else:
                 record[field_name] = None
