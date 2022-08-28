@@ -67,7 +67,7 @@ class G2PGroup(models.Model):
         now = datetime.datetime.now()
         children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
         indicator = [("birthdate", ">=", children)]
-        self._compute_count_and_set("z_crt_grp_num_children", None, indicator)
+        self.compute_count_and_set_indicator("z_crt_grp_num_children", None, indicator)
 
     def _compute_crt_grp_num_eldery(self):
         """
@@ -77,7 +77,7 @@ class G2PGroup(models.Model):
         """
         now = datetime.datetime.now()
         indicator = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
-        self._compute_count_and_set("z_crt_grp_num_elderly", None, indicator)
+        self.compute_count_and_set_indicator("z_crt_grp_num_elderly", None, indicator)
 
     def _compute_crt_grp_num_adults_female_not_elderly(self):
         """
@@ -91,7 +91,7 @@ class G2PGroup(models.Model):
             ("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT)),
             ("gender", "=", "Female"),
         ]
-        self._compute_count_and_set(
+        self.compute_count_and_set_indicator(
             "z_crt_grp_num_adults_female_not_elderly", None, indicator
         )
 
@@ -107,7 +107,7 @@ class G2PGroup(models.Model):
             ("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT)),
             ("gender", "=", "Male"),
         ]
-        self._compute_count_and_set(
+        self.compute_count_and_set_indicator(
             "z_crt_grp_num_adults_male_not_elderly", None, indicator
         )
 
@@ -122,7 +122,9 @@ class G2PGroup(models.Model):
         indicator = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, indicators=indicator)
+                cnt = record.count_individuals(
+                    relationship_kinds=None, criteria=indicator
+                )
                 record["z_crt_grp_is_single_head_hh"] = cnt > 0
             else:
                 record["z_crt_grp_is_single_head_hh"] = None
@@ -138,7 +140,9 @@ class G2PGroup(models.Model):
         # TODO: fix the iteration
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=["Head"], indicators=indicator)
+                cnt = record.count_individuals(
+                    relationship_kinds=["Head"], criteria=indicator
+                )
                 _logger.info("cnt: %s", cnt)
                 record.z_crt_grp_is_elderly_head_hh = cnt > 0
             else:
@@ -151,7 +155,9 @@ class G2PGroup(models.Model):
         indicator = [("z_cst_ind_disability_level", ">", 0)]
         for record in self:
             if record["is_group"]:
-                cnt = record.count_individuals(kinds=None, indicators=indicator)
+                cnt = record.count_individuals(
+                    relationship_kinds=None, criteria=indicator
+                )
                 record.z_crt_grp_is_hh_with_disabled = cnt > 0
             else:
                 record.z_crt_grp_is_hh_with_disabled = None
