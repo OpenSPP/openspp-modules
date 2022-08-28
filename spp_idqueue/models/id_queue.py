@@ -19,11 +19,13 @@ class OpenSPPIDQueue(models.Model):
     date_requested = fields.Date()
     date_approved = fields.Date()
     date_printed = fields.Date()
+    date_distributed = fields.Date()
     status = fields.Selection(
         [
             ("new", "New"),
             ("approved", "Approved"),
             ("printed", "Printed"),
+            ("distributed", "Distributed"),
             ("cancelled", "Cancelled"),
         ],
         default="new",
@@ -48,6 +50,11 @@ class OpenSPPIDQueue(models.Model):
     def cancel(self):
         for rec in self:
             rec.status = "cancelled"
+
+    def distribute(self):
+        for rec in self:
+            rec.date_distributed = date.today()
+            rec.status = "distributed"
 
 
 class ResConfigSettings(models.TransientModel):

@@ -16,6 +16,7 @@
                     decoration-muted="status=='new'"
                     decoration-success="status=='approved'"
                     decoration-info="status=='printed'"
+                    decoration-primary="status=='distributed'"
                     decoration-danger="status=='cancelled'"
                     widget="badge"
                 />
@@ -34,11 +35,18 @@
                     attrs="{'invisible': [('status', '!=', 'approved')]}"
                 />
                 <button
+                    name="distribute"
+                    type="object"
+                    icon="fa-truck"
+                    class="btn-info"
+                    attrs="{'invisible': [('status', '!=', 'printed')]}"
+                />
+                <button
                     name="cancel"
                     type="object"
                     icon="fa-ban"
                     class="btn-danger"
-                    attrs="{'invisible': [('status', 'in', ('cancelled', 'printed'))]}"
+                    attrs="{'invisible': [('status', 'in', ('cancelled', 'printed', 'distributed'))]}"
                 />
             </tree>
         </field>
