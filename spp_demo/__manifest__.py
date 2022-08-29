@@ -12,6 +12,9 @@
     "depends": [
         "spp_base_demo",
         "g2p_registry_base",
+        "g2p_registry_individual",
+        "g2p_registry_group",
+        "g2p_registry_membership",
         "g2p_programs",
         "spp_custom_field",
         "spp_dashboard",
@@ -22,7 +25,7 @@
         "spp_photo",
         "spp_pos",
         "spp_sms",
-        "celery",
+        # "celery",
     ],
     "external_dependencies": {"python": ["faker"]},
     "data": [

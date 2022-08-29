@@ -16,7 +16,7 @@ _logger = logging.getLogger(__name__)
 class G2PGenerateData(models.Model):
     _name = "spp.generate.data"
 
-    name = fields.Char("Name")
+    name = fields.Char()
     num_groups = fields.Integer("Number of Groups", default=1)
     state = fields.Selection(
         selection=[
@@ -27,19 +27,20 @@ class G2PGenerateData(models.Model):
     )
 
     def generate_sample_data(self):
-        celery = {
-            "countdown": 3,
-            "retry": True,
-            "retry_policy": {"max_retries": 2, "interval_start": 2},
-        }
+        # celery = {
+        #    "countdown": 3,
+        #    "retry": True,
+        #    "retry_policy": {"max_retries": 2, "interval_start": 2},
+        # }
         batches = math.ceil(self.num_groups / 1000)
         for _i in range(0, batches):
-            self.env["celery.task"].call_task(
-                self._name, "_generate_sample_data", res_id=self.id, celery=celery
-            )
+            # self.env["celery.task"].call_task(
+            #    self._name, "_generate_sample_data", res_id=self.id, celery=celery
+            # )
+            self.with_delay()._generate_sample_data(res_id=self.id)
 
     @api.model
-    def _generate_sample_data(self, task_uuid, **kwargs):
+    def _generate_sample_data(self, **kwargs):
         """
         Generate sample data for testing
         Returns:
@@ -73,15 +74,15 @@ class G2PGenerateData(models.Model):
         )
 
         group_membership_kind_principal_id = self.env.ref(
-            "g2p_registry_base.group_membership_kind_principal"
+            "g2p_registry_membership.group_membership_kind_principal"
         ).id
         group_membership_kind_head_id = self.env.ref(
-            "g2p_registry_base.group_membership_kind_head"
+            "g2p_registry_membership.group_membership_kind_head"
         ).id
         group_kind_household_id = self.env.ref(
-            "g2p_registry_base.group_kind_household"
+            "g2p_registry_group.group_kind_household"
         ).id
-        group_kind_family_id = self.env.ref("g2p_registry_base.group_kind_family").id
+        group_kind_family_id = self.env.ref("g2p_registry_group.group_kind_family").id
 
         num_groups = min(res.num_groups, 1000)
         for i in range(0, num_groups):
@@ -200,7 +201,7 @@ class G2PGenerateData(models.Model):
             if res.state == "draft":
                 res.update({"state": "generate"})
 
-        msg = "CELERY called task: model [%s] and method [%s]." % (
+        msg = "Task Queue called task: model [%s] and method [%s]." % (
             self._name,
             "_generate_sample_data",
         )
