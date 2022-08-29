@@ -1,0 +1,4 @@
+git+https://github.com/OpenG2P/openg2p-registry@15.0#subdirectory=setup/g2p_registry_base
+git+https://github.com/OpenG2P/openg2p-registry@15.0#subdirectory=setup/g2p_registry_group
+git+https://github.com/OpenG2P/openg2p-registry@15.0#subdirectory=setup/g2p_registry_individual
+git+https://github.com/OpenG2P/openg2p-registry@15.0#subdirectory=setup/g2p_registry_membership
