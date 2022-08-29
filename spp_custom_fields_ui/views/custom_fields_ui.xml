@@ -40,7 +40,7 @@
                               <field name="help" />
                           </group>
                       </group>
-                      <field name="ttype" invisible="1"/>
+                      <field name="ttype" invisible="1" />
                       <notebook>
                           <page
                             name="base"

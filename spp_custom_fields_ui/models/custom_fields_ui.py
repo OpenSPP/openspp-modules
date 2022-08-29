@@ -92,11 +92,16 @@ class OpenSPPCustomFieldsUI(models.Model):
         """
         if self.field_category == "ind":
             name = ""
-            if self.prefix and self.draft_name:
-                name = self.prefix + "_" + self.draft_name
-                self.name = name
+            if self.prefix:
+                name = self.prefix + "_"
+            if self.draft_name:
+                name = name + self.draft_name
+
+            self.name = name
             self.compute = "indicators = []\n"
-            self.compute += "self.compute_count_and_set_indicator('%s', None, indicators)" % name
+            self.compute += (
+                "self.compute_count_and_set_indicator('%s', None, indicators)" % name
+            )
             self.ttype = "integer"
 
     @api.onchange("kinds")
