@@ -34,17 +34,18 @@
                               <field name="model_id" readonly="1" force_save="1" />
                           </group>
                           <group>
-                              <field name="ttype" attrs="{'readonly': [('field_category','=','crt')]}" />
+                              <field name="ttype" attrs="{'readonly': [('field_category','=','ind')]}" />
                               <field name="target_type" />
                               <field name="field_category" />
                               <field name="help" />
                           </group>
                       </group>
+                      <field name="ttype" invisible="1"/>
                       <notebook>
                           <page
                             name="base"
                             string="Properties"
-                            attrs="{'invisible': [('field_category','not in',['crt'])]}"
+                            attrs="{'invisible': [('field_category','not in',['ind'])]}"
                         >
                               <group string="Base Properties" invisible="1">
                                   <group>
@@ -116,7 +117,7 @@
                               </group>
                               <group
                                 string="Advanced Properties"
-                                attrs="{'invisible': [('field_category','not in',['crt'])]}"
+                                attrs="{'invisible': [('field_category','not in',['ind'])]}"
                             >
 
                                   <field name="store" />

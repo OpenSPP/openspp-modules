@@ -14,7 +14,7 @@ class OpenSPPCustomFieldsUI(models.Model):
         default="grp",
     )
     field_category = fields.Selection(
-        selection=[("cst", "Custom"), ("crt", "Calculated")],
+        selection=[("cst", "Custom"), ("ind", "Calculated")],
         string="Field Category",
         default="cst",
     )
@@ -90,13 +90,13 @@ class OpenSPPCustomFieldsUI(models.Model):
         :param name: The name.
         :return: Computes the Compute Field by the params.
         """
-        if self.field_category == "crt":
+        if self.field_category == "ind":
             name = ""
             if self.prefix and self.draft_name:
                 name = self.prefix + "_" + self.draft_name
                 self.name = name
             self.compute = "indicators = []\n"
-            self.compute += "self._compute_count_and_set('%s', None, indicators)" % name
+            self.compute += "self.compute_count_and_set_indicator('%s', None, indicators)" % name
             self.ttype = "integer"
 
     @api.onchange("kinds")
@@ -120,5 +120,5 @@ class OpenSPPCustomFieldsUI(models.Model):
             self.compute = "kinds = %s \n" % kind_ids
             self.compute += "indicators = []\n"
             self.compute += (
-                "self._compute_count_and_set('%s', kinds, indicators)" % name
+                "self.compute_count_and_set_indicator('%s', kinds, indicators)" % name
             )
