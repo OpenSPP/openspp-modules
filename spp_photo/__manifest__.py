@@ -13,8 +13,6 @@
         "base",
         "base_multi_image",
         "g2p_registry_base",
-        # "spp_additional_data",
-        "g2p_programs",
     ],
     "data": [
         "views/registrant.xml",
