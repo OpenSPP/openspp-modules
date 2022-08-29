@@ -45,7 +45,10 @@ class OpenSPPResPartner(models.Model):
                 for rec in model_fields_id:
                     els = rec.name.split("_")
                     if len(els) >= 3 and (
-                        els[2] == "grp" and not is_group or els[2] == "ind" and is_group
+                        els[2] == "grp"
+                        and not is_group
+                        or els[2] == "indv"
+                        and is_group
                     ):
                         continue
                     if len(els) >= 2 and els[1] == "cst":

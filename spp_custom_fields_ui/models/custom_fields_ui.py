@@ -9,7 +9,7 @@ class OpenSPPCustomFieldsUI(models.Model):
     _inherit = "ir.model.fields"
 
     target_type = fields.Selection(
-        selection=[("grp", "Group"), ("ind", "Individual")],
+        selection=[("grp", "Group"), ("indv", "Individual")],
         string="Target Type",
         default="grp",
     )
