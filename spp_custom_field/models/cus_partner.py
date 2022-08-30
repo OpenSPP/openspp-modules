@@ -53,7 +53,7 @@ class OpenSPPResPartner(models.Model):
                         continue
                     if len(els) >= 2 and els[1] == "cst":
                         etree.SubElement(custom_group, "field", {"name": rec.name})
-                    elif len(els) >= 2 and els[1] == "calc":
+                    elif len(els) >= 2 and els[1] == "ind":
                         new_field = etree.SubElement(
                             indicators_group,
                             "field",

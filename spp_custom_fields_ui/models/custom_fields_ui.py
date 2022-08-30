@@ -14,7 +14,7 @@ class OpenSPPCustomFieldsUI(models.Model):
         default="grp",
     )
     field_category = fields.Selection(
-        selection=[("cst", "Custom"), ("calc", "Calculated")],
+        selection=[("cst", "Custom"), ("ind", "Calculated")],
         string="Field Category",
         default="cst",
     )
@@ -90,7 +90,7 @@ class OpenSPPCustomFieldsUI(models.Model):
         :param name: The name.
         :return: Computes the Compute Field by the params.
         """
-        if self.field_category == "calc":
+        if self.field_category == "ind":
             name = ""
             if self.prefix:
                 name = self.prefix + "_"
