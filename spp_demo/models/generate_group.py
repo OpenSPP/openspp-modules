@@ -270,8 +270,8 @@ class G2PGenerateData(models.Model):
             "is_registrant": True,
             "is_group": False,
             "registration_date": registration_date,
-            "z_cst_ind_disability_level": disability_level,
-            "z_cst_ind_medical_condition": medical_condition,
-            "z_cst_ind_pregnancy_start": pregnancy_start,
-            "z_cst_ind_lactation_start": lactation_start,
+            "z_cst_indv_disability_level": disability_level,
+            "z_cst_indv_medical_condition": medical_condition,
+            "z_cst_indv_pregnancy_start": pregnancy_start,
+            "z_cst_indv_lactation_start": lactation_start,
         }
