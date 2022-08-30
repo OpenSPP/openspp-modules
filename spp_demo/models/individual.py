@@ -9,9 +9,7 @@ _logger = logging.getLogger(__name__)
 class G2PIndividual(models.Model):
     _inherit = "res.partner"
 
-    # z_cst_ind_disability_mental = fields.Integer("Mental disability level")  # 0-100
-    # z_cst_ind_disability_physical = fields.Integer("Physical disability level")  # 0-100
-    z_cst_indv_medical_condition = fields.Integer(
+    z_cst_ind_medical_condition = fields.Integer(
         "chronic illness/medical conditions level"
     )  # 0-100
     z_cst_indv_disability_level = fields.Integer("Disability level")  # 0-100

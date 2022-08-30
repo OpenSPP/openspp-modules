@@ -17,7 +17,6 @@ class G2PGroup(models.Model):
 
     """
     Source:
-
     OK ➢ Households (HH) with children - extracted from demographic data of HH adult members plus child members
     OK ➢ single-headed HH - extracted from demographic data of HH adult members
     OK ➢ female-headed HH - extracted from demographic data of HH adult members
@@ -114,7 +113,6 @@ class G2PGroup(models.Model):
         """
         Households (HH) with children
         Returns:
-
         """
         now = datetime.datetime.now()
         children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
@@ -125,7 +123,6 @@ class G2PGroup(models.Model):
         """
         Number of Eldery in this household
         Returns:
-
         """
         now = datetime.datetime.now()
         domain = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
@@ -135,7 +132,6 @@ class G2PGroup(models.Model):
         """
         Number of members in this household
         Returns:
-
         """
         self.compute_count_and_set_indicator("z_ind_grp_num_members", None, [])
 
@@ -143,7 +139,6 @@ class G2PGroup(models.Model):
         """
         Number of adults in this household
         Returns:
-
         """
         now = datetime.datetime.now()
         domain = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
@@ -153,7 +148,6 @@ class G2PGroup(models.Model):
         """
         Number of adults woman in this household
         Returns:
-
         """
         now = datetime.datetime.now()
         domain = [
@@ -166,7 +160,6 @@ class G2PGroup(models.Model):
         """
         single-headed HH - extracted from demographic data of HH adult members
         Returns:
-
         """
         # TODO: Should we exclude eldery?
         now = datetime.datetime.now()
@@ -174,18 +167,11 @@ class G2PGroup(models.Model):
         self.compute_count_and_set_indicator(
             "z_ind_grp_is_single_head_hh", None, domain, presence_only=True
         )
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, domain=domain)
-        #        record["z_ind_grp_is_single_head_hh"] = cnt > 0
-        #    else:
-        #        record["z_ind_grp_is_single_head_hh"] = None
 
     def _compute_ind_grp_is_woman_head_hh(self):
         """
         female-headed HH - extracted from demographic data of HH adult members
         Returns:
-
         """
         _logger.info("-" * 80)
         _logger.info("_compute_ind_grp_is_woman_head_hh")
@@ -199,20 +185,11 @@ class G2PGroup(models.Model):
             "z_ind_grp_is_woman_head_hh", None, domain, presence_only=True
         )
 
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=["Head"], domain=indicator)
-        #        _logger.info(cnt)
-        #        record["z_ind_grp_is_woman_head_hh"] = cnt > 0
-        #    else:
-        #        record["z_ind_grp_is_woman_head_hh"] = False
-
-    def _compute_ind_grp_is_eldery_head_hh(self):
+    def _compute_crt_grp_is_eldery_head_hh(self):
         """
         Elderly-headed HHs - extracted from demographic
         data of HH adult members
         Returns:
-
         """
         _logger.info("-" * 80)
         _logger.info("_compute_ind_grp_is_eldery_head_hh")
@@ -223,15 +200,7 @@ class G2PGroup(models.Model):
             "z_ind_grp_is_elderly_head_hh", None, domain, presence_only=True
         )
 
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=["Head"], domain=indicator)
-        #        _logger.info("cnt: %s", cnt)
-        #        record.z_ind_grp_is_elderly_head_hh = cnt > 0
-        #    else:
-        #        record.z_ind_grp_is_elderly_head_hh = None
-
-    def _compute_ind_grp_is_hh_with_children(self):
+    def _compute_crt_grp_is_hh_with_children(self):
         """
         Households (HH) with children - extracted from demographic data of HH adult members
         plus child members from personal data
@@ -243,14 +212,7 @@ class G2PGroup(models.Model):
             "z_ind_grp_is_hh_with_children", None, domain, presence_only=True
         )
 
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, domain=indicator)
-        #        record["z_ind_grp_is_hh_with_children"] = cnt > 0
-        #    else:
-        #        record["z_ind_grp_is_hh_with_children"] = None
-
-    def _compute_ind_grp_is_hh_with_pregnant_lactating(self):
+    def _compute_crt_grp_is_hh_with_pregnant_lactating(self):
         """
         Households (HH) with pregnant and lactating
         """
@@ -267,14 +229,7 @@ class G2PGroup(models.Model):
             presence_only=True,
         )
 
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, domain=indicator)
-        #        record.z_ind_grp_is_hh_with_pregnant_lactating = cnt > 0
-        #    else:
-        #        record.z_ind_grp_is_hh_with_pregnant_lactating = None
-
-    def _compute_ind_grp_is_hh_with_disabled(self):
+    def _compute_crt_grp_is_hh_with_disabled(self):
         """
         HHs with disabled (mental or physical) members
         """
@@ -283,14 +238,7 @@ class G2PGroup(models.Model):
             "z_ind_grp_is_hh_with_disabled", None, domain, presence_only=True
         )
 
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, domain=indicator)
-        #        record.z_ind_grp_is_hh_with_disabled = cnt > 0
-        #    else:
-        #        record.z_ind_grp_is_hh_with_disabled = None
-
-    def _compute_ind_grp_is_hh_with_medical_condition(self):
+    def _compute_crt_grp_is_hh_with_medical_condition(self):
         """
         HHs with members that have chronic illness/medical conditions
         """
@@ -302,14 +250,7 @@ class G2PGroup(models.Model):
             presence_only=True,
         )
 
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, domain=indicator)
-        #        record.z_ind_grp_is_hh_with_medical_condition = cnt > 0
-        #    else:
-        #        record.z_ind_grp_is_hh_with_medical_condition = None
-
-    def _compute_ind_grp_is_hh_with_elderly(self):
+    def _compute_crt_grp_is_hh_with_elderly(self):
         """
         Households (HH) with elderly - extracted from demographic data of HH adult members
         plus elderly members from personal data
@@ -319,10 +260,3 @@ class G2PGroup(models.Model):
         self.compute_count_and_set_indicator(
             "z_ind_grp_is_hh_with_elderly", None, domain, presence_only=True
         )
-
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, domain=indicator)
-        #        record.z_ind_grp_is_hh_with_elderly = cnt > 0
-        #    else:
-        #        record.z_ind_grp_is_hh_with_elderly = None
