@@ -44,7 +44,7 @@ msgid "Base Properties"
 msgstr ""
 
 #. module: spp_custom_fields_ui
-#: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__field_category__crt
+#: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__field_category__ind
 msgid "Calculated"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgid "How to define a computed field"
 msgstr ""
 
 #. module: spp_custom_fields_ui
-#: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__target_type__ind
+#: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__target_type__indv
 msgid "Individual"
 msgstr ""
 
