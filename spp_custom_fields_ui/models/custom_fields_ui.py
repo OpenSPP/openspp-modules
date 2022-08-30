@@ -9,12 +9,12 @@ class OpenSPPCustomFieldsUI(models.Model):
     _inherit = "ir.model.fields"
 
     target_type = fields.Selection(
-        selection=[("grp", "Group"), ("ind", "Individual")],
+        selection=[("grp", "Group"), ("indv", "Individual")],
         string="Target Type",
         default="grp",
     )
     field_category = fields.Selection(
-        selection=[("cst", "Custom"), ("crt", "Calculated")],
+        selection=[("cst", "Custom"), ("ind", "Calculated")],
         string="Field Category",
         default="cst",
     )
@@ -90,13 +90,18 @@ class OpenSPPCustomFieldsUI(models.Model):
         :param name: The name.
         :return: Computes the Compute Field by the params.
         """
-        if self.field_category == "crt":
+        if self.field_category == "ind":
             name = ""
-            if self.prefix and self.draft_name:
-                name = self.prefix + "_" + self.draft_name
-                self.name = name
-            self.compute = "indicators = []\n"
-            self.compute += "self._compute_count_and_set('%s', None, indicators)" % name
+            if self.prefix:
+                name = self.prefix + "_"
+            if self.draft_name:
+                name = name + self.draft_name
+
+            self.name = name
+            self.compute = "domain = []\n"
+            self.compute += (
+                "self.compute_count_and_set_indicator('%s', None, domain)" % name
+            )
             self.ttype = "integer"
 
     @api.onchange("kinds")
@@ -118,7 +123,7 @@ class OpenSPPCustomFieldsUI(models.Model):
             if self.prefix and self.draft_name:
                 name = self.prefix + "_" + self.draft_name
             self.compute = "kinds = %s \n" % kind_ids
-            self.compute += "indicators = []\n"
+            self.compute += "domain = []\n"
             self.compute += (
-                "self._compute_count_and_set('%s', kinds, indicators)" % name
+                "self.compute_count_and_set_indicator('%s', kinds, domain)" % name
             )

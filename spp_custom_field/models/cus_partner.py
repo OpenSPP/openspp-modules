@@ -33,7 +33,7 @@ class OpenSPPResPartner(models.Model):
             if basic_info_page:
                 is_group = self._context.get("default_is_group", False)
                 custom_page = etree.Element("page", {"string": "Addtional Details"})
-                indicators_page = etree.Element("page", {"string": "indicators"})
+                indicators_page = etree.Element("page", {"string": "Indicators"})
 
                 custom_group = etree.SubElement(
                     custom_page, "group", {"col": "4", "colspan": "4"}
@@ -45,12 +45,15 @@ class OpenSPPResPartner(models.Model):
                 for rec in model_fields_id:
                     els = rec.name.split("_")
                     if len(els) >= 3 and (
-                        els[2] == "grp" and not is_group or els[2] == "ind" and is_group
+                        els[2] == "grp"
+                        and not is_group
+                        or els[2] == "indv"
+                        and is_group
                     ):
                         continue
                     if len(els) >= 2 and els[1] == "cst":
                         etree.SubElement(custom_group, "field", {"name": rec.name})
-                    elif len(els) >= 2 and els[1] == "crt":
+                    elif len(els) >= 2 and els[1] == "ind":
                         new_field = etree.SubElement(
                             indicators_group,
                             "field",
