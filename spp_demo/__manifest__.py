@@ -25,6 +25,7 @@
         "spp_photo",
         "spp_pos",
         "spp_sms",
+        "queue_job",
         # "celery",
     ],
     "external_dependencies": {"python": ["faker"]},
