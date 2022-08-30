@@ -17,7 +17,6 @@ class G2PGroup(models.Model):
 
     """
     Source:
-
     OK ➢ Households (HH) with children - extracted from demographic data of HH adult members plus child members
     OK ➢ single-headed HH - extracted from demographic data of HH adult members
     OK ➢ female-headed HH - extracted from demographic data of HH adult members
@@ -114,28 +113,25 @@ class G2PGroup(models.Model):
         """
         Households (HH) with children
         Returns:
-
         """
         now = datetime.datetime.now()
         children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
-        indicator = [("birthdate", ">=", children)]
-        self.compute_count_and_set_indicator("z_crt_grp_num_children", None, indicator)
+        indicators = [("birthdate", ">=", children)]
+        self.compute_count_and_set_indicator("z_crt_grp_num_children", None, indicators)
 
     def _compute_crt_grp_num_eldery(self):
         """
         Number of Eldery in this household
         Returns:
-
         """
         now = datetime.datetime.now()
-        indicator = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
-        self.compute_count_and_set_indicator("z_crt_grp_num_elderly", None, indicator)
+        indicators = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
+        self.compute_count_and_set_indicator("z_crt_grp_num_elderly", None, indicators)
 
     def _compute_crt_grp_num_members(self):
         """
         Number of members in this household
         Returns:
-
         """
         self.compute_count_and_set_indicator("z_crt_grp_num_members", None, [])
 
@@ -143,90 +139,90 @@ class G2PGroup(models.Model):
         """
         Number of adults in this household
         Returns:
-
         """
         now = datetime.datetime.now()
-        indicator = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
-        self.compute_count_and_set_indicator("z_crt_grp_num_adults", None, indicator)
+        indicators = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
+        self.compute_count_and_set_indicator("z_crt_grp_num_adults", None, indicators)
 
     def _compute_crt_grp_num_adults_woman(self):
         """
         Number of adults woman in this household
         Returns:
-
         """
         now = datetime.datetime.now()
-        indicator = [
+        indicators = [
             ("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT)),
             ("gender", "=", "Female"),
         ]
         self.compute_count_and_set_indicator(
-            "z_crt_grp_num_adults_woman", None, indicator
+            "z_crt_grp_num_adults_woman", None, indicators
         )
 
     def _compute_crt_grp_is_single_head_hh(self):
         """
         single-headed HH - extracted from demographic data of HH adult members
         Returns:
-
         """
         # TODO: Should we exclude eldery?
         now = datetime.datetime.now()
-        indicator = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
-        for record in self:
-            if record["is_group"]:
-                cnt = record.count_individuals(
-                    relationship_kinds=None, criteria=indicator
-                )
-                record["z_crt_grp_is_single_head_hh"] = cnt > 0
-            else:
-                record["z_crt_grp_is_single_head_hh"] = None
+        indicators = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
+        self.compute_count_and_set_indicator(
+            "z_crt_grp_is_single_head_hh", None, indicators, presence_only=True
+        )
+        # for record in self:
+        #    if record["is_group"]:
+        #        cnt = record.count_individuals(kinds=None, indicators=indicators)
+        #        record["z_crt_grp_is_single_head_hh"] = cnt > 0
+        #    else:
+        #        record["z_crt_grp_is_single_head_hh"] = None
 
     def _compute_crt_grp_is_woman_head_hh(self):
         """
         female-headed HH - extracted from demographic data of HH adult members
         Returns:
-
         """
         _logger.info("-" * 80)
         _logger.info("_compute_crt_grp_is_woman_head_hh")
         _logger.info("self: %s", self)
         now = datetime.datetime.now()
-        indicator = [
+        indicators = [
             ("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT)),
             ("gender", "=", "Female"),
         ]
-        for record in self:
-            if record["is_group"]:
-                cnt = record.count_individuals(
-                    relationship_kinds=["Head"], criteria=indicator
-                )
-                _logger.info(cnt)
-                record["z_crt_grp_is_woman_head_hh"] = cnt > 0
-            else:
-                record["z_crt_grp_is_woman_head_hh"] = False
+        self.compute_count_and_set_indicator(
+            "z_crt_grp_is_woman_head_hh", None, indicators, presence_only=True
+        )
+
+        # for record in self:
+        #    if record["is_group"]:
+        #        cnt = record.count_individuals(kinds=["Head"], indicators=indicator)
+        #        _logger.info(cnt)
+        #        record["z_crt_grp_is_woman_head_hh"] = cnt > 0
+        #    else:
+        #        record["z_crt_grp_is_woman_head_hh"] = False
 
     def _compute_crt_grp_is_eldery_head_hh(self):
         """
         Elderly-headed HHs - extracted from demographic
         data of HH adult members
         Returns:
-
         """
         _logger.info("-" * 80)
         _logger.info("_compute_crt_grp_is_eldery_head_hh")
         _logger.info("self: %s", self)
         now = datetime.datetime.now()
-        indicator = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
-        for record in self:
-            if record["is_group"]:
-                cnt = record.count_individuals(
-                    relationship_kinds=["Head"], criteria=indicator
-                )
-                _logger.info("cnt: %s", cnt)
-                record.z_crt_grp_is_elderly_head_hh = cnt > 0
-            else:
-                record.z_crt_grp_is_elderly_head_hh = None
+        indicators = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
+        self.compute_count_and_set_indicator(
+            "z_crt_grp_is_elderly_head_hh", None, indicators, presence_only=True
+        )
+
+        # for record in self:
+        #    if record["is_group"]:
+        #        cnt = record.count_individuals(kinds=["Head"], indicators=indicator)
+        #        _logger.info("cnt: %s", cnt)
+        #        record.z_crt_grp_is_elderly_head_hh = cnt > 0
+        #    else:
+        #        record.z_crt_grp_is_elderly_head_hh = None
 
     def _compute_crt_grp_is_hh_with_children(self):
         """
@@ -235,62 +231,76 @@ class G2PGroup(models.Model):
         """
         now = datetime.datetime.now()
         children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
-        indicator = [("birthdate", ">=", children)]
-        for record in self:
-            if record["is_group"]:
-                cnt = record.count_individuals(
-                    relationship_kinds=None, criteria=indicator
-                )
-                record["z_crt_grp_is_hh_with_children"] = cnt > 0
-            else:
-                record["z_crt_grp_is_hh_with_children"] = None
+        indicators = [("birthdate", ">=", children)]
+        self.compute_count_and_set_indicator(
+            "z_crt_grp_is_hh_with_children", None, indicators, presence_only=True
+        )
+
+        # for record in self:
+        #    if record["is_group"]:
+        #        cnt = record.count_individuals(kinds=None, indicators=indicator)
+        #        record["z_crt_grp_is_hh_with_children"] = cnt > 0
+        #    else:
+        #        record["z_crt_grp_is_hh_with_children"] = None
 
     def _compute_crt_grp_is_hh_with_pregnant_lactating(self):
         """
         Households (HH) with pregnant and lactating
         """
         datetime.datetime.now()
-        indicator = [
+        indicators = [
             "|",
             ("z_cst_ind_pregnancy_start", "!=", None),
             ("z_cst_ind_lactation_start", "=", None),
         ]
-        for record in self:
-            if record["is_group"]:
-                cnt = record.count_individuals(
-                    relationship_kinds=None, criteria=indicator
-                )
-                record.z_crt_grp_is_hh_with_pregnant_lactating = cnt > 0
-            else:
-                record.z_crt_grp_is_hh_with_pregnant_lactating = None
+        self.compute_count_and_set_indicator(
+            "z_crt_grp_is_hh_with_pregnant_lactating",
+            None,
+            indicators,
+            presence_only=True,
+        )
+
+        # for record in self:
+        #    if record["is_group"]:
+        #        cnt = record.count_individuals(kinds=None, indicators=indicator)
+        #        record.z_crt_grp_is_hh_with_pregnant_lactating = cnt > 0
+        #    else:
+        #        record.z_crt_grp_is_hh_with_pregnant_lactating = None
 
     def _compute_crt_grp_is_hh_with_disabled(self):
         """
         HHs with disabled (mental or physical) members
         """
-        indicator = [("z_cst_ind_disability_level", ">", 0)]
-        for record in self:
-            if record["is_group"]:
-                cnt = record.count_individuals(
-                    relationship_kinds=None, criteria=indicator
-                )
-                record.z_crt_grp_is_hh_with_disabled = cnt > 0
-            else:
-                record.z_crt_grp_is_hh_with_disabled = None
+        indicators = [("z_cst_ind_disability_level", ">", 0)]
+        self.compute_count_and_set_indicator(
+            "z_crt_grp_is_hh_with_disabled", None, indicators, presence_only=True
+        )
+
+        # for record in self:
+        #    if record["is_group"]:
+        #        cnt = record.count_individuals(kinds=None, indicators=indicator)
+        #        record.z_crt_grp_is_hh_with_disabled = cnt > 0
+        #    else:
+        #        record.z_crt_grp_is_hh_with_disabled = None
 
     def _compute_crt_grp_is_hh_with_medical_condition(self):
         """
         HHs with members that have chronic illness/medical conditions
         """
-        indicator = [("z_cst_ind_medical_condition", ">", 0)]
-        for record in self:
-            if record["is_group"]:
-                cnt = record.count_individuals(
-                    relationship_kinds=None, criteria=indicator
-                )
-                record.z_crt_grp_is_hh_with_medical_condition = cnt > 0
-            else:
-                record.z_crt_grp_is_hh_with_medical_condition = None
+        indicators = [("z_cst_ind_medical_condition", ">", 0)]
+        self.compute_count_and_set_indicator(
+            "z_crt_grp_is_hh_with_medical_condition",
+            None,
+            indicators,
+            presence_only=True,
+        )
+
+        # for record in self:
+        #    if record["is_group"]:
+        #        cnt = record.count_individuals(kinds=None, indicators=indicator)
+        #        record.z_crt_grp_is_hh_with_medical_condition = cnt > 0
+        #    else:
+        #        record.z_crt_grp_is_hh_with_medical_condition = None
 
     def _compute_crt_grp_is_hh_with_elderly(self):
         """
@@ -298,12 +308,14 @@ class G2PGroup(models.Model):
         plus elderly members from personal data
         """
         now = datetime.datetime.now()
-        indicator = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
-        for record in self:
-            if record["is_group"]:
-                cnt = record.count_individuals(
-                    relationship_kinds=None, criteria=indicator
-                )
-                record.z_crt_grp_is_hh_with_elderly = cnt > 0
-            else:
-                record.z_crt_grp_is_hh_with_elderly = None
+        indicators = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
+        self.compute_count_and_set_indicator(
+            "z_crt_grp_is_hh_with_elderly", None, indicators, presence_only=True
+        )
+
+        # for record in self:
+        #    if record["is_group"]:
+        #        cnt = record.count_individuals(kinds=None, indicators=indicator)
+        #        record.z_crt_grp_is_hh_with_elderly = cnt > 0
+        #    else:
+        #        record.z_crt_grp_is_hh_with_elderly = None
