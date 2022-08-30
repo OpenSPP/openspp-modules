@@ -1,1 +1,1 @@
-OpenG2P Demo
+OpenG2P Connect Demo
