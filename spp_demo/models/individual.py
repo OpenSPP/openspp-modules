@@ -11,13 +11,13 @@ class G2PIndividual(models.Model):
 
     # z_cst_ind_disability_mental = fields.Integer("Mental disability level")  # 0-100
     # z_cst_ind_disability_physical = fields.Integer("Physical disability level")  # 0-100
-    z_cst_ind_medical_condition = fields.Integer(
+    z_cst_indv_medical_condition = fields.Integer(
         "chronic illness/medical conditions level"
     )  # 0-100
-    z_cst_ind_disability_level = fields.Integer("Disability level")  # 0-100
-    z_cst_ind_pregnancy_start = fields.Date(
+    z_cst_indv_disability_level = fields.Integer("Disability level")  # 0-100
+    z_cst_indv_pregnancy_start = fields.Date(
         "Pregnancy start"
     )  # We set a date to be able to clean it later
-    z_cst_ind_lactation_start = fields.Date(
+    z_cst_indv_lactation_start = fields.Date(
         "Lactation start"
     )  # We set a date to be able to clean it later
