@@ -58,6 +58,12 @@ class G2PGroup(models.Model):
         help="Number of members lost primary source income during Cyclone Aug 2022",
         store=True,
     )
+    z_ind_grp_num_disability = fields.Integer(
+        "Number of members with disability",
+        compute="_compute_ind_grp_num_disability",
+        help="Number of members with disability",
+        store=True,
+    )
 
     z_ind_grp_is_hh_with_disabled = fields.Boolean(
         "Is household disabled (mental or physical) members",
@@ -141,7 +147,7 @@ class G2PGroup(models.Model):
         Returns:
 
         """
-        domain = [("z_cst_ind_cyclone_aug_2022_injured", "=", True)]
+        domain = [("z_cst_indv_cyclone_aug_2022_injured", "=", True)]
         self.compute_count_and_set_indicator(
             "z_ind_grp_num_cyclone_aug_2022_injured", None, domain
         )
@@ -152,7 +158,7 @@ class G2PGroup(models.Model):
         Returns:
 
         """
-        domain = [("z_cst_ind_receive_government_benefits", "=", True)]
+        domain = [("z_cst_indv_receive_government_benefits", "=", True)]
         self.compute_count_and_set_indicator(
             "z_ind_grp_num_receive_government_benefits", None, domain
         )
@@ -163,7 +169,7 @@ class G2PGroup(models.Model):
         Returns:
 
         """
-        domain = [("z_cst_ind_cyclone_aug_2022_lost_livestock", "=", True)]
+        domain = [("z_cst_indv_cyclone_aug_2022_lost_livestock", "=", True)]
         self.compute_count_and_set_indicator(
             "z_ind_grp_num_cyclone_aug_2022_lost_livestock", None, domain
         )
@@ -174,10 +180,19 @@ class G2PGroup(models.Model):
         Returns:
 
         """
-        domain = [("z_cst_ind_cyclone_aug_2022_lost_primary_source_income", "=", True)]
+        domain = [("z_cst_indv_cyclone_aug_2022_lost_primary_source_income", "=", True)]
         self.compute_count_and_set_indicator(
             "z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income", None, domain
         )
+
+    def _compute_ind_grp_num_disability(self):
+        """
+        Number of members with disability
+        Returns:
+
+        """
+        domain = [("z_cst_indv_disability_level", ">", 0)]
+        self.compute_count_and_set_indicator("z_ind_grp_num_disability", None, domain)
 
     def _compute_ind_grp_is_single_head_hh(self):
         """
@@ -208,7 +223,7 @@ class G2PGroup(models.Model):
         """
         HHs with disabled (mental or physical) members
         """
-        domain = [("z_cst_ind_disability_level", ">", 0)]
+        domain = [("z_cst_indv_disability_level", ">", 0)]
         self.compute_count_and_set_indicator(
             "z_ind_grp_is_hh_with_disabled", None, domain, presence_only=True
         )
