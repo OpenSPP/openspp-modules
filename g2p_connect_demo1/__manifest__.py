@@ -6,8 +6,8 @@
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/openspp-project/openspp-demo",
-    "license": "AGPL-3",
-    "development_status": "Beta",
+    "license": "LGPL-3",
+    "development_status": "Alpha",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "spp_base_demo",
