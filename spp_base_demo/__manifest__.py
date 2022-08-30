@@ -15,7 +15,6 @@
         "spp_helpdesk",
     ],
     "data": [
-        # "security/ir.model.access.csv",
         "data/users_data.xml",
     ],
     "assets": {},

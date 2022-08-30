@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 class OpenSPPGenerateProgramData(models.Model):
     _name = "spp.generate.program.data"
 
-    name = fields.Char("Name")
+    name = fields.Char()
     num_programs = fields.Integer("Number of Programs", default=1)
     num_beneficicaries = fields.Integer("Number of Beneficiary", default=1)
     num_cycles = fields.Integer("Number of Cycles", default=1)
