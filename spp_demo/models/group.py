@@ -169,12 +169,6 @@ class G2PGroup(models.Model):
         self.compute_count_and_set_indicator(
             "z_crt_grp_is_single_head_hh", None, indicators, presence_only=True
         )
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, indicators=indicators)
-        #        record["z_crt_grp_is_single_head_hh"] = cnt > 0
-        #    else:
-        #        record["z_crt_grp_is_single_head_hh"] = None
 
     def _compute_crt_grp_is_woman_head_hh(self):
         """
@@ -193,14 +187,6 @@ class G2PGroup(models.Model):
             "z_crt_grp_is_woman_head_hh", None, indicators, presence_only=True
         )
 
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=["Head"], indicators=indicator)
-        #        _logger.info(cnt)
-        #        record["z_crt_grp_is_woman_head_hh"] = cnt > 0
-        #    else:
-        #        record["z_crt_grp_is_woman_head_hh"] = False
-
     def _compute_crt_grp_is_eldery_head_hh(self):
         """
         Elderly-headed HHs - extracted from demographic
@@ -216,14 +202,6 @@ class G2PGroup(models.Model):
             "z_crt_grp_is_elderly_head_hh", None, indicators, presence_only=True
         )
 
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=["Head"], indicators=indicator)
-        #        _logger.info("cnt: %s", cnt)
-        #        record.z_crt_grp_is_elderly_head_hh = cnt > 0
-        #    else:
-        #        record.z_crt_grp_is_elderly_head_hh = None
-
     def _compute_crt_grp_is_hh_with_children(self):
         """
         Households (HH) with children - extracted from demographic data of HH adult members
@@ -235,13 +213,6 @@ class G2PGroup(models.Model):
         self.compute_count_and_set_indicator(
             "z_crt_grp_is_hh_with_children", None, indicators, presence_only=True
         )
-
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, indicators=indicator)
-        #        record["z_crt_grp_is_hh_with_children"] = cnt > 0
-        #    else:
-        #        record["z_crt_grp_is_hh_with_children"] = None
 
     def _compute_crt_grp_is_hh_with_pregnant_lactating(self):
         """
@@ -260,13 +231,6 @@ class G2PGroup(models.Model):
             presence_only=True,
         )
 
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, indicators=indicator)
-        #        record.z_crt_grp_is_hh_with_pregnant_lactating = cnt > 0
-        #    else:
-        #        record.z_crt_grp_is_hh_with_pregnant_lactating = None
-
     def _compute_crt_grp_is_hh_with_disabled(self):
         """
         HHs with disabled (mental or physical) members
@@ -275,13 +239,6 @@ class G2PGroup(models.Model):
         self.compute_count_and_set_indicator(
             "z_crt_grp_is_hh_with_disabled", None, indicators, presence_only=True
         )
-
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, indicators=indicator)
-        #        record.z_crt_grp_is_hh_with_disabled = cnt > 0
-        #    else:
-        #        record.z_crt_grp_is_hh_with_disabled = None
 
     def _compute_crt_grp_is_hh_with_medical_condition(self):
         """
@@ -295,13 +252,6 @@ class G2PGroup(models.Model):
             presence_only=True,
         )
 
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, indicators=indicator)
-        #        record.z_crt_grp_is_hh_with_medical_condition = cnt > 0
-        #    else:
-        #        record.z_crt_grp_is_hh_with_medical_condition = None
-
     def _compute_crt_grp_is_hh_with_elderly(self):
         """
         Households (HH) with elderly - extracted from demographic data of HH adult members
@@ -312,10 +262,3 @@ class G2PGroup(models.Model):
         self.compute_count_and_set_indicator(
             "z_crt_grp_is_hh_with_elderly", None, indicators, presence_only=True
         )
-
-        # for record in self:
-        #    if record["is_group"]:
-        #        cnt = record.count_individuals(kinds=None, indicators=indicator)
-        #        record.z_crt_grp_is_hh_with_elderly = cnt > 0
-        #    else:
-        #        record.z_crt_grp_is_hh_with_elderly = None
