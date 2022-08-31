@@ -37,6 +37,10 @@
                               <field name="ttype" attrs="{'readonly': [('field_category','=','ind')]}" />
                               <field name="target_type" />
                               <field name="field_category" />
+                              <field
+                                name="has_presence"
+                                attrs="{'invisible': [('field_category','!=','ind')]}"
+                            />
                               <field name="help" />
                           </group>
                       </group>

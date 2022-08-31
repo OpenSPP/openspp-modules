@@ -21,6 +21,7 @@ class OpenSPPCustomFieldsUI(models.Model):
     prefix = fields.Char("Prefix", compute="_compute_prefix")
     draft_name = fields.Char(string="Field Name", required=True, index=True)
     kinds = fields.Many2many("g2p.group.membership.kind", string="Kind")
+    has_presence = fields.Boolean("Presence", default=False)
 
     def open_custom_fields_tree(self):
         """
@@ -90,19 +91,8 @@ class OpenSPPCustomFieldsUI(models.Model):
         :param name: The name.
         :return: Computes the Compute Field by the params.
         """
-        if self.field_category == "ind":
-            name = ""
-            if self.prefix:
-                name = self.prefix + "_"
-            if self.draft_name:
-                name = name + self.draft_name
-
-            self.name = name
-            self.compute = "domain = []\n"
-            self.compute += (
-                "self.compute_count_and_set_indicator('%s', None, domain)" % name
-            )
-            self.ttype = "integer"
+        for rec in self:
+            rec.set_compute()
 
     @api.onchange("kinds")
     def _onchange_kinds(self):
@@ -114,16 +104,48 @@ class OpenSPPCustomFieldsUI(models.Model):
         :param name: The name.
         :return: Computes the Compute Field by the params.
         """
-        if self.kinds:
-            kind_ids = []
-            for rec_line in self.kinds:
-                kind_id = str(rec_line.name)
-                kind_ids.append(kind_id)
+        for rec in self:
+            rec.set_compute()
 
-            if self.prefix and self.draft_name:
-                name = self.prefix + "_" + self.draft_name
-            self.compute = "kinds = %s \n" % kind_ids
-            self.compute += "domain = []\n"
-            self.compute += (
-                "self.compute_count_and_set_indicator('%s', kinds, domain)" % name
-            )
+    @api.onchange("has_presence")
+    def _onchange_has_presence(self):
+        """
+        This method is used to change the ttype to 'boolean' if has_presence is true.
+        :param ttype: The Field Type.
+        :param has_presence: The Presence Field.
+        :return: ttype.
+        """
+
+        for rec in self:
+            rec.set_compute()
+
+    def set_compute(self):
+        for rec in self:
+            name = ""
+            if rec.field_category == "ind":
+                if rec.prefix:
+                    name = rec.prefix + "_"
+                if rec.draft_name:
+                    name = name + rec.draft_name
+                rec.name = name
+
+            rec.compute = "kinds = None \n"
+            if rec.kinds:
+                kind_ids = []
+                for rec_line in rec.kinds:
+                    kind_id = str(rec_line.name)
+                    kind_ids.append(kind_id)
+
+                rec.compute = "kinds = %s \n" % kind_ids
+            rec.compute += "domain = []\n"
+            if rec.has_presence:
+                rec.ttype = "boolean"
+                rec.compute += (
+                    "self.compute_count_and_set_indicator('%s', kinds, domain, presence_only=True)"
+                    % name
+                )
+            else:
+                rec.ttype = "integer"
+                rec.compute += (
+                    "self.compute_count_and_set_indicator('%s', kinds, domain)" % name
+                )
