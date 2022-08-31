@@ -31,6 +31,15 @@ class G2PCashEntitlementManager(models.Model):
         "entitlement_id",
         "Entitlement Items",
     )
+    one_time_subsidy = fields.Monetary(
+        currency_field="currency_id",
+        default=0.0,
+    )
+    currency_id = fields.Many2one(
+        "res.currency",
+        related="program_id.journal_id.currency_id",
+        readonly=True,
+    )
 
     # Group able to validate the payment
     # Todo: Create a record rule for payment_validation_group
@@ -41,7 +50,7 @@ class G2PCashEntitlementManager(models.Model):
     def prepare_entitlements(self, cycle, beneficiaries):
         if not self.entitlement_item_ids:
             raise UserError(
-                _("There are not items entered for this entitlement manager.")
+                _("There are no items entered for this entitlement manager.")
             )
 
         all_beneficiaries_ids = beneficiaries.mapped("partner_id.id")
@@ -105,6 +114,11 @@ class G2PCashEntitlementManager(models.Model):
                             "initial_amount"
                         ]
                     )
+                # Check if amount > one_time_subsidy; ignore if set to 0
+                if self.one_time_subsidy > 0.0:
+                    if amount > self.one_time_subsidy:
+                        amount = self.one_time_subsidy
+
                 new_entitlements_to_create[beneficiary_id.id] = {
                     "cycle_id": cycle.id,
                     "partner_id": beneficiary_id.id,

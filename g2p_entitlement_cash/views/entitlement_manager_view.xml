@@ -45,12 +45,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 invisible="context.get('default_program_id',False)"
                             />
                         </h2>
-                        <div class="o_row">
+                    </div>
+                    <group colspan="4" col="4">
+                        <div colspan="2">
                             <field name="evaluate_one_item" />
                             <label for="evaluate_one_item" string="Evaluate one item" />
                         </div>
-                    </div>
-                    <group colspan="4" col="4">
+                        <field name="one_time_subsidy" string="One-time Subsidy: " />
                         <field name="entitlement_item_ids" nolabel="1" colspan="4">
                             <tree>
                                 <field name='sequence' widget='handle' />
@@ -86,6 +87,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             colspan="4"
                         />
                     </group>
+                    <field name="currency_id" invisible="1" />
                 </sheet>
             </form>
         </field>

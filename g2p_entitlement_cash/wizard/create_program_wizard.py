@@ -22,6 +22,11 @@ class G2PCreateNewProgramWiz(models.TransientModel):
         "Cash Entitlement Items",
     )
 
+    one_time_subsidy = fields.Monetary(
+        currency_field="currency_id",
+        default=0.0,
+    )
+
     def _check_required_fields(self):
         res = super(G2PCreateNewProgramWiz, self)._check_required_fields()
         if self.entitlement_kind == "cash" and not self.entitlement_cash_item_ids:
@@ -56,6 +61,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
                     "program_id": program_id,
                     "evaluate_one_item": self.evaluate_one_item,
                     "entitlement_item_ids": entitlement_item_ids,
+                    "one_time_subsidy": self.one_time_subsidy,
                     "entitlement_validation_group_id": self.entitlement_validation_group_id.id,
                 }
             )
