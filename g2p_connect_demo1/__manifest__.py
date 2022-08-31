@@ -17,7 +17,7 @@
         "g2p_registry_membership",
         "g2p_programs",
         "spp_custom_field",
-        "spp_dashboard",
+        # "spp_dashboard",
         "spp_idpass",
         "spp_helpdesk",
         "spp_area",
