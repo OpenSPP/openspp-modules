@@ -1,0 +1,14 @@
+git+https://github.com/OpenG2P/openg2p-registry@15.0#subdirectory=setup/g2p_registry_base
+git+https://github.com/OpenG2P/openg2p-registry@15.0#subdirectory=setup/g2p_registry_group
+git+https://github.com/OpenG2P/openg2p-registry@15.0#subdirectory=setup/g2p_registry_individual
+git+https://github.com/OpenG2P/openg2p-registry@15.0#subdirectory=setup/g2p_registry_membership
+git+https://github.com/OpenG2P/openg2p-program@15.0#subdirectory=setup/g2p_programs
+git+https://github.com/openspp-project/openspp-registry@15.0#subdirectory=setup/spp_area
+git+https://github.com/openspp-project/openspp-registry@15.0#subdirectory=setup/custom_field
+git+https://github.com/openspp-project/openspp-registry@15.0#subdirectory=setup/spp_dashboard
+git+https://github.com/openspp-project/openspp-registry@15.0#subdirectory=setup/spp_idpass
+git+https://github.com/openspp-project/openspp-registry@15.0#subdirectory=setup/spp_photo
+git+https://github.com/openspp-project/openspp-theme@15.0#subdirectory=setup/theme_openspp
+git+https://github.com/openspp-project/openspp-program@15.0#subdirectory=setup/spp_pos
+git+https://github.com/openspp-project/openspp-grievance-redress-mechanism@15.0#subdirectory=setup/spp_helpdesk
+git+https://github.com/openspp-project/openspp-communication@15.0#subdirectory=setup/spp_sms
