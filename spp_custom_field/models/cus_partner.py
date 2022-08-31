@@ -70,16 +70,32 @@ class OpenSPPResPartner(models.Model):
                             etree.SubElement(
                                 custom_div_right, "label", {"for": rec.name}
                             )
+                            if rec.help:
+                                custom_div_right_help = etree.SubElement(
+                                    custom_div_right, "div", {"class": "text-muted"}
+                                )
+                                span = etree.SubElement(custom_div_right_help, "span")
+                                span.text = rec.help
+
                         else:
                             etree.SubElement(
                                 custom_div_right, "label", {"for": rec.name}
                             )
+
+                            if rec.help:
+                                custom_div_right_help = etree.SubElement(
+                                    custom_div_right, "div", {"class": "text-muted"}
+                                )
+                                span = etree.SubElement(custom_div_right_help, "span")
+                                span.text = rec.help
+
                             custom_div_right_inner_div = etree.SubElement(
                                 custom_div_right, "div", {"class": "text-muted"}
                             )
                             etree.SubElement(
                                 custom_div_right_inner_div, "field", {"name": rec.name}
                             )
+
                     elif len(els) >= 2 and els[1] == "ind":
                         indicators_div2 = etree.SubElement(
                             indicators_div,
@@ -105,10 +121,26 @@ class OpenSPPResPartner(models.Model):
                             etree.SubElement(
                                 indicators_div_right, "label", {"for": rec.name}
                             )
+                            if rec.help:
+                                indicators_div_right_help = etree.SubElement(
+                                    indicators_div_right, "div", {"class": "text-muted"}
+                                )
+                                span = etree.SubElement(
+                                    indicators_div_right_help, "span"
+                                )
+                                span.text = rec.help
                         else:
                             etree.SubElement(
                                 indicators_div_right, "label", {"for": rec.name}
                             )
+                            if rec.help:
+                                indicators_div_right_help = etree.SubElement(
+                                    indicators_div_right, "div", {"class": "text-muted"}
+                                )
+                                span = etree.SubElement(
+                                    indicators_div_right_help, "span"
+                                )
+                                span.text = rec.help
                             indicators_div_right_inner_div = etree.SubElement(
                                 indicators_div_right, "div", {"class": "text-muted"}
                             )
