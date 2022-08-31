@@ -32,7 +32,7 @@ class OpenSPPResPartner(models.Model):
 
             if basic_info_page:
                 is_group = self._context.get("default_is_group", False)
-                custom_page = etree.Element("page", {"string": "Addtional Details"})
+                custom_page = etree.Element("page", {"string": "Additional Details"})
                 indicators_page = etree.Element("page", {"string": "Indicators"})
 
                 custom_group = etree.SubElement(
