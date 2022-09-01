@@ -115,7 +115,7 @@ class G2PCashEntitlementManager(models.Model):
                             "initial_amount"
                         ]
                     )
-                # Check if amount > one_time_subsidy; ignore if set to 0
+                # Check if amount > one_time_subsidy; ignore if one_time_subsidy is set to 0
                 if self.one_time_subsidy > 0.0:
                     if amount > self.one_time_subsidy:
                         amount = self.one_time_subsidy
@@ -133,7 +133,18 @@ class G2PCashEntitlementManager(models.Model):
 
         # Create entitlement records
         for ent in new_entitlements_to_create:
-            self.env["g2p.entitlement"].create(new_entitlements_to_create[ent])
+            ent["initial_amount"] = self._check_subsidy(ent["initial_amount"])
+            # Create non-zero entitlements only
+            if ent["initial_amount"] > 0.0:
+                self.env["g2p.entitlement"].create(new_entitlements_to_create[ent])
+
+    def _check_subsidy(self, amount):
+        # Check if initial_amount < one_time_subsidy then set = one_time_subsidy
+        # Ignore if one_time_subsidy is set to 0
+        if self.one_time_subsidy > 0.0:
+            if amount < self.one_time_subsidy:
+                return self.one_time_subsidy
+        return amount
 
     def validate_entitlements(self, cycle, cycle_memberships):
         # TODO: Change the status of the entitlements to `validated` for this members.
