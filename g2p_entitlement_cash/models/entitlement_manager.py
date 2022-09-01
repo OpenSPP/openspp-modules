@@ -96,12 +96,13 @@ class G2PCashEntitlementManager(models.Model):
             )
 
             for beneficiary_id in beneficiaries_with_entitlements_to_create:
-                multiplier = 1
                 if rec.multiplier_field:
                     # Get the multiplier value from multiplier_field else return the default multiplier=1
                     multiplier = beneficiary_id.mapped(rec.multiplier_field.name)
                     if multiplier:
-                        multiplier = multiplier[0] or 1
+                        multiplier = multiplier[0] or 0
+                else:
+                    multiplier = 1
                 if rec.max_multiplier > 0 and multiplier > rec.max_multiplier:
                     multiplier = rec.max_multiplier
                 amount = rec.amount * float(multiplier)
