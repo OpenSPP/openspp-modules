@@ -133,9 +133,12 @@ class G2PCashEntitlementManager(models.Model):
 
         # Create entitlement records
         for ent in new_entitlements_to_create:
-            ent["initial_amount"] = self._check_subsidy(ent["initial_amount"])
+            initial_amount = new_entitlements_to_create[ent]["initial_amount"]
+            new_entitlements_to_create[ent]["initial_amount"] = self._check_subsidy(
+                initial_amount
+            )
             # Create non-zero entitlements only
-            if ent["initial_amount"] > 0.0:
+            if new_entitlements_to_create[ent]["initial_amount"] > 0.0:
                 self.env["g2p.entitlement"].create(new_entitlements_to_create[ent])
 
     def _check_subsidy(self, amount):
