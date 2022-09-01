@@ -8,7 +8,7 @@ Part of Openg2p. See LICENSE file for full copyright and licensing details.
         <field name="model">g2p.generate.data</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Generate Data">
+            <tree>
                 <field name="name" />
                 <field name="num_groups" />
                 <field name="state" />
