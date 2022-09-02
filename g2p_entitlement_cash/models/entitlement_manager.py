@@ -31,6 +31,16 @@ class G2PCashEntitlementManager(models.Model):
         "entitlement_id",
         "Entitlement Items",
     )
+    max_amount = fields.Monetary(
+        string="Maximum Amount",
+        currency_field="currency_id",
+        default=0.0,
+    )
+    currency_id = fields.Many2one(
+        "res.currency",
+        related="program_id.journal_id.currency_id",
+        readonly=True,
+    )
 
     # Group able to validate the payment
     # Todo: Create a record rule for payment_validation_group
@@ -41,7 +51,7 @@ class G2PCashEntitlementManager(models.Model):
     def prepare_entitlements(self, cycle, beneficiaries):
         if not self.entitlement_item_ids:
             raise UserError(
-                _("There are not items entered for this entitlement manager.")
+                _("There are no items entered for this entitlement manager.")
             )
 
         all_beneficiaries_ids = beneficiaries.mapped("partner_id.id")
@@ -87,12 +97,13 @@ class G2PCashEntitlementManager(models.Model):
             )
 
             for beneficiary_id in beneficiaries_with_entitlements_to_create:
-                multiplier = 1
                 if rec.multiplier_field:
                     # Get the multiplier value from multiplier_field else return the default multiplier=1
                     multiplier = beneficiary_id.mapped(rec.multiplier_field.name)
                     if multiplier:
-                        multiplier = multiplier[0] or 1
+                        multiplier = multiplier[0] or 0
+                else:
+                    multiplier = 1
                 if rec.max_multiplier > 0 and multiplier > rec.max_multiplier:
                     multiplier = rec.max_multiplier
                 amount = rec.amount * float(multiplier)
@@ -105,6 +116,11 @@ class G2PCashEntitlementManager(models.Model):
                             "initial_amount"
                         ]
                     )
+                # Check if amount > max_amount; ignore if max_amount is set to 0
+                if self.max_amount > 0.0:
+                    if amount > self.max_amount:
+                        amount = self.max_amount
+
                 new_entitlements_to_create[beneficiary_id.id] = {
                     "cycle_id": cycle.id,
                     "partner_id": beneficiary_id.id,
@@ -118,7 +134,21 @@ class G2PCashEntitlementManager(models.Model):
 
         # Create entitlement records
         for ent in new_entitlements_to_create:
-            self.env["g2p.entitlement"].create(new_entitlements_to_create[ent])
+            initial_amount = new_entitlements_to_create[ent]["initial_amount"]
+            new_entitlements_to_create[ent]["initial_amount"] = self._check_subsidy(
+                initial_amount
+            )
+            # Create non-zero entitlements only
+            if new_entitlements_to_create[ent]["initial_amount"] > 0.0:
+                self.env["g2p.entitlement"].create(new_entitlements_to_create[ent])
+
+    def _check_subsidy(self, amount):
+        # Check if initial_amount < max_amount then set = max_amount
+        # Ignore if max_amount is set to 0
+        if self.max_amount > 0.0:
+            if amount < self.max_amount:
+                return self.max_amount
+        return amount
 
     def validate_entitlements(self, cycle, cycle_memberships):
         # TODO: Change the status of the entitlements to `validated` for this members.
