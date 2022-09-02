@@ -22,7 +22,8 @@ class G2PCreateNewProgramWiz(models.TransientModel):
         "Cash Entitlement Items",
     )
 
-    one_time_subsidy = fields.Monetary(
+    max_amount = fields.Monetary(
+        string="Maximum Amount",
         currency_field="currency_id",
         default=0.0,
     )
@@ -61,7 +62,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
                     "program_id": program_id,
                     "evaluate_one_item": self.evaluate_one_item,
                     "entitlement_item_ids": entitlement_item_ids,
-                    "one_time_subsidy": self.one_time_subsidy,
+                    "max_amount": self.max_amount,
                     "entitlement_validation_group_id": self.entitlement_validation_group_id.id,
                 }
             )

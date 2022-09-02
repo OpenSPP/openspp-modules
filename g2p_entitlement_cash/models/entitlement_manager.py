@@ -31,7 +31,8 @@ class G2PCashEntitlementManager(models.Model):
         "entitlement_id",
         "Entitlement Items",
     )
-    one_time_subsidy = fields.Monetary(
+    max_amount = fields.Monetary(
+        string="Maximum Amount",
         currency_field="currency_id",
         default=0.0,
     )
@@ -115,10 +116,10 @@ class G2PCashEntitlementManager(models.Model):
                             "initial_amount"
                         ]
                     )
-                # Check if amount > one_time_subsidy; ignore if one_time_subsidy is set to 0
-                if self.one_time_subsidy > 0.0:
-                    if amount > self.one_time_subsidy:
-                        amount = self.one_time_subsidy
+                # Check if amount > max_amount; ignore if max_amount is set to 0
+                if self.max_amount > 0.0:
+                    if amount > self.max_amount:
+                        amount = self.max_amount
 
                 new_entitlements_to_create[beneficiary_id.id] = {
                     "cycle_id": cycle.id,
@@ -142,11 +143,11 @@ class G2PCashEntitlementManager(models.Model):
                 self.env["g2p.entitlement"].create(new_entitlements_to_create[ent])
 
     def _check_subsidy(self, amount):
-        # Check if initial_amount < one_time_subsidy then set = one_time_subsidy
-        # Ignore if one_time_subsidy is set to 0
-        if self.one_time_subsidy > 0.0:
-            if amount < self.one_time_subsidy:
-                return self.one_time_subsidy
+        # Check if initial_amount < max_amount then set = max_amount
+        # Ignore if max_amount is set to 0
+        if self.max_amount > 0.0:
+            if amount < self.max_amount:
+                return self.max_amount
         return amount
 
     def validate_entitlements(self, cycle, cycle_memberships):

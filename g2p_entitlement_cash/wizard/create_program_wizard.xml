@@ -19,7 +19,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <field name="evaluate_one_item" />
                         <label for="evaluate_one_item" string="Evaluate one item" />
                     </div>
-                    <field name="one_time_subsidy" string="One-time Subsidy: " />
+                    <field name="max_amount" string="Maximum Amount: " />
                     <!-- <newline /> -->
                     <field name="entitlement_cash_item_ids" nolabel="1" colspan="4">
                         <tree>
