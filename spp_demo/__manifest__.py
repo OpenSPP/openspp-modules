@@ -17,7 +17,7 @@
         "g2p_registry_membership",
         "g2p_programs",
         "spp_custom_field",
-        # "spp_dashboard",
+        "spp_dashboard",
         "spp_idpass",
         "spp_helpdesk",
         "spp_area",
@@ -26,7 +26,6 @@
         "spp_pos",
         "spp_sms",
         "queue_job",
-        # "celery",
     ],
     "external_dependencies": {"python": ["faker"]},
     "data": [
