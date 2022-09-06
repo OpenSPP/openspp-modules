@@ -2,11 +2,13 @@
 
 import logging
 
+from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
 
 
+@tagged("post_install", "-at_install")
 class ComputeIndicatorFieldsTest(TransactionCase):
     @classmethod
     def setUpClass(cls):
@@ -160,22 +162,33 @@ class ComputeIndicatorFieldsTest(TransactionCase):
                 "is_registrant": True,
             }
         )
+        members1 = {
+            cls.registrant_1.id,
+            cls.registrant_3.id,
+            cls.registrant_5.id,
+            cls.registrant_7.id,
+            cls.registrant_9.id,
+        }
+        group1_members = {"individual": members1}
+        cls.group_1.write({"group_membership_ids": [(0, 0, group1_members)]})
+        members2 = {
+            cls.registrant_2.id,
+            cls.registrant_4.id,
+            cls.registrant_6.id,
+            cls.registrant_8.id,
+            cls.registrant_10.id,
+        }
+        group2_members = {"individual": members2}
+        cls.group_2.write({"group_membership_ids": [(0, 0, group2_members)]})
 
-    def test_01_add_members(self):
-        self.group_1.write(
-            {"group_membership_ids": [(0, 0, {"individual": self.registrant_1.id})]}
-        )
-        message = (
-            "Membership Testing: Adding Group Member Failed! Result: %s Expecting: %s"
-            % (
-                self.group_1.group_membership_ids[0].individual.name,
-                self.registrant_1.name,
-            )
+    def test_01_num_children(self):
+        self.assertEqual(
+            len(self.group_1.group_membership_ids),
+            5,
         )
         self.assertEqual(
-            self.group_1.group_membership_ids[0].individual.id,
-            self.registrant_1.id,
-            message,
+            len(self.group_2.group_membership_ids),
+            5,
         )
 
     def test_02_assign_member(self):
