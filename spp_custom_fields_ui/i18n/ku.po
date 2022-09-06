@@ -1,0 +1,170 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_custom_fields_ui
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ku\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid "<code>datetime</code> (Python module)"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid "<code>dateutil</code> (Python module)"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid "<code>self</code> (the set of records to compute)"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid "<code>time</code> (Python module)"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid "Advanced Properties"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid "Base Properties"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__field_category__ind
+msgid "Calculated"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid ""
+"Computed fields are defined with the fields\n"
+"                                  <strong>Dependencies</strong> and <strong>Compute</strong>."
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__field_category__cst
+msgid "Custom"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: code:addons/spp_custom_fields_ui/models/custom_fields_ui.py:0
+#: model:ir.actions.server,name:spp_custom_fields_ui.action_custom_fields_ui
+#: model:ir.ui.menu,name:spp_custom_fields_ui.menu_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_tree
+#, python-format
+msgid "Custom Fields"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__field_category
+msgid "Field Category"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__draft_name
+msgid "Field Name"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model,name:spp_custom_fields_ui.model_ir_model_fields
+msgid "Fields"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__target_type__grp
+msgid "Group"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid "How to define a computed field"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__target_type__indv
+msgid "Individual"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__kinds
+msgid "Kind"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid "Miscellaneous"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid ""
+"Other features are accessible through <code>self</code>, like\n"
+"                                  <code>self.env</code>, etc."
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__prefix
+msgid "Prefix"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__has_presence
+msgid "Presence"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid "Properties"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__target_type
+msgid "Target Type"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid ""
+"The field <strong>Compute</strong> is the Python code to\n"
+"                                  compute the value of the field on a set of records. The value of\n"
+"                                  the field must be assigned to each record with a dictionary-like\n"
+"                                  assignment."
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid ""
+"The field <strong>Dependencies</strong> lists the fields that\n"
+"                                  the current field depends on. It is a comma-separated list of\n"
+"                                  field names, like <code>name, size</code>. You can also refer to\n"
+"                                  fields accessible through other relational fields, for instance\n"
+"                                  <code>partner_id.company_id.name</code>."
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid "The only predefined variables are"
+msgstr ""
+
+#. module: spp_custom_fields_ui
+#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+msgid ""
+"for record in self:\n"
+"                                        record['size'] = len(record.name)"
+msgstr ""
