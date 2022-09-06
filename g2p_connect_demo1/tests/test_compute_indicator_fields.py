@@ -343,18 +343,3 @@ class ComputeIndicatorFieldsTest(TransactionCase):
             self.group_1.z_ind_grp_is_elderly_head_hh,
             False,
         )
-
-    def test_13_num_cyclone_aug_2022_injured_disabled(self):
-        self.registrant_1.active = False
-        self.group_2._compute_ind_grp_num_cyclone_aug_2022_injured()
-        self.assertEqual(
-            self.group_2.z_ind_grp_num_cyclone_aug_2022_injured,
-            0,
-        )
-
-        self.registrant_2.active = False
-        self.group_1._compute_ind_grp_num_cyclone_aug_2022_injured()
-        self.assertEqual(
-            self.group_1.z_ind_grp_num_cyclone_aug_2022_injured,
-            0,
-        )
