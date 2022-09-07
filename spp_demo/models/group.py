@@ -185,7 +185,7 @@ class G2PGroup(models.Model):
             "z_ind_grp_is_woman_head_hh", None, domain, presence_only=True
         )
 
-    def _compute_crt_grp_is_eldery_head_hh(self):
+    def _compute_ind_grp_is_eldery_head_hh(self):
         """
         Elderly-headed HHs - extracted from demographic
         data of HH adult members
@@ -200,7 +200,7 @@ class G2PGroup(models.Model):
             "z_ind_grp_is_elderly_head_hh", None, domain, presence_only=True
         )
 
-    def _compute_crt_grp_is_hh_with_children(self):
+    def _compute_ind_grp_is_hh_with_children(self):
         """
         Households (HH) with children - extracted from demographic data of HH adult members
         plus child members from personal data
@@ -212,7 +212,7 @@ class G2PGroup(models.Model):
             "z_ind_grp_is_hh_with_children", None, domain, presence_only=True
         )
 
-    def _compute_crt_grp_is_hh_with_pregnant_lactating(self):
+    def _compute_ind_grp_is_hh_with_pregnant_lactating(self):
         """
         Households (HH) with pregnant and lactating
         """
@@ -229,7 +229,7 @@ class G2PGroup(models.Model):
             presence_only=True,
         )
 
-    def _compute_crt_grp_is_hh_with_disabled(self):
+    def _compute_ind_grp_is_hh_with_disabled(self):
         """
         HHs with disabled (mental or physical) members
         """
@@ -238,7 +238,7 @@ class G2PGroup(models.Model):
             "z_ind_grp_is_hh_with_disabled", None, domain, presence_only=True
         )
 
-    def _compute_crt_grp_is_hh_with_medical_condition(self):
+    def _compute_ind_grp_is_hh_with_medical_condition(self):
         """
         HHs with members that have chronic illness/medical conditions
         """
@@ -250,7 +250,7 @@ class G2PGroup(models.Model):
             presence_only=True,
         )
 
-    def _compute_crt_grp_is_hh_with_elderly(self):
+    def _compute_ind_grp_is_hh_with_elderly(self):
         """
         Households (HH) with elderly - extracted from demographic data of HH adult members
         plus elderly members from personal data
