@@ -1,0 +1,186 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_consent
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ckb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: spp_consent
+#: model_terms:ir.ui.view,arch_db:spp_consent.view_registrant_consent_form
+#: model_terms:ir.ui.view,arch_db:spp_consent.view_registrant_consent_group_form
+msgid ""
+"<span class=\"o_stat_text\">Record</span>\n"
+"                          <span class=\"o_stat_text\">Consent</span>"
+msgstr ""
+
+#. module: spp_consent
+#: model_terms:ir.ui.view,arch_db:spp_consent.record_consent_wizard_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__config_id
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__config_id
+msgid "Config"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__name
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__name
+msgid "Consent"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__is_group
+msgid "Consent For Group"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_res_partner__consent_ids
+#: model:ir.model.fields,field_description:spp_consent.field_res_users__consent_ids
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent_mixin__consent_ids
+msgid "Consent IDS"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model,name:spp_consent.model_spp_consent_mixin
+msgid "Consent Mixin"
+msgstr ""
+
+#. module: spp_consent
+#: model_terms:ir.ui.view,arch_db:spp_consent.view_registrant_consent_form
+#: model_terms:ir.ui.view,arch_db:spp_consent.view_registrant_consent_group_form
+msgid "Consents"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model,name:spp_consent.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_consent
+#: model_terms:ir.ui.view,arch_db:spp_consent.record_consent_wizard_form_view
+msgid "Create Consent"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__create_uid
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__create_uid
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__create_date
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__create_date
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__display_name
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__display_name
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.actions.act_window,name:spp_consent.action_spp_expired_consent
+#: model:ir.ui.menu,name:spp_consent.menu_spp_expired_consent
+#: model_terms:ir.ui.view,arch_db:spp_consent.view_spp_expired_consent_tree
+msgid "Expired Consents"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__expiry
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__expiry
+msgid "Expiry Date"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__group_id
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__group_id
+#: model_terms:ir.ui.view,arch_db:spp_consent.record_consent_wizard_form_view
+msgid "Group"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__id
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__id
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent____last_update
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config____last_update
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__write_uid
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__write_uid
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__write_date
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__write_date
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__name
+msgid "Name"
+msgstr ""
+
+#. module: spp_consent
+#: model_terms:ir.actions.act_window,help:spp_consent.action_spp_expired_consent
+msgid "No Expired Consents"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model,name:spp_consent.model_spp_consent
+msgid "OpenSPP Consent"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model,name:spp_consent.model_spp_consent_config
+msgid "OpenSPP Consent Config"
+msgstr ""
+
+#. module: spp_consent
+#: code:addons/spp_consent/models/consent_mixin.py:0
+#, python-format
+msgid "Record Consent"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model,name:spp_consent.model_spp_record_consent_wizard
+msgid "Record Consent Wizard"
+msgstr ""
+
+#. module: spp_consent
+#: model:ir.model.fields,field_description:spp_consent.field_spp_consent__signatory_id
+#: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__signatory_id
+#: model_terms:ir.ui.view,arch_db:spp_consent.record_consent_wizard_form_view
+msgid "Signatory"
+msgstr ""
+
+#. module: spp_consent
+#: code:addons/spp_consent/wizard/record_consent.py:0
+#, python-format
+msgid "There are no selected Signatory!"
+msgstr ""
