@@ -19,3 +19,4 @@ class G2PRegistrant(models.Model):
                 rec.full_address += " " + rec.city
             if rec.zip:
                 rec.full_address += " " + rec.zip
+            rec.address = rec.full_address

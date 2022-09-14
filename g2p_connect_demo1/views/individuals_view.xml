@@ -3,6 +3,19 @@
    Part of OpenG2P Registry. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
+    <record id="view_individuals_list_tree_demo" model="ir.ui.view">
+        <field name="name">view_individuals_list_tree_demo</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_list_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='address']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='address']" position="after">
+                <field name="full_address" string="Address" />
+            </xpath>
+        </field>
+    </record>
     <record id="view_individuals_form_demo" model="ir.ui.view">
         <field name="name">view_individuals_form_demo</field>
         <field name="model">res.partner</field>
