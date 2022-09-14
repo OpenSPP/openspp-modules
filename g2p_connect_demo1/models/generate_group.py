@@ -84,6 +84,15 @@ class OpenG2PGenerateData(models.Model):
         group_kind_family_id = self.env.ref("g2p_registry_group.group_kind_family").id
 
         num_groups = min(res.num_groups, 1000)
+
+        bank = self.env["res.bank"].search([("name", "=", "Sample Bank")])
+        bank_id = None
+        if bank:
+            bank_id = bank[0]
+        else:
+            vals = {"name": "Sample Bank", "bic": "1010101010"}
+            bank_id = self.env["res.bank"].create(vals)
+
         for i in range(0, num_groups):
             locale = random.choice(locales)
             group_size = random.choice(group_size_range)
@@ -104,6 +113,7 @@ class OpenG2PGenerateData(models.Model):
                 sex_choice_range,
                 age_group_range,
                 registration_date,
+                bank_id,
             )
 
             head["is_head"] = True
@@ -114,6 +124,14 @@ class OpenG2PGenerateData(models.Model):
 
             group_kind = random.choice([group_kind_household_id, group_kind_family_id])
 
+            banks = random.randint(1, 5)
+            bank_ids = []
+            for _ in range(banks):
+                val = {
+                    "bank_id": bank_id.id,
+                    "acc_number": str(random.randint(1, 9999999999)),
+                }
+                bank_ids.append([0, 0, val])
             group = {
                 "id": group_id,
                 "name": last_name,
@@ -121,6 +139,11 @@ class OpenG2PGenerateData(models.Model):
                 "is_registrant": True,
                 "registration_date": registration_date,
                 "kind": group_kind,
+                "street": fake[locale].street_address(),
+                "street2": fake[locale].street_name(),
+                "city": fake[locale].city(),
+                "zip": fake[locale].postcode(),
+                "bank_ids": bank_ids,
             }
 
             create_group_id = self.env["res.partner"].create(group)
@@ -135,6 +158,7 @@ class OpenG2PGenerateData(models.Model):
                     sex_choice_range,
                     age_group_range,
                     registration_date,
+                    bank_id,
                 )
 
                 data["id"] = f"{group_id}-{i+1}"
@@ -210,7 +234,13 @@ class OpenG2PGenerateData(models.Model):
         # _logger.info(json.dumps({"group": group, "members": members}, indent=4))
 
     def _generate_individual_data(
-        self, fake, last_name, sex_choice_range, age_group_range, registration_date
+        self,
+        fake,
+        last_name,
+        sex_choice_range,
+        age_group_range,
+        registration_date,
+        bank_id,
     ):
         sex = random.choice(sex_choice_range)
         age_group = random.choice(age_group_range)
@@ -256,7 +286,14 @@ class OpenG2PGenerateData(models.Model):
         ).isoformat()
 
         fullname = "{} {}".format(first_name, last_name)
-
+        banks = random.randint(1, 5)
+        bank_ids = []
+        for _ in range(banks):
+            val = {
+                "bank_id": bank_id.id,
+                "acc_number": str(random.randint(1, 999999999)),
+            }
+            bank_ids.append([0, 0, val])
         return {
             "name": fullname,
             "given_name": first_name,
@@ -271,4 +308,9 @@ class OpenG2PGenerateData(models.Model):
             "z_cst_indv_receive_government_benefits": gov_benefits,
             "z_cst_indv_cyclone_aug_2022_lost_livestock": lost_livestock,
             "z_cst_indv_cyclone_aug_2022_lost_primary_source_income": lost_primary_source_income,
+            "street": fake.street_address(),
+            "street2": fake.street_name(),
+            "city": fake.city(),
+            "zip": fake.postcode(),
+            "bank_ids": bank_ids,
         }

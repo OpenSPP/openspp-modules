@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Part of OpenG2P Registry. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_groups_list_tree_demo" model="ir.ui.view">
+        <field name="name">view_groups_list_tree_demo</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_list_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='address']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='address']" position="after">
+                <field name="full_address" string="Address" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_groups_form_demo" model="ir.ui.view">
+        <field name="name">view_groups_form_demo</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+          <xpath expr="//page[@name='basic_info']/group/group[1]" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//page[@name='basic_info']/group/group[1]" position="after">
+            <group colspan="2">
+              <field
+                        name="area_id"
+                        placeholder="Area"
+                        attrs="{'readonly':[('disabled','!=',False)]}"
+                        options="{'no_open': True, 'no_create': True}"
+                    />
+              <span class="o_form_label o_td_label" name="address_name">
+                  <b>Address</b>
+              </span>
+              <div>
+                <field
+                            name="full_address"
+                            attrs="{'readonly':[('disabled','!=',False)]}"
+                            class="oe_read_only"
+                        />
+                <field
+                            name="street"
+                            placeholder="Street"
+                            attrs="{'readonly':[('disabled','!=',False)]}"
+                            class="oe_edit_only"
+                        />
+                <field
+                            name="street2"
+                            placeholder="Street2"
+                            attrs="{'readonly':[('disabled','!=',False)]}"
+                            class="oe_edit_only"
+                        />
+                <field
+                            name="city"
+                            placeholder="City"
+                            attrs="{'readonly':[('disabled','!=',False)]}"
+                            class="oe_edit_only"
+                        />
+                <field
+                            name="zip"
+                            placeholder="Postal"
+                            attrs="{'readonly':[('disabled','!=',False)]}"
+                            class="oe_edit_only"
+                        />
+              </div>
+            </group>
+          </xpath>
+        </field>
+    </record>
+
+</odoo>

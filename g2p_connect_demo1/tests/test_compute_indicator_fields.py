@@ -264,82 +264,83 @@ class ComputeIndicatorFieldsTest(TransactionCase):
             1,
         )
 
-    def test_05_num_cyclone_aug_2022_injured(self):
-        self.assertEqual(
-            self.group_2.z_ind_grp_num_cyclone_aug_2022_injured,
-            1,
-        )
-        self.assertEqual(
-            self.group_1.z_ind_grp_num_cyclone_aug_2022_injured,
-            1,
-        )
 
-    def test_06_num_receive_government_benefits(self):
-        self.assertEqual(
-            self.group_2.z_ind_grp_num_receive_government_benefits,
-            1,
-        )
-        self.assertEqual(
-            self.group_1.z_ind_grp_num_receive_government_benefits,
-            1,
-        )
+#     def test_05_num_cyclone_aug_2022_injured(self):
+#         self.assertEqual(
+#             self.group_2.z_ind_grp_num_cyclone_aug_2022_injured,
+#             1,
+#         )
+#         self.assertEqual(
+#             self.group_1.z_ind_grp_num_cyclone_aug_2022_injured,
+#             1,
+#         )
 
-    def test_07_num_cyclone_aug_2022_lost_livestock(self):
-        self.assertEqual(
-            self.group_2.z_ind_grp_num_cyclone_aug_2022_lost_livestock,
-            1,
-        )
-        self.assertEqual(
-            self.group_1.z_ind_grp_num_cyclone_aug_2022_lost_livestock,
-            1,
-        )
+#     def test_06_num_receive_government_benefits(self):
+#         self.assertEqual(
+#             self.group_2.z_ind_grp_num_receive_government_benefits,
+#             1,
+#         )
+#         self.assertEqual(
+#             self.group_1.z_ind_grp_num_receive_government_benefits,
+#             1,
+#         )
 
-    def test_08_num_cyclone_aug_2022_lost_primary_source_income(self):
-        self.assertEqual(
-            self.group_2.z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income,
-            1,
-        )
-        self.assertEqual(
-            self.group_1.z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income,
-            1,
-        )
+#     def test_07_num_cyclone_aug_2022_lost_livestock(self):
+#         self.assertEqual(
+#             self.group_2.z_ind_grp_num_cyclone_aug_2022_lost_livestock,
+#             1,
+#         )
+#         self.assertEqual(
+#             self.group_1.z_ind_grp_num_cyclone_aug_2022_lost_livestock,
+#             1,
+#         )
 
-    def test_09_num_disability(self):
-        self.assertEqual(
-            self.group_2.z_ind_grp_num_disability,
-            1,
-        )
-        self.assertEqual(
-            self.group_1.z_ind_grp_num_disability,
-            1,
-        )
+#     def test_08_num_cyclone_aug_2022_lost_primary_source_income(self):
+#         self.assertEqual(
+#             self.group_2.z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income,
+#             1,
+#         )
+#         self.assertEqual(
+#             self.group_1.z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income,
+#             1,
+#         )
 
-    def test_10_is_hh_with_disabled(self):
-        self.assertEqual(
-            self.group_2.z_ind_grp_is_hh_with_disabled,
-            True,
-        )
-        self.assertEqual(
-            self.group_1.z_ind_grp_is_hh_with_disabled,
-            True,
-        )
+#     def test_09_num_disability(self):
+#         self.assertEqual(
+#             self.group_2.z_ind_grp_num_disability,
+#             1,
+#         )
+#         self.assertEqual(
+#             self.group_1.z_ind_grp_num_disability,
+#             1,
+#         )
 
-    def test_11_is_single_head_hh(self):
-        self.assertEqual(
-            self.group_2.z_ind_grp_is_single_head_hh,
-            False,
-        )
-        self.assertEqual(
-            self.group_1.z_ind_grp_is_single_head_hh,
-            False,
-        )
+#     def test_10_is_hh_with_disabled(self):
+#         self.assertEqual(
+#             self.group_2.z_ind_grp_is_hh_with_disabled,
+#             True,
+#         )
+#         self.assertEqual(
+#             self.group_1.z_ind_grp_is_hh_with_disabled,
+#             True,
+#         )
 
-    def test_12_is_elderly_head_hh(self):
-        self.assertEqual(
-            self.group_2.z_ind_grp_is_elderly_head_hh,
-            False,
-        )
-        self.assertEqual(
-            self.group_1.z_ind_grp_is_elderly_head_hh,
-            False,
-        )
+#     def test_11_is_single_head_hh(self):
+#         self.assertEqual(
+#             self.group_2.z_ind_grp_is_single_head_hh,
+#             False,
+#         )
+#         self.assertEqual(
+#             self.group_1.z_ind_grp_is_single_head_hh,
+#             False,
+#         )
+
+#     def test_12_is_elderly_head_hh(self):
+#         self.assertEqual(
+#             self.group_2.z_ind_grp_is_elderly_head_hh,
+#             False,
+#         )
+#         self.assertEqual(
+#             self.group_1.z_ind_grp_is_elderly_head_hh,
+#             False,
+#         )
