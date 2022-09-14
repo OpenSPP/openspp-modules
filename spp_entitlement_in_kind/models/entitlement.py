@@ -60,15 +60,34 @@ class G2PInKindEntitlement(models.Model):
                     if fund_balance >= rec.initial_amount:
                         amt += rec.initial_amount
                         # Prepare journal entry (account.move) via account.payment
+                        amount = rec.initial_amount
+                        _logger.info("DEBUG! transfer_fee: %s", rec.transfer_fee)
+                        if rec.transfer_fee > 0.0:
+                            amount -= rec.transfer_fee
+                            # Incurred Fees (transfer fees)
+                            payment = {
+                                "partner_id": rec.partner_id.id,
+                                "payment_type": "outbound",
+                                "amount": rec.transfer_fee,
+                                "currency_id": rec.journal_id.currency_id.id,
+                                "journal_id": rec.journal_id.id,
+                                "partner_type": "supplier",
+                                "ref": "Service Fee: Code: %s" % rec.code,
+                            }
+                            self.env["account.payment"].create(payment)
+
+                        # Fund Disbursed (amount - transfer fees)
                         payment = {
                             "partner_id": rec.partner_id.id,
                             "payment_type": "outbound",
-                            "amount": rec.initial_amount,
+                            "amount": amount,
                             "currency_id": rec.journal_id.currency_id.id,
                             "journal_id": rec.journal_id.id,
                             "partner_type": "supplier",
+                            "ref": "Fund disbursed to beneficiary: Code: %s" % rec.code,
                         }
                         new_payment = self.env["account.payment"].create(payment)
+
                         rec.update(
                             {
                                 "disbursement_id": new_payment.id,
@@ -88,6 +107,7 @@ class G2PInKindEntitlement(models.Model):
                                 "entitlement": rec.code,
                             }
                         )
+
                 else:  # In-Kind Entitlements
                     if rec.manage_inventory:
                         rec._action_launch_stock_rule()
