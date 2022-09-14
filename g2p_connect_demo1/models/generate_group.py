@@ -27,16 +27,9 @@ class OpenG2PGenerateData(models.Model):
     )
 
     def generate_sample_data(self):
-        # celery = {
-        #    "countdown": 3,
-        #    "retry": True,
-        #    "retry_policy": {"max_retries": 2, "interval_start": 2},
-        # }
+
         batches = math.ceil(self.num_groups / 1000)
         for _i in range(0, batches):
-            # self.env["celery.task"].call_task(
-            #    self._name, "_generate_sample_data", res_id=self.id, celery=celery
-            # )
             self.with_delay()._generate_sample_data(res_id=self.id)
 
     @api.model
@@ -51,18 +44,18 @@ class OpenG2PGenerateData(models.Model):
             "cs_CZ",
             "en_US",
             "de_CH",
-            "ar_AA",
+            # "ar_AA",
             "de_DE",
             "en_GB",
             "en_IE",
-            "en_TH",
+            # "en_TH",
             "es_ES",
             "es_MX",
             "fr_FR",
             "hi_IN",
             "hr_HR",
             "it_IT",
-            "zh_CN",
+            # "zh_CN",
         ]
         fake = Faker(locales)
 
@@ -85,12 +78,12 @@ class OpenG2PGenerateData(models.Model):
 
         num_groups = min(res.num_groups, 1000)
 
-        bank = self.env["res.bank"].search([("name", "=", "Sample Bank")])
+        bank = self.env["res.bank"].search([("name", "=", "slcb")])
         bank_id = None
         if bank:
             bank_id = bank[0]
         else:
-            vals = {"name": "Sample Bank", "bic": "1010101010"}
+            vals = {"name": "slcb", "bic": "1010101010"}
             bank_id = self.env["res.bank"].create(vals)
 
         for i in range(0, num_groups):
@@ -129,7 +122,7 @@ class OpenG2PGenerateData(models.Model):
             for _ in range(banks):
                 val = {
                     "bank_id": bank_id.id,
-                    "acc_number": str(random.randint(1, 9999999999)),
+                    "acc_number": str(random.randint(111111111, 9999999999)),
                 }
                 bank_ids.append([0, 0, val])
             group = {
@@ -262,7 +255,7 @@ class OpenG2PGenerateData(models.Model):
             last_name = fake.last_name()
 
         injured = False
-        if random.randint(0, 1) == 1:
+        if random.randint(0, 10) == 1:
             injured = True
 
         disability_level = 0
@@ -270,15 +263,15 @@ class OpenG2PGenerateData(models.Model):
             disability_level = random.randint(10, 100)
 
         gov_benefits = False
-        if random.randint(0, 1) == 1:
+        if random.randint(0, 10) == 1:
             gov_benefits = True
 
         lost_livestock = False
-        if random.randint(0, 1) == 1:
+        if random.randint(0, 5) == 1:
             lost_livestock = True
 
         lost_primary_source_income = False
-        if random.randint(0, 1) == 1:
+        if random.randint(0, 3) == 1:
             lost_primary_source_income = True
 
         dob = fake.date_between_dates(
@@ -288,12 +281,14 @@ class OpenG2PGenerateData(models.Model):
         fullname = "{} {}".format(first_name, last_name)
         banks = random.randint(1, 5)
         bank_ids = []
-        for _ in range(banks):
-            val = {
-                "bank_id": bank_id.id,
-                "acc_number": str(random.randint(1, 999999999)),
-            }
-            bank_ids.append([0, 0, val])
+        # Do not give bank account to kids
+        if age_group != "C":
+            for _ in range(banks):
+                val = {
+                    "bank_id": bank_id.id,
+                    "acc_number": str(random.randint(1, 999999999)),
+                }
+                bank_ids.append([0, 0, val])
         return {
             "name": fullname,
             "given_name": first_name,
