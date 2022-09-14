@@ -79,11 +79,11 @@ class OpenG2PGenerateData(models.Model):
         num_groups = min(res.num_groups, 1000)
 
         bank = self.env["res.bank"].search([("name", "=", "slcb")])
-        bank_id = None
         if bank:
             bank_id = bank[0]
         else:
             vals = {"name": "slcb", "bic": "1010101010"}
+            # TODO set the country
             bank_id = self.env["res.bank"].create(vals)
 
         for i in range(0, num_groups):
@@ -117,14 +117,12 @@ class OpenG2PGenerateData(models.Model):
 
             group_kind = random.choice([group_kind_household_id, group_kind_family_id])
 
-            banks = random.randint(1, 5)
             bank_ids = []
-            for _ in range(banks):
-                val = {
-                    "bank_id": bank_id.id,
-                    "acc_number": str(random.randint(111111111, 9999999999)),
-                }
-                bank_ids.append([0, 0, val])
+            val = {
+                "bank_id": bank_id.id,
+                "acc_number": str(random.randint(111111111, 9999999999)),
+            }
+            bank_ids.append([0, 0, val])
             group = {
                 "id": group_id,
                 "name": last_name,
@@ -279,16 +277,14 @@ class OpenG2PGenerateData(models.Model):
         ).isoformat()
 
         fullname = "{} {}".format(first_name, last_name)
-        banks = random.randint(1, 5)
         bank_ids = []
         # Do not give bank account to kids
         if age_group != "C":
-            for _ in range(banks):
-                val = {
-                    "bank_id": bank_id.id,
-                    "acc_number": str(random.randint(1, 999999999)),
-                }
-                bank_ids.append([0, 0, val])
+            val = {
+                "bank_id": bank_id.id,
+                "acc_number": str(random.randint(1, 999999999)),
+            }
+            bank_ids.append([0, 0, val])
         return {
             "name": fullname,
             "given_name": first_name,

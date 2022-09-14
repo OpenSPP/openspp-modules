@@ -32,7 +32,6 @@
     "data": [
         "security/ir.model.access.csv",
         "views/generate_data_view.xml",
-        "views/generate_program_view.xml",
         "views/groups_view.xml",
         "views/individuals_view.xml",
     ],

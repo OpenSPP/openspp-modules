@@ -2,6 +2,5 @@
 
 from . import registrant
 from . import generate_group
-from . import generate_program
 from . import individual
 from . import group
