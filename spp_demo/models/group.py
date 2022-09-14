@@ -182,7 +182,7 @@ class G2PGroup(models.Model):
             ("gender", "=", "Female"),
         ]
         self.compute_count_and_set_indicator(
-            "z_ind_grp_is_woman_head_hh", None, domain, presence_only=True
+            "z_ind_grp_is_woman_head_hh", ["Head"], domain, presence_only=True
         )
 
     def _compute_ind_grp_is_eldery_head_hh(self):
@@ -197,7 +197,7 @@ class G2PGroup(models.Model):
         now = datetime.datetime.now()
         domain = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
         self.compute_count_and_set_indicator(
-            "z_ind_grp_is_elderly_head_hh", None, domain, presence_only=True
+            "z_ind_grp_is_elderly_head_hh", ["Head"], domain, presence_only=True
         )
 
     def _compute_ind_grp_is_hh_with_children(self):
