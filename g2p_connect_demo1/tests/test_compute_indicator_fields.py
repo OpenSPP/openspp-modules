@@ -264,6 +264,7 @@ class ComputeIndicatorFieldsTest(TransactionCase):
             1,
         )
 
+
 #     def test_05_num_cyclone_aug_2022_injured(self):
 #         self.assertEqual(
 #             self.group_2.z_ind_grp_num_cyclone_aug_2022_injured,
