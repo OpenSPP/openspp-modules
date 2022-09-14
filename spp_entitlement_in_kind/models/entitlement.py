@@ -61,7 +61,6 @@ class G2PInKindEntitlement(models.Model):
                         amt += rec.initial_amount
                         # Prepare journal entry (account.move) via account.payment
                         amount = rec.initial_amount
-                        _logger.info("DEBUG! transfer_fee: %s", rec.transfer_fee)
                         if rec.transfer_fee > 0.0:
                             amount -= rec.transfer_fee
                             # Incurred Fees (transfer fees)
