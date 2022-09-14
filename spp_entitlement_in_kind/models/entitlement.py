@@ -61,6 +61,7 @@ class G2PInKindEntitlement(models.Model):
                         amt += rec.initial_amount
                         # Prepare journal entry (account.move) via account.payment
                         amount = rec.initial_amount
+                        new_service_fee = None
                         if rec.transfer_fee > 0.0:
                             amount -= rec.transfer_fee
                             # Incurred Fees (transfer fees)
@@ -73,7 +74,9 @@ class G2PInKindEntitlement(models.Model):
                                 "partner_type": "supplier",
                                 "ref": "Service Fee: Code: %s" % rec.code,
                             }
-                            self.env["account.payment"].create(payment)
+                            new_service_fee = self.env["account.payment"].create(
+                                payment
+                            )
 
                         # Fund Disbursed (amount - transfer fees)
                         payment = {
@@ -90,6 +93,9 @@ class G2PInKindEntitlement(models.Model):
                         rec.update(
                             {
                                 "disbursement_id": new_payment.id,
+                                "service_fee_disbursement_id": new_service_fee
+                                and new_service_fee.id
+                                or None,
                                 "state": "approved",
                                 "date_approved": fields.Date.today(),
                             }
