@@ -150,7 +150,7 @@ msgstr ""
 #. module: spp_idpass
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
-msgid "ID PASS Error: %s Code: %s"
+msgid "ID PASS Error: %(reason)s Code: %(code)s"
 msgstr ""
 
 #. module: spp_idpass
@@ -168,11 +168,6 @@ msgstr ""
 #. module: spp_idpass
 #: model:ir.model,name:spp_idpass.model_spp_id_pass
 msgid "ID Pass"
-msgstr ""
-
-#. module: spp_idpass
-#: model_terms:ir.ui.view,arch_db:spp_idpass.view_spp_idpass_tree
-msgid "ID Pass Configuration"
 msgstr ""
 
 #. module: spp_idpass
