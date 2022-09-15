@@ -157,23 +157,11 @@ class OpenSPPRegistrant(models.Model):
                     datetime.today().strftime("%Y-%m-%d"),
                 )
 
-                attachment = self.env["ir.attachment"].create(
-                    {
-                        "name": self.id_pdf_filename,
-                        "type": "binary",
-                        "datas": file_pdf,
-                        "res_model": self._name,
-                        "res_id": self.id,
-                        "mimetype": "application/x-pdf",
-                    }
+                idqueue = self.env["spp.id.queue"].search(
+                    [("id", "=", vals["id_queue"])]
                 )
-
-                # TODO: Add the identification_no to the ID of the registrant
-
-                attachment_id = {attachment.id}
-                model_id = self.env["res.partner"].search([("id", "=", self.id)])
-                msg_body = "Generated ID: " + self.id_pdf_filename
-                model_id.message_post(body=msg_body, attachment_ids=attachment_id)
+                idqueue.id_pdf = self.id_pdf
+                idqueue.id_pdf_filename = self.id_pdf_filename
 
                 external_identifier = self.env["ir.model.data"].search(
                     [("name", "=", "id_type_idpass"), ("model", "=", "g2p.id.type")]
@@ -181,7 +169,7 @@ class OpenSPPRegistrant(models.Model):
                 _logger.info("External Identifier: %s" % external_identifier.res_id)
                 has_existing_idpass = self.env["g2p.reg.id"].search(
                     [
-                        ("registrant", "=", self.id),
+                        ("partner_id", "=", self.id),
                         ("id_type", "=", external_identifier.res_id),
                     ]
                 )
@@ -215,13 +203,7 @@ class OpenSPPRegistrant(models.Model):
                             ]
                         }
                     )
-                return {
-                    "effect": {
-                        "fadeout": "slow",
-                        "message": "ID Pass has been generated!",
-                        "type": "rainbow_man",
-                    }
-                }
+                return idqueue.id_pdf
             else:
                 raise ValidationError(
                     _("ID PASS Error: %(reason)s Code: %(code)s")

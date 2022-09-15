@@ -11,6 +11,8 @@
                 <field name="requested_by" />
                 <field name="date_requested" />
                 <field name="date_printed" />
+                <field name="id_pdf" filename="id_pdf_filename" widget="binary" string="File" />
+                <field name="id_pdf_filename" invisible="1" />
                 <field
                     name="status"
                     decoration-muted="status=='new'"

@@ -30,6 +30,8 @@ class OpenSPPIDQueue(models.Model):
         ],
         default="new",
     )
+    id_pdf = fields.Binary("ID PASS")
+    id_pdf_filename = fields.Char("ID File Name")
 
     def approve(self):
         for rec in self:
@@ -40,12 +42,13 @@ class OpenSPPIDQueue(models.Model):
     def print(self):
         for rec in self:
             if rec.template_id.id == self.env.ref("spp_idpass.id_type_idpass").id:
-                vals = {"idpass": self.idpass_id.id}
-                self.registrant_id.send_idpass_parameters(vals)
+                vals = {"idpass": self.idpass_id.id, "id_queue": self.id}
+                res_id = self.registrant_id.send_idpass_parameters(vals)
 
-            rec.date_printed = date.today()
-            rec.printed_by = self.env.user.id
-            rec.status = "printed"
+                rec.date_printed = date.today()
+                rec.printed_by = self.env.user.id
+                rec.status = "printed"
+                return res_id
 
     def cancel(self):
         for rec in self:

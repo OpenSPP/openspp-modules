@@ -114,9 +114,24 @@ msgid "Distributed"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "File"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__id
 msgid "ID"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__id_pdf_filename
+msgid "ID File Name"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__id_pdf
+msgid "ID PASS"
 msgstr ""
 
 #. module: spp_idqueue
