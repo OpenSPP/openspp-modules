@@ -4,7 +4,7 @@
         <field name="model">ir.model.fields</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Custom Fields">
+            <tree>
                 <field name="name" />
                 <field name="field_description" />
                 <field name="ttype" />

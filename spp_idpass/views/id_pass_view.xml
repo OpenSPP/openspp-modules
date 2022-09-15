@@ -4,7 +4,7 @@
         <field name="model">spp.id.pass</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="ID Pass Configuration" editable="bottom">
+            <tree editable="bottom">
                 <field name="name" />
                 <field name="api_url" />
                 <field name="api_username" />

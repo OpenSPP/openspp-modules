@@ -7,4 +7,4 @@ class OpenSPPPhotoCategory(models.Model):
     _name = "spp.photo.category"
     _description = "Photo Category"
 
-    name = fields.Char(string="Name")
+    name = fields.Char()

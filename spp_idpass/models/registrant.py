@@ -206,10 +206,8 @@ class OpenSPPRegistrant(models.Model):
                 return idqueue.id_pdf
             else:
                 raise ValidationError(
-                    _(
-                        "ID PASS Error: %s Code: %s"
-                        % (response.reason, response.status_code)
-                    )
+                    _("ID PASS Error: %(reason)s Code: %(code)s")
+                    % (response.reason, response.status_code)
                 )  # noqa: C901
             _logger.info(
                 "ID PASS Response: %s Code: %s"

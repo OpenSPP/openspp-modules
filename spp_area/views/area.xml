@@ -4,7 +4,7 @@
         <field name="model">spp.area</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Area">
+            <tree>
                 <field name="parent_id" />
                 <field name="name" />
                 <field name="code" />
@@ -22,25 +22,25 @@
             <form string="Area">
                 <sheet>
                     <div class="oe_title mb24">
-                    <label for="parent_id" string="Parent:" />
-                    <h1>
-                        <field
+                        <label for="parent_id" string="Parent:" />
+                        <h1>
+                            <field
                                 id="parent_id"
                                 name="parent_id"
                                 placeholder="Select a Parent..."
                                 options="{'no_open':True,'no_create_edit':True,'no_create':True}"
                             />
-                    </h1>
-                    <label for="name" string="Name:" />
-                    <h1>
-                        <field id="name" name="name" placeholder="Area Name..." />
-                    </h1>
+                        </h1>
+                        <label for="name" string="Name:" />
+                        <h1>
+                            <field id="name" name="name" placeholder="Area Name..." />
+                        </h1>
                     </div>
                     <group colspan="6" col="6">
                         <field name="altnames" colspan="6" />
                         <field name="code" colspan="2" />
                         <field name="level" colspan="2" />
-                        <field name="complete_name" colspan="6" invisible="1" />
+                        <field name="complete_name" invisible="1" />
                     </group>
                     <notebook>
                         <page string="Child">

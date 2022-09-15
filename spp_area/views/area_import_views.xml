@@ -92,7 +92,6 @@
                     </group>
                     <field name="raw_data_ids" nolabel="1" attrs="{'readonly':[('state','!=','Done')]}">
                         <tree
-                            string="Raw Data"
                             duplicate="0"
                             create="0"
                             decoration-bf="state in ('Validated','Posted')"
@@ -173,7 +172,7 @@
         <field name="model">spp.area.import</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Area Import">
+            <tree>
                 <field name="name" />
                 <field name="date_uploaded" />
                 <field name="upload_id" />

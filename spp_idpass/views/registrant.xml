@@ -1,82 +1,70 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
-        <record id="view_individuals_idpass_form" model="ir.ui.view">
-            <field name="name">view_individuals_idpass_form</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
-            <field name="arch" type="xml">
-                <xpath expr="//div[@name='button_box']" position="after">
-                  <div
-                        class="alert alert-info text-center o_form_header"
-                        role="alert"
-                        attrs="{'invisible':[('id_pdf_filename','=', False)]}"
-                    >
-                      <a class="close" data-dismiss="alert" href="#">x</a>
-                      <div>
-                        ID Pass has been Generated: <strong><field name="id_pdf" readonly="1" /></strong>
-                      </div>
+    <record id="view_individuals_idpass_form" model="ir.ui.view">
+        <field name="name">view_individuals_idpass_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="after">
+              <div
+                    class="alert alert-info text-center o_form_header"
+                    role="alert"
+                    attrs="{'invisible':[('id_pdf_filename','=', False)]}"
+                >
+                  <a class="close" data-dismiss="alert" href="#">x</a>
+                  <div>
+                    ID Pass has been Generated: <strong><field name="id_pdf" readonly="1" /></strong>
                   </div>
-                </xpath>
-                <xpath expr="//div[@name='button_box']" position="inside">
-                  <button
-                        type="object"
-                        class="oe_stat_button"
-                        icon="fa-id-card "
-                        name="open_issue_idpass_wiz"
-                    >
-                          <div class="o_form_field o_stat_info">
-                              <span class="o_stat_text">Issue</span>
-                          </div>
-                  </button>
-                </xpath>
-
-                <xpath expr="//field[@name='email']" position="after">
-                  <field name="id_pdf" id="id_pdf" string="ID PASS Card" filename="id_pdf_filename" />
-                  <field name="id_pdf_filename" invisible="1" />
-                  <field name="image_1920_filename" invisible="1" />
-                </xpath>
-                <xpath expr="//field[@name='image_1920']" position="attributes">
-                  <attribute name="filename">image_1920_filename</attribute>
-                </xpath>
-            </field>
-        </record>
-
-        <record id="view_groups_idpass_form" model="ir.ui.view">
-            <field name="name">view_groups_form</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
-            <field name="arch" type="xml">
-                <xpath expr="//div[@name='button_box']" position="after">
-                  <div
-                        class="alert alert-info text-center o_form_header"
-                        role="alert"
-                        attrs="{'invisible':[('id_pdf_filename','=', False)]}"
-                    >
-                      <a class="close" data-dismiss="alert" href="#">x</a>
-                      <div>
-                        ID Pass has been Generated: <strong><field name="id_pdf" readonly="1" /></strong>
+              </div>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+              <button type="object" class="oe_stat_button" icon="fa-id-card " name="open_issue_idpass_wiz">
+                      <div class="o_form_field o_stat_info">
+                          <span class="o_stat_text">Issue</span>
                       </div>
-                  </div>
-                </xpath>
-                <xpath expr="//div[@name='button_box']" position="inside">
-                  <button
-                        type="object"
-                        class="oe_stat_button"
-                        icon="fa-id-card "
-                        name="open_issue_idpass_wiz"
-                    >
-                          <div class="o_form_field o_stat_info">
-                              <span class="o_stat_text">Issue</span>
-                          </div>
-                  </button>
-                </xpath>
+              </button>
+            </xpath>
 
-                <xpath expr="//field[@name='email']" position="after">
-                  <field name="id_pdf" id="id_pdf" string="ID PASS Card" filename="id_pdf_filename" />
-                  <field name="id_pdf_filename" invisible="1" />
-                </xpath>
-            </field>
-        </record>
-    </data>
+            <xpath expr="//field[@name='email']" position="after">
+              <field name="id_pdf" id="id_pdf" string="ID PASS Card" filename="id_pdf_filename" />
+              <field name="id_pdf_filename" invisible="1" />
+              <field name="image_1920_filename" invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='image_1920']" position="attributes">
+              <attribute name="filename">image_1920_filename</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_groups_idpass_form" model="ir.ui.view">
+        <field name="name">view_groups_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="after">
+              <div
+                    class="alert alert-info text-center o_form_header"
+                    role="alert"
+                    attrs="{'invisible':[('id_pdf_filename','=', False)]}"
+                >
+                  <a class="close" data-dismiss="alert" href="#">x</a>
+                  <div>
+                    ID Pass has been Generated: <strong><field name="id_pdf" readonly="1" /></strong>
+                  </div>
+              </div>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+              <button type="object" class="oe_stat_button" icon="fa-id-card " name="open_issue_idpass_wiz">
+                      <div class="o_form_field o_stat_info">
+                          <span class="o_stat_text">Issue</span>
+                      </div>
+              </button>
+            </xpath>
+
+            <xpath expr="//field[@name='email']" position="after">
+              <field name="id_pdf" id="id_pdf" string="ID PASS Card" filename="id_pdf_filename" />
+              <field name="id_pdf_filename" invisible="1" />
+            </xpath>
+        </field>
+    </record>
 </odoo>

@@ -4,7 +4,7 @@
         <field name="model">spp.consent</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree string="Expired Consents">
+            <tree>
                 <field name="signatory_id" />
                 <field name="name" />
                 <field name="expiry" />
