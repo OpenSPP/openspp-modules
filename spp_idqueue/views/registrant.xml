@@ -9,7 +9,13 @@
             <attribute name="invisible">1</attribute>
           </xpath>
             <xpath expr="//button[@name='open_issue_idpass_wiz']" position="after">
-              <button type="object" class="oe_stat_button" icon="fa-id-card " name="open_request_id_wizard">
+              <button
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-id-card "
+                    name="open_request_id_wizard"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_requestor"
+                >
                       <div class="o_form_field o_stat_info">
                           <span class="o_stat_text">Request</span>
                       </div>
@@ -33,7 +39,13 @@
             <attribute name="invisible">1</attribute>
           </xpath>
           <xpath expr="//button[@name='open_issue_idpass_wiz']" position="after">
-            <button type="object" class="oe_stat_button" icon="fa-id-card " name="open_request_id_wizard">
+            <button
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-id-card "
+                    name="open_request_id_wizard"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_requestor"
+                >
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_text">Request</span>
                     </div>

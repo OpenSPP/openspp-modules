@@ -28,6 +28,7 @@
                     icon="fa-check"
                     class="btn-success"
                     attrs="{'invisible': [('status', '!=', 'new')]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
                 />
                 <button
                     name="print"
@@ -35,6 +36,7 @@
                     icon="fa-print"
                     class="btn-info"
                     attrs="{'invisible': [('status', '!=', 'approved')]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                 <button
                     name="distribute"
@@ -42,6 +44,7 @@
                     icon="fa-truck"
                     class="btn-info"
                     attrs="{'invisible': [('status', '!=', 'printed')]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                 <button
                     name="cancel"
@@ -49,6 +52,7 @@
                     icon="fa-ban"
                     class="btn-danger"
                     attrs="{'invisible': [('status', 'in', ('cancelled', 'printed', 'distributed'))]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
                 />
             </tree>
         </field>
@@ -83,6 +87,6 @@
         action="action_spp_idqueue"
         parent="g2p_registry_base.g2p_main_menu_root"
         sequence="901"
-        groups="g2p_registry_base.group_g2p_admin"
+        groups="g2p_registry_base.group_g2p_admin,group_g2p_id_validator,group_g2p_id_distributor"
     />
 </odoo>
