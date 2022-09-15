@@ -141,7 +141,6 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model:ir.model,name:spp_idqueue.model_spp_id_queue
-#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 msgid "ID Queue"
 msgstr ""
 
