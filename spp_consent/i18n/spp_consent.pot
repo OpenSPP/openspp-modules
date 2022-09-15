@@ -95,7 +95,6 @@ msgstr ""
 #. module: spp_consent
 #: model:ir.actions.act_window,name:spp_consent.action_spp_expired_consent
 #: model:ir.ui.menu,name:spp_consent.menu_spp_expired_consent
-#: model_terms:ir.ui.view,arch_db:spp_consent.view_spp_expired_consent_tree
 msgid "Expired Consents"
 msgstr ""
 
