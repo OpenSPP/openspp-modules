@@ -10,15 +10,13 @@ class OpenSPPCustomFieldsUI(models.Model):
 
     target_type = fields.Selection(
         selection=[("grp", "Group"), ("indv", "Individual")],
-        string="Target Type",
         default="grp",
     )
     field_category = fields.Selection(
         selection=[("cst", "Custom"), ("ind", "Calculated")],
-        string="Field Category",
         default="cst",
     )
-    prefix = fields.Char("Prefix", compute="_compute_prefix")
+    prefix = fields.Char(compute="_compute_prefix")
     draft_name = fields.Char(string="Field Name", required=True, index=True)
     kinds = fields.Many2many("g2p.group.membership.kind", string="Kind")
     has_presence = fields.Boolean("Presence", default=False)

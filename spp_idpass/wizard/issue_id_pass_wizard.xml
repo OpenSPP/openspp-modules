@@ -3,41 +3,34 @@
 Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
-    <data>
-        <record id="issue_id_pass_wizard_form_view" model="ir.ui.view">
-            <field name="name">issue_id_pass_wizard_form_view</field>
-            <field name="model">spp.issue.idpass.wizard</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <div class="oe_title">
-                            <h1>
-                                <label for="registrant_id" string="Registrant" />
-                            </h1>
-                            <h1>
-                                <field name="registrant_id" readonly="1" />
-                            </h1>
-                            <div class="o_row">
-                            </div>
+    <record id="issue_id_pass_wizard_form_view" model="ir.ui.view">
+        <field name="name">issue_id_pass_wizard_form_view</field>
+        <field name="model">spp.issue.idpass.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <label for="registrant_id" string="Registrant" />
+                        </h1>
+                        <h1>
+                            <field name="registrant_id" readonly="1" />
+                        </h1>
+                        <div class="o_row">
                         </div>
-                        <label for="idpass_id" string="Template" />
-                        <field
-                            name="idpass_id"
-                            options="{'no_create_edit':True,'no_open':True,'no_create':True}"
-                        />
-                    </sheet>
-                    <footer>
-                        <button
-                            name="issue_idpass"
-                            string="Issue IDPass"
-                            type="object"
-                            class="oe_highlight"
-                        />
-                        <button string="Cancel" class="btn-secondary" special="cancel" />
-                    </footer>
-                </form>
-            </field>
-        </record>
+                    </div>
+                    <label for="idpass_id" string="Template" />
+                    <field
+                        name="idpass_id"
+                        options="{'no_create_edit':True,'no_open':True,'no_create':True}"
+                    />
+                </sheet>
+                <footer>
+                    <button name="issue_idpass" string="Issue IDPass" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
 
-    </data>
 </odoo>

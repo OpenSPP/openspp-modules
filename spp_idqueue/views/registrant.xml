@@ -1,51 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
-        <record id="view_individuals_idqueue_form" model="ir.ui.view">
-            <field name="name">view_individuals_idqueue_form</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="spp_idpass.view_individuals_idpass_form" />
-            <field name="arch" type="xml">
-                <xpath expr="//button[@name='open_issue_idpass_wiz']" position="after">
-                  <button
-                        type="object"
-                        class="oe_stat_button"
-                        icon="fa-id-card "
-                        name="open_request_id_wizard"
-                    >
-                          <div class="o_form_field o_stat_info">
-                              <span class="o_stat_text">Request</span>
-                          </div>
-                  </button>
-                </xpath>
-                <xpath expr="//button[@name='open_issue_idpass_wiz']" position="attributes">
-                  <attribute name="invisible">1</attribute>
-                </xpath>
-                <xpath expr="//field[@id='id_pdf']" position="attributes">
-                  <attribute name="invisible">1</attribute>
-                </xpath>
-            </field>
-        </record>
+    <record id="view_individuals_idqueue_form" model="ir.ui.view">
+        <field name="name">view_individuals_idqueue_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_idpass.view_individuals_idpass_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_issue_idpass_wiz']" position="after">
+              <button type="object" class="oe_stat_button" icon="fa-id-card " name="open_request_id_wizard">
+                      <div class="o_form_field o_stat_info">
+                          <span class="o_stat_text">Request</span>
+                      </div>
+              </button>
+            </xpath>
+            <xpath expr="//button[@name='open_issue_idpass_wiz']" position="attributes">
+              <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@id='id_pdf']" position="attributes">
+              <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
 
-        <record id="view_groups_idqueue_form" model="ir.ui.view">
-            <field name="name">view_groups_idqueue_form</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="spp_idpass.view_groups_idpass_form" />
-            <field name="arch" type="xml">
-              <xpath expr="//button[@name='open_issue_idpass_wiz']" position="after">
-                <button type="object" class="oe_stat_button" icon="fa-id-card " name="open_request_id_wizard">
-                        <div class="o_form_field o_stat_info">
-                            <span class="o_stat_text">Request</span>
-                        </div>
-                </button>
-              </xpath>
-              <xpath expr="//button[@name='open_issue_idpass_wiz']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
-              <xpath expr="//field[@id='id_pdf']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
-            </field>
-        </record>
-    </data>
+    <record id="view_groups_idqueue_form" model="ir.ui.view">
+        <field name="name">view_groups_idqueue_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_idpass.view_groups_idpass_form" />
+        <field name="arch" type="xml">
+          <xpath expr="//button[@name='open_issue_idpass_wiz']" position="after">
+            <button type="object" class="oe_stat_button" icon="fa-id-card " name="open_request_id_wizard">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Request</span>
+                    </div>
+            </button>
+          </xpath>
+          <xpath expr="//button[@name='open_issue_idpass_wiz']" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@id='id_pdf']" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+        </field>
+    </record>
+
 </odoo>

@@ -7,4 +7,4 @@ class OpenSPPConsentConfig(models.Model):
     _name = "spp.consent.config"
     _description = "OpenSPP Consent Config"
 
-    name = fields.Char("Name", required=True)
+    name = fields.Char(required=True)

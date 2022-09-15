@@ -13,17 +13,17 @@ class OpenSPPArea(models.Model):
     _parent_name = "parent_id"
     _parent_store = True
     _rec_name = "complete_name"
-    _order = "complete_name"
+    _order = "parent_id,name"
 
     parent_id = fields.Many2one("spp.area", "Parent")
     complete_name = fields.Char(
-        "Name", compute="_compute_complete_name", recursive=True, store=True
+        "Name", compute="_compute_complete_name", recursive=True, translate=True
     )
-    name = fields.Char("Name", required=True, translate=True)
+    name = fields.Char(required=True, translate=True)
     parent_path = fields.Char(index=True)
-    code = fields.Char("Code")
+    code = fields.Char()
     altnames = fields.Char("Alternate Name")
-    level = fields.Integer("Level")
+    level = fields.Integer()
     child_ids = fields.One2many(
         "spp.area", "id", "Child", compute="_compute_get_childs"
     )
@@ -35,14 +35,21 @@ class OpenSPPArea(models.Model):
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
+        cur_lang = self._context.get("lang", False)
+        area_name = self.env["ir.translation"]._get_ids(
+            "spp.area,name", "model", cur_lang, self.ids
+        )
         for area in self:
-            if area.parent_id:
-                area.complete_name = "%s > %s" % (
-                    area.parent_id.complete_name,
-                    area.name,
-                )
+            if area.id:
+                if area.parent_id:
+                    area.complete_name = "%s > %s" % (
+                        area.parent_id.complete_name,
+                        area_name[area.id],
+                    )
+                else:
+                    area.complete_name = area_name[area.id]
             else:
-                area.complete_name = area.name
+                area.complete_name = None
 
     @api.model
     def create(self, vals):

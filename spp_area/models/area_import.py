@@ -17,12 +17,12 @@ class OpenSPPAreaImport(models.Model):
 
     name = fields.Char("File Name", required=True)
     excel_file = fields.Binary("Area Excel File")
-    date_uploaded = fields.Datetime("Date Uploaded")
+    date_uploaded = fields.Datetime()
 
     upload_id = fields.Many2one("res.users", "Uploaded by")
-    date_imported = fields.Datetime("Date Imported")
+    date_imported = fields.Datetime()
     import_id = fields.Many2one("res.users", "Imported by")
-    date_validated = fields.Datetime("Date Validated")
+    date_validated = fields.Datetime()
     validate_id = fields.Many2one("res.users", "Validated by")
     raw_data_ids = fields.One2many("spp.area.import.raw", "area_import_id", "Raw Data")
     tot_rows_imported = fields.Integer(
@@ -294,13 +294,13 @@ class OpenSPPAreaImportActivities(models.Model):
     _order = "row_index, level"
 
     area_import_id = fields.Many2one("spp.area.import", "Area Import", required=True)
-    admin_name = fields.Char("Admin Name")
-    admin_code = fields.Char("Admin Code")
-    admin_alt1 = fields.Char("Admin Alt1")
-    admin_alt2 = fields.Char("Admin Alt2")
-    admin_ref = fields.Char("Admin Ref")
-    level = fields.Integer("Level")
-    row_index = fields.Integer("Row Index")
+    admin_name = fields.Char()
+    admin_code = fields.Char()
+    admin_alt1 = fields.Char()
+    admin_alt2 = fields.Char()
+    admin_ref = fields.Char()
+    level = fields.Integer()
+    row_index = fields.Integer()
     lang_ids = fields.One2many("spp.area.import.lang", "raw_id", "Languages")
     remarks = fields.Text("Remarks/Errors")
     state = fields.Selection(
