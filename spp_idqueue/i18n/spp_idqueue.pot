@@ -125,6 +125,11 @@ msgid "ID"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:res.groups,name:spp_idqueue.group_g2p_id_distributor
+msgid "ID Distributor"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__id_pdf_filename
 msgid "ID File Name"
 msgstr ""
@@ -145,6 +150,11 @@ msgid "ID Queue"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:res.groups,name:spp_idqueue.group_g2p_id_requestor
+msgid "ID Requestor"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.actions.act_window,name:spp_idqueue.action_spp_idqueue
 #: model:ir.ui.menu,name:spp_idqueue.menu_spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.res_config_settings_view_form
@@ -154,6 +164,11 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.res_config_settings_view_form
 msgid "ID Requests Settings"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:res.groups,name:spp_idqueue.group_g2p_id_validator
+msgid "ID Validator"
 msgstr ""
 
 #. module: spp_idqueue
