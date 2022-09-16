@@ -82,7 +82,7 @@ class OpenG2PGenerateData(models.Model):
         if bank:
             bank_id = bank[0]
         else:
-            vals = {"name": "slcb", "bic": "1010101010"}
+            vals = {"name": "slcb", "bic": "10010010"}
             # TODO set the country
             bank_id = self.env["res.bank"].create(vals)
 
