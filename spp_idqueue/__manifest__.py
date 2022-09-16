@@ -13,6 +13,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": ["base", "g2p_registry_base", "spp_idpass"],
     "data": [
+        "security/g2p_security.xml",
         "security/ir.model.access.csv",
         "views/id_queue_view.xml",
         "wizard/request_id_wizard.xml",

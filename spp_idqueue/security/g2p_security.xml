@@ -1,0 +1,18 @@
+<odoo noupdate="0">
+
+    <record id="group_g2p_id_requestor" model="res.groups">
+        <field name="name">ID Requestor</field>
+        <field name="category_id" ref="g2p_registry_base.openg2p_module" />
+    </record>
+
+    <record id="group_g2p_id_validator" model="res.groups">
+        <field name="name">ID Validator</field>
+        <field name="category_id" ref="g2p_registry_base.openg2p_module" />
+    </record>
+
+    <record id="group_g2p_id_distributor" model="res.groups">
+        <field name="name">ID Distributor</field>
+        <field name="category_id" ref="g2p_registry_base.openg2p_module" />
+    </record>
+
+</odoo>
