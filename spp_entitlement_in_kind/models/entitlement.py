@@ -2,7 +2,6 @@
 import logging
 
 from odoo import _, fields, models
-from odoo.exceptions import UserError
 from odoo.tools import float_compare
 
 _logger = logging.getLogger(__name__)
@@ -47,112 +46,22 @@ class G2PInKindEntitlement(models.Model):
                 name += ": In-Kind (" + record.product_id.name + ")"
             record.name = name
 
-    def approve_entitlement(self):
-        amt = 0.0
-        state_err = 0
-        sw = 0
-        for rec in self:
-            if rec.state in ("draft", "pending_validation"):
-                if rec.is_cash_entitlement:
-                    fund_balance = (
-                        self.check_fund_balance(rec.cycle_id.program_id.id) - amt
-                    )
-                    if fund_balance >= rec.initial_amount:
-                        amt += rec.initial_amount
-                        # Prepare journal entry (account.move) via account.payment
-                        amount = rec.initial_amount
-                        new_service_fee = None
-                        if rec.transfer_fee > 0.0:
-                            amount -= rec.transfer_fee
-                            # Incurred Fees (transfer fees)
-                            payment = {
-                                "partner_id": rec.partner_id.id,
-                                "payment_type": "outbound",
-                                "amount": rec.transfer_fee,
-                                "currency_id": rec.journal_id.currency_id.id,
-                                "journal_id": rec.journal_id.id,
-                                "partner_type": "supplier",
-                                "ref": "Service Fee: Code: %s" % rec.code,
-                            }
-                            new_service_fee = self.env["account.payment"].create(
-                                payment
-                            )
-
-                        # Fund Disbursed (amount - transfer fees)
-                        payment = {
-                            "partner_id": rec.partner_id.id,
-                            "payment_type": "outbound",
-                            "amount": amount,
-                            "currency_id": rec.journal_id.currency_id.id,
-                            "journal_id": rec.journal_id.id,
-                            "partner_type": "supplier",
-                            "ref": "Fund disbursed to beneficiary: Code: %s" % rec.code,
-                        }
-                        new_payment = self.env["account.payment"].create(payment)
-
-                        rec.update(
-                            {
-                                "disbursement_id": new_payment.id,
-                                "service_fee_disbursement_id": new_service_fee
-                                and new_service_fee.id
-                                or None,
-                                "state": "approved",
-                                "date_approved": fields.Date.today(),
-                            }
-                        )
-                    else:
-                        raise UserError(
-                            _(
-                                "The fund for the program: %(program)s[%(fund).2f] "
-                                + "is insufficient for the entitlement: %(entitlement)s"
-                            )
-                            % {
-                                "program": rec.cycle_id.program_id.name,
-                                "fund": fund_balance,
-                                "entitlement": rec.code,
-                            }
-                        )
-
-                else:  # In-Kind Entitlements
-                    if rec.manage_inventory:
-                        rec._action_launch_stock_rule()
-                    rec.update(
-                        {
-                            "state": "approved",
-                            "date_approved": fields.Date.today(),
-                        }
-                    )
-
-            else:
-                state_err += 1
-                if sw == 0:
-                    sw = 1
-                    message = _(
-                        "<b>Entitle State Error! Entitlements not in 'pending validation' state:</b>\n"
-                    )
-                message += _("Program: %(program)s, Beneficiary: %(partner)s.\n") % {
-                    "program": rec.cycle_id.program_id.name,
-                    "partner": rec.partner_id.name,
-                }
-
-        if state_err > 0:
-            kind = "danger"
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": _("Entitlement"),
-                    "message": message,
-                    "sticky": True,
-                    "type": kind,
-                },
+    def _process_noncash_base_entitlement(self, rec):
+        # _logger.info("DEBUG: _process_noncash_base_entitlement: rec: %s", rec)
+        if rec.manage_inventory:
+            rec._action_launch_stock_rule()
+        rec.update(
+            {
+                "state": "approved",
+                "date_approved": fields.Date.today(),
             }
+        )
 
     def open_entitlement_form(self):
         if self.is_cash_entitlement:
             view = "g2p_programs.view_entitlement_form"
         else:  # In-kind Entitlement
-            view = "g2p_entitlement_in_kind.view_entitlement_inkind_form"
+            view = "spp_entitlement_in_kind.view_entitlement_inkind_form"
         return {
             "name": "Entitlement",
             "view_mode": "form",
