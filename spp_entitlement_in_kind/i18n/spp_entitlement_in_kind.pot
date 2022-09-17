@@ -20,14 +20,6 @@ msgid "0 means no limit"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
-#, python-format
-msgid ""
-"<b>Entitle State Error! Entitlements not in 'pending validation' "
-"state:</b>\n"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
 #: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_inkind
 msgid "Add a new entitlement!"
 msgstr ""
@@ -124,7 +116,6 @@ msgid "Enter the program name..."
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
 #: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
 #: model:ir.model,name:spp_entitlement_in_kind.model_g2p_entitlement
 #, python-format
@@ -359,12 +350,6 @@ msgid "Program:"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
-#, python-format
-msgid "Program: %(program)s, Beneficiary: %(partner)s.\n"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__qty
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__qty
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__qty
@@ -415,14 +400,6 @@ msgstr ""
 #. module: spp_entitlement_in_kind
 #: model:ir.model,name:spp_entitlement_in_kind.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
-#, python-format
-msgid ""
-"The fund for the program: %(program)s[%(fund).2f] is insufficient for the "
-"entitlement: %(entitlement)s"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
