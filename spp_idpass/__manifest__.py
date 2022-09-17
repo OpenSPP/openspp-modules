@@ -15,9 +15,12 @@
     "data": [
         "data/id_pass.xml",
         "views/registrant.xml",
+        "views/registrant_list_view.xml",
+        "views/id_type.xml",
         "security/ir.model.access.csv",
         "views/id_pass_view.xml",
         "wizard/issue_id_pass_wizard.xml",
+        "wizard/set_pin_wizard.xml",
     ],
     "assets": {},
     "demo": [],

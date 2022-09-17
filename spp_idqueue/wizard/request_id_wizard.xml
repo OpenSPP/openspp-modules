@@ -20,10 +20,14 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </div>
                     </div>
                     <group>
+
+                        <field name="target_type" invisible="1" />
                         <field
-                            name="template_id"
+                            name="id_type"
                             options="{'no_create_edit':True,'no_open':True,'no_create':True}"
                             attrs="{'required':[('registrant_id','=', True)]}"
+                            domain="[('target_type', '=', [target_type, 'both'])]"
+                            string="ID Type"
                         />
                         <field name="is_idpass" invisible="1" />
                         <field
@@ -31,6 +35,23 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             string="ID Pass Template"
                             options="{'no_create_edit':True,'no_open':True,'no_create':True}"
                             attrs="{'invisible':[('is_idpass','!=', True)], 'required':[('is_idpass','=', True)]}"
+                        />
+                        <field name="is_pds" invisible="1" />
+                        <field
+                            name="mii"
+                            attrs="{'invisible':[('is_pds','!=', True)], 'required':[('is_pds','=', True)]}"
+                        />
+                        <field
+                            name="iin"
+                            attrs="{'invisible':[('is_pds','!=', True)], 'required':[('is_pds','=', True)]}"
+                        />
+                        <field
+                            name="acc_number"
+                            attrs="{'invisible':[('is_pds','!=', True)], 'required':[('is_pds','=', True)]}"
+                        />
+                        <field
+                            name="pds_number"
+                            attrs="{'invisible':[('is_pds','!=', True)], 'required':[('is_pds','=', True)]}"
                         />
                     </group>
                 </sheet>

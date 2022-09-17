@@ -6,7 +6,7 @@ from datetime import datetime
 import requests
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -19,6 +19,25 @@ class OpenSPPRegistrant(models.Model):
     id_pdf = fields.Binary("ID PASS")
     id_pdf_filename = fields.Char("ID File Name")
     image_1920_filename = fields.Char("Image 1920 FileName")
+    pds_number = fields.Char(
+        string="PDS Number", compute="_compute_pds_number", store=True
+    )
+    with_pds = fields.Boolean(default=False, compute="_compute_with_pds", store=True)
+
+    @api.depends("reg_ids")
+    def _compute_pds_number(self):
+        for rec in self:
+            rec.pds_number = ""
+            for ids in rec.reg_ids:
+                if ids.id_type.id == self.env.ref("spp_idpass.id_type_pds_number").id:
+                    rec.pds_number = ids.value
+
+    @api.depends("pds_number")
+    def _compute_with_pds(self):
+        for rec in self:
+            rec.with_pds = False
+            if rec.pds_number:
+                rec.with_pds = True
 
     def open_issue_idpass_wiz(self):
         view = self.env.ref("spp_idpass.issue_id_pass_wizard_form_view")
@@ -42,11 +61,14 @@ class OpenSPPRegistrant(models.Model):
             id_pass_param = self.env["spp.id.pass"].search(
                 [("id", "=", vals["idpass"])]
             )
-
+        is_pds = False
         if id_pass_param:
-
             given_name = self.given_name
             identification_no = f"{self.id:06d}"
+
+            if vals["pds_number"]:
+                identification_no = vals["pds_number"]
+                is_pds = True
             birth_place = self.birth_place or ""
             gender = self.gender or ""
             surname = self.family_name
@@ -66,7 +88,8 @@ class OpenSPPRegistrant(models.Model):
                         [("id", "=", head_id)]
                     )
                     given_name = head_registrant.given_name
-                    identification_no = f"{head_registrant.id:09d}"
+                    if not vals["pds_number"]:
+                        identification_no = f"{head_registrant.id:09d}"
                     birth_place = head_registrant.birth_place or ""
                     gender = head_registrant.gender or ""
                     surname = head_registrant.family_name
@@ -163,16 +186,13 @@ class OpenSPPRegistrant(models.Model):
                 idqueue.id_pdf = self.id_pdf
                 idqueue.id_pdf_filename = self.id_pdf_filename
 
-                external_identifier = self.env["ir.model.data"].search(
-                    [("name", "=", "id_type_idpass"), ("model", "=", "g2p.id.type")]
-                )
-                _logger.info("External Identifier: %s" % external_identifier.res_id)
                 has_existing_idpass = self.env["g2p.reg.id"].search(
                     [
                         ("partner_id", "=", self.id),
-                        ("id_type", "=", external_identifier.res_id),
+                        ("id_type", "=", vals["id_type"]),
                     ]
                 )
+
                 if has_existing_idpass:
                     self.update(
                         {
@@ -181,8 +201,9 @@ class OpenSPPRegistrant(models.Model):
                                     1,
                                     has_existing_idpass[0].id,
                                     {
-                                        "id_type": external_identifier.res_id,
+                                        "id_type": vals["id_type"],
                                         "value": identification_no,
+                                        "is_pds": is_pds,
                                     },
                                 )
                             ]
@@ -196,8 +217,9 @@ class OpenSPPRegistrant(models.Model):
                                     0,
                                     0,
                                     {
-                                        "id_type": external_identifier.res_id,
+                                        "id_type": vals["id_type"],
                                         "value": identification_no,
+                                        "is_pds": is_pds,
                                     },
                                 )
                             ]

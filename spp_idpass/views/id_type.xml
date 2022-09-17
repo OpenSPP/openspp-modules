@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_id_type_tree_idpass" model="ir.ui.view">
+        <field name="name">view_id_type_tree_idpass</field>
+        <field name="model">g2p.id.type</field>
+        <field name="inherit_id" ref="g2p_registry_base.view_id_type_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+              <field name="target_type" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

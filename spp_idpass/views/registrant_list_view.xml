@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_groups_idpass_list" model="ir.ui.view">
+        <field name="name">view_groups_idpass_list</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_list_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+              <field name="pds_number" />
+              <field name="with_pds" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

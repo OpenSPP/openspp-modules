@@ -65,6 +65,36 @@
               <field name="id_pdf" id="id_pdf" string="ID PASS Card" filename="id_pdf_filename" />
               <field name="id_pdf_filename" invisible="1" />
             </xpath>
+
+            <xpath expr="//field[@name='reg_ids']/tree[1]" position="inside">
+              <field name="is_pds" invisible="1" />
+              <button
+                    name="open_set_pin_wiz"
+                    type="object"
+                    icon="fa-key"
+                    class="btn-info"
+                    attrs="{'invisible':[('is_pds','=', False)]}"
+                />
+            </xpath>
         </field>
     </record>
+
+    <record id="group_list_filter" model="ir.ui.view">
+        <field name="name">group_list_filter</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <search string="Search Group">
+                <field name="name" />
+                <field name="pds_number" />
+                <filter string="PDS Number" name="with_pds" domain="[('with_pds', '=', True)]" />
+            </search>
+        </field>
+    </record>
+
+    <record id="g2p_registry_group.action_groups_list" model="ir.actions.act_window">
+        <field name="search_view_id" ref="group_list_filter" />
+    </record>
+
+
 </odoo>

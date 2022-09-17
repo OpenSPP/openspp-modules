@@ -10,7 +10,7 @@ class OpenSPPIDQueue(models.Model):
     _description = "ID Queue"
 
     name = fields.Char("Request Name")
-    template_id = fields.Many2one("g2p.id.type", required=True)
+    id_type = fields.Many2one("g2p.id.type", required=True, string="ID Type")
     idpass_id = fields.Many2one("spp.id.pass")
     requested_by = fields.Many2one("res.users", required=True)
     approved_by = fields.Many2one("res.users")
@@ -32,6 +32,7 @@ class OpenSPPIDQueue(models.Model):
     )
     id_pdf = fields.Binary("ID PASS")
     id_pdf_filename = fields.Char("ID File Name")
+    pds_number = fields.Char("PDS Card Number")
 
     def approve(self):
         for rec in self:
@@ -41,14 +42,21 @@ class OpenSPPIDQueue(models.Model):
 
     def print(self):
         for rec in self:
-            if rec.template_id.id == self.env.ref("spp_idpass.id_type_idpass").id:
-                vals = {"idpass": self.idpass_id.id, "id_queue": self.id}
-                res_id = self.registrant_id.send_idpass_parameters(vals)
-
-                rec.date_printed = date.today()
-                rec.printed_by = self.env.user.id
-                rec.status = "printed"
-                return res_id
+            if (
+                rec.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id
+                or rec.id_type.id == self.env.ref("spp_idpass.id_type_pds_number").id
+            ):
+                vals = {
+                    "idpass": self.idpass_id.id,
+                    "id_queue": self.id,
+                    "pds_number": rec.pds_number or False,
+                    "id_type": rec.id_type.id,
+                }
+                self.registrant_id.send_idpass_parameters(vals)
+            rec.date_printed = date.today()
+            rec.printed_by = self.env.user.id
+            rec.status = "printed"
+            return
 
     def cancel(self):
         for rec in self:
