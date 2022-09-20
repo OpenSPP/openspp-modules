@@ -41,26 +41,27 @@ class OpenG2PGenerateData(models.Model):
         res_id = kwargs.get("res_id")
         res = self.browse(res_id)
         locales = [
-            "cs_CZ",
-            "en_US",
-            "de_CH",
+            # "cs_CZ",
+            # "en_US",
+            "id_ID",
+            # "de_CH",
             # "ar_AA",
-            "de_DE",
-            "en_GB",
-            "en_IE",
+            # "de_DE",
+            # "en_GB",
+            # "en_IE",
             # "en_TH",
-            "es_ES",
-            "es_MX",
-            "fr_FR",
-            "hi_IN",
-            "hr_HR",
-            "it_IT",
+            # "es_ES",
+            # "es_MX",
+            # "fr_FR",
+            # "hi_IN",
+            # "hr_HR",
+            # "it_IT",
             # "zh_CN",
         ]
         fake = Faker(locales)
 
         sex_choice_range = ["Female", "Male"] * 50 + ["Other"]
-        age_group_range = ["A", "C"] * 2 + ["E"]
+        age_group_range = ["A", "C", "N"] * 2 + ["E"]
         group_size_range = (
             list(range(1, 2)) * 2 + list(range(3, 5)) * 4 + list(range(6, 8))
         )
@@ -74,7 +75,7 @@ class OpenG2PGenerateData(models.Model):
         group_kind_household_id = self.env.ref(
             "g2p_registry_group.group_kind_household"
         ).id
-        group_kind_family_id = self.env.ref("g2p_registry_group.group_kind_family").id
+        # group_kind_family_id = self.env.ref("g2p_registry_group.group_kind_family").id
 
         num_groups = min(res.num_groups, 1000)
 
@@ -104,7 +105,7 @@ class OpenG2PGenerateData(models.Model):
                 fake[locale],
                 last_name,
                 sex_choice_range,
-                age_group_range,
+                ["A", "E"],
                 registration_date,
                 bank_id,
             )
@@ -115,7 +116,7 @@ class OpenG2PGenerateData(models.Model):
                 "demo." + hashlib.md5(f"{last_name} {i}".encode("UTF-8")).hexdigest()
             )
 
-            group_kind = random.choice([group_kind_household_id, group_kind_family_id])
+            group_kind = group_kind_household_id  # random.choice([group_kind_household_id, group_kind_family_id])
 
             bank_ids = []
             val = {
@@ -134,6 +135,7 @@ class OpenG2PGenerateData(models.Model):
                 "street2": fake[locale].street_name(),
                 "city": fake[locale].city(),
                 "zip": fake[locale].postcode(),
+                "area_id": random.choice([4, 51, 41]),
                 "bank_ids": bank_ids,
             }
 
@@ -239,7 +241,10 @@ class OpenG2PGenerateData(models.Model):
             fake.first_name_male() if sex == "Male" else fake.first_name_female()
         )
         different_last_name = random.randint(0, 100) < 10
-        if age_group == "C":
+        if age_group == "N":
+            date_start = datetime.datetime.now() - relativedelta(years=1)
+            date_end = datetime.datetime.now()
+        elif age_group == "C":
             date_start = datetime.datetime.now() - relativedelta(years=17)
             date_end = datetime.datetime.now()
         elif age_group == "A":
@@ -278,6 +283,7 @@ class OpenG2PGenerateData(models.Model):
 
         fullname = "{} {}".format(first_name, last_name)
         bank_ids = []
+        phone = ""
         # Do not give bank account to kids
         if age_group != "C":
             val = {
@@ -285,7 +291,8 @@ class OpenG2PGenerateData(models.Model):
                 "acc_number": str(random.randint(1, 999999999)),
             }
             bank_ids.append([0, 0, val])
-        return {
+            phone = fake.phone_number()
+        data = {
             "name": fullname,
             "given_name": first_name,
             "family_name": last_name,
@@ -293,6 +300,7 @@ class OpenG2PGenerateData(models.Model):
             "birthdate": dob,
             "is_registrant": True,
             "is_group": False,
+            "phone": phone,
             "registration_date": registration_date,
             "z_cst_indv_cyclone_aug_2022_injured": injured,
             "z_cst_indv_disability_level": disability_level,
@@ -305,3 +313,8 @@ class OpenG2PGenerateData(models.Model):
             "zip": fake.postcode(),
             "bank_ids": bank_ids,
         }
+
+        if phone:
+            data["phone_number_ids"] = [[0, 0, {"phone_no": phone}]]
+
+        return data
