@@ -2,3 +2,4 @@
 
 from . import id_pass
 from . import registrant
+from . import id_type
