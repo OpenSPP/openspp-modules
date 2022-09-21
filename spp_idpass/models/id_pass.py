@@ -19,3 +19,4 @@ class OpenSPPIDPass(models.Model):
         default="years",
     )
     is_active = fields.Boolean("Active")
+    id_type = fields.Many2one("g2p.id.type")

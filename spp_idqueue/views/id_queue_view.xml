@@ -7,7 +7,7 @@
             <tree create="false">
                 <field name="name" invisible="1" />
                 <field name="registrant_id" />
-                <field name="template_id" />
+                <field name="id_type" string="ID Type" />
                 <field name="requested_by" />
                 <field name="date_requested" />
                 <field name="date_printed" />

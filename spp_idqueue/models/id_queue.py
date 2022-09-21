@@ -10,7 +10,7 @@ class OpenSPPIDQueue(models.Model):
     _description = "ID Queue"
 
     name = fields.Char("Request Name")
-    template_id = fields.Many2one("g2p.id.type", required=True)
+    id_type = fields.Many2one("g2p.id.type", required=True)
     idpass_id = fields.Many2one("spp.id.pass")
     requested_by = fields.Many2one("res.users", required=True)
     approved_by = fields.Many2one("res.users")
@@ -41,7 +41,7 @@ class OpenSPPIDQueue(models.Model):
 
     def print(self):
         for rec in self:
-            if rec.template_id.id == self.env.ref("spp_idpass.id_type_idpass").id:
+            if rec.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id:
                 vals = {"idpass": self.idpass_id.id, "id_queue": self.id}
                 res_id = self.registrant_id.send_idpass_parameters(vals)
 

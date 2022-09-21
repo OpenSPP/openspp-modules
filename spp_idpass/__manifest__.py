@@ -17,6 +17,7 @@
         "views/registrant.xml",
         "security/ir.model.access.csv",
         "views/id_pass_view.xml",
+        "views/id_type.xml",
         "wizard/issue_id_pass_wizard.xml",
     ],
     "assets": {},

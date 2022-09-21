@@ -20,10 +20,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </div>
                     </div>
                     <group>
+                        <field name="target_type" invisible="1" />
                         <field
-                            name="template_id"
+                            name="id_type"
                             options="{'no_create_edit':True,'no_open':True,'no_create':True}"
                             attrs="{'required':[('registrant_id','=', True)]}"
+                            domain="[('target_type', '=', [target_type, 'both'])]"
+                            string="ID Type"
                         />
                         <field name="is_idpass" invisible="1" />
                         <field
