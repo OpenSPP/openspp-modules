@@ -167,6 +167,12 @@ msgid "ID Requests Settings"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "ID Type"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:res.groups,name:spp_idqueue.group_g2p_id_validator
 msgid "ID Validator"
 msgstr ""
@@ -174,6 +180,12 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__idpass_id
 msgid "IDPass ID"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__id_type
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__id_type
+msgid "Id Type"
 msgstr ""
 
 #. module: spp_idqueue
@@ -263,9 +275,8 @@ msgid "Status"
 msgstr ""
 
 #. module: spp_idqueue
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__template_id
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__template_id
-msgid "Template"
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__target_type
+msgid "Target Type"
 msgstr ""
 
 #. module: spp_idqueue
