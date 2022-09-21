@@ -1,4 +1,5 @@
 # Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+import collections
 import datetime
 import logging
 
@@ -87,6 +88,69 @@ class G2PGroup(models.Model):
         "extracted from demographic data of HH adult members",
         store=True,
     )
+
+    z_ind_grp_num_single_child_less_36m_with_birth_cert = fields.Integer(
+        "Number of Children of less than 36 months old with birth certificate",
+        compute="_compute_ind_grp_single_child_less_36m_with_birth_cert",
+        store=True,
+    )
+
+    z_ind_grp_num_twin_less_36m_with_birth_cert = fields.Integer(
+        "Number of twins of less than 36 months old with birth certificate",
+        compute="_compute_ind_grp_twin_less_36m_with_birth_cert",
+        store=True,
+    )
+
+    z_ind_grp_num_triplets_more_less_36m_with_birth_cert = fields.Integer(
+        "Number of triplets or more of less than 36 months old with birth certificate",
+        compute="_compute_ind_grp_triplets_more_less_36m_with_birth_cert",
+        store=True,
+    )
+
+    def _compute_ind_grp_single_child_less_36m_with_birth_cert(self):
+        self.z_ind_grp_num_single_child_less_36m_with_birth_cert = (
+            self._count_child_by_group(1)
+        )
+
+    def _compute_ind_grp_twin_less_36m_with_birth_cert(self):
+        self.z_ind_grp_num_twin_less_36m_with_birth_cert = self._count_child_by_group(2)
+
+    def _compute_ind_grp_triplets_more_less_36m_with_birth_cert(self):
+        self.z_ind_grp_num_triplets_more_less_36m_with_birth_cert = (
+            self._count_child_by_group(3)
+        )
+
+    def _count_child_by_group(self, group):
+        # basic implementation
+        now = datetime.datetime.now()
+        children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
+        count_by_type = {}
+        for rec in self:
+            domain = [
+                ("birthdate", ">=", children),
+                ("z_cst_indv_has_birth_certificate", "=", True),
+            ]
+
+            children_birthdate = rec.group_membership_ids.individual.filtered_domain(
+                domain
+            ).mapped("birthdate")
+            # basic identifying of twins
+            children_birthdate = sorted(children_birthdate)
+            children_birthdate = map(
+                lambda x: x.strftime("%Y-%m-%d"), children_birthdate
+            )
+            count_by_date = collections.Counter(children_birthdate)
+
+            for _date, count in count_by_date.items():
+                count_by_type.setdefault(count, 0)
+                count_by_type[count] += 1
+        if group == 3:
+            return (
+                sum(count_by_type.values())
+                - count_by_type.get(1, 0)
+                - count_by_type.get(2, 0)
+            )
+        return count_by_type.get(group, 0)
 
     def _compute_ind_grp_num_children(self):
         """

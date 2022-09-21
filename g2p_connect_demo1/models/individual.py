@@ -9,6 +9,7 @@ _logger = logging.getLogger(__name__)
 class G2PIndividual(models.Model):
     _inherit = "res.partner"
 
+    # Demo 1
     z_cst_indv_cyclone_aug_2022_injured = fields.Boolean(
         "Injured during Cyclone Aug 2022"
     )
@@ -22,3 +23,6 @@ class G2PIndividual(models.Model):
     z_cst_indv_cyclone_aug_2022_lost_primary_source_income = fields.Boolean(
         "Lost primary source income during Cyclone Aug 2022"
     )
+
+    # Demo 2
+    z_cst_indv_has_birth_certificate = fields.Boolean("Has birth certificate")
