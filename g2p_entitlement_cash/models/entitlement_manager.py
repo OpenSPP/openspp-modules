@@ -155,6 +155,96 @@ class G2PCashEntitlementManager(models.Model):
         # move the funds from the program's wallet to the wallet of each Beneficiary that are validated
         pass
 
+    def is_cash_entitlement(self):
+        return True
+
+    def approve_entitlements(self, entitlements):
+        amt = 0.0
+        state_err = 0
+        message = ""
+        sw = 0
+        for rec in entitlements:
+            if rec.state in ("draft", "pending_validation"):
+                fund_balance = self.check_fund_balance(rec.cycle_id.program_id.id) - amt
+                if fund_balance >= rec.initial_amount:
+                    amt += rec.initial_amount
+                    # Prepare journal entry (account.move) via account.payment
+                    amount = rec.initial_amount
+                    new_service_fee = None
+                    if rec.transfer_fee > 0.0:
+                        amount -= rec.transfer_fee
+                        # Incurred Fees (transfer fees)
+                        payment = {
+                            "partner_id": rec.partner_id.id,
+                            "payment_type": "outbound",
+                            "amount": rec.transfer_fee,
+                            "currency_id": rec.journal_id.currency_id.id,
+                            "journal_id": rec.journal_id.id,
+                            "partner_type": "supplier",
+                            "ref": "Service Fee: Code: %s" % rec.code,
+                        }
+                        new_service_fee = self.env["account.payment"].create(payment)
+
+                    # Fund Disbursed (amount - transfer fees)
+                    payment = {
+                        "partner_id": rec.partner_id.id,
+                        "payment_type": "outbound",
+                        "amount": amount,
+                        "currency_id": rec.journal_id.currency_id.id,
+                        "journal_id": rec.journal_id.id,
+                        "partner_type": "supplier",
+                        "ref": "Fund disbursed to beneficiary: Code: %s" % rec.code,
+                    }
+                    new_payment = self.env["account.payment"].create(payment)
+
+                    rec.update(
+                        {
+                            "disbursement_id": new_payment.id,
+                            "service_fee_disbursement_id": new_service_fee
+                            and new_service_fee.id
+                            or None,
+                            "state": "approved",
+                            "date_approved": fields.Date.today(),
+                        }
+                    )
+                else:
+                    raise UserError(
+                        _(
+                            "The fund for the program: %(program)s [%(fund).2f] "
+                            + "is insufficient for the entitlement: %(entitlement)s"
+                        )
+                        % {
+                            "program": rec.cycle_id.program_id.name,
+                            "fund": fund_balance,
+                            "entitlement": rec.code,
+                        }
+                    )
+
+            else:
+                state_err += 1
+                if sw == 0:
+                    sw = 1
+                    message = _(
+                        "<b>Entitlement State Error! Entitlements not in 'pending validation' state:</b>\n"
+                    )
+                message += _("Program: %(prg)s, Beneficiary: %(partner)s.\n") % {
+                    "prg": rec.cycle_id.program_id.name,
+                    "partner": rec.partner_id.name,
+                }
+
+        return (state_err, message)
+
+    def open_entitlement_form(self, rec):
+        return {
+            "name": "Cash Entitlement",
+            "view_mode": "form",
+            "res_model": "g2p.entitlement",
+            "res_id": rec.id,
+            "view_id": self.env.ref("g2p_programs.view_entitlement_form").id,
+            "type": "ir.actions.act_window",
+            "target": "new",
+        }
+
 
 class G2PCashEntitlementItem(models.Model):
     _name = "g2p.program.entitlement.manager.cash.item"

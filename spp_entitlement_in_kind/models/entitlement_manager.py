@@ -148,6 +148,51 @@ class G2PInKindEntitlementManager(models.Model):
         # move the funds from the program's wallet to the wallet of each Beneficiary that are validated
         pass
 
+    def is_cash_entitlement(self):
+        return False
+
+    def approve_entitlements(self, entitlements):
+        state_err = 0
+        message = ""
+        sw = 0
+        for rec in entitlements:
+            if rec.state in ("draft", "pending_validation"):
+                # _logger.info("DEBUG: _process_noncash_base_entitlement: rec: %s", rec)
+                if rec.manage_inventory:
+                    rec._action_launch_stock_rule()
+                rec.update(
+                    {
+                        "state": "approved",
+                        "date_approved": fields.Date.today(),
+                    }
+                )
+            else:
+                state_err += 1
+                if sw == 0:
+                    sw = 1
+                    message = _(
+                        "<b>Entitlement State Error! Entitlements not in 'pending validation' state:</b>\n"
+                    )
+                message += _("Program: %(prg)s, Beneficiary: %(partner)s.\n") % {
+                    "prg": rec.cycle_id.program_id.name,
+                    "partner": rec.partner_id.name,
+                }
+
+        return (state_err, message)
+
+    def open_entitlement_form(self, rec):
+        return {
+            "name": "Entitlement",
+            "view_mode": "form",
+            "res_model": "g2p.entitlement",
+            "res_id": rec.id,
+            "view_id": self.env.ref(
+                "spp_entitlement_in_kind.view_entitlement_inkind_form"
+            ).id,
+            "type": "ir.actions.act_window",
+            "target": "new",
+        }
+
 
 class G2PInKindEntitlementItem(models.Model):
     _name = "g2p.program.entitlement.manager.inkind.item"
