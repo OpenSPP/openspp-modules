@@ -1,4 +1,4 @@
-<odoo noupdate="0">
+<odoo noupdate="1">
     <!-- ID Type: ID Pass -->
     <record id="id_type_idpass" model="g2p.id.type">
         <field name="name">ID PASS Lite</field>
