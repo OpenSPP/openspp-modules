@@ -234,6 +234,26 @@ class G2PCashEntitlementManager(models.Model):
 
         return (state_err, message)
 
+    def open_entitlements_form(self, cycle):
+        self.ensure_one()
+        action = {
+            "name": _("Cycle Cash Entitlements"),
+            "type": "ir.actions.act_window",
+            "res_model": "g2p.entitlement",
+            "context": {
+                "create": False,
+                "default_cycle_id": cycle.id,
+                # "search_default_approved_state": 1,
+            },
+            "view_mode": "list,form",
+            "views": [
+                [self.env.ref("g2p_programs.view_entitlement_tree").id, "tree"],
+                [self.env.ref("g2p_programs.view_entitlement_form").id, "form"],
+            ],
+            "domain": [("cycle_id", "=", cycle.id)],
+        }
+        return action
+
     def open_entitlement_form(self, rec):
         return {
             "name": "Cash Entitlement",
