@@ -24,6 +24,9 @@ class G2PCashEntitlementManager(models.Model):
     ]
     _description = "Cash Entitlement Manager"
 
+    # Set to True so that the UI will display the payment management components
+    IS_CASH_ENTITLEMENT = True
+
     # Cash Entitlement Manager
     evaluate_one_item = fields.Boolean(default=False)
     entitlement_item_ids = fields.One2many(
@@ -155,9 +158,6 @@ class G2PCashEntitlementManager(models.Model):
         # move the funds from the program's wallet to the wallet of each Beneficiary that are validated
         pass
 
-    def is_cash_entitlement(self):
-        return True
-
     def approve_entitlements(self, entitlements):
         amt = 0.0
         state_err = 0
@@ -225,7 +225,7 @@ class G2PCashEntitlementManager(models.Model):
                 if sw == 0:
                     sw = 1
                     message = _(
-                        "<b>Entitlement State Error! Entitlements not in 'pending validation' state:</b>\n"
+                        "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
                     )
                 message += _("Program: %(prg)s, Beneficiary: %(partner)s.\n") % {
                     "prg": rec.cycle_id.program_id.name,

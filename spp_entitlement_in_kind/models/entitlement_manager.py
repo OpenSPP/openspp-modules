@@ -24,6 +24,9 @@ class G2PInKindEntitlementManager(models.Model):
     ]
     _description = "In-Kind Entitlement Manager"
 
+    # Set to False so that the UI will not display the payment management components
+    IS_CASH_ENTITLEMENT = False
+
     @api.model
     def _default_warehouse_id(self):
         return self.env["stock.warehouse"].search(
@@ -148,9 +151,6 @@ class G2PInKindEntitlementManager(models.Model):
         # move the funds from the program's wallet to the wallet of each Beneficiary that are validated
         pass
 
-    def is_cash_entitlement(self):
-        return False
-
     def approve_entitlements(self, entitlements):
         state_err = 0
         message = ""
@@ -171,7 +171,7 @@ class G2PInKindEntitlementManager(models.Model):
                 if sw == 0:
                     sw = 1
                     message = _(
-                        "<b>Entitlement State Error! Entitlements not in 'pending validation' state:</b>\n"
+                        "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
                     )
                 message += _("Program: %(prg)s, Beneficiary: %(partner)s.\n") % {
                     "prg": rec.cycle_id.program_id.name,
