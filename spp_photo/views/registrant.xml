@@ -11,7 +11,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='other']" position="before">
-                <page string="Photos">
+                <page string="Photos" name="page_photos">
                     <field
                         name="image_ids"
                         nolabel="1"
@@ -31,7 +31,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='other']" position="before">
-                <page string="Photos">
+                <page string="Photos" name="page_photos">
                     <field
                         name="image_ids"
                         nolabel="1"
