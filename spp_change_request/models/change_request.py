@@ -20,8 +20,11 @@ class ChangeRequestBase(models.Model):
     request_type = fields.Selection(
         string="Request Type", selection="_selection_request_type_ref_id", required=True
     )
-    group_id = fields.Many2one(
-        "res.partner", "Group", domain=[("is_group", "=", True)], required=True
+    registrant_id = fields.Many2one(
+        "res.partner",
+        "Registrant",
+        domain=[("is_registrant", "=", True)],
+        required=True,
     )
     request_type_ref_id = fields.Reference(
         string="Change Request Template", selection="_selection_request_type_ref_id"
@@ -48,7 +51,7 @@ class ChangeRequestBase(models.Model):
     def _selection_request_type_ref_id(self):
         return []
 
-    def open_change_request_form(self):
+    def open_change_request_form(self, mode="readonly"):
         self.ensure_one()
         if self.request_type_ref_id:
             # Get the res_model and res_id from the request_type_ref_id (reference field)
@@ -58,6 +61,9 @@ class ChangeRequestBase(models.Model):
             res_id = self.request_type_ref_id.id
             if res_id:
                 action = self.env[res_model].get_formview_action()
+                context = {
+                    "create": False,
+                }
                 action.update(
                     {
                         "views": [
@@ -65,8 +71,8 @@ class ChangeRequestBase(models.Model):
                         ],
                         "res_id": res_id,
                         "target": "new",
-                        "context": self.env.context,
-                        "flags": {"mode": "readonly"},
+                        "context": context,
+                        "flags": {"mode": mode},
                     }
                 )
                 return action
@@ -87,7 +93,9 @@ class ChangeRequestBase(models.Model):
             if rec.state == "draft":
                 # Set the request_type_ref_id
                 res_model = rec.request_type
-                ref_id = self.env[res_model].create({"group_id": rec.group_id.id})
+                ref_id = self.env[res_model].create(
+                    {"registrant_id": rec.registrant_id.id}
+                )
                 request_type_ref_id = f"{res_model},{ref_id.id}"
                 _logger.debug("DEBUG! request_type_ref_id: %s", request_type_ref_id)
                 rec.update(
@@ -96,7 +104,7 @@ class ChangeRequestBase(models.Model):
                     }
                 )
                 # Open Request Form
-                return rec.open_change_request_form()
+                return rec.open_change_request_form(mode="edit")
             else:
                 raise ValidationError(
                     _("The change request to be created must be in draft state.")

@@ -20,6 +20,7 @@
         "data/sequences.xml",
         "views/main_view.xml",
         "views/change_request_view.xml",
+        "views/types/change_request_add_children_view.xml",
     ],
     "assets": {},
     "demo": [],
