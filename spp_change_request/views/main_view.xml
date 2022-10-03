@@ -1,0 +1,8 @@
+<!--
+Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <menuitem id="g2p_change_request_menu_root" name="Change Request" sequence="1" />
+
+</odoo>
