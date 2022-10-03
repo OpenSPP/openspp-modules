@@ -8,7 +8,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="priority">0</field>
         <field name="arch" type="xml">
             <tree sample="1">
-                <field name="registrant_id" />
+                <field name="change_request_id" />
+                <field name="registrant_id" string="Group" />
                 <field name="family_name" />
                 <field name="given_name" />
                 <field name="addl_name" />
@@ -35,6 +36,14 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <field name="registrant_id" readonly="1" />
                         </h1>
                         <div class="o_row">
+                            <h2>
+                                <field
+                                    name="change_request_id"
+                                    readonly="1"
+                                    options="{'no_open':True}"
+                                    string="Group"
+                                />
+                            </h2>
                         </div>
                     </div>
                     <group colspan="4" col="4" string="">
