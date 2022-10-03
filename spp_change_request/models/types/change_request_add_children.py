@@ -19,11 +19,28 @@ class ChangeRequestAddChildren(models.Model):
     _name = "spp.change.request.add.children"
     _inherit = "spp.change.request.source.mixin"
     _description = "Add Children Change Request Type"
-    _rec_name = "group_id"
+    _rec_name = "registrant_id"
 
-    group_id = fields.Many2one(
-        "res.partner", "Group", domain=[("is_group", "=", True)], required=True
+    registrant_id = fields.Many2one(
+        "res.partner",
+        "Group",
+        domain=[("is_registrant", "=", True), ("is_group", "=", True)],
+        required=True,
     )
-    children_ids = fields.Many2many(
-        "res.partner", string="Children to be added to group"
+
+    # Registrant Fields
+    family_name = fields.Char(required=True)
+    given_name = fields.Char(required=True)
+    addl_name = fields.Char("Additional Name")
+    birth_place = fields.Char()
+    birthdate_not_exact = fields.Boolean()
+    birthdate = fields.Date("Date of Birth")
+    gender = fields.Selection(
+        [("Female", "Female"), ("Male", "Male"), ("Other", "Other")],
+    )
+    address = fields.Text()
+
+    # Group Membership Fields
+    kind = fields.Many2many(
+        "g2p.group.membership.kind", string="Group Membership Kinds"
     )

@@ -10,13 +10,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
             <tree sample="1">
                 <field name="name" />
                 <field name="date_requested" />
-                <field name="write_uid" string="Requested By" />
+                <field name="write_uid" string="Requested By" widget="many2one_avatar_user" />
                 <field name="request_type" />
-                <field name="group_id" />
+                <field name="registrant_id" />
                 <field name="request_type_ref_id" invisible="1" />
-                <field name="validator_id" />
+                <field name="validator_id" widget="many2one_avatar_user" />
                 <field name="date_validated" />
-                <field name="approver_id" />
+                <field name="approver_id" widget="many2one_avatar_user" />
                 <field name="date_approved" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field
@@ -44,7 +44,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         name="submit_request"
                         type="object"
                         string="Submit"
-                        icon="fa-envelope-o"
+                        icon="fa-paper-plane"
                         class="btn-primary"
                         states="draft"
                     />
@@ -52,7 +52,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         name="validate_request"
                         type="object"
                         string="Validate"
-                        icon="fa-undo"
+                        icon="fa-check-square-o"
                         class="btn-warning"
                         states="submitted"
                     />
@@ -68,7 +68,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         name="cancel_request"
                         type="object"
                         string="Cancel"
-                        icon="fa-download"
+                        icon="fa-ban"
                         class="btn-danger"
                         states="validated"
                     />
@@ -120,10 +120,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <h2>
                             <field name="request_type" attrs="{'readonly':[('state','!=','draft')]}" />
                         </h2>
-                        <label for="group_id" string="Group:" />
+                        <label for="registrant_id" string="Registrant:" />
                         <h2>
                             <field
-                                name="group_id"
+                                name="registrant_id"
                                 options="{'no_create': True,'no_open':True}"
                                 attrs="{'readonly':[('state','!=','draft')]}"
                                 class="oe_inline"
@@ -135,6 +135,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 icon="fa-external-link "
                                 class="btn-primary"
                                 attrs="{'invisible':[('request_type_ref_id','!=',False)]}"
+                                style="margin-left: 10px;"
                             />
                             <button
                                 name="open_change_request_form"
@@ -143,6 +144,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 icon="fa-external-link "
                                 class="btn-success"
                                 attrs="{'invisible':[('request_type_ref_id','=',False)]}"
+                                style="margin-left: 10px;"
                             />
                         </h2>
                         <div class="o_row">
@@ -191,7 +193,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="arch" type="xml">
             <search string="Search Change Request">
                 <field name="name" />
-                <field name="group_id" />
+                <field name="registrant_id" />
                 <field name="request_type_ref_id" />
                 <field name="write_uid" string="Submitted By" />
                 <field name="validator_id" />
