@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models
+from odoo import Command, api, fields, models
 
 
 class ChangeRequestTypeCustomAddChildren(models.Model):
@@ -19,14 +19,6 @@ class ChangeRequestAddChildren(models.Model):
     _name = "spp.change.request.add.children"
     _inherit = "spp.change.request.source.mixin"
     _description = "Add Children Change Request Type"
-    _rec_name = "registrant_id"
-
-    registrant_id = fields.Many2one(
-        "res.partner",
-        "Group",
-        domain=[("is_registrant", "=", True), ("is_group", "=", True)],
-        required=True,
-    )
 
     # Registrant Fields
     family_name = fields.Char(required=True)
@@ -44,3 +36,33 @@ class ChangeRequestAddChildren(models.Model):
     kind = fields.Many2many(
         "g2p.group.membership.kind", string="Group Membership Kinds"
     )
+
+    def update_live_data(self):
+        self.ensure_one()
+        # Create a new individual (res.partner)
+        kinds = []
+        for rec in self.kind:
+            kinds.append(Command.link(rec.id))
+        individual_id = self.env["res.partner"].create(
+            {
+                "is_registrant": True,
+                "is_group": False,
+                "name": self._get_name(),
+                "family_name": self.family_name,
+                "given_name": self.given_name,
+                "addl_name": self.addl_name,
+                "birth_place": self.birth_place,
+                "birthdate_not_exact": self.birthdate_not_exact,
+                "birthdate": self.birthdate,
+                "gender": self.gender,
+                "address": self.address,
+            }
+        )
+        # Add to group
+        self.env["g2p.group.membership"].create(
+            {
+                "group": self.registrant_id.id,
+                "individual": individual_id.id,
+                "kind": kinds,
+            }
+        )

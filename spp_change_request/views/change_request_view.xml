@@ -8,6 +8,14 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <tree sample="1">
+                <button
+                    name="open_change_request_form"
+                    type="object"
+                    help="Open Details"
+                    icon="fa-external-link "
+                    class="btn-success"
+                    attrs="{'invisible':[('request_type_ref_id','=',False)]}"
+                />
                 <field name="name" />
                 <field name="date_requested" />
                 <field name="write_uid" string="Requested By" widget="many2one_avatar_user" />
@@ -60,7 +68,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         name="approve_request"
                         type="object"
                         string="Approve"
-                        icon="fa-approve"
+                        icon="fa-thumbs-o-up"
                         class="btn-success"
                         states="validated"
                     />
@@ -131,14 +139,14 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <button
                                 name="create_request_detail"
                                 type="object"
-                                string="Request Detail"
+                                string="Request Details"
                                 icon="fa-external-link "
                                 class="btn-primary"
                                 attrs="{'invisible':[('request_type_ref_id','!=',False)]}"
                                 style="margin-left: 10px;"
                             />
                             <button
-                                name="open_change_request_form"
+                                name="open_request_detail"
                                 type="object"
                                 string="Open Details"
                                 icon="fa-external-link "

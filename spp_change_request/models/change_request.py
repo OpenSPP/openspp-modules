@@ -51,7 +51,7 @@ class ChangeRequestBase(models.Model):
     def _selection_request_type_ref_id(self):
         return []
 
-    def open_change_request_form(self, mode="readonly"):
+    def open_change_request_form(self, target="current", mode="readonly"):
         self.ensure_one()
         if self.request_type_ref_id:
             # Get the res_model and res_id from the request_type_ref_id (reference field)
@@ -70,7 +70,7 @@ class ChangeRequestBase(models.Model):
                             (self.env[res_model].get_request_type_view_id(), "form")
                         ],
                         "res_id": res_id,
-                        "target": "new",
+                        "target": target,
                         "context": context,
                         "flags": {"mode": mode},
                     }
@@ -88,13 +88,18 @@ class ChangeRequestBase(models.Model):
             },
         }
 
+    def open_request_detail(self):
+        for rec in self:
+            # Open Request Form
+            return rec.open_change_request_form(target="new", mode="edit")
+
     def create_request_detail(self):
         for rec in self:
             if rec.state == "draft":
                 # Set the request_type_ref_id
                 res_model = rec.request_type
                 ref_id = self.env[res_model].create(
-                    {"registrant_id": rec.registrant_id.id}
+                    {"registrant_id": rec.registrant_id.id, "change_request_id": rec.id}
                 )
                 request_type_ref_id = f"{res_model},{ref_id.id}"
                 _logger.debug("DEBUG! request_type_ref_id: %s", request_type_ref_id)
@@ -104,7 +109,7 @@ class ChangeRequestBase(models.Model):
                     }
                 )
                 # Open Request Form
-                return rec.open_change_request_form(mode="edit")
+                return rec.open_change_request_form(target="new", mode="edit")
             else:
                 raise ValidationError(
                     _("The change request to be created must be in draft state.")
@@ -129,19 +134,13 @@ class ChangeRequestBase(models.Model):
     def validate_request(self):
         for rec in self:
             if rec.state == "submitted":
-                if rec.validator_id:
-                    rec.update(
-                        {
-                            "date_validated": fields.Datetime.now(),
-                            "state": "validated",
-                        }
-                    )
-                else:
-                    raise ValidationError(
-                        _(
-                            "Validation failed! This request is not assigned to a validator."
-                        )
-                    )
+                rec.update(
+                    {
+                        "validator_id": self.env.user,
+                        "date_validated": fields.Datetime.now(),
+                        "state": "validated",
+                    }
+                )
             else:
                 raise ValidationError(
                     _("The request to be validated must be in submitted state.")
@@ -150,19 +149,16 @@ class ChangeRequestBase(models.Model):
     def approve_request(self):
         for rec in self:
             if rec.state == "validated":
-                if rec.approver_id:
-                    rec.update(
-                        {
-                            "date_approved": fields.Datetime.now(),
-                            "state": "approved",
-                        }
-                    )
-                else:
-                    raise ValidationError(
-                        _(
-                            "Approval failed! This request is not assigned to a approver."
-                        )
-                    )
+                # Apply Changes to Live Data
+                rec.request_type_ref_id.update_live_data()
+                # Update CR record
+                rec.update(
+                    {
+                        "approver_id": self.env.user,
+                        "date_approved": fields.Datetime.now(),
+                        "state": "approved",
+                    }
+                )
             else:
                 raise ValidationError(
                     _("The request to be approved must be in validated state.")
