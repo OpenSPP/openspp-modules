@@ -6,13 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-10-06 10:22+0000\n"
+"Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
+"Language-Team: French <https://translate.openspp.org/projects/openspp/"
+"spp_idqueue/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_idqueue_form
@@ -38,12 +41,12 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_id_queue__status__cancelled
 msgid "Cancelled"
-msgstr ""
+msgstr "Annulé"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,help:spp_idqueue.field_res_config_settings__auto_approve_id_request
@@ -64,7 +67,7 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model,name:spp_idqueue.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #. module: spp_idqueue
 #: model_terms:ir.actions.act_window,help:spp_idqueue.action_spp_idqueue
@@ -75,13 +78,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__create_uid
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__create_date
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé sur"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__date_approved
@@ -107,7 +110,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__display_name
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Afficher un nom"
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_id_queue__status__distributed
@@ -118,7 +121,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
@@ -162,24 +165,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue____last_update
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Modification le"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__write_uid
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__write_date
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Mise à jour le"
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_id_queue__status__new
 msgid "New"
-msgstr ""
+msgstr "Nouveau"
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_id_queue__status__printed
@@ -195,7 +198,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__registrant_id
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
 msgid "Registrant"
-msgstr ""
+msgstr "Inscrit"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__registrant_id
@@ -232,7 +235,7 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__status
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__template_id
