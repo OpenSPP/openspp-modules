@@ -6,13 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-10-06 10:22+0000\n"
+"Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
+"Language-Team: French <https://translate.openspp.org/projects/openspp/"
+"spp_photo/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_photo
 #: model:ir.model,name:spp_photo.model_base_multi_image_image
@@ -22,22 +25,22 @@ msgstr ""
 #. module: spp_photo
 #: model:ir.model,name:spp_photo.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé sur"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Afficher un nom"
 
 #. module: spp_photo
 #: model:ir.model.fields.selection,name:spp_photo.selection__base_multi_image_image__storage__db
@@ -48,7 +51,7 @@ msgstr ""
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: spp_photo
 #: model_terms:ir.ui.view,arch_db:spp_photo.image_form_view
@@ -64,17 +67,17 @@ msgstr ""
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Modification le"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Mise à jour le"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_res_partner__image_main
@@ -89,7 +92,7 @@ msgstr ""
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__name
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: spp_photo
 #: model:ir.model,name:spp_photo.model_spp_photo_category
