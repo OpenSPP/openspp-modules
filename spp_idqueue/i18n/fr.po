@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-10-06 10:22+0000\n"
+"PO-Revision-Date: 2022-10-07 13:22+0000\n"
 "Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_idqueue/fr/>\n"
@@ -21,22 +21,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_idqueue_form
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_individuals_idqueue_form
 msgid "<span class=\"o_stat_text\">Request</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Demande</span>"
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_id_queue__status__approved
 msgid "Approved"
-msgstr ""
+msgstr "Approuvé"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__approved_by
 msgid "Approved By"
-msgstr ""
+msgstr "Approuvé par"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_res_config_settings__auto_approve_id_request
 msgid "Auto-approve ID Requests"
-msgstr ""
+msgstr "Approuver automatiquement les demandes d'identification"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
@@ -53,16 +53,20 @@ msgstr "Annulé"
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.res_config_settings_view_form
 msgid "Check if you want to auto-approve ID requests"
 msgstr ""
+"Cochez si vous souhaitez approuver automatiquement les demandes "
+"d'identification"
 
 #. module: spp_idqueue
 #: model_terms:ir.actions.act_window,help:spp_idqueue.action_spp_idqueue
 msgid "Click the create button to enter the information of the ID Queue."
 msgstr ""
+"Cliquez sur le bouton Créer pour entrer les informations de la file "
+"d'attente d'ID."
 
 #. module: spp_idqueue
 #: model:ir.model,name:spp_idqueue.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Paramètres de configuration"
 
 #. module: spp_idqueue
 #: model:ir.model,name:spp_idqueue.model_res_partner
@@ -72,7 +76,7 @@ msgstr "Contact"
 #. module: spp_idqueue
 #: model_terms:ir.actions.act_window,help:spp_idqueue.action_spp_idqueue
 msgid "Create a new ID Queue!"
-msgstr ""
+msgstr "Créez une nouvelle file d'attente d'ID !"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__create_uid
@@ -89,22 +93,22 @@ msgstr "Créé sur"
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__date_approved
 msgid "Date Approved"
-msgstr ""
+msgstr "Date d'approbation"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__date_distributed
 msgid "Date Distributed"
-msgstr ""
+msgstr "Date de distribution"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__date_printed
 msgid "Date Printed"
-msgstr ""
+msgstr "Date d'impression"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__date_requested
 msgid "Date Requested"
-msgstr ""
+msgstr "Date demandée"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__display_name
@@ -115,7 +119,7 @@ msgstr "Afficher un nom"
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_id_queue__status__distributed
 msgid "Distributed"
-msgstr ""
+msgstr "Distribué"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__id
@@ -126,13 +130,13 @@ msgstr "ID"
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
 msgid "ID Pass Template"
-msgstr ""
+msgstr "Modèle ID Pass"
 
 #. module: spp_idqueue
 #: model:ir.model,name:spp_idqueue.model_spp_id_queue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 msgid "ID Queue"
-msgstr ""
+msgstr "File d'attente d'ID"
 
 #. module: spp_idqueue
 #: model:ir.actions.act_window,name:spp_idqueue.action_spp_idqueue
@@ -149,17 +153,17 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__idpass_id
 msgid "IDPass ID"
-msgstr ""
+msgstr "ID Pass ID"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__idpass_id
 msgid "Idpass"
-msgstr ""
+msgstr "Idpass"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__is_idpass
 msgid "Is Idpass"
-msgstr ""
+msgstr "est Idpass"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue____last_update
@@ -187,12 +191,12 @@ msgstr "Nouveau"
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_id_queue__status__printed
 msgid "Printed"
-msgstr ""
+msgstr "Imprimé"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__printed_by
 msgid "Printed By"
-msgstr ""
+msgstr "Imprimé par"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__registrant_id
@@ -203,7 +207,7 @@ msgstr "Inscrit"
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__registrant_id
 msgid "Registrant ID"
-msgstr ""
+msgstr "ID de l'inscrit"
 
 #. module: spp_idqueue
 #: code:addons/spp_idqueue/models/registrant.py:0
@@ -215,22 +219,22 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model,name:spp_idqueue.model_spp_request_id_wizard
 msgid "Request ID Wizard"
-msgstr ""
+msgstr "Assistant de demande d'ID"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__name
 msgid "Request Name"
-msgstr ""
+msgstr "Nom de la demande"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__requested_by
 msgid "Requested By"
-msgstr ""
+msgstr "Demandé par"
 
 #. module: spp_idqueue
 #: model:ir.actions.act_window,name:spp_idqueue.res_config_settings_menu_action
 msgid "Settings"
-msgstr ""
+msgstr "Réglages"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__status
@@ -247,4 +251,4 @@ msgstr ""
 #: code:addons/spp_idqueue/wizard/request_id_wizard.py:0
 #, python-format
 msgid "There are no selected Template!"
-msgstr ""
+msgstr "Il n'y a pas de modèle sélectionné !"
