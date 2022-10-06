@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-10-06 10:22+0000\n"
+"PO-Revision-Date: 2022-10-07 13:22+0000\n"
 "Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_idpass/fr/>\n"
@@ -21,37 +21,37 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_idpass.view_groups_idpass_form
 #: model_terms:ir.ui.view,arch_db:spp_idpass.view_individuals_idpass_form
 msgid "<span class=\"o_stat_text\">Issue</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Problème</span>"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__api_password
 msgid "API Password"
-msgstr ""
+msgstr "Mot de passe API"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__api_url
 msgid "API URL"
-msgstr ""
+msgstr "URL de l'API"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__api_username
 msgid "API Username"
-msgstr ""
+msgstr "Nom d'utilisateur de l'API"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Action nécessaire"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__is_active
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Nombre de pièces jointes"
 
 #. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
@@ -62,6 +62,7 @@ msgstr "Annuler"
 #: model_terms:ir.actions.act_window,help:spp_idpass.action_spp_idpass
 msgid "Click the create button to enter the configuration of the IP PASS."
 msgstr ""
+"Cliquez sur le bouton Créer pour entrer dans la configuration de l'IP PASS."
 
 #. module: spp_idpass
 #: model:ir.model,name:spp_idpass.model_res_partner
@@ -71,7 +72,7 @@ msgstr "Contact"
 #. module: spp_idpass
 #: model_terms:ir.actions.act_window,help:spp_idpass.action_spp_idpass
 msgid "Create a new ID PASS Configuration!"
-msgstr ""
+msgstr "Créez une nouvelle configuration ID PASS !"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__create_uid
@@ -88,7 +89,7 @@ msgstr "Créé sur"
 #. module: spp_idpass
 #: model:ir.model.fields.selection,name:spp_idpass.selection__spp_id_pass__expiry_length_type__days
 msgid "Days"
-msgstr ""
+msgstr "Journées"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__display_name
@@ -99,22 +100,22 @@ msgstr "Afficher un nom"
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__filename_prefix
 msgid "File Name Prefix"
-msgstr ""
+msgstr "Préfixe du nom de fichier"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Abonnés"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Abonnés (Partenaires)"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "A un message"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__id
@@ -125,31 +126,31 @@ msgstr "ID"
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__expiry_length
 msgid "ID Expiry Length"
-msgstr ""
+msgstr "Durée d'expiration de l'ID"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__id_pdf_filename
 #: model:ir.model.fields,field_description:spp_idpass.field_res_users__id_pdf_filename
 msgid "ID File Name"
-msgstr ""
+msgstr "Nom du fichier d'ID"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__id_pdf
 #: model:ir.model.fields,field_description:spp_idpass.field_res_users__id_pdf
 #: model:ir.ui.menu,name:spp_idpass.menu_spp_idpass
 msgid "ID PASS"
-msgstr ""
+msgstr "ID PASS"
 
 #. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.view_groups_idpass_form
 #: model_terms:ir.ui.view,arch_db:spp_idpass.view_individuals_idpass_form
 msgid "ID PASS Card"
-msgstr ""
+msgstr "Carte d'ID PASS"
 
 #. module: spp_idpass
 #: model:ir.actions.act_window,name:spp_idpass.action_spp_idpass
 msgid "ID PASS Configuration"
-msgstr ""
+msgstr "Configuration ID PASS"
 
 #. module: spp_idpass
 #: code:addons/spp_idpass/models/registrant.py:0
@@ -162,17 +163,20 @@ msgstr ""
 #, python-format
 msgid "ID PASS Error: No Head or Principal Recipient assigned to this Group"
 msgstr ""
+"Erreur ID PASS : aucun responsable ou récipiendaire principal affecté à ce "
+"groupe"
 
 #. module: spp_idpass
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
 msgid "ID PASS Error: Please try reuploading the ID Picture"
 msgstr ""
+"Erreur ID PASS : veuillez essayer de télécharger à nouveau l'image d'identité"
 
 #. module: spp_idpass
 #: model:ir.model,name:spp_idpass.model_spp_id_pass
 msgid "ID Pass"
-msgstr ""
+msgstr "ID Pass"
 
 #. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.view_spp_idpass_tree
@@ -183,30 +187,30 @@ msgstr ""
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
 msgid "ID Pass Error: No API set"
-msgstr ""
+msgstr "Erreur ID Pass : Aucune API définie"
 
 #. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.view_groups_idpass_form
 #: model_terms:ir.ui.view,arch_db:spp_idpass.view_individuals_idpass_form
 msgid "ID Pass has been Generated:"
-msgstr ""
+msgstr "ID Pass a été généré :"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__idpass_id
 msgid "IDPass ID"
-msgstr ""
+msgstr "ID Pass ID"
 
 #. module: spp_idpass
 #: model:ir.model.fields,help:spp_idpass.field_res_partner__message_needaction
 #: model:ir.model.fields,help:spp_idpass.field_res_partner__message_unread
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Si cochée, de nouveaux messages nécessitent votre attention."
 
 #. module: spp_idpass
 #: model:ir.model.fields,help:spp_idpass.field_res_partner__message_has_error
 #: model:ir.model.fields,help:spp_idpass.field_res_partner__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Si cochée, certains messages présentent une erreur de livraison."
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__image_1920_filename
@@ -217,23 +221,23 @@ msgstr ""
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Est Abonné"
 
 #. module: spp_idpass
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
 msgid "Issue ID Pass"
-msgstr ""
+msgstr "ID Pass problème"
 
 #. module: spp_idpass
 #: model:ir.model,name:spp_idpass.model_spp_issue_idpass_wizard
 msgid "Issue ID Pass Wizard"
-msgstr ""
+msgstr "Assistant ID Pass de problème"
 
 #. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
 msgid "Issue IDPass"
-msgstr ""
+msgstr "ID Pass problème"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass____last_update
@@ -256,52 +260,52 @@ msgstr "Mise à jour le"
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__expiry_length_type
 msgid "Length Type"
-msgstr ""
+msgstr "Type de longueur"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Pièce jointe principale"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Erreur de livraison du message"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #. module: spp_idpass
 #: model:ir.model.fields.selection,name:spp_idpass.selection__spp_id_pass__expiry_length_type__months
 msgid "Months"
-msgstr ""
+msgstr "Mois"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Nombre d'actions"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Nombre d'erreurs"
 
 #. module: spp_idpass
 #: model:ir.model.fields,help:spp_idpass.field_res_partner__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Nombre de messages nécessitant une action"
 
 #. module: spp_idpass
 #: model:ir.model.fields,help:spp_idpass.field_res_partner__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Nombre de messages avec erreur de livraison"
 
 #. module: spp_idpass
 #: model:ir.model.fields,help:spp_idpass.field_res_partner__message_unread_counter
 msgid "Number of unread messages"
-msgstr ""
+msgstr "Nombre de messages non lus"
 
 #. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
@@ -311,40 +315,40 @@ msgstr "Inscrit"
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__registrant_id
 msgid "Registrant ID"
-msgstr ""
+msgstr "ID de l'inscrit"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr ""
+msgstr "Erreur de livraison SMS"
 
 #. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
 msgid "Template"
-msgstr ""
+msgstr "Modèle"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__name
 msgid "Template Name"
-msgstr ""
+msgstr "Nom du modèle"
 
 #. module: spp_idpass
 #: code:addons/spp_idpass/wizard/issue_id_pass_wizard.py:0
 #, python-format
 msgid "There are no selected Template!"
-msgstr ""
+msgstr "Il n'y a pas de modèle sélectionné !"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Messages non lus"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Compteur de messages non lus"
 
 #. module: spp_idpass
 #: model:ir.model.fields.selection,name:spp_idpass.selection__spp_id_pass__expiry_length_type__years
 msgid "Years"
-msgstr ""
+msgstr "Années"
