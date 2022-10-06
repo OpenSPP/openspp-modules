@@ -6,18 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-10-06 10:22+0000\n"
+"Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
+"Language-Team: French <https://translate.openspp.org/projects/openspp/"
+"spp_custom_fields_ui/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
+#, fuzzy
 msgid "<code>datetime</code> (Python module)"
-msgstr ""
+msgstr "<code>dateheure</code> (module Python)"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
@@ -27,27 +31,27 @@ msgstr ""
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
 msgid "<code>self</code> (the set of records to compute)"
-msgstr ""
+msgstr "<code>self</code> (l'ensemble des enregistrements à calculer)"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
 msgid "<code>time</code> (Python module)"
-msgstr ""
+msgstr "<code>temps</code> (module Python)"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
 msgid "Advanced Properties"
-msgstr ""
+msgstr "Propriétés avancées"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
 msgid "Base Properties"
-msgstr ""
+msgstr "Propriétés de base"
 
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__field_category__ind
 msgid "Calculated"
-msgstr ""
+msgstr "Calculé"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
@@ -56,11 +60,14 @@ msgid ""
 "                                  <strong>Dependencies</strong> and "
 "<strong>Compute</strong>."
 msgstr ""
+"Les champs calculés sont définis avec les champs \n"
+"                                                    <strong>Dependencies</"
+"strong> et <strong>Compute</strong>."
 
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__field_category__cst
 msgid "Custom"
-msgstr ""
+msgstr "Personnalisé"
 
 #. module: spp_custom_fields_ui
 #: code:addons/spp_custom_fields_ui/models/custom_fields_ui.py:0
@@ -70,47 +77,47 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_tree
 #, python-format
 msgid "Custom Fields"
-msgstr ""
+msgstr "Les champs personnalisés"
 
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__field_category
 msgid "Field Category"
-msgstr ""
+msgstr "Catégorie de champ"
 
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__draft_name
 msgid "Field Name"
-msgstr ""
+msgstr "Nom de domaine"
 
 #. module: spp_custom_fields_ui
 #: model:ir.model,name:spp_custom_fields_ui.model_ir_model_fields
 msgid "Fields"
-msgstr ""
+msgstr "Des champs"
 
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__target_type__grp
 msgid "Group"
-msgstr ""
+msgstr "Groupe"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
 msgid "How to define a computed field"
-msgstr ""
+msgstr "Comment définir un champ calculé"
 
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields.selection,name:spp_custom_fields_ui.selection__ir_model_fields__target_type__indv
 msgid "Individual"
-msgstr ""
+msgstr "Individu"
 
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__kinds
 msgid "Kind"
-msgstr ""
+msgstr "Type"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Divers"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
@@ -122,22 +129,22 @@ msgstr ""
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__prefix
 msgid "Prefix"
-msgstr ""
+msgstr "Préfixe"
 
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__has_presence
 msgid "Presence"
-msgstr ""
+msgstr "Présence"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
 msgid "Properties"
-msgstr ""
+msgstr "Propriétés"
 
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__target_type
 msgid "Target Type"
-msgstr ""
+msgstr "Type de cible"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
@@ -149,6 +156,12 @@ msgid ""
 "with a dictionary-like\n"
 "                                  assignment."
 msgstr ""
+"Le champ <strong>Compute</strong> est le code Python pour \n"
+"                                                   calculer la valeur du "
+"champ sur un ensemble d'enregistrements. La valeur du \n"
+"                                                   champ doit être affectée "
+"à chaque enregistrement avec une affectation de type \n"
+"                                                   dictionnaire."
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
@@ -162,11 +175,20 @@ msgid ""
 "fields, for instance\n"
 "                                  <code>partner_id.company_id.name</code>."
 msgstr ""
+"Le champ <strong>Dépendances</strong> liste les champs dont \n"
+"                                                   dépend le champ courant. "
+"Il s'agit d'une liste de \n"
+"                                                   noms de champs séparés "
+"par des virgules, comme <code>nom, taille</code>. Vous pouvez également \n"
+"                                                   faire référence à des "
+"champs accessibles via d'autres champs relationnels, par exemple \n"
+"                                                   <code>partner_id."
+"company_id.name</code>."
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
 msgid "The only predefined variables are"
-msgstr ""
+msgstr "Les seules variables prédéfinies sont"
 
 #. module: spp_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
@@ -174,3 +196,6 @@ msgid ""
 "for record in self:\n"
 "                                        record['size'] = len(record.name)"
 msgstr ""
+"pour l'enregistrement en soi : \n"
+"                                                             record['size'] "
+"= len(record.name)"
