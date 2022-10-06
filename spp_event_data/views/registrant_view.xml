@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_groups_event_data_form" model="ir.ui.view">
+        <field name="name">view_groups_event_data_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+              <button
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-calendar"
+                    name="open_create_event_wizard"
+                    attrs="{'invisible':[('disabled','!=',False)]}"
+                >
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Event</span>
+                        <span class="o_stat_text">Data</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//page[@name='other']" position="before">
+              <page name="event_data" string="Event Data">
+                  <group col="4" colspan="4" name="event_data_group">
+                  </group>
+                  <group>
+                    <field name="event_data_ids" readonly="1">
+                      <tree>
+                        <button name="open_form" type="object" icon="fa-external-link" class="btn-success" />
+                        <field name="name" />
+                        <field name="model" />
+                        <field name="collection_date" />
+                        <field name="expiry_date" />
+                      </tree>
+                    </field>
+                  </group>
+              </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
