@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-10-06 10:22+0000\n"
+"PO-Revision-Date: 2022-10-07 13:22+0000\n"
 "Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_photo/fr/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: spp_photo
 #: model:ir.model,name:spp_photo.model_base_multi_image_image
 msgid " image model for multiple image functionality "
-msgstr ""
+msgstr " modèle d'image pour la fonctionnalité d'images multiples "
 
 #. module: spp_photo
 #: model:ir.model,name:spp_photo.model_res_partner
@@ -46,7 +46,7 @@ msgstr "Afficher un nom"
 #: model:ir.model.fields.selection,name:spp_photo.selection__base_multi_image_image__storage__db
 #: model:ir.model.fields.selection,name:spp_photo.selection__base_multi_image_image__storage_select__db
 msgid "File"
-msgstr ""
+msgstr "Dossier"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__id
@@ -56,13 +56,13 @@ msgstr "ID"
 #. module: spp_photo
 #: model_terms:ir.ui.view,arch_db:spp_photo.image_form_view
 msgid "Image Category"
-msgstr ""
+msgstr "Catégorie d'images"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_res_partner__image_ids
 #: model:ir.model.fields,field_description:spp_photo.field_res_users__image_ids
 msgid "Images"
-msgstr ""
+msgstr "Images"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category____last_update
@@ -82,12 +82,12 @@ msgstr "Mise à jour le"
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_res_partner__image_main
 msgid "Main image"
-msgstr ""
+msgstr "Image principale"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_res_partner__image_main_medium
 msgid "Medium image"
-msgstr ""
+msgstr "Image moyenne"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__name
@@ -98,32 +98,32 @@ msgstr "Nom"
 #: model:ir.model,name:spp_photo.model_spp_photo_category
 #: model:ir.model.fields,field_description:spp_photo.field_base_multi_image_image__photo_category_id
 msgid "Photo Category"
-msgstr ""
+msgstr "Catégorie de photos"
 
 #. module: spp_photo
 #: model_terms:ir.ui.view,arch_db:spp_photo.view_group_photo_form
 #: model_terms:ir.ui.view,arch_db:spp_photo.view_registrant_photo_form
 msgid "Photos"
-msgstr ""
+msgstr "Photos"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_res_partner__image_main_small
 msgid "Small image"
-msgstr ""
+msgstr "Petite image"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_base_multi_image_image__storage
 #: model_terms:ir.ui.view,arch_db:spp_photo.image_form_view
 msgid "Storage"
-msgstr ""
+msgstr "Stockage"
 
 #. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_base_multi_image_image__storage_select
 msgid "Storage Select"
-msgstr ""
+msgstr "Stockage Sélectionner"
 
 #. module: spp_photo
 #: model:ir.model.fields.selection,name:spp_photo.selection__base_multi_image_image__storage__url
 #: model:ir.model.fields.selection,name:spp_photo.selection__base_multi_image_image__storage_select__url
 msgid "URL"
-msgstr ""
+msgstr "URL"
