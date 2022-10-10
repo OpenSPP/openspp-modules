@@ -12,43 +12,54 @@ class SPPCreateEventWizard(models.TransientModel):
         "Event Data Model",
         default="default",
     )
-    registrant = fields.Many2one(
+    partner_id = fields.Many2one(
         "res.partner", domain=[("is_group", "=", True), ("is_registrant", "=", True)]
     )
+    registrar = fields.Char()
+    collection_date = fields.Date()
+    expiry_date = fields.Date()
 
     def next_page(self):
         for rec in self:
-            if rec.event_data_model:
-                if not rec.event_data_model == "default":
-                    event_data_model = rec.event_data_model
-                    event_data_model = event_data_model.replace(".", "_")
-                    model_list = event_data_model.split("_")
-                    model_list.pop(0)
-                    model_view = "%s.create_" % event_data_model
-                    for split_model in model_list:
-                        model_view += "%s_" % split_model
+            if rec.event_data_model and not rec.event_data_model == "default":
+                model_name = rec.event_data_model
+                # compute wizard model name
 
-                    model_view += "form_view"
-                    view = self.env.ref(model_view)
+                wizard_list = model_name.split(".")
+                wizard_model = "%s.create." % wizard_list[0]
+                wizard_list.pop(0)
+                view_name = ""
+                for split_wizard in wizard_list:
+                    wizard_model += "%s." % split_wizard
+                    view_name += "%s " % split_wizard.capitalize()
+                wizard_model += "wizard"
+                view_id = rec.get_view_id(wizard_model)
+                # create the event data and pass it to event_data_model wizard
+                vals_list = {
+                    "model": model_name,
+                    "partner_id": rec.partner_id.id,
+                    "registrar": rec.registrar or False,
+                    "collection_date": rec.collection_date or False,
+                    "expiry_date": rec.expiry_date or False,
+                }
+                event_id = self.env["spp.event.data"].create(vals_list)
 
-                    wizard_list = event_data_model.split("_")
-                    wizard_model = "%s.create." % wizard_list[0]
-                    wizard_list.pop(0)
-                    view_name = ""
-                    for split_wizard in wizard_list:
-                        wizard_model += "%s." % split_wizard
-                        view_name += "%s " % split_wizard.capitalize()
-                    wizard_model += "wizard"
+                wiz = self.env[wizard_model].create({"event_id": event_id.id})
 
-                    vals_list = {"registrant": rec.registrant.id}
-                    wiz = self.env[wizard_model].create(vals_list)
-                    return {
-                        "name": _("Create %s Wizard" % view_name),
-                        "view_mode": "form",
-                        "res_model": wizard_model,
-                        "res_id": wiz.id,
-                        "view_id": view.id,
-                        "type": "ir.actions.act_window",
-                        "target": "new",
-                        "context": self.env.context,
-                    }
+                return {
+                    "name": _("Create %s Wizard" % view_name),
+                    "view_mode": "form",
+                    "res_model": wizard_model,
+                    "res_id": wiz.id,
+                    "view_id": view_id,
+                    "type": "ir.actions.act_window",
+                    "target": "new",
+                    "context": self.env.context,
+                }
+
+    def get_view_id(self, model_name):
+        return (
+            self.env["ir.ui.view"]
+            .search([("model", "=", model_name), ("type", "=", "form")], limit=1)
+            .id
+        )

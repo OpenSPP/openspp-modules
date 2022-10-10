@@ -31,6 +31,12 @@
                         <field name="model" />
                         <field name="collection_date" />
                         <field name="expiry_date" />
+                        <field
+                                    name="state"
+                                    decoration-success="state=='active'"
+                                    decoration-info="state=='done'"
+                                    widget="badge"
+                                />
                       </tree>
                     </field>
                   </group>

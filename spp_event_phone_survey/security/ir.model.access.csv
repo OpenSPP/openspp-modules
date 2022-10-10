@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-spp_phone_survey_admin,Phone Survey Admin Access,spp_event_phone_survey.model_spp_event_phone_survey,g2p_registry_base.group_g2p_admin,1,1,1,1
-spp_create_event_phone_survey_wizard_admin,Create Event Phone Survey Wizard Admin Access,spp_event_phone_survey.model_spp_create_event_phone_survey_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1

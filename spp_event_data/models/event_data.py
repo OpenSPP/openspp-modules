@@ -15,11 +15,19 @@ class OpenSPPEventData(models.Model):
     name = fields.Char(compute="_compute_name", store=True)
     model = fields.Char("Related Document Model", index=True)
     res_id = fields.Many2oneReference("Related data", index=True, model_field="model")
-    registrar = fields.Many2one("res.partner")
+    registrar = fields.Char()
+    partner_id = fields.Many2one(
+        "res.partner", domain=[("is_group", "=", True), ("is_registrant", "=", True)]
+    )
     collection_date = fields.Date()
     expiry_date = fields.Date()
+    state = fields.Selection(
+        [("active", "Active"), ("done", "Done")],
+        "State",
+        default="active",
+    )
 
-    @api.depends("model")
+    @api.depends("model", "res_id")
     def _compute_name(self):
         for rec in self:
             rec.name = ""
@@ -31,6 +39,28 @@ class OpenSPPEventData(models.Model):
                 model = self.env[rec.model].search([("id", "=", rec.res_id)])
                 if model and model.summary:
                     rec.name += " - [%s]" % model.summary
+
+    @api.model
+    def create(self, vals):
+        if vals["model"]:
+            model = vals["model"]
+            partner = vals["partner_id"]
+            active_event = self.env["spp.event.data"].search(
+                [
+                    ("model", "=", model),
+                    ("state", "=", "active"),
+                    ("partner_id", "=", partner),
+                ]
+            )
+            if active_event:
+                active_event.end_active_event()
+
+        event = super(OpenSPPEventData, self).create(vals)
+        return event
+
+    def end_active_event(self):
+        for rec in self:
+            rec.state = "done"
 
     def open_form(self):
         for rec in self:

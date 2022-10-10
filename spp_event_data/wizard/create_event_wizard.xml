@@ -10,7 +10,11 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
             <form edit="0">
                 <sheet>
                     <group>
+                      <field name="partner_id" readonly="1" />
                       <field name="event_data_model" />
+                      <field name="registrar" />
+                      <field name="collection_date" />
+                      <field name="expiry_date" />
                     </group>
                 </sheet>
                 <footer>
