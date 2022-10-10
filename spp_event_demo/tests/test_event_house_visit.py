@@ -22,7 +22,7 @@ class EventHouseVisitTest(TransactionCase):
         )
         cls.house_visit_1 = cls.env["spp.event.house.visit"].create(
             {
-                "registrant": cls.group_1.id,
+                "partner_id": cls.group_1.id,
                 "summary": "Testing Visit",
                 "description": "This visit is for testing only",
             }

@@ -22,7 +22,7 @@ class EventPhoneSurveyTest(TransactionCase):
         )
         cls.phone_survey_1 = cls.env["spp.event.phone.survey"].create(
             {
-                "registrant": cls.group_1.id,
+                "partner_id": cls.group_1.id,
                 "summary": "Testing Visit",
                 "description": "This visit is for testing only",
             }
