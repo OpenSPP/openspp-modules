@@ -30,7 +30,7 @@ class EventHouseVisitTest(TransactionCase):
             {
                 "partner_id": cls.group_1.id,
                 "model": "spp.event.house.visit",
-                "res_id": cls.house_visit_1.id
+                "res_id": cls.house_visit_1.id,
             }
         )
 
@@ -56,7 +56,7 @@ class EventHouseVisitTest(TransactionCase):
         vals_event_data = {
             "partner_id": self.group_1.id,
             "model": "spp.event.house.visit",
-            "res_id": house_visit_2.id
+            "res_id": house_visit_2.id,
         }
         event_data_2 = self.env["spp.event.data"].create(vals_event_data)
 

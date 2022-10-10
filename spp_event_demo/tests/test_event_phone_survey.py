@@ -30,7 +30,7 @@ class EventPhoneSurveyTest(TransactionCase):
             {
                 "partner_id": cls.group_1.id,
                 "model": "spp.event.phone.survey",
-                "res_id": cls.house_visit_1.id
+                "res_id": cls.phone_survey_1.id,
             }
         )
 
@@ -57,7 +57,7 @@ class EventPhoneSurveyTest(TransactionCase):
         vals_event_data = {
             "partner_id": self.group_1.id,
             "model": "spp.event.phone.survey",
-            "res_id": phone_survey_2.id
+            "res_id": phone_survey_2.id,
         }
         event_data_2 = self.env["spp.event.data"].create(vals_event_data)
         self.group_1._compute_active_phone_survey()
