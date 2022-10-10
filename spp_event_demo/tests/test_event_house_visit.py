@@ -22,23 +22,23 @@ class EventHouseVisitTest(TransactionCase):
         )
         cls.house_visit_1 = cls.env["spp.event.house.visit"].create(
             {
-                "partner_id": cls.group_1.id,
                 "summary": "Testing Visit",
                 "description": "This visit is for testing only",
+            }
+        )
+        cls.event_data_1 = cls.env["spp.event.data"].create(
+            {
+                "partner_id": cls.group_1.id,
+                "model": "spp.event.house.visit",
+                "res_id": cls.house_visit_1.id
             }
         )
 
     def test_01_check_active_house_visit(self):
         self.group_1._compute_active_house_visit()
-        event_id = self.env["spp.event.data"].search(
-            [
-                ("model", "=", "spp.event.house.visit"),
-                ("res_id", "=", self.house_visit_1.id),
-            ]
-        )
         self.assertEqual(
             self.group_1.active_house_visit.id,
-            event_id.id,
+            self.event_data_1.id,
         )
 
     def test_02_check_name(self):
@@ -48,21 +48,20 @@ class EventHouseVisitTest(TransactionCase):
         )
 
     def test_03_recheck_active_house_visit_after_entering_new_visit(self):
-        if self.group_1.active_house_visit:
-            self.group_1.end_active_event(self.group_1.active_house_visit)
-
-        vals = {
-            "registrant": self.group_1.id,
+        vals_house = {
             "summary": "Testing Visit 2",
             "description": "This visit is for testing again",
         }
-        house_visit_2 = self.env["spp.event.house.visit"].create(vals)
+        house_visit_2 = self.env["spp.event.house.visit"].create(vals_house)
+        vals_event_data = {
+            "partner_id": self.group_1.id,
+            "model": "spp.event.house.visit",
+            "res_id": house_visit_2.id
+        }
+        event_data_2 = self.env["spp.event.data"].create(vals_event_data)
 
         self.group_1._compute_active_house_visit()
-        event_id = self.env["spp.event.data"].search(
-            [("model", "=", "spp.event.house.visit"), ("res_id", "=", house_visit_2.id)]
-        )
         self.assertEqual(
             self.group_1.active_house_visit.id,
-            event_id.id,
+            event_data_2.id,
         )
