@@ -18,22 +18,21 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 />
                 <field name="name" />
                 <field name="date_requested" />
-                <field name="write_uid" string="Requested By" widget="many2one_avatar_user" />
+                <field name="create_uid" string="Requested By" widget="many2one_avatar_user" />
                 <field name="request_type" />
                 <field name="registrant_id" />
                 <field name="request_type_ref_id" invisible="1" />
-                <field name="validator_id" widget="many2one_avatar_user" />
-                <field name="date_validated" />
-                <field name="approver_id" widget="many2one_avatar_user" />
-                <field name="date_approved" />
+                <field name="appliedby_id" widget="many2one_avatar_user" />
+                <field name="date_applied" />
+                <field name="activity_ids" widget="list_activity" optional="show" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field
                     name="state"
                     decoration-info="state=='draft'"
-                    decoration-primary="state=='submitted'"
+                    decoration-primary="state=='pending'"
                     decoration-warning="state=='validated'"
-                    decoration-success="state=='approved'"
-                    decoration-danger="state=='cancelled'"
+                    decoration-success="state=='applied'"
+                    decoration-danger="state=='rejected'"
                     widget="badge"
                     string="State"
                 />
@@ -49,9 +48,9 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
             <form string="Change Request">
                 <header>
                     <button
-                        name="submit_request"
+                        name="set_pending_validation"
                         type="object"
-                        string="Submit"
+                        string="Pending Validation"
                         icon="fa-paper-plane"
                         class="btn-primary"
                         states="draft"
@@ -62,28 +61,30 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         string="Validate"
                         icon="fa-check-square-o"
                         class="btn-warning"
-                        states="submitted"
+                        states="pending"
                     />
                     <button
-                        name="approve_request"
+                        name="apply_changes"
                         type="object"
-                        string="Approve"
+                        string="Apply Changes"
                         icon="fa-thumbs-o-up"
                         class="btn-success"
                         states="validated"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
                     />
                     <button
-                        name="cancel_request"
+                        name="reject_request"
                         type="object"
-                        string="Cancel"
+                        string="Reject"
                         icon="fa-ban"
                         class="btn-danger"
-                        states="validated"
+                        states="draft,pending"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
                     />
                     <field
                         name="state"
                         widget="statusbar"
-                        statusbar_visible="draft,submitted,validated,approved"
+                        statusbar_visible="draft,pending,validated,applied"
                     />
                 </header>
                 <sheet>
@@ -97,9 +98,9 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     />
                     <widget
                         name="web_ribbon"
-                        title="Submitted"
+                        title="Pending Validation"
                         bg_color="bg-primary"
-                        attrs="{'invisible': [('state', '!=', 'submitted')]}"
+                        attrs="{'invisible': [('state', '!=', 'pending')]}"
                     />
                     <widget
                         name="web_ribbon"
@@ -109,15 +110,15 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     />
                     <widget
                         name="web_ribbon"
-                        title="Approved"
+                        title="Applied"
                         bg_color="bg-success"
-                        attrs="{'invisible': [('state', '!=', 'approved')]}"
+                        attrs="{'invisible': [('state', '!=', 'applied')]}"
                     />
                     <widget
                         name="web_ribbon"
-                        title="Cancelled"
+                        title="Rejected"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('state', '!=', 'cancelled')]}"
+                        attrs="{'invisible': [('state', '!=', 'rejected')]}"
                     />
                     <div class="oe_title mb24">
                         <label for="name" string="Request #:" />
@@ -169,21 +170,27 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     <group colspan="4" col="4">
                         <field name="date_requested" readonly="1" />
                         <field
-                            name="write_uid"
+                            name="create_uid"
                             string="Requested By"
                             options="{'no_create': True,'no_open':True}"
                             readonly="1"
                         />
-                        <field name="date_validated" readonly="1" />
+                        <field name="date_applied" readonly="1" />
                         <field
-                            name="validator_id"
+                            name="appliedby_id"
                             options="{'no_create': True,'no_open':True}"
                             readonly="1"
                         />
-                        <field name="date_approved" readonly="1" />
-                        <field name="approver_id" options="{'no_create': True,'no_open':True}" readonly="1" />
+                        <field name="validator_ids" readonly="1" colspan="4">
+                            <tree>
+                                <field name="stage_id" />
+                                <field name="validator_id" />
+                                <field name="date_validated" />
+                            </tree>
+                        </field>
                     </group>
                     <field name="request_type_ref_id" invisible="1" />
+                    <field name="last_activity_id" invisible="1" />
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" />
@@ -203,16 +210,9 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="name" />
                 <field name="registrant_id" />
                 <field name="request_type_ref_id" />
-                <field name="write_uid" string="Submitted By" />
-                <field name="validator_id" />
-                <field name="approver_id" />
+                <field name="create_uid" string="Submitted By" />
+                <field name="appliedby_id" />
                 <group expand="0" string="Group By">
-                    <filter
-                        string="Validator"
-                        name="grp_validator_id"
-                        context="{'group_by': 'validator_id'}"
-                    />
-                    <filter string="Approver" name="grp_approver_id" context="{'group_by': 'approver_id'}" />
                     <filter string="Company" name="grp_company_id" context="{'group_by': 'company_id'}" />
                 </group>
             </search>
@@ -220,7 +220,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
     </record>
 
     <record id="action_change_request" model="ir.actions.act_window">
-        <field name="name">Change Requests</field>
+        <field name="name">All Requests</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.change.request</field>
         <field name="view_mode">tree,form</field>
@@ -252,9 +252,9 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
     <menuitem
         id="menu_change_request"
-        name="List"
+        name="All"
         action="action_change_request"
-        parent="g2p_change_request_menu_root"
+        parent="spp_change_request_request_root"
         sequence="0"
     />
 

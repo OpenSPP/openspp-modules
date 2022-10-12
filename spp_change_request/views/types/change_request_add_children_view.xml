@@ -37,31 +37,47 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </h1>
                         <div class="o_row">
                             <h2>
-                                <field
-                                    name="change_request_id"
-                                    readonly="1"
-                                    options="{'no_open':True}"
-                                    string="Group"
-                                />
+                                <label for="request_type" string="Request Type:" />
+                                <field name="request_type" readonly="1" />
                             </h2>
                         </div>
                     </div>
-                    <group colspan="4" col="4" string="">
-                        <field name="family_name" />
-                        <field name="given_name" />
-                        <field name="addl_name" />
-                        <field name="gender" />
-                        <field name="birth_place" colspan="4" />
-                        <field name="birthdate_not_exact" widget="boolean_toggle" />
-                        <field name="birthdate" />
-                        <field name="address" colspan="4" />
-                        <field
-                            name="kind"
-                            widget="many2many_tags"
-                            options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
-                            colspan="4"
-                        />
-                    </group>
+                    <notebook>
+                        <page string="Request Details">
+                            <group colspan="4" col="4" string="">
+                                <field name="family_name" required="1" />
+                                <field name="given_name" required="1" />
+                                <field name="addl_name" />
+                                <field name="gender" />
+                                <field name="birth_place" colspan="4" />
+                                <field name="birthdate_not_exact" widget="boolean_toggle" />
+                                <field name="birthdate" />
+                                <field name="address" colspan="4" />
+                                <field
+                                    name="kind"
+                                    widget="many2many_tags"
+                                    options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
+                                    colspan="4"
+                                />
+                            </group>
+                        </page>
+                        <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
+                            <field name="validation_ids" create="0" nolabel="1">
+                                <tree>
+                                    <field name="sequence" widget="handle" />
+                                    <field name="request_type" invisible="1" />
+                                    <field name="stage_id" options="{'no_create_edit':true}" />
+                                    <field
+                                        name="validation_group_id"
+                                        string="Validation Group"
+                                        domain="[('category_id','=',%(g2p_registry_base.openg2p_module)d)]"
+                                        options="{'no_open':true,'no_edit':true,'no_create':true}"
+                                    />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <field name="change_request_id" invisible="1" />
                 </sheet>
             </form>
         </field>

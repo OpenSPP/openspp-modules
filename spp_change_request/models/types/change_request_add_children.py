@@ -17,12 +17,17 @@ class ChangeRequestTypeCustomAddChildren(models.Model):
 
 class ChangeRequestAddChildren(models.Model):
     _name = "spp.change.request.add.children"
-    _inherit = "spp.change.request.source.mixin"
+    _inherit = [
+        "spp.change.request.source.mixin",
+        "spp.change.request.validation.sequence.mixin",
+    ]
     _description = "Add Children Change Request Type"
 
+    request_type = fields.Selection(related="change_request_id.request_type")
+
     # Registrant Fields
-    family_name = fields.Char(required=True)
-    given_name = fields.Char(required=True)
+    family_name = fields.Char()
+    given_name = fields.Char()
     addl_name = fields.Char("Additional Name")
     birth_place = fields.Char()
     birthdate_not_exact = fields.Boolean()
@@ -36,6 +41,9 @@ class ChangeRequestAddChildren(models.Model):
     kind = fields.Many2many(
         "g2p.group.membership.kind", string="Group Membership Kinds"
     )
+
+    # Add domain to inherited field: validation_ids
+    validation_ids = fields.Many2many(domain=[("request_type", "=", _name)])
 
     def update_live_data(self):
         self.ensure_one()
