@@ -16,10 +16,13 @@
         "g2p_registry_group",
     ],
     "data": [
+        "security/change_request_security.xml",
         "security/ir.model.access.csv",
         "data/sequences.xml",
+        "data/mail_activity.xml",
         "views/main_view.xml",
         "views/change_request_view.xml",
+        "views/change_request_validation_sequence_view.xml",
         "views/types/change_request_add_children_view.xml",
     ],
     "assets": {},

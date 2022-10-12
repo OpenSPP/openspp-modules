@@ -7,7 +7,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     _name = "spp.change.request.source.mixin"
     _description = "Change Request Data Source Mixin"
-    _rec_name = "registrant_id"
+    _rec_name = "change_request_id"
 
     registrant_id = fields.Many2one(
         "res.partner",
@@ -23,6 +23,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """Retrieve form view."""
         return (
             self.env["ir.ui.view"]
+            .sudo()
             .search([("model", "=", self._name), ("type", "=", "form")], limit=1)
             .id
         )
@@ -35,4 +36,4 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             name += self.given_name + " "
         if self.addl_name:
             name += self.addl_name + " "
-        return name.upper()
+        return name.title()
