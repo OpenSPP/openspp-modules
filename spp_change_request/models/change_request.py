@@ -14,8 +14,6 @@ class ChangeRequestBase(models.Model):
     _order = "id desc"
     _check_company_auto = True
 
-    RES_MODEL = "spp_change_request.model_" + _name.replace(".", "_")
-
     name = fields.Char("Request #", required=True, default="Draft")
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
     date_requested = fields.Datetime()
@@ -55,22 +53,12 @@ class ChangeRequestBase(models.Model):
     def create(self, vals):
         res = super(ChangeRequestBase, self).create(vals)
         # Create pending validation activity
-        activity_type_id = self.env.ref(
-            "spp_change_request.pending_validation_activity"
-        ).id
-        next_activity = {
-            "res_id": res.id,
-            # "res_model_id": self.env.ref(self.RES_MODEL).id,
-            "res_model_id": self.env["ir.model"]._get(self._name).id,
-            "user_id": self.env.user.id,
-            "summary": _("For Pending Validation"),
-            "note": _(
-                "A new change request was submitted. The next step will set this request to 'Pending Validation'."
-            ),
-            "activity_type_id": activity_type_id,
-            "date_deadline": fields.Date.today(),
-        }
-        activity = self.env["mail.activity"].create(next_activity)
+        activity_type = "spp_change_request.pending_validation_activity"
+        summary = _("For Pending Validation")
+        note = _(
+            "A new change request was submitted. The next step will set this request to 'Pending Validation'."
+        )
+        activity = self._generate_activity(res, activity_type, summary, note)
         res["last_activity_id"] = activity.id
         return res
 
@@ -150,22 +138,13 @@ class ChangeRequestBase(models.Model):
                 # Mark previous activity as 'done'
                 rec.last_activity_id.action_done()
                 # Create validation activity
-                activity_type_id = self.env.ref(
-                    "spp_change_request.validation_activity"
-                ).id
-                next_activity = {
-                    "res_id": rec.id,
-                    "res_model_id": self.env["ir.model"]._get(self._name).id,
-                    "user_id": self.env.user.id,
-                    "summary": _("For Validation"),
-                    "note": _(
-                        "The change request is now set for validation. Depending on the "
-                        + "validation sequence, this may be subjected to one or more validations."
-                    ),
-                    "activity_type_id": activity_type_id,
-                    "date_deadline": fields.Date.today(),
-                }
-                activity = self.env["mail.activity"].create(next_activity)
+                activity_type = "spp_change_request.validation_activity"
+                summary = _("For Validation")
+                note = _(
+                    "The change request is now set for validation. Depending on the "
+                    + "validation sequence, this may be subjected to one or more validations."
+                )
+                activity = self._generate_activity(rec, activity_type, summary, note)
 
                 # Update change request
                 name = self.env["ir.sequence"].next_by_code("spp.change.request.num")
@@ -200,22 +179,15 @@ class ChangeRequestBase(models.Model):
                         # Mark previous activity as 'done'
                         rec.last_activity_id.action_done()
                         # Create apply changes activity
-                        activity_type_id = self.env.ref(
-                            "spp_change_request.apply_changes_activity"
-                        ).id
-                        next_activity = {
-                            "res_id": rec.id,
-                            "res_model_id": self.env["ir.model"]._get(self._name).id,
-                            "user_id": self.env.user.id,
-                            "summary": _("For Application of Changes"),
-                            "note": _(
-                                "The change request is now fully validated. It is now submitted "
-                                + "for final application of changes."
-                            ),
-                            "activity_type_id": activity_type_id,
-                            "date_deadline": fields.Date.today(),
-                        }
-                        activity = self.env["mail.activity"].create(next_activity)
+                        activity_type = "spp_change_request.apply_changes_activity"
+                        summary = _("For Application of Changes")
+                        note = _(
+                            "The change request is now fully validated. It is now submitted "
+                            + "for final application of changes."
+                        )
+                        activity = self._generate_activity(
+                            rec, activity_type, summary, note
+                        )
 
                         vals.update(
                             {"state": "validated", "last_activity_id": activity.id}
@@ -228,42 +200,6 @@ class ChangeRequestBase(models.Model):
                 raise ValidationError(
                     _("The request to be validated must be in submitted state.")
                 )
-
-    def _get_validation_stage(self):
-        stage = None
-        message = None
-        validator_id = self.env.user.id
-        # Get the current validators
-        validation_stages = None
-        validation_stage_ids = None
-        if self.validator_ids:
-            validation_stage_ids = self.validator_ids.mapped("stage_id.id")
-        if self.request_type_ref_id.validation_ids:
-            # Get the next validation sequence
-            if validation_stage_ids:
-                validation_stages = self.request_type_ref_id.validation_ids.filtered(
-                    lambda a: a.stage_id.id not in validation_stage_ids
-                )
-            else:
-                validation_stages = self.request_type_ref_id.validation_ids
-            if validation_stages:
-                if len(validation_stages) == 1:
-                    message = "FINAL"
-                stage = validation_stages[0]
-                # Check if user is allowed to validate request
-                if validator_id not in stage.validation_group_id.users.ids:
-                    message = (
-                        _("You are not allowed to validate this request! Stage: %s")
-                        % stage.stage_id.name
-                    )
-                    stage = None
-            else:
-                message = _(
-                    "Error in validation stages. No available stage to assign to this validation."
-                )
-        else:
-            message = _("There are no validators defined for this requests.")
-        return stage, message, validator_id
 
     def apply_changes(self):
         for rec in self:
@@ -303,6 +239,55 @@ class ChangeRequestBase(models.Model):
                         "The request to be rejected must be in draft or pending validation state."
                     )
                 )
+
+    def _get_validation_stage(self):
+        stage = None
+        message = None
+        validator_id = self.env.user.id
+        # Get the current validators
+        validation_stages = None
+        validation_stage_ids = None
+        if self.validator_ids:
+            validation_stage_ids = self.validator_ids.mapped("stage_id.id")
+        if self.request_type_ref_id.validation_ids:
+            # Get the next validation sequence
+            if validation_stage_ids:
+                validation_stages = self.request_type_ref_id.validation_ids.filtered(
+                    lambda a: a.stage_id.id not in validation_stage_ids
+                )
+            else:
+                validation_stages = self.request_type_ref_id.validation_ids
+            if validation_stages:
+                if len(validation_stages) == 1:
+                    message = "FINAL"
+                stage = validation_stages[0]
+                # Check if user is allowed to validate request
+                if validator_id not in stage.validation_group_id.users.ids:
+                    message = (
+                        _("You are not allowed to validate this request! Stage: %s")
+                        % stage.stage_id.name
+                    )
+                    stage = None
+            else:
+                message = _(
+                    "Error in validation stages. No available stage to assign to this validation."
+                )
+        else:
+            message = _("There are no validators defined for this request.")
+        return stage, message, validator_id
+
+    def _generate_activity(self, res, activity_type, summary, note):
+        activity_type_id = self.env.ref(activity_type).id
+        next_activity = {
+            "res_id": res.id,
+            "res_model_id": self.env["ir.model"]._get(self._name).id,
+            "user_id": self.env.user.id,
+            "summary": summary,
+            "note": note,
+            "activity_type_id": activity_type_id,
+            "date_deadline": fields.Date.today(),
+        }
+        return self.env["mail.activity"].create(next_activity)
 
 
 class ChangeRequestValidators(models.Model):
