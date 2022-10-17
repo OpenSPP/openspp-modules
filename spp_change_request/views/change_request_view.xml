@@ -22,6 +22,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="request_type" />
                 <field name="registrant_id" />
                 <field name="request_type_ref_id" invisible="1" />
+                <field name="validatedby_id" widget="many2one_avatar_user" />
+                <field name="date_validated" />
                 <field name="appliedby_id" widget="many2one_avatar_user" />
                 <field name="date_applied" />
                 <field name="activity_ids" widget="list_activity" optional="show" />
@@ -34,7 +36,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     decoration-success="state=='applied'"
                     decoration-danger="state=='rejected'"
                     widget="badge"
-                    string="State"
                 />
             </tree>
         </field>
@@ -48,7 +49,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
             <form string="Change Request">
                 <header>
                     <button
-                        name="set_pending_validation"
+                        name="on_submit"
                         type="object"
                         string="Pending Validation"
                         icon="fa-paper-plane"
@@ -56,7 +57,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         states="draft"
                     />
                     <button
-                        name="validate_request"
+                        name="on_validate"
                         type="object"
                         string="Validate"
                         icon="fa-check-square-o"
@@ -64,7 +65,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         states="pending"
                     />
                     <button
-                        name="apply_changes"
+                        name="apply"
                         type="object"
                         string="Apply Changes"
                         icon="fa-thumbs-o-up"
@@ -73,7 +74,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
                     />
                     <button
-                        name="reject_request"
+                        name="on_reject"
                         type="object"
                         string="Reject"
                         icon="fa-ban"
@@ -175,12 +176,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             options="{'no_create': True,'no_open':True}"
                             readonly="1"
                         />
-                        <field name="date_applied" readonly="1" />
-                        <field
-                            name="appliedby_id"
-                            options="{'no_create': True,'no_open':True}"
-                            readonly="1"
-                        />
                         <field name="validator_ids" readonly="1" colspan="4">
                             <tree>
                                 <field name="stage_id" />
@@ -188,6 +183,18 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="date_validated" />
                             </tree>
                         </field>
+                        <field name="date_validated" readonly="1" />
+                        <field
+                            name="validatedby_id"
+                            options="{'no_create': True,'no_open':True}"
+                            readonly="1"
+                        />
+                        <field name="date_applied" readonly="1" />
+                        <field
+                            name="appliedby_id"
+                            options="{'no_create': True,'no_open':True}"
+                            readonly="1"
+                        />
                     </group>
                     <field name="request_type_ref_id" invisible="1" />
                     <field name="last_activity_id" invisible="1" />
@@ -252,10 +259,11 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
     <menuitem
         id="menu_change_request"
-        name="All"
+        name="All Requests"
         action="action_change_request"
         parent="spp_change_request_request_root"
         sequence="0"
+        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
     />
 
 </odoo>
