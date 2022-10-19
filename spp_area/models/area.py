@@ -36,21 +36,22 @@ class OpenSPPArea(models.Model):
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
-        cur_lang = self._context.get("lang", False)
-        area_name = self.env["ir.translation"]._get_ids(
-            "spp.area,name", "model", cur_lang, self.ids
-        )
-        for area in self:
-            if area.id:
-                if area.parent_id:
-                    area.complete_name = "%s > %s" % (
-                        area.parent_id.complete_name,
-                        area_name[area.id],
-                    )
+        for rec in self:
+            cur_lang = rec._context.get("lang", False)
+            area_name = rec.env["ir.translation"]._get_ids(
+                "spp.area,name", "model", cur_lang, rec.ids
+            )
+            for area in rec:
+                if area.id:
+                    if area.parent_id:
+                        area.complete_name = "%s > %s" % (
+                            area.parent_id.complete_name,
+                            area_name[area.id],
+                        )
+                    else:
+                        area.complete_name = area_name[area.id]
                 else:
-                    area.complete_name = area_name[area.id]
-            else:
-                area.complete_name = None
+                    area.complete_name = None
 
     @api.model
     def create(self, vals):
