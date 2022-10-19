@@ -1,7 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import logging
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -41,17 +42,16 @@ class OpenSPPArea(models.Model):
             area_name = rec.env["ir.translation"]._get_ids(
                 "spp.area,name", "model", cur_lang, rec.ids
             )
-            for area in rec:
-                if area.id:
-                    if area.parent_id:
-                        area.complete_name = "%s > %s" % (
-                            area.parent_id.complete_name,
-                            area_name[area.id],
-                        )
-                    else:
-                        area.complete_name = area_name[area.id]
+            if rec.id:
+                if rec.parent_id:
+                    rec.complete_name = "%s > %s" % (
+                        rec.parent_id.complete_name,
+                        area_name[rec.id],
+                    )
                 else:
-                    area.complete_name = None
+                    rec.complete_name = area_name[rec.id]
+            else:
+                rec.complete_name = None
 
     @api.model
     def create(self, vals):
@@ -81,3 +81,23 @@ class OpenSPPAreaKind(models.Model):
     _description = "Area Kind"
 
     name = fields.Char(required=True)
+
+    def unlink(self):
+        for rec in self:
+            external_identifier = self.env["ir.model.data"].search(
+                [("res_id", "=", rec.id), ("model", "=", "spp.area.kind")]
+            )
+            if external_identifier and external_identifier.name:
+                raise ValidationError(_("Can't delete default Area Kind"))
+            else:
+                return super(OpenSPPAreaKind, self).unlink()
+
+    def write(self, vals):
+        for rec in self:
+            external_identifier = self.env["ir.model.data"].search(
+                [("res_id", "=", rec.id), ("model", "=", "spp.area.kind")]
+            )
+            if external_identifier and external_identifier.name:
+                raise ValidationError(_("Can't edit default Area Kind"))
+            else:
+                return super(OpenSPPAreaKind, self).write(vals)
