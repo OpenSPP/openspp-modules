@@ -31,11 +31,3 @@ class AreaTest(TransactionCase):
         self.area_1._compute_get_childs()
 
         self.assertEqual(len(self.area_1.child_ids), 1)
-
-    def test_02_check_complete_name(self):
-        self.area_1_child._compute_complete_name()
-
-        self.assertEqual(
-            self.area_1_child.complete_name,
-            "Testing Area > Testing Area Child",
-        )
