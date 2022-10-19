@@ -27,6 +27,7 @@
         "views/individual_views.xml",
         "views/group_views.xml",
         "views/area.xml",
+        "views/area_kind.xml",
         "views/area_import_views.xml",
     ],
     "assets": {},

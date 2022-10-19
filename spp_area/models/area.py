@@ -27,6 +27,7 @@ class OpenSPPArea(models.Model):
     child_ids = fields.One2many(
         "spp.area", "id", "Child", compute="_compute_get_childs"
     )
+    kind = fields.Many2one("spp.area.kind", "Kind")
 
     def _compute_get_childs(self):
         for rec in self:
@@ -72,3 +73,10 @@ class OpenSPPArea(models.Model):
 
         self.env["ir.translation"]._upsert_translations(vals_list)
         return Area
+
+
+class OpenSPPAreaKind(models.Model):
+    _name = "spp.area.kind"
+    _description = "Area Kind"
+
+    name = fields.Char(required=True)
