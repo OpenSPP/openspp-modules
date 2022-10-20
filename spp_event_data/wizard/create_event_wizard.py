@@ -1,5 +1,7 @@
 # Part of OpenG2P. See LICENSE file for full copyright and licensing details.
 
+from datetime import date
+
 from odoo import _, fields, models
 
 
@@ -9,14 +11,12 @@ class SPPCreateEventWizard(models.TransientModel):
 
     event_data_model = fields.Selection(
         [("default", "")],
-        "Event Data Model",
+        "Event Type",
         default="default",
     )
-    partner_id = fields.Many2one(
-        "res.partner", domain=[("is_group", "=", True), ("is_registrant", "=", True)]
-    )
+    partner_id = fields.Many2one("res.partner", domain=[("is_registrant", "=", True)])
     registrar = fields.Char()
-    collection_date = fields.Date()
+    collection_date = fields.Date(default=date.today())
     expiry_date = fields.Date()
 
     def next_page(self):
@@ -44,7 +44,13 @@ class SPPCreateEventWizard(models.TransientModel):
                 }
                 event_id = self.env["spp.event.data"].create(vals_list)
 
-                wiz = self.env[wizard_model].create({"event_id": event_id.id})
+                target_type = "individual"
+                if rec.partner_id.is_group:
+                    target_type = "group"
+
+                wiz = self.env[wizard_model].create(
+                    {"event_id": event_id.id, "target_type": target_type}
+                )
 
                 return {
                     "name": _("Create %s Wizard" % view_name),

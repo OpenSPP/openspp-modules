@@ -7,6 +7,8 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='event_data_group']" position="inside">
               <field name="active_house_visit" />
+            </xpath>
+            <xpath expr="//group[@name='event_data_group2']" position="inside">
               <field name="active_phone_survey" />
             </xpath>
         </field>

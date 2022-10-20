@@ -28,14 +28,3 @@ class OpenSPPRegistrant(models.Model):
             active_phone_survey = rec._get_active_event("spp.event.phone.survey")
             if active_phone_survey:
                 rec.active_phone_survey = active_phone_survey.id
-
-    def _get_active_event(self, model):
-        for rec in self:
-            active_event = self.env["spp.event.data"].search(
-                [
-                    ("model", "=", model),
-                    ("state", "=", "active"),
-                    ("partner_id", "=", rec.id),
-                ]
-            )
-            return active_event

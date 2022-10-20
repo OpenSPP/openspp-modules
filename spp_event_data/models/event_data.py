@@ -14,11 +14,10 @@ class OpenSPPEventData(models.Model):
 
     name = fields.Char(compute="_compute_name", store=True)
     model = fields.Char("Related Document Model", index=True)
+    event_type = fields.Char(compute="_compute_event_type", store=True)
     res_id = fields.Many2oneReference("Related data", index=True, model_field="model")
     registrar = fields.Char()
-    partner_id = fields.Many2one(
-        "res.partner", domain=[("is_group", "=", True), ("is_registrant", "=", True)]
-    )
+    partner_id = fields.Many2one("res.partner", domain=[("is_registrant", "=", True)])
     collection_date = fields.Date()
     expiry_date = fields.Date()
     state = fields.Selection(
@@ -26,6 +25,15 @@ class OpenSPPEventData(models.Model):
         "State",
         default="active",
     )
+
+    @api.depends("model")
+    def _compute_event_type(self):
+        for rec in self:
+            rec.event_type = ""
+            if rec.model:
+                model_name = self.env["ir.model"].search([("model", "=", rec.model)])
+                if model_name:
+                    rec.event_type = model_name.name
 
     @api.depends("model", "res_id")
     def _compute_name(self):
@@ -36,9 +44,8 @@ class OpenSPPEventData(models.Model):
                 if model_name:
                     rec.name = model_name.name
 
-                model = self.env[rec.model].search([("id", "=", rec.res_id)])
-                if model and model.summary:
-                    rec.name += " - [%s]" % model.summary
+                if rec.create_date:
+                    rec.name += " - [%s]" % rec.create_date
 
     @api.model
     def create(self, vals):

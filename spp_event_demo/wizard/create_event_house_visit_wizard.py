@@ -8,6 +8,7 @@ class SPPCreateEventHouseVisitWizard(models.TransientModel):
     _description = "Create Event House Visit Wizard"
 
     event_id = fields.Many2one("spp.event.data")
+    target_type = fields.Selection([("individual", "Individual"), ("group", "Group")])
     summary = fields.Char()
     description = fields.Text()
 

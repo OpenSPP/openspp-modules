@@ -8,6 +8,7 @@
                 <field name="partner_id" />
                 <field name="name" />
                 <field name="model" />
+                <field name="event_type" />
                 <field name="res_id" />
                 <field name="registrar" />
                 <field name="collection_date" />

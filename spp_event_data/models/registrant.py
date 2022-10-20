@@ -23,3 +23,14 @@ class OpenSPPRegistrant(models.Model):
                 "target": "new",
                 "context": self.env.context,
             }
+
+    def _get_active_event(self, model):
+        for rec in self:
+            active_event = self.env["spp.event.data"].search(
+                [
+                    ("model", "=", model),
+                    ("state", "=", "active"),
+                    ("partner_id", "=", rec.id),
+                ]
+            )
+            return active_event
