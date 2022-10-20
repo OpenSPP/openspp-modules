@@ -42,9 +42,10 @@ class EventHouseVisitTest(TransactionCase):
         )
 
     def test_02_check_name(self):
+        house_visit_create_date = self.group_1.active_house_visit.create_date
         self.assertEqual(
             self.group_1.active_house_visit.name,
-            "House Visit - [Testing Visit]",
+            "House Visit - [%s]" % house_visit_create_date,
         )
 
     def test_03_recheck_active_house_visit_after_entering_new_visit(self):
