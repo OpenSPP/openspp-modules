@@ -5,7 +5,9 @@
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
+                <field name="parent_id" />
                 <field name="name" />
+                <field name="complete_name" string="Complete Name" />
             </tree>
         </field>
     </record>
@@ -16,6 +18,7 @@
         <field name="priority" eval="1" />
         <field name="arch" type="xml">
             <search string="Search Area">
+                <field name="parent_id" />
                 <field name="name" />
             </search>
         </field>

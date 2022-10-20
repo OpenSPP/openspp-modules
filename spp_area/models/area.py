@@ -79,8 +79,31 @@ class OpenSPPArea(models.Model):
 class OpenSPPAreaKind(models.Model):
     _name = "spp.area.kind"
     _description = "Area Kind"
+    _parent_name = "parent_id"
+    _parent_store = True
+    _rec_name = "complete_name"
+    _order = "parent_id,name"
 
+    parent_id = fields.Many2one("spp.area.kind", "Parent")
+    parent_path = fields.Char(index=True)
     name = fields.Char(required=True)
+    complete_name = fields.Char(
+        "Name", compute="_compute_complete_name", recursive=True, translate=True
+    )
+
+    @api.depends("name", "parent_id.complete_name")
+    def _compute_complete_name(self):
+        for rec in self:
+            if rec.id:
+                if rec.parent_id:
+                    rec.complete_name = "%s > %s" % (
+                        rec.parent_id.complete_name,
+                        rec.name,
+                    )
+                else:
+                    rec.complete_name = rec.name
+            else:
+                rec.complete_name = None
 
     def unlink(self):
         for rec in self:
@@ -90,7 +113,11 @@ class OpenSPPAreaKind(models.Model):
             if external_identifier and external_identifier.name:
                 raise ValidationError(_("Can't delete default Area Kind"))
             else:
-                return super(OpenSPPAreaKind, self).unlink()
+                areas = self.env["spp.area"].search([("kind", "=", rec.id)])
+                if areas:
+                    raise ValidationError(_("Can't delete used Area Kind"))
+                else:
+                    return super(OpenSPPAreaKind, self).unlink()
 
     def write(self, vals):
         for rec in self:

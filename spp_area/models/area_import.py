@@ -106,7 +106,11 @@ class OpenSPPAreaImport(models.Model):
                     for col in range(sheet.ncols):
                         col_name = sheet.cell(0, col).value
                         if col_name.find("Name") >= 0:
-                            maxcolsstr = col_name.strip("Area").replace("Name", "")
+                            maxcolsstr = ""
+                            if col_name.find("admin") >= 0:
+                                maxcolsstr = col_name.strip("admin").replace("Name", "")
+                            elif col_name.find("Area") >= 0:
+                                maxcolsstr = col_name.strip("Area").replace("Name", "")
                             maxcols_name_length = len(maxcolsstr)
                             if maxcols_name_length == 5 or maxcols_name_length == 4:
                                 maxcolsstr = maxcolsstr[:-3]
