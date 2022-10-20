@@ -1,0 +1,161 @@
+<odoo>
+    <record id="view_service_points_tree" model="ir.ui.view">
+        <field name="name">view_service_points_tree</field>
+        <field name="model">spp.service.point</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="is_disabled == True">
+                <field name="name" />
+                <field name="area_id" />
+                <field name="service_type_ids" widget="many2many_tags" />
+                <field name="phone_sanitized" />
+                <field name="is_contract_active" />
+                <field name="is_disabled" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_service_points_form" model="ir.ui.view">
+        <field name="name">view_service_points_form</field>
+        <field name="model">spp.service.point</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <form string="Service Point">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-ban"
+                            name="disable_service_point"
+                            attrs="{'invisible':[('is_disabled','!=',False)]}"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Disable</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check"
+                            name="enable_service_point"
+                            attrs="{'invisible':[('is_disabled','=',False)]}"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Enable</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title mb24">
+                        <label for="name" string="Agent:" />
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="Agent Name..."
+                                attrs="{'readonly':[('is_disabled','=',True)]}"
+                            />
+                        </h1>
+                        <label for="area_id" string="Area:" />
+                        <h2>
+                            <field
+                                name="area_id"
+                                placeholder="Area Name..."
+                                options="{'no_create':true,'no_edit':true,'no_open':true}"
+                                attrs="{'readonly':[('is_disabled','=',True)]}"
+                            />
+                        </h2>
+                    </div>
+                    <group colspan="4" col="4">
+                        <field
+                            name="service_type_ids"
+                            widget="many2many_tags"
+                            options="{'no_create_edit':true,'no_open':true}"
+                            attrs="{'readonly':[('is_disabled','=',True)]}"
+                            colspan="4"
+                        />
+                        <field name="phone_no" attrs="{'readonly':[('is_disabled','=',True)]}" />
+                        <field name="phone_sanitized" />
+                        <field
+                            name="country_id"
+                            options="{'no_create':true,'no_edit':true,'no_open':true}"
+                            attrs="{'readonly':[('is_disabled','=',True)]}"
+                        />
+                        <field
+                            name="shop_address"
+                            attrs="{'readonly':[('is_disabled','=',True)]}"
+                            colspan="4"
+                        />
+                        <field
+                            name="is_contract_active"
+                            attrs="{'readonly':[('is_disabled','=',True)]}"
+                            colspan="4"
+                        />
+                        <field name="is_disabled" readonly="True" />
+                        <field name="disabled_date" readonly="True" />
+                        <field
+                            name="disabled_reason"
+                            attrs="{'readonly':[('is_disabled','=',False)], 'required':[('is_disabled','=',True)]}"
+                            colspan="4"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="service_points_filter" model="ir.ui.view">
+        <field name="name">service_points_filter</field>
+        <field name="model">spp.service.point</field>
+        <field name="priority" eval="0" />
+        <field name="arch" type="xml">
+            <search string="Search Service Points">
+                <field name="name" />
+                <field name="area_id" string="Area" />
+                <field name="service_type_ids" string="Service Type" />
+                <separator />
+                <group expand="0" name="group_by" string="Group By">
+                    <filter name="grp_area_id" string="Area" context="{'group_by': 'area_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_service_points" model="ir.actions.act_window">
+        <field name="name">Service Point</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.service.point</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Service Point!
+            </p><p>
+                Click the create button to enter a new service point.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_service_points_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_service_points_tree" />
+        <field name="act_window_id" ref="action_service_points" />
+    </record>
+
+    <record id="action_service_points_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_service_points_form" />
+        <field name="act_window_id" ref="action_service_points" />
+    </record>
+
+    <menuitem
+        id="menu_service_points"
+        name="Service Points"
+        action="action_service_points"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="1000"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+</odoo>
