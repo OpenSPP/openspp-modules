@@ -106,10 +106,11 @@ class OpenSPPAreaImport(models.Model):
                     for col in range(sheet.ncols):
                         col_name = sheet.cell(0, col).value
                         if col_name.find("Name") >= 0:
-                            maxcolsstr = col_name.strip("admin").replace("Name", "")
+                            maxcolsstr = col_name.strip("Area").replace("Name", "")
                             maxcols_name_length = len(maxcolsstr)
                             if maxcols_name_length == 5 or maxcols_name_length == 4:
                                 maxcolsstr = maxcolsstr[:-3]
+                                maxcolsstr = maxcolsstr.replace("_", "")
                             try:
                                 max_cols = int(maxcolsstr)
                                 break
@@ -125,6 +126,7 @@ class OpenSPPAreaImport(models.Model):
                             admin_ref = None
                             admin_alt1 = None
                             admin_alt2 = None
+                            admin_kind = None
                             state = "Validated"
                             errctr = 0
                             remarks = ""
@@ -142,7 +144,7 @@ class OpenSPPAreaImport(models.Model):
 
                                 # Determine the column name based on First Row rowIndex(0), columnIndex(col)
                                 col_name = sheet.cell(0, col).value
-                                if col_name.find(str(xcols) + "Pcode") >= 0:
+                                if col_name.find(str(xcols) + "Code") >= 0:
                                     admin_code = col_value
                                 elif col_name.find(str(xcols) + "Name") >= 0:
                                     if not admin_name:
@@ -178,6 +180,8 @@ class OpenSPPAreaImport(models.Model):
                                     admin_alt1 = col_value
                                 elif col_name.find(str(xcols) + "AltName2") >= 0:
                                     admin_alt2 = col_value
+                                elif col_name.find(str(xcols) + "Kind") >= 0:
+                                    admin_kind = col_value
                                 _logger.info(
                                     "Area Masterlist Import: LANGUAGES: %s" % lang
                                 )
@@ -193,6 +197,7 @@ class OpenSPPAreaImport(models.Model):
                                     "admin_ref": admin_ref,
                                     "admin_alt1": admin_alt1,
                                     "admin_alt2": admin_alt2,
+                                    "admin_kind": admin_kind,
                                     "level": xcols,
                                     "remarks": remarks,
                                     "state": state,
@@ -232,12 +237,19 @@ class OpenSPPAreaImport(models.Model):
             for raw in rec.raw_data_ids:
                 if raw.state == "Validated":
                     if raw.admin_name:
+                        area_kind = self.env["spp.area.kind"].search(
+                            [("name", "=", raw.admin_kind)]
+                        )
+                        if not area_kind:
+                            vals = [{"name": raw.admin_kind}]
+                            area_kind = self.env["spp.area.kind"].create(vals)
                         if raw.level == 0:
                             new_vals = {
                                 "name": raw.admin_name or False,
                                 "code": raw.admin_code or False,
                                 "altnames": raw.admin_alt1 or raw.admin_alt2 or False,
                                 "level": raw.level or False,
+                                "kind": area_kind[0].id or False,
                             }
                         else:
                             new_vals = {
@@ -246,6 +258,7 @@ class OpenSPPAreaImport(models.Model):
                                 "code": raw.admin_code or False,
                                 "altnames": raw.admin_alt1 or raw.admin_alt2 or False,
                                 "level": raw.level or False,
+                                "kind": area_kind[0].id or False,
                             }
                         # Check if Area already Exist
                         curr_area = self.env["spp.area"].search(
@@ -299,6 +312,7 @@ class OpenSPPAreaImportActivities(models.Model):
     admin_alt1 = fields.Char()
     admin_alt2 = fields.Char()
     admin_ref = fields.Char()
+    admin_kind = fields.Char()
     level = fields.Integer()
     row_index = fields.Integer()
     lang_ids = fields.One2many("spp.area.import.lang", "raw_id", "Languages")

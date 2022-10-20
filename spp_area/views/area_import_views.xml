@@ -115,6 +115,7 @@
                             <field name="admin_alt1" />
                             <field name="admin_alt2" />
                             <field name="admin_ref" />
+                            <field name="admin_kind" />
                             <field name="level" />
                             <field name="row_index" />
                             <field name="lang_ids" widget="many2many_tags" readonly="1" />
