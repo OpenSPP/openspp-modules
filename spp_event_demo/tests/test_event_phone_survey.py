@@ -42,9 +42,10 @@ class EventPhoneSurveyTest(TransactionCase):
         )
 
     def test_02_check_name(self):
+        phone_survey_create_date = self.group_1.active_phone_survey.create_date
         self.assertEqual(
             self.group_1.active_phone_survey.name,
-            "Phone Survey - [Testing Visit]",
+            "Phone Survey - [%s]" % phone_survey_create_date,
         )
 
     def test_03_recheck_active_phone_survey_after_entering_new_visit(self):
