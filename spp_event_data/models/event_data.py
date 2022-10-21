@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 import logging
+from datetime import date
 
 from odoo import _, api, fields, models
 
@@ -18,10 +19,10 @@ class OpenSPPEventData(models.Model):
     res_id = fields.Many2oneReference("Related data", index=True, model_field="model")
     registrar = fields.Char()
     partner_id = fields.Many2one("res.partner", domain=[("is_registrant", "=", True)])
-    collection_date = fields.Date()
+    collection_date = fields.Date(default=date.today(), required=True)
     expiry_date = fields.Date()
     state = fields.Selection(
-        [("active", "Active"), ("done", "Done")],
+        [("active", "Active"), ("inactive", "Inactive")],
         "State",
         default="active",
     )
@@ -67,7 +68,7 @@ class OpenSPPEventData(models.Model):
 
     def end_active_event(self):
         for rec in self:
-            rec.state = "done"
+            rec.state = "inactive"
 
     def open_form(self):
         for rec in self:

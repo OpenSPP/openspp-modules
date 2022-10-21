@@ -14,7 +14,7 @@ class OpenSPPRegistrant(models.Model):
             view = self.env.ref("spp_event_data.create_event_data_form_view")
             wiz = self.env["spp.create.event.wizard"].create({"partner_id": rec.id})
             return {
-                "name": _("Create Event Wizard"),
+                "name": _("Create Event Data"),
                 "view_mode": "form",
                 "res_model": "spp.create.event.wizard",
                 "res_id": wiz.id,

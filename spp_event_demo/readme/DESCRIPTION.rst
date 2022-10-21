@@ -1,1 +1,1 @@
-OpenSPP Event House Visit
+OpenSPP Event data demo and tests
