@@ -6,4 +6,6 @@ class G2PRegistrant(models.Model):
     _inherit = "res.partner"
 
     # Custom Fields
-    area_id = fields.Many2one("spp.area", "Area")
+    area_id = fields.Many2one(
+        "spp.area", "Area", domain="[('kind', '=', 'Home Address')]"
+    )

@@ -1,7 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import logging
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -27,6 +28,7 @@ class OpenSPPArea(models.Model):
     child_ids = fields.One2many(
         "spp.area", "id", "Child", compute="_compute_get_childs"
     )
+    kind = fields.Many2one("spp.area.kind", "Kind")
 
     def _compute_get_childs(self):
         for rec in self:
@@ -35,21 +37,21 @@ class OpenSPPArea(models.Model):
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
-        cur_lang = self._context.get("lang", False)
-        area_name = self.env["ir.translation"]._get_ids(
-            "spp.area,name", "model", cur_lang, self.ids
-        )
-        for area in self:
-            if area.id:
-                if area.parent_id:
-                    area.complete_name = "%s > %s" % (
-                        area.parent_id.complete_name,
-                        area_name[area.id],
+        for rec in self:
+            cur_lang = rec._context.get("lang", False)
+            area_name = rec.env["ir.translation"]._get_ids(
+                "spp.area,name", "model", cur_lang, rec.ids
+            )
+            if rec.id:
+                if rec.parent_id:
+                    rec.complete_name = "%s > %s" % (
+                        rec.parent_id.complete_name,
+                        area_name[rec.id],
                     )
                 else:
-                    area.complete_name = area_name[area.id]
+                    rec.complete_name = area_name[rec.id]
             else:
-                area.complete_name = None
+                rec.complete_name = None
 
     @api.model
     def create(self, vals):
@@ -72,3 +74,57 @@ class OpenSPPArea(models.Model):
 
         self.env["ir.translation"]._upsert_translations(vals_list)
         return Area
+
+
+class OpenSPPAreaKind(models.Model):
+    _name = "spp.area.kind"
+    _description = "Area Kind"
+    _parent_name = "parent_id"
+    _parent_store = True
+    _rec_name = "complete_name"
+    _order = "parent_id,name"
+
+    parent_id = fields.Many2one("spp.area.kind", "Parent")
+    parent_path = fields.Char(index=True)
+    name = fields.Char(required=True)
+    complete_name = fields.Char(
+        "Name", compute="_compute_complete_name", recursive=True, translate=True
+    )
+
+    @api.depends("name", "parent_id.complete_name")
+    def _compute_complete_name(self):
+        for rec in self:
+            if rec.id:
+                if rec.parent_id:
+                    rec.complete_name = "%s > %s" % (
+                        rec.parent_id.complete_name,
+                        rec.name,
+                    )
+                else:
+                    rec.complete_name = rec.name
+            else:
+                rec.complete_name = None
+
+    def unlink(self):
+        for rec in self:
+            external_identifier = self.env["ir.model.data"].search(
+                [("res_id", "=", rec.id), ("model", "=", "spp.area.kind")]
+            )
+            if external_identifier and external_identifier.name:
+                raise ValidationError(_("Can't delete default Area Kind"))
+            else:
+                areas = self.env["spp.area"].search([("kind", "=", rec.id)])
+                if areas:
+                    raise ValidationError(_("Can't delete used Area Kind"))
+                else:
+                    return super(OpenSPPAreaKind, self).unlink()
+
+    def write(self, vals):
+        for rec in self:
+            external_identifier = self.env["ir.model.data"].search(
+                [("res_id", "=", rec.id), ("model", "=", "spp.area.kind")]
+            )
+            if external_identifier and external_identifier.name:
+                raise ValidationError(_("Can't edit default Area Kind"))
+            else:
+                return super(OpenSPPAreaKind, self).write(vals)

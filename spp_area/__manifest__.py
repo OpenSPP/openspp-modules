@@ -23,10 +23,12 @@
         ]
     },
     "data": [
+        "data/area_kind_data.xml",
         "security/ir.model.access.csv",
         "views/individual_views.xml",
         "views/group_views.xml",
         "views/area.xml",
+        "views/area_kind.xml",
         "views/area_import_views.xml",
     ],
     "assets": {},

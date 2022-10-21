@@ -10,6 +10,7 @@
                 <field name="code" />
                 <field name="altnames" />
                 <field name="level" />
+                <field name="kind" />
             </tree>
         </field>
     </record>
@@ -41,6 +42,7 @@
                         <field name="code" colspan="2" />
                         <field name="level" colspan="2" />
                         <field name="complete_name" invisible="1" />
+                        <field name="kind" />
                     </group>
                     <notebook>
                         <page string="Child">
