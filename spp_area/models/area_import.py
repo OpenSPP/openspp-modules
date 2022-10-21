@@ -148,7 +148,10 @@ class OpenSPPAreaImport(models.Model):
 
                                 # Determine the column name based on First Row rowIndex(0), columnIndex(col)
                                 col_name = sheet.cell(0, col).value
-                                if col_name.find(str(xcols) + "Code") >= 0:
+                                if (
+                                    col_name.find(str(xcols) + "Code") >= 0
+                                    or col_name.find(str(xcols) + "Pcode") >= 0
+                                ):
                                     admin_code = col_value
                                 elif col_name.find(str(xcols) + "Name") >= 0:
                                     if not admin_name:
@@ -241,19 +244,23 @@ class OpenSPPAreaImport(models.Model):
             for raw in rec.raw_data_ids:
                 if raw.state == "Validated":
                     if raw.admin_name:
-                        area_kind = self.env["spp.area.kind"].search(
-                            [("name", "=", raw.admin_kind)]
-                        )
-                        if not area_kind:
-                            vals = [{"name": raw.admin_kind}]
-                            area_kind = self.env["spp.area.kind"].create(vals)
+                        area_kind = None
+                        area_kind_id = None
+                        if raw.admin_kind:
+                            area_kind = self.env["spp.area.kind"].search(
+                                [("name", "=", raw.admin_kind)]
+                            )
+                            if not area_kind:
+                                vals = [{"name": raw.admin_kind}]
+                                area_kind = self.env["spp.area.kind"].create(vals)
+                                area_kind_id = area_kind[0].id
                         if raw.level == 0:
                             new_vals = {
                                 "name": raw.admin_name or False,
                                 "code": raw.admin_code or False,
                                 "altnames": raw.admin_alt1 or raw.admin_alt2 or False,
                                 "level": raw.level or False,
-                                "kind": area_kind[0].id or False,
+                                "kind": area_kind_id or False,
                             }
                         else:
                             new_vals = {
@@ -262,7 +269,7 @@ class OpenSPPAreaImport(models.Model):
                                 "code": raw.admin_code or False,
                                 "altnames": raw.admin_alt1 or raw.admin_alt2 or False,
                                 "level": raw.level or False,
-                                "kind": area_kind[0].id or False,
+                                "kind": area_kind_id or False,
                             }
                         # Check if Area already Exist
                         curr_area = self.env["spp.area"].search(
