@@ -23,7 +23,8 @@ class EventHouseVisitTest(TransactionCase):
         cls.house_visit_1 = cls.env["spp.event.house.visit"].create(
             {
                 "summary": "Testing Visit",
-                "description": "This visit is for testing only",
+                "is_farm": True,
+                "farm_size_acre": 50,
             }
         )
         cls.event_data_1 = cls.env["spp.event.data"].create(
