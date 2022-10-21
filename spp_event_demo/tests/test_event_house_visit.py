@@ -52,7 +52,8 @@ class EventHouseVisitTest(TransactionCase):
     def test_03_recheck_active_house_visit_after_entering_new_visit(self):
         vals_house = {
             "summary": "Testing Visit 2",
-            "description": "This visit is for testing again",
+            "is_farm": True,
+            "farm_size_acre": 50,
         }
         house_visit_2 = self.env["spp.event.house.visit"].create(vals_house)
         vals_event_data = {
