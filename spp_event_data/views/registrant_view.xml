@@ -38,7 +38,7 @@
                         <field
                                     name="state"
                                     decoration-success="state=='active'"
-                                    decoration-info="state=='done'"
+                                    decoration-warning="state=='inactive'"
                                     widget="badge"
                                 />
                       </tree>
@@ -87,7 +87,7 @@
                         <field
                                     name="state"
                                     decoration-success="state=='active'"
-                                    decoration-info="state=='done'"
+                                    decoration-warning="state=='inactive'"
                                     widget="badge"
                                 />
                       </tree>
