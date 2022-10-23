@@ -254,6 +254,11 @@ class OpenSPPAreaImport(models.Model):
                                 vals = [{"name": raw.admin_kind}]
                                 area_kind = self.env["spp.area.kind"].create(vals)
                                 area_kind_id = area_kind[0].id
+                            else:
+                                area_kind_id = area_kind[0].id
+                        else:
+                            area_kind_id = self.env.ref("spp_area.home_area_kind").id
+
                         if raw.level == 0:
                             new_vals = {
                                 "name": raw.admin_name or False,
