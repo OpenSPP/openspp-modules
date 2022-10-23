@@ -55,10 +55,16 @@ class OpenSPPArea(models.Model):
 
     @api.model
     def create(self, vals):
+        area_name = self.name
+        if "name" in vals:
+            area_name = vals["name"]
+        area_code = self.code
+        if "code" in vals:
+            area_code = vals["code"]
         curr_area = self.env["spp.area"].search(
             [
-                ("name", "=", vals["name"]),
-                ("code", "=", vals["code"]),
+                ("name", "=", area_name),
+                ("code", "=", area_code),
             ]
         )
         if curr_area:
