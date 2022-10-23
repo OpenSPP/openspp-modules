@@ -55,25 +55,54 @@ class OpenSPPArea(models.Model):
 
     @api.model
     def create(self, vals):
-        Area = super(OpenSPPArea, self).create(vals)
-        _logger.info("Area ID: %s" % Area.id)
-        Languages = self.env["res.lang"].search([("active", "=", True)])
-        vals_list = []
-        for lang_code in Languages:
-            vals_list.append(
-                {
-                    "name": "spp.area,name",
-                    "lang": lang_code.code,
-                    "res_id": Area.id,
-                    "src": Area.name,
-                    "value": None,
-                    "state": "to_translate",
-                    "type": "model",
-                }
-            )
+        curr_area = self.env["spp.area"].search(
+            [
+                ("name", "=", vals["name"]),
+                ("code", "=", vals["code"]),
+            ]
+        )
+        if curr_area:
+            raise ValidationError(_("Area already exist!"))
+        else:
+            Area = super(OpenSPPArea, self).create(vals)
+            _logger.info("Area ID: %s" % Area.id)
+            Languages = self.env["res.lang"].search([("active", "=", True)])
+            vals_list = []
+            for lang_code in Languages:
+                vals_list.append(
+                    {
+                        "name": "spp.area,name",
+                        "lang": lang_code.code,
+                        "res_id": Area.id,
+                        "src": Area.name,
+                        "value": None,
+                        "state": "to_translate",
+                        "type": "model",
+                    }
+                )
 
-        self.env["ir.translation"]._upsert_translations(vals_list)
-        return Area
+            self.env["ir.translation"]._upsert_translations(vals_list)
+            return Area
+
+    def write(self, vals):
+        for rec in self:
+            area_name = rec.name
+            if "name" in vals:
+                area_name = vals["name"]
+            area_code = rec.code
+            if "code" in vals:
+                area_code = vals["code"]
+            curr_area = self.env["spp.area"].search(
+                [
+                    ("name", "=", area_name),
+                    ("code", "=", area_code),
+                    ("id", "!=", rec.id),
+                ]
+            )
+            if curr_area:
+                raise ValidationError(_("Area already exist!"))
+            else:
+                return super(OpenSPPArea, self).write(vals)
 
 
 class OpenSPPAreaKind(models.Model):
