@@ -5,6 +5,7 @@
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <tree>
+                <button name="open_form" type="object" icon="fa-external-link" class="btn-success" />
                 <field name="partner_id" />
                 <field name="name" />
                 <field name="model" />
