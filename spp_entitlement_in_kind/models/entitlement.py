@@ -46,32 +46,6 @@ class G2PInKindEntitlement(models.Model):
                 name += ": In-Kind (" + record.product_id.name + ")"
             record.name = name
 
-    def _process_noncash_base_entitlement(self, rec):
-        # _logger.info("DEBUG: _process_noncash_base_entitlement: rec: %s", rec)
-        if rec.manage_inventory:
-            rec._action_launch_stock_rule()
-        rec.update(
-            {
-                "state": "approved",
-                "date_approved": fields.Date.today(),
-            }
-        )
-
-    def open_entitlement_form(self):
-        if self.is_cash_entitlement:
-            view = "g2p_programs.view_entitlement_form"
-        else:  # In-kind Entitlement
-            view = "spp_entitlement_in_kind.view_entitlement_inkind_form"
-        return {
-            "name": "Entitlement",
-            "view_mode": "form",
-            "res_model": "g2p.entitlement",
-            "res_id": self.id,
-            "view_id": self.env.ref(view).id,
-            "type": "ir.actions.act_window",
-            "target": "new",
-        }
-
     # Inventory functions
     def _prepare_procurement_values(self, group_id=False):
         """Prepare specific key for moves or other components that will be created from a stock rule

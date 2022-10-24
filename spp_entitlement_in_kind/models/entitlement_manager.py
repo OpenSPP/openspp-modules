@@ -24,6 +24,9 @@ class G2PInKindEntitlementManager(models.Model):
     ]
     _description = "In-Kind Entitlement Manager"
 
+    # Set to False so that the UI will not display the payment management components
+    IS_CASH_ENTITLEMENT = False
+
     @api.model
     def _default_warehouse_id(self):
         return self.env["stock.warehouse"].search(
@@ -147,6 +150,73 @@ class G2PInKindEntitlementManager(models.Model):
         # TODO: Change the status of the entitlements to `validated` for this members.
         # move the funds from the program's wallet to the wallet of each Beneficiary that are validated
         pass
+
+    def approve_entitlements(self, entitlements):
+        state_err = 0
+        message = ""
+        sw = 0
+        for rec in entitlements:
+            if rec.state in ("draft", "pending_validation"):
+                # _logger.info("DEBUG: _process_noncash_base_entitlement: rec: %s", rec)
+                if rec.manage_inventory:
+                    rec._action_launch_stock_rule()
+                rec.update(
+                    {
+                        "state": "approved",
+                        "date_approved": fields.Date.today(),
+                    }
+                )
+            else:
+                state_err += 1
+                if sw == 0:
+                    sw = 1
+                    message = _(
+                        "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
+                    )
+                message += _("Program: %(prg)s, Beneficiary: %(partner)s.\n") % {
+                    "prg": rec.cycle_id.program_id.name,
+                    "partner": rec.partner_id.name,
+                }
+
+        return (state_err, message)
+
+    def open_entitlements_form(self, cycle):
+        self.ensure_one()
+        action = {
+            "name": _("Cycle In-Kind Entitlements"),
+            "type": "ir.actions.act_window",
+            "res_model": "g2p.entitlement",
+            "context": {
+                "create": False,
+                "default_cycle_id": cycle.id,
+                # "search_default_approved_state": 1,
+            },
+            "view_mode": "list,form",
+            "views": [
+                [self.env.ref("g2p_programs.view_entitlement_tree").id, "tree"],
+                [
+                    self.env.ref(
+                        "spp_entitlement_in_kind.view_entitlement_inkind_form"
+                    ).id,
+                    "form",
+                ],
+            ],
+            "domain": [("cycle_id", "=", cycle.id)],
+        }
+        return action
+
+    def open_entitlement_form(self, rec):
+        return {
+            "name": "Entitlement",
+            "view_mode": "form",
+            "res_model": "g2p.entitlement",
+            "res_id": rec.id,
+            "view_id": self.env.ref(
+                "spp_entitlement_in_kind.view_entitlement_inkind_form"
+            ).id,
+            "type": "ir.actions.act_window",
+            "target": "new",
+        }
 
 
 class G2PInKindEntitlementItem(models.Model):
