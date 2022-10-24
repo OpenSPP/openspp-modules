@@ -54,6 +54,17 @@ class OpenSPPArea(models.Model):
                 rec.complete_name = None
 
     @api.model
+    def _name_search(
+        self, name, args=None, operator="ilike", limit=100, name_get_uid=None
+    ):
+        args = args or []
+        domain = []
+        if name:
+            domain = [("name", operator, name)]
+
+        return self._search(domain + args, limit=limit, access_rights_uid=name_get_uid)
+
+    @api.model
     def create(self, vals):
         area_name = self.name
         if "name" in vals:

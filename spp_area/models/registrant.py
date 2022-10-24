@@ -7,7 +7,7 @@ class G2PRegistrant(models.Model):
 
     @api.model
     def _get_area_domain(self):
-        area_id = self.env.ref("spp_area.home_area_kind").id
+        area_id = self.env.ref("spp_area.admin_area_kind").id
         return [("kind", "=", area_id)]
 
     # Custom Fields
