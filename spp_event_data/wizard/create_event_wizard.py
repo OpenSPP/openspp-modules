@@ -44,13 +44,7 @@ class SPPCreateEventWizard(models.TransientModel):
                 }
                 event_id = self.env["spp.event.data"].create(vals_list)
 
-                target_type = "individual"
-                if rec.partner_id.is_group:
-                    target_type = "group"
-
-                wiz = self.env[wizard_model].create(
-                    {"event_id": event_id.id, "target_type": target_type}
-                )
+                wiz = self.env[wizard_model].create({"event_id": event_id.id})
 
                 return {
                     "name": _("Create %s Wizard" % view_name),
