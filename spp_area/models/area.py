@@ -58,6 +58,10 @@ class OpenSPPArea(models.Model):
             else:
                 rec.complete_name = None
 
+    def _temp_complete_name(self):
+        for rec in self:
+            rec.complete_name = rec.name
+
     @api.model
     def _name_search(
         self, name, args=None, operator="ilike", limit=100, name_get_uid=None
@@ -103,7 +107,7 @@ class OpenSPPArea(models.Model):
                 )
 
             self.env["ir.translation"]._upsert_translations(vals_list)
-            Area._compute_complete_name()
+            Area._temp_complete_name()
             return Area
 
     def write(self, vals):
