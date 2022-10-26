@@ -87,7 +87,6 @@ class OpenSPPArea(models.Model):
             raise ValidationError(_("Area already exist!"))
         else:
             Area = super(OpenSPPArea, self).create(vals)
-            Area._compute_complete_name()
             Languages = self.env["res.lang"].search([("active", "=", True)])
             vals_list = []
             for lang_code in Languages:
@@ -104,6 +103,7 @@ class OpenSPPArea(models.Model):
                 )
 
             self.env["ir.translation"]._upsert_translations(vals_list)
+            Area._compute_complete_name()
             return Area
 
     def write(self, vals):
