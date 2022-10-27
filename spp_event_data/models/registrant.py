@@ -24,7 +24,7 @@ class OpenSPPRegistrant(models.Model):
                 "context": self.env.context,
             }
 
-    def _get_active_event(self, model):
+    def _get_active_event_id(self, model):
         for rec in self:
             active_event = self.env["spp.event.data"].search(
                 [
@@ -33,4 +33,7 @@ class OpenSPPRegistrant(models.Model):
                     ("partner_id", "=", rec.id),
                 ]
             )
-            return active_event
+            if active_event:
+                return active_event.id
+            else:
+                return
