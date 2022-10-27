@@ -54,7 +54,6 @@ class OpenSPPArea(models.Model):
                     if area_name[rec.id]:
                         rec.complete_name = area_name[rec.id]
 
-                    _logger.info("Area Name: %s" % rec.complete_name)
             else:
                 rec.complete_name = None
 
