@@ -13,20 +13,6 @@ class OpenSPPRegistrant(models.Model):
         "spp.event.data", compute="_compute_active_phone_survey"
     )
 
-    def _get_active_event_id(self, model):
-        for rec in self:
-            active_event = self.env["spp.event.data"].search(
-                [
-                    ("model", "=", model),
-                    ("state", "=", "active"),
-                    ("partner_id", "=", rec.id),
-                ]
-            )
-            if active_event:
-                return active_event.id
-            else:
-                return
-
     @api.depends("event_data_ids")
     def _compute_active_house_visit(self):
         for rec in self:

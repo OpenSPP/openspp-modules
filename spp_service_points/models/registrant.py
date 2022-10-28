@@ -23,7 +23,7 @@ class OpenSPPServicePoint(models.Model):
     name = fields.Char("Agent", required=True)
     area_id = fields.Many2one("spp.area", "Area")
     service_type_ids = fields.Many2many("spp.service.type", string="Service Types")
-    phone_no = fields.Char("Phone Number", required=True)
+    phone_no = fields.Char("Phone Number")
     phone_sanitized = fields.Char(compute="_compute_phone_sanitized")
     shop_address = fields.Text("Address")
     is_contract_active = fields.Boolean("Active Contract")

@@ -42,6 +42,7 @@ class OpenSPPArea(models.Model):
             area_name = rec.env["ir.translation"]._get_ids(
                 "spp.area,name", "model", cur_lang, rec.ids
             )
+
             if rec.id:
                 if rec.parent_id:
                     rec.complete_name = "%s > %s" % (
@@ -49,9 +50,16 @@ class OpenSPPArea(models.Model):
                         area_name[rec.id],
                     )
                 else:
-                    rec.complete_name = area_name[rec.id]
+                    rec.complete_name = rec.name
+                    if area_name[rec.id]:
+                        rec.complete_name = area_name[rec.id]
+
             else:
                 rec.complete_name = None
+
+    def _temp_complete_name(self):
+        for rec in self:
+            rec.complete_name = rec.name
 
     @api.model
     def _name_search(
@@ -82,7 +90,6 @@ class OpenSPPArea(models.Model):
             raise ValidationError(_("Area already exist!"))
         else:
             Area = super(OpenSPPArea, self).create(vals)
-            _logger.info("Area ID: %s" % Area.id)
             Languages = self.env["res.lang"].search([("active", "=", True)])
             vals_list = []
             for lang_code in Languages:
@@ -99,6 +106,7 @@ class OpenSPPArea(models.Model):
                 )
 
             self.env["ir.translation"]._upsert_translations(vals_list)
+            Area._temp_complete_name()
             return Area
 
     def write(self, vals):
