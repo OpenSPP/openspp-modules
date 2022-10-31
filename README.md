@@ -1,8 +1,8 @@
 
 <!-- /!\ Non OCA Context : Set here the badge of your runbot / runboat instance. -->
-[![Pre-commit Status](https://github.com/openspp-project/openspp-program/actions/workflows/pre-commit.yml/badge.svg?branch=15.0)](https://github.com/openspp-project/openspp-program/actions/workflows/pre-commit.yml?query=branch%3A15.0)
-[![Build Status](https://github.com/openspp-project/openspp-program/actions/workflows/test.yml/badge.svg?branch=15.0)](https://github.com/openspp-project/openspp-program/actions/workflows/test.yml?query=branch%3A15.0)
-[![codecov](https://codecov.io/gh/openspp-project/openspp-program/branch/15.0/graph/badge.svg)](https://codecov.io/gh/openspp-project/openspp-program)
+[![Pre-commit Status](https://github.com/openspp/openspp-program/actions/workflows/pre-commit.yml/badge.svg?branch=15.0)](https://github.com/openspp/openspp-program/actions/workflows/pre-commit.yml?query=branch%3A15.0)
+[![Build Status](https://github.com/openspp/openspp-program/actions/workflows/test.yml/badge.svg?branch=15.0)](https://github.com/openspp/openspp-program/actions/workflows/test.yml?query=branch%3A15.0)
+[![codecov](https://codecov.io/gh/openspp/openspp-program/branch/15.0/graph/badge.svg)](https://codecov.io/gh/openspp/openspp-program)
 <!-- /!\ Non OCA Context : Set here the badge of your translation instance. -->
 
 <!-- /!\ do not modify above this line -->
