@@ -1,0 +1,201 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_service_points
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "<span class=\"o_stat_text\">Disable</span>"
+msgstr ""
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "<span class=\"o_stat_text\">Enable</span>"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__is_contract_active
+msgid "Active Contract"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__shop_address
+msgid "Address"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__name
+msgid "Agent"
+msgstr ""
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Agent Name..."
+msgstr ""
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Agent:"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__area_id
+#: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
+msgid "Area"
+msgstr ""
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Area Name..."
+msgstr ""
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Area:"
+msgstr ""
+
+#. module: spp_service_points
+#: model_terms:ir.actions.act_window,help:spp_service_points.action_service_points
+msgid "Click the create button to enter a new service point."
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model,name:spp_service_points.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__country_id
+msgid "Country"
+msgstr ""
+
+#. module: spp_service_points
+#: model_terms:ir.actions.act_window,help:spp_service_points.action_service_points
+msgid "Create a new Service Point!"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__create_uid
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__create_date
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__disabled_date
+msgid "Date Disabled"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__disabled_reason
+msgid "Disable Reason"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__is_disabled
+msgid "Disabled"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__display_name
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
+msgid "Group By"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__id
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point____last_update
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__write_uid
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__write_date
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__phone_no
+msgid "Phone Number"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__phone_sanitized
+msgid "Phone Sanitized"
+msgstr ""
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
+msgid "Search Service Points"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.actions.act_window,name:spp_service_points.action_service_points
+#: model:ir.model,name:spp_service_points.model_spp_service_point
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Service Point"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_res_partner__service_point_ids
+#: model:ir.model.fields,field_description:spp_service_points.field_res_users__service_point_ids
+#: model:ir.ui.menu,name:spp_service_points.menu_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_point_groups_form
+msgid "Service Points"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model,name:spp_service_points.model_spp_service_type
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__name
+#: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
+msgid "Service Type"
+msgstr ""
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__service_type_ids
+msgid "Service Types"
+msgstr ""
+
+#. module: spp_service_points
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format
+msgid "Service point is already disabled."
+msgstr ""
+
+#. module: spp_service_points
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format
+msgid "Service point is already enabled."
+msgstr ""
