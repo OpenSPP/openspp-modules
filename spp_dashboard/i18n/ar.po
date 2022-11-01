@@ -6,14 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-11-02 07:22+0000\n"
+"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
+"spp_dashboard/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.view_cycle_form_dashboard
@@ -121,7 +124,7 @@ msgstr ""
 #. module: spp_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_block_form_view_spp
 msgid "Name:"
-msgstr ""
+msgstr "اسم:"
 
 #. module: spp_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.view_cycle_tree_dashboard
@@ -141,7 +144,7 @@ msgstr ""
 #: model:ir.ui.menu,name:spp_dashboard.menu_program_dashboard
 #, python-format
 msgid "Program"
-msgstr ""
+msgstr "برنامج"
 
 #. module: spp_dashboard
 #: model:ir.actions.client,name:spp_dashboard.action_program_dashboard
@@ -162,7 +165,7 @@ msgstr ""
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_menu__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "تسلسل"
 
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_block__use_func
