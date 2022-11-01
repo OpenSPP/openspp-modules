@@ -6,14 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator:  <jeremi@openspp.org>\n"
-"Language-Team: Language C\n"
+"PO-Revision-Date: 2022-11-02 07:22+0000\n"
+"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
+"spp_event_demo/ar/>\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"PO-Revision-Date: 2022-10-31 21:51+0700\n"
-"Language: C\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__active_house_visit
@@ -48,7 +51,7 @@ msgstr ""
 #. module: spp_event_demo
 #: model:ir.model,name:spp_event_demo.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "اتصال"
 
 #. module: spp_event_demo
 #: model:ir.model,name:spp_event_demo.model_spp_create_event_house_visit_wizard
@@ -81,7 +84,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__create_uid
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "انشأ من قبل"
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__create_date
@@ -89,7 +92,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__create_date
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__create_date
 msgid "Created on"
-msgstr ""
+msgstr "انشأ على"
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__description
@@ -152,7 +155,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__id
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__id
 msgid "ID"
-msgstr ""
+msgstr "بطاقة تعريف"
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__is_farm
@@ -166,7 +169,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit____last_update
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "تاريخ آخر تعديل"
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__write_uid
@@ -174,7 +177,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__write_uid
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__write_date
@@ -182,7 +185,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__write_date
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__no_food_stock
