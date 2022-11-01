@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_spp_auth_jwt_validator_form" model="ir.ui.view">
+        <field name="name">spp.auth.jwt.validator.form</field>
+        <field name="model">spp.auth.jwt.validator</field>
+        <field name="arch" type="xml">
+            <form string="arch">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title mb24">
+                        <label for="name" string="Validator Name:" />
+                        <h1>
+                            <field id="name" name="name" placeholder="JWT Validator Name..." />
+                        </h1>
+                        <div class="o_row">
+                        </div>
+                    </div>
+                    <group colspan="4" col="4">
+                        <field name="audience" />
+                        <field name="issuer" />
+                        <field name="signature_type" />
+                        <newline />
+                        <field
+                            name="secret_algorithm"
+                            string="Algorithm"
+                            attrs="{'invisible': [('signature_type', '!=', 'secret')],
+                                'required': [('signature_type', '=', 'secret')]}"
+                        />
+                        <field
+                            name="secret_key"
+                            string="Key"
+                            attrs="{'invisible': [('signature_type', '!=', 'secret')],
+                                'required': [('signature_type', '=', 'secret')]}"
+                        />
+                        <field
+                            name="public_key_algorithm"
+                            string="Algorithm"
+                            attrs="{'invisible': [('signature_type', '!=', 'public_key')],
+                                'required': [('signature_type', '=', 'public_key')]}"
+                        />
+                        <field
+                            name="public_key_jwk_uri"
+                            string="JWK URI"
+                            attrs="{'invisible': [('signature_type', '!=', 'public_key')]}"
+                            widget="url"
+                        />
+                        <field
+                            name="public_key"
+                            string="Public Key"
+                            attrs="{'invisible': [('signature_type', '!=', 'public_key')]}"
+                            colspan="4"
+                        />
+                    </group>
+                    <group string="JWT Token Decoder Options" colspan="4" col="4">
+                        <field name="jwt_opt_verify_exp" />
+                        <field name="jwt_opt_verify_sig" />
+                    </group>
+                    <group string="User Configuration" colspan="4" col="4">
+                        <field
+                            name="default_user_id"
+                            options="{'no_open':True,'no_create':True,'no_edit':True}"
+                        />
+                        <field name="partner_id_strategy" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_spp_auth_jwt_validator_tree" model="ir.ui.view">
+        <field name="name">spp.auth.jwt.validator.tree</field>
+        <field name="model">spp.auth.jwt.validator</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="issuer" />
+                <field name="audience" />
+                <field name="signature_type" />
+                <field name="partner_id_strategy" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_spp_auth_jwt_validator" model="ir.actions.act_window">
+        <field name="name">JWT Validators</field>
+        <field name="res_model">spp.auth.jwt.validator</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_spp_auth_jwt_validator"
+        name="JWT Validators"
+        parent="base.menu_users"
+        sequence="30"
+        action="action_spp_auth_jwt_validator"
+        groups="base.group_no_one"
+    />
+</odoo>
