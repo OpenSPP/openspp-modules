@@ -6,14 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-11-02 07:22+0000\n"
+"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
+"spp_idpass/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.view_groups_idpass_form
@@ -64,7 +67,7 @@ msgstr ""
 #. module: spp_idpass
 #: model:ir.model,name:spp_idpass.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "اتصال"
 
 #. module: spp_idpass
 #: model_terms:ir.actions.act_window,help:spp_idpass.action_spp_idpass
@@ -75,13 +78,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__create_uid
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "انشأ من قبل"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__create_date
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "انشأ على"
 
 #. module: spp_idpass
 #: model:ir.model.fields.selection,name:spp_idpass.selection__spp_id_pass__expiry_length_type__days
@@ -118,7 +121,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__id
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "بطاقة تعريف"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__expiry_length
@@ -237,19 +240,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass____last_update
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "تاريخ آخر تعديل"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__write_uid
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__write_date
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__expiry_length_type
