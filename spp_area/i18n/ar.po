@@ -6,14 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-11-02 07:22+0000\n"
+"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
+"spp_area/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__admin_alt1
@@ -146,7 +149,7 @@ msgstr ""
 #. module: spp_area
 #: model:ir.model,name:spp_area.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "اتصال"
 
 #. module: spp_area
 #: model_terms:ir.actions.act_window,help:spp_area.action_spparea
@@ -159,7 +162,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__create_uid
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "انشأ من قبل"
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__create_date
@@ -167,7 +170,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__create_date
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__create_date
 msgid "Created on"
-msgstr ""
+msgstr "انشأ على"
 
 #. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_import_form
@@ -223,7 +226,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_area.spparea_filter
 #: model_terms:ir.ui.view,arch_db:spp_area.spparea_import_filter
 msgid "Group By"
-msgstr ""
+msgstr "مجموعة بواسطة"
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__id
@@ -231,7 +234,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__id
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__id
 msgid "ID"
-msgstr ""
+msgstr "بطاقة تعريف"
 
 #. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_import_form
@@ -270,7 +273,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang____last_update
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "تاريخ آخر تعديل"
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__write_uid
@@ -278,7 +281,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__write_uid
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__write_date
@@ -286,7 +289,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__write_date
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__level
@@ -309,7 +312,7 @@ msgstr ""
 #. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_form
 msgid "Name:"
-msgstr ""
+msgstr "اسم:"
 
 #. module: spp_area
 #: model:ir.model.fields.selection,name:spp_area.selection__spp_area_import__state__new
