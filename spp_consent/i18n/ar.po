@@ -6,14 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-11-02 07:22+0000\n"
+"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
+"spp_consent/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_consent
 #: model_terms:ir.ui.view,arch_db:spp_consent.view_registrant_consent_form
@@ -66,7 +69,7 @@ msgstr ""
 #. module: spp_consent
 #: model:ir.model,name:spp_consent.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "اتصال"
 
 #. module: spp_consent
 #: model_terms:ir.ui.view,arch_db:spp_consent.record_consent_wizard_form_view
@@ -78,14 +81,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__create_uid
 #: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "انشأ من قبل"
 
 #. module: spp_consent
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent__create_date
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__create_date
 #: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "انشأ على"
 
 #. module: spp_consent
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent__display_name
@@ -112,35 +115,35 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__group_id
 #: model_terms:ir.ui.view,arch_db:spp_consent.record_consent_wizard_form_view
 msgid "Group"
-msgstr ""
+msgstr "مجموعة"
 
 #. module: spp_consent
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent__id
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__id
 #: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "بطاقة تعريف"
 
 #. module: spp_consent
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent____last_update
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config____last_update
 #: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "تاريخ آخر تعديل"
 
 #. module: spp_consent
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent__write_uid
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__write_uid
 #: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: spp_consent
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent__write_date
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__write_date
 #: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: spp_consent
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__name
