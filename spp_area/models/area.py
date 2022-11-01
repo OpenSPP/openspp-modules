@@ -1,5 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import logging
+import textwrap
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -24,7 +25,10 @@ class OpenSPPArea(models.Model):
     parent_path = fields.Char(index=True)
     code = fields.Char()
     altnames = fields.Char("Alternate Name")
-    level = fields.Integer()
+    level = fields.Integer(help="This is the area level for importing")
+    area_level = fields.Integer(
+        compute="_compute_area_level", help="This is the main area level"
+    )
     child_ids = fields.One2many(
         "spp.area", "id", "Child", compute="_compute_get_childs"
     )
@@ -34,6 +38,30 @@ class OpenSPPArea(models.Model):
         for rec in self:
             child_ids = self.env["spp.area"].search([("parent_id", "=", rec.id)])
             rec.child_ids = child_ids
+
+    @api.depends("parent_id")
+    def _compute_area_level(self):
+        for rec in self:
+            if rec.parent_id:
+                rec.area_level = rec.parent_id.area_level + 1
+            else:
+                rec.area_level = 0
+
+    @api.onchange("parent_id")
+    def _onchange_parent_id(self):
+        for rec in self:
+            if rec.area_level > 10:
+                raise ValidationError(
+                    _(
+                        textwrap.fill(
+                            textwrap.dedent(
+                                """Max level exceeded! Can't have area with level greater
+                        than 10 and your current area is level %s."""
+                                % rec.area_level
+                            )
+                        )
+                    )
+                )
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
@@ -45,10 +73,16 @@ class OpenSPPArea(models.Model):
 
             if rec.id:
                 if rec.parent_id:
-                    rec.complete_name = "%s > %s" % (
-                        rec.parent_id.complete_name,
-                        area_name[rec.id],
-                    )
+                    if area_name[rec.id]:
+                        rec.complete_name = "%s > %s" % (
+                            rec.parent_id.complete_name,
+                            area_name[rec.id],
+                        )
+                    else:
+                        rec.complete_name = "%s > %s" % (
+                            rec.parent_id.complete_name,
+                            rec.name,
+                        )
                 else:
                     rec.complete_name = rec.name
                     if area_name[rec.id]:
@@ -56,10 +90,6 @@ class OpenSPPArea(models.Model):
 
             else:
                 rec.complete_name = None
-
-    def _temp_complete_name(self):
-        for rec in self:
-            rec.complete_name = rec.name
 
     @api.model
     def _name_search(
@@ -86,6 +116,7 @@ class OpenSPPArea(models.Model):
                 ("code", "=", area_code),
             ]
         )
+
         if curr_area:
             raise ValidationError(_("Area already exist!"))
         else:
@@ -106,7 +137,6 @@ class OpenSPPArea(models.Model):
                 )
 
             self.env["ir.translation"]._upsert_translations(vals_list)
-            Area._temp_complete_name()
             return Area
 
     def write(self, vals):

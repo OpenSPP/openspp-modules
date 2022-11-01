@@ -9,7 +9,7 @@
                 <field name="name" />
                 <field name="code" />
                 <field name="altnames" />
-                <field name="level" />
+                <field name="area_level" />
                 <field name="kind" />
             </tree>
         </field>
@@ -40,8 +40,9 @@
                     <group colspan="6" col="6">
                         <field name="altnames" colspan="6" />
                         <field name="code" colspan="2" />
-                        <field name="level" colspan="2" />
+                        <field name="area_level" colspan="2" />
                         <field name="complete_name" invisible="1" />
+                        <field name="level" invisible="1" />
                         <field name="kind" />
                     </group>
                     <notebook>

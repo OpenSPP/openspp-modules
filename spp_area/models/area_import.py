@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import base64
 import logging
+import textwrap
 from io import BytesIO
 
 from xlrd import open_workbook
@@ -112,7 +113,11 @@ class OpenSPPAreaImport(models.Model):
                             elif col_name.find("Area") >= 0:
                                 maxcolsstr = col_name.strip("Area").replace("Name", "")
                             maxcols_name_length = len(maxcolsstr)
-                            if maxcols_name_length == 5 or maxcols_name_length == 4:
+                            if (
+                                maxcols_name_length == 6
+                                or maxcols_name_length == 5
+                                or maxcols_name_length == 4
+                            ):
                                 maxcolsstr = maxcolsstr[:-3]
                                 maxcolsstr = maxcolsstr.replace("_", "")
                             try:
@@ -121,7 +126,7 @@ class OpenSPPAreaImport(models.Model):
                             except Exception:
                                 max_cols = None
                 else:
-                    if max_cols:
+                    if max_cols <= 10:
                         xcols = max_cols
                         while xcols >= 0:
 
@@ -214,6 +219,18 @@ class OpenSPPAreaImport(models.Model):
                             )
 
                             xcols -= 1
+                    else:
+                        raise ValidationError(
+                            _(
+                                textwrap.fill(
+                                    textwrap.dedent(
+                                        """Max level exceeded! Can't import area with level greater
+                                than 10 and the area you are importing has %s levels."""
+                                        % max_cols
+                                    )
+                                )
+                            )
+                        )
 
             for val in columns:
                 vals.append([0, 0, val])
