@@ -101,6 +101,11 @@ msgid "Area Kind"
 msgstr ""
 
 #. module: spp_area
+#: model:ir.model.fields,field_description:spp_area.field_spp_area__area_level
+msgid "Area Level"
+msgstr ""
+
+#. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_form
 msgid "Area Name..."
 msgstr ""
@@ -453,6 +458,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__state
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__state
 msgid "Status"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.model.fields,help:spp_area.field_spp_area__level
+msgid "This is the area level for importing"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.model.fields,help:spp_area.field_spp_area__area_level
+msgid "This is the main area level"
 msgstr ""
 
 #. module: spp_area
