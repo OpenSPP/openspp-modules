@@ -10,6 +10,8 @@ from faker import Faker
 
 from odoo import api, fields, models
 
+from odoo.addons.queue_job.delay import group
+
 _logger = logging.getLogger(__name__)
 
 
@@ -29,8 +31,12 @@ class OpenG2PGenerateData(models.Model):
     def generate_sample_data(self):
 
         batches = math.ceil(self.num_groups / 1000)
+        jobs = []
         for _i in range(0, batches):
-            self.with_delay()._generate_sample_data(res_id=self.id)
+            jobs.append(self.delayable()._generate_sample_data(res_id=self.id))
+        main_job = group(*jobs)
+        main_job.on_done(self.delayable().mark_as_done())
+        main_job.delay()
 
     @api.model
     def _generate_sample_data(self, **kwargs):
@@ -223,9 +229,6 @@ class OpenG2PGenerateData(models.Model):
                         }
                     )
 
-            if res.state == "draft":
-                res.update({"state": "generate"})
-
         msg = "Task Queue called task: model [%s] and method [%s]." % (
             self._name,
             "_generate_sample_data",
@@ -234,6 +237,9 @@ class OpenG2PGenerateData(models.Model):
         return {"result": msg, "res_model": self._name, "res_ids": [res_id]}
         # _logger.info("-" * 80)
         # _logger.info(json.dumps({"group": group, "members": members}, indent=4))
+
+    def mark_as_done(self):
+        self.update({"state": "generate"})
 
     def _generate_individual_data(
         self,
