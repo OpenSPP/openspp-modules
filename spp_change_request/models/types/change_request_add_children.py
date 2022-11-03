@@ -71,13 +71,7 @@ class ChangeRequestAddChildren(models.Model):
                         "start_date": mrec.start_date,
                         "end_date": mrec.end_date,
                     }
-                    # group_member_ids.append(Command.create(group_members))
                     self.env["spp.group.members.temp"].create(group_members)
-                # _logger.info(
-                #    "Change Request: _compute_group_member_ids: group_member_ids = %s"
-                #    % group_member_ids
-                # )
-                # rec.group_member_ids = group_member_ids
 
     def _update_live_data(self):
         self.ensure_one()
