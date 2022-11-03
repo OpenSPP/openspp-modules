@@ -9,7 +9,6 @@ class OpenG2PIDType(models.Model):
 
     target_type = fields.Selection(
         [("individual", "Individual"), ("group", "Group"), ("both", "Both")],
-        "Target Type",
         default="individual",
     )
 

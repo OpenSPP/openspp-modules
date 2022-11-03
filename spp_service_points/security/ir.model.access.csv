@@ -1,3 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 spp_service_point_admin,Service Point Admin Access,spp_service_points.model_spp_service_point,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_service_type_admin,Service Point Type Admin Access,spp_service_points.model_spp_service_type,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+spp_service_point_registrar,Service Point Registrar Access,spp_service_points.model_spp_service_point,g2p_registry_base.group_g2p_registrar,1,1,1,0
+spp_service_type_registrar,Service Point Type Registrar Access,spp_service_points.model_spp_service_type,g2p_registry_base.group_g2p_registrar,1,1,1,0
