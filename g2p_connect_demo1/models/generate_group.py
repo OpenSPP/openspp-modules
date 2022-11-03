@@ -119,9 +119,18 @@ class OpenG2PGenerateData(models.Model):
             group_kind = group_kind_household_id  # random.choice([group_kind_household_id, group_kind_family_id])
 
             bank_ids = []
+
+            # Make sure we get a unique number
+            while True:
+                bank_number = str(random.randint(111111111, 9999999999))
+                if not self.env["res.partner.bank"].search_count(
+                    [("acc_number", "=", bank_number)]
+                ):
+                    break
+
             val = {
                 "bank_id": bank_id.id,
-                "acc_number": str(random.randint(111111111, 9999999999)),
+                "acc_number": bank_number,
             }
             bank_ids.append([0, 0, val])
             group = {
