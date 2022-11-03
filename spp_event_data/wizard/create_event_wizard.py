@@ -47,7 +47,7 @@ class SPPCreateEventWizard(models.TransientModel):
                 wiz = self.env[wizard_model].create({"event_id": event_id.id})
 
                 return {
-                    "name": _("Create %s Wizard") % view_name,
+                    "name": _("Create %s Wizard", view_name),
                     "view_mode": "form",
                     "res_model": wizard_model,
                     "res_id": wiz.id,
