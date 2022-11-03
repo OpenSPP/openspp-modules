@@ -15,6 +15,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     icon="fa-external-link "
                     class="btn-success"
                     attrs="{'invisible':[('request_type_ref_id','=',False)]}"
+                    context="{'form':'spp_change_request.view_change_request_add_children_validation_form'}"
                 />
                 <field name="name" />
                 <field name="date_requested" />
