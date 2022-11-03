@@ -77,15 +77,18 @@ class ChangeRequestBase(models.Model):
             res_model = request_type_ref_id[:s]
             res_id = self.request_type_ref_id.id
             if res_id:
+                form_id = self.env[res_model].get_request_type_view_id()
+                if self._context.get("form"):
+                    form = self.env.ref(self._context["form"]) or None
+                    if form:
+                        form_id = form.id
                 action = self.env[res_model].get_formview_action()
                 context = {
                     "create": False,
                 }
                 action.update(
                     {
-                        "views": [
-                            (self.env[res_model].get_request_type_view_id(), "form")
-                        ],
+                        "views": [(form_id, "form")],
                         "res_id": res_id,
                         "target": target,
                         "context": context,
@@ -108,7 +111,7 @@ class ChangeRequestBase(models.Model):
     def open_request_detail(self):
         for rec in self:
             # Open Request Form
-            return rec.open_change_request_form(target="new", mode="edit")
+            return rec.open_change_request_form(target="current", mode="edit")
 
     def create_request_detail(self):
         for rec in self:
@@ -126,7 +129,7 @@ class ChangeRequestBase(models.Model):
                     }
                 )
                 # Open Request Form
-                return rec.open_change_request_form(target="new", mode="edit")
+                return rec.open_change_request_form(target="current", mode="edit")
             else:
                 raise UserError(
                     _(

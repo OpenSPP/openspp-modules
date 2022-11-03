@@ -163,6 +163,189 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
+    <record id="view_change_request_add_children_validation_form" model="ir.ui.view">
+        <field name="name">view_change_request_add_children_validation_form</field>
+        <field name="model">spp.change.request.add.children</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <form string="Add Children Change Request">
+                <header>
+                    <button
+                        name="on_validate"
+                        type="object"
+                        string="Validate"
+                        icon="fa-check-square-o"
+                        class="btn-warning"
+                        states="pending"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator"
+                    />
+                    <button
+                        name="apply"
+                        type="object"
+                        string="Apply Changes"
+                        icon="fa-thumbs-o-up"
+                        class="btn-success"
+                        states="validated"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
+                    />
+                    <button
+                        name="on_reject"
+                        type="object"
+                        string="Reject"
+                        icon="fa-ban"
+                        class="btn-danger"
+                        states="draft,pending"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,pending,validated,applied"
+                    />
+                </header>
+
+                <!-- Form Body -->
+                <div class="oe_button_box" name="button_box">
+                </div>
+                <group colspan="4" col="4">
+
+                    <!-- Left Panel -->
+                    <group colspan="2" col="4" class="o_left_panel">
+                        <div class="o_header_label1">
+                            <label for="registrant_id" string="Group:" />
+                            <h2>
+                                <field name="registrant_id" readonly="1" />
+                            </h2>
+                        </div>
+                        <newline />
+                        <notebook colspan="2" class="o_container_left">
+                            <page string="Group Members">
+                                <field name="group_member_ids" readonly="1" nolabel="1">
+                                    <tree>
+                                        <field name="group_add_children_id" invisible="1" />
+                                        <field name="individual_id" string="Members" />
+                                        <field
+                                            name="kind_ids"
+                                            widget="many2many_tags"
+                                            options="{'no_create_edit':True,'no_open':True}"
+                                        />
+                                        <field name="start_date" />
+                                        <field name="end_date" />
+                                    </tree>
+                                    <form string="Group Membership">
+                                        <sheet>
+                                            <div class="oe_title mb24">
+                                                <h1>
+                                                    <field
+                                                        name="individual_id"
+                                                        string="Member"
+                                                        options="{'no_open':True}"
+                                                        readonly="1"
+                                                    />
+                                                </h1>
+                                                <div class="o_row">
+                                                    <label for="kind_ids" string="Kinds:" />
+                                                    <field
+                                                        name="kind_ids"
+                                                        widget="many2many_tags"
+                                                        options="{'no_open':True}"
+                                                        readonly="1"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <group string="Date Range" colspan="4" col="4">
+                                                <field name="start_date" />
+                                                <field name="end_date" />
+                                            </group>
+                                            <field name="group_add_children_id" invisible="1" />
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+
+                    <!-- Right Panel -->
+                    <group colspan="2" col="4">
+                        <div class="o_header_label1">
+                            <label for="request_type" string="Request Type:" />
+                            <h2>
+                                <field name="request_type" readonly="1" />
+                            </h2>
+                        </div>
+                        <newline />
+                        <notebook colspan="2" class="o_container_right">
+                            <page string="Request Details">
+                                <group colspan="4" col="4">
+                                    <field name="validatedby_id" readonly="1" />
+                                    <field name="date_validated" readonly="1" />
+                                </group>
+                                <group colspan="4" col="4" string="New Information">
+                                    <field
+                                        name="family_name"
+                                        required="1"
+                                        attrs="{'readonly':[('state','!=','draft')]}"
+                                    />
+                                    <field
+                                        name="given_name"
+                                        required="1"
+                                        attrs="{'readonly':[('state','!=','draft')]}"
+                                    />
+                                    <field name="addl_name" attrs="{'readonly':[('state','!=','draft')]}" />
+                                    <field name="gender" attrs="{'readonly':[('state','!=','draft')]}" />
+                                    <field
+                                        name="birth_place"
+                                        colspan="4"
+                                        attrs="{'readonly':[('state','!=','draft')]}"
+                                    />
+                                    <field
+                                        name="birthdate_not_exact"
+                                        attrs="{'readonly':[('state','!=','draft')]}"
+                                    />
+                                    <field name="birthdate" attrs="{'readonly':[('state','!=','draft')]}" />
+                                    <field
+                                        name="address"
+                                        colspan="4"
+                                        attrs="{'readonly':[('state','!=','draft')]}"
+                                    />
+                                    <field
+                                        name="kind"
+                                        widget="many2many_tags"
+                                        options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
+                                        colspan="4"
+                                        attrs="{'readonly':[('state','!=','draft')]}"
+                                    />
+                                </group>
+                            </page>
+                            <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
+                                <field
+                                    name="validation_ids"
+                                    create="0"
+                                    nolabel="1"
+                                    attrs="{'readonly':[('state','not in',('draft','pending'))]}"
+                                >
+                                    <tree>
+                                        <field name="sequence" widget="handle" />
+                                        <field name="request_type" invisible="1" />
+                                        <field name="stage_id" options="{'no_create_edit':true}" />
+                                        <field
+                                            name="validation_group_id"
+                                            string="Validation Group"
+                                            domain="[('category_id','=',%(g2p_registry_base.openg2p_module)d)]"
+                                            options="{'no_open':true,'no_edit':true,'no_create':true}"
+                                        />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <!-- Attached Documents -->
+                    </group>
+                    <field name="change_request_id" invisible="1" />
+                </group>
+            </form>
+        </field>
+    </record>
+
     <record id="change_request_add_children_filter" model="ir.ui.view">
         <field name="name">change_request_add_children_filter</field>
         <field name="model">spp.change.request.add.children</field>
@@ -205,7 +388,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
     <record id="action_change_request_add_children_form_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_change_request_add_children_form" />
+        <field name="view_id" ref="view_change_request_add_children_validation_form" />
         <field name="act_window_id" ref="action_change_request_add_children" />
     </record>
 
@@ -246,7 +429,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
     <record id="action_change_request_add_children_pending_form_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_change_request_add_children_form" />
+        <field name="view_id" ref="view_change_request_add_children_validation_form" />
         <field name="act_window_id" ref="action_change_request_add_children_pending" />
     </record>
 

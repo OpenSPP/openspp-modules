@@ -25,7 +25,11 @@
         "views/change_request_validation_sequence_view.xml",
         "views/types/change_request_add_children_view.xml",
     ],
-    "assets": {},
+    "assets": {
+        "web.assets_backend": [
+            "spp_change_request/static/src/scss/change_request.scss",
+        ],
+    },
     "demo": [],
     "images": [],
     "application": True,

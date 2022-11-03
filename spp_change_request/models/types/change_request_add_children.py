@@ -1,7 +1,10 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import logging
 
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class ChangeRequestTypeCustomAddChildren(models.Model):
@@ -43,8 +46,38 @@ class ChangeRequestAddChildren(models.Model):
         "g2p.group.membership.kind", string="Group Membership Kinds"
     )
 
+    # Registry fields
+    group_member_ids = fields.One2many(
+        "spp.group.members.temp",
+        "group_add_children_id",
+        "Group Members",
+        compute="_compute_group_member_ids",
+        store=False,
+    )
+
     # Add domain to inherited field: validation_ids
     validation_ids = fields.Many2many(domain=[("request_type", "=", _name)])
+
+    def _compute_group_member_ids(self):
+        for rec in self:
+            if rec.registrant_id:
+                rec.group_member_ids = Command.clear()
+                for mrec in rec.registrant_id.group_membership_ids:
+                    kind_ids = mrec.kind and mrec.kind.ids or None
+                    group_members = {
+                        "group_add_children_id": rec.id,
+                        "individual_id": mrec.individual.id,
+                        "kind_ids": kind_ids,
+                        "start_date": mrec.start_date,
+                        "end_date": mrec.end_date,
+                    }
+                    # group_member_ids.append(Command.create(group_members))
+                    self.env["spp.group.members.temp"].create(group_members)
+                # _logger.info(
+                #    "Change Request: _compute_group_member_ids: group_member_ids = %s"
+                #    % group_member_ids
+                # )
+                # rec.group_member_ids = group_member_ids
 
     def _update_live_data(self):
         self.ensure_one()
