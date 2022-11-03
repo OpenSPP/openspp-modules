@@ -3,7 +3,7 @@
 import logging
 from datetime import date
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -23,7 +23,6 @@ class OpenSPPEventData(models.Model):
     expiry_date = fields.Date()
     state = fields.Selection(
         [("active", "Active"), ("inactive", "Inactive")],
-        "State",
         default="active",
     )
 
@@ -75,7 +74,7 @@ class OpenSPPEventData(models.Model):
             res_model = rec.model
             view_id = self.env[res_model].get_view_id()
             return {
-                "name": _("%s" % rec.name),
+                "name": rec.name,
                 "view_mode": "form",
                 "res_model": res_model,
                 "res_id": rec.res_id,

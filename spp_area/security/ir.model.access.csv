@@ -5,4 +5,4 @@ spp_area_import_raw_admin,Area Import Raw Admin Access,spp_area.model_spp_area_i
 spp_area_import_raw_lang_admin,Area Import Raw Languages Admin Access,spp_area.model_spp_area_import_lang,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_area_kind_admin,Area Kind Admin Access,spp_area.model_spp_area_kind,g2p_registry_base.group_g2p_admin,1,1,1,1
 
-spp_area_registrar,Area Registrar Access,spp_area.model_spp_area,g2p_registry_base.group_g2p_registrar,1,0,0,0
+spp_area_registrar,Area Registrar Access,spp_area.model_spp_area,g2p_registry_base.group_g2p_registrar,1,1,1,0

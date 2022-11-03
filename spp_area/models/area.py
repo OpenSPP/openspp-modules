@@ -32,7 +32,7 @@ class OpenSPPArea(models.Model):
     child_ids = fields.One2many(
         "spp.area", "id", "Child", compute="_compute_get_childs"
     )
-    kind = fields.Many2one("spp.area.kind", "Kind")
+    kind = fields.Many2one("spp.area.kind")
 
     def _compute_get_childs(self):
         for rec in self:
