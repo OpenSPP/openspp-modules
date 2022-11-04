@@ -3,25 +3,21 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
     <menuitem
-        id="menu_change_request_add_children_root"
-        name="Add Children Change Requests"
-        parent="spp_change_request_request_root"
-        sequence="10"
+        id="menu_change_request_move_replace_root"
+        name="Move/Transfer Member Change Requests"
+        parent="spp_change_request.spp_change_request_request_root"
+        sequence="11"
     />
 
-    <record id="view_change_request_add_children_tree" model="ir.ui.view">
-        <field name="name">change_request_add_children_tree</field>
-        <field name="model">spp.change.request.add.children</field>
+    <record id="view_change_request_move_replace_tree" model="ir.ui.view">
+        <field name="name">change_request_move_replace_tree</field>
+        <field name="model">spp.change.request.move.transfer</field>
         <field name="priority">0</field>
         <field name="arch" type="xml">
             <tree sample="1" create="0">
                 <field name="change_request_id" />
-                <field name="registrant_id" string="Group" />
-                <field name="family_name" />
-                <field name="given_name" />
-                <field name="addl_name" />
-                <field name="gender" />
-                <field name="kind" widget="many2many_tags" />
+                <field name="registrant_id" string="Member" />
+                <field name="move_to_group_id" />
                 <field name="create_date" />
                 <field name="validatedby_id" widget="many2one_avatar_user" />
                 <field name="date_validated" />
@@ -38,12 +34,12 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
-    <record id="view_change_request_add_children_form" model="ir.ui.view">
-        <field name="name">view_change_request_add_children_form</field>
-        <field name="model">spp.change.request.add.children</field>
+    <record id="view_change_request_move_replace_form" model="ir.ui.view">
+        <field name="name">view_change_request_move_replace_form</field>
+        <field name="model">spp.change.request.move.transfer</field>
         <field name="priority">0</field>
         <field name="arch" type="xml">
-            <form string="Add Children Change Request">
+            <form string="Move/Transfer Member Change Request">
                 <header>
                     <button
                         name="on_validate"
@@ -101,38 +97,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <page string="Request Details">
                             <group colspan="4" col="4" string="">
                                 <field
-                                    name="family_name"
+                                    name="move_to_group_id"
                                     required="1"
                                     attrs="{'readonly':[('state','!=','draft')]}"
-                                />
-                                <field
-                                    name="given_name"
-                                    required="1"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                />
-                                <field name="addl_name" attrs="{'readonly':[('state','!=','draft')]}" />
-                                <field name="gender" attrs="{'readonly':[('state','!=','draft')]}" />
-                                <field
-                                    name="birth_place"
-                                    colspan="4"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                />
-                                <field
-                                    name="birthdate_not_exact"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                />
-                                <field name="birthdate" attrs="{'readonly':[('state','!=','draft')]}" />
-                                <field
-                                    name="address"
-                                    colspan="4"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                />
-                                <field
-                                    name="kind"
-                                    widget="many2many_tags"
-                                    options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
-                                    colspan="4"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    options="{'no_open':true,'no_create':true,'no_edit':true}"
                                 />
                             </group>
                         </page>
@@ -166,12 +134,12 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
-    <record id="view_change_request_add_children_validation_form" model="ir.ui.view">
-        <field name="name">view_change_request_add_children_validation_form</field>
-        <field name="model">spp.change.request.add.children</field>
+    <record id="view_change_request_move_replace_validation_form" model="ir.ui.view">
+        <field name="name">view_change_request_move_replace_validation_form</field>
+        <field name="model">spp.change.request.move.transfer</field>
         <field name="priority">100</field>
         <field name="arch" type="xml">
-            <form string="Add Children Change Request">
+            <form string="Move/Transfer Member Change Request">
                 <header>
                     <button
                         name="on_validate"
@@ -214,7 +182,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     <!-- Left Panel -->
                     <group colspan="2" col="4" class="o_left_panel">
                         <div class="o_header_label1">
-                            <label for="registrant_id" string="Change Request for Group:" />
+                            <label for="registrant_id" string="Change Request for Member:" />
                             <h2>
                                 <field name="registrant_id" readonly="1" />
                                 <button
@@ -230,10 +198,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </div>
                         <newline />
                         <notebook colspan="2" class="o_container_left">
-                            <page string="Group Members">
-                                <field name="group_member_ids" readonly="1" nolabel="1">
+                            <page string="Destination Group Current Members">
+                                <field name="move_to_group_member_ids" readonly="1" nolabel="1">
                                     <tree>
-                                        <field name="group_add_children_id" invisible="1" />
+                                        <field name="group_move_to_id" invisible="1" />
                                         <field name="individual_id" string="Members" />
                                         <field
                                             name="kind_ids"
@@ -268,7 +236,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                                 <field name="start_date" />
                                                 <field name="end_date" />
                                             </group>
-                                            <field name="group_add_children_id" invisible="1" />
+                                            <field name="group_move_to_id" invisible="1" />
                                         </sheet>
                                     </form>
                                 </field>
@@ -293,38 +261,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 </group>
                                 <group colspan="4" col="4" string="New Information">
                                     <field
-                                        name="family_name"
+                                        name="move_to_group_id"
                                         required="1"
                                         attrs="{'readonly':[('state','!=','draft')]}"
-                                    />
-                                    <field
-                                        name="given_name"
-                                        required="1"
-                                        attrs="{'readonly':[('state','!=','draft')]}"
-                                    />
-                                    <field name="addl_name" attrs="{'readonly':[('state','!=','draft')]}" />
-                                    <field name="gender" attrs="{'readonly':[('state','!=','draft')]}" />
-                                    <field
-                                        name="birth_place"
-                                        colspan="4"
-                                        attrs="{'readonly':[('state','!=','draft')]}"
-                                    />
-                                    <field
-                                        name="birthdate_not_exact"
-                                        attrs="{'readonly':[('state','!=','draft')]}"
-                                    />
-                                    <field name="birthdate" attrs="{'readonly':[('state','!=','draft')]}" />
-                                    <field
-                                        name="address"
-                                        colspan="4"
-                                        attrs="{'readonly':[('state','!=','draft')]}"
-                                    />
-                                    <field
-                                        name="kind"
-                                        widget="many2many_tags"
-                                        options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
-                                        colspan="4"
-                                        attrs="{'readonly':[('state','!=','draft')]}"
+                                        options="{'no_open':true,'no_create':true,'no_edit':true}"
                                     />
                                 </group>
                             </page>
@@ -359,98 +299,96 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
-    <record id="change_request_add_children_filter" model="ir.ui.view">
-        <field name="name">change_request_add_children_filter</field>
-        <field name="model">spp.change.request.add.children</field>
+    <record id="change_request_move_replace_filter" model="ir.ui.view">
+        <field name="name">change_request_move_replace_filter</field>
+        <field name="model">spp.change.request.move.transfer</field>
         <field name="priority" eval="1" />
         <field name="arch" type="xml">
-            <search string="Search Change Request: Add Children">
-                <field name="registrant_id" string="Group" />
-                <field name="family_name" />
-                <field name="given_name" />
-                <field name="addl_name" />
+            <search string="Search Change Request: Move/Transfer Member">
+                <field name="registrant_id" string="Registrant" />
+                <field name="move_to_group_id" string="Destination Group" />
             </search>
         </field>
     </record>
 
-    <!-- All Add Children Change Requests -->
-    <record id="action_change_request_add_children" model="ir.actions.act_window">
-        <field name="name">Add Children Change Request</field>
+    <!-- All Move/Transfer Member Change Requests -->
+    <record id="action_change_request_move_replace" model="ir.actions.act_window">
+        <field name="name">Move/Transfer Member Change Request</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">spp.change.request.add.children</field>
+        <field name="res_model">spp.change.request.move.transfer</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="change_request_add_children_filter" />
+        <field name="search_view_id" ref="change_request_move_replace_filter" />
         <field name="context">{}</field>
         <field name="domain">[]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No 'Add Children' change requests found!
+                No 'Move/Transfer Member' change requests found!
             </p><p>
                 There are no records found based on the current filter.
             </p>
         </field>
     </record>
 
-    <record id="action_change_request_add_children_tree_view" model="ir.actions.act_window.view">
+    <record id="action_change_request_move_replace_tree_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_change_request_add_children_tree" />
-        <field name="act_window_id" ref="action_change_request_add_children" />
+        <field name="view_id" ref="view_change_request_move_replace_tree" />
+        <field name="act_window_id" ref="action_change_request_move_replace" />
     </record>
 
-    <record id="action_change_request_add_children_form_view" model="ir.actions.act_window.view">
+    <record id="action_change_request_move_replace_form_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_change_request_add_children_validation_form" />
-        <field name="act_window_id" ref="action_change_request_add_children" />
+        <field name="view_id" ref="view_change_request_move_replace_validation_form" />
+        <field name="act_window_id" ref="action_change_request_move_replace" />
     </record>
 
     <menuitem
-        id="menu_change_request_add_children"
-        name="All Add Children Requests"
-        action="action_change_request_add_children"
-        parent="menu_change_request_add_children_root"
+        id="menu_change_request_move_replace"
+        name="All Move/Transfer Member Requests"
+        action="action_change_request_move_replace"
+        parent="menu_change_request_move_replace_root"
         sequence="0"
         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
     />
 
     <!-- Pending Validation -->
-    <record id="action_change_request_add_children_pending" model="ir.actions.act_window">
-        <field name="name">Pending Validation: Add Children</field>
+    <record id="action_change_request_move_replace_pending" model="ir.actions.act_window">
+        <field name="name">Pending Validation: Move/Transfer Member</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">spp.change.request.add.children</field>
+        <field name="res_model">spp.change.request.move.transfer</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="change_request_add_children_filter" />
+        <field name="search_view_id" ref="change_request_move_replace_filter" />
         <field name="context">{}</field>
         <field name="domain">[('state','=','pending')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No pending 'Add Children' change requests found!
+                No pending 'Move/Transfer Member' change requests found!
             </p><p>
                 There are no records found based on the current filter.
             </p>
         </field>
     </record>
 
-    <record id="action_change_request_add_children_pending_tree_view" model="ir.actions.act_window.view">
+    <record id="action_change_request_move_replace_pending_tree_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_change_request_add_children_tree" />
-        <field name="act_window_id" ref="action_change_request_add_children_pending" />
+        <field name="view_id" ref="view_change_request_move_replace_tree" />
+        <field name="act_window_id" ref="action_change_request_move_replace_pending" />
     </record>
 
-    <record id="action_change_request_add_children_pending_form_view" model="ir.actions.act_window.view">
+    <record id="action_change_request_move_replace_pending_form_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_change_request_add_children_validation_form" />
-        <field name="act_window_id" ref="action_change_request_add_children_pending" />
+        <field name="view_id" ref="view_change_request_move_replace_validation_form" />
+        <field name="act_window_id" ref="action_change_request_move_replace_pending" />
     </record>
 
     <menuitem
-        id="menu_change_request_add_children_pending"
+        id="menu_change_request_move_replace_pending"
         name="Pending Validation"
-        action="action_change_request_add_children_pending"
-        parent="menu_change_request_add_children_root"
+        action="action_change_request_move_replace_pending"
+        parent="menu_change_request_move_replace_root"
         sequence="10"
         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator"
     />

@@ -31,7 +31,7 @@ class ChangeRequestValidationSequenceMixin(models.AbstractModel):
 
     validation_ids = fields.Many2many(
         "spp.change.request.validation.sequence",
-        relation="spp_change_request_validation_sequence_rel",
+        relation="spp_change_request_rel",
         string="Validation Sequence",
         default=_default_validation_ids,
         required=True,
