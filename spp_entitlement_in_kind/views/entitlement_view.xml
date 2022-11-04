@@ -103,10 +103,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     <field name="is_cash_entitlement" invisible="1" />
                     <field name="initial_amount" invisible="1" />
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="message_ids" />
-                </div>
             </form>
         </field>
     </record>
