@@ -1,9 +1,9 @@
 from odoo import fields, models
 
 
-class SPPGroupMembershipTemp(models.TransientModel):
-    _name = "spp.group.members.temp"
-    _description = "Group Membership (Temporary Table)"
+class SPPGroupMembershipTemp(models.Model):
+    _name = "spp.change.request.group.members"
+    _description = "Group Membership"
     _order = "id desc"
 
     group_add_children_id = fields.Many2one("spp.change.request.add.children")

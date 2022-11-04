@@ -101,8 +101,8 @@ class ChangeRequestBase(models.Model):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": "ERROR!",
-                "message": "The Request Type field must be filled-up.",
+                "title": _("ERROR!"),
+                "message": _("The Request Type field must be filled-up."),
                 "sticky": False,
                 "type": "danger",
             },
@@ -118,18 +118,37 @@ class ChangeRequestBase(models.Model):
             if rec.state in ("draft", "pending"):
                 # Set the request_type_ref_id
                 res_model = rec.request_type
-                ref_id = self.env[res_model].create(
-                    {"registrant_id": rec.registrant_id.id, "change_request_id": rec.id}
-                )
-                request_type_ref_id = f"{res_model},{ref_id.id}"
-                _logger.debug("DEBUG! request_type_ref_id: %s", request_type_ref_id)
-                rec.update(
-                    {
-                        "request_type_ref_id": request_type_ref_id,
-                    }
-                )
-                # Open Request Form
-                return rec.open_change_request_form(target="current", mode="edit")
+
+                # Check if the change request type selected is configured
+                # for the registrant type (group/individual)
+                is_group = self.env[res_model].IS_GROUP
+                if rec.registrant_id.is_group == is_group:
+                    ref_id = self.env[res_model].create(
+                        {
+                            "registrant_id": rec.registrant_id.id,
+                            "change_request_id": rec.id,
+                        }
+                    )
+                    request_type_ref_id = f"{res_model},{ref_id.id}"
+                    _logger.debug("DEBUG! request_type_ref_id: %s", request_type_ref_id)
+                    rec.update(
+                        {
+                            "request_type_ref_id": request_type_ref_id,
+                        }
+                    )
+                    # Open Request Form
+                    return rec.open_change_request_form(target="current", mode="edit")
+                else:
+                    if is_group:
+                        mtype = _("groups")
+                    else:
+                        mtype = _("individuals")
+                    raise UserError(
+                        _(
+                            "Incorrect registrant type. This change request only accept %s"
+                        )
+                        % mtype
+                    )
             else:
                 raise UserError(
                     _(
