@@ -115,6 +115,8 @@ class G2PInKindEntitlementManager(models.Model):
                 entitlements_to_create
             )
 
+            entitlements = []
+
             for beneficiary_id in beneficiaries_with_entitlements_to_create:
                 multiplier = 1
                 if rec.multiplier_field:
@@ -126,7 +128,7 @@ class G2PInKindEntitlementManager(models.Model):
                     multiplier = rec.max_multiplier
                 qty = multiplier * rec.qty
 
-                self.env["g2p.entitlement"].create(
+                entitlements.append(
                     {
                         "cycle_id": cycle.id,
                         "partner_id": beneficiary_id.id,
@@ -145,6 +147,7 @@ class G2PInKindEntitlementManager(models.Model):
                         "valid_until": entitlement_end_validity,
                     }
                 )
+            self.env["g2p.entitlement"].create(entitlements)
 
     def validate_entitlements(self, cycle, cycle_memberships):
         # TODO: Change the status of the entitlements to `validated` for this members.
