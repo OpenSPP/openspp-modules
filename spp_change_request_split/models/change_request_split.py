@@ -7,56 +7,60 @@ from odoo.exceptions import ValidationError
 _logger = logging.getLogger(__name__)
 
 
-class ChangeRequestTypeCustomDeactivate(models.Model):
+class ChangeRequestTypeCustomSplit(models.Model):
     _inherit = "spp.change.request"
 
     @api.model
     def _selection_request_type_ref_id(self):
         selection = super()._selection_request_type_ref_id()
-        new_request_type = ("spp.change.request.deactivate", "Deactivate Members")
+        new_request_type = ("spp.change.request.split", "Split Members")
         if new_request_type not in selection:
             selection.append(new_request_type)
         return selection
 
 
-class ChangeRequestDeactivate(models.Model):
-    _name = "spp.change.request.deactivate"
+class ChangeRequestSplit(models.Model):
+    _name = "spp.change.request.split"
     _inherit = [
         "spp.change.request.source.mixin",
         "spp.change.request.validation.sequence.mixin",
     ]
-    _description = "Deactivate Member Change Request Type"
+    _description = "Split Member Change Request Type"
 
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(
         "res.partner",
-        "Deactivate a Member of Group",
+        "Split Member of Group",
         domain=[("is_registrant", "=", True), ("is_group", "=", True)],
     )
 
     request_type = fields.Selection(related="change_request_id.request_type")
 
     # Change Request Fields
-    # TODO: Add dynamic domain based on registrant_id (group)
-    deactivate_partner_id = fields.Many2one(
+    registrant_to_split_id = fields.Many2one(
         "res.partner",
-        "Member to Deactivate",
+        "Individual to Split",
         domain=[("is_registrant", "=", True), ("is_group", "=", False)],
     )
-    remarks = fields.Text()
+
+    new_registrant_id = fields.Many2one(
+        "res.partner",
+        "Destination Group",
+        domain=[("is_registrant", "=", True), ("is_group", "=", True)],
+    )
 
     # Target Group Current Members
-    deactivate_group_member_ids = fields.One2many(
-        "spp.change.request.group.members", "group_deactivate_id", "Group Members"
+    split_group_member_ids = fields.One2many(
+        "spp.change.request.group.members", "group_to_split_id", "Group Members"
     )
 
     # Add domain to inherited field: validation_ids
     validation_ids = fields.Many2many(
-        relation="spp_change_request_deact_rel", domain=[("request_type", "=", _name)]
+        relation="spp_change_request_split_rel", domain=[("request_type", "=", _name)]
     )
 
     def write(self, vals):
-        res = super(ChangeRequestDeactivate, self).write(vals)
+        res = super(ChangeRequestSplit, self).write(vals)
         # Must update the spp.change.request (base) registrant_id
         self._update_registrant_id(self)
         self._copy_group_member_ids(self)
@@ -65,14 +69,13 @@ class ChangeRequestDeactivate(models.Model):
     def _copy_group_member_ids(self, res):
         for rec in res:
             _logger.info(
-                "Change Request: Deactivate Member _copy_group_member_ids: rec: %s"
-                % rec
+                "Change Request: Split Member _copy_group_member_ids: rec: %s" % rec
             )
             if rec.registrant_id:
                 for mrec in rec.registrant_id.group_membership_ids:
                     kind_ids = mrec.kind and mrec.kind.ids or None
                     group_members = {
-                        "group_deactivate_id": rec.id,
+                        "group_to_split_id": rec.id,
                         "individual_id": mrec.individual.id,
                         "kind_ids": kind_ids,
                     }
@@ -127,6 +130,27 @@ class ChangeRequestDeactivate(models.Model):
     def open_registrant_details_form(self):
         self.ensure_one()
         res_id = self.registrant_id.id
+        form_id = self.env.ref("g2p_registry_group.view_groups_form").id
+        action = self.env["res.partner"].get_formview_action()
+        context = {
+            "create": False,
+            "edit": False,
+        }
+        action.update(
+            {
+                "name": _("Member Details"),
+                "views": [(form_id, "form")],
+                "res_id": res_id,
+                "target": "new",
+                "context": context,
+                "flags": {"mode": "readonly"},
+            }
+        )
+        return action
+
+    def open_new_registrant_details_form(self):
+        self.ensure_one()
+        res_id = self.new_registrant_id.id
         form_id = self.env.ref("g2p_registry_group.view_groups_form").id
         action = self.env["res.partner"].get_formview_action()
         context = {
