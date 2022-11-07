@@ -1,4 +1,5 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import json
 import logging
 
 from odoo import Command, _, api, fields, models
@@ -37,12 +38,18 @@ class ChangeRequestDeactivate(models.Model):
     request_type = fields.Selection(related="change_request_id.request_type")
 
     # Change Request Fields
-    # TODO: Add dynamic domain based on registrant_id (group)
     deactivate_partner_id = fields.Many2one(
         "res.partner",
         "Member to Deactivate",
         domain=[("is_registrant", "=", True), ("is_group", "=", False)],
     )
+    # For dynamic domain based on registrant_id.group_membership_ids
+    deactivate_partner_id_domain = fields.Char(
+        compute="_compute_deactivate_partner_id_domain",
+        readonly=True,
+        store=False,
+    )
+
     remarks = fields.Text()
 
     # Target Group Current Members
@@ -77,10 +84,28 @@ class ChangeRequestDeactivate(models.Model):
                         "kind_ids": kind_ids,
                     }
                     self.env["spp.change.request.group.members"].create(group_members)
-                    _logger.info(
-                        "Change Request: _compute_group_member_ids: group_members: %s"
-                        % group_members
-                    )
+
+    @api.onchange("registrant_id")
+    def _onchange_registrant_id(self):
+        self.update(
+            {
+                "deactivate_partner_id": None,
+                "deactivate_group_member_ids": [(Command.clear())],
+            }
+        )
+
+    @api.depends("registrant_id")
+    def _compute_deactivate_partner_id_domain(self):
+        for rec in self:
+            domain = [("is_registrant", "=", True), ("is_group", "=", False)]
+            group_membership_ids = []
+            if rec.registrant_id:
+                group_membership_ids = [
+                    grp.individual.id for grp in rec.registrant_id.group_membership_ids
+                ]
+            if group_membership_ids:
+                domain.append(("id", "in", group_membership_ids))
+            rec.deactivate_partner_id_domain = json.dumps(domain)
 
     def _update_live_data(self):
         # TODO: update live data

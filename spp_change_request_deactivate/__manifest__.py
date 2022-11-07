@@ -15,6 +15,7 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "spp_change_request",
+        "web_domain_field",
     ],
     "data": [
         "security/ir.model.access.csv",
