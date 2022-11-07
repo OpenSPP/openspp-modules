@@ -10,10 +10,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     _rec_name = "change_request_id"
 
     registrant_id = fields.Many2one(
-        "res.partner",
-        "Registrant",
-        domain=[("is_registrant", "=", True)],
-        required=True,
+        "res.partner", "Registrant", domain=[("is_registrant", "=", True)]
     )
     change_request_id = fields.Many2one(
         "spp.change.request", "Change Request", required=True
@@ -28,6 +25,11 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         string="Status",
         readonly=True,
     )
+
+    def _update_registrant_id(self, res):
+        for rec in res:
+            if rec.registrant_id:
+                rec.change_request_id.update({"registrant_id": rec.registrant_id.id})
 
     def _get_name(self):
         name = ""
