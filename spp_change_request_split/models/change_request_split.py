@@ -1,4 +1,5 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import json
 import logging
 
 from odoo import Command, _, api, fields, models
@@ -42,6 +43,12 @@ class ChangeRequestSplit(models.Model):
         "Individual to Split",
         domain=[("is_registrant", "=", True), ("is_group", "=", False)],
     )
+    # For dynamic domain based on registrant_id.group_membership_ids
+    registrant_to_split_id_domain = fields.Char(
+        compute="_compute_registrant_to_split_id_domain",
+        readonly=True,
+        store=False,
+    )
 
     new_registrant_id = fields.Many2one(
         "res.partner",
@@ -80,10 +87,28 @@ class ChangeRequestSplit(models.Model):
                         "kind_ids": kind_ids,
                     }
                     self.env["spp.change.request.group.members"].create(group_members)
-                    _logger.info(
-                        "Change Request: _compute_group_member_ids: group_members: %s"
-                        % group_members
-                    )
+
+    @api.onchange("registrant_id")
+    def _onchange_registrant_id(self):
+        self.update(
+            {
+                "registrant_to_split_id": None,
+                "split_group_member_ids": [(Command.clear())],
+            }
+        )
+
+    @api.depends("registrant_id")
+    def _compute_registrant_to_split_id_domain(self):
+        for rec in self:
+            domain = [("is_registrant", "=", True), ("is_group", "=", False)]
+            group_membership_ids = []
+            if rec.registrant_id:
+                group_membership_ids = [
+                    grp.individual.id for grp in rec.registrant_id.group_membership_ids
+                ]
+            if group_membership_ids:
+                domain.append(("id", "in", group_membership_ids))
+            rec.registrant_to_split_id_domain = json.dumps(domain)
 
     def _update_live_data(self):
         # TODO: update live data

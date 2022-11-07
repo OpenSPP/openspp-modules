@@ -79,7 +79,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     <div class="oe_button_box" name="button_box">
                     </div>
                     <div class="oe_title mb24">
-                        <label for="registrant_id" string="Split to Group:" />
+                        <label for="registrant_id" string="Source Group:" />
                         <h1>
                             <field
                                 name="registrant_id"
@@ -107,6 +107,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                     required="1"
                                     attrs="{'readonly':[('state','!=','draft')]}"
                                     options="{'no_open':true,'no_create':true,'no_edit':true}"
+                                    domain="registrant_to_split_id_domain"
                                     colspan="4"
                                 />
                                 <field
@@ -144,6 +145,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </page>
                     </notebook>
                     <field name="change_request_id" invisible="1" />
+                    <field name="registrant_to_split_id_domain" invisible="1" />
+                    <field name="split_group_member_ids" invisible="1" />
                 </sheet>
             </form>
         </field>
@@ -215,7 +218,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <notebook colspan="2" class="o_container_left">
                             <page string="Source Group Current Members">
                                 <field name="split_group_member_ids" readonly="1" nolabel="1">
-                                    <tree>
+                                    <tree decoration-danger="individual_id==parent.registrant_to_split_id">
                                         <field name="group_to_split_id" invisible="1" />
                                         <field name="individual_id" string="Members" />
                                         <field
@@ -286,6 +289,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         required="1"
                                         attrs="{'readonly':[('state','!=','draft')]}"
                                         options="{'no_open':true,'no_create':true,'no_edit':true}"
+                                        domain="registrant_to_split_id_domain"
                                     />
                                     <field
                                         name="new_registrant_id"
@@ -317,6 +321,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </notebook>
                     </group>
                     <field name="change_request_id" invisible="1" />
+                    <field name="registrant_to_split_id_domain" invisible="1" />
                 </group>
             </form>
         </field>

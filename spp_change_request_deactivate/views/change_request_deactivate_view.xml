@@ -106,6 +106,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                     required="1"
                                     attrs="{'readonly':[('state','!=','draft')]}"
                                     options="{'no_open':true,'no_create':true,'no_edit':true}"
+                                    domain="deactivate_partner_id_domain"
                                     colspan="4"
                                 />
                                 <field
@@ -141,6 +142,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </page>
                     </notebook>
                     <field name="change_request_id" invisible="1" />
+                    <field name="deactivate_partner_id_domain" invisible="1" />
+                    <field name="deactivate_group_member_ids" invisible="1" />
                 </sheet>
             </form>
         </field>
@@ -212,7 +215,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <notebook colspan="2" class="o_container_left">
                             <page string="Selected Group Current Members">
                                 <field name="deactivate_group_member_ids" readonly="1" nolabel="1">
-                                    <tree>
+                                    <tree decoration-danger="individual_id==parent.deactivate_partner_id">
                                         <field name="group_deactivate_id" invisible="1" />
                                         <field name="individual_id" string="Members" />
                                         <field
@@ -283,6 +286,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         required="1"
                                         attrs="{'readonly':[('state','!=','draft')]}"
                                         options="{'no_open':true,'no_create':true,'no_edit':true}"
+                                        domain="deactivate_partner_id_domain"
                                     />
                                     <field
                                         name="remarks"
@@ -314,6 +318,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </notebook>
                     </group>
                     <field name="change_request_id" invisible="1" />
+                    <field name="deactivate_partner_id_domain" invisible="1" />
                 </group>
             </form>
         </field>
