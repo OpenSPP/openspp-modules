@@ -8,6 +8,8 @@ class SPPGroupMembershipTemp(models.Model):
 
     group_add_children_id = fields.Many2one("spp.change.request.add.children")
     individual_id = fields.Many2one("res.partner", string="Registrant")
-    kind_ids = fields.Many2many("g2p.group.membership.kind", string="Kinds")
+    kind_ids = fields.Many2many("g2p.group.membership.kind", string="Membership Types")
     start_date = fields.Datetime(default=lambda self: fields.Datetime.now())
     end_date = fields.Datetime()
+    birthdate = fields.Date("Date of Birth", related="individual_id.birthdate")
+    age = fields.Char(related="individual_id.age")

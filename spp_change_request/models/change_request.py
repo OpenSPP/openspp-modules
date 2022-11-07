@@ -24,7 +24,6 @@ class ChangeRequestBase(models.Model):
         "res.partner",
         "Registrant",
         domain=[("is_registrant", "=", True)],
-        required=True,
     )
     request_type_ref_id = fields.Reference(
         string="Change Request Template", selection="_selection_request_type_ref_id"
@@ -114,6 +113,33 @@ class ChangeRequestBase(models.Model):
             return rec.open_change_request_form(target="current", mode="edit")
 
     def create_request_detail(self):
+        for rec in self:
+            if rec.state in ("draft", "pending"):
+                # Set the request_type_ref_id
+                res_model = rec.request_type
+
+                ref_id = self.env[res_model].create(
+                    {
+                        "change_request_id": rec.id,
+                    }
+                )
+                request_type_ref_id = f"{res_model},{ref_id.id}"
+                _logger.debug("DEBUG! request_type_ref_id: %s", request_type_ref_id)
+                rec.update(
+                    {
+                        "request_type_ref_id": request_type_ref_id,
+                    }
+                )
+                # Open Request Form
+                return rec.open_change_request_form(target="current", mode="edit")
+            else:
+                raise UserError(
+                    _(
+                        "The change request to be created must be in draft or pending validation state."
+                    )
+                )
+
+    def Xcreate_request_detail(self):
         for rec in self:
             if rec.state in ("draft", "pending"):
                 # Set the request_type_ref_id

@@ -27,12 +27,16 @@ class ChangeRequestAddChildren(models.Model):
     ]
     _description = "Add Children Change Request Type"
 
-    # Use in checking allowed registrant type
-    IS_GROUP = True
+    # Redefine registrant_id to set specific domain and label
+    registrant_id = fields.Many2one(
+        "res.partner",
+        "Add to Group",
+        domain=[("is_registrant", "=", True), ("is_group", "=", True)],
+    )
 
     request_type = fields.Selection(related="change_request_id.request_type")
 
-    # Registrant Fields
+    # Change Request Fields
     family_name = fields.Char()
     given_name = fields.Char()
     addl_name = fields.Char("Additional Name")
@@ -43,13 +47,11 @@ class ChangeRequestAddChildren(models.Model):
         [("Female", "Female"), ("Male", "Male"), ("Other", "Other")],
     )
     address = fields.Text()
-
-    # Group Membership Fields
     kind = fields.Many2many(
-        "g2p.group.membership.kind", string="Group Membership Kinds"
+        "g2p.group.membership.kind", string="Group Membership Types"
     )
 
-    # Registry fields
+    # Target Group Current Members
     group_member_ids = fields.One2many(
         "spp.change.request.group.members", "group_add_children_id", "Group Members"
     )
@@ -60,17 +62,19 @@ class ChangeRequestAddChildren(models.Model):
         domain=[("request_type", "=", _name)],
     )
 
-    # def write(self, vals):
-    #    res = super(ChangeRequestAddChildren, self).write(vals)
-    #    self._copy_group_member_ids(self)
-    #    return res
-
-    @api.model_create_multi
-    @api.returns("self", lambda value: value.id)
-    def create(self, vals_list):
-        res = super(ChangeRequestAddChildren, self).create(vals_list)
-        self._copy_group_member_ids(res)
+    def write(self, vals):
+        res = super(ChangeRequestAddChildren, self).write(vals)
+        # Must update the spp.change.request (base) registrant_id
+        self._update_registrant_id(self)
+        self._copy_group_member_ids(self)
         return res
+
+    # @api.model_create_multi
+    # @api.returns("self", lambda value: value.id)
+    # def create(self, vals_list):
+    #    res = super(ChangeRequestAddChildren, self).create(vals_list)
+    #    self._copy_group_member_ids(res)
+    #    return res
 
     def _copy_group_member_ids(self, res):
         for rec in res:
@@ -84,8 +88,6 @@ class ChangeRequestAddChildren(models.Model):
                         "group_add_children_id": rec.id,
                         "individual_id": mrec.individual.id,
                         "kind_ids": kind_ids,
-                        "start_date": mrec.start_date,
-                        "end_date": mrec.end_date,
                     }
                     self.env["spp.change.request.group.members"].create(group_members)
 
