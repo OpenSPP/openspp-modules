@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo noupdate="0">
+
+    <record id="dms_access_group" model="dms.access.group">
+        <field name="name">Change Request DMS Group</field>
+        <field
+            name="group_ids"
+            eval="[
+            (4, ref('g2p_registry_base.group_g2p_admin')),
+            (4, ref('spp_change_request.group_spp_change_request_administrator')),
+            (4, ref('spp_change_request.group_spp_change_request_validator'))
+        ]"
+        />
+        <field name="perm_create" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="True" />
+    </record>
+
+    <record id="attachment_storage_add_children" model="dms.storage">
+        <field name="name">Change Request: Add Children</field>
+        <field name="save_type">file</field>
+        <field
+            name="model_ids"
+            eval="[(4, ref('spp_change_request.model_spp_change_request_add_children'))]"
+        />
+        <field name="field_default_group_id" ref="dms_access_group" />
+    </record>
+
+</odoo>

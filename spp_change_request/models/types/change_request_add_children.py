@@ -26,6 +26,10 @@ class ChangeRequestAddChildren(models.Model):
         "spp.change.request.validation.sequence.mixin",
     ]
     _description = "Add Children Change Request Type"
+    _order = "id desc"
+
+    # Initialize DMS Storage
+    DMS_STORAGE = "spp_change_request.attachment_storage_add_children"
 
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(
@@ -64,32 +68,47 @@ class ChangeRequestAddChildren(models.Model):
 
     def write(self, vals):
         res = super(ChangeRequestAddChildren, self).write(vals)
-        # Must update the spp.change.request (base) registrant_id
-        self._update_registrant_id(self)
-        self._copy_group_member_ids(self)
+        if self.registrant_id:
+            # Update the spp.change.request (base) registrant_id
+            self._update_registrant_id(self)
         return res
 
     # @api.model_create_multi
     # @api.returns("self", lambda value: value.id)
     # def create(self, vals_list):
     #    res = super(ChangeRequestAddChildren, self).create(vals_list)
-    #    self._copy_group_member_ids(res)
     #    return res
 
-    def _copy_group_member_ids(self, res):
-        for rec in res:
-            _logger.debug(
+    @api.onchange("registrant_id")
+    def _onchange_registrant_id(self):
+        if self.group_member_ids:
+            self.group_member_ids = [(Command.clear())]
+        # Populate the group members
+        self._copy_group_member_ids()
+
+    def _copy_group_member_ids(self):
+        for rec in self:
+            _logger.info(
                 "Change Request: Add Children _copy_group_member_ids: rec: %s" % rec
             )
-            if rec.registrant_id:
-                for mrec in rec.registrant_id.group_membership_ids:
-                    kind_ids = mrec.kind and mrec.kind.ids or None
-                    group_members = {
-                        "group_add_children_id": rec.id,
-                        "individual_id": mrec.individual.id,
-                        "kind_ids": kind_ids,
-                    }
-                    self.env["spp.change.request.group.members"].create(group_members)
+            for mrec in rec.registrant_id.group_membership_ids:
+                kind_ids = mrec.kind and mrec.kind.ids or None
+                group_members = {
+                    "group_add_children_id": rec.id,
+                    "individual_id": mrec.individual.id,
+                    "kind_ids": kind_ids,
+                }
+                self.env["spp.change.request.group.members"].create(group_members)
+
+    def _get_name(self):
+        name = ""
+        if self.family_name:
+            name += self.family_name + ", "
+        if self.given_name:
+            name += self.given_name + " "
+        if self.addl_name:
+            name += self.addl_name + " "
+        return name.title()
 
     def _update_live_data(self):
         self.ensure_one()

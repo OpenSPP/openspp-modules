@@ -9,17 +9,24 @@
     "license": "LGPL-3",
     "development_status": "Alpha",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
+    "external_dependencies": {
+        "python": [
+            "python-magic",
+        ]
+    },
     "depends": [
         "base",
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_registry_group",
+        "dms_field",
     ],
     "data": [
         "security/change_request_security.xml",
         "security/ir.model.access.csv",
         "data/sequences.xml",
         "data/mail_activity.xml",
+        "data/dms.xml",
         "views/main_view.xml",
         "views/change_request_view.xml",
         "views/change_request_validation_sequence_view.xml",

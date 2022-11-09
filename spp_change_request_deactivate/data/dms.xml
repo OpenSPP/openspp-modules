@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo noupdate="0">
+
+    <record id="attachment_storage_deactivate" model="dms.storage">
+        <field name="name">Change Request: Deactivate Member</field>
+        <field name="save_type">file</field>
+        <field
+            name="model_ids"
+            eval="[(4, ref('spp_change_request_deactivate.model_spp_change_request_deactivate'))]"
+        />
+        <field name="field_default_group_id" ref="spp_change_request.dms_access_group" />
+    </record>
+
+</odoo>

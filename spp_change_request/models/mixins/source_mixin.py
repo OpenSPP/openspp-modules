@@ -26,20 +26,22 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         readonly=True,
     )
 
+    # DMS Field
+    dms_directory_ids = fields.One2many(
+        "dms.directory",
+        "res_id",
+        string="DMS Directories",
+        domain=lambda self: [
+            ("res_model", "=", self._name),
+            ("storage_id.save_type", "!=", "attachment"),
+        ],
+        auto_join=True,
+    )
+
     def _update_registrant_id(self, res):
         for rec in res:
             if rec.registrant_id:
                 rec.change_request_id.update({"registrant_id": rec.registrant_id.id})
-
-    def _get_name(self):
-        name = ""
-        if self.family_name:
-            name += self.family_name + ", "
-        if self.given_name:
-            name += self.given_name + " "
-        if self.addl_name:
-            name += self.addl_name + " "
-        return name.title()
 
     def get_request_type_view_id(self):
         """
@@ -86,10 +88,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         activity = request._generate_activity(activity_type, summary, note)
 
         # Update change request
-        name = self.env["ir.sequence"].next_by_code("spp.change.request.num")
         request.update(
             {
-                "name": name,
                 "date_requested": fields.Datetime.now(),
                 "state": "pending",
                 "last_activity_id": activity.id,

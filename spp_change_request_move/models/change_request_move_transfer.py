@@ -27,6 +27,9 @@ class ChangeRequestMoveTransfer(models.Model):
     ]
     _description = "Move/Transfer Member Change Request Type"
 
+    # Initialize DMS Storage
+    DMS_STORAGE = "spp_change_request_move.attachment_storage_move"
+
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(
         "res.partner",
@@ -59,30 +62,32 @@ class ChangeRequestMoveTransfer(models.Model):
 
     def write(self, vals):
         res = super(ChangeRequestMoveTransfer, self).write(vals)
-        # Must update the spp.change.request (base) registrant_id
-        self._update_registrant_id(self)
-        self._copy_group_member_ids(self)
+        if self.registrant_id:
+            # Must update the spp.change.request (base) registrant_id
+            self._update_registrant_id(self)
         return res
 
-    def _copy_group_member_ids(self, res):
-        for rec in res:
+    @api.onchange("registrant_id")
+    def _onchange_registrant_id(self):
+        if self.move_to_group_member_ids:
+            self.move_to_group_member_ids = [(Command.clear())]
+        # Populate the group members
+        self._copy_group_member_ids()
+
+    def _copy_group_member_ids(self):
+        for rec in self:
             _logger.info(
                 "Change Request: Move/Transfer Member _copy_group_member_ids: rec: %s"
                 % rec
             )
-            if rec.registrant_id:
-                for mrec in rec.registrant_id.group_membership_ids:
-                    kind_ids = mrec.kind and mrec.kind.ids or None
-                    group_members = {
-                        "group_move_to_id": rec.id,
-                        "individual_id": mrec.individual.id,
-                        "kind_ids": kind_ids,
-                    }
-                    self.env["spp.change.request.group.members"].create(group_members)
-                    _logger.info(
-                        "Change Request: _compute_group_member_ids: group_members: %s"
-                        % group_members
-                    )
+            for mrec in rec.registrant_id.group_membership_ids:
+                kind_ids = mrec.kind and mrec.kind.ids or None
+                group_members = {
+                    "group_move_to_id": rec.id,
+                    "individual_id": mrec.individual.id,
+                    "kind_ids": kind_ids,
+                }
+                self.env["spp.change.request.group.members"].create(group_members)
 
     def _update_live_data(self):
         self.ensure_one()

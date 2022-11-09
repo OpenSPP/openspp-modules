@@ -19,6 +19,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "data/dms.xml",
         "views/change_request_split_view.xml",
     ],
     "assets": {},
