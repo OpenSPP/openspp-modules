@@ -4,8 +4,8 @@
 import logging
 from functools import partial
 
-import jwt
-from jwt import PyJWKClient
+import jwt  # pylint: disable=missing-manifest-dependency
+from jwt import PyJWKClient  # pylint: disable=missing-manifest-dependency
 from werkzeug.exceptions import InternalServerError
 
 from odoo import _, api, fields, models, tools
