@@ -30,6 +30,11 @@ class ChangeRequestChangeLocation(models.Model):
     ]
     _description = "Change Branch/Centre/Food Agent Change Request Type"
 
+    # Initialize DMS Storage
+    DMS_STORAGE = (
+        "spp_change_request_change_location.attachment_storage_change_location"
+    )
+
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(
         "res.partner",
@@ -55,8 +60,9 @@ class ChangeRequestChangeLocation(models.Model):
 
     def write(self, vals):
         res = super(ChangeRequestChangeLocation, self).write(vals)
-        # Must update the spp.change.request (base) registrant_id
-        self._update_registrant_id(self)
+        if self.registrant_id:
+            # Must update the spp.change.request (base) registrant_id
+            self._update_registrant_id(self)
         return res
 
     def _update_live_data(self):

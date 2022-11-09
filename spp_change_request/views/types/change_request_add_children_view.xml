@@ -142,12 +142,15 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             </group>
                         </page>
                         <page string="Attachments">
-
+                            <field
+                                name="dms_directory_ids"
+                                mode="dms_tree"
+                                attrs="{'invisible':[('registrant_id','=',False)],'readonly':[('state','!=','draft')]}"
+                            />
                         </page>
                         <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
                             <field
                                 name="validation_ids"
-                                create="0"
                                 nolabel="1"
                                 attrs="{'readonly':[('state','not in',('draft','pending'))]}"
                             >
@@ -166,6 +169,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </page>
                     </notebook>
                     <field name="change_request_id" invisible="1" />
+                    <field name="group_member_ids" invisible="1" />
                 </sheet>
             </form>
         </field>
@@ -282,7 +286,11 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <newline />
                         <notebook colspan="2" class="o_container_left">
                             <page string="Attachments">
-
+                                <field
+                                    name="dms_directory_ids"
+                                    mode="dms_tree"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                />
                             </page>
                         </notebook>
                     </group>
@@ -339,26 +347,23 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                     />
                                 </group>
                             </page>
+                            <!-- TODO: Fix Javascript error if open and 'Edit' button was clicked.
                             <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
                                 <field
                                     name="validation_ids"
-                                    create="0"
                                     nolabel="1"
-                                    attrs="{'readonly':[('state','not in',('draft','pending'))]}"
+                                    readonly="1"
                                 >
-                                    <tree>
-                                        <field name="sequence" widget="handle" />
+                                    <tree editable="bottom">
                                         <field name="request_type" invisible="1" />
                                         <field name="stage_id" options="{'no_create_edit':true}" />
                                         <field
                                             name="validation_group_id"
                                             string="Validation Group"
-                                            domain="[('category_id','=',%(g2p_registry_base.openg2p_module)d)]"
-                                            options="{'no_open':true,'no_edit':true,'no_create':true}"
                                         />
                                     </tree>
                                 </field>
-                            </page>
+                            </page> -->
                         </notebook>
                     </group>
                     <field name="change_request_id" invisible="1" />

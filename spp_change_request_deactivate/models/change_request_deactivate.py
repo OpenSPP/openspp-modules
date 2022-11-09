@@ -28,6 +28,9 @@ class ChangeRequestDeactivate(models.Model):
     ]
     _description = "Deactivate Member Change Request Type"
 
+    # Initialize DMS Storage
+    DMS_STORAGE = "spp_change_request_deactivate.attachment_storage_deactivate"
+
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(
         "res.partner",
@@ -64,35 +67,36 @@ class ChangeRequestDeactivate(models.Model):
 
     def write(self, vals):
         res = super(ChangeRequestDeactivate, self).write(vals)
-        # Must update the spp.change.request (base) registrant_id
-        self._update_registrant_id(self)
-        self._copy_group_member_ids(self)
+        if self.registrant_id:
+            # Must update the spp.change.request (base) registrant_id
+            self._update_registrant_id(self)
+        self._copy_group_member_ids()
         return res
 
-    def _copy_group_member_ids(self, res):
-        for rec in res:
+    @api.onchange("registrant_id")
+    def _onchange_registrant_id(self):
+        if self.deactivate_group_member_ids:
+            self.update(
+                {
+                    "deactivate_partner_id": None,
+                    "deactivate_group_member_ids": [(Command.clear())],
+                }
+            )
+
+    def _copy_group_member_ids(self):
+        for rec in self:
             _logger.info(
                 "Change Request: Deactivate Member _copy_group_member_ids: rec: %s"
                 % rec
             )
-            if rec.registrant_id:
-                for mrec in rec.registrant_id.group_membership_ids:
-                    kind_ids = mrec.kind and mrec.kind.ids or None
-                    group_members = {
-                        "group_deactivate_id": rec.id,
-                        "individual_id": mrec.individual.id,
-                        "kind_ids": kind_ids,
-                    }
-                    self.env["spp.change.request.group.members"].create(group_members)
-
-    @api.onchange("registrant_id")
-    def _onchange_registrant_id(self):
-        self.update(
-            {
-                "deactivate_partner_id": None,
-                "deactivate_group_member_ids": [(Command.clear())],
-            }
-        )
+            for mrec in rec.registrant_id.group_membership_ids:
+                kind_ids = mrec.kind and mrec.kind.ids or None
+                group_members = {
+                    "group_deactivate_id": rec.id,
+                    "individual_id": mrec.individual.id,
+                    "kind_ids": kind_ids,
+                }
+                self.env["spp.change.request.group.members"].create(group_members)
 
     @api.depends("registrant_id")
     def _compute_deactivate_partner_id_domain(self):

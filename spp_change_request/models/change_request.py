@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import logging
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -14,7 +14,11 @@ class ChangeRequestBase(models.Model):
     _order = "id desc"
     _check_company_auto = True
 
-    name = fields.Char("Request #", required=True, default="Draft")
+    def _default_name(self):
+        name = self.env["ir.sequence"].next_by_code("spp.change.request.num")
+        return name
+
+    name = fields.Char("Request #", required=True, default=_default_name)
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
     date_requested = fields.Datetime()
     request_type = fields.Selection(
@@ -117,10 +121,26 @@ class ChangeRequestBase(models.Model):
             if rec.state in ("draft", "pending"):
                 # Set the request_type_ref_id
                 res_model = rec.request_type
+                # Set the dms directory
+                _logger.info(
+                    "Change Request: DMS Directory Creation (%s)"
+                    % len(self.dms_directory_ids)
+                )
+                storage = self.env.ref(self.env[res_model].DMS_STORAGE)
+                dmsval = {
+                    "storage_id": storage.id,
+                    # "res_id": rec.id,
+                    "res_model": res_model,
+                    "is_root_directory": True,
+                    "name": rec.name,
+                    "group_ids": [(4, storage.field_default_group_id.id)],
+                }
 
+                # Create the change request detail record
                 ref_id = self.env[res_model].create(
                     {
                         "change_request_id": rec.id,
+                        "dms_directory_ids": [(Command.create(dmsval))],
                     }
                 )
                 request_type_ref_id = f"{res_model},{ref_id.id}"
@@ -132,49 +152,6 @@ class ChangeRequestBase(models.Model):
                 )
                 # Open Request Form
                 return rec.open_change_request_form(target="current", mode="edit")
-            else:
-                raise UserError(
-                    _(
-                        "The change request to be created must be in draft or pending validation state."
-                    )
-                )
-
-    def Xcreate_request_detail(self):
-        for rec in self:
-            if rec.state in ("draft", "pending"):
-                # Set the request_type_ref_id
-                res_model = rec.request_type
-
-                # Check if the change request type selected is configured
-                # for the registrant type (group/individual)
-                is_group = self.env[res_model].IS_GROUP
-                if rec.registrant_id.is_group == is_group:
-                    ref_id = self.env[res_model].create(
-                        {
-                            "registrant_id": rec.registrant_id.id,
-                            "change_request_id": rec.id,
-                        }
-                    )
-                    request_type_ref_id = f"{res_model},{ref_id.id}"
-                    _logger.debug("DEBUG! request_type_ref_id: %s", request_type_ref_id)
-                    rec.update(
-                        {
-                            "request_type_ref_id": request_type_ref_id,
-                        }
-                    )
-                    # Open Request Form
-                    return rec.open_change_request_form(target="current", mode="edit")
-                else:
-                    if is_group:
-                        mtype = _("groups")
-                    else:
-                        mtype = _("individuals")
-                    raise UserError(
-                        _(
-                            "Incorrect registrant type. This change request only accept %s"
-                        )
-                        % mtype
-                    )
             else:
                 raise UserError(
                     _(

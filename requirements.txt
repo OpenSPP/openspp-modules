@@ -1,5 +1,0 @@
-# generated from manifests external_dependencies
-apispec
-pyjwt>=2.4.0
-pyOpenSSL==22.0.0
-xlrd

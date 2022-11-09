@@ -28,6 +28,9 @@ class ChangeRequestSplit(models.Model):
     ]
     _description = "Split Member Change Request Type"
 
+    # Initialize DMS Storage
+    DMS_STORAGE = "spp_change_request_split.attachment_storage_split"
+
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(
         "res.partner",
@@ -68,34 +71,35 @@ class ChangeRequestSplit(models.Model):
 
     def write(self, vals):
         res = super(ChangeRequestSplit, self).write(vals)
-        # Must update the spp.change.request (base) registrant_id
-        self._update_registrant_id(self)
-        self._copy_group_member_ids(self)
+        if self.registrant_id:
+            # Must update the spp.change.request (base) registrant_id
+            self._update_registrant_id(self)
+        self._copy_group_member_ids()
         return res
-
-    def _copy_group_member_ids(self, res):
-        for rec in res:
-            _logger.info(
-                "Change Request: Split Member _copy_group_member_ids: rec: %s" % rec
-            )
-            if rec.registrant_id:
-                for mrec in rec.registrant_id.group_membership_ids:
-                    kind_ids = mrec.kind and mrec.kind.ids or None
-                    group_members = {
-                        "group_to_split_id": rec.id,
-                        "individual_id": mrec.individual.id,
-                        "kind_ids": kind_ids,
-                    }
-                    self.env["spp.change.request.group.members"].create(group_members)
 
     @api.onchange("registrant_id")
     def _onchange_registrant_id(self):
-        self.update(
-            {
-                "registrant_to_split_id": None,
-                "split_group_member_ids": [(Command.clear())],
-            }
-        )
+        if self.split_group_member_ids:
+            self.update(
+                {
+                    "registrant_to_split_id": None,
+                    "split_group_member_ids": [(Command.clear())],
+                }
+            )
+
+    def _copy_group_member_ids(self):
+        for rec in self:
+            _logger.info(
+                "Change Request: Split Member _copy_group_member_ids: rec: %s" % rec
+            )
+            for mrec in rec.registrant_id.group_membership_ids:
+                kind_ids = mrec.kind and mrec.kind.ids or None
+                group_members = {
+                    "group_to_split_id": rec.id,
+                    "individual_id": mrec.individual.id,
+                    "kind_ids": kind_ids,
+                }
+                self.env["spp.change.request.group.members"].create(group_members)
 
     @api.depends("registrant_id")
     def _compute_registrant_to_split_id_domain(self):

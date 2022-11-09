@@ -117,11 +117,14 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                     options="{'no_open':true,'no_create':true,'no_edit':true}"
                                     colspan="4"
                                 />
-
                             </group>
                         </page>
                         <page string="Attachments">
-
+                            <field
+                                name="dms_directory_ids"
+                                mode="dms_tree"
+                                attrs="{'invisible':[('registrant_id','=',False)],'readonly':[('state','!=','draft')]}"
+                            />
                         </page>
                         <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
                             <field
@@ -263,7 +266,11 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <newline />
                         <notebook colspan="2" class="o_container_left">
                             <page string="Attachments">
-
+                                <field
+                                    name="dms_directory_ids"
+                                    mode="dms_tree"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                />
                             </page>
                         </notebook>
                     </group>
