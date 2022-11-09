@@ -29,13 +29,13 @@ class G2PCreateNewProgramWiz(models.TransientModel):
     )
 
     def _check_required_fields(self):
-        res = super(G2PCreateNewProgramWiz, self)._check_required_fields()
+        res = super()._check_required_fields()
         if self.entitlement_kind == "cash" and not self.entitlement_cash_item_ids:
             raise UserError(_("Items are required in the Cash entitlement manager."))
         return res
 
     def _get_entitlement_manager(self, program_id):
-        res = super(G2PCreateNewProgramWiz, self)._get_entitlement_manager(program_id)
+        res = super()._get_entitlement_manager(program_id)
         if self.entitlement_kind == "cash":
             # Add a new record to cash entitlement manager model
             entitlement_item_ids = []

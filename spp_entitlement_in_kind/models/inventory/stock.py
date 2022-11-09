@@ -12,7 +12,7 @@ class StockMove(models.Model):
 
     @api.model
     def _prepare_merge_moves_distinct_fields(self):
-        distinct_fields = super(StockMove, self)._prepare_merge_moves_distinct_fields()
+        distinct_fields = super()._prepare_merge_moves_distinct_fields()
         distinct_fields.append("entitlement_id")
         return distinct_fields
 
@@ -21,7 +21,7 @@ class StockMove(models.Model):
         return self.entitlement_id.cycle_id or res
 
     def _assign_picking_post_process(self, new=False):
-        super(StockMove, self)._assign_picking_post_process(new=new)
+        super()._assign_picking_post_process(new=new)
         if new:
             picking_id = self.mapped("picking_id")
             entitlement_ids = self.mapped("entitlement_id.cycle_id")
@@ -44,7 +44,7 @@ class StockRule(models.Model):
     _inherit = "stock.rule"
 
     def _get_custom_move_fields(self):
-        fields = super(StockRule, self)._get_custom_move_fields()
+        fields = super()._get_custom_move_fields()
         fields += ["entitlement_id"]
         return fields
 

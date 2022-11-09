@@ -39,7 +39,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
     )
 
     def _check_required_fields(self):
-        res = super(G2PCreateNewProgramWiz, self)._check_required_fields()
+        res = super()._check_required_fields()
         if self.entitlement_kind == "inkind":
             if not self.entitlement_item_ids:
                 raise UserError(
@@ -54,7 +54,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
         return res
 
     def _get_entitlement_manager(self, program_id):
-        res = super(G2PCreateNewProgramWiz, self)._get_entitlement_manager(program_id)
+        res = super()._get_entitlement_manager(program_id)
         if self.entitlement_kind == "inkind":
             # Add a new record to in-kind entitlement manager model
             entitlement_item_ids = []
