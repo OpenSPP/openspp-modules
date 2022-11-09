@@ -93,6 +93,12 @@ msgid "Cycle"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#, python-format
+msgid "Cycle In-Kind Entitlements"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
 #: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__uom_id
 #: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__uom_id
 msgid "Default unit of measure used for all stock operations."
@@ -137,6 +143,13 @@ msgstr ""
 #. module: spp_entitlement_in_kind
 #: model:ir.actions.act_window,name:spp_entitlement_in_kind.action_entitlement_manager_inkind
 msgid "Entitlement Managers"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#, python-format
+msgid ""
+"Entitlement State Error! Entitlements not in 'pending validation' state:\n"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
@@ -347,6 +360,12 @@ msgstr ""
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
 msgid "Program:"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#, python-format
+msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
