@@ -91,6 +91,16 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__description
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__description
 msgid "Description"
