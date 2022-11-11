@@ -219,6 +219,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <page string="Selected Group Current Members">
                                 <field name="deactivate_group_member_ids" readonly="1" nolabel="1">
                                     <tree decoration-danger="individual_id==parent.deactivate_partner_id">
+                                        <button
+                                            name="open_individual_form"
+                                            type="object"
+                                            help="Open Member Form"
+                                            icon="fa-external-link "
+                                            class="btn-success"
+                                        />
                                         <field name="group_deactivate_id" invisible="1" />
                                         <field name="individual_id" string="Members" />
                                         <field

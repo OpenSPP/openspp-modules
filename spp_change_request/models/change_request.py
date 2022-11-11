@@ -81,8 +81,10 @@ class ChangeRequestBase(models.Model):
             res_id = self.request_type_ref_id.id
             if res_id:
                 form_id = self.env[res_model].get_request_type_view_id()
-                if self._context.get("form"):
-                    form = self.env.ref(self._context["form"]) or None
+                if self._context.get("show_validation_form"):
+                    form = (
+                        self.env.ref(self.request_type_ref_id.VALIDATION_FORM) or None
+                    )
                     if form:
                         form_id = form.id
                 action = self.env[res_model].get_formview_action()

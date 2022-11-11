@@ -34,6 +34,7 @@ class ChangeRequestChangeLocation(models.Model):
     DMS_STORAGE = (
         "spp_change_request_change_location.attachment_storage_change_location"
     )
+    VALIDATION_FORM = "spp_change_request_change_location.view_change_request_change_location_validation_form"
 
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(

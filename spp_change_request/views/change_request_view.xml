@@ -8,7 +8,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <tree sample="1">
-                <!-- Make the form XML ID dynamic based on request_type
                 <button
                     name="open_change_request_form"
                     type="object"
@@ -16,8 +15,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     icon="fa-external-link "
                     class="btn-success"
                     attrs="{'invisible':[('request_type_ref_id','=',False)]}"
-                    context="{'form':'spp_change_request.view_change_request_add_children_validation_form'}"
-                /> -->
+                    context="{'show_validation_form':True}"
+                />
                 <field name="name" />
                 <field name="date_requested" />
                 <field name="create_uid" string="Requested By" widget="many2one_avatar_user" />
