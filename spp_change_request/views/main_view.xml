@@ -1,0 +1,20 @@
+<!--
+Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <menuitem id="spp_change_request_menu_root" name="Change Request" sequence="1" />
+    <menuitem
+        id="spp_change_request_request_root"
+        name="Requests"
+        parent="spp_change_request_menu_root"
+        sequence="1"
+    />
+    <menuitem
+        id="spp_change_request_config_root"
+        name="Configuration"
+        parent="spp_change_request_menu_root"
+        sequence="100"
+    />
+
+</odoo>

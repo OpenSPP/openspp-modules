@@ -2,4 +2,5 @@
 apispec
 pyjwt>=2.4.0
 pyOpenSSL==22.0.0
+python-magic
 xlrd
