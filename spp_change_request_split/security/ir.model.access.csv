@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-spp_change_request_split_admin,Change Request Type:Split Admin Access,spp_change_request_split.model_spp_change_request_split,g2p_registry_base.group_g2p_admin,1,1,1,1
-
-spp_change_request_split_validator,Change Request Type:Split Validator Access,spp_change_request_split.model_spp_change_request_split,spp_change_request.group_spp_change_request_validator,1,1,0,0
-
-spp_change_request_split_administrator,Change Request Type:Split Administrator Access,spp_change_request_split.model_spp_change_request_split,spp_change_request.group_spp_change_request_administrator,1,1,0,0
