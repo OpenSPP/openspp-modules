@@ -34,6 +34,13 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_photo
+#: model:ir.model.fields,field_description:spp_photo.field_base_multi_image_image__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_photo.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_photo
 #: model:ir.model.fields,field_description:spp_photo.field_spp_photo_category__display_name
 msgid "Display Name"
 msgstr ""
