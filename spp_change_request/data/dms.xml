@@ -19,14 +19,4 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="perm_unlink" eval="True" />
     </record>
 
-    <record id="attachment_storage_add_children" model="dms.storage">
-        <field name="name">Change Request: Add Children</field>
-        <field name="save_type">file</field>
-        <field
-            name="model_ids"
-            eval="[(4, ref('spp_change_request.model_spp_change_request_add_children'))]"
-        />
-        <field name="field_default_group_id" ref="dms_access_group" />
-    </record>
-
 </odoo>

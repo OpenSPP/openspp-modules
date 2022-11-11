@@ -30,6 +30,9 @@ class ChangeRequestSplit(models.Model):
 
     # Initialize DMS Storage
     DMS_STORAGE = "spp_change_request_split.attachment_storage_split"
+    VALIDATION_FORM = (
+        "spp_change_request_split.view_change_request_split_validation_form"
+    )
 
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(

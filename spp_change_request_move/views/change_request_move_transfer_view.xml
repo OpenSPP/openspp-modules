@@ -3,14 +3,14 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
     <menuitem
-        id="menu_change_request_move_replace_root"
+        id="menu_change_request_move_transfer_root"
         name="Move/Transfer Member Change Requests"
         parent="spp_change_request.spp_change_request_request_root"
         sequence="11"
     />
 
-    <record id="view_change_request_move_replace_tree" model="ir.ui.view">
-        <field name="name">change_request_move_replace_tree</field>
+    <record id="view_change_request_move_transfer_tree" model="ir.ui.view">
+        <field name="name">change_request_move_transfer_tree</field>
         <field name="model">spp.change.request.move.transfer</field>
         <field name="priority">0</field>
         <field name="arch" type="xml">
@@ -34,8 +34,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
-    <record id="view_change_request_move_replace_form" model="ir.ui.view">
-        <field name="name">view_change_request_move_replace_form</field>
+    <record id="view_change_request_move_transfer_form" model="ir.ui.view">
+        <field name="name">view_change_request_move_transfer_form</field>
         <field name="model">spp.change.request.move.transfer</field>
         <field name="priority">0</field>
         <field name="arch" type="xml">
@@ -157,8 +157,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
-    <record id="view_change_request_move_replace_validation_form" model="ir.ui.view">
-        <field name="name">view_change_request_move_replace_validation_form</field>
+    <record id="view_change_request_move_transfer_validation_form" model="ir.ui.view">
+        <field name="name">view_change_request_move_transfer_validation_form</field>
         <field name="model">spp.change.request.move.transfer</field>
         <field name="priority">100</field>
         <field name="arch" type="xml">
@@ -224,6 +224,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <page string="Destination Group Current Members">
                                 <field name="move_to_group_member_ids" readonly="1" nolabel="1">
                                     <tree>
+                                        <button
+                                            name="open_individual_form"
+                                            type="object"
+                                            help="Open Member Form"
+                                            icon="fa-external-link "
+                                            class="btn-success"
+                                        />
                                         <field name="group_move_to_id" invisible="1" />
                                         <field name="individual_id" string="Members" />
                                         <field
@@ -341,8 +348,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
-    <record id="change_request_move_replace_filter" model="ir.ui.view">
-        <field name="name">change_request_move_replace_filter</field>
+    <record id="change_request_move_transfer_filter" model="ir.ui.view">
+        <field name="name">change_request_move_transfer_filter</field>
         <field name="model">spp.change.request.move.transfer</field>
         <field name="priority" eval="1" />
         <field name="arch" type="xml">
@@ -354,12 +361,12 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
     </record>
 
     <!-- All Move/Transfer Member Change Requests -->
-    <record id="action_change_request_move_replace" model="ir.actions.act_window">
+    <record id="action_change_request_move_transfer" model="ir.actions.act_window">
         <field name="name">Move/Transfer Member Change Request</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.change.request.move.transfer</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="change_request_move_replace_filter" />
+        <field name="search_view_id" ref="change_request_move_transfer_filter" />
         <field name="context">{}</field>
         <field name="domain">[]</field>
         <field name="help" type="html">
@@ -371,36 +378,36 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
-    <record id="action_change_request_move_replace_tree_view" model="ir.actions.act_window.view">
+    <record id="action_change_request_move_transfer_tree_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_change_request_move_replace_tree" />
-        <field name="act_window_id" ref="action_change_request_move_replace" />
+        <field name="view_id" ref="view_change_request_move_transfer_tree" />
+        <field name="act_window_id" ref="action_change_request_move_transfer" />
     </record>
 
-    <record id="action_change_request_move_replace_form_view" model="ir.actions.act_window.view">
+    <record id="action_change_request_move_transfer_form_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_change_request_move_replace_validation_form" />
-        <field name="act_window_id" ref="action_change_request_move_replace" />
+        <field name="view_id" ref="view_change_request_move_transfer_validation_form" />
+        <field name="act_window_id" ref="action_change_request_move_transfer" />
     </record>
 
     <menuitem
-        id="menu_change_request_move_replace"
+        id="menu_change_request_move_transfer"
         name="All Move/Transfer Member Requests"
-        action="action_change_request_move_replace"
-        parent="menu_change_request_move_replace_root"
+        action="action_change_request_move_transfer"
+        parent="menu_change_request_move_transfer_root"
         sequence="0"
         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
     />
 
     <!-- Pending Validation -->
-    <record id="action_change_request_move_replace_pending" model="ir.actions.act_window">
+    <record id="action_change_request_move_transfer_pending" model="ir.actions.act_window">
         <field name="name">Pending Validation: Move/Transfer Member</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.change.request.move.transfer</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="change_request_move_replace_filter" />
+        <field name="search_view_id" ref="change_request_move_transfer_filter" />
         <field name="context">{}</field>
         <field name="domain">[('state','=','pending')]</field>
         <field name="help" type="html">
@@ -412,25 +419,25 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
-    <record id="action_change_request_move_replace_pending_tree_view" model="ir.actions.act_window.view">
+    <record id="action_change_request_move_transfer_pending_tree_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_change_request_move_replace_tree" />
-        <field name="act_window_id" ref="action_change_request_move_replace_pending" />
+        <field name="view_id" ref="view_change_request_move_transfer_tree" />
+        <field name="act_window_id" ref="action_change_request_move_transfer_pending" />
     </record>
 
-    <record id="action_change_request_move_replace_pending_form_view" model="ir.actions.act_window.view">
+    <record id="action_change_request_move_transfer_pending_form_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_change_request_move_replace_validation_form" />
-        <field name="act_window_id" ref="action_change_request_move_replace_pending" />
+        <field name="view_id" ref="view_change_request_move_transfer_validation_form" />
+        <field name="act_window_id" ref="action_change_request_move_transfer_pending" />
     </record>
 
     <menuitem
-        id="menu_change_request_move_replace_pending"
+        id="menu_change_request_move_transfer_pending"
         name="Pending Validation"
-        action="action_change_request_move_replace_pending"
-        parent="menu_change_request_move_replace_root"
+        action="action_change_request_move_transfer_pending"
+        parent="menu_change_request_move_transfer_root"
         sequence="10"
         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator"
     />

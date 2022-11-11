@@ -29,6 +29,9 @@ class ChangeRequestMoveTransfer(models.Model):
 
     # Initialize DMS Storage
     DMS_STORAGE = "spp_change_request_move.attachment_storage_move"
+    VALIDATION_FORM = (
+        "spp_change_request_move.view_change_request_move_transfer_validation_form"
+    )
 
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(
@@ -50,7 +53,7 @@ class ChangeRequestMoveTransfer(models.Model):
     )
     remarks = fields.Text()
 
-    # Target Group Current Members
+    # Target Group Fields
     move_to_group_member_ids = fields.One2many(
         "spp.change.request.group.members", "group_move_to_id", "Group Members"
     )

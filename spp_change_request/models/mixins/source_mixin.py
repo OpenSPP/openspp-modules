@@ -26,6 +26,12 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         readonly=True,
     )
 
+    # Target Fields
+    group_address = fields.Text(related="registrant_id.address", readonly=True)
+    group_registration_date = fields.Date(
+        related="registrant_id.registration_date", readonly=True
+    )
+
     # DMS Field
     dms_directory_ids = fields.One2many(
         "dms.directory",

@@ -30,6 +30,9 @@ class ChangeRequestDeactivate(models.Model):
 
     # Initialize DMS Storage
     DMS_STORAGE = "spp_change_request_deactivate.attachment_storage_deactivate"
+    VALIDATION_FORM = (
+        "spp_change_request_deactivate.view_change_request_deactivate_validation_form"
+    )
 
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(
