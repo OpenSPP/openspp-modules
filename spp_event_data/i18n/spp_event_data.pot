@@ -82,6 +82,13 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_event_data
+#: model:ir.model.fields,field_description:spp_event_data.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__display_name
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__display_name
 msgid "Display Name"
