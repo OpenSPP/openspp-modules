@@ -1,0 +1,24 @@
+.o_left_panel {
+    background-image: linear-gradient(to right, rgb(228, 239, 239), rgb(255, 255, 255));
+    border-left: 5px solid rgb(30, 0, 255);
+    width: 49% !important;
+}
+
+.o_right_panel {
+    border-left: 5px solid green;
+    width: 49% !important;
+}
+
+.o_header_label1 {
+    border-bottom: 2px solid black;
+    margin-left: 10px;
+}
+
+.o_container_right {
+    margin-left: 10px !important;
+}
+
+.o_container_left {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
