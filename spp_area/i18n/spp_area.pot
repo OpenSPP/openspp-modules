@@ -229,6 +229,16 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_area
+#: model:ir.model.fields,field_description:spp_area.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_area.field_spp_area__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_import__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_import_form
 msgid "DONE"
 msgstr ""
