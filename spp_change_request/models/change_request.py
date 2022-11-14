@@ -35,6 +35,7 @@ class ChangeRequestBase(models.Model):
     validator_ids = fields.One2many(
         "spp.change.request.validators", "request_id", "Validation Records"
     )
+    assign_to_id = fields.Many2one("res.users", "Assigned to")
     validatedby_id = fields.Many2one("res.users", "Validated by")
     date_validated = fields.Datetime()
     appliedby_id = fields.Many2one("res.users", "Applied by")
@@ -177,37 +178,57 @@ class ChangeRequestBase(models.Model):
 
     def on_validate(self):
         for rec in self:
-            if rec.request_type_ref_id:
-                if rec.state == "pending":
-                    rec.request_type_ref_id._on_validate(rec)
+            # Check if change user is assigned to current user
+            if rec._check_user("Validate"):
+                if rec.request_type_ref_id:
+                    if rec.state == "pending":
+                        rec.request_type_ref_id._on_validate(rec)
+                    else:
+                        raise ValidationError(
+                            _("The request to be validated must be in submitted state.")
+                        )
                 else:
-                    raise ValidationError(
-                        _("The request to be validated must be in submitted state.")
+                    raise UserError(
+                        _("The request details must be properly filled-up.")
                     )
-            else:
-                raise UserError(_("The request details must be properly filled-up."))
 
     def apply(self):
         for rec in self:
-            if rec.state == "validated":
-                rec.request_type_ref_id._apply(rec)
-            else:
-                raise ValidationError(
-                    _(
-                        "The request must be in validated state for changes to be applied."
+            # Check if change user is assigned to current user
+            if rec._check_user("Apply"):
+                if rec.state == "validated":
+                    rec.request_type_ref_id._apply(rec)
+                else:
+                    raise ValidationError(
+                        _(
+                            "The request must be in validated state for changes to be applied."
+                        )
                     )
-                )
 
     def on_reject(self):
         for rec in self:
-            if rec.state in ("draft", "pending"):
-                rec.request_type_ref_id._on_reject(rec)
+            # Check if change user is assigned to current user
+            if rec._check_user("Reject"):
+                if rec.state in ("draft", "pending"):
+                    rec.request_type_ref_id._on_reject(rec)
+                else:
+                    raise UserError(
+                        _(
+                            "The request to be rejected must be in draft or pending validation state."
+                        )
+                    )
+
+    def _check_user(self, process):
+        self.ensure_one()
+        if self.assign_to_id:
+            if self.assign_to_id.id == self.env.user.id:
+                return True
             else:
                 raise UserError(
-                    _(
-                        "The request to be rejected must be in draft or pending validation state."
-                    )
+                    _("You are not allowed to %s this change request") % process
                 )
+        else:
+            raise UserError(_("There are no user assigned to this change request."))
 
     def _get_validation_stage(self):
         self.ensure_one()
