@@ -1,0 +1,60 @@
+# Part of OpenG2P Registry. See LICENSE file for full copyright and licensing details.
+import logging
+
+from odoo import api, fields, models
+
+_logger = logging.getLogger(__name__)
+
+
+class ConfirmUserAssignmentWiz(models.TransientModel):
+    _name = "spp.change.request.user.assign.wizard"
+    _description = "Change Request User Assignment Wizard"
+
+    @api.model
+    def default_get(self, fields):
+        res = super(ConfirmUserAssignmentWiz, self).default_get(fields)
+        if self.env.context.get("active_id"):
+            res["change_request_id"] = self.env.context["active_id"]
+        if self.env.context.get("curr_assign_to_id"):
+            if self.env.context["curr_assign_to_id"] != self.env.user.id:
+                res["assign_to_id"] = self.env.user
+            res["curr_assign_to_id"] = self.env.context["curr_assign_to_id"]
+        else:
+            res["assign_to_id"] = self.env.user.id
+        return res
+
+    change_request_id = fields.Many2one(
+        "spp.change.request", "Change Request", required=True
+    )
+    curr_assign_to_id = fields.Many2one(
+        "res.users", "Currently Assigned to", related="change_request_id.assign_to_id"
+    )
+    assign_to_id = fields.Many2one("res.users", "Transfer to")
+    dialog_message = fields.Text(compute="_compute_dialog_message")
+
+    def assign_to_user(self):
+        for rec in self:
+            rec.change_request_id.update(
+                {
+                    "assign_to_id": rec.assign_to_id.id,
+                }
+            )
+
+    @api.depends("change_request_id", "assign_to_id")
+    def _compute_dialog_message(self):
+        for rec in self:
+            msg = f"The change request: {rec.change_request_id.name} "
+            if not rec.curr_assign_to_id:
+                # No user assignment
+                msg += "is not assigned to any user. "
+            elif rec.curr_assign_to_id.id == self.env.user.id:
+                # The current assigned user is the current user
+                msg += "is currently assigned to you. "
+            else:
+                msg += f"is currently assigned to {rec.curr_assign_to_id.name}. "
+            if rec.assign_to_id.id == self.env.user.id:
+                # Assign to current user
+                msg += "Are you sure you would like to assign this to yourself?"
+            else:
+                msg += "Are you sure you would like to assign this to:"
+            rec.dialog_message = msg

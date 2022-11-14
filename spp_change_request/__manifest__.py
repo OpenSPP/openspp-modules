@@ -27,6 +27,7 @@
         "data/sequences.xml",
         "data/mail_activity.xml",
         "data/dms.xml",
+        "wizard/confirm_user_assignment_view.xml",
         "views/main_view.xml",
         "views/change_request_view.xml",
         "views/change_request_validation_sequence_view.xml",
