@@ -34,6 +34,17 @@ repos:
       - id: oca-update-pre-commit-excluded-addons
       - id: oca-fix-manifest-website
         args: ["https://github.com/openspp/openspp-registry"]
+      - id: oca-gen-addon-readme
+        args:
+          - --addons-dir=.
+          - --org-name=openspp
+          - --repo-name=openspp-registry
+          - --branch=15.0
+      - id: oca-gen-addons-table
+        stages: [manual]
+      - id: oca-gen-addon-icon
+        args:
+          - --addons-dir=.
   - repo: https://github.com/myint/autoflake
     rev: v1.4
     hooks:
@@ -104,7 +115,7 @@ repos:
           - --settings=.
         exclude: /__init__\.py$
   - repo: https://github.com/acsone/setuptools-odoo
-    rev: 3.0.3
+    rev: 3.1.8
     hooks:
       - id: setuptools-odoo-make-default
       - id: setuptools-odoo-get-requirements
@@ -113,7 +124,7 @@ repos:
           - requirements.txt
           - --header
           - "# generated from manifests external_dependencies"
-  - repo: https://gitlab.com/PyCQA/flake8
+  - repo: https://github.com/PyCQA/flake8
     rev: 3.9.2
     hooks:
       - id: flake8

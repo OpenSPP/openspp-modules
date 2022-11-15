@@ -1,5 +1,5 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: '2934565'
+_commit: 77f734a
 _src_path: https://github.com/openspp/openspp-odoo-addons-repo-template.git
 ci: GitHub
 dependency_installation_mode: OCA
@@ -12,7 +12,7 @@ github_enforce_dev_status_compatibility: true
 include_wkhtmltopdf: false
 odoo_version: 15.0
 org_name: OpenSPP.org
-org_slug: openspp-project
+org_slug: openspp
 rebel_module_groups: []
 repo_description: OpenSPP’s key feature is a 360-degree view of the registrant and
     beneficiary. The information is stored in one place and can be easily accessed
