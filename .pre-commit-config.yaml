@@ -40,11 +40,13 @@ repos:
           - --org-name=openspp
           - --repo-name=openspp-registry
           - --branch=15.0
+        stages: [manual]
       - id: oca-gen-addons-table
         stages: [manual]
       - id: oca-gen-addon-icon
         args:
           - --addons-dir=.
+        stages: [manual]
   - repo: https://github.com/myint/autoflake
     rev: v1.4
     hooks:
