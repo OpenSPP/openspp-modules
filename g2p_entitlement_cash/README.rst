@@ -13,11 +13,11 @@ G2P Program Entitlement (Cash)
 .. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-openspp-project%2Fopenspp--program-lightgray.png?logo=github
+.. |badge3| image:: https://img.shields.io/badge/github-openspp%2Fopenspp--program-lightgray.png?logo=github
     :target: https://github.com/openspp/openspp-program/tree/15.0/g2p_entitlement_cash
     :alt: openspp/openspp-program
 
-|badge1| |badge2| |badge3|
+|badge1| |badge2| |badge3| 
 
 OpenSPP Cash Entitlement
 
@@ -61,7 +61,7 @@ Maintainers
 
 Current maintainers:
 
-|maintainer-jeremi| |maintainer-gonzalesedwin1123|
+|maintainer-jeremi| |maintainer-gonzalesedwin1123| 
 
 This module is part of the `openspp/openspp-program <https://github.com/openspp/openspp-program/tree/15.0/g2p_entitlement_cash>`_ project on GitHub.
 
