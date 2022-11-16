@@ -1,6 +1,4 @@
 odoo.define("spp_pos.KeyPressEntitlement", function (require) {
-    "use strict";
-
     const {patch} = require("web.utils");
 
     const KeyPressCheck = {

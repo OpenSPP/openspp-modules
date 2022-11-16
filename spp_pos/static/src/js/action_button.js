@@ -1,6 +1,4 @@
 odoo.define("spp_pos.EntitlementButton", function (require) {
-    "use strict";
-
     const {Gui} = require("point_of_sale.Gui");
     const PosComponent = require("point_of_sale.PosComponent");
     const Registries = require("point_of_sale.Registries");

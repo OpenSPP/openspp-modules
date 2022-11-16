@@ -1,6 +1,4 @@
 odoo.define("spp_dashboard.Dashboard", function (require) {
-    "use strict";
-
     var odoo_dynamic_dashboard = require("odoo_dynamic_dashboard.Dashboard");
     var ajax = require("web.ajax");
     var ctx = {};
