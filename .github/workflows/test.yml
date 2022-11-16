@@ -8,7 +8,9 @@ on:
     branches:
       - "15.0"
       - "15.0-ocabot-*"
-
+env:
+  OCA_GIT_USER_NAME: openspp
+  OCA_GIT_USER_EMAIL: bot@openspp.org
 jobs:
   unreleased-deps:
     runs-on: ubuntu-latest
