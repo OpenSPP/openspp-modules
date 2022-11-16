@@ -163,6 +163,12 @@ msgid "Entitlement:"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
+#, python-format
+msgid "Entitlement: In-Kind (%s)"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
 #: model:ir.ui.menu,name:spp_entitlement_in_kind.menu_entitlement_inkind
 msgid "Entitlements"
 msgstr ""
