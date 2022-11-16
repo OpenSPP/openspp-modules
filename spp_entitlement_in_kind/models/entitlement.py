@@ -32,6 +32,7 @@ class G2PInKindEntitlement(models.Model):
 
     def _compute_name(self):
         for record in self:
+            # TODO: use super to compute for the other way.
             name = _("Entitlement")
             if record.is_cash_entitlement:
                 initial_amount = "{:,.2f}".format(record.initial_amount)
@@ -43,7 +44,7 @@ class G2PInKindEntitlement(models.Model):
                     + "]"
                 )
             else:
-                name += ": In-Kind (" + record.product_id.name + ")"
+                name = _("Entitlement: In-Kind (%s)", record.product_id.name)
             record.name = name
 
     # Inventory functions
