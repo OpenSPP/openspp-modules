@@ -45,7 +45,7 @@ class OpenSPPEventData(models.Model):
                     rec.name = model_name.name
 
                 if rec.create_date:
-                    rec.name += " - [%s]" % rec.create_date
+                    rec.name += " - [%s]" % rec.create_date.strftime("%Y-%m-%d %H:%M")
 
     @api.model
     def create(self, vals):
