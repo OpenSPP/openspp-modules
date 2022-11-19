@@ -1,7 +1,8 @@
-# Part of OpenG2P Registry. See LICENSE file for full copyright and licensing details.
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import logging
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -13,8 +14,11 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
     @api.model
     def default_get(self, fields):
         res = super(ConfirmUserAssignmentWiz, self).default_get(fields)
-        if self.env.context.get("active_id"):
-            res["change_request_id"] = self.env.context["active_id"]
+        if self.env.context.get("change_request_id"):
+            res["change_request_id"] = self.env.context["change_request_id"]
+        else:
+            if self.env.context.get("active_id"):
+                res["change_request_id"] = self.env.context["active_id"]
         if self.env.context.get("curr_assign_to_id"):
             if self.env.context["curr_assign_to_id"] != self.env.user.id:
                 res["assign_to_id"] = self.env.user
@@ -30,31 +34,66 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
         "res.users", "Currently Assigned to", related="change_request_id.assign_to_id"
     )
     assign_to_id = fields.Many2one("res.users", "Transfer to")
-    dialog_message = fields.Text(compute="_compute_dialog_message")
+    dialog_message = fields.Text(compute="_compute_message_assignment")
+    assign_to_any = fields.Boolean(compute="_compute_message_assignment")
 
     def assign_to_user(self):
         for rec in self:
-            rec.change_request_id.update(
-                {
-                    "assign_to_id": rec.assign_to_id.id,
-                }
-            )
+            # Check if user is a member of validators in the validation sequence config
+            user_ok = False
+            if rec.change_request_id.request_type_ref_id.validation_ids:
+                for mrec in rec.change_request_id.request_type_ref_id.validation_ids:
+                    if mrec.validation_group_id.id in rec.assign_to_id.groups_id.ids:
+                        user_ok = True
+                        break
+                if user_ok:
+                    rec.change_request_id.update(
+                        {
+                            "assign_to_id": rec.assign_to_id.id,
+                        }
+                    )
+                else:
+                    raise UserError(
+                        _(
+                            "Only users of groups defined in the validation sequence can be assigned to this change request."
+                        )
+                    )
+            else:
+                raise UserError(
+                    _(
+                        "This change request does not have any validation sequence defined."
+                    )
+                )
 
     @api.depends("change_request_id", "assign_to_id")
-    def _compute_dialog_message(self):
+    def _compute_message_assignment(self):
         for rec in self:
-            msg = f"The change request: {rec.change_request_id.name} "
+            assign_to_any = False
             if not rec.curr_assign_to_id:
                 # No user assignment
-                msg += "is not assigned to any user. "
+                msg1 = _(
+                    "The change request: %s is not assigned to any user. ",
+                    rec.change_request_id.name,
+                )
             elif rec.curr_assign_to_id.id == self.env.user.id:
                 # The current assigned user is the current user
-                msg += "is currently assigned to you. "
+                msg1 = _(
+                    "The change request: %s is currently assigned to you. ",
+                    rec.change_request_id.name,
+                )
             else:
-                msg += f"is currently assigned to {rec.curr_assign_to_id.name}. "
+                msg1 = _(
+                    f"The change request: {rec.change_request_id.name} is currently assigned to {rec.curr_assign_to_id.name}. "
+                )
             if rec.assign_to_id.id == self.env.user.id:
                 # Assign to current user
-                msg += "Are you sure you would like to assign this to yourself?"
+                msg2 = _("Are you sure you would like to assign this to yourself?")
             else:
-                msg += "Are you sure you would like to assign this to:"
-            rec.dialog_message = msg
+                msg2 = _("Are you sure you would like to assign this to:")
+                assign_to_any = True
+            rec.update(
+                {
+                    "dialog_message": msg1 + msg2,
+                    "assign_to_any": assign_to_any,
+                }
+            )

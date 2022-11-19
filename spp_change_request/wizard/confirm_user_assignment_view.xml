@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-   Part of OpenG2P Registry. See LICENSE file for full copyright and licensing details.
+   Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
     <record id="change_request_user_assign_wizard" model="ir.ui.view">
@@ -15,10 +15,15 @@
                         </h3>
                     </div>
                     <group>
-                        <field name="assign_to_id" options="{'no_open':True}" />
+                        <field
+                            name="assign_to_id"
+                            options="{'no_create':True,'no_edit':True,'no_open':True}"
+                            attrs="{'invisible':[('assign_to_any','=',False)]}"
+                        />
                     </group>
-                    <field name="change_request_id" options="{'no_open':True}" invisible="1" />
-                    <field name="curr_assign_to_id" options="{'no_open':True}" invisible="1" />
+                    <field name="change_request_id" invisible="1" />
+                    <field name="curr_assign_to_id" invisible="1" />
+                    <field name="assign_to_any" invisible="1" />
                 </sheet>
                 <footer>
                     <button name="assign_to_user" string="YES" type="object" class="oe_highlight" />
