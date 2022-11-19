@@ -28,7 +28,7 @@ class ChangeRequestBase(models.Model):
     registrant_id = fields.Many2one(
         "res.partner",
         "Registrant",
-        domain=[("is_registrant", "=", True), ("is_group", "=", True)],
+        domain=[("is_registrant", "=", True)],
     )
     applicant_id = fields.Many2one(
         "res.partner",
@@ -40,7 +40,6 @@ class ChangeRequestBase(models.Model):
         readonly=True,
         store=False,
     )
-    applicant_unified_id = fields.Char("Applicant's UID Number")
     applicant_phone = fields.Char("Applicant's Phone Number")
 
     request_type_ref_id = fields.Reference(
@@ -101,7 +100,6 @@ class ChangeRequestBase(models.Model):
     def _onchange_applicant_id(self):
         if self.applicant_id:
             vals = {
-                "applicant_unified_id": self.applicant_id.unified_id,
                 "applicant_phone": self.applicant_id.phone,
             }
             self.update(vals)
