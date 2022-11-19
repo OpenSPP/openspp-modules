@@ -22,11 +22,12 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="create_uid" string="Requested By" widget="many2one_avatar_user" />
                 <field name="request_type" />
                 <field name="registrant_id" />
+                <field name="applicant_id" />
                 <field name="request_type_ref_id" invisible="1" />
                 <field name="assign_to_id" widget="many2one_avatar_user" />
-                <field name="validatedby_id" widget="many2one_avatar_user" />
+                <field name="last_validated_by_id" widget="many2one_avatar_user" />
                 <field name="date_validated" />
-                <field name="appliedby_id" widget="many2one_avatar_user" />
+                <field name="applied_by_id" widget="many2one_avatar_user" />
                 <field name="date_applied" />
                 <field name="activity_ids" widget="list_activity" optional="show" />
                 <field name="company_id" groups="base.group_multi_company" />
@@ -53,7 +54,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     <button
                         name="on_submit"
                         type="object"
-                        string="Pending Validation"
+                        string="Request Validation"
                         icon="fa-paper-plane"
                         class="btn-primary"
                         states="draft"
@@ -81,7 +82,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         string="Reject"
                         icon="fa-ban"
                         class="btn-danger"
-                        states="draft,pending"
+                        states="pending"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
                     />
                     <field
@@ -150,14 +151,14 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <field
                                 name="registrant_id"
                                 options="{'no_create': True,'no_open':True}"
-                                readonly="1"
+                                attrs="{'readonly':[('state','!=','draft')]}"
                                 class="oe_inline"
                             />
                             <button
                                 name="create_request_detail"
                                 type="object"
-                                string="Request Details"
-                                icon="fa-external-link "
+                                string="NEXT"
+                                icon="fa-chevron-circle-right"
                                 class="btn-primary"
                                 attrs="{'invisible':[('request_type_ref_id','!=',False)]}"
                                 style="margin-left: 10px;"
@@ -165,20 +166,49 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <button
                                 name="open_request_detail"
                                 type="object"
-                                string="Open Details"
-                                icon="fa-external-link "
+                                string="NEXT"
+                                icon="fa-chevron-circle-right"
                                 class="btn-success"
                                 attrs="{'invisible':[('request_type_ref_id','=',False)]}"
                                 style="margin-left: 10px;"
                             />
                         </h2>
                     </div>
-                    <group colspan="4" col="4">
+                    <group colspan="4" col="4" string="Applicant Information">
+                        <field
+                            name="applicant_id"
+                            options="{'no_create': True,'no_open':True}"
+                            attrs="{'readonly':[('state','!=','draft')]}"
+                            domain="applicant_id_domain"
+                            required="1"
+                        />
+                        <button
+                            name="open_applicant_form"
+                            type="object"
+                            string="View Applicant Details"
+                            icon="fa-external-link"
+                            class="btn-success"
+                            attrs="{'invisible':[('applicant_id','=',False)]}"
+                            style="margin-left: 10px;"
+                            colspan="2"
+                        />
+                        <field
+                            name="applicant_unified_id"
+                            string="Unified ID"
+                            attrs="{'readonly':[('state','!=','draft')]}"
+                        />
+                        <field
+                            name="applicant_phone"
+                            string="Phone No."
+                            attrs="{'readonly':[('state','!=','draft')]}"
+                        />
+                    </group>
+                    <group colspan="4" col="4" string="Monitoring" groups="g2p_registry_base.group_g2p_admin">
                         <field
                             name="assign_to_id"
                             string="Assigned To"
                             options="{'no_create': True,'no_open':True}"
-                            attrs="{'readonly':[('state','in',('applied','rejected'))]}"
+                            readonly="1"
                         />
                         <field
                             name="company_id"
@@ -203,19 +233,20 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </field>
                         <field name="date_validated" readonly="1" />
                         <field
-                            name="validatedby_id"
+                            name="last_validated_by_id"
                             options="{'no_create': True,'no_open':True}"
                             readonly="1"
                         />
                         <field name="date_applied" readonly="1" />
                         <field
-                            name="appliedby_id"
+                            name="applied_by_id"
                             options="{'no_create': True,'no_open':True}"
                             readonly="1"
                         />
                     </group>
                     <field name="request_type_ref_id" invisible="1" />
                     <field name="last_activity_id" invisible="1" />
+                    <field name="applicant_id_domain" invisible="1" />
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" />
@@ -236,7 +267,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="registrant_id" />
                 <field name="request_type_ref_id" />
                 <field name="create_uid" string="Submitted By" />
-                <field name="appliedby_id" />
+                <field name="applied_by_id" />
                 <group expand="0" string="Group By">
                     <filter string="Company" name="grp_company_id" context="{'group_by': 'company_id'}" />
                 </group>

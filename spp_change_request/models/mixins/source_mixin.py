@@ -1,4 +1,4 @@
-# Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 from odoo import _, fields, models
 
 
@@ -12,12 +12,25 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     registrant_id = fields.Many2one(
         "res.partner", "Registrant", domain=[("is_registrant", "=", True)]
     )
+    applicant_id = fields.Many2one(
+        "res.partner",
+        "Applicant",
+        domain=[("is_registrant", "=", True), ("is_group", "=", False)],
+    )
+    applicant_unified_id = fields.Char(
+        "Applicant's UID Number", related="change_request_id.applicant_unified_id"
+    )
+    applicant_phone = fields.Char(
+        "Applicant's Phone Number", related="change_request_id.applicant_phone"
+    )
     change_request_id = fields.Many2one(
         "spp.change.request", "Change Request", required=True
     )
-
-    validatedby_id = fields.Many2one(
-        "res.users", "Last Validator", related="change_request_id.validatedby_id"
+    assign_to_id = fields.Many2one(
+        "res.users", "Assigned to", related="change_request_id.assign_to_id"
+    )
+    last_validated_by_id = fields.Many2one(
+        "res.users", "Last Validator", related="change_request_id.last_validated_by_id"
     )
     date_validated = fields.Datetime(related="change_request_id.date_validated")
     state = fields.Selection(
@@ -132,7 +145,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         # Update CR record
         request.update(
             {
-                "appliedby_id": self.env.user,
+                "applied_by_id": self.env.user,
                 "date_applied": fields.Datetime.now(),
                 "state": "applied",
             }
@@ -159,3 +172,64 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         )
         # Mark previous activity as 'done'
         request.last_activity_id.action_done()
+
+    def _copy_group_member_ids(self, group_id_field):
+        for rec in self:
+            for mrec in rec.registrant_id.group_membership_ids:
+                kind_ids = mrec.kind and mrec.kind.ids or None
+                group_members = {
+                    group_id_field: rec.id,
+                    "individual_id": mrec.individual.id,
+                    "kind_ids": kind_ids,
+                }
+                self.env["spp.change.request.group.members"].create(group_members)
+
+    def _copy_service_point_ids(self, change_request_field):
+        for rec in self:
+            for mrec in rec.registrant_id.service_point_ids:
+                service_points = {
+                    change_request_field: rec.id,
+                    "service_point_id": mrec.id,
+                }
+                self.env["pds.change.request.service.point"].create(service_points)
+
+    def _copy_from_group_member_ids(self, group_id_field):
+        for rec in self:
+            for mrec in rec.registrant_id.group_membership_ids:
+                kind_ids = mrec.kind and mrec.kind.ids or None
+                if (
+                    kind_ids
+                    and self.env.ref(
+                        "g2p_registry_membership.group_membership_kind_head"
+                    ).id
+                    not in kind_ids
+                ) or not kind_ids:
+                    group_members = {
+                        group_id_field: rec.id,
+                        "individual_id": mrec.individual.id,
+                        "kind_ids": kind_ids,
+                        "new_relation_to_head": mrec.individual.relation_to_head.id,
+                        "new_birthdate": mrec.individual.birthdate,
+                    }
+                    self.env["pds.change.request.src.grp"].create(group_members)
+
+    def open_applicant_details_form(self):
+        self.ensure_one()
+        res_id = self.applicant_id.id
+        form_id = self.env.ref("g2p_registry_individual.view_individuals_form").id
+        action = self.env["res.partner"].get_formview_action()
+        context = {
+            "create": False,
+            "edit": False,
+        }
+        action.update(
+            {
+                "name": _("Applicant Details"),
+                "views": [(form_id, "form")],
+                "res_id": res_id,
+                "target": "new",
+                "context": context,
+                "flags": {"mode": "readonly"},
+            }
+        )
+        return action

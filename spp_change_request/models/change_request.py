@@ -1,4 +1,5 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import json
 import logging
 
 from odoo import Command, _, api, fields, models
@@ -27,8 +28,21 @@ class ChangeRequestBase(models.Model):
     registrant_id = fields.Many2one(
         "res.partner",
         "Registrant",
-        domain=[("is_registrant", "=", True)],
+        domain=[("is_registrant", "=", True), ("is_group", "=", True)],
     )
+    applicant_id = fields.Many2one(
+        "res.partner",
+        "Applicant",
+        domain=[("is_registrant", "=", True), ("is_group", "=", False)],
+    )
+    applicant_id_domain = fields.Char(
+        compute="_compute_applicant_id_domain",
+        readonly=True,
+        store=False,
+    )
+    applicant_unified_id = fields.Char("Applicant's UID Number")
+    applicant_phone = fields.Char("Applicant's Phone Number")
+
     request_type_ref_id = fields.Reference(
         string="Change Request Template", selection="_selection_request_type_ref_id"
     )
@@ -36,9 +50,9 @@ class ChangeRequestBase(models.Model):
         "spp.change.request.validators", "request_id", "Validation Records"
     )
     assign_to_id = fields.Many2one("res.users", "Assigned to")
-    validatedby_id = fields.Many2one("res.users", "Validated by")
+    last_validated_by_id = fields.Many2one("res.users", "Validated by")
     date_validated = fields.Datetime()
-    appliedby_id = fields.Many2one("res.users", "Applied by")
+    applied_by_id = fields.Many2one("res.users", "Applied by")
     date_applied = fields.Datetime()
     last_activity_id = fields.Many2one("mail.activity")
     state = fields.Selection(
@@ -71,6 +85,26 @@ class ChangeRequestBase(models.Model):
     @api.model
     def _selection_request_type_ref_id(self):
         return []
+
+    @api.depends("registrant_id")
+    def _compute_applicant_id_domain(self):
+        for rec in self:
+            domain = [("id", "=", 0)]
+            if rec.registrant_id:
+                group_membership_ids = rec.registrant_id.group_membership_ids.mapped(
+                    "individual.id"
+                )
+                domain = [("id", "in", group_membership_ids)]
+            rec.applicant_id_domain = json.dumps(domain)
+
+    @api.onchange("applicant_id")
+    def _onchange_applicant_id(self):
+        if self.applicant_id:
+            vals = {
+                "applicant_unified_id": self.applicant_id.unified_id,
+                "applicant_phone": self.applicant_id.phone,
+            }
+            self.update(vals)
 
     def open_change_request_form(self, target="current", mode="readonly"):
         self.ensure_one()
@@ -114,6 +148,38 @@ class ChangeRequestBase(models.Model):
             },
         }
 
+    def open_applicant_form(self, target="current", mode="readonly"):
+        self.ensure_one()
+        if self.applicant_id:
+            res_id = self.applicant_id.id
+            form_id = self.env.ref("g2p_registry_individual.view_individuals_form").id
+            action = self.env["res.partner"].get_formview_action()
+            context = {
+                "create": False,
+            }
+            action.update(
+                {
+                    "name": _("Applicant Details"),
+                    "views": [(form_id, "form")],
+                    "res_id": res_id,
+                    "target": "new",
+                    "context": context,
+                    "flags": {"mode": "readonly"},
+                }
+            )
+            return action
+
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("ERROR!"),
+                "message": _("The Applicant field must be filled-up."),
+                "sticky": False,
+                "type": "danger",
+            },
+        }
+
     def open_request_detail(self):
         for rec in self:
             # Open Request Form
@@ -142,10 +208,13 @@ class ChangeRequestBase(models.Model):
                 # Create the change request detail record
                 ref_id = self.env[res_model].create(
                     {
+                        "registrant_id": rec.registrant_id.id,
+                        "applicant_id": rec.applicant_id.id,
                         "change_request_id": rec.id,
                         "dms_directory_ids": [(Command.create(dmsval))],
                     }
                 )
+                ref_id._onchange_registrant_id()
                 request_type_ref_id = f"{res_model},{ref_id.id}"
                 _logger.debug("DEBUG! request_type_ref_id: %s", request_type_ref_id)
                 rec.update(
@@ -174,7 +243,9 @@ class ChangeRequestBase(models.Model):
                         )
                     )
             else:
-                raise UserError(_("The request details must be properly filled-up."))
+                raise UserError(
+                    _("The change request type must be properly filled-up.")
+                )
 
     def on_validate(self):
         for rec in self:
@@ -225,7 +296,7 @@ class ChangeRequestBase(models.Model):
                 return True
             else:
                 raise UserError(
-                    _("You are not allowed to %s this change request") % process
+                    _("You are not allowed to %s this change request", process)
                 )
         else:
             raise UserError(_("There are no user assigned to this change request."))
@@ -254,9 +325,9 @@ class ChangeRequestBase(models.Model):
                 stage = validation_stages[0]
                 # Check if user is allowed to validate request
                 if validator_id not in stage.validation_group_id.users.ids:
-                    message = (
-                        _("You are not allowed to validate this request! Stage: %s")
-                        % stage.stage_id.name
+                    message = _(
+                        "You are not allowed to validate this request! Stage: %s",
+                        stage.stage_id.name,
                     )
                     stage = None
             else:
