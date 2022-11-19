@@ -58,6 +58,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         icon="fa-paper-plane"
                         class="btn-primary"
                         states="draft"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_agent"
                     />
                     <button
                         name="on_validate"
@@ -66,6 +67,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         icon="fa-check-square-o"
                         class="btn-warning"
                         states="pending"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
                     />
                     <button
                         name="apply"
@@ -178,6 +180,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             name="applicant_phone"
                             string="Phone No."
                             required="1"
+                            widget="phone"
+                            options="{'enable_sms': false}"
                             attrs="{'readonly':[('state','!=','draft')]}"
                         />
                     </group>
