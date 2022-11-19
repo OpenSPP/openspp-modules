@@ -96,13 +96,27 @@ class ChangeRequestBase(models.Model):
                 domain = [("id", "in", group_membership_ids)]
             rec.applicant_id_domain = json.dumps(domain)
 
+    @api.onchange("registrant_id")
+    def _onchange_registrant_id(self):
+        if self.registrant_id:
+            self.update(
+                {
+                    "applicant_id": None,
+                    "applicant_phone": None,
+                }
+            )
+
     @api.onchange("applicant_id")
     def _onchange_applicant_id(self):
         if self.applicant_id:
             vals = {
                 "applicant_phone": self.applicant_id.phone,
             }
-            self.update(vals)
+        else:
+            vals = {
+                "applicant_phone": None,
+            }
+        self.update(vals)
 
     def open_change_request_form(self, target="current", mode="readonly"):
         self.ensure_one()

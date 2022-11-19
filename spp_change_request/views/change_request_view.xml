@@ -154,24 +154,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 attrs="{'readonly':[('state','!=','draft')]}"
                                 class="oe_inline"
                             />
-                            <button
-                                name="create_request_detail"
-                                type="object"
-                                string="NEXT"
-                                icon="fa-chevron-circle-right"
-                                class="btn-primary"
-                                attrs="{'invisible':[('request_type_ref_id','!=',False)]}"
-                                style="margin-left: 10px;"
-                            />
-                            <button
-                                name="open_request_detail"
-                                type="object"
-                                string="NEXT"
-                                icon="fa-chevron-circle-right"
-                                class="btn-success"
-                                attrs="{'invisible':[('request_type_ref_id','=',False)]}"
-                                style="margin-left: 10px;"
-                            />
                         </h2>
                     </div>
                     <group colspan="4" col="4" string="Applicant Information">
@@ -195,9 +177,30 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <field
                             name="applicant_phone"
                             string="Phone No."
+                            required="1"
                             attrs="{'readonly':[('state','!=','draft')]}"
                         />
                     </group>
+                    <footer>
+                        <button
+                            name="create_request_detail"
+                            type="object"
+                            string="NEXT"
+                            icon="fa-chevron-circle-right"
+                            class="btn-primary"
+                            attrs="{'invisible':[('request_type_ref_id','!=',False)]}"
+                            style="margin-left: 10px;"
+                        />
+                        <button
+                            name="open_request_detail"
+                            type="object"
+                            string="NEXT"
+                            icon="fa-chevron-circle-right"
+                            class="btn-warning"
+                            attrs="{'invisible':[('request_type_ref_id','=',False)]}"
+                            style="margin-left: 10px;"
+                        />
+                    </footer>
                     <group colspan="4" col="4" string="Monitoring" groups="g2p_registry_base.group_g2p_admin">
                         <field
                             name="assign_to_id"
