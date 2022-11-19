@@ -156,6 +156,7 @@ class ChangeRequestBase(models.Model):
             action = self.env["res.partner"].get_formview_action()
             context = {
                 "create": False,
+                "edit": False,
             }
             action.update(
                 {
