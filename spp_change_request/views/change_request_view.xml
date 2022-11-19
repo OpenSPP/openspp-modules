@@ -98,7 +98,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             type="action"
                             icon="fa-user-circle"
                             class="oe_stat_button"
-                            state="draft,pending,validated"
+                            states="pending,validated"
                             context="{'curr_assign_to_id':assign_to_id}"
                         >
                             <div class="o_form_field o_stat_info">
@@ -191,11 +191,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             attrs="{'invisible':[('applicant_id','=',False)]}"
                             style="margin-left: 10px;"
                             colspan="2"
-                        />
-                        <field
-                            name="applicant_unified_id"
-                            string="Unified ID"
-                            attrs="{'readonly':[('state','!=','draft')]}"
                         />
                         <field
                             name="applicant_phone"

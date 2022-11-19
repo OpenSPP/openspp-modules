@@ -72,18 +72,18 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
             if not rec.curr_assign_to_id:
                 # No user assignment
                 msg1 = _(
-                    "The change request: %s is not assigned to any user. ",
+                    "The change request: %s is not assigned to any user.",
                     rec.change_request_id.name,
                 )
             elif rec.curr_assign_to_id.id == self.env.user.id:
                 # The current assigned user is the current user
                 msg1 = _(
-                    "The change request: %s is currently assigned to you. ",
+                    "The change request: %s is currently assigned to you.",
                     rec.change_request_id.name,
                 )
             else:
                 msg1 = _(
-                    f"The change request: {rec.change_request_id.name} is currently assigned to {rec.curr_assign_to_id.name}. "
+                    f"The change request: {rec.change_request_id.name} is currently assigned to {rec.curr_assign_to_id.name}."
                 )
             if rec.assign_to_id.id == self.env.user.id:
                 # Assign to current user
@@ -93,7 +93,7 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
                 assign_to_any = True
             rec.update(
                 {
-                    "dialog_message": msg1 + msg2,
+                    "dialog_message": f"{msg1} {msg2}",
                     "assign_to_any": assign_to_any,
                 }
             )

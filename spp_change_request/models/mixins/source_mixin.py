@@ -17,9 +17,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         "Applicant",
         domain=[("is_registrant", "=", True), ("is_group", "=", False)],
     )
-    applicant_unified_id = fields.Char(
-        "Applicant's UID Number", related="change_request_id.applicant_unified_id"
-    )
     applicant_phone = fields.Char(
         "Applicant's Phone Number", related="change_request_id.applicant_phone"
     )
