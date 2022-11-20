@@ -73,9 +73,6 @@ class G2PGenerateData(models.Model):
             list(range(1, 2)) * 2 + list(range(3, 5)) * 4 + list(range(6, 8))
         )
 
-        group_membership_kind_principal_id = self.env.ref(
-            "g2p_registry_membership.group_membership_kind_principal"
-        ).id
         group_membership_kind_head_id = self.env.ref(
             "g2p_registry_membership.group_membership_kind_head"
         ).id
@@ -180,12 +177,7 @@ class G2PGenerateData(models.Model):
                         {
                             "group": create_group_id.id,
                             "individual": create_member_id.id,
-                            "kind": [
-                                (
-                                    4,
-                                    group_membership_kind_principal_id,
-                                )
-                            ],
+                            "kind": [],
                         }
                     )
 
