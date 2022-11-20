@@ -85,7 +85,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def on_submit(self):
         for rec in self:
-            rec.validate_data()
             rec._on_submit(rec.change_request_id)
 
     def validate_data(self):
@@ -112,6 +111,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :return:
         """
         self.ensure_one()
+        # Validate the submitted data
+        self.validate_data()
         # Mark previous activity as 'done'
         request.last_activity_id.action_done()
         # Create validation activity
