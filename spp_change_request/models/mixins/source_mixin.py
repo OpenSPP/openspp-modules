@@ -1,5 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 from odoo import _, fields, models
+from odoo.exceptions import ValidationError
 
 
 class ChangeRequestSourceMixin(models.AbstractModel):
@@ -8,6 +9,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     _name = "spp.change.request.source.mixin"
     _description = "Change Request Data Source Mixin"
     _rec_name = "change_request_id"
+
+    required_document_type = []
 
     registrant_id = fields.Many2one(
         "res.partner", "Registrant", domain=[("is_registrant", "=", True)]
@@ -82,7 +85,24 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def on_submit(self):
         for rec in self:
+            rec.validate_data()
             rec._on_submit(rec.change_request_id)
+
+    def validate_data(self):
+        """
+        This method is used to validate the data of the change request before submitting for review.
+        :param self: The request.
+        :return:
+        :raises:
+            ValidationError: Exception raised when something is not valid.
+        """
+        self.ensure_one()
+        for document_type in self.required_document_type:
+            # TODO: Check the required documents
+            if True:
+                raise ValidationError(
+                    _("Please upload the required document type: %s", document_type)
+                )
 
     def _on_submit(self, request):
         """

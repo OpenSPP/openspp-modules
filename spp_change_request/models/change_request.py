@@ -271,7 +271,7 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             if rec.request_type_ref_id:
                 if rec.state == "draft":
-                    rec.request_type_ref_id._on_submit(rec)
+                    rec.request_type_ref_id.on_submit(rec)
                 else:
                     raise UserError(
                         _(
