@@ -2,7 +2,7 @@
 
 
 {
-    "name": "ID Queueing Management",
+    "name": "OpenSPP ID Printing Queue",
     "category": "OpenSPP",
     "version": "15.0.0.0.1",
     "sequence": 1,
