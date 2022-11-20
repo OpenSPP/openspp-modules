@@ -5,6 +5,8 @@ import logging
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
+from odoo.addons.phone_validation.tools import phone_validation
+
 _logger = logging.getLogger(__name__)
 
 
@@ -117,6 +119,27 @@ class ChangeRequestBase(models.Model):
                 "applicant_phone": None,
             }
         self.update(vals)
+
+    @api.constrains("registrant_id", "applicant_phone")
+    def _check_applicant_phone(self):
+        for rec in self:
+            country_code = (
+                rec.registrant_id.country_id.code
+                if rec.registrant_id
+                and rec.registrant_id.country_id
+                and rec.registrant_id.country_id.code
+                else None
+            )
+            if country_code is None:
+                country_code = (
+                    rec.company_id.country_id.code
+                    if rec.company_id.country_id and rec.company_id.country_id.code
+                    else None
+                )
+            try:
+                phone_validation.phone_parse(rec.applicant_phone, country_code)
+            except UserError as e:
+                raise ValidationError(_("Incorrect phone number format")) from e
 
     def open_change_request_form(self, target="current", mode="readonly"):
         self.ensure_one()
