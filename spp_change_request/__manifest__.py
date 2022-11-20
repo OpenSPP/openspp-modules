@@ -20,6 +20,7 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "spp_service_points",
+        "spp_area",
         "dms_field",
         "web_domain_field",
     ],
