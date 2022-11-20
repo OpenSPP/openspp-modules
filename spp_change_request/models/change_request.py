@@ -72,6 +72,9 @@ class ChangeRequestBase(models.Model):
 
     @api.model
     def create(self, vals):
+        # Assign the CR to the current user by default
+        if "assign_to_id" not in vals or vals["assign_to_id"] is None:
+            vals["assign_to_id"] = self.env.user.id
         res = super(ChangeRequestBase, self).create(vals)
         # Create pending validation activity
         activity_type = "spp_change_request.pending_validation_activity"

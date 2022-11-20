@@ -75,7 +75,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             .id
         )
 
-    def _update_live_data(self):
+    def update_live_data(self):
         """
         This method is used to apply the changes to models based on the type of change request.
         :param self: The request.
@@ -129,6 +129,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 "date_requested": fields.Datetime.now(),
                 "state": "pending",
                 "last_activity_id": activity.id,
+                "assign_to_id": None,
             }
         )
 
@@ -158,7 +159,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         self.ensure_one()
         # Apply Changes to Live Data
-        self._update_live_data()
+        self.update_live_data()
         # Update CR record
         request.update(
             {
