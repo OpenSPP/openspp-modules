@@ -219,6 +219,59 @@ class ChangeRequestBase(models.Model):
             },
         }
 
+    def open_user_assignment_wiz(self):
+        for rec in self:
+            assign_self = False
+            if rec.assign_to_id:
+                if rec.assign_to_id.id != self.env.user.id:
+                    assign_self = True
+            else:
+                assign_self = True
+            if not assign_self:
+                form_id = self.env.ref(
+                    "spp_change_request.change_request_user_assign_wizard"
+                ).id
+                action = {
+                    "name": _("Assign Change Request to User"),
+                    "type": "ir.actions.act_window",
+                    "view_mode": "form",
+                    "view_id": form_id,
+                    "view_type": "form",
+                    "res_model": "spp.change.request.user.assign.wizard",
+                    "target": "new",
+                    "context": {"curr_assign_to_id": rec.assign_to_id.id},
+                }
+                return action
+            else:
+                self.assign_to_user(self.env.user)
+
+    def assign_to_user(self, user):
+        self.ensure_one()
+        # Check if user is a member of validators in the validation sequence config
+        user_ok = False
+        if self.request_type_ref_id.validation_ids:
+            for mrec in self.request_type_ref_id.validation_ids:
+                if mrec.validation_group_id.id in user.groups_id.ids:
+                    user_ok = True
+                    break
+            if user_ok:
+                self.update(
+                    {
+                        "assign_to_id": user.id,
+                    }
+                )
+            else:
+                raise UserError(
+                    _(
+                        "Only users of groups defined in the validation sequence "
+                        "can be assigned to this change request."
+                    )
+                )
+        else:
+            raise UserError(
+                _("This change request does not have any validation sequence defined.")
+            )
+
     def open_request_detail(self):
         for rec in self:
             # Open Request Form
@@ -273,14 +326,7 @@ class ChangeRequestBase(models.Model):
     def on_submit(self):
         for rec in self:
             if rec.request_type_ref_id:
-                if rec.state == "draft":
-                    rec.request_type_ref_id._on_submit(rec)
-                else:
-                    raise UserError(
-                        _(
-                            "The request must be in draft state to be set to pending validation."
-                        )
-                    )
+                rec.request_type_ref_id._on_submit(rec)
             else:
                 raise UserError(
                     _("The change request type must be properly filled-up.")
@@ -288,45 +334,15 @@ class ChangeRequestBase(models.Model):
 
     def on_validate(self):
         for rec in self:
-            # Check if change user is assigned to current user
-            if rec._check_user("Validate"):
-                if rec.request_type_ref_id:
-                    if rec.state == "pending":
-                        rec.request_type_ref_id._on_validate(rec)
-                    else:
-                        raise ValidationError(
-                            _("The request to be validated must be in submitted state.")
-                        )
-                else:
-                    raise UserError(
-                        _("The request details must be properly filled-up.")
-                    )
+            rec.request_type_ref_id._on_validate(rec)
 
     def apply(self):
         for rec in self:
-            # Check if change user is assigned to current user
-            if rec._check_user("Apply"):
-                if rec.state == "validated":
-                    rec.request_type_ref_id._apply(rec)
-                else:
-                    raise ValidationError(
-                        _(
-                            "The request must be in validated state for changes to be applied."
-                        )
-                    )
+            rec.request_type_ref_id._apply(rec)
 
     def on_reject(self):
         for rec in self:
-            # Check if change user is assigned to current user
-            if rec._check_user("Reject"):
-                if rec.state in ("draft", "pending"):
-                    rec.request_type_ref_id._on_reject(rec)
-                else:
-                    raise UserError(
-                        _(
-                            "The request to be rejected must be in draft or pending validation state."
-                        )
-                    )
+            rec.request_type_ref_id._on_reject(rec)
 
     def _check_user(self, process):
         self.ensure_one()

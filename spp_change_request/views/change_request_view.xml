@@ -96,12 +96,12 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
-                            name="%(spp_change_request.action_change_request_user_assign_wizard)d"
-                            type="action"
+                            name="open_user_assignment_wiz"
+                            type="object"
                             icon="fa-user-circle"
                             class="oe_stat_button"
                             states="pending,validated"
-                            context="{'curr_assign_to_id':assign_to_id}"
+                            groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Assign</span>
