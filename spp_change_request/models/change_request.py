@@ -331,6 +331,7 @@ class ChangeRequestBase(models.Model):
     def _check_user(self, process):
         self.ensure_one()
         if self.assign_to_id:
+            # Only user assigned to CR is allowed to process
             if self.assign_to_id.id == self.env.user.id:
                 return True
             else:

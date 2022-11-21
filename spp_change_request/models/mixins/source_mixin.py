@@ -1,5 +1,5 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-from odoo import _, fields, models
+from odoo import Command, _, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -139,13 +139,42 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             rec._on_validate(rec.change_request_id)
 
     def _on_validate(self, request):
-        """
-        This method is used to validate the change request.
-        :param self: The request type.
-        :param request: The request.
-        :return:
-        """
-        raise NotImplementedError()
+        self.ensure_one()
+        # Get current validation sequence
+        stage, message, validator_id = request._get_validation_stage()
+        if stage:
+            validator = {
+                "stage_id": stage.stage_id.id,
+                "validator_id": validator_id,
+                "date_validated": fields.Datetime.now(),
+            }
+            vals = {
+                "validator_ids": [(Command.create(validator))],
+                "last_validated_by_id": validator_id,
+                "date_validated": fields.Datetime.now(),
+            }
+            if message == "FINAL":
+                # Mark previous activity as 'done'
+                request.last_activity_id.action_done()
+                # Create apply changes activity
+                activity_type = "spp_change_request.apply_changes_activity"
+                summary = _("For Application of Changes")
+                note = _(
+                    "The change request is now fully validated. It is now submitted "
+                    + "for final application of changes."
+                )
+                activity = request._generate_activity(activity_type, summary, note)
+
+                vals.update(
+                    {
+                        "state": "validated",
+                        "last_activity_id": activity.id,
+                    }
+                )
+            # Update the change request
+            request.update(vals)
+        else:
+            raise ValidationError(message)
 
     def apply(self):
         for rec in self:
