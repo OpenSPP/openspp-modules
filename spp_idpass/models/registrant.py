@@ -157,7 +157,7 @@ class OpenSPPRegistrant(models.Model):
                     datetime.today().strftime("%Y-%m-%d"),
                 )
 
-                idqueue = self.env["spp.id.queue"].search(
+                idqueue = self.env["spp.print.queue.id"].search(
                     [("id", "=", vals["id_queue"])]
                 )
                 idqueue.id_pdf = self.id_pdf

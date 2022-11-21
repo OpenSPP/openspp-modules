@@ -6,7 +6,7 @@ from odoo import api, fields, models
 
 
 class OpenSPPIDQueue(models.Model):
-    _name = "spp.id.queue"
+    _name = "spp.print.queue.id"
     _description = "ID Queue"
 
     name = fields.Char("Request Name")
@@ -32,6 +32,8 @@ class OpenSPPIDQueue(models.Model):
     )
     id_pdf = fields.Binary("ID PASS")
     id_pdf_filename = fields.Char("ID File Name")
+
+    # batch_id = fields.One2many("spp.print.queue.batch", "queued_ids", string="Batch")
 
     def approve(self):
         for rec in self:

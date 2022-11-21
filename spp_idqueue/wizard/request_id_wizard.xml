@@ -5,7 +5,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 <odoo>
     <record id="request_id_wizard_form_view" model="ir.ui.view">
         <field name="name">request_id_wizard_form_view</field>
-        <field name="model">spp.request.id.wizard</field>
+        <field name="model">spp.print.queue.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -31,7 +31,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <field name="is_idpass" invisible="1" />
                         <field
                             name="idpass_id"
-                            string="ID Pass Template"
+                            string="Template"
                             options="{'no_create_edit':True,'no_open':True,'no_create':True}"
                             attrs="{'invisible':[('is_idpass','!=', True)], 'required':[('is_idpass','=', True)]}"
                         />
