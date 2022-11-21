@@ -314,3 +314,32 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             }
         )
         return action
+
+    def open_user_assignment_wiz(self):
+        for rec in self:
+            assign_self = False
+            if rec.change_request_id.assign_to_id:
+                if rec.change_request_id.assign_to_id.id != self.env.user.id:
+                    assign_self = True
+            else:
+                assign_self = True
+            if not assign_self:
+                form_id = self.env.ref(
+                    "spp_change_request.change_request_user_assign_wizard"
+                ).id
+                action = {
+                    "name": _("Assign Change Request to User"),
+                    "type": "ir.actions.act_window",
+                    "view_mode": "form",
+                    "view_id": form_id,
+                    "view_type": "form",
+                    "res_model": "spp.change.request.user.assign.wizard",
+                    "target": "new",
+                    "context": {
+                        "curr_assign_to_id": rec.change_request_id.assign_to_id.id,
+                        "change_request_id": rec.change_request_id.id,
+                    },
+                }
+                return action
+            else:
+                self.change_request_id.assign_to_user(self.env.user)

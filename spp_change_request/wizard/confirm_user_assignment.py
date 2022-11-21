@@ -59,7 +59,7 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
             else:
                 msg1 = _(
                     f"The change request: {rec.change_request_id.name} "
-                    "is currently assigned to {rec.curr_assign_to_id.name}."
+                    f"is currently assigned to {rec.curr_assign_to_id.name}."
                 )
             if rec.assign_to_id.id == self.env.user.id:
                 # Assign to current user
