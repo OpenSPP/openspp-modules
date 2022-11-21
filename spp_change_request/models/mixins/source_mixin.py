@@ -289,8 +289,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         group_id_field: rec.id,
                         "individual_id": mrec.individual.id,
                         "kind_ids": kind_ids,
-                        "new_relation_to_head": mrec.individual.relation_to_head.id,
-                        "new_birthdate": mrec.individual.birthdate,
+                        "new_relation_to_head": None,
                     }
                     self.env["pds.change.request.src.grp"].create(group_members)
 
