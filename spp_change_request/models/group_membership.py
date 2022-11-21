@@ -15,6 +15,11 @@ class SPPGroupMembershipTemp(models.Model):
     phone = fields.Char(string="Phone Numbers", related="individual_id.phone")
 
     def open_individual_form(self):
+        context = {
+            "default_is_group": False,
+            "create": False,
+            "edit": False,
+        }
         return {
             "name": "Individual Member",
             "view_mode": "form",
@@ -23,6 +28,6 @@ class SPPGroupMembershipTemp(models.Model):
             "view_id": self.env.ref("g2p_registry_individual.view_individuals_form").id,
             "type": "ir.actions.act_window",
             "target": "new",
-            "context": {"default_is_group": False},
+            "context": context,
             "flags": {"mode": "readonly"},
         }
