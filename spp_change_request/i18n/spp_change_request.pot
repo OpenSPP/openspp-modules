@@ -377,6 +377,12 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "For Application of Changes"
+msgstr ""
+
+#. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "For Pending Validation"
@@ -731,6 +737,14 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "The Request Type field must be filled-up."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid ""
+"The change request is now fully validated. It is now submitted for final "
+"application of changes."
 msgstr ""
 
 #. module: spp_change_request
