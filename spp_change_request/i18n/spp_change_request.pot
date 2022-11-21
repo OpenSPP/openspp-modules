@@ -130,7 +130,10 @@ msgid "Apply Changes"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_user_assign_wizard
+#, python-format
 msgid "Assign Change Request to User"
 msgstr ""
 
@@ -574,7 +577,7 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
+#: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid ""
 "Only users of groups defined in the validation sequence can be assigned to "
@@ -782,32 +785,26 @@ msgid "The change request: %s is not assigned to any user."
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/models/change_request.py:0
-#, python-format
-msgid "The request details must be properly filled-up."
-msgstr ""
-
-#. module: spp_change_request
-#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The request must be in draft state to be set to pending validation."
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The request must be in validated state for changes to be applied."
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid ""
 "The request to be rejected must be in draft or pending validation state."
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The request to be validated must be in submitted state."
 msgstr ""
@@ -825,7 +822,7 @@ msgid "There are no validators defined for this request."
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
+#: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "This change request does not have any validation sequence defined."
 msgstr ""
