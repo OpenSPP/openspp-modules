@@ -1,5 +1,5 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-from odoo import _, fields, models
+from odoo import Command, _, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -85,7 +85,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def on_submit(self):
         for rec in self:
-            rec.validate_data()
             rec._on_submit(rec.change_request_id)
 
     def validate_data(self):
@@ -112,6 +111,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :return:
         """
         self.ensure_one()
+        # Validate the submitted data
+        self.validate_data()
         # Mark previous activity as 'done'
         request.last_activity_id.action_done()
         # Create validation activity
@@ -138,13 +139,42 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             rec._on_validate(rec.change_request_id)
 
     def _on_validate(self, request):
-        """
-        This method is used to validate the change request.
-        :param self: The request type.
-        :param request: The request.
-        :return:
-        """
-        raise NotImplementedError()
+        self.ensure_one()
+        # Get current validation sequence
+        stage, message, validator_id = request._get_validation_stage()
+        if stage:
+            validator = {
+                "stage_id": stage.stage_id.id,
+                "validator_id": validator_id,
+                "date_validated": fields.Datetime.now(),
+            }
+            vals = {
+                "validator_ids": [(Command.create(validator))],
+                "last_validated_by_id": validator_id,
+                "date_validated": fields.Datetime.now(),
+            }
+            if message == "FINAL":
+                # Mark previous activity as 'done'
+                request.last_activity_id.action_done()
+                # Create apply changes activity
+                activity_type = "spp_change_request.apply_changes_activity"
+                summary = _("For Application of Changes")
+                note = _(
+                    "The change request is now fully validated. It is now submitted "
+                    + "for final application of changes."
+                )
+                activity = request._generate_activity(activity_type, summary, note)
+
+                vals.update(
+                    {
+                        "state": "validated",
+                        "last_activity_id": activity.id,
+                    }
+                )
+            # Update the change request
+            request.update(vals)
+        else:
+            raise ValidationError(message)
 
     def apply(self):
         for rec in self:
@@ -211,9 +241,9 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 }
                 self.env["pds.change.request.service.point"].create(service_points)
 
-    def _copy_from_group_member_ids(self, group_id_field):
+    def _copy_from_group_member_ids(self, group_ref_field, group_id_field):
         for rec in self:
-            for mrec in rec.registrant_id.group_membership_ids:
+            for mrec in rec[group_ref_field].group_membership_ids:
                 kind_ids = mrec.kind and mrec.kind.ids or None
                 if (
                     kind_ids

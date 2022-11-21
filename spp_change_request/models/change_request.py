@@ -274,7 +274,7 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             if rec.request_type_ref_id:
                 if rec.state == "draft":
-                    rec.request_type_ref_id.on_submit(rec)
+                    rec.request_type_ref_id._on_submit(rec)
                 else:
                     raise UserError(
                         _(
@@ -331,6 +331,7 @@ class ChangeRequestBase(models.Model):
     def _check_user(self, process):
         self.ensure_one()
         if self.assign_to_id:
+            # Only user assigned to CR is allowed to process
             if self.assign_to_id.id == self.env.user.id:
                 return True
             else:
