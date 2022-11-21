@@ -16,6 +16,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     class="btn-success"
                     attrs="{'invisible':[('request_type_ref_id','=',False)]}"
                     context="{'show_validation_form':True}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
                 />
                 <field name="name" />
                 <field name="date_requested" />
