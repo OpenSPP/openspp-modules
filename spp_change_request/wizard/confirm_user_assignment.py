@@ -13,6 +13,7 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
+        # TODO: Skip if CR is not assigned to anybody. The user will be automatically assigned.
         res = super(ConfirmUserAssignmentWiz, self).default_get(fields)
         if self.env.context.get("change_request_id"):
             res["change_request_id"] = self.env.context["change_request_id"]

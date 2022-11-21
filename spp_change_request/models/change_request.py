@@ -273,14 +273,7 @@ class ChangeRequestBase(models.Model):
     def on_submit(self):
         for rec in self:
             if rec.request_type_ref_id:
-                if rec.state == "draft":
-                    rec.request_type_ref_id._on_submit(rec)
-                else:
-                    raise UserError(
-                        _(
-                            "The request must be in draft state to be set to pending validation."
-                        )
-                    )
+                rec.request_type_ref_id._on_submit(rec)
             else:
                 raise UserError(
                     _("The change request type must be properly filled-up.")
@@ -288,45 +281,15 @@ class ChangeRequestBase(models.Model):
 
     def on_validate(self):
         for rec in self:
-            # Check if change user is assigned to current user
-            if rec._check_user("Validate"):
-                if rec.request_type_ref_id:
-                    if rec.state == "pending":
-                        rec.request_type_ref_id._on_validate(rec)
-                    else:
-                        raise ValidationError(
-                            _("The request to be validated must be in submitted state.")
-                        )
-                else:
-                    raise UserError(
-                        _("The request details must be properly filled-up.")
-                    )
+            rec.request_type_ref_id._on_validate(rec)
 
     def apply(self):
         for rec in self:
-            # Check if change user is assigned to current user
-            if rec._check_user("Apply"):
-                if rec.state == "validated":
-                    rec.request_type_ref_id._apply(rec)
-                else:
-                    raise ValidationError(
-                        _(
-                            "The request must be in validated state for changes to be applied."
-                        )
-                    )
+            rec.request_type_ref_id._apply(rec)
 
     def on_reject(self):
         for rec in self:
-            # Check if change user is assigned to current user
-            if rec._check_user("Reject"):
-                if rec.state in ("draft", "pending"):
-                    rec.request_type_ref_id._on_reject(rec)
-                else:
-                    raise UserError(
-                        _(
-                            "The request to be rejected must be in draft or pending validation state."
-                        )
-                    )
+            rec.request_type_ref_id._on_reject(rec)
 
     def _check_user(self, process):
         self.ensure_one()

@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 from odoo import Command, _, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class ChangeRequestSourceMixin(models.AbstractModel):
@@ -83,10 +83,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         raise NotImplementedError()
 
-    def on_submit(self):
-        for rec in self:
-            rec._on_submit(rec.change_request_id)
-
     def validate_data(self):
         """
         This method is used to validate the data of the change request before submitting for review.
@@ -103,6 +99,10 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     _("Please upload the required document type: %s", document_type)
                 )
 
+    def on_submit(self):
+        for rec in self:
+            rec._on_submit(rec.change_request_id)
+
     def _on_submit(self, request):
         """
         This method is used to submit the change request.
@@ -111,28 +111,33 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :return:
         """
         self.ensure_one()
-        # Validate the submitted data
-        self.validate_data()
-        # Mark previous activity as 'done'
-        request.last_activity_id.action_done()
-        # Create validation activity
-        activity_type = "spp_change_request.validation_activity"
-        summary = _("For Validation")
-        note = _(
-            "The change request is now set for validation. Depending on the "
-            + "validation sequence, this may be subjected to one or more validations."
-        )
-        activity = request._generate_activity(activity_type, summary, note)
+        if request.state == "draft":
+            # Validate the submitted data
+            self.validate_data()
+            # Mark previous activity as 'done'
+            request.last_activity_id.action_done()
+            # Create validation activity
+            activity_type = "spp_change_request.validation_activity"
+            summary = _("For Validation")
+            note = _(
+                "The change request is now set for validation. Depending on the "
+                + "validation sequence, this may be subjected to one or more validations."
+            )
+            activity = request._generate_activity(activity_type, summary, note)
 
-        # Update change request
-        request.update(
-            {
-                "date_requested": fields.Datetime.now(),
-                "state": "pending",
-                "last_activity_id": activity.id,
-                "assign_to_id": None,
-            }
-        )
+            # Update change request
+            request.update(
+                {
+                    "date_requested": fields.Datetime.now(),
+                    "state": "pending",
+                    "last_activity_id": activity.id,
+                    "assign_to_id": None,
+                }
+            )
+        else:
+            raise UserError(
+                _("The request must be in draft state to be set to pending validation.")
+            )
 
     def on_validate(self):
         for rec in self:
@@ -140,41 +145,51 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def _on_validate(self, request):
         self.ensure_one()
-        # Get current validation sequence
-        stage, message, validator_id = request._get_validation_stage()
-        if stage:
-            validator = {
-                "stage_id": stage.stage_id.id,
-                "validator_id": validator_id,
-                "date_validated": fields.Datetime.now(),
-            }
-            vals = {
-                "validator_ids": [(Command.create(validator))],
-                "last_validated_by_id": validator_id,
-                "date_validated": fields.Datetime.now(),
-            }
-            if message == "FINAL":
-                # Mark previous activity as 'done'
-                request.last_activity_id.action_done()
-                # Create apply changes activity
-                activity_type = "spp_change_request.apply_changes_activity"
-                summary = _("For Application of Changes")
-                note = _(
-                    "The change request is now fully validated. It is now submitted "
-                    + "for final application of changes."
-                )
-                activity = request._generate_activity(activity_type, summary, note)
-
-                vals.update(
-                    {
-                        "state": "validated",
-                        "last_activity_id": activity.id,
+        # Check if CR is assigned to current user
+        if request._check_user("Validate"):
+            if request.state == "pending":
+                # Get current validation sequence
+                stage, message, validator_id = request._get_validation_stage()
+                if stage:
+                    validator = {
+                        "stage_id": stage.stage_id.id,
+                        "validator_id": validator_id,
+                        "date_validated": fields.Datetime.now(),
                     }
+                    vals = {
+                        "validator_ids": [(Command.create(validator))],
+                        "last_validated_by_id": validator_id,
+                        "date_validated": fields.Datetime.now(),
+                        "assign_to_id": None,
+                    }
+                    if message == "FINAL":
+                        # Mark previous activity as 'done'
+                        request.last_activity_id.action_done()
+                        # Create apply changes activity
+                        activity_type = "spp_change_request.apply_changes_activity"
+                        summary = _("For Application of Changes")
+                        note = _(
+                            "The change request is now fully validated. It is now submitted "
+                            + "for final application of changes."
+                        )
+                        activity = request._generate_activity(
+                            activity_type, summary, note
+                        )
+
+                        vals.update(
+                            {
+                                "state": "validated",
+                                "last_activity_id": activity.id,
+                            }
+                        )
+                    # Update the change request
+                    request.update(vals)
+                else:
+                    raise ValidationError(message)
+            else:
+                raise ValidationError(
+                    _("The request to be validated must be in submitted state.")
                 )
-            # Update the change request
-            request.update(vals)
-        else:
-            raise ValidationError(message)
 
     def apply(self):
         for rec in self:
@@ -188,18 +203,27 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :return:
         """
         self.ensure_one()
-        # Apply Changes to Live Data
-        self.update_live_data()
-        # Update CR record
-        request.update(
-            {
-                "applied_by_id": self.env.user,
-                "date_applied": fields.Datetime.now(),
-                "state": "applied",
-            }
-        )
-        # Mark previous activity as 'done'
-        request.last_activity_id.action_done()
+        # Check if CR is assigned to current user
+        if request._check_user("Apply"):
+            if request.state == "validated":
+                # Apply Changes to Live Data
+                self.update_live_data()
+                # Update CR record
+                request.update(
+                    {
+                        "applied_by_id": self.env.user,
+                        "date_applied": fields.Datetime.now(),
+                        "state": "applied",
+                    }
+                )
+                # Mark previous activity as 'done'
+                request.last_activity_id.action_done()
+            else:
+                raise ValidationError(
+                    _(
+                        "The request must be in validated state for changes to be applied."
+                    )
+                )
 
     def on_reject(self):
         for rec in self:
@@ -213,13 +237,22 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :return:
         """
         self.ensure_one()
-        request.update(
-            {
-                "state": "rejected",
-            }
-        )
-        # Mark previous activity as 'done'
-        request.last_activity_id.action_done()
+        # Check if CR is assigned to current user
+        if request._check_user("Reject"):
+            if request.state in ("draft", "pending"):
+                request.update(
+                    {
+                        "state": "rejected",
+                    }
+                )
+                # Mark previous activity as 'done'
+                request.last_activity_id.action_done()
+            else:
+                raise UserError(
+                    _(
+                        "The request to be rejected must be in draft or pending validation state."
+                    )
+                )
 
     def _copy_group_member_ids(self, group_id_field):
         for rec in self:
