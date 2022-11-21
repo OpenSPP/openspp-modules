@@ -213,6 +213,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     {
                         "applied_by_id": self.env.user,
                         "date_applied": fields.Datetime.now(),
+                        "assign_to_id": None,
                         "state": "applied",
                     }
                 )

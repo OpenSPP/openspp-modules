@@ -11,7 +11,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
             eval="[
             (4, ref('g2p_registry_base.group_g2p_admin')),
             (4, ref('spp_change_request.group_spp_change_request_administrator')),
-            (4, ref('spp_change_request.group_spp_change_request_validator'))
+            (4, ref('spp_change_request.group_spp_change_request_validator')),
+            (4, ref('spp_change_request.group_spp_change_request_agent'))
         ]"
         />
         <field name="perm_create" eval="True" />
