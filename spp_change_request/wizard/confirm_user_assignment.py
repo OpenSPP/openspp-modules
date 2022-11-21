@@ -2,7 +2,6 @@
 import logging
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -13,7 +12,6 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        # TODO: Skip if CR is not assigned to anybody. The user will be automatically assigned.
         res = super(ConfirmUserAssignmentWiz, self).default_get(fields)
         if self.env.context.get("change_request_id"):
             res["change_request_id"] = self.env.context["change_request_id"]
@@ -40,32 +38,7 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
 
     def assign_to_user(self):
         for rec in self:
-            # Check if user is a member of validators in the validation sequence config
-            user_ok = False
-            if rec.change_request_id.request_type_ref_id.validation_ids:
-                for mrec in rec.change_request_id.request_type_ref_id.validation_ids:
-                    if mrec.validation_group_id.id in rec.assign_to_id.groups_id.ids:
-                        user_ok = True
-                        break
-                if user_ok:
-                    rec.change_request_id.update(
-                        {
-                            "assign_to_id": rec.assign_to_id.id,
-                        }
-                    )
-                else:
-                    raise UserError(
-                        _(
-                            "Only users of groups defined in the validation sequence "
-                            "can be assigned to this change request."
-                        )
-                    )
-            else:
-                raise UserError(
-                    _(
-                        "This change request does not have any validation sequence defined."
-                    )
-                )
+            rec.change_request_id.assign_to_user(rec.assign_to_id)
 
     @api.depends("change_request_id", "assign_to_id")
     def _compute_message_assignment(self):
