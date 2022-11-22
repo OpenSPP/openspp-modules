@@ -42,6 +42,7 @@ spp_change_request_g2p_phone_number_administrator,G2P Phone Number CR Administra
 spp_change_request_g2p_reg_id_administrator,G2P Registrant ID CR Administrator Access,g2p_registry_base.model_g2p_reg_id,spp_change_request.group_spp_change_request_administrator,1,0,0,0
 spp_change_request_event_data_administrator,SPP Event Data CR Administrator Access,spp_event_data.model_spp_event_data,spp_change_request.group_spp_change_request_administrator,1,0,0,0
 
+
 spp_dms_storage_administrator,SPP DMS Storage Administrator Access,dms.model_dms_storage,spp_change_request.group_spp_change_request_administrator,1,1,1,0
 spp_dms_directory_administrator,SPP DMS Directory Administrator Access,dms.model_dms_directory,spp_change_request.group_spp_change_request_administrator,1,1,1,0
 

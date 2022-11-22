@@ -195,6 +195,7 @@ class ChangeRequestBase(models.Model):
             context = {
                 "create": False,
                 "edit": False,
+                "hide_from_cr": 1,
             }
             action.update(
                 {
