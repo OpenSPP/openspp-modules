@@ -1,4 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import logging
+
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
@@ -11,6 +13,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     _rec_name = "change_request_id"
 
     required_document_type = []
+    AUTO_APPLY_CHANGES = True
 
     registrant_id = fields.Many2one(
         "res.partner", "Registrant", domain=[("is_registrant", "=", True)]
@@ -187,6 +190,18 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         )
                     # Update the change request
                     request.update(vals)
+
+                    # Update the live data if the user has the access
+                    if self.AUTO_APPLY_CHANGES:
+                        try:
+                            self.apply()
+                        except UserError:
+                            # Silently ignore and leave the change request as is until someone with the correct access
+                            # can apply the changes
+                            logging.info(
+                                "User %s does not have access to apply changes."
+                                % self.env.user
+                            )
                 else:
                     raise ValidationError(message)
             else:
