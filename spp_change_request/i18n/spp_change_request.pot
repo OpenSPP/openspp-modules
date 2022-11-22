@@ -130,6 +130,11 @@ msgid "Apply Changes"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_validation_sequence__validation_group_state__both
+msgid "Apply to Both"
+msgstr ""
+
+#. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
@@ -339,6 +344,11 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__birthdate
 msgid "Date of Birth"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_validation_sequence__validation_group_state__destination
+msgid "Destination Area"
 msgstr ""
 
 #. module: spp_change_request
@@ -717,6 +727,11 @@ msgid "Sequence"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_validation_sequence__validation_group_state__source
+msgid "Source Area"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__name
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
 msgid "Stage"
@@ -879,6 +894,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_form
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_tree
 msgid "Validation Group"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__validation_group_state
+msgid "Validation Group Application"
 msgstr ""
 
 #. module: spp_change_request
