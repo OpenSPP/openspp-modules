@@ -344,8 +344,13 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             rec.request_type_ref_id._on_reject(rec)
 
-    def _check_user(self, process):
+    def _check_user(self, process, auto_assign=False):
         self.ensure_one()
+
+        # if no user is assigned, assign to current user
+        if not self.assign_to_id and auto_assign:
+            self.assign_to_user(self.env.user)
+
         if self.assign_to_id:
             # Only user assigned to CR is allowed to process
             if self.assign_to_id.id == self.env.user.id:
