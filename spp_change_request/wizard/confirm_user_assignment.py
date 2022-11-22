@@ -24,6 +24,9 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
             res["curr_assign_to_id"] = self.env.context["curr_assign_to_id"]
         else:
             res["assign_to_id"] = self.env.user.id
+
+        if self.env.context.get("assign_to"):
+            res["assign_to"] = self.env.context["assign_to"]
         return res
 
     change_request_id = fields.Many2one(
@@ -32,9 +35,10 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
     curr_assign_to_id = fields.Many2one(
         "res.users", "Currently Assigned to", related="change_request_id.assign_to_id"
     )
-    assign_to_id = fields.Many2one("res.users", "Transfer to")
+    assign_to_id = fields.Many2one("res.users", "User")
     dialog_message = fields.Text(compute="_compute_message_assignment")
     assign_to_any = fields.Boolean(compute="_compute_message_assignment")
+    assign_to = fields.Boolean(default=False)
 
     def assign_to_user(self):
         for rec in self:
@@ -43,33 +47,11 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
     @api.depends("change_request_id", "assign_to_id")
     def _compute_message_assignment(self):
         for rec in self:
-            assign_to_any = False
-            if not rec.curr_assign_to_id:
-                # No user assignment
-                msg1 = _(
-                    "The change request: %s is not assigned to any user.",
-                    rec.change_request_id.name,
-                )
-            elif rec.curr_assign_to_id.id == self.env.user.id:
-                # The current assigned user is the current user
-                msg1 = _(
-                    "The change request: %s is currently assigned to you.",
-                    rec.change_request_id.name,
-                )
-            else:
-                msg1 = _(
-                    f"The change request: {rec.change_request_id.name} "
-                    f"is currently assigned to {rec.curr_assign_to_id.name}."
-                )
-            if rec.assign_to_id.id == self.env.user.id:
-                # Assign to current user
-                msg2 = _("Are you sure you would like to assign this to yourself?")
-            else:
-                msg2 = _("Are you sure you would like to assign this to:")
-                assign_to_any = True
+            msg1 = _("Assign this change request to:")
+            assign_to_any = True
             rec.update(
                 {
-                    "dialog_message": f"{msg1} {msg2}",
+                    "dialog_message": f"{msg1}",
                     "assign_to_any": assign_to_any,
                 }
             )
