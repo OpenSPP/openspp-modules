@@ -146,7 +146,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     def _on_validate(self, request):
         self.ensure_one()
         # Check if CR is assigned to current user
-        if request._check_user("Validate"):
+        if request._check_user("Validate", auto_assign=True):
             if request.state == "pending":
                 # Get current validation sequence
                 stage, message, validator_id = request._get_validation_stage()
@@ -204,7 +204,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         self.ensure_one()
         # Check if CR is assigned to current user
-        if request._check_user("Apply"):
+        if request._check_user("Apply", auto_assign=True):
             if request.state == "validated":
                 # Apply Changes to Live Data
                 self.update_live_data()
@@ -238,7 +238,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         self.ensure_one()
         # Check if CR is assigned to current user
-        if request._check_user("Reject"):
+        if request._check_user("Reject", auto_assign=True):
             if request.state in ("draft", "pending"):
                 request.update(
                     {
