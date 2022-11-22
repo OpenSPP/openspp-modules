@@ -132,14 +132,26 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_user_assign_wizard
 #, python-format
 msgid "Assign Change Request to User"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to
+msgid "Assign To"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_any
 msgid "Assign To Any"
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
+#, python-format
+msgid "Assign this change request to:"
 msgstr ""
 
 #. module: spp_change_request
@@ -283,6 +295,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__create_date
 msgid "Created on"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__current_user_assigned
+msgid "Current User Assigned"
 msgstr ""
 
 #. module: spp_change_request
@@ -773,18 +790,6 @@ msgid "The change request type must be properly filled-up."
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
-#, python-format
-msgid "The change request: %s is currently assigned to you."
-msgstr ""
-
-#. module: spp_change_request
-#: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
-#, python-format
-msgid "The change request: %s is not assigned to any user."
-msgstr ""
-
-#. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The request must be in draft state to be set to pending validation."
@@ -828,11 +833,6 @@ msgid "This change request does not have any validation sequence defined."
 msgstr ""
 
 #. module: spp_change_request
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_id
-msgid "Transfer to"
-msgstr ""
-
-#. module: spp_change_request
 #: model:ir.model.fields,help:spp_change_request.field_spp_change_request__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr ""
@@ -845,6 +845,11 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_unread_counter
 msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_id
+msgid "User"
 msgstr ""
 
 #. module: spp_change_request
