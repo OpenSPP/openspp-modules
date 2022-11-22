@@ -302,6 +302,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         context = {
             "create": False,
             "edit": False,
+            "hide_from_cr": 1,
         }
         action.update(
             {
