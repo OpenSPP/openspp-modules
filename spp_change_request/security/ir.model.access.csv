@@ -20,7 +20,6 @@ spp_change_request_g2p_reg_rel_validator,G2P Registry Relationship CR Validator 
 spp_change_request_g2p_phone_number_validator,G2P Phone Number CR Validator Access,g2p_registry_base.model_g2p_phone_number,spp_change_request.group_spp_change_request_validator,1,0,0,0
 spp_change_request_g2p_reg_id_validator,G2P Registrant ID CR Validator Access,g2p_registry_base.model_g2p_reg_id,spp_change_request.group_spp_change_request_validator,1,0,0,0
 spp_change_request_event_data_validator,SPP Event Data CR Validator Access,spp_event_data.model_spp_event_data,spp_change_request.group_spp_change_request_validator,1,0,0,0
-spp_helpdesk_ticket_validator,SPP Helpdesk Ticket Validator Access,helpdesk_mgmt.model_helpdesk_ticket,spp_change_request.group_spp_change_request_validator,1,0,0,0
 
 spp_dms_storage_validator,SPP DMS Storage Validator Access,dms.model_dms_storage,spp_change_request.group_spp_change_request_validator,1,0,0,0
 spp_dms_directory_validator,SPP DMS Directory Validator Access,dms.model_dms_directory,spp_change_request.group_spp_change_request_validator,1,0,0,0
@@ -42,7 +41,6 @@ spp_change_request_g2p_reg_rel_administrator,G2P Registry Relationship CR Admini
 spp_change_request_g2p_phone_number_administrator,G2P Phone Number CR Administrator Access,g2p_registry_base.model_g2p_phone_number,spp_change_request.group_spp_change_request_administrator,1,0,0,0
 spp_change_request_g2p_reg_id_administrator,G2P Registrant ID CR Administrator Access,g2p_registry_base.model_g2p_reg_id,spp_change_request.group_spp_change_request_administrator,1,0,0,0
 spp_change_request_event_data_administrator,SPP Event Data CR Administrator Access,spp_event_data.model_spp_event_data,spp_change_request.group_spp_change_request_administrator,1,0,0,0
-spp_helpdesk_ticket_administrator,SPP Helpdesk Ticket Administrator Access,helpdesk_mgmt.model_helpdesk_ticket,spp_change_request.group_spp_change_request_administrator,1,0,0,0
 
 spp_dms_storage_administrator,SPP DMS Storage Administrator Access,dms.model_dms_storage,spp_change_request.group_spp_change_request_administrator,1,1,1,0
 spp_dms_directory_administrator,SPP DMS Directory Administrator Access,dms.model_dms_directory,spp_change_request.group_spp_change_request_administrator,1,1,1,0
@@ -63,7 +61,6 @@ spp_change_request_g2p_reg_rel_agent,G2P Registry Relationship CR Agent Access,g
 spp_change_request_g2p_phone_number_agent,G2P Phone Number CR Agent Access,g2p_registry_base.model_g2p_phone_number,spp_change_request.group_spp_change_request_agent,1,0,0,0
 spp_change_request_g2p_reg_id_agent,G2P Registrant ID CR Agent Access,g2p_registry_base.model_g2p_reg_id,spp_change_request.group_spp_change_request_agent,1,0,0,0
 spp_change_request_event_data_agent,SPP Event Data CR Agent Access,spp_event_data.model_spp_event_data,spp_change_request.group_spp_change_request_agent,1,0,0,0
-spp_helpdesk_ticket_agent,SPP Helpdesk Ticket Agent Access,helpdesk_mgmt.model_helpdesk_ticket,spp_change_request.group_spp_change_request_agent,1,0,0,0
 
 spp_dms_storage_agent,SPP DMS Storage Agent Access,dms.model_dms_storage,spp_change_request.group_spp_change_request_agent,1,1,1,0
 spp_dms_directory_agent,SPP DMS Directory Agent Access,dms.model_dms_directory,spp_change_request.group_spp_change_request_agent,1,1,1,0
