@@ -1,5 +1,5 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-from odoo import Command, _, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -55,6 +55,9 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             ("storage_id.save_type", "!=", "attachment"),
         ],
         auto_join=True,
+    )
+    current_user_assigned = fields.Boolean(
+        compute="_compute_current_user_assigned", default=False
     )
 
     def _update_registrant_id(self, res):
@@ -344,3 +347,31 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 return action
             else:
                 self.change_request_id.assign_to_user(self.env.user)
+
+    def open_user_assignment_to_wiz(self):
+        for rec in self:
+            form_id = self.env.ref(
+                "spp_change_request.change_request_user_assign_wizard"
+            ).id
+            action = {
+                "name": _("Assign Change Request to User"),
+                "type": "ir.actions.act_window",
+                "view_mode": "form",
+                "view_id": form_id,
+                "view_type": "form",
+                "res_model": "spp.change.request.user.assign.wizard",
+                "target": "new",
+                "context": {
+                    "curr_assign_to_id": rec.change_request_id.assign_to_id.id,
+                    "change_request_id": rec.change_request_id.id,
+                    "assign_to": True,
+                },
+            }
+            return action
+
+    @api.depends("assign_to_id")
+    def _compute_current_user_assigned(self):
+        for rec in self:
+            rec.current_user_assigned = False
+            if self.env.context.get("uid", False) == rec.assign_to_id.id:
+                rec.current_user_assigned = True
