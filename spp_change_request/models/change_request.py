@@ -449,6 +449,16 @@ class ChangeRequestValidationSequence(models.Model):
     validation_group_id = fields.Many2one(
         "res.groups", string="Change Request Validation Group"
     )
+    validation_group_state = fields.Selection(
+        [
+            ("source", "Source Area"),
+            ("destination", "Destination Area"),
+            ("both", "Apply to Both"),
+        ],
+        string="Validation Group Application",
+        default="both",
+        required=True,
+    )
 
     @api.model
     def _selection_request_type_ref_id(self):

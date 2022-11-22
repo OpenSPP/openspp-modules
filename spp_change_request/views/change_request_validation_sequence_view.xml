@@ -17,6 +17,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     domain="[('category_id','=',%(spp_change_request.spp_change_request_module)d)]"
                     options="{'no_open':true,'no_edit':true,'no_create':true}"
                 />
+                <field name="validation_group_state" />
             </tree>
         </field>
     </record>
@@ -44,6 +45,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             domain="[('category_id','=',%(spp_change_request.spp_change_request_module)d)]"
                             options="{'no_open':true,'no_edit':true,'no_create':true}"
                         />
+                        <field name="validation_group_state" />
                     </group>
                 </sheet>
             </form>
