@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 
 
 class OpenSPPRequestIDWizard(models.TransientModel):
-    _name = "spp.request.id.wizard"
+    _name = "spp.print.queue.wizard"
     _description = "Request ID Wizard"
 
     registrant_id = fields.Many2one("res.partner", "Registrant ID", required=True)
@@ -45,7 +45,7 @@ class OpenSPPRequestIDWizard(models.TransientModel):
                     "status": status,
                     "registrant_id": rec.registrant_id.id,
                 }
-                self.env["spp.id.queue"].create(vals)
+                self.env["spp.print.queue.id"].create(vals)
             else:
                 raise UserError(_("There are no selected Template!"))
 
