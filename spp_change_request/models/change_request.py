@@ -247,29 +247,35 @@ class ChangeRequestBase(models.Model):
 
     def assign_to_user(self, user):
         self.ensure_one()
-        # Check if user is a member of validators in the validation sequence config
         user_ok = False
-        if self.request_type_ref_id.validation_ids:
-            for mrec in self.request_type_ref_id.validation_ids:
-                if mrec.validation_group_id.id in user.groups_id.ids:
-                    user_ok = True
-                    break
-            if user_ok:
-                self.update(
-                    {
-                        "assign_to_id": user.id,
-                    }
-                )
+        # Fuy validated CRs will proceed for users of the CR Administrator group
+        if self.state == "validated":
+            user_ok = True
+        else:
+            # Check if user is a member of validators in the validation sequence config
+            if self.request_type_ref_id.validation_ids:
+                for mrec in self.request_type_ref_id.validation_ids:
+                    if mrec.validation_group_id.id in user.groups_id.ids:
+                        user_ok = True
+                        break
             else:
                 raise UserError(
                     _(
-                        "Only users of groups defined in the validation sequence "
-                        "can be assigned to this change request."
+                        "This change request does not have any validation sequence defined."
                     )
                 )
+        if user_ok:
+            self.update(
+                {
+                    "assign_to_id": user.id,
+                }
+            )
         else:
             raise UserError(
-                _("This change request does not have any validation sequence defined.")
+                _(
+                    "Only users of groups defined in the validation sequence "
+                    "can be assigned to this change request."
+                )
             )
 
     def open_request_detail(self):

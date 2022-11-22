@@ -14,7 +14,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field
                     name="validation_group_id"
                     string="Validation Group"
-                    domain="[('category_id','=',%(g2p_registry_base.openg2p_module)d)]"
+                    domain="[('category_id','=',%(spp_change_request.spp_change_request_module)d)]"
                     options="{'no_open':true,'no_edit':true,'no_create':true}"
                 />
             </tree>
@@ -41,7 +41,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <field
                             name="validation_group_id"
                             string="Validation Group"
-                            domain="[('category_id','=',%(g2p_registry_base.openg2p_module)d)]"
+                            domain="[('category_id','=',%(spp_change_request.spp_change_request_module)d)]"
                             options="{'no_open':true,'no_edit':true,'no_create':true}"
                         />
                     </group>
@@ -116,6 +116,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         action="action_change_request_validation_sequence"
         parent="spp_change_request_config_root"
         sequence="1"
+        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
     />
 
 </odoo>

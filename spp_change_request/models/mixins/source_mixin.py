@@ -213,6 +213,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     {
                         "applied_by_id": self.env.user,
                         "date_applied": fields.Datetime.now(),
+                        "assign_to_id": None,
                         "state": "applied",
                     }
                 )
@@ -254,9 +255,9 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     )
                 )
 
-    def _copy_group_member_ids(self, group_id_field):
+    def _copy_group_member_ids(self, group_id_field, group_ref_field="registrant_id"):
         for rec in self:
-            for mrec in rec.registrant_id.group_membership_ids:
+            for mrec in rec[group_ref_field].group_membership_ids:
                 kind_ids = mrec.kind and mrec.kind.ids or None
                 group_members = {
                     group_id_field: rec.id,
