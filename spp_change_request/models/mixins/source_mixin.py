@@ -121,7 +121,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             summary = _("For Validation")
             note = _(
                 "The change request is now set for validation. Depending on the "
-                + "validation sequence, this may be subjected to one or more validations."
+                "validation sequence, this may be subjected to one or more validations."
             )
             activity = request._generate_activity(activity_type, summary, note)
 
