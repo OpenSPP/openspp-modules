@@ -22,6 +22,7 @@
         "g2p_registry_membership",
         "spp_service_points",
         "spp_area",
+        "helpdesk_mgmt",
         "dms_field",
         "web_domain_field",
     ],
