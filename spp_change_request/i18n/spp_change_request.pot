@@ -262,6 +262,16 @@ msgid "Change Request Validator"
 msgstr ""
 
 #. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_hq_validator
+msgid "Change Request Validator HQ"
+msgstr ""
+
+#. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_local_validator
+msgid "Change Request Validator Local"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_validators
 msgid "Change Request Validators"
 msgstr ""
