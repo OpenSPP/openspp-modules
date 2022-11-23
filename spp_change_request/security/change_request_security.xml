@@ -15,6 +15,11 @@
         <field name="category_id" ref="spp_change_request.spp_change_request_module" />
     </record>
 
+    <record id="group_spp_change_request_applicator" model="res.groups">
+        <field name="name">Change Request Applicator</field>
+        <field name="category_id" ref="spp_change_request.spp_change_request_module" />
+    </record>
+
     <record id="group_spp_change_request_administrator" model="res.groups">
         <field name="name">Change Request Administrator</field>
         <field name="category_id" ref="spp_change_request.spp_change_request_module" />
