@@ -394,8 +394,8 @@ class ChangeRequestBase(models.Model):
                 # Check if user is allowed to validate request
                 if validator_id not in stage.validation_group_id.users.ids:
                     message = _(
-                        "You are not allowed to validate this request! Stage: %s",
-                        stage.stage_id.name,
+                        f"You are not allowed to validate this request! Stage: {stage.stage_id.name}. "
+                        f"Allowed Validator Group: {stage.validation_group_id.name}"
                     )
                     stage = None
             else:
