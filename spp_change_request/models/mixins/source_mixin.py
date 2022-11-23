@@ -202,6 +202,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                                 "User %s does not have access to apply changes."
                                 % self.env.user
                             )
+                            # revert the assignment if the apply failed
+                            request.update({"assign_to_id": None})
                 else:
                     raise ValidationError(message)
             else:
