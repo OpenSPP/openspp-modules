@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-23 09:35+0000\n"
+"PO-Revision-Date: 2022-11-24 12:22+0000\n"
 "Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_service_points/fr/>\n"
@@ -76,7 +76,7 @@ msgstr ""
 #. module: spp_service_points
 #: model:ir.model,name:spp_service_points.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__country_id
@@ -113,7 +113,7 @@ msgstr ""
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__is_disabled
 msgid "Disabled"
-msgstr ""
+msgstr "Handicapé"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__display_name
@@ -124,31 +124,31 @@ msgstr "Afficher un nom"
 #. module: spp_service_points
 #: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
 msgid "Group By"
-msgstr ""
+msgstr "Groupé par"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__id
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point____last_update
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Modification le"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__write_uid
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__write_date
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Mise à jour le"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__phone_no
