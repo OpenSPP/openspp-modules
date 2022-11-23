@@ -412,6 +412,11 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.ui.menu,name:spp_change_request.spp_change_request_for_application_root
+msgid "For Application"
+msgstr ""
+
+#. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "For Application of Changes"
@@ -425,6 +430,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#: model:ir.ui.menu,name:spp_change_request.spp_change_request_pending_validation_root
 #, python-format
 msgid "For Validation"
 msgstr ""
