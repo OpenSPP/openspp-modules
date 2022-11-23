@@ -284,6 +284,85 @@ class ChangeRequestBase(models.Model):
             # Open Request Form
             return rec.open_change_request_form(target="current", mode="edit")
 
+    def prepare_directory(self):
+        self.ensure_one()
+        root_dir = self.env["dms.directory"].search(
+            [("is_root_directory", "=", True), ("name", "=", "Change Requests")]
+        )
+        if not root_dir:
+            res_model = self.request_type
+            storage = self.env.ref("spp_change_request.dms_change_request_storage")
+            root_dir = self.env["dms.directory"].create(
+                {
+                    "storage_id": storage.id,
+                    # "res_model": self,
+                    "group_ids": [(4, storage.field_default_group_id.id)],
+                    "name": "Change Requests",
+                    "is_root_directory": True,
+                }
+            )
+        root_dir = root_dir[0]
+
+        logging.info("Root Directory: %s", root_dir)
+
+        requests_dir = self.env["dms.directory"].search(
+            [("id", "child_of", root_dir.id), ("name", "=", self.request_type)]
+        )
+        if not requests_dir:
+            res_model = self.request_type
+            storage = self.env.ref(self.env[res_model].DMS_STORAGE)
+            requests_dir = self.env["dms.directory"].create(
+                {
+                    "name": self.request_type,
+                    # "storage_id": storage.id,
+                    "parent_id": root_dir.id,
+                    # "res_model": self.request_type,
+                    # "group_ids": [(4, root_dir.group_ids.ids)],
+                    "is_root_directory": False,
+                }
+            )
+
+        requests_dir = requests_dir[0]
+        logging.info("Requests Directory: %s", requests_dir)
+        return requests_dir
+
+    def create_folder_for_request(self):
+        self.ensure_one()
+        requests_dir = self.prepare_directory()
+        request_dir = self.env["dms.directory"].search(
+            [("id", "child_of", requests_dir.id), ("name", "=", self.name)]
+        )
+        logging.info("Request Directory before: %s", request_dir)
+        if not request_dir:
+            res_model = self.request_type
+            storage = self.env.ref(self.env[res_model].DMS_STORAGE)
+            request_dir = self.env["dms.directory"].create(
+                {
+                    "name": self.name,
+                    "storage_id": storage.id,
+                    "parent_id": requests_dir.id,
+                    "res_model": self.request_type,
+                    # "group_ids": [(4, requests_dir.group_ids.ids)],
+                    "is_root_directory": False,
+                }
+            )
+        logging.info("Request Directory after: %s", request_dir)
+        request_dir = request_dir[0]
+
+        applicant_dir = self.env["dms.directory"].search(
+            [("id", "child_of", request_dir.id), ("name", "=", "Applicant")]
+        )
+        if not applicant_dir:
+            self.env["dms.directory"].create(
+                {
+                    "name": "Applicant",
+                    "parent_id": request_dir.id,
+                    "is_root_directory": False,
+                }
+            )
+
+        return request_dir
+
     def create_request_detail(self):
         for rec in self:
             if rec.state in ("draft", "pending"):
@@ -313,6 +392,14 @@ class ChangeRequestBase(models.Model):
                         "dms_directory_ids": [(Command.create(dmsval))],
                     }
                 )
+                self.env["dms.directory"].create(
+                    {
+                        "name": "Applicant",
+                        "parent_id": ref_id.dms_directory_ids[0].id,
+                        "is_root_directory": False,
+                    }
+                )
+
                 ref_id._onchange_registrant_id()
                 request_type_ref_id = f"{res_model},{ref_id.id}"
                 _logger.debug("DEBUG! request_type_ref_id: %s", request_type_ref_id)
