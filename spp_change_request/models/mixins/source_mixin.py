@@ -192,7 +192,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     request.update(vals)
 
                     # Update the live data if the user has the access
-                    if self.AUTO_APPLY_CHANGES:
+                    if self.AUTO_APPLY_CHANGES and message == "FINAL":
                         try:
                             self.apply()
                         except UserError:
@@ -208,6 +208,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 raise ValidationError(
                     _("The request to be validated must be in submitted state.")
                 )
+        return
 
     def apply(self):
         for rec in self:
