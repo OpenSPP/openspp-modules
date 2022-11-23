@@ -5,10 +5,22 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
     <menuitem id="spp_change_request_menu_root" name="Change Request" sequence="1" />
     <menuitem
+        id="spp_change_request_pending_validation_root"
+        name="For Validation"
+        parent="spp_change_request_menu_root"
+        sequence="10"
+    />
+    <menuitem
         id="spp_change_request_request_root"
         name="Requests"
         parent="spp_change_request_menu_root"
-        sequence="1"
+        sequence="20"
+    />
+    <menuitem
+        id="spp_change_request_for_application_root"
+        name="For Application"
+        parent="spp_change_request_menu_root"
+        sequence="30"
     />
     <menuitem
         id="spp_change_request_config_root"
