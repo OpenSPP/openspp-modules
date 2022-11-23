@@ -196,6 +196,11 @@ msgid "Change Request Agent"
 msgstr ""
 
 #. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_applicator
+msgid "Change Request Applicator"
+msgstr ""
+
+#. module: spp_change_request
 #: model:dms.access.group,name:spp_change_request.dms_access_group
 msgid "Change Request DMS Group"
 msgstr ""
