@@ -271,7 +271,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             if request.state in ("draft", "pending"):
                 request.update(
                     {
-                        "state": "rejected",
+                        "state": "draft",
                     }
                 )
                 # Mark previous activity as 'done'

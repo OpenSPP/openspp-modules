@@ -101,6 +101,8 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             # Only allow the deletion of draft change requests by the user who created it
             if rec.state == "draft" and rec.create_uid == self.env.user:
+                # Remove the associated CR type record
+                rec.request_type_ref_id.unlink()
                 return super(ChangeRequestBase, self).unlink()
             else:
                 raise UserError(_("Only draft change requests can be deleted."))
