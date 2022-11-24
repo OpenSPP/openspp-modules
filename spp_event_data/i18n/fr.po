@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-24 12:22+0000\n"
+"PO-Revision-Date: 2022-11-25 13:22+0000\n"
 "Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_event_data/fr/>\n"
@@ -24,11 +24,13 @@ msgid ""
 "<span class=\"o_stat_text\">Event</span>\n"
 "                        <span class=\"o_stat_text\">Data</span>"
 msgstr ""
+"<span class=\"o_stat_text\">Événement</span> \n"
+"<span class=\"o_stat_text\">Données</span>"
 
 #. module: spp_event_data
 #: model:ir.model.fields.selection,name:spp_event_data.selection__spp_event_data__state__active
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #. module: spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.create_event_data_form_view
@@ -39,12 +41,14 @@ msgstr "Annuler"
 #: model_terms:ir.actions.act_window,help:spp_event_data.action_spp_event_data
 msgid "Click the create button to enter the configuration of the Event Data."
 msgstr ""
+"Cliquez sur le bouton Créer pour entrer dans la configuration des données "
+"d'événement."
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__collection_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__collection_date
 msgid "Collection Date"
-msgstr ""
+msgstr "Date de collecte"
 
 #. module: spp_event_data
 #: model:ir.model,name:spp_event_data.model_res_partner
@@ -55,13 +59,13 @@ msgstr "Contact"
 #: code:addons/spp_event_data/wizard/create_event_wizard.py:0
 #, python-format
 msgid "Create %s Wizard"
-msgstr ""
+msgstr "Créer un assistant %s"
 
 #. module: spp_event_data
 #: code:addons/spp_event_data/models/registrant.py:0
 #, python-format
 msgid "Create Event Data"
-msgstr ""
+msgstr "Créer des données d'événement"
 
 #. module: spp_event_data
 #: model:ir.model,name:spp_event_data.model_spp_create_event_wizard
@@ -71,7 +75,7 @@ msgstr "Créer un assistant d'événement"
 #. module: spp_event_data
 #: model_terms:ir.actions.act_window,help:spp_event_data.action_spp_event_data
 msgid "Create a new Event Data!"
-msgstr ""
+msgstr "Créez une nouvelle donnée d'événement !"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__create_uid
@@ -98,13 +102,13 @@ msgstr "Afficher un nom"
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_groups_event_data_form
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_individual_event_data_form
 msgid "Event Data"
-msgstr ""
+msgstr "Données d'événement"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_res_partner__event_data_ids
 #: model:ir.model.fields,field_description:spp_event_data.field_res_users__event_data_ids
 msgid "Event Data IDs"
-msgstr ""
+msgstr "ID de données d'événement"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__event_data_model
@@ -116,7 +120,7 @@ msgstr "Type d'événement"
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__expiry_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__expiry_date
 msgid "Expiry Date"
-msgstr ""
+msgstr "Date d'expiration"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__id
@@ -127,7 +131,7 @@ msgstr "ID"
 #. module: spp_event_data
 #: model:ir.model.fields.selection,name:spp_event_data.selection__spp_event_data__state__inactive
 msgid "Inactive"
-msgstr ""
+msgstr "Inactif"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard____last_update
@@ -155,31 +159,31 @@ msgstr "Nom"
 #. module: spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.create_event_data_form_view
 msgid "Next"
-msgstr ""
+msgstr "Prochain"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__partner_id
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__partner_id
 msgid "Partner"
-msgstr ""
+msgstr "Partenaire"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__registrar
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__registrar
 msgid "Registrar"
-msgstr ""
+msgstr "Greffier"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__model
 msgid "Related Document Model"
-msgstr ""
+msgstr "Modèle de document associé"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__res_id
 msgid "Related data"
-msgstr ""
+msgstr "Données associées"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__state
 msgid "State"
-msgstr ""
+msgstr "État"
