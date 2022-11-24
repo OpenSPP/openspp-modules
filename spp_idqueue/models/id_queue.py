@@ -2,7 +2,8 @@
 
 from datetime import date
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class OpenSPPIDQueue(models.Model):
@@ -24,6 +25,7 @@ class OpenSPPIDQueue(models.Model):
         [
             ("new", "New"),
             ("approved", "Approved"),
+            ("generated", "Generated"),
             ("printed", "Printed"),
             ("distributed", "Distributed"),
             ("cancelled", "Cancelled"),
@@ -35,28 +37,65 @@ class OpenSPPIDQueue(models.Model):
 
     batch_id = fields.One2many("spp.print.queue.batch", "queued_ids", string="Batch")
 
-    def approve(self):
+    def on_approve(self):
         for rec in self:
             rec.date_approved = date.today()
             rec.approved_by = self.env.user.id
             rec.status = "approved"
 
-    def print(self):
+    def on_generate(self):
+        # Make sure the ID is in the correct state before generating
+        # we allow to re-generate cards
+        self.generate_cards()
+
+    def on_print(self):
+        # as we return the PDF, we need to make sure that there is only 1 card selected
+        self.ensure_one()
+
+        # Make sure the ID is in the correct state before printing
+        if self.filtered(lambda x: x.status not in ["generated", "approved"]):
+            raise ValidationError(_("ID must be approved before printing"))
+
+        if self.filtered(lambda x: x.batch_id):
+            raise ValidationError(_("ID in a batch cannot be printed individually"))
+
+        if self.status == "approved":
+            # Not generated yet, generate it
+            res_id = self.generate_card(self)
+        else:
+            res_id = self.id_pdf
+
+        self.date_printed = date.today()
+        self.printed_by = self.env.user.id
+        self.status = "printed"
+        return res_id
+
+    def generate_cards(self):
+        if self.filtered(lambda x: x.status not in ["generated", "approved", "added_to_batch"]):
+            raise ValidationError(_("ID must be approved before printing"))
+
         for rec in self:
-            if rec.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id:
-                vals = {"idpass": self.idpass_id.id, "id_queue": self.id}
-                res_id = self.registrant_id.send_idpass_parameters(vals)
+            self.generate_card(rec)
+            rec.status = "generated"
 
-                rec.date_printed = date.today()
-                rec.printed_by = self.env.user.id
-                rec.status = "printed"
-                return res_id
+    def generate_card(self, card):
+        """
+        Generate ID card
+        Override this method to change the backend used to generate the ID card
+        """
+        if card.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id:
+            vals = {"idpass": self.idpass_id.id, "id_queue": self.id}
+            self.registrant_id.send_idpass_parameters(vals)
 
-    def cancel(self):
+    def on_cancel(self):
+        if self.filtered(lambda x: x.status in ["printed", "distributed"]):
+            raise ValidationError(_("ID cannot be canceled if it has been printed"))
         for rec in self:
             rec.status = "cancelled"
 
-    def distribute(self):
+    def on_distribute(self):
+        if self.filtered(lambda x: x.status in ["printed"]):
+            raise ValidationError(_("ID can only be distributed if it has been printed"))
         for rec in self:
             rec.date_distributed = date.today()
             rec.status = "distributed"

@@ -23,7 +23,7 @@
                     widget="badge"
                 />
                 <button
-                    name="approve"
+                    name="on_approve"
                     type="object"
                     icon="fa-check"
                     class="btn-success"
@@ -31,7 +31,7 @@
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
                 />
                 <button
-                    name="print"
+                    name="on_print"
                     type="object"
                     icon="fa-print"
                     class="btn-info"
@@ -39,7 +39,7 @@
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                 <button
-                    name="distribute"
+                    name="on_distribute"
                     type="object"
                     icon="fa-truck"
                     class="btn-info"
@@ -47,7 +47,7 @@
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                 <button
-                    name="cancel"
+                    name="on_cancel"
                     type="object"
                     icon="fa-ban"
                     class="btn-danger"
