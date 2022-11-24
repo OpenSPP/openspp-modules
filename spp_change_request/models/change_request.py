@@ -99,7 +99,8 @@ class ChangeRequestBase(models.Model):
 
     def unlink(self):
         for rec in self:
-            if rec.state == "draft":
+            # Only allow the deletion of draft change requests by the user who created it
+            if rec.state == "draft" and rec.create_uid == self.env.user:
                 return super(ChangeRequestBase, self).unlink()
             else:
                 raise UserError(_("Only draft change requests can be deleted."))
