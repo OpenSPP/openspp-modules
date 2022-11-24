@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-23 09:35+0000\n"
+"PO-Revision-Date: 2022-11-24 12:22+0000\n"
 "Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_event_data/fr/>\n"
@@ -33,7 +33,7 @@ msgstr ""
 #. module: spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.create_event_data_form_view
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: spp_event_data
 #: model_terms:ir.actions.act_window,help:spp_event_data.action_spp_event_data
@@ -49,7 +49,7 @@ msgstr ""
 #. module: spp_event_data
 #: model:ir.model,name:spp_event_data.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #. module: spp_event_data
 #: code:addons/spp_event_data/wizard/create_event_wizard.py:0
@@ -66,7 +66,7 @@ msgstr ""
 #. module: spp_event_data
 #: model:ir.model,name:spp_event_data.model_spp_create_event_wizard
 msgid "Create Event Wizard"
-msgstr ""
+msgstr "Créer un assistant d'événement"
 
 #. module: spp_event_data
 #: model_terms:ir.actions.act_window,help:spp_event_data.action_spp_event_data
@@ -110,7 +110,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__event_data_model
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__event_type
 msgid "Event Type"
-msgstr ""
+msgstr "Type d'événement"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__expiry_date
@@ -122,7 +122,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__id
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: spp_event_data
 #: model:ir.model.fields.selection,name:spp_event_data.selection__spp_event_data__state__inactive
@@ -133,24 +133,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard____last_update
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Modification le"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__write_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Mise à jour le"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__name
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.create_event_data_form_view
