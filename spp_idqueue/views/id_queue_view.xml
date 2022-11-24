@@ -58,6 +58,21 @@
         </field>
     </record>
 
+    <record id="view_spp_idqueue_filter" model="ir.ui.view">
+        <field name="name">view_spp_idqueue_filter</field>
+        <field name="model">spp.print.queue.id</field>
+        <field name="arch" type="xml">
+            <search string="Search Partner">
+                <filter string="New" name="new" domain="[('status', '=', 'new')]" />
+                <filter string="Approved" name="approved" domain="[('status', '=', 'approved')]" />
+                <filter string="Generated" name="generated" domain="[('status', '=', 'generated')]" />
+                <filter string="Printed" name="printed" domain="[('status', '=', 'printed')]" />
+                <filter string="Distributed" name="distributed" domain="[('status', '=', 'distributed')]" />
+                <filter string="Cancelled" name="cancelled" domain="[('status', '=', 'cancelled')]" />
+            </search>
+        </field>
+    </record>
+
     <record id="action_spp_idqueue" model="ir.actions.act_window">
         <field name="name">ID Requests Queue</field>
         <field name="type">ir.actions.act_window</field>
@@ -65,6 +80,7 @@
         <field name="view_mode">tree</field>
         <field name="context">{}</field>
         <field name="domain">[]</field>
+        <field name="search_view_id" ref="view_spp_idqueue_filter" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new ID Queue!
