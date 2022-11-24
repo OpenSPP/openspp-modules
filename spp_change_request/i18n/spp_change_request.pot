@@ -699,12 +699,6 @@ msgid "Phone Numbers"
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format
-msgid "Please upload the required document type: %s"
-msgstr ""
-
-#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__registrant_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__individual_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__registrant_id
