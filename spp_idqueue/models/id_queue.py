@@ -2,7 +2,7 @@
 
 from datetime import date
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -71,7 +71,9 @@ class OpenSPPIDQueue(models.Model):
         return res_id
 
     def generate_cards(self):
-        if self.filtered(lambda x: x.status not in ["generated", "approved", "added_to_batch"]):
+        if self.filtered(
+            lambda x: x.status not in ["generated", "approved", "added_to_batch"]
+        ):
             raise ValidationError(_("ID must be approved before printing"))
 
         for rec in self:
@@ -95,7 +97,9 @@ class OpenSPPIDQueue(models.Model):
 
     def on_distribute(self):
         if self.filtered(lambda x: x.status in ["printed"]):
-            raise ValidationError(_("ID can only be distributed if it has been printed"))
+            raise ValidationError(
+                _("ID can only be distributed if it has been printed")
+            )
         for rec in self:
             rec.date_distributed = date.today()
             rec.status = "distributed"
