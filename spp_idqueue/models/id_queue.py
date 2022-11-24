@@ -33,7 +33,7 @@ class OpenSPPIDQueue(models.Model):
     id_pdf = fields.Binary("ID PASS")
     id_pdf_filename = fields.Char("ID File Name")
 
-    # batch_id = fields.One2many("spp.print.queue.batch", "queued_ids", string="Batch")
+    batch_id = fields.One2many("spp.print.queue.batch", "queued_ids", string="Batch")
 
     def approve(self):
         for rec in self:

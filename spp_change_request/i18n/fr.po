@@ -6,13 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-11-23 09:35+0000\n"
+"Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
+"Language-Team: French <https://translate.openspp.org/projects/openspp/"
+"spp_change_request/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"Language: C\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
@@ -21,83 +24,85 @@ msgid ""
 "A new change request was submitted. The next step will set this request to "
 "'Pending Validation'."
 msgstr ""
+"Une nouvelle demande de modification a été soumise. L'étape suivante "
+"définira cette demande sur \"Validation en attente\"."
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Action nécessaire"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Activités"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Décoration d'exception d'activité"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "État d'activité"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icône du type d'activité"
 
 #. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
 msgid "Add a new change request!"
-msgstr ""
+msgstr "Ajoutez une nouvelle demande de modification !"
 
 #. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validation_sequence
 msgid "Add a new validation sequence by request type!"
-msgstr ""
+msgstr "Ajoutez une nouvelle séquence de validation par type de requête !"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__group_address
 msgid "Address"
-msgstr ""
+msgstr "Adresse"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__age
 msgid "Age"
-msgstr ""
+msgstr "Âge"
 
 #. module: spp_change_request
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request
 #: model:ir.ui.menu,name:spp_change_request.menu_change_request
 msgid "All Requests"
-msgstr ""
+msgstr "Toutes les demandes"
 
 #. module: spp_change_request
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__applied
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Applied"
-msgstr ""
+msgstr "Appliqué"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__appliedby_id
 msgid "Applied by"
-msgstr ""
+msgstr "Appliqué par"
 
 #. module: spp_change_request
 #: model:mail.activity.type,name:spp_change_request.apply_changes_activity
 msgid "Apply Change Request"
-msgstr ""
+msgstr "Appliquer la demande de modification"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Apply Changes"
-msgstr ""
+msgstr "Appliquer les modifications"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Nombre de pièces jointes"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request
@@ -106,53 +111,53 @@ msgstr ""
 #: model:ir.ui.menu,name:spp_change_request.spp_change_request_menu_root
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Change Request"
-msgstr ""
+msgstr "Changer de requête"
 
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_administrator
 msgid "Change Request Administrator"
-msgstr ""
+msgstr "Administrateur des demandes de modification"
 
 #. module: spp_change_request
 #: model:dms.access.group,name:spp_change_request.dms_access_group
 msgid "Change Request DMS Group"
-msgstr ""
+msgstr "Groupe DMS de demande de changement"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_source_mixin
 msgid "Change Request Data Source Mixin"
-msgstr ""
+msgstr "Mélange de source de données de demande de modification"
 
 #. module: spp_change_request
 #: model:mail.activity.type,name:spp_change_request.validation_activity
 msgid "Change Request For Validation"
-msgstr ""
+msgstr "Demande de modification pour validation"
 
 #. module: spp_change_request
 #: model:ir.module.category,name:spp_change_request.spp_change_request_module
 msgid "Change Request Module Access"
-msgstr ""
+msgstr "Accès au module de demande de modification"
 
 #. module: spp_change_request
 #: model:mail.activity.type,name:spp_change_request.pending_validation_activity
 msgid "Change Request Pending Validation"
-msgstr ""
+msgstr "Demande de modification en attente de validation"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__request_type_ref_id
 msgid "Change Request Template"
-msgstr ""
+msgstr "Modèle de demande de modification"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__validation_group_id
 msgid "Change Request Validation Group"
-msgstr ""
+msgstr "Groupe de validation des demandes de changement"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_validation_sequence
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_form
 msgid "Change Request Validation Sequence"
-msgstr ""
+msgstr "Séquence de validation de la demande de changement"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_validation_sequence_mixin
@@ -162,33 +167,35 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_validation_stage
 msgid "Change Request Validation Stage"
-msgstr ""
+msgstr "Étape de validation de la demande de modification"
 
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_validator
 msgid "Change Request Validator"
-msgstr ""
+msgstr "Validateur de demande de changement"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_validators
 msgid "Change Request Validators"
-msgstr ""
+msgstr "Validateurs de demande de changement"
 
 #. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
 msgid "Click the create button to enter a new change request."
 msgstr ""
+"Cliquez sur le bouton Créer pour saisir une nouvelle demande de modification."
 
 #. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validation_sequence
 msgid "Click the create button to enter a new validation sequence."
 msgstr ""
+"Cliquez sur le bouton Créer pour saisir une nouvelle séquence de validation."
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__company_id
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
 msgid "Company"
-msgstr ""
+msgstr "Compagnie"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
@@ -198,7 +205,7 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.ui.menu,name:spp_change_request.spp_change_request_config_root
 msgid "Configuration"
-msgstr ""
+msgstr "Configuration"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__create_uid
@@ -207,7 +214,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__create_date
@@ -216,7 +223,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé sur"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__dms_directory_ids
@@ -227,29 +234,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__dms_directory_ids
 msgid "DMS Directories"
-msgstr ""
+msgstr "Annuaires DMS"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_applied
 msgid "Date Applied"
-msgstr ""
+msgstr "Date d'application"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_requested
 msgid "Date Requested"
-msgstr ""
+msgstr "Date demandée"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_validated
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__date_validated
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__date_validated
 msgid "Date Validated"
-msgstr ""
+msgstr "Date de Validation"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__birthdate
 msgid "Date of Birth"
-msgstr ""
+msgstr "Date de naissance"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__display_name
@@ -258,24 +265,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Afficher un nom"
 
 #. module: spp_change_request
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__draft
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "ERROR!"
-msgstr ""
+msgstr "ERREUR!"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__end_date
 msgid "End Date"
-msgstr ""
+msgstr "Date de fin"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
@@ -283,16 +290,18 @@ msgstr ""
 msgid ""
 "Error in validation stages. No available stage to assign to this validation."
 msgstr ""
+"Erreur dans les étapes de validation. Aucune étape disponible à affecter à "
+"cette validation."
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Abonnés"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Abonnés (Partenaires)"
 
 #. module: spp_change_request
 #: model:ir.model.fields,help:spp_change_request.field_spp_change_request__activity_type_icon
@@ -303,13 +312,13 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "For Pending Validation"
-msgstr ""
+msgstr "Validation en attente"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "For Validation"
-msgstr ""
+msgstr "Pour validation"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter

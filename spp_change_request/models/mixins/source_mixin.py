@@ -98,12 +98,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             ValidationError: Exception raised when something is not valid.
         """
         self.ensure_one()
-        # for document_type in self.REQUIRED_DOCUMENT_TYPE:
-        #    # TODO: Check the required documents
-        #    if True:
-        #        raise ValidationError(
-        #            _("Please upload the required document type: %s", document_type)
-        #        )
 
     def on_submit(self):
         for rec in self:
@@ -205,6 +199,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                                 "User %s does not have access to apply changes."
                                 % self.env.user
                             )
+                            # revert the assignment if the apply failed
+                            request.update({"assign_to_id": None})
                 else:
                     raise ValidationError(message)
             else:

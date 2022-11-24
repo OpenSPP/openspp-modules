@@ -19,5 +19,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="perm_write" eval="True" />
         <field name="perm_unlink" eval="True" />
     </record>
+    <record id="dms_change_request_storage" model="dms.storage">
+        <field name="name">Change Requests storage</field>
+        <field name="save_type">file</field>
+        <field name="field_default_group_id" ref="spp_change_request.dms_access_group" />
+    </record>
 
 </odoo>
