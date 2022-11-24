@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-02 07:22+0000\n"
+"PO-Revision-Date: 2022-11-25 13:22+0000\n"
 "Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_idqueue/ar/>\n"
@@ -105,13 +105,13 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__date_requested
 msgid "Date Requested"
-msgstr ""
+msgstr "تاريخ الطلب"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_id_queue__display_name
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_request_id_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_id_queue__status__distributed
