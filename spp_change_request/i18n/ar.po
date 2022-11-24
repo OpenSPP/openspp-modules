@@ -6,14 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-11-25 13:22+0000\n"
+"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
+"spp_change_request/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
@@ -26,12 +29,12 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "الإجراء اللازم"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "أنشطة"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_exception_decoration
@@ -41,7 +44,7 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "حالة النشاط"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_type_icon
@@ -51,7 +54,7 @@ msgstr ""
 #. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
 msgid "Add a new change request!"
-msgstr ""
+msgstr "أضف طلب تغيير جديد!"
 
 #. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validation_sequence
@@ -61,44 +64,44 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__group_address
 msgid "Address"
-msgstr ""
+msgstr "عنوان"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__age
 msgid "Age"
-msgstr ""
+msgstr "العمر"
 
 #. module: spp_change_request
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request
 #: model:ir.ui.menu,name:spp_change_request.menu_change_request
 msgid "All Requests"
-msgstr ""
+msgstr "كل الطلبات"
 
 #. module: spp_change_request
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__applied
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Applied"
-msgstr ""
+msgstr "مُطبَّق"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__appliedby_id
 msgid "Applied by"
-msgstr ""
+msgstr "تم التطبيق بواسطة"
 
 #. module: spp_change_request
 #: model:mail.activity.type,name:spp_change_request.apply_changes_activity
 msgid "Apply Change Request"
-msgstr ""
+msgstr "تطبيق طلب التغيير"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Apply Changes"
-msgstr ""
+msgstr "اعتماد التغيير"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "عدد المرفقات"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request
@@ -107,12 +110,12 @@ msgstr ""
 #: model:ir.ui.menu,name:spp_change_request.spp_change_request_menu_root
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Change Request"
-msgstr ""
+msgstr "معاملة"
 
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_administrator
 msgid "Change Request Administrator"
-msgstr ""
+msgstr "مسؤول الطلب او المعاملة"
 
 #. module: spp_change_request
 #: model:dms.access.group,name:spp_change_request.dms_access_group
@@ -132,28 +135,28 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.module.category,name:spp_change_request.spp_change_request_module
 msgid "Change Request Module Access"
-msgstr ""
+msgstr "الدخول الى وحدة المعاملات"
 
 #. module: spp_change_request
 #: model:mail.activity.type,name:spp_change_request.pending_validation_activity
 msgid "Change Request Pending Validation"
-msgstr ""
+msgstr "الطلب معلق للتحقق"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__request_type_ref_id
 msgid "Change Request Template"
-msgstr ""
+msgstr "نموذج الطلب"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__validation_group_id
 msgid "Change Request Validation Group"
-msgstr ""
+msgstr "مجموعة التحقق من صحة الطلب"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_validation_sequence
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_form
 msgid "Change Request Validation Sequence"
-msgstr ""
+msgstr "تسلسل التحقق للمعاملة"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_validation_sequence_mixin
@@ -163,17 +166,17 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_validation_stage
 msgid "Change Request Validation Stage"
-msgstr ""
+msgstr "مرحلة التحقق من المعاملة"
 
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_validator
 msgid "Change Request Validator"
-msgstr ""
+msgstr "مدقق المعاملة"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_validators
 msgid "Change Request Validators"
-msgstr ""
+msgstr "مدققون المعاملات"
 
 #. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
@@ -188,8 +191,9 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__company_id
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
+#, fuzzy
 msgid "Company"
-msgstr ""
+msgstr "شركة"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
@@ -199,7 +203,7 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.ui.menu,name:spp_change_request.spp_change_request_config_root
 msgid "Configuration"
-msgstr ""
+msgstr "الاعدادات"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__create_uid
@@ -208,7 +212,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "انشأ من قبل"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__create_date
@@ -217,7 +221,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__create_date
 msgid "Created on"
-msgstr ""
+msgstr "انشأ على"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__dms_directory_ids
@@ -238,19 +242,19 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_requested
 msgid "Date Requested"
-msgstr ""
+msgstr "تاريخ الطلب"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_validated
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__date_validated
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__date_validated
 msgid "Date Validated"
-msgstr ""
+msgstr "تاريخ التحقق"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__birthdate
 msgid "Date of Birth"
-msgstr ""
+msgstr "تاريخ الميلاد"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__display_name
@@ -259,24 +263,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: spp_change_request
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__draft
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Draft"
-msgstr ""
+msgstr "مسودة"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "ERROR!"
-msgstr ""
+msgstr "خطأ!"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__end_date
 msgid "End Date"
-msgstr ""
+msgstr "تاريخ الانتهاء"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
@@ -304,13 +308,13 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "For Pending Validation"
-msgstr ""
+msgstr "انتظار التحقق"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "For Validation"
-msgstr ""
+msgstr "للتحقق"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
@@ -340,7 +344,7 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "أيقونة"
 
 #. module: spp_change_request
 #: model:ir.model.fields,help:spp_change_request.field_spp_change_request__activity_exception_icon
@@ -376,7 +380,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage____last_update
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "تاريخ آخر تعديل"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__write_uid
@@ -385,7 +389,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__write_date
@@ -394,12 +398,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__validatedby_id
 msgid "Last Validator"
-msgstr ""
+msgstr "اخر مدقق"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_main_attachment_id
