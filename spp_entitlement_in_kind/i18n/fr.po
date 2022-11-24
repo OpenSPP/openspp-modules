@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-10-07 09:22+0000\n"
+"PO-Revision-Date: 2022-11-25 13:22+0000\n"
 "Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_entitlement_in_kind/fr/>\n"
@@ -49,11 +49,13 @@ msgstr "Approuver la prestation"
 #: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_manager_inkind
 msgid "Click the create button to enter a new in-kind entitlement manager."
 msgstr ""
+"Cliquez sur le bouton Créer pour saisir un nouveau gestionnaire de droits en "
+"nature."
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_inkind
 msgid "Click the create button to enter the new In-kind entitlement."
-msgstr ""
+msgstr "Cliquez sur le bouton créer pour entrer le nouveau droit en nature."
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
@@ -181,6 +183,8 @@ msgid ""
 "For inventory management, the warehouse is required in the In-kind "
 "entitlement manager."
 msgstr ""
+"Pour la gestion des stocks, l'entrepôt est requis dans le gestionnaire de "
+"droits en nature."
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.entitlement_manager_inkind_filter
@@ -198,12 +202,12 @@ msgstr "ID"
 #: model:ir.model.fields.selection,name:spp_entitlement_in_kind.selection__g2p_program_create_wizard__entitlement_kind__inkind
 #: model:ir.ui.menu,name:spp_entitlement_in_kind.g2p_inkind_root
 msgid "In-Kind"
-msgstr ""
+msgstr "En nature"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
 msgid "In-Kind Entitlement"
-msgstr ""
+msgstr "Droit en nature"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__inkind_item_id
