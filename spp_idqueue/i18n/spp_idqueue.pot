@@ -35,6 +35,16 @@ msgid "Auto-approve ID Requests"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__batch_id
+msgid "Batch"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__name
+msgid "Batch name"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
 msgid "Cancel"
 msgstr ""
@@ -71,12 +81,14 @@ msgid "Create a new ID Queue!"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__create_uid
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__create_uid
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__create_date
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__create_date
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__create_date
 msgid "Created on"
@@ -85,6 +97,7 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_res_config_settings__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_idqueue.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__dms_directory_ids
 msgid "DMS Directories"
@@ -111,6 +124,7 @@ msgid "Date Requested"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__display_name
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__display_name
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__display_name
 msgid "Display Name"
@@ -127,6 +141,12 @@ msgid "File"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__generated
+msgid "Generated"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__id
 msgid "ID"
@@ -138,11 +158,13 @@ msgid "ID Distributor"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__id_pdf_filename
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id_pdf_filename
 msgid "ID File Name"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__id_pdf
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id_pdf
 msgid "ID PASS"
 msgstr ""
@@ -181,6 +203,11 @@ msgid "ID Validator"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model,name:spp_idqueue.model_spp_print_queue_batch
+msgid "ID print Batch"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__idpass_id
 msgid "IDPass ID"
 msgstr ""
@@ -202,29 +229,34 @@ msgid "Is Idpass"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch____last_update
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id____last_update
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__write_uid
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__write_uid
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__write_date
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__write_date
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__new
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__new
 msgid "New"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__printed
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__printed
 msgid "Printed"
 msgstr ""
@@ -232,6 +264,16 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__printed_by
 msgid "Printed By"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__printing
+msgid "Printing"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__queued_ids
+msgid "Queued IDs"
 msgstr ""
 
 #. module: spp_idqueue
@@ -273,6 +315,7 @@ msgid "Settings"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__status
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__status
 msgid "Status"
 msgstr ""
