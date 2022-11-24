@@ -1,0 +1,198 @@
+<odoo>
+    <record id="view_spp_print_queue_batch_tree" model="ir.ui.view">
+        <field name="name">view_spp_print_queue_batch_tree</field>
+        <field name="model">spp.print.queue.batch</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="name" />
+                <field name="queued_ids" />
+                <field name="id_pdf" filename="id_pdf_filename" widget="binary" string="File" />
+                <field name="id_pdf_filename" invisible="1" />
+                <field name="create_date" />
+                <field
+                    name="status"
+                    decoration-warning="status=='new'"
+                    decoration-success="status=='generated'"
+                    decoration-info="status=='printing'"
+                    decoration-primary="status=='printed'"
+                    widget="badge"
+                />
+                <button
+                    name="generate_batch"
+                    type="object"
+                    icon="fa-check"
+                    class="btn-success"
+                    attrs="{'invisible': [('status', '!=', 'new')]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
+                />
+                <button
+                    name="print_batch"
+                    type="object"
+                    icon="fa-print"
+                    class="btn-info"
+                    attrs="{'invisible': [('status', '!=', 'generated')]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                />
+                <button
+                    name="batch_printed"
+                    type="object"
+                    icon="fa-truck"
+                    class="btn-info"
+                    attrs="{'invisible': [('status', '!=', 'printing')]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                />
+            </tree>
+        </field>
+    </record>
+    <record id="view_spp_print_queue_batch_form" model="ir.ui.view">
+        <field name="name">view_spp_print_queue_batch_form</field>
+        <field name="model">spp.print.queue.batch</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                        <button
+                        name="generate_batch"
+                        type="object"
+                        string="Generate Batch"
+                        icon="fa-check"
+                        class="btn-primary"
+                        attrs="{'invisible': [('status', '!=', 'new')]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                    />
+                        <button
+                        name="print_batch"
+                        type="object"
+                        string="Print Batch"
+                        icon="fa-print"
+                        class="btn-primary"
+                        attrs="{'invisible': [('status', '!=', 'generated')]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                    />
+                        <button
+                        name="batch_printed"
+                        type="object"
+                        string="Batch Printed"
+                        icon="fa-truck"
+                        class="btn-success"
+                        attrs="{'invisible': [('status', '!=', 'printing')]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                    />
+                    </header>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="New"
+                        bg_color="bg-warning"
+                        attrs="{'invisible': [('status', '!=', 'new')]}"
+                    />
+                    <widget
+                        name="web_ribbon"
+                        title="Generated"
+                        bg_color="bg-success"
+                        attrs="{'invisible': [('status', '!=', 'generated')]}"
+                    />
+                    <widget
+                        name="web_ribbon"
+                        title="Printing"
+                        bg_color="bg-info"
+                        attrs="{'invisible': [('status', '!=', 'printing')]}"
+                    />
+                    <widget
+                        name="web_ribbon"
+                        title="Printed"
+                        bg_color="bg-primary"
+                        attrs="{'invisible': [('status', '!=', 'printed')]}"
+                    />
+                    <div class="oe_title">
+                        <h1>
+                            <label for="name" string="Batch Name" />
+                        </h1>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                        <div class="o_row">
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Batch Details">
+                            <group>
+                                <field
+                                    name="id_pdf"
+                                    filename="id_pdf_filename"
+                                    widget="binary"
+                                    string="File"
+                                    readonly="1"
+                                />
+                                <field name="id_pdf_filename" invisible="1" />
+                                <field name="create_date" readonly="1" />
+                                <field name="queued_ids" readonly="1">
+                                    <tree>
+                                        <field name="registrant_id" />
+                                        <field name="id_type" string="ID Type" />
+                                        <field name="requested_by" />
+                                        <field name="date_requested" />
+                                        <field name="date_printed" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <field name="status" invisible="1" />
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_spp_print_queue_batch_filter" model="ir.ui.view">
+        <field name="name">view_spp_print_queue_batch_filter</field>
+        <field name="model">spp.print.queue.batch</field>
+        <field name="arch" type="xml">
+            <search string="Search Print Batch">
+                <filter string="New" name="new" domain="[('status', '=', 'new')]" />
+                <filter string="Generated" name="generated" domain="[('status', '=', 'generated')]" />
+                <filter string="Printing" name="printing" domain="[('status', '=', 'printing')]" />
+                <filter string="Printed" name="printed" domain="[('status', '=', 'printed')]" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_spp_print_queue_batch" model="ir.actions.act_window">
+        <field name="name">ID Print Batch</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.print.queue.batch</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="search_view_id" ref="view_spp_print_queue_batch_filter" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new ID Batch!
+            </p><p>
+                Click the create button to enter the information of the ID Batch.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_print_queue_batch_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_spp_print_queue_batch_tree" />
+        <field name="act_window_id" ref="action_spp_print_queue_batch" />
+    </record>
+    <record id="action_spp_print_queue_batch_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_print_queue_batch_form" />
+        <field name="act_window_id" ref="action_spp_print_queue_batch" />
+    </record>
+
+    <menuitem
+        id="menu_spp_print_queue_batch"
+        name="ID Print Batch"
+        action="action_spp_print_queue_batch"
+        parent="spp_idqueue.menuspp_id_mgmt"
+        sequence="11"
+        groups="g2p_registry_base.group_g2p_admin,group_g2p_id_validator,group_g2p_id_distributor"
+    />
+</odoo>

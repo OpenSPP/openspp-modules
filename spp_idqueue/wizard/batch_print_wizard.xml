@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="batch_print_wizard_form_view" model="ir.ui.view">
+        <field name="name">batch_print_wizard_form_view</field>
+        <field name="model">spp.batch.print.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <label for="name" string="Batch Name" />
+                        </h1>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                        <div class="o_row">
+                        </div>
+                    </div>
+                    <group>
+                        <field name="queue_ids" string="ID Request" readonly="1">
+                            <tree readonly="1">
+                                <field name="registrant_id" />
+                                <field name="date_requested" />
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <field name="id_count" readonly="1" />
+                        <field name="max_id_per_batch" />
+                        <field name="batches_count" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="print_batch" string="Print Batch" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

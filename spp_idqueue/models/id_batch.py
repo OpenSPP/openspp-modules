@@ -11,7 +11,7 @@ class OpenSPPPrintBatch(models.Model):
     name = fields.Char("Batch name")
 
     #  We should only allow `approved` id to be added to a batch
-    queued_ids = fields.Many2one("spp.print.queue.id", string="Queued IDs")
+    queued_ids = fields.One2many("spp.print.queue.id", "batch_id", string="Queued IDs")
 
     status = fields.Selection(
         [
@@ -25,3 +25,16 @@ class OpenSPPPrintBatch(models.Model):
 
     id_pdf = fields.Binary("ID PASS")
     id_pdf_filename = fields.Char("ID File Name")
+
+    def generate_batch(self):
+        for rec in self:
+            rec.status = "generated"
+            # Todo: Generate batch
+
+    def print_batch(self):
+        for rec in self:
+            rec.status = "printing"
+
+    def batch_printed(self):
+        for rec in self:
+            rec.status = "printed"

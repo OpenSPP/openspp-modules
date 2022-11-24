@@ -13,6 +13,7 @@
                 <field name="date_printed" />
                 <field name="id_pdf" filename="id_pdf_filename" widget="binary" string="File" />
                 <field name="id_pdf_filename" invisible="1" />
+                <field name="batch_id" />
                 <field
                     name="status"
                     decoration-muted="status=='new'"
@@ -27,7 +28,7 @@
                     type="object"
                     icon="fa-check"
                     class="btn-success"
-                    attrs="{'invisible': [('status', '!=', 'new')]}"
+                    attrs="{'invisible': ['|',('status', '!=', 'new'),('batch_id', '!=', False)]}"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
                 />
                 <button
@@ -35,7 +36,7 @@
                     type="object"
                     icon="fa-print"
                     class="btn-info"
-                    attrs="{'invisible': [('status', '!=', 'approved')]}"
+                    attrs="{'invisible': ['|',('status', '!=', 'approved'),('batch_id', '!=', False)]}"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                 <button
@@ -43,7 +44,7 @@
                     type="object"
                     icon="fa-truck"
                     class="btn-info"
-                    attrs="{'invisible': [('status', '!=', 'printed')]}"
+                    attrs="{'invisible': ['|',('status', '!=', 'printed'),('batch_id', '!=', False)]}"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                 <button
@@ -51,7 +52,7 @@
                     type="object"
                     icon="fa-ban"
                     class="btn-danger"
-                    attrs="{'invisible': [('status', 'in', ('cancelled', 'printed', 'distributed'))]}"
+                    attrs="{'invisible': ['|',('status', 'in', ('cancelled', 'printed', 'distributed')),('batch_id', '!=', False)]}"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
                 />
             </tree>
@@ -98,11 +99,27 @@
     </record>
 
     <menuitem
+        id="menuspp_id_mgmt"
+        name="ID Management"
+        parent="g2p_registry_base.g2p_main_menu_root"
+        sequence="901"
+    />
+
+    <menuitem
         id="menu_spp_idqueue"
         name="ID Requests Queue"
         action="action_spp_idqueue"
-        parent="g2p_registry_base.g2p_main_menu_root"
-        sequence="901"
+        parent="spp_idqueue.menuspp_id_mgmt"
+        sequence="10"
         groups="g2p_registry_base.group_g2p_admin,group_g2p_id_validator,group_g2p_id_distributor"
     />
+
+    <record model="ir.actions.server" id="id_batch_print">
+      <field name="name">Batch Print</field>
+      <field name="model_id" ref="spp_idqueue.model_spp_batch_print_wizard" />
+      <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_id" />
+      <field name="binding_view_types">list</field>
+      <field name="state">code</field>
+      <field name="code">action = model.open_wizard()</field>
+    </record>
 </odoo>
