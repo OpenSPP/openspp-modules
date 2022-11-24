@@ -9,10 +9,20 @@
                 <field name="api_url" />
                 <field name="api_username" />
                 <field name="api_password" />
+                <field name="auth_token_url" />
+                <field name="auth_token" />
                 <field name="filename_prefix" />
                 <field name="expiry_length" />
                 <field name="expiry_length_type" />
                 <field name="is_active" />
+                <button
+                    name="generate_auth_token"
+                    type="object"
+                    icon="fa-key"
+                    class="btn-success"
+                    attrs="{'invisible': [('auth_token', '!=', False)]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
+                />
             </tree>
         </field>
     </record>
