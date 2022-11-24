@@ -53,8 +53,19 @@ class ChangeRequestBase(models.Model):
     assign_to_id = fields.Many2one("res.users", "Assigned to")
     last_validated_by_id = fields.Many2one("res.users", "Validated by")
     date_validated = fields.Datetime()
+
+    # TODO: Record the next validation sequence and area center
+    next_validation_sequence_id = fields.Many2one(
+        "spp.change.request.validation.sequence", "Next Validation Sequence"
+    )
+    next_area_center_ids = fields.Many2many("spp.area", string="Next Center Area")
+
     applied_by_id = fields.Many2one("res.users", "Applied by")
     date_applied = fields.Datetime()
+    rejected_by_id = fields.Many2one("res.users", "Rejected by")
+    date_rejected = fields.Datetime()
+    rejected_remarks = fields.Text("Rejection Remarks")
+
     last_activity_id = fields.Many2one("mail.activity")
     state = fields.Selection(
         [
@@ -85,6 +96,13 @@ class ChangeRequestBase(models.Model):
         activity = res._generate_activity(activity_type, summary, note)
         res["last_activity_id"] = activity.id
         return res
+
+    def unlink(self):
+        for rec in self:
+            if rec.state == "draft":
+                return super(ChangeRequestBase, self).unlink()
+            else:
+                raise UserError(_("Only draft change requests can be deleted."))
 
     @api.model
     def _selection_request_type_ref_id(self):
@@ -348,8 +366,17 @@ class ChangeRequestBase(models.Model):
             rec.request_type_ref_id._apply(rec)
 
     def on_reject(self):
-        for rec in self:
-            rec.request_type_ref_id._on_reject(rec)
+        form_id = self.env.ref("spp_change_request.change_request_reject_wizard").id
+        action = {
+            "name": _("Reject Change Request"),
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "view_id": form_id,
+            "view_type": "form",
+            "res_model": "spp.change.request.reject.wizard",
+            "target": "new",
+        }
+        return action
 
     def _check_user(self, process, auto_assign=False):
         self.ensure_one()

@@ -12,7 +12,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     _description = "Change Request Data Source Mixin"
     _rec_name = "change_request_id"
 
-    required_document_type = []
+    REQUIRED_DOCUMENT_TYPE = []
     AUTO_APPLY_CHANGES = True
 
     registrant_id = fields.Many2one(
@@ -247,7 +247,20 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def on_reject(self):
         for rec in self:
-            rec._on_reject(rec.change_request_id)
+            form_id = self.env.ref("spp_change_request.change_request_reject_wizard").id
+            action = {
+                "name": _("Reject Change Request"),
+                "type": "ir.actions.act_window",
+                "view_mode": "form",
+                "view_id": form_id,
+                "view_type": "form",
+                "res_model": "spp.change.request.reject.wizard",
+                "target": "new",
+                "context": {
+                    "change_request_id": rec.change_request_id.id,
+                },
+            }
+            return action
 
     def _on_reject(self, request):
         """
