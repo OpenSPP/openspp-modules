@@ -1,6 +1,13 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
+import json
+import logging
+
+import requests
+
 from odoo import fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class OpenSPPIDPass(models.Model):
@@ -18,5 +25,26 @@ class OpenSPPIDPass(models.Model):
         "Length Type",
         default="years",
     )
+    auth_token_url = fields.Text()
+    auth_token = fields.Text()
     is_active = fields.Boolean("Active")
     id_type = fields.Many2one("g2p.id.type")
+
+    def generate_auth_token(self):
+        for rec in self:
+            if rec.auth_token_url and rec.api_username and rec.api_password:
+                data = {"username": rec.api_username, "password": rec.api_password}
+                headers = {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                }
+
+                response = requests.post(
+                    rec.auth_token_url,
+                    data=json.dumps(data),
+                    headers=headers,
+                )
+                if response.status_code == 200:
+                    response_json = response.json()
+                    rec.auth_token = response_json["token"]
+        return

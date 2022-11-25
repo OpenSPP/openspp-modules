@@ -1,15 +1,23 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 spp_idqueue_admin,ID Queue Admin Access,spp_idqueue.model_spp_print_queue_id,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_idbatch_admin,ID Batch Admin Access,spp_idqueue.model_spp_print_queue_batch,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_request_id_wizard_admin,Request ID Wizard Admin Access,spp_idqueue.model_spp_print_queue_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_batch_create_wizard_admin,Batch Create Wizard Admin Access,spp_idqueue.model_spp_batch_create_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
 
 spp_idqueue_requestor,ID Queue Requestor Access,spp_idqueue.model_spp_print_queue_id,spp_idqueue.group_g2p_id_requestor,1,1,1,0
 spp_request_id_wizard_requestor,Request ID Wizard Requestor Access,spp_idqueue.model_spp_print_queue_wizard,spp_idqueue.group_g2p_id_requestor,1,1,1,0
 spp_idqueue_request_requestor,Request ID Wizard Requestor Access,spp_idqueue.model_spp_print_queue_wizard,spp_idqueue.group_g2p_id_requestor,1,1,1,0
 spp_idpass_requestor,ID Pass Requestor Access,spp_idpass.model_spp_id_pass,spp_idqueue.group_g2p_id_requestor,1,1,1,0
+spp_idbatch_requestor,ID Batch Requestor Access,spp_idqueue.model_spp_print_queue_batch,spp_idqueue.group_g2p_id_requestor,1,1,1,0
+spp_batch_create_wizard_requestor,Batch Create Wizard Requestor Access,spp_idqueue.model_spp_batch_create_wizard,spp_idqueue.group_g2p_id_requestor,1,1,1,0
 
 spp_idpass_valdiator,ID Pass Validator Access,spp_idpass.model_spp_id_pass,spp_idqueue.group_g2p_id_validator,1,1,1,0
 spp_idqueue_validator,ID Queue Validator Access,spp_idqueue.model_spp_print_queue_id,spp_idqueue.group_g2p_id_validator,1,1,1,0
+spp_idbatch_validator,ID Batch Validator Access,spp_idqueue.model_spp_print_queue_batch,spp_idqueue.group_g2p_id_validator,1,1,1,0
+spp_batch_create_wizard_validator,Batch Create Wizard Validator Access,spp_idqueue.model_spp_batch_create_wizard,spp_idqueue.group_g2p_id_validator,1,1,1,0
 
 spp_idpass_distributor,ID Pass Distributor Access,spp_idpass.model_spp_id_pass,spp_idqueue.group_g2p_id_distributor,1,1,1,0
 spp_idqueue_distributor,ID Queue Distributor Access,spp_idqueue.model_spp_print_queue_id,spp_idqueue.group_g2p_id_distributor,1,1,1,0
 ir_model_distributor_access,IR Model Data Distributor Access,base.model_ir_model_data,spp_idqueue.group_g2p_id_distributor,1,1,1,0
+spp_idbatch_distributor,ID Batch Distributor Access,spp_idqueue.model_spp_print_queue_batch,spp_idqueue.group_g2p_id_distributor,1,1,1,0
+spp_batch_create_wizard_distributor,Batch Create Wizard Distributor Access,spp_idqueue.model_spp_batch_create_wizard,spp_idqueue.group_g2p_id_distributor,1,1,1,0
