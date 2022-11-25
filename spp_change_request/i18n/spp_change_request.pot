@@ -55,6 +55,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
+#: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validated
 msgid "Add a new change request!"
 msgstr ""
 
@@ -295,6 +296,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
+#: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validated
 msgid "Click the create button to enter a new change request."
 msgstr ""
 
@@ -928,6 +930,11 @@ msgid "This change request does not have any validation sequence defined."
 msgstr ""
 
 #. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "This change request was REJECTED."
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,help:spp_change_request.field_spp_change_request__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr ""
@@ -961,6 +968,12 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__validated
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Validated"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.actions.act_window,name:spp_change_request.action_change_request_validated
+#: model:ir.ui.menu,name:spp_change_request.menu_change_request_validated
+msgid "Validated Requests"
 msgstr ""
 
 #. module: spp_change_request
