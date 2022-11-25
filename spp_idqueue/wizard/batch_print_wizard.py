@@ -43,10 +43,9 @@ class OpenSPPBatchPrintWizard(models.TransientModel):
         for rec in self:
             id_count = 0
             batches_count = rec.batches_count
-            batch_name = ""
+            batch_name = rec.name
             if batches_count > 1:
                 batch_name = _("%s - 1", rec.name)
-
             batch_id = self.env["spp.print.queue.batch"].create({"name": batch_name})
             current_batch_count = 1
             for queue in rec.queue_ids:

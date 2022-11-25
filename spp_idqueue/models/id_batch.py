@@ -28,8 +28,14 @@ class OpenSPPPrintBatch(models.Model):
 
     def generate_batch(self):
         for rec in self:
-            rec.status = "generated"
-            # Todo: Generate batch
+            for queue in rec.queued_ids:
+                queue.on_generate()
+            if not rec.queued_ids.filtered(lambda x: x.status not in ["generated"]):
+                rec.status = "generated"
+                rec.pass_api_param()
+
+    def pass_api_param(self):
+        return
 
     def print_batch(self):
         for rec in self:
