@@ -1,7 +1,12 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 
-from odoo import fields, models
+import json
+
+import requests
+
+from odoo import _, fields, models
+from odoo.exceptions import ValidationError
 
 
 class OpenSPPPrintBatch(models.Model):
@@ -28,13 +33,41 @@ class OpenSPPPrintBatch(models.Model):
 
     def generate_batch(self):
         for rec in self:
-            for queue in rec.queued_ids:
-                queue.on_generate()
+            rec.queued_ids.generate_cards()
             if not rec.queued_ids.filtered(lambda x: x.status not in ["generated"]):
                 rec.status = "generated"
                 rec.pass_api_param()
 
     def pass_api_param(self):
+        for rec in self:
+            batch_param = self.env["spp.id.pass"].search(
+                [("id", "=", self.env.ref("spp_idqueue.id_template_batch_print").id)]
+            )
+            if batch_param and batch_param.auth_token and batch_param.api_url:
+                token = _("Token %s", batch_param.auth_token)
+                data = {
+                    "batch_id": str(rec.id),
+                }
+                headers = {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": token,
+                }
+
+                response = requests.post(
+                    batch_param.api_url,
+                    data=json.dumps(data),
+                    headers=headers,
+                )
+
+                if not response.status_code == 200:
+                    message = _(
+                        f"ID Pass Error: {response.reason or ''} with Code: {response.status_code or ''}"
+                    )
+                    raise ValidationError(message)
+            else:
+                message = _("No Auth Token or API URL")
+                raise ValidationError(message)
         return
 
     def print_batch(self):

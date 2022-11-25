@@ -115,8 +115,8 @@
     />
 
     <record model="ir.actions.server" id="id_batch_print">
-      <field name="name">Batch Print</field>
-      <field name="model_id" ref="spp_idqueue.model_spp_batch_print_wizard" />
+      <field name="name">Create Batch Printing</field>
+      <field name="model_id" ref="spp_idqueue.model_spp_batch_create_wizard" />
       <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_id" />
       <field name="binding_view_types">list</field>
       <field name="state">code</field>

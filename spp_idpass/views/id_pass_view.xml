@@ -20,7 +20,6 @@
                     type="object"
                     icon="fa-key"
                     class="btn-success"
-                    attrs="{'invisible': [('auth_token', '!=', False)]}"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
                 />
             </tree>

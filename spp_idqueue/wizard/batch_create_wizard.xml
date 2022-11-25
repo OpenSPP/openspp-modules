@@ -3,9 +3,9 @@
 Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
-    <record id="batch_print_wizard_form_view" model="ir.ui.view">
-        <field name="name">batch_print_wizard_form_view</field>
-        <field name="model">spp.batch.print.wizard</field>
+    <record id="batch_create_wizard_form_view" model="ir.ui.view">
+        <field name="name">batch_create_wizard_form_view</field>
+        <field name="model">spp.batch.create.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -34,7 +34,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     </group>
                 </sheet>
                 <footer>
-                    <button name="print_batch" string="Print Batch" type="object" class="oe_highlight" />
+                    <button name="create_batch" string="Create Batch" type="object" class="oe_highlight" />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>

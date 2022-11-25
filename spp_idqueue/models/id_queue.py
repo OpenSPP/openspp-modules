@@ -77,7 +77,7 @@ class OpenSPPIDQueue(models.Model):
             raise ValidationError(_("ID must be approved before printing"))
 
         for rec in self:
-            self.generate_card(rec)
+            rec.generate_card(rec)
             rec.status = "generated"
 
     def generate_card(self, card):
