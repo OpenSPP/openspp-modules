@@ -31,7 +31,7 @@ class RejectChangeRequestWiz(models.TransientModel):
         for rec in self:
             if rec.change_request_id:
                 rec.change_request_id.request_type_ref_id._on_reject(
-                    rec.change_request_id
+                    rec.change_request_id, rec.rejected_remarks
                 )
             else:
                 raise UserError(_("There are no change request selected."))

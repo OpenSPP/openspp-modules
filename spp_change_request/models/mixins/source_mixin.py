@@ -132,6 +132,9 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     "state": "pending",
                     "last_activity_id": activity.id,
                     "assign_to_id": None,
+                    "rejected_by_id": None,
+                    "date_rejected": None,
+                    "rejected_remarks": None,
                 }
             )
         else:
@@ -258,7 +261,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             }
             return action
 
-    def _on_reject(self, request):
+    def _on_reject(self, request, rejected_remarks):
         """
         This method is used to reject the change request.
         :param self: The request type.
@@ -272,6 +275,9 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 request.update(
                     {
                         "state": "draft",
+                        "rejected_remarks": rejected_remarks,
+                        "rejected_by_id": self.env.user.id,
+                        "date_rejected": fields.Datetime.now(),
                     }
                 )
                 # Mark previous activity as 'done'

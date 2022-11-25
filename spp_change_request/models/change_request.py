@@ -270,8 +270,9 @@ class ChangeRequestBase(models.Model):
     def assign_to_user(self, user):
         self.ensure_one()
         user_ok = False
-        # Fuy validated CRs will proceed for users of the CR Administrator group
+        # Fully validated CRs will proceed
         if self.state == "validated":
+            # TODO: User must be a member of administrator and validator HQ
             user_ok = True
         else:
             # Check if user is a member of validators in the validation sequence config
