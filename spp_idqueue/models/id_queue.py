@@ -17,6 +17,7 @@ class OpenSPPIDQueue(models.Model):
     approved_by = fields.Many2one("res.users")
     printed_by = fields.Many2one("res.users")
     registrant_id = fields.Many2one("res.partner", required=True)
+    area_id = fields.Many2one("spp.area", related="registrant_id.area_id", store=True)
     date_requested = fields.Date()
     date_approved = fields.Date()
     date_printed = fields.Date()
@@ -103,6 +104,20 @@ class OpenSPPIDQueue(models.Model):
         for rec in self:
             rec.date_distributed = date.today()
             rec.status = "distributed"
+
+    def validate_requests(self):
+        if self.env.context.get("active_ids"):
+            queue_id = self.env["spp.print.queue.id"].search(
+                [
+                    ("id", "in", self.env.context.get("active_ids")),
+                    ("status", "=", "new"),
+                ]
+            )
+            if queue_id:
+                for rec in queue_id:
+                    rec.date_approved = date.today()
+                    rec.approved_by = self.env.user.id
+                    rec.status = "approved"
 
 
 class ResConfigSettings(models.TransientModel):

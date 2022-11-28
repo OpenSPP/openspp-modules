@@ -20,6 +20,7 @@
         "views/id_batch_view.xml",
         "wizard/request_id_wizard.xml",
         "wizard/batch_create_wizard.xml",
+        "wizard/multi_id_request_wizard.xml",
         "views/registrant.xml",
         "views/res_config_settings.xml",
     ],

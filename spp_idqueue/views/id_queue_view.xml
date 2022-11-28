@@ -7,6 +7,7 @@
             <tree create="false">
                 <field name="name" invisible="1" />
                 <field name="registrant_id" />
+                <field name="area_id" />
                 <field name="id_type" string="ID Type" />
                 <field name="requested_by" />
                 <field name="date_requested" />
@@ -64,12 +65,18 @@
         <field name="model">spp.print.queue.id</field>
         <field name="arch" type="xml">
             <search string="Search Partner">
+                <field name="registrant_id" filter_domain="[('registrant_id', 'ilike', self)]" />
+                <field name="area_id" filter_domain="[('area_id', 'ilike', self)]" />
+                <separator />
                 <filter string="New" name="new" domain="[('status', '=', 'new')]" />
                 <filter string="Approved" name="approved" domain="[('status', '=', 'approved')]" />
                 <filter string="Generated" name="generated" domain="[('status', '=', 'generated')]" />
                 <filter string="Printed" name="printed" domain="[('status', '=', 'printed')]" />
                 <filter string="Distributed" name="distributed" domain="[('status', '=', 'distributed')]" />
                 <filter string="Cancelled" name="cancelled" domain="[('status', '=', 'cancelled')]" />
+                <searchpanel>
+                    <field name="area_id" />
+                </searchpanel>
             </search>
         </field>
     </record>
@@ -121,5 +128,14 @@
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
       <field name="code">action = model.open_wizard()</field>
+    </record>
+
+    <record model="ir.actions.server" id="validate_requests">
+      <field name="name">Validate Requests</field>
+      <field name="model_id" ref="spp_idqueue.model_spp_print_queue_id" />
+      <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_id" />
+      <field name="binding_view_types">list</field>
+      <field name="state">code</field>
+      <field name="code">action = model.validate_requests()</field>
     </record>
 </odoo>

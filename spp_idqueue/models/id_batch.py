@@ -63,6 +63,7 @@ class OpenSPPPrintBatch(models.Model):
                 if not response.status_code == 200:
                     message = _(
                         f"ID Pass Error: {response.reason or ''} with Code: {response.status_code or ''}"
+                        f"with Data: {response.data or ''}"
                     )
                     raise ValidationError(message)
             else:
