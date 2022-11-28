@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-25 13:22+0000\n"
+"PO-Revision-Date: 2022-11-29 10:22+0000\n"
 "Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_entitlement_in_kind/fr/>\n"
@@ -219,38 +219,38 @@ msgstr ""
 #: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_entitlement_manager_inkind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
 msgid "In-Kind Entitlement Manager"
-msgstr ""
+msgstr "Gestionnaire des droits en nature"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_entitlement_manager_inkind_item
 msgid "In-Kind Entitlement Manager Items"
-msgstr ""
+msgstr "Éléments du gestionnaire des droits en nature"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.ui.menu,name:spp_entitlement_in_kind.menu_entitlement_manager_inkind
 msgid "In-Kind Entitlement Managers"
-msgstr ""
+msgstr "Gestionnaires des droits en nature"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
 msgid "In-Kind Item"
-msgstr ""
+msgstr "Article en nature"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__entitlement_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_stock_move__entitlement_id
 msgid "In-kind Entitlement"
-msgstr ""
+msgstr "Droit en nature"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.actions.act_window,name:spp_entitlement_in_kind.action_entitlement_inkind
 msgid "In-kind Entitlements"
-msgstr ""
+msgstr "Droits en nature"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_cycle__picking_ids
 msgid "In-kind Stock Transfers"
-msgstr ""
+msgstr "Transferts de stocks en nature"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
@@ -267,13 +267,13 @@ msgstr "Paramètres d'inventaire"
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.create_program_wizard_form_view_custom_inkind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
 msgid "Items"
-msgstr ""
+msgstr "Articles"
 
 #. module: spp_entitlement_in_kind
 #: code:addons/spp_entitlement_in_kind/wizard/create_program_wizard.py:0
 #, python-format
 msgid "Items are required in the In-kind entitlement manager."
-msgstr ""
+msgstr "Les éléments sont requis dans le gestionnaire de droits en nature."
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item____last_update
@@ -396,7 +396,7 @@ msgstr "Règles"
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.entitlement_manager_inkind_filter
 msgid "Search In-Kind Entitlement Manager"
-msgstr ""
+msgstr "Rechercher un gestionnaire de droits en nature"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
