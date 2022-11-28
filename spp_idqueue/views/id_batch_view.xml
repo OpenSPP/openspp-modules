@@ -18,6 +18,15 @@
                     decoration-primary="status=='printed'"
                     widget="badge"
                 />
+                <field
+                    name="merge_status"
+                    decoration-info="merge_status=='draft'"
+                    decoration-primary="merge_status=='sent'"
+                    decoration-success="merge_status=='merged'"
+                    decoration-warning="merge_status=='error_sending'"
+                    decoration-danger="merge_status=='error_merging'"
+                    widget="badge"
+                />
                 <button
                     name="generate_batch"
                     type="object"
@@ -27,11 +36,19 @@
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
                 />
                 <button
+                    name="retry_pass_api"
+                    type="object"
+                    icon="fa-refresh"
+                    class="btn-info"
+                    attrs="{'invisible': [('merge_status', '!=', 'error_sending')]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                />
+                <button
                     name="print_batch"
                     type="object"
                     icon="fa-print"
                     class="btn-info"
-                    attrs="{'invisible': ['&amp;',('status', '!=', 'generated'), ('id_pdf', '!=', True)]}"
+                    attrs="{'invisible': ['|',('status', '!=', 'generated'), ('id_pdf', '=', False)]}"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                 <button
@@ -61,12 +78,21 @@
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
+                        name="retry_pass_api"
+                        type="object"
+                        string="Retry Sending"
+                        icon="fa-refresh"
+                        class="btn-info"
+                        attrs="{'invisible': [('merge_status', '!=', 'error_sending')]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                    />
+                        <button
                         name="print_batch"
                         type="object"
                         string="Print Batch"
                         icon="fa-print"
                         class="btn-primary"
-                        attrs="{'invisible': [('status', '!=', 'generated')]}"
+                        attrs="{'invisible': ['|',('status', '!=', 'generated'), ('id_pdf', '=', False)]}"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
@@ -126,6 +152,17 @@
                                 />
                                 <field name="id_pdf_filename" invisible="1" />
                                 <field name="create_date" readonly="1" />
+                                <field
+                                    name="merge_status"
+                                    decoration-info="merge_status=='draft'"
+                                    decoration-primary="merge_status=='sent'"
+                                    decoration-success="merge_status=='merged'"
+                                    decoration-warning="merge_status=='error_sending'"
+                                    decoration-danger="merge_status=='error_merging'"
+                                    widget="badge"
+                                    readonly="1"
+                                    force_save="1"
+                                />
                                 <field name="queued_ids" readonly="1">
                                     <tree>
                                         <field name="registrant_id" />
