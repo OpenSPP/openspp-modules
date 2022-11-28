@@ -1017,11 +1017,6 @@ msgid "Validation Stage"
 msgstr ""
 
 #. module: spp_change_request
-#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
-msgid "View Applicant Details"
-msgstr ""
-
-#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__website_message_ids
 msgid "Website Messages"
 msgstr ""
