@@ -100,6 +100,7 @@ msgstr ""
 #: model:ir.ui.menu,name:spp_event_data.menu_spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_groups_event_data_form
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_individual_event_data_form
+#: model_terms:ir.ui.view,arch_db:spp_event_data.view_spp_event_data_form
 msgid "Event Data"
 msgstr ""
 
