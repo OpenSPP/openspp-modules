@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-25 13:22+0000\n"
+"PO-Revision-Date: 2022-11-29 13:22+0000\n"
 "Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_change_request/fr/>\n"
@@ -688,78 +688,79 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,help:spp_change_request.field_spp_change_request__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Type d'activité d'exception enregistrée."
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Messages non lus"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Compteur de messages non lus"
 
 #. module: spp_change_request
 #: model:ir.module.category,description:spp_change_request.spp_change_request_module
 msgid "User access level for the OpenSPP change request module"
 msgstr ""
+"Niveau d'accès utilisateur pour le module de demande de changement OpenSPP"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Validate"
-msgstr ""
+msgstr "Valider"
 
 #. module: spp_change_request
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__validated
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Validated"
-msgstr ""
+msgstr "Validé"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__validatedby_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__validator_id
 msgid "Validated by"
-msgstr ""
+msgstr "Validé par"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_form
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_tree
 msgid "Validation Group"
-msgstr ""
+msgstr "Groupe de validation"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__validator_ids
 msgid "Validation Records"
-msgstr ""
+msgstr "Dossiers de validation"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence_mixin__validation_ids
 #: model:ir.ui.menu,name:spp_change_request.menu_change_request_validation_sequence
 msgid "Validation Sequence"
-msgstr ""
+msgstr "Séquence de validation"
 
 #. module: spp_change_request
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_validation_sequence
 msgid "Validation Sequences"
-msgstr ""
+msgstr "Séquences de validation"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__stage_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__stage_id
 msgid "Validation Stage"
-msgstr ""
+msgstr "Étape de validation"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Messagerie du site Web"
 
 #. module: spp_change_request
 #: model:ir.model.fields,help:spp_change_request.field_spp_change_request__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Historique des communications du site Web"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
