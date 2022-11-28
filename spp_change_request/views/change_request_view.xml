@@ -178,7 +178,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <button
                             name="open_applicant_form"
                             type="object"
-                            string="View Applicant Details"
                             icon="fa-external-link"
                             class="btn-success"
                             attrs="{'invisible':[('applicant_id','=',False)]}"
