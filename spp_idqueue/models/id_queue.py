@@ -108,11 +108,13 @@ class OpenSPPIDQueue(models.Model):
     def validate_requests(self):
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
-                [("id", "in", self.env.context.get("active_ids"))]
+                [
+                    ("id", "in", self.env.context.get("active_ids")),
+                    ("status", "=", "new"),
+                ]
             )
-            queue_ids = queue_id.filtered(lambda x: x.status == "new")
-            if queue_ids:
-                for rec in queue_ids:
+            if queue_id:
+                for rec in queue_id:
                     rec.date_approved = date.today()
                     rec.approved_by = self.env.user.id
                     rec.status = "approved"
