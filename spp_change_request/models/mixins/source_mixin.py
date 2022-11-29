@@ -59,6 +59,17 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         ],
         auto_join=True,
     )
+    dms_file_ids = fields.One2many(
+        "dms.file",
+        "res_id",
+        string="DMS Files",
+        domain=lambda self: [
+            ("directory_id.res_model", "=", self._name),
+            ("storage_id.save_type", "!=", "attachment"),
+        ],
+        auto_join=True,
+    )
+
     current_user_assigned = fields.Boolean(
         compute="_compute_current_user_assigned", default=False
     )
@@ -406,3 +417,78 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             rec.current_user_assigned = False
             if self.env.context.get("uid", False) == rec.assign_to_id.id:
                 rec.current_user_assigned = True
+
+    def check_required_documents(self):
+        for directories in self.dms_directory_ids:
+            file_ids_child = []
+
+            if directories.child_directory_ids:
+                for child_directories in directories.child_directory_ids:
+                    file_ids_child = child_directories.file_ids.mapped("category_id.id")
+
+            file_ids = directories.file_ids.mapped("category_id.id")
+            for child_ids in file_ids_child:
+                file_ids.append(child_ids)
+
+            missing_docs = []
+
+            for doc in self.REQUIRED_DOCUMENT_TYPE:
+                document = self.env.ref(doc)
+                if document.id not in file_ids:
+                    missing_docs.append(document.name)
+
+            if missing_docs:
+                if len(missing_docs) > 1:
+                    return _(
+                        "The required documents %s are missing.",
+                        ", ".join(missing_docs),
+                    )
+                else:
+                    return _(
+                        "The required document %s is missing.",
+                        ", ".join(missing_docs),
+                    )
+
+        return None
+
+    def attach_documents(self):
+        for rec in self:
+            # TODO: Get the directory_id based on document type
+            # Get the first directory for now
+            if rec.dms_directory_ids:
+                directory_id = rec.dms_directory_ids[0].id
+                if self.env.context.get("category_id"):
+                    category_id = self.env.context.get("category_id")
+                    category = self.env["dms.category"].search(
+                        [("id", "=", category_id)]
+                    )
+                    if category:
+                        form_id = self.env.ref(
+                            "spp_change_request.view_dms_file_spp_custom_form"
+                        ).id
+                        action = {
+                            "name": _("Upload Document: %s", category.name),
+                            "type": "ir.actions.act_window",
+                            "view_mode": "form",
+                            "view_id": form_id,
+                            "view_type": "form",
+                            "res_model": "dms.file",
+                            "target": "new",
+                            "context": {
+                                "default_directory_id": directory_id,
+                                "default_category_id": category_id,
+                            },
+                        }
+                        return action
+                    else:
+                        raise UserError(
+                            _("The required document category is not configured.")
+                        )
+                else:
+                    raise UserError(
+                        _("The document category must be specified in the context.")
+                    )
+            else:
+                raise UserError(
+                    _("There are no directories defined for this change request.")
+                )
