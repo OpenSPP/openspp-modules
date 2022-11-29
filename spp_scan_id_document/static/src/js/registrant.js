@@ -29,8 +29,7 @@ odoo.define(function () {
     document.getElementById("id_scan_button").onclick = function () {
         fetch(initialise_url, {
             method: "GET",
-        }).then((initialise_response) => {
-            initialise_response.json();
+        }).then(() => {
             fetch(readdocument_url, {
                 method: "GET",
             })
@@ -39,8 +38,7 @@ odoo.define(function () {
                     populate_field(response_json);
                     fetch(shutdown_url, {
                         method: "GET",
-                    }).then((shutdown_response) => {
-                        shutdown_response.json();
+                    }).then(() => {
                         // Shutdown completed
                     });
                 });
