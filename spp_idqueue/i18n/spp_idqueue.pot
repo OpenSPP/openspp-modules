@@ -212,6 +212,21 @@ msgid "Distributed"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__draft
+msgid "Draft"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__error_merging
+msgid "Error Merging"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__error_sending
+msgid "Error Sending"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
@@ -401,6 +416,16 @@ msgid "Max ID per batch"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__merge_status
+msgid "Merge Status"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__merged
+msgid "Merged"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model,name:spp_idqueue.model_spp_multi_id_request_wizard
 msgid "Multiple ID Request Wizard"
 msgstr ""
@@ -412,6 +437,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "New"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "No Auth Token or API URL"
 msgstr ""
 
 #. module: spp_idqueue
@@ -491,6 +522,11 @@ msgid "Requested By"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Retry Sending"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
 msgid "Search Partner"
 msgstr ""
@@ -498,6 +534,11 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
 msgid "Search Print Batch"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__sent
+msgid "Sent"
 msgstr ""
 
 #. module: spp_idqueue
