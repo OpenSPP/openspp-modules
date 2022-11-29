@@ -1,0 +1,82 @@
+<odoo>
+    <record id="view_dms_file_spp_custom_form" model="ir.ui.view">
+        <field name="name">view_dms_file_spp_custom_form</field>
+        <field name="model">dms.file</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <form string="Files">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <div class="oe_button_box" name="button_box" />
+                    <field
+                        name="image_1920"
+                        widget="image"
+                        class="oe_avatar"
+                        nolabel="1"
+                        options="{'image_preview': 'image_128'}"
+                    />
+                    <div class="oe_title">
+                        <h4>
+                            <field
+                                name="category_id"
+                                placeholder="Internal / Human Resource"
+                                options="{'no_open': True}"
+                                readonly="1"
+                            />
+                        </h4>
+                        <h2>
+                            <field
+                                name="content"
+                                filename="name"
+                                mimetype="mimetype"
+                                widget="preview_binary"
+                            />
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" class="oe_read_only" string="Filename" />
+                            <field name="mimetype" />
+                        </group>
+                        <group>
+                            <field
+                                name="directory_id"
+                                options="{'no_quick_create': True,'no_open':True}"
+                                class="oe_read_only"
+                            />
+                            <field name="storage_id" options="{'no_open': True}" />
+                            <field
+                                name="path_json"
+                                widget="path_json"
+                                options="{'prefix': True, 'suffix': False}"
+                                attrs="{'invisible': ['|', ('name', '=', False), ('directory_id', '=', False)]}"
+                                string="Path"
+                            />
+                        </group>
+                    </group>
+                    <field name="active" invisible="1" />
+                    <field name="tag_ids" invisible="1" />
+                    <field name="extension" invisible="1" />
+                    <field name="storage_id_save_type" invisible="1" />
+                    <field name="res_model" invisible="1" />
+                    <field name="res_id" invisible="1" />
+                    <field name="record_ref" invisible="1" />
+                    <field name="create_date" invisible="1" />
+                    <field name="create_uid" invisible="1" />
+                    <field name="write_date" invisible="1" />
+                    <field name="write_uid" invisible="1" />
+                    <field name="permission_write" invisible="1" />
+                    <field name="permission_unlink" invisible="1" />
+                    <field name="is_lock_editor" invisible="1" />
+                    <field name="is_locked" invisible="1" />
+                    <field name="locked_by" invisible="1" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
