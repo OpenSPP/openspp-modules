@@ -40,7 +40,7 @@
                     type="object"
                     icon="fa-refresh"
                     class="btn-info"
-                    attrs="{'invisible': [('merge_status', '!=', 'error_sending')]}"
+                    attrs="{'invisible': [('merge_status', 'not in', ['error_sending', 'error_merging'])]}"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                 <button
@@ -83,7 +83,7 @@
                         string="Retry Sending"
                         icon="fa-refresh"
                         class="btn-info"
-                        attrs="{'invisible': [('merge_status', '!=', 'error_sending')]}"
+                        attrs="{'invisible': [('merge_status', 'not in', ['error_sending', 'error_merging'])]}"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
