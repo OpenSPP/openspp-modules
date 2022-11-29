@@ -136,6 +136,11 @@ msgid "Apply to Both"
 msgstr ""
 
 #. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
+msgid "Archived"
+msgstr ""
+
+#. module: spp_change_request
 #: code:addons/spp_change_request/wizard/reject_change_request.py:0
 #, python-format
 msgid "Are you sure you would like to reject this request: %s"
@@ -367,6 +372,11 @@ msgid "DMS Directories"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__dms_file_ids
+msgid "DMS Files"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_applied
 msgid "Date Applied"
 msgstr ""
@@ -431,6 +441,16 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__end_date
 msgid "End Date"
+msgstr ""
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
+msgid "Filename"
+msgstr ""
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
+msgid "Files"
 msgstr ""
 
 #. module: spp_change_request
@@ -525,6 +545,11 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "Incorrect phone number format"
+msgstr ""
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
+msgid "Internal / Human Resource"
 msgstr ""
 
 #. module: spp_change_request
@@ -682,6 +707,11 @@ msgstr ""
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_tree
 msgid "Open Details"
+msgstr ""
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
+msgid "Path"
 msgstr ""
 
 #. module: spp_change_request
@@ -889,6 +919,12 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
+msgid "The document category must be specified in the context."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
 msgid "The request must be in draft state to be set to pending validation."
 msgstr ""
 
@@ -912,9 +948,33 @@ msgid "The request to be validated must be in submitted state."
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The required document %s is missing."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The required document category is not configured."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The required documents %s are missing."
+msgstr ""
+
+#. module: spp_change_request
 #: code:addons/spp_change_request/wizard/reject_change_request.py:0
 #, python-format
 msgid "There are no change request selected."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "There are no directories defined for this change request."
 msgstr ""
 
 #. module: spp_change_request
@@ -947,6 +1007,12 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_unread_counter
 msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Upload Document: %s"
 msgstr ""
 
 #. module: spp_change_request
