@@ -30,6 +30,16 @@ class OpenSPPPrintBatch(models.Model):
 
     id_pdf = fields.Binary("ID PASS")
     id_pdf_filename = fields.Char("ID File Name")
+    merge_status = fields.Selection(
+        [
+            ("draft", "Draft"),
+            ("sent", "Sent"),
+            ("merged", "Merged"),
+            ("error_sending", "Error Sending"),
+            ("error_merging", "Error Merging"),
+        ],
+        default="draft",
+    )
 
     def generate_batch(self):
         for rec in self:
@@ -37,6 +47,10 @@ class OpenSPPPrintBatch(models.Model):
             if not rec.queued_ids.filtered(lambda x: x.status not in ["generated"]):
                 rec.status = "generated"
                 rec.pass_api_param()
+
+    def retry_pass_api(self):
+        for rec in self:
+            rec.pass_api_param()
 
     def pass_api_param(self):
         for rec in self:
@@ -60,12 +74,10 @@ class OpenSPPPrintBatch(models.Model):
                     headers=headers,
                 )
 
-                if not response.status_code == 200:
-                    message = _(
-                        f"ID Pass Error: {response.reason or ''} with Code: {response.status_code or ''}"
-                        f"with Data: {response.data or ''}"
-                    )
-                    raise ValidationError(message)
+                if response.status_code == 200:
+                    rec.merge_status = "sent"
+                else:
+                    rec.merge_status = "error_sending"
             else:
                 message = _("No Auth Token or API URL")
                 raise ValidationError(message)
