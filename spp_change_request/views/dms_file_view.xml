@@ -38,15 +38,11 @@
                             />
                         </h2>
                     </div>
-                    <group name="content">
+                    <group>
                         <group>
                             <field name="name" class="oe_read_only" string="Filename" />
-                        </group>
-                        <group>
                             <field name="mimetype" />
                         </group>
-                    </group>
-                    <group name="settings">
                         <group>
                             <field
                                 name="directory_id"
@@ -54,8 +50,6 @@
                                 class="oe_read_only"
                             />
                             <field name="storage_id" options="{'no_open': True}" />
-                        </group>
-                        <group>
                             <field
                                 name="path_json"
                                 widget="path_json"
@@ -63,15 +57,10 @@
                                 attrs="{'invisible': ['|', ('name', '=', False), ('directory_id', '=', False)]}"
                                 string="Path"
                             />
-                            <field
-                                name="tag_ids"
-                                widget="many2many_tags"
-                                placeholder="Tags..."
-                                options="{'color_field': 'color', 'no_create_edit': True}"
-                            />
                         </group>
                     </group>
                     <field name="active" invisible="1" />
+                    <field name="tag_ids" invisible="1" />
                     <field name="extension" invisible="1" />
                     <field name="storage_id_save_type" invisible="1" />
                     <field name="res_model" invisible="1" />
