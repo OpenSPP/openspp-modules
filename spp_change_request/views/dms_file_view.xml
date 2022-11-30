@@ -25,8 +25,9 @@
                             <field
                                 name="category_id"
                                 placeholder="Internal / Human Resource"
-                                options="{'no_open': True}"
-                                readonly="1"
+                                options="{'no_open': True,'no_create': True,'no_edit':True}"
+                                required="1"
+                                attrs="{'readonly':[('category_id','!=',False)]}"
                             />
                         </h4>
                         <h2>
