@@ -27,7 +27,7 @@
                                 placeholder="Internal / Human Resource"
                                 options="{'no_open': True,'no_create': True,'no_edit':True}"
                                 required="1"
-                                attrs="{'readonly':[('category_id','!=',False)]}"
+                                readonly="context.get('category_readonly')"
                             />
                         </h4>
                         <h2>
