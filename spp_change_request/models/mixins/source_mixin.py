@@ -477,6 +477,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                             "context": {
                                 "default_directory_id": directory_id,
                                 "default_category_id": category_id,
+                                "category_readonly": True,
                             },
                         }
                         return action
