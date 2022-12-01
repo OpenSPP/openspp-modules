@@ -10,12 +10,13 @@ class G2PRegistrant(models.Model):
     @api.depends("street", "street2", "city", "zip")
     def _compute_address(self):
         for rec in self:
-            rec.full_address = ""
+            full_address = ""
             if rec.street:
-                rec.full_address = rec.street
+                full_address = rec.street
             if rec.street2:
-                rec.full_address += " " + rec.street2
+                full_address += f" {rec.street2}"
             if rec.city:
-                rec.full_address += " " + rec.city
+                full_address += f" {rec.city}"
             if rec.zip:
-                rec.full_address += " " + rec.zip
+                full_address += f" {rec.zip}"
+            rec.full_address = full_address
