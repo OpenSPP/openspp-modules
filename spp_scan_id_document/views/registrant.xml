@@ -10,10 +10,7 @@
                 expr="//div[@name='button_box']/button[@name='%(g2p_registry_base.action_disable_registrant_wizard)d']"
                 position="before"
             >
-                <script type="text/javascript" src="spp_scan_id_document/static/src/js/registrant.js">
-                </script>
-                <link rel="stylesheet" href="/spp_scan_id_document/static/src/css/registrant_widget.css" />
-                <field name="id_document_details" />
+                <field name="id_document_details" widget="id_document_reader" />
             </xpath>
         </field>
     </record>

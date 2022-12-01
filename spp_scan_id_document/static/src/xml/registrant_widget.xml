@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
-    <button t-name="id_document_reader" class="btn oe_stat_button oe_edit_only">
-        <i class="fa fa-fw o_button_icon fa-external-link" />
-        <div class="o_form_field o_stat_info">
-            <span class="o_stat_text">Scan Document</span>
-        </div>
-    </button>
+    <span t-name="id_document_reader">
+        <button class="btn oe_stat_button oe_edit_only">
+            <i class="fa fa-fw o_button_icon fa-external-link" />
+            <div class="o_form_field o_stat_info">
+                <span class="o_stat_text">Scan Document</span>
+            </div>
+        </button>
+    </span>
 </templates>
