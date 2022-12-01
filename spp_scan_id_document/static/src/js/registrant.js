@@ -1,47 +1,43 @@
-odoo.define(function () {
+odoo.define(function (require) {
     const initialise_url = "http://localhost:12222/initialise";
     const readdocument_url = "http://localhost:12222/readdocument";
     const shutdown_url = "http://localhost:12222/shutdown";
 
-    function populate_field(data) {
-        const gender_index_dict = {
-            "": "0",
-            Female: "1",
-            Male: "2",
-            Other: "3",
-        };
-        let gender = data.gender;
-        if (!(gender in gender_index_dict)) {
-            gender = "";
-        }
+    var Widget = require("web.Widget");
+    var field_registry = require("web.field_registry");
 
-        document.querySelector("input[name='family_name']").value = data.family_name;
-        document.querySelector("input[name='given_name']").value = data.given_name;
-        document.querySelector("input[name='birthdate']").value = data.birth_date;
-        document.querySelector("select[name='gender']").selectedIndex = gender_index_dict[gender];
-
-        $('input[name="family_name"]').trigger("change");
-        $('input[name="given_name"]').trigger("change");
-        $('input[name="birthdate"]').trigger("change");
-        $('select[name="gender"]').trigger("change");
-    }
-
-    document.getElementById("id_scan_button").onclick = function () {
-        fetch(initialise_url, {
-            method: "GET",
-        }).then(() => {
-            fetch(readdocument_url, {
+    var DocumentReader = Widget.extend({
+        template: "id_document_reader",
+        xmlDependencies: ["/spp_scan_id_document/static/src/xml/registrant_widget.xml"],
+        events: {
+            click: "_onClick",
+        },
+        init: function (parent) {
+            this._super(parent);
+        },
+        _onClick: function () {
+            fetch(initialise_url, {
                 method: "GET",
-            })
-                .then((read_response) => read_response.json())
-                .then((response_json) => {
-                    populate_field(response_json);
-                    fetch(shutdown_url, {
-                        method: "GET",
-                    }).then(() => {
-                        // Shutdown completed
+            }).then(() => {
+                fetch(readdocument_url, {
+                    method: "GET",
+                })
+                    .then((read_response) => read_response.text())
+                    .then((response) => {
+                        document.querySelector("textarea[name='id_document_details']").value = response;
+                        $('textarea[name="id_document_details"]').trigger("change");
+                        fetch(shutdown_url, {
+                            method: "GET",
+                        }).then(() => {
+                            // Shutdown completed
+                        });
                     });
-                });
-        });
-    };
+            });
+        },
+    });
+
+    var document_reader = new DocumentReader(this);
+    document_reader.prependTo(".oe_button_box");
+
+    field_registry.add("id_document_reader", DocumentReader);
 });

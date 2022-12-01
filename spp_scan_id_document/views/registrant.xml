@@ -12,11 +12,8 @@
             >
                 <script type="text/javascript" src="spp_scan_id_document/static/src/js/registrant.js">
                 </script>
-                <a id="id_scan_button" type="button" class="oe_edit_only btn" name="scan_passport">
-                    <div class="o_form_field o_stat_info">
-                        <span class="o_stat_text">Scan Passport</span>
-                    </div>
-                </a>
+                <link rel="stylesheet" href="/spp_scan_id_document/static/src/css/registrant_widget.css" />
+                <field name="id_document_details" />
             </xpath>
         </field>
     </record>
