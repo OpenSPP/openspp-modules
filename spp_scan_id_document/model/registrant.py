@@ -1,6 +1,9 @@
 import json
+import logging
 
 from odoo import api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class IdDetailsIndividual(models.Model):
@@ -29,5 +32,5 @@ class IdDetailsIndividual(models.Model):
                     "id_document_details": "",
                 }
                 self.update(vals)
-        except json.decoder.JSONDecodeError:
-            pass
+        except json.decoder.JSONDecodeError as e:
+            _logger.error(e)
