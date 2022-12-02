@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <span t-name="id_document_reader_field">
+        <button type="button" class="btn btn-primary" title="Scan Document">
+            Scan Document
+        </button>
+    </span>
+</templates>

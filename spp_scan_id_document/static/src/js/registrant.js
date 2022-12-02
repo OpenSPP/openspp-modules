@@ -49,5 +49,11 @@ odoo.define("spp_scan_id_document.field", function (require) {
         },
     });
 
+    var DocumentReaderField = DocumentReader.extend({
+        template: "id_document_reader_field",
+        xmlDependencies: ["/spp_scan_id_document/static/src/xml/registrant_field_widget.xml"],
+    });
+
     field_registry.add("id_document_reader", DocumentReader);
+    field_registry.add("id_document_reader_field", DocumentReaderField);
 });
