@@ -23,6 +23,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <field name="queue_ids" string="ID Request" readonly="1">
                             <tree readonly="1">
                                 <field name="registrant_id" />
+                                <field name="id_type" string="ID Type" />
+                                <field name="idpass_id" string="Template" />
                                 <field name="date_requested" />
                             </tree>
                         </field>
