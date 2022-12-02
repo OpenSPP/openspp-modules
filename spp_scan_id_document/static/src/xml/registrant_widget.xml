@@ -10,7 +10,7 @@
     </span>
 
     <span t-name="id_document_reader_field">
-        <button type="button" class="btn btn-primary" title="Scan Document">
+        <button type="button" class="btn btn-primary oe_edit_only" title="Scan Document">
             Scan Document
         </button>
     </span>
