@@ -59,4 +59,13 @@
           </xpath>
         </field>
     </record>
+
+    <record model="ir.actions.server" id="multi_id_request">
+      <field name="name">Request ID</field>
+      <field name="model_id" ref="spp_idqueue.model_spp_multi_id_request_wizard" />
+      <field name="binding_model_id" ref="base.model_res_partner" />
+      <field name="binding_view_types">list</field>
+      <field name="state">code</field>
+      <field name="code">action = model.open_wizard()</field>
+    </record>
 </odoo>

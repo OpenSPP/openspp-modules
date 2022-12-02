@@ -6,19 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-11-25 13:22+0000\n"
+"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
+"spp_rest_auth_jwt/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_rest_auth_jwt
 #: model_terms:ir.ui.view,arch_db:spp_rest_auth_jwt.view_spp_auth_jwt_validator_form
 msgid "Algorithm"
-msgstr ""
+msgstr "الخوارزمية"
 
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__audience
@@ -33,12 +36,12 @@ msgstr ""
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "انشأ من قبل"
 
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__create_date
 msgid "Created on"
-msgstr ""
+msgstr "انشأ على"
 
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_ir_http__dms_directory_ids
@@ -49,12 +52,12 @@ msgstr ""
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__default_user_id
 msgid "Default User"
-msgstr ""
+msgstr "المستخدم الافتراضي"
 
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields.selection,name:spp_rest_auth_jwt.selection__spp_auth_jwt_validator__public_key_algorithm__es256
@@ -145,27 +148,27 @@ msgstr ""
 #. module: spp_rest_auth_jwt
 #: model_terms:ir.ui.view,arch_db:spp_rest_auth_jwt.view_spp_auth_jwt_validator_form
 msgid "Key"
-msgstr ""
+msgstr "مفتاح"
 
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "تاريخ آخر تعديل"
 
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__name
 msgid "Name"
-msgstr ""
+msgstr "الإسم"
 
 #. module: spp_rest_auth_jwt
 #: code:addons/spp_rest_auth_jwt/models/auth_jwt_validator.py:0

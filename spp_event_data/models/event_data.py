@@ -71,6 +71,10 @@ class OpenSPPEventData(models.Model):
 
     def open_form(self):
         for rec in self:
+            context = {
+                "create": False,
+                "edit": False,
+            }
             res_model = rec.model
             view_id = self.env[res_model].get_view_id()
             return {
@@ -81,6 +85,6 @@ class OpenSPPEventData(models.Model):
                 "view_id": view_id,
                 "type": "ir.actions.act_window",
                 "target": "new",
-                "context": self.env.context,
+                "context": context,
                 "flags": {"mode": "readonly"},
             }

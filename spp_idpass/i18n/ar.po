@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-02 07:22+0000\n"
+"PO-Revision-Date: 2022-11-25 13:22+0000\n"
 "Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_idpass/ar/>\n"
@@ -42,7 +42,7 @@ msgstr ""
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "الإجراء اللازم"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__is_active
@@ -52,7 +52,7 @@ msgstr ""
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "عدد المرفقات"
 
 #. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
@@ -95,7 +95,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__display_name
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__filename_prefix

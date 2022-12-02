@@ -9,7 +9,7 @@
     "license": "LGPL-3",
     "development_status": "Alpha",
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
-    "depends": ["base", "g2p_registry_base"],
+    "depends": ["base", "g2p_registry_base", "g2p_registry_individual"],
     "data": ["views/registrant.xml"],
     "assets": {
         "web.assets_backend": [

@@ -23,12 +23,37 @@
             </tree>
         </field>
     </record>
+    <record id="view_spp_event_data_form" model="ir.ui.view">
+        <field name="name">view_spp_event_data_form</field>
+        <field name="model">spp.event.data</field>
+        <field name="priority">200</field>
+        <field name="arch" type="xml">
+            <form string="Event Data" duplicate="0" edit="0" create="0">
+                <sheet>
+                  <group>
+                    <group>
+                      <field name="partner_id" readonly="1" />
+                      <field name="name" />
+                      <field name="model" />
+                      <field name="event_type" />
+                    </group>
+                    <group>
+                      <field name="res_id" />
+                      <field name="registrar" />
+                      <field name="collection_date" />
+                      <field name="expiry_date" />
+                    </group>
+                  </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
     <record id="action_spp_event_data" model="ir.actions.act_window">
         <field name="name">Event Data</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.event.data</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree,form</field>
         <field name="context">{}</field>
         <field name="domain">[]</field>
         <field name="help" type="html">
@@ -44,6 +69,13 @@
         <field name="sequence" eval="1" />
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_spp_event_data_tree" />
+        <field name="act_window_id" ref="action_spp_event_data" />
+    </record>
+
+    <record id="action_spp_event_data_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_data_form" />
         <field name="act_window_id" ref="action_spp_event_data" />
     </record>
 

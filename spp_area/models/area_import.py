@@ -93,7 +93,7 @@ class OpenSPPAreaImport(models.Model):
                 inputx.write(base64.decodebytes(rec.excel_file))
                 book = open_workbook(file_contents=inputx.getvalue())
             except TypeError as e:
-                raise ValidationError(_("ERROR: {}").format(e))  # noqa: C901, B904
+                raise ValidationError(_("ERROR: {}").format(e)) from e
             sheet = book.sheets()[0]
             vals = []
             _logger.info("Area Import: Parsing Excel File: %s" % fields.Datetime.now())
@@ -235,7 +235,6 @@ class OpenSPPAreaImport(models.Model):
             for val in columns:
                 vals.append([0, 0, val])
 
-            # raise Warning('Debug: %s' % vals)
             _logger.info(
                 "Area Masterlist Import: Updating Record: %s" % fields.Datetime.now()
             )
