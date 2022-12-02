@@ -32,6 +32,10 @@ class IdDetailsIndividual(models.Model):
                         "gender": details["gender"],
                         "id_document_details": "",
                     }
+
+                    if details["photo"]:
+                        vals.update({"image_1920": details["photo"]})
+
                     self.update(vals)
         except json.decoder.JSONDecodeError as e:
             _logger.error(e)
