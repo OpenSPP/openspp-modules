@@ -317,6 +317,7 @@ msgid "ID Requests Settings"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
@@ -559,8 +560,10 @@ msgid "Target Type"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Template"
 msgstr ""
 
