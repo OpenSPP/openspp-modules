@@ -15,9 +15,6 @@
         "web.assets_backend": [
             "/spp_scan_id_document/static/src/js/registrant.js",
         ],
-        "web.assets_qweb": [
-            "/spp_scan_id_document/static/src/xml/registrant_widget.xml"
-        ],
     },
     "demo": [],
     "images": [],
