@@ -32,6 +32,8 @@ msgstr ""
 #. module: spp_scan_id_document
 #. openerp-web
 #: code:addons/spp_scan_id_document/static/src/xml/registrant_widget.xml:0
+#: code:addons/spp_scan_id_document/static/src/xml/registrant_widget.xml:0
+#: code:addons/spp_scan_id_document/static/src/xml/registrant_widget.xml:0
 #, python-format
 msgid "Scan Document"
 msgstr ""
