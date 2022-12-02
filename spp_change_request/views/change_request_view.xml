@@ -7,7 +7,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">spp.change.request</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree sample="1">
+            <tree sample="1" decoration-danger="date_rejected != False">
                 <button
                     name="open_change_request_form"
                     type="object"
@@ -31,6 +31,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="applied_by_id" widget="many2one_avatar_user" />
                 <field name="date_applied" />
                 <field name="activity_ids" widget="list_activity" optional="show" />
+                <field name="date_rejected" invisible="1" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field
                     name="state"
@@ -86,7 +87,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         icon="fa-ban"
                         class="btn-danger"
                         states="pending"
-                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator"
                     />
                     <field
                         name="state"
@@ -94,6 +95,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         statusbar_visible="draft,pending,validated,applied"
                     />
                 </header>
+                <div
+                    class="alert alert-danger text-center o_form_header"
+                    role="status"
+                    attrs="{'invisible': [('rejected_by_id', '=', False)]}"
+                >
+                    This change request was REJECTED.
+                </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
@@ -102,7 +110,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             icon="fa-user-circle"
                             class="oe_stat_button"
                             states="pending,validated"
-                            groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator"
+                            groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Assign</span>
@@ -170,7 +178,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <button
                             name="open_applicant_form"
                             type="object"
-                            string="View Applicant Details"
                             icon="fa-external-link"
                             class="btn-success"
                             attrs="{'invisible':[('applicant_id','=',False)]}"
@@ -246,6 +253,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             options="{'no_create': True,'no_open':True}"
                             readonly="1"
                         />
+                        <field name="date_rejected" readonly="1" />
+                        <field
+                            name="rejected_by_id"
+                            options="{'no_create': True,'no_open':True}"
+                            readonly="1"
+                        />
+                        <field name="rejected_remarks" colspan="4" readonly="1" />
                     </group>
                     <field name="request_type_ref_id" invisible="1" />
                     <field name="last_activity_id" invisible="1" />
@@ -278,6 +292,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
+    <!-- All Requests -->
     <record id="action_change_request" model="ir.actions.act_window">
         <field name="name">All Requests</field>
         <field name="type">ir.actions.act_window</field>
@@ -315,7 +330,48 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         action="action_change_request"
         parent="spp_change_request_request_root"
         sequence="0"
-        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
+        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent,spp_change_request.group_spp_change_request_hq_validator"
+    />
+
+    <!-- Validated Requests -->
+    <record id="action_change_request_validated" model="ir.actions.act_window">
+        <field name="name">Validated Requests</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.change.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="change_request_filter" />
+        <field name="context">{'create':False,'edit':False}</field>
+        <field name="domain">[('state','=','validated')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new change request!
+            </p><p>
+                Click the create button to enter a new change request.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_change_request_validated_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_change_request_tree" />
+        <field name="act_window_id" ref="action_change_request_validated" />
+    </record>
+
+    <record id="action_change_request_validated_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_change_request_form" />
+        <field name="act_window_id" ref="action_change_request_validated" />
+    </record>
+
+    <menuitem
+        id="menu_change_request_validated"
+        name="Validated Requests"
+        action="action_change_request_validated"
+        parent="spp_change_request_for_application_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
     />
 
 </odoo>

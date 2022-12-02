@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-02 07:22+0000\n"
+"PO-Revision-Date: 2022-11-25 13:22+0000\n"
 "Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_service_points/ar/>\n"
@@ -36,7 +36,7 @@ msgstr ""
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__shop_address
 msgid "Address"
-msgstr ""
+msgstr "عنوان"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__name
@@ -120,7 +120,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__display_name
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: spp_service_points
 #: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
