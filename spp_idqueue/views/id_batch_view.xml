@@ -167,6 +167,7 @@
                                     <tree>
                                         <field name="registrant_id" />
                                         <field name="id_type" string="ID Type" />
+                                        <field name="idpass_id" string="Template" />
                                         <field name="requested_by" />
                                         <field name="date_requested" />
                                         <field
