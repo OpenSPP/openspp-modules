@@ -493,3 +493,33 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 raise UserError(
                     _("There are no directories defined for this change request.")
                 )
+
+    def upload_dms(self, file, document_number, category=None):
+        # TODO: Get the directory_id based on document type
+        # Get the first directory for now
+        if self.dms_directory_ids:
+            if self._origin:
+                directory_id = self._origin.dms_directory_ids[0].id
+            else:
+                directory_id = self.dms_directory_ids[0].id
+            category_id = None
+            if category:
+                category_id = self.env.ref(category).id
+                category = self.env["dms.category"].search([("id", "=", category_id)])
+                if category:
+                    category_id = category[0].id
+                else:
+                    raise UserError(
+                        _("The required document category is not configured.")
+                    )
+            vals = {
+                "name": f"UID-{document_number}",
+                "directory_id": directory_id,
+                "category_id": category_id,
+                "content": file,
+            }
+            self.env["dms.file"].create(vals)
+        else:
+            raise UserError(
+                _("There are no directories defined for this change request.")
+            )
