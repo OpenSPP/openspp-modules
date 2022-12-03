@@ -218,7 +218,7 @@ class ChangeRequestBase(models.Model):
                 domain = [
                     ("partner_id.is_registrant", "=", True),
                     ("partner_id.is_group", "=", True),
-                    ("value", "=", details["document_number"].strip()),
+                    ("value", "=", details["qrcode"].strip()),
                 ]
                 id_docs = self.env["g2p.reg.id"].search(domain)
                 if id_docs:
