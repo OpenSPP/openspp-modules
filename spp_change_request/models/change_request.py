@@ -32,6 +32,10 @@ class ChangeRequestBase(models.Model):
         "Registrant",
         domain=[("is_registrant", "=", True)],
     )
+
+    # For ID Scanner Widget
+    id_document_details = fields.Text("ID Document")
+
     applicant_id = fields.Many2one(
         "res.partner",
         "Applicant",
@@ -164,6 +168,41 @@ class ChangeRequestBase(models.Model):
                 phone_validation.phone_parse(rec.applicant_phone, country_code)
             except UserError as e:
                 raise ValidationError(_("Incorrect phone number format")) from e
+
+    @api.onchange("id_document_details")
+    def _onchange_scan_id_document_details(self):
+        if self.id_document_details:
+            try:
+                details = json.loads(self.id_document_details)
+            except json.decoder.JSONDecodeError as e:
+                details = None
+                _logger.error(e)
+            if details:
+                if self.registrant_id:
+                    group_membership_ids = (
+                        self.registrant_id.group_membership_ids.mapped("individual.id")
+                    )
+                    domain = [
+                        ("partner_id", "in", group_membership_ids),
+                        ("value", "=", details["document_number"].strip()),
+                    ]
+                    id_docs = self.env["g2p.reg.id"].search(domain)
+                    if id_docs:
+                        vals = {
+                            "applicant_id": id_docs.partner_id.id,
+                            "applicant_phone": id_docs.partner_id.phone,
+                        }
+                        self.update(vals)
+                    else:
+                        raise UserError(
+                            _(
+                                "There are no applicant found with the ID number scanned."
+                            )
+                        )
+                else:
+                    raise UserError(_("A registrant must be selected."))
+            else:
+                raise UserError(_("There are no data captured from the ID scanner."))
 
     def open_change_request_form(self, target="current", mode="readonly"):
         self.ensure_one()
@@ -405,15 +444,17 @@ class ChangeRequestBase(models.Model):
                     "group_ids": [(4, storage.field_default_group_id.id)],
                 }
 
+                # Prepare CR type model data
+                cr_type_vals = {
+                    "registrant_id": rec.registrant_id.id,
+                    "applicant_id": rec.applicant_id.id,
+                    "change_request_id": rec.id,
+                    "dms_directory_ids": [(Command.create(dmsval))],
+                }
+
                 # Create the change request detail record
-                ref_id = self.env[res_model].create(
-                    {
-                        "registrant_id": rec.registrant_id.id,
-                        "applicant_id": rec.applicant_id.id,
-                        "change_request_id": rec.id,
-                        "dms_directory_ids": [(Command.create(dmsval))],
-                    }
-                )
+                ref_id = self.env[res_model].create(cr_type_vals)
+
                 self.env["dms.directory"].create(
                     {
                         "name": "Applicant",
@@ -422,12 +463,19 @@ class ChangeRequestBase(models.Model):
                     }
                 )
 
+                # Upload Scanned ID to DMS
+                if rec.id_document_details:
+                    dms_id_doc = rec._get_id_doc_vals(ref_id)
+                    if dms_id_doc:
+                        ref_id.update({"dms_file_ids": [(Command.create(dms_id_doc))]})
+
                 ref_id._onchange_registrant_id()
                 request_type_ref_id = f"{res_model},{ref_id.id}"
                 _logger.debug("DEBUG! request_type_ref_id: %s", request_type_ref_id)
                 rec.update(
                     {
                         "request_type_ref_id": request_type_ref_id,
+                        "id_document_details": "",
                     }
                 )
                 # Open Request Form
@@ -438,6 +486,23 @@ class ChangeRequestBase(models.Model):
                         "The change request to be created must be in draft or pending validation state."
                     )
                 )
+
+    def _get_id_doc_vals(self, rec):
+        try:
+            details = json.loads(self.id_document_details)
+        except json.decoder.JSONDecodeError as e:
+            details = None
+            _logger.error(e)
+        if details:
+            if details["image"]:
+                directory_id = rec.dms_directory_ids[0].id
+                retval = {
+                    "name": details["document_number"],
+                    "directory_id": directory_id,
+                    "content": details["image"],
+                }
+                return retval
+        return None
 
     def on_submit(self):
         for rec in self:
