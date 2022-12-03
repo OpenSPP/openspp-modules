@@ -29,6 +29,12 @@ msgid ""
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "A registrant must be selected."
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_needaction
 msgid "Action Needed"
 msgstr ""
@@ -520,6 +526,11 @@ msgid "ID"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__id_document_details
+msgid "ID Document"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_exception_icon
 msgid "Icon"
 msgstr ""
@@ -955,6 +966,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The required document category is not configured."
 msgstr ""
@@ -966,12 +978,25 @@ msgid "The required documents %s are missing."
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no applicant found with the ID number scanned."
+msgstr ""
+
+#. module: spp_change_request
 #: code:addons/spp_change_request/wizard/reject_change_request.py:0
 #, python-format
 msgid "There are no change request selected."
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no data captured from the ID scanner."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "There are no directories defined for this change request."
