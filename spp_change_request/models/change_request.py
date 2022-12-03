@@ -494,12 +494,12 @@ class ChangeRequestBase(models.Model):
             details = None
             _logger.error(e)
         if details:
-            if details["photo"]:
+            if details["image"]:
                 directory_id = rec.dms_directory_ids[0].id
                 retval = {
                     "name": details["document_number"],
                     "directory_id": directory_id,
-                    "content": details["photo"],
+                    "content": details["image"],
                 }
                 return retval
         return None
