@@ -23,15 +23,15 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
-msgid ""
-"A new change request was submitted. The next step will set this request to "
-"'Pending Validation'."
+msgid "A group must be selected."
 msgstr ""
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
-msgid "A registrant must be selected."
+msgid ""
+"A new change request was submitted. The next step will set this request to "
+"'Pending Validation'."
 msgstr ""
 
 #. module: spp_change_request
@@ -526,11 +526,6 @@ msgid "ID"
 msgstr ""
 
 #. module: spp_change_request
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__id_document_details
-msgid "ID Document"
-msgstr ""
-
-#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_exception_icon
 msgid "Icon"
 msgstr ""
@@ -839,6 +834,16 @@ msgid "SMS Delivery error"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__id_document_details
+msgid "Scanned ID Document"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__qr_code_details
+msgid "Scanned QR Card"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
 msgid "Search Change Request"
@@ -978,12 +983,6 @@ msgid "The required documents %s are missing."
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/models/change_request.py:0
-#, python-format
-msgid "There are no applicant found with the ID number scanned."
-msgstr ""
-
-#. module: spp_change_request
 #: code:addons/spp_change_request/wizard/reject_change_request.py:0
 #, python-format
 msgid "There are no change request selected."
@@ -996,10 +995,28 @@ msgid "There are no data captured from the ID scanner."
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no data captured from the QR Code scanner."
+msgstr ""
+
+#. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "There are no directories defined for this change request."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no group found with the ID number from the QR Code scanned."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no registrant found with the ID number scanned."
 msgstr ""
 
 #. module: spp_change_request
