@@ -165,6 +165,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 attrs="{'readonly':[('state','!=','draft')]}"
                                 class="oe_inline"
                             />
+                            <field
+                                name="qr_code_details"
+                                widget="id_document_qrreader_field"
+                                colspan="4"
+                                attrs="{'invisible':[('state','!=','draft')]}"
+                                class="oe_inline"
+                            />
                         </h2>
                     </div>
                     <!-- ID Document Scanner Widget -->

@@ -34,7 +34,9 @@ class ChangeRequestBase(models.Model):
     )
 
     # For ID Scanner Widget
-    id_document_details = fields.Text("ID Document")
+    id_document_details = fields.Text("Scanned ID Document")
+    # For QR Code Scanner Widget
+    qr_code_details = fields.Text("Scanned QR Card")
 
     applicant_id = fields.Many2one(
         "res.partner",
@@ -189,20 +191,51 @@ class ChangeRequestBase(models.Model):
                     id_docs = self.env["g2p.reg.id"].search(domain)
                     if id_docs:
                         vals = {
-                            "applicant_id": id_docs.partner_id.id,
-                            "applicant_phone": id_docs.partner_id.phone,
+                            "applicant_id": id_docs[0].partner_id.id,
+                            "applicant_phone": id_docs[0].partner_id.phone,
                         }
                         self.update(vals)
                     else:
                         raise UserError(
                             _(
-                                "There are no applicant found with the ID number scanned."
+                                "There are no registrant found with the ID number scanned."
                             )
                         )
                 else:
-                    raise UserError(_("A registrant must be selected."))
+                    raise UserError(_("A group must be selected."))
             else:
                 raise UserError(_("There are no data captured from the ID scanner."))
+
+    @api.onchange("qr_code_details")
+    def _onchange_scan_qr_code_details(self):
+        if self.qr_code_details:
+            try:
+                details = json.loads(self.qr_code_details)
+            except json.decoder.JSONDecodeError as e:
+                details = None
+                _logger.error(e)
+            if details:
+                domain = [
+                    ("partner_id.is_registrant", "=", True),
+                    ("partner_id.is_group", "=", True),
+                    ("value", "=", details["document_number"].strip()),
+                ]
+                id_docs = self.env["g2p.reg.id"].search(domain)
+                if id_docs:
+                    vals = {
+                        "registrant_id": id_docs.partner_id[0].id,
+                    }
+                    self.update(vals)
+                else:
+                    raise UserError(
+                        _(
+                            "There are no group found with the ID number from the QR Code scanned."
+                        )
+                    )
+            else:
+                raise UserError(
+                    _("There are no data captured from the QR Code scanner.")
+                )
 
     def open_change_request_form(self, target="current", mode="readonly"):
         self.ensure_one()
@@ -454,20 +487,25 @@ class ChangeRequestBase(models.Model):
 
                 # Create the change request detail record
                 ref_id = self.env[res_model].create(cr_type_vals)
+                directory_id = ref_id.dms_directory_ids[0].id
 
                 self.env["dms.directory"].create(
                     {
                         "name": "Applicant",
-                        "parent_id": ref_id.dms_directory_ids[0].id,
+                        "parent_id": directory_id,
                         "is_root_directory": False,
                     }
                 )
 
-                # Upload Scanned ID to DMS
-                if rec.id_document_details:
-                    dms_id_doc = rec._get_id_doc_vals(ref_id)
-                    if dms_id_doc:
-                        ref_id.update({"dms_file_ids": [(Command.create(dms_id_doc))]})
+                # Upload Scanned IDs to DMS
+                dms_file_ids = []
+                for id_fld in ["id_document_details", "qr_code_details"]:
+                    if rec[id_fld]:
+                        dms_id_doc = rec._get_id_doc_vals(directory_id, id_fld)
+                        if dms_id_doc:
+                            dms_file_ids.append(Command.create(dms_id_doc))
+                if dms_file_ids:
+                    ref_id.update({"dms_file_ids": dms_file_ids})
 
                 ref_id._onchange_registrant_id()
                 request_type_ref_id = f"{res_model},{ref_id.id}"
@@ -487,15 +525,14 @@ class ChangeRequestBase(models.Model):
                     )
                 )
 
-    def _get_id_doc_vals(self, rec):
+    def _get_id_doc_vals(self, directory_id, id_fld):
         try:
-            details = json.loads(self.id_document_details)
+            details = json.loads(id_fld)
         except json.decoder.JSONDecodeError as e:
             details = None
             _logger.error(e)
         if details:
             if details["image"]:
-                directory_id = rec.dms_directory_ids[0].id
                 retval = {
                     "name": details["document_number"],
                     "directory_id": directory_id,
