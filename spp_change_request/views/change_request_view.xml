@@ -54,7 +54,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
             <form string="Change Request">
                 <header>
                     <button
-                        name="on_submit"
+                        name="action_submit"
                         type="object"
                         string="Request Validation"
                         icon="fa-paper-plane"
@@ -63,7 +63,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_agent"
                     />
                     <button
-                        name="on_validate"
+                        name="action_validate"
                         type="object"
                         string="Validate"
                         icon="fa-check-square-o"
@@ -72,7 +72,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
                     />
                     <button
-                        name="apply"
+                        name="action_apply"
                         type="object"
                         string="Apply Changes"
                         icon="fa-thumbs-o-up"
@@ -81,7 +81,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
                     />
                     <button
-                        name="on_reject"
+                        name="action_reject"
                         type="object"
                         string="Reject"
                         icon="fa-ban"

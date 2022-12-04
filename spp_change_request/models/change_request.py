@@ -590,7 +590,7 @@ class ChangeRequestBase(models.Model):
                 return retval
         return None
 
-    def on_submit(self):
+    def action_submit(self):
         for rec in self:
             if rec.request_type_ref_id:
                 rec.request_type_ref_id._on_submit(rec)
@@ -599,15 +599,15 @@ class ChangeRequestBase(models.Model):
                     _("The change request type must be properly filled-up.")
                 )
 
-    def on_validate(self):
+    def action_validate(self):
         for rec in self:
             rec.request_type_ref_id._on_validate(rec)
 
-    def apply(self):
+    def action_apply(self):
         for rec in self:
             rec.request_type_ref_id._apply(rec)
 
-    def on_reject(self):
+    def action_reject(self):
         form_id = self.env.ref("spp_change_request.change_request_reject_wizard").id
         action = {
             "name": _("Reject Change Request"),
