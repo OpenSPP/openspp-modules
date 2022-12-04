@@ -525,20 +525,18 @@ class ChangeRequestBase(models.Model):
                     )
                 )
 
-    def _get_id_doc_vals(self, directory_id, id_fld):
+    def _get_id_doc_vals(self, directory_id, id_fld, file_name_prefix: str = ""):
         try:
             details = json.loads(id_fld)
         except json.decoder.JSONDecodeError as e:
             details = None
             _logger.error(e)
-        if details:
-            if details["image"]:
-                retval = {
-                    "name": details["document_number"],
-                    "directory_id": directory_id,
-                    "content": details["image"],
-                }
-                return retval
+        if details and "image" in details:
+            return {
+                "name": file_name_prefix + details["document_number"] + ".jpg",
+                "directory_id": directory_id,
+                "content": details["image"],
+            }
         return None
 
     def on_submit(self):
