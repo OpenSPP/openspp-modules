@@ -63,7 +63,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
                     status = "new"
                     if auto_approve_id_request:
                         status = "approved"
-
+                    counter = 0
                     for registrant in rec.registrant_ids:
                         vals = {
                             "id_type": rec.id_type.id,
@@ -73,7 +73,22 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
                             "status": status,
                             "registrant_id": registrant.id,
                         }
+
                         self.env["spp.print.queue.id"].create(vals)
+                        counter += 1
+
+                    message = _("%s request/s created.", counter)
+                    kind = "info"
+                    return {
+                        "type": "ir.actions.client",
+                        "tag": "display_notification",
+                        "params": {
+                            "title": _("ID Requests"),
+                            "message": message,
+                            "sticky": True,
+                            "type": kind,
+                        },
+                    }
             else:
                 raise UserError(_("There are no selected Template!"))
         return
