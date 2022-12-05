@@ -171,34 +171,40 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 colspan="4"
                                 attrs="{'invisible':[('state','!=','draft')]}"
                                 class="oe_inline"
+                                style="margin-left: 10px;"
                             />
                         </h2>
+                        <label for="applicant_id" string="Applicant:" />
+                        <h3>
+                            <field
+                                name="applicant_id"
+                                options="{'no_create': True,'no_open':True}"
+                                attrs="{'readonly':['!',('state','!=','draft'),('id_document_details','!=',False)]}"
+                                domain="applicant_id_domain"
+                                required="1"
+                                force_save="1"
+                                class="oe_inline"
+                            />
+                            <!-- ID Document Scanner Widget -->
+                            <field
+                                name="id_document_details"
+                                widget="id_document_reader_field"
+                                colspan="4"
+                                attrs="{'invisible':[('state','!=','draft')]}"
+                                style="margin-left: 10px;"
+                                class="oe_inline"
+                            />
+                            <button
+                                name="open_applicant_form"
+                                type="object"
+                                icon="fa-external-link"
+                                class="btn-success oe_inline"
+                                attrs="{'invisible':[('applicant_id','=',False)]}"
+                                style="margin-left: 10px;"
+                            />
+                        </h3>
                     </div>
-                    <!-- ID Document Scanner Widget -->
-                    <field
-                        name="id_document_details"
-                        widget="id_document_reader_field"
-                        colspan="4"
-                        attrs="{'invisible':[('state','!=','draft')]}"
-                        nolabel="1"
-                    />
                     <group colspan="4" col="4" string="Applicant Information">
-                        <field
-                            name="applicant_id"
-                            options="{'no_create': True,'no_open':True}"
-                            attrs="{'readonly':[('state','!=','draft')]}"
-                            domain="applicant_id_domain"
-                            required="1"
-                        />
-                        <button
-                            name="open_applicant_form"
-                            type="object"
-                            icon="fa-external-link"
-                            class="btn-success"
-                            attrs="{'invisible':[('applicant_id','=',False)]}"
-                            style="margin-left: 10px;"
-                            colspan="2"
-                        />
                         <field
                             name="applicant_phone"
                             string="Phone No."
