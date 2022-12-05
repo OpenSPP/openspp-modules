@@ -37,5 +37,11 @@ class IdDetailsIndividual(models.Model):
                         vals.update({"image_1920": details["photo"]})
 
                     self.update(vals)
-        except json.decoder.JSONDecodeError as e:
+        except Exception as e:
             _logger.error(e)
+
+        self.update(
+            {
+                "id_document_details": "",
+            }
+        )
