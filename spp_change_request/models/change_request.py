@@ -644,7 +644,7 @@ class ChangeRequestValidators(models.Model):
     _description = "Change Request Validators"
     _rec_name = "validator_id"
 
-    request_id = fields.Many2one("spp.change.request", "Change Request", required=True)
+    request_id = fields.Many2one("spp.change.request", "Change Request")
     stage_id = fields.Many2one(
         "spp.change.request.validation.stage", "Validation Stage", required=True
     )

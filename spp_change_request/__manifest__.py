@@ -22,6 +22,7 @@
         "g2p_registry_membership",
         "spp_service_points",
         "spp_area",
+        "spp_scan_id_document",
         "dms_field",
         "web_domain_field",
     ],
