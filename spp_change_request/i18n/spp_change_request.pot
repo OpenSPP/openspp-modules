@@ -116,6 +116,11 @@ msgid "Applicant's Phone Number"
 msgstr ""
 
 #. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Applicant:"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__applied
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Applied"
