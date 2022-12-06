@@ -550,7 +550,7 @@ class ChangeRequestBase(models.Model):
 
     def on_validate(self):
         for rec in self:
-            rec.request_type_ref_id._on_validate(rec)
+            return rec.request_type_ref_id._on_validate(rec)
 
     def apply(self):
         for rec in self:

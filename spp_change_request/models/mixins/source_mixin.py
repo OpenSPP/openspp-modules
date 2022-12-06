@@ -155,7 +155,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def on_validate(self):
         for rec in self:
-            rec._on_validate(rec.change_request_id)
+            return rec._on_validate(rec.change_request_id)
 
     def _on_validate(self, request):
         self.ensure_one()
@@ -206,12 +206,67 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         except UserError:
                             # Silently ignore and leave the change request as is until someone with the correct access
                             # can apply the changes
-                            logging.info(
-                                "User %s does not have access to apply changes."
-                                % self.env.user
+                            log_message = _(
+                                "User %s does not have access to apply changes.",
+                                self.env.user,
                             )
+                            logging.info(log_message)
                             # revert the assignment if the apply failed
                             request.update({"assign_to_id": None})
+
+                    if request.state == "validated":
+                        message = _("The change request has been fully validated")
+                        return {
+                            "type": "ir.actions.client",
+                            "tag": "display_notification",
+                            "params": {
+                                "title": _("Change Request Validated"),
+                                "message": message + " %s",
+                                "links": [
+                                    {
+                                        "label": "Refresh Page",
+                                    }
+                                ],
+                                "sticky": True,
+                                "type": "success",
+                            },
+                        }
+                        # Use Rainbowman
+                        # return {
+                        #     'effect': {
+                        #         'fadeout': 'slow',
+                        #         'message': message,
+                        #         'type': 'rainbow_man',
+                        #     }
+                        # }
+                    if request.state == "applied":
+                        message = _(
+                            "The change request has been validated and the changes has been applied"
+                        )
+                        return {
+                            "type": "ir.actions.client",
+                            "tag": "display_notification",
+                            "params": {
+                                "title": _("Change Request Applied"),
+                                "message": message + " %s",
+                                "links": [
+                                    {
+                                        "label": "Refresh Page",
+                                    }
+                                ],
+                                "sticky": True,
+                                "type": "success",
+                            },
+                        }
+                        # Use Rainbowman
+                        # return {
+                        #     'effect': {
+                        #         'fadeout': 'slow',
+                        #         'message': message,
+                        #         'type': 'rainbow_man',
+                        #     }
+                        # }
+
                 else:
                     raise ValidationError(message)
             else:
@@ -248,6 +303,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 )
                 # Mark previous activity as 'done'
                 request.last_activity_id.action_done()
+
             else:
                 raise ValidationError(
                     _(
