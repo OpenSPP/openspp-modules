@@ -19,6 +19,19 @@ odoo.define("spp_scan_id_document.field", function (require) {
             this.initialise_url = initialise_url;
             this.get_url = readdocument_url;
             this.shutdown_url = shutdown_url;
+
+            const default_button_text = "Scan Document";
+            const default_icon = "fa fa-fw o_button_icon fa-external-link";
+            const default_classes = "btn oe_stat_button oe_edit_only";
+            const default_classes_field = "btn btn-primary oe_edit_only";
+            var icon = "";
+            if (this.attrs.icon) {
+                icon = "fa fa-fw o_button_icon " + this.attrs.icon;
+            }
+            this.text = this.attrs.text || this.attrs.title || this.attrs.string || default_button_text;
+            this.icon = icon || default_icon;
+            this.classes = this.attrs.classes || this.attrs.classNames || default_classes;
+            this.classes_field = this.attrs.classes || default_classes_field;
         },
         _onClick: function () {
             if (!this.onclick_started) {
