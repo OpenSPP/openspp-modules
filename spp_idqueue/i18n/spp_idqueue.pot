@@ -20,6 +20,12 @@ msgid "%s - 1"
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
+#, python-format
+msgid "%s request/s created."
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_idqueue_form
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_individuals_idqueue_form
 msgid "<span class=\"o_stat_text\">Request</span>"
@@ -302,6 +308,12 @@ msgstr ""
 #. module: spp_idqueue
 #: model:res.groups,name:spp_idqueue.group_g2p_id_requestor
 msgid "ID Requestor"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
+#, python-format
+msgid "ID Requests"
 msgstr ""
 
 #. module: spp_idqueue
