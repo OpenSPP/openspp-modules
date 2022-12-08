@@ -10,7 +10,13 @@
                 expr="//div[@name='button_box']/button[@name='%(g2p_registry_base.action_disable_registrant_wizard)d']"
                 position="before"
             >
-                <field name="id_document_details" widget="id_document_reader" />
+                <field
+                    name="id_document_details"
+                    widget="id_document_reader"
+                    classes="btn oe_stat_button oe_edit_only"
+                    icon="fa-external-link"
+                    text="Scan Document"
+                />
             </xpath>
         </field>
     </record>

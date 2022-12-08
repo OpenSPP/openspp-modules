@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
     <span t-name="id_document_reader">
-        <button class="btn oe_stat_button oe_edit_only">
-            <i class="fa fa-fw o_button_icon fa-external-link" />
+        <button t-att-class="widget.classes">
+            <i t-att-class="widget.icon" />
             <div class="o_form_field o_stat_info">
-                <span class="o_stat_text">Scan Document</span>
+                <span class="o_stat_text"><t t-esc="widget.text" /></span>
             </div>
         </button>
     </span>
 
     <span t-name="id_document_reader_field">
-        <button type="button" class="btn btn-primary oe_edit_only" title="Scan Document">
-            Scan Document
+        <button type="button" t-att-class="widget.classes_field">
+            <t t-esc="widget.text" />
         </button>
     </span>
 
