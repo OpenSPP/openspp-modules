@@ -230,6 +230,12 @@ msgid "Change Request Applicator"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Change Request Applied"
+msgstr ""
+
+#. module: spp_change_request
 #: model:dms.access.group,name:spp_change_request.dms_access_group
 msgid "Change Request DMS Group"
 msgstr ""
@@ -267,6 +273,12 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_user_assign_wizard
 msgid "Change Request User Assignment Wizard"
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Change Request Validated"
 msgstr ""
 
 #. module: spp_change_request
@@ -910,6 +922,18 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
+msgid "The change request has been fully validated"
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request has been validated and the changes has been applied"
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
 msgid ""
 "The change request is now fully validated. It is now submitted for final "
 "application of changes."
@@ -1065,6 +1089,12 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_id
 msgid "User"
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "User %s does not have access to apply changes."
 msgstr ""
 
 #. module: spp_change_request
