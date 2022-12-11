@@ -680,7 +680,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__next_area_center_ids
-msgid "Next Center Area"
+msgid "Next Area"
 msgstr ""
 
 #. module: spp_change_request
@@ -716,7 +716,7 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
-msgid "Only draft change requests can be deleted."
+msgid "Only draft change requests can be deleted by its creator."
 msgstr ""
 
 #. module: spp_change_request
@@ -1000,7 +1000,6 @@ msgstr ""
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The required document category is not configured."
 msgstr ""
@@ -1030,7 +1029,6 @@ msgid "There are no data captured from the QR Code scanner."
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "There are no directories defined for this change request."
