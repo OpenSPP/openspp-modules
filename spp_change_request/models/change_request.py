@@ -11,6 +11,31 @@ _logger = logging.getLogger(__name__)
 
 
 class ChangeRequestBase(models.Model):
+    """
+    ChangeRequestBase is the base model for all change requests.
+    The object containing the change request details points to this model.
+
+    Every change requests have a DMS folder associated where the documents are stored.
+
+    The change request is assigned to a user who is responsible for the change request.
+
+    A change request can be only deleted if it is in draft state and by its original submitter.
+
+    The change request status can evolve as follows:
+
+    .. graphviz::
+
+       digraph {
+          "draft" -> "pending";
+          "pending" -> "validated";
+          "validated" -> "validated";
+          "validated" -> "applied";
+          "validated" -> "rejected";
+          "rejected" -> "pending";
+       }
+
+    """
+
     _name = "spp.change.request"
     _description = "Change Request"
     _inherit = ["mail.thread", "mail.activity.mixin"]
@@ -23,7 +48,7 @@ class ChangeRequestBase(models.Model):
 
     name = fields.Char("Request #", required=True, default=_default_name)
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
-    date_requested = fields.Datetime()
+    date_requested = fields.Datetime()  # Date the change request was submitted
     request_type = fields.Selection(
         selection="_selection_request_type_ref_id", required=True
     )
@@ -31,7 +56,7 @@ class ChangeRequestBase(models.Model):
         "res.partner",
         "Registrant",
         domain=[("is_registrant", "=", True)],
-    )
+    )  #: Registrant who submitted the change request
 
     # For ID Scanner Widget
     id_document_details = fields.Text("Scanned ID Document")
@@ -42,37 +67,55 @@ class ChangeRequestBase(models.Model):
         "res.partner",
         "Applicant",
         domain=[("is_registrant", "=", True), ("is_group", "=", False)],
-    )
+    )  #: Applicant who submitted the change request (In case the registrant is a group, the applicant is the individual)
     applicant_id_domain = fields.Char(
         compute="_compute_applicant_id_domain",
         readonly=True,
         store=False,
     )
-    applicant_phone = fields.Char("Applicant's Phone Number")
+    applicant_phone = fields.Char(
+        "Applicant's Phone Number"
+    )  #: Applicant's phone number
 
     request_type_ref_id = fields.Reference(
         string="Change Request Template", selection="_selection_request_type_ref_id"
     )
     validator_ids = fields.One2many(
         "spp.change.request.validators", "request_id", "Validation Records"
-    )
-    assign_to_id = fields.Many2one("res.users", "Assigned to")
-    last_validated_by_id = fields.Many2one("res.users", "Validated by")
-    date_validated = fields.Datetime()
+    )  #: List of validators that validated the change request
+    assign_to_id = fields.Many2one("res.users", "Assigned to")  #: current assigned user
+    last_validated_by_id = fields.Many2one(
+        "res.users", "Validated by"
+    )  #: last user that validated the change request
+    date_validated = (
+        fields.Datetime()
+    )  #: last date the change request has been validated
 
     # TODO: Record the next validation sequence and area center
     next_validation_sequence_id = fields.Many2one(
         "spp.change.request.validation.sequence", "Next Validation Sequence"
-    )
-    next_area_center_ids = fields.Many2many("spp.area", string="Next Center Area")
+    )  #: When the change request is pending validation, this store the next required validation in the sequence
 
-    applied_by_id = fields.Many2one("res.users", "Applied by")
-    date_applied = fields.Datetime()
-    rejected_by_id = fields.Many2one("res.users", "Rejected by")
-    date_rejected = fields.Datetime()
-    rejected_remarks = fields.Text("Rejection Remarks")
+    # TODO: @edwin: remove `center` from this variable name
+    next_area_center_ids = fields.Many2many(
+        "spp.area", string="Next Area"
+    )  #: When the change request change the area, we store the destination in case a validation based on it is required
+
+    applied_by_id = fields.Many2one(
+        "res.users", "Applied by"
+    )  #: user that applied the change request
+    date_applied = fields.Datetime()  #: date the change request was applied
+    rejected_by_id = fields.Many2one(
+        "res.users", "Rejected by"
+    )  #: user that rejected the change request
+    date_rejected = fields.Datetime()  #: date the change request was rejected
+    rejected_remarks = fields.Text(
+        "Rejection Remarks"
+    )  #: remarks of why the change request was rejected
 
     last_activity_id = fields.Many2one("mail.activity")
+
+    # TODO: @edwin: can we rename this status?
     state = fields.Selection(
         [
             ("draft", "Draft"),
@@ -85,10 +128,11 @@ class ChangeRequestBase(models.Model):
         required=True,
         readonly=True,
         default="draft",
-    )
+    )  #: status of the change request
 
     @api.model
     def create(self, vals):
+
         # Assign the CR to the current user by default
         if "assign_to_id" not in vals or vals["assign_to_id"] is None:
             vals["assign_to_id"] = self.env.user.id
@@ -111,7 +155,9 @@ class ChangeRequestBase(models.Model):
                 rec.request_type_ref_id.unlink()
                 return super(ChangeRequestBase, self).unlink()
             else:
-                raise UserError(_("Only draft change requests can be deleted."))
+                raise UserError(
+                    _("Only draft change requests can be deleted by its creator.")
+                )
 
     @api.model
     def _selection_request_type_ref_id(self):
@@ -378,84 +424,87 @@ class ChangeRequestBase(models.Model):
             # Open Request Form
             return rec.open_change_request_form(target="current", mode="edit")
 
-    def prepare_directory(self):
-        self.ensure_one()
-        root_dir = self.env["dms.directory"].search(
-            [("is_root_directory", "=", True), ("name", "=", "Change Requests")]
-        )
-        if not root_dir:
-            res_model = self.request_type
-            storage = self.env.ref("spp_change_request.dms_change_request_storage")
-            root_dir = self.env["dms.directory"].create(
-                {
-                    "storage_id": storage.id,
-                    # "res_model": self,
-                    "group_ids": [(4, storage.field_default_group_id.id)],
-                    "name": "Change Requests",
-                    "is_root_directory": True,
-                }
-            )
-        root_dir = root_dir[0]
-
-        logging.info("Root Directory: %s", root_dir)
-
-        requests_dir = self.env["dms.directory"].search(
-            [("id", "child_of", root_dir.id), ("name", "=", self.request_type)]
-        )
-        if not requests_dir:
-            res_model = self.request_type
-            storage = self.env.ref(self.env[res_model].DMS_STORAGE)
-            requests_dir = self.env["dms.directory"].create(
-                {
-                    "name": self.request_type,
-                    # "storage_id": storage.id,
-                    "parent_id": root_dir.id,
-                    # "res_model": self.request_type,
-                    # "group_ids": [(4, root_dir.group_ids.ids)],
-                    "is_root_directory": False,
-                }
-            )
-
-        requests_dir = requests_dir[0]
-        logging.info("Requests Directory: %s", requests_dir)
-        return requests_dir
-
-    def create_folder_for_request(self):
-        self.ensure_one()
-        requests_dir = self.prepare_directory()
-        request_dir = self.env["dms.directory"].search(
-            [("id", "child_of", requests_dir.id), ("name", "=", self.name)]
-        )
-        logging.info("Request Directory before: %s", request_dir)
-        if not request_dir:
-            res_model = self.request_type
-            storage = self.env.ref(self.env[res_model].DMS_STORAGE)
-            request_dir = self.env["dms.directory"].create(
-                {
-                    "name": self.name,
-                    "storage_id": storage.id,
-                    "parent_id": requests_dir.id,
-                    "res_model": self.request_type,
-                    # "group_ids": [(4, requests_dir.group_ids.ids)],
-                    "is_root_directory": False,
-                }
-            )
-        logging.info("Request Directory after: %s", request_dir)
-        request_dir = request_dir[0]
-
-        applicant_dir = self.env["dms.directory"].search(
-            [("id", "child_of", request_dir.id), ("name", "=", "Applicant")]
-        )
-        if not applicant_dir:
-            self.env["dms.directory"].create(
-                {
-                    "name": "Applicant",
-                    "parent_id": request_dir.id,
-                    "is_root_directory": False,
-                }
-            )
-
-        return request_dir
+    # def prepare_directory(self):
+    #     """
+    #     Prepare the directory for the change request attachments
+    #     """
+    #     self.ensure_one()
+    #     root_dir = self.env["dms.directory"].search(
+    #         [("is_root_directory", "=", True), ("name", "=", "Change Requests")]
+    #     )
+    #     if not root_dir:
+    #         res_model = self.request_type
+    #         storage = self.env.ref("spp_change_request.dms_change_request_storage")
+    #         root_dir = self.env["dms.directory"].create(
+    #             {
+    #                 "storage_id": storage.id,
+    #                 # "res_model": self,
+    #                 "group_ids": [(4, storage.field_default_group_id.id)],
+    #                 "name": "Change Requests",
+    #                 "is_root_directory": True,
+    #             }
+    #         )
+    #     root_dir = root_dir[0]
+    #
+    #     logging.info("Root Directory: %s", root_dir)
+    #
+    #     requests_dir = self.env["dms.directory"].search(
+    #         [("id", "child_of", root_dir.id), ("name", "=", self.request_type)]
+    #     )
+    #     if not requests_dir:
+    #         res_model = self.request_type
+    #         storage = self.env.ref(self.env[res_model].DMS_STORAGE)
+    #         requests_dir = self.env["dms.directory"].create(
+    #             {
+    #                 "name": self.request_type,
+    #                 # "storage_id": storage.id,
+    #                 "parent_id": root_dir.id,
+    #                 # "res_model": self.request_type,
+    #                 # "group_ids": [(4, root_dir.group_ids.ids)],
+    #                 "is_root_directory": False,
+    #             }
+    #         )
+    #
+    #     requests_dir = requests_dir[0]
+    #     logging.info("Requests Directory: %s", requests_dir)
+    #     return requests_dir
+    #
+    # def create_folder_for_request(self):
+    #     self.ensure_one()
+    #     requests_dir = self.prepare_directory()
+    #     request_dir = self.env["dms.directory"].search(
+    #         [("id", "child_of", requests_dir.id), ("name", "=", self.name)]
+    #     )
+    #     logging.info("Request Directory before: %s", request_dir)
+    #     if not request_dir:
+    #         res_model = self.request_type
+    #         storage = self.env.ref(self.env[res_model].DMS_STORAGE)
+    #         request_dir = self.env["dms.directory"].create(
+    #             {
+    #                 "name": self.name,
+    #                 "storage_id": storage.id,
+    #                 "parent_id": requests_dir.id,
+    #                 "res_model": self.request_type,
+    #                 # "group_ids": [(4, requests_dir.group_ids.ids)],
+    #                 "is_root_directory": False,
+    #             }
+    #         )
+    #     logging.info("Request Directory after: %s", request_dir)
+    #     request_dir = request_dir[0]
+    #
+    #     applicant_dir = self.env["dms.directory"].search(
+    #         [("id", "child_of", request_dir.id), ("name", "=", "Applicant")]
+    #     )
+    #     if not applicant_dir:
+    #         self.env["dms.directory"].create(
+    #             {
+    #                 "name": "Applicant",
+    #                 "parent_id": request_dir.id,
+    #                 "is_root_directory": False,
+    #             }
+    #         )
+    #
+    #     return request_dir
 
     def create_request_detail(self):
         for rec in self:
@@ -539,7 +588,7 @@ class ChangeRequestBase(models.Model):
             }
         return None
 
-    def on_submit(self):
+    def action_submit(self):
         for rec in self:
             if rec.request_type_ref_id:
                 rec.request_type_ref_id._on_submit(rec)
@@ -548,15 +597,15 @@ class ChangeRequestBase(models.Model):
                     _("The change request type must be properly filled-up.")
                 )
 
-    def on_validate(self):
+    def action_validate(self):
         for rec in self:
             return rec.request_type_ref_id._on_validate(rec)
 
-    def apply(self):
+    def action_apply(self):
         for rec in self:
             rec.request_type_ref_id._apply(rec)
 
-    def on_reject(self):
+    def action_reject(self):
         form_id = self.env.ref("spp_change_request.change_request_reject_wizard").id
         action = {
             "name": _("Reject Change Request"),

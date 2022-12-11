@@ -6,13 +6,39 @@ from odoo.exceptions import UserError, ValidationError
 
 
 class ChangeRequestSourceMixin(models.AbstractModel):
-    """Change Request Data Source mixin."""
+    """
+    Change Request Data Source mixin.
+    ---------------------------------
+    This mixin is inherited by objects implementing a change Request.
+
+    Example:
+
+    .. code-block:: python
+
+        class ChangeRequestAddChildren(models.Model):
+            _name = "spp.change.request.demo.add.children"
+            _inherit = [
+                "spp.change.request.source.mixin",
+                "spp.change.request.validation.sequence.mixin",
+            ]
+            _description = "Add Children Change Request Type"
+
+            # Initialize DMS Storage
+            DMS_STORAGE = "spp_change_request_add_children.attachment_storage_add_children"
+            VALIDATION_FORM = "spp_change_request_add_children.view_change_request_add_children_validation_form"
+            REQUIRED_DOCUMENT_TYPE = [
+                "change_request.dms_birth_certificate_category",
+            ]
+
+    """
 
     _name = "spp.change.request.source.mixin"
     _description = "Change Request Data Source Mixin"
     _rec_name = "change_request_id"
 
-    REQUIRED_DOCUMENT_TYPE = []
+    REQUIRED_DOCUMENT_TYPE = []  # List of required document category `dms.category`
+    VALIDATION_FORM = None
+    DMS_STORAGE = None
     AUTO_APPLY_CHANGES = True
 
     registrant_id = fields.Many2one(
@@ -82,8 +108,9 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     def get_request_type_view_id(self):
         """
         Retrieve form view ID.
-        :param self: The request.
+
         :return: form view ID
+        :rtype: int
         """
         return (
             self.env["ir.ui.view"]
@@ -94,32 +121,31 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def update_live_data(self):
         """
-        This method is used to apply the changes to models based on the type of change request.
-        :param self: The request.
-        :return:
+        This method is meant to be overridden by the child classes to update the data of the registrant.
+
         """
         raise NotImplementedError()
 
     def validate_data(self):
         """
-        This method is used to validate the data of the change request before submitting for review.
-        :param self: The request.
-        :return:
-        :raises:
-            ValidationError: Exception raised when something is not valid.
+        This method is meant to be overridden by the child classes to validate the data of the change request
+        before submitting for review.
+
+        :raise ValidationError: Exception raised when something is not valid.
         """
         self.ensure_one()
+        self.check_required_documents()
 
-    def on_submit(self):
+    def action_submit(self):
         for rec in self:
             rec._on_submit(rec.change_request_id)
 
     def _on_submit(self, request):
         """
-        This method is used to submit the change request.
-        :param self: The request type.
+        This method is called when the Change Request is submitted for validation.
+
         :param request: The request.
-        :return:
+        :raise UserError: Exception raised when something is not valid.
         """
         self.ensure_one()
         if request.state == "draft":
@@ -149,11 +175,17 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 }
             )
         else:
+            # TODO: @edwin Should we use UserError or ValidationError?
             raise UserError(
                 _("The request must be in draft state to be set to pending validation.")
             )
 
-    def on_validate(self):
+    def action_validate(self):
+        """
+        This method is called when the Change Request is validated by a user.
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
         for rec in self:
             return rec._on_validate(rec.change_request_id)
 
@@ -202,7 +234,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     # Update the live data if the user has the access
                     if self.AUTO_APPLY_CHANGES and message == "FINAL":
                         try:
-                            self.apply()
+                            self.action_apply()
                         except UserError:
                             # Silently ignore and leave the change request as is until someone with the correct access
                             # can apply the changes
@@ -275,16 +307,20 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 )
         return
 
-    def apply(self):
+    def action_apply(self):
+        """
+        This method is called when the Change Request is applied to the live data.
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
         for rec in self:
             rec._apply(rec.change_request_id)
 
     def _apply(self, request):
         """
         This method is used to apply the change request.
-        :param self: The request type.
+
         :param request: The request.
-        :return:
         """
         self.ensure_one()
         # Check if CR is assigned to current user
@@ -311,28 +347,33 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     )
                 )
 
-    def on_reject(self):
-        for rec in self:
-            form_id = self.env.ref("spp_change_request.change_request_reject_wizard").id
-            action = {
-                "name": _("Reject Change Request"),
-                "type": "ir.actions.act_window",
-                "view_mode": "form",
-                "view_id": form_id,
-                "view_type": "form",
-                "res_model": "spp.change.request.reject.wizard",
-                "target": "new",
-                "context": {
-                    "change_request_id": rec.change_request_id.id,
-                },
-            }
-            return action
+    def action_reject(self):
+        """
+        This method is called when the user click on reject during the validation process.
+        """
+        self.ensure_one()
 
-    def _on_reject(self, request, rejected_remarks):
+        form_id = self.env.ref("spp_change_request.change_request_reject_wizard").id
+        action = {
+            "name": _("Reject Change Request"),
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "view_id": form_id,
+            "view_type": "form",
+            "res_model": "spp.change.request.reject.wizard",
+            "target": "new",
+            "context": {
+                "change_request_id": self.change_request_id.id,
+            },
+        }
+        return action
+
+    def _on_reject(self, request, rejected_remarks: str):
         """
         This method is used to reject the change request.
-        :param self: The request type.
+
         :param request: The request.
+        :param rejected_remarks: the reason for the rejection
         :return:
         """
         self.ensure_one()
@@ -476,6 +517,12 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 rec.current_user_assigned = True
 
     def check_required_documents(self):
+        """
+        This method verifies that documents with the category specified in :attribute:`REQUIRED_DOCUMENT_TYPE`
+        are attached to the change request.
+
+        :raise ValidationError: Exception raised when documents are missing
+        """
         for directories in self.dms_directory_ids:
             file_ids_child = []
 
@@ -496,19 +543,21 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
             if missing_docs:
                 if len(missing_docs) > 1:
-                    return _(
-                        "The required documents %s are missing.",
-                        ", ".join(missing_docs),
+                    raise ValidationError(
+                        _(
+                            "The required documents %s are missing.",
+                            ", ".join(missing_docs),
+                        )
                     )
                 else:
-                    return _(
-                        "The required document %s is missing.",
-                        ", ".join(missing_docs),
+                    raise ValidationError(
+                        _(
+                            "The required document %s is missing.",
+                            ", ".join(missing_docs),
+                        )
                     )
 
-        return None
-
-    def attach_documents(self):
+    def action_attach_documents(self):
         for rec in self:
             # TODO: Get the directory_id based on document type
             # Get the first directory for now
@@ -551,32 +600,33 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     _("There are no directories defined for this change request.")
                 )
 
-    def upload_dms(self, file, document_number, category=None):
-        # TODO: Get the directory_id based on document type
-        # Get the first directory for now
-        if self.dms_directory_ids:
-            if self._origin:
-                directory_id = self._origin.dms_directory_ids[0].id
-            else:
-                directory_id = self.dms_directory_ids[0].id
-            category_id = None
-            if category:
-                category_id = self.env.ref(category).id
-                category = self.env["dms.category"].search([("id", "=", category_id)])
-                if category:
-                    category_id = category[0].id
-                else:
-                    raise UserError(
-                        _("The required document category is not configured.")
-                    )
-            vals = {
-                "name": f"UID-{document_number}",
-                "directory_id": directory_id,
-                "category_id": category_id,
-                "content": file,
-            }
-            self.env["dms.file"].create(vals)
-        else:
-            raise UserError(
-                _("There are no directories defined for this change request.")
-            )
+    #
+    # def upload_dms(self, file, document_number, category=None):
+    #     # TODO: Get the directory_id based on document type
+    #     # Get the first directory for now
+    #     if self.dms_directory_ids:
+    #         if self._origin:
+    #             directory_id = self._origin.dms_directory_ids[0].id
+    #         else:
+    #             directory_id = self.dms_directory_ids[0].id
+    #         category_id = None
+    #         if category:
+    #             category_id = self.env.ref(category).id
+    #             category = self.env["dms.category"].search([("id", "=", category_id)])
+    #             if category:
+    #                 category_id = category[0].id
+    #             else:
+    #                 raise UserError(
+    #                     _("The required document category is not configured.")
+    #                 )
+    #         vals = {
+    #             "name": f"UID-{document_number}",
+    #             "directory_id": directory_id,
+    #             "category_id": category_id,
+    #             "content": file,
+    #         }
+    #         self.env["dms.file"].create(vals)
+    #     else:
+    #         raise UserError(
+    #             _("There are no directories defined for this change request.")
+    #         )
