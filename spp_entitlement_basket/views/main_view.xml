@@ -1,0 +1,23 @@
+<odoo>
+
+    <menuitem
+        id="g2p_basket_entitlement_root"
+        name="Basket Entitlement"
+        parent="g2p_programs.g2p_program_menu_root"
+        sequence="420"
+    />
+
+    <menuitem
+        id="g2p_basket_entitlement_reports_menu_root"
+        name="Reports"
+        parent="g2p_basket_entitlement_root"
+        sequence="100"
+    />
+    <menuitem
+        id="g2p_basket_entitlement_config_menu_root"
+        name="Configuration"
+        parent="g2p_basket_entitlement_root"
+        sequence="200"
+    />
+
+</odoo>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_entitlement_basket_admin,Entitlement Basket Admin Access,spp_entitlement_basket.model_spp_entitlement_basket,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_entitlement_basket_product_admin,Entitlement Basket Product Admin Access,spp_entitlement_basket.model_spp_entitlement_basket_product,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+spp_entitlement_basket_product_product_admin, Entitlement Basket Product Product Admin Access,product.model_product_product,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+spp_entitlement_basket_program_manager,Entitlement Basket Program Manager Access,spp_entitlement_basket.model_spp_entitlement_basket,g2p_programs.g2p_program_manager,1,1,1,0
+spp_entitlement_basket_product_program_manager,Entitlement Basket Product Program Manager Access,spp_entitlement_basket.model_spp_entitlement_basket_product,g2p_programs.g2p_program_manager,1,1,1,1
+
+spp_entitlement_basket_product_product_program_manager,Entitlement Basket Product Product Program Manager Access,product.model_product_product,g2p_programs.g2p_program_manager,1,0,0,0
