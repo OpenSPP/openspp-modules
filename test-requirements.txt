@@ -5,3 +5,4 @@ git+https://github.com/OpenG2P/openg2p-registry@15.0#subdirectory=setup/g2p_regi
 git+https://github.com/OpenG2P/openg2p-registry@15.0#subdirectory=setup/g2p_bank
 git+https://github.com/openspp/openspp-odoo-external-dependencies@15.0#subdirectory=setup/odoo_dynamic_dashboard
 git+https://github.com/OpenG2P/openg2p-program@15.0#subdirectory=setup/g2p_programs
+git+https://github.com/OpenSPP/openspp-registry@15.0#subdirectory=setup/spp_service_points
