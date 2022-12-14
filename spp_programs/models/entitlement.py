@@ -46,6 +46,7 @@ class InKindEntitlement(models.Model):
         "product.product", "Product", domain=[("type", "=", "product")]
     )
     qty = fields.Integer("QTY", default=1)
+    unit_price = fields.Float()
     uom_id = fields.Many2one("uom.uom", "Unit of Measure")
 
     # Inventory integration fields

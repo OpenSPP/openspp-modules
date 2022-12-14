@@ -22,6 +22,7 @@
         "views/main_view.xml",
         "views/entitlement_view.xml",
         "views/cycle_view.xml",
+        "views/service_point_view.xml",
     ],
     "assets": {},
     "demo": [],

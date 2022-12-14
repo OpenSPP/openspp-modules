@@ -76,6 +76,7 @@ class SPPBasketEntitlementManager(models.Model):
                     [
                         ("cycle_id", "=", cycle.id),
                         ("partner_id", "in", beneficiaries_ids),
+                        ("product_id", "=", rec.product_id.id),
                     ]
                 )
                 .mapped("partner_id.id")
@@ -96,26 +97,40 @@ class SPPBasketEntitlementManager(models.Model):
             entitlements = []
 
             for beneficiary_id in beneficiaries_with_entitlements_to_create:
-                # TODO: Determine if there's a need for multiplier
-                # multiplier = 1
-
-                entitlements.append(
-                    {
-                        "cycle_id": cycle.id,
-                        "partner_id": beneficiary_id.id,
-                        "total_amount": rec.product_id.list_price * rec.qty,
-                        "product_id": rec.product_id.id,
-                        "qty": rec.qty,
-                        "uom_id": rec.uom_id.id,
-                        "warehouse_id": self.warehouse_id
-                        and self.warehouse_id.id
-                        or None,
-                        "state": "draft",
-                        "valid_from": entitlement_start_validity,
-                        "valid_until": entitlement_end_validity,
-                    }
-                )
-            self.env["g2p.entitlement.inkind"].create(entitlements)
+                # Check service point product_ids
+                if (
+                    beneficiary_id.service_point_ids
+                    and beneficiary_id.service_point_ids.product_ids
+                ):
+                    service_point_product_ids = beneficiary_id.service_point_ids.mapped(
+                        "product_ids.id"
+                    )
+                    if rec.product_id.id in service_point_product_ids:
+                        service_point_id = beneficiary_id.service_point_ids.filtered(
+                            lambda x: rec.product_id.id in x.product_ids.ids
+                        )
+                        # raise UserError("DEBUG: %s" % service_point_id[0])
+                        # TODO: Check inventory
+                        entitlements.append(
+                            {
+                                "cycle_id": cycle.id,
+                                "partner_id": beneficiary_id.id,
+                                "service_point_id": service_point_id.id,
+                                "total_amount": rec.product_id.list_price * rec.qty,
+                                "product_id": rec.product_id.id,
+                                "qty": rec.qty,
+                                "unit_price": rec.product_id.list_price,
+                                "uom_id": rec.uom_id.id,
+                                "warehouse_id": self.warehouse_id
+                                and self.warehouse_id.id
+                                or None,
+                                "state": "draft",
+                                "valid_from": entitlement_start_validity,
+                                "valid_until": entitlement_end_validity,
+                            }
+                        )
+            if entitlements:
+                self.env["g2p.entitlement.inkind"].create(entitlements)
 
     def validate_entitlements(self, cycle, cycle_memberships):
         # TODO: Change the status of the entitlements to `validated` for this members.

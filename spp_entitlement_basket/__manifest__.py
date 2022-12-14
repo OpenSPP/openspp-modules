@@ -21,6 +21,7 @@
         "security/ir.model.access.csv",
         "wizard/create_program_wizard.xml",
         "views/stock/entitlement_basket_view.xml",
+        "views/entitlement_manager_view.xml",
     ],
     "assets": {},
     "demo": [],
