@@ -31,10 +31,14 @@
                     </div>
                     <group>
                         <field name="product_ids" nolabel="1">
-                            <tree>
-                                <field name="product_id" />
-                                <field name="alt_product_ids" widget="many2many_tags" />
-                                <field name="qty" />
+                            <tree editable="top">
+                                <field
+                                    name="product_id"
+                                    options="{'no_open':True,'no_create':True,'no_edit':True}"
+                                    required="1"
+                                />
+                                <field name="qty" required="1" />
+                                <field name="uom_id" readonly="1" options="{'no_open':True}" />
                             </tree>
                             <form>
                                 <sheet>
@@ -45,17 +49,13 @@
                                                 id="product_id"
                                                 name="product_id"
                                                 options="{'no_open':True,'no_create':True,'no_edit':True}"
+                                                required="1"
                                             />
                                         </h1>
                                     </div>
                                     <group colspan="4" col="4">
-                                        <field
-                                            name="alt_product_ids"
-                                            widget="many2many_tags"
-                                            options="{'no_open':True,'no_create':True,'no_edit':True}"
-                                            colspan="4"
-                                        />
                                         <field name="qty" required="1" />
+                                        <field name="uom_id" readonly="1" options="{'no_open':True}" />
                                     </group>
                                 </sheet>
                             </form>
@@ -114,7 +114,7 @@
         id="menu_entitlement_basket"
         name="Entitlement Basket"
         action="action_entitlement_basket"
-        parent="g2p_basket_entitlement_config_menu_root"
+        parent="spp_programs.spp_programs_config_menu_root"
         sequence="10"
         groups="g2p_registry_base.group_g2p_admin,g2p_programs.g2p_program_manager"
     />

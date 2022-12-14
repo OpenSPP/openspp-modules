@@ -1,10 +1,14 @@
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
 from odoo import api, fields, models
 from odoo.tools.sql import column_exists, create_column
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
-    entitlement_id = fields.Many2one("g2p.entitlement", "Entitlement", index=True)
+    entitlement_id = fields.Many2one(
+        "g2p.entitlement.inkind", "In-kind Entitlement", index=True
+    )
 
     @api.model
     def _prepare_merge_moves_distinct_fields(self):

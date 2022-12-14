@@ -1,3 +1,5 @@
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
 from odoo import api, fields, models
 
 
@@ -20,12 +22,9 @@ class EntitlementBasket(models.Model):
         for rec in self:
             product_names = ""
             for ctr, pr in enumerate(rec.product_ids, start=1):
-                product_names += f"{ctr}.) {pr.product_id.name}"
-                if pr.alt_product_ids:
-                    product_names += " - Alternate Products: " + ", ".join(
-                        pr.alt_product_ids.mapped("name")
-                    )
-                product_names += ". \n"
+                product_names += (
+                    f"{ctr}.) {pr.product_id.name} - {pr.qty} {pr.uom_id.name}\n"
+                )
             rec.product_names = product_names
 
 
@@ -33,13 +32,11 @@ class EntitlementBasketProducts(models.Model):
     _name = "spp.entitlement.basket.product"
     _description = "Entitlement Basket Product"
 
-    basket_id = fields.Many2one("spp.entitlement.basket", "Entitlement Basket", required=True)
+    basket_id = fields.Many2one(
+        "spp.entitlement.basket", "Entitlement Basket", required=True
+    )
     product_id = fields.Many2one(
         "product.product", "Product", domain=[("type", "=", "product")], required=True
     )
-    alt_product_ids = fields.Many2many(
-        "product.product",
-        string="Alternate Products",
-        domain=[("type", "=", "product")],
-    )
-    qty = fields.Integer("QTY")
+    qty = fields.Integer("QTY", default=1)
+    uom_id = fields.Many2one("uom.uom", "Unit of Measure", related="product_id.uom_id")

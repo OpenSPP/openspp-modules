@@ -1,10 +1,11 @@
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
 class EntitlementManager(models.Model):
     _inherit = "g2p.program.entitlement.manager"
-    _description = "Basket Entitlement Manager"
 
     @api.model
     def _selection_manager_ref_id(self):
@@ -33,6 +34,9 @@ class SPPBasketEntitlementManager(models.Model):
         )
 
     # Basket Entitlement Manager
+    entitlement_basket_id = fields.Many2one(
+        "spp.entitlement.basket", "Entitlement Basket"
+    )
     entitlement_item_ids = fields.One2many(
         "g2p.program.entitlement.manager.basket.item",
         "entitlement_id",
@@ -67,7 +71,7 @@ class SPPBasketEntitlementManager(models.Model):
             # Get beneficiaries_with_entitlements to prevent generating
             # the same entitlement for beneficiaries
             beneficiaries_with_entitlements = (
-                self.env["g2p.entitlement"]
+                self.env["g2p.entitlement.inkind"]
                 .search(
                     [
                         ("cycle_id", "=", cycle.id),
@@ -94,13 +98,12 @@ class SPPBasketEntitlementManager(models.Model):
             for beneficiary_id in beneficiaries_with_entitlements_to_create:
                 # TODO: Determine if there's a need for multiplier
                 # multiplier = 1
-                # TODO: initial_amount based on qty and molsa qty
 
                 entitlements.append(
                     {
                         "cycle_id": cycle.id,
                         "partner_id": beneficiary_id.id,
-                        "initial_amount": rec.product_id.list_price * rec.qty,
+                        "total_amount": rec.product_id.list_price * rec.qty,
                         "product_id": rec.product_id.id,
                         "qty": rec.qty,
                         "uom_id": rec.uom_id.id,
@@ -108,12 +111,11 @@ class SPPBasketEntitlementManager(models.Model):
                         and self.warehouse_id.id
                         or None,
                         "state": "draft",
-                        "is_cash_entitlement": False,
                         "valid_from": entitlement_start_validity,
                         "valid_until": entitlement_end_validity,
                     }
                 )
-            self.env["g2p.entitlement"].create(entitlements)
+            self.env["g2p.entitlement.inkind"].create(entitlements)
 
     def validate_entitlements(self, cycle, cycle_memberships):
         # TODO: Change the status of the entitlements to `validated` for this members.
@@ -152,18 +154,16 @@ class SPPBasketEntitlementManager(models.Model):
         action = {
             "name": _("Cycle Basket Entitlements"),
             "type": "ir.actions.act_window",
-            "res_model": "g2p.entitlement",
+            "res_model": "g2p.entitlement.inkind",
             "context": {
                 "create": False,
                 "default_cycle_id": cycle.id,
             },
             "view_mode": "list,form",
             "views": [
-                [self.env.ref("g2p_programs.view_entitlement_tree").id, "tree"],
+                [self.env.ref("spp_programs.view_entitlement_inkind_tree").id, "tree"],
                 [
-                    self.env.ref(
-                        "spp_entitlement_in_kind.view_entitlement_basket_form"
-                    ).id,
+                    self.env.ref("spp_programs.view_entitlement_inkind_form").id,
                     "form",
                 ],
             ],
@@ -175,11 +175,9 @@ class SPPBasketEntitlementManager(models.Model):
         return {
             "name": "Entitlement",
             "view_mode": "form",
-            "res_model": "g2p.entitlement",
+            "res_model": "g2p.entitlement.inkind",
             "res_id": rec.id,
-            "view_id": self.env.ref(
-                "spp_entitlement_in_kind.view_entitlement_basket_form"
-            ).id,
+            "view_id": self.env.ref("spp_programs.view_entitlement_inkind_form").id,
             "type": "ir.actions.act_window",
             "target": "new",
         }

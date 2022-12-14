@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Entitlement Basket",
+    "name": "OpenSPP Programs",
     "category": "OpenSPP",
     "version": "15.0.0.0.1",
     "sequence": 1,
@@ -13,19 +13,20 @@
         "base",
         "g2p_registry_base",
         "g2p_programs",
-        "spp_programs",
+        "spp_service_points",
         "product",
         "stock",
     ],
     "data": [
         "security/ir.model.access.csv",
-        "wizard/create_program_wizard.xml",
-        "views/stock/entitlement_basket_view.xml",
+        "views/main_view.xml",
+        "views/entitlement_view.xml",
+        "views/cycle_view.xml",
     ],
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
 }
