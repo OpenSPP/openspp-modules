@@ -17,6 +17,12 @@ class EntitlementManager(models.Model):
 
 
 class SPPBasketEntitlementManager(models.Model):
+    """
+    SPPBasketEntitlementManager is the model for the food basket entitlement manager.
+    It provides all the functions for processing food basket entitlements.
+
+    """
+
     _name = "g2p.program.entitlement.manager.basket"
     _inherit = [
         "g2p.base.program.entitlement.manager",
@@ -36,12 +42,12 @@ class SPPBasketEntitlementManager(models.Model):
     # Basket Entitlement Manager
     entitlement_basket_id = fields.Many2one(
         "spp.entitlement.basket", "Entitlement Basket"
-    )
+    )  #: Food basket configured for entitlement
     entitlement_item_ids = fields.One2many(
         "g2p.program.entitlement.manager.basket.item",
         "entitlement_id",
         "Entitlement Items",
-    )
+    )  #: Details of the food basket (products, QTY, UoM)
 
     # Inventory integration fields
     warehouse_id = fields.Many2one(

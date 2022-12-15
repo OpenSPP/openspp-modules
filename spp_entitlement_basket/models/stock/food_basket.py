@@ -4,6 +4,18 @@ from odoo import api, fields, models
 
 
 class EntitlementBasket(models.Model):
+    """
+    EntitlementBasket is the model for food basket configuration.
+    Food baskets are selected in the food basket entitlement manager.
+
+    The field product_ids contains the list of products in a basket with QTY
+    and unit of measure that will be distributed to the beneficiaries.
+
+    Setting the active field to false will make a food basket unselectable
+    in the food basket entitlement manager.
+
+    """
+
     _name = "spp.entitlement.basket"
     _description = "Entitlement Basket"
     _order = "id desc"
@@ -29,6 +41,14 @@ class EntitlementBasket(models.Model):
 
 
 class EntitlementBasketProducts(models.Model):
+    """
+    EntitlementBasketProducts is the model for the products in food baskets.
+    One or more products can be defined per food basket.
+
+    The field product_id is linked to the model product.product.
+
+    """
+
     _name = "spp.entitlement.basket.product"
     _description = "Entitlement Basket Product"
 
