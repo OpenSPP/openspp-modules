@@ -9,6 +9,7 @@ from odoo.exceptions import ValidationError
 class OpenSPPIDQueue(models.Model):
     _name = "spp.print.queue.id"
     _description = "ID Queue"
+    _order = "id DESC"
 
     name = fields.Char("Request Name")
     id_type = fields.Many2one("g2p.id.type", required=True)
@@ -97,7 +98,7 @@ class OpenSPPIDQueue(models.Model):
             rec.status = "cancelled"
 
     def on_distribute(self):
-        if self.filtered(lambda x: x.status in ["printed"]):
+        if not self.filtered(lambda x: x.status in ["printed"]):
             raise ValidationError(
                 _("ID can only be distributed if it has been printed")
             )
