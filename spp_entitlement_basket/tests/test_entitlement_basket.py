@@ -63,7 +63,7 @@ class EntitlementBasketTest(TransactionCase):
                         Command.create(
                             {
                                 "product_id": self.product_2.id,
-                                "qty": 5,
+                                "qty": 3,
                             }
                         )
                     ),
@@ -71,12 +71,11 @@ class EntitlementBasketTest(TransactionCase):
             }
         )
 
-        product_names = f"1.) {self.product_1.name} - {self.product_1.qty} {self.product_1.uom_id.name}\n"
-        product_names += f"2.) {self.product_2.name} - {self.product_2.qty} {self.product_2.uom_id.name}\n"
+        product_names = f"1.) {self.product_1.name} - 5 {self.product_1.uom_id.name}\n"
+        product_names += f"2.) {self.product_2.name} - 3 {self.product_2.uom_id.name}\n"
 
         self.assertEqual(
             food_basket.product_names,
             product_names,
-            "Food Basket creation FAILED (EXPECTED %s but RESULT is %s)"
-            % (product_names, food_basket.product_names),
+            f"Food Basket creation FAILED (EXPECTED {product_names} but RESULT is {food_basket.product_names})",
         )
