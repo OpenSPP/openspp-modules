@@ -8,16 +8,19 @@ import requests
 from odoo import _, fields, models
 from odoo.exceptions import ValidationError
 
+from odoo.addons.queue_job.delay import group
+
 
 class OpenSPPPrintBatch(models.Model):
     _name = "spp.print.queue.batch"
     _description = "ID print Batch"
 
+    JOBBATCH_SIZE = 20
+
     name = fields.Char("Batch name")
 
     #  We should only allow `approved` id to be added to a batch
     queued_ids = fields.One2many("spp.print.queue.id", "batch_id", string="Queued IDs")
-
     status = fields.Selection(
         [
             ("new", "New"),
@@ -45,14 +48,32 @@ class OpenSPPPrintBatch(models.Model):
     def generate_batch(self):
         for rec in self:
             rec.status = "generating"
-            rec.with_delay()._generate_cards(rec.queued_ids)
+            queued_ids = []
+            jobs = []
+            ctr2 = 1
+            max_rec = len(rec.queued_ids)
+            for ctr, queued_id in enumerate(rec.queued_ids, 1):
+                queued_ids.append(queued_id.id)
+                if ctr2 == self.JOBBATCH_SIZE or ctr == max_rec:
+                    ctr2 = 0
+                    jobs.append(rec.delayable()._generate_cards(queued_ids))
+                    queued_ids = []
+                ctr2 += 1
+
+            main_job = group(*jobs)
+            main_job.on_done(self.delayable().mark_as_done(rec))
+            main_job.delay()
 
     def _generate_cards(self, queue_ids):
-        for rec in self:
-            queue_ids.generate_cards()
-            if not rec.queued_ids.filtered(lambda x: x.status not in ["generated"]):
-                rec.status = "generated"
-                rec.pass_api_param()
+        queued_ids = self.env["spp.print.queue.id"].search([("id", "in", queue_ids)])
+        queued_ids.generate_cards()
+
+    def mark_as_done(self, rec):
+        if not rec.queued_ids.filtered(lambda x: x.status != "generated"):
+            rec.status = "generated"
+            rec.pass_api_param()
+        else:
+            raise ValidationError(_("Some IDs are not generated"))
 
     def retry_pass_api(self):
         for rec in self:
