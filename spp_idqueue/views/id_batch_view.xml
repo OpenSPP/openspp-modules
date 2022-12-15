@@ -120,6 +120,12 @@
                     />
                     <widget
                         name="web_ribbon"
+                        title="Generating"
+                        bg_color="bg-info"
+                        attrs="{'invisible': [('status', '!=', 'generating')]}"
+                    />
+                    <widget
+                        name="web_ribbon"
                         title="Printing"
                         bg_color="bg-info"
                         attrs="{'invisible': [('status', '!=', 'printing')]}"

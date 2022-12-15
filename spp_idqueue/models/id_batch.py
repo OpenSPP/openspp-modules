@@ -21,6 +21,7 @@ class OpenSPPPrintBatch(models.Model):
     status = fields.Selection(
         [
             ("new", "New"),
+            ("generating", "Generating"),
             ("generated", "Generated"),
             ("printing", "Printing"),
             ("printed", "Printed"),
@@ -43,7 +44,12 @@ class OpenSPPPrintBatch(models.Model):
 
     def generate_batch(self):
         for rec in self:
-            rec.queued_ids.generate_cards()
+            rec.status = "generating"
+            rec.with_delay()._generate_cards(rec.queued_ids)
+
+    def _generate_cards(self, queue_ids):
+        for rec in self:
+            queue_ids.generate_cards()
             if not rec.queued_ids.filtered(lambda x: x.status not in ["generated"]):
                 rec.status = "generated"
                 rec.pass_api_param()
