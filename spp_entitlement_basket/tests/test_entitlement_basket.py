@@ -72,7 +72,7 @@ class EntitlementBasketTest(TransactionCase):
         )
 
         product_names = f"1.) {self.product_1.name} - 5 {self.product_1.uom_id.name}\n"
-        product_names += f"2.) {self.product_2.name} - 3 {self.product_2.uom_id.name}\n"
+        product_names += f"1.) {self.product_2.name} - 3 {self.product_2.uom_id.name}\n"
 
         self.assertEqual(
             food_basket.product_names,
