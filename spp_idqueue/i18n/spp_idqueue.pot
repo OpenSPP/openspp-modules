@@ -254,6 +254,12 @@ msgid "Generated"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__generating
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Generating"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__id
@@ -557,6 +563,12 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.actions.act_window,name:spp_idqueue.res_config_settings_menu_action
 msgid "Settings"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Some IDs are not generated"
 msgstr ""
 
 #. module: spp_idqueue
