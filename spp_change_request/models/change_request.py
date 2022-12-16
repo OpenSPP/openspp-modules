@@ -212,10 +212,11 @@ class ChangeRequestBase(models.Model):
                     if rec.company_id.country_id and rec.company_id.country_id.code
                     else None
                 )
-            try:
-                phone_validation.phone_parse(rec.applicant_phone, country_code)
-            except UserError as e:
-                raise ValidationError(_("Incorrect phone number format")) from e
+            if rec.applicant_phone:
+                try:
+                    phone_validation.phone_parse(rec.applicant_phone, country_code)
+                except UserError as e:
+                    raise ValidationError(_("Incorrect phone number format")) from e
 
     @api.onchange("id_document_details")
     def _onchange_scan_id_document_details(self):
@@ -420,6 +421,7 @@ class ChangeRequestBase(models.Model):
             )
 
     def open_request_detail(self):
+        self._check_phone_exist()
         for rec in self:
             # Open Request Form
             return rec.open_change_request_form(target="current", mode="edit")
@@ -506,7 +508,13 @@ class ChangeRequestBase(models.Model):
     #
     #     return request_dir
 
+    def _check_phone_exist(self):
+        if not self.applicant_phone:
+            raise UserError(_("Phone No. is required."))
+
     def create_request_detail(self):
+        self._check_phone_exist()
+
         for rec in self:
             if rec.state in ("draft", "pending"):
                 # Set the request_type_ref_id

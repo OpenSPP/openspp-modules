@@ -208,7 +208,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <field
                             name="applicant_phone"
                             string="Phone No."
-                            required="1"
                             widget="phone"
                             options="{'enable_sms': false}"
                             attrs="{'readonly':[('state','!=','draft')]}"
