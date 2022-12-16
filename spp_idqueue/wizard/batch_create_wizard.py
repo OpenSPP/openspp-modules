@@ -26,7 +26,7 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
                 res["queue_ids"] = queue_ids
                 res["id_count"] = len(queue_ids)
             else:
-                raise UserError(_("There are no valid id requests!"))
+                raise UserError(_("No approved id requests selected!"))
             return res
         else:
             raise UserError(_("There are no selected id requests!"))
