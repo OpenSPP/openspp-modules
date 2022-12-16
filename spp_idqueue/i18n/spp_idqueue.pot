@@ -465,6 +465,12 @@ msgid "No Auth Token or API URL"
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
+#, python-format
+msgid "No approved id requests selected!"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Print Batch"
 msgstr ""
@@ -609,12 +615,6 @@ msgstr ""
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #, python-format
 msgid "There are no selected id requests!"
-msgstr ""
-
-#. module: spp_idqueue
-#: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
-#, python-format
-msgid "There are no valid id requests!"
 msgstr ""
 
 #. module: spp_idqueue
