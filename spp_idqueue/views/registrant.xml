@@ -60,6 +60,41 @@
         </field>
     </record>
 
+    <record id="view_groups_requests_form" model="ir.ui.view">
+        <field name="name">view_groups_requests_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+          <xpath expr="//page[@name='ids']" position="after">
+            <page string="ID Requests">
+                <field name="id_requests" readonly="1" nolabel="1">
+                    <tree>
+                        <button
+                                name="open_request_form"
+                                type="object"
+                                icon="fa-external-link"
+                                class="btn-success"
+                            />
+                        <field name="idpass_id" string="Template" />
+                        <field name="date_requested" />
+                        <field name="requested_by" />
+                        <field name="batch_id" />
+                        <field
+                                name="status"
+                                decoration-muted="status=='new'"
+                                decoration-success="status=='approved'"
+                                decoration-info="status=='printed'"
+                                decoration-primary="status=='distributed'"
+                                decoration-danger="status=='cancelled'"
+                                widget="badge"
+                            />
+                    </tree>
+                </field>
+            </page>
+          </xpath>
+        </field>
+    </record>
+
     <record model="ir.actions.server" id="multi_id_request">
       <field name="name">Request ID</field>
       <field name="model_id" ref="spp_idqueue.model_spp_multi_id_request_wizard" />

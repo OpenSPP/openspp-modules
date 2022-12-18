@@ -70,7 +70,21 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
             if queue_ids:
                 batch_id.write({"queued_ids": queue_ids})
 
-            return
+            message = _("%s batch(es) created.", rec.batches_count)
+            kind = "info"
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": _("ID Requests"),
+                    "message": message,
+                    "sticky": True,
+                    "type": kind,
+                    "next": {
+                        "type": "ir.actions.act_window_close",
+                    },
+                },
+            }
 
     @api.depends("max_id_per_batch", "id_count")
     def _compute_batches_count(self):
