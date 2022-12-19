@@ -55,8 +55,8 @@ class OpenSPPIDQueue(models.Model):
             rec.date_approved = date.today()
             rec.approved_by = self.env.user.id
             rec.status = "approved"
-            message = _("{} validated this request at {}.").format(
-                self.env.user.name, datetime.now().strftime("%B %d, %Y %H:%M")
+            message = _("{} validated this request on {}.").format(
+                self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
             )
             rec.save_to_mail_thread(message)
 
@@ -85,8 +85,8 @@ class OpenSPPIDQueue(models.Model):
         self.date_printed = date.today()
         self.printed_by = self.env.user.id
         self.status = "printed"
-        message = _("{} printed this request at {}.").format(
-            self.env.user.name, datetime.now().strftime("%B %d, %Y %H:%M")
+        message = _("{} printed this request on {}.").format(
+            self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
         )
         self.save_to_mail_thread(message)
         return res_id
@@ -101,8 +101,8 @@ class OpenSPPIDQueue(models.Model):
         for rec in self:
             rec.generate_card(rec)
             rec.status = "generated"
-            message = _("{} generated this request at {}.").format(
-                self.env.user.name, datetime.now().strftime("%B %d, %Y %H:%M")
+            message = _("{} generated this request on {}.").format(
+                self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
             )
             rec.save_to_mail_thread(message)
 
@@ -120,8 +120,8 @@ class OpenSPPIDQueue(models.Model):
             raise ValidationError(_("ID cannot be canceled if it has been printed"))
         for rec in self:
             rec.status = "cancelled"
-            message = _("{} cancelled this request at {}.").format(
-                self.env.user.name, datetime.now().strftime("%B %d, %Y %H:%M")
+            message = _("{} cancelled this request on {}.").format(
+                self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
             )
             rec.save_to_mail_thread(message)
 
@@ -133,8 +133,8 @@ class OpenSPPIDQueue(models.Model):
         for rec in self:
             rec.date_distributed = date.today()
             rec.status = "distributed"
-            message = _("{} distributed this request at {}.").format(
-                self.env.user.name, datetime.now().strftime("%B %d, %Y %H:%M")
+            message = _("{} distributed this request on {}.").format(
+                self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
             )
             rec.save_to_mail_thread(message)
 
@@ -152,8 +152,9 @@ class OpenSPPIDQueue(models.Model):
                     rec.date_approved = date.today()
                     rec.approved_by = self.env.user.id
                     rec.status = "approved"
-                    message = _("{} validated this request at {}.").format(
-                        self.env.user.name, datetime.now().strftime("%B %d, %Y %H:%M")
+                    message = _("{} validated this request on {}.").format(
+                        self.env.user.name,
+                        datetime.now().strftime("%B %d, %Y at %H:%M"),
                     )
                     rec.save_to_mail_thread(message)
 
@@ -187,8 +188,8 @@ class OpenSPPIDQueue(models.Model):
             max_rec = len(queue_ids)
             for ctr, queued_id in enumerate(queue_ids, 1):
                 queued_id.status = "generating"
-                message = _("{} started to generate this request at {}.").format(
-                    self.env.user.name, datetime.now().strftime("%B %d, %Y %H:%M")
+                message = _("{} started to generate this request on {}.").format(
+                    self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
                 )
                 queued_id.save_to_mail_thread(message)
                 queue_datas.append(queued_id.id)
@@ -234,8 +235,9 @@ class OpenSPPIDQueue(models.Model):
                     rec.date_printed = date.today()
                     rec.printed_by = self.env.user.id
                     rec.status = "printed"
-                    message = _("{} printed this request at {}.").format(
-                        self.env.user.name, datetime.now().strftime("%B %d, %Y %H:%M")
+                    message = _("{} printed this request on {}.").format(
+                        self.env.user.name,
+                        datetime.now().strftime("%B %d, %Y at %H:%M"),
                     )
                     rec.save_to_mail_thread(message)
 
@@ -268,8 +270,9 @@ class OpenSPPIDQueue(models.Model):
                 for rec in queue_id:
                     rec.date_distributed = date.today()
                     rec.status = "distributed"
-                    message = _("{} distributed this request at {}.").format(
-                        self.env.user.name, datetime.now().strftime("%B %d, %Y %H:%M")
+                    message = _("{} distributed this request on {}.").format(
+                        self.env.user.name,
+                        datetime.now().strftime("%B %d, %Y at %H:%M"),
                     )
                     rec.save_to_mail_thread(message)
 
