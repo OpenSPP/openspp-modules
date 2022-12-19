@@ -1,17 +1,22 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from datetime import date
+from datetime import date, datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
+from odoo.addons.queue_job.delay import group
+
 
 class OpenSPPIDQueue(models.Model):
     _name = "spp.print.queue.id"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "ID Queue"
     _order = "id DESC"
 
-    name = fields.Char("Request Name")
+    JOB_SIZE = 20
+
+    name = fields.Char("Request Name", compute="_compute_name")
     id_type = fields.Many2one("g2p.id.type", required=True)
     idpass_id = fields.Many2one("spp.id.pass")
     requested_by = fields.Many2one("res.users", required=True)
@@ -27,6 +32,7 @@ class OpenSPPIDQueue(models.Model):
         [
             ("new", "New"),
             ("approved", "Approved"),
+            ("generating", "Generating"),
             ("generated", "Generated"),
             ("printed", "Printed"),
             ("distributed", "Distributed"),
@@ -39,11 +45,20 @@ class OpenSPPIDQueue(models.Model):
 
     batch_id = fields.Many2one("spp.print.queue.batch", string="Batch")
 
+    @api.depends("registrant_id", "idpass_id")
+    def _compute_name(self):
+        for rec in self:
+            rec.name = f"{rec.registrant_id.name or ''} - {rec.idpass_id.name or ''}"
+
     def on_approve(self):
         for rec in self:
             rec.date_approved = date.today()
             rec.approved_by = self.env.user.id
             rec.status = "approved"
+            message = _("{} validated this request on {}.").format(
+                self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
+            )
+            rec.save_to_mail_thread(message)
 
     def on_generate(self):
         # Make sure the ID is in the correct state before generating
@@ -70,17 +85,26 @@ class OpenSPPIDQueue(models.Model):
         self.date_printed = date.today()
         self.printed_by = self.env.user.id
         self.status = "printed"
+        message = _("{} printed this request on {}.").format(
+            self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
+        )
+        self.save_to_mail_thread(message)
         return res_id
 
     def generate_cards(self):
         if self.filtered(
-            lambda x: x.status not in ["generated", "approved", "added_to_batch"]
+            lambda x: x.status
+            not in ["generating", "generated", "approved", "added_to_batch"]
         ):
             raise ValidationError(_("ID must be approved before printing"))
 
         for rec in self:
             rec.generate_card(rec)
             rec.status = "generated"
+            message = _("{} generated this request on {}.").format(
+                self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
+            )
+            rec.save_to_mail_thread(message)
 
     def generate_card(self, card):
         """
@@ -96,6 +120,10 @@ class OpenSPPIDQueue(models.Model):
             raise ValidationError(_("ID cannot be canceled if it has been printed"))
         for rec in self:
             rec.status = "cancelled"
+            message = _("{} cancelled this request on {}.").format(
+                self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
+            )
+            rec.save_to_mail_thread(message)
 
     def on_distribute(self):
         if not self.filtered(lambda x: x.status in ["printed"]):
@@ -105,6 +133,10 @@ class OpenSPPIDQueue(models.Model):
         for rec in self:
             rec.date_distributed = date.today()
             rec.status = "distributed"
+            message = _("{} distributed this request on {}.").format(
+                self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
+            )
+            rec.save_to_mail_thread(message)
 
     def validate_requests(self):
         if self.env.context.get("active_ids"):
@@ -115,10 +147,166 @@ class OpenSPPIDQueue(models.Model):
                 ]
             )
             if queue_id:
+                max_rec = len(queue_id)
                 for rec in queue_id:
                     rec.date_approved = date.today()
                     rec.approved_by = self.env.user.id
                     rec.status = "approved"
+                    message = _("{} validated this request on {}.").format(
+                        self.env.user.name,
+                        datetime.now().strftime("%B %d, %Y at %H:%M"),
+                    )
+                    rec.save_to_mail_thread(message)
+
+                message = _("%s request(s) are validated.", max_rec)
+                kind = "info"
+                return {
+                    "type": "ir.actions.client",
+                    "tag": "display_notification",
+                    "params": {
+                        "title": _("ID Requests"),
+                        "message": message,
+                        "sticky": True,
+                        "type": kind,
+                        "next": {
+                            "type": "ir.actions.act_window_close",
+                        },
+                    },
+                }
+
+    def generate_validate_requests(self):
+        queue_ids = self.env["spp.print.queue.id"].search(
+            [
+                ("id", "in", self.env.context.get("active_ids")),
+                ("status", "=", "approved"),
+            ]
+        )
+        if queue_ids:
+            queue_datas = []
+            jobs = []
+            ctr2 = 1
+            max_rec = len(queue_ids)
+            for ctr, queued_id in enumerate(queue_ids, 1):
+                queued_id.status = "generating"
+                message = _("{} started to generate this request on {}.").format(
+                    self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
+                )
+                queued_id.save_to_mail_thread(message)
+                queue_datas.append(queued_id.id)
+                if ctr2 == self.JOB_SIZE or ctr == max_rec:
+                    ctr2 = 0
+                    jobs.append(self.delayable()._generate_multi_cards(queue_datas))
+                    queue_datas = []
+                ctr2 += 1
+            main_job = group(*jobs)
+            main_job.delay()
+
+            message = _("%s request(s) are now being generated.", max_rec)
+            kind = "info"
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": _("ID Requests"),
+                    "message": message,
+                    "sticky": True,
+                    "type": kind,
+                    "next": {
+                        "type": "ir.actions.act_window_close",
+                    },
+                },
+            }
+
+    def _generate_multi_cards(self, queue_ids):
+        queued_ids = self.env["spp.print.queue.id"].search([("id", "in", queue_ids)])
+        queued_ids.generate_cards()
+
+    def print_requests(self):
+        if self.env.context.get("active_ids"):
+            queue_id = self.env["spp.print.queue.id"].search(
+                [
+                    ("id", "in", self.env.context.get("active_ids")),
+                    ("status", "=", "generated"),
+                ]
+            )
+            if queue_id:
+                max_rec = len(queue_id)
+                for rec in queue_id:
+                    rec.date_printed = date.today()
+                    rec.printed_by = self.env.user.id
+                    rec.status = "printed"
+                    message = _("{} printed this request on {}.").format(
+                        self.env.user.name,
+                        datetime.now().strftime("%B %d, %Y at %H:%M"),
+                    )
+                    rec.save_to_mail_thread(message)
+
+                message = _("%s request(s) are printed.", max_rec)
+                kind = "info"
+                return {
+                    "type": "ir.actions.client",
+                    "tag": "display_notification",
+                    "params": {
+                        "title": _("ID Requests"),
+                        "message": message,
+                        "sticky": True,
+                        "type": kind,
+                        "next": {
+                            "type": "ir.actions.act_window_close",
+                        },
+                    },
+                }
+
+    def distribute_requests(self):
+        if self.env.context.get("active_ids"):
+            queue_id = self.env["spp.print.queue.id"].search(
+                [
+                    ("id", "in", self.env.context.get("active_ids")),
+                    ("status", "=", "printed"),
+                ]
+            )
+            if queue_id:
+                max_rec = len(queue_id)
+                for rec in queue_id:
+                    rec.date_distributed = date.today()
+                    rec.status = "distributed"
+                    message = _("{} distributed this request on {}.").format(
+                        self.env.user.name,
+                        datetime.now().strftime("%B %d, %Y at %H:%M"),
+                    )
+                    rec.save_to_mail_thread(message)
+
+                message = _("%s request(s) are distributed.", max_rec)
+                kind = "info"
+                return {
+                    "type": "ir.actions.client",
+                    "tag": "display_notification",
+                    "params": {
+                        "title": _("ID Requests"),
+                        "message": message,
+                        "sticky": True,
+                        "type": kind,
+                        "next": {
+                            "type": "ir.actions.act_window_close",
+                        },
+                    },
+                }
+
+    def save_to_mail_thread(self, message):
+        for rec in self:
+            rec.message_post(body=message)
+
+    def open_request_form(self):
+        return {
+            "name": "ID Request",
+            "view_mode": "form",
+            "res_model": self._name,
+            "res_id": self.id,
+            "view_id": self.env.ref("spp_idqueue.view_spp_idqueue_form").id,
+            "type": "ir.actions.act_window",
+            "target": "new",
+            "flags": {"mode": "readonly"},
+        }
 
 
 class ResConfigSettings(models.TransientModel):

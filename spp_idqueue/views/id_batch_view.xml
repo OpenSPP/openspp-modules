@@ -28,14 +28,22 @@
                     widget="badge"
                 />
                 <button
-                    name="generate_batch"
+                    name="approve_batch"
                     type="object"
                     icon="fa-check"
-                    class="btn-success"
+                    class="btn-primary"
                     attrs="{'invisible': [('status', '!=', 'new')]}"
-                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
-                <button
+                        <button
+                    name="generate_batch"
+                    type="object"
+                    icon="fa-download"
+                    class="btn-primary"
+                    attrs="{'invisible': [('status', '!=', 'approved')]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                />
+                        <button
                     name="retry_pass_api"
                     type="object"
                     icon="fa-refresh"
@@ -43,20 +51,28 @@
                     attrs="{'invisible': [('merge_status', 'not in', ['error_sending', 'error_merging'])]}"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
-                <button
+                        <button
                     name="print_batch"
                     type="object"
                     icon="fa-print"
-                    class="btn-info"
-                    attrs="{'invisible': ['|',('status', '!=', 'generated'), ('id_pdf', '=', False)]}"
+                    class="btn-primary"
+                    attrs="{'invisible': ['|',('status', '!=', 'generated'), ('merge_status', '!=', 'merged')]}"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
-                <button
+                        <button
                     name="batch_printed"
                     type="object"
-                    icon="fa-truck"
-                    class="btn-info"
+                    icon="fa-print"
+                    class="btn-success"
                     attrs="{'invisible': [('status', '!=', 'printing')]}"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                />
+                        <button
+                    name="batch_distributed"
+                    type="object"
+                    icon="fa-truck"
+                    class="btn-primary"
+                    attrs="{'invisible': [('status', '!=', 'printed')]}"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
             </tree>
@@ -69,12 +85,21 @@
             <form>
                 <header>
                         <button
-                        name="generate_batch"
+                        name="approve_batch"
                         type="object"
-                        string="Generate Batch"
+                        string="Validate Batch"
                         icon="fa-check"
                         class="btn-primary"
                         attrs="{'invisible': [('status', '!=', 'new')]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                    />
+                        <button
+                        name="generate_batch"
+                        type="object"
+                        string="Generate Batch"
+                        icon="fa-download"
+                        class="btn-primary"
+                        attrs="{'invisible': [('status', '!=', 'approved')]}"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
@@ -92,25 +117,50 @@
                         string="Print Batch"
                         icon="fa-print"
                         class="btn-primary"
-                        attrs="{'invisible': ['|',('status', '!=', 'generated'), ('id_pdf', '=', False)]}"
+                        attrs="{'invisible': ['|',('status', '!=', 'generated'), ('merge_status', '!=', 'merged')]}"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
                         name="batch_printed"
                         type="object"
                         string="Batch Printed"
-                        icon="fa-truck"
+                        icon="fa-print"
                         class="btn-success"
                         attrs="{'invisible': [('status', '!=', 'printing')]}"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
+                        <button
+                        name="batch_distributed"
+                        type="object"
+                        string="Distribute Batch"
+                        icon="fa-truck"
+                        class="btn-primary"
+                        attrs="{'invisible': [('status', '!=', 'printed')]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                    />
+                        <button
+                        name="refresh_data"
+                        type="object"
+                        string="Refresh Data"
+                        icon="fa-refresh"
+                        class="btn-primary"
+                        attrs="{'invisible': ['|',('status', 'not in', ['generating', 'generated']), ('merge_status', '!=', 'sent')]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
+                    />
                     </header>
                 <sheet>
+
                     <widget
                         name="web_ribbon"
                         title="New"
                         bg_color="bg-warning"
                         attrs="{'invisible': [('status', '!=', 'new')]}"
+                    />
+                    <widget
+                        name="web_ribbon"
+                        title="Approved"
+                        bg_color="bg-primary"
+                        attrs="{'invisible': [('status', '!=', 'approved')]}"
                     />
                     <widget
                         name="web_ribbon"
@@ -136,6 +186,38 @@
                         bg_color="bg-primary"
                         attrs="{'invisible': [('status', '!=', 'printed')]}"
                     />
+                    <widget
+                        name="web_ribbon"
+                        title="Distributed"
+                        bg_color="bg-primary"
+                        attrs="{'invisible': [('status', '!=', 'distributed')]}"
+                    />
+                    <div
+                        class="alert alert-info text-center o_form_header"
+                        role="status"
+                        attrs="{'invisible': [('status', '!=', 'generating')]}"
+                    >
+                        IDs for this Batch is being generated. Click <button
+                            name="refresh_data"
+                            icon="fa-refresh"
+                            type="object"
+                            class="btn-primary"
+                            string="Refresh Data"
+                        /> to check changes.
+                    </div>
+                    <div
+                        class="alert alert-info text-center o_form_header"
+                        role="status"
+                        attrs="{'invisible': ['|',('status', '!=', 'generated'), ('merge_status', '!=', 'sent')]}"
+                    >
+                        IDs for this Batch is being merged. Click <button
+                            name="refresh_data"
+                            icon="fa-refresh"
+                            type="object"
+                            class="btn-primary"
+                            string="Refresh Data"
+                        /> to check changes.
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <label for="name" string="Batch Name" />
@@ -158,7 +240,7 @@
                                 />
                                 <field name="id_pdf_filename" invisible="1" />
                                 <field name="create_date" readonly="1" />
-                                <field
+                                <!--<field
                                     name="merge_status"
                                     decoration-info="merge_status=='draft'"
                                     decoration-primary="merge_status=='sent'"
@@ -168,6 +250,13 @@
                                     widget="badge"
                                     readonly="1"
                                     force_save="1"
+                                />-->
+                                <field name="merge_status" />
+                                <field
+                                    name="date_merged"
+                                    readonly="1"
+                                    force_save="1"
+                                    attrs="{'invisible': [('merge_status', '!=', 'merged')]}"
                                 />
                                 <field name="queued_ids" readonly="1">
                                     <tree>
@@ -196,9 +285,29 @@
                                 </field>
                             </group>
                         </page>
+                        <page string="Other Info">
+                            <group>
+                                <group>
+                                    <field name="approved_by" readonly="1" force_save="1" />
+                                    <field name="printed_by" readonly="1" force_save="1" />
+                                    <field name="distributed_by" readonly="1" force_save="1" />
+                                </group>
+                                <group>
+                                    <field name="date_approved" readonly="1" force_save="1" />
+                                    <field name="date_printed" readonly="1" force_save="1" />
+                                    <field name="date_distributed" readonly="1" force_save="1" />
+                                </group>
+                            </group>
+
+                        </page>
                         <field name="status" invisible="1" />
                     </notebook>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
             </form>
         </field>
     </record>
@@ -208,10 +317,16 @@
         <field name="model">spp.print.queue.batch</field>
         <field name="arch" type="xml">
             <search string="Search Print Batch">
+                <field name="name" filter_domain="[('name', 'ilike', self)]" />
+                <separator />
                 <filter string="New" name="new" domain="[('status', '=', 'new')]" />
+                <filter string="Approved" name="approved" domain="[('status', '=', 'approved')]" />
+                <filter string="Generating" name="generating" domain="[('status', '=', 'generating')]" />
                 <filter string="Generated" name="generated" domain="[('status', '=', 'generated')]" />
                 <filter string="Printing" name="printing" domain="[('status', '=', 'printing')]" />
                 <filter string="Printed" name="printed" domain="[('status', '=', 'printed')]" />
+                <filter string="Distributed" name="distributed" domain="[('status', '=', 'distributed')]" />
+                <filter string="Merged" name="merged" domain="[('merge_status', '=', 'merged')]" />
             </search>
         </field>
     </record>
@@ -254,4 +369,49 @@
         sequence="11"
         groups="g2p_registry_base.group_g2p_admin,group_g2p_id_validator,group_g2p_id_distributor"
     />
+
+    <record model="ir.actions.server" id="multi_approve_batch">
+      <field name="name">Validate Batches</field>
+      <field name="model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
+      <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
+      <field name="binding_view_types">list</field>
+      <field name="state">code</field>
+      <field name="code">action = model.multi_approve_batch()</field>
+    </record>
+
+    <record model="ir.actions.server" id="multi_generate_batch">
+      <field name="name">Generate Batches</field>
+      <field name="model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
+      <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
+      <field name="binding_view_types">list</field>
+      <field name="state">code</field>
+      <field name="code">action = model.multi_generate_batch()</field>
+    </record>
+
+    <record model="ir.actions.server" id="multi_print_batch">
+      <field name="name">Print Batches</field>
+      <field name="model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
+      <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
+      <field name="binding_view_types">list</field>
+      <field name="state">code</field>
+      <field name="code">action = model.multi_print_batch()</field>
+    </record>
+
+    <record model="ir.actions.server" id="multi_printed_batch">
+      <field name="name">Batches Printed</field>
+      <field name="model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
+      <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
+      <field name="binding_view_types">list</field>
+      <field name="state">code</field>
+      <field name="code">action = model.multi_printed_batch()</field>
+    </record>
+
+    <record model="ir.actions.server" id="multi_distribute_batch">
+      <field name="name">Distribute Batches</field>
+      <field name="model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
+      <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
+      <field name="binding_view_types">list</field>
+      <field name="state">code</field>
+      <field name="code">action = model.multi_distribute_batch()</field>
+    </record>
 </odoo>

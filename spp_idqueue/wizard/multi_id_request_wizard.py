@@ -77,7 +77,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
                         self.env["spp.print.queue.id"].create(vals)
                         counter += 1
 
-                    message = _("%s request/s created.", counter)
+                    message = _("%s request(s) created.", counter)
                     kind = "info"
                     return {
                         "type": "ir.actions.client",
@@ -87,6 +87,9 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
                             "message": message,
                             "sticky": True,
                             "type": kind,
+                            "next": {
+                                "type": "ir.actions.act_window_close",
+                            },
                         },
                     }
             else:
