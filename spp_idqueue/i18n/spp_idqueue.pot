@@ -20,9 +20,39 @@ msgid "%s - 1"
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
+#, python-format
+msgid "%s batch(es) created."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%s request(s) are distributed."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%s request(s) are now being generated."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%s request(s) are printed."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%s request(s) are validated."
+msgstr ""
+
+#. module: spp_idqueue
 #: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
 #, python-format
-msgid "%s request/s created."
+msgid "%s request(s) created."
 msgstr ""
 
 #. module: spp_idqueue
@@ -32,12 +62,52 @@ msgid "<span class=\"o_stat_text\">Request</span>"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_needaction
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_exception_decoration
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_state
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_type_icon
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "Approve Request"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__approved
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__approved
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Approved"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__approved_by
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__approved_by
 msgid "Approved By"
 msgstr ""
@@ -45,6 +115,12 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__area_id
 msgid "Area"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_attachment_count
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_attachment_count
+msgid "Attachment Count"
 msgstr ""
 
 #. module: spp_idqueue
@@ -80,6 +156,11 @@ msgid "Batch name"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_printed_batch
+msgid "Batches Printed"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__batches_count
 msgid "Batches to be created"
 msgstr ""
@@ -88,12 +169,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 msgid "Cancel"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "Cancel Request"
 msgstr ""
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__cancelled
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 msgid "Cancelled"
 msgstr ""
 
@@ -183,16 +271,24 @@ msgid "DMS Directories"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__date_approved
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__date_approved
 msgid "Date Approved"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__date_distributed
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__date_distributed
 msgid "Date Distributed"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__date_merged
+msgid "Date Merged"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__date_printed
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__date_printed
 msgid "Date Printed"
 msgstr ""
@@ -212,9 +308,43 @@ msgid "Display Name"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Distribute"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Distribute Batch"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_distribute_batch
+msgid "Distribute Batches"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "Distribute Request"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.distribute_requests
+msgid "Distribute Requests"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__distributed
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__distributed
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Distributed"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__distributed_by
+msgid "Distributed By"
 msgstr ""
 
 #. module: spp_idqueue
@@ -233,10 +363,34 @@ msgid "Error Sending"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
 msgid "File"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_follower_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_partner_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_type_icon
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Generate"
 msgstr ""
 
 #. module: spp_idqueue
@@ -245,9 +399,25 @@ msgid "Generate Batch"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_generate_batch
+msgid "Generate Batches"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "Generate Request"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.generate_requests
+msgid "Generate Requests"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__generated
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__generated
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Generated"
@@ -255,8 +425,18 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__generating
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__generating
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Generating"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__has_message
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__has_message
+msgid "Has Message"
 msgstr ""
 
 #. module: spp_idqueue
@@ -317,7 +497,15 @@ msgid "ID Requestor"
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
+#: model:ir.model.fields,field_description:spp_idqueue.field_res_partner__id_requests
+#: model:ir.model.fields,field_description:spp_idqueue.field_res_users__id_requests
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_requests_form
 #, python-format
 msgid "ID Requests"
 msgstr ""
@@ -385,6 +573,28 @@ msgid "IDPass ID"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "IDs for this Batch is being generated. Click"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "IDs for this Batch is being merged. Click"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_exception_icon
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_exception_icon
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__id_type
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id_type
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__id_type
@@ -394,6 +604,28 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__idpass_id
 msgid "Idpass"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_needaction
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_unread
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_needaction
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_has_error
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_has_sms_error
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_has_error
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_is_follower
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_is_follower
+msgid "Is Follower"
 msgstr ""
 
 #. module: spp_idqueue
@@ -430,6 +662,12 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_main_attachment_id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__max_id_per_batch
 msgid "Max ID per batch"
 msgstr ""
@@ -441,7 +679,20 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__merged
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
 msgid "Merged"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_has_error
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_ids
+msgid "Messages"
 msgstr ""
 
 #. module: spp_idqueue
@@ -450,18 +701,37 @@ msgid "Multiple ID Request Wizard"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__my_activity_date_deadline
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__new
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__new
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "New"
 msgstr ""
 
 #. module: spp_idqueue
-#: code:addons/spp_idqueue/models/id_batch.py:0
-#, python-format
-msgid "No Auth Token or API URL"
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_date_deadline
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_summary
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_type_id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_type_id
+msgid "Next Activity Type"
 msgstr ""
 
 #. module: spp_idqueue
@@ -471,20 +741,77 @@ msgid "No approved id requests selected!"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_needaction_counter
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_has_error_counter
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_needaction_counter
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_has_error_counter
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_unread_counter
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Other Info"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Print"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Print Batch"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_print_batch
+msgid "Print Batches"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "Print Request"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.print_requests
+msgid "Print Requests"
 msgstr ""
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__printed
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__printed
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Printed"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__printed_by
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__printed_by
 msgid "Printed By"
 msgstr ""
@@ -507,9 +834,15 @@ msgid "Queued IDs"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Refresh Data"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__registrant_ids
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__registrant_id
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 msgid "Registrant"
 msgstr ""
 
@@ -521,6 +854,11 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
 msgid "Registrants"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Request Details"
 msgstr ""
 
 #. module: spp_idqueue
@@ -547,8 +885,20 @@ msgid "Requested By"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_user_id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Retry Sending"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_has_sms_error
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_has_sms_error
+msgid "SMS Delivery error"
 msgstr ""
 
 #. module: spp_idqueue
@@ -572,15 +922,19 @@ msgid "Settings"
 msgstr ""
 
 #. module: spp_idqueue
-#: code:addons/spp_idqueue/models/id_batch.py:0
-#, python-format
-msgid "Some IDs are not generated"
-msgstr ""
-
-#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__status
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__status
 msgid "Status"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_state
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
 msgstr ""
 
 #. module: spp_idqueue
@@ -593,6 +947,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_requests_form
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Template"
 msgstr ""
@@ -618,12 +973,108 @@ msgid "There are no selected id requests!"
 msgstr ""
 
 #. module: spp_idqueue
-#: code:addons/spp_idqueue/models/id_batch.py:0
-#, python-format
-msgid "Token %s"
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_exception_decoration
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_unread
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_unread_counter
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Validate"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Validate Batch"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_approve_batch
+msgid "Validate Batches"
 msgstr ""
 
 #. module: spp_idqueue
 #: model:ir.actions.server,name:spp_idqueue.validate_requests
 msgid "Validate Requests"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__website_message_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__website_message_ids
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "to check changes."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "{} cancelled this request on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "{} distributed this request on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "{} generated this request on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "{} printed this request on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "{} started to generate this batch on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "{} started to generate this request on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "{} validated this batch on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "{} validated this request on {}."
 msgstr ""
