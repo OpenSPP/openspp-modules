@@ -8,8 +8,30 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">spp.batch.create.wizard</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="step1,step2" />
+                </header>
                 <sheet>
-                    <div class="oe_title">
+                    <!-- STEP 1 -->
+                    <div
+                        class="alert alert-info text-center o_form_header"
+                        role="status"
+                        attrs="{'invisible': [('state', '=', 'step2')]}"
+                    >
+                        Found multiple templates, please select a template below for this batch.
+                    </div>
+                    <group attrs="{'invisible':[('state','=','step2')]}">
+                        <field
+                            name="id_type"
+                            options="{'no_create_edit':True,'no_open':True,'no_create':True}"
+                        />
+                        <field
+                            name="idpass_id"
+                            options="{'no_create_edit':True,'no_open':True,'no_create':True}"
+                        />
+                    </group>
+                    <!-- STEP 2 -->
+                    <div class="oe_title" attrs="{'invisible':[('state','=','step1')]}">
                         <h1>
                             <label for="name" string="Batch Name" />
                         </h1>
@@ -19,7 +41,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <div class="o_row">
                         </div>
                     </div>
-                    <group>
+                    <group attrs="{'invisible':[('state','=','step1')]}">
                         <field name="queue_ids" string="ID Request" readonly="1">
                             <tree readonly="1">
                                 <field name="registrant_id" />
@@ -29,13 +51,20 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             </tree>
                         </field>
                     </group>
-                    <group>
+                    <group attrs="{'invisible':[('state','=','step1')]}">
                         <field name="id_count" readonly="1" />
                         <field name="max_id_per_batch" />
                         <field name="batches_count" />
                     </group>
                 </sheet>
                 <footer>
+                    <button
+                        name="next_step"
+                        string="Next Step"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '=', 'step2')]}"
+                    />
                     <button name="create_batch" string="Create Batch" type="object" class="oe_highlight" />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>

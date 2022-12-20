@@ -17,14 +17,22 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
         res = super(OpenSPPBatchCreateWizard, self).default_get(fields)
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
-                [("id", "in", self.env.context.get("active_ids"))]
+                [
+                    ("id", "in", self.env.context.get("active_ids")),
+                    ("status", "=", "approved"),
+                    ("batch_id", "=", False),
+                ]
             )
-            queue_ids = queue_id.filtered(
-                lambda x: not x.batch_id and x.status == "approved"
-            )
-            if len(queue_ids) > 0:
-                res["queue_ids"] = queue_ids
-                res["id_count"] = len(queue_ids)
+
+            if len(queue_id) > 0:
+                templates = queue_id.mapped("idpass_id.id")
+                if len(set(templates)) > 1:
+                    res["queue_ids"] = queue_id
+                    res["state"] = "step1"
+                else:
+                    res["queue_ids"] = queue_id
+                    res["id_count"] = len(queue_id)
+                    res["state"] = "step2"
             else:
                 raise UserError(_("No approved id requests selected!"))
             return res
@@ -38,6 +46,31 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
         string="Batches to be created", compute="_compute_batches_count"
     )
     queue_ids = fields.Many2many("spp.print.queue.id")
+    id_type = fields.Many2one("g2p.id.type", required=True, string="ID Type")
+    idpass_id = fields.Many2one(
+        "spp.id.pass", string="Template", domain="[('id_type', '=', id_type)]"
+    )
+    state = fields.Selection(
+        [("step1", "Set Template"), ("step2", "Set Batch")],
+        "Status",
+        default="step1",
+        readonly=True,
+    )
+
+    def next_step(self):
+        for rec in self:
+            if rec.queue_ids and rec.idpass_id:
+                queue_id = self.env["spp.print.queue.id"].search(
+                    [
+                        ("id", "in", rec.queue_ids.ids),
+                        ("idpass_id", "=", rec.idpass_id.id),
+                    ]
+                )
+                if queue_id:
+                    rec.queue_ids = queue_id
+                    rec.id_count = len(queue_id)
+                    rec.state = "step2"
+                return self._reopen_self()
 
     def create_batch(self):
         for rec in self:
@@ -105,4 +138,13 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
             "type": "ir.actions.act_window",
             "target": "new",
             "context": self.env.context,
+        }
+
+    def _reopen_self(self):
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": self._name,
+            "res_id": self.id,
+            "view_mode": "form",
+            "target": "new",
         }
