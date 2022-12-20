@@ -389,6 +389,12 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
+msgid ""
+"Found multiple templates, please select a template below for this batch."
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 msgid "Generate"
 msgstr ""
@@ -523,10 +529,10 @@ msgid "ID Requests Settings"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__id_type
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
-#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "ID Type"
 msgstr ""
@@ -684,6 +690,11 @@ msgid "Merged"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Merged File"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_has_error
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_has_error
 msgid "Message Delivery error"
@@ -732,6 +743,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_type_id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_type_id
 msgid "Next Activity Type"
+msgstr ""
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
+msgid "Next Step"
 msgstr ""
 
 #. module: spp_idqueue
@@ -917,11 +933,22 @@ msgid "Sent"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_batch_create_wizard__state__step2
+msgid "Set Batch"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_batch_create_wizard__state__step1
+msgid "Set Template"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.actions.act_window,name:spp_idqueue.res_config_settings_menu_action
 msgid "Settings"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__state
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__status
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__status
 msgid "Status"
@@ -944,10 +971,12 @@ msgid "Target Type"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__idpass_id
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_requests_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Template"
 msgstr ""
