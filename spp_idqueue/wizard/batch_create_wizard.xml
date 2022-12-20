@@ -65,7 +65,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         class="oe_highlight"
                         attrs="{'invisible': [('state', '=', 'step2')]}"
                     />
-                    <button name="create_batch" string="Create Batch" type="object" class="oe_highlight" />
+                    <button
+                        name="create_batch"
+                        string="Create Batch"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '=', 'step1')]}"
+                    />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
