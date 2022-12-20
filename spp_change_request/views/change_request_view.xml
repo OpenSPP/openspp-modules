@@ -89,6 +89,24 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         states="pending"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator"
                     />
+                    <button
+                        name="action_cancel"
+                        type="object"
+                        string="Cancel"
+                        icon="fa-times-circle"
+                        class="btn-default"
+                        states="draft,pending,rejected"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator"
+                    />
+                    <button
+                        name="action_reset_to_draft"
+                        type="object"
+                        string="Reset to Draft"
+                        icon="fa-rotate-left"
+                        class="btn-success"
+                        states="rejected"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator"
+                    />
                     <field
                         name="state"
                         widget="statusbar"

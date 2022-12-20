@@ -347,6 +347,77 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     )
                 )
 
+    def action_cancel(self):
+        """
+        This method is called when the Change Request is applied to the live data.
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
+        for rec in self:
+            rec._cancel(rec.change_request_id)
+
+    def _cancel(self, request):
+        """
+        This method is used to cancel the change request.
+
+        :param request: The request.
+        :return:
+        """
+        self.ensure_one()
+        if request.state in ("draft", "pending", "rejected"):
+            request.update(
+                {
+                    "state": "cancelled",
+                    "cancelled_by_id": self.env.user.id,
+                    "date_cancelled": fields.Datetime.now(),
+                    "validator_ids": [(Command.clear())],
+                }
+            )
+            # Mark previous activity as 'done'
+            request.last_activity_id.action_done()
+        else:
+            raise UserError(
+                _(
+                    "The request to be cancelled must be in draft, pending, or rejected validation state."
+                )
+            )
+
+    def action_reset_to_draft(self):
+        """
+        This method is called when the Change Request is applied to the live data.
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
+        for rec in self:
+            rec._reset_to_draft(rec.change_request_id)
+
+    def _reset_to_draft(self, request):
+        """
+        This method is used to reset to draft the change request.
+
+        :param request: The request.
+        :return:
+        """
+        self.ensure_one()
+
+        if request.state == "rejected":
+            request.update(
+                {
+                    "date_requested": fields.Datetime.now(),
+                    "reset_to_draft_by_id": self.env.user.id,
+                    "state": "draft",
+                    "validator_ids": [(Command.clear())],
+                }
+            )
+            # Mark previous activity as 'done'
+            request.last_activity_id.action_done()
+        else:
+            raise UserError(
+                _(
+                    "The request to be cancelled must be in draft, pending, or rejected validation state."
+                )
+            )
+
     def action_reject(self):
         """
         This method is called when the user click on reject during the validation process.
@@ -382,7 +453,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             if request.state in ("draft", "pending"):
                 request.update(
                     {
-                        "state": "draft",
+                        "state": "rejected",
                         "rejected_remarks": rejected_remarks,
                         "rejected_by_id": self.env.user.id,
                         "date_rejected": fields.Datetime.now(),
