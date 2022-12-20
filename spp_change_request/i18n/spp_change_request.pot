@@ -200,7 +200,19 @@ msgstr ""
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Cancel"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__cancelled
+msgid "Cancelled"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__cancelled_by_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__reset_to_draft_by_id
+msgid "Cancelled by"
 msgstr ""
 
 #. module: spp_change_request
@@ -405,6 +417,11 @@ msgid "Date Applied"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_cancelled
+msgid "Date Cancelled"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_rejected
 msgid "Date Rejected"
 msgstr ""
@@ -412,6 +429,11 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_requested
 msgid "Date Requested"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_reset_to_draft
+msgid "Date Reset To Draft"
 msgstr ""
 
 #. module: spp_change_request
@@ -847,6 +869,11 @@ msgid "Requests"
 msgstr ""
 
 #. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Reset to Draft"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_user_id
 msgid "Responsible User"
 msgstr ""
@@ -963,6 +990,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "The change request type must be properly filled-up."
 msgstr ""
@@ -983,6 +1011,16 @@ msgstr ""
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The request must be in validated state for changes to be applied."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid ""
+"The request to be cancelled must be in draft, pending, or rejected "
+"validation state."
 msgstr ""
 
 #. module: spp_change_request
