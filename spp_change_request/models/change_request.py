@@ -27,11 +27,14 @@ class ChangeRequestBase(models.Model):
 
        digraph {
           "draft" -> "pending";
+          "draft" -> "cancelled";
           "pending" -> "validated";
           "validated" -> "validated";
           "validated" -> "applied";
           "validated" -> "rejected";
           "rejected" -> "pending";
+          "rejected" -> "draft";
+          "rejected" -> "cancelled";
        }
 
     """
@@ -123,12 +126,25 @@ class ChangeRequestBase(models.Model):
             ("validated", "Validated"),
             ("applied", "Applied"),
             ("rejected", "Rejected"),
+            ("cancelled", "Cancelled"),
         ],
         "Status",
         required=True,
         readonly=True,
         default="draft",
     )  #: status of the change request
+
+    cancelled_by_id = fields.Many2one(
+        "res.users", "Cancelled by"
+    )  #: user that cancelled the change request
+    date_cancelled = fields.Datetime()  #: date the change request was cancelled
+
+    reset_to_draft_by_id = fields.Many2one(
+        "res.users", "Cancelled by"
+    )  #: user that reset the change request to draft
+    date_reset_to_draft = (
+        fields.Datetime()
+    )  #: date the change request was reset to draft
 
     @api.model
     def create(self, vals):
@@ -612,6 +628,47 @@ class ChangeRequestBase(models.Model):
     def action_apply(self):
         for rec in self:
             rec.request_type_ref_id._apply(rec)
+
+    def action_cancel(self):
+        for rec in self:
+            if rec.request_type_ref_id:
+                rec.request_type_ref_id._cancel(rec)
+            elif rec.state == "draft":
+                self.do_cancel(rec)
+            else:
+                raise UserError(
+                    _("The change request type must be properly filled-up.")
+                )
+
+    def do_cancel(self, request):
+        """
+        This method is used to cancel the change request.
+
+        :param request: The request.
+        :return:
+        """
+        self.ensure_one()
+        if request.state in ("draft", "pending", "rejected"):
+            request.update(
+                {
+                    "state": "cancelled",
+                    "cancelled_by_id": self.env.user.id,
+                    "date_cancelled": fields.Datetime.now(),
+                    "validator_ids": [(Command.clear())],
+                }
+            )
+            # Mark previous activity as 'done'
+            request.last_activity_id.action_done()
+        else:
+            raise UserError(
+                _(
+                    "The request to be cancelled must be in draft, pending, or rejected validation state."
+                )
+            )
+
+    def action_reset_to_draft(self):
+        for rec in self:
+            rec.request_type_ref_id._reset_to_draft(rec)
 
     def action_reject(self):
         form_id = self.env.ref("spp_change_request.change_request_reject_wizard").id
