@@ -634,38 +634,42 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             # Get the first directory for now
             if rec.dms_directory_ids:
                 directory_id = rec.dms_directory_ids[0].id
+                form_id = self.env.ref(
+                    "spp_change_request.view_dms_file_spp_custom_form"
+                ).id
+                dms_context = {"default_directory_id": directory_id}
+                action = {
+                    "type": "ir.actions.act_window",
+                    "view_mode": "form",
+                    "view_id": form_id,
+                    "view_type": "form",
+                    "res_model": "dms.file",
+                    "target": "new",
+                    "context": dms_context,
+                }
                 if self.env.context.get("category_id"):
                     category_id = self.env.context.get("category_id")
                     category = self.env["dms.category"].search(
                         [("id", "=", category_id)]
                     )
                     if category:
-                        form_id = self.env.ref(
-                            "spp_change_request.view_dms_file_spp_custom_form"
-                        ).id
-                        action = {
-                            "name": _("Upload Document: %s", category.name),
-                            "type": "ir.actions.act_window",
-                            "view_mode": "form",
-                            "view_id": form_id,
-                            "view_type": "form",
-                            "res_model": "dms.file",
-                            "target": "new",
-                            "context": {
-                                "default_directory_id": directory_id,
+                        dms_context.update(
+                            {
                                 "default_category_id": category_id,
                                 "category_readonly": True,
-                            },
-                        }
-                        return action
+                            }
+                        )
+                        action.update(
+                            {
+                                "name": _("Upload Document: %s", category.name),
+                                "context": dms_context,
+                            }
+                        )
                     else:
                         raise UserError(
                             _("The required document category is not configured.")
                         )
-                else:
-                    raise UserError(
-                        _("The document category must be specified in the context.")
-                    )
+                return action
             else:
                 raise UserError(
                     _("There are no directories defined for this change request.")

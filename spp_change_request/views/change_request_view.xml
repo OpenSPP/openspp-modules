@@ -186,6 +186,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <field
                                 name="qr_code_details"
                                 widget="id_document_qrreader_field"
+                                icon="fa-qrcode"
+                                string="Scan QR Code"
                                 colspan="4"
                                 attrs="{'invisible':[('state','!=','draft')]}"
                                 class="oe_inline"
@@ -207,6 +209,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <field
                                 name="id_document_details"
                                 widget="id_document_reader_field"
+                                icon="fa-id-card-o"
+                                string="Scan ID Document"
                                 colspan="4"
                                 attrs="{'invisible':[('state','!=','draft')]}"
                                 style="margin-left: 10px;"
