@@ -46,15 +46,15 @@ class EntitlementBasketTest(TransactionCase):
             {"name": "Food 1", "type": "product", "list_price": 62.00}
         )
 
-    def test_01_add_food_basket(self):
-        food_basket = self.env["spp.entitlement.basket"].create(
+        # Food Basket
+        cls.food_basket = cls.env["spp.entitlement.basket"].create(
             {
                 "name": "Food Basket 1",
                 "product_ids": [
                     (
                         Command.create(
                             {
-                                "product_id": self.product_1.id,
+                                "product_id": cls.product_1.id,
                                 "qty": 5,
                             }
                         )
@@ -62,7 +62,7 @@ class EntitlementBasketTest(TransactionCase):
                     (
                         Command.create(
                             {
-                                "product_id": self.product_2.id,
+                                "product_id": cls.product_2.id,
                                 "qty": 3,
                             }
                         )
@@ -71,11 +71,19 @@ class EntitlementBasketTest(TransactionCase):
             }
         )
 
+        # Create Program Wizard
+        # cls.new_program = cls.env['g2p.program.create.wizard'].create(
+        #    {
+        #
+        #    }
+        # )
+
+    def test_01_add_food_basket(self):
         product_names = f"1.) {self.product_1.name} - 5 {self.product_1.uom_id.name}\n"
         product_names += f"2.) {self.product_2.name} - 3 {self.product_2.uom_id.name}\n"
 
         self.assertEqual(
-            food_basket.product_names,
+            self.food_basket.product_names,
             product_names,
-            f"Food Basket creation FAILED (EXPECTED {product_names} but RESULT is {food_basket.product_names})",
+            f"Food Basket creation FAILED (EXPECTED {product_names} but RESULT is {self.food_basket.product_names})",
         )

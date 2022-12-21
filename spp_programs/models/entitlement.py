@@ -172,6 +172,9 @@ class InKindEntitlement(models.Model):
                     "message": message,
                     "sticky": True,
                     "type": kind,
+                    "next": {
+                        "type": "ir.actions.act_window_close",
+                    },
                 },
             }
 
