@@ -85,6 +85,7 @@
                         type="object"
                         class="btn-primary"
                     />
+                    <button string="Close" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
         </field>
