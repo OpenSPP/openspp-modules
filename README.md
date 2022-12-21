@@ -24,8 +24,10 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [g2p_entitlement_cash](g2p_entitlement_cash/) | 15.0.0.0.1 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | G2P Program Entitlement (Cash)
 [spp_dashboard](spp_dashboard/) | 15.0.0.0.1 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Dashboard
+[spp_entitlement_basket](spp_entitlement_basket/) | 15.0.0.0.1 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Entitlement Basket
 [spp_entitlement_in_kind](spp_entitlement_in_kind/) | 15.0.0.0.1 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Program Entitlement (In-Kind)
 [spp_pos](spp_pos/) | 15.0.0.0.1 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP POS
+[spp_programs](spp_programs/) | 15.0.0.0.1 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Programs
 
 [//]: # (end addons)
 
