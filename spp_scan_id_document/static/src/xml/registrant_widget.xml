@@ -11,6 +11,7 @@
 
     <span t-name="id_document_reader_field">
         <button type="button" t-att-class="widget.classes_field">
+            <i t-att-class="widget.icon" />
             <t t-esc="widget.text" />
         </button>
     </span>
