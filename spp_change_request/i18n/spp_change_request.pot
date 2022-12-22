@@ -227,6 +227,11 @@ msgid "Change Request"
 msgstr ""
 
 #. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
+msgid "Change Request #"
+msgstr ""
+
+#. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_administrator
 msgid "Change Request Administrator"
 msgstr ""
@@ -346,6 +351,11 @@ msgid "Click the create button to enter a new validation sequence."
 msgstr ""
 
 #. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
+msgid "Close"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__company_id
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
 msgid "Company"
@@ -394,6 +404,7 @@ msgid "Currently Assigned to"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_dms_file__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__dms_directory_ids
@@ -486,6 +497,11 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__end_date
 msgid "End Date"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_dms_file
+msgid "File"
 msgstr ""
 
 #. module: spp_change_request
@@ -884,6 +900,21 @@ msgid "SMS Delivery error"
 msgstr ""
 
 #. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
+msgid "Save"
+msgstr ""
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Scan ID Document"
+msgstr ""
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Scan QR Code"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__id_document_details
 msgid "Scanned ID Document"
 msgstr ""
@@ -993,12 +1024,6 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "The change request type must be properly filled-up."
-msgstr ""
-
-#. module: spp_change_request
-#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format
-msgid "The document category must be specified in the context."
 msgstr ""
 
 #. module: spp_change_request
