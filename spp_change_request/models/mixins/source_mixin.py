@@ -364,7 +364,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :return:
         """
         self.ensure_one()
-        if request.state in ("draft", "pending", "rejected"):
+        if request.state in ("draft", "pending", "rejected", "validated"):
             request.update(
                 {
                     "state": "cancelled",
