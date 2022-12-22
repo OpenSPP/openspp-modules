@@ -306,12 +306,10 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         "tag": "display_notification",
                         "params": {
                             "title": _("Change Request Partially Validated"),
-                            "message": message + " %s",
-                            "links": [
-                                {
-                                    "label": "Refresh Page",
-                                }
-                            ],
+                            "message": message,
+                            "next": {
+                                "type": "ir.actions.act_window_close",
+                            },
                             "sticky": True,
                             "type": "success",
                         },
