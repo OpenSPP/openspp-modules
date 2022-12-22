@@ -318,7 +318,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="priority" eval="1" />
         <field name="arch" type="xml">
             <search string="Search Change Request">
-                <field name="name" string="Change Request #"/>
+                <field name="name" string="Change Request #" />
                 <field name="registrant_id" />
                 <field name="request_type_ref_id" />
                 <field name="create_uid" string="Submitted By" />
