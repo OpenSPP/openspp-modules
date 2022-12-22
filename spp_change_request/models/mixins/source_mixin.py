@@ -203,7 +203,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         "date_validated": fields.Datetime.now(),
                     }
                     vals = {
-                        "state": "validated",
                         "validator_ids": [(Command.create(validator))],
                         "last_validated_by_id": validator_id,
                         "date_validated": fields.Datetime.now(),
@@ -249,7 +248,21 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
                     if request.state == "validated":
                         message = _("The change request has been fully validated")
-                        self.update_live_data()
+                        return {
+                            "type": "ir.actions.client",
+                            "tag": "display_notification",
+                            "params": {
+                                "title": _("Change Request Validated"),
+                                "message": message + " %s",
+                                "links": [
+                                    {
+                                        "label": "Refresh Page",
+                                    }
+                                ],
+                                "sticky": True,
+                                "type": "success",
+                            },
+                        }
 
                         # Use Rainbowman
                         # return {
@@ -286,6 +299,23 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         #         'type': 'rainbow_man',
                         #     }
                         # }
+
+                    message = _("The change request has been partially validated")
+                    return {
+                        "type": "ir.actions.client",
+                        "tag": "display_notification",
+                        "params": {
+                            "title": _("Change Request Partially Validated"),
+                            "message": message + " %s",
+                            "links": [
+                                {
+                                    "label": "Refresh Page",
+                                }
+                            ],
+                            "sticky": True,
+                            "type": "success",
+                        },
+                    }
 
                 else:
                     raise ValidationError(message)
