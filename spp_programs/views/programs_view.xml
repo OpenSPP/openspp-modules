@@ -3,30 +3,27 @@
 Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
-    <record id="view_cycle_custom_spp_tree" model="ir.ui.view">
-        <field name="name">view_cycle_custom_spp_tree</field>
-        <field name="model">g2p.cycle</field>
-        <field name="inherit_id" ref="g2p_programs.view_cycle_tree" />
+    <record id="view_program_list_custom_spp_form" model="ir.ui.view">
+        <field name="name">view_program_list_custom_spp_form</field>
+        <field name="model">g2p.program</field>
+        <field name="inherit_id" ref="g2p_programs.view_program_list_form" />
+        <field name="priority">1000</field>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='entitlements_count']" position="attributes">
-                <attribute name="string">Cash Entitlements</attribute>
-            </xpath>
-            <xpath expr="//field[@name='entitlements_count']" position="after">
+            <xpath expr="//field[@name='cycle_ids']/tree/field[@name='entitlement_ids']" position="replace">
+                <field name="entitlements_count" string="Cash Entitlements" />
                 <field name="inkind_entitlements_count" string="In-kind Entitlements" />
             </xpath>
-        </field>
-    </record>
-
-    <record id="view_cycle_custom_spp_form" model="ir.ui.view">
-        <field name="name">view_cycle_custom_spp_form</field>
-        <field name="model">g2p.cycle</field>
-        <field name="inherit_id" ref="g2p_programs.view_cycle_form" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='entitlement_ids']" position="attributes">
+            <xpath
+                expr="//field[@name='cycle_ids']/form/sheet/notebook/page/field[@name='entitlement_ids']"
+                position="attributes"
+            >
                 <attribute name="colspan">4</attribute>
                 <attribute name="attrs">{'invisible':[('inkind_entitlements_count','>',0)]}</attribute>
             </xpath>
-            <xpath expr="//field[@name='entitlement_ids']" position="after">
+            <xpath
+                expr="//field[@name='cycle_ids']/form/sheet/notebook/page/field[@name='entitlement_ids']"
+                position="after"
+            >
                 <field
                     name="inkind_entitlement_ids"
                     nolabel="1"
@@ -35,12 +32,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     attrs="{'invisible':[('inkind_entitlements_count','=',0)]}"
                 >
                     <tree>
-                        <button
-                            name="open_entitlement_form"
-                            type="object"
-                            icon="fa-external-link"
-                            class="btn-success"
-                        />
                         <field name="name" />
                         <field name="code" />
                         <field name="partner_id" />
