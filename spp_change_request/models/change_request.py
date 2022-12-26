@@ -413,7 +413,7 @@ class ChangeRequestBase(models.Model):
         self.ensure_one()
         user_ok = False
         # Fully validated CRs will proceed
-        if self.state == "validated":
+        if self.state in ["draft", "validated", "rejected"]:
             # TODO: User must be a member of administrator and validator HQ
             user_ok = True
         else:
@@ -756,7 +756,10 @@ class ChangeRequestBase(models.Model):
                     message = "FINAL"
                 stage = validation_stages[0]
                 # Check if user is allowed to validate request
-                if validator_id not in stage.validation_group_id.users.ids:
+                if (
+                    self.state not in ["draft", "rejected"]
+                    and validator_id not in stage.validation_group_id.users.ids
+                ):
                     message = _(
                         f"You are not allowed to validate this request! Stage: {stage.stage_id.name}. "
                         f"Allowed Validator Group: {stage.validation_group_id.name}"
