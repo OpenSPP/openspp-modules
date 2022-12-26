@@ -146,6 +146,13 @@ class ChangeRequestBase(models.Model):
         fields.Datetime()
     )  #: date the change request was reset to draft
 
+    validation_group_id = fields.Many2one(
+        "res.groups",
+        string="Change Request Validation Group",
+        compute="_compute_validation_group_id",
+        store=True,
+    )
+
     @api.model
     def create(self, vals):
 
@@ -700,6 +707,31 @@ class ChangeRequestBase(models.Model):
                 )
         else:
             raise UserError(_("There are no user assigned to this change request."))
+
+    @api.depends("validator_ids", "state")
+    def _compute_validation_group_id(self):
+        for rec in self:
+            if rec.state in ["draft", "pending"]:
+                validation_stages = None
+                validation_stage_ids = None
+                if rec.validator_ids:
+                    validation_stage_ids = rec.validator_ids.mapped("stage_id.id")
+
+                if rec.request_type_ref_id and rec.request_type_ref_id.validation_ids:
+                    if validation_stage_ids:
+                        validation_stages = (
+                            rec.request_type_ref_id.validation_ids.filtered(
+                                lambda a: a.stage_id.id not in validation_stage_ids
+                            )
+                        )
+                    else:
+                        validation_stages = rec.request_type_ref_id.validation_ids
+
+                    if validation_stages:
+                        stage = validation_stages[0]
+                        rec.validation_group_id = stage.validation_group_id
+                        print(stage.validation_group_id)
+                        print(rec.validation_group_id)
 
     def _get_validation_stage(self):
         self.ensure_one()
