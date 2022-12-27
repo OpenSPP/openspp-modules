@@ -14,6 +14,10 @@ class OpenSPPRegistrant(models.Model):
     )
 
     def open_request_id_wizard(self):
+        """
+        Open Request ID Wizard
+        These are used to open the Request ID Wizard
+        """
         view = self.env.ref("spp_idqueue.request_id_wizard_form_view")
         wiz = self.env["spp.print.queue.wizard"].create({"registrant_id": self.id})
         return {

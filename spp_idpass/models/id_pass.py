@@ -31,6 +31,11 @@ class OpenSPPIDPass(models.Model):
     id_type = fields.Many2one("g2p.id.type")
 
     def generate_auth_token(self):
+        """
+        Generate Auth Token
+        This generates the auth token from auth_token_url, api_username
+        and api_password
+        """
         for rec in self:
             if rec.auth_token_url and rec.api_username and rec.api_password:
                 data = {"username": rec.api_username, "password": rec.api_password}

@@ -14,6 +14,12 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
+        """
+        Default Get
+        These overrides the default_get function to set the
+        queue_ids, state and id_count depending on different
+        scenarios
+        """
         res = super(OpenSPPBatchCreateWizard, self).default_get(fields)
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
@@ -58,6 +64,11 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
     )
 
     def next_step(self):
+        """
+        Next Step
+        These are used to proceed to 2nd Step which are
+        the batch creation
+        """
         for rec in self:
             if rec.queue_ids and rec.idpass_id:
                 queue_id = self.env["spp.print.queue.id"].search(
@@ -73,6 +84,10 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
                 return self._reopen_self()
 
     def create_batch(self):
+        """
+        Create Batch
+        These are used to create the batch or batches
+        """
         for rec in self:
             id_count = 0
             batches_count = rec.batches_count
@@ -121,6 +136,10 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
 
     @api.depends("max_id_per_batch", "id_count")
     def _compute_batches_count(self):
+        """
+        Compute Batches Count
+        These are used to compute the count of batches to be created
+        """
         for rec in self:
             rec.batches_count = 1
             if rec.max_id_per_batch and rec.id_count:
@@ -130,6 +149,10 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
                     rec.batches_count = math.ceil(rec.id_count / rec.max_id_per_batch)
 
     def open_wizard(self):
+        """
+        Open Wizard
+        These are being called to open the Batch Creation Wizard
+        """
         return {
             "name": "Create Batch Printing",
             "view_mode": "form",
@@ -141,6 +164,10 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
         }
 
     def _reopen_self(self):
+        """
+        Reopen Self
+        These are used to reopen the wizard
+        """
         return {
             "type": "ir.actions.act_window",
             "res_model": self._name,

@@ -47,10 +47,19 @@ class OpenSPPIDQueue(models.Model):
 
     @api.depends("registrant_id", "idpass_id")
     def _compute_name(self):
+        """
+        Compute Name
+        These are used to compute the name of the queue base on
+        registrant name and template name
+        """
         for rec in self:
             rec.name = f"{rec.registrant_id.name or ''} - {rec.idpass_id.name or ''}"
 
     def on_approve(self):
+        """
+        On Approve
+        These are used to approve or validate the request
+        """
         for rec in self:
             rec.date_approved = date.today()
             rec.approved_by = self.env.user.id
@@ -61,11 +70,20 @@ class OpenSPPIDQueue(models.Model):
             rec.save_to_mail_thread(message)
 
     def on_generate(self):
+        """
+        On Generate
+        These are used to call the generation of cards function
+        """
         # Make sure the ID is in the correct state before generating
         # we allow to re-generate cards
         self.generate_cards()
 
     def on_print(self):
+        """
+        On Print
+        These are used to set the request as printed
+        """
+
         # as we return the PDF, we need to make sure that there is only 1 card selected
         self.ensure_one()
 
@@ -92,6 +110,10 @@ class OpenSPPIDQueue(models.Model):
         return res_id
 
     def generate_cards(self):
+        """
+        Generate Cards
+        These are used to generate the ID from the request
+        """
         if self.filtered(
             lambda x: x.status
             not in ["generating", "generated", "approved", "added_to_batch"]
@@ -116,6 +138,10 @@ class OpenSPPIDQueue(models.Model):
             self.registrant_id.send_idpass_parameters(vals)
 
     def on_cancel(self):
+        """
+        On Cancel
+        These are used to cancel the request
+        """
         if self.filtered(lambda x: x.status in ["printed", "distributed"]):
             raise ValidationError(_("ID cannot be canceled if it has been printed"))
         for rec in self:
@@ -126,6 +152,10 @@ class OpenSPPIDQueue(models.Model):
             rec.save_to_mail_thread(message)
 
     def on_distribute(self):
+        """
+        On Approve
+        These are used to set the request as distributed
+        """
         if not self.filtered(lambda x: x.status in ["printed"]):
             raise ValidationError(
                 _("ID can only be distributed if it has been printed")
@@ -139,6 +169,11 @@ class OpenSPPIDQueue(models.Model):
             rec.save_to_mail_thread(message)
 
     def validate_requests(self):
+        """
+        Validate Requests
+        These are used to approve or validate multiple requests
+        via Server Action
+        """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
                 [
@@ -175,6 +210,11 @@ class OpenSPPIDQueue(models.Model):
                 }
 
     def generate_validate_requests(self):
+        """
+        Generate Validated Requests
+        These are used to generate multiple validated requests
+        by creating a Queue Job to work on background
+        """
         queue_ids = self.env["spp.print.queue.id"].search(
             [
                 ("id", "in", self.env.context.get("active_ids")),
@@ -218,10 +258,18 @@ class OpenSPPIDQueue(models.Model):
             }
 
     def _generate_multi_cards(self, queue_ids):
+        """
+        Generate Multi Cards
+        These are called by the Job Queue created from generate_validate_requests
+        """
         queued_ids = self.env["spp.print.queue.id"].search([("id", "in", queue_ids)])
         queued_ids.generate_cards()
 
     def print_requests(self):
+        """
+        Print Requests
+        These are used to set multiple requests as printed
+        """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
                 [
@@ -258,6 +306,10 @@ class OpenSPPIDQueue(models.Model):
                 }
 
     def distribute_requests(self):
+        """
+        Distribute Requests
+        These are used to set multiple requests as distributed
+        """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
                 [
@@ -293,10 +345,18 @@ class OpenSPPIDQueue(models.Model):
                 }
 
     def save_to_mail_thread(self, message):
+        """
+        Save to Mail Thread
+        These are being used or called to post to mail_thread
+        """
         for rec in self:
             rec.message_post(body=message)
 
     def open_request_form(self):
+        """
+        Open Request Form
+        These are being used to open the request form
+        """
         return {
             "name": "ID Request",
             "view_mode": "form",
@@ -312,6 +372,12 @@ class OpenSPPIDQueue(models.Model):
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
+    """
+    Add Auto Approve configuration to automatically set
+    requests as 'approved' upon creation if auto_approve_id_request
+    is True
+    """
+
     auto_approve_id_request = fields.Boolean(
         default=True,
         help="Check if you want to auto-approve ID requests",
@@ -319,6 +385,10 @@ class ResConfigSettings(models.TransientModel):
     )
 
     def set_values(self):
+        """
+        Get Values
+        These are used to Set the auto_approve_id_request value
+        """
         res = super(ResConfigSettings, self).set_values()
         self.env["ir.config_parameter"].set_param(
             "spp_id_queue.auto_approve_id_request", self.auto_approve_id_request
@@ -327,6 +397,10 @@ class ResConfigSettings(models.TransientModel):
 
     @api.model
     def get_values(self):
+        """
+        Get Values
+        These are used to Get the auto_approve_id_request value
+        """
         res = super(ResConfigSettings, self).get_values()
         params = self.env["ir.config_parameter"].sudo()
         res.update(

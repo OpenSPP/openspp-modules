@@ -14,6 +14,11 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
+        """
+        Default Get
+        These overrides the default_get function to set the
+        registrant_ids base on the selected registrants 'active_ids'
+        """
         res = super(OpenSPPMultiIDRequestWizard, self).default_get(fields)
         if self.env.context.get("active_ids"):
             registrant_ids = self.env["res.partner"].search(
@@ -35,6 +40,10 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
 
     @api.depends("registrant_ids")
     def _compute_target_type(self):
+        """
+        Compute Target Type
+        These are used to compute the target_type
+        """
         for rec in self:
             rec.target_type = "individual"
             if rec.registrant_ids and rec.registrant_ids[0].is_group:
@@ -44,6 +53,10 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
 
     @api.onchange("id_type")
     def _onchange_template(self):
+        """
+        Template Onchange
+        These are used to set is_idpass on Template Onchange
+        """
         for rec in self:
             rec.is_idpass = False
             if (
@@ -53,6 +66,10 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
                 rec.is_idpass = True
 
     def create_requests(self):
+        """
+        Create Requests
+        These are used to create the request or requests
+        """
         for rec in self:
             if rec.id_type:
                 if rec.registrant_ids:
@@ -97,6 +114,10 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
         return
 
     def open_wizard(self):
+        """
+        Open Wizard
+        These are being called to open the Multiple ID Request wizard
+        """
         return {
             "name": "Create Multiple ID Request",
             "view_mode": "form",

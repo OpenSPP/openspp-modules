@@ -127,6 +127,8 @@
                     />
                     </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
                     <widget
                         name="web_ribbon"
                         title="New"
@@ -169,7 +171,7 @@
                         bg_color="bg-warning"
                         attrs="{'invisible': [('status', '!=', 'cancelled')]}"
                     />
-                    <div class="oe_title">
+                    <div class="oe_title" name="title">
                         <h1>
                             <label for="registrant_id" string="Registrant" />
                         </h1>

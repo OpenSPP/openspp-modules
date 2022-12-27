@@ -13,6 +13,11 @@ class OpenG2PIDType(models.Model):
     )
 
     def unlink(self):
+        """
+        Unlink
+        This overrides the unlink function to stop default ID
+        Types from being deleted
+        """
         for rec in self:
             external_identifier = self.env["ir.model.data"].search(
                 [("res_id", "=", rec.id), ("model", "=", "g2p.id.type")]
@@ -23,6 +28,11 @@ class OpenG2PIDType(models.Model):
                 return super(OpenG2PIDType, self).unlink()
 
     def write(self, vals):
+        """
+        Write
+        This overrides the write function to stop default ID
+        Types from being edited
+        """
         external_identifier = self.env["ir.model.data"].search(
             [("res_id", "=", self.id), ("model", "=", "g2p.id.type")]
         )
