@@ -730,8 +730,6 @@ class ChangeRequestBase(models.Model):
                     if validation_stages:
                         stage = validation_stages[0]
                         rec.validation_group_id = stage.validation_group_id
-                        print(stage.validation_group_id)
-                        print(rec.validation_group_id)
 
     def _get_validation_stage(self):
         self.ensure_one()
