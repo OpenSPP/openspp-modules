@@ -785,18 +785,6 @@ class ChangeRequestBase(models.Model):
         }
         return self.env["mail.activity"].create(next_activity)
 
-    @api.model
-    def search_read(self, domain=None, fields=None, offset=0, limit=None, order=None):
-        domain = domain or []
-        search_for = ["registrant_id.area_center_id", "=", "user.pds_area_ids"]
-        if search_for in domain:
-            index = domain.index(search_for)
-            del domain[index]
-            domain.append(
-                ["registrant_id.area_center_id", "in", self.env.user.pds_area_ids.ids]
-            )
-        return super().search_read(domain, fields, offset, limit, order)
-
 
 class ChangeRequestValidators(models.Model):
     _name = "spp.change.request.validators"

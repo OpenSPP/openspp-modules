@@ -327,16 +327,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="request_type_ref_id" />
                 <field name="create_uid" string="Submitted By" />
                 <field name="applied_by_id" />
-                <filter name="filter_my_cr" string="My Change Requests" domain="[('create_uid', '=', uid)]" />
-                <separator />
-                <filter
-                    name="filter_my_area"
-                    string="My Area"
-                    domain="[('registrant_id.area_center_id', '=', 'user.pds_area_ids')]"
-                />
-                <group expand="0" string="Group By">
-                    <filter string="Company" name="grp_company_id" context="{'group_by': 'company_id'}" />
-                </group>
             </search>
         </field>
     </record>
