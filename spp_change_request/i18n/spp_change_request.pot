@@ -273,6 +273,12 @@ msgid "Change Request Module Access"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Change Request Partially Validated"
+msgstr ""
+
+#. module: spp_change_request
 #: model:mail.activity.type,name:spp_change_request.pending_validation_activity
 msgid "Change Request Pending Validation"
 msgstr ""
@@ -299,6 +305,7 @@ msgid "Change Request Validated"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__validation_group_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__validation_group_id
 msgid "Change Request Validation Group"
 msgstr ""
@@ -357,7 +364,6 @@ msgstr ""
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__company_id
-#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
 msgid "Company"
 msgstr ""
 
@@ -554,7 +560,6 @@ msgid "For Validation"
 msgstr ""
 
 #. module: spp_change_request
-#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
 msgid "Group By"
 msgstr ""
@@ -987,6 +992,12 @@ msgstr ""
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The change request has been fully validated"
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request has been partially validated"
 msgstr ""
 
 #. module: spp_change_request
