@@ -263,6 +263,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                                 "type": "success",
                             },
                         }
+
                         # Use Rainbowman
                         # return {
                         #     'effect': {
@@ -298,6 +299,21 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         #         'type': 'rainbow_man',
                         #     }
                         # }
+
+                    message = _("The change request has been partially validated")
+                    return {
+                        "type": "ir.actions.client",
+                        "tag": "display_notification",
+                        "params": {
+                            "title": _("Change Request Partially Validated"),
+                            "message": message,
+                            "next": {
+                                "type": "ir.actions.act_window_close",
+                            },
+                            "sticky": True,
+                            "type": "success",
+                        },
+                    }
 
                 else:
                     raise ValidationError(message)
