@@ -127,8 +127,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             type="object"
                             icon="fa-user-circle"
                             class="oe_stat_button"
-                            states="pending,validated"
-                            groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator"
+                            states="draft,pending,validated,rejected"
+                            groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_agent"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Assign</span>
@@ -327,9 +327,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="request_type_ref_id" />
                 <field name="create_uid" string="Submitted By" />
                 <field name="applied_by_id" />
-                <group expand="0" string="Group By">
-                    <filter string="Company" name="grp_company_id" context="{'group_by': 'company_id'}" />
-                </group>
             </search>
         </field>
     </record>
@@ -341,7 +338,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="res_model">spp.change.request</field>
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="change_request_filter" />
-        <field name="context">{}</field>
+        <field name="context">{'search_default_filter_my_cr': 1}</field>
         <field name="domain">[]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
