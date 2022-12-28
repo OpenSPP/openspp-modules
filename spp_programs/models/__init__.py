@@ -3,5 +3,4 @@
 from . import constants
 from . import cycle
 from . import entitlement
-from . import service_point
 from . import stock
