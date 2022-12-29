@@ -82,7 +82,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
             <p class="o_view_nocontent_smiling_face">
                 In-Kind Entitlement Report
             </p><p>
-                List of in-kind entitlements.
+                There are no entitlements retrieved based on the filters specified.
             </p>
         </field>
     </record>
@@ -100,14 +100,5 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="view_id" ref="view_entitlement_inkind_form" />
         <field name="act_window_id" ref="action_entitlement_report_inkind" />
     </record>
-
-    <menuitem
-        id="menu_entitlement_report_inkind"
-        name="Entitlements"
-        action="action_entitlement_report_inkind"
-        parent="spp_programs_reports_menu_root"
-        sequence="10"
-        groups="g2p_registry_base.group_g2p_admin,g2p_programs.g2p_program_manager,g2p_programs.g2p_finance_validator"
-    />
 
 </odoo>

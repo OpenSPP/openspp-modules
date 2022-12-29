@@ -1,5 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 spp_programs_entitlement_inkind_admin,SPP Entitlement In-Kind Admin Access,spp_programs.model_g2p_entitlement_inkind,g2p_registry_base.group_g2p_admin,1,1,1,1
+g2p_entitlement_inkind_report_wizard_admin,SPP Entitlement In-Kind Report Wizard Admin Access,spp_programs.model_g2p_entitlement_inkind_report_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
 
 spp_programs_product_product_admin,SPP Entitlement Product Product Admin Access,product.model_product_product,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_programs_stock_picking_admin,SPP Entitlement Stock Picking Admin Access,stock.model_stock_picking,g2p_registry_base.group_g2p_admin,1,1,1,1
@@ -11,6 +12,7 @@ spp_programs_stock_move_admin,SPP Entitlement Stock Move Admin Access,stock.mode
 spp_programs_stock_rule_admin,SPP Entitlement Stock Rule Admin Access,stock.model_stock_rule,g2p_registry_base.group_g2p_admin,1,1,1,1
 
 spp_programs_entitlement_inkind_program_manager,SPP Entitlement In-Kind Program Manager Access,spp_programs.model_g2p_entitlement_inkind,g2p_programs.g2p_program_manager,1,1,1,0
+g2p_entitlement_inkind_report_wizard_program_manager,SPP Entitlement In-Kind Report Wizard Program Manager Access,spp_programs.model_g2p_entitlement_inkind_report_wizard,g2p_programs.g2p_program_manager,1,1,1,1
 
 spp_programs_product_product_program_manager,SPP Entitlement Product Product Program Manager Access,product.model_product_product,g2p_programs.g2p_program_manager,1,1,0,0
 spp_programs_stock_picking_program_manager,SPP Entitlement Stock Picking Program Manager Access,stock.model_stock_picking,g2p_programs.g2p_program_manager,1,1,1,0
@@ -22,3 +24,4 @@ spp_programs_stock_move_program_manager,SPP Entitlement Stock Move Program Manag
 spp_programs_stock_rule_program_manager,SPP Entitlement Stock Rule Program Manager Access,stock.model_stock_rule,g2p_programs.g2p_program_manager,1,0,0,0
 
 spp_programs_entitlement_inkind_program_validator,SPP Entitlement In-Kind Program Validator Access,spp_programs.model_g2p_entitlement_inkind,g2p_programs.g2p_program_validator,1,1,0,0
+g2p_entitlement_inkind_report_wizard_program_validator,SPP Entitlement In-Kind Report Wizard Program Validator Access,spp_programs.model_g2p_entitlement_inkind_report_wizard,g2p_programs.g2p_program_validator,1,1,1,1

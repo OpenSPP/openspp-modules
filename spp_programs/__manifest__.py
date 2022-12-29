@@ -15,6 +15,7 @@
         "g2p_programs",
         "product",
         "stock",
+        "web_domain_field",
     ],
     "data": [
         "security/ir.model.access.csv",
@@ -23,6 +24,7 @@
         "views/cycle_view.xml",
         "views/programs_view.xml",
         "views/inkind_entitlement_report_view.xml",
+        "wizard/inkind_entitlement_report_wiz.xml",
     ],
     "assets": {},
     "demo": [],
