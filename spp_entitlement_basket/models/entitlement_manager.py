@@ -221,3 +221,17 @@ class G2PBasketEntitlementItem(models.Model):
     uom_id = fields.Many2one(
         "uom.uom", "Unit of Measure", related="product_id.uom_id", store=True
     )
+
+    # any field that is an integer of `res.partner`
+    # It could be the number of members, children, elderly, or any other metrics.
+    # if no multiplier field is set, it is considered as 1.
+    multiplier_field = fields.Many2one(
+        "ir.model.fields",
+        "Multiplier",
+        domain=[("model_id.model", "=", "res.partner"), ("ttype", "=", "integer")],
+    )
+    max_multiplier = fields.Integer(
+        default=0,
+        string="Maximum number",
+        help="0 means no limit",
+    )

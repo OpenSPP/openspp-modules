@@ -98,6 +98,8 @@ class G2PCreateNewProgramWiz(models.TransientModel):
                         {
                             "product_id": item.product_id.id,
                             "qty": item.qty,
+                            "multiplier_field": item.multiplier_field.id,
+                            "max_multiplier": item.max_multiplier,
                         },
                     ]
                 )
@@ -140,3 +142,14 @@ class G2PCreateNewProgramWizItem(models.TransientModel):
     )
     qty = fields.Integer("QTY", default=1, required=True)
     uom_id = fields.Many2one("uom.uom", "Unit of Measure", related="product_id.uom_id")
+
+    multiplier_field = fields.Many2one(
+        "ir.model.fields",
+        "Multiplier",
+        domain=[("model_id.model", "=", "res.partner"), ("ttype", "=", "integer")],
+    )
+    max_multiplier = fields.Integer(
+        default=0,
+        string="Maximum number",
+        help="0 means no limit",
+    )
