@@ -22,6 +22,7 @@
         "views/entitlement_view.xml",
         "views/cycle_view.xml",
         "views/programs_view.xml",
+        "views/inkind_entitlement_report_view.xml",
     ],
     "assets": {},
     "demo": [],
