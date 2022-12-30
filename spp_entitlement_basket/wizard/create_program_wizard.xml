@@ -25,13 +25,16 @@
                                     colspan="4"
                                     options="{'no_open':True,'no_create':True,'no_edit':True}"
                                 />
+                                <field
+                                    name="multiplier_field"
+                                    options="{'no_open':True,'no_create':True,'no_create_edit':True}"
+                                />
+                                <field name="max_multiplier" />
                                 <field name="basket_entitlement_item_ids" nolabel="1" colspan="4">
                                     <tree>
                                         <field name="product_id" />
                                         <field name="qty" />
                                         <field name="uom_id" />
-                                        <field name="multiplier_field" />
-                                        <field name="max_multiplier" />
                                     </tree>
                                     <form string="Entitlement Item">
                                         <group colspan="4" col="4">
@@ -45,13 +48,6 @@
                                                 name="uom_id"
                                                 options="{'no_open':True,'no_create':True,'no_create_edit':True}"
                                             />
-                                        </group>
-                                        <group colspan="4" col="4" string="Rules">
-                                            <field
-                                                name="multiplier_field"
-                                                options="{'no_open':True,'no_create':True,'no_create_edit':True}"
-                                            />
-                                            <field name="max_multiplier" />
                                         </group>
                                     </form>
                                 </field>

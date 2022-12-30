@@ -32,6 +32,17 @@ class G2PCreateNewProgramWiz(models.TransientModel):
         "Entitlement Items",
     )
 
+    multiplier_field = fields.Many2one(
+        "ir.model.fields",
+        "Multiplier",
+        domain=[("model_id.model", "=", "res.partner"), ("ttype", "=", "integer")],
+    )
+    max_multiplier = fields.Integer(
+        default=0,
+        string="Maximum number",
+        help="0 means no limit",
+    )
+
     # Inventory integration fields
     warehouse_id = fields.Many2one(
         "stock.warehouse",
@@ -98,8 +109,6 @@ class G2PCreateNewProgramWiz(models.TransientModel):
                         {
                             "product_id": item.product_id.id,
                             "qty": item.qty,
-                            "multiplier_field": item.multiplier_field.id,
-                            "max_multiplier": item.max_multiplier,
                         },
                     ]
                 )
@@ -111,6 +120,8 @@ class G2PCreateNewProgramWiz(models.TransientModel):
                     "program_id": program_id,
                     "entitlement_basket_id": self.entitlement_basket_id.id,
                     "entitlement_item_ids": entitlement_item_ids,
+                    "multiplier_field": self.multiplier_field.id,
+                    "max_multiplier": self.max_multiplier,
                     "entitlement_validation_group_id": self.entitlement_validation_group_id.id,
                     "warehouse_id": self.warehouse_id.id,
                 }
@@ -142,14 +153,3 @@ class G2PCreateNewProgramWizItem(models.TransientModel):
     )
     qty = fields.Integer("QTY", default=1, required=True)
     uom_id = fields.Many2one("uom.uom", "Unit of Measure", related="product_id.uom_id")
-
-    multiplier_field = fields.Many2one(
-        "ir.model.fields",
-        "Multiplier",
-        domain=[("model_id.model", "=", "res.partner"), ("ttype", "=", "integer")],
-    )
-    max_multiplier = fields.Integer(
-        default=0,
-        string="Maximum number",
-        help="0 means no limit",
-    )

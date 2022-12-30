@@ -49,6 +49,20 @@ class SPPBasketEntitlementManager(models.Model):
         "Entitlement Items",
     )  #: Details of the food basket (products, QTY, UoM)
 
+    # any field that is an integer of `res.partner`
+    # It could be the number of members, children, elderly, or any other metrics.
+    # if no multiplier field is set, it is considered as 1.
+    multiplier_field = fields.Many2one(
+        "ir.model.fields",
+        "Multiplier",
+        domain=[("model_id.model", "=", "res.partner"), ("ttype", "=", "integer")],
+    )
+    max_multiplier = fields.Integer(
+        default=0,
+        string="Maximum number",
+        help="0 means no limit",
+    )
+
     # Inventory integration fields
     warehouse_id = fields.Many2one(
         "stock.warehouse",
@@ -112,16 +126,14 @@ class SPPBasketEntitlementManager(models.Model):
                         "product_ids.id"
                     )
                     if rec.product_id.id in service_point_product_ids:
-                        service_point_id = beneficiary_id.service_point_ids.filtered(
-                            lambda x: rec.product_id.id in x.product_ids.ids
-                        )
+                        service_point_id = beneficiary_id.service_point_ids
                         # raise UserError("DEBUG: %s" % service_point_id[0])
                         # TODO: Check inventory
                         entitlements.append(
                             {
                                 "cycle_id": cycle.id,
                                 "partner_id": beneficiary_id.id,
-                                "service_point_id": service_point_id.id,
+                                "service_point_id": service_point_id[0].id,
                                 "total_amount": rec.product_id.list_price * rec.qty,
                                 "product_id": rec.product_id.id,
                                 "qty": rec.qty,
@@ -220,18 +232,4 @@ class G2PBasketEntitlementItem(models.Model):
     qty = fields.Integer("QTY", default=1, required=True)
     uom_id = fields.Many2one(
         "uom.uom", "Unit of Measure", related="product_id.uom_id", store=True
-    )
-
-    # any field that is an integer of `res.partner`
-    # It could be the number of members, children, elderly, or any other metrics.
-    # if no multiplier field is set, it is considered as 1.
-    multiplier_field = fields.Many2one(
-        "ir.model.fields",
-        "Multiplier",
-        domain=[("model_id.model", "=", "res.partner"), ("ttype", "=", "integer")],
-    )
-    max_multiplier = fields.Integer(
-        default=0,
-        string="Maximum number",
-        help="0 means no limit",
     )
