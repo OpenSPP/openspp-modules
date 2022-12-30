@@ -62,7 +62,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def approve_batch(self):
         """
-        These are used to approve or validate a batch
+        This function is used to approve or validate a batch
         """
         for rec in self:
             rec.date_approved = date.today()
@@ -78,7 +78,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def _generate_batch(self, batch_ids):
         """
-        These are used to generate cards from batch by
+        This function is used to generate cards from batch by
         creating a Queue Job for each Job Batch
         :param batch_ids: The Batch IDS.
         :return: Return a notification to state the progress
@@ -132,7 +132,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def _generate_cards(self, queue_ids):
         """
-        These are used generate each cards from the Batch via Queue Jobs
+        This generates each cards from the Batch via Queue Jobs
         :param queued_ids: The Queue IDS.
         :return: Call generate_cards
         """
@@ -141,7 +141,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def mark_as_done(self, rec):
         """
-        These are used to set the batch as 'generated' when the
+        This function is used to set the batch as 'generated' when the
         Queue Job is Done
         :param rec: The Record.
         :return: Set status, call save_to_mail_thread then pass the api parameter
@@ -162,7 +162,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def pass_api_param(self):
         """
-        These are used to pass the Batch ID on API
+        This function is used to pass the Batch ID on API
         to merge all Individual IDS to one PDF
         """
         for rec in self:
@@ -197,7 +197,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def print_batch(self):
         """
-        These are used to set the Batch to 'printing'
+        This function is used to set the Batch to 'printing'
         """
         for rec in self:
             rec.status = "printing"
@@ -213,7 +213,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def batch_printed(self):
         """
-        These are used to set the Batch and each individual IDs
+        This function is used to set the Batch and each individual IDs
         to 'printed'
         """
         for rec in self:
@@ -237,7 +237,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def batch_distributed(self):
         """
-        These are used to set the Batch and each individual IDs
+        This function is used to set the Batch and each individual IDs
         to 'distributed'
         """
         for rec in self:
@@ -260,7 +260,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def multi_approve_batch(self):
         """
-        These are used for server action to approve multi-selected batches
+        This function is used for server action to approve multi-selected batches
         """
         if self.env.context.get("active_ids"):
             batch_ids = self.env["spp.print.queue.batch"].search(
@@ -299,7 +299,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def multi_generate_batch(self):
         """
-        These are used for server action to generate multi-selected batches
+        This function is used for server action to generate multi-selected batches
         """
         if self.env.context.get("active_ids"):
             batch_ids = self.env["spp.print.queue.batch"].search(
@@ -313,7 +313,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def multi_print_batch(self):
         """
-        These are used for server action to print multi-selected batches
+        This function is used for server action to print multi-selected batches
         """
         if self.env.context.get("active_ids"):
             batch_ids = self.env["spp.print.queue.batch"].search(
@@ -357,7 +357,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def multi_printed_batch(self):
         """
-        These are used for server action to set multi-selected batches and
+        This function is used for server action to set multi-selected batches and
         their Individual IDs as printed
         """
         if self.env.context.get("active_ids"):
@@ -407,7 +407,7 @@ class OpenSPPPrintBatch(models.Model):
 
     def multi_distribute_batch(self):
         """
-        These are used for server action to set multi-selected batches and
+        This function is used for server action to set multi-selected batches and
         their Individual IDs as distributed
         """
         if self.env.context.get("active_ids"):

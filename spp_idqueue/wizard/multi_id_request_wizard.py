@@ -41,7 +41,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
     @api.depends("registrant_ids")
     def _compute_target_type(self):
         """
-        These are used to compute the target_type
+        This function is used to compute the target_type
         """
         for rec in self:
             rec.target_type = "individual"
@@ -53,7 +53,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
     @api.onchange("id_type")
     def _onchange_template(self):
         """
-        These are used to set is_idpass on Template Onchange
+        This function is used to set is_idpass on Template Onchange
         """
         for rec in self:
             rec.is_idpass = False
@@ -65,7 +65,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
 
     def create_requests(self):
         """
-        These are used to create the request or requests
+        This function is used to create the request or requests
         """
         for rec in self:
             if rec.id_type:

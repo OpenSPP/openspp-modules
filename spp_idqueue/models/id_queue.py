@@ -48,7 +48,7 @@ class OpenSPPIDQueue(models.Model):
     @api.depends("registrant_id", "idpass_id")
     def _compute_name(self):
         """
-        These are used to compute the name of the queue base on
+        This function is used to compute the name of the queue base on
         registrant name and template name
         """
         for rec in self:
@@ -56,7 +56,7 @@ class OpenSPPIDQueue(models.Model):
 
     def on_approve(self):
         """
-        These are used to approve or validate the request
+        This function is used to approve or validate the request
         """
         for rec in self:
             rec.date_approved = date.today()
@@ -74,7 +74,7 @@ class OpenSPPIDQueue(models.Model):
 
     def on_print(self):
         """
-        These are used to set the request as printed
+        This function is used to set the request as printed
         """
 
         # as we return the PDF, we need to make sure that there is only 1 card selected
@@ -132,7 +132,7 @@ class OpenSPPIDQueue(models.Model):
 
     def on_cancel(self):
         """
-        These are used to cancel the request
+        This function is used to cancel the request
         """
         if self.filtered(lambda x: x.status in ["printed", "distributed"]):
             raise ValidationError(_("ID cannot be canceled if it has been printed"))
@@ -145,7 +145,7 @@ class OpenSPPIDQueue(models.Model):
 
     def on_distribute(self):
         """
-        These are used to set the request as distributed
+        This function is used to set the request as distributed
         """
         if not self.filtered(lambda x: x.status in ["printed"]):
             raise ValidationError(
@@ -161,7 +161,7 @@ class OpenSPPIDQueue(models.Model):
 
     def validate_requests(self):
         """
-        These are used to approve or validate multiple requests
+        This function is used to approve or validate multiple requests
         via Server Action
         """
         if self.env.context.get("active_ids"):
@@ -201,7 +201,7 @@ class OpenSPPIDQueue(models.Model):
 
     def generate_validate_requests(self):
         """
-        These are used to generate multiple validated requests
+        This function is used to generate multiple validated requests
         by creating a Queue Job to work on background
         """
         queue_ids = self.env["spp.print.queue.id"].search(
@@ -249,7 +249,7 @@ class OpenSPPIDQueue(models.Model):
 
     def print_requests(self):
         """
-        These are used to set multiple requests as printed
+        This function is used to set multiple requests as printed
         """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
@@ -288,7 +288,7 @@ class OpenSPPIDQueue(models.Model):
 
     def distribute_requests(self):
         """
-        These are used to set multiple requests as distributed
+        This function is used to set multiple requests as distributed
         """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(

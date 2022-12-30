@@ -16,7 +16,7 @@ class OpenSPPIssueIDPassWizard(models.TransientModel):
 
     def issue_idpass(self):
         """
-        These are used to call the send_idpass_parameters to
+        This calls the send_idpass_parameters to
         generate the id for this registrant
         """
         if self.idpass_id:

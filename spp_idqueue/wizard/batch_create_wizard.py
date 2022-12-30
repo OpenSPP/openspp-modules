@@ -65,7 +65,7 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
 
     def next_step(self):
         """
-        These are used to proceed to 2nd Step which are
+        This function is used to proceed to 2nd Step which are
         the batch creation
         """
         for rec in self:
@@ -84,7 +84,7 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
 
     def create_batch(self):
         """
-        These are used to create the batch or batches
+        This function is used to create the batch or batches
         """
         for rec in self:
             id_count = 0
@@ -135,7 +135,7 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
     @api.depends("max_id_per_batch", "id_count")
     def _compute_batches_count(self):
         """
-        These are used to compute the count of batches to be created
+        This function is used to compute the count of batches to be created
         """
         for rec in self:
             rec.batches_count = 1
