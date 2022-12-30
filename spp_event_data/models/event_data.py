@@ -28,6 +28,9 @@ class OpenSPPEventData(models.Model):
 
     @api.depends("model")
     def _compute_event_type(self):
+        """
+        This computes the event_type of the event data
+        """
         for rec in self:
             rec.event_type = ""
             if rec.model:
@@ -37,6 +40,9 @@ class OpenSPPEventData(models.Model):
 
     @api.depends("model", "res_id")
     def _compute_name(self):
+        """
+        This computes the name of the event data
+        """
         for rec in self:
             rec.name = ""
             if rec.model:
@@ -49,6 +55,10 @@ class OpenSPPEventData(models.Model):
 
     @api.model
     def create(self, vals):
+        """
+        This overrides the create function to end the previous active event before
+        creating
+        """
         if vals["model"]:
             model = vals["model"]
             partner = vals["partner_id"]
