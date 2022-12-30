@@ -18,8 +18,6 @@ class OpenSPPIssueIDPassWizard(models.TransientModel):
         """
         These are used to call the send_idpass_parameters to
         generate the id for this registrant
-        :param vals: The Values to be issued.
-        :return: Call send_idpass_parameters to issue ID.
         """
         if self.idpass_id:
             vals = {"idpass": self.idpass_id.id}

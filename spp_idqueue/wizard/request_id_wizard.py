@@ -22,8 +22,6 @@ class OpenSPPRequestIDWizard(models.TransientModel):
     def _compute_target_type(self):
         """
         These are used to compute target_type
-        :param target_type: The Target Type.
-        :return: Set target_type
         """
         for rec in self:
             if rec.registrant_id:
@@ -35,8 +33,6 @@ class OpenSPPRequestIDWizard(models.TransientModel):
     def request_id(self):
         """
         These are used to create the request
-        :param vals: The Values tobe created.
-        :return: Create request
         """
         for rec in self:
             if rec.id_type:
@@ -63,8 +59,6 @@ class OpenSPPRequestIDWizard(models.TransientModel):
     def _onchange_template(self):
         """
         These are used to set is_idpass on Template onchange
-        :param is_idpass: The Is IDPass.
-        :return: set is_idpass
         """
         for rec in self:
             rec.is_idpass = False

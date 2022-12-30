@@ -33,11 +33,7 @@ class OpenSPPIDPass(models.Model):
     def generate_auth_token(self):
         """
         This generates the auth token from auth_token_url, api_username
-        and api_password,
-        :param data: The Data.
-        :param headers: The Header.
-        :param auth_token: The Auth Token.
-        :return: Set the Auth Token base on response.
+        and api_password
         """
         for rec in self:
             if rec.auth_token_url and rec.api_username and rec.api_password:

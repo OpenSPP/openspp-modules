@@ -50,10 +50,6 @@ class OpenSPPIDQueue(models.Model):
         """
         These are used to compute the name of the queue base on
         registrant name and template name
-        :param name: The Name.
-        :param registrant_id: The Registrant.
-        :param idpass_id: The IDPass.
-        :return: Set name with registrant_id Name and idpass_id Name
         """
         for rec in self:
             rec.name = f"{rec.registrant_id.name or ''} - {rec.idpass_id.name or ''}"
@@ -61,10 +57,6 @@ class OpenSPPIDQueue(models.Model):
     def on_approve(self):
         """
         These are used to approve or validate the request
-        :param date_approved: The Date Approved.
-        :param approved_by: The Approved By.
-        :param status: The Status.
-        :return: Set date_approved, approved_by, status then call save_to_mail_thread
         """
         for rec in self:
             rec.date_approved = date.today()
@@ -83,10 +75,6 @@ class OpenSPPIDQueue(models.Model):
     def on_print(self):
         """
         These are used to set the request as printed
-        :param date_printed: The Date Printed.
-        :param printed_by: The Printed By.
-        :param status: The Status.
-        :return: Set date_printed, printed_by, status then call save_to_mail_thread
         """
 
         # as we return the PDF, we need to make sure that there is only 1 card selected
@@ -117,8 +105,6 @@ class OpenSPPIDQueue(models.Model):
     def generate_cards(self):
         """
         These are used to generate the ID from the request
-        :param status: The Status.
-        :return: Call generate_card, set status then call save_to_mail_thread
         """
         if self.filtered(
             lambda x: x.status
@@ -137,7 +123,7 @@ class OpenSPPIDQueue(models.Model):
     def generate_card(self, card):
         """
         Override this method to change the backend used to generate the ID card
-        :param vals: The Values tobe passed.
+        :param card: The Card being generated.
         :return: Call send_idpass_parameters with vals
         """
         if card.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id:
@@ -147,8 +133,6 @@ class OpenSPPIDQueue(models.Model):
     def on_cancel(self):
         """
         These are used to cancel the request
-        :param status: The Status.
-        :return: Set status then call save_to_mail_thread
         """
         if self.filtered(lambda x: x.status in ["printed", "distributed"]):
             raise ValidationError(_("ID cannot be canceled if it has been printed"))
@@ -162,9 +146,6 @@ class OpenSPPIDQueue(models.Model):
     def on_distribute(self):
         """
         These are used to set the request as distributed
-        :param date_distributed: The Date Distributed.
-        :param status: The Status.
-        :return: Set date_distributed, status then call save_to_mail_thread
         """
         if not self.filtered(lambda x: x.status in ["printed"]):
             raise ValidationError(
@@ -182,11 +163,6 @@ class OpenSPPIDQueue(models.Model):
         """
         These are used to approve or validate multiple requests
         via Server Action
-        :param date_approved: The Date Approved.
-        :param approved_by: The Approved By.
-        :param status: The Status.
-        :return: Set date_approved, approved_by, status, call save_to_mail_thread then
-        return a notification
         """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
@@ -227,10 +203,6 @@ class OpenSPPIDQueue(models.Model):
         """
         These are used to generate multiple validated requests
         by creating a Queue Job to work on background
-        :param active_ids: The Selected Queues.
-        :param queue_ids: The Queues.
-        :return: Create Queue Jobs to call _generate_multi_cards with queue_datas then
-        return a notification
         """
         queue_ids = self.env["spp.print.queue.id"].search(
             [
@@ -278,11 +250,6 @@ class OpenSPPIDQueue(models.Model):
     def print_requests(self):
         """
         These are used to set multiple requests as printed
-        :param date_printed: The Date Printed.
-        :param printed_by: The Printed By.
-        :param status: The Status.
-        :return: Set date_printed, printed_by, status, call save_to_mail_thread then
-        return a notification
         """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
@@ -322,10 +289,6 @@ class OpenSPPIDQueue(models.Model):
     def distribute_requests(self):
         """
         These are used to set multiple requests as distributed
-        :param date_distributed: The Date Distributed.
-        :param status: The Status.
-        :return: Set date_distributed, status, call save_to_mail_thread then
-        return a notification
         """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(

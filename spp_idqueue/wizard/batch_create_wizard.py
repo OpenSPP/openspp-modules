@@ -67,10 +67,6 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
         """
         These are used to proceed to 2nd Step which are
         the batch creation
-        :param queue_ids: The Queue IDS.
-        :param id_count: The ID Count.
-        :param state: The State.
-        :return: Set queue_ids, id_count, state then reopen wizard
         """
         for rec in self:
             if rec.queue_ids and rec.idpass_id:
@@ -89,9 +85,6 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
     def create_batch(self):
         """
         These are used to create the batch or batches
-        :param queue_ids: The Queue IDS.
-        :param batch_name: The Batch Name.
-        :return: Create a batch then return a notification
         """
         for rec in self:
             id_count = 0
@@ -143,8 +136,6 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
     def _compute_batches_count(self):
         """
         These are used to compute the count of batches to be created
-        :param batches_count: The Batches Count.
-        :return: Set the batches_count
         """
         for rec in self:
             rec.batches_count = 1

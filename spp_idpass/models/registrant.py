@@ -43,8 +43,7 @@ class OpenSPPRegistrant(models.Model):
         """
         These function is being used to handle the passing of Datas
         to IDPass, to generate the ID of the registrant
-        :param data_param: The Data Parameters tobe created.
-        :param data: The Data tobe send.
+        :param vals: The Values.
         :return: Response from the API.
         """
         id_pass_param = self.env["spp.id.pass"].search([("is_active", "=", True)])
@@ -209,8 +208,7 @@ class OpenSPPRegistrant(models.Model):
         """
         This checks if the ID already exists in the registrant g2p.reg.id
         if yes create else update
-        :param id: The ID of current registrant.
-        :param id_type: The ID Type.
+        :param identification_no: The Identification Number.
         :return: Write or update the reg_ids depending on condition.
         """
         existing_id = self.env["g2p.reg.id"].search(
