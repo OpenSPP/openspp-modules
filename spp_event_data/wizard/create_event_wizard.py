@@ -20,6 +20,10 @@ class SPPCreateEventWizard(models.TransientModel):
     expiry_date = fields.Date()
 
     def next_page(self):
+        """
+        These set up the event data model then proceed to its view for the
+        next step
+        """
         for rec in self:
             if rec.event_data_model and not rec.event_data_model == "default":
                 model_name = rec.event_data_model
@@ -58,6 +62,11 @@ class SPPCreateEventWizard(models.TransientModel):
                 }
 
     def get_view_id(self, model_name):
+        """
+        This retrieves the Model View ID
+        :param model_name: The Model.
+        :return: Model View ID.
+        """
         return (
             self.env["ir.ui.view"]
             .search([("model", "=", model_name), ("type", "=", "form")], limit=1)

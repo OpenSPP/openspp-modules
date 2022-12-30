@@ -25,6 +25,11 @@ class OpenSPPRegistrant(models.Model):
             }
 
     def _get_active_event_id(self, model):
+        """
+        This gets the active event id
+        :param model: The Model.
+        :return: Active Event Data ID.
+        """
         for rec in self:
             active_event = self.env["spp.event.data"].search(
                 [
