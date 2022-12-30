@@ -22,7 +22,6 @@ class OpenSPPRegistrant(models.Model):
 
     def open_issue_idpass_wiz(self):
         """
-        Open Issue IDPass Wizard
         This opens the ID Pass Issuance Wizard
         """
         view = self.env.ref("spp_idpass.issue_id_pass_wizard_form_view")
@@ -42,9 +41,11 @@ class OpenSPPRegistrant(models.Model):
 
     def send_idpass_parameters(self, vals):  # noqa: C901
         """
-        Send IDPass Parameter
         These function is being used to handle the passing of Datas
         to IDPass, to generate the ID of the registrant
+        :param data_param: The Data Parameters tobe created.
+        :param data: The Data tobe send.
+        :return: Response from the API.
         """
         id_pass_param = self.env["spp.id.pass"].search([("is_active", "=", True)])
         if vals["idpass"]:
@@ -182,15 +183,19 @@ class OpenSPPRegistrant(models.Model):
                 raise ValidationError(
                     _("ID PASS Error: %(reason)s Code: %(code)s")
                     % (response.reason, response.status_code)
-                )  # noqa: C901\
+                )  # noqa: C901
             return
         else:
             raise ValidationError(_("ID Pass Error: No API set"))  # noqa: C901
 
     def send_idpass_data(self, url, data, headers, auth):
         """
-        Send ID Pass Data
         This sends a request to generate the ID using default authentication
+        :param url: The URL.
+        :param data: The Data.
+        :param headers: The Headers.
+        :param auth: The Authentication.
+        :return: Request API to send data and receive a response.
         """
 
         return requests.post(
@@ -202,9 +207,11 @@ class OpenSPPRegistrant(models.Model):
 
     def check_existing_id(self, identification_no):
         """
-        Check Existing ID
         This checks if the ID already exists in the registrant g2p.reg.id
         if yes create else update
+        :param id: The ID of current registrant.
+        :param id_type: The ID Type.
+        :return: Write or update the reg_ids depending on condition.
         """
         existing_id = self.env["g2p.reg.id"].search(
             [

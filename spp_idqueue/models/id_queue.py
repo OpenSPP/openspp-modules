@@ -48,17 +48,23 @@ class OpenSPPIDQueue(models.Model):
     @api.depends("registrant_id", "idpass_id")
     def _compute_name(self):
         """
-        Compute Name
         These are used to compute the name of the queue base on
         registrant name and template name
+        :param name: The Name.
+        :param registrant_id: The Registrant.
+        :param idpass_id: The IDPass.
+        :return: Set name with registrant_id Name and idpass_id Name
         """
         for rec in self:
             rec.name = f"{rec.registrant_id.name or ''} - {rec.idpass_id.name or ''}"
 
     def on_approve(self):
         """
-        On Approve
         These are used to approve or validate the request
+        :param date_approved: The Date Approved.
+        :param approved_by: The Approved By.
+        :param status: The Status.
+        :return: Set date_approved, approved_by, status then call save_to_mail_thread
         """
         for rec in self:
             rec.date_approved = date.today()
@@ -70,18 +76,17 @@ class OpenSPPIDQueue(models.Model):
             rec.save_to_mail_thread(message)
 
     def on_generate(self):
-        """
-        On Generate
-        These are used to call the generation of cards function
-        """
         # Make sure the ID is in the correct state before generating
         # we allow to re-generate cards
         self.generate_cards()
 
     def on_print(self):
         """
-        On Print
         These are used to set the request as printed
+        :param date_printed: The Date Printed.
+        :param printed_by: The Printed By.
+        :param status: The Status.
+        :return: Set date_printed, printed_by, status then call save_to_mail_thread
         """
 
         # as we return the PDF, we need to make sure that there is only 1 card selected
@@ -111,8 +116,9 @@ class OpenSPPIDQueue(models.Model):
 
     def generate_cards(self):
         """
-        Generate Cards
         These are used to generate the ID from the request
+        :param status: The Status.
+        :return: Call generate_card, set status then call save_to_mail_thread
         """
         if self.filtered(
             lambda x: x.status
@@ -130,8 +136,9 @@ class OpenSPPIDQueue(models.Model):
 
     def generate_card(self, card):
         """
-        Generate ID card
         Override this method to change the backend used to generate the ID card
+        :param vals: The Values tobe passed.
+        :return: Call send_idpass_parameters with vals
         """
         if card.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id:
             vals = {"idpass": self.idpass_id.id, "id_queue": self.id}
@@ -139,8 +146,9 @@ class OpenSPPIDQueue(models.Model):
 
     def on_cancel(self):
         """
-        On Cancel
         These are used to cancel the request
+        :param status: The Status.
+        :return: Set status then call save_to_mail_thread
         """
         if self.filtered(lambda x: x.status in ["printed", "distributed"]):
             raise ValidationError(_("ID cannot be canceled if it has been printed"))
@@ -153,8 +161,10 @@ class OpenSPPIDQueue(models.Model):
 
     def on_distribute(self):
         """
-        On Approve
         These are used to set the request as distributed
+        :param date_distributed: The Date Distributed.
+        :param status: The Status.
+        :return: Set date_distributed, status then call save_to_mail_thread
         """
         if not self.filtered(lambda x: x.status in ["printed"]):
             raise ValidationError(
@@ -170,9 +180,13 @@ class OpenSPPIDQueue(models.Model):
 
     def validate_requests(self):
         """
-        Validate Requests
         These are used to approve or validate multiple requests
         via Server Action
+        :param date_approved: The Date Approved.
+        :param approved_by: The Approved By.
+        :param status: The Status.
+        :return: Set date_approved, approved_by, status, call save_to_mail_thread then
+        return a notification
         """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
@@ -211,9 +225,12 @@ class OpenSPPIDQueue(models.Model):
 
     def generate_validate_requests(self):
         """
-        Generate Validated Requests
         These are used to generate multiple validated requests
         by creating a Queue Job to work on background
+        :param active_ids: The Selected Queues.
+        :param queue_ids: The Queues.
+        :return: Create Queue Jobs to call _generate_multi_cards with queue_datas then
+        return a notification
         """
         queue_ids = self.env["spp.print.queue.id"].search(
             [
@@ -224,7 +241,6 @@ class OpenSPPIDQueue(models.Model):
         if queue_ids:
             queue_datas = []
             jobs = []
-            ctr2 = 1
             max_rec = len(queue_ids)
             for ctr, queued_id in enumerate(queue_ids, 1):
                 queued_id.status = "generating"
@@ -233,11 +249,9 @@ class OpenSPPIDQueue(models.Model):
                 )
                 queued_id.save_to_mail_thread(message)
                 queue_datas.append(queued_id.id)
-                if ctr2 == self.JOB_SIZE or ctr == max_rec:
-                    ctr2 = 0
+                if (ctr % self.JOB_SIZE == 0) or ctr == max_rec:
                     jobs.append(self.delayable()._generate_multi_cards(queue_datas))
                     queue_datas = []
-                ctr2 += 1
             main_job = group(*jobs)
             main_job.delay()
 
@@ -258,17 +272,17 @@ class OpenSPPIDQueue(models.Model):
             }
 
     def _generate_multi_cards(self, queue_ids):
-        """
-        Generate Multi Cards
-        These are called by the Job Queue created from generate_validate_requests
-        """
         queued_ids = self.env["spp.print.queue.id"].search([("id", "in", queue_ids)])
         queued_ids.generate_cards()
 
     def print_requests(self):
         """
-        Print Requests
         These are used to set multiple requests as printed
+        :param date_printed: The Date Printed.
+        :param printed_by: The Printed By.
+        :param status: The Status.
+        :return: Set date_printed, printed_by, status, call save_to_mail_thread then
+        return a notification
         """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
@@ -307,8 +321,11 @@ class OpenSPPIDQueue(models.Model):
 
     def distribute_requests(self):
         """
-        Distribute Requests
         These are used to set multiple requests as distributed
+        :param date_distributed: The Date Distributed.
+        :param status: The Status.
+        :return: Set date_distributed, status, call save_to_mail_thread then
+        return a notification
         """
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
@@ -345,18 +362,10 @@ class OpenSPPIDQueue(models.Model):
                 }
 
     def save_to_mail_thread(self, message):
-        """
-        Save to Mail Thread
-        These are being used or called to post to mail_thread
-        """
         for rec in self:
             rec.message_post(body=message)
 
     def open_request_form(self):
-        """
-        Open Request Form
-        These are being used to open the request form
-        """
         return {
             "name": "ID Request",
             "view_mode": "form",
@@ -385,10 +394,6 @@ class ResConfigSettings(models.TransientModel):
     )
 
     def set_values(self):
-        """
-        Get Values
-        These are used to Set the auto_approve_id_request value
-        """
         res = super(ResConfigSettings, self).set_values()
         self.env["ir.config_parameter"].set_param(
             "spp_id_queue.auto_approve_id_request", self.auto_approve_id_request
@@ -397,10 +402,6 @@ class ResConfigSettings(models.TransientModel):
 
     @api.model
     def get_values(self):
-        """
-        Get Values
-        These are used to Get the auto_approve_id_request value
-        """
         res = super(ResConfigSettings, self).get_values()
         params = self.env["ir.config_parameter"].sudo()
         res.update(
