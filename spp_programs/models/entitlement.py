@@ -50,6 +50,7 @@ class InKindEntitlement(models.Model):
     uom_id = fields.Many2one("uom.uom", "Unit of Measure")
 
     # Inventory integration fields
+    manage_inventory = fields.Boolean(default=False)
     warehouse_id = fields.Many2one(
         "stock.warehouse",
         string="Warehouse",
