@@ -64,6 +64,7 @@ class SPPBasketEntitlementManager(models.Model):
     )
 
     # Inventory integration fields
+    manage_inventory = fields.Boolean(default=False)
     warehouse_id = fields.Many2one(
         "stock.warehouse",
         string="Warehouse",
@@ -139,6 +140,7 @@ class SPPBasketEntitlementManager(models.Model):
                                 "qty": rec.qty,
                                 "unit_price": rec.product_id.list_price,
                                 "uom_id": rec.uom_id.id,
+                                "manage_inventory": self.manage_inventory,
                                 "warehouse_id": self.warehouse_id
                                 and self.warehouse_id.id
                                 or None,
@@ -161,7 +163,8 @@ class SPPBasketEntitlementManager(models.Model):
         sw = 0
         for rec in entitlements:
             if rec.state in ("draft", "pending_validation"):
-                rec._action_launch_stock_rule()
+                if rec.manage_inventory:
+                    rec._action_launch_stock_rule()
                 rec.update(
                     {
                         "state": "approved",

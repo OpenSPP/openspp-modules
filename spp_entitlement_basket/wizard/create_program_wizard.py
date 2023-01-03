@@ -44,6 +44,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
     )
 
     # Inventory integration fields
+    manage_inventory = fields.Boolean(default=False)
     warehouse_id = fields.Many2one(
         "stock.warehouse",
         string="Warehouse",
@@ -88,7 +89,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
                 raise UserError(
                     _("Items are required in the Basket entitlement manager.")
                 )
-            if not self.warehouse_id:
+            if self.manage_inventory and not self.warehouse_id:
                 raise UserError(
                     _(
                         "For inventory management, the warehouse is required in the basket entitlement manager."
@@ -123,6 +124,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
                     "multiplier_field": self.multiplier_field.id,
                     "max_multiplier": self.max_multiplier,
                     "entitlement_validation_group_id": self.entitlement_validation_group_id.id,
+                    "manage_inventory": self.manage_inventory,
                     "warehouse_id": self.warehouse_id.id,
                 }
             )
