@@ -7,6 +7,9 @@ class G2PRegistrant(models.Model):
 
     @api.model
     def _get_area_domain(self):
+        """
+        This set up the domain of the area base on its kind
+        """
         area_id = self.env.ref("spp_area.admin_area_kind").id
         return [("kind", "=", area_id)]
 

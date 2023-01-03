@@ -93,6 +93,11 @@ class OpenSPPServicePoint(models.Model):
             else:
                 raise UserError(_("Service point is already enabled."))
 
+    def open_area_form(self):
+        for rec in self:
+            if rec.area_id:
+                return rec.area_id.open_area_form()
+
 
 class OpenSPPServiceType(models.Model):
     _name = "spp.service.type"
