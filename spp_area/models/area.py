@@ -56,7 +56,7 @@ class OpenSPPArea(models.Model):
                         textwrap.fill(
                             textwrap.dedent(
                                 """Max level exceeded! Can't have area with level greater
-                        than 10 and your current area is level %s."""
+                        than 10 and your current area is level %s. """
                                 % rec.area_level
                             )
                         )
