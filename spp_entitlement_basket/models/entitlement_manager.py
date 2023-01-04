@@ -152,6 +152,41 @@ class SPPBasketEntitlementManager(models.Model):
             if entitlements:
                 self.env["g2p.entitlement.inkind"].create(entitlements)
 
+    def cancel_entitlements(self, cycle):
+        """Basket Entitlement Manager :meth:`cancel_entitlements`
+        Cancel entitlements in a cycle
+
+        :param cycle: A recordset of cycle
+        :return:
+        """
+        # Get the entitlements in cycle
+        entitlements_count = cycle.get_entitlements(
+            ["draft", "pending_validation"],
+            entitlement_model="g2p.entitlement.inkind",
+            count=True,
+        )
+        if entitlements_count < self.MIN_ROW_JOB_QUEUE:
+            self._cancel_entitlements(cycle)
+        else:
+            self._cancel_entitlements_async(cycle, entitlements_count)
+
+    def _cancel_entitlements(self, cycle, offset=0, limit=None):
+        """Basket Entitlement Manager :meth:`_cancel_entitlements`
+        Synchronous cancellation of entitlements in a cycle
+
+        :param cycle: A recordset of cycle
+        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
+        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :return:
+        """
+        entitlements = cycle.get_entitlements(
+            ["draft", "pending_validation"],
+            entitlement_model="g2p.entitlement.inkind",
+            offset=offset,
+            limit=limit,
+        )
+        entitlements.update({"state": "cancelled"})
+
     def validate_entitlements(self, cycle, cycle_memberships):
         # TODO: Change the status of the entitlements to `validated` for this members.
         # move the funds from the program's wallet to the wallet of each Beneficiary that are validated

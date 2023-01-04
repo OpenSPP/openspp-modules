@@ -17,6 +17,36 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         </field>
     </record>
 
+    <record id="view_cycle_custom_spp_form" model="ir.ui.view">
+        <field name="name">view_cycle_custom_spp_form</field>
+        <field name="model">g2p.cycle</field>
+        <field name="inherit_id" ref="g2p_programs.view_cycle_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='configuration']" position="inside">
+                <field name="inkind_entitlements_count" invisible="1" />
+                <field name="entitlements_count" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@name='open_entitlements_form']" position="attributes">
+                <attribute name="attrs">{'invisible':[('entitlements_count','=',0)]}</attribute>
+            </xpath>
+            <xpath expr="//button[@name='open_entitlements_form']" position="after">
+                <button
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-folder-open-o"
+                    name="open_entitlements_form"
+                    attrs="{'invisible':[('inkind_entitlements_count','=',0)]}"
+                >
+                    <div class="o_form_field o_stat_info">
+                        <field name="inkind_entitlements_count" class="o_stat_value" />
+                        <span class="o_stat_text">Entitlements</span>
+                    </div>
+                </button>
+            </xpath>
+
+        </field>
+    </record>
+
 <!--    <record id="view_cycle_custom_spp_form" model="ir.ui.view">
         <field name="name">view_cycle_custom_spp_form</field>
         <field name="model">g2p.cycle</field>
