@@ -41,8 +41,8 @@ class OpenSPPRegistrant(models.Model):
 
     def send_idpass_parameters(self, vals):  # noqa: C901
         """
-        These function is being used to handle the passing of Datas
-        to IDPass, to generate the ID of the registrant
+        This function is being used to handle the passing of Datas
+        to ID Pass, to generate the ID of the registrant
         :param vals: The Values.
         :return: Response from the API.
         """

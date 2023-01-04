@@ -31,7 +31,8 @@ class OpenG2PIDType(models.Model):
         This overrides the write function to stop default ID
         Types from being edited
         :param vals: The Values being edited.
-        :return: raise an error if the ID Type being edited is id_type_idpass else write.
+        :raises: :class:ValidationError: Can't edit default ID Type
+        :return: super write.
         """
         external_identifier = self.env["ir.model.data"].search(
             [("res_id", "=", self.id), ("model", "=", "g2p.id.type")]
