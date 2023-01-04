@@ -15,6 +15,10 @@ class OpenSPPIssueIDPassWizard(models.TransientModel):
     registrant_id = fields.Many2one("res.partner", "Registrant ID")
 
     def issue_idpass(self):
+        """
+        This calls the send_idpass_parameters to
+        generate the id for this registrant
+        """
         if self.idpass_id:
             vals = {"idpass": self.idpass_id.id}
             self.registrant_id.send_idpass_parameters(vals)

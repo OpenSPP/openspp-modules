@@ -14,6 +14,12 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
+        """
+        Default Get
+        These overrides the default_get function to set the
+        queue_ids, state and id_count depending on different
+        scenarios
+        """
         res = super(OpenSPPBatchCreateWizard, self).default_get(fields)
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
@@ -58,6 +64,10 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
     )
 
     def next_step(self):
+        """
+        This function is used to proceed to 2nd Step which are
+        the batch creation
+        """
         for rec in self:
             if rec.queue_ids and rec.idpass_id:
                 queue_id = self.env["spp.print.queue.id"].search(
@@ -73,6 +83,9 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
                 return self._reopen_self()
 
     def create_batch(self):
+        """
+        This function is used to create the batch or batches
+        """
         for rec in self:
             id_count = 0
             batches_count = rec.batches_count
@@ -121,6 +134,9 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
 
     @api.depends("max_id_per_batch", "id_count")
     def _compute_batches_count(self):
+        """
+        This function is used to compute the count of batches to be created
+        """
         for rec in self:
             rec.batches_count = 1
             if rec.max_id_per_batch and rec.id_count:

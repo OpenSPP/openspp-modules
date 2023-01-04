@@ -61,6 +61,9 @@ class OpenSPPPrintBatch(models.Model):
         return
 
     def approve_batch(self):
+        """
+        This function is used to approve or validate a batch
+        """
         for rec in self:
             rec.date_approved = date.today()
             rec.approved_by = self.env.user.id
@@ -74,6 +77,12 @@ class OpenSPPPrintBatch(models.Model):
         return self._generate_batch(self)
 
     def _generate_batch(self, batch_ids):
+        """
+        This function is used to generate cards from batch by
+        creating a Queue Job for each Job Batch
+        :param batch_ids: The Batch IDS.
+        :return: Return a notification to state the progress
+        """
         ctr_batch = 0
         ctr_ids = 0
         for rec in batch_ids:
@@ -81,7 +90,6 @@ class OpenSPPPrintBatch(models.Model):
             rec.status = "generating"
             queued_ids = []
             jobs = []
-            ctr2 = 1
             max_rec = len(rec.queued_ids)
             for ctr, queued_id in enumerate(rec.queued_ids, 1):
                 queued_id.status = "generating"
@@ -91,11 +99,9 @@ class OpenSPPPrintBatch(models.Model):
                 queued_id.save_to_mail_thread(message)
                 ctr_ids += 1
                 queued_ids.append(queued_id.id)
-                if ctr2 == self.JOBBATCH_SIZE or ctr == max_rec:
-                    ctr2 = 0
+                if (ctr % self.JOBBATCH_SIZE == 0) or ctr == max_rec:
                     jobs.append(rec.delayable()._generate_cards(queued_ids))
                     queued_ids = []
-                ctr2 += 1
 
             main_job = group(*jobs)
             main_job.on_done(self.delayable().mark_as_done(rec))
@@ -125,10 +131,21 @@ class OpenSPPPrintBatch(models.Model):
         }
 
     def _generate_cards(self, queue_ids):
+        """
+        This generates each cards from the Batch via Queue Jobs
+        :param queued_ids: The Queue IDS.
+        :return: Call generate_cards
+        """
         queued_ids = self.env["spp.print.queue.id"].search([("id", "in", queue_ids)])
         queued_ids.generate_cards()
 
     def mark_as_done(self, rec):
+        """
+        This function is used to set the batch as 'generated' when the
+        Queue Job is Done
+        :param rec: The Record.
+        :return: Set status, call save_to_mail_thread then pass the api parameter
+        """
         if not rec.queued_ids.filtered(lambda x: x.status != "generated"):
             rec.status = "generated"
             message = _("{} generated this batch on {}.").format(
@@ -144,6 +161,10 @@ class OpenSPPPrintBatch(models.Model):
             rec.pass_api_param()
 
     def pass_api_param(self):
+        """
+        This function is used to pass the Batch ID on API
+        to merge all Individual IDS to one PDF
+        """
         for rec in self:
             batch_param = self.env["spp.id.pass"].search(
                 [("id", "=", self.env.ref("spp_idqueue.id_template_batch_print").id)]
@@ -175,6 +196,9 @@ class OpenSPPPrintBatch(models.Model):
         return
 
     def print_batch(self):
+        """
+        This function is used to set the Batch to 'printing'
+        """
         for rec in self:
             rec.status = "printing"
             message = _("{} started to print this batch on {}.").format(
@@ -188,6 +212,10 @@ class OpenSPPPrintBatch(models.Model):
                 queue_id.save_to_mail_thread(message)
 
     def batch_printed(self):
+        """
+        This function is used to set the Batch and each individual IDs
+        to 'printed'
+        """
         for rec in self:
             rec.date_printed = date.today()
             rec.printed_by = self.env.user.id
@@ -208,6 +236,10 @@ class OpenSPPPrintBatch(models.Model):
             rec.save_to_mail_thread(message)
 
     def batch_distributed(self):
+        """
+        This function is used to set the Batch and each individual IDs
+        to 'distributed'
+        """
         for rec in self:
             rec.date_distributed = date.today()
             rec.distributed_by = self.env.user.id
@@ -227,6 +259,9 @@ class OpenSPPPrintBatch(models.Model):
             rec.save_to_mail_thread(message)
 
     def multi_approve_batch(self):
+        """
+        This function is used for server action to approve multi-selected batches
+        """
         if self.env.context.get("active_ids"):
             batch_ids = self.env["spp.print.queue.batch"].search(
                 [
@@ -263,6 +298,9 @@ class OpenSPPPrintBatch(models.Model):
                 }
 
     def multi_generate_batch(self):
+        """
+        This function is used for server action to generate multi-selected batches
+        """
         if self.env.context.get("active_ids"):
             batch_ids = self.env["spp.print.queue.batch"].search(
                 [
@@ -274,6 +312,9 @@ class OpenSPPPrintBatch(models.Model):
                 return self._generate_batch(batch_ids)
 
     def multi_print_batch(self):
+        """
+        This function is used for server action to print multi-selected batches
+        """
         if self.env.context.get("active_ids"):
             batch_ids = self.env["spp.print.queue.batch"].search(
                 [
@@ -315,6 +356,10 @@ class OpenSPPPrintBatch(models.Model):
                 }
 
     def multi_printed_batch(self):
+        """
+        This function is used for server action to set multi-selected batches and
+        their Individual IDs as printed
+        """
         if self.env.context.get("active_ids"):
             batch_ids = self.env["spp.print.queue.batch"].search(
                 [
@@ -361,6 +406,10 @@ class OpenSPPPrintBatch(models.Model):
                 }
 
     def multi_distribute_batch(self):
+        """
+        This function is used for server action to set multi-selected batches and
+        their Individual IDs as distributed
+        """
         if self.env.context.get("active_ids"):
             batch_ids = self.env["spp.print.queue.batch"].search(
                 [

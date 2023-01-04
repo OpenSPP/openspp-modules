@@ -21,6 +21,9 @@ class OpenSPPRegistrant(models.Model):
     image_1920_filename = fields.Char("Image 1920 FileName")
 
     def open_issue_idpass_wiz(self):
+        """
+        This opens the ID Pass Issuance Wizard
+        """
         view = self.env.ref("spp_idpass.issue_id_pass_wizard_form_view")
         wiz = self.env["spp.issue.idpass.wizard"].create({"registrant_id": self.id})
         return {
@@ -37,6 +40,12 @@ class OpenSPPRegistrant(models.Model):
         }
 
     def send_idpass_parameters(self, vals):  # noqa: C901
+        """
+        This function is being used to handle the passing of Datas
+        to ID Pass, to generate the ID of the registrant
+        :param vals: The Values.
+        :return: Response from the API.
+        """
         id_pass_param = self.env["spp.id.pass"].search([("is_active", "=", True)])
         if vals["idpass"]:
             id_pass_param = self.env["spp.id.pass"].search(
@@ -44,12 +53,14 @@ class OpenSPPRegistrant(models.Model):
             )
 
         if id_pass_param:
-
-            given_name = self.given_name
-            identification_no = f"{self.id:06d}"
-            birth_place = self.birth_place or ""
-            gender = self.gender or ""
-            surname = self.family_name
+            data_param = {
+                "given_names": self.given_name,
+                "identification_no": f"{self.id:06d}",
+                "place_of_birth": self.birth_place or "",
+                "sex": self.gender or "",
+                "surname": self.family_name,
+                "nationality": "",
+            }
             profile_pic = self.image_1920 or False
             profile_pic_filename = self.image_1920_filename or False
             if self.is_group:
@@ -65,11 +76,14 @@ class OpenSPPRegistrant(models.Model):
                     head_registrant = self.env["res.partner"].search(
                         [("id", "=", head_id)]
                     )
-                    given_name = head_registrant.given_name
-                    identification_no = f"{head_registrant.id:09d}"
-                    birth_place = head_registrant.birth_place or ""
-                    gender = head_registrant.gender or ""
-                    surname = head_registrant.family_name
+                    data_param = {
+                        "given_names": head_registrant.given_name,
+                        "identification_no": f"{head_registrant.id:09d}",
+                        "place_of_birth": head_registrant.birth_place or "",
+                        "sex": head_registrant.gender or "",
+                        "surname": head_registrant.family_name,
+                        "nationality": "",
+                    }
                     profile_pic = head_registrant.image_1920 or False
                     profile_pic_filename = head_registrant.image_1920_filename or False
                 else:
@@ -80,7 +94,6 @@ class OpenSPPRegistrant(models.Model):
                     )  # noqa: C901
 
             issue_date = datetime.today().strftime("%Y/%m/%d")
-
             expiry_date = datetime.today()
 
             if id_pass_param[0].expiry_length_type == "years":
@@ -96,10 +109,14 @@ class OpenSPPRegistrant(models.Model):
                     days=id_pass_param[0].expiry_length
                 )
             expiry_date = expiry_date.strftime("%Y/%m/%d")
-
+            data_param.update(
+                {
+                    "date_of_expiry": expiry_date,
+                    "date_of_issue": issue_date,
+                }
+            )
             file_type = ""
             if profile_pic_filename:
-
                 file_type = profile_pic_filename.partition(".")[2]
                 if file_type == "jpg":
                     file_type = "jpeg"
@@ -108,54 +125,49 @@ class OpenSPPRegistrant(models.Model):
                     raise ValidationError(
                         _("ID PASS Error: Please try reuploading the ID Picture")
                     )  # noqa: C901
+
             profile_pic_url = ""
-
-            data = {
-                "fields": {
-                    "date_of_expiry": expiry_date,
-                    "date_of_issue": issue_date,
-                    "given_names": given_name,
-                    "identification_no": identification_no,
-                    "nationality": "Filipino",
-                    "place_of_birth": birth_place,
-                    "sex": gender,
-                    "surname": surname,
-                    "qrcode_svg_1": f"{identification_no};{given_name};{surname}",
-                }
-            }
-
             if profile_pic and file_type in ("jpeg", "png"):
                 profile_pic = str(profile_pic)
                 profile_pic = profile_pic[2:]
                 profile_pic_url = "data:image/" + file_type + ";base64," + profile_pic
 
-                data["fields"].update(
+                data_param.update(
                     {
                         "profile_svg_6": profile_pic_url,
                     }
                 )
+            data_param.update(
+                {
+                    "qrcode_svg_1": f"{data_param['identification_no']};"
+                    f"{data_param['given_names']};{data_param['surname']}"
+                }
+            )
+
+            data = {"fields": data_param}
 
             headers = {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             }
-
-            response = requests.post(
+            response = self.send_idpass_data(
                 id_pass_param[0].api_url,
-                data=json.dumps(data),
-                headers=headers,
-                auth=(id_pass_param[0].api_username, id_pass_param[0].api_password),
+                json.dumps(data),
+                headers,
+                (id_pass_param[0].api_username, id_pass_param[0].api_password),
             )
+
             if response.status_code == 200:
                 pdf_vals = response.json()
                 file_pdf = pdf_vals["files"]["pdf"]
                 file_pdf = file_pdf[28:]
-                self.id_pdf = file_pdf
-                self.id_pdf_filename = "{}_{}_{}.pdf".format(
+                file_pdf_filename = "{}_{}_{}.pdf".format(
                     id_pass_param[0].filename_prefix,
-                    identification_no,
+                    data_param["identification_no"],
                     datetime.today().strftime("%Y-%m-%d"),
                 )
+                self.id_pdf = file_pdf
+                self.id_pdf_filename = file_pdf_filename
 
                 idqueue = self.env["spp.print.queue.id"].search(
                     [("id", "=", vals["id_queue"])]
@@ -163,56 +175,76 @@ class OpenSPPRegistrant(models.Model):
                 idqueue.id_pdf = self.id_pdf
                 idqueue.id_pdf_filename = self.id_pdf_filename
 
-                external_identifier = self.env["ir.model.data"].search(
-                    [("name", "=", "id_type_idpass"), ("model", "=", "g2p.id.type")]
-                )
-                _logger.info("External Identifier: %s" % external_identifier.res_id)
-                has_existing_idpass = self.env["g2p.reg.id"].search(
-                    [
-                        ("partner_id", "=", self.id),
-                        ("id_type", "=", external_identifier.res_id),
-                    ]
-                )
-                if has_existing_idpass:
-                    self.update(
-                        {
-                            "reg_ids": [
-                                (
-                                    1,
-                                    has_existing_idpass[0].id,
-                                    {
-                                        "id_type": external_identifier.res_id,
-                                        "value": identification_no,
-                                    },
-                                )
-                            ]
-                        }
-                    )
-                else:
-                    self.write(
-                        {
-                            "reg_ids": [
-                                (
-                                    0,
-                                    0,
-                                    {
-                                        "id_type": external_identifier.res_id,
-                                        "value": identification_no,
-                                    },
-                                )
-                            ]
-                        }
-                    )
-                return idqueue.id_pdf
+                self.check_existing_id(data_param["identification_no"])
+
+                return
             else:
                 raise ValidationError(
                     _("ID PASS Error: %(reason)s Code: %(code)s")
                     % (response.reason, response.status_code)
                 )  # noqa: C901
-            _logger.info(
-                "ID PASS Response: %s Code: %s"
-                % (response.reason, response.status_code)
-            )
             return
         else:
             raise ValidationError(_("ID Pass Error: No API set"))  # noqa: C901
+
+    def send_idpass_data(self, url, data, headers, auth):
+        """
+        This sends a request to generate the ID using default authentication
+        :param url: The URL.
+        :param data: The Data.
+        :param headers: The Headers.
+        :param auth: The Authentication.
+        :return: Request API to send data and receive a response.
+        """
+
+        return requests.post(
+            url,
+            data=data,
+            headers=headers,
+            auth=auth,
+        )
+
+    def check_existing_id(self, identification_no):
+        """
+        This checks if the ID already exists in the registrant g2p.reg.id
+        if yes create else update
+        :param identification_no: The Identification Number.
+        :return: Write or update the reg_ids depending on condition.
+        """
+        existing_id = self.env["g2p.reg.id"].search(
+            [
+                ("partner_id", "=", self.id),
+                ("id_type", "=", self.env.ref("spp_idpass.id_type_idpass").id),
+            ]
+        )
+
+        if existing_id:
+            self.update(
+                {
+                    "reg_ids": [
+                        (
+                            1,
+                            existing_id[0].id,
+                            {
+                                "id_type": existing_id[0].id_type.id,
+                                "value": identification_no,
+                            },
+                        )
+                    ]
+                }
+            )
+        else:
+            self.write(
+                {
+                    "reg_ids": [
+                        (
+                            0,
+                            0,
+                            {
+                                "id_type": existing_id[0].id_type.id,
+                                "value": identification_no,
+                            },
+                        )
+                    ]
+                }
+            )
