@@ -71,12 +71,21 @@ class EntitlementBasketTest(TransactionCase):
             }
         )
 
-        # Create Program Wizard
-        # cls.new_program = cls.env['g2p.program.create.wizard'].create(
-        #    {
-        #
-        #    }
-        # )
+        # Create Program Wizard (do not automatically generate beneficiaries)
+        cls.new_program_nogen = cls.env["g2p.program.create.wizard"].create(
+            {
+                "name": "Food Basket",
+                "currency_id": cls.env.user.company_id.currency_id.id,
+                "auto_approve_entitlements": True,
+                "cycle_duration": 30,
+                "approver_group_id": cls.env.ref("g2p_registry_base.group_g2p_admin"),
+                "entitlement_validation_group_id": cls.env.ref(
+                    "g2p_registry_base.group_g2p_admin"
+                ),
+                "gen_benificiaries": "no",  # Do not generate beneficiaries
+                "state": "step1",  # Do not proceed to step 2 (generate beneficiaries)
+            }
+        )
 
     def test_01_add_food_basket(self):
         product_names = f"1.) {self.product_1.name} - 5 {self.product_1.uom_id.name}\n"
@@ -87,3 +96,9 @@ class EntitlementBasketTest(TransactionCase):
             product_names,
             f"Food Basket creation FAILED (EXPECTED {product_names} but RESULT is {self.food_basket.product_names})",
         )
+
+    # def test_01_create_program_nogen(self):
+    #    new_program = self.new_program_nogen.update({
+    #        'entitlement_kind': 'basket_entitlement',
+    #        'entitlement_basket_id':
+    #    })
