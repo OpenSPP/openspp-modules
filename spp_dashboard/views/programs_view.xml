@@ -43,7 +43,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     />
                 </group>
             </xpath>
-            <xpath expr="//field[@name='cycle_ids']/tree/field[@name='entitlement_ids']" position="after">
+            <xpath expr="//field[@name='cycle_ids']/tree/field[@name='state']" position="after">
                 <button
                     name="open_dashboard"
                     type="object"
