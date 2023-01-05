@@ -154,6 +154,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Open Area Details"
+msgstr ""
+
+#. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__phone_no
 msgid "Phone Number"
 msgstr ""
