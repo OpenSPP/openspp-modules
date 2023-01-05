@@ -53,6 +53,10 @@ class OpenSPPAreaImport(models.Model):
 
     @api.onchange("excel_file")
     def excel_file_change(self):
+        """
+        This updates the date_uploaded, upload_id and state when
+        the excel_file has been uploaded
+        """
         if self.name:
             self.update(
                 {
@@ -66,6 +70,9 @@ class OpenSPPAreaImport(models.Model):
 
     @api.depends("raw_data_ids")
     def _compute_get_total_rows(self):
+        """
+        This computes the total rows of the Excel file
+        """
         for rec in self:
             tot_rows_imported = 0
             tot_rows_error = 0
@@ -85,6 +92,9 @@ class OpenSPPAreaImport(models.Model):
             rec.update({"state": "Cancelled"})
 
     def import_data(self):  # noqa: C901
+        """
+        This set up the datas from the Excel file then import it as raw data
+        """
         _logger.info("Area Import: Started: %s" % fields.Datetime.now())
         for rec in self:
             _logger.info("Area Import: Loading Excel File: %s" % fields.Datetime.now())
@@ -255,6 +265,10 @@ class OpenSPPAreaImport(models.Model):
             )
 
     def save_to_area(self):
+        """
+        This set up the data then save it to spp_area including the area kind
+        and its translations
+        """
         for rec in self:
             parent_id = None
             for raw in rec.raw_data_ids:
@@ -275,9 +289,11 @@ class OpenSPPAreaImport(models.Model):
                         else:
                             area_kind_id = self.env.ref("spp_area.admin_area_kind").id
 
+                        name = f"{raw.admin_code or ''} - {raw.admin_name or ''}"
+
                         if raw.level == 0:
                             new_vals = {
-                                "name": raw.admin_name or False,
+                                "draft_name": raw.admin_name or False,
                                 "code": raw.admin_code or False,
                                 "altnames": raw.admin_alt1 or raw.admin_alt2 or False,
                                 "level": raw.level or False,
@@ -286,7 +302,7 @@ class OpenSPPAreaImport(models.Model):
                         else:
                             new_vals = {
                                 "parent_id": parent_id,
-                                "name": raw.admin_name or False,
+                                "draft_name": raw.admin_name or False,
                                 "code": raw.admin_code or False,
                                 "altnames": raw.admin_alt1 or raw.admin_alt2 or False,
                                 "level": raw.level or False,
@@ -295,17 +311,19 @@ class OpenSPPAreaImport(models.Model):
                         # Check if Area already Exist
                         curr_area = self.env["spp.area"].search(
                             [
-                                ("name", "=", raw.admin_name),
+                                ("draft_name", "=", raw.admin_name),
                                 ("code", "=", raw.admin_code),
                             ]
                         )
 
                         if not curr_area:
                             area_id = self.env["spp.area"].create(new_vals)
+                            area_id._compute_name()
                             parent_id = area_id.id
                             raw.update({"state": "Posted"})
                         else:
-                            area_id = curr_area[0].update(new_vals)
+                            curr_area[0].update(new_vals)
+                            curr_area._compute_name()
                             parent_id = curr_area[0].id
                             raw.update({"state": "Updated"})
                         for lang in raw.lang_ids:
@@ -314,10 +332,10 @@ class OpenSPPAreaImport(models.Model):
                             iso_code = lang.lang_id.code
                             vals_list.append(
                                 {
-                                    "name": "spp.area,name",
+                                    "name": "spp.area,draft_name",
                                     "lang": iso_code,
                                     "res_id": parent_id,
-                                    "src": raw.admin_name,
+                                    "src": name,
                                     "value": trans_name,
                                     "state": "translated",
                                     "type": "model",
