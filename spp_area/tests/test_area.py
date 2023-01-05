@@ -17,12 +17,12 @@ class AreaTest(TransactionCase):
         # Initial Setup of Variables
         cls.area_1 = cls.env["spp.area"].create(
             {
-                "name": "Testing Area",
+                "draft_name": "Testing Area",
             }
         )
         cls.area_1_child = cls.env["spp.area"].create(
             {
-                "name": "Testing Area Child",
+                "draft_name": "Testing Area Child",
                 "parent_id": cls.area_1.id,
             }
         )

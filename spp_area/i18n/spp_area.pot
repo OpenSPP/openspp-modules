@@ -191,7 +191,9 @@ msgid "Code"
 msgstr ""
 
 #. module: spp_area
+#: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_form
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_kind_tree
+#: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_tree
 msgid "Complete Name"
 msgstr ""
 
@@ -271,6 +273,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_area.selection__spp_area_import__state__done
 #: model_terms:ir.ui.view,arch_db:spp_area.spparea_import_filter
 msgid "Done"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.model.fields,field_description:spp_area.field_spp_area__draft_name
+msgid "Draft Name"
 msgstr ""
 
 #. module: spp_area

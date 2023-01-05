@@ -14,14 +14,14 @@ class OpenSPPArea(models.Model):
     _order = "id desc"
     _parent_name = "parent_id"
     _parent_store = True
-    _rec_name = "complete_name"
     _order = "parent_id,name"
 
     parent_id = fields.Many2one("spp.area", "Parent")
     complete_name = fields.Char(
         "Name", compute="_compute_complete_name", recursive=True, translate=True
     )
-    name = fields.Char(required=True, translate=True)
+    name = fields.Char(translate=True, compute="_compute_name", store=True)
+    draft_name = fields.Char(required=True, translate=True)
     parent_path = fields.Char(index=True)
     code = fields.Char()
     altnames = fields.Char("Alternate Name")
@@ -34,13 +34,27 @@ class OpenSPPArea(models.Model):
     )
     kind = fields.Many2one("spp.area.kind")
 
+    @api.depends("draft_name", "code")
+    def _compute_name(self):
+        """
+        This sets the name for area to include code
+        """
+        for rec in self:
+            rec.name = f"{rec.code or ''} - {rec.draft_name or ''}"
+
     def _compute_get_childs(self):
+        """
+        This computes the child_ids of the area
+        """
         for rec in self:
             child_ids = self.env["spp.area"].search([("parent_id", "=", rec.id)])
             rec.child_ids = child_ids
 
     @api.depends("parent_id")
     def _compute_area_level(self):
+        """
+        This computes the area_level of the area
+        """
         for rec in self:
             if rec.parent_id:
                 rec.area_level = rec.parent_id.area_level + 1
@@ -65,6 +79,9 @@ class OpenSPPArea(models.Model):
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
+        """
+        This computes the complete_name of the area to include its parent name
+        """
         for rec in self:
             cur_lang = rec._context.get("lang", False)
             area_name = rec.env["ir.translation"]._get_ids(
@@ -92,18 +109,13 @@ class OpenSPPArea(models.Model):
                 rec.complete_name = None
 
     @api.model
-    def _name_search(
-        self, name, args=None, operator="ilike", limit=100, name_get_uid=None
-    ):
-        args = args or []
-        domain = []
-        if name:
-            domain = [("name", operator, name)]
-
-        return self._search(domain + args, limit=limit, access_rights_uid=name_get_uid)
-
-    @api.model
     def create(self, vals):
+        """
+        This overrides the create function to raise a validation error if
+        the area already exists else create then add the translation for draft_name
+        :param vals: The Values to be created.
+        :return: The Area Created.
+        """
         area_name = self.name
         if "name" in vals:
             area_name = vals["name"]
@@ -126,10 +138,10 @@ class OpenSPPArea(models.Model):
             for lang_code in Languages:
                 vals_list.append(
                     {
-                        "name": "spp.area,name",
+                        "name": "spp.area,draft_name",
                         "lang": lang_code.code,
                         "res_id": Area.id,
-                        "src": Area.name,
+                        "src": Area.draft_name,
                         "value": None,
                         "state": "to_translate",
                         "type": "model",
@@ -140,6 +152,12 @@ class OpenSPPArea(models.Model):
             return Area
 
     def write(self, vals):
+        """
+        This overrides the write function to raise a validation error if
+        the area already exist else write
+        :param vals: The Values to be set.
+        :return: The Area Updated.
+        """
         for rec in self:
             area_name = rec.name
             if "name" in vals:
@@ -159,6 +177,19 @@ class OpenSPPArea(models.Model):
             else:
                 return super(OpenSPPArea, self).write(vals)
 
+    def open_area_form(self):
+        for rec in self:
+            return {
+                "name": "Area",
+                "view_mode": "form",
+                "res_model": "spp.area",
+                "res_id": rec.id,
+                "view_id": self.env.ref("spp_area.view_spparea_form").id,
+                "type": "ir.actions.act_window",
+                "target": "new",
+                "flags": {"mode": "readonly"},
+            }
+
 
 class OpenSPPAreaKind(models.Model):
     _name = "spp.area.kind"
@@ -177,6 +208,10 @@ class OpenSPPAreaKind(models.Model):
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
+        """
+        This computes the complete name by adding the parent complete area
+        kind name and the area kind name
+        """
         for rec in self:
             if rec.id:
                 if rec.parent_id:
@@ -190,6 +225,10 @@ class OpenSPPAreaKind(models.Model):
                 rec.complete_name = None
 
     def unlink(self):
+        """
+        This overrides the unlink function to prevent users to delete or
+        unlink default area kinds (pre-created by xml data)
+        """
         for rec in self:
             external_identifier = self.env["ir.model.data"].search(
                 [("res_id", "=", rec.id), ("model", "=", "spp.area.kind")]
@@ -204,6 +243,10 @@ class OpenSPPAreaKind(models.Model):
                     return super(OpenSPPAreaKind, self).unlink()
 
     def write(self, vals):
+        """
+        This overrides the write function to prevent users to edit
+        default area kinds (pre-created by xml data)
+        """
         for rec in self:
             external_identifier = self.env["ir.model.data"].search(
                 [("res_id", "=", rec.id), ("model", "=", "spp.area.kind")]

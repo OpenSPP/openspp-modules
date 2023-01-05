@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="parent_id" />
+                <field name="complete_name" string="Complete Name" />
                 <field name="name" />
                 <field name="code" />
                 <field name="altnames" />
@@ -34,14 +35,26 @@
                         </h1>
                         <label for="name" string="Name:" />
                         <h1>
-                            <field id="name" name="name" placeholder="Area Name..." />
+                            <field
+                                id="name"
+                                name="name"
+                                placeholder="Area Name..."
+                                class="oe_read_only"
+                                force_save="1"
+                            />
+                            <field
+                                id="draft_name"
+                                name="draft_name"
+                                placeholder="Area Name..."
+                                class="oe_edit_only"
+                            />
                         </h1>
                     </div>
                     <group colspan="6" col="6">
                         <field name="altnames" colspan="6" />
                         <field name="code" colspan="2" />
                         <field name="area_level" colspan="2" />
-                        <field name="complete_name" invisible="1" />
+                        <field name="complete_name" string="Complete Name" />
                         <field name="level" invisible="1" />
                         <field name="kind" />
                     </group>

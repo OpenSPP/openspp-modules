@@ -63,6 +63,15 @@
                                 options="{'no_create':true,'no_edit':true,'no_open':true}"
                                 attrs="{'readonly':[('is_disabled','=',True)]}"
                             />
+                            <button
+                                name="open_area_form"
+                                type="object"
+                                help="Open Area Details"
+                                icon="fa-external-link "
+                                class="btn-success"
+                                style="margin-left: 10px;"
+                                attrs="{'invisible':[('area_id','=',False)]}"
+                            />
                         </h2>
                     </div>
                     <group colspan="4" col="4">
