@@ -31,6 +31,10 @@ class EntitlementBasket(models.Model):
 
     @api.depends("product_ids")
     def _compute_product_names(self):
+        """
+
+        :return:
+        """
         for rec in self:
             product_names = ""
             for ctr, pr in enumerate(rec.product_ids, start=1):

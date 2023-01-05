@@ -153,7 +153,8 @@ class SPPBasketEntitlementManager(models.Model):
                 self.env["g2p.entitlement.inkind"].create(entitlements)
 
     def cancel_entitlements(self, cycle):
-        """Basket Entitlement Manager :meth:`cancel_entitlements`
+        """
+        Basket Entitlement Manager :meth:`cancel_entitlements`
         Cancel entitlements in a cycle
 
         :param cycle: A recordset of cycle
@@ -161,7 +162,7 @@ class SPPBasketEntitlementManager(models.Model):
         """
         # Get the entitlements in cycle
         entitlements_count = cycle.get_entitlements(
-            ["draft", "pending_validation"],
+            ["draft", "pending_validation", "approved"],
             entitlement_model="g2p.entitlement.inkind",
             count=True,
         )
@@ -171,7 +172,8 @@ class SPPBasketEntitlementManager(models.Model):
             self._cancel_entitlements_async(cycle, entitlements_count)
 
     def _cancel_entitlements(self, cycle, offset=0, limit=None):
-        """Basket Entitlement Manager :meth:`_cancel_entitlements`
+        """
+        Basket Entitlement Manager :meth:`_cancel_entitlements`
         Synchronous cancellation of entitlements in a cycle
 
         :param cycle: A recordset of cycle
@@ -180,7 +182,7 @@ class SPPBasketEntitlementManager(models.Model):
         :return:
         """
         entitlements = cycle.get_entitlements(
-            ["draft", "pending_validation"],
+            ["draft", "pending_validation", "approved"],
             entitlement_model="g2p.entitlement.inkind",
             offset=offset,
             limit=limit,
