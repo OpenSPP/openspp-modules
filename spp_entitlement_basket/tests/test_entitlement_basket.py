@@ -83,8 +83,8 @@ class EntitlementBasketTest(TransactionCase):
                 ).id,
                 "entitlement_validation_group_id": cls.env.ref(
                     "g2p_registry_base.group_g2p_admin"
-                ),
-                "gen_benificiaries": "no",  # Do not generate beneficiaries
+                ).id,
+                "import_beneficiaries": "no",  # Do not import beneficiaries
                 "state": "step1",  # Do not proceed to step 2 (generate beneficiaries)
             }
         )
