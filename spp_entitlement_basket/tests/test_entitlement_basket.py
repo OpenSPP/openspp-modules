@@ -78,7 +78,9 @@ class EntitlementBasketTest(TransactionCase):
                 "currency_id": cls.env.user.company_id.currency_id.id,
                 "auto_approve_entitlements": True,
                 "cycle_duration": 30,
-                "approver_group_id": cls.env.ref("g2p_registry_base.group_g2p_admin"),
+                "approver_group_id": cls.env.ref(
+                    "g2p_registry_base.group_g2p_admin"
+                ).id,
                 "entitlement_validation_group_id": cls.env.ref(
                     "g2p_registry_base.group_g2p_admin"
                 ),
