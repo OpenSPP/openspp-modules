@@ -137,6 +137,11 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         self.check_required_documents()
 
     def action_submit(self):
+        """
+        This method is called when the Change Request is requested for validation by a user.
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
         for rec in self:
             rec._on_submit(rec.change_request_id)
 
@@ -190,6 +195,12 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             return rec._on_validate(rec.change_request_id)
 
     def _on_validate(self, request):
+        """
+        This method is called when the Change Request is validated by a user.
+
+        :param request: The request.
+        :raise UserError: Exception raised when something is not valid.
+        """
         self.ensure_one()
         # Check if CR is assigned to current user
         if request._check_user("Validate", auto_assign=True):

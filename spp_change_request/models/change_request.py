@@ -243,6 +243,17 @@ class ChangeRequestBase(models.Model):
 
     @api.onchange("id_document_details")
     def _onchange_scan_id_document_details(self):
+        """
+        This method is called whenever there is a change in the value of id_document_details field.
+
+        Updates other fields based on the field value of id_document_details
+
+        id_document_details must be a JSON Serializable
+
+        :return:
+
+        :raise UserError: Exception raised when something is not valid.
+        """
         if self.id_document_details:
             try:
                 details = json.loads(self.id_document_details)
@@ -278,6 +289,17 @@ class ChangeRequestBase(models.Model):
 
     @api.onchange("qr_code_details")
     def _onchange_scan_qr_code_details(self):
+        """
+        This method is called whenever there is a change in the value of qr_code_details field.
+
+        Updates other fields based on the field value of qr_code_details
+
+        qr_code_details must be a JSON Serializable
+
+        :return:
+
+        :raise UserError: Exception raised when something is not valid.
+        """
         if self.qr_code_details:
             try:
                 details = json.loads(self.qr_code_details)
@@ -410,6 +432,19 @@ class ChangeRequestBase(models.Model):
                 self.assign_to_user(self.env.user)
 
     def assign_to_user(self, user):
+        """
+        Add user to assign_to_id field
+
+        :param res.user user: record of the user.
+
+        :return:
+        :rtype:
+
+        :example:
+
+        >>> self.assign_to_user(self.env.user)
+        """
+
         self.ensure_one()
         user_ok = False
         # Fully validated CRs will proceed
@@ -620,6 +655,11 @@ class ChangeRequestBase(models.Model):
         return None
 
     def action_submit(self):
+        """
+        This method is called when the Change Request is requested for validation by a user.
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
         for rec in self:
             if rec.request_type_ref_id:
                 rec.request_type_ref_id._on_submit(rec)
@@ -629,14 +669,29 @@ class ChangeRequestBase(models.Model):
                 )
 
     def action_validate(self):
+        """
+        This method is called when the Change Request is validated by a user.
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
         for rec in self:
             return rec.request_type_ref_id._on_validate(rec)
 
     def action_apply(self):
+        """
+        This method is called when the Change Request is applied by a user.
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
         for rec in self:
             rec.request_type_ref_id._apply(rec)
 
     def action_cancel(self):
+        """
+        This method is called when the Change Request is cancelled by a user.
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
         for rec in self:
             if rec.request_type_ref_id:
                 rec.request_type_ref_id._cancel(rec)
@@ -674,10 +729,28 @@ class ChangeRequestBase(models.Model):
             )
 
     def action_reset_to_draft(self):
+        """
+        This method is called when the Change Request is Reset to Draft by a user.
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
         for rec in self:
             rec.request_type_ref_id._reset_to_draft(rec)
 
     def action_reject(self):
+        """
+        Opens reject wizard form
+
+        :param:.
+
+        :return: action
+        :rtype: dict
+
+        :example:
+
+        >>> self.action_reject()
+        """
+
         form_id = self.env.ref("spp_change_request.change_request_reject_wizard").id
         action = {
             "name": _("Reject Change Request"),
@@ -732,6 +805,18 @@ class ChangeRequestBase(models.Model):
                         rec.validation_group_id = stage.validation_group_id
 
     def _get_validation_stage(self):
+        """
+        Gets the validation stage and message of a Change Request
+
+        :param:.
+
+        :return: stage, message, validator_id
+        :rtype: spp.change.request.validation.stage, str, int
+
+        :example:
+
+        >>> self._get_validation_stage()
+        """
         self.ensure_one()
         stage = None
         message = None
