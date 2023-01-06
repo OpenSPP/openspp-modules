@@ -637,17 +637,29 @@ class ChangeRequestBase(models.Model):
             rec.request_type_ref_id._apply(rec)
 
     def action_cancel(self):
-        for rec in self:
-            if rec.request_type_ref_id:
-                rec.request_type_ref_id._cancel(rec)
-            elif rec.state == "draft":
-                self.do_cancel(rec)
-            else:
-                raise UserError(
-                    _("The change request type must be properly filled-up.")
-                )
+        """
+        This method is called when the Change Request is applied to the live data.
 
-    def do_cancel(self, request):
+        :raise ValidationError: Exception raised when something is not valid.
+        """
+        self.ensure_one()
+
+        form_id = self.env.ref("spp_change_request.change_request_cancel_wizard").id
+        action = {
+            "name": _("Cancel Change Request"),
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "view_id": form_id,
+            "view_type": "form",
+            "res_model": "spp.change.request.cancel.wizard",
+            "target": "new",
+            "context": {
+                "change_request_id": self.id,
+            },
+        }
+        return action
+
+    def _cancel(self, request):
         """
         This method is used to cancel the change request.
 
