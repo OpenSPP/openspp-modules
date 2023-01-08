@@ -15,5 +15,10 @@ jobs:
           reviewers: jeremi, gonzalesedwin1123, emjay0921, reichie020212, nhatnm0612
           assignees: jeremi, gonzalesedwin1123
           skipKeywords: wip, draft
+          addReviewers: true
+          addAssignees: true
+          numberOfReviewers: 2
+          numberOfAssignees: 2
+          excludeLabels: dependencies, wip
 
- 
+
