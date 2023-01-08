@@ -1,14 +1,20 @@
 name: Auto Assign
 on:
   issues:
-    types: [opened]
+    types: [opened, edited, labeled, unlabeled]
   pull_request:
-    types: [opened]
+    types: [opened, edited, labeled, unlabeled]
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: bubkoo/auto-assign@v1
+      - uses: wow-actions/auto-assign@v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CONFIG_FILE: .github/auto-assign.yml
+          # using the `org/team_slug` or `/team_slug` syntax to add git team as reviewers
+          reviewers: |
+            jeremi
+            gonzalesedwin1123
+            OpenSPP/openspp-reviewer
+          assignees: jeremi, gonzalesedwin1123
+          skipKeywords: wip, draft
