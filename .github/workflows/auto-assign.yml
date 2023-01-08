@@ -1,24 +1,14 @@
 name: Auto Assign
 on:
   issues:
-    types: [opened, edited, labeled, unlabeled]
+    types: [opened]
   pull_request:
-    types: [opened, edited, labeled, unlabeled]
+    types: [opened]
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: wow-actions/auto-assign@v3
+      - uses: bubkoo/auto-assign@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # using the `org/team_slug` or `/team_slug` syntax to add git team as reviewers
-          reviewers: jeremi, gonzalesedwin1123, emjay0921, reichie020212, nhatnm0612
-          assignees: jeremi, gonzalesedwin1123
-          skipKeywords: wip, draft
-          addReviewers: true
-          addAssignees: true
-          numberOfReviewers: 2
-          numberOfAssignees: 2
-          excludeLabels: dependencies, wip
-
-
+          CONFIG_FILE: .github/auto-assign.yml
