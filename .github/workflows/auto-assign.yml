@@ -12,9 +12,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # using the `org/team_slug` or `/team_slug` syntax to add git team as reviewers
-          reviewers: |
-            jeremi
-            gonzalesedwin1123
-            OpenSPP/openspp-reviewer
+          reviewers: jeremi, gonzalesedwin1123, OpenSPP/openspp-reviewer
           assignees: jeremi, gonzalesedwin1123
           skipKeywords: wip, draft
+ 
