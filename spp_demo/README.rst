@@ -13,11 +13,11 @@ OpenSPP Demo
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-openspp-project%2Fopenspp--demo-lightgray.png?logo=github
+.. |badge3| image:: https://img.shields.io/badge/github-openspp%2Fopenspp--demo-lightgray.png?logo=github
     :target: https://github.com/openspp/openspp-demo/tree/15.0/spp_demo
     :alt: openspp/openspp-demo
 
-|badge1| |badge2| |badge3|
+|badge1| |badge2| |badge3| 
 
 OpenSPP Newland Demo
 
@@ -56,7 +56,7 @@ Maintainers
 
 Current maintainers:
 
-|maintainer-jeremi| |maintainer-gonzalesedwin1123|
+|maintainer-jeremi| |maintainer-gonzalesedwin1123| 
 
 This module is part of the `openspp/openspp-demo <https://github.com/openspp/openspp-demo/tree/15.0/spp_demo>`_ project on GitHub.
 

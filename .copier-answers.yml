@@ -1,10 +1,11 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: '2934565'
+_commit: 40cc1e9
 _src_path: https://github.com/openspp/openspp-odoo-addons-repo-template.git
 ci: GitHub
 dependency_installation_mode: OCA
 generate_requirements_txt: true
 github_check_license: true
+github_ci_extra_env: {}
 github_enable_codecov: true
 github_enable_makepot: true
 github_enable_stale_action: true
@@ -12,7 +13,7 @@ github_enforce_dev_status_compatibility: true
 include_wkhtmltopdf: false
 odoo_version: 15.0
 org_name: OpenSPP.org
-org_slug: openspp-project
+org_slug: openspp
 rebel_module_groups: []
 repo_description: OpenSPP Demo Repo
 repo_name: OpenSPP Demo
