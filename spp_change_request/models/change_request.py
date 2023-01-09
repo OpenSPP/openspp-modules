@@ -155,6 +155,11 @@ class ChangeRequestBase(models.Model):
 
     @api.model
     def create(self, vals):
+        """
+        This method is overrides the default create method of model.
+
+        Called whenever a record is created
+        """
 
         # Assign the CR to the current user by default
         if "assign_to_id" not in vals or vals["assign_to_id"] is None:
@@ -188,6 +193,11 @@ class ChangeRequestBase(models.Model):
 
     @api.depends("registrant_id")
     def _compute_applicant_id_domain(self):
+        """
+        Called whenever registrant_id field is changed
+
+        This method is used for dynamic domain of applicant_id field
+        """
         for rec in self:
             domain = [("id", "=", 0)]
             if rec.registrant_id:
@@ -199,6 +209,12 @@ class ChangeRequestBase(models.Model):
 
     @api.onchange("registrant_id")
     def _onchange_registrant_id(self):
+        """
+        Called whenever registrant_id field is changed
+
+        This method updates other fields to None
+        """
+
         if self.registrant_id:
             self.update(
                 {
@@ -209,6 +225,11 @@ class ChangeRequestBase(models.Model):
 
     @api.onchange("applicant_id")
     def _onchange_applicant_id(self):
+        """
+        Called whenever applicant_id field is changed
+
+        This method updates the applicant_phone field based on phone of applicant_id
+        """
         if self.applicant_id:
             vals = {
                 "applicant_phone": self.applicant_id.phone,
@@ -221,6 +242,11 @@ class ChangeRequestBase(models.Model):
 
     @api.constrains("registrant_id", "applicant_phone")
     def _check_applicant_phone(self):
+        """
+        Called whenever registrant_id and applicant_phone field are saved
+
+        This method checks the format of applicant_phone
+        """
         for rec in self:
             country_code = (
                 rec.registrant_id.country_id.code
@@ -406,6 +432,16 @@ class ChangeRequestBase(models.Model):
         }
 
     def open_user_assignment_wiz(self):
+        """
+        Called whenever a user reassign the CR to him/her or to other user
+
+        Reassign a CR to current user if CR is assigned to other user else
+        Opens a wizard form to show a selection of users to be reassign
+
+        :return: action
+
+        :raise UserError: Exception raised when something is not valid.
+        """
         for rec in self:
             assign_self = False
             if rec.assign_to_id:
@@ -567,6 +603,11 @@ class ChangeRequestBase(models.Model):
     #     return request_dir
 
     def _check_phone_exist(self):
+        """
+        Checks if phone is existing
+
+        :raise UserError: Exception raised when applicant_phone is not existing.
+        """
         if not self.applicant_phone:
             raise UserError(_("Phone No. is required."))
 
@@ -790,6 +831,11 @@ class ChangeRequestBase(models.Model):
 
     @api.depends("validator_ids", "state")
     def _compute_validation_group_id(self):
+        """
+        Called whenever there are changes in validator_ids and state field
+
+        Save a list of groups that are currently allowed to validate the Change Request
+        """
         for rec in self:
             if rec.state in ["draft", "pending"]:
                 validation_stages = None
