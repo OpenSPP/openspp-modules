@@ -380,8 +380,22 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
         :raise ValidationError: Exception raised when something is not valid.
         """
-        for rec in self:
-            rec._cancel(rec.change_request_id)
+        self.ensure_one()
+
+        form_id = self.env.ref("spp_change_request.change_request_cancel_wizard").id
+        action = {
+            "name": _("Cancel Change Request"),
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "view_id": form_id,
+            "view_type": "form",
+            "res_model": "spp.change.request.cancel.wizard",
+            "target": "new",
+            "context": {
+                "change_request_id": self.change_request_id.id,
+            },
+        }
+        return action
 
     def _cancel(self, request):
         """
