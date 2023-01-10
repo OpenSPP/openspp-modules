@@ -8,7 +8,7 @@ import jwt  # pylint: disable=missing-manifest-dependency
 from jwt import PyJWKClient  # pylint: disable=missing-manifest-dependency
 from werkzeug.exceptions import InternalServerError
 
-from odoo import _, api, fields, models, tools
+from odoo import Command, _, api, fields, models, tools
 from odoo.exceptions import ValidationError
 
 from ..exceptions import (
@@ -143,6 +143,8 @@ class AuthJWTValidator(models.Model):
         except Exception as e:
             _logger.info("Invalid token: %s", e)
             raise UnauthorizedInvalidToken()  # noqa: B904
+
+        # _logger.info("PAYLOAD: %s", payload)
         return payload
 
     # OpenSPP: Customized for the OpenG2P Rest API
@@ -168,6 +170,17 @@ class AuthJWTValidator(models.Model):
             if email:
                 user = self.env["res.users"].search([("email", "=", email)])
                 if user:
+                    uid = user[0].id
+                    partner_id = user[0].partner_id and user[0].partner_id.id or None
+                else:
+                    group = [
+                        Command.link(
+                            self.env.ref("g2p_registry_base.group_g2p_registrar").id
+                        )
+                    ]
+                    vals = {"name": email, "login": email, "groups_id": group}
+                    user = self.env["res.users"].create(vals)
+                    user.partner_id.email = email
                     uid = user[0].id
                     partner_id = user[0].partner_id and user[0].partner_id.id or None
 
