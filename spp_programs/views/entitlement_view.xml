@@ -43,9 +43,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         class="btn-success"
                         icon="fa-thumbs-o-up"
                         name="approve_entitlement"
-                        attrs="{'invisible':[('state','not in',('draft','pending_validation'))]}"
+                        states="draft,pending_validation"
                         string="Approve Entitlement"
-                        groups="g2p_programs.g2p_finance_validator"
                     />
                     <field
                         name="state"

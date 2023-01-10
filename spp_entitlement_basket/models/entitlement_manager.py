@@ -152,6 +152,45 @@ class SPPBasketEntitlementManager(models.Model):
             if entitlements:
                 self.env["g2p.entitlement.inkind"].create(entitlements)
 
+    def set_pending_validation_entitlements(self, cycle):
+        """
+        Default Entitlement Manager :meth:`set_pending_validation_entitlements`
+        Set entitlements to pending_validation in a cycle
+
+        :param cycle: A recordset of cycle
+        :return:
+        """
+        # Get the number of entitlements in cycle
+        entitlements_count = cycle.get_entitlements(
+            ["draft"],
+            entitlement_model="g2p.entitlement.inkind",
+            count=True,
+        )
+        if entitlements_count < self.MIN_ROW_JOB_QUEUE:
+            self._set_pending_validation_entitlements(cycle)
+
+        else:
+            self._set_pending_validation_entitlements_async(cycle, entitlements_count)
+
+    def _set_pending_validation_entitlements(self, cycle, offset=0, limit=None):
+        """
+        Basket Entitlement Manager :meth:`_set_pending_validation_entitlements`
+        Synchronous setting of entitlements to pending_validation in a cycle
+
+        :param cycle: A recordset of cycle
+        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
+        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :return:
+        """
+        # Get the entitlements in the cycle
+        entitlements = cycle.get_entitlements(
+            ["draft"],
+            entitlement_model="g2p.entitlement.inkind",
+            offset=offset,
+            limit=limit,
+        )
+        entitlements.update({"state": "pending_validation"})
+
     def validate_entitlements(self, cycle):
         """
         Basket Entitlement Manager :meth:`validate_entitlements`
