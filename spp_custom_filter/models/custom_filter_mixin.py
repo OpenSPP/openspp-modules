@@ -16,7 +16,17 @@ class CustomFilterMixin(models.AbstractModel):
 
         - Add param `allow_filter=False` if you want to hide field from UI filtering.
 
-        ```python
+        :param list[str] allfields: list of fields to document, all if empty or not provided
+
+        :param list[str] attributes: list of description attributes to return for each field,
+            all if empty or not provided
+
+        :rtype: dictionary
+
+        :return: dict of field name and its attributes
+
+        :example:
+
         class ResPartner(models.Model):
             _name = "res.partner"
             _inherit = ["res.partner", "custom.filter.mixin"]
@@ -31,24 +41,12 @@ class CustomFilterMixin(models.AbstractModel):
                 allow_filter=False,
                 ...
             )
-        ```
-
-
-        Args:
-            :allfields: list of fields to document, all if empty or not provided
-
-            :attributes: list of description attributes to return for each field,
-                all if empty or not provided
-
-        Returns:
-            type: dictionary
         """
         res = super().fields_get(allfields, attributes)
 
         for fname in res.keys():
-            res[fname]["searchable"] = (
-                getattr(self._fields[fname], "allow_filter", True)
-                and res[fname]["searchable"]
-            )
+            allow_filter = getattr(self._fields[fname], "allow_filter", True)
+            res[fname]["searchable"] = allow_filter and res[fname]["searchable"]
+            res[fname]["exportable"] = allow_filter
 
         return res

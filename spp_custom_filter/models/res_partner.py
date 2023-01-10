@@ -91,7 +91,6 @@ class ResPartner(models.Model):
     partner_longitude = fields.Float(allow_filter=False)
     partner_share = fields.Boolean(allow_filter=False)
     payment_token_count = fields.Integer(allow_filter=False)
-    phone = fields.Char(allow_filter=False)
     phone_blacklisted = fields.Boolean(allow_filter=False)
     phone_mobile_search = fields.Char(allow_filter=False)
     phone_sanitized = fields.Char(allow_filter=False)
