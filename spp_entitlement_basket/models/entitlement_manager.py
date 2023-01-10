@@ -152,6 +152,76 @@ class SPPBasketEntitlementManager(models.Model):
             if entitlements:
                 self.env["g2p.entitlement.inkind"].create(entitlements)
 
+    def validate_entitlements(self, cycle):
+        """
+        Basket Entitlement Manager :meth:`validate_entitlements`
+        Validate entitlements in a cycle
+
+        :param cycle: A recordset of cycle
+        :return:
+        """
+        # Get the number of entitlements in cycle
+        entitlements_count = cycle.get_entitlements(
+            ["draft", "pending_validation"],
+            entitlement_model="g2p.entitlement.inkind",
+            count=True,
+        )
+        if entitlements_count < self.MIN_ROW_JOB_QUEUE:
+            err, message = self._validate_entitlements(cycle)
+            if err > 0:
+                kind = "danger"
+                return {
+                    "type": "ir.actions.client",
+                    "tag": "display_notification",
+                    "params": {
+                        "title": _("Entitlement"),
+                        "message": message,
+                        "sticky": True,
+                        "type": kind,
+                        "next": {
+                            "type": "ir.actions.act_window_close",
+                        },
+                    },
+                }
+            else:
+                kind = "success"
+                return {
+                    "type": "ir.actions.client",
+                    "tag": "display_notification",
+                    "params": {
+                        "title": _("Entitlement"),
+                        "message": _("Entitlements are validated and approved."),
+                        "sticky": True,
+                        "type": kind,
+                        "next": {
+                            "type": "ir.actions.act_window_close",
+                        },
+                    },
+                }
+        else:
+            self._validate_entitlements_async(cycle, entitlements_count)
+
+    def _validate_entitlements(self, cycle, offset=0, limit=None):
+        """
+        Basket Entitlement Manager :meth:`_validate_entitlements`
+        Synchronous validation of entitlements in a cycle
+
+        :param cycle: A recordset of cycle
+        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
+        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :return err: Integer number of errors
+        :return message: String description of the error
+        """
+        # Get the entitlements in the cycle
+        entitlements = cycle.get_entitlements(
+            ["draft", "pending_validation"],
+            entitlement_model="g2p.entitlement.inkind",
+            offset=offset,
+            limit=limit,
+        )
+        err, message = self.approve_entitlements(entitlements)
+        return err, message
+
     def cancel_entitlements(self, cycle):
         """
         Basket Entitlement Manager :meth:`cancel_entitlements`
@@ -189,18 +259,22 @@ class SPPBasketEntitlementManager(models.Model):
         )
         entitlements.update({"state": "cancelled"})
 
-    def validate_entitlements(self, cycle, cycle_memberships):
-        # TODO: Change the status of the entitlements to `validated` for this members.
-        # move the funds from the program's wallet to the wallet of each Beneficiary that are validated
-        pass
-
     def approve_entitlements(self, entitlements):
+        """
+        Default Entitlement Manager :meth:`_approve_entitlements`
+        Approve selected entitlements
+
+        :param entitlements: Selected entitlements to approve
+        :return state_err: Integer number of errors
+        :return message: String description of the errors
+        """
         state_err = 0
         message = ""
         sw = 0
         for rec in entitlements:
             if rec.state in ("draft", "pending_validation"):
                 if rec.manage_inventory:
+                    # TODO: check if there is enough stocks to allocate
                     rec._action_launch_stock_rule()
                 rec.update(
                     {
