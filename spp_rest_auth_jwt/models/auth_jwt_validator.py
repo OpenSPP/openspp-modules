@@ -176,7 +176,8 @@ class AuthJWTValidator(models.Model):
                     group = [
                         Command.link(
                             self.env.ref("g2p_registry_base.group_g2p_registrar").id
-                        )
+                        ),
+                        Command.link(self.env.ref("base.group_user").id),
                     ]
                     vals = {"name": email, "login": email, "groups_id": group}
                     user = self.env["res.users"].create(vals)
