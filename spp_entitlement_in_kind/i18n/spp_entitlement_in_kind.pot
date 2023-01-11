@@ -251,11 +251,6 @@ msgid "In-kind Entitlements"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_cycle__picking_ids
-msgid "In-kind Stock Transfers"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
 msgid "Inventory"
 msgstr ""
@@ -425,6 +420,11 @@ msgstr ""
 #. module: spp_entitlement_in_kind
 #: model:ir.model,name:spp_entitlement_in_kind.model_stock_rule
 msgid "Stock Rule"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_cycle__picking_ids
+msgid "Stock Transfers"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
