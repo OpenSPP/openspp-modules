@@ -1,0 +1,20 @@
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <menuitem
+        id="spp_programs_root"
+        name="In-Kind"
+        parent="g2p_programs.g2p_program_menu_root"
+        sequence="410"
+    />
+    <menuitem id="spp_programs_reports_menu_root" name="Reports" parent="spp_programs_root" sequence="100" />
+    <menuitem
+        id="spp_programs_config_menu_root"
+        name="Configuration"
+        parent="spp_programs_root"
+        sequence="200"
+    />
+
+</odoo>

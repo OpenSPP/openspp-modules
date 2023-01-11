@@ -1,0 +1,39 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_programs_entitlement_inkind_admin,SPP Entitlement In-Kind Admin Access,spp_programs.model_g2p_entitlement_inkind,g2p_registry_base.group_g2p_admin,1,1,1,1
+g2p_entitlement_inkind_report_wizard_admin,SPP Entitlement In-Kind Report Wizard Admin Access,spp_programs.model_g2p_entitlement_inkind_report_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+spp_programs_product_product_admin,SPP Entitlement Product Product Admin Access,product.model_product_product,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_programs_product_category_admin,SPP Entitlement Product Category Admin Access,product.model_product_category,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_programs_stock_picking_admin,SPP Entitlement Stock Picking Admin Access,stock.model_stock_picking,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_programs_procurement_group_admin,SPP Entitlement Procurement Group Admin Access,stock.model_procurement_group,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_programs_stock_warehouse_admin,SPP Entitlement Stock Warehouse Admin Access,stock.model_stock_warehouse,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_programs_stock_location_admin,SPP Entitlement Stock Location Admin Access,stock.model_stock_location,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_programs_stock_location_route_admin,SPP Entitlement Stock Location Route Admin Access,stock.model_stock_location_route,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_programs_stock_move_admin,SPP Entitlement Stock Move Admin Access,stock.model_stock_move,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_programs_stock_rule_admin,SPP Entitlement Stock Rule Admin Access,stock.model_stock_rule,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+spp_programs_entitlement_inkind_program_manager,SPP Entitlement In-Kind Program Manager Access,spp_programs.model_g2p_entitlement_inkind,g2p_programs.g2p_program_manager,1,1,1,0
+g2p_entitlement_inkind_report_wizard_program_manager,SPP Entitlement In-Kind Report Wizard Program Manager Access,spp_programs.model_g2p_entitlement_inkind_report_wizard,g2p_programs.g2p_program_manager,1,1,1,1
+
+spp_programs_product_product_program_manager,SPP Entitlement Product Product Program Manager Access,product.model_product_product,g2p_programs.g2p_program_manager,1,1,0,0
+spp_programs_product_category_program_manager,SPP Entitlement Product Category Program Manager Access,product.model_product_category,g2p_programs.g2p_program_manager,1,1,0,0
+spp_programs_stock_picking_program_manager,SPP Entitlement Stock Picking Program Manager Access,stock.model_stock_picking,g2p_programs.g2p_program_manager,1,1,1,0
+spp_programs_procurement_group_program_manager,SPP Entitlement Procurement Group Program Manager Access,stock.model_procurement_group,g2p_programs.g2p_program_manager,1,1,0,0
+spp_programs_stock_warehouse_program_manager,SPP Entitlement Stock Warehouse Program Manager Access,stock.model_stock_warehouse,g2p_programs.g2p_program_manager,1,1,0,0
+spp_programs_stock_location_program_manager,SPP Entitlement Stock Location Program Manager Access,stock.model_stock_location,g2p_programs.g2p_program_manager,1,0,0,0
+spp_programs_stock_location_route_program_manager,SPP Entitlement Stock Location Route Program Manager Access,stock.model_stock_location_route,g2p_programs.g2p_program_manager,1,0,0,0
+spp_programs_stock_move_program_manager,SPP Entitlement Stock Move Program Manager Access,stock.model_stock_move,g2p_programs.g2p_program_manager,1,1,1,0
+spp_programs_stock_rule_program_manager,SPP Entitlement Stock Rule Program Manager Access,stock.model_stock_rule,g2p_programs.g2p_program_manager,1,0,0,0
+
+spp_programs_entitlement_inkind_program_validator,SPP Entitlement In-Kind Program Validator Access,spp_programs.model_g2p_entitlement_inkind,g2p_programs.g2p_program_validator,1,1,0,0
+g2p_entitlement_inkind_report_wizard_program_validator,SPP Entitlement In-Kind Report Wizard Program Validator Access,spp_programs.model_g2p_entitlement_inkind_report_wizard,g2p_programs.g2p_program_validator,1,1,1,1
+
+spp_programs_product_product_program_validator,SPP Entitlement Product Product Program Validator Access,product.model_product_product,g2p_programs.g2p_program_validator,1,0,0,0
+spp_programs_product_category_program_validator,SPP Entitlement Product Category Program Validator Access,product.model_product_category,g2p_programs.g2p_program_validator,1,0,0,0
+spp_programs_stock_picking_program_validator,SPP Entitlement Stock Picking Program Validator Access,stock.model_stock_picking,g2p_programs.g2p_program_validator,1,1,1,0
+spp_programs_procurement_group_program_validator,SPP Entitlement Procurement Group Program Validator Access,stock.model_procurement_group,g2p_programs.g2p_program_validator,1,1,0,0
+spp_programs_stock_warehouse_program_validator,SPP Entitlement Stock Warehouse Program Validator Access,stock.model_stock_warehouse,g2p_programs.g2p_program_validator,1,1,0,0
+spp_programs_stock_location_program_validator,SPP Entitlement Stock Location Program Validator Access,stock.model_stock_location,g2p_programs.g2p_program_validator,1,0,0,0
+spp_programs_stock_location_route_program_validator,SPP Entitlement Stock Location Route Program Validator Access,stock.model_stock_location_route,g2p_programs.g2p_program_validator,1,0,0,0
+spp_programs_stock_move_program_validator,SPP Entitlement Stock Move Program Validator Access,stock.model_stock_move,g2p_programs.g2p_program_validator,1,1,1,0
+spp_programs_stock_rule_program_validator,SPP Entitlement Stock Rule Program Validator Access,stock.model_stock_rule,g2p_programs.g2p_program_validator,1,0,0,0

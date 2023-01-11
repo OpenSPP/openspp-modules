@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_program_list_custom_spp_form" model="ir.ui.view">
+        <field name="name">view_program_list_custom_spp_form</field>
+        <field name="model">g2p.program</field>
+        <field name="inherit_id" ref="g2p_programs.view_program_list_form" />
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='cycle_ids']/tree/field[@name='entitlements_count']"
+                position="replace"
+            >
+                <field name="entitlements_count" string="Cash Entitlements" />
+                <field name="inkind_entitlements_count" string="In-kind Entitlements" />
+            </xpath>
+            <xpath
+                expr="//field[@name='cycle_ids']/form/sheet/notebook/page/field[@name='entitlement_ids']"
+                position="attributes"
+            >
+                <attribute name="colspan">4</attribute>
+                <attribute name="attrs">{'invisible':[('inkind_entitlements_count','>',0)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='cycle_ids']/form/sheet/notebook/page/field[@name='entitlement_ids']"
+                position="after"
+            >
+                <field
+                    name="inkind_entitlement_ids"
+                    nolabel="1"
+                    readonly="1"
+                    colspan="4"
+                    attrs="{'invisible':[('inkind_entitlements_count','=',0)]}"
+                >
+                    <tree>
+                        <field name="name" />
+                        <field name="code" />
+                        <field name="partner_id" />
+                        <field name="cycle_id" />
+                        <field name="service_point_id" />
+                        <field name="valid_from" />
+                        <field name="valid_until" />
+                        <field
+                            name="state"
+                            decoration-primary="state=='pending_validation'"
+                            decoration-success="state=='approved'"
+                            decoration-warning="state=='cancelled'"
+                            decoration-danger="state=='expired'"
+                            widget="badge"
+                            string="State"
+                        />
+                        <field name="company_id" groups="base.group_multi_company" />
+                    </tree>
+                    <form>
+                        <div class="oe_title mb24">
+                            <label for="name" string="Entitlement:" />
+                            <h1>
+                                <field id="name" name="name" placeholder="Enter the program name..." />
+                            </h1>
+                            <label for="code" string="Code:" />
+                            <h2>
+                                <field id="code" name="code" placeholder="code..." />
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field
+                                    name="partner_id"
+                                    options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                                />
+                                <field
+                                    name="program_id"
+                                    options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                                />
+                                <field
+                                    name="cycle_id"
+                                    options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                                />
+                                <field
+                                    name="service_point_id"
+                                    options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                                />
+                                <field
+                                    name="company_id"
+                                    groups="base.group_multi_company"
+                                    options="{'no_create': True}"
+                                />
+                            </group>
+                            <group>
+                                <field name="valid_from" />
+                                <field name="valid_until" />
+                                <field name="date_approved" />
+                            </group>
+                        </group>
+                    </form>
+                </field>
+                <field name="inkind_entitlements_count" invisible="1" />
+                <field name="entitlements_count" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

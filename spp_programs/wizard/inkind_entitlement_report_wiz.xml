@@ -1,0 +1,56 @@
+<odoo>
+    <record id="inkind_entitlement_report_wizard" model="ir.ui.view">
+        <field name="name">inkind_entitlement_report_wizard</field>
+        <field name="model">g2p.entitlement.inkind.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div>
+                        Filter Program:
+                        <h2>
+                            <field
+                                name="program_id"
+                                options="{'no_open':True, 'no_create':True, 'no_edit':True}"
+                            />
+                        </h2>
+                        Filter Cycle:
+                        <h2>
+                            <field
+                                name="cycle_id"
+                                options="{'no_open':True, 'no_create':True, 'no_edit':True}"
+                                domain="cycle_id_domain"
+                            />
+                        </h2>
+                    </div>
+                    <field name="cycle_id_domain" invisible="1" />
+                </sheet>
+                <footer>
+                    <button
+                        name="generate_report"
+                        string="Generate Report"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="btn-danger" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_inkind_entitlement_report_wizard" model="ir.actions.act_window">
+        <field name="name">In-kind Entitlement Report</field>
+        <field name="res_model">g2p.entitlement.inkind.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_entitlement_report_inkind"
+        name="Entitlements"
+        action="action_inkind_entitlement_report_wizard"
+        parent="spp_programs_reports_menu_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin,g2p_programs.g2p_program_manager,g2p_programs.g2p_finance_validator"
+    />
+
+</odoo>

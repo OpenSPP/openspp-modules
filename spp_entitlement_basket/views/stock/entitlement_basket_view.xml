@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_entitlement_basket_tree" model="ir.ui.view">
+        <field name="name">view_entitlement_basket_tree</field>
+        <field name="model">spp.entitlement.basket</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <tree sample="1">
+                <field name="name" string="Entitlement Basket Name" />
+                <field name="product_names" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_entitlement_basket_form" model="ir.ui.view">
+        <field name="name">view_entitlement_basket_form</field>
+        <field name="model">spp.entitlement.basket</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <form string="Entitlement Basket">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Entitlement Basket Name:" />
+                        <h1>
+                            <field id="name" name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="product_ids" nolabel="1">
+                            <tree editable="top">
+                                <field
+                                    name="product_id"
+                                    options="{'no_open':True,'no_create':True,'no_edit':True}"
+                                    required="1"
+                                />
+                                <field name="qty" required="1" />
+                                <field name="uom_id" readonly="1" options="{'no_open':True}" />
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <div class="oe_title">
+                                        <label for="product_id" string="Product:" />
+                                        <h1>
+                                            <field
+                                                id="product_id"
+                                                name="product_id"
+                                                options="{'no_open':True,'no_create':True,'no_edit':True}"
+                                                required="1"
+                                            />
+                                        </h1>
+                                    </div>
+                                    <group colspan="4" col="4">
+                                        <field name="qty" required="1" />
+                                        <field name="uom_id" readonly="1" options="{'no_open':True}" />
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </group>
+                    <field name="active" invisible="1" />
+                    <field name="product_names" invisible="1" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="entitlement_basket_filter" model="ir.ui.view">
+        <field name="name">entitlement_basket_filter</field>
+        <field name="model">spp.entitlement.basket</field>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <search string="Search Entitlement Basket">
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_entitlement_basket" model="ir.actions.act_window">
+        <field name="name">Entitlement Basket</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.entitlement.basket</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="entitlement_basket_filter" />
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new Entitlement Basket!
+            </p><p>
+                Click the create button to enter the new Entitlement Basket entitlement.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_entitlement_basket_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_entitlement_basket_tree" />
+        <field name="act_window_id" ref="action_entitlement_basket" />
+    </record>
+
+    <record id="action_entitlement_basket_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_entitlement_basket_form" />
+        <field name="act_window_id" ref="action_entitlement_basket" />
+    </record>
+
+    <menuitem
+        id="menu_entitlement_basket"
+        name="Entitlement Basket"
+        action="action_entitlement_basket"
+        parent="spp_programs.spp_programs_config_menu_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin,g2p_programs.g2p_program_manager"
+    />
+
+</odoo>

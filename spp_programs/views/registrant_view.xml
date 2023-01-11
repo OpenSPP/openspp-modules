@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <!-- individuals view-->
+    <record id="view_registrant_ext_tree_custom_spp" model="ir.ui.view">
+        <field name="name">view_registrant_ext_tree_custom_spp</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_programs.view_registrant_ext_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='entitlements_count']" position="after">
+                <field name="inkind_entitlements_count" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_registrant_ext_form_custom_spp" model="ir.ui.view">
+        <field name="name">view_registrant_ext_form_custom_spp</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_programs.view_registrant_ext_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='cash_entitlement']" position="after">
+                <page name="inkind_entitlement" string="In-kind Entitlements">
+                    <field name="inkind_entitlement_ids" readonly="1" nolabel="1">
+                      <tree>
+                          <button
+                                name="open_entitlement_form"
+                                type="object"
+                                icon="fa-external-link"
+                                class="btn-success"
+                            />
+                          <field name="name" />
+                          <field name="code" />
+                          <field name="cycle_id" />
+                          <field name="valid_from" />
+                          <field name="valid_until" />
+                          <field name="state" />
+                          <field name="company_id" groups="base.group_multi_company" />
+                      </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- groups view-->
+
+    <record id="view_group_ext_tree_custom_spp" model="ir.ui.view">
+        <field name="name">view_group_ext_tree_custom_spp</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_programs.view_group_ext_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='entitlements_count']" position="after">
+                <field name="inkind_entitlements_count" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_group_ext_form_custom_spp" model="ir.ui.view">
+        <field name="name">view_group_ext_form_custom_spp</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_programs.view_group_ext_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='cash_entitlement']" position="after">
+                <page name="inkind_entitlement" string="In-kind Entitlements">
+                  <field name="inkind_entitlement_ids" readonly="1" nolabel="1">
+                    <tree>
+                        <button
+                                name="open_entitlement_form"
+                                type="object"
+                                icon="fa-external-link"
+                                class="btn-success"
+                            />
+                        <field name="name" />
+                        <field name="code" />
+                        <field name="cycle_id" />
+                        <field name="valid_from" />
+                        <field name="valid_until" />
+                        <field name="state" />
+                        <field name="company_id" groups="base.group_multi_company" />
+                    </tree>
+                  </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
