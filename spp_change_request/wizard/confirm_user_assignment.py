@@ -11,15 +11,6 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
     _name = "spp.change.request.user.assign.wizard"
     _description = "Change Request User Assignment Wizard"
 
-    GROUP_NAMES = [
-        "Change Request Agent",
-        "Change Request Validator",
-        "Change Request Applicator",
-        "Change Request Administrator",
-        "Change Request Validator HQ",
-        "Change Request Validator Local",
-    ]
-
     @api.model
     def default_get(self, fields):
         res = super(ConfirmUserAssignmentWiz, self).default_get(fields)
@@ -71,9 +62,16 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
 
     @api.depends("assign_to_id")
     def _compute_assign_to_id_domain(self):
-        group_ids = (
-            self.env["res.groups"].search([("name", "in", self.GROUP_NAMES)]).ids
-        )
+
+        group_ids = [
+            self.env.ref("spp_change_request.group_spp_change_request_agent").id,
+            self.env.ref("spp_change_request.group_spp_change_request_validator").id,
+            self.env.ref("spp_change_request.group_spp_change_request_applicator").id,
+            self.env.ref(
+                "spp_change_request.group_spp_change_request_administrator"
+            ).id,
+        ]
+
         user_group_ids = self.env.user.groups_id.ids
 
         same_group_ids = list(set(user_group_ids).intersection(group_ids))
