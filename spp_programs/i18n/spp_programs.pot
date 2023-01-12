@@ -444,7 +444,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__total_amount
-msgid "Total Amount"
+msgid "Total Value"
 msgstr ""
 
 #. module: spp_programs
@@ -455,11 +455,6 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__trans2fsp
 msgid "Transferred to FSP"
-msgstr ""
-
-#. module: spp_programs
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__unit_price
-msgid "Unit Price"
 msgstr ""
 
 #. module: spp_programs
@@ -479,6 +474,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
 msgid "Valid Until"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__unit_price
+msgid "Value/Unit"
 msgstr ""
 
 #. module: spp_programs
