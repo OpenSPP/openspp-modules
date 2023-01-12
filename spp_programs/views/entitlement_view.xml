@@ -69,7 +69,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <group>
                             <field
                                 name="partner_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="1"
                                 options="{'no_open':True,'no_quick_create':True,'no_create':True}"
                             />
                             <field
@@ -78,12 +78,12 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             />
                             <field
                                 name="cycle_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="1"
                                 options="{'no_open':True,'no_quick_create':True,'no_create':True}"
                             />
                             <field
                                 name="service_point_id"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="1"
                                 options="{'no_open':True,'no_quick_create':True,'no_create':True}"
                             />
                             <field
@@ -91,7 +91,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 groups="base.group_multi_company"
                                 options="{'no_create': True}"
                                 force_save="1"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="1"
                             />
                         </group>
                         <group>
@@ -106,28 +106,22 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field
                                     name="product_id"
                                     options="{'no_open':True,'no_quick_create':True,'no_create':True}"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
                                     colspan="4"
-                                    required="1"
+                                    readonly="1"
                                 />
                                 <field
                                     name="qty"
                                     attrs="{'readonly':[('state','!=','draft')]}"
-                                    required="1"
+                                    readonly="1"
                                 />
                                 <field
                                     name="uom_id"
                                     options="{'no_open':True,'no_quick_create':True,'no_create':True}"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    required="1"
+                                    readonly="1"
                                 />
-                                <field name="total_amount" attrs="{'readonly':[('state','!=','draft')]}" />
-                                <field
-                                    name="currency_id"
-                                    options="{'no_open':True,'no_quick_create':True,'no_create':True}"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    required="1"
-                                />
+                                <field name="unit_price" readonly="1" />
+                                <field name="total_amount" readonly="1" />
+                                <field name="currency_id" options="{'no_open':True}" readonly="1" />
                             </group>
                         </page>
                         <page string="Inventory" attrs="{'invisible':[('manage_inventory','=',False)]}">

@@ -46,7 +46,7 @@ class InKindEntitlement(models.Model):
         "product.product", "Product", domain=[("type", "=", "product")]
     )
     qty = fields.Integer("QTY", default=1)
-    unit_price = fields.Float()
+    unit_price = fields.Monetary(string="Value/Unit", currency_field="currency_id")
     uom_id = fields.Many2one("uom.uom", "Unit of Measure")
 
     # Inventory integration fields
@@ -64,7 +64,7 @@ class InKindEntitlement(models.Model):
     currency_id = fields.Many2one(
         "res.currency", readonly=True, related="journal_id.currency_id"
     )
-    total_amount = fields.Monetary(currency_field="currency_id")
+    total_amount = fields.Monetary(string="Total Value", currency_field="currency_id")
     journal_id = fields.Many2one(
         "account.journal",
         "Journal",
