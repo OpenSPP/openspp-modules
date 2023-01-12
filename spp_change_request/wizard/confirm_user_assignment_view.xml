@@ -17,6 +17,7 @@
                     <group>
                         <field
                             name="assign_to_id"
+                            domain="assign_to_id_domain"
                             options="{'no_create':True,'no_edit':True,'no_open':True}"
                             attrs="{'invisible':[('assign_to_any','=',False)]}"
                         />
@@ -24,6 +25,7 @@
                     <field name="change_request_id" invisible="1" />
                     <field name="curr_assign_to_id" invisible="1" />
                     <field name="assign_to_any" invisible="1" />
+                    <field name="assign_to_id_domain" invisible="1" />
                 </sheet>
                 <footer>
                     <button name="assign_to_user" string="YES" type="object" class="oe_highlight" />

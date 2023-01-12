@@ -155,3 +155,5 @@ spp_ir_sequence_agent,SPP IR Sequence Agent Access,base.model_ir_sequence,spp_ch
 
 spp_change_request_cancel_wizard_agent,Change Request Cancel Agent Access,spp_change_request.model_spp_change_request_cancel_wizard,spp_change_request.group_spp_change_request_agent,1,1,1,1
 spp_idqueue_requestor,SPP ID Queue Agent Access,spp_idqueue.model_spp_print_queue_id,spp_change_request.group_spp_change_request_agent,1,1,1,0
+
+spp_change_request_user_assign_wizard_agent,Change Request User Assignment Agent Access,spp_change_request.model_spp_change_request_user_assign_wizard,spp_change_request.group_spp_change_request_agent,1,1,1,0
