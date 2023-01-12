@@ -70,11 +70,6 @@ msgid "Custom Fields"
 msgstr ""
 
 #. module: spp_custom_fields_ui
-#: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__dms_directory_ids
-msgid "DMS Directories"
-msgstr ""
-
-#. module: spp_custom_fields_ui
 #: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__field_category
 msgid "Field Category"
 msgstr ""
