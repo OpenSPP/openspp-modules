@@ -13,7 +13,11 @@
     "data": [
         "views/custom_fields_ui.xml",
     ],
-    "assets": {},
+    "assets": {
+        "web.assets_backend": [
+            "spp_custom_fields_ui/static/src/js/basic_fields.js",
+        ],
+    },
     "demo": [],
     "images": [],
     "application": True,
