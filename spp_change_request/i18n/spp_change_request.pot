@@ -374,6 +374,13 @@ msgid "Change Request Validators"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_res_partner__change_request_ids
+#: model:ir.model.fields,field_description:spp_change_request.field_res_users__change_request_ids
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_group_ext_form_custom_spp_cr
+msgid "Change Requests"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validated
 msgid "Click the create button to enter a new change request."
@@ -403,6 +410,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
 msgid "Confirm"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_res_partner
+msgid "Contact"
 msgstr ""
 
 #. module: spp_change_request
@@ -441,6 +453,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_dms_file__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_change_request.field_res_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__dms_directory_ids
@@ -918,6 +931,7 @@ msgstr ""
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_tree
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_group_ext_form_custom_spp_cr
 msgid "Requested By"
 msgstr ""
 
