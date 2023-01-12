@@ -52,6 +52,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <form string="Change Request">
+                <field name="hide_button_css" />
                 <header>
                     <button
                         name="action_submit"
