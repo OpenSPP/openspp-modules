@@ -12,8 +12,5 @@ class RegistryCRCustom(models.Model):
     _inherit = "res.partner"
 
     change_request_ids = fields.One2many(
-        "spp.change.request",
-        "registrant_id",
-        "Change Requests",
-        domain=[("state", "in", ("applied", "cancelled"))],
+        "spp.change.request", "registrant_id", "Change Requests"
     )
