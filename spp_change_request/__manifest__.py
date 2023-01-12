@@ -34,11 +34,12 @@
         "data/dms.xml",
         "wizard/confirm_user_assignment_view.xml",
         "wizard/reject_change_request_view.xml",
+        "wizard/cancel_change_request_view.xml",
         "views/main_view.xml",
         "views/change_request_view.xml",
         "views/change_request_validation_sequence_view.xml",
         "views/dms_file_view.xml",
-        "wizard/cancel_change_request_view.xml",
+        "views/registrant_view.xml",
     ],
     "assets": {
         "web.assets_backend": [
