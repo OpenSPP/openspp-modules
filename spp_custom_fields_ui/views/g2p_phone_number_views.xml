@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_phone_number_tree_inherit_spp_custom_fields_ui" model="ir.ui.view">
+        <field name="name">g2p.phone.number.view.list.inherit</field>
+        <field name="model">g2p.phone.number</field>
+        <field name="inherit_id" ref="g2p_registry_base.view_phone_number_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone_no']" position="attributes">
+                <attribute name="widget">phone</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_phone_number_form_inherit_spp_custom_fields_ui" model="ir.ui.view">
+        <field name="name">g2p.phone.number.view.form.inherit</field>
+        <field name="model">g2p.phone.number</field>
+        <field name="inherit_id" ref="g2p_registry_base.view_phone_number_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone_no']" position="attributes">
+                <attribute name="widget">phone</attribute>
+            </xpath>
+            <xpath expr="//field[@name='phone_sanitized']" position="attributes">
+                <attribute name="widget">phone</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

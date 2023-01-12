@@ -12,6 +12,7 @@
     "depends": ["base", "g2p_registry_base"],
     "data": [
         "views/custom_fields_ui.xml",
+        "views/g2p_phone_number_views.xml",
     ],
     "assets": {
         "web.assets_backend": [
