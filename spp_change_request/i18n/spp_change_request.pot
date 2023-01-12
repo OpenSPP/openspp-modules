@@ -183,6 +183,11 @@ msgid "Assign To Any"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_id_domain
+msgid "Assign To Id Domain"
+msgstr ""
+
+#. module: spp_change_request
 #: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
 #, python-format
 msgid "Assign this change request to:"
