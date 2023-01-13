@@ -210,6 +210,12 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "CR Reset to Draft"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
 msgid "Cancel"
@@ -222,6 +228,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #, python-format
 msgid "Cancel Change Request"
+msgstr ""
+
+#. module: spp_change_request
+#: model:mail.activity.type,name:spp_change_request.cancel_activity
+msgid "Cancel Request"
 msgstr ""
 
 #. module: spp_change_request
@@ -280,6 +291,12 @@ msgid "Change Request Cancel Wizard"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Change Request Cancelled"
+msgstr ""
+
+#. module: spp_change_request
 #: model:dms.access.group,name:spp_change_request.dms_access_group
 msgid "Change Request DMS Group"
 msgstr ""
@@ -311,8 +328,19 @@ msgid "Change Request Pending Validation"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Change Request Rejected"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_reject_wizard
 msgid "Change Request Rejection Wizard"
+msgstr ""
+
+#. module: spp_change_request
+#: model:mail.activity.type,name:spp_change_request.reset_draft_activity
+msgid "Change Request Reset to Draft"
 msgstr ""
 
 #. module: spp_change_request
@@ -878,6 +906,7 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_reject_wizard
+#: model:mail.activity.type,name:spp_change_request.reject_activity
 #, python-format
 msgid "Reject Change Request"
 msgstr ""
@@ -1085,6 +1114,24 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "The change request type must be properly filled-up."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request was cancelled by %s."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request was rejected by %s."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request was reset to draft."
 msgstr ""
 
 #. module: spp_change_request
