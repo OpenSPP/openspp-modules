@@ -25,4 +25,25 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="delay_count">0</field>
     </record>
 
+    <record id="reject_activity" model="mail.activity.type">
+        <field name="name">Reject Change Request</field>
+        <field name="res_model">spp.change.request</field>
+        <field name="icon">fa-thumbs-down</field>
+        <field name="delay_count">0</field>
+    </record>
+
+    <record id="cancel_activity" model="mail.activity.type">
+        <field name="name">Cancel Request</field>
+        <field name="res_model">spp.change.request</field>
+        <field name="icon">fa-ban</field>
+        <field name="delay_count">0</field>
+    </record>
+
+    <record id="reset_draft_activity" model="mail.activity.type">
+        <field name="name">Change Request Reset to Draft</field>
+        <field name="res_model">spp.change.request</field>
+        <field name="icon">fa-undo</field>
+        <field name="delay_count">0</field>
+    </record>
+
 </odoo>
