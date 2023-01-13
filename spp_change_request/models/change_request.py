@@ -152,24 +152,6 @@ class ChangeRequestBase(models.Model):
         compute="_compute_validation_group_id",
         store=True,
     )
-    hide_button_css = fields.Html(
-        string="CSS", sanitize=False, compute="_compute_hide_button_css", store=False
-    )
-
-    @api.depends("state")
-    def _compute_hide_button_css(self):
-        for record in self:
-            if (
-                record.state == "draft"
-                and record.create_uid != self.env.user
-                and record.assign_to_id != self.env.user
-            ):
-                # Hide edit button when state is 'draft' and current user is not in either create_uid or assign_to_id
-                record.hide_button_css = (
-                    "<style>.o_form_button_edit {display: none !important;}</style>"
-                )
-            else:
-                record.hide_button_css = "<style></style>"
 
     @api.model
     def create(self, vals):

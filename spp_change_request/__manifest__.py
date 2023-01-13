@@ -43,6 +43,7 @@
     "assets": {
         "web.assets_backend": [
             "spp_change_request/static/src/scss/change_request.scss",
+            "spp_change_request/static/src/js/hide_button.js",
         ],
     },
     "demo": [],
