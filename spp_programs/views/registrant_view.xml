@@ -4,17 +4,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
     <!-- individuals view-->
-    <record id="view_registrant_ext_tree_custom_spp" model="ir.ui.view">
-        <field name="name">view_registrant_ext_tree_custom_spp</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="g2p_programs.view_registrant_ext_tree" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='entitlements_count']" position="after">
-                <field name="inkind_entitlements_count" />
-            </xpath>
-        </field>
-    </record>
-
     <record id="view_registrant_ext_form_custom_spp" model="ir.ui.view">
         <field name="name">view_registrant_ext_form_custom_spp</field>
         <field name="model">res.partner</field>
@@ -45,17 +34,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
     </record>
 
     <!-- groups view-->
-
-    <record id="view_group_ext_tree_custom_spp" model="ir.ui.view">
-        <field name="name">view_group_ext_tree_custom_spp</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="g2p_programs.view_group_ext_tree" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='entitlements_count']" position="after">
-                <field name="inkind_entitlements_count" />
-            </xpath>
-        </field>
-    </record>
 
     <record id="view_group_ext_form_custom_spp" model="ir.ui.view">
         <field name="name">view_group_ext_form_custom_spp</field>
