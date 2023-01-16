@@ -202,7 +202,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <field
                                 name="applicant_id"
                                 options="{'no_create': True,'no_open':True}"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                attrs="{'readonly':['|',('state','!=','draft'),('id_document_details','!=',False)]}"
                                 domain="applicant_id_domain"
                                 required="1"
                                 force_save="1"
