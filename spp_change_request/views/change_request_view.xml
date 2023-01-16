@@ -173,7 +173,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </h1>
                         <label for="request_type" string="Request Type:" />
                         <h2>
-                            <field name="request_type" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field
+                                name="request_type"
+                                attrs="{'readonly':['|', ('state','!=','draft'), ('request_type_ref_id','!=',False)]}"
+                            />
                         </h2>
                         <label for="registrant_id" string="Registrant:" />
                         <h2>
