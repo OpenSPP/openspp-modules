@@ -45,10 +45,6 @@ class ChangeRequestBase(models.Model):
     _order = "id desc"
     _check_company_auto = True
 
-    def _default_name(self):
-        name = self.env["ir.sequence"].next_by_code("spp.change.request.num")
-        return name
-
     name = fields.Char("Request #", required=True, default="NEW")
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
     date_requested = fields.Datetime()  # Date the change request was submitted
