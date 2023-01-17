@@ -767,9 +767,9 @@ class ChangeRequestBase(models.Model):
                     and validator_id not in stage.validation_group_id.users.ids
                 ):
                     message = _(
-                        f"You are not allowed to validate this request! Stage: {stage.stage_id.name}. "
-                        f"Allowed Validator Group: {stage.validation_group_id.name}"
-                    )
+                        "You are not allowed to validate this request! Stage: {}. "
+                        "Allowed Validator Group: {}"
+                    ).format(stage.stage_id.name, stage.validation_group_id.name)
                     stage = None
             else:
                 message = _(
