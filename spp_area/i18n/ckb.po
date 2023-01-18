@@ -25,8 +25,18 @@ msgid "Admin Alt2"
 msgstr ""
 
 #. module: spp_area
+#: model:spp.area.kind,complete_name:spp_area.admin_area_kind
+msgid "Admin Area"
+msgstr ""
+
+#. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__admin_code
 msgid "Admin Code"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__admin_kind
+msgid "Admin Kind"
 msgstr ""
 
 #. module: spp_area
@@ -54,7 +64,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_area.view_area_groups_form
 #: model_terms:ir.ui.view,arch_db:spp_area.view_area_individuals_form
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_form
-#: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_tree
 msgid "Area"
 msgstr ""
 
@@ -72,7 +81,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__area_import_id
 #: model:ir.ui.menu,name:spp_area.menu_spparea_import
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_import_form
-#: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_import_tree
 msgid "Area Import"
 msgstr ""
 
@@ -84,6 +92,18 @@ msgstr ""
 #. module: spp_area
 #: model:ir.model,name:spp_area.model_spp_area_import_lang
 msgid "Area Import Raw Data Languages"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.actions.act_window,name:spp_area.action_spparea_kind
+#: model:ir.model,name:spp_area.model_spp_area_kind
+#: model:ir.ui.menu,name:spp_area.menu_spparea_kind
+msgid "Area Kind"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.model.fields,field_description:spp_area.field_spp_area__area_level
+msgid "Area Level"
 msgstr ""
 
 #. module: spp_area
@@ -102,6 +122,12 @@ msgid "Area Upload"
 msgstr ""
 
 #. module: spp_area
+#: code:addons/spp_area/models/area.py:0
+#, python-format
+msgid "Area already exist!"
+msgstr ""
+
+#. module: spp_area
 #: model:ir.ui.menu,name:spp_area.area_main_top_menu
 msgid "Areas"
 msgstr ""
@@ -109,6 +135,24 @@ msgstr ""
 #. module: spp_area
 #: model:ir.model,name:spp_area.model_spp_area_import
 msgid "Areas Import Table"
+msgstr ""
+
+#. module: spp_area
+#: code:addons/spp_area/models/area.py:0
+#, python-format
+msgid "Can't delete default Area Kind"
+msgstr ""
+
+#. module: spp_area
+#: code:addons/spp_area/models/area.py:0
+#, python-format
+msgid "Can't delete used Area Kind"
+msgstr ""
+
+#. module: spp_area
+#: code:addons/spp_area/models/area.py:0
+#, python-format
+msgid "Can't edit default Area Kind"
 msgstr ""
 
 #. module: spp_area
@@ -128,6 +172,11 @@ msgid "Child"
 msgstr ""
 
 #. module: spp_area
+#: model_terms:ir.actions.act_window,help:spp_area.action_spparea_kind
+msgid "Click the create button to enter the information of the Area Kind."
+msgstr ""
+
+#. module: spp_area
 #: model_terms:ir.actions.act_window,help:spp_area.action_spparea
 msgid "Click the create button to enter the information of the Area."
 msgstr ""
@@ -143,8 +192,20 @@ msgid "Code"
 msgstr ""
 
 #. module: spp_area
+#: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_form
+#: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_kind_tree
+#: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_tree
+msgid "Complete Name"
+msgstr ""
+
+#. module: spp_area
 #: model:ir.model,name:spp_area.model_res_partner
 msgid "Contact"
+msgstr ""
+
+#. module: spp_area
+#: model_terms:ir.actions.act_window,help:spp_area.action_spparea_kind
+msgid "Create a new Area Kind!"
 msgstr ""
 
 #. module: spp_area
@@ -157,6 +218,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__create_uid
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__create_uid
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__create_uid
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -165,7 +227,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__create_date
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__create_date
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__create_date
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__create_date
 msgid "Created on"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.model.fields,field_description:spp_area.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_area.field_spp_area__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_import__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__dms_directory_ids
+msgid "DMS Directories"
 msgstr ""
 
 #. module: spp_area
@@ -193,6 +266,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__display_name
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__display_name
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__display_name
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -200,6 +274,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_area.selection__spp_area_import__state__done
 #: model_terms:ir.ui.view,arch_db:spp_area.spparea_import_filter
 msgid "Done"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.model.fields,field_description:spp_area.field_spp_area__draft_name
+msgid "Draft Name"
 msgstr ""
 
 #. module: spp_area
@@ -229,6 +308,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__id
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__id
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__id
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__id
 msgid "ID"
 msgstr ""
 
@@ -258,6 +338,11 @@ msgid "Imported by"
 msgstr ""
 
 #. module: spp_area
+#: model:ir.model.fields,field_description:spp_area.field_spp_area__kind
+msgid "Kind"
+msgstr ""
+
+#. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__lang_id
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__lang_ids
 msgid "Languages"
@@ -268,6 +353,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import____last_update
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang____last_update
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw____last_update
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -276,6 +362,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__write_uid
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__write_uid
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__write_uid
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -284,6 +371,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__write_date
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__write_date
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__write_date
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -302,6 +390,8 @@ msgstr ""
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__complete_name
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__name
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__complete_name
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__name
 msgid "Name"
 msgstr ""
 
@@ -319,12 +409,14 @@ msgstr ""
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__parent_id
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__parent_id
 #: model_terms:ir.ui.view,arch_db:spp_area.spparea_filter
 msgid "Parent"
 msgstr ""
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__parent_path
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__parent_path
 msgid "Parent Path"
 msgstr ""
 
@@ -361,6 +453,7 @@ msgstr ""
 
 #. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.spparea_filter
+#: model_terms:ir.ui.view,arch_db:spp_area.spparea_kind_filter
 msgid "Search Area"
 msgstr ""
 
@@ -383,6 +476,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__state
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__state
 msgid "Status"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.model.fields,help:spp_area.field_spp_area__level
+msgid "This is the area level for importing"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.model.fields,help:spp_area.field_spp_area__area_level
+msgid "This is the main area level"
 msgstr ""
 
 #. module: spp_area
