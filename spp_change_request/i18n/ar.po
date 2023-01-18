@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2023-01-18 11:50+0000\n"
-"Last-Translator: sajjad alkantale <sajjadjameel68@gmail.com>\n"
+"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_change_request/ar/>\n"
 "Language: ar\n"
@@ -237,7 +237,7 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_applied
 msgid "Date Applied"
-msgstr ""
+msgstr "تاريخ التقديم"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_requested
@@ -701,7 +701,7 @@ msgstr "تم التحقق"
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__validatedby_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__validator_id
 msgid "Validated by"
-msgstr ""
+msgstr "تم التصديق من قبل"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
