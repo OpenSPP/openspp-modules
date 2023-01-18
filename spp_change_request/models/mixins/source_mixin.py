@@ -741,3 +741,25 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     #         raise UserError(
     #             _("There are no directories defined for this change request.")
     #         )
+
+    def open_registrant_details_form(self, name="Group Details"):
+        self.ensure_one()
+        res_id = self.registrant_id.id
+        form_id = self.env.ref("g2p_registry_group.view_groups_form").id
+        action = self.env["res.partner"].get_formview_action()
+        context = {
+            "create": False,
+            "edit": False,
+            "hide_from_cr": 1,
+        }
+        action.update(
+            {
+                "name": _(name),
+                "views": [(form_id, "form")],
+                "res_id": res_id,
+                "target": "new",
+                "context": context,
+                "flags": {"mode": "readonly"},
+            }
+        )
+        return action
