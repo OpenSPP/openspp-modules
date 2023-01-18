@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-25 13:22+0000\n"
+"PO-Revision-Date: 2023-01-18 12:56+0000\n"
 "Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_entitlement_in_kind/ar/>\n"
@@ -60,12 +60,11 @@ msgstr ""
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
 msgid "Code:"
-msgstr ""
+msgstr "رمز:"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__company_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__company_id
-#, fuzzy
 msgid "Company"
 msgstr "شركة"
 
@@ -133,7 +132,7 @@ msgstr ""
 #: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
 #: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
 #: model:ir.model,name:spp_entitlement_in_kind.model_g2p_entitlement
-#, fuzzy, python-format
+#, python-format
 msgid "Entitlement"
 msgstr "الاستحقاق"
 
@@ -146,7 +145,6 @@ msgstr "مفردة الاستحقاق"
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__entitlement_item_ids
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__entitlement_item_ids
-#, fuzzy
 msgid "Entitlement Items"
 msgstr "مفردات الاستحقاق"
 
@@ -163,12 +161,12 @@ msgstr "مجموعة التحقق من الاستحقاق"
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
 msgid "Entitlement:"
-msgstr ""
+msgstr "الاستحقاق:"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.ui.menu,name:spp_entitlement_in_kind.menu_entitlement_inkind
 msgid "Entitlements"
-msgstr ""
+msgstr "مستحقات"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__evaluate_single_item
@@ -189,7 +187,7 @@ msgstr ""
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.entitlement_manager_inkind_filter
 msgid "Group By"
-msgstr "مجموعة بواسطة"
+msgstr "مجموعة من"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__id
@@ -207,7 +205,7 @@ msgstr ""
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
 msgid "In-Kind Entitlement"
-msgstr ""
+msgstr "المستحقات العينية"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__inkind_item_id
@@ -267,7 +265,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.create_program_wizard_form_view_custom_inkind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
 msgid "Items"
-msgstr ""
+msgstr "عناصر"
 
 #. module: spp_entitlement_in_kind
 #: code:addons/spp_entitlement_in_kind/wizard/create_program_wizard.py:0
