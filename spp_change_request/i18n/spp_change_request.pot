@@ -580,6 +580,13 @@ msgid "End Date"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid ""
+"Error in validation stages. No available stage to assign to this validation."
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_dms_file
 msgid "File"
 msgstr ""
@@ -1233,6 +1240,12 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
+msgid "There are no validators defined for this request."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
 msgid "This change request does not have any validation sequence defined."
 msgstr ""
 
@@ -1354,4 +1367,12 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "You are not allowed to %s this change request"
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid ""
+"You are not allowed to validate this request! Stage: {}. Allowed Validator "
+"Group: {}"
 msgstr ""
