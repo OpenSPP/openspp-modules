@@ -20,6 +20,30 @@ msgid "%s - 1"
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "%s batch(es) are being printed."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "%s batch(es) are distributed."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "%s batch(es) are printed."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "%s batch(es) are validated."
+msgstr ""
+
+#. module: spp_idqueue
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #, python-format
 msgid "%s batch(es) created."
@@ -455,6 +479,16 @@ msgid "ID"
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "ID Batch"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__id_count
 msgid "ID Count"
 msgstr ""
@@ -751,6 +785,12 @@ msgid "Next Step"
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "No Auth Token or API URL"
+msgstr ""
+
+#. module: spp_idqueue
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #, python-format
 msgid "No approved id requests selected!"
@@ -948,6 +988,12 @@ msgid "Settings"
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Some IDs are not generated"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__state
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__status
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__status
@@ -999,6 +1045,12 @@ msgstr ""
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #, python-format
 msgid "There are no selected id requests!"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Token %s"
 msgstr ""
 
 #. module: spp_idqueue
@@ -1057,16 +1109,37 @@ msgid "to check changes."
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "{} Batch(es) with total of {} IDs are being generated."
+msgstr ""
+
+#. module: spp_idqueue
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "{} cancelled this request on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "{} distributed this batch on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "{} distributed this request on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "{} generated this batch on {}."
 msgstr ""
 
 #. module: spp_idqueue
@@ -1076,6 +1149,20 @@ msgid "{} generated this request on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "{} printed this batch on {}"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "{} printed this batch on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
@@ -1093,6 +1180,26 @@ msgstr ""
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "{} started to generate this request on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "{} started to print this batch on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "{} started to print this request on {}."
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "{} validated this batch on {}"
 msgstr ""
 
 #. module: spp_idqueue
