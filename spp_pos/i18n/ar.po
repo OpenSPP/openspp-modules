@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-02 07:22+0000\n"
+"PO-Revision-Date: 2023-01-18 12:56+0000\n"
 "Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_pos/ar/>\n"
@@ -46,7 +46,7 @@ msgstr "أدخل رمز الاستحقاق يدويًا"
 #: model:ir.model,name:spp_pos.model_g2p_entitlement
 #: model:pos.category,name:spp_pos.entitlement_product_categ_pos
 #: model:product.template,name:spp_pos.entitlement_product
-#, fuzzy, python-format
+#, python-format
 msgid "Entitlement"
 msgstr "الاستحقاق"
 
@@ -71,7 +71,7 @@ msgstr "نموذج المنتج"
 #: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
 #, python-format
 msgid "Scan Entitlement QR Code"
-msgstr "مسح رمز الاستجابة السريعة للاستحقاق"
+msgstr "مسح رمز الاستجابة السريعة"
 
 #. module: spp_pos
 #. openerp-web
