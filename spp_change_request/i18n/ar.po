@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-18 11:50+0000\n"
+"PO-Revision-Date: 2023-01-18 12:56+0000\n"
 "Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_change_request/ar/>\n"
@@ -191,7 +191,6 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__company_id
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
-#, fuzzy
 msgid "Company"
 msgstr "شركة"
 
@@ -320,7 +319,7 @@ msgstr "للتحقق"
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
 msgid "Group By"
-msgstr ""
+msgstr "مجموعة من"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_group_members
