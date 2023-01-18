@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-25 13:22+0000\n"
-"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"PO-Revision-Date: 2023-01-18 11:50+0000\n"
+"Last-Translator: sajjad alkantale <sajjadjameel68@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_change_request/ar/>\n"
 "Language: ar\n"
@@ -269,7 +269,7 @@ msgstr "الاسم"
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__draft
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Draft"
-msgstr "مسودة"
+msgstr "قيد الأنشاء"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
@@ -480,7 +480,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__pending
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Pending Validation"
-msgstr ""
+msgstr "انتظار التحقق"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__phone
@@ -535,19 +535,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__request_type
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
 msgid "Request Type"
-msgstr ""
+msgstr "نوع الطلب"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_form
 msgid "Request Type:"
-msgstr ""
+msgstr "نوع الطلب"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_tree
 msgid "Requested By"
-msgstr ""
+msgstr "مقدم الطلب"
 
 #. module: spp_change_request
 #: model:ir.ui.menu,name:spp_change_request.spp_change_request_request_root
@@ -610,7 +610,7 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "The Request Type field must be filled-up."
-msgstr ""
+msgstr "يجب ملئ حقل نوع الطلب"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
@@ -695,7 +695,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__validated
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Validated"
-msgstr ""
+msgstr "تم التحقق"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__validatedby_id
