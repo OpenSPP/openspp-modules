@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-10-07 13:22+0000\n"
-"Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
+"PO-Revision-Date: 2023-01-19 03:02+0000\n"
+"Last-Translator: Jeremi Joslin <jeremi@openspp.org>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_idqueue/fr/>\n"
 "Language: fr\n"
@@ -210,10 +210,8 @@ msgstr "Annuler"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
-#, fuzzy
-#| msgid "Date Requested"
 msgid "Cancel Request"
-msgstr "Date demandée"
+msgstr "Demande d&#39;annulation"
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__cancelled
