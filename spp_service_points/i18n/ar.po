@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-18 11:50+0000\n"
-"Last-Translator: sajjad alkantale <sajjadjameel68@gmail.com>\n"
+"PO-Revision-Date: 2023-01-18 12:56+0000\n"
+"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_service_points/ar/>\n"
 "Language: ar\n"
@@ -125,7 +125,7 @@ msgstr "الاسم"
 #. module: spp_service_points
 #: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
 msgid "Group By"
-msgstr "مجموعة بواسطة"
+msgstr "مجموعة من"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__id
