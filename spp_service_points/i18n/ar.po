@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-12-19 14:22+0000\n"
-"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"PO-Revision-Date: 2023-01-18 11:50+0000\n"
+"Last-Translator: sajjad alkantale <sajjadjameel68@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_service_points/ar/>\n"
 "Language: ar\n"
@@ -31,7 +31,7 @@ msgstr ""
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__is_contract_active
 msgid "Active Contract"
-msgstr ""
+msgstr "حالة الوكالة"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__shop_address
@@ -41,33 +41,33 @@ msgstr "عنوان"
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__name
 msgid "Agent"
-msgstr ""
+msgstr "الوكيل"
 
 #. module: spp_service_points
 #: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
 msgid "Agent Name..."
-msgstr ""
+msgstr "أسم الوكيل"
 
 #. module: spp_service_points
 #: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
 msgid "Agent:"
-msgstr ""
+msgstr "الوكيل :"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__area_id
 #: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
 msgid "Area"
-msgstr "المنطقة"
+msgstr "المركز"
 
 #. module: spp_service_points
 #: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
 msgid "Area Name..."
-msgstr "اسم المنطقة..."
+msgstr "المركز..."
 
 #. module: spp_service_points
 #: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
 msgid "Area:"
-msgstr "منطقة:"
+msgstr "المركز:"
 
 #. module: spp_service_points
 #: model_terms:ir.actions.act_window,help:spp_service_points.action_service_points
@@ -109,12 +109,12 @@ msgstr ""
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__disabled_reason
 msgid "Disable Reason"
-msgstr ""
+msgstr "سبب الايقاف"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__is_disabled
 msgid "Disabled"
-msgstr ""
+msgstr "ايقاف"
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__display_name
@@ -159,7 +159,7 @@ msgstr "رقم الهاتف"
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__phone_sanitized
 msgid "Phone Sanitized"
-msgstr ""
+msgstr "رقم الهاتف"
 
 #. module: spp_service_points
 #: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
