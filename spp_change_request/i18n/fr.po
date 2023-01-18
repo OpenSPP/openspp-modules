@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-29 13:22+0000\n"
-"Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
+"PO-Revision-Date: 2023-01-19 03:02+0000\n"
+"Last-Translator: Jeremi Joslin <jeremi@openspp.org>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_change_request/fr/>\n"
 "Language: fr\n"
@@ -245,10 +245,8 @@ msgstr "Rechercher une demande de modification"
 
 #. module: spp_change_request
 #: model:mail.activity.type,name:spp_change_request.cancel_activity
-#, fuzzy
-#| msgid "Change Request"
 msgid "Cancel Request"
-msgstr "Changer de requête"
+msgstr "Demande d&#39;annulation"
 
 #. module: spp_change_request
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__cancelled
@@ -311,17 +309,14 @@ msgstr "Modèle de demande de modification"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_cancel_wizard
-#, fuzzy
-#| msgid "Change Request Validator"
 msgid "Change Request Cancel Wizard"
-msgstr "Validateur de demande de changement"
+msgstr "Assistant d&#39;annulation de demande d'annulation"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, fuzzy, python-format
-#| msgid "Change Request Template"
+#, python-format
 msgid "Change Request Cancelled"
-msgstr "Modèle de demande de modification"
+msgstr "Demande de modification annulée"
 
 #. module: spp_change_request
 #: model:dms.access.group,name:spp_change_request.dms_access_group
@@ -1214,7 +1209,7 @@ msgstr "Le champ Type de demande doit être rempli."
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The change request was cancelled by %s."
-msgstr ""
+msgstr "La demande de modification a été annulée par %s."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
