@@ -110,6 +110,12 @@ msgid "Currency"
 msgstr ""
 
 #. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Cycle Cash Entitlements"
+msgstr ""
+
+#. module: g2p_entitlement_cash
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__display_name
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash__display_name
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__display_name
@@ -134,6 +140,13 @@ msgstr ""
 #. module: g2p_entitlement_cash
 #: model:ir.actions.act_window,name:g2p_entitlement_cash.action_entitlement_manager_cash
 msgid "Entitlement Managers"
+msgstr ""
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid ""
+"Entitlement State Error! Entitlements not in 'pending validation' state:\n"
 msgstr ""
 
 #. module: g2p_entitlement_cash
@@ -253,6 +266,12 @@ msgid "Program:"
 msgstr ""
 
 #. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
+msgstr ""
+
+#. module: g2p_entitlement_cash
 #: model_terms:ir.ui.view,arch_db:g2p_entitlement_cash.view_entitlement_manager_cash_tree
 msgid "Rules"
 msgstr ""
@@ -277,6 +296,14 @@ msgstr ""
 #: model:ir.model.fields,help:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash__currency_id
 #: model:ir.model.fields,help:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__currency_id
 msgid "The currency used to enter statement"
+msgstr ""
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid ""
+"The fund for the program: %(program)s [%(fund).2f] is insufficient for the "
+"entitlement: %(entitlement)s"
 msgstr ""
 
 #. module: g2p_entitlement_cash
