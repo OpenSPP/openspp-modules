@@ -25,14 +25,6 @@ msgid "0 means no limit"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
-#, python-format
-msgid ""
-"<b>Entitle State Error! Entitlements not in 'pending validation' "
-"state:</b>\n"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
 #: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_inkind
 msgid "Add a new entitlement!"
 msgstr ""
@@ -106,6 +98,12 @@ msgid "Cycle"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#, python-format
+msgid "Cycle In-Kind Entitlements"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
 #: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__uom_id
 #: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__uom_id
 msgid "Default unit of measure used for all stock operations."
@@ -130,7 +128,6 @@ msgstr ""
 
 #. module: spp_entitlement_in_kind
 #: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
-#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
 #: model:ir.model,name:spp_entitlement_in_kind.model_g2p_entitlement
 #, python-format
 msgid "Entitlement"
@@ -154,6 +151,13 @@ msgid "Entitlement Managers"
 msgstr "مدراء الاستحقاق"
 
 #. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#, python-format
+msgid ""
+"Entitlement State Error! Entitlements not in 'pending validation' state:\n"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__entitlement_validation_group_id
 msgid "Entitlement Validation Group"
 msgstr "مجموعة التحقق من الاستحقاق"
@@ -162,6 +166,12 @@ msgstr "مجموعة التحقق من الاستحقاق"
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
 msgid "Entitlement:"
 msgstr "الاستحقاق:"
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
+#, python-format
+msgid "Entitlement: In-Kind (%s)"
+msgstr ""
 
 #. module: spp_entitlement_in_kind
 #: model:ir.ui.menu,name:spp_entitlement_in_kind.menu_entitlement_inkind
@@ -243,11 +253,6 @@ msgstr ""
 #. module: spp_entitlement_in_kind
 #: model:ir.actions.act_window,name:spp_entitlement_in_kind.action_entitlement_inkind
 msgid "In-kind Entitlements"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_cycle__picking_ids
-msgid "In-kind Stock Transfers"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
@@ -364,9 +369,9 @@ msgid "Program:"
 msgstr "برنامج:"
 
 #. module: spp_entitlement_in_kind
-#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
 #, python-format
-msgid "Program: %(program)s, Beneficiary: %(partner)s.\n"
+msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
@@ -423,11 +428,8 @@ msgid "Stock Rule"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
-#, python-format
-msgid ""
-"The fund for the program: %(program)s[%(fund).2f] is insufficient for the "
-"entitlement: %(entitlement)s"
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_cycle__picking_ids
+msgid "Stock Transfers"
 msgstr ""
 
 #. module: spp_entitlement_in_kind

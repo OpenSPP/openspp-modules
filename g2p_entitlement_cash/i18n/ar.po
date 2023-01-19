@@ -116,7 +116,6 @@ msgstr "عملة"
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
 #, fuzzy, python-format
-#| msgid "Cash Entitlement"
 msgid "Cycle Cash Entitlements"
 msgstr "مستحقات نقدية"
 
