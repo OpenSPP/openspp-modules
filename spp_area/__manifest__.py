@@ -9,7 +9,7 @@
     "author": "OpenSPP.org",
     "website": "https://github.com/openspp/openspp-registry",
     "license": "LGPL-3",
-    "development_status": "Alpha",
+    "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "base",

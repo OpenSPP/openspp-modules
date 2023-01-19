@@ -74,10 +74,14 @@ msgstr "Personnalisé"
 #: model:ir.actions.server,name:spp_custom_fields_ui.action_custom_fields_ui
 #: model:ir.ui.menu,name:spp_custom_fields_ui.menu_custom_fields_ui
 #: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_form
-#: model_terms:ir.ui.view,arch_db:spp_custom_fields_ui.view_custom_fields_ui_tree
 #, python-format
 msgid "Custom Fields"
 msgstr "Les champs personnalisés"
+
+#. module: spp_custom_fields_ui
+#: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
 
 #. module: spp_custom_fields_ui
 #: model:ir.model.fields,field_description:spp_custom_fields_ui.field_ir_model_fields__field_category
