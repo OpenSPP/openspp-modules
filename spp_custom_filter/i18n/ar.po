@@ -1,0 +1,915 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_custom_filter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_needaction
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__active
+msgid "Active"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__active_lang_count
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__active_lang_count
+msgid "Active Lang Count"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__activity_type_icon
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__addl_name
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__addl_name
+msgid "Additional Name"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__additional_info
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__additional_info
+msgid "Additional info"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_ir_model_fields__allow_filter
+msgid "Allow to show this field on Custom filter!"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_attachment_count
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__avatar_1024
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__avatar_1024
+msgid "Avatar 1024"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__avatar_128
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__avatar_128
+msgid "Avatar 128"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__avatar_1920
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__avatar_1920
+msgid "Avatar 1920"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__avatar_256
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__avatar_256
+msgid "Avatar 256"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__avatar_512
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__avatar_512
+msgid "Avatar 512"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__bank_account_count
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__bank_account_count
+msgid "Bank Account Count"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__barcode
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__barcode
+msgid "Barcode"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__is_blacklisted
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__is_blacklisted
+msgid "Blacklist"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__mobile_blacklisted
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__mobile_blacklisted
+msgid "Blacklisted Phone Is Mobile"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__phone_blacklisted
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__phone_blacklisted
+msgid "Blacklisted Phone is Phone"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_bounce
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_bounce
+msgid "Bounce"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__is_company
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__is_company
+msgid "Check if the contact is a company, otherwise it is a person"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__employee
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__employee
+msgid "Check this box if this contact is an Employee."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__city
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__city
+msgid "City"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__color
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__color
+msgid "Color Index"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__commercial_partner_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__commercial_partner_id
+msgid "Commercial Entity"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__company_name
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__company_name
+msgid "Company Name"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__commercial_company_name
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__commercial_company_name
+msgid "Company Name Entity"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__partner_gid
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__partner_gid
+msgid "Company database ID"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__contact_address
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__contact_address
+msgid "Complete Address"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model,name:spp_custom_filter.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__message_bounce
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__message_bounce
+msgid "Counter of the number of bounced emails for this contact"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__country_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__country_id
+msgid "Country"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__country_code
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__country_code
+msgid "Country Code"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__credit
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__credit
+msgid "Credit"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__credit_limit
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__credit_limit
+msgid "Credit Limit"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__currency_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model,name:spp_custom_filter.model_custom_filter_mixin
+msgid "Custom Filter Mixin"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__customer_rank
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__customer_rank
+msgid "Customer Rank"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_custom_filter_mixin__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_custom_filter.field_ir_model_fields__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__date
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__date
+msgid "Date"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__debit
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__debit
+msgid "Debit"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__debit_limit
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__debit_limit
+msgid "Debit Limit"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__partner_share
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__partner_share
+msgid ""
+"Either customer (not a user), either shared user. Indicated the current "
+"partner is a customer without access or with a limited access created for "
+"sharing data."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__employee
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__employee
+msgid "Employee"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__event_count
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__event_count
+msgid "Event Count"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__family_name
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__family_name
+msgid "Family Name"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__phone_sanitized
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__phone_sanitized
+msgid ""
+"Field used to store sanitized phone number. Helps speeding up searches and "
+"comparisons."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model,name:spp_custom_filter.model_ir_model_fields
+msgid "Fields"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__activity_type_icon
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__force_recompute_canary
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__force_recompute_canary
+msgid "Force Recompute Canary"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__email_formatted
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__email_formatted
+msgid "Format email address \"Name <email@domain>\""
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__email_formatted
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__email_formatted
+msgid "Formatted Email"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__partner_latitude
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__partner_latitude
+msgid "Geo Latitude"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__partner_longitude
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__partner_longitude
+msgid "Geo Longitude"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__given_name
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__given_name
+msgid "Given Name"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__is_group
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__is_group
+msgid "Group"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__has_message
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__has_unreconciled_entries
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__has_unreconciled_entries
+msgid "Has Unreconciled Entries"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__helpdesk_ticket_active_count
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__helpdesk_ticket_active_count
+msgid "Helpdesk Ticket Active Count"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__helpdesk_ticket_count
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__helpdesk_ticket_count
+msgid "Helpdesk Ticket Count"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__helpdesk_ticket_count_string
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__helpdesk_ticket_count_string
+msgid "Helpdesk Ticket Count String"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__id_pdf_filename
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__id_pdf_filename
+msgid "ID File Name"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__im_status
+msgid "IM Status"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__activity_exception_icon
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__activity_exception_icon
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__message_needaction
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__message_unread
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__message_needaction
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__message_has_error
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__message_has_sms_error
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__message_has_error
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__is_blacklisted
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__is_blacklisted
+msgid ""
+"If the email address is on the blacklist, the contact won't receive mass "
+"mailing anymore, from any list"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__phone_sanitized_blacklisted
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__phone_sanitized_blacklisted
+msgid ""
+"If the sanitized phone number is on the blacklist, the contact won't receive"
+" mass mailing sms anymore, from any list"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__image_1024
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__image_1024
+msgid "Image 1024"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__image_128
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__image_128
+msgid "Image 128"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__image_1920_filename
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__image_1920_filename
+msgid "Image 1920 FileName"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__image_256
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__image_256
+msgid "Image 256"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__image_512
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__image_512
+msgid "Image 512"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__mobile_blacklisted
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__mobile_blacklisted
+msgid ""
+"Indicates if a blacklisted sanitized phone number is a mobile number. Helps "
+"distinguish which number is blacklisted             when there is both a "
+"mobile and phone field in a model."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__phone_blacklisted
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__phone_blacklisted
+msgid ""
+"Indicates if a blacklisted sanitized phone number is a phone number. Helps "
+"distinguish which number is blacklisted             when there is both a "
+"mobile and phone field in a model."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__industry_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__industry_id
+msgid "Industry"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__invoice_warn_msg
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__invoice_warn_msg
+msgid "Invoice Warn Msg"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_is_follower
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__is_company
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__is_company
+msgid "Is a Company"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__function
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__function
+msgid "Job Position"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__journal_item_count
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__journal_item_count
+msgid "Journal Item Count"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__kind_as_str
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__kind_as_str
+msgid "Kind"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__last_time_entries_checked
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__last_time_entries_checked
+msgid "Last Time Entries Checked"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__mailing_sms_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__mailing_sms_id
+msgid "Mailing Sms"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_main_attachment_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_has_error
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__mobile
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__mobile
+msgid "Mobile"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__my_activity_date_deadline
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__activity_date_deadline
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__activity_summary
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__activity_type_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__email_normalized
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__email_normalized
+msgid "Normalized Email"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__comment
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__comment
+msgid "Notes"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_needaction_counter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_has_error_counter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__message_needaction_counter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__message_has_error_counter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__message_unread_counter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__parent_name
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__parent_name
+msgid "Parent name"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__is_partial_group
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__is_partial_group
+msgid "Partial Group"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__same_vat_partner_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__same_vat_partner_id
+msgid "Partner with same Tax ID"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__payment_token_count
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__payment_token_count
+msgid "Payment Token Count"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__phone_sanitized_blacklisted
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__phone_sanitized_blacklisted
+msgid "Phone Blacklisted"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__phone_mobile_search
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__phone_mobile_search
+msgid "Phone/Mobile"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__picking_warn_msg
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__picking_warn_msg
+msgid "Picking Warn Msg"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__pos_order_count
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__pos_order_count
+msgid "Pos Order Count"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__property_account_payable_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__property_account_payable_id
+msgid "Property Account Payable"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__property_account_position_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__property_account_position_id
+msgid "Property Account Position"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__property_account_receivable_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__property_account_receivable_id
+msgid "Property Account Receivable"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__property_payment_term_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__property_payment_term_id
+msgid "Property Payment Term"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__property_product_pricelist
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__property_product_pricelist
+msgid "Property Product Pricelist"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__property_stock_customer
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__property_stock_customer
+msgid "Property Stock Customer"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__property_stock_supplier
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__property_stock_supplier
+msgid "Property Stock Supplier"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__property_supplier_payment_term_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__property_supplier_payment_term_id
+msgid "Property Supplier Payment Term"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__ref
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__ref
+msgid "Reference"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__is_registrant
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__is_registrant
+msgid "Registrant"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__parent_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__parent_id
+msgid "Related Company"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__activity_user_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_has_sms_error
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__user_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__user_id
+msgid "Salesperson"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__phone_sanitized
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__phone_sanitized
+msgid "Sanitized Number"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__self
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__self
+msgid "Self"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__partner_share
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__partner_share
+msgid "Share Partner"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_ir_model_fields__allow_filter
+msgid "Show on Custom Filter"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__signup_expiration
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__signup_expiration
+msgid "Signup Expiration"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__signup_token
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__signup_token
+msgid "Signup Token"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__signup_type
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__signup_type
+msgid "Signup Token Type"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__signup_valid
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__signup_valid
+msgid "Signup Token is Valid"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__signup_url
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__signup_url
+msgid "Signup URL"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__state_id
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__state_id
+msgid "State"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__street
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__street
+msgid "Street"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__street2
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__street2
+msgid "Street2"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__supplier_rank
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__supplier_rank
+msgid "Supplier Rank"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__vat
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__vat
+msgid "Tax ID"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__country_code
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__country_code
+msgid ""
+"The ISO country code in two chars. \n"
+"You can use this field for quick search."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__vat
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__vat
+msgid ""
+"The Tax Identification Number. Complete it if the contact is subjected to "
+"government taxes. Used in some legal statements."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__user_id
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__user_id
+msgid "The internal user in charge of this contact."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__email_normalized
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__email_normalized
+msgid ""
+"This field is used to search on email address as the primary email field can"
+" contain more than strictly an email address."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__tz_offset
+msgid "Timezone offset"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__title
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__title
+msgid "Title"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__total_invoiced
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__total_invoiced
+msgid "Total Invoiced"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_unread
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__message_unread_counter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_res_partner__barcode
+#: model:ir.model.fields,help:spp_custom_filter.field_res_users__barcode
+msgid "Use a barcode to identify this contact."
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__website
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__website
+msgid "Website Link"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_partner__zip
+#: model:ir.model.fields,field_description:spp_custom_filter.field_res_users__zip
+msgid "Zip"
+msgstr ""
