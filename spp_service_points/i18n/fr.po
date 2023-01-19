@@ -101,6 +101,13 @@ msgid "Created on"
 msgstr "Créé sur"
 
 #. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__disabled_date
 msgid "Date Disabled"
 msgstr "Date de désactivation"
@@ -149,6 +156,11 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__write_date
 msgid "Last Updated on"
 msgstr "Mise à jour le"
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Open Area Details"
+msgstr ""
 
 #. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__phone_no

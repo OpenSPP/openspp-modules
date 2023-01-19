@@ -46,8 +46,7 @@ msgstr ""
 #. module: spp_event_demo
 #: model_terms:ir.actions.act_window,help:spp_event_demo.action_spp_event_phone_survey
 msgid ""
-"Click the create button to enter the configuration of the Phone Survey "
-"Event."
+"Click the create button to enter the configuration of the Phone Survey Event."
 msgstr ""
 "Cliquez sur le bouton créer pour entrer dans la configuration de l'événement "
 "d'enquête téléphonique."
@@ -97,6 +96,16 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__create_date
 msgid "Created on"
 msgstr "Créé sur"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__description

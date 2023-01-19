@@ -54,6 +54,33 @@ msgid "Attachment Count"
 msgstr "Nombre de pièces jointes"
 
 #. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__auth_token
+msgid "Auth Token"
+msgstr ""
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__auth_token_url
+msgid "Auth Token Url"
+msgstr ""
+
+#. module: spp_idpass
+#: model:ir.model.fields.selection,name:spp_idpass.selection__g2p_id_type__target_type__both
+msgid "Both"
+msgstr ""
+
+#. module: spp_idpass
+#: code:addons/spp_idpass/models/id_type.py:0
+#, python-format
+msgid "Can't delete default ID Type"
+msgstr ""
+
+#. module: spp_idpass
+#: code:addons/spp_idpass/models/id_type.py:0
+#, python-format
+msgid "Can't edit default ID Type"
+msgstr ""
+
+#. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
 msgid "Cancel"
 msgstr "Annuler"
@@ -87,6 +114,14 @@ msgid "Created on"
 msgstr "Créé sur"
 
 #. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_g2p_id_type__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_idpass
 #: model:ir.model.fields.selection,name:spp_idpass.selection__spp_id_pass__expiry_length_type__days
 msgid "Days"
 msgstr "Journées"
@@ -111,6 +146,11 @@ msgstr "Abonnés"
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Abonnés (Partenaires)"
+
+#. module: spp_idpass
+#: model:ir.model.fields.selection,name:spp_idpass.selection__g2p_id_type__target_type__group
+msgid "Group"
+msgstr ""
 
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__has_message
@@ -155,7 +195,7 @@ msgstr "Configuration ID PASS"
 #. module: spp_idpass
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
-msgid "ID PASS Error: %s Code: %s"
+msgid "ID PASS Error: %(reason)s Code: %(code)s"
 msgstr ""
 
 #. module: spp_idpass
@@ -179,11 +219,6 @@ msgid "ID Pass"
 msgstr "ID Pass"
 
 #. module: spp_idpass
-#: model_terms:ir.ui.view,arch_db:spp_idpass.view_spp_idpass_tree
-msgid "ID Pass Configuration"
-msgstr ""
-
-#. module: spp_idpass
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
 msgid "ID Pass Error: No API set"
@@ -196,9 +231,19 @@ msgid "ID Pass has been Generated:"
 msgstr "ID Pass a été généré :"
 
 #. module: spp_idpass
+#: model:ir.model,name:spp_idpass.model_g2p_id_type
+msgid "ID Type"
+msgstr ""
+
+#. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__idpass_id
 msgid "IDPass ID"
 msgstr "ID Pass ID"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__id_type
+msgid "Id Type"
+msgstr ""
 
 #. module: spp_idpass
 #: model:ir.model.fields,help:spp_idpass.field_res_partner__message_needaction
@@ -217,6 +262,11 @@ msgstr "Si cochée, certains messages présentent une erreur de livraison."
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__image_1920_filename
 #: model:ir.model.fields,field_description:spp_idpass.field_res_users__image_1920_filename
 msgid "Image 1920 FileName"
+msgstr ""
+
+#. module: spp_idpass
+#: model:ir.model.fields.selection,name:spp_idpass.selection__g2p_id_type__target_type__individual
+msgid "Individual"
 msgstr ""
 
 #. module: spp_idpass
@@ -324,6 +374,11 @@ msgid "SMS Delivery error"
 msgstr "Erreur de livraison SMS"
 
 #. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_g2p_id_type__target_type
+msgid "Target Type"
+msgstr ""
+
+#. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
 msgid "Template"
 msgstr "Modèle"
@@ -348,6 +403,16 @@ msgstr "Messages non lus"
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_unread_counter
 msgid "Unread Messages Counter"
 msgstr "Compteur de messages non lus"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: spp_idpass
+#: model:ir.model.fields,help:spp_idpass.field_res_partner__website_message_ids
+msgid "Website communication history"
+msgstr ""
 
 #. module: spp_idpass
 #: model:ir.model.fields.selection,name:spp_idpass.selection__spp_id_pass__expiry_length_type__years
