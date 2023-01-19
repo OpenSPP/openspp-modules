@@ -34,7 +34,7 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "Date Distributed"
 msgid "%s batch(es) are distributed."
-msgstr "Date de distribution"
+msgstr ""
 
 #. module: spp_idqueue
 #: code:addons/spp_idqueue/models/id_batch.py:0
