@@ -45,11 +45,7 @@ class ChangeRequestBase(models.Model):
     _order = "id desc"
     _check_company_auto = True
 
-    def _default_name(self):
-        name = self.env["ir.sequence"].next_by_code("spp.change.request.num")
-        return name
-
-    name = fields.Char("Request #", required=True, default=_default_name)
+    name = fields.Char("Request #", required=True, default="NEW")
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
     date_requested = fields.Datetime()  # Date the change request was submitted
     request_type = fields.Selection(
@@ -164,6 +160,7 @@ class ChangeRequestBase(models.Model):
         # Assign the CR to the current user by default
         if "assign_to_id" not in vals or vals["assign_to_id"] is None:
             vals["assign_to_id"] = self.env.user.id
+        vals["name"] = self.env["ir.sequence"].next_by_code("spp.change.request.num")
         res = super(ChangeRequestBase, self).create(vals)
         # Create pending validation activity
         activity_type = "spp_change_request.pending_validation_activity"
@@ -897,9 +894,9 @@ class ChangeRequestBase(models.Model):
                     and validator_id not in stage.validation_group_id.users.ids
                 ):
                     message = _(
-                        f"You are not allowed to validate this request! Stage: {stage.stage_id.name}. "
-                        f"Allowed Validator Group: {stage.validation_group_id.name}"
-                    )
+                        "You are not allowed to validate this request! Stage: {}. "
+                        "Allowed Validator Group: {}"
+                    ).format(stage.stage_id.name, stage.validation_group_id.name)
                     stage = None
             else:
                 message = _(

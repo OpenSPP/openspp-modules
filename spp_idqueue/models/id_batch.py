@@ -112,8 +112,8 @@ class OpenSPPPrintBatch(models.Model):
             )
             rec.save_to_mail_thread(message_1)
 
-        message = _(
-            f"{ctr_batch or ''} Batch(es) with total of {ctr_ids or ''} IDs are being generated."
+        message = _("{} Batch(es) with total of {} IDs are being generated.").format(
+            ctr_batch or "", ctr_ids or ""
         )
         kind = "info"
         return {

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-25 13:22+0000\n"
-"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"PO-Revision-Date: 2023-01-18 11:50+0000\n"
+"Last-Translator: sajjad alkantale <sajjadjameel68@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_event_demo/ar/>\n"
 "Language: ar\n"
@@ -95,6 +95,16 @@ msgid "Created on"
 msgstr "انشأ على"
 
 #. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__description
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__description
 msgid "Description"
@@ -104,7 +114,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__disabled
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__disabled
 msgid "Disabled"
-msgstr ""
+msgstr "ايقاف"
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__display_name

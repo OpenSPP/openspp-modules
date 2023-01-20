@@ -183,6 +183,11 @@ msgid "Assign To Any"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_id_domain
+msgid "Assign To Id Domain"
+msgstr ""
+
+#. module: spp_change_request
 #: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
 #, python-format
 msgid "Assign this change request to:"
@@ -205,6 +210,12 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "CR Reset to Draft"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
 msgid "Cancel"
@@ -217,6 +228,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #, python-format
 msgid "Cancel Change Request"
+msgstr ""
+
+#. module: spp_change_request
+#: model:mail.activity.type,name:spp_change_request.cancel_activity
+msgid "Cancel Request"
 msgstr ""
 
 #. module: spp_change_request
@@ -275,6 +291,12 @@ msgid "Change Request Cancel Wizard"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Change Request Cancelled"
+msgstr ""
+
+#. module: spp_change_request
 #: model:dms.access.group,name:spp_change_request.dms_access_group
 msgid "Change Request DMS Group"
 msgstr ""
@@ -306,8 +328,19 @@ msgid "Change Request Pending Validation"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Change Request Rejected"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_reject_wizard
 msgid "Change Request Rejection Wizard"
+msgstr ""
+
+#. module: spp_change_request
+#: model:mail.activity.type,name:spp_change_request.reset_draft_activity
+msgid "Change Request Reset to Draft"
 msgstr ""
 
 #. module: spp_change_request
@@ -369,6 +402,13 @@ msgid "Change Request Validators"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_res_partner__change_request_ids
+#: model:ir.model.fields,field_description:spp_change_request.field_res_users__change_request_ids
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_group_ext_form_custom_spp_cr
+msgid "Change Requests"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validated
 msgid "Click the create button to enter a new change request."
@@ -398,6 +438,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
 msgid "Confirm"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_res_partner
+msgid "Contact"
 msgstr ""
 
 #. module: spp_change_request
@@ -436,6 +481,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_dms_file__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_change_request.field_res_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__dms_directory_ids
@@ -531,6 +577,13 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__end_date
 msgid "End Date"
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid ""
+"Error in validation stages. No available stage to assign to this validation."
 msgstr ""
 
 #. module: spp_change_request
@@ -860,6 +913,7 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_reject_wizard
+#: model:mail.activity.type,name:spp_change_request.reject_activity
 #, python-format
 msgid "Reject Change Request"
 msgstr ""
@@ -913,6 +967,7 @@ msgstr ""
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_tree
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_group_ext_form_custom_spp_cr
 msgid "Requested By"
 msgstr ""
 
@@ -1071,6 +1126,24 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
+msgid "The change request was cancelled by %s."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request was rejected by %s."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request was reset to draft."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
 msgid "The request must be in draft state to be set to pending validation."
 msgstr ""
 
@@ -1162,6 +1235,12 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "There are no user assigned to this change request."
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no validators defined for this request."
 msgstr ""
 
 #. module: spp_change_request
@@ -1288,4 +1367,12 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "You are not allowed to %s this change request"
+msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid ""
+"You are not allowed to validate this request! Stage: {}. Allowed Validator "
+"Group: {}"
 msgstr ""

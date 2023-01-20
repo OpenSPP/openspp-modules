@@ -173,14 +173,17 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </h1>
                         <label for="request_type" string="Request Type:" />
                         <h2>
-                            <field name="request_type" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field
+                                name="request_type"
+                                attrs="{'readonly':['|', ('state','!=','draft'), ('request_type_ref_id','!=',False)]}"
+                            />
                         </h2>
                         <label for="registrant_id" string="Registrant:" />
                         <h2>
                             <field
                                 name="registrant_id"
                                 options="{'no_create': True,'no_open':True}"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                attrs="{'readonly':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
                                 class="oe_inline"
                             />
                             <field
@@ -189,7 +192,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 icon="fa-qrcode"
                                 string="Scan QR Code"
                                 colspan="4"
-                                attrs="{'invisible':[('state','!=','draft')]}"
+                                attrs="{'invisible':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
                                 class="oe_inline"
                                 style="margin-left: 10px;"
                             />
@@ -199,7 +202,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <field
                                 name="applicant_id"
                                 options="{'no_create': True,'no_open':True}"
-                                attrs="{'readonly':['!',('state','!=','draft'),('id_document_details','!=',False)]}"
+                                attrs="{'readonly':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
                                 domain="applicant_id_domain"
                                 required="1"
                                 force_save="1"
@@ -212,7 +215,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 icon="fa-id-card-o"
                                 string="Scan ID Document"
                                 colspan="4"
-                                attrs="{'invisible':[('state','!=','draft')]}"
+                                attrs="{'invisible':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
                                 style="margin-left: 10px;"
                                 class="oe_inline"
                             />

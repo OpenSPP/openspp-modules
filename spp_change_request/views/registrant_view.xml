@@ -1,0 +1,42 @@
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <!-- groups view-->
+
+    <record id="view_group_ext_form_custom_spp_cr" model="ir.ui.view">
+        <field name="name">view_group_ext_form_custom_spp_cr</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other']" position="before">
+                <page string="Change Requests">
+                    <field name="change_request_ids" readonly="1" nolabel="1">
+                        <tree editable="top">
+                            <field name="name" />
+                            <field name="date_requested" />
+                            <field name="create_uid" string="Requested By" widget="many2one_avatar_user" />
+                            <field name="request_type" />
+                            <field name="registrant_id" invisible="1" />
+                            <field name="applicant_id" />
+                            <field name="request_type_ref_id" invisible="1" />
+                            <field name="assign_to_id" widget="many2one_avatar_user" />
+                            <field name="date_rejected" invisible="1" />
+                            <field name="company_id" groups="base.group_multi_company" />
+                            <field
+                                name="state"
+                                decoration-info="state=='draft'"
+                                decoration-primary="state=='pending'"
+                                decoration-warning="state=='validated'"
+                                decoration-success="state=='applied'"
+                                decoration-danger="state=='rejected'"
+                                widget="badge"
+                            />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,10 +1,11 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: 8f633a6
+_commit: 79935fe
 _src_path: https://github.com/openspp/openspp-odoo-addons-repo-template.git
 ci: GitHub
 dependency_installation_mode: OCA
 generate_requirements_txt: true
 github_check_license: false
+github_ci_extra_env: {}
 github_enable_codecov: true
 github_enable_makepot: true
 github_enable_stale_action: true

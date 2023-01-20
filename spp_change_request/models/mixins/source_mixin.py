@@ -264,25 +264,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                             "tag": "display_notification",
                             "params": {
                                 "title": _("Change Request Validated"),
-                                "message": message + " %s",
-                                "links": [
-                                    {
-                                        "label": "Refresh Page",
-                                    }
-                                ],
+                                "message": message,
+                                "next": {
+                                    "type": "ir.actions.act_window_close",
+                                },
                                 "sticky": True,
                                 "type": "success",
                             },
                         }
 
-                        # Use Rainbowman
-                        # return {
-                        #     'effect': {
-                        #         'fadeout': 'slow',
-                        #         'message': message,
-                        #         'type': 'rainbow_man',
-                        #     }
-                        # }
                     if request.state == "applied":
                         message = _(
                             "The change request has been validated and the changes has been applied"
@@ -292,24 +282,14 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                             "tag": "display_notification",
                             "params": {
                                 "title": _("Change Request Applied"),
-                                "message": message + " %s",
-                                "links": [
-                                    {
-                                        "label": "Refresh Page",
-                                    }
-                                ],
+                                "message": message,
+                                "next": {
+                                    "type": "ir.actions.act_window_close",
+                                },
                                 "sticky": True,
                                 "type": "success",
                             },
                         }
-                        # Use Rainbowman
-                        # return {
-                        #     'effect': {
-                        #         'fadeout': 'slow',
-                        #         'message': message,
-                        #         'type': 'rainbow_man',
-                        #     }
-                        # }
 
                     message = _("The change request has been partially validated")
                     return {
@@ -406,15 +386,25 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         self.ensure_one()
         if request.state in ("draft", "pending", "rejected", "validated"):
+            # Mark previous activity as 'done'
+            request.last_activity_id.action_done()
+            # Create validation activity
+            activity_type = "spp_change_request.cancel_activity"
+            summary = _("Change Request Cancelled")
+            note = _("The change request was cancelled by %s.", self.env.user.name)
+            activity = request._generate_activity(activity_type, summary, note)
+
+            # Update the Request
             request.update(
                 {
                     "state": "cancelled",
                     "cancelled_by_id": self.env.user.id,
                     "date_cancelled": fields.Datetime.now(),
                     "validator_ids": [(Command.clear())],
+                    "last_activity_id": activity.id,
                 }
             )
-            # Mark previous activity as 'done'
+            # Mark cancel activity as 'done' because there are no re-activation after cancellation of CR
             request.last_activity_id.action_done()
         else:
             raise UserError(
@@ -442,16 +432,24 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         self.ensure_one()
 
         if request.state == "rejected":
+            # Mark previous activity as 'done'
+            request.last_activity_id.action_done()
+            # Create validation activity
+            activity_type = "spp_change_request.reset_draft_activity"
+            summary = _("CR Reset to Draft")
+            note = _("The change request was reset to draft.")
+            activity = request._generate_activity(activity_type, summary, note)
+
+            # Update the Request
             request.update(
                 {
                     "date_requested": fields.Datetime.now(),
                     "reset_to_draft_by_id": self.env.user.id,
                     "state": "draft",
                     "validator_ids": [(Command.clear())],
+                    "last_activity_id": activity.id,
                 }
             )
-            # Mark previous activity as 'done'
-            request.last_activity_id.action_done()
         else:
             raise UserError(
                 _(
@@ -492,6 +490,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         # Check if CR is assigned to current user
         if request._check_user("Reject", auto_assign=True):
             if request.state in ("draft", "pending"):
+                # Mark previous activity as 'done'
+                request.last_activity_id.action_done()
+                # Create validation activity
+                activity_type = "spp_change_request.reject_activity"
+                summary = _("Change Request Rejected")
+                note = _("The change request was rejected by %s.", self.env.user.name)
+                activity = request._generate_activity(activity_type, summary, note)
+
+                # Update the Request
                 request.update(
                     {
                         "state": "rejected",
@@ -499,10 +506,9 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         "rejected_by_id": self.env.user.id,
                         "date_rejected": fields.Datetime.now(),
                         "validator_ids": [(Command.clear())],
+                        "last_activity_id": activity.id,
                     }
                 )
-                # Mark previous activity as 'done'
-                request.last_activity_id.action_done()
             else:
                 raise UserError(
                     _(

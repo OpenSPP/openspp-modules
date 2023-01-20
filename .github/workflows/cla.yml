@@ -24,7 +24,7 @@ jobs:
           path-to-document: "https://github.com/openspp/openspp-cla/tree/main" # e.g. a CLA or a DCO document
           # branch should not be protected
           branch: "main"
-          allowlist: dependabot-preview[bot],greenkeeper[bot]
+          allowlist: dependabot-preview[bot],greenkeeper[bot],dependabot[bot]
           remote-organization-name: openspp
           remote-repository-name: openspp-cla
           #below are the optional inputs - If the optional inputs are not given, then default values will be taken

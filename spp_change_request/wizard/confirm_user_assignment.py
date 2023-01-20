@@ -1,4 +1,5 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import json
 import logging
 
 from odoo import _, api, fields, models
@@ -36,6 +37,9 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
         "res.users", "Currently Assigned to", related="change_request_id.assign_to_id"
     )
     assign_to_id = fields.Many2one("res.users", "User")
+    assign_to_id_domain = fields.Char(
+        compute="_compute_assign_to_id_domain",
+    )
     dialog_message = fields.Text(compute="_compute_message_assignment")
     assign_to_any = fields.Boolean(compute="_compute_message_assignment")
     assign_to = fields.Boolean(default=False)
@@ -55,3 +59,23 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
                     "assign_to_any": assign_to_any,
                 }
             )
+
+    @api.depends("assign_to_id")
+    def _compute_assign_to_id_domain(self):
+
+        group_ids = [
+            self.env.ref("spp_change_request.group_spp_change_request_agent").id,
+            self.env.ref("spp_change_request.group_spp_change_request_validator").id,
+            self.env.ref("spp_change_request.group_spp_change_request_applicator").id,
+            self.env.ref(
+                "spp_change_request.group_spp_change_request_administrator"
+            ).id,
+        ]
+
+        user_group_ids = self.env.user.groups_id.ids
+
+        same_group_ids = list(set(user_group_ids).intersection(group_ids))
+        domain = [("groups_id", "in", same_group_ids)]
+
+        for rec in self:
+            rec.assign_to_id_domain = json.dumps(domain)
