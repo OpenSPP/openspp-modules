@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-18 11:50+0000\n"
-"Last-Translator: sajjad alkantale <sajjadjameel68@gmail.com>\n"
+"PO-Revision-Date: 2023-01-24 01:58+0000\n"
+"Last-Translator: Mohammed Alateya <mohammadalbaqer@gmail.com>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_idqueue/ar/>\n"
 "Language: ar\n"
@@ -529,7 +529,7 @@ msgstr "الاسم"
 #. module: spp_idqueue
 #: model:ir.ui.menu,name:spp_idqueue.menuspp_id_mgmt
 msgid "ID Management"
-msgstr ""
+msgstr "ادارة البطاقات"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__id_pdf
