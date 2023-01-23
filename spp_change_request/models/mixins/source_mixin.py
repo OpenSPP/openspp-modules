@@ -101,6 +101,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     )
 
     def _update_registrant_id(self, res):
+
         for rec in res:
             if rec.registrant_id:
                 rec.change_request_id.update({"registrant_id": rec.registrant_id.id})
@@ -556,6 +557,13 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     self.env["pds.change.request.src.grp"].create(group_members)
 
     def open_applicant_details_form(self):
+        """
+        Opens the view form to show details of applicant
+
+        :return ditc action: form view action
+
+        :raise:
+        """
         self.ensure_one()
         res_id = self.applicant_id.id
         form_id = self.env.ref("g2p_registry_individual.view_individuals_form").id
@@ -578,6 +586,16 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         return action
 
     def open_user_assignment_wiz(self):
+        """
+        Called whenever a user reassign the CR to him/her or to other user
+
+        Reassign a CR to current user if CR is assigned to other user else
+        Opens a wizard form to show a selection of users to be reassign
+
+        :return: action
+
+        :raise UserError: Exception raised when something is not valid.
+        """
         for rec in self:
             assign_self = False
             if rec.change_request_id.assign_to_id:
@@ -607,6 +625,16 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 self.change_request_id.assign_to_user(self.env.user)
 
     def open_user_assignment_to_wiz(self):
+        """
+        Called whenever a user reassign the CR to him/her or to other user
+
+        Reassign a CR to current user if CR is assigned to other user else
+        Opens a wizard form to show a selection of users to be reassign
+
+        :return: action
+
+        :raise UserError: Exception raised when something is not valid.
+        """
         for rec in self:
             form_id = self.env.ref(
                 "spp_change_request.change_request_user_assign_wizard"
@@ -629,6 +657,12 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     @api.depends("assign_to_id")
     def _compute_current_user_assigned(self):
+        """
+        Gets the current user assigned on the Change Request
+
+        :return:
+        :raise:
+        """
         for rec in self:
             rec.current_user_assigned = False
             if self.env.context.get("uid", False) == rec.assign_to_id.id:

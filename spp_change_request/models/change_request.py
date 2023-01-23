@@ -353,6 +353,16 @@ class ChangeRequestBase(models.Model):
                 )
 
     def open_change_request_form(self, target="current", mode="readonly"):
+        """
+        Opens the form view of the request_type_ref model
+
+        :param str target:
+        :param str readonly:
+
+        :return dict action: form view action
+
+        :raise:
+        """
         self.ensure_one()
         if self.request_type_ref_id:
             # Get the res_model and res_id from the request_type_ref_id (reference field)
@@ -395,6 +405,16 @@ class ChangeRequestBase(models.Model):
         }
 
     def open_applicant_form(self, target="current", mode="readonly"):
+        """
+        Opens the form view of the applicant_id to view details
+
+        :param str target:
+        :param str readonly:
+
+        :return dict action: form view action
+
+        :raise:
+        """
         self.ensure_one()
         if self.applicant_id:
             res_id = self.applicant_id.id
@@ -512,6 +532,14 @@ class ChangeRequestBase(models.Model):
             )
 
     def open_request_detail(self):
+        """
+        Validate Phone then Opens the form view of the request_type_ref model
+
+        :return dict action: form view action
+
+        :raise UserError: Exception raised when applicant_phone is not existing.
+        """
+
         self._check_phone_exist()
         for rec in self:
             # Open Request Form
@@ -609,6 +637,13 @@ class ChangeRequestBase(models.Model):
             raise UserError(_("Phone No. is required."))
 
     def create_request_detail(self):
+        """
+        Creates the request_type_ref recod then opens the form view of the request_type_ref model
+
+        :return dict action: form view action
+
+        :raise UserError: Exception raised when applicant_phone is not existing.
+        """
         self._check_phone_exist()
 
         for rec in self:
@@ -786,7 +821,7 @@ class ChangeRequestBase(models.Model):
         """
         Opens reject wizard form
 
-        :param:.
+        :param:
 
         :return: action
         :rtype: dict
