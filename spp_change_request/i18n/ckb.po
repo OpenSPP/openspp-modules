@@ -216,6 +216,11 @@ msgid "CR Reset to Draft"
 msgstr ""
 
 #. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "CREATE"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
 msgid "Cancel"
