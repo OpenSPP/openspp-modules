@@ -245,7 +245,16 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             string="NEXT"
                             icon="fa-chevron-circle-right"
                             class="btn-primary"
-                            attrs="{'invisible':[('request_type_ref_id','!=',False)]}"
+                            attrs="{'invisible':['|', ('request_type_ref_id','!=',False), ('id', '=', False)]}"
+                            style="margin-left: 10px;"
+                        />
+                        <button
+                            name="create_request_detail_no_redirect"
+                            type="object"
+                            string="CREATE"
+                            icon="fa-chevron-circle-right"
+                            class="btn-primary"
+                            attrs="{'invisible':['|', ('request_type_ref_id','!=',False), ('id', '!=', False)]}"
                             style="margin-left: 10px;"
                         />
                         <button
@@ -309,6 +318,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     <field name="request_type_ref_id" invisible="1" />
                     <field name="last_activity_id" invisible="1" />
                     <field name="applicant_id_domain" invisible="1" />
+                    <field name="id" invisible="1" />
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" />

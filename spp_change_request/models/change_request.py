@@ -531,6 +531,10 @@ class ChangeRequestBase(models.Model):
         if not self.applicant_phone:
             raise UserError(_("Phone No. is required."))
 
+    def create_request_detail_no_redirect(self):
+        # Called the function without return
+        self.create_request_detail()
+
     def create_request_detail(self):
         self._check_phone_exist()
 
