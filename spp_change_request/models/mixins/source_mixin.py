@@ -711,6 +711,28 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     _("There are no directories defined for this change request.")
                 )
 
+    def open_registrant_details_form(self):
+        self.ensure_one()
+        res_id = self.registrant_id.id
+        form_id = self.env.ref("g2p_registry_group.view_groups_form").id
+        action = self.env["res.partner"].get_formview_action()
+        context = {
+            "create": False,
+            "edit": False,
+            "hide_from_cr": 1,
+        }
+        action.update(
+            {
+                "name": _("Registrant Details"),
+                "views": [(form_id, "form")],
+                "res_id": res_id,
+                "target": "new",
+                "context": context,
+                "flags": {"mode": "readonly"},
+            }
+        )
+        return action
+
     #
     # def upload_dms(self, file, document_number, category=None):
     #     # TODO: Get the directory_id based on document type
