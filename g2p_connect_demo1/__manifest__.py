@@ -2,7 +2,7 @@
 {
     "name": "OpenG2P Connect Demo",
     "category": "OpenG2P",
-    "version": "15.0.0.0.1",
+    "version": "15.0.0.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/openspp/openspp-demo",
