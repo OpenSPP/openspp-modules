@@ -696,11 +696,6 @@ msgid "Incorrect phone number format"
 msgstr ""
 
 #. module: spp_change_request
-#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
-msgid "Internal / Human Resource"
-msgstr ""
-
-#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_is_follower
 msgid "Is Follower"
 msgstr ""
