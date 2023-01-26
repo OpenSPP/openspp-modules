@@ -2,7 +2,7 @@
 {
     "name": "G2P Program Entitlement (Cash)",
     "category": "G2P",
-    "version": "15.0.0.0.1",
+    "version": "15.0.0.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/openspp/openspp-program",
