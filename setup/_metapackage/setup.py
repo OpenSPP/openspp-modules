@@ -8,7 +8,7 @@ setuptools.setup(
     description="Meta package for openspp-openspp-demo Odoo addons",
     version=version,
     install_requires=[
-        'odoo-addon-g2p_connect_demo1>=15.0dev,<15.1dev',
+        'odoo-addon-g2p_connect_demo>=15.0dev,<15.1dev',
         'odoo-addon-spp_base_demo>=15.0dev,<15.1dev',
         'odoo-addon-spp_demo>=15.0dev,<15.1dev',
     ],
