@@ -216,6 +216,11 @@ msgid "CR Reset to Draft"
 msgstr ""
 
 #. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "CREATE"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
 msgid "Cancel"
@@ -693,11 +698,6 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "Incorrect phone number format"
-msgstr ""
-
-#. module: spp_change_request
-#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
-msgid "Internal / Human Resource"
 msgstr ""
 
 #. module: spp_change_request
