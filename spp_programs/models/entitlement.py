@@ -33,6 +33,7 @@ class InKindEntitlement(models.Model):
         help="A beneficiary",
         required=True,
         domain=[("is_registrant", "=", True)],
+        index=True,
     )
     service_point_id = fields.Many2one("spp.service.point", "Service Point")
 
