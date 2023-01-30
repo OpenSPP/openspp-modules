@@ -33,11 +33,13 @@
         # "spp_pos",
         # "spp_sms",
         "queue_job",
+        "spp_change_request_add_children_demo",
     ],
     "external_dependencies": {"python": ["faker"]},
     "data": [
         "security/ir.model.access.csv",
         "views/generate_data_view.xml",
+        "views/generate_change_request_data_view.xml",
         "views/groups_view.xml",
         "views/individuals_view.xml",
     ],

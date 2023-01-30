@@ -2,5 +2,6 @@
 
 from . import registrant
 from . import generate_group
+from . import generate_change_request
 from . import individual
 from . import group
