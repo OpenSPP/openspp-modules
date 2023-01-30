@@ -66,7 +66,8 @@ class OpenG2PGenerateData(models.Model):
         ]
         fake = Faker(locales)
 
-        sex_choice_range = ["Female", "Male"] * 50 + ["Other"]
+        # sex_choice_range = ["Female", "Male"] * 50 + ["Other"]
+        sex_choice_range = ["Female", "Male"] * 50
         age_group_range = ["A", "C", "N"] * 2 + ["E"]
         group_size_range = (
             list(range(1, 2)) * 2 + list(range(3, 5)) * 4 + list(range(6, 8))
@@ -89,6 +90,10 @@ class OpenG2PGenerateData(models.Model):
             vals = {"name": "slcb", "bic": "10010010"}
             # TODO set the country
             bank_id = self.env["res.bank"].create(vals)
+
+        # Get area center ids
+        center_areas = self.env["spp.area"].search([("parent_id", "!=", False)])
+        center_area_ids = center_areas.mapped("id")
 
         for i in range(0, num_groups):
             locale = random.choice(locales)
@@ -147,7 +152,7 @@ class OpenG2PGenerateData(models.Model):
                 "street2": fake[locale].street_name(),
                 "city": fake[locale].city(),
                 "zip": fake[locale].postcode(),
-                "area_id": random.choice([4, 51, 41]),
+                "area_id": random.choice(center_area_ids),
                 "bank_ids": bank_ids,
             }
 

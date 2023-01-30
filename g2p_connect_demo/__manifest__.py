@@ -25,7 +25,7 @@
         "spp_idqueue",
         # "spp_helpdesk",
         "spp_area",
-        "spp_custom_filter",
+        # "spp_custom_filter",
         "spp_change_request",
         "spp_event_data",
         "spp_service_points",
