@@ -10,6 +10,7 @@ git+https://github.com/openspp/openspp-registry@15.0#subdirectory=setup/spp_cust
 git+https://github.com/openspp/openspp-odoo-external-dependencies@15.0#subdirectory=setup/odoo_dynamic_dashboard
 git+https://github.com/openspp/openspp-program@15.0#subdirectory=setup/spp_dashboard
 git+https://github.com/openspp/openspp-registry@15.0#subdirectory=setup/spp_idpass
+git+https://github.com/openspp/openspp-registry@15.0#subdirectory=setup/spp_event_data
 git+https://github.com/openspp/openspp-registry@15.0#subdirectory=setup/spp_change_request
 git+https://github.com/openspp/openspp-theme@15.0#subdirectory=setup/theme_openspp
 git+https://github.com/openspp/openspp-program@15.0#subdirectory=setup/spp_pos
