@@ -141,6 +141,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         This method is called when the Change Request is requested for validation by a user.
 
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_submit"
+                type="object"
+            />
+
         :raise ValidationError: Exception raised when something is not valid.
         """
         for rec in self:
@@ -189,6 +198,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     def action_validate(self):
         """
         This method is called when the Change Request is validated by a user.
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_validate"
+                type="object"
+            />
 
         :raise ValidationError: Exception raised when something is not valid.
         """
@@ -319,6 +337,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         This method is called when the Change Request is applied to the live data.
 
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_apply"
+                type="object"
+            />
+
         :raise ValidationError: Exception raised when something is not valid.
         """
         for rec in self:
@@ -358,6 +385,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     def action_cancel(self):
         """
         This method is called when the Change Request is applied to the live data.
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_cancel"
+                type="object"
+            />
 
         :raise ValidationError: Exception raised when something is not valid.
         """
@@ -418,6 +454,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         This method is called when the Change Request is applied to the live data.
 
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_reset_to_draft"
+                type="object"
+            />
+
         :raise ValidationError: Exception raised when something is not valid.
         """
         for rec in self:
@@ -460,7 +505,16 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def action_reject(self):
         """
-        This method is called when the user click on reject during the validation process.
+        This method is called when the Change Request is Reset to Draft by a user.
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_reset_to_draft"
+                type="object"
+            />
         """
         self.ensure_one()
 
@@ -486,6 +540,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :param request: The request.
         :param rejected_remarks: the reason for the rejection
         :return:
+
+        :raise UserError: Exception raised when something is not valid.
         """
         self.ensure_one()
         # Check if CR is assigned to current user
@@ -558,9 +614,29 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def open_applicant_details_form(self):
         """
-        Opens the view form to show details of applicant
+        Get and opens the form view of the applicant_id to view details
 
-        :return ditc action: form view action
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_applicant_details_form"
+                type="object"
+            />
+
+        NOTE:
+        - To add or modify some key-value pair, either call or super this function
+
+        example:
+            def open_applicant_details_form(self):
+                action = super().open_applicant_details_form()
+
+                action.update({'key': 'value'})
+
+                return action
+
+        :return dict action: form view action
 
         :raise:
         """
@@ -591,6 +667,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
         Reassign a CR to current user if CR is assigned to other user else
         Opens a wizard form to show a selection of users to be reassign
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_user_assignment_wiz"
+                type="object"
+            />
 
         :return: action
 
@@ -630,6 +715,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
         Reassign a CR to current user if CR is assigned to other user else
         Opens a wizard form to show a selection of users to be reassign
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_user_assignment_to_wiz"
+                type="object"
+            />
 
         :return: action
 
@@ -756,40 +850,30 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     _("There are no directories defined for this change request.")
                 )
 
-    #
-    # def upload_dms(self, file, document_number, category=None):
-    #     # TODO: Get the directory_id based on document type
-    #     # Get the first directory for now
-    #     if self.dms_directory_ids:
-    #         if self._origin:
-    #             directory_id = self._origin.dms_directory_ids[0].id
-    #         else:
-    #             directory_id = self.dms_directory_ids[0].id
-    #         category_id = None
-    #         if category:
-    #             category_id = self.env.ref(category).id
-    #             category = self.env["dms.category"].search([("id", "=", category_id)])
-    #             if category:
-    #                 category_id = category[0].id
-    #             else:
-    #                 raise UserError(
-    #                     _("The required document category is not configured.")
-    #                 )
-    #         vals = {
-    #             "name": f"UID-{document_number}",
-    #             "directory_id": directory_id,
-    #             "category_id": category_id,
-    #             "content": file,
-    #         }
-    #         self.env["dms.file"].create(vals)
-    #     else:
-    #         raise UserError(
-    #             _("There are no directories defined for this change request.")
-    #         )
-
     def open_registrant_details_form(self):
         """
         Opens a modal form that consists of registrant's details
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_registrant_details_form"
+                type="object"
+            />
+
+        NOTE:
+        - This function is used on several files. Be careful on updating this function.
+        - To add or modify some key-value pair, either call or super this function
+
+        example:
+            def open_registrant_details_form(self):
+                action = super().open_registrant_details_form()
+
+                action.update({'key': 'value'})
+
+                return action
 
         :return dict action: form view action
 

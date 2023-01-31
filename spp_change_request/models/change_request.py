@@ -152,9 +152,18 @@ class ChangeRequestBase(models.Model):
     @api.model
     def create(self, vals):
         """
-        This method is overrides the default create method of model.
+        Creates a record for this model and generate activity
 
-        Called whenever a record is created
+        Usage:
+
+        - Add/Update key-value pair on vals before calling super
+        - Generate activity and add the activity to the result of super
+
+        :param dict vals: field name and value pair
+
+        :return dict res:
+
+        :raise:
         """
 
         # Assign the CR to the current user by default
@@ -173,6 +182,20 @@ class ChangeRequestBase(models.Model):
         return res
 
     def unlink(self):
+        """
+        This method overrides the default unlink method of model.
+
+        Unlink Change request type reference of the record then delete the record.
+        Can only be deleted when these conditions are met:
+        - state is 'draft'
+        - current user is the who creates the record
+
+        :param:
+
+        :return:
+
+        :raise:
+        """
         for rec in self:
             # Only allow the deletion of draft change requests by the user who created it
             if rec.state == "draft" and rec.create_uid == self.env.user:
@@ -209,7 +232,14 @@ class ChangeRequestBase(models.Model):
         """
         Called whenever registrant_id field is changed
 
-        This method updates other fields to None
+        Remove applicant_id field's value and applicant_phone field's value in the UI
+        whenever the user is selecting values in registrant_id field
+
+        :param:
+
+        :return:
+
+        :raise:
         """
 
         if self.registrant_id:
@@ -225,7 +255,13 @@ class ChangeRequestBase(models.Model):
         """
         Called whenever applicant_id field is changed
 
-        This method updates the applicant_phone field based on phone of applicant_id
+        This method updates the applicant_phone field based on phone field of applicant_id
+
+        :param:
+
+        :return:
+
+        :raise:
         """
         if self.applicant_id:
             vals = {
@@ -243,6 +279,12 @@ class ChangeRequestBase(models.Model):
         Called whenever registrant_id and applicant_phone field are saved
 
         This method checks the format of applicant_phone
+
+        :param:
+
+        :return:
+
+        :raise ValidationError: Exception raised when phone number format is not valid.
         """
         for rec in self:
             country_code = (
@@ -272,6 +314,9 @@ class ChangeRequestBase(models.Model):
         Updates other fields based on the field value of id_document_details
 
         id_document_details must be a JSON Serializable
+
+        NOTE: Must be used in conjunction with an ID document scanner.
+            : e.g. passport scanner, qr code scanner
 
         :return:
 
@@ -319,6 +364,9 @@ class ChangeRequestBase(models.Model):
 
         qr_code_details must be a JSON Serializable
 
+        NOTE: Must be used in conjunction with an ID document scanner.
+            : e.g. passport scanner, qr code scanner
+
         :return:
 
         :raise UserError: Exception raised when something is not valid.
@@ -354,7 +402,31 @@ class ChangeRequestBase(models.Model):
 
     def open_change_request_form(self, target="current", mode="readonly"):
         """
-        Opens the form view of the request_type_ref model
+        Get and opens the form view or validation form view of the selected request type of the Change Request
+        based on the context passed in env
+
+        Returns an error display notification when no request type is selected.
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_change_request_form"
+                type="object"
+            />
+
+        NOTE: To change the values of a parameter and use it to xml, I suggest you to create a new function and
+              call this function with different arguments
+
+        example:
+            def new_open_request_form(self):
+                return self.open_change_request_form(target="<other_value>", mode="<other_value>")
+
+            <button
+                name="new_open_request_form"
+                type="object"
+            />
 
         :param str target:
         :param str readonly:
@@ -406,7 +478,30 @@ class ChangeRequestBase(models.Model):
 
     def open_applicant_form(self, target="current", mode="readonly"):
         """
-        Opens the form view of the applicant_id to view details
+        Get and opens the form view of the applicant_id to view details
+
+        Returns an error display notification when no applicant is selected.
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_applicant_form"
+                type="object"
+            />
+
+        NOTE: To change the values of a parameter and use it to xml, I suggest you to create a new function and
+              call this function with different arguments
+
+        example:
+            def new_open_request_form(self):
+                return self.open_applicant_form(target="<other_value>", mode="<other_value>")
+
+            <button
+                name="new_open_request_form"
+                type="object"
+            />
 
         :param str target:
         :param str readonly:
@@ -455,6 +550,15 @@ class ChangeRequestBase(models.Model):
         Reassign a CR to current user if CR is assigned to other user else
         Opens a wizard form to show a selection of users to be reassign
 
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_user_assignment_wiz"
+                type="object"
+            />
+
         :return: action
 
         :raise UserError: Exception raised when something is not valid.
@@ -486,7 +590,7 @@ class ChangeRequestBase(models.Model):
 
     def assign_to_user(self, user):
         """
-        Add user to assign_to_id field
+        Add user to assign_to_id field when certain conditions are met
 
         :param res.user user: record of the user.
 
@@ -496,6 +600,8 @@ class ChangeRequestBase(models.Model):
         :example:
 
         >>> self.assign_to_user(self.env.user)
+
+        :raise UserError: Exception raised when something is not valid.
         """
 
         self.ensure_one()
@@ -533,7 +639,7 @@ class ChangeRequestBase(models.Model):
 
     def open_request_detail(self):
         """
-        Validate Phone then Opens the form view of the request_type_ref model
+        Validate Phone then Opens the form view of the selected request type
 
         :return dict action: form view action
 
@@ -545,88 +651,6 @@ class ChangeRequestBase(models.Model):
             # Open Request Form
             return rec.open_change_request_form(target="current", mode="edit")
 
-    # def prepare_directory(self):
-    #     """
-    #     Prepare the directory for the change request attachments
-    #     """
-    #     self.ensure_one()
-    #     root_dir = self.env["dms.directory"].search(
-    #         [("is_root_directory", "=", True), ("name", "=", "Change Requests")]
-    #     )
-    #     if not root_dir:
-    #         res_model = self.request_type
-    #         storage = self.env.ref("spp_change_request.dms_change_request_storage")
-    #         root_dir = self.env["dms.directory"].create(
-    #             {
-    #                 "storage_id": storage.id,
-    #                 # "res_model": self,
-    #                 "group_ids": [(4, storage.field_default_group_id.id)],
-    #                 "name": "Change Requests",
-    #                 "is_root_directory": True,
-    #             }
-    #         )
-    #     root_dir = root_dir[0]
-    #
-    #     logging.info("Root Directory: %s", root_dir)
-    #
-    #     requests_dir = self.env["dms.directory"].search(
-    #         [("id", "child_of", root_dir.id), ("name", "=", self.request_type)]
-    #     )
-    #     if not requests_dir:
-    #         res_model = self.request_type
-    #         storage = self.env.ref(self.env[res_model].DMS_STORAGE)
-    #         requests_dir = self.env["dms.directory"].create(
-    #             {
-    #                 "name": self.request_type,
-    #                 # "storage_id": storage.id,
-    #                 "parent_id": root_dir.id,
-    #                 # "res_model": self.request_type,
-    #                 # "group_ids": [(4, root_dir.group_ids.ids)],
-    #                 "is_root_directory": False,
-    #             }
-    #         )
-    #
-    #     requests_dir = requests_dir[0]
-    #     logging.info("Requests Directory: %s", requests_dir)
-    #     return requests_dir
-    #
-    # def create_folder_for_request(self):
-    #     self.ensure_one()
-    #     requests_dir = self.prepare_directory()
-    #     request_dir = self.env["dms.directory"].search(
-    #         [("id", "child_of", requests_dir.id), ("name", "=", self.name)]
-    #     )
-    #     logging.info("Request Directory before: %s", request_dir)
-    #     if not request_dir:
-    #         res_model = self.request_type
-    #         storage = self.env.ref(self.env[res_model].DMS_STORAGE)
-    #         request_dir = self.env["dms.directory"].create(
-    #             {
-    #                 "name": self.name,
-    #                 "storage_id": storage.id,
-    #                 "parent_id": requests_dir.id,
-    #                 "res_model": self.request_type,
-    #                 # "group_ids": [(4, requests_dir.group_ids.ids)],
-    #                 "is_root_directory": False,
-    #             }
-    #         )
-    #     logging.info("Request Directory after: %s", request_dir)
-    #     request_dir = request_dir[0]
-    #
-    #     applicant_dir = self.env["dms.directory"].search(
-    #         [("id", "child_of", request_dir.id), ("name", "=", "Applicant")]
-    #     )
-    #     if not applicant_dir:
-    #         self.env["dms.directory"].create(
-    #             {
-    #                 "name": "Applicant",
-    #                 "parent_id": request_dir.id,
-    #                 "is_root_directory": False,
-    #             }
-    #         )
-    #
-    #     return request_dir
-
     def _check_phone_exist(self):
         """
         Checks if phone is existing
@@ -637,12 +661,40 @@ class ChangeRequestBase(models.Model):
             raise UserError(_("Phone No. is required."))
 
     def create_request_detail_no_redirect(self):
+        """
+        Creates the request_type_ref record
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="create_request_detail_no_redirect"
+                type="object"
+            />
+
+        NOTE: do not return the action of create_request_detail to not do redirection of page
+
+        :return dict action: form view action
+
+        :raise UserError: Exception raised when applicant_phone is not existing.
+        """
+
         # Called the function without return
         self.create_request_detail()
 
     def create_request_detail(self):
         """
-        Creates the request_type_ref recod then opens the form view of the request_type_ref model
+        Creates the request_type_ref record then opens the form view of the selected request type
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="create_request_detail"
+                type="object"
+            />
 
         :return dict action: form view action
 
@@ -735,7 +787,16 @@ class ChangeRequestBase(models.Model):
         """
         This method is called when the Change Request is requested for validation by a user.
 
-        :raise ValidationError: Exception raised when something is not valid.
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_submit"
+                type="object"
+            />
+
+        :raise UserError: Exception raised when no selected request type.
         """
         for rec in self:
             if rec.request_type_ref_id:
@@ -749,6 +810,15 @@ class ChangeRequestBase(models.Model):
         """
         This method is called when the Change Request is validated by a user.
 
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_validate"
+                type="object"
+            />
+
         :raise ValidationError: Exception raised when something is not valid.
         """
         for rec in self:
@@ -758,6 +828,15 @@ class ChangeRequestBase(models.Model):
         """
         This method is called when the Change Request is applied by a user.
 
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_apply"
+                type="object"
+            />
+
         :raise ValidationError: Exception raised when something is not valid.
         """
         for rec in self:
@@ -765,7 +844,16 @@ class ChangeRequestBase(models.Model):
 
     def action_cancel(self):
         """
-        This method is called when the Change Request is applied to the live data.
+        Get and opens the wizard form change_request_cancel_wizard to cancel the change request
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_cancel"
+                type="object"
+            />
 
         :raise ValidationError: Exception raised when something is not valid.
         """
@@ -788,10 +876,11 @@ class ChangeRequestBase(models.Model):
 
     def _cancel(self, request):
         """
-        This method is used to cancel the change request.
+        To cancel the change request when certain conditions are met.
+        The user who cancelled the change requeest and the datetime it occured is also saved
 
         :param request: The request.
-        :return:
+        :raise UserError: if state not in draft, pending, or rejected
         """
         self.ensure_one()
         if request.state in ("draft", "pending", "rejected"):
@@ -816,6 +905,15 @@ class ChangeRequestBase(models.Model):
         """
         This method is called when the Change Request is Reset to Draft by a user.
 
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_reset_to_draft"
+                type="object"
+            />
+
         :raise ValidationError: Exception raised when something is not valid.
         """
         for rec in self:
@@ -823,16 +921,21 @@ class ChangeRequestBase(models.Model):
 
     def action_reject(self):
         """
-        Opens reject wizard form
+        Opens reject wizard form change_request_reject_wizard
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_reset_to_draft"
+                type="object"
+            />
 
         :param:
 
         :return: action
         :rtype: dict
-
-        :example:
-
-        >>> self.action_reject()
         """
 
         form_id = self.env.ref("spp_change_request.change_request_reject_wizard").id
