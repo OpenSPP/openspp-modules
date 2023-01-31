@@ -12,6 +12,12 @@ _logger = logging.getLogger(__name__)
 class ChangeRequestTypeCustomAddChildren(models.Model):
     _inherit = "spp.change.request"
 
+    registrant_id = fields.Many2one(
+        "res.partner",
+        "Registrant",
+        domain=[("is_registrant", "=", True), ("is_group", "=", True)],
+    )
+
     @api.model
     def _selection_request_type_ref_id(self):
         selection = super()._selection_request_type_ref_id()
@@ -34,8 +40,8 @@ class ChangeRequestAddChildren(models.Model):
     DMS_STORAGE = "spp_change_request_add_children_demo.attachment_storage_add_children"
     VALIDATION_FORM = "spp_change_request_add_children_demo.view_change_request_add_children_validation_form"
     REQUIRED_DOCUMENT_TYPE = [
-        "spp_change_request_add_children_demo.spp_dms_add_children",
-        # "spp_change_request_add_children_demo.spp_dms_birth_certificate",
+        # "spp_change_request_add_children_demo.spp_dms_add_children",
+        "spp_change_request_add_children_demo.spp_dms_birth_certificate",
         # "spp_change_request_add_children_demo.spp_dms_applicant_spp_card",
         # "spp_change_request_add_children_demo.spp_dms_applicant_uid_card",
         # "spp_change_request_add_children_demo.spp_dms_custody_certificate",
@@ -60,10 +66,9 @@ class ChangeRequestAddChildren(models.Model):
 
     # Change Request Fields
     full_name = fields.Char(compute="_compute_full_name", readonly=True)
-    given_name = fields.Char("First Name")
-    father_name = fields.Char("Father's Name")
-    grand_father_name = fields.Char("Grand Father's Name")
-    family_name = fields.Char("Last Name")
+    family_name = fields.Char()
+    given_name = fields.Char()
+    addl_name = fields.Char("Additional Name")
 
     birth_place = fields.Char()
     birthdate_not_exact = fields.Boolean()
@@ -77,11 +82,6 @@ class ChangeRequestAddChildren(models.Model):
     kind = fields.Many2many(
         "g2p.group.membership.kind", string="Group Membership Types"
     )
-
-    # relation_to_head = fields.Many2one(
-    #    "g2p.relationship",
-    #    "Relationship to Head",
-    # )
 
     applicant_relation = fields.Selection(
         [("father", "Father"), ("mother", "Mother"), ("grandfather", "Grandfather")],
@@ -98,19 +98,6 @@ class ChangeRequestAddChildren(models.Model):
         relation="spp_change_request_add_children_demo_rel",
         domain=[("request_type", "=", _name)],
     )
-
-    # def write(self, vals):
-    #    res = super().write(vals)
-    #    if self.registrant_id:
-    #        # Update the spp.change.request (base) registrant_id
-    #        self._update_registrant_id(self)
-    #    return res
-
-    # @api.model_create_multi
-    # @api.returns("self", lambda value: value.id)
-    # def create(self, vals_list):
-    #    res = super(ChangeRequestAddChildren, self).create(vals_list)
-    #    return res
 
     @api.onchange("birthdate")
     def _onchange_birthdate(self):
@@ -153,12 +140,12 @@ class ChangeRequestAddChildren(models.Model):
             except UserError as e:
                 raise ValidationError(_("Incorrect phone number format")) from e
 
-    @api.depends("given_name", "father_name", "grand_father_name", "family_name")
+    @api.depends("given_name", "addl_name", "family_name")
     def _compute_full_name(self):
         for rec in self:
             full_name = (
-                f"{rec.given_name or ''} {rec.father_name or ''}"
-                f" {rec.grand_father_name or ''} {rec.family_name or ''}"
+                f"{rec.family_name or ''}, {rec.given_name or ''}"
+                f" {rec.addl_name or ''}"
             )
             rec.full_name = full_name.title()
 
@@ -209,37 +196,34 @@ class ChangeRequestAddChildren(models.Model):
 
     def validate_data(self):
         super().validate_data()
-        if not self.given_name:
-            raise ValidationError(_("The First Name is required."))
-        if not self.father_name:
-            raise ValidationError(_("The Father Name is required."))
-        if not self.grand_father_name:
-            raise ValidationError(_("The Grand Father Name is required."))
         if not self.family_name:
             raise ValidationError(_("The Family Name is required."))
+        if not self.given_name:
+            raise ValidationError(_("The First Name is required."))
+        if not self.addl_name:
+            raise ValidationError(_("The Father Name is required."))
         if not self.birthdate:
             raise ValidationError(_("The Date of Birth is required."))
-        # if not self.relation_to_head:
-        #    raise ValidationError(_("The Relationship to Head is required."))
         if not self.applicant_relation:
             raise ValidationError(_("The Relationship to Applicant is required."))
         if not self.gender:
             raise ValidationError(_("The Gender is required."))
-        if self.applicant_relation in ("mother", "grandfather"):
-            custody_docs = self.env["dms.file"].search(
-                [
-                    (
-                        "category_id",
-                        "=",
-                        self.env.ref(
-                            "spp_change_request.spp_dms_custody_certificate"
-                        ).id,
-                    ),
-                    ("res_id", "=", self.id),
-                ]
-            )
-            if not custody_docs:
-                raise ValidationError(_("The Custody Certificate is required."))
+        # If mother or father, make the custody certificate required
+        # if self.applicant_relation in ("mother", "grandfather"):
+        #     custody_docs = self.env["dms.file"].search(
+        #         [
+        #             (
+        #                 "category_id",
+        #                 "=",
+        #                 self.env.ref(
+        #                     "spp_change_request_add_children_demo.spp_dms_custody_certificate"
+        #                 ).id,
+        #             ),
+        #             ("res_id", "=", self.id),
+        #         ]
+        #     )
+        #     if not custody_docs:
+        #         raise ValidationError(_("The Custody Certificate is required."))
 
         return
 
@@ -275,17 +259,13 @@ class ChangeRequestAddChildren(models.Model):
                 "is_registrant": True,
                 "is_group": False,
                 "name": self.full_name,
-                "given_name": self.given_name,
-                "father_name": self.father_name,
-                "grand_father_name": self.grand_father_name,
                 "family_name": self.family_name,
+                "given_name": self.given_name,
+                "addl_name": self.addl_name,
                 "birth_place": self.birth_place,
                 "birthdate_not_exact": self.birthdate_not_exact,
                 "birthdate": self.birthdate,
                 "gender": self.gender,
-                # "relation_to_head": self.relation_to_head
-                # and self.relation_to_head.id
-                # or None,
                 "phone_number_ids": phone_rec,
                 "reg_ids": uid_rec,
             }

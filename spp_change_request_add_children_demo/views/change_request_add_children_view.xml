@@ -169,22 +169,18 @@
                             <group colspan="4" col="4" string="">
                                 <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
                                 <field
+                                    name="family_name"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    class="oe_edit_only"
+                                    colspan="4"
+                                />
+                                <field
                                     name="given_name"
                                     attrs="{'readonly':[('state','!=','draft')]}"
                                     class="oe_edit_only"
                                 />
                                 <field
-                                    name="father_name"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    class="oe_edit_only"
-                                />
-                                <field
-                                    name="grand_father_name"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    class="oe_edit_only"
-                                />
-                                <field
-                                    name="family_name"
+                                    name="addl_name"
                                     attrs="{'readonly':[('state','!=','draft')]}"
                                     class="oe_edit_only"
                                 />
@@ -221,14 +217,14 @@
                         <page string="Attachments">
                             <!-- Attachment UI -->
                             <header attrs="{'invisible':[('state','!=','draft')]}">
-                                <button
+                                <!-- <button
                                     name="action_attach_documents"
                                     type="object"
                                     string="Request Form"
                                     class="btn-primary"
                                     context="{'category_id':%(spp_dms_add_children)d}"
                                     style="margin-left: 10px;"
-                                />
+                                /> -->
                                 <button
                                     name="action_attach_documents"
                                     type="object"
@@ -237,7 +233,7 @@
                                     context="{'category_id':%(spp_dms_birth_certificate)d}"
                                     style="margin-left: 10px;"
                                 />
-                                <button
+                                <!-- <button
                                     name="action_attach_documents"
                                     type="object"
                                     string="Applicant UID Card"
@@ -253,7 +249,7 @@
                                     context="{'category_id':%(spp_dms_custody_certificate)d}"
                                     style="margin-left: 10px;"
                                     attrs="{'invisible':[('applicant_relation','not in',('mother','grandfather'))]}"
-                                />
+                                /> -->
                                 <button
                                     name="action_attach_documents"
                                     type="object"
@@ -560,10 +556,9 @@
                                 </group>
                                 <group colspan="4" col="4" string="New Information">
                                     <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
+                                    <field name="family_name" readonly="1" colspan="4" class="oe_edit_only" />
                                     <field name="given_name" readonly="1" class="oe_edit_only" />
-                                    <field name="father_name" readonly="1" class="oe_edit_only" />
-                                    <field name="grand_father_name" readonly="1" class="oe_edit_only" />
-                                    <field name="family_name" readonly="1" class="oe_edit_only" />
+                                    <field name="addl_name" readonly="1" class="oe_edit_only" />
                                     <field name="gender" readonly="1" />
                                     <field
                                         name="phone"
@@ -674,13 +669,12 @@
         <field name="arch" type="xml">
             <search string="Search Change Request: Add Child/Member">
                 <field name="registrant_id" string="Group" />
-                <field name="given_name" />
-                <field name="father_name" />
-                <field name="grand_father_name" />
                 <field name="family_name" />
+                <field name="given_name" />
+                <field name="addl_name" />
                 <filter
                     name="filter_validator"
-                    string="Need to Validate"
+                    string="Assigned to me"
                     domain="[('change_request_id.validation_group_id.users', 'in', uid)]"
                 />
             </search>
@@ -739,7 +733,7 @@
         <field name="domain">[('state','=','pending')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No pending 'Add Children' change requests found!
+                No pending 'Add Child/Member' change requests found!
             </p><p>
                 There are no records found based on the current filter.
             </p>
