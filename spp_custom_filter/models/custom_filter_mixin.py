@@ -1,10 +1,11 @@
-from odoo import models
+from odoo import api, models
 
 
 class CustomFilterMixin(models.AbstractModel):
     _name = "custom.filter.mixin"
     _description = "Custom Filter Mixin"
 
+    @api.model
     def fields_get(self, allfields=None, attributes=None):
         """Customizing searchable attribute for fields in model.
 
@@ -50,3 +51,6 @@ class CustomFilterMixin(models.AbstractModel):
             res[fname]["exportable"] = allow_filter
 
         return res
+
+    def _valid_field_parameter(self, field, name):
+        return name == "allow_filter" or super()._valid_field_parameter(field, name)
