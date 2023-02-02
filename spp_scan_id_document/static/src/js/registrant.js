@@ -53,6 +53,7 @@ odoo.define("spp_scan_id_document.field", function (require) {
                                         method: "GET",
                                     }).then(() => {
                                         // Shutdown completed
+                                        this._setValue(" ", "UPDATE");
                                         this.onclick_started = false;
                                     });
                                 }
