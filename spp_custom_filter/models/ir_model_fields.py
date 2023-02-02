@@ -6,13 +6,13 @@ class IrModelFields(models.Model):
 
     allow_filter = fields.Boolean(
         string="Show on Custom Filter",
-        default=True,
+        default=False,
         help="Allow to show this field on Custom filter!",
     )
 
     def _reflect_field_params(self, field, model_id):
         vals = super(IrModelFields, self)._reflect_field_params(field, model_id)
-        vals["allow_filter"] = getattr(field, "allow_filter", None)
+        vals["allow_filter"] = getattr(field, "allow_filter", False)
         return vals
 
     def _instanciate_attrs(self, field_data):

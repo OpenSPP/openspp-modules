@@ -15,7 +15,7 @@ class CustomFilterMixin(models.AbstractModel):
 
         - Add a field [even stored field] / Altering an old field [even stored field]
 
-        - Add param `allow_filter=False` if you want to hide field from UI filtering.
+        - Add param `allow_filter=True` if you want to show field from UI filtering.
 
         :param list[str] allfields: list of fields to document, all if empty or not provided
 
@@ -34,19 +34,22 @@ class CustomFilterMixin(models.AbstractModel):
 
             active = fields.Boolean(
                 ...,
-                allow_filter=False,
+                allow_filter=True,
                 ...
             )
             newfield = fields.Text(
                 ...,
-                allow_filter=False,
+                allow_filter=True,
                 ...
             )
         """
         res = super().fields_get(allfields, attributes)
 
         for fname in res.keys():
-            allow_filter = getattr(self._fields[fname], "allow_filter", True)
+            if fname == "id":
+                allow_filter = getattr(self._fields[fname], "allow_filter", True)
+            else:
+                allow_filter = getattr(self._fields[fname], "allow_filter", False)
             res[fname]["searchable"] = allow_filter and res[fname]["searchable"]
             res[fname]["exportable"] = allow_filter
 
