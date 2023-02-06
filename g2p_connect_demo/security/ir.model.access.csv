@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 g2p_generate_data_admin,Generate Data Admin Access,g2p_connect_demo.model_g2p_generate_data,g2p_registry_base.group_g2p_admin,1,1,1,1
 g2p_generate_change_request_data_admin,Generate Change Request Data Admin Access,g2p_connect_demo.model_g2p_generate_change_request_data,g2p_registry_base.group_g2p_admin,1,1,1,1
+
