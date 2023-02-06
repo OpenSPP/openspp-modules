@@ -650,6 +650,12 @@ msgid "Group By"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Group Details"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_group_members
 msgid "Group Membership"
 msgstr ""
