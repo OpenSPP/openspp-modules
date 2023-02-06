@@ -642,6 +642,11 @@ msgstr ""
 "cette validation."
 
 #. module: spp_change_request
+#: model:dms.category,name:spp_change_request.pds_dms_extra_documents
+msgid "Extra Documents"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_dms_file
 msgid "File"
 msgstr ""
