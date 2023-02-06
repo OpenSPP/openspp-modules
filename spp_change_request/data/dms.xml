@@ -25,4 +25,9 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="field_default_group_id" ref="spp_change_request.dms_access_group" />
     </record>
 
+    <!-- Parent Category -->
+    <record id="pds_dms_extra_documents" model="dms.category">
+        <field name="name">Extra Documents</field>
+    </record>
+
 </odoo>

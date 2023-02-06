@@ -27,6 +27,7 @@
                                 options="{'no_open': True,'no_create': True,'no_edit':True}"
                                 required="1"
                                 readonly="context.get('category_readonly')"
+                                domain="[('parent_id', 'child_of', %(spp_change_request.pds_dms_extra_documents)d)]"
                             />
                         </h4>
                         <h2>
