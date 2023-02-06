@@ -101,6 +101,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     )
 
     def _update_registrant_id(self, res):
+
         for rec in res:
             if rec.registrant_id:
                 rec.change_request_id.update({"registrant_id": rec.registrant_id.id})
@@ -137,6 +138,20 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         self.check_required_documents()
 
     def action_submit(self):
+        """
+        This method is called when the Change Request is requested for validation by a user.
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_submit"
+                type="object"
+            />
+
+        :raise ValidationError: Exception raised when something is not valid.
+        """
         for rec in self:
             rec._on_submit(rec.change_request_id)
 
@@ -184,12 +199,27 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         This method is called when the Change Request is validated by a user.
 
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_validate"
+                type="object"
+            />
+
         :raise ValidationError: Exception raised when something is not valid.
         """
         for rec in self:
             return rec._on_validate(rec.change_request_id)
 
     def _on_validate(self, request):
+        """
+        This method is called when the Change Request is validated by a user.
+
+        :param request: The request.
+        :raise UserError: Exception raised when something is not valid.
+        """
         self.ensure_one()
         # Check if CR is assigned to current user
         if request._check_user("Validate", auto_assign=True):
@@ -307,6 +337,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         This method is called when the Change Request is applied to the live data.
 
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_apply"
+                type="object"
+            />
+
         :raise ValidationError: Exception raised when something is not valid.
         """
         for rec in self:
@@ -346,6 +385,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     def action_cancel(self):
         """
         This method is called when the Change Request is applied to the live data.
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_cancel"
+                type="object"
+            />
 
         :raise ValidationError: Exception raised when something is not valid.
         """
@@ -406,6 +454,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         This method is called when the Change Request is applied to the live data.
 
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_reset_to_draft"
+                type="object"
+            />
+
         :raise ValidationError: Exception raised when something is not valid.
         """
         for rec in self:
@@ -448,7 +505,16 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def action_reject(self):
         """
-        This method is called when the user click on reject during the validation process.
+        This method is called when the Change Request is Reset to Draft by a user.
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="action_reset_to_draft"
+                type="object"
+            />
         """
         self.ensure_one()
 
@@ -474,6 +540,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :param request: The request.
         :param rejected_remarks: the reason for the rejection
         :return:
+
+        :raise UserError: Exception raised when something is not valid.
         """
         self.ensure_one()
         # Check if CR is assigned to current user
@@ -545,6 +613,33 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     self.env["pds.change.request.src.grp"].create(group_members)
 
     def open_applicant_details_form(self):
+        """
+        Get and opens the form view of the applicant_id to view details
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_applicant_details_form"
+                type="object"
+            />
+
+        NOTE:
+        - To add or modify some key-value pair, either call or super this function
+
+        example:
+            def open_applicant_details_form(self):
+                action = super().open_applicant_details_form()
+
+                action.update({'key': 'value'})
+
+                return action
+
+        :return dict action: form view action
+
+        :raise:
+        """
         self.ensure_one()
         res_id = self.applicant_id.id
         form_id = self.env.ref("g2p_registry_individual.view_individuals_form").id
@@ -567,6 +662,25 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         return action
 
     def open_user_assignment_wiz(self):
+        """
+        Called whenever a user reassign the CR to him/her or to other user
+
+        Reassign a CR to current user if CR is assigned to other user else
+        Opens a wizard form to show a selection of users to be reassign
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_user_assignment_wiz"
+                type="object"
+            />
+
+        :return: action
+
+        :raise UserError: Exception raised when something is not valid.
+        """
         for rec in self:
             assign_self = False
             if rec.change_request_id.assign_to_id:
@@ -596,6 +710,25 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 self.change_request_id.assign_to_user(self.env.user)
 
     def open_user_assignment_to_wiz(self):
+        """
+        Called whenever a user reassign the CR to him/her or to other user
+
+        Reassign a CR to current user if CR is assigned to other user else
+        Opens a wizard form to show a selection of users to be reassign
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_user_assignment_to_wiz"
+                type="object"
+            />
+
+        :return: action
+
+        :raise UserError: Exception raised when something is not valid.
+        """
         for rec in self:
             form_id = self.env.ref(
                 "spp_change_request.change_request_user_assign_wizard"
@@ -618,6 +751,12 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     @api.depends("assign_to_id")
     def _compute_current_user_assigned(self):
+        """
+        Gets the current user assigned on the Change Request
+
+        :return:
+        :raise:
+        """
         for rec in self:
             rec.current_user_assigned = False
             if self.env.context.get("uid", False) == rec.assign_to_id.id:
@@ -711,33 +850,52 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     _("There are no directories defined for this change request.")
                 )
 
-    #
-    # def upload_dms(self, file, document_number, category=None):
-    #     # TODO: Get the directory_id based on document type
-    #     # Get the first directory for now
-    #     if self.dms_directory_ids:
-    #         if self._origin:
-    #             directory_id = self._origin.dms_directory_ids[0].id
-    #         else:
-    #             directory_id = self.dms_directory_ids[0].id
-    #         category_id = None
-    #         if category:
-    #             category_id = self.env.ref(category).id
-    #             category = self.env["dms.category"].search([("id", "=", category_id)])
-    #             if category:
-    #                 category_id = category[0].id
-    #             else:
-    #                 raise UserError(
-    #                     _("The required document category is not configured.")
-    #                 )
-    #         vals = {
-    #             "name": f"UID-{document_number}",
-    #             "directory_id": directory_id,
-    #             "category_id": category_id,
-    #             "content": file,
-    #         }
-    #         self.env["dms.file"].create(vals)
-    #     else:
-    #         raise UserError(
-    #             _("There are no directories defined for this change request.")
-    #         )
+    def open_registrant_details_form(self):
+        """
+        Opens a modal form that consists of registrant's details
+
+        Usage:
+        - Add this function in the name of button with type object in XML
+
+        example:
+            <button
+                name="open_registrant_details_form"
+                type="object"
+            />
+
+        NOTE:
+        - This function is used on several files. Be careful on updating this function.
+        - To add or modify some key-value pair, either call or super this function
+
+        example:
+            def open_registrant_details_form(self):
+                action = super().open_registrant_details_form()
+
+                action.update({'key': 'value'})
+
+                return action
+
+        :return dict action: form view action
+
+        :raise:
+        """
+        self.ensure_one()
+        res_id = self.registrant_id.id
+        form_id = self.env.ref("g2p_registry_group.view_groups_form").id
+        action = self.env["res.partner"].get_formview_action()
+        context = {
+            "create": False,
+            "edit": False,
+            "hide_from_cr": 1,
+        }
+        action.update(
+            {
+                "name": _("Group Details"),
+                "views": [(form_id, "form")],
+                "res_id": res_id,
+                "target": "new",
+                "context": context,
+                "flags": {"mode": "readonly"},
+            }
+        )
+        return action
