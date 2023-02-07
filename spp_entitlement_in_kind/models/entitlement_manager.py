@@ -5,7 +5,6 @@ from odoo.exceptions import UserError
 
 class EntitlementManager(models.Model):
     _inherit = "g2p.program.entitlement.manager"
-    _description = "In-Kind Entitlement Manager"
 
     @api.model
     def _selection_manager_ref_id(self):
@@ -55,21 +54,22 @@ class G2PInKindEntitlementManager(models.Model):
     )
 
     # Group able to validate the payment
-    # Todo: Create a record rule for payment_validation_group
     entitlement_validation_group_id = fields.Many2one(
         "res.groups", string="Entitlement Validation Group"
     )
 
-    def prepare_entitlements(self, cycle, beneficiaries):
+    def prepare_entitlements(self, cycle, beneficiaries, skip_count=False):
+        """Prepare In-Kind Entitlements.
+        This method is used to prepare the in-kind entitlement list of the beneficiaries.
+        :param cycle: The cycle.
+        :param beneficiaries: The beneficiaries.
+        :param skip_count: Skip compute total entitlements
+        :return:
+        """
         if not self.entitlement_item_ids:
             raise UserError(
                 _("There are no items entered for this entitlement manager.")
             )
-
-        # Prepare Inventory
-        if self.manage_inventory:
-            # Prepare stock.picking record
-            pass
 
         all_beneficiaries_ids = beneficiaries.mapped("partner_id.id")
         for rec in self.entitlement_item_ids:
@@ -92,7 +92,7 @@ class G2PInKindEntitlementManager(models.Model):
             # Get beneficiaries_with_entitlements to prevent generating
             # the same entitlement for beneficiaries
             beneficiaries_with_entitlements = (
-                self.env["g2p.entitlement"]
+                self.env["g2p.entitlement.inkind"]
                 .search(
                     [
                         ("cycle_id", "=", cycle.id),
@@ -132,9 +132,10 @@ class G2PInKindEntitlementManager(models.Model):
                     {
                         "cycle_id": cycle.id,
                         "partner_id": beneficiary_id.id,
-                        "initial_amount": 0.0,
+                        "total_amount": rec.product_id.list_price * qty,
                         "product_id": rec.product_id.id,
                         "qty": qty,
+                        "unit_price": rec.product_id.list_price,
                         "uom_id": rec.uom_id.id,
                         "manage_inventory": self.manage_inventory,
                         "warehouse_id": self.warehouse_id
@@ -142,26 +143,179 @@ class G2PInKindEntitlementManager(models.Model):
                         or None,
                         "inkind_item_id": rec.id,
                         "state": "draft",
-                        "is_cash_entitlement": False,
                         "valid_from": entitlement_start_validity,
                         "valid_until": entitlement_end_validity,
                     }
                 )
-            self.env["g2p.entitlement"].create(entitlements)
+            if entitlements:
+                self.env["g2p.entitlement.inkind"].create(entitlements)
 
-    def validate_entitlements(self, cycle, cycle_memberships):
-        # TODO: Change the status of the entitlements to `validated` for this members.
-        # move the funds from the program's wallet to the wallet of each Beneficiary that are validated
-        pass
+        # Compute total entitlements
+        if not skip_count:
+            cycle._compute_inkind_entitlements_count()
+
+    def set_pending_validation_entitlements(self, cycle):
+        """Set Entitlements to Pending Validation.
+        In-kind Entitlement Manager :meth:`set_pending_validation_entitlements`.
+        Set entitlements to pending_validation in a cycle.
+
+        :param cycle: A recordset of cycle
+        :return:
+        """
+        # Get the number of entitlements in cycle
+        entitlements_count = cycle.get_entitlements(
+            ["draft"],
+            entitlement_model="g2p.entitlement.inkind",
+            count=True,
+        )
+        if entitlements_count < self.MIN_ROW_JOB_QUEUE:
+            self._set_pending_validation_entitlements(cycle)
+
+        else:
+            self._set_pending_validation_entitlements_async(cycle, entitlements_count)
+
+    def _set_pending_validation_entitlements(self, cycle, offset=0, limit=None):
+        """Set Entitlements to Pending Validation.
+        In-kind Entitlement Manager :meth:`_set_pending_validation_entitlements`.
+        Set entitlements to pending_validation in a cycle.
+
+        :param cycle: A recordset of cycle
+        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
+        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :return:
+        """
+        # Get the entitlements in the cycle
+        entitlements = cycle.get_entitlements(
+            ["draft"],
+            entitlement_model="g2p.entitlement.inkind",
+            offset=offset,
+            limit=limit,
+        )
+        entitlements.update({"state": "pending_validation"})
+
+    def validate_entitlements(self, cycle):
+        """Validate In-Kind Entitlements.
+        In-Kind Entitlement Manager :meth:`validate_entitlements`.
+        Validate entitlements in a cycle
+
+        :param cycle: A recordset of cycle
+        :return:
+        """
+        # Get the number of entitlements in cycle
+        entitlements_count = cycle.get_entitlements(
+            ["draft", "pending_validation"],
+            entitlement_model="g2p.entitlement.inkind",
+            count=True,
+        )
+        if entitlements_count < self.MIN_ROW_JOB_QUEUE:
+            err, message = self._validate_entitlements(cycle)
+            if err > 0:
+                kind = "danger"
+                return {
+                    "type": "ir.actions.client",
+                    "tag": "display_notification",
+                    "params": {
+                        "title": _("Entitlement"),
+                        "message": message,
+                        "sticky": True,
+                        "type": kind,
+                        "next": {
+                            "type": "ir.actions.act_window_close",
+                        },
+                    },
+                }
+            else:
+                kind = "success"
+                return {
+                    "type": "ir.actions.client",
+                    "tag": "display_notification",
+                    "params": {
+                        "title": _("Entitlement"),
+                        "message": _("Entitlements are validated and approved."),
+                        "sticky": True,
+                        "type": kind,
+                        "next": {
+                            "type": "ir.actions.act_window_close",
+                        },
+                    },
+                }
+        else:
+            self._validate_entitlements_async(cycle, entitlements_count)
+
+    def _validate_entitlements(self, cycle, offset=0, limit=None):
+        """Validate In-Kind Entitlements.
+        In-Kind Entitlement Manager :meth:`_validate_entitlements`.
+        Validate entitlements in a cycle.
+
+        :param cycle: A recordset of cycle
+        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
+        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :return err: Integer number of errors
+        :return message: String description of the error
+        """
+        # Get the entitlements in the cycle
+        entitlements = cycle.get_entitlements(
+            ["draft", "pending_validation"],
+            entitlement_model="g2p.entitlement.inkind",
+            offset=offset,
+            limit=limit,
+        )
+        err, message = self.approve_entitlements(entitlements)
+        return err, message
+
+    def cancel_entitlements(self, cycle):
+        """Cancel In-Kind Entitlements.
+        In-Kind Entitlement Manager :meth:`cancel_entitlements`
+        Cancel entitlements in a cycle.
+
+        :param cycle: A recordset of cycle
+        :return:
+        """
+        # Get the entitlements in cycle
+        entitlements_count = cycle.get_entitlements(
+            ["draft", "pending_validation", "approved"],
+            entitlement_model="g2p.entitlement.inkind",
+            count=True,
+        )
+        if entitlements_count < self.MIN_ROW_JOB_QUEUE:
+            self._cancel_entitlements(cycle)
+        else:
+            self._cancel_entitlements_async(cycle, entitlements_count)
+
+    def _cancel_entitlements(self, cycle, offset=0, limit=None):
+        """Cancel In-Kind Entitlements.
+        Basket Entitlement Manager :meth:`_cancel_entitlements`.
+        Cancel entitlements in a cycle.
+
+        :param cycle: A recordset of cycle
+        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
+        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :return:
+        """
+        entitlements = cycle.get_entitlements(
+            ["draft", "pending_validation", "approved"],
+            entitlement_model="g2p.entitlement.inkind",
+            offset=offset,
+            limit=limit,
+        )
+        entitlements.update({"state": "cancelled"})
 
     def approve_entitlements(self, entitlements):
+        """Approve In-Kind Entitlements.
+        In-Kind Entitlement Manager :meth:`_approve_entitlements`.
+        Approve selected entitlements.
+
+        :param entitlements: Selected entitlements to approve
+        :return state_err: Integer number of errors
+        :return message: String description of the errors
+        """
         state_err = 0
         message = ""
         sw = 0
         for rec in entitlements:
             if rec.state in ("draft", "pending_validation"):
-                # _logger.info("DEBUG: _process_noncash_base_entitlement: rec: %s", rec)
                 if rec.manage_inventory:
+                    # TODO: check if there is enough stocks to allocate
                     rec._action_launch_stock_rule()
                 rec.update(
                     {
@@ -186,21 +340,18 @@ class G2PInKindEntitlementManager(models.Model):
     def open_entitlements_form(self, cycle):
         self.ensure_one()
         action = {
-            "name": _("Cycle In-Kind Entitlements"),
+            "name": _("In-Kind Entitlements"),
             "type": "ir.actions.act_window",
-            "res_model": "g2p.entitlement",
+            "res_model": "g2p.entitlement.inkind",
             "context": {
                 "create": False,
                 "default_cycle_id": cycle.id,
-                # "search_default_approved_state": 1,
             },
             "view_mode": "list,form",
             "views": [
-                [self.env.ref("g2p_programs.view_entitlement_tree").id, "tree"],
+                [self.env.ref("spp_programs.view_entitlement_inkind_tree").id, "tree"],
                 [
-                    self.env.ref(
-                        "spp_entitlement_in_kind.view_entitlement_inkind_form"
-                    ).id,
+                    self.env.ref("spp_programs.view_entitlement_inkind_form").id,
                     "form",
                 ],
             ],
@@ -212,11 +363,9 @@ class G2PInKindEntitlementManager(models.Model):
         return {
             "name": "Entitlement",
             "view_mode": "form",
-            "res_model": "g2p.entitlement",
+            "res_model": "g2p.entitlement.inkind",
             "res_id": rec.id,
-            "view_id": self.env.ref(
-                "spp_entitlement_in_kind.view_entitlement_inkind_form"
-            ).id,
+            "view_id": self.env.ref("spp_programs.view_entitlement_inkind_form").id,
             "type": "ir.actions.act_window",
             "target": "new",
         }
