@@ -13,6 +13,7 @@
         "base",
         "g2p_registry_base",
         "g2p_programs",
+        "spp_programs",
     ],
     "data": [
         "security/ir.model.access.csv",
