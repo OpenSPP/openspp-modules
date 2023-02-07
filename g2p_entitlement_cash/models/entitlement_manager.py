@@ -53,7 +53,7 @@ class G2PCashEntitlementManager(models.Model):
     )
 
     def prepare_entitlements(self, cycle, beneficiaries, skip_count=False):
-        """Prepare Entitlements.
+        """Prepare Cash Entitlements.
         Cash Entitlement Manager :meth:`prepare_entitlements`.
         This method is used to prepare the entitlement list of the beneficiaries.
 
@@ -185,7 +185,7 @@ class G2PCashEntitlementManager(models.Model):
         return amount
 
     def set_pending_validation_entitlements(self, cycle):
-        """Set Entitlements to Pending Validation.
+        """Set Cash Entitlements to Pending Validation.
         Cash Entitlement Manager :meth:`set_pending_validation_entitlements`.
         Set entitlements to pending_validation in a cycle.
 
@@ -205,7 +205,7 @@ class G2PCashEntitlementManager(models.Model):
             self._set_pending_validation_entitlements_async(cycle, entitlements_count)
 
     def _set_pending_validation_entitlements(self, cycle, offset=0, limit=None):
-        """Set Entitlements to Pending Validation.
+        """Set Cash Entitlements to Pending Validation.
         Cash Entitlement Manager :meth:`_set_pending_validation_entitlements`.
         Set entitlements to pending_validation in a cycle.
 
@@ -224,7 +224,7 @@ class G2PCashEntitlementManager(models.Model):
         entitlements.update({"state": "pending_validation"})
 
     def validate_entitlements(self, cycle):
-        """Validate Entitlements.
+        """Validate Cash Entitlements.
         Cash Entitlement Manager :meth:`validate_entitlements`.
         Validate entitlements in a cycle.
 
@@ -273,7 +273,7 @@ class G2PCashEntitlementManager(models.Model):
             self._validate_entitlements_async(cycle, entitlements_count)
 
     def _validate_entitlements(self, cycle, offset=0, limit=None):
-        """Validate Entitlements.
+        """Validate Cash Entitlements.
         Cash Entitlement Manager :meth:`_validate_entitlements`.
         Validate entitlements in a cycle.
 
@@ -294,7 +294,7 @@ class G2PCashEntitlementManager(models.Model):
         return err, message
 
     def cancel_entitlements(self, cycle):
-        """Cancel Entitlements.
+        """Cancel Cash Entitlements.
         Cash Entitlement Manager :meth:`cancel_entitlements`.
         Cancel entitlements in a cycle.
 
@@ -313,7 +313,7 @@ class G2PCashEntitlementManager(models.Model):
             self._cancel_entitlements_async(cycle, entitlements_count)
 
     def _cancel_entitlements(self, cycle, offset=0, limit=None):
-        """Cancel Entitlements.
+        """Cancel Cash Entitlements.
         Cash Entitlement Manager :meth:`_cancel_entitlements`.
         Cancel entitlements in a cycle.
 
@@ -332,7 +332,7 @@ class G2PCashEntitlementManager(models.Model):
         entitlements.update({"state": "cancelled"})
 
     def approve_entitlements(self, entitlements):
-        """Approve Entitlements.
+        """Approve Cash Entitlements.
         Cash Entitlement Manager :meth:`_approve_entitlements`.
         Approve selected entitlements.
 

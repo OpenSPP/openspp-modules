@@ -82,7 +82,8 @@ class SPPBasketEntitlementManager(models.Model):
     )
 
     def prepare_entitlements(self, cycle, beneficiaries, skip_count=False):
-        """
+        """Prepare Basket Entitlements.
+        Basket Entitlement Manager :meth:`prepare_entitlements`.
         This method is used to prepare the entitlement list of the beneficiaries.
         :param cycle: The cycle.
         :param beneficiaries: The beneficiaries.
@@ -164,9 +165,9 @@ class SPPBasketEntitlementManager(models.Model):
             cycle._compute_inkind_entitlements_count()
 
     def set_pending_validation_entitlements(self, cycle):
-        """
-        Default Entitlement Manager :meth:`set_pending_validation_entitlements`
-        Set entitlements to pending_validation in a cycle
+        """Set Basket Entitlements to Pending Validation.
+        Basket Entitlement Manager :meth:`set_pending_validation_entitlements`.
+        Set entitlements to pending_validation in a cycle.
 
         :param cycle: A recordset of cycle
         :return:
@@ -184,9 +185,9 @@ class SPPBasketEntitlementManager(models.Model):
             self._set_pending_validation_entitlements_async(cycle, entitlements_count)
 
     def _set_pending_validation_entitlements(self, cycle, offset=0, limit=None):
-        """
-        Basket Entitlement Manager :meth:`_set_pending_validation_entitlements`
-        Synchronous setting of entitlements to pending_validation in a cycle
+        """Set Basket Entitlements to Pending Validation.
+        Basket Entitlement Manager :meth:`_set_pending_validation_entitlements`.
+        Set entitlements to pending_validation in a cycle.
 
         :param cycle: A recordset of cycle
         :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
@@ -203,9 +204,9 @@ class SPPBasketEntitlementManager(models.Model):
         entitlements.update({"state": "pending_validation"})
 
     def validate_entitlements(self, cycle):
-        """
-        Basket Entitlement Manager :meth:`validate_entitlements`
-        Validate entitlements in a cycle
+        """Validate Basket Entitlements.
+        Basket Entitlement Manager :meth:`validate_entitlements`.
+        Validate entitlements in a cycle.
 
         :param cycle: A recordset of cycle
         :return:
@@ -252,9 +253,9 @@ class SPPBasketEntitlementManager(models.Model):
             self._validate_entitlements_async(cycle, entitlements_count)
 
     def _validate_entitlements(self, cycle, offset=0, limit=None):
-        """
-        Basket Entitlement Manager :meth:`_validate_entitlements`
-        Synchronous validation of entitlements in a cycle
+        """Validate Basket Entitlements.
+        Basket Entitlement Manager :meth:`_validate_entitlements`.
+        Validate entitlements in a cycle
 
         :param cycle: A recordset of cycle
         :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
@@ -273,9 +274,9 @@ class SPPBasketEntitlementManager(models.Model):
         return err, message
 
     def cancel_entitlements(self, cycle):
-        """
-        Basket Entitlement Manager :meth:`cancel_entitlements`
-        Cancel entitlements in a cycle
+        """Cancel Basket Entitlements.
+        Basket Entitlement Manager :meth:`cancel_entitlements`.
+        Cancel entitlements in a cycle.
 
         :param cycle: A recordset of cycle
         :return:
@@ -292,9 +293,9 @@ class SPPBasketEntitlementManager(models.Model):
             self._cancel_entitlements_async(cycle, entitlements_count)
 
     def _cancel_entitlements(self, cycle, offset=0, limit=None):
-        """
-        Basket Entitlement Manager :meth:`_cancel_entitlements`
-        Synchronous cancellation of entitlements in a cycle
+        """Cancel Basket Entitlements.
+        Basket Entitlement Manager :meth:`_cancel_entitlements`.
+        Synchronous cancellation of entitlements in a cycle.
 
         :param cycle: A recordset of cycle
         :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
@@ -310,9 +311,9 @@ class SPPBasketEntitlementManager(models.Model):
         entitlements.update({"state": "cancelled"})
 
     def approve_entitlements(self, entitlements):
-        """
-        Default Entitlement Manager :meth:`_approve_entitlements`
-        Approve selected entitlements
+        """Approve Basket Entitlements.
+        Basket Entitlement Manager :meth:`_approve_entitlements`.
+        Approve selected entitlements.
 
         :param entitlements: Selected entitlements to approve
         :return state_err: Integer number of errors

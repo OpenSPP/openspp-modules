@@ -155,7 +155,7 @@ class G2PInKindEntitlementManager(models.Model):
             cycle._compute_inkind_entitlements_count()
 
     def set_pending_validation_entitlements(self, cycle):
-        """Set Entitlements to Pending Validation.
+        """Set In-Kind Entitlements to Pending Validation.
         In-kind Entitlement Manager :meth:`set_pending_validation_entitlements`.
         Set entitlements to pending_validation in a cycle.
 
@@ -175,7 +175,7 @@ class G2PInKindEntitlementManager(models.Model):
             self._set_pending_validation_entitlements_async(cycle, entitlements_count)
 
     def _set_pending_validation_entitlements(self, cycle, offset=0, limit=None):
-        """Set Entitlements to Pending Validation.
+        """Set In-Kind Entitlements to Pending Validation.
         In-kind Entitlement Manager :meth:`_set_pending_validation_entitlements`.
         Set entitlements to pending_validation in a cycle.
 
