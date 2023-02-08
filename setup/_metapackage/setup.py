@@ -10,6 +10,8 @@ setuptools.setup(
     install_requires=[
         'odoo-addon-g2p_connect_demo>=15.0dev,<15.1dev',
         'odoo-addon-spp_base_demo>=15.0dev,<15.1dev',
+        'odoo-addon-spp_change_request_add_children_demo>=15.0dev,<15.1dev',
+        'odoo-addon-spp_custom_filter_ui>=15.0dev,<15.1dev',
         'odoo-addon-spp_demo>=15.0dev,<15.1dev',
     ],
     classifiers=[
