@@ -351,7 +351,9 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="res_model">spp.change.request</field>
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="change_request_filter" />
-        <field name="context">{'search_default_filter_my_cr': 1}</field>
+        <field
+            name="context"
+        >{'search_default_filter_my_cr': 1, 'search_default_filter_available_cr': 1}</field>
         <field name="domain">[]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
