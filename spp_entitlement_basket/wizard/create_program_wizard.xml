@@ -10,6 +10,12 @@
                 >{'readonly':[('entitlement_kind','=','basket_entitlement')]}</attribute>
                 <attribute name="force_save">1</attribute>
             </xpath>
+            <xpath
+                expr="//field[@name='entitlement_validation_group_id']/parent::group"
+                position="attributes"
+            >
+                <attribute name="invisible">1</attribute>
+            </xpath>
             <xpath expr="//group[@name='default']" position="after">
                 <group
                     colspan="4"
@@ -17,52 +23,65 @@
                     name='entitlement_basket'
                     attrs="{'invisible':[('entitlement_kind','!=', 'basket_entitlement')]}"
                 >
-                    <notebook colspan="4">
+                    <notebook>
                         <page string="Items">
-                            <group colspan="4" col="4">
-                                <field
-                                    name="entitlement_basket_id"
-                                    options="{'no_open':True,'no_create':True,'no_edit':True}"
-                                />
-                                <field name="manage_inventory" />
-                                <field
-                                    name="multiplier_field"
-                                    options="{'no_open':True,'no_create':True,'no_create_edit':True}"
-                                />
-                                <field name="max_multiplier" />
-                                <field name="basket_entitlement_item_ids" nolabel="1" colspan="4">
-                                    <tree>
-                                        <field name="product_id" />
-                                        <field name="qty" />
-                                        <field name="uom_id" />
-                                    </tree>
-                                    <form string="Entitlement Item">
-                                        <group colspan="4" col="4">
-                                            <field
-                                                name="product_id"
-                                                options="{'no_open':True,'no_create':True,'no_create_edit':True}"
-                                                colspan="4"
-                                            />
+                            <group>
+                                <group>
+                                    <field
+                                        name="entitlement_basket_id"
+                                        options="{'no_open':True,'no_create':True,'no_edit':True}"
+                                    />
+                                    <field name="manage_inventory" />
+                                    <field
+                                        name="multiplier_field"
+                                        options="{'no_open':True,'no_create':True,'no_create_edit':True}"
+                                    />
+                                    <field name="max_multiplier" />
+                                    <field
+                                        name="entitlement_validation_group_id"
+                                        options="{'no_open':True,'no_create':True,'no_create_edit':True}"
+                                        domain="[('category_id','=',%(g2p_registry_base.openg2p_module)d)]"
+                                    />
+                                </group>
+                                <group>
+                                    <field name="basket_entitlement_item_ids" nolabel="1">
+                                        <tree>
+                                            <field name="product_id" />
                                             <field name="qty" />
-                                            <field
-                                                name="uom_id"
-                                                options="{'no_open':True,'no_create':True,'no_create_edit':True}"
-                                            />
-                                        </group>
-                                    </form>
-                                </field>
+                                            <field name="uom_id" />
+                                        </tree>
+                                        <form string="Entitlement Item">
+                                            <group colspan="4" col="4">
+                                                <field
+                                                    name="product_id"
+                                                    options="{'no_open':True,'no_create':True,'no_create_edit':True}"
+                                                    colspan="4"
+                                                />
+                                                <field name="qty" />
+                                                <field
+                                                    name="uom_id"
+                                                    options="{'no_open':True,'no_create':True,'no_create_edit':True}"
+                                                />
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
                             </group>
                         </page>
                         <page
                             string="Inventory Settings"
                             attrs="{'invisible':[('manage_inventory','=',False)]}"
                         >
-                            <group colspan="4" col="4">
-                                <field
-                                    name="warehouse_id"
-                                    options="{'no_open':True,'no_create':True,'no_create_edit':True}"
-                                />
-                                <field name="company_id" invisible="1" options="{'no_open':True}" />
+                            <group>
+                                <group>
+                                    <field
+                                        name="warehouse_id"
+                                        options="{'no_open':True,'no_create':True,'no_create_edit':True}"
+                                    />
+                                </group>
+                                <group>
+                                    <field name="company_id" invisible="1" options="{'no_open':True}" />
+                                </group>
                             </group>
                         </page>
                     </notebook>
