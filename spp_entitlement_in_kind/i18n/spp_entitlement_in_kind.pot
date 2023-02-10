@@ -20,33 +20,18 @@ msgid "0 means no limit"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_inkind
-msgid "Add a new entitlement!"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
 #: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_manager_inkind
 msgid "Add an Entitlement Manager!"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
-msgid "Approve Entitlement"
+#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_entitlement_manager
+msgid "Cash Entitlement Manager"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_manager_inkind
 msgid "Click the create button to enter a new in-kind entitlement manager."
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_inkind
-msgid "Click the create button to enter the new In-kind entitlement."
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
-msgid "Code:"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
@@ -86,19 +71,6 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_cycle
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_procurement_group__cycle_id
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_stock_picking__cycle_id
-msgid "Cycle"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
-#, python-format
-msgid "Cycle In-Kind Entitlements"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
 #: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__uom_id
 #: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__uom_id
 msgid "Default unit of measure used for all stock operations."
@@ -117,13 +89,9 @@ msgid "Enter the Manager Name..."
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
-msgid "Enter the program name..."
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
-#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_entitlement
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_entitlement_inkind
 #, python-format
 msgid "Entitlement"
 msgstr ""
@@ -158,19 +126,9 @@ msgid "Entitlement Validation Group"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
-msgid "Entitlement:"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
 #, python-format
-msgid "Entitlement: In-Kind (%s)"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.ui.menu,name:spp_entitlement_in_kind.menu_entitlement_inkind
-msgid "Entitlements"
+msgid "Entitlements are validated and approved."
 msgstr ""
 
 #. module: spp_entitlement_in_kind
@@ -203,22 +161,15 @@ msgstr ""
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields.selection,name:spp_entitlement_in_kind.selection__g2p_program_create_wizard__entitlement_kind__inkind
-#: model:ir.ui.menu,name:spp_entitlement_in_kind.g2p_inkind_root
 msgid "In-Kind"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
-msgid "In-Kind Entitlement"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__inkind_item_id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement_inkind__inkind_item_id
 msgid "In-Kind Entitlement Condition"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_entitlement_manager
 #: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_entitlement_manager_inkind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
 msgid "In-Kind Entitlement Manager"
@@ -235,24 +186,14 @@ msgid "In-Kind Entitlement Managers"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
-msgid "In-Kind Item"
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#, python-format
+msgid "In-Kind Entitlements"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__entitlement_id
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_stock_move__entitlement_id
 msgid "In-kind Entitlement"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.actions.act_window,name:spp_entitlement_in_kind.action_entitlement_inkind
-msgid "In-kind Entitlements"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
-msgid "Inventory"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
@@ -295,7 +236,6 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__manage_inventory
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__manage_inventory
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__manage_inventory
 msgid "Manage Inventory"
@@ -340,13 +280,6 @@ msgid "New Program"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model:ir.model,name:spp_entitlement_in_kind.model_procurement_group
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_cycle__procurement_group_id
-msgid "Procurement Group"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__product_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__product_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__product_id
 msgid "Product"
@@ -370,20 +303,9 @@ msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__qty
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__qty
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__qty
 msgid "QTY"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.ui.menu,name:spp_entitlement_in_kind.g2p_inkind_reports_menu_root
-msgid "Reports"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__route_id
-msgid "Route"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
@@ -408,51 +330,19 @@ msgid "Sequence"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model:ir.model,name:spp_entitlement_in_kind.model_stock_move
-msgid "Stock Move"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__move_ids
-msgid "Stock Moves"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.model,name:spp_entitlement_in_kind.model_stock_rule
-msgid "Stock Rule"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_cycle__picking_ids
-msgid "Stock Transfers"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
 #: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
 #, python-format
 msgid "There are no items entered for this entitlement manager."
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model:ir.model,name:spp_entitlement_in_kind.model_stock_picking
-msgid "Transfer"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__uom_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__uom_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__uom_id
 msgid "Unit of Measure"
 msgstr ""
 
 #. module: spp_entitlement_in_kind
-#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__warehouse_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__warehouse_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__warehouse_id
 msgid "Warehouse"
-msgstr ""
-
-#. module: spp_entitlement_in_kind
-#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
-msgid "code..."
 msgstr ""
