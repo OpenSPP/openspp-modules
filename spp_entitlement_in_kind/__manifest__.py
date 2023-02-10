@@ -11,15 +11,15 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "base",
-        "stock",
         "g2p_registry_base",
         "g2p_programs",
+        "spp_programs",
+        "product",
+        "stock",
     ],
     "data": [
         "security/ir.model.access.csv",
-        "views/main_view.xml",
         "views/entitlement_manager_view.xml",
-        "views/entitlement_view.xml",
         "wizard/create_program_wizard.xml",
     ],
     "assets": {},

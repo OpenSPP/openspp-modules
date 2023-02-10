@@ -52,7 +52,16 @@ class G2PCashEntitlementManager(models.Model):
         "res.groups", string="Entitlement Validation Group"
     )
 
-    def prepare_entitlements(self, cycle, beneficiaries):
+    def prepare_entitlements(self, cycle, beneficiaries, skip_count=False):
+        """Prepare Cash Entitlements.
+        Cash Entitlement Manager :meth:`prepare_entitlements`.
+        This method is used to prepare the entitlement list of the beneficiaries.
+
+        :param cycle: The cycle.
+        :param beneficiaries: The beneficiaries.
+        :param skip_count: Skip compute total entitlements
+        :return:
+        """
         if not self.entitlement_item_ids:
             raise UserError(
                 _("There are no items entered for this entitlement manager.")
@@ -63,16 +72,9 @@ class G2PCashEntitlementManager(models.Model):
         new_entitlements_to_create = {}
         for rec in self.entitlement_item_ids:
             if rec.condition:
-                # Filter res.partner based on entitlement condition and get ids
-                domain = [("id", "in", all_beneficiaries_ids)]
-                domain += self._safe_eval(rec.condition)
-                beneficiaries_ids = self.env["res.partner"].search(domain).ids
-                # Check if single evaluation
-                if self.evaluate_one_item:
-                    # Remove beneficiaries_ids from all_beneficiaries_ids
-                    for bid in beneficiaries_ids:
-                        if bid in all_beneficiaries_ids:
-                            all_beneficiaries_ids.remove(bid)
+                beneficiaries_ids = self._get_all_beneficiaries(
+                    all_beneficiaries_ids, rec.condition, self.evaluate_one_item
+                )
             else:
                 beneficiaries_ids = all_beneficiaries_ids
 
@@ -146,6 +148,34 @@ class G2PCashEntitlementManager(models.Model):
             if new_entitlements_to_create[ent]["initial_amount"] > 0.0:
                 self.env["g2p.entitlement"].create(new_entitlements_to_create[ent])
 
+        # Compute total entitlements
+        if not skip_count:
+            cycle._compute_entitlements_count()
+
+    def _get_all_beneficiaries(
+        self, all_beneficiaries_ids, condition, evaluate_one_item
+    ):
+        """Get All Beneficiaries.
+        Cash Entitlement Manager :meth:`_get_all_beneficiaries`.
+        Called by :meth:`prepare_entitlements` to get all beneficiaries to be prepared entitlements.
+
+        :param all_beneficiaries_ids: Recordset of beneficiaries
+        :param condition: List of tuple of domain filter
+        :param evaluate_one_item: Boolean if true will evaluate all beneficiaries if it should be removed
+        :return: all_beneficiaries_ids: recordset of beneficiaries
+        """
+        # Filter res.partner based on entitlement condition and get ids
+        domain = [("id", "in", all_beneficiaries_ids)]
+        domain += self._safe_eval(condition)
+        beneficiaries_ids = self.env["res.partner"].search(domain).ids
+        # Check if single evaluation
+        if evaluate_one_item:
+            # Remove beneficiaries_ids from all_beneficiaries_ids
+            for bid in beneficiaries_ids:
+                if bid in all_beneficiaries_ids:
+                    all_beneficiaries_ids.remove(bid)
+        return all_beneficiaries_ids
+
     def _check_subsidy(self, amount):
         # Check if initial_amount < max_amount then set = max_amount
         # Ignore if max_amount is set to 0
@@ -154,12 +184,162 @@ class G2PCashEntitlementManager(models.Model):
                 return self.max_amount
         return amount
 
-    def validate_entitlements(self, cycle, cycle_memberships):
-        # TODO: Change the status of the entitlements to `validated` for this members.
-        # move the funds from the program's wallet to the wallet of each Beneficiary that are validated
-        pass
+    def set_pending_validation_entitlements(self, cycle):
+        """Set Cash Entitlements to Pending Validation.
+        Cash Entitlement Manager :meth:`set_pending_validation_entitlements`.
+        Set entitlements to pending_validation in a cycle.
+
+        :param cycle: A recordset of cycle
+        :return:
+        """
+        # Get the number of entitlements in cycle
+        entitlements_count = cycle.get_entitlements(
+            ["draft"],
+            entitlement_model="g2p.entitlement",
+            count=True,
+        )
+        if entitlements_count < self.MIN_ROW_JOB_QUEUE:
+            self._set_pending_validation_entitlements(cycle)
+
+        else:
+            self._set_pending_validation_entitlements_async(cycle, entitlements_count)
+
+    def _set_pending_validation_entitlements(self, cycle, offset=0, limit=None):
+        """Set Cash Entitlements to Pending Validation.
+        Cash Entitlement Manager :meth:`_set_pending_validation_entitlements`.
+        Set entitlements to pending_validation in a cycle.
+
+        :param cycle: A recordset of cycle
+        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
+        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :return:
+        """
+        # Get the entitlements in the cycle
+        entitlements = cycle.get_entitlements(
+            ["draft"],
+            entitlement_model="g2p.entitlement",
+            offset=offset,
+            limit=limit,
+        )
+        entitlements.update({"state": "pending_validation"})
+
+    def validate_entitlements(self, cycle):
+        """Validate Cash Entitlements.
+        Cash Entitlement Manager :meth:`validate_entitlements`.
+        Validate entitlements in a cycle.
+
+        :param cycle: A recordset of cycle
+        :return:
+        """
+        # Get the number of entitlements in cycle
+        entitlements_count = cycle.get_entitlements(
+            ["draft", "pending_validation"],
+            entitlement_model="g2p.entitlement",
+            count=True,
+        )
+        if entitlements_count < self.MIN_ROW_JOB_QUEUE:
+            err, message = self._validate_entitlements(cycle)
+            if err > 0:
+                kind = "danger"
+                return {
+                    "type": "ir.actions.client",
+                    "tag": "display_notification",
+                    "params": {
+                        "title": _("Entitlement"),
+                        "message": message,
+                        "sticky": True,
+                        "type": kind,
+                        "next": {
+                            "type": "ir.actions.act_window_close",
+                        },
+                    },
+                }
+            else:
+                kind = "success"
+                return {
+                    "type": "ir.actions.client",
+                    "tag": "display_notification",
+                    "params": {
+                        "title": _("Entitlement"),
+                        "message": _("Entitlements are validated and approved."),
+                        "sticky": True,
+                        "type": kind,
+                        "next": {
+                            "type": "ir.actions.act_window_close",
+                        },
+                    },
+                }
+        else:
+            self._validate_entitlements_async(cycle, entitlements_count)
+
+    def _validate_entitlements(self, cycle, offset=0, limit=None):
+        """Validate Cash Entitlements.
+        Cash Entitlement Manager :meth:`_validate_entitlements`.
+        Validate entitlements in a cycle.
+
+        :param cycle: A recordset of cycle
+        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
+        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :return err: Integer number of errors
+        :return message: String description of the error
+        """
+        # Get the entitlements in the cycle
+        entitlements = cycle.get_entitlements(
+            ["draft", "pending_validation"],
+            entitlement_model="g2p.entitlement",
+            offset=offset,
+            limit=limit,
+        )
+        err, message = self.approve_entitlements(entitlements)
+        return err, message
+
+    def cancel_entitlements(self, cycle):
+        """Cancel Cash Entitlements.
+        Cash Entitlement Manager :meth:`cancel_entitlements`.
+        Cancel entitlements in a cycle.
+
+        :param cycle: A recordset of cycle
+        :return:
+        """
+        # Get the number of entitlements in cycle
+        entitlements_count = cycle.get_entitlements(
+            ["draft", "pending_validation", "approved"],
+            entitlement_model="g2p.entitlement",
+            count=True,
+        )
+        if entitlements_count < self.MIN_ROW_JOB_QUEUE:
+            self._cancel_entitlements(cycle)
+        else:
+            self._cancel_entitlements_async(cycle, entitlements_count)
+
+    def _cancel_entitlements(self, cycle, offset=0, limit=None):
+        """Cancel Cash Entitlements.
+        Cash Entitlement Manager :meth:`_cancel_entitlements`.
+        Cancel entitlements in a cycle.
+
+        :param cycle: A recordset of cycle
+        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
+        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :return:
+        """
+        # Get the entitlements in the cycle
+        entitlements = cycle.get_entitlements(
+            ["draft", "pending_validation", "approved"],
+            entitlement_model="g2p.entitlement",
+            offset=offset,
+            limit=limit,
+        )
+        entitlements.update({"state": "cancelled"})
 
     def approve_entitlements(self, entitlements):
+        """Approve Cash Entitlements.
+        Cash Entitlement Manager :meth:`_approve_entitlements`.
+        Approve selected entitlements.
+
+        :param entitlements: Selected entitlements to approve
+        :return state_err: Integer number of errors
+        :return message: String description of the errors
+        """
         amt = 0.0
         state_err = 0
         message = ""
@@ -209,18 +389,16 @@ class G2PCashEntitlementManager(models.Model):
                         }
                     )
                 else:
-                    raise UserError(
-                        _(
-                            "The fund for the program: %(program)s [%(fund).2f] "
-                            + "is insufficient for the entitlement: %(entitlement)s"
-                        )
-                        % {
-                            "program": rec.cycle_id.program_id.name,
-                            "fund": fund_balance,
-                            "entitlement": rec.code,
-                        }
-                    )
-
+                    message = _(
+                        "The fund for the program: %(program)s [%(fund).2f] "
+                        + "is insufficient for the entitlement: %(entitlement)s"
+                    ) % {
+                        "program": rec.cycle_id.program_id.name,
+                        "fund": fund_balance,
+                        "entitlement": rec.code,
+                    }
+                    # Stop the process and return an error
+                    return (1, message)
             else:
                 state_err += 1
                 if sw == 0:
@@ -238,7 +416,7 @@ class G2PCashEntitlementManager(models.Model):
     def open_entitlements_form(self, cycle):
         self.ensure_one()
         action = {
-            "name": _("Cycle Cash Entitlements"),
+            "name": _("Cash Entitlements"),
             "type": "ir.actions.act_window",
             "res_model": "g2p.entitlement",
             "context": {
