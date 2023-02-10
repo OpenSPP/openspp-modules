@@ -21,6 +21,7 @@ class G2PGroup(models.Model):
         compute="_compute_ind_grp_num_children",
         help="Number of children",
         store=True,
+        allow_filter=True,
     )
     z_ind_grp_num_elderly = fields.Integer(
         "Number of eldery", compute="_compute_ind_grp_num_eldery", store=True
@@ -29,41 +30,48 @@ class G2PGroup(models.Model):
         "Number of adults",
         compute="_compute_ind_grp_num_adults_male_not_elderly",
         store=True,
+        allow_filter=True,
     )
     z_ind_grp_num_adults_female_not_elderly = fields.Integer(
         "Number of adults woman not elderly",
         compute="_compute_ind_grp_num_adults_female_not_elderly",
         store=True,
+        allow_filter=True,
     )
     z_ind_grp_num_cyclone_aug_2022_injured = fields.Integer(
         "Number of members injured during Cyclone Aug 2022",
         compute="_compute_ind_grp_num_cyclone_aug_2022_injured",
         help="Number of injured",
         store=True,
+        allow_filter=True,
     )
     z_ind_grp_num_receive_government_benefits = fields.Integer(
         "Number of members received government benefits",
         compute="_compute_ind_grp_num_receive_government_benefits",
         help="Number of members received government benefits",
         store=True,
+        allow_filter=True,
     )
     z_ind_grp_num_cyclone_aug_2022_lost_livestock = fields.Integer(
         "Number of members lost significant livestock during Cyclone Aug 2022",
         compute="_compute_ind_grp_num_cyclone_aug_2022_lost_livestock",
         help="Number of members lost significant livestock during Cyclone Aug 2022",
         store=True,
+        allow_filter=True,
     )
     z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income = fields.Integer(
         "Number of members lost primary source income during Cyclone Aug 2022",
         compute="_compute_ind_grp_num_cyclone_aug_2022_lost_primary_source_income",
         help="Number of members lost primary source income during Cyclone Aug 2022",
         store=True,
+        allow_filter=True,
     )
     z_ind_grp_num_disability = fields.Integer(
         "Number of members with disability",
         compute="_compute_ind_grp_num_disability",
         help="Number of members with disability",
         store=True,
+        allow_filter=True,
     )
 
     z_ind_grp_is_hh_with_disabled = fields.Boolean(
@@ -71,6 +79,7 @@ class G2PGroup(models.Model):
         compute="_compute_ind_grp_is_hh_with_disabled",
         help="HHs with disabled (mental or physical) members",
         store=True,
+        allow_filter=True,
     )
 
     z_ind_grp_is_single_head_hh = fields.Boolean(
@@ -79,6 +88,7 @@ class G2PGroup(models.Model):
         help="Single-headed HH - extracted from demographic data of "
         "HH adult members",
         store=True,
+        allow_filter=True,
     )
 
     z_ind_grp_is_elderly_head_hh = fields.Boolean(
@@ -87,24 +97,28 @@ class G2PGroup(models.Model):
         help="Elderly-headed HHs - "
         "extracted from demographic data of HH adult members",
         store=True,
+        allow_filter=True,
     )
 
     z_ind_grp_num_single_child_less_36m_with_birth_cert = fields.Integer(
         "Number of Children of less than 36 months old with birth certificate",
         compute="_compute_ind_grp_single_child_less_36m_with_birth_cert",
         store=True,
+        allow_filter=True,
     )
 
     z_ind_grp_num_twin_less_36m_with_birth_cert = fields.Integer(
         "Number of twins of less than 36 months old with birth certificate",
         compute="_compute_ind_grp_twin_less_36m_with_birth_cert",
         store=True,
+        allow_filter=True,
     )
 
     z_ind_grp_num_triplets_more_less_36m_with_birth_cert = fields.Integer(
         "Number of triplets or more of less than 36 months old with birth certificate",
         compute="_compute_ind_grp_triplets_more_less_36m_with_birth_cert",
         store=True,
+        allow_filter=True,
     )
 
     def _compute_ind_grp_single_child_less_36m_with_birth_cert(self):
@@ -264,7 +278,7 @@ class G2PGroup(models.Model):
         Returns:
 
         """
-        # TODO: Should we exclude eldery?
+        # TODO: This does not work as expected anymore @Emjay0921 it should be only when there is one adult only
         now = datetime.datetime.now()
         domain = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
         self.compute_count_and_set_indicator(
@@ -280,7 +294,7 @@ class G2PGroup(models.Model):
         now = datetime.datetime.now()
         domain = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
         self.compute_count_and_set_indicator(
-            "z_ind_grp_is_elderly_head_hh", None, domain, presence_only=True
+            "z_ind_grp_is_elderly_head_hh", ["Head"], domain, presence_only=True
         )
 
     def _compute_ind_grp_is_hh_with_disabled(self):
