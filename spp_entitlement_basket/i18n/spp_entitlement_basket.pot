@@ -46,6 +46,11 @@ msgid "Basket Entitlement Manager Items"
 msgstr ""
 
 #. module: spp_entitlement_basket
+#: model:ir.model,name:spp_entitlement_basket.model_g2p_program_entitlement_manager
+msgid "Cash Entitlement Manager"
+msgstr ""
+
+#. module: spp_entitlement_basket
 #: model_terms:ir.actions.act_window,help:spp_entitlement_basket.action_entitlement_manager_basket
 msgid ""
 "Click the create button to enter a new food basket entitlement manager."
@@ -223,11 +228,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__id
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__id
 msgid "ID"
-msgstr ""
-
-#. module: spp_entitlement_basket
-#: model:ir.model,name:spp_entitlement_basket.model_g2p_program_entitlement_manager
-msgid "In-Kind Entitlement Manager"
 msgstr ""
 
 #. module: spp_entitlement_basket
