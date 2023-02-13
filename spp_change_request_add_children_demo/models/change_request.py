@@ -1,6 +1,6 @@
 import logging
 
-from odoo import Command, models
+from odoo import Command, api, models
 
 _logger = logging.getLogger(__name__)
 
@@ -74,5 +74,11 @@ class ChangeRequestBaseCustomDemo(models.Model):
                     }
                 )
 
-    def _check_phone_exist(self):
+    # Temporary solution to phone number fo
+    # def _check_phone_exist(self):
+    #    pass
+
+    @api.constrains("registrant_id", "applicant_phone")
+    def _check_applicant_phone(self):
+        # Temporary solution to phone number format error
         pass

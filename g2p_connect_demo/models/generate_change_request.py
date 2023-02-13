@@ -93,22 +93,23 @@ class OpenG2PGenerateChangeRequestData(models.Model):
             else:
                 lang = registrant.company_id.partner_id.lang
             fake = Faker(lang)
-            _logger.info("Registrant Name: %s" % registrant.name)
-            _logger.info("Registrant Language: %s" % lang)
+            _logger.debug("Registrant Name: %s" % registrant.name)
+            _logger.debug("Registrant Language: %s" % lang)
             applicant_ids = registrant.group_membership_ids.mapped("individual.id")
             applicant_id = random.choice(applicant_ids)
+
             # TODO: Fix error in phone number format
-            # applicant = self.env["res.partner"].search([("id", "=", applicant_id)])
-            # if applicant.phone:
-            #     applicant_phone = applicant.phone
-            # else:
-            #    applicant_phone = fake.phone_number()
+            applicant = self.env["res.partner"].search([("id", "=", applicant_id)])
+            if applicant.phone:
+                applicant_phone = applicant.phone
+            else:
+                applicant_phone = fake.phone_number()
 
             cr_vals = {
                 "request_type": request_type,
                 "registrant_id": registrant_id,
                 "applicant_id": applicant_id,
-                # "applicant_phone": applicant_phone,
+                "applicant_phone": applicant_phone,
             }
             _logger.debug("Processing #%s Data: %s" % (i, cr_vals))
             cr_sample_data.append(cr_vals)
