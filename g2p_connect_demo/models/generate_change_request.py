@@ -75,25 +75,6 @@ class OpenG2PGenerateChangeRequestData(models.Model):
         """
         res_id = kwargs.get("res_id")
         res = self.browse(res_id)
-        locales = [
-            # "cs_CZ",
-            # "en_US",
-            "id_ID",
-            # "de_CH",
-            # "ar_AA",
-            # "de_DE",
-            # "en_GB",
-            # "en_IE",
-            # "en_TH",
-            # "es_ES",
-            # "es_MX",
-            # "fr_FR",
-            # "hi_IN",
-            # "hr_HR",
-            # "it_IT",
-            # "zh_CN",
-        ]
-        fake = Faker(locales)
 
         registrants = kwargs.get("registrant_ids")
         membership_kinds = kwargs.get("membership_kinds")
@@ -107,18 +88,27 @@ class OpenG2PGenerateChangeRequestData(models.Model):
 
             # Get applicants based on registrant_id
             registrant = self.env["res.partner"].search([("id", "=", registrant_id)])[0]
+            if registrant.lang:
+                lang = registrant.lang
+            else:
+                lang = registrant.company_id.partner_id.lang
+            fake = Faker(lang)
+            _logger.info("Registrant Name: %s" % registrant.name)
+            _logger.info("Registrant Language: %s" % lang)
             applicant_ids = registrant.group_membership_ids.mapped("individual.id")
             applicant_id = random.choice(applicant_ids)
-            # TODO: Fix error in phone number format
+            # TODO: Fix error in phone number format when using the applicant's phone
             # applicant = self.env["res.partner"].search([("id", "=", applicant_id)])
-            # applicant_phone = applicant.phone or "09111111111"
-            applicant_phone = "09" + str(random.randint(111111111, 999999999))
+            # if applicant.phone:
+            #     applicant_phone = applicant.phone
+            # else:
+            # applicant_phone = fake.phone_number()
 
             cr_vals = {
                 "request_type": request_type,
                 "registrant_id": registrant_id,
                 "applicant_id": applicant_id,
-                "applicant_phone": applicant_phone,
+                # "applicant_phone": applicant_phone,
             }
             _logger.debug("Processing #%s Data: %s" % (i, cr_vals))
             cr_sample_data.append(cr_vals)
@@ -133,14 +123,21 @@ class OpenG2PGenerateChangeRequestData(models.Model):
 
         # Store spp.change.reques.add.children data
         for crd in generated_crs:
-            locale = random.choice(locales)
-            family_name = fake[locale].last_name()
+            # Generate applicant's phone number
+            # applicant_phone = crd.applicant_id.phone
+            # if not applicant_phone:
+            applicant_phone = fake.phone_number()
+            # Update the applicant's phone number
+            _logger.info("Registrant Phone: %s" % applicant_phone)
+            crd.update({"applicant_phone": applicant_phone})
+
+            family_name = fake.last_name()
             gender = random.choice(["Female", "Male"] * 50)
             given_name = (
                 fake.first_name_male() if gender == "Male" else fake.first_name_female()
             )
-            addl_name = fake[locale].last_name()
-            birth_place = fake[locale].address()
+            addl_name = fake.last_name()
+            birth_place = fake.address()
             birthdate_not_exact = random.choice([True, False] * 50)
             date_start = datetime.datetime.now() - relativedelta(years=100)
             date_end = datetime.datetime.now()

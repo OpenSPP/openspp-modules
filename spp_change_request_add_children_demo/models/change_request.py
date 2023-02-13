@@ -73,3 +73,6 @@ class ChangeRequestBaseCustomDemo(models.Model):
                         "id_document_details": "",
                     }
                 )
+
+    def _check_phone_exist(self):
+        pass
