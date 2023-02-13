@@ -7,12 +7,14 @@
             name="model_id"
             ref="spp_change_request_add_children_demo.model_spp_change_request_add_children"
         />
-        <field name="domain_force">[("registrant_id.area_center_id.id", "in", user.spp_area_ids.ids)]</field>
-        <field name="perm_read" eval="True" />
+        <!-- <field name="domain_force">[("registrant_id.area_center_id.id", "in", user.spp_area_ids.ids)]</field> -->
+        <field name="domain_force">[]</field>
+        <field name="perm_read" eval="False" />
         <field name="perm_write" eval="True" />
         <field name="perm_create" eval="True" />
         <field name="perm_unlink" eval="True" />
         <field name="groups" eval="[(4, ref('spp_change_request.group_spp_change_request_validator'))]" />
     </record>
+
 
 </odoo>

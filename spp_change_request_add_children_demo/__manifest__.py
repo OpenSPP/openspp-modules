@@ -22,6 +22,7 @@
         "data/dms.xml",
         "data/change_request_stage.xml",
         "data/change_request_sequence.xml",
+        "data/id_type.xml",
         "views/change_request_add_children_view.xml",
     ],
     "assets": {},
