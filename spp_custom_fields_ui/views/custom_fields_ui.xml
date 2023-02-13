@@ -49,9 +49,12 @@
                           <page
                             name="base"
                             string="Properties"
-                            attrs="{'invisible': [('field_category','not in',['ind'])]}"
+                            attrs="{'invisible': [('field_category','not in',['cst', 'ind'])]}"
                         >
-                              <group string="Base Properties" invisible="1">
+                              <group
+                                string="Base Properties"
+                                attrs="{'invisible': [('field_category','not in',['cst'])]}"
+                            >
                                   <group>
                                       <field name="required" />
                                       <field name="readonly" />
