@@ -37,6 +37,8 @@
     "external_dependencies": {"python": ["faker"]},
     "data": [
         "security/ir.model.access.csv",
+        "data/users_data.xml",
+        "data/sample_data.xml",
         "views/generate_data_view.xml",
         "views/generate_change_request_data_view.xml",
         "views/groups_view.xml",

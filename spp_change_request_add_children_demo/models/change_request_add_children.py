@@ -247,7 +247,9 @@ class ChangeRequestAddChildren(models.Model):
             uid_rec = [
                 Command.create(
                     {
-                        "id_type": self.env.ref("spp_registry.unified_id_type").id,
+                        "id_type": self.env.ref(
+                            "spp_change_request_add_children_demo.unified_id_type"
+                        ).id,
                         "value": self.uid_number,
                     }
                 )
