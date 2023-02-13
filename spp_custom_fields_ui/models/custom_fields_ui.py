@@ -79,6 +79,8 @@ class OpenSPPCustomFieldsUI(models.Model):
         if self.prefix and self.draft_name:
             self.name = self.prefix + "_" + self.draft_name
 
+        self.set_compute()
+
     @api.onchange("field_category")
     def _onchange_field_category(self):
         """
@@ -105,6 +107,11 @@ class OpenSPPCustomFieldsUI(models.Model):
         for rec in self:
             rec.set_compute()
 
+    @api.onchange("target_type")
+    def _onchange_target_type(self):
+        for rec in self:
+            rec.set_compute()
+
     @api.onchange("has_presence")
     def _onchange_has_presence(self):
         """
@@ -120,30 +127,31 @@ class OpenSPPCustomFieldsUI(models.Model):
     def set_compute(self):
         for rec in self:
             name = ""
+            rec.compute = None
+            if rec.prefix:
+                name = rec.prefix + "_"
+            if rec.draft_name:
+                name = name + rec.draft_name
+            rec.name = name
             if rec.field_category == "ind":
-                if rec.prefix:
-                    name = rec.prefix + "_"
-                if rec.draft_name:
-                    name = name + rec.draft_name
-                rec.name = name
+                rec.compute = "kinds = None \n"
+                if rec.kinds:
+                    kind_ids = []
+                    for rec_line in rec.kinds:
+                        kind_id = str(rec_line.name)
+                        kind_ids.append(kind_id)
 
-            rec.compute = "kinds = None \n"
-            if rec.kinds:
-                kind_ids = []
-                for rec_line in rec.kinds:
-                    kind_id = str(rec_line.name)
-                    kind_ids.append(kind_id)
-
-                rec.compute = "kinds = %s \n" % kind_ids
-            rec.compute += "domain = []\n"
-            if rec.has_presence:
-                rec.ttype = "boolean"
-                rec.compute += (
-                    "self.compute_count_and_set_indicator('%s', kinds, domain, presence_only=True)"
-                    % name
-                )
-            else:
-                rec.ttype = "integer"
-                rec.compute += (
-                    "self.compute_count_and_set_indicator('%s', kinds, domain)" % name
-                )
+                    rec.compute = "kinds = %s \n" % kind_ids
+                rec.compute += "domain = []\n"
+                if rec.has_presence:
+                    rec.ttype = "boolean"
+                    rec.compute += (
+                        "self.compute_count_and_set_indicator('%s', kinds, domain, presence_only=True)"
+                        % name
+                    )
+                else:
+                    rec.ttype = "integer"
+                    rec.compute += (
+                        "self.compute_count_and_set_indicator('%s', kinds, domain)"
+                        % name
+                    )
