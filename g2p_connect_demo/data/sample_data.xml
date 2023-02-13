@@ -1,5 +1,14 @@
-<odoo noupdate="1">
-      <!-- Demo Area -->
+<odoo noupdate="0">
+    <!-- Area Kind -->
+    <record id="branch_area_kind" model="spp.area.kind">
+        <field name="name">Branch</field>
+    </record>
+
+    <record id="center_area_kind" model="spp.area.kind">
+        <field name="name">Branch</field>
+    </record>
+
+    <!-- Demo Area -->
       <record id="demo_area_1" model="spp.area">
           <field name="code">201</field>
           <field name="draft_name">Demo Area 1</field>
@@ -15,38 +24,38 @@
       <record id="demo_branch_1" model="spp.area">
           <field name="code">1</field>
           <field name="draft_name">Demo Branch 1</field>
-          <field name="kind" ref="pds_area.branch_area_kind" />
+          <field name="kind" ref="g2p_connect_demo.branch_area_kind" />
       </record>
       <record id="demo_branch_2" model="spp.area">
           <field name="code">2</field>
           <field name="draft_name">Demo Branch 2</field>
-          <field name="kind" ref="pds_area.branch_area_kind" />
+          <field name="kind" ref="g2p_connect_demo.branch_area_kind" />
       </record>
 
       <!-- Demo Center Area -->
       <record id="demo_center_1" model="spp.area">
           <field name="code">101</field>
           <field name="draft_name">Demo Center 1</field>
-          <field name="kind" ref="pds_area.center_area_kind" />
+          <field name="kind" ref="g2p_connect_demo.center_area_kind" />
           <field name="parent_id" ref="demo_branch_1" />
       </record>
       <record id="demo_center_2" model="spp.area">
           <field name="code">102</field>
           <field name="draft_name">Demo Center 2</field>
-          <field name="kind" ref="pds_area.center_area_kind" />
+          <field name="kind" ref="g2p_connect_demo.center_area_kind" />
           <field name="parent_id" ref="demo_branch_1" />
       </record>
 
     <record model="spp.area" id="demo_center_201">
         <field name="code">201</field>
           <field name="draft_name">Demo Center 201</field>
-        <field name="kind" ref="pds_area.center_area_kind" />
+        <field name="kind" ref="g2p_connect_demo.center_area_kind" />
         <field name="parent_id" ref="demo_branch_2" />
     </record>
     <record model="spp.area" id="demo_center_202">
         <field name="code">202</field>
           <field name="draft_name">Demo Center 202</field>
-        <field name="kind" ref="pds_area.center_area_kind" />
+        <field name="kind" ref="g2p_connect_demo.center_area_kind" />
         <field name="parent_id" ref="demo_branch_2" />
     </record>
       <!-- Demo Service Points -->
