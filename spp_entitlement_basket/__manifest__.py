@@ -23,7 +23,11 @@
         "views/stock/entitlement_basket_view.xml",
         "views/entitlement_manager_view.xml",
     ],
-    "assets": {},
+    "assets": {
+        "web.assets_backend": [
+            "spp_entitlement_basket/static/src/css/spp_entitlement_basket.css",
+        ]
+    },
     "demo": [],
     "images": [],
     "application": True,
