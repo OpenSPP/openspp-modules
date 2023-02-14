@@ -56,6 +56,7 @@ msgid "Cash Entitlement Items"
 msgstr "مادة المستحقات النقدية"
 
 #. module: g2p_entitlement_cash
+#: model:ir.model,name:g2p_entitlement_cash.model_g2p_program_entitlement_manager
 #: model:ir.model,name:g2p_entitlement_cash.model_g2p_program_entitlement_manager_cash
 #: model_terms:ir.ui.view,arch_db:g2p_entitlement_cash.view_entitlement_manager_cash_form
 msgid "Cash Entitlement Manager"
@@ -70,6 +71,13 @@ msgstr "بنود مدير الاستحقاقات النقدية"
 #: model:ir.ui.menu,name:g2p_entitlement_cash.menu_entitlement_manager_cash
 msgid "Cash Entitlement Managers"
 msgstr "مدراء الاستحقاقات النقدية"
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, fuzzy, python-format
+#| msgid "Cash Entitlement"
+msgid "Cash Entitlements"
+msgstr "مستحقات نقدية"
 
 #. module: g2p_entitlement_cash
 #: model_terms:ir.actions.act_window,help:g2p_entitlement_cash.action_entitlement_manager_cash
@@ -114,12 +122,6 @@ msgid "Currency"
 msgstr "عملة"
 
 #. module: g2p_entitlement_cash
-#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
-#, fuzzy, python-format
-msgid "Cycle Cash Entitlements"
-msgstr "مستحقات نقدية"
-
-#. module: g2p_entitlement_cash
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__display_name
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash__display_name
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__display_name
@@ -130,6 +132,13 @@ msgstr "الاسم"
 #: model_terms:ir.ui.view,arch_db:g2p_entitlement_cash.view_entitlement_manager_cash_form
 msgid "Enter the Manager Name..."
 msgstr "أدخل اسم المدير ..."
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, fuzzy, python-format
+#| msgid "Cash Entitlement"
+msgid "Entitlement"
+msgstr "مستحقات نقدية"
 
 #. module: g2p_entitlement_cash
 #: model_terms:ir.ui.view,arch_db:g2p_entitlement_cash.view_entitlement_manager_cash_form
@@ -159,6 +168,13 @@ msgid "Entitlement Validation Group"
 msgstr "مجموعة التحقق من الاستحقاق"
 
 #. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, fuzzy, python-format
+#| msgid "Entitlement Validation Group"
+msgid "Entitlements are validated and approved."
+msgstr "مجموعة التحقق من الاستحقاق"
+
+#. module: g2p_entitlement_cash
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_create_wizard__evaluate_one_item
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash__evaluate_one_item
 msgid "Evaluate One Item"
@@ -181,11 +197,6 @@ msgstr "مجموعة من"
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__id
 msgid "ID"
 msgstr "بطاقة تعريف"
-
-#. module: g2p_entitlement_cash
-#: model:ir.model,name:g2p_entitlement_cash.model_g2p_program_entitlement_manager
-msgid "In-Kind Entitlement Manager"
-msgstr "مدير الاستحقاقات العينية"
 
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/wizard/create_program_wizard.py:0
@@ -316,3 +327,10 @@ msgstr ""
 #, fuzzy, python-format
 msgid "There are no items entered for this entitlement manager."
 msgstr "لا توجد عناصر تم إدخالها لمدير الاستحقاقات هذا."
+
+#, fuzzy, python-format
+#~ msgid "Cycle Cash Entitlements"
+#~ msgstr "مستحقات نقدية"
+
+#~ msgid "In-Kind Entitlement Manager"
+#~ msgstr "مدير الاستحقاقات العينية"
