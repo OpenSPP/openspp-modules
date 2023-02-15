@@ -584,6 +584,68 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 }
                 self.env["spp.change.request.group.members"].create(group_members)
 
+    def copy_group_member_ids_condition(self):
+        """Conditions to copy group members
+
+        Overwrite this function to the inherited model to add
+        condition when copying a group member.
+        Do not overwrite or override if no conditions needed.
+
+        example:
+            def copy_group_member_ids_condition:
+                if self.state == 'draft':
+                    return True
+                return False
+
+        NOTE: always return True or False
+        """
+        return True
+
+    def copy_group_member_ids(
+        self,
+        group_id_field,
+        group_ref_field="registrant_id",
+        model_name="spp.change.request.group.members",
+        condition_function=copy_group_member_ids_condition,
+    ):
+        """Copy group members
+
+        :param group_id_field str: name of the field
+        :param group_ref_field str: name of the reference field, default value is 'registrant_id'
+        :param model_name str/list: name or list of names of a model, default value is 'spp.change.request.group.members'
+        :param condition_function method: method to add conditions, default value is copy_group_member_ids_condition
+
+        :return:
+
+        :example:
+            self.copy_group_member_ids("group_member_id")
+            self.copy_group_member_ids("group_member_id", group_ref_field="registrant_id")
+            self.copy_group_member_ids("group_member_id", model_name="spp.change.request")
+            self.copy_group_member_ids("group_member_id", model_name=["spp.change.request", "pds.change.request"])
+
+            def my_condition(self):
+                if self.state == 'draft':
+                    return True
+                return False
+
+            self.copy_group_member_ids("group_member_id", condition_function=my_condition)
+
+        """
+        for rec in self:
+            for mrec in rec[group_ref_field].group_membership_ids:
+                kind_ids = mrec.kind and mrec.kind.ids or None
+                if condition_function(self):
+                    group_members = {
+                        group_id_field: rec.id,
+                        "individual_id": mrec.individual.id,
+                        "kind_ids": kind_ids,
+                    }
+                    if isinstance(model_name, str):
+                        self.env[model_name].create(group_members)
+                    else:
+                        for model in model_name:
+                            self.env[model].create(group_members)
+
     def _copy_service_point_ids(self, change_request_field):
         for rec in self:
             for mrec in rec.registrant_id.service_point_ids:
@@ -762,7 +824,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             if self.env.context.get("uid", False) == rec.assign_to_id.id:
                 rec.current_user_assigned = True
 
-    def check_required_documents(self):
+    def check_required_documents(self, additional_required_doc_type=None):
         """
         This method verifies that documents with the category specified in :attribute:`REQUIRED_DOCUMENT_TYPE`
         are attached to the change request.
@@ -786,6 +848,12 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 document = self.env.ref(doc)
                 if document.id not in file_ids:
                     missing_docs.append(document.name)
+
+            if additional_required_doc_type:
+                for doc in additional_required_doc_type:
+                    document = self.env.ref(doc)
+                    if document.id not in file_ids:
+                        missing_docs.append(document.name)
 
             if missing_docs:
                 if len(missing_docs) > 1:
