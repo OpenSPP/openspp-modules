@@ -161,7 +161,7 @@ class ChangeRequestBase(models.Model):
 
         :param dict vals: field name and value pair
 
-        :return dict res:
+        :return recordset res:
 
         :raise:
         """
@@ -177,8 +177,7 @@ class ChangeRequestBase(models.Model):
         note = _(
             "A new change request was submitted. The next step will set this request to 'Pending Validation'."
         )
-        activity = res._generate_activity(activity_type, summary, note)
-        res["last_activity_id"] = activity.id
+        res._generate_activity(activity_type, summary, note)
         return res
 
     def unlink(self):
@@ -1060,7 +1059,11 @@ class ChangeRequestBase(models.Model):
             "activity_type_id": activity_type_id,
             "date_deadline": fields.Date.today(),
         }
-        return self.env["mail.activity"].create(next_activity)
+        activity = self.env["mail.activity"].create(next_activity)
+        # Mark cancel activity as 'done' because there are no re-activation after cancellation of CR
+        if activity_type == "spp_change_request.cancel_activity":
+            activity_type.action_done()
+        return self.update({"last_activity_id": activity.id})
 
 
 class ChangeRequestValidators(models.Model):
