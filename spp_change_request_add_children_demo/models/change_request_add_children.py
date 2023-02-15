@@ -200,8 +200,6 @@ class ChangeRequestAddChildren(models.Model):
             raise ValidationError(_("The Family Name is required."))
         if not self.given_name:
             raise ValidationError(_("The First Name is required."))
-        if not self.addl_name:
-            raise ValidationError(_("The Father Name is required."))
         if not self.birthdate:
             raise ValidationError(_("The Date of Birth is required."))
         if not self.applicant_relation:
