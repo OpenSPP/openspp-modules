@@ -25,7 +25,7 @@ addon | version | maintainers | summary
 [g2p_connect_demo](g2p_connect_demo/) | 15.0.0.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | G2P Connect Demo
 [spp_base_demo](spp_base_demo/) | 15.0.0.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Base Demo
 [spp_change_request_add_children_demo](spp_change_request_add_children_demo/) | 15.0.0.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | CR Demo: Add Child/Member
-[spp_custom_filter_ui](spp_custom_filter_ui/) | 15.0.0.1.0 | [![nhatnm0612](https://github.com/nhatnm0612.png?size=30px)](https://github.com/nhatnm0612) | Customize Filter of Odoo to show less fields
+[spp_custom_filter_ui](spp_custom_filter_ui/) | 15.0.0.0.0 | [![nhatnm0612](https://github.com/nhatnm0612.png?size=30px)](https://github.com/nhatnm0612) | Base config for SPP Custom Filter to only display useful fields
 [spp_demo](spp_demo/) | 15.0.0.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Demo
 
 [//]: # (end addons)
