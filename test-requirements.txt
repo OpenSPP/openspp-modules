@@ -17,6 +17,7 @@ git+https://github.com/openspp/openspp-registry@15.0#subdirectory=setup/spp_scan
 git+https://github.com/openspp/openspp-registry@15.0#subdirectory=setup/spp_change_request
 git+https://github.com/openspp/openspp-theme@15.0#subdirectory=setup/theme_openspp
 git+https://github.com/openspp/openspp-program@15.0#subdirectory=setup/spp_pos
+git+https://github.com/openspp/openspp-program@15.0#subdirectory=setup/spp_programs
 git+https://github.com/openspp/openspp-grievance-redress-mechanism@15.0#subdirectory=setup/spp_helpdesk
 git+https://github.com/openspp/openspp-communication@15.0#subdirectory=setup/spp_sms
 git+https://github.com/openspp/openspp-program@15.0#subdirectory=setup/g2p_entitlement_cash
