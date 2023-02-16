@@ -237,7 +237,6 @@ class AuthJWTValidator(models.Model):
         else:
             default = {"name": name}
 
-        self.ensure_one()
         new = super().copy(default)
 
         return new
