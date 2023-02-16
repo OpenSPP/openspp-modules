@@ -1,4 +1,4 @@
-<odoo noupdate="0">
+<odoo noupdate="1">
     <!-- Area Kind -->
     <record id="branch_area_kind" model="spp.area.kind">
         <field name="name">Branch</field>
