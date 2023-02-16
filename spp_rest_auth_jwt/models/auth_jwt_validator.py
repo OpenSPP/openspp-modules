@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import logging
+import uuid
 from functools import partial
 
 import jwt  # pylint: disable=missing-manifest-dependency
@@ -228,3 +229,15 @@ class AuthJWTValidator(models.Model):
     def unlink(self):
         self._unregister_auth_method()
         return super().unlink()
+
+    def copy(self, default=None):
+        name = f"{self.name}_{uuid.uuid4().hex}"
+        if default:
+            default.update({"name": name})
+        else:
+            default = {"name": name}
+
+        self.ensure_one()
+        new = super().copy(default)
+
+        return new
