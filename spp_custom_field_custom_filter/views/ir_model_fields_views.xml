@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_custom_fields_ui_form_inherit" model="ir.ui.view">
+        <field name="name">ir.model.fields.view.form.inherit</field>
+        <field name="model">ir.model.fields</field>
+        <field name="inherit_id" ref="spp_custom_fields_ui.view_custom_fields_ui_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='readonly']" position="after">
+                <field name="allow_filter" groups="base.group_no_one" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
