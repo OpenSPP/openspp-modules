@@ -49,6 +49,8 @@ class SPPBasketEntitlementManager(models.Model):
         "Entitlement Items",
     )  #: Details of the food basket (products, QTY, UoM)
 
+    basket_product_ids = fields.One2many(related="entitlement_basket_id.product_ids")
+
     # any field that is an integer of `res.partner`
     # It could be the number of members, children, elderly, or any other metrics.
     # if no multiplier field is set, it is considered as 1.
