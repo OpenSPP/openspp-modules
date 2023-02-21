@@ -267,7 +267,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             style="margin-left: 10px;"
                         />
                     </footer>
-                    <group colspan="4" col="4" string="Monitoring" groups="g2p_registry_base.group_g2p_admin">
+                    <group colspan="4" col="4" string="Monitoring">
                         <field
                             name="assign_to_id"
                             string="Assigned To"
