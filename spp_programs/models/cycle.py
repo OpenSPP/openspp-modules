@@ -26,13 +26,6 @@ class G2PCycle(models.Model):
             )
             rec.update({"inkind_entitlements_count": entitlements_count})
 
-    def prepare_entitlement(self):
-        """Hide 'Prepare Entitlement' button when clicked"""
-        super().prepare_entitlement()
-        self.write({"hide_prepare_entitlement_button": True})
-
-        return
-
     def copy_beneficiaries_from_program(self):
         """Show 'Prepare Entitlement' button if a beneficiary is successfully imported"""
         action = super().copy_beneficiaries_from_program()
