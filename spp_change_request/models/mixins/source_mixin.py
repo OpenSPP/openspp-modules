@@ -175,14 +175,13 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 "The change request is now set for validation. Depending on the "
                 "validation sequence, this may be subjected to one or more validations."
             )
-            activity = request._generate_activity(activity_type, summary, note)
+            request._generate_activity(activity_type, summary, note)
 
             # Update change request
             request.update(
                 {
                     "date_requested": fields.Datetime.now(),
                     "state": "pending",
-                    "last_activity_id": activity.id,
                     "assign_to_id": None,
                     "rejected_by_id": None,
                     "date_rejected": None,
@@ -248,16 +247,9 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                             "The change request is now fully validated. It is now submitted "
                             + "for final application of changes."
                         )
-                        activity = request._generate_activity(
-                            activity_type, summary, note
-                        )
+                        request._generate_activity(activity_type, summary, note)
 
-                        vals.update(
-                            {
-                                "state": "validated",
-                                "last_activity_id": activity.id,
-                            }
-                        )
+                        vals.update({"state": "validated"})
                     # Update the change request
                     request.update(vals)
 
@@ -429,7 +421,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             activity_type = "spp_change_request.cancel_activity"
             summary = _("Change Request Cancelled")
             note = _("The change request was cancelled by %s.", self.env.user.name)
-            activity = request._generate_activity(activity_type, summary, note)
+            request._generate_activity(activity_type, summary, note)
 
             # Update the Request
             request.update(
@@ -438,11 +430,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     "cancelled_by_id": self.env.user.id,
                     "date_cancelled": fields.Datetime.now(),
                     "validator_ids": [(Command.clear())],
-                    "last_activity_id": activity.id,
                 }
             )
-            # Mark cancel activity as 'done' because there are no re-activation after cancellation of CR
-            request.last_activity_id.action_done()
         else:
             raise UserError(
                 _(
@@ -484,7 +473,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             activity_type = "spp_change_request.reset_draft_activity"
             summary = _("CR Reset to Draft")
             note = _("The change request was reset to draft.")
-            activity = request._generate_activity(activity_type, summary, note)
+            request._generate_activity(activity_type, summary, note)
 
             # Update the Request
             request.update(
@@ -493,7 +482,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     "reset_to_draft_by_id": self.env.user.id,
                     "state": "draft",
                     "validator_ids": [(Command.clear())],
-                    "last_activity_id": activity.id,
                 }
             )
         else:
@@ -553,7 +541,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 activity_type = "spp_change_request.reject_activity"
                 summary = _("Change Request Rejected")
                 note = _("The change request was rejected by %s.", self.env.user.name)
-                activity = request._generate_activity(activity_type, summary, note)
+                request._generate_activity(activity_type, summary, note)
 
                 # Update the Request
                 request.update(
@@ -563,7 +551,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         "rejected_by_id": self.env.user.id,
                         "date_rejected": fields.Datetime.now(),
                         "validator_ids": [(Command.clear())],
-                        "last_activity_id": activity.id,
                     }
                 )
             else:
