@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_program_wizard_form_view_spp" model="ir.ui.view">
+        <field name="name">create_program_wizard_form_view_spp</field>
+        <field name="model">g2p.program.create.wizard</field>
+        <field name="priority">1000</field>
+        <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='eligibility']/group[1]/label[1]" position="before">
+                <field name="admin_area_ids" colspan="4" widget="many2many_tags" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
