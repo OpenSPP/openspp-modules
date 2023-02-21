@@ -5,3 +5,4 @@ from . import cycle
 from . import entitlement
 from . import registrant
 from . import stock
+from . import managers
