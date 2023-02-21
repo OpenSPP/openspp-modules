@@ -300,14 +300,10 @@ class G2PCashEntitlementManager(models.Model):
 
     def mark_job_as_done(self, cycle, msg):
         if cycle.validate_async_err:
-            super().mark_job_as_done(
-                cycle,
-                _(
-                    "Entitlements are not approved due to some issues. Kindly address the issue."
-                ),
+            msg = _(
+                "Entitlements are not approved due to some issues. Kindly address the issue."
             )
-        else:
-            super().mark_job_as_done(cycle, msg)
+        super().mark_job_as_done(cycle, msg)
 
         return
 
