@@ -36,6 +36,12 @@ msgid "Add a new entitlement!"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__admin_area_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__admin_area_ids
+msgid "Admin Area"
+msgstr ""
+
+#. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
 msgid "Approve Entitlement"
 msgstr ""
@@ -96,6 +102,11 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model,name:spp_programs.model_res_partner
 msgid "Contact"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
 msgstr ""
 
 #. module: spp_programs
@@ -343,6 +354,12 @@ msgid "Program"
 msgstr ""
 
 #. module: spp_programs
+#: code:addons/spp_programs/wizard/create_program_wizard.py:0
+#, python-format
+msgid "Programs"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__qty
 msgid "QTY"
 msgstr ""
@@ -391,6 +408,11 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__service_point_id
 msgid "Service Point"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_program_membership_manager_default
+msgid "Simple Eligibility"
 msgstr ""
 
 #. module: spp_programs
