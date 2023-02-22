@@ -6,14 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-02-23 01:30+0000\n"
+"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
+"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
+"spp_entitlement_basket/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_entitlement_basket
 #: model:ir.model.fields,help:spp_entitlement_basket.field_g2p_program_create_wizard__max_multiplier
@@ -34,7 +37,7 @@ msgstr ""
 #. module: spp_entitlement_basket
 #: model_terms:ir.actions.act_window,help:spp_entitlement_basket.action_entitlement_manager_basket
 msgid "Add an Entitlement Manager!"
-msgstr ""
+msgstr "أضف مدير استحقاق!"
 
 #. module: spp_entitlement_basket
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__entitlement_id
@@ -108,7 +111,7 @@ msgstr ""
 #: model:ir.model.fields,help:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__uom_id
 #: model:ir.model.fields,help:spp_entitlement_basket.field_spp_entitlement_basket_product__uom_id
 msgid "Default unit of measure used for all stock operations."
-msgstr ""
+msgstr "وحدة القياس الافتراضية المستخدمة لجميع عمليات المخزون."
 
 #. module: spp_entitlement_basket
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__display_name
@@ -185,7 +188,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
-msgstr ""
+msgstr "خطأ في حالة الاستحقاق ! الاستحقاقات ليست في حالة \"التحقق المعلق\":\n"
 
 #. module: spp_entitlement_basket
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__entitlement_validation_group_id
@@ -234,7 +237,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.create_program_wizard_form_view_custom_basket
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_form
 msgid "Inventory Settings"
-msgstr ""
+msgstr "إعدادات الجرد"
 
 #. module: spp_entitlement_basket
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.create_program_wizard_form_view_custom_basket
@@ -278,7 +281,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__manage_inventory
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__manage_inventory
 msgid "Manage Inventory"
-msgstr ""
+msgstr "إدارة المخزون"
 
 #. module: spp_entitlement_basket
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__entitlement_kind
@@ -317,7 +320,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__product_id
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__product_id
 msgid "Product"
-msgstr ""
+msgstr "منتج"
 
 #. module: spp_entitlement_basket
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__product_names
@@ -352,14 +355,14 @@ msgstr ""
 #: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
 #, python-format
 msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
-msgstr ""
+msgstr "%(partner)sالبرنامج:٪ (prg)s ، المستفيد:٪ (الشريك) s.\n"
 
 #. module: spp_entitlement_basket
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__qty
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__qty
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__qty
 msgid "QTY"
-msgstr ""
+msgstr "الكمية"
 
 #. module: spp_entitlement_basket
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.entitlement_basket_filter
@@ -388,17 +391,17 @@ msgstr ""
 #: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
 #, python-format
 msgid "There are no items entered for this entitlement manager."
-msgstr ""
+msgstr "لا توجد عناصر تم إدخالها لمدير الاستحقاقات هذا."
 
 #. module: spp_entitlement_basket
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__uom_id
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__uom_id
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__uom_id
 msgid "Unit of Measure"
-msgstr ""
+msgstr "وحدة القياس"
 
 #. module: spp_entitlement_basket
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__warehouse_id
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__warehouse_id
 msgid "Warehouse"
-msgstr ""
+msgstr "مستودع"
