@@ -17,6 +17,7 @@ class G2PCycle(models.Model):
     picking_ids = fields.One2many("stock.picking", "cycle_id", string="Stock Transfers")
     procurement_group_id = fields.Many2one("procurement.group", "Procurement Group")
 
+    validate_async_err = fields.Boolean(default=False)
     hide_prepare_entitlement_button = fields.Boolean(default=False)
 
     def _compute_inkind_entitlements_count(self):

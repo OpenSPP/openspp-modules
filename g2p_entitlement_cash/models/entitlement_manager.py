@@ -291,7 +291,21 @@ class G2PCashEntitlementManager(models.Model):
             limit=limit,
         )
         err, message = self.approve_entitlements(entitlements)
+        if err:
+            cycle.message_post(body=_(message))
+            cycle.write({"validate_async_err": True, "state": "to_approve"})
+        else:
+            cycle.write({"validate_async_err": False})
         return err, message
+
+    def mark_job_as_done(self, cycle, msg):
+        if cycle.validate_async_err:
+            msg = _(
+                "Entitlements are not approved due to some issues. Kindly address the issue."
+            )
+        super().mark_job_as_done(cycle, msg)
+
+        return
 
     def cancel_entitlements(self, cycle):
         """Cancel Cash Entitlements.
