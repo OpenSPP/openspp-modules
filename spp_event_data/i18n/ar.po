@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-25 13:22+0000\n"
-"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"PO-Revision-Date: 2023-02-23 01:06+0000\n"
+"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_event_data/ar/>\n"
 "Language: ar\n"
@@ -90,8 +90,9 @@ msgstr "انشأ على"
 #: model:ir.model.fields,field_description:spp_event_data.field_res_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__dms_directory_ids
+#, fuzzy
 msgid "DMS Directories"
-msgstr ""
+msgstr "دليل الوثائق"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__display_name
