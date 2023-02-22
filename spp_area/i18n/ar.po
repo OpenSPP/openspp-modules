@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-18 14:42+0000\n"
-"Last-Translator: sajjad alkantale <sajjadjameel68@gmail.com>\n"
+"PO-Revision-Date: 2023-02-23 01:06+0000\n"
+"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_area/ar/>\n"
 "Language: ar\n"
@@ -244,8 +244,9 @@ msgstr "انشأ على"
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__dms_directory_ids
+#, fuzzy
 msgid "DMS Directories"
-msgstr ""
+msgstr "دليل الوثائق"
 
 #. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_import_form
