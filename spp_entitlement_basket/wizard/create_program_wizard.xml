@@ -4,9 +4,6 @@
         <field name="model">g2p.program.create.wizard</field>
         <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//form" position="attributes">
-                <attribute name="class" separator=" " add="o_form_sheet_scrollable" />
-            </xpath>
             <xpath expr="//field[@name='target_type']" position="attributes">
                 <attribute
                     name="attrs"
@@ -39,7 +36,7 @@
                                     colspan="4"
                                     readonly="1"
                                 >
-                                    <tree limit="4">
+                                    <tree limit="4" class="o_form_sheet_scrollable">
                                         <field name="product_id" />
                                         <field name="qty" />
                                         <field name="uom_id" />
