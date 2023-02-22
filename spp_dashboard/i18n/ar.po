@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-02 07:22+0000\n"
-"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"PO-Revision-Date: 2023-02-23 01:30+0000\n"
+"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_dashboard/ar/>\n"
 "Language: ar\n"
@@ -25,43 +25,47 @@ msgid ""
 "<span class=\"o_stat_text\">Open</span>\n"
 "                        <span class=\"o_stat_text\">Dashboard</span>"
 msgstr ""
+"<span class=\"o_stat_text\">Open</span>\n"
+"                        <span class=\"o_stat_text\">Dashboard</span>"
 
 #. module: spp_dashboard
 #: code:addons/spp_dashboard/models/cycles.py:0
 #, python-format
 msgid "A dashboard must be defined for this cycle."
-msgstr ""
+msgstr "يجب تحديد لوحة القيادة لهذه الدورة."
 
 #. module: spp_dashboard
 #: code:addons/spp_dashboard/models/programs.py:0
 #, python-format
 msgid "A dashboard must be defined for this program."
-msgstr ""
+msgstr "يجب تحديد لوحة القيادة لهذا البرنامج."
 
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_block__args
 msgid "Arguments"
-msgstr ""
+msgstr "الاسباب"
 
 #. module: spp_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_block_form_view_spp
+#, fuzzy
 msgid "Block Information"
-msgstr ""
+msgstr "المعلومات"
 
 #. module: spp_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_block_form_view_spp
+#, fuzzy
 msgid "Block Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_menu__client_action
 msgid "Client Action"
-msgstr ""
+msgstr "اجرائات المستخدم"
 
 #. module: spp_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_menu_form_view_spp
 msgid "Create Menu"
-msgstr ""
+msgstr "إنشاء قائمة"
 
 #. module: spp_dashboard
 #: code:addons/spp_dashboard/models/cycles.py:0
@@ -69,13 +73,13 @@ msgstr ""
 #: model:ir.ui.menu,name:spp_dashboard.menu_cycle_dashboard
 #, python-format
 msgid "Cycle"
-msgstr ""
+msgstr "دورة"
 
 #. module: spp_dashboard
 #: model:ir.actions.client,name:spp_dashboard.action_cycle_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.view_cycle_form_dashboard
 msgid "Cycle Dashboard"
-msgstr ""
+msgstr "لوحة تحكم الدورة"
 
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_g2p_cycle__dashboard_id
@@ -84,42 +88,44 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.view_cycle_form_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.view_program_list_form_dashboard
 msgid "Dashboard"
-msgstr ""
+msgstr "لوحة التحكم"
 
 #. module: spp_dashboard
 #: model:ir.model,name:spp_dashboard.model_dashboard_block
+#, fuzzy
 msgid "Dashboard Blocks"
-msgstr ""
+msgstr "لوحة التحكم"
 
 #. module: spp_dashboard
 #: model:ir.model,name:spp_dashboard.model_dashboard_menu
 msgid "Dashboard Menu"
-msgstr ""
+msgstr "قائمة لوحة التحكم"
 
 #. module: spp_dashboard
 #: model:ir.model.fields.selection,name:spp_dashboard.selection__dashboard_block__result_type__float
+#, fuzzy
 msgid "Float"
-msgstr ""
+msgstr "الكسور"
 
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_block__func
 msgid "Function"
-msgstr ""
+msgstr "وظيفة"
 
 #. module: spp_dashboard
 #: model:ir.model.fields.selection,name:spp_dashboard.selection__dashboard_block__result_type__int
 msgid "Integer"
-msgstr ""
+msgstr "عدد صحيح"
 
 #. module: spp_dashboard
 #: model:ir.ui.menu,name:spp_dashboard.menu_all_program_dashboard
 msgid "Main"
-msgstr ""
+msgstr "رئيسي"
 
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_menu__action_menu_id
 msgid "Menu"
-msgstr ""
+msgstr "قائمة"
 
 #. module: spp_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_block_form_view_spp
@@ -131,12 +137,12 @@ msgstr "اسم:"
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.view_program_list_form_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.view_program_list_tree_dashboard
 msgid "Open Dashboard"
-msgstr ""
+msgstr "افتح لوحة التحكم"
 
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_menu__menu_id
 msgid "Parent Menu"
-msgstr ""
+msgstr "القائمة الام"
 
 #. module: spp_dashboard
 #: code:addons/spp_dashboard/models/programs.py:0
@@ -150,29 +156,29 @@ msgstr "برنامج"
 #: model:ir.actions.client,name:spp_dashboard.action_program_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.view_program_list_form_dashboard
 msgid "Program Dashboard"
-msgstr ""
+msgstr "لوحة تحكم البرنامج"
 
 #. module: spp_dashboard
 #: model:ir.actions.client,name:spp_dashboard.action_all_program_dashboard
 msgid "Programs Dashboard"
-msgstr ""
+msgstr "لوحة تحكم البرنامج"
 
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_block__result_type
 msgid "Result Data Type"
-msgstr ""
+msgstr "نتيجة نوع البيانات"
 
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_menu__sequence
 msgid "Sequence"
-msgstr "تسلسل"
+msgstr "التسلسل"
 
 #. module: spp_dashboard
 #: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_block__use_func
 msgid "Use Function"
-msgstr ""
+msgstr "وظائف المستخدم"
 
 #. module: spp_dashboard
 #: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_block_form_view_spp
 msgid "e.g.'abc',['def','xyz']"
-msgstr ""
+msgstr "على سبيل المثال 'abc'، ['def'، 'xyz']"
