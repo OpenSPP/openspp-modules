@@ -550,7 +550,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         "rejected_remarks": rejected_remarks,
                         "rejected_by_id": self.env.user.id,
                         "date_rejected": fields.Datetime.now(),
-                        "validator_ids": [(Command.clear())],
+                        # "validator_ids": [(Command.clear())],
                     }
                 )
             else:
