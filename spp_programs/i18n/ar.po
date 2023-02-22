@@ -6,14 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-02-23 01:30+0000\n"
+"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
+"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
+"spp_programs/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.14\n"
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__inkind_entitlements_count
@@ -104,7 +107,7 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model,name:spp_programs.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "اتصال"
 
 #. module: spp_programs
 #: model:ir.model,name:spp_programs.model_g2p_program_create_wizard
@@ -135,7 +138,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_programs.field_procurement_group__cycle_id
 #: model:ir.model.fields,field_description:spp_programs.field_stock_picking__cycle_id
 msgid "Cycle"
-msgstr ""
+msgstr "دورة"
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__cycle_id_domain
@@ -248,7 +251,7 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.ui.menu,name:spp_programs.spp_programs_root
 msgid "In-Kind"
-msgstr ""
+msgstr "عينيًا"
 
 #. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
@@ -273,7 +276,7 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_stock_move__entitlement_id
 msgid "In-kind Entitlement"
-msgstr ""
+msgstr "الاستحقاق العيني"
 
 #. module: spp_programs
 #: code:addons/spp_programs/wizard/inkind_entitlement_report_wiz.py:0
@@ -334,7 +337,7 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__manage_inventory
 msgid "Manage Inventory"
-msgstr ""
+msgstr "إدارة المخزون"
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__name
@@ -375,7 +378,7 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__product_id
 msgid "Product"
-msgstr ""
+msgstr "منتج"
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__program_id
@@ -392,7 +395,7 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__qty
 msgid "QTY"
-msgstr ""
+msgstr "الكمية"
 
 #. module: spp_programs
 #: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__rdpd2ben
@@ -512,7 +515,7 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__uom_id
 msgid "Unit of Measure"
-msgstr ""
+msgstr "وحدة القياس"
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__valid_from
@@ -541,7 +544,7 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__warehouse_id
 msgid "Warehouse"
-msgstr ""
+msgstr "مستودع"
 
 #. module: spp_programs
 #: code:addons/spp_programs/models/entitlement.py:0
