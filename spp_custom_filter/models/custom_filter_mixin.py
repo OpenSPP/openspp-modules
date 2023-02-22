@@ -44,14 +44,15 @@ class CustomFilterMixin(models.AbstractModel):
             )
         """
         res = super().fields_get(allfields, attributes)
-
+        if self.user_has_groups("base.group_no_one"):
+            return res
         for fname in res.keys():
             if fname == "id":
                 allow_filter = getattr(self._fields[fname], "allow_filter", True)
             else:
                 allow_filter = getattr(self._fields[fname], "allow_filter", False)
-            res[fname]["searchable"] = allow_filter and res[fname]["searchable"]
-            res[fname]["exportable"] = allow_filter
+            res[fname]["searchable"] = allow_filter and res[fname].get("searchable")
+            res[fname]["exportable"] = allow_filter and res[fname].get("exportable")
 
         return res
 
