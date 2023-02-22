@@ -18,6 +18,7 @@ class G2PCycle(models.Model):
     procurement_group_id = fields.Many2one("procurement.group", "Procurement Group")
 
     validate_async_err = fields.Boolean(default=False)
+    hide_prepare_entitlement_button = fields.Boolean(default=False)
 
     def _compute_inkind_entitlements_count(self):
         for rec in self:
@@ -25,3 +26,14 @@ class G2PCycle(models.Model):
                 [("cycle_id", "=", rec.id)]
             )
             rec.update({"inkind_entitlements_count": entitlements_count})
+
+    def copy_beneficiaries_from_program(self):
+        """Show 'Prepare Entitlement' button if a beneficiary is successfully imported"""
+        action = super().copy_beneficiaries_from_program()
+
+        if action.get("params") and action["params"].get("type"):
+            type = action["params"]["type"]
+            if type == "success":
+                self.write({"hide_prepare_entitlement_button": False})
+
+        return action
