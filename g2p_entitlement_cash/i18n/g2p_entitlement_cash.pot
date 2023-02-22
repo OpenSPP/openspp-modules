@@ -164,6 +164,13 @@ msgstr ""
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
+msgid ""
+"Entitlements are not approved due to some issues. Kindly address the issue."
+msgstr ""
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
 msgid "Entitlements are validated and approved."
 msgstr ""
 
