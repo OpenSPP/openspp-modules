@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo-addon-spp_change_request>=15.0dev,<15.1dev',
         'odoo-addon-spp_consent>=15.0dev,<15.1dev',
         'odoo-addon-spp_custom_field>=15.0dev,<15.1dev',
+        'odoo-addon-spp_custom_field_custom_filter>=15.0dev,<15.1dev',
         'odoo-addon-spp_custom_fields_ui>=15.0dev,<15.1dev',
         'odoo-addon-spp_custom_filter>=15.0dev,<15.1dev',
         'odoo-addon-spp_event_data>=15.0dev,<15.1dev',
