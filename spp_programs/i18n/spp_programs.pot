@@ -527,6 +527,11 @@ msgid "Valid Until"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__validate_async_err
+msgid "Validate Async Err"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__unit_price
 msgid "Value/Unit"
 msgstr ""
