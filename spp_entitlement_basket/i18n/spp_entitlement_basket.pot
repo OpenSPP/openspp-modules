@@ -330,6 +330,7 @@ msgid "Product:"
 msgstr ""
 
 #. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__basket_product_ids
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__basket_product_ids
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__product_ids
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_form
