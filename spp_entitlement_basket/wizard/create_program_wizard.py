@@ -26,6 +26,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
     entitlement_basket_id = fields.Many2one(
         "spp.entitlement.basket", "Entitlement Basket"
     )
+    basket_product_ids = fields.One2many(related="entitlement_basket_id.product_ids")
     basket_entitlement_item_ids = fields.One2many(
         "g2p.program.create.wizard.basket.entitlement.item",
         "program_id",
@@ -85,7 +86,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
                         "The Food Basket in Cycle Manager is required in the Basket entitlement manager."
                     )
                 )
-            if not self.basket_entitlement_item_ids:
+            if not self.basket_product_ids:
                 raise UserError(
                     _("Items are required in the Basket entitlement manager.")
                 )
