@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-25 13:22+0000\n"
-"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"PO-Revision-Date: 2023-02-24 02:22+0000\n"
+"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_consent/ar/>\n"
 "Language: ar\n"
@@ -29,7 +29,7 @@ msgstr ""
 #. module: spp_consent
 #: model_terms:ir.ui.view,arch_db:spp_consent.record_consent_wizard_form_view
 msgid "Cancel"
-msgstr ""
+msgstr "الغاء"
 
 #. module: spp_consent
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent__config_id
@@ -122,7 +122,7 @@ msgstr "مجموعة"
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent_config__id
 #: model:ir.model.fields,field_description:spp_consent.field_spp_record_consent_wizard__id
 msgid "ID"
-msgstr "بطاقة تعريف"
+msgstr ""
 
 #. module: spp_consent
 #: model:ir.model.fields,field_description:spp_consent.field_spp_consent____last_update
