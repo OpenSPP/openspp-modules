@@ -30,12 +30,7 @@
                                     options="{'no_open':True,'no_create':True,'no_create_edit':True}"
                                 />
                                 <field name="max_multiplier" />
-                                <field
-                                    name="basket_entitlement_item_ids"
-                                    nolabel="1"
-                                    colspan="4"
-                                    readonly="1"
-                                >
+                                <field name="basket_product_ids" nolabel="1" colspan="4" readonly="1">
                                     <tree limit="4" class="o_form_sheet_scrollable">
                                         <field name="product_id" />
                                         <field name="qty" />
