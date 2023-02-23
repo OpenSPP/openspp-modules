@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-02-23 01:30+0000\n"
+"PO-Revision-Date: 2023-02-24 02:22+0000\n"
 "Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "g2p_entitlement_cash/ar/>\n"
@@ -203,7 +203,7 @@ msgstr "مجموعة من"
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash__id
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__id
 msgid "ID"
-msgstr "بطاقة تعريف"
+msgstr ""
 
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/wizard/create_program_wizard.py:0
