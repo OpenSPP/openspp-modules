@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-18 12:56+0000\n"
-"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"PO-Revision-Date: 2023-02-23 01:30+0000\n"
+"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_entitlement_in_kind/ar/>\n"
 "Language: ar\n"
@@ -32,7 +32,7 @@ msgstr ""
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_manager_inkind
 msgid "Add an Entitlement Manager!"
-msgstr ""
+msgstr "أضف مدير استحقاق!"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
@@ -42,7 +42,7 @@ msgstr ""
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_manager_inkind
 msgid "Click the create button to enter a new in-kind entitlement manager."
-msgstr ""
+msgstr "انقر فوق الزر \"إنشاء\" لإدخال مدير استحقاق جديد."
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_inkind
@@ -74,7 +74,7 @@ msgstr "إنشاء معالج برنامج جديد"
 #. module: spp_entitlement_in_kind
 #: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_create_wizard_entitlement_item
 msgid "Create a New Program Wizard Entitlement Items"
-msgstr ""
+msgstr "إنشاء عناصر استحقاق لبرنامج جديد"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__create_uid
@@ -107,7 +107,7 @@ msgstr ""
 #: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__uom_id
 #: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__uom_id
 msgid "Default unit of measure used for all stock operations."
-msgstr ""
+msgstr "وحدة القياس الافتراضية المستخدمة لجميع عمليات المخزون."
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__display_name
@@ -155,7 +155,7 @@ msgstr "مدراء الاستحقاق"
 #, python-format
 msgid ""
 "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
-msgstr ""
+msgstr "خطأ في حالة الاستحقاق ! الاستحقاقات ليست في حالة \"التحقق المعلق\":\n"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__entitlement_validation_group_id
@@ -188,11 +188,11 @@ msgstr "تقييم عنصر واحد"
 
 #. module: spp_entitlement_in_kind
 #: code:addons/spp_entitlement_in_kind/wizard/create_program_wizard.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "For inventory management, the warehouse is required in the In-kind "
 "entitlement manager."
-msgstr ""
+msgstr "لإدارة المخزون ، المستودع يتطلب وجود مدير الاستحقاقات العينية."
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.entitlement_manager_inkind_filter
@@ -210,7 +210,7 @@ msgstr "بطاقة تعريف"
 #: model:ir.model.fields.selection,name:spp_entitlement_in_kind.selection__g2p_program_create_wizard__entitlement_kind__inkind
 #: model:ir.ui.menu,name:spp_entitlement_in_kind.g2p_inkind_root
 msgid "In-Kind"
-msgstr ""
+msgstr "عينيًا"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
@@ -220,7 +220,7 @@ msgstr "المستحقات العينية"
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__inkind_item_id
 msgid "In-Kind Entitlement Condition"
-msgstr ""
+msgstr "شرط الاستحقاق العيني"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_entitlement_manager
@@ -232,12 +232,12 @@ msgstr "مدير الاستحقاقات العينية"
 #. module: spp_entitlement_in_kind
 #: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_entitlement_manager_inkind_item
 msgid "In-Kind Entitlement Manager Items"
-msgstr ""
+msgstr "عناصر مدير الاستحقاقات العينية"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.ui.menu,name:spp_entitlement_in_kind.menu_entitlement_manager_inkind
 msgid "In-Kind Entitlement Managers"
-msgstr ""
+msgstr "مديرو الاستحقاقات العينية"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
@@ -248,7 +248,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__entitlement_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_stock_move__entitlement_id
 msgid "In-kind Entitlement"
-msgstr ""
+msgstr "الاستحقاق العيني"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.actions.act_window,name:spp_entitlement_in_kind.action_entitlement_inkind
@@ -264,7 +264,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.create_program_wizard_form_view_custom_inkind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
 msgid "Inventory Settings"
-msgstr ""
+msgstr "إعدادات الجرد"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.create_program_wizard_form_view_custom_inkind
@@ -276,7 +276,7 @@ msgstr "عناصر"
 #: code:addons/spp_entitlement_in_kind/wizard/create_program_wizard.py:0
 #, python-format
 msgid "Items are required in the In-kind entitlement manager."
-msgstr ""
+msgstr "العناصر مطلوبة في مدير الاستحقاقات العينية."
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item____last_update
@@ -304,13 +304,13 @@ msgstr "آخر تحديث في"
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__manage_inventory
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__manage_inventory
 msgid "Manage Inventory"
-msgstr ""
+msgstr "إدارة المخزون"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.create_program_wizard_form_view_custom_inkind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
 msgid "Manage stock movements (inventory)"
-msgstr ""
+msgstr "إدارة حركات المخزون"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__entitlement_kind
@@ -355,7 +355,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__product_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__product_id
 msgid "Product"
-msgstr ""
+msgstr "منتج"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__program_id
@@ -372,14 +372,14 @@ msgstr "برنامج:"
 #: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
 #, python-format
 msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
-msgstr ""
+msgstr "%(partner)sالبرنامج:٪ (prg)s ، المستفيد:٪ (الشريك) s.\n"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__qty
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__qty
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__qty
 msgid "QTY"
-msgstr ""
+msgstr "الكمية"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.ui.menu,name:spp_entitlement_in_kind.g2p_inkind_reports_menu_root
@@ -399,7 +399,7 @@ msgstr "قواعد"
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.entitlement_manager_inkind_filter
 msgid "Search In-Kind Entitlement Manager"
-msgstr ""
+msgstr "ابحث في مدير الاستحقاقات العينية"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
@@ -410,7 +410,7 @@ msgstr "اختر برنامج ..."
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__sequence
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__sequence
 msgid "Sequence"
-msgstr "تسلسل"
+msgstr "التسلسل"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model,name:spp_entitlement_in_kind.model_stock_move
@@ -434,7 +434,7 @@ msgstr ""
 
 #. module: spp_entitlement_in_kind
 #: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "There are no items entered for this entitlement manager."
 msgstr "لا توجد عناصر تم إدخالها لمدير الاستحقاقات هذا."
 
@@ -448,14 +448,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__uom_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__uom_id
 msgid "Unit of Measure"
-msgstr ""
+msgstr "وحدة القياس"
 
 #. module: spp_entitlement_in_kind
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__warehouse_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__warehouse_id
 #: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__warehouse_id
 msgid "Warehouse"
-msgstr ""
+msgstr "مستودع"
 
 #. module: spp_entitlement_in_kind
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form

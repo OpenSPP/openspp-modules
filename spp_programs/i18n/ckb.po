@@ -37,6 +37,12 @@ msgid "Add a new entitlement!"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__admin_area_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__admin_area_ids
+msgid "Admin Area"
+msgstr ""
+
+#. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
 msgid "Approve Entitlement"
 msgstr ""
@@ -100,6 +106,11 @@ msgid "Contact"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__create_uid
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__create_uid
 msgid "Created by"
@@ -136,6 +147,11 @@ msgid "Date Approved"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_cycle_manager_default
+msgid "Default Cycle Manager"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__display_name
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__display_name
 msgid "Display Name"
@@ -159,6 +175,12 @@ msgstr ""
 #: model:ir.model,name:spp_programs.model_g2p_entitlement_inkind
 #, python-format
 msgid "Entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/managers/cycle_manager.py:0
+#, python-format
+msgid "Entitlement Ready."
 msgstr ""
 
 #. module: spp_programs
@@ -209,6 +231,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
 msgid "Group By"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__hide_prepare_entitlement_button
+msgid "Hide Prepare Entitlement Button"
 msgstr ""
 
 #. module: spp_programs
@@ -327,6 +354,18 @@ msgid "Pending Validation"
 msgstr ""
 
 #. module: spp_programs
+#: code:addons/spp_programs/models/managers/cycle_manager.py:0
+#, python-format
+msgid "Prepare entitlement for %s beneficiaries started."
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/managers/cycle_manager.py:0
+#, python-format
+msgid "Prepare entitlement for beneficiaries."
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model,name:spp_programs.model_procurement_group
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__procurement_group_id
 msgid "Procurement Group"
@@ -341,6 +380,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__program_id
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__program_id
 msgid "Program"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/wizard/create_program_wizard.py:0
+#, python-format
+msgid "Programs"
 msgstr ""
 
 #. module: spp_programs
@@ -392,6 +437,11 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__service_point_id
 msgid "Service Point"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_program_membership_manager_default
+msgid "Simple Eligibility"
 msgstr ""
 
 #. module: spp_programs
@@ -475,6 +525,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
 msgid "Valid Until"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__validate_async_err
+msgid "Validate Async Err"
 msgstr ""
 
 #. module: spp_programs

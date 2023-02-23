@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-18 12:56+0000\n"
-"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"PO-Revision-Date: 2023-02-23 01:30+0000\n"
+"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "g2p_entitlement_cash/ar/>\n"
 "Language: ar\n"
@@ -27,7 +27,7 @@ msgstr ""
 #. module: g2p_entitlement_cash
 #: model_terms:ir.actions.act_window,help:g2p_entitlement_cash.action_entitlement_manager_cash
 msgid "Add an Entitlement Manager!"
-msgstr ""
+msgstr "أضف مدير استحقاق!"
 
 #. module: g2p_entitlement_cash
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__amount
@@ -160,12 +160,19 @@ msgstr "مدراء الاستحقاق"
 #, python-format
 msgid ""
 "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
-msgstr ""
+msgstr "خطأ في حالة الاستحقاق ! الاستحقاقات ليست في حالة \"التحقق المعلق\":\n"
 
 #. module: g2p_entitlement_cash
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash__entitlement_validation_group_id
 msgid "Entitlement Validation Group"
 msgstr "مجموعة التحقق من الاستحقاق"
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid ""
+"Entitlements are not approved due to some issues. Kindly address the issue."
+msgstr ""
 
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
@@ -284,7 +291,7 @@ msgstr "برنامج:"
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
-msgstr ""
+msgstr "%(partner)sالبرنامج:٪ (prg)s ، المستفيد:٪ (الشريك) s.\n"
 
 #. module: g2p_entitlement_cash
 #: model_terms:ir.ui.view,arch_db:g2p_entitlement_cash.view_entitlement_manager_cash_tree
@@ -305,7 +312,7 @@ msgstr "اختر برنامج ..."
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__sequence
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__sequence
 msgid "Sequence"
-msgstr "تسلسل"
+msgstr "التسلسل"
 
 #. module: g2p_entitlement_cash
 #: model:ir.model.fields,help:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash__currency_id
@@ -324,7 +331,7 @@ msgstr ""
 
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "There are no items entered for this entitlement manager."
 msgstr "لا توجد عناصر تم إدخالها لمدير الاستحقاقات هذا."
 
