@@ -43,18 +43,6 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     </div>
                 </button>
             </xpath>
-
-            <xpath expr="//button[@name='prepare_entitlement']" position="before">
-                <field name="hide_prepare_entitlement_button" invisible="1" />
-            </xpath>
-
-            <xpath expr="//button[@name='prepare_entitlement']" position="attributes">
-                <attribute name="states" />
-                <attribute
-                    name="attrs"
-                >{'invisible': ['|', ('hide_prepare_entitlement_button', '!=', False), ('state', '!=', 'draft')]}</attribute>
-            </xpath>
-
         </field>
     </record>
 
