@@ -18,7 +18,10 @@ class G2PCycle(models.Model):
     procurement_group_id = fields.Many2one("procurement.group", "Procurement Group")
 
     validate_async_err = fields.Boolean(default=False)
-    hide_prepare_entitlement_button = fields.Boolean(default=False)
+
+    # Code commented for now. might be used in the future to hide and show prepare entitlement button
+    # Commented date: Feb 23, 2023
+    # hide_prepare_entitlement_button = fields.Boolean(default=False)
 
     def _compute_inkind_entitlements_count(self):
         for rec in self:
@@ -27,13 +30,15 @@ class G2PCycle(models.Model):
             )
             rec.update({"inkind_entitlements_count": entitlements_count})
 
-    def copy_beneficiaries_from_program(self):
-        """Show 'Prepare Entitlement' button if a beneficiary is successfully imported"""
-        action = super().copy_beneficiaries_from_program()
+    # Code commented for now. might be used in the future to hide and show prepare entitlement button
+    # Commented date: Feb 23, 2023
+    # def copy_beneficiaries_from_program(self):
+    #     """Show 'Prepare Entitlement' button if a beneficiary is successfully imported"""
+    #     action = super().copy_beneficiaries_from_program()
 
-        if action.get("params") and action["params"].get("type"):
-            type = action["params"]["type"]
-            if type == "success":
-                self.write({"hide_prepare_entitlement_button": False})
+    #     if action.get("params") and action["params"].get("type"):
+    #         type = action["params"]["type"]
+    #         if type == "success":
+    #             self.write({"hide_prepare_entitlement_button": False})
 
-        return action
+    #     return action

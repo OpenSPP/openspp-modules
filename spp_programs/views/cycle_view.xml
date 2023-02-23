@@ -44,7 +44,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 </button>
             </xpath>
 
-            <xpath expr="//button[@name='prepare_entitlement']" position="before">
+            <!-- Code commented for now. might be used in the future to hide and show prepare entitlement button -->
+            <!-- Commented date: Feb 23, 2023 -->
+
+            <!-- <xpath expr="//button[@name='prepare_entitlement']" position="before">
                 <field name="hide_prepare_entitlement_button" invisible="1" />
             </xpath>
 
@@ -53,7 +56,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <attribute
                     name="attrs"
                 >{'invisible': ['|', ('hide_prepare_entitlement_button', '!=', False), ('state', '!=', 'draft')]}</attribute>
-            </xpath>
+            </xpath> -->
 
         </field>
     </record>
