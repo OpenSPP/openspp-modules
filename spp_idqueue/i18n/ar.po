@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-02-23 01:06+0000\n"
+"PO-Revision-Date: 2023-02-24 02:22+0000\n"
 "Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_idqueue/ar/>\n"
@@ -119,7 +119,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_type_icon
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "رمز نوع النشاط"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
@@ -203,21 +203,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 msgid "Cancel"
-msgstr ""
+msgstr "الغاء"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
-#, fuzzy
-#| msgid "Date Requested"
 msgid "Cancel Request"
-msgstr "تاريخ الطلب"
+msgstr "معاملة تغير"
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__cancelled
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 msgid "Cancelled"
-msgstr "ملغى"
+msgstr "ألغيت"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,help:spp_idqueue.field_res_config_settings__auto_approve_id_request
@@ -413,19 +411,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
 msgid "File"
-msgstr ""
+msgstr "ملف"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_follower_ids
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "متابعون"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_partner_ids
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "المتابعون (الشركاء)"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_type_icon
@@ -492,7 +490,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__has_message
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "رسالة"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__id
@@ -501,7 +499,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__id
 msgid "ID"
-msgstr "بطاقة تعريف"
+msgstr ""
 
 #. module: spp_idqueue
 #: code:addons/spp_idqueue/models/id_batch.py:0
@@ -676,7 +674,7 @@ msgstr ""
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_needaction
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_unread
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "إذا تم تحديدها ، فإن الرسائل الجديدة تتطلب انتباهك."
 
 #. module: spp_idqueue
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_has_error
@@ -684,13 +682,13 @@ msgstr ""
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_has_error
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "إذا تم تحديده ، فإن بعض الرسائل بها خطأ في التسليم."
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_is_follower
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "متابع"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__is_idpass
@@ -729,7 +727,7 @@ msgstr "آخر تحديث في"
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_main_attachment_id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "المرفق الرئيسي"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__max_id_per_batch
@@ -756,13 +754,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_has_error
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "خطأ في تسليم الرسالة"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_ids
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "رسائل"
 
 #. module: spp_idqueue
 #: model:ir.model,name:spp_idqueue.model_spp_multi_id_request_wizard
@@ -773,7 +771,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__my_activity_date_deadline
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "الموعد النهائي لنشاطاتي"
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__new
@@ -789,19 +787,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_date_deadline
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "الموعد النهائي للنشاط التالي"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_summary
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "ملخص النشاط التالي"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_type_id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "نوع النشاط التالي"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
@@ -824,31 +822,31 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_needaction_counter
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "عدد الإجراءات"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_has_error_counter
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "عدد الأخطاء"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_needaction_counter
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "عدد الرسائل التي تتطلب اتخاذ إجراء"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_has_error_counter
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "عدد الرسائل التي بها خطأ في التسليم"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_unread_counter
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_unread_counter
 msgid "Number of unread messages"
-msgstr ""
+msgstr "عدد الرسائل غير المقروءة"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
@@ -928,7 +926,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 msgid "Registrant"
-msgstr ""
+msgstr "المسجل"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__registrant_id
@@ -972,7 +970,7 @@ msgstr "مقدم الطلب"
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_user_id
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "مستخدم مسؤول"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
@@ -983,7 +981,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_has_sms_error
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr ""
+msgstr "خطأ في تسليم الرسائل القصيرة"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
@@ -1026,7 +1024,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__status
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__status
 msgid "Status"
-msgstr ""
+msgstr "الحالة"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_state
@@ -1037,6 +1035,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"الوضع على أساس الأنشطة\n"
+"متأخر: تاريخ الاستحقاق فات بالفعل\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"مخطط له: الأنشطة المستقبلية."
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__target_type
