@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-18 12:56+0000\n"
-"Last-Translator: Fawaz Nari <fawaz.t.nari@gmail.com>\n"
+"PO-Revision-Date: 2023-02-24 02:22+0000\n"
+"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_pos/ar/>\n"
 "Language: ar\n"
@@ -29,9 +29,9 @@ msgstr "--أو--"
 #. openerp-web
 #: code:addons/spp_pos/static/src/js/action_button.js:0
 #: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
-#, fuzzy, python-format
+#, python-format
 msgid "Close"
-msgstr "اغلق"
+msgstr "اغلاق"
 
 #. module: spp_pos
 #. openerp-web
