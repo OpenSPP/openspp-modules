@@ -51,8 +51,10 @@ class CustomFilterMixin(models.AbstractModel):
                 allow_filter = getattr(self._fields[fname], "allow_filter", True)
             else:
                 allow_filter = getattr(self._fields[fname], "allow_filter", False)
-            res[fname]["searchable"] = allow_filter and res[fname].get("searchable")
-            res[fname]["exportable"] = allow_filter and res[fname].get("exportable")
+            if res[fname].get("searchable"):
+                res[fname]["searchable"] = allow_filter and res[fname]["searchable"]
+            if res[fname].get("exportable"):
+                res[fname]["exportable"] = allow_filter and res[fname]["exportable"]
 
         return res
 
