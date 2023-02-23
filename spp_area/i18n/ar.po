@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-02-23 01:06+0000\n"
+"PO-Revision-Date: 2023-02-24 02:22+0000\n"
 "Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
 "Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
 "spp_area/ar/>\n"
@@ -164,12 +164,12 @@ msgstr ""
 #. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_import_form
 msgid "Cancel"
-msgstr ""
+msgstr "الغاء"
 
 #. module: spp_area
 #: model:ir.model.fields.selection,name:spp_area.selection__spp_area_import__state__cancelled
 msgid "Cancelled"
-msgstr "ملغى"
+msgstr "ألغيت"
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__child_ids
@@ -319,7 +319,7 @@ msgstr "مجموعة من"
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__id
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__id
 msgid "ID"
-msgstr "بطاقة تعريف"
+msgstr ""
 
 #. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_import_form
@@ -485,7 +485,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__state
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__state
 msgid "Status"
-msgstr ""
+msgstr "الحالة"
 
 #. module: spp_area
 #: model:ir.model.fields,help:spp_area.field_spp_area__level
