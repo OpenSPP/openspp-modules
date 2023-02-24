@@ -103,7 +103,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
         if self.entitlement_kind == "basket_entitlement":
             # Add a new record to basket entitlement manager model
             entitlement_item_ids = []
-            for item in self.basket_entitlement_item_ids:
+            for item in self.basket_product_ids:
                 entitlement_item_ids.append(
                     [
                         0,
