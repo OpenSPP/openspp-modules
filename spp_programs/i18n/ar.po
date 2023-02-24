@@ -151,11 +151,6 @@ msgid "Date Approved"
 msgstr ""
 
 #. module: spp_programs
-#: model:ir.model,name:spp_programs.model_g2p_cycle_manager_default
-msgid "Default Cycle Manager"
-msgstr ""
-
-#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__display_name
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__display_name
 msgid "Display Name"
@@ -179,12 +174,6 @@ msgstr ""
 #: model:ir.model,name:spp_programs.model_g2p_entitlement_inkind
 #, python-format
 msgid "Entitlement"
-msgstr ""
-
-#. module: spp_programs
-#: code:addons/spp_programs/models/managers/cycle_manager.py:0
-#, python-format
-msgid "Entitlement Ready."
 msgstr ""
 
 #. module: spp_programs
@@ -235,11 +224,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
 msgid "Group By"
-msgstr ""
-
-#. module: spp_programs
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__hide_prepare_entitlement_button
-msgid "Hide Prepare Entitlement Button"
 msgstr ""
 
 #. module: spp_programs
@@ -355,18 +339,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
 msgid "Pending Validation"
-msgstr ""
-
-#. module: spp_programs
-#: code:addons/spp_programs/models/managers/cycle_manager.py:0
-#, python-format
-msgid "Prepare entitlement for %s beneficiaries started."
-msgstr ""
-
-#. module: spp_programs
-#: code:addons/spp_programs/models/managers/cycle_manager.py:0
-#, python-format
-msgid "Prepare entitlement for beneficiaries."
 msgstr ""
 
 #. module: spp_programs
