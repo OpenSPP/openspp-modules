@@ -25,6 +25,12 @@ msgid "Custom Filter Mixin"
 msgstr ""
 
 #. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_custom_filter_mixin__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_custom_filter.field_ir_model_fields__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_custom_filter
 #: model:ir.model,name:spp_custom_filter.model_ir_model_fields
 msgid "Fields"
 msgstr ""
