@@ -41,12 +41,6 @@ msgid "Add a new entitlement!"
 msgstr ""
 
 #. module: spp_programs
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__admin_area_ids
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__admin_area_ids
-msgid "Admin Area"
-msgstr ""
-
-#. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
 msgid "Approve Entitlement"
 msgstr ""
@@ -74,6 +68,12 @@ msgstr "ألغيت"
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_tree
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
 msgid "Cash Entitlements"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__admin_area_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__admin_area_ids
+msgid "Center Areas"
 msgstr ""
 
 #. module: spp_programs
@@ -143,6 +143,20 @@ msgstr "دورة"
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__cycle_id_domain
 msgid "Cycle Id Domain"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_procurement_group__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_stock_move__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_stock_picking__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_stock_rule__dms_directory_ids
+msgid "DMS Directories"
 msgstr ""
 
 #. module: spp_programs
