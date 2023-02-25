@@ -14,7 +14,7 @@ Event Data Demo
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-openspp%2Fopenspp--registry-lightgray.png?logo=github
-    :target: https://github.com/openspp/openspp-registry/tree/15.0/spp_event_demo
+    :target: https://github.com/openspp/openspp-registry/tree/rc/15.0.1.0.6/spp_event_demo
     :alt: openspp/openspp-registry
 
 |badge1| |badge2| |badge3| 
@@ -32,7 +32,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/openspp/openspp-registry/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/openspp/openspp-registry/issues/new?body=module:%20spp_event_demo%0Aversion:%2015.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/openspp/openspp-registry/issues/new?body=module:%20spp_event_demo%0Aversion:%20rc/15.0.1.0.6%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -61,6 +61,6 @@ Current maintainers:
 
 |maintainer-jeremi| |maintainer-gonzalesedwin1123| |maintainer-emjay0921| 
 
-This module is part of the `openspp/openspp-registry <https://github.com/openspp/openspp-registry/tree/15.0/spp_event_demo>`_ project on GitHub.
+This module is part of the `openspp/openspp-registry <https://github.com/openspp/openspp-registry/tree/rc/15.0.1.0.6/spp_event_demo>`_ project on GitHub.
 
 You are welcome to contribute.
