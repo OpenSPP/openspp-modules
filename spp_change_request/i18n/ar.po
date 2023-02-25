@@ -40,8 +40,8 @@ msgid ""
 "A new change request was submitted. The next step will set this request to "
 "'Pending Validation'."
 msgstr ""
-"تم تقديم معاملة تغيير جديد. ستعمل الخطوة التالية على تعيين هذا الطلب على \"في"
-" انتظار التحقق من الصحة\"."
+"تم تقديم معاملة تغيير جديد. ستعمل الخطوة التالية على تعيين هذا الطلب على "
+"\"في انتظار التحقق من الصحة\"."
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_needaction
@@ -99,7 +99,6 @@ msgstr "كل الطلبات"
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__applicant_id
 #, fuzzy
-#| msgid "Applied"
 msgid "Applicant"
 msgstr "مُطبَّق"
 
@@ -200,7 +199,6 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
 #, fuzzy, python-format
-#| msgid "Add a new change request!"
 msgid "Assign this change request to:"
 msgstr "أضف طلب تغيير جديد!"
 
@@ -293,21 +291,18 @@ msgstr "معاملة تغيير"
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_applicator
 #, fuzzy
-#| msgid "Change Request Validator"
 msgid "Change Request Applicator"
 msgstr "مدقق المعاملة"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "Change Request Template"
 msgid "Change Request Applied"
 msgstr "نموذج الطلب"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_cancel_wizard
 #, fuzzy
-#| msgid "Change Request Validator"
 msgid "Change Request Cancel Wizard"
 msgstr "مدقق المعاملة"
 
@@ -357,14 +352,12 @@ msgstr "رفض معاملة التغير"
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_reject_wizard
 #, fuzzy
-#| msgid "Change Request Administrator"
 msgid "Change Request Rejection Wizard"
 msgstr "مسؤول الطلب او المعاملة"
 
 #. module: spp_change_request
 #: model:mail.activity.type,name:spp_change_request.reset_draft_activity
 #, fuzzy
-#| msgid "Change Request Administrator"
 msgid "Change Request Reset to Draft"
 msgstr "مسؤول الطلب او المعاملة"
 
@@ -376,14 +369,12 @@ msgstr "نموذج الطلب"
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_user_assign_wizard
 #, fuzzy
-#| msgid "Change Request Administrator"
 msgid "Change Request User Assignment Wizard"
 msgstr "مسؤول الطلب او المعاملة"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "Change Request Validator"
 msgid "Change Request Validated"
 msgstr "مدقق المعاملة"
 
@@ -466,7 +457,6 @@ msgstr "الاعدادات"
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
 #, fuzzy
-#| msgid "Configuration"
 msgid "Confirm"
 msgstr "الاعدادات"
 
@@ -660,7 +650,6 @@ msgstr "للتطبيق"
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "Apply Changes"
 msgid "For Application of Changes"
 msgstr "اعتماد التغيير"
 
@@ -830,6 +819,11 @@ msgid "NO"
 msgstr "كلا"
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr "الموعد النهائي للنشاط التالي"
@@ -967,7 +961,6 @@ msgstr "مرفوض"
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__rejected_by_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__rejected_by_id
 #, fuzzy
-#| msgid "Requested By"
 msgid "Rejected by"
 msgstr "مقدم الطلب"
 
@@ -1111,7 +1104,6 @@ msgstr "مقدم من"
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, fuzzy, python-format
-#| msgid "The Request Type field must be filled-up."
 msgid "The Applicant field must be filled-up."
 msgstr "يجب ملئ حقل نوع الطلب"
 
@@ -1172,7 +1164,6 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, fuzzy, python-format
-#| msgid "The Request Type field must be filled-up."
 msgid "The change request type must be properly filled-up."
 msgstr "يجب ملئ حقل نوع الطلب"
 
@@ -1251,7 +1242,6 @@ msgstr ""
 #: code:addons/spp_change_request/wizard/cancel_change_request.py:0
 #: code:addons/spp_change_request/wizard/reject_change_request.py:0
 #, fuzzy, python-format
-#| msgid "Add a new change request!"
 msgid "There are no change request selected."
 msgstr "أضف طلب تغيير جديد!"
 
@@ -1300,7 +1290,6 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, fuzzy, python-format
-#| msgid "Change Request Validation Sequence"
 msgid "This change request does not have any validation sequence defined."
 msgstr "تسلسل التحقق للمعاملة"
 
@@ -1362,7 +1351,6 @@ msgstr "تم التحقق"
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_validated
 #: model:ir.ui.menu,name:spp_change_request.menu_change_request_validated
 #, fuzzy
-#| msgid "Date Requested"
 msgid "Validated Requests"
 msgstr "تاريخ الطلب"
 

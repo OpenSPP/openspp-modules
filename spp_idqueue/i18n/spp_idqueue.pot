@@ -116,8 +116,18 @@ msgid "Activity Type Icon"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_approve_batch
+msgid "Approve Batches"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 msgid "Approve Request"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.validate_requests
+msgid "Approve Requests"
 msgstr ""
 
 #. module: spp_idqueue
@@ -762,6 +772,12 @@ msgid "New"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_calendar_event_id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_date_deadline
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_date_deadline
 msgid "Next Activity Deadline"
@@ -1079,16 +1095,6 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Validate Batch"
-msgstr ""
-
-#. module: spp_idqueue
-#: model:ir.actions.server,name:spp_idqueue.multi_approve_batch
-msgid "Validate Batches"
-msgstr ""
-
-#. module: spp_idqueue
-#: model:ir.actions.server,name:spp_idqueue.validate_requests
-msgid "Validate Requests"
 msgstr ""
 
 #. module: spp_idqueue

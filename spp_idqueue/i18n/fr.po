@@ -31,8 +31,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: code:addons/spp_idqueue/models/id_batch.py:0
-#, fuzzy, python-format
-#| msgid "Date Distributed"
+#, python-format
 msgid "%s batch(es) are distributed."
 msgstr ""
 
@@ -121,11 +120,20 @@ msgid "Activity Type Icon"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_approve_batch
+msgid "Approve Batches"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 #, fuzzy
-#| msgid "Auto-approve ID Requests"
 msgid "Approve Request"
 msgstr "Approuver automatiquement les demandes d'identification"
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.validate_requests
+msgid "Approve Requests"
+msgstr ""
 
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__approved
@@ -179,7 +187,6 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 #, fuzzy
-#| msgid "Date Printed"
 msgid "Batch Printed"
 msgstr "Date d'impression"
 
@@ -191,7 +198,6 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.actions.server,name:spp_idqueue.multi_printed_batch
 #, fuzzy
-#| msgid "Date Printed"
 msgid "Batches Printed"
 msgstr "Date d'impression"
 
@@ -231,7 +237,6 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.actions.act_window,help:spp_idqueue.action_spp_print_queue_batch
 #, fuzzy
-#| msgid "Click the create button to enter the information of the ID Queue."
 msgid "Click the create button to enter the information of the ID Batch."
 msgstr ""
 "Cliquez sur le bouton Créer pour entrer les informations de la file "
@@ -257,7 +262,6 @@ msgstr "Contact"
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
 #, fuzzy
-#| msgid "Created by"
 msgid "Create Batch"
 msgstr "Créé par"
 
@@ -274,14 +278,12 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
 #, fuzzy
-#| msgid "Date Requested"
 msgid "Create Requests"
 msgstr "Date demandée"
 
 #. module: spp_idqueue
 #: model_terms:ir.actions.act_window,help:spp_idqueue.action_spp_print_queue_batch
 #, fuzzy
-#| msgid "Create a new ID Queue!"
 msgid "Create a new ID Batch!"
 msgstr "Créez une nouvelle file d'attente d'ID !"
 
@@ -334,7 +336,6 @@ msgstr "Date de distribution"
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__date_merged
 #, fuzzy
-#| msgid "Date Printed"
 msgid "Date Merged"
 msgstr "Date d'impression"
 
@@ -361,35 +362,30 @@ msgstr "Afficher un nom"
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 #, fuzzy
-#| msgid "Distributed"
 msgid "Distribute"
 msgstr "Distribué"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 #, fuzzy
-#| msgid "Distributed"
 msgid "Distribute Batch"
 msgstr "Distribué"
 
 #. module: spp_idqueue
 #: model:ir.actions.server,name:spp_idqueue.multi_distribute_batch
 #, fuzzy
-#| msgid "Distributed"
 msgid "Distribute Batches"
 msgstr "Distribué"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 #, fuzzy
-#| msgid "Distributed"
 msgid "Distribute Request"
 msgstr "Distribué"
 
 #. module: spp_idqueue
 #: model:ir.actions.server,name:spp_idqueue.distribute_requests
 #, fuzzy
-#| msgid "Date Requested"
 msgid "Distribute Requests"
 msgstr "Date demandée"
 
@@ -406,7 +402,6 @@ msgstr "Distribué"
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__distributed_by
 #, fuzzy
-#| msgid "Distributed"
 msgid "Distributed By"
 msgstr "Distribué"
 
@@ -475,14 +470,12 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 #, fuzzy
-#| msgid "Date Requested"
 msgid "Generate Request"
 msgstr "Date demandée"
 
 #. module: spp_idqueue
 #: model:ir.actions.server,name:spp_idqueue.generate_requests
 #, fuzzy
-#| msgid "Date Requested"
 msgid "Generate Requests"
 msgstr "Date demandée"
 
@@ -535,7 +528,6 @@ msgstr ""
 #. module: spp_idqueue
 #: model:res.groups,name:spp_idqueue.group_g2p_id_distributor
 #, fuzzy
-#| msgid "Date Distributed"
 msgid "ID Distributor"
 msgstr "Date de distribution"
 
@@ -543,7 +535,6 @@ msgstr "Date de distribution"
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__id_pdf_filename
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id_pdf_filename
 #, fuzzy
-#| msgid "Display Name"
 msgid "ID File Name"
 msgstr "Afficher un nom"
 
@@ -572,14 +563,12 @@ msgstr "File d'attente d'ID"
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
 #, fuzzy
-#| msgid "Date Requested"
 msgid "ID Request"
 msgstr "Date demandée"
 
 #. module: spp_idqueue
 #: model:res.groups,name:spp_idqueue.group_g2p_id_requestor
 #, fuzzy
-#| msgid "Date Requested"
 msgid "ID Requestor"
 msgstr "Date demandée"
 
@@ -591,7 +580,6 @@ msgstr "Date demandée"
 #: model:ir.model.fields,field_description:spp_idqueue.field_res_users__id_requests
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_requests_form
 #, fuzzy, python-format
-#| msgid "Date Requested"
 msgid "ID Requests"
 msgstr "Date demandée"
 
@@ -759,7 +747,6 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__merge_status
 #, fuzzy
-#| msgid "Status"
 msgid "Merge Status"
 msgstr "Statut"
 
@@ -789,7 +776,6 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model,name:spp_idqueue.model_spp_multi_id_request_wizard
 #, fuzzy
-#| msgid "Request ID Wizard"
 msgid "Multiple ID Request Wizard"
 msgstr "Assistant de demande d'ID"
 
@@ -808,6 +794,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "New"
 msgstr "Nouveau"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_calendar_event_id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_date_deadline
@@ -882,35 +874,30 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 #, fuzzy
-#| msgid "Printed"
 msgid "Print"
 msgstr "Imprimé"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 #, fuzzy
-#| msgid "Printed By"
 msgid "Print Batch"
 msgstr "Imprimé par"
 
 #. module: spp_idqueue
 #: model:ir.actions.server,name:spp_idqueue.multi_print_batch
 #, fuzzy
-#| msgid "Printed By"
 msgid "Print Batches"
 msgstr "Imprimé par"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 #, fuzzy
-#| msgid "Date Requested"
 msgid "Print Request"
 msgstr "Date demandée"
 
 #. module: spp_idqueue
 #: model:ir.actions.server,name:spp_idqueue.print_requests
 #, fuzzy
-#| msgid "Date Requested"
 msgid "Print Requests"
 msgstr "Date demandée"
 
@@ -935,14 +922,12 @@ msgstr "Imprimé par"
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 #, fuzzy
-#| msgid "Printed"
 msgid "Printing"
 msgstr "Imprimé"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__queue_ids
 #, fuzzy
-#| msgid "ID Queue"
 msgid "Queue"
 msgstr "File d'attente d'ID"
 
@@ -972,14 +957,12 @@ msgstr "ID de l'inscrit"
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
 #, fuzzy
-#| msgid "Registrant"
 msgid "Registrants"
 msgstr "Inscrit"
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 #, fuzzy
-#| msgid "Request Name"
 msgid "Request Details"
 msgstr "Nom de la demande"
 
@@ -1046,7 +1029,6 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_batch_create_wizard__state__step1
 #, fuzzy
-#| msgid "ID Pass Template"
 msgid "Set Template"
 msgstr "Modèle ID Pass"
 
@@ -1098,7 +1080,6 @@ msgstr ""
 #. module: spp_idqueue
 #: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
 #, fuzzy, python-format
-#| msgid "There are no selected Template!"
 msgid "There are no selected Registrants!"
 msgstr "Il n'y a pas de modèle sélectionné !"
 
@@ -1112,7 +1093,6 @@ msgstr "Il n'y a pas de modèle sélectionné !"
 #. module: spp_idqueue
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #, fuzzy, python-format
-#| msgid "There are no selected Template!"
 msgid "There are no selected id requests!"
 msgstr "Il n'y a pas de modèle sélectionné !"
 
@@ -1149,18 +1129,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Validate Batch"
 msgstr ""
-
-#. module: spp_idqueue
-#: model:ir.actions.server,name:spp_idqueue.multi_approve_batch
-msgid "Validate Batches"
-msgstr ""
-
-#. module: spp_idqueue
-#: model:ir.actions.server,name:spp_idqueue.validate_requests
-#, fuzzy
-#| msgid "Date Requested"
-msgid "Validate Requests"
-msgstr "Date demandée"
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__website_message_ids
@@ -1277,3 +1245,8 @@ msgstr ""
 #, python-format
 msgid "{} validated this request on {}."
 msgstr ""
+
+#, fuzzy
+#~| msgid "Date Requested"
+#~ msgid "Validate Requests"
+#~ msgstr "Date demandée"

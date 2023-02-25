@@ -103,7 +103,6 @@ msgstr ""
 #: model:ir.model,name:spp_area.model_spp_area_kind
 #: model:ir.ui.menu,name:spp_area.menu_spparea_kind
 #, fuzzy
-#| msgid "Area"
 msgid "Area Kind"
 msgstr "المركز"
 
@@ -286,7 +285,6 @@ msgstr ""
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__draft_name
 #, fuzzy
-#| msgid "Area Name..."
 msgid "Draft Name"
 msgstr "المركز..."
 

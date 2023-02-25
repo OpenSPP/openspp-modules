@@ -30,7 +30,6 @@ msgstr "Administrateur Alt2"
 #. module: spp_area
 #: model:spp.area.kind,complete_name:spp_area.admin_area_kind
 #, fuzzy
-#| msgid "Admin Ref"
 msgid "Admin Area"
 msgstr "Réf administrateur"
 
@@ -42,7 +41,6 @@ msgstr "Code administrateur"
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__admin_kind
 #, fuzzy
-#| msgid "Admin Code"
 msgid "Admin Kind"
 msgstr "Code administrateur"
 
@@ -106,14 +104,12 @@ msgstr ""
 #: model:ir.model,name:spp_area.model_spp_area_kind
 #: model:ir.ui.menu,name:spp_area.menu_spparea_kind
 #, fuzzy
-#| msgid "Area"
 msgid "Area Kind"
 msgstr "Zone"
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__area_level
 #, fuzzy
-#| msgid "Level"
 msgid "Area Level"
 msgstr "Niveau"
 
@@ -185,7 +181,6 @@ msgstr "Enfant"
 #. module: spp_area
 #: model_terms:ir.actions.act_window,help:spp_area.action_spparea_kind
 #, fuzzy
-#| msgid "Click the create button to enter the information of the Area."
 msgid "Click the create button to enter the information of the Area Kind."
 msgstr "Cliquez sur le bouton Créer pour saisir les informations de la Zone."
 
@@ -209,7 +204,6 @@ msgstr "Code"
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_kind_tree
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_tree
 #, fuzzy
-#| msgid "Alternate Name"
 msgid "Complete Name"
 msgstr "Nom alternatif"
 
@@ -221,7 +215,6 @@ msgstr "Contact"
 #. module: spp_area
 #: model_terms:ir.actions.act_window,help:spp_area.action_spparea_kind
 #, fuzzy
-#| msgid "Create a new Area!"
 msgid "Create a new Area Kind!"
 msgstr "Créez une nouvelle zone !"
 
@@ -296,7 +289,6 @@ msgstr "Fait"
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__draft_name
 #, fuzzy
-#| msgid "Alternate Name"
 msgid "Draft Name"
 msgstr "Nom alternatif"
 

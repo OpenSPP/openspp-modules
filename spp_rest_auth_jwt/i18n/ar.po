@@ -44,13 +44,6 @@ msgid "Created on"
 msgstr "انشأ على"
 
 #. module: spp_rest_auth_jwt
-#: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_ir_http__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__dms_directory_ids
-#, fuzzy
-msgid "DMS Directories"
-msgstr "دليل الوثائق"
-
-#. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__default_user_id
 msgid "Default User"
 msgstr "المستخدم الافتراضي"
@@ -282,3 +275,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_rest_auth_jwt.view_spp_auth_jwt_validator_form
 msgid "arch"
 msgstr ""
+
+#, fuzzy
+#~ msgid "DMS Directories"
+#~ msgstr "دليل الوثائق"

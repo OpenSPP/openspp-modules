@@ -39,12 +39,6 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_rest_auth_jwt
-#: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_ir_http__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__dms_directory_ids
-msgid "DMS Directories"
-msgstr ""
-
-#. module: spp_rest_auth_jwt
 #: model:ir.model.fields,field_description:spp_rest_auth_jwt.field_spp_auth_jwt_validator__default_user_id
 msgid "Default User"
 msgstr ""

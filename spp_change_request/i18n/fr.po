@@ -96,7 +96,6 @@ msgstr "Toutes les demandes"
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__applicant_id
 #, fuzzy
-#| msgid "Applied"
 msgid "Applicant"
 msgstr "Appliqué"
 
@@ -104,7 +103,6 @@ msgstr "Appliqué"
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "Open Details"
 msgid "Applicant Details"
 msgstr "Ouvrir les détails"
 
@@ -122,7 +120,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_phone
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__applicant_phone
 #, fuzzy
-#| msgid "Phone Numbers"
 msgid "Applicant's Phone Number"
 msgstr "Numéros de téléphone"
 
@@ -179,7 +176,6 @@ msgstr ""
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_user_assign_wizard
 #, fuzzy, python-format
-#| msgid "Change Request Validator"
 msgid "Assign Change Request to User"
 msgstr "Validateur de demande de changement"
 
@@ -201,7 +197,6 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
 #, fuzzy, python-format
-#| msgid "Add a new change request!"
 msgid "Assign this change request to:"
 msgstr "Ajoutez une nouvelle demande de modification !"
 
@@ -244,7 +239,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #, fuzzy, python-format
-#| msgid "Search Change Request"
 msgid "Cancel Change Request"
 msgstr "Rechercher une demande de modification"
 
@@ -263,7 +257,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__reset_to_draft_by_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__cancelled_by_id
 #, fuzzy
-#| msgid "Created by"
 msgid "Cancelled by"
 msgstr "Créé par"
 
@@ -282,7 +275,6 @@ msgstr "Changer de requête"
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
 #, fuzzy
-#| msgid "Change Request"
 msgid "Change Request #"
 msgstr "Changer de requête"
 
@@ -294,21 +286,18 @@ msgstr "Administrateur des demandes de modification"
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_agent
 #, fuzzy
-#| msgid "Change Request"
 msgid "Change Request Agent"
 msgstr "Changer de requête"
 
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_applicator
 #, fuzzy
-#| msgid "Change Request Validator"
 msgid "Change Request Applicator"
 msgstr "Validateur de demande de changement"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "Change Request Template"
 msgid "Change Request Applied"
 msgstr "Modèle de demande de modification"
 
@@ -346,7 +335,6 @@ msgstr "Accès au module de demande de modification"
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "Change Request For Validation"
 msgid "Change Request Partially Validated"
 msgstr "Demande de modification pour validation"
 
@@ -358,21 +346,18 @@ msgstr "Demande de modification en attente de validation"
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "Change Request Template"
 msgid "Change Request Rejected"
 msgstr "Modèle de demande de modification"
 
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_reject_wizard
 #, fuzzy
-#| msgid "Change Request Administrator"
 msgid "Change Request Rejection Wizard"
 msgstr "Administrateur des demandes de modification"
 
 #. module: spp_change_request
 #: model:mail.activity.type,name:spp_change_request.reset_draft_activity
 #, fuzzy
-#| msgid "Change Request Administrator"
 msgid "Change Request Reset to Draft"
 msgstr "Administrateur des demandes de modification"
 
@@ -384,14 +369,12 @@ msgstr "Modèle de demande de modification"
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_user_assign_wizard
 #, fuzzy
-#| msgid "Change Request Administrator"
 msgid "Change Request User Assignment Wizard"
 msgstr "Administrateur des demandes de modification"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "Change Request Validator"
 msgid "Change Request Validated"
 msgstr "Validateur de demande de changement"
 
@@ -425,14 +408,12 @@ msgstr "Validateur de demande de changement"
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_hq_validator
 #, fuzzy
-#| msgid "Change Request Validator"
 msgid "Change Request Validator HQ"
 msgstr "Validateur de demande de changement"
 
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_local_validator
 #, fuzzy
-#| msgid "Change Request Validator"
 msgid "Change Request Validator Local"
 msgstr "Validateur de demande de changement"
 
@@ -446,7 +427,6 @@ msgstr "Validateurs de demande de changement"
 #: model:ir.model.fields,field_description:spp_change_request.field_res_users__change_request_ids
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_group_ext_form_custom_spp_cr
 #, fuzzy
-#| msgid "Change Request"
 msgid "Change Requests"
 msgstr "Changer de requête"
 
@@ -482,7 +462,6 @@ msgstr "Configuration"
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
 #, fuzzy
-#| msgid "Configuration"
 msgid "Confirm"
 msgstr "Configuration"
 
@@ -554,14 +533,12 @@ msgstr "Date d'application"
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_cancelled
 #, fuzzy
-#| msgid "Date Validated"
 msgid "Date Cancelled"
 msgstr "Date de Validation"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_rejected
 #, fuzzy
-#| msgid "Date Requested"
 msgid "Date Rejected"
 msgstr "Date demandée"
 
@@ -590,7 +567,6 @@ msgstr "Date de naissance"
 #. module: spp_change_request
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_validation_sequence__validation_group_state__destination
 #, fuzzy
-#| msgid "Registration Date"
 msgid "Destination Area"
 msgstr "Date d'inscription"
 
@@ -599,7 +575,6 @@ msgstr "Date d'inscription"
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__dialog_message
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__dialog_message
 #, fuzzy
-#| msgid "Has Message"
 msgid "Dialog Message"
 msgstr "A un message"
 
@@ -679,14 +654,12 @@ msgstr "Icône géniale de police, par exemple fa-tâches"
 #. module: spp_change_request
 #: model:ir.ui.menu,name:spp_change_request.spp_change_request_for_application_root
 #, fuzzy
-#| msgid "For Validation"
 msgid "For Application"
 msgstr "Pour validation"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "Apply Changes"
 msgid "For Application of Changes"
 msgstr "Appliquer les modifications"
 
@@ -711,7 +684,6 @@ msgstr "Groupé par"
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "Open Details"
 msgid "Group Details"
 msgstr "Ouvrir les détails"
 
@@ -858,6 +830,11 @@ msgid "NO"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr "Date limite de la prochaine activité"
@@ -880,7 +857,6 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__next_validation_sequence_id
 #, fuzzy
-#| msgid "Validation Sequence"
 msgid "Next Validation Sequence"
 msgstr "Séquence de validation"
 
@@ -942,7 +918,6 @@ msgstr "Validation en attente"
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #, fuzzy
-#| msgid "Phone Numbers"
 msgid "Phone No."
 msgstr "Numéros de téléphone"
 
@@ -985,7 +960,6 @@ msgstr "Rejeter"
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_reject_wizard
 #: model:mail.activity.type,name:spp_change_request.reject_activity
 #, fuzzy, python-format
-#| msgid "Search Change Request"
 msgid "Reject Change Request"
 msgstr "Rechercher une demande de modification"
 
@@ -999,7 +973,6 @@ msgstr "Rejeté"
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__rejected_by_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__rejected_by_id
 #, fuzzy
-#| msgid "Rejected"
 msgid "Rejected by"
 msgstr "Rejeté"
 
@@ -1035,7 +1008,6 @@ msgstr "Type de demande:"
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #, fuzzy
-#| msgid "Change Request For Validation"
 msgid "Request Validation"
 msgstr "Demande de modification pour validation"
 
@@ -1145,7 +1117,6 @@ msgstr "Proposé par"
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, fuzzy, python-format
-#| msgid "The Request Type field must be filled-up."
 msgid "The Applicant field must be filled-up."
 msgstr "Le champ Type de demande doit être rempli."
 
@@ -1164,9 +1135,6 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid ""
-#| "The change request to be created must be in draft or pending validation "
-#| "state."
 msgid "The change request has been partially validated"
 msgstr ""
 "La demande de modification à créer doit être à l'état brouillon ou en "
@@ -1175,7 +1143,6 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid "The request must be in validated state for changes to be applied."
 msgid "The change request has been validated and the changes has been applied"
 msgstr ""
 "La demande doit être dans un état validé pour que les modifications soient "
@@ -1213,7 +1180,6 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, fuzzy, python-format
-#| msgid "The Request Type field must be filled-up."
 msgid "The change request type must be properly filled-up."
 msgstr "Le champ Type de demande doit être rempli."
 
@@ -1255,8 +1221,6 @@ msgstr ""
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, fuzzy, python-format
-#| msgid ""
-#| "The request to be rejected must be in draft or pending validation state."
 msgid ""
 "The request to be cancelled must be in draft, pending, or rejected "
 "validation state."
@@ -1301,7 +1265,6 @@ msgstr ""
 #: code:addons/spp_change_request/wizard/cancel_change_request.py:0
 #: code:addons/spp_change_request/wizard/reject_change_request.py:0
 #, fuzzy, python-format
-#| msgid "Add a new change request!"
 msgid "There are no change request selected."
 msgstr "Ajoutez une nouvelle demande de modification !"
 
@@ -1338,7 +1301,6 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, fuzzy, python-format
-#| msgid "Click the create button to enter a new change request."
 msgid "There are no user assigned to this change request."
 msgstr ""
 "Cliquez sur le bouton Créer pour saisir une nouvelle demande de modification."
@@ -1352,7 +1314,6 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, fuzzy, python-format
-#| msgid "Click the create button to enter a new validation sequence."
 msgid "This change request does not have any validation sequence defined."
 msgstr ""
 "Cliquez sur le bouton Créer pour saisir une nouvelle séquence de validation."
@@ -1416,7 +1377,6 @@ msgstr "Validé"
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_validated
 #: model:ir.ui.menu,name:spp_change_request.menu_change_request_validated
 #, fuzzy
-#| msgid "Date Requested"
 msgid "Validated Requests"
 msgstr "Date demandée"
 
@@ -1436,7 +1396,6 @@ msgstr "Groupe de validation"
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__validation_group_state
 #, fuzzy
-#| msgid "Validation Group"
 msgid "Validation Group Application"
 msgstr "Groupe de validation"
 
