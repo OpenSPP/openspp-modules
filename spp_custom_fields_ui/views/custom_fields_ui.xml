@@ -124,7 +124,7 @@
                               </group>
                               <group
                                 string="Advanced Properties"
-                                attrs="{'invisible': [('field_category',!=','ind')]}"
+                                attrs="{'invisible': [('field_category','!=','ind')]}"
                             >
 
                                   <field name="store" />
