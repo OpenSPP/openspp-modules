@@ -165,7 +165,7 @@ msgstr "مؤرشف"
 #: code:addons/spp_change_request/wizard/cancel_change_request.py:0
 #, python-format
 msgid "Are you sure you would like to cancel this request: %s"
-msgstr "هل أنت متأكد أنك تريد إلغاء هذا الطلب:٪ s"
+msgstr "هل أنت متأكد أنك تريد إلغاء هذا الطلب: %s"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/wizard/reject_change_request.py:0
@@ -1166,13 +1166,13 @@ msgstr "يجب ملئ حقل نوع الطلب"
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The change request was cancelled by %s."
-msgstr "تم إلغاء معاملة التغيير من قبل."
+msgstr "تم إلغاء معاملة التغيير من قبل. %s"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The change request was rejected by %s."
-msgstr "تم رفض معاملة التغيير بواسطة."
+msgstr "تم رفض معاملة التغيير بواسطة. %s"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
