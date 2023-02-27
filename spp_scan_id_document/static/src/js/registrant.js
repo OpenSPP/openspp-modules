@@ -6,6 +6,7 @@ odoo.define("spp_scan_id_document.field", function (require) {
 
     var field_registry = require("web.field_registry");
     var AbstractField = require("web.AbstractField");
+    var Dialog = require("web.Dialog");
 
     var DocumentReader = AbstractField.extend({
         template: "id_document_reader",
@@ -38,30 +39,38 @@ odoo.define("spp_scan_id_document.field", function (require) {
                 this.onclick_started = true;
                 fetch(this.initialise_url, {
                     method: "GET",
-                }).then((initialise_response) => {
-                    if (initialise_response.ok) {
-                        fetch(this.get_url, {
-                            method: "GET",
-                        })
-                            .then((read_response) => read_response.text())
-                            .then((response) => {
-                                if (response === "{}") {
-                                    this.onclick_started = false;
-                                } else {
-                                    this._setValue(response, "UPDATE");
-                                    fetch(this.shutdown_url, {
-                                        method: "GET",
-                                    }).then(() => {
-                                        // Shutdown completed
-                                        this._setValue(" ", "UPDATE");
+                })
+                    .then((initialise_response) => {
+                        if (initialise_response.ok) {
+                            fetch(this.get_url, {
+                                method: "GET",
+                            })
+                                .then((read_response) => read_response.text())
+                                .then((response) => {
+                                    if (response === "{}") {
                                         this.onclick_started = false;
-                                    });
-                                }
-                            });
-                    } else {
+                                    } else {
+                                        this._setValue(response, "UPDATE");
+                                        fetch(this.shutdown_url, {
+                                            method: "GET",
+                                        }).then(() => {
+                                            // Shutdown completed
+                                            this._setValue(" ", "UPDATE");
+                                            this.onclick_started = false;
+                                        });
+                                    }
+                                });
+                        } else {
+                            this.onclick_started = false;
+                        }
+                    })
+                    .catch(() => {
                         this.onclick_started = false;
-                    }
-                });
+                        Dialog.alert(
+                            this,
+                            "ERROR! Unable to connect to scanner. Make sure scanner is working and connected."
+                        );
+                    });
             }
         },
     });
@@ -83,10 +92,10 @@ odoo.define("spp_scan_id_document.field", function (require) {
     });
 
     // Widgets for a button with fa-external-link design.
-    field_registry.add("id_document_reader", DocumentReader); // Calls readdocument api
-    field_registry.add("id_document_qrreader", QrDocumentReader); // Calls qrcode api
+    field_registry.add("id_document_reader", DocumentReader);
+    field_registry.add("id_document_qrreader", QrDocumentReader);
 
-    // widgets for a simple button without fa-external-link design.
-    field_registry.add("id_document_reader_field", DocumentReaderField); // Calls readdocument api
-    field_registry.add("id_document_qrreader_field", QrDocumentReaderField); // Calls qrcode api
+    // Widgets for a simple button without fa-external-link design.
+    field_registry.add("id_document_reader_field", DocumentReaderField);
+    field_registry.add("id_document_qrreader_field", QrDocumentReaderField);
 });
