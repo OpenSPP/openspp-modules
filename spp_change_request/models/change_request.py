@@ -1067,7 +1067,10 @@ class ChangeRequestBase(models.Model):
         activity = self.env["mail.activity"].create(next_activity)
         # Mark cancel activity as 'done' because there are no re-activation after cancellation of CR
         if activity_type == "spp_change_request.cancel_activity":
-            activity_type.action_done()
+            activity.action_done()
+            return
+
+        # When calling action_done this return below is no longer possible as the activity will be deleted
         return self.update({"last_activity_id": activity.id})
 
 

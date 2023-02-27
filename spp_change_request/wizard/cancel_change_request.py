@@ -29,7 +29,12 @@ class CancelChangeRequestWiz(models.TransientModel):
     def cancel_change_request(self):
         for rec in self:
             if rec.change_request_id:
-                rec.change_request_id.request_type_ref_id._cancel(rec.change_request_id)
+                if rec.change_request_id.request_type_ref_id:
+                    rec.change_request_id.request_type_ref_id._cancel(
+                        rec.change_request_id
+                    )
+                else:
+                    rec.change_request_id._cancel(rec.change_request_id)
             else:
                 raise UserError(_("There are no change request selected."))
 
