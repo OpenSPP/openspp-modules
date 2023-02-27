@@ -53,7 +53,7 @@
                         >
                               <group
                                 string="Base Properties"
-                                attrs="{'invisible': [('field_category','not in',['cst'])]}"
+                                attrs="{'invisible': [('field_category','!=','cst')]}"
                             >
                                   <group>
                                       <field name="required" />
@@ -124,7 +124,7 @@
                               </group>
                               <group
                                 string="Advanced Properties"
-                                attrs="{'invisible': [('field_category','not in',['ind'])]}"
+                                attrs="{'invisible': [('field_category','!=','ind')]}"
                             >
 
                                   <field name="store" />
