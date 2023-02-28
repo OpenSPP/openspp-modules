@@ -43,6 +43,9 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     </div>
                 </button>
             </xpath>
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">0</attribute>
+            </xpath>
         </field>
     </record>
 
