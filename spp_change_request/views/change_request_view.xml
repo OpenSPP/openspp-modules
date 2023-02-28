@@ -51,7 +51,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">spp.change.request</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <form string="Change Request">
+            <form string="Change Request" delete="0" duplicate="false">
                 <header>
                     <button
                         name="action_submit"
