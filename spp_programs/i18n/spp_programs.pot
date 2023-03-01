@@ -146,6 +146,11 @@ msgid "Date Approved"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_cycle_manager_default
+msgid "Default Cycle Manager"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__display_name
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__display_name
 msgid "Display Name"
