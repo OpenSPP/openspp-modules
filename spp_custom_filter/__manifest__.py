@@ -1,6 +1,6 @@
 {
     "name": "SPP Custom Filter",
-    "version": "15.0.0.0.0",
+    "version": "15.0.1.0.10",
     "summary": "Customize Filter of Odoo to show less fields",
     "author": "OpenSPP.org",
     "maintainers": ["nhatnm0612"],
