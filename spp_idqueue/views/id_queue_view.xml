@@ -185,8 +185,8 @@
                         <page string="Request Details">
                             <group>
                                 <group>
-                                    <field name="requested_by" readonly="1" />
-                                    <field name="approved_by" readonly="1" />
+                                    <field name="requested_by" readonly="1" options="{'no_open': True}" />
+                                    <field name="approved_by" readonly="1" options="{'no_open': True}" />
                                     <field name="printed_by" readonly="1" />
                                     <field
                                         name="id_pdf"
