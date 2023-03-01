@@ -21,11 +21,14 @@ class OpenSPPIDQueue(models.Model):
     idpass_id = fields.Many2one("spp.id.pass")
     requested_by = fields.Many2one("res.users", required=True)
     approved_by = fields.Many2one("res.users")
+    generated_by = fields.Many2one("res.users")
     printed_by = fields.Many2one("res.users")
+    distributed_by = fields.Many2one("res.users")
     registrant_id = fields.Many2one("res.partner", required=True)
     area_id = fields.Many2one("spp.area", related="registrant_id.area_id", store=True)
     date_requested = fields.Date()
     date_approved = fields.Date()
+    date_generated = fields.Date()
     date_printed = fields.Date()
     date_distributed = fields.Date()
     status = fields.Selection(
@@ -115,9 +118,12 @@ class OpenSPPIDQueue(models.Model):
         for rec in self:
             rec.generate_card(rec)
             rec.status = "generated"
+            date_now = datetime.now()
             message = _("{} generated this request on {}.").format(
-                self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
+                self.env.user.name, date_now.strftime("%B %d, %Y at %H:%M")
             )
+            rec.generated_by = self.env.user.id
+            rec.date_generated = date_now.date()
             rec.save_to_mail_thread(message)
 
     def generate_card(self, card):
@@ -157,6 +163,7 @@ class OpenSPPIDQueue(models.Model):
             message = _("{} distributed this request on {}.").format(
                 self.env.user.name, datetime.now().strftime("%B %d, %Y at %H:%M")
             )
+            rec.distributed_by = self.env.user.id
             rec.save_to_mail_thread(message)
 
     def validate_requests(self):
