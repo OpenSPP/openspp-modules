@@ -187,7 +187,9 @@
                                 <group>
                                     <field name="requested_by" readonly="1" />
                                     <field name="approved_by" readonly="1" />
+                                    <field name="generated_by" readonly="1" />
                                     <field name="printed_by" readonly="1" />
+                                    <field name="distributed_by" readonly="1" />
                                     <field
                                         name="id_pdf"
                                         filename="id_pdf_filename"
@@ -205,6 +207,7 @@
                                 <group>
                                     <field name="date_requested" readonly="1" />
                                     <field name="date_approved" readonly="1" />
+                                    <field name="date_generated" readonly="1" />
                                     <field name="date_printed" readonly="1" />
                                     <field name="date_distributed" readonly="1" />
                                 </group>
