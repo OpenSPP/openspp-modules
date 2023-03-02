@@ -262,197 +262,206 @@ class OpenSPPPrintBatch(models.Model):
         """
         This function is used for server action to approve multi-selected batches
         """
-        if self.env.context.get("active_ids"):
-            batch_ids = self.env["spp.print.queue.batch"].search(
-                [
-                    ("id", "in", self.env.context.get("active_ids")),
-                    ("status", "=", "new"),
-                ]
-            )
-            if batch_ids:
-                max_rec = len(batch_ids)
-                for batch_id in batch_ids:
-                    batch_id.date_approved = date.today()
-                    batch_id.approved_by = self.env.user.id
-                    batch_id.status = "approved"
-                    message = _("{} validated this batch on {}").format(
-                        self.env.user.name,
-                        datetime.now().strftime("%B %d, %Y at %H:%M"),
-                    )
-                    batch_id.save_to_mail_thread(message)
-
-                message = _("%s batch(es) are validated.", max_rec)
-                kind = "info"
-                return {
-                    "type": "ir.actions.client",
-                    "tag": "display_notification",
-                    "params": {
-                        "title": _("ID Batch"),
-                        "message": message,
-                        "sticky": True,
-                        "type": kind,
-                        "next": {
-                            "type": "ir.actions.act_window_close",
-                        },
-                    },
+        batch_ids = self.filtered(lambda r: r.status == "new")
+        if batch_ids:
+            max_rec = len(batch_ids)
+            batch_ids.write(
+                {
+                    "date_approved": fields.Date.today(),
+                    "approved_by": self.env.user.id,
+                    "status": "approved",
                 }
+            )
+            message = _("{} validated this batch on {}").format(
+                self.env.user.name,
+                datetime.now().strftime("%B %d, %Y at %H:%M"),
+            )
+            batch_ids.save_to_mail_thread(message)
+
+            message = _("%s batch(es) are validated.", max_rec)
+            kind = "info"
+        else:
+            message = _("Please select at least 1 new batch need to approve!")
+            kind = "warning"
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("ID Batch"),
+                "message": message,
+                "sticky": True,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
 
     def multi_generate_batch(self):
         """
         This function is used for server action to generate multi-selected batches
         """
-        if self.env.context.get("active_ids"):
-            batch_ids = self.env["spp.print.queue.batch"].search(
-                [
-                    ("id", "in", self.env.context.get("active_ids")),
-                    ("status", "=", "approved"),
-                ]
-            )
-            if batch_ids:
-                return self._generate_batch(batch_ids)
+        batch_ids = self.filtered(lambda r: r.status == "approved")
+        if batch_ids:
+            return self._generate_batch(batch_ids)
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("ID Batch"),
+                "message": _(
+                    "Please select at least 1 approved batch need to approve!"
+                ),
+                "sticky": True,
+                "type": "warning",
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
 
     def multi_print_batch(self):
         """
         This function is used for server action to print multi-selected batches
         """
-        if self.env.context.get("active_ids"):
-            batch_ids = self.env["spp.print.queue.batch"].search(
-                [
-                    ("id", "in", self.env.context.get("active_ids")),
-                    ("status", "=", "generated"),
-                    ("merge_status", "=", "merged"),
-                ]
+        batch_ids = self.filtered(
+            lambda r: r.status == "generated" and r.merge_status == "merged"
+        )
+        if batch_ids:
+            max_rec = len(batch_ids)
+            batch_ids.write({"status": "printing"})
+            message = _("{} started to print this batch on {}.").format(
+                self.env.user.name,
+                datetime.now().strftime("%B %d, %Y at %H:%M"),
             )
-            if batch_ids:
-                max_rec = len(batch_ids)
-                for batch_id in batch_ids:
-                    batch_id.status = "printing"
-                    message = _("{} started to print this batch on {}.").format(
-                        self.env.user.name,
-                        datetime.now().strftime("%B %d, %Y at %H:%M"),
-                    )
-                    batch_id.save_to_mail_thread(message)
-                    for queue_id in batch_id.queued_ids:
-                        message = _("{} started to print this request on {}.").format(
-                            self.env.user.name,
-                            datetime.now().strftime("%B %d, %Y at %H:%M"),
-                        )
-                        queue_id.save_to_mail_thread(message)
+            batch_ids.save_to_mail_thread(message)
+            message = _("{} started to print this request on {}.").format(
+                self.env.user.name,
+                datetime.now().strftime("%B %d, %Y at %H:%M"),
+            )
+            batch_ids.queue_ids.save_to_mail_thread(message)
 
-                message = _("%s batch(es) are being printed.", max_rec)
-                kind = "info"
-                return {
-                    "type": "ir.actions.client",
-                    "tag": "display_notification",
-                    "params": {
-                        "title": _("ID Batch"),
-                        "message": message,
-                        "sticky": True,
-                        "type": kind,
-                        "next": {
-                            "type": "ir.actions.act_window_close",
-                        },
-                    },
-                }
+            message = _("%s batch(es) are being printed.", max_rec)
+            kind = "info"
+        else:
+            message = _("Please select at least 1 generated batch need to print!")
+            kind = "warning"
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("ID Batch"),
+                "message": message,
+                "sticky": True,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
 
     def multi_printed_batch(self):
         """
         This function is used for server action to set multi-selected batches and
         their Individual IDs as printed
         """
-        if self.env.context.get("active_ids"):
-            batch_ids = self.env["spp.print.queue.batch"].search(
-                [
-                    ("id", "in", self.env.context.get("active_ids")),
-                    ("status", "=", "printing"),
-                ]
-            )
-            if batch_ids:
-                max_rec = len(batch_ids)
-                for batch_id in batch_ids:
-                    batch_id.date_printed = date.today()
-                    batch_id.printed_by = self.env.user.id
-                    batch_id.status = "printed"
-                    message = _("{} printed this batch on {}.").format(
-                        self.env.user.name,
-                        datetime.now().strftime("%B %d, %Y at %H:%M"),
-                    )
-                    batch_id.save_to_mail_thread(message)
-
-                    for queue_id in batch_id.queued_ids:
-                        queue_id.date_printed = date.today()
-                        queue_id.printed_by = self.env.user.id
-                        queue_id.status = "printed"
-                        message = _("{} printed this request on {}.").format(
-                            self.env.user.name,
-                            datetime.now().strftime("%B %d, %Y at %H:%M"),
-                        )
-                        queue_id.save_to_mail_thread(message)
-
-                message = _("%s batch(es) are printed.", max_rec)
-                kind = "info"
-                return {
-                    "type": "ir.actions.client",
-                    "tag": "display_notification",
-                    "params": {
-                        "title": _("ID Batch"),
-                        "message": message,
-                        "sticky": True,
-                        "type": kind,
-                        "next": {
-                            "type": "ir.actions.act_window_close",
-                        },
-                    },
+        batch_ids = self.filtered(lambda r: r.status == "printing")
+        if batch_ids:
+            max_rec = len(batch_ids)
+            batch_ids.write(
+                {
+                    "date_printed": fields.Date.today(),
+                    "printed_by": self.env.user.id,
+                    "status": "printed",
                 }
+            )
+            message = _("{} printed this batch on {}.").format(
+                self.env.user.name,
+                datetime.now().strftime("%B %d, %Y at %H:%M"),
+            )
+            batch_ids.save_to_mail_thread(message)
+            batch_ids.queued_ids.write(
+                {
+                    "date_printed": fields.Date.today(),
+                    "printed_by": self.env.user.id,
+                    "status": "printed",
+                }
+            )
+            message = _("{} printed this request on {}.").format(
+                self.env.user.name,
+                datetime.now().strftime("%B %d, %Y at %H:%M"),
+            )
+            batch_ids.queue_ids.save_to_mail_thread(message)
+
+            message = _("%s batch(es) are printed.", max_rec)
+            kind = "info"
+        else:
+            message = _("Please select at least 1 printing batch need to printed!")
+            kind = "warning"
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("ID Batch"),
+                "message": message,
+                "sticky": True,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
 
     def multi_distribute_batch(self):
         """
         This function is used for server action to set multi-selected batches and
         their Individual IDs as distributed
         """
-        if self.env.context.get("active_ids"):
-            batch_ids = self.env["spp.print.queue.batch"].search(
-                [
-                    ("id", "in", self.env.context.get("active_ids")),
-                    ("status", "=", "printed"),
-                ]
-            )
-            if batch_ids:
-                max_rec = len(batch_ids)
-                for batch_id in batch_ids:
-                    batch_id.date_distributed = date.today()
-                    batch_id.distributed_by = self.env.user.id
-                    batch_id.status = "distributed"
-                    message = _("{} distributed this batch on {}.").format(
-                        self.env.user.name,
-                        datetime.now().strftime("%B %d, %Y at %H:%M"),
-                    )
-                    batch_id.save_to_mail_thread(message)
-
-                    for queue_id in batch_id.queued_ids:
-                        queue_id.date_distributed = date.today()
-                        queue_id.status = "distributed"
-                        message = _("{} distributed this request on {}.").format(
-                            self.env.user.name,
-                            datetime.now().strftime("%B %d, %Y at %H:%M"),
-                        )
-                        queue_id.save_to_mail_thread(message)
-
-                message = _("%s batch(es) are distributed.", max_rec)
-                kind = "info"
-                return {
-                    "type": "ir.actions.client",
-                    "tag": "display_notification",
-                    "params": {
-                        "title": _("ID Batch"),
-                        "message": message,
-                        "sticky": True,
-                        "type": kind,
-                        "next": {
-                            "type": "ir.actions.act_window_close",
-                        },
-                    },
+        batch_ids = self.filtered(lambda r: r.status == "printed")
+        if batch_ids:
+            max_rec = len(batch_ids)
+            batch_ids.write(
+                {
+                    "date_distributed": fields.Date.today(),
+                    "distributed_by": self.env.user.id,
+                    "status": "distributed",
                 }
+            )
+            message = _("{} distributed this batch on {}.").format(
+                self.env.user.name,
+                datetime.now().strftime("%B %d, %Y at %H:%M"),
+            )
+            batch_ids.save_to_mail_thread(message)
+            batch_ids.queued_ids.write(
+                {
+                    "date_distributed": fields.Date.today(),
+                    "status": "distributed",
+                }
+            )
+            message = _("{} distributed this request on {}.").format(
+                self.env.user.name,
+                datetime.now().strftime("%B %d, %Y at %H:%M"),
+            )
+            batch_ids.queued_ids.save_to_mail_thread(message)
+
+            message = _("%s batch(es) are distributed.", max_rec)
+            kind = "info"
+        else:
+            message = _("Please select at least 1 printed batch need to distribute!")
+            kind = "warning"
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("ID Batch"),
+                "message": message,
+                "sticky": True,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
 
     def save_to_mail_thread(self, message):
         for rec in self:
