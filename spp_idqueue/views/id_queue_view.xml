@@ -185,11 +185,11 @@
                         <page string="Request Details">
                             <group>
                                 <group>
-                                    <field name="requested_by" readonly="1" />
-                                    <field name="approved_by" readonly="1" />
-                                    <field name="generated_by" readonly="1" />
-                                    <field name="printed_by" readonly="1" />
-                                    <field name="distributed_by" readonly="1" />
+                                    <field name="requested_by" readonly="1" options="{'no_open': True}" />
+                                    <field name="approved_by" readonly="1" options="{'no_open': True}" />
+                                    <field name="generated_by" readonly="1" options="{'no_open': True}" />
+                                    <field name="printed_by" readonly="1" options="{'no_open': True}" />
+                                    <field name="distributed_by" readonly="1" options="{'no_open': True}" />
                                     <field
                                         name="id_pdf"
                                         filename="id_pdf_filename"
