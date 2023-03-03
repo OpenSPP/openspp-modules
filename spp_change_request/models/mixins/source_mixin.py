@@ -1,5 +1,4 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-import logging
 
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -255,18 +254,25 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
                     # Update the live data if the user has the access
                     if self.AUTO_APPLY_CHANGES and message == "FINAL":
+                        is_exception = False
+                        message = ""
                         try:
                             self.action_apply()
                         except UserError:
-                            # Silently ignore and leave the change request as is until someone with the correct access
-                            # can apply the changes
-                            log_message = _(
+                            message = _(
                                 "User %s does not have access to apply changes.",
                                 self.env.user,
                             )
-                            logging.info(log_message)
-                            # revert the assignment if the apply failed
-                            request.update({"assign_to_id": None})
+                            is_exception = True
+                        except Exception as e:
+                            message = _(
+                                "An error was encountered in applying the changes: %s",
+                                repr(e),
+                            )
+                            is_exception = True
+
+                        if is_exception:
+                            raise UserError(message)
 
                     if request.state == "validated":
                         message = _("The change request has been fully validated")
