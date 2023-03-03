@@ -7,7 +7,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">spp.change.request</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree sample="1" decoration-danger="date_rejected != False">
+            <tree sample="1" decoration-danger="date_rejected != False" delete="0">
                 <button
                     name="open_change_request_form"
                     type="object"
