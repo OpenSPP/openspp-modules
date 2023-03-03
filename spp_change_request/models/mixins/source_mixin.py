@@ -153,7 +153,22 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :raise ValidationError: Exception raised when something is not valid.
         """
         for rec in self:
-            rec._on_submit(rec.change_request_id)
+            existing_pending_validated_cr = self.env["spp.change.request"].search(
+                [
+                    ("registrant_id", "=", rec.registrant_id.id),
+                    ("state", "in", ["pending", "validated"]),
+                ]
+            )
+            if not existing_pending_validated_cr:
+                rec._on_submit(rec.change_request_id)
+            else:
+                raise UserError(
+                    _(
+                        "There is a pending CR for this group. "
+                        "Please save this request for now then request for validation "
+                        "again once all pending CRs are completed."
+                    )
+                )
 
     def _on_submit(self, request):
         """

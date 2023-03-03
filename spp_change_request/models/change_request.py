@@ -803,11 +803,26 @@ class ChangeRequestBase(models.Model):
         :raise UserError: Exception raised when no selected request type.
         """
         for rec in self:
-            if rec.request_type_ref_id:
-                rec.request_type_ref_id._on_submit(rec)
+            existing_pending_validated_cr = self.env["spp.change.request"].search(
+                [
+                    ("registrant_id", "=", rec.registrant_id.id),
+                    ("state", "in", ["pending", "validated"]),
+                ]
+            )
+            if not existing_pending_validated_cr:
+                if rec.request_type_ref_id:
+                    rec.request_type_ref_id._on_submit(rec)
+                else:
+                    raise UserError(
+                        _("The change request type must be properly filled-up.")
+                    )
             else:
                 raise UserError(
-                    _("The change request type must be properly filled-up.")
+                    _(
+                        "There is a pending CR for this group. "
+                        "Please save this request for now then request for validation "
+                        "again once all pending CRs are completed."
+                    )
                 )
 
     def action_validate(self):
