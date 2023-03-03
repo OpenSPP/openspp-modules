@@ -87,6 +87,12 @@ msgid "All Requests"
 msgstr ""
 
 #. module: spp_change_request
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "An error was encountered in applying the changes: %s"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__applicant_id
 msgid "Applicant"
