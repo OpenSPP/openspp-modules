@@ -45,7 +45,7 @@ class ChangeRequestBase(models.Model):
     _order = "id desc"
     _check_company_auto = True
 
-    name = fields.Char("Request #", required=True, default="NEW")
+    name = fields.Char("Request #", required=True, default="طلب جديد")
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
     date_requested = fields.Datetime()  # Date the change request was submitted
     request_type = fields.Selection(
