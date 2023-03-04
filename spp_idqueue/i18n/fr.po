@@ -870,6 +870,60 @@ msgid "Other Info"
 msgstr ""
 
 #. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Please select at least 1 approved batch need to approve!"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "Please select at least 1 approved request which need to generate!"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Please select at least 1 generated batch need to print!"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "Please select at least 1 generated request which need to print!"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Please select at least 1 new batch need to approve!"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "Please select at least 1 new request which need to approve!"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Please select at least 1 printed batch need to distribute!"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "Please select at least 1 printed request which need to distribute!"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Please select at least 1 printing batch need to printed!"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
 #, fuzzy
 msgid "Print"
