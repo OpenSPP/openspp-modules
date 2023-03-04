@@ -647,16 +647,21 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 }
                 self.env["pds.change.request.service.point"].create(service_points)
 
-    def _copy_from_group_member_ids(self, group_ref_field, group_id_field):
+    def _copy_from_group_member_ids(
+        self, group_ref_field, group_id_field, skip_head=True
+    ):
         for rec in self:
             for mrec in rec[group_ref_field].group_membership_ids:
                 kind_ids = mrec.kind and mrec.kind.ids or None
                 if (
                     kind_ids
-                    and self.env.ref(
-                        "g2p_registry_membership.group_membership_kind_head"
-                    ).id
-                    not in kind_ids
+                    and (
+                        not skip_head
+                        or self.env.ref(
+                            "g2p_registry_membership.group_membership_kind_head"
+                        ).id
+                        not in kind_ids
+                    )
                 ) or not kind_ids:
                     group_members = {
                         group_id_field: rec.id,
