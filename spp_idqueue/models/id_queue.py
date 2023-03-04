@@ -171,52 +171,46 @@ class OpenSPPIDQueue(models.Model):
         This function is used to approve or validate multiple requests
         via Server Action
         """
-        if self.env.context.get("active_ids"):
-            queue_id = self.env["spp.print.queue.id"].search(
-                [
-                    ("id", "in", self.env.context.get("active_ids")),
-                    ("status", "=", "new"),
-                ]
-            )
-            if queue_id:
-                max_rec = len(queue_id)
-                for rec in queue_id:
-                    rec.date_approved = date.today()
-                    rec.approved_by = self.env.user.id
-                    rec.status = "approved"
-                    message = _("{} validated this request on {}.").format(
-                        self.env.user.name,
-                        datetime.now().strftime("%B %d, %Y at %H:%M"),
-                    )
-                    rec.save_to_mail_thread(message)
-
-                message = _("%s request(s) are validated.", max_rec)
-                kind = "info"
-                return {
-                    "type": "ir.actions.client",
-                    "tag": "display_notification",
-                    "params": {
-                        "title": _("ID Requests"),
-                        "message": message,
-                        "sticky": True,
-                        "type": kind,
-                        "next": {
-                            "type": "ir.actions.act_window_close",
-                        },
-                    },
+        queue_id = self.filtered(lambda r: r.status == "new")
+        if queue_id:
+            queue_id.write(
+                {
+                    "date_approved": fields.Date.today(),
+                    "approved_by": self.env.user.id,
+                    "status": "approved",
                 }
+            )
+            message = _("{} validated this request on {}.").format(
+                self.env.user.name,
+                datetime.now().strftime("%B %d, %Y at %H:%M"),
+            )
+            queue_id.save_to_mail_thread(message)
+
+            message = _("%s request(s) are validated.", len(queue_id))
+            kind = "info"
+        else:
+            message = _("Please select at least 1 new request which need to approve!")
+            kind = "warning"
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("ID Requests"),
+                "message": message,
+                "sticky": True,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
 
     def generate_validate_requests(self):
         """
         This function is used to generate multiple validated requests
         by creating a Queue Job to work on background
         """
-        queue_ids = self.env["spp.print.queue.id"].search(
-            [
-                ("id", "in", self.env.context.get("active_ids")),
-                ("status", "=", "approved"),
-            ]
-        )
+        queue_ids = self.filtered(lambda r: r.status == "approved")
         if queue_ids:
             queue_datas = []
             jobs = []
@@ -236,19 +230,24 @@ class OpenSPPIDQueue(models.Model):
 
             message = _("%s request(s) are now being generated.", max_rec)
             kind = "info"
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": _("ID Requests"),
-                    "message": message,
-                    "sticky": True,
-                    "type": kind,
-                    "next": {
-                        "type": "ir.actions.act_window_close",
-                    },
+        else:
+            message = _(
+                "Please select at least 1 approved request which need to generate!"
+            )
+            kind = "warning"
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("ID Requests"),
+                "message": message,
+                "sticky": True,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
                 },
-            }
+            },
+        }
 
     def _generate_multi_cards(self, queue_ids):
         queued_ids = self.env["spp.print.queue.id"].search([("id", "in", queue_ids)])
@@ -258,78 +257,79 @@ class OpenSPPIDQueue(models.Model):
         """
         This function is used to set multiple requests as printed
         """
-        if self.env.context.get("active_ids"):
-            queue_id = self.env["spp.print.queue.id"].search(
-                [
-                    ("id", "in", self.env.context.get("active_ids")),
-                    ("status", "=", "generated"),
-                ]
-            )
-            if queue_id:
-                max_rec = len(queue_id)
-                for rec in queue_id:
-                    rec.date_printed = date.today()
-                    rec.printed_by = self.env.user.id
-                    rec.status = "printed"
-                    message = _("{} printed this request on {}.").format(
-                        self.env.user.name,
-                        datetime.now().strftime("%B %d, %Y at %H:%M"),
-                    )
-                    rec.save_to_mail_thread(message)
-
-                message = _("%s request(s) are printed.", max_rec)
-                kind = "info"
-                return {
-                    "type": "ir.actions.client",
-                    "tag": "display_notification",
-                    "params": {
-                        "title": _("ID Requests"),
-                        "message": message,
-                        "sticky": True,
-                        "type": kind,
-                        "next": {
-                            "type": "ir.actions.act_window_close",
-                        },
-                    },
+        queue_id = self.filtered(lambda r: r.status == "generated")
+        if queue_id:
+            max_rec = len(queue_id)
+            queue_id.write(
+                {
+                    "date_printed": fields.Date.today(),
+                    "printed_by": self.env.user.id,
+                    "status": "printed",
                 }
+            )
+            message = _("{} printed this request on {}.").format(
+                self.env.user.name,
+                datetime.now().strftime("%B %d, %Y at %H:%M"),
+            )
+            queue_id.save_to_mail_thread(message)
+
+            message = _("%s request(s) are printed.", max_rec)
+            kind = "info"
+        else:
+            message = _(
+                "Please select at least 1 generated request which need to print!"
+            )
+            kind = "warning"
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("ID Requests"),
+                "message": message,
+                "sticky": True,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
 
     def distribute_requests(self):
         """
         This function is used to set multiple requests as distributed
         """
-        if self.env.context.get("active_ids"):
-            queue_id = self.env["spp.print.queue.id"].search(
-                [
-                    ("id", "in", self.env.context.get("active_ids")),
-                    ("status", "=", "printed"),
-                ]
+        queue_id = self.filtered(lambda r: r.status == "printed")
+        if queue_id:
+            max_rec = len(queue_id)
+            queue_id.write(
+                {"date_distributed": fields.Date.today(), "status": "distributed"}
             )
-            if queue_id:
-                max_rec = len(queue_id)
-                for rec in queue_id:
-                    rec.date_distributed = date.today()
-                    rec.status = "distributed"
-                    message = _("{} distributed this request on {}.").format(
-                        self.env.user.name,
-                        datetime.now().strftime("%B %d, %Y at %H:%M"),
-                    )
-                    rec.save_to_mail_thread(message)
+            message = _("{} distributed this request on {}.").format(
+                self.env.user.name,
+                datetime.now().strftime("%B %d, %Y at %H:%M"),
+            )
+            queue_id.save_to_mail_thread(message)
 
-                message = _("%s request(s) are distributed.", max_rec)
-                kind = "info"
-                return {
-                    "type": "ir.actions.client",
-                    "tag": "display_notification",
-                    "params": {
-                        "title": _("ID Requests"),
-                        "message": message,
-                        "sticky": True,
-                        "type": kind,
-                        "next": {
-                            "type": "ir.actions.act_window_close",
-                        },
-                    },
-                }
+            message = _("%s request(s) are distributed.", max_rec)
+            kind = "info"
+        else:
+            message = _(
+                "Please select at least 1 printed request which need to distribute!"
+            )
+            kind = "warning"
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("ID Requests"),
+                "message": message,
+                "sticky": True,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
 
     def save_to_mail_thread(self, message):
         for rec in self:

@@ -309,7 +309,7 @@
       <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_id" />
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
-      <field name="code">action = model.validate_requests()</field>
+      <field name="code">action = records.validate_requests()</field>
     </record>
 
     <record model="ir.actions.server" id="generate_requests">
@@ -318,7 +318,7 @@
       <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_id" />
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
-      <field name="code">action = model.generate_validate_requests()</field>
+      <field name="code">action = records.generate_validate_requests()</field>
     </record>
 
     <record model="ir.actions.server" id="print_requests">
@@ -327,7 +327,7 @@
       <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_id" />
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
-      <field name="code">action = model.print_requests()</field>
+      <field name="code">action = records.print_requests()</field>
     </record>
 
     <record model="ir.actions.server" id="distribute_requests">
@@ -336,7 +336,7 @@
       <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_id" />
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
-      <field name="code">action = model.distribute_requests()</field>
+      <field name="code">action = records.distribute_requests()</field>
     </record>
 
 </odoo>

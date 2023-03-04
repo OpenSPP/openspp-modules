@@ -377,7 +377,7 @@
       <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
-      <field name="code">action = model.multi_approve_batch()</field>
+      <field name="code">action = records.multi_approve_batch()</field>
     </record>
 
     <record model="ir.actions.server" id="multi_generate_batch">
@@ -386,7 +386,7 @@
       <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
-      <field name="code">action = model.multi_generate_batch()</field>
+      <field name="code">action = records.multi_generate_batch()</field>
     </record>
 
     <record model="ir.actions.server" id="multi_print_batch">
@@ -395,7 +395,7 @@
       <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
-      <field name="code">action = model.multi_print_batch()</field>
+      <field name="code">action = records.multi_print_batch()</field>
     </record>
 
     <record model="ir.actions.server" id="multi_printed_batch">
@@ -404,7 +404,7 @@
       <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
-      <field name="code">action = model.multi_printed_batch()</field>
+      <field name="code">action = records.multi_printed_batch()</field>
     </record>
 
     <record model="ir.actions.server" id="multi_distribute_batch">
@@ -413,6 +413,6 @@
       <field name="binding_model_id" ref="spp_idqueue.model_spp_print_queue_batch" />
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
-      <field name="code">action = model.multi_distribute_batch()</field>
+      <field name="code">action = records.multi_distribute_batch()</field>
     </record>
 </odoo>
