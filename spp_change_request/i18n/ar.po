@@ -1327,14 +1327,14 @@ msgid "User"
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format
-msgid "User %s does not have access to apply changes."
+#: model:ir.module.category,description:spp_change_request.spp_change_request_module
+msgid "User access level for the OpenSPP change request module"
 msgstr ""
 
 #. module: spp_change_request
-#: model:ir.module.category,description:spp_change_request.spp_change_request_module
-msgid "User access level for the OpenSPP change request module"
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "User {} does not have access to apply changes.{}"
 msgstr ""
 
 #. module: spp_change_request
