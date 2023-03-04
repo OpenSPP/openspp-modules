@@ -391,7 +391,7 @@ class OpenSPPPrintBatch(models.Model):
                 self.env.user.name,
                 datetime.now().strftime("%B %d, %Y at %H:%M"),
             )
-            batch_ids.queue_ids.save_to_mail_thread(message)
+            batch_ids.queued_ids.save_to_mail_thread(message)
 
             message = _("%s batch(es) are printed.", max_rec)
             kind = "info"
