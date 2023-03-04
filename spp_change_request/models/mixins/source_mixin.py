@@ -258,11 +258,10 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         message = ""
                         try:
                             self.action_apply()
-                        except UserError:
+                        except UserError as e:
                             message = _(
-                                "User %s does not have access to apply changes.",
-                                self.env.user,
-                            )
+                                "User {} does not have access to apply changes." "{}"
+                            ).format(self.env.user.name, repr(e))
                             is_exception = True
                         except Exception as e:
                             message = _(
