@@ -8,7 +8,7 @@ class CustomDefaultCycleManager(models.Model):
         pass
 
     def mark_prepare_entitlement_as_done(self, cycle, msg):
-        super().mark_prepare_entitlement_as_done()
+        super().mark_prepare_entitlement_as_done(cycle, msg)
         # Update Statistics
         cycle._compute_inkind_entitlements_count()
         return
