@@ -83,13 +83,12 @@ class SPPBasketEntitlementManager(models.Model):
         "res.groups", string="Entitlement Validation Group"
     )
 
-    def prepare_entitlements(self, cycle, beneficiaries, skip_count=False):
+    def prepare_entitlements(self, cycle, beneficiaries):
         """Prepare Basket Entitlements.
         Basket Entitlement Manager :meth:`prepare_entitlements`.
         This method is used to prepare the entitlement list of the beneficiaries.
         :param cycle: The cycle.
         :param beneficiaries: The beneficiaries.
-        :param skip_count: Skip compute total entitlements
         :return:
         """
         if not self.entitlement_item_ids:
@@ -161,10 +160,6 @@ class SPPBasketEntitlementManager(models.Model):
                         )
             if entitlements:
                 self.env["g2p.entitlement.inkind"].create(entitlements)
-
-        # Compute total entitlements
-        if not skip_count:
-            cycle._compute_inkind_entitlements_count()
 
     def set_pending_validation_entitlements(self, cycle):
         """Set Basket Entitlements to Pending Validation.

@@ -58,12 +58,11 @@ class G2PInKindEntitlementManager(models.Model):
         "res.groups", string="Entitlement Validation Group"
     )
 
-    def prepare_entitlements(self, cycle, beneficiaries, skip_count=False):
+    def prepare_entitlements(self, cycle, beneficiaries):
         """Prepare In-Kind Entitlements.
         This method is used to prepare the in-kind entitlement list of the beneficiaries.
         :param cycle: The cycle.
         :param beneficiaries: The beneficiaries.
-        :param skip_count: Skip compute total entitlements
         :return:
         """
         if not self.entitlement_item_ids:
@@ -149,10 +148,6 @@ class G2PInKindEntitlementManager(models.Model):
                 )
             if entitlements:
                 self.env["g2p.entitlement.inkind"].create(entitlements)
-
-        # Compute total entitlements
-        if not skip_count:
-            cycle._compute_inkind_entitlements_count()
 
     def set_pending_validation_entitlements(self, cycle):
         """Set In-Kind Entitlements to Pending Validation.
