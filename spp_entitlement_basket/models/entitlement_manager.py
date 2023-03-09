@@ -265,32 +265,24 @@ class SPPBasketEntitlementManager(models.Model):
         :return:
         """
         # Get the entitlements in cycle
-        entitlements_count = cycle.get_entitlements(
+        entitlements = cycle.get_entitlements(
             ["draft", "pending_validation", "approved"],
             entitlement_model="g2p.entitlement.inkind",
-            count=True,
         )
+        entitlements_count = len(entitlements)
         if entitlements_count < self.MIN_ROW_JOB_QUEUE:
-            self._cancel_entitlements(cycle)
+            self._cancel_entitlements(entitlements)
         else:
-            self._cancel_entitlements_async(cycle, entitlements_count)
+            self._cancel_entitlements_async(cycle, entitlements, entitlements_count)
 
-    def _cancel_entitlements(self, cycle, offset=0, limit=None):
+    def _cancel_entitlements(self, entitlements):
         """Cancel Basket Entitlements.
         Basket Entitlement Manager :meth:`_cancel_entitlements`.
         Synchronous cancellation of entitlements in a cycle.
 
-        :param cycle: A recordset of cycle
-        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
-        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :param entitlements: A recordset of entitlements to cancel
         :return:
         """
-        entitlements = cycle.get_entitlements(
-            ["draft", "pending_validation", "approved"],
-            entitlement_model="g2p.entitlement.inkind",
-            offset=offset,
-            limit=limit,
-        )
         entitlements.update({"state": "cancelled"})
 
     def approve_entitlements(self, entitlements):
