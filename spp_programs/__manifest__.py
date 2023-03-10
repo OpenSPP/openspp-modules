@@ -30,7 +30,11 @@
         "wizard/inkind_entitlement_report_wiz.xml",
         "wizard/create_program_wizard.xml",
     ],
-    "assets": {},
+    "assets": {
+        "web.assets_backend": [
+            "spp_programs/static/src/js/hide_button.js",
+        ],
+    },
     "demo": [],
     "images": [],
     "application": False,
