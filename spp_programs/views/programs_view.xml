@@ -99,6 +99,17 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="inkind_entitlements_count" invisible="1" />
                 <field name="entitlements_count" invisible="1" />
             </xpath>
+
+            <xpath expr="//button[@name='enroll_eligible_registrants']" position="before">
+                <button
+                    name="import_eligible_registrants"
+                    type="object"
+                    string="Import Eligible Registrants"
+                    icon="fa-download"
+                    class="btn-primary"
+                    states="active"
+                />
+            </xpath>
         </field>
     </record>
 
