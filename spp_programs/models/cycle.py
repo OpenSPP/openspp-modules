@@ -10,7 +10,7 @@ class G2PCycle(models.Model):
         "g2p.entitlement.inkind", "cycle_id", "In-Kind Entitlements"
     )
     inkind_entitlements_count = fields.Integer(
-        string="# In-kind Entitlements",
+        string="# In-kind Entitlements", readonly=True
     )
 
     # Stock Management Fields
