@@ -21,6 +21,12 @@ msgid "# In-kind Entitlements"
 msgstr ""
 
 #. module: spp_programs
+#: code:addons/spp_programs/models/programs.py:0
+#, python-format
+msgid "%s Imported Beneficiaries"
+msgstr ""
+
+#. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_form
 msgid "<span class=\"o_stat_text\">Entitlements</span>"
 msgstr ""
@@ -233,6 +239,17 @@ msgid "ID"
 msgstr ""
 
 #. module: spp_programs
+#: code:addons/spp_programs/models/programs.py:0
+#, python-format
+msgid "Import"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
+msgid "Import Eligible Registrants"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.ui.menu,name:spp_programs.spp_programs_root
 msgid "In-Kind"
 msgstr ""
@@ -329,6 +346,12 @@ msgid "Name"
 msgstr ""
 
 #. module: spp_programs
+#: code:addons/spp_programs/models/programs.py:0
+#, python-format
+msgid "No Eligibility Manager defined."
+msgstr ""
+
+#. module: spp_programs
 #: code:addons/spp_programs/models/entitlement.py:0
 #, python-format
 msgid "Only draft entitlements are allowed to be deleted"
@@ -353,6 +376,7 @@ msgid "Product"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_program
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__program_id
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__program_id
 msgid "Program"
@@ -418,6 +442,12 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model,name:spp_programs.model_g2p_program_membership_manager_default
 msgid "Simple Eligibility"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/programs.py:0
+#, python-format
+msgid "Started importing %s beneficiaries"
 msgstr ""
 
 #. module: spp_programs
