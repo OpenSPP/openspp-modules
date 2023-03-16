@@ -1,6 +1,6 @@
 {
     "name": "SPP Custom field-Custom filter Integrate",
-    "version": "15.0.0.0.0",
+    "version": "15.0.1.0.13",
     "author": "OpenSPP.org",
     "website": "https://github.com/openspp/openspp-registry",
     "license": "LGPL-3",
