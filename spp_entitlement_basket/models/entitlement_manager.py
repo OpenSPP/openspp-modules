@@ -323,6 +323,11 @@ class SPPBasketEntitlementManager(models.Model):
         return (state_err, message)
 
     def open_entitlements_form(self, cycle):
+        """Open Entitlements Form.
+
+        :param cycle: recordset of the cycle
+        :return:
+        """
         self.ensure_one()
         action = {
             "name": _("Cycle Basket Entitlements"),
