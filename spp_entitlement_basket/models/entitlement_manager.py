@@ -1,7 +1,10 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 
 class EntitlementManager(models.Model):
@@ -83,13 +86,12 @@ class SPPBasketEntitlementManager(models.Model):
         "res.groups", string="Entitlement Validation Group"
     )
 
-    def prepare_entitlements(self, cycle, beneficiaries, skip_count=False):
+    def prepare_entitlements(self, cycle, beneficiaries):
         """Prepare Basket Entitlements.
         Basket Entitlement Manager :meth:`prepare_entitlements`.
         This method is used to prepare the entitlement list of the beneficiaries.
         :param cycle: The cycle.
         :param beneficiaries: The beneficiaries.
-        :param skip_count: Skip compute total entitlements
         :return:
         """
         if not self.entitlement_item_ids:
@@ -162,10 +164,6 @@ class SPPBasketEntitlementManager(models.Model):
             if entitlements:
                 self.env["g2p.entitlement.inkind"].create(entitlements)
 
-        # Compute total entitlements
-        if not skip_count:
-            cycle._compute_inkind_entitlements_count()
-
     def set_pending_validation_entitlements(self, cycle):
         """Set Basket Entitlements to Pending Validation.
         Basket Entitlement Manager :meth:`set_pending_validation_entitlements`.
@@ -175,35 +173,27 @@ class SPPBasketEntitlementManager(models.Model):
         :return:
         """
         # Get the number of entitlements in cycle
-        entitlements_count = cycle.get_entitlements(
+        entitlements = cycle.get_entitlements(
             ["draft"],
             entitlement_model="g2p.entitlement.inkind",
-            count=True,
         )
+        entitlements_count = len(entitlements)
         if entitlements_count < self.MIN_ROW_JOB_QUEUE:
-            self._set_pending_validation_entitlements(cycle)
+            self._set_pending_validation_entitlements(entitlements)
 
         else:
-            self._set_pending_validation_entitlements_async(cycle, entitlements_count)
+            self._set_pending_validation_entitlements_async(cycle, entitlements)
 
-    def _set_pending_validation_entitlements(self, cycle, offset=0, limit=None):
+    def _set_pending_validation_entitlements(self, entitlements):
         """Set Basket Entitlements to Pending Validation.
         Basket Entitlement Manager :meth:`_set_pending_validation_entitlements`.
         Set entitlements to pending_validation in a cycle.
 
-        :param cycle: A recordset of cycle
-        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
-        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :param entitlements: A recordset of entitlements to process
         :return:
         """
-        # Get the entitlements in the cycle
-        entitlements = cycle.get_entitlements(
-            ["draft"],
-            entitlement_model="g2p.entitlement.inkind",
-            offset=offset,
-            limit=limit,
-        )
         entitlements.update({"state": "pending_validation"})
+        _logger.debug("Entitlement Validation: total: %s" % (len(entitlements)))
 
     def validate_entitlements(self, cycle):
         """Validate Basket Entitlements.
@@ -214,13 +204,13 @@ class SPPBasketEntitlementManager(models.Model):
         :return:
         """
         # Get the number of entitlements in cycle
-        entitlements_count = cycle.get_entitlements(
+        entitlements = cycle.get_entitlements(
             ["draft", "pending_validation"],
             entitlement_model="g2p.entitlement.inkind",
-            count=True,
         )
+        entitlements_count = len(entitlements)
         if entitlements_count < self.MIN_ROW_JOB_QUEUE:
-            err, message = self._validate_entitlements(cycle)
+            err, message = self._validate_entitlements(entitlements)
             if err > 0:
                 kind = "danger"
                 return {
@@ -252,26 +242,17 @@ class SPPBasketEntitlementManager(models.Model):
                     },
                 }
         else:
-            self._validate_entitlements_async(cycle, entitlements_count)
+            self._validate_entitlements_async(cycle, entitlements, entitlements_count)
 
-    def _validate_entitlements(self, cycle, offset=0, limit=None):
+    def _validate_entitlements(self, entitlements):
         """Validate Basket Entitlements.
         Basket Entitlement Manager :meth:`_validate_entitlements`.
         Validate entitlements in a cycle
 
-        :param cycle: A recordset of cycle
-        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
-        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :param entitlements: A recordset of entitlements to validate
         :return err: Integer number of errors
         :return message: String description of the error
         """
-        # Get the entitlements in the cycle
-        entitlements = cycle.get_entitlements(
-            ["draft", "pending_validation"],
-            entitlement_model="g2p.entitlement.inkind",
-            offset=offset,
-            limit=limit,
-        )
         err, message = self.approve_entitlements(entitlements)
         return err, message
 
@@ -284,32 +265,24 @@ class SPPBasketEntitlementManager(models.Model):
         :return:
         """
         # Get the entitlements in cycle
-        entitlements_count = cycle.get_entitlements(
+        entitlements = cycle.get_entitlements(
             ["draft", "pending_validation", "approved"],
             entitlement_model="g2p.entitlement.inkind",
-            count=True,
         )
+        entitlements_count = len(entitlements)
         if entitlements_count < self.MIN_ROW_JOB_QUEUE:
-            self._cancel_entitlements(cycle)
+            self._cancel_entitlements(entitlements)
         else:
-            self._cancel_entitlements_async(cycle, entitlements_count)
+            self._cancel_entitlements_async(cycle, entitlements, entitlements_count)
 
-    def _cancel_entitlements(self, cycle, offset=0, limit=None):
+    def _cancel_entitlements(self, entitlements):
         """Cancel Basket Entitlements.
         Basket Entitlement Manager :meth:`_cancel_entitlements`.
         Synchronous cancellation of entitlements in a cycle.
 
-        :param cycle: A recordset of cycle
-        :param offset: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query offset
-        :param limit: An integer value to be used in :meth:`cycle.get_entitlements` for setting the query limit
+        :param entitlements: A recordset of entitlements to cancel
         :return:
         """
-        entitlements = cycle.get_entitlements(
-            ["draft", "pending_validation", "approved"],
-            entitlement_model="g2p.entitlement.inkind",
-            offset=offset,
-            limit=limit,
-        )
         entitlements.update({"state": "cancelled"})
 
     def approve_entitlements(self, entitlements):
@@ -350,6 +323,11 @@ class SPPBasketEntitlementManager(models.Model):
         return (state_err, message)
 
     def open_entitlements_form(self, cycle):
+        """Open Entitlements Form.
+
+        :param cycle: recordset of the cycle
+        :return:
+        """
         self.ensure_one()
         action = {
             "name": _("Cycle Basket Entitlements"),
