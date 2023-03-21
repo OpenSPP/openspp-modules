@@ -211,6 +211,20 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         for rec in self:
             return rec._on_validate(rec.change_request_id)
 
+    def auto_apply_conditions(self):
+        """
+        Check if conditions/requirements are met:
+        if requirements are met, auto apply will execute
+        else it will not execute
+
+        NOTE: Overwrite this method on the inherited models if conditions/requirements are
+              needed to check before executing auto apply.
+
+              Return True if requirements are met
+              else False
+        """
+        return True
+
     def _on_validate(self, request):
         """
         This method is called when the Change Request is validated by a user.
@@ -253,7 +267,11 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     request.update(vals)
 
                     # Update the live data if the user has the access
-                    if self.AUTO_APPLY_CHANGES and message == "FINAL":
+                    if (
+                        self.AUTO_APPLY_CHANGES
+                        and message == "FINAL"
+                        and self.auto_apply_conditions()
+                    ):
                         is_exception = False
                         message = ""
                         try:
