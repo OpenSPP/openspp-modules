@@ -121,8 +121,15 @@ class InKindEntitlement(models.Model):
                 g2p_program_validator = self.env.user.has_group(
                     "g2p_programs.g2p_program_validator"
                 )
+                g2p_program_cycle_approver = self.env.user.has_group(
+                    "g2p_programs.g2p_program_cycle_approver"
+                )
 
-                if group_g2p_registrar or g2p_program_validator:
+                # Users with groups Registrar or Program Validator without Program Cycle Approver are not allowed
+                # But users with both Program Validator and Program Cycle Approver are allowed
+                if group_g2p_registrar or (
+                    g2p_program_validator and not g2p_program_cycle_approver
+                ):
                     raise ValidationError(
                         _("You have no access in the Entitlement List View")
                     )
