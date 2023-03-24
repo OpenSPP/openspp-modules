@@ -25,6 +25,7 @@
         "spp_scan_id_document",
         "dms_field",
         "web_domain_field",
+        "spp_idqueue",
     ],
     "data": [
         "security/change_request_security.xml",
