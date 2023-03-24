@@ -121,18 +121,16 @@ class TestRegistrant(TransactionCase):
         except ValidationError as e:
             self.skipTest(e.args)
         vals = {"idpass": self._test_id_pass.id, "id_queue": self._test_id_queue.id}
-        test_date = datetime.today()
         self._test_household.send_idpass_parameters(vals)
         self.assertEqual(
             self._test_id_queue.id_pdf,
             "TESTPDF",
             "Id Queue should have correct Id PDF!",
         )
-        with patch.object(datetime, "today", lambda: test_date):
-            jon_snow_identification_number = f"{self._test_individual.id:09d}"
-            today_strf = test_date.strftime("%Y-%m-%d")
-            self.assertEqual(
-                self._test_id_queue.id_pdf_filename,
-                "kclk_{}_{}.pdf".format(jon_snow_identification_number, today_strf),
-                "Id Queue should have correct PDF file name!",
-            )
+        jon_snow_identification_number = f"{self._test_individual.id:09d}"
+        today_strf = datetime.today().strftime("%Y-%m-%d")
+        self.assertEqual(
+            self._test_id_queue.id_pdf_filename,
+            "kclk_{}_{}.pdf".format(jon_snow_identification_number, today_strf),
+            "Id Queue should have correct PDF file name!",
+        )
