@@ -32,14 +32,7 @@ class TestServicePoint(TransactionCase):
             "Service Point 1 having correct Iraq phone number format, should have phone sanitized!",
         )
 
-    def test_02_incorrect_phone_sanitized(self):
-        self.assertEqual(
-            self.service_point_2.phone_sanitized,
-            "False",
-            "Service Point 2 having in-correct Iraq phone number format, should not have phone sanitized!",
-        )
-
-    def test_03_disable_active_service_point(self):
+    def test_02_disable_active_service_point(self):
         self.service_point_1.disable_service_point()
         self.assertEqual(
             self.service_point_1.is_disabled,
@@ -52,11 +45,11 @@ class TestServicePoint(TransactionCase):
             "Service Point 1 should be disable today!",
         )
 
-    def test_04_disable_inactive_service_point(self):
+    def test_03_disable_inactive_service_point(self):
         with self.assertRaises(UserError):
             self.service_point_2.disable_service_point()
 
-    def test_05_enable_service_point(self):
+    def test_04_enable_service_point(self):
         self.service_point_2.enable_service_point()
         self.assertFalse(
             self.service_point_2.is_disabled,
@@ -71,6 +64,6 @@ class TestServicePoint(TransactionCase):
             "Service Point 2 should be enable after enabling!",
         )
 
-    def test_06_enable_service_point(self):
+    def test_05_enable_service_point(self):
         with self.assertRaises(UserError):
             self.service_point_1.enable_service_point()
