@@ -55,8 +55,8 @@ def format_definition_name(name):
     return name.replace(' ', '') if name else ''
 
 
-class OpenAPIPath(models.Model):
-    _name = 'openapi.path'
+class SPPAPIPath(models.Model):
+    _name = 'spp_api.path'
     _order = 'model_id'
     _rec_name = 'model_id'
     _description = "OpenAPI Path"
@@ -64,7 +64,7 @@ class OpenAPIPath(models.Model):
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
     namespace_id = fields.Many2one(
-        'openapi.namespace', string='API Namespace', required=True,
+        'spp_api.namespace', string='API Namespace', required=True,
         ondelete='cascade')
     model_id = fields.Many2one('ir.model', required=True, ondelete='cascade')
     model = fields.Char(related='model_id.model', readonly=True)
@@ -87,7 +87,7 @@ class OpenAPIPath(models.Model):
     warning_required = fields.Boolean(
         compute='_compute_warning_required', compute_sudo=True)
     api_field_ids = fields.One2many(
-        'openapi.field', 'path_id', string='Fields', copy=True)
+        'spp_api.field', 'path_id', string='Fields', copy=True)
     update_domain = fields.Char(default="[]")
     # Unlink
     unlink_domain = fields.Char(default="[]")
@@ -96,7 +96,7 @@ class OpenAPIPath(models.Model):
     function_domain = fields.Char(default="[]")
     function = fields.Char()
     function_parameter_ids = fields.One2many(
-        'openapi.function.parameter', 'path_id', string='Parameters',
+        'spp_api.function.parameter', 'path_id', string='Parameters',
         copy=True)
 
     _sql_constraints = [

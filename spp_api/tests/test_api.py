@@ -137,7 +137,7 @@ class TestAPI(HttpCase):
         self.assertEqual(resp.json()["error"], pinguin.CODE__no_user_auth[1])
 
     def test_user_not_allowed_for_namespace(self):
-        namespace = self.phantom_env["openapi.namespace"].search(
+        namespace = self.phantom_env["spp_api.namespace"].search(
             [("name", "=", "demo")]
         )
         new_user = self.phantom_env["res.users"].create(
@@ -225,9 +225,9 @@ class TestAPI(HttpCase):
 
     # TODO: doesn't work in test environment
     def _test_log_creating(self):
-        logs_count_before_request = len(self.phantom_env["openapi.log"].search([]))
+        logs_count_before_request = len(self.phantom_env["spp_api.log"].search([]))
         self.request_from_user(self.demo_user, "GET", "/{model}")
-        logs_count_after_request = len(self.phantom_env["openapi.log"].search([]))
+        logs_count_after_request = len(self.phantom_env["spp_api.log"].search([]))
         self.assertTrue(logs_count_after_request > logs_count_before_request)
 
     # TODO test is not update for the latest module version
@@ -239,7 +239,7 @@ class TestAPI(HttpCase):
         model_for_report = self.phantom_env["ir.model"].search(
             [("model", "=", modelname_for_report)]
         )
-        namespace = self.phantom_env["openapi.namespace"].search([("name", "=")])
+        namespace = self.phantom_env["spp_api.namespace"].search([("name", "=")])
         records_for_report = self.phantom_env[modelname_for_report].search([], limit=3)
         docids = ",".join([str(i) for i in records_for_report.ids])
 

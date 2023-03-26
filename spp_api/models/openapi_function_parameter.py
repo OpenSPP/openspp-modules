@@ -1,15 +1,15 @@
 from odoo import fields, models, api
 
 
-class OpenAPIFunctionParameter(models.Model):
+class SPPAPIFunctionParameter(models.Model):
     """
     OpenAPI Function Parameter Model
     """
-    _name = 'openapi.function.parameter'
+    _name = 'spp_api.function.parameter'
     _description = "OpenAPI Function"
 
     path_id = fields.Many2one(
-        'openapi.path', required=True, ondelete='cascade')
+        'spp_api.path', required=True, ondelete='cascade')
     name = fields.Char(required=True)
     sequence = fields.Integer()
     type = fields.Selection([

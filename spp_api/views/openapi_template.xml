@@ -2,7 +2,7 @@
 <!-- Copyright 2017 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <template id="openapi" name="OpenAPI">
+    <template id="openapi" name="OpenSPP API">
         <t t-call="web.layout">
             <t t-set="head">
                 <meta name="generator" content="Odoo OpenAPI" />

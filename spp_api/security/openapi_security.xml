@@ -9,15 +9,15 @@
     <record model="res.groups" id="group_user">
         <field name="name">User</field>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
-        <field name="category_id" ref="nl_openapi.module_management" />
+        <field name="category_id" ref=" spp_api.module_management" />
     </record>
     <record model="res.groups" id="group_manager">
         <field name="name">Manager</field>
-        <field name="implied_ids" eval="[(4, ref('nl_openapi.group_user'))]" />
+        <field name="implied_ids" eval="[(4, ref(' spp_api.group_user'))]" />
         <field
             name="users"
             eval="[(4, ref('base.partner_root')), (4, ref('base.user_root'))]"
         />
-        <field name="category_id" ref="nl_openapi.module_management" />
+        <field name="category_id" ref=" spp_api.module_management" />
     </record>
 </odoo>

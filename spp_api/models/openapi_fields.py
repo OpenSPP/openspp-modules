@@ -1,15 +1,15 @@
 from odoo import api, fields, models
 
 
-class openAPIField(models.Model):
-    _name = 'openapi.field'
+class SPPAPIField(models.Model):
+    _name = 'spp_api.field'
     _order = 'sequence'
     _rec_name = 'field_name'
     _description = "OpenAPI Field"
 
     sequence = fields.Integer()
     path_id = fields.Many2one(
-        'openapi.path', required=True, ondelete='cascade')
+        'spp_api.path', required=True, ondelete='cascade')
     model_id = fields.Many2one(
         related="path_id.model_id", readonly=True)
     field_id = fields.Many2one(

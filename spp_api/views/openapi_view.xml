@@ -24,7 +24,7 @@
     </record>
     <record id="_logs_tree_view" model="ir.ui.view">
         <field name="name">logs.tree.view</field>
-        <field name="model">openapi.log</field>
+        <field name="model">spp_api.log</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="create_date" />
@@ -35,7 +35,7 @@
     </record>
     <record model="ir.ui.view" id='openapi_log_model_view_form'>
         <field name="name">openapi.log.form</field>
-        <field name="model">openapi.log</field>
+        <field name="model">spp_api.log</field>
         <field name="arch" type="xml">
             <form string="Log">
                 <group>
@@ -52,7 +52,7 @@
 
     <record id="view_api_rest_path_tree" model="ir.ui.view">
         <field name="name">api.rest.path.tree</field>
-        <field name="model">openapi.path</field>
+        <field name="model">spp_api.path</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree string="Paths" decoration-muted="not active">
@@ -67,7 +67,7 @@
 
         <record id="view_api_rest_path_form" model="ir.ui.view">
         <field name="name">api.rest.path.form</field>
-        <field name="model">openapi.path</field>
+        <field name="model">spp_api.path</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="Path">
@@ -162,7 +162,7 @@
 
     <record model="ir.ui.view" id="namespace_form_view">
         <field name="name">openapi.namespace.form</field>
-        <field name="model">openapi.namespace</field>
+        <field name="model">spp_api.namespace</field>
         <field name="arch" type="xml">
             <form string="OpenAPI">
                 <header position="inside">
@@ -234,7 +234,7 @@
     </record>
     <record id='openapi_namespace_model_view_tree' model='ir.ui.view'>
         <field name="name">openapi.namespace.tree</field>
-        <field name="model">openapi.namespace</field>
+        <field name="model">spp_api.namespace</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
@@ -243,7 +243,7 @@
     </record>
     <record model="ir.actions.act_window" id="namespace_list_action">
         <field name="name">Intergrations</field>
-        <field name="res_model">openapi.namespace</field>
+        <field name="res_model">spp_api.namespace</field>
         <field name="view_mode">tree,form</field>
         <field name="help">Create and manage the namespaces.</field>
     </record>
@@ -255,7 +255,7 @@
     <menuitem id="openapi_menu" name="OpenAPI" parent="main_openapi_menu" />
     <menuitem
         id="namespaces_menu"
-        name="Intergrations"
+        name="Integrations"
         parent="openapi_menu"
         action="namespace_list_action"
     />

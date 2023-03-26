@@ -11,8 +11,8 @@ import werkzeug
 from odoo import http
 from odoo.http import request, Response
 
-from odoo.addons.base_api.lib.pinguin import error_response
-from odoo.addons.nl_openapi.controllers.pinguin import successful_response, CODE__obj_not_found
+from odoo.addons.spp_base_api.lib.pinguin import error_response
+from odoo.addons. spp_api.controllers.pinguin import successful_response, CODE__obj_not_found
 from . import pinguin
 
 _logger = logging.getLogger(__name__)
@@ -38,7 +38,7 @@ API_ENDPOINT = "/api"
 # Furthermore we check if api version is supported.
 # This keeps the code below minial and readable.
 
-# class openAPIWrapper:
+# class SPPAPIWrapper:
 #     def __call__(self, func):
 #         @wraps(func)
 #         def wrapper(*args, **kwargs):

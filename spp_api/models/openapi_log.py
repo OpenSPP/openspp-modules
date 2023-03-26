@@ -4,11 +4,11 @@ from odoo import fields, models
 
 
 class Log(models.Model):
-    _name = "openapi.log"
+    _name = "spp_api.log"
     _order = "id desc"
     _description = "OpenAPI logs"
 
-    namespace_id = fields.Many2one("openapi.namespace", "Integration")
+    namespace_id = fields.Many2one("spp_api.namespace", "Integration")
     request = fields.Char("Request")
     request_data = fields.Text("Request Data")
     response_data = fields.Text("Response Data")

@@ -11,14 +11,14 @@ import uuid
 
 from odoo import api, fields, models
 
-from odoo.addons.base_api.lib import pinguin
+from odoo.addons.spp_base_api.lib import pinguin
 
 _logger = logging.getLogger(__name__)
 
 
 class Namespace(models.Model):
 
-    _name = "openapi.namespace"
+    _name = "spp_api.namespace"
     _description = "Integration"
 
     active = fields.Boolean("Active", default=True)
@@ -30,7 +30,7 @@ class Namespace(models.Model):
     )
     version_name = fields.Char(string='Number Version', required=True)
     description = fields.Char("Description")
-    log_ids = fields.One2many("openapi.log", "namespace_id", string="Logs")
+    log_ids = fields.One2many("spp_api.log", "namespace_id", string="Logs")
     log_count = fields.Integer("Log count", compute="_compute_log_count")
     log_request = fields.Selection(
         [("disabled", "Disabled"), ("info", "Short"), ("debug", "Full")],
@@ -53,7 +53,7 @@ class Namespace(models.Model):
     #     context={"active_test": False},
     # )
     path_ids = fields.One2many(
-        'openapi.path', 'namespace_id', string='Paths',
+        'spp_api.path', 'namespace_id', string='Paths',
         context={'active_test': False})
     user_ids = fields.Many2many(
         "res.users", string="Allowed Users", default=lambda self: self.env.user
@@ -260,7 +260,7 @@ class Namespace(models.Model):
         return {
             "name": "Logs",
             "view_mode": "tree,form",
-            "res_model": "openapi.log",
+            "res_model": "spp_api.log",
             "type": "ir.actions.act_window",
             "domain": [["namespace_id", "=", self.id]],
         }
@@ -268,7 +268,7 @@ class Namespace(models.Model):
     def _compute_last_used(self):
         for s in self:
             s.last_log_date = (
-                s.env["openapi.log"]
+                s.env["spp_api.log"]
                 .search(
                     [("namespace_id", "=", s.id), ("create_date", "!=", False)],
                     limit=1,

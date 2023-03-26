@@ -32,7 +32,7 @@ from odoo.http import request
 from odoo.service import security
 from odoo.tools import date_utils
 
-from odoo.addons.base_api.lib.pinguin import (
+from odoo.addons.spp_base_api.lib.pinguin import (
     error_response,
     get_dict_from_record,
     get_dictlist_from_model,
@@ -279,7 +279,7 @@ def get_openapi_path(namespace, version, model, method_name):
         ("method", "=", http_method)
     ]
     _logger.info("get_openapi_path: %s", domain_path)
-    path = request.env['openapi.path'].sudo().search(
+    path = request.env['spp_api.path'].sudo().search(
         domain_path, limit=1)
 
     _logger.info("get_openapi_path: %s", path)
@@ -309,7 +309,7 @@ def get_namespace_by_name_from_users_namespaces(
     :raise: werkzeug.exceptions.HTTPException if the namespace is not contained
                                               in allowed user namespaces.
     """
-    namespace = request.env["openapi.namespace"].search([("name", "=", namespace_name)])
+    namespace = request.env["spp_api.namespace"].search([("name", "=", namespace_name)])
 
     if not namespace.exists() and raise_exception:
         raise werkzeug.exceptions.HTTPException(
@@ -383,7 +383,7 @@ def _create_log_record(
         elif namespace_log_response == "error" and user_response.status_code > 400:
             log_data["response_data"] = user_response.__dict__
 
-        return env["openapi.log"].create(log_data)
+        return env["spp_api.log"].create(log_data)
 
 
 # Patched http route

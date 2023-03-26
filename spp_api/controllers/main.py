@@ -11,7 +11,7 @@ from odoo import http
 from odoo.http import request, Response
 from odoo.tools import date_utils
 
-from odoo.addons.nl_openapi.config import BASE_API
+from odoo.addons. spp_api.config import BASE_API
 from odoo.addons.web.controllers.main import ensure_db
 
 _logger = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ class OAS(http.Controller):
             "urls.primaryName": primary_name,
         }
         values = {"swagger_settings": swagger_settings}
-        return request.render("nl_openapi.openapi", values)
+        return request.render(" spp_api.openapi", values)
 
     def _get_api_urls(self):
         """
@@ -43,7 +43,7 @@ class OAS(http.Controller):
         """
 
         namespaces = (
-            http.request.env["openapi.namespace"]
+            http.request.env["spp_api.namespace"]
             .sudo()
             .search([["active", "=", True]])
         )
@@ -83,7 +83,7 @@ class OAS(http.Controller):
     def oas_json_spec_download(self, namespace_name, version, **kwargs):
         ensure_db()
         namespace = (
-            http.request.env["openapi.namespace"]
+            http.request.env["spp_api.namespace"]
             .sudo()
             .search([("name", "=", namespace_name), ("version_name", "=", version)])
         )
