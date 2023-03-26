@@ -38,7 +38,7 @@ class TestAPI(HttpCase):
 
     def request(self, method, url, auth=None, **kwargs):
         kwargs.setdefault("model", self.model_name)
-        kwargs.setdefault("namespace", "demo")
+        kwargs.setdefault("namespace_id", "demo")
         url = (
             "http://localhost:%d/api/v1/{namespace}" % config["http_port"] + url
         ).format(**kwargs)

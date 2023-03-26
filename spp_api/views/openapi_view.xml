@@ -49,100 +49,122 @@
             </form>
         </field>
     </record>
-    <record model="ir.ui.view" id="access_form_view">
-        <field name="name">openapi.access.form</field>
-        <field name="model">openapi.access</field>
+
+    <record id="view_api_rest_path_tree" model="ir.ui.view">
+        <field name="name">api.rest.path.tree</field>
+        <field name="model">openapi.path</field>
+        <field name="type">tree</field>
         <field name="arch" type="xml">
-            <form string="Access">
+            <tree string="Paths" decoration-muted="not active">
+                <field name="namespace_id"/>
+                <field name="name"/>
+                <field name="active" widget="boolean_toggle"/>
+                <field name="model_id"/>
+                <field name="method"/>
+            </tree>
+        </field>
+    </record>
+
+        <record id="view_api_rest_path_form" model="ir.ui.view">
+        <field name="name">api.rest.path.form</field>
+        <field name="model">openapi.path</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Path">
                 <sheet>
-                    <widget
-                        name="web_ribbon"
-                        title="Archived"
-                        bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
-                    />
+                    <widget name="web_ribbon" title="Inactive" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
                     <div class="oe_title">
-                        <group>
-                            <field name="id" invisible="1" />
-                            <field name="model" invisible="1" />
-                            <field name="model_id" options="{'no_create': True}" />
-                            <field name="active" />
-                            <field name="api_create" />
-                            <field name="api_read" />
-                            <field name="api_update" />
-                            <field name="api_delete" />
-                            <field name="api_public_methods" />
-                            <field
-                                name="public_methods"
-                                attrs="{'invisible': [('api_public_methods', '=', False)]}"
-                            />
-                            <field name="private_methods" />
-                            <field
-                                name="read_one_id"
-                                attrs="{'readonly': [('model_id', '=', False)]}"
-                                context="{'default_resource': model, 'default_name': context.get('parent_name', '&lt;parent_namespace_name&gt;') + ' / ' + model + ' / read_one'}"
-                            >
-                                <form string="Read One Fields">
-                                    <group>
-                                        <field name="name" />
-                                        <field name="resource" />
-                                        <field name="export_fields">
-                                            <form string="Export Fields">
-                                                <group>
-                                                    <field name="name" />
-                                                </group>
-                                            </form>
-                                        </field>
-                                    </group>
-                                </form>
-                            </field>
-                            <field
-                                name="read_many_id"
-                                attrs="{'readonly': [('model_id', '=', False)], 'invisible': [('api_read', '=', False)]}"
-                                context="{'default_resource': model, 'default_name': context.get('parent_name', '&lt;parent_namespace_name&gt;') + ' / ' + model + ' / read_many'}"
-                            >
-                                <form string="Read Many Fields">
-                                    <group>
-                                        <field name="name" />
-                                        <field name="resource" />
-                                        <field name="export_fields">
-                                            <form string="Export Fields">
-                                                <group>
-                                                    <field name="name" />
-                                                </group>
-                                            </form>
-                                        </field>
-                                    </group>
-                                </form>
-                            </field>
-                        </group>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <label for="model_id"/>
+                        <h3>
+                            <field name="model_id" options="{'no_create': True}"/>
+                            <field name="model" invisible="1"/>
+                        </h3>
+                        <label for="namespace_id"/>
+                        <h5>
+                            <field name="namespace_id" options="{'no_create': True}"/>
+                        </h5>
                     </div>
-                    <notebook attrs="{'invisible': [('api_create', '=', False)]}">
-                        <page string="Creation Context Presets">
-                            <field
-                                name="create_context_ids"
-                                attrs="{'readonly': [('model_id', '=', False)]}"
-                                context="{'default_model_id': model_id}"
-                            >
-                                <form string="Creation Context Presets">
-                                    <group>
-                                        <field name="name" />
-                                        <field name="description" />
-                                        <field name="context" />
-                                    </group>
-                                </form>
-                            </field>
-                        </page>
-                    </notebook>
+                    <group string="Description">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                    <group>
+                        <group string="Additional Information">
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="deprecated" widget="boolean_toggle"/>
+<!--                            <field name="tag_id" options="{'no_create': True}"/>-->
+                        </group>
+                        <group string="Method">
+                            <field name="method" widget="radio"/>
+
+                        </group>
+                    </group>
+                    <group string="Settings for read"
+                           attrs="{'invisible': [('method', 'not in', ['get'])]}">
+                        <field name="limit" attrs="{'required': [('method', '=', 'get')]}"/>
+                        <field name="filter_domain" widget="domain" options="{'model': 'model', 'in_dialog': True}"
+                               placeholder="Add domain to filter result, example: [('name', '=', 'Test')]"/>
+                        <field name="field_ids" widget="many2many_tags"
+                               attrs="{'required': [('method', '=', 'get')]}"
+                               options="{'no_create': True}"/>
+                    </group>
+                    <field name="warning_required" invisible="1"/>
+                    <group string="Settings for create/update" attrs="{'invisible': [('method', 'not in', ['post', 'put'])]}">
+                        <field name="update_domain" widget="domain" options="{'model': 'model', 'in_dialog': True}"
+                               attrs="{'invisible': [('method', 'not in', ['put'])]}"/>
+                        <div colspan="2" class="alert alert-danger text-center" role="alert"
+                             attrs="{'invisible': [('warning_required', '=', True)]}">
+                            Please note, some required fields have not been added to the list of fields, creating or updating may not work.
+                        </div>
+                        <field name="api_field_ids"
+                               context="{'default_path_id': active_id}">
+                            <tree editable="bottom" decoration-muted="default_value">
+                                <field name="model_id" invisible="1"/>
+                                <field name="path_id" invisible="1" />
+                                <field name="sequence" widget="handle"/>
+                                <field name="field_id" options="{'no_create': True}"/>
+                                <field name="description"/>
+                                <field name="default_value"/>
+                                <field name="force_required" invisible="1"/>
+                                <field name="required" attrs="{'readonly': [('default_value', 'not in', ['', False])]}"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group string="Settings for unlink"
+                           attrs="{'invisible': [('method', 'not in', ['delete'])]}">
+                        <field name="unlink_domain" widget="domain" options="{'model': 'model', 'in_dialog': True}"/>
+                    </group>
+                    <group string="Settings for custom function"
+                           attrs="{'invisible': [('method', 'not in', ['patch'])]}">
+                        <field name="function_apply_on_record" attrs="{'required': [('method', '=', 'patch')]}"/>
+                        <field name="function_domain" widget="domain" options="{'model': 'model', 'in_dialog': True}"
+                               attrs="{'invisible': [('function_apply_on_record', '=', False)]}"/>
+                        <field name="function" attrs="{'required': [('method', '=', 'patch')]}"/>
+                        <field name="function_parameter_ids">
+                            <tree editable="bottom">
+                                <field name="path_id" invisible="1" />
+                                <field name="sequence" widget="handle"/>
+                                <field name="name"/>
+                                <field name="type"/>
+                                <field name="description"/>
+                                <field name="default_value"/>
+                                <field name="required"/>
+                            </tree>
+                        </field>
+                    </group>
                 </sheet>
             </form>
         </field>
     </record>
+
     <record model="ir.ui.view" id="namespace_form_view">
         <field name="name">openapi.namespace.form</field>
         <field name="model">openapi.namespace</field>
         <field name="arch" type="xml">
-            <form string="Intergration">
+            <form string="OpenAPI">
                 <header position="inside">
                     <button
                         name="reset_token"
@@ -175,7 +197,12 @@
                             <field name="name" class="oe_inline" />
                             <field name="active" invisible="1" />
                         </h1>
-                        <label for="description" class="oe_edit_only" />
+                        <label for="version_name" />
+                        <h3>
+                            <field name="version_name" />
+                        </h3>
+
+                        <label for="description" />
                         <h3>
                             <field name="description" />
                         </h3>
@@ -190,17 +217,8 @@
                         </group>
                     </div>
                     <notebook>
-                        <page string="Accessable Models">
-                            <field
-                                name="access_ids"
-                                mode="tree"
-                                context="{'parent_name': name, 'active_test': False}"
-                            >
-                                <tree>
-                                    <field name="active" />
-                                    <field name="model_id" />
-                                </tree>
-                            </field>
+                        <page string="Paths">
+                            <field name="path_ids" context="{'default_version_id': active_id}" nolabel="1"/>
                         </page>
                         <page string="Allowed Users">
                             <field name="user_ids">
@@ -223,28 +241,11 @@
             </tree>
         </field>
     </record>
-    <record id='openapi_access_model_view_tree' model='ir.ui.view'>
-        <field name="name">openapi.access.tree</field>
-        <field name="model">openapi.access</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="namespace_id" />
-                <field name="model" />
-            </tree>
-        </field>
-    </record>
     <record model="ir.actions.act_window" id="namespace_list_action">
         <field name="name">Intergrations</field>
         <field name="res_model">openapi.namespace</field>
         <field name="view_mode">tree,form</field>
         <field name="help">Create and manage the namespaces.</field>
-    </record>
-    <record model="ir.actions.act_window" id="ir_model_accesses_list_action">
-        <field name="name">Accesses</field>
-        <field name="res_model">openapi.access</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[('model_id', '=', active_id)]</field>
-        <field name="context">{'default_model_id': active_id}</field>
     </record>
     <menuitem
         id="main_openapi_menu"

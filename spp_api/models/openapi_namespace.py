@@ -5,12 +5,15 @@
 # Copyright 2021 Denis Mudarisov <https://github.com/trojikman>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 import collections
+import logging
 import urllib.parse as urlparse
 import uuid
 
 from odoo import api, fields, models
 
 from odoo.addons.base_api.lib import pinguin
+
+_logger = logging.getLogger(__name__)
 
 
 class Namespace(models.Model):
@@ -25,6 +28,7 @@ class Namespace(models.Model):
         help="""Integration name, e.g. ebay, amazon, magento, etc.
         The name is used in api endpoint""",
     )
+    version_name = fields.Char(string='Number Version', required=True)
     description = fields.Char("Description")
     log_ids = fields.One2many("openapi.log", "namespace_id", string="Logs")
     log_count = fields.Integer("Log count", compute="_compute_log_count")
@@ -42,12 +46,15 @@ class Namespace(models.Model):
 
     last_log_date = fields.Datetime(compute="_compute_last_used", string="Latest usage")
 
-    access_ids = fields.One2many(
-        "openapi.access",
-        "namespace_id",
-        string="Accesses",
-        context={"active_test": False},
-    )
+    # access_ids = fields.One2many(
+    #     "openapi.access",
+    #     "namespace_id",
+    #     string="Accesses",
+    #     context={"active_test": False},
+    # )
+    path_ids = fields.One2many(
+        'openapi.path', 'namespace_id', string='Paths',
+        context={'active_test': False})
     user_ids = fields.Many2many(
         "res.users", string="Allowed Users", default=lambda self: self.env.user
     )
@@ -64,9 +71,9 @@ class Namespace(models.Model):
 
     _sql_constraints = [
         (
-            "name_uniq",
-            "unique (name)",
-            "A namespace already exists with this name. Namespace's name must be unique!",
+            "name_ands_version_uniq",
+            "unique (name, version_name)",
+            "A namespace already exists with this name and version number. Namespace's name and version must be unique!",
         )
     ]
 
@@ -74,9 +81,10 @@ class Namespace(models.Model):
         return [
             (
                 record.id,
-                "/api/v1/%s%s"
+                "/api/%s/%s%s"
                 % (
                     record.name,
+                    record.version_name,
                     " (%s)" % record.description if record.description else "",
                 ),
             )
@@ -98,7 +106,7 @@ class Namespace(models.Model):
         vals = self._fix_name(vals)
         return super(Namespace, self).write(vals)
 
-    def get_OAS(self):
+    def get_oas(self, version):
         current_host = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
         parsed_current_host = urlparse.urlparse(current_host)
 
@@ -123,7 +131,7 @@ class Namespace(models.Model):
                 ("swagger", "2.0"),
                 ("info", {"title": self.name, "version": self.write_date}),
                 ("host", parsed_current_host.netloc),
-                ("basePath", "/api/v1/%s" % self.name),
+                ("basePath", "/api/%s/%s" % (self.name, version)),
                 ("schemes", [parsed_current_host.scheme]),
                 (
                     "consumes",
@@ -180,10 +188,10 @@ class Namespace(models.Model):
                     {
                         "ErrorResponse": {
                             "type": "object",
-                            "required": ["error", "error_descrip"],
+                            "required": ["error", "error_description"],
                             "properties": {
                                 "error": {"type": "string"},
-                                "error_descrip": {"type": "string"},
+                                "error_description": {"type": "string"},
                             },
                         },
                     },
@@ -211,21 +219,32 @@ class Namespace(models.Model):
             ]
         )
 
-        for openapi_access in self.access_ids.filtered("active"):
-            OAS_part_for_model = openapi_access.get_OAS_part()
+        paths = self.path_ids.filtered("active")
+        for path in paths:
+            _logger.debug("path: %s" % path)
+            OAS_part_for_model = path.get_oas_part()
+            _logger.debug("OAS_part_for_model: %s" % OAS_part_for_model)
             spec["tags"].append(OAS_part_for_model["tag"])
             del OAS_part_for_model["tag"]
             pinguin.update(spec, OAS_part_for_model)
+            _logger.debug("spec: %s" % spec)
+
+        # for openapi_access in self.access_ids.filtered("active"):
+        #     OAS_part_for_model = openapi_access.get_OAS_part()
+        #     spec["tags"].append(OAS_part_for_model["tag"])
+        #     del OAS_part_for_model["tag"]
+        #     pinguin.update(spec, OAS_part_for_model)
 
         return spec
 
-    @api.depends("name", "token")
+    @api.depends("name", "token", "version_name")
     def _compute_spec_url(self):
         base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
         for record in self:
-            record.spec_url = "{}/api/v1/{}/swagger.json?token={}&db={}".format(
+            record.spec_url = "{}/api/{}/{}/swagger.json?token={}&db={}".format(
                 base_url,
                 record.name,
+                record.version_name,
                 record.token,
                 self._cr.dbname,
             )

@@ -22,6 +22,7 @@ Todo:
 """
 import base64
 import functools
+import logging
 import traceback
 
 import werkzeug.wrappers
@@ -38,6 +39,7 @@ from odoo.addons.base_api.lib.pinguin import (
     get_model_for_read,
 )
 from odoo.addons.web.controllers.main import ReportController
+from odoo.tools.safe_eval import safe_eval
 
 from .apijsonrequest import api_route
 
@@ -46,6 +48,8 @@ try:
 except ImportError:
     import json
 
+
+_logger = logging.getLogger(__name__)
 
 ####################################
 # Definition of global error codes #
@@ -138,6 +142,7 @@ def authenticate_token_for_user(token):
 
     :raise: werkzeug.exceptions.HTTPException if user not found.
     """
+    _logger.debug("authenticate_token_for_user: %s", token)
     user = request.env["res.users"].sudo().search([("openapi_token", "=", token)])
     if user.exists():
         # copy-pasted from odoo.http.py:OpenERPSession.authenticate()
@@ -242,6 +247,51 @@ def setup_db(httprequest, db_name):
 # Pinguin Routing #
 ###################
 
+
+def get_openapi_path(namespace, version, model, method_name):
+    """Get the OpenAPI path for a given namespace, version and method.
+
+    :param str namespace: The namespace name.
+    :param str version: The version name.
+    :param str method_name: The method name.
+
+    :returns: The opensapi.path object.
+    :rtype: path
+    """
+    _logger.info("get_openapi_path: %s %s %s %s", namespace, version, model, method_name)
+    if not namespace or not version:
+        raise werkzeug.exceptions.HTTPException(
+            response=error_response(404,
+                                            "Not Found",
+                                            "Namespace and version are required")
+        )
+
+    http_method = request.httprequest.method.lower()
+    # if api_method:
+    #     http_method = "patch"
+
+    # TODO: Handle custom functions
+
+    domain_path = [
+        ("namespace_id.name", "=", namespace),
+        ("namespace_id.version_name", "=", version),
+        ("name", "=", model),
+        ("method", "=", http_method)
+    ]
+    _logger.info("get_openapi_path: %s", domain_path)
+    path = request.env['openapi.path'].sudo().search(
+        domain_path, limit=1)
+
+    _logger.info("get_openapi_path: %s", path)
+    if not path:
+        raise werkzeug.exceptions.HTTPException(
+            response=error_response(404,
+                                            "Not Found",
+                                            "The requested URL was not found on the server. If you entered the "
+                                            "URL manually please check your spelling and try again.")
+        )
+
+    return path
 
 # Try to get namespace from user allowed namespaces
 def get_namespace_by_name_from_users_namespaces(
@@ -357,20 +407,42 @@ def route(*args, **kwargs):
             auth_header = get_auth_header(
                 request.httprequest.headers, raise_exception=True
             )
+
+            _logger.info("auth_header: %s", auth_header)
+            _logger.info("iargs: %s", iargs)
+            _logger.info("ikwargs: %s", ikwargs)
+
+            namespace = ikwargs.get("namespace")
+            version = ikwargs.get("version")
+            model = ikwargs.get("model")
+            method = ikwargs.get("method")
+
             db_name, user_token = get_data_from_auth_header(auth_header)
             setup_db(request.httprequest, db_name)
             authenticated_user = authenticate_token_for_user(user_token)
-            namespace = get_namespace_by_name_from_users_namespaces(
-                authenticated_user, ikwargs["namespace"], raise_exception=True
-            )
+            path = get_openapi_path(namespace, version, model, method)
+
             data_for_log = {
-                "namespace_id": namespace.id,
-                "namespace_log_request": namespace.log_request,
-                "namespace_log_response": namespace.log_response,
+                "namespace": namespace,
+                "version": version,
+                "method": method,
+                "path_id": path.id,
+                "namespace_log_request": path.namespace_id.log_request,
+                "namespace_log_response": path.namespace_id.log_response,
                 "user_id": authenticated_user.id,
                 "user_request": None,
                 "user_response": None,
             }
+
+            # Eval query parameters
+            for k, v in ikwargs.items():
+                try:
+                    ikwargs[k] = safe_eval(v)
+                except Exception:
+                    # ignore errors
+                    continue
+
+            ikwargs["path"] = path
 
             try:
                 response = controller_method(*iargs, **ikwargs)
@@ -383,13 +455,13 @@ def route(*args, **kwargs):
                 response = error_response(
                     status=500,
                     error=type(e).__name__,
-                    error_descrip=e.name if hasattr(e, "name") else str(e),
+                    error_description=e.name if hasattr(e, "name") else str(e),
                 )
 
             data_for_log.update(
                 {"user_request": request.httprequest, "user_response": response}
             )
-            create_log_record(**data_for_log)
+            # create_log_record(**data_for_log)
 
             return response
 
@@ -448,7 +520,7 @@ def get_create_context(namespace, model, canned_context):
 
 # TODO: cache per model and database
 # Get model configuration (openapi.access)
-def get_model_openapi_access(namespace, model):
+def get_model_openapi_access(namespace, version, model):
     """Get the model configuration and validate the requested namespace against the session.
 
     The namespace is a lightweight ACL + default implementation to integrate
@@ -497,7 +569,9 @@ def get_model_openapi_access(namespace, model):
     openapi_access = (
         request.env(cr, uid)["openapi.access"]
         .sudo()
-        .search([("model_id", "=", model), ("namespace_id.name", "=", namespace)])
+        .search([("model_id", "=", model),
+                 ("namespace_id.name", "=", namespace),
+                 ("version_name", "=", version)])
     )
     if not openapi_access.exists():
         raise werkzeug.exceptions.HTTPException(
