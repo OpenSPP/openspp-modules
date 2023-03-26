@@ -33,7 +33,7 @@ class OAS(http.Controller):
             "urls.primaryName": primary_name,
         }
         values = {"swagger_settings": swagger_settings}
-        return request.render(" spp_api.openapi", values)
+        return request.render("spp_api.openapi", values)
 
     def _get_api_urls(self):
         """

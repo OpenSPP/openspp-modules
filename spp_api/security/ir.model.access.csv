@@ -1,12 +1,12 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-user_access_openapi_log,access_openapi_log,model_openapi_log, spp_api.group_user,1,0,1,0
-user_access_openapi_namespace,access_openapi_namespace,model_openapi_namespace, spp_api.group_user,1,0,0,0
-user_access_openapi_path,access_openapi_path,model_openapi_path, spp_api.group_user,1,0,0,0
-user_access_openapi_field,access_openapi_field,model_openapi_field, spp_api.group_user,1,0,0,0
-user_access_openapi_function_parameter,access_openapi_function_parameter,model_openapi_function_parameter, spp_api.group_user,1,0,0,0
-manager_access_openapi_log,access_openapi_log,model_openapi_log, spp_api.group_manager,1,1,1,1
-manager_access_openapi_namespace,access_openapi_namespace,model_openapi_namespace, spp_api.group_manager,1,1,1,1
-manager_access_openapi_path,access_openapi_path,model_openapi_path, spp_api.group_manager,1,1,1,1
-manager_access_openapi_field,access_openapi_field,model_openapi_field, spp_api.group_manager,1,1,1,1
-manager_access_openapi_function_parameter,access_openapi_function_parameter,model_openapi_function_parameter, spp_api.group_manager,1,1,1,1
+user_access_openapi_log,access_openapi_log,model_openapi_log,spp_api.group_user,1,0,1,0
+user_access_openapi_namespace,access_openapi_namespace,model_openapi_namespace,spp_api.group_user,1,0,0,0
+user_access_openapi_path,access_openapi_path,model_openapi_path,spp_api.group_user,1,0,0,0
+user_access_openapi_field,access_openapi_field,model_openapi_field,spp_api.group_user,1,0,0,0
+user_access_openapi_function_parameter,access_openapi_function_parameter,model_openapi_function_parameter,spp_api.group_user,1,0,0,0
+manager_access_openapi_log,access_openapi_log,model_openapi_log,spp_api.group_manager,1,1,1,1
+manager_access_openapi_namespace,access_openapi_namespace,model_openapi_namespace,spp_api.group_manager,1,1,1,1
+manager_access_openapi_path,access_openapi_path,model_openapi_path,spp_api.group_manager,1,1,1,1
+manager_access_openapi_field,access_openapi_field,model_openapi_field,spp_api.group_manager,1,1,1,1
+manager_access_openapi_function_parameter,access_openapi_function_parameter,model_openapi_function_parameter,spp_api.group_manager,1,1,1,1
 ,,,
