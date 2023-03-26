@@ -77,9 +77,11 @@ def validate_spec(model, spec):
     :raise: Exception:
                     * if the tuple representing the field does not have length 2.
                     * if the second part of the tuple representing the field is not a list or tuple.
-                    * if if a tuple representing a field consists of two parts, but the first part is not a relative field.
-                    * if if the second part of the tuple representing the field is of type tuple, but the field is the ratio 2many.
-                    * if if the field is neither a string nor a tuple.
+                    * if a tuple representing a field consists of two parts, but the first part is not a
+                        relative field.
+                    * if the second part of the tuple representing the field is of type tuple, but the field
+                        is the ratio 2many.
+                    * if the field is neither a string nor a tuple.
     """
     self = model
     for field in spec:
@@ -281,10 +283,10 @@ def get_model_for_read(model, ENV=False):
         cr._cnx.set_isolation_level(ISOLATION_LEVEL_READ_COMMITTED)
     try:
         return request.env(cr, uid)[model]
-    except KeyError:
+    except KeyError as e:
         err = list(CODE__obj_not_found)
         err[2] = 'The "%s" model is not available on this instance.' % model
-        raise werkzeug.exceptions.HTTPException(response=error_response(*err))
+        raise werkzeug.exceptions.HTTPException(response=error_response(*err)) from e
 
 
 # Python > 3.5

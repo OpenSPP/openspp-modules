@@ -28,7 +28,7 @@ class Namespace(models.Model):
         help="""Integration name, e.g. ebay, amazon, magento, etc.
         The name is used in api endpoint""",
     )
-    version_name = fields.Char(string='Number Version', required=True)
+    version_name = fields.Char(string="Number Version", required=True)
     description = fields.Char("Description")
     log_ids = fields.One2many("spp_api.log", "namespace_id", string="Logs")
     log_count = fields.Integer("Log count", compute="_compute_log_count")
@@ -53,8 +53,8 @@ class Namespace(models.Model):
     #     context={"active_test": False},
     # )
     path_ids = fields.One2many(
-        'spp_api.path', 'namespace_id', string='Paths',
-        context={'active_test': False})
+        "spp_api.path", "namespace_id", string="Paths", context={"active_test": False}
+    )
     user_ids = fields.Many2many(
         "res.users", string="Allowed Users", default=lambda self: self.env.user
     )

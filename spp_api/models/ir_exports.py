@@ -34,6 +34,8 @@ class IrExports(models.Model):
                 fields[i], ""
             ):
                 raise exceptions.ValidationError(
-                    _('You must delete the "%s" field or "%s" field')
-                    % (fields[i], fields[i + 1])
+                    _(
+                        'You must delete the "%(field1)s" field or "%(field2)s" field',
+                        {"field1": fields[i], "field2": fields[i + 1]},
+                    )
                 )

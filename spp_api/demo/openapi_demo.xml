@@ -57,9 +57,6 @@
         <field name="private_methods">_email_send</field>
         <field name="read_one_id" ref="ir_exports_res_partner_one_demo" />
         <field name="read_many_id" ref="ir_exports_res_partner_many_demo" />
-        <field
-            name="create_context_ids"
-            eval="[(4, ref('context_res_partner_demo'))]"
-        />
+        <field name="create_context_ids" eval="[(4, ref('context_res_partner_demo'))]" />
     </record>
 </odoo>

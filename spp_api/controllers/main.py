@@ -8,17 +8,17 @@ import logging
 import werkzeug
 
 from odoo import http
-from odoo.http import request, Response
+from odoo.http import request
 from odoo.tools import date_utils
 
-from odoo.addons. spp_api.config import BASE_API
 from odoo.addons.web.controllers.main import ensure_db
+
+from ..config import BASE_API
 
 _logger = logging.getLogger(__name__)
 
 
 class OAS(http.Controller):
-
     @http.route(
         ["/doc/api-docs/index.html"],
         methods=["GET"],
@@ -43,19 +43,16 @@ class OAS(http.Controller):
         """
 
         namespaces = (
-            http.request.env["spp_api.namespace"]
-            .sudo()
-            .search([["active", "=", True]])
+            http.request.env["spp_api.namespace"].sudo().search([["active", "=", True]])
         )
         api_urls = []
         for namespace in namespaces:
             api_urls.append(
                 {
                     "name": "{}: {}".format(namespace.name, namespace.version_name),
-                    "url":  namespace.spec_url,
+                    "url": namespace.spec_url,
                 }
             )
-
 
         # services_registry = _rest_services_databases.get(request.env.cr.dbname, {})
         # api_urls = []
@@ -72,7 +69,6 @@ class OAS(http.Controller):
         #         )
         # api_urls = sorted(api_urls, key=lambda k: k["name"])
         return api_urls
-
 
     @http.route(
         "/" + BASE_API + "/<namespace_name>/<version>/swagger.json",

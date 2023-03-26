@@ -31,15 +31,10 @@ import odoo
 from odoo.http import request
 from odoo.service import security
 from odoo.tools import date_utils
-
-from odoo.addons.spp_base_api.lib.pinguin import (
-    error_response,
-    get_dict_from_record,
-    get_dictlist_from_model,
-    get_model_for_read,
-)
-from odoo.addons.web.controllers.main import ReportController
 from odoo.tools.safe_eval import safe_eval
+
+from odoo.addons.spp_base_api.lib.pinguin import error_response, get_dict_from_record, get_model_for_read
+from odoo.addons.web.controllers.main import ReportController
 
 from .apijsonrequest import api_route
 
@@ -199,12 +194,12 @@ def get_data_from_auth_header(header):
         decoded_token_parts = (
             base64.b64decode(normalized_token).decode("utf-8").split(":")
         )
-    except TypeError:
+    except TypeError as e:
         raise werkzeug.exceptions.HTTPException(
             response=error_response(
                 500, "Invalid header", "Basic auth header must be valid base64 string"
             )
-        )
+        ) from e
 
     if len(decoded_token_parts) == 1:
         db_name, user_token = None, decoded_token_parts[0]
@@ -258,12 +253,14 @@ def get_openapi_path(namespace, version, model, method_name):
     :returns: The opensapi.path object.
     :rtype: path
     """
-    _logger.info("get_openapi_path: %s %s %s %s", namespace, version, model, method_name)
+    _logger.info(
+        "get_openapi_path: %s %s %s %s", namespace, version, model, method_name
+    )
     if not namespace or not version:
         raise werkzeug.exceptions.HTTPException(
-            response=error_response(404,
-                                            "Not Found",
-                                            "Namespace and version are required")
+            response=error_response(
+                404, "Not Found", "Namespace and version are required"
+            )
         )
 
     http_method = request.httprequest.method.lower()
@@ -276,22 +273,24 @@ def get_openapi_path(namespace, version, model, method_name):
         ("namespace_id.name", "=", namespace),
         ("namespace_id.version_name", "=", version),
         ("name", "=", model),
-        ("method", "=", http_method)
+        ("method", "=", http_method),
     ]
     _logger.info("get_openapi_path: %s", domain_path)
-    path = request.env['spp_api.path'].sudo().search(
-        domain_path, limit=1)
+    path = request.env["spp_api.path"].sudo().search(domain_path, limit=1)
 
     _logger.info("get_openapi_path: %s", path)
     if not path:
         raise werkzeug.exceptions.HTTPException(
-            response=error_response(404,
-                                            "Not Found",
-                                            "The requested URL was not found on the server. If you entered the "
-                                            "URL manually please check your spelling and try again.")
+            response=error_response(
+                404,
+                "Not Found",
+                "The requested URL was not found on the server. If you entered the "
+                "URL manually please check your spelling and try again.",
+            )
         )
 
     return path
+
 
 # Try to get namespace from user allowed namespaces
 def get_namespace_by_name_from_users_namespaces(
@@ -376,7 +375,7 @@ def _create_log_record(
                 try:
                     del log_data["request_data"][k]
                 except KeyError:
-                    pass
+                    _logger.debug("Key %s not found in request_data" % k)
 
         if namespace_log_response == "debug":
             log_data["response_data"] = user_response.__dict__
@@ -569,9 +568,13 @@ def get_model_openapi_access(namespace, version, model):
     openapi_access = (
         request.env(cr, uid)["openapi.access"]
         .sudo()
-        .search([("model_id", "=", model),
-                 ("namespace_id.name", "=", namespace),
-                 ("version_name", "=", version)])
+        .search(
+            [
+                ("model_id", "=", model),
+                ("namespace_id.name", "=", namespace),
+                ("version_name", "=", version),
+            ]
+        )
     )
     if not openapi_access.exists():
         raise werkzeug.exceptions.HTTPException(
@@ -640,138 +643,6 @@ def get_model_openapi_access(namespace, version, model):
 ##################
 
 
-def wrap__resource__create_one(modelname, context, data, success_code, out_fields):
-    """Function to create one record.
-
-    :param str model: The name of the model.
-    :param dict context: TODO
-    :param dict data: Data received from the user.
-    :param int success_code: The success code.
-    :param tuple out_fields: Canned fields.
-
-    :returns: successful response if the create operation is performed
-              otherwise error response
-    :rtype: werkzeug.wrappers.Response
-    """
-    model_obj = get_model_for_read(modelname)
-    try:
-        created_obj = model_obj.with_context(context).create(data)
-        test_mode = request.registry.test_cr
-        if not test_mode:
-            # Somehow don't making a commit here may lead to error
-            # "Record does not exist or has been deleted"
-            # Probably, Odoo (10.0 at least) uses different cursors
-            # to create and to read fields from database
-            request.env.cr.commit()
-    except Exception as e:
-        return error_response(400, type(e).__name__, str(e))
-
-    out_data = get_dict_from_record(created_obj, out_fields, (), ())
-    return successful_response(success_code, out_data)
-
-
-def wrap__resource__read_all(modelname, success_code, out_fields):
-    """function to read all records.
-
-    :param str modelname: The name of the model.
-    :param int success_code: The success code.
-    :param tuple out_fields: Canned fields.
-
-    :returns: successful response with records data
-    :rtype: werkzeug.wrappers.Response
-    """
-    data = get_dictlist_from_model(modelname, out_fields)
-    return successful_response(success_code, data)
-
-
-def wrap__resource__read_one(modelname, id, success_code, out_fields):
-    """Function to read one record.
-
-    :param str modelname: The name of the model.
-    :param int id: The record id of which we want to read.
-    :param int success_code: The success code.
-    :param tuple out_fields: Canned fields.
-
-    :returns: successful response with the data of one record
-    :rtype: werkzeug.wrappers.Response
-    """
-    out_data = get_dict_from_model(modelname, out_fields, id)
-    return successful_response(success_code, out_data)
-
-
-def wrap__resource__update_one(modelname, id, success_code, data):
-    """Function to update one record.
-
-    :param str modelname: The name of the model.
-    :param int id: The record id of which we want to update.
-    :param int success_code: The success code.
-    :param dict data: The data for update.
-
-    :returns: successful response if the update operation is performed
-              otherwise error response
-    :rtype: werkzeug.wrappers.Response
-    """
-    cr, uid = request.cr, request.session.uid
-    record = request.env(cr, uid)[modelname].browse(id)
-    if not record.exists():
-        return error_response(*CODE__obj_not_found)
-    try:
-        record.write(data)
-    except Exception as e:
-        return error_response(400, type(e).__name__, str(e))
-    return successful_response(success_code)
-
-
-def wrap__resource__unlink_one(modelname, id, success_code):
-    """Function to delete one record.
-
-    :param str modelname: The name of the model.
-    :param int id: The record id of which we want to delete.
-    :param int success_code: The success code.
-
-    :returns: successful response if the delete operation is performed
-              otherwise error response
-    :rtype: werkzeug.wrappers.Response
-    """
-    cr, uid = request.cr, request.session.uid
-    record = request.env(cr, uid)[modelname].browse([id])
-    if not record.exists():
-        return error_response(*CODE__obj_not_found)
-    record.unlink()
-    return successful_response(success_code)
-
-
-def wrap__resource__call_method(modelname, ids, method, method_params, success_code):
-    """Function to call the model method for records by IDs.
-
-    :param str modelname: The name of the model.
-    :param list ids: The record ids of which we want to call method.
-    :param str method: The name of the method.
-    :param int success_code: The success code.
-
-    :returns: successful response if the method execution did not cause an error
-              otherwise error response
-    :rtype: werkzeug.wrappers.Response
-    """
-    model_obj = get_model_for_read(modelname)
-
-    if not hasattr(model_obj, method):
-        return error_response(*CODE__invalid_method)
-
-    records = model_obj.browse(ids).exists()
-    results = []
-    args = method_params.get("args", [])
-    kwargs = method_params.get("kwargs", {})
-    for record in records or [model_obj]:
-        result = getattr(record, method)(*args, **kwargs)
-        results.append(result)
-
-    if len(ids) <= 1 and len(results):
-        results = results[0]
-    model_obj.flush()  # to recompute fields
-    return successful_response(success_code, data=results)
-
-
 def wrap__resource__get_report(
     namespace, report_external_id, docids, converter, success_code
 ):
@@ -833,200 +704,3 @@ def get_dict_from_model(model, spec, id, **kwargs):
             response=error_response(*CODE__res_not_found)
         )
     return get_dict_from_record(record, spec, include_fields, exclude_fields)
-
-
-# Check that the method is allowed
-def method_is_allowed(method, methods_conf, main=False, raise_exception=False):
-    """Check that the method is allowed for the specified settings.
-
-    :param str method: The name of the method.
-    :param dict methods_conf: The methods configuration dictionary.
-        A dictionary containing the methods API configuration.
-            The layout of the dict is as follows:
-            ```python
-            {
-                'public' : {
-                     'mode':            (String)    one of 'all', 'none', 'custom',
-                     'whitelist':       (List)      of method strings,
-                 },
-                'private' : {
-                     'mode':            (String)    one of 'none', 'custom',
-                     'whitelist':       (List)      of method strings,
-                 },
-                'main' : {
-                     'mode':            (String)    one of 'none', 'custom',
-                     'whitelist':       (List)      of method strings,
-                 },
-            }
-            ```
-    :param bool main: The method is a one of access fields.
-    :param bool raise_exception: raise exception instead of returning **False**.
-
-    :returns: **True** if the method is allowed, otherwise **False**.
-    :rtype: bool
-    :raise: werkzeug.exceptions.HTTPException if the method is not allowed and
-                                              raise_exception is **True**.
-    """
-    if main:
-        method_type = "main"
-    else:
-        method_type = "private" if method.startswith("_") else "public"
-
-    if methods_conf[method_type]["mode"] == "all":
-        return True
-    if (
-        methods_conf[method_type]["mode"] == "custom"
-        and method in methods_conf[method_type]["whitelist"]
-    ):
-        return True
-    if raise_exception:
-        raise werkzeug.exceptions.HTTPException(
-            response=error_response(*CODE__method_blocked)
-        )
-    return False
-
-
-###############
-# Pinguin OAS #
-###############
-
-# Get definition name
-def get_definition_name(modelname, prefix="", postfix="", splitter="-"):
-    """Concatenation of the prefix, modelname, postfix.
-
-    :param str modelname: The name of the model.
-    :param str prefix: The prefix.
-    :param str postfix: The postfix.
-    :param str splitter: The splitter.
-
-    :returns: Concatenation of the arguments
-    :rtype: str
-    """
-    return splitter.join([s for s in [prefix, modelname, postfix] if s])
-
-
-# Get OAS definitions part for model and nested models
-def get_OAS_definitions_part(
-    model_obj, export_fields_dict, definition_prefix="", definition_postfix=""
-):
-    """Recursively gets definition parts of the OAS for model by export fields.
-
-    :param odoo.models.Model model_obj: The model object.
-    :param dict export_fields_dict: The dictionary with export fields.
-            Example of the dict is as follows:
-            ```python
-            {
-                u'active': None,
-                u'child_ids': {
-                    u'user_ids': {
-                        u'city': None,
-                        u'login': None,
-                        u'password': None,
-                        u'id': None}, u'id': None
-                    },
-                    u'email': None,
-                    u'name': None
-                }
-            ```
-
-    :param str definition_prefix: The prefix for definition name.
-    :param str definition_postfix: The postfix for definition name.
-
-    :returns: Definitions for the model and relative models.
-    :rtype: dict
-    """
-    definition_name = get_definition_name(
-        model_obj._name, definition_prefix, definition_postfix
-    )
-
-    definitions = {
-        definition_name: {"type": "object", "properties": {}, "required": []},
-    }
-
-    fields_meta = model_obj.fields_get(export_fields_dict.keys())
-
-    for field, child_fields in export_fields_dict.items():
-        meta = fields_meta[field]
-        if child_fields:
-            child_model = model_obj.env[meta["relation"]]
-            child_definition = get_OAS_definitions_part(
-                child_model, child_fields, definition_prefix=definition_name
-            )
-
-            if meta["type"].endswith("2one"):
-                field_property = child_definition[
-                    get_definition_name(child_model._name, prefix=definition_name)
-                ]
-            else:
-                field_property = {
-                    "type": "array",
-                    "items": child_definition[
-                        get_definition_name(child_model._name, prefix=definition_name)
-                    ],
-                }
-        else:
-            field_property = {}
-
-            if meta["type"] == "integer":
-                field_property.update(type="integer")
-            elif meta["type"] == "float":
-                field_property.update(type="number", format="float")
-            elif meta["type"] == "monetary":
-                field_property.update(type="number", format="float")
-            elif meta["type"] == "char":
-                field_property.update(type="string")
-            elif meta["type"] == "text":
-                field_property.update(type="string")
-            elif meta["type"] == "binary":
-                field_property.update(type="string", format="binary")
-            elif meta["type"] == "boolean":
-                field_property.update(type="boolean")
-            elif meta["type"] == "date":
-                field_property.update(type="string", format="date")
-            elif meta["type"] == "datetime":
-                field_property.update(type="string", format="date-time")
-            elif meta["type"] == "many2one":
-                field_property.update(type="integer")
-            elif meta["type"] == "selection":
-                field_property.update(
-                    {
-                        "type": "integer"
-                        if meta["selection"]
-                        and isinstance(meta["selection"][0][0], int)
-                        else "string",
-                        "enum": [i[0] for i in meta["selection"]],
-                    }
-                )
-            elif meta["type"] in ["one2many", "many2many"]:
-                field_property.update({"type": "array", "items": {"type": "integer"}})
-
-            # We cannot have both required and readOnly flags in field openapi
-            # definition, for that reason we cannot blindly use odoo's
-            # attributed readonly and required.
-            #
-            # 1) For odoo-required, but NOT odoo-related field, we do NOT use
-            # openapi-readonly
-            #
-            # Example of such field can be found in sale module:
-            #     partner_id = fields.Many2one('res.partner', readonly=True,
-            #     states={'draft': [('readonly', False)], 'sent': [('readonly',
-            #     False)]}, required=True, ...)
-            #
-            # 2) For odoo-required and odoo-related field, we DO use
-            # openapi-readonly, but we don't use openapi-required
-            if meta["readonly"] and (not meta["required"] or meta.get("related")):
-                field_property.update(readOnly=True)
-
-        definitions[definition_name]["properties"][field] = field_property
-
-        if meta["required"] and not meta.get("related"):
-            fld = model_obj._fields[field]
-            # Mark as required only if field doesn't have defaul value
-            # Boolean always has default value (False)
-            if fld.default is None and fld.type != "boolean":
-                definitions[definition_name]["required"].append(field)
-
-    if not definitions[definition_name]["required"]:
-        del definitions[definition_name]["required"]
-
-    return definitions

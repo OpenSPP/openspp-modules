@@ -57,10 +57,10 @@ class Base(models.AbstractModel):
         def convert_external_2_inner_id(ext_id):
             try:
                 result = imd_env._xmlid_lookup(PREFIX + "." + ext_id)[2]
-            except ValueError:
+            except ValueError as e:
                 raise ValueError(
                     "No object with external id in field {}: {}".format(field, ext_id)
-                )
+                ) from e
             return result
 
         for field in vals:

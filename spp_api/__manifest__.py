@@ -8,9 +8,9 @@
     "images": ["images/icon.png"],
     "version": "15.0.0.0.0",
     "application": False,
-    "author": "OpenSPP / IT-Projects LLC, Ivan Yelizariev",
+    "author": "OpenSPP.org",
     "development_status": "Alpha",
-    "website": "https://t.me/sync_studio",
+    "website": "https://github.com/openspp/openspp-program",
     "license": "LGPL-3",
     "depends": ["spp_base_api", "mail"],
     "external_dependencies": {
