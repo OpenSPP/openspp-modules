@@ -281,12 +281,12 @@
         </field>
     </record>
     <record model="ir.actions.act_window" id="namespace_list_action">
-        <field name="name">Intergrations</field>
+        <field name="name">APIs</field>
         <field name="res_model">spp_api.namespace</field>
         <field name="view_mode">tree,form</field>
         <field name="help">Create and manage the namespaces.</field>
     </record>
     <menuitem id="main_openapi_menu" name="OpenAPI" web_icon="openapi,static/description/icon.png" />
     <menuitem id="openapi_menu" name="OpenAPI" parent="main_openapi_menu" />
-    <menuitem id="namespaces_menu" name="Integrations" parent="openapi_menu" action="namespace_list_action" />
+    <menuitem id="namespaces_menu" name="APIs" parent="openapi_menu" action="namespace_list_action" />
 </odoo>

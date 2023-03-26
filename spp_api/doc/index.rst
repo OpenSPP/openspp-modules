@@ -28,7 +28,7 @@ Configuration
 Activating and customization
 ----------------------------
 
-* Open menu ``[[ OpenAPI ]] >> OpenAPI >> Integrations``
+* Open menu ``[[ OpenAPI ]] >> OpenAPI >> APIs``
 * Click ``[Create]``
 * Specify **Name** for integration, e.g. ``test``
 * Set **Log requests** to *Full*

@@ -279,6 +279,6 @@ class Namespace(models.Model):
 
     def _compute_log_count(self):
         self._cr.execute(
-            "SELECT COUNT(*) FROM openapi_log WHERE namespace_id=(%s);", [str(self.id)]
+            "SELECT COUNT(*) FROM spp_api_log WHERE namespace_id=(%s);", [str(self.id)]
         )
         self.log_count = self._cr.dictfetchone()["count"]
