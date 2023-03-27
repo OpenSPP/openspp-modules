@@ -37,3 +37,25 @@ class Common(TransactionCase):
         assert type(vals) == dict
         vals.update({"is_registrant": True})
         return self.env["res.partner"].create(vals)
+
+    def _create_test_queue(
+        self, registrant_id, id_type=None, idpass_id=None, status="approved"
+    ):
+        if not id_type:
+            id_type = self.env.ref("spp_idpass.id_type_idpass").id
+        else:
+            assert isinstance(id_type, int)
+        if not idpass_id:
+            idpass_id = self.env.ref("spp_idpass.id_template_idpass").id
+        else:
+            assert isinstance(idpass_id, int)
+        assert status in ("new", "approved")
+        return self.env["spp.print.queue.id"].create(
+            {
+                "registrant_id": registrant_id,
+                "id_type": id_type,
+                "requested_by": self.env.user.id,
+                "status": status,
+                "idpass_id": idpass_id,
+            }
+        )

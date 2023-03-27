@@ -112,7 +112,7 @@ class TestRegistrant(TransactionCase):
     def test_05_send_idpass_parameters_correct_vals_response_200(self, mock_post):
         mock_post.return_value = Mock(
             status_code=200,
-            json=lambda: {"files": {"pdf": "1234567890123456789012345678TESTPDF"}},
+            json=lambda: {"files": {"pdf": "1234567890123456789012345678TEST"}},
         )
         self._create_test_id_pass()
         self._create_test_reg_id()
@@ -124,7 +124,7 @@ class TestRegistrant(TransactionCase):
         self._test_household.send_idpass_parameters(vals)
         self.assertEqual(
             self._test_id_queue.id_pdf,
-            "TESTPDF",
+            "TEST",
             "Id Queue should have correct Id PDF!",
         )
         jon_snow_identification_number = f"{self._test_individual.id:09d}"
