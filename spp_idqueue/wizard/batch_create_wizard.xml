@@ -36,7 +36,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <label for="name" string="Batch Name" />
                         </h1>
                         <h1>
-                            <field name="name" />
+                            <field name="name" required="1" />
                         </h1>
                         <div class="o_row">
                         </div>
