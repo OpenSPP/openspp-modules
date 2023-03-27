@@ -173,37 +173,14 @@ class OpenSPPIDQueue(models.Model):
         """
         queue_id = self.filtered(lambda r: r.status == "new")
         if queue_id:
-            queue_id.write(
-                {
-                    "date_approved": fields.Date.today(),
-                    "approved_by": self.env.user.id,
-                    "status": "approved",
-                }
-            )
-            message = _("{} validated this request on {}.").format(
-                self.env.user.name,
-                datetime.now().strftime("%B %d, %Y at %H:%M"),
-            )
-            queue_id.save_to_mail_thread(message)
-
+            for rec in queue_id:
+                rec.on_approve()
             message = _("%s request(s) are validated.", len(queue_id))
             kind = "info"
         else:
             message = _("Please select at least 1 new request which need to approve!")
             kind = "warning"
-        return {
-            "type": "ir.actions.client",
-            "tag": "display_notification",
-            "params": {
-                "title": _("ID Requests"),
-                "message": message,
-                "sticky": True,
-                "type": kind,
-                "next": {
-                    "type": "ir.actions.act_window_close",
-                },
-            },
-        }
+        return self._display_notification(message, kind)
 
     def generate_validate_requests(self):
         """
@@ -235,19 +212,7 @@ class OpenSPPIDQueue(models.Model):
                 "Please select at least 1 approved request which need to generate!"
             )
             kind = "warning"
-        return {
-            "type": "ir.actions.client",
-            "tag": "display_notification",
-            "params": {
-                "title": _("ID Requests"),
-                "message": message,
-                "sticky": True,
-                "type": kind,
-                "next": {
-                    "type": "ir.actions.act_window_close",
-                },
-            },
-        }
+        return self._display_notification(message, kind)
 
     def _generate_multi_cards(self, queue_ids):
         queued_ids = self.env["spp.print.queue.id"].search([("id", "in", queue_ids)])
@@ -259,40 +224,17 @@ class OpenSPPIDQueue(models.Model):
         """
         queue_id = self.filtered(lambda r: r.status == "generated")
         if queue_id:
-            max_rec = len(queue_id)
-            queue_id.write(
-                {
-                    "date_printed": fields.Date.today(),
-                    "printed_by": self.env.user.id,
-                    "status": "printed",
-                }
-            )
-            message = _("{} printed this request on {}.").format(
-                self.env.user.name,
-                datetime.now().strftime("%B %d, %Y at %H:%M"),
-            )
-            queue_id.save_to_mail_thread(message)
+            for rec in queue_id:
+                rec.on_print()
 
-            message = _("%s request(s) are printed.", max_rec)
+            message = _("%s request(s) are printed.", len(queue_id))
             kind = "info"
         else:
             message = _(
                 "Please select at least 1 generated request which need to print!"
             )
             kind = "warning"
-        return {
-            "type": "ir.actions.client",
-            "tag": "display_notification",
-            "params": {
-                "title": _("ID Requests"),
-                "message": message,
-                "sticky": True,
-                "type": kind,
-                "next": {
-                    "type": "ir.actions.act_window_close",
-                },
-            },
-        }
+        return self._display_notification(message, kind)
 
     def distribute_requests(self):
         """
@@ -300,23 +242,20 @@ class OpenSPPIDQueue(models.Model):
         """
         queue_id = self.filtered(lambda r: r.status == "printed")
         if queue_id:
-            max_rec = len(queue_id)
-            queue_id.write(
-                {"date_distributed": fields.Date.today(), "status": "distributed"}
-            )
-            message = _("{} distributed this request on {}.").format(
-                self.env.user.name,
-                datetime.now().strftime("%B %d, %Y at %H:%M"),
-            )
-            queue_id.save_to_mail_thread(message)
+            for rec in queue_id:
+                rec.on_distribute()
 
-            message = _("%s request(s) are distributed.", max_rec)
+            message = _("%s request(s) are distributed.", len(queue_id))
             kind = "info"
         else:
             message = _(
                 "Please select at least 1 printed request which need to distribute!"
             )
             kind = "warning"
+        return self._display_notification(message, kind)
+
+    @api.model
+    def _display_notification(self, message, kind):
         return {
             "type": "ir.actions.client",
             "tag": "display_notification",
