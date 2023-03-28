@@ -616,7 +616,7 @@ class ChangeRequestBase(models.Model):
             user_ok = True
         else:
             # Check if user is a member of validators in the validation sequence config
-            if self.request_type_ref_id.validation_ids:
+            if self.request_type_ref_id and self.request_type_ref_id.validation_ids:
                 for mrec in self.request_type_ref_id.validation_ids:
                     if mrec.validation_group_id.id in user.groups_id.ids:
                         user_ok = True
