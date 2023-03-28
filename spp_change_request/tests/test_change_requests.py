@@ -1,6 +1,7 @@
 import json
 from unittest.mock import patch
 
+from odoo import fields
 from odoo.exceptions import UserError
 
 from .common import Common
@@ -110,4 +111,49 @@ class TestChangeRequests(Common):
             [res.get("type"), res.get("tag"), res.get("params", {}).get("type")],
             ["ir.actions.client", "display_notification", "danger"],
             "Request Type ID not existed, client should display error notification!",
+        )
+
+    def test_08_cancel_error(self):
+        with self.assertRaisesRegex(
+            UserError, "^.*request to be cancelled must be in draft.*$"
+        ):
+            self._test_change_request.state = "validated"
+            self._test_change_request._cancel(self._test_change_request)
+
+    def test_09_cancel(self):
+        self.assertListEqual(
+            [
+                self._test_change_request.state,
+                self._test_change_request.cancelled_by_id.id,
+                self._test_change_request.date_cancelled,
+            ],
+            ["draft", False, False],
+            "Draft CR should not have cancelling info.!",
+        )
+        self._test_change_request._cancel(self._test_change_request)
+        self.assertListEqual(
+            [
+                self._test_change_request.state,
+                self._test_change_request.cancelled_by_id,
+            ],
+            ["cancelled", self.env.user],
+            "Cancelled CR should have cancelling info.!",
+        )
+        self.assertLessEqual(
+            self._test_change_request.date_cancelled,
+            fields.Datetime.now(),
+            "Cancelled CR should have date cancelled info.!",
+        )
+
+    def test_10_check_user_error(self):
+        self._test_change_request.assign_to_id = None
+        with self.assertRaisesRegex(UserError, "^.*no user assigned.*$"):
+            self._test_change_request._check_user(process="Apply")
+
+    def test_11_check_user(self):
+        with self.assertRaisesRegex(UserError, "^You are not allowed.*$"):
+            self._test_change_request.with_user(2)._check_user(process="Apply")
+        self.assertTrue(
+            self._test_change_request._check_user(process="Apply"),
+            "Change request creator / assignee should have access!",
         )
