@@ -17,14 +17,14 @@ class OpenSPPConsentMixin(models.AbstractModel):
         :param wiz: The Wizard.
         :return: This will return the action based on the params.
         """
+        self.ensure_one()
         view = self.env.ref("spp_consent.record_consent_wizard_form_view")
-        wiz = self.env["spp.record.consent.wizard"].create({"signatory_id": self.id})
-
+        vals = {}
         if self.is_group:
-            view = self.env.ref("spp_consent.record_consent_wizard_form_view")
-            wiz = self.env["spp.record.consent.wizard"].create(
-                {"group_id": self.id, "is_group": True}
-            )
+            vals = {"group_id": self.id, "is_group": True}
+        else:
+            vals = {"signatory_id": self.id}
+        wiz = self.env["spp.record.consent.wizard"].create(vals)
 
         return {
             "name": _("Record Consent"),
