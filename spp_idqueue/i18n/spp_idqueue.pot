@@ -550,9 +550,6 @@ msgstr ""
 
 #. module: spp_idqueue
 #: code:addons/spp_idqueue/models/id_queue.py:0
-#: code:addons/spp_idqueue/models/id_queue.py:0
-#: code:addons/spp_idqueue/models/id_queue.py:0
-#: code:addons/spp_idqueue/models/id_queue.py:0
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
 #: model:ir.model.fields,field_description:spp_idqueue.field_res_partner__id_requests
@@ -1197,7 +1194,6 @@ msgstr ""
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
-#: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "{} distributed this request on {}."
 msgstr ""
@@ -1229,7 +1225,6 @@ msgstr ""
 #. module: spp_idqueue
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_batch.py:0
-#: code:addons/spp_idqueue/models/id_queue.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "{} printed this request on {}."
@@ -1275,7 +1270,6 @@ msgid "{} validated this batch on {}."
 msgstr ""
 
 #. module: spp_idqueue
-#: code:addons/spp_idqueue/models/id_queue.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "{} validated this request on {}."
