@@ -110,6 +110,11 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     states="active"
                 />
             </xpath>
+            <xpath expr="//button[@name='enroll_eligible_registrants']" position="attributes">
+                <attribute
+                    name="groups"
+                >!g2p_programs.g2p_program_validator, !g2p_program.g2p_program_cycle_approver</attribute>
+            </xpath>
         </field>
     </record>
 
