@@ -350,6 +350,12 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: spp_idpass
+#: code:addons/spp_idpass/tests/test_registrant.py:0
+#, python-format
+msgid "Object `OpenSPPIDQueue` not yet existed!"
+msgstr ""
+
+#. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
 msgid "Registrant"
 msgstr ""
