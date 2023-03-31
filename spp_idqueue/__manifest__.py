@@ -24,7 +24,11 @@
         "views/registrant.xml",
         "views/res_config_settings.xml",
     ],
-    "assets": {},
+    "assets": {
+        "web.assets_backend": [
+            "spp_idqueue/static/src/js/form_controller.js",
+        ],
+    },
     "demo": [],
     "images": [],
     "application": True,
