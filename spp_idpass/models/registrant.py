@@ -181,7 +181,7 @@ class OpenSPPRegistrant(models.Model):
             else:
                 raise ValidationError(
                     _("ID PASS Error: %(reason)s Code: %(code)s")
-                    % (response.reason, response.status_code)
+                    % {"reason": response.reason, "code": response.status_code}
                 )  # noqa: C901
             return
         else:
@@ -241,7 +241,7 @@ class OpenSPPRegistrant(models.Model):
                             0,
                             0,
                             {
-                                "id_type": existing_id[0].id_type.id,
+                                "id_type": self.env.ref("spp_idpass.id_type_idpass").id,
                                 "value": identification_no,
                             },
                         )

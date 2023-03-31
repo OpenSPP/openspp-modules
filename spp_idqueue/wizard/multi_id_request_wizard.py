@@ -44,11 +44,12 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
         This function is used to compute the target_type
         """
         for rec in self:
-            rec.target_type = "individual"
-            if rec.registrant_ids and rec.registrant_ids[0].is_group:
+            if not rec.registrant_ids:
+                raise UserError(_("There are no selected Registrants!"))
+            if rec.registrant_ids[0].is_group:
                 rec.target_type = "group"
             else:
-                raise UserError(_("There are no selected Registrants!"))
+                rec.target_type = "individual"
 
     @api.onchange("id_type")
     def _onchange_template(self):
