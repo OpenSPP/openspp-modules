@@ -4,6 +4,9 @@ odoo.define("spp_change_request.view_change_request_form", function (require) {
     var user = session.uid;
 
     FormController.include({
+        getModelsToHide: function () {
+            return ["spp.change.request"];
+        },
         updateButtons: function () {
             this._super.apply(this, arguments);
             if (
@@ -13,7 +16,7 @@ odoo.define("spp_change_request.view_change_request_form", function (require) {
                 this.renderer.state.data.create_uid &&
                 this.renderer.state.data.create_uid.data
             ) {
-                if (this.modelName === "spp.change.request") {
+                if (this.getModelsToHide().includes(this.modelName)) {
                     if (
                         this.renderer.state.data.state === "draft" &&
                         this.renderer.state.data.assign_to_id.data.id !== user &&
