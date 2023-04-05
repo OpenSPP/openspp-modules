@@ -26,6 +26,7 @@
         "dms_field",
         "web_domain_field",
         "spp_idqueue",
+        "spp_event_data",
     ],
     "data": [
         "security/change_request_security.xml",
