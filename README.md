@@ -23,7 +23,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [spp_api](spp_api/) | 15.0.0.0.0 |  | RESTful API for OpenSPP
-[spp_base_api](spp_base_api/) | 15.0.1.0.1 |  | Basic function and methods of API for openapi or XML-RPC
+[spp_base_api](spp_base_api/) | 15.0.0.0.0 |  | Basic function and methods of API for openapi or XML-RPC
 
 [//]: # (end addons)
 
