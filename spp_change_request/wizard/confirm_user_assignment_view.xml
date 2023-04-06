@@ -17,7 +17,6 @@
                     <group>
                         <field
                             name="assign_to_id"
-                            domain="assign_to_id_domain"
                             options="{'no_create':True,'no_edit':True,'no_open':True}"
                             attrs="{'invisible':[('assign_to_any','=',False)]}"
                         />

@@ -149,6 +149,10 @@ class ChangeRequestBase(models.Model):
         store=True,
     )
 
+    current_user_assigned = fields.Boolean(
+        compute="_compute_current_user_assigned", default=False
+    )
+
     @api.model
     def create(self, vals):
         """
@@ -1072,6 +1076,19 @@ class ChangeRequestBase(models.Model):
 
         # When calling action_done this return below is no longer possible as the activity will be deleted
         return self.update({"last_activity_id": activity.id})
+
+    @api.depends("assign_to_id")
+    def _compute_current_user_assigned(self):
+        """
+        Gets the current user assigned on the Change Request
+
+        :return:
+        :raise:
+        """
+        for rec in self:
+            rec.current_user_assigned = False
+            if self.env.context.get("uid", False) == rec.assign_to_id.id:
+                rec.current_user_assigned = True
 
 
 class ChangeRequestValidators(models.Model):

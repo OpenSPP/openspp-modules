@@ -39,17 +39,4 @@
         />
     </record>
 
-    <record id="allow_edit_rule" model="ir.rule">
-        <field name="name">Only requested user or assigned to user can Edit</field>
-        <field name="model_id" ref="model_spp_change_request" />
-        <field name="perm_read" eval="False" />
-        <field name="perm_write" eval="True" />
-        <field name="perm_unlink" eval="False" />
-        <field name="perm_create" eval="False" />
-        <!-- Logical Representation: (('state', '=', 'draft') & (('create_uid', '=', user.id) | ('assign_to_id', '=', user.id))) | ('state', '!=', 'draft') -->
-        <field
-            name="domain_force"
-        >['|', '&amp;', ('state', '=', 'draft'), '|', ('create_uid', '=', user.id), ('assign_to_id', '=', user.id), ('state', '!=', 'draft')]</field>
-    </record>
-
 </odoo>
