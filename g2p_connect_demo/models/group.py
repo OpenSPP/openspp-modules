@@ -27,7 +27,7 @@ class G2PGroup(models.Model):
         "Number of eldery", compute="_compute_ind_grp_num_eldery", store=True
     )
     z_ind_grp_num_adults_male_not_elderly = fields.Integer(
-        "Number of adults",
+        "Number of adults male not elderly",
         compute="_compute_ind_grp_num_adults_male_not_elderly",
         store=True,
         allow_filter=True,
@@ -122,42 +122,47 @@ class G2PGroup(models.Model):
     )
 
     def _compute_ind_grp_single_child_less_36m_with_birth_cert(self):
-        self.z_ind_grp_num_single_child_less_36m_with_birth_cert = (
-            self._count_child_by_group(1)
-        )
+        for rec in self:
+            rec.z_ind_grp_num_single_child_less_36m_with_birth_cert = (
+                rec._count_child_by_group(1)
+            )
 
     def _compute_ind_grp_twin_less_36m_with_birth_cert(self):
-        self.z_ind_grp_num_twin_less_36m_with_birth_cert = self._count_child_by_group(2)
+        for rec in self:
+            rec.z_ind_grp_num_twin_less_36m_with_birth_cert = rec._count_child_by_group(
+                2
+            )
 
     def _compute_ind_grp_triplets_more_less_36m_with_birth_cert(self):
-        self.z_ind_grp_num_triplets_more_less_36m_with_birth_cert = (
-            self._count_child_by_group(3)
-        )
+        for rec in self:
+            rec.z_ind_grp_num_triplets_more_less_36m_with_birth_cert = (
+                rec._count_child_by_group(3)
+            )
 
     def _count_child_by_group(self, group):
+        self.ensure_one()
         # basic implementation
         now = datetime.datetime.now()
         children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
+
         count_by_type = {}
-        for rec in self:
-            domain = [
-                ("birthdate", ">=", children),
-                ("z_cst_indv_has_birth_certificate", "=", True),
-            ]
+        domain = [
+            ("birthdate", ">=", children),
+            ("z_cst_indv_has_birth_certificate", "=", True),
+        ]
 
-            children_birthdate = rec.group_membership_ids.individual.filtered_domain(
-                domain
-            ).mapped("birthdate")
-            # basic identifying of twins
-            children_birthdate = sorted(children_birthdate)
-            children_birthdate = map(
-                lambda x: x.strftime("%Y-%m-%d"), children_birthdate
-            )
-            count_by_date = collections.Counter(children_birthdate)
+        children_birthdate = self.group_membership_ids.individual.filtered_domain(
+            domain
+        ).mapped("birthdate")
+        logging.info(children_birthdate)
+        # basic identifying of twins
+        children_birthdate = sorted(children_birthdate)
+        children_birthdate = map(lambda x: x.strftime("%Y-%m-%d"), children_birthdate)
+        count_by_date = collections.Counter(children_birthdate)
 
-            for _date, count in count_by_date.items():
-                count_by_type.setdefault(count, 0)
-                count_by_type[count] += 1
+        for _date, count in count_by_date.items():
+            count_by_type.setdefault(count, 0)
+            count_by_type[count] += 1
         if group == 3:
             return (
                 sum(count_by_type.values())
