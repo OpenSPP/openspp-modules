@@ -9,7 +9,9 @@ _logger = logging.getLogger(__name__)
 class G2PBasicEntitlementCashSpent(models.Model):
     _name = "g2p.entitlement"
 
-    spent_amount = fields.Monetary(required=True, currency_field="currency_id", default=0.0)
+    spent_amount = fields.Monetary(
+        required=True, currency_field="currency_id", default=0.0
+    )
 
     def _compute_balance(self):
         for rec in self:
