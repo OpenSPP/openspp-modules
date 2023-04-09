@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "SPP Program Entitlement (Cash)",
-    "category": "SPP",
+    "name": "SPP Program Entitlement basic cash spent",
+    "category": "G2P",
     "version": "15.0.0.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",
@@ -13,12 +13,6 @@
         "base",
         "g2p_registry_base",
         "g2p_programs",
-        "spp_programs",
-    ],
-    "data": [
-        "security/ir.model.access.csv",
-        "views/entitlement_manager_view.xml",
-        "wizard/create_program_wizard.xml",
     ],
     "assets": {},
     "demo": [],
