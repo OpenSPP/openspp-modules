@@ -1,6 +1,7 @@
 odoo.define("spp_programs.domain", function (require) {
     const {FieldDomain} = require("web.basic_fields");
     var Domain = require("web.Domain");
+    var DomainSelector = require("web.DomainSelector");
 
     FieldDomain.include({
         _target_type_prefilter_domain: function () {
@@ -80,6 +81,13 @@ odoo.define("spp_programs.domain", function (require) {
                 this.value = Domain.prototype.arrayToString(value_domain);
             }
             this._super.apply(this, arguments);
+        },
+    });
+
+    DomainSelector.include({
+        _initialize: function (domain) {
+            this.rawDomain = Domain.prototype.arrayToString(domain);
+            return this._super(domain);
         },
     });
 });
