@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 
 class G2PBasicEntitlementCashSpent(models.Model):
-    _name = "g2p.entitlement"
+    _inherit = "g2p.entitlement"
 
     spent_amount = fields.Monetary(
         required=True, currency_field="currency_id", default=0.0
