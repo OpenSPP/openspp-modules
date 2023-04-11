@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__)
 class CustomG2PProgram(models.Model):
     _inherit = "g2p.program"
 
-    def import_eligible_registrants(self):
+    def import_eligible_registrants(self, state="draft"):
         eligibility_managers = self.get_managers(self.MANAGER_ELIGIBILITY)
         if eligibility_managers:
             manager = eligibility_managers[0]
@@ -34,7 +34,7 @@ class CustomG2PProgram(models.Model):
                 )
                 kind = "warning"
 
-            manager.import_eligible_registrants()
+            manager.import_eligible_registrants(state=state)
         else:
             message = _("No Eligibility Manager defined.")
             kind = "danger"
