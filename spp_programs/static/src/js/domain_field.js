@@ -24,7 +24,7 @@ odoo.define("spp_programs.domain", function (require) {
             }
             return value_domain;
         },
-        _fetchCount(force = false) {
+        _fetchCount() {
             // Changes is only for program wizard
             if (this.record.evalContext.active_model === "g2p.program.create.wizard") {
                 if (!this._domainModel) {
@@ -32,14 +32,6 @@ odoo.define("spp_programs.domain", function (require) {
                     this.nbRecords = 0;
                     return Promise.resolve();
                 }
-
-                // Do not re-fetch the count if nothing has changed
-                const value = this.value || "[]";
-                const key = `${this._domainModel}/${value}`;
-                if (!force && this.lastCountFetchKey === key) {
-                    return this.lastCountFetchProm;
-                }
-                this.lastCountFetchKey = key;
 
                 this.nbRecords = null;
 
