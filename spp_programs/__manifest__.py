@@ -33,6 +33,7 @@
     "assets": {
         "web.assets_backend": [
             "spp_programs/static/src/js/hide_button.js",
+            "spp_programs/static/src/js/domain_field.js",
         ],
     },
     "demo": [],
