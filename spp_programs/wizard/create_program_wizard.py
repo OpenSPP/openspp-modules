@@ -2,6 +2,7 @@
 import logging
 
 from odoo import _, api, fields, models
+from odoo.tools import safe_eval
 
 # from odoo.exceptions import ValidationError
 
@@ -19,10 +20,21 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
     @api.onchange("admin_area_ids")
     def on_admin_area_ids_change(self):
-        eligibility_domain = "[]"
+        eligibility_domain = self.eligibility_domain
+        domain = []
+        if eligibility_domain not in [None, "[]"]:
+            # Do not remove other filters
+            # Convert the string to list of tuples
+            domain = safe_eval.safe_eval(eligibility_domain)
+            # get the area_center_id from the list
+            area_dom = [flt for flt in domain if "area_id" in flt]
+            if area_dom:
+                domain.remove(area_dom[0])
+
         if self.admin_area_ids:
             area_ids = self.admin_area_ids.ids
-            eligibility_domain = "[('area_id', 'in', ({}))]".format(area_ids)
+            domain.append(("area_id", "in", tuple(area_ids)))
+            eligibility_domain = str(domain)
 
         self.eligibility_domain = eligibility_domain
 
