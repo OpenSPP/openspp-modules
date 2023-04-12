@@ -34,9 +34,25 @@ class SPPCreateNewProgramWiz(models.TransientModel):
         if self.admin_area_ids:
             area_ids = self.admin_area_ids.ids
             domain.append(("area_id", "in", tuple(area_ids)))
-            eligibility_domain = str(domain)
+        eligibility_domain = str(self._insert_domain_operator(domain))
 
         self.eligibility_domain = eligibility_domain
+
+    def _insert_domain_operator(self, domain):
+        """Insert operator to the domain"""
+        operator_used = ""
+        if domain:
+            # Check and get the operator used in the domain
+            if domain[0] in ["&", "|"]:
+                operator_used = domain[0]
+        if operator_used:
+
+            # Clear all operators
+            domain = list(filter(lambda a: a != operator_used, domain))
+            if len(domain) > 1:
+                # Add operators based on the length of the domain
+                domain = [operator_used] * (len(domain) - 1) + domain
+        return domain
 
     def create_program(self):
         self._check_required_fields()
