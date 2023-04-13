@@ -41,21 +41,15 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
     def _insert_domain_operator(self, domain):
         """Insert operator to the domain"""
-        operator_used = "&"
-        operator = {
-            "&": AND,
-            "|": OR,
-        }
+        if not domain:
+            return domain
+        operator_used = AND
+        if domain[0] == "|":
+            operator_used = OR
         new_domain = []
-        if domain:
-            # Check and get the operator used in the domain
-            if domain[0] in ["&", "|"]:
-                operator_used = domain[0]
-
-            domain = list(filter(lambda a: a != operator_used, domain))
-            for dom in domain:
-                new_domain = operator[operator_used]([new_domain, [dom]])
-
+        domain = list(filter(lambda a: a not in ["&", "|", "!"], domain))
+        for dom in domain:
+            new_domain = operator_used([new_domain, [dom]])
         return new_domain
 
     def create_program(self):
