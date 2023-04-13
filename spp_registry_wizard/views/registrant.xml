@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_spp_groups_form_membership" model="ir.ui.view">
+        <field name="name">view_spp_groups_form_membership</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_membership.view_groups_form_membership" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='members']/group[1]" position="before">
+                <button
+                    name="open_create_member_wiz"
+                    type="object"
+                    string="Create Member"
+                    class="btn-primary"
+                    groups="g2p_registry_base.group_g2p_admin"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

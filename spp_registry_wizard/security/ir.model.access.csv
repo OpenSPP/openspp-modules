@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_create_member_wizard_admin,Create Member Wizard Admin Access,spp_registry_wizard.model_spp_create_member_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1

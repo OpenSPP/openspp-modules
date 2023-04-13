@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_member_wizard_form_view" model="ir.ui.view">
+        <field name="name">create_member_wizard_form_view</field>
+        <field name="model">spp.create.member.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="step1,step2" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <label for="group_id" string="Household" />
+                        </h1>
+                        <h1>
+                            <field name="group_id" readonly="1" />
+                        </h1>
+                        <div class="o_row">
+                        </div>
+                    </div>
+                    <group colspan="4" col="4" attrs="{'invisible':[('state','=','step2')]}">
+                        <field name="role" colspan="4" widget="many2many_tags" options="{'no_create_edit':True,'no_open':True,'no_create':True}"/>
+                    </group>
+                    <notebook colspan="4" attrs="{'invisible':[('state','=','step1')]}">
+                        <page string="Basic Info">
+                            <group>
+                                <group>
+                                    <field name="name" force_save="1" readonly="1" class="oe_read_only"/>
+                                    <field name="given_name" class="oe_edit_only"/>
+                                    <field name="family_name" class="oe_edit_only"/>
+                                    <field name="addl_name" class="oe_edit_only"/>
+                                </group>
+                                <group>
+                                    <field name="registration_date" />
+
+                                    <label for="lang" attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}" />
+                                    <div class="o_row" attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}">
+                                        <field name="lang" />
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Personal Info">
+                            <group colspan="4" col="4">
+                                <group colspan="2">
+                                    <span class="o_form_label o_td_label" name="address_name">
+                                        <b>Address</b>
+                                    </span>
+                                    <div class="o_address_format">
+                                        <field
+                                            name="address"
+                                        />
+                                    </div>
+                                    <field
+                                        name="email"
+                                        widget="email"
+                                        context="{'gravatar_image': True}"
+                                    />
+                                </group>
+                            </group>
+                            <group col="6" colspan="6">
+                                <field
+                                    name="birth_place"
+                                    colspan="6"
+                                />
+                                <field name="birthdate"/>
+                                <field
+                                    name="birthdate_not_exact"
+                                />
+                                <field name="age" />
+                                <field name="gender"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    <field name="is_registrant" invisible="1" />
+                    <field name="is_group" invisible="1" />
+                    <field name="individual_id" invisible="1" />
+                    <field name="active_lang_count" invisible="1" />
+                </sheet>
+                <footer>
+                    <button
+                        name="next_step"
+                        string="Next"
+                        icon="fa-chevron-right"
+                        type="object"
+                        class="btn-warning"
+                        attrs="{'invisible':[('state','=','step2')]}"
+                    />
+                    <button
+                        name="prev_step"
+                        string="Back"
+                        icon="fa-chevron-left"
+                        type="object"
+                        class="btn-warning"
+                        attrs="{'invisible':[('state','=','step1')]}"
+                    />
+                    <button name="create_member" string="Create Member" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
