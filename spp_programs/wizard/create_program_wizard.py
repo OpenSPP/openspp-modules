@@ -2,6 +2,7 @@
 import logging
 
 from odoo import _, api, fields, models
+from odoo.osv.expression import AND, OR
 from odoo.tools import safe_eval
 
 # from odoo.exceptions import ValidationError
@@ -40,19 +41,22 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
     def _insert_domain_operator(self, domain):
         """Insert operator to the domain"""
-        operator_used = ""
+        operator_used = "&"
+        operator = {
+            "&": AND,
+            "|": OR,
+        }
+        new_domain = []
         if domain:
             # Check and get the operator used in the domain
             if domain[0] in ["&", "|"]:
                 operator_used = domain[0]
-        if operator_used:
 
-            # Clear all operators
             domain = list(filter(lambda a: a != operator_used, domain))
-            if len(domain) > 1:
-                # Add operators based on the length of the domain
-                domain = [operator_used] * (len(domain) - 1) + domain
-        return domain
+            for dom in domain:
+                new_domain = operator[operator_used]([new_domain, [dom]])
+
+        return new_domain
 
     def create_program(self):
         self._check_required_fields()
