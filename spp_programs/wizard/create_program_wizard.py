@@ -2,6 +2,7 @@
 import logging
 
 from odoo import _, api, fields, models
+from odoo.osv.expression import AND, OR
 from odoo.tools import safe_eval
 
 # from odoo.exceptions import ValidationError
@@ -34,9 +35,22 @@ class SPPCreateNewProgramWiz(models.TransientModel):
         if self.admin_area_ids:
             area_ids = self.admin_area_ids.ids
             domain.append(("area_id", "in", tuple(area_ids)))
-            eligibility_domain = str(domain)
+        eligibility_domain = str(self._insert_domain_operator(domain))
 
         self.eligibility_domain = eligibility_domain
+
+    def _insert_domain_operator(self, domain):
+        """Insert operator to the domain"""
+        if not domain:
+            return domain
+        operator_used = AND
+        if domain[0] == "|":
+            operator_used = OR
+        new_domain = []
+        domain = list(filter(lambda a: a not in ["&", "|", "!"], domain))
+        for dom in domain:
+            new_domain = operator_used([new_domain, [dom]])
+        return new_domain
 
     def create_program(self):
         self._check_required_fields()
