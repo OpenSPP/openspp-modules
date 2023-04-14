@@ -22,23 +22,47 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <div class="o_row">
                         </div>
                     </div>
+
+                    <field name="head_member" invisible="1" />
                     <group colspan="4" col="4" attrs="{'invisible':[('state','=','step2')]}">
-                        <field name="role" colspan="4" widget="many2many_tags" options="{'no_create_edit':True,'no_open':True,'no_create':True}"/>
+                        <field
+                            name="role"
+                            colspan="4"
+                            widget="many2many_tags"
+                            options="{'no_create_edit':True,'no_open':True,'no_create':True}"
+                        />
                     </group>
                     <notebook colspan="4" attrs="{'invisible':[('state','=','step1')]}">
                         <page string="Basic Info">
                             <group>
                                 <group>
-                                    <field name="name" force_save="1" readonly="1" class="oe_read_only"/>
-                                    <field name="given_name" class="oe_edit_only"/>
-                                    <field name="family_name" class="oe_edit_only"/>
-                                    <field name="addl_name" class="oe_edit_only"/>
+                                    <field name="name" force_save="1" readonly="1" class="oe_read_only" />
+                                    <field
+                                        name="given_name"
+                                        class="oe_edit_only"
+                                        attrs="{'required': [('state', '=', 'step2')]}"
+                                    />
+                                    <field
+                                        name="family_name"
+                                        class="oe_edit_only"
+                                        attrs="{'required': [('state', '=', 'step2')]}"
+                                    />
+                                    <field name="addl_name" class="oe_edit_only" />
                                 </group>
                                 <group>
-                                    <field name="registration_date" />
+                                    <field
+                                        name="registration_date"
+                                        attrs="{'required': [('state', '=', 'step2')]}"
+                                    />
 
-                                    <label for="lang" attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}" />
-                                    <div class="o_row" attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}">
+                                    <label
+                                        for="lang"
+                                        attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}"
+                                    />
+                                    <div
+                                        class="o_row"
+                                        attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}"
+                                    >
                                         <field name="lang" />
                                     </div>
                                 </group>
@@ -51,34 +75,48 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         <b>Address</b>
                                     </span>
                                     <div class="o_address_format">
-                                        <field
-                                            name="address"
-                                        />
+                                        <field name="address" />
                                     </div>
-                                    <field
-                                        name="email"
-                                        widget="email"
-                                        context="{'gravatar_image': True}"
-                                    />
+                                    <field name="email" widget="email" context="{'gravatar_image': True}" />
+                                </group>
+                                <group colspan="2">
+                                    <field name="phone_number_ids" nolabel="1" colspan="2">
+                                        <tree editable="bottom">
+                                             <field
+                                                name="phone_no"
+                                                string="Phone Numbers"
+                                                widget="phone"
+                                                options="{'enable_sms': false}"
+                                            />
+                                            <field name="country_id" />
+                                            <field name="date_collected" />
+                                        </tree>
+                                    </field>
                                 </group>
                             </group>
                             <group col="6" colspan="6">
-                                <field
-                                    name="birth_place"
-                                    colspan="6"
-                                />
-                                <field name="birthdate"/>
-                                <field
-                                    name="birthdate_not_exact"
-                                />
+                                <field name="birth_place" colspan="6" />
+                                <field name="birthdate" attrs="{'required': [('state', '=', 'step2')]}" />
+                                <field name="birthdate_not_exact" />
                                 <field name="age" />
-                                <field name="gender"/>
+                                <field name="gender" />
                             </group>
+                        </page>
+                        <page string="IDs" name="ids">
+                            <field name="reg_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field
+                                        name="id_type"
+                                        options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                                    />
+                                    <field name="value" string="ID Number" />
+                                    <field name="expiry_date" />
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                     <field name="is_registrant" invisible="1" />
                     <field name="is_group" invisible="1" />
-                    <field name="individual_id" invisible="1" />
                     <field name="active_lang_count" invisible="1" />
                 </sheet>
                 <footer>
@@ -98,7 +136,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         class="btn-warning"
                         attrs="{'invisible':[('state','=','step1')]}"
                     />
-                    <button name="create_member" string="Create Member" type="object" class="oe_highlight" />
+                    <button
+                        name="create_member"
+                        string="Create Member"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible':[('state','=','step1')]}"
+                    />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
