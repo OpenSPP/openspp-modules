@@ -1,8 +1,8 @@
+
 <!-- /!\ Non OCA Context : Set here the badge of your runbot / runboat instance. -->
 [![Pre-commit Status](https://github.com/openspp/openspp-registry/actions/workflows/pre-commit.yml/badge.svg?branch=15.0)](https://github.com/openspp/openspp-registry/actions/workflows/pre-commit.yml?query=branch%3A15.0)
 [![Build Status](https://github.com/openspp/openspp-registry/actions/workflows/test.yml/badge.svg?branch=15.0)](https://github.com/openspp/openspp-registry/actions/workflows/test.yml?query=branch%3A15.0)
 [![codecov](https://codecov.io/gh/openspp/openspp-registry/branch/15.0/graph/badge.svg)](https://codecov.io/gh/openspp/openspp-registry)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FOpenSPP%2Fopenspp-registry.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FOpenSPP%2Fopenspp-registry?ref=badge_shield)
 <!-- /!\ Non OCA Context : Set here the badge of your translation instance. -->
 [![Translation Status](https://translate.openspp.org/widgets/openspp/-/svg-badge.svg)](https://translate.openspp.org/engage/openspp/?utm_source=widget)
 
@@ -52,6 +52,3 @@ that explains its license.
 
 ----
 <!-- /!\ Non OCA Context : Set here the full description of your organization. -->
-
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FOpenSPP%2Fopenspp-registry.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FOpenSPP%2Fopenspp-registry?ref=badge_large)
