@@ -22,6 +22,11 @@ msgid ""
 msgstr ""
 
 #. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "<span class=\"o_stat_text\">Reassign</span>"
+msgstr ""
+
+#. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "A group must be selected."
@@ -481,6 +486,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__current_user_assigned
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__current_user_assigned
 msgid "Current User Assigned"
 msgstr ""
