@@ -2,8 +2,6 @@ from unittest.mock import patch
 
 from odoo.tests import TransactionCase
 
-from ..models.change_request import ChangeRequestBase
-
 
 class Common(TransactionCase):
     def setUp(self):
@@ -42,12 +40,17 @@ class Common(TransactionCase):
         vals.update({"is_registrant": True})
         return self.env["res.partner"].create(vals)
 
-    @patch.object(
-        ChangeRequestBase,
-        "_selection_request_type_ref_id",
-        return_value=[("test.request.type", "Test Request Type")],
+    @patch(
+        "odoo.addons.spp_change_request.models.change_request.ChangeRequestBase._selection_request_type_ref_id"
     )
-    def _create_change_request(self, name="Test Change Request"):
+    def _create_change_request(self, mock_request_type_selection):
+        mock_request_type_selection.return_value = [
+            ("test.request.type", "Test Request Type")
+        ]
+        mock_request_type_selection.__name__ = "_mocked__selection_request_type_ref_id"
         return self.env["spp.change.request"].create(
-            {"name": name, "request_type": "test.request.type"}
+            {
+                "name": "Test Request",
+                "request_type": "test.request.type",
+            }
         )
