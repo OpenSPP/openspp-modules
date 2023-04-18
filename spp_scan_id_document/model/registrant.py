@@ -18,23 +18,23 @@ class IdDetailsIndividual(models.Model):
                 details = json.loads(self.id_document_details)
                 if details:
                     name = ""
-                    if details["family_name"]:
+                    if details.get("family_name"):
                         name += f"{details['family_name']}, "
-                    if details["given_name"]:
+                    if details.get("given_name"):
                         name += f"{details['given_name']} "
                     if self.addl_name:
                         name += f"{self.addl_name} "
                     vals = {
-                        "family_name": details["family_name"],
-                        "given_name": details["given_name"],
+                        "family_name": details.get("family_name"),
+                        "given_name": details.get("given_name"),
                         "name": name,
-                        "birthdate": details["birth_date"],
-                        "gender": details["gender"],
+                        "birthdate": details.get("birth_date"),
+                        "gender": details.get("gender"),
                         "id_document_details": "",
                     }
 
-                    if details["photo"]:
-                        vals.update({"image_1920": details["photo"]})
+                    if details.get("image"):
+                        vals.update({"image_1920": details["image"]})
 
                     self.update(vals)
         except Exception as e:
