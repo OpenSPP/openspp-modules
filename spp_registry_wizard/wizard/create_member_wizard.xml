@@ -33,7 +33,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         />
                     </group>
                     <notebook colspan="4" attrs="{'invisible':[('state','=','step1')]}">
-                        <page string="Basic Info">
+                        <page string="Basic Info" name="basic_info">
                             <group>
                                 <group>
                                     <field name="name" force_save="1" readonly="1" class="oe_read_only" />
