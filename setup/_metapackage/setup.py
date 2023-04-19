@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-g2p_entitlement_cash>=15.0dev,<15.1dev',
+        'odoo-addon-spp_basic_cash_entitlement_spent>=15.0dev,<15.1dev',
         'odoo-addon-spp_dashboard>=15.0dev,<15.1dev',
         'odoo-addon-spp_entitlement_basket>=15.0dev,<15.1dev',
         'odoo-addon-spp_entitlement_in_kind>=15.0dev,<15.1dev',
