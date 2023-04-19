@@ -50,17 +50,23 @@
         </t>
 
         <body>
-            <div id="swagger-ui" t-att-data-settings='json.dumps(swagger_settings)' />
 
+            <div id="swagger-ui"/>
             <script>
-                 odoo.define('base_rest.swagger', function (require) {
-                        var SwaggerUi = require('base_rest.swagger_ui');
-                        var swagger_ui = new SwaggerUi('#swagger-ui');
-                        $(function() {
-                            swagger_ui.start();
-                        });
-                        return swagger_ui;
-                    });
+                window.onload = function() {
+                    // Begin Swagger UI call region
+                    SwaggerUIBundle({
+                        urls: <t t-raw="urls"/>,
+                        "urls.primaryName": "<t t-esc="urls_primaryName"/>",
+                        dom_id: '#swagger-ui',
+                        deepLinking: true,
+                        presets: [
+                            SwaggerUIBundle.presets.apis,
+                            SwaggerUIStandalonePreset
+                        ],
+                        layout: "StandaloneLayout"
+                    })
+                }
             </script>
         </body>
     </template>

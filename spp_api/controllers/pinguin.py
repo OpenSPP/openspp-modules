@@ -137,7 +137,7 @@ def authenticate_token_for_user(token):
 
     :raise: werkzeug.exceptions.HTTPException if user not found.
     """
-    _logger.debug("authenticate_token_for_user: %s", token)
+    _logger.info("authenticate_token_for_user: %s", token)
     user = request.env["res.users"].sudo().search([("openapi_token", "=", token)])
     if user.exists():
         # copy-pasted from odoo.http.py:OpenERPSession.authenticate()
@@ -402,7 +402,6 @@ def route(*args, **kwargs):
         @api_route(*args, **kwargs)
         @functools.wraps(controller_method)
         def controller_method_wrapper(*iargs, **ikwargs):
-
             auth_header = get_auth_header(
                 request.httprequest.headers, raise_exception=True
             )
@@ -417,6 +416,7 @@ def route(*args, **kwargs):
             method = ikwargs.get("method")
 
             db_name, user_token = get_data_from_auth_header(auth_header)
+            _logger.info("db_name: %s - user_token: %s" % (db_name, user_token))
             setup_db(request.httprequest, db_name)
             authenticated_user = authenticate_token_for_user(user_token)
             path = get_openapi_path(namespace, version, model, method)
