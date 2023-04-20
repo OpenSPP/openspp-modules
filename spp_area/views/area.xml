@@ -55,9 +55,9 @@
                         <field name="code" colspan="2" />
                         <field name="area_level" colspan="2" />
                         <field name="complete_name" string="Complete Name" />
-                        <field name="level" invisible="1" />
-                        <field name="kind" />
+                        <field name="kind" colspan="2" />
                     </group>
+                        <field name="level" invisible="1" />
                     <notebook>
                         <page string="Child">
                             <field name="child_ids" nolabel="1">
