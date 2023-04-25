@@ -1,0 +1,871 @@
+<odoo>
+    <menuitem
+        id="menu_change_request_add_child_root"
+        name="Add Child/Member Change Requests"
+        parent="spp_change_request.spp_change_request_request_root"
+        sequence="10"
+    />
+
+    <record id="view_change_request_add_child_tree" model="ir.ui.view">
+        <field name="name">change_request_add_child_tree</field>
+        <field name="model">spp.change.request.add.child</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <tree sample="1" create="0">
+                <field name="change_request_id" />
+                <field name="registrant_id" string="Group" />
+                <field name="full_name" />
+                <field name="gender" />
+                <field name="create_date" />
+                <field name="last_validated_by_id" widget="many2one_avatar_user" />
+                <field name="date_validated" />
+                <field
+                    name="state"
+                    decoration-info="state=='draft'"
+                    decoration-primary="state=='pending'"
+                    decoration-warning="state=='validated'"
+                    decoration-success="state=='applied'"
+                    decoration-danger="state=='rejected'"
+                    widget="badge"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_change_request_add_child_form" model="ir.ui.view">
+        <field name="name">view_change_request_add_child_form</field>
+        <field name="model">spp.change.request.add.child</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <form string="Add Child/Member Change Request" delete="0" duplicate="false">
+                <header>
+                    <button
+                        name="action_submit"
+                        type="object"
+                        string="Request Validation"
+                        icon="fa-paper-plane"
+                        class="btn-primary"
+                        states="draft"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_agent"
+                    />
+                    <button
+                        name="action_validate"
+                        type="object"
+                        string="Validate"
+                        icon="fa-check-square-o"
+                        class="btn-warning"
+                        attrs="{'invisible': ['|',('state','!=','pending'),('current_user_in_validation_group','=',False)]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
+                    />
+                    <button
+                        name="action_apply"
+                        type="object"
+                        string="Apply Changes"
+                        icon="fa-thumbs-o-up"
+                        class="btn-success"
+                        attrs="{'invisible': [('state', '!=', 'validated')]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
+                    />
+                    <button
+                        name="action_reject"
+                        type="object"
+                        string="Reject"
+                        icon="fa-ban"
+                        class="btn-danger"
+                        attrs="{'invisible': ['|',('state','!=','pending'),('current_user_in_validation_group','=',False)]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
+                    />
+                    <button
+                        name="action_cancel"
+                        type="object"
+                        string="Cancel Change Request"
+                        icon="fa-times-circle"
+                        class="btn-default"
+                        states="draft,pending,rejected,validated"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
+                    />
+                    <button
+                        name="action_reset_to_draft"
+                        type="object"
+                        string="Reset to Draft"
+                        icon="fa-rotate-left"
+                        class="btn-success"
+                        states="rejected"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,pending,validated,applied"
+                    />
+                    <field name="current_user_in_validation_group" invisible="1" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <!-- <button
+                            attrs="{'invisible': ['|', '|', ('state', '=', 'applied'), ('is_paid', '=', True), ('fee', '&lt;=', '0.0')]}"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-money"
+                            name="action_paid"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <field name="fee" class="o_stat_value" />
+                                <span class="o_stat_text">Set to Paid</span>
+                            </div>
+                        </button> -->
+                        <button
+                            name="open_user_assignment_wiz"
+                            type="object"
+                            icon="fa-user-circle"
+                            class="oe_stat_button"
+                            states="pending,validated"
+                            groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Assign</span>
+                                <span class="o_stat_text">To Me</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title mb24">
+                        <label for="registrant_id" string="Add to Group:" />
+                        <h1>
+                            <field
+                                name="registrant_id"
+                                options="{'no_create': True,'no_open':True}"
+                                readonly="1"
+                                class="oe_inline"
+                            />
+                            <button
+                                name="open_registrant_details_form"
+                                type="object"
+                                icon="fa-external-link "
+                                class="btn-success"
+                                style="margin-left: 10px;"
+                                attrs="{'invisible':[('registrant_id','=',False)]}"
+                            />
+                        </h1>
+                        <label for="applicant_id" string="Applicant:" />
+                        <h2>
+                            <field
+                                name="applicant_id"
+                                options="{'no_create': True,'no_open':True}"
+                                readonly="1"
+                                class="oe_inline"
+                            />
+                            <button
+                                name="open_applicant_details_form"
+                                type="object"
+                                icon="fa-external-link "
+                                class="btn-success"
+                                style="margin-left: 10px;"
+                                attrs="{'invisible':[('registrant_id','=',False)]}"
+                            />
+                        </h2>
+                        <div class="o_row">
+                            <h2>
+                                <label for="request_type" string="Request Type:" />
+                                <field name="request_type" readonly="1" />
+                            </h2>
+                        </div>
+                    </div>
+                    <field name="source" invisible="1" />
+                    <notebook>
+                        <page
+                            name="spp_only_request_details"
+                            attrs="{'invisible': [('source', '!=', 'spp')]}"
+                            string="Request Details"
+                        >
+                            <field name="child_ids">
+                                <kanban>
+                                    <field name="full_name" />
+                                    <field name="given_name" />
+                                    <field name="father_name" />
+                                    <field name="grand_father_name" />
+                                    <field name="family_name" />
+                                    <field name="birth_place" />
+                                    <field name="birthdate" />
+                                    <field name="age" />
+                                    <field name="gender" />
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div class="oe_kanban_global_click">
+                                                <div class="oe_kanban_details">
+                                                    <h4>
+                                                        <field name="full_name" />
+                                                    </h4>
+                                                    <div t-if="record.birth_place.raw_value">
+                                                        <b>Birth Place:</b> <field name="birth_place" />
+                                                    </div>
+                                                    <div t-if="record.age.raw_value">
+                                                        <b>Age:</b> <field name="age" />
+                                                    </div>
+                                                    <div t-if="record.gender.raw_value">
+                                                        <b>Gender:</b> <field name="gender" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+                        <page string="Request Details" attrs="{'invisible': [('source', '=', 'spp')]}">
+                            <field
+                                name="id_document_details"
+                                widget="id_document_reader_field"
+                                colspan="4"
+                                attrs="{'invisible':[('state','!=','draft')]}"
+                            />
+                            <group colspan="4" col="4" string="">
+                                <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
+                                <field
+                                    name="given_name"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    class="oe_edit_only"
+                                />
+                                <field
+                                    name="father_name"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    class="oe_edit_only"
+                                />
+                                <field
+                                    name="grand_father_name"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    class="oe_edit_only"
+                                />
+                                <field
+                                    name="family_name"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    class="oe_edit_only"
+                                />
+                                <field name="gender" attrs="{'readonly':[('state','!=','draft')]}" />
+                                <field
+                                    name="phone"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    widget="phone"
+                                    options="{'enable_sms': false}"
+                                />
+                                <field
+                                    name="birth_place"
+                                    colspan="4"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                />
+                                <field
+                                    name="birthdate_not_exact"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                />
+                                <field name="birthdate" attrs="{'readonly':[('state','!=','draft')]}" />
+                                <field name="age" readonly="1" force_save="1" />
+                                <!-- <field
+                                    name="kind"
+                                    widget="many2many_tags"
+                                    options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                /> -->
+                                <field
+                                    name="applicant_relation"
+                                    attrs="{'readonly':[('state','!=','draft')],'invisible':[('age','>',18)]}"
+                                />
+                            </group>
+                        </page>
+                        <page string="Attachments">
+                            <!-- Attachment UI -->
+                            <header attrs="{'invisible':[('state','!=','draft')]}">
+                                <button
+                                    name="action_attach_documents"
+                                    type="object"
+                                    string="Request Form"
+                                    class="btn-primary"
+                                    context="{'category_id':%(spp_change_request.spp_dms_add_children)d}"
+                                    style="margin-left: 10px;"
+                                />
+                                <button
+                                    name="action_attach_documents"
+                                    type="object"
+                                    string="Birth Certificate"
+                                    class="btn-primary"
+                                    context="{'category_id':%(spp_change_request.spp_dms_birth_certificate)d}"
+                                    style="margin-left: 10px;"
+                                />
+                                <button
+                                    name="action_attach_documents"
+                                    type="object"
+                                    string="Custody Certificate"
+                                    class="btn-primary"
+                                    context="{'category_id':%(spp_change_request.spp_dms_custody_certificate)d}"
+                                    style="margin-left: 10px;"
+                                    attrs="{'invisible':[('applicant_relation','not in',('mother','grandfather'))]}"
+                                />
+                                <button
+                                    name="action_attach_documents"
+                                    type="object"
+                                    string="Other Documents"
+                                    context="{'other_documents': True}"
+                                    class="btn-warning"
+                                    style="margin-left: 10px;"
+                                />
+                            </header>
+                            <field
+                                name="dms_file_ids"
+                                nolabel="1"
+                                context="{'form_view_ref':'spp_change_request.view_dms_file_spp_custom_form'}"
+                            >
+                                <tree
+                                    js_class="file_list"
+                                    decoration-warning="not active"
+                                    decoration-muted="(is_locked and not is_lock_editor)"
+                                    editable="bottom"
+                                    create="0"
+                                >
+                                    <button
+                                        name="action_attach_documents"
+                                        type="object"
+                                        class="btn-success"
+                                        icon="fa-external-link"
+                                    />
+                                    <field name="name" invisible="1" />
+                                    <field
+                                        name="content"
+                                        filename="name"
+                                        mimetype="mimetype"
+                                        widget="preview_binary"
+                                        string="File"
+                                        readonly="1"
+                                    />
+                                    <field name="category_id" readonly="1" options="{'no_open':True}" />
+                                    <field name="directory_id" readonly="1" options="{'no_open':True}" />
+                                    <field name="mimetype" readonly="1" />
+                                    <field name="size" widget="integer" readonly="1" />
+                                    <field name="write_date" readonly="1" />
+                                    <field name="active" invisible="1" />
+                                    <field name="is_locked" invisible="1" />
+                                    <field name="is_lock_editor" invisible="1" />
+                                </tree>
+                            </field>
+                            <!-- <field
+                                name="dms_directory_ids"
+                                mode="dms_tree"
+                                attrs="{'invisible':[('registrant_id','=',False)],'readonly':[('state','!=','draft')]}"
+                            /> -->
+                        </page>
+                        <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
+                            <field
+                                name="validation_ids"
+                                nolabel="1"
+                                attrs="{'readonly':[('state','not in',('draft','pending'))]}"
+                            >
+                                <tree>
+                                    <field name="sequence" widget="handle" />
+                                    <field name="request_type" invisible="1" />
+                                    <field name="stage_id" options="{'no_create_edit':true}" />
+                                    <field
+                                        name="validation_group_id"
+                                        string="Validation Group"
+                                        domain="[('category_id','=',%(g2p_registry_base.openg2p_module)d)]"
+                                        options="{'no_open':true,'no_edit':true,'no_create':true}"
+                                    />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Other Information">
+                            <group colspan="4" col="4">
+                                <field
+                                    name="change_request_id"
+                                    string="Request No."
+                                    readonly="1"
+                                    options="{'no_open':True}"
+                                    colspan="4"
+                                />
+                                <field
+                                    name="assign_to_id"
+                                    string="Assigned To"
+                                    options="{'no_open':True}"
+                                    readonly="1"
+                                />
+                                <field name="date_requested" readonly="1" />
+                                <field
+                                    name="applicant_phone"
+                                    string="Applicant's Phone #"
+                                    required="1"
+                                    widget="phone"
+                                    options="{'enable_sms': false}"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    readonly="1"
+                                />
+                                <field name="last_validated_by_id" readonly="1" />
+                                <field name="date_validated" readonly="1" />
+                                <field name="create_uid" readonly="1" options="{'no_open': True}" />
+                            </group>
+                        </page>
+                    </notebook>
+                    <field name="group_member_ids" invisible="1" />
+                    <field name="dms_directory_ids" invisible="1" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_change_request_add_child_validation_form" model="ir.ui.view">
+        <field name="name">view_change_request_add_child_validation_form</field>
+        <field name="model">spp.change.request.add.child</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <form string="Add Child/Member Change Request" edit="0">
+                <header>
+                    <button
+                        name="open_user_assignment_wiz"
+                        type="object"
+                        icon="fa-user-circle"
+                        class="btn-primary"
+                        string="Assign To Me"
+                        attrs="{'invisible': ['|', '|',('current_user_assigned', '!=', False), ('state', 'not in', ('draft', 'pending','validated', 'rejected')),('current_user_in_validation_group','=',False)]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_hq_validator"
+                    />
+                    <button
+                        name="open_user_assignment_to_wiz"
+                        type="object"
+                        icon="fa-user-circle"
+                        class="btn-primary"
+                        string="Reassign"
+                        attrs="{'invisible': ['|',('current_user_assigned', '!=', True), ('state', 'not in', ('pending','validated'))]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_hq_validator"
+                    />
+                    <button
+                        name="action_submit"
+                        type="object"
+                        string="Request Validation"
+                        icon="fa-paper-plane"
+                        class="btn-primary"
+                        states="draft"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_agent"
+                    />
+                    <button
+                        name="action_validate"
+                        type="object"
+                        string="Validate"
+                        icon="fa-check-square-o"
+                        class="btn-warning"
+                        attrs="{'invisible': ['|',('state','!=','pending'),('current_user_in_validation_group','=',False)]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
+                    />
+                    <button
+                        name="action_apply"
+                        type="object"
+                        string="Apply Changes"
+                        icon="fa-thumbs-o-up"
+                        class="btn-success"
+                        attrs="{'invisible': [('state', '!=', 'validated')]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
+                    />
+                    <button
+                        name="action_reject"
+                        type="object"
+                        string="Reject"
+                        icon="fa-ban"
+                        class="btn-danger"
+                        attrs="{'invisible': ['|',('state','!=','pending'),('current_user_in_validation_group','=',False)]}"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
+                    />
+                    <button
+                        name="action_cancel"
+                        type="object"
+                        string="Cancel Change Request"
+                        icon="fa-times-circle"
+                        class="btn-default"
+                        states="draft,pending,rejected,validated"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
+                    />
+                    <button
+                        name="action_reset_to_draft"
+                        type="object"
+                        string="Reset to Draft"
+                        icon="fa-rotate-left"
+                        class="btn-success"
+                        states="rejected"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,pending,validated,applied"
+                    />
+                    <field name="current_user_in_validation_group" invisible="1" />
+                </header>
+                <!-- Form Body -->
+                <div class="oe_button_box" name="button_box">
+                </div>
+                <field name="source" invisible="1" />
+                <group colspan="4" col="4">
+                    <!-- Left Panel -->
+                    <group colspan="2" col="4" class="o_left_panel">
+                        <div class="o_header_label1">
+                            <label for="registrant_id" string="ADD CHILD/MEMBER TO GROUP:" />
+                            <h2>
+                                <field name="registrant_id" readonly="1" options="{'no_open':True}" />
+                                <button
+                                    name="open_registrant_details_form"
+                                    type="object"
+                                    string="Open Details"
+                                    icon="fa-external-link "
+                                    class="btn-success"
+                                    style="margin-left: 10px;"
+                                    attrs="{'invisible':[('registrant_id','=',False)]}"
+                                />
+                            </h2>
+                        </div>
+                        <newline />
+                        <notebook colspan="2" class="o_container_left">
+                            <page string="TARGET GROUP INFORMATION">
+                                <group colspan="4" col="4" name="target_group">
+                                    <field name="group_address" colspan="4" />
+                                    <field name="group_registration_date" />
+                                </group>
+                                <group
+                                    colspan="4"
+                                    col="4"
+                                    string="Current Group Members"
+                                    name="group_members"
+                                >
+                                    <field name="group_member_ids" readonly="1" nolabel="1" colspan="4">
+                                        <tree>
+                                            <button
+                                                name="open_individual_form"
+                                                type="object"
+                                                help="Open Member Form"
+                                                icon="fa-external-link "
+                                                class="btn-success"
+                                            />
+                                            <field name="group_add_child_id" invisible="1" />
+                                            <field name="individual_id" string="Members" />
+                                            <field
+                                                name="kind_ids"
+                                                widget="many2many_tags"
+                                                options="{'no_open':True}"
+                                            />
+                                        </tree>
+                                        <form string="Group Membership">
+                                            <sheet>
+                                                <div class="oe_title mb24">
+                                                    <h1>
+                                                        <field
+                                                            name="individual_id"
+                                                            string="Member"
+                                                            options="{'no_open':True}"
+                                                            readonly="1"
+                                                        />
+                                                    </h1>
+                                                    <div class="o_row">
+                                                        <label for="kind_ids" string="Membership Types:" />
+                                                        <field
+                                                            name="kind_ids"
+                                                            widget="many2many_tags"
+                                                            options="{'no_open':True}"
+                                                            readonly="1"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <group colspan="4" col="4">
+                                                    <field name="phone" readonly="1" />
+                                                    <field name="birthdate" readonly="1" />
+                                                    <field name="age" readonly="1" />
+                                                </group>
+                                                <field name="group_add_child_id" invisible="1" />
+                                            </sheet>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                    <!-- Right Panel -->
+                    <group colspan="2" col="4" class="o_right_panel">
+                        <div class="o_header_label1">
+                            <label for="request_type" string="Request Type:" />
+                            <h2>
+                                <field name="request_type" readonly="1" />
+                            </h2>
+                        </div>
+                        <newline />
+                        <notebook colspan="2" class="o_container_right">
+                            <page string="Request Details">
+                                <group colspan="4" col="4" string="Applicant Information">
+                                    <field
+                                        name="applicant_id"
+                                        options="{'no_create': True,'no_open':True}"
+                                        readonly="1"
+                                    />
+                                    <button
+                                        name="open_applicant_details_form"
+                                        type="object"
+                                        icon="fa-external-link"
+                                        class="btn-success"
+                                        attrs="{'invisible':[('applicant_id','=',False)]}"
+                                        style="margin-left: 10px;"
+                                        colspan="2"
+                                    />
+                                    <field
+                                        name="applicant_phone"
+                                        string="Phone No."
+                                        readonly="1"
+                                        widget="phone"
+                                        options="{'enable_sms': false}"
+                                    />
+                                </group>
+                                <group
+                                    name="tamwini_new_info"
+                                    colspan="4"
+                                    col="4"
+                                    string="New Information"
+                                    attrs="{'invisible': [('source', '=', 'spp')]}"
+                                >
+                                    <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
+                                    <field name="given_name" readonly="1" class="oe_edit_only" />
+                                    <field name="father_name" readonly="1" class="oe_edit_only" />
+                                    <field name="grand_father_name" readonly="1" class="oe_edit_only" />
+                                    <field name="family_name" readonly="1" class="oe_edit_only" />
+                                    <field name="gender" readonly="1" />
+                                    <field
+                                        name="phone"
+                                        readonly="1"
+                                        widget="phone"
+                                        options="{'enable_sms': false}"
+                                    />
+                                    <field name="birth_place" colspan="4" readonly="1" />
+                                    <field name="birthdate_not_exact" readonly="1" />
+                                    <field name="birthdate" readonly="1" />
+                                    <field
+                                        name="kind"
+                                        widget="many2many_tags"
+                                        options="{'no_open':True}"
+                                        colspan="4"
+                                        readonly="1"
+                                    />
+                                </group>
+                                <group
+                                    colspan="4"
+                                    col="4"
+                                    name="spp_new_info"
+                                    string="New Information"
+                                    attrs="{'invisible': [('source', '!=', 'spp')]}"
+                                >
+                                    <field name="child_ids" nolabel="1">
+                                        <tree>
+                                            <button
+                                                name="action_open_self"
+                                                type="object"
+                                                icon="fa-external-link "
+                                                class="btn-success"
+                                                style="margin-left: 10px;"
+                                            />
+                                            <field name="full_name" />
+                                            <field name="age" />
+                                            <field name="gender" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Attachments">
+                                <field
+                                    name="dms_file_ids"
+                                    readonly="1"
+                                    nolabel="1"
+                                    context="{'form_view_ref':'spp_change_request.view_dms_file_spp_custom_form'}"
+                                >
+                                    <tree
+                                        js_class="file_list"
+                                        decoration-warning="not active"
+                                        decoration-muted="(is_locked and not is_lock_editor)"
+                                        multi_edit="1"
+                                        create="0"
+                                        class="validator_tree"
+                                    >
+                                        <field name="name" invisible="1" />
+                                        <field
+                                            name="content"
+                                            filename="name"
+                                            mimetype="mimetype"
+                                            widget="preview_binary"
+                                            string="File"
+                                        />
+                                        <field name="category_id" />
+                                        <field name="directory_id" />
+                                        <field name="mimetype" invisible="1" />
+                                        <field name="size" widget="integer" />
+                                        <field name="write_date" />
+                                        <field name="active" invisible="1" />
+                                        <field name="is_locked" invisible="1" />
+                                        <field name="is_lock_editor" invisible="1" />
+                                    </tree>
+                                </field>
+                                <!-- <field
+                                    name="dms_directory_ids"
+                                    mode="dms_tree"
+                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                /> -->
+                            </page>
+                            <page string="Other Information">
+                                <group colspan="4" col="4">
+                                    <field
+                                        name="change_request_id"
+                                        string="Request No."
+                                        readonly="1"
+                                        options="{'no_open':True}"
+                                        colspan="4"
+                                    />
+                                    <field
+                                        name="assign_to_id"
+                                        string="Assigned To"
+                                        options="{'no_open':True}"
+                                        readonly="1"
+                                    />
+                                    <field name="current_user_assigned" invisible="1" />
+                                    <field name="date_requested" readonly="1" />
+                                    <field name="last_validated_by_id" readonly="1" />
+                                    <field name="date_validated" readonly="1" />
+                                    <field name="create_uid" readonly="1" options="{'no_open': True}" />
+                                </group>
+                            </page>
+                            <!-- TODO: Fix Javascript error if open and 'Edit' button was clicked.
+                            <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
+                                <field
+                                    name="validation_ids"
+                                    nolabel="1"
+                                    readonly="1"
+                                >
+                                    <tree editable="bottom">
+                                        <field name="request_type" invisible="1" />
+                                        <field name="stage_id" options="{'no_create_edit':true}" />
+                                        <field
+                                            name="validation_group_id"
+                                            string="Validation Group"
+                                        />
+                                    </tree>
+                                </field>
+                            </page> -->
+                        </notebook>
+                    </group>
+
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="change_request_add_child_filter" model="ir.ui.view">
+        <field name="name">change_request_add_child_filter</field>
+        <field name="model">spp.change.request.add.child</field>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <search string="Search Change Request: Add Child/Member">
+                <field name="registrant_id" string="Group" />
+                <field name="given_name" />
+                <field name="father_name" />
+                <field name="grand_father_name" />
+                <field name="family_name" />
+                <filter
+                    name="filter_need_to_validate"
+                    string="Need to Validate"
+                    domain="[('change_request_id.validation_group_id.users', 'in', uid)]"
+                />
+                <filter
+                    name="filter_validator"
+                    string="Assigned To Me"
+                    domain="[('change_request_id.assign_to_id.id', '=', uid)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <!-- All Add Children Change Requests -->
+    <record id="action_change_request_add_child" model="ir.actions.act_window">
+        <field name="name">Add Child/Member Change Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.change.request.add.child</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="change_request_add_child_filter" />
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No 'Add Child/Member' change requests found!
+            </p><p>
+                There are no records found based on the current filter.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_change_request_add_child_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_change_request_add_child_tree" />
+        <field name="act_window_id" ref="action_change_request_add_child" />
+    </record>
+
+    <record id="action_change_request_add_child_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_change_request_add_child_validation_form" />
+        <field name="act_window_id" ref="action_change_request_add_child" />
+    </record>
+
+    <menuitem
+        id="menu_change_request_add_child"
+        name="All Add Child/Member Requests"
+        action="action_change_request_add_child"
+        parent="menu_change_request_add_child_root"
+        sequence="0"
+        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
+    />
+
+    <!-- Pending Validation -->
+    <record id="action_change_request_add_child_pending" model="ir.actions.act_window">
+        <field name="name">Add Child/Member</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.change.request.add.child</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="change_request_add_child_filter" />
+        <field name="context">{'search_default_filter_need_to_validate': 1}</field>
+        <field name="domain">[('state','=','pending')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No pending 'Add Children' change requests found!
+            </p><p>
+                There are no records found based on the current filter.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_change_request_add_child_pending_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_change_request_add_child_tree" />
+        <field name="act_window_id" ref="action_change_request_add_child_pending" />
+    </record>
+
+    <record id="action_change_request_add_child_pending_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_change_request_add_child_validation_form" />
+        <field name="act_window_id" ref="action_change_request_add_child_pending" />
+    </record>
+
+    <menuitem
+        id="menu_change_request_add_child_pending"
+        name="Pending Validation"
+        action="action_change_request_add_child_pending"
+        parent="menu_change_request_add_child_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
+    />
+
+    <menuitem
+        id="menu_change_request_add_child_for_validation"
+        name="Add Child/Member"
+        action="action_change_request_add_child_pending"
+        parent="spp_change_request.spp_change_request_pending_validation_root"
+        sequence="10"
+        groups="spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
+    />
+
+</odoo>

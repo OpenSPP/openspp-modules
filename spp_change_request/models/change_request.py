@@ -152,6 +152,30 @@ class ChangeRequestBase(models.Model):
     current_user_assigned = fields.Boolean(
         compute="_compute_current_user_assigned", default=False
     )
+    current_user_in_validation_group = fields.Boolean(
+        compute="_compute_allow_validate",
+        store=False,
+    )
+
+    def _compute_allow_validate(self):
+        """
+        Check if current user having enough access to validate / reject current CR
+        instead of waiting users to press buttons then raise error.
+
+        :param:
+
+        :return:
+
+        :raise:
+        """
+        for rec in self:
+            current_validation_group = rec.validation_group_id.get_external_id()
+            current_validation_group_xml_id = "".join(current_validation_group.values())
+            rec.current_user_in_validation_group = (
+                self.user_has_groups(current_validation_group_xml_id)
+                if current_validation_group_xml_id
+                else False
+            )
 
     @api.model
     def create(self, vals):

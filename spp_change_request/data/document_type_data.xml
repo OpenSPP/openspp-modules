@@ -1,0 +1,76 @@
+<odoo noupdate="1">
+        <!-- Parent Category -->
+      <record id="spp_dms_identification_documents" model="dms.category">
+          <field name="name">Identification Documents</field>
+      </record>
+      <record id="spp_dms_certificates" model="dms.category">
+          <field name="name">Certificates</field>
+      </record>
+      <record id="spp_dms_request_form_document" model="dms.category">
+          <field name="name">Request Form Document</field>
+      </record>
+      <record id="spp_dms_proofs" model="dms.category">
+          <field name="name">Proofs</field>
+      </record>
+      <record id="spp_dms_documents" model="dms.category">
+          <field name="name">Documents</field>
+      </record>
+
+        <!-- Child Category Identification Documents-->
+      <record id="spp_dms_residency_card" model="dms.category">
+          <field name="name">Residency Card</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_identification_documents" />
+      </record>
+      <record id="spp_dms_old_id_card" model="dms.category">
+          <field name="name">Old ID Card</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_identification_documents" />
+      </record>
+
+        <!-- Child Category Certificates-->
+      <record id="spp_dms_birth_certificate" model="dms.category">
+          <field name="name">Birth Certificate</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_certificates" />
+      </record>
+      <record id="spp_dms_death_certificate" model="dms.category">
+          <field name="name">Death Certificate</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_certificates" />
+      </record>
+      <record id="spp_dms_divorce_certificate" model="dms.category">
+          <field name="name">Divorce Certificate</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_certificates" />
+      </record>
+      <record id="spp_dms_custody_certificate" model="dms.category">
+          <field name="name">Custody Certificate</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_certificates" />
+      </record>
+      <record id="spp_dms_marriage_certificate" model="dms.category">
+          <field name="name">Marriage Certificate</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_certificates" />
+      </record>
+
+        <!-- Child Category Request Form Document-->
+      <record id="spp_dms_add_children" model="dms.category">
+          <field name="name">Add Children Request Form</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_request_form_document" />
+      </record>
+
+      <!-- Proofs -->
+      <record id="spp_dms_vulnerability_proof" model="dms.category">
+          <field name="name">Proof of vulnerability situation</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_proofs" />
+      </record>
+
+      <!-- Documents -->
+      <record id="spp_dms_court_documents" model="dms.category">
+          <field name="name">Court Documents</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_documents" />
+      </record>
+      <record id="spp_dms_municipal_council_nomination" model="dms.category">
+          <field name="name">Municipal Council Nomination</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_documents" />
+      </record>
+      <record id="spp_dms_property_ownership" model="dms.category">
+          <field name="name">Property Ownership</field>
+          <field name="parent_id" ref="spp_change_request.spp_dms_documents" />
+      </record>
+</odoo>

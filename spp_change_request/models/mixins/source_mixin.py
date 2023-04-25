@@ -99,6 +99,11 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         compute="_compute_current_user_assigned", default=False
     )
 
+    current_user_in_validation_group = fields.Boolean(
+        related="change_request_id.current_user_in_validation_group",
+    )
+    date_requested = fields.Datetime(related="change_request_id.date_requested")
+
     def _update_registrant_id(self, res):
 
         for rec in res:

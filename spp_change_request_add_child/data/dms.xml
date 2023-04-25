@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <record id="attachment_storage_add_child" model="dms.storage">
+        <field name="name">Change Request: Add Children/Member</field>
+        <field name="save_type">file</field>
+        <field name="model_ids" eval="[(4, ref('model_spp_change_request_add_child'))]" />
+        <field name="field_default_group_id" ref="spp_change_request.dms_access_group" />
+    </record>
+
+</odoo>
