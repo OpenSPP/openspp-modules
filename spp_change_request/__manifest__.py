@@ -34,6 +34,8 @@
         "data/sequences.xml",
         "data/mail_activity.xml",
         "data/dms.xml",
+        "data/document_type_data.xml",
+        "data/change_request_stage.xml",
         "wizard/confirm_user_assignment_view.xml",
         "wizard/reject_change_request_view.xml",
         "wizard/cancel_change_request_view.xml",
