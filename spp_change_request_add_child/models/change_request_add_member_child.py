@@ -15,8 +15,6 @@ class ChangeRequestAddMemberChild(models.Model):
     )
     full_name = fields.Char(compute="_compute_full_name")
     given_name = fields.Char("First Name", required=True)
-    father_name = fields.Char("Father's Name", required=True)
-    grand_father_name = fields.Char("Grand Father's Name", required=True)
     family_name = fields.Char("Last Name")
     birth_place = fields.Char()
     birthdate = fields.Date("Date of Birth", required=True)
@@ -48,13 +46,10 @@ class ChangeRequestAddMemberChild(models.Model):
         string="Group Members",
     )
 
-    @api.depends("given_name", "father_name", "grand_father_name", "family_name")
+    @api.depends("given_name", "family_name")
     def _compute_full_name(self):
         for rec in self:
-            full_name = (
-                f"{rec.given_name or ''} {rec.father_name or ''}"
-                f" {rec.grand_father_name or ''} {rec.family_name or ''}"
-            )
+            full_name = f"{rec.given_name or ''} {rec.family_name or ''}"
             rec.full_name = full_name.title()
 
     def action_open_self(self):
@@ -87,8 +82,6 @@ class ChangeRequestAddMemberChild(models.Model):
                     "is_group": False,
                     "name": self.full_name,
                     "given_name": self.given_name,
-                    "father_name": self.father_name,
-                    "grand_father_name": self.grand_father_name,
                     "family_name": self.family_name,
                     "birth_place": self.birth_place,
                     "birthdate_not_exact": False,

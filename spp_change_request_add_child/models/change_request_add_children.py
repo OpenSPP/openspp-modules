@@ -62,8 +62,6 @@ class ChangeRequestAddChildMember(models.Model):
     # Change Request Fields
     full_name = fields.Char(compute="_compute_full_name", readonly=True)
     given_name = fields.Char("First Name")
-    father_name = fields.Char("Father's Name")
-    grand_father_name = fields.Char("Grand Father's Name")
     family_name = fields.Char("Last Name")
 
     birth_place = fields.Char()
@@ -120,8 +118,6 @@ class ChangeRequestAddChildMember(models.Model):
                     for cr_details in request_details.add_member:
                         cr_vals = {
                             "given_name": cr_details.given_name or None,
-                            "father_name": cr_details.father_name or None,
-                            "grand_father_name": cr_details.grand_father_name or None,
                             "family_name": cr_details.family_name or None,
                             "gender": cr_details.gender or None,
                             "phone": cr_details.phone or None,
@@ -217,23 +213,18 @@ class ChangeRequestAddChildMember(models.Model):
                 except UserError as e:
                     raise ValidationError(_("Incorrect phone number format")) from e
 
-    @api.depends("given_name", "father_name", "grand_father_name", "family_name")
+    @api.depends("given_name", "family_name")
     def _compute_full_name(self):
         """
         Called whenever there are changes in any of the following fields:
         given_name
-        father_name
-        grand_father_name
         family_name
 
-        Combines given_name, father_name, grand_father_name, and family_name and saved to
+        Combines given_name, and family_name and saved to
         full_name field
         """
         for rec in self:
-            full_name = (
-                f"{rec.given_name or ''} {rec.father_name or ''}"
-                f" {rec.grand_father_name or ''} {rec.family_name or ''}"
-            )
+            full_name = f"{rec.given_name or ''} {rec.family_name or ''}"
             rec.full_name = full_name.title()
 
     @api.onchange("id_document_details")
@@ -264,9 +255,6 @@ class ChangeRequestAddChildMember(models.Model):
                         "family_name": details.get("family_name", None),
                         "given_name": details.get("given_name", None),
                         "birthdate": details.get("birth_date", None),
-                        "uid_number": details.get("document_number", None),
-                        "father_name": details.get("father_name", None),
-                        "grand_father_name": details.get("grand_father_name", None),
                         "gender": details.get("gender", None),
                         "id_document_details": "",
                         "birth_place": details.get("birth_place_city", None),
@@ -320,8 +308,6 @@ class ChangeRequestAddChildMember(models.Model):
         return self.write(
             {
                 "given_name": to_copy.given_name,
-                "father_name": to_copy.father_name,
-                "grand_father_name": to_copy.grand_father_name,
                 "family_name": to_copy.family_name,
                 "birth_place": to_copy.birth_place,
                 "birthdate": to_copy.birthdate,
@@ -347,10 +333,6 @@ class ChangeRequestAddChildMember(models.Model):
 
         if not self.given_name:
             error_messages.append(_("The First Name is required."))
-        if not self.father_name:
-            error_messages.append(_("The Father Name is required."))
-        if not self.grand_father_name:
-            error_messages.append(_("The Grand Father Name is required."))
         if not self.birthdate:
             error_messages.append(_("The Date of Birth is required."))
         if self.age.isdigit():
@@ -404,8 +386,6 @@ class ChangeRequestAddChildMember(models.Model):
                 "is_group": False,
                 "name": self.full_name,
                 "given_name": self.given_name,
-                "father_name": self.father_name,
-                "grand_father_name": self.grand_father_name,
                 "family_name": self.family_name,
                 "birth_place": self.birth_place,
                 "birthdate_not_exact": self.birthdate_not_exact,

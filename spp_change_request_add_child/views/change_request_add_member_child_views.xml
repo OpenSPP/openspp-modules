@@ -18,10 +18,8 @@
                     <group>
                         <group>
                             <field name="given_name" />
-                            <field name="father_name" />
                         </group>
                         <group>
-                            <field name="grand_father_name" />
                             <field name="family_name" />
                         </group>
                     </group>

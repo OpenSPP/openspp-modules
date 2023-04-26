@@ -181,8 +181,6 @@
                                 <kanban>
                                     <field name="full_name" />
                                     <field name="given_name" />
-                                    <field name="father_name" />
-                                    <field name="grand_father_name" />
                                     <field name="family_name" />
                                     <field name="birth_place" />
                                     <field name="birthdate" />
@@ -222,16 +220,6 @@
                                 <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
                                 <field
                                     name="given_name"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    class="oe_edit_only"
-                                />
-                                <field
-                                    name="father_name"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    class="oe_edit_only"
-                                />
-                                <field
-                                    name="grand_father_name"
                                     attrs="{'readonly':[('state','!=','draft')]}"
                                     class="oe_edit_only"
                                 />
@@ -622,8 +610,6 @@
                                 >
                                     <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
                                     <field name="given_name" readonly="1" class="oe_edit_only" />
-                                    <field name="father_name" readonly="1" class="oe_edit_only" />
-                                    <field name="grand_father_name" readonly="1" class="oe_edit_only" />
                                     <field name="family_name" readonly="1" class="oe_edit_only" />
                                     <field name="gender" readonly="1" />
                                     <field
@@ -760,8 +746,6 @@
             <search string="Search Change Request: Add Child/Member">
                 <field name="registrant_id" string="Group" />
                 <field name="given_name" />
-                <field name="father_name" />
-                <field name="grand_father_name" />
                 <field name="family_name" />
                 <filter
                     name="filter_need_to_validate"
