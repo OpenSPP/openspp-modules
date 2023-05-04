@@ -371,6 +371,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "Change Request Validated"
 msgstr ""
