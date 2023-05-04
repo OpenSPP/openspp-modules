@@ -1,12 +1,16 @@
-<odoo noupdate="1">
-    <!-- ID Type: ID Pass -->
-    <record id="id_type_idpass" model="g2p.id.type">
-        <field name="name">ID PASS Lite</field>
-        <field name="target_type">both</field>
-    </record>
+<odoo>
+    <data noupdate="1">
 
-    <record id="id_template_idpass" model="spp.id.pass">
-        <field name="name">ID PASS Template</field>
-        <field name="id_type" ref="id_type_idpass" />
-    </record>
+        <!-- ID Type: ID Pass -->
+        <record id="id_type_idpass" model="g2p.id.type">
+            <field name="name">ID PASS Lite</field>
+            <field name="target_type">both</field>
+        </record>
+
+        <record id="id_template_idpass" model="spp.id.pass">
+            <field name="name">ID PASS Template</field>
+            <field name="id_type" ref="id_type_idpass" />
+        </record>
+
+    </data>
 </odoo>
