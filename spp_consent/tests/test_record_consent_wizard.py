@@ -63,3 +63,18 @@ class TestRecordConsentWiz(Common):
             "Default-Tywin Lannister",
             "Consent Wizard should change name!",
         )
+
+    def test_04_get_members(self):
+        test_consent = self._model.create({"group_id": self._test_group.id})
+        res = test_consent._get_members()
+        all_members = (
+            self._test_individual_1
+            | self._test_individual_2
+            | self._test_individual_3
+            | self._test_individual_4
+        )
+        self.assertItemsEqual(
+            res["domain"]["signatory_id"][0][2],
+            all_members.ids,
+            "onchange method should give correct domain for signatory_id",
+        )

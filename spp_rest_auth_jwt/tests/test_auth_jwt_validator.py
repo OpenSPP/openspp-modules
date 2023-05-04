@@ -1,9 +1,11 @@
 import jwt
 
 from odoo import fields
+from odoo.exceptions import ValidationError
 from odoo.tests import TransactionCase
+from odoo.tools import mute_logger
 
-from ..exceptions import UnauthorizedInvalidToken
+from ..exceptions import JwtValidatorNotFound, UnauthorizedInvalidToken
 
 PUBLIC_KEY = """-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCQpS6pKR48+HBQpuPBYF4dqhCm
@@ -58,7 +60,9 @@ class TestAuthJwtValidator(TransactionCase):
             }
         )
 
-    def generate_bearer_token(self, prv_key, issuer, audience, algorithm=None):
+    def generate_bearer_token(
+        self, prv_key, issuer, audience, algorithm=None, **kwargs
+    ):
         if not algorithm:
             algorithm = "RS256"
         now = fields.Datetime.now()
@@ -68,7 +72,14 @@ class TestAuthJwtValidator(TransactionCase):
             "iss": issuer,
             "aud": audience,
         }
+        data.update(kwargs)
         return jwt.encode(data, prv_key, algorithm=algorithm)
+
+    def test_00_check_name(self):
+        with self.assertRaisesRegex(
+            ValidationError, r"is not a valid python identifier\.$"
+        ):
+            self.jwt_validator.name = "invalid name"
 
     def test_01_correct_token(self):
         correct_token = self.generate_bearer_token(
@@ -81,6 +92,7 @@ class TestAuthJwtValidator(TransactionCase):
             "Correct Token must be decodable!",
         )
 
+    @mute_logger("odoo.addons.spp_rest_auth_jwt.models.auth_jwt_validator")
     def test_02_token_incorrect_key(self):
         wrong_token = self.generate_bearer_token(
             prv_key=WRONG_PRV_KEY,
@@ -90,6 +102,7 @@ class TestAuthJwtValidator(TransactionCase):
         with self.assertRaises(UnauthorizedInvalidToken):
             self.jwt_validator._decode(wrong_token)
 
+    @mute_logger("odoo.addons.spp_rest_auth_jwt.models.auth_jwt_validator")
     def test_03_token_incorrect_issuer(self):
         wrong_token = self.generate_bearer_token(
             prv_key=PRIVATE_KEY,
@@ -99,6 +112,7 @@ class TestAuthJwtValidator(TransactionCase):
         with self.assertRaises(UnauthorizedInvalidToken):
             self.jwt_validator._decode(wrong_token)
 
+    @mute_logger("odoo.addons.spp_rest_auth_jwt.models.auth_jwt_validator")
     def test_04_token_incorrect_audience(self):
         wrong_token = self.generate_bearer_token(
             prv_key=PRIVATE_KEY,
@@ -107,3 +121,16 @@ class TestAuthJwtValidator(TransactionCase):
         )
         with self.assertRaises(UnauthorizedInvalidToken):
             self.jwt_validator._decode(wrong_token)
+
+    @mute_logger("odoo.addons.spp_rest_auth_jwt.models.auth_jwt_validator")
+    def test_05_get_validator_by_name(self):
+        with self.assertRaises(JwtValidatorNotFound):
+            self.env["spp.auth.jwt.validator"]._get_validator_by_name("invalid_name")
+        valid_name_validator = self.env[
+            "spp.auth.jwt.validator"
+        ]._get_validator_by_name("valid_name")
+        self.assertEqual(
+            valid_name_validator,
+            self.jwt_validator,
+            "_get_validator_by_name should only return 1 correct validator!",
+        )

@@ -1,7 +1,8 @@
-from odoo.tests import TransactionCase
+from ..models.registrant import OpenSPPRegistrant
+from .common import Common
 
 
-class TestEventData(TransactionCase):
+class TestEventData(Common):
     def setUp(self):
         super().setUp()
         self._test_partner = self.env["res.partner"].create(
@@ -61,4 +62,25 @@ class TestEventData(TransactionCase):
             self._test_partner._get_active_event_id(self._test_partner._name),
             mock_event_2.id,
             "Mock event 2 should not be active event for test_partner!",
+        )
+
+    def test_04_open_form(self):
+        OpenSPPRegistrant.get_view_id = lambda rec: 1
+        mock_event = self.create_mock_event()
+        res = mock_event.open_form()
+        self.assertEqual(
+            res["res_model"], "res.partner", "open_form should give us correct model"
+        )
+        self.assertEqual(
+            res["res_id"],
+            self._test_partner.id,
+            "open_form should give us correct record id",
+        )
+        self.assertFalse(
+            res["context"]["create"],
+            "Should not allow user to create new record in next action",
+        )
+        self.assertFalse(
+            res["context"]["edit"],
+            "Should not allow user to edit record in next action",
         )
