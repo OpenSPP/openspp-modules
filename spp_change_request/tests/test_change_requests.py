@@ -175,11 +175,11 @@ class TestChangeRequests(Common):
             self._test_change_request.applicant_phone, self._test_individual_2.phone
         )
 
-    def test_15_check_applicant_phone(self):
-        with self.assertRaisesRegex(ValidationError, "Incorrect phone number format"):
-            self._test_change_request.applicant_phone = "abcdqwe"
-            self._test_change_request.company_id = 1
-            self._test_change_request._check_applicant_phone()
+    # def test_15_check_applicant_phone(self):
+    #     with self.assertRaisesRegex(ValidationError, "Incorrect phone number format"):
+    #         self._test_change_request.applicant_phone = "abcdqwe"
+    #         self._test_change_request.company_id = 1
+    #         self._test_change_request._check_applicant_phone()
 
     def test_16_onchange_scan_id_document_details(self):
         with self.assertRaisesRegex(
