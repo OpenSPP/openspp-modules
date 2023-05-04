@@ -177,7 +177,7 @@ class TestChangeRequests(Common):
 
     def test_15_check_applicant_phone(self):
         with self.assertRaisesRegex(ValidationError, "Incorrect phone number format"):
-            self._test_change_request.update({"applicant_phone": "+63"})
+            self._test_change_request.update({"applicant_phone": "abcdqwe"})
 
     def test_16_onchange_scan_id_document_details(self):
         with self.assertRaisesRegex(
@@ -213,3 +213,32 @@ class TestChangeRequests(Common):
         self._test_change_request.applicant_id = False
         action = self._test_change_request.open_applicant_form()
         self.assertEqual(action.get("tag"), "display_notification")
+
+    def test_19_open_user_assignment_wiz(self):
+        self._test_change_request.assign_to_id = False
+        self._test_change_request.open_user_assignment_wiz()
+        self.assertEqual(self._test_change_request.assign_to_id, self.env.user)
+
+        self._test_change_request.assign_to_id = self._test_individual_3.id
+        self._test_change_request.open_user_assignment_wiz()
+        self.assertEqual(self._test_change_request.assign_to_id, self.env.user)
+
+        self._test_change_request.assign_to_id = self.env.user.id
+        action = self._test_change_request.open_user_assignment_wiz()
+        self.assertEqual(action.get("name"), "Assign Change Request to User")
+
+    def test_20_create_request_detail_no_redirect(self):
+        self._test_change_request.state = "pending"
+        self._test_change_request.applicant_phone = "+639277817283"
+
+        with self.assertRaises(KeyError):
+            self._test_change_request.create_request_detail_no_redirect()
+
+    def test_21_get_id_doc_vals(self):
+        id_fld = "this is wrong"
+        doc_vals = self._test_change_request._get_id_doc_vals(1, id_fld)
+        self.assertIsNone(doc_vals)
+
+        id_fld = '{"image": "my_image", "document_number": "123"}'
+        doc_vals = self._test_change_request._get_id_doc_vals(1, id_fld)
+        self.assertIsNotNone(doc_vals)
