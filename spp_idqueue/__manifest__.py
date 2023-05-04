@@ -11,7 +11,7 @@
     "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["base", "g2p_registry_base", "spp_idpass"],
+    "depends": ["base", "g2p_registry_base", "spp_idpass", "spp_area"],
     "data": [
         "data/id_pass.xml",
         "security/g2p_security.xml",
