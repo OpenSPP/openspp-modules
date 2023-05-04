@@ -2,7 +2,7 @@ import json
 from unittest.mock import patch
 
 from odoo import fields
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 from .common import Common
 
@@ -157,3 +157,59 @@ class TestChangeRequests(Common):
             self._test_change_request._check_user(process="Apply"),
             "Change request creator / assignee should have access!",
         )
+
+    def test_12_onchange_registrant_id(self):
+        self._test_change_request.registrant_id = self._test_group_2
+        self.assertFalse(self._test_change_request.applicant_id)
+        self.assertFalse(self._test_change_request.applicant_phone)
+
+    def test_13_selection_request_type_ref_id(self):
+        self.assertEqual(self._test_change_request._selection_request_type_ref_id(), [])
+
+    def test_14_onchange_applicant_id(self):
+        self._test_change_request.applicant_id = False
+        self.assertFalse(self._test_change_request.applicant_phone)
+
+        self._test_change_request.applicant_id = self._test_individual_2
+        self.assertEqual(
+            self._test_change_request.applicant_phone, self._test_individual_2.phone
+        )
+
+    def test_15_check_applicant_phone(self):
+        with self.assertRaisesRegex(ValidationError, "Incorrect phone number format"):
+            self._test_change_request.update({"applicant_phone": "+63"})
+
+    def test_16_onchange_scan_id_document_details(self):
+        with self.assertRaisesRegex(
+            UserError, "There are no data captured from the ID scanner."
+        ):
+            self._test_change_request.id_document_details = "this is wrong"
+            self._test_change_request._onchange_scan_id_document_details()
+
+        with self.assertRaisesRegex(UserError, "A group must be selected."):
+            self._test_change_request.registrant_id = None
+            self._test_change_request.id_document_details = '{"first_name": "my name"}'
+            self._test_change_request._onchange_scan_id_document_details()
+
+        with self.assertRaisesRegex(
+            UserError, "There are no registrant found with the ID number scanned."
+        ):
+            self._test_change_request.registrant_id = self._test_group_2.id
+            self._test_change_request.id_document_details = '{"first_name": "my name"}'
+            self._test_change_request._onchange_scan_id_document_details()
+
+    def test_17_onchange_scan_qr_code_details(self):
+        with self.assertRaisesRegex(
+            UserError, "There are no data captured from the QR Code scanner."
+        ):
+            self._test_change_request.qr_code_details = "this is wrong"
+            self._test_change_request._onchange_scan_qr_code_details()
+
+    def test_18_open_applicant_form(self):
+        self._test_change_request.applicant_id = self._test_individual_3.id
+        action = self._test_change_request.open_applicant_form()
+        self.assertEqual(action.get("name"), "Applicant Details")
+
+        self._test_change_request.applicant_id = False
+        action = self._test_change_request.open_applicant_form()
+        self.assertEqual(action.get("tag"), "display_notification")

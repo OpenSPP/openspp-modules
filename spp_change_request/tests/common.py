@@ -33,6 +33,14 @@ class Common(TransactionCase):
                 ],
             }
         )
+
+        self._test_group_2 = self._create_registrant(
+            {
+                "name": "Butay clan",
+                "is_group": True,
+                "group_membership_ids": [],
+            }
+        )
         return super().setUp()
 
     def _create_registrant(self, vals):
