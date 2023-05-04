@@ -1,6 +1,7 @@
 from datetime import date
 
 from odoo.exceptions import UserError
+from odoo.tools import mute_logger
 
 from .common import Common
 
@@ -34,6 +35,7 @@ class TestRequestIdWiz(Common):
             group_target.target_type, "group", "This wizard should target group!"
         )
 
+    @mute_logger("odoo.addons.spp_idqueue.wizard.request_id_wizard")
     def test_02_onchange_template(self):
         wiz = self._create_correct_queue_wizard()
         self.assertTrue(wiz.is_idpass, "Id Type should be ID Pass!")
@@ -43,6 +45,7 @@ class TestRequestIdWiz(Common):
         with self.assertRaises(UserError):
             wiz.request_id()
 
+    @mute_logger("odoo.addons.spp_idqueue.wizard.request_id_wizard")
     def test_04_request_id_not_auto_approve(self):
         wiz = self._create_correct_queue_wizard()
         wiz.request_id()
@@ -63,6 +66,7 @@ class TestRequestIdWiz(Common):
             "The requestor should be current user!",
         )
 
+    @mute_logger("odoo.addons.spp_idqueue.wizard.request_id_wizard")
     def test_05_request_id_auto_approve(self):
         wiz = self._create_correct_queue_wizard()
         self.env["ir.config_parameter"].set_param(

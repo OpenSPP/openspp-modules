@@ -137,3 +137,110 @@ class TestIdQueue(Common):
         self.assertEqual(
             self.test_queue.status, "cancelled", "Test Queue should now `cancelled`!"
         )
+
+    def test_08_generate_cards(self):
+        with self.assertRaisesRegex(
+            ValidationError, "^.*must be approved before printing$"
+        ):
+            self.test_queue.generate_cards()
+
+    def test_09_validate_requests(self):
+        res = self.test_queue.validate_requests()
+        self.assertRegex(
+            res["params"]["message"],
+            r"request\(s\) are validated\.$",
+            "Should be an info message!",
+        )
+        self.assertEqual(res["params"]["type"], "info", "Should be an info message!")
+        res = self.test_queue.validate_requests()
+        self.assertEqual(
+            res["params"]["message"],
+            "Please select at least 1 new request which need to approve!",
+            "Should be an warning message!",
+        )
+        self.assertEqual(
+            res["params"]["type"], "warning", "Should be an warning message!"
+        )
+
+    def test_10_generate_validate_requests(self):
+        self.test_queue.status = "new"
+        res = self.test_queue.generate_validate_requests()
+        self.assertEqual(
+            res["params"]["message"],
+            "Please select at least 1 approved request which need to generate!",
+            "Should be an warning message!",
+        )
+        self.assertEqual(
+            res["params"]["type"], "warning", "Should be an warning message!"
+        )
+        self.test_queue.status = "approved"
+        res = self.test_queue.generate_validate_requests()
+        jobs_created = self.env["queue.job"].search(
+            [("model_name", "=", self.test_queue._name)]
+        )
+        self.assertTrue(
+            bool(jobs_created.ids), "Should be jobs created for generating!"
+        )
+        self.assertRegex(
+            res["params"]["message"],
+            r"request\(s\) are now being generated\.$",
+            "Should be an info message!",
+        )
+        self.assertEqual(res["params"]["type"], "info", "Should be an info message!")
+
+    @patch("requests.post")
+    def test_11_print_requests(self, mock_post):
+        mock_post.return_value = Mock(
+            status_code=200,
+            json=lambda: {"files": {"pdf": "1234567890123456789012345678TEST"}},
+        )
+        self.test_queue.status = "generated"
+        res = self.test_queue.print_requests()
+        self.assertRegex(
+            res["params"]["message"],
+            r"request\(s\) are printed\.$",
+            "Should be an info message!",
+        )
+        self.assertEqual(res["params"]["type"], "info", "Should be an info message!")
+        res = self.test_queue.print_requests()
+        self.assertEqual(
+            res["params"]["message"],
+            "Please select at least 1 generated request which need to print!",
+            "Should be an warning message!",
+        )
+        self.assertEqual(
+            res["params"]["type"], "warning", "Should be an warning message!"
+        )
+
+    def test_12_distribute_requests(self):
+        self.test_queue.status = "printed"
+        res = self.test_queue.distribute_requests()
+        self.assertRegex(
+            res["params"]["message"],
+            r"request\(s\) are distributed\.$",
+            "Should be an info message!",
+        )
+        self.assertEqual(res["params"]["type"], "info", "Should be an info message!")
+        res = self.test_queue.distribute_requests()
+        self.assertEqual(
+            res["params"]["message"],
+            "Please select at least 1 printed request which need to distribute!",
+            "Should be an warning message!",
+        )
+        self.assertEqual(
+            res["params"]["type"], "warning", "Should be an warning message!"
+        )
+
+    def test_13_display_notification(self):
+        res = self.test_queue._display_notification("1", "warning")
+        self.assertEqual(res["params"]["message"], "1", "Should be an warning message!")
+        self.assertEqual(
+            res["params"]["type"], "warning", "Should be an warning message!"
+        )
+        self.assertEqual(
+            res["type"], "ir.actions.client", "Should be an warning message!"
+        )
+        self.assertEqual(
+            res["params"]["title"], "ID Requests", "Should be an warning message!"
+        )
+        self.assertTrue(res["params"]["sticky"], "Should be an warning message!")

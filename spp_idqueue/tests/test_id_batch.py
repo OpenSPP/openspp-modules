@@ -149,3 +149,150 @@ class TestIdBatch(Common):
                 ["distributed", False, date.today()],
                 "Test Queue status should be `distributed`!",
             )
+
+    def test_08_generate_batch(self):
+        self.test_batch._generate_batch(self.test_batch)
+        for queue in self.test_batch.queued_ids:
+            self.assertEqual(
+                queue.status, "generating", "All queue should be generating!"
+            )
+        self.assertEqual(
+            self.test_batch.status, "generating", "Batch should be generating!"
+        )
+        jobs_created = self.env["queue.job"].search(
+            [("model_name", "=", self.test_batch._name)]
+        )
+        self.assertNotEqual(
+            jobs_created.ids, [], "Should create jobs for generating batches!"
+        )
+
+    def test_09_multi_approve_batch(self):
+        self.test_batch.status = "new"
+        res = self.test_batch.multi_approve_batch()
+        self.assertListEqual(
+            [
+                self.test_batch.date_approved,
+                self.test_batch.approved_by.id,
+                self.test_batch.status,
+            ],
+            [date.today(), self.env.uid, "approved"],
+            "Test batch should be in `approved` status!",
+        )
+        self.assertRegex(
+            res["params"]["message"],
+            r"batch\(es\) are validated\.$",
+            "Should be an info message!",
+        )
+        self.assertEqual(res["params"]["type"], "info", "Should be an info message!")
+        res = self.test_batch.multi_approve_batch()
+        self.assertEqual(
+            res["params"]["message"],
+            "Please select at least 1 new batch need to approve!",
+            "Should be an warning message!",
+        )
+        self.assertEqual(
+            res["params"]["type"], "warning", "Should be an warning message!"
+        )
+
+    def test_10_multi_print_batch(self):
+        self.test_batch.write({"status": "generated", "merge_status": "merged"})
+        res = self.test_batch.multi_print_batch()
+        self.assertEqual(
+            self.test_batch.status, "printing", "Batch status should be printing!"
+        )
+        self.assertRegex(
+            res["params"]["message"],
+            r"batch\(es\) are being printed\.$",
+            "Should be an info message!",
+        )
+        self.assertEqual(res["params"]["type"], "info", "Should be an info message!")
+        res = self.test_batch.multi_print_batch()
+        self.assertEqual(
+            res["params"]["message"],
+            "Please select at least 1 generated batch need to print!",
+            "Should be an warning message!",
+        )
+        self.assertEqual(
+            res["params"]["type"], "warning", "Should be an warning message!"
+        )
+
+    def test_11_multi_printed_batch(self):
+        self.test_batch.status = "printing"
+        res = self.test_batch.multi_printed_batch()
+        self.assertEqual(
+            self.test_batch.status, "printed", "Batch status should be printed!"
+        )
+        self.assertEqual(
+            self.test_batch.date_printed,
+            date.today(),
+            "Batch status should be printed!",
+        )
+        self.assertEqual(
+            self.test_batch.printed_by.id,
+            self.env.uid,
+            "Batch status should be printed!",
+        )
+        for queue in self.test_batch.queued_ids:
+            self.assertEqual(queue.status, "printed", "Queue status should be printed!")
+            self.assertEqual(
+                queue.date_printed, date.today(), "Queue status should be printed!"
+            )
+            self.assertEqual(
+                queue.printed_by.id, self.env.uid, "Queue status should be printed!"
+            )
+        self.assertRegex(
+            res["params"]["message"],
+            r"batch\(es\) are printed\.$",
+            "Should be an info message!",
+        )
+        self.assertEqual(res["params"]["type"], "info", "Should be an info message!")
+        res = self.test_batch.multi_printed_batch()
+        self.assertEqual(
+            res["params"]["message"],
+            "Please select at least 1 printing batch need to printed!",
+            "Should be an warning message!",
+        )
+        self.assertEqual(
+            res["params"]["type"], "warning", "Should be an warning message!"
+        )
+
+    def test_12_multi_distribute_batch(self):
+        self.test_batch.status = "printed"
+        res = self.test_batch.multi_distribute_batch()
+        self.assertEqual(
+            self.test_batch.status, "distributed", "Batch status should be distributed!"
+        )
+        self.assertEqual(
+            self.test_batch.date_distributed,
+            date.today(),
+            "Batch status should be distributed!",
+        )
+        self.assertEqual(
+            self.test_batch.distributed_by.id,
+            self.env.uid,
+            "Batch status should be distributed!",
+        )
+        for queue in self.test_batch.queued_ids:
+            self.assertEqual(
+                queue.status, "distributed", "Queue status should be distributed!"
+            )
+            self.assertEqual(
+                queue.date_distributed,
+                date.today(),
+                "Queue status should be distributed!",
+            )
+        self.assertRegex(
+            res["params"]["message"],
+            r"batch\(es\) are distributed\.$",
+            "Should be an info message!",
+        )
+        self.assertEqual(res["params"]["type"], "info", "Should be an info message!")
+        res = self.test_batch.multi_distribute_batch()
+        self.assertEqual(
+            res["params"]["message"],
+            "Please select at least 1 printed batch need to distribute!",
+            "Should be an warning message!",
+        )
+        self.assertEqual(
+            res["params"]["type"], "warning", "Should be an warning message!"
+        )
