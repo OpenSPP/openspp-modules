@@ -292,53 +292,23 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                             raise UserError(message)
 
                     if request.state == "validated":
+                        title = _("Change Request Validated")
                         message = _("The change request has been fully validated")
-                        return {
-                            "type": "ir.actions.client",
-                            "tag": "display_notification",
-                            "params": {
-                                "title": _("Change Request Validated"),
-                                "message": message,
-                                "next": {
-                                    "type": "ir.actions.act_window_close",
-                                },
-                                "sticky": True,
-                                "type": "success",
-                            },
-                        }
+                        kind = "success"
+                        return self.show_notification(title, message, kind)
 
                     if request.state == "applied":
+                        title = _("Change Request Applied")
                         message = _(
                             "The change request has been validated and the changes has been applied"
                         )
-                        return {
-                            "type": "ir.actions.client",
-                            "tag": "display_notification",
-                            "params": {
-                                "title": _("Change Request Applied"),
-                                "message": message,
-                                "next": {
-                                    "type": "ir.actions.act_window_close",
-                                },
-                                "sticky": True,
-                                "type": "success",
-                            },
-                        }
+                        kind = "success"
+                        return self.show_notification(title, message, kind)
 
+                    title = _("Change Request Partially Validated")
                     message = _("The change request has been partially validated")
-                    return {
-                        "type": "ir.actions.client",
-                        "tag": "display_notification",
-                        "params": {
-                            "title": _("Change Request Partially Validated"),
-                            "message": message,
-                            "next": {
-                                "type": "ir.actions.act_window_close",
-                            },
-                            "sticky": True,
-                            "type": "success",
-                        },
-                    }
+                    kind = "success"
+                    return self.show_notification(title, message, kind)
 
                 else:
                     raise ValidationError(message)
@@ -982,3 +952,18 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             }
         )
         return action
+
+    def show_notification(self, title, message, kind):
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Change Request Validated"),
+                "message": message,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+                "sticky": True,
+                "type": kind,
+            },
+        }
