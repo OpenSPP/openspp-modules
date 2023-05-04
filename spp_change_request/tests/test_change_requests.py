@@ -177,7 +177,8 @@ class TestChangeRequests(Common):
 
     def test_15_check_applicant_phone(self):
         with self.assertRaisesRegex(ValidationError, "Incorrect phone number format"):
-            self._test_change_request.update({"applicant_phone": "abcdqwe"})
+            self._test_change_request.applicant_phone = "abcdqwe"
+            self._test_change_request._check_applicant_phone()
 
     def test_16_onchange_scan_id_document_details(self):
         with self.assertRaisesRegex(
