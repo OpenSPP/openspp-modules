@@ -1134,3 +1134,24 @@ class ChangeRequestValidationSequence(models.Model):
     @api.model
     def _selection_request_type_ref_id(self):
         return []
+
+
+class ChangeRequestMixinTestModel(models.Model):
+    """This model is for unit test purposes only. Do not create any record for this model"""
+
+    _name = "source.mixin.test.model"
+    _inherit = [
+        "spp.change.request.source.mixin",
+        "spp.change.request.validation.sequence.mixin",
+    ]
+
+    DMS_STORAGE = "spp_change_request.dms_change_request_storage_test"
+
+    def create(self, vals):
+        if self.env.context.get("unittest", False):
+            return super().create(vals)
+        raise UserError("This model is for unit test only")
+
+    @api.onchange("registrant_id")
+    def _onchange_registrant_id(self):
+        pass

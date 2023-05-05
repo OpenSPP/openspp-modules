@@ -8,6 +8,7 @@ class Common(TransactionCase):
         self._test_individual_1 = self._create_registrant({"name": "Liu Bei"})
         self._test_individual_2 = self._create_registrant({"name": "Guan Yu"})
         self._test_individual_3 = self._create_registrant({"name": "Zhang Fei"})
+        self._test_individual_4 = self._create_registrant({"name": "Xu Huang"})
         self._test_group = self._create_registrant(
             {
                 "name": "Shu clan",
@@ -38,7 +39,23 @@ class Common(TransactionCase):
             {
                 "name": "Butay clan",
                 "is_group": True,
-                "group_membership_ids": [],
+                "group_membership_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "individual": self._test_individual_4.id,
+                            "kind": [
+                                (
+                                    4,
+                                    self.env.ref(
+                                        "g2p_registry_membership.group_membership_kind_head"
+                                    ).id,
+                                )
+                            ],
+                        },
+                    ),
+                ],
             }
         )
         return super().setUp()
@@ -47,6 +64,10 @@ class Common(TransactionCase):
         assert type(vals) == dict
         vals.update({"is_registrant": True})
         return self.env["res.partner"].create(vals)
+
+    def _create_g2p_registrant_id(self, vals):
+        assert type(vals) == dict
+        return self.env["g2p.reg.id"].create(vals)
 
     @patch(
         "odoo.addons.spp_change_request.models.change_request.ChangeRequestBase._selection_request_type_ref_id"

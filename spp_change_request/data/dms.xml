@@ -28,6 +28,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="field_default_group_id" ref="spp_change_request.dms_access_group" />
     </record>
 
+    <record id="dms_change_request_storage_test" model="dms.storage">
+        <field name="name">Change Request: Test Storage</field>
+        <field name="save_type">file</field>
+        <field name="model_ids" eval="[(4, ref('model_source_mixin_test_model'))]" />
+        <field name="field_default_group_id" ref="spp_change_request.dms_access_group" />
+    </record>
+
     <!-- Parent Category -->
     <record id="pds_dms_extra_documents" model="dms.category">
         <field name="name">Extra Documents</field>

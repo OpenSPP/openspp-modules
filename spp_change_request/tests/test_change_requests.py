@@ -158,8 +158,13 @@ class TestChangeRequests(Common):
             "Change request creator / assignee should have access!",
         )
 
+        self._test_change_request.assign_to_id = False
+        self._test_change_request._check_user(process="Apply", auto_assign=True)
+        self.assertEqual(self._test_change_request.assign_to_id, self.env.user)
+
     def test_12_onchange_registrant_id(self):
         self._test_change_request.registrant_id = self._test_group_2
+        self._test_change_request._onchange_registrant_id()
         self.assertFalse(self._test_change_request.applicant_id)
         self.assertFalse(self._test_change_request.applicant_phone)
 
@@ -168,17 +173,20 @@ class TestChangeRequests(Common):
 
     def test_14_onchange_applicant_id(self):
         self._test_change_request.applicant_id = False
+        self._test_change_request._onchange_applicant_id()
         self.assertFalse(self._test_change_request.applicant_phone)
 
         self._test_change_request.applicant_id = self._test_individual_2
+        self._test_change_request._onchange_applicant_id()
         self.assertEqual(
             self._test_change_request.applicant_phone, self._test_individual_2.phone
         )
 
-    def test_15_check_applicant_phone(self):
+    @patch("odoo.addons.phone_validation.tools.phone_validation.phone_parse")
+    def test_15_check_applicant_phone(self, mock):
+        mock.side_effect = UserError("error")
         with self.assertRaisesRegex(ValidationError, "Incorrect phone number format"):
-            self._test_change_request.company_id = self.env["res.company"].browse(1)
-            self._test_change_request.applicant_phone = "abcdqwe"
+            self._test_change_request.applicant_phone = "+639266716023"
             self._test_change_request._check_applicant_phone()
 
     def test_16_onchange_scan_id_document_details(self):
@@ -199,6 +207,27 @@ class TestChangeRequests(Common):
             self._test_change_request.registrant_id = self._test_group_2.id
             self._test_change_request.id_document_details = '{"first_name": "my name"}'
             self._test_change_request._onchange_scan_id_document_details()
+
+        g2p_registrant_id_vals = {
+            "partner_id": self._test_individual_1.id,
+            "id_type": 1,
+            "value": "12345678",
+        }
+
+        g2p_registrant_id = self._create_g2p_registrant_id(g2p_registrant_id_vals)
+        self._test_change_request.registrant_id = self._test_group.id
+        self._test_change_request.id_document_details = (
+            '{"document_number": "12345678"}'
+        )
+        self._test_change_request._onchange_scan_id_document_details()
+
+        self.assertEqual(
+            self._test_change_request.applicant_id, g2p_registrant_id.partner_id
+        )
+        self.assertEqual(
+            self._test_change_request.applicant_phone,
+            g2p_registrant_id.partner_id.phone,
+        )
 
     def test_17_onchange_scan_qr_code_details(self):
         with self.assertRaisesRegex(
@@ -244,3 +273,55 @@ class TestChangeRequests(Common):
         id_fld = '{"image": "my_image", "document_number": "123"}'
         doc_vals = self._test_change_request._get_id_doc_vals(1, id_fld)
         self.assertIsNotNone(doc_vals)
+
+    def test_22_create_request_detail(self):
+        self._test_change_request.state = "validated"
+        self._test_change_request.applicant_phone = "+639266726823"
+        with self.assertRaisesRegex(
+            UserError,
+            "The change request to be created must be in draft or pending validation state.",
+        ):
+            self._test_change_request.create_request_detail()
+
+    def test_23_action_submit(self):
+        with self.assertRaisesRegex(
+            UserError, "The change request type must be properly filled-up."
+        ):
+            self._test_change_request.action_submit()
+
+    def test_24_action_validate(self):
+        with self.assertRaises(AttributeError):
+            self._test_change_request.action_validate()
+
+    def test_25_action_apply(self):
+        with self.assertRaises(AttributeError):
+            self._test_change_request.action_apply()
+
+    def test_26_action_cancel(self):
+        action = self._test_change_request.action_cancel()
+        self.assertEqual(action.get("name"), "Cancel Change Request")
+
+    def test_27_action_reset_to_draft(self):
+        with self.assertRaises(AttributeError):
+            self._test_change_request.action_reset_to_draft()
+
+    def test_28_action_reject(self):
+        action = self._test_change_request.action_reject()
+        self.assertEqual(action.get("name"), "Reject Change Request")
+
+    def test_29_generate_activity(self):
+        activity_type = "spp_change_request.cancel_activity"
+        summary = "For Cancel Request"
+        note = "Cancel Request"
+        activity = self._test_change_request._generate_activity(
+            activity_type, summary, note
+        )
+
+        self.assertIsNone(activity)
+
+    def test_30_compute_current_user_assigned(self):
+        self._test_change_request.with_context(
+            uid=self.env.user.id
+        )._compute_current_user_assigned()
+
+        self.assertTrue(self._test_change_request.current_user_assigned)
