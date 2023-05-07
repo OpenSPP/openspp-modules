@@ -17,12 +17,12 @@ class TestAreaKind(TransactionCase):
         self.assertEqual(
             self.data.complete_name,
             "Admin Area",
-            "Parent Area Should have complete name == name",
+            "Parent Area should have complete name == name",
         )
         self.assertEqual(
             self.test_area_kind.complete_name,
             "Admin Area > Test Area Kind",
-            "Parent Area Should have complete name == name",
+            "Child Area should have complete name including its parent complete name",
         )
 
     def test_02_write(self):
