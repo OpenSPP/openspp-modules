@@ -9,6 +9,7 @@
     "development_status": "Alpha",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
+        "mail",
         "web",
     ],
     "application": False,
