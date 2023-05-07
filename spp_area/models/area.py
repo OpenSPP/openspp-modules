@@ -83,7 +83,7 @@ class OpenSPPArea(models.Model):
         This computes the complete_name of the area to include its parent name
         """
         for rec in self:
-            cur_lang = rec._context.get("lang", False)
+            cur_lang = rec._context.get("lang", "en_US")
             area_name = rec.env["ir.translation"]._get_ids(
                 "spp.area,name", "model", cur_lang, rec.ids
             )
@@ -251,7 +251,11 @@ class OpenSPPAreaKind(models.Model):
             external_identifier = self.env["ir.model.data"].search(
                 [("res_id", "=", rec.id), ("model", "=", "spp.area.kind")]
             )
-            if external_identifier and external_identifier.name:
+            if (
+                external_identifier
+                and external_identifier.name
+                and not self._context.get("install_mode")
+            ):
                 raise ValidationError(_("Can't edit default Area Kind"))
             else:
                 return super(OpenSPPAreaKind, self).write(vals)
