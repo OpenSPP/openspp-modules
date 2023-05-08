@@ -95,3 +95,18 @@ class ChangeRequestSourceMixinTest(Common):
         action = self.test_request_type.action_cancel()
 
         self.assertEqual(action.get("name"), "Cancel Change Request")
+
+    def test_10_cancel(self):
+        self._test_change_request.state = "applied"
+        with self.assertRaisesRegex(
+            UserError,
+            "The request to be cancelled must be in draft, pending, or rejected validation state.",
+        ):
+            self.test_request_type._cancel(self.test_request_type.change_request_id)
+
+        self._test_change_request.state = "draft"
+        self.test_request_type._cancel(self.test_request_type.change_request_id)
+        self.assertEqual(self.test_request_type.state, "cancelled")
+
+    def test_11_action_reset_to_draft(self):
+        pass

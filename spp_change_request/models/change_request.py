@@ -1150,7 +1150,7 @@ class ChangeRequestMixinTestModel(models.Model):
     def create(self, vals):
         if self.env.context.get("unittest", False):
             return super().create(vals)
-        raise UserError("This model is for unit test only")
+        raise UserError(_("This model is for unit test only"))
 
     @api.onchange("registrant_id")
     def _onchange_registrant_id(self):
