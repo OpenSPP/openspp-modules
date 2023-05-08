@@ -25,6 +25,7 @@ class ChangeRequestSourceMixinTest(Common):
             unittest=True
         ).create_request_detail_no_redirect()
         self.test_request_type = self._test_change_request.request_type_ref_id
+        self.test_user = self.env["res.users"].create({"name": "test", "login": "test"})
 
     def _create_change_request(self):
         return self.env["spp.change.request"].create(
@@ -49,8 +50,9 @@ class ChangeRequestSourceMixinTest(Common):
         with self.assertRaises(NotImplementedError):
             self.test_request_type.update_live_data()
 
-    # def test_04_validate_data(self):
-    #     self.assertEqual(1, 1)
+    def test_04_validate_data(self):
+        with self.assertRaises(ValidationError):
+            self.test_request_type.validate_data()
 
     @patch(
         "odoo.addons.spp_change_request.models.mixins.source_mixin.ChangeRequestSourceMixin.check_required_documents",
@@ -70,7 +72,15 @@ class ChangeRequestSourceMixinTest(Common):
 
         self.assertEqual(self._test_change_request.state, "pending")
 
-    # def test_06_action_validate(self):
+    def test_06_action_validate(self):
+        self._test_change_request.state = "draft"
+        with self.assertRaisesRegex(
+            ValidationError,
+            "The request to be validated must be in submitted state.",
+        ):
+            self.test_request_type._on_validate(
+                self.test_request_type.change_request_id
+            )
 
     def test_07_auto_apply_conditions(self):
         self.assertTrue(self.test_request_type.auto_apply_conditions())
@@ -109,4 +119,131 @@ class ChangeRequestSourceMixinTest(Common):
         self.assertEqual(self.test_request_type.state, "cancelled")
 
     def test_11_action_reset_to_draft(self):
-        pass
+        self._test_change_request.state = "draft"
+
+        with self.assertRaisesRegex(
+            UserError,
+            "The request to be cancelled must be in draft, pending, or rejected validation state.",
+        ):
+            self.test_request_type.action_reset_to_draft()
+
+        self._test_change_request.state = "rejected"
+        self.test_request_type.action_reset_to_draft()
+
+        self.assertEqual(self.test_request_type.state, "draft")
+
+    def test_12_action_reject(self):
+        action = self.test_request_type.action_reject()
+
+        self.assertEqual(
+            [action.get("name"), action.get("type"), action.get("view_mode")],
+            ["Reject Change Request", "ir.actions.act_window", "form"],
+        )
+
+    def test_13_on_reject(self):
+        rejected_remarks = "test rejected remarks"
+
+        self._test_change_request.state = "cancelled"
+        with self.assertRaisesRegex(
+            UserError,
+            "The request to be rejected must be in draft or pending validation state.",
+        ):
+            self.test_request_type._on_reject(
+                self.test_request_type.change_request_id, rejected_remarks
+            )
+
+        self._test_change_request.state = "draft"
+
+        self.test_request_type._on_reject(
+            self.test_request_type.change_request_id, rejected_remarks
+        )
+        self.assertEqual(self.test_request_type.state, "rejected")
+
+    def test_14_copy_group_member_ids_condition(self):
+        self.assertTrue(self.test_request_type.copy_group_member_ids_condition())
+
+    def test_15_open_applicant_details_form(self):
+        action = self.test_request_type.open_applicant_details_form()
+
+        self.assertEqual(
+            [action.get("name"), action.get("target")], ["Applicant Details", "new"]
+        )
+
+    def test_16_open_user_assignment_wiz(self):
+        self._test_change_request.assign_to_id = self.env.user
+
+        action = self.test_request_type.open_user_assignment_wiz()
+        self.assertEqual(
+            [action.get("name"), action.get("type"), action.get("view_mode")],
+            ["Assign Change Request to User", "ir.actions.act_window", "form"],
+        )
+
+        self._test_change_request.assign_to_id = False
+        self.test_request_type.open_user_assignment_wiz()
+        self.assertEqual(self.test_request_type.assign_to_id, self.env.user)
+
+        self._test_change_request.assign_to_id = self.test_user.id
+        self.test_request_type.open_user_assignment_wiz()
+        self.assertEqual(self.test_request_type.assign_to_id, self.env.user)
+
+    def test_17_open_user_assignment_to_wiz(self):
+        action = self.test_request_type.open_user_assignment_to_wiz()
+        self.assertEqual(
+            [action.get("name"), action.get("type"), action.get("view_mode")],
+            ["Assign Change Request to User", "ir.actions.act_window", "form"],
+        )
+
+    def test_18_compute_current_user_assigned(self):
+        self.test_request_type.with_context(
+            uid=self.env.user.id
+        )._compute_current_user_assigned()
+
+        self.assertTrue(self.test_request_type.current_user_assigned)
+
+    def test_19_check_required_documents(self):
+        addtional_request_docs = ["spp_change_request.pds_dms_extra_documents"]
+
+        with self.assertRaises(ValidationError):
+            self.test_request_type.check_required_documents(addtional_request_docs)
+
+        with self.assertRaises(ValidationError):
+            self.test_request_type.check_required_documents()
+
+    def test_20_action_attach_documents(self):
+        with self.assertRaisesRegex(
+            UserError, "The required document category is not configured."
+        ):
+            self.test_request_type.with_context(
+                category_id=9999999
+            ).action_attach_documents()
+
+        action = self.test_request_type.with_context(
+            category_id=self.env.ref("spp_change_request.pds_dms_extra_documents").id
+        ).action_attach_documents()
+        self.assertEqual(
+            [action.get("type"), action.get("view_mode"), action.get("res_model")],
+            ["ir.actions.act_window", "form", "dms.file"],
+        )
+
+    def test_21_open_registrant_details_form(self):
+        action = self.test_request_type.open_registrant_details_form()
+
+        self.assertEqual(
+            [action.get("name"), action.get("target")], ["Group Details", "new"]
+        )
+
+    def test_22_show_notification(self):
+        title = "title"
+        message = "test message"
+        kind = "test kind"
+        action = self.test_request_type.show_notification(title, message, kind)
+
+        self.assertEqual(
+            [
+                action["params"]["message"],
+                action["params"]["type"],
+                action.get("type"),
+                action.get("tag"),
+            ],
+            [message, kind, "ir.actions.client", "display_notification"],
+        )
