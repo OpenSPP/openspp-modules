@@ -970,6 +970,9 @@ class ChangeRequestBase(models.Model):
             if self.assign_to_id.id == self.env.user.id:
                 return True
             else:
+                if process == "Validate":
+                    # A validator can work on CR without assigning to self
+                    return True
                 raise UserError(
                     _("You are not allowed to %s this change request", process)
                 )
