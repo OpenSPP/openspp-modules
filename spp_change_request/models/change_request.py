@@ -1147,6 +1147,7 @@ class ChangeRequestMixinTestModel(models.Model):
 
     DMS_STORAGE = "spp_change_request.dms_change_request_storage_test"
     REQUIRED_DOCUMENT_TYPE = ["spp_change_request.pds_dms_extra_documents"]
+    VALIDATION_FORM = "spp_change_request.view_change_request_form"
 
     def create(self, vals):
         if self.env.context.get("unittest", False):

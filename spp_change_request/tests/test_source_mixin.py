@@ -27,7 +27,15 @@ class ChangeRequestSourceMixinTest(Common):
         self.test_request_type = self._test_change_request.request_type_ref_id
         self.test_user = self.env["res.users"].create({"name": "test", "login": "test"})
 
-    def _create_change_request(self):
+    @patch(
+        "odoo.addons.spp_change_request.models.change_request.ChangeRequestBase._selection_request_type_ref_id"
+    )
+    def _create_change_request(self, mock_request_type_selection):
+        mock_request_type_selection.__name__ = "_mocked___selection_request_type_ref_id"
+
+        mock_request_type_selection.return_value = [
+            ("source.mixin.test.model", "Test Request Type")
+        ]
         return self.env["spp.change.request"].create(
             {
                 "name": "Test Request",
@@ -69,7 +77,10 @@ class ChangeRequestSourceMixinTest(Common):
 
         self._test_change_request.state = "draft"
         self.test_request_type.action_submit()
+        self.assertEqual(self._test_change_request.state, "pending")
 
+        self._test_change_request.state = "draft"
+        self._test_change_request.action_submit()
         self.assertEqual(self._test_change_request.state, "pending")
 
     def test_06_action_validate(self):
@@ -78,9 +89,15 @@ class ChangeRequestSourceMixinTest(Common):
             ValidationError,
             "The request to be validated must be in submitted state.",
         ):
-            self.test_request_type._on_validate(
-                self.test_request_type.change_request_id
-            )
+            self.test_request_type.action_validate()
+
+        self._test_change_request.state = "pending"
+
+        with self.assertRaisesRegex(
+            ValidationError,
+            "There are no validators defined for this request.",
+        ):
+            self.test_request_type.action_validate()
 
     def test_07_auto_apply_conditions(self):
         self.assertTrue(self.test_request_type.auto_apply_conditions())
@@ -246,4 +263,107 @@ class ChangeRequestSourceMixinTest(Common):
                 action.get("tag"),
             ],
             [message, kind, "ir.actions.client", "display_notification"],
+        )
+
+    def test_23_unlink(self):
+        self._test_change_request.unlink()
+
+    def test_24_open_request_detail(self):
+        res = self._test_change_request.with_context(
+            show_validation_form=True
+        ).open_request_detail()
+        self.assertIsNotNone(res)
+
+    def test_25_get_validation_stage(self):
+        stage, message, validator_id = self._test_change_request._get_validation_stage()
+        self.assertEqual(
+            [stage, message, validator_id],
+            [
+                None,
+                "There are no validators defined for this request.",
+                self.env.user.id,
+            ],
+        )
+
+    def test_26_cancel_wizard(self):
+        self._test_change_request_2 = self._create_change_request()
+        self._test_change_request_2.applicant_phone = "+639277817283"
+        self._test_change_request_2.registrant_id = self._test_group
+        self._test_change_request_2.applicant_id = self._test_individual_1
+
+        self.wizard_1 = (
+            self.env["spp.change.request.cancel.wizard"]
+            .with_context(change_request_id=self._test_change_request.id)
+            .create({})
+        )
+        self.wizard_2 = (
+            self.env["spp.change.request.cancel.wizard"]
+            .with_context(active_id=self._test_change_request_2.id)
+            .create({})
+        )
+
+        self.assertIsNotNone(self.wizard_1)
+        self.assertIsNotNone(self.wizard_2)
+
+        self.wizard_1.cancel_change_request()
+        self.assertEqual(self._test_change_request.state, "cancelled")
+
+        self.wizard_2.cancel_change_request()
+        self.assertEqual(self._test_change_request.state, "cancelled")
+
+        self.wizard_1._compute_message()
+        self.assertEqual(
+            self.wizard_1.dialog_message,
+            f"Are you sure you would like to cancel this request: {self._test_change_request.name}",
+        )
+
+    def test_27_confirm_user_wizard(self):
+        self.wizard_1 = (
+            self.env["spp.change.request.user.assign.wizard"]
+            .with_context(
+                change_request_id=self._test_change_request.id,
+                curr_assign_to_id=self.test_user.id,
+                assign_to=True,
+            )
+            .create({})
+        )
+
+        self.wizard_2 = (
+            self.env["spp.change.request.user.assign.wizard"]
+            .with_context(active_id=self._test_change_request.id)
+            .create({})
+        )
+
+        self.assertIsNotNone(self.wizard_1)
+        self.assertIsNotNone(self.wizard_2)
+
+        self.wizard_1.assign_to_user()
+        self.assertEqual(
+            self.wizard_1.change_request_id.assign_to_id.id, self.env.user.id
+        )
+
+        self.wizard_1._compute_message_assignment()
+        self.assertEqual(
+            [self.wizard_1.dialog_message, self.wizard_1.assign_to_any],
+            ["Assign this change request to:", True],
+        )
+
+        self.wizard_1._compute_assign_to_id_domain()
+        self.assertIsNotNone(self.wizard_1.assign_to_id_domain)
+
+    def test_28_reject_wizard(self):
+        self.wizard_1 = (
+            self.env["spp.change.request.reject.wizard"]
+            .with_context(change_request_id=self._test_change_request.id)
+            .create({"rejected_remarks": "Rejected"})
+        )
+        self.assertIsNotNone(self.wizard_1)
+
+        self.wizard_1.reject_change_request()
+        self.assertEqual(self.wizard_1.change_request_id.state, "rejected")
+
+        self.wizard_1._compute_message()
+        self.assertEqual(
+            self.wizard_1.dialog_message,
+            f"Are you sure you would like to reject this request: {self.wizard_1.change_request_id.name}",
         )

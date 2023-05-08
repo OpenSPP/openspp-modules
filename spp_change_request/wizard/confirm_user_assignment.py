@@ -21,7 +21,7 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
                 res["change_request_id"] = self.env.context["active_id"]
         if self.env.context.get("curr_assign_to_id"):
             if self.env.context["curr_assign_to_id"] != self.env.user.id:
-                res["assign_to_id"] = self.env.user
+                res["assign_to_id"] = self.env.user.id
             res["curr_assign_to_id"] = self.env.context["curr_assign_to_id"]
         else:
             res["assign_to_id"] = self.env.user.id
