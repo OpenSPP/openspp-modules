@@ -11,6 +11,7 @@ class ChangeRequestSourceMixinTest(Common):
     )
     def setUp(self, mock_request_type_selection):
         super().setUp()
+        mock_request_type_selection.__name__ = "_mocked___selection_request_type_ref_id"
 
         mock_request_type_selection.return_value = [
             ("source.mixin.test.model", "Test Request Type")
@@ -56,6 +57,7 @@ class ChangeRequestSourceMixinTest(Common):
         return_value=True,
     )
     def test_05_action_submit(self, mocker):
+        mocker.__name__ = "_mocked__check_required_documents"
         self._test_change_request.state = "pending"
         with self.assertRaisesRegex(
             UserError,
@@ -77,7 +79,8 @@ class ChangeRequestSourceMixinTest(Common):
         "odoo.addons.spp_change_request.models.mixins.source_mixin.ChangeRequestSourceMixin.update_live_data",
         return_value=True,
     )
-    def test_08_action_apply(self):
+    def test_08_action_apply(self, mocker):
+        mocker.__name__ = "_mocked__update_live_data"
         with self.assertRaisesRegex(
             ValidationError,
             "The request must be in validated state for changes to be applied.",
