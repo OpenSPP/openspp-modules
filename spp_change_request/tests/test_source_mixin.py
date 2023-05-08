@@ -334,6 +334,15 @@ class ChangeRequestSourceMixinTest(Common):
             .create({})
         )
 
+        self.wizard_2 = (
+            self.env["spp.change.request.user.assign.wizard"]
+            .with_context(
+                active_id=self._test_change_request.id,
+                curr_assign_to_id=self.env.user.id,
+            )
+            .create({})
+        )
+
         self.assertIsNotNone(self.wizard_1)
         self.assertIsNotNone(self.wizard_2)
 
@@ -355,6 +364,11 @@ class ChangeRequestSourceMixinTest(Common):
         self.wizard_1 = (
             self.env["spp.change.request.reject.wizard"]
             .with_context(change_request_id=self._test_change_request.id)
+            .create({"rejected_remarks": "Rejected"})
+        )
+        self.wizard_2 = (
+            self.env["spp.change.request.reject.wizard"]
+            .with_context(active_id=self._test_change_request.id)
             .create({"rejected_remarks": "Rejected"})
         )
         self.assertIsNotNone(self.wizard_1)
