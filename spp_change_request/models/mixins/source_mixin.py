@@ -729,11 +729,16 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :raise UserError: Exception raised when something is not valid.
         """
         for rec in self:
+            is_admin = self.env.user.has_group(
+                "spp_change_request.group_spp_change_request_administrator"
+            )
             assign_self = False
             if rec.change_request_id.assign_to_id:
                 if rec.change_request_id.assign_to_id.id != self.env.user.id:
                     if self.env.user.id == self.change_request_id.create_uid:
                         assign_self = True
+                    elif is_admin:
+                        assign_self = False
                     else:
                         raise ValidationError(
                             _("You're not allowed to re-assign this CR.")
