@@ -17,6 +17,7 @@
         "views/house_visit_view.xml",
         "views/phone_survey_view.xml",
         "views/registrant_view.xml",
+        "views/event_data_import_view.xml",
         "wizard/create_event_house_visit_wizard.xml",
         "wizard/create_event_phone_survey_wizard.xml",
     ],

@@ -16,6 +16,7 @@
         "security/ir.model.access.csv",
         "views/event_data_view.xml",
         "views/registrant_view.xml",
+        "views/event_data_import_views.xml",
         "wizard/create_event_wizard.xml",
     ],
     "assets": {},

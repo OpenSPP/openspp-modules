@@ -1,5 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 spp_event_data_admin,Event Data Admin Access,spp_event_data.model_spp_event_data,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_create_event_wizard_admin,Create Event Wizard Admin Access,spp_event_data.model_spp_create_event_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_event_data_import_admin,Event Data Import Admin Access,spp_event_data.model_spp_event_data_import,g2p_registry_base.group_g2p_admin,1,1,1,1
 
 spp_event_data_registrar,Event Data Registrar Access,spp_event_data.model_spp_event_data,g2p_registry_base.group_g2p_registrar,1,1,1,0
+spp_event_data_import_registrar,Event Data Import Registrar Access,spp_event_data.model_spp_event_data_import,g2p_registry_base.group_g2p_registrar,1,1,1,0

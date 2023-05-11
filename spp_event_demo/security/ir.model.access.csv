@@ -4,3 +4,6 @@ spp_create_event_house_visit_wizard_admin,Create Event House Visit Wizard Admin 
 
 spp_phone_survey_admin,Phone Survey Admin Access,spp_event_demo.model_spp_event_phone_survey,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_create_event_phone_survey_wizard_admin,Create Event Phone Survey Wizard Admin Access,spp_event_demo.model_spp_create_event_phone_survey_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+spp_event_house_visit_raw_admin,House Visit Import Raw Admin Access,spp_event_demo.model_spp_event_house_visit_raw,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_event_phone_survey_raw_admin,Phone Survey Import Raw Admin Access,spp_event_demo.model_spp_event_phone_survey_raw,g2p_registry_base.group_g2p_admin,1,1,1,1

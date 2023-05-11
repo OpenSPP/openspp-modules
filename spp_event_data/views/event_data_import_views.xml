@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!-- Event Data Import (Excel File) -->
+    <record id="view_spp_event_data_import_form" model="ir.ui.view">
+        <field name="name">view_spp_event_data_import_form</field>
+        <field name="model">spp.event.data.import</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Event Data Import">
+                <header>
+                    <button
+                        name="import_data"
+                        type="object"
+                        string="Import"
+                        class="btn-primary"
+                        states="New,Uploaded"
+                    />
+                   <button
+                        name="save_to_event_data"
+                        type="object"
+                        string="Save to Event Data"
+                        class="btn-success"
+                        states="Imported"
+                    />
+                    <button
+                        name="cancel_import"
+                        type="object"
+                        string="Cancel"
+                        class="btn-danger"
+                        states="Uploaded,Imported"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="New,Uploaded,Imported,Done,Cancelled"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="NEW"
+                        bg_color="bg-warning"
+                        attrs="{'invisible': [('state', '!=', 'New')]}"
+                    />
+                    <widget
+                        name="web_ribbon"
+                        title="UPLOADED"
+                        bg_color="bg-primary"
+                        attrs="{'invisible': [('state', '!=', 'Uploaded')]}"
+                    />
+                    <widget
+                        name="web_ribbon"
+                        title="IMPORTED"
+                        bg_color="bg-primary"
+                        attrs="{'invisible': [('state', '!=', 'Imported')]}"
+                    />
+                    <widget
+                        name="web_ribbon"
+                        title="DONE"
+                        bg_color="bg-success"
+                        attrs="{'invisible': [('state', '!=', 'Done')]}"
+                    />
+                    <div class="oe_title">
+                        <h2>
+                            <field name="name" attrs="{'readonly':[('state','not in',('New','Uploaded'))]}" />
+                        </h2>
+                        <div class="o_row">
+                            <label
+                                for="excel_file"
+                                class="oe_read_only"
+                                string="Event Data Excel File: "
+                            /><field
+                                name="excel_file"
+                                filename="name"
+                                attrs="{'readonly':[('state','not in',('New','Uploaded'))]}"
+                            />
+                        </div>
+                    </div>
+                    <group colspan="4" col="4">
+                        <field
+                            name="event_data_model"
+                            attrs="{'readonly':[('state','not in',('New','Uploaded'))]}"
+                        />
+                        <field
+                            name="upload_id"
+                            attrs="{'readonly':[('state','not in',('New','Uploaded'))]}"
+                        />
+                        <field
+                            name="date_uploaded"
+                            attrs="{'readonly':[('state','not in',('New','Uploaded'))]}"
+                        />
+                        <field name="import_id" readonly="1" />
+                        <field name="date_imported" readonly="1" />
+                        <field name="validate_id" readonly="1" />
+                        <field name="date_validated" readonly="1" />
+                    </group>
+                    <notebook>
+                        <page name="raw_data" string="Raw Data">
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="spp_event_data_import_filter" model="ir.ui.view">
+        <field name="name">spp_event_data_import_filter</field>
+        <field name="model">spp.event.data.import</field>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <search string="Search Imported File">
+                <field name="name" />
+                <field name="upload_id" />
+                <field name="import_id" />
+                <separator />
+                <filter name="state_new" string="New" domain="[('state','=','New')]" />
+                <filter name="state_uploaded" string="Uploaded" domain="[('state','=','Uploaded')]" />
+                <filter name="state_done" string="Done" domain="[('state','=','Done')]" />
+                <separator />
+                <group expand="0" name="group_by" string="Group By">
+                    <filter name="grp_state" string="State" context="{'group_by': 'state'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_spp_event_data_import_tree" model="ir.ui.view">
+        <field name="name">view_spp_event_data_import_tree</field>
+        <field name="model">spp.event.data.import</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="date_uploaded" />
+                <field name="upload_id" />
+                <field name="date_imported" />
+                <field name="import_id" />
+                <field
+                    name="state"
+                    decoration-primary="state=='Uploaded'"
+                    decoration-warning="state=='Imported'"
+                    decoration-success="state=='Done'"
+                    decoration-danger="state=='Cancelled'"
+                    widget="badge"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_view_spp_event_data_import" model="ir.actions.act_window">
+        <field name="name">Event Data Import</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.event.data.import</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="spp_event_data_import_filter" />
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Upload an excel file!
+            </p><p>
+                Click the create button to upload a new excel file.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_view_spp_event_data_import_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_spp_event_data_import_tree" />
+        <field name="act_window_id" ref="action_view_spp_event_data_import" />
+    </record>
+
+    <record id="action_view_spp_event_data_import_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_data_import_form" />
+        <field name="act_window_id" ref="action_view_spp_event_data_import" />
+    </record>
+
+    <menuitem id="spp_event_data_main_menu_root" name="Event Data" active="True" sequence="0" />
+
+    <menuitem
+        id="menu_spp_event_data_import"
+        name="Event Data Import"
+        action="action_view_spp_event_data_import"
+        parent="spp_event_data_main_menu_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+
+</odoo>
