@@ -128,7 +128,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             type="object"
                             icon="fa-user-circle"
                             class="oe_stat_button"
-                            groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_agent"
+                            groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_agent,spp_change_request.group_spp_change_request_administrator"
                         >
                             <div
                                 class="o_form_field o_stat_info"
