@@ -27,10 +27,13 @@ class IdDetailsIndividual(models.Model):
                     vals = {
                         "family_name": details.get("family_name"),
                         "given_name": details.get("given_name"),
+                        "father_name": details.get("father_name", None),
+                        "grand_father_name": details.get("grand_father_name", None),
                         "name": name,
                         "birthdate": details.get("birth_date"),
                         "gender": details.get("gender"),
                         "id_document_details": "",
+                        "birth_place": details.get("birth_place_city", None),
                     }
 
                     if details.get("image"):
