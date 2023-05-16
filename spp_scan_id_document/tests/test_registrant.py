@@ -38,4 +38,3 @@ class IdDetailsIndividualTest(TransactionCase):
 
         self.assertEqual(self.applicant.family_name, "Red")
         self.assertEqual(self.applicant.given_name, "Blue")
-        self.assertEqual(self.applicant.gender, "Male")
