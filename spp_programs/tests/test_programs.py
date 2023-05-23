@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
 from odoo.tests import TransactionCase
+from odoo.tools import mute_logger
 
 
 class TestProgram(TransactionCase):
@@ -26,6 +27,7 @@ class TestProgram(TransactionCase):
 
         self.program_2 = self.env["g2p.program"].create({"name": "Test Program 2"})
 
+    @mute_logger("root")
     @patch("odoo.addons.spp_programs.models.programs.len")
     def test_01_import_eligible_registrants(self, mocker):
         mocker.__name__ = "len__mocker"

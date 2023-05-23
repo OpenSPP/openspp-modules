@@ -1,38 +1,16 @@
+from datetime import date
 from unittest.mock import Mock, patch
 
 from odoo import Command, fields
 from odoo.exceptions import ValidationError
-from odoo.tests import TransactionCase
+from odoo.tools import mute_logger
+
+from .common import Common
 
 
-class TestEntitlement(TransactionCase):
+class TestEntitlement(Common):
     def setUp(self):
         super().setUp()
-
-        self.program = self.env["g2p.program"].create({"name": "Test Program"})
-
-        registrant = self.env["res.partner"].create(
-            {
-                "name": "test registrant",
-                "is_registrant": True,
-            }
-        )
-
-        self.cycle = self.env["g2p.cycle"].create(
-            {
-                "name": "Test Cycle",
-                "program_id": self.program.id,
-                "start_date": fields.Date.today(),
-                "end_date": fields.Date.today(),
-            }
-        )
-
-        self.entitlement = self.env["g2p.entitlement.inkind"].create(
-            {
-                "partner_id": registrant.id,
-                "cycle_id": self.cycle.id,
-            }
-        )
         group = [
             Command.link(self.env.ref("g2p_programs.g2p_program_manager").id),
         ]
@@ -80,11 +58,75 @@ class TestEntitlement(TransactionCase):
             self.entitlement.name, f"Entitlement: ({self.entitlement.product_id.name})"
         )
 
-    def test_05_gc_mark_expired_entitlement(self):
-        # Check if function doesn't have error
-
+    @patch("odoo.fields.Date.today")
+    def test_05_gc_mark_expired_entitlement(self, mocked_today):
+        mocked_today.__name__ = "today_mock"
+        mocked_today.return_value = date(2023, 5, 20)
+        entitlement_to_expired = self.env["g2p.entitlement"].create(
+            [
+                {
+                    "partner_id": self.registrant.id,
+                    "initial_amount": 1.0,
+                    "cycle_id": self.cycle.id,
+                    "state": "approved",
+                    "valid_until": fields.Date.add(fields.Date.today(), days=-1),
+                },
+                {
+                    "partner_id": self.registrant.id,
+                    "initial_amount": 1.0,
+                    "cycle_id": self.cycle.id,
+                    "state": "approved",
+                    "valid_until": fields.Date.add(fields.Date.today(), days=-1),
+                },
+                {
+                    "partner_id": self.registrant.id,
+                    "initial_amount": 1.0,
+                    "cycle_id": self.cycle.id,
+                    "state": "approved",
+                    "valid_until": fields.Date.add(fields.Date.today(), days=-1),
+                },
+            ]
+        )
+        entitlement_not_to_expired = self.env["g2p.entitlement"].create(
+            [
+                {
+                    "partner_id": self.registrant.id,
+                    "initial_amount": 1.0,
+                    "cycle_id": self.cycle.id,
+                    "state": "approved",
+                    "valid_until": fields.Date.add(fields.Date.today(), days=1),
+                },
+                {
+                    "partner_id": self.registrant.id,
+                    "initial_amount": 1.0,
+                    "cycle_id": self.cycle.id,
+                    "state": "approved",
+                    "valid_until": fields.Date.add(fields.Date.today(), days=1),
+                },
+                {
+                    "partner_id": self.registrant.id,
+                    "initial_amount": 1.0,
+                    "cycle_id": self.cycle.id,
+                    "state": "approved",
+                    "valid_until": fields.Date.add(fields.Date.today(), days=1),
+                },
+            ]
+        )
         self.entitlement._gc_mark_expired_entitlement()
+        for rec in entitlement_to_expired:
+            self.assertEqual(
+                rec.state,
+                "expired",
+                "To expired entitlement should be expired after garbage collector run!",
+            )
+        for rec in entitlement_not_to_expired:
+            self.assertNotEqual(
+                rec.state,
+                "expired",
+                "Not to expired entitlement should not be expired!",
+            )
 
+    @mute_logger("odoo.models.unlink")
     def test_06_unlink(self):
         self.entitlement.state = "pending_validation"
 
@@ -136,8 +178,70 @@ class TestEntitlement(TransactionCase):
             [self.cycle.start_date, self.cycle.end_date],
         )
 
-    @patch(
-        "odoo.addons.spp_programs.models.entitlement.InKindEntitlement._get_outgoing_incoming_moves"
-    )
-    def test_10_get_qty_procurement(self, mocker):
-        pass
+    def test_10_get_qty_procurement(self):
+        self.entitlement.product_id = self.env["product.product"].create(
+            {
+                "name": "Flour [TEST]",
+                "detailed_type": "product",
+                "categ_id": self.env.ref("product.product_category_all").id,
+                "uom_id": self.env.ref("uom.product_uom_unit").id,
+                "uom_po_id": self.env.ref("uom.product_uom_unit").id,
+            }
+        )
+        self.entitlement.uom_id = self.env.ref("uom.product_uom_unit")
+        self.assertEqual(
+            self.entitlement._get_qty_procurement(),
+            0.0,
+            "Procurement Quantity should be 0 since no move in or out!",
+        )
+        self.env["stock.move"].create(
+            {
+                "location_id": self.env.ref("stock.stock_location_suppliers").id,
+                "location_dest_id": self.env.ref("stock.stock_location_stock").id,
+                "to_refund": True,
+                "name": "Test Move In - Flour [TEST]",
+                "product_id": self.entitlement.product_id.id,
+                "date": fields.Date.today(),
+                "product_uom": self.env.ref("uom.product_uom_unit").id,
+                "product_uom_qty": 1.0,
+                "entitlement_id": self.entitlement.id,
+            }
+        )
+        self.assertEqual(
+            self.entitlement._get_qty_procurement(),
+            -1.0,
+            "Procurement Quantity should be -1 since there is a refund move in!",
+        )
+        self.env["stock.move"].create(
+            {
+                "location_id": self.env.ref("stock.stock_location_stock").id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
+                "to_refund": True,
+                "name": "Test Move Out - Flour [TEST]",
+                "product_id": self.entitlement.product_id.id,
+                "date": fields.Date.today(),
+                "product_uom": self.env.ref("uom.product_uom_unit").id,
+                "product_uom_qty": 2.0,
+                "entitlement_id": self.entitlement.id,
+            }
+        )
+        self.assertEqual(
+            self.entitlement._get_qty_procurement(),
+            1.0,
+            "Procurement Quantity should be 1 since there is a refund move out!",
+        )
+
+    def test_11_prepare_procurement_group_vals(self):
+        vals = self.entitlement._prepare_procurement_group_vals()
+        self.assertEqual(vals["name"], "Test Cycle", "Name should be cycle name!")
+        self.assertEqual(vals["move_type"], "direct", "Move type should be direct!")
+        self.assertEqual(
+            vals["cycle_id"],
+            self.entitlement.cycle_id.id,
+            "Cycle should be entitlement cycle!",
+        )
+        self.assertEqual(
+            vals["partner_id"],
+            self.entitlement.partner_id.id,
+            "Partner Id should be entitlement partner!",
+        )
