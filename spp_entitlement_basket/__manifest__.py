@@ -14,6 +14,7 @@
         "g2p_registry_base",
         "g2p_programs",
         "spp_programs",
+        "spp_service_points",
         "product",
         "stock",
     ],
