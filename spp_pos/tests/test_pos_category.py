@@ -9,3 +9,6 @@ class TestPosCateg(TransactionCase):
             self.env.ref("spp_pos.entitlement_product_categ_pos").id,
             "Should return correct pos category!",
         )
+        self.env.ref("spp_pos.entitlement_product_categ_pos").unlink()
+        res = self.env["pos.category"].get_entitlement_categ()
+        self.assertFalse(res, "POS Category is now deleted!")

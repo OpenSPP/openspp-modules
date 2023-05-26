@@ -1,3 +1,4 @@
+from . import test_create_program_wiz
 from . import test_entitlement_report_wiz
 from . import test_entitlement
 from . import test_programs
