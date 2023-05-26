@@ -34,7 +34,7 @@ class CustomG2PProgram(models.Model):
                 )
                 kind = "warning"
 
-            manager.import_eligible_registrants(state=state)
+            manager.import_eligible_registrants()
         else:
             message = _("No Eligibility Manager defined.")
             kind = "danger"
