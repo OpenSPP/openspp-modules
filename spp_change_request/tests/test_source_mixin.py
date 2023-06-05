@@ -200,8 +200,10 @@ class ChangeRequestSourceMixinTest(Common):
         self.assertEqual(self.test_request_type.assign_to_id, self.env.user)
 
         self._test_change_request.assign_to_id = self.test_user.id
-        self.test_request_type.open_user_assignment_wiz()
-        self.assertEqual(self.test_request_type.assign_to_id, self.env.user)
+        with self.assertRaisesRegex(
+            ValidationError, "You're not allowed to re-assign this CR."
+        ):
+            self.test_request_type.open_user_assignment_wiz()
 
     def test_17_open_user_assignment_to_wiz(self):
         action = self.test_request_type.open_user_assignment_to_wiz()

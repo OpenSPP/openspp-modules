@@ -251,8 +251,10 @@ class TestChangeRequests(Common):
         self.assertEqual(self._test_change_request.assign_to_id, self.env.user)
 
         self._test_change_request.assign_to_id = self._test_individual_3.id
-        self._test_change_request.open_user_assignment_wiz()
-        self.assertEqual(self._test_change_request.assign_to_id, self.env.user)
+        with self.assertRaisesRegex(
+            ValidationError, "You're not allowed to re-assign this CR."
+        ):
+            self._test_change_request.open_user_assignment_wiz()
 
         self._test_change_request.assign_to_id = self.env.user.id
         action = self._test_change_request.open_user_assignment_wiz()
