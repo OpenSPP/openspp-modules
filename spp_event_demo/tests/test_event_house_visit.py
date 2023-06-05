@@ -62,14 +62,14 @@ class EventHouseVisitTest(TransactionCase):
         with open(PATH % filename) as demo_file:
             return self.env["spp.event.data.import"].create(
                 {
-                    "excel_file": demo_file.read(),
+                    "excel_file": demo_file,
                     "name": "%s.csv" % filename,
                     "event_data_model": model,
                 }
             )
 
     def test_01_check_active_house_visit(self):
-        event_data = self.create_event_data(None)
+        event_data = self.create_event_data()
         self._test_individual._compute_active_house_visit()
 
         self.assertEqual(
