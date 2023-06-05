@@ -1,7 +1,7 @@
 import logging
 from os import path
 
-import pandas as pd
+import xlrd
 
 from odoo import fields
 from odoo.tests.common import TransactionCase
@@ -61,10 +61,11 @@ class EventHouseVisitTest(TransactionCase):
         return event_data
 
     def create_import_event_data(self, filename, model):
-        df = pd.read_excel(PATH % filename)
+        workbook = xlrd.open_workbook(PATH % filename)
+        worksheet = workbook.sheet_by_index(1)
         return self.env["spp.event.data.import"].create(
             {
-                "excel_file": df,
+                "excel_file": worksheet,
                 "name": "%s.xlsx" % filename,
                 "event_data_model": model,
             }
