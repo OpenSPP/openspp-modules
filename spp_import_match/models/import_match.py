@@ -62,13 +62,10 @@ class SPPImportMatch(models.Model):
                 domain.append((field.name, "=", converted_row[field.name]))
             if not combination_valid:
                 continue
-            _logger.info("DOMAIN: %s", domain)
             match = model.search(domain)
             if len(match) == 1:
-                _logger.info("MATCH: %s", match)
                 return match
 
-        _logger.info("MODEL: %s", model)
         return model
 
     @api.model
