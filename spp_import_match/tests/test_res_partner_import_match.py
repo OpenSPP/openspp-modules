@@ -87,7 +87,7 @@ class TestResPartnerImportMatch(TransactionCase):
         """Change email based on Name."""
         import_match = self.create_matching_given_family_name()
 
-        _logger.info(import_match.field_ids)
+        _logger.info(import_match.field_ids.mapped("name"))
 
         record = self._base_import_record("res.partner", "res_partner_name")
         record.execute_import(
