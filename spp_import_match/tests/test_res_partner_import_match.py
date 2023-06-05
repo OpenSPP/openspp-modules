@@ -49,7 +49,7 @@ class TestResPartnerImportMatch(TransactionCase):
         vals = {"model_id": res_partner.id}
         import_match = self.env["spp.import.match"].create(vals)
         given_name_field = self.env["ir.model.fields"].search(
-            [("name", "=", "given_name")]
+            [("name", "=", "given_name"), ("model_id", "=", res_partner.id)]
         )
 
         self.env["spp.import.match.fields"].create(
@@ -57,7 +57,7 @@ class TestResPartnerImportMatch(TransactionCase):
         )
 
         family_name_field = self.env["ir.model.fields"].search(
-            [("name", "=", "family_name")]
+            [("name", "=", "family_name"), ("model_id", "=", res_partner.id)]
         )
 
         self.env["spp.import.match.fields"].create(
@@ -70,7 +70,9 @@ class TestResPartnerImportMatch(TransactionCase):
         res_partner = self.env["ir.model"].search([("model", "=", "res.partner")])
         vals = {"model_id": res_partner.id}
         import_match = self.env["spp.import.match"].create(vals)
-        name_field = self.env["ir.model.fields"].search([("name", "=", "name")])
+        name_field = self.env["ir.model.fields"].search(
+            [("name", "=", "name"), ("model_id", "=", res_partner.id)]
+        )
 
         self.env["spp.import.match.fields"].create(
             {"field_id": name_field.id, "match_id": import_match.id}
