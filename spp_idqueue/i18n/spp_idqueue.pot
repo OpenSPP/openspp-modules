@@ -284,6 +284,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_queue_job_channel__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_idqueue.field_res_config_settings__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_idqueue.field_res_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__dms_directory_ids
@@ -684,6 +685,11 @@ msgid "Is Idpass"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model,name:spp_idqueue.model_queue_job_channel
+msgid "Job Channels"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard____last_update
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard____last_update
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch____last_update
@@ -838,6 +844,12 @@ msgstr ""
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Other Info"
+msgstr ""
+
+#. module: spp_idqueue
+#: code:addons/spp_idqueue/models/queue_job_channel.py:0
+#, python-format
+msgid "Parent channel required."
 msgstr ""
 
 #. module: spp_idqueue

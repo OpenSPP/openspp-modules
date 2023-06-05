@@ -667,7 +667,10 @@ class ChangeRequestBase(models.Model):
         self._check_phone_exist()
         for rec in self:
             # Open Request Form
-            return rec.open_change_request_form(target="current", mode="edit")
+            mode = "edit"
+            if self.env.user.id not in [self.assign_to_id.id, self.create_uid]:
+                mode = "readonly"
+            return rec.open_change_request_form(target="current", mode=mode)
 
     def _check_phone_exist(self):
         """

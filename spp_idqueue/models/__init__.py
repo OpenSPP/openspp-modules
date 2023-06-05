@@ -3,3 +3,4 @@
 from . import id_queue
 from . import id_batch
 from . import registrant
+from . import queue_job_channel
