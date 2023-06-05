@@ -100,11 +100,17 @@ class OpenSPPPrintBatch(models.Model):
                 ctr_ids += 1
                 queued_ids.append(queued_id.id)
                 if (ctr % self.JOBBATCH_SIZE == 0) or ctr == max_rec:
-                    jobs.append(rec.delayable()._generate_cards(queued_ids))
+                    jobs.append(
+                        rec.delayable(channel="root_id_batch.id_batch")._generate_cards(
+                            queued_ids
+                        )
+                    )
                     queued_ids = []
 
             main_job = group(*jobs)
-            main_job.on_done(self.delayable().mark_as_done(rec))
+            main_job.on_done(
+                self.delayable(channel="root_id_batch.id_batch").mark_as_done(rec)
+            )
             main_job.delay()
 
             message_1 = _("{} started to generate this batch on {}.").format(

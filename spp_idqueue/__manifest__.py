@@ -11,9 +11,15 @@
     "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["base", "g2p_registry_base", "spp_idpass"],
+    "depends": [
+        "base",
+        "g2p_registry_base",
+        "spp_idpass",
+        "queue_job",
+    ],
     "data": [
         "data/id_pass.xml",
+        "data/queue_data.xml",
         "security/g2p_security.xml",
         "security/ir.model.access.csv",
         "views/id_queue_view.xml",
