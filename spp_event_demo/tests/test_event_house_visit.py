@@ -65,7 +65,7 @@ class EventHouseVisitTest(TransactionCase):
         worksheet = workbook.sheet_by_index(0)
         return self.env["spp.event.data.import"].create(
             {
-                "excel_file": worksheet,
+                "excel_file": worksheet.read(),
                 "name": "%s.xlsx" % filename,
                 "event_data_model": model,
             }
