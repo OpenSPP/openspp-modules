@@ -6,7 +6,7 @@ from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
 
-PATH = path.join(path.dirname(__file__), "import_data", "%s.csv")
+PATH = path.join(path.dirname(__file__), "import_data", "%s.xlsx")
 OPTIONS = {
     "headers": True,
     "quoting": '"',
