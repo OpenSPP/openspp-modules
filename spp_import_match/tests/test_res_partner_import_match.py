@@ -96,7 +96,7 @@ class TestResPartnerImportMatch(TransactionCase):
         _logger.info(partner.mapped("name"))
 
         record.execute_import(
-            ["id", "given_name", "family_name", "name", "email"], [], OPTIONS
+            ["given_name", "family_name", "name", "email"], [], OPTIONS
         )
         partner = self.env["res.partner"].search([("name", "=", "Renaud Rufino")])
         _logger.info(partner.mapped("name"))
@@ -113,10 +113,10 @@ class TestResPartnerImportMatch(TransactionCase):
 
         record = self._base_import_record("res.partner", "res_partner_group_name")
 
-        partner = self.env["res.partner"].search([("name", "=", "Renaud Rufino")])
+        partner = self.env["res.partner"].search([("name", "=", "Renaud")])
         _logger.info(partner.mapped("name"))
 
-        record.execute_import(["id", "name", "email"], [], OPTIONS)
+        record.execute_import(["name", "email"], [], OPTIONS)
 
         partner = self.env["res.partner"].search([("name", "=", "Renaud")])
         _logger.info(partner.mapped("name"))
