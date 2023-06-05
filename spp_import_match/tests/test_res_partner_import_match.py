@@ -94,14 +94,19 @@ class TestResPartnerImportMatch(TransactionCase):
             ["id", "given_name", "family_name", "name", "email"], [], OPTIONS
         )
         partner = self.env["res.partner"].search([("name", "=", "Renaud Rufino")])
-        _logger.info(partner)
+        _logger.info(partner.mapped("name"))
         self._test_applicant.env.cache.invalidate()
         self.assertEqual(self._test_applicant.email, "rufinorenaud@gmail.com")
 
     def test_02_res_partner_group_name(self):
         """Change email based on Name."""
-        self.create_matching_name()
+        import_match = self.create_matching_name()
+
+        _logger.info(import_match.field_ids.mapped("name"))
+
         record = self._base_import_record("res.partner", "res_partner_group_name")
         record.execute_import(["id", "name", "email"], [], OPTIONS)
+        partner = self.env["res.partner"].search([("name", "=", "Renaud")])
+        _logger.info(partner.mapped("name"))
         self._test_hh.env.cache.invalidate()
         self.assertEqual(self._test_hh.email, "renaudhh@gmail.com")

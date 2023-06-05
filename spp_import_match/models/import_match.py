@@ -64,8 +64,10 @@ class SPPImportMatch(models.Model):
                 continue
             match = model.search(domain)
             if len(match) == 1:
+                _logger.info(match)
                 return match
 
+        _logger.info(model)
         return model
 
     @api.model
