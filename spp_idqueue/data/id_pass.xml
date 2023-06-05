@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-
-    <data noupdate="1">
-        <!-- ID Template: Batch Print -->
-        <record id="id_template_batch_print" model="spp.id.pass">
-            <field name="name">ID Batch Print</field>
-        </record>
-    </data>
-
+<odoo noupdate="1">
+    <!-- ID Template: Batch Print -->
+    <record id="id_template_batch_print" model="spp.id.pass">
+        <field name="name">ID Batch Print</field>
+    </record>
 </odoo>
