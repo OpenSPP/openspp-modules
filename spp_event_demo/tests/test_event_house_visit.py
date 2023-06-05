@@ -1,6 +1,8 @@
 import logging
 from os import path
 
+import pandas as pd
+
 from odoo import fields
 from odoo.tests.common import TransactionCase
 
@@ -59,15 +61,14 @@ class EventHouseVisitTest(TransactionCase):
         return event_data
 
     def create_import_event_data(self, filename, model):
-        with open(PATH % filename) as demo_file:
-            _logger.info(demo_file)
-            return self.env["spp.event.data.import"].create(
-                {
-                    "excel_file": demo_file.read(),
-                    "name": "%s.csv" % filename,
-                    "event_data_model": model,
-                }
-            )
+        df = pd.read_excel(PATH % filename)
+        return self.env["spp.event.data.import"].create(
+            {
+                "excel_file": df,
+                "name": "%s.xlsx" % filename,
+                "event_data_model": model,
+            }
+        )
 
     def test_01_check_active_house_visit(self):
         event_data = self.create_event_data()

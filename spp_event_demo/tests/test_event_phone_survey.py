@@ -59,7 +59,7 @@ class EventPhoneSurveyTest(TransactionCase):
             return self.env["spp.event.data.import"].create(
                 {
                     "excel_file": demo_file.read(),
-                    "name": "%s.csv" % filename,
+                    "name": "%s.xlsx" % filename,
                     "event_data_model": model,
                 }
             )
