@@ -60,7 +60,7 @@ class EventHouseVisitTest(TransactionCase):
 
     def create_import_event_data(self, filename, model):
         with open(PATH % filename) as demo_file:
-            _logger.info(demo_file.read())
+            _logger.info("DEMO FILE: %s", demo_file.read())
             return self.env["spp.event.data.import"].create(
                 {
                     "excel_file": demo_file.read(),
