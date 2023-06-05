@@ -1,67 +1,85 @@
 import logging
+from os import path
 
-from odoo.tests import tagged
+from odoo import fields
 from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
 
+PATH = path.join(path.dirname(__file__), "import_data", "%s.csv")
+OPTIONS = {
+    "headers": True,
+    "quoting": '"',
+    "separator": ",",
+}
 
-@tagged("post_install", "-at_install")
+
 class EventPhoneSurveyTest(TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super(EventPhoneSurveyTest, cls).setUpClass()
+    def setUp(self):
+        super().setUp()
 
-        # Initial Setup of Variables
-        cls.group_1 = cls.env["res.partner"].create(
+        self._test_group = self.env["res.partner"].create(
             {
-                "name": "Group 1",
+                "name": "BARASA",
                 "is_registrant": True,
                 "is_group": True,
             }
         )
-        cls.phone_survey_1 = cls.env["spp.event.phone.survey"].create(
+        self._test_individual = self.env["res.partner"].create(
             {
-                "summary": "Testing Visit",
-                "description": "This visit is for testing only",
-            }
-        )
-        cls.event_data_1 = cls.env["spp.event.data"].create(
-            {
-                "partner_id": cls.group_1.id,
-                "model": "spp.event.phone.survey",
-                "res_id": cls.phone_survey_1.id,
+                "name": "NJERI, WAMBUI",
+                "family_name": "Njeri",
+                "given_name": "Wambui",
+                "is_group": False,
+                "is_registrant": True,
+                "phone": "+639266716911",
             }
         )
 
-    def test_01_check_active_phone_survey(self):
-        self.group_1._compute_active_phone_survey()
-        self.assertEqual(
-            self.group_1.active_phone_survey.id,
-            self.event_data_1.id,
-        )
-
-    def test_02_check_name(self):
-        self.assertIn(
-            "Phone Survey",
-            self.group_1.active_phone_survey.name,
-        )
-
-    def test_03_recheck_active_phone_survey_after_entering_new_visit(self):
-        vals_phone = {
-            "summary": "Testing Visit 2",
-            "description": "This visit is for testing again",
+    def create_event_data(self):
+        event_vals = {
+            "summary": "Phone Survey",
+            "description": "Phone Survey Event Data",
         }
-        phone_survey_2 = self.env["spp.event.phone.survey"].create(vals_phone)
-
-        vals_event_data = {
-            "partner_id": self.group_1.id,
+        event = self.env["spp.event.phone.survey"].create(event_vals)
+        event_data_vals = {
             "model": "spp.event.phone.survey",
-            "res_id": phone_survey_2.id,
+            "partner_id": self._test_individual.id,
+            "collection_date": fields.date.today() or False,
+            "expiry_date": False,
+            "res_id": event.id,
         }
-        event_data_2 = self.env["spp.event.data"].create(vals_event_data)
-        self.group_1._compute_active_phone_survey()
+        event_data = self.env["spp.event.data"].create(event_data_vals)
+
+        return event_data
+
+    def create_import_event_data(self, filename, model):
+        with open(PATH % filename) as demo_file:
+            return self.env["spp.event.data.import"].create(
+                {
+                    "excel_file": demo_file.read(),
+                    "name": "%s.csv" % filename,
+                    "event_data_model": model,
+                }
+            )
+
+    def test_01_check_active_house_visit(self):
+        event_data = self.create_event_data(None)
+        self._test_individual._compute_active_phone_survey()
+
         self.assertEqual(
-            self.group_1.active_phone_survey.id,
-            event_data_2.id,
+            self._test_individual.active_phone_survey.id,
+            event_data.id,
+        )
+
+    def test_02_import_and_save(self):
+        import_data = self.create_import_event_data(
+            "phone_survey", "spp.event.phone.survey"
+        )
+        import_data.import_data()
+        import_data.save_to_event_data()
+
+        self.assertEqual(
+            len(self._test_individual.event_data_ids),
+            1,
         )

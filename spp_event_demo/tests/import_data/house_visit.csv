@@ -1,0 +1,2 @@
+registrant_given_name,registrant_family_name,summary,is_farm,farm_size_acre,number_of_pigs,number_of_cows,no_food_stock,disabled
+Wambui,Njeri,Sample House Visit,True,1200,200,300,400,500,False

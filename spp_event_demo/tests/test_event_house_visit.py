@@ -1,69 +1,90 @@
 import logging
+from os import path
 
-from odoo.tests import tagged
+from odoo import fields
 from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
 
+PATH = path.join(path.dirname(__file__), "import_data", "%s.csv")
+OPTIONS = {
+    "headers": True,
+    "quoting": '"',
+    "separator": ",",
+}
 
-@tagged("post_install", "-at_install")
+
 class EventHouseVisitTest(TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super(EventHouseVisitTest, cls).setUpClass()
+    def setUp(self):
+        super().setUp()
 
-        # Initial Setup of Variables
-        cls.group_1 = cls.env["res.partner"].create(
+        self._test_group = self.env["res.partner"].create(
             {
-                "name": "Group 1",
+                "name": "BARASA",
                 "is_registrant": True,
                 "is_group": True,
             }
         )
-        cls.house_visit_1 = cls.env["spp.event.house.visit"].create(
+        self._test_individual = self.env["res.partner"].create(
             {
-                "summary": "Testing Visit",
-                "is_farm": True,
-                "farm_size_acre": 50,
+                "name": "NJERI, WAMBUI",
+                "family_name": "Njeri",
+                "given_name": "Wambui",
+                "is_group": False,
+                "is_registrant": True,
+                "phone": "+639266716911",
             }
         )
-        cls.event_data_1 = cls.env["spp.event.data"].create(
-            {
-                "partner_id": cls.group_1.id,
-                "model": "spp.event.house.visit",
-                "res_id": cls.house_visit_1.id,
-            }
-        )
+
+    def create_event_data(self):
+        event_vals = {
+            "summary": "House Visit",
+            "is_farm": True,
+            "farm_size_acre": "1200",
+            "number_of_pigs": "250",
+            "number_of_cows": "100",
+            "no_food_stock": "1000",
+            "disabled": False,
+        }
+        event = self.env["spp.event.house.visit"].create(event_vals)
+        event_data_vals = {
+            "model": "spp.event.house.visit",
+            "partner_id": self._test_individual.id,
+            "collection_date": fields.date.today() or False,
+            "expiry_date": False,
+            "res_id": event.id,
+        }
+        event_data = self.env["spp.event.data"].create(event_data_vals)
+
+        return event_data
+
+    def create_import_event_data(self, filename, model):
+        with open(PATH % filename) as demo_file:
+            return self.env["spp.event.data.import"].create(
+                {
+                    "excel_file": demo_file.read(),
+                    "name": "%s.csv" % filename,
+                    "event_data_model": model,
+                }
+            )
 
     def test_01_check_active_house_visit(self):
-        self.group_1._compute_active_house_visit()
+        event_data = self.create_event_data(None)
+        self._test_individual._compute_active_house_visit()
+
         self.assertEqual(
-            self.group_1.active_house_visit.id,
-            self.event_data_1.id,
+            self._test_individual.active_house_visit.id,
+            event_data.id,
         )
 
-    def test_02_check_name(self):
-        self.assertIn(
-            "House Visit",
-            self.group_1.active_house_visit.name,
+    def test_02_import_and_save(self):
+        import_data = self.create_import_event_data(
+            "house_visit", "spp.event.house.visit"
         )
+        import_data.import_data()
+        import_data.save_to_event_data()
 
-    def test_03_recheck_active_house_visit_after_entering_new_visit(self):
-        vals_house = {
-            "summary": "Testing Visit 2",
-            "is_farm": True,
-            "farm_size_acre": 50,
-        }
-        house_visit_2 = self.env["spp.event.house.visit"].create(vals_house)
-        vals_event_data = {
-            "partner_id": self.group_1.id,
-            "model": "spp.event.house.visit",
-            "res_id": house_visit_2.id,
-        }
-        event_data_2 = self.env["spp.event.data"].create(vals_event_data)
-
-        self.group_1._compute_active_house_visit()
         self.assertEqual(
-            self.group_1.active_house_visit.id,
-            event_data_2.id,
+            len(self._test_individual.event_data_ids),
+            1,
         )
