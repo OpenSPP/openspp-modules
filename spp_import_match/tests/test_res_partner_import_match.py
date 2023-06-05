@@ -26,9 +26,9 @@ class TestResPartnerImportMatch(TransactionCase):
         )
         self._test_applicant = self.env["res.partner"].create(
             {
-                "name": "Renaud Rufino",
-                "family_name": "Renaud",
-                "given_name": "Rufino",
+                "name": "Rufino Renaud",
+                "family_name": "Rufino",
+                "given_name": "Renaud",
                 "is_group": False,
                 "is_registrant": True,
                 "phone": "+639266716911",
@@ -92,13 +92,13 @@ class TestResPartnerImportMatch(TransactionCase):
 
         record = self._base_import_record("res.partner", "res_partner_name")
 
-        partner = self.env["res.partner"].search([("name", "=", "Renaud Rufino")])
+        partner = self.env["res.partner"].search([("name", "=", "Rufino Renaud")])
         _logger.info(partner.mapped("name"))
 
         record.execute_import(
             ["given_name", "family_name", "name", "email"], [], OPTIONS
         )
-        partner = self.env["res.partner"].search([("name", "=", "Renaud Rufino")])
+        partner = self.env["res.partner"].search([("name", "=", "Rufino Renaud")])
         _logger.info(partner.mapped("name"))
 
         self._test_applicant.env.cache.invalidate()
