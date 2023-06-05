@@ -55,9 +55,10 @@ class EventPhoneSurveyTest(TransactionCase):
 
     def create_import_event_data(self, filename, model):
         with open(PATH % filename) as demo_file:
+            _logger.info(demo_file.read())
             return self.env["spp.event.data.import"].create(
                 {
-                    "excel_file": demo_file,
+                    "excel_file": demo_file.read(),
                     "name": "%s.csv" % filename,
                     "event_data_model": model,
                 }
