@@ -572,10 +572,20 @@ class ChangeRequestBase(models.Model):
         :raise UserError: Exception raised when something is not valid.
         """
         for rec in self:
+            is_admin = self.env.user.has_group(
+                "spp_change_request.group_spp_change_request_administrator"
+            )
             assign_self = False
             if rec.assign_to_id:
                 if rec.assign_to_id.id != self.env.user.id:
-                    assign_self = True
+                    if self.env.user.id == self.create_uid:
+                        assign_self = True
+                    elif is_admin:
+                        assign_self = False
+                    else:
+                        raise ValidationError(
+                            _("You're not allowed to re-assign this CR.")
+                        )
             else:
                 assign_self = True
             if not assign_self:

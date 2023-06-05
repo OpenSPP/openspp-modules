@@ -39,3 +39,37 @@ class IdDetailsIndividualTest(TransactionCase):
         self.assertEqual(self.applicant.family_name, "Red")
         self.assertEqual(self.applicant.given_name, "Blue")
         self.assertEqual(self.applicant.gender, "Male")
+
+    def test_scan_id_document_details_vals(self):
+
+        details = {
+            "photo": "",
+            "given_name": "Blue",
+            "family_name": "Red",
+            "birth_date": "1970-06-18",
+            "gender": "Male",
+            "document_type": "Passport",
+            "document_number": "162401579884",
+            "expiry_date": "06/18/2025",
+            "nationality": "Philippines",
+            "birth_place_city": "Caloocan",
+        }
+
+        vals = self.applicant.scan_id_document_details_vals(details)
+
+        self.assertEqual(
+            [
+                details["family_name"],
+                details["given_name"],
+                details["birth_date"],
+                details["gender"],
+                details["birth_place_city"],
+            ],
+            [
+                vals.get("family_name"),
+                vals.get("given_name"),
+                vals.get("birthdate"),
+                vals.get("gender"),
+                vals.get("birth_place"),
+            ],
+        )

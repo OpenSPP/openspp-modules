@@ -1456,3 +1456,10 @@ msgid ""
 "You are not allowed to validate this request! Stage: {}. Allowed Validator "
 "Group: {}"
 msgstr ""
+
+#. module: spp_change_request
+#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "You're not allowed to re-assign this CR."
+msgstr ""
