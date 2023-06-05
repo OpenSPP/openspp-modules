@@ -1,6 +1,8 @@
 import logging
 from os import path
 
+import xlrd
+
 from odoo import fields
 from odoo.tests.common import TransactionCase
 
@@ -54,15 +56,14 @@ class EventPhoneSurveyTest(TransactionCase):
         return event_data
 
     def create_import_event_data(self, filename, model):
-        with open(PATH % filename) as demo_file:
-            _logger.info(demo_file)
-            return self.env["spp.event.data.import"].create(
-                {
-                    "excel_file": demo_file.read(),
-                    "name": "%s.xlsx" % filename,
-                    "event_data_model": model,
-                }
-            )
+        workbook = xlrd.open_workbook(PATH % filename)
+        return self.env["spp.event.data.import"].create(
+            {
+                "excel_file": workbook,
+                "name": "%s.xlsx" % filename,
+                "event_data_model": model,
+            }
+        )
 
     def test_01_check_active_house_visit(self):
         event_data = self.create_event_data()
