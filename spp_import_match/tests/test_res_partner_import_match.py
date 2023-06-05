@@ -1,6 +1,9 @@
+import logging
 from os import path
 
 from odoo.tests import TransactionCase
+
+_logger = logging.getLogger(__name__)
 
 PATH = path.join(path.dirname(__file__), "import_data", "%s.csv")
 OPTIONS = {
@@ -82,9 +85,14 @@ class TestResPartnerImportMatch(TransactionCase):
 
     def test_01_res_partner_name(self):
         """Change email based on Name."""
-        self.create_matching_given_family_name()
+        import_match = self.create_matching_given_family_name()
+
+        _logger.info(import_match)
+
         record = self._base_import_record("res.partner", "res_partner_name")
-        record.execute_import(["id", "given_name", "family_name", "email"], [], OPTIONS)
+        record.execute_import(
+            ["id", "given_name", "family_name", "name", "email"], [], OPTIONS
+        )
         self._test_applicant.env.cache.invalidate()
         self.assertEqual(self._test_applicant.email, "rufinorenaud@gmail.com")
 
