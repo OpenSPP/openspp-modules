@@ -67,52 +67,47 @@ class OpenSPPEventDataImport(models.Model):
             vals = []
             columns = []
             mainvals = {}
-            for row in range(sheet.nrows):
-                if row > 0:  # Ignore First Row containing column headings
-                    registrant_given_name = None
-                    registrant_family_name = None
-                    summary = None
-                    description = None
-                    state = "Validated"
-                    errctr = 0
-                    remarks = ""
-                    for col in range(1, sheet.ncols):
-                        col_value = sheet.cell(row, col).value
-                        if col_value == "<Null>":
-                            col_value = ""
-                        col_name = sheet.cell(0, col).value
-                        if col_name.find("registrant_given_name") >= 0:
-                            registrant_given_name = col_value
-                            if not col_value:
-                                errctr += 1
-                                state = "Error"
-                                remarks += (
-                                    str(errctr) + ".) Given Name cannot be blank; "
-                                )
-                        elif col_name.find("registrant_family_name") >= 0:
-                            registrant_family_name = col_value
-                            if not col_value:
-                                errctr += 1
-                                state = "Error"
-                                remarks += (
-                                    str(errctr) + ".) Family Name cannot be blank; "
-                                )
-                        elif col_name.find("summary") >= 0:
-                            summary = col_value
-                        elif col_name.find("description") >= 0:
-                            description = col_value
+            for row in range(1, sheet.nrows):
+                registrant_given_name = None
+                registrant_family_name = None
+                summary = None
+                description = None
+                state = "Validated"
+                errctr = 0
+                remarks = ""
+                for col in range(1, sheet.ncols):
+                    col_value = sheet.cell(row, col).value
+                    if col_value == "<Null>":
+                        col_value = ""
+                    col_name = sheet.cell(0, col).value
+                    if col_name.find("registrant_given_name") >= 0:
+                        registrant_given_name = col_value
+                        if not col_value:
+                            errctr += 1
+                            state = "Error"
+                            remarks += str(errctr) + ".) Given Name cannot be blank; "
+                    elif col_name.find("registrant_family_name") >= 0:
+                        registrant_family_name = col_value
+                        if not col_value:
+                            errctr += 1
+                            state = "Error"
+                            remarks += str(errctr) + ".) Family Name cannot be blank; "
+                    elif col_name.find("summary") >= 0:
+                        summary = col_value
+                    elif col_name.find("description") >= 0:
+                        description = col_value
 
-                    # Store values to columns
-                    columns.append(
-                        {
-                            "registrant_given_name": registrant_given_name,
-                            "registrant_family_name": registrant_family_name,
-                            "summary": summary,
-                            "description": description,
-                            "state": state,
-                            "remarks": remarks,
-                        }
-                    )
+                # Store values to columns
+                columns.append(
+                    {
+                        "registrant_given_name": registrant_given_name,
+                        "registrant_family_name": registrant_family_name,
+                        "summary": summary,
+                        "description": description,
+                        "state": state,
+                        "remarks": remarks,
+                    }
+                )
 
             for val in columns:
                 vals.append([0, 0, val])

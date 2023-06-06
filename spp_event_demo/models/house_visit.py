@@ -75,71 +75,67 @@ class OpenSPPEventDataImport(models.Model):
             columns = []
             mainvals = {}
             for row in range(1, sheet.nrows):
-                if row > 0:  # Ignore First Row containing column headings
-                    registrant_given_name = None
-                    registrant_family_name = None
-                    summary = None
-                    is_farm = None
-                    farm_size_acre = None
-                    number_of_pigs = None
-                    number_of_cows = None
-                    no_food_stock = None
-                    disabled = None
-                    state = "Validated"
-                    errctr = 0
-                    remarks = ""
-                    for col in range(sheet.ncols):
-                        col_value = sheet.cell(row, col).value
-                        if col_value == "<Null>":
-                            col_value = ""
-                        col_name = sheet.cell(0, col).value
-                        if col_name.find("registrant_given_name") >= 0:
-                            registrant_given_name = col_value
-                            if not col_value:
-                                errctr += 1
-                                state = "Error"
-                                remarks += (
-                                    str(errctr) + ".) Given Name cannot be blank; "
-                                )
-                        elif col_name.find("registrant_family_name") >= 0:
-                            registrant_family_name = col_value
-                            if not col_value:
-                                errctr += 1
-                                state = "Error"
-                                remarks += (
-                                    str(errctr) + ".) Family Name cannot be blank; "
-                                )
-                        elif col_name.find("summary") >= 0:
-                            summary = col_value
-                        elif col_name.find("is_farm") >= 0:
-                            is_farm = col_value
-                        elif col_name.find("farm_size_acre") >= 0:
-                            farm_size_acre = col_value
-                        elif col_name.find("number_of_pigs") >= 0:
-                            number_of_pigs = col_value
-                        elif col_name.find("number_of_cows") >= 0:
-                            number_of_cows = col_value
-                        elif col_name.find("no_food_stock") >= 0:
-                            no_food_stock = col_value
-                        elif col_name.find("disabled") >= 0:
-                            disabled = col_value
 
-                    # Store values to columns
-                    columns.append(
-                        {
-                            "registrant_given_name": registrant_given_name,
-                            "registrant_family_name": registrant_family_name,
-                            "summary": summary,
-                            "is_farm": is_farm,
-                            "farm_size_acre": farm_size_acre,
-                            "number_of_pigs": number_of_pigs,
-                            "number_of_cows": number_of_cows,
-                            "no_food_stock": no_food_stock,
-                            "disabled": disabled,
-                            "state": state,
-                            "remarks": remarks,
-                        }
-                    )
+                registrant_given_name = None
+                registrant_family_name = None
+                summary = None
+                is_farm = None
+                farm_size_acre = None
+                number_of_pigs = None
+                number_of_cows = None
+                no_food_stock = None
+                disabled = None
+                state = "Validated"
+                errctr = 0
+                remarks = ""
+                for col in range(1, sheet.ncols):
+                    col_value = sheet.cell(row, col).value
+                    if col_value == "<Null>":
+                        col_value = ""
+                    col_name = sheet.cell(0, col).value
+                    if col_name.find("registrant_given_name") >= 0:
+                        registrant_given_name = col_value
+                        if not col_value:
+                            errctr += 1
+                            state = "Error"
+                            remarks += str(errctr) + ".) Given Name cannot be blank; "
+                    elif col_name.find("registrant_family_name") >= 0:
+                        registrant_family_name = col_value
+                        if not col_value:
+                            errctr += 1
+                            state = "Error"
+                            remarks += str(errctr) + ".) Family Name cannot be blank; "
+                    elif col_name.find("summary") >= 0:
+                        summary = col_value
+                    elif col_name.find("is_farm") >= 0:
+                        is_farm = col_value
+                    elif col_name.find("farm_size_acre") >= 0:
+                        farm_size_acre = col_value
+                    elif col_name.find("number_of_pigs") >= 0:
+                        number_of_pigs = col_value
+                    elif col_name.find("number_of_cows") >= 0:
+                        number_of_cows = col_value
+                    elif col_name.find("no_food_stock") >= 0:
+                        no_food_stock = col_value
+                    elif col_name.find("disabled") >= 0:
+                        disabled = col_value
+
+                # Store values to columns
+                columns.append(
+                    {
+                        "registrant_given_name": registrant_given_name,
+                        "registrant_family_name": registrant_family_name,
+                        "summary": summary,
+                        "is_farm": is_farm,
+                        "farm_size_acre": farm_size_acre,
+                        "number_of_pigs": number_of_pigs,
+                        "number_of_cows": number_of_cows,
+                        "no_food_stock": no_food_stock,
+                        "disabled": disabled,
+                        "state": state,
+                        "remarks": remarks,
+                    }
+                )
 
             for val in columns:
                 vals.append([0, 0, val])
