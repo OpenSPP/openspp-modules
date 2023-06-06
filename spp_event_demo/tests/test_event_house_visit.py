@@ -1,3 +1,4 @@
+import base64
 import logging
 from os import path
 
@@ -64,7 +65,7 @@ class EventHouseVisitTest(TransactionCase):
         workbook = xlrd.open_workbook(PATH % filename)
         return self.env["spp.event.data.import"].create(
             {
-                "excel_file": workbook.read(),
+                "excel_file": base64.encodebytes(workbook),
                 "name": "%s.xlsx" % filename,
                 "event_data_model": model,
             }
