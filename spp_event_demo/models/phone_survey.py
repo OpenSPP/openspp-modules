@@ -75,7 +75,7 @@ class OpenSPPEventDataImport(models.Model):
                 state = "Validated"
                 errctr = 0
                 remarks = ""
-                for col in range(1, sheet.ncols):
+                for col in range(sheet.ncols):
                     col_value = sheet.cell(row, col).value
                     if col_value == "<Null>":
                         col_value = ""
