@@ -212,6 +212,7 @@ class OpenSPPAreaImport(models.Model):
                                 lang_ids.append([0, 0, lang[x]])
 
                             # Store values to columns
+                            admin_code = str(admin_code)
                             char_type = "Int" and admin_code.isnumeric() or "Char"
                             if char_type == "Int":
                                 admin_code = int(admin_code)
