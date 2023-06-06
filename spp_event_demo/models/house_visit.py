@@ -74,7 +74,7 @@ class OpenSPPEventDataImport(models.Model):
             vals = []
             columns = []
             mainvals = {}
-            for row in range(sheet.nrows):
+            for row in range(1, sheet.nrows):
                 if row > 0:  # Ignore First Row containing column headings
                     registrant_given_name = None
                     registrant_family_name = None
@@ -145,8 +145,7 @@ class OpenSPPEventDataImport(models.Model):
                 vals.append([0, 0, val])
 
             _logger.info(
-                "Event Data Masterlist Import: Updating Record: %s"
-                % fields.Datetime.now()
+                "Event Data Import: Updating Record: %s" % fields.Datetime.now()
             )
             mainvals.update(
                 {
@@ -160,9 +159,7 @@ class OpenSPPEventDataImport(models.Model):
             )
             rec.update(mainvals)
 
-            _logger.info(
-                "Event Data Masterlist Import: Completed: %s" % fields.Datetime.now()
-            )
+            _logger.info("Event Data Import: Completed: %s" % fields.Datetime.now())
 
     def spp_event_house_visit_save(self):
         for rec in self:
@@ -194,7 +191,6 @@ class OpenSPPEventDataImport(models.Model):
                                 "expiry_date": False,
                                 "res_id": event.id,
                             }
-                            _logger.info(registrant.name)
                             self.env["spp.event.data"].create(event_data_vals)
                             registrant._compute_active_house_visit()
                             raw.update({"state": "Posted"})

@@ -76,7 +76,7 @@ class OpenSPPEventDataImport(models.Model):
                     state = "Validated"
                     errctr = 0
                     remarks = ""
-                    for col in range(sheet.ncols):
+                    for col in range(1, sheet.ncols):
                         col_value = sheet.cell(row, col).value
                         if col_value == "<Null>":
                             col_value = ""
@@ -118,8 +118,7 @@ class OpenSPPEventDataImport(models.Model):
                 vals.append([0, 0, val])
 
             _logger.info(
-                "Event Data Masterlist Import: Updating Record: %s"
-                % fields.Datetime.now()
+                "Event Data Import: Updating Record: %s" % fields.Datetime.now()
             )
             mainvals.update(
                 {
@@ -133,9 +132,7 @@ class OpenSPPEventDataImport(models.Model):
             )
             rec.update(mainvals)
 
-            _logger.info(
-                "Area Masterlist Import: Completed: %s" % fields.Datetime.now()
-            )
+            _logger.info("Event Data Import: Completed: %s" % fields.Datetime.now())
 
     def spp_event_phone_survey_save(self):
         for rec in self:
