@@ -1,8 +1,5 @@
-import base64
 import logging
 from os import path
-
-import xlrd
 
 from odoo import fields
 from odoo.tests.common import TransactionCase
@@ -62,13 +59,12 @@ class EventHouseVisitTest(TransactionCase):
         return event_data
 
     def create_import_event_data(self, filename, model):
-        workbook = xlrd.open_workbook(PATH % filename)
-        worksheet = workbook.sheet_by_index(0)
-        firstRow = worksheet.read()
-        _logger.info(firstRow)
+        fo = open(PATH % filename, "rb")
+        excel_file = fo.read()
+        fo.close()
         return self.env["spp.event.data.import"].create(
             {
-                "excel_file": base64.encodebytes(worksheet),
+                "excel_file": excel_file,
                 "name": "%s.xlsx" % filename,
                 "event_data_model": model,
             }
