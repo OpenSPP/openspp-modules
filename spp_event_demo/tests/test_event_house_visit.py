@@ -1,3 +1,4 @@
+import base64
 import logging
 from os import path
 
@@ -59,12 +60,11 @@ class EventHouseVisitTest(TransactionCase):
         return event_data
 
     def create_import_event_data(self, filename, model):
-        fo = open(PATH % filename, "rb")
-        excel_file = fo.read()
-        fo.close()
+        fo = open(PATH % filename, "rb").read()
+        base64_encoded = base64.b64encode(fo).decode("UTF-8")
         return self.env["spp.event.data.import"].create(
             {
-                "excel_file": excel_file,
+                "excel_file": base64_encoded,
                 "name": "%s.xlsx" % filename,
                 "event_data_model": model,
             }
