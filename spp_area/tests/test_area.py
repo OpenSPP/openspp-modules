@@ -48,9 +48,9 @@ class AreaTest(TransactionCase):
         self.assertEqual(len(self.area_1.child_ids), 1)
 
     def test_02_import_data(self):
-        import_data = self.create_import_event_data("test")
+        import_data = self.create_import_area("test")
         import_data.import_data()
         import_data.save_to_area()
 
-        areas = self.env["spp.area"].browse()
+        areas = self.env["spp.area"].search([])
         self.assertEqual(len(areas), 21)
