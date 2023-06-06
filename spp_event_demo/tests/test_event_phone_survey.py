@@ -1,7 +1,6 @@
+import base64
 import logging
 from os import path
-
-import xlrd
 
 from odoo import fields
 from odoo.tests.common import TransactionCase
@@ -56,10 +55,11 @@ class EventPhoneSurveyTest(TransactionCase):
         return event_data
 
     def create_import_event_data(self, filename, model):
-        workbook = xlrd.open_workbook(PATH % filename)
+        fo = open(PATH % filename, "rb").read()
+        base64_encoded = base64.b64encode(fo).decode("UTF-8")
         return self.env["spp.event.data.import"].create(
             {
-                "excel_file": workbook,
+                "excel_file": base64_encoded,
                 "name": "%s.xlsx" % filename,
                 "event_data_model": model,
             }

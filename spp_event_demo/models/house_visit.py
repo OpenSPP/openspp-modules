@@ -161,7 +161,7 @@ class OpenSPPEventDataImport(models.Model):
             rec.update(mainvals)
 
             _logger.info(
-                "Area Masterlist Import: Completed: %s" % fields.Datetime.now()
+                "Event Data Masterlist Import: Completed: %s" % fields.Datetime.now()
             )
 
     def spp_event_house_visit_save(self):
@@ -194,6 +194,7 @@ class OpenSPPEventDataImport(models.Model):
                                 "expiry_date": False,
                                 "res_id": event.id,
                             }
+                            _logger.info(registrant.name)
                             self.env["spp.event.data"].create(event_data_vals)
                             registrant._compute_active_house_visit()
                             raw.update({"state": "Posted"})
