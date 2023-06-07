@@ -1,5 +1,4 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-
 from odoo import api, models
 
 
@@ -8,7 +7,10 @@ class Base(models.AbstractModel):
 
     @api.model
     def load(self, fields, data):
-        if self.env["spp.import.match"]._usable_rules(self._name, fields):
+        usable, field_to_match = self.env["spp.import.match"]._usable_rules(
+            self._name, fields
+        )
+        if usable:
             newdata = list()
             if ".id" in fields:
                 column = fields.index(".id")
@@ -28,6 +30,7 @@ class Base(models.AbstractModel):
             clean_fields = [f[0] for f in import_fields]
             for dbid, xmlid, record, info in converted_data:
                 row = dict(zip(clean_fields, data[info["record"]]))
+
                 match = self
                 if xmlid:
                     row["id"] = xmlid
@@ -37,9 +40,18 @@ class Base(models.AbstractModel):
                     match = self.browse(dbid)
                 else:
                     match = self.env["spp.import.match"]._match_find(self, record, row)
+
+                flat_fields_to_remove = [
+                    item for sublist in field_to_match for item in sublist
+                ]
+                for fields_pop in flat_fields_to_remove:
+                    if fields_pop in fields:
+                        fields.remove(fields_pop)
+
                 match.export_data(fields)
+
                 ext_id = match.get_external_id()
                 row["id"] = ext_id[match.id] if match else row.get("id", "")
-                newdata.append(tuple(row[f] for f in clean_fields))
+                newdata.append(tuple(row[f] for f in fields))
             data = newdata
         return super(Base, self).load(fields, data)
