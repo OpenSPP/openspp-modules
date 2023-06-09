@@ -44,8 +44,6 @@ class SQLEligibilityManager(models.Model):
             domain += [("is_group", "=", True)]
         if self.program_id.target_type == "individual":
             domain += [("is_group", "=", False)]
-        # domain += self._safe_eval(self.eligibility_domain)
-        # _logger.debug("DOMAIN: %s" % domain)
         return domain
 
     def _get_beneficiaries_sql_query(self):

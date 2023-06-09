@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP SQL-base Eligibility Manager",
+    "name": "OpenSPP SQL Query Eligibility Manager",
     "category": "OpenSPP",
     "version": "15.0.0.0.0",
     "sequence": 1,
