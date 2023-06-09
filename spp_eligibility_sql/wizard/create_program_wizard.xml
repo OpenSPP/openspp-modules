@@ -1,0 +1,20 @@
+<odoo>
+    <record id="create_program_wizard_form_view_custom_eligibility_sql" model="ir.ui.view">
+        <field name="name">create_program_wizard_form_view_custom_eligibility_sql</field>
+        <field name="model">g2p.program.create.wizard</field>
+        <field name="inherit_id" ref="spp_programs.create_program_wizard_form_view_spp" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='default_eligibility']" position="after">
+                <group
+                    colspan="4"
+                    col="4"
+                    name='sql_eligibility'
+                    attrs="{'invisible':[('eligibility_kind','!=', 'sql_eligibility')]}"
+                >
+                    <field name="sql_query" colspan="4" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
