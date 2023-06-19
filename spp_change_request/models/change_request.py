@@ -668,7 +668,7 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             # Open Request Form
             mode = "edit"
-            if self.env.user.id not in [self.assign_to_id.id, self.create_uid]:
+            if self.env.user.id not in [self.assign_to_id.id, self.create_uid.id]:
                 mode = "readonly"
             return rec.open_change_request_form(target="current", mode=mode)
 

@@ -21,11 +21,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
         """
         res = super(OpenSPPMultiIDRequestWizard, self).default_get(fields)
         if self.env.context.get("active_ids"):
-            registrant_ids = self.env["res.partner"].search(
-                [("id", "in", self.env.context.get("active_ids"))]
-            )
-            if registrant_ids:
-                res["registrant_ids"] = registrant_ids
+            res["registrant_ids"] = [(6, 0, self._context.get("active_ids"))]
             return res
         else:
             raise UserError(_("There are no selected Registrants!"))

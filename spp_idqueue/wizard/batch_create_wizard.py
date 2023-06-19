@@ -33,10 +33,10 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
             if len(queue_id) > 0:
                 templates = queue_id.mapped("idpass_id.id")
                 if len(set(templates)) > 1:
-                    res["queue_ids"] = queue_id
+                    res["queue_ids"] = [(6, 0, queue_id.ids)]
                     res["state"] = "step1"
                 else:
-                    res["queue_ids"] = queue_id
+                    res["queue_ids"] = [(6, 0, queue_id.ids)]
                     res["id_count"] = len(queue_id)
                     res["state"] = "step2"
             else:
