@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_individuals_form_inherit_spp_registrant_import" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="inside">
+                <div id="registrant_id" groups="base.group_no_one">
+                    <label for="registrant_id" />
+                    <field name="registrant_id" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_groups_form_inherit_spp_registrant_import" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="inside">
+                <div id="registrant_id" groups="base.group_no_one">
+                    <label for="registrant_id" />
+                    <field name="registrant_id" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
