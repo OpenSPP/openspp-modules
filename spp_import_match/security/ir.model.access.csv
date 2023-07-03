@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_import_match_admin,SPP Import Matching Admin Access,spp_import_match.model_spp_import_match,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_import_match_fields_admin,SPP Import Matching Fields Admin Access,spp_import_match.model_spp_import_match_fields,g2p_registry_base.group_g2p_admin,1,1,1,1
