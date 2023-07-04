@@ -1,0 +1,27 @@
+<odoo>
+    <record id="create_program_wizard_form_view_custom_eligibility_tags" model="ir.ui.view">
+        <field name="name">create_program_wizard_form_view_custom_eligibility_tags</field>
+        <field name="model">g2p.program.create.wizard</field>
+        <field name="inherit_id" ref="spp_programs.create_program_wizard_form_view_spp" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='default_eligibility']" position="after">
+                <group
+                    colspan="4"
+                    col="4"
+                    name='sql_eligibility'
+                    attrs="{'invisible':[('eligibility_kind','!=', 'tags_eligibility')]}"
+                >
+                    <field name="tags_id" colspan="4" />
+                    <field name="area_id" colspan="4" />
+                    <field
+                        name="custom_domain"
+                        colspan="4"
+                        widget="domain"
+                        options="{'model': 'res.partner'}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
