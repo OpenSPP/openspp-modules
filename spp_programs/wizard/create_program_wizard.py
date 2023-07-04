@@ -62,7 +62,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
     def create_program(self):
         self._check_required_fields()
         for rec in self:
-            program = self.create_g2p_program(rec)
+            program = rec.create_g2p_program()
             program_id = program.id
             vals = {}
 
@@ -71,11 +71,11 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
             # Set Default Cycle Manager settings
             # Add a new record to default cycle manager model
-            def_mgr = self.create_cycle_manager_default(program_id, rec)
+            def_mgr = rec.create_cycle_manager_default(program_id)
             def_mgr.update(self._get_recurrent_field_values())
 
             # Add a new record to cycle manager parent model
-            mgr = self.create_cycle_manager(program_id, def_mgr)
+            mgr = rec.create_cycle_manager(program_id, def_mgr)
             vals.update({"cycle_managers": [(4, mgr.id)]})
 
             # Set Default Entitlement Manager
@@ -85,7 +85,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             program.update(vals)
 
             if rec.import_beneficiaries == "yes":
-                self.program_wizard_import_beneficiaries(program)
+                rec.program_wizard_import_beneficiaries(program)
 
             # Open the newly created program
             action = {
@@ -133,25 +133,25 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             }
         )
 
-    def create_cycle_manager_default(self, program_id, rec):
+    def create_cycle_manager_default(self, program_id):
         return self.env["g2p.cycle.manager.default"].create(
             {
                 "name": "Default",
                 "program_id": program_id,
-                "auto_approve_entitlements": rec.auto_approve_entitlements,
-                "cycle_duration": rec.cycle_duration,
-                "approver_group_id": rec.approver_group_id.id or None,
+                "auto_approve_entitlements": self.auto_approve_entitlements,
+                "cycle_duration": self.cycle_duration,
+                "approver_group_id": self.approver_group_id.id or None,
             }
         )
 
-    def create_g2p_program(self, rec):
+    def create_g2p_program(self):
         # Create a new journal for this program
-        journal_id = self.create_journal(rec.name, rec.currency_id.id)
+        journal_id = self.create_journal(self.name, self.currency_id.id)
 
         return self.env["g2p.program"].create(
             {
-                "name": rec.name,
+                "name": self.name,
                 "journal_id": journal_id,
-                "target_type": rec.target_type,
+                "target_type": self.target_type,
             }
         )
