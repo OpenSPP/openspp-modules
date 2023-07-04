@@ -22,11 +22,15 @@ class TestSPPCreateNewProgramWiz(TransactionCase):
                 "eligibility_kind": "tags_eligibility",
                 "area_id": cls.area_id.id,
                 "tags_id": cls.tags_id.id,
+                "entitlement_kind": "default",
+                "amount_per_cycle": 1.0,
+                "amount_per_individual_in_group": 1.0,
             }
         )
         cls.program = cls.program_create_wiz.create_g2p_program()
 
     def test_01_on_tags_area_change(self):
+        self.program_create_wiz.on_tags_area_change()
         expected_result = json.dumps(
             [("tags_ids", "=", self.tags_id.id), ("area_id", "=", self.area_id.id)]
         )
@@ -42,6 +46,6 @@ class TestSPPCreateNewProgramWiz(TransactionCase):
             self.program_create_wiz._check_required_fields()
 
     def test_03_get_eligibility_manager(self):
-        res = self.program_create_wiz._get_eligibility_manager(self.program)
+        res = self.program_create_wiz._get_eligibility_manager(self.program.id)
 
         self.assertIn("eligibility_managers", res)
