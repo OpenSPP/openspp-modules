@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <function model="ir.model.fields" name="create_daily_recompute_cron" />
+
+</odoo>
