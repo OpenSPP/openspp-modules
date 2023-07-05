@@ -2,7 +2,7 @@
 
 import logging
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 # from odoo.exceptions import ValidationError
@@ -18,6 +18,109 @@ class SPPCreateNewProgramWiz(models.TransientModel):
         selection_add=[("sql_eligibility", "SQL-base Eligibility")]
     )
     sql_query = fields.Text(string="SQL Query")
+    sql_query_valid = fields.Selection(
+        [
+            ("new", "New"),
+            ("valid", "Valid"),
+            ("invalid", "Invalid"),
+            ("recheck", "Needs Re-checking"),
+        ],
+        string="SQL Query Status",
+        default="new",
+    )
+    sql_record_count = fields.Integer("Record Count", default=0)
+    sql_query_valid_message = fields.Text("Query Validation Message")
+
+    @api.onchange("sql_query")
+    def _sql_query_onchange(self):
+        """
+        Changing the SQL Query should require the re-checking of the user defined query.
+        Set the sql_query_valid field to 'recheck' and the sql_record_count to 0.
+        :return:
+        """
+        for rec in self:
+            rec.update(
+                {
+                    "sql_query_valid": "recheck",
+                    "sql_record_count": 0,
+                    "sql_query_valid_message": None,
+                }
+            )
+
+    def _generate_sql_query(self):
+        """
+        Generate the SQL Query based on the user defined query.
+        The SQL WHERE clause will be added to filter active, enabled, and either group or individual registrants.
+        The user defined query will be added in the final where clause as a sub-query.
+        :return: string sql_query
+        """
+        sql = self.sql_query
+        # Create a query to add the disabled and is_group fields in the where clause
+        where_clause = "active AND disabled IS NULL"
+        if self.target_type == "group":
+            where_clause += " AND is_group"
+        elif self.target_type == "individual":
+            where_clause += " AND NOT is_group"
+
+        sql_query = """
+            WITH tbl AS (
+                %s
+            )
+            SELECT id FROM res_partner
+            WHERE
+            %s
+            AND id IN (
+                SELECT id FROM tbl
+            )
+        """ % (
+            sql,
+            where_clause,
+        )
+        _logger.info("DB Query: %s" % sql_query)
+
+        return sql_query
+
+    def test_sql_query(self):
+        """
+        Check if the SQL Query is valid.
+        If valid, it must return the res_partner id field and must contain at least 1 record.
+        :return:
+        """
+        for rec in self:
+            sql_query = rec._generate_sql_query()
+            record_count = 0
+            try:
+                self._cr.execute(sql_query)  # pylint: disable=sql-injection
+            except Exception as e:
+                _logger.info("Database Query Error: %s" % e)
+                sql_query_valid = "invalid"
+                sql_query_valid_message = _("Database Query Error: %s") % e
+                self._cr.rollback()
+            else:
+                beneficiaries = self._cr.dictfetchall()
+                # Convert List Dict to List
+                if beneficiaries:
+                    if not beneficiaries[0].get("id"):
+                        sql_query_valid = "invalid"
+                        sql_query_valid_message = _(
+                            "The SQL Query must return the record ID field."
+                        )
+                    else:
+                        record_count = len(beneficiaries)
+                        sql_query_valid = "valid"
+                        sql_query_valid_message = None
+                else:
+                    sql_query_valid = "invalid"
+                    sql_query_valid_message = _("The SQL Query returned no record.")
+            rec.update(
+                {
+                    "sql_query_valid": sql_query_valid,
+                    "sql_query_valid_message": sql_query_valid_message,
+                    "sql_record_count": record_count,
+                    "state": "step1",
+                }
+            )
+            return self._reopen_self()
 
     def _check_required_fields(self):
         res = super()._check_required_fields()
@@ -26,24 +129,11 @@ class SPPCreateNewProgramWiz(models.TransientModel):
                 raise UserError(
                     _("A SQL Query is needed for this eligibility criteria type.")
                 )
+            elif not self.sql_query_valid:
+                raise UserError(_("The SQL Query must be validated first."))
+            elif not self.sql_record_count:
+                raise UserError(_("The SQL Query must return 1 or more record."))
 
-        if self.entitlement_kind == "basket_entitlement":
-            if not self.entitlement_basket_id:
-                raise UserError(
-                    _(
-                        "The Food Basket in Cycle Manager is required in the Basket entitlement manager."
-                    )
-                )
-            if not self.basket_product_ids:
-                raise UserError(
-                    _("Items are required in the Basket entitlement manager.")
-                )
-            if self.manage_inventory and not self.warehouse_id:
-                raise UserError(
-                    _(
-                        "For inventory management, the warehouse is required in the basket entitlement manager."
-                    )
-                )
         return res
 
     def _get_eligibility_manager(self, program_id):
@@ -56,6 +146,9 @@ class SPPCreateNewProgramWiz(models.TransientModel):
                     "name": "SQL Query",
                     "program_id": program_id,
                     "sql_query": self.sql_query,
+                    "sql_query_valid": self.sql_query_valid,
+                    "sql_query_valid_message": self.sql_query_valid_message,
+                    "sql_record_count": self.sql_record_count,
                 }
             )
             # Add a new record to eligibility manager parent model

@@ -12,6 +12,20 @@
                     attrs="{'invisible':[('eligibility_kind','!=', 'sql_eligibility')]}"
                 >
                     <field name="sql_query" colspan="4" />
+                    <label for="sql_query_valid" />
+                    <div colspan="3">
+                        <field name="sql_query_valid" readonly="1" force_save="1" class="oe_inline" />
+                        <button
+                            name="test_sql_query"
+                            type="object"
+                            icon="fa-check-square-o"
+                            class="btn-success"
+                            style="margin-left: 10px;"
+                            string="Validate Query"
+                        />
+                    </div>
+                    <field name="sql_record_count" readonly="1" force_save="1" colspan="4" />
+                    <field name="sql_query_valid_message" colspan="4" readonly="1" force_save="1" />
                 </group>
             </xpath>
         </field>
