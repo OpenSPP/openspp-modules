@@ -12,6 +12,7 @@
     "depends": ["base_setup", "queue_job"],
     "data": [
         "data/ir_cron_data.xml",
+        "security/ir.model.access.csv",
         "views/ir_model_fields_views.xml",
         "views/res_config_settings_views.xml",
     ],
