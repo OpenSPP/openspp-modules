@@ -9,7 +9,7 @@
             <xpath expr="//div[hasclass('oe_title')]" position="inside">
                 <div id="registrant_id" groups="base.group_no_one">
                     <label for="registrant_id" />
-                    <field name="registrant_id" />
+                    <field name="registrant_id" readonly="1" />
                 </div>
             </xpath>
         </field>
@@ -23,7 +23,7 @@
             <xpath expr="//div[hasclass('oe_title')]" position="inside">
                 <div id="registrant_id" groups="base.group_no_one">
                     <label for="registrant_id" />
-                    <field name="registrant_id" />
+                    <field name="registrant_id" readonly="1" />
                 </div>
             </xpath>
         </field>

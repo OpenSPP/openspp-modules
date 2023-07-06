@@ -1,7 +1,9 @@
 import random
+import re
 import string
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class Registrant(models.Model):
@@ -11,7 +13,7 @@ class Registrant(models.Model):
         string="Registrant ID",
         compute="_compute_registrant_id",
         store=True,
-        readonly=True,  # Never ever change this to false
+        readonly=False,
         index=True,
     )
 
@@ -22,6 +24,26 @@ class Registrant(models.Model):
             "registrant_id is an unique identifier!",
         )
     ]
+
+    @api.constrains("registrant_id")
+    def _check_registrant_id(self):
+        match_pattern = r"^(IND|GRP)_[0-9a-zA-Z]{8}$"
+        for rec in self:
+            if not rec.is_registrant:
+                continue
+            if not re.match(match_pattern, rec.registrant_id):
+                raise ValidationError(
+                    _("Registrant ID is not following correct format!")
+                )
+            if any(
+                [
+                    char in rec.registrant_id.split("_")[-1]
+                    for char in ("0", "O", "1", "I")
+                ]
+            ):
+                raise ValidationError(
+                    _("Registrant ID is not following correct format!")
+                )
 
     @api.depends("is_registrant", "is_group")
     def _compute_registrant_id(self):

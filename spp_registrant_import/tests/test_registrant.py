@@ -1,5 +1,6 @@
 from psycopg2.errors import UniqueViolation
 
+from odoo.exceptions import ValidationError
 from odoo.tests import TransactionCase
 from odoo.tools import mute_logger
 
@@ -80,3 +81,17 @@ class TestRegistrant(TransactionCase):
                 }
             )
             self.env.cr.commit()
+
+    @mute_logger("py.warnings")
+    def test_05_check_registrant_id(self):
+        with self.assertRaisesRegex(
+            ValidationError, "^.*not following correct format.{1}$"
+        ):
+            # 7 characters registrant_id
+            self._test_household.write({"registrant_id": "GRP_AaAaAa2"})
+        with self.assertRaisesRegex(
+            ValidationError, "^.*not following correct format.{1}$"
+        ):
+            # '1' in registrant_id
+            self._test_individuals[0].write({"registrant_id": "IND_AaAaAa21"})
+        self._partner.write({"registrant_id": "IND_AaAaAa21"})
