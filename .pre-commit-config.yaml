@@ -38,12 +38,12 @@ repos:
       # update the NOT INSTALLABLE ADDONS section above
       - id: oca-update-pre-commit-excluded-addons
       - id: oca-fix-manifest-website
-        args: ["https://github.com/openspp/openspp-registry"]
+        args: ["https://github.com/openspp/openspp-base"]
       - id: oca-gen-addon-readme
         args:
           - --addons-dir=.
           - --org-name=openspp
-          - --repo-name=openspp-registry
+          - --repo-name=openspp-base
           - --branch=15.0
         stages: [manual]
       - id: oca-gen-addons-table
