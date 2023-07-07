@@ -29,12 +29,21 @@
         "views/managers/eligibility_manager_view.xml",
         "wizard/inkind_entitlement_report_wiz.xml",
         "wizard/create_program_wizard.xml",
+        "report/program_approval_receipt.xml",
+        "report/report_format.xml",
     ],
     "assets": {
         "web.assets_backend": [
             "spp_programs/static/src/js/hide_button.js",
             "spp_programs/static/src/js/domain_field.js",
+            # "spp_programs/static/src/scss/spp_programs.scss",
         ],
+        # "web.report_assets_common": [
+        #     "spp_programs/static/src/scss/spp_programs.scss",
+        # ],
+        # "web.assets_qweb": [
+        #     "spp_programs/static/src/scss/spp_programs.scss",
+        # ],
     },
     "demo": [],
     "images": [],

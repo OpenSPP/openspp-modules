@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="print_program_approval_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="header">
+                    <div style="border-style: groove;">
+                        <div class="row" style="border-style: groove;">
+                            <div name="left-upper-side" class="col-5" style="border-style: groove;">
+                                <img
+                                    t-if="o.company_id.logo"
+                                    t-att-src="image_data_uri(o.company_id.logo)"
+                                    style="max-height: 45px;"
+                                    alt="Logo"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page">
+                    <style>
+                        .table-report {
+                            width: 100%;
+                            margin-bottom: 1rem;
+                            color: #212529;
+                            border-collapse: collapse !important;
+                        }
+                        .table-report th,
+                        .table-report td {
+                            padding: 0.75rem;
+                            vertical-align: top;
+                            border-top: 1px solid #dee2e6;
+                            background-color: #fff !important;
+                        }
+                        .table-report thead th {
+                            vertical-align: bottom;
+                            border-bottom: 2px solid #dee2e6;
+                        }
+                        .table-report tbody + tbody {
+                            border-top: 2px solid #dee2e6;
+                        }
+                        .table-report-sm th,
+                        .table-report-sm td {
+                            padding: 0.3rem;
+                        }
+                        .text-left {
+                            text-align: left !important;
+                        }
+                        .text-right {
+                            text-align: right !important;
+                        }
+                        .text-center {
+                            text-align: center !important;
+                        }
+                        .container {
+                            padding-right: 15px;
+                            padding-left: 15px;
+                            margin-right: auto;
+                            margin-left: auto;
+                        }
+                        .col-sm-6 {
+                            float: left;
+                            width: 50%;
+                        }
+                        .no-margin-bottom {
+                            margin-bottom: 0px;
+                        }
+                        .no-margin-top {
+                            margin-top: 0px;
+                        }
+                        .margin-top {
+                            margin-top: 7em;
+                        }
+                    </style>
+                    <div class="container">
+                        <h2>
+                            <span>Program: </span>
+                            <span t-if="o.name" t-field="o.name" />
+                        </h2>
+                        <div id="informations">
+                            <div class="col-sm-6" name="program_target_type">
+                                <h3 class="no-margin-bottom">Target Type: </h3>
+                                <p class="no-margin-top" t-field="o.target_type" />
+                            </div>
+                            <div class="col-sm-6" name="program_beneficiaries_count">
+                                <h3 class="no-margin-bottom">Beneficiaries:</h3>
+                                <p class="no-margin-top" t-field="o.eligible_beneficiaries_count" />
+                            </div>
+                        </div>
+
+                        <h3 class="margin-top">Cycles</h3>
+                        <table class="table-report table-report-sm" name="cycle_table">
+                            <thead class="cycle_head">
+                                <tr>
+                                    <th name="th_name" class="text-left"><span>Cycle Name</span></th>
+                                    <th name="th_state" class="text-left"><span>State</span></th>
+                                </tr>
+                            </thead>
+                            <tbody class="cycle_tbody">
+                                <t t-set="cycles" t-value="o.cycle_ids" />
+                                <t t-foreach="cycles" t-as="cycle">
+                                    <td class="text-left"><span t-field="cycle.name" /></td>
+                                    <td class="text-left"><span t-field="cycle.state" /></td>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr />
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
