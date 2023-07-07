@@ -14,6 +14,7 @@
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_registry_group",
+        "spp_import_match",
     ],
     "data": [
         "views/res_partner_views.xml",
@@ -21,4 +22,5 @@
     "application": False,
     "installable": True,
     "auto_install": False,
+    "post_init_hook": "post_init_hook",
 }
