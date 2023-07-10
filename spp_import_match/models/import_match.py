@@ -1,6 +1,10 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models, tools
+import logging
+from odoo import _, api, fields, models, tools
+from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class SPPImportMatch(models.Model):
@@ -27,6 +31,7 @@ class SPPImportMatch(models.Model):
         required=True,
         help="Fields to Match in Importing",
     )
+
 
     @api.onchange("model_id")
     def _onchange_model_id(self):
@@ -123,4 +128,22 @@ class SPPImportMatchFields(models.Model):
             if rec.sub_field_id:
                 name = rec.field_id.name + "/" + rec.sub_field_id.name
             rec.name = name
+
+    @api.onchange("field_id")
+    def _onchange_field_id(self):
+        for rec in self:
+            field_id = rec.field_id.id
+            fields_list = []
+            for field in rec.match_id.field_ids:
+                new_id_str = str(field.id)
+                if not new_id_str.find("NewId_'virtual"):
+                    fields_list.append(field.field_id.id)
+
+            duplicate_counter = 0
+            for duplicate_field in fields_list:
+                if duplicate_field == field_id:
+                    duplicate_counter += 1
+
+            if duplicate_counter > 1:
+                raise ValidationError(_("Field '%s', already exists!") % rec.field_id.field_description)
 
