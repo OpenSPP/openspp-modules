@@ -28,7 +28,10 @@
         "spp_programs",
     ],
     "external_dependencies": {},
-    "data": [],
+    "data": [
+        "data/top_up_card.xml",
+        "views/registrant_view.xml",
+    ],
     "assets": {},
     "demo": [],
     "images": [],

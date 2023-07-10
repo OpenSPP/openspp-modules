@@ -1,0 +1,5 @@
+<odoo noupdate="1">
+    <record id="id_top_up_card" model="g2p.id.type">
+        <field name="name">Top-up Card</field>
+    </record>
+</odoo>
