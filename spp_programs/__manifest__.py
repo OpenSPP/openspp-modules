@@ -11,6 +11,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "base",
+        "web",
         "g2p_registry_base",
         "g2p_programs",
         "spp_area",
