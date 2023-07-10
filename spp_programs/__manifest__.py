@@ -36,14 +36,7 @@
         "web.assets_backend": [
             "spp_programs/static/src/js/hide_button.js",
             "spp_programs/static/src/js/domain_field.js",
-            # "spp_programs/static/src/scss/spp_programs.scss",
         ],
-        # "web.report_assets_common": [
-        #     "spp_programs/static/src/scss/spp_programs.scss",
-        # ],
-        # "web.assets_qweb": [
-        #     "spp_programs/static/src/scss/spp_programs.scss",
-        # ],
     },
     "demo": [],
     "images": [],
