@@ -5,7 +5,6 @@
         <field name="name">Program Id Sequence</field>
         <field name="code">program.id.sequence</field>
         <field name="prefix">PROG_%(year)s_</field>
-        <field name="implementation">no_gap</field>
         <field name="padding">8</field>
         <field name="use_date_range" eval="True" />
         <field eval="1" name="number_next" />
