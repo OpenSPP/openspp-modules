@@ -27,23 +27,22 @@ class Registrant(models.Model):
 
     @api.constrains("registrant_id")
     def _check_registrant_id(self):
-        match_pattern = r"^(IND|GRP)_[0-9a-zA-Z]{8}$"
+        match_pattern = r"^(IND|GRP)_[0-9A-Z]{8}$"
+        not_correct_format = _("Registrant ID is not following correct format!")
         for rec in self:
             if not rec.is_registrant:
                 continue
             if not re.match(match_pattern, rec.registrant_id):
-                raise ValidationError(
-                    _("Registrant ID is not following correct format!")
-                )
+                raise ValidationError(not_correct_format)
+            if rec.is_group and rec.registrant_id.startswith("IND_"):
+                raise ValidationError(not_correct_format)
             if any(
                 [
                     char in rec.registrant_id.split("_")[-1]
                     for char in ("0", "O", "1", "I")
                 ]
             ):
-                raise ValidationError(
-                    _("Registrant ID is not following correct format!")
-                )
+                raise ValidationError(not_correct_format)
 
     @api.depends("is_registrant", "is_group")
     def _compute_registrant_id(self):
