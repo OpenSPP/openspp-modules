@@ -14,6 +14,7 @@ class SPPImportMatch(models.Model):
 
     name = fields.Char(compute="_compute_name", store=True, index=True)
     sequence = fields.Integer(index=True)
+    overwrite_match = fields.Boolean(Default=False)
     model_id = fields.Many2one(
         "ir.model",
         "Model",
@@ -32,6 +33,13 @@ class SPPImportMatch(models.Model):
         help="Fields to Match in Importing",
     )
 
+    _sql_constraints = [
+        (
+            "model_id_unique",
+            "unique (model_id)",
+            "Model must be unique",
+        ),
+    ]
 
     @api.onchange("model_id")
     def _onchange_model_id(self):
@@ -87,7 +95,9 @@ class SPPImportMatch(models.Model):
         available = self.search([("model_name", "=", model_name)])
         field_to_match = []
         for record in available:
-            field_to_match.append(record.field_ids.mapped("name"))
+            for field in record.field_ids:
+                if not field.sub_field_id:
+                    field_to_match.append(field.name)
             for f in record.field_ids:
                 if f.name in fields or f.field_id.name in fields:
                     result |= record
