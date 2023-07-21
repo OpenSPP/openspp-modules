@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="0">
+
+    <record id="service_point_path" model="spp_api.path">
+        <field name="name">Service Points</field>
+        <field name="model_id" ref="model_spp_service_point" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">GET Service Points</field>
+        <field name="method">get</field>
+        <field name="field_ids" eval="[(
+            6, 0, [
+                ref('spp_service_points.field_spp_service_point__area_id'),
+                ref('spp_service_points.field_spp_service_point__country_id'),
+                ref('spp_service_points.field_spp_service_point__id'),
+                ref('spp_service_points.field_spp_service_point__is_contract_active'),
+                ref('spp_service_points.field_spp_service_point__name'),
+                ref('spp_service_points.field_spp_service_point__phone_no'),
+                ref('spp_service_points.field_spp_service_point__write_date'),
+                ref('spp_api_records.field_spp_service_point__company_id'),
+                ref('spp_api_records.field_spp_service_point__topup_service_point'),
+            ]
+        )]" />
+    </record>
+
+</odoo>
