@@ -139,7 +139,7 @@ class SPPAPIPath(models.Model):
     def copy(self, default=None):
         default = dict(default or {})
         default.update(name=_("%s (copy)") % (self.name or ""))
-        return super(ApiRestPath, self).copy(default)
+        return super().copy(default)
 
     @api.model
     def create(self, values):
