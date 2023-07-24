@@ -10,6 +10,7 @@
     "depends": [
         "spp_api",
         "spp_service_points",
+        "g2p_programs",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",
