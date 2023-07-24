@@ -1,0 +1,40 @@
+<odoo>
+
+    <record id="view_res_users_role_spp_custom_form" model="ir.ui.view">
+        <field name="name">view_res_users_role_spp_custom_form</field>
+        <field name="model">res.users.role</field>
+        <field name="inherit_id" ref="base_user_role.view_res_users_role_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='show_rule_ids']" position="after">
+                <button class="oe_stat_button" name="action_update_users" type="object" icon="fa-gears">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Update</span>
+                        <span class="o_stat_text">User Roles</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="role_type" />
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='user_id']" position="after">
+                <field
+                    name="local_area_id"
+                    options="{'no_open':True,'no_create':True,'no_edit':True}"
+                    attrs="{'readonly':[('parent.role_type','!=','local')]}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_res_users_role_spp_custom_tree" model="ir.ui.view">
+        <field name="name">view_res_users_role_spp_custom_tree</field>
+        <field name="model">res.users.role</field>
+        <field name="inherit_id" ref="base_user_role.view_res_users_role_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="role_type" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
