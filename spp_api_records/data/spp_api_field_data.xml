@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="service_point_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_post_path" />
+        <field name="field_id" ref="spp_api_records.field_spp_service_point_device__service_point_id" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="service_point_terminal_device_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_post_path" />
+        <field
+            name="field_id"
+            ref="spp_api_records.field_spp_service_point_device__service_point_terminal_device_id"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="device_model_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_post_path" />
+        <field name="field_id" ref="spp_api_records.field_spp_service_point_device__device_model" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="android_version_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_post_path" />
+        <field name="field_id" ref="spp_api_records.field_spp_service_point_device__android_version" />
+        <field name="required" eval="1" />
+    </record>
+
+</odoo>
