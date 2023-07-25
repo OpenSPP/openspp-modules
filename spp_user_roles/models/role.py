@@ -2,7 +2,7 @@
 
 import logging
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -13,6 +13,14 @@ class ResUsersRoleCustomSPP(models.Model):
     role_type = fields.Selection(
         [("local", "Local"), ("global", "Global")], default="global"
     )
+
+    @api.onchange("role_type")
+    def _onchange_role_type(self):
+        for rec in self:
+            if rec.role_type == "global":
+                rl = rec.line_ids.filtered(lambda a: not a.local_area_id)
+                if rl:
+                    rl.update({"local_area_id": None})
 
     def action_update_users(self):
         """
