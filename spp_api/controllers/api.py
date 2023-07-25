@@ -102,7 +102,7 @@ class ApiV1Controller(http.Controller):
         path = kw.get("path")
         del kw["path"]
 
-        data = path._post_treatment_values(kw)
+        data = path.post_treatment_values(kw)
 
         records = self.get_records(path.model, kw)
         obj = records.create(data)
