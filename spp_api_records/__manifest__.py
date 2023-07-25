@@ -10,6 +10,7 @@
     "depends": [
         "spp_api",
         "spp_service_points",
+        "product",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",
