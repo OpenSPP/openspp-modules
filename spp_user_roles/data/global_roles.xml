@@ -1,8 +1,9 @@
-<odoo noupdate="0">
+<odoo noupdate="1">
 
     <!-- Admin -->
     <record id="global_role_admin" model="res.users.role">
         <field name="name">System Admin</field>
+        <field name="role_type">global</field>
         <field
             name="comment"
         >This role has universal access and permissions to all system data and features.</field>
@@ -22,6 +23,7 @@
     <!-- Finance -->
     <record id="global_role_finance" model="res.users.role">
         <field name="name">Global Finance</field>
+        <field name="role_type">global</field>
         <field name="comment">This role has access to financial data across all areas.</field>
         <field
             name="implied_ids"
@@ -35,6 +37,7 @@
     <!-- Program Manager -->
     <record id="global_role_program_manager" model="res.users.role">
         <field name="name">Global Program Manager</field>
+        <field name="role_type">global</field>
         <field
             name="comment"
         >This role has access to all area-specific data to allow for effective program coordination and management.</field>
@@ -50,6 +53,7 @@
     <!-- Registrar -->
     <record id="global_role_registrar" model="res.users.role">
         <field name="name">Global Registrar</field>
+        <field name="role_type">global</field>
         <field
             name="comment"
         >This role is allowed to capture data related to their assigned area but doesn't have access to any other information.</field>
@@ -68,6 +72,7 @@
     <!-- Support -->
     <record id="global_role_support" model="res.users.role">
         <field name="name">Global Support</field>
+        <field name="role_type">global</field>
         <field
             name="comment"
         >This role is allowed to view and respond to support requests only from their assigned area.</field>
@@ -83,6 +88,7 @@
         <!-- Support Manager -->
     <record id="global_role_support_manager" model="res.users.role">
         <field name="name">Global Support Manager</field>
+        <field name="role_type">global</field>
         <field
             name="comment"
         >This role can supervise and manage all support requests and activities across all areas.</field>

@@ -5,7 +5,16 @@
         <field name="inherit_id" ref="base_user_role.view_res_users_form_inherit" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='role_line_ids']/tree/field[@name='role_id']" position="after">
-                <field name="local_area_id" options="{'no_open':True,'no_create':True,'no_edit':True}" />
+                <field name="role_type" invisible="1" />
+                <field
+                    name="local_area_id"
+                    options="{'no_open':True,'no_create':True,'no_edit':True}"
+                    attrs="{'readonly':[('role_type','!=','local')]}"
+                />
+            </xpath>
+            <xpath expr="//field[@name='role_line_ids']/tree/field[@name='role_id']" position="attributes">
+                <attribute name="options">{'no_open':True,'no_create':True,'no_edit':True}</attribute>
+                <attribute name="attrs">{'readonly':[('local_area_id','!=',False)]}</attribute>
             </xpath>
         </field>
     </record>

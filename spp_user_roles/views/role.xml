@@ -23,6 +23,9 @@
                     attrs="{'readonly':[('parent.role_type','!=','local')]}"
                 />
             </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='user_id']" position="attributes">
+                <attribute name="options">{'no_open':True,'no_create':True,'no_edit':True}</attribute>
+            </xpath>
         </field>
     </record>
 

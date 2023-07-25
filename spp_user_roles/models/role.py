@@ -27,4 +27,6 @@ class ResUsersRoleCustomSPP(models.Model):
 class ResUsersRoleLineCustomSPP(models.Model):
     _inherit = "res.users.role.line"
 
+    role_type = fields.Selection(related="role_id.role_type")
+
     local_area_id = fields.Many2one("spp.area", string="Center Area")

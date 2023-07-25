@@ -1,8 +1,9 @@
-<odoo noupdate="0">
+<odoo noupdate="1">
 
     <!-- Registrar -->
     <record id="local_role_registrar" model="res.users.role">
         <field name="name">Local Registrar</field>
+        <field name="role_type">local</field>
         <field
             name="comment"
         >This role is allowed to capture data related to their assigned area but doesn't have access to any other information.</field>
@@ -21,6 +22,7 @@
     <!-- Support -->
     <record id="local_role_support" model="res.users.role">
         <field name="name">Local Support</field>
+        <field name="role_type">local</field>
         <field
             name="comment"
         >This role is allowed to view and respond to support requests only from their assigned area.</field>
