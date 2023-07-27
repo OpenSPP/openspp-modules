@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_service_points_form_inherit_spp_api_records" model="ir.ui.view">
+        <field name="name">spp.service.point.view.form.inherit</field>
+        <field name="model">spp.service.point</field>
+        <field name="inherit_id" ref="spp_service_points.view_service_points_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_contract_active']" position="after">
+                <field name="topup_service_point" widget="boolean_toggle" />
+                <field name="company_id" options="{'no_create':true,'no_edit':true,'no_open':true}" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="service_points_filter_inherit_spp_api_records" model="ir.ui.view">
+        <field name="name">spp.service.point.view.search.inherit</field>
+        <field name="model">spp.service.point</field>
+        <field name="inherit_id" ref="spp_service_points.service_points_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//separator" position="after">
+                <filter
+                    name="fltr_topup"
+                    string="Allow Topup"
+                    domain="[('topup_service_point', '=', True)]"
+                />
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter name="grp_company" string="Company" context="{'group_by': 'company_id'}" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
