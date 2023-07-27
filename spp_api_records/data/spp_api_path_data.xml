@@ -29,15 +29,17 @@
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">GET Currency</field>
         <field name="method">get</field>
-        <field name="field_ids" eval="[(
+        <field
+            name="field_ids"
+            eval="[(
             6, 0, [
                 ref('base.field_res_currency__name'),
                 ref('base.field_res_currency__full_name'),
-                ref('base.field_res_currency__symbol'),
-                ref('base.field_res_currency__rate'),
-                ref('base.field_res_currency__active'),
+                ref('base.field_res_currency__decimal_places'),
+                ref('base.field_res_currency__write_date'),
             ]
-        )]" />
+        )]"
+        />
     </record>
 
 </odoo>
