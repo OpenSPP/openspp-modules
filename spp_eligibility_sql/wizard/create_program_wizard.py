@@ -110,8 +110,10 @@ class SPPCreateNewProgramWiz(models.TransientModel):
                         sql_query_valid = "valid"
                         sql_query_valid_message = None
                 else:
-                    sql_query_valid = "invalid"
-                    sql_query_valid_message = _("The SQL Query returned no record.")
+                    sql_query_valid = "valid"
+                    sql_query_valid_message = _(
+                        "The SQL Query is valid but it did not return any record."
+                    )
             rec.update(
                 {
                     "sql_query_valid": sql_query_valid,
