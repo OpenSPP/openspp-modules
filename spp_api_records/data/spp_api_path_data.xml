@@ -29,7 +29,9 @@
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">GET Cycle</field>
         <field name="method">get</field>
-        <field name="field_ids" eval="[(
+        <field
+            name="field_ids"
+            eval="[(
             6, 0, [
                 ref('g2p_programs.field_g2p_cycle__id'),
                 ref('g2p_programs.field_g2p_cycle__name'),
@@ -37,8 +39,10 @@
                 ref('g2p_programs.field_g2p_cycle__start_date'),
                 ref('g2p_programs.field_g2p_cycle__end_date'),
                 ref('g2p_programs.field_g2p_cycle__state'),
+                ref('g2p_programs.field_g2p_cycle__write_date'),
             ]
-        )]" />
+        )]"
+        />
     </record>
 
 </odoo>
