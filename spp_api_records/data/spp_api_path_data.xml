@@ -23,4 +23,31 @@
         />
     </record>
 
+    <record id="vouchers_path" model="spp_api.path">
+        <field name="name">Vouchers</field>
+        <field name="model_id" ref="g2p_programs.model_g2p_entitlement" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">GET Vouchers</field>
+        <field name="method">get</field>
+        <field
+            name="field_ids"
+            eval="[(
+            6, 0, [
+                ref('g2p_programs.field_g2p_entitlement__id'),
+                ref('g2p_programs.field_g2p_entitlement__cycle_id'),
+                ref('spp_api_records.field_g2p_entitlement__cycle_number'),
+                ref('g2p_programs.field_g2p_entitlement__partner_id'),
+                ref('spp_api_records.field_g2p_entitlement__partner_type'),
+                ref('spp_api_records.field_g2p_entitlement__program_id'),
+                ref('spp_api_records.field_g2p_entitlement__type'),
+                ref('g2p_programs.field_g2p_entitlement__valid_from'),
+                ref('g2p_programs.field_g2p_entitlement__valid_until'),
+                ref('g2p_programs.field_g2p_entitlement__initial_amount'),
+                ref('g2p_programs.field_g2p_entitlement__currency_id'),
+                ref('g2p_programs.field_g2p_entitlement__write_date'),
+            ]
+        )]"
+        />
+    </record>
+
 </odoo>
