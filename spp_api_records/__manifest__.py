@@ -10,10 +10,12 @@
     "depends": [
         "spp_api",
         "spp_service_points",
+        "spp_ent_trans",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",
         "data/spp_api_path_data.xml",
+        "data/spp_api_field_data.xml",
     ],
     "application": False,
     "auto_install": False,
