@@ -1,3 +1,4 @@
+import logging
 from copy import deepcopy
 
 from odoo import _, api, fields, models
@@ -24,6 +25,8 @@ SWAGGER_FIELD_MAPPING = {
 }
 
 MAX_LIMIT = 500
+
+_logger = logging.getLogger(__name__)
 
 
 def convert_field_type_to_swagger(field_type):
@@ -552,6 +555,34 @@ class SPPAPIPath(models.Model):
             self._context_parameter(),
         ]
 
+    def get_domain(self, kwargs):
+        domain = kwargs.get("domain", [])
+
+        # populate domain
+        if "from_date" in kwargs:
+            domain.append(("create_date", ">=", kwargs["from_date"]))
+            del kwargs["from_date"]
+
+        if "last_modified_date" in kwargs:
+            domain.append(("write_date", ">=", kwargs["last_modified_date"]))
+            del kwargs["last_modified_date"]
+
+        # Get all fields of model
+        model_fields = self.env[self.model].fields_get().keys()
+
+        kw_copy = kwargs.copy()
+        for field in kw_copy:
+            if field in model_fields:
+                domain.append((field, "=", kwargs[field]))
+                del kwargs[field]
+
+        del kw_copy
+
+        if self.filter_domain:
+            domain += self.eval_domain(self.filter_domain)
+
+        return domain
+
     def search_treatment_kwargs(self, kwargs):
         """
         Processes the search kwargs to apply limits, domains, and fields.
@@ -562,14 +593,20 @@ class SPPAPIPath(models.Model):
         :rtype: dict
         """
         self.ensure_one()
+
         # Limit
         limit = kwargs.get("limit", 0)
         max_limit = self.limit if self.limit else MAX_LIMIT
         kwargs["limit"] = limit if (limit and limit <= max_limit) else max_limit
-        domain = kwargs.get("domain", [])
-        if self.filter_domain:
-            domain += self.eval_domain(self.filter_domain)
-        kwargs["domain"] = domain
+
+        # Offset
+        kwargs["offset"] = kwargs.get("start_from", 0)
+        if "start_from" in kwargs:
+            del kwargs["start_from"]
+
+        # Domain
+        kwargs["domain"] = self.get_domain(kwargs)
+
         # Fields
         self._treatment_fields(kwargs)
         return kwargs
@@ -643,7 +680,7 @@ class SPPAPIPath(models.Model):
         # Remove fields unspecified
         new_values = post_values.copy()
         api_fields = self.api_field_ids.mapped("field_name")
-        for field, value in post_values.items():
+        for field in post_values.keys():
             if field not in api_fields:
                 new_values.pop(field)
         # Add fields with default_value
@@ -749,9 +786,9 @@ class SPPAPIPath(models.Model):
                     try:
                         new_value = python_type(value)
                         new_values[function_parameter.name] = new_value
-                    except Exception:
+                    except Exception as e:
                         # Delete value if it's not possible to convert
-                        pass
+                        _logger.error(e)
                 else:
                     new_values[function_parameter.name] = value
             # Add fields with default_value

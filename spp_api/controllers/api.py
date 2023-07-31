@@ -3,7 +3,6 @@
 # Copyright 2018 Rafis Bikbov <https://it-projects.info/team/bikbov>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 # pylint: disable=redefined-builtin
-import json
 import logging
 
 import werkzeug
@@ -77,6 +76,7 @@ class ApiV1Controller(http.Controller):
         if "context" in kwargs:
             records = records.with_context(**kwargs.get("context"))
             del kwargs["context"]
+
         return records
 
     def get_record(self, model, id, path, kwargs):
@@ -113,14 +113,19 @@ class ApiV1Controller(http.Controller):
         _api_endpoint_model, methods=["GET"], type="http", auth="none", csrf=False
     )
     def read_multi__GET(self, namespace, version, model, **kw):
+        kw.get("request_id", None)
+        if "request_id" in kw:
+            del kw["request_id"]
+
         path = kw.get("path")
         del kw["path"]
-        path.search_treatment_kwargs(kw)
-
+        kw = path.search_treatment_kwargs(kw)
         records = self.get_records(path.model, kw)
+        records = records.search_read(**kw)
+
         response_data = {
-            "results": records.search_read(**kw),
-            "total": records.search_count(kw.get("domain", [])),
+            "results": records,
+            "total": len(records),
             "offset": kw.get("offset", 0),
             "limit": kw.get("limit", 0),
             "version": version,
@@ -145,10 +150,11 @@ class ApiV1Controller(http.Controller):
         #         response=error_response(*CODE__obj_not_found)
         #     )
         obj = self.get_record(path.model, id, path, kw)
-        result = obj.read(**kw)
+        result = obj.read(fields=kw["fields"])
+
         response_data = result and result[0] or {}
         _logger.info("response_data: %s", response_data)
-        return json.dumps(response_data)
+        return successful_response(200, response_data)
 
     # UpdateOne
     @pinguin.route(
