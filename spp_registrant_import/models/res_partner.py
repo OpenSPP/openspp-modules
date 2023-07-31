@@ -9,6 +9,11 @@ from odoo.exceptions import ValidationError
 class Registrant(models.Model):
     _inherit = "res.partner"
 
+    name = fields.Char(
+        compute="_compute_name",
+        inverse="_inverse_name",
+        store=True,
+    )
     registrant_id = fields.Char(
         string="Registrant ID",
         compute="_compute_registrant_id",
@@ -35,6 +40,8 @@ class Registrant(models.Model):
             if not re.match(match_pattern, rec.registrant_id):
                 raise ValidationError(not_correct_format)
             if rec.is_group and rec.registrant_id.startswith("IND_"):
+                raise ValidationError(not_correct_format)
+            if not rec.is_group and rec.registrant_id.startswith("GRP_"):
                 raise ValidationError(not_correct_format)
             if any(
                 [
@@ -67,3 +74,42 @@ class Registrant(models.Model):
         unique_id = "".join(random.choice(allowed_characters) for _ in range(length))
 
         return unique_id
+
+    @api.onchange("is_group", "family_name", "given_name", "addl_name")
+    def name_change(self):
+        pass
+
+    @api.depends(
+        "is_registrant",
+        "is_group",
+        "family_name",
+        "given_name",
+        "addl_name",
+    )
+    def _compute_name(self):
+        for rec in self:
+            if not rec.is_registrant or rec.is_group:
+                continue
+            name = []
+            if rec.family_name:
+                name.append(rec.family_name)
+            if rec.given_name:
+                name.append(rec.given_name)
+            if rec.addl_name:
+                name.append(self.addl_name)
+            rec.name = ", ".join(name).upper()
+
+    def _inverse_name(self):
+        for rec in self:
+            if not rec.is_registrant or rec.is_group:
+                continue
+            name = list(map(lambda i: i.capitalize(), self.name.split(", ")))
+            if len(name) == 1:
+                rec.given_name = name[0]
+            elif len(name) == 2:
+                rec.family_name = name[0]
+                rec.given_name = name[1]
+            else:
+                rec.family_name = name[0]
+                rec.given_name = name[1]
+                rec.addl_name = name[2]
