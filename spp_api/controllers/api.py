@@ -110,9 +110,6 @@ class ApiV1Controller(http.Controller):
 
         data = path.post_treatment_values(kw)
 
-        records = self.get_records(path.model, kw)
-        obj = records.create(data)
-
         # Request Log
         self.create_api_log(
             path,
@@ -121,10 +118,19 @@ class ApiV1Controller(http.Controller):
             request_id=request_id,
         )
 
+        records = self.get_records(path.model, kw)
+        obj = records.create(data)
         # Response Log
-        self.create_api_log(path, "response", response_data=str(obj.id))
+        response_api_log = self.create_api_log(
+            path, "response", response_data=str(obj.id)
+        )
 
-        return successful_response(201, obj.id)
+        response = {
+            "reply_id": response_api_log.reply_id,
+            "time_stamp": response_api_log.create_date,
+        }
+
+        return successful_response(201, response)
 
     # ReadMulti (optional: filters, offset, limit, order, include_fields, exclude_fields):
     @pinguin.route(
@@ -140,6 +146,14 @@ class ApiV1Controller(http.Controller):
         if "request_id" in kw:
             del kw["request_id"]
 
+        # Request Log
+        self.create_api_log(
+            path,
+            "request",
+            request_parameter=json.dumps(kw_copy, default=str),
+            request_id=request_id,
+        )
+
         kw = path.search_treatment_kwargs(kw)
         records = self.get_records(path.model, kw)
         records = records.search_read(**kw)
@@ -151,14 +165,6 @@ class ApiV1Controller(http.Controller):
             "limit": kw.get("limit", 0),
             "version": version,
         }
-
-        # Request Log
-        self.create_api_log(
-            path,
-            "request",
-            request_parameter=json.dumps(kw_copy, default=str),
-            request_id=request_id,
-        )
 
         # Response Log
         self.create_api_log(
@@ -181,14 +187,6 @@ class ApiV1Controller(http.Controller):
         if "request_id" in kw:
             del kw["request_id"]
 
-        path.read_treatment_kwargs(kw)
-
-        obj = self.get_record(path.model, id, path, kw)
-        result = obj.search_read(fields=kw["fields"])
-
-        response_data = result and result[0] or {}
-        _logger.info("response_data: %s", response_data)
-
         # Request Log
         self.create_api_log(
             path,
@@ -196,6 +194,14 @@ class ApiV1Controller(http.Controller):
             request_parameter=json.dumps(kw_copy, default=str),
             request_id=request_id,
         )
+
+        path.read_treatment_kwargs(kw)
+
+        obj = self.get_record(path.model, id, path, kw)
+        result = obj.search_read(fields=kw["fields"])
+
+        response_data = result and result[0] or {}
+        _logger.info("response_data: %s", response_data)
 
         # Response Log
         self.create_api_log(
@@ -217,17 +223,6 @@ class ApiV1Controller(http.Controller):
             del kw["request_id"]
 
         data = path.post_treatment_values(kw)
-        # read_domain = path.eval_domain(path.filter_domain)
-        #
-        # records = self.get_records(path.model, kw)
-        # read_domain += [('id', '=', id)]
-        # obj = records.search(read_domain, limit=1)
-        # if not obj:
-        #     raise werkzeug.exceptions.HTTPException(
-        #         response=error_response(*CODE__obj_not_found)
-        #     )
-        obj = self.get_record(path.model, id, path, kw)
-        obj.write(data)
 
         # Request Log
         self.create_api_log(
@@ -237,10 +232,21 @@ class ApiV1Controller(http.Controller):
             request_id=request_id,
         )
 
-        # Response Log
-        self.create_api_log(path, "response", response_data=str(obj.id))
+        obj = self.get_record(path.model, id, path, kw)
 
-        return successful_response(200, obj.id)
+        obj.write(data)
+
+        # Response Log
+        response_api_log = self.create_api_log(
+            path, "response", response_data=str(obj.id)
+        )
+
+        response = {
+            "reply_id": response_api_log.reply_id,
+            "time_stamp": response_api_log.create_date,
+        }
+
+        return successful_response(200, response)
 
     # UnlinkOne
     @pinguin.route(
@@ -254,14 +260,14 @@ class ApiV1Controller(http.Controller):
         if "request_id" in kw:
             del kw["request_id"]
 
+        # Request Log
+        self.create_api_log(path, "request", request_id=request_id)
+
         obj = self.get_record(path.model, id, path, kw)
         name = obj.name
         obj.unlink()
 
         response = f"{name} is successfully deleted"
-
-        # Request Log
-        self.create_api_log(path, "request", request_id=request_id)
 
         # Response Log
         self.create_api_log(path, "response", response_data=response)
@@ -290,14 +296,14 @@ class ApiV1Controller(http.Controller):
         if "request_id" in method_params:
             del method_params["request_id"]
 
+        # Request Log
+        self.create_api_log(path, "request", request_id=request_id)
+
         obj = self.get_record(path.model, id, path, method_params)
         kwargs = path.custom_treatment_values(method_params)
         data = getattr(obj, path.function)(**kwargs)
 
         obj.flush()  # to recompute fields
-
-        # Request Log
-        self.create_api_log(path, "request", request_id=request_id)
 
         # Response Log
         self.create_api_log(path, "response", response_data=data)
@@ -324,6 +330,14 @@ class ApiV1Controller(http.Controller):
         if "request_id" in method_params:
             del method_params["request_id"]
 
+        # Request Log
+        self.create_api_log(
+            path,
+            "request",
+            request_parameter=json.dumps(method_params_copy, default=str),
+            request_id=request_id,
+        )
+
         records = self.get_records(path.model, method_params)
         ids = ids and ids.split(",") or []
         ids = [int(i) for i in ids]
@@ -338,14 +352,6 @@ class ApiV1Controller(http.Controller):
 
         data = getattr(records, path.function)(**kwargs)
         records.flush()  # to recompute fields
-
-        # Request Log
-        self.create_api_log(
-            path,
-            "request",
-            request_parameter=json.dumps(method_params_copy, default=str),
-            request_id=request_id,
-        )
 
         # Response Log
         self.create_api_log(path, "response", response_data=data)
@@ -410,4 +416,4 @@ class ApiV1Controller(http.Controller):
             "response_data": kwargs.get("response_data", False),
         }
 
-        request.env["spp_api.log"].create(vals)
+        return request.env["spp_api.log"].create(vals)
