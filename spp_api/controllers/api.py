@@ -3,6 +3,8 @@
 # Copyright 2018 Rafis Bikbov <https://it-projects.info/team/bikbov>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 # pylint: disable=redefined-builtin
+import datetime
+import functools
 import json
 import logging
 import uuid
@@ -31,6 +33,63 @@ _logger = logging.getLogger(__name__)
 #################################################################
 
 API_ENDPOINT = "/api"
+
+
+def create_api_log(func):
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        # Request Log
+        path = kwargs.get("path")
+        request_id = kwargs.get("request_id", False)
+        if not request_id:
+            raise werkzeug.exceptions.HTTPException(
+                response=error_response(400, "Bad Request", "request_id is required.")
+            )
+        if (
+            request.env["spp_api.log"]
+            .search([("request_id", "=", request_id)])
+            .exists()
+        ):
+            raise werkzeug.exceptions.HTTPException(
+                response=error_response(
+                    400, "Bad Request", "request_id is already taken."
+                )
+            )
+
+        initial_val = {
+            "method": path.method,
+            "model": path.model,
+            "request": http.request.httprequest.full_path,
+        }
+
+        request_log_val = initial_val.copy()
+        request_log_val["http_type"] = "request"
+        request_log_val["request_id"] = request_id
+        if path.method in ["get", "patch"]:
+            request_log_val["request_parameter"] = kwargs
+        else:
+            request_log_val["request_data"] = kwargs
+
+        request.env["spp_api.log"].create(request_log_val)
+        del request_log_val
+
+        # Run API Function
+        response = func(self, *args, **kwargs)
+
+        # Response Log
+        json_response = json.loads(response.response[0])
+        reply_id = json_response.get("reply_id", None) or self.get_reply_id()
+        response_log_val = initial_val.copy()
+        response_log_val["http_type"] = "response"
+        response_log_val["reply_id"] = reply_id
+        response_log_val["response_data"] = response.response[0].decode("utf-8")
+
+        request.env["spp_api.log"].create(response_log_val)
+        del response_log_val
+
+        return response
+
+    return wrapper
 
 
 class ApiV1Controller(http.Controller):
@@ -70,6 +129,18 @@ class ApiV1Controller(http.Controller):
         + "/report/<any(pdf, html):converter>/<report_external_id>/<docids>"
     )
 
+    def get_reply_id(self):
+        reply_id = ""
+        while True:
+            reply_id = str(uuid.uuid4())
+            if (
+                not request.env["spp_api.log"]
+                .search([("reply_id", "=", reply_id)])
+                .exists()
+            ):
+                break
+        return reply_id
+
     def get_records(self, model, kwargs):
         user = request.env.user
         records = request.env[model].with_user(user)
@@ -100,34 +171,19 @@ class ApiV1Controller(http.Controller):
     @pinguin.route(
         _api_endpoint_model, methods=["POST"], type="http", auth="none", csrf=False
     )
+    @create_api_log
     def create_one__POST(self, namespace, version, model, **kw):
         path = kw.get("path")
         del kw["path"]
 
-        request_id = kw.get("request_id")
-        if "request_id" in kw:
-            del kw["request_id"]
-
         data = path.post_treatment_values(kw)
 
-        # Request Log
-        self.create_api_log(
-            path,
-            "request",
-            request_data=json.dumps(data, default=str),
-            request_id=request_id,
-        )
-
         records = self.get_records(path.model, kw)
-        obj = records.create(data)
-        # Response Log
-        response_api_log = self.create_api_log(
-            path, "response", response_data=str(obj.id)
-        )
+        records.create(data)
 
         response = {
-            "reply_id": response_api_log.reply_id,
-            "time_stamp": response_api_log.create_date,
+            "time_stamp": str(datetime.datetime.now()),
+            "reply_id": self.get_reply_id(),
         }
 
         return successful_response(201, response)
@@ -136,23 +192,10 @@ class ApiV1Controller(http.Controller):
     @pinguin.route(
         _api_endpoint_model, methods=["GET"], type="http", auth="none", csrf=False
     )
+    @create_api_log
     def read_multi__GET(self, namespace, version, model, **kw):
         path = kw.get("path")
         del kw["path"]
-
-        kw_copy = kw.copy()
-
-        request_id = kw.get("request_id", None)
-        if "request_id" in kw:
-            del kw["request_id"]
-
-        # Request Log
-        self.create_api_log(
-            path,
-            "request",
-            request_parameter=json.dumps(kw_copy, default=str),
-            request_id=request_id,
-        )
 
         kw = path.search_treatment_kwargs(kw)
         records = self.get_records(path.model, kw)
@@ -164,12 +207,9 @@ class ApiV1Controller(http.Controller):
             "offset": kw.get("offset", 0),
             "limit": kw.get("limit", 0),
             "version": version,
+            "time_stamp": str(datetime.datetime.now()),
+            "reply_id": self.get_reply_id(),
         }
-
-        # Response Log
-        self.create_api_log(
-            path, "response", response_data=json.dumps(response_data, default=str)
-        )
 
         return successful_response(200, response_data)
 
@@ -177,23 +217,10 @@ class ApiV1Controller(http.Controller):
     @pinguin.route(
         _api_endpoint_model_id, methods=["GET"], type="http", auth="none", csrf=False
     )
+    @create_api_log
     def read_one__GET(self, namespace, version, model, id, **kw):
         path = kw.get("path")
         del kw["path"]
-
-        kw_copy = kw.copy()
-
-        request_id = kw.get("request_id", None)
-        if "request_id" in kw:
-            del kw["request_id"]
-
-        # Request Log
-        self.create_api_log(
-            path,
-            "request",
-            request_parameter=json.dumps(kw_copy, default=str),
-            request_id=request_id,
-        )
 
         path.read_treatment_kwargs(kw)
 
@@ -201,11 +228,11 @@ class ApiV1Controller(http.Controller):
         result = obj.search_read(fields=kw["fields"])
 
         response_data = result and result[0] or {}
-        _logger.info("response_data: %s", response_data)
-
-        # Response Log
-        self.create_api_log(
-            path, "response", response_data=json.dumps(response_data, default=str)
+        response_data.update(
+            {
+                "time_stamp": str(datetime.datetime.now()),
+                "reply_id": self.get_reply_id(),
+            }
         )
 
         return successful_response(200, response_data)
@@ -214,36 +241,19 @@ class ApiV1Controller(http.Controller):
     @pinguin.route(
         _api_endpoint_model_id, methods=["PUT"], type="http", auth="none", csrf=False
     )
+    @create_api_log
     def update_one__PUT(self, namespace, version, model, id, **kw):
         path = kw.get("path")
         del kw["path"]
 
-        request_id = kw.get("request_id")
-        if "request_id" in kw:
-            del kw["request_id"]
-
         data = path.post_treatment_values(kw)
 
-        # Request Log
-        self.create_api_log(
-            path,
-            "request",
-            request_data=json.dumps(data, default=str),
-            request_id=request_id,
-        )
-
         obj = self.get_record(path.model, id, path, kw)
-
         obj.write(data)
 
-        # Response Log
-        response_api_log = self.create_api_log(
-            path, "response", response_data=str(obj.id)
-        )
-
         response = {
-            "reply_id": response_api_log.reply_id,
-            "time_stamp": response_api_log.create_date,
+            "time_stamp": str(datetime.datetime.now()),
+            "reply_id": self.get_reply_id(),
         }
 
         return successful_response(200, response)
@@ -252,27 +262,20 @@ class ApiV1Controller(http.Controller):
     @pinguin.route(
         _api_endpoint_model_id, methods=["DELETE"], type="http", auth="none", csrf=False
     )
+    @create_api_log
     def unlink_one__DELETE(self, namespace, version, model, id, **kw):
         path = kw.get("path")
         del kw["path"]
 
-        request_id = kw.get("request_id")
-        if "request_id" in kw:
-            del kw["request_id"]
-
-        # Request Log
-        self.create_api_log(path, "request", request_id=request_id)
-
         obj = self.get_record(path.model, id, path, kw)
-        name = obj.name
         obj.unlink()
 
-        response = f"{name} is successfully deleted"
+        response_data = {
+            "time_stamp": str(datetime.datetime.now()),
+            "reply_id": self.get_reply_id(),
+        }
 
-        # Response Log
-        self.create_api_log(path, "response", response_data=response)
-
-        return successful_response(pinguin.CODE__ok_no_content, response)
+        return successful_response(200, response_data)
 
     # ######################
     # # Auxiliary Methods ##
@@ -286,27 +289,18 @@ class ApiV1Controller(http.Controller):
         auth="none",
         csrf=False,
     )
+    @create_api_log
     def call_method_one__PATCH(
         self, namespace, version, model, id, method_name, **method_params
     ):
         path = method_params.get("path")
         del method_params["path"]
 
-        request_id = method_params.get("request_id")
-        if "request_id" in method_params:
-            del method_params["request_id"]
-
-        # Request Log
-        self.create_api_log(path, "request", request_id=request_id)
-
         obj = self.get_record(path.model, id, path, method_params)
         kwargs = path.custom_treatment_values(method_params)
         data = getattr(obj, path.function)(**kwargs)
 
         obj.flush()  # to recompute fields
-
-        # Response Log
-        self.create_api_log(path, "response", response_data=data)
 
         return successful_response(200, data=data)
 
@@ -318,25 +312,12 @@ class ApiV1Controller(http.Controller):
         auth="none",
         csrf=False,
     )
+    @create_api_log
     def call_method_multi__PATCH(
         self, namespace, version, model, method_name, ids=None, **method_params
     ):
         path = method_params.get("path")
         del method_params["path"]
-
-        method_params_copy = method_params.copy()
-
-        request_id = method_params.get("request_id")
-        if "request_id" in method_params:
-            del method_params["request_id"]
-
-        # Request Log
-        self.create_api_log(
-            path,
-            "request",
-            request_parameter=json.dumps(method_params_copy, default=str),
-            request_id=request_id,
-        )
 
         records = self.get_records(path.model, method_params)
         ids = ids and ids.split(",") or []
@@ -353,9 +334,6 @@ class ApiV1Controller(http.Controller):
         data = getattr(records, path.function)(**kwargs)
         records.flush()  # to recompute fields
 
-        # Response Log
-        self.create_api_log(path, "response", response_data=data)
-
         return successful_response(200, data=data)
 
     # Get Report
@@ -370,50 +348,3 @@ class ApiV1Controller(http.Controller):
             converter=converter,
             success_code=pinguin.CODE__success,
         )
-
-    def create_api_log(self, path, http_type, **kwargs):
-        reply_id = ""
-        request_id = kwargs.get("request_id", False)
-
-        if http_type == "response":
-            # To make sure reply_id is unique
-            while True:
-                reply_id = str(uuid.uuid4())
-                if (
-                    not request.env["spp_api.log"]
-                    .search([("reply_id", "=", reply_id)])
-                    .exists()
-                ):
-                    break
-        elif http_type == "request":
-            # Check if request_id is in parameter/data and if it is already taken.
-            if not request_id:
-                raise werkzeug.exceptions.HTTPException(
-                    response=error_response(
-                        400, "Bad Request", "request_id is required."
-                    )
-                )
-            if (
-                request.env["spp_api.log"]
-                .search([("request_id", "=", request_id)])
-                .exists()
-            ):
-                raise werkzeug.exceptions.HTTPException(
-                    response=error_response(
-                        400, "Bad Request", "request_id is already taken."
-                    )
-                )
-
-        vals = {
-            "method": path.method,
-            "http_type": http_type,
-            "model": path.model,
-            "request": http.request.httprequest.full_path,
-            "request_id": request_id,
-            "request_parameter": kwargs.get("request_parameter", False),
-            "request_data": kwargs.get("request_data", False),
-            "reply_id": reply_id,
-            "response_data": kwargs.get("response_data", False),
-        }
-
-        return request.env["spp_api.log"].create(vals)
