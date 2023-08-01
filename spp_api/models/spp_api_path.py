@@ -583,6 +583,11 @@ class SPPAPIPath(models.Model):
 
         return domain
 
+    def _clean_kwargs(self, kw, keys):
+        for key in kw.copy():
+            if key not in keys:
+                del kw[key]
+
     def search_treatment_kwargs(self, kwargs):
         """
         Processes the search kwargs to apply limits, domains, and fields.
@@ -609,6 +614,9 @@ class SPPAPIPath(models.Model):
 
         # Fields
         self._treatment_fields(kwargs)
+
+        # Remove unnecessary keys
+        self._clean_kwargs(kwargs, ["limit", "offset", "domain", "fields"])
         return kwargs
 
     def read_treatment_kwargs(self, kwargs):

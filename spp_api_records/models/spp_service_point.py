@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import fields, models
 
 
 class SppServicePoint(models.Model):
@@ -7,10 +7,10 @@ class SppServicePoint(models.Model):
     topup_service_point = fields.Boolean(
         string="Allow Topup",
         help="Is service point where beneficiaries can go and top-up "
-        "their cards to purchase commodities"
+        "their cards to purchase commodities",
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
+        string="Country Office",
         default=lambda self: self.env.company,
     )

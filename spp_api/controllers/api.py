@@ -3,7 +3,9 @@
 # Copyright 2018 Rafis Bikbov <https://it-projects.info/team/bikbov>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 # pylint: disable=redefined-builtin
+import json
 import logging
+import uuid
 
 import werkzeug
 
@@ -102,10 +104,26 @@ class ApiV1Controller(http.Controller):
         path = kw.get("path")
         del kw["path"]
 
+        request_id = kw.get("request_id")
+        if "request_id" in kw:
+            del kw["request_id"]
+
         data = path.post_treatment_values(kw)
 
         records = self.get_records(path.model, kw)
         obj = records.create(data)
+
+        # Request Log
+        self.create_api_log(
+            path,
+            "request",
+            request_data=json.dumps(data, default=str),
+            request_id=request_id,
+        )
+
+        # Response Log
+        self.create_api_log(path, "response", response_data=str(obj.id))
+
         return successful_response(201, obj.id)
 
     # ReadMulti (optional: filters, offset, limit, order, include_fields, exclude_fields):
@@ -113,12 +131,15 @@ class ApiV1Controller(http.Controller):
         _api_endpoint_model, methods=["GET"], type="http", auth="none", csrf=False
     )
     def read_multi__GET(self, namespace, version, model, **kw):
-        kw.get("request_id", None)
+        path = kw.get("path")
+        del kw["path"]
+
+        kw_copy = kw.copy()
+
+        request_id = kw.get("request_id", None)
         if "request_id" in kw:
             del kw["request_id"]
 
-        path = kw.get("path")
-        del kw["path"]
         kw = path.search_treatment_kwargs(kw)
         records = self.get_records(path.model, kw)
         records = records.search_read(**kw)
@@ -130,6 +151,20 @@ class ApiV1Controller(http.Controller):
             "limit": kw.get("limit", 0),
             "version": version,
         }
+
+        # Request Log
+        self.create_api_log(
+            path,
+            "request",
+            request_parameter=json.dumps(kw_copy, default=str),
+            request_id=request_id,
+        )
+
+        # Response Log
+        self.create_api_log(
+            path, "response", response_data=json.dumps(response_data, default=str)
+        )
+
         return successful_response(200, response_data)
 
     # ReadOne (optional: include_fields, exclude_fields)
@@ -139,21 +174,34 @@ class ApiV1Controller(http.Controller):
     def read_one__GET(self, namespace, version, model, id, **kw):
         path = kw.get("path")
         del kw["path"]
-        path.read_treatment_kwargs(kw)
-        # read_domain = path.eval_domain(path.filter_domain)
 
-        # records = self.get_records(path.model, kw)
-        # read_domain += [('id', '=', id)]
-        # obj = records.search(read_domain, limit=1)
-        # if not obj:
-        #     raise werkzeug.exceptions.HTTPException(
-        #         response=error_response(*CODE__obj_not_found)
-        #     )
+        kw_copy = kw.copy()
+
+        request_id = kw.get("request_id", None)
+        if "request_id" in kw:
+            del kw["request_id"]
+
+        path.read_treatment_kwargs(kw)
+
         obj = self.get_record(path.model, id, path, kw)
-        result = obj.read(fields=kw["fields"])
+        result = obj.search_read(fields=kw["fields"])
 
         response_data = result and result[0] or {}
         _logger.info("response_data: %s", response_data)
+
+        # Request Log
+        self.create_api_log(
+            path,
+            "request",
+            request_parameter=json.dumps(kw_copy, default=str),
+            request_id=request_id,
+        )
+
+        # Response Log
+        self.create_api_log(
+            path, "response", response_data=json.dumps(response_data, default=str)
+        )
+
         return successful_response(200, response_data)
 
     # UpdateOne
@@ -163,6 +211,11 @@ class ApiV1Controller(http.Controller):
     def update_one__PUT(self, namespace, version, model, id, **kw):
         path = kw.get("path")
         del kw["path"]
+
+        request_id = kw.get("request_id")
+        if "request_id" in kw:
+            del kw["request_id"]
+
         data = path.post_treatment_values(kw)
         # read_domain = path.eval_domain(path.filter_domain)
         #
@@ -175,6 +228,18 @@ class ApiV1Controller(http.Controller):
         #     )
         obj = self.get_record(path.model, id, path, kw)
         obj.write(data)
+
+        # Request Log
+        self.create_api_log(
+            path,
+            "request",
+            request_data=json.dumps(data, default=str),
+            request_id=request_id,
+        )
+
+        # Response Log
+        self.create_api_log(path, "response", response_data=str(obj.id))
+
         return successful_response(200, obj.id)
 
     # UnlinkOne
@@ -184,18 +249,24 @@ class ApiV1Controller(http.Controller):
     def unlink_one__DELETE(self, namespace, version, model, id, **kw):
         path = kw.get("path")
         del kw["path"]
-        # read_domain = path.eval_domain(path.filter_domain)
-        #
-        # records = self.get_records(path.model, kw)
-        # read_domain += [('id', '=', id)]
-        # obj = records.search(read_domain, limit=1)
-        # if not obj:
-        #     raise werkzeug.exceptions.HTTPException(
-        #         response=error_response(*CODE__obj_not_found)
-        #     )
+
+        request_id = kw.get("request_id")
+        if "request_id" in kw:
+            del kw["request_id"]
+
         obj = self.get_record(path.model, id, path, kw)
+        name = obj.name
         obj.unlink()
-        return successful_response(pinguin.CODE__ok_no_content, obj.id)
+
+        response = f"{name} is successfully deleted"
+
+        # Request Log
+        self.create_api_log(path, "request", request_id=request_id)
+
+        # Response Log
+        self.create_api_log(path, "response", response_data=response)
+
+        return successful_response(pinguin.CODE__ok_no_content, response)
 
     # ######################
     # # Auxiliary Methods ##
@@ -215,10 +286,22 @@ class ApiV1Controller(http.Controller):
         path = method_params.get("path")
         del method_params["path"]
 
+        request_id = method_params.get("request_id")
+        if "request_id" in method_params:
+            del method_params["request_id"]
+
         obj = self.get_record(path.model, id, path, method_params)
         kwargs = path.custom_treatment_values(method_params)
         data = getattr(obj, path.function)(**kwargs)
+
         obj.flush()  # to recompute fields
+
+        # Request Log
+        self.create_api_log(path, "request", request_id=request_id)
+
+        # Response Log
+        self.create_api_log(path, "response", response_data=data)
+
         return successful_response(200, data=data)
 
     # Call Method on RecordSet (optional: method parameters)
@@ -235,19 +318,38 @@ class ApiV1Controller(http.Controller):
         path = method_params.get("path")
         del method_params["path"]
 
+        method_params_copy = method_params.copy()
+
+        request_id = method_params.get("request_id")
+        if "request_id" in method_params:
+            del method_params["request_id"]
+
         records = self.get_records(path.model, method_params)
         ids = ids and ids.split(",") or []
         ids = [int(i) for i in ids]
         kwargs = path.custom_treatment_values(method_params)
 
         # limit to the authorized domain and ids
-        domain = path.eval_domain(path.filter_domain)
-        domain += [("id", "in", ids)]
+        domain = path.get_domain(method_params)
+        if ids:
+            domain += [("id", "in", ids)]
 
         records = records.search(domain)
 
         data = getattr(records, path.function)(**kwargs)
         records.flush()  # to recompute fields
+
+        # Request Log
+        self.create_api_log(
+            path,
+            "request",
+            request_parameter=json.dumps(method_params_copy, default=str),
+            request_id=request_id,
+        )
+
+        # Response Log
+        self.create_api_log(path, "response", response_data=data)
+
         return successful_response(200, data=data)
 
     # Get Report
@@ -262,3 +364,50 @@ class ApiV1Controller(http.Controller):
             converter=converter,
             success_code=pinguin.CODE__success,
         )
+
+    def create_api_log(self, path, http_type, **kwargs):
+        reply_id = ""
+        request_id = kwargs.get("request_id", False)
+
+        if http_type == "response":
+            # To make sure reply_id is unique
+            while True:
+                reply_id = str(uuid.uuid4())
+                if (
+                    not request.env["spp_api.log"]
+                    .search([("reply_id", "=", reply_id)])
+                    .exists()
+                ):
+                    break
+        elif http_type == "request":
+            # Check if request_id is in parameter/data and if it is already taken.
+            if not request_id:
+                raise werkzeug.exceptions.HTTPException(
+                    response=error_response(
+                        400, "Bad Request", "request_id is required."
+                    )
+                )
+            if (
+                request.env["spp_api.log"]
+                .search([("request_id", "=", request_id)])
+                .exists()
+            ):
+                raise werkzeug.exceptions.HTTPException(
+                    response=error_response(
+                        400, "Bad Request", "request_id is already taken."
+                    )
+                )
+
+        vals = {
+            "method": path.method,
+            "http_type": http_type,
+            "model": path.model,
+            "request": http.request.httprequest.full_path,
+            "request_id": request_id,
+            "request_parameter": kwargs.get("request_parameter", False),
+            "request_data": kwargs.get("request_data", False),
+            "reply_id": reply_id,
+            "response_data": kwargs.get("response_data", False),
+        }
+
+        request.env["spp_api.log"].create(vals)
