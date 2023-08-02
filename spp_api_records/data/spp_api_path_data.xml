@@ -23,4 +23,26 @@
         />
     </record>
 
+    <record id="service_point_user_get_path" model="spp_api.path">
+        <field name="name">service_point_users</field>
+        <field name="model_id" ref="base.model_res_users" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">GET service point users</field>
+        <field name="method">get</field>
+        <field name="filter_domain">[('is_service_point_user', '=', True)]</field>
+        <field
+            name="field_ids"
+            eval="[(
+            6, 0, [
+                ref('base.field_res_users__login'),
+                ref('base.field_res_users__password'),
+                ref('base.field_res_users__name'),
+                ref('base.field_res_users__active'),
+                ref('base.field_res_users__write_date'),
+                ref('spp_acf_service_point.field_res_users__service_point_id'),
+            ]
+        )]"
+        />
+    </record>
+
 </odoo>
