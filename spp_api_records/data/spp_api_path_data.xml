@@ -31,4 +31,12 @@
         <field name="method">post</field>
     </record>
 
+    <record id="spp_service_point_device_put_path" model="spp_api.path">
+        <field name="name">Service Point Device</field>
+        <field name="model_id" ref="model_spp_service_point_device" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">PUT Service Point Device</field>
+        <field name="method">put</field>
+    </record>
+
 </odoo>
