@@ -65,7 +65,7 @@ def create_api_log(func):
         request_log_val = initial_val.copy()
         request_log_val["http_type"] = "request"
         request_log_val["request_id"] = request_id
-        if path.method in ["get", "patch"]:
+        if path.method in ["get"]:
             request_log_val["request_parameter"] = kwargs
         else:
             request_log_val["request_data"] = kwargs
