@@ -179,7 +179,11 @@ class ApiV1Controller(http.Controller):
         data = path.post_treatment_values(kw)
 
         records = self.get_records(path.model, kw)
-        records.create(data)
+
+        if hasattr(records, "special_create"):
+            records.special_create(data)
+        else:
+            records.create(data)
 
         response = {
             "time_stamp": str(datetime.datetime.now()),
