@@ -18,6 +18,8 @@
                 ref('spp_service_points.field_spp_service_point__name'),
                 ref('spp_service_points.field_spp_service_point__phone_no'),
                 ref('spp_service_points.field_spp_service_point__write_date'),
+                ref('spp_acf_service_point.field_spp_service_point__company_id'),
+                ref('spp_acf_service_point_device.field_spp_service_point__topup_service_point'),
             ]
         )]"
         />
@@ -25,7 +27,7 @@
 
     <record id="spp_service_point_device_post_path" model="spp_api.path">
         <field name="name">Service Point Device</field>
-        <field name="model_id" ref="model_spp_service_point_device" />
+        <field name="model_id" ref="spp_acf_service_point_device.model_spp_service_point_device" />
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">POST Service Point Device</field>
         <field name="method">post</field>
@@ -33,7 +35,7 @@
 
     <record id="spp_service_point_device_put_path" model="spp_api.path">
         <field name="name">Service Point Device</field>
-        <field name="model_id" ref="model_spp_service_point_device" />
+        <field name="model_id" ref="spp_acf_service_point_device.model_spp_service_point_device" />
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">PUT Service Point Device</field>
         <field name="method">put</field>
