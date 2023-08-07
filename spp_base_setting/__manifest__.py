@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Country Office",
+    "name": "OpenSPP Base Settings",
     "category": "OpenSPP",
     "version": "15.0.0.0.0",
     "sequence": 1,
@@ -15,6 +15,7 @@
     ],
     "data": [
         "views/country_office_views.xml",
+        "views/res_users_views.xml",
     ],
     "assets": {},
     "demo": [],

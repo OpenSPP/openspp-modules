@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem
+        action="base.action_res_users"
+        id="menu_action_res_users"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="0"
+    />
+    <menuitem
+        action="base.action_res_groups"
+        id="menu_action_res_groups"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        groups="base.group_no_one"
+        sequence="3"
+    />
+</odoo>
