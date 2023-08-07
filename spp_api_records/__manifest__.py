@@ -15,7 +15,6 @@
     "data": [
         "data/spp_api_namespace_data.xml",
         "data/spp_api_path_data.xml",
-        "views/spp_service_point_views.xml",
     ],
     "application": False,
     "auto_install": False,

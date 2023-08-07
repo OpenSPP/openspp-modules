@@ -65,7 +65,7 @@ def create_api_log(func):
         request_log_val = initial_val.copy()
         request_log_val["http_type"] = "request"
         request_log_val["request_id"] = request_id
-        if path.method in ["get", "patch"]:
+        if path.method in ["get"]:
             request_log_val["request_parameter"] = kwargs
         else:
             request_log_val["request_data"] = kwargs
@@ -223,9 +223,8 @@ class ApiV1Controller(http.Controller):
         del kw["path"]
 
         path.read_treatment_kwargs(kw)
-
         obj = self.get_record(path.model, id, path, kw)
-        result = obj.search_read(fields=kw["fields"])
+        result = obj.search_read(domain=[("id", "=", obj.id)], fields=kw["fields"])
 
         response_data = result and result[0] or {}
         response_data.update(
