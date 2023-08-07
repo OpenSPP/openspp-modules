@@ -7,7 +7,9 @@
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">GET Service Points</field>
         <field name="method">get</field>
-        <field name="field_ids" eval="[(
+        <field
+            name="field_ids"
+            eval="[(
             6, 0, [
                 ref('spp_service_points.field_spp_service_point__area_id'),
                 ref('spp_service_points.field_spp_service_point__country_id'),
@@ -16,10 +18,9 @@
                 ref('spp_service_points.field_spp_service_point__name'),
                 ref('spp_service_points.field_spp_service_point__phone_no'),
                 ref('spp_service_points.field_spp_service_point__write_date'),
-                ref('spp_api_records.field_spp_service_point__company_id'),
-                ref('spp_api_records.field_spp_service_point__topup_service_point'),
             ]
-        )]" />
+        )]"
+        />
     </record>
 
 </odoo>
