@@ -114,10 +114,14 @@ class TagBasedEligibilityManager(models.Model):
             beneficiary_ids = rec.program_id.get_beneficiaries().mapped("partner_id")
             new_beneficiaries = new_beneficiaries - beneficiary_ids
 
+            new_beneficiaries_count = len(new_beneficiaries)
+
             if len(new_beneficiaries) < self.NON_ASYNC_LIMIT:
                 rec._import_registrants(new_beneficiaries, state=state, do_count=True)
             else:
                 rec._import_registrants_async(new_beneficiaries, state=state)
+
+            return new_beneficiaries_count
 
     def _import_registrants_async(self, new_beneficiaries, state="draft"):
         self.ensure_one()
