@@ -3,7 +3,7 @@
 
     <record id="service_point_path" model="spp_api.path">
         <field name="name">Service Points</field>
-        <field name="model_id" ref="model_spp_service_point" />
+        <field name="model_id" ref="spp_service_points.model_spp_service_point" />
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">GET Service Points</field>
         <field name="method">get</field>
