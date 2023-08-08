@@ -38,21 +38,29 @@ class G2PGroup(models.Model):
         "Number of members", compute="_compute_ind_grp_num_members", store=True
     )
     z_ind_grp_num_adults = fields.Integer(
-        "Number of adults", compute="_compute_ind_grp_num_adults", store=True
+        "Number of adults",
+        compute="_compute_ind_grp_num_adults",
+        store=True,
+        recompute_daily=True,
     )
     z_ind_grp_num_adults_woman = fields.Integer(
         "Number of adults woman",
         compute="_compute_ind_grp_num_adults_woman",
         store=True,
+        recompute_daily=True,
     )
     z_ind_grp_num_elderly = fields.Integer(
-        "Number of eldery", compute="_compute_ind_grp_num_eldery", store=True
+        "Number of eldery",
+        compute="_compute_ind_grp_num_eldery",
+        store=True,
+        recompute_daily=True,
     )
 
     z_ind_grp_is_hh_with_children = fields.Boolean(
         "Is household (HH) with children",
         compute="_compute_ind_grp_is_hh_with_children",
         store=True,
+        recompute_daily=True,
     )
 
     # z_ind_grp_is_hh_with_disabled = fields.Boolean("HHs with disabled (mental or physical) members",
@@ -64,6 +72,7 @@ class G2PGroup(models.Model):
         help="Households (HH) with elderly (including single / elderly-headed "
         "HHs) - extracted from demographic data of HH adult members",
         store=True,
+        recompute_daily=True,
     )
 
     z_ind_grp_is_hh_with_pregnant_lactating = fields.Boolean(
@@ -107,6 +116,7 @@ class G2PGroup(models.Model):
         help="Elderly-headed HHs - "
         "extracted from demographic data of HH adult members",
         store=True,
+        recompute_daily=True,
     )
 
     def _compute_ind_grp_num_children(self):
