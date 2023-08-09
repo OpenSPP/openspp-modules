@@ -12,6 +12,22 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
             <xpath expr="//page[@name='eligibility']/group[1]/label[1]" position="before">
                 <field name="admin_area_ids" colspan="4" widget="many2many_tags" />
             </xpath>
+
+            <xpath expr="//page[@name='cycle']/group/div/group" position="before">
+                <group>
+                    <field name="is_one_time_distribution" />
+                </group>
+            </xpath>
+
+            <xpath expr="//page[@name='cycle']/group/div/group[2]" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_one_time_distribution', '=', True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='cycle']/group/div/group[3]" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': ['|', ('rrule_type', '!=', 'monthly'), ('is_one_time_distribution', '=', True)]}</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
