@@ -25,7 +25,7 @@
 
     <record id="service_point_terminal_device_path" model="spp_api.path">
         <field name="name">Service Point Devices</field>
-        <field name="model_id" ref="model_spp_service_point_device" />
+        <field name="model_id" ref="spp_acf_service_point_device.model_spp_service_point_device" />
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">GET Service Point Devices</field>
         <field name="method">get</field>
@@ -33,10 +33,10 @@
             name="field_ids"
             eval="[(
             6, 0, [
-                ref('spp_api_records.field_spp_service_point_device__service_point_terminal_device_id'),
-                ref('spp_api_records.field_spp_service_point_device__android_version'),
-                ref('spp_api_records.field_spp_service_point_device__device_model'),
-                ref('spp_api_records.field_spp_service_point_device__status'),
+                ref('spp_acf_service_point_device.field_spp_service_point_device__service_point_terminal_device_id'),
+                ref('spp_acf_service_point_device.field_spp_service_point_device__android_version'),
+                ref('spp_acf_service_point_device.field_spp_service_point_device__device_model'),
+                ref('spp_acf_service_point_device.field_spp_service_point_device__status'),
             ]
         )]"
         />
