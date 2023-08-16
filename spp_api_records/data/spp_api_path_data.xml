@@ -39,7 +39,7 @@
                 ref('base.field_res_users__name'),
                 ref('base.field_res_users__active'),
                 ref('base.field_res_users__write_date'),
-                ref('spp_acf_service_point.field_res_users__service_point_id'),
+                ref('spp_service_points.field_res_users__service_point_id'),
             ]
         )]"
         />
