@@ -1,8 +1,14 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import email_normalize
 
+from odoo.addons.auth_signup.models.res_users import SignupError
 from odoo.addons.phone_validation.tools import phone_validation
+
+_logger = logging.getLogger(__name__)
 
 
 class OpenSPPRegistrant(models.Model):
@@ -32,6 +38,12 @@ class OpenSPPServicePoint(models.Model):
     disabled_reason = fields.Char("Disable Reason")
     country_id = fields.Many2one(
         "res.country", "Country", default=_get_default_country_id
+    )
+
+    res_partner_company_id = fields.Many2one(
+        "res.partner",
+        "Company",
+        domain=[("is_company", "=", True)],
     )
 
     @api.depends("phone_no", "country_id")
@@ -97,6 +109,56 @@ class OpenSPPServicePoint(models.Model):
         for rec in self:
             if rec.area_id:
                 return rec.area_id.open_area_form()
+
+    def create_user(self):
+        if not self.res_partner_company_id:
+            raise UserError(_("Service point does not have company."))
+        if not self.res_partner_company_id.child_ids:
+            raise UserError(_("Company does not have contacts."))
+
+        for child_id in self.res_partner_company_id.child_ids:
+            if child_id.email:
+                try:
+                    self._create_user(child_id)
+                except SignupError as e:
+                    _logger.error(e)
+            else:
+                raise UserError(_(f"{child_id.name} does not have email."))
+
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Create SP User"),
+                "message": _(
+                    "Successfully created users for the contacts of the company"
+                ),
+                "sticky": True,
+                "type": "success",
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
+
+    def _create_user(self, child_id):
+        return (
+            self.env["res.users"]
+            .with_context(no_reset_password=True)
+            ._create_user_from_template(
+                {
+                    "email": email_normalize(child_id.email),
+                    "login": email_normalize(child_id.email),
+                    "partner_id": child_id.id,
+                    "groups_id": [
+                        (4, self.env.ref("base.group_user").id),
+                        (4, self.env.ref("spp_service_points.service_point_users").id),
+                    ],
+                    "is_service_point_user": True,
+                    "service_point_id": self.id,
+                }
+            )
+        )
 
 
 class OpenSPPServiceType(models.Model):

@@ -26,6 +26,17 @@
                         <button
                             type="object"
                             class="oe_stat_button"
+                            icon="fa-address-card-o"
+                            name="create_user"
+                            attrs="{'invisible':[('is_disabled','!=',True), ('res_partner_company_id', '=', False)]}"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Create SP User</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
                             icon="fa-ban"
                             name="disable_service_point"
                             attrs="{'invisible':[('is_disabled','!=',False)]}"
@@ -98,6 +109,10 @@
                             name="is_contract_active"
                             attrs="{'readonly':[('is_disabled','=',True)]}"
                             colspan="4"
+                        />
+                        <field
+                            name="res_partner_company_id"
+                            options="{'no_create':true,'no_edit':true,'no_open':true}"
                         />
                         <field name="is_disabled" readonly="True" />
                         <field name="disabled_date" readonly="True" />
