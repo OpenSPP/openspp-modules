@@ -10,8 +10,7 @@
     "depends": [
         "spp_api",
         "spp_service_points",
-        "spp_acf_service_point",
-        "spp_acf_service_point_device",
+        "spp_service_point_device",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",

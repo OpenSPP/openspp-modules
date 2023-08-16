@@ -6,7 +6,7 @@
         <field name="path_id" ref="spp_service_point_device_post_path" />
         <field
             name="field_id"
-            ref="spp_acf_service_point_device.field_spp_service_point_device__service_point_id"
+            ref="spp_service_point_device.field_spp_service_point_device__service_point_id"
         />
         <field name="required" eval="1" />
     </record>
@@ -15,17 +15,14 @@
         <field name="path_id" ref="spp_service_point_device_post_path" />
         <field
             name="field_id"
-            ref="spp_acf_service_point_device.field_spp_service_point_device__service_point_terminal_device_id"
+            ref="spp_service_point_device.field_spp_service_point_device__service_point_terminal_device_id"
         />
         <field name="required" eval="1" />
     </record>
 
     <record id="device_model_api_field" model="spp_api.field">
         <field name="path_id" ref="spp_service_point_device_post_path" />
-        <field
-            name="field_id"
-            ref="spp_acf_service_point_device.field_spp_service_point_device__device_model"
-        />
+        <field name="field_id" ref="spp_service_point_device.field_spp_service_point_device__device_model" />
         <field name="required" eval="1" />
     </record>
 
@@ -33,7 +30,7 @@
         <field name="path_id" ref="spp_service_point_device_post_path" />
         <field
             name="field_id"
-            ref="spp_acf_service_point_device.field_spp_service_point_device__android_version"
+            ref="spp_service_point_device.field_spp_service_point_device__android_version"
         />
         <field name="required" eval="1" />
     </record>
@@ -43,7 +40,7 @@
         <field name="path_id" ref="spp_service_point_device_put_path" />
         <field
             name="field_id"
-            ref="spp_acf_service_point_device.field_spp_service_point_device__service_point_id"
+            ref="spp_service_point_device.field_spp_service_point_device__service_point_id"
         />
     </record>
 
@@ -51,23 +48,20 @@
         <field name="path_id" ref="spp_service_point_device_put_path" />
         <field
             name="field_id"
-            ref="spp_acf_service_point_device.field_spp_service_point_device__service_point_terminal_device_id"
+            ref="spp_service_point_device.field_spp_service_point_device__service_point_terminal_device_id"
         />
     </record>
 
     <record id="put_device_model_api_field" model="spp_api.field">
         <field name="path_id" ref="spp_service_point_device_put_path" />
-        <field
-            name="field_id"
-            ref="spp_acf_service_point_device.field_spp_service_point_device__device_model"
-        />
+        <field name="field_id" ref="spp_service_point_device.field_spp_service_point_device__device_model" />
     </record>
 
     <record id="put_android_version_api_field" model="spp_api.field">
         <field name="path_id" ref="spp_service_point_device_put_path" />
         <field
             name="field_id"
-            ref="spp_acf_service_point_device.field_spp_service_point_device__android_version"
+            ref="spp_service_point_device.field_spp_service_point_device__android_version"
         />
     </record>
 
