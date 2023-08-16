@@ -117,11 +117,19 @@ class OpenSPPServicePoint(models.Model):
             raise UserError(_("Company does not have contacts."))
 
         for child_id in self.res_partner_company_id.child_ids:
+
+            # if individual already have an account then continue
+            if child_id.user_ids:
+                continue
+
             if child_id.email:
                 try:
                     self._create_user(child_id)
                 except SignupError as e:
                     _logger.error(e)
+                    raise UserError(
+                        _(f"Error on individual {child_id.name}: {e}")
+                    ) from e
             else:
                 raise UserError(_(f"{child_id.name} does not have email."))
 
