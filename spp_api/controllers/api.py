@@ -182,7 +182,7 @@ class ApiV1Controller(http.Controller):
         records.create(data)
 
         response = {
-            "time_stamp": str(datetime.datetime.now()),
+            "timestamp": str(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
@@ -207,7 +207,7 @@ class ApiV1Controller(http.Controller):
             "offset": kw.get("offset", 0),
             "limit": kw.get("limit", 0),
             "version": version,
-            "time_stamp": str(datetime.datetime.now()),
+            "timestamp": str(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
@@ -229,7 +229,7 @@ class ApiV1Controller(http.Controller):
         response_data = result and result[0] or {}
         response_data.update(
             {
-                "time_stamp": str(datetime.datetime.now()),
+                "timestamp": str(datetime.datetime.now()),
                 "reply_id": self.get_reply_id(),
             }
         )
@@ -251,7 +251,7 @@ class ApiV1Controller(http.Controller):
         obj.write(data)
 
         response = {
-            "time_stamp": str(datetime.datetime.now()),
+            "timestamp": str(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
@@ -270,7 +270,7 @@ class ApiV1Controller(http.Controller):
         obj.unlink()
 
         response_data = {
-            "time_stamp": str(datetime.datetime.now()),
+            "timestamp": str(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
