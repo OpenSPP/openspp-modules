@@ -97,26 +97,34 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             }
             return action
 
+    def _create_default_eligibility_manager(self, program_id):
+        def_mgr_obj = "g2p.program_membership.manager.default"
+        def_mgr = self.env[def_mgr_obj].create(
+            {
+                "name": "Default",
+                "program_id": program_id,
+                "admin_area_ids": self.admin_area_ids,
+                "eligibility_domain": self.eligibility_domain,
+            }
+        )
+        return def_mgr
+
+    def _create_eligibility_managers(self, program_id, def_mgr):
+        return self.env["g2p.eligibility.manager"].create(
+            {
+                "program_id": program_id,
+                "manager_ref_id": "%s,%s" % (def_mgr._name, str(def_mgr.id)),
+            }
+        )
+
     def _get_eligibility_manager(self, program_id):
-        val = None
+        val = {}
         if self.eligibility_kind == "default_eligibility":
             # Add a new record to default eligibility manager model
-            def_mgr_obj = "g2p.program_membership.manager.default"
-            def_mgr = self.env[def_mgr_obj].create(
-                {
-                    "name": "Default",
-                    "program_id": program_id,
-                    "admin_area_ids": self.admin_area_ids,
-                    "eligibility_domain": self.eligibility_domain,
-                }
-            )
+            def_mgr = self._create_default_eligibility_manager(program_id)
             # Add a new record to eligibility manager parent model
-            mgr = self.env["g2p.eligibility.manager"].create(
-                {
-                    "program_id": program_id,
-                    "manager_ref_id": "%s,%s" % (def_mgr_obj, str(def_mgr.id)),
-                }
-            )
+            mgr = self._create_eligibility_managers(program_id, def_mgr)
+
             val = {"eligibility_managers": [(4, mgr.id)]}
         return val
 
