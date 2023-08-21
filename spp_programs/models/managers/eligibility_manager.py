@@ -14,6 +14,7 @@ class SPPDefaultEligibilityManager(models.Model):
         return [("kind", "=", self.env.ref("spp_area.admin_area_kind").id)]
 
     admin_area_ids = fields.Many2many("spp.area", domain=_get_admin_area_domain)
+    target_type = fields.Selection(related="program_id.target_type")
 
     @api.onchange("admin_area_ids")
     def on_admin_area_ids_change(self):

@@ -1,0 +1,25 @@
+<odoo>
+    <record id="create_program_wizard_form_view_custom_exclusion" model="ir.ui.view">
+        <field name="name">create_program_wizard_form_view_custom_exclusion</field>
+        <field name="model">g2p.program.create.wizard</field>
+        <field name="inherit_id" ref="spp_programs.create_program_wizard_form_view_spp" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='eligibility_domain']" position="after">
+                <field name="enable_exclusion_filter" colspan="4" />
+                <label
+                    for="exclusion_eligibility_domain"
+                    string="FILTER:"
+                    attrs="{'invisible': [('enable_exclusion_filter', '=', False)]}"
+                />
+                <field
+                    name="exclusion_eligibility_domain"
+                    colspan="4"
+                    widget="domain"
+                    options="{'model': 'res.partner'}"
+                    nolabel="1"
+                    attrs="{'invisible': [('enable_exclusion_filter', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

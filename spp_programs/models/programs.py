@@ -10,14 +10,16 @@ _logger = logging.getLogger(__name__)
 class CustomG2PProgram(models.Model):
     _inherit = "g2p.program"
 
+    def get_new_beneficiaries(self, manager):
+        domain = manager._prepare_eligible_domain()
+        return self.env["res.partner"].search(domain)
+
     def import_eligible_registrants(self, state="draft"):
         eligibility_managers = self.get_managers(self.MANAGER_ELIGIBILITY)
         if eligibility_managers:
             manager = eligibility_managers[0]
 
-            domain = manager._prepare_eligible_domain()
-
-            new_beneficiaries = self.env["res.partner"].search(domain)
+            new_beneficiaries = self.get_new_beneficiaries(manager)
 
             # Exclude already added beneficiaries
             beneficiary_ids = self.get_beneficiaries().mapped("partner_id")

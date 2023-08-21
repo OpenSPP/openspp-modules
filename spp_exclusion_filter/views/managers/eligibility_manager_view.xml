@@ -10,9 +10,15 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="priority">1000</field>
         <field name="inherit_id" ref="g2p_programs.view_eligibility_manager_default_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='eligibility_domain']" position="before">
-                <field name="admin_area_ids" colspan="4" widget="many2many_tags" />
-                <field name="target_type" colspan="4" invisible="1" />
+            <xpath expr="//field[@name='eligibility_domain']" position="after">
+                <field name="enable_exclusion_filter" colspan="4" />
+                <field
+                    name="exclusion_eligibility_domain"
+                    widget="domain"
+                    options="{'model': 'res.partner'}"
+                    colspan="4"
+                    attrs="{'invisible': [('enable_exclusion_filter', '=', False)]}"
+                />
             </xpath>
         </field>
     </record>
