@@ -15,8 +15,7 @@ class CustomSPPCreateNewProgramWiz(models.TransientModel):
 
     def _create_default_eligibility_manager(self, program_id):
         def_mgr = super()._create_default_eligibility_manager(program_id)
-        if self.eligibility_kind == "default_eligibility":
-            def_mgr.enable_exclusion_filter = self.enable_exclusion_filter
-            def_mgr.exclusion_eligibility_domain = self.exclusion_eligibility_domain
+        def_mgr.enable_exclusion_filter = self.enable_exclusion_filter
+        def_mgr.exclusion_eligibility_domain = self.exclusion_eligibility_domain
 
         return def_mgr
