@@ -47,14 +47,15 @@ class SPPCreateNewProgramWiz(models.TransientModel):
                 }
             )
 
-    def _generate_sql_query(self):
+    def _generate_sql_query(self, sql=""):
         """
         Generate the SQL Query based on the user defined query.
         The SQL WHERE clause will be added to filter active, enabled, and either group or individual registrants.
         The user defined query will be added in the final where clause as a sub-query.
         :return: string sql_query
         """
-        sql = self.sql_query
+        if not sql:
+            sql = self.sql_query
         # Create a query to add the disabled and is_group fields in the where clause
         where_clause = "active AND disabled IS NULL"
         if self.target_type == "group":
