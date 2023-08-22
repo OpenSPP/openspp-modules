@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <function model="audit.rule" name="create">
+        <value
+            model="audit.rule"
+            eval="{
+            'name': 'Res Partner Admin Rule',
+            'log_create': True,
+            'model_id': obj().env['ir.model'].search([('model', '=', 'res.partner')]).id,
+            'group_id': obj().env.ref('g2p_registry_base.group_g2p_admin').id,
+        }"
+        />
+    </function>
+
+
+</odoo>
