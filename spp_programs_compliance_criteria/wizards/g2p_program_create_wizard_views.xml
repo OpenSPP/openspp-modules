@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="create_program_wizard_form_view_inherit_spp_programs_compliance_criteria" model="ir.ui.view">
+        <field name="name">g2p.program.create.wizard.view.form.inherit</field>
+        <field name="model">g2p.program.create.wizard</field>
+        <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
+        <field name="priority">1000000</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="compliance_criteria" widget="boolean_toggle" />
+            </xpath>
+            <xpath expr="//page[@name='eligibility']" position="after">
+                <page
+                    name="compliance"
+                    string="Configure the Compliance Criteria"
+                    attrs="{'invisible': [('compliance_criteria', '=', False)]}"
+                >
+                    <group>
+                        <field
+                            name="compliance_kind"
+                            widget="radio"
+                            options="{'horizontal': True}"
+                            attrs="{'required': [('compliance_criteria', '=', True)]}"
+                        />
+                    </group>
+                    <group
+                        name="compliance_domain"
+                        attrs="{'invisible': [('compliance_kind', '!=', 'g2p.program_membership.manager.default')]}"
+                    >
+                        <field
+                            name="compliance_domain"
+                            widget="domain"
+                            options="{'model': 'res.partner', 'hide_result': True}"
+                            attrs="{'required': [('compliance_kind', '=', 'g2p.program_membership.manager.default')]}"
+                        />
+                    </group>
+                    <group
+                        name="compliance_sql"
+                        colspan="4"
+                        col="4"
+                        attrs="{'invisible': [('compliance_kind', '!=', 'g2p.program_membership.manager.sql')]}"
+                    >
+                        <field name="compliance_sql" colspan="4" />
+                        <label for="compliance_sql_query_valid" />
+                        <div colspan="3">
+                            <field
+                                name="compliance_sql_query_valid"
+                                readonly="1"
+                                force_save="1"
+                                class="oe_inline"
+                            />
+                            <button
+                                name="test_compliance_sql_query"
+                                type="object"
+                                icon="fa-check-square-o"
+                                class="btn-success"
+                                style="margin-left: 10px;"
+                                string="Validate Query"
+                            />
+                        </div>
+                    </group>
+                    <group
+                        name="compliance_tags"
+                        attrs="{'invisible': [('compliance_kind', '!=', 'g2p.program_membership.manager.tags')]}"
+                    >
+                        <field
+                            name="compliance_tag_id"
+                            options="{'no_open': True, 'no_create_edit': True}"
+                            attrs="{'required': [('compliance_kind', '=', 'g2p.program_membership.manager.tags')]}"
+                        />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
