@@ -21,8 +21,6 @@
             ]
         )]"
         />
-<<<<<<< HEAD
-=======
     </record>
 
     <record id="product_category_path" model="spp_api.path">
@@ -37,10 +35,10 @@
             6, 0, [
                 ref('product.field_product_category__id'),
                 ref('product.field_product_category__name'),
+                ref('product.field_product_category__write_date'),
             ]
         )]"
         />
->>>>>>> 20dc501 (add product category api)
     </record>
 
 </odoo>
