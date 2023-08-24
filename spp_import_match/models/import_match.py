@@ -143,17 +143,20 @@ class SPPImportMatchFields(models.Model):
     def _onchange_field_id(self):
         for rec in self:
             field_id = rec.field_id.id
+            field_type = rec.field_id.ttype
             fields_list = []
-            for field in rec.match_id.field_ids:
-                new_id_str = str(field.id)
-                if not new_id_str.find("NewId_'virtual"):
-                    fields_list.append(field.field_id.id)
+            if field_type not in ('many2many', 'one2many', 'many2one'):
+                for field in rec.match_id.field_ids:
+                    new_id_str = str(field.id)
+                    new_id_str_2 = ''.join(letter for letter in new_id_str if letter.isalnum())
+                    if 'NewIdvirtual' not in new_id_str_2:
+                        fields_list.append(field.field_id.id)
 
-            duplicate_counter = 0
-            for duplicate_field in fields_list:
-                if duplicate_field == field_id:
-                    duplicate_counter += 1
+                duplicate_counter = 0
+                for duplicate_field in fields_list:
+                    if duplicate_field == field_id:
+                        duplicate_counter += 1
 
-            if duplicate_counter > 1:
-                raise ValidationError(_("Field '%s', already exists!") % rec.field_id.field_description)
+                if duplicate_counter > 1:
+                    raise ValidationError(_("Field '%s', already exists!") % rec.field_id.field_description)
 
