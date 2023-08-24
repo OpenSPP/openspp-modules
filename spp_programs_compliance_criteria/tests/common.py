@@ -13,9 +13,7 @@ class Common(TransactionCase):
         )
         self._tag = self.env["g2p.registrant.tags"].create({"name": "Tag 1 [TEST]"})
 
-    def program_create_wizard(self, vals=None):
-        if not vals:
-            vals = {}
+    def program_create_wizard(self, vals):
         vals.update(
             {
                 "name": "Program 1 [TEST]",

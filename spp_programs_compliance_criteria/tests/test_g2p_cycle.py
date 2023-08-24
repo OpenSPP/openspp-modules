@@ -21,9 +21,7 @@ class TestG2pCycle(common.Common):
         action = self._test.create_program()
         self.program = self.env["g2p.program"].browse(action["res_id"])
 
-    def _create_individual(self, vals=None):
-        if not vals:
-            vals = {}
+    def _create_individual(self, vals):
         vals.update(
             {
                 "is_registrant": True,
