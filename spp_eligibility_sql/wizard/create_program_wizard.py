@@ -56,6 +56,14 @@ class SPPCreateNewProgramWiz(models.TransientModel):
         """
         if not sql:
             sql = self.sql_query
+        # Remove DMLs in the query
+        dmls = ["insert", "update", "delete"]
+        for dml in dmls:
+            if sql.upper().find(dml.upper()) >= 0:
+                sql = "DML ERROR"
+                _logger.info("SQL-based Eligibility Wizard: DML violation %s" % sql)
+                break
+
         # Create a query to add the disabled and is_group fields in the where clause
         where_clause = "active AND disabled IS NULL"
         if self.target_type == "group":
@@ -77,7 +85,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             sql,
             where_clause,
         )
-        _logger.info("DB Query: %s" % sql_query)
+        _logger.debug("SQL-based Eligibility Wizard: DB Query: %s" % sql_query)
 
         return sql_query
 
@@ -93,7 +101,9 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             try:
                 self._cr.execute(sql_query)  # pylint: disable=sql-injection
             except Exception as e:
-                _logger.info("Database Query Error: %s" % e)
+                _logger.debug(
+                    "SQL-based Eligibility Wizard: Database Query Error: %s" % e
+                )
                 sql_query_valid = "invalid"
                 sql_query_valid_message = _("Database Query Error: %s") % e
                 self._cr.rollback()

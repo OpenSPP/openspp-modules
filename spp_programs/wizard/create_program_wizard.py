@@ -145,3 +145,13 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             )
             val = {"eligibility_managers": [(4, mgr.id)]}
         return val
+
+    def _reopen_self(self):
+        return {
+            "name": "Set Program Settings",
+            "type": "ir.actions.act_window",
+            "res_model": self._name,
+            "res_id": self.id,
+            "view_mode": "form",
+            "target": "new",
+        }

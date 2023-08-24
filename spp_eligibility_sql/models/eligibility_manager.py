@@ -88,6 +88,14 @@ class SQLEligibilityManager(models.Model):
         :return: string sql_query
         """
         sql = self.sql_query
+        # Remove DMLs in the query
+        dmls = ["insert", "update", "delete"]
+        for dml in dmls:
+            if sql.upper().find(dml.upper()) >= 0:
+                sql = "DML ERROR"
+                _logger.info("SQL-based Eligibility: DML violation %s" % sql)
+                break
+
         # Create a query to add the disabled and is_group fields in the where clause
         where_clause = "active AND disabled IS NULL"
         if self.program_id.target_type == "group":
@@ -109,7 +117,7 @@ class SQLEligibilityManager(models.Model):
             sql,
             where_clause,
         )
-        _logger.info("DB Query: %s" % sql_query)
+        _logger.debug("DB Query: %s" % sql_query)
 
         return sql_query
 
@@ -151,7 +159,7 @@ class SQLEligibilityManager(models.Model):
                 # Add a parameter to comply with pre-commit sql-injection-error
                 self._cr.execute(sql_query)  # pylint: disable=sql-injection
             except Exception as e:
-                _logger.info("Database Query Error: %s" % e)
+                _logger.debug("Database Query Error: %s" % e)
                 sql_query_valid = "invalid"
                 sql_query_valid_message = _("Database Query Error: %s") % e
                 self._cr.rollback()
@@ -211,14 +219,14 @@ class SQLEligibilityManager(models.Model):
         ben_count = 0
         for rec in self:
             new_beneficiaries = rec._get_beneficiaries_sql_query()
-            _logger.info("Found %s beneficiaries", len(new_beneficiaries))
+            _logger.debug("Found %s beneficiaries", len(new_beneficiaries))
 
             # Exclude already added beneficiaries
             beneficiary_ids = rec.program_id.get_beneficiaries().mapped("partner_id.id")
-            _logger.info("Excluding %s beneficiaries", len(beneficiary_ids))
+            _logger.debug("Excluding %s beneficiaries", len(beneficiary_ids))
 
             new_beneficiaries = list(set(new_beneficiaries).difference(beneficiary_ids))
-            _logger.info("Finally %s beneficiaries", len(new_beneficiaries))
+            _logger.debug("Finally %s beneficiaries", len(new_beneficiaries))
 
             ben_count = len(new_beneficiaries)
             if ben_count < 1000:
@@ -257,7 +265,7 @@ class SQLEligibilityManager(models.Model):
         self.program_id.message_post(body=_("Import finished."))
 
     def _import_registrants(self, new_beneficiaries, state="draft", do_count=False):
-        _logger.info("Importing %s beneficiaries", len(new_beneficiaries))
+        _logger.debug("Importing %s beneficiaries", len(new_beneficiaries))
         beneficiaries_val = []
         for beneficiary_id in new_beneficiaries:
             beneficiaries_val.append(
