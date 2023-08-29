@@ -1,0 +1,13 @@
+<odoo>
+    <record id="create_program_wizard_form_view_custom_acf" model="ir.ui.view">
+        <field name="name">create_program_wizard_form_view_custom_entitlement_acf</field>
+        <field name="model">g2p.program.create.wizard</field>
+        <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='entitlement_kind']" position="after">
+                <field name="store_sp_in_entitlements" colspan="4" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
