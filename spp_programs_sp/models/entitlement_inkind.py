@@ -7,12 +7,11 @@ from odoo import fields, models
 _logger = logging.getLogger(__name__)
 
 
-class CustomSPPProgramEntitlementCash(models.Model):
+class CustomSPPProgramEntitlementInKind(models.Model):
     """
     Add the handling of service points in entitlements
     """
 
-    _inherit = "g2p.entitlement"
+    _inherit = "g2p.entitlement.inkind"
 
     service_point_ids = fields.Many2many("spp.service.point", string="Service Points")
-    service_point_id = fields.Many2one("spp.service.point", "Service Point")

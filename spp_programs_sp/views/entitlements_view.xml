@@ -4,6 +4,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
 
+    <!-- Cash Entitlements -->
     <record id="view_entitlement_tree_custom_spp_sp_form" model="ir.ui.view">
         <field name="name">view_entitlement_tree_custom_spp_sp_form</field>
         <field name="model">g2p.entitlement</field>
@@ -29,6 +30,42 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     readonly="1"
                     options="{'no_open':True,'no_quick_create':True,'no_create':True}"
                 />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- In-Kind Entitlements -->
+    <record id="view_entitlement_inkind_tree_custom_spp_sp_form" model="ir.ui.view">
+        <field name="name">view_entitlement_inkind_tree_custom_spp_sp_form</field>
+        <field name="model">g2p.entitlement.inkind</field>
+        <field name="inherit_id" ref="spp_programs.view_entitlement_inkind_tree" />
+        <field name="priority">2000</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="service_point_ids" widget="many2many_tags" />
+            </xpath>
+            <xpath expr="//field[@name='service_point_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_entitlement_inkind_form_custom_spp_sp_form" model="ir.ui.view">
+        <field name="name">view_entitlement_inkind_form_custom_spp_sp_form</field>
+        <field name="model">g2p.entitlement.inkind</field>
+        <field name="inherit_id" ref="spp_programs.view_entitlement_inkind_form" />
+        <field name="priority">2000</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='service_point_id']" position="replace">
+                <field
+                    name="service_point_ids"
+                    widget="many2many_tags"
+                    readonly="1"
+                    options="{'no_open':True,'no_quick_create':True,'no_create':True}"
+                />
+            </xpath>
+            <xpath expr="//field[@name='manage_inventory']" position="after">
+                <field name="service_point_id" invisible="1" />
             </xpath>
         </field>
     </record>
