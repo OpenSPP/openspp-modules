@@ -44,7 +44,11 @@ class SPPDefaultEligibilityManager(models.Model):
 
             new_beneficiaries = new_beneficiaries - beneficiary_ids
 
+            ben_count = len(new_beneficiaries)
+
             if len(new_beneficiaries) < 1000:
                 rec._import_registrants(new_beneficiaries, state=state, do_count=True)
             else:
                 rec._import_registrants_async(new_beneficiaries, state=state)
+
+            return ben_count

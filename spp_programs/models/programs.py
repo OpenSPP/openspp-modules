@@ -10,22 +10,12 @@ _logger = logging.getLogger(__name__)
 class CustomG2PProgram(models.Model):
     _inherit = "g2p.program"
 
-    def get_new_beneficiaries(self, manager):
-        domain = manager._prepare_eligible_domain()
-        return self.env["res.partner"].search(domain)
-
     def import_eligible_registrants(self, state="draft"):
         eligibility_managers = self.get_managers(self.MANAGER_ELIGIBILITY)
         if eligibility_managers:
             manager = eligibility_managers[0]
 
-            new_beneficiaries = self.get_new_beneficiaries(manager)
-
-            # Exclude already added beneficiaries
-            beneficiary_ids = self.get_beneficiaries().mapped("partner_id")
-            new_beneficiaries = new_beneficiaries - beneficiary_ids
-
-            new_beneficiaries_count = len(new_beneficiaries)
+            new_beneficiaries_count = manager.import_eligible_registrants()
 
             if new_beneficiaries_count < 1000:
                 message = _("%s Imported Beneficiaries") % new_beneficiaries_count
