@@ -200,7 +200,7 @@ class ApiV1Controller(http.Controller):
         kw = path.search_treatment_kwargs(kw)
         records = self.get_records(path.model, kw)
         records = records.search_read(**kw)
-
+        records = path._get_response_treatment(records)
         response_data = {
             "results": records,
             "total": len(records),
@@ -225,7 +225,7 @@ class ApiV1Controller(http.Controller):
         path.read_treatment_kwargs(kw)
         obj = self.get_record(path.model, id, path, kw)
         result = obj.search_read(domain=[("id", "=", obj.id)], fields=kw["fields"])
-
+        result = path._get_response_treatment(result)
         response_data = result and result[0] or {}
         response_data.update(
             {

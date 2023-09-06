@@ -960,3 +960,19 @@ class SPPAPIPath(models.Model):
                 )
             )
         return field_alias
+
+    def _get_response_treatment(self, response_data):
+        if isinstance(response_data, dict):
+            response_data = [response_data]
+        self.ensure_one()
+        field_aliases = (
+            self.env["spp_api.field.alias"]
+            .sudo()
+            .search(self._get_related_field_alias_domain())
+        )
+        for element in response_data:
+            for field_alias in field_aliases:
+                if field_alias.field_id.name not in element.keys():
+                    continue
+                element[field_alias.alias_name] = element.pop(field_alias.field_id.name)
+        return response_data
