@@ -917,7 +917,11 @@ class SPPAPIPath(models.Model):
             "res_model": "spp_api.field.alias",
             "domain": self._get_related_field_alias_domain(),
             "view_mode": "tree,form",
-            "context": {"default_api_path_id": self.id, "scoped_alias": True},
+            "context": {
+                "default_api_path_id": self.id,
+                "scoped_alias": True,
+                "create": False,
+            },
         }
 
     def _get_related_field_alias_domain(self):
