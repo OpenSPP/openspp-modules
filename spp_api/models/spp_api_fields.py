@@ -44,5 +44,5 @@ class SPPAPIField(models.Model):
 
     def _get_field_name(self):
         self.ensure_one()
-        field_alias = self.path_id._get_field_name_alias(self)
+        field_alias = self.path_id._get_field_name_alias(self.field_id)
         return field_alias.alias_name if field_alias else self.field_name
