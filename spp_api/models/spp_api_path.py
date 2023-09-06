@@ -2,6 +2,7 @@ import logging
 from copy import deepcopy
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 from odoo.tools import safe_eval
 
 # Field type mapping for Swagger
@@ -114,6 +115,15 @@ class SPPAPIPath(models.Model):
             "Name, Version, Method must be unique!",
         ),
     ]
+
+    @api.constrains(
+        "method",
+        "field_ids",
+    )
+    def _check_field_get_method(self):
+        for rec in self:
+            if rec.method == "get" and not rec.field_ids:
+                raise ValidationError(_("API need a specific fields list!"))
 
     @api.onchange("model_id")
     def _onchange_model_id(self):
@@ -886,3 +896,24 @@ class SPPAPIPath(models.Model):
     def eval_domain(self, domain):
         self.ensure_one()
         return safe_eval.safe_eval(domain, self._get_eval_context())
+
+    def open_self_form(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _(self._description),
+            "res_model": self._name,
+            "res_id": self.id,
+            "view_mode": "form",
+        }
+
+    def action_open_field_alias(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Field Name Alias"),
+            "res_model": "spp_api.field.alias",
+            "domain": ["|", ("api_path_id", "=", self.id), ("api_path_id", "=", False)],
+            "view_mode": "tree,form",
+            "context": {"default_api_path_id": self.id, "scoped_alias": True},
+        }
