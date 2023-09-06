@@ -13,6 +13,12 @@ class SppApiFieldAlias(models.Model):
         required=True,
         ondelete="cascade",
     )
+    model_id = fields.Many2one(
+        comodel_name="ir.model",
+        string="Model",
+        related="field_id.model_id",
+        store=True,
+    )
     api_path_id = fields.Many2one(
         comodel_name="spp_api.path",
         string="API Path",

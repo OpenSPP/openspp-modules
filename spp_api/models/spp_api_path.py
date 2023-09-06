@@ -915,10 +915,20 @@ class SPPAPIPath(models.Model):
             "type": "ir.actions.act_window",
             "name": _("Field Name Alias"),
             "res_model": "spp_api.field.alias",
-            "domain": ["|", ("api_path_id", "=", self.id), ("api_path_id", "=", False)],
+            "domain": self._get_related_field_alias_domain(),
             "view_mode": "tree,form",
             "context": {"default_api_path_id": self.id, "scoped_alias": True},
         }
+
+    def _get_related_field_alias_domain(self):
+        self.ensure_one()
+        return [
+            "|",
+            ("api_path_id", "=", self.id),
+            "&",
+            ("api_path_id", "=", False),
+            ("model_id", "=", self.model_id.id),
+        ]
 
     def _get_field_name_alias(self, field):
         self.ensure_one()
