@@ -664,7 +664,9 @@ class SPPAPIPath(models.Model):
                 "description": field.field_description or "",
             }
             self._update_values_ttype(field, values, definition=True)
-            properties.update({field.name: values})
+            field_alias = self._get_field_name_alias(field)
+            field_name = field.name if not field_alias else field_alias.alias_name
+            properties.update({field_name: values})
         return properties
 
     # Post
@@ -678,7 +680,7 @@ class SPPAPIPath(models.Model):
         self.ensure_one()
         properties = []
         for api_field in self.api_field_ids.filtered(lambda f: not f.default_value):
-            field_name = api_field.field_name
+            field_name = api_field._get_field_name()
             _type, _format = convert_field_type_to_swagger(api_field.field_id.ttype)
             values = {
                 "in": "formData",
@@ -917,3 +919,30 @@ class SPPAPIPath(models.Model):
             "view_mode": "tree,form",
             "context": {"default_api_path_id": self.id, "scoped_alias": True},
         }
+
+    def _get_field_name_alias(self, field):
+        self.ensure_one()
+        field_alias = (
+            self.env["spp_api.field.alias"]
+            .sudo()
+            .search(
+                [
+                    ("field_id", "=", field.id),
+                    ("api_path_id", "=", self.id),
+                ],
+                limit=1,
+            )
+        )
+        if not field_alias:
+            field_alias = (
+                self.env["spp_api.field.alias"]
+                .sudo()
+                .search(
+                    [
+                        ("field_id", "=", field.id),
+                        ("global_alias", "=", True),
+                    ],
+                    limit=1,
+                )
+            )
+        return field_alias
