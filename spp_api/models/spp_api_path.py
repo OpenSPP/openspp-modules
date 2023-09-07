@@ -697,6 +697,7 @@ class SPPAPIPath(models.Model):
 
     def post_treatment_values(self, post_values):
         self.ensure_one()
+        post_values = self._fields_alias_treatment(post_values)
         # Remove fields unspecified
         new_values = post_values.copy()
         api_fields = self.api_field_ids.mapped("field_name")
@@ -976,3 +977,19 @@ class SPPAPIPath(models.Model):
                     continue
                 element[field_alias.alias_name] = element.pop(field_alias.field_id.name)
         return response_data
+
+    def _fields_alias_treatment(self, post_values):
+        res = {}
+        field_aliases = (
+            self.env["spp_api.field.alias"]
+            .sudo()
+            .search(self._get_related_field_alias_domain())
+        )
+        field_alias_names = field_aliases.mapped("alias_name")
+        for key in post_values:
+            if key not in field_alias_names:
+                res[key] = post_values[key]
+                continue
+            field_alias = field_aliases.filtered(lambda fa: fa.alias_name == key)
+            res[field_alias.field_id.name] = post_values[key]
+        return res
