@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_group_spp_base_form" model="ir.ui.view">
+        <field name="name">view_group_spp_base_form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1000</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='reg_ids']/tree[1]/field[@name='value']" position="after">
+                <field name="card_uid" attrs="{'required': [('id_type', '=', %(spp_base.id_top_up_card)d)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_individual_spp_base_form" model="ir.ui.view">
+        <field name="name">view_individual_spp_base_form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1000</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='reg_ids']/tree[1]/field[@name='value']" position="after">
+                <field name="card_uid" attrs="{'required': [('id_type', '=', %(spp_base.id_top_up_card)d)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
