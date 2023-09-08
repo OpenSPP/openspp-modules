@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template xml:space="preserve">
+
+    <t t-extend="ImportView.side_panel" >
+        <t t-jquery="div.o_import_formatting" t-operation="before">
+            <h4>Import Match</h4>
+            <div class="mb-2 d-flex align-items-center">
+                <label for="oe_import_match">Config:</label>
+                <input class="oe_import_match oe_import_dropdown" id="oe_import_match"/>
+            </div>
+            <div
+                title="When checked, the import will be executed as a background job,
+after splitting your file in small chunks that will be processed independently.
+Use this to import very large files."
+            >
+                <input type="checkbox" class="oe_import_queue" id="oe_import_queue" />
+                <label for="oe_import_queue">Import in the background</label>
+            </div>
+        </t>
+    </t>
+</template>

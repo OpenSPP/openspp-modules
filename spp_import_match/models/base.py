@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import re
-from odoo import api, models
+from odoo import api, models, fields
 
 class Base(models.AbstractModel):
     _inherit = "base"
