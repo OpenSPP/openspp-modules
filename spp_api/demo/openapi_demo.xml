@@ -7,6 +7,7 @@
         <field name="log_request">debug</field>
         <field name="log_response">debug</field>
         <field name="token">demo_token</field>
+        <field name="version_name">v1</field>
         <field name="user_ids" eval="[(4, ref('base.user_demo'))]" />
     </record>
     <record id="ir_exports_res_partner_one_demo" model="ir.exports">
