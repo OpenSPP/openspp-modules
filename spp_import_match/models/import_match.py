@@ -12,7 +12,7 @@ class SPPImportMatch(models.Model):
     _description = "Import Matching"
     _order = "sequence, name"
 
-    name = fields.Char(compute="_compute_name", store=True, index=True)
+    name = fields.Char()
     sequence = fields.Integer(index=True)
     overwrite_match = fields.Boolean(Default=False)
     model_id = fields.Many2one(
@@ -33,27 +33,10 @@ class SPPImportMatch(models.Model):
         help="Fields to Match in Importing",
     )
 
-    _sql_constraints = [
-        (
-            "model_id_unique",
-            "unique (model_id)",
-            "Model must be unique",
-        ),
-    ]
-
     @api.onchange("model_id")
     def _onchange_model_id(self):
         for rec in self:
             rec.field_ids = None
-
-    @api.depends("model_id")
-    def _compute_name(self):
-        for rec in self:
-            name = "New"
-            if rec.model_id:
-                name = rec.model_description
-
-            rec.name = name
 
     @api.model
     def _match_find(self, model, converted_row, imported_row):

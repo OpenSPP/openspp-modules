@@ -15,7 +15,14 @@
         "security/ir.model.access.csv",
         "views/import_match_view.xml",
     ],
-    "assets": {},
+    'assets': {
+        "web.assets_backend": [
+            "/spp_import_match/static/src/legacy/js/custom_base_import.js",
+        ],
+        'web.assets_qweb': [
+            'spp_import_match/static/src/legacy/xml/custom_base_import.xml',
+        ],
+    },
     "demo": [],
     "images": [],
     "application": True,
