@@ -13,6 +13,7 @@ import werkzeug
 
 from odoo import http
 from odoo.http import request
+from odoo.osv.expression import OR
 
 from odoo.addons.spp_base_api.lib.pinguin import error_response
 
@@ -78,7 +79,11 @@ def create_api_log(func):
 
         # Response Log
         json_response = json.loads(response.response[0])
-        reply_id = json_response.get("reply_id", None) or self.get_reply_id()
+        reply_id = (
+            isinstance(json_response, dict)
+            and json_response.get("reply_id", None)
+            or self.get_reply_id()
+        )
         response_log_val = initial_val.copy()
         response_log_val["http_type"] = "response"
         response_log_val["reply_id"] = reply_id
@@ -319,14 +324,15 @@ class ApiV1Controller(http.Controller):
         del method_params["path"]
 
         records = self.get_records(path.model, method_params)
-        ids = ids and ids.split(",") or []
-        ids = [int(i) for i in ids]
+        if isinstance(ids, str):
+            ids = ids and ids.split(",") or []
+            ids = [int(i) for i in ids]
         kwargs = path.custom_treatment_values(method_params)
 
         # limit to the authorized domain and ids
         domain = path.get_domain(method_params)
         if ids:
-            domain += [("id", "in", ids)]
+            domain = OR([domain, [("id", "in", ids)]])
 
         records = records.search(domain)
 
