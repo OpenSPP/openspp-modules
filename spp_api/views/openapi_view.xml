@@ -113,7 +113,7 @@
                         <group string="Additional Information">
                             <field name="active" widget="boolean_toggle" />
                             <field name="deprecated" widget="boolean_toggle" />
-<!--                            <field name="tag_id" options="{'no_create': True}"/>-->
+<!--                            <field name="tag_id" options="{'no_create': True}" />-->
                         </group>
                         <group string="Method">
                             <field name="method" widget="radio" />
