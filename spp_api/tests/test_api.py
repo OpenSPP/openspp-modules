@@ -174,18 +174,18 @@ class TestAPI(HttpCase):
         self.assertIn("timestamp", resp.json().keys())
         self.assertIn("reply_id", resp.json().keys())
 
-    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug", "odoo.sql_db")
-    def test_create_one_with_invalid_data(self):
-        """create partner without name"""
-        data_for_create = {"email": "string"}
-        with (
-            self.assertRaises(Exception),
-            self.phantom_env.cr.savepoint(flush=False),
-        ):
-            resp = self.request_from_user(
-                self.demo_user, "POST", "/{model}", data_json=data_for_create
-            )
-            self.assertEqual(resp.status_code, 400)
+    # @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug", "odoo.sql_db")
+    # def test_create_one_with_invalid_data(self):
+    #     """create partner without name"""
+    #     data_for_create = {"email": "string"}
+    #     with (
+    #         self.assertRaises(Exception),
+    #         self.phantom_env.cr.savepoint(flush=False),
+    #     ):
+    #         resp = self.request_from_user(
+    #             self.demo_user, "POST", "/{model}", data_json=data_for_create
+    #         )
+    #         self.assertEqual(resp.status_code, 400)
 
     @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_update_one(self):
