@@ -33,7 +33,10 @@ from odoo.service import security
 from odoo.tools import date_utils
 from odoo.tools.safe_eval import safe_eval
 
+# fmt: off
 from odoo.addons.spp_base_api.lib.pinguin import error_response, get_dict_from_record, get_model_for_read
+
+# fmt: on
 from odoo.addons.web.controllers.main import ReportController
 
 from .apijsonrequest import api_route
