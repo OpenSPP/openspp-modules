@@ -57,7 +57,7 @@
         <field name="model">spp_api.path</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="Paths" decoration-muted="not active">
+            <tree decoration-muted="not active">
                 <button icon="fa-external-link" name="open_self_form" type="object" class="btn btn-success" />
                 <field name="namespace_id" />
                 <field name="name" />
