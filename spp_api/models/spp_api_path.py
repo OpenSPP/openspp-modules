@@ -510,7 +510,7 @@ class SPPAPIPath(models.Model):
             "type": "string",
         }
 
-    def _context_parameter(self, type="query"):
+    def _context_parameter(self, _type="query"):
         """
         Generates a dictionary containing the information of the 'context'
         parameter used in the API.
@@ -673,7 +673,7 @@ class SPPAPIPath(models.Model):
     def _post_parameters(self):
         self.ensure_one()
         return self._post_properties() + [
-            self._context_parameter(type="formData"),
+            self._context_parameter(_type="formData"),
         ]
 
     def _post_properties(self):
@@ -738,7 +738,7 @@ class SPPAPIPath(models.Model):
             parameters
             + self._post_properties()
             + [
-                self._context_parameter(type="formData"),
+                self._context_parameter(_type="formData"),
             ]
         )
 
@@ -747,14 +747,14 @@ class SPPAPIPath(models.Model):
         self.ensure_one()
         return [
             self._id_parameter(),
-            self._context_parameter(type="formData"),
+            self._context_parameter(_type="formData"),
         ]
 
     # Put Custom function
     def _custom_parameters(self):
         self.ensure_one()
         parameters = self._custom_function_parameters() + [
-            self._context_parameter(type="formData")
+            self._context_parameter(_type="formData")
         ]
         if self.function_apply_on_record:
             parameters = [self._id_parameter()] + parameters
@@ -785,7 +785,7 @@ class SPPAPIPath(models.Model):
         return properties
 
     def custom_treatment_values(self, post_values):
-        def _real_type_python(type):
+        def _real_type_python(_type):
             return {
                 "integer": int,
                 "float": float,
@@ -793,7 +793,7 @@ class SPPAPIPath(models.Model):
                 "string": str,
                 "array": list,
                 "object": dict,
-            }.get(type)
+            }.get(_type)
 
         self.ensure_one()
         new_values = {}
