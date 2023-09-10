@@ -31,7 +31,7 @@
         <field name="name">spp_api.field.alias.view.tree</field>
         <field name="model">spp_api.field.alias</field>
         <field name="arch" type="xml">
-            <tree string="Field Name Alias">
+            <tree>
                 <field name="alias_name" />
                 <field name="field_id" />
                 <field name="api_path_id" />
