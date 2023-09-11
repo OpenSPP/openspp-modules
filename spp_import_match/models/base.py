@@ -1,6 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import re
+import logging
 from odoo import api, models, fields
+_logger = logging.getLogger(__name__)
 
 class Base(models.AbstractModel):
     _inherit = "base"
@@ -8,9 +10,6 @@ class Base(models.AbstractModel):
     @api.model
     def load(self, fields, data):
         usable, field_to_match = self.env["spp.import.match"]._usable_rules(self._name, fields)
-        import_match = self.env["spp.import.match"].search([("model_name", "=", self._name)])
-        overwrite_match = import_match[0].overwrite_match if import_match else False
-
         if usable:
             newdata = list()
             if ".id" in fields:
@@ -50,15 +49,7 @@ class Base(models.AbstractModel):
                 match.export_data(fields)
 
                 ext_id = match.get_external_id()
-                add_row = False
-                if ext_id:
-                    if overwrite_match:
-                        add_row = True
-                else:
-                    add_row = True
-
-                if add_row:
-                    row["id"] = ext_id[match.id] if match else row.get("id", "")
-                    newdata.append(tuple(row[f] for f in fields))
+                row["id"] = ext_id[match.id] if match else row.get("id", "")
+                newdata.append(tuple(row[f] for f in fields))
             data = newdata
         return super(Base, self).load(fields, data)

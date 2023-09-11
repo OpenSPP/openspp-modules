@@ -78,13 +78,10 @@ class SPPImportMatch(models.Model):
         available = self.search([("model_name", "=", model_name)])
         field_to_match = []
         for record in available:
-            for field in record.field_ids:
-                if not field.sub_field_id:
-                    field_to_match.append(field.name)
+            field_to_match.append(record.field_ids.mapped("name"))
             for f in record.field_ids:
                 if f.name in fields or f.field_id.name in fields:
                     result |= record
-
         return result.ids, field_to_match
 
 
