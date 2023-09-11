@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="g2p_entitlement_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="g2p_programs.field_g2p_entitlement__write_date" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_path" />
+    </record>
+
+    <record id="g2p_entitlement_inkind_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="spp_programs.field_g2p_entitlement_inkind__write_date" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_inkind_path" />
+    </record>
+
+</odoo>
