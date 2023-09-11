@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="service_point_user_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="base.field_res_users__write_date" />
+        <field name="api_path_id" ref="spp_api_records.service_point_user_get_path" />
+    </record>
+
+</odoo>
