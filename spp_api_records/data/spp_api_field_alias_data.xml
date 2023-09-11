@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_currency_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="base.field_res_currency__write_date" />
+        <field name="api_path_id" ref="spp_api_records.currency_path" />
+    </record>
+
+</odoo>
