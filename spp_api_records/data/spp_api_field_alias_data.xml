@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="cycle_write_data" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="g2p_programs.field_g2p_cycle__write_date" />
+        <field name="api_path_id" ref="spp_api_records.cycles_path" />
+    </record>
+
+</odoo>
