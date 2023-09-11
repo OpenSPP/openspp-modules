@@ -47,24 +47,27 @@ class SPPCreateNewProgramWiz(models.TransientModel):
                 )
         return
 
+    def get_manager_tags_val(self, program_id):
+        return {
+            "name": "Tags Manager",
+            "program_id": program_id,
+            "tags_id": self.tags_id.id,
+            "area_id": self.area_id.id,
+        }
+
     def _get_eligibility_manager(self, program_id):
         res = super()._get_eligibility_manager(program_id)
         if self.eligibility_kind == "tags_eligibility":
             # Add a new record to tag-base eligibility manager model
+            manager_tags_val = self.get_manager_tags_val(program_id)
             def_mgr = self.env["g2p.program_membership.manager.tags"].create(
-                {
-                    "name": "Tags Manager",
-                    "program_id": program_id,
-                    "tags_id": self.tags_id.id,
-                    "area_id": self.area_id.id,
-                }
+                manager_tags_val
             )
+
             # Add a new record to eligibility manager parent model
-            mgr = self.env["g2p.eligibility.manager"].create(
-                {
-                    "program_id": program_id,
-                    "manager_ref_id": "%s,%s" % (def_mgr._name, str(def_mgr.id)),
-                }
+            eligibility_manager_val = self._get_eligibility_managers_val(
+                program_id, def_mgr
             )
+            mgr = self.env["g2p.eligibility.manager"].create(eligibility_manager_val)
             res = {"eligibility_managers": [(4, mgr.id)]}
         return res

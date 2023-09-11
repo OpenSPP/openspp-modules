@@ -62,7 +62,9 @@ class SPPCreateNewProgramWiz(models.TransientModel):
     def create_program(self):
         self._check_required_fields()
         for rec in self:
-            program = rec.create_g2p_program()
+            program_vals = rec.get_program_vals()
+            program = self.env["g2p.program"].create(program_vals)
+
             program_id = program.id
             vals = {}
 
@@ -71,11 +73,17 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
             # Set Default Cycle Manager settings
             # Add a new record to default cycle manager model
-            def_mgr = rec.create_cycle_manager_default(program_id)
-            def_mgr.update(self._get_recurrent_field_values())
+
+            cycle_manager_default_val = rec.get_cycle_manager_default_val(program_id)
+            def_mgr = self.env["g2p.cycle.manager.default"].create(
+                cycle_manager_default_val
+            )
 
             # Add a new record to cycle manager parent model
-            mgr = rec.create_cycle_manager(program_id, def_mgr)
+
+            cycle_manager_val = rec.get_cycle_manager_val(program_id, def_mgr)
+            mgr = self.env["g2p.cycle.manager"].create(cycle_manager_val)
+
             vals.update({"cycle_managers": [(4, mgr.id)]})
 
             # Set Default Entitlement Manager
@@ -97,33 +105,36 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             }
             return action
 
-    def _create_default_eligibility_manager(self, program_id):
-        def_mgr_obj = "g2p.program_membership.manager.default"
-        def_mgr = self.env[def_mgr_obj].create(
-            {
-                "name": "Default",
-                "program_id": program_id,
-                "admin_area_ids": self.admin_area_ids,
-                "eligibility_domain": self.eligibility_domain,
-            }
-        )
-        return def_mgr
+    def _get_default_eligibility_manager_val(self, program_id):
+        return {
+            "name": "Default",
+            "program_id": program_id,
+            "admin_area_ids": self.admin_area_ids,
+            "eligibility_domain": self.eligibility_domain,
+        }
 
-    def _create_eligibility_managers(self, program_id, def_mgr):
-        return self.env["g2p.eligibility.manager"].create(
-            {
-                "program_id": program_id,
-                "manager_ref_id": "%s,%s" % (def_mgr._name, str(def_mgr.id)),
-            }
-        )
+    def _get_eligibility_managers_val(self, program_id, def_mgr):
+        return {
+            "program_id": program_id,
+            "manager_ref_id": "%s,%s" % (def_mgr._name, str(def_mgr.id)),
+        }
 
     def _get_eligibility_manager(self, program_id):
         val = {}
         if self.eligibility_kind == "default_eligibility":
             # Add a new record to default eligibility manager model
-            def_mgr = self._create_default_eligibility_manager(program_id)
+            default_eligibility_manager_val = self._get_default_eligibility_manager_val(
+                program_id
+            )
+            def_mgr = self.env["g2p.program_membership.manager.default"].create(
+                default_eligibility_manager_val
+            )
+
             # Add a new record to eligibility manager parent model
-            mgr = self._create_eligibility_managers(program_id, def_mgr)
+            eligibility_manager_val = self._get_eligibility_managers_val(
+                program_id, def_mgr
+            )
+            mgr = self.env["g2p.eligibility.manager"].create(eligibility_manager_val)
 
             val = {"eligibility_managers": [(4, mgr.id)]}
         return val
@@ -132,34 +143,29 @@ class SPPCreateNewProgramWiz(models.TransientModel):
         eligibility_managers = program.get_managers(program.MANAGER_ELIGIBILITY)
         eligibility_managers[0].import_eligible_registrants(state="enrolled")
 
-    def create_cycle_manager(self, program_id, cycle_manager_default):
-        return self.env["g2p.cycle.manager"].create(
-            {
-                "program_id": program_id,
-                "manager_ref_id": "%s,%s"
-                % (cycle_manager_default._name, str(cycle_manager_default.id)),
-            }
-        )
+    def get_cycle_manager_val(self, program_id, cycle_manager_default):
+        return {
+            "program_id": program_id,
+            "manager_ref_id": "%s,%s"
+            % (cycle_manager_default._name, str(cycle_manager_default.id)),
+        }
 
-    def create_cycle_manager_default(self, program_id):
-        return self.env["g2p.cycle.manager.default"].create(
-            {
-                "name": "Default",
-                "program_id": program_id,
-                "auto_approve_entitlements": self.auto_approve_entitlements,
-                "cycle_duration": self.cycle_duration,
-                "approver_group_id": self.approver_group_id.id or None,
-            }
-        )
+    def get_cycle_manager_default_val(self, program_id):
+        return {
+            "name": "Default",
+            "program_id": program_id,
+            "auto_approve_entitlements": self.auto_approve_entitlements,
+            "cycle_duration": self.cycle_duration,
+            "approver_group_id": self.approver_group_id.id or None,
+            **self._get_recurrent_field_values(),
+        }
 
-    def create_g2p_program(self):
+    def get_program_vals(self):
         # Create a new journal for this program
         journal_id = self.create_journal(self.name, self.currency_id.id)
 
-        return self.env["g2p.program"].create(
-            {
-                "name": self.name,
-                "journal_id": journal_id,
-                "target_type": self.target_type,
-            }
-        )
+        return {
+            "name": self.name,
+            "journal_id": journal_id,
+            "target_type": self.target_type,
+        }
