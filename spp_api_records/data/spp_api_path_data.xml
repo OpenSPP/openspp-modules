@@ -29,7 +29,7 @@
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">GET service point users</field>
         <field name="method">get</field>
-        <field name="filter_domain">[('is_service_point_user', '=', True)]</field>
+        <field name="filter_domain">[('service_point_ids', '!=', False)]</field>
         <field
             name="field_ids"
             eval="[(
@@ -39,7 +39,7 @@
                 ref('base.field_res_users__name'),
                 ref('base.field_res_users__active'),
                 ref('base.field_res_users__write_date'),
-                ref('spp_service_points.field_res_users__service_point_id'),
+                ref('spp_service_points.field_res_users__service_point_ids'),
             ]
         )]"
         />
