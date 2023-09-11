@@ -46,6 +46,14 @@ class OpenSPPServicePoint(models.Model):
         domain=[("is_company", "=", True)],
     )
 
+    user_ids = fields.Many2many(
+        comodel_name="res.users",
+        relation="service_point_ids_user_ids_rel",
+        column1="user_id",
+        column2="service_point_id",
+        string="Service Points",
+    )
+
     @api.depends("phone_no", "country_id")
     def _compute_phone_sanitized(self):
         for rec in self:
@@ -162,11 +170,40 @@ class OpenSPPServicePoint(models.Model):
                         (4, self.env.ref("base.group_user").id),
                         (4, self.env.ref("spp_service_points.service_point_users").id),
                     ],
-                    "is_service_point_user": True,
-                    "service_point_id": self.id,
+                    "service_point_ids": [(4, self.id)],
                 }
             )
         )
+
+    def get_user_id_list(self):
+        user_id_list = []
+
+        # get all user_ids of individual
+        if self.res_partner_company_id and self.res_partner_company_id.child_ids:
+            for child_id in self.res_partner_company_id.child_ids:
+                user_id_list.extend(child_id.user_ids.ids)
+
+        # to ensure no duplicate id
+        user_id_list = list(set(user_id_list))
+
+        return user_id_list
+
+    def write(self, vals):
+        res = super().write(vals)
+
+        if "res_partner_company_id" in vals:
+            self.user_ids = [(6, 0, self.get_user_id_list())]
+
+        return res
+
+    @api.model
+    def create(self, vals):
+        res = super().create(vals)
+
+        if "res_partner_company_id" in vals:
+            res.user_ids = [(6, 0, res.get_user_id_list())]
+
+        return res
 
 
 class OpenSPPServiceType(models.Model):
