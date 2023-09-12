@@ -15,12 +15,7 @@
     "data": [
         "data/spp_api_namespace_data.xml",
         "data/spp_api_path_data.xml",
-<<<<<<< HEAD
-=======
-        "views/spp_service_point_device_views.xml",
-        "views/spp_service_point_views.xml",
         "security/ir.model.access.csv",
->>>>>>> 030b079 ([UPD] add model, views, tests for terminal devices)
     ],
     "application": False,
     "auto_install": False,
