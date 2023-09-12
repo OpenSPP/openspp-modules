@@ -36,11 +36,8 @@
             6, 0, [
                 ref('base.field_res_partner__id'),
                 ref('base.field_res_partner__name'),
-                ref('g2p_registry_base.field_res_partner__is_group'),
-                ref('g2p_registry_base.field_res_partner__address'),
-                ref('spp_area.field_res_partner__area_id'),
-                ref('base.field_res_partner__email'),
                 ref('g2p_registry_base.field_res_partner__registration_date'),
+                ref('base.field_res_partner__company_id'),
             ]
         )]"
         />
