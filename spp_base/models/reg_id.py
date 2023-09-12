@@ -1,6 +1,5 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import logging
-import textwrap
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -16,5 +15,8 @@ class OpenSPPRegistrantID(models.Model):
     @api.constrains("card_uid")
     def _check_card_uid(self):
         for rec in self:
-            if rec.id_type.id == self.env.ref("spp_base.id_top_up_card").id and len(str(rec.card_uid)) != 10:
+            if (
+                rec.id_type.id == self.env.ref("spp_base.id_top_up_card").id
+                and len(str(rec.card_uid)) != 10
+            ):
                 raise ValidationError(_("Top-up Card UID should have 10 characters"))
