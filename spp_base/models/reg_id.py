@@ -12,7 +12,7 @@ class OpenSPPRegistrantID(models.Model):
 
     card_uid = fields.Char("Card UID")
 
-    @api.constrains("card_uid")
+    @api.constrains("card_uid", "id_type")
     def _check_card_uid(self):
         for rec in self:
             if (
