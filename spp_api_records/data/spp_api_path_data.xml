@@ -35,7 +35,6 @@
             eval="[(
             6, 0, [
                 ref('base.field_res_users__login'),
-                ref('base.field_res_users__password'),
                 ref('base.field_res_users__name'),
                 ref('base.field_res_users__active'),
                 ref('base.field_res_users__write_date'),
