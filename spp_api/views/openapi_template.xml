@@ -51,13 +51,13 @@
 
         <body>
 
-            <div id="swagger-ui"/>
+            <div id="swagger-ui" />
             <script>
                 window.onload = function() {
                     // Begin Swagger UI call region
                     SwaggerUIBundle({
-                        urls: <t t-raw="urls"/>,
-                        "urls.primaryName": "<t t-esc="urls_primaryName"/>",
+                        urls: <t t-raw="urls" />,
+                        "urls.primaryName": "<t t-esc="urls_primaryName" />",
                         dom_id: '#swagger-ui',
                         deepLinking: true,
                         presets: [

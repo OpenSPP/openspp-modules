@@ -2,6 +2,7 @@ import logging
 from copy import deepcopy
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 from odoo.tools import safe_eval
 
 # Field type mapping for Swagger
@@ -114,6 +115,15 @@ class SPPAPIPath(models.Model):
             "Name, Version, Method must be unique!",
         ),
     ]
+
+    @api.constrains(
+        "method",
+        "field_ids",
+    )
+    def _check_field_get_method(self):
+        for rec in self:
+            if rec.method == "get" and not rec.field_ids:
+                raise ValidationError(_("API need a specific fields list!"))
 
     @api.onchange("model_id")
     def _onchange_model_id(self):
@@ -500,7 +510,7 @@ class SPPAPIPath(models.Model):
             "type": "string",
         }
 
-    def _context_parameter(self, type="query"):
+    def _context_parameter(self, _type="query"):
         """
         Generates a dictionary containing the information of the 'context'
         parameter used in the API.
@@ -654,21 +664,23 @@ class SPPAPIPath(models.Model):
                 "description": field.field_description or "",
             }
             self._update_values_ttype(field, values, definition=True)
-            properties.update({field.name: values})
+            field_alias = self._get_field_name_alias(field)
+            field_name = field.name if not field_alias else field_alias.alias_name
+            properties.update({field_name: values})
         return properties
 
     # Post
     def _post_parameters(self):
         self.ensure_one()
         return self._post_properties() + [
-            self._context_parameter(type="formData"),
+            self._context_parameter(_type="formData"),
         ]
 
     def _post_properties(self):
         self.ensure_one()
         properties = []
         for api_field in self.api_field_ids.filtered(lambda f: not f.default_value):
-            field_name = api_field.field_name
+            field_name = api_field._get_field_name()
             _type, _format = convert_field_type_to_swagger(api_field.field_id.ttype)
             values = {
                 "in": "formData",
@@ -685,6 +697,7 @@ class SPPAPIPath(models.Model):
 
     def post_treatment_values(self, post_values):
         self.ensure_one()
+        post_values = self._fields_alias_treatment(post_values)
         # Remove fields unspecified
         new_values = post_values.copy()
         api_fields = self.api_field_ids.mapped("field_name")
@@ -725,7 +738,7 @@ class SPPAPIPath(models.Model):
             parameters
             + self._post_properties()
             + [
-                self._context_parameter(type="formData"),
+                self._context_parameter(_type="formData"),
             ]
         )
 
@@ -734,14 +747,14 @@ class SPPAPIPath(models.Model):
         self.ensure_one()
         return [
             self._id_parameter(),
-            self._context_parameter(type="formData"),
+            self._context_parameter(_type="formData"),
         ]
 
     # Put Custom function
     def _custom_parameters(self):
         self.ensure_one()
         parameters = self._custom_function_parameters() + [
-            self._context_parameter(type="formData")
+            self._context_parameter(_type="formData")
         ]
         if self.function_apply_on_record:
             parameters = [self._id_parameter()] + parameters
@@ -772,7 +785,7 @@ class SPPAPIPath(models.Model):
         return properties
 
     def custom_treatment_values(self, post_values):
-        def _real_type_python(type):
+        def _real_type_python(_type):
             return {
                 "integer": int,
                 "float": float,
@@ -780,7 +793,7 @@ class SPPAPIPath(models.Model):
                 "string": str,
                 "array": list,
                 "object": dict,
-            }.get(type)
+            }.get(_type)
 
         self.ensure_one()
         new_values = {}
@@ -886,3 +899,97 @@ class SPPAPIPath(models.Model):
     def eval_domain(self, domain):
         self.ensure_one()
         return safe_eval.safe_eval(domain, self._get_eval_context())
+
+    def open_self_form(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _(self._description),
+            "res_model": self._name,
+            "res_id": self.id,
+            "view_mode": "form",
+        }
+
+    def action_open_field_alias(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Field Name Alias"),
+            "res_model": "spp_api.field.alias",
+            "domain": self._get_related_field_alias_domain(),
+            "view_mode": "tree,form",
+            "context": {
+                "default_api_path_id": self.id,
+                "scoped_alias": True,
+                "create": False,
+            },
+        }
+
+    def _get_related_field_alias_domain(self):
+        self.ensure_one()
+        return [
+            "|",
+            ("api_path_id", "=", self.id),
+            "&",
+            ("api_path_id", "=", False),
+            ("model_id", "=", self.model_id.id),
+        ]
+
+    def _get_field_name_alias(self, field):
+        self.ensure_one()
+        field_alias = (
+            self.env["spp_api.field.alias"]
+            .sudo()
+            .search(
+                [
+                    ("field_id", "=", field.id),
+                    ("api_path_id", "=", self.id),
+                ],
+                limit=1,
+            )
+        )
+        if not field_alias:
+            field_alias = (
+                self.env["spp_api.field.alias"]
+                .sudo()
+                .search(
+                    [
+                        ("field_id", "=", field.id),
+                        ("global_alias", "=", True),
+                    ],
+                    limit=1,
+                )
+            )
+        return field_alias
+
+    def _get_response_treatment(self, response_data):
+        if isinstance(response_data, dict):
+            response_data = [response_data]
+        self.ensure_one()
+        field_aliases = (
+            self.env["spp_api.field.alias"]
+            .sudo()
+            .search(self._get_related_field_alias_domain())
+        )
+        for element in response_data:
+            for field_alias in field_aliases:
+                if field_alias.field_id.name not in element.keys():
+                    continue
+                element[field_alias.alias_name] = element.pop(field_alias.field_id.name)
+        return response_data
+
+    def _fields_alias_treatment(self, post_values):
+        res = {}
+        field_aliases = (
+            self.env["spp_api.field.alias"]
+            .sudo()
+            .search(self._get_related_field_alias_domain())
+        )
+        field_alias_names = field_aliases.mapped("alias_name")
+        for key in post_values:
+            if key not in field_alias_names:
+                res[key] = post_values[key]
+                continue
+            field_alias = field_aliases.filtered(lambda fa: fa.alias_name == key)
+            res[field_alias.field_id.name] = post_values[key]
+        return res

@@ -35,3 +35,14 @@ class SPPAPIField(models.Model):
     def on_required_change(self):
         if self.default_value:
             self.required = False
+
+    def create_api_field_name_alias(self):
+        self.ensure_one()
+        return self.field_id.with_context(
+            default_api_path_id=self.path_id.id
+        ).create_api_field_name_alias()
+
+    def _get_field_name(self):
+        self.ensure_one()
+        field_alias = self.path_id._get_field_name_alias(self.field_id)
+        return field_alias.alias_name if field_alias else self.field_name

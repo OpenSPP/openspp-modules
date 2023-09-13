@@ -27,10 +27,10 @@ class OAS(http.Controller):
     )
     def index(self, **params):
         primary_name = params.get("urls.primaryName")
-        swagger_settings = {
-            "urls": self._get_api_urls(),
-            "urls.primaryName": primary_name,
-        }
+        # swagger_settings = {
+        #     "urls": self._get_api_urls(),
+        #     "urls.primaryName": primary_name,
+        # }
 
         values = {
             "urls": json.dumps(self._get_api_urls()),

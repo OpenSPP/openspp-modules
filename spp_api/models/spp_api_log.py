@@ -38,4 +38,4 @@ class Log(models.Model):
     response_data = fields.Text()
 
     def _compute_name(self):
-        self.name = f"{self.type} {self.method} - {self.model}"
+        self.name = f"{self.http_type} {self.method} - {self.model}"

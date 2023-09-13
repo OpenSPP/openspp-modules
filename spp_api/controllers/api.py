@@ -13,6 +13,7 @@ import werkzeug
 
 from odoo import http
 from odoo.http import request
+from odoo.osv.expression import OR
 
 from odoo.addons.spp_base_api.lib.pinguin import error_response
 
@@ -78,7 +79,11 @@ def create_api_log(func):
 
         # Response Log
         json_response = json.loads(response.response[0])
-        reply_id = json_response.get("reply_id", None) or self.get_reply_id()
+        reply_id = (
+            isinstance(json_response, dict)
+            and json_response.get("reply_id", None)
+            or self.get_reply_id()
+        )
         response_log_val = initial_val.copy()
         response_log_val["http_type"] = "response"
         response_log_val["reply_id"] = reply_id
@@ -182,7 +187,7 @@ class ApiV1Controller(http.Controller):
         records.create(data)
 
         response = {
-            "time_stamp": str(datetime.datetime.now()),
+            "timestamp": str(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
@@ -200,14 +205,14 @@ class ApiV1Controller(http.Controller):
         kw = path.search_treatment_kwargs(kw)
         records = self.get_records(path.model, kw)
         records = records.search_read(**kw)
-
+        records = path._get_response_treatment(records)
         response_data = {
             "results": records,
             "total": len(records),
             "offset": kw.get("offset", 0),
             "limit": kw.get("limit", 0),
             "version": version,
-            "time_stamp": str(datetime.datetime.now()),
+            "timestamp": str(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
@@ -225,11 +230,11 @@ class ApiV1Controller(http.Controller):
         path.read_treatment_kwargs(kw)
         obj = self.get_record(path.model, id, path, kw)
         result = obj.search_read(domain=[("id", "=", obj.id)], fields=kw["fields"])
-
+        result = path._get_response_treatment(result)
         response_data = result and result[0] or {}
         response_data.update(
             {
-                "time_stamp": str(datetime.datetime.now()),
+                "timestamp": str(datetime.datetime.now()),
                 "reply_id": self.get_reply_id(),
             }
         )
@@ -251,7 +256,7 @@ class ApiV1Controller(http.Controller):
         obj.write(data)
 
         response = {
-            "time_stamp": str(datetime.datetime.now()),
+            "timestamp": str(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
@@ -270,7 +275,7 @@ class ApiV1Controller(http.Controller):
         obj.unlink()
 
         response_data = {
-            "time_stamp": str(datetime.datetime.now()),
+            "timestamp": str(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
@@ -319,14 +324,15 @@ class ApiV1Controller(http.Controller):
         del method_params["path"]
 
         records = self.get_records(path.model, method_params)
-        ids = ids and ids.split(",") or []
-        ids = [int(i) for i in ids]
+        if isinstance(ids, str):
+            ids = ids and ids.split(",") or []
+            ids = [int(i) for i in ids]
         kwargs = path.custom_treatment_values(method_params)
 
         # limit to the authorized domain and ids
         domain = path.get_domain(method_params)
         if ids:
-            domain += [("id", "in", ids)]
+            domain = OR([domain, [("id", "in", ids)]])
 
         records = records.search(domain)
 
