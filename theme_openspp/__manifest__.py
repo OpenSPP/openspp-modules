@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Theme",
     "author": "OpenSPP.org",
-    "website": "https://github.com/openspp/openspp-theme",
+    "website": "https://github.com/openspp/openspp-registry",
     "category": "Theme",
     "version": "15.0.0.0.0",
     "depends": ["web"],
