@@ -29,12 +29,15 @@
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">GET Products</field>
         <field name="method">get</field>
-        <field name="field_ids" eval="[(
+        <field
+            name="field_ids"
+            eval="[(
             6, 0, [
                 ref('product.field_product_template__id'),
                 ref('product.field_product_template__name'),
             ]
-        )]" />
+        )]"
+        />
     </record>
 
 </odoo>
