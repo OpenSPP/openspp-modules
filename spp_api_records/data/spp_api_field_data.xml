@@ -7,7 +7,7 @@
         <field name="required" eval="1" />
     </record>
 
-    <record id="cash_entitlement_card_number_api_field" model="spp_api.field">
+    <record id="cash_entitlement_card_type_api_field" model="spp_api.field">
         <field name="path_id" ref="cash_entitlement_post_path" />
         <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__card_type" />
         <field name="required" eval="1" />
