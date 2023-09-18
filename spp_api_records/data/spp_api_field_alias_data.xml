@@ -13,4 +13,16 @@
         <field name="api_path_id" ref="spp_api_records.vouchers_inkind_path" />
     </record>
 
+    <record id="g2p_entitlement_create_date" model="spp_api.field.alias">
+        <field name="alias_name">creation_date</field>
+        <field name="field_id" ref="g2p_programs.field_g2p_entitlement__create_date" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_path" />
+    </record>
+
+    <record id="g2p_entitlement_inkind_create_date" model="spp_api.field.alias">
+        <field name="alias_name">creation_date</field>
+        <field name="field_id" ref="spp_programs.field_g2p_entitlement_inkind__create_date" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_inkind_path" />
+    </record>
+
 </odoo>

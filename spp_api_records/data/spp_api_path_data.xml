@@ -47,6 +47,7 @@
                 ref('spp_programs.field_g2p_entitlement_inkind__qty'),
                 ref('spp_programs.field_g2p_entitlement_inkind__uom_id'),
                 ref('spp_programs.field_g2p_entitlement_inkind__write_date'),
+                ref('spp_programs.field_g2p_entitlement_inkind__create_date'),
             ]
         )]"
         />
@@ -74,6 +75,7 @@
                 ref('g2p_programs.field_g2p_entitlement__initial_amount'),
                 ref('g2p_programs.field_g2p_entitlement__currency_id'),
                 ref('g2p_programs.field_g2p_entitlement__write_date'),
+                ref('g2p_programs.field_g2p_entitlement__create_date'),
             ]
         )]"
         />
