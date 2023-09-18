@@ -12,7 +12,7 @@
         "spp_service_points",
         "contacts",
         "g2p_registry_base",
-        "spp_area"
+        "spp_area",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",
