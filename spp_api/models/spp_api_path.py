@@ -976,6 +976,7 @@ class SPPAPIPath(models.Model):
         )
         for element in response_data:
             self._format_datetime(element)
+            self._adjust_null_value_fields(element)
             for field_alias in field_aliases:
                 if field_alias.field_id.name not in element.keys():
                     continue
@@ -1006,3 +1007,31 @@ class SPPAPIPath(models.Model):
             ):
                 continue
             element[key] = datetime_format(element[key])
+
+    def _adjust_null_value_fields(self, element):
+        VARCHAR_TYPES = ["char", "text", "html", "selection", "reference"]
+        NULL_TYPES = [
+            "date",
+            "datetime",
+            "binary",
+            "many2one",
+            "many2one_reference",
+            "integer",
+            "float",
+            "monetary",
+        ]
+        X_TO_MANY_TYPES = ["one2many", "many2many"]
+
+        model_sudo = self.env[self.model].sudo()
+        for key in element:
+            if element[key]:
+                continue
+            field_type = model_sudo._fields[key].type
+            if field_type == "boolean":
+                continue
+            if field_type in VARCHAR_TYPES:
+                element[key] = ""
+            if field_type in X_TO_MANY_TYPES:
+                element[key] = []
+            if field_type in NULL_TYPES:
+                element[key] = None
