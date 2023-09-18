@@ -1,9 +1,7 @@
-from odoo import _, api, fields, models
+from odoo import fields, models
 
 
 class UomUom(models.Model):
     _inherit = "uom.uom"
 
-    symbol = fields.Char(
-        size=3
-    )
+    symbol = fields.Char(size=3)
