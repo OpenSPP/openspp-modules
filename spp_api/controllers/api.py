@@ -17,6 +17,7 @@ from odoo.osv.expression import OR
 
 from odoo.addons.spp_base_api.lib.pinguin import error_response
 
+from ..tools import datetime_format
 from . import pinguin
 from .pinguin import CODE__obj_not_found, successful_response
 
@@ -187,7 +188,7 @@ class ApiV1Controller(http.Controller):
         records.create(data)
 
         response = {
-            "timestamp": str(datetime.datetime.now()),
+            "timestamp": datetime_format(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
@@ -212,7 +213,7 @@ class ApiV1Controller(http.Controller):
             "offset": kw.get("offset", 0),
             "limit": kw.get("limit", 0),
             "version": version,
-            "timestamp": str(datetime.datetime.now()),
+            "timestamp": datetime_format(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
@@ -234,7 +235,7 @@ class ApiV1Controller(http.Controller):
         response_data = result and result[0] or {}
         response_data.update(
             {
-                "timestamp": str(datetime.datetime.now()),
+                "timestamp": datetime_format(datetime.datetime.now()),
                 "reply_id": self.get_reply_id(),
             }
         )
@@ -256,7 +257,7 @@ class ApiV1Controller(http.Controller):
         obj.write(data)
 
         response = {
-            "timestamp": str(datetime.datetime.now()),
+            "timestamp": datetime_format(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 
@@ -275,7 +276,7 @@ class ApiV1Controller(http.Controller):
         obj.unlink()
 
         response_data = {
-            "timestamp": str(datetime.datetime.now()),
+            "timestamp": datetime_format(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
         }
 

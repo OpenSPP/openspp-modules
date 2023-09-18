@@ -1,9 +1,12 @@
 import logging
 from copy import deepcopy
+from datetime import date, datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import safe_eval
+
+from ..tools import datetime_format
 
 # Field type mapping for Swagger
 SWAGGER_FIELD_MAPPING = {
@@ -972,6 +975,7 @@ class SPPAPIPath(models.Model):
             .search(self._get_related_field_alias_domain())
         )
         for element in response_data:
+            self._format_datetime(element)
             for field_alias in field_aliases:
                 if field_alias.field_id.name not in element.keys():
                     continue
@@ -993,3 +997,12 @@ class SPPAPIPath(models.Model):
             field_alias = field_aliases.filtered(lambda fa: fa.alias_name == key)
             res[field_alias.field_id.name] = post_values[key]
         return res
+
+    @api.model
+    def _format_datetime(self, element):
+        for key in element:
+            if not isinstance(element[key], date) or not isinstance(
+                element[key], datetime
+            ):
+                continue
+            element[key] = datetime_format(element[key])
