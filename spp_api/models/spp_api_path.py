@@ -574,7 +574,7 @@ class SPPAPIPath(models.Model):
             del kwargs["from_date"]
 
         if "last_modified_date" in kwargs:
-            domain.append(("write_date", ">=", kwargs["last_modified_date"]))
+            domain.append(("write_date", ">", kwargs["last_modified_date"]))
             del kwargs["last_modified_date"]
 
         # Get all fields of model
