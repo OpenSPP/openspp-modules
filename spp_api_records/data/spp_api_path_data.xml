@@ -29,12 +29,15 @@
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">GET Countries</field>
         <field name="method">get</field>
-        <field name="field_ids" eval="[(
+        <field
+            name="field_ids"
+            eval="[(
             6, 0, [
                 ref('base.field_res_country__id'),
                 ref('base.field_res_country__name'),
             ]
-        )]" />
+        )]"
+        />
     </record>
 
 </odoo>
