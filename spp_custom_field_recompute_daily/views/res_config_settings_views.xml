@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_config_settings_view_form_inherit_spp_custom_field_recompute_daily" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='companies']" position="after">
+                <div id="recompute_daily">
+                    <h2>Daily Recomputing</h2>
+                    <div class="row mt16 o_settings_container" name="recompute_daily_setting_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box" id="recompute_daily_setting">
+                            <div class="o_setting_right_pane">
+                                <label for="maximum_daily_recompute_count" />
+                                <div class="text-muted">
+                                    Set maximum number of records for synchronous recomputing fields.
+                                </div>
+                                <field name="maximum_daily_recompute_count" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
