@@ -23,6 +23,11 @@ class TestCreateProgramWiz(TransactionCase):
             }
         )
 
+        self.program = self._program_create_wiz.create_g2p_program()
+        self.cycle_manager_default = (
+            self._program_create_wiz.create_cycle_manager_default(self.program.id)
+        )
+
     def test_01_on_admin_area_ids_change(self):
         self.assertEqual(
             self._program_create_wiz.eligibility_domain,
@@ -42,9 +47,8 @@ class TestCreateProgramWiz(TransactionCase):
         ):
             self._program_create_wiz.create_program()
         self._program_create_wiz.amount_per_cycle = 5.0
-        self.assertFalse(
-            self.env["g2p.program"].search([]).ids, "Start without program!"
-        )
+
+        self._program_create_wiz.import_beneficiaries = "yes"
         res = self._program_create_wiz.create_program()
         self.assertEqual(type(res), dict, "Action should be in json format!")
         for key in ("type", "res_model", "res_id"):
@@ -58,3 +62,31 @@ class TestCreateProgramWiz(TransactionCase):
             res["res_model"], "g2p.program", "Action for program should be return!"
         )
         self.assertTrue(res["res_id"], "New record for program should be existed!")
+
+    def test_03_get_eligibility_manager(self):
+        self._program_create_wiz.eligibility_kind = "default_eligibility"
+        res = self._program_create_wiz._get_eligibility_manager(self.program.id)
+
+        self.assertIn("eligibility_managers", res)
+
+    def test_04_create_cycle_manager(self):
+        cycle_manager = self._program_create_wiz.create_cycle_manager(
+            self.program.id, self.cycle_manager_default
+        )
+
+        self.assertEqual(cycle_manager._name, "g2p.cycle.manager")
+        self.assertIsNotNone(cycle_manager)
+
+    def test_05_create_cycle_manager_default(self):
+        cycle_manager_default = self._program_create_wiz.create_cycle_manager_default(
+            self.program.id
+        )
+
+        self.assertEqual(cycle_manager_default._name, "g2p.cycle.manager.default")
+        self.assertIsNotNone(cycle_manager_default)
+
+    def test_06_create_g2p_program(self):
+        program = self._program_create_wiz.create_g2p_program()
+
+        self.assertEqual(program._name, "g2p.program")
+        self.assertIsNotNone(program)
