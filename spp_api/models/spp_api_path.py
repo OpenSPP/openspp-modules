@@ -873,7 +873,7 @@ class SPPAPIPath(models.Model):
             values.update({"description": description})
         if field.ttype == "datetime":
             description = values.get("description", "")
-            description += "\n\n {}".format(_("Example: `YYYY-MM-DD HH:MM:SS`"))
+            description += "\n\n {}".format(_("Example: `YYYY-MM-DD'T'HH:MM:ss.SSSZ`"))
             values.update({"description": description})
         return values
 
