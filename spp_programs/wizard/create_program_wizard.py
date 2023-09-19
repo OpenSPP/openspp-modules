@@ -19,7 +19,8 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
     admin_area_ids = fields.Many2many("spp.area", domain=_get_admin_area_domain)
 
-    # Tag-based Eligibility Manager
+    is_one_time_distribution = fields.Boolean("One-time Distribution")
+
     eligibility_kind = fields.Selection(
         [("default_eligibility", "Default")],
         "Eligibility Manager",
@@ -89,11 +90,16 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             # Set Default Entitlement Manager
             vals.update(rec._get_entitlement_manager(program_id))
 
+            vals.update({"is_one_time_distribution": rec.is_one_time_distribution})
+
             # Complete the program data
             program.update(vals)
 
             if rec.import_beneficiaries == "yes":
                 rec.program_wizard_import_beneficiaries(program)
+
+            if rec.is_one_time_distribution:
+                program.create_new_cycle()
 
             # Open the newly created program
             action = {

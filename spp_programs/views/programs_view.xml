@@ -115,6 +115,16 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     name="groups"
                 >!g2p_programs.g2p_program_validator, !g2p_programs.g2p_program_cycle_approver</attribute>
             </xpath>
+
+            <xpath expr="//button[@name='create_new_cycle']" position="before">
+                <field name="is_one_time_distribution" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@name='create_new_cycle']" position="attributes">
+                <attribute name="states" />
+                <attribute
+                    name="attrs"
+                >{'invisible': ['|', ('is_one_time_distribution', '=', True), ('state', '!=', 'active')]}</attribute>
+            </xpath>
         </field>
     </record>
 
