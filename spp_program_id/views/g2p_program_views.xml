@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="program_list_filter_inherit_spp_programs" model="ir.ui.view">
+        <field name="name">g2p.program.view.search.inherit</field>
+        <field name="model">g2p.program</field>
+        <field name="inherit_id" ref="g2p_programs.program_list_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="program_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_program_list_tree_inherit_spp_program_id" model="ir.ui.view">
+        <field name="name">g2p.program.view.list.inherit</field>
+        <field name="model">g2p.program</field>
+        <field name="inherit_id" ref="g2p_programs.view_program_list_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="program_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_program_list_form_inherit_spp_program_id" model="ir.ui.view">
+        <field name="name">g2p.program.view.form.inherit</field>
+        <field name="model">g2p.program</field>
+        <field name="inherit_id" ref="g2p_programs.view_program_list_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//h1" position="after">
+                <h4>
+                    <label for="program_id" string="Program ID:" />
+                    <field name="program_id" required="1" />
+                </h4>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

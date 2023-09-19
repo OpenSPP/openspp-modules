@@ -12,6 +12,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="arch" type="xml">
             <xpath expr="//field[@name='eligibility_domain']" position="before">
                 <field name="admin_area_ids" colspan="4" widget="many2many_tags" />
+                <field name="target_type" colspan="4" invisible="1" />
             </xpath>
         </field>
     </record>

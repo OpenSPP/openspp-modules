@@ -24,9 +24,11 @@ odoo.define("spp_programs.domain", function (require) {
             }
             return value_domain;
         },
+        _getAllowedModels() {
+            return ["g2p.program.create.wizard", "g2p.eligibility.manager"];
+        },
         _fetchCount() {
-            // Changes is only for program wizard
-            if (this.record.evalContext.active_model === "g2p.program.create.wizard") {
+            if (this._getAllowedModels().includes(this.record.evalContext.active_model)) {
                 if (!this._domainModel) {
                     this._isValidForModel = true;
                     this.nbRecords = 0;
@@ -67,8 +69,7 @@ odoo.define("spp_programs.domain", function (require) {
         },
         _onShowSelectionButtonClick: function (e) {
             e.preventDefault();
-            // Changes is only for program wizard
-            if (this.record.evalContext.active_model === "g2p.program.create.wizard") {
+            if (this._getAllowedModels().includes(this.record.evalContext.active_model)) {
                 var value_domain = this._target_type_prefilter_domain();
                 this.value = Domain.prototype.arrayToString(value_domain);
             }

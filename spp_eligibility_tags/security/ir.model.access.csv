@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+g2p_program_membership_manager_tags_admin,Eligibility Manager Tag-based Admin Access,spp_eligibility_tags.model_g2p_program_membership_manager_tags,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+g2p_program_membership_manager_tags_program_manager,Eligibility Manager Tag-based Program Manager Access,spp_eligibility_tags.model_g2p_program_membership_manager_tags,g2p_programs.g2p_program_manager,1,1,1,0
+
+g2p_program_membership_manager_tags_validator,Eligibility Manager Tag-based Validator Access,spp_eligibility_tags.model_g2p_program_membership_manager_tags,g2p_programs.g2p_program_validator,1,0,0,0
