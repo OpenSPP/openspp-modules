@@ -862,18 +862,8 @@ class SPPAPIPath(models.Model):
             if definition:
                 values.update(
                     {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                        },
-                        "description": "{} \n\n {}".format(
-                            _(
-                                "Return list with 2 element, "
-                                "first ID of ressource (integer), "
-                                "second Name of ressource (string)."
-                            ),
-                            _("Example : `[1, 'Example']`"),
-                        ),
+                        "type": "integer",
+                        "description": "ID of related record",
                     }
                 )
         # Manage dates
