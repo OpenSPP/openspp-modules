@@ -42,6 +42,28 @@
         />
     </record>
 
+    <record id="cycles_path" model="spp_api.path">
+        <field name="name">g2p.cycle</field>
+        <field name="model_id" ref="g2p_programs.model_g2p_cycle" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">GET Cycle</field>
+        <field name="method">get</field>
+        <field
+            name="field_ids"
+            eval="[(
+            6, 0, [
+                ref('g2p_programs.field_g2p_cycle__id'),
+                ref('g2p_programs.field_g2p_cycle__name'),
+                ref('g2p_programs.field_g2p_cycle__program_id'),
+                ref('g2p_programs.field_g2p_cycle__start_date'),
+                ref('g2p_programs.field_g2p_cycle__end_date'),
+                ref('g2p_programs.field_g2p_cycle__state'),
+                ref('g2p_programs.field_g2p_cycle__write_date'),
+            ]
+        )]"
+        />
+    </record>
+
     <record id="products_path" model="spp_api.path">
         <field name="name">Products</field>
         <field name="model_id" ref="product.model_product_template" />

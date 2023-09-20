@@ -14,6 +14,7 @@
         "uom",
         "spp_service_point_device",
         "product",
+        "g2p_programs",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",
