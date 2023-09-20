@@ -2,13 +2,15 @@
 
 import logging
 
-from odoo import _, models
+from odoo import _, fields, models
 
 _logger = logging.getLogger(__name__)
 
 
 class CustomG2PProgram(models.Model):
     _inherit = "g2p.program"
+
+    is_one_time_distribution = fields.Boolean("One-time Distribution")
 
     def import_eligible_registrants(self, state="draft"):
         eligibility_managers = self.get_managers(self.MANAGER_ELIGIBILITY)
@@ -25,8 +27,6 @@ class CustomG2PProgram(models.Model):
                     _("Started importing %s beneficiaries") % new_beneficiaries_count
                 )
                 kind = "warning"
-
-            manager.import_eligible_registrants()
         else:
             message = _("No Eligibility Manager defined.")
             kind = "danger"

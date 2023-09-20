@@ -19,6 +19,8 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
     admin_area_ids = fields.Many2many("spp.area", domain=_get_admin_area_domain)
 
+    is_one_time_distribution = fields.Boolean("One-time Distribution")
+
     eligibility_kind = fields.Selection(
         [("default_eligibility", "Default")],
         "Eligibility Manager",
@@ -61,16 +63,9 @@ class SPPCreateNewProgramWiz(models.TransientModel):
     def create_program(self):
         self._check_required_fields()
         for rec in self:
-            # Create a new journal for this program
-            journal_id = self.create_journal(rec.name, rec.currency_id.id)
+            program_vals = rec.get_program_vals()
+            program = self.env["g2p.program"].create(program_vals)
 
-            program = self.env["g2p.program"].create(
-                {
-                    "name": rec.name,
-                    "journal_id": journal_id,
-                    "target_type": rec.target_type,
-                }
-            )
             program_id = program.id
             vals = {}
 
@@ -79,37 +74,32 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
             # Set Default Cycle Manager settings
             # Add a new record to default cycle manager model
-            def_mgr_obj = "g2p.cycle.manager.default"
-            def_mgr = self.env[def_mgr_obj].create(
-                {
-                    "name": "Default",
-                    "program_id": program_id,
-                    "auto_approve_entitlements": rec.auto_approve_entitlements,
-                    "cycle_duration": rec.cycle_duration,
-                    "approver_group_id": rec.approver_group_id.id or None,
-                }
+
+            cycle_manager_default_val = rec.get_cycle_manager_default_val(program_id)
+            def_mgr = self.env["g2p.cycle.manager.default"].create(
+                cycle_manager_default_val
             )
-            def_mgr.update(self._get_recurrent_field_values())
 
             # Add a new record to cycle manager parent model
-            man_obj = self.env["g2p.cycle.manager"]
-            mgr = man_obj.create(
-                {
-                    "program_id": program_id,
-                    "manager_ref_id": "%s,%s" % (def_mgr_obj, str(def_mgr.id)),
-                }
-            )
+
+            cycle_manager_val = rec.get_cycle_manager_val(program_id, def_mgr)
+            mgr = self.env["g2p.cycle.manager"].create(cycle_manager_val)
+
             vals.update({"cycle_managers": [(4, mgr.id)]})
 
             # Set Default Entitlement Manager
             vals.update(rec._get_entitlement_manager(program_id))
 
+            vals.update({"is_one_time_distribution": rec.is_one_time_distribution})
+
             # Complete the program data
             program.update(vals)
 
             if rec.import_beneficiaries == "yes":
-                eligibility_managers = program.get_managers(program.MANAGER_ELIGIBILITY)
-                eligibility_managers[0].import_eligible_registrants(state="enrolled")
+                rec.program_wizard_import_beneficiaries(program)
+
+            if rec.is_one_time_distribution:
+                program.create_new_cycle()
 
             # Open the newly created program
             action = {
@@ -154,3 +144,34 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
             val = {"eligibility_managers": [(4, mgr.id)]}
         return val
+
+    def program_wizard_import_beneficiaries(self, program):
+        eligibility_managers = program.get_managers(program.MANAGER_ELIGIBILITY)
+        eligibility_managers[0].import_eligible_registrants(state="enrolled")
+
+    def get_cycle_manager_val(self, program_id, cycle_manager_default):
+        return {
+            "program_id": program_id,
+            "manager_ref_id": "%s,%s"
+            % (cycle_manager_default._name, str(cycle_manager_default.id)),
+        }
+
+    def get_cycle_manager_default_val(self, program_id):
+        return {
+            "name": "Default",
+            "program_id": program_id,
+            "auto_approve_entitlements": self.auto_approve_entitlements,
+            "cycle_duration": self.cycle_duration,
+            "approver_group_id": self.approver_group_id.id or None,
+            **self._get_recurrent_field_values(),
+        }
+
+    def get_program_vals(self):
+        # Create a new journal for this program
+        journal_id = self.create_journal(self.name, self.currency_id.id)
+
+        return {
+            "name": self.name,
+            "journal_id": journal_id,
+            "target_type": self.target_type,
+        }

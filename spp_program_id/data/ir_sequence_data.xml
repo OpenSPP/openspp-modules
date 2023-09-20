@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <record id="program_id_sequence" model="ir.sequence">
+        <field name="name">Program Id Sequence</field>
+        <field name="code">program.id.sequence</field>
+        <field name="prefix">PROG_%(year)s_</field>
+        <field name="padding">8</field>
+        <field name="use_date_range" eval="True" />
+        <field eval="1" name="number_next" />
+        <field eval="1" name="number_increment" />
+        <field eval="False" name="company_id" />
+    </record>
+
+</odoo>

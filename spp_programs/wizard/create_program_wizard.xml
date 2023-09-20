@@ -9,8 +9,48 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="priority">1000</field>
         <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='eligibility']/group[1]/label[1]" position="before">
-                <field name="admin_area_ids" colspan="4" widget="many2many_tags" />
+            <xpath expr="//page[@name='eligibility']/group[1]" position="replace">
+                <group colspan="4" col="4">
+                    <field
+                        name="eligibility_kind"
+                        colspan="4"
+                        widget="radio"
+                        options="{'horizontal': true}"
+                        string="Eligibility manager"
+                    />
+                </group>
+                <group
+                    colspan="4"
+                    col="4"
+                    name="default_eligibility"
+                    attrs="{'invisible':[('eligibility_kind','!=', 'default_eligibility')]}"
+                >
+                    <field name="admin_area_ids" colspan="4" widget="many2many_tags" />
+                    <label for="eligibility_domain" string="FILTER:" />
+                    <field
+                        name="eligibility_domain"
+                        colspan="4"
+                        widget="domain"
+                        options="{'model': 'res.partner'}"
+                        nolabel="1"
+                    />
+                </group>
+            </xpath>
+
+            <xpath expr="//page[@name='cycle']/group/div/group" position="before">
+                <group>
+                    <field name="is_one_time_distribution" />
+                </group>
+            </xpath>
+
+            <xpath expr="//page[@name='cycle']/group/div/group[2]" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_one_time_distribution', '=', True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='cycle']/group/div/group[3]" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': ['|', ('rrule_type', '!=', 'monthly'), ('is_one_time_distribution', '=', True)]}</attribute>
             </xpath>
         </field>
     </record>

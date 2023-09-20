@@ -24,3 +24,10 @@ class SPPDefaultEligibilityManager(models.Model):
             eligibility_domain = "[('area_id', 'in', ({}))]".format(area_ids)
 
         self.eligibility_domain = eligibility_domain
+
+    def _prepare_eligible_domain(self, membership=None):
+        domain = super()._prepare_eligible_domain(membership)
+
+        domain += [("is_registrant", "=", True)]
+
+        return domain

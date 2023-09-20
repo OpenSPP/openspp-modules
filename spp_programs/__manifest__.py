@@ -11,6 +11,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "base",
+        "web",
         "g2p_registry_base",
         "g2p_programs",
         "spp_area",
@@ -29,6 +30,8 @@
         "views/managers/eligibility_manager_view.xml",
         "wizard/inkind_entitlement_report_wiz.xml",
         "wizard/create_program_wizard.xml",
+        "report/program_approval_receipt.xml",
+        "report/report_format.xml",
     ],
     "assets": {
         "web.assets_backend": [
