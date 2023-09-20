@@ -247,4 +247,20 @@
         <field name="method">put</field>
     </record>
 
+    <record id="cash_entitlement_post_path" model="spp_api.path">
+        <field name="name">Cash Entitlement</field>
+        <field name="model_id" ref="spp_ent_trans.model_spp_entitlement_transactions" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">POST Cash Entitlements</field>
+        <field name="method">post</field>
+    </record>
+
+    <record id="inkind_entitlement_post_path" model="spp_api.path">
+        <field name="name">In Kind Entitlement</field>
+        <field name="model_id" ref="spp_ent_trans.model_spp_inkind_entitlement_transactions" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">POST Cash Entitlements</field>
+        <field name="method">post</field>
+    </record>
+
 </odoo>

@@ -18,6 +18,7 @@
         "spp_programs",
         "g2p_entitlement_cash",
         "spp_entitlement_in_kind",
+        "spp_ent_trans",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",
