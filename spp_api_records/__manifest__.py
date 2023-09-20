@@ -8,6 +8,7 @@
     "website": "https://github.com/openspp/openspp-program",
     "license": "LGPL-3",
     "depends": [
+        "base",
         "spp_api",
         "spp_service_points",
     ],
