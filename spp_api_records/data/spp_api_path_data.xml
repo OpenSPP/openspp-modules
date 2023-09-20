@@ -40,4 +40,22 @@
         />
     </record>
 
+    <record id="uom_uom_path" model="spp_api.path">
+        <field name="name">Units of Measure</field>
+        <field name="model_id" ref="uom.model_uom_uom" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">GET Units of Measure</field>
+        <field name="method">get</field>
+        <field
+            name="field_ids"
+            eval="[(
+            6, 0, [
+                ref('uom.field_uom_uom__id'),
+                ref('uom.field_uom_uom__name'),
+                ref('spp_api_records.field_uom_uom__symbol'),
+            ]
+        )]"
+        />
+    </record>
+
 </odoo>
