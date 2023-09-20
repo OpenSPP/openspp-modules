@@ -2,7 +2,7 @@
 <odoo noupdate="1">
 
     <record id="spp_api_namespace" model="spp_api.namespace">
-        <field name="name">SPP API</field>
+        <field name="name">spp_api</field>
         <field name="version_name">1</field>
         <field name="description">SPP API for Famoco</field>
         <field name="log_request">debug</field>

@@ -23,4 +23,24 @@
         />
     </record>
 
+    <record id="program_path" model="spp_api.path">
+        <field name="name">Programs</field>
+        <field name="model_id" ref="g2p_programs.model_g2p_program" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">GET Programs</field>
+        <field name="method">get</field>
+        <field
+            name="field_ids"
+            eval="[(
+            6, 0, [
+                ref('g2p_programs.field_g2p_program__name'),
+                ref('spp_api_records.field_g2p_program__company_id'),
+                ref('g2p_programs.field_g2p_program__cycles_count'),
+                ref('g2p_programs.field_g2p_program__active'),
+                ref('g2p_programs.field_g2p_program__write_date'),
+            ]
+        )]"
+        />
+    </record>
+
 </odoo>
