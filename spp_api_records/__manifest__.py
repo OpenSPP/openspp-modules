@@ -12,6 +12,7 @@
         "spp_api",
         "spp_service_points",
         "uom",
+        "spp_service_point_device",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",
