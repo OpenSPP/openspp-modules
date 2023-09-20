@@ -19,4 +19,10 @@
         <field name="api_path_id" ref="spp_api_records.currency_path" />
     </record>
 
+    <record id="product_category_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="product.field_product_category__write_date" />
+        <field name="api_path_id" ref="spp_api_records.product_category_path" />
+    </record>
+
 </odoo>
