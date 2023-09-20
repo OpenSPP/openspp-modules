@@ -60,6 +60,66 @@
         />
     </record>
 
+    <record id="vouchers_inkind_path" model="spp_api.path">
+        <field name="name">VouchersInkind</field>
+        <field name="model_id" ref="spp_programs.model_g2p_entitlement_inkind" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">GET In-Kind Vouchers</field>
+        <field name="method">get</field>
+        <field
+            name="field_ids"
+            eval="[(
+            6, 0, [
+                ref('spp_programs.field_g2p_entitlement_inkind__id'),
+                ref('spp_programs.field_g2p_entitlement_inkind__cycle_id'),
+                ref('spp_programs.field_g2p_entitlement_inkind__code'),
+                ref('spp_api_records.field_g2p_entitlement_inkind__cycle_number'),
+                ref('spp_programs.field_g2p_entitlement_inkind__partner_id'),
+                ref('spp_api_records.field_g2p_entitlement_inkind__partner_type'),
+                ref('spp_programs.field_g2p_entitlement_inkind__program_id'),
+                ref('spp_api_records.field_g2p_entitlement_inkind__type'),
+                ref('spp_programs.field_g2p_entitlement_inkind__valid_from'),
+                ref('spp_programs.field_g2p_entitlement_inkind__valid_until'),
+                ref('spp_programs.field_g2p_entitlement_inkind__product_id'),
+                ref('spp_programs.field_g2p_entitlement_inkind__unit_price'),
+                ref('spp_programs.field_g2p_entitlement_inkind__qty'),
+                ref('spp_programs.field_g2p_entitlement_inkind__uom_id'),
+                ref('spp_programs.field_g2p_entitlement_inkind__write_date'),
+                ref('spp_programs.field_g2p_entitlement_inkind__create_date'),
+            ]
+        )]"
+        />
+    </record>
+
+    <record id="vouchers_path" model="spp_api.path">
+        <field name="name">VouchersCash</field>
+        <field name="model_id" ref="g2p_programs.model_g2p_entitlement" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">GET Cash Vouchers</field>
+        <field name="method">get</field>
+        <field
+            name="field_ids"
+            eval="[(
+            6, 0, [
+                ref('g2p_programs.field_g2p_entitlement__id'),
+                ref('g2p_programs.field_g2p_entitlement__cycle_id'),
+                ref('g2p_programs.field_g2p_entitlement__code'),
+                ref('spp_api_records.field_g2p_entitlement__cycle_number'),
+                ref('g2p_programs.field_g2p_entitlement__partner_id'),
+                ref('spp_api_records.field_g2p_entitlement__partner_type'),
+                ref('spp_api_records.field_g2p_entitlement__program_id'),
+                ref('spp_api_records.field_g2p_entitlement__type'),
+                ref('g2p_programs.field_g2p_entitlement__valid_from'),
+                ref('g2p_programs.field_g2p_entitlement__valid_until'),
+                ref('g2p_programs.field_g2p_entitlement__initial_amount'),
+                ref('g2p_programs.field_g2p_entitlement__currency_id'),
+                ref('g2p_programs.field_g2p_entitlement__write_date'),
+                ref('g2p_programs.field_g2p_entitlement__create_date'),
+            ]
+        )]"
+        />
+    </record>
+
     <record id="company_path" model="spp_api.path">
         <field name="name">res.company</field>
         <field name="model_id" ref="base.model_res_company" />

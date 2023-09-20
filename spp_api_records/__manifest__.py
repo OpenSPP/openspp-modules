@@ -15,6 +15,9 @@
         "spp_service_point_device",
         "product",
         "g2p_programs",
+        "spp_programs",
+        "g2p_entitlement_cash",
+        "spp_entitlement_in_kind",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",
