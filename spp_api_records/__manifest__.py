@@ -18,6 +18,8 @@
         "data/spp_api_namespace_data.xml",
         "data/spp_api_path_data.xml",
         "views/uom_category_views.xml",
+        "data/spp_api_field_data.xml",
+        "data/spp_api_field_alias_data.xml",
     ],
     "application": False,
     "auto_install": False,

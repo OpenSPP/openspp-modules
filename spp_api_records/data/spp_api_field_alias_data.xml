@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="spp_service_point_res_partner_company_id" model="spp_api.field.alias">
+        <field name="alias_name">company_id</field>
+        <field name="field_id" ref="spp_service_points.field_spp_service_point__res_partner_company_id" />
+        <field name="api_path_id" ref="spp_api_records.service_point_path" />
+    </record>
+
+</odoo>
