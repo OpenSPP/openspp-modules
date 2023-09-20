@@ -15,10 +15,11 @@
         "base",
         "g2p_registry_base",
         "g2p_registry_group",
+        "g2p_programs",
         "spp_area",
         "spp_idqueue",
         "base_user_role",
-        "dms",
+        "spp_api",
     ],
     "data": [
         "data/local_roles.xml",
