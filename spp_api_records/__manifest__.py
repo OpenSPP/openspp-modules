@@ -19,6 +19,9 @@
         "g2p_entitlement_cash",
         "spp_entitlement_in_kind",
         "spp_ent_trans",
+        "contacts",
+        "g2p_registry_base",
+        "spp_area",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",
