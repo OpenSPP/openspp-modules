@@ -42,6 +42,23 @@
         />
     </record>
 
+    <record id="products_path" model="spp_api.path">
+        <field name="name">Products</field>
+        <field name="model_id" ref="product.model_product_template" />
+        <field name="namespace_id" ref="spp_api_namespace" />
+        <field name="description">GET Products</field>
+        <field name="method">get</field>
+        <field
+            name="field_ids"
+            eval="[(
+            6, 0, [
+                ref('product.field_product_template__id'),
+                ref('product.field_product_template__name'),
+            ]
+        )]"
+        />
+    </record>
+
     <record id="uom_uom_path" model="spp_api.path">
         <field name="name">Units of Measure</field>
         <field name="model_id" ref="uom.model_uom_uom" />
