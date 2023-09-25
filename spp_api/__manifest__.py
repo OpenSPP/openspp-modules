@@ -25,6 +25,7 @@
         "views/openapi_template.xml",
         "views/res_users_view.xml",
         "views/ir_model_view.xml",
+        "views/spp_api_field_alias_views.xml",
     ],
     "demo": ["demo/openapi_demo.xml", "demo/openapi_security_demo.xml"],
     "post_load": "post_load",

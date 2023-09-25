@@ -35,7 +35,7 @@ _logger = logging.getLogger(__name__)
 
 
 class ApiJsonRequest(WebRequest):
-    _request_type = "apijson"
+    _request_type = "http"
 
     def __init__(self, *args):
         super(ApiJsonRequest, self).__init__(*args)

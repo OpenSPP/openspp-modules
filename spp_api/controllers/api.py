@@ -3,16 +3,21 @@
 # Copyright 2018 Rafis Bikbov <https://it-projects.info/team/bikbov>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 # pylint: disable=redefined-builtin
+import datetime
+import functools
 import json
 import logging
+import uuid
 
 import werkzeug
 
 from odoo import http
 from odoo.http import request
+from odoo.osv.expression import OR
 
 from odoo.addons.spp_base_api.lib.pinguin import error_response
 
+from ..tools import datetime_format
 from . import pinguin
 from .pinguin import CODE__obj_not_found, successful_response
 
@@ -30,6 +35,67 @@ _logger = logging.getLogger(__name__)
 #################################################################
 
 API_ENDPOINT = "/api"
+
+
+def create_api_log(func):
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        # Request Log
+        path = kwargs.get("path")
+        request_id = kwargs.get("request_id", False)
+        if not request_id:
+            raise werkzeug.exceptions.HTTPException(
+                response=error_response(400, "Bad Request", "request_id is required.")
+            )
+        if (
+            request.env["spp_api.log"]
+            .search([("request_id", "=", request_id)])
+            .exists()
+        ):
+            raise werkzeug.exceptions.HTTPException(
+                response=error_response(
+                    400, "Bad Request", "request_id is already taken."
+                )
+            )
+
+        initial_val = {
+            "method": path.method,
+            "model": path.model,
+            "request": http.request.httprequest.full_path,
+        }
+
+        request_log_val = initial_val.copy()
+        request_log_val["http_type"] = "request"
+        request_log_val["request_id"] = request_id
+        if path.method in ["get"]:
+            request_log_val["request_parameter"] = kwargs
+        else:
+            request_log_val["request_data"] = kwargs
+
+        request.env["spp_api.log"].create(request_log_val)
+        del request_log_val
+
+        # Run API Function
+        response = func(self, *args, **kwargs)
+
+        # Response Log
+        json_response = json.loads(response.response[0])
+        reply_id = (
+            isinstance(json_response, dict)
+            and json_response.get("reply_id", None)
+            or self.get_reply_id()
+        )
+        response_log_val = initial_val.copy()
+        response_log_val["http_type"] = "response"
+        response_log_val["reply_id"] = reply_id
+        response_log_val["response_data"] = response.response[0].decode("utf-8")
+
+        request.env["spp_api.log"].create(response_log_val)
+        del response_log_val
+
+        return response
+
+    return wrapper
 
 
 class ApiV1Controller(http.Controller):
@@ -69,6 +135,18 @@ class ApiV1Controller(http.Controller):
         + "/report/<any(pdf, html):converter>/<report_external_id>/<docids>"
     )
 
+    def get_reply_id(self):
+        reply_id = ""
+        while True:
+            reply_id = str(uuid.uuid4())
+            if (
+                not request.env["spp_api.log"]
+                .search([("reply_id", "=", reply_id)])
+                .exists()
+            ):
+                break
+        return reply_id
+
     def get_records(self, model, kwargs):
         user = request.env.user
         records = request.env[model].with_user(user)
@@ -77,6 +155,7 @@ class ApiV1Controller(http.Controller):
         if "context" in kwargs:
             records = records.with_context(**kwargs.get("context"))
             del kwargs["context"]
+
         return records
 
     def get_record(self, model, id, path, kwargs):
@@ -98,98 +177,110 @@ class ApiV1Controller(http.Controller):
     @pinguin.route(
         _api_endpoint_model, methods=["POST"], type="http", auth="none", csrf=False
     )
+    @create_api_log
     def create_one__POST(self, namespace, version, model, **kw):
         path = kw.get("path")
         del kw["path"]
 
-        data = path._post_treatment_values(kw)
+        data = path.post_treatment_values(kw)
 
         records = self.get_records(path.model, kw)
-        obj = records.create(data)
-        return successful_response(201, obj.id)
+        records.create(data)
+
+        response = {
+            "timestamp": datetime_format(datetime.datetime.now()),
+            "reply_id": self.get_reply_id(),
+        }
+
+        return successful_response(201, response)
 
     # ReadMulti (optional: filters, offset, limit, order, include_fields, exclude_fields):
     @pinguin.route(
         _api_endpoint_model, methods=["GET"], type="http", auth="none", csrf=False
     )
+    @create_api_log
     def read_multi__GET(self, namespace, version, model, **kw):
         path = kw.get("path")
         del kw["path"]
-        path.search_treatment_kwargs(kw)
 
+        kw = path.search_treatment_kwargs(kw)
         records = self.get_records(path.model, kw)
+        records = records.search_read(**kw)
+        records = path._get_response_treatment(records)
         response_data = {
-            "results": records.search_read(**kw),
-            "total": records.search_count(kw.get("domain", [])),
+            "results": records,
+            "total": len(records),
             "offset": kw.get("offset", 0),
             "limit": kw.get("limit", 0),
             "version": version,
+            "timestamp": datetime_format(datetime.datetime.now()),
+            "reply_id": self.get_reply_id(),
         }
+
         return successful_response(200, response_data)
 
     # ReadOne (optional: include_fields, exclude_fields)
     @pinguin.route(
         _api_endpoint_model_id, methods=["GET"], type="http", auth="none", csrf=False
     )
+    @create_api_log
     def read_one__GET(self, namespace, version, model, id, **kw):
         path = kw.get("path")
         del kw["path"]
-        path.read_treatment_kwargs(kw)
-        # read_domain = path.eval_domain(path.filter_domain)
 
-        # records = self.get_records(path.model, kw)
-        # read_domain += [('id', '=', id)]
-        # obj = records.search(read_domain, limit=1)
-        # if not obj:
-        #     raise werkzeug.exceptions.HTTPException(
-        #         response=error_response(*CODE__obj_not_found)
-        #     )
+        path.read_treatment_kwargs(kw)
         obj = self.get_record(path.model, id, path, kw)
-        result = obj.read(**kw)
+        result = obj.search_read(domain=[("id", "=", obj.id)], fields=kw["fields"])
+        result = path._get_response_treatment(result)
         response_data = result and result[0] or {}
-        _logger.info("response_data: %s", response_data)
-        return json.dumps(response_data)
+        response_data.update(
+            {
+                "timestamp": datetime_format(datetime.datetime.now()),
+                "reply_id": self.get_reply_id(),
+            }
+        )
+
+        return successful_response(200, response_data)
 
     # UpdateOne
     @pinguin.route(
         _api_endpoint_model_id, methods=["PUT"], type="http", auth="none", csrf=False
     )
+    @create_api_log
     def update_one__PUT(self, namespace, version, model, id, **kw):
         path = kw.get("path")
         del kw["path"]
+
         data = path.post_treatment_values(kw)
-        # read_domain = path.eval_domain(path.filter_domain)
-        #
-        # records = self.get_records(path.model, kw)
-        # read_domain += [('id', '=', id)]
-        # obj = records.search(read_domain, limit=1)
-        # if not obj:
-        #     raise werkzeug.exceptions.HTTPException(
-        #         response=error_response(*CODE__obj_not_found)
-        #     )
+
         obj = self.get_record(path.model, id, path, kw)
         obj.write(data)
-        return successful_response(200, obj.id)
+
+        response = {
+            "timestamp": datetime_format(datetime.datetime.now()),
+            "reply_id": self.get_reply_id(),
+        }
+
+        return successful_response(200, response)
 
     # UnlinkOne
     @pinguin.route(
         _api_endpoint_model_id, methods=["DELETE"], type="http", auth="none", csrf=False
     )
+    @create_api_log
     def unlink_one__DELETE(self, namespace, version, model, id, **kw):
         path = kw.get("path")
         del kw["path"]
-        # read_domain = path.eval_domain(path.filter_domain)
-        #
-        # records = self.get_records(path.model, kw)
-        # read_domain += [('id', '=', id)]
-        # obj = records.search(read_domain, limit=1)
-        # if not obj:
-        #     raise werkzeug.exceptions.HTTPException(
-        #         response=error_response(*CODE__obj_not_found)
-        #     )
+
         obj = self.get_record(path.model, id, path, kw)
         obj.unlink()
-        return successful_response(pinguin.CODE__ok_no_content, obj.id)
+
+        response_data = {
+            "timestamp": datetime_format(datetime.datetime.now()),
+            "reply_id": self.get_reply_id(),
+        }
+
+        return successful_response(200, response_data)
 
     # ######################
     # # Auxiliary Methods ##
@@ -203,6 +294,7 @@ class ApiV1Controller(http.Controller):
         auth="none",
         csrf=False,
     )
+    @create_api_log
     def call_method_one__PATCH(
         self, namespace, version, model, id, method_name, **method_params
     ):
@@ -212,7 +304,9 @@ class ApiV1Controller(http.Controller):
         obj = self.get_record(path.model, id, path, method_params)
         kwargs = path.custom_treatment_values(method_params)
         data = getattr(obj, path.function)(**kwargs)
+
         obj.flush()  # to recompute fields
+
         return successful_response(200, data=data)
 
     # Call Method on RecordSet (optional: method parameters)
@@ -223,6 +317,7 @@ class ApiV1Controller(http.Controller):
         auth="none",
         csrf=False,
     )
+    @create_api_log
     def call_method_multi__PATCH(
         self, namespace, version, model, method_name, ids=None, **method_params
     ):
@@ -230,18 +325,21 @@ class ApiV1Controller(http.Controller):
         del method_params["path"]
 
         records = self.get_records(path.model, method_params)
-        ids = ids and ids.split(",") or []
-        ids = [int(i) for i in ids]
+        if isinstance(ids, str):
+            ids = ids and ids.split(",") or []
+            ids = [int(i) for i in ids]
         kwargs = path.custom_treatment_values(method_params)
 
         # limit to the authorized domain and ids
-        domain = path.eval_domain(path.filter_domain)
-        domain += [("id", "in", ids)]
+        domain = path.get_domain(method_params)
+        if ids:
+            domain = OR([domain, [("id", "in", ids)]])
 
         records = records.search(domain)
 
         data = getattr(records, path.function)(**kwargs)
         records.flush()  # to recompute fields
+
         return successful_response(200, data=data)
 
     # Get Report

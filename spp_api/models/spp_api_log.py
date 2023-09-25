@@ -8,9 +8,34 @@ class Log(models.Model):
     _order = "id desc"
     _description = "OpenAPI logs"
 
+    name = fields.Char(compute="_compute_name")
+    method = fields.Selection(
+        [
+            ("get", "Read"),
+            ("post", "Create"),
+            ("put", "Update"),
+            ("delete", "Delete"),
+            ("patch", "Custom function"),
+        ],
+        required=True,
+    )
+    http_type = fields.Selection(
+        [
+            ("request", "Request"),
+            ("response", "Response"),
+        ],
+        required=True,
+    )
+    model = fields.Char(required=True)
     namespace_id = fields.Many2one("spp_api.namespace", "Integration")
-    request = fields.Char("Request")
-    request_data = fields.Text("Request Data")
-    response_data = fields.Text("Response Data")
-    # create_uid -- auto field
-    # create_date -- auto field
+    request = fields.Text()  # full_path
+
+    request_id = fields.Text()
+    request_parameter = fields.Text()
+    request_data = fields.Text()
+
+    reply_id = fields.Text()
+    response_data = fields.Text()
+
+    def _compute_name(self):
+        self.name = f"{self.http_type} {self.method} - {self.model}"

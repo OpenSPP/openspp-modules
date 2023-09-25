@@ -21,15 +21,14 @@ class Namespace(models.Model):
     _name = "spp_api.namespace"
     _description = "Integration"
 
-    active = fields.Boolean("Active", default=True)
+    active = fields.Boolean(default=True)
     name = fields.Char(
-        "Name",
         required=True,
         help="""Integration name, e.g. ebay, amazon, magento, etc.
         The name is used in api endpoint""",
     )
     version_name = fields.Char(string="Number Version", required=True)
-    description = fields.Char("Description")
+    description = fields.Char()
     log_ids = fields.One2many("spp_api.log", "namespace_id", string="Logs")
     log_count = fields.Integer("Log count", compute="_compute_log_count")
     log_request = fields.Selection(

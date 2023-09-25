@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <record id="spp_api_namespace" model="spp_api.namespace">
+        <field name="name">spp_api</field>
+        <field name="version_name">1</field>
+        <field name="description">SPP API for Famoco</field>
+        <field name="log_request">debug</field>
+        <field name="log_response">debug</field>
+        <field name="user_ids" eval="[(4, ref('base.user_admin'))]" />
+    </record>
+
+</odoo>

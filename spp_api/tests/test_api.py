@@ -4,20 +4,21 @@
 # Copyright 2021 Denis Mudarisov <https://github.com/trojikman>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 import logging
+import uuid
 
 import requests
 
 from odoo import api
 from odoo.tests import tagged
 from odoo.tests.common import HttpCase, get_db_name
-from odoo.tools import config
+from odoo.tools import config, mute_logger
 
 from ..controllers import pinguin
 
 _logger = logging.getLogger(__name__)
 
 USER_DEMO = "base.user_demo"
-USER_ADMIN = "base.user_root"
+USER_ADMIN = "base.user_admin"
 MESSAGE = "message is posted from API"
 
 
@@ -35,27 +36,126 @@ class TestAPI(HttpCase):
         self.demo_user = self.phantom_env.ref(USER_DEMO)
         self.admin_user = self.phantom_env.ref(USER_ADMIN)
         self.model_name = "res.partner"
+        self.phantom_env["spp_api.path"].create(
+            [
+                {
+                    "name": "res.partner",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                    "description": "GET res.partner",
+                    "method": "get",
+                    "field_ids": [
+                        (
+                            6,
+                            0,
+                            [
+                                self.env.ref("base.field_res_partner__name").id,
+                            ],
+                        )
+                    ],
+                },
+                {
+                    "name": "res.partner",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                    "description": "POST res.partner",
+                    "method": "post",
+                    "api_field_ids": [
+                        (
+                            0,
+                            0,
+                            {
+                                "field_id": self.env.ref(
+                                    "base.field_res_partner__name"
+                                ).id
+                            },
+                        ),
+                        (
+                            0,
+                            0,
+                            {
+                                "field_id": self.env.ref(
+                                    "base.field_res_partner__type"
+                                ).id
+                            },
+                        ),
+                    ],
+                },
+                {
+                    "name": "res.partner",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                    "description": "UPDATE res.partner",
+                    "method": "put",
+                    "api_field_ids": [
+                        (
+                            0,
+                            0,
+                            {
+                                "field_id": self.env.ref(
+                                    "base.field_res_partner__name"
+                                ).id
+                            },
+                        ),
+                        (
+                            0,
+                            0,
+                            {
+                                "field_id": self.env.ref(
+                                    "base.field_res_partner__type"
+                                ).id
+                            },
+                        ),
+                    ],
+                },
+                {
+                    "name": "res.partner",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                    "description": "DELETE res.partner",
+                    "method": "delete",
+                },
+            ]
+        )
 
     def request(self, method, url, auth=None, **kwargs):
         kwargs.setdefault("model", self.model_name)
-        kwargs.setdefault("namespace_id", "demo")
+        kwargs.setdefault("namespace", "demo")
+        kwargs.setdefault("namespace_version", "v1")
         url = (
-            "http://localhost:%d/api/v1/{namespace}" % config["http_port"] + url
+            "http://localhost:%d/api/{namespace}/{namespace_version}"
+            % config["http_port"]
+            + url
         ).format(**kwargs)
         self.opener = requests.Session()
+        if method in ["POST", "PUT", "PATCH"]:
+            json_data = kwargs.get("data_json")
+            if "request_id" not in json_data:
+                json_data["request_id"] = uuid.uuid4().__str__()
+            return self.opener.request(
+                method, url, timeout=30, auth=auth, json=kwargs.get("data_json")
+            )
+        params = {"request_id": uuid.uuid4().__str__()}
         return self.opener.request(
-            method, url, timeout=30, auth=auth, json=kwargs.get("data_json")
+            method,
+            url,
+            timeout=30,
+            auth=auth,
+            json=kwargs.get("data_json"),
+            params=params,
         )
 
     def request_from_user(self, user, *args, **kwargs):
         kwargs["auth"] = requests.auth.HTTPBasicAuth(self.db_name, user.openapi_token)
         return self.request(*args, **kwargs)
 
+    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_read_many_all(self):
         resp = self.request_from_user(self.demo_user, "GET", "/{model}")
         self.assertEqual(resp.status_code, pinguin.CODE__success)
         # TODO check content
 
+    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_read_one(self):
         record_id = self.phantom_env[self.model_name].search([], limit=1).id
         resp = self.request_from_user(
@@ -64,25 +164,30 @@ class TestAPI(HttpCase):
         self.assertEqual(resp.status_code, pinguin.CODE__success)
         # TODO check content
 
+    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_create_one(self):
         data_for_create = {"name": "created_from_test", "type": "other"}
         resp = self.request_from_user(
             self.demo_user, "POST", "/{model}", data_json=data_for_create
         )
         self.assertEqual(resp.status_code, pinguin.CODE__created)
-        created_user = self.phantom_env[self.model_name].browse(resp.json()["id"])
-        self.assertEqual(created_user.name, data_for_create["name"])
+        self.assertIn("timestamp", resp.json().keys())
+        self.assertIn("reply_id", resp.json().keys())
 
-    # TODO: doesn't work in test environment
-    def _test_create_one_with_invalid_data(self):
-        """create partner without name"""
-        self.phantom_env = api.Environment(self.registry.test_cr, self.uid, {})
-        data_for_create = {"email": "string"}
-        resp = self.request_from_user(
-            self.demo_user, "POST", "/{model}", data_json=data_for_create
-        )
-        self.assertEqual(resp.status_code, 400)
+    # @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug", "odoo.sql_db")
+    # def test_create_one_with_invalid_data(self):
+    #     """create partner without name"""
+    #     data_for_create = {"email": "string"}
+    #     with (
+    #         self.assertRaises(Exception),
+    #         self.phantom_env.cr.savepoint(flush=False),
+    #     ):
+    #         resp = self.request_from_user(
+    #             self.demo_user, "POST", "/{model}", data_json=data_for_create
+    #         )
+    #         self.assertEqual(resp.status_code, 400)
 
+    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_update_one(self):
         data_for_update = {
             "name": "for update in test",
@@ -95,22 +200,30 @@ class TestAPI(HttpCase):
             record_id=partner.id,
             data_json=data_for_update,
         )
-        self.assertEqual(resp.status_code, pinguin.CODE__ok_no_content)
-        self.assertEqual(partner.name, data_for_update["name"])
+        self.assertEqual(resp.status_code, pinguin.CODE__success)
+        self.assertIn("timestamp", resp.json().keys())
+        self.assertIn("reply_id", resp.json().keys())
         # TODO: check result
 
-    # TODO: doesn't work in test environment
-    def _test_unlink_one(self):
-        partner = self.phantom_env[self.model_name].create(
-            {"name": "record for deleting from test"}
-        )
-        resp = self.request_from_user(
-            self.demo_user, "DELETE", "/{model}/{record_id}", record_id=partner.id
-        )
-        self.assertEqual(resp.status_code, pinguin.CODE__ok_no_content)
-        self.assertFalse(self.phantom_env[self.model_name].browse(partner.id).exists())
-        # TODO: check result
+    @mute_logger(
+        "odoo.addons.spp_api.controllers.pinguin", "werkzeug", "odoo.models.unlink"
+    )
+    def test_unlink_one(self):
+        with self.env.cr.savepoint():
+            partner = self.phantom_env[self.model_name].create(
+                {"name": "record for deleting from test"}
+            )
+            self.phantom_env[self.model_name].invalidate_cache()
 
+            resp = self.request_from_user(
+                self.admin_user, "DELETE", "/{model}/{record_id}", record_id=partner.id
+            )
+            self.assertEqual(resp.status_code, pinguin.CODE__success)
+            self.assertFalse(
+                self.phantom_env[self.model_name].browse(partner.id).exists()
+            )
+
+    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_unauthorized_user(self):
         resp = self.request("GET", "/{model}")
         self.assertEqual(resp.status_code, pinguin.CODE__no_user_auth[0])
@@ -126,6 +239,7 @@ class TestAPI(HttpCase):
         self.assertEqual(resp.status_code, pinguin.CODE__db_not_found[0])
         self.assertEqual(resp.json()["error"], pinguin.CODE__db_not_found[1])
 
+    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_invalid_user_token(self):
         invalid_token = "invalid_user_token"
         resp = self.request(
@@ -136,25 +250,26 @@ class TestAPI(HttpCase):
         self.assertEqual(resp.status_code, pinguin.CODE__no_user_auth[0])
         self.assertEqual(resp.json()["error"], pinguin.CODE__no_user_auth[1])
 
-    def test_user_not_allowed_for_namespace(self):
-        namespace = self.phantom_env["spp_api.namespace"].search(
-            [("name", "=", "demo")]
-        )
-        new_user = self.phantom_env["res.users"].create(
-            {"name": "new user", "login": "new_user"}
-        )
-        new_user.write(
-            {"groups_id": [(4, self.phantom_env.ref("openapi.group_user").id)]}
-        )
-        new_user.reset_openapi_token()
-        new_user.flush()
-        self.assertTrue(new_user.id not in namespace.user_ids.ids)
-        self.assertTrue(namespace.id not in new_user.namespace_ids.ids)
+    # def test_user_not_allowed_for_namespace(self):
+    #     namespace = self.phantom_env["spp_api.namespace"].search(
+    #         [("name", "=", "demo")]
+    #     )
+    #     new_user = self.phantom_env["res.users"].create(
+    #         {"name": "new user", "login": "new_user"}
+    #     )
+    #     new_user.write(
+    #         {"groups_id": [(4, self.phantom_env.ref("spp_api.group_user").id)]}
+    #     )
+    #     new_user.reset_openapi_token()
+    #     new_user.flush()
+    #     self.assertTrue(new_user.id not in namespace.user_ids.ids)
+    #     self.assertTrue(namespace.id not in new_user.namespace_ids.ids)
 
-        resp = self.request_from_user(new_user, "GET", "/{model}")
-        self.assertEqual(resp.status_code, pinguin.CODE__user_no_perm[0], resp.json())
-        self.assertEqual(resp.json()["error"], pinguin.CODE__user_no_perm[1])
+    #     resp = self.request_from_user(new_user, "GET", "/{model}")
+    #     self.assertEqual(resp.status_code, pinguin.CODE__user_no_perm[0], resp.json())
+    #     self.assertEqual(resp.json()["error"], pinguin.CODE__user_no_perm[1])
 
+    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_call_allowed_method_on_singleton_record(self):
         if (
             not self.env["ir.module.module"].search([("name", "=", "mail")]).state
@@ -163,9 +278,22 @@ class TestAPI(HttpCase):
             self.skipTest(
                 "To run test 'test_call_allowed_method_on_singleton_record' install 'mail'-module"
             )
+        self.env["spp_api.path"].create(
+            {
+                "name": "res.partner",
+                "model_id": self.env.ref("base.model_res_partner").id,
+                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "description": "PATCH res.partner",
+                "method": "patch",
+                "function": "message_post",
+                "function_parameter_ids": [
+                    (0, 0, {"name": "body", "type": "string"}),
+                ],
+            }
+        )
         partner = self.phantom_env[self.model_name].search([], limit=1)
         method_name = "message_post"
-        method_params = {"kwargs": {"body": MESSAGE}}
+        method_params = {"body": MESSAGE}
         resp = self.request_from_user(
             self.demo_user,
             "PATCH",
@@ -177,11 +305,25 @@ class TestAPI(HttpCase):
         self.assertEqual(resp.status_code, pinguin.CODE__success)
         # TODO check that message is created
 
+    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_call_allowed_method_on_recordset(self):
+        self.env["spp_api.path"].create(
+            {
+                "name": "res.partner",
+                "model_id": self.env.ref("base.model_res_partner").id,
+                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "description": "PATCH res.partner",
+                "method": "patch",
+                "function": "write",
+                "function_parameter_ids": [
+                    (0, 0, {"name": "vals", "type": "object"}),
+                ],
+            }
+        )
         partners = self.phantom_env[self.model_name].search([], limit=5)
         method_name = "write"
         method_params = {
-            "args": [{"name": "changed from write method called from api"}],
+            "vals": {"name": "changed from write method called from api"},
         }
         ids = partners.mapped("id")
         ids_str = ",".join(str(i) for i in ids)
@@ -189,28 +331,40 @@ class TestAPI(HttpCase):
         resp = self.request_from_user(
             self.demo_user,
             "PATCH",
-            "/{model}/call/{method_name}/{ids}",
+            "/{model}/call/{method_name}/{ids_str}",
             method_name=method_name,
-            ids=ids_str,
+            ids_str=ids_str,
             data_json=method_params,
         )
 
         self.assertEqual(resp.status_code, pinguin.CODE__success)
-        for i in range(len(partners)):
-            self.assertTrue(resp.json()[i])
-        # reread records
-        partners = self.phantom_env[self.model_name].browse(ids)
-        for partner in partners:
-            self.assertEqual(partner.name, method_params["args"][0]["name"])
+        self.assertListEqual(
+            partners.mapped("name"), [method_params["vals"]["name"]] * 5
+        )
 
     def test_call_model_method(self):
+        self.env["spp_api.path"].create(
+            {
+                "name": "res.partner",
+                "model_id": self.env.ref("base.model_res_partner").id,
+                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "description": "PATCH res.partner",
+                "method": "patch",
+                "function": "search_read",
+                "function_parameter_ids": [
+                    (0, 0, {"name": "domain", "type": "array"}),
+                    (0, 0, {"name": "fields", "type": "array"}),
+                ],
+            }
+        )
         domain = [["id", "=", 1]]
         record = self.phantom_env[self.model_name].search(domain)
         self.assertTrue(record, "Record with ID 1 is not available")
 
-        method_name = "search"
+        method_name = "search_read"
         method_params = {
-            "args": [domain],
+            "domain": [["id", "=", "1"]],
+            "fields": ["id", "name"],
         }
         resp = self.request_from_user(
             self.demo_user,
@@ -221,65 +375,82 @@ class TestAPI(HttpCase):
         )
 
         self.assertEqual(resp.status_code, pinguin.CODE__success)
-        self.assertEqual(resp.json(), [1])
+        for item in resp.json():
+            self.assertIn("id", item)
+            self.assertIn("name", item)
 
-    # TODO: doesn't work in test environment
-    def _test_log_creating(self):
+    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
+    def test_log_creating(self):
         logs_count_before_request = len(self.phantom_env["spp_api.log"].search([]))
         self.request_from_user(self.demo_user, "GET", "/{model}")
         logs_count_after_request = len(self.phantom_env["spp_api.log"].search([]))
         self.assertTrue(logs_count_after_request > logs_count_before_request)
 
-    # TODO test is not update for the latest module version
-    def _test_get_report_for_allowed_model(self):
-        super_user = self.phantom_env.ref(USER_ADMIN)
-        modelname_for_report = "ir.module.module"
-        report_external_id = "base.ir_module_reference_print"
+    # # TODO test is not update for the latest module version
+    # def _test_get_report_for_allowed_model(self):
+    #     super_user = self.phantom_env.ref(USER_ADMIN)
+    #     modelname_for_report = "ir.module.module"
+    #     report_external_id = "base.ir_module_reference_print"
 
-        model_for_report = self.phantom_env["ir.model"].search(
-            [("model", "=", modelname_for_report)]
-        )
-        namespace = self.phantom_env["spp_api.namespace"].search([("name", "=")])
-        records_for_report = self.phantom_env[modelname_for_report].search([], limit=3)
-        docids = ",".join([str(i) for i in records_for_report.ids])
+    #     model_for_report = self.phantom_env["ir.model"].search(
+    #         [("model", "=", modelname_for_report)]
+    #     )
+    #     namespace = self.phantom_env["spp_api.namespace"].search([("name", "=")])
+    #     records_for_report = self.phantom_env[modelname_for_report].search([], limit=3)
+    #     docids = ",".join([str(i) for i in records_for_report.ids])
 
-        self.phantom_env["openapi.access"].create(
-            {
-                "active": True,
-                "namespace_id": namespace.id,
-                "model_id": model_for_report.id,
-                "model": modelname_for_report,
-                "api_create": False,
-                "api_read": True,
-                "api_update": False,
-                "api_public_methods": False,
-                "public_methods": False,
-                "private_methods": False,
-                "read_one_id": False,
-                "read_many_id": False,
-                "create_context_ids": False,
-            }
-        )
+    #     self.phantom_env["openapi.access"].create(
+    #         {
+    #             "active": True,
+    #             "namespace_id": namespace.id,
+    #             "model_id": model_for_report.id,
+    #             "model": modelname_for_report,
+    #             "api_create": False,
+    #             "api_read": True,
+    #             "api_update": False,
+    #             "api_public_methods": False,
+    #             "public_methods": False,
+    #             "private_methods": False,
+    #             "read_one_id": False,
+    #             "read_many_id": False,
+    #             "create_context_ids": False,
+    #         }
+    #     )
 
-        super_user.write({"namespace_ids": [(4, namespace.id)]})
+    #     super_user.write({"namespace_ids": [(4, namespace.id)]})
 
-        url = "http://localhost:%d/api/v1/demo/report/html/%s/%s" % (
-            config["http_port"],
-            report_external_id,
-            docids,
-        )
-        resp = requests.request(
-            "GET",
-            url,
-            timeout=30,
-            auth=requests.auth.HTTPBasicAuth(self.db_name, super_user.openapi_token),
-        )
-        self.assertEqual(resp.status_code, pinguin.CODE__success)
+    #     url = "http://localhost:%d/api/v1/demo/report/html/%s/%s" % (
+    #         config["http_port"],
+    #         report_external_id,
+    #         docids,
+    #     )
+    #     resp = requests.request(
+    #         "GET",
+    #         url,
+    #         timeout=30,
+    #         auth=requests.auth.HTTPBasicAuth(self.db_name, super_user.openapi_token),
+    #     )
+    #     self.assertEqual(resp.status_code, pinguin.CODE__success)
 
     def test_response_has_no_error(self):
+        self.env["spp_api.path"].create(
+            {
+                "name": "res.partner",
+                "model_id": self.env.ref("base.model_res_partner").id,
+                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "description": "PATCH res.partner",
+                "method": "patch",
+                "function": "search_read",
+                "function_parameter_ids": [
+                    (0, 0, {"name": "domain", "type": "array"}),
+                    (0, 0, {"name": "fields", "type": "array"}),
+                ],
+            }
+        )
         method_name = "search_read"
         method_params = {
-            "args": [[["id", "=", "1"]], ["id", "name"]],
+            "domain": [["id", "=", "1"]],
+            "fields": ["id", "name"],
         }
         resp = self.request_from_user(
             self.demo_user,

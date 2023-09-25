@@ -1,7 +1,12 @@
+import logging
 from copy import deepcopy
+from datetime import date, datetime
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 from odoo.tools import safe_eval
+
+from ..tools import datetime_format
 
 # Field type mapping for Swagger
 SWAGGER_FIELD_MAPPING = {
@@ -24,6 +29,8 @@ SWAGGER_FIELD_MAPPING = {
 }
 
 MAX_LIMIT = 500
+
+_logger = logging.getLogger(__name__)
 
 
 def convert_field_type_to_swagger(field_type):
@@ -112,6 +119,15 @@ class SPPAPIPath(models.Model):
         ),
     ]
 
+    @api.constrains(
+        "method",
+        "field_ids",
+    )
+    def _check_field_get_method(self):
+        for rec in self:
+            if rec.method == "get" and not rec.field_ids:
+                raise ValidationError(_("API need a specific fields list!"))
+
     @api.onchange("model_id")
     def _onchange_model_id(self):
         self.field_ids = False
@@ -139,7 +155,7 @@ class SPPAPIPath(models.Model):
     def copy(self, default=None):
         default = dict(default or {})
         default.update(name=_("%s (copy)") % (self.name or ""))
-        return super(ApiRestPath, self).copy(default)
+        return super().copy(default)
 
     @api.model
     def create(self, values):
@@ -497,7 +513,7 @@ class SPPAPIPath(models.Model):
             "type": "string",
         }
 
-    def _context_parameter(self, type="query"):
+    def _context_parameter(self, _type="query"):
         """
         Generates a dictionary containing the information of the 'context'
         parameter used in the API.
@@ -552,6 +568,39 @@ class SPPAPIPath(models.Model):
             self._context_parameter(),
         ]
 
+    def get_domain(self, kwargs):
+        domain = kwargs.get("domain", [])
+
+        # populate domain
+        if "from_date" in kwargs:
+            domain.append(("create_date", ">=", kwargs["from_date"]))
+            del kwargs["from_date"]
+
+        if "last_modified_date" in kwargs:
+            domain.append(("write_date", ">", kwargs["last_modified_date"]))
+            del kwargs["last_modified_date"]
+
+        # Get all fields of model
+        model_fields = self.env[self.model].fields_get().keys()
+
+        kw_copy = kwargs.copy()
+        for field in kw_copy:
+            if field in model_fields:
+                domain.append((field, "=", kwargs[field]))
+                del kwargs[field]
+
+        del kw_copy
+
+        if self.filter_domain:
+            domain += self.eval_domain(self.filter_domain)
+
+        return domain
+
+    def _clean_kwargs(self, kw, keys):
+        for key in kw.copy():
+            if key not in keys:
+                del kw[key]
+
     def search_treatment_kwargs(self, kwargs):
         """
         Processes the search kwargs to apply limits, domains, and fields.
@@ -562,16 +611,25 @@ class SPPAPIPath(models.Model):
         :rtype: dict
         """
         self.ensure_one()
+
         # Limit
         limit = kwargs.get("limit", 0)
         max_limit = self.limit if self.limit else MAX_LIMIT
         kwargs["limit"] = limit if (limit and limit <= max_limit) else max_limit
-        domain = kwargs.get("domain", [])
-        if self.filter_domain:
-            domain += self.eval_domain(self.filter_domain)
-        kwargs["domain"] = domain
+
+        # Offset
+        kwargs["offset"] = kwargs.get("start_from", 0)
+        if "start_from" in kwargs:
+            del kwargs["start_from"]
+
+        # Domain
+        kwargs["domain"] = self.get_domain(kwargs)
+
         # Fields
         self._treatment_fields(kwargs)
+
+        # Remove unnecessary keys
+        self._clean_kwargs(kwargs, ["limit", "offset", "domain", "fields"])
         return kwargs
 
     def read_treatment_kwargs(self, kwargs):
@@ -609,21 +667,23 @@ class SPPAPIPath(models.Model):
                 "description": field.field_description or "",
             }
             self._update_values_ttype(field, values, definition=True)
-            properties.update({field.name: values})
+            field_alias = self._get_field_name_alias(field)
+            field_name = field.name if not field_alias else field_alias.alias_name
+            properties.update({field_name: values})
         return properties
 
     # Post
     def _post_parameters(self):
         self.ensure_one()
         return self._post_properties() + [
-            self._context_parameter(type="formData"),
+            self._context_parameter(_type="formData"),
         ]
 
     def _post_properties(self):
         self.ensure_one()
         properties = []
         for api_field in self.api_field_ids.filtered(lambda f: not f.default_value):
-            field_name = api_field.field_name
+            field_name = api_field._get_field_name()
             _type, _format = convert_field_type_to_swagger(api_field.field_id.ttype)
             values = {
                 "in": "formData",
@@ -640,10 +700,11 @@ class SPPAPIPath(models.Model):
 
     def post_treatment_values(self, post_values):
         self.ensure_one()
+        post_values = self._fields_alias_treatment(post_values)
         # Remove fields unspecified
         new_values = post_values.copy()
         api_fields = self.api_field_ids.mapped("field_name")
-        for field, value in post_values.items():
+        for field in post_values.keys():
             if field not in api_fields:
                 new_values.pop(field)
         # Add fields with default_value
@@ -680,7 +741,7 @@ class SPPAPIPath(models.Model):
             parameters
             + self._post_properties()
             + [
-                self._context_parameter(type="formData"),
+                self._context_parameter(_type="formData"),
             ]
         )
 
@@ -689,14 +750,14 @@ class SPPAPIPath(models.Model):
         self.ensure_one()
         return [
             self._id_parameter(),
-            self._context_parameter(type="formData"),
+            self._context_parameter(_type="formData"),
         ]
 
     # Put Custom function
     def _custom_parameters(self):
         self.ensure_one()
         parameters = self._custom_function_parameters() + [
-            self._context_parameter(type="formData")
+            self._context_parameter(_type="formData")
         ]
         if self.function_apply_on_record:
             parameters = [self._id_parameter()] + parameters
@@ -727,7 +788,7 @@ class SPPAPIPath(models.Model):
         return properties
 
     def custom_treatment_values(self, post_values):
-        def _real_type_python(type):
+        def _real_type_python(_type):
             return {
                 "integer": int,
                 "float": float,
@@ -735,7 +796,7 @@ class SPPAPIPath(models.Model):
                 "string": str,
                 "array": list,
                 "object": dict,
-            }.get(type)
+            }.get(_type)
 
         self.ensure_one()
         new_values = {}
@@ -749,9 +810,9 @@ class SPPAPIPath(models.Model):
                     try:
                         new_value = python_type(value)
                         new_values[function_parameter.name] = new_value
-                    except Exception:
+                    except Exception as e:
                         # Delete value if it's not possible to convert
-                        pass
+                        _logger.error(e)
                 else:
                     new_values[function_parameter.name] = value
             # Add fields with default_value
@@ -801,18 +862,8 @@ class SPPAPIPath(models.Model):
             if definition:
                 values.update(
                     {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                        },
-                        "description": "{} \n\n {}".format(
-                            _(
-                                "Return list with 2 element, "
-                                "first ID of ressource (integer), "
-                                "second Name of ressource (string)."
-                            ),
-                            _("Example : `[1, 'Example']`"),
-                        ),
+                        "type": "integer",
+                        "description": "ID of related record",
                     }
                 )
         # Manage dates
@@ -822,7 +873,7 @@ class SPPAPIPath(models.Model):
             values.update({"description": description})
         if field.ttype == "datetime":
             description = values.get("description", "")
-            description += "\n\n {}".format(_("Example: `YYYY-MM-DD HH:MM:SS`"))
+            description += "\n\n {}".format(_("Example: `YYYY-MM-DD'T'HH:MM:ss.SSSZ`"))
             values.update({"description": description})
         return values
 
@@ -841,3 +892,149 @@ class SPPAPIPath(models.Model):
     def eval_domain(self, domain):
         self.ensure_one()
         return safe_eval.safe_eval(domain, self._get_eval_context())
+
+    def open_self_form(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _(self._description),
+            "res_model": self._name,
+            "res_id": self.id,
+            "view_mode": "form",
+        }
+
+    def action_open_field_alias(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Field Name Alias"),
+            "res_model": "spp_api.field.alias",
+            "domain": self._get_related_field_alias_domain(),
+            "view_mode": "tree,form",
+            "context": {
+                "default_api_path_id": self.id,
+                "scoped_alias": True,
+                "create": False,
+            },
+        }
+
+    def _get_related_field_alias_domain(self):
+        self.ensure_one()
+        return [
+            "|",
+            ("api_path_id", "=", self.id),
+            "&",
+            ("api_path_id", "=", False),
+            ("model_id", "=", self.model_id.id),
+        ]
+
+    def _get_field_name_alias(self, field):
+        self.ensure_one()
+        field_alias = (
+            self.env["spp_api.field.alias"]
+            .sudo()
+            .search(
+                [
+                    ("field_id", "=", field.id),
+                    ("api_path_id", "=", self.id),
+                ],
+                limit=1,
+            )
+        )
+        if not field_alias:
+            field_alias = (
+                self.env["spp_api.field.alias"]
+                .sudo()
+                .search(
+                    [
+                        ("field_id", "=", field.id),
+                        ("global_alias", "=", True),
+                    ],
+                    limit=1,
+                )
+            )
+        return field_alias
+
+    def _get_response_treatment(self, response_data):
+        if isinstance(response_data, dict):
+            response_data = [response_data]
+        self.ensure_one()
+        field_aliases = (
+            self.env["spp_api.field.alias"]
+            .sudo()
+            .search(self._get_related_field_alias_domain())
+        )
+        for element in response_data:
+            self._format_datetime(element)
+            self._adjust_null_value_fields(element)
+            self._adjust_many2one_fields(element)
+            for field_alias in field_aliases:
+                if field_alias.field_id.name not in element.keys():
+                    continue
+                element[field_alias.alias_name] = element.pop(field_alias.field_id.name)
+        return response_data
+
+    def _fields_alias_treatment(self, post_values):
+        res = {}
+        field_aliases = (
+            self.env["spp_api.field.alias"]
+            .sudo()
+            .search(self._get_related_field_alias_domain())
+        )
+        field_alias_names = field_aliases.mapped("alias_name")
+        for key in post_values:
+            if key not in field_alias_names:
+                res[key] = post_values[key]
+                continue
+            field_alias = field_aliases.filtered(lambda fa: fa.alias_name == key)
+            res[field_alias.field_id.name] = post_values[key]
+        return res
+
+    @api.model
+    def _format_datetime(self, element):
+        for key in element:
+            if not isinstance(element[key], date) or not isinstance(
+                element[key], datetime
+            ):
+                continue
+            element[key] = datetime_format(element[key])
+
+    def _adjust_null_value_fields(self, element):
+        VARCHAR_TYPES = ["char", "text", "html", "selection", "reference"]
+        NULL_TYPES = [
+            "date",
+            "datetime",
+            "binary",
+            "many2one",
+            "many2one_reference",
+            "integer",
+            "float",
+            "monetary",
+        ]
+        X_TO_MANY_TYPES = ["one2many", "many2many"]
+
+        model_sudo = self.env[self.model].sudo()
+        for key in element:
+            if element[key]:
+                continue
+            field_type = model_sudo._fields[key].type
+            if field_type == "boolean":
+                continue
+            if field_type in VARCHAR_TYPES:
+                element[key] = ""
+            if field_type in X_TO_MANY_TYPES:
+                element[key] = []
+            if field_type in NULL_TYPES:
+                element[key] = None
+
+    def _adjust_many2one_fields(self, element):
+        model_sudo = self.env[self.model].sudo()
+        for key in element:
+            if model_sudo._fields[key].type not in ("many2one", "many2one_reference"):
+                continue
+            if (
+                element[key]
+                and type(element[key]) in (list, tuple)
+                and len(element[key]) == 2
+            ):
+                element[key] = element[key][0]
