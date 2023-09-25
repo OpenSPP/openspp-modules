@@ -1,9 +1,12 @@
 import logging
 from copy import deepcopy
+from datetime import date, datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import safe_eval
+
+from ..tools import datetime_format
 
 # Field type mapping for Swagger
 SWAGGER_FIELD_MAPPING = {
@@ -574,7 +577,7 @@ class SPPAPIPath(models.Model):
             del kwargs["from_date"]
 
         if "last_modified_date" in kwargs:
-            domain.append(("write_date", ">=", kwargs["last_modified_date"]))
+            domain.append(("write_date", ">", kwargs["last_modified_date"]))
             del kwargs["last_modified_date"]
 
         # Get all fields of model
@@ -972,6 +975,8 @@ class SPPAPIPath(models.Model):
             .search(self._get_related_field_alias_domain())
         )
         for element in response_data:
+            self._format_datetime(element)
+            self._adjust_null_value_fields(element)
             for field_alias in field_aliases:
                 if field_alias.field_id.name not in element.keys():
                     continue
@@ -993,3 +998,40 @@ class SPPAPIPath(models.Model):
             field_alias = field_aliases.filtered(lambda fa: fa.alias_name == key)
             res[field_alias.field_id.name] = post_values[key]
         return res
+
+    @api.model
+    def _format_datetime(self, element):
+        for key in element:
+            if not isinstance(element[key], date) or not isinstance(
+                element[key], datetime
+            ):
+                continue
+            element[key] = datetime_format(element[key])
+
+    def _adjust_null_value_fields(self, element):
+        VARCHAR_TYPES = ["char", "text", "html", "selection", "reference"]
+        NULL_TYPES = [
+            "date",
+            "datetime",
+            "binary",
+            "many2one",
+            "many2one_reference",
+            "integer",
+            "float",
+            "monetary",
+        ]
+        X_TO_MANY_TYPES = ["one2many", "many2many"]
+
+        model_sudo = self.env[self.model].sudo()
+        for key in element:
+            if element[key]:
+                continue
+            field_type = model_sudo._fields[key].type
+            if field_type == "boolean":
+                continue
+            if field_type in VARCHAR_TYPES:
+                element[key] = ""
+            if field_type in X_TO_MANY_TYPES:
+                element[key] = []
+            if field_type in NULL_TYPES:
+                element[key] = None
