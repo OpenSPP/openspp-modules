@@ -862,18 +862,8 @@ class SPPAPIPath(models.Model):
             if definition:
                 values.update(
                     {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                        },
-                        "description": "{} \n\n {}".format(
-                            _(
-                                "Return list with 2 element, "
-                                "first ID of ressource (integer), "
-                                "second Name of ressource (string)."
-                            ),
-                            _("Example : `[1, 'Example']`"),
-                        ),
+                        "type": "integer",
+                        "description": "ID of related record",
                     }
                 )
         # Manage dates
@@ -883,7 +873,7 @@ class SPPAPIPath(models.Model):
             values.update({"description": description})
         if field.ttype == "datetime":
             description = values.get("description", "")
-            description += "\n\n {}".format(_("Example: `YYYY-MM-DD HH:MM:SS`"))
+            description += "\n\n {}".format(_("Example: `YYYY-MM-DD'T'HH:MM:ss.SSSZ`"))
             values.update({"description": description})
         return values
 
@@ -977,6 +967,7 @@ class SPPAPIPath(models.Model):
         for element in response_data:
             self._format_datetime(element)
             self._adjust_null_value_fields(element)
+            self._adjust_many2one_fields(element)
             for field_alias in field_aliases:
                 if field_alias.field_id.name not in element.keys():
                     continue
@@ -1035,3 +1026,15 @@ class SPPAPIPath(models.Model):
                 element[key] = []
             if field_type in NULL_TYPES:
                 element[key] = None
+
+    def _adjust_many2one_fields(self, element):
+        model_sudo = self.env[self.model].sudo()
+        for key in element:
+            if model_sudo._fields[key].type not in ("many2one", "many2one_reference"):
+                continue
+            if (
+                element[key]
+                and type(element[key]) in (list, tuple)
+                and len(element[key]) == 2
+            ):
+                element[key] = element[key][0]
