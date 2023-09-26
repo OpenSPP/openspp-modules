@@ -44,6 +44,7 @@ class OpenSPPServicePoint(models.Model):
         "res.partner",
         "Company",
         domain=[("is_company", "=", True)],
+        inverse="_inverse_res_partner_company_id",
     )
 
     user_ids = fields.Many2many(
@@ -175,35 +176,22 @@ class OpenSPPServicePoint(models.Model):
             )
         )
 
-    def get_user_id_list(self):
-        user_id_list = []
+    def update_user_ids(self):
+        for res in self:
+            user_id_list = []
 
-        # get all user_ids of individual
-        if self.res_partner_company_id and self.res_partner_company_id.child_ids:
-            for child_id in self.res_partner_company_id.child_ids:
-                user_id_list.extend(child_id.user_ids.ids)
+            # get all user_ids of individual
+            if res.res_partner_company_id and res.res_partner_company_id.child_ids:
+                for child_id in res.res_partner_company_id.child_ids:
+                    user_id_list.extend(child_id.user_ids.ids)
 
-        # to ensure no duplicate id
-        user_id_list = list(set(user_id_list))
+            # to ensure no duplicate id
+            user_id_list = list(set(user_id_list))
+            res.user_ids = [(6, 0, user_id_list)]
 
-        return user_id_list
-
-    def write(self, vals):
-        res = super().write(vals)
-
-        if "res_partner_company_id" in vals:
-            self.user_ids = [(6, 0, self.get_user_id_list())]
-
-        return res
-
-    @api.model
-    def create(self, vals):
-        res = super().create(vals)
-
-        if "res_partner_company_id" in vals:
-            res.user_ids = [(6, 0, res.get_user_id_list())]
-
-        return res
+    @api.depends("res_partner_company_id")
+    def _inverse_res_partner_company_id(self):
+        self.update_user_ids()
 
 
 class OpenSPPServiceType(models.Model):
