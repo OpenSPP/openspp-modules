@@ -24,6 +24,12 @@
         <field name="required" eval="1" />
     </record>
 
+    <record id="cash_entitlement_receipt_no_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__receipt_number" />
+        <field name="required" eval="1" />
+    </record>
+
     <record id="cash_entitlement_entitlement_id_api_field" model="spp_api.field">
         <field name="path_id" ref="cash_entitlement_post_path" />
         <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__entitlement_id" />
@@ -166,6 +172,15 @@
     <record id="inkind_entitlement_card_type_api_field" model="spp_api.field">
         <field name="path_id" ref="inkind_entitlement_post_path" />
         <field name="field_id" ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__card_type" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_receipt_number_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__receipt_number"
+        />
         <field name="required" eval="1" />
     </record>
 
