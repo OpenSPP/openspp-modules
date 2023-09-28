@@ -7,6 +7,7 @@ class SPPEntitlementTransactions(models.Model):
 
     card_number = fields.Char()
     card_type = fields.Char()
+    receipt_number = fields.Char()
     entitlement_id = fields.Many2one("g2p.entitlement", string="Entitlement")
     service_point_id = fields.Many2one("spp.service.point", string="Service Point")
     service_point_device_id = fields.Char(string="Service Point Device ID")
@@ -52,6 +53,7 @@ class SPPInKindEntitlementTransactions(models.Model):
 
     card_number = fields.Char()
     card_type = fields.Char()
+    receipt_number = fields.Char()
     entitlement_id = fields.Many2one("g2p.entitlement.inkind", string="Entitlement")
     service_point_id = fields.Many2one("spp.service.point", string="Service Point")
     service_point_device_id = fields.Char(string="Service Point Device ID")
