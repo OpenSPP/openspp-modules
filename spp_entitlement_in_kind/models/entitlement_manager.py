@@ -1,6 +1,10 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 
 class EntitlementManager(models.Model):
@@ -127,27 +131,46 @@ class G2PInKindEntitlementManager(models.Model):
                     multiplier = rec.max_multiplier
                 qty = multiplier * rec.qty
 
-                entitlements.append(
-                    {
-                        "cycle_id": cycle.id,
-                        "partner_id": beneficiary_id.id,
-                        "total_amount": rec.product_id.list_price * qty,
-                        "product_id": rec.product_id.id,
-                        "qty": qty,
-                        "unit_price": rec.product_id.list_price,
-                        "uom_id": rec.uom_id.id,
-                        "manage_inventory": self.manage_inventory,
-                        "warehouse_id": self.warehouse_id
-                        and self.warehouse_id.id
-                        or None,
-                        "inkind_item_id": rec.id,
-                        "state": "draft",
-                        "valid_from": entitlement_start_validity,
-                        "valid_until": entitlement_end_validity,
-                    }
-                )
+                entitlement_fields = {
+                    "cycle_id": cycle.id,
+                    "partner_id": beneficiary_id.id,
+                    "total_amount": rec.product_id.list_price * qty,
+                    "product_id": rec.product_id.id,
+                    "qty": qty,
+                    "unit_price": rec.product_id.list_price,
+                    "uom_id": rec.uom_id.id,
+                    "manage_inventory": self.manage_inventory,
+                    "warehouse_id": self.warehouse_id and self.warehouse_id.id or None,
+                    "inkind_item_id": rec.id,
+                    "state": "draft",
+                    "valid_from": entitlement_start_validity,
+                    "valid_until": entitlement_end_validity,
+                }
+                # Check if there are additional fields to be added in entitlements
+                addl_fields = self._get_addl_entitlement_fields(beneficiary_id)
+                if addl_fields:
+                    entitlement_fields.update(addl_fields)
+                entitlements.append(entitlement_fields)
+
             if entitlements:
                 self.env["g2p.entitlement.inkind"].create(entitlements)
+
+    def _get_addl_entitlement_fields(self, beneficiary_id):
+        """
+        This function must be overriden to add additional field to be written in the entitlements.
+        Add the id_number from the beneficiaries based on the id_type configured in entitlement manager.
+        """
+        retval = None
+        if self.id_type:
+            id_docs = beneficiary_id.reg_ids.filtered(
+                lambda a: a.id_type.id == self.id_type.id
+            )
+            if id_docs:
+                id_number = id_docs[0].value
+                retval = {
+                    "id_number": id_number,
+                }
+        return retval
 
     def set_pending_validation_entitlements(self, cycle):
         """Set In-Kind Entitlements to Pending Validation.

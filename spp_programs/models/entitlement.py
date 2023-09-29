@@ -35,6 +35,8 @@ class InKindEntitlement(models.Model):
         domain=[("is_registrant", "=", True)],
         index=True,
     )
+    id_number = fields.Char()
+
     service_point_id = fields.Many2one("spp.service.point", "Service Point")
 
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)

@@ -64,6 +64,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
                     "entitlement_item_ids": entitlement_item_ids,
                     "max_amount": self.max_amount,
                     "entitlement_validation_group_id": self.entitlement_validation_group_id.id,
+                    "id_type": self.id_type.id,
                 }
             )
 

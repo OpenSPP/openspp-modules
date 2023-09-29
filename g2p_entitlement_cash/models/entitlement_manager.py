@@ -147,6 +147,10 @@ class G2PCashEntitlementManager(models.Model):
                     "valid_from": entitlement_start_validity,
                     "valid_until": entitlement_end_validity,
                 }
+                # Check if there are additional fields to be added in entitlements
+                addl_fields = self._get_addl_entitlement_fields(beneficiary_id)
+                if addl_fields:
+                    new_entitlements_to_create[beneficiary_id.id].update(addl_fields)
 
         # Create entitlement records
         for ent in new_entitlements_to_create:
@@ -157,6 +161,23 @@ class G2PCashEntitlementManager(models.Model):
             # Create non-zero entitlements only
             if new_entitlements_to_create[ent]["initial_amount"] > 0.0:
                 self.env["g2p.entitlement"].create(new_entitlements_to_create[ent])
+
+    def _get_addl_entitlement_fields(self, beneficiary_id):
+        """
+        This function must be overriden to add additional field to be written in the entitlements.
+        Add the id_number from the beneficiaries based on the id_type configured in entitlement manager.
+        """
+        retval = None
+        if self.id_type:
+            id_docs = beneficiary_id.reg_ids.filtered(
+                lambda a: a.id_type.id == self.id_type.id
+            )
+            if id_docs:
+                id_number = id_docs[0].value
+                retval = {
+                    "id_number": id_number,
+                }
+        return retval
 
     def _get_all_beneficiaries(
         self, all_beneficiaries_ids, condition, evaluate_one_item

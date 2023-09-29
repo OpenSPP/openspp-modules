@@ -81,10 +81,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             </form>
                         </field>
                         <field
+                            name="id_type"
+                            options="{'no_open':true,'no_create':true,'no_create_edit':true}"
+                        />
+                        <field
                             name="entitlement_validation_group_id"
                             options="{'no_open':True,'no_create':True,'no_create_edit':True}"
                             domain="[('category_id','=',%(g2p_registry_base.openg2p_module)d)]"
-                            colspan="4"
                         />
                     </group>
                     <field name="currency_id" invisible="1" />
