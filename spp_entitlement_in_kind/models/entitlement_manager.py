@@ -1,6 +1,12 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+from odoo.addons.queue_job.delay import group
+
+_logger = logging.getLogger(__name__)
 
 
 class EntitlementManager(models.Model):
@@ -169,6 +175,44 @@ class G2PInKindEntitlementManager(models.Model):
         else:
             self._set_pending_validation_entitlements_async(cycle, entitlements_count)
 
+    def _set_pending_validation_entitlements_async(self, cycle, entitlements_count):
+        """Set Entitlements to Pending Validation
+        In-kind Entitlement Manager :meth:`_set_pending_validation_entitlements_async`
+        Asynchronous setting of entitlements to pending_validation in a cycle using `job_queue`
+
+        :param cycle: A recordset of cycle
+        :param entitlements_count: Integer - total number of entitlements to process
+        :return:
+        """
+        _logger.debug("Set entitlements to pending validation asynchronously")
+        cycle.message_post(
+            body=_(
+                "Setting %s entitlements to pending validation has started.",
+                entitlements_count,
+            )
+        )
+        cycle.write(
+            {
+                "locked": True,
+                "locked_reason": _("Set entitlements to pending validation for cycle."),
+            }
+        )
+
+        jobs = []
+        for i in range(0, entitlements_count, self.MAX_ROW_JOB_QUEUE):
+            jobs.append(
+                self.delayable()._set_pending_validation_entitlements(
+                    cycle, offset=i, limit=self.MAX_ROW_JOB_QUEUE
+                )
+            )
+        main_job = group(*jobs)
+        main_job.on_done(
+            self.delayable().mark_job_as_done(
+                cycle, _("Entitlements Set to Pending Validation.")
+            )
+        )
+        main_job.delay()
+
     def _set_pending_validation_entitlements(self, cycle, offset=0, limit=None):
         """Set In-Kind Entitlements to Pending Validation.
         In-kind Entitlement Manager :meth:`_set_pending_validation_entitlements`.
@@ -236,6 +280,42 @@ class G2PInKindEntitlementManager(models.Model):
                 }
         else:
             self._validate_entitlements_async(cycle, entitlements_count)
+
+    def _validate_entitlements_async(self, cycle, entitlements_count):
+        """Validate Entitlements
+        In-kind Entitlement Manager :meth:`_validate_entitlements_async`
+        Asynchronous validation of entitlements in a cycle using `job_queue`
+
+        :param cycle: A recordset of cycle
+        :param entitlements: A recordset of entitlements to validate
+        :param entitlements_count: Integer count of entitlements to validate
+        :return:
+        """
+        _logger.debug("Validate entitlements asynchronously")
+        cycle.message_post(
+            body=_("Validate %s entitlements started.", entitlements_count)
+        )
+        cycle.write(
+            {
+                "locked": True,
+                "locked_reason": _("Validate and approve entitlements for cycle."),
+            }
+        )
+
+        jobs = []
+        for i in range(0, entitlements_count, self.MAX_ROW_JOB_QUEUE):
+            jobs.append(
+                self.delayable()._validate_entitlements(
+                    cycle, offset=i, limit=self.MAX_ROW_JOB_QUEUE
+                )
+            )
+        main_job = group(*jobs)
+        main_job.on_done(
+            self.delayable().mark_job_as_done(
+                cycle, _("Entitlements Validated and Approved.")
+            )
+        )
+        main_job.delay()
 
     def _validate_entitlements(self, cycle, offset=0, limit=None):
         """Validate In-Kind Entitlements.
