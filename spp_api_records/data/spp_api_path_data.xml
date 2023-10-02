@@ -251,6 +251,7 @@
             6, 0, [
                 ref('product.field_product_template__id'),
                 ref('product.field_product_template__name'),
+                ref('spp_api_records.field_product_template__image_url'),
             ]
         )]"
         />
