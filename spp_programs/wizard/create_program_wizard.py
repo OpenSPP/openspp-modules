@@ -21,6 +21,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
     is_one_time_distribution = fields.Boolean("One-time Distribution")
 
+    # SQL-base Eligibility Manager
     eligibility_kind = fields.Selection(
         [("default_eligibility", "Default")],
         "Eligibility Manager",
