@@ -178,6 +178,16 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             "target_type": self.target_type,
         }
 
+    def _reopen_self(self):
+        return {
+            "name": "Set Program Settings",
+            "type": "ir.actions.act_window",
+            "res_model": self._name,
+            "res_id": self.id,
+            "view_mode": "form",
+            "target": "new",
+        }
+        
     def _get_entitlement_manager(self, program_id):
         val = None
         if self.entitlement_kind == "default":
