@@ -13,6 +13,7 @@
                 <field name="transaction_uuid" />
                 <field name="timestamp_transaction_created" />
                 <field name="transaction_type" />
+                <field name="receipt_number" />
                 <field name="user_id" options="{'no_open':true,'no_create':true}" />
                 <field name="entitlement_id" options="{'no_open':true,'no_create':true}" />
                 <field name="service_point_id" options="{'no_open':true,'no_create':true}" />
