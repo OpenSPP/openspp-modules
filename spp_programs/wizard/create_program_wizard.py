@@ -187,4 +187,32 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             "view_mode": "form",
             "target": "new",
         }
-        
+
+    def _get_entitlement_manager(self, program_id):
+        val = None
+        if self.entitlement_kind == "default":
+            # Add a new record to default entitlement manager model
+            def_mgr_obj = "g2p.program.entitlement.manager.default"
+            def_mgr = self.env[def_mgr_obj].create(
+                {
+                    "name": "Default",
+                    "program_id": program_id,
+                    "amount_per_cycle": self.amount_per_cycle,
+                    "amount_per_individual_in_group": self.amount_per_individual_in_group,
+                    "transfer_fee_pct": self.transfer_fee_pct,
+                    "transfer_fee_amt": self.transfer_fee_amt,
+                    "max_individual_in_group": self.max_individual_in_group,
+                    "entitlement_validation_group_id": self.entitlement_validation_group_id.id,
+                    "id_type": self.id_type.id,
+                }
+            )
+            # Add a new record to entitlement manager parent model
+            man_obj = self.env["g2p.program.entitlement.manager"]
+            mgr = man_obj.create(
+                {
+                    "program_id": program_id,
+                    "manager_ref_id": "%s,%s" % (def_mgr_obj, str(def_mgr.id)),
+                }
+            )
+            val = {"entitlement_managers": [(4, mgr.id)]}
+        return val
