@@ -7,7 +7,7 @@ class ProductTemplateCustomization(models.Model):
     image_url = fields.Char(string="Product URL", compute="_compute_product_image_url")
 
     @api.depends("image_1920", "image_512")
-    def _compute_partner_type(self):
+    def _compute_product_image_url(self):
         """
         Generate the URL of product images (image_512).
         """
@@ -18,7 +18,7 @@ class ProductTemplateCustomization(models.Model):
                 url = (
                     base_url
                     + "/web/image?"
-                    + "model=product_product&id="
+                    + "model=product.template&id="
                     + str(rec.id)
                     + "&field=image_512"
                 )
