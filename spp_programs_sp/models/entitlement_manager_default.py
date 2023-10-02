@@ -18,76 +18,32 @@ class G2PDefaultEntitlementManagerCustomSP(models.Model):
 
     _inherit = "g2p.program.entitlement.manager.default"
 
-    def prepare_entitlements(self, cycle, beneficiaries):
-        """Prepare entitlements.
-        This overrides the Default Entitlement Manager :meth:`prepare_entitlements`
-        to support the storing of service points in the generated entitlements.
-        :param cycle: The cycle.
-        :param beneficiaries: The beneficiaries.
-        :return:
+    def _get_addl_entitlement_fields(self, beneficiary_id):
         """
+        Extends this function to include the service_point_ids if enabled in the program configuration.
+        Add the service_point_ids of the beneficiaries based on the program config.
+        """
+        retval = super()._get_addl_entitlement_fields(beneficiary_id)
         # Check if service points needs to be added in the entitlements
         use_service_point_ids = False
-        if cycle.program_id.store_sp_in_entitlements:
+        if self.program_id.store_sp_in_entitlements:
             use_service_point_ids = True
 
-        benecifiaries_ids = beneficiaries.mapped("partner_id.id")
+        # Get the beneficiarie's service points
+        if use_service_point_ids:
+            service_point_ids = beneficiary_id.service_point_ids or None
+        else:
+            service_point_ids = None
 
-        benecifiaries_with_entitlements = (
-            self.env["g2p.entitlement"]
-            .search(
-                [("cycle_id", "=", cycle.id), ("partner_id", "in", benecifiaries_ids)]
-            )
-            .mapped("partner_id.id")
-        )
-        entitlements_to_create = [
-            benecifiaries_id
-            for benecifiaries_id in benecifiaries_ids
-            if benecifiaries_id not in benecifiaries_with_entitlements
-        ]
-
-        entitlement_start_validity = cycle.start_date
-        entitlement_end_validity = cycle.end_date
-        entitlement_currency = self.currency_id.id
-
-        beneficiaries_with_entitlements_to_create = self.env["res.partner"].browse(
-            entitlements_to_create
-        )
-
-        individual_count = beneficiaries_with_entitlements_to_create.count_individuals()
-        individual_count_map = dict(individual_count)
-
-        entitlements = []
-        for beneficiary_id in beneficiaries_with_entitlements_to_create:
-            amount = self._calculate_amount(
-                beneficiary_id, individual_count_map.get(beneficiary_id.id, 0)
-            )
-            transfer_fee = 0.0
-            if self.transfer_fee_pct > 0.0:
-                transfer_fee = amount * (self.transfer_fee_pct / 100.0)
-            elif self.transfer_fee_amt > 0.0:
-                transfer_fee = self.transfer_fee_amt
-
-            # Get the beneficiarie's service points
-            if use_service_point_ids:
-                service_point_ids = beneficiary_id.service_point_ids or None
-            else:
-                service_point_ids = None
-
-            entitlements.append(
+        # Add the service points to the entitlement
+        if retval:
+            retval.update(
                 {
-                    "cycle_id": cycle.id,
-                    "partner_id": beneficiary_id.id,
-                    "initial_amount": amount,
-                    "transfer_fee": transfer_fee,
-                    "currency_id": entitlement_currency,
-                    "state": "draft",
-                    "is_cash_entitlement": True,
-                    "valid_from": entitlement_start_validity,
-                    "valid_until": entitlement_end_validity,
-                    # Add the service points to the entitlement
                     "service_point_ids": service_point_ids,
                 }
             )
-        if entitlements:
-            self.env["g2p.entitlement"].create(entitlements)
+        else:
+            retval = {
+                "service_point_ids": service_point_ids,
+            }
+        return retval
