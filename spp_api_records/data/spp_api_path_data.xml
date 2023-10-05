@@ -88,7 +88,7 @@
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">GET service point users</field>
         <field name="method">get</field>
-        <field name="filter_domain">[('service_point_ids', '!=', False)]</field>
+        <field name="filter_domain">[('partner_id.ind_service_points_ids', '!=', False)]</field>
         <field
             name="field_ids"
             eval="[(
