@@ -209,7 +209,7 @@ class ApiV1Controller(http.Controller):
         records = path._get_response_treatment(records)
         response_data = {
             "results": records,
-            "total": len(records),
+            "count": len(records),
             "offset": kw.get("offset", 0),
             "limit": kw.get("limit", 0),
             "version": version,
