@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+g2p_registrant_tags_registrar,Registrant Tags Registrant Access,g2p_registry_base.model_g2p_registrant_tags,g2p_registry_base.group_g2p_registrar,1,1,1,1

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_model_fields_form_inherit_spp_custom_field_recompute_daily" model="ir.ui.view">
+        <field name="name">ir.model.fields.view.form.inherit</field>
+        <field name="model">ir.model.fields</field>
+        <field name="inherit_id" ref="base.view_model_fields_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='base']//field[@name='copied']" position="after">
+                <field name="recompute_daily" groups="base.group_no_one" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_model_fields_tree_inherit_spp_custom_field_recompute_daily" model="ir.ui.view">
+        <field name="name">ir.model.fields.view.list.inherit</field>
+        <field name="model">ir.model.fields</field>
+        <field name="inherit_id" ref="base.view_model_fields_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='readonly']" position="after">
+                <field name="recompute_daily" groups="base.group_no_one" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_model_fields_search_inherit_spp_custom_field_recompute_daily" model="ir.ui.view">
+        <field name="name">ir.model.fields.view.search.inherit</field>
+        <field name="model">ir.model.fields</field>
+        <field name="inherit_id" ref="base.view_model_fields_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='translate']" position="after">
+                <separator />
+                <filter
+                    name="daily_recompute"
+                    string="Daily Recompute"
+                    domain="[('recompute_daily', '=', True)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
