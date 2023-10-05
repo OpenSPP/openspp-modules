@@ -17,6 +17,42 @@ class OpenSPPRegistrant(models.Model):
     # Custom Fields
     service_point_ids = fields.Many2many("spp.service.point", string="Service Points")
 
+    ind_service_points_ids = fields.Many2many(
+        comodel_name="spp.service.point",
+        relation="service_point_ids_individual_ids_rel",
+        column1="individual_id",
+        column2="service_point_id",
+        compute="_compute_ind_service_points_ids",
+        inverse="_inverse_ind_service_points_ids",
+        store=True,
+    )
+
+    @api.depends("parent_id")
+    def _compute_ind_service_points_ids(self):
+        for rec in self:
+            rec.ind_service_points_ids.update_individual_ids()
+            if rec.parent_id:
+                service_points_ids = self.env["spp.service.point"].search(
+                    [("res_partner_company_id", "=", rec.parent_id.id)]
+                )
+                service_points_ids.update_individual_ids()
+
+    def _inverse_ind_service_points_ids(self):
+        pass
+
+    def unlink(self):
+        child_ids = None
+        for rec in self:
+            if rec.is_company:
+                child_ids = rec.child_ids
+
+        super(OpenSPPRegistrant, self).unlink()
+
+        if child_ids:
+            child_ids._compute_ind_service_points_ids()
+
+        return
+
 
 class OpenSPPServicePoint(models.Model):
     _name = "spp.service.point"
@@ -46,13 +82,12 @@ class OpenSPPServicePoint(models.Model):
         domain=[("is_company", "=", True)],
         inverse="_inverse_res_partner_company_id",
     )
-
-    user_ids = fields.Many2many(
-        comodel_name="res.users",
-        relation="service_point_ids_user_ids_rel",
-        column1="user_id",
-        column2="service_point_id",
-        string="Service Points",
+    individual_ids = fields.Many2many(
+        comodel_name="res.partner",
+        relation="service_point_ids_individual_ids_rel",
+        column1="service_point_id",
+        column2="individual_id",
+        readonly=True,
     )
 
     @api.depends("phone_no", "country_id")
@@ -119,6 +154,16 @@ class OpenSPPServicePoint(models.Model):
             if rec.area_id:
                 return rec.area_id.open_area_form()
 
+    def update_individual_ids(self):
+        for res in self:
+            child_ids = []
+            if res.res_partner_company_id and res.res_partner_company_id.child_ids:
+                child_ids = res.res_partner_company_id.child_ids.ids
+            res.individual_ids = [(6, 0, child_ids)]
+
+    def _inverse_res_partner_company_id(self):
+        self.update_individual_ids()
+
     def create_user(self):
         if not self.res_partner_company_id:
             raise UserError(_("Service point does not have company."))
@@ -175,23 +220,6 @@ class OpenSPPServicePoint(models.Model):
                 }
             )
         )
-
-    def update_user_ids(self):
-        for res in self:
-            user_id_list = []
-
-            # get all user_ids of individual
-            if res.res_partner_company_id and res.res_partner_company_id.child_ids:
-                for child_id in res.res_partner_company_id.child_ids:
-                    user_id_list.extend(child_id.user_ids.ids)
-
-            # to ensure no duplicate id
-            user_id_list = list(set(user_id_list))
-            res.user_ids = [(6, 0, user_id_list)]
-
-    @api.depends("res_partner_company_id")
-    def _inverse_res_partner_company_id(self):
-        self.update_user_ids()
 
 
 class OpenSPPServiceType(models.Model):
