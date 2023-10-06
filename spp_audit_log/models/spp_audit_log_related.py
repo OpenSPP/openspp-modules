@@ -39,13 +39,15 @@ class SppAuditLogRelated(models.Model):
                 msg = f"field's comodel should be {rec.spp_audit_log_id.model_id.name}"
                 raise ValidationError(_(msg))
 
-    @api.constrains("model_id")
-    def _check_model_id(self):
-        for rec in self:
-            if rec.model_id == rec.spp_audit_log_id.model_id:
-                raise ValidationError(
-                    _("Related model should not be the same with the parent model.")
-                )
+    # TODO: should I add this or not?
+    # @api.constrains("model_id")
+    # def _check_model_id(self):
+    #     # model and parent model should not be the same
+    #     for rec in self:
+    #         if rec.model_id == rec.spp_audit_log_id.model_id:
+    #             raise ValidationError(
+    #                 _("Related model should not be the same with the parent model.")
+    #             )
 
     @api.depends("model_id")
     def _compute_field_id_domain(self):
