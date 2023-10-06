@@ -126,12 +126,24 @@ class SppAuditLog(models.Model):
         return
 
     def send_log_message(self, method, data):
+        self.ensure_one()
         for res_id in data:
             record_model = self.env[self.sudo().model_id.model]
             record = record_model.browse(res_id)
+            related_model_records = []
+            for related_model in self.related_model_ids:
+                related_model_records.append(
+                    self.env[related_model.model_id.model].search(
+                        [(related_model.field_id.name, "=", res_id)]
+                    )
+                )
+
             if method == "create":
                 msg = f"{data[res_id]['new'].get('name')} is Created."
                 record.message_post(body=msg)
+                for related_model_record in related_model_records:
+                    for model_record in related_model_record:
+                        model_record.message_post(body=msg)
             elif method == "write":
                 old_data = data[res_id]["old"]
                 new_data = data[res_id]["new"]
@@ -139,7 +151,17 @@ class SppAuditLog(models.Model):
                 for old_data_field_name, new_data_field_name in zip(old_data, new_data):
                     field = record._fields.get(new_data_field_name)
                     field_label = field.get_description(self.env)["string"]
-                    msg = f"{field_label} is updated from {old_data[old_data_field_name]} " \
+                    msg = (
+                        f"{field_label} is updated from {old_data[old_data_field_name]} "
                         f"to {new_data[new_data_field_name]}"
+                    )
                     record.message_post(body=msg)
+
+                    updated_msg = f"{self.model_id.name} ({record.name}): {msg}"
+                    for related_model_record in related_model_records:
+                        for model_record in related_model_record:
+                            model_record.message_post(body=updated_msg)
+            elif method == "unlink":
+                # TODO: add message_post for deleting records
+                pass
         return

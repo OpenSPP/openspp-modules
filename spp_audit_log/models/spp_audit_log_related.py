@@ -14,6 +14,7 @@ class SppAuditLogRelated(models.Model):
         "ir.model",
         "Model",
         required=True,
+        domain=[("is_mail_thread", "=", True)],
         ondelete="cascade",
     )
     field_id = fields.Many2one(
