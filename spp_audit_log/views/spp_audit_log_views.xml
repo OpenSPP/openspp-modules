@@ -1,0 +1,95 @@
+<odoo>
+  <!-- explicit list view definition -->
+  <record id="view_spp_audit_log_related_tree" model="ir.ui.view">
+    <field name="name">view_spp_audit_log_related_tree</field>
+    <field name="model">spp.audit.log.related</field>
+    <field name="type">tree</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="spp_audit_log_id" invisible="1" />
+            <field name="model_id" />
+            <field name="field_id" />
+        </tree>
+    </field>
+  </record>
+
+  <record id="view_spp_audit_log_related_form" model="ir.ui.view">
+    <field name="name">view_spp_audit_log_related_form</field>
+    <field name="model">spp.audit.log.related</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form string="">
+        <sheet>
+          <group>
+            <field name="spp_audit_log_id" readonly="1" invisible="1" />
+            <field name="model_id" options="{'no_create': True}" />
+            <field name="field_id" options="{'no_create': True}" domain="field_id_domain" />
+          </group>
+        </sheet>
+        <field name="field_id_domain" invisible="1" />
+      </form>
+    </field>
+  </record>
+
+  <!-- explicit list view definition -->
+  <record id="spp_audit_log_tree" model="ir.ui.view">
+    <field name="name">spp_audit_log_tree</field>
+    <field name="model">spp.audit.log</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="log_create" />
+        <field name="log_write" />
+        <field name="log_unlink" />
+        <field name="model_id" />
+      </tree>
+    </field>
+  </record>
+
+  <!-- explicit form view definition -->
+  <record id="spp_audit_log_form" model="ir.ui.view">
+    <field name="name">spp_audit_log_form</field>
+    <field name="model">spp.audit.log</field>
+    <field name="arch" type="xml">
+      <form string="Audit Log">
+        <sheet>
+          <group>
+            <field name="name" />
+            <field name="log_create" />
+            <field name="log_write" />
+            <field name="log_unlink" />
+            <field name="model_id" options="{'no_create': True}" />
+          </group>
+          <notebook attrs="{'invisible': [('id', '=', False)]}">
+            <page string="Related Models">
+                <field
+                                  name="related_model_ids"
+                                  nolabel="1"
+                                  context="{'default_spp_audit_log_id': active_id}"
+                              />
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- actions opening views on models -->
+  <record id="spp_audit_log_action_window" model="ir.actions.act_window">
+    <field name="name">Audit Log</field>
+    <field name="res_model">spp.audit.log</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help">Create and manage the audit log.</field>
+  </record>
+
+  <!-- Top menu item -->
+  <menuitem name="Audit Log" id="spp_audit_log.menu_root" />
+
+  <!-- actions -->
+  <menuitem
+          name="Audit Log"
+          id="spp_audit_log.menu_1"
+          parent="spp_audit_log.menu_root"
+          action="spp_audit_log_action_window"
+      />
+</odoo>
