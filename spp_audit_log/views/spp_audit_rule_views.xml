@@ -1,27 +1,27 @@
 <odoo>
   <!-- explicit list view definition -->
-  <record id="view_spp_audit_log_related_tree" model="ir.ui.view">
-    <field name="name">view_spp_audit_log_related_tree</field>
-    <field name="model">spp.audit.log.related</field>
+  <record id="view_spp_audit_rule_related_tree" model="ir.ui.view">
+    <field name="name">view_spp_audit_rule_related_tree</field>
+    <field name="model">spp.audit.rule.related</field>
     <field name="type">tree</field>
     <field name="arch" type="xml">
         <tree>
-            <field name="spp_audit_log_id" invisible="1" />
+            <field name="spp_audit_rule_id" invisible="1" />
             <field name="model_id" />
             <field name="field_id" />
         </tree>
     </field>
   </record>
 
-  <record id="view_spp_audit_log_related_form" model="ir.ui.view">
-    <field name="name">view_spp_audit_log_related_form</field>
-    <field name="model">spp.audit.log.related</field>
+  <record id="view_spp_audit_rule_related_form" model="ir.ui.view">
+    <field name="name">view_spp_audit_rule_related_form</field>
+    <field name="model">spp.audit.rule.related</field>
     <field name="type">form</field>
     <field name="arch" type="xml">
       <form string="">
         <sheet>
           <group>
-            <field name="spp_audit_log_id" readonly="1" invisible="1" />
+            <field name="spp_audit_rule_id" readonly="1" invisible="1" />
             <field name="model_id" options="{'no_create': True}" />
             <field name="field_id" options="{'no_create': True}" domain="field_id_domain" />
           </group>
@@ -32,9 +32,9 @@
   </record>
 
   <!-- explicit list view definition -->
-  <record id="spp_audit_log_tree" model="ir.ui.view">
-    <field name="name">spp_audit_log_tree</field>
-    <field name="model">spp.audit.log</field>
+  <record id="spp_audit_rule_tree" model="ir.ui.view">
+    <field name="name">spp_audit_rule_tree</field>
+    <field name="model">spp.audit.rule</field>
     <field name="arch" type="xml">
       <tree>
         <field name="name" />
@@ -47,9 +47,9 @@
   </record>
 
   <!-- explicit form view definition -->
-  <record id="spp_audit_log_form" model="ir.ui.view">
-    <field name="name">spp_audit_log_form</field>
-    <field name="model">spp.audit.log</field>
+  <record id="spp_audit_rule_form" model="ir.ui.view">
+    <field name="name">spp_audit_rule_form</field>
+    <field name="model">spp.audit.rule</field>
     <field name="arch" type="xml">
       <form string="Audit Log">
         <sheet>
@@ -65,7 +65,7 @@
                 <field
                                   name="related_model_ids"
                                   nolabel="1"
-                                  context="{'default_spp_audit_log_id': active_id}"
+                                  context="{'default_spp_audit_rule_id': active_id}"
                               />
             </page>
           </notebook>
@@ -75,9 +75,9 @@
   </record>
 
   <!-- actions opening views on models -->
-  <record id="spp_audit_log_action_window" model="ir.actions.act_window">
-    <field name="name">Audit Log</field>
-    <field name="res_model">spp.audit.log</field>
+  <record id="spp_audit_rule_action_window" model="ir.actions.act_window">
+    <field name="name">Audit Rule</field>
+    <field name="res_model">spp.audit.rule</field>
     <field name="view_mode">tree,form</field>
     <field name="help">Create and manage the audit log.</field>
   </record>
@@ -85,11 +85,15 @@
   <!-- Top menu item -->
   <menuitem name="Audit Log" id="spp_audit_log.menu_root" />
 
+  <!-- Sub-menu item -->
+
+  <menuitem name="Audit" id="spp_audit_log.audit_submenu" parent="spp_audit_log.menu_root" />
+
   <!-- actions -->
   <menuitem
-          name="Audit Log"
-          id="spp_audit_log.menu_1"
-          parent="spp_audit_log.menu_root"
-          action="spp_audit_log_action_window"
+          name="Rule"
+          id="spp_audit_log.rule_menu"
+          parent="spp_audit_log.audit_submenu"
+          action="spp_audit_rule_action_window"
       />
 </odoo>

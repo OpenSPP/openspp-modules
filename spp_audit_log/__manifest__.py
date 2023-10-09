@@ -18,7 +18,7 @@
     "data": [
         "security/audit_log_security.xml",
         "security/ir.model.access.csv",
-        "views/spp_audit_log_views.xml",
+        "views/spp_audit_rule_views.xml",
     ],
     "assets": {},
     "demo": [],

@@ -4,7 +4,7 @@ from ..tools import audit_decorator
 
 
 class SppAuditLog(models.Model):
-    _name = "spp.audit.log"
+    _name = "spp.audit.rule"
     _description = "SPP Audit Log"
 
     name = fields.Char(size=32, required=True)
@@ -19,7 +19,7 @@ class SppAuditLog(models.Model):
         domain=[("is_mail_thread", "=", True)],
         ondelete="cascade",
     )
-    related_model_ids = fields.One2many("spp.audit.log.related", "spp_audit_log_id")
+    related_model_ids = fields.One2many("spp.audit.rule.related", "spp_audit_rule_id")
 
     _sql_constraints = [
         (
@@ -39,7 +39,7 @@ class SppAuditLog(models.Model):
     ]
 
     @api.model
-    def get_audit_log(self, method):
+    def get_audit_rule(self, method):
         domain = [("model_id.model", "=", self._name)]
         if method == "create":
             domain.append(("log_create", "=", True))
@@ -48,7 +48,7 @@ class SppAuditLog(models.Model):
         elif method == "unlink":
             domain.append(("log_unlink", "=", True))
 
-        return self.env["spp.audit.log"].search(domain, limit=1)
+        return self.env["spp.audit.rule"].search(domain, limit=1)
 
     @api.model
     def _register_hook(self, ids=None):
@@ -63,8 +63,8 @@ class SppAuditLog(models.Model):
                 continue
             RecordModel = self.env[rule.model_id.model]
 
-            # Add attribute get_audit_log to models that are being created or updated in spp.audit.log
-            type(RecordModel).get_audit_log = SppAuditLog.get_audit_log
+            # Add attribute get_audit_rule to models that are being created or updated in spp.audit.rule
+            type(RecordModel).get_audit_rule = SppAuditLog.get_audit_rule
 
             for method in self._methods:
                 func = getattr(RecordModel, method)
