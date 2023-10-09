@@ -1,3 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_spp_audit_rule,SPP Audit Log Access,model_spp_audit_rule,spp_audit_log.group_manager,1,1,1,1
-access_spp_audit_rule_related,SPP Audit Log Related Access,model_spp_audit_rule_related,spp_audit_log.group_manager,1,1,1,1
+access_spp_audit_rule,SPP Audit Rule Access,model_spp_audit_rule,spp_audit_log.group_manager,1,1,1,1
+access_spp_audit_log,SPP Audit Log Access,model_spp_audit_log,spp_audit_log.group_manager,1,1,1,1

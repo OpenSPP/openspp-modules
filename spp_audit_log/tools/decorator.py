@@ -25,8 +25,8 @@ def audit_decorator(method):
     def audit_create(self, vals):
         result = audit_create.origin(self, vals)
         record = self.browse(result) if isinstance(result, (int, long)) else result
-        rule = self.get_audit_rule("create")
-        if rule:
+        rules = self.get_audit_rules("create")
+        for rule in rules:
             new_values = record.read(load="_classic_write")
             keys = new_values[0].keys()
             for key in keys:
@@ -36,11 +36,11 @@ def audit_decorator(method):
         return result
 
     def audit_write(self, vals):
-        rule = self.get_audit_rule("write")
-        if rule:
+        rules = self.get_audit_rules("write")
+        if rules:
             old_values = self.sudo().read(load="_classic_write")
         result = audit_write.origin(self, vals)
-        if rule:
+        for rule in rules:
             if audit_write.origin.__name__ == "_write":
                 new_values = get_new_values(self)
             else:
@@ -56,8 +56,8 @@ def audit_decorator(method):
         return result
 
     def audit_unlink(self):
-        rule = self.get_audit_rule("unlink")
-        if rule:
+        rules = self.get_audit_rules("unlink")
+        for rule in rules:
             old_values = self.read(load="_classic_write")
             keys = old_values[0].keys()
             for key in keys:

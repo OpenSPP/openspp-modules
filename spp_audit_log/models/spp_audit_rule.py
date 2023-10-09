@@ -1,13 +1,16 @@
-from odoo import api, fields, models
+import json
+from odoo import _, api, fields, models
 
 from ..tools import audit_decorator
+from odoo.exceptions import ValidationError
 
 
-class SppAuditLog(models.Model):
+class SppAuditRule(models.Model):
     _name = "spp.audit.rule"
-    _description = "SPP Audit Log"
+    _description = "SPP Audit Rule"
 
     name = fields.Char(size=32, required=True)
+    # TODO: should we need to add active field?
     # active = fields.Boolean(default=True)
     log_create = fields.Boolean("Log Creation", default=True)
     log_write = fields.Boolean("Log Update", default=True)
@@ -16,16 +19,30 @@ class SppAuditLog(models.Model):
         "ir.model",
         "Model",
         required=True,
-        domain=[("is_mail_thread", "=", True)],
         ondelete="cascade",
     )
-    related_model_ids = fields.One2many("spp.audit.rule.related", "spp_audit_rule_id")
+    model_id_domain = fields.Char(
+        compute="_compute_model_id_domain",
+        readonly=True,
+    )
+    parent_id = fields.Many2one('spp.audit.rule', string='Parent Rule')
+    child_ids = fields.One2many('spp.audit.rule', 'parent_id', string='Related Rules', readonly=True)
+
+    # will be visible and used only if audit rule have parent
+    field_id = fields.Many2one(
+        "ir.model.fields",
+        ondelete="cascade",
+    )
+    field_id_domain = fields.Char(
+        compute="_compute_field_id_domain",
+        readonly=True,
+    )
 
     _sql_constraints = [
         (
             "model_uniq",
-            "unique(model_id)",
-            "There is already a rule defined on this model",
+            "unique(model_id, parent_id)",
+            "There is already a rule defined for this model and parent",
         ),
     ]
 
@@ -39,7 +56,7 @@ class SppAuditLog(models.Model):
     ]
 
     @api.model
-    def get_audit_rule(self, method):
+    def get_audit_rules(self, method):
         domain = [("model_id.model", "=", self._name)]
         if method == "create":
             domain.append(("log_create", "=", True))
@@ -48,7 +65,7 @@ class SppAuditLog(models.Model):
         elif method == "unlink":
             domain.append(("log_unlink", "=", True))
 
-        return self.env["spp.audit.rule"].search(domain, limit=1)
+        return self.env["spp.audit.rule"].search(domain)
 
     @api.model
     def _register_hook(self, ids=None):
@@ -63,8 +80,8 @@ class SppAuditLog(models.Model):
                 continue
             RecordModel = self.env[rule.model_id.model]
 
-            # Add attribute get_audit_rule to models that are being created or updated in spp.audit.rule
-            type(RecordModel).get_audit_rule = SppAuditLog.get_audit_rule
+            # Add attribute get_audit_rules to models that are being created or updated in spp.audit.rule
+            type(RecordModel).get_audit_rules = SppAuditRule.get_audit_rules
 
             for method in self._methods:
                 func = getattr(RecordModel, method)
@@ -118,50 +135,89 @@ class SppAuditLog(models.Model):
                 del data[res_id]
         return data
 
+    @api.depends("model_id", "parent_id")
+    def _compute_field_id_domain(self):
+        for rec in self:
+            domain = [("id", "=", 0)]
+            if rec.model_id and rec.parent_id:
+                domain = [
+                    ("model_id", "=", rec.model_id.id),
+                    ("relation", "=", rec.parent_id.model_id.model),
+                ]
+            rec.field_id_domain = json.dumps(domain)
+
+    @api.depends("parent_id")
+    def _compute_model_id_domain(self):
+        for rec in self:
+            # If rule doesn't have a parent rule, selection model should have inherit the mail.thread
+            # Else, all model can be selected
+            domain = [("is_mail_thread", "=", True)]
+            if rec.parent_id:
+                domain = []
+            rec.model_id_domain = json.dumps(domain)
+            
+    @api.constrains("model_id")
+    def _check_model_id(self):
+        for rec in self:
+            if not rec.parent_id and not rec.model_id.is_mail_thread:
+                raise ValidationError(_("Model should have inherit the mail.thread model."))
+    
+    @api.constrains("field_id")
+    def _check_field_id(self):
+        for rec in self:
+            if rec.parent_id and not rec.field_id:
+                raise ValidationError(_("Field is required if the rule is a child rule."))
+            
+    @api.constrains("model_id", "field_id")
+    def _check_model_id_field_id(self):
+        for rec in self:
+            if not rec.parent_id and not rec.model_id.is_mail_thread:
+                raise ValidationError(_("Model should have inherit the mail.thread model if rule is a parent rule."))
+            if rec.parent_id and not rec.field_id:
+                raise ValidationError(_("Field is required if the rule is a child rule."))
+            if rec.parent_id and rec.field_id.relation != rec.parent_id.model_id.model:
+                error_msg = f"Field's relation should be {rec.spp_audit_rule_id.model_id.name}"
+                raise ValidationError(_(error_msg))
+            
+    def get_most_parent(self, res_ids):
+        if not self.parent_id:
+            return None, []
+
+        # Initialize variable to be used in while loop
+        current_rule_id = self
+        parent_rule_id = self.parent_id
+        currect_model_records = {"model": self.model_id.model, "ids": res_ids}
+
+        # get the model name and ids of the most parent rule
+        # loop will break if a rule doesn't have parent rule
+        while parent_rule_id:
+            current_records = self.env[currect_model_records['model']].browse(currect_model_records['ids'])
+            currect_model_records["model"] = parent_rule_id.model_id.model
+            new_ids = []
+            for record in current_records:
+                new_ids.extend(getattr(record, current_rule_id.field_id.name).ids)
+            currect_model_records["ids"] = new_ids
+            
+            current_rule_id = parent_rule_id
+            parent_rule_id = parent_rule_id.parent_id
+
+        return currect_model_records["model"], [str(record_id) for record_id in currect_model_records["ids"]]
+
     def log(self, method, old_values=None, new_values=None):
         self.ensure_one()
         if old_values or new_values:
             data = self._format_data_to_log(old_values, new_values)
-            self.send_log_message(method, data)
-        return
-
-    def send_log_message(self, method, data):
-        self.ensure_one()
-        for res_id in data:
-            record_model = self.env[self.sudo().model_id.model]
-            record = record_model.browse(res_id)
-            related_model_records = []
-            for related_model in self.related_model_ids:
-                related_model_records.append(
-                    self.env[related_model.model_id.model].search(
-                        [(related_model.field_id.name, "=", res_id)]
-                    )
-                )
-
-            if method == "create":
-                msg = f"{data[res_id]['new'].get('name')} is Created."
-                record.message_post(body=msg)
-                for related_model_record in related_model_records:
-                    for model_record in related_model_record:
-                        model_record.message_post(body=msg)
-            elif method == "write":
-                old_data = data[res_id]["old"]
-                new_data = data[res_id]["new"]
-
-                for old_data_field_name, new_data_field_name in zip(old_data, new_data):
-                    field = record._fields.get(new_data_field_name)
-                    field_label = field.get_description(self.env)["string"]
-                    msg = (
-                        f"{field_label} is updated from {old_data[old_data_field_name]} "
-                        f"to {new_data[new_data_field_name]}"
-                    )
-                    record.message_post(body=msg)
-
-                    updated_msg = f"{self.model_id.name} ({record.name}): {msg}"
-                    for related_model_record in related_model_records:
-                        for model_record in related_model_record:
-                            model_record.message_post(body=updated_msg)
-            elif method == "unlink":
-                # TODO: add message_post for deleting records
-                pass
+            audit_log = self.env['spp.audit.log'].sudo()
+            for res_id in data:
+                parent_model, parent_res_ids = self.get_most_parent([res_id])
+                audit_log.create({
+                    'audit_rule_id': self.id,
+                    'user_id': self._uid,
+                    'model_id': self.sudo().model_id.id,
+                    'res_id': res_id,
+                    'method': method,
+                    'data': repr(data[res_id]),
+                    "parent_model_id": self.env["ir.model"].search([('model', '=', parent_model)], limit=1).id,
+                    "parent_res_ids_str": ','.join(parent_res_ids),
+                })
         return

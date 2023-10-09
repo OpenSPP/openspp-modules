@@ -1,35 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <!-- explicit list view definition -->
-  <record id="view_spp_audit_rule_related_tree" model="ir.ui.view">
-    <field name="name">view_spp_audit_rule_related_tree</field>
-    <field name="model">spp.audit.rule.related</field>
-    <field name="type">tree</field>
-    <field name="arch" type="xml">
-        <tree>
-            <field name="spp_audit_rule_id" invisible="1" />
-            <field name="model_id" />
-            <field name="field_id" />
-        </tree>
-    </field>
-  </record>
-
-  <record id="view_spp_audit_rule_related_form" model="ir.ui.view">
-    <field name="name">view_spp_audit_rule_related_form</field>
-    <field name="model">spp.audit.rule.related</field>
-    <field name="type">form</field>
-    <field name="arch" type="xml">
-      <form string="">
-        <sheet>
-          <group>
-            <field name="spp_audit_rule_id" readonly="1" invisible="1" />
-            <field name="model_id" options="{'no_create': True}" />
-            <field name="field_id" options="{'no_create': True}" domain="field_id_domain" />
-          </group>
-        </sheet>
-        <field name="field_id_domain" invisible="1" />
-      </form>
-    </field>
-  </record>
 
   <!-- explicit list view definition -->
   <record id="spp_audit_rule_tree" model="ir.ui.view">
@@ -37,11 +7,13 @@
     <field name="model">spp.audit.rule</field>
     <field name="arch" type="xml">
       <tree>
+        <field name="parent_id"/>
         <field name="name" />
         <field name="log_create" />
         <field name="log_write" />
         <field name="log_unlink" />
         <field name="model_id" />
+        <field name="field_id" />
       </tree>
     </field>
   </record>
@@ -51,22 +23,31 @@
     <field name="name">spp_audit_rule_form</field>
     <field name="model">spp.audit.rule</field>
     <field name="arch" type="xml">
-      <form string="Audit Log">
+      <form string="Audit Rule">
+        <field name="model_id_domain" invisible="1"/>
+        <field name="field_id_domain" invisible="1"/>
         <sheet>
           <group>
+            <field name="parent_id"/>
             <field name="name" />
             <field name="log_create" />
             <field name="log_write" />
             <field name="log_unlink" />
-            <field name="model_id" options="{'no_create': True}" />
+            <field name="model_id" options="{'no_create': True, 'no_open': True}" domain="model_id_domain"/>
+            <field name="field_id" attrs="{'invisible': [('parent_id', '=', False)]}" options="{'no_open': True}" domain="field_id_domain"/>
           </group>
           <notebook attrs="{'invisible': [('id', '=', False)]}">
-            <page string="Related Models">
-                <field
-                                  name="related_model_ids"
-                                  nolabel="1"
-                                  context="{'default_spp_audit_rule_id': active_id}"
-                              />
+            <page name="related_rules" string="Related Roles">
+              <field name="child_ids">
+                <tree create="0" edit="0" delete="0" editable="bottom">
+                  <field name="name"/>
+                  <field name="log_create" />
+                  <field name="log_write" />
+                  <field name="log_unlink" />
+                  <field name="model_id" />
+                  <field name="field_id" />
+                </tree>
+              </field>
             </page>
           </notebook>
         </sheet>
@@ -79,7 +60,7 @@
     <field name="name">Audit Rule</field>
     <field name="res_model">spp.audit.rule</field>
     <field name="view_mode">tree,form</field>
-    <field name="help">Create and manage the audit log.</field>
+    <field name="help">Create and manage the audit rule.</field>
   </record>
 
   <!-- Top menu item -->
