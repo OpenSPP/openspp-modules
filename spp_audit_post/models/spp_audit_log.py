@@ -32,9 +32,10 @@ class SppAuditLog(models.Model):
         data = safe_eval(self.data or "{}", {"datetime": datetime})
         RecordModel = self.env[self.model_id.model]
         record = RecordModel.browse(self.res_id)
-        record_name = ""
-        if record:
+        if record and hasattr(record, "name"):
             record_name = record.name
+        else:
+            record_name = self.model_id.name
         for fname in set(data["new"].keys()) | set(data["old"].keys()):
             field = RecordModel._fields.get(fname)
             if field and (
