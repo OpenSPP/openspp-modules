@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <function model="spp.audit.rule" name="create_rules">
+        <value
+            model="spp.audit.rule"
+            eval="{
+            'name': 'Program Rule',
+            'model_id': obj().env['ir.model'].search([('model', '=', 'g2p.program')]).id,
+        }"
+        />
+    </function>
+    <function model="spp.audit.rule" name="create_rules">
+        <value
+            model="spp.audit.rule"
+            eval="{
+            'name': 'Child Cycle Rule',
+            'parent_id': obj().env['spp.audit.rule'].search([('name', '=', 'Program Rule')]).id,
+            'model_id': obj().env['ir.model'].search([('model', '=', 'g2p.cycle')]).id,
+            'field_id': obj().env['ir.model.fields'].search([('name', '=', 'program_id'), ('model', '=', 'g2p.cycle'), ('relation', '=', 'g2p.program')]).id,
+        }"
+        />
+    </function>
+    <function model="spp.audit.rule" name="create_rules">
+        <value
+            model="spp.audit.rule"
+            eval="{
+            'name': 'Child Entitlement Rule',
+            'parent_id': obj().env['spp.audit.rule'].search([('name', '=', 'Child Cycle Rule')]).id,
+            'model_id': obj().env['ir.model'].search([('model', '=', 'g2p.entitlement.inkind')]).id,
+            'field_id': obj().env['ir.model.fields'].search([('name', '=', 'cycle_id'), ('model', '=', 'g2p.entitlement.inkind'), ('relation', '=', 'g2p.cycle')]).id,
+        }"
+        />
+    </function>
+</odoo>
