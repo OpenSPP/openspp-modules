@@ -1,8 +1,9 @@
 import json
+
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 from ..tools import audit_decorator
-from odoo.exceptions import ValidationError
 
 
 class SppAuditRule(models.Model):
@@ -25,8 +26,10 @@ class SppAuditRule(models.Model):
         compute="_compute_model_id_domain",
         readonly=True,
     )
-    parent_id = fields.Many2one('spp.audit.rule', string='Parent Rule')
-    child_ids = fields.One2many('spp.audit.rule', 'parent_id', string='Related Rules', readonly=True)
+    parent_id = fields.Many2one("spp.audit.rule", string="Parent Rule")
+    child_ids = fields.One2many(
+        "spp.audit.rule", "parent_id", string="Related Rules", readonly=True
+    )
 
     # will be visible and used only if audit rule have parent
     field_id = fields.Many2one(
@@ -155,30 +158,40 @@ class SppAuditRule(models.Model):
             if rec.parent_id:
                 domain = []
             rec.model_id_domain = json.dumps(domain)
-            
+
     @api.constrains("model_id")
     def _check_model_id(self):
         for rec in self:
             if not rec.parent_id and not rec.model_id.is_mail_thread:
-                raise ValidationError(_("Model should have inherit the mail.thread model."))
-    
+                raise ValidationError(
+                    _("Model should have inherit the mail.thread model.")
+                )
+
     @api.constrains("field_id")
     def _check_field_id(self):
         for rec in self:
             if rec.parent_id and not rec.field_id:
-                raise ValidationError(_("Field is required if the rule is a child rule."))
-            
+                raise ValidationError(
+                    _("Field is required if the rule is a child rule.")
+                )
+
     @api.constrains("model_id", "field_id")
     def _check_model_id_field_id(self):
         for rec in self:
             if not rec.parent_id and not rec.model_id.is_mail_thread:
-                raise ValidationError(_("Model should have inherit the mail.thread model if rule is a parent rule."))
+                raise ValidationError(
+                    _(
+                        "Model should have inherit the mail.thread model if rule is a parent rule."
+                    )
+                )
             if rec.parent_id and not rec.field_id:
-                raise ValidationError(_("Field is required if the rule is a child rule."))
+                raise ValidationError(
+                    _("Field is required if the rule is a child rule.")
+                )
             if rec.parent_id and rec.field_id.relation != rec.parent_id.model_id.model:
-                error_msg = f"Field's relation should be {rec.spp_audit_rule_id.model_id.name}"
+                error_msg = f"Field's relation should be {rec.parent_id.model_id.name}"
                 raise ValidationError(_(error_msg))
-            
+
     def get_most_parent(self, res_ids):
         if not self.parent_id:
             return None, []
@@ -191,33 +204,42 @@ class SppAuditRule(models.Model):
         # get the model name and ids of the most parent rule
         # loop will break if a rule doesn't have parent rule
         while parent_rule_id:
-            current_records = self.env[currect_model_records['model']].browse(currect_model_records['ids'])
+            current_records = self.env[currect_model_records["model"]].browse(
+                currect_model_records["ids"]
+            )
             currect_model_records["model"] = parent_rule_id.model_id.model
             new_ids = []
             for record in current_records:
                 new_ids.extend(getattr(record, current_rule_id.field_id.name).ids)
             currect_model_records["ids"] = new_ids
-            
+
             current_rule_id = parent_rule_id
             parent_rule_id = parent_rule_id.parent_id
 
-        return currect_model_records["model"], [str(record_id) for record_id in currect_model_records["ids"]]
+        return currect_model_records["model"], [
+            str(record_id) for record_id in currect_model_records["ids"]
+        ]
 
     def log(self, method, old_values=None, new_values=None):
         self.ensure_one()
         if old_values or new_values:
             data = self._format_data_to_log(old_values, new_values)
-            audit_log = self.env['spp.audit.log'].sudo()
+            audit_log = self.env["spp.audit.log"].sudo()
             for res_id in data:
                 parent_model, parent_res_ids = self.get_most_parent([res_id])
-                audit_log.create({
-                    'audit_rule_id': self.id,
-                    'user_id': self._uid,
-                    'model_id': self.sudo().model_id.id,
-                    'res_id': res_id,
-                    'method': method,
-                    'data': repr(data[res_id]),
-                    "parent_model_id": self.env["ir.model"].search([('model', '=', parent_model)], limit=1).id,
-                    "parent_res_ids_str": ','.join(parent_res_ids),
-                })
+                audit_log.create(
+                    {
+                        # TODO: should we need to connect spp.audit.log to spp.audit.rule?
+                        # 'audit_rule_id': self.id,
+                        "user_id": self._uid,
+                        "model_id": self.sudo().model_id.id,
+                        "res_id": res_id,
+                        "method": method,
+                        "data": repr(data[res_id]),
+                        "parent_model_id": self.env["ir.model"]
+                        .search([("model", "=", parent_model)], limit=1)
+                        .id,
+                        "parent_res_ids_str": ",".join(parent_res_ids),
+                    }
+                )
         return
