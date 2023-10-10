@@ -205,11 +205,12 @@ class ApiV1Controller(http.Controller):
 
         kw = path.search_treatment_kwargs(kw)
         records = self.get_records(path.model, kw)
-        records = records.search_read(**kw)
-        records = path._get_response_treatment(records)
+        records_data = records.search_read(**kw)
+        records_all = records.search_count(kw.get("domain"))
+        records_data = path._get_response_treatment(records_data)
         response_data = {
-            "results": records,
-            "count": len(records),
+            "results": records_data,
+            "count": records_all,
             "offset": kw.get("offset", 0),
             "limit": kw.get("limit", 0),
             "version": version,
