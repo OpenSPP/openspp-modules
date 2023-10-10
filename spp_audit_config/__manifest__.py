@@ -9,12 +9,13 @@
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
+        "g2p_registry_membership",
         "spp_programs",
         "spp_audit_log",
     ],
     "external_dependencies": {},
     "data": [
-        "data/audit_rule_data.xml",    
+        "data/audit_rule_data.xml",
     ],
     "assets": {},
     "demo": [],

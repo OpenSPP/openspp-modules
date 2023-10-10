@@ -10,13 +10,15 @@ class SppAuditRule(models.Model):
         # Used in creation of rules when installing or upgrading this module
         model_id = vals.get("model_id")
         parent_id = vals.get("parent_id")
+        field_id = vals.get("field_id")
 
         # to avoid sql constraints error when upgrading this module
-        if model_id and parent_id:
+        if model_id:
             rule = self.env["spp.audit.rule"].search(
                 [
                     ("model_id", "=", model_id),
                     ("parent_id", "=", parent_id),
+                    ("field_id", "=", field_id),
                 ],
                 limit=1,
             )
