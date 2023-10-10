@@ -47,6 +47,11 @@ class SppAuditRule(models.Model):
             "unique(model_id, parent_id)",
             "There is already a rule defined for this model and parent",
         ),
+        (
+            "name_uniq",
+            "unique(name)",
+            "Name must be unique",
+        ),
     ]
 
     _methods = ["create", "write", "_write", "unlink"]
