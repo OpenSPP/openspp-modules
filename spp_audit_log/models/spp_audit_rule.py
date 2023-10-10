@@ -44,8 +44,8 @@ class SppAuditRule(models.Model):
     _sql_constraints = [
         (
             "model_uniq",
-            "unique(model_id, parent_id)",
-            "There is already a rule defined for this model and parent",
+            "unique(model_id, parent_id, field_id)",
+            "There is already a rule defined for this model, parent, and field",
         ),
         (
             "name_uniq",

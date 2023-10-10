@@ -1,6 +1,7 @@
 # (C) 2021 Smile (<https://www.smile.eu>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
+import copy
 import sys
 
 from odoo import api
@@ -41,6 +42,7 @@ def audit_decorator(method):
             old_values = self.sudo().read(load="_classic_write")
         result = audit_write.origin(self, vals)
         for rule in rules:
+            old_values_copy = copy.deepcopy(old_values)
             if audit_write.origin.__name__ == "_write":
                 new_values = get_new_values(self)
             else:
@@ -49,10 +51,10 @@ def audit_decorator(method):
             for key in keys:
                 if str(type(new_values[0][key])) == "<class 'markupsafe.Markup'>":
                     new_values[0][key] = str(new_values[0][key])
-                    old_values[0][key] = str(old_values[0][key])
+                    old_values_copy[0][key] = str(old_values_copy[0][key])
 
             if audit_write.origin.__name__ == "write":
-                rule.log("write", old_values, new_values)
+                rule.log("write", old_values_copy, new_values)
         return result
 
     def audit_unlink(self):
