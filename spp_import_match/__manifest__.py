@@ -6,7 +6,7 @@
     "version": "15.0.0.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",
-    "website": "https://github.com/openspp/openspp-registry",
+    "website": "https://github.com/openspp/openspp-base",
     "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
