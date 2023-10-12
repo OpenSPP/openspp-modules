@@ -1,7 +1,9 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import re
 import logging
-from odoo import api, models, fields
+from odoo import api, models, fields, _
+
+from odoo.exceptions import ValidationError, UserError
 _logger = logging.getLogger(__name__)
 
 class Base(models.AbstractModel):
@@ -26,8 +28,12 @@ class Base(models.AbstractModel):
             if "id" not in fields:
                 fields.append("id")
                 import_fields.append(["id"])
-
-            clean_fields = [f[0] for f in import_fields]
+            clean_fields = []
+            for f in import_fields:
+                field_name = f[0]
+                if len(f) > 1:
+                    field_name += "/" + f[1]
+                clean_fields.append(field_name)
             for dbid, xmlid, record, info in converted_data:
                 row = dict(zip(clean_fields, data[info["record"]]))
 
@@ -41,10 +47,11 @@ class Base(models.AbstractModel):
                 else:
                     match = self.env["spp.import.match"]._match_find(self, record, row)
 
-                flat_fields_to_remove = [item for sublist in field_to_match for item in sublist]
-                for fields_pop in flat_fields_to_remove:
-                    if fields_pop in fields:
-                        fields.remove(fields_pop)
+                if match:
+                    flat_fields_to_remove = [item for sublist in field_to_match for item in sublist]
+                    for fields_pop in flat_fields_to_remove:
+                        if fields_pop in row:
+                            row[fields_pop] = False
 
                 match.export_data(fields)
 
@@ -53,3 +60,19 @@ class Base(models.AbstractModel):
                 newdata.append(tuple(row[f] for f in fields))
             data = newdata
         return super(Base, self).load(fields, data)
+
+    def write(self, vals):
+        model = self.env["ir.model"].search([("model", "=", self._name)])
+        new_vals = vals.copy()
+        for rec in vals:
+            field_name = rec
+            if not vals[field_name]:
+                field = self.env["ir.model.fields"].search(
+                    [
+                        ("model_id", "=", model.id),
+                        ("name", "=", field_name)
+                    ]
+                )
+                if field and field.ttype in ('one2many', 'many2many'):
+                    new_vals.pop(rec)
+        return super(Base, self).write(new_vals)
