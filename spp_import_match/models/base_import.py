@@ -49,9 +49,8 @@ class SPPBaseImport(models.TransientModel):
             translated_model_name = search_result[0][1]
         else:
             translated_model_name = self._description
-        description = _("Import %s from file %s") % (
-            translated_model_name,
-            self.file_name,
+        description = _("Import {} from file {}").format(
+            translated_model_name, self.file_name
         )
         attachment = self._create_csv_attachment(
             import_fields, data, options, self.file_name
@@ -141,8 +140,7 @@ class SPPBaseImport(models.TransientModel):
             model_obj, fields, data, chunk_size
         ):
             chunk = str(priority - INIT_PRIORITY).zfill(padding)
-            description = _("Import %s from file %s - #%s - lines %s to %s")
-            description = description % (
+            description = _("Import {} from file {} - #{} - lines {} to {}").format(
                 translated_model_name,
                 file_name,
                 chunk,

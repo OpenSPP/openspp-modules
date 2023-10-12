@@ -1,12 +1,4 @@
 odoo.define("spp_import_match.import", function (require) {
-
-    var AbstractAction = require("web.AbstractAction");
-    var config = require("web.config");
-    var core = require("web.core");
-    var Dialog = require("web.Dialog");
-    var session = require("web.session");
-    var time = require("web.time");
-    var fieldUtils = require("web.field_utils");
     var rpc = require("web.rpc");
     var DataImport = require("base_import.import").DataImport;
 
@@ -18,25 +10,6 @@ odoo.define("spp_import_match.import", function (require) {
         return _.findWhere(data, {id: term}) || _make_option(term);
     }
 
-    function dataFilteredQuery(q) {
-        var suggestions = _.clone(this.data);
-        if (q.term) {
-            var exact = _.filter(suggestions, function (s) {
-                return s.id === q.term || s.text === q.term;
-            });
-            if (exact.length) {
-                suggestions = exact;
-            } else {
-                suggestions = [_make_option(q.term)].concat(
-                    _.filter(suggestions, function (s) {
-                        return s.id.indexOf(q.term) !== -1 || s.text.indexOf(q.term) !== -1;
-                    })
-                );
-            }
-        }
-        q.callback({results: suggestions});
-    }
-
     DataImport.include({
         import_options: function () {
             var options = this._super.apply(this, arguments);
@@ -44,7 +17,7 @@ odoo.define("spp_import_match.import", function (require) {
             return options;
         },
 
-        onimported: function (event, from, to, results) {
+        onimported: function () {
             if (this.$("input.oe_import_queue").prop("checked")) {
                 console.log("CHECKED QUEUE");
                 this.displayNotification({
@@ -95,6 +68,7 @@ odoo.define("spp_import_match.import", function (require) {
 
                         for (const [key, value] of Object.entries(data)) {
                             console.log(value.name);
+                            console.log(key);
                             configs.push(value.name);
                         }
                         console.log(configs);
