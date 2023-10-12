@@ -27,6 +27,13 @@ class SppAuditLog(models.Model):
         return res
 
     def _parent_get_content(self):
+        """
+        The function `_parent_get_content` retrieves the content of a record and compares the old and
+        new values of its fields, returning a list of tuples containing the record name, field label,
+        old value, and new value for each field that has changed.
+        :return: a list of tuples containing information about the changes made to a record. Each tuple
+        in the list represents a change and contains the following elements:
+        """
         self.ensure_one()
         content = []
         data = safe_eval(self.data or "{}", {"datetime": datetime})

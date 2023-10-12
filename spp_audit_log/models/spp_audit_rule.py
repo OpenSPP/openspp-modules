@@ -65,6 +65,14 @@ class SppAuditRule(models.Model):
 
     @api.model
     def get_audit_rules(self, method):
+        """
+        The function returns audit rules based on the specified method.
+
+        :param method: The "method" parameter is a string that specifies the type of operation being
+        performed. It can have one of the following values: "create", "write", or "unlink"
+        :return: The method is returning a search result of "spp.audit.rule" records based on the
+        specified domain.
+        """
         domain = [("model_id.model", "=", self._name)]
         if method == "create":
             domain.append(("log_create", "=", True))
@@ -77,6 +85,15 @@ class SppAuditRule(models.Model):
 
     @api.model
     def _register_hook(self, ids=None):
+        """
+        The function `_register_hook` adds a decorator to certain methods of models in order to enable
+        auditing.
+
+        :param ids: The `ids` parameter is a list of record IDs. It is used to specify a subset of
+        records on which the hook should be registered. If `ids` is not provided or is an empty list,
+        the hook will be registered on all records of the model
+        :return: a boolean value indicating whether any updates were made.
+        """
         self = self.sudo()
         updated = False
         if ids:
@@ -98,6 +115,7 @@ class SppAuditRule(models.Model):
                         break
                     func = func.origin
                 else:
+                    # Monkey patch the methods to add a decorator
                     RecordModel._patch_method(method, audit_decorator(method))
             updated = bool(ids)
         if updated:
@@ -120,6 +138,21 @@ class SppAuditRule(models.Model):
 
     @classmethod
     def _format_data_to_log(cls, old_values, new_values):
+        """
+        The function `_format_data_to_log` takes in old and new values, removes ignored fields, compares
+        the values, and returns a dictionary of data with differences between old and new values.
+
+        :param cls: The parameter `cls` refers to the class itself. It is used to access class
+        attributes and methods within the method
+        :param old_values: The parameter "old_values" is a list of dictionaries representing the old
+        values of some data. Each dictionary represents a set of values for a specific data record
+        :param new_values: The `new_values` parameter is a list of dictionaries or a single dictionary
+        containing the new values for a particular resource. Each dictionary represents a resource and
+        its corresponding field-value pairs
+        :return: a dictionary containing the formatted data. The dictionary has resource IDs as keys,
+        and the values are dictionaries with "old" and "new" keys. The "old" and "new" dictionaries
+        contain the field-value pairs for the old and new values respectively.
+        """
         data = {}
         for age in ("old", "new"):
             vals_list = old_values if age == "old" else new_values
@@ -198,6 +231,13 @@ class SppAuditRule(models.Model):
                 raise ValidationError(_(error_msg))
 
     def get_most_parent(self, res_ids):
+        """
+        The function `get_most_parent` retrieves the model name and ids of the most parent rule based on
+        a given set of resource ids.
+
+        :param res_ids: The `res_ids` parameter is a list of record IDs
+        :return: a tuple containing the model name and a list of record IDs.
+        """
         if not self.parent_id:
             return None, []
 
@@ -226,6 +266,21 @@ class SppAuditRule(models.Model):
         ]
 
     def log(self, method, old_values=None, new_values=None):
+        """
+        The function logs changes made to a model's records by creating an audit log entry with
+        information about the user, model, record, method, and data.
+
+        :param method: The "method" parameter is a string that represents the action or method being
+        logged. It could be a create, write, or delete action, for example
+        :param old_values: The `old_values` parameter is a dictionary that contains the previous values
+        of the fields that were changed. The keys of the dictionary are the field names, and the values
+        are the old values of those fields
+        :param new_values: The `new_values` parameter is a dictionary that contains the updated values
+        of the fields in the record. It represents the new state of the record after the changes have
+        been made
+        :return: Nothing is being returned. The return statement at the end of the method is empty, so
+        it returns None.
+        """
         self.ensure_one()
         if old_values or new_values:
             data = self._format_data_to_log(old_values, new_values)

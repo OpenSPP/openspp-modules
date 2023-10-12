@@ -7,12 +7,19 @@ class SppAuditRule(models.Model):
     @api.model
     @api.returns("self", lambda value: value.id)
     def create_rules(self, vals):
-        # Used in creation of rules when installing or upgrading this module
+        """
+        The function creates rules for installing or upgrading a module, avoiding SQL constraints
+        errors.
+
+        :param vals: The parameter "vals" is a dictionary that contains the values to be used for
+        creating or updating a record in the "spp.audit.rule" model. It may contain the following keys:
+        :return: The method is returning an instance of the "spp.audit.rule" model.
+        """
+
         model_id = vals.get("model_id")
         parent_id = vals.get("parent_id")
         field_id = vals.get("field_id")
 
-        # to avoid sql constraints error when upgrading this module
         if model_id:
             rule = self.env["spp.audit.rule"].search(
                 [

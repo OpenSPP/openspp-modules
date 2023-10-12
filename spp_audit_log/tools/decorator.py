@@ -11,6 +11,16 @@ if sys.version_info > (3,):
 
 
 def audit_decorator(method):
+    """
+    The audit_decorator function is a Python decorator that adds auditing functionality to create, write, and
+    unlink methods of a class.
+
+    :param method: The `method` parameter is a string that specifies the type of operation being
+    performed. It can have one of the following values: "create", "write", or "unlink"
+    :return: The audit_decorator function returns one of three functions: audit_create, audit_write, or
+    audit_unlink, depending on the value of the method parameter.
+    """
+
     def get_new_values(self):
         new_values = []
         for record in self:

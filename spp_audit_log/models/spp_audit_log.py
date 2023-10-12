@@ -59,6 +59,16 @@ class SppAuditLog(models.Model):
                 rec.name = ""
 
     def _format_value(self, field, value):
+        """
+        The function `_format_value` formats a given value based on the field type in a specific
+        context.
+
+        :param field: The `field` parameter represents the field object that contains information about
+        the field being formatted, such as its type, selection options, and related model
+        :param value: The `value` parameter is the value of the field that needs to be formatted. It can
+        be of any data type depending on the field type
+        :return: the formatted value based on the field type and value provided.
+        """
         self.ensure_one()
         if not value and field.type not in ("boolean", "integer", "float"):
             return ""
@@ -96,6 +106,13 @@ class SppAuditLog(models.Model):
         return value
 
     def _get_content(self):
+        """
+        The function `_get_content` retrieves the content of a record, including the old and new values
+        of its fields, and returns it as a list of tuples.
+        :return: a list of tuples containing the label, old value, and new value for each field that has
+        changed in the record.
+        """
+
         self.ensure_one()
         content = []
         data = safe_eval(self.data or "{}", {"datetime": datetime})
