@@ -41,19 +41,22 @@ odoo.define('spp_import_match.import', function (require) {
             return options;
         },
 
-        onimported: function () {
+        onimported: function (event, from, to, results) {
             if (this.$("input.oe_import_queue").prop("checked")) {
+                console.log("CHECKED QUEUE");
                 this.displayNotification({
-                    type: "warning",
-                    title: _t("Your request is being processed"),
-                    message: _t(
-                        "You can check the status of this job in menu 'Queue / Jobs'."
-                    ),
-                });
+                title: "Your request is being processed",
+                message: "You can check the status of this job in menu 'Queue / Jobs'.",
+                type: "success"});
                 this.exit();
+                console.log("CHECKED QUEUE");
             } else {
                 this._super.apply(this, arguments);
             }
+        },
+
+        exit: function () {
+            this.trigger_up('history_back');
         },
 
         start: function () {
