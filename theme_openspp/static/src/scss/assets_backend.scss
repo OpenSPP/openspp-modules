@@ -1,0 +1,181 @@
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,400;1,600;1,700&display=swap);
+
+:root {
+    --header-height: 92px;
+    --title-font: "Archia Bold", sans-serif;
+    --text-font: "Open Sans", sans-serif;
+    --nl-yellow: #3264c8;
+    --nl-dark-yellow: #fbc446;
+    --nl-white: #fffcf8;
+    --nl-black: #212529;
+    --nl-black-btt: #282829;
+    --nl-grey: #6b6a6a;
+    --nl-blue: #3264c8;
+    --nl-dark_blue: #021b4f;
+    --nl-light_blue: #009dd1;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+.text-monospace {
+    margin-top: 0.3rem;
+}
+
+.o_main_navbar {
+    background-color: var(--nl-blue);
+    border-bottom: 0px;
+}
+
+//a, .o_main_navbar .o_menu_brand, .o_main_navbar .o_menu_toggle, .o_main_navbar .o_navbar_apps_menu, .o_main_navbar > .o_menu_sections > div, .o_main_navbar > .o_menu_sections > div > a, .o_main_navbar .o_menu_systray > div, .o_main_navbar .o_menu_systray > div > a, .o_main_navbar .o_nav_entry, .o_main_navbar .o_menu_sections .o_nav_entry, .o_main_navbar .o_menu_systray .o_nav_entry, .o_main_navbar .dropdown .dropdown-toggle, .o_main_navbar .o_menu_sections .dropdown .dropdown-toggle, .o_main_navbar .o_menu_systray .dropdown .dropdown-toggle {
+//    color: var(--nl-black);
+//}
+.o_main_navbar .o_menu_brand,
+.o_main_navbar .o_menu_toggle,
+.o_main_navbar .o_navbar_apps_menu,
+.o_main_navbar > .o_menu_sections > div,
+.o_main_navbar > .o_menu_sections > div > a,
+.o_main_navbar .o_menu_systray > div,
+.o_main_navbar .o_menu_systray > div > a,
+.o_main_navbar .o_nav_entry,
+.o_main_navbar .o_menu_sections .o_nav_entry,
+.o_main_navbar .o_menu_systray .o_nav_entry,
+.o_main_navbar .dropdown .dropdown-toggle,
+.o_main_navbar .o_menu_sections .dropdown .dropdown-toggle,
+.o_main_navbar .o_menu_systray .dropdown .dropdown-toggle {
+    color: var(--nl-white);
+}
+
+a {
+    color: var(--nl-blue);
+}
+
+.o_form_view .oe_button_box .oe_stat_button .o_button_icon {
+    color: var(--nl-blue) !important;
+}
+
+.o_form_view .oe_button_box .btn.oe_stat_button > .o_stat_info .o_stat_value,
+.o_form_view .oe_button_box .btn.oe_stat_button > span .o_stat_value {
+    font-weight: 700;
+    color: var(--nl-blue);
+}
+
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
+    background-color: var(--nl-blue);
+    color: #fff;
+}
+
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after,
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:before {
+    border-left-color: var(--nl-blue);
+}
+
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
+    background-color: var(--nl-blue);
+    color: var(--nl-white);
+    font-weight: bold;
+}
+
+.o_form_view .o_form_uri {
+    color: var(--nl-black);
+}
+
+.o_form_view .o_form_uri:hover {
+    color: var(--nl-grey);
+}
+
+.o_form_view .o_form_uri > span {
+    color: var(--nl-grey);
+}
+
+.o_form_view .o_form_uri > span:hover {
+    color: var(--nl-grey);
+}
+
+.o_form_view .o_form_uri > span:first-child {
+    color: var(--nl-black);
+}
+
+.o_form_view .o_form_uri > span:first-child:hover {
+    color: var(--nl-black);
+}
+
+.o_form_view .o_horizontal_separator {
+    color: var(--nl-black);
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: var(--nl-white);
+    border-color: var(--nl-black-btt);
+    background-color: var(--nl-black-btt);
+}
+
+.btn-fill-primary,
+.btn-primary {
+    //color: #282829;
+    //background-color: #3264c8;
+    //border-color: #3264c8;
+    background-color: var(--nl-blue);
+    border-color: var(--nl-blue);
+
+    color: var(--nl-white);
+    font: 1rem var(--text-font);
+}
+
+.btn-fill-primary:hover,
+.btn-primary:hover {
+    color: var(--nl-white);
+    background-color: var(--nl-dark_blue);
+    border-color: var(--nl-white);
+}
+
+.btn-link {
+    color: #282829;
+}
+
+.o_required_modifier.o_input,
+.o_required_modifier .o_input {
+    background-color: #d6e0f5 !important;
+}
+
+.o_form_view .oe_button_box .oe_stat_button .o_button_icon {
+    color: #282829;
+}
+
+.o_filter_menu .o_add_condition .fa {
+    margin-right: 6px;
+    margin-top: 3px;
+    margin-left: -2px;
+}
+
+.o_list_buttons .btn,
+.o_form_buttons_edit .btn {
+    margin-right: 8px;
+}
+
+.o_control_panel .o_form_buttons_view > button:first-child {
+    margin-right: 8px;
+}
+
+// Radio button
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    background: black;
+    border-radius: 50%;
+    border: 2px solid white;
+    outline: 1px solid black;
+}
+
+// Hide tooltip
+.o_tooltip,
+.o_tooltip_overlay,
+.o_tooltip_content {
+    display: none !important;
+}
+
+// Hide Discuss
+.o_ChatWindowManager,
+.o_MessagingMenu,
+.o_employee_chat_btn {
+    display: none !important;
+}
