@@ -1,17 +1,19 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-import re
 import logging
-from odoo import api, models, fields, _
 
-from odoo.exceptions import ValidationError, UserError
+from odoo import api, models
+
 _logger = logging.getLogger(__name__)
+
 
 class Base(models.AbstractModel):
     _inherit = "base"
 
     @api.model
     def load(self, fields, data):
-        usable, field_to_match = self.env["spp.import.match"]._usable_rules(self._name, fields)
+        usable, field_to_match = self.env["spp.import.match"]._usable_rules(
+            self._name, fields
+        )
         if usable:
             newdata = list()
             if ".id" in fields:
@@ -21,9 +23,9 @@ class Base(models.AbstractModel):
                     dbid = int(values[column])
                     values[column] = self.browse(dbid).get_external_id().get(dbid)
             import_fields = list(map(models.fix_import_export_id_paths, fields))
-            converted_data = list(self._convert_records(
-                self._extract_records(import_fields, data)
-            ))
+            converted_data = list(
+                self._convert_records(self._extract_records(import_fields, data))
+            )
 
             if "id" not in fields:
                 fields.append("id")
@@ -48,7 +50,9 @@ class Base(models.AbstractModel):
                     match = self.env["spp.import.match"]._match_find(self, record, row)
 
                 if match:
-                    flat_fields_to_remove = [item for sublist in field_to_match for item in sublist]
+                    flat_fields_to_remove = [
+                        item for sublist in field_to_match for item in sublist
+                    ]
                     for fields_pop in flat_fields_to_remove:
                         if fields_pop in row:
                             row[fields_pop] = False
@@ -68,11 +72,8 @@ class Base(models.AbstractModel):
             field_name = rec
             if not vals[field_name]:
                 field = self.env["ir.model.fields"].search(
-                    [
-                        ("model_id", "=", model.id),
-                        ("name", "=", field_name)
-                    ]
+                    [("model_id", "=", model.id), ("name", "=", field_name)]
                 )
-                if field and field.ttype in ('one2many', 'many2many'):
+                if field and field.ttype in ("one2many", "many2many"):
                     new_vals.pop(rec)
         return super(Base, self).write(new_vals)

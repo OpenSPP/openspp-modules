@@ -1,4 +1,3 @@
-
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 {
@@ -7,7 +6,7 @@
     "version": "15.0.0.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",
-    "website": "https://github.com/openspp/openspp-registry",
+    "website": "https://github.com/openspp/openspp-base",
     "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
@@ -17,12 +16,12 @@
         "security/ir.model.access.csv",
         "views/import_match_view.xml",
     ],
-    'assets': {
+    "assets": {
         "web.assets_backend": [
             "/spp_import_match/static/src/legacy/js/custom_base_import.js",
         ],
-        'web.assets_qweb': [
-            'spp_import_match/static/src/legacy/xml/custom_base_import.xml',
+        "web.assets_qweb": [
+            "spp_import_match/static/src/legacy/xml/custom_base_import.xml",
         ],
     },
     "demo": [],
