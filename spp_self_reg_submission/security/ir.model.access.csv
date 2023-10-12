@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_spp_self_reg_submission_spp_self_reg_submission,spp_self_reg_submission.spp_self_reg_submission,model_spp_self_reg_submission,base.group_user,1,1,1,1

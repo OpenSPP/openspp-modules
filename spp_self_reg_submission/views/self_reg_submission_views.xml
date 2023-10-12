@@ -1,0 +1,89 @@
+<odoo>
+  <!-- explicit list view definition -->
+
+  <record model="ir.ui.view" id="spp_self_reg_submission_tree">
+    <field name="name">spp_self_reg_submission_tree</field>
+    <field name="model">spp.self_reg.submission</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="domain" />
+        <field name="identifier" />
+        <field name="timestamp" />
+        <field name="form_data" />
+        <field name="meta_data" />
+        <field name="complete" />
+      </tree>
+    </field>
+  </record>
+
+  <!-- explicit form view definition -->
+  <record id="spp_self_reg_submission_form" model="ir.ui.view">
+    <field name="name">spp_self_reg_submission_form</field>
+    <field name="model">spp.self_reg.submission</field>
+    <field name="arch" type="xml">
+      <form string="Self Register Submission">
+        <sheet>
+          <group name="name" string="">
+            <field name="domain" />
+            <field name="identifier" />
+            <field name="timestamp" />
+            <field name="form_data" />
+            <field name="meta_data" />
+            <field name="complete" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+
+  <!-- actions opening views on models -->
+
+  <record model="ir.actions.act_window" id="spp_self_reg_submission_action">
+    <field name="name">Self Register Submission</field>
+    <field name="res_model">spp.self_reg.submission</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help">Create and manage the self reg submission.</field>
+  </record>
+
+  <menuitem
+        id="menu_self_reg_submission"
+        name="Self Register Submission"
+        action="spp_self_reg_submission_action"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+    />
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="spp_self_reg_submission.action_server">
+      <field name="name">spp_self_reg_submission server</field>
+      <field name="model_id" ref="model_spp_self_reg_submission_spp_self_reg_submission"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="spp_self_reg_submission" id="spp_self_reg_submission.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="spp_self_reg_submission.menu_1" parent="spp_self_reg_submission.menu_root"/>
+    <menuitem name="Menu 2" id="spp_self_reg_submission.menu_2" parent="spp_self_reg_submission.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="spp_self_reg_submission.menu_1_list" parent="spp_self_reg_submission.menu_1"
+              action="spp_self_reg_submission.action_window"/>
+    <menuitem name="Server to list" id="spp_self_reg_submission" parent="spp_self_reg_submission.menu_2"
+              action="spp_self_reg_submission.action_server"/>
+-->
+</odoo>
