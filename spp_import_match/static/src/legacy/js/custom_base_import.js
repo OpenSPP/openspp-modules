@@ -44,49 +44,30 @@ odoo.define("spp_import_match.import", function (require) {
         },
 
         setup_import_match_selection: function () {
-            console.log(this.res_model);
             var configs = [];
             var dataconfig = "_(configs)";
             var self = this;
 
             rpc.query({
-                model: "ir.model",
+                model: "spp.import.match",
                 method: "search_read",
-                args: [[["model", "=", this.res_model]]],
+                args: [[["model_id.model", "=", this.res_model]]],
             }).then(function (data) {
-                if (data) {
-                    console.log("THIS 1 " + this);
-                    console.log(data[0].id);
-                    var model_id = data[0].id;
-                    rpc.query({
-                        model: "spp.import.match",
-                        method: "search_read",
-                        args: [[["model_id", "=", model_id]]],
-                    }).then(function (data) {
-                        console.log("THIS 2 " + this);
-                        console.log(data);
-
-                        for (const [key, value] of Object.entries(data)) {
-                            console.log(value.name);
-                            console.log(key);
-                            configs.push(value.name);
-                        }
-                        console.log(configs);
-                        dataconfig = _(configs);
-
-                        console.log("DATA " + dataconfig);
-                        var data = dataconfig.map(_make_option);
-                        self.$("input.oe_import_match").select2({
-                            width: "100%",
-                            data: data,
-                            // Query: dataFilteredQuery,
-                            minimumResultsForSearch: -1,
-                            initSelection: function ($e, c) {
-                                c(_from_data(data, $e.val()) || _make_option($e.val()));
-                            },
-                        });
-                    });
+                for (const [, value] of Object.entries(data)) {
+                    configs.push(value.name);
                 }
+                dataconfig = _(configs);
+
+                const res = dataconfig.map(_make_option);
+                self.$("input.oe_import_match").select2({
+                    width: "100%",
+                    data: res,
+                    // Query: dataFilteredQuery,
+                    minimumResultsForSearch: -1,
+                    initSelection: function ($e, c) {
+                        c(_from_data(res, $e.val()) || _make_option($e.val()));
+                    },
+                });
             });
         },
     });
