@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+g2p_program_membership_manager_sql_admin,Eligibility Manager SQL-based Admin Access,spp_eligibility_sql.model_g2p_program_membership_manager_sql,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+g2p_program_membership_manager_sql_program_manager,Eligibility Manager SQL-based Program Manager Access,spp_eligibility_sql.model_g2p_program_membership_manager_sql,g2p_programs.g2p_program_manager,1,1,1,0
+
+g2p_program_membership_manager_sql_validator,Eligibility Manager SQL-based Validator Access,spp_eligibility_sql.model_g2p_program_membership_manager_sql,g2p_programs.g2p_program_validator,1,0,0,0

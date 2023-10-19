@@ -1,0 +1,34 @@
+<odoo>
+    <record id="create_program_wizard_form_view_custom_eligibility_sql" model="ir.ui.view">
+        <field name="name">create_program_wizard_form_view_custom_eligibility_sql</field>
+        <field name="model">g2p.program.create.wizard</field>
+        <field name="inherit_id" ref="spp_programs.create_program_wizard_form_view_spp" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='default_eligibility']" position="after">
+                <group
+                    colspan="4"
+                    col="4"
+                    name='sql_eligibility'
+                    attrs="{'invisible':[('eligibility_kind','!=', 'sql_eligibility')]}"
+                >
+                    <field name="sql_query" colspan="4" />
+                    <label for="sql_query_valid" />
+                    <div colspan="3">
+                        <field name="sql_query_valid" readonly="1" force_save="1" class="oe_inline" />
+                        <button
+                            name="test_sql_query"
+                            type="object"
+                            icon="fa-check-square-o"
+                            class="btn-success"
+                            style="margin-left: 10px;"
+                            string="Validate Query"
+                        />
+                    </div>
+                    <field name="sql_record_count" readonly="1" force_save="1" colspan="4" />
+                    <field name="sql_query_valid_message" colspan="4" readonly="1" force_save="1" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
