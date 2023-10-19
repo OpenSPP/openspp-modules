@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Theme",
     "author": "OpenSPP.org",
-    "website": "https://github.com/openspp/openspp-registry",
+    "website": "https://github.com/openspp/openspp-base",
     "category": "Theme",
     "version": "15.0.0.0.0",
     "depends": ["web"],
@@ -21,6 +21,7 @@
             "theme_openspp/static/src/scss/dynamic_dasbhoard.scss",
             "theme_openspp/static/src/js/basic_fields.js",
             "theme_openspp/static/src/js/user_menu_items.esm.js",
+            "theme_openspp/static/src/js/app_window_title.js",
         ],
     },
     "application": True,
