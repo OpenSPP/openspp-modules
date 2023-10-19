@@ -1,0 +1,6 @@
+<odoo>
+    <record model="res.groups" id="service_point_users">
+        <field name="name">Service Point User</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+</odoo>

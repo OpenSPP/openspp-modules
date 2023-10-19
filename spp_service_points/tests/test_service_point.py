@@ -1,4 +1,4 @@
-from odoo import fields
+from odoo import _, fields
 from odoo.exceptions import UserError
 from odoo.tests import TransactionCase
 
@@ -22,6 +22,58 @@ class TestServicePoint(TransactionCase):
                 "phone_no": "+964700123456",
                 "is_disabled": True,
                 "disabled_reason": "Wrong phone number format!",
+            }
+        )
+
+        self.res_partner_company = self.env["res.partner"].create(
+            {
+                "name": "company_test",
+                "is_company": True,
+            }
+        )
+
+        self.res_partner_company_2 = self.env["res.partner"].create(
+            {
+                "name": "company_test",
+                "is_company": True,
+            }
+        )
+
+        self.res_partner_individual = self.env["res.partner"].create(
+            {
+                "name": "individual_test",
+                "parent_id": self.res_partner_company.id,
+            }
+        )
+
+        self.res_partner_individual_2 = self.env["res.partner"].create(
+            {
+                "name": "individual_test_2",
+                "email": "individual_test_2@ymail.com",
+            }
+        )
+
+        self.service_point_3 = self.env["spp.service.point"].create(
+            {
+                "name": "Without Company",
+                "country_id": country.id,
+                "phone_no": "+964700123456",
+            }
+        )
+
+        self.service_point_4 = self.env["spp.service.point"].create(
+            {
+                "name": "With Company and Contacts",
+                "country_id": country.id,
+                "res_partner_company_id": self.res_partner_company.id,
+            }
+        )
+
+        self.service_point_5 = self.env["spp.service.point"].create(
+            {
+                "name": "With Company and without Contacts",
+                "country_id": country.id,
+                "res_partner_company_id": self.res_partner_company_2.id,
             }
         )
 
@@ -67,3 +119,43 @@ class TestServicePoint(TransactionCase):
     def test_05_enable_service_point(self):
         with self.assertRaises(UserError):
             self.service_point_1.enable_service_point()
+
+    def test_06_create_user(self):
+        with self.assertRaisesRegex(UserError, "Service point does not have company."):
+            self.service_point_3.create_user()
+
+        with self.assertRaisesRegex(UserError, "Company does not have contacts."):
+            self.service_point_5.create_user()
+
+        expected_result = {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Create SP User"),
+                "message": _(
+                    "Successfully created users for the contacts of the company"
+                ),
+                "sticky": True,
+                "type": "success",
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
+
+        with self.assertRaisesRegex(
+            UserError, f"{self.res_partner_individual.name} does not have email."
+        ):
+            self.service_point_4.create_user()
+
+        self.res_partner_individual.email = "test_indv@ymail.com"
+
+        self.assertEqual(self.service_point_4.create_user(), expected_result)
+
+        self.assertIsNotNone(self.res_partner_individual.user_ids)
+
+        self.res_partner_individual_2.parent_id = self.res_partner_company.id
+
+        user = self.service_point_4._create_user(self.res_partner_individual_2)
+
+        self.assertIsNotNone(user)
