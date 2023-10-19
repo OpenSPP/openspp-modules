@@ -172,12 +172,17 @@ class SPPBasketEntitlementManager(models.Model):
         :param cycle: A recordset of cycle
         :return:
         """
-        # Get the number of entitlements in cycle
+        # Get the number of entitlements
+        entitlements_count = cycle.get_entitlements(
+            ["draft"], entitlement_model="g2p.entitlement.inkind", count=True
+        )
+
+        # Get the entitlements
         entitlements = cycle.get_entitlements(
             ["draft"],
             entitlement_model="g2p.entitlement.inkind",
         )
-        entitlements_count = len(entitlements)
+
         if entitlements_count < self.MIN_ROW_JOB_QUEUE:
             self._set_pending_validation_entitlements(entitlements)
 
@@ -193,7 +198,7 @@ class SPPBasketEntitlementManager(models.Model):
         :return:
         """
         entitlements.update({"state": "pending_validation"})
-        _logger.debug("Entitlement Validation: total: %s" % (len(entitlements)))
+        # _logger.debug("Entitlement Validation: total: %s" % (len(entitlements)))
 
     def validate_entitlements(self, cycle):
         """Validate Basket Entitlements.
@@ -203,12 +208,19 @@ class SPPBasketEntitlementManager(models.Model):
         :param cycle: A recordset of cycle
         :return:
         """
-        # Get the number of entitlements in cycle
+        # Get the number of entitlements
+        entitlements_count = cycle.get_entitlements(
+            ["draft", "pending_validation"],
+            entitlement_model="g2p.entitlement.inkind",
+            count=True,
+        )
+
+        # Get the entitlements
         entitlements = cycle.get_entitlements(
             ["draft", "pending_validation"],
             entitlement_model="g2p.entitlement.inkind",
         )
-        entitlements_count = len(entitlements)
+
         if entitlements_count < self.MIN_ROW_JOB_QUEUE:
             err, message = self._validate_entitlements(entitlements)
             if err > 0:
@@ -264,12 +276,19 @@ class SPPBasketEntitlementManager(models.Model):
         :param cycle: A recordset of cycle
         :return:
         """
-        # Get the entitlements in cycle
+        # Get the number of entitlements
+        entitlements_count = cycle.get_entitlements(
+            ["draft", "pending_validation", "approved"],
+            entitlement_model="g2p.entitlement.inkind",
+            count=True,
+        )
+
+        # Get the entitlements
         entitlements = cycle.get_entitlements(
             ["draft", "pending_validation", "approved"],
             entitlement_model="g2p.entitlement.inkind",
         )
-        entitlements_count = len(entitlements)
+
         if entitlements_count < self.MIN_ROW_JOB_QUEUE:
             self._cancel_entitlements(entitlements)
         else:

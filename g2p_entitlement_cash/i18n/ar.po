@@ -169,6 +169,13 @@ msgstr "مجموعة التحقق من الاستحقاق"
 
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, fuzzy, python-format
+#| msgid "Entitlement Validation Group"
+msgid "Entitlements Validated and Approved."
+msgstr "مجموعة التحقق من الاستحقاق"
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid ""
 "Entitlements are not approved due to some issues. Kindly address the issue."
@@ -334,6 +341,18 @@ msgstr ""
 #, python-format
 msgid "There are no items entered for this entitlement manager."
 msgstr "لا توجد عناصر تم إدخالها لمدير الاستحقاقات هذا."
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Validate %s entitlements started."
+msgstr ""
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Validate and approve entitlements for cycle."
+msgstr ""
 
 #, fuzzy, python-format
 #~ msgid "Cycle Cash Entitlements"

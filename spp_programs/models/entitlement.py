@@ -159,12 +159,13 @@ class InKindEntitlement(models.Model):
         ).write({"state": "expired"})
 
     def unlink(self):
-        if self.state == "draft":
-            return super(InKindEntitlement, self).unlink()
-        else:
-            raise ValidationError(
-                _("Only draft entitlements are allowed to be deleted")
-            )
+        for rec in self:
+            if rec.state == "draft":
+                return super(InKindEntitlement, self).unlink()
+            else:
+                raise ValidationError(
+                    _("Only draft entitlements are allowed to be deleted")
+                )
 
     def approve_entitlement(self):
         state_err, message = self.program_id.get_manager(

@@ -51,6 +51,13 @@ msgid "Basket Entitlement Manager Items"
 msgstr ""
 
 #. module: spp_entitlement_basket
+#: model:ir.model,name:spp_entitlement_basket.model_g2p_program_entitlement_manager
+#, fuzzy
+#| msgid "Add an Entitlement Manager!"
+msgid "Cash Entitlement Manager"
+msgstr "أضف مدير استحقاق!"
+
+#. module: spp_entitlement_basket
 #: model_terms:ir.actions.act_window,help:spp_entitlement_basket.action_entitlement_manager_basket
 msgid "Click the create button to enter a new food basket entitlement manager."
 msgstr ""
@@ -99,18 +106,6 @@ msgstr ""
 #: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
 #, python-format
 msgid "Cycle Basket Entitlements"
-msgstr ""
-
-#. module: spp_entitlement_basket
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_entitlement_inkind__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__dms_directory_ids
-msgid "DMS Directories"
 msgstr ""
 
 #. module: spp_entitlement_basket
@@ -183,11 +178,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__basket_entitlement_item_ids
 #: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__entitlement_item_ids
 msgid "Entitlement Items"
-msgstr ""
-
-#. module: spp_entitlement_basket
-#: model:ir.model,name:spp_entitlement_basket.model_g2p_program_entitlement_manager
-msgid "Entitlement Manager"
 msgstr ""
 
 #. module: spp_entitlement_basket

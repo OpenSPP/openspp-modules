@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="external_layout_standard">
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img
+                        t-if="company.logo"
+                        t-att-src="image_data_uri(company.logo)"
+                        style="max-height: 45px;"
+                        alt="Logo"
+                    />
+                </div>
+                <div
+                    class="col-9 text-right"
+                    style="margin-top:22px;"
+                    t-field="company.report_header"
+                    name="moto"
+                />
+            </div>
+            <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6" name="company_address">
+                    <ul class="list-unstyled">
+                        <li>
+                            <t t-esc="company.name" />
+                        </li>
+                        <li t-if="company.country_id">
+                            <t t-esc="company.country_id.name" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div
+            t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+            t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+            t-att-data-oe-model="o and o._name"
+            t-att-data-oe-id="o and o.id"
+            t-att-data-oe-lang="o and o.env.context.get('lang')"
+        >
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout" />
+            </div>
+            <t t-out="0" />
+        </div>
+
+        <div t-attf-class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <div t-field="company.report_footer" />
+                </ul>
+
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page" /> / <span class="topage" />
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="external_layout">
+        <t t-if="not o" t-set="o" t-value="doc" />
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <t t-call="spp_programs.external_layout_standard"><t t-out="0" /></t>
+
+    </template>
+
+    <template id="print_program_approval_receipt">
+        <t t-call="web.html_container">
+            <t t-call="spp_programs.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <h2>
+                            <span>Program</span>
+                            <span t-field="o.name" />
+                        </h2>
+                        <div id="informations" class="row mt32 mb32">
+                            <div class="col-auto mw-100 mb-2" name="program_target_type">
+                                <strong>Target Type:</strong>
+                                <p class="m-0" t-field="o.target_type" />
+                            </div>
+                            <div class="col-auto mw-100 mb-2" name="program_beneficiaries_count">
+                                <strong>Beneficiaries:</strong>
+                                <p class="m-0" t-field="o.eligible_beneficiaries_count" />
+                            </div>
+                        </div>
+                        <table class="table table-sm o_main_table" name="cycle_line_table">
+                            <thead>
+                                <tr>
+                                    <th name="th_name" class="text-left"><span>Cycle Name</span></th>
+                                    <th name="th_state" class="text-left"><span>State</span></th>
+                                </tr>
+                            </thead>
+                            <tbody class="cycle_tbody">
+                                 <t t-set="cycles" t-value="o.cycle_ids" />
+                                 <t t-foreach="cycles" t-as="cycle">
+                                    <tr>
+                                        <td class="text-left"><span t-field="cycle.name" /></td>
+                                        <td class="text-left"><span t-field="cycle.state" /></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="page-break-before:always;"> </p>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -164,6 +164,12 @@ msgstr ""
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
+msgid "Entitlements Validated and Approved."
+msgstr ""
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
 msgid ""
 "Entitlements are not approved due to some issues. Kindly address the issue."
 msgstr ""
@@ -325,4 +331,16 @@ msgstr ""
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "There are no items entered for this entitlement manager."
+msgstr ""
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Validate %s entitlements started."
+msgstr ""
+
+#. module: g2p_entitlement_cash
+#: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Validate and approve entitlements for cycle."
 msgstr ""
