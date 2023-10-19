@@ -50,14 +50,26 @@
     </record>
 
     <record id="g2p_entitlement_code" model="spp_api.field.alias">
-        <field name="alias_name">card_number</field>
+        <field name="alias_name">voucher_number</field>
         <field name="field_id" ref="g2p_programs.field_g2p_entitlement__code" />
         <field name="api_path_id" ref="spp_api_records.vouchers_path" />
     </record>
 
     <record id="g2p_entitlement_inkind_code" model="spp_api.field.alias">
-        <field name="alias_name">card_number</field>
+        <field name="alias_name">voucher_number</field>
         <field name="field_id" ref="spp_programs.field_g2p_entitlement_inkind__code" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_inkind_path" />
+    </record>
+
+    <record id="g2p_entitlement_id_number" model="spp_api.field.alias">
+        <field name="alias_name">card_number</field>
+        <field name="field_id" ref="spp_programs.field_g2p_entitlement__id_number" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_path" />
+    </record>
+
+    <record id="g2p_entitlement_inkind_id_number" model="spp_api.field.alias">
+        <field name="alias_name">card_number</field>
+        <field name="field_id" ref="spp_programs.field_g2p_entitlement_inkind__id_number" />
         <field name="api_path_id" ref="spp_api_records.vouchers_inkind_path" />
     </record>
 
