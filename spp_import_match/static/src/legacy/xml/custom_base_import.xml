@@ -4,9 +4,10 @@
     <t t-extend="ImportView.side_panel">
         <t t-jquery="div.o_import_formatting" t-operation="before">
             <h4>Import Match</h4>
-            <div class="mb-2 d-flex align-items-center">
-                <label for="oe_import_match">Config:</label>
-                <input class="oe_import_match oe_import_dropdown" id="oe_import_match" />
+            <div id="oe_config_import_matching">
+                <h5 class="mt-3">Config: </h5>
+                <div class="oe_import_options" id="oe_import_match">
+                </div>
             </div>
             <div
                 title="When checked, the import will be executed as a background job,
