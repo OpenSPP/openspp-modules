@@ -37,6 +37,7 @@
             6, 0, [
                 ref('base.field_res_country__id'),
                 ref('base.field_res_country__name'),
+                ref('base.field_res_country__write_date'),
             ]
         )]"
         />
@@ -195,6 +196,7 @@
             eval="[(
             6, 0, [
                 ref('base.field_res_company__name'),
+                ref('base.field_res_company__write_date'),
             ]
         )]"
         />
@@ -253,6 +255,9 @@
             6, 0, [
                 ref('product.field_product_template__id'),
                 ref('product.field_product_template__name'),
+                ref('product.field_product_template__uom_id'),
+                ref('product.field_product_template__categ_id'),
+                ref('product.field_product_template__write_date'),
             ]
         )]"
         />
@@ -271,6 +276,7 @@
                 ref('uom.field_uom_uom__id'),
                 ref('uom.field_uom_uom__name'),
                 ref('spp_api_records.field_uom_uom__symbol'),
+                ref('uom.field_uom_uom__write_date'),
             ]
         )]"
         />
@@ -290,6 +296,7 @@
                 ref('spp_service_point_device.field_spp_service_point_device__android_version'),
                 ref('spp_service_point_device.field_spp_service_point_device__device_model'),
                 ref('spp_service_point_device.field_spp_service_point_device__is_active'),
+                ref('spp_service_point_device.field_spp_service_point_device__write_date'),
             ]
         )]"
         />

@@ -85,4 +85,51 @@
         <field name="field_id" ref="g2p_programs.field_g2p_program__write_date" />
     </record>
 
+    <record id="res_country_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="base.field_res_country__write_date" />
+        <field name="api_path_id" ref="spp_api_records.res_country_path" />
+    </record>
+
+    <record id="res_company_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="base.field_res_company__write_date" />
+        <field name="api_path_id" ref="spp_api_records.company_path" />
+    </record>
+
+    <record id="service_points_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="spp_service_points.field_spp_service_point__write_date" />
+        <field name="api_path_id" ref="spp_api_records.service_point_path" />
+    </record>
+
+    <record id="service_points_device_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="spp_service_point_device.field_spp_service_point_device__write_date" />
+        <field name="api_path_id" ref="spp_api_records.service_point_terminal_device_path" />
+    </record>
+
+    <record id="product_template_uom_id" model="spp_api.field.alias">
+        <field name="alias_name">unit_of_measure_id</field>
+        <field name="field_id" ref="product.field_product_template__uom_id" />
+        <field name="api_path_id" ref="spp_api_records.products_path" />
+    </record>
+
+    <record id="product_template_categ_id" model="spp_api.field.alias">
+        <field name="alias_name">product_category_id</field>
+        <field name="field_id" ref="product.field_product_template__categ_id" />
+        <field name="api_path_id" ref="spp_api_records.products_path" />
+    </record>
+
+    <record id="product_template_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="product.field_product_template__write_date" />
+        <field name="api_path_id" ref="spp_api_records.products_path" />
+    </record>
+
+    <record id="uom_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="uom.field_uom_uom__write_date" />
+        <field name="api_path_id" ref="spp_api_records.uom_uom_path" />
+    </record>
 </odoo>
