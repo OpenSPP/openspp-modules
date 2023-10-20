@@ -279,17 +279,10 @@
     </record>
 
     <menuitem
-        id="menuspp_id_mgmt"
-        name="ID Management"
-        parent="g2p_registry_base.g2p_main_menu_root"
-        sequence="901"
-    />
-
-    <menuitem
         id="menu_spp_idqueue"
         name="ID Requests Queue"
         action="action_spp_idqueue"
-        parent="spp_idqueue.menuspp_id_mgmt"
+        parent="spp_idqueue.id_queue_main_menu_root"
         sequence="10"
         groups="g2p_registry_base.group_g2p_admin,group_g2p_id_validator,group_g2p_id_distributor"
     />

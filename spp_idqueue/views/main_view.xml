@@ -1,0 +1,19 @@
+<odoo>
+    <!-- Top menu item -->
+
+    <menuitem
+        id="id_queue_main_menu_root"
+        name="ID Management"
+        web_icon="spp_idqueue,static/src/img/icons/contacts.png"
+        active="True"
+        sequence="1"
+    />
+
+    <menuitem
+        id="id_queue_configuration_menu_root"
+        name="Configuration"
+        parent="id_queue_main_menu_root"
+        sequence="1000"
+    />
+
+</odoo>
