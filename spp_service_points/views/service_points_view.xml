@@ -178,8 +178,8 @@
         id="menu_service_points"
         name="Service Points"
         action="action_service_points"
-        parent="g2p_registry_base.g2p_configuration_menu_root"
-        sequence="1000"
+        parent="spp_service_points.service_points_main_menu_root"
+        sequence="10"
         groups="g2p_registry_base.group_g2p_admin"
     />
 </odoo>
