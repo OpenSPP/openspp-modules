@@ -9,13 +9,13 @@ odoo.define("spp_import_match.import", function (require) {
 
         init: function () {
             this._super.apply(this, arguments);
-            this.importMatches = [];
-            this.configs = [];
+            this.importMatchIds = [];
         },
 
         import_options: function () {
             var options = this._super.apply(this, arguments);
             options.use_queue = this.$("input.oe_import_queue").prop("checked");
+            options.import_match_ids = this.importMatchIds;
             return options;
         },
 
@@ -57,7 +57,6 @@ odoo.define("spp_import_match.import", function (require) {
                 }
                 var content = "";
                 for (const [, value] of Object.entries(data)) {
-                    self.configs.push(value);
                     const id_for_label = "o_config_checkbox_import_match_" + value.id;
                     content += `
                         <div class="custom-control custom-checkbox">
@@ -69,8 +68,15 @@ odoo.define("spp_import_match.import", function (require) {
             });
         },
 
-        _onImportMatchChanges: function () {
-            return;
+        _onImportMatchChanges: function (ev) {
+            const targetIdSplited = ev.target.id.split("_");
+            const importMatchId = parseInt(targetIdSplited[targetIdSplited.length - 1], 10);
+            const importMatchIdIndex = this.importMatchIds.indexOf(importMatchId);
+            if (importMatchIdIndex === -1) {
+                this.importMatchIds.push(importMatchId);
+            } else {
+                this.importMatchIds.splice(importMatchIdIndex, 1);
+            }
         },
     });
 });
