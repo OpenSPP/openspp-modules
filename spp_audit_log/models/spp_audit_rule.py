@@ -40,6 +40,9 @@ class SppAuditRule(models.Model):
         compute="_compute_field_id_domain",
         readonly=True,
     )
+    action_id = fields.Many2one(
+        "ir.actions.act_window", "Add in the 'More' menu", readonly=True
+    )
 
     _sql_constraints = [
         (
@@ -62,6 +65,38 @@ class SppAuditRule(models.Model):
         "message_last_post",
         "write_date",
     ]
+
+    def _add_action_id(self):
+        for rec in self:
+            if not rec.action_id:
+                # Check action menu if view audit logs for a model is already existing
+                ir_act_window_id = self.env["ir.actions.act_window"].search(
+                    [
+                        ("binding_model_id", "=", rec.model_id.id),
+                        ("res_model", "=", "spp.audit.log"),
+                        ("name", "=", "View logs"),
+                    ],
+                    limit=1,
+                )
+
+                if ir_act_window_id:
+                    # If action menu is existing, save existing action menu to action_id
+                    rec.action_id = ir_act_window_id
+                else:
+                    # Create action menu
+                    vals = {
+                        "name": _("View logs"),
+                        "res_model": "spp.audit.log",
+                        "binding_model_id": rec.model_id.id,
+                        "domain": "[('model_id','=', %s), "
+                        "('res_id', '=', active_id), ('method', 'in', %s)]"
+                        % (
+                            rec.model_id.id,
+                            [method.replace("_", "") for method in self._methods],
+                        ),
+                    }
+                    rec.action_id = self.env["ir.actions.act_window"].create(vals)
+        return
 
     @api.model
     def get_audit_rules(self, method):
@@ -126,15 +161,33 @@ class SppAuditRule(models.Model):
     @api.returns("self", lambda value: value.id)
     def create(self, vals):
         rule = super().create(vals)
+        rule._add_action_id()
         if self._register_hook(rule.id):
             self.pool.signal_changes()
         return rule
 
     def write(self, vals):
         res = super().write(vals)
+        self._add_action_id()
         if self._register_hook(self._ids):
             self.pool.signal_changes()
         return res
+
+    def unlink(self):
+        for rec in self:
+            # get number of audit rule with the same model
+            audit_rule_count = self.env["spp.audit.rule"].search(
+                [("model_id", "=", rec.model_id.id)],
+                count=True,
+            )
+
+            # if only 1 and with menu action, unlink menu action
+            if audit_rule_count == 1 and rec.action_id:
+                rec.action_id.unlink()
+
+            super(SppAuditRule, rec).unlink()
+
+        return
 
     @classmethod
     def _format_data_to_log(cls, old_values, new_values):
