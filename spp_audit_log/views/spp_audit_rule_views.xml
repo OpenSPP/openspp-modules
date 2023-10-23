@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
   <!-- explicit list view definition -->
@@ -7,7 +7,7 @@
     <field name="model">spp.audit.rule</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="parent_id"/>
+        <field name="parent_id" />
         <field name="name" />
         <field name="log_create" />
         <field name="log_write" />
@@ -24,23 +24,28 @@
     <field name="model">spp.audit.rule</field>
     <field name="arch" type="xml">
       <form string="Audit Rule">
-        <field name="model_id_domain" invisible="1"/>
-        <field name="field_id_domain" invisible="1"/>
+        <field name="model_id_domain" invisible="1" />
+        <field name="field_id_domain" invisible="1" />
         <sheet>
           <group>
-            <field name="parent_id"/>
+            <field name="parent_id" />
             <field name="name" />
             <field name="log_create" />
             <field name="log_write" />
             <field name="log_unlink" />
-            <field name="model_id" options="{'no_create': True, 'no_open': True}" domain="model_id_domain"/>
-            <field name="field_id" attrs="{'invisible': [('parent_id', '=', False)]}" options="{'no_open': True}" domain="field_id_domain"/>
+            <field name="model_id" options="{'no_create': True, 'no_open': True}" domain="model_id_domain" />
+            <field
+                            name="field_id"
+                            attrs="{'invisible': [('parent_id', '=', False)]}"
+                            options="{'no_open': True}"
+                            domain="field_id_domain"
+                        />
           </group>
           <notebook attrs="{'invisible': [('id', '=', False)]}">
-            <page name="related_rules" string="Related Roles">
+            <page name="related_rules" string="Related Rules">
               <field name="child_ids">
                 <tree create="0" edit="0" delete="0" editable="bottom">
-                  <field name="name"/>
+                  <field name="name" />
                   <field name="log_create" />
                   <field name="log_write" />
                   <field name="log_unlink" />
@@ -72,9 +77,9 @@
 
   <!-- actions -->
   <menuitem
-          name="Rule"
-          id="spp_audit_log.rule_menu"
-          parent="spp_audit_log.audit_submenu"
-          action="spp_audit_rule_action_window"
-      />
+        name="Rule"
+        id="spp_audit_log.rule_menu"
+        parent="spp_audit_log.audit_submenu"
+        action="spp_audit_rule_action_window"
+    />
 </odoo>
