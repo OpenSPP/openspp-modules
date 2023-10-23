@@ -2,7 +2,7 @@
 
 import logging
 
-from odoo import _, api, fields, models, tools
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -75,10 +75,12 @@ class SPPImportMatch(models.Model):
         return model
 
     @api.model
-    @tools.ormcache("model_name", "frozenset(fields)")
-    def _usable_rules(self, model_name, fields):
+    def _usable_rules(self, model_name, fields, option_config_ids=False):
         result = self
-        available = self.search([("model_name", "=", model_name)])
+        domain = [("model_name", "=", model_name)]
+        if option_config_ids and isinstance(option_config_ids, list):
+            domain.append(("id", "in", option_config_ids))
+        available = self.search(domain)
         field_to_match = []
         for record in available:
             field_to_match.append(record.field_ids.mapped("name"))
