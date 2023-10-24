@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_service_points_tree_inherit_spp_api_records" model="ir.ui.view">
+        <field name="name">spp.service.point.view.list.inherit</field>
+        <field name="model">spp.service.point</field>
+        <field name="inherit_id" ref="spp_service_points.view_service_points_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='area_id']" position="after">
+                <field name="program_id" widget="many2many_tags" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_service_points_form_inherit_spp_api_records" model="ir.ui.view">
+        <field name="name">spp.service.point.view.form.inherit</field>
+        <field name="model">spp.service.point</field>
+        <field name="inherit_id" ref="spp_service_points.view_service_points_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='country_id']" position="after">
+                <field name="program_id" widget="many2many_tags" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

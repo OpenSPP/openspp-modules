@@ -22,10 +22,12 @@
         "contacts",
         "g2p_registry_base",
         "spp_area",
+        "spp_programs_sp",
     ],
     "data": [
         "data/spp_api_namespace_data.xml",
         "data/spp_api_path_data.xml",
+        "views/spp_service_point_views.xml",
         "views/uom_category_views.xml",
         "data/spp_api_field_data.xml",
         "data/spp_api_field_alias_data.xml",
