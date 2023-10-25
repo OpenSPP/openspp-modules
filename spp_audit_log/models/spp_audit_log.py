@@ -1,6 +1,7 @@
 from dateutil import tz
 
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 from odoo.tools.safe_eval import datetime, safe_eval
 
 
@@ -31,6 +32,8 @@ class SppAuditLog(models.Model):
 
     # Where to log
     log_to = fields.Text(compute="_compute_log_to")
+
+    ALLOW_DELETE = False
 
     @api.depends("parent_model_id")
     def _compute_log_to(self):
@@ -146,3 +149,9 @@ class SppAuditLog(models.Model):
                 '<table class="o_list_view table table-condensed '
                 'table-striped">%s%s</table>' % (thead, tbody)
             )
+
+    def unlink(self):
+        if not self.ALLOW_DELETE:
+            raise UserError(_("You cannot remove audit logs!"))
+
+        return super().unlink()
