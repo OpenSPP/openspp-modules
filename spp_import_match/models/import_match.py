@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 import logging
+
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import ValidationError
 
@@ -77,7 +78,9 @@ class SPPImportMatch(models.Model):
                         if field.sub_field_id.name in tuple_val:
                             row_value = tuple_val[field.sub_field_id.name]
                             add_to_domain = True
-                            field_value = field.field_id.name + "." + field.sub_field_id.name
+                            field_value = (
+                                field.field_id.name + "." + field.sub_field_id.name
+                            )
                     if add_to_domain:
                         domain.append((field_value, "=", row_value))
             if not combination_valid:
@@ -145,11 +148,13 @@ class SPPImportMatchFields(models.Model):
             field_id = rec.field_id.id
             field_type = rec.field_id.ttype
             fields_list = []
-            if field_type not in ('many2many', 'one2many', 'many2one'):
+            if field_type not in ("many2many", "one2many", "many2one"):
                 for field in rec.match_id.field_ids:
                     new_id_str = str(field.id)
-                    new_id_str_2 = ''.join(letter for letter in new_id_str if letter.isalnum())
-                    if 'NewIdvirtual' not in new_id_str_2:
+                    new_id_str_2 = "".join(
+                        letter for letter in new_id_str if letter.isalnum()
+                    )
+                    if "NewIdvirtual" not in new_id_str_2:
                         fields_list.append(field.field_id.id)
 
                 duplicate_counter = 0
@@ -158,5 +163,7 @@ class SPPImportMatchFields(models.Model):
                         duplicate_counter += 1
 
                 if duplicate_counter > 1:
-                    raise ValidationError(_("Field '%s', already exists!") % rec.field_id.field_description)
-
+                    raise ValidationError(
+                        _("Field '%s', already exists!")
+                        % rec.field_id.field_description
+                    )
