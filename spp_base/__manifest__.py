@@ -21,8 +21,6 @@
         "g2p_registry_group",
         "g2p_registry_membership",
         "spp_area",
-        "spp_change_request",
-        "spp_event_data",
         "spp_idpass",
         "spp_idqueue",
         "spp_service_points",
