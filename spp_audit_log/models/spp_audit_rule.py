@@ -334,25 +334,25 @@ class SppAuditRule(models.Model):
         :return: Nothing is being returned. The return statement at the end of the method is empty, so
         it returns None.
         """
-        self.ensure_one()
         if old_values or new_values:
             data = self._format_data_to_log(old_values, new_values)
             audit_log = self.env["spp.audit.log"].sudo()
-            for res_id in data:
-                parent_model, parent_res_ids = self.get_most_parent([res_id])
-                audit_log.create(
-                    {
-                        # TODO: should we need to connect spp.audit.log to spp.audit.rule?
-                        # 'audit_rule_id': self.id,
-                        "user_id": self._uid,
-                        "model_id": self.sudo().model_id.id,
-                        "res_id": res_id,
-                        "method": method,
-                        "data": repr(data[res_id]),
-                        "parent_model_id": self.env["ir.model"]
-                        .search([("model", "=", parent_model)], limit=1)
-                        .id,
-                        "parent_res_ids_str": ",".join(parent_res_ids),
-                    }
-                )
+            for rec in self:
+                for res_id in data:
+                    parent_model, parent_res_ids = rec.get_most_parent([res_id])
+                    audit_log.create(
+                        {
+                            # TODO: should we need to connect spp.audit.log to spp.audit.rule?
+                            # 'audit_rule_id': self.id,
+                            "user_id": self._uid,
+                            "model_id": rec.sudo().model_id.id,
+                            "res_id": res_id,
+                            "method": method,
+                            "data": repr(data[res_id]),
+                            "parent_model_id": self.env["ir.model"]
+                            .search([("model", "=", parent_model)], limit=1)
+                            .id,
+                            "parent_res_ids_str": ",".join(parent_res_ids),
+                        }
+                    )
         return
