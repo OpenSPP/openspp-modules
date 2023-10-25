@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
   <!-- explicit list view definition -->
@@ -26,20 +26,20 @@
         <sheet>
           <div class="oe_title" colspan="4">
           <h1>
-            <field name="name"/>
+            <field name="name" />
           </h1>
           <div groups="base.group_no_one">
-            <field name="model_id" class="oe_inline"/>,<field name="res_id"/>
+            <field name="model_id" class="oe_inline" />,<field name="res_id" />
           </div>
           <group>
-            <field name="create_date"/>
-            <field name="user_id"/>
-            <field name="method" groups="base.group_no_one"/>
+            <field name="create_date" />
+            <field name="user_id" />
+            <field name="method" groups="base.group_no_one" />
           </group>
           </div>
           <notebook>
             <page string="Changes">
-              <field name="data_html" colspan="4" nolabel="1"/>
+              <field name="data_html" colspan="4" nolabel="1" />
             </page>
           </notebook>
         </sheet>
@@ -57,10 +57,10 @@
 
   <!-- actions -->
   <menuitem
-          name="Log"
-          id="spp_audit_log.log_menu"
-          parent="spp_audit_log.audit_submenu"
-          action="spp_audit_log_action_window"
-      />
+        name="Log"
+        id="spp_audit_log.log_menu"
+        parent="spp_audit_log.audit_submenu"
+        action="spp_audit_log_action_window"
+    />
 
 </odoo>
