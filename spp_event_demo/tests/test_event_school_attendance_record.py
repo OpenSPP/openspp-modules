@@ -28,7 +28,7 @@ class EventSchoolAttendanceRecordTest(TransactionCase):
         )
         cls.event_data_1 = cls.env["spp.event.data"].create(
             {
-                "partner_id": cls.person.id,
+                "partner_id": cls.person_1.id,
                 "model": "spp.event.schoolattendance.record",
                 "res_id": cls.school_attendance_1.id,
             }
