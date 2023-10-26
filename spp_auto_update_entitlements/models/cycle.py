@@ -1,8 +1,22 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from odoo import models
-
+from odoo import models, fields
+from datetime import date
 from odoo.addons.g2p_programs.models import constants
+
+
+class SPPCycle(models.Model):
+    _inherit = "g2p.cycle"
+
+    is_expired = fields.Boolean(compute="_compute_is_expired")
+
+    def _compute_is_expired(self):
+        for rec in self:
+            is_expired = False
+            if rec.end_date <= date.today():
+                is_expired = True
+
+            rec.is_expired = is_expired
 
 
 class SPPDefaultCycleManager(models.Model):
