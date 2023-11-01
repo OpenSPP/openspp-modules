@@ -18,8 +18,10 @@ class G2PGroup(models.Model):
     """
     Source:
     OK ➢ Households (HH) with children - extracted from demographic data of HH adult members plus child members
-    OK ➢ Households (HH) with children aged 12-18 - extracted from demographic data of HH adult members plus child members
-    OK ➢ Households (HH) with children aged 0-11 - extracted from demographic data of HH adult members plus child members
+    OK ➢ Households (HH) with children aged 12-18 - extracted from demographic data of HH adult members
+    plus childmembers
+    OK ➢ Households (HH) with children aged 0-11 - extracted from demographic data of HH adult members
+    plus child members
     OK ➢ single-headed HH - extracted from demographic data of HH adult members
     OK ➢ female-headed HH - extracted from demographic data of HH adult members
     OK ➢ HH with pregnant/lactating women - extracted from vulnerability indicator
@@ -156,7 +158,9 @@ class G2PGroup(models.Model):
             ("birthdate", ">=", children),
             ("birthdate", "<", now - relativedelta(years=12)),
         ]
-        self.compute_count_and_set_indicator("z_ind_grp_num_children_12_and_above", None, domain)
+        self.compute_count_and_set_indicator(
+            "z_ind_grp_num_children_12_and_above", None, domain
+        )
 
     def _compute_ind_grp_num_children_11_and_below(self):
         """
@@ -167,7 +171,9 @@ class G2PGroup(models.Model):
         domain = [
             ("birthdate", ">=", now - relativedelta(years=11)),
         ]
-        self.compute_count_and_set_indicator("z_ind_grp_num_children_11_and_below", None, domain)
+        self.compute_count_and_set_indicator(
+            "z_ind_grp_num_children_11_and_below", None, domain
+        )
 
     def _compute_ind_grp_num_eldery(self):
         """
