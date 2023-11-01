@@ -1,0 +1,60 @@
+<odoo>
+    <record id="view_spp_event_phone_survey_tree" model="ir.ui.view">
+        <field name="name">view_spp_event_phone_survey_tree</field>
+        <field name="model">spp.event.phone.survey</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="summary" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_spp_event_phone_survey_form" model="ir.ui.view">
+        <field name="name">view_spp_event_phone_survey_form</field>
+        <field name="model">spp.event.phone.survey</field>
+        <field name="priority">200</field>
+        <field name="arch" type="xml">
+            <form string="Event Data: Phone Survey" duplicate="0">
+                <sheet>
+                    <group colspan="4" col="4">
+                        <field name="summary" />
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_event_phone_survey" model="ir.actions.act_window">
+        <field name="name">Event Data: Phone Survey</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.event.phone.survey</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Phone Survey Event!
+            </p><p>
+                Click the create button to enter the configuration of the Phone Survey Event.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_event_phone_survey_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_spp_event_phone_survey_tree" />
+        <field name="act_window_id" ref="action_spp_event_phone_survey" />
+    </record>
+
+    <record id="action_spp_event_phone_survey_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_phone_survey_form" />
+        <field name="act_window_id" ref="action_spp_event_phone_survey" />
+    </record>
+
+  </odoo>

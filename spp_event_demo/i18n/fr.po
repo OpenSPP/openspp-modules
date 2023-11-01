@@ -1,0 +1,251 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_event_demo
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-11-24 12:22+0000\n"
+"Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
+"Language-Team: French <https://translate.openspp.org/projects/openspp/"
+"spp_event_demo/fr/>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14\n"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__active_house_visit
+#: model:ir.model.fields,field_description:spp_event_demo.field_res_users__active_house_visit
+msgid "Active House Visit"
+msgstr "Visite active de la maison"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__active_phone_survey
+#: model:ir.model.fields,field_description:spp_event_demo.field_res_users__active_phone_survey
+msgid "Active Phone Survey"
+msgstr "Enquête téléphonique active"
+
+#. module: spp_event_demo
+#: model_terms:ir.ui.view,arch_db:spp_event_demo.create_event_house_visit_form_view
+#: model_terms:ir.ui.view,arch_db:spp_event_demo.create_event_phone_survey_form_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: spp_event_demo
+#: model_terms:ir.actions.act_window,help:spp_event_demo.action_spp_event_house_visit
+msgid ""
+"Click the create button to enter the configuration of the House Visit Event."
+msgstr ""
+"Cliquez sur le bouton créer pour entrer dans la configuration de l'événement "
+"de visite à domicile."
+
+#. module: spp_event_demo
+#: model_terms:ir.actions.act_window,help:spp_event_demo.action_spp_event_phone_survey
+msgid ""
+"Click the create button to enter the configuration of the Phone Survey Event."
+msgstr ""
+"Cliquez sur le bouton créer pour entrer dans la configuration de l'événement "
+"d'enquête téléphonique."
+
+#. module: spp_event_demo
+#: model:ir.model,name:spp_event_demo.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: spp_event_demo
+#: model:ir.model,name:spp_event_demo.model_spp_create_event_house_visit_wizard
+msgid "Create Event House Visit Wizard"
+msgstr "Créer un assistant de visite de maison d'événement"
+
+#. module: spp_event_demo
+#: model:ir.model,name:spp_event_demo.model_spp_create_event_phone_survey_wizard
+msgid "Create Event Phone Survey Wizard"
+msgstr "Créer un assistant d'enquête téléphonique sur les événements"
+
+#. module: spp_event_demo
+#: model:ir.model,name:spp_event_demo.model_spp_create_event_wizard
+msgid "Create Event Wizard"
+msgstr "Créer un assistant d'événement"
+
+#. module: spp_event_demo
+#: model_terms:ir.actions.act_window,help:spp_event_demo.action_spp_event_house_visit
+msgid "Create a new House Visit Event!"
+msgstr "Créez un nouvel événement de visite à domicile !"
+
+#. module: spp_event_demo
+#: model_terms:ir.actions.act_window,help:spp_event_demo.action_spp_event_phone_survey
+msgid "Create a new Phone Survey Event!"
+msgstr "Créez un nouvel événement d&#39;enquête téléphonique !"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__create_uid
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__create_date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__create_date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__create_date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__create_date
+msgid "Created on"
+msgstr "Créé sur"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__description
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__description
+msgid "Description"
+msgstr "La description"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__disabled
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__disabled
+msgid "Disabled"
+msgstr "Handicapé"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__display_name
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__display_name
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__display_name
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__display_name
+msgid "Display Name"
+msgstr "Afficher un nom"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__event_id
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__event_id
+msgid "Event"
+msgstr "Événement"
+
+#. module: spp_event_demo
+#: model:ir.actions.act_window,name:spp_event_demo.action_spp_event_house_visit
+#: model_terms:ir.ui.view,arch_db:spp_event_demo.view_spp_event_house_visit_form
+msgid "Event Data: House Visit"
+msgstr "Données d'événement : visite à domicile"
+
+#. module: spp_event_demo
+#: model:ir.actions.act_window,name:spp_event_demo.action_spp_event_phone_survey
+#: model_terms:ir.ui.view,arch_db:spp_event_demo.view_spp_event_phone_survey_form
+msgid "Event Data: Phone Survey"
+msgstr "Données d'événement : enquête téléphonique"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_wizard__event_data_model
+msgid "Event Type"
+msgstr "Type d'événement"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__farm_size_acre
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__farm_size_acre
+msgid "Farm Size Acre"
+msgstr "Taille de la ferme"
+
+#. module: spp_event_demo
+#: model:ir.model,name:spp_event_demo.model_spp_event_house_visit
+#: model:ir.model.fields.selection,name:spp_event_demo.selection__spp_create_event_wizard__event_data_model__spp_event_house_visit
+msgid "House Visit"
+msgstr "Visite de la maison"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__id
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__id
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__id
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__id
+msgid "ID"
+msgstr "ID"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__is_farm
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__is_farm
+msgid "Is Farm"
+msgstr "Est la ferme"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard____last_update
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard____last_update
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit____last_update
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey____last_update
+msgid "Last Modified on"
+msgstr "Modification le"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__write_uid
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__write_date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__write_date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__write_date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__write_date
+msgid "Last Updated on"
+msgstr "Mise à jour le"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__no_food_stock
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__no_food_stock
+msgid "No Food Stock"
+msgstr "Pas de stock de nourriture"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__number_of_cows
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__number_of_cows
+msgid "Number Of Cows"
+msgstr "Nombre de vaches"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__number_of_pigs
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__number_of_pigs
+msgid "Number Of Pigs"
+msgstr "Nombre de porcs"
+
+#. module: spp_event_demo
+#: model:ir.model,name:spp_event_demo.model_spp_event_phone_survey
+#: model:ir.model.fields.selection,name:spp_event_demo.selection__spp_create_event_wizard__event_data_model__spp_event_phone_survey
+msgid "Phone Survey"
+msgstr "Sondage téléphonique"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__photo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__photo
+msgid "Photo"
+msgstr "Photo"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__photo_filename
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__photo_filename
+msgid "Photo Filename"
+msgstr "Nom du fichier photo"
+
+#. module: spp_event_demo
+#: model_terms:ir.ui.view,arch_db:spp_event_demo.create_event_house_visit_form_view
+#: model_terms:ir.ui.view,arch_db:spp_event_demo.create_event_phone_survey_form_view
+msgid "Save"
+msgstr "Sauvegarder"
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__summary
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__summary
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__summary
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__summary
+msgid "Summary"
+msgstr "Sommaire"
