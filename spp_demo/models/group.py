@@ -18,6 +18,10 @@ class G2PGroup(models.Model):
     """
     Source:
     OK ➢ Households (HH) with children - extracted from demographic data of HH adult members plus child members
+    OK ➢ Households (HH) with children aged 12-18 - extracted from demographic data of HH adult members
+    plus childmembers
+    OK ➢ Households (HH) with children aged 0-11 - extracted from demographic data of HH adult members
+    plus child members
     OK ➢ single-headed HH - extracted from demographic data of HH adult members
     OK ➢ female-headed HH - extracted from demographic data of HH adult members
     OK ➢ HH with pregnant/lactating women - extracted from vulnerability indicator
@@ -30,6 +34,20 @@ class G2PGroup(models.Model):
     z_ind_grp_num_children = fields.Integer(
         "Number of children",
         compute="_compute_ind_grp_num_children",
+        help="Households (HH) with children - extracted from demographic data of "
+        "HH adult members plus child members",
+        store=True,
+    )
+    z_ind_grp_num_children_12_and_above = fields.Integer(
+        "Number of children aged 12 and above",
+        compute="_compute_ind_grp_num_children_12_and_above",
+        help="Households (HH) with children - extracted from demographic data of "
+        "HH adult members plus child members",
+        store=True,
+    )
+    z_ind_grp_num_children_11_and_below = fields.Integer(
+        "Number of children aged 11 and below",
+        compute="_compute_ind_grp_num_children_11_and_below",
         help="Households (HH) with children - extracted from demographic data of "
         "HH adult members plus child members",
         store=True,
@@ -128,6 +146,34 @@ class G2PGroup(models.Model):
         children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
         domain = [("birthdate", ">=", children)]
         self.compute_count_and_set_indicator("z_ind_grp_num_children", None, domain)
+
+    def _compute_ind_grp_num_children_12_and_above(self):
+        """
+        Households (HH) with children aged above 12
+        :return:
+        """
+        now = datetime.datetime.now()
+        children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
+        domain = [
+            ("birthdate", ">=", children),
+            ("birthdate", "<", now - relativedelta(years=12)),
+        ]
+        self.compute_count_and_set_indicator(
+            "z_ind_grp_num_children_12_and_above", None, domain
+        )
+
+    def _compute_ind_grp_num_children_11_and_below(self):
+        """
+        Households (HH) with children aged 11 and below
+        :return:
+        """
+        now = datetime.datetime.now()
+        domain = [
+            ("birthdate", ">=", now - relativedelta(years=11)),
+        ]
+        self.compute_count_and_set_indicator(
+            "z_ind_grp_num_children_11_and_below", None, domain
+        )
 
     def _compute_ind_grp_num_eldery(self):
         """

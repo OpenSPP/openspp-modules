@@ -27,7 +27,7 @@ addon | version | maintainers | summary
 [spp_change_request_add_children_demo](spp_change_request_add_children_demo/) | 15.0.0.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | CR Demo: Add Child/Member
 [spp_custom_filter_ui](spp_custom_filter_ui/) | 15.0.0.0.0 | [![nhatnm0612](https://github.com/nhatnm0612.png?size=30px)](https://github.com/nhatnm0612) | Base config for SPP Custom Filter to only display useful fields
 [spp_demo](spp_demo/) | 15.0.0.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Demo
-
+[spp_event_demo](spp_event_demo/) | 15.0.0.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) [![emjay0921](https://github.com/emjay0921.png?size=30px)](https://github.com/emjay0921) | Event Data Demo
 [//]: # (end addons)
 
 <!-- prettier-ignore-end -->

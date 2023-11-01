@@ -4,11 +4,12 @@
 from odoo import fields, models
 
 
-class OpenSPPSchoolAttendanceRecord(models.Model):
-    _name = "spp.event.schoolattendance.record"
-    _description = "School Attendance Record"
+class OpenSPPSchoolEnrolmentRecord(models.Model):
+    _name = "spp.event.schoolenrolment.record"
+    _description = "School Enrolment Record"
 
-    attendance_description = fields.Char()
+    school_name = fields.Char()
+    enrolment_type = fields.Char()
     date = fields.Date()
 
     def get_view_id(self):
