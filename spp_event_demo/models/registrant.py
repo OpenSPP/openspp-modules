@@ -13,8 +13,8 @@ class OpenSPPRegistrant(models.Model):
         "spp.event.data", compute="_compute_active_phone_survey"
     )
 
-    active_school_attendance_record = fields.Many2one(
-        "spp.event.data", compute="_compute_active_school_attendance_record"
+    active_school_enrolment_record = fields.Many2one(
+        "spp.event.data", compute="_compute_active_school_enrolment_record"
     )
 
     @api.depends("event_data_ids")
@@ -34,11 +34,11 @@ class OpenSPPRegistrant(models.Model):
             rec.active_phone_survey = rec._get_active_event_id("spp.event.phone.survey")
 
     @api.depends("event_data_ids")
-    def _compute_active_school_attendance_record(self):
+    def _compute_active_school_enrolment_record(self):
         """
-        This computes the active school attendance record of the registrant
+        This computes the active school enrolment record of the registrant
         """
         for rec in self:
-            rec.active_school_attendance_record = rec._get_active_event_id(
-                "spp.event.schoolattendance.record"
+            rec.active_school_enrolment_record = rec._get_active_event_id(
+                "spp.event.schoolenrolment.record"
             )

@@ -2,4 +2,4 @@
 
 from . import test_event_house_visit
 from . import test_event_phone_survey
-from . import test_event_school_attendance_record
+from . import test_event_schoolenrolment_record

@@ -10,6 +10,6 @@ class SPPCreateEventWizard(models.TransientModel):
         selection_add=[
             ("spp.event.house.visit", "House Visit"),
             ("spp.event.phone.survey", "Phone Survey"),
-            ("spp.event.schoolattendance.record", "School Attendance Record"),
+            ("spp.event.schoolenrolment.record", "School Enrolment Record"),
         ]
     )

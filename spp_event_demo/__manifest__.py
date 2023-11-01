@@ -19,7 +19,7 @@
         "views/registrant_view.xml",
         "wizard/create_event_house_visit_wizard.xml",
         "wizard/create_event_phone_survey_wizard.xml",
-        "wizard/create_event_school_attendance_wizard.xml",
+        "wizard/create_event_school_enrolment_wizard.xml",
     ],
     "assets": {},
     "demo": [],
