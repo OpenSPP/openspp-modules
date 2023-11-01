@@ -17,7 +17,6 @@ setuptools.setup(
         'odoo-addon-spp_custom_filter>=15.0dev,<15.1dev',
         'odoo-addon-spp_data_export>=15.0dev,<15.1dev',
         'odoo-addon-spp_event_data>=15.0dev,<15.1dev',
-        'odoo-addon-spp_event_demo>=15.0dev,<15.1dev',
         'odoo-addon-spp_idpass>=15.0dev,<15.1dev',
         'odoo-addon-spp_idqueue>=15.0dev,<15.1dev',
         'odoo-addon-spp_rest_auth_jwt>=15.0dev,<15.1dev',
