@@ -13,7 +13,10 @@ class G2pProgramEntitlementManagerDefault(models.Model):
                 "0",
             )
         )
-        if automated_beneficiaries_filtering_mechanism == "2":
+        if (
+            automated_beneficiaries_filtering_mechanism == "2"
+            and cycle.program_id.compliance_managers
+        ):
             satisfied_registrant_ids = (
                 self.env["res.partner"]
                 .sudo()
