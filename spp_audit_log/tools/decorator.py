@@ -10,6 +10,18 @@ if sys.version_info > (3,):
     long = int
 
 
+def get_new_values(records):
+    new_values = []
+    for record in records:
+        vals = {}
+        for fname in records._fields:
+            vals[fname] = records._fields[fname].convert_to_read(
+                record[fname], record, use_name_get=False
+            )
+        new_values.append(vals)
+    return new_values
+
+
 def audit_decorator(method):
     """
     The audit_decorator function is a Python decorator that adds auditing functionality to create, write, and
@@ -20,17 +32,6 @@ def audit_decorator(method):
     :return: The audit_decorator function returns one of three functions: audit_create, audit_write, or
     audit_unlink, depending on the value of the method parameter.
     """
-
-    def get_new_values(self):
-        new_values = []
-        for record in self:
-            vals = {}
-            for fname in self._fields:
-                vals[fname] = self._fields[fname].convert_to_read(
-                    record[fname], record, use_name_get=False
-                )
-            new_values.append(vals)
-        return new_values
 
     @api.model
     def audit_create(self, vals):
