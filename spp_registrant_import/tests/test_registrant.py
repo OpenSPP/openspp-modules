@@ -80,7 +80,6 @@ class TestRegistrant(TransactionCase):
                     "registrant_id": self._test_individuals[1].registrant_id,
                 }
             )
-            self.env.cr.commit()
 
     @mute_logger("py.warnings")
     def test_05_check_registrant_id(self):

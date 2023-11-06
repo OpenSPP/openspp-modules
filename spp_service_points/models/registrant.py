@@ -179,13 +179,19 @@ class OpenSPPServicePoint(models.Model):
             if child_id.email:
                 try:
                     self._create_user(child_id)
-                except SignupError as e:
+                except (SignupError, ValueError) as e:
                     _logger.error(e)
                     raise UserError(
-                        _(f"Error on individual {child_id.name}: {e}")
+                        _("Error on individual {child_name}: {error}").format(
+                            child_name=child_id.name, error=e
+                        )
                     ) from e
             else:
-                raise UserError(_(f"{child_id.name} does not have email."))
+                raise UserError(
+                    _("{child_name} does not have email.").format(
+                        child_name=child_id.name
+                    )
+                )
 
         return {
             "type": "ir.actions.client",
