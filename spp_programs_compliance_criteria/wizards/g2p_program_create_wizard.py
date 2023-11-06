@@ -85,47 +85,11 @@ class G2pProgramCreateWizard(models.TransientModel):
         self.ensure_one()
         program.ensure_one()
         self._check_compliance_manager_info()
-        if self.compliance_kind == "g2p.program_membership.manager.default":
-            manager = (
-                self.env[self.compliance_kind]
-                .sudo()
-                .create(
-                    {
-                        "name": "Default",
-                        "program_id": program.id,
-                        "admin_area_ids": [(6, 0, self.admin_area_ids.ids)],
-                        "eligibility_domain": self.compliance_domain,
-                    }
-                )
-            )
-        elif self.compliance_kind == "g2p.program_membership.manager.sql":
-            manager = (
-                self.env[self.compliance_kind]
-                .sudo()
-                .create(
-                    {
-                        "name": "SQL Query",
-                        "program_id": program.id,
-                        "sql_query": self.compliance_sql,
-                        "sql_query_valid": "valid",
-                        "sql_query_valid_message": "",
-                        "sql_record_count": 0,
-                    }
-                )
-            )
-        elif self.compliance_kind == "g2p.program_membership.manager.tags":
-            manager = (
-                self.env[self.compliance_kind]
-                .sudo()
-                .create(
-                    {
-                        "name": "Tags Manager",
-                        "program_id": program.id,
-                        "tags_id": self.compliance_tag_id.id,
-                        "area_id": self.area_id.id,
-                    }
-                )
-            )
+        manager = (
+            self.env[self.compliance_kind]
+            .sudo()
+            .create(self._prepare_compliance_criteria_create_vals(program))
+        )
         program.write(
             {
                 "compliance_managers": [
@@ -140,3 +104,47 @@ class G2pProgramCreateWizard(models.TransientModel):
                 ],
             }
         )
+
+    def _prepare_compliance_criteria_create_vals(self, program):
+        """
+        Preparing vals for creating compliance criteria manager for new program.
+
+        :param program: instance of g2p.program()
+        :return (dictionary): create vals for compliance criteria manager
+        :raise: NotImplementedError for compliance_kind not yet existed
+
+        How to inherit this function:
+        ```python
+            def _prepare_compliance_criteria_create_vals(self, program):
+                if self.compliance_kind = "new.manager.type":
+                    return {
+                        "key": "value",
+                        ...
+                    }
+                return super()._prepare_compliance_criteria_create_vals(program)
+        ```
+        """
+        if self.compliance_kind == "g2p.program_membership.manager.default":
+            return {
+                "name": "Default",
+                "program_id": program.id,
+                "admin_area_ids": [(6, 0, self.admin_area_ids.ids)],
+                "eligibility_domain": self.compliance_domain,
+            }
+        elif self.compliance_kind == "g2p.program_membership.manager.sql":
+            return {
+                "name": "SQL Query",
+                "program_id": program.id,
+                "sql_query": self.compliance_sql,
+                "sql_query_valid": "valid",
+                "sql_query_valid_message": "",
+                "sql_record_count": 0,
+            }
+        elif self.compliance_kind == "g2p.program_membership.manager.tags":
+            return {
+                "name": "Tags Manager",
+                "program_id": program.id,
+                "tags_id": self.compliance_tag_id.id,
+                "area_id": self.area_id.id,
+            }
+        raise NotImplementedError()
