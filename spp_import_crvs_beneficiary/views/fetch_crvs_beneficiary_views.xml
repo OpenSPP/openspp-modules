@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <!-- explicit form view definition -->
+    <record id="fetch_crvs_beneficiary_form" model="ir.ui.view">
+        <field name="name">fetch_crvs_beneficiary_form</field>
+        <field name="model">spp.fetch.crvs.beneficiary</field>
+        <field name="arch" type="xml">
+            <form string="Fetch CRVS Beneficiaries" create="false" edit="false">
+                <sheet>
+                    <group name="fetch_crvs">
+                        <field name="filter_type" />
+                    </group>
+
+                    <group
+                        name="birthdate_range"
+                        attrs="{'invisible': [('filter_type', '!=', 'birthdate_range')]}"
+                    >
+                        <field name="start_date" colspan="4" />
+                        <field name="end_date" colspan="4" />
+                    </group>
+                    <group name="id_types" attrs="{'invisible': [('filter_type', '!=', 'id_type')]}">
+                        <field name="identifier_type" />
+                        <field name="identifier_value" />
+                    </group>
+                    <footer>
+                        <button
+                            name="fetch_crvs_beneficiary"
+                            string="Fetch"
+                            type="object"
+                            class="oe_highlight btn-primary"
+                        />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record id="fetch_crvs_beneficiary_action_window" model="ir.actions.act_window">
+        <field name="name">Fetch CRVS Beneficiaries</field>
+        <field name="res_model">spp.fetch.crvs.beneficiary</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <!-- Sub-menu/Action item -->
+    <menuitem
+        name="Fetch CRVS"
+        id="fetch_crvs_submenu"
+        parent="g2p_programs.g2p_program_menu_root"
+        action="fetch_crvs_beneficiary_action_window"
+    />
+</odoo>
