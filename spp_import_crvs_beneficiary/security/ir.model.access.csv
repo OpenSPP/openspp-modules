@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_crvs_beneficiary,SPP Fetch CRVS Beneficiary Access,model_spp_fetch_crvs_beneficiary,spp_import_crvs_beneficiary.group_manager,1,1,1,1
+access_crvs_imported_individuals,SPP CRVS Imported Beneficiary Access,model_spp_crvs_imported_individuals,spp_import_crvs_beneficiary.group_manager,1,1,1,1

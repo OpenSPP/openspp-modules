@@ -11,7 +11,7 @@ from ..models import constants
 _logger = logging.getLogger(__name__)
 
 
-class SPPFetchCRVSBeneficiary(models.TransientModel):
+class SPPFetchCRVSBeneficiary(models.Model):
     _name = "spp.fetch.crvs.beneficiary"
     _description = "Fetch CRVS Beneficiary"
 
@@ -25,6 +25,11 @@ class SPPFetchCRVSBeneficiary(models.TransientModel):
     end_date = fields.Date()
     identifier_type = fields.Selection(constants.ID_TYPE_CHOICES)
     identifier_value = fields.Char()
+
+    done_imported = fields.Boolean()
+    imported_individual_ids = fields.One2many(
+        "spp.crvs.imported.individuals", "fetch_crvs_id", "Imported Individuals"
+    )
 
     TIMEOUT = 10
 
@@ -212,7 +217,6 @@ class SPPFetchCRVSBeneficiary(models.TransientModel):
             "gender": sex.title(),
             "birthdate": birth_date,
             "birth_place": birth_place,
-            "ind_is_imported_from_crvs": True,
             "is_registrant": True,
             "is_group": False,
         }
@@ -303,6 +307,15 @@ class SPPFetchCRVSBeneficiary(models.TransientModel):
 
                             # Check and Create Registrant ID
                             self.create_registrant_id(clean_identifiers, partner_id)
+
+                            # Create CRVS Imported Individuals
+                            self.env["spp.crvs.imported.individuals"].create(
+                                {
+                                    "fetch_crvs_id": self.id,
+                                    "individual_id": partner_id.id,
+                                }
+                            )
+                self.done_imported = True
         else:
             kind = "danger"
             message = response.reason
