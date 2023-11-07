@@ -280,7 +280,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
         # Process response
         if response.ok:
             kind = "success"
-            message = _("Fetched")
+            message = _("Successfully Imported CRVS Beneficiaries")
 
             search_responses = (
                 response.json().get("message", {}).get("search_response", [])
