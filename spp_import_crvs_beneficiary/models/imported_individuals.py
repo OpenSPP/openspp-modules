@@ -21,3 +21,6 @@ class SPPCRVSImportedIndividuals(models.Model):
         domain=[("is_group", "=", False), ("is_registrant", "=", True)],
         auto_join=True,
     )
+
+    is_created = fields.Boolean("Created?")
+    is_updated = fields.Boolean("Updated?")

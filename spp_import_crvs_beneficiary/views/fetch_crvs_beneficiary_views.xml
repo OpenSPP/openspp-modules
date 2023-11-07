@@ -8,6 +8,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
+                <field name="create_date" />
             </tree>
         </field>
     </record>
@@ -40,6 +41,8 @@
                         <field name="imported_individual_ids" options="{'no_create': True, 'no_open': True}">
                             <tree>
                                 <field name="individual_id" />
+                                <field name="is_created" />
+                                <field name="is_updated" />
                             </tree>
                         </field>
                     </group>

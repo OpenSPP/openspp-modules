@@ -297,6 +297,11 @@ class SPPFetchCRVSBeneficiary(models.Model):
                                 clean_identifiers,
                             ) = self.get_partner_and_clean_identifier(identifiers)
 
+                            if partner_id:
+                                is_created = False
+                            else:
+                                is_created = True
+
                             # Instantiate individual data
                             partner_data = self.get_individual_data(record)
 
@@ -313,6 +318,8 @@ class SPPFetchCRVSBeneficiary(models.Model):
                                 {
                                     "fetch_crvs_id": self.id,
                                     "individual_id": partner_id.id,
+                                    "is_created": is_created,
+                                    "is_updated": not is_created,
                                 }
                             )
                 self.done_imported = True
