@@ -7,7 +7,7 @@
         <field name="model">spp.fetch.crvs.beneficiary</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name" />
+                <field name="name" string="Search Criteria" />
                 <field name="create_date" />
             </tree>
         </field>
@@ -18,7 +18,7 @@
         <field name="name">fetch_crvs_beneficiary_form</field>
         <field name="model">spp.fetch.crvs.beneficiary</field>
         <field name="arch" type="xml">
-            <form string="Fetch CRVS Beneficiaries" create="false" edit="false">
+            <form string="Previous Search Criterias" create="false" edit="false">
                 <sheet>
                     <field name="done_imported" invisible="1" />
                     <group name="fetch_crvs">
@@ -62,14 +62,14 @@
 
     <!-- actions opening views on models -->
     <record id="fetch_crvs_beneficiary_action_window" model="ir.actions.act_window">
-        <field name="name">Fetch CRVS Beneficiaries</field>
+        <field name="name">Previous Search Criterias</field>
         <field name="res_model">spp.fetch.crvs.beneficiary</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <!-- Sub-menu/Action item -->
     <menuitem
-        name="Fetch CRVS"
+        name="Import From CRVS"
         id="fetch_crvs_submenu"
         parent="g2p_programs.g2p_program_menu_root"
         action="fetch_crvs_beneficiary_action_window"
