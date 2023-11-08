@@ -40,12 +40,13 @@ def audit_decorator(method):
         rules = self.get_audit_rules("create")
 
         new_values = record.read(load="_classic_write")
-        keys = new_values[0].keys()
-        for key in keys:
-            if str(type(new_values[0][key])) == "<class 'markupsafe.Markup'>":
-                new_values[0][key] = str(new_values[0][key])
+        if new_values:
+            keys = new_values[0].keys()
+            for key in keys:
+                if str(type(new_values[0][key])) == "<class 'markupsafe.Markup'>":
+                    new_values[0][key] = str(new_values[0][key])
 
-        rules.log("create", new_values=new_values)
+            rules.log("create", new_values=new_values)
         return result
 
     def audit_write(self, vals):
@@ -59,25 +60,29 @@ def audit_decorator(method):
             new_values = get_new_values(self)
         else:
             new_values = self.sudo().read(load="_classic_write")
-        keys = new_values[0].keys()
-        for key in keys:
-            if str(type(new_values[0][key])) == "<class 'markupsafe.Markup'>":
-                new_values[0][key] = str(new_values[0][key])
-                old_values_copy[0][key] = str(old_values_copy[0][key])
 
-        if audit_write.origin.__name__ == "write":
-            rules.log("write", old_values_copy, new_values)
+        if new_values:
+            keys = new_values[0].keys()
+            for key in keys:
+                if str(type(new_values[0][key])) == "<class 'markupsafe.Markup'>":
+                    new_values[0][key] = str(new_values[0][key])
+                    old_values_copy[0][key] = str(old_values_copy[0][key])
+
+            if audit_write.origin.__name__ == "write":
+                rules.log("write", old_values_copy, new_values)
         return result
 
     def audit_unlink(self):
         rules = self.get_audit_rules("unlink")
         old_values = self.read(load="_classic_write")
-        keys = old_values[0].keys()
-        for key in keys:
-            if str(type(old_values[0][key])) == "<class 'markupsafe.Markup'>":
-                old_values[0][key] = str(old_values[0][key])
 
-        rules.log("unlink", old_values)
+        if old_values:
+            keys = old_values[0].keys()
+            for key in keys:
+                if str(type(old_values[0][key])) == "<class 'markupsafe.Markup'>":
+                    old_values[0][key] = str(old_values[0][key])
+
+            rules.log("unlink", old_values)
         return audit_unlink.origin(self)
 
     methods = {
