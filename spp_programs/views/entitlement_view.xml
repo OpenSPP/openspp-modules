@@ -12,6 +12,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="name" />
                 <field name="code" />
                 <field name="partner_id" />
+                <field name="id_number" />
                 <field name="service_point_id" />
                 <field name="program_id" />
                 <field name="cycle_id" />
@@ -72,6 +73,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 readonly="1"
                                 options="{'no_open':True,'no_quick_create':True,'no_create':True}"
                             />
+                            <field name="id_number" readonly="1" />
                             <field
                                 name="program_id"
                                 options="{'no_open':True,'no_quick_create':True,'no_create':True}"

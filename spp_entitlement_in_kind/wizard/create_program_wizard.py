@@ -82,6 +82,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
                     "evaluate_single_item": self.evaluate_single_item,
                     "entitlement_item_ids": entitlement_item_ids,
                     "entitlement_validation_group_id": self.entitlement_validation_group_id.id,
+                    "id_type": self.id_type.id,
                     "manage_inventory": self.manage_inventory,
                     "warehouse_id": self.warehouse_id.id,
                 }

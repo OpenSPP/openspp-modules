@@ -21,11 +21,14 @@ class SPPCreateNewProgramWiz(models.TransientModel):
 
     is_one_time_distribution = fields.Boolean("One-time Distribution")
 
+    # SQL-base Eligibility Manager
     eligibility_kind = fields.Selection(
         [("default_eligibility", "Default")],
         "Eligibility Manager",
         default="default_eligibility",
     )
+
+    id_type = fields.Many2one("g2p.id.type", "ID Type to store in entitlements")
 
     @api.onchange("admin_area_ids")
     def on_admin_area_ids_change(self):
@@ -175,3 +178,42 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             "journal_id": journal_id,
             "target_type": self.target_type,
         }
+
+    def _reopen_self(self):
+        return {
+            "name": "Set Program Settings",
+            "type": "ir.actions.act_window",
+            "res_model": self._name,
+            "res_id": self.id,
+            "view_mode": "form",
+            "target": "new",
+        }
+
+    def _get_entitlement_manager(self, program_id):
+        val = None
+        if self.entitlement_kind == "default":
+            # Add a new record to default entitlement manager model
+            def_mgr_obj = "g2p.program.entitlement.manager.default"
+            def_mgr = self.env[def_mgr_obj].create(
+                {
+                    "name": "Default",
+                    "program_id": program_id,
+                    "amount_per_cycle": self.amount_per_cycle,
+                    "amount_per_individual_in_group": self.amount_per_individual_in_group,
+                    "transfer_fee_pct": self.transfer_fee_pct,
+                    "transfer_fee_amt": self.transfer_fee_amt,
+                    "max_individual_in_group": self.max_individual_in_group,
+                    "entitlement_validation_group_id": self.entitlement_validation_group_id.id,
+                    "id_type": self.id_type.id,
+                }
+            )
+            # Add a new record to entitlement manager parent model
+            man_obj = self.env["g2p.program.entitlement.manager"]
+            mgr = man_obj.create(
+                {
+                    "program_id": program_id,
+                    "manager_ref_id": "%s,%s" % (def_mgr_obj, str(def_mgr.id)),
+                }
+            )
+            val = {"entitlement_managers": [(4, mgr.id)]}
+        return val

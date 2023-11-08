@@ -52,6 +52,14 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     name="attrs"
                 >{'invisible': ['|', ('rrule_type', '!=', 'monthly'), ('is_one_time_distribution', '=', True)]}</attribute>
             </xpath>
+
+            <xpath expr="//group/field[@name='entitlement_kind']" position="after">
+                <field
+                    name="id_type"
+                    colspan="4"
+                    options="{'no_open':true,'no_create':true,'no_create_edit':true}"
+                />
+            </xpath>
         </field>
     </record>
 </odoo>

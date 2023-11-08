@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_entitlement_tree_custom_spp_programs" model="ir.ui.view">
+        <field name="name">view_entitlement_tree_custom_spp_programs</field>
+        <field name="model">g2p.entitlement</field>
+        <field name="inherit_id" ref="g2p_programs.view_entitlement_tree" />
+        <field name="priority">2000</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="id_number" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_entitlement_form_custom_spp_programs" model="ir.ui.view">
+        <field name="name">view_entitlement_form_custom_spp_programs</field>
+        <field name="model">g2p.entitlement</field>
+        <field name="inherit_id" ref="g2p_programs.view_entitlement_form" />
+        <field name="priority">2000</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="id_number" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
