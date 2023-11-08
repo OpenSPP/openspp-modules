@@ -88,13 +88,12 @@
         <field name="namespace_id" ref="spp_api_namespace" />
         <field name="description">GET service point users</field>
         <field name="method">get</field>
-        <field name="filter_domain">[('service_point_ids', '!=', False)]</field>
+        <field name="filter_domain">[('partner_id.ind_service_points_ids', '!=', False)]</field>
         <field
             name="field_ids"
             eval="[(
             6, 0, [
                 ref('base.field_res_users__login'),
-                ref('base.field_res_users__password'),
                 ref('base.field_res_users__name'),
                 ref('base.field_res_users__active'),
                 ref('base.field_res_users__write_date'),
@@ -253,6 +252,7 @@
             6, 0, [
                 ref('product.field_product_template__id'),
                 ref('product.field_product_template__name'),
+                ref('spp_api_records.field_product_template__image_url'),
             ]
         )]"
         />
