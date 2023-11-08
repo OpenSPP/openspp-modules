@@ -234,7 +234,7 @@ class SPPAPIPath(models.Model):
                                 ),
                             },
                         },
-                        "total": {
+                        "count": {
                             "type": "integer",
                         },
                         "offset": {
