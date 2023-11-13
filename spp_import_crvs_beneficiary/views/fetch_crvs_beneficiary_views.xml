@@ -18,23 +18,35 @@
         <field name="name">fetch_crvs_beneficiary_form</field>
         <field name="model">spp.fetch.crvs.beneficiary</field>
         <field name="arch" type="xml">
-            <form string="Previous Search Criterias" create="false" edit="false">
+            <form string="Previous Search Criterias">
                 <sheet>
-                    <field name="done_imported" invisible="1" />
-                    <group name="fetch_crvs">
-                        <field name="filter_type" attrs="{'readonly': [('done_imported', '=', True)]}" />
+                    <group name="name">
+                        <field name="name" attrs="{'readonly': [('done_imported', '=', True)]}" />
+                        <field name="done_imported" invisible="1" />
                     </group>
 
-                    <group
-                        name="birthdate_range"
-                        attrs="{'invisible': [('filter_type', '!=', 'birthdate_range')]}"
-                    >
-                        <field name="start_date" attrs="{'readonly': [('done_imported', '=', True)]}" />
-                        <field name="end_date" attrs="{'readonly': [('done_imported', '=', True)]}" />
+                    <group name="id_type_search_criteria">
+                        <field
+                            name="id_type_search_criteria_ids"
+                            attrs="{'readonly': [('done_imported', '=', True)]}"
+                        >
+                            <tree editable="top">
+                                <field name="identifier_type" />
+                                <field name="identifier_value" />
+                            </tree>
+                        </field>
                     </group>
-                    <group name="id_types" attrs="{'invisible': [('filter_type', '!=', 'id_type')]}">
-                        <field name="identifier_type" attrs="{'readonly': [('done_imported', '=', True)]}" />
-                        <field name="identifier_value" attrs="{'readonly': [('done_imported', '=', True)]}" />
+
+                    <group name="birth_date_search_criteria_ids">
+                        <field
+                            name="birth_date_search_criteria_ids"
+                            attrs="{'readonly': [('done_imported', '=', True)]}"
+                        >
+                            <tree editable="top">
+                                <field name="from_birth_date" />
+                                <field name="to_birth_date" />
+                            </tree>
+                        </field>
                     </group>
 
                     <group name="imported_individuals" attrs="{'invisible': [('done_imported', '=', False)]}">

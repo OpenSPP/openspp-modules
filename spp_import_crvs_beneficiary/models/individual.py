@@ -12,6 +12,8 @@ class OpenSPPIndividual(models.Model):
         "spp.crvs.imported.individuals", "individual_id", "CRVS Import"
     )
 
+    is_mother = fields.Boolean("A Mother", compute="_compute_is_mother", store=True)
+
     @api.depends("crvs_import_ids")
     def _compute_ind_is_imported_from_crvs(self):
         for rec in self:
@@ -19,3 +21,23 @@ class OpenSPPIndividual(models.Model):
                 rec.ind_is_imported_from_crvs = True
             else:
                 rec.ind_is_imported_from_crvs = False
+
+    @api.depends("individual_membership_ids")
+    def _compute_is_mother(self):
+        for rec in self:
+            if self.env["g2p.group.membership"].search(
+                [
+                    ("id", "in", rec.individual_membership_ids.ids),
+                    (
+                        "kind",
+                        "=",
+                        self.env.ref(
+                            "g2p_registry_membership.group_membership_kind_head"
+                        ).id,
+                    ),
+                    ("is_created_from_crvs", "=", True),
+                ]
+            ):
+                rec.is_mother = True
+            else:
+                rec.is_mother = False

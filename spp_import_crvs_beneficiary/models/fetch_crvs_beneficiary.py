@@ -1,4 +1,6 @@
 import logging
+import uuid
+from copy import deepcopy
 
 import requests
 from dateutil import parser
@@ -6,65 +8,84 @@ from dateutil import parser
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
-from ..models import constants
-
 _logger = logging.getLogger(__name__)
+
+
+class BaseSearchCriteria(models.AbstractModel):
+    _name = "spp.base.search.criteria"
+    _description = "Base Search Criteria"
+
+    fetch_crvs_id = fields.Many2one("spp.fetch.crvs.beneficiary", required=True)
+
+    @api.model
+    def get_query_type(self):
+        raise NotImplementedError()
+
+    def get_query(self):
+        raise NotImplementedError()
+
+    def get_search_requests(self, **kwargs):
+        search_criteria = self.get_search_criteria()
+
+        crvs_version = kwargs.get("crvs_version")
+        reference_id = kwargs.get("reference_id")
+        today_isoformat = kwargs.get("today_isoformat")
+
+        search_requests = []
+
+        for rec in self:
+            search_criteria_copy = deepcopy(search_criteria)
+            search_criteria_copy["query"] = rec.get_query()
+
+            search_request = {
+                "version": crvs_version,
+                "reference_id": reference_id,
+                "timestamp": today_isoformat,
+                "registry_type": "civil",
+                "search_criteria": search_criteria_copy,
+            }
+            search_requests.append(search_request)
+
+        return search_requests
+
+    @api.model
+    def get_result_record_type(self):
+        return {"value": "person"}
+
+    @api.model
+    def get_reg_event_type(self):
+        return {"value": "1"}
+
+    @api.model
+    def get_search_criteria(self):
+        return {
+            "reg_event_type": self.get_reg_event_type(),
+            "query_type": self.get_query_type(),
+            "result_record_type": self.get_result_record_type(),
+        }
 
 
 class SPPFetchCRVSBeneficiary(models.Model):
     _name = "spp.fetch.crvs.beneficiary"
     _description = "Fetch CRVS Beneficiary"
 
-    name = fields.Char(compute="_compute_name")
-    filter_type = fields.Selection(
-        constants.FILTER_TYPE_CHOICES,
-        required=True,
-        string="Type",
+    name = fields.Char("Search Criteria Name", required=True)
+    id_type_search_criteria_ids = fields.One2many(
+        "spp.id.type.search.criteria", "fetch_crvs_id", "ID Type Search Criterias"
     )
-    start_date = fields.Date()
-    end_date = fields.Date()
-    identifier_type = fields.Selection(constants.ID_TYPE_CHOICES)
-    identifier_value = fields.Char()
+    birth_date_search_criteria_ids = fields.One2many(
+        "spp.predicate.search.criteria", "fetch_crvs_id", "Predicate Search Criterias"
+    )
 
     done_imported = fields.Boolean()
     imported_individual_ids = fields.One2many(
-        "spp.crvs.imported.individuals", "fetch_crvs_id", "Imported Individuals"
+        "spp.crvs.imported.individuals",
+        "fetch_crvs_id",
+        "Imported Individuals",
+        readonly=True,
     )
 
     TIMEOUT = 10
-
-    @api.depends("filter_type")
-    def _compute_name(self):
-        for rec in self:
-            if rec.filter_type == constants.ID_TYPE:
-                rec.name = f"{constants.ID_TYPE_LABEL}: {rec.identifier_type} - {rec.identifier_value}"
-            elif rec.filter_type == constants.BIRTHDATE_RANGE:
-                rec.name = f"{constants.BIRTHDATE_RANGE_LABEL}: {rec.start_date} - {rec.end_date}"
-
-    @api.constrains("filter_type")
-    def _check_filter_type(self):
-        for rec in self:
-            if rec.filter_type == constants.ID_TYPE:
-                if not rec.identifier_type or not rec.identifier_value:
-                    raise ValidationError(
-                        _(
-                            "Identifier Type and Identifier Value is required if selected Type is %(label)s"
-                        )
-                        % {
-                            "label": constants.ID_TYPE_LABEL,
-                        }
-                    )
-            elif rec.filter_type == constants.BIRTHDATE_RANGE:
-                if not rec.start_date or not rec.end_date:
-                    raise ValidationError(
-                        _(
-                            "Start Date and End Date is required if selected Type is %(label)s"
-                        )
-                        % {
-                            "label": constants.BIRTHDATE_RANGE_LABEL,
-                        }
-                    )
-        return
 
     def get_crvs_search_url(self, config_parameters):
         CRVS_URL = config_parameters.get_param("crvs_url")
@@ -74,41 +95,12 @@ class SPPFetchCRVSBeneficiary(models.Model):
 
         return f"{CRVS_URL}/{CRVS_NAMESPACE}/v{CRVS_VERSION}/{SEARCH_PATH}"
 
-    def get_query(self):
-        query_type = constants.QUERY_TYPE_MAPPING[self.filter_type]
-        query = ""
-        if query_type == constants.ID_TYPE_VALUE:
-            query = {
-                "identifier_type": {"value": self.identifier_type},
-                "identifier_value": self.identifier_value,
-            }
-        elif query_type == constants.PREDICATE:
-            if self.filter_type == constants.BIRTHDATE_RANGE:
-                query = [
-                    {
-                        "condition": "and",
-                        "expression1": {
-                            "attribute_name": "birthdate",
-                            "operator": "gt",
-                            "attribute_value": str(self.start_date),
-                        },
-                        "expression2": {
-                            "attribute_name": "birthdate",
-                            "operator": "lt",
-                            "attribute_value": str(self.end_date),
-                        },
-                    }
-                ]
-
-        return query
-
     def get_headers_for_request(self):
         return {
             "Content-Type": "application/json",
         }
 
-    def get_header_for_body(self, crvs_version, today_isoformat):
-        message_id = "message1"
+    def get_header_for_body(self, crvs_version, today_isoformat, message_id):
         sender_id = "sender1"
         receiver_id = "receiver1"
         total_count = 1
@@ -124,38 +116,52 @@ class SPPFetchCRVSBeneficiary(models.Model):
             "encryption_algorithm": "",
         }
 
-    def get_message(self, crvs_version, today_isoformat, query):
-        query_type = constants.QUERY_TYPE_MAPPING[self.filter_type]
-        transaction_id = "123456"
-        reference_id = "1234567"
+    def get_search_request(self, crvs_version, reference_id, today_isoformat):
+        search_requests = []
+        if self.id_type_search_criteria_ids:
+            search_requests.extend(
+                self.id_type_search_criteria_ids.get_search_requests(
+                    crvs_version=crvs_version,
+                    reference_id=reference_id,
+                    today_isoformat=today_isoformat,
+                )
+            )
+
+        if self.birth_date_search_criteria_ids:
+            search_requests.extend(
+                self.birth_date_search_criteria_ids.get_search_requests(
+                    crvs_version=crvs_version,
+                    reference_id=reference_id,
+                    today_isoformat=today_isoformat,
+                )
+            )
+
+        return search_requests
+
+    def get_message(self, crvs_version, today_isoformat, transaction_id, reference_id):
+
+        # Define Search Requests
+        search_request = self.get_search_request(
+            crvs_version, reference_id, today_isoformat
+        )
+
         return {
             "transaction_id": transaction_id,
-            "search_request": [
-                {
-                    "version": crvs_version,
-                    "reference_id": reference_id,
-                    "timestamp": today_isoformat,
-                    "registry_type": "civil",
-                    "search_criteria": {
-                        "reg_event_type": {"value": "1"},
-                        "query_type": query_type,
-                        "query": query,
-                        "result_record_type": {"value": "person"},
-                    },
-                }
-            ],
+            "search_request": search_request,
         }
 
     def get_data(self, signature, header, message):
         return {"signature": signature, "header": header, "message": message}
 
-    def get_partner_and_clean_identifier(self, identifiers):
+    def get_partner_and_clean_identifier(
+        self, identifiers, identifier_type_key="type", identifier_value_key="value"
+    ):
         clean_identifiers = []
         partner_id = None
         # get existing record if there's any
         for identifier in identifiers:
-            identifier_type = identifier.get("type", "")
-            identifier_value = identifier.get("value", "")
+            identifier_type = identifier.get(identifier_type_key, "")
+            identifier_value = identifier.get(identifier_value_key, "")
             if identifier_type and identifier_value:
 
                 # Check if identifier type is already created. Create record if no existing identifier type
@@ -195,9 +201,9 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return name
 
     def get_individual_data(self, record):
-        family_name = record.get("family_name", "")
-        given_name = record.get("given_name", "")
-        middle_name = record.get("middle_name", "")
+        family_name = record.get("familyName", "")
+        given_name = record.get("givenName", "")
+        middle_name = record.get("middleName", "")
         sex = record.get("sex", "")
         birth_date = record.get("birthDate", "")
         birth_place = record.get("birthPlace", {}).get("address", "")
@@ -246,10 +252,61 @@ class SPPFetchCRVSBeneficiary(models.Model):
                 self.env["g2p.reg.id"].create(reg_data)
         return
 
+    def process_records(
+        self, record, identifier_type_key="type", identifier_value_key="value"
+    ):
+        identifiers = record.get("identifier", [])
+        (partner_id, clean_identifiers,) = self.get_partner_and_clean_identifier(
+            identifiers,
+            identifier_type_key=identifier_type_key,
+            identifier_value_key=identifier_value_key,
+        )
+
+        if partner_id:
+            is_created = False
+        else:
+            is_created = True
+
+        # Instantiate individual data
+        partner_data = self.get_individual_data(record)
+
+        # Create or Update individual
+        partner_id = self.create_or_update_individual(partner_id, partner_data)
+
+        # Check and Create Registrant ID
+        self.create_registrant_id(clean_identifiers, partner_id)
+
+        # Create CRVS Imported Individuals
+        crvs_imported_individuals = self.env["spp.crvs.imported.individuals"]
+        if not crvs_imported_individuals.search(
+            [("fetch_crvs_id", "=", self.id), ("individual_id", "=", partner_id.id)],
+            limit=1,
+        ):
+            crvs_imported_individuals.create(
+                {
+                    "fetch_crvs_id": self.id,
+                    "individual_id": partner_id.id,
+                    "is_created": is_created,
+                    "is_updated": not is_created,
+                }
+            )
+
+        return partner_id
+
     def fetch_crvs_beneficiary(self):
+        if (
+            not self.id_type_search_criteria_ids
+            and not self.birth_date_search_criteria_ids
+        ):
+            raise ValidationError(
+                _("Add atleast one search criteria before click fetch button.")
+            )
+
         config_parameters = self.env["ir.config_parameter"].sudo()
         today_isoformat = fields.Datetime.today().isoformat()
         crvs_version = config_parameters.get_param("crvs_version")
+
+        message_id = str(uuid.uuid4())
 
         # Define CRVS search url
         full_crvs_search_url = self.get_crvs_search_url(config_parameters)
@@ -257,14 +314,13 @@ class SPPFetchCRVSBeneficiary(models.Model):
         # Define headers for post request
         headers = self.get_headers_for_request()
 
-        # Define query
-        query = self.get_query()
-
         # Define header
-        header = self.get_header_for_body(crvs_version, today_isoformat)
+        header = self.get_header_for_body(crvs_version, today_isoformat, message_id)
 
         # Define message
-        message = self.get_message(crvs_version, today_isoformat, query)
+        message = self.get_message(
+            crvs_version, today_isoformat, transaction_id=message_id, reference_id=""
+        )
 
         # Define signature
         signature = ""
@@ -285,44 +341,94 @@ class SPPFetchCRVSBeneficiary(models.Model):
             search_responses = (
                 response.json().get("message", {}).get("search_response", [])
             )
-            if search_responses:
-                for search_response in search_responses:
-                    reg_records = search_response.get("data", {}).get("reg_records", [])
-                    for record in reg_records:
-                        identifiers = record.get("identifier", [])
-                        if identifiers:
-                            # get existing record if there's any and clean identifiers for better searching in ORM
-                            (
-                                partner_id,
-                                clean_identifiers,
-                            ) = self.get_partner_and_clean_identifier(identifiers)
+            for search_response in search_responses:
+                reg_records = search_response.get("data", {}).get("reg_records", [])
+                for record in reg_records:
+                    identifiers = record.get("identifier", [])
+                    if identifiers:
+                        partner_id = self.process_records(record)
 
-                            if partner_id:
-                                is_created = False
-                            else:
-                                is_created = True
+                        relations = record.get("relations", [])
+                        for relation in relations:
+                            relation_identifiers = relation.get("identifier", [])
+                            is_mother = "Mother" in relation.get("@type", "")
+                            if relation_identifiers and is_mother:
+                                relation_partner_id = self.process_records(
+                                    relation,
+                                    identifier_type_key="name",
+                                    identifier_value_key="identifier",
+                                )
 
-                            # Instantiate individual data
-                            partner_data = self.get_individual_data(record)
+                                # Check if parent have group membership
+                                group = None
 
-                            # Create or Update individual
-                            partner_id = self.create_or_update_individual(
-                                partner_id, partner_data
-                            )
+                                if relation_partner_id.individual_membership_ids:
+                                    membership = self.env[
+                                        "g2p.group.membership"
+                                    ].search(
+                                        [
+                                            (
+                                                "id",
+                                                "in",
+                                                relation_partner_id.individual_membership_ids.ids,
+                                            ),
+                                            ("is_created_from_crvs", "=", True),
+                                        ],
+                                        limit=1,
+                                    )
+                                    if membership:
+                                        group = membership.group
 
-                            # Check and Create Registrant ID
-                            self.create_registrant_id(clean_identifiers, partner_id)
+                                if not group:
+                                    group = self.env["res.partner"].create(
+                                        {
+                                            "name": f"{str(relation_partner_id.family_name).title()} Family",
+                                            "is_registrant": True,
+                                            "is_group": True,
+                                            "grp_is_created_from_crvs": True,
+                                            "kind": self.env.ref(
+                                                "g2p_registry_group.group_kind_family"
+                                            ).id,
+                                        }
+                                    )
 
-                            # Create CRVS Imported Individuals
-                            self.env["spp.crvs.imported.individuals"].create(
-                                {
-                                    "fetch_crvs_id": self.id,
-                                    "individual_id": partner_id.id,
-                                    "is_created": is_created,
-                                    "is_updated": not is_created,
-                                }
-                            )
-                self.done_imported = True
+                                    if not self.env["g2p.group.membership"].search(
+                                        [
+                                            ("group", "=", group.id),
+                                            ("individual", "=", relation_partner_id.id),
+                                        ]
+                                    ):
+                                        # Add parent to group
+                                        self.env["g2p.group.membership"].create(
+                                            {
+                                                "group": group.id,
+                                                "individual": relation_partner_id.id,
+                                                "kind": [
+                                                    (
+                                                        4,
+                                                        self.env.ref(
+                                                            "g2p_registry_membership.group_membership_kind_head"
+                                                        ).id,
+                                                    )
+                                                ],
+                                            }
+                                        )
+
+                                if not self.env["g2p.group.membership"].search(
+                                    [
+                                        ("group", "=", group.id),
+                                        ("individual", "=", partner_id.id),
+                                    ]
+                                ):
+                                    # Add child to group
+                                    self.env["g2p.group.membership"].create(
+                                        {
+                                            "group": group.id,
+                                            "individual": partner_id.id,
+                                        }
+                                    )
+
+            self.done_imported = True
         else:
             kind = "danger"
             message = response.reason

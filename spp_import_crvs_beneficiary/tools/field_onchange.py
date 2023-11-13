@@ -16,7 +16,7 @@ def field_onchange(obj, on_change_field_name, field_name):
             domain.remove(crvs_dom[0])
 
     if getattr(obj, on_change_field_name):
-        domain.append((field_name, "=", True))
+        domain.append((field_name, "=", getattr(obj, on_change_field_name)))
 
     eligibility_domain = str(insert_operator(domain))
     obj.eligibility_domain = eligibility_domain
