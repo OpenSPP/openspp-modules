@@ -10,6 +10,12 @@
             <xpath expr="//field[@name='copied']" position="after">
                 <field name="with_weight" attrs="{'invisible': [('field_category','!=','cst')]}" />
                 <field name="field_weight" attrs="{'invisible': [('with_weight','=',False)]}" />
+                <field name="area_ids" attrs="{'invisible': [('with_weight','=',False)]}">
+                    <tree editable="bottom">
+                        <field name="name" />
+                        <field name="weight" />
+                    </tree>
+                </field>
             </xpath>
         </field>
     </record>

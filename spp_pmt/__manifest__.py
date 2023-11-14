@@ -16,8 +16,10 @@
         "g2p_registry_base",
         "g2p_registry_group",
         "spp_custom_fields_ui",
+        "spp_area",
     ],
     "data": [
+        "security/ir.model.access.csv",
         "views/custom_fields_ui_view.xml",
         "views/custom_registrant_view.xml",
     ],

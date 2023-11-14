@@ -46,6 +46,9 @@ class G2PGroupPMT(models.Model):
             rec.area_calc = area_calc
 
     def _compute_pmt_score(self):
+
+        hh_area = self.area_id
+
         model = self.env["ir.model"].search([("model", "=", "res.partner")])
 
         fields = self.env["ir.model.fields"].search(
@@ -58,7 +61,14 @@ class G2PGroupPMT(models.Model):
         weights = {}
         if fields:
             for field in fields:
-                weights.update({field.name: field.field_weight})
+                if hh_area:
+                    areas = field.area_ids.filtered(lambda a: a.name.id == hh_area.id)
+                    if areas:
+                        weights.update({field.name: areas[0].weight})
+                    else:
+                        weights.update({field.name: field.field_weight})
+                else:
+                    weights.update({field.name: field.field_weight})
 
         if weights:
             for record in self:
