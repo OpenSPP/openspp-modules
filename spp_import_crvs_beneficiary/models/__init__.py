@@ -5,5 +5,3 @@ from . import fetch_crvs_beneficiary
 from . import group
 from . import group_membership
 from . import imported_individuals
-from . import predicate_search_criteria
-from . import id_type_search_criteria

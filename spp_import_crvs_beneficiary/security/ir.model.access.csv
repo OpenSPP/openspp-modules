@@ -1,5 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_crvs_beneficiary,SPP Fetch CRVS Beneficiary Access,model_spp_fetch_crvs_beneficiary,spp_import_crvs_beneficiary.group_manager,1,1,1,1
 access_crvs_imported_individuals,SPP CRVS Imported Beneficiary Access,model_spp_crvs_imported_individuals,spp_import_crvs_beneficiary.group_manager,1,1,1,1
-access_predicate_search_criteria,SPP Predicate Search Criteria Access,model_spp_predicate_search_criteria,spp_import_crvs_beneficiary.group_manager,1,1,1,1
-access_id_type_search_criteria,SPP ID Type Search Criteria Access,model_spp_id_type_search_criteria,spp_import_crvs_beneficiary.group_manager,1,1,1,1
+access_spp_fetch_domain_filter,Fetch Domain Filter Access,model_spp_fetch_domain_filter,spp_import_crvs_beneficiary.group_manager,1,1,1,1

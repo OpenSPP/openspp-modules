@@ -1,68 +1,24 @@
 import logging
 import uuid
-from copy import deepcopy
 
 import requests
 from dateutil import parser
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import ValidationError
+from odoo.tools import safe_eval
+
+from ..models import constants
+from ..tools import calculate_signature
 
 _logger = logging.getLogger(__name__)
 
 
-class BaseSearchCriteria(models.AbstractModel):
-    _name = "spp.base.search.criteria"
-    _description = "Base Search Criteria"
+class FetchDomainFilter(models.TransientModel):
+    _name = "spp.fetch.domain.filter"
+    _description = "Fetch Domain Filter"
 
-    fetch_crvs_id = fields.Many2one("spp.fetch.crvs.beneficiary", required=True)
-
-    @api.model
-    def get_query_type(self):
-        raise NotImplementedError()
-
-    def get_query(self):
-        raise NotImplementedError()
-
-    def get_search_requests(self, **kwargs):
-        search_criteria = self.get_search_criteria()
-
-        crvs_version = kwargs.get("crvs_version")
-        reference_id = kwargs.get("reference_id")
-        today_isoformat = kwargs.get("today_isoformat")
-
-        search_requests = []
-
-        for rec in self:
-            search_criteria_copy = deepcopy(search_criteria)
-            search_criteria_copy["query"] = rec.get_query()
-
-            search_request = {
-                "version": crvs_version,
-                "reference_id": reference_id,
-                "timestamp": today_isoformat,
-                "registry_type": "civil",
-                "search_criteria": search_criteria_copy,
-            }
-            search_requests.append(search_request)
-
-        return search_requests
-
-    @api.model
-    def get_result_record_type(self):
-        return {"value": "person"}
-
-    @api.model
-    def get_reg_event_type(self):
-        return {"value": "1"}
-
-    @api.model
-    def get_search_criteria(self):
-        return {
-            "reg_event_type": self.get_reg_event_type(),
-            "query_type": self.get_query_type(),
-            "result_record_type": self.get_result_record_type(),
-        }
+    birthdate = fields.Date("Birth Date")
 
 
 class SPPFetchCRVSBeneficiary(models.Model):
@@ -70,12 +26,8 @@ class SPPFetchCRVSBeneficiary(models.Model):
     _description = "Fetch CRVS Beneficiary"
 
     name = fields.Char("Search Criteria Name", required=True)
-    id_type_search_criteria_ids = fields.One2many(
-        "spp.id.type.search.criteria", "fetch_crvs_id", "ID Type Search Criterias"
-    )
-    birth_date_search_criteria_ids = fields.One2many(
-        "spp.predicate.search.criteria", "fetch_crvs_id", "Predicate Search Criterias"
-    )
+
+    domain = fields.Text(default="[]", required=True)
 
     done_imported = fields.Boolean()
     imported_individual_ids = fields.One2many(
@@ -116,30 +68,51 @@ class SPPFetchCRVSBeneficiary(models.Model):
             "encryption_algorithm": "",
         }
 
-    def get_search_request(self, crvs_version, reference_id, today_isoformat):
-        search_requests = []
-        if self.id_type_search_criteria_ids:
-            search_requests.extend(
-                self.id_type_search_criteria_ids.get_search_requests(
-                    crvs_version=crvs_version,
-                    reference_id=reference_id,
-                    today_isoformat=today_isoformat,
-                )
-            )
+    def get_query(self):
+        queries = []
+        domain = safe_eval.safe_eval(self.domain)
 
-        if self.birth_date_search_criteria_ids:
-            search_requests.extend(
-                self.birth_date_search_criteria_ids.get_search_requests(
-                    crvs_version=crvs_version,
-                    reference_id=reference_id,
-                    today_isoformat=today_isoformat,
-                )
-            )
+        if not domain:
+            raise ValidationError(_("Add atleast one filter."))
+
+        for dom in domain:
+            if isinstance(dom, list) and len(dom) == 3:
+                field_name = constants.FIELD_MAPPING.get(dom[0])
+                operator = constants.OPERATION_MAPPING.get(dom[1])
+                if field_name and operator:
+                    value = dom[2]
+                    queries.append(
+                        {
+                            "expression1": {
+                                "attribute_name": field_name,
+                                "operator": operator,
+                                "attribute_value": value,
+                            }
+                        }
+                    )
+        return queries
+
+    def get_search_request(self, crvs_version, reference_id, today_isoformat):
+        search_requests = {
+            "version": crvs_version,
+            "reference_id": reference_id,
+            "timestamp": today_isoformat,
+            "registry_type": "civil",
+            "search_criteria": {
+                "reg_event_type": {
+                    "value": "1",
+                },
+                "query_type": constants.PREDICATE,
+                "result_record_type": {
+                    "value": "person",
+                },
+                "query": self.get_query(),
+            },
+        }
 
         return search_requests
 
     def get_message(self, crvs_version, today_isoformat, transaction_id, reference_id):
-
         # Define Search Requests
         search_request = self.get_search_request(
             crvs_version, reference_id, today_isoformat
@@ -253,7 +226,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return
 
     def process_records(
-        self, record, identifier_type_key="type", identifier_value_key="value"
+        self, record, identifier_type_key="name", identifier_value_key="identifier"
     ):
         identifiers = record.get("identifier", [])
         (partner_id, clean_identifiers,) = self.get_partner_and_clean_identifier(
@@ -294,13 +267,6 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return partner_id
 
     def fetch_crvs_beneficiary(self):
-        if (
-            not self.id_type_search_criteria_ids
-            and not self.birth_date_search_criteria_ids
-        ):
-            raise ValidationError(
-                _("Add atleast one search criteria before click fetch button.")
-            )
 
         config_parameters = self.env["ir.config_parameter"].sudo()
         today_isoformat = fields.Datetime.today().isoformat()
@@ -315,22 +281,36 @@ class SPPFetchCRVSBeneficiary(models.Model):
         headers = self.get_headers_for_request()
 
         # Define header
-        header = self.get_header_for_body(crvs_version, today_isoformat, message_id)
+        header = self.get_header_for_body(
+            crvs_version,
+            today_isoformat,
+            message_id,
+        )
 
         # Define message
         message = self.get_message(
-            crvs_version, today_isoformat, transaction_id=message_id, reference_id=""
+            crvs_version,
+            today_isoformat,
+            transaction_id=message_id,
+            reference_id="",
         )
 
         # Define signature
-        signature = ""
+        signature = calculate_signature(header=header, payload=message)
 
         # Define data
-        data = self.get_data(signature, header, message)
+        data = self.get_data(
+            signature,
+            header,
+            message,
+        )
 
         # POST Request
         response = requests.post(
-            full_crvs_search_url, headers=headers, json=data, timeout=self.TIMEOUT
+            full_crvs_search_url,
+            headers=headers,
+            json=data,
+            timeout=self.TIMEOUT,
         )
 
         # Process response
@@ -361,7 +341,6 @@ class SPPFetchCRVSBeneficiary(models.Model):
 
                                 # Check if parent have group membership
                                 group = None
-
                                 if relation_partner_id.individual_membership_ids:
                                     membership = self.env[
                                         "g2p.group.membership"
@@ -379,6 +358,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
                                     if membership:
                                         group = membership.group
 
+                                # Create group membership
                                 if not group:
                                     group = self.env["res.partner"].create(
                                         {
@@ -392,6 +372,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
                                         }
                                     )
 
+                                    # if parent not in group
                                     if not self.env["g2p.group.membership"].search(
                                         [
                                             ("group", "=", group.id),
@@ -414,6 +395,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
                                             }
                                         )
 
+                                # If child not in group
                                 if not self.env["g2p.group.membership"].search(
                                     [
                                         ("group", "=", group.id),
