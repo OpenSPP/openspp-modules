@@ -14,6 +14,7 @@
         "spp_programs",
         "g2p_registry_base",
         "g2p_registry_individual",
+        "spp_registry_data_source",
     ],
     "data": [
         "security/fetch_crvs_security.xml",

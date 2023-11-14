@@ -4,7 +4,7 @@ import uuid
 import requests
 from dateutil import parser
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import safe_eval
 
@@ -12,6 +12,9 @@ from ..models import constants
 from ..tools import calculate_signature
 
 _logger = logging.getLogger(__name__)
+
+DATA_SOURCE_NAME = "CRVS"
+DATA_SOURCE_SEARCH_PATH_NAME = "Registry Sync Search"
 
 
 class FetchDomainFilter(models.TransientModel):
@@ -39,13 +42,40 @@ class SPPFetchCRVSBeneficiary(models.Model):
 
     TIMEOUT = 10
 
-    def get_crvs_search_url(self, config_parameters):
-        CRVS_URL = config_parameters.get_param("crvs_url")
-        CRVS_NAMESPACE = config_parameters.get_param("crvs_namespace")
-        CRVS_VERSION = config_parameters.get_param("crvs_version")
-        SEARCH_PATH = "/registry/sync/search"
+    @api.model
+    def get_data_source(self):
+        self.ensure_one()
 
-        return f"{CRVS_URL}/{CRVS_NAMESPACE}/v{CRVS_VERSION}/{SEARCH_PATH}"
+        data_source = self.env["spp.data.source"].search(
+            [("name", "=", DATA_SOURCE_NAME)], limit=1
+        )
+
+        if not data_source:
+            raise ValidationError(
+                _("No data source named {data_source} is configured!").format(
+                    data_source=DATA_SOURCE_NAME
+                )
+            )
+
+        paths = {}
+
+        for path_id in data_source.data_source_path_ids:
+            paths[path_id.name] = path_id.path
+
+        if DATA_SOURCE_SEARCH_PATH_NAME not in paths:
+            raise ValidationError(
+                _("No path in data source named {path} is configured!").format(
+                    path=DATA_SOURCE_SEARCH_PATH_NAME
+                )
+            )
+
+        return data_source, paths
+
+    def get_crvs_search_url(self, data_source_id, paths):
+        url = data_source_id.url
+        search_path = paths.get(DATA_SOURCE_SEARCH_PATH_NAME)
+
+        return f"{url}{search_path}"
 
     def get_headers_for_request(self):
         return {
@@ -274,8 +304,11 @@ class SPPFetchCRVSBeneficiary(models.Model):
 
         message_id = str(uuid.uuid4())
 
+        # Define Data Source
+        data_source_id, paths = self.get_data_source()
+
         # Define CRVS search url
-        full_crvs_search_url = self.get_crvs_search_url(config_parameters)
+        full_crvs_search_url = self.get_crvs_search_url(data_source_id, paths)
 
         # Define headers for post request
         headers = self.get_headers_for_request()
