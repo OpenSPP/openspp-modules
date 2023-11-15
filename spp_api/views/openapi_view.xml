@@ -279,7 +279,8 @@
                             <field name="log_response" />
                             <field name="last_log_date" readonly="1" />
                             <field name="token" />
-                            <field name="spec_url" widget="url" readonly="1" />
+                            <field name="spec_url" widget="url" readonly="1" invisible="1" />
+                            <field name="spec_url_v2" widget="url" readonly="1" />
                         </group>
                     </div>
                     <notebook>
