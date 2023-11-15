@@ -34,12 +34,13 @@
                         />
                     </group>
 
-                    <group name="imported_individuals" attrs="{'invisible': [('done_imported', '=', False)]}">
+                    <group name="imported_individuals" attrs="{'invisible': [('id', '=', False)]}">
                         <field name="imported_individual_ids" options="{'no_create': True, 'no_open': True}">
                             <tree>
                                 <field name="individual_id" />
                                 <field name="is_created" />
                                 <field name="is_updated" />
+                                <field name="data_source_id" />
                             </tree>
                         </field>
                     </group>
@@ -50,6 +51,13 @@
                             type="object"
                             class="oe_highlight btn-primary"
                             attrs="{'invisible': [('done_imported', '=', True)]}"
+                        />
+                        <button
+                            name="enable_fetch"
+                            string="Enable fetch button"
+                            type="object"
+                            class="oe_highlight btn-primary"
+                            attrs="{'invisible': [('done_imported', '=', False)]}"
                         />
                     </footer>
                 </sheet>

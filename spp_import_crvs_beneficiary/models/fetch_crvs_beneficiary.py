@@ -256,7 +256,11 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return
 
     def process_records(
-        self, record, identifier_type_key="name", identifier_value_key="identifier"
+        self,
+        record,
+        data_source,
+        identifier_type_key="name",
+        identifier_value_key="identifier",
     ):
         identifiers = record.get("identifier", [])
         (partner_id, clean_identifiers,) = self.get_partner_and_clean_identifier(
@@ -272,6 +276,8 @@ class SPPFetchCRVSBeneficiary(models.Model):
 
         # Instantiate individual data
         partner_data = self.get_individual_data(record)
+
+        partner_data.update({"data_source_id": data_source.id})
 
         # Create or Update individual
         partner_id = self.create_or_update_individual(partner_id, partner_data)
@@ -359,7 +365,9 @@ class SPPFetchCRVSBeneficiary(models.Model):
                 for record in reg_records:
                     identifiers = record.get("identifier", [])
                     if identifiers:
-                        partner_id = self.process_records(record)
+                        partner_id = self.process_records(
+                            record, data_source=data_source_id
+                        )
 
                         relations = record.get("relations", [])
                         for relation in relations:
@@ -370,6 +378,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
                                     relation,
                                     identifier_type_key="name",
                                     identifier_value_key="identifier",
+                                    data_source=data_source_id,
                                 )
 
                                 # Check if parent have group membership
@@ -399,6 +408,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
                                             "is_registrant": True,
                                             "is_group": True,
                                             "grp_is_created_from_crvs": True,
+                                            "data_source_id": data_source_id.id,
                                             "kind": self.env.ref(
                                                 "g2p_registry_group.group_kind_family"
                                             ).id,
@@ -456,6 +466,26 @@ class SPPFetchCRVSBeneficiary(models.Model):
                 "message": message,
                 "sticky": True,
                 "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
+        return action
+
+    def enable_fetch(self):
+        self.ensure_one()
+
+        self.done_imported = False
+
+        action = {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Enabled Fetch button"),
+                "message": _("Fetch on this criteria is now enabled."),
+                "sticky": True,
+                "type": "success",
                 "next": {
                     "type": "ir.actions.act_window_close",
                 },
