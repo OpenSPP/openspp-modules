@@ -9,7 +9,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="inherit_id" ref="g2p_programs.view_cycle_form" />
         <field name="arch" type="xml">
             <xpath expr="//button[@name='mark_ended']" position="replace">
-                <field name="is_expired" invisible="1"/>
+                <field name="is_expired" invisible="1" />
                 <button
                     type="object"
                     class="btn-primary"

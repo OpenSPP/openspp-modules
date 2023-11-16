@@ -1,7 +1,9 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from odoo import models, fields
 from datetime import date
+
+from odoo import fields, models
+
 from odoo.addons.g2p_programs.models import constants
 
 
@@ -32,24 +34,16 @@ class SPPDefaultCycleManager(models.Model):
             entitlement.update({"state": state})
 
     def check_entitlements_transactions(self, entitlement):
-        total_purchase = 0
-        total_void = 0
+        balance = entitlement.entitlement_balance
+        initial_amount = entitlement.initial_amount
         state = entitlement.state
 
-        if entitlement.transaction_ids:
+        if initial_amount > balance:
             state = "parrdpd2ben"
+        elif initial_amount == balance:
+            state = entitlement.state
 
-        for transactions in entitlement.transaction_ids:
-
-            if transactions.transaction_type == "PURCHASE":
-                total_purchase += transactions.amount_charged_by_service_point
-
-            elif transactions.transaction_type == "VOID":
-                total_void += transactions.amount_charged_by_service_point
-
-        total_amount = total_purchase - total_void
-
-        if total_amount == entitlement.initial_amount:
+        if balance == 0:
             state = "rdpd2ben"
 
         return state

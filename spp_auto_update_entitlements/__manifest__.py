@@ -17,6 +17,7 @@
     ],
     "data": [
         "views/cycle_view.xml",
+        "views/entitlements_view.xml",
     ],
     "assets": {},
     "demo": [],
