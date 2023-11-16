@@ -1,5 +1,6 @@
 import logging
-from copy import deepcopy
+
+# from copy import deepcopy
 from datetime import date, datetime
 
 from odoo import _, api, fields, models
@@ -221,7 +222,7 @@ class SPPAPIPath(models.Model):
             get_one_path = "/{}/{}".format(self.name, "{Id}")
             if get_one_path not in swagger_paths:
                 swagger_paths.setdefault(get_one_path, {})
-            # Read All elements
+            # region::Read All elements::
             definition_all = {
                 "schema": {
                     "type": "object",
@@ -259,33 +260,35 @@ class SPPAPIPath(models.Model):
                     "get": values,
                 }
             )
-            # Read One element
-            values_one = deepcopy(values)
-            definition_one = {
-                "schema": {
-                    "type": "object",
-                    "properties": {
-                        "result": {
-                            "$ref": "#/definitions/{}".format(
-                                format_definition_name(self.name)
-                            ),
-                        },
-                        "reply_id": {
-                            "type": "string",
-                        },
-                        "timestamp": {
-                            "type": "string",
-                        },
-                    },
-                }
-            }
-            values_one["responses"]["200"].update(definition_one)
-            values_one.update(parameters=self._get_parameters_one_element())
-            swagger_paths[get_one_path].update(
-                {
-                    "get": values_one,
-                }
-            )
+            # endregion
+            # region::Read One element::
+            # values_one = deepcopy(values)
+            # definition_one = {
+            #     "schema": {
+            #         "type": "object",
+            #         "properties": {
+            #             "result": {
+            #                 "$ref": "#/definitions/{}".format(
+            #                     format_definition_name(self.name)
+            #                 ),
+            #             },
+            #             "reply_id": {
+            #                 "type": "string",
+            #             },
+            #             "timestamp": {
+            #                 "type": "string",
+            #             },
+            #         },
+            #     }
+            # }
+            # values_one["responses"]["200"].update(definition_one)
+            # values_one.update(parameters=self._get_parameters_one_element())
+            # swagger_paths[get_one_path].update(
+            #     {
+            #         "get": values_one,
+            #     }
+            # )
+        # endregion
         # Post
         elif self.method == "post" and self.api_field_ids:
             # Default dict path

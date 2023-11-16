@@ -110,22 +110,22 @@ class Namespace(models.Model):
         current_host = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
         parsed_current_host = urlparse.urlparse(current_host)
 
-        report_parameters = [
-            {
-                "name": "report_external_id",
-                "in": "path",
-                "description": "Report xml id or report name",
-                "required": True,
-                "type": "string",
-            },
-            {
-                "name": "docids",
-                "in": "path",
-                "description": "One identifier or several identifiers separated by commas",
-                "required": True,
-                "type": "string",
-            },
-        ]
+        # report_parameters = [
+        #     {
+        #         "name": "report_external_id",
+        #         "in": "path",
+        #         "description": "Report xml id or report name",
+        #         "required": True,
+        #         "type": "string",
+        #     },
+        #     {
+        #         "name": "docids",
+        #         "in": "path",
+        #         "description": "One identifier or several identifiers separated by commas",
+        #         "required": True,
+        #         "type": "string",
+        #     },
+        # ]
         spec = collections.OrderedDict(
             [
                 ("swagger", "2.0"),
@@ -140,48 +140,51 @@ class Namespace(models.Model):
                 ("produces", ["application/json"]),
                 (
                     "paths",
-                    {
-                        "/report/pdf/{report_external_id}/{docids}": {
-                            "get": {
-                                "summary": "Get PDF report file for %s namespace"
-                                % self.name,
-                                "description": "Returns PDF report file for %s namespace"
-                                % self.name,
-                                "operationId": "getPdfReportFileFor%sNamespace"
-                                % self.name.capitalize(),
-                                "produces": ["application/pdf"],
-                                "responses": {
-                                    "200": {
-                                        "description": "A PDF report file for %s namespace."
-                                        % self.name,
-                                        "schema": {"type": "file"},
-                                    }
-                                },
-                                "parameters": report_parameters,
-                                "tags": ["report"],
-                            }
-                        },
-                        "/report/html/{report_external_id}/{docids}": {
-                            "get": {
-                                "summary": "Get HTML report file for %s namespace"
-                                % self.name,
-                                "description": "Returns HTML report file for %s namespace"
-                                % self.name,
-                                "operationId": "getHtmlReportFileFor%sNamespace"
-                                % self.name.capitalize(),
-                                "produces": ["application/pdf"],
-                                "responses": {
-                                    "200": {
-                                        "description": "A HTML report file for %s namespace."
-                                        % self.name,
-                                        "schema": {"type": "file"},
-                                    }
-                                },
-                                "parameters": report_parameters,
-                                "tags": ["report"],
-                            }
-                        },
-                    },
+                    {}
+                    # region::REPORT::
+                    # {
+                    #     "/report/pdf/{report_external_id}/{docids}": {
+                    #         "get": {
+                    #             "summary": "Get PDF report file for %s namespace"
+                    #             % self.name,
+                    #             "description": "Returns PDF report file for %s namespace"
+                    #             % self.name,
+                    #             "operationId": "getPdfReportFileFor%sNamespace"
+                    #             % self.name.capitalize(),
+                    #             "produces": ["application/pdf"],
+                    #             "responses": {
+                    #                 "200": {
+                    #                     "description": "A PDF report file for %s namespace."
+                    #                     % self.name,
+                    #                     "schema": {"type": "file"},
+                    #                 }
+                    #             },
+                    #             "parameters": report_parameters,
+                    #             "tags": ["report"],
+                    #         }
+                    #     },
+                    #     "/report/html/{report_external_id}/{docids}": {
+                    #         "get": {
+                    #             "summary": "Get HTML report file for %s namespace"
+                    #             % self.name,
+                    #             "description": "Returns HTML report file for %s namespace"
+                    #             % self.name,
+                    #             "operationId": "getHtmlReportFileFor%sNamespace"
+                    #             % self.name.capitalize(),
+                    #             "produces": ["application/pdf"],
+                    #             "responses": {
+                    #                 "200": {
+                    #                     "description": "A HTML report file for %s namespace."
+                    #                     % self.name,
+                    #                     "schema": {"type": "file"},
+                    #                 }
+                    #             },
+                    #             "parameters": report_parameters,
+                    #             "tags": ["report"],
+                    #         }
+                    #     },
+                    # },
+                    # endregion
                 ),
                 (
                     "definitions",
