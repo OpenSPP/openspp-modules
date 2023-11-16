@@ -1,0 +1,19 @@
+<odoo>
+    <!-- Top menu item -->
+
+    <menuitem
+        id="service_points_main_menu_root"
+        name="Service Point"
+        web_icon="spp_idqueue,static/src/img/icons/contacts.png"
+        active="True"
+        sequence="1"
+    />
+
+    <menuitem
+        id="service_points_configuration_menu_root"
+        name="Configuration"
+        parent="service_points_main_menu_root"
+        sequence="1000"
+    />
+
+</odoo>

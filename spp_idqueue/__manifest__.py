@@ -22,6 +22,7 @@
         "data/queue_data.xml",
         "security/g2p_security.xml",
         "security/ir.model.access.csv",
+        "views/main_view.xml",
         "views/id_queue_view.xml",
         "views/id_batch_view.xml",
         "wizard/request_id_wizard.xml",

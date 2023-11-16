@@ -16,6 +16,7 @@
     "data": [
         "security/ir.model.access.csv",
         "security/security_group.xml",
+        "views/main_view.xml",
         "views/group_views.xml",
         "views/service_points_view.xml",
     ],

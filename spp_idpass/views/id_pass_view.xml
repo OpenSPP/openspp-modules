@@ -53,8 +53,8 @@
         id="menu_spp_idpass"
         name="ID PASS"
         action="action_spp_idpass"
-        parent="g2p_registry_base.g2p_configuration_menu_root"
-        sequence="32"
+        parent="spp_idqueue.id_queue_configuration_menu_root"
+        sequence="10"
         groups="g2p_registry_base.group_g2p_admin"
     />
 </odoo>
