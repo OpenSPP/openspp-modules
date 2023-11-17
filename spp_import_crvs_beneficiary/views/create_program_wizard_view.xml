@@ -10,7 +10,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='admin_area_ids']" position="after">
-                <field name="data_source_id" colspan="4" />
+                <field name="data_source_id" colspan="4" options="{'no_open':true}" />
             </xpath>
         </field>
     </record>

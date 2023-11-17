@@ -21,7 +21,7 @@
             <form string="Previous Search Criterias">
                 <sheet>
                     <group name="data_source">
-                        <field name="data_source_id" />
+                        <field name="data_source_id" options="{'no_create': True, 'no_open': True}" />
                     </group>
                     <group name="name">
                         <field name="name" attrs="{'readonly': [('done_imported', '=', True)]}" />
