@@ -72,7 +72,7 @@
                         />
                         <button
                             name="enable_fetch"
-                            string="Enable fetch button"
+                            string="Enable Fetching"
                             type="object"
                             class="oe_highlight btn-primary"
                             attrs="{'invisible': [('done_imported', '=', False)]}"

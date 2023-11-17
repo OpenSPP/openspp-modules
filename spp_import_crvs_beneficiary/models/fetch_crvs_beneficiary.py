@@ -57,7 +57,7 @@ class CRVSLocation(models.Model):
     _name = "spp.crvs.location"
     _description = "CRVS Location"
 
-    name = fields.Char(compute="_compute_name")
+    name = fields.Char(compute="_compute_name", store=True)
     identifier_name = fields.Char(required=True)
     identifier = fields.Char(required=True)
     location_type = fields.Char(required=True)
@@ -197,6 +197,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
     )
 
     domain = fields.Text(
+        string="Filter",
         default=_get_default_domain,
         required=True,
     )
