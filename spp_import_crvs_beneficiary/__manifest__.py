@@ -19,6 +19,7 @@
     "data": [
         "security/fetch_crvs_security.xml",
         "security/ir.model.access.csv",
+        "data/crvs_data_source.xml",
         "views/create_program_wizard_view.xml",
         "views/eligibility_manager_view.xml",
         "views/fetch_crvs_beneficiary_views.xml",

@@ -24,10 +24,3 @@ class SPPCRVSImportedIndividuals(models.Model):
 
     is_created = fields.Boolean("Created?")
     is_updated = fields.Boolean("Updated?")
-
-    data_source_id = fields.Many2one(
-        "spp.data.source",
-        string="Data Source",
-        related="individual_id.data_source_id",
-        readonly=1,
-    )

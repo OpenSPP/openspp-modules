@@ -11,4 +11,5 @@ OPERATION_MAPPING = {
 
 FIELD_MAPPING = {
     "birthdate": "birthdate",
+    "location": "birthplace",
 }

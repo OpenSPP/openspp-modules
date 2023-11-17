@@ -11,7 +11,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="inherit_id" ref="g2p_programs.view_eligibility_manager_default_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='admin_area_ids']" position="after">
-                <field name="imported_from_crvs" colspan="4" />
+                <field name="data_source_id" colspan="4" />
             </xpath>
         </field>
     </record>

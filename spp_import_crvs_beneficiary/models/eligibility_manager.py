@@ -10,8 +10,8 @@ _logger = logging.getLogger(__name__)
 class SPPDefaultEligibilityManager(models.Model):
     _inherit = "g2p.program_membership.manager.default"
 
-    imported_from_crvs = fields.Boolean("Imported from CRVS")
+    data_source_id = fields.Many2one("spp.data.source")
 
-    @api.onchange("imported_from_crvs")
-    def on_imported_from_crvs_change(self):
-        field_onchange(self, "imported_from_crvs", "ind_is_imported_from_crvs")
+    @api.onchange("data_source_id")
+    def onchange_data_source_id(self):
+        field_onchange(self, "data_source_id.name", "data_source_id.name")
