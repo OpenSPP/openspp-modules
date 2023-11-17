@@ -1,3 +1,4 @@
+import copy
 import json
 import logging
 import uuid
@@ -79,60 +80,80 @@ class CRVSLocation(models.Model):
                 rec.name = rec.location_name
 
     @api.model
+    def get_or_set_location_hashmap(self, location_additional_type, hashmap):
+        crvs_location_type = self.env["spp.crvs.location.type"].sudo()
+        if location_additional_type not in hashmap:
+            additional_type_id = crvs_location_type.search(
+                [("location_type", "=", location_additional_type)], limit=1
+            )
+            if not additional_type_id:
+                additional_type_id = crvs_location_type.create(
+                    {"location_type": location_additional_type}
+                )
+            hashmap[location_additional_type] = additional_type_id
+
+        return hashmap[location_additional_type]
+
+    @api.model
+    def get_crvs_location_vals(
+        self, identifier, location, additional_type_id, *args, **kwargs
+    ):
+        vals = {
+            "identifier_name": identifier.get("name"),
+            "identifier": identifier.get("identifier"),
+            "location_type": location.get("@type", ""),
+            "location_additional_type_id": additional_type_id.id,
+            "location_name": location.get("name", ""),
+        }
+        crvs_location = self.env["spp.crvs.location"].sudo()
+        # Get Parent
+        parent = location.get("containedInPlace", "")
+        if parent:
+            parent_id = crvs_location.search([("identifier", "=", parent)], limit=1)
+            if parent_id:
+                vals.update(
+                    {
+                        "parent_id": parent_id.id,
+                    }
+                )
+
+        return copy.deepcopy(vals)
+
+    @api.model
+    def update_or_create_location(self, identifier, vals, *args, **kwargs):
+        crvs_location_id = (
+            self.env["spp.crvs.location"]
+            .sudo()
+            .search([("identifier", "=", identifier.get("identifier"))], limit=1)
+        )
+
+        if not crvs_location_id:
+            self.env["spp.crvs.location"].sudo().create(vals)
+        else:
+            crvs_location_id.write(vals)
+
+    @api.model
     def process_location(self, result):
         location_types_hashmap = {}
         locations = result.get("locations", [])
-        crvs_location_type = self.env["spp.crvs.location.type"].sudo()
-        crvs_location = self.env["spp.crvs.location"].sudo()
         for loc in locations:
-            loc_name = loc.get("name", "")
-            loc_type = loc.get("@type", "")
             loc_additional_type = loc.get("additionalType", "")
-            parent = loc.get("containedInPlace", "")
             identifiers = loc.get("identifier", [])
 
-            # Get Parent
-            parent_id = None
-            if parent:
-                parent_id = crvs_location.search([("identifier", "=", parent)], limit=1)
-
-            if loc_additional_type in location_types_hashmap:
-                additional_type_id = location_types_hashmap[loc_additional_type]
-            else:
-                additional_type_id = crvs_location_type.search(
-                    [("location_type", "=", loc_additional_type)], limit=1
-                )
-                if not additional_type_id:
-                    additional_type_id = crvs_location_type.create(
-                        {"location_type": loc_additional_type}
-                    )
-
-                location_types_hashmap[loc_additional_type] = additional_type_id
+            # Get or Set location type hashmap
+            additional_type_id = self.get_or_set_location_hashmap(
+                loc_additional_type, location_types_hashmap
+            )
 
             for identifier in identifiers:
                 if identifier.get("identifier"):
-                    crvs_location_id = crvs_location.search(
-                        [("identifier", "=", identifier.get("identifier"))], limit=1
+                    # Define location values
+                    crvs_location_vals = self.get_crvs_location_vals(
+                        identifier, loc, additional_type_id
                     )
 
-                    # Update or Create
-                    crv_location_vals = {
-                        "identifier_name": identifier.get("name"),
-                        "identifier": identifier.get("identifier"),
-                        "location_type": loc_type,
-                        "location_additional_type_id": additional_type_id.id,
-                        "location_name": loc_name,
-                    }
-                    if parent_id:
-                        crv_location_vals.update(
-                            {
-                                "parent_id": parent_id.id,
-                            }
-                        )
-                    if not crvs_location_id:
-                        crvs_location.create(crv_location_vals)
-                    else:
-                        crvs_location_id.write(crv_location_vals)
+                    # Update or Create Location
+                    self.update_or_create_location(identifier, crvs_location_vals)
 
     @api.model
     def create_locations(self):
@@ -163,8 +184,10 @@ class CRVSLocation(models.Model):
         self.ensure_one()
 
         if self.child_ids:
+            # return self if already a parent
             return self
         else:
+            # return parent if self doesn't have a child
             return self.parent_id
 
 
@@ -453,6 +476,8 @@ class SPPFetchCRVSBeneficiary(models.Model):
         middle_name = record.get("middleName", "")
         sex = record.get("sex", "")
         birth_date = record.get("birthDate", "")
+
+        # TODO: birthplace is not supported yet
         birth_place = record.get("birthPlace", {}).get("address", "")
         try:
             birth_date = parser.parse(birth_date)
@@ -497,6 +522,83 @@ class SPPFetchCRVSBeneficiary(models.Model):
                     "value": clean_identifier["value"],
                 }
                 self.env["g2p.reg.id"].create(reg_data)
+        return
+
+    def create_and_process_group(self, partner_id, relation_partner_id):
+        group = None
+
+        # Check if parent have group membership then get and update group
+        if relation_partner_id.individual_membership_ids:
+            membership = self.env["g2p.group.membership"].search(
+                [
+                    (
+                        "id",
+                        "in",
+                        relation_partner_id.individual_membership_ids.ids,
+                    ),
+                    ("is_created_from_crvs", "=", True),
+                ],
+                limit=1,
+            )
+            if membership:
+                group = membership.group
+                group.write(
+                    {
+                        "data_source_id": self.data_source_id.id,
+                    }
+                )
+
+        # Create group membership
+        if not group:
+            group = self.env["res.partner"].create(
+                {
+                    "name": str(relation_partner_id.family_name).title(),
+                    "is_registrant": True,
+                    "is_group": True,
+                    "grp_is_created_from_crvs": True,
+                    "data_source_id": self.data_source_id.id,
+                    "kind": self.env.ref("g2p_registry_group.group_kind_family").id,
+                }
+            )
+
+            # if parent not in a group
+            if not self.env["g2p.group.membership"].search(
+                [
+                    ("group", "=", group.id),
+                    ("individual", "=", relation_partner_id.id),
+                ]
+            ):
+                # Add parent to group
+                self.env["g2p.group.membership"].create(
+                    {
+                        "group": group.id,
+                        "individual": relation_partner_id.id,
+                        "kind": [
+                            (
+                                4,
+                                self.env.ref(
+                                    "g2p_registry_membership.group_membership_kind_head"
+                                ).id,
+                            )
+                        ],
+                    }
+                )
+
+            # If child not in group
+            if not self.env["g2p.group.membership"].search(
+                [
+                    ("group", "=", group.id),
+                    ("individual", "=", partner_id.id),
+                ]
+            ):
+                # Add child to group
+                self.env["g2p.group.membership"].create(
+                    {
+                        "group": group.id,
+                        "individual": partner_id.id,
+                    }
+                )
+
         return
 
     def process_records(self, record):
@@ -618,91 +720,20 @@ class SPPFetchCRVSBeneficiary(models.Model):
                     if identifiers:
                         partner_id = self.process_records(record)
 
+                        # Process Relation
+                        relation_partner_id = None
                         relations = record.get("relations", [])
                         for relation in relations:
                             relation_identifiers = relation.get("identifier", [])
                             is_mother = "Mother" in relation.get("@type", "")
                             if relation_identifiers and is_mother:
                                 relation_partner_id = self.process_records(relation)
+                                break
 
-                                # Check if parent have group membership
-                                group = None
-                                if relation_partner_id.individual_membership_ids:
-                                    membership = self.env[
-                                        "g2p.group.membership"
-                                    ].search(
-                                        [
-                                            (
-                                                "id",
-                                                "in",
-                                                relation_partner_id.individual_membership_ids.ids,
-                                            ),
-                                            ("is_created_from_crvs", "=", True),
-                                        ],
-                                        limit=1,
-                                    )
-                                    if membership:
-                                        group = membership.group
-                                        group.write(
-                                            {
-                                                "data_source_id": self.data_source_id.id,
-                                            }
-                                        )
-
-                                # Create group membership
-                                if not group:
-                                    group = self.env["res.partner"].create(
-                                        {
-                                            "name": str(
-                                                relation_partner_id.family_name
-                                            ).title(),
-                                            "is_registrant": True,
-                                            "is_group": True,
-                                            "grp_is_created_from_crvs": True,
-                                            "data_source_id": self.data_source_id.id,
-                                            "kind": self.env.ref(
-                                                "g2p_registry_group.group_kind_family"
-                                            ).id,
-                                        }
-                                    )
-
-                                    # if parent not in group
-                                    if not self.env["g2p.group.membership"].search(
-                                        [
-                                            ("group", "=", group.id),
-                                            ("individual", "=", relation_partner_id.id),
-                                        ]
-                                    ):
-                                        # Add parent to group
-                                        self.env["g2p.group.membership"].create(
-                                            {
-                                                "group": group.id,
-                                                "individual": relation_partner_id.id,
-                                                "kind": [
-                                                    (
-                                                        4,
-                                                        self.env.ref(
-                                                            "g2p_registry_membership.group_membership_kind_head"
-                                                        ).id,
-                                                    )
-                                                ],
-                                            }
-                                        )
-
-                                # If child not in group
-                                if not self.env["g2p.group.membership"].search(
-                                    [
-                                        ("group", "=", group.id),
-                                        ("individual", "=", partner_id.id),
-                                    ]
-                                ):
-                                    # Add child to group
-                                    self.env["g2p.group.membership"].create(
-                                        {
-                                            "group": group.id,
-                                            "individual": partner_id.id,
-                                        }
-                                    )
+                        if relation_partner_id:
+                            self.create_and_process_group(
+                                partner_id, relation_partner_id
+                            )
 
             self.done_imported = True
         else:
