@@ -32,6 +32,9 @@ class SPPBaseImport(models.TransientModel):
         if dryrun or not options.get(OPT_USE_QUEUE):
             # normal import
             _logger.info("Doing Normal Import")
+            import_match_ids = options.get("import_match_ids", [])
+            if import_match_ids:
+                self = self.with_context(import_match_ids=import_match_ids)
             return super().execute_import(fields, columns, options, dryrun=dryrun)
         _logger.info("Started Asynchronous Import: %s" % self.res_model)
         # asynchronous import

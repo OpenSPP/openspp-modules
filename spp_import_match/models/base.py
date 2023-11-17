@@ -12,7 +12,9 @@ class Base(models.AbstractModel):
     @api.model
     def load(self, fields, data):
         usable, field_to_match = self.env["spp.import.match"]._usable_rules(
-            self._name, fields
+            self._name,
+            fields,
+            option_config_ids=self.env.context.get("import_match_ids", []),
         )
         if usable:
             newdata = list()
