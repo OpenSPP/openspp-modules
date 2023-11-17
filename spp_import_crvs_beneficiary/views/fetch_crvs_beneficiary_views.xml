@@ -20,14 +20,30 @@
         <field name="arch" type="xml">
             <form string="Previous Search Criterias">
                 <sheet>
+                    <field name="done_imported" invisible="1" />
+                    <field name="location_id_domain" invisible="1" />
                     <group name="data_source">
                         <field name="data_source_id" options="{'no_create': True, 'no_open': True}" />
                     </group>
                     <group name="name">
                         <field name="name" attrs="{'readonly': [('done_imported', '=', True)]}" />
-                        <field name="done_imported" invisible="1" />
                     </group>
-                    <group name="filter_domain">
+                    <group name="location_type_id">
+                        <field
+                            name="location_type_id"
+                            options="{'no_create': True, 'no_open': True}"
+                            attrs="{'readonly': [('done_imported', '=', True)]}"
+                        />
+                    </group>
+                    <group name="location">
+                        <field
+                            name="location_id"
+                            domain="location_id_domain"
+                            options="{'no_create': True, 'no_open': True}"
+                            attrs="{'readonly': [('done_imported', '=', True)]}"
+                        />
+                    </group>
+                    <group name="filter_domain" widget="selection">
                         <field
                             name="domain"
                             colspan="4"

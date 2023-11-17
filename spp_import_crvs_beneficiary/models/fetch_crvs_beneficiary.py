@@ -7,7 +7,7 @@ from urllib.parse import urlencode
 import requests
 from dateutil import parser
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import safe_eval
 
@@ -29,9 +29,113 @@ class FetchDomainFilter(models.TransientModel):
     _name = "spp.fetch.domain.filter"
     _description = "Fetch Domain Filter"
 
-    def _get_location_selection(self):
-        location_selection = [("", "All locations")]
+    birthdate = fields.Date("Birth Date")
 
+
+class CRVSLocationType(models.Model):
+    _name = "spp.crvs.location.type"
+    _description = "CRVS Location Type"
+
+    name = fields.Char(compute="_compute_name")
+    location_type = fields.Char(required=True)
+
+    _sql_constraints = [
+        (
+            "location_type_uniq",
+            "unique(location_type)",
+            "The location_type must be unique !",
+        ),
+    ]
+
+    @api.depends("location_type")
+    def _compute_name(self):
+        for rec in self:
+            rec.name = rec.location_type.replace("_", " ").title()
+
+
+class CRVSLocation(models.Model):
+    _name = "spp.crvs.location"
+    _description = "CRVS Location"
+
+    name = fields.Char(compute="_compute_name")
+    identifier_name = fields.Char(required=True)
+    identifier = fields.Char(required=True)
+    location_type = fields.Char(required=True)
+    location_additional_type_id = fields.Many2one("spp.crvs.location.type")
+    location_name = fields.Char(required=True)
+    parent_id = fields.Many2one("spp.crvs.location")
+    child_ids = fields.One2many("spp.crvs.location", "parent_id")
+
+    _sql_constraints = [
+        ("identifier_uniq", "unique(identifier)", "The identifier must be unique !"),
+    ]
+
+    @api.depends("location_name", "parent_id")
+    def _compute_name(self):
+        for rec in self:
+            if rec.parent_id:
+                rec.name = f"{rec.parent_id.name} - {rec.location_name}"
+            else:
+                rec.name = rec.location_name
+
+    @api.model
+    def process_location(self, result):
+        location_types_hashmap = {}
+        locations = result.get("locations", [])
+        crvs_location_type = self.env["spp.crvs.location.type"].sudo()
+        crvs_location = self.env["spp.crvs.location"].sudo()
+        for loc in locations:
+            loc_name = loc.get("name", "")
+            loc_type = loc.get("@type", "")
+            loc_additional_type = loc.get("additionalType", "")
+            parent = loc.get("containedInPlace", "")
+            identifiers = loc.get("identifier", [])
+
+            # Get Parent
+            parent_id = None
+            if parent:
+                parent_id = crvs_location.search([("identifier", "=", parent)], limit=1)
+
+            if loc_additional_type in location_types_hashmap:
+                additional_type_id = location_types_hashmap[loc_additional_type]
+            else:
+                additional_type_id = crvs_location_type.search(
+                    [("location_type", "=", loc_additional_type)], limit=1
+                )
+                if not additional_type_id:
+                    additional_type_id = crvs_location_type.create(
+                        {"location_type": loc_additional_type}
+                    )
+
+                location_types_hashmap[loc_additional_type] = additional_type_id
+
+            for identifier in identifiers:
+                if identifier.get("identifier"):
+                    crvs_location_id = crvs_location.search(
+                        [("identifier", "=", identifier.get("identifier"))], limit=1
+                    )
+
+                    # Update or Create
+                    crv_location_vals = {
+                        "identifier_name": identifier.get("name"),
+                        "identifier": identifier.get("identifier"),
+                        "location_type": loc_type,
+                        "location_additional_type_id": additional_type_id.id,
+                        "location_name": loc_name,
+                    }
+                    if parent_id:
+                        crv_location_vals.update(
+                            {
+                                "parent_id": parent_id.id,
+                            }
+                        )
+                    if not crvs_location_id:
+                        crvs_location.create(crv_location_vals)
+                    else:
+                        crvs_location_id.write(crv_location_vals)
+
+    @api.model
+    def create_locations(self):
         data_source_id = self.env["spp.data.source"].search(
             [("name", "=", DATA_SOURCE_NAME)], limit=1
         )
@@ -51,25 +155,17 @@ class FetchDomainFilter(models.TransientModel):
             if location_path:
                 url = f"{data_source_id.url}{location_path}"
                 response = requests.get(url)
-
                 if response.ok:
                     result = response.json()
-                    locations = result.get("locations", [])
-                    for loc in locations:
-                        name = loc.get("name", "")
-                        if name:
-                            identifiers = loc.get("identifier", [])
+                    self.process_location(result)
 
-                            for identifier in identifiers:
-                                if identifier.get("identifier"):
-                                    location_selection.append(
-                                        (identifier["identifier"], name)
-                                    )
+    def get_parent(self):
+        self.ensure_one()
 
-        return location_selection
-
-    birthdate = fields.Date("Birth Date")
-    location = fields.Selection(_get_location_selection)
+        if self.child_ids:
+            return self
+        else:
+            return self.parent_id
 
 
 class SPPFetchCRVSBeneficiary(models.Model):
@@ -79,8 +175,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
     def _get_default_domain(self):
         return (
             f'["&",["birthdate",">","{DEFAULT_YEAR}-{DEFAULT_MONTH}-{DEFAULT_DAY}"]'
-            f',["birthdate","<","{DEFAULT_YEAR}-{DEFAULT_MONTH}-{DEFAULT_DAY}"],'
-            ' ["location","=",""]]'
+            f',["birthdate","<","{DEFAULT_YEAR}-{DEFAULT_MONTH}-{DEFAULT_DAY}"]]'
         )
 
     data_source_id = fields.Many2one(
@@ -93,6 +188,13 @@ class SPPFetchCRVSBeneficiary(models.Model):
     )
 
     name = fields.Char("Search Criteria Name", required=True)
+
+    location_type_id = fields.Many2one("spp.crvs.location.type")
+    location_id = fields.Many2one("spp.crvs.location")
+    location_id_domain = fields.Char(
+        compute="_compute_location_id_domain",
+        readonly=True,
+    )
 
     domain = fields.Text(
         default=_get_default_domain,
@@ -108,6 +210,14 @@ class SPPFetchCRVSBeneficiary(models.Model):
     )
 
     TIMEOUT = 10
+
+    @api.depends("location_type_id")
+    def _compute_location_id_domain(self):
+        for rec in self:
+            domain = []
+            if rec.location_type_id:
+                domain = [("location_additional_type_id", "=", rec.location_type_id.id)]
+            rec.location_id_domain = json.dumps(domain)
 
     def get_data_source_paths(self):
         self.ensure_one()
@@ -210,22 +320,13 @@ class SPPFetchCRVSBeneficiary(models.Model):
                 operator = constants.OPERATION_MAPPING.get(dom[1])
                 if field_name and operator:
                     value = dom[2]
-                    if dom[0] == "birthdate" and value:
-                        birthdate_expressions.get(operator, {}).update(
-                            {
-                                "attribute_name": field_name,
-                                "operator": operator,
-                                "attribute_value": value,
-                            }
-                        )
-                    if dom[0] == "location" and value:
-                        location_expression.update(
-                            {
-                                "attribute_name": field_name,
-                                "operator": operator,
-                                "attribute_value": value,
-                            }
-                        )
+                    birthdate_expressions.get(operator, {}).update(
+                        {
+                            "attribute_name": field_name,
+                            "operator": operator,
+                            "attribute_value": value,
+                        }
+                    )
 
         errors = []
 
@@ -244,6 +345,17 @@ class SPPFetchCRVSBeneficiary(models.Model):
                         "expression2": birthdate_expressions["lt"],
                     }
                 )
+
+        # Location query
+        if self.location_id:
+            parent_location = self.location_id.get_parent()
+            location_expression.update(
+                {
+                    "attribute_name": "birthplace",
+                    "operator": "eq",
+                    "attribute_value": parent_location.identifier,
+                }
+            )
 
         if errors:
             raise ValidationError("\n".join(errors))

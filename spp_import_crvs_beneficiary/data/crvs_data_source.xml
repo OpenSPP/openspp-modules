@@ -5,7 +5,7 @@
             model="spp.data.source"
             eval="{
                 'name': 'CRVS',
-                'url': 'https://dci.cdpi-living-labs.opencrvs.org',
+                'url': 'https://dci.opencrvs.lab.cdpi.dev',
                 'auth_type':'bearer_authentication',
                 'paths': [
                     {
