@@ -17,7 +17,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
 
         val.update(
             {
-                "data_source_id": self.data_source_id,
+                "data_source_id": self.data_source_id.id,
             }
         )
 
