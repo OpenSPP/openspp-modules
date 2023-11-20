@@ -478,7 +478,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
         birth_date = record.get("birthDate", "")
 
         # TODO: birthplace is not supported yet
-        birth_place = record.get("birthPlace", {}).get("address", "")
+        birth_place_identifier = record.get("birthPlace", {}).get("identifier", "")
         try:
             birth_date = parser.parse(birth_date)
         except Exception as e:
@@ -486,6 +486,18 @@ class SPPFetchCRVSBeneficiary(models.Model):
             _logger.error(e)
 
         name = self.get_full_name_format(family_name, given_name, middle_name)
+
+        location = None
+        location_id = None
+        if birth_place_identifier:
+            location = self.env["spp.crvs.location"].search(
+                [("identifier", "=", birth_place_identifier)], limit=1
+            )
+            location_id = location.id
+
+        birth_place = ""
+        if location:
+            birth_place = location.name
 
         return {
             "name": name,
@@ -497,6 +509,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
             "birth_place": birth_place,
             "is_registrant": True,
             "is_group": False,
+            "location_id": location_id,
         }
 
     def create_or_update_individual(self, partner_id, partner_data):

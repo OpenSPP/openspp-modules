@@ -17,6 +17,8 @@ class OpenSPPIndividual(models.Model):
         "Youngest Child Age (Year)", compute="_compute_youngest_child_age", store=True
     )
 
+    location_id = fields.Many2one("spp.crvs.location")
+
     @api.depends("crvs_import_ids")
     def _compute_ind_is_imported_from_crvs(self):
         for rec in self:
