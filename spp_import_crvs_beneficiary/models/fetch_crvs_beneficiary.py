@@ -612,7 +612,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
                 }
             )
 
-        relation_partner_id._compute_youngest_child_age()
+        relation_partner_id._compute_no_of_child_under_months()
 
         return
 

@@ -1,3 +1,5 @@
+from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models
 
 
@@ -13,11 +15,14 @@ class OpenSPPIndividual(models.Model):
     )
 
     is_mother = fields.Boolean("A Mother", compute="_compute_is_mother", store=True)
-    youngest_child_age = fields.Integer(
-        "Youngest Child Age (Year)", compute="_compute_youngest_child_age", store=True
-    )
 
     location_id = fields.Many2one("spp.crvs.location")
+
+    no_of_child_under_12_months = fields.Integer(
+        "Number of child under 12 months",
+        compute="_compute_no_of_child_under_months",
+        store=True,
+    )
 
     @api.depends("crvs_import_ids")
     def _compute_ind_is_imported_from_crvs(self):
@@ -49,7 +54,7 @@ class OpenSPPIndividual(models.Model):
                 rec.is_mother = False
 
     @api.depends("individual_membership_ids")
-    def _compute_youngest_child_age(self):
+    def _compute_no_of_child_under_months(self):
         for rec in self:
             if rec.is_mother:
                 membership_id = self.env["g2p.group.membership"].search(
@@ -61,21 +66,30 @@ class OpenSPPIndividual(models.Model):
                 )
 
                 if membership_id:
-                    youngest_child_age = None
+                    child_under_12_count = 0
                     group = membership_id.group
                     for member in group.group_membership_ids:
                         if member.individual == rec:
                             continue
 
-                        age = member.individual.age
-                        if age.isdigit():
-                            age = int(age)
-                        else:
+                        if not member.individual.birthdate:
                             continue
 
-                        if youngest_child_age is None:
-                            youngest_child_age = age
-                        elif age < youngest_child_age:
-                            youngest_child_age = age
+                        age = member.individual.compute_age_by_month()
+                        if age is None:
+                            continue
 
-                    rec.youngest_child_age = youngest_child_age
+                        if age < 12:
+                            child_under_12_count += 1
+
+                    if child_under_12_count:
+                        rec.no_of_child_under_12_months = child_under_12_count
+
+    def compute_age_by_month(self):
+        self.ensure_one()
+
+        today = fields.Datetime.now().date()
+        if self.birthdate:
+            delta = relativedelta(today, self.birthdate)
+            return delta.months + (delta.years * 12)
+        return None
