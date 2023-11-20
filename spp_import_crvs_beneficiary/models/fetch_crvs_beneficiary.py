@@ -561,43 +561,45 @@ class SPPFetchCRVSBeneficiary(models.Model):
                 }
             )
 
-            # if parent not in a group
-            if not self.env["g2p.group.membership"].search(
-                [
-                    ("group", "=", group.id),
-                    ("individual", "=", relation_partner_id.id),
-                ]
-            ):
-                # Add parent to group
-                self.env["g2p.group.membership"].create(
-                    {
-                        "group": group.id,
-                        "individual": relation_partner_id.id,
-                        "kind": [
-                            (
-                                4,
-                                self.env.ref(
-                                    "g2p_registry_membership.group_membership_kind_head"
-                                ).id,
-                            )
-                        ],
-                    }
-                )
+        # If child not in group
+        if not self.env["g2p.group.membership"].search(
+            [
+                ("group", "=", group.id),
+                ("individual", "=", partner_id.id),
+            ]
+        ):
+            # Add child to group
+            self.env["g2p.group.membership"].create(
+                {
+                    "group": group.id,
+                    "individual": partner_id.id,
+                }
+            )
 
-            # If child not in group
-            if not self.env["g2p.group.membership"].search(
-                [
-                    ("group", "=", group.id),
-                    ("individual", "=", partner_id.id),
-                ]
-            ):
-                # Add child to group
-                self.env["g2p.group.membership"].create(
-                    {
-                        "group": group.id,
-                        "individual": partner_id.id,
-                    }
-                )
+        # if parent not in a group
+        if not self.env["g2p.group.membership"].search(
+            [
+                ("group", "=", group.id),
+                ("individual", "=", relation_partner_id.id),
+            ]
+        ):
+            # Add parent to group
+            self.env["g2p.group.membership"].create(
+                {
+                    "group": group.id,
+                    "individual": relation_partner_id.id,
+                    "kind": [
+                        (
+                            4,
+                            self.env.ref(
+                                "g2p_registry_membership.group_membership_kind_head"
+                            ).id,
+                        )
+                    ],
+                }
+            )
+
+        relation_partner_id._compute_youngest_child_age()
 
         return
 
