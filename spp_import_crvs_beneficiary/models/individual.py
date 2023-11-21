@@ -20,7 +20,13 @@ class OpenSPPIndividual(models.Model):
 
     no_of_child_under_12_months = fields.Integer(
         "Number of child under 12 months",
-        compute="_compute_no_of_child_under_months",
+        compute="_compute_child_under_no_of_months",
+        store=True,
+    )
+
+    child_under_12_birthplace = fields.Text(
+        "Child under 12 months birthplace",
+        compute="_compute_child_under_no_of_months",
         store=True,
     )
 
@@ -54,7 +60,7 @@ class OpenSPPIndividual(models.Model):
                 rec.is_mother = False
 
     @api.depends("individual_membership_ids")
-    def _compute_no_of_child_under_months(self):
+    def _compute_child_under_no_of_months(self):
         for rec in self:
             if rec.is_mother:
                 membership_id = self.env["g2p.group.membership"].search(
@@ -67,6 +73,7 @@ class OpenSPPIndividual(models.Model):
 
                 if membership_id:
                     child_under_12_count = 0
+                    child_under_12_birthplace = []
                     group = membership_id.group
                     for member in group.group_membership_ids:
                         if member.individual == rec:
@@ -81,9 +88,17 @@ class OpenSPPIndividual(models.Model):
 
                         if age < 12:
                             child_under_12_count += 1
+                            if member.individual.birth_place:
+                                child_under_12_birthplace.append(
+                                    member.individual.birth_place
+                                )
 
                     if child_under_12_count:
                         rec.no_of_child_under_12_months = child_under_12_count
+                    if child_under_12_birthplace:
+                        rec.child_under_12_birthplace = ",".join(
+                            child_under_12_birthplace
+                        )
 
     def compute_age_by_month(self):
         self.ensure_one()

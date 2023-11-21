@@ -3,7 +3,7 @@ from odoo.tools import safe_eval
 from .insert_operator import insert_operator
 
 
-def field_onchange(obj, on_change_field_name, field_name):
+def field_onchange(obj, on_change_field_name, field_name, operator="="):
     eligibility_domain = obj.eligibility_domain
     domain = []
     if eligibility_domain not in [None, "[]"]:
@@ -25,7 +25,7 @@ def field_onchange(obj, on_change_field_name, field_name):
             value = None
 
     if value:
-        domain.append((field_name, "=", value))
+        domain.append((field_name, operator, value))
 
     eligibility_domain = str(insert_operator(domain))
     obj.eligibility_domain = eligibility_domain

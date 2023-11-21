@@ -16,17 +16,6 @@ from ..models import constants
 
 _logger = logging.getLogger(__name__)
 
-DATA_SOURCE_NAME = "CRVS"
-DATA_SOURCE_SEARCH_PATH_NAME = "Registry Sync Search"
-DATA_SOURCE_AUTH_PATH_NAME = "Authentication"
-DATA_SOURCE_LOCATION_PATH_NAME = "Location"
-
-DEFAULT_YEAR = 2023
-DEFAULT_MONTH = 11
-DEFAULT_DAY = 15
-
-REQUEST_TIMEOUT = 10
-
 
 class FetchDomainFilter(models.TransientModel):
     _name = "spp.fetch.domain.filter"
@@ -209,14 +198,14 @@ class CRVSLocation(models.Model):
         The function creates a URL by concatenating the URL of a data source with a location path.
         """
         data_source_id = self.env["spp.data.source"].search(
-            [("name", "=", DATA_SOURCE_NAME)], limit=1
+            [("name", "=", constants.DATA_SOURCE_NAME)], limit=1
         )
 
         if data_source_id:
             location_path = ""
             data_source_path_id = self.env["spp.data.source.path"].search(
                 [
-                    ("name", "=", DATA_SOURCE_LOCATION_PATH_NAME),
+                    ("name", "=", constants.DATA_SOURCE_LOCATION_PATH_NAME),
                     ("data_source_id", "=", data_source_id.id),
                 ],
                 limit=1,
@@ -226,7 +215,7 @@ class CRVSLocation(models.Model):
 
             if location_path:
                 url = f"{data_source_id.url}{location_path}"
-                response = requests.get(url, timeout=REQUEST_TIMEOUT)
+                response = requests.get(url, timeout=constants.REQUEST_TIMEOUT)
                 if response.ok:
                     result = response.json()
                     self.process_location(result)
@@ -254,15 +243,15 @@ class SPPFetchCRVSBeneficiary(models.Model):
 
     def _get_default_domain(self):
         return (
-            f'["&",["birthdate",">","{DEFAULT_YEAR}-{DEFAULT_MONTH}-{DEFAULT_DAY}"]'
-            f',["birthdate","<","{DEFAULT_YEAR}-{DEFAULT_MONTH}-{DEFAULT_DAY}"]]'
+            f'["&",["birthdate",">","{constants.DEFAULT_YEAR}-{constants.DEFAULT_MONTH}-{constants.DEFAULT_DAY}"]'
+            f',["birthdate","<","{constants.DEFAULT_YEAR}-{constants.DEFAULT_MONTH}-{constants.DEFAULT_DAY}"]]'
         )
 
     data_source_id = fields.Many2one(
         "spp.data.source",
         required=True,
         default=lambda self: self.env["spp.data.source"].search(
-            [("name", "=", DATA_SOURCE_NAME)], limit=1
+            [("name", "=", constants.DATA_SOURCE_NAME)], limit=1
         ),
         readonly=True,
     )
@@ -311,17 +300,17 @@ class SPPFetchCRVSBeneficiary(models.Model):
         for path_id in self.data_source_id.data_source_path_ids:
             paths[path_id.name] = path_id.path
 
-        if DATA_SOURCE_SEARCH_PATH_NAME not in paths:
+        if constants.DATA_SOURCE_SEARCH_PATH_NAME not in paths:
             raise ValidationError(
                 _("No path in data source named {path} is configured!").format(
-                    path=DATA_SOURCE_SEARCH_PATH_NAME
+                    path=constants.DATA_SOURCE_SEARCH_PATH_NAME
                 )
             )
 
-        if DATA_SOURCE_AUTH_PATH_NAME not in paths:
+        if constants.DATA_SOURCE_AUTH_PATH_NAME not in paths:
             raise ValidationError(
                 _("No path in data source named {path} is configured!").format(
-                    path=DATA_SOURCE_AUTH_PATH_NAME
+                    path=constants.DATA_SOURCE_AUTH_PATH_NAME
                 )
             )
 
@@ -338,7 +327,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
         variables.
         """
         url = self.data_source_id.url
-        search_path = paths.get(DATA_SOURCE_SEARCH_PATH_NAME)
+        search_path = paths.get(constants.DATA_SOURCE_SEARCH_PATH_NAME)
 
         return f"{url}{search_path}"
 
@@ -352,7 +341,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
         :return: a URL string that includes the base URL, authentication path, and URL parameters.
         """
         url = self.data_source_id.url
-        auth_path = paths.get(DATA_SOURCE_AUTH_PATH_NAME)
+        auth_path = paths.get(constants.DATA_SOURCE_AUTH_PATH_NAME)
 
         grant_type = self.env["ir.config_parameter"].sudo().get_param("crvs_grant_type")
         client_id = self.env["ir.config_parameter"].sudo().get_param("crvs_client_id")
@@ -382,7 +371,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
         response = requests.post(
             auth_url,
             headers=headers,
-            timeout=REQUEST_TIMEOUT,
+            timeout=constants.REQUEST_TIMEOUT,
         )
         if response.ok:
             result = response.json()
@@ -633,9 +622,13 @@ class SPPFetchCRVSBeneficiary(models.Model):
         The function `get_individual_data` retrieves individual data from a record and returns it in a
         dictionary format.
 
-        :param record: The `record` parameter is a dictionary that contains the data for an individual's
-        record. It may have the following keys:
-        :return: a dictionary with the following keys and values:
+        :param record: The `record` parameter is a dictionary that contains various data related to an
+        individual. It may have the following keys:
+        :return: a dictionary containing various data related to an individual. The dictionary includes
+        the individual's name, family name, given name, middle name, gender, birth date, whether the
+        individual is a registrant or not, whether the individual is a group or not, and the location
+        ID. If the individual is a mother and has a home location identifier, the dictionary also
+        includes the home location
         """
         family_name = record.get("familyName", "")
         given_name = record.get("givenName", "")
@@ -643,8 +636,10 @@ class SPPFetchCRVSBeneficiary(models.Model):
         sex = record.get("sex", "")
         birth_date = record.get("birthDate", "")
 
-        # TODO: birthplace is not supported yet
+        is_mother = "Mother" in record.get("@type", "")
+        home_location_identifier = record.get("homeLocation", "")
         birth_place_identifier = record.get("birthPlace", {}).get("identifier", "")
+
         try:
             birth_date = parser.parse(birth_date)
         except Exception as e:
@@ -653,30 +648,40 @@ class SPPFetchCRVSBeneficiary(models.Model):
 
         name = self.get_full_name_format(family_name, given_name, middle_name)
 
-        location = None
-        location_id = None
-        if birth_place_identifier:
-            location = self.env["spp.crvs.location"].search(
-                [("identifier", "=", birth_place_identifier)], limit=1
-            )
-            location_id = location.id
-
-        birth_place = ""
-        if location:
-            birth_place = location.name
-
-        return {
+        vals = {
             "name": name,
             "family_name": family_name,
             "given_name": given_name,
             "addl_name": middle_name,
             "gender": sex.title(),
             "birthdate": birth_date,
-            "birth_place": birth_place,
             "is_registrant": True,
             "is_group": False,
-            "location_id": location_id,
         }
+
+        if is_mother and home_location_identifier:
+            home_location_id = (
+                self.env["spp.crvs.location"]
+                .search([("identifier", "=", home_location_identifier)], limit=1)
+                .id
+            )
+            vals.update({"location_id": home_location_id})
+        else:
+            location = None
+            location_id = None
+            if birth_place_identifier:
+                location = self.env["spp.crvs.location"].search(
+                    [("identifier", "=", birth_place_identifier)], limit=1
+                )
+                location_id = location.id
+
+            birth_place = ""
+            if location:
+                birth_place = location.name
+
+            vals.update({"birth_place": birth_place, "location_id": location_id})
+
+        return vals
 
     def create_or_update_individual(self, partner_id, partner_data):
         """
@@ -741,17 +746,11 @@ class SPPFetchCRVSBeneficiary(models.Model):
 
         # Check if parent have group membership then get and update group
         if relation_partner_id.individual_membership_ids:
-            membership = self.env["g2p.group.membership"].search(
-                [
-                    (
-                        "id",
-                        "in",
-                        relation_partner_id.individual_membership_ids.ids,
-                    ),
-                    ("is_created_from_crvs", "=", True),
-                ],
-                limit=1,
-            )
+            membership = None
+            for ind_membership in relation_partner_id.individual_membership_ids:
+                if ind_membership.is_created_from_crvs:
+                    membership = ind_membership
+                    break
             if membership:
                 group = membership.group
                 group.write(
@@ -811,7 +810,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
                 }
             )
 
-        relation_partner_id._compute_no_of_child_under_months()
+        relation_partner_id._compute_child_under_no_of_months()
 
         return
 
@@ -927,7 +926,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
             full_crvs_search_url,
             headers=headers,
             data=data,
-            timeout=REQUEST_TIMEOUT,
+            timeout=constants.REQUEST_TIMEOUT,
         )
 
         # Process response
