@@ -26,9 +26,6 @@ repos:
     hooks:
       # update the NOT INSTALLABLE ADDONS section above
       - id: oca-update-pre-commit-excluded-addons
-        args:
-          - --addons-dir
-          - odoo/custom/src/private
   - repo: https://github.com/myint/autoflake
     rev: v2.2.1
     hooks:
