@@ -17,7 +17,7 @@ OpenSPP Base
     :target: https://github.com/openspp/openspp-base/tree/15.0/spp_base
     :alt: openspp/openspp-base
 
-|badge1| |badge2| |badge3| 
+|badge1| |badge2| |badge3|
 
 OpenSPP Base
 
@@ -56,7 +56,7 @@ Maintainers
 
 Current maintainers:
 
-|maintainer-jeremi| |maintainer-gonzalesedwin1123| 
+|maintainer-jeremi| |maintainer-gonzalesedwin1123|
 
 This module is part of the `openspp/openspp-base <https://github.com/openspp/openspp-base/tree/15.0/spp_base>`_ project on GitHub.
 

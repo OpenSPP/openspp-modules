@@ -17,6 +17,6 @@ class View(models.Model):
             .sudo()
             .get_param("app_system_name", "OpenSPP")
         )
-        return super(View, self)._render_template(
+        return super()._render_template(
             template, values=values, engine=engine
         )

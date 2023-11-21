@@ -11,7 +11,7 @@ class SppAuditLog(models.Model):
 
     @api.model
     def create(self, vals):
-        res = super(SppAuditLog, self).create(vals)
+        res = super().create(vals)
 
         if res.parent_model_id:
             res_ids = list(map(int, res.parent_res_ids_str.split(",")))

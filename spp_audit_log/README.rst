@@ -38,4 +38,4 @@ To show the list of logs:
 To view logs of displayed model:
 
 #. Select and click one record.
-#. Go to ``Action > View logs``. 
+#. Go to ``Action > View logs``.

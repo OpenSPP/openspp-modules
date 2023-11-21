@@ -67,4 +67,4 @@ class Base(models.AbstractModel):
                     row["id"] = ext_id[match.id] if match else row.get("id", "")
                     newdata.append(tuple(row[f] for f in fields))
             data = newdata
-        return super(Base, self).load(fields, data)
+        return super().load(fields, data)

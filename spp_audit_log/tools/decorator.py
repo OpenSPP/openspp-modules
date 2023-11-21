@@ -6,8 +6,7 @@ import sys
 
 from odoo import api
 
-if sys.version_info > (3,):
-    long = int
+long = int
 
 
 def get_new_values(records):
