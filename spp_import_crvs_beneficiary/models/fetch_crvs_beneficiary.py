@@ -25,6 +25,8 @@ DEFAULT_YEAR = 2023
 DEFAULT_MONTH = 11
 DEFAULT_DAY = 15
 
+REQUEST_TIMEOUT = 10
+
 
 class FetchDomainFilter(models.TransientModel):
     _name = "spp.fetch.domain.filter"
@@ -73,6 +75,10 @@ class CRVSLocation(models.Model):
 
     @api.depends("location_name", "parent_id")
     def _compute_name(self):
+        """
+        The function `_compute_name` sets the `name` field of each record based on the `parent_id` and
+        `location_name` fields.
+        """
         for rec in self:
             if rec.parent_id:
                 rec.name = f"{rec.parent_id.name} - {rec.location_name}"
@@ -81,6 +87,16 @@ class CRVSLocation(models.Model):
 
     @api.model
     def get_or_set_location_hashmap(self, location_additional_type, hashmap):
+        """
+        The function `get_or_set_location_hashmap` checks if a given location additional type exists in
+        a hashmap, and if not, creates it and adds it to the hashmap.
+
+        :param location_additional_type: The parameter "location_additional_type" is a string that
+        represents a type of location. It is used as a key in the hashmap to retrieve or set a value
+        :param hashmap: A dictionary that stores location additional types as keys and their
+        corresponding additional type IDs as values
+        :return: the value associated with the key "location_additional_type" in the hashmap.
+        """
         crvs_location_type = self.env["spp.crvs.location.type"].sudo()
         if location_additional_type not in hashmap:
             additional_type_id = crvs_location_type.search(
@@ -98,6 +114,20 @@ class CRVSLocation(models.Model):
     def get_crvs_location_vals(
         self, identifier, location, additional_type_id, *args, **kwargs
     ):
+        """
+        The function `get_crvs_location_vals` retrieves values from various parameters and returns a
+        dictionary with the extracted values.
+
+        :param identifier: The "identifier" parameter is a dictionary that contains information about an
+        identifier. It has two keys: "name" and "identifier". The "name" key holds the name of the
+        identifier, and the "identifier" key holds the identifier value
+        :param location: The "location" parameter is a dictionary that contains information about a
+        location. It may have the following keys:
+        :param additional_type_id: The additional_type_id parameter is an ID that represents the
+        additional type of the location. It is used to identify the specific type or category of the
+        location
+        :return: a dictionary object `vals` that contains the following key-value pairs:
+        """
         vals = {
             "identifier_name": identifier.get("name"),
             "identifier": identifier.get("identifier"),
@@ -121,6 +151,16 @@ class CRVSLocation(models.Model):
 
     @api.model
     def update_or_create_location(self, identifier, vals, *args, **kwargs):
+        """
+        The function updates or creates a location record in the "spp.crvs.location" model based on the
+        provided identifier and values.
+
+        :param identifier: The `identifier` parameter is a dictionary that contains the identifier
+        information for the location. It is used to search for an existing location in the database
+        :param vals: The `vals` parameter is a dictionary that contains the values to be updated or
+        created in the `spp.crvs.location` model. It represents the data that will be written to the
+        record(s) in the database
+        """
         crvs_location_id = (
             self.env["spp.crvs.location"]
             .sudo()
@@ -134,6 +174,14 @@ class CRVSLocation(models.Model):
 
     @api.model
     def process_location(self, result):
+        """
+        The function processes location data by extracting additional types and identifiers, updating or
+        creating locations based on the extracted data.
+
+        :param result: The `result` parameter is a dictionary that contains information about locations.
+        It is expected to have a key "locations" which maps to a list of location objects. Each location
+        object is a dictionary that contains information about a specific location
+        """
         location_types_hashmap = {}
         locations = result.get("locations", [])
         for loc in locations:
@@ -157,6 +205,9 @@ class CRVSLocation(models.Model):
 
     @api.model
     def create_locations(self):
+        """
+        The function creates a URL by concatenating the URL of a data source with a location path.
+        """
         data_source_id = self.env["spp.data.source"].search(
             [("name", "=", DATA_SOURCE_NAME)], limit=1
         )
@@ -175,12 +226,18 @@ class CRVSLocation(models.Model):
 
             if location_path:
                 url = f"{data_source_id.url}{location_path}"
-                response = requests.get(url)
+                response = requests.get(url, timeout=REQUEST_TIMEOUT)
                 if response.ok:
                     result = response.json()
                     self.process_location(result)
 
     def get_parent(self):
+        """
+        The function returns the parent object if the current object has child objects, otherwise it
+        returns the parent_id of the current object.
+        :return: The code is returning either the current object (`self`) if it already has child
+        records, or the parent object (`self.parent_id`) if it does not have any child records.
+        """
         self.ensure_one()
 
         if self.child_ids:
@@ -233,8 +290,6 @@ class SPPFetchCRVSBeneficiary(models.Model):
         readonly=True,
     )
 
-    TIMEOUT = 10
-
     @api.depends("location_type_id")
     def _compute_location_id_domain(self):
         for rec in self:
@@ -244,6 +299,11 @@ class SPPFetchCRVSBeneficiary(models.Model):
             rec.location_id_domain = json.dumps(domain)
 
     def get_data_source_paths(self):
+        """
+        The function `get_data_source_paths` returns a dictionary of data source paths, with names as
+        keys and paths as values, and raises a validation error if certain paths are not configured.
+        :return: a dictionary containing the names and paths of data sources.
+        """
         self.ensure_one()
 
         paths = {}
@@ -268,12 +328,29 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return paths
 
     def get_crvs_search_url(self, paths):
+        """
+        The function returns the search URL for a given data source and search path.
+
+        :param paths: The `paths` parameter is a dictionary that contains various paths related to the
+        data source. It is assumed that the `paths` dictionary has a key named
+        `DATA_SOURCE_SEARCH_PATH_NAME` which represents the search path for the data source
+        :return: a URL string that is constructed by concatenating the `url` and `search_path`
+        variables.
+        """
         url = self.data_source_id.url
         search_path = paths.get(DATA_SOURCE_SEARCH_PATH_NAME)
 
         return f"{url}{search_path}"
 
     def get_crvs_auth_url(self, paths):
+        """
+        The function `get_crvs_auth_url` returns the authentication URL for a data source.
+
+        :param paths: The `paths` parameter is a dictionary that contains various paths related to the
+        data source. In this code snippet, it is used to retrieve the value of the
+        `DATA_SOURCE_AUTH_PATH_NAME` key
+        :return: a URL string that includes the base URL, authentication path, and URL parameters.
+        """
         url = self.data_source_id.url
         auth_path = paths.get(DATA_SOURCE_AUTH_PATH_NAME)
 
@@ -292,18 +369,28 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return f"{url}{auth_path}?{urlencode(url_params)}"
 
     def get_auth_token(self, auth_url):
+        """
+        The function `get_auth_token` sends a POST request to an authentication URL and returns the
+        access token if the response is successful, otherwise it raises a validation error.
+
+        :param auth_url: The `auth_url` parameter is the URL endpoint where the authentication request
+        should be sent. It is typically provided by the API service you are trying to authenticate with
+        :return: an authentication token in the format "{token_type} {access_token}".
+        """
         headers = self.get_headers_for_request()
 
         response = requests.post(
             auth_url,
             headers=headers,
-            timeout=self.TIMEOUT,
+            timeout=REQUEST_TIMEOUT,
         )
         if response.ok:
             result = response.json()
             return f'{result.get("token_type")} {result.get("access_token")}'
         else:
-            raise ValidationError(_(response.reason))
+            raise ValidationError(
+                _("{reason}: Unable to connect to API.").format(reason=response.reason)
+            )
 
     def get_headers_for_request(self):
         return {
@@ -311,6 +398,17 @@ class SPPFetchCRVSBeneficiary(models.Model):
         }
 
     def get_header_for_body(self, crvs_version, today_isoformat, message_id):
+        """
+        The function returns a dictionary containing header information for a message.
+
+        :param crvs_version: The version of the CRVS (Civil Registration and Vital Statistics) system
+        :param today_isoformat: The `today_isoformat` parameter is a string representing the current
+        date and time in ISO 8601 format. It is used to set the value of the "message_ts" field in the
+        header
+        :param message_id: The `message_id` parameter is a unique identifier for the message. It can be
+        any string value that uniquely identifies the message
+        :return: a dictionary with the following key-value pairs:
+        """
         sender_id = "sender1"
         receiver_id = "receiver1"
         total_count = 10
@@ -327,6 +425,11 @@ class SPPFetchCRVSBeneficiary(models.Model):
         }
 
     def get_query(self):
+        """
+        The function `get_query` takes a domain as input and generates a query based on the provided
+        filters for birthdate and location.
+        :return: a list of query expressions.
+        """
         query = []
         domain = safe_eval.safe_eval(self.domain)
 
@@ -397,6 +500,16 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return query
 
     def get_search_request(self, reference_id, today_isoformat):
+        """
+        The function `get_search_request` returns a dictionary containing search criteria for a birth
+        registry based on the given reference ID, timestamp, and query.
+
+        :param reference_id: The reference_id is a unique identifier for the search request. It can be
+        any value that helps identify the request, such as a UUID or a database record ID
+        :param today_isoformat: The `today_isoformat` parameter is a string representing the current
+        date in ISO 8601 format. It is used to set the timestamp in the `search_requests` dictionary
+        :return: a dictionary object called "search_requests".
+        """
         search_requests = {
             "reference_id": reference_id,
             "timestamp": today_isoformat,
@@ -410,6 +523,20 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return search_requests
 
     def get_message(self, today_isoformat, transaction_id, reference_id):
+        """
+        The function `get_message` returns a dictionary containing the transaction ID and a list of
+        search requests.
+
+        :param today_isoformat: The parameter "today_isoformat" is a string representing the current
+        date in ISO format. For example, "2022-01-01"
+        :param transaction_id: The transaction ID is a unique identifier for a specific transaction. It
+        is used to track and identify a particular transaction in a system or database
+        :param reference_id: The reference_id is a unique identifier for a specific transaction or
+        request. It is used to track and identify the transaction or request throughout the system
+        :return: a dictionary with two keys: "transaction_id" and "search_request". The value of
+        "transaction_id" is the transaction_id parameter passed to the function, and the value of
+        "search_request" is a list containing the search_request variable.
+        """
         # Define Search Requests
         search_request = self.get_search_request(reference_id, today_isoformat)
 
@@ -419,6 +546,19 @@ class SPPFetchCRVSBeneficiary(models.Model):
         }
 
     def get_data(self, signature, header, message):
+        """
+        The function `get_data` takes in three parameters (signature, header, message) and returns a
+        dictionary with the header and message as key-value pairs.
+
+        :param signature: The signature parameter is a string that represents the signature of the data.
+        It could be a cryptographic signature or any other type of signature used to verify the
+        authenticity or integrity of the data
+        :param header: The "header" parameter is a string that represents the header of the data. It
+        could be a title or a brief description of the data
+        :param message: The `message` parameter is a string that represents the content of the message.
+        It could be any text or information that needs to be included in the data
+        :return: A dictionary containing the header and message values.
+        """
         return {
             # "signature": signature,
             "header": header,
@@ -426,6 +566,14 @@ class SPPFetchCRVSBeneficiary(models.Model):
         }
 
     def get_partner_and_clean_identifier(self, identifiers):
+        """
+        The function takes a list of identifiers, creates new identifier types if necessary, and returns
+        the partner ID and a list of clean identifiers.
+
+        :param identifiers: The `identifiers` parameter is a list of dictionaries. Each dictionary
+        represents an identifier and contains two key-value pairs:
+        :return: a tuple containing the partner_id and clean_identifiers.
+        """
         clean_identifiers = []
         partner_id = None
         # get existing record if there's any
@@ -459,6 +607,16 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return partner_id, clean_identifiers
 
     def get_full_name_format(self, family_name, given_name, middle_name):
+        """
+        The function takes in a family name, given name, and middle name, and returns the full name in
+        uppercase with a comma separating the family name.
+
+        :param family_name: The family name parameter represents the last name or surname of a person
+        :param given_name: The parameter "given_name" represents the given or first name of a person
+        :param middle_name: The `middle_name` parameter is a string that represents the middle name of a
+        person
+        :return: the full name in uppercase format.
+        """
         name = ""
         if family_name:
             name += family_name + ", "
@@ -471,6 +629,14 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return name
 
     def get_individual_data(self, record):
+        """
+        The function `get_individual_data` retrieves individual data from a record and returns it in a
+        dictionary format.
+
+        :param record: The `record` parameter is a dictionary that contains the data for an individual's
+        record. It may have the following keys:
+        :return: a dictionary with the following keys and values:
+        """
         family_name = record.get("familyName", "")
         given_name = record.get("givenName", "")
         middle_name = record.get("middleName", "")
@@ -513,6 +679,19 @@ class SPPFetchCRVSBeneficiary(models.Model):
         }
 
     def create_or_update_individual(self, partner_id, partner_data):
+        """
+        The function creates or updates a partner record in the res.partner model based on the provided
+        partner_id and partner_data.
+
+        :param partner_id: The partner_id parameter is the ID of the partner record that you want to
+        create or update. If the partner_id is provided, it means that you want to update an existing
+        partner record. If the partner_id is not provided, it means that you want to create a new
+        partner record
+        :param partner_data: A dictionary containing the data for the partner. This data will be used to
+        create or update the partner record
+        :return: the partner_id, which is either the updated partner record or the newly created partner
+        record.
+        """
         if partner_id:
             partner_id.write(partner_data)
         else:
@@ -521,6 +700,15 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return partner_id
 
     def create_registrant_id(self, clean_identifiers, partner_id):
+        """
+        The function creates a registrant ID for a partner using clean identifiers.
+
+        :param clean_identifiers: The parameter "clean_identifiers" is a list of dictionaries. Each
+        dictionary represents a clean identifier and contains the following keys:
+        :param partner_id: partner_id is an object representing the partner for whom the registrant ID
+        is being created
+        :return: The function does not explicitly return anything.
+        """
         for clean_identifier in clean_identifiers:
             partner_reg_id = self.env["g2p.reg.id"].search(
                 [
@@ -538,6 +726,17 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return
 
     def create_and_process_group(self, partner_id, relation_partner_id):
+        """
+        The function creates and processes a group membership for a partner and their relation partner.
+
+        :param partner_id: The `partner_id` parameter represents the ID of the individual partner
+        (child) that needs to be added to the group
+        :param relation_partner_id: The parameter "relation_partner_id" represents the partner
+        (individual) with whom the group is related. It is used to check if the partner already has
+        group membership and to add the partner to the group if necessary
+        :return: The function does not explicitly return anything. It ends with a return statement
+        without any value, so it effectively returns None.
+        """
         group = None
 
         # Check if parent have group membership then get and update group
@@ -617,6 +816,15 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return
 
     def process_records(self, record):
+        """
+        The function processes records by extracting identifiers, getting partner and clean identifiers,
+        creating or updating individual data, creating a registrant ID, and creating CRVS imported
+        individuals.
+
+        :param record: The "record" parameter is a dictionary that contains information about a
+        particular record. It may have the following keys:
+        :return: the variable "partner_id".
+        """
         identifiers = record.get("identifier", [])
         (
             partner_id,
@@ -657,6 +865,11 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return partner_id
 
     def fetch_crvs_beneficiary(self):
+        """
+        The function fetch_crvs_beneficiary is used to fetch beneficiary data from a CRVS system and
+        process it in the current system.
+        :return: an action object.
+        """
 
         config_parameters = self.env["ir.config_parameter"].sudo()
         today_isoformat = datetime.now(timezone.utc).isoformat()
@@ -714,7 +927,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
             full_crvs_search_url,
             headers=headers,
             data=data,
-            timeout=self.TIMEOUT,
+            timeout=REQUEST_TIMEOUT,
         )
 
         # Process response
@@ -753,9 +966,11 @@ class SPPFetchCRVSBeneficiary(models.Model):
             self.done_imported = True
         else:
             kind = "danger"
-            message = (
-                response.json().get("error", {}).get("message", "") or response.reason
-            )
+            message = response.json().get("error", {}).get("message", "")
+            if not message:
+                message = _("{reason}: Unable to connect to API.").format(
+                    reason=response.reason
+                )
 
         action = {
             "type": "ir.actions.client",
@@ -773,6 +988,10 @@ class SPPFetchCRVSBeneficiary(models.Model):
         return action
 
     def enable_fetch(self):
+        """
+        The function enables the "Fetch" button and displays a success notification.
+        :return: an action dictionary.
+        """
         self.ensure_one()
 
         self.done_imported = False
