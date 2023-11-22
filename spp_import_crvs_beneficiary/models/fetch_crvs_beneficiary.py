@@ -398,8 +398,10 @@ class SPPFetchCRVSBeneficiary(models.Model):
         any string value that uniquely identifies the message
         :return: a dictionary with the following key-value pairs:
         """
-        sender_id = "sender1"
-        receiver_id = "receiver1"
+        sender_id = (
+            self.env["ir.config_parameter"].sudo().get_param("web.base.url") or ""
+        )
+        receiver_id = "crvs"
         total_count = 10
         return {
             "version": crvs_version,
@@ -875,6 +877,8 @@ class SPPFetchCRVSBeneficiary(models.Model):
         crvs_version = config_parameters.get_param("crvs_version")
 
         message_id = str(uuid.uuid4())
+        transaction_id = str(uuid.uuid4())
+        reference_id = str(uuid.uuid4())
 
         # Define Data Source
         paths = self.get_data_source_paths()
@@ -904,8 +908,8 @@ class SPPFetchCRVSBeneficiary(models.Model):
         # Define message
         message = self.get_message(
             today_isoformat,
-            transaction_id=message_id,
-            reference_id="",
+            transaction_id=transaction_id,
+            reference_id=reference_id,
         )
 
         # Define signature / Signature is not being used right now hence commented
