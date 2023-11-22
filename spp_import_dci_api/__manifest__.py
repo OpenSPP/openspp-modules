@@ -1,5 +1,5 @@
 {
-    "name": """OpenSPP Import: CRVS Beneficiaries""",
+    "name": """OpenSPP Import: DCI API""",
     "summary": """RESTful API routes for OpenSPP""",
     "category": "",
     "version": "15.0.0.0.0",

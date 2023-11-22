@@ -92,7 +92,7 @@
 
     <!-- Sub-menu/Action item -->
     <menuitem
-        name="Import From CRVS"
+        name="Import From Registry"
         id="fetch_crvs_submenu"
         parent="g2p_programs.g2p_program_menu_root"
         action="fetch_crvs_beneficiary_action_window"
