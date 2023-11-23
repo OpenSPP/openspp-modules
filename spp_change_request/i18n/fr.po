@@ -447,8 +447,7 @@ msgstr "Changer de requête"
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validated
 msgid "Click the create button to enter a new change request."
 msgstr ""
-"Cliquez sur le bouton Créer pour saisir une nouvelle demande de "
-"modification."
+"Cliquez sur le bouton Créer pour saisir une nouvelle demande de modification."
 
 #. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validation_sequence
@@ -758,7 +757,7 @@ msgstr "Si cochée, certains messages présentent une erreur de livraison."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Incorrect phone number format"
 msgstr "Format du numéro de téléphone incorrect"
 
@@ -857,6 +856,11 @@ msgid "NO"
 msgstr "Non"
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr "Date limite de la prochaine activité"
@@ -910,15 +914,15 @@ msgstr "Nombre de messages non lus"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Only draft change requests can be deleted by its creator."
 msgstr ""
-"Seules les demandes de modification en brouillon peuvent être supprimées par"
-" leur créateur."
+"Seules les demandes de modification en brouillon peuvent être supprimées par "
+"leur créateur."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid ""
 "Only users of groups defined in the validation sequence can be assigned to "
 "this change request."
@@ -951,7 +955,7 @@ msgstr "Numéros de téléphone"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Phone No. is required."
 msgstr "Le numéro de téléphone est requis."
 
@@ -1164,7 +1168,7 @@ msgstr "Le champ Type de demande doit être rempli."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "The change request has been fully validated"
 msgstr "La demande de modification a été entièrement validée."
 
@@ -1186,7 +1190,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid ""
 "The change request is now fully validated. It is now submitted for final "
 "application of changes."
@@ -1229,13 +1233,13 @@ msgstr "La demande de modification a été annulée par %s."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "The change request was rejected by %s."
 msgstr "La demande de modification a été rejetée par %s."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "The change request was reset to draft."
 msgstr "La demande de modification a été réinitialisée en brouillon."
 
@@ -1283,19 +1287,19 @@ msgstr "La demande à valider doit être à l'état soumis."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "The required document %s is missing."
 msgstr "Le document requis %s est manquant."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "The required document category is not configured."
 msgstr "La catégorie de document requise n'est pas configurée."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "The required documents %s are missing."
 msgstr "Les documents requis %s sont manquants."
 
@@ -1308,32 +1312,32 @@ msgstr "Ajoutez une nouvelle demande de modification !"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "There are no data captured from the ID scanner."
 msgstr "Aucune donnée n'a été capturée par le lecteur d'identité."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "There are no data captured from the QR Code scanner."
 msgstr "Aucune donnée n'a été capturée par le scanner de code QR."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "There are no directories defined for this change request."
 msgstr ""
 "Il n'y a pas de répertoires définis pour cette demande de modification."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "There are no group found with the ID number from the QR Code scanned."
 msgstr "Aucun groupe trouvé avec le numéro d'ID issu du QR Code scanné."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "There are no registrant found with the ID number scanned."
 msgstr "Aucun inscrit n'a été trouvé avec le numéro d'identification scanné."
 
@@ -1342,12 +1346,11 @@ msgstr "Aucun inscrit n'a été trouvé avec le numéro d'identification scanné
 #, fuzzy, python-format
 msgid "There are no user assigned to this change request."
 msgstr ""
-"Cliquez sur le bouton Créer pour saisir une nouvelle demande de "
-"modification."
+"Cliquez sur le bouton Créer pour saisir une nouvelle demande de modification."
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "There are no validators defined for this request."
 msgstr "Il n'y a pas de validateurs définis pour cette demande."
 
@@ -1382,7 +1385,7 @@ msgstr "Compteur de messages non lus"
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/dms_file.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Upload Document: %s"
 msgstr "Téléverser le document : %s"
 
@@ -1400,7 +1403,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "User {} does not have access to apply changes.{}"
 msgstr "L'utilisateur {} n'a pas accès pour appliquer des modifications.{}"
 
@@ -1481,13 +1484,13 @@ msgstr "OUI"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "You are not allowed to %s this change request"
 msgstr "Vous n'êtes pas autorisé à %s cette demande de modification"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid ""
 "You are not allowed to validate this request! Stage: {}. Allowed Validator "
 "Group: {}"
@@ -1498,7 +1501,7 @@ msgstr ""
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "You're not allowed to re-assign this CR."
 msgstr ""
 "Vous n'avez pas l'autorisation de réaffecter cette demande de changement "

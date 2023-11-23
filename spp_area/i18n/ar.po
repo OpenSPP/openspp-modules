@@ -145,19 +145,19 @@ msgstr ""
 #. module: spp_area
 #: code:addons/spp_area/models/area.py:0
 #, python-format
-msgid "Can't delete default Area Kind"
+msgid "Can't delete default Area Type"
 msgstr ""
 
 #. module: spp_area
 #: code:addons/spp_area/models/area.py:0
 #, python-format
-msgid "Can't delete used Area Kind"
+msgid "Can't delete used Area Type"
 msgstr ""
 
 #. module: spp_area
 #: code:addons/spp_area/models/area.py:0
 #, python-format
-msgid "Can't edit default Area Kind"
+msgid "Can't edit default Area Type"
 msgstr ""
 
 #. module: spp_area

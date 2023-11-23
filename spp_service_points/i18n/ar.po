@@ -75,6 +75,12 @@ msgid "Click the create button to enter a new service point."
 msgstr ""
 
 #. module: spp_service_points
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format
+msgid "Company does not have contacts."
+msgstr ""
+
+#. module: spp_service_points
 #: model:ir.model,name:spp_service_points.model_res_partner
 msgid "Contact"
 msgstr "اتصال"
@@ -83,6 +89,12 @@ msgstr "اتصال"
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__country_id
 msgid "Country"
 msgstr "البلد"
+
+#. module: spp_service_points
+#: code:addons/spp_service_points/tests/test_service_point.py:0
+#, python-format
+msgid "Create SP User"
+msgstr ""
 
 #. module: spp_service_points
 #: model_terms:ir.actions.act_window,help:spp_service_points.action_service_points
@@ -209,6 +221,12 @@ msgstr "انواع الوكالات"
 #. module: spp_service_points
 #: code:addons/spp_service_points/models/registrant.py:0
 #, python-format
+msgid "Service point does not have company."
+msgstr ""
+
+#. module: spp_service_points
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format
 msgid "Service point is already disabled."
 msgstr "الوكالة غير فعالة."
 
@@ -217,3 +235,9 @@ msgstr "الوكالة غير فعالة."
 #, python-format
 msgid "Service point is already enabled."
 msgstr "الوكالة مفعلة."
+
+#. module: spp_service_points
+#: code:addons/spp_service_points/tests/test_service_point.py:0
+#, python-format
+msgid "Successfully created users for the contacts of the company"
+msgstr ""

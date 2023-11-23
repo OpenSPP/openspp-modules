@@ -772,6 +772,12 @@ msgid "New"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_calendar_event_id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_date_deadline
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_date_deadline
 msgid "Next Activity Deadline"

@@ -8,7 +8,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2023-01-18 14:42+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: French <https://translate.openspp.org/projects/openspp/spp_area/fr/>\n"
+"Language-Team: French <https://translate.openspp.org/projects/openspp/"
+"spp_area/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,20 +143,20 @@ msgstr "Tableau d'importation des zones"
 #. module: spp_area
 #: code:addons/spp_area/models/area.py:0
 #, python-format
-msgid "Can't delete default Area Kind"
-msgstr "Impossible de supprimer le type de zone par défaut"
+msgid "Can't delete default Area Type"
+msgstr ""
 
 #. module: spp_area
 #: code:addons/spp_area/models/area.py:0
 #, python-format
-msgid "Can't delete used Area Kind"
-msgstr "Impossible de supprimer un type de zone utilisé"
+msgid "Can't delete used Area Type"
+msgstr ""
 
 #. module: spp_area
 #: code:addons/spp_area/models/area.py:0
 #, python-format
-msgid "Can't edit default Area Kind"
-msgstr "Impossible de modifier le type de zone par défaut"
+msgid "Can't edit default Area Type"
+msgstr ""
 
 #. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_import_form
@@ -173,9 +174,9 @@ msgstr "Annulé"
 msgid "Child"
 msgstr "Enfant"
 
+#
 #. module: spp_area
 #: model_terms:ir.actions.act_window,help:spp_area.action_spparea_kind
-#
 msgid "Click the create button to enter the information of the Area Kind."
 msgstr ""
 "Cliquez sur le bouton créer pour saisir les informations du Type de Zone."
@@ -188,19 +189,18 @@ msgstr "Cliquez sur le bouton Créer pour saisir les informations de la Zone."
 #. module: spp_area
 #: model_terms:ir.actions.act_window,help:spp_area.action_view_spparea_import
 msgid "Click the create button to upload a new excel file."
-msgstr ""
-"Cliquez sur le bouton Créer pour télécharger un nouveau fichier Excel."
+msgstr "Cliquez sur le bouton Créer pour télécharger un nouveau fichier Excel."
 
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__code
 msgid "Code"
 msgstr "Code"
 
+#
 #. module: spp_area
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_form
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_kind_tree
 #: model_terms:ir.ui.view,arch_db:spp_area.view_spparea_tree
-#
 msgid "Complete Name"
 msgstr "Nom complet"
 
@@ -237,6 +237,7 @@ msgstr "Créé par"
 msgid "Created on"
 msgstr "Créé sur"
 
+#
 #. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_res_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__dms_directory_ids
@@ -244,7 +245,6 @@ msgstr "Créé sur"
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_lang__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__dms_directory_ids
-#
 msgid "DMS Directories"
 msgstr "Répertoires du DMS"
 
@@ -548,3 +548,15 @@ msgstr "Validé"
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__validate_id
 msgid "Validated by"
 msgstr "Validé par"
+
+#, python-format
+#~ msgid "Can't delete default Area Kind"
+#~ msgstr "Impossible de supprimer le type de zone par défaut"
+
+#, python-format
+#~ msgid "Can't delete used Area Kind"
+#~ msgstr "Impossible de supprimer un type de zone utilisé"
+
+#, python-format
+#~ msgid "Can't edit default Area Kind"
+#~ msgstr "Impossible de modifier le type de zone par défaut"
