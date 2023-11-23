@@ -5,6 +5,12 @@ class SPPIndividualCustom(models.Model):
     _inherit = "res.partner"
 
     def get_dci_individual_registry_data(self):
+        """
+        The function `get_dci_individual_registry_data` retrieves individual registry data and returns
+        it in a specific format.
+        :return: a list of dictionaries, where each dictionary represents an individual's registry data.
+        Each dictionary contains the following key-value pairs:
+        """
         reg_records = []
 
         for rec in self:

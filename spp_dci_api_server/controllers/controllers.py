@@ -148,6 +148,20 @@ class SppDciApiServer(Controller):
         return response_wrapper(200, data)
 
     def check_content(self, content, label, required_parameters):
+        """
+        The function checks if a content has all the required parameters and returns an error message if
+        any parameter is missing.
+
+        :param content: The `content` parameter is the data that needs to be checked for certain
+        conditions. It could be a dictionary, a list, or any other data type that you want to validate
+        :param label: The label parameter is a string that represents the name or label of the content
+        being checked. It is used in the error messages to provide context for the missing or invalid
+        parameters
+        :param required_parameters: A list of parameters that are required in the content
+        :return: a dictionary with a "code" and "message" key. The "code" key represents the status code
+        of the response, and the "message" key provides a descriptive message about the error or
+        requirement.
+        """
         if not content:
             return {"code": 400, "message": f"{label} is required."}
 
@@ -162,6 +176,19 @@ class SppDciApiServer(Controller):
         return None
 
     def process_queries(self, query_type, queries, domain):
+        """
+        The function processes queries by checking their content and constructing a domain based on the
+        query type and attributes.
+
+        :param query_type: The `query_type` parameter is a string that specifies the type of query being
+        processed. It is used to determine the logic for processing the queries
+        :param queries: The `queries` parameter is a list of dictionaries. Each dictionary represents a
+        query and contains information about the query, such as the expression to be evaluated
+        :param domain: The "domain" parameter in the given code represents a domain expression that is
+        used to filter data based on certain conditions. It is initially passed as an argument to the
+        function and is updated based on the queries processed within the function
+        :return: the updated domain after processing the queries.
+        """
         for query in queries:
             if query_type == constants.PREDICATE:
                 query_error = self.check_content(query, "query", ["expression1"])
@@ -216,6 +243,20 @@ class SppDciApiServer(Controller):
     def process_search_requests(
         self, search_requests, today_isoformat, search_responses
     ):
+        """
+        The function processes search requests by validating the request data, checking query and
+        registration types, modifying the search domain based on the queries, and returning search
+        responses.
+
+        :param search_requests: A list of search requests. Each search request is a dictionary
+        containing the following keys:
+        :param today_isoformat: The parameter "today_isoformat" is a string representing the current
+        date in ISO format (YYYY-MM-DD)
+        :param search_responses: search_responses is a list that stores the search responses generated
+        by the function. Each search response is a dictionary containing information such as the
+        reference ID, timestamp, status, data, and locale
+        :return: the `search_responses` list after processing the search requests.
+        """
         for req in search_requests:
             req_error = self.check_content(
                 req, "search_request", ["reference_id", "timestamp", "search_criteria"]
