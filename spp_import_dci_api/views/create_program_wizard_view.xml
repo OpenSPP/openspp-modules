@@ -11,11 +11,11 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="arch" type="xml">
             <xpath expr="//field[@name='admin_area_ids']" position="after">
                 <field name="is_crvs_data_source" colspan="4" invisible="1" />
-                <field name="data_source_id" colspan="4" options="{'no_open':true}" />
+                <field name="data_source_id" colspan="4" options="{'no_open':true, 'no_create': True}" />
                 <field
                     name="location_id"
                     colspan="4"
-                    options="{'no_open':true}"
+                    options="{'no_open':true, 'no_create': True}"
                     attrs="{'invisible': [('is_crvs_data_source', '!=', True)]}"
                 />
             </xpath>
