@@ -25,7 +25,7 @@
     </record>
 
     <record id="action_spparea_kind" model="ir.actions.act_window">
-        <field name="name">Area Kind</field>
+        <field name="name">Area Type</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.area.kind</field>
         <field name="view_mode">tree</field>
@@ -33,9 +33,9 @@
         <field name="domain">[]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Create a new Area Kind!
+                Create a new Area Type!
             </p><p>
-                Click the create button to enter the information of the Area Kind.
+                Click the create button to enter the information of the Area Type.
             </p>
         </field>
     </record>
@@ -49,7 +49,7 @@
 
     <menuitem
         id="menu_spparea_kind"
-        name="Area Kind"
+        name="Area Type"
         action="action_spparea_kind"
         parent="spp_area.area_main_top_menu"
         sequence="110"

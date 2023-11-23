@@ -193,7 +193,7 @@ class OpenSPPArea(models.Model):
 
 class OpenSPPAreaKind(models.Model):
     _name = "spp.area.kind"
-    _description = "Area Kind"
+    _description = "Area Type"
     _parent_name = "parent_id"
     _parent_store = True
     _rec_name = "complete_name"
@@ -210,7 +210,7 @@ class OpenSPPAreaKind(models.Model):
     def _compute_complete_name(self):
         """
         This computes the complete name by adding the parent complete area
-        kind name and the area kind name
+        kind name and the Area Type name
         """
         for rec in self:
             if rec.id:
@@ -227,31 +227,31 @@ class OpenSPPAreaKind(models.Model):
     def unlink(self):
         """
         This overrides the unlink function to prevent users to delete or
-        unlink default area kinds (pre-created by xml data)
+        unlink default Area Types (pre-created by xml data)
         """
         for rec in self:
             external_identifier = self.env["ir.model.data"].search(
                 [("res_id", "=", rec.id), ("model", "=", "spp.area.kind")]
             )
             if external_identifier and external_identifier.name:
-                raise ValidationError(_("Can't delete default Area Kind"))
+                raise ValidationError(_("Can't delete default Area Type"))
             else:
                 areas = self.env["spp.area"].search([("kind", "=", rec.id)])
                 if areas:
-                    raise ValidationError(_("Can't delete used Area Kind"))
+                    raise ValidationError(_("Can't delete used Area Type"))
                 else:
                     return super(OpenSPPAreaKind, self).unlink()
 
     def write(self, vals):
         """
         This overrides the write function to prevent users to edit
-        default area kinds (pre-created by xml data)
+        default Area Types (pre-created by xml data)
         """
         for rec in self:
             external_identifier = self.env["ir.model.data"].search(
                 [("res_id", "=", rec.id), ("model", "=", "spp.area.kind")]
             )
             if external_identifier and external_identifier.name:
-                raise ValidationError(_("Can't edit default Area Kind"))
+                raise ValidationError(_("Can't edit default Area Type"))
             else:
                 return super(OpenSPPAreaKind, self).write(vals)

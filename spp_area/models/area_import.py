@@ -266,7 +266,7 @@ class OpenSPPAreaImport(models.Model):
 
     def save_to_area(self):
         """
-        This set up the data then save it to spp_area including the area kind
+        This set up the data then save it to spp_area including the Area Type
         and its translations
         """
         for rec in self:
