@@ -91,6 +91,7 @@ msgid "Country"
 msgstr "البلد"
 
 #. module: spp_service_points
+#: code:addons/spp_service_points/models/registrant.py:0
 #: code:addons/spp_service_points/tests/test_service_point.py:0
 #, python-format
 msgid "Create SP User"
@@ -141,6 +142,12 @@ msgstr "ايقاف"
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__display_name
 msgid "Display Name"
 msgstr "الاسم"
+
+#. module: spp_service_points
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format
+msgid "Error on individual {child_name}: {error}"
+msgstr ""
 
 #. module: spp_service_points
 #: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
@@ -237,7 +244,14 @@ msgid "Service point is already enabled."
 msgstr "الوكالة مفعلة."
 
 #. module: spp_service_points
+#: code:addons/spp_service_points/models/registrant.py:0
 #: code:addons/spp_service_points/tests/test_service_point.py:0
 #, python-format
 msgid "Successfully created users for the contacts of the company"
+msgstr ""
+
+#. module: spp_service_points
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format
+msgid "{child_name} does not have email."
 msgstr ""
