@@ -94,6 +94,7 @@ class SppDciApiServer(Controller):
             auth_header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
         )
 
+        # TODO: payload of access token is not used for now
         verified, payload = verify_and_decode_signature(access_token)
 
         if not verified:
@@ -121,72 +122,12 @@ class SppDciApiServer(Controller):
         transaction_id = message.get("transaction_id")
         search_requests = message["search_request"]
 
-        search_responses = []
-
         today_isoformat = datetime.now(timezone.utc).isoformat()
         correlation_id = str(uuid.uuid4())
 
-        for req in search_requests:
-            req_error = self.check_content(
-                req, "search_request", ["reference_id", "timestamp", "search_criteria"]
-            )
-            if req_error:
-                return error_wrapper(req_error.get("code"), req_error.get("message"))
-
-            search_criteria = req.get("search_criteria")
-            search_criteria_error = self.check_content(
-                search_criteria, "search_criteria", ["reg_type", "query_type", "query"]
-            )
-            if search_criteria_error:
-                return error_wrapper(
-                    search_criteria_error.get("code"),
-                    search_criteria_error.get("message"),
-                )
-
-            query_type = search_criteria.get("query_type")
-            if query_type not in constants.ALLOWED_QUERY_TYPE:
-                return error_wrapper(
-                    400,
-                    f"query_type only accepts these values: {', '.join(constants.ALLOWED_QUERY_TYPE)}",
-                )
-
-            reg_type = search_criteria.get("reg_type")
-
-            if reg_type not in constants.REG_TYPE_CHOICES:
-                return error_wrapper(
-                    400,
-                    f"These are the only supported reg type: {', '.join(constants.REG_TYPE_CHOICES)}",
-                )
-
-            reference_id = req.get("reference_id")
-            queries = search_criteria.get("query")
-
-            domain = [("is_registrant", "=", True)]
-
-            if reg_type == constants.INDIVIDUAL:
-                domain.append(("is_group", "=", False))
-            else:
-                domain.append(("is_group", "=", True))
-
-            # Process Queries and modify domain
-            self.process_queries(query_type, queries, domain)
-
-            if domain:
-                records = request.env["res.partner"].sudo().search(domain)
-                if records:
-                    search_responses.append(
-                        {
-                            "reference_id": reference_id,
-                            "timestamp": today_isoformat,
-                            "status": "succ",
-                            "data": {
-                                "reg_record_type": "person",
-                                "reg_type": reg_type,
-                                "reg_records": records.get_dci_individual_registry_data(),
-                            },
-                            "locale": "eng",
-                        }
-                    )
+        # Process search requests and modify search_responses
+        search_responses = []
+        self.process_search_requests(search_requests, today_isoformat, search_responses)
 
         header = {
             "message_id": message_id,
@@ -271,3 +212,69 @@ class SppDciApiServer(Controller):
                 )
 
         return domain
+
+    def process_search_requests(
+        self, search_requests, today_isoformat, search_responses
+    ):
+        for req in search_requests:
+            req_error = self.check_content(
+                req, "search_request", ["reference_id", "timestamp", "search_criteria"]
+            )
+            if req_error:
+                return error_wrapper(req_error.get("code"), req_error.get("message"))
+
+            search_criteria = req.get("search_criteria")
+            search_criteria_error = self.check_content(
+                search_criteria, "search_criteria", ["reg_type", "query_type", "query"]
+            )
+            if search_criteria_error:
+                return error_wrapper(
+                    search_criteria_error.get("code"),
+                    search_criteria_error.get("message"),
+                )
+
+            query_type = search_criteria.get("query_type")
+            if query_type not in constants.ALLOWED_QUERY_TYPE:
+                return error_wrapper(
+                    400,
+                    f"query_type only accepts these values: {', '.join(constants.ALLOWED_QUERY_TYPE)}",
+                )
+
+            reg_type = search_criteria.get("reg_type")
+
+            if reg_type not in constants.REG_TYPE_CHOICES:
+                return error_wrapper(
+                    400,
+                    f"These are the only supported reg type: {', '.join(constants.REG_TYPE_CHOICES)}",
+                )
+
+            reference_id = req.get("reference_id")
+            queries = search_criteria.get("query")
+
+            domain = [("is_registrant", "=", True)]
+
+            if reg_type == constants.INDIVIDUAL:
+                domain.append(("is_group", "=", False))
+            else:
+                domain.append(("is_group", "=", True))
+
+            # Process Queries and modify domain
+            self.process_queries(query_type, queries, domain)
+
+            if domain:
+                records = request.env["res.partner"].sudo().search(domain)
+                if records:
+                    search_responses.append(
+                        {
+                            "reference_id": reference_id,
+                            "timestamp": today_isoformat,
+                            "status": "succ",
+                            "data": {
+                                "reg_record_type": "person",
+                                "reg_type": reg_type,
+                                "reg_records": records.get_dci_individual_registry_data(),
+                            },
+                            "locale": "eng",
+                        }
+                    )
+        return search_responses
