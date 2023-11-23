@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-23 04:46+0000\n"
+"PO-Revision-Date: 2023-11-23 05:02+0000\n"
 "Last-Translator: Weblate Admin <rj@newlogic.com>\n"
 "Language-Team: French <https://translate.openspp.org/projects/openspp/"
 "spp_change_request/fr/>\n"
@@ -199,7 +199,6 @@ msgstr "Attribuer à"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_any
-#, fuzzy
 msgid "Assign To Any"
 msgstr "Attribuer à n'importe qui"
 
@@ -239,7 +238,6 @@ msgstr "Réinitialisation de la demande de modification en brouillon"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
-#, fuzzy
 msgid "CREATE"
 msgstr "CRÉER"
 
@@ -265,7 +263,6 @@ msgstr "Demande d&#39;annulation"
 
 #. module: spp_change_request
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__cancelled
-#, fuzzy
 msgid "Cancelled"
 msgstr "Annulé"
 
@@ -273,7 +270,6 @@ msgstr "Annulé"
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__cancelled_by_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__reset_to_draft_by_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__cancelled_by_id
-#, fuzzy
 msgid "Cancelled by"
 msgstr "Créé par"
 
@@ -291,9 +287,8 @@ msgstr "Changer de requête"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
-#, fuzzy
 msgid "Change Request #"
-msgstr "Changer de requête"
+msgstr "Demande de changement #"
 
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_administrator
@@ -308,7 +303,6 @@ msgstr "Changer de requête"
 
 #. module: spp_change_request
 #: model:res.groups,name:spp_change_request.group_spp_change_request_applicator
-#, fuzzy
 msgid "Change Request Applicator"
 msgstr "Validateur de demande de changement"
 
