@@ -6,9 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-19 03:02+0000\n"
-"Last-Translator: Jeremi Joslin <jeremi@openspp.org>\n"
-"Language-Team: French <https://translate.openspp.org/projects/openspp/spp_change_request/fr/>\n"
+"PO-Revision-Date: 2023-11-23 04:46+0000\n"
+"Last-Translator: Weblate Admin <rj@newlogic.com>\n"
+"Language-Team: French <https://translate.openspp.org/projects/openspp/"
+"spp_change_request/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,23 +19,21 @@ msgstr ""
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
-#, fuzzy
 msgid ""
 "<span class=\"o_stat_text\">Assign</span>\n"
 "                                <span class=\"o_stat_text\">To Me</span>"
 msgstr ""
-"<span class=\"o_stat_text\">Attribuer</span>\n"
-"                                <span class=\"o_stat_text\">À Moi</span>"
+"<span class=\"o_stat_text\">Attribuer</span> \n"
+"                                  <span class=\"o_stat_text\">À Moi</span>"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
-#, fuzzy
 msgid "<span class=\"o_stat_text\">Reassign</span>"
 msgstr "<span class=\"o_stat_text\">Réaffecter</span>"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/change_request.py:0
-#, python-format, fuzzy
+#, python-format
 msgid "A group must be selected."
 msgstr "Il faut sélectionner un groupe."
 
@@ -102,7 +101,7 @@ msgstr "Toutes les demandes"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, python-format
 msgid "An error was encountered in applying the changes: %s"
 msgstr ""
 "Une erreur a été rencontrée lors de l'application des modifications : %s"
@@ -123,26 +122,22 @@ msgstr "Ouvrir les détails"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id_domain
-#, fuzzy
 msgid "Applicant Id Domain"
 msgstr "Domaine d'identifiant du demandeur"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
-#, fuzzy
 msgid "Applicant Information"
 msgstr "Informations sur le demandeur"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_phone
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__applicant_phone
-#, fuzzy
 msgid "Applicant's Phone Number"
-msgstr "Numéros de téléphone"
+msgstr "Numéro de téléphone"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
-#, fuzzy
 msgid "Applicant:"
 msgstr "Demandeur :"
 
@@ -169,25 +164,23 @@ msgstr "Appliquer les modifications"
 
 #. module: spp_change_request
 #: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_validation_sequence__validation_group_state__both
-#, fuzzy
 msgid "Apply to Both"
 msgstr "À appliquer aux deux"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
-#, fuzzy
 msgid "Archived"
 msgstr "Archivé"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/wizard/cancel_change_request.py:0
-#, python-format, fuzzy
+#, python-format
 msgid "Are you sure you would like to cancel this request: %s"
 msgstr "Êtes-vous sûr de vouloir annuler cette demande : %s ?"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/wizard/reject_change_request.py:0
-#, python-format, fuzzy
+#, python-format
 msgid "Are you sure you would like to reject this request: %s"
 msgstr "Êtes-vous sûr de vouloir rejeter cette demande : %s ?"
 
@@ -195,13 +188,12 @@ msgstr "Êtes-vous sûr de vouloir rejeter cette demande : %s ?"
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_user_assign_wizard
-#, fuzzy, python-format
+#, python-format
 msgid "Assign Change Request to User"
-msgstr "Validateur de demande de changement"
+msgstr "Attribuer la demande de modification a l'utilisateur"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to
-#, fuzzy
 msgid "Assign To"
 msgstr "Attribuer à"
 
@@ -213,21 +205,19 @@ msgstr "Attribuer à n'importe qui"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_id_domain
-#, fuzzy
 msgid "Assign To Id Domain"
 msgstr "Affecter à l'ID du domaine"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Assign this change request to:"
 msgstr "Ajoutez une nouvelle demande de modification !"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
-#, fuzzy
 msgid "Assigned To"
-msgstr "Affecté à"
+msgstr "Attribué à"
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__assign_to_id
@@ -243,9 +233,9 @@ msgstr "Nombre de pièces jointes"
 
 #. module: spp_change_request
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
-#, python-format, fuzzy
+#, python-format
 msgid "CR Reset to Draft"
-msgstr "Réinitialisation de la CR en brouillon"
+msgstr "Réinitialisation de la demande de modification en brouillon"
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
@@ -256,7 +246,6 @@ msgstr "CRÉER"
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
-#, fuzzy
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -265,7 +254,7 @@ msgstr "Annuler"
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_cancel_wizard
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
-#, fuzzy, python-format
+#, python-format
 msgid "Cancel Change Request"
 msgstr "Rechercher une demande de modification"
 
