@@ -27,8 +27,38 @@ msgid "%s Imported Beneficiaries"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.actions.report,print_report_name:spp_programs.action_print_program_approval_receipt
+msgid "'Program Approval Receipt'"
+msgstr ""
+
+#. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_form
 msgid "<span class=\"o_stat_text\">Entitlements</span>"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.print_program_approval_receipt
+msgid "<span>Cycle Name</span>"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.print_program_approval_receipt
+msgid "<span>Program</span>"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.print_program_approval_receipt
+msgid "<span>State</span>"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.print_program_approval_receipt
+msgid "<strong>Beneficiaries:</strong>"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.print_program_approval_receipt
+msgid "<strong>Target Type:</strong>"
 msgstr ""
 
 #. module: spp_programs
@@ -147,8 +177,29 @@ msgid "Cycle Id Domain"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle_manager_default__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_procurement_group__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_stock_move__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_stock_picking__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_stock_rule__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__date_approved
 msgid "Date Approved"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_program_create_wizard__eligibility_kind__default_eligibility
+msgid "Default"
 msgstr ""
 
 #. module: spp_programs
@@ -167,6 +218,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
 msgid "Draft"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__eligibility_kind
+msgid "Eligibility Manager"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.create_program_wizard_form_view_spp
+msgid "Eligibility manager"
 msgstr ""
 
 #. module: spp_programs
@@ -209,6 +270,11 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__expired
 msgid "Expired"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.create_program_wizard_form_view_spp
+msgid "FILTER:"
 msgstr ""
 
 #. module: spp_programs
@@ -336,6 +402,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.external_layout_standard
+msgid "Logo"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__manage_inventory
 msgid "Manage Inventory"
 msgstr ""
@@ -352,9 +423,20 @@ msgid "No Eligibility Manager defined."
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program__is_one_time_distribution
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__is_one_time_distribution
+msgid "One-time Distribution"
+msgstr ""
+
+#. module: spp_programs
 #: code:addons/spp_programs/models/entitlement.py:0
 #, python-format
 msgid "Only draft entitlements are allowed to be deleted"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.external_layout_standard
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
 msgstr ""
 
 #. module: spp_programs
@@ -380,6 +462,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__program_id
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__program_id
 msgid "Program"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.actions.report,name:spp_programs.action_print_program_approval_receipt
+msgid "Program Approval Receipt"
 msgstr ""
 
 #. module: spp_programs
@@ -482,6 +569,11 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__picking_ids
 msgid "Stock Transfers"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__target_type
+msgid "Target Type"
 msgstr ""
 
 #. module: spp_programs

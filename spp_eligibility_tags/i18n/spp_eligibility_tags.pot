@@ -1,0 +1,170 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_eligibility_tags
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_eligibility_tags
+#: code:addons/spp_eligibility_tags/wizard/create_program_wizard.py:0
+#, python-format
+msgid "A tag is needed for this eligibility criteria type."
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model_terms:ir.actions.act_window,help:spp_eligibility_tags.action_eligibility_manager_tags
+msgid "Add an Eligibility Manager!"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_create_wizard__area_id
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__area_id
+msgid "Area"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model_terms:ir.actions.act_window,help:spp_eligibility_tags.action_eligibility_manager_tags
+msgid "Click the create button to enter a new eligibility manager."
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model,name:spp_eligibility_tags.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_eligibility_manager__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_create_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_create_wizard__custom_domain
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__custom_domain
+msgid "Domain"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model,name:spp_eligibility_tags.model_g2p_eligibility_manager
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_create_wizard__eligibility_kind
+msgid "Eligibility Manager"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_tags.view_eligibility_manager_tag_form
+msgid "Enter the Manager Name..."
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_tags.eligibility_manager_tag_filter
+msgid "Group By"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: code:addons/spp_eligibility_tags/models/eligibility_manager.py:0
+#, python-format
+msgid "Import finished."
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__name
+msgid "Manager Name"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_tags.view_eligibility_manager_tag_form
+msgid "Name:"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__program_id
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_tags.eligibility_manager_tag_filter
+msgid "Program"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_tags.view_eligibility_manager_tag_form
+msgid "Program:"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_tags.eligibility_manager_tag_filter
+msgid "Search Eligibility Manager"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_tags.view_eligibility_manager_tag_form
+msgid "Select a program..."
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model,name:spp_eligibility_tags.model_g2p_program_membership_manager_tags
+#: model:ir.model.fields.selection,name:spp_eligibility_tags.selection__g2p_program_create_wizard__eligibility_kind__tags_eligibility
+msgid "Tag-based Eligibility"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_tags.view_eligibility_manager_tag_form
+msgid "Tag-based Eligibility Manager"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.actions.act_window,name:spp_eligibility_tags.action_eligibility_manager_tags
+#: model:ir.ui.menu,name:spp_eligibility_tags.menu_eligibility_manager_tag
+msgid "Tag-based Eligibility Managers"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_create_wizard__tags_id
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__tags_id
+msgid "Tags"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__target_type
+msgid "Target Type"
+msgstr ""
