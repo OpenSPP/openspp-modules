@@ -79,23 +79,75 @@ class TestSppApiNamespace(TransactionCase):
 
     def test_08_get_oas(self):
         self.env["spp_api.path"].create(
-            {
-                "name": "res.partner",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "namespace_id": self._namespace.id,
-                "description": "GET res.partner",
-                "method": "get",
-                "field_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.env.ref("base.field_res_partner__name").id,
-                            self.env.ref("base.field_res_partner__write_date").id,
-                        ],
-                    )
-                ],
-            }
+            [
+                {
+                    "name": "res.partner",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "namespace_id": self._namespace.id,
+                    "description": "GET res.partner",
+                    "method": "get",
+                    "field_ids": [
+                        (
+                            6,
+                            0,
+                            [
+                                self.env.ref("base.field_res_partner__name").id,
+                                self.env.ref("base.field_res_partner__write_date").id,
+                            ],
+                        ),
+                    ],
+                },
+                {
+                    "name": "res.partner",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "namespace_id": self._namespace.id,
+                    "description": "POST res.partner",
+                    "method": "post",
+                    "api_field_ids": [
+                        (
+                            0,
+                            0,
+                            {
+                                "field_id": self.env.ref(
+                                    "base.field_res_partner__name"
+                                ).id,
+                            },
+                        ),
+                    ],
+                },
+                {
+                    "name": "res.partner",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "namespace_id": self._namespace.id,
+                    "description": "PUT res.partner",
+                    "method": "put",
+                    "api_field_ids": [
+                        (
+                            0,
+                            0,
+                            {
+                                "field_id": self.env.ref(
+                                    "base.field_res_partner__name"
+                                ).id,
+                            },
+                        ),
+                    ],
+                },
+                {
+                    "name": "res.partner",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "namespace_id": self._namespace.id,
+                    "description": "DELETE res.partner",
+                    "method": "delete",
+                },
+                {
+                    "name": "res.partner",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "namespace_id": self._namespace.id,
+                    "description": "PATCH res.partner",
+                    "method": "patch",
+                },
+            ]
         )
         with self.assertLogs(
             "odoo.addons.spp_api.models.spp_api_namespace",
@@ -108,4 +160,4 @@ class TestSppApiNamespace(TransactionCase):
                     "DEBUG:odoo.addons.spp_api.models.spp_api_namespace:", ""
                 )
                 output.append(out.split(":", 1)[0])
-            self.assertEqual(output, ["path", "OAS_part_for_model", "spec"])
+            self.assertEqual(output, ["path", "OAS_part_for_model", "spec"] * 5)
