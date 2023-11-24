@@ -32,6 +32,7 @@ class ClientCredential(models.Model):
     client_secret = fields.Char(
         required=True, readonly=True, default=_generate_client_secret
     )
+    show_button_clicked = fields.Boolean()
 
     _sql_constraints = [
         ("name_uniq", "unique(name)", "Client Name must be unique !"),
@@ -58,3 +59,29 @@ class ClientCredential(models.Model):
         }
 
         return calculate_signature(header, payload)
+
+    def show_credentials(self):
+        self.ensure_one()
+
+        action = self.env[self._name].get_formview_action()
+        form_id = self.env.ref(
+            "spp_dci_api_server.spp_dci_api_client_credential_view_credentials"
+        ).id
+
+        action.update(
+            {
+                "views": [(form_id, "form")],
+                "target": "new",
+                "type": "ir.actions.act_window",
+                "view_type": "form",
+                "view_mode": "form",
+            }
+        )
+
+        self.update(
+            {
+                "show_button_clicked": True,
+            }
+        )
+
+        return action
