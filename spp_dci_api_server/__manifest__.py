@@ -14,13 +14,8 @@
         "g2p_registry_individual",
     ],
     "data": [
-        # "security/fetch_crvs_security.xml",
         "security/ir.model.access.csv",
-        # "data/crvs_data_source.xml",
-        # "data/crvs_location_data.xml",
         "views/client_credentials_view.xml",
-        # "views/eligibility_manager_view.xml",
-        # "views/fetch_crvs_beneficiary_views.xml",
     ],
     "application": True,
     "auto_install": False,
