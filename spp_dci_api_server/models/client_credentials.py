@@ -11,9 +11,27 @@ class ClientCredential(models.Model):
     _name = "spp.dci.api.client.credential"
     _description = "SPP DCI Client Credential"
 
+    @api.model
+    def _generate_client_id(self):
+        client_id = str(uuid.uuid4())
+        while self.search_count([("client_id", "=", client_id)]):
+            client_id = str(uuid.uuid4())
+
+        return client_id
+
+    @api.model
+    def _generate_client_secret(self):
+        client_secret = str(uuid.uuid4())
+        while self.search_count([("client_secret", "=", client_secret)]):
+            client_secret = str(uuid.uuid4())
+
+        return client_secret
+
     name = fields.Char("Client Name", required=True)
-    client_id = fields.Char(required=True, readonly=True)
-    client_secret = fields.Char(required=True, readonly=True)
+    client_id = fields.Char(required=True, readonly=True, default=_generate_client_id)
+    client_secret = fields.Char(
+        required=True, readonly=True, default=_generate_client_secret
+    )
 
     _sql_constraints = [
         ("name_uniq", "unique(name)", "Client Name must be unique !"),
@@ -26,27 +44,6 @@ class ClientCredential(models.Model):
     ]
 
     TOKEN_EXPIRATION_MIN = 10
-
-    @api.model
-    def generate_credentials(self):
-        client_id = str(uuid.uuid4())
-        while self.search_count([("client_id", "=", client_id)]):
-            client_id = str(uuid.uuid4())
-
-        client_secret = str(uuid.uuid4())
-        while self.search_count([("client_secret", "=", client_secret)]):
-            client_secret = str(uuid.uuid4())
-
-        return client_id, client_secret
-
-    @api.model
-    def create(self, vals):
-        client_id, client_secret = self.generate_credentials()
-
-        vals["client_id"] = client_id
-        vals["client_secret"] = client_secret
-
-        return super().create(vals)
 
     @api.model
     def generate_access_token(self):
