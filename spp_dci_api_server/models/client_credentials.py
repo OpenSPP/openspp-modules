@@ -2,7 +2,8 @@ import calendar
 import uuid
 from datetime import datetime, timedelta
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 from ..tools import calculate_signature
 
@@ -63,26 +64,29 @@ class ClientCredential(models.Model):
     def show_credentials(self):
         self.ensure_one()
 
-        action = self.env[self._name].get_formview_action()
-        form_id = self.env.ref(
-            "spp_dci_api_server.spp_dci_api_client_credential_view_credentials"
-        ).id
+        if not self.show_button_clicked:
+            action = self.env[self._name].get_formview_action()
+            form_id = self.env.ref(
+                "spp_dci_api_server.spp_dci_api_client_credential_view_credentials"
+            ).id
 
-        action.update(
-            {
-                "views": [(form_id, "form")],
-                "target": "new",
-                "type": "ir.actions.act_window",
-                "view_type": "form",
-                "view_mode": "form",
-                "res_id": self.id,
-            }
-        )
+            action.update(
+                {
+                    "views": [(form_id, "form")],
+                    "target": "new",
+                    "type": "ir.actions.act_window",
+                    "view_type": "form",
+                    "view_mode": "form",
+                    "res_id": self.id,
+                }
+            )
 
-        self.update(
-            {
-                "show_button_clicked": True,
-            }
-        )
+            self.update(
+                {
+                    "show_button_clicked": True,
+                }
+            )
+        else:
+            raise UserError(_("Client ID and Client Secret is already showed once."))
 
         return action
