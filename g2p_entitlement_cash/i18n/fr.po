@@ -161,7 +161,7 @@ msgstr "Gestionnaires de prestations"
 #, python-format
 msgid ""
 "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
-msgstr ""
+msgstr "Erreur d'État de Droit! Les droits ne sont pas en état de 'validation en attente':\n"
 
 #. module: g2p_entitlement_cash
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash__entitlement_validation_group_id
@@ -180,7 +180,7 @@ msgstr "Groupe de validation des prestations"
 #, python-format
 msgid ""
 "Entitlements are not approved due to some issues. Kindly address the issue."
-msgstr ""
+msgstr "Les prestations ne sont pas approuvés en raison de certains problèmes. Veuillez régler le problème."
 
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
@@ -334,7 +334,7 @@ msgstr "La devise utilisée pour saisir le relevé"
 msgid ""
 "The fund for the program: %(program)s [%(fund).2f] is insufficient for the "
 "entitlement: %(entitlement)s"
-msgstr ""
+msgstr "Le fonds pour le programme : %(program)s [%(fund).2f] est insuffisant pour la prestation : %(entitlement)s"
 
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
@@ -346,13 +346,13 @@ msgstr "Aucun élément n'a été saisi pour ce gestionnaire de droits."
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Validate %s entitlements started."
-msgstr ""
+msgstr "La validation des droits %s a commencé."
 
 #. module: g2p_entitlement_cash
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Validate and approve entitlements for cycle."
-msgstr ""
+msgstr "Valider et approuver les prestations pour le cycle."
 
 #, fuzzy, python-format
 #~ msgid "Cycle Cash Entitlements"
