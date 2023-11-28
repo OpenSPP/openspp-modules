@@ -21,7 +21,7 @@ msgstr ""
 #: model:ir.model.fields,help:g2p_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__max_multiplier
 #: model:ir.model.fields,help:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__max_multiplier
 msgid "0 means no limit"
-msgstr "0 signifie pas de limite"
+msgstr "0 signifie aucune limite"
 
 #. module: g2p_entitlement_cash
 #: model_terms:ir.actions.act_window,help:g2p_entitlement_cash.action_entitlement_manager_cash
@@ -139,7 +139,7 @@ msgstr "Entrez le nom du gestionnaire..."
 #, fuzzy, python-format
 #| msgid "Cash Entitlement"
 msgid "Entitlement"
-msgstr "Prestation comptant"
+msgstr "Prestation"
 
 #. module: g2p_entitlement_cash
 #: model_terms:ir.ui.view,arch_db:g2p_entitlement_cash.view_entitlement_manager_cash_form
@@ -161,7 +161,7 @@ msgstr "Gestionnaires de prestations"
 #, python-format
 msgid ""
 "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
-msgstr "Erreur d'État de Droit! Les droits ne sont pas en état de 'validation en attente':\n"
+msgstr "Erreur d'État de Prestation ! Prestations pas en état de 'validation en attente' :\n"
 
 #. module: g2p_entitlement_cash
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash__entitlement_validation_group_id
@@ -187,13 +187,13 @@ msgstr "Les prestations ne sont pas approuvés en raison de certains problèmes.
 #, fuzzy, python-format
 #| msgid "Entitlement Validation Group"
 msgid "Entitlements are validated and approved."
-msgstr "Groupe de validation des prestations"
+msgstr "Les prestations sont validées et approuvées."
 
 #. module: g2p_entitlement_cash
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_create_wizard__evaluate_one_item
 #: model:ir.model.fields,field_description:g2p_entitlement_cash.field_g2p_program_entitlement_manager_cash__evaluate_one_item
 msgid "Evaluate One Item"
-msgstr "Évaluer un article"
+msgstr "Évaluer un élément"
 
 #. module: g2p_entitlement_cash
 #: model_terms:ir.ui.view,arch_db:g2p_entitlement_cash.create_program_wizard_form_view_custom_cash
@@ -299,7 +299,7 @@ msgstr "Programme :"
 #: code:addons/g2p_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
-msgstr ""
+msgstr "Programme : %(prg)s, Bénéficiaire : %(partner)s.\n"
 
 #. module: g2p_entitlement_cash
 #: model_terms:ir.ui.view,arch_db:g2p_entitlement_cash.view_entitlement_manager_cash_tree
