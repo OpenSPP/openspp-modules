@@ -28,4 +28,4 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_scan_id_document.field_res_partner__id_document_details
 #: model:ir.model.fields,field_description:spp_scan_id_document.field_res_users__id_document_details
 msgid "Id Document Details"
-msgstr ""
+msgstr "Détails du document d'identité"
