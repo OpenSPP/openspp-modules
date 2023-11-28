@@ -15,9 +15,13 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "spp_import_match",
+        "spp_area",
+        "spp_service_points",
     ],
     "data": [
         "views/res_partner_views.xml",
+        "views/spp_area_views.xml",
+        "views/spp_service_point_views.xml",
     ],
     "application": False,
     "installable": True,
