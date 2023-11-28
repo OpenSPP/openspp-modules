@@ -14,6 +14,7 @@
     "depends": ["base", "g2p_registry_base", "g2p_registry_membership"],
     "data": [
         "data/id_pass.xml",
+        "views/main_view.xml",
         "views/registrant.xml",
         "security/ir.model.access.csv",
         "views/id_pass_view.xml",
