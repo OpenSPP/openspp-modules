@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_service_points_form_inherit_spp_registrant_import" model="ir.ui.view">
+        <field name="name">spp.service.point.view.form.inherit</field>
+        <field name="model">spp.service.point</field>
+        <field name="inherit_id" ref="spp_service_points.view_service_points_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <field name="unique_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_service_points_tree_inherit_spp_registrant_import" model="ir.ui.view">
+        <field name="name">spp.service.point.view.list.inherit</field>
+        <field name="model">spp.service.point</field>
+        <field name="inherit_id" ref="spp_service_points.view_service_points_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="unique_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="service_points_filter_inherit_spp_registrant_import" model="ir.ui.view">
+        <field name="name">spp.service.point.view.search.inherit</field>
+        <field name="model">spp.service.point</field>
+        <field name="inherit_id" ref="spp_service_points.service_points_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="unique_id" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

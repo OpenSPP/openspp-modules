@@ -5,6 +5,8 @@ import string
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
+from ..tools import _generate_unique_id
+
 
 class Registrant(models.Model):
     _inherit = "res.partner"
@@ -58,7 +60,7 @@ class Registrant(models.Model):
                 rec.registrant_id = None
                 continue
             prefix = "GRP" if rec.is_group else "IND"
-            unique_id = self._generate_unique_id()
+            unique_id = _generate_unique_id()
             rec.registrant_id = "_".join([prefix, unique_id])
 
     def _generate_unique_id(self):
