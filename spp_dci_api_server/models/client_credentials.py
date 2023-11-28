@@ -47,6 +47,8 @@ class ClientCredential(models.Model):
 
     TOKEN_EXPIRATION_MIN = 10
 
+    ALLOW_EXPORT = False
+
     @api.model
     def generate_access_token(self):
         today = datetime.today()
@@ -90,3 +92,9 @@ class ClientCredential(models.Model):
             raise UserError(_("Client ID and Client Secret is already showed once."))
 
         return action
+
+    def export_data(self, fields_to_export):
+        if not self.ALLOW_EXPORT:
+            raise UserError(_("Not allowed to export on this model."))
+
+        return super().export_data(fields_to_export)
