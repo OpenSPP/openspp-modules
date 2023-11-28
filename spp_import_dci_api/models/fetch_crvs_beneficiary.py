@@ -812,7 +812,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
                 }
             )
 
-        relation_partner_id._compute_child_under_no_of_months()
+        group._compute_child_under_no_of_months()
 
         return
 
