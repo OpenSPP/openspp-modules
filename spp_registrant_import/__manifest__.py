@@ -10,13 +10,8 @@
     "development_status": "Alpha",
     "maintainers": ["jeremi", "gonzalesedwin1123", "nhatnm0612"],
     "depends": [
-        "base",
-        "g2p_registry_base",
-        "g2p_registry_individual",
-        "g2p_registry_group",
+        "spp_base",
         "spp_import_match",
-        "spp_area",
-        "spp_service_points",
     ],
     "data": [
         "views/res_partner_views.xml",

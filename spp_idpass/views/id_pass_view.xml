@@ -49,12 +49,12 @@
         <field name="act_window_id" ref="action_spp_idpass" />
     </record>
 
-    <menuitem
+    <!-- <menuitem
         id="menu_spp_idpass"
         name="ID PASS"
         action="action_spp_idpass"
         parent="spp_idqueue.id_queue_configuration_menu_root"
         sequence="10"
         groups="g2p_registry_base.group_g2p_admin"
-    />
+    /> -->
 </odoo>
