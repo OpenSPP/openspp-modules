@@ -60,6 +60,11 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     options="{'no_open':true,'no_create':true,'no_create_edit':true}"
                 />
             </xpath>
+            <xpath expr="//button[@name='create_program']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': [('state', '=', 'step1')]}
+                </attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
