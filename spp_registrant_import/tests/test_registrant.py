@@ -26,6 +26,9 @@ class TestRegistrant(TransactionCase):
                 "name": "Partner 1",
             }
         )
+        (
+            self._partner | self._test_household | self._test_individuals
+        )._compute_registrant_id()
 
     def create_registrant(self, vals):
         assert type(vals) == dict

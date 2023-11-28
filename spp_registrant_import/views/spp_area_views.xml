@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="spp_area.view_spparea_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='kind']" position="after">
-                <field name="unique_id" />
+                <field name="registrant_id" />
             </xpath>
         </field>
     </record>
@@ -18,7 +18,7 @@
         <field name="inherit_id" ref="spp_area.view_spparea_tree" />
         <field name="arch" type="xml">
             <xpath expr="//tree" position="inside">
-                <field name="unique_id" optional="show" />
+                <field name="registrant_id" optional="show" />
             </xpath>
         </field>
     </record>
@@ -29,7 +29,7 @@
         <field name="inherit_id" ref="spp_area.spparea_filter" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="unique_id" />
+                <field name="registrant_id" />
             </xpath>
         </field>
     </record>
