@@ -69,7 +69,7 @@
   </record>
 
   <!-- Top menu item -->
-  <menuitem name="Audit Log" id="spp_audit_log.menu_root" />
+  <menuitem name="Audit Log" id="spp_audit_log.menu_root" groups="spp_audit_log.group_manager" />
 
   <!-- Sub-menu item -->
 
