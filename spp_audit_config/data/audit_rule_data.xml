@@ -24,19 +24,6 @@
         />
     </function>
 
-    <!-- Child Entitlement Rule child of Child Cycle Rule -->
-    <function model="spp.audit.rule" name="create_rules">
-        <value
-            model="spp.audit.rule"
-            eval="{
-            'name': 'Child Entitlement Rule',
-            'parent_id': obj().env['spp.audit.rule'].search([('name', '=', 'Child Cycle Rule')]).id,
-            'model_id': obj().env['ir.model'].search([('model', '=', 'g2p.entitlement.inkind')]).id,
-            'field_id': obj().env['ir.model.fields'].search([('name', '=', 'cycle_id'), ('model', '=', 'g2p.entitlement.inkind'), ('relation', '=', 'g2p.cycle')]).id,
-        }"
-        />
-    </function>
-
     <!-- Registry Rule -->
     <function model="spp.audit.rule" name="create_rules">
         <value
@@ -48,28 +35,13 @@
         />
     </function>
 
-    <!-- Child Group Membership Rule child of Registry Rule -->
+    <!-- Service Point Rule -->
     <function model="spp.audit.rule" name="create_rules">
         <value
             model="spp.audit.rule"
             eval="{
-            'name': 'Child Group Membership Rule',
-            'parent_id': obj().env['spp.audit.rule'].search([('name', '=', 'Registry Rule')]).id,
-            'model_id': obj().env['ir.model'].search([('model', '=', 'g2p.group.membership')]).id,
-            'field_id': obj().env['ir.model.fields'].search([('name', '=', 'group'), ('model', '=', 'g2p.group.membership'), ('relation', '=', 'res.partner')]).id,
-        }"
-        />
-    </function>
-
-    <!-- Child Individual Membership Rule child of Registry Rule -->
-    <function model="spp.audit.rule" name="create_rules">
-        <value
-            model="spp.audit.rule"
-            eval="{
-            'name': 'Child Individual Membership Rule',
-            'parent_id': obj().env['spp.audit.rule'].search([('name', '=', 'Registry Rule')]).id,
-            'model_id': obj().env['ir.model'].search([('model', '=', 'g2p.group.membership')]).id,
-            'field_id': obj().env['ir.model.fields'].search([('name', '=', 'individual'), ('model', '=', 'g2p.group.membership'), ('relation', '=', 'res.partner')]).id,
+            'name': 'Service Point Rule',
+            'model_id': obj().env['ir.model'].search([('model', '=', 'spp.service.point')]).id,
         }"
         />
     </function>

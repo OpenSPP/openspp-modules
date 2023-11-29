@@ -11,6 +11,7 @@
     "depends": [
         "g2p_registry_membership",
         "spp_programs",
+        "spp_service_points",
         "spp_audit_log",
     ],
     "external_dependencies": {},
