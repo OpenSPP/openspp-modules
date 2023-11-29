@@ -60,6 +60,7 @@ class SppUniqueId(models.AbstractModel):
             ):
                 raise ValidationError(not_correct_format)
 
+    @api.depends('create_date')
     def _compute_spp_id(self):
         for rec in self:
             prefix = rec._get_spp_id_prefix()
