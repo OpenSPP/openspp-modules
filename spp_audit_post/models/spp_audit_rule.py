@@ -63,12 +63,6 @@ class SppAuditRule(models.Model):
     @api.constrains("model_id", "field_id")
     def _check_model_id_field_id(self):
         for rec in self:
-            if not rec.parent_id and not rec.model_id.is_mail_thread:
-                raise ValidationError(
-                    _(
-                        "Model should have inherit the mail.thread model if rule is a parent rule."
-                    )
-                )
             if rec.parent_id and not rec.field_id:
                 raise ValidationError(
                     _("Field is required if the rule is a child rule.")
