@@ -1,9 +1,11 @@
-from odoo import models
+from odoo import fields, models
 
 
 class Registrant(models.Model):
     _name = "res.partner"
     _inherit = ["res.partner", "spp.unique.id"]
+
+    spp_id = fields.Char(readonly=False)
 
     def _get_spp_id_prefix(self):
         if not self.is_registrant:
