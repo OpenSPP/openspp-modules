@@ -50,14 +50,14 @@ class Registrant(models.Model):
                 rec.given_name = name[1]
                 rec.addl_name = name[2]
 
-    def _get_registrant_id_prefix(self):
+    def _get_spp_id_prefix(self):
         if not self.is_registrant:
             return ""
         if self.is_group:
             return "GRP"
         return "IND"
 
-    def _get_match_registrant_id_pattern(self):
+    def _get_match_spp_id_pattern(self):
         if not self.is_registrant:
             return ""
         if self.is_group:

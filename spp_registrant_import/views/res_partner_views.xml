@@ -7,9 +7,9 @@
         <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('oe_title')]" position="inside">
-                <div id="registrant_id">
-                    <label for="registrant_id" />
-                    <field name="registrant_id" readonly="1" />
+                <div id="spp_id">
+                    <label for="spp_id" />
+                    <field name="spp_id" readonly="1" />
                 </div>
             </xpath>
         </field>
@@ -21,9 +21,9 @@
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('oe_title')]" position="inside">
-                <div id="registrant_id">
-                    <label for="registrant_id" />
-                    <field name="registrant_id" readonly="1" />
+                <div id="spp_id">
+                    <label for="spp_id" />
+                    <field name="spp_id" readonly="1" />
                 </div>
             </xpath>
         </field>

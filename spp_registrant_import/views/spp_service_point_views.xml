@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="spp_service_points.view_service_points_form" />
         <field name="arch" type="xml">
             <xpath expr="//group" position="inside">
-                <field name="registrant_id" />
+                <field name="spp_id" />
             </xpath>
         </field>
     </record>
@@ -18,7 +18,7 @@
         <field name="inherit_id" ref="spp_service_points.view_service_points_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="registrant_id" />
+                <field name="spp_id" />
             </xpath>
         </field>
     </record>
@@ -29,7 +29,7 @@
         <field name="inherit_id" ref="spp_service_points.service_points_filter" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="registrant_id" />
+                <field name="spp_id" />
             </xpath>
         </field>
     </record>
