@@ -28,7 +28,6 @@ class SppUniqueId(models.AbstractModel):
         string="Unique ID",
         compute="_compute_spp_id",
         store=True,
-        readonly=False,
         index=True,
     )
 
@@ -60,7 +59,7 @@ class SppUniqueId(models.AbstractModel):
             ):
                 raise ValidationError(not_correct_format)
 
-    @api.depends('create_date')
+    @api.depends("create_date")
     def _compute_spp_id(self):
         for rec in self:
             prefix = rec._get_spp_id_prefix()
