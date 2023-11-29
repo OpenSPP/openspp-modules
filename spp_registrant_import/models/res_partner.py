@@ -10,6 +10,7 @@ class Registrant(models.Model):
         inverse="_inverse_name",
         store=True,
     )
+    spp_id = fields.Char(readonly=False)
 
     @api.onchange("is_group", "family_name", "given_name", "addl_name")
     def name_change(self):
