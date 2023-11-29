@@ -36,9 +36,6 @@ class TestRegistrant(TransactionCase):
                 "name": "Partner 1",
             }
         )
-        (
-            self._partner | self._test_household | self._test_individuals
-        )._compute_spp_id()
 
     def test_01_compute_spp_id_normal_partner(self):
         self.assertFalse(
