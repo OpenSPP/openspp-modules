@@ -9,15 +9,26 @@ class SppAuditLog(models.Model):
         "Parent HTML Data", readonly=True, compute="_compute_parent_data_html"
     )
 
+    # Parent model based on audit rule
+    parent_model_id = fields.Many2one(
+        "ir.model", "Model", readonly=True, ondelete="cascade"
+    )
+    parent_res_ids_str = fields.Text(readonly=True)
+
+    # Where to log
+    log_to = fields.Text(compute="_compute_log_to")
+
     @api.model
     def create(self, vals):
         res = super().create(vals)
 
-        if res.parent_model_id:
+        records = []
+        msg = ""
+        if res.parent_model_id and res.parent_model_id.is_mail_thread:
             res_ids = list(map(int, res.parent_res_ids_str.split(",")))
             records = self.env[res.parent_model_id.model].browse(res_ids)
             msg = res.parent_data_html
-        else:
+        elif res.model_id and res.model_id.is_mail_thread:
             records = self.env[res.model_id.model].browse(res.res_id)
             msg = res.data_html
 
@@ -72,3 +83,11 @@ class SppAuditLog(models.Model):
                 '<table class="o_list_view table table-condensed '
                 'table-striped">%s%s</table>' % (thead, tbody)
             )
+
+    @api.depends("parent_model_id")
+    def _compute_log_to(self):
+        for rec in self:
+            if rec.parent_model_id:
+                rec.log_to = f"{rec.parent_model_id.model}({rec.parent_res_ids_str})"
+            else:
+                rec.log_to = f"{rec.model_id.model}({rec.res_id})"

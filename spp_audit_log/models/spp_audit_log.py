@@ -1,6 +1,6 @@
 from dateutil import tz
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.safe_eval import datetime, safe_eval
 
@@ -24,24 +24,7 @@ class SppAuditLog(models.Model):
     data = fields.Text(readonly=True)
     data_html = fields.Html("HTML Data", readonly=True, compute="_compute_data_html")
 
-    # Parent model based on audit rule
-    parent_model_id = fields.Many2one(
-        "ir.model", "Model", readonly=True, ondelete="cascade"
-    )
-    parent_res_ids_str = fields.Text(readonly=True)
-
-    # Where to log
-    log_to = fields.Text(compute="_compute_log_to")
-
     ALLOW_DELETE = False
-
-    @api.depends("parent_model_id")
-    def _compute_log_to(self):
-        for rec in self:
-            if rec.parent_model_id:
-                rec.log_to = f"{rec.parent_model_id.model}({rec.parent_res_ids_str})"
-            else:
-                rec.log_to = f"{rec.model_id.model}({rec.res_id})"
 
     def _compute_name(self):
         for rec in self:

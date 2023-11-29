@@ -22,14 +22,6 @@ class SppAuditRule(models.Model):
         required=True,
         ondelete="cascade",
     )
-    model_id_domain = fields.Char(
-        compute="_compute_model_id_domain",
-        readonly=True,
-    )
-    parent_id = fields.Many2one("spp.audit.rule", string="Parent Rule")
-    child_ids = fields.One2many(
-        "spp.audit.rule", "parent_id", string="Related Rules", readonly=True
-    )
 
     field_to_log_ids = fields.Many2many("ir.model.fields", string="Fields to log")
     field_to_log_ids_domain = fields.Char(
@@ -37,26 +29,11 @@ class SppAuditRule(models.Model):
         readonly=True,
     )
 
-    # will be visible and used only if audit rule have parent
-    field_id = fields.Many2one(
-        "ir.model.fields",
-        ondelete="cascade",
-        help="Field that connects this model to the model of the parent rule.",
-    )
-    field_id_domain = fields.Char(
-        compute="_compute_field_id_domain",
-        readonly=True,
-    )
     action_id = fields.Many2one(
         "ir.actions.act_window", "Add in the 'More' menu", readonly=True
     )
 
     _sql_constraints = [
-        (
-            "model_uniq",
-            "unique(model_id, parent_id, field_id)",
-            "There is already a rule defined for this model, parent, and field",
-        ),
         (
             "name_uniq",
             "unique(name)",
@@ -71,8 +48,17 @@ class SppAuditRule(models.Model):
         "message_ids",
         "message_last_post",
         "write_date",
-        # "id",
     ]
+
+    @api.constrains("model_id")
+    def _check_model(self):
+        for rec in self:
+            if self.env[self._name].search_count(
+                [("model_id", "=", rec.model_id.id), ("id", "!=", rec.id)]
+            ):
+                raise ValidationError(
+                    _("A rule is already existed for the selected model.")
+                )
 
     def _add_action_id(self):
         for rec in self:
@@ -247,104 +233,28 @@ class SppAuditRule(models.Model):
                 ]
             rec.field_to_log_ids_domain = json.dumps(domain)
 
-    @api.depends("model_id", "parent_id")
-    def _compute_field_id_domain(self):
-        for rec in self:
-            domain = [("id", "=", 0)]
-            if rec.model_id and rec.parent_id:
-                domain = [
-                    ("model_id", "=", rec.model_id.id),
-                    ("relation", "=", rec.parent_id.model_id.model),
-                ]
-            rec.field_id_domain = json.dumps(domain)
-
-    @api.depends("parent_id")
-    def _compute_model_id_domain(self):
-        for rec in self:
-            # If rule doesn't have a parent rule, selection model should have inherit the mail.thread
-            # Else, all model can be selected
-            domain = [("is_mail_thread", "=", True)]
-            if rec.parent_id:
-                domain = []
-            rec.model_id_domain = json.dumps(domain)
-
-    @api.constrains("model_id")
-    def _check_model_id(self):
-        for rec in self:
-            if not rec.parent_id and not rec.model_id.is_mail_thread:
-                raise ValidationError(
-                    _("Model should have inherit the mail.thread model.")
-                )
-
-    @api.constrains("field_id")
-    def _check_field_id(self):
-        for rec in self:
-            if rec.parent_id and not rec.field_id:
-                raise ValidationError(
-                    _("Field is required if the rule is a child rule.")
-                )
-
-    @api.constrains("model_id", "field_id")
-    def _check_model_id_field_id(self):
-        for rec in self:
-            if not rec.parent_id and not rec.model_id.is_mail_thread:
-                raise ValidationError(
-                    _(
-                        "Model should have inherit the mail.thread model if rule is a parent rule."
-                    )
-                )
-            if rec.parent_id and not rec.field_id:
-                raise ValidationError(
-                    _("Field is required if the rule is a child rule.")
-                )
-            if rec.parent_id and rec.field_id.relation != rec.parent_id.model_id.model:
-                error_msg = f"Field's relation should be {rec.parent_id.model_id.name}"
-                raise ValidationError(_(error_msg))
-
     @api.onchange("model_id")
     def _onchange_model_id(self):
         if self.model_id:
             self.update(
                 {
                     "field_to_log_ids": None,
-                    "field_id": None,
                 }
             )
 
-    def get_most_parent(self, res_ids):
-        """
-        The function `get_most_parent` retrieves the model name and ids of the most parent rule based on
-        a given set of resource ids.
+        return
 
-        :param res_ids: The `res_ids` parameter is a list of record IDs
-        :return: a tuple containing the model name and a list of record IDs.
-        """
-        if not self.parent_id:
-            return None, []
-
-        # Initialize variable to be used in while loop
-        current_rule_id = self
-        parent_rule_id = self.parent_id
-        currect_model_records = {"model": self.model_id.model, "ids": res_ids}
-
-        # get the model name and ids of the most parent rule
-        # loop will break if a rule doesn't have parent rule
-        while parent_rule_id:
-            current_records = self.env[currect_model_records["model"]].browse(
-                currect_model_records["ids"]
-            )
-            currect_model_records["model"] = parent_rule_id.model_id.model
-            new_ids = []
-            for record in current_records:
-                new_ids.extend(getattr(record, current_rule_id.field_id.name).ids)
-            currect_model_records["ids"] = new_ids
-
-            current_rule_id = parent_rule_id
-            parent_rule_id = parent_rule_id.parent_id
-
-        return currect_model_records["model"], [
-            str(record_id) for record_id in currect_model_records["ids"]
-        ]
+    def get_audit_log_vals(self, res_id, method, data):
+        self.ensure_one()
+        return {
+            # TODO: should we need to connect spp.audit.log to spp.audit.rule?
+            # 'audit_rule_id': self.id,
+            "user_id": self._uid,
+            "model_id": self.sudo().model_id.id,
+            "res_id": res_id,
+            "method": method,
+            "data": repr(data[res_id]),
+        }
 
     def log(self, method, old_values=None, new_values=None):
         """
@@ -368,20 +278,6 @@ class SppAuditRule(models.Model):
             audit_log = self.env["spp.audit.log"].sudo()
             for rec in self:
                 for res_id in data:
-                    parent_model, parent_res_ids = rec.get_most_parent([res_id])
-                    audit_log.create(
-                        {
-                            # TODO: should we need to connect spp.audit.log to spp.audit.rule?
-                            # 'audit_rule_id': self.id,
-                            "user_id": self._uid,
-                            "model_id": rec.sudo().model_id.id,
-                            "res_id": res_id,
-                            "method": method,
-                            "data": repr(data[res_id]),
-                            "parent_model_id": self.env["ir.model"]
-                            .search([("model", "=", parent_model)], limit=1)
-                            .id,
-                            "parent_res_ids_str": ",".join(parent_res_ids),
-                        }
-                    )
+                    audit_log_vals = rec.get_audit_log_vals(res_id, method, data)
+                    audit_log.create(audit_log_vals)
         return

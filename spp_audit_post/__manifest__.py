@@ -18,6 +18,7 @@
     "external_dependencies": {},
     "data": [
         "security/ir.model.access.csv",
+        "views/spp_audit_rule_views.xml",
     ],
     "assets": {},
     "demo": [],

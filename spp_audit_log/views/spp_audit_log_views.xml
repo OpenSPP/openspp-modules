@@ -12,7 +12,6 @@
         <field name="model" />
         <field name="res_id" />
         <field name="method" />
-        <field name="log_to" />
       </tree>
     </field>
   </record>
