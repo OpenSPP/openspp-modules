@@ -24,9 +24,9 @@ def _generate_unique_id():
 class SppUniqueId(models.AbstractModel):
     _name = "spp.unique.id"
 
-    registrant_id = fields.Char(
+    spp_id = fields.Char(
         string="Unique ID",
-        compute="_compute_registrant_id",
+        compute="_compute_spp_id",
         store=True,
         readonly=False,
         index=True,
@@ -34,40 +34,39 @@ class SppUniqueId(models.AbstractModel):
 
     _sql_constraints = [
         (
-            "registrant_id_uniq",
-            "UNIQUE(registrant_id)",
-            "registrant_id is an unique identifier!",
+            "spp_id_uniq",
+            "UNIQUE(spp_id)",
+            "spp_id is an unique identifier!",
         )
     ]
 
-    def _get_registrant_id_prefix(self):
+    def _get_spp_id_prefix(self):
         raise NotImplementedError()
 
-    def _get_match_registrant_id_pattern(self):
+    def _get_match_spp_id_pattern(self):
         raise NotImplementedError()
 
-    @api.constrains("registrant_id")
-    def _check_registrant_id(self):
+    @api.constrains("spp_id")
+    def _check_spp_id(self):
         not_correct_format = _("Unique ID is not following correct format!")
         for rec in self:
-            match_pattern = rec._get_match_registrant_id_pattern()
+            match_pattern = rec._get_match_spp_id_pattern()
             if not match_pattern:
                 continue
-            if not re.match(match_pattern, rec.registrant_id):
+            if not re.match(match_pattern, rec.spp_id):
                 raise ValidationError(not_correct_format)
             if any(
-                [
-                    char in rec.registrant_id.split("_")[-1]
-                    for char in ("0", "O", "1", "I")
-                ]
+                [char in rec.spp_id.split("_")[-1] for char in ("0", "O", "1", "I")]
             ):
                 raise ValidationError(not_correct_format)
 
-    def _compute_registrant_id(self):
+    def _compute_spp_id(self):
         for rec in self:
-            prefix = rec._get_registrant_id_prefix()
+            prefix = rec._get_spp_id_prefix()
             if not prefix:
-                rec.registrant_id = False
+                rec.spp_id = False
                 continue
-            registrant_id = _generate_unique_id()
-            rec.registrant_id = "_".join([prefix, registrant_id])
+            spp_id = "_".join([prefix, _generate_unique_id()])
+            while self.search([("spp_id", "=", spp_id)], limit=1):
+                spp_id = "_".join([prefix, _generate_unique_id()])
+            rec.spp_id = spp_id
