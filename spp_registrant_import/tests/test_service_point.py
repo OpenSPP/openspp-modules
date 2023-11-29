@@ -18,7 +18,6 @@ class TestServicePoint(TransactionCase):
                 {"name": "Service Point 2"},
             ]
         )
-        (self.service_point_1 | self.service_point_2)._compute_spp_id()
 
     def test_01_compute_spp_id_uniq(self):
         self.assertNotEqual(self.service_point_1.spp_id, self.service_point_2.spp_id)

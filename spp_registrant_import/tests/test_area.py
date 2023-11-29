@@ -16,7 +16,6 @@ class TestArea(TransactionCase):
                 {"draft_name": "Area 2"},
             ]
         )
-        (self.area_1 | self.area_2)._compute_spp_id()
 
     def test_01_compute_spp_id_uniq(self):
         self.assertNotEqual(self.area_1.spp_id, self.area_2.spp_id)
