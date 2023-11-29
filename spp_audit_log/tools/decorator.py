@@ -49,17 +49,18 @@ def audit_decorator(method):
 
     def audit_write(self, vals):
         rules = self.get_audit_rules("write")
+        old_values_copy = None
         if rules:
             old_values = self.sudo().read(load="_classic_write")
+            old_values_copy = copy.deepcopy(old_values)
         result = audit_write.origin(self, vals)
 
-        old_values_copy = copy.deepcopy(old_values)
         if audit_write.origin.__name__ == "_write":
             new_values = get_new_values(self)
         else:
             new_values = self.sudo().read(load="_classic_write")
 
-        if new_values:
+        if new_values and old_values_copy:
             keys = new_values[0].keys()
             for key in keys:
                 if str(type(new_values[0][key])) == "<class 'markupsafe.Markup'>":

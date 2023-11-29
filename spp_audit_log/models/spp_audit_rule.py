@@ -31,10 +31,17 @@ class SppAuditRule(models.Model):
         "spp.audit.rule", "parent_id", string="Related Rules", readonly=True
     )
 
+    field_to_log_ids = fields.Many2many("ir.model.fields", string="Fields to log")
+    field_to_log_ids_domain = fields.Char(
+        compute="_compute_field_to_log_ids_domain",
+        readonly=True,
+    )
+
     # will be visible and used only if audit rule have parent
     field_id = fields.Many2one(
         "ir.model.fields",
         ondelete="cascade",
+        help="Field that connects this model to the model of the parent rule.",
     )
     field_id_domain = fields.Char(
         compute="_compute_field_id_domain",
@@ -64,6 +71,7 @@ class SppAuditRule(models.Model):
         "message_ids",
         "message_last_post",
         "write_date",
+        # "id",
     ]
 
     def _add_action_id(self):
@@ -190,7 +198,7 @@ class SppAuditRule(models.Model):
         return
 
     @classmethod
-    def _format_data_to_log(cls, old_values, new_values):
+    def _format_data_to_log(cls, old_values, new_values, fields_to_log):
         """
         The function `_format_data_to_log` takes in old and new values, removes ignored fields, compares
         the values, and returns a dictionary of data with differences between old and new values.
@@ -212,9 +220,8 @@ class SppAuditRule(models.Model):
             if isinstance(vals_list, dict):
                 vals_list = [vals_list]
             for vals in vals_list or []:
-                for field in cls._ignored_fields:
-                    vals.pop(field, None)
                 res_id = vals.pop("id")
+                vals = dict(filter(lambda x: x[0] in fields_to_log, vals.items()))
                 if vals:
                     data.setdefault(res_id, {"old": {}, "new": {}})[age] = vals
         for res_id in list(data.keys()):
@@ -228,6 +235,17 @@ class SppAuditRule(models.Model):
             if data[res_id]["old"] == data[res_id]["new"]:
                 del data[res_id]
         return data
+
+    @api.depends("model_id")
+    def _compute_field_to_log_ids_domain(self):
+        for rec in self:
+            domain = [("id", "=", 0)]
+            if rec.model_id:
+                domain = [
+                    ("model_id", "=", rec.model_id.id),
+                    ("name", "not in", self._ignored_fields),
+                ]
+            rec.field_to_log_ids_domain = json.dumps(domain)
 
     @api.depends("model_id", "parent_id")
     def _compute_field_id_domain(self):
@@ -283,6 +301,16 @@ class SppAuditRule(models.Model):
                 error_msg = f"Field's relation should be {rec.parent_id.model_id.name}"
                 raise ValidationError(_(error_msg))
 
+    @api.onchange("model_id")
+    def _onchange_model_id(self):
+        if self.model_id:
+            self.update(
+                {
+                    "field_to_log_ids": None,
+                    "field_id": None,
+                }
+            )
+
     def get_most_parent(self, res_ids):
         """
         The function `get_most_parent` retrieves the model name and ids of the most parent rule based on
@@ -335,7 +363,8 @@ class SppAuditRule(models.Model):
         it returns None.
         """
         if old_values or new_values:
-            data = self._format_data_to_log(old_values, new_values)
+            fields_to_log = self.field_to_log_ids.mapped("name")
+            data = self._format_data_to_log(old_values, new_values, fields_to_log)
             audit_log = self.env["spp.audit.log"].sudo()
             for rec in self:
                 for res_id in data:
