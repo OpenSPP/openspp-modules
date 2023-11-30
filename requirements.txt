@@ -1,6 +1,6 @@
 # generated from manifests external_dependencies
 bravado_core
 jsonschema
-jwt
+pyjwt
 PyLD
 swagger_spec_validator

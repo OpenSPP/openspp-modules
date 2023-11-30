@@ -5,7 +5,7 @@
     "version": "15.0.0.0.0",
     "author": "OpenSPP.org",
     "development_status": "Alpha",
-    "external_dependencies": {"python": ["PyLD", "jwt"]},
+    "external_dependencies": {"python": ["PyLD", "pyjwt"]},
     "website": "https://github.com/openspp/openspp-program",
     "license": "LGPL-3",
     "depends": [
