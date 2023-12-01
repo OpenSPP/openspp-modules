@@ -53,7 +53,7 @@
         id="menu_spp_idpass"
         name="ID PASS"
         action="action_spp_idpass"
-        parent="spp_idqueue.id_queue_configuration_menu_root"
+        parent="spp_idpass.id_pass_configuration_menu_root"
         sequence="10"
         groups="g2p_registry_base.group_g2p_admin"
     />

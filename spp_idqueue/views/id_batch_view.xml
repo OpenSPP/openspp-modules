@@ -366,7 +366,7 @@
         id="menu_spp_print_queue_batch"
         name="ID Print Batch"
         action="action_spp_print_queue_batch"
-        parent="spp_idqueue.id_queue_main_menu_root"
+        parent="spp_idpass.id_pass_main_menu_root"
         sequence="20"
         groups="g2p_registry_base.group_g2p_admin,group_g2p_id_validator,group_g2p_id_distributor"
     />
