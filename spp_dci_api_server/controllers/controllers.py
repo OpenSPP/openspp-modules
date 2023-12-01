@@ -6,9 +6,33 @@ import werkzeug.wrappers
 
 from odoo.http import Controller, request, route
 from odoo.osv.expression import AND
+from odoo.service.db import list_dbs
 from odoo.tools import date_utils
 
 from ..tools import constants, verify_and_decode_signature
+
+
+def setup_db(httprequest, db_name):
+    """check and setup db in session by db name
+
+    :param httprequest: a wrapped werkzeug Request object
+    :type httprequest: :class:`werkzeug.wrappers.BaseRequest`
+    :param str db_name: Database name.
+
+    :raise: werkzeug.exceptions.HTTPException if the database not found.
+    """
+
+    if not db_name:
+        return 400, {
+            "error": "Bad Request",
+            "error_description": "db_name is required.",
+        }
+
+    if db_name not in list_dbs(force=True):
+        return 404, {"error": "Not Found", "error_description": "DB not found."}
+
+    httprequest.session.db = db_name
+    return 200, None
 
 
 def response_wrapper(status, data):
@@ -48,6 +72,12 @@ class SppDciApiServer(Controller):
         client_id = kw.get("client_id", "")
         client_secret = kw.get("client_secret", "")
         grant_type = kw.get("grant_type", "")
+        db_name = kw.get("db_name", "")
+
+        status_code, error_message = setup_db(request.httprequest, db_name)
+
+        if error_message:
+            return response_wrapper(status_code, error_message)
 
         if not all([client_id, client_secret, grant_type]):
             error = {
@@ -72,7 +102,7 @@ class SppDciApiServer(Controller):
             }
             return response_wrapper(401, error)
 
-        access_token = client.generate_access_token()
+        access_token = client.generate_access_token(db_name)
 
         data = {
             "access_token": access_token,
@@ -96,6 +126,11 @@ class SppDciApiServer(Controller):
 
         # TODO: payload of access token is not used for now
         verified, payload = verify_and_decode_signature(access_token)
+
+        db_name = payload.get("db_name")
+        status_code, error_message = setup_db(request.httprequest, db_name)
+        if error_message:
+            return error_wrapper(status_code, error_message["error_description"])
 
         if not verified:
             return error_wrapper(401, "Invalid Access Token.")
