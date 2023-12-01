@@ -29,8 +29,6 @@ class ResPartnerCustomSPP(models.Model):
             # if grp_dom:
             domain.append(("area_id", "child_of", self.env.user.center_area_ids.ids))
 
-        res = super(ResPartnerCustomSPP, self).search_read(
-            domain, fields, offset, limit, order
-        )
+        res = super().search_read(domain, fields, offset, limit, order)
         _logger.debug("FILTER: domain: %s" % domain)
         return res

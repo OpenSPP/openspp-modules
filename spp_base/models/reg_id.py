@@ -20,4 +20,3 @@ class OpenSPPRegistrantID(models.Model):
                 and len(str(rec.card_uid)) != 10
             ):
                 raise ValidationError(_("Top-up Card UID should have 10 characters"))
-
