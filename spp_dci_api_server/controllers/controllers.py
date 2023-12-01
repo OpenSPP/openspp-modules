@@ -72,7 +72,16 @@ class SppDciApiServer(Controller):
         req = request
 
         data = req.httprequest.data or "{}"
-        data = json.loads(data)
+        try:
+            data = json.loads(data)
+        except json.decoder.JSONDecodeError:
+            return response_wrapper(
+                400,
+                {
+                    "error": "Bad Request",
+                    "error_description": "data must be in JSON format.",
+                },
+            )
 
         client_id = data.get("client_id", "")
         client_secret = data.get("client_secret", "")
@@ -143,7 +152,10 @@ class SppDciApiServer(Controller):
         req = HttpRequest(req.httprequest)
 
         data = req.httprequest.data or "{}"
-        data = json.loads(data)
+        try:
+            data = json.loads(data)
+        except json.decoder.JSONDecodeError:
+            return error_wrapper(400, "data must be in JSON format.")
 
         header = data.get("header", "")
 
