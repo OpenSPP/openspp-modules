@@ -50,7 +50,7 @@ class ClientCredential(models.Model):
     ALLOW_EXPORT = False
 
     @api.model
-    def generate_access_token(self, db_name):
+    def generate_access_token(self):
         today = datetime.today()
         expiry_datetime = today + timedelta(minutes=self.TOKEN_EXPIRATION_MIN)
 
@@ -59,7 +59,6 @@ class ClientCredential(models.Model):
             "iat": calendar.timegm(today.timetuple()),
             "exp": calendar.timegm(expiry_datetime.timetuple()),
             "iss": "openspp:auth-service",
-            "db_name": db_name,
         }
 
         return calculate_signature(header, payload)
