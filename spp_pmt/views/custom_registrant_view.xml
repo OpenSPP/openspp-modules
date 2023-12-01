@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_groups_pmt_form" model="ir.ui.view">
+        <field name="name">view_groups_pmt_form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1000</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <field name="grp_pmt_score" invisible="1" />
+                <field name="area_calc" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
