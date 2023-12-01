@@ -71,7 +71,9 @@ class SppDciApiServer(Controller):
     def auth_get_access_token(self, **kw):
         req = request
 
-        data = json.loads(req.httprequest.data)
+        data = req.httprequest.data or "{}"
+        data = json.loads(data)
+
         client_id = data.get("client_id", "")
         client_secret = data.get("client_secret", "")
         grant_type = data.get("grant_type", "")
@@ -140,7 +142,9 @@ class SppDciApiServer(Controller):
             return error_wrapper(status_code, error_message["error_description"])
         req = HttpRequest(req.httprequest)
 
-        data = json.loads(req.httprequest.data)
+        data = req.httprequest.data or "{}"
+        data = json.loads(data)
+
         header = data.get("header", "")
 
         header_error = self.check_content(
