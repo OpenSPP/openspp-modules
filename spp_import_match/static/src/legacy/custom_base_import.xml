@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template xml:space="preserve">
+
+    <t t-extend="ImportView.side_panel">
+        <t t-jquery="div.o_import_formatting" t-operation="before">
+            <h4>Import Match</h4>
+            <div class="mb-2 d-flex align-items-center">
+                <label for="oe_import_match">Configuration:</label>
+                <input class="oe_import_match oe_import_dropdown" id="oe_import_match" />
+            </div>
+        </t>
+    </t>
+</template>

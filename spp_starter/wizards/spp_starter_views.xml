@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="spp_starter_view_form" model="ir.ui.view">
+        <field name="name">spp.starter.view.form</field>
+        <field name="model">spp.starter</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="state" widget="statusbar" invisible="1" />
+                <sheet>
+                    <div attrs="{'invisible': [('state', '!=', '0')]}">
+                        <div class="alert alert-info text-center" role="alert">
+                            <strong>1. Organization Setup</strong>
+                            &gt; 2. Registry Setup
+                            &gt; 3. Service Points
+                            &gt; 4. Cash Transfer
+                            &gt; 5. In-Kind Transfer
+                            &gt; 6. Grievance Redress Mechanism (GRM)
+                        </div>
+                        <label for="org_name" string="Organization Name" />
+                        <br />
+                        <field name="org_name" nolabel="1" placeholder="Enter your organization name." />
+                        <label for="org_address" string="Organization's Address" />
+                        <br />
+                        <field
+                            name="org_address"
+                            nolabel="1"
+                            placeholder="Enter the organization's address."
+                        />
+                        <label for="org_phone" string="Organization's Phone Number" />
+                        <br />
+                        <field
+                            name="org_phone"
+                            nolabel="1"
+                            placeholder="Enter the organization's phone number."
+                        />
+                        <label for="org_currency_id" string="Select the organization's operating currency." />
+                        <br />
+                        <field
+                            name="org_currency_id"
+                            nolabel="1"
+                            options="{'no_create': True, 'no_open': True}"
+                        />
+                    </div>
+                    <div attrs="{'invisible': [('state', '!=', '1')]}">
+                        <div class="alert alert-info text-center" role="alert">
+                            1. Organization Setup
+                            &gt; <strong>2. Registry Setup</strong>
+                            &gt; 3. Service Points
+                            &gt; 4. Cash Transfer
+                            &gt; 5. In-Kind Transfer
+                            &gt; 6. Grievance Redress Mechanism (GRM)
+                        </div>
+                        <label for="managing_target" string="Will you manage groups, individuals, or both?" />
+                        <br />
+                        <field
+                            name="managing_target"
+                            nolabel="1"
+                            widget="radio"
+                            options="{'horizontal': true}"
+                        />
+                        <br />
+                        <label
+                            for="location_assignment"
+                            string="Is location assignment for registrants needed?"
+                        />
+                        <br />
+                        <field
+                            name="location_assignment"
+                            nolabel="1"
+                            widget="radio"
+                            options="{'horizontal': true}"
+                        />
+                        <br />
+                        <label for="id_management" string="Would you like to issue functional IDs?" />
+                        <br />
+                        <field
+                            name="id_management"
+                            nolabel="1"
+                            widget="radio"
+                            options="{'horizontal': true}"
+                        />
+                    </div>
+                    <div attrs="{'invisible': [('state', '!=', '2')]}">
+                        <div class="alert alert-info text-center" role="alert">
+                            1. Organization Setup
+                            &gt; 2. Registry Setup
+                            &gt; <strong>3. Service Points</strong>
+                            &gt; 4. Cash Transfer
+                            &gt; 5. In-Kind Transfer
+                            &gt; 6. Grievance Redress Mechanism (GRM)
+                        </div>
+                        <label
+                            for="service_point_management"
+                            string="Do you need to manage service points?"
+                        />
+                        <br />
+                        <field
+                            name="service_point_management"
+                            nolabel="1"
+                            widget="radio"
+                            options="{'horizontal': true}"
+                        />
+                    </div>
+                    <div attrs="{'invisible': [('state', '!=', '3')]}">
+                        <div class="alert alert-info text-center" role="alert">
+                            1. Organization Setup
+                            &gt; 2. Registry Setup
+                            &gt; 3. Service Points
+                            &gt; <strong>4. Cash Transfer</strong>
+                            &gt; 5. In-Kind Transfer
+                            &gt; 6. Grievance Redress Mechanism (GRM)
+                        </div>
+                        <label for="cash_transfer_needed" string="Will you be conducting cash transfers?" />
+                        <br />
+                        <field
+                            name="cash_transfer_needed"
+                            nolabel="1"
+                            widget="radio"
+                            options="{'horizontal': true}"
+                        />
+                        <br />
+                        <label for="bank_details_needed" string="Do you need to capture bank details?" />
+                        <br />
+                        <field
+                            name="bank_details_needed"
+                            nolabel="1"
+                            widget="radio"
+                            options="{'horizontal': true}"
+                        />
+                    </div>
+                    <div attrs="{'invisible': [('state', '!=', '4')]}">
+                        <div class="alert alert-info text-center" role="alert">
+                            1. Organization Setup
+                            &gt; 2. Registry Setup
+                            &gt; 3. Service Points
+                            &gt; 4. Cash Transfer
+                            &gt; <strong>5. In-Kind Transfer</strong>
+                            &gt; 6. Grievance Redress Mechanism (GRM)
+                        </div>
+                        <label
+                            for="conducting_inkind_transfer"
+                            string="Will you be conducting in-kind transfers?"
+                        />
+                        <br />
+                        <field
+                            name="conducting_inkind_transfer"
+                            nolabel="1"
+                            widget="radio"
+                            options="{'horizontal': true}"
+                        />
+                    </div>
+                    <div attrs="{'invisible': [('state', '!=', '5')]}">
+                        <div class="alert alert-info text-center" role="alert">
+                            1. Organization Setup
+                            &gt; 2. Registry Setup
+                            &gt; 3. Service Points
+                            &gt; 4. Cash Transfer
+                            &gt; 5. In-Kind Transfer
+                            &gt; <strong>6. Grievance Redress Mechanism (GRM)</strong>
+                        </div>
+                        <label
+                            for="complaint_management"
+                            string="Do you require a Grievance Redress Mechanism?"
+                        />
+                        <br />
+                        <field
+                            name="complaint_management"
+                            nolabel="1"
+                            widget="radio"
+                            options="{'horizontal': true}"
+                        />
+                    </div>
+                </sheet>
+                <footer>
+                    <button
+                        string="Back"
+                        name="action_last_state"
+                        type="object"
+                        attrs="{'invisible': [('state', '=', '0')]}"
+                        class="btn btn-secondary"
+                    />
+                    <button
+                        string="Next"
+                        name="action_next_state"
+                        type="object"
+                        attrs="{'invisible': [('state', '=', '5')]}"
+                        class="oe_highlight"
+                    />
+                    <button
+                        string="Done"
+                        name="action_done"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', '5')]}"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" special="cancel" class="btn btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="spp_starter_action" model="ir.actions.act_window">
+        <field name="name">Welcome to OpenSPP!</field>
+        <field name="res_model">spp.starter</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="spp_starter_menu"
+        name="Apps"
+        action="spp_starter_action"
+        groups="base.group_system"
+        sequence="500"
+    />
+
+</odoo>
