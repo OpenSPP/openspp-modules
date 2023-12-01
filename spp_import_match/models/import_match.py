@@ -1,7 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 import logging
-from odoo import _, api, fields, models, tools
+
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -12,7 +13,7 @@ class SPPImportMatch(models.Model):
     _description = "Import Matching"
     _order = "sequence, name"
 
-    name = fields.Char(compute="_compute_name", store=True, index=True)
+    name = fields.Char()
     sequence = fields.Integer(index=True)
     overwrite_match = fields.Boolean(Default=False)
     model_id = fields.Many2one(
@@ -33,27 +34,10 @@ class SPPImportMatch(models.Model):
         help="Fields to Match in Importing",
     )
 
-    _sql_constraints = [
-        (
-            "model_id_unique",
-            "unique (model_id)",
-            "Model must be unique",
-        ),
-    ]
-
     @api.onchange("model_id")
     def _onchange_model_id(self):
         for rec in self:
             rec.field_ids = None
-
-    @api.depends("model_id")
-    def _compute_name(self):
-        for rec in self:
-            name = "New"
-            if rec.model_id:
-                name = rec.model_description
-
-            rec.name = name
 
     @api.model
     def _match_find(self, model, converted_row, imported_row):
@@ -77,7 +61,9 @@ class SPPImportMatch(models.Model):
                         if field.sub_field_id.name in tuple_val:
                             row_value = tuple_val[field.sub_field_id.name]
                             add_to_domain = True
-                            field_value = field.field_id.name + "." + field.sub_field_id.name
+                            field_value = (
+                                field.field_id.name + "." + field.sub_field_id.name
+                            )
                     if add_to_domain:
                         domain.append((field_value, "=", row_value))
             if not combination_valid:
@@ -89,19 +75,18 @@ class SPPImportMatch(models.Model):
         return model
 
     @api.model
-    @tools.ormcache("model_name", "frozenset(fields)")
-    def _usable_rules(self, model_name, fields):
+    def _usable_rules(self, model_name, fields, option_config_ids=False):
         result = self
-        available = self.search([("model_name", "=", model_name)])
+        domain = [("model_name", "=", model_name)]
+        if option_config_ids and isinstance(option_config_ids, list):
+            domain.append(("id", "in", option_config_ids))
+        available = self.search(domain)
         field_to_match = []
         for record in available:
-            for field in record.field_ids:
-                if not field.sub_field_id:
-                    field_to_match.append(field.name)
+            field_to_match.append(record.field_ids.mapped("name"))
             for f in record.field_ids:
                 if f.name in fields or f.field_id.name in fields:
                     result |= record
-
         return result.ids, field_to_match
 
 
@@ -145,11 +130,13 @@ class SPPImportMatchFields(models.Model):
             field_id = rec.field_id.id
             field_type = rec.field_id.ttype
             fields_list = []
-            if field_type not in ('many2many', 'one2many', 'many2one'):
+            if field_type not in ("many2many", "one2many", "many2one"):
                 for field in rec.match_id.field_ids:
                     new_id_str = str(field.id)
-                    new_id_str_2 = ''.join(letter for letter in new_id_str if letter.isalnum())
-                    if 'NewIdvirtual' not in new_id_str_2:
+                    new_id_str_2 = "".join(
+                        letter for letter in new_id_str if letter.isalnum()
+                    )
+                    if "NewIdvirtual" not in new_id_str_2:
                         fields_list.append(field.field_id.id)
 
                 duplicate_counter = 0
@@ -158,5 +145,7 @@ class SPPImportMatchFields(models.Model):
                         duplicate_counter += 1
 
                 if duplicate_counter > 1:
-                    raise ValidationError(_("Field '%s', already exists!") % rec.field_id.field_description)
-
+                    raise ValidationError(
+                        _("Field '%s', already exists!")
+                        % rec.field_id.field_description
+                    )
