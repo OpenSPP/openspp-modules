@@ -1,18 +1,14 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import re
 from odoo import api, models
-
 
 class Base(models.AbstractModel):
     _inherit = "base"
 
     @api.model
     def load(self, fields, data):
-        usable, field_to_match = self.env["spp.import.match"]._usable_rules(
-            self._name, fields
-        )
-        import_match = self.env["spp.import.match"].search(
-            [("model_name", "=", self._name)]
-        )
+        usable, field_to_match = self.env["spp.import.match"]._usable_rules(self._name, fields)
+        import_match = self.env["spp.import.match"].search([("model_name", "=", self._name)])
         overwrite_match = import_match[0].overwrite_match if import_match else False
 
         if usable:
@@ -46,9 +42,7 @@ class Base(models.AbstractModel):
                 else:
                     match = self.env["spp.import.match"]._match_find(self, record, row)
 
-                flat_fields_to_remove = [
-                    item for sublist in field_to_match for item in sublist
-                ]
+                flat_fields_to_remove = [item for sublist in field_to_match for item in sublist]
                 for fields_pop in flat_fields_to_remove:
                     if fields_pop in fields:
                         fields.remove(fields_pop)
@@ -67,4 +61,4 @@ class Base(models.AbstractModel):
                     row["id"] = ext_id[match.id] if match else row.get("id", "")
                     newdata.append(tuple(row[f] for f in fields))
             data = newdata
-        return super().load(fields, data)
+        return super(Base, self).load(fields, data)
