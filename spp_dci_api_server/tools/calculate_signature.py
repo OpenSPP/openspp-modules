@@ -1,16 +1,14 @@
-import os
-
 import jwt
+
+from odoo.tools.misc import file_open
 
 JWT_ALGORITHM = "RS256"
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
 
-
-with open(f"{dir_path}/private_key.pem") as privatefile:
+with file_open("spp_dci_api_server/tools/private_key.pem") as privatefile:
     privkey = privatefile.read()
 
-with open(f"{dir_path}/public_key.pub") as publicfile:
+with file_open("spp_dci_api_server/tools/public_key.pub") as publicfile:
     pubkey = publicfile.read()
 
 
