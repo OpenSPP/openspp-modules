@@ -5,10 +5,10 @@ from odoo.tools.misc import file_open
 JWT_ALGORITHM = "RS256"
 
 
-with file_open("spp_dci_api_server/tools/private_key.pem") as privatefile:
+with file_open("spp_oauth/tools/private_key.pem") as privatefile:
     privkey = privatefile.read()
 
-with file_open("spp_dci_api_server/tools/public_key.pub") as publicfile:
+with file_open("spp_oauth/tools/public_key.pub") as publicfile:
     pubkey = publicfile.read()
 
 
