@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="spp_users_bearer_token_view_form" model="ir.ui.view">
+        <field name="name">spp.users.bearer.token.view.form</field>
+        <field name="model">spp.users.bearer.token</field>
+        <field name="arch" type="xml">
+            <form string="Users Bearer Token">
+                <sheet>
+                    <group>
+                        <field name="calculated_token" widget="CopyClipboardText" nolabel="1" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

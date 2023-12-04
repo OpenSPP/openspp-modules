@@ -18,7 +18,17 @@
             <notebook position="inside">
                 <page string="Allowed APIs">
                     <group>
-                        <field name="openapi_token" />
+                        <label for="openapi_token" />
+                        <div class="o_row">
+                            <field name="openapi_token" />
+                            <span />
+                            <button
+                                icon="fa-key"
+                                name="action_view_bearer_token"
+                                type="object"
+                                class="oe_highlight"
+                            />
+                        </div>
                     </group>
                     <field name="namespace_ids" />
                 </page>

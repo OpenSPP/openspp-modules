@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 import uuid
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class ResUsers(models.Model):
@@ -31,3 +31,24 @@ class ResUsers(models.Model):
     @api.model
     def reset_all_openapi_tokens(self):
         self.search([]).reset_openapi_token()
+
+    def action_view_bearer_token(self):
+        self.ensure_one()
+        token = (
+            self.env["spp.users.bearer.token"]
+            .sudo()
+            .create(
+                {
+                    "user_id": self.id,
+                }
+            )
+        )
+        return {
+            "name": _("Users Bearer Token"),
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "view_type": "form",
+            "res_model": "spp.users.bearer.token",
+            "res_id": token.id,
+            "target": "new",
+        }
