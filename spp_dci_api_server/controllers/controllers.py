@@ -9,7 +9,9 @@ from odoo.osv.expression import AND
 from odoo.service.db import list_dbs
 from odoo.tools import date_utils
 
-from ..tools import constants, verify_and_decode_signature
+from odoo.addons.spp_oauth.tools import verify_and_decode_signature
+
+from ..tools import constants
 
 
 def setup_db(req, db_name):

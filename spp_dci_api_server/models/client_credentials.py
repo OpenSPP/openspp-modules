@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from ..tools import calculate_signature
+from odoo.addons.spp_oauth.tools import calculate_signature
 
 
 class ClientCredential(models.Model):
