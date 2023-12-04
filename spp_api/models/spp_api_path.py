@@ -489,10 +489,10 @@ class SPPAPIPath(models.Model):
                     "Search domain to read. ("
                     "Defaults to an empty domain "
                     "that will match all records) "
-                    '<a href="https://www.odoo.com/documentation/15.0/'
-                    "en/developer/reference/addons/"
-                    'orm.html#reference-orm-domains" '
-                    'target="_blank">Documentation</a>'
+                    # '<a href="https://www.odoo.com/documentation/15.0/'
+                    # "en/developer/reference/addons/"
+                    # 'orm.html#reference-orm-domains" '
+                    # 'target="_blank">Documentation</a>'
                 ),
                 _("Example: `[('name', '=', 'Test')]`"),
             ),
