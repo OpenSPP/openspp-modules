@@ -209,7 +209,7 @@ class SPPAPIPath(models.Model):
             },
             "security": [
                 {
-                    "api_key": [],
+                    "basicAuth": [],
                 }
             ],
         }
