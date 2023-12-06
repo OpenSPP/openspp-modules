@@ -50,7 +50,7 @@ class SppUniqueId(models.AbstractModel):
         not_correct_format = _("Unique ID is not following correct format!")
         for rec in self:
             match_pattern = rec._get_match_spp_id_pattern()
-            if not match_pattern:
+            if not match_pattern or not rec.spp_id:
                 continue
             if not re.match(match_pattern, rec.spp_id):
                 raise ValidationError(not_correct_format)
