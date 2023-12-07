@@ -1,49 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <!-- Program Rule -->
-    <function model="spp.audit.rule" name="create_rules">
-        <value
-            model="spp.audit.rule"
-            eval="{
-            'name': 'Program Rule',
-            'model_id': obj().env['ir.model'].search([('model', '=', 'g2p.program')]).id,
-        }"
-        />
-    </function>
 
-    <!-- Child Cycle Rule child of Program Rule -->
-    <function model="spp.audit.rule" name="create_rules">
-        <value
-            model="spp.audit.rule"
-            eval="{
-            'name': 'Child Cycle Rule',
-            'parent_id': obj().env['spp.audit.rule'].search([('name', '=', 'Program Rule')]).id,
-            'model_id': obj().env['ir.model'].search([('model', '=', 'g2p.cycle')]).id,
-            'field_id': obj().env['ir.model.fields'].search([('name', '=', 'program_id'), ('model', '=', 'g2p.cycle'), ('relation', '=', 'g2p.program')]).id,
-        }"
+    <record id="spp_program_rule" model="spp.audit.rule">
+        <field name="name">Program Rule</field>
+        <field
+            name="model_id"
+            model="ir.model"
+            eval="obj().env['ir.model'].search([('model', '=', 'g2p.program')]).id"
         />
-    </function>
+    </record>
 
-    <!-- Registry Rule -->
-    <function model="spp.audit.rule" name="create_rules">
-        <value
-            model="spp.audit.rule"
-            eval="{
-            'name': 'Registry Rule',
-            'model_id': obj().env['ir.model'].search([('model', '=', 'res.partner')]).id,
-        }"
+    <record id="spp_cycle_rule" model="spp.audit.rule">
+        <field name="name">Cycle Rule</field>
+        <field
+            name="model_id"
+            model="ir.model"
+            eval="obj().env['ir.model'].search([('model', '=', 'g2p.cycle')]).id"
         />
-    </function>
+    </record>
 
-    <!-- Service Point Rule -->
-    <function model="spp.audit.rule" name="create_rules">
-        <value
-            model="spp.audit.rule"
-            eval="{
-            'name': 'Service Point Rule',
-            'model_id': obj().env['ir.model'].search([('model', '=', 'spp.service.point')]).id,
-        }"
+    <record id="spp_registry_rule" model="spp.audit.rule">
+        <field name="name">Registry Rule</field>
+        <field
+            name="model_id"
+            model="ir.model"
+            eval="obj().env['ir.model'].search([('model', '=', 'res.partner')]).id"
         />
-    </function>
+    </record>
+
+    <record id="spp_service_point_rule" model="spp.audit.rule">
+        <field name="name">Service Point Rule</field>
+        <field
+            name="model_id"
+            model="ir.model"
+            eval="obj().env['ir.model'].search([('model', '=', 'spp.service.point')]).id"
+        />
+    </record>
 
 </odoo>
