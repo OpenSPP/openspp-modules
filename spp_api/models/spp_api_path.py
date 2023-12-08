@@ -531,7 +531,7 @@ class SPPAPIPath(models.Model):
         """
         self.ensure_one()
         return {
-            "name": "offset",
+            "name": "start_from",
             "in": "query",
             "description": _("Number of records to skip. (Defaults to 0)"),
             "required": False,
