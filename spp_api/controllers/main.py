@@ -4,6 +4,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 import json
 import logging
+from os.path import dirname, join, realpath
 
 import werkzeug
 
@@ -106,3 +107,28 @@ class OAS(http.Controller):
             status=200,
             **response_params
         )
+
+    @http.route(
+        "/" + BASE_API + "/swagger-doc/<namespace_name>/<version>",
+        type="http",
+        auth="none",
+        csrf=False,
+    )
+    def oas_document(self, namespace_name, version, **kwargs):
+        ensure_db()
+        namespace = (
+            http.request.env["spp_api.namespace"]
+            .sudo()
+            .search([("name", "=", namespace_name), ("version_name", "=", version)])
+        )
+        if not namespace:
+            raise werkzeug.exceptions.NotFound()
+        if namespace.token != kwargs.get("token"):
+            raise werkzeug.exceptions.Forbidden()
+        namespace_oas_data = json.dumps(
+            namespace.get_oas(version), default=date_utils.json_default
+        )
+        html_template_dir = join(dirname(dirname(realpath(__file__))), "templates")
+        with open(join(html_template_dir, "index.html"), "r") as file:
+            return_html = file.read() % namespace_oas_data
+        return werkzeug.wrappers.Response(return_html, status=200, mimetype="text/html")

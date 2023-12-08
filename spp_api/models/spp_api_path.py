@@ -1,5 +1,6 @@
 import logging
-from copy import deepcopy
+
+# from copy import deepcopy
 from datetime import date, datetime
 
 from odoo import _, api, fields, models
@@ -208,7 +209,7 @@ class SPPAPIPath(models.Model):
             },
             "security": [
                 {
-                    "api_key": [],
+                    "basicAuth": [],
                 }
             ],
         }
@@ -221,7 +222,7 @@ class SPPAPIPath(models.Model):
             get_one_path = "/{}/{}".format(self.name, "{Id}")
             if get_one_path not in swagger_paths:
                 swagger_paths.setdefault(get_one_path, {})
-            # Read All elements
+            # region::Read All elements::
             definition_all = {
                 "schema": {
                     "type": "object",
@@ -234,6 +235,9 @@ class SPPAPIPath(models.Model):
                                 ),
                             },
                         },
+                        "reply_id": {
+                            "type": "string",
+                        },
                         "count": {
                             "type": "integer",
                         },
@@ -242,6 +246,9 @@ class SPPAPIPath(models.Model):
                         },
                         "limit": {
                             "type": "integer",
+                        },
+                        "timestamp": {
+                            "type": "string",
                         },
                     },
                 }
@@ -253,22 +260,35 @@ class SPPAPIPath(models.Model):
                     "get": values,
                 }
             )
-            # Read One element
-            values_one = deepcopy(values)
-            definition_one = {
-                "schema": {
-                    "$ref": "#/definitions/{}".format(
-                        format_definition_name(self.name)
-                    ),
-                }
-            }
-            values_one["responses"]["200"].update(definition_one)
-            values_one.update(parameters=self._get_parameters_one_element())
-            swagger_paths[get_one_path].update(
-                {
-                    "get": values_one,
-                }
-            )
+            # endregion
+            # region::Read One element::
+            # values_one = deepcopy(values)
+            # definition_one = {
+            #     "schema": {
+            #         "type": "object",
+            #         "properties": {
+            #             "result": {
+            #                 "$ref": "#/definitions/{}".format(
+            #                     format_definition_name(self.name)
+            #                 ),
+            #             },
+            #             "reply_id": {
+            #                 "type": "string",
+            #             },
+            #             "timestamp": {
+            #                 "type": "string",
+            #             },
+            #         },
+            #     }
+            # }
+            # values_one["responses"]["200"].update(definition_one)
+            # values_one.update(parameters=self._get_parameters_one_element())
+            # swagger_paths[get_one_path].update(
+            #     {
+            #         "get": values_one,
+            #     }
+            # )
+        # endregion
         # Post
         elif self.method == "post" and self.api_field_ids:
             # Default dict path
@@ -279,7 +299,15 @@ class SPPAPIPath(models.Model):
             definition = {
                 "description": _("Identifier of the resource created."),
                 "schema": {
-                    "type": "integer",
+                    "type": "object",
+                    "properties": {
+                        "reply_id": {
+                            "type": "string",
+                        },
+                        "timestamp": {
+                            "type": "string",
+                        },
+                    },
                 },
             }
             values["responses"]["200"].update(definition)
@@ -302,7 +330,15 @@ class SPPAPIPath(models.Model):
             definition = {
                 "description": _("Return a boolean if update is a success."),
                 "schema": {
-                    "type": "boolean",
+                    "type": "object",
+                    "properties": {
+                        "result": {
+                            "type": "boolean",
+                        },
+                        "reply_id": {
+                            "type": "string",
+                        },
+                    },
                 },
             }
             values["responses"]["200"].update(definition)
@@ -325,7 +361,15 @@ class SPPAPIPath(models.Model):
             definition = {
                 "description": _("Return a boolean if delete is a success."),
                 "schema": {
-                    "type": "boolean",
+                    "type": "object",
+                    "properties": {
+                        "result": {
+                            "type": "boolean",
+                        },
+                        "reply_id": {
+                            "type": "string",
+                        },
+                    },
                 },
             }
             values["responses"]["200"].update(definition)
@@ -383,6 +427,33 @@ class SPPAPIPath(models.Model):
         }
         return swagger_definitions
 
+    def _request_id_parameter(self):
+        return {
+            "name": "request_id",
+            "in": "query",
+            "description": "the unique ID created by the caller",
+            "required": True,
+            "type": "string",
+        }
+
+    def _from_date_parameter(self):
+        return {
+            "name": "from_date",
+            "in": "query",
+            "description": "UTC datetime for create time",
+            "type": "string",
+            "format": "date-time",
+        }
+
+    def _last_modified_date_parameter(self):
+        return {
+            "name": "last_modified_date",
+            "in": "query",
+            "description": "UTC datetime for update time",
+            "type": "string",
+            "format": "date-time",
+        }
+
     # Fields
     def _id_parameter(self):
         """
@@ -418,10 +489,10 @@ class SPPAPIPath(models.Model):
                     "Search domain to read. ("
                     "Defaults to an empty domain "
                     "that will match all records) "
-                    '<a href="https://www.odoo.com/documentation/15.0/'
-                    "en/developer/reference/addons/"
-                    'orm.html#reference-orm-domains" '
-                    'target="_blank">Documentation</a>'
+                    # '<a href="https://www.odoo.com/documentation/15.0/'
+                    # "en/developer/reference/addons/"
+                    # 'orm.html#reference-orm-domains" '
+                    # 'target="_blank">Documentation</a>'
                 ),
                 _("Example: `[('name', '=', 'Test')]`"),
             ),
@@ -526,7 +597,7 @@ class SPPAPIPath(models.Model):
         self.ensure_one()
         return {
             "name": "context",
-            "in": type,
+            "in": _type,
             "description": "{} \n\n {}".format(
                 _("Specific context to method"), _('Example: `{"lang": "fr_FR"}`')
             ),
@@ -545,6 +616,9 @@ class SPPAPIPath(models.Model):
         """
         self.ensure_one()
         return [
+            self._request_id_parameter(),
+            self._from_date_parameter(),
+            self._last_modified_date_parameter(),
             self._domain_parameter(),
             self._fields_parameter(),
             self._offset_parameter(),
@@ -563,6 +637,7 @@ class SPPAPIPath(models.Model):
         """
         self.ensure_one()
         return [
+            self._request_id_parameter(),
             self._id_parameter(),
             self._fields_parameter(),
             self._context_parameter(),
@@ -676,6 +751,7 @@ class SPPAPIPath(models.Model):
     def _post_parameters(self):
         self.ensure_one()
         return self._post_properties() + [
+            self._request_id_parameter(),
             self._context_parameter(_type="formData"),
         ]
 
@@ -741,6 +817,7 @@ class SPPAPIPath(models.Model):
             parameters
             + self._post_properties()
             + [
+                self._request_id_parameter(),
                 self._context_parameter(_type="formData"),
             ]
         )
@@ -749,6 +826,7 @@ class SPPAPIPath(models.Model):
     def _delete_parameters(self):
         self.ensure_one()
         return [
+            self._request_id_parameter(),
             self._id_parameter(),
             self._context_parameter(_type="formData"),
         ]

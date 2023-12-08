@@ -35,3 +35,17 @@ class TestJsonSpec(HttpCase):
             Spec.from_dict(spec_dict, config={"validate_swagger_spec": True})
         except SwaggerValidationError as e:
             self.fail("A JSON Schema for Swagger 2.0 is not valid:\n %s" % e)
+
+    def test_03_api_swagger_view(self):
+        db = self.env.cr.dbname
+        url = self.env["ir.config_parameter"].get_param(
+            "web.base.url", f"http://localhost:{config['http_port']}"
+        )
+        resp = self.url_open(f"{url}/api/swagger-doc/demo/v1?token=demo_token&db={db}")
+        self.assertEqual(resp.status_code, 200)
+        resp = self.url_open(f"{url}/api/swagger-doc/demo1/v1?token=demo_token&db={db}")
+        self.assertEqual(resp.status_code, 404)
+        resp = self.url_open(
+            f"{url}/api/swagger-doc/demo/v1?token=demo_token_1&db={db}"
+        )
+        self.assertEqual(resp.status_code, 403)
