@@ -12,7 +12,7 @@
     "development_status": "Alpha",
     "website": "https://github.com/openspp/openspp-program",
     "license": "LGPL-3",
-    "depends": ["spp_base_api", "mail"],
+    "depends": ["spp_base_api", "mail", "spp_oauth"],
     "external_dependencies": {
         "python": ["bravado_core", "swagger_spec_validator", "jsonschema"],
         "bin": [],
@@ -26,6 +26,7 @@
         "views/res_users_view.xml",
         "views/ir_model_view.xml",
         "views/spp_api_field_alias_views.xml",
+        "wizards/res_users_bearer_token_views.xml",
     ],
     "demo": ["demo/openapi_demo.xml", "demo/openapi_security_demo.xml"],
     "post_load": "post_load",

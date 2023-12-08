@@ -6,3 +6,4 @@ def post_load():
     # module is not installed
     from . import models
     from . import controllers
+    from . import wizards

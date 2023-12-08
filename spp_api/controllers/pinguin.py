@@ -35,6 +35,7 @@ from odoo.tools.safe_eval import safe_eval
 
 # fmt: off
 from odoo.addons.spp_base_api.lib.pinguin import error_response, get_dict_from_record, get_model_for_read
+from odoo.addons.spp_oauth.tools.rsa_encode_decode import verify_and_decode_signature
 
 # fmt: on
 from odoo.addons.web.controllers.main import ReportController
@@ -66,6 +67,11 @@ CODE__method_blocked = (
     403,
     "Blocked Method",
     "This method is not whitelisted on this model.",
+)
+CODE__auth_method_not_supported = (
+    403,
+    "Authorization Method Not Supported",
+    "The request authorization method is not supported by server!",
 )
 CODE__db_not_found = (404, "Db not found", "Welcome to macondo!")
 CODE__canned_ctx_not_found = (
@@ -160,7 +166,7 @@ def authenticate_token_for_user(token):
 
 
 def get_auth_header(headers, raise_exception=False):
-    """check and get basic authentication header from headers
+    """check and get basic / bearer authentication header from headers
 
     :param werkzeug.datastructures.Headers headers: All headers in request.
     :param bool raise_exception: raise exception.
@@ -173,7 +179,9 @@ def get_auth_header(headers, raise_exception=False):
                                               or it is not Basic type.
     """
     auth_header = headers.get("Authorization") or headers.get("authorization")
-    if not auth_header or not auth_header.startswith("Basic "):
+    if not auth_header or not any(
+        [auth_header.startswith("Basic "), auth_header.startswith("Bearer ")]
+    ):
         if raise_exception:
             raise werkzeug.exceptions.HTTPException(
                 response=error_response(*CODE__no_user_auth)
@@ -182,6 +190,16 @@ def get_auth_header(headers, raise_exception=False):
 
 
 def get_data_from_auth_header(header):
+    if header.startswith("Basic "):
+        return get_data_from_basic_auth_header(header)
+    if header.startswith("Bearer "):
+        return get_data_from_bearer_auth_header(header)
+    raise werkzeug.exceptions.HTTPException(
+        response=error_response(*CODE__auth_method_not_supported)
+    )
+
+
+def get_data_from_basic_auth_header(header):
     """decode basic auth header and get data
 
     :param str header: The raw auth header.
@@ -220,6 +238,30 @@ def get_data_from_auth_header(header):
         )
 
     return db_name, user_token
+
+
+def get_data_from_bearer_auth_header(header):
+    """decode bearer auth header and get data
+
+    :param str header: The raw auth header.
+
+    :returns: a tuple of database name and user token
+    :rtype: tuple
+    :raise: werkzeug.exceptions.HTTPException if bearer header is invalid or if the bearer header is
+                                              in the wrong format
+    """
+    normalized_token = header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
+    decoded, res = verify_and_decode_signature(normalized_token)
+    if not decoded:
+        raise werkzeug.exceptions.HTTPException(
+            response=error_response(*CODE__no_user_auth)
+        )
+    if not all([key in res.keys() for key in ("database", "token")]):
+        err_descrip = 'Bearer auth header payload must include "database" & "token"'
+        raise werkzeug.exceptions.HTTPException(
+            response=error_response(500, "Invalid header", err_descrip)
+        )
+    return res["database"], res["token"]
 
 
 def setup_db(httprequest, db_name):
