@@ -8,6 +8,7 @@ patch(WebClient.prototype, "app_odoo_customize.WebClient", {
     setup() {
         this._super.apply(this, arguments);
         const app_system_name = session.app_system_name || "OpenSPP";
-        this.title.setParts({zopenerp: app_system_name}); // Zopenerp is easy to grep
+        // Zopenerp is easy to grep
+        this.title.setParts({zopenerp: app_system_name});
     },
 });

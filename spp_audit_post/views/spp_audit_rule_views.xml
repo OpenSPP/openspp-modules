@@ -1,0 +1,41 @@
+<odoo>
+    <record id="spp_audit_rule_form_custom" model="ir.ui.view">
+        <field name="name">spp_audit_rule_form_custom</field>
+        <field name="model">spp.audit.rule</field>
+        <field name="priority">10</field>
+        <field name="inherit_id" ref="spp_audit_log.spp_audit_rule_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="field_id_domain" invisible="1" />
+                <field name="parent_id" options="{'no_create': True, 'no_open': True}" />
+            </xpath>
+
+            <xpath expr="//field[@name='log_unlink']" position="after">
+                <field
+                    name="field_id"
+                    attrs="{'invisible': [('parent_id', '=', False)]}"
+                    options="{'no_open': True}"
+                    domain="field_id_domain"
+                />
+            </xpath>
+
+            <xpath expr="//group[@name='audit_rule_fields']" position="after">
+                <field name="is_mail_thread" invisible="1" />
+                <notebook attrs="{'invisible': [('is_mail_thread', '=', False)]}">
+                    <page name="related_rules" string="Related Rules">
+                      <field name="child_ids">
+                        <tree create="0" edit="0" delete="0" editable="bottom">
+                          <field name="name" />
+                          <field name="log_create" />
+                          <field name="log_write" />
+                          <field name="log_unlink" />
+                          <field name="model_id" />
+                          <field name="field_id" />
+                        </tree>
+                      </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

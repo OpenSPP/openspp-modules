@@ -52,8 +52,8 @@ class SPPBaseImport(models.TransientModel):
             translated_model_name = search_result[0][1]
         else:
             translated_model_name = self._description
-        description = _("Import {} from file {}").format(
-            translated_model_name, self.file_name
+        description = _("Import {model_name} from file {file_name}").format(
+            model_name=translated_model_name, file_name=self.file_name
         )
         attachment = self._create_csv_attachment(
             import_fields, data, options, self.file_name
@@ -143,12 +143,14 @@ class SPPBaseImport(models.TransientModel):
             model_obj, fields, data, chunk_size
         ):
             chunk = str(priority - INIT_PRIORITY).zfill(padding)
-            description = _("Import {} from file {} - #{} - lines {} to {}").format(
-                translated_model_name,
-                file_name,
-                chunk,
-                row_from + 1 + header_offset,
-                row_to + 1 + header_offset,
+            description = _(
+                "Import {model_name} from file {file_name} - #{chunk} - lines {row_from} to {row_to}"
+            ).format(
+                model_name=translated_model_name,
+                file_name=file_name,
+                chunk=chunk,
+                row_from=row_from + 1 + header_offset,
+                row_to=row_to + 1 + header_offset,
             )
             # create a CSV attachment and enqueue the job
             root, ext = splitext(file_name)

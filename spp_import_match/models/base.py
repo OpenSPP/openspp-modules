@@ -70,7 +70,7 @@ class Base(models.AbstractModel):
                 row["id"] = ext_id[match.id] if match else row.get("id", "")
                 newdata.append(tuple(row[f] for f in fields))
             data = newdata
-        return super(Base, self).load(fields, data)
+        return super().load(fields, data)
 
     def write(self, vals):
         model = self.env["ir.model"].search([("model", "=", self._name)])
@@ -83,4 +83,4 @@ class Base(models.AbstractModel):
                 )
                 if field and field.ttype in ("one2many", "many2many"):
                     new_vals.pop(rec)
-        return super(Base, self).write(new_vals)
+        return super().write(new_vals)

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="spp_program_rule" model="spp.audit.rule">
+        <field name="name">Program Rule</field>
+        <field
+            name="model_id"
+            model="ir.model"
+            eval="obj().env['ir.model'].search([('model', '=', 'g2p.program')]).id"
+        />
+    </record>
+
+    <record id="spp_cycle_rule" model="spp.audit.rule">
+        <field name="name">Cycle Rule</field>
+        <field
+            name="model_id"
+            model="ir.model"
+            eval="obj().env['ir.model'].search([('model', '=', 'g2p.cycle')]).id"
+        />
+    </record>
+
+    <record id="spp_registry_rule" model="spp.audit.rule">
+        <field name="name">Registry Rule</field>
+        <field
+            name="model_id"
+            model="ir.model"
+            eval="obj().env['ir.model'].search([('model', '=', 'res.partner')]).id"
+        />
+    </record>
+
+    <record id="spp_service_point_rule" model="spp.audit.rule">
+        <field name="name">Service Point Rule</field>
+        <field
+            name="model_id"
+            model="ir.model"
+            eval="obj().env['ir.model'].search([('model', '=', 'spp.service.point')]).id"
+        />
+    </record>
+
+</odoo>
