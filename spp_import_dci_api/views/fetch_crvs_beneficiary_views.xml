@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- explicit list view definition -->
+
+    <record id="fetch_crvs_beneficiary_tree" model="ir.ui.view">
+        <field name="name">fetch_crvs_beneficiary_tree</field>
+        <field name="model">spp.fetch.crvs.beneficiary</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Search Criteria" />
+                <field name="create_date" />
+            </tree>
+        </field>
+    </record>
+
+     <!-- explicit form view definition -->
+    <record id="fetch_crvs_beneficiary_form" model="ir.ui.view">
+        <field name="name">fetch_crvs_beneficiary_form</field>
+        <field name="model">spp.fetch.crvs.beneficiary</field>
+        <field name="arch" type="xml">
+            <form string="Previous Search Criterias">
+                <sheet>
+                    <field name="done_imported" invisible="1" />
+                    <field name="location_id_domain" invisible="1" />
+                    <group name="data_source">
+                        <field name="data_source_id" options="{'no_create': True, 'no_open': True}" />
+                    </group>
+                    <group name="name">
+                        <field name="name" attrs="{'readonly': [('done_imported', '=', True)]}" />
+                    </group>
+                    <group name="location_type_id">
+                        <field
+                            name="location_type_id"
+                            options="{'no_create': True, 'no_open': True}"
+                            attrs="{'readonly': [('done_imported', '=', True)]}"
+                        />
+                    </group>
+                    <group name="location">
+                        <field
+                            name="location_id"
+                            domain="location_id_domain"
+                            options="{'no_create': True, 'no_open': True}"
+                            attrs="{'readonly': [('done_imported', '=', True)]}"
+                        />
+                    </group>
+                    <group name="filter_domain" widget="selection">
+                        <field
+                            name="domain"
+                            colspan="4"
+                            widget="domain"
+                            options="{'model': 'spp.fetch.domain.filter'}"
+                            attrs="{'readonly': [('done_imported', '=', True)]}"
+                        />
+                    </group>
+
+                    <group name="imported_individuals" attrs="{'invisible': [('id', '=', False)]}">
+                        <field name="imported_individual_ids" options="{'no_create': True, 'no_open': True}">
+                            <tree>
+                                <field name="individual_id" />
+                                <field name="is_created" />
+                                <field name="is_updated" />
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button
+                            name="fetch_crvs_beneficiary"
+                            string="Fetch"
+                            type="object"
+                            class="oe_highlight btn-primary"
+                            attrs="{'invisible': [('done_imported', '=', True)]}"
+                        />
+                        <button
+                            name="enable_fetch"
+                            string="Enable Fetching"
+                            type="object"
+                            class="oe_highlight btn-primary"
+                            attrs="{'invisible': [('done_imported', '=', False)]}"
+                        />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record id="fetch_crvs_beneficiary_action_window" model="ir.actions.act_window">
+        <field name="name">Previous Search Criterias</field>
+        <field name="res_model">spp.fetch.crvs.beneficiary</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Sub-menu/Action item -->
+    <menuitem
+        name="Import From Registry"
+        id="fetch_crvs_submenu"
+        parent="g2p_programs.g2p_program_menu_root"
+        action="fetch_crvs_beneficiary_action_window"
+    />
+</odoo>

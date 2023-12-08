@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_program_wizard_form_view_spp" model="ir.ui.view">
+        <field name="name">create_program_wizard_form_view_spp</field>
+        <field name="model">g2p.program.create.wizard</field>
+        <field name="priority">1000</field>
+        <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='admin_area_ids']" position="after">
+                <field name="is_crvs_data_source" colspan="4" invisible="1" />
+                <field name="data_source_id" colspan="4" options="{'no_open':true, 'no_create': True}" />
+                <field
+                    name="location_id"
+                    colspan="4"
+                    options="{'no_open':true, 'no_create': True}"
+                    attrs="{'invisible': [('is_crvs_data_source', '!=', True)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
