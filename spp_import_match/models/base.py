@@ -56,7 +56,12 @@ class Base(models.AbstractModel):
                         item for sublist in field_to_match for item in sublist
                     ]
                     for fields_pop in flat_fields_to_remove:
-                        if fields_pop in row:
+                        # TODO: @eMJay0921: import matching should not remove any
+                        # value of importing row, this should be removed.
+                        if fields_pop in row and match._fields[fields_pop].type in [
+                            "one2many",
+                            "many2many",
+                        ]:
                             row[fields_pop] = False
 
                 match.export_data(fields)
