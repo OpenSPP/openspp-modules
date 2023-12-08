@@ -535,7 +535,7 @@ class SPPAPIPath(models.Model):
             "in": "query",
             "description": _("Number of records to skip. (Defaults to 0)"),
             "required": False,
-            "type": "integer",
+            "type": "string",
         }
 
     def _limit_parameter(self):
@@ -555,7 +555,7 @@ class SPPAPIPath(models.Model):
                 _("(Maximum: {})").format(self.limit) if self.limit else ""
             ),
             "required": False,
-            "type": "integer",
+            "type": "string",
         }
 
     def _order_parameter(self):
