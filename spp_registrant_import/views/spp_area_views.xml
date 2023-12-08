@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_spparea_form_inherit_spp_registrant_import" model="ir.ui.view">
+        <field name="name">spp.area.view.form.inherit</field>
+        <field name="model">spp.area</field>
+        <field name="inherit_id" ref="spp_area.view_spparea_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='kind']" position="after">
+                <field name="spp_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_spparea_tree_inherit_spp_registrant_import" model="ir.ui.view">
+        <field name="name">spp.area.view.list.inherit</field>
+        <field name="model">spp.area</field>
+        <field name="inherit_id" ref="spp_area.view_spparea_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="spp_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="spparea_filter_inherit_spp_registrant_import" model="ir.ui.view">
+        <field name="name">spp.area.view.search.inherit</field>
+        <field name="model">spp.area</field>
+        <field name="inherit_id" ref="spp_area.spparea_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="spp_id" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
