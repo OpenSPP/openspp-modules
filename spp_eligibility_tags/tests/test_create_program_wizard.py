@@ -27,7 +27,7 @@ class TestSPPCreateNewProgramWiz(TransactionCase):
                 "amount_per_individual_in_group": 1.0,
             }
         )
-        cls.program = cls.program_create_wiz.create_g2p_program()
+        cls.program = cls.program_create_wiz.create_program()
 
     def test_01_on_tags_area_change(self):
         self.program_create_wiz.on_tags_area_change()

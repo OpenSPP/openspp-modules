@@ -20,10 +20,11 @@ class TestCreateProgramWiz(TransactionCase):
                 "cycle_duration": 1,
                 "currency_id": self.env.company.currency_id.id,
                 "admin_area_ids": [(6, 0, self.areas.ids)],
+                "amount_per_cycle": 1.0,
             }
         )
 
-        self.program = self._program_create_wiz.create_g2p_program()
+        self.program = self._program_create_wiz.create_program()
         self.cycle_manager_default = (
             self._program_create_wiz.create_cycle_manager_default(self.program.id)
         )
@@ -85,8 +86,8 @@ class TestCreateProgramWiz(TransactionCase):
         self.assertEqual(cycle_manager_default._name, "g2p.cycle.manager.default")
         self.assertIsNotNone(cycle_manager_default)
 
-    def test_06_create_g2p_program(self):
-        program = self._program_create_wiz.create_g2p_program()
+    def test_06_create_program(self):
+        program = self._program_create_wiz.create_program()
 
         self.assertEqual(program._name, "g2p.program")
         self.assertIsNotNone(program)
