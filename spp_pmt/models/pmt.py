@@ -22,6 +22,7 @@ class G2PGroupPMT(models.Model):
     z_ind_grp_pmt_score = fields.Float(
         "PMT Score of the group",
         compute="_compute_pmt_score",
+        compute_sudo=True,
     )
     grp_pmt_score = fields.Float(
         "PMT Score of the group", compute="_compute_pmt_score", store=True
@@ -70,8 +71,8 @@ class G2PGroupPMT(models.Model):
                 else:
                     weights.update({field.name: field.field_weight})
 
-        if weights:
-            for record in self:
+        for record in self:
+            if weights:
                 z_ind_grp_pmt_score = 0
                 if record.group_membership_ids:
                     total_score = 0.0
@@ -86,3 +87,6 @@ class G2PGroupPMT(models.Model):
 
                 record.z_ind_grp_pmt_score = z_ind_grp_pmt_score
                 record.grp_pmt_score = z_ind_grp_pmt_score
+            else:
+                record.z_ind_grp_pmt_score = 0
+                record.grp_pmt_score = 0
