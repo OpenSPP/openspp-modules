@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="product_uom_categ_form_view_inherit_spp_api_records" model="ir.ui.view">
+        <field name="name">uom.category.view.form.inherit</field>
+        <field name="model">uom.category</field>
+        <field name="inherit_id" ref="uom.product_uom_categ_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='uom_ids']/tree/field[@name='name']" position="after">
+                <field name="symbol" required="1" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+user_access_spp_api_log,access_spp_api_log,model_spp_api_log,spp_api.group_user,1,0,1,0
+user_access_spp_api_namespace,access_spp_api_namespace,model_spp_api_namespace,spp_api.group_user,1,0,0,0
+user_access_spp_api_path,access_spp_api_path,model_spp_api_path,spp_api.group_user,1,0,0,0
+user_access_spp_api_field,access_spp_api_field,model_spp_api_field,spp_api.group_user,1,0,0,0
+access_spp_api_field_alias_group_user,spp.api.field.alias.group.user,model_spp_api_field_alias,spp_api.group_user,1,0,0,0
+user_access_spp_api_function_parameter,access_spp_api_function_parameter,model_spp_api_function_parameter,spp_api.group_user,1,0,0,0
+manager_access_spp_api_log,access_spp_api_log,model_spp_api_log,spp_api.group_manager,1,1,1,1
+manager_access_spp_api_namespace,access_spp_api_namespace,model_spp_api_namespace,spp_api.group_manager,1,1,1,1
+manager_access_spp_api_path,access_spp_api_path,model_spp_api_path,spp_api.group_manager,1,1,1,1
+manager_access_spp_api_field,access_spp_api_field,model_spp_api_field,spp_api.group_manager,1,1,1,1
+manager_access_spp_api_function_parameter,access_spp_api_function_parameter,model_spp_api_function_parameter,spp_api.group_manager,1,1,1,1
+access_spp_api_field_alias_group_manager,spp.api.field.alias.group.manager,model_spp_api_field_alias,spp_api.group_manager,1,1,1,1
+user_access_spp_users_bearer_token,access_spp_users_bearer_token,model_spp_users_bearer_token,spp_api.group_user,1,1,1,1

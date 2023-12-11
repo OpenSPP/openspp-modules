@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- POST Service Point Device -->
+    <record id="service_point_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_post_path" />
+        <field
+            name="field_id"
+            ref="spp_service_point_device.field_spp_service_point_device__service_point_id"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <!--Cash Entitlements -->
+    <record id="cash_entitlement_card_number_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__card_number" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="cash_entitlement_card_type_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__card_type" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="cash_entitlement_receipt_no_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__receipt_number" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="cash_entitlement_entitlement_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__entitlement_id" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="cash_entitlement_service_point_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__service_point_id" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="cash_entitlement_service_point_device_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_entitlement_transactions__service_point_device_id"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="service_point_terminal_device_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_post_path" />
+        <field
+            name="field_id"
+            ref="spp_service_point_device.field_spp_service_point_device__service_point_terminal_device_id"
+        />
+        <field name="required" eval="1" />
+    </record>
+    <record id="cash_entitlement_user_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__user_id" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="cash_entitlement_timestamp_transaction_created_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_entitlement_transactions__timestamp_transaction_created"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="device_model_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_post_path" />
+        <field name="field_id" ref="spp_service_point_device.field_spp_service_point_device__device_model" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="android_version_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_post_path" />
+        <field
+            name="field_id"
+            ref="spp_service_point_device.field_spp_service_point_device__android_version"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="cash_entitlement_transaction_type_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__transaction_type" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="cash_entitlement_transaction_uuid_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__transaction_uuid" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="cash_entitlement_currency_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__currency_id" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="cash_entitlement_amount_charged_by_service_point_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_entitlement_transactions__amount_charged_by_service_point"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="service_point_device_is_active_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_post_path" />
+        <field name="field_id" ref="spp_service_point_device.field_spp_service_point_device__is_active" />
+    </record>
+
+    <!-- PUT Service Point Device -->
+    <record id="put_service_point_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_put_path" />
+        <field
+            name="field_id"
+            ref="spp_service_point_device.field_spp_service_point_device__service_point_id"
+        />
+    </record>
+
+    <record id="put_service_point_terminal_device_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_put_path" />
+        <field
+            name="field_id"
+            ref="spp_service_point_device.field_spp_service_point_device__service_point_terminal_device_id"
+        />
+    </record>
+
+    <record id="put_device_model_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_put_path" />
+        <field name="field_id" ref="spp_service_point_device.field_spp_service_point_device__device_model" />
+    </record>
+
+    <record id="put_android_version_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_put_path" />
+        <field
+            name="field_id"
+            ref="spp_service_point_device.field_spp_service_point_device__android_version"
+        />
+    </record>
+
+    <record id="put_service_point_device_is_active_api_field" model="spp_api.field">
+        <field name="path_id" ref="spp_service_point_device_put_path" />
+        <field name="field_id" ref="spp_service_point_device.field_spp_service_point_device__is_active" />
+    </record>
+
+    <record id="cash_entitlement_value_remaining_api_field" model="spp_api.field">
+        <field name="path_id" ref="cash_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_entitlement_transactions__value_remaining" />
+        <field name="required" eval="1" />
+    </record>
+
+    <!--In-kind Entitlements -->
+    <record id="inkind_entitlement_card_number_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__card_number" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_card_type_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__card_type" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_receipt_number_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__receipt_number"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_entitlement_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__entitlement_id"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_service_point_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__service_point_id"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_service_point_device_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__service_point_device_id"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_user_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__user_id" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_timestamp_transaction_created_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__timestamp_transaction_created"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_transaction_type_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__transaction_type"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_transaction_uuid_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__transaction_uuid"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_product_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__product_id" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_quantity_remaining_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__quantity_remaining"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_quantity_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__quantity" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_uom_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__uom_id" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_currency_id_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field name="field_id" ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__currency_id" />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_amount_charged_by_service_point_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__amount_charged_by_service_point"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+    <record id="inkind_entitlement_value_remaining_api_field" model="spp_api.field">
+        <field name="path_id" ref="inkind_entitlement_post_path" />
+        <field
+            name="field_id"
+            ref="spp_ent_trans.field_spp_inkind_entitlement_transactions__value_remaining"
+        />
+        <field name="required" eval="1" />
+    </record>
+
+</odoo>

@@ -1,0 +1,991 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* openapi
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-15 18:12+0000\n"
+"PO-Revision-Date: 2022-09-15 20:25+0200\n"
+"Last-Translator: \n"
+"Language-Team: Alpis Traduction et Interpétation <info@alpis.fr>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "%s (copy)"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "(Maximum: {})"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "<span>Field Aliases</span>"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.constraint,message:spp_api.constraint_spp_api_namespace_name_ands_version_uniq
+#, fuzzy
+msgid ""
+"A namespace already exists with this name and version number. Namespace's "
+"name and version must be unique!"
+msgstr ""
+"Un espace de noms existe déjà avec ce préfixe. Le préfixe de l'espace de "
+"noms doit être unique !"
+
+#. module: spp_api
+#: model:ir.actions.act_window,name:spp_api.spp_api_log_list_action
+#: model:ir.ui.menu,name:spp_api.api_log_menu
+#, fuzzy
+msgid "API Logs"
+msgstr "Journaux OpenAPI"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__namespace_id
+msgid "API Namespace"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__api_path_id
+msgid "API Path"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "API need a specific fields list!"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/ir_model_fields.py:0
+#, python-format
+msgid "API path is not specify!"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.actions.act_window,name:spp_api.namespace_list_action
+#: model:ir.ui.menu,name:spp_api.namespaces_menu
+msgid "APIs"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__active
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__active
+msgid "Active"
+msgstr "Activer"
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "Add domain to filter result, example: [('name', '=', 'Test')]"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "Additional Information"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__alias_name
+#, fuzzy
+msgid "Alias Name"
+msgstr "Nom affiché"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_field_alias.py:0
+#, python-format
+msgid "Alias Name should be different from its field name!"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.constraint,message:spp_api.constraint_spp_api_field_alias_alias_name_api_path_uniq
+msgid "Alias name only exists once in one API Path!"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_res_users__namespace_ids
+#: model_terms:ir.ui.view,arch_db:spp_api.res_users_view_form
+#, fuzzy
+msgid "Allowed APIs"
+msgstr "Utilisateurs autorisés"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__user_ids
+#: model_terms:ir.ui.view,arch_db:spp_api.namespace_form_view
+msgid "Allowed Users"
+msgstr "Utilisateurs autorisés"
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.spp_api_field_alias_view_search
+msgid "Api Path"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.namespace_form_view
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_function_parameter__type__array
+msgid "Array"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,help:spp_api.field_res_users__openapi_token
+msgid "Authentication token for access to API (/api)."
+msgstr "Jeton d'authentification pour l'accès à l'API (/api)."
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_function_parameter__type__boolean
+msgid "Boolean"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_log__method__post
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_path__method__post
+#, fuzzy
+msgid "Create"
+msgstr "Créé par"
+
+#. module: spp_api
+#: model_terms:ir.actions.act_window,help:spp_api.namespace_list_action
+msgid "Create and manage the namespaces."
+msgstr "Créez et gérez les espaces de noms."
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__create_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__create_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__create_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__create_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__create_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__create_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__create_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__create_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__create_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__create_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_log__method__patch
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_path__method__patch
+msgid "Custom function"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__default_value
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__default_value
+msgid "Default Value"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_log__method__delete
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_path__method__delete
+#, fuzzy
+msgid "Delete"
+msgstr "Supprimer via l'API"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__deprecated
+#, fuzzy
+msgid "Deprecated"
+msgstr "Créé par"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__description
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__description
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__description
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__description
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "Description"
+msgstr "Description"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, fuzzy, python-format
+msgid "Description of the error"
+msgstr "Description"
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_namespace__log_request__disabled
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_namespace__log_response__disabled
+msgid "Disabled"
+msgstr "Désactivé"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__display_name
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__display_name
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__display_name
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__display_name
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__display_name
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.namespace_form_view
+#: model_terms:ir.ui.view,arch_db:spp_api.res_users_view_form
+msgid "Do you want to proceed reset token?"
+msgstr "Voulez-vous procéder à la réinitialisation du jeton ?"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, fuzzy, python-format
+msgid "Error code"
+msgstr "Seulement les erreurs"
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_namespace__log_response__error
+msgid "Errors only"
+msgstr "Seulement les erreurs"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Example: `YYYY-MM-DD'T'HH:MM:ss.SSSZ`"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Example: `YYYY-MM-DD`"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Example: `['id', 'name']`"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Example: `[('name', '=', 'Test')]`"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Example: `{\"lang\": \"fr_FR\"}`"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Example: {}"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.ir_exports_form_view
+msgid "Export Fields"
+msgstr "Exporter les champs"
+
+#. module: spp_api
+#: model:ir.model,name:spp_api.model_ir_exports
+#: model_terms:ir.ui.view,arch_db:spp_api.ir_exports_form_view
+msgid "Exports"
+msgstr "Exports"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__field_id
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__field_id
+#: model_terms:ir.ui.view,arch_db:spp_api.spp_api_field_alias_view_search
+msgid "Field"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.actions.act_window,name:spp_api.spp_api_field_alias_action
+#: model:ir.ui.menu,name:spp_api.spp_api_field_alias_menu
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "Field Alias"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__field_name
+#, fuzzy
+msgid "Field Name"
+msgstr "Nom du modéle"
+
+#. module: spp_api
+#: code:addons/spp_api/models/ir_model_fields.py:0
+#: code:addons/spp_api/models/spp_api_path.py:0
+#: model:ir.model,name:spp_api.model_spp_api_field_alias
+#: model_terms:ir.ui.view,arch_db:spp_api.spp_api_field_alias_view_form
+#: model_terms:ir.ui.view,arch_db:spp_api.spp_api_field_alias_view_search
+#, python-format
+msgid "Field Name Alias"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.constraint,message:spp_api.constraint_spp_api_field_alias_field_api_path_uniq
+msgid "Field only alias once in one API Path!"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model,name:spp_api.model_ir_model_fields
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__api_field_ids
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__field_ids
+#, fuzzy
+msgid "Fields"
+msgstr "Exporter les champs"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__filter_domain
+msgid "Filter Domain"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_function_parameter__type__float
+msgid "Float"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_namespace__log_request__debug
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_namespace__log_response__debug
+msgid "Full"
+msgstr "Complet"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__function
+msgid "Function"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__function_apply_on_record
+msgid "Function Apply On Record"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__function_domain
+msgid "Function Domain"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__global_alias
+#: model_terms:ir.ui.view,arch_db:spp_api.spp_api_field_alias_view_search
+msgid "Global Alias"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.spp_api_field_alias_view_search
+msgid "Group By"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__http_type
+msgid "Http Type"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__id
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__id
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__id
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__id
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__id
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__id
+msgid "ID"
+msgstr "Identifiant"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__token
+msgid "Identification token"
+msgstr "Jeton d'identification"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Identifier of the resource created."
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+#, fuzzy
+msgid "Inactive"
+msgstr "Activer"
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_function_parameter__type__integer
+#, fuzzy
+msgid "Integer"
+msgstr "Intégration"
+
+#. module: spp_api
+#: model:ir.model,name:spp_api.model_spp_api_namespace
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__namespace_id
+msgid "Integration"
+msgstr "Intégration"
+
+#. module: spp_api
+#: model:ir.model.fields,help:spp_api.field_spp_api_namespace__name
+msgid ""
+"Integration name, e.g. ebay, amazon, magento, etc.\n"
+"        The name is used in api endpoint"
+msgstr ""
+"Nom de l'intégration, par exemple ebay, amazon, magento, etc.\n"
+"        Le nom est utilisé dans le point de terminaison api"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field____last_update
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias____last_update
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter____last_update
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log____last_update
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace____last_update
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__write_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__write_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__write_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__write_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__write_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__write_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__write_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__write_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__write_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__write_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__write_date
+msgid "Last Updated on"
+msgstr "Dernière Mise à Jour le"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__last_log_date
+msgid "Latest usage"
+msgstr "Dernière utilisation"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__limit
+msgid "Limit of results"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.actions.act_window,help:spp_api.spp_api_log_list_action
+msgid "List of API Logs."
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "List of fields to read. (Defaults to all fields)"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.openapi_log_model_view_form
+msgid "Log"
+msgstr "Journal d'erreurs"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__log_request
+msgid "Log Requests"
+msgstr "Enregistrer des appels"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__log_response
+msgid "Log Responses"
+msgstr "Enregistrer les réponses"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__log_count
+msgid "Log count"
+msgstr "Nombre d’enregistrements"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__log_ids
+#: model_terms:ir.ui.view,arch_db:spp_api.namespace_form_view
+msgid "Logs"
+msgstr "Journaux"
+
+#. module: spp_api
+#: model:res.groups,name:spp_api.group_manager
+msgid "Manager"
+msgstr "Gestionnaire"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Maximum number of records to return. {}"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__method
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__method
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "Method"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__model_id
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__model_id
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__model
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__model
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__model_id
+msgid "Model"
+msgstr "Modèle"
+
+#. module: spp_api
+#: model:ir.model,name:spp_api.model_ir_model
+msgid "Models"
+msgstr "Modèles"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__name
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__name
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__name
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Name of error"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.constraint,message:spp_api.constraint_spp_api_path_name_uniq
+msgid "Name, Version, Method must be unique!"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__version_name
+msgid "Number Version"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Number of records to skip. (Defaults to 0)"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_function_parameter__type__object
+msgid "Object (Dictionary)"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.module.category,name:spp_api.module_management
+#: model:ir.ui.menu,name:spp_api.main_openapi_menu
+#: model:ir.ui.menu,name:spp_api.openapi_menu
+#: model_terms:ir.ui.view,arch_db:spp_api.namespace_form_view
+msgid "OpenAPI"
+msgstr "OpenAPI"
+
+#. module: spp_api
+#: model:ir.model,name:spp_api.model_spp_api_field
+#, fuzzy
+msgid "OpenAPI Field"
+msgstr "Journaux OpenAPI"
+
+#. module: spp_api
+#: model:ir.model,name:spp_api.model_spp_api_function_parameter
+#, fuzzy
+msgid "OpenAPI Function"
+msgstr "Jeton OpenAPI"
+
+#. module: spp_api
+#: model:ir.model,name:spp_api.model_spp_api_path
+#, fuzzy
+msgid "OpenAPI Path"
+msgstr "OpenAPI"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_res_users__openapi_token
+msgid "OpenAPI Token"
+msgstr "Jeton OpenAPI"
+
+#. module: spp_api
+#: model:ir.model,name:spp_api.model_spp_api_log
+msgid "OpenAPI logs"
+msgstr "Journaux OpenAPI"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid ""
+"Param to sort result. (Defaults to no sort) \n"
+" Field name followed by the sort operator. (asc or desc)"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__function_parameter_ids
+msgid "Parameters"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__path_id
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__path_id
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "Path"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__path_ids
+#: model_terms:ir.ui.view,arch_db:spp_api.namespace_form_view
+msgid "Paths"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid ""
+"Please note, some required fields have not been added to the list of fields, "
+"creating or updating may not work."
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_log__method__get
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_path__method__get
+msgid "Read"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__reply_id
+msgid "Reply"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__request
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__request_id
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_log__http_type__request
+msgid "Request"
+msgstr "Demande"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__request_data
+msgid "Request Data"
+msgstr "Demande de données"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__request_parameter
+#, fuzzy
+msgid "Request Parameter"
+msgstr "Demande de données"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__force_required
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__required
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__required
+#, fuzzy
+msgid "Required"
+msgstr "Demande"
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.res_users_view_form
+msgid "Reset OpenAPI Token"
+msgstr "Réinitialiser le jeton OpenAPI"
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.namespace_form_view
+msgid "Reset Token"
+msgstr "Réinitialiser le jeton"
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_log__http_type__response
+#, fuzzy
+msgid "Response"
+msgstr "Enregistrer les réponses"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__response_data
+msgid "Response Data"
+msgstr "Données de réponse"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Return a boolean if delete is a success."
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Return a boolean if update is a success."
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.spp_api_field_alias_view_search
+msgid "Scoped Alias"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid ""
+"Search domain to read. (Defaults to an empty domain that will match all "
+"records) <a href=\"https://www.odoo.com/documentation/15.0/en/developer/"
+"reference/addons/orm.html#reference-orm-domains\" target=\"_blank"
+"\">Documentation</a>"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__sequence
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.ui.menu,name:spp_api.spp_api_config_menu
+msgid "Settings"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "Settings for create/update"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "Settings for custom function"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "Settings for read"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_form
+msgid "Settings for unlink"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_namespace__log_request__info
+msgid "Short"
+msgstr "Court"
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "Specific context to method"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__spec_url
+msgid "Specification Link"
+msgstr "Lien de spécification"
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_function_parameter__type__string
+msgid "String"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,help:spp_api.field_spp_api_field_alias__model_id
+msgid "The model this field belongs to"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_field_alias.py:0
+#, fuzzy, python-format
+msgid "There is another global alias for this field!"
+msgstr "Il y a déjà un enregistrement pour ce modèle"
+
+#. module: spp_api
+#: model:ir.model.fields,help:spp_api.field_spp_api_namespace__token
+msgid "Token passed by a query string parameter to access the specification."
+msgstr ""
+"Jeton passé par un paramètre de chaîne de requête pour accéder à la "
+"spécification."
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__type
+msgid "Type"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__unlink_domain
+msgid "Unlink Domain"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_log__method__put
+#: model:ir.model.fields.selection,name:spp_api.selection__spp_api_path__method__put
+#, fuzzy
+msgid "Update"
+msgstr "Mettre à jour via API"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__update_domain
+#, fuzzy
+msgid "Update Domain"
+msgstr "Dernière Mise à Jour le"
+
+#. module: spp_api
+#: model:res.groups,name:spp_api.group_user
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: spp_api
+#: model:ir.module.category,description:spp_api.module_management
+msgid "User access level for OpenAPI"
+msgstr "Niveau d'accès utilisateur pour OpenAPI"
+
+#. module: spp_api
+#: model:ir.model,name:spp_api.model_res_users
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__warning_required
+msgid "Warning Required"
+msgstr ""
+
+#. module: spp_api
+#: code:addons/spp_api/models/spp_api_path.py:0
+#, python-format
+msgid "or"
+msgstr ""
+
+#~ msgid "Access"
+#~ msgstr "Accès"
+
+#~ msgid "Access via API"
+#~ msgstr "Accès via API"
+
+#~ msgid "Access via API "
+#~ msgstr "Accès via API "
+
+#~ msgid "Accessable Models"
+#~ msgstr "Modèles accessibles"
+
+#~ msgid "Accesses"
+#~ msgstr "Accès"
+
+#~ msgid "Allow Private methods"
+#~ msgstr "Autoriser les méthodes privées"
+
+#~ msgid "Allowed Integrations"
+#~ msgstr "Intégrations autorisées"
+
+#~ msgid "Allowed Intergrations"
+#~ msgstr "Intégrations autorisées"
+
+#~ msgid ""
+#~ "Allowed private methods. Private methods are ones that start with "
+#~ "underscore. Format: one method per line. When empty -- private methods "
+#~ "are not allowed"
+#~ msgstr ""
+#~ "Méthodes privées autorisées. Les méthodes privées sont celles qui "
+#~ "commencent par un souligné. Format : une méthode par ligne. Si vide -- "
+#~ "les méthodes privées ne sont pas autorisées"
+
+#~ msgid ""
+#~ "Allowed public methods besides basic ones.\n"
+#~ "Public methods are ones that don't start with underscore).\n"
+#~ "Format: one method per line.\n"
+#~ "When empty -- all public methods are allowed"
+#~ msgstr ""
+#~ "Méthodes publiques autorisées en plus des méthodes de base.\n"
+#~ "Les méthodes publiques sont celles qui ne commencent pas par un "
+#~ "souligné).\n"
+#~ "Format : une méthode par ligne.\n"
+#~ "Lorsque vide -- toutes les méthodes publiques sont autorisées"
+
+#~ msgid "Call Public methods via API"
+#~ msgstr "Appeler les méthodes publiques via l'API"
+
+#~ msgid "Can be used to pass default values or custom context"
+#~ msgstr ""
+#~ "Peut être utilisé pour passer des valeurs par défaut ou un contexte "
+#~ "personnalisé"
+
+#~ msgid "Context"
+#~ msgstr "Contexte"
+
+#~ msgid "Context must be jsonable."
+#~ msgstr "Le contexte doit être jsonable."
+
+#~ msgid "Context on creating via API "
+#~ msgstr "Contexte de création via API "
+
+#~ msgid "Create via API"
+#~ msgstr "Créer via l'API"
+
+#~ msgid "Creation Context Presets"
+#~ msgstr "Préréglages du contexte de création"
+
+#~ msgid "Fields to return on reading one record, on creating a record"
+#~ msgstr ""
+#~ "Champs à retourner à la lecture d'un enregistrement, à la création d'un "
+#~ "enregistrement"
+
+#~ msgid "Fields to return on reading via non one-record endpoint"
+#~ msgstr ""
+#~ "Champs à retourner à la lecture via un point de terminaison autre qu'un "
+#~ "enregistrement"
+
+#~ msgid "Intergration"
+#~ msgstr "Intégration"
+
+#~ msgid "Intergrations"
+#~ msgstr "Intégrations"
+
+#~ msgid ""
+#~ "Method %r is not part of the model's method list:\n"
+#~ " %r"
+#~ msgstr ""
+#~ "La méthode %r ne fait pas partie de la liste de méthodes du modèle :\n"
+#~ " %r"
+
+#~ msgid ""
+#~ "Private method (starting with \"_\" listed in public methods whitelist)"
+#~ msgstr ""
+#~ "Méthode privée (commençant par \"_\" répertorié dans la liste blanche des "
+#~ "méthodes publiques)"
+
+#~ msgid ""
+#~ "Public method (not starting with \"_\" listed in private methods whitelist"
+#~ msgstr ""
+#~ "Méthode publique (ne commençant pas par \"_\" répertoriée dans la liste "
+#~ "blanche des méthodes privées"
+
+#~ msgid "Read Many Fields"
+#~ msgstr "Lire plusieurs champs"
+
+#~ msgid "Read One Fields"
+#~ msgstr "Lire un champ"
+
+#~ msgid "Read via API"
+#~ msgstr "Lire via API"
+
+#~ msgid "Related openapi accesses"
+#~ msgstr "Accès openapi kiés"
+
+#~ msgid "Related openapi accesses count"
+#~ msgstr "Nombre d'accès openapi liés"
+
+#~ msgid "Restric Public methods"
+#~ msgstr "Restreindre les méthodes publiques"
+
+#~ msgid "The model \"%s\" has no such field: \"%s\"."
+#~ msgstr "Le modèle \"%s\" n'a pas ce champ : \"%s\"."
+
+#~ msgid "There is already a context with the same name for this Model"
+#~ msgstr "Il existe déjà un contexte portant le même nom pour ce modèle"
+
+#~ msgid "You must delete the \"%s\" field or \"%s\" field"
+#~ msgstr "Vous devez supprimer le champ « %s » ou le champ « %s »"
+
+#~ msgid "You must select at least one API method for \"%s\" model."
+#~ msgstr ""
+#~ "Vous devez sélectionner au moins une méthode API pour le modèle \"%s\"."

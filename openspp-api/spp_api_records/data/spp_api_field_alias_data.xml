@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="spp_service_point_res_partner_company_id" model="spp_api.field.alias">
+        <field name="alias_name">company_id</field>
+        <field name="field_id" ref="spp_service_points.field_spp_service_point__res_partner_company_id" />
+        <field name="api_path_id" ref="spp_api_records.service_point_path" />
+    </record>
+
+    <record id="cycle_write_data" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="g2p_programs.field_g2p_cycle__write_date" />
+        <field name="api_path_id" ref="spp_api_records.cycles_path" />
+    </record>
+
+    <record id="res_currency_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="base.field_res_currency__write_date" />
+        <field name="api_path_id" ref="spp_api_records.currency_path" />
+    </record>
+
+    <record id="product_category_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="product.field_product_category__write_date" />
+        <field name="api_path_id" ref="spp_api_records.product_category_path" />
+    </record>
+
+    <record id="g2p_entitlement_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="g2p_programs.field_g2p_entitlement__write_date" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_path" />
+    </record>
+
+    <record id="g2p_entitlement_inkind_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="spp_programs.field_g2p_entitlement_inkind__write_date" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_inkind_path" />
+    </record>
+
+    <record id="g2p_entitlement_create_date" model="spp_api.field.alias">
+        <field name="alias_name">creation_date</field>
+        <field name="field_id" ref="g2p_programs.field_g2p_entitlement__create_date" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_path" />
+    </record>
+
+    <record id="g2p_entitlement_inkind_create_date" model="spp_api.field.alias">
+        <field name="alias_name">creation_date</field>
+        <field name="field_id" ref="spp_programs.field_g2p_entitlement_inkind__create_date" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_inkind_path" />
+    </record>
+
+    <record id="g2p_entitlement_code" model="spp_api.field.alias">
+        <field name="alias_name">voucher_number</field>
+        <field name="field_id" ref="g2p_programs.field_g2p_entitlement__code" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_path" />
+    </record>
+
+    <record id="g2p_entitlement_inkind_code" model="spp_api.field.alias">
+        <field name="alias_name">voucher_number</field>
+        <field name="field_id" ref="spp_programs.field_g2p_entitlement_inkind__code" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_inkind_path" />
+    </record>
+
+    <record id="g2p_entitlement_id_number" model="spp_api.field.alias">
+        <field name="alias_name">card_number</field>
+        <field name="field_id" ref="spp_programs.field_g2p_entitlement__id_number" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_path" />
+    </record>
+
+    <record id="g2p_entitlement_inkind_id_number" model="spp_api.field.alias">
+        <field name="alias_name">card_number</field>
+        <field name="field_id" ref="spp_programs.field_g2p_entitlement_inkind__id_number" />
+        <field name="api_path_id" ref="spp_api_records.vouchers_inkind_path" />
+    </record>
+
+    <record id="service_point_user_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="base.field_res_users__write_date" />
+        <field name="api_path_id" ref="spp_api_records.service_point_user_get_path" />
+    </record>
+
+    <record id="program_write_data" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="api_path_id" ref="spp_api_records.program_path" />
+        <field name="field_id" ref="g2p_programs.field_g2p_program__write_date" />
+    </record>
+
+    <record id="res_country_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="base.field_res_country__write_date" />
+        <field name="api_path_id" ref="spp_api_records.res_country_path" />
+    </record>
+
+    <record id="res_company_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="base.field_res_company__write_date" />
+        <field name="api_path_id" ref="spp_api_records.company_path" />
+    </record>
+
+    <record id="service_points_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="spp_service_points.field_spp_service_point__write_date" />
+        <field name="api_path_id" ref="spp_api_records.service_point_path" />
+    </record>
+
+    <record id="service_points_device_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="spp_service_point_device.field_spp_service_point_device__write_date" />
+        <field name="api_path_id" ref="spp_api_records.service_point_terminal_device_path" />
+    </record>
+
+    <record id="product_template_uom_id" model="spp_api.field.alias">
+        <field name="alias_name">unit_of_measure_id</field>
+        <field name="field_id" ref="product.field_product_template__uom_id" />
+        <field name="api_path_id" ref="spp_api_records.products_path" />
+    </record>
+
+    <record id="product_template_categ_id" model="spp_api.field.alias">
+        <field name="alias_name">product_category_id</field>
+        <field name="field_id" ref="product.field_product_template__categ_id" />
+        <field name="api_path_id" ref="spp_api_records.products_path" />
+    </record>
+
+    <record id="product_template_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="product.field_product_template__write_date" />
+        <field name="api_path_id" ref="spp_api_records.products_path" />
+    </record>
+
+    <record id="uom_write_date" model="spp_api.field.alias">
+        <field name="alias_name">last_updated</field>
+        <field name="field_id" ref="uom.field_uom_uom__write_date" />
+        <field name="api_path_id" ref="spp_api_records.uom_uom_path" />
+    </record>
+</odoo>

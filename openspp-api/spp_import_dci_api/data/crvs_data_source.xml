@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <function model="spp.data.source" name="create_data_source">
+        <value
+            model="spp.data.source"
+            eval="{
+                'name': 'CRVS',
+                'url': 'https://dci.opencrvs.lab.cdpi.dev',
+                'auth_type':'bearer_authentication',
+                'paths': [
+                    {
+                        'name': 'Registry Sync Search',
+                        'path': '/registry/sync/search',
+                    },
+                    {
+                        'name': 'Authentication',
+                        'path': '/oauth2/client/token',
+                    },
+                    {
+                        'name': 'Location',
+                        'path': '/.well-known/locations.json',
+                    }
+                ]
+            }"
+        />
+    </function>
+</odoo>
