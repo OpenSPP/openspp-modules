@@ -1,12 +1,7 @@
 <odoo>
     <!-- Top menu item -->
 
-    <menuitem
-        id="id_pass_main_menu_root"
-        name="ID Management"
-        active="True"
-        sequence="1"
-    />
+    <menuitem id="id_pass_main_menu_root" name="ID Management" active="True" sequence="1" />
 
     <menuitem
         id="id_pass_configuration_menu_root"

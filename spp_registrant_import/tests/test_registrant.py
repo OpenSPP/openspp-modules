@@ -17,10 +17,9 @@ class TestRegistrant(TransactionCase):
                 "is_group": True,
             }
         )
-        self._test_individuals = (
-            self.create_registrant({"name": "TEST, INDIVIDUAL, 1"}) |
-            self.create_registrant({"name": "TEST, INDIVIDUAL, 2"})
-        )
+        self._test_individuals = self.create_registrant(
+            {"name": "TEST, INDIVIDUAL, 1"}
+        ) | self.create_registrant({"name": "TEST, INDIVIDUAL, 2"})
         self._partner = self.env["res.partner"].create(
             {
                 "name": "Partner 1",
