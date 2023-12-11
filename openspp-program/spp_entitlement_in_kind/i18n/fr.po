@@ -1,0 +1,470 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_entitlement_in_kind
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-11-29 10:22+0000\n"
+"Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
+"Language-Team: French <https://translate.openspp.org/projects/openspp/"
+"spp_entitlement_in_kind/fr/>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14\n"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__max_multiplier
+#: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__max_multiplier
+msgid "0 means no limit"
+msgstr "0 signifie pas de limite"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_inkind
+msgid "Add a new entitlement!"
+msgstr "Ajoutez une nouvelle prestation !"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_manager_inkind
+msgid "Add an Entitlement Manager!"
+msgstr "Ajoutez un gestionnaire de prestations !"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
+msgid "Approve Entitlement"
+msgstr "Approuver la prestation"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_manager_inkind
+msgid "Click the create button to enter a new in-kind entitlement manager."
+msgstr ""
+"Cliquez sur le bouton Créer pour saisir un nouveau gestionnaire de droits en "
+"nature."
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.actions.act_window,help:spp_entitlement_in_kind.action_entitlement_inkind
+msgid "Click the create button to enter the new In-kind entitlement."
+msgstr "Cliquez sur le bouton créer pour entrer le nouveau droit en nature."
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
+msgid "Code:"
+msgstr "Code :"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__company_id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__company_id
+msgid "Company"
+msgstr "Compagnie"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__condition
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__condition
+msgid "Condition Domain"
+msgstr "Domaine de conditions"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr "Créer un nouvel assistant de programme"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_create_wizard_entitlement_item
+msgid "Create a New Program Wizard Entitlement Items"
+msgstr "Créer un nouvel élément de droit de l'assistant de programme"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__create_uid
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__create_uid
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__create_date
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__create_date
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__create_date
+msgid "Created on"
+msgstr "Créé sur"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_cycle
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_procurement_group__cycle_id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_stock_picking__cycle_id
+msgid "Cycle"
+msgstr "Cycle"
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#, python-format
+msgid "Cycle In-Kind Entitlements"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__uom_id
+#: model:ir.model.fields,help:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__uom_id
+msgid "Default unit of measure used for all stock operations."
+msgstr ""
+"Unité de mesure par défaut utilisée pour toutes les opérations de stock."
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__display_name
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__display_name
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__display_name
+msgid "Display Name"
+msgstr "Afficher un nom"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
+msgid "Enter the Manager Name..."
+msgstr "Entrez le nom du gestionnaire..."
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
+msgid "Enter the program name..."
+msgstr "Entrez le nom du programme..."
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
+#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_entitlement
+#, python-format
+msgid "Entitlement"
+msgstr "Prestation"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.create_program_wizard_form_view_custom_inkind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
+msgid "Entitlement Item"
+msgstr "Elément de prestation"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__entitlement_item_ids
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__entitlement_item_ids
+msgid "Entitlement Items"
+msgstr "Eléments de prestation"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.actions.act_window,name:spp_entitlement_in_kind.action_entitlement_manager_inkind
+msgid "Entitlement Managers"
+msgstr "Gestionnaires de prestations"
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#, python-format
+msgid ""
+"Entitlement State Error! Entitlements not in 'pending validation' state:\n"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__entitlement_validation_group_id
+msgid "Entitlement Validation Group"
+msgstr "Groupe de validation des prestations"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
+msgid "Entitlement:"
+msgstr "Prestation :"
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement.py:0
+#, python-format
+msgid "Entitlement: In-Kind (%s)"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
+#: model:ir.ui.menu,name:spp_entitlement_in_kind.menu_entitlement_inkind
+msgid "Entitlements"
+msgstr "Prestations"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__evaluate_single_item
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__evaluate_single_item
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.create_program_wizard_form_view_custom_inkind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
+msgid "Evaluate one item"
+msgstr "Évaluer un article"
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/wizard/create_program_wizard.py:0
+#, python-format
+msgid ""
+"For inventory management, the warehouse is required in the In-kind "
+"entitlement manager."
+msgstr ""
+"Pour la gestion des stocks, l'entrepôt est requis dans le gestionnaire de "
+"droits en nature."
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.entitlement_manager_inkind_filter
+msgid "Group By"
+msgstr "Groupé par"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__id
+msgid "ID"
+msgstr "ID"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields.selection,name:spp_entitlement_in_kind.selection__g2p_program_create_wizard__entitlement_kind__inkind
+#: model:ir.ui.menu,name:spp_entitlement_in_kind.g2p_inkind_root
+msgid "In-Kind"
+msgstr "En nature"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
+msgid "In-Kind Entitlement"
+msgstr "Droit en nature"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__inkind_item_id
+msgid "In-Kind Entitlement Condition"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_entitlement_manager
+#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_entitlement_manager_inkind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
+msgid "In-Kind Entitlement Manager"
+msgstr "Gestionnaire des droits en nature"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model,name:spp_entitlement_in_kind.model_g2p_program_entitlement_manager_inkind_item
+msgid "In-Kind Entitlement Manager Items"
+msgstr "Éléments du gestionnaire des droits en nature"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.ui.menu,name:spp_entitlement_in_kind.menu_entitlement_manager_inkind
+msgid "In-Kind Entitlement Managers"
+msgstr "Gestionnaires des droits en nature"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
+msgid "In-Kind Item"
+msgstr "Article en nature"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__entitlement_id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_stock_move__entitlement_id
+msgid "In-kind Entitlement"
+msgstr "Droit en nature"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.actions.act_window,name:spp_entitlement_in_kind.action_entitlement_inkind
+msgid "In-kind Entitlements"
+msgstr "Droits en nature"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.create_program_wizard_form_view_custom_inkind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
+msgid "Inventory Settings"
+msgstr "Paramètres d'inventaire"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.create_program_wizard_form_view_custom_inkind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
+msgid "Items"
+msgstr "Articles"
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/wizard/create_program_wizard.py:0
+#, python-format
+msgid "Items are required in the In-kind entitlement manager."
+msgstr "Les éléments sont requis dans le gestionnaire de droits en nature."
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item____last_update
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind____last_update
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item____last_update
+msgid "Last Modified on"
+msgstr "Modification le"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__write_uid
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__write_uid
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__write_date
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__write_date
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__write_date
+msgid "Last Updated on"
+msgstr "Mise à jour le"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__manage_inventory
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__manage_inventory
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__manage_inventory
+msgid "Manage Inventory"
+msgstr "Gérer l'inventaire"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.create_program_wizard_form_view_custom_inkind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
+msgid "Manage stock movements (inventory)"
+msgstr "Gérer les mouvements de stock (inventaire)"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__entitlement_kind
+msgid "Manager"
+msgstr "Gestionnaire"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__name
+msgid "Manager Name"
+msgstr "Nom du gestionnaire"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__max_multiplier
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__max_multiplier
+msgid "Maximum number"
+msgstr "Nombre maximal"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__multiplier_field
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__multiplier_field
+msgid "Multiplier"
+msgstr "Multiplicateur"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
+msgid "Name:"
+msgstr "Nom :"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__program_id
+msgid "New Program"
+msgstr "Nouveau programme"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model,name:spp_entitlement_in_kind.model_procurement_group
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_cycle__procurement_group_id
+msgid "Procurement Group"
+msgstr "Groupe des achats"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__product_id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__product_id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__product_id
+msgid "Product"
+msgstr "Produit"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__program_id
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.entitlement_manager_inkind_filter
+msgid "Program"
+msgstr "Programme"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
+msgid "Program:"
+msgstr "Programme :"
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#, python-format
+msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__qty
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__qty
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__qty
+msgid "QTY"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
+#: model:ir.ui.menu,name:spp_entitlement_in_kind.g2p_inkind_reports_menu_root
+msgid "Reports"
+msgstr "Rapports"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__route_id
+msgid "Route"
+msgstr "Itinéraire"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_tree
+msgid "Rules"
+msgstr "Règles"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.entitlement_manager_inkind_filter
+msgid "Search In-Kind Entitlement Manager"
+msgstr "Rechercher un gestionnaire de droits en nature"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_manager_inkind_form
+msgid "Select a program..."
+msgstr "Sélectionnez un programme..."
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__sequence
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model,name:spp_entitlement_in_kind.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement d'actions"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__move_ids
+msgid "Stock Moves"
+msgstr "Mouvements d'actions"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model,name:spp_entitlement_in_kind.model_stock_rule
+msgid "Stock Rule"
+msgstr "Règle de stock"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_cycle__picking_ids
+msgid "Stock Transfers"
+msgstr ""
+
+#. module: spp_entitlement_in_kind
+#: code:addons/spp_entitlement_in_kind/models/entitlement_manager.py:0
+#, python-format
+msgid "There are no items entered for this entitlement manager."
+msgstr "Aucun élément n'a été saisi pour ce gestionnaire de droits."
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model,name:spp_entitlement_in_kind.model_stock_picking
+msgid "Transfer"
+msgstr "Transférer"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__uom_id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard_entitlement_item__uom_id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind_item__uom_id
+msgid "Unit of Measure"
+msgstr "Unité de mesure"
+
+#. module: spp_entitlement_in_kind
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_entitlement__warehouse_id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_create_wizard__warehouse_id
+#: model:ir.model.fields,field_description:spp_entitlement_in_kind.field_g2p_program_entitlement_manager_inkind__warehouse_id
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#. module: spp_entitlement_in_kind
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_in_kind.view_entitlement_inkind_form
+msgid "code..."
+msgstr "code..."
+
+#~ msgid "In-kind Stock Transfers"
+#~ msgstr "Transferts de stocks en nature"

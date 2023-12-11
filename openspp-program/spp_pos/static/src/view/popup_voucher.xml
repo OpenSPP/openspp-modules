@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+   <t t-name="EntitlementPopup" owl="1">
+       <div role="dialog" class="modal-dialog">
+           <div class="popup popup-couponproducts">
+               <p class="title">
+                   <t t-esc="props.title" />
+               </p>
+               <span class="body">
+                 <div style="margin:20px;">
+
+                   <div class="row" style="border:1px solid black;">
+                     <h1><i class="fa fa-qrcode fa-2xl" /></h1>
+                     <h2>Scan Entitlement QR Code</h2>
+                   </div>
+                   --Or--
+                   <div class="row" style="border:1px solid black;">
+                      <h2>Enter Entitlement Code Manually</h2>
+                      <input type="text" name="qr_code" id="qr_code" />
+                      <br />
+                      <br />
+                   </div>
+                 </div>
+               </span>
+               <div class="footer">
+                   <div style="background-color: #890202" class="button cancel" t-on-click="confirm">
+                       <span style="color: #ffffff">Close</span>
+                   </div>
+                   <div style="background-color: #020b89" class="button" t-on-click="get_entitlement">
+                       <span style="color: #ffffff">Search</span>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </t>
+</templates>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_cycle_form_inherit_spp_programs_compliance_criteria" model="ir.ui.view">
+        <field name="name">g2p.cycle.view.form.inherit</field>
+        <field name="model">g2p.cycle</field>
+        <field name="inherit_id" ref="g2p_programs.view_cycle_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="before">
+                <button
+                    string="Compliance Criteria"
+                    name="action_filter_beneficiaries_by_compliance_criteria"
+                    type="object"
+                    icon="fa-filter"
+                    class="btn-warning"
+                    confirm="Filtering is one way action. Are you sure to do this?"
+                    attrs="{'invisible': [('allow_filter_compliance_criteria', '=', False)]}"
+                />
+                <field name="allow_filter_compliance_criteria" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

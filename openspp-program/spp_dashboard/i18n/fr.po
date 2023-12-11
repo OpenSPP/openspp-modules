@@ -1,0 +1,180 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_dashboard
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-10-07 09:22+0000\n"
+"Last-Translator: Corentin Madec <corentin@newlogic.com>\n"
+"Language-Team: French <https://translate.openspp.org/projects/openspp/"
+"spp_dashboard/fr/>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14\n"
+
+#. module: spp_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.view_cycle_form_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.view_program_list_form_dashboard
+msgid ""
+"<span class=\"o_stat_text\">Open</span>\n"
+"                        <span class=\"o_stat_text\">Dashboard</span>"
+msgstr ""
+"<span class=\"o_stat_text\">Ouvrir</span> \n"
+"                                    <span class=\"o_stat_text\">Tableau de "
+"bord</span>"
+
+#. module: spp_dashboard
+#: code:addons/spp_dashboard/models/cycles.py:0
+#, python-format
+msgid "A dashboard must be defined for this cycle."
+msgstr "Un tableau de bord doit être défini pour ce cycle."
+
+#. module: spp_dashboard
+#: code:addons/spp_dashboard/models/programs.py:0
+#, python-format
+msgid "A dashboard must be defined for this program."
+msgstr "Un tableau de bord doit être défini pour ce programme."
+
+#. module: spp_dashboard
+#: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_block__args
+msgid "Arguments"
+msgstr "Arguments"
+
+#. module: spp_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_block_form_view_spp
+msgid "Block Information"
+msgstr "Informations sur le bloc"
+
+#. module: spp_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_block_form_view_spp
+msgid "Block Name"
+msgstr "Nom du bloc"
+
+#. module: spp_dashboard
+#: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_menu__client_action
+msgid "Client Action"
+msgstr "Action du client"
+
+#. module: spp_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_menu_form_view_spp
+msgid "Create Menu"
+msgstr "Créer un menu"
+
+#. module: spp_dashboard
+#: code:addons/spp_dashboard/models/cycles.py:0
+#: model:ir.model,name:spp_dashboard.model_g2p_cycle
+#: model:ir.ui.menu,name:spp_dashboard.menu_cycle_dashboard
+#, python-format
+msgid "Cycle"
+msgstr "Cycle"
+
+#. module: spp_dashboard
+#: model:ir.actions.client,name:spp_dashboard.action_cycle_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.view_cycle_form_dashboard
+msgid "Cycle Dashboard"
+msgstr "Tableau de bord du cycle"
+
+#. module: spp_dashboard
+#: model:ir.model.fields,field_description:spp_dashboard.field_g2p_cycle__dashboard_id
+#: model:ir.model.fields,field_description:spp_dashboard.field_g2p_program__dashboard_id
+#: model:ir.ui.menu,name:spp_dashboard.spp_program_dashboard_root
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.view_cycle_form_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.view_program_list_form_dashboard
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#. module: spp_dashboard
+#: model:ir.model,name:spp_dashboard.model_dashboard_block
+msgid "Dashboard Blocks"
+msgstr "Blocs de tableau de bord"
+
+#. module: spp_dashboard
+#: model:ir.model,name:spp_dashboard.model_dashboard_menu
+msgid "Dashboard Menu"
+msgstr "Menu du tableau de bord"
+
+#. module: spp_dashboard
+#: model:ir.model.fields.selection,name:spp_dashboard.selection__dashboard_block__result_type__float
+msgid "Float"
+msgstr "Flotteur"
+
+#. module: spp_dashboard
+#: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_block__func
+msgid "Function"
+msgstr "Fonction"
+
+#. module: spp_dashboard
+#: model:ir.model.fields.selection,name:spp_dashboard.selection__dashboard_block__result_type__int
+msgid "Integer"
+msgstr "Entier"
+
+#. module: spp_dashboard
+#: model:ir.ui.menu,name:spp_dashboard.menu_all_program_dashboard
+msgid "Main"
+msgstr "Principal"
+
+#. module: spp_dashboard
+#: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_menu__action_menu_id
+msgid "Menu"
+msgstr "Menu"
+
+#. module: spp_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_block_form_view_spp
+msgid "Name:"
+msgstr "Nom :"
+
+#. module: spp_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.view_cycle_tree_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.view_program_list_form_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.view_program_list_tree_dashboard
+msgid "Open Dashboard"
+msgstr "Ouvrir le tableau de bord"
+
+#. module: spp_dashboard
+#: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_menu__menu_id
+msgid "Parent Menu"
+msgstr "Menu parents"
+
+#. module: spp_dashboard
+#: code:addons/spp_dashboard/models/programs.py:0
+#: model:ir.model,name:spp_dashboard.model_g2p_program
+#: model:ir.ui.menu,name:spp_dashboard.menu_program_dashboard
+#, python-format
+msgid "Program"
+msgstr "Programme"
+
+#. module: spp_dashboard
+#: model:ir.actions.client,name:spp_dashboard.action_program_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.view_program_list_form_dashboard
+msgid "Program Dashboard"
+msgstr "Tableau de bord du programme"
+
+#. module: spp_dashboard
+#: model:ir.actions.client,name:spp_dashboard.action_all_program_dashboard
+msgid "Programs Dashboard"
+msgstr "Tableau de bord des programmes"
+
+#. module: spp_dashboard
+#: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_block__result_type
+msgid "Result Data Type"
+msgstr "Type de données de résultat"
+
+#. module: spp_dashboard
+#: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_menu__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: spp_dashboard
+#: model:ir.model.fields,field_description:spp_dashboard.field_dashboard_block__use_func
+msgid "Use Function"
+msgstr "Utiliser la fonction"
+
+#. module: spp_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_dashboard.dashboard_block_form_view_spp
+msgid "e.g.'abc',['def','xyz']"
+msgstr ""

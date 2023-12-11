@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <record id="view_eligibility_manager_default_form_spp" model="ir.ui.view">
+        <field name="name">view_eligibility_manager_default_form_spp</field>
+        <field name="model">g2p.program_membership.manager.default</field>
+        <field name="priority">1000</field>
+        <field name="inherit_id" ref="g2p_programs.view_eligibility_manager_default_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='eligibility_domain']" position="before">
+                <field name="admin_area_ids" colspan="4" widget="many2many_tags" />
+                <field name="target_type" colspan="4" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

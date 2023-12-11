@@ -1,0 +1,4 @@
+.o_form_sheet_scrollable {
+    max-height: 10vh;
+    overflow-y: scroll;
+}

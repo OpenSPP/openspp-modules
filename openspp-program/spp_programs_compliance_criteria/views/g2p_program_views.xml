@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_program_list_form_inherit_spp_programs_compliance_criteria" model="ir.ui.view">
+        <field name="name">g2p.program.view.form.inherit</field>
+        <field name="model">g2p.program</field>
+        <field name="inherit_id" ref="g2p_programs.view_program_list_form" />
+        <field name="priority">1000000</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_managers']/parent::group/parent::group" position="after">
+                <group colspan="2" string="Compliance Managers">
+                    <group colspan="2">
+                        <field name="compliance_managers" nolabel="1" widget="many2many">
+                            <tree editable="top">
+                                <button
+                                    name="open_manager_form"
+                                    type="object"
+                                    icon="fa-external-link"
+                                    class="btn-success"
+                                    attrs="{'invisible': [('manager_ref_id', '=', False)]}"
+                                    context="{'default_program_id': active_id, 'create': False}"
+                                />
+                                <field
+                                    name="manager_ref_id"
+                                    options="{'no_quick_create': True}"
+                                    string="Managers"
+                                    context="{'default_program_id':active_id}"
+                                />
+                                <field name="manager_id" invisible="1" />
+                            </tree>
+                            <form string="Compliance Manager">
+                                <sheet>
+                                    <group colspan="4" col="4">
+                                        <field
+                                            name="manager_ref_id"
+                                            options="{'no_quick_create':True}"
+                                            colspan="4"
+                                            context="{'default_program_id': program_id}"
+                                        />
+                                        <field name="program_id" invisible="1" />
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_spp_compliance_manager_group_g2p_admin,spp.compliance.manager.group.g2p.admin,model_spp_compliance_manager,g2p_registry_base.group_g2p_admin,1,1,1,1
+access_spp_compliance_manager_g2p_program_manager,spp.compliance.manager.g2p.program.manager,model_spp_compliance_manager,g2p_programs.g2p_program_manager,1,1,1,0
+access_spp_compliance_manager_g2p_program_validator,spp.compliance.manager.g2p.program.validator,model_spp_compliance_manager,g2p_programs.g2p_program_validator,1,0,0,0

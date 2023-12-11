@@ -1,0 +1,24 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_basic_cash_entitlement_spent
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_basic_cash_entitlement_spent
+#: model:ir.model,name:spp_basic_cash_entitlement_spent.model_g2p_entitlement
+msgid "Entitlement"
+msgstr ""
+
+#. module: spp_basic_cash_entitlement_spent
+#: model:ir.model.fields,field_description:spp_basic_cash_entitlement_spent.field_g2p_entitlement__spent_amount
+msgid "Spent Amount"
+msgstr ""

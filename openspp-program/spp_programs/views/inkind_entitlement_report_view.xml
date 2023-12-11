@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_entitlement_inkind_report_tree" model="ir.ui.view">
+        <field name="name">view_entitlement_inkind_report_tree</field>
+        <field name="model">g2p.entitlement.inkind</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <tree create="0" edit="0" delete="0" default_order="partner_id">
+                <field name="name" />
+                <field name="code" />
+                <field name="partner_id" options="{'no_open':True}" />
+                <field name="service_point_id" options="{'no_open':True}" />
+                <field name="program_id" options="{'no_open':True}" />
+                <field name="cycle_id" options="{'no_open':True}" />
+                <field name="qty" />
+                <field name="unit_price" />
+                <field name="total_amount" />
+                <field name="currency_id" options="{'no_open':True}" />
+                <field name="valid_from" />
+                <field name="valid_until" />
+                <field
+                    name="state"
+                    decoration-primary="state=='pending_validation'"
+                    decoration-success="state=='approved'"
+                    decoration-warning="state=='cancelled'"
+                    decoration-danger="state=='expired'"
+                    widget="badge"
+                    string="State"
+                />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="entitlement_inkind_report_filter" model="ir.ui.view">
+        <field name="name">entitlement_inkind_report_filter</field>
+        <field name="model">g2p.entitlement.inkind</field>
+        <field name="priority" eval="100" />
+        <field name="arch" type="xml">
+            <search string="Search In-kind Entitlements">
+                <field name="program_id" />
+                <field name="service_point_id" />
+                <field name="cycle_id" />
+                <field name="partner_id" />
+                <field name="code" />
+                <separator />
+                <filter name="filter_valid_from" date="valid_from" />
+                <filter name="filter_valid_until" date="valid_until" />
+                <separator />
+                <filter name="draft_state" string="Draft" domain="[('state','=','draft')]" />
+                <filter
+                    name="pending_validation_state"
+                    string="Pending Validation"
+                    domain="[('state','=','pending_validation')]"
+                />
+                <filter name="approved_state" string="Approved" domain="[('state','=','approved')]" />
+                <filter name="cancelled_state" string="Cancelled" domain="[('state','=','cancelled')]" />
+                <filter name="expired_state" string="Exited" domain="[('state','=','expired')]" />
+                <group expand="0" string="Group By">
+                    <filter string="Valid From" name="valid_from" context="{'group_by':'valid_from'}" />
+                    <filter string="Valid Until" name="valid_until" context="{'group_by':'valid_until'}" />
+                    <separator orientation="vertical" />
+                    <filter string="State" name="grp_state" context="{'group_by': 'state'}" />
+                    <filter string="Company" name="grp_company_id" context="{'group_by': 'company_id'}" />
+                </group>
+                <!-- <searchpanel>
+                    <field name="program_id" icon="fa-users" />
+                </searchpanel> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_entitlement_report_inkind" model="ir.actions.act_window">
+        <field name="name">In-kind Entitlements Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">g2p.entitlement.inkind</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="entitlement_inkind_report_filter" />
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                In-Kind Entitlement Report
+            </p><p>
+                There are no entitlements retrieved based on the filters specified.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_entitlement_inkind_report_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_entitlement_inkind_report_tree" />
+        <field name="act_window_id" ref="action_entitlement_report_inkind" />
+    </record>
+
+    <record id="action_entitlement_inkind_report_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_entitlement_inkind_form" />
+        <field name="act_window_id" ref="action_entitlement_report_inkind" />
+    </record>
+
+</odoo>

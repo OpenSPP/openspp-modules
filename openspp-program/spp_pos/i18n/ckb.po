@@ -1,0 +1,90 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_pos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ckb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#, python-format
+msgid "--Or--"
+msgstr ""
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/js/action_button.js:0
+#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#, python-format
+msgid "Close"
+msgstr ""
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#, python-format
+msgid "Enter Entitlement Code Manually"
+msgstr ""
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/view/action_button.xml:0
+#: model:ir.model,name:spp_pos.model_g2p_entitlement
+#: model:pos.category,name:spp_pos.entitlement_product_categ_pos
+#: model:product.template,name:spp_pos.entitlement_product
+#, python-format
+msgid "Entitlement"
+msgstr ""
+
+#. module: spp_pos
+#: model:ir.model.fields,field_description:spp_pos.field_product_product__is_locked
+#: model:ir.model.fields,field_description:spp_pos.field_product_template__is_locked
+msgid "Locked"
+msgstr ""
+
+#. module: spp_pos
+#: model:ir.model,name:spp_pos.model_pos_category
+msgid "Point of Sale Category"
+msgstr ""
+
+#. module: spp_pos
+#: model:ir.model,name:spp_pos.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#, python-format
+msgid "Scan Entitlement QR Code"
+msgstr ""
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/js/action_button.js:0
+#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#, python-format
+msgid "Search"
+msgstr ""
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/js/action_button.js:0
+#, python-format
+msgid "Select Entitlement"
+msgstr ""
+
+#. module: spp_pos
+#: model:product.template,uom_name:spp_pos.entitlement_product
+msgid "Units"
+msgstr ""

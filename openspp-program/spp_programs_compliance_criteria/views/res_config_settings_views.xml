@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_config_settings_programs_view_form" model="ir.ui.view">
+        <field name="name">
+            res.config.settings.view.form.inherit.programs
+        </field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div
+                    class="app_settings_block"
+                    data-string="Programs Settings"
+                    data-key="spp_programs"
+                    string="Programs Settings"
+                >
+                    <h2>Programs Settings</h2>
+                    <div class="row mt16 o_settings_container" id="management">
+                        <div class="col-12 col-lg-6 o_setting_box" id="auto_approve_id_request">
+                            <div class="o_setting_right_pane">
+                                <label for="beneficiaries_automated_filtering_mechanism" />
+                                <div class="text-muted">
+                                    0. No Automated Filtering Mechanism<br />
+                                    1. On Cycle Memberships Creating Event<br />
+                                    2. On Entitlement Creating Event
+                                </div>
+                                <field name="beneficiaries_automated_filtering_mechanism" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_config_settings_menu_programs_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="res_config_settings_programs_view_form" />
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'spp_programs'}</field>
+    </record>
+
+
+    <menuitem
+        id="menu_programs_settings_general"
+        name="General Settings"
+        parent="g2p_programs.g2p_program_configuration_menu_root"
+        sequence="0"
+        action="res_config_settings_menu_programs_action"
+        groups="base.group_system"
+    />
+
+</odoo>

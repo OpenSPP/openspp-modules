@@ -1,0 +1,654 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_programs
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: C\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__inkind_entitlements_count
+#: model:ir.model.fields,field_description:spp_programs.field_res_partner__inkind_entitlements_count
+#: model:ir.model.fields,field_description:spp_programs.field_res_users__inkind_entitlements_count
+msgid "# In-kind Entitlements"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/programs.py:0
+#, python-format
+msgid "%s Imported Beneficiaries"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.actions.report,print_report_name:spp_programs.action_print_program_approval_receipt
+msgid "'Program Approval Receipt'"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_form
+msgid "<span class=\"o_stat_text\">Entitlements</span>"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.print_program_approval_receipt
+msgid "<span>Cycle Name</span>"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.print_program_approval_receipt
+msgid "<span>Program</span>"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.print_program_approval_receipt
+msgid "<span>State</span>"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.print_program_approval_receipt
+msgid "<strong>Beneficiaries:</strong>"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.print_program_approval_receipt
+msgid "<strong>Target Type:</strong>"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,help:spp_programs.field_g2p_entitlement_inkind__partner_id
+msgid "A beneficiary"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.actions.act_window,help:spp_programs.action_entitlement_inkind
+msgid "Add a new entitlement!"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__admin_area_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__admin_area_ids
+msgid "Admin Area"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
+msgid "Approve Entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__approved
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+msgid "Approved"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.inkind_entitlement_report_wizard
+msgid "Cancel"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__cancelled
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+msgid "Cancelled"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_tree
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
+msgid "Cash Entitlements"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.actions.act_window,help:spp_programs.action_entitlement_inkind
+msgid "Click the create button to enter the new entitlement."
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__code
+msgid "Code"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
+msgid "Code:"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__company_id
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+msgid "Company"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.ui.menu,name:spp_programs.spp_programs_config_menu_root
+msgid "Configuration"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__create_uid
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__create_date
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_cycle
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__cycle_id
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__cycle_id
+#: model:ir.model.fields,field_description:spp_programs.field_procurement_group__cycle_id
+#: model:ir.model.fields,field_description:spp_programs.field_stock_picking__cycle_id
+msgid "Cycle"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__cycle_id_domain
+msgid "Cycle Id Domain"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle_manager_default__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_procurement_group__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_stock_move__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_stock_picking__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_programs.field_stock_rule__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__date_approved
+msgid "Date Approved"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_program_create_wizard__eligibility_kind__default_eligibility
+msgid "Default"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_cycle_manager_default
+msgid "Default Cycle Manager"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__display_name
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__draft
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+msgid "Draft"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__eligibility_kind
+msgid "Eligibility Manager"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.create_program_wizard_form_view_spp
+msgid "Eligibility manager"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
+msgid "Enter the program name..."
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/entitlement.py:0
+#: model:ir.model,name:spp_programs.model_g2p_entitlement_inkind
+#, python-format
+msgid "Entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
+msgid "Entitlement:"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/entitlement.py:0
+#, python-format
+msgid "Entitlement: (%s)"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.ui.menu,name:spp_programs.menu_entitlement_inkind
+#: model:ir.ui.menu,name:spp_programs.menu_entitlement_report_inkind
+msgid "Entitlements"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+msgid "Exited"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__expired
+msgid "Expired"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.create_program_wizard_form_view_spp
+msgid "FILTER:"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.inkind_entitlement_report_wizard
+msgid "Filter Cycle:"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.inkind_entitlement_report_wizard
+msgid "Filter Program:"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.inkind_entitlement_report_wizard
+msgid "Generate Report"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+msgid "Group By"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__id
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/programs.py:0
+#, python-format
+msgid "Import"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
+msgid "Import Eligible Registrants"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.ui.menu,name:spp_programs.spp_programs_root
+msgid "In-Kind"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
+msgid "In-Kind Entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.actions.act_window,help:spp_programs.action_entitlement_report_inkind
+msgid "In-Kind Entitlement Report"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__inkind_entitlement_ids
+msgid "In-Kind Entitlements"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
+msgid "In-Kind Item"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_stock_move__entitlement_id
+msgid "In-kind Entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/wizard/inkind_entitlement_report_wiz.py:0
+#: model:ir.actions.act_window,name:spp_programs.action_inkind_entitlement_report_wizard
+#, python-format
+msgid "In-kind Entitlement Report"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_entitlement_inkind_report_wizard
+msgid "In-kind Entitlement Report Wizard"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.actions.act_window,name:spp_programs.action_entitlement_inkind
+#: model:ir.model.fields,field_description:spp_programs.field_res_partner__inkind_entitlement_ids
+#: model:ir.model.fields,field_description:spp_programs.field_res_users__inkind_entitlement_ids
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_tree
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_group_ext_form_custom_spp
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_registrant_ext_form_custom_spp
+msgid "In-kind Entitlements"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.actions.act_window,name:spp_programs.action_entitlement_report_inkind
+msgid "In-kind Entitlements Report"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
+msgid "Inventory"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind____last_update
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__write_uid
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__write_date
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.external_layout_standard
+msgid "Logo"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__manage_inventory
+msgid "Manage Inventory"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__name
+msgid "Name"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/programs.py:0
+#, python-format
+msgid "No Eligibility Manager defined."
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program__is_one_time_distribution
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__is_one_time_distribution
+msgid "One-time Distribution"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/entitlement.py:0
+#, python-format
+msgid "Only draft entitlements are allowed to be deleted"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.external_layout_standard
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__pending_validation
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+msgid "Pending Validation"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_procurement_group
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__procurement_group_id
+msgid "Procurement Group"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__product_id
+msgid "Product"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_program
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__program_id
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__program_id
+msgid "Program"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.actions.report,name:spp_programs.action_print_program_approval_receipt
+msgid "Program Approval Receipt"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/wizard/create_program_wizard.py:0
+#, python-format
+msgid "Programs"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__qty
+msgid "QTY"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__rdpd2ben
+msgid "Redeemed/Paid to Beneficiary"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__partner_id
+msgid "Registrant"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__rejected2
+msgid "Rejected: Beneficiary account does not exist"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__rejected1
+msgid "Rejected: Beneficiary didn't want the entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__rejected3
+msgid "Rejected: Other reason"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.ui.menu,name:spp_programs.spp_programs_reports_menu_root
+msgid "Reports"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__route_id
+msgid "Route"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+msgid "Search In-kind Entitlements"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__service_point_id
+msgid "Service Point"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_program_membership_manager_default
+msgid "Simple Eligibility"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/programs.py:0
+#, python-format
+msgid "Started importing %s beneficiaries"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_report_tree
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_tree
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
+msgid "State"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__state
+msgid "Status"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__move_ids
+msgid "Stock Moves"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_stock_rule
+msgid "Stock Rule"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__picking_ids
+msgid "Stock Transfers"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__target_type
+msgid "Target Type"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,help:spp_programs.field_g2p_entitlement_inkind__currency_id
+msgid "The currency used to enter statement"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.constraint,message:spp_programs.constraint_g2p_entitlement_inkind_unique_entitlement_code
+msgid "The entitlement code must be unique."
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.actions.act_window,help:spp_programs.action_entitlement_report_inkind
+msgid "There are no entitlements retrieved based on the filters specified."
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__total_amount
+msgid "Total Value"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__trans2fsp
+msgid "Transferred to FSP"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__uom_id
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__valid_from
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+msgid "Valid From"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__valid_until
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
+#: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
+msgid "Valid Until"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__validate_async_err
+msgid "Validate Async Err"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__unit_price
+msgid "Value/Unit"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__warehouse_id
+msgid "Warehouse"
+msgstr ""
+
+#. module: spp_programs
+#: code:addons/spp_programs/models/entitlement.py:0
+#, python-format
+msgid "You have no access in the Entitlement List View"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
+msgid "code..."
+msgstr ""

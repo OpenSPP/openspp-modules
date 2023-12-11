@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_dashboard_menu_tree_spp" model="ir.ui.view">
+        <field name="name">view_dashboard_menu_tree_spp</field>
+        <field name="model">dashboard.menu</field>
+        <field name="inherit_id" ref="odoo_dynamic_dashboard.view_dashboard_menu_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='menu_id']" position="after">
+                <field name="sequence" />
+                <field name="action_menu_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dashboard_menu_form_view_spp" model="ir.ui.view">
+        <field name="name">dashboard_menu_form_view_spp</field>
+        <field name="model">dashboard.menu</field>
+        <field name="inherit_id" ref="odoo_dynamic_dashboard.dashboard_menu_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <button
+                        name="create_action_menu"
+                        type="object"
+                        string="Create Menu"
+                        icon="fa-plus"
+                        class="btn-primary"
+                        attrs="{'invisible':[('action_menu_id','!=',False)]}"
+                    />
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='menu_id']" position="after">
+                <field name="sequence" />
+                <field name="action_menu_id" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_print_program_approval_receipt" model="ir.actions.report">
+        <field name="name">Program Approval Receipt</field>
+        <field name="model">g2p.program</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">spp_programs.print_program_approval_receipt</field>
+        <field name="report_file">spp_programs.print_program_approval_receipt</field>
+        <field name="print_report_name">'Program Approval Receipt'</field>
+        <field name="binding_model_id" ref="model_g2p_program" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

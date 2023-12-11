@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <record id="view_program_list_custom_spp_sp_form" model="ir.ui.view">
+        <field name="name">view_program_list_custom_spp_sp_form</field>
+        <field name="model">g2p.program</field>
+        <field name="inherit_id" ref="g2p_programs.view_program_list_form" />
+        <field name="priority">2000</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='accounting']" position="after">
+                <group string="Other Configurations" name="oth_config" colspan="4" col="4">
+                    <field name="store_sp_in_entitlements" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

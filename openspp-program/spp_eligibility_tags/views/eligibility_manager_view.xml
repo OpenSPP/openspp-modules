@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <!-- Tag-based Eligibility Manager -->
+    <record id="view_eligibility_manager_tag_tree" model="ir.ui.view">
+        <field name="name">view_eligibility_manager_tag_tree</field>
+        <field name="model">g2p.program_membership.manager.tags</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree sample="1">
+                <field name="name" />
+                <field name="program_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_eligibility_manager_tag_form" model="ir.ui.view">
+        <field name="name">view_eligibility_manager_tag_form</field>
+        <field name="model">g2p.program_membership.manager.tags</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Tag-based Eligibility Manager">
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title mb24">
+                        <label for="name" string="Name:" />
+                        <h1>
+                            <field id="name" name="name" placeholder="Enter the Manager Name..." />
+                        </h1>
+                        <label
+                            for="program_id"
+                            string="Program:"
+                            invisible="context.get('default_program_id',False)"
+                        />
+                        <h2 invisible="context.get('default_program_id',False)">
+                            <field
+                                id="program_id"
+                                name="program_id"
+                                placeholder="Select a program..."
+                                options="{'no_open':True,'no_create':True,'no_create_edit':True}"
+                                invisible="context.get('default_program_id',False)"
+                            />
+                        </h2>
+                        <div class="o_row">
+                        </div>
+                    </div>
+                    <group colspan="4" col="4">
+                        <field name="tags_id" colspan="4" required="1" />
+                        <field name="area_id" colspan="4" />
+                        <field name="target_type" colspan="4" invisible="1" />
+                        <field
+                            name="custom_domain"
+                            colspan="4"
+                            widget="domain"
+                            options="{'model': 'res.partner'}"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="eligibility_manager_tag_filter" model="ir.ui.view">
+        <field name="name">eligibility_manager_tag_filter</field>
+        <field name="model">g2p.program_membership.manager.tags</field>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <search string="Search Eligibility Manager">
+                <field name="name" />
+                <field name="program_id" />
+                <group expand="0" string="Group By">
+                    <filter string="Program" name="grp_program_id" context="{'group_by': 'program_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_eligibility_manager_tags" model="ir.actions.act_window">
+        <field name="name">Tag-based Eligibility Managers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">g2p.program_membership.manager.tags</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="eligibility_manager_tag_filter" />
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add an Eligibility Manager!
+            </p><p>
+                Click the create button to enter a new eligibility manager.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_eligibility_manager_tag_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_eligibility_manager_tag_tree" />
+        <field name="act_window_id" ref="action_eligibility_manager_tags" />
+    </record>
+
+    <record id="action_eligibility_manager_tag_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_eligibility_manager_tag_form" />
+        <field name="act_window_id" ref="action_eligibility_manager_tags" />
+    </record>
+
+    <menuitem
+        id="menu_eligibility_manager_tag"
+        name="Tag-based Eligibility Managers"
+        action="action_eligibility_manager_tags"
+        parent="g2p_programs.g2p_manager_menu_root"
+        sequence="105"
+        groups="g2p_registry_base.group_g2p_admin,g2p_programs.g2p_program_manager"
+    />
+
+</odoo>

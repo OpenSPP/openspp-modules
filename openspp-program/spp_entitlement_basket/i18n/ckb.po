@@ -1,0 +1,404 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_entitlement_basket
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ckb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,help:spp_entitlement_basket.field_g2p_program_create_wizard__max_multiplier
+#: model:ir.model.fields,help:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__max_multiplier
+msgid "0 means no limit"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__active
+msgid "Active"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.actions.act_window,help:spp_entitlement_basket.action_entitlement_basket
+msgid "Add a new Entitlement Basket!"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.actions.act_window,help:spp_entitlement_basket.action_entitlement_manager_basket
+msgid "Add an Entitlement Manager!"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__entitlement_id
+#: model:ir.model.fields.selection,name:spp_entitlement_basket.selection__g2p_program_create_wizard__entitlement_kind__basket_entitlement
+msgid "Basket Entitlement"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model,name:spp_entitlement_basket.model_g2p_program_entitlement_manager_basket_item
+msgid "Basket Entitlement Manager Items"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model,name:spp_entitlement_basket.model_g2p_program_entitlement_manager
+msgid "Cash Entitlement Manager"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.actions.act_window,help:spp_entitlement_basket.action_entitlement_manager_basket
+msgid "Click the create button to enter a new food basket entitlement manager."
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.actions.act_window,help:spp_entitlement_basket.action_entitlement_basket
+msgid ""
+"Click the create button to enter the new Entitlement Basket entitlement."
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__company_id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__company_id
+msgid "Company"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model,name:spp_entitlement_basket.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model,name:spp_entitlement_basket.model_g2p_program_create_wizard_basket_entitlement_item
+msgid "Create a New Program Wizard basket Entitlement Items"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__create_uid
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__create_uid
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__create_uid
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__create_uid
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__create_date
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__create_date
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__create_date
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__create_date
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
+#, python-format
+msgid "Cycle Basket Entitlements"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,help:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__uom_id
+#: model:ir.model.fields,help:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__uom_id
+#: model:ir.model.fields,help:spp_entitlement_basket.field_spp_entitlement_basket_product__uom_id
+msgid "Default unit of measure used for all stock operations."
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__display_name
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__display_name
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__display_name
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__display_name
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_form
+msgid "Enter the Manager Name..."
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
+#: model:ir.model,name:spp_entitlement_basket.model_g2p_entitlement_inkind
+#, python-format
+msgid "Entitlement"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.actions.act_window,name:spp_entitlement_basket.action_entitlement_basket
+#: model:ir.model,name:spp_entitlement_basket.model_spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_entitlement_inkind__entitlement_basket_id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__entitlement_basket_id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__entitlement_basket_id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__basket_id
+#: model:ir.ui.menu,name:spp_entitlement_basket.menu_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_basket_form
+msgid "Entitlement Basket"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model,name:spp_entitlement_basket.model_g2p_program_entitlement_manager_basket
+msgid "Entitlement Basket Manager"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__name
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_basket_tree
+msgid "Entitlement Basket Name"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_basket_form
+msgid "Entitlement Basket Name:"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model,name:spp_entitlement_basket.model_spp_entitlement_basket_product
+msgid "Entitlement Basket Product"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.create_program_wizard_form_view_custom_basket
+msgid "Entitlement Item"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__basket_entitlement_item_ids
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__entitlement_item_ids
+msgid "Entitlement Items"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.actions.act_window,name:spp_entitlement_basket.action_entitlement_manager_basket
+msgid "Entitlement Managers"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
+#, python-format
+msgid ""
+"Entitlement State Error! Entitlements not in 'pending validation' state:\n"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__entitlement_validation_group_id
+msgid "Entitlement Validation Group"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
+#, python-format
+msgid "Entitlements are validated and approved."
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_form
+msgid "Food Basket Entitlement Manager"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.ui.menu,name:spp_entitlement_basket.menu_entitlement_manager_basket
+msgid "Food Basket Entitlement Managers"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: code:addons/spp_entitlement_basket/wizard/create_program_wizard.py:0
+#, python-format
+msgid ""
+"For inventory management, the warehouse is required in the basket "
+"entitlement manager."
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.entitlement_manager_basket_filter
+msgid "Group By"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.create_program_wizard_form_view_custom_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_form
+msgid "Inventory Settings"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.create_program_wizard_form_view_custom_basket
+msgid "Items"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: code:addons/spp_entitlement_basket/wizard/create_program_wizard.py:0
+#, python-format
+msgid "Items are required in the Basket entitlement manager."
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item____last_update
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket____last_update
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item____last_update
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket____last_update
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__write_uid
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__write_uid
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__write_uid
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__write_uid
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__write_date
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__write_date
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__write_date
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__write_date
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__manage_inventory
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__manage_inventory
+msgid "Manage Inventory"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__entitlement_kind
+msgid "Manager"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__name
+msgid "Manager Name"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__max_multiplier
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__max_multiplier
+msgid "Maximum number"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__multiplier_field
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__multiplier_field
+msgid "Multiplier"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_form
+msgid "Name:"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__program_id
+msgid "New Program"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__product_id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__product_id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__product_id
+msgid "Product"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__product_names
+msgid "Product Names"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_basket_form
+msgid "Product:"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__basket_product_ids
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__basket_product_ids
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket__product_ids
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_form
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_tree
+msgid "Products"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__program_id
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.entitlement_manager_basket_filter
+msgid "Program"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_form
+msgid "Program:"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
+#, python-format
+msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__qty
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__qty
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__qty
+msgid "QTY"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.entitlement_basket_filter
+msgid "Search Entitlement Basket"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.entitlement_manager_basket_filter
+msgid "Search Food Basket Entitlement Manager"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_form
+msgid "Select a program..."
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: code:addons/spp_entitlement_basket/wizard/create_program_wizard.py:0
+#, python-format
+msgid ""
+"The Food Basket in Cycle Manager is required in the Basket entitlement "
+"manager."
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
+#, python-format
+msgid "There are no items entered for this entitlement manager."
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item__uom_id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item__uom_id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product__uom_id
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard__warehouse_id
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__warehouse_id
+msgid "Warehouse"
+msgstr ""

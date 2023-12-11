@@ -1,0 +1,94 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_pos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-02-24 02:22+0000\n"
+"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
+"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
+"spp_pos/ar/>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.14\n"
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#, python-format
+msgid "--Or--"
+msgstr "--أو--"
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/js/action_button.js:0
+#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#, python-format
+msgid "Close"
+msgstr "اغلاق"
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#, python-format
+msgid "Enter Entitlement Code Manually"
+msgstr "أدخل رمز الاستحقاق يدويًا"
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/view/action_button.xml:0
+#: model:ir.model,name:spp_pos.model_g2p_entitlement
+#: model:pos.category,name:spp_pos.entitlement_product_categ_pos
+#: model:product.template,name:spp_pos.entitlement_product
+#, python-format
+msgid "Entitlement"
+msgstr "الاستحقاق"
+
+#. module: spp_pos
+#: model:ir.model.fields,field_description:spp_pos.field_product_product__is_locked
+#: model:ir.model.fields,field_description:spp_pos.field_product_template__is_locked
+msgid "Locked"
+msgstr "مقفل"
+
+#. module: spp_pos
+#: model:ir.model,name:spp_pos.model_pos_category
+msgid "Point of Sale Category"
+msgstr "فئة نقاط البيع"
+
+#. module: spp_pos
+#: model:ir.model,name:spp_pos.model_product_template
+msgid "Product Template"
+msgstr "نموذج المنتج"
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#, python-format
+msgid "Scan Entitlement QR Code"
+msgstr "مسح رمز الاستجابة السريعة"
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/js/action_button.js:0
+#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#, python-format
+msgid "Search"
+msgstr "بحث"
+
+#. module: spp_pos
+#. openerp-web
+#: code:addons/spp_pos/static/src/js/action_button.js:0
+#, python-format
+msgid "Select Entitlement"
+msgstr "اختر المستحقات"
+
+#. module: spp_pos
+#: model:product.template,uom_name:spp_pos.entitlement_product
+msgid "Units"
+msgstr "وحدات"

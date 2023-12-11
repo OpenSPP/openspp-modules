@@ -1,0 +1,88 @@
+<odoo>
+
+    <record id="view_spp_entitlement_transactions_tree" model="ir.ui.view">
+        <field name="name">Entitlement Transactions</field>
+        <field name="model">spp.entitlement.transactions</field>
+        <field name="priority">0</field>
+        <field name="arch" type="xml">
+            <tree editable="top" create="0" duplicate="0">
+                <field name="program_id" options="{'no_open':true,'no_create':true}" />
+                <field name="cycle_id" options="{'no_open':true,'no_create':true}" />
+                <field name="card_number" />
+                <field name="card_type" />
+                <field name="transaction_uuid" />
+                <field name="timestamp_transaction_created" />
+                <field name="transaction_type" />
+                <field name="receipt_number" />
+                <field name="user_id" options="{'no_open':true,'no_create':true}" />
+                <field name="entitlement_id" options="{'no_open':true,'no_create':true}" />
+                <field name="service_point_id" options="{'no_open':true,'no_create':true}" />
+                <field name="service_point_device_id" />
+                <field name="currency_id" options="{'no_open':true,'no_create':true}" optional="hide" />
+                <field name="amount_charged_by_service_point" />
+                <field name="value_remaining" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="spp_entitlement_transactions_filter" model="ir.ui.view">
+        <field name="name">spp_entitlement_transactions_filter</field>
+        <field name="model">spp.entitlement.transactions</field>
+        <field name="priority" eval="0" />
+        <field name="arch" type="xml">
+            <search string="Search Entitlement Transactions">
+                <field name="transaction_uuid" />
+                <field name="service_point_id" />
+                <field name="program_id" />
+                <field name="cycle_id" />
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Entitlement"
+                        name="grp_entitlement_id"
+                        context="{'group_by':'entitlement_id'}"
+                    />
+                    <filter
+                        string="Service Point"
+                        name="grp_service_point_id"
+                        context="{'group_by':'service_point_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_spp_entitlement_transactions" model="ir.actions.act_window">
+        <field name="name">Entitlement Transactions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.entitlement.transactions</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="spp_entitlement_transactions_filter" />
+        <field name="context" />
+        <field name="domain" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Entitlement Transactions
+            </p><p>
+                There are no data returned based on the defined filters.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_entitlement_transactions_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_spp_entitlement_transactions_tree" />
+        <field name="act_window_id" ref="action_spp_entitlement_transactions" />
+    </record>
+
+    <menuitem
+        id="menu_spp_entitlement_transactions"
+        name="Entitlement Transactions"
+        action="action_spp_entitlement_transactions"
+        parent="g2p_programs.g2p_accounting_root"
+        sequence="18"
+        groups="g2p_registry_base.group_g2p_admin,g2p_programs.g2p_program_manager,g2p_programs.g2p_program_validator,g2p_programs.g2p_finance_validator"
+    />
+
+</odoo>

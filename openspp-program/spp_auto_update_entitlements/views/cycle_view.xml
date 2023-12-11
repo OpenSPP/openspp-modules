@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_cycle_custom_spp_form" model="ir.ui.view">
+        <field name="name">view_cycle_custom_spp_form</field>
+        <field name="model">g2p.cycle</field>
+        <field name="inherit_id" ref="g2p_programs.view_cycle_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='mark_ended']" position="replace">
+                <field name="is_expired" invisible="1" />
+                <button
+                    type="object"
+                    class="btn-primary"
+                    icon="fa-file-text-o"
+                    name="mark_ended"
+                    attrs="{'invisible':[('is_expired', '=', False)]}"
+                    string="Set as Ended"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
