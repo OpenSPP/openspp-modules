@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of Openg2p. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_generate_change_request_data_tree" model="ir.ui.view">
+        <field name="name">view_generate_change_request_data_tree</field>
+        <field name="model">g2p.generate.change.request.data</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="num_crs" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_generate_change_request_data_form" model="ir.ui.view">
+        <field name="name">view_generate_change_request_data_form</field>
+        <field name="model">g2p.generate.change.request.data</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Generate Data">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,generate" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-thumbs-o-up"
+                            name="generate_sample_data"
+                            attrs="{'invisible':[('state','!=','draft')]}"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Generate</span>
+                                <span class="o_stat_text">Sample Data</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title mb24">
+                        <label for="name" string="Name:" />
+                        <h1>
+                            <field id="name" name="name" />
+                        </h1>
+                        <label for="num_crs" string="Number of Change Requests:" />
+                        <h2>
+                            <field id="num_crs" name="num_crs" placeholder="Number of change requests..." />
+                        </h2>
+                    </div>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_generate_change_request_data" model="ir.actions.act_window">
+        <field name="name">Generate Change Request Data</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">g2p.generate.change.request.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Generate Change Request Data
+            </p><p>
+                Click the create button to enter the new record.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_generate_change_request_data_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_generate_change_request_data_tree" />
+        <field name="act_window_id" ref="action_generate_change_request_data" />
+    </record>
+
+    <record id="action_generate_change_request_data_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_generate_change_request_data_form" />
+        <field name="act_window_id" ref="action_generate_change_request_data" />
+    </record>
+
+    <menuitem
+        id="menu_generate_change_request_data"
+        name="Generate Change Request Sample Data"
+        action="action_generate_change_request_data"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="41"
+    />
+
+</odoo>

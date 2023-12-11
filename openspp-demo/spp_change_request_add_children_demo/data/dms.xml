@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="0">
+
+    <record id="attachment_storage_add_children" model="dms.storage">
+        <field name="name">Change Request: Add Children</field>
+        <field name="save_type">file</field>
+        <field name="model_ids" eval="[(4, ref('model_spp_change_request_add_children'))]" />
+        <field name="field_default_group_id" ref="spp_change_request.dms_access_group" />
+    </record>
+
+    <!-- Parent Category -->
+    <record id="spp_dms_identification_documents" model="dms.category">
+        <field name="name">Identification Documents</field>
+    </record>
+    <record id="spp_dms_certificates" model="dms.category">
+        <field name="name">Certificates</field>
+    </record>
+    <record id="spp_dms_request_form_document" model="dms.category">
+        <field name="name">Request Form Document</field>
+    </record>
+
+    <!-- Child Category Documents-->
+    <record id="spp_dms_add_children" model="dms.category">
+        <field name="name">Add Children Request Form</field>
+        <field name="parent_id" ref="spp_dms_request_form_document" />
+    </record>
+
+    <record id="spp_dms_birth_certificate" model="dms.category">
+        <field name="name">Birth Certificate</field>
+        <field name="parent_id" ref="spp_dms_certificates" />
+    </record>
+
+    <record id="spp_dms_applicant_uid_card" model="dms.category">
+        <field name="name">Applicant UID Card</field>
+        <field name="parent_id" ref="spp_dms_identification_documents" />
+    </record>
+
+    <record id="spp_dms_custody_certificate" model="dms.category">
+        <field name="name">Custody Certificate</field>
+        <field name="parent_id" ref="spp_dms_certificates" />
+    </record>
+
+    <record id="spp_dms_uid_card" model="dms.category">
+        <field name="name">UID Card</field>
+        <field name="parent_id" ref="spp_dms_identification_documents" />
+    </record>
+
+</odoo>

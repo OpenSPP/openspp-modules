@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_school_enrolment_form_view" model="ir.ui.view">
+        <field name="name">create_event_school_enrolment_form_view</field>
+        <field name="model">spp.create.event.schoolenrolment.record.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                      <field name="school_name" />
+                      <field name="enrolment_type" />
+                      <field name="date" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

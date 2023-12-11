@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_house_visit_admin,House Visit Admin Access,spp_event_demo.model_spp_event_house_visit,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_create_event_house_visit_wizard_admin,Create Event House Visit Wizard Admin Access,spp_event_demo.model_spp_create_event_house_visit_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+spp_phone_survey_admin,Phone Survey Admin Access,spp_event_demo.model_spp_event_phone_survey,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_create_event_phone_survey_wizard_admin,Create Event Phone Survey Wizard Admin Access,spp_event_demo.model_spp_create_event_phone_survey_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+spp_schoolenrolment_record_admin,School Enrolment Record Admin Access,spp_event_demo.model_spp_event_schoolenrolment_record,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_create_event_schoolenrolment_record_wizard_admin,Create Event School Enrolment Record Wizard Admin Access,spp_event_demo.model_spp_create_event_schoolenrolment_record_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1

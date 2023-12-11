@@ -1,0 +1,123 @@
+<odoo noupdate="1">
+    <!-- Area Kind -->
+    <record id="branch_area_kind" model="spp.area.kind">
+        <field name="name">Branch</field>
+    </record>
+
+    <record id="center_area_kind" model="spp.area.kind">
+        <field name="name">Branch</field>
+    </record>
+
+    <!-- Demo Area -->
+      <record id="demo_area_1" model="spp.area">
+          <field name="code">201</field>
+          <field name="draft_name">Demo Area 1</field>
+          <field name="kind" ref="spp_area.admin_area_kind" />
+      </record>
+      <record id="demo_area_2" model="spp.area">
+          <field name="code">202</field>
+          <field name="draft_name">Demo Area 2</field>
+          <field name="kind" ref="spp_area.admin_area_kind" />
+      </record>
+
+          <!-- Demo Branch Area -->
+      <record id="demo_branch_1" model="spp.area">
+          <field name="code">1</field>
+          <field name="draft_name">Demo Branch 1</field>
+          <field name="kind" ref="g2p_connect_demo.branch_area_kind" />
+      </record>
+      <record id="demo_branch_2" model="spp.area">
+          <field name="code">2</field>
+          <field name="draft_name">Demo Branch 2</field>
+          <field name="kind" ref="g2p_connect_demo.branch_area_kind" />
+      </record>
+
+      <!-- Demo Center Area -->
+      <record id="demo_center_1" model="spp.area">
+          <field name="code">101</field>
+          <field name="draft_name">Demo Center 1</field>
+          <field name="kind" ref="g2p_connect_demo.center_area_kind" />
+          <field name="parent_id" ref="demo_branch_1" />
+      </record>
+      <record id="demo_center_2" model="spp.area">
+          <field name="code">102</field>
+          <field name="draft_name">Demo Center 2</field>
+          <field name="kind" ref="g2p_connect_demo.center_area_kind" />
+          <field name="parent_id" ref="demo_branch_1" />
+      </record>
+
+    <record model="spp.area" id="demo_center_201">
+        <field name="code">201</field>
+          <field name="draft_name">Demo Center 201</field>
+        <field name="kind" ref="g2p_connect_demo.center_area_kind" />
+        <field name="parent_id" ref="demo_branch_2" />
+    </record>
+    <record model="spp.area" id="demo_center_202">
+        <field name="code">202</field>
+          <field name="draft_name">Demo Center 202</field>
+        <field name="kind" ref="g2p_connect_demo.center_area_kind" />
+        <field name="parent_id" ref="demo_branch_2" />
+    </record>
+      <!-- Demo Service Points -->
+      <record id="demo_service_points_1" model="spp.service.point">
+          <field name="name">Agent 1</field>
+          <field name="area_id" ref="demo_center_1" />
+      </record>
+      <record id="demo_service_points_2" model="spp.service.point">
+          <field name="name">Agent 2</field>
+          <field name="area_id" ref="demo_center_1" />
+      </record>
+      <record id="demo_service_points_3" model="spp.service.point">
+          <field name="name">Agent 3</field>
+          <field name="area_id" ref="demo_center_2" />
+      </record>
+      <record id="demo_service_points_4" model="spp.service.point">
+          <field name="name">Agent 4</field>
+          <field name="area_id" ref="demo_center_2" />
+      </record>
+      <record id="demo_service_points_5" model="spp.service.point">
+          <field name="name">Agent 5</field>
+          <field name="area_id" ref="demo_center_1" />
+      </record>
+      <record id="demo_service_points_6" model="spp.service.point">
+          <field name="name">Agent 6</field>
+          <field name="area_id" ref="demo_center_1" />
+      </record>
+      <record id="demo_service_points_7" model="spp.service.point">
+          <field name="name">Agent 7</field>
+          <field name="area_id" ref="demo_center_2" />
+      </record>
+      <record id="demo_service_points_8" model="spp.service.point">
+          <field name="name">Agent 8</field>
+          <field name="area_id" ref="demo_center_2" />
+      </record>
+    <record id="demo_service_points_9" model="spp.service.point">
+            <field name="name">Agent 9</field>
+            <field name="area_id" ref="demo_center_201" />
+    </record>
+    <record id="demo_service_points_10" model="spp.service.point">
+            <field name="name">Agent 10</field>
+            <field name="area_id" ref="demo_center_201" />
+    </record>
+    <record model="spp.service.point" id="demo_service_points_11">
+            <field name="name">Agent 11</field>
+            <field name="area_id" ref="demo_center_202" />
+    </record>
+    <record model="spp.service.point" id="demo_service_points_12">
+            <field name="name">Agent 12</field>
+            <field name="area_id" ref="demo_center_202" />
+    </record>
+    <record model="spp.service.point" id="demo_service_points_13">
+            <field name="name">Agent 13</field>
+            <field name="area_id" ref="demo_center_201" />
+    </record>
+    <record model="spp.service.point" id="demo_service_points_14">
+            <field name="name">Agent 14</field>
+            <field name="area_id" ref="demo_center_201" />
+    </record>
+    <record model="spp.service.point" id="demo_service_points_15">
+            <field name="name">Agent 15</field>
+            <field name="area_id" ref="demo_center_202" />
+    </record>
+
+</odoo>

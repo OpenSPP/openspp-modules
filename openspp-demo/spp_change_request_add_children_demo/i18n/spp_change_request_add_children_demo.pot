@@ -1,0 +1,586 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_change_request_add_children_demo
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+msgid ""
+"<span class=\"o_stat_text\">Assign</span>\n"
+"                                <span class=\"o_stat_text\">To Me</span>"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "ADD CHILD/MEMBER TO GROUP:"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.actions.act_window,name:spp_change_request_add_children_demo.action_change_request_add_children_pending
+#: model:ir.ui.menu,name:spp_change_request_add_children_demo.menu_change_request_add_children_for_validation
+msgid "Add Child/Member"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.actions.act_window,name:spp_change_request_add_children_demo.action_change_request_add_children
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Add Child/Member Change Request"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model,name:spp_change_request_add_children_demo.model_spp_change_request_add_children
+msgid "Add Child/Member Change Request Type"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.ui.menu,name:spp_change_request_add_children_demo.menu_change_request_add_children_root
+msgid "Add Child/Member Change Requests"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_add_children
+msgid "Add Children Request Form"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__registrant_id
+msgid "Add to Group"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+msgid "Add to Group:"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__addl_name
+msgid "Additional Name"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__group_address
+msgid "Address"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.ui.menu,name:spp_change_request_add_children_demo.menu_change_request_add_children
+msgid "All Add Child/Member Requests"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__applicant_id
+msgid "Applicant"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Applicant Information"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_applicant_uid_card
+msgid "Applicant UID Card"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+msgid "Applicant's Phone #"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__applicant_phone
+msgid "Applicant's Phone Number"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+msgid "Applicant:"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Apply Changes"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Assign To Me"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Assigned To"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__assign_to_id
+msgid "Assigned to"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.change_request_add_children_filter
+msgid "Assigned to me"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Attachments"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_birth_certificate
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+msgid "Birth Certificate"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__birth_place
+msgid "Birth Place"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__birthdate_not_exact
+msgid "Birthdate Not Exact"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
+#, python-format
+msgid "Birthdate should not be on a later date."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Cancel Change Request"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_certificates
+msgid "Certificates"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model,name:spp_change_request_add_children_demo.model_spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__change_request_id
+msgid "Change Request"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model,name:spp_change_request_add_children_demo.model_spp_change_request_validation_sequence
+msgid "Change Request Validation Sequence"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Current Group Members"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__current_user_assigned
+msgid "Current User Assigned"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_custody_certificate
+msgid "Custody Certificate"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_group_members__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_validation_sequence__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__dms_file_ids
+msgid "DMS Files"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__date_validated
+msgid "Date Validated"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__birthdate
+msgid "Date of Birth"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__family_name
+msgid "Family Name"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields.selection,name:spp_change_request_add_children_demo.selection__spp_change_request_add_children__applicant_relation__father
+msgid "Father"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields.selection,name:spp_change_request_add_children_demo.selection__spp_change_request_add_children__gender__female
+msgid "Female"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "File"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__full_name
+msgid "Full Name"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__gender
+msgid "Gender"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__given_name
+msgid "Given Name"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields.selection,name:spp_change_request_add_children_demo.selection__spp_change_request_add_children__applicant_relation__grandfather
+msgid "Grandfather"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.change_request_add_children_filter
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_tree
+msgid "Group"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_group_members__group_add_children_id
+msgid "Group Add Children"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
+#, python-format
+msgid "Group Details"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__group_member_ids
+msgid "Group Members"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model,name:spp_change_request_add_children_demo.model_spp_change_request_group_members
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Group Membership"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__kind
+msgid "Group Membership Types"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__id_document_details
+msgid "ID Document"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_identification_documents
+msgid "Identification Documents"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
+#, python-format
+msgid "Incorrect phone number format"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__last_validated_by_id
+msgid "Last Validator"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields.selection,name:spp_change_request_add_children_demo.selection__spp_change_request_add_children__gender__male
+msgid "Male"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Member"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Members"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Membership Types:"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields.selection,name:spp_change_request_add_children_demo.selection__spp_change_request_add_children__applicant_relation__mother
+msgid "Mother"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "New Information"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.actions.act_window,help:spp_change_request_add_children_demo.action_change_request_add_children
+msgid "No 'Add Child/Member' change requests found!"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.actions.act_window,help:spp_change_request_add_children_demo.action_change_request_add_children_pending
+msgid "No pending 'Add Child/Member' change requests found!"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Open Details"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Open Member Form"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+msgid "Other Documents"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Other Information"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.ui.menu,name:spp_change_request_add_children_demo.menu_change_request_add_children_pending
+msgid "Pending Validation"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Phone No."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__phone
+msgid "Phone Number"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Reassign"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request__registrant_id
+msgid "Registrant"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__group_registration_date
+msgid "Registration Date"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Reject"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__applicant_relation
+msgid "Relationship to Applicant"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Request Details"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_request_form_document
+msgid "Request Form Document"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Request No."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__request_type
+msgid "Request Type"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Request Type:"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Request Validation"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Reset to Draft"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.change_request_add_children_filter
+msgid "Search Change Request: Add Child/Member"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__state
+msgid "Status"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "TARGET GROUP INFORMATION"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
+#, python-format
+msgid "The Date of Birth is required."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
+#, python-format
+msgid "The Family Name is required."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
+#, python-format
+msgid "The First Name is required."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
+#, python-format
+msgid "The Gender is required."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
+#, python-format
+msgid "The Relationship to Applicant is required."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
+#, python-format
+msgid "There are no directories defined for this change request."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.actions.act_window,help:spp_change_request_add_children_demo.action_change_request_add_children
+#: model_terms:ir.actions.act_window,help:spp_change_request_add_children_demo.action_change_request_add_children_pending
+msgid "There are no records found based on the current filter."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_uid_card
+msgid "UID Card"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__uid_number
+msgid "UID Number"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
+#, python-format
+msgid "UID Number must be 12 digits long."
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Validate"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+msgid "Validation Group"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__validation_ids
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+msgid "Validation Sequence"
+msgstr ""
