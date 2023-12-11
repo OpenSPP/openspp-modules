@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_spp_starter_all,spp.stater.all,model_spp_starter,,1,0,0,0
+access_spp_starter_group_system,spp.starter.group.system,model_spp_starter,base.group_system,1,1,1,1

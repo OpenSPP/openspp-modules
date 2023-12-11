@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <!-- explicit list view definition -->
+  <record id="spp_audit_log_tree" model="ir.ui.view">
+    <field name="name">spp_audit_log_tree</field>
+    <field name="model">spp.audit.log</field>
+    <field name="arch" type="xml">
+      <tree create="false">
+        <field name="create_date" />
+        <field name="name" />
+        <field name="model" />
+        <field name="res_id" />
+        <field name="method" />
+      </tree>
+    </field>
+  </record>
+
+  <!-- explicit form view definition -->
+  <record id="spp_audit_log_form" model="ir.ui.view">
+    <field name="name">spp_audit_log_form</field>
+    <field name="model">spp.audit.log</field>
+    <field name="arch" type="xml">
+      <form string="Audit Log" create="false" edit="false">
+        <sheet>
+          <div class="oe_title" colspan="4">
+          <h1>
+            <field name="name" />
+          </h1>
+          <div groups="base.group_no_one">
+            <field name="model_id" class="oe_inline" />,<field name="res_id" />
+          </div>
+          <group>
+            <field name="create_date" />
+            <field name="user_id" />
+            <field name="method" groups="base.group_no_one" />
+          </group>
+          </div>
+          <notebook>
+            <page string="Changes">
+              <field name="data_html" colspan="4" nolabel="1" />
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- actions opening views on models -->
+  <record id="spp_audit_log_action_window" model="ir.actions.act_window">
+    <field name="name">Audit Log</field>
+    <field name="res_model">spp.audit.log</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help">Create and manage the audit log.</field>
+  </record>
+
+  <!-- actions -->
+  <menuitem
+        name="Log"
+        id="spp_audit_log.log_menu"
+        parent="spp_audit_log.audit_submenu"
+        action="spp_audit_log_action_window"
+    />
+
+</odoo>

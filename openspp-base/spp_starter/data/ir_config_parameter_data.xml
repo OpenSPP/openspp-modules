@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <record id="show_spp_starter" model="ir.config_parameter">
+        <field name="key">spp_starter.show_spp_starter</field>
+        <field name="value">True</field>
+    </record>
+
+</odoo>

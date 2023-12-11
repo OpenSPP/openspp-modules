@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_res_users_form_inherit_spp_custom" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.spp.custom</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base_user_role.view_res_users_form_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='role_line_ids']/tree/field[@name='role_id']" position="after">
+                <field name="role_type" invisible="1" />
+                <field
+                    name="local_area_id"
+                    options="{'no_open':True,'no_create':True,'no_edit':True}"
+                    attrs="{'readonly':[('role_type','!=','local')]}"
+                />
+            </xpath>
+            <xpath expr="//field[@name='role_ids']" position="before">
+                <group colspan="4" col="4">
+                <field
+                        name="center_area_ids"
+                        options="{'no_open':True,'no_create':True,'no_edit':True}"
+                        readonly="1"
+                        widget="many2many_tags"
+                    />
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='role_line_ids']/tree/field[@name='role_id']" position="attributes">
+                <attribute name="options">{'no_open':True,'no_create':True,'no_edit':True}</attribute>
+                <attribute name="attrs">{'readonly':[('local_area_id','!=',False)]}</attribute>
+                <attribute name="force_save">True</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

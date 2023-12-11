@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <!-- explicit list view definition -->
+  <record id="spp_audit_rule_tree" model="ir.ui.view">
+    <field name="name">spp_audit_rule_tree</field>
+    <field name="model">spp.audit.rule</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="log_create" />
+        <field name="log_write" />
+        <field name="log_unlink" />
+        <field name="model_id" />
+      </tree>
+    </field>
+  </record>
+
+  <!-- explicit form view definition -->
+  <record id="spp_audit_rule_form" model="ir.ui.view">
+    <field name="name">spp_audit_rule_form</field>
+    <field name="model">spp.audit.rule</field>
+    <field name="arch" type="xml">
+      <form string="Audit Rule">
+        <field name="field_to_log_ids_domain" invisible="1" />
+        <sheet>
+          <group name="audit_rule_fields">
+            <field name="name" />
+            <field name="model_id" options="{'no_create': True, 'no_open': True}" />
+            <field
+                            name="field_to_log_ids"
+                            widget="many2many_tags"
+                            options="{'no_open':True,'no_create':True,'no_create_edit':True,'no_edit':True}"
+                            domain="field_to_log_ids_domain"
+                        />
+            <field name="log_create" />
+            <field name="log_write" />
+            <field name="log_unlink" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- actions opening views on models -->
+  <record id="spp_audit_rule_action_window" model="ir.actions.act_window">
+    <field name="name">Audit Rule</field>
+    <field name="res_model">spp.audit.rule</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help">Create and manage the audit rule.</field>
+  </record>
+
+  <!-- Top menu item -->
+  <menuitem name="Audit Log" id="spp_audit_log.menu_root" groups="spp_audit_log.group_manager" />
+
+  <!-- Sub-menu item -->
+
+  <menuitem name="Audit" id="spp_audit_log.audit_submenu" parent="spp_audit_log.menu_root" />
+
+  <!-- actions -->
+  <menuitem
+        name="Rule"
+        id="spp_audit_log.rule_menu"
+        parent="spp_audit_log.audit_submenu"
+        action="spp_audit_rule_action_window"
+    />
+</odoo>

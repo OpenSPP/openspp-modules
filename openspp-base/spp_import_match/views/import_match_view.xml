@@ -1,0 +1,121 @@
+<!--
+   Part of OpenG2P Registry. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <record id="view_spp_import_match_tree" model="ir.ui.view">
+        <field name="name">view_spp_import_match_tree</field>
+        <field name="model">spp.import.match</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_spp_import_match_form" model="ir.ui.view">
+        <field name="name">view_spp_import_match_form</field>
+        <field name="model">spp.import.match</field>
+        <field name="arch" type="xml">
+            <form string="Import Match">
+                <sheet>
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                    <notebook>
+                        <page string="Match Details">
+                            <group>
+                                <group>
+                                    <field name="model_id" />
+                                    <field name="overwrite_match" />
+                                </group>
+                                <group>
+                                    <field name="model_name" />
+                                    <field name="model_description" />
+                                </group>
+                            </group>
+                            <group>
+                                <field name="field_ids">
+                                    <tree editable="bottom">
+                                        <field name="field_id" options="{'no_create': True}" />
+                                        <field name="relation" invisible="1" />
+                                        <field
+                                            name="sub_field_id"
+                                            attrs="{'readonly': [('relation', '=', False)], 'required': [('relation', '!=', False)]}"
+                                            domain="[('model_id.model', '=', relation)]"
+                                            options="{'no_create': True}"
+                                        />
+                                        <field name="match_id" invisible="1" />
+                                        <field name="model_id" invisible="1" />
+                                        <field name="conditional" />
+                                        <field
+                                            name="imported_value"
+                                            attrs="{'readonly': [('conditional', '=', False)]}"
+                                        />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    <field name="sequence" invisible="1" />
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_spp_import_match_filter" model="ir.ui.view">
+        <field name="name">view_spp_import_match_filter</field>
+        <field name="model">spp.import.match</field>
+        <field name="arch" type="xml">
+            <search string="Import Match">
+                <field name="name" />
+                <field name="model_id" />
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter string="Model" context="{'group_by': 'model_id'}" name="model" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_spp_import_match" model="ir.actions.act_window">
+        <field name="name">Import Matching</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.import.match</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="search_view_id" ref="view_spp_import_match_filter" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Import Matching!
+            </p><p>
+                Click the create button to enter the information of the Import Matching.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_import_match_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_spp_import_match_tree" />
+        <field name="act_window_id" ref="action_spp_import_match" />
+    </record>
+    <record id="action_spp_import_match_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_import_match_form" />
+        <field name="act_window_id" ref="action_spp_import_match" />
+    </record>
+
+    <menuitem
+        id="menu_spp_import_match"
+        name="Import Match"
+        action="action_spp_import_match"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="1000"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+
+</odoo>
