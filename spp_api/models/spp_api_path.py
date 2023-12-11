@@ -442,7 +442,7 @@ class SPPAPIPath(models.Model):
             "in": "query",
             "description": "UTC datetime for create time",
             "type": "string",
-            "format": "date-time",
+            # "format": "date-time",
         }
 
     def _last_modified_date_parameter(self):
@@ -451,7 +451,7 @@ class SPPAPIPath(models.Model):
             "in": "query",
             "description": "UTC datetime for update time",
             "type": "string",
-            "format": "date-time",
+            # "format": "date-time",
         }
 
     # Fields
