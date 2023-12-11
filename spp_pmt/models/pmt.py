@@ -22,6 +22,7 @@ class G2PGroupPMT(models.Model):
     z_ind_grp_pmt_score = fields.Float(
         "PMT Score of the group",
         compute="_compute_pmt_score",
+        compute_sudo=True,
     )
     grp_pmt_score = fields.Float(
         "PMT Score of the group", compute="_compute_pmt_score", store=True
@@ -70,19 +71,18 @@ class G2PGroupPMT(models.Model):
                 else:
                     weights.update({field.name: field.field_weight})
 
-        if weights:
-            for record in self:
-                z_ind_grp_pmt_score = 0
-                if record.group_membership_ids:
-                    total_score = 0.0
-                    total_weight = 0.0
-                    # Iterating through each member of the group to calculate the PMT score
-                    for ind in record.group_membership_ids:
-                        for field, weight in weights.items():
-                            if hasattr(ind.individual, field):
-                                total_score += getattr(ind.individual, field) * weight
-                                total_weight += weight
-                    z_ind_grp_pmt_score = total_score / total_weight
+        for record in self:
+            z_ind_grp_pmt_score = 0
+            if weights and record.group_membership_ids:
+                total_score = 0.0
+                total_weight = 0.0
+                # Iterating through each member of the group to calculate the PMT score
+                for ind in record.group_membership_ids:
+                    for field, weight in weights.items():
+                        if hasattr(ind.individual, field):
+                            total_score += getattr(ind.individual, field) * weight
+                            total_weight += weight
+                z_ind_grp_pmt_score = total_score / total_weight
 
-                record.z_ind_grp_pmt_score = z_ind_grp_pmt_score
-                record.grp_pmt_score = z_ind_grp_pmt_score
+            record.z_ind_grp_pmt_score = z_ind_grp_pmt_score
+            record.grp_pmt_score = z_ind_grp_pmt_score
