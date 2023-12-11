@@ -1,6 +1,6 @@
 import os
 
-import jwt
+import jwt  # pylint: disable=missing-manifest-dependency
 
 JWT_ALGORITHM = "RS256"
 

@@ -1,4 +1,4 @@
-import jwt
+import jwt  # pylint: disable=missing-manifest-dependency
 
 from odoo.tools.misc import file_open
 
