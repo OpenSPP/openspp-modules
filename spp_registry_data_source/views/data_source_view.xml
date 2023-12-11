@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <!-- explicit list view definition -->
+  <record id="spp_data_source_tree" model="ir.ui.view">
+    <field name="name">spp_data_source_tree</field>
+    <field name="model">spp.data.source</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="url" />
+        <field name="auth_type" />
+      </tree>
+    </field>
+  </record>
+
+  <!-- explicit form view definition -->
+  <record id="spp_data_source_form" model="ir.ui.view">
+    <field name="name">spp_data_source_form</field>
+    <field name="model">spp.data.source</field>
+    <field name="arch" type="xml">
+      <form string="Data Source">
+        <sheet>
+          <group>
+            <field name="name" />
+            <field name="url" widget="CopyClipboardChar" />
+            <field name="auth_type" />
+          </group>
+          <notebook>
+            <page name="url_path" string="URL Paths">
+              <field name="data_source_path_ids">
+                <tree editable="bottom">
+                  <field name="key" string="Data Source Path Name" />
+                  <field name="value" string="URL Path" />
+                </tree>
+              </field>
+            </page>
+            <page name="parameters" string="Required Parameters">
+              <field name="data_source_parameter_ids">
+                <tree editable="bottom">
+                  <field name="key" />
+                  <field name="value" />
+                </tree>
+              </field>
+            </page>
+            <page name="field_mapping" string="Field Mapping">
+              <field name="data_source_field_mapping_ids">
+                <tree editable="bottom">
+                  <field name="key" string="Client Field" />
+                  <field name="value" string="Server Field" />
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- actions opening views on models -->
+  <record id="spp_data_source_action_window" model="ir.actions.act_window">
+    <field name="name">Data Source</field>
+    <field name="res_model">spp.data.source</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help">Create and manage the data source.</field>
+  </record>
+
+  <!-- Sub-menu item/Action -->
+  <menuitem
+        id="menu_data_source"
+        name="Data Source"
+        parent="base.menu_administration"
+        sequence="200"
+        action="spp_data_source_action_window"
+        groups="base.group_system"
+    />
+
+</odoo>

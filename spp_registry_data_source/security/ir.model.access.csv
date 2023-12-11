@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_spp_data_source,SPP Data Source Access,model_spp_data_source,base.group_system,1,1,1,1
+access_spp_data_source_path,SPP Data Source Path Access,model_spp_data_source_path,base.group_system,1,1,1,1
+access_spp_data_source_parameter,SPP Data Source Parameter Access,model_spp_data_source_parameter,base.group_system,1,1,1,1
+access_spp_data_source_field_mapping,SPP Data Source Field Mapping Access,model_spp_data_source_field_mapping,base.group_system,1,1,1,1
