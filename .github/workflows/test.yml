@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - "15.0*"
+      - "15.1*"
   push:
     branches:
       - "15.0"
