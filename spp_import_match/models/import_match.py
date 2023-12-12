@@ -15,7 +15,7 @@ class SPPImportMatch(models.Model):
 
     name = fields.Char()
     sequence = fields.Integer(index=True)
-    overwrite_match = fields.Boolean(Default=False)
+    overwrite_match = fields.Boolean()
     model_id = fields.Many2one(
         "ir.model",
         "Model",

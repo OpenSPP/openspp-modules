@@ -84,7 +84,7 @@ class TestRegistrant(TransactionCase):
 
     @mute_logger("odoo.sql_db")
     def test_04_compute_spp_id_unique_violation(self):
-        with (self.env.cr.savepoint(), self.assertRaises(UniqueViolation)):
+        with self.assertRaises(UniqueViolation):
             self._test_individuals[0].write(
                 {
                     "spp_id": self._test_individuals[1].spp_id,
