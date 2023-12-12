@@ -205,13 +205,13 @@ class CRVSLocation(models.Model):
             location_path = ""
             data_source_path_id = self.env["spp.data.source.path"].search(
                 [
-                    ("name", "=", constants.DATA_SOURCE_LOCATION_PATH_NAME),
+                    ("key", "=", constants.DATA_SOURCE_LOCATION_PATH_NAME),
                     ("data_source_id", "=", data_source_id.id),
                 ],
                 limit=1,
             )
             if data_source_path_id:
-                location_path = data_source_path_id.path
+                location_path = data_source_path_id.value
 
             if location_path:
                 url = f"{data_source_id.url}{location_path}"

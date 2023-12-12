@@ -41,7 +41,7 @@ class SppDataSource(models.Model):
         paths, path_create_vals = vals.pop("paths", []), []
         for path in paths:
             path_create_vals.append(
-                (0, 0, {"name": path.get("name"), "path": path.get("path")})
+                (0, 0, {"key": path.get("name"), "value": path.get("path")})
             )
         vals["data_source_path_ids"] = path_create_vals
         return self.create(vals)
