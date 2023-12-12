@@ -73,7 +73,7 @@ class Base(models.AbstractModel):
         return super().load(fields, data)
 
     def write(self, vals):
-        model = self.env["ir.model"].search([("model", "=", self._name)])
+        model = self.env["ir.model"].sudo().search([("model", "=", self._name)])
         new_vals = vals.copy()
         for rec in vals:
             field_name = rec

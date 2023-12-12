@@ -168,7 +168,7 @@ class TestAPI(HttpCase):
     def test_create_one(self):
         data_for_create = {"name": "created_from_test", "type": "other"}
         resp = self.request_from_user(
-            self.demo_user, "POST", "/{model}", data_json=data_for_create
+            self.admin_user, "POST", "/{model}", data_json=data_for_create
         )
         self.assertEqual(resp.status_code, pinguin.CODE__created)
         self.assertIn("timestamp", resp.json().keys())

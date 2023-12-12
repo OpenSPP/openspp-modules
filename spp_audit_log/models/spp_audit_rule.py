@@ -110,7 +110,7 @@ class SppAuditRule(models.Model):
         elif method == "unlink":
             domain.append(("log_unlink", "=", True))
 
-        return self.env["spp.audit.rule"].search(domain)
+        return self.env["spp.audit.rule"].sudo().search(domain)
 
     @api.model
     def _register_hook(self, ids=None):
