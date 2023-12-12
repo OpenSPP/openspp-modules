@@ -46,6 +46,6 @@ class TestSPPCreateNewProgramWiz(TransactionCase):
             self.program_create_wiz._check_required_fields()
 
     def test_03_get_eligibility_manager(self):
-        res = self.program_create_wiz._get_eligibility_manager(self.program.id)
+        res = self.program_create_wiz._get_eligibility_manager(self.program["res_id"])
 
         self.assertIn("eligibility_managers", res)
