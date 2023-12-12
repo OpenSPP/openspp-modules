@@ -61,5 +61,5 @@ class TestProgram(TransactionCase):
 
         self.assertEqual(
             [action_3.get("type"), action_3.get("tag"), action_3["params"].get("type")],
-            ["ir.actions.client", "display_notification", "warning"],
+            ["ir.actions.client", "display_notification", "success"],
         )
