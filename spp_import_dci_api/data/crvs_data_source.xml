@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <function model="spp.data.source" name="create_data_source">
-        <value
-            model="spp.data.source"
-            eval="{
-                'name': 'CRVS',
-                'url': 'https://dci.opencrvs.lab.cdpi.dev',
-                'auth_type':'bearer_authentication',
-                'paths': [
-                    {
-                        'name': 'Registry Sync Search',
-                        'path': '/registry/sync/search',
-                    },
-                    {
-                        'name': 'Authentication',
-                        'path': '/oauth2/client/token',
-                    },
-                    {
-                        'name': 'Location',
-                        'path': '/.well-known/locations.json',
-                    }
-                ]
-            }"
-        />
-    </function>
+    <record id="spp_crvs_data_source" model="spp.data.source">
+        <field name="name">CRVS</field>
+        <field name="url">https://dci.opencrvs.lab.cdpi.dev</field>
+        <field name="auth_type">bearer_authentication</field>
+    </record>
+    <record id="spp_crvs_registry_path" model="spp.data.source.path">
+        <field name="data_source_id" eval="ref('spp_import_dci_api.spp_crvs_data_source')" />
+        <field name="key">Registry Sync Search</field>
+        <field name="value">/registry/sync/search</field>
+    </record>
+    <record id="spp_crvs_oauth2_path" model="spp.data.source.path">
+        <field name="data_source_id" eval="ref('spp_import_dci_api.spp_crvs_data_source')" />
+        <field name="key">Authentication</field>
+        <field name="value">/oauth2/client/token</field>
+    </record>
+    <record id="spp_crvs_location_path" model="spp.data.source.path">
+        <field name="data_source_id" eval="ref('spp_import_dci_api.spp_crvs_data_source')" />
+        <field name="key">Location</field>
+        <field name="value">/.well-known/locations.json</field>
+    </record>
 </odoo>
