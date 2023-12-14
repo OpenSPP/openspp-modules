@@ -5,7 +5,7 @@
     "version": "15.0.0.0.0",
     "author": "OpenSPP.org",
     "development_status": "Alpha",
-    "website": "https://github.com/openspp/openspp-registry",
+    "website": "https://github.com/openspp/openspp-modules",
     "license": "LGPL-3",
     "depends": [
         "base",
