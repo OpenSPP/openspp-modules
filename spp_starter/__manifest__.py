@@ -3,7 +3,7 @@
     "author": "OpenSPP.org",
     "website": "https://github.com/openspp/openspp-modules",
     "category": "Theme",
-    "version": "15.0.0.0.0",
+    "version": "15.0.1.1.0",
     "license": "AGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],

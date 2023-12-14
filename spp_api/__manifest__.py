@@ -6,7 +6,7 @@
     "summary": """RESTful API for OpenSPP""",
     "category": "",
     "images": ["images/icon.png"],
-    "version": "15.0.0.0.0",
+    "version": "15.0.1.1.0",
     "application": False,
     "author": "OpenSPP.org",
     "development_status": "Alpha",

@@ -2,7 +2,7 @@
     "name": """OpenSPP API: DCI Server""",
     "summary": """RESTful API routes for OpenSPP""",
     "category": "",
-    "version": "15.0.0.0.0",
+    "version": "15.0.1.1.0",
     "author": "OpenSPP.org",
     "development_status": "Alpha",
     "external_dependencies": {"python": ["PyLD", "pyjwt>=2.4.0"]},
