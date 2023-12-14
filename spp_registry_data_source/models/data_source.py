@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class SppDataSource(models.Model):
@@ -31,20 +31,6 @@ class SppDataSource(models.Model):
     _sql_constraints = [
         ("name_uniq", "unique(name)", "The name of the data source must be unique !"),
     ]
-
-    @api.model
-    @api.returns("self", lambda value: value.id)
-    def create_data_source(self, vals):
-        data_source_id = self.search([("name", "=", vals.get("name"))], limit=1)
-        if data_source_id:
-            return data_source_id
-        paths, path_create_vals = vals.pop("paths", []), []
-        for path in paths:
-            path_create_vals.append(
-                (0, 0, {"key": path.get("name"), "value": path.get("path")})
-            )
-        vals["data_source_path_ids"] = path_create_vals
-        return self.create(vals)
 
     def get_field_mapping_key_value_pair(self):
         return self.data_source_field_mapping_ids.get_mapping()

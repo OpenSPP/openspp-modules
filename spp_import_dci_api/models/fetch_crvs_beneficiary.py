@@ -298,7 +298,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
         paths = {}
 
         for path_id in self.data_source_id.data_source_path_ids:
-            paths[path_id.name] = path_id.path
+            paths[path_id.key] = path_id.value
 
         if constants.DATA_SOURCE_SEARCH_PATH_NAME not in paths:
             raise ValidationError(
