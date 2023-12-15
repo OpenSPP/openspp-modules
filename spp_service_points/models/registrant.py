@@ -56,6 +56,7 @@ class OpenSPPRegistrant(models.Model):
 
 class OpenSPPServicePoint(models.Model):
     _name = "spp.service.point"
+    _inherit = ["mail.thread"]
     _description = "Service Point"
     _order = "id desc"
 
