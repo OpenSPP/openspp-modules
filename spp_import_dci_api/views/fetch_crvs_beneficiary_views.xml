@@ -48,7 +48,7 @@
                             name="domain"
                             colspan="4"
                             widget="domain"
-                            options="{'model': 'spp.fetch.domain.filter'}"
+                            options="{'model': 'spp.fetch.domain.filter', 'hide_result': True}"
                             attrs="{'readonly': [('done_imported', '=', True)]}"
                         />
                     </group>

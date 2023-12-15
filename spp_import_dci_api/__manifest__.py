@@ -25,6 +25,11 @@
         "views/eligibility_manager_view.xml",
         "views/fetch_crvs_beneficiary_views.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "spp_import_dci_api/static/src/js/field_domain.js",
+        ],
+    },
     "application": True,
     "auto_install": False,
     "installable": True,
