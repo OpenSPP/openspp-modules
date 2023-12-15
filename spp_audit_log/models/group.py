@@ -15,4 +15,4 @@ class OpenSPPGroup(models.Model):
             for membership in rec.group_membership_ids:
                 member_names.append(membership.individual.name)
 
-            rec.grp_member_names = ",".join(member_names)
+            rec.grp_member_names = ", ".join(member_names)
