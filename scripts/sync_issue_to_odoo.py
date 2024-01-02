@@ -34,16 +34,11 @@ if not project_id:
     print("Project not found")
     sys.exit(1)
 
-# Generate a unique XML ID for the task
-# This could be based on the GitHub issue ID or another unique identifier
-xml_id = f'github_{issue_title.replace(" ", "_").lower()}'
-
 # Create a task associated with the project
 task_id = models.execute_kw(db, uid, password, 'project.task', 'create', [{
     'name': issue_title,
     'description': issue_body,
     'project_id': project_id[0],  # Assuming the project ID is the first in the list
-    'xml_id': xml_id,  # Set the unique XML ID for the task
 }])
 
-print(f"Task created with ID: {task_id} and XML ID: {xml_id}")
+print(f"Task created with ID: {task_id}")
