@@ -23,4 +23,4 @@ jobs:
         ODOO_USERNAME: ${{ secrets.ODOO_USERNAME }}
         ODOO_PASSWORD: ${{ secrets.ODOO_PASSWORD }}
       run: |
-        python ./sync_issue_to_odoo.py "${{ github.event.issue.title }}" "${{ github.event.issue.body }}"
+        python ./scripts/sync_issue_to_odoo.py "${{ github.event.issue.title }}" "${{ github.event.issue.body }}"
