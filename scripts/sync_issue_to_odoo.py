@@ -10,7 +10,7 @@ if not url.startswith('http://') and not url.startswith('https://'):
 
 db = os.getenv('ODOO_DB')
 username = os.getenv('ODOO_USERNAME')  # Odoo login username
-password = os.getenv('ODOO_PASSWORD')  # Odoo login password
+password = os.getenv('ODOO_PASSWORD')  # API Key is used 
 project_name = 'test_proj'  # Project name in Odoo
 
 # GitHub issue data, passed as script arguments
