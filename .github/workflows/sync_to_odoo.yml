@@ -10,6 +10,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        ref: 15.1.1-mono-repo  
 
     - name: Set up Python
       uses: actions/setup-python@v2
