@@ -16,6 +16,7 @@ project_name = 'Action Against Hunger (ACF)'  # Project name in Odoo
 # GitHub issue data, passed as script arguments
 issue_title = sys.argv[1]
 issue_body = sys.argv[2]
+github_issue_id = sys.argv[3]  # Unique GitHub Issue ID
 
 # XML-RPC endpoints for Odoo
 common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
@@ -34,11 +35,26 @@ if not project_id:
     print("Project not found")
     sys.exit(1)
 
-# Create a task associated with the project
-task_id = models.execute_kw(db, uid, password, 'project.task', 'create', [{
-    'name': issue_title,
-    'description': issue_body,
-    'project_id': project_id[0],  # Assuming the project ID is the first in the list
-}])
+# Check if a task with the given GitHub issue ID already exists
+task_id = models.execute_kw(db, uid, password,
+    'project.task', 'search',
+    [[['x_github_issue_id', '=', github_issue_id]]],
+    {'limit': 1})
 
-print(f"Task created with ID: {task_id}")
+if task_id:
+    # Update the existing task
+    models.execute_kw(db, uid, password, 'project.task', 'write', [task_id, {
+        'name': issue_title,
+        'description': issue_body,
+    }])
+    print(f"Task updated with ID: {task_id[0]}")
+else:
+    # Create a new task
+    task_id = models.execute_kw(db, uid, password, 'project.task', 'create', [{
+        'name': issue_title,
+        'description': issue_body,
+        'project_id': project_id[0],
+        'x_github_issue_id': github_issue_id,  # Set the GitHub issue ID
+    }])
+    print(f"Task created with ID: {task_id}")
+
