@@ -19,8 +19,6 @@ class SppAuditRule(models.Model):
         **kwargs
     ):
         rule = self.env["spp.audit.rule"].search([("name", "=", rule_name)], limit=1)
-        if rule:
-            return
 
         model_id = self.env["ir.model"].search([("model", "=", model)])
         if model_id:
@@ -62,6 +60,9 @@ class SppAuditRule(models.Model):
                             }
                         )
 
-            self.env["spp.audit.rule"].create(vals)
+            if rule:
+                rule.write(vals)
+            else:
+                self.env["spp.audit.rule"].create(vals)
 
         return

@@ -4,7 +4,7 @@
     <function model="spp.audit.rule" name="create_rules">
         <value name="rule_name">Program Rule</value>
         <value name="model">g2p.program</value>
-        <value name="fields_to_log" eval="['name']" />
+        <value name="fields_to_log" eval="['name', 'eligible_beneficiaries_count', 'have_members']" />
     </function>
 
     <!-- Cycle Rule -->
@@ -18,21 +18,30 @@
     <function model="spp.audit.rule" name="create_rules">
         <value name="rule_name">Registry Rule</value>
         <value name="model">res.partner</value>
-        <value name="fields_to_log" eval="['name', 'registration_date']" />
+        <value
+            name="fields_to_log"
+            eval="['name', 'registration_date', 'active_group', 'address', 'age', 'area_center_id', 'area_id', 'birth_place', 'birthdate', 'email', 'gender', 'grp_member_names', 'grp_member_uid', 'individual_status', 'lang', 'molsa_vulnerability_level', 'mother_name', 'pds_number', 'phone', 'phone_number_ids', 'relation_to_head', 'service_point_ids', 'unified_id']"
+        />
     </function>
 
     <!-- Service Point Rule -->
     <function model="spp.audit.rule" name="create_rules">
         <value name="rule_name">Service Point Rule</value>
         <value name="model">spp.service.point</value>
-        <value name="fields_to_log" eval="['name']" />
+        <value
+            name="fields_to_log"
+            eval="['name', 'agent_home_address', 'agent_number', 'area_id', 'country_id', 'disabled_date', 'disabled_reason', 'display_name', 'dms_directory_ids', 'final_agent_number', 'id', 'individual_ids', 'is_contract_active', 'is_disabled', 'is_tamawwon_onboarded', 'message_attachment_count', 'message_follower_ids', 'message_has_error', 'message_has_error_counter', 'message_has_sms_error', 'message_is_follower', 'message_main_attachment_id', 'message_needaction', 'message_needaction_counter', 'message_partner_ids', 'message_unread', 'message_unread_counter', 'phone_no', 'phone_sanitized', 'res_partner_company_id', 'service_type_id', 'service_type_ids', 'shop_address', 'write_uid', 'website_message_ids', ]"
+        />
     </function>
 
     <!-- Default Eligibility Manager Rule -->
     <function model="spp.audit.rule" name="create_rules">
         <value name="rule_name">Default Eligibility Manager Rule</value>
         <value name="model">g2p.program_membership.manager.default</value>
-        <value name="fields_to_log" eval="['name', 'eligibility_domain']" />
+        <value
+            name="fields_to_log"
+            eval="['eligibility_domain', 'admin_area_ids', 'create_date', 'display_name', 'program_id']"
+        />
         <value name="view_logs" eval="False" />
         <value name="parent_rule_name">Program Rule</value>
         <value name="connecting_field_name">program_id</value>
@@ -62,7 +71,10 @@
     <function model="spp.audit.rule" name="create_rules">
         <value name="rule_name">Program Manager Rule</value>
         <value name="model">g2p.program.manager.default</value>
-        <value name="fields_to_log" eval="['name']" />
+        <value
+            name="fields_to_log"
+            eval="['copy_last_cycle_on_new_cycle', 'create_date', 'number_of_cycles', 'program_id', 'write_uid']"
+        />
         <value name="view_logs" eval="False" />
         <value name="parent_rule_name">Program Rule</value>
         <value name="connecting_field_name">program_id</value>
@@ -72,7 +84,10 @@
     <function model="spp.audit.rule" name="create_rules">
         <value name="rule_name">Cycle Manager Rule</value>
         <value name="model">g2p.cycle.manager.default</value>
-        <value name="fields_to_log" eval="['name']" />
+        <value
+            name="fields_to_log"
+            eval="['approver_group_id', 'auto_approve_entitlements', 'byday', 'calendar_event_ids', 'cycle_duration', 'day', 'end_type', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'month_by', 'rrule', 'until', 'weekday']"
+        />
         <value name="view_logs" eval="False" />
         <value name="parent_rule_name">Program Rule</value>
         <value name="connecting_field_name">program_id</value>
@@ -112,7 +127,10 @@
     <function model="spp.audit.rule" name="create_rules">
         <value name="rule_name">Basket Entitlement Manager Rule</value>
         <value name="model">g2p.program.entitlement.manager.basket</value>
-        <value name="fields_to_log" eval="['name']" />
+        <value
+            name="fields_to_log"
+            eval="['name', 'basket_product_ids', 'entitlement_basket_id', 'entitlement_item_ids', 'entitlement_validation_group_id', 'manage_inventory', 'max_multiplier', 'multiplier_field', 'program_id']"
+        />
         <value name="view_logs" eval="False" />
         <value name="parent_rule_name">Program Rule</value>
         <value name="connecting_field_name">program_id</value>
