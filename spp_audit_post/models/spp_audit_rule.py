@@ -6,6 +6,8 @@ from odoo.exceptions import ValidationError
 
 class SppAuditRule(models.Model):
     _inherit = "spp.audit.rule"
+    _parent_name = "parent_id"
+    _parent_store = True
 
     parent_id = fields.Many2one(
         "spp.audit.rule",
@@ -28,6 +30,8 @@ class SppAuditRule(models.Model):
         compute="_compute_field_id_domain",
         readonly=True,
     )
+
+    parent_path = fields.Char()
 
     @api.onchange("model_id")
     def _onchange_model_id(self):
@@ -52,15 +56,7 @@ class SppAuditRule(models.Model):
                 ]
             rec.field_id_domain = json.dumps(domain)
 
-    @api.constrains("field_id")
-    def _check_field_id(self):
-        for rec in self:
-            if rec.parent_id and not rec.field_id:
-                raise ValidationError(
-                    _("Field is required if the rule is a child rule.")
-                )
-
-    @api.constrains("model_id", "field_id")
+    @api.constrains("parent_id", "field_id")
     def _check_model_id_field_id(self):
         for rec in self:
             if rec.parent_id and not rec.field_id:

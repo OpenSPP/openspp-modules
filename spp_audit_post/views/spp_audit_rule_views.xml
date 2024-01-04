@@ -7,14 +7,14 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="before">
                 <field name="field_id_domain" invisible="1" />
-                <field name="parent_id" options="{'no_create': True, 'no_open': True}" />
+                <field name="parent_id" options="{'no_create': True, 'no_open': True, 'no_edit': True}" />
             </xpath>
 
             <xpath expr="//field[@name='log_unlink']" position="after">
                 <field
                     name="field_id"
                     attrs="{'invisible': [('parent_id', '=', False)]}"
-                    options="{'no_open': True}"
+                    options="{'no_open': True, 'no_create': True, 'no_edit': True}"
                     domain="field_id_domain"
                 />
             </xpath>
