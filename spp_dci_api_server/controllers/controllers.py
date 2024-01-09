@@ -360,7 +360,7 @@ class SppDciApiServer(Controller):
                 domain.append(("is_group", "=", True))
 
             # Process Queries and modify domain
-            self.process_queries(query_type, queries, domain)
+            domain = self.process_queries(query_type, queries, domain)
 
             if domain:
                 records = request.env["res.partner"].sudo().search(domain)
