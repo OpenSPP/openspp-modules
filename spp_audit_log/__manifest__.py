@@ -13,6 +13,7 @@
     "depends": [
         "base",
         "mail",
+        "g2p_registry_membership",
     ],
     "external_dependencies": {},
     "data": [

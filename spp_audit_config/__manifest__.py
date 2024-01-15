@@ -13,6 +13,7 @@
         "spp_programs",
         "spp_service_points",
         "spp_audit_log",
+        "spp_audit_post",
     ],
     "external_dependencies": {},
     "data": [

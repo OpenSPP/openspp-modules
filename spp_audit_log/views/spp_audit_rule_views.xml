@@ -11,6 +11,7 @@
         <field name="log_create" />
         <field name="log_write" />
         <field name="log_unlink" />
+        <field name="view_logs" />
         <field name="model_id" />
       </tree>
     </field>
@@ -33,6 +34,7 @@
                             options="{'no_open':True,'no_create':True,'no_create_edit':True,'no_edit':True}"
                             domain="field_to_log_ids_domain"
                         />
+            <field name="view_logs" />
             <field name="log_create" />
             <field name="log_write" />
             <field name="log_unlink" />

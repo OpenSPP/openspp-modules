@@ -10,12 +10,13 @@ class SppAuditRule(models.Model):
     _name = "spp.audit.rule"
     _description = "SPP Audit Rule"
 
-    name = fields.Char(size=32, required=True)
+    name = fields.Char(required=True)
     # TODO: should we need to add active field?
     # active = fields.Boolean(default=True)
     log_create = fields.Boolean("Log Creation", default=True)
     log_write = fields.Boolean("Log Update", default=True)
     log_unlink = fields.Boolean("Log Deletion", default=True)
+    view_logs = fields.Boolean("View Logs Action Menu", default=True)
     model_id = fields.Many2one(
         "ir.model",
         "Model",
@@ -60,36 +61,47 @@ class SppAuditRule(models.Model):
                     _("A rule is already existed for the selected model.")
                 )
 
-    def _add_action_id(self):
+    def _process_action_id(self):
         for rec in self:
-            if not rec.action_id:
-                # Check action menu if view audit logs for a model is already existing
-                ir_act_window_id = self.env["ir.actions.act_window"].search(
-                    [
-                        ("binding_model_id", "=", rec.model_id.id),
-                        ("res_model", "=", "spp.audit.log"),
-                        ("name", "=", "View logs"),
-                    ],
-                    limit=1,
-                )
+            if rec.view_logs:
+                if not rec.action_id:
+                    # Check action menu if view audit logs for a model is already existing
+                    ir_act_window_id = self.env["ir.actions.act_window"].search(
+                        [
+                            ("binding_model_id", "=", rec.model_id.id),
+                            ("res_model", "=", "spp.audit.log"),
+                            ("name", "=", "View logs"),
+                        ],
+                        limit=1,
+                    )
 
-                if ir_act_window_id:
-                    # If action menu is existing, save existing action menu to action_id
-                    rec.action_id = ir_act_window_id
-                else:
-                    # Create action menu
-                    vals = {
-                        "name": _("View logs"),
-                        "res_model": "spp.audit.log",
-                        "binding_model_id": rec.model_id.id,
-                        "domain": "[('model_id','=', %s), "
-                        "('res_id', '=', active_id), ('method', 'in', %s)]"
-                        % (
-                            rec.model_id.id,
-                            [method.replace("_", "") for method in self._methods],
-                        ),
-                    }
-                    rec.action_id = self.env["ir.actions.act_window"].create(vals)
+                    if ir_act_window_id:
+                        # If action menu is existing, save existing action menu to action_id
+                        ir_act_window_id.update(
+                            {
+                                "binding_view_types": "form",
+                            }
+                        )
+                        rec.action_id = ir_act_window_id
+                    else:
+                        # Create action menu
+                        vals = {
+                            "name": _("View logs"),
+                            "res_model": "spp.audit.log",
+                            "binding_model_id": rec.model_id.id,
+                            "binding_view_types": "form",
+                            "domain": "[('model_id','=', %s), "
+                            "('res_id', '=', active_id), ('method', 'in', %s)]"
+                            % (
+                                rec.model_id.id,
+                                [method.replace("_", "") for method in self._methods],
+                            ),
+                        }
+                        rec.action_id = self.env["ir.actions.act_window"].create(vals)
+            else:
+                action_menu = rec.action_id
+                if action_menu:
+                    action_menu.unlink()
         return
 
     @api.model
@@ -155,14 +167,14 @@ class SppAuditRule(models.Model):
     @api.returns("self", lambda value: value.id)
     def create(self, vals):
         rule = super().create(vals)
-        rule._add_action_id()
+        rule._process_action_id()
         if self._register_hook(rule.id):
             self.pool.signal_changes()
         return rule
 
     def write(self, vals):
         res = super().write(vals)
-        self._add_action_id()
+        self._process_action_id()
         if self._register_hook(self._ids):
             self.pool.signal_changes()
         return res
