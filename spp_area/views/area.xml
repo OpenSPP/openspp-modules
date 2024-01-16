@@ -57,6 +57,7 @@
                         <field name="complete_name" string="Complete Name" />
                         <field name="level" invisible="1" />
                         <field name="kind" />
+                        <field name="area_sqkm" />
                     </group>
                     <notebook>
                         <page string="Child">

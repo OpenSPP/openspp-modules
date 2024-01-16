@@ -3,6 +3,8 @@ apispec
 bravado_core
 faker
 jsonschema
+openpyxl
+pandas
 pyjwt>=2.4.0
 PyLD
 pyOpenSSL==22.0.0
