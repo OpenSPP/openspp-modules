@@ -84,12 +84,11 @@ class OpenSPPAreaImport(models.Model):
         This computes the total rows of the Excel file
         """
         for rec in self:
-            tot_rows_imported = 0
-            tot_rows_error = 0
-            for ln in rec.raw_data_ids:
-                tot_rows_imported += 1
-                if ln.state == "Error":
-                    tot_rows_error += 1
+            tot_rows_imported = len(rec.raw_data_ids)
+            tot_rows_error = self.env["spp.area.import.raw"].search(
+                [("id", "in", rec.raw_data_ids.ids), ("state", "=", "Error")],
+                count=True,
+            )
             rec.update(
                 {
                     "tot_rows_imported": tot_rows_imported,
