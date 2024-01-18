@@ -18,11 +18,7 @@
         "g2p_registry_group",
     ],
     "external_dependencies": {
-        "python": [
-            "xlrd",
-            "openpyxl",
-            "pandas",
-        ]
+        "python": ["xlrd", "openpyxl", "pandas", "numpy>=1.22.2"]
     },
     "data": [
         "data/area_kind_data.xml",
