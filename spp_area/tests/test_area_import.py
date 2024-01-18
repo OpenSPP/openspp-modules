@@ -1,32 +1,11 @@
-import base64
 import logging
-import os
 
-from odoo.tests.common import TransactionCase
+from .common import AreaImportTestMixin
 
 _logger = logging.getLogger(__name__)
 
 
-class AreaImportTest(TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super(AreaImportTest, cls).setUpClass()
-        xls_file = None
-        xls_file_name = None
-
-        file_path = f"{os.path.dirname(os.path.abspath(__file__))}/irq_adminboundaries_tabulardata.xlsx"
-        with open(file_path, "rb") as f:
-            xls_file_name = f.name
-            xls_file = base64.b64encode(f.read())
-
-        cls.area_import_id = cls.env["spp.area.import"].create(
-            {
-                "excel_file": xls_file,
-                "name": xls_file_name,
-                "state": "Uploaded",
-            }
-        )
-
+class AreaImportTest(AreaImportTestMixin):
     def test_01_cancel_import(self):
         self.area_import_id.cancel_import()
 
