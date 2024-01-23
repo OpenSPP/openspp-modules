@@ -1,10 +1,9 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import base64
 import logging
-import textwrap
 from io import BytesIO
 
-from xlrd import open_workbook
+import pandas as pd
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -15,6 +14,22 @@ _logger = logging.getLogger(__name__)
 class OpenSPPAreaImport(models.Model):
     _name = "spp.area.import"
     _description = "Areas Import Table"
+
+    NEW = "New"
+    UPLOADED = "Uploaded"
+    IMPORTED = "Imported"
+    VALIDATED = "Validated"
+    DONE = "Done"
+    CANCELLED = "Cancelled"
+
+    STATE_SELECTION = [
+        (NEW, NEW),
+        (UPLOADED, UPLOADED),
+        (IMPORTED, IMPORTED),
+        (VALIDATED, VALIDATED),
+        (DONE, DONE),
+        (CANCELLED, CANCELLED),
+    ]
 
     name = fields.Char("File Name", required=True)
     excel_file = fields.Binary("Area Excel File")
@@ -39,16 +54,9 @@ class OpenSPPAreaImport(models.Model):
         readonly=True,
     )
     state = fields.Selection(
-        [
-            ("New", "New"),
-            ("Uploaded", "Uploaded"),
-            ("Imported", "Imported"),
-            ("Done", "Done"),
-            ("Cancelled", "Cancelled"),
-        ],
+        STATE_SELECTION,
         "Status",
-        readonly=True,
-        default="New",
+        default=NEW,
     )
 
     @api.onchange("excel_file")
@@ -62,24 +70,25 @@ class OpenSPPAreaImport(models.Model):
                 {
                     "date_uploaded": fields.Datetime.now(),
                     "upload_id": self.env.user,
-                    "state": "Uploaded",
+                    "state": self.UPLOADED,
                 }
             )
         else:
-            self.update({"date_uploaded": None, "upload_id": None, "state": "New"})
+            self.update(
+                {"date_uploaded": None, "upload_id": None, "state": self.UPLOADED}
+            )
 
-    @api.depends("raw_data_ids")
+    @api.depends("raw_data_ids", "raw_data_ids.state")
     def _compute_get_total_rows(self):
         """
         This computes the total rows of the Excel file
         """
         for rec in self:
-            tot_rows_imported = 0
-            tot_rows_error = 0
-            for ln in rec.raw_data_ids:
-                tot_rows_imported += 1
-                if ln.state == "Error":
-                    tot_rows_error += 1
+            tot_rows_imported = len(rec.raw_data_ids)
+            tot_rows_error = self.env["spp.area.import.raw"].search(
+                [("id", "in", rec.raw_data_ids.ids), ("state", "=", "Error")],
+                count=True,
+            )
             rec.update(
                 {
                     "tot_rows_imported": tot_rows_imported,
@@ -89,7 +98,11 @@ class OpenSPPAreaImport(models.Model):
 
     def cancel_import(self):
         for rec in self:
-            rec.update({"state": "Cancelled"})
+            rec.update({"state": self.CANCELLED})
+
+    def reset_to_uploaded(self):
+        for rec in self:
+            rec.update({"state": self.UPLOADED})
 
     def import_data(self):  # noqa: C901
         """
@@ -97,296 +110,233 @@ class OpenSPPAreaImport(models.Model):
         """
         _logger.info("Area Import: Started: %s" % fields.Datetime.now())
         for rec in self:
+
+            # Delete all existing import data for this record
+            # This can only be happen if the Area Upload record is reset back to Uploaded state
+            if rec.raw_data_ids:
+                rec.raw_data_ids.unlink()
+
             _logger.info("Area Import: Loading Excel File: %s" % fields.Datetime.now())
+            # Wrap binary to BytesIO
             try:
                 inputx = BytesIO()
                 inputx.write(base64.decodebytes(rec.excel_file))
-                book = open_workbook(file_contents=inputx.getvalue())
             except TypeError as e:
                 raise ValidationError(_("ERROR: {}").format(e)) from e
-            sheet = book.sheets()[0]
-            vals = []
-            _logger.info("Area Import: Parsing Excel File: %s" % fields.Datetime.now())
 
-            columns = []
+            # Open file using pandas and get all sheet names of the excel
+            # then sort sheet name from parent to child
+            xl = pd.ExcelFile(inputx)
+            sheet_names = xl.sheet_names
+            sheet_names.sort()
 
-            mainvals = {}
-            max_cols = None
-            for row in range(sheet.nrows):
-                if row == 0:  # Ignore First Row containing column headings
-                    for col in range(sheet.ncols):
-                        col_name = sheet.cell(0, col).value
-                        if col_name.find("Name") >= 0:
-                            maxcolsstr = ""
-                            if col_name.find("admin") >= 0:
-                                maxcolsstr = col_name.strip("admin").replace("Name", "")
-                            elif col_name.find("Area") >= 0:
-                                maxcolsstr = col_name.strip("Area").replace("Name", "")
-                            maxcols_name_length = len(maxcolsstr)
-                            if (
-                                maxcols_name_length == 6
-                                or maxcols_name_length == 5
-                                or maxcols_name_length == 4
-                            ):
-                                maxcolsstr = maxcolsstr[:-3]
-                                maxcolsstr = maxcolsstr.replace("_", "")
-                            try:
-                                max_cols = int(maxcolsstr)
-                                break
-                            except Exception:
-                                max_cols = None
-                else:
-                    if max_cols <= 10:
-                        xcols = max_cols
-                        while xcols >= 0:
+            row_data_vals = []
+            # Iterate sheet name and their index as area level
+            for area_level, sheet_name in enumerate(sheet_names):
 
-                            admin_code = None
-                            admin_name = None
-                            admin_ref = None
-                            admin_alt1 = None
-                            admin_alt2 = None
-                            admin_kind = None
-                            state = "Validated"
-                            errctr = 0
-                            remarks = ""
-                            # Loop through the columns
-                            lang = {}
-                            Languages = self.env["res.lang"].search(
-                                [("active", "=", True)]
-                            )
-                            for col in range(sheet.ncols):
+                # get sheet object by sheet name
+                sheet = xl.parse(sheet_name)
 
-                                # Get the column value
-                                col_value = sheet.cell(row, col).value
-                                if col_value == "<Null>":
-                                    col_value = ""
+                columns = sheet.columns
 
-                                # Determine the column name based on First Row rowIndex(0), columnIndex(col)
-                                col_name = sheet.cell(0, col).value
-                                if (
-                                    col_name.find(str(xcols) + "Code") >= 0
-                                    or col_name.find(str(xcols) + "Pcode") >= 0
-                                ):
-                                    admin_code = col_value
-                                elif col_name.find(str(xcols) + "Name") >= 0:
-                                    if not admin_name:
-                                        admin_name = col_value
-                                        if not col_value:
-                                            errctr += 1
-                                            state = "Error"
-                                            remarks += (
-                                                str(errctr)
-                                                + ".) Name cannot be blank; "
-                                            )
+                # Get Column name to be used as name field in the area
+                name_header = columns[0]
 
-                                    for Lang in Languages:
-                                        if (
-                                            col_name.find(
-                                                str(xcols) + "Name_" + Lang.iso_code
-                                            )
-                                            >= 0
-                                        ):
-                                            lang.update(
-                                                {
-                                                    Lang.iso_code: {
-                                                        "name": col_value,
-                                                        "lang_id": Lang.id,
-                                                        "iso_code": Lang.iso_code,
-                                                    }
-                                                }
-                                            )
+                # Get column prefix and the language iso code used in the name header
+                column_name_prefix, name_iso_code = name_header.split("_")
 
-                                elif col_name.find(str(xcols) + "Ref") >= 0:
-                                    admin_ref = col_value
-                                elif col_name.find(str(xcols) + "AltName1") >= 0:
-                                    admin_alt1 = col_value
-                                elif col_name.find(str(xcols) + "AltName2") >= 0:
-                                    admin_alt2 = col_value
-                                elif col_name.find(str(xcols) + "Kind") >= 0:
-                                    admin_kind = col_value
-                                _logger.info(
-                                    "Area Masterlist Import: LANGUAGES: %s" % lang
-                                )
-                            lang_ids = []
-                            for x in lang:
-                                lang_ids.append([0, 0, lang[x]])
+                # Get Column name to be used as code field in the area
+                code_header = f"{column_name_prefix}_PCODE"
 
-                            # Store values to columns
-                            columns.append(
-                                {
-                                    "admin_name": admin_name,
-                                    "admin_code": admin_code,
-                                    "admin_ref": admin_ref,
-                                    "admin_alt1": admin_alt1,
-                                    "admin_alt2": admin_alt2,
-                                    "admin_kind": admin_kind,
-                                    "level": xcols,
-                                    "remarks": remarks,
-                                    "state": state,
-                                    "row_index": row,
-                                    "lang_ids": lang_ids,
-                                }
-                            )
+                # Get Parent of the area if area level is not 0
+                parent_name_header = None
+                parent_code_header = None
+                if area_level != 0:
+                    parent_name_header = (
+                        f"{column_name_prefix[:3]}{area_level - 1}_{name_iso_code}"
+                    )
+                    parent_code_header = (
+                        f"{column_name_prefix[:3]}{area_level - 1}_PCODE"
+                    )
 
-                            xcols -= 1
-                    else:
-                        raise ValidationError(
-                            _(
-                                textwrap.fill(
-                                    textwrap.dedent(
-                                        """Max level exceeded! Can't import area with level greater
-                                than 10 and the area you are importing has %s levels."""
-                                        % max_cols
-                                    )
-                                )
-                            )
+                # Header for SQKM
+                area_sqkm_header = "AREA_SQKM"
+
+                # Get the required values for area in each row
+                for _index, row in sheet.iterrows():
+                    vals = {
+                        "admin_name": row[name_header],
+                        "admin_code": row[code_header],
+                        "parent_name": "",
+                        "parent_code": "",
+                        "level": area_level,
+                        "area_sqkm": row[area_sqkm_header],
+                    }
+                    if parent_name_header and parent_code_header:
+                        vals.update(
+                            {
+                                "parent_name": row[parent_name_header],
+                                "parent_code": row[parent_code_header],
+                            }
                         )
+                    row_data_vals.append([0, 0, vals])
 
-            for val in columns:
-                vals.append([0, 0, val])
-
-            _logger.info(
-                "Area Masterlist Import: Updating Record: %s" % fields.Datetime.now()
-            )
-            mainvals.update(
+            rec.update(
                 {
                     "date_imported": fields.Datetime.now(),
                     "import_id": self.env.user,
                     "date_validated": fields.Datetime.now(),
                     "validate_id": self.env.user,
-                    "state": "Imported",
-                    "raw_data_ids": vals,
+                    "state": self.IMPORTED,
+                    "raw_data_ids": row_data_vals,
                 }
             )
-            rec.update(mainvals)
 
             _logger.info(
                 "Area Masterlist Import: Completed: %s" % fields.Datetime.now()
             )
 
-    def save_to_area(self):
+    def validate_raw_data(self):
         """
         This set up the data then save it to spp_area including the Area Type
         and its translations
         """
         for rec in self:
-            parent_id = None
-            for raw in rec.raw_data_ids:
-                if raw.state == "Validated":
-                    if raw.admin_name:
-                        area_kind = None
-                        area_kind_id = None
-                        if raw.admin_kind:
-                            area_kind = self.env["spp.area.kind"].search(
-                                [("name", "=", raw.admin_kind)]
-                            )
-                            if not area_kind:
-                                vals = [{"name": raw.admin_kind}]
-                                area_kind = self.env["spp.area.kind"].create(vals)
-                                area_kind_id = area_kind[0].id
-                            else:
-                                area_kind_id = area_kind[0].id
-                        else:
-                            area_kind_id = self.env.ref("spp_area.admin_area_kind").id
+            has_error = rec.raw_data_ids.validate_raw_data()
+            if not has_error:
+                rec.update(
+                    {
+                        "state": self.VALIDATED,
+                    }
+                )
 
-                        name = f"{raw.admin_code or ''} - {raw.admin_name or ''}"
-
-                        if raw.level == 0:
-                            new_vals = {
-                                "draft_name": raw.admin_name or False,
-                                "code": raw.admin_code or False,
-                                "altnames": raw.admin_alt1 or raw.admin_alt2 or False,
-                                "level": raw.level or False,
-                                "kind": area_kind_id or False,
-                            }
-                        else:
-                            new_vals = {
-                                "parent_id": parent_id,
-                                "draft_name": raw.admin_name or False,
-                                "code": raw.admin_code or False,
-                                "altnames": raw.admin_alt1 or raw.admin_alt2 or False,
-                                "level": raw.level or False,
-                                "kind": area_kind_id or False,
-                            }
-                        # Check if Area already Exist
-                        curr_area = self.env["spp.area"].search(
-                            [
-                                ("draft_name", "=", raw.admin_name),
-                                ("code", "=", raw.admin_code),
-                            ]
-                        )
-
-                        if not curr_area:
-                            area_id = self.env["spp.area"].create(new_vals)
-                            area_id._compute_name()
-                            parent_id = area_id.id
-                            raw.update({"state": "Posted"})
-                        else:
-                            curr_area[0].update(new_vals)
-                            curr_area._compute_name()
-                            parent_id = curr_area[0].id
-                            raw.update({"state": "Updated"})
-                        for lang in raw.lang_ids:
-                            vals_list = []
-                            trans_name = lang.name
-                            iso_code = lang.lang_id.code
-                            vals_list.append(
-                                {
-                                    "name": "spp.area,draft_name",
-                                    "lang": iso_code,
-                                    "res_id": parent_id,
-                                    "src": name,
-                                    "value": trans_name,
-                                    "state": "translated",
-                                    "type": "model",
-                                }
-                            )
-                            self.env["ir.translation"]._update_translations(vals_list)
-                        rec.update({"state": "Done"})
-                    else:
-                        raw.update({"state": "Error"})
-
-                else:
-                    raw.update({"state": "Error", "remarks": "Incomplete information!"})
+    def save_to_area(self):
+        for rec in self:
+            rec.raw_data_ids.save_to_area()
+            rec.state = self.DONE
 
 
 # Assets Import Raw Data
 class OpenSPPAreaImportActivities(models.Model):
     _name = "spp.area.import.raw"
     _description = "Area Import Raw Data"
-    _order = "row_index, level"
+    _order = "level"
+
+    NEW = "New"
+    VALIDATED = "Validated"
+    ERROR = "Error"
+    UPDATED = "Updated"
+    POSTED = "Posted"
+
+    STATE_CHOICES = [
+        (NEW, NEW),
+        (VALIDATED, VALIDATED),
+        (ERROR, ERROR),
+        (UPDATED, UPDATED),
+        (POSTED, POSTED),
+    ]
 
     area_import_id = fields.Many2one("spp.area.import", "Area Import", required=True)
     admin_name = fields.Char()
     admin_code = fields.Char()
-    admin_alt1 = fields.Char()
-    admin_alt2 = fields.Char()
-    admin_ref = fields.Char()
-    admin_kind = fields.Char()
+
+    parent_name = fields.Char()
+    parent_code = fields.Char()
+
     level = fields.Integer()
-    row_index = fields.Integer()
-    lang_ids = fields.One2many("spp.area.import.lang", "raw_id", "Languages")
+
+    area_sqkm = fields.Char("Area (sq/km)")
+
     remarks = fields.Text("Remarks/Errors")
     state = fields.Selection(
-        [
-            ("New", "New"),
-            ("Validated", "Validated"),
-            ("Error", "Error"),
-            ("Updated", "Updated"),
-            ("Posted", "Posted"),
-        ],
+        STATE_CHOICES,
         "Status",
-        readonly=True,
         default="New",
     )
 
+    def validate_raw_data(self):
+        has_error = False
+        for rec in self:
+            errors = []
+            if not rec.admin_name or not rec.admin_code:
+                errors.append(_("Name and Code of area is required."))
 
-class OpenSPPAreaImportRawLanguages(models.Model):
-    _name = "spp.area.import.lang"
-    _description = "Area Import Raw Data Languages"
+            if rec.area_sqkm:
+                try:
+                    float(rec.area_sqkm)
+                except ValueError:
+                    errors.append(_("AREA_SQKM should be numerical."))
 
-    name = fields.Char("Translate Name")
-    raw_id = fields.Many2one("spp.area.import.raw", "Area Raw ID")
-    lang_id = fields.Many2one("res.lang", "Languages")
+            if rec.level == 0 and (rec.parent_name or rec.parent_code):
+                errors.append(
+                    _("Level 0 area should not have a parent name and parent code.")
+                )
 
-    iso_code = fields.Char("ISO Code")
+            if rec.level != 0 and (not rec.parent_name or not rec.parent_code):
+                errors.append(
+                    _(
+                        "Level 1 and above area should have a parent name and parent code."
+                    )
+                )
+
+            if errors:
+                state = self.ERROR
+                remarks = "\n".join(errors)
+                has_error = True
+            else:
+                state = self.VALIDATED
+                remarks = "No Error"
+
+            rec.write(
+                {
+                    "remarks": remarks,
+                    "state": state,
+                }
+            )
+
+        return has_error
+
+    def save_to_area(self):
+        for rec in self:
+            parent_id = None
+            if rec.parent_name and rec.parent_code:
+                parent_id = (
+                    self.env["spp.area"]
+                    .search(
+                        [
+                            ("draft_name", "=", rec.parent_name),
+                            ("code", "=", rec.parent_code),
+                        ],
+                        limit=1,
+                    )
+                    .id
+                )
+
+            area_sqkm = rec.area_sqkm
+
+            try:
+                area_sqkm = float(area_sqkm)
+            except ValueError:
+                area_sqkm = 0.0
+
+            area_vals = {
+                "parent_id": parent_id,
+                "draft_name": rec.admin_name,
+                "code": rec.admin_code,
+                "area_sqkm": area_sqkm,
+            }
+            if area_id := self.env["spp.area"].search(
+                [("draft_name", "=", rec.admin_name), ("code", "=", rec.admin_code)]
+            ):
+                state = self.UPDATED
+                area_id.update(area_vals)
+            else:
+                state = self.POSTED
+                self.env["spp.area"].create(area_vals)
+
+            rec.update(
+                {
+                    "state": state,
+                    "remarks": "Successfully save to Area",
+                }
+            )
