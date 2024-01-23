@@ -19,6 +19,7 @@ class G2PGroupPMT(models.Model):
     x_cst_indv_disability = fields.Boolean("Disability")
 
     # Floating-point field to store the computed PMT score of the group
+    # TODO: Why this is not stored? We are having performance issue with this in program enrollment.
     z_ind_grp_pmt_score = fields.Float(
         "PMT Score of the group",
         compute="_compute_pmt_score",
@@ -47,8 +48,8 @@ class G2PGroupPMT(models.Model):
             rec.area_calc = area_calc
 
     def _compute_pmt_score(self):
-
-        hh_area = self.area_id
+        # TODO: FIx issue with self returning more than 1 record
+        hh_area = self[0].area_id  # Temporary fix, get only the 1st record.
 
         model = self.env["ir.model"].search([("model", "=", "res.partner")])
 
@@ -63,6 +64,9 @@ class G2PGroupPMT(models.Model):
         if fields:
             for field in fields:
                 if hh_area:
+                    _logger.info(
+                        "pmt.py: self.area_id: %s - %s" % (self.area_id, hh_area)
+                    )
                     areas = field.area_ids.filtered(lambda a: a.name.id == hh_area.id)
                     if areas:
                         weights.update({field.name: areas[0].weight})
