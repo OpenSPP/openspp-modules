@@ -3,7 +3,7 @@ import base64
 import logging
 from io import BytesIO
 
-import pandas as pd
+from xlrd import open_workbook
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -62,9 +62,10 @@ class OpenSPPAreaImport(models.Model):
     @api.onchange("excel_file")
     def excel_file_change(self):
         """
-        This updates the date_uploaded, upload_id and state when
-        the excel_file has been uploaded
+        The above function is an onchange function in Python that updates the date_uploaded, upload_id,
+        and state fields based on the value of the excel_file field.
         """
+
         if self.name:
             self.update(
                 {
@@ -81,7 +82,8 @@ class OpenSPPAreaImport(models.Model):
     @api.depends("raw_data_ids", "raw_data_ids.state")
     def _compute_get_total_rows(self):
         """
-        This computes the total rows of the Excel file
+        The function `_compute_get_total_rows` calculates the total number of imported rows and the
+        total number of rows with an error for a given record.
         """
         for rec in self:
             tot_rows_imported = len(rec.raw_data_ids)
@@ -97,16 +99,23 @@ class OpenSPPAreaImport(models.Model):
             )
 
     def cancel_import(self):
+        """
+        The function cancels the import by updating the state of the record to "Cancelled".
+        """
         for rec in self:
             rec.update({"state": self.CANCELLED})
 
     def reset_to_uploaded(self):
+        """
+        The function resets the state of a record to "Uploaded".
+        """
         for rec in self:
             rec.update({"state": self.UPLOADED})
 
-    def import_data(self):  # noqa: C901
+    def import_data(self):
         """
-        This set up the datas from the Excel file then import it as raw data
+        The `import_data` function imports data from an Excel file, processes it, and updates the record
+        with the imported data.
         """
         _logger.info("Area Import: Started: %s" % fields.Datetime.now())
         for rec in self:
@@ -124,20 +133,21 @@ class OpenSPPAreaImport(models.Model):
             except TypeError as e:
                 raise ValidationError(_("ERROR: {}").format(e)) from e
 
-            # Open file using pandas and get all sheet names of the excel
+            # Open file using open_workbook, get all sheet names of the excel
             # then sort sheet name from parent to child
-            xl = pd.ExcelFile(inputx)
-            sheet_names = xl.sheet_names
+            book = open_workbook(file_contents=inputx.getvalue())
+
+            sheet_names = book.sheet_names()
             sheet_names.sort()
 
             row_data_vals = []
             # Iterate sheet name and their index as area level
             for area_level, sheet_name in enumerate(sheet_names):
-
                 # get sheet object by sheet name
-                sheet = xl.parse(sheet_name)
+                sheet = book.sheet_by_name(sheet_name)
 
-                columns = sheet.columns
+                # get column list of sheet
+                columns = sheet.row_values(0)
 
                 # Get Column name to be used as name field in the area
                 name_header = columns[0]
@@ -148,9 +158,13 @@ class OpenSPPAreaImport(models.Model):
                 # Get Column name to be used as code field in the area
                 code_header = f"{column_name_prefix}_PCODE"
 
-                # Get Parent of the area if area level is not 0
-                parent_name_header = None
-                parent_code_header = None
+                # get name and code column indexes
+                name_index = columns.index(name_header)
+                code_index = columns.index(code_header)
+
+                # Get index of the Parent header of the area if area level is not 0
+                parent_name_index = None
+                parent_code_index = None
                 if area_level != 0:
                     parent_name_header = (
                         f"{column_name_prefix[:3]}{area_level - 1}_{name_iso_code}"
@@ -159,24 +173,27 @@ class OpenSPPAreaImport(models.Model):
                         f"{column_name_prefix[:3]}{area_level - 1}_PCODE"
                     )
 
-                # Header for SQKM
-                area_sqkm_header = "AREA_SQKM"
+                    parent_name_index = columns.index(parent_name_header)
+                    parent_code_index = columns.index(parent_code_header)
+
+                # Get area_sqkm column index
+                area_sqkm_index = columns.index("AREA_SQKM")
 
                 # Get the required values for area in each row
-                for _index, row in sheet.iterrows():
+                for row in range(1, sheet.nrows):
                     vals = {
-                        "admin_name": row[name_header],
-                        "admin_code": row[code_header],
+                        "admin_name": sheet.cell(row, name_index).value,
+                        "admin_code": sheet.cell(row, code_index).value,
                         "parent_name": "",
                         "parent_code": "",
                         "level": area_level,
-                        "area_sqkm": row[area_sqkm_header],
+                        "area_sqkm": sheet.cell(row, area_sqkm_index).value,
                     }
-                    if parent_name_header and parent_code_header:
+                    if parent_name_index and parent_code_index:
                         vals.update(
                             {
-                                "parent_name": row[parent_name_header],
-                                "parent_code": row[parent_code_header],
+                                "parent_name": sheet.cell(row, parent_name_index).value,
+                                "parent_code": sheet.cell(row, parent_code_index).value,
                             }
                         )
                     row_data_vals.append([0, 0, vals])
@@ -198,8 +215,8 @@ class OpenSPPAreaImport(models.Model):
 
     def validate_raw_data(self):
         """
-        This set up the data then save it to spp_area including the Area Type
-        and its translations
+        The function iterates through a collection of records and validates the raw data associated with
+        each record, updating the state of the record if there are no validation errors.
         """
         for rec in self:
             has_error = rec.raw_data_ids.validate_raw_data()
@@ -211,6 +228,9 @@ class OpenSPPAreaImport(models.Model):
                 )
 
     def save_to_area(self):
+        """
+        The function saves the raw data IDs to an area and updates the state to "Done".
+        """
         for rec in self:
             rec.raw_data_ids.save_to_area()
             rec.state = self.DONE
@@ -255,6 +275,13 @@ class OpenSPPAreaImportActivities(models.Model):
     )
 
     def validate_raw_data(self):
+        """
+        The function `validate_raw_data` checks the validity of raw data by validating various fields
+        and updating the state and remarks of each record accordingly.
+        :return: a boolean value indicating whether there are any errors in the raw data. If there are
+        errors, the value returned will be True. If there are no errors, the value returned will be
+        False.
+        """
         has_error = False
         for rec in self:
             errors = []
@@ -297,6 +324,10 @@ class OpenSPPAreaImportActivities(models.Model):
         return has_error
 
     def save_to_area(self):
+        """
+        The function saves data to the "spp.area" model in the database, updating existing records if
+        they exist and creating new records if they don't.
+        """
         for rec in self:
             parent_id = None
             if rec.parent_name and rec.parent_code:
