@@ -24,6 +24,7 @@
     },
     "data": [
         "data/area_kind_data.xml",
+        "data/queue_job_channel.xml",
         "security/ir.model.access.csv",
         "views/individual_views.xml",
         "views/group_views.xml",
