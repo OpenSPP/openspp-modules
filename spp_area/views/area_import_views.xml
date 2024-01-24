@@ -7,7 +7,8 @@
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <form string="Area Import">
-                <header>
+                <field name="locked" invisible="True" />
+                <header attrs="{'invisible': [('locked', '=', True)]}">
                     <button
                         name="import_data"
                         type="object"
@@ -49,6 +50,21 @@
                         statusbar_visible="New,Uploaded,Imported,Done,Cancelled"
                     />
                 </header>
+                <div
+                    class="alert alert-warning text-center o_form_header"
+                    role="status"
+                    attrs="{'invisible': [('locked', '!=', True)]}"
+                >
+                    <span>Warning: Operation in progress: </span>
+                    <field name="locked_reason" class="o_stat_value" />
+                    <button
+                        name="refresh_page"
+                        type="object"
+                        class="btn_warning"
+                        icon="fa-refresh"
+                        string="Refresh"
+                    />
+                </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                     </div>

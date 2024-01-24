@@ -8,12 +8,16 @@ from xlrd import open_workbook
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
+from odoo.addons.queue_job.delay import group
+
 _logger = logging.getLogger(__name__)
 
 
 class OpenSPPAreaImport(models.Model):
     _name = "spp.area.import"
     _description = "Areas Import Table"
+
+    MIN_ROW_JOB_QUEUE = 400
 
     NEW = "New"
     UPLOADED = "Uploaded"
@@ -58,6 +62,9 @@ class OpenSPPAreaImport(models.Model):
         "Status",
         default=NEW,
     )
+
+    locked = fields.Boolean(default=False)
+    locked_reason = fields.Char(readonly=True)
 
     @api.onchange("excel_file")
     def excel_file_change(self):
@@ -215,25 +222,110 @@ class OpenSPPAreaImport(models.Model):
 
     def validate_raw_data(self):
         """
-        The function iterates through a collection of records and validates the raw data associated with
-        each record, updating the state of the record if there are no validation errors.
+        The function iterates through a collection of records and checks if the count of raw data is
+        less than a minimum threshold, and if so, it calls a validation function, otherwise it calls an
+        asynchronous function.
         """
         for rec in self:
-            has_error = rec.raw_data_ids.validate_raw_data()
-            if not has_error:
-                rec.update(
-                    {
-                        "state": self.VALIDATED,
-                    }
+            raw_data_count = len(rec.raw_data_ids)
+            if raw_data_count < self.MIN_ROW_JOB_QUEUE:
+                rec._validate_raw_data()
+            else:
+                rec._async_function(
+                    raw_data_count, _("Validating data."), "_validate_raw_data"
                 )
+
+    def _validate_raw_data(self):
+        """
+        The function validates raw data and updates the state if there are no errors.
+        """
+        self.ensure_one()
+
+        has_error = self.raw_data_ids.validate_raw_data()
+        if not has_error:
+            self.update(
+                {
+                    "state": self.VALIDATED,
+                }
+            )
+
+    def _async_function(self, raw_data_count, reason_message, function_name):
+        """
+        The above function is an asynchronous function that locks the current record, executes a delayed
+        job, and marks the job as done when it completes.
+
+        :param raw_data_count: The `raw_data_count` parameter represents the number of raw data items
+        that will be processed in the async function
+        :param reason_message: The `reason_message` parameter is a string that represents the reason for
+        locking the object
+        :param function_name: The `function_name` parameter is the name of the function that will be
+        called asynchronously
+        """
+        self.ensure_one()
+
+        self.write(
+            {
+                "locked": True,
+                "locked_reason": reason_message,
+            }
+        )
+
+        jobs = []
+
+        func = getattr(self.delayable(channel="root.area_import"), function_name)
+
+        jobs.append(func())
+
+        main_job = group(*jobs)
+
+        main_job.on_done(self.delayable(channel="root.area_import")._async_mark_done())
+        main_job.delay()
+
+    def _async_mark_done(self):
+        """
+        The function `_async_mark_done` unlocks a resource by setting the `locked` attribute to `False`
+        and clearing the `locked_reason` attribute.
+        """
+        self.ensure_one()
+
+        self.locked = False
+        self.locked_reason = None
 
     def save_to_area(self):
         """
-        The function saves the raw data IDs to an area and updates the state to "Done".
+        The function saves data to an area, either synchronously or asynchronously depending on the
+        number of raw data records.
         """
         for rec in self:
-            rec.raw_data_ids.save_to_area()
-            rec.state = self.DONE
+            raw_data_count = len(rec.raw_data_ids)
+
+            if raw_data_count < self.MIN_ROW_JOB_QUEUE:
+                rec._save_to_area()
+            else:
+                rec._async_function(
+                    raw_data_count, _("Saving to Area."), "_save_to_area"
+                )
+
+    def _save_to_area(self):
+        """
+        The function saves raw data to an area and updates the state to "DONE".
+        """
+        self.ensure_one()
+
+        self.raw_data_ids.save_to_area()
+        self.state = self.DONE
+
+    def refresh_page(self):
+        """
+        The function `refresh_page` returns a dictionary with the type and tag values to reload the
+        page.
+        :return: The code is returning a dictionary with two key-value pairs. The "type" key has the
+        value "ir.actions.client" and the "tag" key has the value "reload".
+        """
+        return {
+            "type": "ir.actions.client",
+            "tag": "reload",
+        }
 
 
 # Assets Import Raw Data
