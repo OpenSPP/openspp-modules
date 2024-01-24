@@ -111,3 +111,9 @@ class AreaImportTest(AreaImportTestMixin):
                 "tag": "reload",
             },
         )
+
+    def test_07_async_mark_done(self):
+        self.area_import_id._async_mark_done()
+
+        self.assertFalse(self.area_import_id.locked)
+        self.assertFalse(self.area_import_id.locked_reason)
