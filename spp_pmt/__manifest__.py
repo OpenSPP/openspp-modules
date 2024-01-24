@@ -16,6 +16,7 @@
         "g2p_registry_base",
         "g2p_registry_group",
         "spp_custom_fields_ui",
+        "spp_custom_field_recompute_daily",
         "spp_area",
     ],
     "data": [

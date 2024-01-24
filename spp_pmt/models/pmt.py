@@ -24,6 +24,8 @@ class G2PGroupPMT(models.Model):
         "PMT Score of the group",
         compute="_compute_pmt_score",
         compute_sudo=True,
+        store=True,
+        recompute_daily=True,
     )
     grp_pmt_score = fields.Float(
         "PMT Score of the group", compute="_compute_pmt_score", store=True
@@ -49,7 +51,6 @@ class G2PGroupPMT(models.Model):
 
     def _compute_pmt_score(self):
         # TODO: FIx issue with self returning more than 1 record
-        hh_area = self[0].area_id  # Temporary fix, get only the 1st record.
 
         model = self.env["ir.model"].search([("model", "=", "res.partner")])
 
@@ -61,21 +62,22 @@ class G2PGroupPMT(models.Model):
             ]
         )
         weights = {}
-        if fields:
-            for field in fields:
-                if hh_area:
-                    _logger.info(
-                        "pmt.py: self.area_id: %s - %s" % (self.area_id, hh_area)
-                    )
-                    areas = field.area_ids.filtered(lambda a: a.name.id == hh_area.id)
-                    if areas:
-                        weights.update({field.name: areas[0].weight})
+        for record in self:
+            hh_area = record.area_id
+            if fields:
+                for field in fields:
+                    if hh_area:
+                        _logger.info(
+                            "pmt.py: self.area_id: %s - %s" % (self.area_id, hh_area)
+                        )
+                        areas = field.area_ids.filtered(lambda a: a.name.id == hh_area.id)
+                        if areas:
+                            weights.update({field.name: areas[0].weight})
+                        else:
+                            weights.update({field.name: field.field_weight})
                     else:
                         weights.update({field.name: field.field_weight})
-                else:
-                    weights.update({field.name: field.field_weight})
 
-        for record in self:
             if weights:
                 z_ind_grp_pmt_score = 0
                 if record.group_membership_ids:
