@@ -1,4 +1,3 @@
-import json
 import logging
 
 from odoo import Command, _, api, fields, models
@@ -54,23 +53,17 @@ class ChangeRequestAddGroup(models.Model):
     registrant_id = fields.Many2one(
         "res.partner",
         "Add to Group",
-        domain=[("is_registrant", "=", True), ("is_group", "=", True)],
+        domain=[("is_registrant", "=", True), ("is_group", "=", False)],
     )
 
     request_type = fields.Selection(related="change_request_id.request_type")
 
-    # For ID Scanner Widget
-    id_document_details = fields.Text("ID Document")
-
     # Change Request Fields
-    full_name = fields.Char(compute="_compute_full_name", readonly=True)
-    family_name = fields.Char()
+    name = fields.Char()
 
     phone = fields.Char("Phone Number")
 
-    kind = fields.Many2many(
-        "g2p.group.membership.kind", string="Group Membership Types"
-    )
+    kind = fields.Many2one("g2p.group.kind", string="Group Type")
 
     # Add domain to inherited field: validation_ids
     validation_ids = fields.Many2many(
@@ -100,55 +93,10 @@ class ChangeRequestAddGroup(models.Model):
             except UserError as e:
                 raise ValidationError(_("Incorrect phone number format")) from e
 
-    @api.onchange("id_document_details")
-    def _onchange_scan_id_document_details(self):
-        if self.dms_directory_ids:
-            if self.id_document_details:
-                try:
-                    details = json.loads(self.id_document_details)
-                except json.decoder.JSONDecodeError as e:
-                    details = None
-                    _logger.error(e)
-                if details:
-                    # Upload to DMS
-                    if details["image"]:
-                        if self._origin:
-                            directory_id = self._origin.dms_directory_ids[0].id
-                        else:
-                            directory_id = self.dms_directory_ids[0].id
-                        dms_vals = {
-                            "name": "UID_" + details["document_number"] + ".jpg",
-                            "directory_id": directory_id,
-                            "category_id": self.env.ref(
-                                "spp_change_request.spp_dms_uid_card"
-                            ).id,
-                            "content": details["image"],
-                        }
-                        # TODO: Should be added to vals["dms_file_ids"] but it is
-                        # not writing to one2many field using Command.create()
-                        self.env["dms.file"].create(dms_vals)
-
-                    # TODO: grand_father_name and father_name
-                    vals = {
-                        "family_name": details["family_name"],
-                        "given_name": details["given_name"],
-                        "birthdate": details["birth_date"],
-                        "gender": details["gender"],
-                        "id_document_details": "",
-                        "birth_place": details["birth_place_city"],
-                        # TODO: Fix not writing to one2many field: dms_file_ids
-                        # "dms_file_ids": [(Command.create(dms_vals))],
-                    }
-                    self.update(vals)
-        else:
-            raise UserError(
-                _("There are no directories defined for this change request.")
-            )
-
     def validate_data(self):
         super().validate_data()
-        if not self.family_name:
-            raise ValidationError(_("The Family Name is required."))
+        if not self.name:
+            raise ValidationError(_("The Name is required."))
 
         return
 
@@ -172,32 +120,17 @@ class ChangeRequestAddGroup(models.Model):
             {
                 "is_registrant": True,
                 "is_group": True,
-                "name": self.full_name,
-                "family_name": self.family_name,
-                "given_name": self.given_name,
-                "addl_name": self.addl_name,
-                "birth_place": self.birth_place,
-                "birthdate_not_exact": self.birthdate_not_exact,
-                "birthdate": self.birthdate,
-                "gender": self.gender,
+                "name": self.name,
                 "phone_number_ids": phone_rec,
-                # "reg_ids": uid_rec,
+                "kind": self.kind.id,
             }
         )
         individual_id.phone_number_ids_change()
-        # Add to group
-        self.env["g2p.group.membership"].create(
-            {
-                "group": self.registrant_id.id,
-                "individual": individual_id.id,
-                "kind": kinds,
-            }
-        )
 
     def open_registrant_details_form(self):
         self.ensure_one()
         res_id = self.registrant_id.id
-        form_id = self.env.ref("g2p_registry_group.view_groups_form").id
+        form_id = self.env.ref("g2p_registry_individual.view_individuals_form").id
         action = self.env["res.partner"].get_formview_action()
         context = {
             "create": False,
@@ -206,7 +139,7 @@ class ChangeRequestAddGroup(models.Model):
         }
         action.update(
             {
-                "name": _("Group Details"),
+                "name": _("Individual Details"),
                 "views": [(form_id, "form")],
                 "res_id": res_id,
                 "target": "new",

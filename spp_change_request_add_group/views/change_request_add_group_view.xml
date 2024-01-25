@@ -14,9 +14,8 @@
             <tree sample="1" create="0">
                 <field name="change_request_id" />
                 <field name="registrant_id" string="Group" />
-                <field name="full_name" />
-                <field name="gender" />
-                <field name="kind" widget="many2many_tags" />
+                <field name="name" />
+                <field name="kind" />
                 <field name="create_date" />
                 <field name="last_validated_by_id" widget="many2one_avatar_user" />
                 <field name="date_validated" />
@@ -160,56 +159,23 @@
                     </div>
                     <notebook>
                         <page string="Request Details">
-                            <field
-                                name="id_document_details"
-                                widget="id_document_reader_field"
-                                colspan="4"
-                                attrs="{'invisible':[('state','!=','draft')]}"
-                            />
                             <group colspan="4" col="4" string="">
-                                <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
+                                <field name="name" readonly="1" colspan="4" class="oe_read_only" />
                                 <field
-                                    name="family_name"
+                                    name="name"
                                     attrs="{'readonly':[('state','!=','draft')]}"
                                     class="oe_edit_only"
                                     colspan="4"
                                 />
-                                <field
-                                    name="given_name"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    class="oe_edit_only"
-                                />
-                                <field
-                                    name="addl_name"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    class="oe_edit_only"
-                                />
-                                <field name="gender" attrs="{'readonly':[('state','!=','draft')]}" />
                                 <field
                                     name="phone"
                                     attrs="{'readonly':[('state','!=','draft')]}"
                                     widget="phone"
                                     options="{'enable_sms': false}"
                                 />
-                                <field name="uid_number" attrs="{'readonly':[('state','!=','draft')]}" />
                                 <field
-                                    name="birth_place"
-                                    colspan="4"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                />
-                                <field
-                                    name="birthdate_not_exact"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                />
-                                <field name="birthdate" attrs="{'readonly':[('state','!=','draft')]}" />
-                                <!-- <field
                                     name="kind"
-                                    widget="many2many_tags"
                                     options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                /> -->
-                                <field
-                                    name="applicant_relation"
                                     attrs="{'readonly':[('state','!=','draft')]}"
                                 />
                             </group>
@@ -217,39 +183,6 @@
                         <page string="Attachments">
                             <!-- Attachment UI -->
                             <header attrs="{'invisible':[('state','!=','draft')]}">
-                                <!-- <button
-                                    name="action_attach_documents"
-                                    type="object"
-                                    string="Request Form"
-                                    class="btn-primary"
-                                    context="{'category_id':%(spp_dms_add_group)d}"
-                                    style="margin-left: 10px;"
-                                /> -->
-                                <button
-                                    name="action_attach_documents"
-                                    type="object"
-                                    string="Birth Certificate"
-                                    class="btn-primary"
-                                    context="{'category_id':%(spp_dms_birth_certificate)d}"
-                                    style="margin-left: 10px;"
-                                />
-                                <!-- <button
-                                    name="action_attach_documents"
-                                    type="object"
-                                    string="Applicant UID Card"
-                                    class="btn-primary"
-                                    context="{'category_id':%(spp_dms_applicant_uid_card)d}"
-                                    style="margin-left: 10px;"
-                                />
-                                <button
-                                    name="action_attach_documents"
-                                    type="object"
-                                    string="Custody Certificate"
-                                    class="btn-primary"
-                                    context="{'category_id':%(spp_dms_custody_certificate)d}"
-                                    style="margin-left: 10px;"
-                                    attrs="{'invisible':[('applicant_relation','not in',('mother','grandfather'))]}"
-                                /> -->
                                 <button
                                     name="action_attach_documents"
                                     type="object"
@@ -289,11 +222,6 @@
                                     <field name="is_lock_editor" invisible="1" />
                                 </tree>
                             </field>
-                            <!-- <field
-                                name="dms_directory_ids"
-                                mode="dms_tree"
-                                attrs="{'invisible':[('registrant_id','=',False)],'readonly':[('state','!=','draft')]}"
-                            /> -->
                         </page>
                         <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
                             <field
@@ -442,7 +370,7 @@
                     <!-- Left Panel -->
                     <group colspan="2" col="4" class="o_left_panel">
                         <div class="o_header_label1">
-                            <label for="registrant_id" string="ADD CHILD/MEMBER TO GROUP:" />
+                            <label for="registrant_id" string="REGISTRANT:" />
                             <h2>
                                 <field name="registrant_id" readonly="1" options="{'no_open':True}" />
                                 <button
@@ -456,69 +384,6 @@
                                 />
                             </h2>
                         </div>
-                        <newline />
-                        <notebook colspan="2" class="o_container_left">
-                            <page string="TARGET GROUP INFORMATION">
-                                <group colspan="4" col="4" name="target_group">
-                                    <field name="group_address" colspan="4" />
-                                    <field name="group_registration_date" />
-                                </group>
-                                <group
-                                    colspan="4"
-                                    col="4"
-                                    string="Current Group Members"
-                                    name="group_members"
-                                >
-                                    <field name="group_member_ids" readonly="1" nolabel="1" colspan="4">
-                                        <tree>
-                                            <button
-                                                name="open_individual_form"
-                                                type="object"
-                                                help="Open Member Form"
-                                                icon="fa-external-link "
-                                                class="btn-success"
-                                            />
-                                            <field name="group_add_group_id" invisible="1" />
-                                            <field name="individual_id" string="Members" />
-                                            <field
-                                                name="kind_ids"
-                                                widget="many2many_tags"
-                                                options="{'no_open':True}"
-                                            />
-                                        </tree>
-                                        <form string="Group Membership">
-                                            <sheet>
-                                                <div class="oe_title mb24">
-                                                    <h1>
-                                                        <field
-                                                            name="individual_id"
-                                                            string="Member"
-                                                            options="{'no_open':True}"
-                                                            readonly="1"
-                                                        />
-                                                    </h1>
-                                                    <div class="o_row">
-                                                        <label for="kind_ids" string="Membership Types:" />
-                                                        <field
-                                                            name="kind_ids"
-                                                            widget="many2many_tags"
-                                                            options="{'no_open':True}"
-                                                            readonly="1"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <group colspan="4" col="4">
-                                                    <field name="phone" readonly="1" />
-                                                    <field name="birthdate" readonly="1" />
-                                                    <field name="age" readonly="1" />
-                                                </group>
-                                                <field name="group_add_group_id" invisible="1" />
-                                            </sheet>
-                                        </form>
-                                    </field>
-                                </group>
-                            </page>
-                        </notebook>
                     </group>
                     <!-- Right Panel -->
                     <group colspan="2" col="4" class="o_right_panel">
@@ -555,25 +420,16 @@
                                     />
                                 </group>
                                 <group colspan="4" col="4" string="New Information">
-                                    <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
-                                    <field name="family_name" readonly="1" colspan="4" class="oe_edit_only" />
-                                    <field name="given_name" readonly="1" class="oe_edit_only" />
-                                    <field name="addl_name" readonly="1" class="oe_edit_only" />
-                                    <field name="gender" readonly="1" />
+                                    <field name="name" readonly="1" colspan="4" class="oe_read_only" />
                                     <field
                                         name="phone"
                                         readonly="1"
                                         widget="phone"
                                         options="{'enable_sms': false}"
                                     />
-                                    <field name="uid_number" readonly="1" />
-                                    <field name="birth_place" colspan="4" readonly="1" />
-                                    <field name="birthdate_not_exact" readonly="1" />
-                                    <field name="birthdate" readonly="1" />
                                     <field
                                         name="kind"
-                                        widget="many2many_tags"
-                                        options="{'no_open':True}"
+                                        options="{'no_open':True,'no_create':True,'no_create_edit':True}"
                                         colspan="4"
                                         readonly="1"
                                     />
@@ -669,9 +525,7 @@
         <field name="arch" type="xml">
             <search string="Search Change Request: Add Group">
                 <field name="registrant_id" string="Group" />
-                <field name="family_name" />
-                <field name="given_name" />
-                <field name="addl_name" />
+                <field name="name" />
                 <filter
                     name="filter_validator"
                     string="Assigned to me"
