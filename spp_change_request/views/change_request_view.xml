@@ -193,6 +193,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 name="registrant_id"
                                 options="{'no_create': True,'no_open':True}"
                                 attrs="{'readonly':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
+                                domain="registrant_id_domain"
                                 class="oe_inline"
                             />
                             <field
@@ -326,6 +327,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     </group>
                     <field name="request_type_ref_id" invisible="1" />
                     <field name="last_activity_id" invisible="1" />
+                    <field name="registrant_id_domain" invisible="1" />
                     <field name="applicant_id_domain" invisible="1" />
                     <field name="id" invisible="1" />
                 </sheet>

@@ -11,12 +11,6 @@ _logger = logging.getLogger(__name__)
 class ChangeRequestTypeCustomAddGroup(models.Model):
     _inherit = "spp.change.request"
 
-    registrant_id = fields.Many2one(
-        "res.partner",
-        "Registrant",
-        domain=[("is_registrant", "=", True), ("is_group", "=", True)],
-    )
-
     @api.model
     def _selection_request_type_ref_id(self):
         selection = super()._selection_request_type_ref_id()
@@ -40,9 +34,8 @@ class ChangeRequestAddGroup(models.Model):
     VALIDATION_FORM = (
         "spp_change_request_add_group.view_change_request_add_group_validation_form"
     )
-    REQUIRED_DOCUMENT_TYPE = [
-        "spp_change_request_add_group.spp_dms_birth_certificate",
-    ]
+    REQUIRED_DOCUMENT_TYPE = []
+    IS_GROUP = False
 
     # Mandatory initialize source and destination center areas
     # If validators will be allowed for both, make the values the same
@@ -70,6 +63,10 @@ class ChangeRequestAddGroup(models.Model):
         relation="spp_change_request_add_group_rel",
         domain=[("request_type", "=", _name)],
     )
+
+    @api.onchange("registrant_id")
+    def _onchange_registrant_id(self):
+        pass
 
     @api.constrains("phone")
     def _check_phone(self):

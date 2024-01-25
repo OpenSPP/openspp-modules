@@ -39,6 +39,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     VALIDATION_FORM = None
     DMS_STORAGE = None
     AUTO_APPLY_CHANGES = True
+    IS_GROUP = True
 
     registrant_id = fields.Many2one(
         "res.partner", "Registrant", domain=[("is_registrant", "=", True)]

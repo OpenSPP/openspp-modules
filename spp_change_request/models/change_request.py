@@ -56,6 +56,11 @@ class ChangeRequestBase(models.Model):
         "Registrant",
         domain=[("is_registrant", "=", True)],
     )  #: Registrant who submitted the change request
+    registrant_id_domain = fields.Char(
+        compute="_compute_registrant_id_domain",
+        readonly=True,
+        store=False,
+    )
 
     # For ID Scanner Widget
     id_document_details = fields.Text("Scanned ID Document")
@@ -66,7 +71,8 @@ class ChangeRequestBase(models.Model):
         "res.partner",
         "Applicant",
         domain=[("is_registrant", "=", True), ("is_group", "=", False)],
-    )  #: Applicant who submitted the change request (In case the registrant is a group, the applicant is the individual)
+    )  #: Applicant who submitted the change request
+    # (In case the registrant is a group, the applicant is the individual)
     applicant_id_domain = fields.Char(
         compute="_compute_applicant_id_domain",
         readonly=True,
@@ -225,15 +231,40 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             domain = [("id", "=", 0)]
             if rec.registrant_id:
-                # TODO: Use the is_ended field to filter
-                # Get only the members with non-expired membership
-                group_memberships = rec.registrant_id.group_membership_ids.filtered(
-                    lambda a: not a.ended_date or a.ended_date > fields.Datetime.now()
-                )
-                if group_memberships:
-                    group_membership_ids = group_memberships.mapped("individual.id")
-                    domain = [("id", "in", group_membership_ids)]
+                if rec.registrant_id.is_group:
+                    # TODO: Use the is_ended field to filter
+                    # Get only the members with non-expired membership
+                    group_memberships = rec.registrant_id.group_membership_ids.filtered(
+                        lambda a: not a.ended_date
+                        or a.ended_date > fields.Datetime.now()
+                    )
+                    if group_memberships:
+                        group_membership_ids = group_memberships.mapped("individual.id")
+                        domain = [("id", "in", group_membership_ids)]
+                else:
+                    domain = [
+                        ("is_registrant", "=", True),
+                        ("is_group", "=", False),
+                    ]
             rec.applicant_id_domain = json.dumps(domain)
+
+    @api.depends("request_type")
+    def _compute_registrant_id_domain(self):
+        """
+        Called whenever request_type field is changed
+
+        This method is used for dynamic domain of registrant_id field
+        """
+        for rec in self:
+            domain = [("is_registrant", "=", True)]
+            is_group = True
+            if rec.request_type:
+                # Get is_group from CR type reference model
+                res_model = rec.request_type
+                is_group = self.env[res_model].IS_GROUP
+            domain.append(("is_group", "=", is_group))
+            _logger.info("Registrant_id Domain: %s" % domain)
+            rec.registrant_id_domain = json.dumps(domain)
 
     @api.onchange("registrant_id")
     def _onchange_registrant_id(self):
@@ -251,12 +282,15 @@ class ChangeRequestBase(models.Model):
         """
 
         if self.registrant_id:
-            self.update(
-                {
-                    "applicant_id": None,
-                    "applicant_phone": None,
-                }
-            )
+            if self.registrant_id.is_group:
+                self.update(
+                    {
+                        "applicant_id": None,
+                        "applicant_phone": None,
+                    }
+                )
+            else:
+                self.applicant_id = self.registrant_id.id
 
     @api.onchange("applicant_id")
     def _onchange_applicant_id(self):

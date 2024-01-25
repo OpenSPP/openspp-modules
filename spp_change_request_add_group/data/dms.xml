@@ -8,7 +8,7 @@
         <field name="field_default_group_id" ref="spp_change_request.dms_access_group" />
     </record>
 
-    <!-- Parent Category -->
+    <!-- Parent Category
     <record id="spp_dms_identification_documents" model="dms.category">
         <field name="name">Identification Documents</field>
     </record>
@@ -17,7 +17,7 @@
     </record>
     <record id="spp_dms_request_form_document" model="dms.category">
         <field name="name">Request Form Document</field>
-    </record>
+    </record> -->
 
     <!-- Child Category Documents
     <record id="spp_dms_add_group" model="dms.category">
