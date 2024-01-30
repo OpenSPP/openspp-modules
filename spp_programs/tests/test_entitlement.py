@@ -9,32 +9,33 @@ from .common import Common
 
 
 class TestEntitlement(Common):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
         group = [
-            Command.link(self.env.ref("g2p_programs.g2p_program_manager").id),
+            Command.link(cls.env.ref("g2p_programs.g2p_program_manager").id),
         ]
-        self.test_user_1 = self.env["res.users"].create(
+        cls.test_user_1 = cls.env["res.users"].create(
             {"name": "test", "login": "test", "groups_id": group}
         )
 
         group_2 = [
-            Command.link(self.env.ref("g2p_programs.g2p_program_manager").id),
-            Command.link(self.env.ref("g2p_registry_base.group_g2p_registrar").id),
+            Command.link(cls.env.ref("g2p_programs.g2p_program_manager").id),
+            Command.link(cls.env.ref("g2p_registry_base.group_g2p_registrar").id),
         ]
-        self.test_user_2 = self.env["res.users"].create(
+        cls.test_user_2 = cls.env["res.users"].create(
             {"name": "test2", "login": "test2", "groups_id": group_2}
         )
 
     def test_01_generate_code(self):
         self.assertIsNotNone(self.entitlement._generate_code())
 
-    def test_02_fields_view_get(self):
-        action_1 = self.entitlement.fields_view_get(view_type="form")
-        action_2 = self.entitlement.with_user(self.test_user_1.id).fields_view_get(
+    def test_02_get_view(self):
+        action_1 = self.entitlement._get_view(view_type="form")
+        action_2 = self.entitlement.with_user(self.test_user_1.id)._get_view(
             view_type="form"
         )
-        action_3 = self.entitlement.with_user(self.test_user_1.id).fields_view_get(
+        action_3 = self.entitlement.with_user(self.test_user_1.id)._get_view(
             view_type="search"
         )
 
@@ -43,9 +44,7 @@ class TestEntitlement(Common):
         with self.assertRaisesRegex(
             ValidationError, "You have no access in the Entitlement List View"
         ):
-            self.entitlement.with_user(self.test_user_2.id).fields_view_get(
-                view_type="form"
-            )
+            self.entitlement.with_user(self.test_user_2.id)._get_view(view_type="form")
 
     def test_03_compute_journal_id(self):
         self.entitlement._compute_journal_id()

@@ -32,6 +32,7 @@ class InKindEntitlement(models.Model):
         "Registrant",
         help="A beneficiary",
         required=True,
+        ondelete="cascade",
         domain=[("is_registrant", "=", True)],
         index=True,
     )
@@ -59,7 +60,7 @@ class InKindEntitlement(models.Model):
         string="Warehouse",
     )
     route_id = fields.Many2one(
-        "stock.location.route", string="Route", ondelete="restrict", check_company=True
+        "stock.route", string="Route", ondelete="restrict", check_company=True
     )
     move_ids = fields.One2many("stock.move", "entitlement_id", string="Stock Moves")
 
@@ -107,11 +108,9 @@ class InKindEntitlement(models.Model):
         ),
     ]
 
-    def fields_view_get(
-        self, view_id=None, view_type="list", toolbar=False, submenu=False
-    ):
-        res = super(InKindEntitlement, self).fields_view_get(
-            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
+    def _get_view(self, view_id=None, view_type="list", **options):
+        arch, view = super(InKindEntitlement, self)._get_view(
+            view_id=view_id, view_type=view_type, **options
         )
 
         group_g2p_admin = self.env.user.has_group("g2p_registry_base.group_g2p_admin")
@@ -136,7 +135,7 @@ class InKindEntitlement(models.Model):
                         _("You have no access in the Entitlement List View")
                     )
 
-        return res
+        return arch, view
 
     @api.depends("cycle_id.program_id.journal_id")
     def _compute_journal_id(self):

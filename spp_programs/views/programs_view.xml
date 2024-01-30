@@ -21,7 +21,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 position="attributes"
             >
                 <attribute name="colspan">4</attribute>
-                <attribute name="attrs">{'invisible':[('inkind_entitlements_count','>',0)]}</attribute>
+                <attribute name="invisible">inkind_entitlements_count > 0</attribute>
             </xpath>
             <xpath
                 expr="//field[@name='cycle_ids']/form/sheet/notebook/page/field[@name='entitlement_ids']"
@@ -32,7 +32,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     nolabel="1"
                     readonly="1"
                     colspan="4"
-                    attrs="{'invisible':[('inkind_entitlements_count','=',0)]}"
+                    invisible="inkind_entitlements_count == 0"
                 >
                     <tree>
                         <field name="name" />
@@ -107,7 +107,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     string="Import Eligible Registrants"
                     icon="fa-download"
                     class="btn-primary"
-                    states="active"
+                    invisible="state != 'active'"
                 />
             </xpath>
             <xpath expr="//button[@name='enroll_eligible_registrants']" position="attributes">
@@ -120,10 +120,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="is_one_time_distribution" invisible="1" />
             </xpath>
             <xpath expr="//button[@name='create_new_cycle']" position="attributes">
-                <attribute name="states" />
-                <attribute
-                    name="attrs"
-                >{'invisible': ['|', ('is_one_time_distribution', '=', True), ('state', '!=', 'active')]}</attribute>
+                <attribute name="invisible">is_one_time_distribution or state != 'active'</attribute>
             </xpath>
         </field>
     </record>
