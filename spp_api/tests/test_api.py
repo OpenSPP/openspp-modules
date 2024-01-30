@@ -29,19 +29,20 @@ MESSAGE = "message is posted from API"
 
 @tagged("post_install", "-at_install")
 class TestAPI(HttpCase):
-    def setUp(self):
-        super(TestAPI, self).setUp()
-        self.db_name = get_db_name()
-        self.phantom_env = api.Environment(self.registry.test_cr, self.uid, {})
-        self.demo_user = self.phantom_env.ref(USER_DEMO)
-        self.admin_user = self.phantom_env.ref(USER_ADMIN)
-        self.model_name = "res.partner"
-        self.phantom_env["spp_api.path"].create(
+    @classmethod
+    def setUpClass(cls):
+        super(TestAPI, cls).setUpClass()
+        cls.db_name = get_db_name()
+        cls.phantom_env = api.Environment(cls.registry.test_cr, cls.uid, {})
+        cls.demo_user = cls.phantom_env.ref(USER_DEMO)
+        cls.admin_user = cls.phantom_env.ref(USER_ADMIN)
+        cls.model_name = "res.partner"
+        cls.phantom_env["spp_api.path"].create(
             [
                 {
                     "name": "res.partner",
-                    "model_id": self.env.ref("base.model_res_partner").id,
-                    "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                    "model_id": cls.env.ref("base.model_res_partner").id,
+                    "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
                     "description": "GET res.partner",
                     "method": "get",
                     "field_ids": [
@@ -49,15 +50,15 @@ class TestAPI(HttpCase):
                             6,
                             0,
                             [
-                                self.env.ref("base.field_res_partner__name").id,
+                                cls.env.ref("base.field_res_partner__name").id,
                             ],
                         )
                     ],
                 },
                 {
                     "name": "res.partner",
-                    "model_id": self.env.ref("base.model_res_partner").id,
-                    "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                    "model_id": cls.env.ref("base.model_res_partner").id,
+                    "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
                     "description": "POST res.partner",
                     "method": "post",
                     "api_field_ids": [
@@ -65,7 +66,7 @@ class TestAPI(HttpCase):
                             0,
                             0,
                             {
-                                "field_id": self.env.ref(
+                                "field_id": cls.env.ref(
                                     "base.field_res_partner__name"
                                 ).id
                             },
@@ -74,7 +75,7 @@ class TestAPI(HttpCase):
                             0,
                             0,
                             {
-                                "field_id": self.env.ref(
+                                "field_id": cls.env.ref(
                                     "base.field_res_partner__type"
                                 ).id
                             },
@@ -83,8 +84,8 @@ class TestAPI(HttpCase):
                 },
                 {
                     "name": "res.partner",
-                    "model_id": self.env.ref("base.model_res_partner").id,
-                    "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                    "model_id": cls.env.ref("base.model_res_partner").id,
+                    "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
                     "description": "UPDATE res.partner",
                     "method": "put",
                     "api_field_ids": [
@@ -92,7 +93,7 @@ class TestAPI(HttpCase):
                             0,
                             0,
                             {
-                                "field_id": self.env.ref(
+                                "field_id": cls.env.ref(
                                     "base.field_res_partner__name"
                                 ).id
                             },
@@ -101,7 +102,7 @@ class TestAPI(HttpCase):
                             0,
                             0,
                             {
-                                "field_id": self.env.ref(
+                                "field_id": cls.env.ref(
                                     "base.field_res_partner__type"
                                 ).id
                             },
@@ -110,8 +111,8 @@ class TestAPI(HttpCase):
                 },
                 {
                     "name": "res.partner",
-                    "model_id": self.env.ref("base.model_res_partner").id,
-                    "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                    "model_id": cls.env.ref("base.model_res_partner").id,
+                    "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
                     "description": "DELETE res.partner",
                     "method": "delete",
                 },
@@ -213,7 +214,7 @@ class TestAPI(HttpCase):
             partner = self.phantom_env[self.model_name].create(
                 {"name": "record for deleting from test"}
             )
-            self.phantom_env[self.model_name].invalidate_cache()
+            self.phantom_env[self.model_name].invalidate_model()
 
             resp = self.request_from_user(
                 self.admin_user, "DELETE", "/{model}/{record_id}", record_id=partner.id

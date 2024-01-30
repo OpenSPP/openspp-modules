@@ -85,12 +85,7 @@
                             <span>Field Aliases</span>
                         </button>
                     </div>
-                    <widget
-                        name="web_ribbon"
-                        title="Inactive"
-                        bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
-                    />
+                    <widget name="web_ribbon" title="Inactive" bg_color="bg-danger" invisible="active" />
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
                         <h1>
@@ -120,8 +115,8 @@
 
                         </group>
                     </group>
-                    <group string="Settings for read" attrs="{'invisible': [('method', 'not in', ['get'])]}">
-                        <field name="limit" attrs="{'required': [('method', '=', 'get')]}" />
+                    <group string="Settings for read" invisible="method not in ['get']">
+                        <field name="limit" required="method == 'get'" />
                         <field
                             name="filter_domain"
                             widget="domain"
@@ -144,25 +139,22 @@
                         </field>
                     </group>
                     <field name="warning_required" invisible="1" />
-                    <group
-                        string="Settings for create/update"
-                        attrs="{'invisible': [('method', 'not in', ['post', 'put'])]}"
-                    >
+                    <group string="Settings for create/update" invisible="method not in ['post', 'put']">
                         <field
                             name="update_domain"
                             widget="domain"
                             options="{'model': 'model', 'in_dialog': True}"
-                            attrs="{'invisible': [('method', 'not in', ['put'])]}"
+                            invisible="method not in ['put']"
                         />
                         <div
                             colspan="2"
                             class="alert alert-danger text-center"
                             role="alert"
-                            attrs="{'invisible': [('warning_required', '=', True)]}"
+                            invisible="warning_required"
                         >
                             Please note, some required fields have not been added to the list of fields, creating or updating may not work.
                         </div>
-                        <field name="api_field_ids" context="{'default_path_id': active_id}">
+                        <field name="api_field_ids" context="{'default_path_id': id}">
                             <tree editable="bottom" decoration-muted="default_value">
                                 <field name="model_id" invisible="1" />
                                 <field name="path_id" invisible="1" />
@@ -171,10 +163,7 @@
                                 <field name="description" />
                                 <field name="default_value" />
                                 <field name="force_required" invisible="1" />
-                                <field
-                                    name="required"
-                                    attrs="{'readonly': [('default_value', 'not in', ['', False])]}"
-                                />
+                                <field name="required" readonly="default_value not in ['', False]" />
                                 <button
                                     string="Field Alias"
                                     name="create_api_field_name_alias"
@@ -184,31 +173,22 @@
                             </tree>
                         </field>
                     </group>
-                    <group
-                        string="Settings for unlink"
-                        attrs="{'invisible': [('method', 'not in', ['delete'])]}"
-                    >
+                    <group string="Settings for unlink" invisible="method not in ['delete']">
                         <field
                             name="unlink_domain"
                             widget="domain"
                             options="{'model': 'model', 'in_dialog': True}"
                         />
                     </group>
-                    <group
-                        string="Settings for custom function"
-                        attrs="{'invisible': [('method', 'not in', ['patch'])]}"
-                    >
-                        <field
-                            name="function_apply_on_record"
-                            attrs="{'required': [('method', '=', 'patch')]}"
-                        />
+                    <group string="Settings for custom function" invisible="method not in ['patch']">
+                        <field name="function_apply_on_record" required="method == 'patch'" />
                         <field
                             name="function_domain"
                             widget="domain"
                             options="{'model': 'model', 'in_dialog': True}"
-                            attrs="{'invisible': [('function_apply_on_record', '=', False)]}"
+                            invisible="not function_apply_on_record"
                         />
-                        <field name="function" attrs="{'required': [('method', '=', 'patch')]}" />
+                        <field name="function" required="method == 'patch'" />
                         <field name="function_parameter_ids">
                             <tree editable="bottom">
                                 <field name="path_id" invisible="1" />
@@ -237,7 +217,7 @@
                         string="Reset Token"
                         confirm="Do you want to proceed reset token?"
                         type="object"
-                        attrs="{'invisible': [('id', '=', False)]}"
+                        invisible="not id"
                     />
                 </header>
                 <sheet>
@@ -251,12 +231,7 @@
                             <field string="Logs" name="log_count" widget="statinfo" />
                         </button>
                     </div>
-                    <widget
-                        name="web_ribbon"
-                        title="Archived"
-                        bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
-                    />
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active" />
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
                         <h1>
@@ -285,7 +260,7 @@
                     </div>
                     <notebook>
                         <page string="Paths">
-                            <field name="path_ids" context="{'default_version_id': active_id}" nolabel="1" />
+                            <field name="path_ids" context="{'default_version_id': id}" nolabel="1" />
                         </page>
                         <page string="Allowed Users">
                             <field name="user_ids">

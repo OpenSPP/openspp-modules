@@ -77,19 +77,14 @@ class Namespace(models.Model):
         )
     ]
 
-    def name_get(self):
-        return [
-            (
-                record.id,
-                "/api/%s/%s%s"
-                % (
-                    record.name,
-                    record.version_name,
-                    " (%s)" % record.description if record.description else "",
-                ),
+    @api.depends("name", "version_name", "description")
+    def _compute_display_name(self):
+        for rec in self:
+            rec.display_name = "/api/%s/%s%s" % (
+                rec.name,
+                rec.version_name,
+                " (%s)" % rec.description if rec.description else "",
             )
-            for record in self
-        ]
 
     @api.model
     def _fix_name(self, vals):

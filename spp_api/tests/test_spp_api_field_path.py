@@ -3,13 +3,14 @@ from odoo.tests import TransactionCase
 
 
 class TestSppApiFieldPath(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.test_get_path = self.env["spp_api.path"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.test_get_path = cls.env["spp_api.path"].create(
             {
                 "name": "res.partner",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
                 "description": "GET res.partner",
                 "method": "get",
                 "field_ids": [
@@ -17,41 +18,41 @@ class TestSppApiFieldPath(TransactionCase):
                         6,
                         0,
                         [
-                            self.env.ref("base.field_res_partner__name").id,
-                            self.env.ref("base.field_res_partner__write_date").id,
+                            cls.env.ref("base.field_res_partner__name").id,
+                            cls.env.ref("base.field_res_partner__write_date").id,
                         ],
                     )
                 ],
             }
         )
-        self.test_get_field_alias = self.env["spp_api.field.alias"].create(
+        cls.test_get_field_alias = cls.env["spp_api.field.alias"].create(
             {
-                "field_id": self.env.ref("base.field_res_partner__write_date").id,
+                "field_id": cls.env.ref("base.field_res_partner__write_date").id,
                 "alias_name": "last_updated",
-                "api_path_id": self.test_get_path.id,
+                "api_path_id": cls.test_get_path.id,
             }
         )
-        self.test_post_path = self.env["spp_api.path"].create(
+        cls.test_post_path = cls.env["spp_api.path"].create(
             {
                 "name": "res.partner",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
                 "description": "POST res.partner",
                 "method": "post",
             }
         )
-        self.test_api_field = self.env["spp_api.field"].create(
+        cls.test_api_field = cls.env["spp_api.field"].create(
             {
-                "field_id": self.env.ref("base.field_res_partner__name").id,
+                "field_id": cls.env.ref("base.field_res_partner__name").id,
                 "required": True,
-                "path_id": self.test_post_path.id,
+                "path_id": cls.test_post_path.id,
             }
         )
-        self.test_post_field_alias = self.env["spp_api.field.alias"].create(
+        cls.test_post_field_alias = cls.env["spp_api.field.alias"].create(
             {
-                "field_id": self.env.ref("base.field_res_partner__name").id,
+                "field_id": cls.env.ref("base.field_res_partner__name").id,
                 "alias_name": "fullname",
-                "api_path_id": self.test_post_path.id,
+                "api_path_id": cls.test_post_path.id,
             }
         )
 

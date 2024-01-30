@@ -12,7 +12,6 @@ import werkzeug.wrappers
 
 import odoo
 from odoo.http import (
-    AuthenticationError,
     Response,
     Root,
     SessionExpiredException,
@@ -131,9 +130,6 @@ class ApiJsonRequest(WebRequest):
             if isinstance(exception, werkzeug.exceptions.NotFound):
                 error["code"] = 404
                 error["message"] = "404: Not Found"
-            if isinstance(exception, AuthenticationError):
-                error["code"] = 100
-                error["message"] = "Odoo Session Invalid"
             if isinstance(exception, SessionExpiredException):
                 error["code"] = 100
                 error["message"] = "Odoo Session Expired"

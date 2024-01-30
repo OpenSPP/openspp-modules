@@ -306,7 +306,7 @@ class ApiV1Controller(http.Controller):
         kwargs = path.custom_treatment_values(method_params)
         data = getattr(obj, path.function)(**kwargs)
 
-        obj.flush()  # to recompute fields
+        obj.flush_model()  # to recompute fields
 
         return successful_response(200, data=data)
 
@@ -339,7 +339,7 @@ class ApiV1Controller(http.Controller):
         records = records.search(domain)
 
         data = getattr(records, path.function)(**kwargs)
-        records.flush()  # to recompute fields
+        records.flush_model()  # to recompute fields
 
         return successful_response(200, data=data)
 
