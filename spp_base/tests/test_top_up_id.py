@@ -4,10 +4,11 @@ from odoo.tools import mute_logger
 
 
 class TestTopUpID(TransactionCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
         vals = {"name": "Test Group 1", "is_group": True, "is_registrant": True}
-        self.test_group = self.env["res.partner"].create(vals)
+        cls.test_group = cls.env["res.partner"].create(vals)
 
     @mute_logger("py.warnings")
     def test_01_create_and_check_error(self):

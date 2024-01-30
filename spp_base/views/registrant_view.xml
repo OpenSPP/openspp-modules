@@ -8,10 +8,7 @@
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='reg_ids']/tree[1]/field[@name='value']" position="after">
-                <field
-                    name="card_uid"
-                    attrs="{'required': [('id_type', '=', %(spp_base.id_top_up_card)d)]}"
-                />
+                <field name="card_uid" required="id_type == %(spp_base.id_top_up_card)d)" />
             </xpath>
         </field>
     </record>
@@ -23,10 +20,7 @@
         <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='reg_ids']/tree[1]/field[@name='value']" position="after">
-                <field
-                    name="card_uid"
-                    attrs="{'required': [('id_type', '=', %(spp_base.id_top_up_card)d)]}"
-                />
+                <field name="card_uid" required="id_type == %(spp_base.id_top_up_card)d)" />
             </xpath>
         </field>
     </record>
