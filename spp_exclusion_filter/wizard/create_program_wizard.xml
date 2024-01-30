@@ -9,7 +9,7 @@
                 <label
                     for="exclusion_eligibility_domain"
                     string="FILTER:"
-                    attrs="{'invisible': [('enable_exclusion_filter', '=', False)]}"
+                    invisible="not enable_exclusion_filter"
                 />
                 <field
                     name="exclusion_eligibility_domain"
@@ -17,7 +17,7 @@
                     widget="domain"
                     options="{'model': 'res.partner'}"
                     nolabel="1"
-                    attrs="{'invisible': [('enable_exclusion_filter', '=', False)]}"
+                    invisible="not enable_exclusion_filter"
                 />
             </xpath>
         </field>
