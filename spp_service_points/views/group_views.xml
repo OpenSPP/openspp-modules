@@ -9,11 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='basic_info']" position="after">
                 <page string="Service Points" name="service_points">
-                    <field
-                        name="service_point_ids"
-                        attrs="{'readonly':[('disabled','!=',False)]}"
-                        nolabel="1"
-                    >
+                    <field name="service_point_ids" readonly="disabled" nolabel="1">
                         <tree decoration-danger="is_disabled == True">
                             <field name="name" />
                             <field name="area_id" />
