@@ -11,7 +11,7 @@
                     class="oe_stat_button"
                     icon="fa-calendar"
                     name="open_create_event_wizard"
-                    attrs="{'invisible':[('disabled','!=',False)]}"
+                    invisible="disabled"
                 >
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_text">Event</span>
@@ -60,7 +60,7 @@
                     class="oe_stat_button"
                     icon="fa-calendar"
                     name="open_create_event_wizard"
-                    attrs="{'invisible':[('disabled','!=',False)]}"
+                    invisible="disabled"
                 >
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_text">Event</span>

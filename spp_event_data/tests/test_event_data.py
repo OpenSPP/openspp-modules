@@ -2,9 +2,10 @@ from odoo.tests import TransactionCase
 
 
 class TestEventData(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self._test_partner = self.env["res.partner"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._test_partner = cls.env["res.partner"].create(
             {
                 "name": "Cao Cao",
                 "is_registrant": True,
