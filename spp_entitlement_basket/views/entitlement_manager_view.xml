@@ -93,10 +93,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 />
                             </group>
                         </page>
-                        <page
-                            string="Inventory Settings"
-                            attrs="{'invisible':[('manage_inventory','=',False)]}"
-                        >
+                        <page string="Inventory Settings" invisible="not manage_inventory">
                             <group colspan="4" col="4">
                                 <field
                                     name="warehouse_id"

@@ -4,15 +4,16 @@ from .common import Common
 
 
 class TestCreateProgramWiz(Common):
-    def setUp(self):
-        super().setUp()
-        self._program_create_wiz = self.env["g2p.program.create.wizard"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._program_create_wiz = cls.env["g2p.program.create.wizard"].create(
             {
                 "name": "Program 1 [TEST]",
                 "rrule_type": "monthly",
                 "eligibility_domain": "[]",
                 "cycle_duration": 1,
-                "currency_id": self.env.company.currency_id.id,
+                "currency_id": cls.env.company.currency_id.id,
                 "entitlement_kind": "basket_entitlement",
             }
         )
