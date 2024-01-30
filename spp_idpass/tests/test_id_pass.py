@@ -4,9 +4,10 @@ from odoo.tests import TransactionCase
 
 
 class TestIdPass(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self._id_pass = self.env["spp.id.pass"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._id_pass = cls.env["spp.id.pass"].create(
             {
                 "name": "Test ID Pass",
                 "auth_token_url": "https://auth.token.url",

@@ -7,9 +7,10 @@ from odoo.tests import TransactionCase
 
 
 class TestRegistrant(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self._test_individual = self.env["res.partner"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._test_individual = cls.env["res.partner"].create(
             {
                 "name": "Jon Snow",
                 "given_name": "Jon",
@@ -20,7 +21,7 @@ class TestRegistrant(TransactionCase):
                 "is_group": False,
             }
         )
-        self._test_household = self.env["res.partner"].create(
+        cls._test_household = cls.env["res.partner"].create(
             {
                 "name": "Winterfell",
                 "group_membership_ids": [
@@ -28,11 +29,11 @@ class TestRegistrant(TransactionCase):
                         0,
                         0,
                         {
-                            "individual": self._test_individual.id,
+                            "individual": cls._test_individual.id,
                             "kind": [
                                 (
                                     4,
-                                    self.env.ref(
+                                    cls.env.ref(
                                         "g2p_registry_membership.group_membership_kind_head"
                                     ).id,
                                 )
