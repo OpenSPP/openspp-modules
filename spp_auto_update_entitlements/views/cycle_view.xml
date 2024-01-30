@@ -15,7 +15,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     class="btn-primary"
                     icon="fa-file-text-o"
                     name="mark_ended"
-                    attrs="{'invisible':[('is_expired', '=', False)]}"
+                    invisible="not is_expired"
                     string="Set as Ended"
                 />
             </xpath>
