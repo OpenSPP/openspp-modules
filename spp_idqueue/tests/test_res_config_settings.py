@@ -2,10 +2,11 @@ from odoo.tests import TransactionCase
 
 
 class TestResConfigSettings(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self._config = self.env["ir.config_parameter"]
-        self._settings = self.env["res.config.settings"].create({})
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._config = cls.env["ir.config_parameter"]
+        cls._settings = cls.env["res.config.settings"].create({})
 
     def test_01_get_auto_approve_id_request(self):
         self._config.set_param("spp_id_queue.auto_approve_id_request", False)

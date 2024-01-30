@@ -4,30 +4,31 @@ from .common import Common
 
 
 class TestBatchCreateWiz(Common):
-    def setUp(self):
-        super().setUp()
-        self._test_g2p_id_type = self.env["g2p.id.type"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._test_g2p_id_type = cls.env["g2p.id.type"].create(
             {
                 "name": "G2P ID Type",
                 "target_type": "both",
             }
         )
-        self._test_spp_id_pass = self.env["spp.id.pass"].create(
+        cls._test_spp_id_pass = cls.env["spp.id.pass"].create(
             {
                 "name": "SPP ID Pass",
-                "id_type": self._test_g2p_id_type.id,
+                "id_type": cls._test_g2p_id_type.id,
             }
         )
-        self._test_queue_1 = self._create_test_queue(self._test_individual_1.id)
-        self._test_queue_2 = self._create_test_queue(
-            self._test_individual_2.id, status="new"
+        cls._test_queue_1 = cls._create_test_queue(cls._test_individual_1.id)
+        cls._test_queue_2 = cls._create_test_queue(
+            cls._test_individual_2.id, status="new"
         )
-        self._test_queue_3 = self._create_test_queue(
-            self._test_individual_3.id,
-            id_type=self._test_g2p_id_type.id,
-            idpass_id=self._test_spp_id_pass.id,
+        cls._test_queue_3 = cls._create_test_queue(
+            cls._test_individual_3.id,
+            id_type=cls._test_g2p_id_type.id,
+            idpass_id=cls._test_spp_id_pass.id,
         )
-        self._model = self.env["spp.batch.create.wizard"]
+        cls._model = cls.env["spp.batch.create.wizard"]
 
     def test_01_default_queue_ids_and_state(self):
         with self.assertRaisesRegex(UserError, "^.*no selected id requests.*$"):

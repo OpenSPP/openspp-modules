@@ -8,7 +8,7 @@
                 <field name="name" />
                 <field name="queued_ids" />
                 <field name="id_pdf" filename="id_pdf_filename" widget="binary" string="File" />
-                <field name="id_pdf_filename" invisible="1" />
+                <field name="id_pdf_filename" column_invisible="1" />
                 <field name="create_date" />
                 <field
                     name="status"
@@ -32,7 +32,7 @@
                     type="object"
                     icon="fa-check"
                     class="btn-primary"
-                    attrs="{'invisible': [('status', '!=', 'new')]}"
+                    invisible="status != 'new'"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                         <button
@@ -40,7 +40,7 @@
                     type="object"
                     icon="fa-download"
                     class="btn-primary"
-                    attrs="{'invisible': [('status', '!=', 'approved')]}"
+                    invisible="status != 'approved'"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                         <button
@@ -48,7 +48,7 @@
                     type="object"
                     icon="fa-refresh"
                     class="btn-info"
-                    attrs="{'invisible': [('merge_status', 'not in', ['error_sending', 'error_merging'])]}"
+                    invisible="merge_status not in ['error_sending', 'error_merging']"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                         <button
@@ -56,7 +56,7 @@
                     type="object"
                     icon="fa-print"
                     class="btn-primary"
-                    attrs="{'invisible': ['|',('status', '!=', 'generated'), ('merge_status', '!=', 'merged')]}"
+                    invisible="status != 'generated' or merge_status != 'merged'"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                         <button
@@ -64,7 +64,7 @@
                     type="object"
                     icon="fa-print"
                     class="btn-success"
-                    attrs="{'invisible': [('status', '!=', 'printing')]}"
+                    invisible="status != 'printing'"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
                         <button
@@ -72,7 +72,7 @@
                     type="object"
                     icon="fa-truck"
                     class="btn-primary"
-                    attrs="{'invisible': [('status', '!=', 'printed')]}"
+                    invisible="status != 'printed'"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                 />
             </tree>
@@ -90,7 +90,7 @@
                         string="Validate Batch"
                         icon="fa-check"
                         class="btn-primary"
-                        attrs="{'invisible': [('status', '!=', 'new')]}"
+                        invisible="status != 'new'"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
@@ -99,7 +99,7 @@
                         string="Generate Batch"
                         icon="fa-download"
                         class="btn-primary"
-                        attrs="{'invisible': [('status', '!=', 'approved')]}"
+                        invisible="status != 'approved'"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
@@ -108,7 +108,7 @@
                         string="Retry Sending"
                         icon="fa-refresh"
                         class="btn-info"
-                        attrs="{'invisible': [('merge_status', 'not in', ['error_sending', 'error_merging'])]}"
+                        invisible="merge_status not in ['error_sending', 'error_merging']"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
@@ -117,7 +117,7 @@
                         string="Print Batch"
                         icon="fa-print"
                         class="btn-primary"
-                        attrs="{'invisible': ['|',('status', '!=', 'generated'), ('merge_status', '!=', 'merged')]}"
+                        invisible="status != 'generated' or merge_status != 'merged'"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
@@ -126,7 +126,7 @@
                         string="Batch Printed"
                         icon="fa-print"
                         class="btn-success"
-                        attrs="{'invisible': [('status', '!=', 'printing')]}"
+                        invisible="status != 'printing'"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
@@ -135,7 +135,7 @@
                         string="Distribute Batch"
                         icon="fa-truck"
                         class="btn-primary"
-                        attrs="{'invisible': [('status', '!=', 'printed')]}"
+                        invisible="status != 'printed'"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                         <button
@@ -144,58 +144,53 @@
                         string="Refresh Data"
                         icon="fa-refresh"
                         class="btn-primary"
-                        attrs="{'invisible': ['|',('status', 'not in', ['generating', 'generated']), ('merge_status', '!=', 'sent')]}"
+                        invisible="status not in ['generating', 'generated'] or merge_status != 'sent'"
                         groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_distributor"
                     />
                     </header>
                 <sheet>
 
-                    <widget
-                        name="web_ribbon"
-                        title="New"
-                        bg_color="bg-warning"
-                        attrs="{'invisible': [('status', '!=', 'new')]}"
-                    />
+                    <widget name="web_ribbon" title="New" bg_color="bg-warning" invisible="status != 'new'" />
                     <widget
                         name="web_ribbon"
                         title="Approved"
                         bg_color="bg-primary"
-                        attrs="{'invisible': [('status', '!=', 'approved')]}"
+                        invisible="status != 'approved'"
                     />
                     <widget
                         name="web_ribbon"
                         title="Generated"
                         bg_color="bg-success"
-                        attrs="{'invisible': [('status', '!=', 'generated')]}"
+                        invisible="status != 'generated'"
                     />
                     <widget
                         name="web_ribbon"
                         title="Generating"
                         bg_color="bg-info"
-                        attrs="{'invisible': [('status', '!=', 'generating')]}"
+                        invisible="status != 'generating'"
                     />
                     <widget
                         name="web_ribbon"
                         title="Printing"
                         bg_color="bg-info"
-                        attrs="{'invisible': [('status', '!=', 'printing')]}"
+                        invisible="status != 'printing'"
                     />
                     <widget
                         name="web_ribbon"
                         title="Printed"
                         bg_color="bg-primary"
-                        attrs="{'invisible': [('status', '!=', 'printed')]}"
+                        invisible="status != 'printed'"
                     />
                     <widget
                         name="web_ribbon"
                         title="Distributed"
                         bg_color="bg-primary"
-                        attrs="{'invisible': [('status', '!=', 'distributed')]}"
+                        invisible="status != 'distributed'"
                     />
                     <div
                         class="alert alert-info text-center o_form_header"
                         role="status"
-                        attrs="{'invisible': [('status', '!=', 'generating')]}"
+                        invisible="status != 'generating'"
                     >
                         IDs for this Batch is being generated. Click <button
                             name="refresh_data"
@@ -208,7 +203,7 @@
                     <div
                         class="alert alert-info text-center o_form_header"
                         role="status"
-                        attrs="{'invisible': ['|',('status', '!=', 'generated'), ('merge_status', '!=', 'sent')]}"
+                        status="status != 'generated' or merge_status != 'sent'"
                     >
                         IDs for this Batch is being merged. Click <button
                             name="refresh_data"
@@ -256,7 +251,7 @@
                                     name="date_merged"
                                     readonly="1"
                                     force_save="1"
-                                    attrs="{'invisible': [('merge_status', '!=', 'merged')]}"
+                                    invisible="merge_status != 'merged'"
                                 />
                                 <field name="queued_ids" readonly="1">
                                     <tree>
@@ -270,9 +265,9 @@
                                             filename="id_pdf_filename"
                                             widget="binary"
                                             string="File"
-                                            invisible="1"
+                                            column_invisible="1"
                                         />
-                                        <field name="id_pdf_filename" invisible="1" />
+                                        <field name="id_pdf_filename" column_invisible="1" />
                                         <field
                                             name="status"
                                             decoration-muted="status=='new'"

@@ -1,3 +1,5 @@
+// Web.FormController is already deprecated in odoo 17, need to find a way to fix this
+
 odoo.define("spp_idqueue.FormController", function (require) {
     var FormController = require("web.FormController");
     var session = require("web.session");

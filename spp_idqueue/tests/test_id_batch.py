@@ -7,18 +7,19 @@ from .common import Common
 
 
 class TestIdBatch(Common):
-    def setUp(self):
-        super().setUp()
-        self._test_queue_1 = self._create_test_queue(self._test_individual_1.id)
-        self._test_queue_2 = self._create_test_queue(self._test_individual_2.id)
-        self._test_queue_3 = self._create_test_queue(self._test_individual_3.id)
-        self.test_batch = self.env["spp.print.queue.batch"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._test_queue_1 = cls._create_test_queue(cls._test_individual_1.id)
+        cls._test_queue_2 = cls._create_test_queue(cls._test_individual_2.id)
+        cls._test_queue_3 = cls._create_test_queue(cls._test_individual_3.id)
+        cls.test_batch = cls.env["spp.print.queue.batch"].create(
             {
                 "name": "TEST BATCH 01",
                 "queued_ids": [
-                    (4, self._test_queue_1.id),
-                    (4, self._test_queue_2.id),
-                    (4, self._test_queue_3.id),
+                    (4, cls._test_queue_1.id),
+                    (4, cls._test_queue_2.id),
+                    (4, cls._test_queue_3.id),
                 ],
             }
         )

@@ -7,10 +7,11 @@ from .common import Common
 
 
 class TestIdQueue(Common):
-    def setUp(self):
-        super().setUp()
-        self.test_queue = self._create_test_queue(
-            registrant_id=self._test_group.id, status="new"
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.test_queue = cls._create_test_queue(
+            registrant_id=cls._test_group.id, status="new"
         )
 
     def test_01_compute_name(self):

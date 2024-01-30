@@ -6,9 +6,10 @@ from .common import Common
 
 
 class TestRequestIdWiz(Common):
-    def setUp(self):
-        super().setUp()
-        self._model = self.env["spp.print.queue.wizard"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._model = cls.env["spp.print.queue.wizard"]
 
     def _create_correct_queue_wizard(self):
         wiz = self._model.create(
