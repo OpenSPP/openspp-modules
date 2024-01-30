@@ -3,18 +3,20 @@ from odoo.tests import TransactionCase
 
 
 class TestSppApiNamespace(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self._namespace = self.env["spp_api.namespace"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._namespace = cls.env["spp_api.namespace"].create(
             {"name": "test", "version_name": "v1"}
         )
-        self.env["ir.config_parameter"].set_param("web.base.url", "https://local.host")
-        self._db_name = self.env.cr.dbname
+        cls.env["ir.config_parameter"].set_param("web.base.url", "https://local.host")
+        cls._db_name = cls.env.cr.dbname
 
-    def test_01_name_get(self):
-        self.assertEqual(
-            self._namespace.name_get(), [(self._namespace.id, "/api/test/v1")]
-        )
+    # odoo17 name_get deprecated
+    # def test_01_name_get(self):
+    #     self.assertEqual(
+    #         self._namespace.name_get(), [(self._namespace.id, "/api/test/v1")]
+    #     )
 
     def test_02_compute_spec_url(self):
         token = self._namespace.token

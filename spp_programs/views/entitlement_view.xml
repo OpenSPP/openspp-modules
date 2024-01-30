@@ -44,7 +44,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         class="btn-success"
                         icon="fa-thumbs-o-up"
                         name="approve_entitlement"
-                        states="draft,pending_validation"
+                        invisible="state not in ['draft', 'pending_validation']"
                         string="Approve Entitlement"
                     />
                     <field
@@ -97,8 +97,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             />
                         </group>
                         <group>
-                            <field name="valid_from" attrs="{'readonly':[('state','!=','draft')]}" />
-                            <field name="valid_until" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field name="valid_from" readonly="state != 'draft'" />
+                            <field name="valid_until" readonly="state != 'draft'" />
                             <field name="date_approved" readonly="1" />
                         </group>
                     </group>
@@ -111,11 +111,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                     colspan="4"
                                     readonly="1"
                                 />
-                                <field
-                                    name="qty"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    readonly="1"
-                                />
+                                <field name="qty" readonly="state != 'draft'" />
                                 <field
                                     name="uom_id"
                                     options="{'no_open':True,'no_quick_create':True,'no_create':True}"
@@ -126,7 +122,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="currency_id" options="{'no_open':True}" readonly="1" />
                             </group>
                         </page>
-                        <page string="Inventory" attrs="{'invisible':[('manage_inventory','=',False)]}">
+                        <page string="Inventory" invisible="not manage_inventory">
                             <group colspan="4" col="4">
                                 <field name="warehouse_id" options="{'no_open':True}" readonly="1" />
                                 <field name="route_id" options="{'no_open':True}" readonly="1" />

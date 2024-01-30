@@ -2,16 +2,17 @@ from odoo.tests import TransactionCase
 
 
 class Common(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.areas = self.env["spp.area"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.areas = cls.env["spp.area"].create(
             [
                 {"draft_name": "Area 1 [TEST]"},
                 {"draft_name": "Area 2 [TEST]"},
                 {"draft_name": "Area 3 [TEST]"},
             ]
         )
-        self._tag = self.env["g2p.registrant.tags"].create({"name": "Tag 1 [TEST]"})
+        cls._tag = cls.env["g2p.registrant.tags"].create({"name": "Tag 1 [TEST]"})
 
     def program_create_wizard(self, vals):
         vals.update(

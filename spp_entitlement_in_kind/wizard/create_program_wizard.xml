@@ -9,12 +9,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='default']" position="after">
-                <group
-                    colspan="4"
-                    col="4"
-                    name='inkind'
-                    attrs="{'invisible':[('entitlement_kind','!=', 'inkind')]}"
-                >
+                <group colspan="4" col="4" name='inkind' invisible="entitlement_kind != 'inkind'">
                     <div colspan="2">
                         <field name="manage_inventory" />
                         <label for="manage_inventory" string="Manage stock movements (inventory)" />
@@ -62,10 +57,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 </form>
                             </field>
                         </page>
-                        <page
-                            string="Inventory Settings"
-                            attrs="{'invisible':[('manage_inventory','=',False)]}"
-                        >
+                        <page string="Inventory Settings" invisible="not manage_inventory">
                             <group colspan="4" col="4">
                                 <field
                                     name="warehouse_id"

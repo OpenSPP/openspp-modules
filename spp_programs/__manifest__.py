@@ -2,7 +2,7 @@
 {
     "name": "OpenSPP Programs",
     "category": "OpenSPP",
-    "version": "15.0.1.1.0",
+    "version": "17.0.1.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/openspp/openspp-modules",
@@ -17,7 +17,6 @@
         "spp_area",
         "product",
         "stock",
-        "web_domain_field",
     ],
     "data": [
         "security/ir.model.access.csv",
@@ -37,8 +36,10 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "spp_programs/static/src/js/hide_button.js",
-            "spp_programs/static/src/js/domain_field.js",
+            # updateButtons function is already deprecated in odoo 17
+            # "spp_programs/static/src/js/hide_button.js",
+            # web.basic_fields module is already deprecated in odoo 17
+            # "spp_programs/static/src/js/domain_field.js",
         ],
     },
     "demo": [],

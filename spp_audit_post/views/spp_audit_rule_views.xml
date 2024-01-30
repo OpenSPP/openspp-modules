@@ -13,7 +13,7 @@
             <xpath expr="//field[@name='log_unlink']" position="after">
                 <field
                     name="field_id"
-                    attrs="{'invisible': [('parent_id', '=', False)]}"
+                    invisible="not parent_id"
                     options="{'no_open': True, 'no_create': True, 'no_edit': True}"
                     domain="field_id_domain"
                 />
@@ -21,7 +21,7 @@
 
             <xpath expr="//group[@name='audit_rule_fields']" position="after">
                 <field name="is_mail_thread" invisible="1" />
-                <notebook attrs="{'invisible': [('is_mail_thread', '=', False)]}">
+                <notebook invisible="not is_mail_thread">
                     <page name="related_rules" string="Related Rules">
                       <field name="child_ids">
                         <tree create="0" edit="0" delete="0" editable="bottom">

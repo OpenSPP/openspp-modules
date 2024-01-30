@@ -9,12 +9,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='default']" position="after">
-                <group
-                    colspan="4"
-                    col="4"
-                    name='cash'
-                    attrs="{'invisible':[('entitlement_kind','!=', 'cash')]}"
-                >
+                <group colspan="4" col="4" name='cash' invisible="entitlement_kind != 'cash'">
                     <div colspan="2">
                         <field name="evaluate_one_item" />
                         <label for="evaluate_one_item" string="Evaluate one item" />

@@ -2,29 +2,30 @@ from odoo.tests import TransactionCase
 
 
 class TestSppApiFields(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.test_path = self.env["spp_api.path"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.test_path = cls.env["spp_api.path"].create(
             {
                 "name": "res.partner",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
                 "description": "POST res.partner",
                 "method": "post",
             }
         )
-        self.test_api_field = self.env["spp_api.field"].create(
+        cls.test_api_field = cls.env["spp_api.field"].create(
             {
-                "field_id": self.env.ref("base.field_res_partner__name").id,
+                "field_id": cls.env.ref("base.field_res_partner__name").id,
                 "required": True,
-                "path_id": self.test_path.id,
+                "path_id": cls.test_path.id,
             }
         )
-        self.test_field_alias = self.env["spp_api.field.alias"].create(
+        cls.test_field_alias = cls.env["spp_api.field.alias"].create(
             {
-                "field_id": self.env.ref("base.field_res_partner__name").id,
+                "field_id": cls.env.ref("base.field_res_partner__name").id,
                 "alias_name": "fullname",
-                "api_path_id": self.test_path.id,
+                "api_path_id": cls.test_path.id,
             }
         )
 

@@ -4,7 +4,7 @@
 {
     "name": "OpenSPP ID Printing Queue",
     "category": "OpenSPP",
-    "version": "15.0.1.1.0",
+    "version": "17.0.1.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/openspp/openspp-modules",
@@ -32,7 +32,8 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "spp_idqueue/static/src/js/form_controller.js",
+            # web.FormController is already deprecated in odoo 17
+            # "spp_idqueue/static/src/js/form_controller.js",
         ],
     },
     "demo": [],

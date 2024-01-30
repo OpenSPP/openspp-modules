@@ -44,11 +44,10 @@ class SppApiFieldAlias(models.Model):
         ),
     ]
 
-    def name_get(self):
-        res = []
+    @api.depends("alias_name", "field_id")
+    def _compute_display_name(self):
         for rec in self:
-            res.append((rec.id, f"{rec.alias_name} - {rec.field_id.name}"))
-        return res
+            rec.display_name = f"{rec.alias_name} - {rec.field_id.name}"
 
     @api.constrains(
         "alias_name",

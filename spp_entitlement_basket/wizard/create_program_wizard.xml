@@ -5,9 +5,7 @@
         <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='target_type']" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'readonly':[('entitlement_kind','=','basket_entitlement')]}</attribute>
+                <attribute name="readonly">entitlement_kind == 'basket_entitlement'</attribute>
                 <attribute name="force_save">1</attribute>
             </xpath>
             <xpath expr="//group[@name='default']" position="after">
@@ -15,7 +13,7 @@
                     colspan="4"
                     col="4"
                     name='entitlement_basket'
-                    attrs="{'invisible':[('entitlement_kind','!=', 'basket_entitlement')]}"
+                    invisible="entitlement_kind != 'basket_entitlement'"
                 >
                     <notebook colspan="4">
                         <page string="Items">
@@ -53,10 +51,7 @@
                                 </field>
                             </group>
                         </page>
-                        <page
-                            string="Inventory Settings"
-                            attrs="{'invisible':[('manage_inventory','=',False)]}"
-                        >
+                        <page string="Inventory Settings" invisible="not manage_inventory">
                             <group colspan="4" col="4">
                                 <field
                                     name="warehouse_id"

@@ -3,45 +3,46 @@ from odoo.tests import TransactionCase
 
 
 class TestCreateProgramWiz(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self._test_products = self.env["product.product"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._test_products = cls.env["product.product"].create(
             [
                 {
                     "name": "Flour [TEST]",
                     "detailed_type": "product",
-                    "categ_id": self.env.ref("product.product_category_all").id,
-                    "uom_id": self.env.ref("uom.product_uom_unit").id,
-                    "uom_po_id": self.env.ref("uom.product_uom_unit").id,
+                    "categ_id": cls.env.ref("product.product_category_all").id,
+                    "uom_id": cls.env.ref("uom.product_uom_unit").id,
+                    "uom_po_id": cls.env.ref("uom.product_uom_unit").id,
                 },
                 {
                     "name": "Food [TEST]",
                     "detailed_type": "product",
-                    "categ_id": self.env.ref("product.product_category_all").id,
-                    "uom_id": self.env.ref("uom.product_uom_unit").id,
-                    "uom_po_id": self.env.ref("uom.product_uom_unit").id,
+                    "categ_id": cls.env.ref("product.product_category_all").id,
+                    "uom_id": cls.env.ref("uom.product_uom_unit").id,
+                    "uom_po_id": cls.env.ref("uom.product_uom_unit").id,
                 },
             ]
         )
-        self._program_create_wiz = self.env["g2p.program.create.wizard"].create(
+        cls._program_create_wiz = cls.env["g2p.program.create.wizard"].create(
             {
                 "name": "Program 1 [TEST]",
                 "rrule_type": "monthly",
                 "eligibility_domain": "[]",
                 "cycle_duration": 1,
-                "currency_id": self.env.company.currency_id.id,
+                "currency_id": cls.env.company.currency_id.id,
                 "entitlement_kind": "inkind",
             }
         )
-        self.journal_id = self._program_create_wiz.create_journal(
-            self._program_create_wiz.name, self._program_create_wiz.currency_id.id
+        cls.journal_id = cls._program_create_wiz.create_journal(
+            cls._program_create_wiz.name, cls._program_create_wiz.currency_id.id
         )
 
-        self.program = self.env["g2p.program"].create(
+        cls.program = cls.env["g2p.program"].create(
             {
-                "name": self._program_create_wiz.name,
-                "journal_id": self.journal_id,
-                "target_type": self._program_create_wiz.target_type,
+                "name": cls._program_create_wiz.name,
+                "journal_id": cls.journal_id,
+                "target_type": cls._program_create_wiz.target_type,
             }
         )
 

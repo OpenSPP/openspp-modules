@@ -4,7 +4,7 @@
 {
     "name": "User Roles Management",
     "category": "OpenSPP",
-    "version": "15.0.1.1.0",
+    "version": "17.0.1.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/openspp/openspp-modules",

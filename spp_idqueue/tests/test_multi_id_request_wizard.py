@@ -6,12 +6,13 @@ from .common import Common
 
 
 class TestMultiIdRequestWizard(Common):
-    def setUp(self):
-        super().setUp()
-        self._model = self.env["spp.multi.id.request.wizard"]
-        self._target_model = self.env["spp.print.queue.id"]
-        self.all_individual = (
-            self._test_individual_1 | self._test_individual_2 | self._test_individual_3
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._model = cls.env["spp.multi.id.request.wizard"]
+        cls._target_model = cls.env["spp.print.queue.id"]
+        cls.all_individual = (
+            cls._test_individual_1 | cls._test_individual_2 | cls._test_individual_3
         )
 
     def _create_correct_multi_id_request_wizard(self):

@@ -27,7 +27,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="entitlements_count" invisible="1" />
             </xpath>
             <xpath expr="//button[@name='open_entitlements_form']" position="attributes">
-                <attribute name="attrs">{'invisible':[('entitlements_count','=',0)]}</attribute>
+                <attribute name="invisible">entitlements_count == 0</attribute>
             </xpath>
             <xpath expr="//button[@name='open_entitlements_form']" position="after">
                 <button
@@ -35,7 +35,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     class="oe_stat_button"
                     icon="fa-folder-open-o"
                     name="open_entitlements_form"
-                    attrs="{'invisible':[('inkind_entitlements_count','=',0)]}"
+                    invisible="inkind_entitlements_count == 0"
                 >
                     <div class="o_form_field o_stat_info">
                         <field name="inkind_entitlements_count" class="o_stat_value" />

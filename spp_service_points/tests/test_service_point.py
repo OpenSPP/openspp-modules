@@ -4,10 +4,11 @@ from odoo.tests import TransactionCase
 
 
 class TestServicePoint(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        country = self.env.ref("base.iq")
-        self.service_point_1 = self.env["spp.service.point"].create(
+    @classmethod
+    def setUpClass(cls):
+        super(TestServicePoint, cls).setUpClass()
+        country = cls.env.ref("base.iq")
+        cls.service_point_1 = cls.env["spp.service.point"].create(
             {
                 "name": "Correct Phone Number",
                 "country_id": country.id,
@@ -15,7 +16,7 @@ class TestServicePoint(TransactionCase):
                 "is_disabled": False,
             }
         )
-        self.service_point_2 = self.env["spp.service.point"].create(
+        cls.service_point_2 = cls.env["spp.service.point"].create(
             {
                 "name": "In-correct Phone Number",
                 "country_id": country.id,
@@ -25,35 +26,35 @@ class TestServicePoint(TransactionCase):
             }
         )
 
-        self.res_partner_company = self.env["res.partner"].create(
+        cls.res_partner_company = cls.env["res.partner"].create(
             {
                 "name": "company_test",
                 "is_company": True,
             }
         )
 
-        self.res_partner_company_2 = self.env["res.partner"].create(
+        cls.res_partner_company_2 = cls.env["res.partner"].create(
             {
                 "name": "company_test",
                 "is_company": True,
             }
         )
 
-        self.res_partner_individual = self.env["res.partner"].create(
+        cls.res_partner_individual = cls.env["res.partner"].create(
             {
                 "name": "individual_test",
-                "parent_id": self.res_partner_company.id,
+                "parent_id": cls.res_partner_company.id,
             }
         )
 
-        self.res_partner_individual_2 = self.env["res.partner"].create(
+        cls.res_partner_individual_2 = cls.env["res.partner"].create(
             {
                 "name": "individual_test_2",
                 "email": "individual_test_2@ymail.com",
             }
         )
 
-        self.service_point_3 = self.env["spp.service.point"].create(
+        cls.service_point_3 = cls.env["spp.service.point"].create(
             {
                 "name": "Without Company",
                 "country_id": country.id,
@@ -61,19 +62,19 @@ class TestServicePoint(TransactionCase):
             }
         )
 
-        self.service_point_4 = self.env["spp.service.point"].create(
+        cls.service_point_4 = cls.env["spp.service.point"].create(
             {
                 "name": "With Company and Contacts",
                 "country_id": country.id,
-                "res_partner_company_id": self.res_partner_company.id,
+                "res_partner_company_id": cls.res_partner_company.id,
             }
         )
 
-        self.service_point_5 = self.env["spp.service.point"].create(
+        cls.service_point_5 = cls.env["spp.service.point"].create(
             {
                 "name": "With Company and without Contacts",
                 "country_id": country.id,
-                "res_partner_company_id": self.res_partner_company_2.id,
+                "res_partner_company_id": cls.res_partner_company_2.id,
             }
         )
 

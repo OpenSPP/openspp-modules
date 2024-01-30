@@ -91,7 +91,7 @@ class SppAuditRule(models.Model):
                             "binding_model_id": rec.model_id.id,
                             "binding_view_types": "form",
                             "domain": "[('model_id','=', %s), "
-                            "('res_id', '=', active_id), ('method', 'in', %s)]"
+                            "('res_id', '=', id), ('method', 'in', %s)]"
                             % (
                                 rec.model_id.id,
                                 [method.replace("_", "") for method in self._methods],

@@ -9,7 +9,7 @@
               <div
                     class="alert alert-info text-center o_form_header"
                     role="alert"
-                    attrs="{'invisible':[('id_pdf_filename','=', False)]}"
+                    invisible="not id_pdf_filename"
                 >
                   <a class="close" data-dismiss="alert" href="#">x</a>
                   <div>
@@ -45,7 +45,7 @@
               <div
                     class="alert alert-info text-center o_form_header"
                     role="alert"
-                    attrs="{'invisible':[('id_pdf_filename','=', False)]}"
+                    invisible="not id_pdf_filename"
                 >
                   <a class="close" data-dismiss="alert" href="#">x</a>
                   <div>

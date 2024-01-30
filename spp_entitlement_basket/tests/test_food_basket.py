@@ -2,21 +2,22 @@ from .common import Common
 
 
 class TestFoodBasket(Common):
-    def setUp(self):
-        super().setUp()
-        self._test_entitlement_basket = self.env["spp.entitlement.basket"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._test_entitlement_basket = cls.env["spp.entitlement.basket"].create(
             {
                 "name": "Basket 1 [TEST]",
                 "product_ids": [
                     (
                         0,
                         0,
-                        {"product_id": self._test_products[0].id},
+                        {"product_id": cls._test_products[0].id},
                     ),
                     (
                         0,
                         0,
-                        {"product_id": self._test_products[-1].id},
+                        {"product_id": cls._test_products[-1].id},
                     ),
                 ],
             }

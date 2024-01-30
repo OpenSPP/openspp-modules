@@ -341,7 +341,6 @@ class OpenSPPAreaImport(models.Model):
                                     "type": "model",
                                 }
                             )
-                            self.env["ir.translation"]._update_translations(vals_list)
                         rec.update({"state": "Done"})
                     else:
                         raw.update({"state": "Error"})

@@ -148,7 +148,6 @@ class OpenSPPArea(models.Model):
                     }
                 )
 
-            self.env["ir.translation"]._upsert_translations(vals_list)
             return Area
 
     def write(self, vals):

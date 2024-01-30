@@ -7,9 +7,10 @@ from odoo.tests import TransactionCase
 
 
 class TestEntitlementManager(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.registrants = self.env["res.partner"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.registrants = cls.env["res.partner"].create(
             [
                 {
                     "name": "Registrant 1 [TEST]",
@@ -23,7 +24,7 @@ class TestEntitlementManager(TransactionCase):
                 },
             ]
         )
-        self.program = self.env["g2p.program"].create(
+        cls.program = cls.env["g2p.program"].create(
             {
                 "name": "Program 1 [TEST]",
                 "program_membership_ids": [
@@ -31,7 +32,7 @@ class TestEntitlementManager(TransactionCase):
                         0,
                         0,
                         {
-                            "partner_id": self.registrants[0].id,
+                            "partner_id": cls.registrants[0].id,
                             "state": "enrolled",
                         },
                     ),
@@ -39,28 +40,28 @@ class TestEntitlementManager(TransactionCase):
                         0,
                         0,
                         {
-                            "partner_id": self.registrants[-1].id,
+                            "partner_id": cls.registrants[-1].id,
                             "state": "enrolled",
                         },
                     ),
                 ],
             }
         )
-        self.program.create_journal()
-        self.cycle = self.env["g2p.cycle"].create(
+        cls.program.create_journal()
+        cls.cycle = cls.env["g2p.cycle"].create(
             {
                 "name": "Cycle 1 [TEST]",
-                "program_id": self.program.id,
+                "program_id": cls.program.id,
                 "start_date": fields.Date.today(),
                 "end_date": fields.Date.today(),
             }
         )
-        self._cash_entitlement_manager = self.env[
+        cls._cash_entitlement_manager = cls.env[
             "g2p.program.entitlement.manager.cash"
         ].create(
             {
                 "name": "Entitlement Manager Cash 1 [TEST]",
-                "program_id": self.program.id,
+                "program_id": cls.program.id,
             }
         )
 

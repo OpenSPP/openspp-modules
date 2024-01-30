@@ -23,7 +23,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     colspan="4"
                     col="4"
                     name="default_eligibility"
-                    attrs="{'invisible':[('eligibility_kind','!=', 'default_eligibility')]}"
+                    invisible="eligibility_kind != 'default_eligibility'"
                 >
                     <field name="admin_area_ids" colspan="4" widget="many2many_tags" />
                     <label for="eligibility_domain" string="FILTER:" />
@@ -44,13 +44,11 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
             </xpath>
 
             <xpath expr="//page[@name='cycle']/group/div/group[2]" position="attributes">
-                <attribute name="attrs">{'invisible': [('is_one_time_distribution', '=', True)]}</attribute>
+                <attribute name="invisible">is_one_time_distribution</attribute>
             </xpath>
 
             <xpath expr="//page[@name='cycle']/group/div/group[3]" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': ['|', ('rrule_type', '!=', 'monthly'), ('is_one_time_distribution', '=', True)]}</attribute>
+                <attribute name="invisible">rrule_type != 'monthly' or is_one_time_distribution</attribute>
             </xpath>
 
             <xpath expr="//group/field[@name='entitlement_kind']" position="after">
@@ -61,8 +59,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 />
             </xpath>
             <xpath expr="//button[@name='create_program']" position="attributes">
-                <attribute name="attrs">
-                    {'invisible': [('state', '=', 'step1')]}
+                <attribute name="invisible">
+                    state == 'step1'
                 </attribute>
             </xpath>
         </field>

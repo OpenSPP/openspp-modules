@@ -12,7 +12,7 @@
                     string="Reset OpenAPI Token"
                     confirm="Do you want to proceed reset token?"
                     type="object"
-                    attrs="{'invisible': [('id', '=', False)]}"
+                    invisible="not id"
                 />
             </header>
             <notebook position="inside">

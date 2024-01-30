@@ -25,7 +25,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <field
                             name="id_type"
                             options="{'no_create_edit':True,'no_open':True,'no_create':True}"
-                            attrs="{'required':[('registrant_id','=', True)]}"
+                            required="registrant_id"
                             domain="[('target_type', '=', [target_type, 'both'])]"
                             string="ID Type"
                         />
@@ -34,7 +34,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             name="idpass_id"
                             string="Template"
                             options="{'no_create_edit':True,'no_open':True,'no_create':True}"
-                            attrs="{'invisible':[('is_idpass','!=', True)], 'required':[('is_idpass','=', True)]}"
+                            invisible="not is_idpass"
+                            required="is_idpass"
                         />
                     </group>
                 </sheet>

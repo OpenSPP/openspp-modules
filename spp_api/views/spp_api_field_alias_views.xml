@@ -56,11 +56,11 @@
                             <field name="alias_name" />
                             <field name="global_alias" invisible="context.get('scoped_alias')" />
                         </group>
-                        <group attrs="{'invisible': [('global_alias', '=', True)]}">
+                        <group invisible="global_alias">
                             <field
                                 name="api_path_id"
                                 readonly="context.get('scoped_alias')"
-                                attrs="{'required': [('global_alias', '=', False)]}"
+                                required="not global_alias"
                             />
                         </group>
                     </group>

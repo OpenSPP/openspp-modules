@@ -7,28 +7,29 @@ from odoo.tests import TransactionCase
 
 
 class TestEntitlementManager(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self._test_products = self.env["product.product"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._test_products = cls.env["product.product"].create(
             [
                 {
                     "name": "Flour [TEST]",
                     "detailed_type": "product",
-                    "categ_id": self.env.ref("product.product_category_all").id,
-                    "uom_id": self.env.ref("uom.product_uom_unit").id,
-                    "uom_po_id": self.env.ref("uom.product_uom_unit").id,
+                    "categ_id": cls.env.ref("product.product_category_all").id,
+                    "uom_id": cls.env.ref("uom.product_uom_unit").id,
+                    "uom_po_id": cls.env.ref("uom.product_uom_unit").id,
                 },
                 {
                     "name": "Food [TEST]",
                     "detailed_type": "product",
-                    "categ_id": self.env.ref("product.product_category_all").id,
-                    "uom_id": self.env.ref("uom.product_uom_unit").id,
-                    "uom_po_id": self.env.ref("uom.product_uom_unit").id,
+                    "categ_id": cls.env.ref("product.product_category_all").id,
+                    "uom_id": cls.env.ref("uom.product_uom_unit").id,
+                    "uom_po_id": cls.env.ref("uom.product_uom_unit").id,
                 },
             ]
         )
-        country = self.env.ref("base.iq")
-        self.service_points = self.env["spp.service.point"].create(
+        country = cls.env.ref("base.iq")
+        cls.service_points = cls.env["spp.service.point"].create(
             [
                 {
                     "name": "Correct Phone Number",
@@ -45,23 +46,23 @@ class TestEntitlementManager(TransactionCase):
                 },
             ]
         )
-        self.registrants = self.env["res.partner"].create(
+        cls.registrants = cls.env["res.partner"].create(
             [
                 {
                     "name": "Registrant 1 [TEST]",
                     "is_registrant": True,
                     "is_group": True,
-                    "service_point_ids": [(6, 0, self.service_points.ids)],
+                    "service_point_ids": [(6, 0, cls.service_points.ids)],
                 },
                 {
                     "name": "Registrant 2 [TEST]",
                     "is_registrant": True,
                     "is_group": True,
-                    "service_point_ids": [(6, 0, self.service_points.ids)],
+                    "service_point_ids": [(6, 0, cls.service_points.ids)],
                 },
             ]
         )
-        self.program = self.env["g2p.program"].create(
+        cls.program = cls.env["g2p.program"].create(
             {
                 "name": "Program 1 [TEST]",
                 "program_membership_ids": [
@@ -69,7 +70,7 @@ class TestEntitlementManager(TransactionCase):
                         0,
                         0,
                         {
-                            "partner_id": self.registrants[0].id,
+                            "partner_id": cls.registrants[0].id,
                             "state": "enrolled",
                         },
                     ),
@@ -77,28 +78,28 @@ class TestEntitlementManager(TransactionCase):
                         0,
                         0,
                         {
-                            "partner_id": self.registrants[-1].id,
+                            "partner_id": cls.registrants[-1].id,
                             "state": "enrolled",
                         },
                     ),
                 ],
             }
         )
-        self.cycle = self.env["g2p.cycle"].create(
+        cls.cycle = cls.env["g2p.cycle"].create(
             {
                 "name": "Cycle 1 [TEST]",
-                "program_id": self.program.id,
+                "program_id": cls.program.id,
                 "start_date": fields.Date.today(),
                 "end_date": fields.Date.today(),
             }
         )
-        self._inkind_entitlement_manager = self.env[
+        cls._inkind_entitlement_manager = cls.env[
             "g2p.program.entitlement.manager.inkind"
         ].create(
             {
                 "name": "Entitlement Manager Inkind 1 [TEST]",
-                "program_id": self.program.id,
-                "warehouse_id": self.env.ref("stock.warehouse0").id,
+                "program_id": cls.program.id,
+                "warehouse_id": cls.env.ref("stock.warehouse0").id,
             }
         )
 

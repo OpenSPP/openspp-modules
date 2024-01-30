@@ -3,13 +3,14 @@ from odoo.tests import TransactionCase
 
 
 class TestIrModelFields(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.test_path = self.env["spp_api.path"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.test_path = cls.env["spp_api.path"].create(
             {
                 "name": "res.partner",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
                 "description": "GET res.partner",
                 "method": "get",
                 "field_ids": [
@@ -17,18 +18,18 @@ class TestIrModelFields(TransactionCase):
                         6,
                         0,
                         [
-                            self.env.ref("base.field_res_partner__name").id,
-                            self.env.ref("base.field_res_partner__write_date").id,
+                            cls.env.ref("base.field_res_partner__name").id,
+                            cls.env.ref("base.field_res_partner__write_date").id,
                         ],
                     )
                 ],
             }
         )
-        self.test_field_alias = self.env["spp_api.field.alias"].create(
+        cls.test_field_alias = cls.env["spp_api.field.alias"].create(
             {
-                "field_id": self.env.ref("base.field_res_partner__write_date").id,
+                "field_id": cls.env.ref("base.field_res_partner__write_date").id,
                 "alias_name": "last_updated",
-                "api_path_id": self.test_path.id,
+                "api_path_id": cls.test_path.id,
             }
         )
 
