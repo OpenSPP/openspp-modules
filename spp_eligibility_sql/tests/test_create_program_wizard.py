@@ -2,29 +2,30 @@ from odoo.tests import TransactionCase
 
 
 class TestCreateProgramWiz(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self._program_create_wiz = self.env["g2p.program.create.wizard"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._program_create_wiz = cls.env["g2p.program.create.wizard"].create(
             {
                 "name": "Test Program 1 [SQL Elibigility]",
                 "eligibility_kind": "sql_eligibility",
                 "sql_query": "select id from res_partner where z_ind_grp_num_eligible_children_under_12_months > 0",
                 "rrule_type": "monthly",
                 "cycle_duration": 1,
-                "currency_id": self.env.company.currency_id.id,
+                "currency_id": cls.env.company.currency_id.id,
                 "entitlement_kind": "cash",
                 "max_amount": 5.0,
             }
         )
-        self.journal_id = self._program_create_wiz.create_journal(
-            self._program_create_wiz.name, self._program_create_wiz.currency_id.id
+        cls.journal_id = cls._program_create_wiz.create_journal(
+            cls._program_create_wiz.name, cls._program_create_wiz.currency_id.id
         )
 
-        # self.program = self.env["g2p.program"].create(
+        # cls.program = cls.env["g2p.program"].create(
         #    {
-        #        "name": self._program_create_wiz.name,
-        #        "journal_id": self.journal_id,
-        #        "target_type": self._program_create_wiz.target_type,
+        #        "name": cls._program_create_wiz.name,
+        #        "journal_id": cls.journal_id,
+        #        "target_type": cls._program_create_wiz.target_type,
         #    }
         # )
 

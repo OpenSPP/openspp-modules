@@ -9,7 +9,7 @@
                     colspan="4"
                     col="4"
                     name='sql_eligibility'
-                    attrs="{'invisible':[('eligibility_kind','!=', 'sql_eligibility')]}"
+                    invisible="eligibility_kind != 'sql_eligibility'"
                 >
                     <field name="sql_query" colspan="4" />
                     <label for="sql_query_valid" />
