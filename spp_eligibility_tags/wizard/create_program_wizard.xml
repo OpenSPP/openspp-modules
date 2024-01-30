@@ -8,8 +8,8 @@
                 <group
                     colspan="4"
                     col="4"
-                    name='sql_eligibility'
-                    attrs="{'invisible':[('eligibility_kind','!=', 'tags_eligibility')]}"
+                    name='tags_eligibility'
+                    invisible="eligibility_kind != 'tags_eligibility'"
                 >
                     <field name="tags_id" colspan="4" />
                     <field name="area_id" colspan="4" />
