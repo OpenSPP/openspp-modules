@@ -3,8 +3,7 @@ from odoo import api, SUPERUSER_ID
 from . import models
 
 
-def post_init_hook(cr, registry):
-    env = api.Environment(cr, SUPERUSER_ID, {})
+def post_init_hook(env):
     contact_model = env.ref("base.model_res_partner")
     registrant_id_field = env.ref("spp_registrant_import.field_res_partner__spp_id")
     contact_import_match = env["spp.import.match"].search(
