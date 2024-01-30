@@ -13,21 +13,21 @@
                         type="object"
                         string="Import"
                         class="btn-primary"
-                        states="New,Uploaded"
+                        invisible="state not in ('New', 'Uploaded')"
                     />
                    <button
                         name="save_to_area"
                         type="object"
                         string="Save to Area"
                         class="btn-success"
-                        states="Imported"
+                        invisible="state != 'Imported'"
                     />
                     <button
                         name="cancel_import"
                         type="object"
                         string="Cancel"
                         class="btn-danger"
-                        states="Uploaded,Imported"
+                        invisible="state not in ('Uploaded', 'Imported')"
                     />
                     <field
                         name="state"
@@ -38,51 +38,40 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                     </div>
-                    <widget
-                        name="web_ribbon"
-                        title="NEW"
-                        bg_color="bg-warning"
-                        attrs="{'invisible': [('state', '!=', 'New')]}"
-                    />
+                    <widget name="web_ribbon" title="NEW" bg_color="bg-warning" invisible="state != 'New'" />
                     <widget
                         name="web_ribbon"
                         title="UPLOADED"
                         bg_color="bg-primary"
-                        attrs="{'invisible': [('state', '!=', 'Uploaded')]}"
+                        invisible="state != 'Uploaded'"
                     />
                     <widget
                         name="web_ribbon"
                         title="IMPORTED"
                         bg_color="bg-primary"
-                        attrs="{'invisible': [('state', '!=', 'Imported')]}"
+                        invisible="state != 'Imported'"
                     />
                     <widget
                         name="web_ribbon"
                         title="DONE"
                         bg_color="bg-success"
-                        attrs="{'invisible': [('state', '!=', 'Done')]}"
+                        invisible="state != 'Done'"
                     />
                     <div class="oe_title">
                         <h2>
-                            <field name="name" attrs="{'readonly':[('state','not in',('New','Uploaded'))]}" />
+                            <field name="name" readonly="state not in ('New', 'Uploaded')" />
                         </h2>
                         <div class="o_row">
                             <label for="excel_file" class="oe_read_only" string="Area Excel File: " /><field
                                 name="excel_file"
                                 filename="name"
-                                attrs="{'readonly':[('state','not in',('New','Uploaded'))]}"
+                                readonly="state not in ('New', 'Uploaded')"
                             />
                         </div>
                     </div>
                     <group colspan="4" col="4">
-                        <field
-                            name="upload_id"
-                            attrs="{'readonly':[('state','not in',('New','Uploaded'))]}"
-                        />
-                        <field
-                            name="date_uploaded"
-                            attrs="{'readonly':[('state','not in',('New','Uploaded'))]}"
-                        />
+                        <field name="upload_id" readonly="state not in ('New', 'Uploaded')" />
+                        <field name="date_uploaded" readonly="state not in ('New', 'Uploaded')" />
                         <field name="import_id" readonly="1" />
                         <field name="date_imported" readonly="1" />
                         <field name="validate_id" readonly="1" />
@@ -90,7 +79,7 @@
                         <field name="tot_rows_imported" readonly="1" />
                         <field name="tot_rows_error" readonly="1" />
                     </group>
-                    <field name="raw_data_ids" nolabel="1" attrs="{'readonly':[('state','!=','Done')]}">
+                    <field name="raw_data_ids" nolabel="1" readonly="state != 'Done'">
                         <tree
                             duplicate="0"
                             create="0"

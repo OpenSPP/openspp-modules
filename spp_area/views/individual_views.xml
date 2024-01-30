@@ -12,7 +12,7 @@
                     name="area_id"
                     placeholder="Area"
                     options="{'no_open': True, 'no_create': True}"
-                    attrs="{'readonly':[('disabled','!=',False)]}"
+                    readonly="disabled"
                 />
             </xpath>
         </field>
