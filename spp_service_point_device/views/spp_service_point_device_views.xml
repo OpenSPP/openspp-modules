@@ -45,14 +45,14 @@
                         string="Inactive"
                         name="action_change_is_active"
                         type="object"
-                        attrs="{'invisible': [('is_active', '=', False)]}"
+                        invisible="not is_active"
                     />
                     <button
                         string="Active"
                         name="action_change_is_active"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('is_active', '=', True)]}"
+                        invisible="is_active"
                     />
                 </header>
                 <sheet>
