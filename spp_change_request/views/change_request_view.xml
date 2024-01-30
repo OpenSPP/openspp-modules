@@ -194,6 +194,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 options="{'no_create': True,'no_open':True}"
                                 attrs="{'readonly':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
                                 domain="registrant_id_domain"
+                                force_save="1"
                                 class="oe_inline"
                             />
                             <field
@@ -212,7 +213,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <field
                                 name="applicant_id"
                                 options="{'no_create': True,'no_open':True}"
-                                attrs="{'readonly':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
+                                attrs="{'readonly':['|','|',('state','!=','draft'),('request_type_ref_id','!=',False),('registrant_is_applicant','=',True)]}"
                                 domain="applicant_id_domain"
                                 required="1"
                                 force_save="1"
@@ -225,7 +226,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 icon="fa-id-card-o"
                                 string="Scan ID Document"
                                 colspan="4"
-                                attrs="{'invisible':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
+                                attrs="{'invisible':['|','|',('state','!=','draft'),('request_type_ref_id','!=',False),('registrant_is_applicant','!=',False)]}"
                                 style="margin-left: 10px;"
                                 class="oe_inline"
                             />
@@ -234,7 +235,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 type="object"
                                 icon="fa-external-link"
                                 class="btn-success oe_inline"
-                                attrs="{'invisible':[('applicant_id','=',False)]}"
+                                attrs="{'invisible':['|',('applicant_id','=',False),('registrant_is_applicant','!=',False)]}"
                                 style="margin-left: 10px;"
                             />
                         </h3>
@@ -328,6 +329,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     <field name="request_type_ref_id" invisible="1" />
                     <field name="last_activity_id" invisible="1" />
                     <field name="registrant_id_domain" invisible="1" />
+                    <field name="registrant_is_applicant" invisible="1" />
                     <field name="applicant_id_domain" invisible="1" />
                     <field name="id" invisible="1" />
                 </sheet>

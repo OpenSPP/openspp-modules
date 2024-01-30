@@ -60,7 +60,11 @@ class ChangeRequestBase(models.Model):
         compute="_compute_registrant_id_domain",
         readonly=True,
         store=False,
+    )  #: Dynamic domain for determining if the registrant is a group or individual
+    registrant_is_applicant = fields.Boolean(
+        "Registrant is also the Applicant", default=False
     )
+    # When true, the applicant_id field will be disabled and will take the value of the registrant_id field
 
     # For ID Scanner Widget
     id_document_details = fields.Text("Scanned ID Document")
@@ -258,13 +262,20 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             domain = [("is_registrant", "=", True)]
             is_group = True
+            registrant_is_applicant = False
             if rec.request_type:
-                # Get is_group from CR type reference model
+                # Get IS_GROUP from CR type reference model
                 res_model = rec.request_type
                 is_group = self.env[res_model].IS_GROUP
+                registrant_is_applicant = self.env[res_model].REGISTRAR_IS_APPLICANT
             domain.append(("is_group", "=", is_group))
             _logger.info("Registrant_id Domain: %s" % domain)
-            rec.registrant_id_domain = json.dumps(domain)
+            rec.update(
+                {
+                    "registrant_id_domain": json.dumps(domain),
+                    "registrant_is_applicant": registrant_is_applicant,
+                }
+            )
 
     @api.onchange("registrant_id")
     def _onchange_registrant_id(self):

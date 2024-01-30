@@ -36,6 +36,7 @@ class ChangeRequestAddGroup(models.Model):
     )
     REQUIRED_DOCUMENT_TYPE = []
     IS_GROUP = False
+    REGISTRAR_IS_APPLICANT = True
 
     # Mandatory initialize source and destination center areas
     # If validators will be allowed for both, make the values the same
