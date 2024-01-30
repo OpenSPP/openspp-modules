@@ -1,4 +1,6 @@
-odoo.define("spp_scan_id_document.field", function (require) {
+// Web.AbstractField module is already deprecated in odoo 17, need to find a way to fix this.
+
+odoo.define("spp_scan_id_document.field", [], function (require) {
     const initialise_url = "http://localhost:12212/initialise";
     const readdocument_url = "http://localhost:12212/readdocument";
     const shutdown_url = "http://localhost:12212/shutdown";

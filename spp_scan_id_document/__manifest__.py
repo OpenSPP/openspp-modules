@@ -2,7 +2,7 @@
 {
     "name": "OpenSPP Registry - Scan ID Document",
     "category": "OpenSPP",
-    "version": "15.0.1.1.0",
+    "version": "17.0.1.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/openspp/openspp-modules",
@@ -13,7 +13,8 @@
     "data": ["views/registrant.xml"],
     "assets": {
         "web.assets_backend": [
-            "/spp_scan_id_document/static/src/js/registrant.js",
+            # web.AbstractField module is already deprecated in odoo 17
+            # "/spp_scan_id_document/static/src/js/registrant.js",
         ],
     },
     "demo": [],
