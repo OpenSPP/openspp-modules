@@ -17,16 +17,16 @@
                                     type="object"
                                     icon="fa-external-link"
                                     class="btn-success"
-                                    attrs="{'invisible': [('manager_ref_id', '=', False)]}"
-                                    context="{'default_program_id': active_id, 'create': False}"
+                                    invisible="not manager_ref_id"
+                                    context="{'default_program_id': id, 'create': False}"
                                 />
                                 <field
                                     name="manager_ref_id"
                                     options="{'no_quick_create': True}"
                                     string="Managers"
-                                    context="{'default_program_id':active_id}"
+                                    context="{'default_program_id':id}"
                                 />
-                                <field name="manager_id" invisible="1" />
+                                <field name="manager_id" column_invisible="1" />
                             </tree>
                             <form string="Compliance Manager">
                                 <sheet>

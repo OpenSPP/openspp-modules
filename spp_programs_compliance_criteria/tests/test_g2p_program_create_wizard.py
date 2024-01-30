@@ -7,9 +7,10 @@ from . import common
 
 
 class TestG2pProgramCreateWiz(common.Common):
-    def setUp(self):
-        super().setUp()
-        self._test = self.program_create_wizard({})
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._test = cls.program_create_wizard({})
 
     def test_01_create_program_without_compliance_manager(self):
         self._test._check_compliance_manager_info()

@@ -4,22 +4,23 @@ from . import common
 
 
 class TestG2pCycle(common.Common):
-    def setUp(self):
-        super().setUp()
-        self.individual_1 = self._create_individual({"name": "Individual 1"})
-        self.individual_2 = self._create_individual({"name": "Individual 2"})
-        self.individual_3 = self._create_individual({"name": "Individual 3"})
-        self._test = self.program_create_wizard(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.individual_1 = cls._create_individual({"name": "Individual 1"})
+        cls.individual_2 = cls._create_individual({"name": "Individual 2"})
+        cls.individual_3 = cls._create_individual({"name": "Individual 3"})
+        cls._test = cls.program_create_wizard(
             {
                 "target_type": "individual",
                 "compliance_criteria": True,
                 "compliance_kind": "g2p.program_membership.manager.default",
-                "compliance_domain": f"[['id', '=', {self.individual_3.id}]]",
+                "compliance_domain": f"[['id', '=', {cls.individual_3.id}]]",
                 "import_beneficiaries": "yes",
             }
         )
-        action = self._test.create_program()
-        self.program = self.env["g2p.program"].browse(action["res_id"])
+        action = cls._test.create_program()
+        cls.program = cls.env["g2p.program"].browse(action["res_id"])
 
     def _create_individual(self, vals):
         vals.update(

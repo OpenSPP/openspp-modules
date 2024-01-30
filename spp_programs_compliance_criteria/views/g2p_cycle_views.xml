@@ -14,7 +14,7 @@
                     icon="fa-filter"
                     class="btn-warning"
                     confirm="Filtering is one way action. Are you sure to do this?"
-                    attrs="{'invisible': [('allow_filter_compliance_criteria', '=', False)]}"
+                    invisible="not allow_filter_compliance_criteria"
                 />
                 <field name="allow_filter_compliance_criteria" invisible="1" />
             </xpath>

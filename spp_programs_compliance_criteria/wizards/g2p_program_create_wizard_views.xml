@@ -14,32 +14,32 @@
                 <page
                     name="compliance"
                     string="Configure the Compliance Criteria"
-                    attrs="{'invisible': [('compliance_criteria', '=', False)]}"
+                    invisible="not compliance_criteria"
                 >
                     <group>
                         <field
                             name="compliance_kind"
                             widget="radio"
                             options="{'horizontal': True}"
-                            attrs="{'required': [('compliance_criteria', '=', True)]}"
+                            required="compliance_criteria"
                         />
                     </group>
                     <group
                         name="compliance_domain"
-                        attrs="{'invisible': [('compliance_kind', '!=', 'g2p.program_membership.manager.default')]}"
+                        invisible="compliance_kind != 'g2p.program_membership.manager.default'"
                     >
                         <field
                             name="compliance_domain"
                             widget="domain"
                             options="{'model': 'res.partner', 'hide_result': True}"
-                            attrs="{'required': [('compliance_kind', '=', 'g2p.program_membership.manager.default')]}"
+                            required="compliance_kind == 'g2p.program_membership.manager.default'"
                         />
                     </group>
                     <group
                         name="compliance_sql"
                         colspan="4"
                         col="4"
-                        attrs="{'invisible': [('compliance_kind', '!=', 'g2p.program_membership.manager.sql')]}"
+                        invisible="compliance_kind != 'g2p.program_membership.manager.sql'"
                     >
                         <field name="compliance_sql" colspan="4" />
                         <label for="compliance_sql_query_valid" />
@@ -62,12 +62,12 @@
                     </group>
                     <group
                         name="compliance_tags"
-                        attrs="{'invisible': [('compliance_kind', '!=', 'g2p.program_membership.manager.tags')]}"
+                        invisible="compliance_kind != 'g2p.program_membership.manager.tags'"
                     >
                         <field
                             name="compliance_tag_id"
                             options="{'no_open': True, 'no_create_edit': True}"
-                            attrs="{'required': [('compliance_kind', '=', 'g2p.program_membership.manager.tags')]}"
+                            required="compliance_kind == 'g2p.program_membership.manager.tags'"
                         />
                     </group>
                 </page>
