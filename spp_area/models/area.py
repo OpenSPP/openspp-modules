@@ -83,28 +83,20 @@ class OpenSPPArea(models.Model):
         This computes the complete_name of the area to include its parent name
         """
         for rec in self:
-            cur_lang = rec._context.get("lang", False)
-            area_name = rec.env["ir.translation"]._get_ids(
-                "spp.area,name", "model", cur_lang, rec.ids
-            )
+            # TODO: consider language and translation of area name. ir.translation was removed starting Odoo16
+            # cur_lang = rec._context.get("lang", False)
+            # area_name = rec.env["ir.translation"]._get_ids(
+            #    "spp.area,name", "model", cur_lang, rec.ids
+            # )
 
             if rec.id:
                 if rec.parent_id:
-                    if area_name[rec.id]:
-                        rec.complete_name = "%s > %s" % (
-                            rec.parent_id.complete_name,
-                            area_name[rec.id],
-                        )
-                    else:
-                        rec.complete_name = "%s > %s" % (
-                            rec.parent_id.complete_name,
-                            rec.name,
-                        )
+                    rec.complete_name = "%s > %s" % (
+                        rec.parent_id.complete_name,
+                        rec.name,
+                    )
                 else:
                     rec.complete_name = rec.name
-                    if area_name[rec.id]:
-                        rec.complete_name = area_name[rec.id]
-
             else:
                 rec.complete_name = None
 
