@@ -8,7 +8,7 @@ _logger = logging.getLogger(__name__)
 class View(models.Model):
     _inherit = "ir.ui.view"
 
-    def _render_template(self, template, values=None, engine="ir.qweb"):
+    def _render_template(self, template, values=None):
         # if template in ['web.login', 'web.webclient_bootstrap']:
         if not values:
             values = {}
@@ -17,4 +17,4 @@ class View(models.Model):
             .sudo()
             .get_param("app_system_name", "OpenSPP")
         )
-        return super()._render_template(template, values=values, engine=engine)
+        return super()._render_template(template, values=values)
