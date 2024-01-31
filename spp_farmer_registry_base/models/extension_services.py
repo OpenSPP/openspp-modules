@@ -6,7 +6,7 @@ _logger = logging.getLogger(__name__)
 
 
 class ExtensionServices(models.Model):
-    _name = "extension.services"
+    _name = "spp.farm.extension"
     _description = "Extension Services"
 
     farm_id = fields.Many2one("res.partner", string="Farm", required=True)

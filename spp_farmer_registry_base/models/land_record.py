@@ -1,6 +1,7 @@
 from odoo import fields, models
 
 
+# We might move it to its own module
 class LandRecord(models.Model):
     _name = "spp.land.record"
     _description = "Land Record Details"
@@ -8,6 +9,8 @@ class LandRecord(models.Model):
     farm_id = fields.Many2one("res.partner", string="Farm")
     name = fields.Char(string="Parcel Name/ID")
     acreage = fields.Float()
+
+    # TODO: Change to geo_point and geo_polygon
     coordinates = fields.Char()
     geo_polygon = fields.Char()
 

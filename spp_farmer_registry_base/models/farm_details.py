@@ -3,7 +3,7 @@ from odoo import fields, models
 
 # TODO: Maybe make it an event data that is displayed as a tab in the Farm
 class FarmDetails(models.Model):
-    _inherit = "res.partner"
+    _name = "spp.farm.details"
 
     farm_id = fields.Many2one("res.partner", string="Farm")
 
@@ -23,3 +23,15 @@ class FarmDetails(models.Model):
     farm_size_under_livestock = fields.Float(string="Acreage Under Livestock")
     farm_size_leased_out = fields.Float(string="Acreage Leased Out")
     farm_size_idle = fields.Float(string="Acreage Fallow/Idle")
+
+    legal_status = fields.Selection(
+        [
+            ("self", "Owned by self"),
+            ("family", "Owned by family"),
+            ("extended community", "Owned by extended community"),
+            ("cooperative", "Owned by cooperative"),
+            ("government", "Owned by Government"),
+            ("leased", "Leased from actual owner"),
+            ("unknown", "Do not Know"),
+        ],
+    )

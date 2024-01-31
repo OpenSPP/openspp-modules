@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 # TODO: Look if there is an Odoo object we should extend instead of creating a new one
 class Species(models.Model):
-    _name = "spp.species"
+    _name = "spp.farm.species"
     _description = "Species"
 
     name = fields.Char(string="Species Name")

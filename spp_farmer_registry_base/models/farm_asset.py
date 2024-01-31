@@ -3,7 +3,7 @@ from odoo import api, fields, models
 
 # TODO: Look if there is an Odoo object we should extend instead of creating a new one
 class FarmAsset(models.Model):
-    _name = "farm.asset"
+    _name = "spp.farm.asset"
     _description = "Farm Assets and Technology"
 
     farm_id = fields.Many2one("res.partner", string="Farm", required=True)
