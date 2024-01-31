@@ -8,24 +8,23 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="name">view_group_ext_form_custom_spp_cr</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
-        <field
-            name="groups_id"
-            eval="[(4, ref('g2p_registry_base.group_g2p_registrar')), (4, ref('g2p_registry_base.group_g2p_admin'))]"
-        />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='other']" position="before">
-                <page string="Change Requests">
+                <page
+                    string="Change Requests"
+                    groups="g2p_registry_base.group_g2p_registrar,g2p_registry_base.group_g2p_admin"
+                >
                     <field name="change_request_ids" readonly="1" nolabel="1">
                         <tree editable="top">
                             <field name="name" />
                             <field name="date_requested" />
                             <field name="create_uid" string="Requested By" widget="many2one_avatar_user" />
                             <field name="request_type" />
-                            <field name="registrant_id" invisible="1" />
+                            <field name="registrant_id" column_invisible="1" />
                             <field name="applicant_id" />
-                            <field name="request_type_ref_id" invisible="1" />
+                            <field name="request_type_ref_id" column_invisible="1" />
                             <field name="assign_to_id" widget="many2one_avatar_user" />
-                            <field name="date_rejected" invisible="1" />
+                            <field name="date_rejected" column_invisible="1" />
                             <field name="company_id" groups="base.group_multi_company" />
                             <field
                                 name="state"

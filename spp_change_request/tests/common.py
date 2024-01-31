@@ -4,11 +4,12 @@ from odoo.tests import TransactionCase
 
 
 class Common(TransactionCase):
-    def setUp(self):
-        self._test_individual_1 = self._create_registrant({"name": "Liu Bei"})
-        self._test_individual_2 = self._create_registrant({"name": "Guan Yu"})
-        self._test_individual_3 = self._create_registrant({"name": "Zhang Fei"})
-        self._test_group = self._create_registrant(
+    @classmethod
+    def setUpClass(cls):
+        cls._test_individual_1 = cls._create_registrant({"name": "Liu Bei"})
+        cls._test_individual_2 = cls._create_registrant({"name": "Guan Yu"})
+        cls._test_individual_3 = cls._create_registrant({"name": "Zhang Fei"})
+        cls._test_group = cls._create_registrant(
             {
                 "name": "Shu clan",
                 "is_group": True,
@@ -17,23 +18,23 @@ class Common(TransactionCase):
                         0,
                         0,
                         {
-                            "individual": self._test_individual_1.id,
+                            "individual": cls._test_individual_1.id,
                             "kind": [
                                 (
                                     4,
-                                    self.env.ref(
+                                    cls.env.ref(
                                         "g2p_registry_membership.group_membership_kind_head"
                                     ).id,
                                 )
                             ],
                         },
                     ),
-                    (0, 0, {"individual": self._test_individual_2.id}),
-                    (0, 0, {"individual": self._test_individual_3.id}),
+                    (0, 0, {"individual": cls._test_individual_2.id}),
+                    (0, 0, {"individual": cls._test_individual_3.id}),
                 ],
             }
         )
-        return super().setUp()
+        return super().setUpClass()
 
     def _create_registrant(self, vals):
         assert type(vals) == dict

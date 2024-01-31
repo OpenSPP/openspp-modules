@@ -8,9 +8,10 @@ from .common import Common
 
 
 class TestChangeRequests(Common):
-    def setUp(self):
-        super().setUp()
-        self._test_change_request = self._create_change_request()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._test_change_request = cls._create_change_request()
 
     def test_01_create(self):
         self.assertEqual(

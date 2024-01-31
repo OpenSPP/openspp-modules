@@ -18,7 +18,7 @@
                         <field
                             name="assign_to_id"
                             options="{'no_create':True,'no_edit':True,'no_open':True}"
-                            attrs="{'invisible':[('assign_to_any','=',False)]}"
+                            invisible="not assign_to_any"
                         />
                     </group>
                     <field name="change_request_id" invisible="1" />
