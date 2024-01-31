@@ -8,7 +8,7 @@
             <form>
                 <field name="state" widget="statusbar" invisible="1" />
                 <sheet>
-                    <div attrs="{'invisible': [('state', '!=', '0')]}">
+                    <div invisible="state != '0'">
                         <div class="alert alert-info text-center" role="alert">
                             <strong>1. Organization Setup</strong>
                             &gt; 2. Registry Setup
@@ -42,7 +42,7 @@
                             options="{'no_create': True, 'no_open': True}"
                         />
                     </div>
-                    <div attrs="{'invisible': [('state', '!=', '1')]}">
+                    <div invisible="state != '1'">
                         <div class="alert alert-info text-center" role="alert">
                             1. Organization Setup
                             &gt; <strong>2. Registry Setup</strong>
@@ -81,7 +81,7 @@
                             options="{'horizontal': true}"
                         />
                     </div>
-                    <div attrs="{'invisible': [('state', '!=', '2')]}">
+                    <div invisible="state != '2'">
                         <div class="alert alert-info text-center" role="alert">
                             1. Organization Setup
                             &gt; 2. Registry Setup
@@ -102,7 +102,7 @@
                             options="{'horizontal': true}"
                         />
                     </div>
-                    <div attrs="{'invisible': [('state', '!=', '3')]}">
+                    <div invisible="state != '3'">
                         <div class="alert alert-info text-center" role="alert">
                             1. Organization Setup
                             &gt; 2. Registry Setup
@@ -129,7 +129,7 @@
                             options="{'horizontal': true}"
                         />
                     </div>
-                    <div attrs="{'invisible': [('state', '!=', '4')]}">
+                    <div invisible="state != '4'">
                         <div class="alert alert-info text-center" role="alert">
                             1. Organization Setup
                             &gt; 2. Registry Setup
@@ -150,7 +150,7 @@
                             options="{'horizontal': true}"
                         />
                     </div>
-                    <div attrs="{'invisible': [('state', '!=', '5')]}">
+                    <div invisible="state != '5'">
                         <div class="alert alert-info text-center" role="alert">
                             1. Organization Setup
                             &gt; 2. Registry Setup
@@ -177,21 +177,21 @@
                         string="Back"
                         name="action_last_state"
                         type="object"
-                        attrs="{'invisible': [('state', '=', '0')]}"
+                        invisible="state == '0'"
                         class="btn btn-secondary"
                     />
                     <button
                         string="Next"
                         name="action_next_state"
                         type="object"
-                        attrs="{'invisible': [('state', '=', '5')]}"
+                        invisible="state == '5'"
                         class="oe_highlight"
                     />
                     <button
                         string="Done"
                         name="action_done"
                         type="object"
-                        attrs="{'invisible': [('state', '!=', '5')]}"
+                        invisible="state != '5'"
                         class="oe_highlight"
                     />
                     <button string="Cancel" special="cancel" class="btn btn-secondary" />
