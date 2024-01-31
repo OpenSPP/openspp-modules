@@ -191,7 +191,7 @@
                                 <field name="applicant_relation" readonly="state != 'draft'" />
                             </group>
                         </page>
-                        <page string="Attachments">
+                        <page string="Attachments" invisible="1">
                             <!-- Attachment UI -->
                             <header invisible="state != 'draft'">
                                 <!-- <button
