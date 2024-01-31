@@ -1,0 +1,6 @@
+<odoo noupdate="1">
+    <record id="kind_farm" model="g2p.group.kind">
+        <field name="name">Farm</field>
+    </record>
+
+</odoo>

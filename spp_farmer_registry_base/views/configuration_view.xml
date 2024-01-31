@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Part of OpenSPPP Registry. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_species_tree" model="ir.ui.view">
+        <field name="name">view_species_tree</field>
+        <field name="model">spp.farm.species</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" required="1"/>
+                <field name="description" />
+                <field name="image" />
+                <field name="species_type" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_species" model="ir.actions.act_window">
+        <field name="name">Species</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.farm.species</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a species!
+            </p><p>
+                Click the create button to enter a new species.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_species_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_species_tree" />
+        <field name="act_window_id" ref="action_species" />
+    </record>
+
+    <menuitem
+        id="menu_species"
+        name="Species"
+        action="action_species"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="100"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
+    />
+
+</odoo>

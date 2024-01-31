@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_farm_activity_admin,Agricultural Activities Admin Access,spp_farmer_registry_base.model_spp_farm_activity,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_farm_extension_admin,Extension Services Admin Access,spp_farmer_registry_base.model_spp_farm_extension,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_farm_asset_admin,Farm Assets and Technology Admin Access,spp_farmer_registry_base.model_spp_farm_asset,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_asset_type_admin,Asset Type Admin Access,spp_farmer_registry_base.model_asset_type,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_machinery_type_admin,Machinery Type Admin Access,spp_farmer_registry_base.model_machinery_type,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_farm_details_admin,Farm Details Admin Access,spp_farmer_registry_base.model_spp_farm_details,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_land_record_admin,Land Record Details Admin Access,spp_farmer_registry_base.model_spp_land_record,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_farm_species_admin,Species Admin Access,spp_farmer_registry_base.model_spp_farm_species,g2p_registry_base.group_g2p_admin,1,1,1,1

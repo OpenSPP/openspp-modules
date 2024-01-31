@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 # We might move it to its own module
@@ -29,11 +29,22 @@ class LandRecord(models.Model):
     # list of `spp.species`` for livestock and aquaculture
     # when land_use is mixed, do not restrict the species
     species = fields.Many2many(
-        "spp.species",
-        domain="[('species_type', '=', land_use)|(land_use, '=', 'mixed')]",
+        "spp.farm.species"
+        # domain="['|',('species_type', '=', land_use),(land_use, '=', 'mixed')]",
     )
+    species_domain = fields.Binary("Species Domain", compute="_compute_species_domain")
 
     cultivation_method = fields.Selection(
         [("irrigated", "Irrigated"), ("rainfed", "Rainfed")],
         help="Relevant if land use is cultivation or mixed",
     )
+
+    @api.depends('land_use')
+    def _compute_species_domain(self):
+        for rec in self:
+            species_domain = []
+            if rec.land_use != 'mixed':
+                species_domain = [('species_type', '=', rec.land_use)]
+
+            rec.species_domain = species_domain
+

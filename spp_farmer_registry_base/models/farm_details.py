@@ -4,6 +4,7 @@ from odoo import fields, models
 # TODO: Maybe make it an event data that is displayed as a tab in the Farm
 class FarmDetails(models.Model):
     _name = "spp.farm.details"
+    _description = "Farm Details"
 
     farm_id = fields.Many2one("res.partner", string="Farm")
 

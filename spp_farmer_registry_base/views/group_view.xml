@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_farm_groups_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='ids']" position="before">
+                <page name="details" string="Farm Details">
+                    <notebook>
+                        <page name="farm_land" string="Land Record">
+                          <field name="farm_land_rec_ids">
+                              <tree editable="bottom">
+                                  <field name="farm_id" column_invisible="1"/>
+                                  <field name="name"/>
+                                  <field name="acreage"/>
+                                  <field name="coordinates"/>
+                                  <field name="geo_polygon"/>
+                                  <field name="land_use"/>
+                                  <field name="species_domain" column_invisible="1"/>
+                                  <field name="species" widget="many2many_tags" domain="species_domain"/>
+                                  <field name="cultivation_method"/>
+                              </tree>
+                          </field>
+                        </page>
+                        <page name="farm_details" string="Details">
+                          <field name="farm_details_ids">
+                              <tree editable="bottom">
+                                  <field name="farm_type"/>
+                                  <field name="farm_total_size"/>
+                                  <field name="farm_size_under_crops"/>
+                                  <field name="farm_size_under_livestock"/>
+                                  <field name="farm_size_leased_out"/>
+                                  <field name="farm_size_idle"/>
+                                  <field name="legal_status"/>
+                              </tree>
+                          </field>
+                        </page>
+                        <page name="farm_activity" string="Activity">
+                          <field name="farm_agri_act_ids">
+                              <tree editable="bottom">
+                                  <field name="farm_id" column_invisible="1"/>
+                                  <field name="land_id"/>
+                                  <field name="purpose"/>
+                                  <field name="activity_type"/>
+                                  <field name="species_id"/>
+                              </tree>
+                          </field>
+                        </page>
+                        <page name="farm_asset" string="Assets">
+                          <field name="farm_asset_ids">
+                              <tree editable="bottom">
+                                  <field name="farm_id" column_invisible="1"/>
+                                  <field name="land_id"/>
+                                  <field name="asset_type"/>
+                                  <field name="machinery_type"/>
+                                  <field name="technology_used"/>
+                                  <field name="quantity"/>
+                              </tree>
+                          </field>
+                        </page>
+                        <page name="farm_extension" string="Extension Services">
+                          <field name="farm_extension_ids">
+                              <tree editable="bottom">
+                                  <field name="farm_id" column_invisible="1"/>
+                                  <field name="land_id"/>
+                                  <field name="extension_services_type"/>
+                                  <field name="extension_services_provider"/>
+                                  <field name="extension_services_date"/>
+                                  <field name="extension_services_topic"/>
+                              </tree>
+                          </field>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
