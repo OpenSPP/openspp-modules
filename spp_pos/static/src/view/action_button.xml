@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
-  <t t-name="OrderLineEntitlement" owl="1">
+  <t t-name="OrderLineEntitlement">
     <button class="control-button" t-on-click="display_popup_entitlement">
             <i class="fa fa-gift" />
             <span>Entitlement
