@@ -30,9 +30,7 @@ class G2PDefaultEntitlementManagerCustom(models.Model):
 
         benecifiaries_with_entitlements = (
             self.env["g2p.entitlement"]
-            .search(
-                [("cycle_id", "=", cycle.id), ("partner_id", "in", benecifiaries_ids)]
-            )
+            .search([("cycle_id", "=", cycle.id), ("partner_id", "in", benecifiaries_ids)])
             .mapped("partner_id.id")
         )
         entitlements_to_create = [
@@ -45,18 +43,14 @@ class G2PDefaultEntitlementManagerCustom(models.Model):
         entitlement_end_validity = cycle.end_date
         entitlement_currency = self.currency_id.id
 
-        beneficiaries_with_entitlements_to_create = self.env["res.partner"].browse(
-            entitlements_to_create
-        )
+        beneficiaries_with_entitlements_to_create = self.env["res.partner"].browse(entitlements_to_create)
 
         individual_count = beneficiaries_with_entitlements_to_create.count_individuals()
         individual_count_map = dict(individual_count)
 
         entitlements = []
         for beneficiary_id in beneficiaries_with_entitlements_to_create:
-            amount = self._calculate_amount(
-                beneficiary_id, individual_count_map.get(beneficiary_id.id, 0)
-            )
+            amount = self._calculate_amount(beneficiary_id, individual_count_map.get(beneficiary_id.id, 0))
             transfer_fee = 0.0
             if self.transfer_fee_pct > 0.0:
                 transfer_fee = amount * (self.transfer_fee_pct / 100.0)
@@ -90,9 +84,7 @@ class G2PDefaultEntitlementManagerCustom(models.Model):
         """
         retval = None
         if self.id_type:
-            id_docs = beneficiary_id.reg_ids.filtered(
-                lambda a: a.id_type.id == self.id_type.id
-            )
+            id_docs = beneficiary_id.reg_ids.filtered(lambda a: a.id_type.id == self.id_type.id)
             if id_docs:
                 id_number = id_docs[0].value
                 retval = {

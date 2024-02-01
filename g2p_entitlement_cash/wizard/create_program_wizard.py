@@ -86,9 +86,7 @@ class G2PCreateNewProgramWizCashItem(models.TransientModel):
     _order = "sequence,id"
 
     sequence = fields.Integer(default=1000)
-    program_id = fields.Many2one(
-        "g2p.program.create.wizard", "New Program", required=True
-    )
+    program_id = fields.Many2one("g2p.program.create.wizard", "New Program", required=True)
 
     amount = fields.Monetary(
         currency_field="currency_id",

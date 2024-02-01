@@ -29,7 +29,6 @@ class OpenG2PGenerateData(models.Model):
     )
 
     def generate_sample_data(self):
-
         batches = math.ceil(self.num_groups / 1000)
         jobs = []
         for _i in range(0, batches):
@@ -69,16 +68,10 @@ class OpenG2PGenerateData(models.Model):
         # sex_choice_range = ["Female", "Male"] * 50 + ["Other"]
         sex_choice_range = ["Female", "Male"] * 50
         age_group_range = ["A", "C", "N"] * 2 + ["E"]
-        group_size_range = (
-            list(range(1, 2)) * 2 + list(range(3, 5)) * 4 + list(range(6, 8))
-        )
+        group_size_range = list(range(1, 2)) * 2 + list(range(3, 5)) * 4 + list(range(6, 8))
 
-        group_membership_kind_head_id = self.env.ref(
-            "g2p_registry_membership.group_membership_kind_head"
-        ).id
-        group_kind_household_id = self.env.ref(
-            "g2p_registry_group.group_kind_household"
-        ).id
+        group_membership_kind_head_id = self.env.ref("g2p_registry_membership.group_membership_kind_head").id
+        group_kind_household_id = self.env.ref("g2p_registry_group.group_kind_household").id
         # group_kind_family_id = self.env.ref("g2p_registry_group.group_kind_family").id
 
         num_groups = min(res.num_groups, 1000)
@@ -120,9 +113,7 @@ class OpenG2PGenerateData(models.Model):
 
             head["is_head"] = True
 
-            group_id = (
-                "demo." + hashlib.md5(f"{last_name} {i}".encode("UTF-8")).hexdigest()
-            )
+            group_id = "demo." + hashlib.md5(f"{last_name} {i}".encode()).hexdigest()
 
             group_kind = group_kind_household_id  # random.choice([group_kind_household_id, group_kind_family_id])
 
@@ -131,9 +122,7 @@ class OpenG2PGenerateData(models.Model):
             # Make sure we get a unique number
             while True:
                 bank_number = str(random.randint(111111111, 9999999999))
-                if not self.env["res.partner.bank"].search_count(
-                    [("acc_number", "=", bank_number)]
-                ):
+                if not self.env["res.partner.bank"].search_count([("acc_number", "=", bank_number)]):
                     break
 
             val = {
@@ -178,15 +167,11 @@ class OpenG2PGenerateData(models.Model):
             if random.randint(0, 2) == 0:
                 members[0]["is_principal_recipient"] = True
             else:
-                members[random.randint(0, group_size - 1)][
-                    "is_principal_recipient"
-                ] = True
+                members[random.randint(0, group_size - 1)]["is_principal_recipient"] = True
 
             for member in members:
                 is_head = True if (member and member.get("is_head")) else False
-                is_principal_recipient = (
-                    True if (member and member.get("is_principal_recipient")) else False
-                )
+                is_principal_recipient = True if (member and member.get("is_principal_recipient")) else False
 
                 if is_head:
                     member.pop("is_head", None)
@@ -249,9 +234,7 @@ class OpenG2PGenerateData(models.Model):
     ):
         sex = random.choice(sex_choice_range)
         age_group = random.choice(age_group_range)
-        first_name = (
-            fake.first_name_male() if sex == "Male" else fake.first_name_female()
-        )
+        first_name = fake.first_name_male() if sex == "Male" else fake.first_name_female()
         different_last_name = random.randint(0, 100) < 10
         if age_group == "N":
             date_start = datetime.datetime.now() - relativedelta(years=1)
@@ -289,11 +272,9 @@ class OpenG2PGenerateData(models.Model):
         if random.randint(0, 3) == 1:
             lost_primary_source_income = True
 
-        dob = fake.date_between_dates(
-            date_start=date_start, date_end=date_end
-        ).isoformat()
+        dob = fake.date_between_dates(date_start=date_start, date_end=date_end).isoformat()
 
-        fullname = "{} {}".format(first_name, last_name)
+        fullname = f"{first_name} {last_name}"
         bank_ids = []
         phone = ""
         # Do not give bank account to kids

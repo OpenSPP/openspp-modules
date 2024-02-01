@@ -1,11 +1,11 @@
 # generated from manifests external_dependencies
+PyLD
 apispec
 bravado_core
 faker
 jsonschema
-pyjwt>=2.4.0
-PyLD
 pyOpenSSL==22.0.0
+pyjwt>=2.4.0
 python-magic
 swagger_spec_validator
 xlrd

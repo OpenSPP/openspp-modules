@@ -12,9 +12,7 @@ class SPPEntitlementTransactions(models.Model):
     service_point_id = fields.Many2one("spp.service.point", string="Service Point")
     service_point_device_id = fields.Char(string="Service Point Device ID")
     user_id = fields.Many2one("res.users", "POS User", required=True)
-    timestamp_transaction_created = fields.Datetime(
-        string="Transaction Created", required=True
-    )
+    timestamp_transaction_created = fields.Datetime(string="Transaction Created", required=True)
     transaction_type = fields.Char()
     transaction_uuid = fields.Char(string="Transaction UUID", required=True)
 
@@ -22,9 +20,7 @@ class SPPEntitlementTransactions(models.Model):
         "res.currency",
         required=True,
     )
-    amount_charged_by_service_point = fields.Monetary(
-        currency_field="currency_id", default=0.0
-    )
+    amount_charged_by_service_point = fields.Monetary(currency_field="currency_id", default=0.0)
     value_remaining = fields.Monetary(currency_field="currency_id", default=0.0)
 
     program_id = fields.Many2one(
@@ -33,9 +29,7 @@ class SPPEntitlementTransactions(models.Model):
         related="entitlement_id.cycle_id.program_id",
         store=False,
     )
-    cycle_id = fields.Many2one(
-        "g2p.cycle", string="Cycle", related="entitlement_id.cycle_id", store=False
-    )
+    cycle_id = fields.Many2one("g2p.cycle", string="Cycle", related="entitlement_id.cycle_id", store=False)
 
     # Constraints
     _sql_constraints = [
@@ -58,9 +52,7 @@ class SPPInKindEntitlementTransactions(models.Model):
     service_point_id = fields.Many2one("spp.service.point", string="Service Point")
     service_point_device_id = fields.Char(string="Service Point Device ID")
     user_id = fields.Many2one("res.users", "POS User", required=True)
-    timestamp_transaction_created = fields.Datetime(
-        string="Transaction Created", required=True
-    )
+    timestamp_transaction_created = fields.Datetime(string="Transaction Created", required=True)
     transaction_type = fields.Char()
     transaction_uuid = fields.Char(string="Transaction UUID", required=True)
     product_id = fields.Many2one("product.product", string="Product")
@@ -71,9 +63,7 @@ class SPPInKindEntitlementTransactions(models.Model):
         "res.currency",
         required=True,
     )
-    amount_charged_by_service_point = fields.Monetary(
-        currency_field="currency_id", default=0.0
-    )
+    amount_charged_by_service_point = fields.Monetary(currency_field="currency_id", default=0.0)
     value_remaining = fields.Monetary(currency_field="currency_id", default=0.0)
 
     program_id = fields.Many2one(
@@ -82,9 +72,7 @@ class SPPInKindEntitlementTransactions(models.Model):
         related="entitlement_id.cycle_id.program_id",
         store=False,
     )
-    cycle_id = fields.Many2one(
-        "g2p.cycle", string="Cycle", related="entitlement_id.cycle_id", store=False
-    )
+    cycle_id = fields.Many2one("g2p.cycle", string="Cycle", related="entitlement_id.cycle_id", store=False)
 
     # Constraints
     _sql_constraints = [

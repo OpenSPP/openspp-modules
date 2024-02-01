@@ -9,9 +9,7 @@ _logger = logging.getLogger(__name__)
 class OpenSPPRegistrant(models.Model):
     _inherit = "res.partner"
 
-    id_requests = fields.One2many(
-        "spp.print.queue.id", "registrant_id", string="ID Requests"
-    )
+    id_requests = fields.One2many("spp.print.queue.id", "registrant_id", string="ID Requests")
 
     def open_request_id_wizard(self):
         view = self.env.ref("spp_idqueue.request_id_wizard_form_view")

@@ -47,17 +47,13 @@ class TestRecordConsentWiz(Common):
         )
 
     def test_03_compute_name(self):
-        test_consent = self._model.create(
-            {"signatory_id": self._test_individual_1.id, "expiry": fields.Date.today()}
-        )
+        test_consent = self._model.create({"signatory_id": self._test_individual_1.id, "expiry": fields.Date.today()})
         self.assertEqual(
             test_consent.name,
             "Tywin Lannister",
             "Consent Wizard should have same name with its signatory!",
         )
-        test_consent.write(
-            {"config_id": self.env.ref("spp_consent.default_consent_config").id}
-        )
+        test_consent.write({"config_id": self.env.ref("spp_consent.default_consent_config").id})
         self.assertEqual(
             test_consent.name,
             "Default-Tywin Lannister",

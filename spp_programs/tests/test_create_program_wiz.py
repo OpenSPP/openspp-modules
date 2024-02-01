@@ -58,9 +58,7 @@ class TestCreateProgramWiz(TransactionCase):
             "ir.actions.act_window",
             "Action for program should be returned!",
         )
-        self.assertEqual(
-            res["res_model"], "g2p.program", "Action for program should be return!"
-        )
+        self.assertEqual(res["res_model"], "g2p.program", "Action for program should be return!")
         self.assertTrue(res["res_id"], "New record for program should be existed!")
 
     def test_03_get_eligibility_manager(self):

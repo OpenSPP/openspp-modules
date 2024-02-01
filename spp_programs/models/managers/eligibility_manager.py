@@ -21,7 +21,7 @@ class SPPDefaultEligibilityManager(models.Model):
         eligibility_domain = "[]"
         if self.admin_area_ids:
             area_ids = self.admin_area_ids.ids
-            eligibility_domain = "[('area_id', 'in', ({}))]".format(area_ids)
+            eligibility_domain = f"[('area_id', 'in', ({area_ids}))]"
 
         self.eligibility_domain = eligibility_domain
 

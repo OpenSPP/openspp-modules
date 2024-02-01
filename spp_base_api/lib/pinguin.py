@@ -63,9 +63,7 @@ def validate_extra_field(field):
     :raise: werkzeug.exceptions.HTTPException if field is invalid.
     """
     if not isinstance(field, str):
-        return werkzeug.exceptions.HTTPException(
-            response=error_response(*CODE__invalid_spec)
-        )
+        return werkzeug.exceptions.HTTPException(response=error_response(*CODE__invalid_spec))
 
 
 def validate_spec(model, spec):
@@ -88,9 +86,7 @@ def validate_spec(model, spec):
         if isinstance(field, tuple):
             # Syntax checks
             if len(field) != 2:
-                raise Exception(
-                    "Tuples representing fields must have length 2. (%r)" % field
-                )
+                raise Exception("Tuples representing fields must have length 2. (%r)" % field)
             if not isinstance(field[1], (tuple, list)):
                 raise Exception(
                     """Tuples representing fields must have a tuple wrapped in
@@ -100,20 +96,11 @@ def validate_spec(model, spec):
             # Validity checks
             fld = self._fields[field[0]]
             if not fld.relational:
-                raise Exception(
-                    "Tuples representing fields can only specify relational fields. (%r)"
-                    % field
-                )
+                raise Exception("Tuples representing fields can only specify relational fields. (%r)" % field)
             if isinstance(field[1], tuple) and fld.type in ["one2many", "many2many"]:
-                raise Exception(
-                    "Specification of a 2many record cannot be a bare tuple. (%r)"
-                    % field
-                )
+                raise Exception("Specification of a 2many record cannot be a bare tuple. (%r)" % field)
         elif not isinstance(field, six.string_types):
-            raise Exception(
-                "Fields are represented by either a strings or tuples. Found: %r"
-                % type(field)
-            )
+            raise Exception("Fields are represented by either a strings or tuples. Found: %r" % type(field))
 
 
 def update(d, u):
@@ -182,9 +169,7 @@ def transform_dictfields_to_list_of_tuples(record, dct, ENV=False):
     :returns: The list of transformed fields.
     :rtype: list
     """
-    fields_with_meta = {
-        k: meta for k, meta in record.fields_get().items() if k in dct.keys()
-    }
+    fields_with_meta = {k: meta for k, meta in record.fields_get().items() if k in dct.keys()}
     result = {}
     for key, value in dct.items():
         if isinstance(value, dict):
@@ -226,9 +211,7 @@ def get_dictlist_from_model(model, spec, **kwargs):
     offset = kwargs.get("offset", 0)
     limit = kwargs.get("limit")
     order = kwargs.get("order")
-    include_fields = kwargs.get(
-        "include_fields", ()
-    )  # Not actually implemented on higher level (ACL!)
+    include_fields = kwargs.get("include_fields", ())  # Not actually implemented on higher level (ACL!)
     exclude_fields = kwargs.get("exclude_fields", ())
     delim = kwargs.get("delimeter", "/")
     ENV = kwargs.get("env", False)
@@ -251,11 +234,7 @@ def get_dictlist_from_model(model, spec, **kwargs):
 
     result = []
     for record in records:
-        result += [
-            get_dict_from_record(
-                record, spec, include_fields, exclude_fields, ENV, delim
-            )
-        ]
+        result += [get_dict_from_record(record, spec, include_fields, exclude_fields, ENV, delim)]
 
     return result
 
@@ -292,10 +271,9 @@ def get_model_for_read(model, ENV=False):
 # Python > 3.5
 # def get_dict_from_record(record, spec: tuple, include_fields: tuple, exclude_fields: tuple):
 
+
 # Extract nested values from a record
-def get_dict_from_record(
-    record, spec, include_fields, exclude_fields, ENV=False, delim="/"
-):
+def get_dict_from_record(record, spec, include_fields, exclude_fields, ENV=False, delim="/"):
     """Generates nested python dict representing one record.
     Going down to the record level, as the framework does not support nested
     data queries natively as they are typical for a REST API.
@@ -310,32 +288,24 @@ def get_dict_from_record(
     result = collections.OrderedDict([])
     _spec = [fld for fld in spec if fld not in exclude_fields] + list(include_fields)
     if list(filter(lambda x: isinstance(x, six.string_types) and delim in x, _spec)):
-        _spec = transform_dictfields_to_list_of_tuples(
-            record, transform_strfields_to_dict(_spec, delim), ENV
-        )
+        _spec = transform_dictfields_to_list_of_tuples(record, transform_strfields_to_dict(_spec, delim), ENV)
     validate_spec(record, _spec)
 
     for field in _spec:
-
         if isinstance(field, tuple):
             # It's a 2many (or a 2one specified as a list)
             if isinstance(field[1], list):
                 result[field[0]] = []
                 for rec in record[field[0]]:
-                    result[field[0]] += [
-                        get_dict_from_record(rec, field[1], (), (), ENV, delim)
-                    ]
+                    result[field[0]] += [get_dict_from_record(rec, field[1], (), (), ENV, delim)]
             # It's a 2one
             if isinstance(field[1], tuple):
-                result[field[0]] = get_dict_from_record(
-                    record[field[0]], field[1], (), (), ENV, delim
-                )
+                result[field[0]] = get_dict_from_record(record[field[0]], field[1], (), (), ENV, delim)
         # Normal field, or unspecified relational
         elif isinstance(field, six.string_types):
             if not hasattr(record, field):
                 raise odoo.exceptions.ValidationError(
-                    odoo._('The model "%s" has no such field: "%s".')
-                    % (record._name, field)
+                    odoo._('The model "%s" has no such field: "%s".') % (record._name, field)
                 )
 
             # result[field] = getattr(record, field)

@@ -52,9 +52,7 @@ class G2PGroup(models.Model):
         "HH adult members plus child members",
         store=True,
     )
-    z_ind_grp_num_members = fields.Integer(
-        "Number of members", compute="_compute_ind_grp_num_members", store=True
-    )
+    z_ind_grp_num_members = fields.Integer("Number of members", compute="_compute_ind_grp_num_members", store=True)
     z_ind_grp_num_adults = fields.Integer(
         "Number of adults",
         compute="_compute_ind_grp_num_adults",
@@ -117,22 +115,19 @@ class G2PGroup(models.Model):
     z_ind_grp_is_single_head_hh = fields.Boolean(
         "Is single-headed household",
         compute="_compute_ind_grp_is_single_head_hh",
-        help="Single-headed HH - extracted from demographic data of "
-        "HH adult members",
+        help="Single-headed HH - extracted from demographic data of " "HH adult members",
         store=True,
     )
     z_ind_grp_is_woman_head_hh = fields.Boolean(
         "Is female-headed household",
         compute="_compute_ind_grp_is_woman_head_hh",
-        help="Female-headed HH - extracted from demographic data of "
-        "HH adult members",
+        help="Female-headed HH - extracted from demographic data of " "HH adult members",
         store=True,
     )
     z_ind_grp_is_elderly_head_hh = fields.Boolean(
         "Is elderly-headed household",
         compute="_compute_ind_grp_is_eldery_head_hh",
-        help="Elderly-headed HHs - "
-        "extracted from demographic data of HH adult members",
+        help="Elderly-headed HHs - " "extracted from demographic data of HH adult members",
         store=True,
         recompute_daily=True,
     )
@@ -158,9 +153,7 @@ class G2PGroup(models.Model):
             ("birthdate", ">=", children),
             ("birthdate", "<", now - relativedelta(years=12)),
         ]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_num_children_12_and_above", None, domain
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_num_children_12_and_above", None, domain)
 
     def _compute_ind_grp_num_children_11_and_below(self):
         """
@@ -171,9 +164,7 @@ class G2PGroup(models.Model):
         domain = [
             ("birthdate", ">=", now - relativedelta(years=11)),
         ]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_num_children_11_and_below", None, domain
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_num_children_11_and_below", None, domain)
 
     def _compute_ind_grp_num_eldery(self):
         """
@@ -220,9 +211,7 @@ class G2PGroup(models.Model):
         # TODO: Should we exclude eldery?
         now = datetime.datetime.now()
         domain = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_is_single_head_hh", None, domain, presence_only=True
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_is_single_head_hh", None, domain, presence_only=True)
 
     def _compute_ind_grp_is_woman_head_hh(self):
         """
@@ -237,9 +226,7 @@ class G2PGroup(models.Model):
             ("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT)),
             ("gender", "=", "Female"),
         ]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_is_woman_head_hh", ["Head"], domain, presence_only=True
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_is_woman_head_hh", ["Head"], domain, presence_only=True)
 
     def _compute_ind_grp_is_eldery_head_hh(self):
         """
@@ -252,9 +239,7 @@ class G2PGroup(models.Model):
         _logger.info("self: %s", self)
         now = datetime.datetime.now()
         domain = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_is_elderly_head_hh", ["Head"], domain, presence_only=True
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_is_elderly_head_hh", ["Head"], domain, presence_only=True)
 
     def _compute_ind_grp_is_hh_with_children(self):
         """
@@ -264,9 +249,7 @@ class G2PGroup(models.Model):
         now = datetime.datetime.now()
         children = now - relativedelta(years=CHILDREN_AGE_LIMIT)
         domain = [("birthdate", ">=", children)]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_is_hh_with_children", None, domain, presence_only=True
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_is_hh_with_children", None, domain, presence_only=True)
 
     def _compute_ind_grp_is_hh_with_pregnant_lactating(self):
         """
@@ -290,9 +273,7 @@ class G2PGroup(models.Model):
         HHs with disabled (mental or physical) members
         """
         domain = [("z_cst_indv_disability_level", ">", 0)]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_is_hh_with_disabled", None, domain, presence_only=True
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_is_hh_with_disabled", None, domain, presence_only=True)
 
     def _compute_ind_grp_is_hh_with_medical_condition(self):
         """
@@ -313,6 +294,4 @@ class G2PGroup(models.Model):
         """
         now = datetime.datetime.now()
         domain = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_is_hh_with_elderly", None, domain, presence_only=True
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_is_hh_with_elderly", None, domain, presence_only=True)

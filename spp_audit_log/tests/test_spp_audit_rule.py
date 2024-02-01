@@ -8,12 +8,8 @@ class AuditRuleTest(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.model_1 = cls.env["ir.model"].search(
-            [("model", "=", "res.partner")], limit=1
-        )
-        cls.res_partner_rule = cls.env["spp.audit.rule"].search(
-            [("model_id", "=", cls.model_1.id)], limit=1
-        )
+        cls.model_1 = cls.env["ir.model"].search([("model", "=", "res.partner")], limit=1)
+        cls.res_partner_rule = cls.env["spp.audit.rule"].search([("model_id", "=", cls.model_1.id)], limit=1)
         if not cls.res_partner_rule:
             cls.res_partner_rule = AuditRuleTest.create_audit_rule(
                 name="Rule 1", model_id=cls.model_1.id, log_unlink=False
@@ -48,9 +44,7 @@ class AuditRuleTest(TransactionCase):
         self.assertFalse(self.res_partner.get_audit_rules("unlink").id)
 
     def test_register_hook(self):
-        self.assertTrue(
-            self.env["spp.audit.rule"]._register_hook([self.res_partner_rule.id])
-        )
+        self.assertTrue(self.env["spp.audit.rule"]._register_hook([self.res_partner_rule.id]))
         self.assertFalse(self.env["spp.audit.rule"]._register_hook([0]))
 
     def test_format_data_to_log(self):
@@ -71,9 +65,7 @@ class AuditRuleTest(TransactionCase):
             not_included_field: True,
         }
         fields_to_log = [field]
-        data = self.env["spp.audit.rule"]._format_data_to_log(
-            old_values, new_values, fields_to_log
-        )
+        data = self.env["spp.audit.rule"]._format_data_to_log(old_values, new_values, fields_to_log)
 
         self.assertIn(id_val, data.keys())
         self.assertIn("old", data[id_val].keys())

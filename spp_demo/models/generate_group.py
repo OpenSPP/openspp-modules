@@ -73,16 +73,10 @@ class G2PGenerateData(models.Model):
         sex_choice_range = sex_choices * 50
 
         age_group_range = ["A", "C"] * 2 + ["E"]
-        group_size_range = (
-            list(range(1, 2)) * 2 + list(range(3, 5)) * 4 + list(range(6, 8))
-        )
+        group_size_range = list(range(1, 2)) * 2 + list(range(3, 5)) * 4 + list(range(6, 8))
 
-        group_membership_kind_head_id = self.env.ref(
-            "g2p_registry_membership.group_membership_kind_head"
-        ).id
-        group_kind_household_id = self.env.ref(
-            "g2p_registry_group.group_kind_household"
-        ).id
+        group_membership_kind_head_id = self.env.ref("g2p_registry_membership.group_membership_kind_head").id
+        group_kind_household_id = self.env.ref("g2p_registry_group.group_kind_household").id
         group_kind_family_id = self.env.ref("g2p_registry_group.group_kind_family").id
 
         num_groups = min(res.num_groups, 1000)
@@ -110,9 +104,7 @@ class G2PGenerateData(models.Model):
 
             head["is_head"] = True
 
-            group_id = (
-                "demo." + hashlib.md5(f"{last_name} {i}".encode("UTF-8")).hexdigest()
-            )
+            group_id = "demo." + hashlib.md5(f"{last_name} {i}".encode()).hexdigest()
 
             group_kind = random.choice([group_kind_household_id, group_kind_family_id])
 
@@ -146,15 +138,11 @@ class G2PGenerateData(models.Model):
             if random.randint(0, 2) == 0:
                 members[0]["is_principal_recipient"] = True
             else:
-                members[random.randint(0, group_size - 1)][
-                    "is_principal_recipient"
-                ] = True
+                members[random.randint(0, group_size - 1)]["is_principal_recipient"] = True
 
             for member in members:
                 is_head = True if (member and member.get("is_head")) else False
-                is_principal_recipient = (
-                    True if (member and member.get("is_principal_recipient")) else False
-                )
+                is_principal_recipient = True if (member and member.get("is_principal_recipient")) else False
 
                 if is_head:
                     member.pop("is_head", None)
@@ -206,14 +194,10 @@ class G2PGenerateData(models.Model):
         # _logger.info("-" * 80)
         # _logger.info(json.dumps({"group": group, "members": members}, indent=4))
 
-    def _generate_individual_data(
-        self, fake, last_name, sex_choice_range, age_group_range, registration_date
-    ):
+    def _generate_individual_data(self, fake, last_name, sex_choice_range, age_group_range, registration_date):
         sex = random.choice(sex_choice_range)
         age_group = random.choice(age_group_range)
-        first_name = (
-            fake.first_name_male() if sex == "Male" else fake.first_name_female()
-        )
+        first_name = fake.first_name_male() if sex == "Male" else fake.first_name_female()
         different_last_name = random.randint(0, 100) < 10
         if age_group == "C":
             date_start = datetime.datetime.now() - relativedelta(years=17)
@@ -251,11 +235,9 @@ class G2PGenerateData(models.Model):
                     date_end=datetime.datetime.now(),
                 ).isoformat()
 
-        dob = fake.date_between_dates(
-            date_start=date_start, date_end=date_end
-        ).isoformat()
+        dob = fake.date_between_dates(date_start=date_start, date_end=date_end).isoformat()
 
-        fullname = "{} {}".format(first_name, last_name)
+        fullname = f"{first_name} {last_name}"
 
         return {
             "name": fullname,

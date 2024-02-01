@@ -33,9 +33,7 @@ class TestRegistrant(TransactionCase):
                             "kind": [
                                 (
                                     4,
-                                    cls.env.ref(
-                                        "g2p_registry_membership.group_membership_kind_head"
-                                    ).id,
+                                    cls.env.ref("g2p_registry_membership.group_membership_kind_head").id,
                                 )
                             ],
                         },
@@ -101,9 +99,7 @@ class TestRegistrant(TransactionCase):
 
     @patch("requests.post")
     def test_04_send_idpass_parameters_correct_vals_response_403(self, mock_post):
-        mock_post.return_value = Mock(
-            status_code=403, json=lambda: {"reason": "Not allowed mock post!"}
-        )
+        mock_post.return_value = Mock(status_code=403, json=lambda: {"reason": "Not allowed mock post!"})
         self._create_test_id_pass()
         vals = {"idpass": self._test_id_pass.id}
         with self.assertRaises(ValidationError):
@@ -132,6 +128,6 @@ class TestRegistrant(TransactionCase):
         today_strf = datetime.today().strftime("%Y-%m-%d")
         self.assertEqual(
             self._test_id_queue.id_pdf_filename,
-            "kclk_{}_{}.pdf".format(jon_snow_identification_number, today_strf),
+            f"kclk_{jon_snow_identification_number}_{today_strf}.pdf",
             "Id Queue should have correct PDF file name!",
         )

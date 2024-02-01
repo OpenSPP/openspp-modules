@@ -34,9 +34,7 @@ class G2PInKindEntitlementManager(models.Model):
 
     @api.model
     def _default_warehouse_id(self):
-        return self.env["stock.warehouse"].search(
-            [("company_id", "=", self.env.company.id)], limit=1
-        )
+        return self.env["stock.warehouse"].search([("company_id", "=", self.env.company.id)], limit=1)
 
     # In-Kind Entitlement Manager
     evaluate_single_item = fields.Boolean("Evaluate one item", default=False)
@@ -55,14 +53,10 @@ class G2PInKindEntitlementManager(models.Model):
         default=_default_warehouse_id,
         check_company=True,
     )
-    company_id = fields.Many2one(
-        "res.company", string="Company", related="program_id.company_id"
-    )
+    company_id = fields.Many2one("res.company", string="Company", related="program_id.company_id")
 
     # Group able to validate the payment
-    entitlement_validation_group_id = fields.Many2one(
-        "res.groups", string="Entitlement Validation Group"
-    )
+    entitlement_validation_group_id = fields.Many2one("res.groups", string="Entitlement Validation Group")
 
     def prepare_entitlements(self, cycle, beneficiaries):
         """Prepare In-Kind Entitlements.
@@ -72,13 +66,10 @@ class G2PInKindEntitlementManager(models.Model):
         :return:
         """
         if not self.entitlement_item_ids:
-            raise UserError(
-                _("There are no items entered for this entitlement manager.")
-            )
+            raise UserError(_("There are no items entered for this entitlement manager."))
 
         all_beneficiaries_ids = beneficiaries.mapped("partner_id.id")
         for rec in self.entitlement_item_ids:
-
             if rec.condition:
                 # Filter res.partner based on entitlement condition and get ids
                 domain = [("id", "in", all_beneficiaries_ids)]
@@ -116,9 +107,7 @@ class G2PInKindEntitlementManager(models.Model):
             entitlement_start_validity = cycle.start_date
             entitlement_end_validity = cycle.end_date
 
-            beneficiaries_with_entitlements_to_create = self.env["res.partner"].browse(
-                entitlements_to_create
-            )
+            beneficiaries_with_entitlements_to_create = self.env["res.partner"].browse(entitlements_to_create)
 
             entitlements = []
 
@@ -164,9 +153,7 @@ class G2PInKindEntitlementManager(models.Model):
         """
         retval = None
         if self.id_type:
-            id_docs = beneficiary_id.reg_ids.filtered(
-                lambda a: a.id_type.id == self.id_type.id
-            )
+            id_docs = beneficiary_id.reg_ids.filtered(lambda a: a.id_type.id == self.id_type.id)
             if id_docs:
                 id_number = id_docs[0].value
                 retval = {
@@ -220,16 +207,10 @@ class G2PInKindEntitlementManager(models.Model):
         jobs = []
         for i in range(0, entitlements_count, self.MAX_ROW_JOB_QUEUE):
             jobs.append(
-                self.delayable()._set_pending_validation_entitlements(
-                    cycle, offset=i, limit=self.MAX_ROW_JOB_QUEUE
-                )
+                self.delayable()._set_pending_validation_entitlements(cycle, offset=i, limit=self.MAX_ROW_JOB_QUEUE)
             )
         main_job = group(*jobs)
-        main_job.on_done(
-            self.delayable().mark_job_as_done(
-                cycle, _("Entitlements Set to Pending Validation.")
-            )
-        )
+        main_job.on_done(self.delayable().mark_job_as_done(cycle, _("Entitlements Set to Pending Validation.")))
         main_job.delay()
 
     def _set_pending_validation_entitlements(self, cycle, offset=0, limit=None):
@@ -311,9 +292,7 @@ class G2PInKindEntitlementManager(models.Model):
         :return:
         """
         _logger.debug("Validate entitlements asynchronously")
-        cycle.message_post(
-            body=_("Validate %s entitlements started.", entitlements_count)
-        )
+        cycle.message_post(body=_("Validate %s entitlements started.", entitlements_count))
         cycle.write(
             {
                 "locked": True,
@@ -323,17 +302,9 @@ class G2PInKindEntitlementManager(models.Model):
 
         jobs = []
         for i in range(0, entitlements_count, self.MAX_ROW_JOB_QUEUE):
-            jobs.append(
-                self.delayable()._validate_entitlements(
-                    cycle, offset=i, limit=self.MAX_ROW_JOB_QUEUE
-                )
-            )
+            jobs.append(self.delayable()._validate_entitlements(cycle, offset=i, limit=self.MAX_ROW_JOB_QUEUE))
         main_job = group(*jobs)
-        main_job.on_done(
-            self.delayable().mark_job_as_done(
-                cycle, _("Entitlements Validated and Approved.")
-            )
-        )
+        main_job.on_done(self.delayable().mark_job_as_done(cycle, _("Entitlements Validated and Approved.")))
         main_job.delay()
 
     def _validate_entitlements(self, cycle, offset=0, limit=None):
@@ -420,9 +391,7 @@ class G2PInKindEntitlementManager(models.Model):
                 state_err += 1
                 if sw == 0:
                     sw = 1
-                    message = _(
-                        "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
-                    )
+                    message = _("Entitlement State Error! Entitlements not in 'pending validation' state:\n")
                 message += _("Program: %(prg)s, Beneficiary: %(partner)s.\n") % {
                     "prg": rec.cycle_id.program_id.name,
                     "partner": rec.partner_id.name,
@@ -470,13 +439,9 @@ class G2PInKindEntitlementItem(models.Model):
     _order = "sequence,id"
 
     sequence = fields.Integer(default=1000)
-    entitlement_id = fields.Many2one(
-        "g2p.program.entitlement.manager.inkind", "In-kind Entitlement", required=True
-    )
+    entitlement_id = fields.Many2one("g2p.program.entitlement.manager.inkind", "In-kind Entitlement", required=True)
 
-    product_id = fields.Many2one(
-        "product.product", "Product", domain=[("type", "=", "product")], required=True
-    )
+    product_id = fields.Many2one("product.product", "Product", domain=[("type", "=", "product")], required=True)
 
     # non-mandatory field to store a domain that is used to verify if this item is valid for a beneficiary
     # For example, it could be: [('is_woman_headed_household, '=', True)]
@@ -498,6 +463,4 @@ class G2PInKindEntitlementItem(models.Model):
     )
 
     qty = fields.Integer("QTY", default=1, required=True)
-    uom_id = fields.Many2one(
-        "uom.uom", "Unit of Measure", related="product_id.uom_id", store=True
-    )
+    uom_id = fields.Many2one("uom.uom", "Unit of Measure", related="product_id.uom_id", store=True)

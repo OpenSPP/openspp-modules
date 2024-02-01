@@ -30,12 +30,8 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
             res["assign_to"] = self.env.context["assign_to"]
         return res
 
-    change_request_id = fields.Many2one(
-        "spp.change.request", "Change Request", required=True
-    )
-    curr_assign_to_id = fields.Many2one(
-        "res.users", "Currently Assigned to", related="change_request_id.assign_to_id"
-    )
+    change_request_id = fields.Many2one("spp.change.request", "Change Request", required=True)
+    curr_assign_to_id = fields.Many2one("res.users", "Currently Assigned to", related="change_request_id.assign_to_id")
     assign_to_id = fields.Many2one("res.users", "User")
     assign_to_id_domain = fields.Char(
         compute="_compute_assign_to_id_domain",
@@ -62,14 +58,11 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
 
     @api.depends("assign_to_id")
     def _compute_assign_to_id_domain(self):
-
         group_ids = [
             self.env.ref("spp_change_request.group_spp_change_request_agent").id,
             self.env.ref("spp_change_request.group_spp_change_request_validator").id,
             self.env.ref("spp_change_request.group_spp_change_request_applicator").id,
-            self.env.ref(
-                "spp_change_request.group_spp_change_request_administrator"
-            ).id,
+            self.env.ref("spp_change_request.group_spp_change_request_administrator").id,
         ]
 
         user_group_ids = self.env.user.groups_id.ids

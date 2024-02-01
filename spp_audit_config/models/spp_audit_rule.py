@@ -16,7 +16,7 @@ class SppAuditRule(models.Model):
         log_unlink=True,
         parent_rule_name="",
         connecting_field_name="",
-        **kwargs
+        **kwargs,
     ):
         rule = self.env["spp.audit.rule"].search([("name", "=", rule_name)], limit=1)
 
@@ -41,9 +41,7 @@ class SppAuditRule(models.Model):
             }
 
             if parent_rule_name and connecting_field_name:
-                parent_rule = self.env["spp.audit.rule"].search(
-                    [("name", "=", parent_rule_name)], limit=1
-                )
+                parent_rule = self.env["spp.audit.rule"].search([("name", "=", parent_rule_name)], limit=1)
                 if parent_rule:
                     connecting_field = self.env["ir.model.fields"].search(
                         [

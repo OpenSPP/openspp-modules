@@ -34,18 +34,14 @@ class InKindEntitlement(models.TransientModel):
                 "edit": False,
                 "delete": False,
             }
-            tree_id = self.env.ref(
-                "spp_programs.view_entitlement_inkind_report_tree"
-            ).id
+            tree_id = self.env.ref("spp_programs.view_entitlement_inkind_report_tree").id
             form_id = self.env.ref("spp_programs.view_entitlement_inkind_form").id
             return {
                 "name": _("In-kind Entitlement Report"),
                 "view_mode": "tree",
                 "res_model": "g2p.entitlement.inkind",
                 "views": [(tree_id, "tree"), (form_id, "form")],
-                "search_view_id": self.env.ref(
-                    "spp_programs.action_entitlement_report_inkind"
-                ).id,
+                "search_view_id": self.env.ref("spp_programs.action_entitlement_report_inkind").id,
                 "domain": domain,
                 "context": context,
                 "type": "ir.actions.act_window",

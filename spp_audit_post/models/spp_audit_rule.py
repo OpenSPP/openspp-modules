@@ -14,9 +14,7 @@ class SppAuditRule(models.Model):
         string="Parent Rule",
         domain=[("model_id.is_mail_thread", "=", True)],
     )
-    child_ids = fields.One2many(
-        "spp.audit.rule", "parent_id", string="Related Rules", readonly=True
-    )
+    child_ids = fields.One2many("spp.audit.rule", "parent_id", string="Related Rules", readonly=True)
 
     is_mail_thread = fields.Boolean(related="model_id.is_mail_thread")
 
@@ -60,9 +58,7 @@ class SppAuditRule(models.Model):
     def _check_model_id_field_id(self):
         for rec in self:
             if rec.parent_id and not rec.field_id:
-                raise ValidationError(
-                    _("Field is required if the rule is a child rule.")
-                )
+                raise ValidationError(_("Field is required if the rule is a child rule."))
             if rec.parent_id and rec.field_id.relation != rec.parent_id.model_id.model:
                 error_msg = f"Field's relation should be {rec.parent_id.model_id.name}"
                 raise ValidationError(_(error_msg))
@@ -86,9 +82,7 @@ class SppAuditRule(models.Model):
         # get the model name and ids of the most parent rule
         # loop will break if a rule doesn't have parent rule
         while parent_rule_id:
-            current_records = self.env[currect_model_records["model"]].browse(
-                currect_model_records["ids"]
-            )
+            current_records = self.env[currect_model_records["model"]].browse(currect_model_records["ids"])
             currect_model_records["model"] = parent_rule_id.model_id.model
             new_ids = []
             for record in current_records:
@@ -98,9 +92,7 @@ class SppAuditRule(models.Model):
             current_rule_id = parent_rule_id
             parent_rule_id = parent_rule_id.parent_id
 
-        return currect_model_records["model"], [
-            str(record_id) for record_id in currect_model_records["ids"]
-        ]
+        return currect_model_records["model"], [str(record_id) for record_id in currect_model_records["ids"]]
 
     def get_audit_log_vals(self, res_id, method, data):
         result = super().get_audit_log_vals(res_id, method, data)
@@ -109,9 +101,7 @@ class SppAuditRule(models.Model):
 
         result.update(
             {
-                "parent_model_id": self.env["ir.model"]
-                .search([("model", "=", parent_model)], limit=1)
-                .id,
+                "parent_model_id": self.env["ir.model"].search([("model", "=", parent_model)], limit=1).id,
                 "parent_res_ids_str": ",".join(parent_res_ids),
             }
         )

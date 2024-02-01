@@ -38,9 +38,7 @@ class SPPAPIField(models.Model):
 
     def create_api_field_name_alias(self):
         self.ensure_one()
-        return self.field_id.with_context(
-            default_api_path_id=self.path_id.id
-        ).create_api_field_name_alias()
+        return self.field_id.with_context(default_api_path_id=self.path_id.id).create_api_field_name_alias()
 
     def _get_field_name(self):
         self.ensure_one()

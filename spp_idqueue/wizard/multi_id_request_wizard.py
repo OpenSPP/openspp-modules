@@ -21,9 +21,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
         """
         res = super(OpenSPPMultiIDRequestWizard, self).default_get(fields)
         if self.env.context.get("active_ids"):
-            registrant_ids = self.env["res.partner"].search(
-                [("id", "in", self.env.context.get("active_ids"))]
-            )
+            registrant_ids = self.env["res.partner"].search([("id", "in", self.env.context.get("active_ids"))])
             if registrant_ids:
                 res["registrant_ids"] = registrant_ids
             return res
@@ -33,9 +31,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
     registrant_ids = fields.Many2many("res.partner")
     id_type = fields.Many2one("g2p.id.type")
     is_idpass = fields.Boolean(default=False)
-    idpass_id = fields.Many2one(
-        "spp.id.pass", "IDPass ID", domain="[('id_type', '=', id_type)]"
-    )
+    idpass_id = fields.Many2one("spp.id.pass", "IDPass ID", domain="[('id_type', '=', id_type)]")
     target_type = fields.Char(compute="_compute_target_type")
 
     @api.depends("registrant_ids")
@@ -58,10 +54,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
         """
         for rec in self:
             rec.is_idpass = False
-            if (
-                rec.id_type
-                and rec.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id
-            ):
+            if rec.id_type and rec.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id:
                 rec.is_idpass = True
 
     def create_requests(self):
@@ -72,9 +65,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
             if rec.id_type:
                 if rec.registrant_ids:
                     params = self.env["ir.config_parameter"].sudo()
-                    auto_approve_id_request = params.get_param(
-                        "spp_id_queue.auto_approve_id_request"
-                    )
+                    auto_approve_id_request = params.get_param("spp_id_queue.auto_approve_id_request")
                     status = "new"
                     if auto_approve_id_request:
                         status = "approved"

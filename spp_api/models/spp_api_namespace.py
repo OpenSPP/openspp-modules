@@ -17,7 +17,6 @@ _logger = logging.getLogger(__name__)
 
 
 class Namespace(models.Model):
-
     _name = "spp_api.namespace"
     _description = "Integration"
 
@@ -51,12 +50,8 @@ class Namespace(models.Model):
     #     string="Accesses",
     #     context={"active_test": False},
     # )
-    path_ids = fields.One2many(
-        "spp_api.path", "namespace_id", string="Paths", context={"active_test": False}
-    )
-    user_ids = fields.Many2many(
-        "res.users", string="Allowed Users", default=lambda self: self.env.user
-    )
+    path_ids = fields.One2many("spp_api.path", "namespace_id", string="Paths", context={"active_test": False})
+    user_ids = fields.Many2many("res.users", string="Allowed Users", default=lambda self: self.env.user)
 
     token = fields.Char(
         "Identification token",
@@ -135,7 +130,7 @@ class Namespace(models.Model):
                 ("produces", ["application/json"]),
                 (
                     "paths",
-                    {}
+                    {},
                     # region::REPORT::
                     # {
                     #     "/report/pdf/{report_external_id}/{docids}": {
@@ -283,7 +278,5 @@ class Namespace(models.Model):
             )
 
     def _compute_log_count(self):
-        self._cr.execute(
-            "SELECT COUNT(*) FROM spp_api_log WHERE namespace_id=(%s);", [str(self.id)]
-        )
+        self._cr.execute("SELECT COUNT(*) FROM spp_api_log WHERE namespace_id=(%s);", [str(self.id)])
         self.log_count = self._cr.dictfetchone()["count"]

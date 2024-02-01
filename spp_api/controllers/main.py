@@ -46,14 +46,12 @@ class OAS(http.Controller):
         :return:
         """
 
-        namespaces = (
-            http.request.env["spp_api.namespace"].sudo().search([["active", "=", True]])
-        )
+        namespaces = http.request.env["spp_api.namespace"].sudo().search([["active", "=", True]])
         api_urls = []
         for namespace in namespaces:
             api_urls.append(
                 {
-                    "name": "{}: {}".format(namespace.name, namespace.version_name),
+                    "name": f"{namespace.name}: {namespace.version_name}",
                     "url": namespace.spec_url,
                 }
             )
@@ -105,7 +103,7 @@ class OAS(http.Controller):
         return werkzeug.wrappers.Response(
             json.dumps(namespace.get_oas(version), default=date_utils.json_default),
             status=200,
-            **response_params
+            **response_params,
         )
 
     @http.route(
@@ -125,10 +123,8 @@ class OAS(http.Controller):
             raise werkzeug.exceptions.NotFound()
         if namespace.token != kwargs.get("token"):
             raise werkzeug.exceptions.Forbidden()
-        namespace_oas_data = json.dumps(
-            namespace.get_oas(version), default=date_utils.json_default
-        )
+        namespace_oas_data = json.dumps(namespace.get_oas(version), default=date_utils.json_default)
         html_template_dir = join(dirname(dirname(realpath(__file__))), "templates")
-        with open(join(html_template_dir, "index.html"), "r") as file:
+        with open(join(html_template_dir, "index.html")) as file:
             return_html = file.read() % namespace_oas_data
         return werkzeug.wrappers.Response(return_html, status=200, mimetype="text/html")

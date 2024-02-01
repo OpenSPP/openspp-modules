@@ -81,9 +81,7 @@ class ChangeRequestAddChildren(models.Model):
     phone = fields.Char("Phone Number")
     uid_number = fields.Char("UID Number")
 
-    kind = fields.Many2many(
-        "g2p.group.membership.kind", string="Group Membership Types"
-    )
+    kind = fields.Many2many("g2p.group.membership.kind", string="Group Membership Types")
 
     applicant_relation = fields.Selection(
         [("father", "Father"), ("mother", "Mother"), ("grandfather", "Grandfather")],
@@ -91,9 +89,7 @@ class ChangeRequestAddChildren(models.Model):
     )
 
     # Target Group Fields
-    group_member_ids = fields.One2many(
-        "spp.change.request.group.members", "group_add_children_id", "Group Members"
-    )
+    group_member_ids = fields.One2many("spp.change.request.group.members", "group_add_children_id", "Group Members")
 
     # Add domain to inherited field: validation_ids
     validation_ids = fields.Many2many(
@@ -126,9 +122,7 @@ class ChangeRequestAddChildren(models.Model):
             cr = rec.change_request_id
             country_code = (
                 cr.registrant_id.country_id.code
-                if cr.registrant_id
-                and cr.registrant_id.country_id
-                and cr.registrant_id.country_id.code
+                if cr.registrant_id and cr.registrant_id.country_id and cr.registrant_id.country_id.code
                 else None
             )
             if country_code is None:
@@ -145,10 +139,7 @@ class ChangeRequestAddChildren(models.Model):
     @api.depends("given_name", "addl_name", "family_name")
     def _compute_full_name(self):
         for rec in self:
-            full_name = (
-                f"{rec.family_name or ''}, {rec.given_name or ''}"
-                f" {rec.addl_name or ''}"
-            )
+            full_name = f"{rec.family_name or ''}, {rec.given_name or ''}" f" {rec.addl_name or ''}"
             rec.full_name = full_name.title()
 
     @api.onchange("id_document_details")
@@ -170,9 +161,7 @@ class ChangeRequestAddChildren(models.Model):
                         dms_vals = {
                             "name": "UID_" + details["document_number"] + ".jpg",
                             "directory_id": directory_id,
-                            "category_id": self.env.ref(
-                                "spp_change_request.spp_dms_uid_card"
-                            ).id,
+                            "category_id": self.env.ref("spp_change_request.spp_dms_uid_card").id,
                             "content": details["image"],
                         }
                         # TODO: Should be added to vals["dms_file_ids"] but it is
@@ -192,9 +181,7 @@ class ChangeRequestAddChildren(models.Model):
                     }
                     self.update(vals)
         else:
-            raise UserError(
-                _("There are no directories defined for this change request.")
-            )
+            raise UserError(_("There are no directories defined for this change request."))
 
     def validate_data(self):
         super().validate_data()
@@ -247,9 +234,7 @@ class ChangeRequestAddChildren(models.Model):
             uid_rec = [
                 Command.create(
                     {
-                        "id_type": self.env.ref(
-                            "spp_change_request_add_children_demo.unified_id_type"
-                        ).id,
+                        "id_type": self.env.ref("spp_change_request_add_children_demo.unified_id_type").id,
                         "value": self.uid_number,
                     }
                 )

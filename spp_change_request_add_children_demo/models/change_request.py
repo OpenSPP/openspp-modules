@@ -6,7 +6,6 @@ _logger = logging.getLogger(__name__)
 
 
 class ChangeRequestBaseCustomDemo(models.Model):
-
     _inherit = "spp.change.request"
 
     def create_request_detail_demo(self):
@@ -21,10 +20,7 @@ class ChangeRequestBaseCustomDemo(models.Model):
                 # Set the request_type_ref_id
                 res_model = rec.request_type
                 # Set the dms directory
-                _logger.debug(
-                    "Change Request: DMS Directory Creation (%s)"
-                    % len(self.dms_directory_ids)
-                )
+                _logger.debug("Change Request: DMS Directory Creation (%s)" % len(self.dms_directory_ids))
                 storage = self.env.ref(self.env[res_model].DMS_STORAGE)
                 dmsval = {
                     "storage_id": storage.id,

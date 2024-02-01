@@ -6,9 +6,7 @@ class TestSppApiNamespace(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls._namespace = cls.env["spp_api.namespace"].create(
-            {"name": "test", "version_name": "v1"}
-        )
+        cls._namespace = cls.env["spp_api.namespace"].create({"name": "test", "version_name": "v1"})
         cls.env["ir.config_parameter"].set_param("web.base.url", "https://local.host")
         cls._db_name = cls.env.cr.dbname
 
@@ -110,9 +108,7 @@ class TestSppApiNamespace(TransactionCase):
                             0,
                             0,
                             {
-                                "field_id": self.env.ref(
-                                    "base.field_res_partner__name"
-                                ).id,
+                                "field_id": self.env.ref("base.field_res_partner__name").id,
                             },
                         ),
                     ],
@@ -128,9 +124,7 @@ class TestSppApiNamespace(TransactionCase):
                             0,
                             0,
                             {
-                                "field_id": self.env.ref(
-                                    "base.field_res_partner__name"
-                                ).id,
+                                "field_id": self.env.ref("base.field_res_partner__name").id,
                             },
                         ),
                     ],
@@ -158,8 +152,6 @@ class TestSppApiNamespace(TransactionCase):
             self._namespace.get_oas(self._namespace.version_name)
             output = []
             for out in log_catcher.output:
-                out = out.replace(
-                    "DEBUG:odoo.addons.spp_api.models.spp_api_namespace:", ""
-                )
+                out = out.replace("DEBUG:odoo.addons.spp_api.models.spp_api_namespace:", "")
                 output.append(out.split(":", 1)[0])
             self.assertEqual(output, ["path", "OAS_part_for_model", "spec"] * 5)

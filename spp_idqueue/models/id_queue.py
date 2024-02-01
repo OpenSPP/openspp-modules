@@ -109,10 +109,7 @@ class OpenSPPIDQueue(models.Model):
         """
         These are used to generate the ID from the request
         """
-        if self.filtered(
-            lambda x: x.status
-            not in ["generating", "generated", "approved", "added_to_batch"]
-        ):
+        if self.filtered(lambda x: x.status not in ["generating", "generated", "approved", "added_to_batch"]):
             raise ValidationError(_("ID must be approved before printing"))
 
         for rec in self:
@@ -154,9 +151,7 @@ class OpenSPPIDQueue(models.Model):
         This function is used to set the request as distributed
         """
         if not self.filtered(lambda x: x.status in ["printed"]):
-            raise ValidationError(
-                _("ID can only be distributed if it has been printed")
-            )
+            raise ValidationError(_("ID can only be distributed if it has been printed"))
         for rec in self:
             rec.date_distributed = date.today()
             rec.status = "distributed"
@@ -208,9 +203,7 @@ class OpenSPPIDQueue(models.Model):
             message = _("%s request(s) are now being generated.", max_rec)
             kind = "info"
         else:
-            message = _(
-                "Please select at least 1 approved request which need to generate!"
-            )
+            message = _("Please select at least 1 approved request which need to generate!")
             kind = "warning"
         return self._display_notification(message, kind)
 
@@ -230,9 +223,7 @@ class OpenSPPIDQueue(models.Model):
             message = _("%s request(s) are printed.", len(queue_id))
             kind = "info"
         else:
-            message = _(
-                "Please select at least 1 generated request which need to print!"
-            )
+            message = _("Please select at least 1 generated request which need to print!")
             kind = "warning"
         return self._display_notification(message, kind)
 
@@ -248,9 +239,7 @@ class OpenSPPIDQueue(models.Model):
             message = _("%s request(s) are distributed.", len(queue_id))
             kind = "info"
         else:
-            message = _(
-                "Please select at least 1 printed request which need to distribute!"
-            )
+            message = _("Please select at least 1 printed request which need to distribute!")
             kind = "warning"
         return self._display_notification(message, kind)
 
@@ -304,18 +293,12 @@ class ResConfigSettings(models.TransientModel):
 
     def set_values(self):
         res = super(ResConfigSettings, self).set_values()
-        self.env["ir.config_parameter"].set_param(
-            "spp_id_queue.auto_approve_id_request", self.auto_approve_id_request
-        )
+        self.env["ir.config_parameter"].set_param("spp_id_queue.auto_approve_id_request", self.auto_approve_id_request)
         return res
 
     @api.model
     def get_values(self):
         res = super(ResConfigSettings, self).get_values()
         params = self.env["ir.config_parameter"].sudo()
-        res.update(
-            auto_approve_id_request=params.get_param(
-                "spp_id_queue.auto_approve_id_request"
-            )
-        )
+        res.update(auto_approve_id_request=params.get_param("spp_id_queue.auto_approve_id_request"))
         return res

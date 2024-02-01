@@ -123,11 +123,7 @@ class OpenSPPAreaImport(models.Model):
                             elif col_name.find("Area") >= 0:
                                 maxcolsstr = col_name.strip("Area").replace("Name", "")
                             maxcols_name_length = len(maxcolsstr)
-                            if (
-                                maxcols_name_length == 6
-                                or maxcols_name_length == 5
-                                or maxcols_name_length == 4
-                            ):
+                            if maxcols_name_length == 6 or maxcols_name_length == 5 or maxcols_name_length == 4:
                                 maxcolsstr = maxcolsstr[:-3]
                                 maxcolsstr = maxcolsstr.replace("_", "")
                             try:
@@ -139,7 +135,6 @@ class OpenSPPAreaImport(models.Model):
                     if max_cols <= 10:
                         xcols = max_cols
                         while xcols >= 0:
-
                             admin_code = None
                             admin_name = None
                             admin_ref = None
@@ -151,11 +146,8 @@ class OpenSPPAreaImport(models.Model):
                             remarks = ""
                             # Loop through the columns
                             lang = {}
-                            Languages = self.env["res.lang"].search(
-                                [("active", "=", True)]
-                            )
+                            Languages = self.env["res.lang"].search([("active", "=", True)])
                             for col in range(sheet.ncols):
-
                                 # Get the column value
                                 col_value = sheet.cell(row, col).value
                                 if col_value == "<Null>":
@@ -163,10 +155,7 @@ class OpenSPPAreaImport(models.Model):
 
                                 # Determine the column name based on First Row rowIndex(0), columnIndex(col)
                                 col_name = sheet.cell(0, col).value
-                                if (
-                                    col_name.find(str(xcols) + "Code") >= 0
-                                    or col_name.find(str(xcols) + "Pcode") >= 0
-                                ):
+                                if col_name.find(str(xcols) + "Code") >= 0 or col_name.find(str(xcols) + "Pcode") >= 0:
                                     admin_code = col_value
                                 elif col_name.find(str(xcols) + "Name") >= 0:
                                     if not admin_name:
@@ -174,18 +163,10 @@ class OpenSPPAreaImport(models.Model):
                                         if not col_value:
                                             errctr += 1
                                             state = "Error"
-                                            remarks += (
-                                                str(errctr)
-                                                + ".) Name cannot be blank; "
-                                            )
+                                            remarks += str(errctr) + ".) Name cannot be blank; "
 
                                     for Lang in Languages:
-                                        if (
-                                            col_name.find(
-                                                str(xcols) + "Name_" + Lang.iso_code
-                                            )
-                                            >= 0
-                                        ):
+                                        if col_name.find(str(xcols) + "Name_" + Lang.iso_code) >= 0:
                                             lang.update(
                                                 {
                                                     Lang.iso_code: {
@@ -204,9 +185,7 @@ class OpenSPPAreaImport(models.Model):
                                     admin_alt2 = col_value
                                 elif col_name.find(str(xcols) + "Kind") >= 0:
                                     admin_kind = col_value
-                                _logger.info(
-                                    "Area Masterlist Import: LANGUAGES: %s" % lang
-                                )
+                                _logger.info("Area Masterlist Import: LANGUAGES: %s" % lang)
                             lang_ids = []
                             for x in lang:
                                 lang_ids.append([0, 0, lang[x]])
@@ -245,9 +224,7 @@ class OpenSPPAreaImport(models.Model):
             for val in columns:
                 vals.append([0, 0, val])
 
-            _logger.info(
-                "Area Masterlist Import: Updating Record: %s" % fields.Datetime.now()
-            )
+            _logger.info("Area Masterlist Import: Updating Record: %s" % fields.Datetime.now())
             mainvals.update(
                 {
                     "date_imported": fields.Datetime.now(),
@@ -260,9 +237,7 @@ class OpenSPPAreaImport(models.Model):
             )
             rec.update(mainvals)
 
-            _logger.info(
-                "Area Masterlist Import: Completed: %s" % fields.Datetime.now()
-            )
+            _logger.info("Area Masterlist Import: Completed: %s" % fields.Datetime.now())
 
     def save_to_area(self):
         """
@@ -277,9 +252,7 @@ class OpenSPPAreaImport(models.Model):
                         area_kind = None
                         area_kind_id = None
                         if raw.admin_kind:
-                            area_kind = self.env["spp.area.kind"].search(
-                                [("name", "=", raw.admin_kind)]
-                            )
+                            area_kind = self.env["spp.area.kind"].search([("name", "=", raw.admin_kind)])
                             if not area_kind:
                                 vals = [{"name": raw.admin_kind}]
                                 area_kind = self.env["spp.area.kind"].create(vals)

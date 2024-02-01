@@ -6,7 +6,7 @@
     "author": "OpenSPP.org",
     "development_status": "Alpha",
     "external_dependencies": {"python": ["pyjwt>=2.4.0"]},
-    "website": "https://github.com/openspp/openspp-modules",
+    "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "depends": [
         "base",

@@ -19,9 +19,7 @@ class G2pProgramCreateWizard(models.TransientModel):
         default="g2p.program_membership.manager.default",
     )
     compliance_domain = fields.Text(default="[]")
-    compliance_tag_id = fields.Many2one(
-        comodel_name="g2p.registrant.tags", string="Compliance Tag"
-    )
+    compliance_tag_id = fields.Many2one(comodel_name="g2p.registrant.tags", string="Compliance Tag")
     compliance_sql = fields.Text(string="SQL Query")
     compliance_sql_query_valid = fields.Selection(
         [
@@ -66,30 +64,20 @@ class G2pProgramCreateWizard(models.TransientModel):
         err_msg = _("Not enough information for creating compliance manager!")
         if not self.compliance_kind:
             raise ValidationError(err_msg)
-        if (
-            self.compliance_kind == "g2p.program_membership.manager.default"
-            and not self.compliance_domain
-        ):
+        if self.compliance_kind == "g2p.program_membership.manager.default" and not self.compliance_domain:
             raise ValidationError(err_msg)
         elif self.compliance_kind == "g2p.program_membership.manager.sql" and (
             not self.compliance_sql or self.compliance_sql_query_valid != "valid"
         ):
             raise ValidationError(err_msg)
-        elif (
-            self.compliance_kind == "g2p.program_membership.manager.tags"
-            and not self.compliance_tag_id
-        ):
+        elif self.compliance_kind == "g2p.program_membership.manager.tags" and not self.compliance_tag_id:
             raise ValidationError(err_msg)
 
     def _create_compliance_manager(self, program):
         self.ensure_one()
         program.ensure_one()
         self._check_compliance_manager_info()
-        manager = (
-            self.env[self.compliance_kind]
-            .sudo()
-            .create(self._prepare_compliance_criteria_create_vals(program))
-        )
+        manager = self.env[self.compliance_kind].sudo().create(self._prepare_compliance_criteria_create_vals(program))
         program.write(
             {
                 "compliance_managers": [
@@ -97,8 +85,7 @@ class G2pProgramCreateWizard(models.TransientModel):
                         0,
                         0,
                         {
-                            "manager_ref_id": "%s,%d"
-                            % (self.compliance_kind, manager.id),
+                            "manager_ref_id": "%s,%d" % (self.compliance_kind, manager.id),
                         },
                     ),
                 ],

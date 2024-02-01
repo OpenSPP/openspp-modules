@@ -37,9 +37,7 @@ class OpenSPPRequestIDWizard(models.TransientModel):
         for rec in self:
             if rec.id_type:
                 params = self.env["ir.config_parameter"].sudo()
-                auto_approve_id_request = params.get_param(
-                    "spp_id_queue.auto_approve_id_request"
-                )
+                auto_approve_id_request = params.get_param("spp_id_queue.auto_approve_id_request")
                 status = "new"
                 if auto_approve_id_request:
                     status = "approved"
@@ -62,12 +60,6 @@ class OpenSPPRequestIDWizard(models.TransientModel):
         """
         for rec in self:
             rec.is_idpass = False
-            _logger.info(
-                "ID REQUEST: %s %s"
-                % (rec.id_type.id, self.env.ref("spp_idpass.id_type_idpass").id)
-            )
-            if (
-                rec.id_type
-                and rec.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id
-            ):
+            _logger.info("ID REQUEST: %s %s" % (rec.id_type.id, self.env.ref("spp_idpass.id_type_idpass").id))
+            if rec.id_type and rec.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id:
                 rec.is_idpass = True

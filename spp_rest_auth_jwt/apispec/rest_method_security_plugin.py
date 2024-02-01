@@ -26,9 +26,7 @@ class RestMethodSecurityPlugin(BasePlugin):
     def operation_helper(self, path=None, operations=None, **kwargs):
         routing = kwargs.get("routing")
         if not routing:
-            super(RestMethodSecurityPlugin, self).operation_helper(
-                path, operations, **kwargs
-            )
+            super(RestMethodSecurityPlugin, self).operation_helper(path, operations, **kwargs)
         if not operations:
             return
         auth = routing.get("auth", self.spec._params.get("default_auth"))

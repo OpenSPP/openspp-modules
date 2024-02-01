@@ -14,10 +14,7 @@ class G2pCycleManagerDefault(models.Model):
                 "0",
             )
         )
-        if (
-            automated_beneficiaries_filtering_mechanism == "1"
-            and cycle.program_id.compliance_managers
-        ):
+        if automated_beneficiaries_filtering_mechanism == "1" and cycle.program_id.compliance_managers:
             domain = cycle._get_compliance_criteria_domain()
             new_domain = AND([domain, [["id", "in", beneficiaries]]])
             beneficiaries = self.env["res.partner"].sudo().search(new_domain).ids

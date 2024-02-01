@@ -10,9 +10,7 @@ class DataSourceKeyValueMixin(models.AbstractModel):
     value = fields.Text(required=True)
 
     key_uniq_error_message = "Key must be unique in this Data Source."
-    _sql_constraints = [
-        ("key_uniq", "unique (data_source_id, key)", key_uniq_error_message)
-    ]
+    _sql_constraints = [("key_uniq", "unique (data_source_id, key)", key_uniq_error_message)]
 
     def get_mapping(self):
         mapping = {}

@@ -47,15 +47,9 @@ def create_api_log(func):
             raise werkzeug.exceptions.HTTPException(
                 response=error_response(400, "Bad Request", "request_id is required.")
             )
-        if (
-            request.env["spp_api.log"]
-            .search([("request_id", "=", request_id)])
-            .exists()
-        ):
+        if request.env["spp_api.log"].search([("request_id", "=", request_id)]).exists():
             raise werkzeug.exceptions.HTTPException(
-                response=error_response(
-                    400, "Bad Request", "request_id is already taken."
-                )
+                response=error_response(400, "Bad Request", "request_id is already taken.")
             )
 
         initial_val = {
@@ -80,11 +74,7 @@ def create_api_log(func):
 
         # Response Log
         json_response = json.loads(response.response[0])
-        reply_id = (
-            isinstance(json_response, dict)
-            and json_response.get("reply_id", None)
-            or self.get_reply_id()
-        )
+        reply_id = isinstance(json_response, dict) and json_response.get("reply_id", None) or self.get_reply_id()
         response_log_val = initial_val.copy()
         response_log_val["http_type"] = "response"
         response_log_val["reply_id"] = reply_id
@@ -123,27 +113,18 @@ class ApiV1Controller(http.Controller):
     # ReadOne # UpdateOne # UnlinkOne
     _api_endpoint_model_id = _api_endpoint + "/<model>/<int:id>"
     # Call Method on Singleton Record
-    _api_endpoint_model_id_method = (
-        _api_endpoint + "/<model>/<int:id>/call/<method_name>"
-    )
+    _api_endpoint_model_id_method = _api_endpoint + "/<model>/<int:id>/call/<method_name>"
     # Call Method on RecordSet
     _api_endpoint_model_method = _api_endpoint + "/<model>/call/<method_name>"
     _api_endpoint_model_method_ids = _api_endpoint + "/<model>/call/<method_name>/<ids>"
     # Get Reports
-    _api_report_docids = (
-        _api_endpoint
-        + "/report/<any(pdf, html):converter>/<report_external_id>/<docids>"
-    )
+    _api_report_docids = _api_endpoint + "/report/<any(pdf, html):converter>/<report_external_id>/<docids>"
 
     def get_reply_id(self):
         reply_id = ""
         while True:
             reply_id = str(uuid.uuid4())
-            if (
-                not request.env["spp_api.log"]
-                .search([("reply_id", "=", reply_id)])
-                .exists()
-            ):
+            if not request.env["spp_api.log"].search([("reply_id", "=", reply_id)]).exists():
                 break
         return reply_id
 
@@ -164,9 +145,7 @@ class ApiV1Controller(http.Controller):
         read_domain += [("id", "=", id)]
         obj = records.search(read_domain, limit=1)
         if not obj:
-            raise werkzeug.exceptions.HTTPException(
-                response=error_response(*CODE__obj_not_found)
-            )
+            raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__obj_not_found))
         return obj
 
     # #################
@@ -174,9 +153,7 @@ class ApiV1Controller(http.Controller):
     # #################
 
     # CreateOne`
-    @pinguin.route(
-        _api_endpoint_model, methods=["POST"], type="http", auth="none", csrf=False
-    )
+    @pinguin.route(_api_endpoint_model, methods=["POST"], type="http", auth="none", csrf=False)
     @create_api_log
     def create_one__POST(self, namespace, version, model, **kw):
         path = kw.get("path")
@@ -195,9 +172,7 @@ class ApiV1Controller(http.Controller):
         return successful_response(201, response)
 
     # ReadMulti (optional: filters, offset, limit, order, include_fields, exclude_fields):
-    @pinguin.route(
-        _api_endpoint_model, methods=["GET"], type="http", auth="none", csrf=False
-    )
+    @pinguin.route(_api_endpoint_model, methods=["GET"], type="http", auth="none", csrf=False)
     @create_api_log
     def read_multi__GET(self, namespace, version, model, **kw):
         path = kw.get("path")
@@ -221,9 +196,7 @@ class ApiV1Controller(http.Controller):
         return successful_response(200, response_data)
 
     # ReadOne (optional: include_fields, exclude_fields)
-    @pinguin.route(
-        _api_endpoint_model_id, methods=["GET"], type="http", auth="none", csrf=False
-    )
+    @pinguin.route(_api_endpoint_model_id, methods=["GET"], type="http", auth="none", csrf=False)
     @create_api_log
     def read_one__GET(self, namespace, version, model, id, **kw):
         path = kw.get("path")
@@ -244,9 +217,7 @@ class ApiV1Controller(http.Controller):
         return successful_response(200, response_data)
 
     # UpdateOne
-    @pinguin.route(
-        _api_endpoint_model_id, methods=["PUT"], type="http", auth="none", csrf=False
-    )
+    @pinguin.route(_api_endpoint_model_id, methods=["PUT"], type="http", auth="none", csrf=False)
     @create_api_log
     def update_one__PUT(self, namespace, version, model, id, **kw):
         path = kw.get("path")
@@ -265,9 +236,7 @@ class ApiV1Controller(http.Controller):
         return successful_response(200, response)
 
     # UnlinkOne
-    @pinguin.route(
-        _api_endpoint_model_id, methods=["DELETE"], type="http", auth="none", csrf=False
-    )
+    @pinguin.route(_api_endpoint_model_id, methods=["DELETE"], type="http", auth="none", csrf=False)
     @create_api_log
     def unlink_one__DELETE(self, namespace, version, model, id, **kw):
         path = kw.get("path")
@@ -296,9 +265,7 @@ class ApiV1Controller(http.Controller):
         csrf=False,
     )
     @create_api_log
-    def call_method_one__PATCH(
-        self, namespace, version, model, id, method_name, **method_params
-    ):
+    def call_method_one__PATCH(self, namespace, version, model, id, method_name, **method_params):
         path = method_params.get("path")
         del method_params["path"]
 
@@ -319,9 +286,7 @@ class ApiV1Controller(http.Controller):
         csrf=False,
     )
     @create_api_log
-    def call_method_multi__PATCH(
-        self, namespace, version, model, method_name, ids=None, **method_params
-    ):
+    def call_method_multi__PATCH(self, namespace, version, model, method_name, ids=None, **method_params):
         path = method_params.get("path")
         del method_params["path"]
 
@@ -344,9 +309,7 @@ class ApiV1Controller(http.Controller):
         return successful_response(200, data=data)
 
     # Get Report
-    @pinguin.route(
-        _api_report_docids, methods=["GET"], type="http", auth="none", csrf=False
-    )
+    @pinguin.route(_api_report_docids, methods=["GET"], type="http", auth="none", csrf=False)
     def report__GET(self, converter, namespace, report_external_id, docids):
         return pinguin.wrap__resource__get_report(
             namespace=namespace,

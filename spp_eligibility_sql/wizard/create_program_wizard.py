@@ -14,9 +14,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
     _inherit = "g2p.program.create.wizard"
 
     # SQL-base Eligibility Manager
-    eligibility_kind = fields.Selection(
-        selection_add=[("sql_eligibility", "SQL-base Eligibility")]
-    )
+    eligibility_kind = fields.Selection(selection_add=[("sql_eligibility", "SQL-base Eligibility")])
     sql_query = fields.Text(string="SQL Query")
     sql_query_valid = fields.Selection(
         [
@@ -101,9 +99,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             try:
                 self._cr.execute(sql_query)  # pylint: disable=sql-injection
             except Exception as e:
-                _logger.debug(
-                    "SQL-based Eligibility Wizard: Database Query Error: %s" % e
-                )
+                _logger.debug("SQL-based Eligibility Wizard: Database Query Error: %s" % e)
                 sql_query_valid = "invalid"
                 sql_query_valid_message = _("Database Query Error: %s") % e
                 self._cr.rollback()
@@ -113,18 +109,14 @@ class SPPCreateNewProgramWiz(models.TransientModel):
                 if beneficiaries:
                     if not beneficiaries[0].get("id"):
                         sql_query_valid = "invalid"
-                        sql_query_valid_message = _(
-                            "The SQL Query must return the record ID field."
-                        )
+                        sql_query_valid_message = _("The SQL Query must return the record ID field.")
                     else:
                         record_count = len(beneficiaries)
                         sql_query_valid = "valid"
                         sql_query_valid_message = None
                 else:
                     sql_query_valid = "valid"
-                    sql_query_valid_message = _(
-                        "The SQL Query is valid but it did not return any record."
-                    )
+                    sql_query_valid_message = _("The SQL Query is valid but it did not return any record.")
             rec.update(
                 {
                     "sql_query_valid": sql_query_valid,
@@ -139,9 +131,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
         res = super()._check_required_fields()
         if self.eligibility_kind == "sql_eligibility":
             if not self.sql_query:
-                raise UserError(
-                    _("A SQL Query is needed for this eligibility criteria type.")
-                )
+                raise UserError(_("A SQL Query is needed for this eligibility criteria type."))
             elif not self.sql_query_valid:
                 raise UserError(_("The SQL Query must be validated first."))
             elif not self.sql_record_count:

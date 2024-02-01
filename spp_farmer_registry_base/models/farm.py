@@ -9,28 +9,14 @@ class Farm(models.Model):
     }
 
     coordinates = fields.GeoPoint(string="GPS Coordinates")
-    farm_asset_ids = fields.One2many(
-        "spp.farm.asset", "asset_farm_id", string="Farm Assets"
-    )
-    farm_machinery_ids = fields.One2many(
-        "spp.farm.asset", "machinery_farm_id", string="Farm Machinery"
-    )
-    farm_details_ids = fields.One2many(
-        "spp.farm.details", "details_farm_id", string="Farm Details"
-    )
-    farm_land_rec_ids = fields.One2many(
-        "spp.land.record", "land_farm_id", string="Land Record"
-    )
+    farm_asset_ids = fields.One2many("spp.farm.asset", "asset_farm_id", string="Farm Assets")
+    farm_machinery_ids = fields.One2many("spp.farm.asset", "machinery_farm_id", string="Farm Machinery")
+    farm_details_ids = fields.One2many("spp.farm.details", "details_farm_id", string="Farm Details")
+    farm_land_rec_ids = fields.One2many("spp.land.record", "land_farm_id", string="Land Record")
 
-    farm_extension_ids = fields.One2many(
-        "spp.farm.extension", "farm_id", string="Farm Extension Services"
-    )
-    farm_crop_act_ids = fields.One2many(
-        "spp.farm.activity", "crop_farm_id", string="Crop Agricultural Activities"
-    )
-    farm_live_act_ids = fields.One2many(
-        "spp.farm.activity", "live_farm_id", string="Livestock Agricultural Activities"
-    )
+    farm_extension_ids = fields.One2many("spp.farm.extension", "farm_id", string="Farm Extension Services")
+    farm_crop_act_ids = fields.One2many("spp.farm.activity", "crop_farm_id", string="Crop Agricultural Activities")
+    farm_live_act_ids = fields.One2many("spp.farm.activity", "live_farm_id", string="Livestock Agricultural Activities")
     farm_aqua_act_ids = fields.One2many(
         "spp.farm.activity",
         "aqua_farm_id",

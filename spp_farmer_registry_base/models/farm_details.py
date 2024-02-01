@@ -15,7 +15,7 @@ class FarmDetails(models.Model):
             ("aquaculture", "Aquaculture"),
             ("mixed", "Mixed"),
         ],
-        string="Farm Type"
+        string="Farm Type",
     )
 
     farm_total_size = fields.Float(string="Farm Size")
@@ -36,5 +36,5 @@ class FarmDetails(models.Model):
             ("leased", "Leased from actual owner"),
             ("unknown", "Do not Know"),
         ],
-        string="Legal Status"
+        string="Legal Status",
     )

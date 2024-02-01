@@ -32,7 +32,9 @@ class AgriculturalActivity(models.Model):
     )
 
     species_id = fields.Many2one(
-        "spp.farm.species", string="Species", domain="[('species_type', '=', activity_type)]"
+        "spp.farm.species",
+        string="Species",
+        domain="[('species_type', '=', activity_type)]",
     )
 
     @api.onchange("farm_id")

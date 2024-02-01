@@ -40,23 +40,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     DMS_STORAGE = None
     AUTO_APPLY_CHANGES = True
 
-    registrant_id = fields.Many2one(
-        "res.partner", "Registrant", domain=[("is_registrant", "=", True)]
-    )
+    registrant_id = fields.Many2one("res.partner", "Registrant", domain=[("is_registrant", "=", True)])
     applicant_id = fields.Many2one(
         "res.partner",
         "Applicant",
         domain=[("is_registrant", "=", True), ("is_group", "=", False)],
     )
-    applicant_phone = fields.Char(
-        "Applicant's Phone Number", related="change_request_id.applicant_phone"
-    )
-    change_request_id = fields.Many2one(
-        "spp.change.request", "Change Request", required=True
-    )
-    assign_to_id = fields.Many2one(
-        "res.users", "Assigned to", related="change_request_id.assign_to_id"
-    )
+    applicant_phone = fields.Char("Applicant's Phone Number", related="change_request_id.applicant_phone")
+    change_request_id = fields.Many2one("spp.change.request", "Change Request", required=True)
+    assign_to_id = fields.Many2one("res.users", "Assigned to", related="change_request_id.assign_to_id")
     last_validated_by_id = fields.Many2one(
         "res.users", "Last Validator", related="change_request_id.last_validated_by_id"
     )
@@ -69,9 +61,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     # Target Fields
     group_address = fields.Text(related="registrant_id.address", readonly=True)
-    group_registration_date = fields.Date(
-        related="registrant_id.registration_date", readonly=True
-    )
+    group_registration_date = fields.Date(related="registrant_id.registration_date", readonly=True)
 
     # DMS Field
     dms_directory_ids = fields.One2many(
@@ -95,12 +85,9 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         auto_join=True,
     )
 
-    current_user_assigned = fields.Boolean(
-        compute="_compute_current_user_assigned", default=False
-    )
+    current_user_assigned = fields.Boolean(compute="_compute_current_user_assigned", default=False)
 
     def _update_registrant_id(self, res):
-
         for rec in res:
             if rec.registrant_id:
                 rec.change_request_id.update({"registrant_id": rec.registrant_id.id})
@@ -112,12 +99,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :return: form view ID
         :rtype: int
         """
-        return (
-            self.env["ir.ui.view"]
-            .sudo()
-            .search([("model", "=", self._name), ("type", "=", "form")], limit=1)
-            .id
-        )
+        return self.env["ir.ui.view"].sudo().search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
 
     def update_live_data(self):
         """
@@ -189,9 +171,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             )
         else:
             # TODO: @edwin Should we use UserError or ValidationError?
-            raise UserError(
-                _("The request must be in draft state to be set to pending validation.")
-            )
+            raise UserError(_("The request must be in draft state to be set to pending validation."))
 
     def action_validate(self):
         """
@@ -267,19 +247,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     request.update(vals)
 
                     # Update the live data if the user has the access
-                    if (
-                        self.AUTO_APPLY_CHANGES
-                        and message == "FINAL"
-                        and self.auto_apply_conditions()
-                    ):
+                    if self.AUTO_APPLY_CHANGES and message == "FINAL" and self.auto_apply_conditions():
                         is_exception = False
                         message = ""
                         try:
                             self.action_apply()
                         except UserError as e:
-                            message = _(
-                                "User {} does not have access to apply changes." "{}"
-                            ).format(self.env.user.name, repr(e))
+                            message = _("User {} does not have access to apply changes." "{}").format(
+                                self.env.user.name, repr(e)
+                            )
                             is_exception = True
                         except Exception as e:
                             message = _(
@@ -299,9 +275,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
                     if request.state == "applied":
                         title = _("Change Request Applied")
-                        message = _(
-                            "The change request has been validated and the changes has been applied"
-                        )
+                        message = _("The change request has been validated and the changes has been applied")
                         kind = "success"
                         return self.show_notification(title, message, kind)
 
@@ -313,9 +287,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 else:
                     raise ValidationError(message)
             else:
-                raise ValidationError(
-                    _("The request to be validated must be in submitted state.")
-                )
+                raise ValidationError(_("The request to be validated must be in submitted state."))
         return
 
     def action_apply(self):
@@ -361,11 +333,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 request.last_activity_id.action_done()
 
             else:
-                raise ValidationError(
-                    _(
-                        "The request must be in validated state for changes to be applied."
-                    )
-                )
+                raise ValidationError(_("The request must be in validated state for changes to be applied."))
 
     def action_cancel(self):
         """
@@ -426,11 +394,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 }
             )
         else:
-            raise UserError(
-                _(
-                    "The request to be cancelled must be in draft, pending, or rejected validation state."
-                )
-            )
+            raise UserError(_("The request to be cancelled must be in draft, pending, or rejected validation state."))
 
     def action_reset_to_draft(self):
         """
@@ -478,11 +442,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 }
             )
         else:
-            raise UserError(
-                _(
-                    "The request to be cancelled must be in draft, pending, or rejected validation state."
-                )
-            )
+            raise UserError(_("The request to be cancelled must be in draft, pending, or rejected validation state."))
 
     def action_reject(self):
         """
@@ -547,11 +507,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     }
                 )
             else:
-                raise UserError(
-                    _(
-                        "The request to be rejected must be in draft or pending validation state."
-                    )
-                )
+                raise UserError(_("The request to be rejected must be in draft or pending validation state."))
 
     def _copy_group_member_ids(self, group_id_field, group_ref_field="registrant_id"):
         for rec in self:
@@ -635,9 +591,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 }
                 self.env["pds.change.request.service.point"].create(service_points)
 
-    def _copy_from_group_member_ids(
-        self, group_ref_field, group_id_field, skip_head=True
-    ):
+    def _copy_from_group_member_ids(self, group_ref_field, group_id_field, skip_head=True):
         for rec in self:
             for mrec in rec[group_ref_field].group_membership_ids:
                 kind_ids = mrec.kind and mrec.kind.ids or None
@@ -645,10 +599,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     kind_ids
                     and (
                         not skip_head
-                        or self.env.ref(
-                            "g2p_registry_membership.group_membership_kind_head"
-                        ).id
-                        not in kind_ids
+                        or self.env.ref("g2p_registry_membership.group_membership_kind_head").id not in kind_ids
                     )
                 ) or not kind_ids:
                     group_members = {
@@ -729,9 +680,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :raise UserError: Exception raised when something is not valid.
         """
         for rec in self:
-            is_admin = self.env.user.has_group(
-                "spp_change_request.group_spp_change_request_administrator"
-            )
+            is_admin = self.env.user.has_group("spp_change_request.group_spp_change_request_administrator")
             assign_self = False
             if rec.change_request_id.assign_to_id:
                 if rec.change_request_id.assign_to_id.id != self.env.user.id:
@@ -740,15 +689,11 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     elif is_admin:
                         assign_self = False
                     else:
-                        raise ValidationError(
-                            _("You're not allowed to re-assign this CR.")
-                        )
+                        raise ValidationError(_("You're not allowed to re-assign this CR."))
             else:
                 assign_self = True
             if not assign_self:
-                form_id = self.env.ref(
-                    "spp_change_request.change_request_user_assign_wizard"
-                ).id
+                form_id = self.env.ref("spp_change_request.change_request_user_assign_wizard").id
                 action = {
                     "name": _("Assign Change Request to User"),
                     "type": "ir.actions.act_window",
@@ -787,9 +732,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :raise UserError: Exception raised when something is not valid.
         """
         for rec in self:
-            form_id = self.env.ref(
-                "spp_change_request.change_request_user_assign_wizard"
-            ).id
+            form_id = self.env.ref("spp_change_request.change_request_user_assign_wizard").id
             action = {
                 "name": _("Assign Change Request to User"),
                 "type": "ir.actions.act_window",
@@ -872,9 +815,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             # Get the first directory for now
             if rec.dms_directory_ids:
                 directory_id = rec.dms_directory_ids[0].id
-                form_id = self.env.ref(
-                    "spp_change_request.view_dms_file_spp_custom_form"
-                ).id
+                form_id = self.env.ref("spp_change_request.view_dms_file_spp_custom_form").id
                 dms_context = {"default_directory_id": directory_id}
                 action = {
                     "type": "ir.actions.act_window",
@@ -887,9 +828,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 }
                 if self.env.context.get("category_id"):
                     category_id = self.env.context.get("category_id")
-                    category = self.env["dms.category"].search(
-                        [("id", "=", category_id)]
-                    )
+                    category = self.env["dms.category"].search([("id", "=", category_id)])
                     if category:
                         dms_context.update(
                             {
@@ -904,14 +843,10 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                             }
                         )
                     else:
-                        raise UserError(
-                            _("The required document category is not configured.")
-                        )
+                        raise UserError(_("The required document category is not configured."))
                 return action
             else:
-                raise UserError(
-                    _("There are no directories defined for this change request.")
-                )
+                raise UserError(_("There are no directories defined for this change request."))
 
     def open_registrant_details_form(self):
         """

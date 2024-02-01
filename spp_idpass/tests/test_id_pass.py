@@ -36,6 +36,4 @@ class TestIdPass(TransactionCase):
             json=lambda: {"token": "Testing token - for testing purpose!"},
         )
         self._id_pass.generate_auth_token()
-        self.assertFalse(
-            self._id_pass.auth_token, "auth token of ID Pass should not have data"
-        )
+        self.assertFalse(self._id_pass.auth_token, "auth token of ID Pass should not have data")

@@ -13,17 +13,9 @@ class G2pProgramEntitlementManagerDefault(models.Model):
                 "0",
             )
         )
-        if (
-            automated_beneficiaries_filtering_mechanism == "2"
-            and cycle.program_id.compliance_managers
-        ):
+        if automated_beneficiaries_filtering_mechanism == "2" and cycle.program_id.compliance_managers:
             satisfied_registrant_ids = (
-                self.env["res.partner"]
-                .sudo()
-                .search(cycle._get_compliance_criteria_domain())
-                .ids
+                self.env["res.partner"].sudo().search(cycle._get_compliance_criteria_domain()).ids
             )
-            beneficiaries = beneficiaries.filtered(
-                lambda cm: cm.partner_id.id in satisfied_registrant_ids
-            )
+            beneficiaries = beneficiaries.filtered(lambda cm: cm.partner_id.id in satisfied_registrant_ids)
         return super().prepare_entitlements(cycle, beneficiaries)

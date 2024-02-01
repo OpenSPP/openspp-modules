@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP: Starter",
     "author": "OpenSPP.org",
-    "website": "https://github.com/openspp/openspp-modules",
+    "website": "https://github.com/OpenSPP/openspp-modules",
     "category": "Theme",
     "version": "17.0.1.0.0",
     "license": "AGPL-3",

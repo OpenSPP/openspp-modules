@@ -15,35 +15,25 @@ class TestEntitlement(Common):
         group = [
             Command.link(cls.env.ref("g2p_programs.g2p_program_manager").id),
         ]
-        cls.test_user_1 = cls.env["res.users"].create(
-            {"name": "test", "login": "test", "groups_id": group}
-        )
+        cls.test_user_1 = cls.env["res.users"].create({"name": "test", "login": "test", "groups_id": group})
 
         group_2 = [
             Command.link(cls.env.ref("g2p_programs.g2p_program_manager").id),
             Command.link(cls.env.ref("g2p_registry_base.group_g2p_registrar").id),
         ]
-        cls.test_user_2 = cls.env["res.users"].create(
-            {"name": "test2", "login": "test2", "groups_id": group_2}
-        )
+        cls.test_user_2 = cls.env["res.users"].create({"name": "test2", "login": "test2", "groups_id": group_2})
 
     def test_01_generate_code(self):
         self.assertIsNotNone(self.entitlement._generate_code())
 
     def test_02_get_view(self):
         action_1 = self.entitlement._get_view(view_type="form")
-        action_2 = self.entitlement.with_user(self.test_user_1.id)._get_view(
-            view_type="form"
-        )
-        action_3 = self.entitlement.with_user(self.test_user_1.id)._get_view(
-            view_type="search"
-        )
+        action_2 = self.entitlement.with_user(self.test_user_1.id)._get_view(view_type="form")
+        action_3 = self.entitlement.with_user(self.test_user_1.id)._get_view(view_type="search")
 
         self.assertTrue(all([action_1, action_2, action_3]))
 
-        with self.assertRaisesRegex(
-            ValidationError, "You have no access in the Entitlement List View"
-        ):
+        with self.assertRaisesRegex(ValidationError, "You have no access in the Entitlement List View"):
             self.entitlement.with_user(self.test_user_2.id)._get_view(view_type="form")
 
     def test_03_compute_journal_id(self):
@@ -53,9 +43,7 @@ class TestEntitlement(Common):
     def test_04_compute_name(self):
         self.entitlement._compute_name()
 
-        self.assertEqual(
-            self.entitlement.name, f"Entitlement: ({self.entitlement.product_id.name})"
-        )
+        self.assertEqual(self.entitlement.name, f"Entitlement: ({self.entitlement.product_id.name})")
 
     @patch("odoo.fields.Date.today")
     def test_05_gc_mark_expired_entitlement(self, mocked_today):
@@ -129,9 +117,7 @@ class TestEntitlement(Common):
     def test_06_unlink(self):
         self.entitlement.state = "pending_validation"
 
-        with self.assertRaisesRegex(
-            ValidationError, "Only draft entitlements are allowed to be deleted"
-        ):
+        with self.assertRaisesRegex(ValidationError, "Only draft entitlements are allowed to be deleted"):
             self.entitlement.unlink()
 
         self.entitlement.state = "draft"

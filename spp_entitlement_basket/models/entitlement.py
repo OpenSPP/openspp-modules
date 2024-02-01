@@ -12,6 +12,4 @@ class SPPBasketEntitlement(models.Model):
 
     # TODO: @edwin: Add to "g2p.entitlement" an entitlement kind selection field.
 
-    entitlement_basket_id = fields.Many2one(
-        "spp.entitlement.basket", "Entitlement Basket"
-    )
+    entitlement_basket_id = fields.Many2one("spp.entitlement.basket", "Entitlement Basket")

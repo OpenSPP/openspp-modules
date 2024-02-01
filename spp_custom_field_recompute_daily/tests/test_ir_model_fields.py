@@ -8,9 +8,7 @@ class TestIrModelFields(TransactionCase):
         self.test_field_1 = self.test_model._fields["field_to_test_1"]
         self.test_field_2 = self.test_model._fields["field_to_test_2"]
         self.test_field_3 = self.test_model._fields["field_to_test_3"]
-        self.model_id = self.env.ref(
-            "spp_custom_field_recompute_daily.model_spp_test_daily_recompute_model"
-        ).id
+        self.model_id = self.env.ref("spp_custom_field_recompute_daily.model_spp_test_daily_recompute_model").id
 
     def _create_test_record(self):
         return self.test_model.create(
@@ -59,9 +57,7 @@ class TestIrModelFields(TransactionCase):
 
     def test_02_recompute_indicator_on_records(self):
         test_record = self._create_test_record()
-        test_field = self.env["ir.model.fields"].search(
-            [("recompute_daily", "=", True)]
-        )
+        test_field = self.env["ir.model.fields"].search([("recompute_daily", "=", True)])
         test_field._recompute_indicator_on_records(test_record)
         fields_to_compute = self.env.fields_to_compute()
         self.assertIn(
@@ -85,18 +81,14 @@ class TestIrModelFields(TransactionCase):
         )
         self.assertFalse(
             bool(recompute_indicator_jobs_count),
-            "Jobs should not exists before reset max daily recompute "
-            "record count and recompute indicators!",
+            "Jobs should not exists before reset max daily recompute " "record count and recompute indicators!",
         )
-        self.env["ir.config_parameter"].set_param(
-            "spp.maximum_daily_recompute_count", "1"
-        )
+        self.env["ir.config_parameter"].set_param("spp.maximum_daily_recompute_count", "1")
         self.env["ir.model.fields"]._daily_recompute_indicators()
         recompute_indicator_jobs_count = self.env["queue.job"].search_count(
             [("func_string", "like", "_recompute_indicator_on_records")]
         )
         self.assertTrue(
             bool(recompute_indicator_jobs_count),
-            "Jobs should exists after reset max daily recompute "
-            "record count and recompute indicators!",
+            "Jobs should exists after reset max daily recompute " "record count and recompute indicators!",
         )

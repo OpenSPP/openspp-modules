@@ -17,21 +17,15 @@ class OpenSPPArea(models.Model):
     _order = "parent_id,name"
 
     parent_id = fields.Many2one("spp.area", "Parent")
-    complete_name = fields.Char(
-        "Name", compute="_compute_complete_name", recursive=True, translate=True
-    )
+    complete_name = fields.Char("Name", compute="_compute_complete_name", recursive=True, translate=True)
     name = fields.Char(translate=True, compute="_compute_name", store=True)
     draft_name = fields.Char(required=True, translate=True)
     parent_path = fields.Char(index=True)
     code = fields.Char()
     altnames = fields.Char("Alternate Name")
     level = fields.Integer(help="This is the area level for importing")
-    area_level = fields.Integer(
-        compute="_compute_area_level", help="This is the main area level"
-    )
-    child_ids = fields.One2many(
-        "spp.area", "id", "Child", compute="_compute_get_childs"
-    )
+    area_level = fields.Integer(compute="_compute_area_level", help="This is the main area level")
+    child_ids = fields.One2many("spp.area", "id", "Child", compute="_compute_get_childs")
     kind = fields.Many2one("spp.area.kind")
 
     @api.depends("draft_name", "code")
@@ -193,9 +187,7 @@ class OpenSPPAreaKind(models.Model):
     parent_id = fields.Many2one("spp.area.kind", "Parent")
     parent_path = fields.Char(index=True)
     name = fields.Char(required=True)
-    complete_name = fields.Char(
-        "Name", compute="_compute_complete_name", recursive=True, translate=True
-    )
+    complete_name = fields.Char("Name", compute="_compute_complete_name", recursive=True, translate=True)
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):

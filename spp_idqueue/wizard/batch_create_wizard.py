@@ -48,14 +48,10 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
     name = fields.Char(string="Batch Name")
     id_count = fields.Integer(string="ID Count")
     max_id_per_batch = fields.Integer(string="Max ID per batch", default=20)
-    batches_count = fields.Integer(
-        string="Batches to be created", compute="_compute_batches_count"
-    )
+    batches_count = fields.Integer(string="Batches to be created", compute="_compute_batches_count")
     queue_ids = fields.Many2many("spp.print.queue.id")
     id_type = fields.Many2one("g2p.id.type", required=True, string="ID Type")
-    idpass_id = fields.Many2one(
-        "spp.id.pass", string="Template", domain="[('id_type', '=', id_type)]"
-    )
+    idpass_id = fields.Many2one("spp.id.pass", string="Template", domain="[('id_type', '=', id_type)]")
     state = fields.Selection(
         [("step1", "Set Template"), ("step2", "Set Batch")],
         "Status",
@@ -105,9 +101,7 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
                         queue_ids = []
                         if not current_batch_count == batches_count:
                             batch_name = f"{rec.name or ''} - {current_batch_count + 1}"
-                            batch_id = self.env["spp.print.queue.batch"].create(
-                                {"name": batch_name}
-                            )
+                            batch_id = self.env["spp.print.queue.batch"].create({"name": batch_name})
                             queue_ids.append([4, queue.id])
                             id_count = 1
                             current_batch_count += 1

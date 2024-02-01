@@ -23,9 +23,7 @@ class G2PGroup(models.Model):
         store=True,
         allow_filter=True,
     )
-    z_ind_grp_num_elderly = fields.Integer(
-        "Number of eldery", compute="_compute_ind_grp_num_eldery", store=True
-    )
+    z_ind_grp_num_elderly = fields.Integer("Number of eldery", compute="_compute_ind_grp_num_eldery", store=True)
     z_ind_grp_num_adults_male_not_elderly = fields.Integer(
         "Number of adults male not elderly",
         compute="_compute_ind_grp_num_adults_male_not_elderly",
@@ -85,8 +83,7 @@ class G2PGroup(models.Model):
     z_ind_grp_is_single_head_hh = fields.Boolean(
         "Is single-headed household",
         compute="_compute_ind_grp_is_single_head_hh",
-        help="Single-headed HH - extracted from demographic data of "
-        "HH adult members",
+        help="Single-headed HH - extracted from demographic data of " "HH adult members",
         store=True,
         allow_filter=True,
     )
@@ -94,8 +91,7 @@ class G2PGroup(models.Model):
     z_ind_grp_is_elderly_head_hh = fields.Boolean(
         "Is elderly-headed household",
         compute="_compute_ind_grp_is_eldery_head_hh",
-        help="Elderly-headed HHs - "
-        "extracted from demographic data of HH adult members",
+        help="Elderly-headed HHs - " "extracted from demographic data of HH adult members",
         store=True,
         allow_filter=True,
     )
@@ -123,21 +119,15 @@ class G2PGroup(models.Model):
 
     def _compute_ind_grp_single_child_less_36m_with_birth_cert(self):
         for rec in self:
-            rec.z_ind_grp_num_single_child_less_36m_with_birth_cert = (
-                rec._count_child_by_group(1)
-            )
+            rec.z_ind_grp_num_single_child_less_36m_with_birth_cert = rec._count_child_by_group(1)
 
     def _compute_ind_grp_twin_less_36m_with_birth_cert(self):
         for rec in self:
-            rec.z_ind_grp_num_twin_less_36m_with_birth_cert = rec._count_child_by_group(
-                2
-            )
+            rec.z_ind_grp_num_twin_less_36m_with_birth_cert = rec._count_child_by_group(2)
 
     def _compute_ind_grp_triplets_more_less_36m_with_birth_cert(self):
         for rec in self:
-            rec.z_ind_grp_num_triplets_more_less_36m_with_birth_cert = (
-                rec._count_child_by_group(3)
-            )
+            rec.z_ind_grp_num_triplets_more_less_36m_with_birth_cert = rec._count_child_by_group(3)
 
     def _count_child_by_group(self, group):
         self.ensure_one()
@@ -151,9 +141,7 @@ class G2PGroup(models.Model):
             ("z_cst_indv_has_birth_certificate", "=", True),
         ]
 
-        children_birthdate = self.group_membership_ids.individual.filtered_domain(
-            domain
-        ).mapped("birthdate")
+        children_birthdate = self.group_membership_ids.individual.filtered_domain(domain).mapped("birthdate")
         logging.info(children_birthdate)
         # basic identifying of twins
         children_birthdate = sorted(children_birthdate)
@@ -164,11 +152,7 @@ class G2PGroup(models.Model):
             count_by_type.setdefault(count, 0)
             count_by_type[count] += 1
         if group == 3:
-            return (
-                sum(count_by_type.values())
-                - count_by_type.get(1, 0)
-                - count_by_type.get(2, 0)
-            )
+            return sum(count_by_type.values()) - count_by_type.get(1, 0) - count_by_type.get(2, 0)
         return count_by_type.get(group, 0)
 
     def _compute_ind_grp_num_children(self):
@@ -204,9 +188,7 @@ class G2PGroup(models.Model):
             ("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT)),
             ("gender", "=", "Female"),
         ]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_num_adults_female_not_elderly", None, domain
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_num_adults_female_not_elderly", None, domain)
 
     def _compute_ind_grp_num_adults_male_not_elderly(self):
         """
@@ -220,9 +202,7 @@ class G2PGroup(models.Model):
             ("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT)),
             ("gender", "=", "Male"),
         ]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_num_adults_male_not_elderly", None, domain
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_num_adults_male_not_elderly", None, domain)
 
     def _compute_ind_grp_num_cyclone_aug_2022_injured(self):
         """
@@ -231,9 +211,7 @@ class G2PGroup(models.Model):
 
         """
         domain = [("z_cst_indv_cyclone_aug_2022_injured", "=", True)]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_num_cyclone_aug_2022_injured", None, domain
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_num_cyclone_aug_2022_injured", None, domain)
 
     def _compute_ind_grp_num_receive_government_benefits(self):
         """
@@ -242,9 +220,7 @@ class G2PGroup(models.Model):
 
         """
         domain = [("z_cst_indv_receive_government_benefits", "=", True)]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_num_receive_government_benefits", None, domain
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_num_receive_government_benefits", None, domain)
 
     def _compute_ind_grp_num_cyclone_aug_2022_lost_livestock(self):
         """
@@ -253,9 +229,7 @@ class G2PGroup(models.Model):
 
         """
         domain = [("z_cst_indv_cyclone_aug_2022_lost_livestock", "=", True)]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_num_cyclone_aug_2022_lost_livestock", None, domain
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_num_cyclone_aug_2022_lost_livestock", None, domain)
 
     def _compute_ind_grp_num_cyclone_aug_2022_lost_primary_source_income(self):
         """
@@ -264,9 +238,7 @@ class G2PGroup(models.Model):
 
         """
         domain = [("z_cst_indv_cyclone_aug_2022_lost_primary_source_income", "=", True)]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income", None, domain
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income", None, domain)
 
     def _compute_ind_grp_num_disability(self):
         """
@@ -286,9 +258,7 @@ class G2PGroup(models.Model):
         # TODO: This does not work as expected anymore @Emjay0921 it should be only when there is one adult only
         now = datetime.datetime.now()
         domain = [("birthdate", "<", now - relativedelta(years=CHILDREN_AGE_LIMIT))]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_is_single_head_hh", None, domain, presence_only=True
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_is_single_head_hh", None, domain, presence_only=True)
 
     def _compute_ind_grp_is_eldery_head_hh(self):
         """
@@ -298,15 +268,11 @@ class G2PGroup(models.Model):
         """
         now = datetime.datetime.now()
         domain = [("birthdate", "<", now - relativedelta(years=ELDERLY_AGE_LIMIT))]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_is_elderly_head_hh", ["Head"], domain, presence_only=True
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_is_elderly_head_hh", ["Head"], domain, presence_only=True)
 
     def _compute_ind_grp_is_hh_with_disabled(self):
         """
         HHs with disabled (mental or physical) members
         """
         domain = [("z_cst_indv_disability_level", ">", 0)]
-        self.compute_count_and_set_indicator(
-            "z_ind_grp_is_hh_with_disabled", None, domain, presence_only=True
-        )
+        self.compute_count_and_set_indicator("z_ind_grp_is_hh_with_disabled", None, domain, presence_only=True)

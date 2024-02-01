@@ -39,12 +39,8 @@ class EntitlementBasketTest(TransactionCase):
         )
 
         # Products
-        cls.product_1 = cls.env["product.product"].create(
-            {"name": "Flour 1", "type": "product", "list_price": 35.00}
-        )
-        cls.product_2 = cls.env["product.product"].create(
-            {"name": "Food 1", "type": "product", "list_price": 62.00}
-        )
+        cls.product_1 = cls.env["product.product"].create({"name": "Flour 1", "type": "product", "list_price": 35.00})
+        cls.product_2 = cls.env["product.product"].create({"name": "Food 1", "type": "product", "list_price": 62.00})
 
         # Food Basket
         cls.food_basket = cls.env["spp.entitlement.basket"].create(
@@ -78,12 +74,8 @@ class EntitlementBasketTest(TransactionCase):
                 "currency_id": cls.env.user.company_id.currency_id.id,
                 "auto_approve_entitlements": True,
                 "cycle_duration": 30,
-                "approver_group_id": cls.env.ref(
-                    "g2p_registry_base.group_g2p_admin"
-                ).id,
-                "entitlement_validation_group_id": cls.env.ref(
-                    "g2p_registry_base.group_g2p_admin"
-                ).id,
+                "approver_group_id": cls.env.ref("g2p_registry_base.group_g2p_admin").id,
+                "entitlement_validation_group_id": cls.env.ref("g2p_registry_base.group_g2p_admin").id,
                 "import_beneficiaries": "no",  # Do not import beneficiaries
                 "state": "step1",  # Do not proceed to step 2 (generate beneficiaries)
             }

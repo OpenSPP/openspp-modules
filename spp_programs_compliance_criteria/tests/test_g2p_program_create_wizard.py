@@ -58,9 +58,7 @@ class TestG2pProgramCreateWiz(common.Common):
             "g2p.program_membership.manager.default",
             "Manager should be correct!",
         )
-        self.assertEqual(
-            manager.eligibility_domain, "[['id', '>', 2]]", "Manager should be correct!"
-        )
+        self.assertEqual(manager.eligibility_domain, "[['id', '>', 2]]", "Manager should be correct!")
         self.assertEqual(manager.program_id, program, "Manager should be correct!")
 
     def test_04_create_program_sql_compliance_manager(self):
@@ -137,9 +135,7 @@ class TestG2pProgramCreateWiz(common.Common):
                 "Compliance SQL should not be valid after change!",
             )
             for output in log_catcher.output:
-                self.assertRegex(
-                    output, "^.*Query is not valid!.*$", "All record is now on cached!"
-                )
+                self.assertRegex(output, "^.*Query is not valid!.*$", "All record is now on cached!")
 
     @mute_logger("odoo.addons.spp_eligibility_sql.wizard.create_program_wizard")
     @patch("odoo.sql_db.Cursor.dictfetchall")

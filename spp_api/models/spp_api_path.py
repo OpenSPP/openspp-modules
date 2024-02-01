@@ -71,9 +71,7 @@ class SPPAPIPath(models.Model):
 
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
-    namespace_id = fields.Many2one(
-        "spp_api.namespace", string="API Namespace", required=True, ondelete="cascade"
-    )
+    namespace_id = fields.Many2one("spp_api.namespace", string="API Namespace", required=True, ondelete="cascade")
     model_id = fields.Many2one("ir.model", required=True, ondelete="cascade")
     model = fields.Char(related="model_id.model", readonly=True)
     method = fields.Selection(
@@ -90,17 +88,11 @@ class SPPAPIPath(models.Model):
     deprecated = fields.Boolean()
     # Read
     filter_domain = fields.Char(default="[]")
-    field_ids = fields.Many2many(
-        "ir.model.fields", domain="[('model_id', '=', model_id)]", string="Fields"
-    )
+    field_ids = fields.Many2many("ir.model.fields", domain="[('model_id', '=', model_id)]", string="Fields")
     limit = fields.Integer(string="Limit of results", default=500)
     # Create / Update
-    warning_required = fields.Boolean(
-        compute="_compute_warning_required", compute_sudo=True
-    )
-    api_field_ids = fields.One2many(
-        "spp_api.field", "path_id", string="Fields", copy=True
-    )
+    warning_required = fields.Boolean(compute="_compute_warning_required", compute_sudo=True)
+    api_field_ids = fields.One2many("spp_api.field", "path_id", string="Fields", copy=True)
     update_domain = fields.Char(default="[]")
     # Unlink
     unlink_domain = fields.Char(default="[]")
@@ -108,9 +100,7 @@ class SPPAPIPath(models.Model):
     function_apply_on_record = fields.Boolean()
     function_domain = fields.Char(default="[]")
     function = fields.Char()
-    function_parameter_ids = fields.One2many(
-        "spp_api.function.parameter", "path_id", string="Parameters", copy=True
-    )
+    function_parameter_ids = fields.One2many("spp_api.function.parameter", "path_id", string="Parameters", copy=True)
 
     _sql_constraints = [
         (
@@ -137,15 +127,9 @@ class SPPAPIPath(models.Model):
     def _compute_warning_required(self):
         warning_required = False
         if self.api_field_ids:
-            model_required_fields = self.model_id.field_id.filtered(
-                lambda f: f.required
-            ).mapped("name")
-            api_required_fields = self.api_field_ids.filtered(
-                lambda f: f.required
-            ).mapped("field_id.name")
-            warning_required = not all(
-                elem in api_required_fields for elem in model_required_fields
-            )
+            model_required_fields = self.model_id.field_id.filtered(lambda f: f.required).mapped("name")
+            api_required_fields = self.api_field_ids.filtered(lambda f: f.required).mapped("field_id.name")
+            warning_required = not all(elem in api_required_fields for elem in model_required_fields)
         self.warning_required = warning_required
 
     def _update_values(self, values):
@@ -216,7 +200,7 @@ class SPPAPIPath(models.Model):
         # Get
         if self.method == "get":
             # Default dict path
-            get_path = "/{}".format(self.name)
+            get_path = f"/{self.name}"
             if get_path not in swagger_paths:
                 swagger_paths.setdefault(get_path, {})
             get_one_path = "/{}/{}".format(self.name, "{Id}")
@@ -230,9 +214,7 @@ class SPPAPIPath(models.Model):
                         "results": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/{}".format(
-                                    format_definition_name(self.name)
-                                ),
+                                "$ref": f"#/definitions/{format_definition_name(self.name)}",
                             },
                         },
                         "reply_id": {
@@ -292,7 +274,7 @@ class SPPAPIPath(models.Model):
         # Post
         elif self.method == "post" and self.api_field_ids:
             # Default dict path
-            post_path = "/{}".format(self.name)
+            post_path = f"/{self.name}"
             if post_path not in swagger_paths:
                 swagger_paths.setdefault(post_path, {})
             # Create element
@@ -486,9 +468,7 @@ class SPPAPIPath(models.Model):
             "in": "query",
             "description": "{} \n\n {}".format(
                 _(
-                    "Search domain to read. ("
-                    "Defaults to an empty domain "
-                    "that will match all records) "
+                    "Search domain to read. (" "Defaults to an empty domain " "that will match all records) "
                     # '<a href="https://www.odoo.com/documentation/15.0/'
                     # "en/developer/reference/addons/"
                     # 'orm.html#reference-orm-domains" '
@@ -576,9 +556,7 @@ class SPPAPIPath(models.Model):
                     "\n Field name followed by the sort operator. "
                     "(asc or desc)"
                 ),
-                _("Example: {}").format(
-                    "`name asc` {} `name desc, id asc`".format(_("or"))
-                ),
+                _("Example: {}").format("`name asc` {} `name desc, id asc`".format(_("or"))),
             ),
             "required": False,
             "type": "string",
@@ -598,9 +576,7 @@ class SPPAPIPath(models.Model):
         return {
             "name": "context",
             "in": _type,
-            "description": "{} \n\n {}".format(
-                _("Specific context to method"), _('Example: `{"lang": "fr_FR"}`')
-            ),
+            "description": "{} \n\n {}".format(_("Specific context to method"), _('Example: `{"lang": "fr_FR"}`')),
             "type": "string",
             "required": False,
         }
@@ -787,18 +763,14 @@ class SPPAPIPath(models.Model):
         for field in self.api_field_ids.filtered(lambda f: f.default_value):
             new_values[field.field_name] = safe_eval.safe_eval(field.default_value)
         # Convert bool
-        fields_boolean = self.api_field_ids.filtered(
-            lambda f: f.field_id.ttype == "boolean"
-        ).mapped("field_name")
+        fields_boolean = self.api_field_ids.filtered(lambda f: f.field_id.ttype == "boolean").mapped("field_name")
         for field in fields_boolean:
             if field in post_values:
-                new_values[field] = (
-                    True if post_values.get(field) in ["1", "true", "True"] else False
-                )
+                new_values[field] = True if post_values.get(field) in ["1", "true", "True"] else False
         # Convert many2many & one2many
-        fields_many2many = self.api_field_ids.filtered(
-            lambda f: f.field_id.ttype in ["many2many", "one2many"]
-        ).mapped("field_name")
+        fields_many2many = self.api_field_ids.filtered(lambda f: f.field_id.ttype in ["many2many", "one2many"]).mapped(
+            "field_name"
+        )
         for field in fields_many2many:
             if field in post_values:
                 values = post_values.get(field)
@@ -834,9 +806,7 @@ class SPPAPIPath(models.Model):
     # Put Custom function
     def _custom_parameters(self):
         self.ensure_one()
-        parameters = self._custom_function_parameters() + [
-            self._context_parameter(_type="formData")
-        ]
+        parameters = self._custom_function_parameters() + [self._context_parameter(_type="formData")]
         if self.function_apply_on_record:
             parameters = [self._id_parameter()] + parameters
         return parameters
@@ -844,9 +814,7 @@ class SPPAPIPath(models.Model):
     def _custom_function_parameters(self):
         self.ensure_one()
         properties = []
-        for function_parameter in self.function_parameter_ids.filtered(
-            lambda f: not f.default_value
-        ):
+        for function_parameter in self.function_parameter_ids.filtered(lambda f: not f.default_value):
             parameter_format = ""
             parameter_type = function_parameter.type
             if parameter_type == "float":
@@ -895,9 +863,7 @@ class SPPAPIPath(models.Model):
                     new_values[function_parameter.name] = value
             # Add fields with default_value
             if function_parameter.default_value:
-                new_values[function_parameter.name] = safe_eval.safe_eval(
-                    function_parameter.default_value
-                )
+                new_values[function_parameter.name] = safe_eval.safe_eval(function_parameter.default_value)
         return new_values
 
     # Others function
@@ -912,11 +878,7 @@ class SPPAPIPath(models.Model):
                 values.update({"type": "string"})
             else:
                 selection_keys = list(
-                    dict(
-                        self.env[self.model].fields_get([field_name])[field_name][
-                            "selection"
-                        ]
-                    ).keys()
+                    dict(self.env[self.model].fields_get([field_name])[field_name]["selection"]).keys()
                 )
                 values.update(
                     {
@@ -1037,11 +999,7 @@ class SPPAPIPath(models.Model):
         if isinstance(response_data, dict):
             response_data = [response_data]
         self.ensure_one()
-        field_aliases = (
-            self.env["spp_api.field.alias"]
-            .sudo()
-            .search(self._get_related_field_alias_domain())
-        )
+        field_aliases = self.env["spp_api.field.alias"].sudo().search(self._get_related_field_alias_domain())
         for element in response_data:
             self._format_datetime(element)
             self._adjust_null_value_fields(element)
@@ -1054,11 +1012,7 @@ class SPPAPIPath(models.Model):
 
     def _fields_alias_treatment(self, post_values):
         res = {}
-        field_aliases = (
-            self.env["spp_api.field.alias"]
-            .sudo()
-            .search(self._get_related_field_alias_domain())
-        )
+        field_aliases = self.env["spp_api.field.alias"].sudo().search(self._get_related_field_alias_domain())
         field_alias_names = field_aliases.mapped("alias_name")
         for key in post_values:
             if key not in field_alias_names:
@@ -1071,9 +1025,7 @@ class SPPAPIPath(models.Model):
     @api.model
     def _format_datetime(self, element):
         for key in element:
-            if not isinstance(element[key], date) or not isinstance(
-                element[key], datetime
-            ):
+            if not isinstance(element[key], date) or not isinstance(element[key], datetime):
                 continue
             element[key] = datetime_format(element[key])
 
@@ -1110,9 +1062,5 @@ class SPPAPIPath(models.Model):
         for key in element:
             if model_sudo._fields[key].type not in ("many2one", "many2one_reference"):
                 continue
-            if (
-                element[key]
-                and type(element[key]) in (list, tuple)
-                and len(element[key]) == 2
-            ):
+            if element[key] and type(element[key]) in (list, tuple) and len(element[key]) == 2:
                 element[key] = element[key][0]

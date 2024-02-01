@@ -9,9 +9,7 @@ class SPPDefaultEligibilityManager(models.Model):
     _inherit = "g2p.program_membership.manager.default"
 
     enable_exclusion_filter = fields.Boolean("Enable Exclusion")
-    exclusion_eligibility_domain = fields.Text(
-        string="Exclusive Domain", default="[]", required=True
-    )
+    exclusion_eligibility_domain = fields.Text(string="Exclusive Domain", default="[]", required=True)
 
     def _prepare_exclusion_eligible_domain(self):
         domain = []
@@ -33,9 +31,7 @@ class SPPDefaultEligibilityManager(models.Model):
 
             if rec.enable_exclusion_filter:
                 exclusive_domain = rec._prepare_exclusion_eligible_domain()
-                excluded_beneficiaries = self.env["res.partner"].search(
-                    exclusive_domain
-                )
+                excluded_beneficiaries = self.env["res.partner"].search(exclusive_domain)
 
                 new_beneficiaries = new_beneficiaries - excluded_beneficiaries
 

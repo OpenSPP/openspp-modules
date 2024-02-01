@@ -27,9 +27,7 @@ class AuthJWTValidator(models.Model):
     _description = "JWT Validator Configuration"
 
     name = fields.Char(required=True)
-    signature_type = fields.Selection(
-        [("secret", "Secret"), ("public_key", "Public key")], required=True
-    )
+    signature_type = fields.Selection([("secret", "Secret"), ("public_key", "Public key")], required=True)
     secret_key = fields.Char()
     secret_algorithm = fields.Selection(
         [
@@ -56,9 +54,7 @@ class AuthJWTValidator(models.Model):
         ],
         default="RS256",
     )
-    audience = fields.Char(
-        required=True, help="Comma separated list of audiences, to validate aud."
-    )
+    audience = fields.Char(required=True, help="Comma separated list of audiences, to validate aud.")
     issuer = fields.Char(required=True, help="To validate iss.")
 
     # JWT Decoder Options
@@ -68,9 +64,7 @@ class AuthJWTValidator(models.Model):
 
     # User Fields
     default_user_id = fields.Many2one("res.users", required=True)
-    partner_id_strategy = fields.Selection(
-        [("email", "From email claim")], default="email", required=True
-    )
+    partner_id_strategy = fields.Selection([("email", "From email claim")], default="email", required=True)
 
     _sql_constraints = [
         ("name_uniq", "unique(name)", "JWT validator names must be unique !"),
@@ -80,9 +74,7 @@ class AuthJWTValidator(models.Model):
     def _check_name(self):
         for rec in self:
             if not rec.name.isidentifier():
-                raise ValidationError(
-                    _("Name %r is not a valid python identifier.") % (rec.name,)
-                )
+                raise ValidationError(_("Name %r is not a valid python identifier.") % (rec.name,))
 
     @api.model
     def _get_validator_by_name_domain(self, validator_name):
@@ -98,9 +90,7 @@ class AuthJWTValidator(models.Model):
             _logger.error("JWT validator not found for name %r", validator_name)
             raise JwtValidatorNotFound()
         if len(validator) != 1:
-            _logger.error(
-                "More than one JWT validator found for name %r", validator_name
-            )
+            _logger.error("More than one JWT validator found for name %r", validator_name)
             raise AmbiguousJwtValidator()
         return validator
 
@@ -158,10 +148,7 @@ class AuthJWTValidator(models.Model):
         # override for additional strategies
         uid = self.default_user_id and self.default_user_id.id or None
         partner_id = (
-            self.default_user_id
-            and self.default_user_id.partner_id
-            and self.default_user_id.partner_id.id
-            or None
+            self.default_user_id and self.default_user_id.partner_id and self.default_user_id.partner_id.id or None
         )
         # Get the email in the payload
         if self.partner_id_strategy == "email":
@@ -199,9 +186,7 @@ class AuthJWTValidator(models.Model):
             setattr(
                 IrHttp.__class__,
                 f"_auth_method_public_or_jwt_{rec.name}",
-                partial(
-                    IrHttp.__class__._auth_method_public_or_jwt, validator_name=rec.name
-                ),
+                partial(IrHttp.__class__._auth_method_public_or_jwt, validator_name=rec.name),
             )
 
     def _unregister_auth_method(self):

@@ -137,9 +137,7 @@ class SppDciApiServer(Controller):
     def retrieve_registry(self, **kw):
         auth_header = get_auth_header(request.httprequest.headers, raise_exception=True)
 
-        access_token = (
-            auth_header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
-        )
+        access_token = auth_header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
 
         verified, payload = verify_and_decode_signature(access_token)
 
@@ -170,13 +168,9 @@ class SppDciApiServer(Controller):
             return error_wrapper(header_error.get("code"), header_error.get("message"))
 
         message = data.get("message", "")
-        message_error = self.check_content(
-            message, "message", ["transaction_id", "search_request"]
-        )
+        message_error = self.check_content(message, "message", ["transaction_id", "search_request"])
         if message_error:
-            return error_wrapper(
-                message_error.get("code"), message_error.get("message")
-            )
+            return error_wrapper(message_error.get("code"), message_error.get("message"))
 
         message_id = header["message_id"]
         transaction_id = message.get("transaction_id")
@@ -253,9 +247,7 @@ class SppDciApiServer(Controller):
             if query_type == constants.PREDICATE:
                 query_error = self.check_content(query, "query", ["expression1"])
                 if query_error:
-                    return error_wrapper(
-                        query_error.get("code"), query_error.get("message")
-                    )
+                    return error_wrapper(query_error.get("code"), query_error.get("message"))
 
                 expression = query.get("expression1")
                 expression_error = self.check_content(
@@ -300,9 +292,7 @@ class SppDciApiServer(Controller):
 
         return domain
 
-    def process_search_requests(
-        self, search_requests, today_isoformat, search_responses
-    ):
+    def process_search_requests(self, search_requests, today_isoformat, search_responses):
         """
         The function processes search requests by validating the request data, checking query and
         registration types, modifying the search domain based on the queries, and returning search
@@ -318,9 +308,7 @@ class SppDciApiServer(Controller):
         :return: the `search_responses` list after processing the search requests.
         """
         for req in search_requests:
-            req_error = self.check_content(
-                req, "search_request", ["reference_id", "timestamp", "search_criteria"]
-            )
+            req_error = self.check_content(req, "search_request", ["reference_id", "timestamp", "search_criteria"])
             if req_error:
                 return error_wrapper(req_error.get("code"), req_error.get("message"))
 

@@ -47,9 +47,7 @@ class OpenSPPGenerateProgramData(models.Model):
             program_name = f"GenProgram {i+1}"
             target_type = random.choice(group_target_type_range)
 
-            program_id = (
-                "demo." + hashlib.md5(f"{program_name} {i}".encode("UTF-8")).hexdigest()
-            )
+            program_id = "demo." + hashlib.md5(f"{program_name} {i}".encode()).hexdigest()
 
             program_data = {
                 "id": program_id,
@@ -59,9 +57,7 @@ class OpenSPPGenerateProgramData(models.Model):
 
             # # create_program_id = program_data
             create_program_id = self.env["g2p.program"].create(program_data)
-            _logger.debug(
-                f"program--- {create_program_id}: {create_program_id.target_type}"
-            )
+            _logger.debug(f"program--- {create_program_id}: {create_program_id.target_type}")
 
             #  Default Enrollment indicator
 
@@ -90,8 +86,7 @@ class OpenSPPGenerateProgramData(models.Model):
             eli_mgr_id = eli_man_obj.create(
                 {
                     "program_id": create_program_id.id,
-                    "manager_ref_id": "%s,%s"
-                    % (def_eli_mgr_obj, str(def_eli_mgr_id.id)),
+                    "manager_ref_id": "%s,%s" % (def_eli_mgr_obj, str(def_eli_mgr_id.id)),
                 }
             )
 
@@ -107,9 +102,7 @@ class OpenSPPGenerateProgramData(models.Model):
                 "program_id": create_program_id.id,
                 "auto_approve_entitlements": auto_approve_entitlements,
                 "cycle_duration": cycle_duration,
-                "approver_group_id": self.env.ref(
-                    "g2p_registry_base.group_g2p_admin"
-                ).id,
+                "approver_group_id": self.env.ref("g2p_registry_base.group_g2p_admin").id,
             }
             def_cycle_mgr_id = self.env[def_cycle_mgr_obj].create(cycle_manager_data)
 
@@ -118,8 +111,7 @@ class OpenSPPGenerateProgramData(models.Model):
             cycle_man_id = cycle_man_obj.create(
                 {
                     "program_id": create_program_id.id,
-                    "manager_ref_id": "%s,%s"
-                    % (def_cycle_mgr_obj, str(def_cycle_mgr_id.id)),
+                    "manager_ref_id": "%s,%s" % (def_cycle_mgr_obj, str(def_cycle_mgr_id.id)),
                 }
             )
             vals.update({"cycle_managers": [(4, cycle_man_id.id)]})
@@ -136,26 +128,21 @@ class OpenSPPGenerateProgramData(models.Model):
                 "entitlement_validation_group_id": None,
             }
 
-            def_prog_ent_mgr_id = self.env[def_prog_ent_mgr_obj].create(
-                entitlement_manager_data
-            )
+            def_prog_ent_mgr_id = self.env[def_prog_ent_mgr_obj].create(entitlement_manager_data)
 
             # Add a new record to entitlement manager parent model
             prog_ent_obj = self.env["g2p.program.entitlement.manager"]
             prog_ent_id = prog_ent_obj.create(
                 {
                     "program_id": create_program_id.id,
-                    "manager_ref_id": "%s,%s"
-                    % (def_prog_ent_mgr_obj, str(def_prog_ent_mgr_id.id)),
+                    "manager_ref_id": "%s,%s" % (def_prog_ent_mgr_obj, str(def_prog_ent_mgr_id.id)),
                 }
             )
             vals.update({"entitlement_managers": [(4, prog_ent_id.id)]})
 
             # Create Beneficiaries
             benificiaries_count = self.num_beneficicaries
-            registrant_ids = (
-                self.env["res.partner"].search(domain, limit=benificiaries_count).ids
-            )
+            registrant_ids = self.env["res.partner"].search(domain, limit=benificiaries_count).ids
 
             _logger.debug(f"registrant_ids-- {len(registrant_ids)} : {registrant_ids}")
 
@@ -178,9 +165,7 @@ class OpenSPPGenerateProgramData(models.Model):
 
             # Create New Cycle
             # TODO: generate cycles
-            program_manager = create_program_id.get_manager(
-                create_program_id.MANAGER_PROGRAM
-            )
+            program_manager = create_program_id.get_manager(create_program_id.MANAGER_PROGRAM)
 
             ######################################################################################
             # cycle_id = program_manager.new_cycle()
@@ -190,9 +175,7 @@ class OpenSPPGenerateProgramData(models.Model):
                 _logger.debug(f"cycle--- {cycle_id}")
 
                 # Create Entitlements
-                cycle_manager = create_program_id.get_manager(
-                    create_program_id.MANAGER_CYCLE
-                )
+                cycle_manager = create_program_id.get_manager(create_program_id.MANAGER_CYCLE)
                 cycle_manager.prepare_entitlements(cycle_id)
 
                 self.cycle_ids = [(4, cycle_id.id)]
@@ -210,9 +193,7 @@ class OpenSPPGenerateProgramData(models.Model):
                 }
 
                 # # Create and Post Program fund
-                create_prog_fund_id = self.env["g2p.program.fund"].create(
-                    program_fund_data
-                )
+                create_prog_fund_id = self.env["g2p.program.fund"].create(program_fund_data)
                 create_prog_fund_id.post_fund()
 
                 if create_prog_fund_id.state == "posted":
@@ -220,9 +201,7 @@ class OpenSPPGenerateProgramData(models.Model):
                     _logger.debug(f"cycle_id--- {cycle_id.state}")
 
                 # # Create Helpdesk Tickets in Cycle
-                cycle_beneficiary_ids = cycle_id.get_beneficiaries(["enrolled"]).mapped(
-                    "partner_id.id"
-                )
+                cycle_beneficiary_ids = cycle_id.get_beneficiaries(["enrolled"]).mapped("partner_id.id")
                 for beneficiary_id in cycle_beneficiary_ids:
                     tx_name = random.choice(ticket_name_range)
                     tx_desc = random.choice(ticket_disc_cycle_range)
@@ -238,9 +217,7 @@ class OpenSPPGenerateProgramData(models.Model):
 
             ######################################################################################
             # Create Helpdesk Tickets in Beneficiaries
-            beneficiary_ids = create_program_id.get_beneficiaries(["enrolled"]).mapped(
-                "partner_id.id"
-            )
+            beneficiary_ids = create_program_id.get_beneficiaries(["enrolled"]).mapped("partner_id.id")
 
             for beneficiary_id in beneficiary_ids:
                 tx_name = random.choice(ticket_name_range)

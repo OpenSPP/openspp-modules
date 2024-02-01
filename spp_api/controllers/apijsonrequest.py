@@ -51,9 +51,7 @@ class ApiJsonRequest(WebRequest):
         if jsonp and self.httprequest.method == "POST":
             # jsonp 2 steps step1 POST: save call
             def handler():
-                self.session[
-                    "jsonp_request_{}".format(request_id)
-                ] = self.httprequest.form["rb"]
+                self.session[f"jsonp_request_{request_id}"] = self.httprequest.form["rb"]
                 self.session.modified = True
                 headers = [("Content-Type", "text/plain; charset=utf-8")]
                 r = werkzeug.wrappers.Response(request_id, headers=headers)
@@ -66,7 +64,7 @@ class ApiJsonRequest(WebRequest):
             request = args.get("rb")
         elif jsonp and request_id:
             # jsonp 2 steps step2 GET: run and return result
-            request = self.session.pop("jsonp_request_{}".format(request_id), "{}")
+            request = self.session.pop(f"jsonp_request_{request_id}", "{}")
         else:
             # regular jsonrpc2
             request = self.httprequest.get_data().decode(self.httprequest.charset)
@@ -75,7 +73,7 @@ class ApiJsonRequest(WebRequest):
         try:
             self.ApiJsonRequest = json.loads(request)
         except ValueError as e:
-            msg = "Invalid JSON data: {!r}".format(request)
+            msg = f"Invalid JSON data: {request!r}"
             _logger.info("%s: %s", self.httprequest.path, msg)
             raise werkzeug.exceptions.BadRequest(msg) from e
 
@@ -83,18 +81,13 @@ class ApiJsonRequest(WebRequest):
         self.context = self.params.pop("context", dict(self.session.context))
 
     def _json_response(self, result=None, error=None):
-
         response = {}
         if error is not None:
             response["error"] = error
 
         mime = "application/json"
         status = error and error.pop("code") or result.status_code
-        body = (
-            response
-            and json.dumps(response, default=date_utils.json_default)
-            or result.data
-        )
+        body = response and json.dumps(response, default=date_utils.json_default) or result.data
 
         return Response(
             body,
@@ -152,9 +145,7 @@ class ApiJsonRequest(WebRequest):
                 if psutil:
                     start_memory = memory_info(psutil.Process(os.getpid()))
                 if rpc_request and rpc_response_flag:
-                    rpc_request.debug(
-                        "%s: %s %s, %s", endpoint, model, method, pprint.pformat(args)
-                    )
+                    rpc_request.debug("%s: %s %s, %s", endpoint, model, method, pprint.pformat(args))
 
             result = self._call_function(**self.params)
 
@@ -183,7 +174,6 @@ class ApiJsonRequest(WebRequest):
 
 # Copy of http.route adding routing 'type':'api'
 def api_route(route=None, **kw):
-
     routing = kw.copy()
     assert "type" not in routing or routing["type"] in ("http", "json", "apijson")
 
@@ -212,8 +202,7 @@ def api_route(route=None, **kw):
                 return response
 
             _logger.warn(
-                "<function %s.%s> returns an invalid response type for an http request"
-                % (f.__module__, f.__name__)
+                "<function %s.%s> returns an invalid response type for an http request" % (f.__module__, f.__name__)
             )
             return response
 
@@ -230,10 +219,7 @@ get_request_original = Root.get_request
 def api_get_request(self, httprequest):
     # deduce type of request
 
-    if (
-        "authorization" in httprequest.headers
-        and httprequest.headers.get("content-type", "") == "application/json"
-    ):
+    if "authorization" in httprequest.headers and httprequest.headers.get("content-type", "") == "application/json":
         return ApiJsonRequest(httprequest)
 
     return get_request_original(self, httprequest)

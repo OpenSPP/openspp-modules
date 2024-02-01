@@ -10,9 +10,7 @@ _logger = logging.getLogger(__name__)
 class ResUsersRoleCustomSPP(models.Model):
     _inherit = "res.users.role"
 
-    role_type = fields.Selection(
-        [("local", "Local"), ("global", "Global")], default="global"
-    )
+    role_type = fields.Selection([("local", "Local"), ("global", "Global")], default="global")
 
     @api.onchange("role_type")
     def _onchange_role_type(self):

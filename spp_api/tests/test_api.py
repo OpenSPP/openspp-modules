@@ -65,20 +65,12 @@ class TestAPI(HttpCase):
                         (
                             0,
                             0,
-                            {
-                                "field_id": cls.env.ref(
-                                    "base.field_res_partner__name"
-                                ).id
-                            },
+                            {"field_id": cls.env.ref("base.field_res_partner__name").id},
                         ),
                         (
                             0,
                             0,
-                            {
-                                "field_id": cls.env.ref(
-                                    "base.field_res_partner__type"
-                                ).id
-                            },
+                            {"field_id": cls.env.ref("base.field_res_partner__type").id},
                         ),
                     ],
                 },
@@ -92,20 +84,12 @@ class TestAPI(HttpCase):
                         (
                             0,
                             0,
-                            {
-                                "field_id": cls.env.ref(
-                                    "base.field_res_partner__name"
-                                ).id
-                            },
+                            {"field_id": cls.env.ref("base.field_res_partner__name").id},
                         ),
                         (
                             0,
                             0,
-                            {
-                                "field_id": cls.env.ref(
-                                    "base.field_res_partner__type"
-                                ).id
-                            },
+                            {"field_id": cls.env.ref("base.field_res_partner__type").id},
                         ),
                     ],
                 },
@@ -123,19 +107,13 @@ class TestAPI(HttpCase):
         kwargs.setdefault("model", self.model_name)
         kwargs.setdefault("namespace", "demo")
         kwargs.setdefault("namespace_version", "v1")
-        url = (
-            "http://localhost:%d/api/{namespace}/{namespace_version}"
-            % config["http_port"]
-            + url
-        ).format(**kwargs)
+        url = ("http://localhost:%d/api/{namespace}/{namespace_version}" % config["http_port"] + url).format(**kwargs)
         self.opener = requests.Session()
         if method in ["POST", "PUT", "PATCH"]:
             json_data = kwargs.get("data_json")
             if "request_id" not in json_data:
                 json_data["request_id"] = uuid.uuid4().__str__()
-            return self.opener.request(
-                method, url, timeout=30, auth=auth, json=kwargs.get("data_json")
-            )
+            return self.opener.request(method, url, timeout=30, auth=auth, json=kwargs.get("data_json"))
         params = {"request_id": uuid.uuid4().__str__()}
         return self.opener.request(
             method,
@@ -159,18 +137,14 @@ class TestAPI(HttpCase):
     @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_read_one(self):
         record_id = self.phantom_env[self.model_name].search([], limit=1).id
-        resp = self.request_from_user(
-            self.demo_user, "GET", "/{model}/{record_id}", record_id=record_id
-        )
+        resp = self.request_from_user(self.demo_user, "GET", "/{model}/{record_id}", record_id=record_id)
         self.assertEqual(resp.status_code, pinguin.CODE__success)
         # TODO check content
 
     @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_create_one(self):
         data_for_create = {"name": "created_from_test", "type": "other"}
-        resp = self.request_from_user(
-            self.admin_user, "POST", "/{model}", data_json=data_for_create
-        )
+        resp = self.request_from_user(self.admin_user, "POST", "/{model}", data_json=data_for_create)
         self.assertEqual(resp.status_code, pinguin.CODE__created)
         self.assertIn("timestamp", resp.json().keys())
         self.assertIn("reply_id", resp.json().keys())
@@ -206,23 +180,15 @@ class TestAPI(HttpCase):
         self.assertIn("reply_id", resp.json().keys())
         # TODO: check result
 
-    @mute_logger(
-        "odoo.addons.spp_api.controllers.pinguin", "werkzeug", "odoo.models.unlink"
-    )
+    @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug", "odoo.models.unlink")
     def test_unlink_one(self):
         with self.env.cr.savepoint():
-            partner = self.phantom_env[self.model_name].create(
-                {"name": "record for deleting from test"}
-            )
+            partner = self.phantom_env[self.model_name].create({"name": "record for deleting from test"})
             self.phantom_env[self.model_name].invalidate_model()
 
-            resp = self.request_from_user(
-                self.admin_user, "DELETE", "/{model}/{record_id}", record_id=partner.id
-            )
+            resp = self.request_from_user(self.admin_user, "DELETE", "/{model}/{record_id}", record_id=partner.id)
             self.assertEqual(resp.status_code, pinguin.CODE__success)
-            self.assertFalse(
-                self.phantom_env[self.model_name].browse(partner.id).exists()
-            )
+            self.assertFalse(self.phantom_env[self.model_name].browse(partner.id).exists())
 
     @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_unauthorized_user(self):
@@ -272,13 +238,8 @@ class TestAPI(HttpCase):
 
     @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_call_allowed_method_on_singleton_record(self):
-        if (
-            not self.env["ir.module.module"].search([("name", "=", "mail")]).state
-            == "installed"
-        ):
-            self.skipTest(
-                "To run test 'test_call_allowed_method_on_singleton_record' install 'mail'-module"
-            )
+        if not self.env["ir.module.module"].search([("name", "=", "mail")]).state == "installed":
+            self.skipTest("To run test 'test_call_allowed_method_on_singleton_record' install 'mail'-module")
         self.env["spp_api.path"].create(
             {
                 "name": "res.partner",
@@ -339,9 +300,7 @@ class TestAPI(HttpCase):
         )
 
         self.assertEqual(resp.status_code, pinguin.CODE__success)
-        self.assertListEqual(
-            partners.mapped("name"), [method_params["vals"]["name"]] * 5
-        )
+        self.assertListEqual(partners.mapped("name"), [method_params["vals"]["name"]] * 5)
 
     def test_call_model_method(self):
         self.env["spp_api.path"].create(
