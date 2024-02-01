@@ -4,15 +4,16 @@ from odoo.tools.safe_eval import safe_eval
 
 @tagged("post_install", "-at_install")
 class TestSppStarter(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.sgd = self.env.ref("base.SGD").id
-        self.test_record = self.env["spp.starter"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.sgd = cls.env.ref("base.SGD").id
+        cls.test_record = cls.env["spp.starter"].create(
             {
                 "org_name": "Newlogic",
                 "org_address": "160 Robinson Rd #14-04 SBF Centre Singapore 068914",
                 "org_phone": "+65 3138 4664",
-                "org_currency_id": self.sgd,
+                "org_currency_id": cls.sgd,
             }
         )
 

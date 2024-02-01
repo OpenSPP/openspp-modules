@@ -8,9 +8,9 @@
         <field name="inherit_id" ref="spp_custom_fields_ui.view_custom_fields_ui_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='copied']" position="after">
-                <field name="with_weight" attrs="{'invisible': [('field_category','!=','cst')]}" />
-                <field name="field_weight" attrs="{'invisible': [('with_weight','=',False)]}" />
-                <field name="area_ids" attrs="{'invisible': [('with_weight','=',False)]}">
+                <field name="with_weight" invisible="field_category != 'cst'" />
+                <field name="field_weight" invisible="not with_weight" />
+                <field name="area_ids" invisible="not with_weight">
                     <tree editable="bottom">
                         <field name="name" />
                         <field name="weight" />
