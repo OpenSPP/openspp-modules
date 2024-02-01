@@ -119,7 +119,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
             mgr = man_obj.create(
                 {
                     "program_id": program_id,
-                    "manager_ref_id": "%s,%s" % (def_mgr_obj, str(def_mgr.id)),
+                    "manager_ref_id": f"{def_mgr_obj},{str(def_mgr.id)}",
                 }
             )
             res = {"entitlement_managers": [(4, mgr.id)]}

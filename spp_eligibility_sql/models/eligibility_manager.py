@@ -103,20 +103,17 @@ class SQLEligibilityManager(models.Model):
         elif self.program_id.target_type == "individual":
             where_clause += " AND NOT is_group"
 
-        sql_query = """
+        sql_query = f"""
             WITH tbl AS (
-                %s
+                {sql}
             )
             SELECT id FROM res_partner
             WHERE
-            %s
+            {where_clause}
             AND id IN (
                 SELECT id FROM tbl
             )
-        """ % (
-            sql,
-            where_clause,
-        )
+        """
         _logger.debug("DB Query: %s" % sql_query)
 
         return sql_query

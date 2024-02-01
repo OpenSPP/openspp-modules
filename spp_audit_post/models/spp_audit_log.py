@@ -73,9 +73,11 @@ class SppAuditLog(models.Model):
                     row += "<td>%s</td>" % item
                 tbody += "<tr>%s</tr>" % row
             tbody = "<tbody>%s</tbody>" % tbody
-            rec.parent_data_html = '<table class="o_list_view table table-condensed ' 'table-striped">%s%s</table>' % (
-                thead,
-                tbody,
+            rec.parent_data_html = (
+                '<table class="o_list_view table table-condensed ' 'table-striped">{}{}</table>'.format(
+                    thead,
+                    tbody,
+                )
             )
 
     @api.depends("parent_model_id")

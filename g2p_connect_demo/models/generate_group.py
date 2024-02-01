@@ -211,7 +211,7 @@ class OpenG2PGenerateData(models.Model):
                         }
                     )
 
-        msg = "Task Queue called task: model [%s] and method [%s]." % (
+        msg = "Task Queue called task: model [{}] and method [{}].".format(
             self._name,
             "_generate_sample_data",
         )

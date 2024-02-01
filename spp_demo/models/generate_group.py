@@ -185,7 +185,7 @@ class G2PGenerateData(models.Model):
             if res.state == "draft":
                 res.update({"state": "generate"})
 
-        msg = "Task Queue called task: model [%s] and method [%s]." % (
+        msg = "Task Queue called task: model [{}] and method [{}].".format(
             self._name,
             "_generate_sample_data",
         )

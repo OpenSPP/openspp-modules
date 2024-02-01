@@ -75,7 +75,7 @@ class Namespace(models.Model):
     @api.depends("name", "version_name", "description")
     def _compute_display_name(self):
         for rec in self:
-            rec.display_name = "/api/%s/%s%s" % (
+            rec.display_name = "/api/{}/{}{}".format(
                 rec.name,
                 rec.version_name,
                 " (%s)" % rec.description if rec.description else "",
@@ -121,7 +121,7 @@ class Namespace(models.Model):
                 ("swagger", "2.0"),
                 ("info", {"title": self.name, "version": self.write_date}),
                 ("host", parsed_current_host.netloc),
-                ("basePath", "/api/%s/%s" % (self.name, version)),
+                ("basePath", f"/api/{self.name}/{version}"),
                 ("schemes", [parsed_current_host.scheme]),
                 (
                     "consumes",

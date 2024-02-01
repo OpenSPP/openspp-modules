@@ -123,7 +123,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
     def _get_eligibility_managers_val(self, program_id, def_mgr):
         return {
             "program_id": program_id,
-            "manager_ref_id": "%s,%s" % (def_mgr._name, str(def_mgr.id)),
+            "manager_ref_id": f"{def_mgr._name},{str(def_mgr.id)}",
         }
 
     def _get_eligibility_manager(self, program_id):
@@ -147,7 +147,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
     def get_cycle_manager_val(self, program_id, cycle_manager_default):
         return {
             "program_id": program_id,
-            "manager_ref_id": "%s,%s" % (cycle_manager_default._name, str(cycle_manager_default.id)),
+            "manager_ref_id": f"{cycle_manager_default._name},{str(cycle_manager_default.id)}",
         }
 
     def get_cycle_manager_default_val(self, program_id):
@@ -203,7 +203,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             mgr = man_obj.create(
                 {
                     "program_id": program_id,
-                    "manager_ref_id": "%s,%s" % (def_mgr_obj, str(def_mgr.id)),
+                    "manager_ref_id": f"{def_mgr_obj},{str(def_mgr.id)}",
                 }
             )
             val = {"entitlement_managers": [(4, mgr.id)]}

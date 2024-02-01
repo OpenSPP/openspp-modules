@@ -60,6 +60,6 @@ class OpenSPPRequestIDWizard(models.TransientModel):
         """
         for rec in self:
             rec.is_idpass = False
-            _logger.info("ID REQUEST: %s %s" % (rec.id_type.id, self.env.ref("spp_idpass.id_type_idpass").id))
+            _logger.info("ID REQUEST: {} {}".format(rec.id_type.id, self.env.ref("spp_idpass.id_type_idpass").id))
             if rec.id_type and rec.id_type.id == self.env.ref("spp_idpass.id_type_idpass").id:
                 rec.is_idpass = True

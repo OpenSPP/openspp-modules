@@ -115,10 +115,7 @@ class SppAuditLog(models.Model):
                     row += "<td>%s</td>" % item
                 tbody += "<tr>%s</tr>" % row
             tbody = "<tbody>%s</tbody>" % tbody
-            rec.data_html = '<table class="o_list_view table table-condensed ' 'table-striped">%s%s</table>' % (
-                thead,
-                tbody,
-            )
+            rec.data_html = '<table class="o_list_view table table-condensed ' f'table-striped">{thead}{tbody}</table>'
 
     def unlink(self):
         if not self.ALLOW_DELETE:

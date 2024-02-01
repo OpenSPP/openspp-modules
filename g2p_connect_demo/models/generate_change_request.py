@@ -107,10 +107,10 @@ class OpenG2PGenerateChangeRequestData(models.Model):
                 "applicant_id": applicant_id,
                 "applicant_phone": applicant_phone,
             }
-            _logger.debug("Processing #%s Data: %s" % (i, cr_vals))
+            _logger.debug(f"Processing #{i} Data: {cr_vals}")
             cr_sample_data.append(cr_vals)
 
-        _logger.debug("Sample CR Data: Total: %s \nData: %s" % (len(cr_sample_data), cr_sample_data))
+        _logger.debug(f"Sample CR Data: Total: {len(cr_sample_data)} \nData: {cr_sample_data}")
 
         generated_crs = self.env["spp.change.request"].create(cr_sample_data)
         generated_crs.create_request_detail_demo()

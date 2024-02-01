@@ -86,7 +86,7 @@ class OpenSPPGenerateProgramData(models.Model):
             eli_mgr_id = eli_man_obj.create(
                 {
                     "program_id": create_program_id.id,
-                    "manager_ref_id": "%s,%s" % (def_eli_mgr_obj, str(def_eli_mgr_id.id)),
+                    "manager_ref_id": f"{def_eli_mgr_obj},{str(def_eli_mgr_id.id)}",
                 }
             )
 
@@ -111,7 +111,7 @@ class OpenSPPGenerateProgramData(models.Model):
             cycle_man_id = cycle_man_obj.create(
                 {
                     "program_id": create_program_id.id,
-                    "manager_ref_id": "%s,%s" % (def_cycle_mgr_obj, str(def_cycle_mgr_id.id)),
+                    "manager_ref_id": f"{def_cycle_mgr_obj},{str(def_cycle_mgr_id.id)}",
                 }
             )
             vals.update({"cycle_managers": [(4, cycle_man_id.id)]})
@@ -135,7 +135,7 @@ class OpenSPPGenerateProgramData(models.Model):
             prog_ent_id = prog_ent_obj.create(
                 {
                     "program_id": create_program_id.id,
-                    "manager_ref_id": "%s,%s" % (def_prog_ent_mgr_obj, str(def_prog_ent_mgr_id.id)),
+                    "manager_ref_id": f"{def_prog_ent_mgr_obj},{str(def_prog_ent_mgr_id.id)}",
                 }
             )
             vals.update({"entitlement_managers": [(4, prog_ent_id.id)]})

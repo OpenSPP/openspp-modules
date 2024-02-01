@@ -32,7 +32,7 @@ def audit_decorator(method):
     @api.model
     def audit_create(self, vals):
         result = audit_create.origin(self, vals)
-        record = self.browse(result) if isinstance(result, (int, long)) else result
+        record = self.browse(result) if isinstance(result, int | long) else result
         rules = self.get_audit_rules("create")
 
         new_values = record.read(load="_classic_write")

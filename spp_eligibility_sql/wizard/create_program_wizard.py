@@ -69,20 +69,17 @@ class SPPCreateNewProgramWiz(models.TransientModel):
         elif self.target_type == "individual":
             where_clause += " AND NOT is_group"
 
-        sql_query = """
+        sql_query = f"""
             WITH tbl AS (
-                %s
+                {sql}
             )
             SELECT id FROM res_partner
             WHERE
-            %s
+            {where_clause}
             AND id IN (
                 SELECT id FROM tbl
             )
-        """ % (
-            sql,
-            where_clause,
-        )
+        """
         _logger.debug("SQL-based Eligibility Wizard: DB Query: %s" % sql_query)
 
         return sql_query
@@ -159,7 +156,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
             mgr = man_obj.create(
                 {
                     "program_id": program_id,
-                    "manager_ref_id": "%s,%s" % (def_mgr_obj, str(def_mgr.id)),
+                    "manager_ref_id": f"{def_mgr_obj},{str(def_mgr.id)}",
                 }
             )
             res = {"eligibility_managers": [(4, mgr.id)]}

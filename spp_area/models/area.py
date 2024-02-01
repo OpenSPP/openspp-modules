@@ -85,10 +85,7 @@ class OpenSPPArea(models.Model):
 
             if rec.id:
                 if rec.parent_id:
-                    rec.complete_name = "%s > %s" % (
-                        rec.parent_id.complete_name,
-                        rec.name,
-                    )
+                    rec.complete_name = f"{rec.parent_id.complete_name} > {rec.name}"
                 else:
                     rec.complete_name = rec.name
             else:
@@ -198,10 +195,7 @@ class OpenSPPAreaKind(models.Model):
         for rec in self:
             if rec.id:
                 if rec.parent_id:
-                    rec.complete_name = "%s > %s" % (
-                        rec.parent_id.complete_name,
-                        rec.name,
-                    )
+                    rec.complete_name = f"{rec.parent_id.complete_name} > {rec.name}"
                 else:
                     rec.complete_name = rec.name
             else:

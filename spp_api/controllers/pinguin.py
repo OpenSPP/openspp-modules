@@ -218,7 +218,7 @@ def get_data_from_basic_auth_header(header):
         db_name, user_token = decoded_token_parts
     else:
         err_descrip = (
-            'Basic auth header payload must be of the form "<%s>" (encoded to base64)' % "user_token"
+            'Basic auth header payload must be of the form "<{}>" (encoded to base64)'.format("user_token")
             if odoo.tools.config["dbfilter"]
             else "db_name:user_token"
         )
@@ -431,7 +431,7 @@ def route(*args, **kwargs):
             method = ikwargs.get("method")
 
             db_name, user_token = get_data_from_auth_header(auth_header)
-            _logger.info("db_name: %s - user_token: %s" % (db_name, user_token))
+            _logger.info(f"db_name: {db_name} - user_token: {user_token}")
             setup_db(request.httprequest, db_name)
             authenticated_user = authenticate_token_for_user(user_token)
             path = get_openapi_path(namespace, version, model, method)

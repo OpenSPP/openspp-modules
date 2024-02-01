@@ -19,7 +19,7 @@ class TestProgram(TransactionCase):
         eligibility_manager = self.env["g2p.eligibility.manager"].create(
             {
                 "program_id": self.program.id,
-                "manager_ref_id": "%s,%s" % (manager_default._name, str(manager_default.id)),
+                "manager_ref_id": f"{manager_default._name},{str(manager_default.id)}",
             }
         )
         self.program.update({"eligibility_managers": [(4, eligibility_manager.id)]})

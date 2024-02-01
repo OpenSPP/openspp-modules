@@ -75,8 +75,7 @@ class DashBoardBlock(models.Model):
                             records = safe_eval.safe_eval(model_func_args, {"self": self})
                         except Exception as ex:
                             _logger.info(
-                                "DEBUG! Error executing the function: %s of model: %s"
-                                % (model_func_args, rec.model_name)
+                                f"DEBUG! Error executing the function: {model_func_args} of model: {rec.model_name}"
                             )
                             _logger.info("DEBUG! %s " % ex)
                             records = None
@@ -99,7 +98,7 @@ class DashBoardBlock(models.Model):
                 magnitude += 1
                 total /= 1000.0
             # add more suffixes if you need them
-            val = "%.2f%s" % (
+            val = "{:.2f}{}".format(
                 total,
                 ["", "K", "M", "G", "T", "P"][magnitude],
             )

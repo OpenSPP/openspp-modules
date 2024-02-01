@@ -87,7 +87,7 @@ def validate_spec(model, spec):
             # Syntax checks
             if len(field) != 2:
                 raise Exception("Tuples representing fields must have length 2. (%r)" % field)
-            if not isinstance(field[1], (tuple, list)):
+            if not isinstance(field[1], tuple | list):
                 raise Exception(
                     """Tuples representing fields must have a tuple wrapped in
                     a list or a bare tuple as it's second item. (%r)"""

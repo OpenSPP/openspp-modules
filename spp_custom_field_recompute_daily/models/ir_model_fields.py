@@ -23,8 +23,8 @@ class IrModelFields(models.Model):
         recompute_daily = getattr(field, "recompute_daily", False)
         if recompute_daily and not all([compute, store]):
             _logger.warning(
-                "Non-compute-stored field: (%s, %s) on model '%s' "
-                "is not allowed to be recomputed daily!" % (field.name, field.string, field.model_name)
+                f"Non-compute-stored field: ({field.name}, {field.string}) on model '{field.model_name}' "
+                "is not allowed to be recomputed daily!"
             )
             recompute_daily = False
         vals["recompute_daily"] = recompute_daily

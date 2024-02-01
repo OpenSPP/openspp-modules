@@ -104,12 +104,10 @@ class ApiJsonRequest(WebRequest):
         except Exception:
             if not isinstance(
                 exception,
-                (
-                    odoo.exceptions.Warning,
-                    SessionExpiredException,
-                    odoo.exceptions.except_orm,
-                    werkzeug.exceptions.NotFound,
-                ),
+                odoo.exceptions.Warning
+                | SessionExpiredException
+                | odoo.exceptions.except_orm
+                | werkzeug.exceptions.NotFound,
             ):
                 _logger.exception("Exception during JSON request handling.")
             error = {
@@ -191,7 +189,7 @@ def api_route(route=None, **kw):
             if isinstance(response, Response) or f.routing_type in ("apijson", "json"):
                 return response
 
-            if isinstance(response, (bytes, str)):
+            if isinstance(response, bytes | str):
                 return Response(response)
 
             if isinstance(response, werkzeug.exceptions.HTTPException):
@@ -201,9 +199,7 @@ def api_route(route=None, **kw):
                 response.set_default()
                 return response
 
-            _logger.warn(
-                "<function %s.%s> returns an invalid response type for an http request" % (f.__module__, f.__name__)
-            )
+            _logger.warn(f"<function {f.__module__}.{f.__name__}> returns an invalid response type for an http request")
             return response
 
         response_wrap.routing = routing
