@@ -71,7 +71,7 @@
                                     <field name="land_coordinates" />
                                 </div>
                             </page>
-                            <page name="npa_shape" string="NPA Shape">
+                            <page name="farm_land" string="Farm Land">
                                 <div class="col-12 col-lg-9 o_setting_box">
                                     <label for="land_geo_polygon" />
                                     <div>
