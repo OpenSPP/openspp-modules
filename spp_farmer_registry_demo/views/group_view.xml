@@ -6,142 +6,148 @@
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='ids']" position="before">
-                <page name="section_details_enterprise" string="Details and Enterprises">
+                <page name="section_details" string="Details">
                     <h4>Farm Details</h4>
-                    <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
+                    <div
+                        class="row mt16 o_settings_container"
+                        style="border-bottom: 1px solid #808080; border-top: 1px solid #808080"
+                    >
+                        <div class="col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="lease_agreement_number" />
+                                <div>
+                                </div>
+                                <field name="lease_agreement_number" />
+                            </div>
+                        </div>
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_name"/>
+                                <label for="land_name" />
                                 <div class="text-muted">
                                 </div>
-                                <field name="land_name"/>
+                                <field name="land_name" />
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_acreage"/>
+                                <label for="land_acreage" />
                                 <div class="text-muted">
                                 </div>
-                                <field name="land_acreage"/>
+                                <field name="land_acreage" />
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_coordinates"/>
+                                <label for="details_legal_status" />
                                 <div>
                                 </div>
-                                <field name="land_coordinates"/>
+                                <field name="details_legal_status" />
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_geo_polygon"/>
+                                <label for="lease_term" />
                                 <div>
                                 </div>
-                                <field name="land_geo_polygon"/>
+                                <field name="lease_term" />
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="details_legal_status"/>
-                                <div>
+                        <notebook>
+                            <page name="address_coordinates" string="Address Coordinates">
+                                <div class="col-12 col-lg-9 o_setting_box">
+                                    <label for="land_coordinates" />
+                                    <div>
+                                    </div>
+                                    <field name="land_coordinates" />
                                 </div>
-                                <field name="details_legal_status"/>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="lease_term"/>
-                                <div>
+                            </page>
+                            <page name="npa_shape" string="NPA Shape">
+                                <div class="col-12 col-lg-9 o_setting_box">
+                                    <label for="land_geo_polygon" />
+                                    <div>
+                                    </div>
+                                    <field name="land_geo_polygon" />
                                 </div>
-                                <field name="lease_term"/>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="lease_agreement_number"/>
-                                <div>
-                                </div>
-                                <field name="lease_agreement_number"/>
-                            </div>
-                        </div>
+                            </page>
+                        </notebook>
                     </div>
-                    <br/>
+                    <br />
+                    <field name="farm_detail_id" invisible="1" />
+                    <field name="farm_land_rec_id" invisible="1" />
+                </page>
+                <page name="section_enterprise" string="Enterprises">
                     <h4>Main Farm Enterprises</h4>
-                    <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
+                    <div
+                        class="row mt16 o_settings_container"
+                        style="border-bottom: 1px solid #808080; border-top: 1px solid #808080"
+                    >
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="growing_crops_subsistence"/>
+                                <field name="growing_crops_subsistence" />
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="growing_crops_subsistence"/>
+                                <label for="growing_crops_subsistence" />
                             </div>
                         </div>
                          <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="growing_crops_sale"/>
+                                <field name="growing_crops_sale" />
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="growing_crops_sale"/>
+                                <label for="growing_crops_sale" />
                             </div>
                          </div>
                          <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="rearing_livestock_subsistence"/>
+                                <field name="rearing_livestock_subsistence" />
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="rearing_livestock_subsistence"/>
+                                <label for="rearing_livestock_subsistence" />
                             </div>
                          </div>
                          <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="rearing_livestock_sale"/>
+                                <field name="rearing_livestock_sale" />
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="rearing_livestock_sale"/>
+                                <label for="rearing_livestock_sale" />
                             </div>
                          </div>
                          <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="aquaculture_subsistence"/>
+                                <field name="aquaculture_subsistence" />
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="aquaculture_subsistence"/>
+                                <label for="aquaculture_subsistence" />
                             </div>
                          </div>
                          <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="aquaculture_sale"/>
+                                <field name="aquaculture_sale" />
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="aquaculture_sale"/>
+                                <label for="aquaculture_sale" />
                             </div>
                          </div>
                          <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="tree_farming"/>
+                                <field name="tree_farming" />
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="tree_farming"/>
+                                <label for="tree_farming" />
                             </div>
                         </div>
                     </div>
-                    <field name="farm_detail_id" invisible="1"/>
-                    <field name="farm_land_rec_id" invisible="1"/>
                 </page>
                 <page name="section_crop" string="Crop Agriculture">
                     <field name="farm_crop_act_ids" domain="[('activity_type', '=', 'crop')]" context="{'default_activity_type': 'crop'}">
