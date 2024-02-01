@@ -15,7 +15,6 @@
                             <div class="o_setting_right_pane">
                                 <label for="land_name"/>
                                 <div class="text-muted">
-                                Descriptive name
                                 </div>
                                 <field name="land_name"/>
                             </div>
@@ -26,7 +25,6 @@
                             <div class="o_setting_right_pane">
                                 <label for="land_acreage"/>
                                 <div class="text-muted">
-                                Total Acreage (own plus leased in)
                                 </div>
                                 <field name="land_acreage"/>
                             </div>
@@ -175,11 +173,7 @@
                                 <field name="livestock_fertilizer_for_fodder"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="livestock_fertilizer_for_fodder"
-                                       string="Fodder and Pasture Fertilizer"/>
-                                <div class="text-muted">
-                                Do you utilize fertilizer for fodder and pasture?
-                                </div>
+                                <label for="livestock_fertilizer_for_fodder"/>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
@@ -187,11 +181,7 @@
                                 <field name="livestock_certified_pasture"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="livestock_certified_pasture"
-                                       string="Certified Fodder and Pasture Seeds"/>
-                                <div class="text-muted">
-                                Do you use certified pasture and fodder seeds?
-                                </div>
+                                <label for="livestock_certified_pasture"/>
                             </div>
                         </div>
                     </div>
@@ -251,10 +241,8 @@
 
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="aquaculture_type"
-                                string="Aquaculture"/>
+                                <label for="aquaculture_type"/>
                                 <div class="text-muted">
-                                What types of aquaculture do you practice?
                                 </div>
                                 <field name="aquaculture_type"/>
                             </div>
@@ -287,16 +275,15 @@
                             </tree>
                         </field>
                     </div>
-                    <div class="row mt16 o_settings_container">
+                    <br/>
+                    <h4>What are your main inputs?</h4>
+                    <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
                                 <field name="aquaculture_main_inputs_fingerlings"/>
                             </div>
                             <div class="o_setting_right_pane">
                                 <label for="aquaculture_main_inputs_fingerlings"/>
-                                <div class="text-muted">
-                                Is fingerlings your main input?
-                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
@@ -305,9 +292,6 @@
                             </div>
                             <div class="o_setting_right_pane">
                                 <label for="aquaculture_main_inputs_feeds"/>
-                                <div class="text-muted">
-                                Is manufactured feeds your main input?
-                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
@@ -316,9 +300,6 @@
                             </div>
                             <div class="o_setting_right_pane">
                                 <label for="aquaculture_main_inputs_fertilizers"/>
-                                <div class="text-muted">
-                                Is fertilizers your main input?
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -328,11 +309,7 @@
                                 <field name="aquaculture_utilize_fertilizer"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="aquaculture_utilize_fertilizer"
-                                string="Utilize fertilizer"/>
-                                <div class="text-muted">
-                                Do you utilize fertilizer in the ponds?
-                                </div>
+                                <label for="aquaculture_utilize_fertilizer"/>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
@@ -340,10 +317,8 @@
 
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="aquaculture_production_level"
-                                string="Production Level"/>
+                                <label for="aquaculture_production_level"/>
                                 <div class="text-muted">
-                                What is your production level?
                                 </div>
                                 <field name="aquaculture_production_level"/>
                             </div>
@@ -353,11 +328,7 @@
                                 <field name="aquaculture_beneficiary_esp"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="aquaculture_beneficiary_esp"
-                                string="ESP Beneficiary"/>
-                                <div class="text-muted">
-                                Are you a beneficiary of the government of Kenya's economic stimulus programme (ESP)?
-                                </div>
+                                <label for="aquaculture_beneficiary_esp"/>
                             </div>
                         </div>
                     </div>
@@ -369,10 +340,8 @@
 
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="farm_technology_power_source"
-                                string="Power Source"/>
+                                <label for="farm_technology_power_source"/>
                                 <div class="text-muted">
-                                What are the sources of power for farm activities?
                                 </div>
                                 <field name="farm_technology_power_source"/>
                             </div>
@@ -382,10 +351,8 @@
 
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="farm_technology_labor_source"
-                                string="Labor Source"/>
+                                <label for="farm_technology_labor_source"/>
                                 <div class="text-muted">
-                                For labor, what is the main source?
                                 </div>
                                 <field name="farm_technology_labor_source"/>
                             </div>
@@ -408,10 +375,8 @@
 
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="farm_technology_own_equipment"
-                                string="Frequently Used"/>
+                                <label for="farm_technology_own_equipment"/>
                                 <div class="text-muted">
-                                Who Owns Most Of The Frequently Used Equipment?
                                 </div>
                                 <field name="farm_technology_own_equipment"/>
                             </div>
@@ -719,10 +684,8 @@
                                 <field name="land_water_management_subsidized_fertilizer"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_water_management_subsidized_fertilizer"
-                                string="Govt. Subsidized fertilizer"/>
+                                <label for="land_water_management_subsidized_fertilizer"/>
                                 <div class="text-muted">
-                                Have you benefited from Govt. Subsidized fertilizer?
                                 </div>
                             </div>
                         </div>
@@ -731,11 +694,7 @@
                                 <field name="land_water_management_use_lime"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_water_management_use_lime"
-                                string="Lime on soil"/>
-                                <div class="text-muted">
-                                Do you use lime on your soil?
-                                </div>
+                                <label for="land_water_management_use_lime"/>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
@@ -743,11 +702,7 @@
                                 <field name="land_water_management_soil_testing"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_water_management_soil_testing"
-                                string="Soil Testing"/>
-                                <div class="text-muted">
-                                Have you done soil testing in the last 3 years?
-                                </div>
+                                <label for="land_water_management_soil_testing"/>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
@@ -755,10 +710,8 @@
                                 <field name="land_water_management_undertake_irrigation"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_water_management_undertake_irrigation"
-                                       string="Irrigation"/>
+                                <label for="land_water_management_undertake_irrigation"/>
                                 <div class="text-muted">
-                                Do you undertake irrigation?
                                 </div>
                             </div>
                         </div>
@@ -766,10 +719,8 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_water_management_irrigation_type"
-                                       string="Irrigation Type"/>
+                                <label for="land_water_management_irrigation_type"/>
                                 <div class="text-muted">
-                                Type of Irrigation
                                 </div>
                                 <field name="land_water_management_irrigation_type"/>
                             </div>
@@ -778,10 +729,8 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_water_management_irrigation_source"
-                                       string="Irrigation Source"/>
+                                <label for="land_water_management_irrigation_source"/>
                                 <div class="text-muted">
-                                What is the main source of water for Irrigation activities?
                                 </div>
                                 <field name="land_water_management_irrigation_source"/>
                             </div>
@@ -790,9 +739,8 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_water_management_total_irrigated_area"/>
+                                <label for="land_water_management_total_irrigated_area" string="What is the total area under irrigation?"/>
                                 <div class="text-muted">
-                                What is the total area under irrigation?
                                 </div>
                                 <field name="land_water_management_total_irrigated_area"/>
                             </div>
@@ -814,7 +762,6 @@
                             <div class="o_setting_right_pane">
                                 <label for="land_water_management_type_of_irrigation_project_name"/>
                                 <div class="text-muted">
-                                (provide name for public and community schemes)
                                 </div>
                                 <field name="land_water_management_type_of_irrigation_project_name"/>
                             </div>
@@ -823,9 +770,9 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_water_management_implementing_body"/>
+                                <label for="land_water_management_implementing_body"
+                                string="For irrigation schemes, what is the implementing body?"/>
                                 <div class="text-muted">
-                                For irrigation schemes, what is the implementing body?
                                 </div>
                                 <field name="land_water_management_implementing_body"/>
                             </div>
@@ -834,9 +781,9 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="land_water_management_irrigation_scheme_membership"/>
+                                <label for="land_water_management_irrigation_scheme_membership"
+                                string="What is your operational irrigation scheme membership?"/>
                                 <div class="text-muted">
-                                What is your operational irrigation scheme membership?
                                 </div>
                                 <field name="land_water_management_irrigation_scheme_membership"/>
                             </div>
@@ -849,10 +796,8 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="financial_services_main_income_source"
-                                string="Source of Income"/>
+                                <label for="financial_services_main_income_source"/>
                                 <div class="text-muted">
-                                What is your main source of income by priority?
                                 </div>
                                 <field name="financial_services_main_income_source"/>
                             </div>
@@ -861,10 +806,8 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="financial_services_percentage_of_income_from_farming"
-                                string="Income Percentage"/>
+                                <label for="financial_services_percentage_of_income_from_farming"/>
                                 <div class="text-muted">
-                                What percentage of your income comes from farming activities?
                                 </div>
                                 <field name="financial_services_percentage_of_income_from_farming"/>
                             </div>
@@ -1029,11 +972,7 @@
                                 <field name="financial_services_crop_insurance"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="financial_services_crop_insurance"
-                                string="Crop Insurance"/>
-                                <div class="text-muted">
-                                Do you insure your crops?
-                                </div>
+                                <label for="financial_services_crop_insurance"/>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
@@ -1041,11 +980,7 @@
                                 <field name="financial_services_livestock_insurance"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="financial_services_livestock_insurance"
-                                string="Livestock Insurance"/>
-                                <div class="text-muted">
-                                Do you insure your livestock?
-                                </div>
+                                <label for="financial_services_livestock_insurance" />
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
@@ -1053,11 +988,7 @@
                                 <field name="financial_services_fish_insurance"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="financial_services_fish_insurance"
-                                string="Fish Insurance"/>
-                                <div class="text-muted">
-                                Do you insure your fish?
-                                </div>
+                                <label for="financial_services_fish_insurance" />
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
@@ -1065,11 +996,7 @@
                                 <field name="financial_services_farm_building_insurance"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="financial_services_farm_building_insurance"
-                                string="Farm building and assets Insurance"/>
-                                <div class="text-muted">
-                                Do you insure your farm buildings and other assets?
-                                </div>
+                                <label for="financial_services_farm_building_insurance"/>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
@@ -1077,21 +1004,15 @@
                                 <field name="financial_services_written_farm_records"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="financial_services_written_farm_records"
-                                string="Written farm records"/>
-                                <div class="text-muted">
-                                Do you keep written farm records?
-                                </div>
+                                <label for="financial_services_written_farm_records"/>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="financial_services_main_source_of_information_on_good_agricultu"
-                                string="Main source of information on (GAP)"/>
+                                <label for="financial_services_main_source_of_information_on_good_agricultu" />
                                 <div class="text-muted">
-                                What is your main source of information on good agricultural practices (GAP)?
                                 </div>
                                 <field name="financial_services_main_source_of_information_on_good_agricultu"/>
                             </div>
@@ -1100,10 +1021,8 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="financial_services_mode_of_extension_service"
-                                string="Extension Service"/>
-                                <div class="text-muted">
-                                What is the mode of extension service that you receive?
+                                <label for="financial_services_mode_of_extension_service"/>
+                                <div>
                                 </div>
                                 <field name="financial_services_mode_of_extension_service"/>
                             </div>
@@ -1112,10 +1031,8 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="financial_services_main_extension_service_provider"
-                                string="Main extension service provider"/>
-                                <div class="text-muted">
-                                What is your main extension service provider?
+                                <label for="financial_services_main_extension_service_provider"/>
+                                <div>
                                 </div>
                                 <field name="financial_services_main_extension_service_provider"/>
                             </div>
