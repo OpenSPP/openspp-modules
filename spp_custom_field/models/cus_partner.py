@@ -15,7 +15,7 @@ class OpenSPPResPartner(models.Model):
     _inherit = "res.partner"
 
     def _get_view(self, view_id=None, view_type="form", **options):
-        arch, view = super(OpenSPPResPartner, self)._get_view(view_id, view_type, **options)
+        arch, view = super()._get_view(view_id, view_type, **options)
 
         if view_type == "form":
             doc = arch

@@ -99,7 +99,7 @@ class InKindEntitlement(models.Model):
     ]
 
     def _get_view(self, view_id=None, view_type="list", **options):
-        arch, view = super(InKindEntitlement, self)._get_view(view_id=view_id, view_type=view_type, **options)
+        arch, view = super()._get_view(view_id=view_id, view_type=view_type, **options)
 
         group_g2p_admin = self.env.user.has_group("g2p_registry_base.group_g2p_admin")
         if not group_g2p_admin:
@@ -140,7 +140,7 @@ class InKindEntitlement(models.Model):
     def unlink(self):
         for rec in self:
             if rec.state == "draft":
-                return super(InKindEntitlement, self).unlink()
+                return super().unlink()
             else:
                 raise ValidationError(_("Only draft entitlements are allowed to be deleted"))
 

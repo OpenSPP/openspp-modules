@@ -46,7 +46,7 @@ class OpenSPPRegistrant(models.Model):
             if rec.is_company:
                 child_ids = rec.child_ids
 
-        super(OpenSPPRegistrant, self).unlink()
+        super().unlink()
 
         if child_ids:
             child_ids._compute_ind_service_points_ids()

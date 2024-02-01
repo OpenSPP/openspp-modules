@@ -6,7 +6,7 @@ from odoo.tests import TransactionCase
 class TestServicePoint(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestServicePoint, cls).setUpClass()
+        super().setUpClass()
         country = cls.env.ref("base.iq")
         cls.service_point_1 = cls.env["spp.service.point"].create(
             {

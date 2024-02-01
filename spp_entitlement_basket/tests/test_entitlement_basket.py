@@ -13,7 +13,7 @@ _logger = logging.getLogger(__name__)
 class EntitlementBasketTest(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(EntitlementBasketTest, cls).setUpClass()
+        super().setUpClass()
 
         # Initial Setup of Variables
         cls.group_1 = cls.env["res.partner"].create(

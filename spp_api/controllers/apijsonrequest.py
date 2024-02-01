@@ -37,7 +37,7 @@ class ApiJsonRequest(WebRequest):
     _request_type = "http"
 
     def __init__(self, *args):
-        super(ApiJsonRequest, self).__init__(*args)
+        super().__init__(*args)
 
         self.jsonp_handler = None
         self.params = {}
@@ -100,7 +100,7 @@ class ApiJsonRequest(WebRequest):
         to arbitrary responses. Anything returned (except None) will
         be used as response."""
         try:
-            return super(ApiJsonRequest, self)._handle_exception(exception)
+            return super()._handle_exception(exception)
         except Exception:
             if not isinstance(
                 exception,

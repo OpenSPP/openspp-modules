@@ -28,7 +28,7 @@ class OpenSPPRecordConsentWizard(models.TransientModel):
 
     def _get_view(self, view_id=None, view_type="form", **options):
         context = self.env.context
-        arch, view = super(OpenSPPRecordConsentWizard, self)._get_view(view_id, view_type, **options)
+        arch, view = super()._get_view(view_id, view_type, **options)
 
         if view_type == "form":
             update_arch = False

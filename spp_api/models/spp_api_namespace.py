@@ -90,11 +90,11 @@ class Namespace(models.Model):
     @api.model
     def create(self, vals):
         vals = self._fix_name(vals)
-        return super(Namespace, self).create(vals)
+        return super().create(vals)
 
     def write(self, vals):
         vals = self._fix_name(vals)
-        return super(Namespace, self).write(vals)
+        return super().write(vals)
 
     def get_oas(self, version):
         current_host = self.env["ir.config_parameter"].sudo().get_param("web.base.url")

@@ -17,7 +17,7 @@ class IrModelFields(models.Model):
     )
 
     def _reflect_field_params(self, field, model_id):
-        vals = super(IrModelFields, self)._reflect_field_params(field, model_id)
+        vals = super()._reflect_field_params(field, model_id)
         compute = getattr(field, "compute", False) or getattr(field, "related", False)
         store = getattr(field, "store", False)
         recompute_daily = getattr(field, "recompute_daily", False)
@@ -31,7 +31,7 @@ class IrModelFields(models.Model):
         return vals
 
     def _instanciate_attrs(self, field_data):
-        attrs = super(IrModelFields, self)._instanciate_attrs(field_data)
+        attrs = super()._instanciate_attrs(field_data)
         if attrs and field_data.get("recompute_daily"):
             attrs["recompute_daily"] = field_data["recompute_daily"]
         return attrs

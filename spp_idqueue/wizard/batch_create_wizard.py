@@ -20,7 +20,7 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
         queue_ids, state and id_count depending on different
         scenarios
         """
-        res = super(OpenSPPBatchCreateWizard, self).default_get(fields)
+        res = super().default_get(fields)
         if self.env.context.get("active_ids"):
             queue_id = self.env["spp.print.queue.id"].search(
                 [

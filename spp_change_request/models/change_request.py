@@ -150,7 +150,7 @@ class ChangeRequestBase(models.Model):
         if "assign_to_id" not in vals or vals["assign_to_id"] is None:
             vals["assign_to_id"] = self.env.user.id
         vals["name"] = self.env["ir.sequence"].next_by_code("spp.change.request.num")
-        res = super(ChangeRequestBase, self).create(vals)
+        res = super().create(vals)
         # Create pending validation activity
         activity_type = "spp_change_request.pending_validation_activity"
         summary = _("For Pending Validation")
@@ -179,7 +179,7 @@ class ChangeRequestBase(models.Model):
                 # Remove the associated CR type record
                 if rec.request_type_ref_id:
                     rec.request_type_ref_id.unlink()
-                return super(ChangeRequestBase, self).unlink()
+                return super().unlink()
             else:
                 raise UserError(_("Only draft change requests can be deleted by its creator."))
 

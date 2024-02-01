@@ -13,7 +13,7 @@ class ConfirmUserAssignmentWiz(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(ConfirmUserAssignmentWiz, self).default_get(fields)
+        res = super().default_get(fields)
         if self.env.context.get("change_request_id"):
             res["change_request_id"] = self.env.context["change_request_id"]
         else:

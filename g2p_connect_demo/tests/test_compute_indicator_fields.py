@@ -15,7 +15,7 @@ _logger = logging.getLogger(__name__)
 class ComputeIndicatorFieldsTest(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(ComputeIndicatorFieldsTest, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(
             context=dict(
                 cls.env.context,

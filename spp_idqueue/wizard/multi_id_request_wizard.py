@@ -19,7 +19,7 @@ class OpenSPPMultiIDRequestWizard(models.TransientModel):
         These overrides the default_get function to set the
         registrant_ids base on the selected registrants 'active_ids'
         """
-        res = super(OpenSPPMultiIDRequestWizard, self).default_get(fields)
+        res = super().default_get(fields)
         if self.env.context.get("active_ids"):
             registrant_ids = self.env["res.partner"].search([("id", "in", self.env.context.get("active_ids"))])
             if registrant_ids:

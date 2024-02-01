@@ -118,7 +118,7 @@ class OpenSPPArea(models.Model):
         if curr_area:
             raise ValidationError(_("Area already exist!"))
         else:
-            Area = super(OpenSPPArea, self).create(vals)
+            Area = super().create(vals)
             Languages = self.env["res.lang"].search([("active", "=", True)])
             vals_list = []
             for lang_code in Languages:
@@ -160,7 +160,7 @@ class OpenSPPArea(models.Model):
             if curr_area:
                 raise ValidationError(_("Area already exist!"))
             else:
-                return super(OpenSPPArea, self).write(vals)
+                return super().write(vals)
 
     def open_area_form(self):
         for rec in self:
@@ -223,7 +223,7 @@ class OpenSPPAreaKind(models.Model):
                 if areas:
                     raise ValidationError(_("Can't delete used Area Type"))
                 else:
-                    return super(OpenSPPAreaKind, self).unlink()
+                    return super().unlink()
 
     def write(self, vals):
         """
@@ -237,4 +237,4 @@ class OpenSPPAreaKind(models.Model):
             if external_identifier and external_identifier.name:
                 raise ValidationError(_("Can't edit default Area Type"))
             else:
-                return super(OpenSPPAreaKind, self).write(vals)
+                return super().write(vals)

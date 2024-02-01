@@ -24,7 +24,7 @@ class OpenG2PIDType(models.Model):
             if external_identifier.name == "id_type_idpass":
                 raise ValidationError(_("Can't delete default ID Type"))
             else:
-                return super(OpenG2PIDType, self).unlink()
+                return super().unlink()
 
     def write(self, vals):
         """
@@ -40,4 +40,4 @@ class OpenG2PIDType(models.Model):
         if external_identifier.name == "id_type_idpass":
             raise ValidationError(_("Can't edit default ID Type"))
         else:
-            return super(OpenG2PIDType, self).write(vals)
+            return super().write(vals)

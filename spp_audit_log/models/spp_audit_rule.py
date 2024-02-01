@@ -185,7 +185,7 @@ class SppAuditRule(models.Model):
             if audit_rule_count == 1 and rec.action_id:
                 rec.action_id.unlink()
 
-            super(SppAuditRule, rec).unlink()
+            super().unlink()
 
         return
 

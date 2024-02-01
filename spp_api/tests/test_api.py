@@ -31,7 +31,7 @@ MESSAGE = "message is posted from API"
 class TestAPI(HttpCase):
     @classmethod
     def setUpClass(cls):
-        super(TestAPI, cls).setUpClass()
+        super().setUpClass()
         cls.db_name = get_db_name()
         cls.phantom_env = api.Environment(cls.registry.test_cr, cls.uid, {})
         cls.demo_user = cls.phantom_env.ref(USER_DEMO)

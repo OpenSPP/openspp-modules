@@ -72,7 +72,7 @@ class OpenSPPEventData(models.Model):
             if active_event:
                 active_event.end_active_event()
 
-        event = super(OpenSPPEventData, self).create(vals)
+        event = super().create(vals)
         return event
 
     def end_active_event(self):

@@ -292,13 +292,13 @@ class ResConfigSettings(models.TransientModel):
     )
 
     def set_values(self):
-        res = super(ResConfigSettings, self).set_values()
+        res = super().set_values()
         self.env["ir.config_parameter"].set_param("spp_id_queue.auto_approve_id_request", self.auto_approve_id_request)
         return res
 
     @api.model
     def get_values(self):
-        res = super(ResConfigSettings, self).get_values()
+        res = super().get_values()
         params = self.env["ir.config_parameter"].sudo()
         res.update(auto_approve_id_request=params.get_param("spp_id_queue.auto_approve_id_request"))
         return res

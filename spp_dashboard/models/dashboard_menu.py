@@ -14,7 +14,7 @@ class DashBoardMenu(models.Model):
     @api.model
     def create(self, vals):
         """Override the create method to prevent automatic creation of actions menu."""
-        return super(models.Model, self).create(vals)
+        return super().create(vals)
 
     @api.ondelete(at_uninstall=True)
     def _unlink_menu_action(self):
