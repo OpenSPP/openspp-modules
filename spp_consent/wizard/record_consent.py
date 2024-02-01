@@ -26,41 +26,39 @@ class OpenSPPRecordConsentWizard(models.TransientModel):
     is_group = fields.Boolean("Consent For Group", default=False)
     config_id = fields.Many2one("spp.consent.config", "Config")
 
-    # Commented (for now) since fields_view_get is now obsolete and replaced with _get_view with
-    # different return values
-    # def _get_view(self, view_id=None, view_type="form", **options):
-    #     context = self.env.context
-    #     arch, view = super(OpenSPPRecordConsentWizard, self)._get_view(
-    #         view_id, view_type, **options
-    #     )
+    def _get_view(self, view_id=None, view_type="form", **options):
+        context = self.env.context
+        arch, view = super(OpenSPPRecordConsentWizard, self)._get_view(
+            view_id, view_type, **options
+        )
 
-    #     if view_type == "form":
-    #         update_arch = False
-    #         doc = arch
+        if view_type == "form":
+            update_arch = False
+            doc = arch
 
-    #         # Check if we need to change the partner_id domain filter
-    #         id_group = context.get("active_id", False)
-    #         if id_group:
-    #             domain = None
-    #             members = self.env["g2p.group.membership"].search(
-    #                 [
-    #                     ("group", "=", id_group),
-    #                 ]
-    #             )
-    #             vals = []
-    #             if members:
-    #                 for line in members:
-    #                     vals.append(line.individual.id)
-    #                 domain = "[('id', 'in', %s)]" % vals
+            # Check if we need to change the partner_id domain filter
+            id_group = context.get("active_id", False)
+            if id_group:
+                domain = None
+                members = self.env["g2p.group.membership"].search(
+                    [
+                        ("group", "=", id_group),
+                    ]
+                )
+                vals = []
+                if members:
+                    for line in members:
+                        vals.append(line.individual.id)
+                    domain = "[('id', 'in', %s)]" % vals
 
-    #             if domain:
-    #                 update_arch = True
-    #                 nodes = doc.xpath("//field[@name='signatory_id']")
-    #                 for node in nodes:
-    #                     node.set("domain", domain)
-    #         if update_arch:
-    #             arch = doc
-    #     return arch, view
+                if domain:
+                    update_arch = True
+                    nodes = doc.xpath("//field[@name='signatory_id']")
+                    for node in nodes:
+                        node.set("domain", domain)
+            if update_arch:
+                arch = doc
+        return arch, view
 
     def record_consent(self):
         if self.signatory_id:
