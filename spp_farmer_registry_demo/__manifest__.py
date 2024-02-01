@@ -14,8 +14,10 @@
     "depends": [
         "base",
         "spp_farmer_registry_base",
+        "base_geoengine",
     ],
     "data": [
+        "views/res_partner.xml",
         "views/group_view.xml",
         "views/individual_view.xml",
     ],
