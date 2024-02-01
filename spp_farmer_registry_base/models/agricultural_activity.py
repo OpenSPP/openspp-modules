@@ -5,7 +5,9 @@ class AgriculturalActivity(models.Model):
     _name = "spp.farm.activity"
     _description = "Agricultural Activities"
 
-    farm_id = fields.Many2one("res.partner", string="Farm", required=True)
+    crop_farm_id = fields.Many2one("res.partner", string="Farm")
+    live_farm_id = fields.Many2one("res.partner", string="Farm")
+    aqua_farm_id = fields.Many2one("res.partner", string="Farm")
     land_id = fields.Many2one(
         "spp.land.record",
         string="Land",

@@ -6,7 +6,8 @@ class FarmAsset(models.Model):
     _name = "spp.farm.asset"
     _description = "Farm Assets and Technology"
 
-    farm_id = fields.Many2one("res.partner", string="Farm", required=True)
+    asset_farm_id = fields.Many2one("res.partner", string="Farm")
+    machinery_farm_id = fields.Many2one("res.partner", string="Farm")
     land_id = fields.Many2one(
         "spp.land.record",
         string="Land",
@@ -14,10 +15,11 @@ class FarmAsset(models.Model):
         domain="[('farm_id', '=', farm_id)]",
     )
 
-    asset_type = fields.One2many("asset.type", "farm_asset_id")
-    machinery_type = fields.One2many("machinery.type", "farm_asset_id")
+    asset_type = fields.Many2one("asset.type")
+    machinery_type = fields.Many2one("machinery.type")
     technology_used = fields.Char()
     quantity = fields.Integer()
+    machine_working_status = fields.Char("Working Status")
 
     @api.onchange("farm_id")
     def _onchange_farm_id(self):
@@ -30,7 +32,6 @@ class AssetType(models.Model):
     _description = "Asset Type"
 
     name = fields.Char(string="Asset Type")
-    farm_asset_id = fields.Many2one("spp.farm.asset")
 
 
 class MachineryType(models.Model):
@@ -38,4 +39,3 @@ class MachineryType(models.Model):
     _description = "Machinery Type"
 
     name = fields.Char(string="Machinery Type")
-    farm_asset_id = fields.Many2one("spp.farm.asset")

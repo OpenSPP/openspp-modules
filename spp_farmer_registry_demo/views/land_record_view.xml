@@ -1,0 +1,95 @@
+<odoo>
+    <record id="view_spp_land_record_tree" model="ir.ui.view">
+        <field name="name">view_spp_land_record_tree</field>
+        <field name="model">spp.land.record</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="farm_id" column_invisible="1" />
+                <field name="name" />
+                <field name="acreage" />
+                <field name="coordinates" />
+                <field name="geo_polygon" />
+                <field name="land_use" />
+                <field name="species" />
+                <field name="species_domain" />
+                <field name="cultivation_method" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_spp_land_record_form" model="ir.ui.view">
+        <field name="name">view_spp_land_record_form</field>
+        <field name="model">spp.land.record</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title" name="title">
+                        <h1>
+                            <label for="farm_id" string="Farm" />
+                        </h1>
+                        <h1>
+                            <field name="farm_id" readonly="1" force_save="1"/>
+                        </h1>
+                        <div class="o_row">
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Land Record">
+                            <group>
+                                <group>
+                                    <field name="name" />
+                                    <field name="acreage" />
+                                    <field name="coordinates" />
+                                    <field name="geo_polygon" />
+                                </group>
+                                <group>
+                                    <field name="land_use" />
+                                    <field name="species" widget="many2many_tags"/>
+                                    <field name="cultivation_method" />
+                                </group>
+                            </group>
+                        </page>
+                        <field name="species_domain" invisible="1" />
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_land_record" model="ir.actions.act_window">
+        <field name="name">Farm Land Record</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.land.record</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Land Record!
+            </p><p>
+                Click the create button to enter Land Record.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_land_record_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_spp_land_record_tree" />
+        <field name="act_window_id" ref="action_spp_land_record" />
+    </record>
+    <record id="action_spp_land_record_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_land_record_form" />
+        <field name="act_window_id" ref="action_spp_land_record" />
+    </record>
+
+</odoo>

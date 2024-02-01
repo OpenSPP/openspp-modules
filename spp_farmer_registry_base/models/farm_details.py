@@ -6,15 +6,16 @@ class FarmDetails(models.Model):
     _name = "spp.farm.details"
     _description = "Farm Details"
 
-    farm_id = fields.Many2one("res.partner", string="Farm")
+    details_farm_id = fields.Many2one("res.partner", string="Farm")
 
-    farm_type = fields.Selection(
+    details_farm_type = fields.Selection(
         [
             ("crop", "Crop"),
             ("livestock", "Livestock"),
             ("aquaculture", "Aquaculture"),
             ("mixed", "Mixed"),
         ],
+        string="Farm Type"
     )
 
     farm_total_size = fields.Float(string="Farm Size")
@@ -25,7 +26,7 @@ class FarmDetails(models.Model):
     farm_size_leased_out = fields.Float(string="Acreage Leased Out")
     farm_size_idle = fields.Float(string="Acreage Fallow/Idle")
 
-    legal_status = fields.Selection(
+    details_legal_status = fields.Selection(
         [
             ("self", "Owned by self"),
             ("family", "Owned by family"),
@@ -35,4 +36,5 @@ class FarmDetails(models.Model):
             ("leased", "Leased from actual owner"),
             ("unknown", "Do not Know"),
         ],
+        string="Legal Status"
     )

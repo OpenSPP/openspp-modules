@@ -5,14 +5,15 @@ from odoo import fields, models, api
 class LandRecord(models.Model):
     _name = "spp.land.record"
     _description = "Land Record Details"
+    _record_name = "land_name"
 
-    farm_id = fields.Many2one("res.partner", string="Farm")
-    name = fields.Char(string="Parcel Name/ID")
-    acreage = fields.Float()
+    land_farm_id = fields.Many2one("res.partner", string="Farm")
+    land_name = fields.Char(string="Parcel Name/ID")
+    land_acreage = fields.Float()
 
     # TODO: Change to geo_point and geo_polygon
-    coordinates = fields.Char()
-    geo_polygon = fields.Char()
+    land_coordinates = fields.Char()
+    land_geo_polygon = fields.Char()
 
     land_use = fields.Selection(
         [

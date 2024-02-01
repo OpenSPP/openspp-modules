@@ -32,10 +32,10 @@ class FarmDetails(models.Model):
     livestock_assisted_reproductive_health_technology_ai = fields.Boolean(
         string="Artificial Insemination (AI)"
     )
-    livestock_assisted_reproductive_health_technology_animal_hormones = fields.Boolean(
+    livestock_assisted_reproductive_health_technology_animal_horm = fields.Boolean(
         string="Animal hormones"
     )
-    livestock_assisted_reproductive_health_technology_embryo_transfer = fields.Boolean(
+    livestock_assisted_reproductive_health_technology_embryo_transf = fields.Boolean(
         string="Embryo Transfer"
     )
     livestock_animal_health_services_routine_vaccination = fields.Boolean(
@@ -270,9 +270,8 @@ class FarmDetails(models.Model):
         [
             ("county government", "County Government"),
             ("national government", "National Government"),
-            ("implementing agents", "Implementing Agents")(
-                "national govt ministry", "National Govt. Ministry"
-            ),
+            ("implementing agents", "Implementing Agents"),
+            ("national govt ministry", "National Govt. Ministry"),
             ("self", "Self (Private)"),
             ("other", "Other"),
         ],
@@ -423,7 +422,7 @@ What is your main extension service provider?
     financial_services_written_farm_records = fields.Boolean(
         string="Do you keep written farm records?"
     )
-    financial_services_main_source_of_information_on_good_agricultural_practices = fields.Selection(
+    financial_services_main_source_of_information_on_good_agricultu = fields.Selection(
         [
             ("newspaper", "Newspaper"),
             ("extension services", "Extension services"),

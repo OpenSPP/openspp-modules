@@ -1,0 +1,1132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_farm_groups_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='ids']" position="before">
+                <page name="details" string="Farm">
+                    <notebook>
+                        <page name="section_details_enterprise" string="Details and Enterprises">
+                            <h4>Farm Details</h4>
+                            <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_name"/>
+                                        <div class="text-muted">
+                                        Descriptive name
+                                        </div>
+                                        <field name="land_name"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_acreage"/>
+                                        <div class="text-muted">
+                                        Total Acreage (own plus leased in)
+                                        </div>
+                                        <field name="land_acreage"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_coordinates"/>
+                                        <div>
+                                        </div>
+                                        <field name="land_coordinates"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_geo_polygon"/>
+                                        <div>
+                                        </div>
+                                        <field name="land_geo_polygon"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="details_legal_status"/>
+                                        <div>
+                                        </div>
+                                        <field name="details_legal_status"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="lease_term"/>
+                                        <div>
+                                        </div>
+                                        <field name="lease_term"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="lease_agreement_number"/>
+                                        <div>
+                                        </div>
+                                        <field name="lease_agreement_number"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <h4>Main Farm Enterprises</h4>
+                            <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="growing_crops_subsistence"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="growing_crops_subsistence"/>
+                                    </div>
+                                </div>
+                                 <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="growing_crops_sale"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="growing_crops_sale"/>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="rearing_livestock_subsistence"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="rearing_livestock_subsistence"/>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="rearing_livestock_sale"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="rearing_livestock_sale"/>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="aquaculture_subsistence"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="aquaculture_subsistence"/>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="aquaculture_sale"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="aquaculture_sale"/>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="tree_farming"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="tree_farming"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <field name="farm_detail_id" invisible="1"/>
+                            <field name="farm_land_rec_id" invisible="1"/>
+                        </page>
+                        <page name="section_crop" string="Crop Agriculture">
+                            <field name="farm_crop_act_ids" domain="[('activity_type', '=', 'crop')]" context="{'default_activity_type': 'crop'}">
+                                <tree editable="bottom">
+                                    <field name="crop_farm_id" column_invisible="1"/>
+                                    <field name="activity_type" readonly="1" force_save="1"/>
+                                    <field name="species_id" />
+                                    <field name="purpose" />
+                                    <field name="cultivation_production_system" />
+                                    <field name="cultivation_water_source" />
+                                    <field name="cultivation_chemical_interventions" />
+                                    <field name="cultivation_fertilizer_interventions" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="section_livestock" string="Livestock">
+                            <field name="farm_live_act_ids" domain="[('activity_type', '=', 'livestock')]" context="{'default_activity_type': 'livestock'}">
+                                <tree editable="bottom">
+                                    <field name="live_farm_id" column_invisible="1"/>
+                                    <field name="activity_type" readonly="1" force_save="1"/>
+                                    <field name="species_id" />
+                                    <field name="livestock_production_system" />
+                                    <field name="livestock_feed_items" />
+                                </tree>
+                            </field>
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="livestock_fertilizer_for_fodder"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="livestock_fertilizer_for_fodder"
+                                               string="Fodder and Pasture Fertilizer"/>
+                                        <div class="text-muted">
+                                        Do you utilize fertilizer for fodder and pasture?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="livestock_certified_pasture"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="livestock_certified_pasture"
+                                               string="Certified Fodder and Pasture Seeds"/>
+                                        <div class="text-muted">
+                                        Do you use certified pasture and fodder seeds?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <h4>Which assisted reproductive health technology do you use?</h4>
+                            <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="livestock_assisted_reproductive_health_technology_ai"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="livestock_assisted_reproductive_health_technology_ai"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="livestock_assisted_reproductive_health_technology_animal_horm"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="livestock_assisted_reproductive_health_technology_animal_horm"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="livestock_assisted_reproductive_health_technology_embryo_transf"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="livestock_assisted_reproductive_health_technology_embryo_transf"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <h4>Which Animal health services do you use?</h4>
+                            <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="livestock_animal_health_services_routine_vaccination"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="livestock_animal_health_services_routine_vaccination"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="livestock_animal_health_services_disease_control"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="livestock_animal_health_services_disease_control"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                        <page name="section_aquaculture" string="Aquaculture">
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="aquaculture_type"
+                                        string="Aquaculture"/>
+                                        <div class="text-muted">
+                                        What types of aquaculture do you practice?
+                                        </div>
+                                        <field name="aquaculture_type"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3>Production Systems</h3><br/>
+                                <field name="farm_asset_ids">
+                                    <tree editable="bottom">
+                                        <field name="asset_farm_id" column_invisible="1"/>
+                                        <field name="asset_type"/>
+                                        <field name="number_active"/>
+                                        <field name="active_area"/>
+                                        <field name="active_volume"/>
+                                        <field name="number_inactive"/>
+                                        <field name="inactive_area"/>
+                                        <field name="inactive_volume"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div>
+                                <h3>Aquatic Species</h3><br/>
+                                <field name="farm_aqua_act_ids" domain="[('activity_type', '=', 'aquaculture')]" context="{'default_activity_type': 'aquaculture'}">
+                                    <tree editable="bottom">
+                                        <field name="live_farm_id" column_invisible="1"/>
+                                        <field name="activity_type" readonly="1" force_save="1"/>
+                                        <field name="species_id" />
+                                        <field name="aquaculture_production_system" />
+                                        <field name="aquaculture_number_of_fingerlings" />
+                                    </tree>
+                                </field>
+                            </div>
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="aquaculture_main_inputs_fingerlings"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="aquaculture_main_inputs_fingerlings"/>
+                                        <div class="text-muted">
+                                        Is fingerlings your main input?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="aquaculture_main_inputs_feeds"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="aquaculture_main_inputs_feeds"/>
+                                        <div class="text-muted">
+                                        Is manufactured feeds your main input?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="aquaculture_main_inputs_fertilizers"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="aquaculture_main_inputs_fertilizers"/>
+                                        <div class="text-muted">
+                                        Is fertilizers your main input?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="aquaculture_utilize_fertilizer"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="aquaculture_utilize_fertilizer"
+                                        string="Utilize fertilizer"/>
+                                        <div class="text-muted">
+                                        Do you utilize fertilizer in the ponds?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="aquaculture_production_level"
+                                        string="Production Level"/>
+                                        <div class="text-muted">
+                                        What is your production level?
+                                        </div>
+                                        <field name="aquaculture_production_level"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="aquaculture_beneficiary_esp"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="aquaculture_beneficiary_esp"
+                                        string="ESP Beneficiary"/>
+                                        <div class="text-muted">
+                                        Are you a beneficiary of the government of Kenya's economic stimulus programme (ESP)?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                        <page name="section_farm_tech" string="Technology and Assets">
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_power_source"
+                                        string="Power Source"/>
+                                        <div class="text-muted">
+                                        What are the sources of power for farm activities?
+                                        </div>
+                                        <field name="farm_technology_power_source"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_labor_source"
+                                        string="Labor Source"/>
+                                        <div class="text-muted">
+                                        For labor, what is the main source?
+                                        </div>
+                                        <field name="farm_technology_labor_source"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4>What are the main types of farm equipment and machinery in use?</h4><br/>
+                                <field name="farm_machinery_ids">
+                                    <tree editable="bottom">
+                                        <field name="machinery_farm_id" column_invisible="1"/>
+                                        <field name="machinery_type"/>
+                                        <field name="quantity"/>
+                                        <field name="machine_working_status"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_own_equipment"
+                                        string="Frequently Used"/>
+                                        <div class="text-muted">
+                                        Who Owns Most Of The Frequently Used Equipment?
+                                        </div>
+                                        <field name="farm_technology_own_equipment"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4>What farm structures do you have?</h4>
+                            <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_spray_race"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_spray_race"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_animal_dip"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_animal_dip"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_loading_ramp"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_loading_ramp"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_zero_grazing_unit"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_zero_grazing_unit"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_hay_store"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_hay_store"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_feed_store"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_feed_store"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_sick_bay"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_sick_bay"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_cattle_boma"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_cattle_boma"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_milking_parlor"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_milking_parlor"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_animal_crush"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_animal_crush"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_traditional_granary"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_traditional_granary"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_modern_granary"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_modern_granary"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_general_store"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_general_store"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_hay_bailers"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_hay_bailers"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_green_house"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_green_house"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_bee_house"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_bee_house"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_hatchery"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_hatchery"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="farm_technology_structure_apriary"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="farm_technology_structure_apriary"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                        <page name="section_land_water" string="Land and Water Management">
+                            <h4>What sustainable land and environmental management practices do you carry out?</h4>
+                            <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_crop_rotation"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_crop_rotation"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_green_cover_crop"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_green_cover_crop"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_contour_ploughing"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_contour_ploughing"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_deep_ripping"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_deep_ripping"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_grass_strips"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_grass_strips"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_trash_line"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_trash_line"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_cambered_beds"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_cambered_beds"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_biogas_production"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_biogas_production"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_mulching"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_mulching"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_minimum_tillage"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_minimum_tillage"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_manuring_composting"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_manuring_composting"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_organic_farming"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_organic_farming"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_terracing"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_terracing"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_water_harvesting"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_water_harvesting"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_zai_pits"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_zai_pits"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_cut_off_drains"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_cut_off_drains"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_conservation_agriculture"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_conservation_agriculture"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_integrated_pest_management"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_integrated_pest_management"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt16 o_settings_container" >
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_subsidized_fertilizer"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_subsidized_fertilizer"
+                                        string="Govt. Subsidized fertilizer"/>
+                                        <div class="text-muted">
+                                        Have you benefited from Govt. Subsidized fertilizer?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_use_lime"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_use_lime"
+                                        string="Lime on soil"/>
+                                        <div class="text-muted">
+                                        Do you use lime on your soil?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_soil_testing"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_soil_testing"
+                                        string="Soil Testing"/>
+                                        <div class="text-muted">
+                                        Have you done soil testing in the last 3 years?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="land_water_management_undertake_irrigation"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_undertake_irrigation"
+                                               string="Irrigation"/>
+                                        <div class="text-muted">
+                                        Do you undertake irrigation?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_irrigation_type"
+                                               string="Irrigation Type"/>
+                                        <div class="text-muted">
+                                        Type of Irrigation
+                                        </div>
+                                        <field name="land_water_management_irrigation_type"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_irrigation_source"
+                                               string="Irrigation Source"/>
+                                        <div class="text-muted">
+                                        What is the main source of water for Irrigation activities?
+                                        </div>
+                                        <field name="land_water_management_irrigation_source"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_total_irrigated_area"/>
+                                        <div class="text-muted">
+                                        What is the total area under irrigation?
+                                        </div>
+                                        <field name="land_water_management_total_irrigated_area"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_type_of_irrigation_project"/>
+                                        <div>
+
+                                        </div>
+                                        <field name="land_water_management_type_of_irrigation_project"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_type_of_irrigation_project_name"/>
+                                        <div class="text-muted">
+                                        (provide name for public and community schemes)
+                                        </div>
+                                        <field name="land_water_management_type_of_irrigation_project_name"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_implementing_body"/>
+                                        <div class="text-muted">
+                                        For irrigation schemes, what is the implementing body?
+                                        </div>
+                                        <field name="land_water_management_implementing_body"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="land_water_management_irrigation_scheme_membership"/>
+                                        <div class="text-muted">
+                                        What is your operational irrigation scheme membership?
+                                        </div>
+                                        <field name="land_water_management_irrigation_scheme_membership"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                        <page name="section_financial" string="Financials and Services">
+                            <div class="row mt16 o_settings_container" >
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_main_income_source"
+                                        string="Source of Income"/>
+                                        <div class="text-muted">
+                                        What is your main source of income by priority?
+                                        </div>
+                                        <field name="financial_services_main_income_source"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_percentage_of_income_from_farming"
+                                        string="Income Percentage"/>
+                                        <div class="text-muted">
+                                        What percentage of your income comes from farming activities?
+                                        </div>
+                                        <field name="financial_services_percentage_of_income_from_farming"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <h4>Do you belong to any of the following types of groups?</h4>
+                            <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_vulnerable_marginalized_group"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_vulnerable_marginalized_group"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_faith_based_organization"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_faith_based_organization"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_community_based_organization"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_community_based_organization"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_producer_group"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_producer_group"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_marketing_group"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_marketing_group"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_table_banking_group"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_table_banking_group"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_common_interest_group"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_common_interest_group"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <h4>Where do you access financial / credit services to facilitate your farming operations?</h4>
+                            <div class="row mt16 o_settings_container" style="border-bottom: 1px solid #808080; border-top: 1px solid #808080">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_mobile_money_saving_loans"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_mobile_money_saving_loans"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_farmer_organization"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_farmer_organization"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_other_money_lenders"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_other_money_lenders"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_self_salary_or_savings"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_self_salary_or_savings"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_family"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_family"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_commercial_bank"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_commercial_bank"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_business_partners"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_business_partners"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_savings_credit_groups"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_savings_credit_groups"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_cooperatives"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_cooperatives"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_micro_finance_institutions"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_micro_finance_institutions"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_non_governmental_donors"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_non_governmental_donors"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row mt16 o_settings_container" >
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_crop_insurance"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_crop_insurance"
+                                        string="Crop Insurance"/>
+                                        <div class="text-muted">
+                                        Do you insure your crops?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_livestock_insurance"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_livestock_insurance"
+                                        string="Livestock Insurance"/>
+                                        <div class="text-muted">
+                                        Do you insure your livestock?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_fish_insurance"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_fish_insurance"
+                                        string="Fish Insurance"/>
+                                        <div class="text-muted">
+                                        Do you insure your fish?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_farm_building_insurance"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_farm_building_insurance"
+                                        string="Farm building and assets Insurance"/>
+                                        <div class="text-muted">
+                                        Do you insure your farm buildings and other assets?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="financial_services_written_farm_records"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_written_farm_records"
+                                        string="Written farm records"/>
+                                        <div class="text-muted">
+                                        Do you keep written farm records?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_main_source_of_information_on_good_agricultu"
+                                        string="Main source of information on (GAP)"/>
+                                        <div class="text-muted">
+                                        What is your main source of information on good agricultural practices (GAP)?
+                                        </div>
+                                        <field name="financial_services_main_source_of_information_on_good_agricultu"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_mode_of_extension_service"
+                                        string="Extension Service"/>
+                                        <div class="text-muted">
+                                        What is the mode of extension service that you receive?
+                                        </div>
+                                        <field name="financial_services_mode_of_extension_service"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="financial_services_main_extension_service_provider"
+                                        string="Main extension service provider"/>
+                                        <div class="text-muted">
+                                        What is your main extension service provider?
+                                        </div>
+                                        <field name="financial_services_main_extension_service_provider"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
