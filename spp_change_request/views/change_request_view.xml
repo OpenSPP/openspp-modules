@@ -14,7 +14,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     help="Open Details"
                     icon="fa-external-link "
                     class="btn-success"
-                    attrs="{'invisible':[('request_type_ref_id','=',False)]}"
+                    invisible="not request_type_ref_id"
                     context="{'show_validation_form':True}"
                     groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
                 />
@@ -24,14 +24,14 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="request_type" />
                 <field name="registrant_id" />
                 <field name="applicant_id" />
-                <field name="request_type_ref_id" invisible="1" />
+                <field name="request_type_ref_id" column_invisible="1" />
                 <field name="assign_to_id" widget="many2one_avatar_user" />
                 <field name="last_validated_by_id" widget="many2one_avatar_user" />
                 <field name="date_validated" />
                 <field name="applied_by_id" widget="many2one_avatar_user" />
                 <field name="date_applied" />
                 <field name="activity_ids" widget="list_activity" optional="show" />
-                <field name="date_rejected" invisible="1" />
+                <field name="date_rejected" column_invisible="1" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field
                     name="state"
@@ -59,7 +59,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         string="Request Validation"
                         icon="fa-paper-plane"
                         class="btn-primary"
-                        states="draft"
+                        invisible="state != 'draft'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_agent"
                     />
                     <button
@@ -68,7 +68,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         string="Validate"
                         icon="fa-check-square-o"
                         class="btn-warning"
-                        states="pending"
+                        invisible="state != 'pending'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
                     />
                     <button
@@ -77,7 +77,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         string="Apply Changes"
                         icon="fa-thumbs-o-up"
                         class="btn-success"
-                        states="validated"
+                        invisible="state != 'validated'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
                     />
                     <button
@@ -86,7 +86,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         string="Reject"
                         icon="fa-ban"
                         class="btn-danger"
-                        states="pending"
+                        invisible="state != 'pending'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator"
                     />
                     <button
@@ -95,7 +95,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         string="Cancel Change Request"
                         icon="fa-times-circle"
                         class="btn-default"
-                        states="draft,pending,rejected,validated"
+                        invisible="state not in  ['draft', 'pending', 'rejected', 'validated']"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
                     />
                     <button
@@ -104,7 +104,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         string="Reset to Draft"
                         icon="fa-rotate-left"
                         class="btn-success"
-                        states="rejected"
+                        invisible="state != 'rejected'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
                     />
                     <field
@@ -116,7 +116,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <div
                     class="alert alert-danger text-center o_form_header"
                     role="status"
-                    attrs="{'invisible': [('rejected_by_id', '=', False)]}"
+                    invisible="not rejected_by_id"
                 >
                     This change request was REJECTED.
                 </div>
@@ -130,50 +130,39 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             class="oe_stat_button"
                             groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_agent,spp_change_request.group_spp_change_request_administrator"
                         >
-                            <div
-                                class="o_form_field o_stat_info"
-                                attrs="{'invisible': [('current_user_assigned', '!=', False)]}"
-                            >
+                            <div class="o_form_field o_stat_info" invisible="current_user_assigned">
                                 <span class="o_stat_text">Assign</span>
                                 <span class="o_stat_text">To Me</span>
                             </div>
-                            <div
-                                class="o_form_field o_stat_info"
-                                attrs="{'invisible': [('current_user_assigned', '!=', True)]}"
-                            >
+                            <div class="o_form_field o_stat_info" invisible="not current_user_assigned">
                                 <span class="o_stat_text">Reassign</span>
                             </div>
                         </button>
                     </div>
-                    <widget
-                        name="web_ribbon"
-                        title="Draft"
-                        bg_color="bg-info"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
-                    />
+                    <widget name="web_ribbon" title="Draft" bg_color="bg-info" invisible="state != 'draft'" />
                     <widget
                         name="web_ribbon"
                         title="Pending Validation"
                         bg_color="bg-primary"
-                        attrs="{'invisible': [('state', '!=', 'pending')]}"
+                        invisible="state != 'pending'"
                     />
                     <widget
                         name="web_ribbon"
                         title="Validated"
                         bg_color="bg-warning"
-                        attrs="{'invisible': [('state', '!=', 'validated')]}"
+                        invisible="state != 'validated'"
                     />
                     <widget
                         name="web_ribbon"
                         title="Applied"
                         bg_color="bg-success"
-                        attrs="{'invisible': [('state', '!=', 'applied')]}"
+                        invisible="state != 'applied'"
                     />
                     <widget
                         name="web_ribbon"
                         title="Rejected"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('state', '!=', 'rejected')]}"
+                        invisible="state != 'rejected'"
                     />
                     <div class="oe_title mb24">
                         <label for="name" string="Request #:" />
@@ -182,17 +171,14 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </h1>
                         <label for="request_type" string="Request Type:" />
                         <h2>
-                            <field
-                                name="request_type"
-                                attrs="{'readonly':['|', ('state','!=','draft'), ('request_type_ref_id','!=',False)]}"
-                            />
+                            <field name="request_type" readonly="state != 'draft' or request_type_ref_id" />
                         </h2>
                         <label for="registrant_id" string="Registrant:" />
                         <h2>
                             <field
                                 name="registrant_id"
                                 options="{'no_create': True,'no_open':True}"
-                                attrs="{'readonly':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
+                                readonly="state != 'draft' or request_type_ref_id"
                                 class="oe_inline"
                             />
                             <field
@@ -201,7 +187,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 icon="fa-qrcode"
                                 string="Scan QR Code"
                                 colspan="4"
-                                attrs="{'invisible':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
+                                invisible="state != 'draft' or request_type_ref_id"
                                 class="oe_inline"
                                 style="margin-left: 10px;"
                             />
@@ -211,7 +197,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             <field
                                 name="applicant_id"
                                 options="{'no_create': True,'no_open':True}"
-                                attrs="{'readonly':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
+                                readonly="state != 'draft' or request_type_ref_id"
                                 domain="applicant_id_domain"
                                 required="1"
                                 force_save="1"
@@ -224,7 +210,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 icon="fa-id-card-o"
                                 string="Scan ID Document"
                                 colspan="4"
-                                attrs="{'invisible':['|',('state','!=','draft'),('request_type_ref_id','!=',False)]}"
+                                invisible="state != 'draft' or request_type_ref_id"
                                 style="margin-left: 10px;"
                                 class="oe_inline"
                             />
@@ -233,7 +219,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 type="object"
                                 icon="fa-external-link"
                                 class="btn-success oe_inline"
-                                attrs="{'invisible':[('applicant_id','=',False)]}"
+                                invisible="not applicant_id"
                                 style="margin-left: 10px;"
                             />
                         </h3>
@@ -244,38 +230,36 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             string="Phone No."
                             widget="phone"
                             options="{'enable_sms': false}"
-                            attrs="{'readonly':[('state','!=','draft')]}"
+                            readonly="state != 'draft'"
                         />
                     </group>
-                    <footer class="o_footer_bg">
-                        <button
-                            name="create_request_detail"
-                            type="object"
-                            string="NEXT"
-                            icon="fa-chevron-circle-right"
-                            class="btn-primary"
-                            attrs="{'invisible':['|', ('request_type_ref_id','!=',False), ('id', '=', False)]}"
-                            style="margin-left: 10px;"
-                        />
-                        <button
-                            name="create_request_detail_no_redirect"
-                            type="object"
-                            string="CREATE"
-                            icon="fa-chevron-circle-right"
-                            class="btn-primary"
-                            attrs="{'invisible':['|', ('request_type_ref_id','!=',False), ('id', '!=', False)]}"
-                            style="margin-left: 10px;"
-                        />
-                        <button
-                            name="open_request_detail"
-                            type="object"
-                            string="NEXT"
-                            icon="fa-chevron-circle-right"
-                            class="btn-warning"
-                            attrs="{'invisible':[('request_type_ref_id','=',False)]}"
-                            style="margin-left: 10px;"
-                        />
-                    </footer>
+                    <button
+                        name="create_request_detail"
+                        type="object"
+                        string="NEXT"
+                        icon="fa-chevron-circle-right"
+                        class="btn-primary"
+                        invisible="request_type_ref_id or not id"
+                        style="margin-left: 10px;"
+                    />
+                    <button
+                        name="create_request_detail_no_redirect"
+                        type="object"
+                        string="CREATE"
+                        icon="fa-chevron-circle-right"
+                        class="btn-primary"
+                        invisible="request_type_ref_id or id"
+                        style="margin-left: 10px;"
+                    />
+                    <button
+                        name="open_request_detail"
+                        type="object"
+                        string="NEXT"
+                        icon="fa-chevron-circle-right"
+                        class="btn-warning"
+                        invisible="not request_type_ref_id"
+                        style="margin-left: 10px;"
+                    />
                     <group colspan="4" col="4" string="Monitoring">
                         <field
                             name="assign_to_id"
@@ -288,7 +272,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             groups="base.group_multi_company"
                             options="{'no_create': True}"
                             force_save="1"
-                            attrs="{'readonly':[('state','!=','draft')]}"
+                            readonly="state != 'draft'"
                         />
                         <field name="date_requested" readonly="1" />
                         <field

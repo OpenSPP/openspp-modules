@@ -6,12 +6,7 @@
         <field name="arch" type="xml">
             <form string="Files">
                 <sheet>
-                    <widget
-                        name="web_ribbon"
-                        title="Archived"
-                        bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
-                    />
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active" />
                     <div class="oe_button_box" name="button_box" />
                     <field
                         name="image_1920"
@@ -55,7 +50,7 @@
                                 name="path_json"
                                 widget="path_json"
                                 options="{'prefix': True, 'suffix': False}"
-                                attrs="{'invisible': ['|', ('name', '=', False), ('directory_id', '=', False)]}"
+                                invisible="not name or not directory_id"
                                 string="Path"
                             />
                         </group>

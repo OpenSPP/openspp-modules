@@ -41,7 +41,7 @@ class ChangeRequestAddChildren(models.Model):
     VALIDATION_FORM = "spp_change_request_add_children_demo.view_change_request_add_children_validation_form"
     REQUIRED_DOCUMENT_TYPE = [
         # "spp_change_request_add_children_demo.spp_dms_add_children",
-        "spp_change_request_add_children_demo.spp_dms_birth_certificate",
+        # "spp_change_request_add_children_demo.spp_dms_birth_certificate",
         # "spp_change_request_add_children_demo.spp_dms_applicant_spp_card",
         # "spp_change_request_add_children_demo.spp_dms_applicant_uid_card",
         # "spp_change_request_add_children_demo.spp_dms_custody_certificate",
@@ -51,6 +51,10 @@ class ChangeRequestAddChildren(models.Model):
     # If validators will be allowed for both, make the values the same
     SRC_AREA_FLD = ["registrant_id", "area_center_id"]
     DST_AREA_FLD = SRC_AREA_FLD
+
+    def _get_dynamic_selection(self):
+        options = self.env["gender.type"].search([])
+        return [(option.value, option.code) for option in options]
 
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(
@@ -73,9 +77,7 @@ class ChangeRequestAddChildren(models.Model):
     birth_place = fields.Char()
     birthdate_not_exact = fields.Boolean()
     birthdate = fields.Date("Date of Birth")
-    gender = fields.Selection(
-        [("Female", "Female"), ("Male", "Male")],
-    )
+    gender = fields.Selection(selection=_get_dynamic_selection)
     phone = fields.Char("Phone Number")
     uid_number = fields.Char("UID Number")
 

@@ -46,7 +46,7 @@
                         string="Request Validation"
                         icon="fa-paper-plane"
                         class="btn-primary"
-                        states="draft"
+                        invisible="state != 'draft'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_agent"
                     />
                     <button
@@ -55,7 +55,7 @@
                         string="Validate"
                         icon="fa-check-square-o"
                         class="btn-warning"
-                        states="pending"
+                        invisible="state != 'pending'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button
@@ -64,7 +64,7 @@
                         string="Apply Changes"
                         icon="fa-thumbs-o-up"
                         class="btn-success"
-                        states="validated"
+                        invisible="state != 'validated'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
                     />
                     <button
@@ -73,7 +73,7 @@
                         string="Reject"
                         icon="fa-ban"
                         class="btn-danger"
-                        states="pending"
+                        invisible="state != 'pending'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button
@@ -82,7 +82,7 @@
                         string="Cancel Change Request"
                         icon="fa-times-circle"
                         class="btn-default"
-                        states="draft,pending,rejected,validated"
+                        invisible="state not in ['draft', 'pending', 'rejected', 'validated']"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
                     />
                     <button
@@ -91,7 +91,7 @@
                         string="Reset to Draft"
                         icon="fa-rotate-left"
                         class="btn-success"
-                        states="rejected"
+                        invisible="state != 'rejected'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
                     />
                     <field
@@ -107,7 +107,7 @@
                             type="object"
                             icon="fa-user-circle"
                             class="oe_stat_button"
-                            states="pending,validated"
+                            invisible="state not in ['pending', 'validated']"
                             groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator"
                         >
                             <div class="o_form_field o_stat_info">
@@ -131,7 +131,7 @@
                                 icon="fa-external-link "
                                 class="btn-success"
                                 style="margin-left: 10px;"
-                                attrs="{'invisible':[('registrant_id','=',False)]}"
+                                invisible="not registrant_id"
                             />
                         </h1>
                         <label for="applicant_id" string="Applicant:" />
@@ -148,7 +148,7 @@
                                 icon="fa-external-link "
                                 class="btn-success"
                                 style="margin-left: 10px;"
-                                attrs="{'invisible':[('registrant_id','=',False)]}"
+                                invisible="not registrant_id"
                             />
                         </h2>
                         <div class="o_row">
@@ -160,63 +160,40 @@
                     </div>
                     <notebook>
                         <page string="Request Details">
-                            <field
+                            <!-- widget is currently not working -->
+                            <!-- <field
                                 name="id_document_details"
                                 widget="id_document_reader_field"
                                 colspan="4"
-                                attrs="{'invisible':[('state','!=','draft')]}"
-                            />
+                                invisible="state != 'draft'"
+                            /> -->
                             <group colspan="4" col="4" string="">
                                 <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
                                 <field
                                     name="family_name"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    readonly="state != 'draft'"
                                     class="oe_edit_only"
                                     colspan="4"
                                 />
-                                <field
-                                    name="given_name"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    class="oe_edit_only"
-                                />
-                                <field
-                                    name="addl_name"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    class="oe_edit_only"
-                                />
-                                <field name="gender" attrs="{'readonly':[('state','!=','draft')]}" />
+                                <field name="given_name" readonly="state != 'draft'" class="oe_edit_only" />
+                                <field name="addl_name" readonly="state != 'draft'" class="oe_edit_only" />
+                                <field name="gender" readonly="state != 'draft'" />
                                 <field
                                     name="phone"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
+                                    readonly="state != 'draft'"
                                     widget="phone"
                                     options="{'enable_sms': false}"
                                 />
-                                <field name="uid_number" attrs="{'readonly':[('state','!=','draft')]}" />
-                                <field
-                                    name="birth_place"
-                                    colspan="4"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                />
-                                <field
-                                    name="birthdate_not_exact"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                />
-                                <field name="birthdate" attrs="{'readonly':[('state','!=','draft')]}" />
-                                <!-- <field
-                                    name="kind"
-                                    widget="many2many_tags"
-                                    options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                /> -->
-                                <field
-                                    name="applicant_relation"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                />
+                                <field name="uid_number" readonly="state != 'draft'" />
+                                <field name="birth_place" readonly="state != 'draft'" />
+                                <field name="birthdate_not_exact" readonly="state != 'draft'" />
+                                <field name="birthdate" readonly="state != 'draft'" />
+                                <field name="applicant_relation" readonly="state != 'draft'" />
                             </group>
                         </page>
-                        <page string="Attachments">
+                        <page string="Attachments" invisible="1">
                             <!-- Attachment UI -->
-                            <header attrs="{'invisible':[('state','!=','draft')]}">
+                            <header invisible="state != 'draft'">
                                 <!-- <button
                                     name="action_attach_documents"
                                     type="object"
@@ -233,23 +210,6 @@
                                     context="{'category_id':%(spp_dms_birth_certificate)d}"
                                     style="margin-left: 10px;"
                                 />
-                                <!-- <button
-                                    name="action_attach_documents"
-                                    type="object"
-                                    string="Applicant UID Card"
-                                    class="btn-primary"
-                                    context="{'category_id':%(spp_dms_applicant_uid_card)d}"
-                                    style="margin-left: 10px;"
-                                />
-                                <button
-                                    name="action_attach_documents"
-                                    type="object"
-                                    string="Custody Certificate"
-                                    class="btn-primary"
-                                    context="{'category_id':%(spp_dms_custody_certificate)d}"
-                                    style="margin-left: 10px;"
-                                    attrs="{'invisible':[('applicant_relation','not in',('mother','grandfather'))]}"
-                                /> -->
                                 <button
                                     name="action_attach_documents"
                                     type="object"
@@ -260,7 +220,7 @@
                             </header>
                             <field
                                 name="dms_file_ids"
-                                attrs="{'readonly':[('state','!=','draft')]}"
+                                readonly="state != 'draft'"
                                 nolabel="1"
                                 context="{'form_view_ref':'spp_change_request.view_dms_file_spp_custom_form'}"
                             >
@@ -271,7 +231,7 @@
                                     multi_edit="1"
                                     create="0"
                                 >
-                                    <field name="name" invisible="1" />
+                                    <field name="name" column_invisible="1" />
                                     <field
                                         name="content"
                                         filename="name"
@@ -284,26 +244,21 @@
                                     <field name="mimetype" />
                                     <field name="size" widget="integer" />
                                     <field name="write_date" />
-                                    <field name="active" invisible="1" />
-                                    <field name="is_locked" invisible="1" />
-                                    <field name="is_lock_editor" invisible="1" />
+                                    <field name="active" column_invisible="1" />
+                                    <field name="is_locked" column_invisible="1" />
+                                    <field name="is_lock_editor" column_invisible="1" />
                                 </tree>
                             </field>
-                            <!-- <field
-                                name="dms_directory_ids"
-                                mode="dms_tree"
-                                attrs="{'invisible':[('registrant_id','=',False)],'readonly':[('state','!=','draft')]}"
-                            /> -->
                         </page>
                         <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
                             <field
                                 name="validation_ids"
                                 nolabel="1"
-                                attrs="{'readonly':[('state','not in',('draft','pending'))]}"
+                                readonly="state not in ('draft','pending')"
                             >
                                 <tree>
                                     <field name="sequence" widget="handle" />
-                                    <field name="request_type" invisible="1" />
+                                    <field name="request_type" column_invisible="1" />
                                     <field name="stage_id" options="{'no_create_edit':true}" />
                                     <field
                                         name="validation_group_id"
@@ -334,8 +289,7 @@
                                     required="1"
                                     widget="phone"
                                     options="{'enable_sms': false}"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                    readonly="1"
+                                    readonly="state != 'draft'"
                                     colspan="4"
                                 />
                                 <field name="last_validated_by_id" readonly="1" />
@@ -363,7 +317,7 @@
                         icon="fa-user-circle"
                         class="btn-primary"
                         string="Assign To Me"
-                        attrs="{'invisible': ['|',('current_user_assigned', '!=', False), ('state', 'not in', ('draft', 'pending','validated', 'rejected'))]}"
+                        invisible="current_user_assigned or state not in ('draft', 'pending','validated', 'rejected')"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator"
                     />
                     <button
@@ -372,7 +326,7 @@
                         icon="fa-user-circle"
                         class="btn-primary"
                         string="Reassign"
-                        attrs="{'invisible': ['|',('current_user_assigned', '!=', True), ('state', 'not in', ('pending','validated'))]}"
+                        invisible="not current_user_assigned or state not in ('pending','validated')"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator"
                     />
                     <button
@@ -381,7 +335,7 @@
                         string="Request Validation"
                         icon="fa-paper-plane"
                         class="btn-primary"
-                        states="draft"
+                        invisible="state != 'draft'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_agent"
                     />
                     <button
@@ -390,7 +344,7 @@
                         string="Validate"
                         icon="fa-check-square-o"
                         class="btn-warning"
-                        states="pending"
+                        invisible="state != 'pending'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button
@@ -399,7 +353,7 @@
                         string="Apply Changes"
                         icon="fa-thumbs-o-up"
                         class="btn-success"
-                        states="validated"
+                        invisible="state != 'validated'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
                     />
                     <button
@@ -408,7 +362,7 @@
                         string="Reject"
                         icon="fa-ban"
                         class="btn-danger"
-                        states="pending"
+                        invisible="state != 'pending'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button
@@ -417,7 +371,7 @@
                         string="Cancel Change Request"
                         icon="fa-times-circle"
                         class="btn-default"
-                        states="draft,pending,rejected,validated"
+                        invisible="state not in ['draft', 'pending', 'rejected', 'validated']"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
                     />
                     <button
@@ -426,7 +380,7 @@
                         string="Reset to Draft"
                         icon="fa-rotate-left"
                         class="btn-success"
-                        states="rejected"
+                        invisible="state != 'rejected'"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
                     />
                     <field
@@ -452,7 +406,7 @@
                                     icon="fa-external-link "
                                     class="btn-success"
                                     style="margin-left: 10px;"
-                                    attrs="{'invisible':[('registrant_id','=',False)]}"
+                                    invisible="not registrant_id"
                                 />
                             </h2>
                         </div>
@@ -542,7 +496,7 @@
                                         type="object"
                                         icon="fa-external-link"
                                         class="btn-success"
-                                        attrs="{'invisible':[('applicant_id','=',False)]}"
+                                        invisible="not applicant_id"
                                         style="margin-left: 10px;"
                                         colspan="2"
                                     />
@@ -593,7 +547,7 @@
                                         multi_edit="1"
                                         create="0"
                                     >
-                                        <field name="name" invisible="1" />
+                                        <field name="name" column_invisible="1" />
                                         <field
                                             name="content"
                                             filename="name"
@@ -603,19 +557,14 @@
                                         />
                                         <field name="category_id" />
                                         <field name="directory_id" />
-                                        <field name="mimetype" invisible="1" />
+                                        <field name="mimetype" column_invisible="1" />
                                         <field name="size" widget="integer" />
                                         <field name="write_date" />
-                                        <field name="active" invisible="1" />
-                                        <field name="is_locked" invisible="1" />
-                                        <field name="is_lock_editor" invisible="1" />
+                                        <field name="active" column_invisible="1" />
+                                        <field name="is_locked" column_invisible="1" />
+                                        <field name="is_lock_editor" column_invisible="1" />
                                     </tree>
                                 </field>
-                                <!-- <field
-                                    name="dms_directory_ids"
-                                    mode="dms_tree"
-                                    attrs="{'readonly':[('state','!=','draft')]}"
-                                /> -->
                             </page>
                             <page string="Other Information">
                                 <group colspan="4" col="4">

@@ -1,28 +1,30 @@
-from lxml import etree
-
-from odoo import api, models
+from odoo import models
 
 
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
-    @api.model
-    def fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
-        ret_val = super().fields_view_get(
-            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
-        )
+    # fields_view_get replaced as _get_view with a different return value
+    # need to fix this.
 
-        page_name = ret_val["name"]
-        if not page_name == "res.config.settings.view.form":
-            return ret_val
+    # @api.model
+    # def _get_view(
+    #     self, view_id=None, view_type="form", **options
+    # ):
+    #     arch, view = super()._get_view(
+    #         view_id, view_type, **options
+    #     )
 
-        doc = etree.XML(ret_val["arch"])
+    #     page_name = view["name"]
+    #     if not page_name == "res.config.settings.view.form":
+    #         return arch, view
 
-        query = "//div[div[field[@widget='upgrade_boolean']]]"
-        for item in doc.xpath(query):
-            item.attrib["class"] = "d-none"
+    #     doc = arch
 
-        ret_val["arch"] = etree.tostring(doc)
-        return ret_val
+    #     query = "//div[div[field[@widget='upgrade_boolean']]]"
+    #     for item in doc.xpath(query):
+    #         item.attrib["class"] = "d-none"
+
+    #     arch = etree.tostring(doc)
+
+    #     return arch, view
