@@ -13,7 +13,7 @@
     "data": ["views/registrant.xml"],
     "assets": {
         "web.assets_backend": [
-            # web.AbstractField module is already deprecated in odoo 17
+            # web.AbstractField module is already obsolete in odoo 17
             # "/spp_scan_id_document/static/src/js/registrant.js",
         ],
     },

@@ -12,7 +12,7 @@ class TestSppApiNamespace(TransactionCase):
         cls.env["ir.config_parameter"].set_param("web.base.url", "https://local.host")
         cls._db_name = cls.env.cr.dbname
 
-    # odoo17 name_get deprecated
+    # odoo17 name_get obsolete
     # def test_01_name_get(self):
     #     self.assertEqual(
     #         self._namespace.name_get(), [(self._namespace.id, "/api/test/v1")]

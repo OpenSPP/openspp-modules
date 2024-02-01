@@ -32,7 +32,7 @@
     ],
     "assets": {
         "web.assets_backend": [
-            # web.FormController is already deprecated in odoo 17
+            # web.FormController is already obsolete in odoo 17
             # "spp_idqueue/static/src/js/form_controller.js",
         ],
     },

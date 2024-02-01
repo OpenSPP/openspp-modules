@@ -36,9 +36,9 @@
     ],
     "assets": {
         "web.assets_backend": [
-            # updateButtons function is already deprecated in odoo 17
+            # updateButtons function is already obsolete in odoo 17
             # "spp_programs/static/src/js/hide_button.js",
-            # web.basic_fields module is already deprecated in odoo 17
+            # web.basic_fields module is already obsolete in odoo 17
             # "spp_programs/static/src/js/domain_field.js",
         ],
     },
