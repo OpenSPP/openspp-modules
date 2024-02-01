@@ -14,15 +14,13 @@ _logger = logging.getLogger(__name__)
 class OpenSPPResPartner(models.Model):
     _inherit = "res.partner"
 
-    def fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
-        res = super(OpenSPPResPartner, self).fields_view_get(
-            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
+    def _get_view(self, view_id=None, view_type="form", **options):
+        arch, view = super(OpenSPPResPartner, self)._get_view(
+            view_id, view_type, **options
         )
 
         if view_type == "form":
-            doc = etree.XML(res["arch"])
+            doc = arch
             basic_info_page = doc.xpath("//page[@name='basic_info']")
 
             model_fields_id = self.env["ir.model.fields"].search(
@@ -159,6 +157,6 @@ class OpenSPPResPartner(models.Model):
                 if indicators_div.getchildren():
                     basic_info_page[0].addnext(indicators_page)
 
-                res["arch"] = etree.tostring(doc, encoding="unicode")
+                arch = etree.tostring(doc, encoding="unicode")
 
-        return res
+        return arch, view

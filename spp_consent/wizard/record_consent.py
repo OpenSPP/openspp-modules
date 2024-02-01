@@ -1,8 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import logging
 
-from lxml import etree
-
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -28,16 +26,15 @@ class OpenSPPRecordConsentWizard(models.TransientModel):
     is_group = fields.Boolean("Consent For Group", default=False)
     config_id = fields.Many2one("spp.consent.config", "Config")
 
-    def fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
+    def _get_view(self, view_id=None, view_type="form", **options):
         context = self.env.context
-        result = super(OpenSPPRecordConsentWizard, self).fields_view_get(
-            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
+        arch, view = super(OpenSPPRecordConsentWizard, self)._get_view(
+            view_id, view_type, **options
         )
+
         if view_type == "form":
             update_arch = False
-            doc = etree.XML(result["arch"])
+            doc = arch
 
             # Check if we need to change the partner_id domain filter
             id_group = context.get("active_id", False)
@@ -60,8 +57,8 @@ class OpenSPPRecordConsentWizard(models.TransientModel):
                     for node in nodes:
                         node.set("domain", domain)
             if update_arch:
-                result["arch"] = etree.tostring(doc, encoding="unicode")
-        return result
+                arch = doc
+        return arch, view
 
     def record_consent(self):
         if self.signatory_id:
