@@ -1,4 +1,4 @@
-// UpdateButtons function is already deprecated in odoo 17, need to find a way to do this in odoo 17
+// UpdateButtons function is already obsolete in odoo 17, need to find a way to do this in odoo 17
 odoo.define("g2p_programs.view_cycle_form", function (require) {
     var FormController = require("web.FormController");
     const hide_states = ["approved", "distributed", "cancelled", "ended"];

@@ -34,7 +34,7 @@ class TestSppApiFieldAlias(TransactionCase):
             }
         )
 
-    # odoo17 name_get deprecated
+    # odoo17 name_get obsolete
     # def test_01_name_get(self):
     #     res = self.test_field_alias.name_get()[0][1]
     #     self.assertEqual(res, "last_updated - write_date")

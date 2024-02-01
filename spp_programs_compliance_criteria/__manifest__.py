@@ -27,7 +27,7 @@
     ],
     "assets": {
         "web.assets_backend": [
-            # web.basic_fields module is already deprecated in odoo 17
+            # web.basic_fields module is already obsolete in odoo 17
             # "spp_programs_compliance_criteria/static/src/js/field_domain.js",
         ],
     },

@@ -19,7 +19,7 @@
         "web.assets_backend": [
             "theme_openspp/static/src/scss/assets_backend.scss",
             "theme_openspp/static/src/scss/dynamic_dasbhoard.scss",
-            # deprecated javascript class/function, need to find a way to fix this
+            # obsolete javascript class/function, need to find a way to fix this
             # "theme_openspp/static/src/js/basic_fields.js",
             # "theme_openspp/static/src/js/user_menu_items.esm.js",
             # "theme_openspp/static/src/js/app_window_title.js",
