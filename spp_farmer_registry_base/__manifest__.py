@@ -22,6 +22,7 @@
     "data": [
         "security/ir.model.access.csv",
         "data/kind_data.xml",
+        "views/res_partner.xml",
         "views/configuration_view.xml",
     ],
     "assets": {},
