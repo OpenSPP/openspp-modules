@@ -8,3 +8,4 @@ from . import farmer
 from . import land_record
 from . import species
 from . import farm
+from . import partner

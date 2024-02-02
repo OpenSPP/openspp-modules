@@ -14,6 +14,8 @@
                 <field name="zip" />
                 <field name="city" />
                 <field name="country_id" />
+                <field name="geo_point" />
+                <field name="geo_multi_polygon" />
                 <templates>
                   <t t-name="info_box">
                     <b>
@@ -33,9 +35,9 @@
         </field>
     </record>
 
-    <record id="geoengine_vector_layer_res_partner" model="geoengine.vector.layer">
-        <field name="geo_field_id" ref="geoengine_partner.field_res_partner__geo_point" />
-        <field name="name">Partner location</field>
+    <record id="geoengine_vector_layer_geo_point_res_partner" model="geoengine.vector.layer">
+        <field name="geo_field_id" ref="spp_farmer_registry_base.field_res_partner__geo_point" />
+        <field name="name">Partner location geo point</field>
         <field eval="1" name="sequence" />
         <field name="view_id" ref="ir_ui_view_geo_partner" />
         <field name="geo_repr">basic</field>
@@ -44,6 +46,17 @@
         <field eval="1" name="nb_class" />
         <field name="begin_color">#FF680A</field>
     </record>
+    <record id="geoengine_vector_layer_geo_multi_poly_res_partner" model="geoengine.vector.layer">
+      <field name="geo_field_id" ref="spp_farmer_registry_base.field_res_partner__geo_multi_polygon" />
+      <field name="name">Partner location geo multi polygon</field>
+      <field eval="1" name="sequence" />
+      <field name="view_id" ref="ir_ui_view_geo_partner" />
+      <field name="geo_repr">basic</field>
+      <field name="active_on_startup" eval="True" />
+      <field name="layer_opacity">0.8</field>
+      <field eval="1" name="nb_class" />
+      <field name="begin_color">#FF680A</field>
+  </record>
     <record id="geoengine_raster_layer_res_partner_osm" model="geoengine.raster.layer">
         <field name="raster_type">osm</field>
         <field name="name">Partner background</field>
