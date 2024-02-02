@@ -6,11 +6,146 @@
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='ids']" position="before">
-                <page name="section_details" string="Details">
-                    <h4>Farm Details</h4>
+                <page name="section_farmer" string="Farmer">
                     <div
                         class="row mt16 o_settings_container"
-                        style="border-bottom: 1px solid #808080; border-top: 1px solid #808080"
+                    >
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_family_name" string="Family Name"/>
+                                <div>
+                                </div>
+                                <field name="farmer_family_name" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_given_name" string="Given Name"/>
+                                <div>
+                                </div>
+                                <field name="farmer_given_name" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_addtnl_name" />
+                                <div>
+                                </div>
+                                <field name="farmer_addtnl_name" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_national_id" />
+                                <div>
+                                </div>
+                                <field name="farmer_national_id" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_mobile_tel" />
+                                <div>
+                                </div>
+                                <field name="farmer_mobile_tel" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_sex" />
+                                <div>
+                                </div>
+                                <field name="farmer_sex" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_marital_status" />
+                                <div>
+                                </div>
+                                <field name="farmer_marital_status" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_birthdate" />
+                                <div>
+                                </div>
+                                <field name="farmer_birthdate" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_household_size" />
+                                <div>
+                                </div>
+                                <field name="farmer_household_size" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_postal_address" />
+                                <div>
+                                </div>
+                                <field name="farmer_postal_address" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_email" />
+                                <div>
+                                </div>
+                                <field name="farmer_email" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_formal_agricultural" />
+                                <div>
+                                </div>
+                                <field name="farmer_formal_agricultural" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="farmer_highest_education_level" />
+                                <div>
+                                </div>
+                                <field name="farmer_highest_education_level" />
+                            </div>
+                        </div>
+                    </div>
+                    <field name="farmer_individual_id" invisible="1"/>
+                </page>
+                <page name="section_details" string="Farm Details">
+                    <div
+                        class="row mt16 o_settings_container"
                     >
                         <div class="col-12 o_setting_box">
                             <div class="o_setting_left_pane">
@@ -80,10 +215,8 @@
                     <field name="farm_land_rec_id" invisible="1" />
                 </page>
                 <page name="section_enterprise" string="Enterprises">
-                    <h4>Main Farm Enterprises</h4>
                     <div
                         class="row mt16 o_settings_container"
-                        style="border-bottom: 1px solid #808080; border-top: 1px solid #808080"
                     >
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
@@ -235,6 +368,15 @@
                     </div>
                 </page>
                 <page name="section_aquaculture" string="Aquaculture">
+                    <field name="farm_aqua_act_ids" domain="[('activity_type', '=', 'aquaculture')]" context="{'default_activity_type': 'aquaculture'}">
+                        <tree editable="bottom">
+                            <field name="live_farm_id" column_invisible="1"/>
+                            <field name="activity_type" column_invisible="1"/>
+                            <field name="species_id" />
+                            <field name="aquaculture_production_system" />
+                            <field name="aquaculture_number_of_fingerlings" />
+                        </tree>
+                    </field>
                     <div class="row mt16 o_settings_container">
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
@@ -260,18 +402,6 @@
                                 <field name="number_inactive"/>
                                 <field name="inactive_area"/>
                                 <field name="inactive_volume"/>
-                            </tree>
-                        </field>
-                    </div>
-                    <div>
-                        <h3>Aquatic Species</h3><br/>
-                        <field name="farm_aqua_act_ids" domain="[('activity_type', '=', 'aquaculture')]" context="{'default_activity_type': 'aquaculture'}">
-                            <tree editable="bottom">
-                                <field name="live_farm_id" column_invisible="1"/>
-                                <field name="activity_type" column_invisible="1"/>
-                                <field name="species_id" />
-                                <field name="aquaculture_production_system" />
-                                <field name="aquaculture_number_of_fingerlings" />
                             </tree>
                         </field>
                     </div>
@@ -334,6 +464,14 @@
                     </div>
                 </page>
                 <page name="section_farm_tech" string="Technology and Assets">
+                    <field name="farm_machinery_ids">
+                        <tree editable="bottom">
+                            <field name="machinery_farm_id" column_invisible="1"/>
+                            <field name="machinery_type"/>
+                            <field name="quantity"/>
+                            <field name="machine_working_status"/>
+                        </tree>
+                    </field>
                     <div class="row mt16 o_settings_container">
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
@@ -357,17 +495,6 @@
                                 <field name="farm_technology_labor_source"/>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <h4>What are the main types of farm equipment and machinery in use?</h4><br/>
-                        <field name="farm_machinery_ids">
-                            <tree editable="bottom">
-                                <field name="machinery_farm_id" column_invisible="1"/>
-                                <field name="machinery_type"/>
-                                <field name="quantity"/>
-                                <field name="machine_working_status"/>
-                            </tree>
-                        </field>
                     </div>
                     <div class="row mt16 o_settings_container">
                         <div class="col-12 col-lg-6 o_setting_box">
