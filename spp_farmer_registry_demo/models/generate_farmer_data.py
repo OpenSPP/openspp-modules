@@ -85,48 +85,51 @@ class SPPGenerateFarmerData(models.Model):
             land_record_id = res._generate_land_record_record(group_id)
             group_id.farm_land_rec_id = land_record_id.id
 
-            crop_farm_species_id = res._get_species_data(species_type="crop")
-            live_farm_species_id = res._get_species_data()
-            aqua_farm_species_id = res._get_species_data(species_type="aquaculture")
+            # create a random number of agricultural activities
+            for _ in range(random.randint(1, 5)):
+                crop_farm_species_id = res._get_species_data(species_type="crop")
+                live_farm_species_id = res._get_species_data()
+                aqua_farm_species_id = res._get_species_data(species_type="aquaculture")
 
-            crop_farm_activity_id = res._generate_agricultural_activity_data(
-                activity_type="crop",
-                crop_farm_id=group_id.id,
-                land_id=land_record_id.id,
-                species_id=crop_farm_species_id.id,
-            )
+                res._generate_agricultural_activity_data(
+                    activity_type="crop",
+                    crop_farm_id=group_id.id,
+                    land_id=land_record_id.id,
+                    species_id=crop_farm_species_id.id,
+                )
 
-            live_farm_activity_id = res._generate_agricultural_activity_data(
-                activity_type="livestock",
-                live_farm_id=group_id.id,
-                land_id=land_record_id.id,
-                species_id=live_farm_species_id.id,
-            )
+                res._generate_agricultural_activity_data(
+                    activity_type="livestock",
+                    live_farm_id=group_id.id,
+                    land_id=land_record_id.id,
+                    species_id=live_farm_species_id.id,
+                )
 
-            aqua_farm_activity_id = res._generate_agricultural_activity_data(
-                activity_type="aquaculture",
-                aqua_farm_id=group_id.id,
-                land_id=land_record_id.id,
-                species_id=aqua_farm_species_id.id,
-            )
+                res._generate_agricultural_activity_data(
+                    activity_type="aquaculture",
+                    aqua_farm_id=group_id.id,
+                    land_id=land_record_id.id,
+                    species_id=aqua_farm_species_id.id,
+                )
 
             farm_details_data = res._generate_farm_details_data()
             group_id.farm_detail_id.write(farm_details_data)
 
-            asset_type_id = res._get_asset_type_data()
-            machinery_type_id = res._get_machinery_type_data()
+            for _ in range(random.randint(3, 7)):
+                asset_type_id = res._get_asset_type_data()
+                machinery_type_id = res._get_machinery_type_data()
 
-            farm_asset_id = res._generate_farm_asset_data(
-                asset_farm_id=group_id.id,
-                land_id=land_record_id.id,
-                asset_type_id=asset_type_id.id,
-            )
+                res._generate_farm_asset_data(
+                    asset_farm_id=group_id.id,
+                    land_id=land_record_id.id,
+                    asset_type_id=asset_type_id.id,
+                )
 
-            farm_machinery_id = res._generate_farm_asset_data(
-                machinery_farm_id=group_id.id,
-                land_id=land_record_id.id,
-                machinery_type_id=machinery_type_id.id,
-            )
+                res._generate_farm_asset_data(
+                    machinery_farm_id=group_id.id,
+                    land_id=land_record_id.id,
+                    machinery_type_id=machinery_type_id.id,
+                )
 
             if res.state == "draft":
                 res.update({"state": "generate"})
