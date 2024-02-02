@@ -59,8 +59,9 @@ class Farm(models.Model):
     @api.model
     def write(self, vals):
         farm = super(Farm, self).write(vals)
-        if self.is_group:
-            self.create_update_farmer(self)
+        for rec in self:
+            if rec.is_group:
+                rec.create_update_farmer(rec)
 
         return farm
 

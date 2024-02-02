@@ -1,0 +1,107 @@
+<odoo noupdate="1">
+    <record id="species_aqua_test" model="spp.farm.species">
+       <field name="name">test</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_african_carp" model="spp.farm.species">
+       <field name="name">African Carp</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_african_catfish" model="spp.farm.species">
+       <field name="name">African Catfish</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_artemia" model="spp.farm.species">
+       <field name="name">Artemia</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_catfish" model="spp.farm.species">
+       <field name="name">Catfish</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_common_carp" model="spp.farm.species">
+       <field name="name">Common Carp</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_crabs" model="spp.farm.species">
+       <field name="name">Crabs</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_groupers" model="spp.farm.species">
+       <field name="name">Groupers</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_invertebrates" model="spp.farm.species">
+       <field name="name">Invertebrates</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_koi_carp_large" model="spp.farm.species">
+       <field name="name">Koi carp Large</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_mouth_bass" model="spp.farm.species">
+       <field name="name">Mouth Bass</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_lobsters" model="spp.farm.species">
+       <field name="name">Lobsters</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_lungfish" model="spp.farm.species">
+       <field name="name">Lungfish</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_milk_fish" model="spp.farm.species">
+       <field name="name">Milk fish</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_mud_crabs" model="spp.farm.species">
+       <field name="name">Mud crabs</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_mullet" model="spp.farm.species">
+       <field name="name">Mullet</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_ornamentals" model="spp.farm.species">
+       <field name="name">Ornamentals</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_oyster_prawns" model="spp.farm.species">
+       <field name="name">Oyster Prawns</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_seaweed" model="spp.farm.species">
+       <field name="name">Seaweed</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_shellfish" model="spp.farm.species">
+       <field name="name">Shellfish</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_shrimp" model="spp.farm.species">
+       <field name="name">Shrimp</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_silver_pompano" model="spp.farm.species">
+       <field name="name">Silver Pompano</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_swordtail" model="spp.farm.species">
+       <field name="name">Swordtail</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_tilapia" model="spp.farm.species">
+       <field name="name">Tilapia</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_trout" model="spp.farm.species">
+       <field name="name">Trout</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+    <record id="species_aqua_other" model="spp.farm.species">
+       <field name="name">Other</field>
+       <field name="species_type">aquaculture</field>
+    </record>
+
+</odoo>

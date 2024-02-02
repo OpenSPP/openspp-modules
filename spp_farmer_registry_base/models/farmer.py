@@ -26,8 +26,8 @@ class TempFarmer(models.Model):
         options = self.env["gender.type"].search([])
         return [(option.value, option.code) for option in options]
 
-    farmer_family_name = fields.Char(string="Farmer Family Name", required=True)
-    farmer_given_name = fields.Char(string="Farmer Given Name", required=True)
+    farmer_family_name = fields.Char(string="Farmer Family Name")
+    farmer_given_name = fields.Char(string="Farmer Given Name")
     farmer_addtnl_name = fields.Char(string="Additional Name")
     farmer_national_id = fields.Char(string="National ID Number")
     farmer_mobile_tel = fields.Char(string="Mobile Telephone Number")

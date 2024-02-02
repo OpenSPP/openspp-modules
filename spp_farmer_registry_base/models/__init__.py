@@ -1,6 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 from . import agricultural_activity
+from . import chemical
+from . import fertilizer
 from . import extension_services
 from . import farm_asset
 from . import farm_details

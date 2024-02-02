@@ -17,17 +17,17 @@
                                 <label for="farmer_family_name" string="Family Name"/>
                                 <div>
                                 </div>
-                                <field name="farmer_family_name" />
+                                <field name="farmer_family_name" required="1"/>
                             </div>
                         </div>
                         <div class="col-4 o_setting_box">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="farmer_given_name" string="Given Name"/>
+                                <label for="farmer_given_name" string="Given Name" />
                                 <div>
                                 </div>
-                                <field name="farmer_given_name" />
+                                <field name="farmer_given_name" required="1"/>
                             </div>
                         </div>
                         <div class="col-4 o_setting_box">
@@ -142,6 +142,7 @@
                         </div>
                     </div>
                     <field name="farmer_individual_id" invisible="1"/>
+                    <field name="farmer_id" invisible="1"/>
                 </page>
                 <page name="section_details" string="Farm Details">
                     <div

@@ -16,6 +16,9 @@
         "spp_farmer_registry_base",
     ],
     "data": [
+        "data/aqua_data.xml",
+        "data/crop_data.xml",
+        "data/livestock_data.xml",
         "views/group_view.xml",
         "views/individual_view.xml",
     ],

@@ -1,0 +1,704 @@
+<odoo noupdate="1">
+    <record id="species_crop_test" model="spp.farm.species">
+       <field name="name">test</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_aloe" model="spp.farm.species">
+       <field name="name">Aloe</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_alstroemeria" model="spp.farm.species">
+       <field name="name">Alstroemeria</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_amaranths" model="spp.farm.species">
+       <field name="name">Amaranths</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_anthurium" model="spp.farm.species">
+       <field name="name">Anthurium</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_apples" model="spp.farm.species">
+       <field name="name">Apples</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_apricots" model="spp.farm.species">
+       <field name="name">Apricots</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_arabicum" model="spp.farm.species">
+       <field name="name">Arabicum</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_arrow_root" model="spp.farm.species">
+       <field name="name">Arrow root</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_artemisia" model="spp.farm.species">
+       <field name="name">Artemisia</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_artichoke" model="spp.farm.species">
+       <field name="name">Artichoke</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_asparagus" model="spp.farm.species">
+       <field name="name">Asparagus</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_avocados" model="spp.farm.species">
+       <field name="name">Avocados</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_baby_corn" model="spp.farm.species">
+       <field name="name">Baby Corn</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_bambara" model="spp.farm.species">
+       <field name="name">Bambara</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_bamboo" model="spp.farm.species">
+       <field name="name">Bamboo</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_beans" model="spp.farm.species">
+       <field name="name">Beans</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_bananas" model="spp.farm.species">
+       <field name="name">Bananas</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_barley" model="spp.farm.species">
+       <field name="name">Barley</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_basil" model="spp.farm.species">
+       <field name="name">Basil</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_beans" model="spp.farm.species">
+       <field name="name">Beans</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_beetroot" model="spp.farm.species">
+       <field name="name">Beetroot</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_begonia" model="spp.farm.species">
+       <field name="name">Begonia</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_bixa" model="spp.farm.species">
+       <field name="name">Bixa</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_black_nightshade" model="spp.farm.species">
+       <field name="name">Black Nightshade</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_bracharia" model="spp.farm.species">
+       <field name="name">Bracharia</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_broad_beans" model="spp.farm.species">
+       <field name="name">Broad Beans</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_broccoli" model="spp.farm.species">
+       <field name="name">Broccoli</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_bulb_onion" model="spp.farm.species">
+       <field name="name">Bulb Onion</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_butter_nut" model="spp.farm.species">
+       <field name="name">Butter Nut</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_cabbages" model="spp.farm.species">
+       <field name="name">Cabbages</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_calliandra" model="spp.farm.species">
+       <field name="name">Calliandra</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_capsicum" model="spp.farm.species">
+       <field name="name">Capsicum</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_carnations" model="spp.farm.species">
+       <field name="name">Carnations</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_carrots" model="spp.farm.species">
+       <field name="name">Carrots</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_carthamus" model="spp.farm.species">
+       <field name="name">Carthamus</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_cashew_nuts" model="spp.farm.species">
+       <field name="name">Cashew nuts</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_cassava" model="spp.farm.species">
+       <field name="name">Cassava</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_castor" model="spp.farm.species">
+       <field name="name">Castor</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_cauliflower" model="spp.farm.species">
+       <field name="name">Cauliflower</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_celery" model="spp.farm.species">
+       <field name="name">Celery</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_chickpeas" model="spp.farm.species">
+       <field name="name">Chickpeas</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_chilies" model="spp.farm.species">
+       <field name="name">Chilies</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_chives" model="spp.farm.species">
+       <field name="name">Chives</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_cinnamon" model="spp.farm.species">
+       <field name="name">Cinnamon</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_clover" model="spp.farm.species">
+       <field name="name">Clover</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_cloves" model="spp.farm.species">
+       <field name="name">Cloves</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_cocoa" model="spp.farm.species">
+       <field name="name">Cocoa</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_coconuts" model="spp.farm.species">
+       <field name="name">Coconuts</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_coffee" model="spp.farm.species">
+       <field name="name">Coffee</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_corriander" model="spp.farm.species">
+       <field name="name">Corriander</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_cotton" model="spp.farm.species">
+       <field name="name">Cotton</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_courgettes" model="spp.farm.species">
+       <field name="name">Courgettes</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_cowpeas" model="spp.farm.species">
+       <field name="name">Cowpeas</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_cucumbers" model="spp.farm.species">
+       <field name="name">Cucumbers</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_custard_apple" model="spp.farm.species">
+       <field name="name">Custard Apple</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_dates" model="spp.farm.species">
+       <field name="name">Dates</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_desmodium" model="spp.farm.species">
+       <field name="name">Desmodium</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_dolichos" model="spp.farm.species">
+       <field name="name">Dolichos</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_dudhi" model="spp.farm.species">
+       <field name="name">Dudhi</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_easter_lilly" model="spp.farm.species">
+       <field name="name">Easter Lilly</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_eggplant" model="spp.farm.species">
+       <field name="name">Eggplant</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_erygium" model="spp.farm.species">
+       <field name="name">Erygium</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_french_beans" model="spp.farm.species">
+       <field name="name">French Beans</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_garlic" model="spp.farm.species">
+       <field name="name">Garlic</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_ginger" model="spp.farm.species">
+       <field name="name">Ginger</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_gladiolus" model="spp.farm.species">
+       <field name="name">Gladiolus</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_grain_amaranthus" model="spp.farm.species">
+       <field name="name">Grain Amaranthus</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_grapefruits" model="spp.farm.species">
+       <field name="name">Grapefruits</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_green_grams" model="spp.farm.species">
+       <field name="name">Green Grams</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_groundnuts" model="spp.farm.species">
+       <field name="name">Groundnuts</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_guard" model="spp.farm.species">
+       <field name="name">Guard</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_guatemala" model="spp.farm.species">
+       <field name="name">Guatemala</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_guavas" model="spp.farm.species">
+       <field name="name">Guavas</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_gypsophilla" model="spp.farm.species">
+       <field name="name">Gypsophilla</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_hops" model="spp.farm.species">
+       <field name="name">Hops</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_jatropha" model="spp.farm.species">
+       <field name="name">Jatropha</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_jojoba" model="spp.farm.species">
+       <field name="name">Jojoba</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_jute_plant" model="spp.farm.species">
+       <field name="name">Jute plant</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_kales" model="spp.farm.species">
+       <field name="name">Kales</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_karella" model="spp.farm.species">
+       <field name="name">Karella</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_kenaf" model="spp.farm.species">
+       <field name="name">Kenaf</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_kikuyu_grass" model="spp.farm.species">
+       <field name="name">Kikuyu grass</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_lavender" model="spp.farm.species">
+       <field name="name">Lavender</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_leaf_amaranth" model="spp.farm.species">
+       <field name="name">Leaf Amaranth</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_leeks" model="spp.farm.species">
+       <field name="name">Leeks</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_lemon_grass" model="spp.farm.species">
+       <field name="name">Lemon Grass</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_lemons" model="spp.farm.species">
+       <field name="name">Lemons</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_lentils" model="spp.farm.species">
+       <field name="name">Lentils</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_lettuce" model="spp.farm.species">
+       <field name="name">Lettuce</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_leucaena" model="spp.farm.species">
+       <field name="name">Leucaena</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_lime" model="spp.farm.species">
+       <field name="name">Lime</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_linseed" model="spp.farm.species">
+       <field name="name">Linseed</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_love_grass" model="spp.farm.species">
+       <field name="name">Love grass</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_lucerne" model="spp.farm.species">
+       <field name="name">Lucerne</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_lupins" model="spp.farm.species">
+       <field name="name">Lupins</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_macadamia_nuts" model="spp.farm.species">
+       <field name="name">Macadamia nuts</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_maize" model="spp.farm.species">
+       <field name="name">Maize</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_mangoes" model="spp.farm.species">
+       <field name="name">Mangoes</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_millet" model="spp.farm.species">
+       <field name="name">Millet</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_mint" model="spp.farm.species">
+       <field name="name">Mint</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_miraa" model="spp.farm.species">
+       <field name="name">Miraa</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_mobydick" model="spp.farm.species">
+       <field name="name">Mobydick</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_moringa" model="spp.farm.species">
+       <field name="name">Moringa</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_mushroom" model="spp.farm.species">
+       <field name="name">Mushroom</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_napier" model="spp.farm.species">
+       <field name="name">Napier</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_oats" model="spp.farm.species">
+       <field name="name">Oats</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_oil_palm" model="spp.farm.species">
+       <field name="name">Oil Palm</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_okra" model="spp.farm.species">
+       <field name="name">Okra</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_olives" model="spp.farm.species">
+       <field name="name">Olives</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_onions" model="spp.farm.species">
+       <field name="name">Onions</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_oranges" model="spp.farm.species">
+       <field name="name">Oranges</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_orchids" model="spp.farm.species">
+       <field name="name">Orchids</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_papyrus" model="spp.farm.species">
+       <field name="name">Papyrus</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_parsley" model="spp.farm.species">
+       <field name="name">Parsley</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_passion_fruits" model="spp.farm.species">
+       <field name="name">Passion fruits</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_pawpaws" model="spp.farm.species">
+       <field name="name">Pawpaws</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_peaches" model="spp.farm.species">
+       <field name="name">Peaches</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_pears" model="spp.farm.species">
+       <field name="name">Pears</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_peas" model="spp.farm.species">
+       <field name="name">Peas</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_pennisetum" model="spp.farm.species">
+       <field name="name">Pennisetum</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_peppers" model="spp.farm.species">
+       <field name="name">Peppers</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_pigeon_peas" model="spp.farm.species">
+       <field name="name">Pigeon Peas</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_pineapples" model="spp.farm.species">
+       <field name="name">Pineapples</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_plantains" model="spp.farm.species">
+       <field name="name">Plantains</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_plums" model="spp.farm.species">
+       <field name="name">Plums</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_potatoes" model="spp.farm.species">
+       <field name="name">Potatoes</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_pumpkins" model="spp.farm.species">
+       <field name="name">Pumpkins</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_pyrethrum" model="spp.farm.species">
+       <field name="name">Pyrethrum</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_radish" model="spp.farm.species">
+       <field name="name">Radish</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_rapeseed" model="spp.farm.species">
+       <field name="name">Rapeseed</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_rhodes_grass" model="spp.farm.species">
+       <field name="name">Rhodes grass</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_rice" model="spp.farm.species">
+       <field name="name">Rice</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_rosemary" model="spp.farm.species">
+       <field name="name">Rosemary</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_roses" model="spp.farm.species">
+       <field name="name">Roses</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_rye" model="spp.farm.species">
+       <field name="name">Rye</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_scabiosa" model="spp.farm.species">
+       <field name="name">Scabiosa</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_sesbania" model="spp.farm.species">
+       <field name="name">Sesbania</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_setaria" model="spp.farm.species">
+       <field name="name">Setaria</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_simsim" model="spp.farm.species">
+       <field name="name">Simsim</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_sisal" model="spp.farm.species">
+       <field name="name">Sisal</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_slender_leaf" model="spp.farm.species">
+       <field name="name">Slender Leaf</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_sorghum" model="spp.farm.species">
+       <field name="name">Sorghum</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_soybeans" model="spp.farm.species">
+       <field name="name">Soybeans</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_spider_plant" model="spp.farm.species">
+       <field name="name">Spider plant</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_spinach" model="spp.farm.species">
+       <field name="name">Spinach</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_spring_onion" model="spp.farm.species">
+       <field name="name">Spring Onion</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_star_grass" model="spp.farm.species">
+       <field name="name">Star grass</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_stevia" model="spp.farm.species">
+       <field name="name">Stevia</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_stinging_nettle" model="spp.farm.species">
+       <field name="name">Stinging Nettle</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_strawberries" model="spp.farm.species">
+       <field name="name">Strawberries</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_sugar_beet" model="spp.farm.species">
+       <field name="name">Sugar Beet</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_sugar_cane" model="spp.farm.species">
+       <field name="name">Sugar Cane</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_sunflower" model="spp.farm.species">
+       <field name="name">Sunflower</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_sweet_potatoes" model="spp.farm.species">
+       <field name="name">Sweet Potatoes</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_sweet_sorghum" model="spp.farm.species">
+       <field name="name">Sweet Sorghum</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_tangerines" model="spp.farm.species">
+       <field name="name">Tangerines</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_tea" model="spp.farm.species">
+       <field name="name">Tea</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_themeda_grass" model="spp.farm.species">
+       <field name="name">Themeda Grass</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_tindori" model="spp.farm.species">
+       <field name="name">Tindori</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_tobacco" model="spp.farm.species">
+       <field name="name">Tobacco</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_tomatoes" model="spp.farm.species">
+       <field name="name">Tomatoes</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_tree_tomato" model="spp.farm.species">
+       <field name="name">Tree Tomato</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_tumeric" model="spp.farm.species">
+       <field name="name">Tumeric</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_tunguja" model="spp.farm.species">
+       <field name="name">Tunguja</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_turia" model="spp.farm.species">
+       <field name="name">Turia</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_turnip" model="spp.farm.species">
+       <field name="name">Turnip</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_valore" model="spp.farm.species">
+       <field name="name">Valore</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_vanilla" model="spp.farm.species">
+       <field name="name">Vanilla</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_veronica" model="spp.farm.species">
+       <field name="name">Veronica</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_vetches" model="spp.farm.species">
+       <field name="name">Vetches</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_water_melon" model="spp.farm.species">
+       <field name="name">Water melon</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_wheat" model="spp.farm.species">
+       <field name="name">Wheat</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_white_sapote" model="spp.farm.species">
+       <field name="name">White Sapote</field>
+       <field name="species_type">crop</field>
+    </record>
+    <record id="species_crop_yams" model="spp.farm.species">
+       <field name="name">Yams</field>
+       <field name="species_type">crop</field>
+    </record>
+
+
+</odoo>

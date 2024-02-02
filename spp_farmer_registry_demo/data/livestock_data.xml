@@ -1,0 +1,299 @@
+<odoo noupdate="1">
+    <record id="species_live_test" model="spp.farm.species">
+       <field name="name">test</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_aberdeen_angus_cattle" model="spp.farm.species">
+       <field name="name">Aberdeen angus cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_angora_rex_rabbit" model="spp.farm.species">
+       <field name="name">Angora rex rabbit</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_ayrshire_cattle" model="spp.farm.species">
+       <field name="name">Ayrshire cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_boran_cattle" model="spp.farm.species">
+       <field name="name">Boran cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_brown_swiss_cattle" model="spp.farm.species">
+       <field name="name">Brown swiss cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_charolais_cattle" model="spp.farm.species">
+       <field name="name">Charolais cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_dexter_cattle" model="spp.farm.species">
+       <field name="name">Dexter cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_fleckvieh_cattle" model="spp.farm.species">
+       <field name="name">Fleckvieh cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_friesian_cattle" model="spp.farm.species">
+       <field name="name">Friesian cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_galloway_cattle" model="spp.farm.species">
+       <field name="name">Galloway cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_guernsey_cattle" model="spp.farm.species">
+       <field name="name">Guernsey cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_hereford_cattle" model="spp.farm.species">
+       <field name="name">Hereford cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_jersey_cattle" model="spp.farm.species">
+       <field name="name">Jersey cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_red_poll_cattle" model="spp.farm.species">
+       <field name="name">Red poll cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_sahiwal_cattle" model="spp.farm.species">
+       <field name="name">Sahiwal cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_santa_getrudis_cattle" model="spp.farm.species">
+       <field name="name">Santa getrudis cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_simmental_cattle" model="spp.farm.species">
+       <field name="name">Simmental cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_zebu_cattle" model="spp.farm.species">
+       <field name="name">Zebu cattle</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_blackhead_sheep" model="spp.farm.species">
+       <field name="name">Blackhead sheep</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_black_persian_sheep" model="spp.farm.species">
+       <field name="name">Black Persian sheep</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_corriedale_sheep" model="spp.farm.species">
+       <field name="name">Corriedale sheep</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_dorper_sheep" model="spp.farm.species">
+       <field name="name">Dorper sheep</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_hair_sheep" model="spp.farm.species">
+       <field name="name">Hair sheep</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_hampshire_sheep" model="spp.farm.species">
+       <field name="name">Hampshire sheep</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_merino_sheep" model="spp.farm.species">
+       <field name="name">Merino sheep</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_red_maasai_sheep" model="spp.farm.species">
+       <field name="name">Red Maasai sheep</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_romney_mash_sheep" model="spp.farm.species">
+       <field name="name">Romney mash sheep</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_southdown_sheep" model="spp.farm.species">
+       <field name="name">Southdown sheep</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_boer_goat" model="spp.farm.species">
+       <field name="name">Boer Goat</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_galla_goat" model="spp.farm.species">
+       <field name="name">Galla Goat</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_kenyan_alpine_goat" model="spp.farm.species">
+       <field name="name">Kenyan Alpine goat</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_saanen_goat" model="spp.farm.species">
+       <field name="name">Saanen Goat</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_small_east_african_goats" model="spp.farm.species">
+       <field name="name">Small East African Goats</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_somali_goat" model="spp.farm.species">
+       <field name="name">Somali Goat</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_toggenburg_goat" model="spp.farm.species">
+       <field name="name">Toggenburg goat</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_californian_white_rabbit" model="spp.farm.species">
+       <field name="name">Californian white rabbit</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_chinchilla_rabbit" model="spp.farm.species">
+       <field name="name">Chinchilla rabbit</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_dutch_rabit" model="spp.farm.species">
+       <field name="name">Dutch Rabit</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_ear_lope_rabbit" model="spp.farm.species">
+       <field name="name">Ear lope rabbit</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_flemish_giant_rabbit" model="spp.farm.species">
+       <field name="name">Flemish giant Rabbit</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_new_zealand_white" model="spp.farm.species">
+       <field name="name">New Zealand white</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_rabbit" model="spp.farm.species">
+       <field name="name">Rabbit</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_duroc_pig" model="spp.farm.species">
+       <field name="name">Duroc pig</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_hampshire_pig" model="spp.farm.species">
+       <field name="name">Hampshire pig</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_land_race_pig" model="spp.farm.species">
+       <field name="name">Land race pig</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_large_white_pig" model="spp.farm.species">
+       <field name="name">Large white pig</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_gabbra_camels" model="spp.farm.species">
+       <field name="name">Gabbra Camels</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_pakistan_camels" model="spp.farm.species">
+       <field name="name">Pakistan Camels</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_rendille_camels" model="spp.farm.species">
+       <field name="name">Rendille Camels</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_somali_camels" model="spp.farm.species">
+       <field name="name">Somali Camels</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_turkana_camels" model="spp.farm.species">
+       <field name="name">Turkana Camels</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_broiler_chicken" model="spp.farm.species">
+       <field name="name">Broiler Chicken</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_indigenous_chicken" model="spp.farm.species">
+       <field name="name">Indigenous Chicken</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_improved_kienyeji" model="spp.farm.species">
+       <field name="name">Improved Kienyeji</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_layer_chicken" model="spp.farm.species">
+       <field name="name">Layer Chicken</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_ducks" model="spp.farm.species">
+       <field name="name">Ducks</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_geese" model="spp.farm.species">
+       <field name="name">Geese</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_guinea_fowl" model="spp.farm.species">
+       <field name="name">Guinea fowl</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_pigeons" model="spp.farm.species">
+       <field name="name">Pigeons</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_quails" model="spp.farm.species">
+       <field name="name">Quails</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_turkeys" model="spp.farm.species">
+       <field name="name">Turkeys</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_box_bee_hives" model="spp.farm.species">
+       <field name="name">Box Bee hives</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_kenya_top_bar_hives" model="spp.farm.species">
+       <field name="name">Kenya Top Bar Hives</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_langstroth_bee_hives" model="spp.farm.species">
+       <field name="name">Langstroth Bee hives</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_log_bee_hives" model="spp.farm.species">
+       <field name="name">Log Bee hives</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_crocodiles" model="spp.farm.species">
+       <field name="name">Crocodiles</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_donkeys" model="spp.farm.species">
+       <field name="name">Donkeys</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_horses" model="spp.farm.species">
+       <field name="name">Horses</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_mules" model="spp.farm.species">
+       <field name="name">Mules</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_ostriches" model="spp.farm.species">
+       <field name="name">Ostriches</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_other" model="spp.farm.species">
+       <field name="name">Other</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_silkworms" model="spp.farm.species">
+       <field name="name">Silkworms</field>
+       <field name="species_type">livestock</field>
+    </record>
+    <record id="species_live_snails" model="spp.farm.species">
+       <field name="name">Snails</field>
+       <field name="species_type">livestock</field>
+    </record>
+
+</odoo>
