@@ -147,7 +147,7 @@
                     <field name="farm_crop_act_ids" domain="[('activity_type', '=', 'crop')]" context="{'default_activity_type': 'crop'}">
                         <tree editable="bottom">
                             <field name="crop_farm_id" column_invisible="1"/>
-                            <field name="activity_type" readonly="1" force_save="1"/>
+                            <field name="activity_type" column_invisible="1"/>
                             <field name="species_id" />
                             <field name="purpose" />
                             <field name="cultivation_production_system" />
@@ -161,7 +161,7 @@
                     <field name="farm_live_act_ids" domain="[('activity_type', '=', 'livestock')]" context="{'default_activity_type': 'livestock'}">
                         <tree editable="bottom">
                             <field name="live_farm_id" column_invisible="1"/>
-                            <field name="activity_type" readonly="1" force_save="1"/>
+                            <field name="activity_type" column_invisible="1"/>
                             <field name="species_id" />
                             <field name="livestock_production_system" />
                             <field name="livestock_feed_items" />
@@ -268,7 +268,7 @@
                         <field name="farm_aqua_act_ids" domain="[('activity_type', '=', 'aquaculture')]" context="{'default_activity_type': 'aquaculture'}">
                             <tree editable="bottom">
                                 <field name="live_farm_id" column_invisible="1"/>
-                                <field name="activity_type" readonly="1" force_save="1"/>
+                                <field name="activity_type" column_invisible="1"/>
                                 <field name="species_id" />
                                 <field name="aquaculture_production_system" />
                                 <field name="aquaculture_number_of_fingerlings" />
