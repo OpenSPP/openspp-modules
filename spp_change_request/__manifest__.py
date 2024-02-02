@@ -24,8 +24,6 @@
         "spp_area",
         "spp_scan_id_document",
         "dms_field",
-        "spp_idqueue",
-        "spp_event_data",
     ],
     "data": [
         "security/change_request_security.xml",
@@ -59,3 +57,6 @@
     "installable": True,
     "auto_install": False,
 }
+
+# "spp_idqueue",
+# "spp_event_data",

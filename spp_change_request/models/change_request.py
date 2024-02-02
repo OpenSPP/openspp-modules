@@ -67,7 +67,7 @@ class ChangeRequestBase(models.Model):
         "Applicant",
         domain=[("is_registrant", "=", True), ("is_group", "=", False)],
     )  #: Applicant who submitted the change request (In case the registrant is a group, the applicant is the individual)
-    applicant_id_domain = fields.Char(
+    applicant_id_domain = fields.Binary(
         compute="_compute_applicant_id_domain",
         readonly=True,
         store=False,
@@ -233,7 +233,7 @@ class ChangeRequestBase(models.Model):
                 if group_memberships:
                     group_membership_ids = group_memberships.mapped("individual.id")
                     domain = [("id", "in", group_membership_ids)]
-            rec.applicant_id_domain = json.dumps(domain)
+            rec.applicant_id_domain = domain
 
     @api.onchange("registrant_id")
     def _onchange_registrant_id(self):
