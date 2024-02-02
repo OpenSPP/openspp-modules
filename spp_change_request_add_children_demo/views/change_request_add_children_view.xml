@@ -167,28 +167,61 @@
                                 colspan="4"
                                 invisible="state != 'draft'"
                             /> -->
-                            <group colspan="4" col="4" string="">
+                            <group colspan="6" col="6">
                                 <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
-                                <field
-                                    name="family_name"
-                                    readonly="state != 'draft'"
-                                    class="oe_edit_only"
-                                    colspan="4"
-                                />
-                                <field name="given_name" readonly="state != 'draft'" class="oe_edit_only" />
-                                <field name="addl_name" readonly="state != 'draft'" class="oe_edit_only" />
-                                <field name="gender" readonly="state != 'draft'" />
-                                <field
-                                    name="phone"
-                                    readonly="state != 'draft'"
-                                    widget="phone"
-                                    options="{'enable_sms': false}"
-                                />
-                                <field name="uid_number" readonly="state != 'draft'" />
-                                <field name="birth_place" readonly="state != 'draft'" />
-                                <field name="birthdate_not_exact" readonly="state != 'draft'" />
-                                <field name="birthdate" readonly="state != 'draft'" />
-                                <field name="applicant_relation" readonly="state != 'draft'" />
+                            </group>
+                            <group colspan="6" col="6">
+                                <group colspan="2">
+                                    <field
+                                        name="family_name"
+                                        readonly="state != 'draft'"
+                                        class="oe_edit_only"
+                                    />
+                                </group>
+                                <group colspan="2">
+                                    <field
+                                        name="given_name"
+                                        readonly="state != 'draft'"
+                                        class="oe_edit_only"
+                                    />
+                                </group>
+                                <group colspan="2">
+                                    <field
+                                        name="addl_name"
+                                        readonly="state != 'draft'"
+                                        class="oe_edit_only"
+                                    />
+                                </group>
+                            </group>
+                            <group colspan="6" col="6">
+                                <group colspan="2">
+                                    <field name="gender" readonly="state != 'draft'" />
+                                </group>
+                                <group colspan="2">
+                                    <field
+                                        name="phone"
+                                        readonly="state != 'draft'"
+                                        widget="phone"
+                                        options="{'enable_sms': false}"
+                                    />
+                                </group>
+                                <group colspan="2">
+                                    <field name="uid_number" readonly="state != 'draft'" />
+                                </group>
+                            </group>
+                            <group colspan="6" col="6">
+                                <field name="birth_place" readonly="state != 'draft'" colspan="6" />
+                            </group>
+                            <group colspan="6" col="6">
+                                <group colspan="2">
+                                    <field name="birthdate_not_exact" readonly="state != 'draft'" />
+                                </group>
+                                <group colspan="2">
+                                    <field name="birthdate" readonly="state != 'draft'" />
+                                </group>
+                                <group colspan="2">
+                                    <field name="applicant_relation" readonly="state != 'draft'" />
+                                </group>
                             </group>
                         </page>
                         <page string="Attachments" invisible="1">
@@ -270,30 +303,41 @@
                             </field>
                         </page>
                         <page string="Other Information">
+                            <group colspan="6" col="6">
+                                <group colspan="2">
+                                    <field
+                                        name="change_request_id"
+                                        string="Request No."
+                                        readonly="1"
+                                        options="{'no_open':True}"
+                                    />
+                                </group>
+                                <group colspan="2">
+                                    <field
+                                        name="assign_to_id"
+                                        string="Assigned To"
+                                        options="{'no_open':True}"
+                                        readonly="1"
+                                    />
+                                </group>
+                                <group colspan="2">
+                                    <field
+                                        name="applicant_phone"
+                                        string="Applicant's Phone #"
+                                        required="1"
+                                        widget="phone"
+                                        options="{'enable_sms': false}"
+                                        readonly="state != 'draft'"
+                                    />
+                                </group>
+                            </group>
                             <group colspan="4" col="4">
-                                <field
-                                    name="change_request_id"
-                                    string="Request No."
-                                    readonly="1"
-                                    options="{'no_open':True}"
-                                />
-                                <field
-                                    name="assign_to_id"
-                                    string="Assigned To"
-                                    options="{'no_open':True}"
-                                    readonly="1"
-                                />
-                                <field
-                                    name="applicant_phone"
-                                    string="Applicant's Phone #"
-                                    required="1"
-                                    widget="phone"
-                                    options="{'enable_sms': false}"
-                                    readonly="state != 'draft'"
-                                    colspan="4"
-                                />
-                                <field name="last_validated_by_id" readonly="1" />
-                                <field name="date_validated" readonly="1" />
+                                <group colspan="2">
+                                    <field name="last_validated_by_id" readonly="1" />
+                                </group>
+                                <group colspan="2">
+                                    <field name="date_validated" readonly="1" />
+                                </group>
                             </group>
                         </page>
                     </notebook>
