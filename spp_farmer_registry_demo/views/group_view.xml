@@ -1,10 +1,62 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <record id="view_farm_groups_form_membership" model="ir.ui.view">
+        <field name="name">view_farm_groups_form_membership</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_membership.view_groups_form_membership" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='members']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
     <record id="view_farm_groups_form" model="ir.ui.view">
         <field name="name">view_farm_groups_form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
+            <xpath expr="//page[@name='relationships']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='basic_info']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='other']" position="before">
+                <page string="Members" name="members_page">
+                    <group col="4" colspan="4">
+                        <field name="group_membership_ids" readonly="disabled" nolabel="1" colspan="4">
+                            <tree default_order='status asc,ended_date asc'>
+                                <button
+                                    name="open_individual_form"
+                                    type="object"
+                                    icon="fa-external-link"
+                                    class="btn-success"
+                                    string="Open Individual Form"
+                                />
+                                <field
+                                    name="individual"
+                                    domain="[('is_registrant','=',True),('is_group','=',False)]"
+                                    options="{'no_create':True}"
+                                    string="Member Name"
+                                    context="{'form_view_ref':'g2p_registry_individual.view_individuals_form'}"
+                                />
+                                <field name="individual_birthdate" width="20%" string="Date of Birth" />
+                                <field name="individual_gender" string="Sex" />
+                                <field
+                                    name="kind"
+                                    string="Role"
+                                    widget="many2many_tags"
+                                    options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
+                                />
+                                <field name="start_date" />
+                                <field name="ended_date" string="End date" />
+                                <field name="status" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+
             <xpath expr="//page[@name='ids']" position="before">
                 <page name="section_farmer" string="Farmer">
                     <div
@@ -122,12 +174,10 @@
                         </div>
                         <div class="col-4 o_setting_box">
                             <div class="o_setting_left_pane">
+                                <field name="farmer_formal_agricultural" />
                             </div>
                             <div class="o_setting_right_pane">
                                 <label for="farmer_formal_agricultural" />
-                                <div>
-                                </div>
-                                <field name="farmer_formal_agricultural" />
                             </div>
                         </div>
                         <div class="col-4 o_setting_box">
@@ -282,7 +332,7 @@
                         <tree editable="bottom">
                             <field name="crop_farm_id" column_invisible="1"/>
                             <field name="activity_type" column_invisible="1"/>
-                            <field name="species_id" />
+                            <field name="species_id" context="{'default_species_type': 'crop'}"/>
                             <field name="purpose" />
                             <field name="cultivation_production_system" />
                             <field name="cultivation_water_source" />
@@ -296,7 +346,7 @@
                         <tree editable="bottom">
                             <field name="live_farm_id" column_invisible="1"/>
                             <field name="activity_type" column_invisible="1"/>
-                            <field name="species_id" />
+                            <field name="species_id" context="{'default_species_type': 'livestock'}"/>
                             <field name="livestock_production_system" />
                             <field name="livestock_feed_items" />
                         </tree>
@@ -373,9 +423,9 @@
                         <tree editable="bottom">
                             <field name="live_farm_id" column_invisible="1"/>
                             <field name="activity_type" column_invisible="1"/>
-                            <field name="species_id" />
-                            <field name="aquaculture_production_system" />
-                            <field name="aquaculture_number_of_fingerlings" />
+                            <field name="species_id" context="{'default_species_type': 'aquaculture'}" width="50%"/>
+                            <field name="aquaculture_production_system" width="30%"/>
+                            <field name="aquaculture_number_of_fingerlings" width="20%"/>
                         </tree>
                     </field>
                     <div class="row mt16 o_settings_container">
@@ -396,13 +446,13 @@
                         <field name="farm_asset_ids">
                             <tree editable="bottom">
                                 <field name="asset_farm_id" column_invisible="1"/>
-                                <field name="asset_type"/>
-                                <field name="number_active"/>
-                                <field name="active_area"/>
-                                <field name="active_volume"/>
-                                <field name="number_inactive"/>
-                                <field name="inactive_area"/>
-                                <field name="inactive_volume"/>
+                                <field name="asset_type" width="40%"/>
+                                <field name="number_active" width="10%"/>
+                                <field name="active_area" width="10%"/>
+                                <field name="active_volume" width="10%"/>
+                                <field name="number_inactive" width="10%"/>
+                                <field name="inactive_area" width="10%"/>
+                                <field name="inactive_volume" width="10%"/>
                             </tree>
                         </field>
                     </div>
@@ -469,7 +519,7 @@
                         <tree editable="bottom">
                             <field name="machinery_farm_id" column_invisible="1"/>
                             <field name="machinery_type"/>
-                            <field name="quantity"/>
+                            <field name="quantity" width="20%"/>
                             <field name="machine_working_status"/>
                         </tree>
                     </field>

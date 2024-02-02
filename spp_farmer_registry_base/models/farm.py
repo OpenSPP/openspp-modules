@@ -81,7 +81,7 @@ class Farm(models.Model):
             "addl_name": farm.farmer_addtnl_name or None,
             "farmer_national_id": farm.farmer_national_id or None,
             "gender": farm.farmer_sex or None,
-            "civil_status": farm.farmer_marital_status or None,
+            "marital_status": farm.farmer_marital_status or None,
             "birthdate": farm.farmer_birthdate or None,
             "farmer_household_size": farm.farmer_household_size or None,
             "farmer_postal_address": farm.farmer_postal_address or None,
@@ -93,6 +93,7 @@ class Farm(models.Model):
         }
         if not farm.farmer_individual_id:
             individual = self.env["res.partner"].create(individual_vals)
+            individual.farmer_id = farm.farmer_id.id
             farm.farmer_individual_id = individual.id
             if farm.farmer_mobile_tel:
                 individual_phone_vals = {
