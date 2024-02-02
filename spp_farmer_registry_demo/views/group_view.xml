@@ -250,12 +250,12 @@
                         </div>
                         <notebook>
                             <page name="address_coordinates" string="Address Coordinates">
-                                <div class="col-12 col-lg-9 o_setting_box">
+                                <div class="col-12 o_setting_box">
                                     <field name="land_coordinates" />
                                 </div>
                             </page>
                             <page name="farm_land" string="Farm Land">
-                                <div class="col-12 col-lg-9 o_setting_box">
+                                <div class="col-12 o_setting_box">
                                     <field name="land_geo_polygon" />
                                 </div>
                             </page>

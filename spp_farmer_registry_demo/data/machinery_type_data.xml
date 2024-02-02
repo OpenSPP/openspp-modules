@@ -1,0 +1,26 @@
+<odoo noupdate="1">
+    <record id="machinery_type_tractors" model="machinery.type">
+       <field name="name">Tractors</field>
+    </record>
+    <record id="machinery_type_tillage_equipment" model="machinery.type">
+       <field name="name">Tillage Equipment</field>
+    </record>
+    <record id="machinery_type_planting_equipment" model="machinery.type">
+       <field name="name">Planting Equipment</field>
+    </record>
+    <record id="machinery_type_harvesting_equipment" model="machinery.type">
+       <field name="name">Harvesting Equipment</field>
+    </record>
+    <record id="machinery_type_hay_equipment" model="machinery.type">
+       <field name="name">Hay and Forage Equipment</field>
+    </record>
+    <record id="machinery_type_crop_protection" model="machinery.type">
+       <field name="name">Crop Protection and Fertilization</field>
+    </record>
+    <record id="machinery_type_irrigation_equipment" model="machinery.type">
+       <field name="name">Irrigation Equipment</field>
+    </record>
+    <record id="machinery_type_material_handling_equipment" model="machinery.type">
+       <field name="name">Material Handling Equipment</field>
+    </record>
+</odoo>

@@ -1,0 +1,643 @@
+import hashlib
+import math
+import random
+import string
+
+from faker import Faker
+
+from odoo import api, fields, models
+
+from odoo.addons.base_geoengine.fields import GeoPoint
+
+from ..tools import generate_polygon, random_location_in_kenya
+
+
+class SPPGenerateFarmerData(models.Model):
+    _name = "spp.generate.farmer.data"
+
+    name = fields.Char()
+    num_groups = fields.Integer("Number of Groups", default=1)
+    state = fields.Selection(
+        selection=[
+            ("draft", "Draft"),
+            ("generate", "Generated"),
+        ],
+        default="draft",
+    )
+
+    def generate_sample_data(self):
+        batches = math.ceil(self.num_groups / 1000)
+
+        for _ in range(0, batches):
+            # self.with_delay()._generate_sample_data(res_id=self.id)
+            self._generate_sample_data(res_id=self.id)
+
+    @api.model
+    def _generate_sample_data(self, **kwargs):
+        res_id = kwargs.get("res_id")
+        res = self.browse(res_id)
+
+        kind_farm_id = self.env.ref("spp_farmer_registry_base.kind_farm").id
+
+        locales = [
+            "en_US",
+            "en_GB",
+            "en_IE",
+            "en_TH",
+            "es_ES",
+            "es_MX",
+        ]
+        fake = Faker(locales)
+
+        # Get available gender field selections
+        options = self.env["gender.type"].search([])
+        sex_choices = [option.value for option in options]
+        sex_choice_range = sex_choices * 50
+
+        num_groups = min(res.num_groups, 1000)
+
+        for i in range(0, num_groups):
+            locale = random.choice(locales)
+            sex = random.choice(sex_choice_range)
+            last_name = fake[locale].last_name()
+            first_name = (
+                fake[locale].first_name_male()
+                if sex == "Male"
+                else fake[locale].first_name_female()
+            )
+
+            group_name = f"{last_name} Farm"
+            id_group = (
+                "demo." + hashlib.md5(f"{group_name} {i}".encode("UTF-8")).hexdigest()
+            )
+
+            group_vals = {
+                "id": id_group,
+                "name": group_name,
+                "kind": kind_farm_id,
+                "is_registrant": True,
+                "is_group": True,
+                "farmer_family_name": last_name,
+                "farmer_given_name": first_name,
+            }
+            group_id = self.env["res.partner"].create(group_vals)
+
+            land_record_id = res._generate_land_record_record(group_id)
+            group_id.farm_land_rec_id = land_record_id.id
+
+            crop_farm_species_id = res._get_species_data(species_type="crop")
+            live_farm_species_id = res._get_species_data()
+            aqua_farm_species_id = res._get_species_data(species_type="aquaculture")
+
+            crop_farm_activity_id = res._generate_agricultural_activity_data(
+                activity_type="crop",
+                crop_farm_id=group_id.id,
+                land_id=land_record_id.id,
+                species_id=crop_farm_species_id.id,
+            )
+
+            live_farm_activity_id = res._generate_agricultural_activity_data(
+                activity_type="livestock",
+                live_farm_id=group_id.id,
+                land_id=land_record_id.id,
+                species_id=live_farm_species_id.id,
+            )
+
+            aqua_farm_activity_id = res._generate_agricultural_activity_data(
+                activity_type="aquaculture",
+                aqua_farm_id=group_id.id,
+                land_id=land_record_id.id,
+                species_id=aqua_farm_species_id.id,
+            )
+
+            farm_details_data = res._generate_farm_details_data()
+            group_id.farm_detail_id.write(farm_details_data)
+
+            asset_type_id = res._get_asset_type_data()
+            machinery_type_id = res._get_machinery_type_data()
+
+            farm_asset_id = res._generate_farm_asset_data(
+                asset_farm_id=group_id.id,
+                land_id=land_record_id.id,
+                asset_type_id=asset_type_id.id,
+            )
+
+            farm_machinery_id = res._generate_farm_asset_data(
+                machinery_farm_id=group_id.id,
+                land_id=land_record_id.id,
+                machinery_type_id=machinery_type_id.id,
+            )
+
+            if res.state == "draft":
+                res.update({"state": "generate"})
+
+        msg = "Task Queue called task: model [%s] and method [%s]." % (
+            self._name,
+            "_generate_sample_data",
+        )
+
+        return {"result": msg, "res_model": self._name, "res_ids": [res_id]}
+
+    def _generate_land_record_record(self, group_id):
+        land_name = "My Farm"
+        latitude, longitude = random_location_in_kenya()
+
+        land_coordinates = GeoPoint.from_latlon(self.env.cr, latitude, longitude)
+
+        points = generate_polygon(latitude, longitude, random.randrange(50, 500))
+
+        utm_points = []
+
+        for lon, lat in points:
+            geo_point = GeoPoint.from_latlon(self.env.cr, lat, lon)
+            utm_points.append((geo_point.x, geo_point.y))
+
+        land_geo_polygon = "MULTIPOLYGON((({})))".format(
+            ", ".join(
+                ["{} {}".format(utm_lat, utm_lon) for utm_lat, utm_lon in utm_points]
+            )
+        )
+
+        return self.env["spp.land.record"].create(
+            {
+                "land_farm_id": group_id.id,
+                "land_name": land_name,
+                "land_coordinates": land_coordinates,
+                "land_geo_polygon": land_geo_polygon,
+            }
+        )
+
+    def _generate_agricultural_activity_data(
+        self,
+        activity_type="crop",
+        crop_farm_id=None,
+        live_farm_id=None,
+        aqua_farm_id=None,
+        land_id=None,
+        species_id=None,
+    ):
+        # Define the possible values for selection fields
+        purposes = ["subsistence", "commercial", "both"]
+        cultivation_water_sources = ["irrigated", "rainfed"]
+        cultivation_production_systems = [
+            "Mono-cropping",
+            "Mixed-cropping",
+            "Agroforestry",
+            "Plantation",
+            "Greenhouse",
+        ]
+        cultivation_chemical_interventions = [
+            "fungicides",
+            "herbicides",
+            "insecticides",
+            "rodenticides",
+            "other",
+        ]
+        cultivation_fertilizer_interventions = [
+            "amonia anhydrous",
+            "ammonium hydroxide",
+            "calcium nitrate",
+            "can",
+            "dap",
+            "double super phosphate",
+            "magnesium nitrate",
+            "map",
+            "mop",
+            "npk",
+            "phosphate rock",
+            "potassium nitrate",
+            "potassium sulphate",
+            "sulphate of ammonia",
+            "superphosphate",
+            "tsp",
+            "urea",
+            "organic manure",
+            "organic liquid fertilizer",
+            "other",
+        ]
+        livestock_production_systems = [
+            "ranching",
+            "communal grazing",
+            "pastoralism",
+            "rotational grazing",
+            "zero grazing",
+            "semi zero grazing",
+            "feedlots",
+            "free range",
+            "tethering",
+            "other",
+        ]
+        livestock_feed_items = [
+            "natural pasture",
+            "improved pasture",
+            "own grown hay",
+            "purchased hay",
+            "manufactured meals",
+            "home-made feed mix",
+            "chick mash",
+            "calf pellets",
+            "mineral salts",
+            "purchased fodder",
+            "pig starter-finisher",
+            "other",
+        ]
+        aquaculture_production_systems = [
+            "ponds",
+            "cages",
+            "tanks",
+            "raceways",
+            "recirculating systems",
+            "aquaponics",
+            "other",
+        ]
+
+        # Generate a random value for each field
+        data = {
+            "crop_farm_id": crop_farm_id,
+            "live_farm_id": live_farm_id,
+            "aqua_farm_id": aqua_farm_id,
+            "land_id": land_id,
+            "species_id": species_id,
+            "purpose": random.choice(purposes),
+            "activity_type": activity_type,
+            "cultivation_water_source": random.choice(cultivation_water_sources),
+            "cultivation_production_system": random.choice(
+                cultivation_production_systems
+            ),
+            "cultivation_chemical_interventions": random.choice(
+                cultivation_chemical_interventions
+            ),
+            "cultivation_fertilizer_interventions": random.choice(
+                cultivation_fertilizer_interventions
+            ),
+            "livestock_production_system": random.choice(livestock_production_systems),
+            "livestock_feed_items": random.choice(livestock_feed_items),
+            "aquaculture_production_system": random.choice(
+                aquaculture_production_systems
+            ),
+            "aquaculture_number_of_fingerlings": random.randint(
+                0, 1000
+            ),  # Assuming a reasonable range for number of fingerlings
+        }
+
+        # Clean up data based on activity_type
+        if data["activity_type"] != "crop":
+            data.pop("cultivation_water_source")
+            data.pop("cultivation_production_system")
+            data.pop("cultivation_chemical_interventions")
+            data.pop("cultivation_fertilizer_interventions")
+
+        if data["activity_type"] != "livestock":
+            data.pop("livestock_production_system")
+            data.pop("livestock_feed_items")
+
+        if data["activity_type"] != "aquaculture":
+            data.pop("aquaculture_production_system")
+            data.pop("aquaculture_number_of_fingerlings")
+
+        return self.env["spp.farm.activity"].create(data)
+
+    def _generate_farm_asset_data(
+        self,
+        asset_farm_id=None,
+        machinery_farm_id=None,
+        land_id=None,
+        asset_type_id=None,
+        machinery_type_id=None,
+    ):
+        # Generate random data for the fields not requiring a reference to another object
+        quantity = random.randint(1, 100)
+        machine_working_status = random.choice(
+            ["Working", "Needs maintenance", "Broken"]
+        )
+        number_active = random.randint(0, quantity)
+        active_area = round(random.uniform(1.0, 100.0), 2)
+        active_volume = round(random.uniform(1.0, 100.0), 2)
+        number_inactive = quantity - number_active
+        inactive_area = round(random.uniform(1.0, 100.0), 2)
+        inactive_volume = round(random.uniform(1.0, 100.0), 2)
+
+        # Construct the data dictionary
+        farm_asset_data = {
+            "asset_farm_id": asset_farm_id,
+            "machinery_farm_id": machinery_farm_id,
+            "land_id": land_id,
+            "asset_type": asset_type_id,
+            "machinery_type": machinery_type_id,
+            "quantity": quantity,
+            "machine_working_status": machine_working_status,
+            "number_active": number_active,
+            "active_area": active_area,
+            "active_volume": active_volume,
+            "number_inactive": number_inactive,
+            "inactive_area": inactive_area,
+            "inactive_volume": inactive_volume,
+        }
+
+        # "spp.farm.asset"
+        return self.env["spp.farm.asset"].create(farm_asset_data)
+
+    def _generate_farm_details_data(
+        self,
+    ):
+        # Generate random data for the fields not requiring a reference to another object
+        farm_types = ["crop", "livestock", "aquaculture", "mixed"]
+        legal_statuses = [
+            "self",
+            "family",
+            "extended community",
+            "cooperative",
+            "government",
+            "leased",
+            "unknown",
+        ]
+        water_body_types = ["freshwater", "marine", "brackish"]
+        power_sources = [
+            "manual labor",
+            "animal drought",
+            "motorized",
+            "wind",
+            "solar",
+            "grid electricity",
+            "other",
+        ]
+        labor_sources = [
+            "family members",
+            "temporary hired help",
+            "permanent hired help",
+        ]
+        equipment_owners = ["self", "community", "hirer"]
+        irrigation_types = [
+            "furrow_canal",
+            "basin",
+            "bucket",
+            "centre_pivot",
+            "drip",
+            "furrow",
+            "sprinkler",
+            "flooding",
+            "other",
+        ]
+        irrigation_sources = [
+            "locality water supply",
+            "water trucking",
+            "rain",
+            "natural rivers and streams",
+            "man made dam",
+            "shallow well or borehole",
+            "adjacent water body",
+            "harvested water",
+            "road runoff",
+            "water pan",
+        ]
+        irrigation_projects = [
+            "public irrigation scheme",
+            "private on farm initiative",
+            "community scheme",
+        ]
+        management_implementing_bodies = [
+            "county government",
+            "national government",
+            "implementing agents",
+            "national govt ministry",
+            "self",
+            "other",
+        ]
+        scheme_memberships = ["full member", "out grower"]
+        income_sources = [
+            "sale of farming produce",
+            "non-farm trading",
+            "salary from employment elsewhere",
+            "casual labor elsewhere",
+            "pension",
+            "remittances",
+            "cash transfer",
+            "other",
+        ]
+        extension_services = [
+            "e-extension",
+            "face-to-face",
+            "farmer field schools",
+            "group demonstrations",
+            "peer-to-peer",
+            "other",
+        ]
+
+        implementing_bodies = [
+            "county government",
+            "national government",
+            "private",
+            "ngo",
+            "other",
+        ]
+
+        main_source_informations = [
+            "newspaper",
+            "extension services",
+            "internet",
+            "radio",
+            "television",
+            "public gatherings",
+            "relatives",
+        ]
+
+        # Randomly select true or false for boolean fields
+        def random_bool():
+            return random.choice([True, False])
+
+        farm_details_data = {
+            "details_farm_type": random.choice(farm_types),
+            "farm_total_size": round(random.uniform(0.1, 1000.0), 2),
+            "farm_size_under_crops": round(random.uniform(0.1, 1000.0), 2),
+            "farm_size_under_livestock": round(random.uniform(0.1, 1000.0), 2),
+            "farm_size_leased_out": round(random.uniform(0.1, 1000.0), 2),
+            "farm_size_idle": round(random.uniform(0.1, 1000.0), 2),
+            "details_legal_status": random.choice(legal_statuses),
+            "lease_term": random.randint(1, 99),
+            "lease_agreement_number": "".join(
+                random.choices(string.ascii_uppercase + string.digits, k=10)
+            ),
+            "another_farm": random_bool(),
+            "growing_crops_subsistence": random_bool(),
+            "growing_crops_sale": random_bool(),
+            "rearing_livestock_subsistence": random_bool(),
+            "rearing_livestock_sale": random_bool(),
+            "tree_farming": random_bool(),
+            "livestock_fertilizer_for_fodder": random_bool(),
+            "livestock_certified_pasture": random_bool(),
+            "livestock_assisted_reproductive_health_technology_ai": random_bool(),
+            "livestock_assisted_reproductive_health_technology_animal_horm": random_bool(),
+            "livestock_assisted_reproductive_health_technology_embryo_transf": random_bool(),
+            "livestock_animal_health_services_routine_vaccination": random_bool(),
+            "livestock_animal_health_services_disease_control": random_bool(),
+            "aquaculture_type": random.choice(water_body_types),
+            "aquaculture_subsistence": random_bool(),
+            "aquaculture_sale": random_bool(),
+            "aquaculture_main_inputs_fingerlings": random_bool(),
+            "aquaculture_main_inputs_feeds": random_bool(),
+            "aquaculture_main_inputs_fertilizers": random_bool(),
+            "aquaculture_utilize_fertilizer": random_bool(),
+            "aquaculture_production_level": random.choice(
+                ["extensive", "semi-intensive", "intensive"]
+            ),
+            "aquaculture_beneficiary_esp": random_bool(),
+            "farm_technology_power_source": random.choice(power_sources),
+            "farm_technology_labor_source": random.choice(labor_sources),
+            "farm_technology_own_equipment": random.choice(equipment_owners),
+            "farm_technology_structure_spray_race": random_bool(),
+            "financial_services_main_income_source": random.choice(income_sources),
+            "farm_technology_structure_animal_dip": random_bool(),
+            "farm_technology_structure_zero_grazing_unit": random_bool(),
+            "farm_technology_structure_hay_store": random_bool(),
+            "farm_technology_structure_feed_store": random_bool(),
+            "farm_technology_structure_sick_bay": random_bool(),
+            "farm_technology_structure_cattle_boma": random_bool(),
+            "farm_technology_structure_milking_parlor": random_bool(),
+            "farm_technology_structure_animal_crush": random_bool(),
+            "farm_technology_structure_traditional_granary": random_bool(),
+            "farm_technology_structure_modern_granary": random_bool(),
+            "farm_technology_structure_general_store": random_bool(),
+            "farm_technology_structure_hay_bailers": random_bool(),
+            "farm_technology_structure_green_house": random_bool(),
+            "farm_technology_structure_bee_house": random_bool(),
+            "farm_technology_structure_hatchery": random_bool(),
+            "farm_technology_structure_apriary": random_bool(),
+            "land_water_management_crop_rotation": random_bool(),
+            "land_water_management_green_cover_crop": random_bool(),
+            "land_water_management_contour_ploughing": random_bool(),
+            "land_water_management_deep_ripping": random_bool(),
+            "land_water_management_grass_strips": random_bool(),
+            "land_water_management_trash_line": random_bool(),
+            "land_water_management_cambered_beds": random_bool(),
+            "land_water_management_biogas_production": random_bool(),
+            "land_water_management_mulching": random_bool(),
+            "land_water_management_minimum_tillage": random_bool(),
+            "land_water_management_manuring_composting": random_bool(),
+            "land_water_management_organic_farming": random_bool(),
+            "land_water_management_terracing": random_bool(),
+            "land_water_management_water_harvesting": random_bool(),
+            "land_water_management_zai_pits": random_bool(),
+            "land_water_management_cut_off_drains": random_bool(),
+            "land_water_management_conservation_agriculture": random_bool(),
+            "land_water_management_integrated_pest_management": random_bool(),
+            "land_water_management_subsidized_fertilizer": random_bool(),
+            "land_water_management_use_lime": random_bool(),
+            "land_water_management_soil_testing": random_bool(),
+            "land_water_management_undertake_irrigation": random_bool(),
+            "land_water_management_irrigation_type": random.choice(irrigation_types),
+            "land_water_management_irrigation_source": random.choice(
+                irrigation_sources
+            ),
+            "land_water_management_total_irrigated_area": round(
+                random.uniform(0.1, 1000.0), 2
+            ),
+            "land_water_management_type_of_irrigation_project": random.choice(
+                irrigation_projects
+            ),
+            "land_water_management_type_of_irrigation_project_name": "Project-"
+            + "".join(random.choices(string.ascii_uppercase + string.digits, k=5)),
+            "land_water_management_implementing_body": random.choice(
+                management_implementing_bodies
+            ),
+            "land_water_management_irrigation_scheme_membership": random.choice(
+                scheme_memberships
+            ),
+            "financial_services_percentage_of_income_from_farming": round(
+                random.uniform(0.1, 1000.0), 2
+            ),
+            "financial_services_vulnerable_marginalized_group": random_bool(),
+            "financial_services_faith_based_organization": random_bool(),
+            "financial_services_community_based_organization": random_bool(),
+            "financial_services_producer_group": random_bool(),
+            "financial_services_marketing_group": random_bool(),
+            "financial_services_table_banking_group": random_bool(),
+            "financial_services_common_interest_group": random_bool(),
+            "financial_services_mobile_money_saving_loans": random_bool(),
+            "financial_services_farmer_organization": random_bool(),
+            "financial_services_other_money_lenders": random_bool(),
+            "financial_services_self_salary_or_savings": random_bool(),
+            "financial_services_family": random_bool(),
+            "financial_services_commercial_bank": random_bool(),
+            "financial_services_business_partners": random_bool(),
+            "financial_services_savings_credit_groups": random_bool(),
+            "financial_services_cooperatives": random_bool(),
+            "financial_services_micro_finance_institutions": random_bool(),
+            "financial_services_non_governmental_donors": random_bool(),
+            "financial_services_crop_insurance": random_bool(),
+            "financial_services_livestock_insurance": random_bool(),
+            "financial_services_fish_insurance": random_bool(),
+            "financial_services_farm_building_insurance": random_bool(),
+            "financial_services_written_farm_records": random_bool(),
+            "financial_services_main_source_of_information_on_good_agricultu": random.choice(
+                main_source_informations
+            ),
+            "financial_services_mode_of_extension_service": random.choice(
+                extension_services
+            ),
+            "financial_services_main_extension_service_provider": random.choice(
+                implementing_bodies
+            ),
+        }
+
+        return farm_details_data
+
+    def _get_species_data(self, species_type=None):
+        # Generate random data for the fields not provided
+
+        aqua_data = [
+            "species_aqua_african_carp",
+            "species_aqua_crabs",
+            "species_aqua_shellfish",
+            "species_aqua_other",
+        ]
+        crop_data = [
+            "species_crop_aloe",
+            "species_crop_apricots",
+            "species_crop_arrow_root",
+            "species_crop_cabbages",
+        ]
+        livestock_data = [
+            "species_live_aberdeen_angus_cattle",
+            "species_live_fleckvieh_cattle",
+            "species_live_guernsey_cattle",
+            "species_live_ear_lope_rabbit",
+        ]
+
+        if species_type == "aquaculture":
+            species_data = random.choice(aqua_data)
+        elif species_type == "crop":
+            species_data = random.choice(crop_data)
+        else:
+            species_data = random.choice(livestock_data)
+
+        return self.env.ref(f"spp_farmer_registry_demo.{species_data}")
+
+    def _get_machinery_type_data(self):
+        machinery_types = [
+            "machinery_type_tractors",
+            "machinery_type_tillage_equipment",
+            "machinery_type_planting_equipment",
+            "machinery_type_harvesting_equipment",
+            "machinery_type_hay_equipment",
+            "machinery_type_crop_protection",
+            "machinery_type_irrigation_equipment",
+            "machinery_type_material_handling_equipment",
+        ]
+
+        return self.env.ref(
+            f"spp_farmer_registry_demo.{random.choice(machinery_types)}"
+        )
+
+    def _get_asset_type_data(self):
+        asset_types = [
+            "asset_type_land_and_soil",
+            "asset_type_building",
+            "asset_type_machinery",
+            "asset_type_vehicles",
+            "asset_type_livestock",
+            "asset_type_tools_and_implements",
+            "asset_type_fencing",
+            "asset_type_water_resource",
+        ]
+
+        return self.env.ref(f"spp_farmer_registry_demo.{random.choice(asset_types)}")

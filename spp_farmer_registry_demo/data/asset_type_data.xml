@@ -1,0 +1,26 @@
+<odoo noupdate="1">
+    <record id="asset_type_land_and_soil" model="asset.type">
+       <field name="name">Land and Soil Improvements</field>
+    </record>
+    <record id="asset_type_building" model="asset.type">
+       <field name="name">Buildings and Structures</field>
+    </record>
+    <record id="asset_type_machinery" model="asset.type">
+       <field name="name">Machinery and Equipment</field>
+    </record>
+    <record id="asset_type_vehicles" model="asset.type">
+       <field name="name">Vehicles</field>
+    </record>
+    <record id="asset_type_livestock" model="asset.type">
+       <field name="name">Livestock</field>
+    </record>
+    <record id="asset_type_tools_and_implements" model="asset.type">
+       <field name="name">Tools and Implements</field>
+    </record>
+    <record id="asset_type_fencing" model="asset.type">
+       <field name="name">Fencing and Enclosures</field>
+    </record>
+    <record id="asset_type_water_resource" model="asset.type">
+       <field name="name">Water Resources</field>
+    </record>
+</odoo>
