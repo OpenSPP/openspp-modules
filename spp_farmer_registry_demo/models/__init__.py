@@ -5,3 +5,4 @@ from . import farm
 from . import farm_asset
 from . import farm_details
 from . import farmer
+from . import generate_farmer_data
