@@ -6,4 +6,5 @@ class ResPartner(models.Model):
 
     _inherit = "res.partner"
 
-    geo_point = fields.GeoPoint("Address coordinates")
+    geo_point = fields.GeoPoint()
+    geo_multi_polygon = fields.GeoMultiPolygon()
