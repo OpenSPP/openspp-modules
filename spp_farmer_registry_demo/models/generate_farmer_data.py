@@ -2,6 +2,7 @@ import hashlib
 import math
 import random
 import string
+from datetime import datetime, timedelta
 
 from faker import Faker
 
@@ -57,30 +58,9 @@ class SPPGenerateFarmerData(models.Model):
         num_groups = min(res.num_groups, 1000)
 
         for i in range(0, num_groups):
-            locale = random.choice(locales)
-            sex = random.choice(sex_choice_range)
-            last_name = fake[locale].last_name()
-            first_name = (
-                fake[locale].first_name_male()
-                if sex == "Male"
-                else fake[locale].first_name_female()
+            group_id = res._generate_group_data(
+                i, fake, locales, sex_choice_range, kind_farm_id
             )
-
-            group_name = f"{last_name} Farm"
-            id_group = (
-                "demo." + hashlib.md5(f"{group_name} {i}".encode("UTF-8")).hexdigest()
-            )
-
-            group_vals = {
-                "id": id_group,
-                "name": group_name,
-                "kind": kind_farm_id,
-                "is_registrant": True,
-                "is_group": True,
-                "farmer_family_name": last_name,
-                "farmer_given_name": first_name,
-            }
-            group_id = self.env["res.partner"].create(group_vals)
 
             land_record_id = res._generate_land_record_record(group_id)
             group_id.farm_land_rec_id = land_record_id.id
@@ -140,6 +120,80 @@ class SPPGenerateFarmerData(models.Model):
         )
 
         return {"result": msg, "res_model": self._name, "res_ids": [res_id]}
+
+    def _generate_group_data(self, index, fake, locales, sex_choice_range, kind_id):
+        locale = random.choice(locales)
+        sex = random.choice(sex_choice_range)
+        last_name = fake[locale].last_name()
+        first_name = (
+            fake[locale].first_name_male()
+            if sex == "Male"
+            else fake[locale].first_name_female()
+        )
+        addl_name = (
+            fake[locale].first_name_male()
+            if sex == "Male"
+            else fake[locale].first_name_female()
+        )
+
+        group_name = f"{last_name} Farm"
+        id_group = (
+            "demo." + hashlib.md5(f"{group_name} {index}".encode("UTF-8")).hexdigest()
+        )
+
+        highest_education_level = [
+            "none",
+            "primary",
+            "secondary",
+            "tertiary",
+        ]
+
+        marital_status = [
+            "single",
+            "married_monogamous",
+            "married_polygamous",
+            "widowed",
+            "separated",
+        ]
+
+        farmer_mobile_tel = "+2547" + "".join(random.choices("0123456789", k=8))
+
+        start_date = datetime(year=1950, month=1, day=1)
+        end_date = datetime(year=2003, month=12, day=31)
+        time_between_dates = end_date - start_date
+        days_between_dates = time_between_dates.days
+        random_number_of_days = random.randrange(days_between_dates)
+        farmer_birthdate = start_date + timedelta(days=random_number_of_days)
+        farmer_email = (
+            "".join(random.choices("abcdefghijklmnopqrstuvwxyz0123456789", k=5))
+            + "@example.com"
+        )
+        farmer_household_size = str(random.randint(1, 10))
+        farmer_postal_address = "P.O Box " + "".join(random.choices("0123456789", k=4))
+
+        group_vals = {
+            "id": id_group,
+            "name": group_name,
+            "kind": kind_id,
+            "is_registrant": True,
+            "is_group": True,
+            "farmer_family_name": last_name,
+            "farmer_given_name": first_name,
+            "farmer_national_id": "".join(
+                random.choices(string.ascii_uppercase + string.digits, k=10)
+            ),
+            "farmer_sex": sex,
+            "farmer_addtnl_name": addl_name,
+            "farmer_marital_status": random.choice(marital_status),
+            "farmer_highest_education_level": random.choice(highest_education_level),
+            "farmer_mobile_tel": farmer_mobile_tel,
+            "farmer_birthdate": farmer_birthdate,
+            "farmer_email": farmer_email,
+            "farmer_formal_agricultural": random.choice([True, False]),
+            "farmer_household_size": farmer_household_size,
+            "farmer_postal_address": farmer_postal_address,
+        }
+        return self.env["res.partner"].create(group_vals)
 
     def _generate_land_record_record(self, group_id):
         land_name = "My Farm"

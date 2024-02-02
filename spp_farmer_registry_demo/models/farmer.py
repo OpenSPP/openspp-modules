@@ -21,5 +21,6 @@ class Farmer(models.Model):
             ("certificate", "Certificate"),
             ("diploma", "Diploma"),
             ("university", "University"),
+            ("tertiary", "Tertiary"),
         ],
     )
