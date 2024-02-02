@@ -14,6 +14,7 @@
                 <field name="zip" />
                 <field name="city" />
                 <field name="country_id" />
+                <field name="geo_point" />
                 <templates>
                   <t t-name="info_box">
                     <b>
@@ -34,7 +35,7 @@
     </record>
 
     <record id="geoengine_vector_layer_res_partner" model="geoengine.vector.layer">
-        <field name="geo_field_id" ref="geoengine_partner.field_res_partner__geo_point" />
+        <field name="geo_field_id" ref="spp_farmer_registry_base.field_res_partner__geo_point" />
         <field name="name">Partner location</field>
         <field eval="1" name="sequence" />
         <field name="view_id" ref="ir_ui_view_geo_partner" />
