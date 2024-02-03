@@ -5,7 +5,7 @@ import string
 
 from faker import Faker
 
-from odoo import api, fields, models
+from odoo import Command, api, fields, models
 
 from odoo.addons.base_geoengine.fields import GeoPoint
 
@@ -189,35 +189,8 @@ class SPPGenerateFarmerData(models.Model):
             "Plantation",
             "Greenhouse",
         ]
-        cultivation_chemical_interventions = [
-            "fungicides",
-            "herbicides",
-            "insecticides",
-            "rodenticides",
-            "other",
-        ]
-        cultivation_fertilizer_interventions = [
-            "amonia anhydrous",
-            "ammonium hydroxide",
-            "calcium nitrate",
-            "can",
-            "dap",
-            "double super phosphate",
-            "magnesium nitrate",
-            "map",
-            "mop",
-            "npk",
-            "phosphate rock",
-            "potassium nitrate",
-            "potassium sulphate",
-            "sulphate of ammonia",
-            "superphosphate",
-            "tsp",
-            "urea",
-            "organic manure",
-            "organic liquid fertilizer",
-            "other",
-        ]
+        cultivation_chemical_interventions = self.env["spp.chemical"].search([]).mapped("id")
+        cultivation_fertilizer_interventions = self.env["spp.fertilizer"].search([]).mapped("id")
         livestock_production_systems = [
             "ranching",
             "communal grazing",
@@ -230,20 +203,7 @@ class SPPGenerateFarmerData(models.Model):
             "tethering",
             "other",
         ]
-        livestock_feed_items = [
-            "natural pasture",
-            "improved pasture",
-            "own grown hay",
-            "purchased hay",
-            "manufactured meals",
-            "home-made feed mix",
-            "chick mash",
-            "calf pellets",
-            "mineral salts",
-            "purchased fodder",
-            "pig starter-finisher",
-            "other",
-        ]
+        livestock_feed_items = self.env["spp.feed.items"].search([]).mapped("id")
         aquaculture_production_systems = [
             "ponds",
             "cages",
@@ -253,6 +213,27 @@ class SPPGenerateFarmerData(models.Model):
             "aquaponics",
             "other",
         ]
+
+        # Produce random quantity of chemical/fertilizer/feed items to be created
+        chemical_interventions_len = random.randint(1, len(cultivation_chemical_interventions))
+        fertilizer_interventions_len = random.randint(1, len(cultivation_fertilizer_interventions))
+        feed_items_len = random.randint(1, len(livestock_feed_items))
+
+        # Generate the chemical/fertilizer/feed items based on the quantity
+        chemical_interventions_vals = []
+        for i in range(chemical_interventions_len):
+            chemical_interventions_vals.append(Command.link(random.choice(cultivation_chemical_interventions)))
+        chemical_interventions_vals = list(dict.fromkeys(chemical_interventions_vals))
+        fertilizer_interventions_vals = []
+
+        for i in range(fertilizer_interventions_len):
+            fertilizer_interventions_vals.append(Command.link(random.choice(cultivation_fertilizer_interventions)))
+        fertilizer_interventions_vals = list(dict.fromkeys(fertilizer_interventions_vals))
+
+        feed_items_interventions_vals = []
+        for i in range(feed_items_len):
+            feed_items_interventions_vals.append(Command.link(random.choice(livestock_feed_items)))
+        feed_items_interventions_vals = list(dict.fromkeys(feed_items_interventions_vals))
 
         # Generate a random value for each field
         data = {
@@ -267,14 +248,10 @@ class SPPGenerateFarmerData(models.Model):
             "cultivation_production_system": random.choice(
                 cultivation_production_systems
             ),
-            "cultivation_chemical_interventions": random.choice(
-                cultivation_chemical_interventions
-            ),
-            "cultivation_fertilizer_interventions": random.choice(
-                cultivation_fertilizer_interventions
-            ),
+            "cultivation_chemical_interventions": chemical_interventions_vals,
+            "cultivation_fertilizer_interventions": fertilizer_interventions_vals,
             "livestock_production_system": random.choice(livestock_production_systems),
-            "livestock_feed_items": random.choice(livestock_feed_items),
+            "livestock_feed_items": feed_items_interventions_vals,
             "aquaculture_production_system": random.choice(
                 aquaculture_production_systems
             ),
