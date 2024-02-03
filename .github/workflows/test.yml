@@ -3,15 +3,12 @@ name: tests
 on:
   pull_request:
     branches:
-      - "15.0*"
-      - "15.1*"
+      - "17.0*"
   push:
     branches:
-      - "15.0"
-      - "rc/15.0*"
-      - "15.0-ocabot-*"
+      - "17.0"
+      - "17.0-ocabot-*"
       - "farmer-registry"
-      - "farmer-registry-*"
 env:
   OCA_GIT_USER_NAME: openspp
   OCA_GIT_USER_EMAIL: bot@openspp.org
@@ -20,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Detect unreleased dependencies
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: |
           for reqfile in requirements.txt test-requirements.txt ; do
               if [ -f ${reqfile} ] ; then
@@ -41,14 +38,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - container: ghcr.io/oca/oca-ci/py3.8-odoo15.0:latest
-            makepot: "true"
+          - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
             name: test with Odoo
-          - container: ghcr.io/oca/oca-ci/py3.8-ocb15.0:latest
+          - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
             name: test with OCB
+            makepot: "true"
     services:
       postgres:
-        image: postgres:9.6
+        image: postgres:15.0
         env:
           POSTGRES_USER: odoo
           POSTGRES_PASSWORD: odoo
@@ -56,11 +53,9 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
-          # Disabling shallow clone for sonarqube
-          # fetch-depth: 0
       - name: Install addons and dependencies
         run: oca_install_addons
       - name: Check licenses
