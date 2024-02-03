@@ -3,6 +3,7 @@
 from . import agricultural_activity
 from . import chemical
 from . import fertilizer
+from . import feed_items
 from . import extension_services
 from . import farm_asset
 from . import farm_details

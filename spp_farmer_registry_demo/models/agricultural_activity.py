@@ -19,43 +19,8 @@ class AgriculturalActivity(models.Model):
         ],
         string="Production system",
     )
-
-    cultivation_chemical_interventions = fields.Selection(
-        [
-            ("fungicides", "Fungicides"),
-            ("herbicides", "Herbicides"),
-            ("insecticides", "Insecticides"),
-            ("rodenticides", "Rodenticides"),
-            ("other", "Other"),
-        ],
-        string="Chemical interventions",
-    )
-
-    cultivation_fertilizer_interventions = fields.Selection(
-        [
-            ("amonia anhydrous", "Amonia Anhydrous"),
-            ("ammonium hydroxide", "Ammonium Hydroxide"),
-            ("calcium nitrate", "Calcium Nitrate"),
-            ("can", "CAN"),
-            ("dap", "DAP"),
-            ("double super phosphate", "Double Super Phosphate"),
-            ("magnesium nitrate", "Magnesium Nitrate"),
-            ("map", "MAP"),
-            ("mop", "MOP"),
-            ("npk", "NPK"),
-            ("phosphate rock", "Phosphate Rock"),
-            ("potassium nitrate", "Potassium Nitrate"),
-            ("potassium sulphate", "Potassium Sulphate"),
-            ("sulphate of ammonia", "Sulphate of Ammonia"),
-            ("superphosphate", "Superphosphate"),
-            ("tsp", "TSP"),
-            ("urea", "Urea"),
-            ("organic manure", "Organic Manure"),
-            ("organic liquid fertilizer", "Organic Liquid Fertilizer"),
-            ("other", "Other"),
-        ],
-        string="Fertilizer interventions",
-    )
+    cultivation_chemical_interventions = fields.Many2many("spp.chemical", string="Chemical interventions")
+    cultivation_fertilizer_interventions = fields.Many2many("spp.fertilizer", string="Fertilizer interventions")
 
     # Fields for Livestock Rearing
     livestock_production_system = fields.Selection(
@@ -73,24 +38,7 @@ class AgriculturalActivity(models.Model):
         ],
         string="Production system",
     )
-
-    livestock_feed_items = fields.Selection(
-        [
-            ("natural pasture", "Natural Pasture"),
-            ("improved pasture", "Improved Pasture"),
-            ("own grown hay", "Own Grown Hay"),
-            ("purchased hay", "Purchased Hay"),
-            ("manufactured meals", "Manufactured Meals"),
-            ("home-made feed mix", "Home-made Feed Mix"),
-            ("chick mash", "Chick Mash"),
-            ("calf pellets", "Calf Pellets"),
-            ("mineral salts", "Mineral Salts"),
-            ("purchased fodder", "Purchased Fodder"),
-            ("pig starter-finisher", "Pig Starter-finisher"),
-            ("other", "Other"),
-        ],
-        string="Feed items",
-    )
+    livestock_feed_items = fields.Many2many("spp.feed.items", string="Feed items")
 
     # Fields for Aquaculture
     aquaculture_production_system = fields.Selection(

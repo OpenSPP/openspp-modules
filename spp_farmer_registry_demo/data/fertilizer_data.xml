@@ -1,0 +1,60 @@
+<odoo noupdate="1">
+    <record id="fertilizer_amonia_anhydrous" model="spp.fertilizer">
+       <field name="name">Amonia Anhydrous</field>
+    </record>
+    <record id="fertilizer_ammonium_hydroxide" model="spp.fertilizer">
+       <field name="name">Ammonium Hydroxide</field>
+    </record>
+    <record id="fertilizer_calcium_nitrates" model="spp.fertilizer">
+       <field name="name">Calcium Nitrate</field>
+    </record>
+    <record id="fertilizer_can" model="spp.fertilizer">
+       <field name="name">CAN</field>
+    </record>
+    <record id="fertilizer_dap" model="spp.fertilizer">
+       <field name="name">DAP</field>
+    </record>
+    <record id="fertilizer_double_super_phosphate" model="spp.fertilizer">
+       <field name="name">Double Super Phosphate</field>
+    </record>
+    <record id="fertilizer_magnesium_nitrate" model="spp.fertilizer">
+       <field name="name">Magnesium Nitrate</field>
+    </record>
+    <record id="fertilizer_map" model="spp.fertilizer">
+       <field name="name">MAP</field>
+    </record>
+    <record id="fertilizer_mop" model="spp.fertilizer">
+       <field name="name">MOP</field>
+    </record>
+    <record id="fertilizer_npk" model="spp.fertilizer">
+       <field name="name">NPK</field>
+    </record>
+    <record id="fertilizer_phosphate_rock" model="spp.fertilizer">
+       <field name="name">Phosphate Rock</field>
+    </record>
+    <record id="fertilizer_potassium_nitrate" model="spp.fertilizer">
+       <field name="name">Potassium Nitrate</field>
+    </record>
+    <record id="fertilizer_potassium_sulphate" model="spp.fertilizer">
+       <field name="name">Potassium Sulphate</field>
+    </record>
+    <record id="fertilizer_sulphate_of_ammonia" model="spp.fertilizer">
+       <field name="name">Sulphate of Ammonia</field>
+    </record>
+    <record id="fertilizer_superphosphate" model="spp.fertilizer">
+       <field name="name">Superphosphate</field>
+    </record>
+    <record id="fertilizer_tsp" model="spp.fertilizer">
+       <field name="name">TSP</field>
+    </record>
+    <record id="fertilizer_urea" model="spp.fertilizer">
+       <field name="name">Urea</field>
+    </record>
+    <record id="fertilizer_organic_manure" model="spp.fertilizer">
+       <field name="name">Organic Manure</field>
+    </record>
+    <record id="fertilizer_organic_liquid_fertilizer" model="spp.fertilizer">
+       <field name="name">Organic Liquid Fertilizer</field>
+    </record>
+
+</odoo>

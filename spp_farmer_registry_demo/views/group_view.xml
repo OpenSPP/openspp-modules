@@ -336,8 +336,8 @@
                             <field name="purpose" />
                             <field name="cultivation_production_system" />
                             <field name="cultivation_water_source" />
-                            <field name="cultivation_chemical_interventions" />
-                            <field name="cultivation_fertilizer_interventions" />
+                            <field name="cultivation_chemical_interventions" widget="many2many_tags"/>
+                            <field name="cultivation_fertilizer_interventions" widget="many2many_tags"/>
                         </tree>
                     </field>
                 </page>
@@ -348,7 +348,7 @@
                             <field name="activity_type" column_invisible="1"/>
                             <field name="species_id" context="{'default_species_type': 'livestock'}"/>
                             <field name="livestock_production_system" />
-                            <field name="livestock_feed_items" />
+                            <field name="livestock_feed_items" widget="many2many_tags"/>
                         </tree>
                     </field>
                     <div class="row mt16 o_settings_container">
