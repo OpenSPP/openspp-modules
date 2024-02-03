@@ -10,6 +10,8 @@ on:
       - "15.0"
       - "rc/15.0*"
       - "15.0-ocabot-*"
+      - "farmer-registry"
+      - "farmer-registry-*"
 env:
   OCA_GIT_USER_NAME: openspp
   OCA_GIT_USER_EMAIL: bot@openspp.org
