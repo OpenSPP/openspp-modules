@@ -1,0 +1,36 @@
+<odoo noupdate="1">
+    <record id="feed_items_natural_pasture" model="spp.feed.items">
+       <field name="name">Natural Pasture</field>
+    </record>
+    <record id="feed_items_improved_pasture" model="spp.feed.items">
+       <field name="name">Improved Pasture</field>
+    </record>
+    <record id="feed_items_own_grown_hay" model="spp.feed.items">
+       <field name="name">Own Grown Hay</field>
+    </record>
+    <record id="feed_items_purchased_hay" model="spp.feed.items">
+       <field name="name">Purchased Hay</field>
+    </record>
+    <record id="feed_items_manufactured_meals" model="spp.feed.items">
+       <field name="name">Manufactured Meals</field>
+    </record>
+    <record id="feed_items_home_made_feed_mix" model="spp.feed.items">
+       <field name="name">Home-made Feed Mix</field>
+    </record>
+    <record id="feed_items_chick_mash" model="spp.feed.items">
+       <field name="name">Chick Mash</field>
+    </record>
+    <record id="feed_items_calf_pellets" model="spp.feed.items">
+       <field name="name">Calf Pellets</field>
+    </record>
+    <record id="feed_items_mineral_salts" model="spp.feed.items">
+       <field name="name">Mineral Salts</field>
+    </record>
+    <record id="feed_items_purchased_fodder" model="spp.feed.items">
+       <field name="name">Purchased Fodder</field>
+    </record>
+    <record id="feed_items_pig_starter_finisher" model="spp.feed.items">
+       <field name="name">Pig Starter-finisher</field>
+    </record>
+
+</odoo>
