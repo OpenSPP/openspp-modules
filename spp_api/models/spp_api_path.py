@@ -442,7 +442,7 @@ class SPPAPIPath(models.Model):
             "in": "query",
             "description": "UTC datetime for create time",
             "type": "string",
-            "format": "date-time",
+            # "format": "date-time",
         }
 
     def _last_modified_date_parameter(self):
@@ -451,7 +451,7 @@ class SPPAPIPath(models.Model):
             "in": "query",
             "description": "UTC datetime for update time",
             "type": "string",
-            "format": "date-time",
+            # "format": "date-time",
         }
 
     # Fields
@@ -531,11 +531,11 @@ class SPPAPIPath(models.Model):
         """
         self.ensure_one()
         return {
-            "name": "offset",
+            "name": "start_from",
             "in": "query",
             "description": _("Number of records to skip. (Defaults to 0)"),
             "required": False,
-            "type": "integer",
+            "type": "string",
         }
 
     def _limit_parameter(self):
@@ -555,7 +555,7 @@ class SPPAPIPath(models.Model):
                 _("(Maximum: {})").format(self.limit) if self.limit else ""
             ),
             "required": False,
-            "type": "integer",
+            "type": "string",
         }
 
     def _order_parameter(self):
