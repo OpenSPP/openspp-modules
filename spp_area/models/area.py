@@ -33,6 +33,15 @@ class OpenSPPArea(models.Model):
         "spp.area", "id", "Child", compute="_compute_get_childs"
     )
     kind = fields.Many2one("spp.area.kind")
+    area_sqkm = fields.Float("Area (sq/km)")
+
+    _sql_constraints = [
+        (
+            "code_unique",
+            "unique (code)",
+            "Code is already exists!",
+        )
+    ]
 
     @api.depends("draft_name", "code")
     def _compute_name(self):
@@ -40,7 +49,12 @@ class OpenSPPArea(models.Model):
         This sets the name for area to include code
         """
         for rec in self:
-            rec.name = f"{rec.code or ''} - {rec.draft_name or ''}"
+            name = rec.draft_name or ""
+
+            if rec.code:
+                name = f"{rec.code} - {name}"
+
+            rec.name = name
 
     def _compute_get_childs(self):
         """
