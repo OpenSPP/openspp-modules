@@ -7,7 +7,8 @@
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <form string="Area Import">
-                <header>
+                <field name="locked" invisible="True" />
+                <header invisible="locked">
                     <button
                         name="import_data"
                         type="object"
@@ -20,14 +21,28 @@
                         type="object"
                         string="Save to Area"
                         class="btn-success"
+                        invisible="state != 'Validated'"
+                    />
+                   <button
+                        name="validate_raw_data"
+                        type="object"
+                        string="Validate Data"
+                        class="btn-success"
                         invisible="state != 'Imported'"
+                    />
+                    <button
+                        name="reset_to_uploaded"
+                        type="object"
+                        string="Reset to Uploaded"
+                        class="btn-primary"
+                        invisible="state not in ('Imported', 'Validated')"
                     />
                     <button
                         name="cancel_import"
                         type="object"
                         string="Cancel"
                         class="btn-danger"
-                        invisible="state not in ('Uploaded', 'Imported')"
+                        invisible="state not in ('Uploaded', 'Imported', 'Validated')"
                     />
                     <field
                         name="state"
@@ -35,6 +50,21 @@
                         statusbar_visible="New,Uploaded,Imported,Done,Cancelled"
                     />
                 </header>
+                <div
+                    class="alert alert-warning text-center o_form_header"
+                    role="status"
+                    invisible="not locked"
+                >
+                    <span>Warning: Operation in progress: </span>
+                    <field name="locked_reason" class="o_stat_value" />
+                    <button
+                        name="refresh_page"
+                        type="object"
+                        class="btn_warning"
+                        icon="fa-refresh"
+                        string="Refresh"
+                    />
+                </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                     </div>
@@ -85,7 +115,6 @@
                             create="0"
                             decoration-bf="state in ('Validated','Posted')"
                             decoration-it="state=='Error'"
-                            decoration-warning="state=='No Model'"
                             decoration-danger="state=='Error'"
                             decoration-success="state=='Posted'"
                         >
@@ -94,20 +123,16 @@
                                 decoration-secondary="state=='New'"
                                 decoration-primary="state=='Validated'"
                                 decoration-success="state=='Posted'"
-                                decoration-warning="state=='No Model'"
                                 decoration-danger="state=='Error'"
                                 widget="badge"
                             />
                             <field name="remarks" />
                             <field name="admin_name" />
                             <field name="admin_code" />
-                            <field name="admin_alt1" />
-                            <field name="admin_alt2" />
-                            <field name="admin_ref" />
-                            <field name="admin_kind" />
+                            <field name="area_sqkm" />
+                            <field name="parent_name" />
+                            <field name="parent_code" />
                             <field name="level" />
-                            <field name="row_index" />
-                            <field name="lang_ids" widget="many2many_tags" readonly="1" />
                         </tree>
                         <form string="Raw Data" duplicate="0" create="0">
                             <header>
@@ -120,12 +145,10 @@
                             <group colspan="4" col="4">
                                 <field name="admin_name" readonly="1" />
                                 <field name="admin_code" readonly="1" />
-                                <field name="admin_alt1" readonly="1" />
-                                <field name="admin_alt2" readonly="1" />
-                                <field name="admin_ref" readonly="1" />
+                                <field name="area_sqkm" readonly="1" />
+                                <field name="parent_name" readonly="1" />
+                                <field name="parent_code" readonly="1" />
                                 <field name="level" readonly="1" />
-                                <field name="row_index" readonly="1" />
-                                <field name="lang_ids" widget="many2many_tags" readonly="1" />
                                 <newline />
                                 <field name="remarks" readonly="1" colspan="4" />
                             </group>
