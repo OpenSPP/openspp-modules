@@ -450,7 +450,6 @@ class G2PInKindEntitlementManager(models.Model):
             ],
             "domain": [("cycle_id", "=", cycle.id)],
         }
-        _logger.info("DEBUG: spp_entitlement_in_kind: open_entitlement_form: %s")
         return action
 
     def open_entitlement_form(self, rec):
