@@ -46,6 +46,17 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
             <xpath expr="//form" position="attributes">
                 <attribute name="create">0</attribute>
             </xpath>
+            <xpath expr="//button[@name='to_approve']" position="after">
+                <button
+                    type="object"
+                    class="btn-success"
+                    icon="fa-play"
+                    title="To approve"
+                    name="to_approve"
+                    string="To Approve"
+                    invisible="state != 'draft' or inkind_entitlements_count == 0"
+                />
+            </xpath>
         </field>
     </record>
 

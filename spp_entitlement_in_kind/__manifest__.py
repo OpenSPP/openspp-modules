@@ -16,6 +16,7 @@
         "spp_programs",
         "product",
         "stock",
+        "spp_service_points",
     ],
     "data": [
         "security/ir.model.access.csv",
