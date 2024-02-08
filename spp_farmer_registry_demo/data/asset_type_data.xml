@@ -1,26 +1,20 @@
 <odoo noupdate="1">
-    <record id="asset_type_land_and_soil" model="asset.type">
-       <field name="name">Land and Soil Improvements</field>
+    <record id="asset_type_ponds" model="asset.type">
+       <field name="name">Ponds</field>
     </record>
-    <record id="asset_type_building" model="asset.type">
-       <field name="name">Buildings and Structures</field>
+    <record id="asset_type_cages" model="asset.type">
+       <field name="name">Cages</field>
     </record>
-    <record id="asset_type_machinery" model="asset.type">
-       <field name="name">Machinery and Equipment</field>
+    <record id="asset_type_tanks" model="asset.type">
+       <field name="name">Tanks</field>
     </record>
-    <record id="asset_type_vehicles" model="asset.type">
-       <field name="name">Vehicles</field>
+    <record id="asset_type_race_ways" model="asset.type">
+       <field name="name">Race ways</field>
     </record>
-    <record id="asset_type_livestock" model="asset.type">
-       <field name="name">Livestock</field>
+    <record id="asset_type_recirculating" model="asset.type">
+       <field name="name">Recirculating Aquaculture Systems (RAS)</field>
     </record>
-    <record id="asset_type_tools_and_implements" model="asset.type">
-       <field name="name">Tools and Implements</field>
-    </record>
-    <record id="asset_type_fencing" model="asset.type">
-       <field name="name">Fencing and Enclosures</field>
-    </record>
-    <record id="asset_type_water_resource" model="asset.type">
-       <field name="name">Water Resources</field>
+    <record id="asset_type_aquaponics" model="asset.type">
+       <field name="name">Aquaponics</field>
     </record>
 </odoo>

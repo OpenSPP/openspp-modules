@@ -1,26 +1,134 @@
 <odoo noupdate="1">
+    <record id="machinery_type_test" model="machinery.type">
+       <field name="name">test</field>
+    </record>
+    <record id="machinery_type_basic_hand_tools" model="machinery.type">
+       <field name="name">Basic Hand tools</field>
+    </record>
+    <record id="machinery_type_bee_hives" model="machinery.type">
+       <field name="name">Bee hives</field>
+    </record>
+    <record id="machinery_type_bee_harvesting_suit" model="machinery.type">
+       <field name="name">Bee harvesting suit</field>
+    </record>
+    <record id="machinery_type_bicycles" model="machinery.type">
+       <field name="name">Bicycles</field>
+    </record>
+    <record id="machinery_type_boats" model="machinery.type">
+       <field name="name">Boats</field>
+    </record>
+    <record id="machinery_type_burdizzo" model="machinery.type">
+       <field name="name">Burdizzo</field>
+    </record>
+    <record id="machinery_type_catcher_box" model="machinery.type">
+       <field name="name">Catcher box</field>
+    </record>
+    <record id="machinery_type_chaff_cutters" model="machinery.type">
+       <field name="name">Chaff cutters</field>
+    </record>
+    <record id="machinery_type_combined_harvesters" model="machinery.type">
+       <field name="name">Combined harvesters</field>
+    </record>
+    <record id="machinery_type_farm_waste_pulverizers" model="machinery.type">
+       <field name="name">Farm waste Pulverizers</field>
+    </record>
+    <record id="machinery_type_feed_pelletizers" model="machinery.type">
+       <field name="name">Feed Pelletizers</field>
+    </record>
+    <record id="machinery_type_feeders" model="machinery.type">
+       <field name="name">Feeders</field>
+    </record>
+    <record id="machinery_type_fishing_nets_or_hooks" model="machinery.type">
+       <field name="name">Fishing nets or hooks</field>
+    </record>
+    <record id="machinery_type_grain_millers" model="machinery.type">
+       <field name="name">Grain Millers</field>
+    </record>
+    <record id="machinery_type_grass_cutter" model="machinery.type">
+       <field name="name">Grass cutter</field>
+    </record>
+    <record id="machinery_type_harrows" model="machinery.type">
+       <field name="name">Harrows</field>
+    </record>
+    <record id="machinery_type_hatchers_or_brooders" model="machinery.type">
+       <field name="name">Hatchers or Brooders</field>
+    </record>
+    <record id="machinery_type_hay_bailers" model="machinery.type">
+       <field name="name">Hay Bailers</field>
+    </record>
+    <record id="machinery_type_honey_extractor" model="machinery.type">
+       <field name="name">Honey extractor</field>
+    </record>
+    <record id="machinery_type_hoof_trimmer" model="machinery.type">
+       <field name="name">Hoof trimmer</field>
+    </record>
+    <record id="machinery_type_incubators" model="machinery.type">
+       <field name="name">Incubators</field>
+    </record>
+    <record id="machinery_type_kenya_top_beehive" model="machinery.type">
+       <field name="name">Kenya Top Beehive</field>
+    </record>
+    <record id="machinery_type_langstroth_hive" model="machinery.type">
+       <field name="name">Langstroth hive</field>
+    </record>
+    <record id="machinery_type_manual_ploughs" model="machinery.type">
+       <field name="name">Manual Ploughs</field>
+    </record>
+    <record id="machinery_type_milking_machines" model="machinery.type">
+       <field name="name">Milking Machines</field>
+    </record>
+    <record id="machinery_type_motorcycle" model="machinery.type">
+       <field name="name">Motorcycle</field>
+    </record>
+    <record id="machinery_type_ox_carts" model="machinery.type">
+       <field name="name">Ox carts</field>
+    </record>
+    <record id="machinery_type_ox_ploughs" model="machinery.type">
+       <field name="name">Ox ploughs</field>
+    </record>
+    <record id="machinery_type_panga_or_machete" model="machinery.type">
+       <field name="name">Panga or machete</field>
+    </record>
+    <record id="machinery_type_planters" model="machinery.type">
+       <field name="name">Planters</field>
+    </record>
+    <record id="machinery_type_rakes" model="machinery.type">
+       <field name="name">Rakes</field>
+    </record>
+    <record id="machinery_type_secateurs" model="machinery.type">
+       <field name="name">Secateurs</field>
+    </record>
+    <record id="machinery_type_smoker" model="machinery.type">
+       <field name="name">Smoker</field>
+    </record>
+    <record id="machinery_type_sprayers_or_spray_pumps" model="machinery.type">
+       <field name="name">Sprayers or spray pumps</field>
+    </record>
     <record id="machinery_type_tractors" model="machinery.type">
        <field name="name">Tractors</field>
     </record>
-    <record id="machinery_type_tillage_equipment" model="machinery.type">
-       <field name="name">Tillage Equipment</field>
+    <record id="machinery_type_traditional_hive" model="machinery.type">
+       <field name="name">Traditional hive</field>
     </record>
-    <record id="machinery_type_planting_equipment" model="machinery.type">
-       <field name="name">Planting Equipment</field>
+    <record id="machinery_type_transportation" model="machinery.type">
+       <field name="name">Transportation</field>
     </record>
-    <record id="machinery_type_harvesting_equipment" model="machinery.type">
-       <field name="name">Harvesting Equipment</field>
+    <record id="machinery_type_vehicle" model="machinery.type">
+       <field name="name">vehicle</field>
     </record>
-    <record id="machinery_type_hay_equipment" model="machinery.type">
-       <field name="name">Hay and Forage Equipment</field>
+    <record id="machinery_type_water_aerators" model="machinery.type">
+       <field name="name">Water aerators</field>
     </record>
-    <record id="machinery_type_crop_protection" model="machinery.type">
-       <field name="name">Crop Protection and Fertilization</field>
+    <record id="machinery_type_water_pumps" model="machinery.type">
+       <field name="name">Water pumps</field>
     </record>
-    <record id="machinery_type_irrigation_equipment" model="machinery.type">
-       <field name="name">Irrigation Equipment</field>
+    <record id="machinery_type_waterers" model="machinery.type">
+       <field name="name">Waterers</field>
     </record>
-    <record id="machinery_type_material_handling_equipment" model="machinery.type">
-       <field name="name">Material Handling Equipment</field>
+    <record id="machinery_type_wax_extractor" model="machinery.type">
+       <field name="name">Wax extractor</field>
+    </record>
+    <record id="machinery_type_wheelbarrow" model="machinery.type">
+       <field name="name">Wheelbarrow </field>
     </record>
 </odoo>

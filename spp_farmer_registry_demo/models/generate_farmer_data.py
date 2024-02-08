@@ -8,9 +8,9 @@ from faker import Faker
 
 from odoo import Command, api, fields, models
 
-from odoo.addons.base_geoengine.fields import GeoPoint
-
-from ..tools import generate_polygon, random_location_in_kenya
+# from odoo.addons.base_geoengine.fields import GeoPoint
+#
+# from ..tools import generate_polygon, random_location_in_kenya
 
 
 class SPPGenerateFarmerData(models.Model):
@@ -102,13 +102,13 @@ class SPPGenerateFarmerData(models.Model):
                 res._generate_farm_asset_data(
                     asset_farm_id=group_id.id,
                     land_id=land_record_id.id,
-                    asset_type_id=asset_type_id.id,
+                    asset_type_id=asset_type_id,
                 )
 
                 res._generate_farm_asset_data(
                     machinery_farm_id=group_id.id,
                     land_id=land_record_id.id,
-                    machinery_type_id=machinery_type_id.id,
+                    machinery_type_id=machinery_type_id,
                 )
 
             if res.state == "draft":
@@ -197,30 +197,30 @@ class SPPGenerateFarmerData(models.Model):
 
     def _generate_land_record_record(self, group_id):
         land_name = "My Farm"
-        latitude, longitude = random_location_in_kenya()
-
-        land_coordinates = GeoPoint.from_latlon(self.env.cr, latitude, longitude)
-
-        points = generate_polygon(latitude, longitude, random.randrange(50, 500))
-
-        utm_points = []
-
-        for lon, lat in points:
-            geo_point = GeoPoint.from_latlon(self.env.cr, lat, lon)
-            utm_points.append((geo_point.x, geo_point.y))
-
-        land_geo_polygon = "MULTIPOLYGON((({})))".format(
-            ", ".join(
-                ["{} {}".format(utm_lat, utm_lon) for utm_lat, utm_lon in utm_points]
-            )
-        )
+        # latitude, longitude = random_location_in_kenya()
+        #
+        # land_coordinates = GeoPoint.from_latlon(self.env.cr, latitude, longitude)
+        #
+        # points = generate_polygon(latitude, longitude, random.randrange(50, 500))
+        #
+        # utm_points = []
+        #
+        # for lon, lat in points:
+        #     geo_point = GeoPoint.from_latlon(self.env.cr, lat, lon)
+        #     utm_points.append((geo_point.x, geo_point.y))
+        #
+        # land_geo_polygon = "MULTIPOLYGON((({})))".format(
+        #     ", ".join(
+        #         ["{} {}".format(utm_lat, utm_lon) for utm_lat, utm_lon in utm_points]
+        #     )
+        # )
 
         return self.env["spp.land.record"].create(
             {
                 "land_farm_id": group_id.id,
                 "land_name": land_name,
-                "land_coordinates": land_coordinates,
-                "land_geo_polygon": land_geo_polygon,
+                # "land_coordinates": land_coordinates,
+                # "land_geo_polygon": land_geo_polygon,
             }
         )
 
@@ -647,31 +647,13 @@ class SPPGenerateFarmerData(models.Model):
         return self.env.ref(f"spp_farmer_registry_demo.{species_data}")
 
     def _get_machinery_type_data(self):
-        machinery_types = [
-            "machinery_type_tractors",
-            "machinery_type_tillage_equipment",
-            "machinery_type_planting_equipment",
-            "machinery_type_harvesting_equipment",
-            "machinery_type_hay_equipment",
-            "machinery_type_crop_protection",
-            "machinery_type_irrigation_equipment",
-            "machinery_type_material_handling_equipment",
-        ]
+        machinery_types = self.env["machinery.type"].search([]).mapped("id")
+        machinery_type_id = random.choice(machinery_types)
 
-        return self.env.ref(
-            f"spp_farmer_registry_demo.{random.choice(machinery_types)}"
-        )
+        return machinery_type_id
 
     def _get_asset_type_data(self):
-        asset_types = [
-            "asset_type_land_and_soil",
-            "asset_type_building",
-            "asset_type_machinery",
-            "asset_type_vehicles",
-            "asset_type_livestock",
-            "asset_type_tools_and_implements",
-            "asset_type_fencing",
-            "asset_type_water_resource",
-        ]
+        asset_types = self.env["asset.type"].search([]).mapped("id")
+        asset_type_id = random.choice(asset_types)
 
-        return self.env.ref(f"spp_farmer_registry_demo.{random.choice(asset_types)}")
+        return asset_type_id

@@ -1,8 +1,4 @@
 <odoo noupdate="1">
-    <record id="species_live_test" model="spp.farm.species">
-       <field name="name">test</field>
-       <field name="species_type">livestock</field>
-    </record>
     <record id="species_live_aberdeen_angus_cattle" model="spp.farm.species">
        <field name="name">Aberdeen angus cattle</field>
        <field name="species_type">livestock</field>

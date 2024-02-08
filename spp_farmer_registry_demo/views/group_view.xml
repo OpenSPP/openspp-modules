@@ -248,7 +248,7 @@
                                 <field name="lease_term" />
                             </div>
                         </div>
-                        <notebook>
+                        <!--<notebook>
                             <page name="address_coordinates" string="Address Coordinates">
                                 <div class="col-12 o_setting_box">
                                     <field name="land_coordinates" />
@@ -259,7 +259,7 @@
                                     <field name="land_geo_polygon" />
                                 </div>
                             </page>
-                        </notebook>
+                        </notebook>-->
                     </div>
                     <br />
                     <field name="farm_detail_id" invisible="1" />
