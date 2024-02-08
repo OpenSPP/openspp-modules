@@ -8,9 +8,9 @@ from faker import Faker
 
 from odoo import Command, api, fields, models
 
-# from odoo.addons.base_geoengine.fields import GeoPoint
-#
-# from ..tools import generate_polygon, random_location_in_kenya
+from odoo.addons.base_geoengine.fields import GeoPoint
+
+from ..tools import generate_polygon, random_location_in_kenya
 
 
 class SPPGenerateFarmerData(models.Model):
@@ -197,30 +197,30 @@ class SPPGenerateFarmerData(models.Model):
 
     def _generate_land_record_record(self, group_id):
         land_name = "My Farm"
-        # latitude, longitude = random_location_in_kenya()
-        #
-        # land_coordinates = GeoPoint.from_latlon(self.env.cr, latitude, longitude)
-        #
-        # points = generate_polygon(latitude, longitude, random.randrange(50, 500))
-        #
-        # utm_points = []
-        #
-        # for lon, lat in points:
-        #     geo_point = GeoPoint.from_latlon(self.env.cr, lat, lon)
-        #     utm_points.append((geo_point.x, geo_point.y))
-        #
-        # land_geo_polygon = "MULTIPOLYGON((({})))".format(
-        #     ", ".join(
-        #         ["{} {}".format(utm_lat, utm_lon) for utm_lat, utm_lon in utm_points]
-        #     )
-        # )
+        latitude, longitude = random_location_in_kenya()
+
+        land_coordinates = GeoPoint.from_latlon(self.env.cr, latitude, longitude)
+
+        points = generate_polygon(latitude, longitude, random.randrange(50, 500))
+
+        utm_points = []
+
+        for lon, lat in points:
+            geo_point = GeoPoint.from_latlon(self.env.cr, lat, lon)
+            utm_points.append((geo_point.x, geo_point.y))
+
+        land_geo_polygon = "MULTIPOLYGON((({})))".format(
+            ", ".join(
+                ["{} {}".format(utm_lat, utm_lon) for utm_lat, utm_lon in utm_points]
+            )
+        )
 
         return self.env["spp.land.record"].create(
             {
                 "land_farm_id": group_id.id,
                 "land_name": land_name,
-                # "land_coordinates": land_coordinates,
-                # "land_geo_polygon": land_geo_polygon,
+                "land_coordinates": land_coordinates,
+                "land_geo_polygon": land_geo_polygon,
             }
         )
 
