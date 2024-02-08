@@ -8,14 +8,15 @@
         <field name="arch" type="xml">
             <geoengine editable="1">
                 <field name="name" select="1" />
+                <field name="display_name" select="1" />
                 <field name="title" />
                 <field name="function" />
                 <field name="website" />
                 <field name="zip" />
                 <field name="city" />
                 <field name="country_id" />
-                <field name="geo_point" />
-                <field name="geo_multi_polygon" />
+                <field name="land_coordinates" />
+                <field name="land_geo_polygon" />
                 <templates>
                   <t t-name="info_box">
                     <b>
@@ -36,8 +37,8 @@
     </record>
 
     <record id="geoengine_vector_layer_geo_point_res_partner" model="geoengine.vector.layer">
-        <field name="geo_field_id" ref="spp_farmer_registry_base.field_res_partner__geo_point" />
-        <field name="name">Partner location geo point</field>
+        <field name="geo_field_id" ref="spp_farmer_registry_base.field_res_partner__land_coordinates" />
+        <field name="name">Address Coordination</field>
         <field eval="1" name="sequence" />
         <field name="view_id" ref="ir_ui_view_geo_partner" />
         <field name="geo_repr">basic</field>
@@ -47,8 +48,8 @@
         <field name="begin_color">#FF680A</field>
     </record>
     <record id="geoengine_vector_layer_geo_multi_poly_res_partner" model="geoengine.vector.layer">
-      <field name="geo_field_id" ref="spp_farmer_registry_base.field_res_partner__geo_multi_polygon" />
-      <field name="name">Partner location geo multi polygon</field>
+      <field name="geo_field_id" ref="spp_farmer_registry_base.field_res_partner__land_geo_polygon" />
+      <field name="name">Farm Land</field>
       <field eval="1" name="sequence" />
       <field name="view_id" ref="ir_ui_view_geo_partner" />
       <field name="geo_repr">basic</field>
@@ -59,9 +60,13 @@
   </record>
     <record id="geoengine_raster_layer_res_partner_osm" model="geoengine.raster.layer">
         <field name="raster_type">osm</field>
-        <field name="name">Partner background</field>
+        <field name="name">Farmer Land Information</field>
         <field name="view_id" ref="ir_ui_view_geo_partner" />
         <field eval="0" name="overlay" />
     </record>
+
+    <record id="g2p_registry_group.action_groups_list" model="ir.actions.act_window">
+      <field name="view_mode">tree,form,geoengine</field>
+  </record>
 
 </odoo>
