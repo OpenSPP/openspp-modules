@@ -1,7 +1,11 @@
-
+import json
 import logging
 
-from odoo import Command, fields, models, api
+import pyproj
+from shapely.geometry import mapping
+from shapely.ops import transform
+
+from odoo import Command, api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -69,6 +73,61 @@ class Farm(models.Model):
 
         return farm
 
+    def _process_record_to_feature(self, record, transformer):
+        """
+        Convert a farm record to a GeoJSON feature using shapely and geojson libraries.
+
+        Args:
+            record: The farm record to process.
+
+        Returns:
+            A GeoJSON feature dictionary or None if coordinates are not found.
+        """
+        if not record.coordinates:
+            return None  # Skip records without coordinates
+
+        point_transformed = mapping(transform(transformer, record.coordinates))
+
+        # Construct the feature with the geometry and properties
+        feature = {
+            "type": "Feature",
+            "geometry": point_transformed,
+            "properties": {
+                "name": record.name,  # Include any other properties you want in the GeoJSON
+            },
+        }
+
+        return feature
+
+    @api.model
+    def get_geojson(self):
+        """
+        Generate a GeoJSON representation of farm records.
+
+        Returns:
+            A GeoJSON string of farm records.
+        """
+        # Query all farms with coordinates
+        # farms = self.search([('coordinates', '!=', False)])
+        farms = self.search([])
+
+        # Construct GeoJSON structure
+        geojson_features = {"type": "FeatureCollection", "features": []}
+
+        # Assuming coordinates are in EPSG:3857 (Pseudo-Mercator)
+        proj_from = pyproj.Proj("epsg:3857")  # EPSG:3857 - WGS 84 / Pseudo-Mercator
+        proj_to = pyproj.Proj("epsg:4326")  # WGS84
+        transformer = pyproj.Transformer.from_proj(
+            proj_from, proj_to, always_xy=True
+        ).transform
+
+        for farm in farms:
+            feature = self._process_record_to_feature(farm, transformer)
+            if feature:
+                geojson_features["features"].append(feature)
+
+        return json.dumps(geojson_features, indent=2)
+
     def create_update_farmer(self, farm):
         farmer_name = ""
         if farm.farmer_family_name:
@@ -100,37 +159,40 @@ class Farm(models.Model):
             individual.farmer_id = farm.farmer_id.id
             farm.farmer_individual_id = individual.id
             if farm.farmer_mobile_tel:
-                self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
+                self.insert_phone_number(
+                    farm.farmer_individual_id.id, farm.farmer_mobile_tel
+                )
             if farm.farmer_national_id:
                 self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
             # Create Membership
             membership_vals = {
                 "group": farm.id,
                 "individual": individual.id,
-                "kind": [Command.link(self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
+                "kind": [
+                    Command.link(
+                        self.env.ref(
+                            "g2p_registry_membership.group_membership_kind_head"
+                        ).id
+                    )
+                ],
             }
             self.env["g2p.group.membership"].create(membership_vals)
 
         else:
             farm.farmer_individual_id.write(individual_vals)
             if farm.farmer_mobile_tel:
-                self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
+                self.insert_phone_number(
+                    farm.farmer_individual_id.id, farm.farmer_mobile_tel
+                )
             if farm.farmer_national_id:
                 self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
 
     def insert_phone_number(self, individual_id, mobile_no):
         current_phone = self.env["g2p.phone.number"].search(
-            [
-                ("partner_id", "=", individual_id),
-                ("phone_no", "=", mobile_no)
-            ]
+            [("partner_id", "=", individual_id), ("phone_no", "=", mobile_no)]
         )
         if not current_phone:
-            individual_phone_vals = {
-                "partner_id": individual_id,
-                "phone_no": mobile_no
-
-            }
+            individual_phone_vals = {"partner_id": individual_id, "phone_no": mobile_no}
             self.env["g2p.phone.number"].create(individual_phone_vals)
 
     def insert_id(self, individual_id, national_id):
@@ -138,21 +200,30 @@ class Farm(models.Model):
             [
                 ("partner_id", "=", individual_id),
                 ("value", "=", national_id),
-                ("id_type", "=", self.env.ref("spp_farmer_registry_base.id_type_national_id").id),
+                (
+                    "id_type",
+                    "=",
+                    self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                ),
             ]
         )
         if not current_id:
             existing_national_id = self.env["g2p.reg.id"].search(
                 [
                     ("partner_id", "=", individual_id),
-                    ("id_type", "=", self.env.ref("spp_farmer_registry_base.id_type_national_id").id),
+                    (
+                        "id_type",
+                        "=",
+                        self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                    ),
                 ]
             )
             id_vals = {
                 "partner_id": individual_id,
                 "value": national_id,
-                "id_type": self.env.ref("spp_farmer_registry_base.id_type_national_id").id
-
+                "id_type": self.env.ref(
+                    "spp_farmer_registry_base.id_type_national_id"
+                ).id,
             }
             if existing_national_id:
                 existing_national_id.write(id_vals)
@@ -170,15 +241,21 @@ class Farm(models.Model):
             "farmer_household_size": individual.farmer_household_size or None,
             "farmer_postal_address": individual.farmer_postal_address or None,
             "farmer_email": individual.email or None,
-            "farmer_formal_agricultural": individual.formal_agricultural_training or None,
-            "farmer_highest_education_level": individual.highest_education_level or None,
+            "farmer_formal_agricultural": individual.formal_agricultural_training
+            or None,
+            "farmer_highest_education_level": individual.highest_education_level
+            or None,
         }
         farmer_national_id = self.env["g2p.reg.id"].search(
             [
                 ("partner_id", "=", individual.id),
-                ("id_type", "=", self.env.ref("spp_farmer_registry_base.id_type_national_id").id),
+                (
+                    "id_type",
+                    "=",
+                    self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                ),
             ],
-            limit=1
+            limit=1,
         )
         if farmer_national_id:
             farmer_vals.update({"farmer_national_id": farmer_national_id.value or None})
@@ -187,7 +264,7 @@ class Farm(models.Model):
             [
                 ("partner_id", "=", individual.id),
             ],
-            limit=1
+            limit=1,
         )
         if farmer_phone:
             farmer_vals.update({"farmer_mobile_tel": farmer_phone.phone_no or None})

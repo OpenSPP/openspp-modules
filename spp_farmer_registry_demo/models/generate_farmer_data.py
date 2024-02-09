@@ -64,6 +64,7 @@ class SPPGenerateFarmerData(models.Model):
 
             land_record_id = res._generate_land_record_record(group_id)
             group_id.farm_land_rec_id = land_record_id.id
+            group_id.coordinates = land_record_id.land_coordinates
 
             # create a random number of agricultural activities
             for _ in range(random.randint(1, 5)):
@@ -196,7 +197,6 @@ class SPPGenerateFarmerData(models.Model):
         return self.env["res.partner"].create(group_vals)
 
     def _generate_land_record_record(self, group_id):
-        land_name = "My Farm"
         latitude, longitude = random_location_in_kenya()
 
         land_coordinates = GeoPoint.from_latlon(self.env.cr, latitude, longitude)
@@ -218,7 +218,7 @@ class SPPGenerateFarmerData(models.Model):
         return self.env["spp.land.record"].create(
             {
                 "land_farm_id": group_id.id,
-                "land_name": land_name,
+                "land_name": group_id.name,
                 "land_coordinates": land_coordinates,
                 "land_geo_polygon": land_geo_polygon,
             }
@@ -243,8 +243,12 @@ class SPPGenerateFarmerData(models.Model):
             "Plantation",
             "Greenhouse",
         ]
-        cultivation_chemical_interventions = self.env["spp.chemical"].search([]).mapped("id")
-        cultivation_fertilizer_interventions = self.env["spp.fertilizer"].search([]).mapped("id")
+        cultivation_chemical_interventions = (
+            self.env["spp.chemical"].search([]).mapped("id")
+        )
+        cultivation_fertilizer_interventions = (
+            self.env["spp.fertilizer"].search([]).mapped("id")
+        )
         livestock_production_systems = [
             "ranching",
             "communal grazing",
@@ -269,25 +273,39 @@ class SPPGenerateFarmerData(models.Model):
         ]
 
         # Produce random quantity of chemical/fertilizer/feed items to be created
-        chemical_interventions_len = random.randint(1, len(cultivation_chemical_interventions))
-        fertilizer_interventions_len = random.randint(1, len(cultivation_fertilizer_interventions))
+        chemical_interventions_len = random.randint(
+            1, len(cultivation_chemical_interventions)
+        )
+        fertilizer_interventions_len = random.randint(
+            1, len(cultivation_fertilizer_interventions)
+        )
         feed_items_len = random.randint(1, len(livestock_feed_items))
 
         # Generate the chemical/fertilizer/feed items based on the quantity
         chemical_interventions_vals = []
-        for i in range(chemical_interventions_len):
-            chemical_interventions_vals.append(Command.link(random.choice(cultivation_chemical_interventions)))
+        for _ in range(chemical_interventions_len):
+            chemical_interventions_vals.append(
+                Command.link(random.choice(cultivation_chemical_interventions))
+            )
         chemical_interventions_vals = list(dict.fromkeys(chemical_interventions_vals))
         fertilizer_interventions_vals = []
 
-        for i in range(fertilizer_interventions_len):
-            fertilizer_interventions_vals.append(Command.link(random.choice(cultivation_fertilizer_interventions)))
-        fertilizer_interventions_vals = list(dict.fromkeys(fertilizer_interventions_vals))
+        for _ in range(fertilizer_interventions_len):
+            fertilizer_interventions_vals.append(
+                Command.link(random.choice(cultivation_fertilizer_interventions))
+            )
+        fertilizer_interventions_vals = list(
+            dict.fromkeys(fertilizer_interventions_vals)
+        )
 
         feed_items_interventions_vals = []
-        for i in range(feed_items_len):
-            feed_items_interventions_vals.append(Command.link(random.choice(livestock_feed_items)))
-        feed_items_interventions_vals = list(dict.fromkeys(feed_items_interventions_vals))
+        for _ in range(feed_items_len):
+            feed_items_interventions_vals.append(
+                Command.link(random.choice(livestock_feed_items))
+            )
+        feed_items_interventions_vals = list(
+            dict.fromkeys(feed_items_interventions_vals)
+        )
 
         # Generate a random value for each field
         data = {

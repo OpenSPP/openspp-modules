@@ -19,6 +19,7 @@
         "g2p_registry_membership",
         "base_geoengine",
     ],
+    "external_dependencies": {"python": ["shapely", "geojson", "simplejson", "pyproj"]},
     "data": [
         "security/ir.model.access.csv",
         "data/kind_data.xml",
