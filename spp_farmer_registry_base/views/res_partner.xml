@@ -7,28 +7,22 @@
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
             <geoengine editable="1">
+                <field name="id" select="1" />
                 <field name="name" select="1" />
                 <field name="display_name" select="1" />
-                <field name="title" />
-                <field name="function" />
-                <field name="website" />
-                <field name="zip" />
-                <field name="city" />
-                <field name="country_id" />
                 <field name="land_coordinates" />
                 <field name="land_geo_polygon" />
+                <field name="farmer_family_name" />
+                <field name="farmer_given_name" />
                 <templates>
                   <t t-name="info_box">
                     <b>
-                      Name: <field name="name" />
+                      Farm: <field name="name" />
                     </b>
                     <ul>
-                      <li>Title: <field name="title" /> </li>
-                      <li>Function: <field name="function" /> </li>
-                      <li>Website: <field name="website" /> </li>
-                      <li>ZIP: <field name="zip" /> </li>
-                      <li>City: <field name="city" /> </li>
-                      <li>Country: <field name="country_id" /> </li>
+                      <li>Farmer Name: <field name="farmer_given_name" /> <field
+                                    name="farmer_family_name"
+                                /></li>
                     </ul>
                   </t>
                 </templates>
