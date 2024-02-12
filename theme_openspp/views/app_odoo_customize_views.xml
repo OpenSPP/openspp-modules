@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <template id="replace_login" name="Login Layout" inherit_id="web.login_layout">
+            <xpath expr="//a[@target='_blank']" position="replace">
+                <a href="https://openspp.org" target="_blank">Powered by <span>OpenSPP</span></a>
+            </xpath>
+        </template>
+</odoo>
