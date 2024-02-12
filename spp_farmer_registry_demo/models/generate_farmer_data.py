@@ -151,6 +151,7 @@ NAMES = [
 
 class SPPGenerateFarmerData(models.Model):
     _name = "spp.generate.farmer.data"
+    _description = "Generate Farm Data"
 
     name = fields.Char()
     num_groups = fields.Integer("Number of Groups", default=1)

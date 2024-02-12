@@ -29,7 +29,7 @@ class Farm(models.Model):
         "spp.farm.details", "details_farm_id", string="Farm Details"
     )
     farm_land_rec_ids = fields.One2many(
-        "spp.land.record", "land_farm_id", string="Land Record"
+        "spp.land.record", "land_farm_id", string="Land Records"
     )
 
     farm_extension_ids = fields.One2many(
@@ -48,11 +48,11 @@ class Farm(models.Model):
     )
 
     farm_asset_id = fields.Many2one("spp.farm.asset", string="Farm Asset")
-    farm_detail_id = fields.Many2one("spp.farm.details", string="Farm Detail")
-    farm_land_rec_id = fields.Many2one("spp.land.record", string="Land Record")
-    farmer_id = fields.Many2one("spp.farmer", string="Farmer")
+    farm_detail_id = fields.Many2one("spp.farm.details", required=True, ondelete="cascade", string="Farm Detail")
+    farm_land_rec_id = fields.Many2one("spp.land.record", required=True, ondelete="cascade", string="Land Record")
+    farmer_id = fields.Many2one("spp.farmer", required=True, ondelete="cascade", string="Farmer")
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals):
         farm = super(Farm, self).create(vals)
         if farm.is_group:

@@ -17,7 +17,7 @@ class AgriculturalActivity(models.Model):
             ("Plantation", "Plantation"),
             ("Greenhouse", "Greenhouse"),
         ],
-        string="Production system",
+        string="Cultivation Production system",
     )
     cultivation_chemical_interventions = fields.Many2many("spp.chemical", string="Chemical interventions")
     cultivation_fertilizer_interventions = fields.Many2many("spp.fertilizer", string="Fertilizer interventions")
@@ -36,7 +36,7 @@ class AgriculturalActivity(models.Model):
             ("tethering", "Tethering"),
             ("other", "Other"),
         ],
-        string="Production system",
+        string="Livestock Production system",
     )
     livestock_feed_items = fields.Many2many("spp.feed.items", string="Feed items")
 
@@ -51,11 +51,11 @@ class AgriculturalActivity(models.Model):
             ("aquaponics", "Aquaponics"),
             ("other", "Other"),
         ],
-        string="Production system",
+        string="Aquaculture Production system",
     )
     aquaculture_number_of_fingerlings = fields.Integer(string="Number of fingerlings")
 
-    @api.onchange("farm_id")
+    @api.onchange("live_farm_id")
     def _onchange_farm_id(self):
         for rec in self:
             rec.land_id = False

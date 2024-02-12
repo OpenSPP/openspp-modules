@@ -6,7 +6,7 @@ class FarmDetails(models.Model):
     _name = "spp.farm.details"
     _description = "Farm Details"
 
-    details_farm_id = fields.Many2one("res.partner", string="Farm")
+    details_farm_id = fields.Many2one("res.partner", string="Details Farm")
 
     details_farm_type = fields.Selection(
         [

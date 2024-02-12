@@ -86,7 +86,7 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="farmer_addtnl_name" />
+                                <label for="farmer_addtnl_name" string="Additional Name" />
                                 <div>
                                 </div>
                                 <field name="farmer_addtnl_name" />
@@ -126,7 +126,7 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="farmer_marital_status" />
+                                <label for="farmer_marital_status" string="Marital Status"/>
                                 <div>
                                 </div>
                                 <field name="farmer_marital_status" />
@@ -146,7 +146,7 @@
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="farmer_household_size" />
+                                <label for="farmer_household_size" string="Household Size"/>
                                 <div>
                                 </div>
                                 <field name="farmer_household_size" />
@@ -177,7 +177,7 @@
                                 <field name="farmer_formal_agricultural" />
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="farmer_formal_agricultural" />
+                                <label for="farmer_formal_agricultural" string="Do you have formal training in agriculture?"/>
                             </div>
                         </div>
                         <div class="col-4 o_setting_box">
@@ -334,7 +334,7 @@
                             <field name="activity_type" column_invisible="1"/>
                             <field name="species_id" context="{'default_species_type': 'crop'}"/>
                             <field name="purpose" />
-                            <field name="cultivation_production_system" />
+                            <field name="cultivation_production_system" string="Production System"/>
                             <field name="cultivation_water_source" />
                             <field name="cultivation_chemical_interventions" widget="many2many_tags"/>
                             <field name="cultivation_fertilizer_interventions" widget="many2many_tags"/>
@@ -347,7 +347,7 @@
                             <field name="live_farm_id" column_invisible="1"/>
                             <field name="activity_type" column_invisible="1"/>
                             <field name="species_id" context="{'default_species_type': 'livestock'}"/>
-                            <field name="livestock_production_system" />
+                            <field name="livestock_production_system" string="Production System"/>
                             <field name="livestock_feed_items" widget="many2many_tags"/>
                         </tree>
                     </field>
@@ -424,7 +424,7 @@
                             <field name="live_farm_id" column_invisible="1"/>
                             <field name="activity_type" column_invisible="1"/>
                             <field name="species_id" context="{'default_species_type': 'aquaculture'}" width="50%"/>
-                            <field name="aquaculture_production_system" width="30%"/>
+                            <field name="aquaculture_production_system" string="Production System" width="30%"/>
                             <field name="aquaculture_number_of_fingerlings" width="20%"/>
                         </tree>
                     </field>

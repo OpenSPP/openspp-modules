@@ -6,8 +6,8 @@ class FarmAsset(models.Model):
     _name = "spp.farm.asset"
     _description = "Farm Assets and Technology"
 
-    asset_farm_id = fields.Many2one("res.partner", string="Farm")
-    machinery_farm_id = fields.Many2one("res.partner", string="Farm")
+    asset_farm_id = fields.Many2one("res.partner", string="Asset Farm")
+    machinery_farm_id = fields.Many2one("res.partner", string="Machinery Farm")
     land_id = fields.Many2one(
         "spp.land.record",
         string="Land",
@@ -21,7 +21,7 @@ class FarmAsset(models.Model):
     quantity = fields.Integer()
     machine_working_status = fields.Char("Working Status")
 
-    @api.onchange("farm_id")
+    @api.onchange("asset_farm_id")
     def _onchange_farm_id(self):
         for rec in self:
             rec.land_id = False
