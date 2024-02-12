@@ -286,66 +286,6 @@ class FarmDetails(models.Model):
     )
 
     # Financials and Services
-    """
-    What is your main source of income by priority?
- Sale of farming produce  Non-farm Trading  Salary from employment elsewhere  Casual labor elsewhere
- Pension  Remittances  Cash transfer  Other
-
-
-
-| [---------]                    |
-|--------------------------------|
-| comes from farming activities? |
-
-
-
-
-Do you belong to a any of the following types of groups?
- Vulnerable/ Marginalized Group  Faith Based Organizations
-Community Based Organization
- Producer Group  Marketing Group  Table Banking Group  Common Interest Group
-
-
-Where Do You Access Financial / Credit Services To Facilitate Your Farming Operations?
-
- Mobile Money saving & loans  Farmer Organization  Other money lenders
- Self (Salary or Savings)  Family  Commercial Bank  Business partners
- Savings & Credit groups  Cooperatives  Micro-finance institutions  Non-governmental donors
-
-Do you insure your crops?
- Yes
- No
-Do you insure your livestock?
- Yes
- No
-Do you insure your fish?
- Yes
- No
- Yes
- Yes
-Do you insure your farm buildings and other assets?
-
-Do you keep written farm records?
- Yes
- No
- Relatives
-What is your main source of information on good agricultural practices (GAP)?
- Newspaper  Extension services  Internet
- Radio  Television  Public gatherings
-
-
-What is the mode of extension service that you receive?
- E-Extesion  Face-to-face  Farmer field schools
- Group demonstrations  Peer-to-Peer  Other (specicy)
-
-
-
-What is your main extension service provider?
- Private  Other
- National Govt.  County Government  NGO
-
-
- """
     financial_services_main_income_source = fields.Selection(
         [
             ("sale of farming produce", "Sale of farming produce"),
