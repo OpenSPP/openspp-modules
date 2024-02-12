@@ -1,0 +1,18 @@
+<odoo>
+    <!-- Top menu item -->
+    <menuitem
+        id="g2p_report_menu_root"
+        name="Reports"
+        parent="g2p_registry_base.g2p_main_menu_root"
+        sequence="800"
+    />
+
+    <menuitem
+        id="menu_farmer_registry_report"
+        name="Farmer Registry Analysis"
+        action="action_farmer_registry_report"
+        parent="g2p_report_menu_root"
+        sequence="1"
+    />
+
+</odoo>

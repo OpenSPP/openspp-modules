@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+farmer_registry_report_g2p_admin,Farmer Registry G2P Admin Access,spp_farmer_registry_dashboard.model_farmer_registry_report,g2p_registry_base.group_g2p_admin,1,0,0,0
+farmer_registry_report_g2p_registrar,Farmer Registry G2P Registrar Access,spp_farmer_registry_dashboard.model_farmer_registry_report,g2p_registry_base.group_g2p_registrar,1,0,0,0

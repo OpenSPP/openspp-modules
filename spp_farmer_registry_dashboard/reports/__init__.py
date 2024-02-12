@@ -1,3 +1,3 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from . import reports
+from . import farmer_registry_report

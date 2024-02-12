@@ -22,7 +22,10 @@
         "spreadsheet_dashboard",
     ],
     "data": [
+        "security/ir.model.access.csv",
         "data/dashboards.xml",
+        "reports/farmer_registry_report_views.xml",
+        "views/main_view.xml",
     ],
     "assets": {},
     "demo": [],
