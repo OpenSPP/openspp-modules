@@ -18,7 +18,8 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "/spp_import_match/static/src/legacy/js/custom_base_import.js",
+            # need to fix the javascript since some of it's module is already obsolete
+            # "/spp_import_match/static/src/legacy/js/custom_base_import.js",
         ],
         "web.assets_qweb": [
             "spp_import_match/static/src/legacy/xml/custom_base_import.xml",
