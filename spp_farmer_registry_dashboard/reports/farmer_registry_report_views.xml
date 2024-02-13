@@ -5,9 +5,9 @@
          <field name="model">farmer.registry.report</field>
          <field name="arch" type="xml">
              <pivot string="Farmer Registry Analysis" sample="1">
-                 <field name="financial_services_main_income_source" type="col" />
+                 <field name="details_legal_status" type="col" />
                  <field name="registration_date" type="row" />
-                 <field name="financial_services_percentage_of_income_from_farming" type="measure" />
+                 <field name="land_acreage" type="measure" />
              </pivot>
          </field>
     </record>
@@ -17,8 +17,8 @@
          <field name="model">farmer.registry.report</field>
          <field name="arch" type="xml">
              <graph string="Farmer Registry Analysis" type="line" sample="1">
-                 <field name="financial_services_main_income_source" />
-                 <field name="financial_services_percentage_of_income_from_farming" type="measure" />
+                 <field name="details_legal_status" />
+                 <field name="land_acreage" type="measure" />
              </graph>
          </field>
     </record>
@@ -30,6 +30,8 @@
              <tree string="Farmer Registry Analysis">
                 <field name="name" string="Farm Name" />
                 <field name="registration_date" optional="show" />
+                 <field name="details_legal_status" string="Land Legal Status" />
+                 <field name="land_acreage" />
                 <field name="financial_services_main_income_source" optional="show" />
                 <field name="financial_services_percentage_of_income_from_farming" optional="show" />
              </tree>
