@@ -7,7 +7,7 @@
       "colNumber": 26,
       "rowNumber": 84,
       "rows": {},
-      "cols": {"0": {"size": 194}, "1": {"size": 123}, "2": {"size": 103}},
+      "cols": {"0": {"size": 194}, "1": {"size": 123}, "2": {"size": 110}, "3": {"size": 107}},
       "merges": [],
       "cells": {
         "A1": {"style": 1, "border": 1},
@@ -79,32 +79,26 @@
       "conditionalFormats": [],
       "figures": [
         {
-          "id": "70f1622e-4cbf-4365-b1c8-7101757e1d0f",
+          "id": "c2df141b-e4a9-44dc-b0f3-b46ee3830166",
           "x": 1,
-          "y": 92,
-          "width": 610,
-          "height": 335,
+          "y": 116,
+          "width": 627,
+          "height": 321,
           "tag": "chart",
           "data": {
-            "title": "Farmer Registry Analysis",
+            "title": "Farmer Registration by Legal Status",
             "background": "#FFFFFF",
             "legendPosition": "top",
             "metaData": {
-              "groupBy": ["registration_date:month"],
-              "measure": "land_acreage",
+              "groupBy": ["details_legal_status"],
+              "measure": "__count",
               "order": null,
               "resModel": "farmer.registry.report",
               "mode": "pie",
               "cumulated": false,
               "cumulatedStart": false
             },
-            "searchParams": {
-              "comparison": null,
-              "context": {"group_by": ["registration_date:month"], "group_by_no_leaf": 1},
-              "domain": [],
-              "groupBy": ["registration_date:month"],
-              "orderBy": []
-            },
+            "searchParams": {"comparison": null, "context": {}, "domain": [], "groupBy": [], "orderBy": []},
             "type": "odoo_pie",
             "fieldMatching": {}
           }
@@ -144,7 +138,7 @@
     },
     "10": {"left": {"style": "thin", "color": "#2D7E84"}}
   },
-  "revisionId": "0b3f1215-db31-4167-adb4-b3593f8ac11d",
+  "revisionId": "6cb37c4e-09b4-4a11-8fff-4efd07ab2e77",
   "uniqueFigureIds": true,
   "settings": {
     "locale": {
@@ -188,6 +182,6 @@
   },
   "listNextId": 2,
   "chartOdooMenusReferences": {
-    "70f1622e-4cbf-4365-b1c8-7101757e1d0f": "spp_farmer_registry_dashboard.menu_farmer_registry_report"
+    "c2df141b-e4a9-44dc-b0f3-b46ee3830166": "spp_farmer_registry_dashboard.menu_farmer_registry_legstat_report"
   }
 }

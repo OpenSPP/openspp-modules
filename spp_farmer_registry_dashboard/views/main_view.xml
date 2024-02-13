@@ -8,11 +8,27 @@
     />
 
     <menuitem
-        id="menu_farmer_registry_report"
-        name="Farmer Registry Analysis"
-        action="action_farmer_registry_report"
+        id="menu_farmer_registry_month_report"
+        name="Farmer Registry by Month"
+        action="action_farmer_registry_month_report"
         parent="g2p_report_menu_root"
-        sequence="1"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_farmer_registry_legstat_report"
+        name="Farmer Registry by Legal Status"
+        action="action_farmer_registry_legstat_report"
+        parent="g2p_report_menu_root"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_farmer_formal_training_report"
+        name="Farmer with/without Training Statistics"
+        action="action_farmer_formal_training_report"
+        parent="g2p_report_menu_root"
+        sequence="30"
     />
 
 </odoo>

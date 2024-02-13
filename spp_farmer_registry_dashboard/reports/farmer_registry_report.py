@@ -27,7 +27,9 @@ class FarmerRegistryReport(models.Model):
         string="What percentage of your income comes from farming activities?",
         readonly=True,
     )
-    land_acreage = fields.Float()
+    land_acreage = fields.Float(
+        readonly=True,
+    )
     details_legal_status = fields.Selection(
         [
             ("self", "Owned by self"),
@@ -39,6 +41,7 @@ class FarmerRegistryReport(models.Model):
             ("unknown", "Do not Know"),
         ],
         string="Legal Status",
+        readonly=True,
     )
 
     @property
