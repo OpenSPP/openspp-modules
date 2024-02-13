@@ -1,0 +1,187 @@
+{
+  "version": 14,
+  "sheets": [
+    {
+      "id": "Sheet1",
+      "name": "Dashboard",
+      "colNumber": 26,
+      "rowNumber": 84,
+      "rows": {},
+      "cols": {"0": {"size": 194}, "1": {"size": 123}, "2": {"size": 110}, "3": {"size": 107}},
+      "merges": [],
+      "cells": {
+        "A1": {"style": 1, "border": 1},
+        "A2": {"style": 2, "content": "Registration Date (Month)", "border": 2},
+        "A3": {
+          "style": 1,
+          "content": "=ODOO.PIVOT.HEADER(1,\"registration_date:month\",\"02/2024\")",
+          "border": 3
+        },
+        "A4": {"style": 1, "content": "=ODOO.PIVOT.HEADER(1)", "border": 3},
+        "B1": {
+          "style": 1,
+          "content": "=ODOO.PIVOT.HEADER(1,\"details_legal_status\",\"family\")",
+          "border": 4
+        },
+        "B2": {
+          "style": 3,
+          "content": "=ODOO.PIVOT.HEADER(1,\"details_legal_status\",\"family\",\"measure\",\"land_acreage\")",
+          "border": 5
+        },
+        "B3": {
+          "content": "=ODOO.PIVOT(1,\"land_acreage\",\"registration_date:month\",\"02/2024\",\"details_legal_status\",\"family\")",
+          "border": 6
+        },
+        "B4": {"content": "=ODOO.PIVOT(1,\"land_acreage\",\"details_legal_status\",\"family\")", "border": 6},
+        "C1": {"style": 1, "content": "=ODOO.PIVOT.HEADER(1,\"details_legal_status\",\"self\")", "border": 4},
+        "C2": {
+          "style": 3,
+          "content": "=ODOO.PIVOT.HEADER(1,\"details_legal_status\",\"self\",\"measure\",\"land_acreage\")",
+          "border": 5
+        },
+        "C3": {
+          "content": "=ODOO.PIVOT(1,\"land_acreage\",\"registration_date:month\",\"02/2024\",\"details_legal_status\",\"self\")",
+          "border": 6
+        },
+        "C4": {"content": "=ODOO.PIVOT(1,\"land_acreage\",\"details_legal_status\",\"self\")", "border": 6},
+        "D1": {
+          "style": 1,
+          "content": "=ODOO.PIVOT.HEADER(1,\"details_legal_status\",\"false\")",
+          "border": 4
+        },
+        "D2": {
+          "style": 3,
+          "content": "=ODOO.PIVOT.HEADER(1,\"details_legal_status\",\"false\",\"measure\",\"land_acreage\")",
+          "border": 5
+        },
+        "D3": {
+          "content": "=ODOO.PIVOT(1,\"land_acreage\",\"registration_date:month\",\"02/2024\",\"details_legal_status\",\"false\")",
+          "border": 6
+        },
+        "D4": {"content": "=ODOO.PIVOT(1,\"land_acreage\",\"details_legal_status\",\"false\")", "border": 6},
+        "E1": {"style": 1, "content": "=ODOO.PIVOT.HEADER(1)", "border": 7},
+        "E2": {"style": 3, "content": "=ODOO.PIVOT.HEADER(1,\"measure\",\"land_acreage\")", "border": 8},
+        "E3": {
+          "content": "=ODOO.PIVOT(1,\"land_acreage\",\"registration_date:month\",\"02/2024\")",
+          "border": 9
+        },
+        "E4": {"content": "=ODOO.PIVOT(1,\"land_acreage\")", "border": 9},
+        "A5": {"border": 4},
+        "B5": {"border": 4},
+        "C5": {"border": 4},
+        "D5": {"border": 4},
+        "E5": {"border": 4},
+        "F1": {"border": 10},
+        "F2": {"border": 10},
+        "F3": {"border": 10},
+        "F4": {"border": 10}
+      },
+      "conditionalFormats": [],
+      "figures": [
+        {
+          "id": "c2df141b-e4a9-44dc-b0f3-b46ee3830166",
+          "x": 1,
+          "y": 116,
+          "width": 627,
+          "height": 321,
+          "tag": "chart",
+          "data": {
+            "title": "Farmer Registration by Legal Status",
+            "background": "#FFFFFF",
+            "legendPosition": "top",
+            "metaData": {
+              "groupBy": ["details_legal_status"],
+              "measure": "__count",
+              "order": null,
+              "resModel": "farmer.registry.report",
+              "mode": "pie",
+              "cumulated": false,
+              "cumulatedStart": false
+            },
+            "searchParams": {"comparison": null, "context": {}, "domain": [], "groupBy": [], "orderBy": []},
+            "type": "odoo_pie",
+            "fieldMatching": {}
+          }
+        }
+      ],
+      "filterTables": [],
+      "areGridLinesVisible": true,
+      "isVisible": true,
+      "headerGroups": {"ROW": [], "COL": []},
+      "dataValidationRules": []
+    }
+  ],
+  "entities": {},
+  "styles": {
+    "1": {"bold": true, "fillColor": "#E6F2F3"},
+    "2": {"fillColor": "#E6F2F3"},
+    "3": {"fillColor": "#E6F2F3", "textColor": "#756f6f"}
+  },
+  "formats": {},
+  "borders": {
+    "1": {"top": {"style": "thin", "color": "#2D7E84"}, "left": {"style": "thin", "color": "#2D7E84"}},
+    "2": {"bottom": {"style": "thin", "color": "#2D7E84"}, "left": {"style": "thin", "color": "#2D7E84"}},
+    "3": {
+      "top": {"style": "thin", "color": "#2D7E84"},
+      "bottom": {"style": "thin", "color": "#2D7E84"},
+      "left": {"style": "thin", "color": "#2D7E84"}
+    },
+    "4": {"top": {"style": "thin", "color": "#2D7E84"}},
+    "5": {"bottom": {"style": "thin", "color": "#2D7E84"}},
+    "6": {"top": {"style": "thin", "color": "#2D7E84"}, "bottom": {"style": "thin", "color": "#2D7E84"}},
+    "7": {"top": {"style": "thin", "color": "#2D7E84"}, "right": {"style": "thin", "color": "#2D7E84"}},
+    "8": {"bottom": {"style": "thin", "color": "#2D7E84"}, "right": {"style": "thin", "color": "#2D7E84"}},
+    "9": {
+      "top": {"style": "thin", "color": "#2D7E84"},
+      "bottom": {"style": "thin", "color": "#2D7E84"},
+      "right": {"style": "thin", "color": "#2D7E84"}
+    },
+    "10": {"left": {"style": "thin", "color": "#2D7E84"}}
+  },
+  "revisionId": "6cb37c4e-09b4-4a11-8fff-4efd07ab2e77",
+  "uniqueFigureIds": true,
+  "settings": {
+    "locale": {
+      "name": "English (US)",
+      "code": "en_US",
+      "thousandsSeparator": ",",
+      "decimalSeparator": ".",
+      "dateFormat": "m/d/yyyy",
+      "timeFormat": "hh:mm:ss a",
+      "formulaArgSeparator": ","
+    }
+  },
+  "odooVersion": 6,
+  "globalFilters": [],
+  "pivots": {
+    "1": {
+      "colGroupBys": ["details_legal_status"],
+      "context": {"group_by": ["registration_date:month"], "group_by_no_leaf": 1},
+      "domain": [],
+      "id": "1",
+      "measures": [{"field": "land_acreage"}],
+      "model": "farmer.registry.report",
+      "rowGroupBys": ["registration_date:month"],
+      "name": "Farmer Registry Analysis by Legal Status",
+      "sortedColumn": null,
+      "fieldMatching": {}
+    }
+  },
+  "pivotNextId": 2,
+  "lists": {
+    "1": {
+      "columns": ["name", "address", "phone", "tags_ids", "registration_date"],
+      "domain": ["&", ["is_registrant", "=", true], ["is_group", "=", true]],
+      "model": "res.partner",
+      "context": {"default_is_registrant": true, "default_is_group": true, "registrant_form": true},
+      "orderBy": [],
+      "id": "1",
+      "name": "Farms",
+      "fieldMatching": {}
+    }
+  },
+  "listNextId": 2,
+  "chartOdooMenusReferences": {
+    "c2df141b-e4a9-44dc-b0f3-b46ee3830166": "spp_farmer_registry_dashboard.menu_farmer_registry_legstat_report"
+  }
+}
