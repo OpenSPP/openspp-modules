@@ -26,13 +26,13 @@
                         <field name="data_source_id" options="{'no_create': True, 'no_open': True}" />
                     </group>
                     <group name="name">
-                        <field name="name" attrs="{'readonly': [('done_imported', '=', True)]}" />
+                        <field name="name" readonly="done_imported" />
                     </group>
                     <group name="location_type_id">
                         <field
                             name="location_type_id"
                             options="{'no_create': True, 'no_open': True}"
-                            attrs="{'readonly': [('done_imported', '=', True)]}"
+                            readonly="done_imported"
                         />
                     </group>
                     <group name="location">
@@ -40,7 +40,7 @@
                             name="location_id"
                             domain="location_id_domain"
                             options="{'no_create': True, 'no_open': True}"
-                            attrs="{'readonly': [('done_imported', '=', True)]}"
+                            readonly="done_imported"
                         />
                     </group>
                     <group name="filter_domain" widget="selection">
@@ -49,11 +49,11 @@
                             colspan="4"
                             widget="domain"
                             options="{'model': 'spp.fetch.domain.filter', 'hide_result': True}"
-                            attrs="{'readonly': [('done_imported', '=', True)]}"
+                            readonly="done_imported"
                         />
                     </group>
 
-                    <group name="imported_individuals" attrs="{'invisible': [('id', '=', False)]}">
+                    <group name="imported_individuals" invisible="not id">
                         <field name="imported_individual_ids" options="{'no_create': True, 'no_open': True}">
                             <tree>
                                 <field name="individual_id" />
@@ -68,14 +68,14 @@
                             string="Fetch"
                             type="object"
                             class="oe_highlight btn-primary"
-                            attrs="{'invisible': [('done_imported', '=', True)]}"
+                            invisible="done_imported"
                         />
                         <button
                             name="enable_fetch"
                             string="Enable Fetching"
                             type="object"
                             class="oe_highlight btn-primary"
-                            attrs="{'invisible': [('done_imported', '=', False)]}"
+                            invisible="not done_imported"
                         />
                     </footer>
                 </sheet>

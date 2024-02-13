@@ -16,7 +16,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     name="location_id"
                     colspan="4"
                     options="{'no_open':true, 'no_create': True}"
-                    attrs="{'invisible': [('is_crvs_data_source', '!=', True)]}"
+                    invisible="not is_crvs_data_source"
                 />
             </xpath>
         </field>
