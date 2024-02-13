@@ -5,10 +5,13 @@ class Farmer(models.Model):
     _inherit = "res.partner"
 
     experience_years = fields.Integer(string="Years of Experience")
-    formal_agricultural_training = fields.Boolean("Do you have formal training in agriculture?")
+    formal_agricultural_training = fields.Boolean(
+        "Do you have formal training in agriculture?"
+    )
     farmer_national_id = fields.Char(string="National ID Number")
-    farmer_household_size = fields.Char(string="Farmer Household Size")
+    farmer_household_size = fields.Integer(string="Farmer Household Size")
     farmer_postal_address = fields.Char("Postal Address")
+
 
 class TempFarmer(models.Model):
     _name = "spp.farmer"
@@ -36,7 +39,7 @@ class TempFarmer(models.Model):
             ("secondary", "Secondary"),
             ("tertiary", "Tertiary"),
         ],
-        string="Highest Educational Level"
+        string="Highest Educational Level",
     )
     farmer_marital_status = fields.Selection(
         [
@@ -46,6 +49,6 @@ class TempFarmer(models.Model):
             ("widowed", "Widowed"),
             ("separated", "Separated"),
         ],
-        string="Farmer Marital Status"
+        string="Farmer Marital Status",
     )
     farmer_individual_id = fields.Many2one("res.partner")
