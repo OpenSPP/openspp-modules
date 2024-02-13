@@ -4,14 +4,13 @@ from odoo import _, http
 from odoo.exceptions import ValidationError
 from odoo.http import request
 
-from odoo.addons.web.controllers.main import ExcelExport, serialize_exception
+from odoo.addons.web.controllers.main import ExcelExport
 
 EXCEL_ROW_LIMIT = 1_048_576
 
 
 class SppExport(ExcelExport):
     @http.route("/web/export/xlsx", type="http", auth="user")
-    @serialize_exception
     def index(self, data):
         """
         In case too many records are selected to export, Odoo server will try to load all records then create
