@@ -35,15 +35,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         />
                     </group>
                 </sheet>
-                <footer>
                     <button
-                        name="record_consent"
-                        string="Create Consent"
-                        type="object"
-                        class="oe_highlight"
-                    />
+                    name="record_consent"
+                    string="Create Consent"
+                    type="object"
+                    class="oe_highlight"
+                />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
             </form>
         </field>
     </record>

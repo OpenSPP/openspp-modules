@@ -72,16 +72,14 @@
                     <field name="is_locked" invisible="1" />
                     <field name="locked_by" invisible="1" />
                 </sheet>
-                <footer>
                     <button
-                        string="Save"
-                        icon="fa-floppy-o"
-                        name="action_save_and_close"
-                        type="object"
-                        class="btn-primary"
-                    />
+                    string="Save"
+                    icon="fa-floppy-o"
+                    name="action_save_and_close"
+                    type="object"
+                    class="btn-primary"
+                />
                     <button string="Close" class="btn-secondary" special="cancel" />
-                </footer>
             </form>
         </field>
     </record>

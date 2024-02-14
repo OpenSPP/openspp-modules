@@ -172,30 +172,28 @@
                         />
                     </div>
                 </sheet>
-                <footer>
                     <button
-                        string="Back"
-                        name="action_last_state"
-                        type="object"
-                        invisible="state == '0'"
-                        class="btn btn-secondary"
-                    />
+                    string="Back"
+                    name="action_last_state"
+                    type="object"
+                    invisible="state == '0'"
+                    class="btn btn-secondary"
+                />
                     <button
-                        string="Next"
-                        name="action_next_state"
-                        type="object"
-                        invisible="state == '5'"
-                        class="oe_highlight"
-                    />
+                    string="Next"
+                    name="action_next_state"
+                    type="object"
+                    invisible="state == '5'"
+                    class="oe_highlight"
+                />
                     <button
-                        string="Done"
-                        name="action_done"
-                        type="object"
-                        invisible="state != '5'"
-                        class="oe_highlight"
-                    />
+                    string="Done"
+                    name="action_done"
+                    type="object"
+                    invisible="state != '5'"
+                    class="oe_highlight"
+                />
                     <button string="Cancel" special="cancel" class="btn btn-secondary" />
-                </footer>
             </form>
         </field>
     </record>

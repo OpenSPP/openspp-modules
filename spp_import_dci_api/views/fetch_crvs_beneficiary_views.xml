@@ -62,22 +62,20 @@
                             </tree>
                         </field>
                     </group>
-                    <footer>
                         <button
-                            name="fetch_crvs_beneficiary"
-                            string="Fetch"
-                            type="object"
-                            class="oe_highlight btn-primary"
-                            invisible="done_imported"
-                        />
+                        name="fetch_crvs_beneficiary"
+                        string="Fetch"
+                        type="object"
+                        class="oe_highlight btn-primary"
+                        invisible="done_imported"
+                    />
                         <button
-                            name="enable_fetch"
-                            string="Enable Fetching"
-                            type="object"
-                            class="oe_highlight btn-primary"
-                            invisible="not done_imported"
-                        />
-                    </footer>
+                        name="enable_fetch"
+                        string="Enable Fetching"
+                        type="object"
+                        class="oe_highlight btn-primary"
+                        invisible="not done_imported"
+                    />
                 </sheet>
             </form>
         </field>

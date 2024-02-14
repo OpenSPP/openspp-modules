@@ -19,15 +19,13 @@
                     </group>
                     <field name="change_request_id" invisible="1" />
                 </sheet>
-                <footer>
                     <button
-                        name="cancel_change_request"
-                        string="Confirm"
-                        type="object"
-                        class="btn btn-success"
-                    />
+                    name="cancel_change_request"
+                    string="Confirm"
+                    type="object"
+                    class="btn btn-success"
+                />
                     <button string="Cancel" class="btn btn-danger" special="cancel" />
-                </footer>
             </form>
         </field>
     </record>
