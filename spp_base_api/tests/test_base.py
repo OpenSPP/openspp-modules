@@ -69,12 +69,8 @@ class TestBase(TransactionCase):
         category_obj = self.env["res.partner.category"]
         t_country_1 = country_obj.create({"name": "TestCountry1", "code": "xxx"})
         t_country_2 = country_obj.create({"name": "TestCountry2", "code": "yyy"})
-        t_company_1 = company_obj.create(
-            {"name": "TestCompany1", "country_id": t_country_1.id}
-        )
-        t_company_2 = company_obj.create(
-            {"name": "TestCompany2", "country_id": t_country_2.id}
-        )
+        t_company_1 = company_obj.create({"name": "TestCompany1", "country_id": t_country_1.id})
+        t_company_2 = company_obj.create({"name": "TestCompany2", "country_id": t_country_2.id})
         t_category_1 = category_obj.create({"name": "TestCategory1"})
         t_category_2 = category_obj.create({"name": "TestCategory2"})
         t_category_3 = category_obj.create({"name": "TestCategory3"})
@@ -135,9 +131,7 @@ class TestBase(TransactionCase):
             "company_id.country_id.id",
         ]
         delimeter = "."
-        record_list = partner_obj.search_read_nested(
-            domain=search_domain, fields=show_fields, delimeter=delimeter
-        )
+        record_list = partner_obj.search_read_nested(domain=search_domain, fields=show_fields, delimeter=delimeter)
         # (1) records has requested values
         self.assertEqual(correct_result, record_list)
 
@@ -151,32 +145,20 @@ class TestBase(TransactionCase):
         # Test #0: Check correct creation of external id
         #
         t_company = company_obj.browse(
-            company_obj.create_or_update_by_external_id(
-                {"id": t_company_ext_id, "name": "TestCompany"}
-            )[1]
+            company_obj.create_or_update_by_external_id({"id": t_company_ext_id, "name": "TestCompany"})[1]
         )
         t_child_1 = partner_obj.browse(
-            partner_obj.create_or_update_by_external_id(
-                {"id": t_child_1_ext_id, "name": "TestChild1"}
-            )[1]
+            partner_obj.create_or_update_by_external_id({"id": t_child_1_ext_id, "name": "TestChild1"})[1]
         )
         t_child_2 = partner_obj.browse(
-            partner_obj.create_or_update_by_external_id(
-                {"id": t_child_2_ext_id, "name": "TestChild2"}
-            )[1]
+            partner_obj.create_or_update_by_external_id({"id": t_child_2_ext_id, "name": "TestChild2"})[1]
         )
         # (1) Check field value (correctness of creation)
         # (2) Check field value (correctness of creation)
         # (3) Check field value (correctness of creation)
-        self.assertEqual(
-            t_company.get_external_id()[t_company.id].split(".", 1)[1], t_company_ext_id
-        )
-        self.assertEqual(
-            t_child_1.get_external_id()[t_child_1.id].split(".", 1)[1], t_child_1_ext_id
-        )
-        self.assertEqual(
-            t_child_2.get_external_id()[t_child_2.id].split(".", 1)[1], t_child_2_ext_id
-        )
+        self.assertEqual(t_company.get_external_id()[t_company.id].split(".", 1)[1], t_company_ext_id)
+        self.assertEqual(t_child_1.get_external_id()[t_child_1.id].split(".", 1)[1], t_child_1_ext_id)
+        self.assertEqual(t_child_2.get_external_id()[t_child_2.id].split(".", 1)[1], t_child_2_ext_id)
         #
         # Test #1: Error : "External ID not defined"
         #

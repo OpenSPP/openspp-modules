@@ -23,9 +23,7 @@ class CustomG2PProgram(models.Model):
                 message = _("%s Imported Beneficiaries") % new_beneficiaries_count
                 kind = "success"
             else:
-                message = (
-                    _("Started importing %s beneficiaries") % new_beneficiaries_count
-                )
+                message = _("Started importing %s beneficiaries") % new_beneficiaries_count
                 kind = "warning"
         else:
             message = _("No Eligibility Manager defined.")

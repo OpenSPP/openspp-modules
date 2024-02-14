@@ -6,12 +6,8 @@ from odoo import api, fields, models
 class SPPEntitlement(models.Model):
     _inherit = "g2p.entitlement"
 
-    state = fields.Selection(
-        selection_add=[("parrdpd2ben", "Partially Redeemed/Paid to Beneficiary")]
-    )
-    transaction_ids = fields.One2many(
-        "spp.entitlement.transactions", "entitlement_id", "Transactions"
-    )
+    state = fields.Selection(selection_add=[("parrdpd2ben", "Partially Redeemed/Paid to Beneficiary")])
+    transaction_ids = fields.One2many("spp.entitlement.transactions", "entitlement_id", "Transactions")
     entitlement_balance = fields.Float(compute="_compute_balance")
 
     @api.depends("transaction_ids")

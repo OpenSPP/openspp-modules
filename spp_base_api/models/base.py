@@ -10,16 +10,11 @@ PREFIX = "__base_api__"
 
 
 class Base(models.AbstractModel):
-
     _inherit = "base"
 
     @api.model
     def search_or_create(self, vals, active_test=True):
-        domain = [
-            (k, "=", v)
-            for k, v in vals.items()
-            if not self._fields.get(k).type.endswith("2many")
-        ]
+        domain = [(k, "=", v) for k, v in vals.items() if not self._fields.get(k).type.endswith("2many")]
         records = self.with_context(active_test=active_test).search(domain)
         is_new = False
         if not records:
@@ -28,9 +23,7 @@ class Base(models.AbstractModel):
         return (is_new, records.ids)
 
     @api.model
-    def search_read_nested(
-        self, domain=None, fields=None, offset=0, limit=None, order=None, delimeter="/"
-    ):
+    def search_read_nested(self, domain=None, fields=None, offset=0, limit=None, order=None, delimeter="/"):
         result = pinguin.get_dictlist_from_model(
             self._name,
             tuple(fields),
@@ -58,9 +51,7 @@ class Base(models.AbstractModel):
             try:
                 result = imd_env._xmlid_lookup(PREFIX + "." + ext_id)[2]
             except ValueError as e:
-                raise ValueError(
-                    "No object with external id in field {}: {}".format(field, ext_id)
-                ) from e
+                raise ValueError(f"No object with external id in field {field}: {ext_id}") from e
             return result
 
         for field in vals:
@@ -79,9 +70,7 @@ class Base(models.AbstractModel):
                 elif list_record[0] == 6:
                     for record_for_replace in list_record[2]:
                         if isinstance(record_for_replace, str):
-                            record_for_replace = convert_external_2_inner_id(
-                                record_for_replace
-                            )
+                            record_for_replace = convert_external_2_inner_id(record_for_replace)
                 vals[field][index] = tuple(list_record)
 
         # If external id exists...

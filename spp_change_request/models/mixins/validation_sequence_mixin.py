@@ -15,16 +15,12 @@ class ChangeRequestValidationSequenceMixin(models.AbstractModel):
     @api.model
     def _default_validation_ids(self):
         _logger.debug("DEBUG! _default_validation_ids: %s", self._name)
-        validations = self.env["spp.change.request.validation.sequence"].search(
-            [("request_type", "=", self._name)]
-        )
+        validations = self.env["spp.change.request.validation.sequence"].search([("request_type", "=", self._name)])
         if validations:
             validation_ids = []
             for rec in validations:
                 validation_ids.append(Command.link(rec.id))
-            _logger.debug(
-                "DEBUG! _default_validation_ids: validation_ids: %s", validation_ids
-            )
+            _logger.debug("DEBUG! _default_validation_ids: validation_ids: %s", validation_ids)
             return validation_ids
         else:
             return None

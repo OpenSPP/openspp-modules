@@ -41,11 +41,7 @@ class OpenG2PGenerateChangeRequestData(models.Model):
         if registrants:
             registrant_ids = registrants.mapped("id")
         else:
-            raise UserError(
-                _(
-                    "There are no registrants that can be used for generating change requests."
-                )
-            )
+            raise UserError(_("There are no registrants that can be used for generating change requests."))
         # Get all membership kinds
         membership_kinds = self.env["g2p.group.membership.kind"].search([])
         if membership_kinds:
@@ -111,13 +107,10 @@ class OpenG2PGenerateChangeRequestData(models.Model):
                 "applicant_id": applicant_id,
                 "applicant_phone": applicant_phone,
             }
-            _logger.debug("Processing #%s Data: %s" % (i, cr_vals))
+            _logger.debug(f"Processing #{i} Data: {cr_vals}")
             cr_sample_data.append(cr_vals)
 
-        _logger.debug(
-            "Sample CR Data: Total: %s \nData: %s"
-            % (len(cr_sample_data), cr_sample_data)
-        )
+        _logger.debug(f"Sample CR Data: Total: {len(cr_sample_data)} \nData: {cr_sample_data}")
 
         generated_crs = self.env["spp.change.request"].create(cr_sample_data)
         generated_crs.create_request_detail_demo()
@@ -126,17 +119,13 @@ class OpenG2PGenerateChangeRequestData(models.Model):
         for crd in generated_crs:
             family_name = fake.last_name()
             gender = random.choice(["Female", "Male"] * 50)
-            given_name = (
-                fake.first_name_male() if gender == "Male" else fake.first_name_female()
-            )
+            given_name = fake.first_name_male() if gender == "Male" else fake.first_name_female()
             addl_name = fake.last_name()
             birth_place = fake.address()
             birthdate_not_exact = random.choice([True, False] * 50)
             date_start = datetime.datetime.now() - relativedelta(years=100)
             date_end = datetime.datetime.now()
-            birthdate = fake.date_between_dates(
-                date_start=date_start, date_end=date_end
-            ).isoformat()
+            birthdate = fake.date_between_dates(date_start=date_start, date_end=date_end).isoformat()
             # phone = fake.phone_number()
             uid_number = str(random.randint(100000000000, 999999999999))
             kind = random.choice(membership_kinds)

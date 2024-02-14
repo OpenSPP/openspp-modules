@@ -38,14 +38,8 @@ class TestIrModelFields(TransactionCase):
         test_field_write_date = self.env.ref("base.field_res_partner__write_date")
         with self.assertRaisesRegex(ValidationError, "API path is not specify!"):
             test_field_name.create_api_field_name_alias()
-        res = test_field_name.with_context(
-            default_api_path_id=self.test_path.id
-        ).create_api_field_name_alias()
+        res = test_field_name.with_context(default_api_path_id=self.test_path.id).create_api_field_name_alias()
         self.assertTrue(type(res) == dict, "Return values should be an action!")
         self.assertFalse(bool(res.get("res_id")), "Name doesn't have its field alias!")
-        res = test_field_write_date.with_context(
-            default_api_path_id=self.test_path.id
-        ).create_api_field_name_alias()
-        self.assertTrue(
-            bool(res.get("res_id")), "Write date has field alias, it should be shown!"
-        )
+        res = test_field_write_date.with_context(default_api_path_id=self.test_path.id).create_api_field_name_alias()
+        self.assertTrue(bool(res.get("res_id")), "Write date has field alias, it should be shown!")

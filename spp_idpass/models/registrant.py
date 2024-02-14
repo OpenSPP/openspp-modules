@@ -48,9 +48,7 @@ class OpenSPPRegistrant(models.Model):
         """
         id_pass_param = self.env["spp.id.pass"].search([("is_active", "=", True)])
         if vals["idpass"]:
-            id_pass_param = self.env["spp.id.pass"].search(
-                [("id", "=", vals["idpass"])]
-            )
+            id_pass_param = self.env["spp.id.pass"].search([("id", "=", vals["idpass"])])
 
         if id_pass_param:
             data_param = {
@@ -73,9 +71,7 @@ class OpenSPPRegistrant(models.Model):
                     if head_id > 0:
                         break
                 if head_id > 0:
-                    head_registrant = self.env["res.partner"].search(
-                        [("id", "=", head_id)]
-                    )
+                    head_registrant = self.env["res.partner"].search([("id", "=", head_id)])
                     data_param = {
                         "given_names": head_registrant.given_name,
                         "identification_no": f"{head_registrant.id:09d}",
@@ -87,27 +83,17 @@ class OpenSPPRegistrant(models.Model):
                     profile_pic = head_registrant.image_1920 or False
                     profile_pic_filename = head_registrant.image_1920_filename or False
                 else:
-                    raise ValidationError(
-                        _(
-                            "ID PASS Error: No Head or Principal Recipient assigned to this Group"
-                        )
-                    )  # noqa: C901
+                    raise ValidationError(_("ID PASS Error: No Head or Principal Recipient assigned to this Group"))  # noqa: C901
 
             issue_date = datetime.today().strftime("%Y/%m/%d")
             expiry_date = datetime.today()
 
             if id_pass_param[0].expiry_length_type == "years":
-                expiry_date = datetime.today() + relativedelta(
-                    years=id_pass_param[0].expiry_length
-                )
+                expiry_date = datetime.today() + relativedelta(years=id_pass_param[0].expiry_length)
             elif id_pass_param[0].expiry_length_type == "months":
-                expiry_date = datetime.today() + relativedelta(
-                    months=id_pass_param[0].expiry_length
-                )
+                expiry_date = datetime.today() + relativedelta(months=id_pass_param[0].expiry_length)
             else:
-                expiry_date = datetime.today() + relativedelta(
-                    days=id_pass_param[0].expiry_length
-                )
+                expiry_date = datetime.today() + relativedelta(days=id_pass_param[0].expiry_length)
             expiry_date = expiry_date.strftime("%Y/%m/%d")
             data_param.update(
                 {
@@ -122,9 +108,7 @@ class OpenSPPRegistrant(models.Model):
                     file_type = "jpeg"
             else:
                 if profile_pic:
-                    raise ValidationError(
-                        _("ID PASS Error: Please try reuploading the ID Picture")
-                    )  # noqa: C901
+                    raise ValidationError(_("ID PASS Error: Please try reuploading the ID Picture"))  # noqa: C901
 
             profile_pic_url = ""
             if profile_pic and file_type in ("jpeg", "png"):
@@ -169,9 +153,7 @@ class OpenSPPRegistrant(models.Model):
                 self.id_pdf = file_pdf
                 self.id_pdf_filename = file_pdf_filename
 
-                idqueue = self.env["spp.print.queue.id"].search(
-                    [("id", "=", vals["id_queue"])]
-                )
+                idqueue = self.env["spp.print.queue.id"].search([("id", "=", vals["id_queue"])])
                 idqueue.id_pdf = self.id_pdf
                 idqueue.id_pdf_filename = self.id_pdf_filename
 

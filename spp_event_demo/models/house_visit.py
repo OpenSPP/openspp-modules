@@ -22,8 +22,4 @@ class OpenSPPHouseVisit(models.Model):
         """
         This retrieves the View ID of this model
         """
-        return (
-            self.env["ir.ui.view"]
-            .search([("model", "=", self._name), ("type", "=", "form")], limit=1)
-            .id
-        )
+        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id

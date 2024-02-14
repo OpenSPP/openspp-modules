@@ -25,8 +25,7 @@ class TestArea(TransactionCase):
             self.assertRegex(
                 area.spp_id,
                 r"^LOC_[a-zA-Z0-9]{8}$",
-                "Area should have unique id start with "
-                "`LOC_` and following by 8 characters.",
+                "Area should have unique id start with " "`LOC_` and following by 8 characters.",
             )
             for char in EXCLUDED_CHARACTERS:
                 self.assertNotIn(
@@ -46,13 +45,9 @@ class TestArea(TransactionCase):
 
     @mute_logger("py.warnings")
     def test_04_check_spp_id(self):
-        with self.assertRaisesRegex(
-            ValidationError, "^.*not following correct format.{1}$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*not following correct format.{1}$"):
             # 7 characters spp_id
             self.area_1.write({"spp_id": "LOC_AaAaAa2"})
-        with self.assertRaisesRegex(
-            ValidationError, "^.*not following correct format.{1}$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*not following correct format.{1}$"):
             # '1' in spp_id
             self.area_2.write({"spp_id": "LOC_AaAaAa21"})

@@ -41,9 +41,7 @@ class TestSppApiFieldAlias(TransactionCase):
 
     @mute_logger("py.warnings")
     def test_02_check_field_name_alias_name(self):
-        with self.assertRaisesRegex(
-            ValidationError, "Alias Name should be different from its field name!"
-        ):
+        with self.assertRaisesRegex(ValidationError, "Alias Name should be different from its field name!"):
             self.test_field_alias.write({"alias_name": "write_date"})
 
     def test_03_inverse_global_alias(self):
@@ -52,9 +50,7 @@ class TestSppApiFieldAlias(TransactionCase):
 
     def test_04_check_field_duplicate_if_api_path_is_null(self):
         self.test_field_alias.write({"global_alias": True})
-        with self.assertRaisesRegex(
-            ValidationError, "There is another global alias for this field!"
-        ):
+        with self.assertRaisesRegex(ValidationError, "There is another global alias for this field!"):
             self.env["spp_api.field.alias"].create(
                 {
                     "field_id": self.env.ref("base.field_res_partner__write_date").id,

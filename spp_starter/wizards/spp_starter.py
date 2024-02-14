@@ -192,21 +192,14 @@ class SppStarter(models.TransientModel):
 
     def _remove_default_products_if_needed(self):
         self.ensure_one()
-        if (
-            self.conducting_inkind_transfer != "yes"
-            or "product.template" not in self.env
-        ):
+        if self.conducting_inkind_transfer != "yes" or "product.template" not in self.env:
             return
         all_products = self.env["product.template"].sudo().search([])
         return all_products.write({"active": False})
 
     @api.model
     def _remove_fake_apps_menu(self):
-        return (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .set_param("spp_starter.show_spp_starter", "False")
-        )
+        return self.env["ir.config_parameter"].sudo().set_param("spp_starter.show_spp_starter", "False")
 
     def _reopen(self):
         self.ensure_one()

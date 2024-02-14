@@ -9,7 +9,7 @@
     "application": False,
     "author": "OpenSPP.org",
     "support": "apps@itpp.dev",
-    "website": "https://github.com/openspp/openspp-modules",
+    "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "depends": [],
     "external_dependencies": {"python": [], "bin": []},

@@ -55,9 +55,7 @@ class SPPBaseImport(models.TransientModel):
         description = _("Import {model_name} from file {file_name}").format(
             model_name=translated_model_name, file_name=self.file_name
         )
-        attachment = self._create_csv_attachment(
-            import_fields, data, options, self.file_name
-        )
+        attachment = self._create_csv_attachment(import_fields, data, options, self.file_name)
         delayed_job = self.with_delay(description=description)._split_file(
             model_name=self.res_model,
             translated_model_name=translated_model_name,
@@ -69,9 +67,7 @@ class SPPBaseImport(models.TransientModel):
         return {}
 
     def _link_attachment_to_job(self, delayed_job, attachment):
-        queue_job = self.env["queue.job"].search(
-            [("uuid", "=", delayed_job.uuid)], limit=1
-        )
+        queue_job = self.env["queue.job"].search([("uuid", "=", delayed_job.uuid)], limit=1)
         attachment.write({"res_model": "queue.job", "res_id": queue_job.id})
 
     @api.returns("ir.attachment")
@@ -89,9 +85,7 @@ class SPPBaseImport(models.TransientModel):
             writer.writerow(row)
         # create attachment
         datas = base64.encodebytes(f.getvalue().encode(encoding))
-        attachment = self.env["ir.attachment"].create(
-            {"name": file_name, "datas": datas}
-        )
+        attachment = self.env["ir.attachment"].create({"name": file_name, "datas": datas})
         return attachment
 
     def _read_csv_attachment(self, attachment, options):
@@ -139,9 +133,7 @@ class SPPBaseImport(models.TransientModel):
         else:
             header_offset = 0
         chunk_size = options.get(OPT_CHUNK_SIZE) or DEFAULT_CHUNK_SIZE
-        for row_from, row_to in self._extract_chunks(
-            model_obj, fields, data, chunk_size
-        ):
+        for row_from, row_to in self._extract_chunks(model_obj, fields, data, chunk_size):
             chunk = str(priority - INIT_PRIORITY).zfill(padding)
             description = _(
                 "Import {model_name} from file {file_name} - #{chunk} - lines {row_from} to {row_to}"
@@ -160,9 +152,7 @@ class SPPBaseImport(models.TransientModel):
                 options,
                 file_name=root + "-" + chunk + ext,
             )
-            delayed_job = self.with_delay(
-                description=description, priority=priority
-            )._import_one_chunk(
+            delayed_job = self.with_delay(description=description, priority=priority)._import_one_chunk(
                 model_name=model_name, attachment=attachment, options=options
             )
             self._link_attachment_to_job(delayed_job, attachment)
@@ -172,11 +162,7 @@ class SPPBaseImport(models.TransientModel):
         model_obj = self.env[model_name]
         fields, data = self._read_csv_attachment(attachment, options)
         result = model_obj.load(fields, data)
-        error_message = [
-            message["message"]
-            for message in result["messages"]
-            if message["type"] == "error"
-        ]
+        error_message = [message["message"] for message in result["messages"] if message["type"] == "error"]
         if error_message:
             raise FailedJobError("\n".join(error_message))
         return result

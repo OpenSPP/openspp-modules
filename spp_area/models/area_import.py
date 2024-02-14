@@ -82,9 +82,7 @@ class OpenSPPAreaImport(models.Model):
                 }
             )
         else:
-            self.update(
-                {"date_uploaded": None, "upload_id": None, "state": self.UPLOADED}
-            )
+            self.update({"date_uploaded": None, "upload_id": None, "state": self.UPLOADED})
 
     @api.depends("raw_data_ids", "raw_data_ids.state")
     def _compute_get_total_rows(self):
@@ -125,7 +123,6 @@ class OpenSPPAreaImport(models.Model):
         """
         _logger.info("Area Import: Started: %s" % fields.Datetime.now())
         for rec in self:
-
             # Delete all existing import data for this record
             # This can only be happen if the Area Upload record is reset back to Uploaded state
             if rec.raw_data_ids:
@@ -173,12 +170,8 @@ class OpenSPPAreaImport(models.Model):
                 parent_name_index = None
                 parent_code_index = None
                 if area_level != 0:
-                    parent_name_header = (
-                        f"{column_name_prefix[:3]}{area_level - 1}_{name_iso_code}"
-                    )
-                    parent_code_header = (
-                        f"{column_name_prefix[:3]}{area_level - 1}_PCODE"
-                    )
+                    parent_name_header = f"{column_name_prefix[:3]}{area_level - 1}_{name_iso_code}"
+                    parent_code_header = f"{column_name_prefix[:3]}{area_level - 1}_PCODE"
 
                     parent_name_index = columns.index(parent_name_header)
                     parent_code_index = columns.index(parent_code_header)
@@ -223,9 +216,7 @@ class OpenSPPAreaImport(models.Model):
                 }
             )
 
-            _logger.info(
-                "Area Masterlist Import: Completed: %s" % fields.Datetime.now()
-            )
+            _logger.info("Area Masterlist Import: Completed: %s" % fields.Datetime.now())
 
     def validate_raw_data(self):
         """
@@ -238,9 +229,7 @@ class OpenSPPAreaImport(models.Model):
             if raw_data_count < self.MIN_ROW_JOB_QUEUE:
                 rec._validate_raw_data()
             else:
-                rec._async_function(
-                    raw_data_count, _("Validating data."), "_validate_raw_data"
-                )
+                rec._async_function(raw_data_count, _("Validating data."), "_validate_raw_data")
 
     def _validate_raw_data(self):
         """
@@ -309,9 +298,7 @@ class OpenSPPAreaImport(models.Model):
             if raw_data_count < self.MIN_ROW_JOB_QUEUE:
                 rec._save_to_area()
             else:
-                rec._async_function(
-                    raw_data_count, _("Saving to Area."), "_save_to_area"
-                )
+                rec._async_function(raw_data_count, _("Saving to Area."), "_save_to_area")
 
     def _save_to_area(self):
         """
@@ -394,16 +381,10 @@ class OpenSPPAreaImportActivities(models.Model):
                     errors.append(_("AREA_SQKM should be numerical."))
 
             if rec.level == 0 and (rec.parent_name or rec.parent_code):
-                errors.append(
-                    _("Level 0 area should not have a parent name and parent code.")
-                )
+                errors.append(_("Level 0 area should not have a parent name and parent code."))
 
             if rec.level != 0 and (not rec.parent_name or not rec.parent_code):
-                errors.append(
-                    _(
-                        "Level 1 and above area should have a parent name and parent code."
-                    )
-                )
+                errors.append(_("Level 1 and above area should have a parent name and parent code."))
 
             if errors:
                 state = self.ERROR

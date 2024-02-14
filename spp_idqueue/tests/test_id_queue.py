@@ -10,9 +10,7 @@ class TestIdQueue(Common):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.test_queue = cls._create_test_queue(
-            registrant_id=cls._test_group.id, status="new"
-        )
+        cls.test_queue = cls._create_test_queue(registrant_id=cls._test_group.id, status="new")
 
     def test_01_compute_name(self):
         self.assertEqual(
@@ -71,9 +69,7 @@ class TestIdQueue(Common):
 
     @patch("requests.post")
     def test_04_on_print(self, mock_post):
-        with self.assertRaisesRegex(
-            ValidationError, "^.*must be approved before printing$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*must be approved before printing$"):
             self.test_queue.on_print()
         mock_post.return_value = Mock(
             status_code=200,
@@ -101,9 +97,7 @@ class TestIdQueue(Common):
         )
 
     def test_05_on_distribute(self):
-        with self.assertRaisesRegex(
-            ValidationError, "^.*can only be distributed if it has been printed.*$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*can only be distributed if it has been printed.*$"):
             self.test_queue.on_distribute()
         self.test_queue.status = "printed"
         self.assertListEqual(
@@ -128,13 +122,9 @@ class TestIdQueue(Common):
 
     def test_06_on_cancel_printed(self):
         self.test_queue.status = "printed"
-        with self.assertRaisesRegex(
-            ValidationError, "^.*cannot be canceled if it has been printed.*$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*cannot be canceled if it has been printed.*$"):
             self.test_queue.on_cancel()
 
     def test_07_on_cancel(self):
         self.test_queue.on_cancel()
-        self.assertEqual(
-            self.test_queue.status, "cancelled", "Test Queue should now `cancelled`!"
-        )
+        self.assertEqual(self.test_queue.status, "cancelled", "Test Queue should now `cancelled`!")

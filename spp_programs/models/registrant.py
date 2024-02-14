@@ -8,9 +8,7 @@ class G2PRegistrantCustom(models.Model):
     _inherit = "res.partner"
 
     # Custom Fields
-    inkind_entitlement_ids = fields.One2many(
-        "g2p.entitlement.inkind", "partner_id", "In-kind Entitlements"
-    )
+    inkind_entitlement_ids = fields.One2many("g2p.entitlement.inkind", "partner_id", "In-kind Entitlements")
 
     # Statistics
     inkind_entitlements_count = fields.Integer(
@@ -22,7 +20,5 @@ class G2PRegistrantCustom(models.Model):
     @api.depends("inkind_entitlement_ids")
     def _compute_inkind_entitlements_count(self):
         for rec in self:
-            inkind_entitlements_count = self.env["g2p.entitlement.inkind"].search_count(
-                [("partner_id", "=", rec.id)]
-            )
+            inkind_entitlements_count = self.env["g2p.entitlement.inkind"].search_count([("partner_id", "=", rec.id)])
             rec.update({"inkind_entitlements_count": inkind_entitlements_count})

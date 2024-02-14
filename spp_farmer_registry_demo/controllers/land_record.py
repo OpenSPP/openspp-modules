@@ -11,6 +11,4 @@ class GeoJsonController(http.Controller):
 
         # Call the get_geojson method from the Farm model
         result = request.env["spp.land.record"].get_geojson()
-        return request.make_response(
-            result, headers=[("Content-Type", "application/json")]
-        )
+        return request.make_response(result, headers=[("Content-Type", "application/json")])

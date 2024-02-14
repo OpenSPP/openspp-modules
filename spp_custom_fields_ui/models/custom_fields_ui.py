@@ -146,12 +146,8 @@ class OpenSPPCustomFieldsUI(models.Model):
                 if rec.has_presence:
                     rec.ttype = "boolean"
                     rec.compute += (
-                        "self.compute_count_and_set_indicator('%s', kinds, domain, presence_only=True)"
-                        % name
+                        "self.compute_count_and_set_indicator('%s', kinds, domain, presence_only=True)" % name
                     )
                 else:
                     rec.ttype = "integer"
-                    rec.compute += (
-                        "self.compute_count_and_set_indicator('%s', kinds, domain)"
-                        % name
-                    )
+                    rec.compute += "self.compute_count_and_set_indicator('%s', kinds, domain)" % name

@@ -46,7 +46,7 @@ class OpenSPPRegistrant(models.Model):
             if rec.is_company:
                 child_ids = rec.child_ids
 
-        super(OpenSPPRegistrant, self).unlink()
+        super().unlink()
 
         if child_ids:
             child_ids._compute_ind_service_points_ids()
@@ -73,9 +73,7 @@ class OpenSPPServicePoint(models.Model):
     is_disabled = fields.Boolean("Disabled")
     disabled_date = fields.Date("Date Disabled")
     disabled_reason = fields.Char("Disable Reason")
-    country_id = fields.Many2one(
-        "res.country", "Country", default=_get_default_country_id
-    )
+    country_id = fields.Many2one("res.country", "Country", default=_get_default_country_id)
 
     res_partner_company_id = fields.Many2one(
         "res.partner",
@@ -172,7 +170,6 @@ class OpenSPPServicePoint(models.Model):
             raise UserError(_("Company does not have contacts."))
 
         for child_id in self.res_partner_company_id.child_ids:
-
             # if individual already have an account then continue
             if child_id.user_ids:
                 continue
@@ -183,25 +180,17 @@ class OpenSPPServicePoint(models.Model):
                 except (SignupError, ValueError) as e:
                     _logger.error(e)
                     raise UserError(
-                        _("Error on individual {child_name}: {error}").format(
-                            child_name=child_id.name, error=e
-                        )
+                        _("Error on individual {child_name}: {error}").format(child_name=child_id.name, error=e)
                     ) from e
             else:
-                raise UserError(
-                    _("{child_name} does not have email.").format(
-                        child_name=child_id.name
-                    )
-                )
+                raise UserError(_("{child_name} does not have email.").format(child_name=child_id.name))
 
         return {
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
                 "title": _("Create SP User"),
-                "message": _(
-                    "Successfully created users for the contacts of the company"
-                ),
+                "message": _("Successfully created users for the contacts of the company"),
                 "sticky": True,
                 "type": "success",
                 "next": {

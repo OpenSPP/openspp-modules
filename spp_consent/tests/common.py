@@ -22,9 +22,7 @@ class Common(TransactionCase):
                             "kind": [
                                 (
                                     4,
-                                    self.env.ref(
-                                        "g2p_registry_membership.group_membership_kind_head"
-                                    ).id,
+                                    self.env.ref("g2p_registry_membership.group_membership_kind_head").id,
                                 )
                             ],
                         },

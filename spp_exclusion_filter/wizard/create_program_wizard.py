@@ -9,9 +9,7 @@ class CustomSPPCreateNewProgramWiz(models.TransientModel):
     _inherit = "g2p.program.create.wizard"
 
     enable_exclusion_filter = fields.Boolean("Enable Exclusion")
-    exclusion_eligibility_domain = fields.Text(
-        string="Exclusive Domain", default="[]", required=True, copy=False
-    )
+    exclusion_eligibility_domain = fields.Text(string="Exclusive Domain", default="[]", required=True, copy=False)
 
     def _get_default_eligibility_manager_val(self, program_id):
         val = super()._get_default_eligibility_manager_val(program_id)

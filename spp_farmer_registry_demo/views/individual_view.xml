@@ -13,11 +13,7 @@
             </xpath>
             <xpath expr="//page[@name='ids']" position="before">
                 <page name="basic_info" string="Personal Info">
-                    <field
-                        name="phone_number_ids"
-                        readonly="disabled"
-                        context="{'reg_form':True}"
-                    >
+                    <field name="phone_number_ids" readonly="disabled" context="{'reg_form':True}">
                         <tree decoration-danger="disabled">
                              <field
                                 name="phone_no"
@@ -26,18 +22,16 @@
                                 options="{'enable_sms': false}"
                             />
                             <field name="country_id" />
-                            <field name="date_collected" width="30%"/>
+                            <field name="date_collected" width="30%" />
                             <field name="disabled" column_invisible="1" />
                         </tree>
                     </field>
-                    <div
-                        class="row mt16 o_settings_container"
-                    >
+                    <div class="row mt16 o_settings_container">
                         <div class="col-6 o_setting_box">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="gender" string="Sex"/>
+                                <label for="gender" string="Sex" />
                                 <div>
                                 </div>
                                 <field name="gender" />

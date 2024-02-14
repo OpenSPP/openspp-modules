@@ -15,15 +15,11 @@ class SPPCreateNewProgramWiz(models.TransientModel):
     _inherit = "g2p.program.create.wizard"
 
     # Tag-based Eligibility Manager
-    eligibility_kind = fields.Selection(
-        selection_add=[("tags_eligibility", "Tag-based Eligibility")]
-    )
+    eligibility_kind = fields.Selection(selection_add=[("tags_eligibility", "Tag-based Eligibility")])
     tags_id = fields.Many2one("g2p.registrant.tags", string="Tags")
     area_id = fields.Many2one(
         "spp.area",
-        domain=lambda self: [
-            ("kind", "=", self.env.ref("spp_area.admin_area_kind").id)
-        ],
+        domain=lambda self: [("kind", "=", self.env.ref("spp_area.admin_area_kind").id)],
     )
     custom_domain = fields.Text(string="Domain", default="[]", readonly=True)
 
@@ -42,9 +38,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
         super()._check_required_fields()
         if self.eligibility_kind == "tags_eligibility":
             if not self.tags_id:
-                raise UserError(
-                    _("A tag is needed for this eligibility criteria type.")
-                )
+                raise UserError(_("A tag is needed for this eligibility criteria type."))
         return
 
     def get_manager_tags_val(self, program_id):
@@ -60,14 +54,10 @@ class SPPCreateNewProgramWiz(models.TransientModel):
         if self.eligibility_kind == "tags_eligibility":
             # Add a new record to tag-base eligibility manager model
             manager_tags_val = self.get_manager_tags_val(program_id)
-            def_mgr = self.env["g2p.program_membership.manager.tags"].create(
-                manager_tags_val
-            )
+            def_mgr = self.env["g2p.program_membership.manager.tags"].create(manager_tags_val)
 
             # Add a new record to eligibility manager parent model
-            eligibility_manager_val = self._get_eligibility_managers_val(
-                program_id, def_mgr
-            )
+            eligibility_manager_val = self._get_eligibility_managers_val(program_id, def_mgr)
             mgr = self.env["g2p.eligibility.manager"].create(eligibility_manager_val)
             res = {"eligibility_managers": [(4, mgr.id)]}
         return res

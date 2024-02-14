@@ -13,8 +13,7 @@ class G2PProgram(models.Model):
     dashboard_id = fields.Many2one(
         "dashboard.menu",
         "Dashboard",
-        default=lambda self: self.env.ref("spp_dashboard.dashboard_menu_program")
-        or None,
+        default=lambda self: self.env.ref("spp_dashboard.dashboard_menu_program") or None,
     )
 
     # Statistics Functions

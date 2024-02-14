@@ -25,9 +25,7 @@ class Base(models.AbstractModel):
                     dbid = int(values[column])
                     values[column] = self.browse(dbid).get_external_id().get(dbid)
             import_fields = list(map(models.fix_import_export_id_paths, fields))
-            converted_data = list(
-                self._convert_records(self._extract_records(import_fields, data))
-            )
+            converted_data = list(self._convert_records(self._extract_records(import_fields, data)))
 
             if "id" not in fields:
                 fields.append("id")
@@ -52,9 +50,7 @@ class Base(models.AbstractModel):
                     match = self.env["spp.import.match"]._match_find(self, record, row)
 
                 if match:
-                    flat_fields_to_remove = [
-                        item for sublist in field_to_match for item in sublist
-                    ]
+                    flat_fields_to_remove = [item for sublist in field_to_match for item in sublist]
                     for fields_pop in flat_fields_to_remove:
                         # TODO: @eMJay0921: import matching should not remove any
                         # value of importing row, this should be removed.
@@ -78,9 +74,7 @@ class Base(models.AbstractModel):
         for rec in vals:
             field_name = rec
             if not vals[field_name]:
-                field = self.env["ir.model.fields"].search(
-                    [("model_id", "=", model.id), ("name", "=", field_name)]
-                )
+                field = self.env["ir.model.fields"].search([("model_id", "=", model.id), ("name", "=", field_name)])
                 if field and field.ttype in ("one2many", "many2many"):
                     new_vals.pop(rec)
         return super().write(new_vals)

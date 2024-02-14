@@ -32,9 +32,7 @@ class TestCreateProgramWiz(Common):
             self._program_create_wiz.basket_entitlement_item_ids.ids,
             "Start without basket entitlement items!",
         )
-        self._program_create_wiz.entitlement_basket_id = self.env[
-            "spp.entitlement.basket"
-        ].create(
+        self._program_create_wiz.entitlement_basket_id = self.env["spp.entitlement.basket"].create(
             {
                 "name": "Basket 1 [TEST]",
                 "product_ids": [
@@ -58,13 +56,9 @@ class TestCreateProgramWiz(Common):
         )
 
     def test_03_check_required_fields(self):
-        with self.assertRaisesRegex(
-            UserError, "Food Basket in Cycle Manager is required"
-        ):
+        with self.assertRaisesRegex(UserError, "Food Basket in Cycle Manager is required"):
             self._program_create_wiz._check_required_fields()
-        self._program_create_wiz.entitlement_basket_id = self.env[
-            "spp.entitlement.basket"
-        ].create(
+        self._program_create_wiz.entitlement_basket_id = self.env["spp.entitlement.basket"].create(
             {
                 "name": "Basket 1 [TEST]",
             }
@@ -78,15 +72,11 @@ class TestCreateProgramWiz(Common):
                 "basket_product_ids": [(6, 0, self._test_products.ids)],
             }
         )
-        with self.assertRaisesRegex(
-            UserError, "For inventory management, the warehouse is required"
-        ):
+        with self.assertRaisesRegex(UserError, "For inventory management, the warehouse is required"):
             self._program_create_wiz._check_required_fields()
 
     def test_04_get_entitlement_manager(self):
-        self._program_create_wiz.entitlement_basket_id = self.env[
-            "spp.entitlement.basket"
-        ].create(
+        self._program_create_wiz.entitlement_basket_id = self.env["spp.entitlement.basket"].create(
             {
                 "name": "Basket 1 [TEST]",
                 "product_ids": [
@@ -132,12 +122,8 @@ class TestCreateProgramWiz(Common):
         )
         self.assertEqual(type(res), dict, "Correct return value")
         self.assertIn("entitlement_managers", res.keys(), "Correct return value")
-        self.assertEqual(
-            type(res["entitlement_managers"]), list, "Correct return value"
-        )
+        self.assertEqual(type(res["entitlement_managers"]), list, "Correct return value")
         self.assertEqual(len(res["entitlement_managers"]), 1, "Correct return value")
-        self.assertEqual(
-            type(res["entitlement_managers"][0]), tuple, "Correct return value"
-        )
+        self.assertEqual(type(res["entitlement_managers"][0]), tuple, "Correct return value")
         self.assertEqual(len(res["entitlement_managers"][0]), 2, "Correct return value")
         self.assertEqual(res["entitlement_managers"][0][0], 4, "Correct return value")

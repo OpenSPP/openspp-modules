@@ -20,9 +20,7 @@ class Common(TransactionCase):
                             "kind": [
                                 (
                                     4,
-                                    cls.env.ref(
-                                        "g2p_registry_membership.group_membership_kind_head"
-                                    ).id,
+                                    cls.env.ref("g2p_registry_membership.group_membership_kind_head").id,
                                 )
                             ],
                         },
@@ -39,9 +37,7 @@ class Common(TransactionCase):
         vals.update({"is_registrant": True})
         return self.env["res.partner"].create(vals)
 
-    def _create_test_queue(
-        self, registrant_id, id_type=None, idpass_id=None, status="approved"
-    ):
+    def _create_test_queue(self, registrant_id, id_type=None, idpass_id=None, status="approved"):
         if not id_type:
             id_type = self.env.ref("spp_idpass.id_type_idpass").id
         else:

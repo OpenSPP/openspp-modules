@@ -15,12 +15,6 @@ class ProductTemplateCustomization(models.Model):
         for rec in self:
             url = None
             if rec.image_1920:
-                url = (
-                    base_url
-                    + "/web/image?"
-                    + "model=product.template&id="
-                    + str(rec.id)
-                    + "&field=image_512"
-                )
+                url = base_url + "/web/image?" + "model=product.template&id=" + str(rec.id) + "&field=image_512"
 
             rec.image_url = url

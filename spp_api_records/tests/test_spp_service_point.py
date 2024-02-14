@@ -140,9 +140,7 @@ class TestSppServicePoint(TransactionCase):
     def test_02_search_program_id(self):
         with self.assertRaisesRegex(ValidationError, "Operator is not supported!"):
             self.env["spp.service.point"].search([("program_id", "in", [1, 2])])
-        res = self.env["spp.service.point"].search(
-            [("program_id", "=", self.test_program_1.id)]
-        )
+        res = self.env["spp.service.point"].search([("program_id", "=", self.test_program_1.id)])
         self.assertIn(
             self.test_service_point_1,
             res,
@@ -163,9 +161,7 @@ class TestSppServicePoint(TransactionCase):
             res,
             "Service point 4 should not be in search result when searching for program_id = program_1.id!",
         )
-        res = self.env["spp.service.point"].search(
-            [("program_id", "=", self.test_program_2.id)]
-        )
+        res = self.env["spp.service.point"].search([("program_id", "=", self.test_program_2.id)])
         self.assertIn(
             self.test_service_point_1,
             res,

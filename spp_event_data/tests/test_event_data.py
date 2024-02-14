@@ -32,12 +32,8 @@ class TestEventData(TransactionCase):
     def test_02_mock_event_state(self):
         mock_event_1 = self.create_mock_event()
         mock_event_2 = self.create_mock_event()
-        self.assertEqual(
-            mock_event_1.state, "inactive", "Mock event 1 state should now ended!"
-        )
-        self.assertEqual(
-            mock_event_2.state, "active", "Mock event 2 state should now active!"
-        )
+        self.assertEqual(mock_event_1.state, "inactive", "Mock event 1 state should now ended!")
+        self.assertEqual(mock_event_2.state, "active", "Mock event 2 state should now active!")
 
     def test_03_active_mock_even(self):
         mock_event_1 = self.create_mock_event()

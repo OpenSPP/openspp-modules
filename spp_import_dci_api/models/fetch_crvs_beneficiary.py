@@ -88,21 +88,15 @@ class CRVSLocation(models.Model):
         """
         crvs_location_type = self.env["spp.crvs.location.type"].sudo()
         if location_additional_type not in hashmap:
-            additional_type_id = crvs_location_type.search(
-                [("location_type", "=", location_additional_type)], limit=1
-            )
+            additional_type_id = crvs_location_type.search([("location_type", "=", location_additional_type)], limit=1)
             if not additional_type_id:
-                additional_type_id = crvs_location_type.create(
-                    {"location_type": location_additional_type}
-                )
+                additional_type_id = crvs_location_type.create({"location_type": location_additional_type})
             hashmap[location_additional_type] = additional_type_id
 
         return hashmap[location_additional_type]
 
     @api.model
-    def get_crvs_location_vals(
-        self, identifier, location, additional_type_id, *args, **kwargs
-    ):
+    def get_crvs_location_vals(self, identifier, location, additional_type_id, *args, **kwargs):
         """
         The function `get_crvs_location_vals` retrieves values from various parameters and returns a
         dictionary with the extracted values.
@@ -151,9 +145,7 @@ class CRVSLocation(models.Model):
         record(s) in the database
         """
         crvs_location_id = (
-            self.env["spp.crvs.location"]
-            .sudo()
-            .search([("identifier", "=", identifier.get("identifier"))], limit=1)
+            self.env["spp.crvs.location"].sudo().search([("identifier", "=", identifier.get("identifier"))], limit=1)
         )
 
         if not crvs_location_id:
@@ -178,16 +170,12 @@ class CRVSLocation(models.Model):
             identifiers = loc.get("identifier", [])
 
             # Get or Set location type hashmap
-            additional_type_id = self.get_or_set_location_hashmap(
-                loc_additional_type, location_types_hashmap
-            )
+            additional_type_id = self.get_or_set_location_hashmap(loc_additional_type, location_types_hashmap)
 
             for identifier in identifiers:
                 if identifier.get("identifier"):
                     # Define location values
-                    crvs_location_vals = self.get_crvs_location_vals(
-                        identifier, loc, additional_type_id
-                    )
+                    crvs_location_vals = self.get_crvs_location_vals(identifier, loc, additional_type_id)
 
                     # Update or Create Location
                     self.update_or_create_location(identifier, crvs_location_vals)
@@ -197,9 +185,7 @@ class CRVSLocation(models.Model):
         """
         The function creates a URL by concatenating the URL of a data source with a location path.
         """
-        data_source_id = self.env["spp.data.source"].search(
-            [("name", "=", constants.DATA_SOURCE_NAME)], limit=1
-        )
+        data_source_id = self.env["spp.data.source"].search([("name", "=", constants.DATA_SOURCE_NAME)], limit=1)
 
         if data_source_id:
             location_path = ""
@@ -250,9 +236,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
     data_source_id = fields.Many2one(
         "spp.data.source",
         required=True,
-        default=lambda self: self.env["spp.data.source"].search(
-            [("name", "=", constants.DATA_SOURCE_NAME)], limit=1
-        ),
+        default=lambda self: self.env["spp.data.source"].search([("name", "=", constants.DATA_SOURCE_NAME)], limit=1),
         readonly=True,
     )
 
@@ -345,9 +329,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
 
         grant_type = self.env["ir.config_parameter"].sudo().get_param("crvs_grant_type")
         client_id = self.env["ir.config_parameter"].sudo().get_param("crvs_client_id")
-        client_secret = (
-            self.env["ir.config_parameter"].sudo().get_param("crvs_client_secret")
-        )
+        client_secret = self.env["ir.config_parameter"].sudo().get_param("crvs_client_secret")
 
         url_params = {
             "grant_type": grant_type,
@@ -377,9 +359,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
             result = response.json()
             return f'{result.get("token_type")} {result.get("access_token")}'
         else:
-            raise ValidationError(
-                _("{reason}: Unable to connect to API.").format(reason=response.reason)
-            )
+            raise ValidationError(_("{reason}: Unable to connect to API.").format(reason=response.reason))
 
     def get_headers_for_request(self):
         return {
@@ -398,9 +378,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
         any string value that uniquely identifies the message
         :return: a dictionary with the following key-value pairs:
         """
-        sender_id = (
-            self.env["ir.config_parameter"].sudo().get_param("web.base.url") or ""
-        )
+        sender_id = self.env["ir.config_parameter"].sudo().get_param("web.base.url") or ""
         receiver_id = "crvs"
         total_count = 10
         return {
@@ -482,11 +460,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
             query.append({"expression1": location_expression})
 
         if not query:
-            raise ValidationError(
-                _(
-                    "Add birthdate filter with one greater than and one less than or a location."
-                )
-            )
+            raise ValidationError(_("Add birthdate filter with one greater than and one less than or a location."))
 
         return query
 
@@ -572,17 +546,12 @@ class SPPFetchCRVSBeneficiary(models.Model):
             identifier_type = identifier.get("name", "")
             identifier_value = identifier.get("identifier", "")
             if identifier_type and identifier_value:
-
                 # Check if identifier type is already created. Create record if no existing identifier type
-                id_type = self.env["g2p.id.type"].search(
-                    [("name", "=", identifier_type)], limit=1
-                )
+                id_type = self.env["g2p.id.type"].search([("name", "=", identifier_type)], limit=1)
                 if not id_type:
                     id_type = self.env["g2p.id.type"].create({"name": identifier_type})
 
-                clean_identifiers.append(
-                    {"id_type": id_type, "value": identifier_value}
-                )
+                clean_identifiers.append({"id_type": id_type, "value": identifier_value})
 
                 if not partner_id:
                     reg_id = self.env["g2p.reg.id"].search(
@@ -663,18 +632,14 @@ class SPPFetchCRVSBeneficiary(models.Model):
 
         if is_mother and home_location_identifier:
             home_location_id = (
-                self.env["spp.crvs.location"]
-                .search([("identifier", "=", home_location_identifier)], limit=1)
-                .id
+                self.env["spp.crvs.location"].search([("identifier", "=", home_location_identifier)], limit=1).id
             )
             vals.update({"location_id": home_location_id})
         else:
             location = None
             location_id = None
             if birth_place_identifier:
-                location = self.env["spp.crvs.location"].search(
-                    [("identifier", "=", birth_place_identifier)], limit=1
-                )
+                location = self.env["spp.crvs.location"].search([("identifier", "=", birth_place_identifier)], limit=1)
                 location_id = location.id
 
             birth_place = ""
@@ -804,9 +769,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
                     "kind": [
                         (
                             4,
-                            self.env.ref(
-                                "g2p_registry_membership.group_membership_kind_head"
-                            ).id,
+                            self.env.ref("g2p_registry_membership.group_membership_kind_head").id,
                         )
                     ],
                 }
@@ -938,9 +901,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
             kind = "success"
             message = _("Successfully Imported CRVS Beneficiaries")
 
-            search_responses = (
-                response.json().get("message", {}).get("search_response", [])
-            )
+            search_responses = response.json().get("message", {}).get("search_response", [])
             if not search_responses:
                 kind = "warning"
                 message = _("No imported beneficiary")
@@ -962,18 +923,14 @@ class SPPFetchCRVSBeneficiary(models.Model):
                                 break
 
                         if relation_partner_id:
-                            self.create_and_process_group(
-                                partner_id, relation_partner_id
-                            )
+                            self.create_and_process_group(partner_id, relation_partner_id)
 
             self.done_imported = True
         else:
             kind = "danger"
             message = response.json().get("error", {}).get("message", "")
             if not message:
-                message = _("{reason}: Unable to connect to API.").format(
-                    reason=response.reason
-                )
+                message = _("{reason}: Unable to connect to API.").format(reason=response.reason)
 
         action = {
             "type": "ir.actions.client",

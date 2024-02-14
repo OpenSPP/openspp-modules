@@ -7,9 +7,7 @@ class TestEligibilityManager(TransactionCase):
     def test_01_selection_manager_ref_id(self):
         selection = self.env["g2p.eligibility.manager"]._selection_manager_ref_id()
 
-        self.assertIn(
-            ("g2p.program_membership.manager.tags", "Tag-based Eligibility"), selection
-        )
+        self.assertIn(("g2p.program_membership.manager.tags", "Tag-based Eligibility"), selection)
 
 
 class TestTagBasedEligibilityManager(TransactionCase):
@@ -91,17 +89,13 @@ class TestTagBasedEligibilityManager(TransactionCase):
         self.assertEqual(domain, expected_result)
 
     def test_05_enroll_eligible_registrants(self):
-        membership = self.tag_manager.enroll_eligible_registrants(
-            program_memberships=None
-        )
+        membership = self.tag_manager.enroll_eligible_registrants(program_memberships=None)
 
         self.assertFalse(membership.id)
         self.assertEqual(membership._name, "g2p.program_membership")
 
     def test_06_verify_cycle_eligibility(self):
-        membership = self.tag_manager.verify_cycle_eligibility(
-            cycle=None, membership=None
-        )
+        membership = self.tag_manager.verify_cycle_eligibility(cycle=None, membership=None)
 
         self.assertFalse(membership.id)
         self.assertEqual(membership._name, "g2p.cycle.membership")

@@ -5,9 +5,7 @@ class Farmer(models.Model):
     _inherit = "res.partner"
 
     experience_years = fields.Integer(string="Years of Experience")
-    formal_agricultural_training = fields.Boolean(
-        "Do you have formal training in agriculture?"
-    )
+    formal_agricultural_training = fields.Boolean("Do you have formal training in agriculture?")
     farmer_national_id = fields.Char(string="National ID Number")
     farmer_household_size = fields.Integer(string="Farmer Household Size")
     farmer_postal_address = fields.Char("Postal Address")

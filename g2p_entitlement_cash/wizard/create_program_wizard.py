@@ -73,7 +73,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
             mgr = man_obj.create(
                 {
                     "program_id": program_id,
-                    "manager_ref_id": "%s,%s" % (def_mgr_obj, str(def_mgr.id)),
+                    "manager_ref_id": f"{def_mgr_obj},{str(def_mgr.id)}",
                 }
             )
             res = {"entitlement_managers": [(4, mgr.id)]}
@@ -86,9 +86,7 @@ class G2PCreateNewProgramWizCashItem(models.TransientModel):
     _order = "sequence,id"
 
     sequence = fields.Integer(default=1000)
-    program_id = fields.Many2one(
-        "g2p.program.create.wizard", "New Program", required=True
-    )
+    program_id = fields.Many2one("g2p.program.create.wizard", "New Program", required=True)
 
     amount = fields.Monetary(
         currency_field="currency_id",

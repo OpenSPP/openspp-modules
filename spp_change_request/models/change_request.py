@@ -48,9 +48,7 @@ class ChangeRequestBase(models.Model):
     name = fields.Char("Request #", required=True, default="NEW")
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
     date_requested = fields.Datetime()  # Date the change request was submitted
-    request_type = fields.Selection(
-        selection="_selection_request_type_ref_id", required=True
-    )
+    request_type = fields.Selection(selection="_selection_request_type_ref_id", required=True)
     registrant_id = fields.Many2one(
         "res.partner",
         "Registrant",
@@ -72,23 +70,15 @@ class ChangeRequestBase(models.Model):
         readonly=True,
         store=False,
     )
-    applicant_phone = fields.Char(
-        "Applicant's Phone Number"
-    )  #: Applicant's phone number
+    applicant_phone = fields.Char("Applicant's Phone Number")  #: Applicant's phone number
 
-    request_type_ref_id = fields.Reference(
-        string="Change Request Template", selection="_selection_request_type_ref_id"
-    )
+    request_type_ref_id = fields.Reference(string="Change Request Template", selection="_selection_request_type_ref_id")
     validator_ids = fields.One2many(
         "spp.change.request.validators", "request_id", "Validation Records"
     )  #: List of validators that validated the change request
     assign_to_id = fields.Many2one("res.users", "Assigned to")  #: current assigned user
-    last_validated_by_id = fields.Many2one(
-        "res.users", "Validated by"
-    )  #: last user that validated the change request
-    date_validated = (
-        fields.Datetime()
-    )  #: last date the change request has been validated
+    last_validated_by_id = fields.Many2one("res.users", "Validated by")  #: last user that validated the change request
+    date_validated = fields.Datetime()  #: last date the change request has been validated
 
     # TODO: Record the next validation sequence and area center
     next_validation_sequence_id = fields.Many2one(
@@ -100,17 +90,11 @@ class ChangeRequestBase(models.Model):
         "spp.area", string="Next Area"
     )  #: When the change request change the area, we store the destination in case a validation based on it is required
 
-    applied_by_id = fields.Many2one(
-        "res.users", "Applied by"
-    )  #: user that applied the change request
+    applied_by_id = fields.Many2one("res.users", "Applied by")  #: user that applied the change request
     date_applied = fields.Datetime()  #: date the change request was applied
-    rejected_by_id = fields.Many2one(
-        "res.users", "Rejected by"
-    )  #: user that rejected the change request
+    rejected_by_id = fields.Many2one("res.users", "Rejected by")  #: user that rejected the change request
     date_rejected = fields.Datetime()  #: date the change request was rejected
-    rejected_remarks = fields.Text(
-        "Rejection Remarks"
-    )  #: remarks of why the change request was rejected
+    rejected_remarks = fields.Text("Rejection Remarks")  #: remarks of why the change request was rejected
 
     last_activity_id = fields.Many2one("mail.activity")
 
@@ -130,17 +114,11 @@ class ChangeRequestBase(models.Model):
         default="draft",
     )  #: status of the change request
 
-    cancelled_by_id = fields.Many2one(
-        "res.users", "Cancelled by"
-    )  #: user that cancelled the change request
+    cancelled_by_id = fields.Many2one("res.users", "Cancelled by")  #: user that cancelled the change request
     date_cancelled = fields.Datetime()  #: date the change request was cancelled
 
-    reset_to_draft_by_id = fields.Many2one(
-        "res.users", "Cancelled by"
-    )  #: user that reset the change request to draft
-    date_reset_to_draft = (
-        fields.Datetime()
-    )  #: date the change request was reset to draft
+    reset_to_draft_by_id = fields.Many2one("res.users", "Cancelled by")  #: user that reset the change request to draft
+    date_reset_to_draft = fields.Datetime()  #: date the change request was reset to draft
 
     validation_group_id = fields.Many2one(
         "res.groups",
@@ -149,9 +127,7 @@ class ChangeRequestBase(models.Model):
         store=True,
     )
 
-    current_user_assigned = fields.Boolean(
-        compute="_compute_current_user_assigned", default=False
-    )
+    current_user_assigned = fields.Boolean(compute="_compute_current_user_assigned", default=False)
 
     @api.model
     def create(self, vals):
@@ -174,13 +150,11 @@ class ChangeRequestBase(models.Model):
         if "assign_to_id" not in vals or vals["assign_to_id"] is None:
             vals["assign_to_id"] = self.env.user.id
         vals["name"] = self.env["ir.sequence"].next_by_code("spp.change.request.num")
-        res = super(ChangeRequestBase, self).create(vals)
+        res = super().create(vals)
         # Create pending validation activity
         activity_type = "spp_change_request.pending_validation_activity"
         summary = _("For Pending Validation")
-        note = _(
-            "A new change request was submitted. The next step will set this request to 'Pending Validation'."
-        )
+        note = _("A new change request was submitted. The next step will set this request to 'Pending Validation'.")
         res._generate_activity(activity_type, summary, note)
         return res
 
@@ -205,11 +179,9 @@ class ChangeRequestBase(models.Model):
                 # Remove the associated CR type record
                 if rec.request_type_ref_id:
                     rec.request_type_ref_id.unlink()
-                return super(ChangeRequestBase, self).unlink()
+                return super().unlink()
             else:
-                raise UserError(
-                    _("Only draft change requests can be deleted by its creator.")
-                )
+                raise UserError(_("Only draft change requests can be deleted by its creator."))
 
     @api.model
     def _selection_request_type_ref_id(self):
@@ -297,9 +269,7 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             country_code = (
                 rec.registrant_id.country_id.code
-                if rec.registrant_id
-                and rec.registrant_id.country_id
-                and rec.registrant_id.country_id.code
+                if rec.registrant_id and rec.registrant_id.country_id and rec.registrant_id.country_id.code
                 else None
             )
             if country_code is None:
@@ -338,9 +308,7 @@ class ChangeRequestBase(models.Model):
                 _logger.error(e)
             if details:
                 if self.registrant_id:
-                    group_membership_ids = (
-                        self.registrant_id.group_membership_ids.mapped("individual.id")
-                    )
+                    group_membership_ids = self.registrant_id.group_membership_ids.mapped("individual.id")
                     domain = [
                         ("partner_id", "in", group_membership_ids),
                         ("value", "=", details.get("document_number", "").strip()),
@@ -353,11 +321,7 @@ class ChangeRequestBase(models.Model):
                         }
                         self.update(vals)
                     else:
-                        raise UserError(
-                            _(
-                                "There are no registrant found with the ID number scanned."
-                            )
-                        )
+                        raise UserError(_("There are no registrant found with the ID number scanned."))
                 else:
                     raise UserError(_("A group must be selected."))
             else:
@@ -398,15 +362,9 @@ class ChangeRequestBase(models.Model):
                     }
                     self.update(vals)
                 else:
-                    raise UserError(
-                        _(
-                            "There are no group found with the ID number from the QR Code scanned."
-                        )
-                    )
+                    raise UserError(_("There are no group found with the ID number from the QR Code scanned."))
             else:
-                raise UserError(
-                    _("There are no data captured from the QR Code scanner.")
-                )
+                raise UserError(_("There are no data captured from the QR Code scanner."))
 
     def open_change_request_form(self, target="current", mode="readonly"):
         """
@@ -453,9 +411,7 @@ class ChangeRequestBase(models.Model):
             if res_id:
                 form_id = self.env[res_model].get_request_type_view_id()
                 if self._context.get("show_validation_form"):
-                    form = (
-                        self.env.ref(self.request_type_ref_id.VALIDATION_FORM) or None
-                    )
+                    form = self.env.ref(self.request_type_ref_id.VALIDATION_FORM) or None
                     if form:
                         form_id = form.id
                 action = self.env[res_model].get_formview_action()
@@ -572,9 +528,7 @@ class ChangeRequestBase(models.Model):
         :raise UserError: Exception raised when something is not valid.
         """
         for rec in self:
-            is_admin = self.env.user.has_group(
-                "spp_change_request.group_spp_change_request_administrator"
-            )
+            is_admin = self.env.user.has_group("spp_change_request.group_spp_change_request_administrator")
             assign_self = False
             if rec.assign_to_id:
                 if rec.assign_to_id.id != self.env.user.id:
@@ -583,15 +537,11 @@ class ChangeRequestBase(models.Model):
                     elif is_admin:
                         assign_self = False
                     else:
-                        raise ValidationError(
-                            _("You're not allowed to re-assign this CR.")
-                        )
+                        raise ValidationError(_("You're not allowed to re-assign this CR."))
             else:
                 assign_self = True
             if not assign_self:
-                form_id = self.env.ref(
-                    "spp_change_request.change_request_user_assign_wizard"
-                ).id
+                form_id = self.env.ref("spp_change_request.change_request_user_assign_wizard").id
                 action = {
                     "name": _("Assign Change Request to User"),
                     "type": "ir.actions.act_window",
@@ -636,11 +586,7 @@ class ChangeRequestBase(models.Model):
                         user_ok = True
                         break
             else:
-                raise UserError(
-                    _(
-                        "This change request does not have any validation sequence defined."
-                    )
-                )
+                raise UserError(_("This change request does not have any validation sequence defined."))
         if user_ok:
             self.update(
                 {
@@ -649,10 +595,7 @@ class ChangeRequestBase(models.Model):
             )
         else:
             raise UserError(
-                _(
-                    "Only users of groups defined in the validation sequence "
-                    "can be assigned to this change request."
-                )
+                _("Only users of groups defined in the validation sequence " "can be assigned to this change request.")
             )
 
     def open_request_detail(self):
@@ -728,10 +671,7 @@ class ChangeRequestBase(models.Model):
                 # Set the request_type_ref_id
                 res_model = rec.request_type
                 # Set the dms directory
-                _logger.info(
-                    "Change Request: DMS Directory Creation (%s)"
-                    % len(self.dms_directory_ids)
-                )
+                _logger.info("Change Request: DMS Directory Creation (%s)" % len(self.dms_directory_ids))
                 storage = self.env.ref(self.env[res_model].DMS_STORAGE)
                 dmsval = {
                     "storage_id": storage.id,
@@ -784,11 +724,7 @@ class ChangeRequestBase(models.Model):
                 # Open Request Form
                 return rec.open_change_request_form(target="current", mode="edit")
             else:
-                raise UserError(
-                    _(
-                        "The change request to be created must be in draft or pending validation state."
-                    )
-                )
+                raise UserError(_("The change request to be created must be in draft or pending validation state."))
 
     def _get_id_doc_vals(self, directory_id, id_fld, file_name_prefix: str = ""):
         try:
@@ -823,9 +759,7 @@ class ChangeRequestBase(models.Model):
             if rec.request_type_ref_id:
                 rec.request_type_ref_id._on_submit(rec)
             else:
-                raise UserError(
-                    _("The change request type must be properly filled-up.")
-                )
+                raise UserError(_("The change request type must be properly filled-up."))
 
     def action_validate(self):
         """
@@ -916,11 +850,7 @@ class ChangeRequestBase(models.Model):
             # Mark previous activity as 'done'
             request.last_activity_id.action_done()
         else:
-            raise UserError(
-                _(
-                    "The request to be cancelled must be in draft, pending, or rejected validation state."
-                )
-            )
+            raise UserError(_("The request to be cancelled must be in draft, pending, or rejected validation state."))
 
     def action_reset_to_draft(self):
         """
@@ -983,9 +913,7 @@ class ChangeRequestBase(models.Model):
             if self.assign_to_id.id == self.env.user.id:
                 return True
             else:
-                raise UserError(
-                    _("You are not allowed to %s this change request", process)
-                )
+                raise UserError(_("You are not allowed to %s this change request", process))
         else:
             raise UserError(_("There are no user assigned to this change request."))
 
@@ -1005,10 +933,8 @@ class ChangeRequestBase(models.Model):
 
                 if rec.request_type_ref_id and rec.request_type_ref_id.validation_ids:
                     if validation_stage_ids:
-                        validation_stages = (
-                            rec.request_type_ref_id.validation_ids.filtered(
-                                lambda a: a.stage_id.id not in validation_stage_ids
-                            )
+                        validation_stages = rec.request_type_ref_id.validation_ids.filtered(
+                            lambda a: a.stage_id.id not in validation_stage_ids
                         )
                     else:
                         validation_stages = rec.request_type_ref_id.validation_ids
@@ -1052,19 +978,13 @@ class ChangeRequestBase(models.Model):
                     message = "FINAL"
                 stage = validation_stages[0]
                 # Check if user is allowed to validate request
-                if (
-                    self.state not in ["draft", "rejected"]
-                    and validator_id not in stage.validation_group_id.users.ids
-                ):
+                if self.state not in ["draft", "rejected"] and validator_id not in stage.validation_group_id.users.ids:
                     message = _(
-                        "You are not allowed to validate this request! Stage: {}. "
-                        "Allowed Validator Group: {}"
+                        "You are not allowed to validate this request! Stage: {}. " "Allowed Validator Group: {}"
                     ).format(stage.stage_id.name, stage.validation_group_id.name)
                     stage = None
             else:
-                message = _(
-                    "Error in validation stages. No available stage to assign to this validation."
-                )
+                message = _("Error in validation stages. No available stage to assign to this validation.")
         else:
             message = _("There are no validators defined for this request.")
         return stage, message, validator_id
@@ -1110,9 +1030,7 @@ class ChangeRequestValidators(models.Model):
     _rec_name = "validator_id"
 
     request_id = fields.Many2one("spp.change.request", "Change Request")
-    stage_id = fields.Many2one(
-        "spp.change.request.validation.stage", "Validation Stage", required=True
-    )
+    stage_id = fields.Many2one("spp.change.request.validation.stage", "Validation Stage", required=True)
     validator_id = fields.Many2one("res.users", "Validated by", required=True)
     date_validated = fields.Datetime()
 
@@ -1124,15 +1042,9 @@ class ChangeRequestValidationSequence(models.Model):
     _order = "sequence,id"
 
     sequence = fields.Integer(default=10)
-    request_type = fields.Selection(
-        selection="_selection_request_type_ref_id", required=True
-    )
-    stage_id = fields.Many2one(
-        "spp.change.request.validation.stage", "Validation Stage", required=True
-    )
-    validation_group_id = fields.Many2one(
-        "res.groups", string="Change Request Validation Group"
-    )
+    request_type = fields.Selection(selection="_selection_request_type_ref_id", required=True)
+    stage_id = fields.Many2one("spp.change.request.validation.stage", "Validation Stage", required=True)
+    validation_group_id = fields.Many2one("res.groups", string="Change Request Validation Group")
     validation_group_state = fields.Selection(
         [
             ("source", "Source Area"),

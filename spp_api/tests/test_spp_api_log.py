@@ -15,7 +15,5 @@ class TestSppApiLog(TransactionCase):
         )
 
     def test_01_compute_name(self):
-        format_name = (
-            f"{self.api_log.http_type} {self.api_log.method} - {self.api_log.model}"
-        )
+        format_name = f"{self.api_log.http_type} {self.api_log.method} - {self.api_log.model}"
         self.assertEqual(self.api_log.name, format_name)

@@ -59,9 +59,7 @@ class G2PCashEntitlementManager(models.Model):
 
     # Group able to validate the payment
     # Todo: Create a record rule for payment_validation_group
-    entitlement_validation_group_id = fields.Many2one(
-        "res.groups", string="Entitlement Validation Group"
-    )
+    entitlement_validation_group_id = fields.Many2one("res.groups", string="Entitlement Validation Group")
 
     def prepare_entitlements(self, cycle, beneficiaries):
         """Prepare Cash Entitlements.
@@ -73,9 +71,7 @@ class G2PCashEntitlementManager(models.Model):
         :return:
         """
         if not self.entitlement_item_ids:
-            raise UserError(
-                _("There are no items entered for this entitlement manager.")
-            )
+            raise UserError(_("There are no items entered for this entitlement manager."))
 
         all_beneficiaries_ids = beneficiaries.mapped("partner_id.id")
 
@@ -108,9 +104,7 @@ class G2PCashEntitlementManager(models.Model):
             entitlement_end_validity = cycle.end_date
             entitlement_currency = rec.currency_id.id
 
-            beneficiaries_with_entitlements_to_create = self.env["res.partner"].browse(
-                entitlements_to_create
-            )
+            beneficiaries_with_entitlements_to_create = self.env["res.partner"].browse(entitlements_to_create)
 
             for beneficiary_id in beneficiaries_with_entitlements_to_create:
                 if rec.multiplier_field:
@@ -126,12 +120,7 @@ class G2PCashEntitlementManager(models.Model):
 
                 # Compute the sum of cash entitlements
                 if beneficiary_id.id in new_entitlements_to_create:
-                    amount = (
-                        amount
-                        + new_entitlements_to_create[beneficiary_id.id][
-                            "initial_amount"
-                        ]
-                    )
+                    amount = amount + new_entitlements_to_create[beneficiary_id.id]["initial_amount"]
                 # Check if amount > max_amount; ignore if max_amount is set to 0
                 if self.max_amount > 0.0:
                     if amount > self.max_amount:
@@ -155,9 +144,7 @@ class G2PCashEntitlementManager(models.Model):
         # Create entitlement records
         for ent in new_entitlements_to_create:
             initial_amount = new_entitlements_to_create[ent]["initial_amount"]
-            new_entitlements_to_create[ent]["initial_amount"] = self._check_subsidy(
-                initial_amount
-            )
+            new_entitlements_to_create[ent]["initial_amount"] = self._check_subsidy(initial_amount)
             # Create non-zero entitlements only
             if new_entitlements_to_create[ent]["initial_amount"] > 0.0:
                 self.env["g2p.entitlement"].create(new_entitlements_to_create[ent])
@@ -169,9 +156,7 @@ class G2PCashEntitlementManager(models.Model):
         """
         retval = None
         if self.id_type:
-            id_docs = beneficiary_id.reg_ids.filtered(
-                lambda a: a.id_type.id == self.id_type.id
-            )
+            id_docs = beneficiary_id.reg_ids.filtered(lambda a: a.id_type.id == self.id_type.id)
             if id_docs:
                 id_number = id_docs[0].value
                 retval = {
@@ -179,9 +164,7 @@ class G2PCashEntitlementManager(models.Model):
                 }
         return retval
 
-    def _get_all_beneficiaries(
-        self, all_beneficiaries_ids, condition, evaluate_one_item
-    ):
+    def _get_all_beneficiaries(self, all_beneficiaries_ids, condition, evaluate_one_item):
         """Get All Beneficiaries.
         Cash Entitlement Manager :meth:`_get_all_beneficiaries`.
         Called by :meth:`prepare_entitlements` to get all beneficiaries to be prepared entitlements.
@@ -304,9 +287,7 @@ class G2PCashEntitlementManager(models.Model):
         :return:
         """
         _logger.debug("Validate entitlements asynchronously")
-        cycle.message_post(
-            body=_("Validate %s entitlements started.", entitlements_count)
-        )
+        cycle.message_post(body=_("Validate %s entitlements started.", entitlements_count))
         cycle.write(
             {
                 "locked": True,
@@ -317,17 +298,9 @@ class G2PCashEntitlementManager(models.Model):
         jobs = []
         for i in range(0, entitlements_count, self.MAX_ROW_JOB_QUEUE):
             # Needs to override
-            jobs.append(
-                self.delayable()._validate_entitlements(
-                    cycle, entitlements[i : i + self.MAX_ROW_JOB_QUEUE]
-                )
-            )
+            jobs.append(self.delayable()._validate_entitlements(cycle, entitlements[i : i + self.MAX_ROW_JOB_QUEUE]))
         main_job = group(*jobs)
-        main_job.on_done(
-            self.delayable().mark_job_as_done(
-                cycle, _("Entitlements Validated and Approved.")
-            )
-        )
+        main_job.on_done(self.delayable().mark_job_as_done(cycle, _("Entitlements Validated and Approved.")))
         main_job.delay()
 
     def _validate_entitlements(self, cycle, entitlements):
@@ -350,9 +323,7 @@ class G2PCashEntitlementManager(models.Model):
 
     def mark_job_as_done(self, cycle, msg):
         if cycle.validate_async_err:
-            msg = _(
-                "Entitlements are not approved due to some issues. Kindly address the issue."
-            )
+            msg = _("Entitlements are not approved due to some issues. Kindly address the issue.")
         super().mark_job_as_done(cycle, msg)
 
         return
@@ -436,9 +407,7 @@ class G2PCashEntitlementManager(models.Model):
                     rec.update(
                         {
                             "disbursement_id": new_payment.id,
-                            "service_fee_disbursement_id": new_service_fee
-                            and new_service_fee.id
-                            or None,
+                            "service_fee_disbursement_id": new_service_fee and new_service_fee.id or None,
                             "state": "approved",
                             "date_approved": fields.Date.today(),
                         }
@@ -458,9 +427,7 @@ class G2PCashEntitlementManager(models.Model):
                 state_err += 1
                 if sw == 0:
                     sw = 1
-                    message = _(
-                        "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
-                    )
+                    message = _("Entitlement State Error! Entitlements not in 'pending validation' state:\n")
                 message += _("Program: %(prg)s, Beneficiary: %(partner)s.\n") % {
                     "prg": rec.cycle_id.program_id.name,
                     "partner": rec.partner_id.name,
@@ -506,9 +473,7 @@ class G2PCashEntitlementItem(models.Model):
     _order = "sequence,id"
 
     sequence = fields.Integer(default=1000)
-    entitlement_id = fields.Many2one(
-        "g2p.program.entitlement.manager.cash", "Cash Entitlement", required=True
-    )
+    entitlement_id = fields.Many2one("g2p.program.entitlement.manager.cash", "Cash Entitlement", required=True)
 
     amount = fields.Monetary(
         currency_field="currency_id",

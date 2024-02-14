@@ -13,9 +13,7 @@ with file_open("spp_oauth/tools/public_key.pub") as publicfile:
 
 
 def calculate_signature(header, payload):
-    return jwt.encode(
-        headers=header, payload=payload, key=privkey, algorithm=JWT_ALGORITHM
-    )
+    return jwt.encode(headers=header, payload=payload, key=privkey, algorithm=JWT_ALGORITHM)
 
 
 def verify_and_decode_signature(access_token):

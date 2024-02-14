@@ -110,12 +110,8 @@ class TestCreateProgramWiz(TransactionCase):
         )
         self.assertEqual(type(res), dict, "Correct return value")
         self.assertIn("entitlement_managers", res.keys(), "Correct return value")
-        self.assertEqual(
-            type(res["entitlement_managers"]), list, "Correct return value"
-        )
+        self.assertEqual(type(res["entitlement_managers"]), list, "Correct return value")
         self.assertEqual(len(res["entitlement_managers"]), 1, "Correct return value")
-        self.assertEqual(
-            type(res["entitlement_managers"][0]), tuple, "Correct return value"
-        )
+        self.assertEqual(type(res["entitlement_managers"][0]), tuple, "Correct return value")
         self.assertEqual(len(res["entitlement_managers"][0]), 2, "Correct return value")
         self.assertEqual(res["entitlement_managers"][0][0], 4, "Correct return value")

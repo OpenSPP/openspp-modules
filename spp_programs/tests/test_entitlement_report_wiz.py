@@ -24,17 +24,11 @@ class TestEntitlementReportWiz(Common):
         self.assertEqual(type(res), dict, "Action should be return as a dictionary!")
         for key in ["res_model", "domain", "type", "flags"]:
             self.assertIn(key, res.keys(), f"> `{key}` should be in return action!")
-        self.assertEqual(
-            res["res_model"], "g2p.entitlement.inkind", "Should return correct model!"
-        )
+        self.assertEqual(res["res_model"], "g2p.entitlement.inkind", "Should return correct model!")
         self.assertEqual(
             res["domain"],
             [("program_id", "=", self.program.id), ("cycle_id", "=", self.cycle.id)],
             "Should return correct domain!",
         )
-        self.assertEqual(
-            res["type"], "ir.actions.act_window", "Should return action window!"
-        )
-        self.assertEqual(
-            res["flags"], {"mode": "readonly"}, "Should be readonly action!"
-        )
+        self.assertEqual(res["type"], "ir.actions.act_window", "Should return action window!")
+        self.assertEqual(res["flags"], {"mode": "readonly"}, "Should be readonly action!")

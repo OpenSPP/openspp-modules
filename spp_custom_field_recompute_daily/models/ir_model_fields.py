@@ -17,22 +17,21 @@ class IrModelFields(models.Model):
     )
 
     def _reflect_field_params(self, field, model_id):
-        vals = super(IrModelFields, self)._reflect_field_params(field, model_id)
+        vals = super()._reflect_field_params(field, model_id)
         compute = getattr(field, "compute", False) or getattr(field, "related", False)
         store = getattr(field, "store", False)
         recompute_daily = getattr(field, "recompute_daily", False)
         if recompute_daily and not all([compute, store]):
             _logger.warning(
-                "Non-compute-stored field: (%s, %s) on model '%s' "
+                f"Non-compute-stored field: ({field.name}, {field.string}) on model '{field.model_name}' "
                 "is not allowed to be recomputed daily!"
-                % (field.name, field.string, field.model_name)
             )
             recompute_daily = False
         vals["recompute_daily"] = recompute_daily
         return vals
 
     def _instanciate_attrs(self, field_data):
-        attrs = super(IrModelFields, self)._instanciate_attrs(field_data)
+        attrs = super()._instanciate_attrs(field_data)
         if attrs and field_data.get("recompute_daily"):
             attrs["recompute_daily"] = field_data["recompute_daily"]
         return attrs
@@ -40,9 +39,7 @@ class IrModelFields(models.Model):
     @api.model
     def _daily_recompute_indicators(self):
         maximum_daily_recompute_count = int(
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("spp.maximum_daily_recompute_count", "10_000")
+            self.env["ir.config_parameter"].sudo().get_param("spp.maximum_daily_recompute_count", "10_000")
         )
         recompute_daily_fields = self.search([("recompute_daily", "=", True)])
         for field in recompute_daily_fields:
@@ -53,15 +50,11 @@ class IrModelFields(models.Model):
                 field._recompute_indicator_on_records(records)
                 continue
             for i in range(0, total_records_count, maximum_daily_recompute_count):
-                field.with_delay()._recompute_indicator_on_records(
-                    records[i : (i + maximum_daily_recompute_count)]
-                )
+                field.with_delay()._recompute_indicator_on_records(records[i : (i + maximum_daily_recompute_count)])
 
     def _recompute_indicator_on_records(self, records_to_compute):
         self.ensure_one()
-        return self.env.add_to_compute(
-            records_to_compute._fields[self.name], records_to_compute
-        )
+        return self.env.add_to_compute(records_to_compute._fields[self.name], records_to_compute)
 
     @api.model
     def create_daily_recompute_cron(self):
@@ -70,9 +63,7 @@ class IrModelFields(models.Model):
         tz = self._context.get("tz") or self.env.user.tz or "UTC"
         local = timezone(tz)
         local_1am = local.localize(
-            fields.Datetime.add(fields.Datetime.now(), days=1).replace(
-                hour=1, minute=0, second=0
-            )
+            fields.Datetime.add(fields.Datetime.now(), days=1).replace(hour=1, minute=0, second=0)
         )
         utc_for_local_1am = local_1am.astimezone(timezone("utc"))
         self.env["ir.cron"].sudo().create(

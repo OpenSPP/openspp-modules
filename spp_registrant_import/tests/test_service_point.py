@@ -10,9 +10,7 @@ EXCLUDED_CHARACTERS = ["0", "O", "1", "I"]
 class TestServicePoint(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.service_point_1, self.service_point_2 = self.env[
-            "spp.service.point"
-        ].create(
+        self.service_point_1, self.service_point_2 = self.env["spp.service.point"].create(
             [
                 {"name": "Service Point 1"},
                 {"name": "Service Point 2"},
@@ -27,8 +25,7 @@ class TestServicePoint(TransactionCase):
             self.assertRegex(
                 area.spp_id,
                 r"^SVP_[a-zA-Z0-9]{8}$",
-                "Area should have unique id start with "
-                "`SVP_` and following by 8 characters.",
+                "Area should have unique id start with " "`SVP_` and following by 8 characters.",
             )
             for char in EXCLUDED_CHARACTERS:
                 self.assertNotIn(
@@ -48,13 +45,9 @@ class TestServicePoint(TransactionCase):
 
     @mute_logger("py.warnings")
     def test_04_check_spp_id(self):
-        with self.assertRaisesRegex(
-            ValidationError, "^.*not following correct format.{1}$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*not following correct format.{1}$"):
             # 7 characters spp_id
             self.service_point_1.write({"spp_id": "SVP_AaAaAa2"})
-        with self.assertRaisesRegex(
-            ValidationError, "^.*not following correct format.{1}$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*not following correct format.{1}$"):
             # '1' in spp_id
             self.service_point_2.write({"spp_id": "SVP_AaAaAa21"})

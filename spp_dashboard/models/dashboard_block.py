@@ -25,11 +25,7 @@ class DashBoardBlock(models.Model):
     def get_dashboard_vals(self, action_id, active_id):
         """Dashboard block values"""
         block_id = []
-        dashboard_block = (
-            self.env["dashboard.block"]
-            .sudo()
-            .search([("client_action", "=", int(action_id))])
-        )
+        dashboard_block = self.env["dashboard.block"].sudo().search([("client_action", "=", int(action_id))])
         for rec in dashboard_block:
             color = rec.tile_color if rec.tile_color else "#1f6abb;"
             icon_color = rec.fa_color if rec.fa_color else "#1f6abb;"
@@ -68,40 +64,23 @@ class DashBoardBlock(models.Model):
                     vals.update({"x_axis": x_axis, "y_axis": y_axis})
                 else:
                     if not rec.use_func:
-                        records = self.get_records(
-                            rec.model_name, domain, rec.operation, rec.measured_field
-                        )
+                        records = self.get_records(rec.model_name, domain, rec.operation, rec.measured_field)
                         if records:
-                            val = self.format_totals(
-                                records[0].get("value"), rec.result_type or "int"
-                            )
+                            val = self.format_totals(records[0].get("value"), rec.result_type or "int")
                             records[0]["value"] = val
                             vals.update(records[0])
                     else:  # Get value from function
-                        model_func_args = (
-                            "self.env['"
-                            + rec.model_name
-                            + "']."
-                            + rec.func
-                            + "("
-                            + rec.args
-                            + ")"
-                        )
+                        model_func_args = "self.env['" + rec.model_name + "']." + rec.func + "(" + rec.args + ")"
                         try:
-                            records = safe_eval.safe_eval(
-                                model_func_args, {"self": self}
-                            )
+                            records = safe_eval.safe_eval(model_func_args, {"self": self})
                         except Exception as ex:
                             _logger.info(
-                                "DEBUG! Error executing the function: %s of model: %s"
-                                % (model_func_args, rec.model_name)
+                                f"DEBUG! Error executing the function: {model_func_args} of model: {rec.model_name}"
                             )
                             _logger.info("DEBUG! %s " % ex)
                             records = None
                         if records:
-                            val = self.format_totals(
-                                records.get("value"), rec.result_type or "int"
-                            )
+                            val = self.format_totals(records.get("value"), rec.result_type or "int")
                             records["value"] = val
                             vals.update(records)
 
@@ -119,7 +98,7 @@ class DashBoardBlock(models.Model):
                 magnitude += 1
                 total /= 1000.0
             # add more suffixes if you need them
-            val = "%.2f%s" % (
+            val = "{:.2f}{}".format(
                 total,
                 ["", "K", "M", "G", "T", "P"][magnitude],
             )

@@ -30,9 +30,7 @@ class SppAuditRule(models.Model):
         readonly=True,
     )
 
-    action_id = fields.Many2one(
-        "ir.actions.act_window", "Add in the 'More' menu", readonly=True
-    )
+    action_id = fields.Many2one("ir.actions.act_window", "Add in the 'More' menu", readonly=True)
 
     _sql_constraints = [
         (
@@ -54,12 +52,8 @@ class SppAuditRule(models.Model):
     @api.constrains("model_id")
     def _check_model(self):
         for rec in self:
-            if self.env[self._name].search_count(
-                [("model_id", "=", rec.model_id.id), ("id", "!=", rec.id)]
-            ):
-                raise ValidationError(
-                    _("A rule is already existed for the selected model.")
-                )
+            if self.env[self._name].search_count([("model_id", "=", rec.model_id.id), ("id", "!=", rec.id)]):
+                raise ValidationError(_("A rule is already existed for the selected model."))
 
     def _process_action_id(self):
         for rec in self:
@@ -90,9 +84,7 @@ class SppAuditRule(models.Model):
                             "res_model": "spp.audit.log",
                             "binding_model_id": rec.model_id.id,
                             "binding_view_types": "form",
-                            "domain": "[('model_id','=', %s), "
-                            "('res_id', '=', id), ('method', 'in', %s)]"
-                            % (
+                            "domain": "[('model_id','=', {}), " "('res_id', '=', id), ('method', 'in', {})]".format(
                                 rec.model_id.id,
                                 [method.replace("_", "") for method in self._methods],
                             ),
@@ -223,9 +215,7 @@ class SppAuditRule(models.Model):
                 if vals:
                     data.setdefault(res_id, {"old": {}, "new": {}})[age] = vals
         for res_id in list(data.keys()):
-            all_fields = set(data[res_id]["old"].keys()) | set(
-                data[res_id]["new"].keys()
-            )
+            all_fields = set(data[res_id]["old"].keys()) | set(data[res_id]["new"].keys())
             for field in all_fields:
                 if data[res_id]["old"].get(field) == data[res_id]["new"].get(field):
                     del data[res_id]["old"][field]

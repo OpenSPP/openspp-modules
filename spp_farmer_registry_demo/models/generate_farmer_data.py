@@ -195,9 +195,7 @@ class SPPGenerateFarmerData(models.Model):
         num_groups = min(res.num_groups, 1000)
 
         for i in range(0, num_groups):
-            group_id = res._generate_group_data(
-                i, fake, locales, sex_choice_range, kind_farm_id
-            )
+            group_id = res._generate_group_data(i, fake, locales, sex_choice_range, kind_farm_id)
 
             land_record_id = res._generate_land_record_record(group_id)
             group_id.farm_land_rec_id = land_record_id.id
@@ -252,7 +250,7 @@ class SPPGenerateFarmerData(models.Model):
             if res.state == "draft":
                 res.update({"state": "generate"})
 
-        msg = "Task Queue called task: model [%s] and method [%s]." % (
+        msg = "Task Queue called task: model [{}] and method [{}].".format(
             self._name,
             "_generate_sample_data",
         )
@@ -263,21 +261,11 @@ class SPPGenerateFarmerData(models.Model):
         locale = random.choice(locales)
         sex = random.choice(sex_choice_range)
         last_name = random.choice(NAMES)
-        first_name = (
-            fake[locale].first_name_male()
-            if sex == "Male"
-            else fake[locale].first_name_female()
-        )
-        addl_name = (
-            fake[locale].first_name_male()
-            if sex == "Male"
-            else fake[locale].first_name_female()
-        )
+        first_name = fake[locale].first_name_male() if sex == "Male" else fake[locale].first_name_female()
+        addl_name = fake[locale].first_name_male() if sex == "Male" else fake[locale].first_name_female()
 
         group_name = f"{last_name} Farm"
-        id_group = (
-            "demo." + hashlib.md5(f"{group_name} {index}".encode("UTF-8")).hexdigest()
-        )
+        id_group = "demo." + hashlib.md5(f"{group_name} {index}".encode()).hexdigest()
 
         highest_education_level = [
             "none",
@@ -302,10 +290,7 @@ class SPPGenerateFarmerData(models.Model):
         days_between_dates = time_between_dates.days
         random_number_of_days = random.randrange(days_between_dates)
         farmer_birthdate = start_date + timedelta(days=random_number_of_days)
-        farmer_email = (
-            "".join(random.choices("abcdefghijklmnopqrstuvwxyz0123456789", k=5))
-            + "@example.com"
-        )
+        farmer_email = "".join(random.choices("abcdefghijklmnopqrstuvwxyz0123456789", k=5)) + "@example.com"
         farmer_household_size = str(random.randint(1, 10))
         farmer_postal_address = "P.O Box " + "".join(random.choices("0123456789", k=4))
 
@@ -317,9 +302,7 @@ class SPPGenerateFarmerData(models.Model):
             "is_group": True,
             "farmer_family_name": last_name,
             "farmer_given_name": first_name,
-            "farmer_national_id": "".join(
-                random.choices(string.ascii_uppercase + string.digits, k=10)
-            ),
+            "farmer_national_id": "".join(random.choices(string.ascii_uppercase + string.digits, k=10)),
             "farmer_sex": sex,
             "farmer_addtnl_name": addl_name,
             "farmer_marital_status": random.choice(marital_status),
@@ -347,9 +330,7 @@ class SPPGenerateFarmerData(models.Model):
             utm_points.append((geo_point.x, geo_point.y))
 
         land_geo_polygon = "MULTIPOLYGON((({})))".format(
-            ", ".join(
-                ["{} {}".format(utm_lat, utm_lon) for utm_lat, utm_lon in utm_points]
-            )
+            ", ".join([f"{utm_lat} {utm_lon}" for utm_lat, utm_lon in utm_points])
         )
 
         return self.env["spp.land.record"].create(
@@ -380,12 +361,8 @@ class SPPGenerateFarmerData(models.Model):
             "Plantation",
             "Greenhouse",
         ]
-        cultivation_chemical_interventions = (
-            self.env["spp.chemical"].search([]).mapped("id")
-        )
-        cultivation_fertilizer_interventions = (
-            self.env["spp.fertilizer"].search([]).mapped("id")
-        )
+        cultivation_chemical_interventions = self.env["spp.chemical"].search([]).mapped("id")
+        cultivation_fertilizer_interventions = self.env["spp.fertilizer"].search([]).mapped("id")
         livestock_production_systems = [
             "ranching",
             "communal grazing",
@@ -410,39 +387,25 @@ class SPPGenerateFarmerData(models.Model):
         ]
 
         # Produce random quantity of chemical/fertilizer/feed items to be created
-        chemical_interventions_len = random.randint(
-            1, len(cultivation_chemical_interventions)
-        )
-        fertilizer_interventions_len = random.randint(
-            1, len(cultivation_fertilizer_interventions)
-        )
+        chemical_interventions_len = random.randint(1, len(cultivation_chemical_interventions))
+        fertilizer_interventions_len = random.randint(1, len(cultivation_fertilizer_interventions))
         feed_items_len = random.randint(1, len(livestock_feed_items))
 
         # Generate the chemical/fertilizer/feed items based on the quantity
         chemical_interventions_vals = []
         for _ in range(chemical_interventions_len):
-            chemical_interventions_vals.append(
-                Command.link(random.choice(cultivation_chemical_interventions))
-            )
+            chemical_interventions_vals.append(Command.link(random.choice(cultivation_chemical_interventions)))
         chemical_interventions_vals = list(dict.fromkeys(chemical_interventions_vals))
         fertilizer_interventions_vals = []
 
         for _ in range(fertilizer_interventions_len):
-            fertilizer_interventions_vals.append(
-                Command.link(random.choice(cultivation_fertilizer_interventions))
-            )
-        fertilizer_interventions_vals = list(
-            dict.fromkeys(fertilizer_interventions_vals)
-        )
+            fertilizer_interventions_vals.append(Command.link(random.choice(cultivation_fertilizer_interventions)))
+        fertilizer_interventions_vals = list(dict.fromkeys(fertilizer_interventions_vals))
 
         feed_items_interventions_vals = []
         for _ in range(feed_items_len):
-            feed_items_interventions_vals.append(
-                Command.link(random.choice(livestock_feed_items))
-            )
-        feed_items_interventions_vals = list(
-            dict.fromkeys(feed_items_interventions_vals)
-        )
+            feed_items_interventions_vals.append(Command.link(random.choice(livestock_feed_items)))
+        feed_items_interventions_vals = list(dict.fromkeys(feed_items_interventions_vals))
 
         # Generate a random value for each field
         data = {
@@ -454,16 +417,12 @@ class SPPGenerateFarmerData(models.Model):
             "purpose": random.choice(purposes),
             "activity_type": activity_type,
             "cultivation_water_source": random.choice(cultivation_water_sources),
-            "cultivation_production_system": random.choice(
-                cultivation_production_systems
-            ),
+            "cultivation_production_system": random.choice(cultivation_production_systems),
             "cultivation_chemical_interventions": chemical_interventions_vals,
             "cultivation_fertilizer_interventions": fertilizer_interventions_vals,
             "livestock_production_system": random.choice(livestock_production_systems),
             "livestock_feed_items": feed_items_interventions_vals,
-            "aquaculture_production_system": random.choice(
-                aquaculture_production_systems
-            ),
+            "aquaculture_production_system": random.choice(aquaculture_production_systems),
             "aquaculture_number_of_fingerlings": random.randint(
                 0, 1000
             ),  # Assuming a reasonable range for number of fingerlings
@@ -496,9 +455,7 @@ class SPPGenerateFarmerData(models.Model):
     ):
         # Generate random data for the fields not requiring a reference to another object
         quantity = random.randint(1, 100)
-        machine_working_status = random.choice(
-            ["Working", "Needs maintenance", "Broken"]
-        )
+        machine_working_status = random.choice(["Working", "Needs maintenance", "Broken"])
         number_active = random.randint(0, quantity)
         active_area = round(random.uniform(1.0, 100.0), 2)
         active_volume = round(random.uniform(1.0, 100.0), 2)
@@ -643,9 +600,7 @@ class SPPGenerateFarmerData(models.Model):
             "farm_size_idle": round(random.uniform(0.1, 1000.0), 2),
             "details_legal_status": random.choice(legal_statuses),
             "lease_term": random.randint(1, 99),
-            "lease_agreement_number": "".join(
-                random.choices(string.ascii_uppercase + string.digits, k=10)
-            ),
+            "lease_agreement_number": "".join(random.choices(string.ascii_uppercase + string.digits, k=10)),
             "another_farm": random_bool(),
             "growing_crops_subsistence": random_bool(),
             "growing_crops_sale": random_bool(),
@@ -666,9 +621,7 @@ class SPPGenerateFarmerData(models.Model):
             "aquaculture_main_inputs_feeds": random_bool(),
             "aquaculture_main_inputs_fertilizers": random_bool(),
             "aquaculture_utilize_fertilizer": random_bool(),
-            "aquaculture_production_level": random.choice(
-                ["extensive", "semi-intensive", "intensive"]
-            ),
+            "aquaculture_production_level": random.choice(["extensive", "semi-intensive", "intensive"]),
             "aquaculture_beneficiary_esp": random_bool(),
             "farm_technology_power_source": random.choice(power_sources),
             "farm_technology_labor_source": random.choice(labor_sources),
@@ -714,26 +667,14 @@ class SPPGenerateFarmerData(models.Model):
             "land_water_management_soil_testing": random_bool(),
             "land_water_management_undertake_irrigation": random_bool(),
             "land_water_management_irrigation_type": random.choice(irrigation_types),
-            "land_water_management_irrigation_source": random.choice(
-                irrigation_sources
-            ),
-            "land_water_management_total_irrigated_area": round(
-                random.uniform(0.1, 1000.0), 2
-            ),
-            "land_water_management_type_of_irrigation_project": random.choice(
-                irrigation_projects
-            ),
+            "land_water_management_irrigation_source": random.choice(irrigation_sources),
+            "land_water_management_total_irrigated_area": round(random.uniform(0.1, 1000.0), 2),
+            "land_water_management_type_of_irrigation_project": random.choice(irrigation_projects),
             "land_water_management_type_of_irrigation_project_name": "Project-"
             + "".join(random.choices(string.ascii_uppercase + string.digits, k=5)),
-            "land_water_management_implementing_body": random.choice(
-                management_implementing_bodies
-            ),
-            "land_water_management_irrigation_scheme_membership": random.choice(
-                scheme_memberships
-            ),
-            "financial_services_percentage_of_income_from_farming": round(
-                random.uniform(0.1, 1000.0), 2
-            ),
+            "land_water_management_implementing_body": random.choice(management_implementing_bodies),
+            "land_water_management_irrigation_scheme_membership": random.choice(scheme_memberships),
+            "financial_services_percentage_of_income_from_farming": round(random.uniform(0.1, 1000.0), 2),
             "financial_services_vulnerable_marginalized_group": random_bool(),
             "financial_services_faith_based_organization": random_bool(),
             "financial_services_community_based_organization": random_bool(),
@@ -757,15 +698,9 @@ class SPPGenerateFarmerData(models.Model):
             "financial_services_fish_insurance": random_bool(),
             "financial_services_farm_building_insurance": random_bool(),
             "financial_services_written_farm_records": random_bool(),
-            "financial_services_main_source_of_information_on_good_agricultu": random.choice(
-                main_source_informations
-            ),
-            "financial_services_mode_of_extension_service": random.choice(
-                extension_services
-            ),
-            "financial_services_main_extension_service_provider": random.choice(
-                implementing_bodies
-            ),
+            "financial_services_main_source_of_information_on_good_agricultu": random.choice(main_source_informations),
+            "financial_services_mode_of_extension_service": random.choice(extension_services),
+            "financial_services_main_extension_service_provider": random.choice(implementing_bodies),
         }
 
         return farm_details_data

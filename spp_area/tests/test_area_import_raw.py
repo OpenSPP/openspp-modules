@@ -4,7 +4,7 @@ from .common import AreaImportTestMixin
 class AreaImportRawTest(AreaImportTestMixin):
     @classmethod
     def setUpClass(cls):
-        super(AreaImportRawTest, cls).setUpClass()
+        super().setUpClass()
 
         cls.area_import_raw_id = cls.env["spp.area.import.raw"].create(
             {
@@ -53,9 +53,7 @@ class AreaImportRawTest(AreaImportTestMixin):
 
         self.assertTrue(result)
         self.assertEqual(self.area_import_raw_id.state, "Error")
-        self.assertIn(
-            "Name and Code of area is required.", self.area_import_raw_id.remarks
-        )
+        self.assertIn("Name and Code of area is required.", self.area_import_raw_id.remarks)
         self.assertIn("AREA_SQKM should be numerical.", self.area_import_raw_id.remarks)
         self.assertIn(
             "Level 0 area should not have a parent name and parent code.",

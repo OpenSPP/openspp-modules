@@ -22,18 +22,14 @@ class TestRequestIdWiz(Common):
         return wiz
 
     def test_01_compute_target_type(self):
-        individual_target = self._model.create(
-            {"registrant_id": self._test_individual_1.id}
-        )
+        individual_target = self._model.create({"registrant_id": self._test_individual_1.id})
         self.assertEqual(
             individual_target.target_type,
             "individual",
             "This wizard should target individual!",
         )
         group_target = self._model.create({"registrant_id": self._test_group.id})
-        self.assertEqual(
-            group_target.target_type, "group", "This wizard should target group!"
-        )
+        self.assertEqual(group_target.target_type, "group", "This wizard should target group!")
 
     def test_02_onchange_template(self):
         wiz = self._create_correct_queue_wizard()
@@ -47,9 +43,7 @@ class TestRequestIdWiz(Common):
     def test_04_request_id_not_auto_approve(self):
         wiz = self._create_correct_queue_wizard()
         wiz.request_id()
-        id_queue = self.env["spp.print.queue.id"].search(
-            [("registrant_id", "=", self._test_group.id)], limit=1
-        )
+        id_queue = self.env["spp.print.queue.id"].search([("registrant_id", "=", self._test_group.id)], limit=1)
         self.assertNotEqual(id_queue.ids, [], "Should have some ID queue created!")
         self.assertEqual(id_queue.status, "new", "Status should be `new`!")
         self.assertEqual(
@@ -66,11 +60,7 @@ class TestRequestIdWiz(Common):
 
     def test_05_request_id_auto_approve(self):
         wiz = self._create_correct_queue_wizard()
-        self.env["ir.config_parameter"].set_param(
-            "spp_id_queue.auto_approve_id_request", True
-        )
+        self.env["ir.config_parameter"].set_param("spp_id_queue.auto_approve_id_request", True)
         wiz.request_id()
-        id_queue = self.env["spp.print.queue.id"].search(
-            [("registrant_id", "=", self._test_group.id)], limit=1
-        )
+        id_queue = self.env["spp.print.queue.id"].search([("registrant_id", "=", self._test_group.id)], limit=1)
         self.assertEqual(id_queue.status, "approved", "Status should be `approved`!")

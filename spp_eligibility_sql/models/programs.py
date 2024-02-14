@@ -11,9 +11,7 @@ _logger = logging.getLogger(__name__)
 class CustomG2PProgram(models.Model):
     _inherit = "g2p.program"
 
-    def create_program_sql_eligibility(
-        self, name, sql_query, entitlement_kind, entitlement_vars
-    ):
+    def create_program_sql_eligibility(self, name, sql_query, entitlement_kind, entitlement_vars):
         """
         Create a program based with SQL .
         :param name: String. Name of the program.
@@ -25,11 +23,7 @@ class CustomG2PProgram(models.Model):
         if name and sql_query and entitlement_vars:
             if entitlement_kind:
                 # Set default currency from the user's current company
-                currency_id = (
-                    self.env.user.company_id.currency_id
-                    and self.env.user.company_id.currency_id.id
-                    or False
-                )
+                currency_id = self.env.user.company_id.currency_id and self.env.user.company_id.currency_id.id or False
 
                 vals = {
                     "name": name,
@@ -39,20 +33,12 @@ class CustomG2PProgram(models.Model):
                     "currency_id": currency_id,
                     "entitlement_kind": entitlement_kind,
                     "auto_approve_entitlements": True,
-                    "approver_group_id": self.env.ref(
-                        "g2p_registry_base.group_g2p_admin"
-                    ).id,
+                    "approver_group_id": self.env.ref("g2p_registry_base.group_g2p_admin").id,
                 }
                 vals.update(entitlement_vars)
-                create_program_wizard = self.env["g2p.program.create.wizard"].create(
-                    vals
-                )
+                create_program_wizard = self.env["g2p.program.create.wizard"].create(vals)
                 return create_program_wizard.create_program()
             else:
                 raise UserError(_("The entitlement kind must be specified."))
         else:
-            raise UserError(
-                _(
-                    "The program name, SQL query, and entitlement dictionary must be provided."
-                )
-            )
+            raise UserError(_("The program name, SQL query, and entitlement dictionary must be provided."))

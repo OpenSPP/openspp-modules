@@ -103,20 +103,17 @@ class SQLEligibilityManager(models.Model):
         elif self.program_id.target_type == "individual":
             where_clause += " AND NOT is_group"
 
-        sql_query = """
+        sql_query = f"""
             WITH tbl AS (
-                %s
+                {sql}
             )
             SELECT id FROM res_partner
             WHERE
-            %s
+            {where_clause}
             AND id IN (
                 SELECT id FROM tbl
             )
-        """ % (
-            sql,
-            where_clause,
-        )
+        """
         _logger.debug("DB Query: %s" % sql_query)
 
         return sql_query
@@ -140,11 +137,7 @@ class SQLEligibilityManager(models.Model):
                     res.append(b["id"])
             return res
         else:
-            raise UserError(
-                _(
-                    "The SQL Query is not valid. Be sure to validate this in the Eligibility Manager."
-                )
-            )
+            raise UserError(_("The SQL Query is not valid. Be sure to validate this in the Eligibility Manager."))
 
     def test_sql_query(self):
         """
@@ -169,18 +162,14 @@ class SQLEligibilityManager(models.Model):
                 if beneficiaries:
                     if not beneficiaries[0].get("id"):
                         sql_query_valid = "invalid"
-                        sql_query_valid_message = _(
-                            "The SQL Query must return the record ID field."
-                        )
+                        sql_query_valid_message = _("The SQL Query must return the record ID field.")
                     else:
                         record_count = len(beneficiaries)
                         sql_query_valid = "valid"
                         sql_query_valid_message = None
                 else:
                     sql_query_valid = "valid"
-                    sql_query_valid_message = _(
-                        "The SQL Query is valid but it did not return any record."
-                    )
+                    sql_query_valid_message = _("The SQL Query is valid but it did not return any record.")
             rec.update(
                 {
                     "sql_query_valid": sql_query_valid,
@@ -204,9 +193,7 @@ class SQLEligibilityManager(models.Model):
     def verify_cycle_eligibility(self, cycle, membership):
         for rec in self:
             beneficiaries = rec._verify_eligibility(membership)
-            return self.env["g2p.cycle.membership"].search(
-                [("partner_id", "in", beneficiaries)]
-            )
+            return self.env["g2p.cycle.membership"].search([("partner_id", "in", beneficiaries)])
 
     def _verify_eligibility(self, membership):
         domain = self._prepare_eligible_domain(membership=membership)
@@ -239,18 +226,12 @@ class SQLEligibilityManager(models.Model):
     def _import_registrants_async(self, new_beneficiaries, state="draft"):
         self.ensure_one()
         program = self.program_id
-        program.message_post(
-            body="Import of %s beneficiaries started." % len(new_beneficiaries)
-        )
+        program.message_post(body="Import of %s beneficiaries started." % len(new_beneficiaries))
         program.write({"locked": True, "locked_reason": "Importing beneficiaries"})
 
         jobs = []
         for i in range(0, len(new_beneficiaries), 10000):
-            jobs.append(
-                self.delayable()._import_registrants(
-                    new_beneficiaries[i : i + 10000], state
-                )
-            )
+            jobs.append(self.delayable()._import_registrants(new_beneficiaries[i : i + 10000], state))
         main_job = group(*jobs)
         main_job.on_done(self.delayable().mark_import_as_done())
         main_job.delay()
@@ -268,9 +249,7 @@ class SQLEligibilityManager(models.Model):
         _logger.debug("Importing %s beneficiaries", len(new_beneficiaries))
         beneficiaries_val = []
         for beneficiary_id in new_beneficiaries:
-            beneficiaries_val.append(
-                (0, 0, {"partner_id": beneficiary_id, "state": state})
-            )
+            beneficiaries_val.append((0, 0, {"partner_id": beneficiary_id, "state": state}))
         self.program_id.update({"program_membership_ids": beneficiaries_val})
 
         if do_count:

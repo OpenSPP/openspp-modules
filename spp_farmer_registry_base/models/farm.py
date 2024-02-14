@@ -19,28 +19,14 @@ class Farm(models.Model):
     }
 
     coordinates = fields.GeoPoint(string="GPS Coordinates")
-    farm_asset_ids = fields.One2many(
-        "spp.farm.asset", "asset_farm_id", string="Farm Assets"
-    )
-    farm_machinery_ids = fields.One2many(
-        "spp.farm.asset", "machinery_farm_id", string="Farm Machinery"
-    )
-    farm_details_ids = fields.One2many(
-        "spp.farm.details", "details_farm_id", string="Farm Details"
-    )
-    farm_land_rec_ids = fields.One2many(
-        "spp.land.record", "land_farm_id", string="Land Records"
-    )
+    farm_asset_ids = fields.One2many("spp.farm.asset", "asset_farm_id", string="Farm Assets")
+    farm_machinery_ids = fields.One2many("spp.farm.asset", "machinery_farm_id", string="Farm Machinery")
+    farm_details_ids = fields.One2many("spp.farm.details", "details_farm_id", string="Farm Details")
+    farm_land_rec_ids = fields.One2many("spp.land.record", "land_farm_id", string="Land Records")
 
-    farm_extension_ids = fields.One2many(
-        "spp.farm.extension", "farm_id", string="Farm Extension Services"
-    )
-    farm_crop_act_ids = fields.One2many(
-        "spp.farm.activity", "crop_farm_id", string="Crop Agricultural Activities"
-    )
-    farm_live_act_ids = fields.One2many(
-        "spp.farm.activity", "live_farm_id", string="Livestock Agricultural Activities"
-    )
+    farm_extension_ids = fields.One2many("spp.farm.extension", "farm_id", string="Farm Extension Services")
+    farm_crop_act_ids = fields.One2many("spp.farm.activity", "crop_farm_id", string="Crop Agricultural Activities")
+    farm_live_act_ids = fields.One2many("spp.farm.activity", "live_farm_id", string="Livestock Agricultural Activities")
     farm_aqua_act_ids = fields.One2many(
         "spp.farm.activity",
         "aqua_farm_id",
@@ -54,7 +40,7 @@ class Farm(models.Model):
 
     @api.model_create_multi
     def create(self, vals):
-        farm = super(Farm, self).create(vals)
+        farm = super().create(vals)
         if farm.is_group:
             self.create_update_farmer(farm)
         elif not farm.is_group and farm.is_registrant:
@@ -64,7 +50,7 @@ class Farm(models.Model):
 
     @api.model
     def write(self, vals):
-        farm = super(Farm, self).write(vals)
+        farm = super().write(vals)
         for rec in self:
             if rec.is_group:
                 rec.create_update_farmer(rec)
@@ -117,9 +103,7 @@ class Farm(models.Model):
         # Assuming coordinates are in EPSG:3857 (Pseudo-Mercator)
         proj_from = pyproj.Proj("epsg:3857")  # EPSG:3857 - WGS 84 / Pseudo-Mercator
         proj_to = pyproj.Proj("epsg:4326")  # WGS84
-        transformer = pyproj.Transformer.from_proj(
-            proj_from, proj_to, always_xy=True
-        ).transform
+        transformer = pyproj.Transformer.from_proj(proj_from, proj_to, always_xy=True).transform
 
         for farm in farms:
             feature = self._process_record_to_feature(farm, transformer)
@@ -159,31 +143,21 @@ class Farm(models.Model):
             individual.farmer_id = farm.farmer_id.id
             farm.farmer_individual_id = individual.id
             if farm.farmer_mobile_tel:
-                self.insert_phone_number(
-                    farm.farmer_individual_id.id, farm.farmer_mobile_tel
-                )
+                self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
             if farm.farmer_national_id:
                 self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
             # Create Membership
             membership_vals = {
                 "group": farm.id,
                 "individual": individual.id,
-                "kind": [
-                    Command.link(
-                        self.env.ref(
-                            "g2p_registry_membership.group_membership_kind_head"
-                        ).id
-                    )
-                ],
+                "kind": [Command.link(self.env.ref("g2p_registry_membership.group_membership_kind_head").id)],
             }
             self.env["g2p.group.membership"].create(membership_vals)
 
         else:
             farm.farmer_individual_id.write(individual_vals)
             if farm.farmer_mobile_tel:
-                self.insert_phone_number(
-                    farm.farmer_individual_id.id, farm.farmer_mobile_tel
-                )
+                self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
             if farm.farmer_national_id:
                 self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
 
@@ -221,9 +195,7 @@ class Farm(models.Model):
             id_vals = {
                 "partner_id": individual_id,
                 "value": national_id,
-                "id_type": self.env.ref(
-                    "spp_farmer_registry_base.id_type_national_id"
-                ).id,
+                "id_type": self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
             }
             if existing_national_id:
                 existing_national_id.write(id_vals)
@@ -241,10 +213,8 @@ class Farm(models.Model):
             "farmer_household_size": individual.farmer_household_size or None,
             "farmer_postal_address": individual.farmer_postal_address or None,
             "farmer_email": individual.email or None,
-            "farmer_formal_agricultural": individual.formal_agricultural_training
-            or None,
-            "farmer_highest_education_level": individual.highest_education_level
-            or None,
+            "farmer_formal_agricultural": individual.formal_agricultural_training or None,
+            "farmer_highest_education_level": individual.highest_education_level or None,
         }
         farmer_national_id = self.env["g2p.reg.id"].search(
             [

@@ -81,9 +81,7 @@ class LandRecord(models.Model):
         # Process polygon geometry with priority
         if geometry_type in ["polygon", "all"] and record.land_geo_polygon:
             # Assuming land_geo_polygon is a shapely object
-            feature["geometry"] = mapping(
-                transform(transformer, record.land_geo_polygon)
-            )
+            feature["geometry"] = mapping(transform(transformer, record.land_geo_polygon))
         # Fallback to point geometry if requested or no polygon is available
         elif geometry_type in ["point", "all"] and record.land_coordinates:
             feature["geometry"] = mapping(transform(transformer, record.coordinates))
@@ -111,14 +109,10 @@ class LandRecord(models.Model):
         # Assuming coordinates are in EPSG:3857 (Pseudo-Mercator)
         proj_from = pyproj.Proj("epsg:3857")  # EPSG:3857 - WGS 84 / Pseudo-Mercator
         proj_to = pyproj.Proj("epsg:4326")  # WGS84
-        transformer = pyproj.Transformer.from_proj(
-            proj_from, proj_to, always_xy=True
-        ).transform
+        transformer = pyproj.Transformer.from_proj(proj_from, proj_to, always_xy=True).transform
 
         for record in land_records:
-            feature = self._process_record_to_feature(
-                record, geometry_type, transformer
-            )
+            feature = self._process_record_to_feature(record, geometry_type, transformer)
             if feature:
                 geojson["features"].append(feature)
 

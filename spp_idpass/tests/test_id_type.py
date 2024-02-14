@@ -41,6 +41,4 @@ class TestIdType(TransactionCase):
     def test_04_unlink_non_default_id_type(self):
         self._non_default_id_type.unlink()
         test_id_type = self.env["g2p.id.type"].search([("name", "=", "Test Id Type")])
-        self.assertListEqual(
-            test_id_type.ids, [], "Non-default Id Type should be deletable!"
-        )
+        self.assertListEqual(test_id_type.ids, [], "Non-default Id Type should be deletable!")

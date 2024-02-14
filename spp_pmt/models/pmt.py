@@ -12,9 +12,7 @@ class G2PGroupPMT(models.Model):
 
     # Boolean fields capturing specific conditions of an individual
     x_cst_indv_gce_ol = fields.Boolean("Lower than G.C.E. Ordinary Level")
-    x_cst_indv_school_age = fields.Boolean(
-        "Currently not attending school or other educational institution"
-    )
+    x_cst_indv_school_age = fields.Boolean("Currently not attending school or other educational institution")
     x_cst_indv_chronic_disease = fields.Boolean("Long-term (chronic) disease")
     x_cst_indv_disability = fields.Boolean("Disability")
 
@@ -24,9 +22,7 @@ class G2PGroupPMT(models.Model):
         compute="_compute_pmt_score",
         compute_sudo=True,
     )
-    grp_pmt_score = fields.Float(
-        "PMT Score of the group", compute="_compute_pmt_score", store=True
-    )
+    grp_pmt_score = fields.Float("PMT Score of the group", compute="_compute_pmt_score", store=True)
     area_calc = fields.Many2one("spp.area", compute="_compute_area")
 
     def _compute_area(self):
@@ -35,9 +31,7 @@ class G2PGroupPMT(models.Model):
             if rec.is_group:
                 if rec.group_membership_ids:
                     individual = rec.group_membership_ids.mapped("individual.id")
-                    members = self.env["res.partner"].search(
-                        [("id", "in", individual), ("area_id", "!=", False)]
-                    )
+                    members = self.env["res.partner"].search([("id", "in", individual), ("area_id", "!=", False)])
                     if members:
                         area_calc = members[0].area_id.id
 
@@ -47,7 +41,6 @@ class G2PGroupPMT(models.Model):
             rec.area_calc = area_calc
 
     def _compute_pmt_score(self):
-
         hh_area = self.area_id
 
         model = self.env["ir.model"].search([("model", "=", "res.partner")])

@@ -67,8 +67,4 @@ class SPPCreateEventWizard(models.TransientModel):
         :param model_name: The Model.
         :return: Model View ID.
         """
-        return (
-            self.env["ir.ui.view"]
-            .search([("model", "=", model_name), ("type", "=", "form")], limit=1)
-            .id
-        )
+        return self.env["ir.ui.view"].search([("model", "=", model_name), ("type", "=", "form")], limit=1).id

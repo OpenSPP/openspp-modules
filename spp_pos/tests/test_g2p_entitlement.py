@@ -48,20 +48,14 @@ class TestG2pEntitlement(TransactionCase):
 
     def test_01_get_entitlement_code_correct_code(self):
         with self.assertLogs("odoo.addons.spp_pos.models.entitlement") as log_catcher:
-            res = self.env["g2p.entitlement"].get_entitlement_code(
-                {"code": self._test_entitlement.code}
-            )
+            res = self.env["g2p.entitlement"].get_entitlement_code({"code": self._test_entitlement.code})
             log = log_catcher.output[0]
             self.assertIn("Code:", log, "Code should be in log!")
-            self.assertIn(
-                self._test_entitlement.code, log, "Log should has input code!"
-            )
+            self.assertIn(self._test_entitlement.code, log, "Log should has input code!")
             self.assertEqual(type(res), dict, "Should be Json Response!")
             for key in ("code", "amount", "status"):
                 self.assertIn(key, res.keys(), f"Key `{key}` is missing!")
-            self.assertEqual(
-                res["code"], self._test_entitlement.code, "Code should be correct!"
-            )
+            self.assertEqual(res["code"], self._test_entitlement.code, "Code should be correct!")
             self.assertEqual(
                 res["amount"],
                 self._test_entitlement.initial_amount,
@@ -71,14 +65,10 @@ class TestG2pEntitlement(TransactionCase):
 
     def test_02_get_entitlement_code_incorrect_code(self):
         with self.assertLogs("odoo.addons.spp_pos.models.entitlement") as log_catcher:
-            res = self.env["g2p.entitlement"].get_entitlement_code(
-                {"code": "self._test_entitlement.code"}
-            )
+            res = self.env["g2p.entitlement"].get_entitlement_code({"code": "self._test_entitlement.code"})
             log = log_catcher.output[0]
             self.assertIn("Code:", log, "Code should be in log!")
-            self.assertIn(
-                "self._test_entitlement.code", log, "Log should has input code!"
-            )
+            self.assertIn("self._test_entitlement.code", log, "Log should has input code!")
             self.assertEqual(type(res), dict, "Should be Json Response!")
             for key in ("code", "amount", "status"):
                 self.assertIn(key, res.keys(), f"Key `{key}` is missing!")
