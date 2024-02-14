@@ -35,7 +35,7 @@ class Common(TransactionCase):
         return super().setUpClass()
 
     def _create_registrant(self, vals):
-        assert type(vals) == dict
+        self.assertTrue(isinstance(vals, dict), "Return vals should be a dict!")
         vals.update({"is_registrant": True})
         return self.env["res.partner"].create(vals)
 

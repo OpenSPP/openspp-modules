@@ -1012,14 +1012,21 @@ class SPPAPIPath(models.Model):
 
     def _fields_alias_treatment(self, post_values):
         res = {}
+        # Fetch all related field aliases just once
         field_aliases = self.env["spp_api.field.alias"].sudo().search(self._get_related_field_alias_domain())
-        field_alias_names = field_aliases.mapped("alias_name")
-        for key in post_values:
-            if key not in field_alias_names:
-                res[key] = post_values[key]
-                continue
-            field_alias = field_aliases.filtered(lambda fa: fa.alias_name == key)
-            res[field_alias.field_id.name] = post_values[key]
+
+        # Create a mapping from alias_name to field_id.name for direct lookup
+        alias_to_field_name_map = {alias.alias_name: alias.field_id.name for alias in field_aliases}
+
+        for key, value in post_values.items():
+            # Directly lookup the key in the mapping
+            if key in alias_to_field_name_map:
+                # If the alias exists, replace key with the corresponding field name
+                res[alias_to_field_name_map[key]] = value
+            else:
+                # If no alias, use the original key
+                res[key] = value
+
         return res
 
     @api.model

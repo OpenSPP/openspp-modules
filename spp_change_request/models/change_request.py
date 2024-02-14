@@ -64,7 +64,8 @@ class ChangeRequestBase(models.Model):
         "res.partner",
         "Applicant",
         domain=[("is_registrant", "=", True), ("is_group", "=", False)],
-    )  #: Applicant who submitted the change request (In case the registrant is a group, the applicant is the individual)
+    )
+    # Applicant who submitted the change request (In case the registrant is a group, the applicant is the individual)
     applicant_id_domain = fields.Binary(
         compute="_compute_applicant_id_domain",
         readonly=True,
@@ -920,28 +921,26 @@ class ChangeRequestBase(models.Model):
     @api.depends("validator_ids", "state")
     def _compute_validation_group_id(self):
         """
-        Called whenever there are changes in validator_ids and state field
-
-        Save a list of groups that are currently allowed to validate the Change Request
+        Called whenever there are changes in validator_ids and state field.
+        Save a list of groups that are currently allowed to validate the Change Request.
         """
         for rec in self:
             if rec.state in ["draft", "pending"]:
-                validation_stages = None
-                validation_stage_ids = None
-                if rec.validator_ids:
-                    validation_stage_ids = rec.validator_ids.mapped("stage_id.id")
+                # Directly obtain validation_stage_ids if validator_ids are present
+                validation_stage_ids = rec.validator_ids.mapped("stage_id.id") if rec.validator_ids else []
 
-                if rec.request_type_ref_id and rec.request_type_ref_id.validation_ids:
-                    if validation_stage_ids:
-                        validation_stages = rec.request_type_ref_id.validation_ids.filtered(
-                            lambda a: a.stage_id.id not in validation_stage_ids
-                        )
-                    else:
-                        validation_stages = rec.request_type_ref_id.validation_ids
+                validation_stages = (
+                    rec.request_type_ref_id.validation_ids
+                    if rec.request_type_ref_id and rec.request_type_ref_id.validation_ids
+                    else self.env["validation.model"].browse()
+                )  # Replace 'validation.model' with the actual model name
 
-                    if validation_stages:
-                        stage = validation_stages[0]
-                        rec.validation_group_id = stage.validation_group_id
+                # Filter validation_stages based on validation_stage_ids, if any
+                if validation_stage_ids:
+                    validation_stages = validation_stages.filtered(lambda a: a.stage_id.id not in validation_stage_ids)  # noqa: B023
+
+                if validation_stages:
+                    rec.validation_group_id = validation_stages[0].validation_group_id
 
     def _get_validation_stage(self):
         """

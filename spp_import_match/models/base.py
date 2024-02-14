@@ -37,7 +37,7 @@ class Base(models.AbstractModel):
                     field_name += "/" + f[1]
                 clean_fields.append(field_name)
             for dbid, xmlid, record, info in converted_data:
-                row = dict(zip(clean_fields, data[info["record"]]))
+                row = dict(zip(clean_fields, data[info["record"]], strict=True))
 
                 match = self
                 if xmlid:

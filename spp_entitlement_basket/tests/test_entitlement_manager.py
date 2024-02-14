@@ -11,7 +11,7 @@ class TestEntitlementManager(Common):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        country = self.env.ref("base.iq")
+        country = cls.env.ref("base.iq")
         cls.service_points = cls.env["spp.service.point"].create(
             [
                 {

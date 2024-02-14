@@ -54,7 +54,7 @@ class TestMultiIdRequestWizard(Common):
         wiz.create_requests()
         targets = self._target_model.search([("registrant_id", "in", self.all_individual.ids)])
         for individual in self.all_individual:
-            target = targets.filtered(lambda rec: rec.registrant_id.id == individual.id)
+            target = targets.filtered(lambda rec: rec.registrant_id.id == individual.id)  # noqa: B023
             self.assertNotEqual(target.ids, [], "Should have some ID queue created!")
             self.assertEqual(target.status, "new", "Status should be `new`!")
             self.assertEqual(
@@ -75,5 +75,5 @@ class TestMultiIdRequestWizard(Common):
         wiz.create_requests()
         targets = self._target_model.search([("registrant_id", "in", self.all_individual.ids)])
         for individual in self.all_individual:
-            target = targets.filtered(lambda rec: rec.registrant_id.id == individual.id)
+            target = targets.filtered(lambda rec: rec.registrant_id.id == individual.id)  # noqa: B023
             self.assertEqual(target.status, "approved", "Status should be `approved`!")
