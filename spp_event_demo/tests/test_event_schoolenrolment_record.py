@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__)
 class EventSchoolEnrolmentRecordTest(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(EventSchoolEnrolmentRecordTest, cls).setUpClass()
+        super().setUpClass()
 
         # Initial Setup of Variables
         cls.person_1 = cls.env["res.partner"].create(
@@ -54,9 +54,7 @@ class EventSchoolEnrolmentRecordTest(TransactionCase):
             "enrolment_type": "University",
             "date": "2028-10-24",
         }
-        school_enrolment_report_2 = self.env["spp.event.schoolenrolment.record"].create(
-            vals_school
-        )
+        school_enrolment_report_2 = self.env["spp.event.schoolenrolment.record"].create(vals_school)
 
         vals_event_data = {
             "partner_id": self.person_1.id,

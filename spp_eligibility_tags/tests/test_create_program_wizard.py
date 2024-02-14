@@ -31,18 +31,14 @@ class TestSPPCreateNewProgramWiz(TransactionCase):
 
     def test_01_on_tags_area_change(self):
         self.program_create_wiz.on_tags_area_change()
-        expected_result = json.dumps(
-            [("tags_ids", "=", self.tags_id.id), ("area_id", "=", self.area_id.id)]
-        )
+        expected_result = json.dumps([("tags_ids", "=", self.tags_id.id), ("area_id", "=", self.area_id.id)])
 
         self.assertEqual(self.program_create_wiz.custom_domain, expected_result)
 
     def test_02_check_required_fields(self):
         self.program_create_wiz.tags_id = False
 
-        with self.assertRaisesRegex(
-            UserError, "A tag is needed for this eligibility criteria type."
-        ):
+        with self.assertRaisesRegex(UserError, "A tag is needed for this eligibility criteria type."):
             self.program_create_wiz._check_required_fields()
 
     def test_03_get_eligibility_manager(self):

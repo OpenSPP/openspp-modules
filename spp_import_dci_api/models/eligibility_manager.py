@@ -25,6 +25,4 @@ class SPPDefaultEligibilityManager(models.Model):
 
     @api.onchange("location_id")
     def onchange_location_id(self):
-        field_onchange(
-            self, "location_id.name", "child_under_12_birthplace", operator="ilike"
-        )
+        field_onchange(self, "location_id.name", "child_under_12_birthplace", operator="ilike")

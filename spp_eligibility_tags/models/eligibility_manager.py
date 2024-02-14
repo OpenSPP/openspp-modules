@@ -29,14 +29,10 @@ class TagBasedEligibilityManager(models.Model):
     tags_id = fields.Many2one("g2p.registrant.tags", string="Tags")
     area_id = fields.Many2one(
         "spp.area",
-        domain=lambda self: [
-            ("kind", "=", self.env.ref("spp_area.admin_area_kind").id)
-        ],
+        domain=lambda self: [("kind", "=", self.env.ref("spp_area.admin_area_kind").id)],
     )
 
-    custom_domain = fields.Text(
-        string="Domain", default="[]", readonly=True, compute="_compute_custom_domain"
-    )
+    custom_domain = fields.Text(string="Domain", default="[]", readonly=True, compute="_compute_custom_domain")
 
     target_type = fields.Selection(related="program_id.target_type")
 
@@ -96,9 +92,7 @@ class TagBasedEligibilityManager(models.Model):
     def verify_cycle_eligibility(self, cycle, membership):
         for rec in self:
             beneficiaries = rec._verify_eligibility(membership)
-            return self.env["g2p.cycle.membership"].search(
-                [("partner_id", "in", beneficiaries)]
-            )
+            return self.env["g2p.cycle.membership"].search([("partner_id", "in", beneficiaries)])
 
     def _verify_eligibility(self, membership):
         domain = self._prepare_eligible_domain(membership=membership)
@@ -126,18 +120,12 @@ class TagBasedEligibilityManager(models.Model):
     def _import_registrants_async(self, new_beneficiaries, state="draft"):
         self.ensure_one()
         program = self.program_id
-        program.message_post(
-            body="Import of %s beneficiaries started." % len(new_beneficiaries)
-        )
+        program.message_post(body="Import of %s beneficiaries started." % len(new_beneficiaries))
         program.write({"locked": True, "locked_reason": "Importing beneficiaries"})
 
         jobs = []
         for i in range(0, len(new_beneficiaries), self.MAX_ROW_JOB_QUEUE):
-            jobs.append(
-                self.delayable()._import_registrants(
-                    new_beneficiaries[i : i + self.MAX_ROW_JOB_QUEUE], state
-                )
-            )
+            jobs.append(self.delayable()._import_registrants(new_beneficiaries[i : i + self.MAX_ROW_JOB_QUEUE], state))
         main_job = group(*jobs)
         main_job.on_done(self.delayable().mark_import_as_done())
         main_job.delay()
@@ -156,9 +144,7 @@ class TagBasedEligibilityManager(models.Model):
         logging.info("updated")
         beneficiaries_val = []
         for beneficiary in new_beneficiaries:
-            beneficiaries_val.append(
-                (0, 0, {"partner_id": beneficiary.id, "state": state})
-            )
+            beneficiaries_val.append((0, 0, {"partner_id": beneficiary.id, "state": state}))
         self.program_id.update({"program_membership_ids": beneficiaries_val})
 
         if do_count:

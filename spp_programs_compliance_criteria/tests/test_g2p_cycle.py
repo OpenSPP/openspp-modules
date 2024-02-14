@@ -68,9 +68,7 @@ class TestG2pCycle(common.Common):
         cycle.action_filter_beneficiaries_by_compliance_criteria()
         self.assertTrue(
             len(cycle.cycle_membership_ids)
-            > len(
-                cycle.cycle_membership_ids.filtered(lambda cm: cm.state == "enrolled")
-            ),
+            > len(cycle.cycle_membership_ids.filtered(lambda cm: cm.state == "enrolled")),
             "Number of enrolled membership should be reduced after filtering!",
         )
 

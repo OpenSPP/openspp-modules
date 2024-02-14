@@ -10,7 +10,7 @@ class RejectChangeRequestWiz(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(RejectChangeRequestWiz, self).default_get(fields)
+        res = super().default_get(fields)
         if self.env.context.get("change_request_id"):
             res["change_request_id"] = self.env.context["change_request_id"]
         else:
@@ -18,21 +18,15 @@ class RejectChangeRequestWiz(models.TransientModel):
                 res["change_request_id"] = self.env.context["active_id"]
         return res
 
-    change_request_id = fields.Many2one(
-        "spp.change.request", "Change Request", required=True
-    )
-    rejected_by_id = fields.Many2one(
-        "res.users", "Rejected by", default=lambda self: self.env.user.id
-    )
+    change_request_id = fields.Many2one("spp.change.request", "Change Request", required=True)
+    rejected_by_id = fields.Many2one("res.users", "Rejected by", default=lambda self: self.env.user.id)
     rejected_remarks = fields.Text("Rejection Remarks", required=True)
     dialog_message = fields.Text(compute="_compute_message")
 
     def reject_change_request(self):
         for rec in self:
             if rec.change_request_id:
-                rec.change_request_id.request_type_ref_id._on_reject(
-                    rec.change_request_id, rec.rejected_remarks
-                )
+                rec.change_request_id.request_type_ref_id._on_reject(rec.change_request_id, rec.rejected_remarks)
             else:
                 raise UserError(_("There are no change request selected."))
 

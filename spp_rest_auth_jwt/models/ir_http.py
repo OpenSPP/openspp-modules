@@ -4,7 +4,8 @@
 import logging
 import re
 
-from odoo import SUPERUSER_ID, api, models, registry as registry_get
+from odoo import SUPERUSER_ID, api, models
+from odoo import registry as registry_get
 from odoo.http import request
 
 from ..exceptions import (
@@ -20,7 +21,6 @@ AUTHORIZATION_RE = re.compile(r"^Bearer ([^ ]+)$")
 
 
 class IrHttpJwt(models.AbstractModel):
-
     _inherit = "ir.http"
 
     @classmethod
@@ -39,17 +39,13 @@ class IrHttpJwt(models.AbstractModel):
             or auth_method.startswith("public_or_jwt_")
         ):
             if request.session.uid:
-                _logger.warning(
-                    'A route with auth="jwt" must not be used within a user session.'
-                )
+                _logger.warning('A route with auth="jwt" must not be used within a user session.')
                 raise UnauthorizedSessionMismatch()
             # Odoo calls _authenticate more than once (in v14? why?), so
             # on the second call we have a request uid and that is not an error
             # because _authenticate will not call _auth_method_jwt a second time.
             if request.uid and not hasattr(request, "jwt_payload"):
-                _logger.error(
-                    "A route with auth='jwt' should not have a request.uid here."
-                )
+                _logger.error("A route with auth='jwt' should not have a request.uid here.")
                 raise UnauthorizedSessionMismatch()
         return super()._authenticate(endpoint)
 
@@ -64,9 +60,7 @@ class IrHttpJwt(models.AbstractModel):
         registry = registry_get(request.db)
         with registry.cursor() as cr:
             env = api.Environment(cr, SUPERUSER_ID, {})
-            validator = env["spp.auth.jwt.validator"]._get_validator_by_name(
-                validator_name
-            )
+            validator = env["spp.auth.jwt.validator"]._get_validator_by_name(validator_name)
             assert len(validator) == 1
             payload = validator._decode(token)
             uid, partner_id = validator._get_and_check_uid_partner_id(payload)

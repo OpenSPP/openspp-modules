@@ -55,17 +55,13 @@ class TestResPartnerImportMatch(TransactionCase):
             [("name", "=", "given_name"), ("model_id", "=", res_partner.id)]
         )
 
-        self.env["spp.import.match.fields"].create(
-            {"field_id": given_name_field.id, "match_id": import_match.id}
-        )
+        self.env["spp.import.match.fields"].create({"field_id": given_name_field.id, "match_id": import_match.id})
 
         family_name_field = self.env["ir.model.fields"].search(
             [("name", "=", "family_name"), ("model_id", "=", res_partner.id)]
         )
 
-        self.env["spp.import.match.fields"].create(
-            {"field_id": family_name_field.id, "match_id": import_match.id}
-        )
+        self.env["spp.import.match.fields"].create({"field_id": family_name_field.id, "match_id": import_match.id})
 
         return import_match
 
@@ -73,13 +69,9 @@ class TestResPartnerImportMatch(TransactionCase):
         res_partner = self.env["ir.model"].search([("model", "=", "res.partner")])
         vals = {"model_id": res_partner.id}
         import_match = self.env["spp.import.match"].create(vals)
-        name_field = self.env["ir.model.fields"].search(
-            [("name", "=", "name"), ("model_id", "=", res_partner.id)]
-        )
+        name_field = self.env["ir.model.fields"].search([("name", "=", "name"), ("model_id", "=", res_partner.id)])
 
-        self.env["spp.import.match.fields"].create(
-            {"field_id": name_field.id, "match_id": import_match.id}
-        )
+        self.env["spp.import.match.fields"].create({"field_id": name_field.id, "match_id": import_match.id})
 
         return import_match
 
@@ -88,9 +80,7 @@ class TestResPartnerImportMatch(TransactionCase):
         self.create_matching_given_family_name()
         record = self._base_import_record("res.partner", "res_partner_name")
 
-        record.execute_import(
-            ["given_name", "family_name", "name", "email"], [], OPTIONS
-        )
+        record.execute_import(["given_name", "family_name", "name", "email"], [], OPTIONS)
 
         self._test_applicant.env.cache.invalidate()
         self.assertEqual(self._test_applicant.email, "rufinorenaud@gmail.com")

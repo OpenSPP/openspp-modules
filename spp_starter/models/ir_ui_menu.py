@@ -10,9 +10,7 @@ class IrUiMenu(models.Model):
     def _visible_menu_ids(self, debug=False):
         menus = super()._visible_menu_ids(debug)
         show_spp_starter = safe_eval(
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("spp_starter.show_spp_starter", "True")
+            self.env["ir.config_parameter"].sudo().get_param("spp_starter.show_spp_starter", "True")
         )
         if show_spp_starter:
             menu_item_id = self.env.ref("base.menu_management").id

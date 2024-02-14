@@ -10,9 +10,7 @@ class ResPartner(models.Model):
     address = fields.Text(allow_filter=True)
     phone = fields.Char(allow_filter=True)
     kind = fields.Many2one(comodel_name="g2p.group.kind", allow_filter=True)
-    category_id = fields.Many2many(
-        comodel_name="res.partner.category", allow_filter=True
-    )
+    category_id = fields.Many2many(comodel_name="res.partner.category", allow_filter=True)
     registration_date = fields.Date(allow_filter=True)
     disabled = fields.Boolean(allow_filter=True)
     company_id = fields.Many2one(comodel_name="res.company", allow_filter=True)

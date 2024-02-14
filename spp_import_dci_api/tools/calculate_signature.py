@@ -12,6 +12,4 @@ with open(f"{dir_path}/private_key.pem") as privatefile:
 
 
 def calculate_signature(header, payload):
-    return jwt.encode(
-        headers=header, payload=payload, key=privkey, algorithm=JWT_ALGORITHM
-    )
+    return jwt.encode(headers=header, payload=payload, key=privkey, algorithm=JWT_ALGORITHM)

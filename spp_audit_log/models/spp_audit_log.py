@@ -15,9 +15,7 @@ class SppAuditLog(models.Model):
     name = fields.Char("Resource Name", size=256, compute="_compute_name")
     create_date = fields.Datetime("Date", readonly=True)
     user_id = fields.Many2one("res.users", "User", required=True, readonly=True)
-    model_id = fields.Many2one(
-        "ir.model", "Model", required=True, readonly=True, ondelete="cascade"
-    )
+    model_id = fields.Many2one("ir.model", "Model", required=True, readonly=True, ondelete="cascade")
     model = fields.Char(related="model_id.model")
     res_id = fields.Integer("Resource Id", readonly=True)
     method = fields.Char(size=64, readonly=True)
@@ -64,22 +62,13 @@ class SppAuditLog(models.Model):
                 selection = selection(self.env[self.model_id.model])
             return dict(selection).get(value, value)
         if field.type == "many2one" and value:
-            return (
-                self.env[field.comodel_name].browse(value).exists().display_name
-                or value
-            )
+            return self.env[field.comodel_name].browse(value).exists().display_name or value
         if field.type == "reference" and value:
             res_model, res_id = value.split(",")
-            return (
-                self.env[res_model].browse(int(res_id)).exists().display_name or value
-            )
+            return self.env[res_model].browse(int(res_id)).exists().display_name or value
         if field.type in ("one2many", "many2many") and value:
             return ", ".join(
-                [
-                    self.env[field.comodel_name].browse(rec_id).exists().display_name
-                    or str(rec_id)
-                    for rec_id in value
-                ]
+                [self.env[field.comodel_name].browse(rec_id).exists().display_name or str(rec_id) for rec_id in value]
             )
         if field.type == "binary" and value:
             return "&lt;binary data&gt;"
@@ -105,9 +94,7 @@ class SppAuditLog(models.Model):
         RecordModel = self.env[self.model_id.model]
         for fname in set(data["new"].keys()) | set(data["old"].keys()):
             field = RecordModel._fields.get(fname)
-            if field and (
-                not field.groups or self.user_has_groups(groups=field.groups)
-            ):
+            if field and (not field.groups or self.user_has_groups(groups=field.groups)):
                 old_value = self._format_value(field, data["old"].get(fname, ""))
                 new_value = self._format_value(field, data["new"].get(fname, ""))
                 if old_value != new_value:
@@ -119,7 +106,7 @@ class SppAuditLog(models.Model):
         for rec in self:
             thead = ""
             for head in (_("Field"), _("Old value"), _("New value")):
-                thead += '<th style="width: 33%;">{head}</th>'.format(head=head)
+                thead += f'<th style="width: 33%;">{head}</th>'
             thead = "<thead><tr>%s</tr></thead>" % thead
             tbody = ""
             for line in rec._get_content():
@@ -128,10 +115,7 @@ class SppAuditLog(models.Model):
                     row += "<td>%s</td>" % item
                 tbody += "<tr>%s</tr>" % row
             tbody = "<tbody>%s</tbody>" % tbody
-            rec.data_html = (
-                '<table class="o_list_view table table-condensed '
-                'table-striped">%s%s</table>' % (thead, tbody)
-            )
+            rec.data_html = '<table class="o_list_view table table-condensed ' f'table-striped">{thead}{tbody}</table>'
 
     def unlink(self):
         if not self.ALLOW_DELETE:

@@ -6,8 +6,7 @@ class SppServicePoint(models.Model):
 
     topup_service_point = fields.Boolean(
         string="Allow Topup",
-        help="Is service point where beneficiaries can go and top-up "
-        "their cards to purchase commodities",
+        help="Is service point where beneficiaries can go and top-up " "their cards to purchase commodities",
     )
 
     def action_view_terminal_devices(self):

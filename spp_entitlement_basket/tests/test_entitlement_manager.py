@@ -76,9 +76,7 @@ class TestEntitlementManager(Common):
                 "end_date": fields.Date.today(),
             }
         )
-        cls._basket_entitlement_manager = cls.env[
-            "g2p.program.entitlement.manager.basket"
-        ].create(
+        cls._basket_entitlement_manager = cls.env["g2p.program.entitlement.manager.basket"].create(
             {
                 "name": "Entitlement Manager Basket 1 [TEST]",
                 "program_id": cls.program.id,
@@ -98,9 +96,7 @@ class TestEntitlementManager(Common):
 
     def test_01_prepare_entitlements(self):
         with self.assertRaisesRegex(UserError, "no items entered for this"):
-            self._basket_entitlement_manager.prepare_entitlements(
-                self.cycle, self.program.program_membership_ids
-            )
+            self._basket_entitlement_manager.prepare_entitlements(self.cycle, self.program.program_membership_ids)
         self._basket_entitlement_manager.write(
             {
                 "entitlement_item_ids": [
@@ -124,16 +120,10 @@ class TestEntitlementManager(Common):
         if "product_ids" not in self.env["spp.service.point"]._fields:
             self.skipTest("Product Ids is not exists in Service Point - Skip!")
         before_entitlement_inkind = self.env["g2p.entitlement.inkind"].search([])
-        self.assertFalse(
-            before_entitlement_inkind.ids, "Start without entitlement inkind!"
-        )
-        self._basket_entitlement_manager.prepare_entitlements(
-            self.cycle, self.program.program_membership_ids
-        )
+        self.assertFalse(before_entitlement_inkind.ids, "Start without entitlement inkind!")
+        self._basket_entitlement_manager.prepare_entitlements(self.cycle, self.program.program_membership_ids)
         after_entitlement_inkind = self.env["g2p.entitlement.inkind"].search([])
-        self.assertTrue(
-            bool(after_entitlement_inkind.ids), "Entitlement Inkind should be created!"
-        )
+        self.assertTrue(bool(after_entitlement_inkind.ids), "Entitlement Inkind should be created!")
 
     def test_02_set_pending_validation_entitlements(self):
         entitlement = self.create_entitlement_inkind()
@@ -151,12 +141,8 @@ class TestEntitlementManager(Common):
         mock_today.return_value = date(2023, 5, 23)
         entitlement = self.create_entitlement_inkind()
         res = self._basket_entitlement_manager.validate_entitlements(self.cycle)
-        self.assertEqual(
-            res["params"]["type"], "success", "Should display success notification!"
-        )
-        self.assertEqual(
-            entitlement.state, "approved", "Entitlement should now approved!"
-        )
+        self.assertEqual(res["params"]["type"], "success", "Should display success notification!")
+        self.assertEqual(entitlement.state, "approved", "Entitlement should now approved!")
         self.assertEqual(
             entitlement.date_approved,
             date(2023, 5, 23),
@@ -166,16 +152,12 @@ class TestEntitlementManager(Common):
     def test_04_cancel_entitlements(self):
         entitlement = self.create_entitlement_inkind()
         self._basket_entitlement_manager.cancel_entitlements(self.cycle)
-        self.assertEqual(
-            entitlement.state, "cancelled", "Entitlement should now cancelled!"
-        )
+        self.assertEqual(entitlement.state, "cancelled", "Entitlement should now cancelled!")
 
     def test_05_open_entitlements_form(self):
         res = self._basket_entitlement_manager.open_entitlements_form(self.cycle)
         for key in ["res_model", "type", "domain"]:
-            self.assertIn(
-                key, res.keys(), f"Key `{key}` is missing from return action!"
-            )
+            self.assertIn(key, res.keys(), f"Key `{key}` is missing from return action!")
         self.assertEqual(res["res_model"], "g2p.entitlement.inkind")
         self.assertEqual(res["type"], "ir.actions.act_window")
         self.assertEqual(res["domain"], [("cycle_id", "=", self.cycle.id)])
@@ -184,9 +166,7 @@ class TestEntitlementManager(Common):
         entitlement = self.create_entitlement_inkind()
         res = self._basket_entitlement_manager.open_entitlement_form(entitlement)
         for key in ["res_model", "type", "target", "res_id", "view_mode"]:
-            self.assertIn(
-                key, res.keys(), f"Key `{key}` is missing from return action!"
-            )
+            self.assertIn(key, res.keys(), f"Key `{key}` is missing from return action!")
         self.assertEqual(res["res_model"], "g2p.entitlement.inkind")
         self.assertEqual(res["type"], "ir.actions.act_window")
         self.assertEqual(res["target"], "new")

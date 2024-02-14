@@ -21,21 +21,15 @@ class TestChangeRequests(Common):
         )
 
     def test_02_unlink_raise_error(self):
-        with self.assertRaisesRegex(
-            UserError, "Only draft change requests can be deleted by its creator."
-        ):
+        with self.assertRaisesRegex(UserError, "Only draft change requests can be deleted by its creator."):
             self._test_change_request.with_user(2).unlink()
         self._test_change_request.state = "pending"
-        with self.assertRaisesRegex(
-            UserError, "Only draft change requests can be deleted by its creator."
-        ):
+        with self.assertRaisesRegex(UserError, "Only draft change requests can be deleted by its creator."):
             self._test_change_request.unlink()
 
     def test_03_unlink(self):
         self._test_change_request.unlink()
-        remaining_change_request = self.env["spp.change.request"].search(
-            [("request_type", "=", "request_type")]
-        )
+        remaining_change_request = self.env["spp.change.request"].search([("request_type", "=", "request_type")])
         self.assertCountEqual(
             remaining_change_request.ids,
             [],
@@ -72,18 +66,12 @@ class TestChangeRequests(Common):
             "Admin should be the one who assigned to this CR!",
         )
         self._test_change_request.state = "pending"
-        with self.assertRaisesRegex(
-            UserError, "^.*not have any validation sequence defined.$"
-        ):
+        with self.assertRaisesRegex(UserError, "^.*not have any validation sequence defined.$"):
             self._test_change_request.assign_to_user(self.env.user)
 
     def test_06_onchange_scan_qr_code_details(self):
-        self._test_change_request.qr_code_details = (
-            '{"qrcode": "-T-E-S-T-Q-R-C-O-D-E-"}'
-        )
-        with self.assertRaisesRegex(
-            UserError, "^.*no group found with the ID number from the QR Code scanned.$"
-        ):
+        self._test_change_request.qr_code_details = '{"qrcode": "-T-E-S-T-Q-R-C-O-D-E-"}'
+        with self.assertRaisesRegex(UserError, "^.*no group found with the ID number from the QR Code scanned.$"):
             self._test_change_request._onchange_scan_qr_code_details()
         self.env["g2p.reg.id"].create(
             {
@@ -115,9 +103,7 @@ class TestChangeRequests(Common):
         )
 
     def test_08_cancel_error(self):
-        with self.assertRaisesRegex(
-            UserError, "^.*request to be cancelled must be in draft.*$"
-        ):
+        with self.assertRaisesRegex(UserError, "^.*request to be cancelled must be in draft.*$"):
             self._test_change_request.state = "validated"
             self._test_change_request._cancel(self._test_change_request)
 

@@ -8,16 +8,12 @@ class FarmerWithWithoutTrainingReport(models.Model):
 
     name = fields.Char(string="Farm Name", readonly=True)
     registration_date = fields.Date(readonly=True)
-    formal_agricultural_training_yn = fields.Char(
-        "With formal training in agriculture", readonly=True
-    )
-    formal_agricultural_training = fields.Boolean(
-        "Do you have formal training in agriculture?", readonly=True
-    )
+    formal_agricultural_training_yn = fields.Char("With formal training in agriculture", readonly=True)
+    formal_agricultural_training = fields.Boolean("Do you have formal training in agriculture?", readonly=True)
 
     @property
     def _table_query(self):
-        return "%s %s %s" % (self._select(), self._from(), self._where())
+        return f"{self._select()} {self._from()} {self._where()}"
 
     @api.model
     def _select(self):

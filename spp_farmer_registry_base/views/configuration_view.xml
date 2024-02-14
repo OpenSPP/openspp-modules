@@ -9,7 +9,7 @@
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
-                <field name="name" required="1"/>
+                <field name="name" required="1" />
                 <field name="description" />
                 <field name="image" />
                 <field name="species_type" />

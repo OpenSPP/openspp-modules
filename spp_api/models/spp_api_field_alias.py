@@ -57,9 +57,7 @@ class SppApiFieldAlias(models.Model):
     def _check_field_name_alias_name(self):
         for rec in self:
             if rec.alias_name == rec.field_id.name:
-                raise ValidationError(
-                    _("Alias Name should be different from its field name!")
-                )
+                raise ValidationError(_("Alias Name should be different from its field name!"))
 
     @api.constrains("field_id", "api_path_id")
     def _check_field_duplicate_if_api_path_is_null(self):
@@ -75,9 +73,7 @@ class SppApiFieldAlias(models.Model):
                 limit=1,
             )
             if to_check:
-                raise ValidationError(
-                    _("There is another global alias for this field!")
-                )
+                raise ValidationError(_("There is another global alias for this field!"))
 
     def _inverse_global_alias(self):
         for rec in self:

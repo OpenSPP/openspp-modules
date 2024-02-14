@@ -30,9 +30,7 @@ class ClientCredential(models.Model):
 
     name = fields.Char("Client Name", required=True)
     client_id = fields.Char(required=True, readonly=True, default=_generate_client_id)
-    client_secret = fields.Char(
-        required=True, readonly=True, default=_generate_client_secret
-    )
+    client_secret = fields.Char(required=True, readonly=True, default=_generate_client_secret)
     show_button_clicked = fields.Boolean()
 
     _sql_constraints = [
@@ -69,9 +67,7 @@ class ClientCredential(models.Model):
 
         if not self.show_button_clicked:
             action = self.env[self._name].get_formview_action()
-            form_id = self.env.ref(
-                "spp_dci_api_server.spp_dci_api_client_credential_view_credentials"
-            ).id
+            form_id = self.env.ref("spp_dci_api_server.spp_dci_api_client_credential_view_credentials").id
 
             action.update(
                 {

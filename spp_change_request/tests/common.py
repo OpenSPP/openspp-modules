@@ -22,9 +22,7 @@ class Common(TransactionCase):
                             "kind": [
                                 (
                                     4,
-                                    cls.env.ref(
-                                        "g2p_registry_membership.group_membership_kind_head"
-                                    ).id,
+                                    cls.env.ref("g2p_registry_membership.group_membership_kind_head").id,
                                 )
                             ],
                         },
@@ -41,13 +39,9 @@ class Common(TransactionCase):
         vals.update({"is_registrant": True})
         return self.env["res.partner"].create(vals)
 
-    @patch(
-        "odoo.addons.spp_change_request.models.change_request.ChangeRequestBase._selection_request_type_ref_id"
-    )
+    @patch("odoo.addons.spp_change_request.models.change_request.ChangeRequestBase._selection_request_type_ref_id")
     def _create_change_request(self, mock_request_type_selection):
-        mock_request_type_selection.return_value = [
-            ("test.request.type", "Test Request Type")
-        ]
+        mock_request_type_selection.return_value = [("test.request.type", "Test Request Type")]
         mock_request_type_selection.__name__ = "_mocked__selection_request_type_ref_id"
         return self.env["spp.change.request"].create(
             {

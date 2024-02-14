@@ -25,9 +25,7 @@ class AreaImportTest(AreaImportTestMixin):
         self.assertEqual(0, self.area_import_id.tot_rows_error)
         self.assertEqual(self.area_import_id.state, "Imported")
         self.assertEqual(
-            self.env["spp.area.import.raw"].search(
-                [("id", "in", raw_data_ids.ids), ("state", "=", "New")], count=True
-            ),
+            self.env["spp.area.import.raw"].search([("id", "in", raw_data_ids.ids), ("state", "=", "New")], count=True),
             self.area_import_id.tot_rows_imported,
         )
 

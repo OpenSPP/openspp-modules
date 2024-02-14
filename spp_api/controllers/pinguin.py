@@ -152,17 +152,13 @@ def authenticate_token_for_user(token):
         # copy-pasted from odoo.http.py:OpenERPSession.authenticate()
         request.session.uid = user.id
         request.session.login = user.login
-        request.session.session_token = user.id and security.compute_session_token(
-            request.session, request.env
-        )
+        request.session.session_token = user.id and security.compute_session_token(request.session, request.env)
         request.uid = user.id
         request.disable_db = False
         request.session.get_context()
 
         return user
-    raise werkzeug.exceptions.HTTPException(
-        response=error_response(*CODE__no_user_auth)
-    )
+    raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__no_user_auth))
 
 
 def get_auth_header(headers, raise_exception=False):
@@ -179,13 +175,9 @@ def get_auth_header(headers, raise_exception=False):
                                               or it is not Basic type.
     """
     auth_header = headers.get("Authorization") or headers.get("authorization")
-    if not auth_header or not any(
-        [auth_header.startswith("Basic "), auth_header.startswith("Bearer ")]
-    ):
+    if not auth_header or not any([auth_header.startswith("Basic "), auth_header.startswith("Bearer ")]):
         if raise_exception:
-            raise werkzeug.exceptions.HTTPException(
-                response=error_response(*CODE__no_user_auth)
-            )
+            raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__no_user_auth))
     return auth_header
 
 
@@ -194,9 +186,7 @@ def get_data_from_auth_header(header):
         return get_data_from_basic_auth_header(header)
     if header.startswith("Bearer "):
         return get_data_from_bearer_auth_header(header)
-    raise werkzeug.exceptions.HTTPException(
-        response=error_response(*CODE__auth_method_not_supported)
-    )
+    raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__auth_method_not_supported))
 
 
 def get_data_from_basic_auth_header(header):
@@ -212,14 +202,10 @@ def get_data_from_basic_auth_header(header):
     """
     normalized_token = header.replace("Basic ", "").replace("\\n", "").encode("utf-8")
     try:
-        decoded_token_parts = (
-            base64.b64decode(normalized_token).decode("utf-8").split(":")
-        )
+        decoded_token_parts = base64.b64decode(normalized_token).decode("utf-8").split(":")
     except TypeError as e:
         raise werkzeug.exceptions.HTTPException(
-            response=error_response(
-                500, "Invalid header", "Basic auth header must be valid base64 string"
-            )
+            response=error_response(500, "Invalid header", "Basic auth header must be valid base64 string")
         ) from e
 
     if len(decoded_token_parts) == 1:
@@ -228,14 +214,11 @@ def get_data_from_basic_auth_header(header):
         db_name, user_token = decoded_token_parts
     else:
         err_descrip = (
-            'Basic auth header payload must be of the form "<%s>" (encoded to base64)'
-            % "user_token"
+            'Basic auth header payload must be of the form "<{}>" (encoded to base64)'.format("user_token")
             if odoo.tools.config["dbfilter"]
             else "db_name:user_token"
         )
-        raise werkzeug.exceptions.HTTPException(
-            response=error_response(500, "Invalid header", err_descrip)
-        )
+        raise werkzeug.exceptions.HTTPException(response=error_response(500, "Invalid header", err_descrip))
 
     return db_name, user_token
 
@@ -253,14 +236,10 @@ def get_data_from_bearer_auth_header(header):
     normalized_token = header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
     decoded, res = verify_and_decode_signature(normalized_token)
     if not decoded:
-        raise werkzeug.exceptions.HTTPException(
-            response=error_response(*CODE__no_user_auth)
-        )
+        raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__no_user_auth))
     if not all([key in res.keys() for key in ("database", "token")]):
         err_descrip = 'Bearer auth header payload must include "database" & "token"'
-        raise werkzeug.exceptions.HTTPException(
-            response=error_response(500, "Invalid header", err_descrip)
-        )
+        raise werkzeug.exceptions.HTTPException(response=error_response(500, "Invalid header", err_descrip))
     return res["database"], res["token"]
 
 
@@ -276,9 +255,7 @@ def setup_db(httprequest, db_name):
     if httprequest.session.db:
         return
     if db_name not in odoo.service.db.list_dbs(force=True):
-        raise werkzeug.exceptions.HTTPException(
-            response=error_response(*CODE__db_not_found)
-        )
+        raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__db_not_found))
 
     httprequest.session.db = db_name
 
@@ -298,14 +275,10 @@ def get_openapi_path(namespace, version, model, method_name):
     :returns: The opensapi.path object.
     :rtype: path
     """
-    _logger.info(
-        "get_openapi_path: %s %s %s %s", namespace, version, model, method_name
-    )
+    _logger.info("get_openapi_path: %s %s %s %s", namespace, version, model, method_name)
     if not namespace or not version:
         raise werkzeug.exceptions.HTTPException(
-            response=error_response(
-                404, "Not Found", "Namespace and version are required"
-            )
+            response=error_response(404, "Not Found", "Namespace and version are required")
         )
 
     http_method = request.httprequest.method.lower()
@@ -338,9 +311,7 @@ def get_openapi_path(namespace, version, model, method_name):
 
 
 # Try to get namespace from user allowed namespaces
-def get_namespace_by_name_from_users_namespaces(
-    user, namespace_name, raise_exception=False
-):
+def get_namespace_by_name_from_users_namespaces(user, namespace_name, raise_exception=False):
     """check and get namespace from users namespaces by name
 
     :param ..models.res_users.ResUsers user: The user record.
@@ -356,9 +327,7 @@ def get_namespace_by_name_from_users_namespaces(
     namespace = request.env["spp_api.namespace"].search([("name", "=", namespace_name)])
 
     if not namespace.exists() and raise_exception:
-        raise werkzeug.exceptions.HTTPException(
-            response=error_response(*CODE__obj_not_found)
-        )
+        raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__obj_not_found))
 
     if namespace not in user.namespace_ids and raise_exception:
         err = list(CODE__user_no_perm)
@@ -407,8 +376,7 @@ def _create_log_record(
     if True:  # just to keep original indent
         log_data = {
             "namespace_id": namespace_id,
-            "request": "%s | %s | %d"
-            % (user_request.url, user_request.method, user_response.status_code),
+            "request": "%s | %s | %d" % (user_request.url, user_request.method, user_response.status_code),
             "request_data": None,
             "response_data": None,
         }
@@ -447,9 +415,7 @@ def route(*args, **kwargs):
         @api_route(*args, **kwargs)
         @functools.wraps(controller_method)
         def controller_method_wrapper(*iargs, **ikwargs):
-            auth_header = get_auth_header(
-                request.httprequest.headers, raise_exception=True
-            )
+            auth_header = get_auth_header(request.httprequest.headers, raise_exception=True)
 
             _logger.info("auth_header: %s", auth_header)
             _logger.info("iargs: %s", iargs)
@@ -461,7 +427,7 @@ def route(*args, **kwargs):
             method = ikwargs.get("method")
 
             db_name, user_token = get_data_from_auth_header(auth_header)
-            _logger.info("db_name: %s - user_token: %s" % (db_name, user_token))
+            _logger.info(f"db_name: {db_name} - user_token: {user_token}")
             setup_db(request.httprequest, db_name)
             authenticated_user = authenticate_token_for_user(user_token)
             path = get_openapi_path(namespace, version, model, method)
@@ -502,9 +468,7 @@ def route(*args, **kwargs):
                     error_description=e.name if hasattr(e, "name") else str(e),
                 )
 
-            data_for_log.update(
-                {"user_request": request.httprequest, "user_response": response}
-            )
+            data_for_log.update({"user_request": request.httprequest, "user_response": response})
             # create_log_record(**data_for_log)
 
             return response
@@ -545,19 +509,13 @@ def get_create_context(namespace, model, canned_context):
         [("model_id", "=", model), ("namespace_id.name", "=", namespace)]
     )
 
-    assert (
-        len(openapi_access) == 1
-    ), "'openapi_access' is not a singleton, bad construction."
+    assert len(openapi_access) == 1, "'openapi_access' is not a singleton, bad construction."
     # Singleton by construction (_sql_constraints)
-    context = openapi_access.create_context_ids.filtered(
-        lambda r: r["name"] == canned_context
-    )
+    context = openapi_access.create_context_ids.filtered(lambda r: r["name"] == canned_context)
     assert len(context) == 1, "'context' is not a singleton, bad construction."
 
     if not context:
-        raise werkzeug.exceptions.HTTPException(
-            response=error_response(*CODE__canned_ctx_not_found)
-        )
+        raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__canned_ctx_not_found))
 
     return context
 
@@ -622,9 +580,7 @@ def get_model_openapi_access(namespace, version, model):
         )
     )
     if not openapi_access.exists():
-        raise werkzeug.exceptions.HTTPException(
-            response=error_response(*CODE__canned_ctx_not_found)
-        )
+        raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__canned_ctx_not_found))
 
     res = {
         "context": {},  # Take ot here FIXME: make sure it is for create_context
@@ -656,12 +612,8 @@ def get_model_openapi_access(namespace, version, model):
     for c in openapi_access.create_context_ids.mapped("context"):
         res["context"].update(json.loads(c))
 
-    res["out_fields_read_multi"] = openapi_access.read_many_id.export_fields.mapped(
-        "name"
-    ) or ("id",)
-    res["out_fields_read_one"] = openapi_access.read_one_id.export_fields.mapped(
-        "name"
-    ) or ("id",)
+    res["out_fields_read_multi"] = openapi_access.read_many_id.export_fields.mapped("name") or ("id",)
+    res["out_fields_read_one"] = openapi_access.read_one_id.export_fields.mapped("name") or ("id",)
 
     if openapi_access.public_methods:
         res["method"]["public"]["whitelist"] = openapi_access.public_methods.split()
@@ -688,9 +640,7 @@ def get_model_openapi_access(namespace, version, model):
 ##################
 
 
-def wrap__resource__get_report(
-    namespace, report_external_id, docids, converter, success_code
-):
+def wrap__resource__get_report(namespace, report_external_id, docids, converter, success_code):
     """Return html or pdf report response.
 
     :param namespace: id/ids/browserecord of the records to print (if not used, pass an empty list)
@@ -736,16 +686,12 @@ def get_dict_from_model(model, spec, id, **kwargs):
     :rtype: dict
     :raise: werkzeug.exceptions.HTTPException if the record does not exist.
     """
-    include_fields = kwargs.get(
-        "include_fields", ()
-    )  # Not actually implemented on higher level (ACL!)
+    include_fields = kwargs.get("include_fields", ())  # Not actually implemented on higher level (ACL!)
     exclude_fields = kwargs.get("exclude_fields", ())
 
     model_obj = get_model_for_read(model)
 
     record = model_obj.browse([id])
     if not record.exists():
-        raise werkzeug.exceptions.HTTPException(
-            response=error_response(*CODE__res_not_found)
-        )
+        raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__res_not_found))
     return get_dict_from_record(record, spec, include_fields, exclude_fields)

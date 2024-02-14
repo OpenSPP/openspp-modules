@@ -5,14 +5,10 @@ from odoo.tools.safe_eval import datetime, safe_eval
 class SppAuditLog(models.Model):
     _inherit = "spp.audit.log"
 
-    parent_data_html = fields.Html(
-        "Parent HTML Data", readonly=True, compute="_compute_parent_data_html"
-    )
+    parent_data_html = fields.Html("Parent HTML Data", readonly=True, compute="_compute_parent_data_html")
 
     # Parent model based on audit rule
-    parent_model_id = fields.Many2one(
-        "ir.model", "Model", readonly=True, ondelete="cascade"
-    )
+    parent_model_id = fields.Many2one("ir.model", "Model", readonly=True, ondelete="cascade")
     parent_res_ids_str = fields.Text(readonly=True)
 
     # Where to log
@@ -56,9 +52,7 @@ class SppAuditLog(models.Model):
             record_name = self.model_id.name
         for fname in set(data["new"].keys()) | set(data["old"].keys()):
             field = RecordModel._fields.get(fname)
-            if field and (
-                not field.groups or self.user_has_groups(groups=field.groups)
-            ):
+            if field and (not field.groups or self.user_has_groups(groups=field.groups)):
                 old_value = self._format_value(field, data["old"].get(fname, ""))
                 new_value = self._format_value(field, data["new"].get(fname, ""))
                 if old_value != new_value:
@@ -70,7 +64,7 @@ class SppAuditLog(models.Model):
         for rec in self:
             thead = ""
             for head in (_("Model"), _("Field"), _("Old value"), _("New value")):
-                thead += '<th style="width: 25%;">{head}</th>'.format(head=head)
+                thead += f'<th style="width: 25%;">{head}</th>'
             thead = "<thead><tr>%s</tr></thead>" % thead
             tbody = ""
             for line in rec._parent_get_content():
@@ -80,8 +74,7 @@ class SppAuditLog(models.Model):
                 tbody += "<tr>%s</tr>" % row
             tbody = "<tbody>%s</tbody>" % tbody
             rec.parent_data_html = (
-                '<table class="o_list_view table table-condensed '
-                'table-striped">%s%s</table>' % (thead, tbody)
+                '<table class="o_list_view table table-condensed ' f'table-striped">{thead}{tbody}</table>'
             )
 
     @api.depends("parent_model_id")

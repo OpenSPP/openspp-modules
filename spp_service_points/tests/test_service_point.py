@@ -6,7 +6,7 @@ from odoo.tests import TransactionCase
 class TestServicePoint(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestServicePoint, cls).setUpClass()
+        super().setUpClass()
         country = cls.env.ref("base.iq")
         cls.service_point_1 = cls.env["spp.service.point"].create(
             {
@@ -133,9 +133,7 @@ class TestServicePoint(TransactionCase):
             "tag": "display_notification",
             "params": {
                 "title": _("Create SP User"),
-                "message": _(
-                    "Successfully created users for the contacts of the company"
-                ),
+                "message": _("Successfully created users for the contacts of the company"),
                 "sticky": True,
                 "type": "success",
                 "next": {
@@ -144,9 +142,7 @@ class TestServicePoint(TransactionCase):
             },
         }
 
-        with self.assertRaisesRegex(
-            UserError, f"{self.res_partner_individual.name} does not have email."
-        ):
+        with self.assertRaisesRegex(UserError, f"{self.res_partner_individual.name} does not have email."):
             self.service_point_4.create_user()
 
         self.res_partner_individual.email = "test_indv@ymail.com"

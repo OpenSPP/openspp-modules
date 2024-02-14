@@ -10,7 +10,7 @@ class CancelChangeRequestWiz(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(CancelChangeRequestWiz, self).default_get(fields)
+        res = super().default_get(fields)
         if self.env.context.get("change_request_id"):
             res["change_request_id"] = self.env.context["change_request_id"]
         else:
@@ -18,21 +18,15 @@ class CancelChangeRequestWiz(models.TransientModel):
                 res["change_request_id"] = self.env.context["active_id"]
         return res
 
-    change_request_id = fields.Many2one(
-        "spp.change.request", "Change Request", required=True
-    )
-    cancelled_by_id = fields.Many2one(
-        "res.users", "Cancelled by", default=lambda self: self.env.user.id
-    )
+    change_request_id = fields.Many2one("spp.change.request", "Change Request", required=True)
+    cancelled_by_id = fields.Many2one("res.users", "Cancelled by", default=lambda self: self.env.user.id)
     dialog_message = fields.Text(compute="_compute_message")
 
     def cancel_change_request(self):
         for rec in self:
             if rec.change_request_id:
                 if rec.change_request_id.request_type_ref_id:
-                    rec.change_request_id.request_type_ref_id._cancel(
-                        rec.change_request_id
-                    )
+                    rec.change_request_id.request_type_ref_id._cancel(rec.change_request_id)
                 else:
                     rec.change_request_id._cancel(rec.change_request_id)
             else:

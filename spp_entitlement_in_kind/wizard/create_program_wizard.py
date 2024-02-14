@@ -14,9 +14,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
 
     @api.model
     def _default_warehouse_id(self):
-        return self.env["stock.warehouse"].search(
-            [("company_id", "=", self.env.company.id)], limit=1
-        )
+        return self.env["stock.warehouse"].search([("company_id", "=", self.env.company.id)], limit=1)
 
     # In-Kind Entitlement Manager
     evaluate_single_item = fields.Boolean("Evaluate one item", default=False)
@@ -34,22 +32,16 @@ class G2PCreateNewProgramWiz(models.TransientModel):
         default=_default_warehouse_id,
         check_company=True,
     )
-    company_id = fields.Many2one(
-        "res.company", string="Company", default=lambda self: self.env.company
-    )
+    company_id = fields.Many2one("res.company", string="Company", default=lambda self: self.env.company)
 
     def _check_required_fields(self):
         res = super()._check_required_fields()
         if self.entitlement_kind == "inkind":
             if not self.entitlement_item_ids:
-                raise UserError(
-                    _("Items are required in the In-kind entitlement manager.")
-                )
+                raise UserError(_("Items are required in the In-kind entitlement manager."))
             if self.manage_inventory and not self.warehouse_id:
                 raise UserError(
-                    _(
-                        "For inventory management, the warehouse is required in the In-kind entitlement manager."
-                    )
+                    _("For inventory management, the warehouse is required in the In-kind entitlement manager.")
                 )
         return res
 
@@ -93,7 +85,7 @@ class G2PCreateNewProgramWiz(models.TransientModel):
             mgr = man_obj.create(
                 {
                     "program_id": program_id,
-                    "manager_ref_id": "%s,%s" % (def_mgr_obj, str(def_mgr.id)),
+                    "manager_ref_id": f"{def_mgr_obj},{str(def_mgr.id)}",
                 }
             )
             res = {"entitlement_managers": [(4, mgr.id)]}
@@ -106,13 +98,9 @@ class G2PCreateNewProgramWizItem(models.TransientModel):
     _order = "sequence,id"
 
     sequence = fields.Integer(default=1000)
-    program_id = fields.Many2one(
-        "g2p.program.create.wizard", "New Program", required=True
-    )
+    program_id = fields.Many2one("g2p.program.create.wizard", "New Program", required=True)
 
-    product_id = fields.Many2one(
-        "product.product", "Product", domain=[("type", "=", "product")], required=True
-    )
+    product_id = fields.Many2one("product.product", "Product", domain=[("type", "=", "product")], required=True)
 
     condition = fields.Char("Condition Domain")
     multiplier_field = fields.Many2one(

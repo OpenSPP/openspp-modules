@@ -6,9 +6,7 @@ from odoo.tools.sql import column_exists, create_column
 
 class StockMove(models.Model):
     _inherit = "stock.move"
-    entitlement_id = fields.Many2one(
-        "g2p.entitlement.inkind", "In-kind Entitlement", index=True
-    )
+    entitlement_id = fields.Many2one("g2p.entitlement.inkind", "In-kind Entitlement", index=True)
 
     @api.model
     def _prepare_merge_moves_distinct_fields(self):
@@ -52,9 +50,7 @@ class StockRule(models.Model):
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    cycle_id = fields.Many2one(
-        related="group_id.cycle_id", string="Cycle", store=True, readonly=False
-    )
+    cycle_id = fields.Many2one(related="group_id.cycle_id", string="Cycle", store=True, readonly=False)
 
     def _auto_init(self):
         """

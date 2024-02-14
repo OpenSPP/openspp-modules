@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Theme",
     "author": "OpenSPP.org",
-    "website": "https://github.com/openspp/openspp-modules",
+    "website": "https://github.com/OpenSPP/openspp-modules",
     "category": "Theme",
     "version": "17.0.1.0.0",
     "depends": ["web"],
@@ -13,9 +13,7 @@
         "views/res_config_settings_views.xml",
     ],
     "assets": {
-        "web._assets_primary_variables": [
-            "theme_openspp/static/src/scss/primary_variables.scss"
-        ],
+        "web._assets_primary_variables": ["theme_openspp/static/src/scss/primary_variables.scss"],
         "web.assets_backend": [
             "theme_openspp/static/src/scss/assets_backend.scss",
             "theme_openspp/static/src/scss/dynamic_dasbhoard.scss",

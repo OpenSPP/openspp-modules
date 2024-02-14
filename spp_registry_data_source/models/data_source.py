@@ -16,9 +16,7 @@ class SppDataSource(models.Model):
 
     auth_type = fields.Selection(AUTH_TYPE_CHOICES, required=True)
 
-    data_source_path_ids = fields.One2many(
-        "spp.data.source.path", "data_source_id", string="URL Paths"
-    )
+    data_source_path_ids = fields.One2many("spp.data.source.path", "data_source_id", string="URL Paths")
     data_source_field_mapping_ids = fields.One2many(
         "spp.data.source.field.mapping",
         "data_source_id",

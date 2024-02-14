@@ -41,9 +41,7 @@ class OpenSPPGroup(models.Model):
                     if age < 12:
                         child_under_12_count += 1
                         if member.individual.birth_place:
-                            child_under_12_birthplace.append(
-                                member.individual.birth_place
-                            )
+                            child_under_12_birthplace.append(member.individual.birth_place)
 
                 if child_under_12_count:
                     rec.no_of_child_under_12_months = child_under_12_count

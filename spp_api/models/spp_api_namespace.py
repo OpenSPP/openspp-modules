@@ -17,7 +17,6 @@ _logger = logging.getLogger(__name__)
 
 
 class Namespace(models.Model):
-
     _name = "spp_api.namespace"
     _description = "Integration"
 
@@ -51,12 +50,8 @@ class Namespace(models.Model):
     #     string="Accesses",
     #     context={"active_test": False},
     # )
-    path_ids = fields.One2many(
-        "spp_api.path", "namespace_id", string="Paths", context={"active_test": False}
-    )
-    user_ids = fields.Many2many(
-        "res.users", string="Allowed Users", default=lambda self: self.env.user
-    )
+    path_ids = fields.One2many("spp_api.path", "namespace_id", string="Paths", context={"active_test": False})
+    user_ids = fields.Many2many("res.users", string="Allowed Users", default=lambda self: self.env.user)
 
     token = fields.Char(
         "Identification token",
@@ -80,7 +75,7 @@ class Namespace(models.Model):
     @api.depends("name", "version_name", "description")
     def _compute_display_name(self):
         for rec in self:
-            rec.display_name = "/api/%s/%s%s" % (
+            rec.display_name = "/api/{}/{}{}".format(
                 rec.name,
                 rec.version_name,
                 " (%s)" % rec.description if rec.description else "",
@@ -95,11 +90,11 @@ class Namespace(models.Model):
     @api.model
     def create(self, vals):
         vals = self._fix_name(vals)
-        return super(Namespace, self).create(vals)
+        return super().create(vals)
 
     def write(self, vals):
         vals = self._fix_name(vals)
-        return super(Namespace, self).write(vals)
+        return super().write(vals)
 
     def get_oas(self, version):
         current_host = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
@@ -126,7 +121,7 @@ class Namespace(models.Model):
                 ("swagger", "2.0"),
                 ("info", {"title": self.name, "version": self.write_date}),
                 ("host", parsed_current_host.netloc),
-                ("basePath", "/api/%s/%s" % (self.name, version)),
+                ("basePath", f"/api/{self.name}/{version}"),
                 ("schemes", [parsed_current_host.scheme]),
                 (
                     "consumes",
@@ -135,7 +130,7 @@ class Namespace(models.Model):
                 ("produces", ["application/json"]),
                 (
                     "paths",
-                    {}
+                    {},
                     # region::REPORT::
                     # {
                     #     "/report/pdf/{report_external_id}/{docids}": {
@@ -283,7 +278,5 @@ class Namespace(models.Model):
             )
 
     def _compute_log_count(self):
-        self._cr.execute(
-            "SELECT COUNT(*) FROM spp_api_log WHERE namespace_id=(%s);", [str(self.id)]
-        )
+        self._cr.execute("SELECT COUNT(*) FROM spp_api_log WHERE namespace_id=(%s);", [str(self.id)])
         self.log_count = self._cr.dictfetchone()["count"]

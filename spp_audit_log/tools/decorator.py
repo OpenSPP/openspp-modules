@@ -13,9 +13,7 @@ def get_new_values(records):
     for record in records:
         vals = {}
         for fname in records._fields:
-            vals[fname] = records._fields[fname].convert_to_read(
-                record[fname], record, use_name_get=False
-            )
+            vals[fname] = records._fields[fname].convert_to_read(record[fname], record, use_name_get=False)
         new_values.append(vals)
     return new_values
 
@@ -34,7 +32,7 @@ def audit_decorator(method):
     @api.model
     def audit_create(self, vals):
         result = audit_create.origin(self, vals)
-        record = self.browse(result) if isinstance(result, (int, long)) else result
+        record = self.browse(result) if isinstance(result, int | long) else result
         rules = self.get_audit_rules("create")
 
         new_values = record.read(load="_classic_write")

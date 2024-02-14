@@ -12,7 +12,7 @@ _logger = logging.getLogger(__name__)
 class AreaTest(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(AreaTest, cls).setUpClass()
+        super().setUpClass()
 
         # Initial Setup of Variables
         cls.area_1 = cls.env["spp.area"].create(

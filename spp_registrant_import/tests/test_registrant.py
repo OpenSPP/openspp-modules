@@ -17,9 +17,9 @@ class TestRegistrant(TransactionCase):
                 "is_group": True,
             }
         )
-        self._test_individuals = self.create_registrant(
-            {"name": "TEST, INDIVIDUAL, 1"}
-        ) | self.create_registrant({"name": "TEST, INDIVIDUAL, 2"})
+        self._test_individuals = self.create_registrant({"name": "TEST, INDIVIDUAL, 1"}) | self.create_registrant(
+            {"name": "TEST, INDIVIDUAL, 2"}
+        )
         self._partner = self.env["res.partner"].create(
             {
                 "name": "Partner 1",
@@ -57,8 +57,7 @@ class TestRegistrant(TransactionCase):
         self.assertRegex(
             self._test_household.spp_id,
             r"^GRP_[a-zA-Z0-9]{8}$",
-            "Household should have unique registrant id start with "
-            "`GRP_` and following by 8 characters.",
+            "Household should have unique registrant id start with " "`GRP_` and following by 8 characters.",
         )
         for char in EXCLUDED_CHARACTERS:
             self.assertNotIn(
@@ -72,8 +71,7 @@ class TestRegistrant(TransactionCase):
             self.assertRegex(
                 individual.spp_id,
                 r"^IND_[a-zA-Z0-9]{8}$",
-                "Individual should have unique registrant id start with "
-                "`IND_` and following by 8 characters.",
+                "Individual should have unique registrant id start with " "`IND_` and following by 8 characters.",
             )
             for char in EXCLUDED_CHARACTERS:
                 self.assertNotIn(
@@ -93,24 +91,16 @@ class TestRegistrant(TransactionCase):
 
     @mute_logger("py.warnings")
     def test_05_check_spp_id(self):
-        with self.assertRaisesRegex(
-            ValidationError, "^.*not following correct format.{1}$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*not following correct format.{1}$"):
             # 7 characters spp_id
             self._test_household.write({"spp_id": "GRP_AAAAAA2"})
-        with self.assertRaisesRegex(
-            ValidationError, "^.*not following correct format.{1}$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*not following correct format.{1}$"):
             # '1' in spp_id
             self._test_individuals[0].write({"spp_id": "IND_AAAAAA21"})
-        with self.assertRaisesRegex(
-            ValidationError, "^.*not following correct format.{1}$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*not following correct format.{1}$"):
             # individual with spp_id starts with GRP_
             self._test_individuals[0].write({"spp_id": "GRP_AAAAAA22"})
-        with self.assertRaisesRegex(
-            ValidationError, "^.*not following correct format.{1}$"
-        ):
+        with self.assertRaisesRegex(ValidationError, "^.*not following correct format.{1}$"):
             # group with spp_id starts with IND_
             self._test_household.write({"spp_id": "IND_AAAAAA22"})
         self._partner.write({"spp_id": "IND_AAAAAA21"})

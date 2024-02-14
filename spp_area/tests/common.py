@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 class AreaImportTestMixin(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(AreaImportTestMixin, cls).setUpClass()
+        super().setUpClass()
         # Greater than or equal to 400 rows
         xls_file = None
         xls_file_name = None

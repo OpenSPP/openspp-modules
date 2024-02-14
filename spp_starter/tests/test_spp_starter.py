@@ -60,11 +60,7 @@ class TestSppStarter(TransactionCase):
 
     def test_04_remove_fake_apps_menu(self):
         self.test_record._remove_fake_apps_menu()
-        show_spp_starter = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("spp_starter.show_spp_starter")
-        )
+        show_spp_starter = self.env["ir.config_parameter"].sudo().get_param("spp_starter.show_spp_starter")
         self.assertFalse(safe_eval(show_spp_starter))
 
     def test_05_remove_default_products_if_needed(self):
@@ -82,9 +78,7 @@ class TestSppStarter(TransactionCase):
 
     def test_07_adjust_main_company_details(self):
         if "account.move.line" in self.env:
-            self.env["account.move.line"].search([]).with_context(
-                force_delete=True
-            ).unlink()
+            self.env["account.move.line"].search([]).with_context(force_delete=True).unlink()
         self.test_record._adjust_main_company_details()
         company = self.env.company
         self.assertEqual(company.name, self.test_record.org_name)

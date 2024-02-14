@@ -13,8 +13,6 @@ class View(models.Model):
         if not values:
             values = {}
         values["title"] = values["app_title"] = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("app_system_name", "OpenSPP")
+            self.env["ir.config_parameter"].sudo().get_param("app_system_name", "OpenSPP")
         )
         return super()._render_template(template, values=values)

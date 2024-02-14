@@ -54,9 +54,7 @@ class SppUniqueId(models.AbstractModel):
                 continue
             if not re.match(match_pattern, rec.spp_id):
                 raise ValidationError(not_correct_format)
-            if any(
-                [char in rec.spp_id.split("_")[-1] for char in ("0", "O", "1", "I")]
-            ):
+            if any([char in rec.spp_id.split("_")[-1] for char in ("0", "O", "1", "I")]):
                 raise ValidationError(not_correct_format)
 
     @api.depends("create_date")

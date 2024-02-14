@@ -11,9 +11,7 @@ class TestMultiIdRequestWizard(Common):
         super().setUpClass()
         cls._model = cls.env["spp.multi.id.request.wizard"]
         cls._target_model = cls.env["spp.print.queue.id"]
-        cls.all_individual = (
-            cls._test_individual_1 | cls._test_individual_2 | cls._test_individual_3
-        )
+        cls.all_individual = cls._test_individual_1 | cls._test_individual_2 | cls._test_individual_3
 
     def _create_correct_multi_id_request_wizard(self):
         wiz = self._model.with_context(active_ids=self.all_individual.ids).create(
@@ -30,9 +28,7 @@ class TestMultiIdRequestWizard(Common):
 
     def test_02_compute_target_type(self):
         individual_target = self._create_correct_multi_id_request_wizard()
-        group_target = self._model.with_context(active_ids=self._test_group.ids).create(
-            {}
-        )
+        group_target = self._model.with_context(active_ids=self._test_group.ids).create({})
         self.assertEqual(
             individual_target.target_type,
             "individual",
@@ -56,9 +52,7 @@ class TestMultiIdRequestWizard(Common):
     def test_05_create_requests_non_auto_approved(self):
         wiz = self._create_correct_multi_id_request_wizard()
         wiz.create_requests()
-        targets = self._target_model.search(
-            [("registrant_id", "in", self.all_individual.ids)]
-        )
+        targets = self._target_model.search([("registrant_id", "in", self.all_individual.ids)])
         for individual in self.all_individual:
             target = targets.filtered(lambda rec: rec.registrant_id.id == individual.id)
             self.assertNotEqual(target.ids, [], "Should have some ID queue created!")
@@ -77,13 +71,9 @@ class TestMultiIdRequestWizard(Common):
 
     def test_06_create_requests_auto_approved(self):
         wiz = self._create_correct_multi_id_request_wizard()
-        self.env["ir.config_parameter"].set_param(
-            "spp_id_queue.auto_approve_id_request", True
-        )
+        self.env["ir.config_parameter"].set_param("spp_id_queue.auto_approve_id_request", True)
         wiz.create_requests()
-        targets = self._target_model.search(
-            [("registrant_id", "in", self.all_individual.ids)]
-        )
+        targets = self._target_model.search([("registrant_id", "in", self.all_individual.ids)])
         for individual in self.all_individual:
             target = targets.filtered(lambda rec: rec.registrant_id.id == individual.id)
             self.assertEqual(target.status, "approved", "Status should be `approved`!")

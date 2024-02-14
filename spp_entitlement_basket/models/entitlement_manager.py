@@ -38,9 +38,7 @@ class SPPBasketEntitlementManager(models.Model):
 
     @api.model
     def _default_warehouse_id(self):
-        return self.env["stock.warehouse"].search(
-            [("company_id", "=", self.env.company.id)], limit=1
-        )
+        return self.env["stock.warehouse"].search([("company_id", "=", self.env.company.id)], limit=1)
 
     # Basket Entitlement Manager
     entitlement_basket_id = fields.Many2one(
@@ -77,14 +75,10 @@ class SPPBasketEntitlementManager(models.Model):
         default=_default_warehouse_id,
         check_company=True,
     )
-    company_id = fields.Many2one(
-        "res.company", string="Company", related="program_id.company_id"
-    )
+    company_id = fields.Many2one("res.company", string="Company", related="program_id.company_id")
 
     # Group able to validate the payment
-    entitlement_validation_group_id = fields.Many2one(
-        "res.groups", string="Entitlement Validation Group"
-    )
+    entitlement_validation_group_id = fields.Many2one("res.groups", string="Entitlement Validation Group")
 
     def prepare_entitlements(self, cycle, beneficiaries):
         """Prepare Basket Entitlements.
@@ -95,9 +89,7 @@ class SPPBasketEntitlementManager(models.Model):
         :return:
         """
         if not self.entitlement_item_ids:
-            raise UserError(
-                _("There are no items entered for this entitlement manager.")
-            )
+            raise UserError(_("There are no items entered for this entitlement manager."))
 
         beneficiaries_ids = beneficiaries.mapped("partner_id.id")
         for rec in self.entitlement_item_ids:
@@ -123,21 +115,14 @@ class SPPBasketEntitlementManager(models.Model):
             entitlement_start_validity = cycle.start_date
             entitlement_end_validity = cycle.end_date
 
-            beneficiaries_with_entitlements_to_create = self.env["res.partner"].browse(
-                entitlements_to_create
-            )
+            beneficiaries_with_entitlements_to_create = self.env["res.partner"].browse(entitlements_to_create)
 
             entitlements = []
 
             for beneficiary_id in beneficiaries_with_entitlements_to_create:
                 # Check service point product_ids
-                if (
-                    beneficiary_id.service_point_ids
-                    and beneficiary_id.service_point_ids.product_ids
-                ):
-                    service_point_product_ids = beneficiary_id.service_point_ids.mapped(
-                        "product_ids.id"
-                    )
+                if beneficiary_id.service_point_ids and beneficiary_id.service_point_ids.product_ids:
+                    service_point_product_ids = beneficiary_id.service_point_ids.mapped("product_ids.id")
                     if rec.product_id.id in service_point_product_ids:
                         service_point_id = beneficiary_id.service_point_ids
                         # raise UserError("DEBUG: %s" % service_point_id[0])
@@ -153,9 +138,7 @@ class SPPBasketEntitlementManager(models.Model):
                                 "unit_price": rec.product_id.list_price,
                                 "uom_id": rec.uom_id.id,
                                 "manage_inventory": self.manage_inventory,
-                                "warehouse_id": self.warehouse_id
-                                and self.warehouse_id.id
-                                or None,
+                                "warehouse_id": self.warehouse_id and self.warehouse_id.id or None,
                                 "state": "draft",
                                 "valid_from": entitlement_start_validity,
                                 "valid_until": entitlement_end_validity,
@@ -173,9 +156,7 @@ class SPPBasketEntitlementManager(models.Model):
         :return:
         """
         # Get the number of entitlements
-        entitlements_count = cycle.get_entitlements(
-            ["draft"], entitlement_model="g2p.entitlement.inkind", count=True
-        )
+        entitlements_count = cycle.get_entitlements(["draft"], entitlement_model="g2p.entitlement.inkind", count=True)
 
         # Get the entitlements
         entitlements = cycle.get_entitlements(
@@ -331,9 +312,7 @@ class SPPBasketEntitlementManager(models.Model):
                 state_err += 1
                 if sw == 0:
                     sw = 1
-                    message = _(
-                        "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
-                    )
+                    message = _("Entitlement State Error! Entitlements not in 'pending validation' state:\n")
                 message += _("Program: %(prg)s, Beneficiary: %(partner)s.\n") % {
                     "prg": rec.cycle_id.program_id.name,
                     "partner": rec.partner_id.name,
@@ -385,15 +364,9 @@ class G2PBasketEntitlementItem(models.Model):
     _description = "Basket Entitlement Manager Items"
     _order = "id"
 
-    entitlement_id = fields.Many2one(
-        "g2p.program.entitlement.manager.basket", "Basket Entitlement", required=True
-    )
+    entitlement_id = fields.Many2one("g2p.program.entitlement.manager.basket", "Basket Entitlement", required=True)
 
-    product_id = fields.Many2one(
-        "product.product", "Product", domain=[("type", "=", "product")], required=True
-    )
+    product_id = fields.Many2one("product.product", "Product", domain=[("type", "=", "product")], required=True)
 
     qty = fields.Integer("QTY", default=1, required=True)
-    uom_id = fields.Many2one(
-        "uom.uom", "Unit of Measure", related="product_id.uom_id", store=True
-    )
+    uom_id = fields.Many2one("uom.uom", "Unit of Measure", related="product_id.uom_id", store=True)

@@ -71,9 +71,7 @@ class TestIdBatch(Common):
             "error_sending",
             "Merge status should be error, since the response status code is 403!",
         )
-        self.assertEqual(
-            self.test_batch.status, "generated", "Status should be generated!"
-        )
+        self.assertEqual(self.test_batch.status, "generated", "Status should be generated!")
 
     @patch("requests.post")
     def test_04_mark_as_done_response_200(self, mock_post):
@@ -92,16 +90,12 @@ class TestIdBatch(Common):
             "sent",
             "Merge status should be sent, since the response status code is 200!",
         )
-        self.assertEqual(
-            self.test_batch.status, "generated", "Status should be generated!"
-        )
+        self.assertEqual(self.test_batch.status, "generated", "Status should be generated!")
 
     def test_05_print_batch(self):
         self.assertEqual(self.test_batch.status, "new", "Status should be new!")
         self.test_batch.print_batch()
-        self.assertEqual(
-            self.test_batch.status, "printing", "Status should be printing!"
-        )
+        self.assertEqual(self.test_batch.status, "printing", "Status should be printing!")
 
     def test_06_batch_printed(self):
         self.assertEqual(self.test_batch.status, "new", "Status should be new!")

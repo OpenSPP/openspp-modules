@@ -100,17 +100,11 @@ class OpenSPPPrintBatch(models.Model):
                 ctr_ids += 1
                 queued_ids.append(queued_id.id)
                 if (ctr % self.JOBBATCH_SIZE == 0) or ctr == max_rec:
-                    jobs.append(
-                        rec.delayable(channel="root_id_batch.id_batch")._generate_cards(
-                            queued_ids
-                        )
-                    )
+                    jobs.append(rec.delayable(channel="root_id_batch.id_batch")._generate_cards(queued_ids))
                     queued_ids = []
 
             main_job = group(*jobs)
-            main_job.on_done(
-                self.delayable(channel="root_id_batch.id_batch").mark_as_done(rec)
-            )
+            main_job.on_done(self.delayable(channel="root_id_batch.id_batch").mark_as_done(rec))
             main_job.delay()
 
             message_1 = _("{} started to generate this batch on {}.").format(
@@ -118,9 +112,7 @@ class OpenSPPPrintBatch(models.Model):
             )
             rec.save_to_mail_thread(message_1)
 
-        message = _("{} Batch(es) with total of {} IDs are being generated.").format(
-            ctr_batch or "", ctr_ids or ""
-        )
+        message = _("{} Batch(es) with total of {} IDs are being generated.").format(ctr_batch or "", ctr_ids or "")
         kind = "info"
         return {
             "type": "ir.actions.client",
@@ -315,9 +307,7 @@ class OpenSPPPrintBatch(models.Model):
             "tag": "display_notification",
             "params": {
                 "title": _("ID Batch"),
-                "message": _(
-                    "Please select at least 1 approved batch need to approve!"
-                ),
+                "message": _("Please select at least 1 approved batch need to approve!"),
                 "sticky": True,
                 "type": "warning",
                 "next": {
@@ -330,9 +320,7 @@ class OpenSPPPrintBatch(models.Model):
         """
         This function is used for server action to print multi-selected batches
         """
-        batch_ids = self.filtered(
-            lambda r: r.status == "generated" and r.merge_status == "merged"
-        )
+        batch_ids = self.filtered(lambda r: r.status == "generated" and r.merge_status == "merged")
         if batch_ids:
             max_rec = len(batch_ids)
             batch_ids.write({"status": "printing"})

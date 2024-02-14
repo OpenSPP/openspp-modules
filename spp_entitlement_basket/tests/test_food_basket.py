@@ -24,9 +24,7 @@ class TestFoodBasket(Common):
         )
 
     def test_01_compute_product_names(self):
-        result_product_names = (
-            "1.) Flour [TEST] - 1 Units" + "\n" + "2.) Food [TEST] - 1 Units" + "\n"
-        )
+        result_product_names = "1.) Flour [TEST] - 1 Units" + "\n" + "2.) Food [TEST] - 1 Units" + "\n"
         self.assertEqual(
             self._test_entitlement_basket.product_names,
             result_product_names,

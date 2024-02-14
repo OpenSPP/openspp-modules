@@ -46,7 +46,7 @@ class FarmerRegistryReport(models.Model):
 
     @property
     def _table_query(self):
-        return "%s %s %s" % (self._select(), self._from(), self._where())
+        return f"{self._select()} {self._from()} {self._where()}"
 
     @api.model
     def _select(self):

@@ -23,9 +23,7 @@ class InKindEntitlement(models.Model):
         return str(uuid4())[4:-8][3:]
 
     name = fields.Char(compute="_compute_name")
-    code = fields.Char(
-        default=lambda x: x._generate_code(), required=True, readonly=True, copy=False
-    )
+    code = fields.Char(default=lambda x: x._generate_code(), required=True, readonly=True, copy=False)
 
     partner_id = fields.Many2one(
         "res.partner",
@@ -46,9 +44,7 @@ class InKindEntitlement(models.Model):
     program_id = fields.Many2one("g2p.program", related="cycle_id.program_id")
 
     # Product Fields
-    product_id = fields.Many2one(
-        "product.product", "Product", domain=[("type", "=", "product")]
-    )
+    product_id = fields.Many2one("product.product", "Product", domain=[("type", "=", "product")])
     qty = fields.Integer("QTY", default=1)
     unit_price = fields.Monetary(string="Value/Unit", currency_field="currency_id")
     uom_id = fields.Many2one("uom.uom", "Unit of Measure")
@@ -59,15 +55,11 @@ class InKindEntitlement(models.Model):
         "stock.warehouse",
         string="Warehouse",
     )
-    route_id = fields.Many2one(
-        "stock.route", string="Route", ondelete="restrict", check_company=True
-    )
+    route_id = fields.Many2one("stock.route", string="Route", ondelete="restrict", check_company=True)
     move_ids = fields.One2many("stock.move", "entitlement_id", string="Stock Moves")
 
     # Accounting Fields
-    currency_id = fields.Many2one(
-        "res.currency", readonly=True, related="journal_id.currency_id"
-    )
+    currency_id = fields.Many2one("res.currency", readonly=True, related="journal_id.currency_id")
     total_amount = fields.Monetary(string="Total Value", currency_field="currency_id")
     journal_id = fields.Many2one(
         "account.journal",
@@ -77,9 +69,7 @@ class InKindEntitlement(models.Model):
     )
 
     valid_from = fields.Date(required=False)
-    valid_until = fields.Date(
-        default=lambda self: fields.Date.add(fields.Date.today(), years=1)
-    )
+    valid_until = fields.Date(default=lambda self: fields.Date.add(fields.Date.today(), years=1))
 
     date_approved = fields.Date()
     state = fields.Selection(
@@ -109,31 +99,19 @@ class InKindEntitlement(models.Model):
     ]
 
     def _get_view(self, view_id=None, view_type="list", **options):
-        arch, view = super(InKindEntitlement, self)._get_view(
-            view_id=view_id, view_type=view_type, **options
-        )
+        arch, view = super()._get_view(view_id=view_id, view_type=view_type, **options)
 
         group_g2p_admin = self.env.user.has_group("g2p_registry_base.group_g2p_admin")
         if not group_g2p_admin:
             if view_type != "search":
-                group_g2p_registrar = self.env.user.has_group(
-                    "g2p_registry_base.group_g2p_registrar"
-                )
-                g2p_program_validator = self.env.user.has_group(
-                    "g2p_programs.g2p_program_validator"
-                )
-                g2p_program_cycle_approver = self.env.user.has_group(
-                    "g2p_programs.g2p_program_cycle_approver"
-                )
+                group_g2p_registrar = self.env.user.has_group("g2p_registry_base.group_g2p_registrar")
+                g2p_program_validator = self.env.user.has_group("g2p_programs.g2p_program_validator")
+                g2p_program_cycle_approver = self.env.user.has_group("g2p_programs.g2p_program_cycle_approver")
 
                 # Users with groups Registrar or Program Validator without Program Cycle Approver are not allowed
                 # But users with both Program Validator and Program Cycle Approver are allowed
-                if group_g2p_registrar or (
-                    g2p_program_validator and not g2p_program_cycle_approver
-                ):
-                    raise ValidationError(
-                        _("You have no access in the Entitlement List View")
-                    )
+                if group_g2p_registrar or (g2p_program_validator and not g2p_program_cycle_approver):
+                    raise ValidationError(_("You have no access in the Entitlement List View"))
 
         return arch, view
 
@@ -162,16 +140,12 @@ class InKindEntitlement(models.Model):
     def unlink(self):
         for rec in self:
             if rec.state == "draft":
-                return super(InKindEntitlement, self).unlink()
+                return super().unlink()
             else:
-                raise ValidationError(
-                    _("Only draft entitlements are allowed to be deleted")
-                )
+                raise ValidationError(_("Only draft entitlements are allowed to be deleted"))
 
     def approve_entitlement(self):
-        state_err, message = self.program_id.get_manager(
-            constants.MANAGER_ENTITLEMENT
-        ).approve_entitlements(self)
+        state_err, message = self.program_id.get_manager(constants.MANAGER_ENTITLEMENT).approve_entitlements(self)
 
         if state_err > 0:
             kind = "danger"
@@ -190,9 +164,7 @@ class InKindEntitlement(models.Model):
             }
 
     def open_entitlement_form(self):
-        return self.program_id.get_manager(
-            constants.MANAGER_ENTITLEMENT
-        ).open_entitlement_form(self)
+        return self.program_id.get_manager(constants.MANAGER_ENTITLEMENT).open_entitlement_form(self)
 
     # Inventory functions
     def _prepare_procurement_values(self, group_id=False):
@@ -223,13 +195,9 @@ class InKindEntitlement(models.Model):
         qty = 0.0
         outgoing_moves, incoming_moves = self._get_outgoing_incoming_moves()
         for move in outgoing_moves:
-            qty += move.product_uom._compute_quantity(
-                move.product_uom_qty, self.uom_id, rounding_method="HALF-UP"
-            )
+            qty += move.product_uom._compute_quantity(move.product_uom_qty, self.uom_id, rounding_method="HALF-UP")
         for move in incoming_moves:
-            qty -= move.product_uom._compute_quantity(
-                move.product_uom_qty, self.uom_id, rounding_method="HALF-UP"
-            )
+            qty -= move.product_uom._compute_quantity(move.product_uom_qty, self.uom_id, rounding_method="HALF-UP")
         return qty
 
     def _get_outgoing_incoming_moves(self):
@@ -237,16 +205,12 @@ class InKindEntitlement(models.Model):
         incoming_moves = self.env["stock.move"]
 
         moves = self.move_ids.filtered(
-            lambda r: r.state != "cancel"
-            and not r.scrapped
-            and self.product_id == r.product_id
+            lambda r: r.state != "cancel" and not r.scrapped and self.product_id == r.product_id
         )
 
         for move in moves:
             if move.location_dest_id.usage == "customer":
-                if not move.origin_returned_move_id or (
-                    move.origin_returned_move_id and move.to_refund
-                ):
+                if not move.origin_returned_move_id or (move.origin_returned_move_id and move.to_refund):
                     outgoing_moves |= move
             elif move.location_dest_id.usage != "customer" and move.to_refund:
                 incoming_moves |= move
@@ -272,9 +236,7 @@ class InKindEntitlement(models.Model):
         """
         if self._context.get("skip_procurement"):
             return True
-        precision = self.env["decimal.precision"].precision_get(
-            "Product Unit of Measure"
-        )
+        precision = self.env["decimal.precision"].precision_get("Product Unit of Measure")
         procurements = []
         for row in self:
             row = row.with_company(row.company_id)
@@ -286,9 +248,7 @@ class InKindEntitlement(models.Model):
 
             group_id = row._get_procurement_group()
             if not group_id:
-                group_id = self.env["procurement.group"].create(
-                    row._prepare_procurement_group_vals()
-                )
+                group_id = self.env["procurement.group"].create(row._prepare_procurement_group_vals())
                 row.cycle_id.procurement_group_id = group_id
             else:
                 # In case the procurement group is already created and the entitlement was
@@ -306,9 +266,7 @@ class InKindEntitlement(models.Model):
 
             row_uom = row.uom_id
             quant_uom = row.product_id.uom_id
-            product_qty, procurement_uom = row_uom._adjust_uom_quantities(
-                product_qty, quant_uom
-            )
+            product_qty, procurement_uom = row_uom._adjust_uom_quantities(product_qty, quant_uom)
             procurements.append(
                 self.env["procurement.group"].Procurement(
                     row.product_id,
@@ -328,9 +286,7 @@ class InKindEntitlement(models.Model):
         # rather than stock.move confirmation
         cycles = self.mapped("cycle_id")
         for cycle in cycles:
-            pickings_to_confirm = cycle.picking_ids.filtered(
-                lambda p: p.state not in ["cancel", "done"]
-            )
+            pickings_to_confirm = cycle.picking_ids.filtered(lambda p: p.state not in ["cancel", "done"])
             if pickings_to_confirm:
                 # Trigger the Scheduler for Pickings
                 pickings_to_confirm.action_confirm()

@@ -26,9 +26,7 @@ class SppUsersBearerToken(models.TransientModel):
         readonly=True,
         required=True,
     )
-    calculated_token = fields.Char(
-        string="User Bearer Token", compute="_compute_bearer_token"
-    )
+    calculated_token = fields.Char(string="User Bearer Token", compute="_compute_bearer_token")
 
     @api.depends("user_id", "user_id.openapi_token", "db_name")
     def _compute_bearer_token(self):
