@@ -1,0 +1,159 @@
+<odoo>
+
+    <record id="view_farmer_registry_report_pivot" model="ir.ui.view">
+         <field name="name">farmer.registry.report.pivot</field>
+         <field name="model">farmer.registry.report</field>
+         <field name="arch" type="xml">
+             <pivot string="Farmer Registry Analysis" sample="1">
+                 <field name="details_legal_status" type="col" />
+                 <field name="registration_date" type="row" />
+                 <field name="land_acreage" type="measure" />
+             </pivot>
+         </field>
+    </record>
+
+    <record id="farmer_registry_report_view_tree" model="ir.ui.view">
+         <field name="name">farmer.registry.report.view.tree</field>
+         <field name="model">farmer.registry.report</field>
+         <field name="arch" type="xml">
+             <tree string="Farmer Registry Analysis">
+                <field name="name" string="Farm Name" />
+                <field name="registration_date" optional="show" />
+                <field name="details_legal_status" string="Land Legal Status" />
+                <field name="land_acreage" />
+                <field name="financial_services_percentage_of_income_from_farming" optional="hide" />
+                <field name="financial_services_main_income_source" optional="hide" />
+             </tree>
+         </field>
+    </record>
+
+    <record id="farmer_registry_report_search" model="ir.ui.view">
+        <field name="name">farmer.registry.report.search</field>
+        <field name="model">farmer.registry.report</field>
+        <field name="arch" type="xml">
+            <search string="Farmer Registry Analysis">
+                <field name="registration_date" />
+            </search>
+        </field>
+    </record>
+
+    <!-- Registration by Month -->
+    <record id="view_farmer_registry_month_report_graph" model="ir.ui.view">
+         <field name="name">farmer.registry.month.report.graph</field>
+         <field name="model">farmer.registry.report</field>
+         <field name="arch" type="xml">
+             <graph string="Farmer Registration by Month" type="line" sample="1">
+                 <field name="details_legal_status" />
+                 <field name="land_acreage" type="measure" />
+             </graph>
+         </field>
+    </record>
+
+    <record id="action_farmer_registry_month_report" model="ir.actions.act_window">
+        <field name="name">Farmer Registration by Month</field>
+        <field name="res_model">farmer.registry.report</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="context">{'group_by':['registration_date:month'], 'group_by_no_leaf':1}</field>
+        <field name="search_view_id" ref="farmer_registry_report_search" />
+        <field name="help">Farmer Registry Report</field>
+    </record>
+
+    <record id="action_farmer_registry_month_report_graph_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_farmer_registry_month_report_graph" />
+        <field name="act_window_id" ref="action_farmer_registry_month_report" />
+    </record>
+
+    <record id="action_farmer_registry_month_report_pivot_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2" />
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_farmer_registry_report_pivot" />
+        <field name="act_window_id" ref="action_farmer_registry_month_report" />
+    </record>
+
+    <!-- Registration by Legal Status -->
+    <record id="view_farmer_registry_legstat_report_graph" model="ir.ui.view">
+         <field name="name">farmer.registry.legstat.report.graph</field>
+         <field name="model">farmer.registry.report</field>
+         <field name="arch" type="xml">
+             <graph string="Farmer Registration by Legal Status" type="pie" sample="1">
+                 <field name="details_legal_status" />
+             </graph>
+         </field>
+    </record>
+
+    <record id="action_farmer_registry_legstat_report" model="ir.actions.act_window">
+        <field name="name">Farmer Registration by Legal Status</field>
+        <field name="res_model">farmer.registry.report</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="context">{}</field>
+        <field name="search_view_id" ref="farmer_registry_report_search" />
+        <field name="help">Farmer Registry Report</field>
+    </record>
+
+    <record id="action_farmer_registry_legstat_report_graph_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_farmer_registry_legstat_report_graph" />
+        <field name="act_window_id" ref="action_farmer_registry_legstat_report" />
+    </record>
+
+    <record id="action_farmer_registry_legstat_report_pivot_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2" />
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_farmer_registry_report_pivot" />
+        <field name="act_window_id" ref="action_farmer_registry_legstat_report" />
+    </record>
+
+    <!-- Percentage of farmers with formal training -->
+    <record id="farmer_formal_training_report_view_tree" model="ir.ui.view">
+         <field name="name">farmer.formal.training.report.view.tree</field>
+         <field name="model">farmer.with.without.training.report</field>
+         <field name="arch" type="xml">
+             <tree string="Farmer With Formal Training Statistics">
+                <field name="name" string="Farm Name" />
+                <field name="registration_date" optional="show" />
+                <field name="formal_agricultural_training_yn" optional="show" />
+                 <field name="formal_agricultural_training" optional="show" />
+             </tree>
+         </field>
+    </record>
+
+    <record id="farmer_formal_training_report_search" model="ir.ui.view">
+        <field name="name">farmer.formal.training.report.search</field>
+        <field name="model">farmer.with.without.training.report</field>
+        <field name="arch" type="xml">
+            <search string="Farmer With Formal Training Statistics">
+                <field name="registration_date" />
+            </search>
+        </field>
+    </record>
+
+    <record id="view_farmer_formal_training_report_pivot" model="ir.ui.view">
+         <field name="name">farmer.formal.training.report.pivot</field>
+         <field name="model">farmer.with.without.training.report</field>
+         <field name="arch" type="xml">
+             <pivot string="Farmer With Formal Training Statistics" sample="1">
+                 <field name="formal_agricultural_training_yn" type="row" />
+             </pivot>
+         </field>
+    </record>
+
+    <record id="action_farmer_formal_training_report" model="ir.actions.act_window">
+        <field name="name">Farmer With Formal Training Statistics</field>
+        <field name="res_model">farmer.with.without.training.report</field>
+        <field name="view_mode">pivot</field>
+        <field name="context">{}</field>
+        <field name="search_view_id" ref="farmer_formal_training_report_search" />
+        <field name="help">Farmer With/Without Formal Training Statistics</field>
+    </record>
+
+    <record id="action_farmer_formal_training_report_pivot_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_farmer_formal_training_report_pivot" />
+        <field name="act_window_id" ref="action_farmer_formal_training_report" />
+    </record>
+
+</odoo>

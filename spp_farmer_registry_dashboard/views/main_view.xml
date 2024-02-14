@@ -1,0 +1,34 @@
+<odoo>
+    <!-- Top menu item -->
+    <menuitem
+        id="g2p_report_menu_root"
+        name="Reports"
+        parent="g2p_registry_base.g2p_main_menu_root"
+        sequence="800"
+    />
+
+    <menuitem
+        id="menu_farmer_registry_month_report"
+        name="Farmer Registry by Month"
+        action="action_farmer_registry_month_report"
+        parent="g2p_report_menu_root"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_farmer_registry_legstat_report"
+        name="Farmer Registry by Legal Status"
+        action="action_farmer_registry_legstat_report"
+        parent="g2p_report_menu_root"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_farmer_formal_training_report"
+        name="Farmer with/without Training Statistics"
+        action="action_farmer_formal_training_report"
+        parent="g2p_report_menu_root"
+        sequence="30"
+    />
+
+</odoo>

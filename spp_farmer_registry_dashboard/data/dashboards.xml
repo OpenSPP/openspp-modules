@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="spreadsheet_dashboard_group_farmer_registry" model="spreadsheet.dashboard.group">
+        <field name="name">Farmer Registry</field>
+        <field name="sequence">1000</field>
+    </record>
+
+    <record id="dashboard_farmer_registry" model="spreadsheet.dashboard">
+        <field name="name">Farmer Registry</field>
+        <field
+            name="spreadsheet_binary_data"
+            type="base64"
+            file="spp_farmer_registry_dashboard/data/files/farmer_registry_dashboard.json"
+        />
+        <field
+            name="dashboard_group_id"
+            ref="spp_farmer_registry_dashboard.spreadsheet_dashboard_group_farmer_registry"
+        />
+        <field
+            name="group_ids"
+            eval="[Command.link(ref('g2p_registry_base.group_g2p_admin')), Command.link(ref('g2p_registry_base.group_g2p_registrar'))]"
+        />
+        <field name="sequence">10</field>
+    </record>
+
+</odoo>
