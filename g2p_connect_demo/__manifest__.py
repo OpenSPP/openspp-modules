@@ -28,7 +28,7 @@
         "spp_change_request",
         "spp_event_data",
         "spp_service_points",
-        "theme_openspp",
+        "theme_openspp_muk",
         # "spp_pos",
         # "spp_sms",
         "queue_job",

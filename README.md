@@ -80,7 +80,6 @@ addon | version | maintainers | summary
 [spp_service_points](spp_service_points/) | 17.0.1.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Service Points
 [spp_starter](spp_starter/) | 17.0.1.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP: Starter
 [spp_user_roles](spp_user_roles/) | 17.0.1.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | User Roles Management
-[theme_openspp](theme_openspp/) | 17.0.1.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Theme
 [theme_openspp_muk](theme_openspp_muk/) | 17.0.1.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Theme (Muk Theme)
 
 [//]: # (end addons)

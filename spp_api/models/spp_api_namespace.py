@@ -68,7 +68,8 @@ class Namespace(models.Model):
         (
             "name_ands_version_uniq",
             "unique (name, version_name)",
-            "A namespace already exists with this name and version number. Namespace's name and version must be unique!",
+            "A namespace already exists with this name and version number. "
+            "Namespace's name and version must be unique!",
         )
     ]
 

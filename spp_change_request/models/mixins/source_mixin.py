@@ -548,7 +548,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
         :param group_id_field str: name of the field
         :param group_ref_field str: name of the reference field, default value is 'registrant_id'
-        :param model_name str/list: name or list of names of a model, default value is 'spp.change.request.group.members'
+        :param model_name str/list: name or list of model names, default value is 'spp.change.request.group.members'
         :param condition_function method: method to add conditions, default value is copy_group_member_ids_condition
 
         :return:

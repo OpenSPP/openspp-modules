@@ -1,0 +1,24 @@
+[project]
+name = "openspp-addons"
+version = "17.0.1.0"
+dependencies = [
+        'odoo-addon-spp_area>=17.0dev,<17.1dev',
+        'odoo-addon-spp_change_request>=17.0dev,<17.1dev',
+        'odoo-addon-spp_consent>=17.0dev,<17.1dev',
+        'odoo-addon-spp_custom_field>=17.0dev,<17.1dev',
+        'odoo-addon-spp_custom_field_custom_filter>=17.0dev,<17.1dev',
+        'odoo-addon-spp_custom_fields_ui>=17.0dev,<17.1dev',
+        'odoo-addon-spp_custom_filter>=17.0dev,<17.1dev',
+        'odoo-addon-spp_data_export>=17.0dev,<17.1dev',
+        'odoo-addon-spp_event_data>=17.0dev,<17.1dev',
+        'odoo-addon-spp_idpass>=17.0dev,<17.1dev',
+        'odoo-addon-spp_idqueue>=17.0dev,<17.1dev',
+        'odoo-addon-spp_rest_auth_jwt>=17.0dev,<17.1dev',
+        'odoo-addon-spp_scan_id_document>=17.0dev,<17.1dev',
+        'odoo-addon-spp_service_points>=17.0dev,<17.1dev',
+]
+classifiers=[
+    "Programming Language :: Python",
+    "Framework :: Odoo",
+    "Framework :: Odoo :: 17.0",
+]

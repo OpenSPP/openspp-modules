@@ -31,7 +31,7 @@ class TestSppApiFields(TransactionCase):
 
     def test_01_create_api_field_name_alias(self):
         res = self.test_api_field.create_api_field_name_alias()
-        self.assertTrue(type(res) == dict, "Return vals should be an action!")
+        self.assertTrue(isinstance(res, dict), "Return vals should be an action!")
 
     def test_02_get_field_name(self):
         res = self.test_api_field._get_field_name()
