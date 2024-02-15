@@ -8,7 +8,7 @@ _logger = logging.getLogger(__name__)
 # Ensure the URL is correctly formatted
 url = os.getenv("ODOO_URL")
 if not url.startswith("http://") and not url.startswith("https://"):
-    _logger.info("Error: ODOO_URL should start with http:// or https://")
+    _logger.error("Error: ODOO_URL should start with http:// or https://")
     sys.exit(1)
 
 db = os.getenv("ODOO_DB")
@@ -40,7 +40,7 @@ project_id = models.execute_kw(
 )
 
 if not project_id:
-    _logger.info("Project not found")
+    _logger.error("Project not found")
     sys.exit(1)
 
 # Check if a task with the given GitHub issue ID already exists

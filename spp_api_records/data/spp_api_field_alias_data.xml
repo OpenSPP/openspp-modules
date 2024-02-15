@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo>
+<odoo noupdate="1">
 
     <record id="spp_service_point_res_partner_company_id" model="spp_api.field.alias">
         <field name="alias_name">company_id</field>
