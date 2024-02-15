@@ -54,8 +54,22 @@ jobs:
           - 5432:5432
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
+#        with:
+#          persist-credentials: false
+
+      # Clone OpenG2P Registry repository
+      - name: Clone OpenG2P Registry Repository
+        run: git clone https://github.com/OpenG2P/openg2p-registry.git --depth 1 --branch 17.0-fix-build
+      # Clone OpenG2P Programs repository
+      - name: Clone OpenG2P Programs Repository
+        run: git clone https://github.com/OpenG2P/openg2p-program.git --depth 1 --branch 17.0-fix-build
+      - name: Clone geospatial Repository
+        run: git clone https://github.com/OpenSPP/geospatial.git --depth 1 --branch 17.0-mig-base_geoengine
+      - name: Copy OpenG2P modules to addons directory
+        run: |
+          cp -r openg2p-registry/* ${ADDONS_DIR}/
+          cp -r openg2p-program/* ${ADDONS_DIR}/
+          cp -r geospatial/* ${ADDONS_DIR}/
       - name: Install addons and dependencies
         run: oca_install_addons
       - name: Check licenses

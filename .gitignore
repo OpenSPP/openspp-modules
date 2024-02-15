@@ -72,3 +72,6 @@ docs/_build/
 
 # OCA rules
 !static/lib/
+
+#ruff
+.ruff_cache
