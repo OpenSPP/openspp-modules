@@ -54,8 +54,8 @@ jobs:
           - 5432:5432
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
+#        with:
+#          persist-credentials: false
 
       # Clone OpenG2P Registry repository
       - name: Clone OpenG2P Registry Repository
