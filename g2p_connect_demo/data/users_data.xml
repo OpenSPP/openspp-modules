@@ -1,6 +1,5 @@
-<!-- pylint:disable=create-user-wo-reset-password -->
-<odoo>
-    <data noupdate="0">
+<!-- oca-hooks:disable=xml-create-user-wo-reset-password -->
+<odoo noupdate="0">
 
         <record id="demo_access_cr_creator" model="res.users">
             <field name="name">CR Creator</field>
@@ -9,9 +8,9 @@
             <field name="email">cr_creator@yourorg.example.com</field>
             <field name="notification_type">inbox</field>
             <field
-                name="groups_id"
-                eval="[(6, 0, [ref('base.group_user'), ref('spp_change_request.group_spp_change_request_agent')])]"
-            />
+            name="groups_id"
+            eval="[(6, 0, [ref('base.group_user'), ref('spp_change_request.group_spp_change_request_agent')])]"
+        />
         </record>
         <record id="demo_access_cr_validator" model="res.users">
             <field name="name">CR Validator</field>
@@ -20,9 +19,9 @@
             <field name="email">cr_validator@yourorg.example.com</field>
             <field name="notification_type">inbox</field>
             <field
-                name="groups_id"
-                eval="[(6, 0, [ref('base.group_user'), ref('spp_change_request.group_spp_change_request_validator'), ref('spp_change_request.group_spp_change_request_local_validator')])]"
-            />
+            name="groups_id"
+            eval="[(6, 0, [ref('base.group_user'), ref('spp_change_request.group_spp_change_request_validator'), ref('spp_change_request.group_spp_change_request_local_validator')])]"
+        />
         </record>
         <record id="demo_access_cr_validator_hq" model="res.users">
             <field name="name">CR Validator HQ</field>
@@ -31,9 +30,9 @@
             <field name="email">cr_validator_hq@yourorg.example.com</field>
             <field name="notification_type">inbox</field>
             <field
-                name="groups_id"
-                eval="[(6, 0, [ref('base.group_user'), ref('spp_change_request.group_spp_change_request_hq_validator')])]"
-            />
+            name="groups_id"
+            eval="[(6, 0, [ref('base.group_user'), ref('spp_change_request.group_spp_change_request_hq_validator')])]"
+        />
         </record>
         <record id="demo_access_cr_administrator" model="res.users">
             <field name="name">CR Administrator</field>
@@ -42,10 +41,8 @@
             <field name="email">cr_administrator@yourorg.example.com</field>
             <field name="notification_type">inbox</field>
             <field
-                name="groups_id"
-                eval="[(6, 0, [ref('base.group_user'), ref('spp_change_request.group_spp_change_request_administrator')])]"
-            />
+            name="groups_id"
+            eval="[(6, 0, [ref('base.group_user'), ref('spp_change_request.group_spp_change_request_administrator')])]"
+        />
         </record>
-
-    </data>
 </odoo>
