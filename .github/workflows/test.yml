@@ -59,14 +59,14 @@ jobs:
 
       # Clone OpenG2P Registry repository
       - name: Clone OpenG2P Registry Repository
-        run: git clone https://github.com/OpenG2P/openg2p_registry.git --depth 1 --branch 17.0
+        run: git clone https://github.com/OpenG2P/openg2p-registry.git --depth 1 --branch 17.0
       # Clone OpenG2P Programs repository
       - name: Clone OpenG2P Programs Repository
-        run: git clone https://github.com/OpenG2P/openg2p_programs.git --depth 1 --branch 17.0
+        run: git clone https://github.com/OpenG2P/openg2p-programs.git --depth 1 --branch 17.0
       - name: Copy OpenG2P modules to addons directory
         run: |
-          cp -r openg2p_registry/* ${ADDONS_DIR}/
-          cp -r openg2p_programs/* ${ADDONS_DIR}/
+          cp -r openg2p-registry/* ${ADDONS_DIR}/
+          cp -r openg2p-programs/* ${ADDONS_DIR}/
       - name: Install addons and dependencies
         run: oca_install_addons
       - name: Check licenses
