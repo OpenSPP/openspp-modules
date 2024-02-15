@@ -70,7 +70,9 @@ class G2PGroupPMT(models.Model):
                         _logger.info(
                             "pmt.py: self.area_id: %s - %s" % (self.area_id, hh_area)
                         )
-                        areas = field.area_ids.filtered(lambda a: a.name.id == hh_area.id)
+                        areas = field.area_ids.filtered(
+                            lambda a: a.name.id == hh_area.id
+                        )
                         if areas:
                             weights.update({field.name: areas[0].weight})
                         else:
