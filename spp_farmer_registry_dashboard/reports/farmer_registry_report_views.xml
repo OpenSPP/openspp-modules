@@ -16,7 +16,7 @@
          <field name="name">farmer.registry.report.view.tree</field>
          <field name="model">farmer.registry.report</field>
          <field name="arch" type="xml">
-             <tree string="Farmer Registry Analysis">
+             <tree>
                 <field name="name" string="Farm Name" />
                 <field name="registration_date" optional="show" />
                 <field name="details_legal_status" string="Land Legal Status" />
@@ -111,7 +111,7 @@
          <field name="name">farmer.formal.training.report.view.tree</field>
          <field name="model">farmer.with.without.training.report</field>
          <field name="arch" type="xml">
-             <tree string="Farmer With Formal Training Statistics">
+             <tree>
                 <field name="name" string="Farm Name" />
                 <field name="registration_date" optional="show" />
                 <field name="formal_agricultural_training_yn" optional="show" />

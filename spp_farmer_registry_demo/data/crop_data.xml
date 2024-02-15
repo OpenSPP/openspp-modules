@@ -79,10 +79,6 @@
        <field name="name">Basil</field>
        <field name="species_type">crop</field>
     </record>
-    <record id="species_crop_beans" model="spp.farm.species">
-       <field name="name">Beans</field>
-       <field name="species_type">crop</field>
-    </record>
     <record id="species_crop_beetroot" model="spp.farm.species">
        <field name="name">Beetroot</field>
        <field name="species_type">crop</field>
