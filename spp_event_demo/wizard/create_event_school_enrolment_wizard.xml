@@ -15,10 +15,8 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
                       <field name="date" />
                     </group>
                 </sheet>
-                <footer>
                     <button name="create_event" string="Save" type="object" class="oe_highlight" />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
             </form>
         </field>
     </record>

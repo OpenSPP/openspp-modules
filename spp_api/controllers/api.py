@@ -153,7 +153,7 @@ class ApiV1Controller(http.Controller):
     # #################
 
     # CreateOne`
-    @pinguin.route(_api_endpoint_model, methods=["POST"], type="http", auth="none", csrf=False)
+    @pinguin.route(_api_endpoint_model, methods=["POST"], type="apijson", auth="none", csrf=False)
     @create_api_log
     def create_one__POST(self, namespace, version, model, **kw):
         path = kw.get("path")
@@ -172,7 +172,7 @@ class ApiV1Controller(http.Controller):
         return successful_response(201, response)
 
     # ReadMulti (optional: filters, offset, limit, order, include_fields, exclude_fields):
-    @pinguin.route(_api_endpoint_model, methods=["GET"], type="http", auth="none", csrf=False)
+    @pinguin.route(_api_endpoint_model, methods=["GET"], type="apijson", auth="none", csrf=False)
     @create_api_log
     def read_multi__GET(self, namespace, version, model, **kw):
         path = kw.get("path")
@@ -196,7 +196,7 @@ class ApiV1Controller(http.Controller):
         return successful_response(200, response_data)
 
     # ReadOne (optional: include_fields, exclude_fields)
-    @pinguin.route(_api_endpoint_model_id, methods=["GET"], type="http", auth="none", csrf=False)
+    @pinguin.route(_api_endpoint_model_id, methods=["GET"], type="apijson", auth="none", csrf=False)
     @create_api_log
     def read_one__GET(self, namespace, version, model, id, **kw):
         path = kw.get("path")
@@ -217,7 +217,7 @@ class ApiV1Controller(http.Controller):
         return successful_response(200, response_data)
 
     # UpdateOne
-    @pinguin.route(_api_endpoint_model_id, methods=["PUT"], type="http", auth="none", csrf=False)
+    @pinguin.route(_api_endpoint_model_id, methods=["PUT"], type="apijson", auth="none", csrf=False)
     @create_api_log
     def update_one__PUT(self, namespace, version, model, id, **kw):
         path = kw.get("path")
@@ -236,7 +236,7 @@ class ApiV1Controller(http.Controller):
         return successful_response(200, response)
 
     # UnlinkOne
-    @pinguin.route(_api_endpoint_model_id, methods=["DELETE"], type="http", auth="none", csrf=False)
+    @pinguin.route(_api_endpoint_model_id, methods=["DELETE"], type="apijson", auth="none", csrf=False)
     @create_api_log
     def unlink_one__DELETE(self, namespace, version, model, id, **kw):
         path = kw.get("path")
@@ -260,7 +260,7 @@ class ApiV1Controller(http.Controller):
     @pinguin.route(
         _api_endpoint_model_id_method,
         methods=["PATCH"],
-        type="http",
+        type="apijson",
         auth="none",
         csrf=False,
     )
@@ -281,7 +281,7 @@ class ApiV1Controller(http.Controller):
     @pinguin.route(
         [_api_endpoint_model_method, _api_endpoint_model_method_ids],
         methods=["PATCH"],
-        type="http",
+        type="apijson",
         auth="none",
         csrf=False,
     )
@@ -309,7 +309,7 @@ class ApiV1Controller(http.Controller):
         return successful_response(200, data=data)
 
     # Get Report
-    @pinguin.route(_api_report_docids, methods=["GET"], type="http", auth="none", csrf=False)
+    @pinguin.route(_api_report_docids, methods=["GET"], type="apijson", auth="none", csrf=False)
     def report__GET(self, converter, namespace, report_external_id, docids):
         return pinguin.wrap__resource__get_report(
             namespace=namespace,

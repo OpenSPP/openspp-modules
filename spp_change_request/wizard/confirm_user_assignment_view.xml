@@ -26,10 +26,8 @@
                     <field name="assign_to_any" invisible="1" />
                     <field name="assign_to_id_domain" invisible="1" />
                 </sheet>
-                <footer>
                     <button name="assign_to_user" string="YES" type="object" class="oe_highlight" />
                     <button string="NO" class="btn-danger" special="cancel" />
-                </footer>
             </form>
         </field>
     </record>

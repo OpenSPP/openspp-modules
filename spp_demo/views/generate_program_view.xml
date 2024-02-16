@@ -32,7 +32,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             class="oe_stat_button"
                             icon="fa-thumbs-o-up"
                             name="generate_program_data"
-                            attrs="{'invisible':[('state','!=','draft')]}"
+                            invisible="state != 'draft'"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Generate</span>
@@ -44,7 +44,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             class="oe_stat_button"
                             icon="fa-thumbs-o-up"
                             name="approve_entitlements"
-                            attrs="{'invisible':[('state','!=','generate')]}"
+                            invisible="state != 'generate'"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Approve All</span>
@@ -55,17 +55,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     <div class="oe_title mb24">
                         <label for="name" string="Name:" />
                         <h1>
-                            <field id="name" name="name" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field id="name" name="name" readonly="state != 'draft'" />
                         </h1>
-                        <!-- <label for="num_programs" string="Number of Programs:" placeholder="Name..." />
-                        <h2>
-                            <field
-                                id="num_programs"
-                                name="num_programs"
-                                placeholder="Number of programs..."
-                                attrs="{'readonly':[('state','!=','draft')]}"
-                            />
-                        </h2> -->
                         <group cols="4" colspan="4">
                             <field name="num_programs" />
                             <field name="num_beneficicaries" />

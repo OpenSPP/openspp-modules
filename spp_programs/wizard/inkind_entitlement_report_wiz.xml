@@ -24,15 +24,13 @@
                     </div>
                     <field name="cycle_id_domain" invisible="1" />
                 </sheet>
-                <footer>
                     <button
-                        name="generate_report"
-                        string="Generate Report"
-                        type="object"
-                        class="oe_highlight"
-                    />
+                    name="generate_report"
+                    string="Generate Report"
+                    type="object"
+                    class="oe_highlight"
+                />
                     <button string="Cancel" class="btn-danger" special="cancel" />
-                </footer>
             </form>
         </field>
     </record>

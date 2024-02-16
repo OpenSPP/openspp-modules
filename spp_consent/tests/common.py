@@ -2,14 +2,15 @@ from odoo.tests import TransactionCase
 
 
 class Common(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self._model = self.env["spp.record.consent.wizard"]
-        self._test_individual_1 = self._create_registrant({"name": "Tywin Lannister"})
-        self._test_individual_2 = self._create_registrant({"name": "Jaime Lannister"})
-        self._test_individual_3 = self._create_registrant({"name": "Cersei Lannister"})
-        self._test_individual_4 = self._create_registrant({"name": "Tyrion Lannister"})
-        self._test_group = self._create_registrant(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._model = cls.env["spp.record.consent.wizard"]
+        cls._test_individual_1 = cls._create_registrant({"name": "Tywin Lannister"})
+        cls._test_individual_2 = cls._create_registrant({"name": "Jaime Lannister"})
+        cls._test_individual_3 = cls._create_registrant({"name": "Cersei Lannister"})
+        cls._test_individual_4 = cls._create_registrant({"name": "Tyrion Lannister"})
+        cls._test_group = cls._create_registrant(
             {
                 "name": "House Lannister",
                 "is_group": True,
@@ -18,18 +19,18 @@ class Common(TransactionCase):
                         0,
                         0,
                         {
-                            "individual": self._test_individual_1.id,
+                            "individual": cls._test_individual_1.id,
                             "kind": [
                                 (
                                     4,
-                                    self.env.ref("g2p_registry_membership.group_membership_kind_head").id,
+                                    cls.env.ref("g2p_registry_membership.group_membership_kind_head").id,
                                 )
                             ],
                         },
                     ),
-                    (0, 0, {"individual": self._test_individual_2.id}),
-                    (0, 0, {"individual": self._test_individual_3.id}),
-                    (0, 0, {"individual": self._test_individual_4.id}),
+                    (0, 0, {"individual": cls._test_individual_2.id}),
+                    (0, 0, {"individual": cls._test_individual_3.id}),
+                    (0, 0, {"individual": cls._test_individual_4.id}),
                 ],
             }
         )

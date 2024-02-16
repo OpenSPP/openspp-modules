@@ -25,10 +25,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         options="{'no_create_edit':True,'no_open':True,'no_create':True}"
                     />
                 </sheet>
-                <footer>
                     <button name="issue_idpass" string="Issue IDPass" type="object" class="oe_highlight" />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
             </form>
         </field>
     </record>

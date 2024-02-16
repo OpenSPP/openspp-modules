@@ -1,11 +1,9 @@
 # generated from manifests external_dependencies
 PyLD
-apispec
 bravado_core
 faker
 geojson
 jsonschema
-pyOpenSSL==22.0.0
 pyjwt>=2.4.0
 pyproj
 python-magic

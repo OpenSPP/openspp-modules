@@ -411,7 +411,7 @@ class SPPFetchCRVSBeneficiary(models.Model):
         location_expression = {}
 
         for dom in domain:
-            if isinstance(dom, list):
+            if isinstance(dom, list | tuple):
                 field_name = constants.FIELD_MAPPING.get(dom[0])
                 operator = constants.OPERATION_MAPPING.get(dom[1])
                 if field_name and operator:

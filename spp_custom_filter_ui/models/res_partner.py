@@ -12,7 +12,7 @@ class ResPartner(models.Model):
     kind = fields.Many2one(comodel_name="g2p.group.kind", allow_filter=True)
     category_id = fields.Many2many(comodel_name="res.partner.category", allow_filter=True)
     registration_date = fields.Date(allow_filter=True)
-    disabled = fields.Boolean(allow_filter=True)
+    disabled = fields.Datetime(allow_filter=True)
     company_id = fields.Many2one(comodel_name="res.company", allow_filter=True)
     is_partial_group = fields.Boolean(allow_filter=True)
     email = fields.Char(allow_filter=True)

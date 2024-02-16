@@ -20,7 +20,7 @@
                 <field
                     name="local_area_id"
                     options="{'no_open':True,'no_create':True,'no_edit':True}"
-                    attrs="{'readonly':[('parent.role_type','!=','local')]}"
+                    readonly="parent.role_type != 'local'"
                 />
             </xpath>
             <xpath expr="//field[@name='line_ids']/tree/field[@name='user_id']" position="attributes">

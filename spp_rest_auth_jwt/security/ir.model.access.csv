@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_spp_auth_jwt_validator_admin,JWT Authentication Validator Admin,model_spp_auth_jwt_validator,base.group_system,1,1,1,1

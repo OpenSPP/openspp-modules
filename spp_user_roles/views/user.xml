@@ -9,7 +9,7 @@
                 <field
                     name="local_area_id"
                     options="{'no_open':True,'no_create':True,'no_edit':True}"
-                    attrs="{'readonly':[('role_type','!=','local')]}"
+                    readonly="role_type != 'local'"
                 />
             </xpath>
             <xpath expr="//field[@name='role_ids']" position="before">
@@ -24,7 +24,7 @@
             </xpath>
             <xpath expr="//field[@name='role_line_ids']/tree/field[@name='role_id']" position="attributes">
                 <attribute name="options">{'no_open':True,'no_create':True,'no_edit':True}</attribute>
-                <attribute name="attrs">{'readonly':[('local_area_id','!=',False)]}</attribute>
+                <attribute name="readonly">local_area_id</attribute>
                 <attribute name="force_save">True</attribute>
             </xpath>
         </field>

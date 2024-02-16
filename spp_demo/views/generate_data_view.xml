@@ -39,7 +39,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             class="oe_stat_button"
                             icon="fa-thumbs-o-up"
                             name="generate_sample_data"
-                            attrs="{'invisible':[('state','!=','draft')]}"
+                            invisible="state != 'draft'"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Generate</span>

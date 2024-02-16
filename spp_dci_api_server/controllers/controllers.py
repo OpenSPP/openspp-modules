@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 
 import werkzeug.wrappers
 
-from odoo.http import Controller, HttpRequest, request, route
+from odoo.http import Controller, request, route
 from odoo.osv.expression import AND
 from odoo.service.db import list_dbs
 from odoo.tools import date_utils
@@ -33,7 +33,7 @@ def setup_db(req, db_name):
     if db_name not in list_dbs(force=True):
         return 404, {"error": "Not Found", "error_description": "DB not found."}
 
-    req.httprequest.session.db = db_name
+    req.session.db = db_name
     return 200, None
 
 
@@ -94,7 +94,7 @@ class SppDciApiServer(Controller):
         if error_message:
             return response_wrapper(status_code, error_message)
 
-        req = HttpRequest(req.httprequest)
+        # req = Request(req.httprequest)
 
         if not all([client_id, client_secret, grant_type]):
             error = {
@@ -149,7 +149,7 @@ class SppDciApiServer(Controller):
         status_code, error_message = setup_db(req, db_name)
         if error_message:
             return error_wrapper(status_code, error_message["error_description"])
-        req = HttpRequest(req.httprequest)
+        # req = Request(req.httprequest)
 
         data = req.httprequest.data or "{}"
         try:

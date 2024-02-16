@@ -11,9 +11,7 @@
                         <field name="calculated_token" widget="CopyClipboardText" nolabel="1" />
                     </group>
                 </sheet>
-                <footer>
                     <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z" />
-                </footer>
             </form>
         </field>
     </record>

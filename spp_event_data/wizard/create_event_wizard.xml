@@ -17,10 +17,8 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
                       <field name="expiry_date" />
                     </group>
                 </sheet>
-                <footer>
                     <button name="next_page" string="Next" type="object" class="oe_highlight" />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
             </form>
         </field>
     </record>

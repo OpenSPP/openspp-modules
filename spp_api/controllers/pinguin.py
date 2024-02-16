@@ -29,6 +29,7 @@ import werkzeug.wrappers
 
 import odoo
 from odoo.http import request
+from odoo.http import route as http_route
 from odoo.service import security
 from odoo.tools import date_utils
 from odoo.tools.safe_eval import safe_eval
@@ -39,8 +40,6 @@ from odoo.addons.spp_oauth.tools.rsa_encode_decode import verify_and_decode_sign
 
 # fmt: on
 from odoo.addons.web.controllers.main import ReportController
-
-from .apijsonrequest import api_route
 
 try:
     import simplejson as json
@@ -153,9 +152,7 @@ def authenticate_token_for_user(token):
         request.session.uid = user.id
         request.session.login = user.login
         request.session.session_token = user.id and security.compute_session_token(request.session, request.env)
-        request.uid = user.id
-        request.disable_db = False
-        request.session.get_context()
+        request.update_env(user=user.id)
 
         return user
     raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__no_user_auth))
@@ -243,7 +240,7 @@ def get_data_from_bearer_auth_header(header):
     return res["database"], res["token"]
 
 
-def setup_db(httprequest, db_name):
+def setup_db(request, db_name):
     """check and setup db in session by db name
 
     :param httprequest: a wrapped werkzeug Request object
@@ -252,12 +249,12 @@ def setup_db(httprequest, db_name):
 
     :raise: werkzeug.exceptions.HTTPException if the database not found.
     """
-    if httprequest.session.db:
+    if request.session.db:
         return
     if db_name not in odoo.service.db.list_dbs(force=True):
         raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__db_not_found))
 
-    httprequest.session.db = db_name
+    request.session.db = db_name
 
 
 ###################
@@ -412,7 +409,7 @@ def route(*args, **kwargs):
     """
 
     def decorator(controller_method):
-        @api_route(*args, **kwargs)
+        @http_route(*args, **kwargs)
         @functools.wraps(controller_method)
         def controller_method_wrapper(*iargs, **ikwargs):
             auth_header = get_auth_header(request.httprequest.headers, raise_exception=True)
@@ -428,7 +425,7 @@ def route(*args, **kwargs):
 
             db_name, user_token = get_data_from_auth_header(auth_header)
             _logger.info(f"db_name: {db_name} - user_token: {user_token}")
-            setup_db(request.httprequest, db_name)
+            setup_db(request, db_name)
             authenticated_user = authenticate_token_for_user(user_token)
             path = get_openapi_path(namespace, version, model, method)
 
