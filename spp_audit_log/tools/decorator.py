@@ -13,7 +13,7 @@ def get_new_values(records):
     for record in records:
         vals = {}
         for fname in records._fields:
-            vals[fname] = records._fields[fname].convert_to_read(record[fname], record, use_name_get=False)
+            vals[fname] = records._fields[fname].convert_to_read(record[fname], record, use_display_name=False)
         new_values.append(vals)
     return new_values
 
@@ -49,14 +49,14 @@ def audit_decorator(method):
         rules = self.get_audit_rules("write")
         old_values_copy = None
         if rules:
-            old_values = self.sudo().read(load="_classic_write")
+            old_values = self.sudo().with_context(allowed_company_ids=[]).read(load="_classic_write")
             old_values_copy = copy.deepcopy(old_values)
         result = audit_write.origin(self, vals)
 
         if audit_write.origin.__name__ == "_write":
             new_values = get_new_values(self)
         else:
-            new_values = self.sudo().read(load="_classic_write")
+            new_values = self.sudo().with_context(allowed_company_ids=[]).read(load="_classic_write")
 
         if new_values and old_values_copy:
             keys = new_values[0].keys()

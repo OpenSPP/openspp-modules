@@ -106,7 +106,7 @@ class SppAuditLog(models.Model):
         for rec in self:
             thead = ""
             for head in (_("Field"), _("Old value"), _("New value")):
-                thead += f'<th style="width: 33%;">{head}</th>'
+                thead += f"<th>{head}</th>"
             thead = "<thead><tr>%s</tr></thead>" % thead
             tbody = ""
             for line in rec._get_content():
