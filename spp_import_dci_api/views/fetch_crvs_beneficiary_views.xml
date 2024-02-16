@@ -46,7 +46,6 @@
                     <group name="filter_domain" widget="selection">
                         <field
                             name="domain"
-                            colspan="4"
                             widget="domain"
                             options="{'model': 'spp.fetch.domain.filter', 'hide_result': True}"
                             readonly="done_imported"
