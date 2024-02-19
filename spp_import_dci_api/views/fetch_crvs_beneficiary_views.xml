@@ -46,8 +46,8 @@
                     <group name="filter_domain" widget="selection">
                         <field
                             name="domain"
-                            widget="domain"
-                            options="{'model': 'spp.fetch.domain.filter', 'hide_result': True}"
+                            widget="domain_import_dci"
+                            options="{'model': 'spp.fetch.domain.filter'}"
                             readonly="done_imported"
                         />
                     </group>
