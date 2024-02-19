@@ -26,9 +26,8 @@ class FarmerWithWithoutTrainingReport(models.Model):
                 farm.id,
                 farm.name AS name,
                 farm.registration_date AS registration_date,
-                farm.formal_agricultural_training AS formal_agricultural_training,
                 CASE
-                    WHEN farm.formal_agricultural_training THEN
+                    WHEN farmer.formal_agricultural_training THEN
                         'Yes'
                     ELSE
                         'No'
@@ -39,6 +38,8 @@ class FarmerWithWithoutTrainingReport(models.Model):
     def _from(self):
         return """
             FROM res_partner AS farm
+                LEFT JOIN spp_farmer AS fr ON fr.id = farm.farmer_id
+                    LEFT JOIN res_partner AS farmer ON farmer.id = fr.farmer_individual_id
         """
 
     @api.model

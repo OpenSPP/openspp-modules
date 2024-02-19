@@ -31,4 +31,12 @@
         sequence="30"
     />
 
+    <menuitem
+        id="menu_farmer_sus_land_env_report"
+        name="Sustainable Land and Environmental Management Statistics"
+        action="action_farmer_sus_land_env_report"
+        parent="g2p_report_menu_root"
+        sequence="40"
+    />
+
 </odoo>

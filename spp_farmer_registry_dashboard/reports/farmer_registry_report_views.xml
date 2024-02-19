@@ -115,7 +115,6 @@
                 <field name="name" string="Farm Name" />
                 <field name="registration_date" optional="show" />
                 <field name="formal_agricultural_training_yn" optional="show" />
-                 <field name="formal_agricultural_training" optional="show" />
              </tree>
          </field>
     </record>
@@ -125,6 +124,7 @@
         <field name="model">farmer.with.without.training.report</field>
         <field name="arch" type="xml">
             <search string="Farmer With Formal Training Statistics">
+                <field name="name" />
                 <field name="registration_date" />
             </search>
         </field>
@@ -154,6 +154,65 @@
         <field name="view_mode">pivot</field>
         <field name="view_id" ref="view_farmer_formal_training_report_pivot" />
         <field name="act_window_id" ref="action_farmer_formal_training_report" />
+    </record>
+
+    <!-- Sustainable Land and Environmental Management Practices -->
+    <record id="farmer_sus_land_env_report_view_tree" model="ir.ui.view">
+         <field name="name">farmer.sus.land.env.report.view.tree</field>
+         <field name="model">farm.details.report</field>
+         <field name="arch" type="xml">
+             <tree string="Sustainable Land and Environmental Management Statistics">
+                <field name="name" string="Farm Name" />
+                <field name="registration_date" optional="show" />
+                <field name="land_water_management_crop_rotation" optional="show" />
+                <field name="land_water_management_green_cover_crop" optional="show" />
+                <field name="land_water_management_contour_ploughing" optional="show" />
+             </tree>
+         </field>
+    </record>
+
+    <record id="view_farmer_sus_land_env_report_graph" model="ir.ui.view">
+         <field name="name">farmer.registry.legstat.report.graph</field>
+         <field name="model">farm.details.report</field>
+         <field name="arch" type="xml">
+             <graph
+                string="Sustainable Land and Environmental Management"
+                type="bar"
+                stacked="False"
+                sample="1"
+            >
+                 <field name="land_water_management_crop_rotation" />
+                 <field name="land_water_management_green_cover_crop" />
+                 <field name="land_water_management_contour_ploughing" />
+             </graph>
+         </field>
+    </record>
+
+    <record id="farmer_sus_land_env_report_search" model="ir.ui.view">
+        <field name="name">farmer.sus.land.env.report.search</field>
+        <field name="model">farm.details.report</field>
+        <field name="arch" type="xml">
+            <search string="Sustainable Land and Environmental Management Statistics">
+                <field name="name" />
+                <field name="registration_date" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_farmer_sus_land_env_report" model="ir.actions.act_window">
+        <field name="name">Farmer With Formal Training Statistics</field>
+        <field name="res_model">farm.details.report</field>
+        <field name="view_mode">graph</field>
+        <field name="context">{}</field>
+        <field name="search_view_id" ref="farmer_sus_land_env_report_search" />
+        <field name="help">Sustainable Land and Environmental Management Statistics</field>
+    </record>
+
+    <record id="action_farmer_sus_land_env_report_graph_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_farmer_sus_land_env_report_graph" />
+        <field name="act_window_id" ref="action_farmer_sus_land_env_report" />
     </record>
 
 </odoo>
