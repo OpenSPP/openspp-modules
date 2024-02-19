@@ -1,19 +1,14 @@
-odoo.define("spp_import_dci_api.field_domain", function (require) {
-    const {FieldDomain} = require("web.basic_fields");
+/** @odoo-module **/
 
-    FieldDomain.include({
-        init: function () {
-            this._super.apply(this, arguments);
-            this.hideResult = this.nodeOptions.hide_result;
-        },
+import {DomainField, domainField} from "@web/views/fields/domain/domain_field";
+import {registry} from "@web/core/registry";
 
-        _replaceContent: function () {
-            this._super.apply(this, arguments);
-            if (this.hideResult) {
-                this.$el.find(".fa-arrow-right").remove();
-                this.$el.find(".o_domain_show_selection_button").remove();
-                this.$el.find(".o_refresh_count").remove();
-            }
-        },
-    });
-});
+class DomainFieldExtend extends DomainField {}
+
+DomainFieldExtend.template = "spp_import_dci_api.DomainField";
+
+var domainFieldExtend = {...domainField};
+
+domainFieldExtend.component = DomainFieldExtend;
+
+registry.category("fields").add("domain_import_dci", domainFieldExtend);

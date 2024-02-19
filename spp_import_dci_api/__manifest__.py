@@ -28,7 +28,8 @@
     "assets": {
         "web.assets_backend": [
             # obsolete javascript
-            # "spp_import_dci_api/static/src/js/field_domain.js",
+            "spp_import_dci_api/static/src/js/field_domain.js",
+            "spp_import_dci_api/static/src/xml/field_domain.xml",
         ],
     },
     "application": True,

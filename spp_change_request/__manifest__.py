@@ -44,7 +44,6 @@
         "web.assets_backend": [
             "spp_change_request/static/src/scss/change_request.scss",
             # obsolete javascript function/class, need to find a way to fix those
-            # "spp_change_request/static/src/js/hide_button.js",
             # "spp_change_request/static/src/js/dms_preview.js",
         ],
         "web.assets_qweb": {

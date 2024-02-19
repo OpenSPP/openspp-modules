@@ -30,8 +30,8 @@
                     >
                         <field
                             name="compliance_domain"
-                            widget="domain"
-                            options="{'model': 'res.partner', 'hide_result': True}"
+                            widget="domain_program_compliance"
+                            options="{'model': 'res.partner'}"
                             required="compliance_kind == 'g2p.program_membership.manager.default'"
                         />
                     </group>

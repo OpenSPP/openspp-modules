@@ -33,6 +33,8 @@ export class DomainFieldExtend extends DomainField {
     }
 }
 
-domainField.component = DomainFieldExtend;
+export var domainFieldExtend = {...domainField};
 
-registry.category("fields").add("domain", domainField, {force: true});
+domainFieldExtend.component = DomainFieldExtend;
+
+registry.category("fields").add("domain", domainFieldExtend, {force: true});
