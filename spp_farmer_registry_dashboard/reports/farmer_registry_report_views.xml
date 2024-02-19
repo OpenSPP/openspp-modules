@@ -181,6 +181,7 @@
                 stacked="False"
                 sample="1"
             >
+                 <field name="graph_footer" />
                  <field name="land_water_management_crop_rotation" />
                  <field name="land_water_management_green_cover_crop" />
                  <field name="land_water_management_contour_ploughing" />

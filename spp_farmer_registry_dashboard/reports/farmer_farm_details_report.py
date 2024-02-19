@@ -8,13 +8,14 @@ class FarmDetailsReport(models.Model):
 
     name = fields.Char(string="Farm Name", readonly=True)
     registration_date = fields.Date(readonly=True)
-    land_water_management_crop_rotation = fields.Integer(
+    graph_footer = fields.Char(readonly=True)
+    land_water_management_crop_rotation = fields.Char(
         string="Crop Rotation", readonly=True
     )
-    land_water_management_green_cover_crop = fields.Integer(
+    land_water_management_green_cover_crop = fields.Char(
         string="Green cover crop", readonly=True
     )
-    land_water_management_contour_ploughing = fields.Integer(
+    land_water_management_contour_ploughing = fields.Char(
         string="Contour ploughing/Ridging", readonly=True
     )
 
@@ -29,23 +30,24 @@ class FarmDetailsReport(models.Model):
                 farm.id,
                 farm.name AS name,
                 farm.registration_date AS registration_date,
+                'Sustainable Land and Environmental Management' AS graph_footer,
                 CASE
                     WHEN dtl.land_water_management_crop_rotation THEN
-                        1
+                        'Crop Rotation'
                     ELSE
-                        0
+                        NULL
                 END AS land_water_management_crop_rotation,
                 CASE
                     WHEN dtl.land_water_management_green_cover_crop THEN
-                        1
+                        'Green cover crop'
                     ELSE
-                        0
+                        NULL
                 END AS land_water_management_green_cover_crop,
                 CASE
                     WHEN dtl.land_water_management_contour_ploughing THEN
-                        1
+                        'Contour ploughing/Ridging'
                     ELSE
-                        0
+                        NULL
                 END AS land_water_management_contour_ploughing
         """
 
