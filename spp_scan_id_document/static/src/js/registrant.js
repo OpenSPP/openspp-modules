@@ -1,103 +1,89 @@
-// Web.AbstractField module is already obsolete in odoo 17, need to find a way to fix this.
+/** @odoo-module **/
 
-odoo.define("spp_scan_id_document.field", [], function (require) {
-    const initialise_url = "http://localhost:12212/initialise";
-    const readdocument_url = "http://localhost:12212/readdocument";
-    const shutdown_url = "http://localhost:12212/shutdown";
-    const qrcode_url = "http://localhost:12212/qrcode";
+import {browser} from "@web/core/browser/browser";
+import {registry} from "@web/core/registry";
+import {RPCErrorDialog} from "@web/core/errors/error_dialogs";
 
-    var field_registry = require("web.field_registry");
-    var AbstractField = require("web.AbstractField");
-    var Dialog = require("web.Dialog");
+import {Component} from "@odoo/owl";
 
-    var DocumentReader = AbstractField.extend({
-        template: "id_document_reader",
-        xmlDependencies: ["/spp_scan_id_document/static/src/xml/registrant_widget.xml"],
-        events: {
-            click: "_onClick",
-        },
-        init: function () {
-            this._super.apply(this, arguments);
-            this.onclick_started = false;
-            this.initialise_url = initialise_url;
-            this.get_url = readdocument_url;
-            this.shutdown_url = shutdown_url;
+export class DocumentReader extends Component {
+    setup() {
+        this.widget = {
+            icon: "fa fa-fw o_button_icon fa-external-link",
+            classes: "btn oe_stat_button oe_edit_only",
+            classes_field: "btn btn-primary oe_edit_only",
+            text: "Scan Document",
+        };
+        this.initialise_url = DocumentReader.initialise_url;
+        this.get_url = DocumentReader.readdocument_url;
+    }
 
-            const default_button_text = "Scan Document";
-            const default_icon = "fa fa-fw o_button_icon fa-external-link";
-            const default_classes = "btn oe_stat_button oe_edit_only";
-            const default_classes_field = "btn btn-primary oe_edit_only";
-            var icon = "";
-            if (this.attrs.icon) {
-                icon = "fa fa-fw o_button_icon " + this.attrs.icon;
-            }
-            this.text = this.attrs.text || this.attrs.title || this.attrs.string || default_button_text;
-            this.icon = icon || default_icon;
-            this.classes = this.attrs.classes || this.attrs.classNames || default_classes;
-            this.classes_field = this.attrs.classes || default_classes_field;
-        },
-        _onClick: function () {
-            if (!this.onclick_started) {
-                this.onclick_started = true;
-                fetch(this.initialise_url, {
-                    method: "GET",
-                })
-                    .then((initialise_response) => {
-                        if (initialise_response.ok) {
-                            fetch(this.get_url, {
-                                method: "GET",
-                            })
-                                .then((read_response) => read_response.text())
-                                .then((response) => {
-                                    if (response === "{}") {
-                                        this.onclick_started = false;
-                                    } else {
-                                        this._setValue(response, "UPDATE");
-                                        fetch(this.shutdown_url, {
-                                            method: "GET",
-                                        }).then(() => {
-                                            // Shutdown completed
-                                            this._setValue(" ", "UPDATE");
-                                            this.onclick_started = false;
-                                        });
-                                    }
-                                });
-                        } else {
-                            this.onclick_started = false;
-                        }
+    onClick() {
+        const {fetch} = browser;
+        fetch(this.initialise_url, {
+            method: "GET",
+        })
+            .then((initialise_response) => {
+                if (initialise_response.ok) {
+                    fetch(this.get_url, {
+                        method: "GET",
                     })
-                    .catch(() => {
-                        this.onclick_started = false;
-                        Dialog.alert(
-                            this,
-                            "ERROR! Unable to connect to scanner. Make sure scanner is working and connected."
-                        );
-                    });
-            }
-        },
-    });
+                        .then((read_response) => read_response.text())
+                        .then((response) => {
+                            this.props.record._update({id_document_details: response});
+                        });
+                }
+            })
+            .catch(() => {
+                this.props.record.model.dialog.add(RPCErrorDialog, {
+                    message:
+                        "ERROR! Unable to connect to scanner. Make sure scanner is working and connected.",
+                    traceback:
+                        "ERROR! Unable to connect to scanner. Make sure scanner is working and connected.",
+                });
+            });
+    }
+}
 
-    var DocumentReaderField = DocumentReader.extend({
-        template: "id_document_reader_field",
-    });
+DocumentReader.initialise_url = "http://localhost:12212/initialise";
+DocumentReader.readdocument_url = "http://localhost:12212/readdocument";
+DocumentReader.shutdown_url = "http://localhost:12212/shutdown";
+DocumentReader.qrcode_url = "http://localhost:12212/qrcode";
+DocumentReader.template = "spp_scan_id_document.id_document_reader";
 
-    var QrDocumentReader = DocumentReader.extend({
-        template: "id_document_reader",
-        init: function () {
-            this._super.apply(this, arguments);
-            this.get_url = qrcode_url;
-        },
-    });
+class DocumentReaderField extends DocumentReader {}
 
-    var QrDocumentReaderField = QrDocumentReader.extend({
-        template: "id_document_reader_field",
-    });
+DocumentReaderField.template = "spp_scan_id_document.id_document_reader_field";
 
-    // Widgets for a button with fa-external-link design.
-    field_registry.add("id_document_reader", DocumentReader);
-    field_registry.add("id_document_qrreader", QrDocumentReader);
+class QrDocumentReader extends DocumentReader {
+    setup() {
+        super.setup();
+        this.get_url = DocumentReader.qrcode_url;
+    }
+}
 
-    // Widgets for a simple button without fa-external-link design.
-    field_registry.add("id_document_reader_field", DocumentReaderField);
-    field_registry.add("id_document_qrreader_field", QrDocumentReaderField);
-});
+class QrDocumentReaderField extends QrDocumentReader {}
+
+QrDocumentReaderField.template = "spp_scan_id_document.id_document_reader_field";
+
+export const documentReader = {
+    component: DocumentReader,
+};
+
+export const documentReaderField = {
+    component: DocumentReaderField,
+};
+
+export const qrDocumentReader = {
+    component: QrDocumentReader,
+};
+
+export const qrDocumentReaderField = {
+    component: QrDocumentReaderField,
+};
+
+registry.category("fields").add("id_document_reader", documentReader);
+registry.category("fields").add("id_document_reader_field", documentReaderField);
+
+registry.category("fields").add("id_document_qrreader", qrDocumentReader);
+registry.category("fields").add("id_document_qrreader_field", qrDocumentReaderField);

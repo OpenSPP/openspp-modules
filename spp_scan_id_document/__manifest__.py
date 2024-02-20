@@ -14,7 +14,8 @@
     "assets": {
         "web.assets_backend": [
             # web.AbstractField module is already obsolete in odoo 17
-            # "/spp_scan_id_document/static/src/js/registrant.js",
+            "/spp_scan_id_document/static/src/js/registrant.js",
+            "/spp_scan_id_document/static/src/xml/registrant_widget.xml",
         ],
     },
     "demo": [],
