@@ -19,10 +19,13 @@ class G2PGroupPMT(models.Model):
     x_cst_indv_disability = fields.Boolean("Disability")
 
     # Floating-point field to store the computed PMT score of the group
+    # TODO: Why this is not stored? We are having performance issue with this in program enrollment.
     z_ind_grp_pmt_score = fields.Float(
         "PMT Score of the group",
         compute="_compute_pmt_score",
         compute_sudo=True,
+        store=True,
+        recompute_daily=True,
     )
     grp_pmt_score = fields.Float(
         "PMT Score of the group", compute="_compute_pmt_score", store=True
@@ -47,8 +50,7 @@ class G2PGroupPMT(models.Model):
             rec.area_calc = area_calc
 
     def _compute_pmt_score(self):
-
-        hh_area = self.area_id
+        # TODO: FIx issue with self returning more than 1 record
 
         model = self.env["ir.model"].search([("model", "=", "res.partner")])
 
@@ -60,18 +62,24 @@ class G2PGroupPMT(models.Model):
             ]
         )
         weights = {}
-        if fields:
-            for field in fields:
-                if hh_area:
-                    areas = field.area_ids.filtered(lambda a: a.name.id == hh_area.id)
-                    if areas:
-                        weights.update({field.name: areas[0].weight})
+        for record in self:
+            hh_area = record.area_id
+            if fields:
+                for field in fields:
+                    if hh_area:
+                        _logger.info(
+                            "pmt.py: self.area_id: %s - %s" % (self.area_id, hh_area)
+                        )
+                        areas = field.area_ids.filtered(
+                            lambda a: a.name.id == hh_area.id
+                        )
+                        if areas:
+                            weights.update({field.name: areas[0].weight})
+                        else:
+                            weights.update({field.name: field.field_weight})
                     else:
                         weights.update({field.name: field.field_weight})
-                else:
-                    weights.update({field.name: field.field_weight})
 
-        for record in self:
             if weights:
                 z_ind_grp_pmt_score = 0
                 if record.group_membership_ids:
