@@ -14,6 +14,7 @@ dependencies = [
     "odoo-addon-spp_base>=17.0dev,<17.1dev",
     "odoo-addon-spp_base_api>=17.0dev,<17.1dev",
     "odoo-addon-spp_base_demo>=17.0dev,<17.1dev",
+    "odoo-addon-spp_base_gis>=17.0dev,<17.1dev",
     "odoo-addon-spp_base_setting>=17.0dev,<17.1dev",
     "odoo-addon-spp_basic_cash_entitlement_spent>=17.0dev,<17.1dev",
     "odoo-addon-spp_change_request>=17.0dev,<17.1dev",
