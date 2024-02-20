@@ -4,7 +4,7 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "category": "Theme",
     "version": "17.0.1.0.0",
-    "license": "AGPL-3",
+    "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": ["base"],

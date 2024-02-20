@@ -5,7 +5,7 @@
     "category": "Theme",
     "version": "17.0.1.0.0",
     "depends": ["base", "calendar", "contacts", "account", "event", "stock", "utm", "web", "muk_web_theme"],
-    "license": "AGPL-3",
+    "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "data": ["views/hide_menu_view.xml"],
