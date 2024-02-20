@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
-    <span t-name="id_document_reader">
-        <button t-att-class="widget.classes">
+    <span t-name="spp_scan_id_document.id_document_reader">
+        <button t-att-class="widget.classes" t-on-click="onClick">
             <i t-att-class="widget.icon" />
             <div class="o_form_field o_stat_info">
                 <span class="o_stat_text"><t t-esc="widget.text" /></span>
@@ -9,8 +9,8 @@
         </button>
     </span>
 
-    <span t-name="id_document_reader_field">
-        <button type="button" t-att-class="widget.classes_field">
+    <span t-name="spp_scan_id_document.id_document_reader_field">
+        <button type="button" t-att-class="widget.classes_field" t-on-click="onClick">
             <i t-att-class="widget.icon" />
             <t t-esc="widget.text" />
         </button>
