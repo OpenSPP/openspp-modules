@@ -9,19 +9,13 @@ class FarmDetailsReport(models.Model):
     name = fields.Char(string="Farm Name", readonly=True)
     registration_date = fields.Date(readonly=True)
     graph_footer = fields.Char(readonly=True)
-    land_water_management_crop_rotation = fields.Char(
-        string="Crop Rotation", readonly=True
-    )
-    land_water_management_green_cover_crop = fields.Char(
-        string="Green cover crop", readonly=True
-    )
-    land_water_management_contour_ploughing = fields.Char(
-        string="Contour ploughing/Ridging", readonly=True
-    )
+    land_water_management_crop_rotation = fields.Char(string="Crop Rotation", readonly=True)
+    land_water_management_green_cover_crop = fields.Char(string="Green cover crop", readonly=True)
+    land_water_management_contour_ploughing = fields.Char(string="Contour ploughing/Ridging", readonly=True)
 
     @property
     def _table_query(self):
-        return "%s %s %s" % (self._select(), self._from(), self._where())
+        return f"{self._select()} {self._from()} {self._where()}"
 
     @api.model
     def _select(self):
