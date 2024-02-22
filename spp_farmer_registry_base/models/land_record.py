@@ -7,7 +7,7 @@ from shapely.ops import transform
 from odoo import api, fields, models
 
 
-# We might move it to its own module
+# TODO: Move it to its own module Independent of farm_base
 class LandRecord(models.Model):
     _name = "spp.land.record"
     _description = "Land Record Details"

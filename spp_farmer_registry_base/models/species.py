@@ -5,7 +5,6 @@ from odoo import fields, models
 _logger = logging.getLogger(__name__)
 
 
-# TODO: Look if there is an Odoo object we should extend instead of creating a new one
 class Species(models.Model):
     _name = "spp.farm.species"
     _description = "Species"
