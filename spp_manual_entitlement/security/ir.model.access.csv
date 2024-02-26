@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_manual_entitlement_wizard_admin,SPP Manual Entitlement Wizard Admin Access,spp_manual_entitlement.model_spp_manual_entitlement_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_cycle_membership_transient_admin,SPP Cycle Membership Transient Admin Access,spp_manual_entitlement.model_spp_cycle_membership_transient,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_upload_cycle_membership_admin,SPP Upload Cycle Membership Admin Access,spp_manual_entitlement.model_spp_upload_cycle_membership,g2p_registry_base.group_g2p_admin,1,1,1,1
