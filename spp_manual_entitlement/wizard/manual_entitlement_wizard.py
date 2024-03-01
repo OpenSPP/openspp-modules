@@ -87,18 +87,33 @@ class SPPPrepareManualEntitlementWizard(models.TransientModel):
             title = "Data Imported"
             return self._reopen_self(title)
 
+    def search_existing_entitlement(self, registrant):
+        current_entitlement = self.env["g2p.entitlement"].search(
+            [("partner_id", "=", registrant), ("cycle_id", "=", self.cycle_id.id)]
+        )
+        if current_entitlement:
+            return True
+        return False
+
     def finalize_import(self):
         for rec in self:
             beneficiary_vals = [(Command.clear())]
             beneficiary_count = 0
             for beneficiary in rec.upload_cycle_membership_ids:
-                partner = self.env["g2p.cycle.membership"].search(
-                    [("partner_id", "=", beneficiary.partner_id), ("cycle_id", "=", rec.cycle_id.id)]
-                )
-                if partner:
-                    beneficiary_count += 1
-                    vals = {"partner_id": partner.partner_id.id, "entitlement_amount": beneficiary.entitlement_amount}
-                    beneficiary_vals.append(Command.create(vals))
+                registrant = self.env["res.partner"].search([("spp_id", "=", beneficiary.partner_id)])
+                if registrant:
+                    with_existing_entitlement = self.search_existing_entitlement(registrant.id)
+                    if not with_existing_entitlement:
+                        partner = self.env["g2p.cycle.membership"].search(
+                            [("partner_id", "=", registrant.id), ("cycle_id", "=", rec.cycle_id.id)]
+                        )
+                        if partner:
+                            beneficiary_count += 1
+                            vals = {
+                                "partner_id": partner.partner_id.id,
+                                "entitlement_amount": beneficiary.entitlement_amount,
+                            }
+                            beneficiary_vals.append(Command.create(vals))
 
             if beneficiary_count > 0:
                 rec.update({"cycle_membership_ids": beneficiary_vals})
@@ -106,14 +121,24 @@ class SPPPrepareManualEntitlementWizard(models.TransientModel):
                 title = "Finalize entitlement amount"
                 return self._reopen_self(title)
             else:
-                raise UserError(_("No existing beneficiary found, please check your excel/csv file."))
+                raise UserError(
+                    _(
+                        "Nothing to Import, either the registrant doesn't exists "
+                        "or there's an existing entitlement for the registrant in this cycle. "
+                        "Please check your excel or csv file."
+                    )
+                )
 
     def step_manual_select(self):
+        if not self.cycle_membership_ids:
+            raise UserError(_("All beneficiaries for this cycle has entitlement. Can't proceed!"))
         self.step = "step2a"
         title = "Beneficiary Selection"
         return self._reopen_self(title)
 
     def step_upload_csv(self):
+        if not self.cycle_membership_ids:
+            raise UserError(_("All beneficiaries for this cycle has entitlement. Can't proceed!"))
         self.step = "step2b_1"
         title = "CSV Upload"
         return self._reopen_self(title)
@@ -171,6 +196,6 @@ class SPPUploadedCycleMembership(models.TransientModel):
     _name = "spp.upload.cycle.membership"
     _description = "Upload Cycle Membership"
 
-    partner_id = fields.Integer("Registrant")
+    partner_id = fields.Char("Registrant")
     entitlement_amount = fields.Float()
     manual_entitlement_id = fields.Many2one("spp.manual.entitlement.wizard")

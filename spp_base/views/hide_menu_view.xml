@@ -18,5 +18,4 @@
     </record>
 
     <menuitem id="mail.menu_root_discuss" name="Line Tracker" groups="hide_menu" />
-
 </odoo>
