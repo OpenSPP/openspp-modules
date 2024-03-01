@@ -15,7 +15,6 @@
         "base",
         "utm",
         "mail",
-        "dms",
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_registry_group",
@@ -27,7 +26,6 @@
         "spp_custom_field",
         "spp_custom_fields_ui",
         "spp_programs",
-        "spp_helpdesk",
     ],
     "external_dependencies": {},
     "data": [

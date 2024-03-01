@@ -23,14 +23,24 @@ class SPPCycle(models.Model):
 
             rec.is_manual_entitlement = is_manual_entitlement
 
+    def search_existing_entitlement(self, registrant):
+        current_entitlement = self.env["g2p.entitlement"].search(
+            [("partner_id", "=", registrant), ("cycle_id", "=", self.id)]
+        )
+        if current_entitlement:
+            return True
+        return False
+
     def prepare_entitlement_manual(self):
         view = self.env.ref("spp_manual_entitlement.manual_entitlement_wizard_form_view")
 
         cycle_memberships = self.cycle_membership_ids.mapped("partner_id.id")
         cycle_membership_vals = []
         for cycle_member in cycle_memberships:
-            vals = {"partner_id": cycle_member}
-            cycle_membership_vals.append(Command.create(vals))
+            with_existing_entitlement = self.search_existing_entitlement(cycle_member)
+            if not with_existing_entitlement:
+                vals = {"partner_id": cycle_member}
+                cycle_membership_vals.append(Command.create(vals))
 
         wiz = self.env["spp.manual.entitlement.wizard"].create(
             {"cycle_id": self.id, "cycle_membership_ids": cycle_membership_vals, "step": "step1"}

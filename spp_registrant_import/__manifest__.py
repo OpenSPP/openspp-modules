@@ -11,7 +11,6 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "nhatnm0612"],
     "depends": [
         "spp_base",
-        "spp_import_match",
     ],
     "data": [
         "views/res_partner_views.xml",
@@ -21,5 +20,4 @@
     "application": False,
     "installable": True,
     "auto_install": False,
-    "post_init_hook": "post_init_hook",
 }
