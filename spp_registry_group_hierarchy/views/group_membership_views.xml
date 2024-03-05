@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Part of OpenSPP Modules. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <record id="view_group_membership_form_spp_custom" model="ir.ui.view">
+        <field name="name">view_group_membership_form_spp_custom</field>
+        <field name="model">g2p.group.membership</field>
+        <field name="inherit_id" ref="g2p_registry_membership.view_group_membership_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="after">
+                <field name="individual_domain" invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='individual']" position="attributes">
+                <attribute name="domain">
+                    individual_domain
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

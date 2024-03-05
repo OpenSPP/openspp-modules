@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Part of OpenSPP Modules. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_group_kind_tree_spp_custom" model="ir.ui.view">
+        <field name="name">view_group_kind_tree_spp_custom</field>
+        <field name="model">g2p.group.kind</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_group_kind_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="allow_all_member_type" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
