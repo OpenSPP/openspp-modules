@@ -1,6 +1,7 @@
 import logging
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -31,3 +32,13 @@ class SPPGroupMembership(models.Model):
                         group_id = rec.group._origin.id
                     domain = [("is_registrant", "=", True), ("id", "!=", group_id)]
             rec.individual_domain = domain
+
+    def open_member_form(self):
+        for rec in self:
+            if rec.individual:
+                if rec.individual.is_group:
+                    return rec.open_group_form()
+                else:
+                    return rec.open_individual_form()
+            else:
+                raise UserError(_("A group or individual must be speficied for this member."))
