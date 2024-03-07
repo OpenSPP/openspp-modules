@@ -7,6 +7,7 @@
     <record id="view_groups_form_membership_spp_custom" model="ir.ui.view">
         <field name="name">view_groups_form_membership_spp_custom</field>
         <field name="model">res.partner</field>
+        <field name="priority" eval="200" />
         <field name="inherit_id" ref="g2p_registry_membership.view_groups_form_membership" />
         <field name="arch" type="xml">
             <xpath
