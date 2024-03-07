@@ -1,10 +1,9 @@
 /** @odoo-module **/
 
+import {Component} from "@odoo/owl";
+import {RPCErrorDialog} from "@web/core/errors/error_dialogs";
 import {browser} from "@web/core/browser/browser";
 import {registry} from "@web/core/registry";
-import {RPCErrorDialog} from "@web/core/errors/error_dialogs";
-
-import {Component} from "@odoo/owl";
 
 export class DocumentReader extends Component {
     setup() {

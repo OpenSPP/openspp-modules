@@ -161,7 +161,7 @@
          <field name="name">farmer.sus.land.env.report.view.tree</field>
          <field name="model">farm.details.report</field>
          <field name="arch" type="xml">
-             <tree string="Sustainable Land and Environmental Management Statistics">
+             <tree>
                 <field name="name" string="Farm Name" />
                 <field name="registration_date" optional="show" />
                 <field name="land_water_management_crop_rotation" optional="show" />
