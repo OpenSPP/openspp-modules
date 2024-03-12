@@ -2,7 +2,7 @@
 
 
 {
-    "name": "Farmer Registry: Base",
+    "name": "OpenSPP: Land Record",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -13,25 +13,16 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "base",
-        "g2p_registry_base",
-        "g2p_registry_individual",
-        "g2p_registry_group",
-        "g2p_registry_membership",
         "spp_base_gis",
-        "spp_land_record",
+        "g2p_registry_base",
     ],
-    "external_dependencies": {"python": ["shapely", "geojson", "simplejson", "pyproj"]},
     "data": [
         "security/ir.model.access.csv",
-        "data/kind_data.xml",
-        "data/id_data.xml",
-        "views/res_partner.xml",
-        "views/configuration_view.xml",
     ],
     "assets": {},
     "demo": [],
     "images": [],
-    "application": False,
+    "application": True,
     "installable": True,
     "auto_install": False,
 }
