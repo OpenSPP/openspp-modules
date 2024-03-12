@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class FarmActivity(models.Model):
@@ -8,4 +8,3 @@ class FarmActivity(models.Model):
     product_name = fields.Char("Product Name")
     product_name_eng = fields.Char("Product Name (English)")
     prod_farm_id = fields.Many2one("res.partner", string="Product Farm")
-

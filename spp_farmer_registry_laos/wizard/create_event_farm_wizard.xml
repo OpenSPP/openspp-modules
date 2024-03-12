@@ -14,10 +14,10 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="no_hh_member"/>
+                                <label for="no_hh_member" />
                                 <div>
                                 </div>
-                                <field name="no_hh_member"/>
+                                <field name="no_hh_member" />
                             </div>
                         </div>
                         <div class="col-4 o_setting_box">
