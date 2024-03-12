@@ -1,11 +1,6 @@
-import json
 import logging
 
-import pyproj
-from shapely.geometry import mapping
-from shapely.ops import transform
-
-from odoo import Command, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
