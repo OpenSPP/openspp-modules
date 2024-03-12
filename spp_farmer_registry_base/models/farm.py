@@ -18,7 +18,7 @@ class Farm(models.Model):
         "spp.farmer": "farmer_id",
     }
 
-    coordinates = fields.GeoPoint(string="GPS Coordinates")
+    coordinates = fields.GeoPointField(string="GPS Coordinates")
     farm_asset_ids = fields.One2many("spp.farm.asset", "asset_farm_id", string="Farm Assets")
     farm_machinery_ids = fields.One2many("spp.farm.asset", "machinery_farm_id", string="Farm Machinery")
     farm_details_ids = fields.One2many("spp.farm.details", "details_farm_id", string="Farm Details")

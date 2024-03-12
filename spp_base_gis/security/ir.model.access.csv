@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+spp_gis_data_layer_user_access,Data Layer GIS User Access,spp_base_gis.model_spp_gis_data_layer,spp_base_gis.group_gis_user,1,0,0,0
+spp_gis_raster_layer_user_access,Raster Layer GIS User Access,spp_base_gis.model_spp_gis_raster_layer,spp_base_gis.group_gis_user,1,0,0,0
+spp_gis_raster_layer_type_user_access,Raster Layer Type GIS User Access,spp_base_gis.model_spp_gis_raster_layer_type,spp_base_gis.group_gis_user,1,0,0,0
+
+spp_gis_data_layer_admin_access,Data Layer GIS Admin Access,spp_base_gis.model_spp_gis_data_layer,spp_base_gis.group_gis_admin,1,1,1,1
+spp_gis_raster_layer_admin_access,Raster Layer GIS Admin Access,spp_base_gis.model_spp_gis_raster_layer,spp_base_gis.group_gis_admin,1,1,1,1
+spp_gis_raster_layer_type_admin_access,Raster Layer Type GIS Admin Access,spp_base_gis.model_spp_gis_raster_layer_type,spp_base_gis.group_gis_admin,1,1,1,1

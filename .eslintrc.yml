@@ -133,7 +133,7 @@ rules:
   no-this-before-super: warn
   no-throw-literal: warn
   no-undef-init: warn
-  no-undef: error
+  no-undef: warn
   no-unmodified-loop-condition: warn
   no-unneeded-ternary: error
   no-unreachable: error

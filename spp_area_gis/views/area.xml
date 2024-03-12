@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="custom_view_spparea_form" model="ir.ui.view">
+        <field name="name">custom_view_spparea_form</field>
+        <field name="model">spp.area</field>
+        <field name="inherit_id" ref="spp_area.view_spparea_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='child']" position="after">
+                <page name="coordinates" string="Coordinates">
+                    <field name="coordinates" />
+                </page>
+                <page name="polygon" string="Polygon">
+                    <field name="geo_polygon" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_gis_spp_area" model="ir.ui.view">
+        <field name="name">SPP Area GIS View</field>
+        <field eval="16" name="priority" />
+        <field name="model">spp.area</field>
+        <field name="arch" type="xml">
+            <gis editable="1">
+                <field name="id" />
+                <field name="name" select="1" />
+                <field name="display_name" />
+                <field name="area_sqkm" />
+                <field name="coordinates" />
+                <field name="geo_polygon" />
+            </gis>
+        </field>
+    </record>
+
+    <record id="gis_vector_layer_area_coordinates" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_area_gis.field_spp_area__coordinates" />
+        <field name="name">Coordinates</field>
+        <field eval="1" name="sequence" />
+        <field name="view_id" ref="view_gis_spp_area" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record>
+
+    <record id="gis_vector_layer_area_polygons" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_area_gis.field_spp_area__geo_polygon" />
+        <field name="name">Polygons</field>
+        <field eval="3" name="sequence" />
+        <field name="view_id" ref="view_gis_spp_area" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record>
+
+    <record id="gis_raster_layer_area_osm" model="spp.gis.raster.layer">
+        <field name="raster_type">osm</field>
+        <field name="name">Default</field>
+        <field name="view_id" ref="view_gis_spp_area" />
+    </record>
+
+    <record id="spp_area.action_spparea" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,gis</field>
+    </record>
+</odoo>

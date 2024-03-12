@@ -17,7 +17,8 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "g2p_registry_membership",
-        "base_geoengine",
+        "spp_base_gis",
+        "spp_land_record",
     ],
     "external_dependencies": {"python": ["shapely", "geojson", "simplejson", "pyproj"]},
     "data": [

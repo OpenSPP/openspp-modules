@@ -19,7 +19,7 @@ class AgriculturalActivity(models.Model):
         ],
         string="Cultivation Production system",
     )
-    cultivation_chemical_interventions = fields.Many2many("spp.chemical", string="Chemical interventions")
+    cultivation_chemical_interventions = fields.Many2many("spp.farm.chemical", string="Chemical interventions")
     cultivation_fertilizer_interventions = fields.Many2many("spp.fertilizer", string="Fertilizer interventions")
 
     # Fields for Livestock Rearing
