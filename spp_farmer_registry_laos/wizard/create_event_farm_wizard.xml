@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_farm_form_view" model="ir.ui.view">
+        <field name="name">create_event_farm_form_view</field>
+        <field name="model">spp.create.event.farm.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_hh_member"/>
+                                <div>
+                                </div>
+                                <field name="no_hh_member"/>
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_indigenous" />
+                                <div>
+                                </div>
+                                <field name="no_indigenous" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="percent_indigenous" />
+                                <div>
+                                </div>
+                                <field name="percent_indigenous" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_15_35" />
+                                <div>
+                                </div>
+                                <field name="no_15_35" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="percent_15_35" />
+                                <div>
+                                </div>
+                                <field name="percent_15_35" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_woman_headed" />
+                                <div>
+                                </div>
+                                <field name="no_woman_headed" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_better_off" />
+                                <div>
+                                </div>
+                                <field name="no_better_off" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_medium" />
+                                <div>
+                                </div>
+                                <field name="no_medium" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_poor" />
+                                <div>
+                                </div>
+                                <field name="no_poor" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_male" />
+                                <div>
+                                </div>
+                                <field name="no_male" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_female" />
+                                <div>
+                                </div>
+                                <field name="no_female" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_both" />
+                                <div>
+                                </div>
+                                <field name="no_both" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

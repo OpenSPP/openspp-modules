@@ -9,7 +9,25 @@ class Farmer(models.Model):
     farmer_national_id = fields.Char(string="National ID Number")
     farmer_household_size = fields.Integer(string="Farmer Household Size")
     farmer_postal_address = fields.Char("Postal Address")
-
+    marital_status = fields.Selection(
+        [
+            ("single", "Single"),
+            ("married_monogamous", "Married Monogamous"),
+            ("married_polygamous", "Married Polygamous"),
+            ("widowed", "Widowed"),
+            ("separated", "Separated"),
+        ],
+        string="Marital Status",
+    )
+    highest_education_level = fields.Selection(
+        [
+            ("none", "None"),
+            ("primary", "Primary"),
+            ("secondary", "Secondary"),
+            ("tertiary", "Tertiary"),
+        ],
+        string="Highest Educational Level",
+    )
 
 class TempFarmer(models.Model):
     _name = "spp.farmer"
