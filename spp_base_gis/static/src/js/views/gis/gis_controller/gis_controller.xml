@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates>
+    <t t-name="spp_base_gis.GisController">
+        <Layout display="props.display" className="'h-100'">
+            <t t-set-slot="layout-actions">
+                <SearchBar t-if="searchBarToggler.state.showSearchBar" autofocus="firstLoad" />
+            </t>
+            <t
+                t-component="props.Renderer"
+                isSavedOrDiscarded="state.isSavedOrDiscarded"
+                archInfo="props.archInfo"
+                data="model.root"
+                editable="editable"
+                openFormRecord.bind="openFormRecord"
+            />
+        </Layout>
+    </t>
+</templates>
