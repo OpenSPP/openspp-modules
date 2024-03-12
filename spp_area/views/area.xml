@@ -60,7 +60,7 @@
                         <field name="area_sqkm" />
                     </group>
                     <notebook>
-                        <page string="Child">
+                        <page name="child" string="Child">
                             <field name="child_ids" nolabel="1">
                                 <tree>
                                     <field name="name" />
