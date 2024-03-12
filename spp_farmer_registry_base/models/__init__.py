@@ -8,6 +8,5 @@ from . import extension_services
 from . import farm_asset
 from . import farm_details
 from . import farmer
-from . import land_record
 from . import species
 from . import farm

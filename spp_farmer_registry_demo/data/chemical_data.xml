@@ -1,14 +1,14 @@
 <odoo noupdate="1">
-    <record id="chemical_fungicides" model="spp.chemical">
+    <record id="chemical_fungicides" model="spp.farm.chemical">
        <field name="name">Fungicides</field>
     </record>
-    <record id="chemical_herbicides" model="spp.chemical">
+    <record id="chemical_herbicides" model="spp.farm.chemical">
        <field name="name">Herbicides</field>
     </record>
-    <record id="chemical_insecticides" model="spp.chemical">
+    <record id="chemical_insecticides" model="spp.farm.chemical">
        <field name="name">Insecticides</field>
     </record>
-    <record id="chemical_rodenticides" model="spp.chemical">
+    <record id="chemical_rodenticides" model="spp.farm.chemical">
        <field name="name">Rodenticides</field>
     </record>
 

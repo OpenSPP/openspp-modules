@@ -7,7 +7,6 @@ from shapely.ops import transform
 from odoo import api, fields, models
 
 
-# We might move it to its own module
 class LandRecord(models.Model):
     _name = "spp.land.record"
     _description = "Land Record Details"
@@ -18,8 +17,8 @@ class LandRecord(models.Model):
     land_acreage = fields.Float()
 
     # TODO: Change to geo_point and geo_polygon
-    land_coordinates = fields.GeoPoint()
-    land_geo_polygon = fields.GeoMultiPolygon()
+    land_coordinates = fields.GeoPointField()
+    land_geo_polygon = fields.GeoPolygonField()
 
     land_use = fields.Selection(
         [
