@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="gis_partner_view_form">
+        <field name="name">gis_partner_view_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <notebook>
+                <!-- <page
+                    string="GIS Multi Polygon"
+                    name="gis_multi_polygon"
+                    groups="spp_base_gis.group_gis_user,spp_base_gis.group_gis_admin"
+                >
+                    <field name="geo_multi_polygon" />
+                </page> -->
+                <page
+                    string="GIS Polygon"
+                    name="gis_polygon"
+                    groups="spp_base_gis.group_gis_user,spp_base_gis.group_gis_admin"
+                >
+                    <field name="geo_polygon_field" />
+                </page>
+                <page
+                    string="GIS Point"
+                    name="gis_point"
+                    groups="spp_base_gis.group_gis_user,spp_base_gis.group_gis_admin"
+                >
+                    <field name="geo_point" />
+                </page>
+                <page
+                    string="GIS Line"
+                    name="gis_line"
+                    groups="spp_base_gis.group_gis_user,spp_base_gis.group_gis_admin"
+                >
+                    <field name="geo_line" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="ir_ui_view_gis_partner" model="ir.ui.view">
+        <field name="name">Partner view</field>
+        <field eval="16" name="priority" />
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <gis editable="1">
+                <field name="id" />
+                <field name="name" select="1" />
+                <field name="display_name" />
+                <field name="title" />
+                <field name="function" />
+                <field name="website" />
+                <field name="zip" />
+                <field name="city" />
+                <field name="country_id" />
+                <field name="geo_point" />
+                <!-- <field name="geo_multi_polygon" /> -->
+                <field name="geo_line" />
+                <field name="geo_polygon_field" />
+            </gis>
+        </field>
+    </record>
+
+    <record id="gis_data_layer_res_partner" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_base_gis_demo.field_res_partner__geo_point" />
+        <field name="name">Partner location</field>
+        <field eval="1" name="sequence" />
+        <field name="view_id" ref="ir_ui_view_gis_partner" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record>
+
+    <record id="gis_data_layer_geo_line_res_partner" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_base_gis_demo.field_res_partner__geo_line" />
+        <field name="name">Partner location Line</field>
+        <field eval="2" name="sequence" />
+        <field name="view_id" ref="ir_ui_view_gis_partner" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record>
+
+    <!-- <record id="gis_data_layer_geo_multi_polygon_res_partner" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_base_gis_demo.field_res_partner__geo_multi_polygon" />
+        <field name="name">Partner location MultiPolygon</field>
+        <field eval="3" name="sequence" />
+        <field name="view_id" ref="ir_ui_view_gis_partner" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record> -->
+
+    <record id="gis_data_layer_geo_polygon_res_partner" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_base_gis_demo.field_res_partner__geo_polygon_field" />
+        <field name="name">Partner location Polygon</field>
+        <field eval="3" name="sequence" />
+        <field name="view_id" ref="ir_ui_view_gis_partner" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record>
+
+    <record id="geo_raster_layer_res_partner_osm" model="spp.gis.raster.layer">
+        <field name="raster_type">osm</field>
+        <field name="name">Partner background</field>
+        <field name="view_id" ref="ir_ui_view_gis_partner" />
+    </record>
+
+    <record id="contacts.action_contacts" model="ir.actions.act_window">
+        <field name="view_mode">kanban,tree,form,activity,gis</field>
+    </record>
+
+</odoo>
