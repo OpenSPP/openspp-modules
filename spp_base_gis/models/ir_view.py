@@ -14,7 +14,7 @@ class IrUIView(models.Model):
     data_layer_ids = fields.One2many("spp.gis.data.layer", "view_id", "Data layers", required=True)
 
     default_center = fields.Char("Default map center", default="[124.74037191, 7.83479874]")
-    default_zoom = fields.Integer("Default map zoom", default=10)
+    default_zoom = fields.Integer("Default map zoom", default=14)
 
     def _is_qweb_based_view(self, view_type):
         if view_type == "gis":

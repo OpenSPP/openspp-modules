@@ -51,6 +51,7 @@ export class FieldGisEditMap extends Component {
         });
 
         onPatched(() => {
+            this.defaultZoom = this.map.getZoom();
             this.renderMap();
             this.onLoadMap();
             this.addDrawInteraction();
@@ -88,11 +89,12 @@ export class FieldGisEditMap extends Component {
         if (!this.defaultZoom) {
             this.defaultZoom = 10;
         }
+
         this.map = new maptilersdk.Map({
             container: this.id,
             style: maptilersdk.MapStyle.STREETS,
             center: this.defaultCenter,
-            zoom: 8,
+            zoom: this.defaultZoom,
         });
     }
 
