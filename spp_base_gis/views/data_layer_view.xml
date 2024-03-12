@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="spp_gis_data_layer_form">
+        <field name="name">spp.gis.data.layer.form</field>
+        <field name="model">spp.gis.data.layer</field>
+        <field name="arch" type="xml">
+            <form string="Data Layer">
+                <sheet>
+                    <group string="General" col="4">
+                        <field name="name" />
+                        <field name="view_id" />
+                        <field name="geo_field_id" />
+                        <field name="active_on_startup" />
+                        <field name="sequence" />
+                        <field name="layer_opacity" />
+                    </group>
+                    <group string="Colors" col="4" colspan="4">
+                        <field name="begin_color" widget="color" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="spp_gis_data_layer_view_form">
+        <field name="name">spp.gis.data.layer.form</field>
+        <field name="model">spp.gis.data.layer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="General" col="4">
+                        <field name="name" />
+                        <field name="geo_field_id" />
+                        <field name="sequence" readonly="1" />
+                        <field name="layer_opacity" />
+                    </group>
+                    <group string="Colors" col="4" colspan="4">
+                        <field name="begin_color" widget="color" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_gis_data_layer_view" model="ir.actions.act_window">
+        <field name="name">Data Layer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.gis.data.layer</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="spp_gis_data_layer_view_form" />
+    </record>
+
+
+    <record model="ir.ui.view" id="spp_gis_data_layer_view_tree">
+        <field name="name">spp.gis.data.layer.tree</field>
+        <field name="model">spp.gis.data.layer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" select="1" />
+                <field name="geo_repr" select="1" />
+                <field name="geo_field_id" select="1" />
+                <field name="active_on_startup" />
+                <field name="sequence" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_data_layer_view" model="ir.actions.act_window">
+        <field name="name">Data Layer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.gis.data.layer</field>
+        <field name="view_id" ref="spp_gis_data_layer_view_tree" />
+    </record>
+
+</odoo>

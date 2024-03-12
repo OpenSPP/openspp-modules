@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="gis_view_form">
+        <field name="name">gis.view.form</field>
+        <field name="model">ir.ui.view</field>
+        <field name="inherit_id" ref="base.view_view_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="GIS Data" col="4" invisible="type != 'gis'">
+                    <group>
+                        <field name="default_center" />
+                        <field name="default_zoom" />
+                    </group>
+                    <separator string="Data (Active layers)" colspan="4" />
+                    <field name="data_layer_ids" colspan="4" nolabel="1" />
+                    <separator string="Raster (Background layers)" colspan="4" />
+                    <field name="raster_layer_ids" colspan="4" nolabel="1" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="gis_view_action" model="ir.actions.act_window">
+        <field name="name">Views</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ir.ui.view</field>
+        <field name="view_id" ref="base.view_view_tree" />
+        <field name="search_view_id" ref="base.action_view_search" />
+        <field name="domain">[('type', '=', 'gis')]</field>
+    </record>
+
+</odoo>
