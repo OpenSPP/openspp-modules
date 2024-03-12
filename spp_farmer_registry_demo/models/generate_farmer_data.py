@@ -1,4 +1,5 @@
 import hashlib
+import json
 import math
 import random
 import string
@@ -7,8 +8,6 @@ from datetime import datetime, timedelta
 from faker import Faker
 
 from odoo import Command, api, fields, models
-
-from odoo.addons.base_geoengine.fields import GeoPoint
 
 from ..tools import generate_polygon, random_location_in_kenya
 
@@ -319,26 +318,18 @@ class SPPGenerateFarmerData(models.Model):
     def _generate_land_record_record(self, group_id):
         latitude, longitude = random_location_in_kenya()
 
-        land_coordinates = GeoPoint.from_latlon(self.env.cr, latitude, longitude)
+        land_coordinates = {"type": "Point", "coordinates": [longitude, latitude]}
 
         points = generate_polygon(latitude, longitude, random.randrange(50, 500))
 
-        utm_points = []
-
-        for lon, lat in points:
-            geo_point = GeoPoint.from_latlon(self.env.cr, lat, lon)
-            utm_points.append((geo_point.x, geo_point.y))
-
-        land_geo_polygon = "MULTIPOLYGON((({})))".format(
-            ", ".join([f"{utm_lat} {utm_lon}" for utm_lat, utm_lon in utm_points])
-        )
+        land_geo_polygon = {"type": "Polygon", "coordinates": [points]}
 
         return self.env["spp.land.record"].create(
             {
                 "land_farm_id": group_id.id,
                 "land_name": group_id.name,
-                "land_coordinates": land_coordinates,
-                "land_geo_polygon": land_geo_polygon,
+                "land_coordinates": json.dumps(land_coordinates),
+                "land_geo_polygon": json.dumps(land_geo_polygon),
             }
         )
 
@@ -361,7 +352,7 @@ class SPPGenerateFarmerData(models.Model):
             "Plantation",
             "Greenhouse",
         ]
-        cultivation_chemical_interventions = self.env["spp.chemical"].search([]).mapped("id")
+        cultivation_chemical_interventions = self.env["spp.farm.chemical"].search([]).mapped("id")
         cultivation_fertilizer_interventions = self.env["spp.fertilizer"].search([]).mapped("id")
         livestock_production_systems = [
             "ranching",

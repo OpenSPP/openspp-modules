@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates>
+    <t t-name="spp_base_gis.LayersPanel">
+        <div
+            class="menu border-end"
+            t-att-class="state.isFolded ? 'o_layer_panel_fold' : 'o_layer_panel bg-view'"
+        >
+            <div
+                class="w-100 d-flex"
+                t-att-class="state.isFolded ? 'justify-content-center' : 'justify-content-end'"
+            >
+                <button
+                    type="button"
+                    class="btn"
+                    t-att-class="state.isFolded ? 'unfold text-900': 'fold'"
+                    t-on-click="fold"
+                    aria-label="Toggle Fold"
+                >
+                    <i
+                        t-att-class="state.isFolded ? 'fa fa-arrow-left': 'fa fa-arrow-right'"
+                        role="img"
+                        aria-hidden="true"
+                    />
+                </button>
+            </div>
+            <div t-if="!state.isFolded">
+                <Notebook orientation="'horizontal'">
+                    <t t-set-slot="page_1" title="'Raster Layer'" isVisible="true">
+                        <header class="o_search_panel_section_header pt-4 pb-2 text-uppercase cursor-default">
+                            <span class="fs-6 fw-bold" t-on-click="openNewRaster">Create Raster</span>
+                            <button
+                                type="button"
+                                t-if="isGisAdmin"
+                                class="btn btn-edit"
+                                t-on-click="openNewRaster"
+                                aria-label="Add New Layer"
+                            >
+                                <i class="fa fa-plus text-primary" />
+                            </button>
+                        </header>
+                        <ul class="raster list-group d-block o_search_panel_field">
+                            <li t-foreach="state.gisLayers.backgrounds" t-as="layer" t-key="layer.id">
+                                <div class="d-flex align-items-center">
+                                    <button
+                                        type="button"
+                                        t-if="isGisAdmin"
+                                        class="btn btn-edit"
+                                        t-on-click.prevent="() => this.onEditRasterButtonSelected(layer)"
+                                        aria-label="Edit Layer"
+                                    >
+                                        <i class="fa fa-edit text-primary" />
+                                    </button>
+                                    <div class="form-check o_radio_item d-flex" aria-atomic="true">
+                                        <input
+                                            type="radio"
+                                            t-att-checked="layer.isVisible"
+                                            class="form-check-input o_radio_input"
+                                            t-att-id="'raster_' + layer.id"
+                                            name="raster"
+                                            t-att-value="layer.id"
+                                            t-on-change="() => onRasterChange(layer)"
+                                        />
+                                        <label
+                                            class="form-check-label o_form_label"
+                                            t-att-for="'raster_' + layer.id"
+                                            t-esc="layer.name"
+                                        />
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </t>
+                    <t t-set-slot="page_2" title="'Data Layer'" isVisible="true">
+                        <div t-ref="root" class="root">
+                            <ul class="list p-0">
+                                <li
+                                    t-foreach="state.gisLayers.actives"
+                                    t-as="data"
+                                    t-key="data.resId"
+                                    class="item d-flex align-items-center"
+                                    t-att-data-id="data.id"
+                                >
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <button
+                                            type="button"
+                                            t-if="isGisAdmin"
+                                            class="btn btn-edit"
+                                            t-on-click.prevent="() => this.onEditButtonSelected(data)"
+                                            aria-label="Edit Data"
+                                        >
+                                            <i class="fa fa-edit text-primary" />
+                                        </button>
+                                        <CheckBox
+                                            value="data.isVisible"
+                                            t-on-change="() => onDataLayerChange(data, 'onVisibleChanged', !data.isVisible)"
+                                        >
+                                            <span t-esc="data.name" />
+                                        </CheckBox>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </t>
+                </Notebook>
+            </div>
+        </div>
+    </t>
+</templates>

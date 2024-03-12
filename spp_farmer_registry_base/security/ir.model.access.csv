@@ -5,9 +5,8 @@ spp_farm_asset_admin,Farm Assets and Technology Admin Access,spp_farmer_registry
 spp_asset_type_admin,Asset Type Admin Access,spp_farmer_registry_base.model_asset_type,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_machinery_type_admin,Machinery Type Admin Access,spp_farmer_registry_base.model_machinery_type,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_farm_details_admin,Farm Details Admin Access,spp_farmer_registry_base.model_spp_farm_details,g2p_registry_base.group_g2p_admin,1,1,1,1
-spp_land_record_admin,Land Record Details Admin Access,spp_farmer_registry_base.model_spp_land_record,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_farm_species_admin,Species Admin Access,spp_farmer_registry_base.model_spp_farm_species,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_farmer_admin,Temporary Model for Farmer Admin Access,spp_farmer_registry_base.model_spp_farmer,g2p_registry_base.group_g2p_admin,1,1,1,1
-spp_chemical_admin,Chemical Interventions Types Admin Access,spp_farmer_registry_base.model_spp_chemical,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_farm_chemical_admin,Farm Chemical Interventions Types Admin Access,spp_farmer_registry_base.model_spp_farm_chemical,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_fertilizer_admin,Fertilizer Interventions Types Admin Access,spp_farmer_registry_base.model_spp_fertilizer,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_feed_items_admin,Feed Items Types Admin Access,spp_farmer_registry_base.model_spp_feed_items,g2p_registry_base.group_g2p_admin,1,1,1,1

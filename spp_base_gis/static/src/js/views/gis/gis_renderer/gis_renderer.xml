@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="spp_base_gis.GisRenderer">
+        <div class="d-flex view w-100">
+            <div class="map_container">
+                <div id="olmap" class="ol-map" />
+            </div>
+            <LayersPanel model="props.data.resModel" dataLayerModel="dataLayerModel.root" />
+        </div>
+        <div id="map-legend" class="ol-control" />
+    </t>
+</templates>
