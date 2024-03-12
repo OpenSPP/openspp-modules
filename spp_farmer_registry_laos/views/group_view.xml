@@ -67,6 +67,12 @@
                         </tree>
                     </field>
                 </page>
+                <page name="address_coordinates" string="Address Coordinates">
+                    <field name="land_coordinates" />
+                </page>
+                <page name="farm_land" string="Farm Land">
+                    <field name="land_geo_polygon" />
+                </page>
             </xpath>
         </field>
     </record>
