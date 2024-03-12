@@ -1,0 +1,188 @@
+<odoo>
+    <record id="view_spp_event_farm_tree" model="ir.ui.view">
+        <field name="name">view_spp_event_farm_tree</field>
+        <field name="model">spp.event.farm</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="no_hh_member" />
+                <field name="no_indigenous" />
+                <field name="percent_indigenous" />
+                <field name="no_15_35" />
+                <field name="percent_15_35" />
+                <field name="no_woman_headed" />
+                <field name="no_better_off" />
+                <field name="no_medium" />
+                <field name="no_poor" />
+                <field name="no_male" />
+                <field name="no_female" />
+                <field name="no_both" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_spp_event_farm_form" model="ir.ui.view">
+        <field name="name">view_spp_event_farm_form</field>
+        <field name="model">spp.event.farm</field>
+        <field name="priority">200</field>
+        <field name="arch" type="xml">
+            <form string="Event Data: Farm" duplicate="0">
+                <sheet>
+                  <div class="row mt16 o_settings_container">
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_hh_member"/>
+                                <div>
+                                </div>
+                                <field name="no_hh_member"/>
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_indigenous" />
+                                <div>
+                                </div>
+                                <field name="no_indigenous" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="percent_indigenous" />
+                                <div>
+                                </div>
+                                <field name="percent_indigenous" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_15_35" />
+                                <div>
+                                </div>
+                                <field name="no_15_35" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="percent_15_35" />
+                                <div>
+                                </div>
+                                <field name="percent_15_35" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_woman_headed" />
+                                <div>
+                                </div>
+                                <field name="no_woman_headed" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_better_off" />
+                                <div>
+                                </div>
+                                <field name="no_better_off" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_medium" />
+                                <div>
+                                </div>
+                                <field name="no_medium" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_poor" />
+                                <div>
+                                </div>
+                                <field name="no_poor" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_male" />
+                                <div>
+                                </div>
+                                <field name="no_male" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_female" />
+                                <div>
+                                </div>
+                                <field name="no_female" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_both" />
+                                <div>
+                                </div>
+                                <field name="no_both" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_event_farm" model="ir.actions.act_window">
+        <field name="name">Event Data: Farm</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.event.farm</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Farm Event!
+            </p><p>
+                Click the create button to enter the configuration of the Farm Event.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_event_farm_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_spp_event_farm_tree" />
+        <field name="act_window_id" ref="action_spp_event_farm" />
+    </record>
+
+    <record id="action_spp_event_farm_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_farm_form" />
+        <field name="act_window_id" ref="action_spp_event_farm" />
+    </record>
+
+  </odoo>

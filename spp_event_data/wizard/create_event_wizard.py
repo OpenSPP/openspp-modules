@@ -10,7 +10,7 @@ class SPPCreateEventWizard(models.TransientModel):
     _description = "Create Event Wizard"
 
     event_data_model = fields.Selection(
-        [("default", "")],
+        [("default", "None")],
         "Event Type",
         default="default",
     )

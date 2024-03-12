@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_event_farm_admin,SPP Farm Event Admin Access,spp_farmer_registry_laos.model_spp_event_farm,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_event_farm_registrar,SPP Farm Event Registrar Access,spp_farmer_registry_laos.model_spp_event_farm,g2p_registry_base.group_g2p_registrar,1,1,1,1
+spp_create_event_farm_wizard_admin,SPP Create Farm Event Wizard Admin Access,spp_farmer_registry_laos.model_spp_create_event_farm_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_create_event_farm_wizard_registrar,SPP Create Farm Event Wizard Registrar Access,spp_farmer_registry_laos.model_spp_create_event_farm_wizard,g2p_registry_base.group_g2p_registrar,1,1,1,1
