@@ -62,8 +62,9 @@
                     <field name="farm_prod_ids">
                         <tree editable="bottom">
                             <field name="product_id" width="20%" />
-                            <field name="product_name" width="40%" />
-                            <field name="product_name_eng" width="40%" />
+                            <field name="product_name" width="30%" />
+                            <field name="product_name_eng" width="30%" />
+                            <field name="target_year" width="20%" />
                         </tree>
                     </field>
                 </page>
