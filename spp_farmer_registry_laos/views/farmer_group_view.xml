@@ -1,0 +1,230 @@
+<odoo>
+    <record id="view_farmer_groups_list_tree" model="ir.ui.view">
+        <field name="name">view_farmer_groups_list_tree</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="disabled" duplicate="0">
+                <field name="name" />
+                <field name="address" />
+                <field name="phone" />
+                <field
+                    name="tags_ids"
+                    widget="many2many_tags"
+                    options="{'color_field': 'color', 'no_create_edit': True}"
+                    string="Tags"
+                />
+                <field name="registration_date" />
+                <field name="disabled" column_invisible="1" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_farmer_groups_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+             <form string="Group Registrant" duplicate="0">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-ban"
+                            name="%(g2p_registry_base.action_disable_registrant_wizard)d"
+                            invisible="disabled"
+                            title="Disable"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Disable</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check"
+                            name="enable_registrant"
+                            invisible="not disabled"
+                            title="Enable"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Enable</span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active" />
+                    <widget
+                        name="web_ribbon"
+                        title="Disabled"
+                        bg_color="bg-warning"
+                        invisible="not disabled"
+                    />
+                    <field
+                        name="image_1920"
+                        widget="image"
+                        class="oe_avatar"
+                        options="{'preview_image': 'avatar_128'}"
+                    />
+                    <div class="oe_title mb24">
+                        <h1>
+                            <field
+                                id="registrant"
+                                name="name"
+                                placeholder="Enter name of group..."
+                                required="1"
+                                readonly="disabled"
+                            />
+                        </h1>
+                        <div class="o_row">
+                            <label for="tags_ids" string="Tags: " />
+                            <field
+                                name="tags_ids"
+                                widget="many2many_tags"
+                                options="{'color_field': 'color', 'no_create_edit': True}"
+                                placeholder="Tags..."
+                                colspan="4"
+                                string="Tags"
+                                readonly="disabled"
+                            />
+                            <label for="company_id" string=" | Company: " groups="base.group_multi_company" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                options="{'no_create': True}"
+                                readonly="parent_id"
+                                force_save="1"
+                            />
+                        </div>
+                    </div>
+                    <group colspan="4" col="4">
+                        <field name="registration_date" readonly="disabled or registration_date" />
+                        <label for="lang" invisible="active_lang_count &lt;=1" />
+                        <div class="o_row" invisible="active_lang_count &lt;= 1">
+                            <field name="lang" readonly="disabled" />
+                        </div>
+                        <field
+                            name="kind"
+                            colspan="2"
+                            options="{'no_open':True, 'no_create_edit':True,'no_create':True}"
+                            readonly="disabled"
+                        />
+                    </group>
+                    <notebook>
+                        <page name="basic_info" string="Contact Details" invisible="1">
+                            <group colspan="4" col="4">
+                                <group colspan="2">
+                                    <span class="o_form_label o_td_label" name="address_name">
+                                        <b>Address</b>
+                                    </span>
+                                    <div class="o_address_format">
+                                        <field name="address" readonly="disabled" />
+                                    </div>
+                                </group>
+                                <group colspan="2">
+                                    <field
+                                        name="phone_number_ids"
+                                        readonly="disabled"
+                                        context="{'reg_form':True}"
+                                        nolabel="1"
+                                        colspan="2"
+                                    >
+                                        <tree decoration-danger="disabled">
+                                             <field
+                                                name="phone_no"
+                                                string="Phone Numbers"
+                                                widget="phone"
+                                                options="{'enable_sms': false}"
+                                            />
+                                            <field name="country_id" />
+                                            <field name="disabled" column_invisible="1" />
+                                        </tree>
+                                    </field>
+                                    <field
+                                        name="email"
+                                        widget="email"
+                                        context="{'gravatar_image': True}"
+                                        readonly="disabled"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="other" string="Other Information">
+                            <group>
+                                <group>
+                                    <field name="create_date" />
+                                    <field name="create_uid" />
+                                    <field name="write_date" />
+                                    <field name="write_uid" />
+                                </group>
+                                <group>
+                                    <field name="disabled" readonly="1" />
+                                    <field name="disabled_by" readonly="1" />
+                                    <field name="disabled_reason" readonly="1" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <field name="avatar_128" invisible="1" />
+                    <field name="active" invisible="1" />
+                    <field name="country_code" invisible="1" />
+                    <field name="is_registrant" invisible="1" />
+                    <field name="parent_id" invisible="1" />
+                    <field name="is_group" invisible="1" />
+                    <field name="phone" invisible="1" />
+                    <field name="active_lang_count" invisible="1" />
+                    <field name="user_ids" invisible="1" />
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_farmer_groups_list" model="ir.actions.act_window">
+        <field name="name">Farmer Groups</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="g2p_registry_group.view_registry_groups_filter" />
+        <field
+            name="context"
+        >{'default_is_registrant':True,'default_is_group':True,'registrant_form':True}</field>
+        <field name="domain">[('is_registrant', '=', True),('is_group','=',True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new farmer's group!
+            </p><p>
+                Click the create button to enter the new farmer's group information.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_farmer_groups_list_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_farmer_groups_list_tree" />
+        <field name="act_window_id" ref="action_farmer_groups_list" />
+    </record>
+
+    <record id="action_farmer_groups_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_farmer_groups_form" />
+        <field name="act_window_id" ref="action_farmer_groups_list" />
+    </record>
+
+    <menuitem
+        id="menu_farmer_groups_list"
+        name="Farmer Groups"
+        action="action_farmer_groups_list"
+        parent="g2p_registry_base.g2p_main_menu_root"
+        sequence="5"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
+    />
+
+</odoo>
