@@ -29,6 +29,7 @@ class Farmer(models.Model):
         string="Highest Educational Level",
     )
 
+
 class TempFarmer(models.Model):
     _name = "spp.farmer"
     _description = "Temporary Model for Farmer"

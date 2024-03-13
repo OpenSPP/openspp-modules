@@ -32,11 +32,7 @@ class SPPCreateEventWizard(models.TransientModel):
                 wizard_list = model_name.split(".")
                 wizard_model = "%s.create." % wizard_list[0]
                 wizard_list.pop(0)
-                view_name = self.env["ir.model"].search(
-                    [
-                        ("model", "=", model_name)
-                    ]
-                ).name
+                view_name = self.env["ir.model"].search([("model", "=", model_name)]).name
                 for split_wizard in wizard_list:
                     wizard_model += "%s." % split_wizard
                 wizard_model += "wizard"

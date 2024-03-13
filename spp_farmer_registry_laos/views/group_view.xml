@@ -5,11 +5,12 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="g2p_registry_membership.view_groups_form_membership" />
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='members']" position="attributes">
-                <attribute name="invisible">1</attribute>
+            <xpath expr="//page[@name='other']" position="before">
+               <xpath expr="//page[@name='members']" position="move" />
             </xpath>
         </field>
     </record>
+
     <record id="view_farm_groups_form" model="ir.ui.view">
         <field name="name">view_farm_groups_form</field>
         <field name="model">res.partner</field>
@@ -20,41 +21,6 @@
             </xpath>
             <xpath expr="//page[@name='basic_info']" position="attributes">
                 <attribute name="invisible">1</attribute>
-            </xpath>
-            <xpath expr="//page[@name='other']" position="before">
-                <page string="Members" name="members_page">
-                    <group col="4" colspan="4">
-                        <field name="group_membership_ids" readonly="disabled" nolabel="1" colspan="4">
-                            <tree default_order='status asc,ended_date asc'>
-                                <button
-                                    name="open_individual_form"
-                                    type="object"
-                                    icon="fa-external-link"
-                                    class="btn-success"
-                                    string="Open Individual Form"
-                                />
-                                <field
-                                    name="individual"
-                                    domain="[('is_registrant','=',True),('is_group','=',False)]"
-                                    options="{'no_create':True}"
-                                    string="Member Name"
-                                    context="{'form_view_ref':'g2p_registry_individual.view_individuals_form'}"
-                                />
-                                <field name="individual_birthdate" width="20%" string="Date of Birth" />
-                                <field name="individual_gender" string="Sex" />
-                                <field
-                                    name="kind"
-                                    string="Role"
-                                    widget="many2many_tags"
-                                    options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
-                                />
-                                <field name="start_date" />
-                                <field name="ended_date" string="End date" />
-                                <field name="status" />
-                            </tree>
-                        </field>
-                    </group>
-                </page>
             </xpath>
 
             <xpath expr="//page[@name='ids']" position="before">
