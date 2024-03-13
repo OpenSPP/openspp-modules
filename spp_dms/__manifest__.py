@@ -14,7 +14,10 @@
         "base",
     ],
     "external_dependencies": {},
-    "data": [],
+    "data": [
+        'security/ir.model.access.csv',
+        'views/dms_directory_views.xml',
+    ],
     "assets": {},
     "demo": [],
     "images": [],
