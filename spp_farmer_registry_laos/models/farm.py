@@ -54,3 +54,7 @@ class Farm(models.Model):
         """
         for rec in self:
             rec.active_event_cycle3b = rec._get_active_event_id("spp.event.cycle3b")
+
+    # overwrite for now since we will not create an individual per group in this module
+    def create_update_farmer(self, farm):
+        pass
