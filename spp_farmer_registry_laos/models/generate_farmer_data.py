@@ -423,13 +423,13 @@ class SPPLaosGenerateFarmerData(models.Model):
         event_id = self._create_event_data("spp.event.cycle2b", group_id)
 
         cycle2b_vals = {
-                "no_implemented": random.randint(0, 100),
-                "no_on_going": random.randint(0, 100),
-                "no_not_implemented": random.randint(0, 100),
-                "production_area": random.randint(0, 100),
-                "agricultural_yield": random.randint(0, 100),
-                "agricultural_productivity": random.randint(0, 100),
-            }
+            "no_implemented": random.randint(0, 100),
+            "no_on_going": random.randint(0, 100),
+            "no_not_implemented": random.randint(0, 100),
+            "production_area": random.randint(0, 100),
+            "agricultural_yield": random.randint(0, 100),
+            "agricultural_productivity": random.randint(0, 100),
+        }
         event = self.env["spp.event.cycle2b"].create(cycle2b_vals)
         event_id.res_id = event.id
 
@@ -437,11 +437,11 @@ class SPPLaosGenerateFarmerData(models.Model):
         event_id = self._create_event_data("spp.event.cycle2c", group_id)
 
         cycle2c_vals = {
-                "no_livestock_project": random.randint(0, 100),
-                "no_livestock_present": random.randint(0, 100),
-                "no_livestock_consumption": random.randint(0, 100),
-                "no_livestock_sold": random.randint(0, 100),
-                "no_livestock_increase": random.randint(0, 100),
-            }
+            "no_livestock_project": random.randint(0, 100),
+            "no_livestock_present": random.randint(0, 100),
+            "no_livestock_consumption": random.randint(0, 100),
+            "no_livestock_sold": random.randint(0, 100),
+            "no_livestock_increase": random.randint(0, 100),
+        }
         event = self.env["spp.event.cycle2c"].create(cycle2c_vals)
         event_id.res_id = event.id

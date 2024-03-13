@@ -16,11 +16,13 @@
         "base",
         "g2p_registry_base",
         "spp_farmer_registry_base",
+        "spp_registry_group_hierarchy",
         "spp_event_data",
         "queue_job",
     ],
     "data": [
         "security/ir.model.access.csv",
+        "data/group_kind_data.xml",
         "views/group_view.xml",
         "views/event_data_view.xml",
         "views/generate_farmer_data_view.xml",
