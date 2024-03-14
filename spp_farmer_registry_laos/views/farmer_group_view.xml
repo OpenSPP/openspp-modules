@@ -54,6 +54,18 @@
                                 <span class="o_stat_text">Enable</span>
                             </div>
                         </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-calendar"
+                            name="open_create_event_wizard"
+                            invisible="disabled"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Event</span>
+                                <span class="o_stat_text">Data</span>
+                            </div>
+                        </button>
                     </div>
                     <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active" />
                     <widget
@@ -158,6 +170,7 @@
                                                         name="group"
                                                         options="{'no_open':True,'no_create_edit':True,'no_create':True}"
                                                         readonly="1"
+                                                        force_save="1"
                                                     />
                                                 </h1>
                                                 <label for="individual" string="Child:" />
@@ -183,8 +196,49 @@
                                                 <field name="ended_date" />
                                             </group>
                                             <field name="individual_domain" invisible="1" />
+                                            <field name="group" invisible="1" />
                                         </sheet>
                                     </form>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="section_farm_act" string="Farm Activity">
+                            <field name="farm_prod_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id" width="20%" />
+                                    <field name="product_name" width="30%" />
+                                    <field name="product_name_eng" width="30%" />
+                                    <field name="target_year" width="20%" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="event_data" string="Event Data">
+                            <group>
+                                <group name="event_data_group">
+                                </group>
+                                <group name="event_data_group2">
+                                </group>
+                            </group>
+                            <group>
+                                <field name="event_data_ids" readonly="1">
+                                    <tree>
+                                        <button
+                                            name="open_form"
+                                            type="object"
+                                            icon="fa-external-link"
+                                            class="btn-success"
+                                        />
+                                        <field name="name" />
+                                        <field name="event_type" />
+                                        <field name="collection_date" />
+                                        <field name="expiry_date" />
+                                        <field
+                                            name="state"
+                                            decoration-success="state=='active'"
+                                            decoration-warning="state=='inactive'"
+                                            widget="badge"
+                                        />
+                                    </tree>
                                 </field>
                             </group>
                         </page>
