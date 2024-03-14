@@ -188,6 +188,9 @@
                                 </field>
                             </group>
                         </page>
+                        <page name="address_coordinates" string="Address Coordinates">
+                            <field name="land_coordinates" />
+                        </page>
                         <page name="basic_info" string="Contact Details" invisible="1">
                             <group colspan="4" col="4">
                                 <group colspan="2">
@@ -261,11 +264,43 @@
         </field>
     </record>
 
+    <record id="ir_ui_view_gis_farmer_group" model="ir.ui.view">
+        <field name="name">Farmer Group GIS view</field>
+        <field eval="16" name="priority" />
+        <field name="model">res.partner</field>
+        <field name="default_zoom">10</field>
+        <field name="arch" type="xml">
+            <gis editable="1">
+                <field name="id" select="1" />
+                <field name="name" select="1" />
+                <field name="display_name" select="1" />
+                <field name="land_coordinates" />
+              </gis>
+        </field>
+    </record>
+
+    <record id="gis_data_layer_geo_point_farmer_group" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_farmer_registry_base.field_res_partner__land_coordinates" />
+        <field name="name">Address Coordination</field>
+        <field eval="1" name="sequence" />
+        <field name="view_id" ref="ir_ui_view_gis_farmer_group" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record>
+
+    <record id="gis_raster_layer_farmer_group_osm" model="spp.gis.raster.layer">
+        <field name="raster_type">osm</field>
+        <field name="name">Farmer Group Information</field>
+        <field name="view_id" ref="ir_ui_view_gis_farmer_group" />
+    </record>
+
     <record id="action_farmer_groups_list" model="ir.actions.act_window">
         <field name="name">Farmer Groups</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,gis</field>
         <field name="search_view_id" ref="g2p_registry_group.view_registry_groups_filter" />
         <field
             name="context"
