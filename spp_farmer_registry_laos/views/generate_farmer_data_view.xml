@@ -43,9 +43,13 @@
                         <h1>
                             <field id="name" name="name" />
                         </h1>
-                        <label for="num_groups" string="Number of Groups:" placeholder="Name..." />
+                        <label for="num_groups" string="Number of Farmer Groups:" placeholder="Name..." />
                         <h2>
-                            <field id="num_groups" name="num_groups" placeholder="Number of groups..." />
+                            <field
+                                id="num_groups"
+                                name="num_groups"
+                                placeholder="Number of farmer groups..."
+                            />
                         </h2>
                     </div>
 
