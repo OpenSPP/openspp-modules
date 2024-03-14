@@ -43,4 +43,16 @@
             </xpath>
         </field>
     </record>
+
+    <record id="g2p_registry_group.action_groups_list" model="ir.actions.act_window">
+        <field
+            name="context"
+            eval="{'default_is_registrant':True,'default_is_group':True,'registrant_form':True,'default_kind':ref('spp_farmer_registry_base.kind_farm')}"
+        />
+        <field
+            name="domain"
+            eval="[('is_registrant', '=', True),('is_group','=',True),('kind','!=',ref('spp_farmer_registry_laos.kind_farmer_group'))]"
+        />
+    </record>
+
 </odoo>
