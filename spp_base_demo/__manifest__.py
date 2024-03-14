@@ -12,7 +12,7 @@
     "depends": [
         "g2p_registry_base",
         "g2p_programs",
-        "spp_helpdesk",
+        # "spp_helpdesk",
     ],
     "data": [
         "data/users_data.xml",

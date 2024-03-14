@@ -40,7 +40,7 @@
         />
         </record>
 
-        <record id="demo_access_support_person" model="res.users">
+        <!--<record id="demo_access_support_person" model="res.users">
             <field name="name">support person</field>
             <field name="login">support_person</field>
             <field name="password">demo</field>
@@ -48,7 +48,7 @@
             name="groups_id"
             eval="[(6, 0, [ref('base.group_user'), ref('spp_helpdesk.spp_support_person')])]"
         />
-        </record>
+        </record>-->
 
          <record id="demo_access_support_admin" model="res.users">
             <field name="name">OpenSPP Admin</field>
