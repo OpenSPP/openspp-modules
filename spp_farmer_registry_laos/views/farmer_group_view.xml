@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree decoration-danger="disabled" duplicate="0">
                 <field name="name" />
+                <field name="kind" />
                 <field name="address" />
                 <field name="phone" />
                 <field
@@ -112,6 +113,81 @@
                         />
                     </group>
                     <notebook>
+                        <page string="Members" name="members">
+                            <group col="4" colspan="4">
+                                <field
+                                    name="group_membership_ids"
+                                    readonly="disabled"
+                                    nolabel="1"
+                                    colspan="4"
+                                >
+                                    <tree default_order='status asc,ended_date asc'>
+                                        <button
+                                            name="open_member_form"
+                                            type="object"
+                                            icon="fa-external-link"
+                                            class="btn-success"
+                                            help="Open Member Form"
+                                        />
+                                        <field
+                                            name="individual"
+                                            domain="individual_domain"
+                                            options="{'no_create':True}"
+                                            string="Member Name"
+                                            context="{'form_view_ref':'g2p_registry_individual.view_individuals_form'}"
+                                        />
+                                        <field
+                                            name="kind"
+                                            string="Role"
+                                            widget="many2many_tags"
+                                            options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
+                                        />
+                                        <field name="start_date" />
+                                        <field name="ended_date" string="End date" />
+                                        <field name="status" />
+                                        <field name="individual_domain" column_invisible="1" />
+                                    </tree>
+                                    <form string="Group Membership">
+                                        <sheet>
+                                            <div class="oe_button_box" name="button_box" />
+                                            <div class="oe_title mb24">
+                                                <label for="group" string="Parent:" />
+                                                <h1>
+                                                    <field
+                                                        id="group"
+                                                        name="group"
+                                                        options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                                                        readonly="1"
+                                                    />
+                                                </h1>
+                                                <label for="individual" string="Child:" />
+                                                <h1>
+                                                    <field
+                                                        id="individual"
+                                                        name="individual"
+                                                        options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                                                        domain="individual_domain"
+                                                    />
+                                                </h1>
+                                                <div class="o_row">
+                                                    <label for="kind" string="Role:" />
+                                                    <field
+                                                        name="kind"
+                                                        widget="many2many_tags"
+                                                        options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <group string="Date Range" colspan="4" col="4">
+                                                <field name="start_date" />
+                                                <field name="ended_date" />
+                                            </group>
+                                            <field name="individual_domain" invisible="1" />
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
                         <page name="basic_info" string="Contact Details" invisible="1">
                             <group colspan="4" col="4">
                                 <group colspan="2">
@@ -212,7 +288,7 @@
     </record>
 
     <record id="action_farmer_groups_form_view" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1" />
+        <field name="sequence" eval="2" />
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_farmer_groups_form" />
         <field name="act_window_id" ref="action_farmer_groups_list" />
@@ -228,3 +304,70 @@
     />
 
 </odoo>
+<!--
+                                    <tree editable="top" default_order='status asc,ended_date asc'>
+                                        <button
+                                            name="open_member_form"
+                                            type="object"
+                                            icon="fa-external-link"
+                                            class="btn-success"
+                                            help="Open Member Form"
+                                        />
+                                        <field
+                                            name="individual"
+                                            domain="individual_domain"
+                                            options="{'no_create':True}"
+                                            string="Member Name"
+                                            context="{'form_view_ref':'g2p_registry_individual.view_individuals_form'}"
+                                        />
+                                        <field
+                                            name="kind"
+                                            string="Role"
+                                            widget="many2many_tags"
+                                            options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
+                                        />
+                                        <field name="start_date" />
+                                        <field name="ended_date" string="End date" />
+                                        <field name="status" />
+                                        <field name="individual_domain" column_invisible="1" />
+                                    </tree>
+
+                                    <form string="Group Membership">
+                                        <sheet>
+                                            <div class="oe_button_box" name="button_box" />
+                                            <div class="oe_title mb24">
+                                                <label for="group" string="Parent:" />
+                                                <h1>
+                                                    <field
+                                                        id="group"
+                                                        name="group"
+                                                        options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                                                        readonly="1"
+                                                    />
+                                                </h1>
+                                                <label for="individual" string="Child:" />
+                                                <h1>
+                                                    <field
+                                                        id="individual"
+                                                        name="individual"
+                                                        options="{'no_open':True,'no_create_edit':True,'no_create':True}"
+                                                        domain="individual_domain"
+                                                    />
+                                                </h1>
+                                                <div class="o_row">
+                                                    <label for="kind" string="Role:" />
+                                                    <field
+                                                        name="kind"
+                                                        widget="many2many_tags"
+                                                        options="{'no_open':True, 'no_create_edit':True, 'no_create':True, 'no_quick_create':True}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <group string="Date Range" colspan="4" col="4">
+                                                <field name="start_date" />
+                                                <field name="ended_date" />
+                                            </group>
+                                            <field name="individual_domain" invisible="1" />
+                                        </sheet>
+                                    </form>
+-->
