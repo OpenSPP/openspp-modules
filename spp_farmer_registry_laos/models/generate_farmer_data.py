@@ -143,6 +143,109 @@ NAMES = [
     "Wanjiru",
 ]
 
+FARMER_GROUP_NAMES = [
+    "FarmMates",
+    "AgriAllies",
+    "CropComrades",
+    "SeedSquad",
+    "HarvestHelpers",
+    "PlowPals",
+    "SowBuddies",
+    "GrowGuild",
+    "MeadowMates",
+    "TerraTroop",
+    "CultivateCrew",
+    "FieldFriends",
+    "EarthEntourage",
+    "PasturePosse",
+    "TillerTeam",
+    "GrainGang",
+    "AgricAmigos",
+    "PlantPioneers",
+    "SoilSiblings",
+    "OrchardOrder",
+    "RuralRangers",
+    "HomesteadHomies",
+    "FertileFellows",
+    "BountyBuddies",
+    "SproutSquad",
+    "CropCohort",
+    "AgriAffiliates",
+    "FarmFaction",
+    "HarvestHorde",
+    "CultivarClan",
+    "YieldYielders",
+    "GreenGuardians",
+    "TillTribe",
+    "MeadowMilitia",
+    "SeedlingSociety",
+    "CropCircleCrew",
+    "FarmForce",
+    "AgronomyAlliance",
+    "EarthbornEchelon",
+    "GrowGroup",
+    "PastoralPack",
+    "SoilSquadrons",
+    "PlowPartners",
+    "HarvestHive",
+    "RuralRebels",
+    "FieldFaction",
+    "PlantingParty",
+    "TerraTribe",
+    "GrowthGroupies",
+    "AgrarianArmy",
+    "SeedSoldiers",
+    "FieldForce",
+    "CropCollective",
+    "HarvestHuddle",
+    "PlantPals",
+    "MeadowMenagerie",
+    "AgriAllstars",
+    "BountyBrigade",
+    "PasturePals",
+    "SowSquadrons",
+    "FieldFellows",
+    "EarthEmissaries",
+    "TillageTroopers",
+    "SproutSquadron",
+    "HarvestHeroes",
+    "CropCrusaders",
+    "GreenGroveGroupies",
+    "SoilSoldiers",
+    "MeadowMavens",
+    "FarmFellows",
+    "SeedlingSquad",
+    "GrowerGang",
+    "OrchardOutfit",
+    "PlantingPlatoon",
+    "CultivarCompanions",
+    "AgriArtisans",
+    "TillerTribe",
+    "FarmFrontiers",
+    "HarvestHenchmen",
+    "AgrarianAdvocates",
+    "CropCommandos",
+    "PastoralPioneers",
+    "FieldFrontiersmen",
+    "SoilSavants",
+    "Growers'Guildsmen",
+    "EarthwiseElite",
+    "MeadowMasters",
+    "RuralRanks",
+    "HarvestHonorables",
+    "CropConsortium",
+    "FarmFrontFaction",
+    "PloughPatrol",
+    "SowerSquadrons",
+    "PasturePartisans",
+    "TerraTroopers",
+    "YieldYodas",
+    "AgriAssortment",
+    "GreenfieldGuard",
+    "SoilSentries",
+    "FarmsteadFellowship",
+]
+
 PRODUCTS = [
     {
         "id": 1,
@@ -252,7 +355,7 @@ class SPPLaosGenerateFarmerData(models.Model):
     _description = "Generate Farm Data For Laos"
 
     name = fields.Char()
-    num_groups = fields.Integer("Number of Groups", default=1)
+    num_groups = fields.Integer("Number of Farmer Groups", default=1)
     state = fields.Selection(
         selection=[
             ("draft", "Draft"),
@@ -272,24 +375,37 @@ class SPPLaosGenerateFarmerData(models.Model):
     def _generate_sample_data(self, **kwargs):
         res = kwargs.get("res")
 
+        kind_farmer_group_id = self.env.ref("spp_farmer_registry_laos.kind_farmer_group").id
         kind_farm_id = self.env.ref("spp_farmer_registry_base.kind_farm").id
         num_groups = min(res.num_groups, 1000)
 
-        for i in range(0, num_groups):
-            group_id = res._generate_group_data(i, kind_farm_id)
-            self._generate_event_data_cycle2a(group_id)
-            self._generate_event_data_cycle2b(group_id)
-            self._generate_event_data_cycle2c(group_id)
-            self._generate_event_data_cycle3a(group_id)
-            self._generate_event_data_cycle3b(group_id)
-            land_record_id = res._generate_land_record_record(group_id)
-            group_id.farm_land_rec_id = land_record_id.id
-            group_id.coordinates = land_record_id.land_coordinates
-            product = random.choice(PRODUCTS)
-            res._generate_farm_activity(group_id, product)
+        for i in range(1, num_groups + 1):
+            farmer_group_name = f"Farmer Group {random.choice(FARMER_GROUP_NAMES)}"
+            farmer_group_id = res._generate_group_data(i, kind_farmer_group_id, farmer_group_name)
 
-            if res.state == "draft":
-                res.update({"state": "generate"})
+            for j in range(random.randint(1, 5)):
+                group_name = f"{random.choice(NAMES)} Farm"
+                group_id = res._generate_group_data(j, kind_farm_id, group_name)
+                self._generate_event_data_cycle2a(group_id)
+                self._generate_event_data_cycle2b(group_id)
+                self._generate_event_data_cycle2c(group_id)
+                self._generate_event_data_cycle3a(group_id)
+                self._generate_event_data_cycle3b(group_id)
+                land_record_id = res._generate_land_record_record(group_id)
+                group_id.farm_land_rec_id = land_record_id.id
+                group_id.coordinates = land_record_id.land_coordinates
+                product = random.choice(PRODUCTS)
+                res._generate_farm_activity(group_id, product)
+
+                self.env["g2p.group.membership"].create(
+                    {
+                        "group": farmer_group_id.id,
+                        "individual": group_id.id,
+                    }
+                )
+
+        if res.state == "draft":
+            res.update({"state": "generate"})
 
         msg = "Task Queue called task: model [{}] and method [{}].".format(
             self._name,
@@ -298,8 +414,7 @@ class SPPLaosGenerateFarmerData(models.Model):
 
         return {"result": msg, "res_model": self._name, "res_ids": [res.id]}
 
-    def _generate_group_data(self, index, kind_id):
-        group_name = f"{random.choice(NAMES)} Farm"
+    def _generate_group_data(self, index, kind_id, group_name):
         id_group = "demo." + hashlib.md5(f"{group_name} {index}".encode()).hexdigest()
 
         group_vals = {
