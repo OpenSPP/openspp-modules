@@ -380,10 +380,22 @@ class SPPLaosGenerateFarmerData(models.Model):
         num_groups = min(res.num_groups, 1000)
 
         for i in range(1, num_groups + 1):
+            # Generate Farmer Group data
             farmer_group_name = f"Farmer Group {random.choice(FARMER_GROUP_NAMES)}"
             farmer_group_id = res._generate_group_data(i, kind_farmer_group_id, farmer_group_name)
+            self._generate_event_data_cycle2a(farmer_group_id)
+            self._generate_event_data_cycle2b(farmer_group_id)
+            self._generate_event_data_cycle2c(farmer_group_id)
+            self._generate_event_data_cycle3a(farmer_group_id)
+            self._generate_event_data_cycle3b(farmer_group_id)
+            land_record_id = res._generate_land_record_record(farmer_group_id)
+            farmer_group_id.farm_land_rec_id = land_record_id.id
+            farmer_group_id.coordinates = land_record_id.land_coordinates
+            product = random.choice(PRODUCTS)
+            res._generate_farm_activity(farmer_group_id, product)
 
             for j in range(random.randint(1, 5)):
+                # Generate Farm data
                 group_name = f"{random.choice(NAMES)} Farm"
                 group_id = res._generate_group_data(j, kind_farm_id, group_name)
                 self._generate_event_data_cycle2a(group_id)
