@@ -37,7 +37,17 @@ class SPPGroupMembership(models.Model):
         for rec in self:
             if rec.individual:
                 if rec.individual.is_group:
-                    return rec.open_group_form()
+                    return {
+                        "name": "Group Membership",
+                        "view_mode": "form",
+                        "res_model": "res.partner",
+                        "res_id": rec.individual.id,
+                        "view_id": self.env.ref("g2p_registry_group.view_groups_form").id,
+                        "type": "ir.actions.act_window",
+                        "target": "new",
+                        "context": {"default_is_group": True},
+                        "flags": {"mode": "readonly"},
+                    }
                 else:
                     return rec.open_individual_form()
             else:
