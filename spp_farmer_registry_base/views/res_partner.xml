@@ -49,4 +49,11 @@
       <field name="view_mode">tree,form,gis</field>
   </record>
 
+    <record id="action_groups_list_gis_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3" />
+        <field name="view_mode">gis</field>
+        <field name="view_id" ref="ir_ui_view_geo_partner" />
+        <field name="act_window_id" ref="g2p_registry_group.action_groups_list" />
+    </record>
+
 </odoo>
