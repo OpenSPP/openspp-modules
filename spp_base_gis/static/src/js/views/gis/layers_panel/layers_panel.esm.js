@@ -61,7 +61,7 @@ export class LayersPanel extends Component {
 
     async loadLayers() {
         try {
-            const result = await this.orm.call(this.props.model, "get_gis_layers", []);
+            const result = await this.orm.call(this.props.model, "get_gis_layers", [this.env.config.viewId]);
             this.state.gisLayers = result;
         } catch (error) {
             console.error("Error loading layers:", error);

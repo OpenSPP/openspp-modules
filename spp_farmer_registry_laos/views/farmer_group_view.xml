@@ -387,6 +387,13 @@
         <field name="act_window_id" ref="action_farmer_groups_list" />
     </record>
 
+    <record id="action_farmer_groups_gis_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3" />
+        <field name="view_mode">gis</field>
+        <field name="view_id" ref="ir_ui_view_gis_farmer_group" />
+        <field name="act_window_id" ref="action_farmer_groups_list" />
+    </record>
+
     <menuitem
         id="menu_farmer_groups_list"
         name="Farmer Groups"
