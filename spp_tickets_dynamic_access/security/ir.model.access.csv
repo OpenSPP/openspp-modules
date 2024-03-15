@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+model_res_partner_access,Res Partner,model_res_partner,base.group_user,1,1,1,1
+model_spp_ticket_access,SPP Ticket,model_spp_ticket,base.group_user,1,1,1,1

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_form_inherited" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.spp</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <!-- Add a smart button to show the ticket count -->
+            <xpath expr="//header" position="inside">
+                <button
+                    name="%(action_view_partner_tickets)d"
+                    type="action"
+                    class="oe_stat_button"
+                    icon="fa-tags"
+                >
+                    <field string="Tickets" name="ticket_count" widget="statinfo" />
+                </button>
+            </xpath>
+            <!-- Add a tab/page to list tickets related to the partner -->
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page string="Tickets" name="partner_tickets">
+                    <field name="ticket_ids" context="{'default_partner_id': active_id}">
+                        <tree editable="bottom">
+                            <field name="name" />
+                            <field name="ticket_type" />
+                            <field name="priority" />
+                            <field name="status" />
+                            <field name="assigned_to" />
+                            <field name="creation_date" />
+                            <field name="resolution_date" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Define the action to view the partner's tickets -->
+    <record id="action_view_partner_tickets" model="ir.actions.act_window">
+        <field name="name">Tickets</field>
+        <field name="res_model">spp.ticket</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('partner_id', '=', active_id)]</field>
+        <field name="context">{'default_partner_id': active_id}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Ticket
+            </p>
+        </field>
+    </record>
+</odoo>
