@@ -13,10 +13,12 @@
     "depends": [
         "base",
     ],
-    "external_dependencies": {},
+    "external_dependencies": {"python": ["PIL"]},
     "data": [
-        'security/ir.model.access.csv',
-        'views/dms_directory_views.xml',
+        "security/security.xml",
+        "security/ir.model.access.csv",
+        "views/main_view.xml",
+        "views/dms_directory_views.xml",
     ],
     "assets": {},
     "demo": [],
