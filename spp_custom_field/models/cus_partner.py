@@ -3,6 +3,7 @@
 
 import json
 import logging
+import ast
 
 from lxml import etree
 
@@ -20,17 +21,17 @@ class OpenSPPResPartner(models.Model):
         if view_type == "form":
             doc = arch
             basic_info_page = doc.xpath("//page[@name='basic_info']")
-            group_view = self.env["ir.ui.view"].search([("id", "=", view_id)])
-            group_view_name = self.env.ref("g2p_registry_group.view_groups_form").name
-            is_group = False
-            if group_view.name == group_view_name:
-                is_group = True
+
+            action_id = self.env["ir.actions.act_window"].browse(options.get("action_id"))
+
             model_fields_id = self.env["ir.model.fields"].search(
                 [("model_id", "=", "res.partner")],
                 order="ttype, field_description",
             )
-
             if basic_info_page:
+                action_id = action_id.context.replace("'", "\"")
+                is_group = ast.literal_eval(action_id).get("default_is_group")
+
                 custom_page = etree.Element("page", {"string": "Additional Details"})
                 indicators_page = etree.Element("page", {"string": "Indicators"})
 
