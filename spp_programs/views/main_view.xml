@@ -16,5 +16,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         parent="spp_programs_root"
         sequence="200"
     />
-
+    <menuitem id="g2p_programs.g2p_program_menu_root"
+              name="Programs"
+              web_icon="spp_programs,static/description/icon_program.png"
+              sequence="0" />
 </odoo>
