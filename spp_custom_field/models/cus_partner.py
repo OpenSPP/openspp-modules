@@ -20,14 +20,17 @@ class OpenSPPResPartner(models.Model):
         if view_type == "form":
             doc = arch
             basic_info_page = doc.xpath("//page[@name='basic_info']")
-
+            group_view = self.env["ir.ui.view"].search([("id", "=", view_id)])
+            group_view_name = self.env.ref("g2p_registry_group.view_groups_form").name
+            is_group = False
+            if group_view.name == group_view_name:
+                is_group = True
             model_fields_id = self.env["ir.model.fields"].search(
                 [("model_id", "=", "res.partner")],
                 order="ttype, field_description",
             )
 
             if basic_info_page:
-                is_group = self._context.get("default_is_group", False)
                 custom_page = etree.Element("page", {"string": "Additional Details"})
                 indicators_page = etree.Element("page", {"string": "Indicators"})
 
