@@ -31,7 +31,6 @@
         "views/group_view.xml",
         "views/event_data_view.xml",
         "views/generate_farmer_data_view.xml",
-        "views/laos_raster_view.xml",
         "wizard/create_event_farm_wizard.xml",
     ],
     "assets": {},
