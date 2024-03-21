@@ -56,6 +56,10 @@ Part of Openg2p. See LICENSE file for full copyright and licensing details.
                         <h2>
                             <field id="num_groups" name="num_groups" placeholder="Number of groups..." />
                         </h2>
+                        <label for="locale" string="Locale:" />
+                        <h2>
+                            <field id="locale" name="locale" placeholder="Locale..." />
+                        </h2>
                     </div>
 
                 </sheet>
