@@ -21,6 +21,7 @@
         "spp_farmer_registry_base",
         "spp_registry_group_hierarchy",
         "spp_event_data",
+        "g2p_programs",
         "queue_job",
     ],
     "data": [

@@ -3,13 +3,56 @@
 Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
-    <record id="create_event_cycle2a_form_view" model="ir.ui.view">
-        <field name="name">create_event_cycle2a_form_view</field>
-        <field name="model">spp.create.event.cycle2a.wizard</field>
+    <record id="create_event_cycle_form_view" model="ir.ui.view">
+        <field name="name">create_event_cycle_form_view</field>
+        <field name="model">spp.create.event.cycle.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
                     <div class="row mt16 o_settings_container">
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="program_id" />
+                                <div>
+                                </div>
+                                <field
+                                    name="program_id"
+                                    domain="[('id', 'in', program_id_domain)]"
+                                    options="{'no_open':true,'no_create':true}"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="cycle_id" />
+                                <div>
+                                </div>
+                                <field
+                                    name="cycle_id"
+                                    domain="[('program_id', '=', program_id)]"
+                                    options="{'no_open':true,'no_create':true}"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="event_type" />
+                                <div>
+                                </div>
+                                <field name="event_type" />
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        invisible="event_type not in ('fgmemr1', 'wumem', 'fgmemr2')"
+                    >
                         <div class="col-4 o_setting_box">
                             <div class="o_setting_left_pane">
                             </div>
@@ -131,22 +174,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             </div>
                         </div>
                     </div>
-                </sheet>
-                <footer>
-                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
-                    <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
-            </form>
-        </field>
-    </record>
-
-    <record id="create_event_cycle2b_form_view" model="ir.ui.view">
-        <field name="name">create_event_cycle2b_form_view</field>
-        <field name="model">spp.create.event.cycle2b.wizard</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <div class="row mt16 o_settings_container">
+                    <div class="row mt16 o_settings_container" invisible="event_type != 'impagri'">
                         <div class="col-4 o_setting_box">
                             <div class="o_setting_left_pane">
                             </div>
@@ -208,22 +236,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             </div>
                         </div>
                     </div>
-                </sheet>
-                <footer>
-                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
-                    <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
-            </form>
-        </field>
-    </record>
-
-    <record id="create_event_cycle2c_form_view" model="ir.ui.view">
-        <field name="name">create_event_cycle2c_form_view</field>
-        <field name="model">spp.create.event.cycle2c.wizard</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <div class="row mt16 o_settings_container">
+                    <div class="row mt16 o_settings_container" invisible="event_type != 'implive'">
                         <div class="col-4 o_setting_box">
                             <div class="o_setting_left_pane">
                             </div>
@@ -276,280 +289,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </div>
                     </div>
                 </sheet>
-                <footer>
-                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
-                    <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
-            </form>
-        </field>
-    </record>
-
-    <record id="create_event_cycle3a_form_view" model="ir.ui.view">
-        <field name="name">create_event_cycle3a_form_view</field>
-        <field name="model">spp.create.event.cycle3a.wizard</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <div class="row mt16 o_settings_container">
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_hh_member" />
-                                <div>
-                                </div>
-                                <field name="no_hh_member" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_indigenous" />
-                                <div>
-                                </div>
-                                <field name="no_indigenous" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="percent_indigenous" />
-                                <div>
-                                </div>
-                                <field name="percent_indigenous" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_15_35" />
-                                <div>
-                                </div>
-                                <field name="no_15_35" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="percent_15_35" />
-                                <div>
-                                </div>
-                                <field name="percent_15_35" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_woman_headed" />
-                                <div>
-                                </div>
-                                <field name="no_woman_headed" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_better_off" />
-                                <div>
-                                </div>
-                                <field name="no_better_off" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_medium" />
-                                <div>
-                                </div>
-                                <field name="no_medium" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_poor" />
-                                <div>
-                                </div>
-                                <field name="no_poor" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_male" />
-                                <div>
-                                </div>
-                                <field name="no_male" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_female" />
-                                <div>
-                                </div>
-                                <field name="no_female" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_both" />
-                                <div>
-                                </div>
-                                <field name="no_both" />
-                            </div>
-                        </div>
-                    </div>
-                </sheet>
-                <footer>
-                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
-                    <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
-            </form>
-        </field>
-    </record>
-
-    <record id="create_event_cycle3b_form_view" model="ir.ui.view">
-        <field name="name">create_event_cycle3b_form_view</field>
-        <field name="model">spp.create.event.cycle3b.wizard</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <div class="row mt16 o_settings_container">
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_hh_member" />
-                                <div>
-                                </div>
-                                <field name="no_hh_member" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_indigenous" />
-                                <div>
-                                </div>
-                                <field name="no_indigenous" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="percent_indigenous" />
-                                <div>
-                                </div>
-                                <field name="percent_indigenous" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_15_35" />
-                                <div>
-                                </div>
-                                <field name="no_15_35" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="percent_15_35" />
-                                <div>
-                                </div>
-                                <field name="percent_15_35" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_woman_headed" />
-                                <div>
-                                </div>
-                                <field name="no_woman_headed" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_better_off" />
-                                <div>
-                                </div>
-                                <field name="no_better_off" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_medium" />
-                                <div>
-                                </div>
-                                <field name="no_medium" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_poor" />
-                                <div>
-                                </div>
-                                <field name="no_poor" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_male" />
-                                <div>
-                                </div>
-                                <field name="no_male" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_female" />
-                                <div>
-                                </div>
-                                <field name="no_female" />
-                            </div>
-                        </div>
-                        <div class="col-4 o_setting_box">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="no_both" />
-                                <div>
-                                </div>
-                                <field name="no_both" />
-                            </div>
-                        </div>
-                    </div>
-                </sheet>
+                <field name="event_id" invisible="1" />
+                <field name="program_id_domain" invisible="1" />
                 <footer>
                     <button name="create_event" string="Save" type="object" class="oe_highlight" />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
