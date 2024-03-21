@@ -6,17 +6,26 @@ import math
 import random
 
 from dateutil.relativedelta import relativedelta
-from faker import Faker
 
 from odoo import api, fields, models
 
 from odoo.addons.queue_job.delay import group
+from odoo.addons.spp_base_demo.locale_providers import create_faker
 
 _logger = logging.getLogger(__name__)
 
 
 class OpenG2PGenerateData(models.Model):
     _name = "g2p.generate.data"
+
+    LOCALE_SELECTION = [
+        ("en_US", "United States (English)"),
+        ("en_KE", "Kenya (English)"),
+        ("sw_KE", "Kenya (Swahili)"),
+        ("si_LK", "Sri Lanka (Sinhala)"),
+        ("ta_LK", "Sri Lanka (Tamil)"),
+        ("lo_LA", "Laos (Lao)"),
+    ]
 
     name = fields.Char()
     num_groups = fields.Integer("Number of Groups", default=1)
@@ -26,6 +35,11 @@ class OpenG2PGenerateData(models.Model):
             ("generate", "Generated"),
         ],
         default="draft",
+    )
+    locale = fields.Selection(
+        LOCALE_SELECTION,
+        default="en_KE",
+        required=True,
     )
 
     def generate_sample_data(self):
@@ -45,25 +59,7 @@ class OpenG2PGenerateData(models.Model):
         """
         res_id = kwargs.get("res_id")
         res = self.browse(res_id)
-        locales = [
-            # "cs_CZ",
-            # "en_US",
-            "id_ID",
-            # "de_CH",
-            # "ar_AA",
-            # "de_DE",
-            # "en_GB",
-            # "en_IE",
-            # "en_TH",
-            # "es_ES",
-            # "es_MX",
-            # "fr_FR",
-            # "hi_IN",
-            # "hr_HR",
-            # "it_IT",
-            # "zh_CN",
-        ]
-        fake = Faker(locales)
+        fake = create_faker(res.locale)
 
         # sex_choice_range = ["Female", "Male"] * 50 + ["Other"]
         sex_choices = self.env["gender.type"].search([]).mapped("value")
@@ -90,21 +86,16 @@ class OpenG2PGenerateData(models.Model):
         center_area_ids = center_areas.mapped("id")
 
         for i in range(0, num_groups):
-            locale = random.choice(locales)
             group_size = random.choice(group_size_range)
-            last_name = fake[locale].last_name()
+            last_name = fake.last_name()
 
-            registration_date = (
-                fake[locale]
-                .date_between_dates(
-                    date_start=datetime.datetime.now() - relativedelta(weeks=4),
-                    date_end=datetime.datetime.now(),
-                )
-                .isoformat()
-            )
+            registration_date = fake.date_between_dates(
+                date_start=datetime.datetime.now() - relativedelta(weeks=4),
+                date_end=datetime.datetime.now(),
+            ).isoformat()
 
             head = res._generate_individual_data(
-                fake[locale],
+                fake,
                 last_name,
                 sex_choice_range,
                 ["A", "E"],
@@ -138,10 +129,10 @@ class OpenG2PGenerateData(models.Model):
                 "is_registrant": True,
                 "registration_date": registration_date,
                 "kind": group_kind,
-                "street": fake[locale].street_address(),
-                "street2": fake[locale].street_name(),
-                "city": fake[locale].city(),
-                "zip": fake[locale].postcode(),
+                "street": fake.street_address(),
+                "street2": fake.street_name(),
+                "city": fake.city(),
+                "zip": fake.postcode(),
                 "area_id": random.choice(center_area_ids),
                 "bank_ids": bank_ids,
             }
@@ -153,7 +144,7 @@ class OpenG2PGenerateData(models.Model):
 
             for i in range(group_size - 1):
                 data = res._generate_individual_data(
-                    fake[locale],
+                    fake,
                     last_name,
                     sex_choice_range,
                     age_group_range,
