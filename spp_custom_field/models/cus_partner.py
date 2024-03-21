@@ -23,6 +23,9 @@ class OpenSPPResPartner(models.Model):
             basic_info_page = doc.xpath("//page[@name='basic_info']")
 
             action_id = self.env["ir.actions.act_window"].browse(options.get("action_id"))
+            if not action_id:
+                act_window_view = self.env["ir.actions.act_window.view"].search([("view_id", "=", view_id)], limit=1)
+                action_id = act_window_view.act_window_id
 
             model_fields_id = self.env["ir.model.fields"].search(
                 [("model_id", "=", "res.partner")],
