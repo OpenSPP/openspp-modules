@@ -134,6 +134,11 @@ export class GisRenderer extends Component {
                 this.createWMSRasterSource(rasterLayerSourceId, layer);
                 this.createWMSRasterLayer(rasterLayerSourceId, layer);
             }
+            if (layer.raster_type === "image") {
+                const sourceId = `image_${layer.id}`;
+                this.createImageRasterSource(sourceId, layer);
+                this.createImageRasterLayer(sourceId, layer);
+            }
             if (layer.raster_type === "osm" && layer.isVisible) {
                 this.defaultRaster = layer;
             }
@@ -247,6 +252,38 @@ export class GisRenderer extends Component {
 
     createWMSRasterLayer(sourceId, layer) {
         const opacity = Math.min(1, Math.max(0, layer.opacity));
+
+        this.layers.push({
+            type: "raster",
+            id: sourceId,
+            source: sourceId,
+            paint: {
+                "raster-opacity": opacity,
+            },
+            layout: {
+                visibility: layer.isVisible ? "visible" : "none",
+            },
+        });
+    }
+
+    createImageRasterSource(sourceId, layer) {
+        this.sources.push([
+            sourceId,
+            {
+                type: "image",
+                url: layer.image_url,
+                coordinates: [
+                    [layer.x_min, layer.y_max], // Top-left
+                    [layer.x_max, layer.y_max], // Top-right
+                    [layer.x_max, layer.y_min], // Bottom-right
+                    [layer.x_min, layer.y_min], // Bottom-left
+                ],
+            },
+        ]);
+    }
+
+    createImageRasterLayer(sourceId, layer) {
+        const opacity = Math.min(1, Math.max(0, layer.image_opacity));
 
         this.layers.push({
             type: "raster",
@@ -437,6 +474,25 @@ export class GisRenderer extends Component {
 
                 this.map.setLayoutProperty(rasterLayerSourceId, "visibility", visibility);
                 this.map.setPaintProperty(rasterLayerSourceId, "raster-opacity", opacity);
+            } else if (layer.raster_type === "image") {
+                const sourceId = `image_${layer.id}`;
+                const visibility = layer.isVisible ? "visible" : "none";
+                const opacity = Math.min(1, Math.max(0, layer.image_opacity));
+
+                const source = this.map.getSource(sourceId);
+                if (source) {
+                    source.updateImage({
+                        url: layer.image_url,
+                        coordinates: [
+                            [layer.x_min, layer.y_max], // Top-left
+                            [layer.x_max, layer.y_max], // Top-right
+                            [layer.x_max, layer.y_min], // Bottom-right
+                            [layer.x_min, layer.y_min], // Bottom-left
+                        ],
+                    });
+                    this.map.setLayoutProperty(sourceId, "visibility", visibility);
+                    this.map.setPaintProperty(sourceId, "raster-opacity", opacity);
+                }
             } else if (layer.raster_type === "osm" && layer.isVisible) {
                 this.map.setStyle(this.getMapStyle(layer));
             }
