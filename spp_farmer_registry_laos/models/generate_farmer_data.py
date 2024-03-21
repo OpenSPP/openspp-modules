@@ -349,6 +349,13 @@ PRODUCTS = [
     },
 ]
 
+EVENT_TYPE = [
+    "fgmemr1",
+    "wumem",
+    "fgmemr2",
+    "impagri",
+    "implive",
+]
 
 class SPPLaosGenerateFarmerData(models.Model):
     _name = "spp.laos.generate.farmer.data"
@@ -383,11 +390,7 @@ class SPPLaosGenerateFarmerData(models.Model):
             # Generate Farmer Group data
             farmer_group_name = f"Farmer Group {random.choice(FARMER_GROUP_NAMES)}"
             farmer_group_id = res._generate_group_data(i, kind_farmer_group_id, farmer_group_name)
-            self._generate_event_data_cycle2a(farmer_group_id)
-            self._generate_event_data_cycle2b(farmer_group_id)
-            self._generate_event_data_cycle2c(farmer_group_id)
-            self._generate_event_data_cycle3a(farmer_group_id)
-            self._generate_event_data_cycle3b(farmer_group_id)
+            self._generate_event_data_cycle(farmer_group_id)
             land_record_id = res._generate_land_record_record(farmer_group_id)
             farmer_group_id.farm_land_rec_id = land_record_id.id
             farmer_group_id.coordinates = land_record_id.land_coordinates
@@ -398,11 +401,7 @@ class SPPLaosGenerateFarmerData(models.Model):
                 # Generate Farm data
                 group_name = f"{random.choice(NAMES)} Farm"
                 group_id = res._generate_group_data(j, kind_farm_id, group_name)
-                self._generate_event_data_cycle2a(group_id)
-                self._generate_event_data_cycle2b(group_id)
-                self._generate_event_data_cycle2c(group_id)
-                self._generate_event_data_cycle3a(group_id)
-                self._generate_event_data_cycle3b(group_id)
+                self._generate_event_data_cycle(group_id)
                 land_record_id = res._generate_land_record_record(group_id)
                 group_id.farm_land_rec_id = land_record_id.id
                 group_id.coordinates = land_record_id.land_coordinates
@@ -481,94 +480,79 @@ class SPPLaosGenerateFarmerData(models.Model):
         event_id = self.env["spp.event.data"].create(vals_list)
         return event_id
 
-    def _generate_event_data_cycle2a(self, group_id):
-        event_id = self._create_event_data("spp.event.cycle2a", group_id)
+    def _generate_event_data_cycle(self, group_id):
+        event_id = self._create_event_data("spp.event.cycle", group_id)
         vals = self._generate_event_data_vals()
 
-        event = self.env["spp.event.cycle2a"].create(vals)
-        event_id.res_id = event.id
-
-    def _generate_event_data_cycle3a(self, group_id):
-        event_id = self._create_event_data("spp.event.cycle3a", group_id)
-        vals = self._generate_event_data_vals()
-
-        event = self.env["spp.event.cycle3a"].create(vals)
-        event_id.res_id = event.id
-
-    def _generate_event_data_cycle3b(self, group_id):
-        event_id = self._create_event_data("spp.event.cycle3b", group_id)
-        vals = self._generate_event_data_vals()
-
-        event = self.env["spp.event.cycle3b"].create(vals)
+        event = self.env["spp.event.cycle"].create(vals)
         event_id.res_id = event.id
 
     def _generate_event_data_vals(self):
-        no_hh_member = random.randint(1, 100)
-        no_indigenous = random.randint(1, no_hh_member)
-        percent_indigenous = no_indigenous / no_hh_member * 100
-        no_15_35 = random.randint(1, no_indigenous)
-        percent_15_35 = no_15_35 / no_hh_member * 100
-        cycle_vals = {
-            "no_woman_headed": 0,
-            "no_better_off": 0,
-            "no_medium": 0,
-            "no_poor": 0,
-        }
-        total_member = no_hh_member
-        for val in cycle_vals:
-            if total_member > 0:
-                value = random.randint(0, total_member)
-                cycle_vals[val] = value
-                total_member -= value
-
-        cycle_vals2 = {
-            "no_male": 0,
-            "no_female": 0,
-            "no_both": 0,
-        }
-        total_member = no_hh_member
-        for val in cycle_vals2:
-            if total_member > 0:
-                value = random.randint(0, total_member)
-                cycle_vals2[val] = value
-                total_member -= value
-
-        cycle_vals.update(cycle_vals2)
-
-        cycle_vals.update(
-            {
-                "no_hh_member": no_hh_member,
-                "no_indigenous": no_indigenous,
-                "percent_indigenous": percent_indigenous,
-                "no_15_35": no_15_35,
-                "percent_15_35": percent_15_35,
+        event_type = random.choice(EVENT_TYPE)
+        cycle_vals = {}
+        if event_type in ("fgmemr1", "wumem", "fgmemr2"):
+            no_hh_member = random.randint(1, 100)
+            no_indigenous = random.randint(1, no_hh_member)
+            percent_indigenous = no_indigenous / no_hh_member * 100
+            no_15_35 = random.randint(1, no_indigenous)
+            percent_15_35 = no_15_35 / no_hh_member * 100
+            cycle_vals = {
+                "no_woman_headed": 0,
+                "no_better_off": 0,
+                "no_medium": 0,
+                "no_poor": 0,
             }
-        )
-        return cycle_vals
+            total_member = no_hh_member
+            for val in cycle_vals:
+                if total_member > 0:
+                    value = random.randint(0, total_member)
+                    cycle_vals[val] = value
+                    total_member -= value
 
-    def _generate_event_data_cycle2b(self, group_id):
-        event_id = self._create_event_data("spp.event.cycle2b", group_id)
+            cycle_vals2 = {
+                "no_male": 0,
+                "no_female": 0,
+                "no_both": 0,
+            }
+            total_member = no_hh_member
+            for val in cycle_vals2:
+                if total_member > 0:
+                    value = random.randint(0, total_member)
+                    cycle_vals2[val] = value
+                    total_member -= value
 
-        cycle2b_vals = {
-            "no_implemented": random.randint(0, 100),
-            "no_on_going": random.randint(0, 100),
-            "no_not_implemented": random.randint(0, 100),
-            "production_area": random.randint(0, 100),
-            "agricultural_yield": random.randint(0, 100),
-            "agricultural_productivity": random.randint(0, 100),
-        }
-        event = self.env["spp.event.cycle2b"].create(cycle2b_vals)
-        event_id.res_id = event.id
+            cycle_vals.update(cycle_vals2)
 
-    def _generate_event_data_cycle2c(self, group_id):
-        event_id = self._create_event_data("spp.event.cycle2c", group_id)
+            cycle_vals.update(
+                {
+                    "event_type": event_type,
+                    "no_hh_member": no_hh_member,
+                    "no_indigenous": no_indigenous,
+                    "percent_indigenous": percent_indigenous,
+                    "no_15_35": no_15_35,
+                    "percent_15_35": percent_15_35,
+                }
+            )
 
-        cycle2c_vals = {
-            "no_livestock_project": random.randint(0, 100),
-            "no_livestock_present": random.randint(0, 100),
-            "no_livestock_consumption": random.randint(0, 100),
-            "no_livestock_sold": random.randint(0, 100),
-            "no_livestock_increase": random.randint(0, 100),
-        }
-        event = self.env["spp.event.cycle2c"].create(cycle2c_vals)
-        event_id.res_id = event.id
+        elif event_type == "impagri":
+            cycle_vals = {
+                "event_type": event_type,
+                "no_implemented": random.randint(0, 100),
+                "no_on_going": random.randint(0, 100),
+                "no_not_implemented": random.randint(0, 100),
+                "production_area": random.randint(0, 100),
+                "agricultural_yield": random.randint(0, 100),
+                "agricultural_productivity": random.randint(0, 100),
+            }
+        else:
+            cycle_vals = {
+                "event_type": event_type,
+                "no_livestock_project": random.randint(0, 100),
+                "no_livestock_present": random.randint(0, 100),
+                "no_livestock_consumption": random.randint(0, 100),
+                "no_livestock_sold": random.randint(0, 100),
+                "no_livestock_increase": random.randint(0, 100),
+            }
+
+        if cycle_vals:
+            return cycle_vals
