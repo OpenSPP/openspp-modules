@@ -5,12 +5,9 @@ import random
 import string
 from datetime import datetime, timedelta
 
-from faker import Faker
-from faker.config import AVAILABLE_LOCALES
-
 from odoo import Command, api, fields, models
 
-from odoo.addons.spp_base_demo.locale_providers import get_faker_provider
+from odoo.addons.spp_base_demo.locale_providers import create_faker
 
 from .. import tools
 
@@ -36,18 +33,6 @@ LOCALES = {
         "location_function": tools.random_location_in_sri_lanka,
     },
 }
-
-
-def create_faker(res):
-    locale = res.locale if res.locale in AVAILABLE_LOCALES else None
-    fake = Faker(locale=locale)
-
-    if res.locale and res.locale not in AVAILABLE_LOCALES:
-        provider = get_faker_provider(res.locale)
-        if provider:
-            fake.add_provider(provider)
-
-    return fake
 
 
 class SPPGenerateFarmerData(models.Model):
@@ -85,7 +70,7 @@ class SPPGenerateFarmerData(models.Model):
 
         kind_farm_id = self.env.ref("spp_farmer_registry_base.kind_farm").id
 
-        fake = create_faker(res)
+        fake = create_faker(res.locale)
 
         # Get available gender field selections
         options = self.env["gender.type"].search([])
