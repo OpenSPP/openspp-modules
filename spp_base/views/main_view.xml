@@ -1,0 +1,13 @@
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <menuitem
+        id="g2p_registry_base.g2p_main_menu_root"
+        name="Registry"
+        web_icon="spp_base,static/description/icon_registry.png"
+        active="True"
+        sequence="-1"
+    />
+</odoo>

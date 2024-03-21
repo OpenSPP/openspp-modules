@@ -32,6 +32,7 @@
         "data/top_up_card.xml",
         "views/registrant_view.xml",
         "views/hide_menu_view.xml",
+        "views/main_view.xml",
     ],
     "assets": {},
     "demo": [],
