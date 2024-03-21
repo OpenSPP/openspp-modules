@@ -72,7 +72,6 @@ class OpenSPPGisRasterLayer(models.Model):
         RASTER_STYLE_CHOICES,
         default="streets",
     )
-
     view_id = fields.Many2one("ir.ui.view", "Related View", domain=[("type", "=", "gis")], required=True)
 
     type_id = fields.Many2one("spp.gis.raster.layer.type", "Layer", domain="[('service', '=', raster_type)]")
