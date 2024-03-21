@@ -124,7 +124,7 @@
     <menuitem
         id="area_main_menu_root"
         name="Area"
-        web_icon="g2p_registry_base,static/src/img/icons/contacts.png"
+        web_icon="spp_area,static/description/icon_area.png"
         active="True"
         sequence="0"
     />
