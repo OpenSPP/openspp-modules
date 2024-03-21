@@ -1,2 +1,4 @@
 from .random_location_in_kenya import random_location_in_kenya
+from .random_location_in_laos import random_location_in_laos
+from .random_location_in_sri_lanka import random_location_in_sri_lanka
 from .generate_polygon import generate_polygon
