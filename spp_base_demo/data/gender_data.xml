@@ -1,0 +1,10 @@
+<odoo noupdate="1">
+    <record id="gender_male" model="gender.type">
+        <field name="code">Male</field>
+        <field name="value">Male</field>
+    </record>
+    <record id="gender_female" model="gender.type">
+        <field name="code">Female</field>
+        <field name="value">Female</field>
+    </record>
+</odoo>
