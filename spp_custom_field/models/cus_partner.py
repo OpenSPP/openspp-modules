@@ -1,9 +1,9 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 
+import ast
 import json
 import logging
-import ast
 
 from lxml import etree
 
@@ -29,7 +29,7 @@ class OpenSPPResPartner(models.Model):
                 order="ttype, field_description",
             )
             if basic_info_page:
-                action_id = action_id.context.replace("'", "\"")
+                action_id = action_id.context.replace("'", '"')
                 is_group = ast.literal_eval(action_id).get("default_is_group")
 
                 custom_page = etree.Element("page", {"string": "Additional Details"})
