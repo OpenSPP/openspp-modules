@@ -23,14 +23,6 @@
                         <field name="raster_style" required="raster_type == 'osm'" />
                         <field name="visible_on_load" />
                     </group>
-                    <group string="Image options" invisible="raster_type != 'image'" colspan="4">
-                        <field name="image_url" required="raster_type == 'image'" />
-                        <field name="image_opacity" required="raster_type == 'image'" />
-                        <field name="x_min" required="raster_type == 'image'" />
-                        <field name="x_max" required="raster_type == 'image'" />
-                        <field name="y_min" required="raster_type == 'image'" />
-                        <field name="y_max" required="raster_type == 'image'" />
-                    </group>
                 </sheet>
             </form>
         </field>
