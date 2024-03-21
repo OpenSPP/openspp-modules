@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="product_001" model="product.product">
+        <field name="name">Organic Brown Rice</field>
+        <field name="list_price">5.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1001</field>
+    </record>
+
+    <record id="product_002" model="product.product">
+        <field name="name">LED Desk Lamp</field>
+        <field name="list_price">24.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1002</field>
+    </record>
+
+    <record id="product_003" model="product.product">
+        <field name="name">Stainless Steel Water Bottle</field>
+        <field name="list_price">15.50</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">HW1003</field>
+    </record>
+
+    <record id="product_004" model="product.product">
+        <field name="name">Microfiber Bath Towel</field>
+        <field name="list_price">19.95</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">HOME1004</field>
+    </record>
+
+    <record id="product_005" model="product.product">
+        <field name="name">Extra Virgin Olive Oil</field>
+        <field name="list_price">10.75</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1005</field>
+    </record>
+
+    <record id="product_006" model="product.product">
+        <field name="name">Bluetooth Headphones</field>
+        <field name="list_price">59.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1006</field>
+    </record>
+
+    <record id="product_007" model="product.product">
+        <field name="name">Thermal Insulated Backpack</field>
+        <field name="list_price">33.80</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">OUTD1007</field>
+    </record>
+
+    <record id="product_008" model="product.product">
+        <field name="name">All-Purpose Cleaner</field>
+        <field name="list_price">6.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">CLEAN1008</field>
+    </record>
+
+    <record id="product_009" model="product.product">
+        <field name="name">Cotton T-Shirts Pack of 3</field>
+        <field name="list_price">29.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">APP1009</field>
+    </record>
+
+    <record id="product_010" model="product.product">
+        <field name="name">High-Speed HDMI Cable</field>
+        <field name="list_price">12.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1010</field>
+    </record>
+
+    <record id="product_011" model="product.product">
+        <field name="name">Whole Wheat Pasta</field>
+        <field name="list_price">2.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1011</field>
+    </record>
+
+    <record id="product_012" model="product.product">
+        <field name="name">Rechargeable Battery Pack</field>
+        <field name="list_price">14.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1012</field>
+    </record>
+
+    <record id="product_013" model="product.product">
+        <field name="name">Organic Almonds</field>
+        <field name="list_price">7.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1013</field>
+    </record>
+
+    <record id="product_014" model="product.product">
+        <field name="name">Fleece Blanket</field>
+        <field name="list_price">25.00</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">HOME1014</field>
+    </record>
+
+    <record id="product_015" model="product.product">
+        <field name="name">Wireless Mouse</field>
+        <field name="list_price">17.50</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1015</field>
+    </record>
+
+    <record id="product_016" model="product.product">
+        <field name="name">Natural Soy Wax Candle</field>
+        <field name="list_price">8.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">DECOR1016</field>
+    </record>
+
+    <record id="product_017" model="product.product">
+        <field name="name">Yoga Mat</field>
+        <field name="list_price">20.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">SPORT1017</field>
+    </record>
+
+    <record id="product_018" model="product.product">
+        <field name="name">Multipurpose Paper (500 Sheets)</field>
+        <field name="list_price">4.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">OFFICE1018</field>
+    </record>
+
+    <record id="product_019" model="product.product">
+        <field name="name">Dishwashing Liquid</field>
+        <field name="list_price">3.29</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">CLEAN1019</field>
+    </record>
+
+    <record id="product_020" model="product.product">
+        <field name="name">Mechanical Keyboard</field>
+        <field name="list_price">49.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1020</field>
+    </record>
+
+        <record id="product_021" model="product.product">
+        <field name="name">Raw Honey</field>
+        <field name="list_price">9.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1021</field>
+    </record>
+
+    <record id="product_022" model="product.product">
+        <field name="name">Portable Power Bank</field>
+        <field name="list_price">18.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1022</field>
+    </record>
+
+    <record id="product_023" model="product.product">
+        <field name="name">Quinoa Grain</field>
+        <field name="list_price">5.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1023</field>
+    </record>
+
+    <record id="product_024" model="product.product">
+        <field name="name">Plush Bathrobe</field>
+        <field name="list_price">29.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">HOME1024</field>
+    </record>
+
+    <record id="product_025" model="product.product">
+        <field name="name">Smartphone Tripod</field>
+        <field name="list_price">15.95</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1025</field>
+    </record>
+
+    <record id="product_026" model="product.product">
+        <field name="name">Bamboo Cutting Board</field>
+        <field name="list_price">12.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">KITCH1026</field>
+    </record>
+
+    <record id="product_027" model="product.product">
+        <field name="name">Resistance Bands Set</field>
+        <field name="list_price">24.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">SPORT1027</field>
+    </record>
+
+    <record id="product_028" model="product.product">
+        <field name="name">Linen Bed Sheets Set</field>
+        <field name="list_price">89.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">HOME1028</field>
+    </record>
+
+    <record id="product_029" model="product.product">
+        <field name="name">Liquid Laundry Detergent</field>
+        <field name="list_price">11.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">CLEAN1029</field>
+    </record>
+
+    <record id="product_030" model="product.product">
+        <field name="name">Gaming Mouse Pad</field>
+        <field name="list_price">7.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1030</field>
+    </record>
+
+        <record id="product_031" model="product.product">
+        <field name="name">Chia Seeds</field>
+        <field name="list_price">6.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1031</field>
+    </record>
+
+    <record id="product_032" model="product.product">
+        <field name="name">Wireless Charging Pad</field>
+        <field name="list_price">22.95</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1032</field>
+    </record>
+
+    <record id="product_033" model="product.product">
+        <field name="name">Green Tea Bags</field>
+        <field name="list_price">4.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1033</field>
+    </record>
+
+    <record id="product_034" model="product.product">
+        <field name="name">Egyptian Cotton Towels Set</field>
+        <field name="list_price">35.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">HOME1034</field>
+    </record>
+
+    <record id="product_035" model="product.product">
+        <field name="name">Tablet Stand Holder</field>
+        <field name="list_price">14.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1035</field>
+    </record>
+
+    <record id="product_036" model="product.product">
+        <field name="name">Silicone Baking Mat</field>
+        <field name="list_price">8.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">KITCH1036</field>
+    </record>
+
+    <record id="product_037" model="product.product">
+        <field name="name">Foam Roller for Physical Therapy</field>
+        <field name="list_price">18.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">SPORT1037</field>
+    </record>
+
+    <record id="product_038" model="product.product">
+        <field name="name">Decorative Throw Pillows Set</field>
+        <field name="list_price">27.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">DECOR1038</field>
+    </record>
+
+    <record id="product_039" model="product.product">
+        <field name="name">Glass Cleaner Spray</field>
+        <field name="list_price">3.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">CLEAN1039</field>
+    </record>
+
+    <record id="product_040" model="product.product">
+        <field name="name">External Hard Drive 1TB</field>
+        <field name="list_price">59.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1040</field>
+    </record>
+
+        <record id="product_041" model="product.product">
+        <field name="name">Organic Maple Syrup</field>
+        <field name="list_price">7.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1041</field>
+    </record>
+
+    <record id="product_042" model="product.product">
+        <field name="name">Noise-Canceling Headphones</field>
+        <field name="list_price">89.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1042</field>
+    </record>
+
+    <record id="product_043" model="product.product">
+        <field name="name">Spice Rack Organizer</field>
+        <field name="list_price">20.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">KITCH1043</field>
+    </record>
+
+    <record id="product_044" model="product.product">
+        <field name="name">Wool Dryer Balls</field>
+        <field name="list_price">16.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">HOME1044</field>
+    </record>
+
+    <record id="product_045" model="product.product">
+        <field name="name">Digital Kitchen Scale</field>
+        <field name="list_price">12.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">KITCH1045</field>
+    </record>
+
+    <record id="product_046" model="product.product">
+        <field name="name">Insulated Lunch Box</field>
+        <field name="list_price">14.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">HOME1046</field>
+    </record>
+
+    <record id="product_047" model="product.product">
+        <field name="name">Jump Rope with Counter</field>
+        <field name="list_price">9.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">SPORT1047</field>
+    </record>
+
+    <record id="product_048" model="product.product">
+        <field name="name">Magnetic Whiteboard Eraser</field>
+        <field name="list_price">4.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">OFFICE1048</field>
+    </record>
+
+    <record id="product_049" model="product.product">
+        <field name="name">Fabric Softener</field>
+        <field name="list_price">5.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">CLEAN1049</field>
+    </record>
+
+    <record id="product_050" model="product.product">
+        <field name="name">USB-C to USB Adapter</field>
+        <field name="list_price">6.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">ELEC1050</field>
+    </record>
+
+        <record id="product_051" model="product.product">
+        <field name="name">Organic Black Beans</field>
+        <field name="list_price">1.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1051</field>
+    </record>
+
+    <record id="product_052" model="product.product">
+        <field name="name">Roasted Cashew Nuts</field>
+        <field name="list_price">8.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1052</field>
+    </record>
+
+    <record id="product_053" model="product.product">
+        <field name="name">Whole Grain Mustard</field>
+        <field name="list_price">3.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1053</field>
+    </record>
+
+    <record id="product_054" model="product.product">
+        <field name="name">Organic Tomato Sauce</field>
+        <field name="list_price">2.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1054</field>
+    </record>
+
+    <record id="product_055" model="product.product">
+        <field name="name">Virgin Coconut Oil</field>
+        <field name="list_price">7.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1055</field>
+    </record>
+
+    <record id="product_056" model="product.product">
+        <field name="name">Almond Flour</field>
+        <field name="list_price">10.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1056</field>
+    </record>
+
+    <record id="product_057" model="product.product">
+        <field name="name">Pink Himalayan Salt</field>
+        <field name="list_price">4.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1057</field>
+    </record>
+
+    <record id="product_058" model="product.product">
+        <field name="name">Balsamic Vinegar of Modena</field>
+        <field name="list_price">5.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1058</field>
+    </record>
+
+    <record id="product_059" model="product.product">
+        <field name="name">Organic Peanut Butter</field>
+        <field name="list_price">6.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1059</field>
+    </record>
+
+    <record id="product_060" model="product.product">
+        <field name="name">Dried Mango Slices</field>
+        <field name="list_price">8.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1060</field>
+    </record>
+
+        <record id="product_061" model="product.product">
+        <field name="name">Organic Apple Cider Vinegar</field>
+        <field name="list_price">4.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1061</field>
+    </record>
+
+    <record id="product_062" model="product.product">
+        <field name="name">Basmati Rice</field>
+        <field name="list_price">3.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1062</field>
+    </record>
+
+    <record id="product_063" model="product.product">
+        <field name="name">Canned Chickpeas</field>
+        <field name="list_price">1.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1063</field>
+    </record>
+
+    <record id="product_064" model="product.product">
+        <field name="name">Quinoa Puffs</field>
+        <field name="list_price">5.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1064</field>
+    </record>
+
+    <record id="product_065" model="product.product">
+        <field name="name">Dark Chocolate Bars</field>
+        <field name="list_price">2.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1065</field>
+    </record>
+
+    <record id="product_066" model="product.product">
+        <field name="name">Oat Milk</field>
+        <field name="list_price">3.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1066</field>
+    </record>
+
+    <record id="product_067" model="product.product">
+        <field name="name">Sliced Almonds</field>
+        <field name="list_price">6.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1067</field>
+    </record>
+
+    <record id="product_068" model="product.product">
+        <field name="name">Freeze-Dried Strawberries</field>
+        <field name="list_price">7.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1068</field>
+    </record>
+
+    <record id="product_069" model="product.product">
+        <field name="name">Organic Lentils</field>
+        <field name="list_price">2.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1069</field>
+    </record>
+
+    <record id="product_070" model="product.product">
+        <field name="name">Extra Strong English Mustard</field>
+        <field name="list_price">3.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1070</field>
+    </record>
+
+        <record id="product_071" model="product.product">
+        <field name="name">Organic Dried Apricots</field>
+        <field name="list_price">8.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1071</field>
+    </record>
+
+    <record id="product_072" model="product.product">
+        <field name="name">Walnut Halves and Pieces</field>
+        <field name="list_price">9.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1072</field>
+    </record>
+
+    <record id="product_073" model="product.product">
+        <field name="name">Ground Cinnamon</field>
+        <field name="list_price">2.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1073</field>
+    </record>
+
+    <record id="product_074" model="product.product">
+        <field name="name">Gourmet Vanilla Beans</field>
+        <field name="list_price">14.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1074</field>
+    </record>
+
+    <record id="product_075" model="product.product">
+        <field name="name">Cold-Pressed Avocado Oil</field>
+        <field name="list_price">12.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1075</field>
+    </record>
+
+    <record id="product_076" model="product.product">
+        <field name="name">Stone-Ground Whole Wheat Flour</field>
+        <field name="list_price">3.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1076</field>
+    </record>
+
+    <record id="product_077" model="product.product">
+        <field name="name">Organic Raw Cacao Nibs</field>
+        <field name="list_price">10.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1077</field>
+    </record>
+
+    <record id="product_078" model="product.product">
+        <field name="name">Smoked Paprika</field>
+        <field name="list_price">3.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1078</field>
+    </record>
+
+    <record id="product_079" model="product.product">
+        <field name="name">Marinated Artichoke Hearts</field>
+        <field name="list_price">6.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1079</field>
+    </record>
+
+    <record id="product_080" model="product.product">
+        <field name="name">Organic Blue Agave Syrup</field>
+        <field name="list_price">7.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1080</field>
+    </record>
+        <record id="product_081" model="product.product">
+        <field name="name">Sesame Seed Oil</field>
+        <field name="list_price">5.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1081</field>
+    </record>
+
+    <record id="product_082" model="product.product">
+        <field name="name">Organic Chicken Broth</field>
+        <field name="list_price">2.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1082</field>
+    </record>
+
+    <record id="product_083" model="product.product">
+        <field name="name">Turmeric Powder</field>
+        <field name="list_price">3.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1083</field>
+    </record>
+
+    <record id="product_084" model="product.product">
+        <field name="name">Pure Maple Granules</field>
+        <field name="list_price">6.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1084</field>
+    </record>
+
+    <record id="product_085" model="product.product">
+        <field name="name">Red Lentils</field>
+        <field name="list_price">1.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1085</field>
+    </record>
+
+    <record id="product_086" model="product.product">
+        <field name="name">Pitted Kalamata Olives</field>
+        <field name="list_price">4.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1086</field>
+    </record>
+
+    <record id="product_087" model="product.product">
+        <field name="name">Organic Raw Almond Butter</field>
+        <field name="list_price">10.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1087</field>
+    </record>
+
+    <record id="product_088" model="product.product">
+        <field name="name">Black Bean Spaghetti</field>
+        <field name="list_price">3.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1088</field>
+    </record>
+
+    <record id="product_089" model="product.product">
+        <field name="name">Organic Green Tea Matcha Powder</field>
+        <field name="list_price">15.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1089</field>
+    </record>
+
+    <record id="product_090" model="product.product">
+        <field name="name">Dried Shiitake Mushrooms</field>
+        <field name="list_price">7.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1090</field>
+    </record>
+
+        <record id="product_091" model="product.product">
+        <field name="name">Organic Tomato Paste</field>
+        <field name="list_price">1.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1091</field>
+    </record>
+
+    <record id="product_092" model="product.product">
+        <field name="name">Wildflower Honey</field>
+        <field name="list_price">6.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1092</field>
+    </record>
+
+    <record id="product_093" model="product.product">
+        <field name="name">Pecan Halves</field>
+        <field name="list_price">9.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1093</field>
+    </record>
+
+    <record id="product_094" model="product.product">
+        <field name="name">Canned Coconut Milk</field>
+        <field name="list_price">2.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1094</field>
+    </record>
+
+    <record id="product_095" model="product.product">
+        <field name="name">Brown Basmati Rice</field>
+        <field name="list_price">3.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1095</field>
+    </record>
+
+    <record id="product_096" model="product.product">
+        <field name="name">Dried Cranberries</field>
+        <field name="list_price">4.49</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1096</field>
+    </record>
+
+    <record id="product_097" model="product.product">
+        <field name="name">White Quinoa</field>
+        <field name="list_price">5.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1097</field>
+    </record>
+
+    <record id="product_098" model="product.product">
+        <field name="name">Applewood Smoked Bacon</field>
+        <field name="list_price">8.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1098</field>
+    </record>
+
+    <record id="product_099" model="product.product">
+        <field name="name">Pure Bourbon Vanilla Extract</field>
+        <field name="list_price">12.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1099</field>
+    </record>
+
+    <record id="product_100" model="product.product">
+        <field name="name">Organic Pickled Beets</field>
+        <field name="list_price">4.99</field>
+        <field name="detailed_type">product</field>
+        <field name="default_code">FOOD1100</field>
+    </record>
+</odoo>
