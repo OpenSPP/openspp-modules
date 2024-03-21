@@ -19,8 +19,11 @@
         "security/ir.model.access.csv",
         "views/main_view.xml",
         "views/dms_directory_views.xml",
+        "views/dms_file_views.xml",
     ],
-    "assets": {},
+    "assets": {
+        "web.assets_backend": [],
+    },
     "demo": [],
     "images": [],
     "application": True,

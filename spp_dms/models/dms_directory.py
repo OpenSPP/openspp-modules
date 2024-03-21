@@ -20,8 +20,6 @@ class SPPDMSDirectory(models.Model):
         comodel_name="spp.dms.directory",
         string="Parent Directory",
         ondelete="restrict",
-        # Access to a directory doesn't necessarily mean access its parent, so
-        # prefetching this field could lead to misleading access errors
         prefetch=False,
         index=True,
         store=True,
@@ -30,7 +28,7 @@ class SPPDMSDirectory(models.Model):
         copy=True,
         default=lambda self: self._default_parent_id(),
     )
-    root_directory_id = fields.Many2one("dms.directory", "Root Directory", compute="_compute_root_id", store=True)
+    root_directory_id = fields.Many2one("spp.dms.directory", "Root Directory", compute="_compute_root_id", store=True)
     child_directory_ids = fields.One2many(
         comodel_name="spp.dms.directory",
         inverse_name="parent_id",
@@ -84,7 +82,6 @@ class SPPDMSDirectory(models.Model):
             if record.is_root_directory:
                 record.root_directory_id = record.id
             else:
-                # recursively check all parent nodes up to the root directory
                 if not record.parent_id.root_directory_id:
                     record.parent_id._compute_root_id()
                 record.root_directory_id = record.parent_id.root_directory_id

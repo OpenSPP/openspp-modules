@@ -1,5 +1,7 @@
 import base64
+import hashlib
 import json
+import logging
 from collections import defaultdict
 
 from PIL import Image
@@ -10,9 +12,14 @@ from odoo.tools.mimetypes import guess_mimetype
 
 from ..tools import file_tools
 
+_logger = logging.getLogger(__name__)
+
 
 class SPPDMSFile(models.Model):
     _name = "spp.dms.file"
+    _inherit = [
+        "spp.dms.mixins.thumbnail",
+    ]
     _description = "DMS File"
     _order = "name asc"
 
@@ -51,10 +58,10 @@ class SPPDMSFile(models.Model):
     size = fields.Float(readonly=True)
     human_size = fields.Char(readonly=True, string="Size", compute="_compute_human_size", store=True)
     checksum = fields.Char(string="Checksum/SHA1", readonly=True, index="btree")
-    content_binary = fields.Binary(attachment=False, prefetch=False)
     content_file = fields.Binary(attachment=True, prefetch=False)
 
     image_1920 = fields.Image(compute="_compute_image_1920", store=True, readonly=False)
+    color = fields.Integer(default=0)
 
     @api.depends("mimetype", "content")
     def _compute_image_1920(self):
@@ -73,55 +80,75 @@ class SPPDMSFile(models.Model):
 
     @api.depends("name", "directory_id", "directory_id.parent_path")
     def _compute_path(self):
-        model = self.env["dms.directory"]
+        model = self.env["spp.dms.directory"]
         for record in self:
-            path_names = [record.display_name]
-            path_json = [
-                {
-                    "model": record._name,
-                    "name": record.display_name,
-                    "id": isinstance(record.id, int) and record.id or 0,
-                }
-            ]
-            current_dir = record.directory_id
-            while current_dir:
-                path_names.insert(0, current_dir.name)
-                path_json.insert(
-                    0,
+            if record.display_name:
+                path_names = [record.display_name]
+                path_json = [
                     {
-                        "model": model._name,
-                        "name": current_dir.name,
-                        "id": current_dir._origin.id,
-                    },
+                        "model": record._name,
+                        "name": record.display_name,
+                        "id": isinstance(record.id, int) and record.id or 0,
+                    }
+                ]
+                current_dir = record.directory_id
+                while current_dir:
+                    path_names.insert(0, current_dir.name)
+                    path_json.insert(
+                        0,
+                        {
+                            "model": model._name,
+                            "name": current_dir.name,
+                            "id": current_dir._origin.id,
+                        },
+                    )
+                    current_dir = current_dir.parent_id
+                record.update(
+                    {
+                        "path_names": "/".join(path_names),
+                        "path_json": json.dumps(path_json),
+                    }
                 )
-                current_dir = current_dir.parent_id
-            record.update(
-                {
-                    "path_names": "/".join(path_names),
-                    "path_json": json.dumps(path_json),
-                }
-            )
+            else:
+                record.update(
+                    {
+                        "path_names": "/",
+                        "path_json": None,
+                    }
+                )
 
-    @api.depends("content_binary", "content_file")
+    @api.depends("content_file")
     def _compute_content(self):
         bin_size = self.env.context.get("bin_size", False)
         for record in self:
             if record.content_file:
                 context = {"human_size": True} if bin_size else {"base64": True}
                 record.content = record.with_context(**context).content_file
-            elif record.content_binary:
-                record.content = record.content_binary if bin_size else base64.b64encode(record.content_binary)
 
     def _inverse_content(self):
         updates = defaultdict(set)
         for record in self:
-            values = self._get_content_inital_vals()
+            values = {"content_file": False}
             binary = base64.b64decode(record.content or "")
             values = record._update_content_vals(values, binary)
             updates[tools.frozendict(values)].add(record.id)
-        with self.env.norecompute():
-            for vals, ids in updates.items():
-                self.browse(ids).write(dict(vals))
+        # with self.env.norecompute():
+        for vals, ids in updates.items():
+            self.browse(ids).write(dict(vals))
+
+    def _update_content_vals(self, vals, binary):
+        new_vals = vals.copy()
+        new_vals.update(
+            {
+                "checksum": self._get_checksum(binary),
+                "size": binary and len(binary) or 0,
+            }
+        )
+        new_vals["content_file"] = self.content
+        return new_vals
+
+    def _get_checksum(self, binary):
+        return hashlib.sha1(binary or b"").hexdigest()
 
     @api.depends("name", "mimetype", "content")
     def _compute_extension(self):
@@ -131,8 +158,12 @@ class SPPDMSFile(models.Model):
     @api.depends("content")
     def _compute_mimetype(self):
         for record in self:
-            binary = base64.b64decode(record.content or "")
-            record.mimetype = guess_mimetype(binary)
+            try:
+                binary = base64.b64decode(record.content or "")
+            except Exception:
+                _logger.info("DEBUG: _compute_mimetype: %s" % record.content)
+            else:
+                record.mimetype = guess_mimetype(binary)
 
     @api.depends("size")
     def _compute_human_size(self):

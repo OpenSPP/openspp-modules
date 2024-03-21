@@ -288,17 +288,6 @@
                     </group>
                 </group>
             </xpath>
-            <!-- <form position="inside">
-                <footer>
-                    <button
-                        class="btn btn-primary"
-                        type="object"
-                        string="Create"
-                        name="action_save_onboarding_directory_step"
-                    />
-                    <button special="cancel" string="Cancel" />
-                </footer>
-            </form> -->
         </field>
     </record>
 
