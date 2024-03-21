@@ -8,6 +8,7 @@ class OpenSPPGisRasterLayer(models.Model):
     RASTER_TYPE_CHOICES = [
         ("d_wms", "Distant WMS"),
         ("osm", "OpenStreetMap"),
+        ("image", "Image"),
     ]
 
     RASTER_STYLE_CHOICES = [
@@ -58,12 +59,12 @@ class OpenSPPGisRasterLayer(models.Model):
         required=True,
     )
     name = fields.Char("Layer Name", translate=True, required=True)
-    url = fields.Char("Service URL")
 
     # technical field to display or not wms options
     is_wms = fields.Boolean(compute="_compute_is_wms")
 
     # wms options
+    url = fields.Char("Service URL")
     wms_layer_name = fields.Char("WMS Layer Name")
     opacity = fields.Float(default=1.0)
 
@@ -72,12 +73,21 @@ class OpenSPPGisRasterLayer(models.Model):
         RASTER_STYLE_CHOICES,
         default="streets",
     )
+    visible_on_load = fields.Boolean("Is visible on load?", default=True)
+
+    # image options
+    image_url = fields.Char()
+    image_opacity = fields.Float(default=1.0)
+    x_min = fields.Float(digits=(3, 15))
+    x_max = fields.Float(digits=(3, 15))
+    y_min = fields.Float(digits=(3, 15))
+    y_max = fields.Float(digits=(3, 15))
+
     view_id = fields.Many2one("ir.ui.view", "Related View", domain=[("type", "=", "gis")], required=True)
 
     type_id = fields.Many2one("spp.gis.raster.layer.type", "Layer", domain="[('service', '=', raster_type)]")
     type = fields.Char(related="type_id.code")
     sequence = fields.Integer("Layer priority", default=6)
-    visible_on_load = fields.Boolean("Is visible on load?", default=True)
 
     @api.depends("raster_type")
     def _compute_is_wms(self):
