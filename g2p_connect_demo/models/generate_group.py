@@ -66,7 +66,8 @@ class OpenG2PGenerateData(models.Model):
         fake = Faker(locales)
 
         # sex_choice_range = ["Female", "Male"] * 50 + ["Other"]
-        sex_choice_range = ["Female", "Male"] * 50
+        sex_choices = self.env["gender.type"].search([]).mapped("value")
+        sex_choice_range = sex_choices * 50
         age_group_range = ["A", "C", "N"] * 2 + ["E"]
         group_size_range = list(range(1, 2)) * 2 + list(range(3, 5)) * 4 + list(range(6, 8))
 
@@ -272,7 +273,9 @@ class OpenG2PGenerateData(models.Model):
         if random.randint(0, 3) == 1:
             lost_primary_source_income = True
 
-        dob = fake.date_between_dates(date_start=date_start, date_end=date_end).isoformat()
+        dob = fake.date_between_dates(date_start=date_start, date_end=date_end)
+        registration_date = fake.date_between_dates(date_start=dob, date_end=datetime.datetime.now()).isoformat()
+        dob = dob.isoformat()
 
         fullname = f"{first_name} {last_name}"
         bank_ids = []

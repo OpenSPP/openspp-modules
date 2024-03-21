@@ -29,42 +29,23 @@
               <field
                         name="area_id"
                         placeholder="Area"
-                        attrs="{'readonly':[('disabled','!=',False)]}"
+                        readonly="disabled != False"
                         options="{'no_open': True, 'no_create': True}"
                     />
               <span class="o_form_label o_td_label" name="address_name">
                   <b>Address</b>
               </span>
               <div>
-                <field
-                            name="full_address"
-                            attrs="{'readonly':[('disabled','!=',False)]}"
-                            class="oe_read_only"
-                        />
-                <field
-                            name="street"
-                            placeholder="Street"
-                            attrs="{'readonly':[('disabled','!=',False)]}"
-                            class="oe_edit_only"
-                        />
+                <field name="full_address" readonly="disabled != False" class="oe_read_only" />
+                <field name="street" placeholder="Street" readonly="disabled != False" class="oe_edit_only" />
                 <field
                             name="street2"
                             placeholder="Street2"
-                            attrs="{'readonly':[('disabled','!=',False)]}"
+                            readonly="disabled != False"
                             class="oe_edit_only"
                         />
-                <field
-                            name="city"
-                            placeholder="City"
-                            attrs="{'readonly':[('disabled','!=',False)]}"
-                            class="oe_edit_only"
-                        />
-                <field
-                            name="zip"
-                            placeholder="Postal"
-                            attrs="{'readonly':[('disabled','!=',False)]}"
-                            class="oe_edit_only"
-                        />
+                <field name="city" placeholder="City" readonly="disabled != False" class="oe_edit_only" />
+                <field name="zip" placeholder="Postal" readonly="disabled != False" class="oe_edit_only" />
               </div>
             </group>
           </xpath>
