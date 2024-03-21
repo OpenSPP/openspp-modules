@@ -16,6 +16,7 @@
     ],
     "data": [
         "data/users_data.xml",
+        "data/gender_data.xml",
     ],
     "assets": {},
     "demo": [],
