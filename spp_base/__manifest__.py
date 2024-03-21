@@ -26,7 +26,6 @@
         "spp_custom_field",
         "spp_custom_fields_ui",
         "spp_programs",
-        "spp_helpdesk",
     ],
     "external_dependencies": {},
     "data": [

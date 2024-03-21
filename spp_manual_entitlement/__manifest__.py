@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP: Import Improvement",
+    "name": "SPP Program: Manual Entitlement",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -8,16 +8,22 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "development_status": "Alpha",
-    "maintainers": ["jeremi", "gonzalesedwin1123", "nhatnm0612"],
+    "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
-        "spp_base",
+        "base",
+        "g2p_registry_base",
+        "g2p_programs",
+        "spp_registrant_import",
     ],
     "data": [
-        "views/res_partner_views.xml",
-        "views/spp_area_views.xml",
-        "views/spp_service_point_views.xml",
+        "security/ir.model.access.csv",
+        "views/cycle_view.xml",
+        "wizard/manual_entitlement_wizard.xml",
     ],
-    "application": False,
+    "assets": {},
+    "demo": [],
+    "images": [],
+    "application": True,
     "installable": True,
     "auto_install": False,
 }
