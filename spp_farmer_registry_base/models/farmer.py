@@ -12,8 +12,6 @@ class Farmer(models.Model):
     marital_status = fields.Selection(
         [
             ("single", "Single"),
-            ("married_monogamous", "Married Monogamous"),
-            ("married_polygamous", "Married Polygamous"),
             ("widowed", "Widowed"),
             ("separated", "Separated"),
         ],
@@ -61,8 +59,6 @@ class TempFarmer(models.Model):
     farmer_marital_status = fields.Selection(
         [
             ("single", "Single"),
-            ("married_monogamous", "Married Monogamous"),
-            ("married_polygamous", "Married Polygamous"),
             ("widowed", "Widowed"),
             ("separated", "Separated"),
         ],
