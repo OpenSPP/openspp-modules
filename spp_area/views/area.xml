@@ -50,8 +50,8 @@
                             />
                         </h1>
                     </div>
-                    <div class="row mt16 o_settings_container">
-                        <div class="col-16 o_setting_box">
+                    <div class="row mt16 o_settings_container" name="details">
+                        <div class="col-16 o_setting_box" name="altnames">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -61,7 +61,7 @@
                                 <field name="altnames" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="code">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -71,7 +71,7 @@
                                 <field name="code" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="area_level">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -81,7 +81,7 @@
                                 <field name="area_level" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="complete_name">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -91,7 +91,7 @@
                                 <field name="complete_name" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="kind">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -101,7 +101,7 @@
                                 <field name="kind" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="area_sqkm">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
