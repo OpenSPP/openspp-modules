@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="testing_view_farm_groups_form" model="ir.ui.view">
+        <field name="name">testing_view_farm_groups_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='kind']" position="after">
+                <button name="my_button" string="my_button" type="object" class="oe_highlight btn-primary" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
