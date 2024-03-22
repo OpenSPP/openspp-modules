@@ -12,10 +12,13 @@
     "depends": [
         "g2p_registry_base",
         "g2p_programs",
-        "spp_helpdesk",
+        # "spp_helpdesk",
+        "product",
     ],
     "data": [
         "data/users_data.xml",
+        "data/gender_data.xml",
+        "data/product_data.xml",
     ],
     "assets": {},
     "demo": [],

@@ -47,13 +47,13 @@
       </record>
 
     <record model="spp.area" id="demo_center_201">
-        <field name="code">201</field>
+        <field name="code">C201</field>
           <field name="draft_name">Demo Center 201</field>
         <field name="kind" ref="g2p_connect_demo.center_area_kind" />
         <field name="parent_id" ref="demo_branch_2" />
     </record>
     <record model="spp.area" id="demo_center_202">
-        <field name="code">202</field>
+        <field name="code">C202</field>
           <field name="draft_name">Demo Center 202</field>
         <field name="kind" ref="g2p_connect_demo.center_area_kind" />
         <field name="parent_id" ref="demo_branch_2" />
@@ -119,5 +119,4 @@
             <field name="name">Agent 15</field>
             <field name="area_id" ref="demo_center_202" />
     </record>
-
 </odoo>

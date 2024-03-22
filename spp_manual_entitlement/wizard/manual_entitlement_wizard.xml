@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="manual_entitlement_wizard_form_view" model="ir.ui.view">
+        <field name="name">manual_entitlement_wizard_form_view</field>
+        <field name="model">spp.manual.entitlement.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="step" invisible="1" />
+                    <div class="row" invisible="step != 'step1'">
+                        <div class="column" style="flex: 50%; padding: 20px; text-align: center">
+                            <button
+                                type="object"
+                                class="btn-primary"
+                                icon="fa-mouse-pointer"
+                                name="step_manual_select"
+                                string="Manual Select"
+                            />
+                            <br />
+                            <span style="font-size:8pt">
+                                Manually select from the list of the cycle beneficiaries.
+                            </span>
+                        </div>
+                        <div class="column" style="flex: 50%; padding: 20px; text-align: center">
+                            <button
+                                type="object"
+                                class="btn-primary"
+                                icon="fa-upload"
+                                name="step_upload_csv"
+                                string="Upload CSV/XLSX"
+                            />
+                            <br />
+                            <span style="font-size:8pt">
+                                Upload CSV/XLSX file containing the list of beneficiaries ID and entitlement amount.
+                            </span>
+                        </div>
+                    </div>
+                    <div invisible="step != 'step2a'">
+                        <field name="cycle_membership_ids">
+                            <tree editable="bottom" create="0" delete="0">
+                                <field name="selected" />
+                                <field name="partner_id" readonly="1" force_save="1" />
+                            </tree>
+                        </field>
+                    </div>
+                    <div invisible="step != 'step2b_1'">
+                        <field name="file" filename="filename" widget="binary" />
+                        <field name="filename" invisible="1" />
+                    </div>
+                    <div invisible="step != 'step2b_2'">
+                        <field name="file" filename="filename" widget="binary" readonly="1" />
+                        <field name="filename" invisible="1" />
+                        <field name="upload_cycle_membership_ids" readonly="1">
+                            <tree>
+                                <field name="partner_id" />
+                                <field name="entitlement_amount" />
+                            </tree>
+                        </field>
+                    </div>
+                    <div invisible="step != 'step3'">
+                        <field name="cycle_membership_ids">
+                            <tree editable="bottom" create="0" delete="0">
+                                <field name="partner_id" readonly="1" force_save="1" />
+                                <field name="entitlement_amount" />
+                            </tree>
+                        </field>
+                    </div>
+                </sheet>
+                <footer>
+                    <button
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-check"
+                        name="create_entitlement"
+                        string="Create Entitlements"
+                        invisible="step != 'step3'"
+                    />
+                    <button
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-arrow-right"
+                        name="step_input_entitlement_amounts"
+                        string="Next"
+                        invisible="step != 'step2a'"
+                    />
+                    <button
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-upload"
+                        name="start_import"
+                        string="Import"
+                        invisible="step != 'step2b_1'"
+                    />
+                    <button
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-arrow-right"
+                        name="finalize_import"
+                        string="Next"
+                        invisible="step != 'step2b_2'"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

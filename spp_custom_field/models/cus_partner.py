@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 
+import ast
 import json
 import logging
 
@@ -21,13 +22,19 @@ class OpenSPPResPartner(models.Model):
             doc = arch
             basic_info_page = doc.xpath("//page[@name='basic_info']")
 
+            action_id = self.env["ir.actions.act_window"].browse(options.get("action_id"))
+            if not action_id:
+                act_window_view = self.env["ir.actions.act_window.view"].search([("view_id", "=", view_id)], limit=1)
+                action_id = act_window_view.act_window_id
+
             model_fields_id = self.env["ir.model.fields"].search(
                 [("model_id", "=", "res.partner")],
                 order="ttype, field_description",
             )
-
             if basic_info_page:
-                is_group = self._context.get("default_is_group", False)
+                action_id = action_id.context.replace("'", '"')
+                is_group = ast.literal_eval(action_id).get("default_is_group")
+
                 custom_page = etree.Element("page", {"string": "Additional Details"})
                 indicators_page = etree.Element("page", {"string": "Indicators"})
 

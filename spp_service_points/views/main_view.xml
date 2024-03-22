@@ -4,7 +4,7 @@
     <menuitem
         id="service_points_main_menu_root"
         name="Service Point"
-        web_icon="spp_idqueue,static/src/img/icons/contacts.png"
+        web_icon="spp_service_points,static/description/icon.png"
         active="True"
         sequence="1"
     />

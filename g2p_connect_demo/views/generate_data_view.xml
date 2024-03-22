@@ -39,7 +39,7 @@ Part of Openg2p. See LICENSE file for full copyright and licensing details.
                             class="oe_stat_button"
                             icon="fa-thumbs-o-up"
                             name="generate_sample_data"
-                            attrs="{'invisible':[('state','!=','draft')]}"
+                            invisible="state != 'draft'"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Generate</span>
@@ -55,6 +55,10 @@ Part of Openg2p. See LICENSE file for full copyright and licensing details.
                         <label for="num_groups" string="Number of Groups:" />
                         <h2>
                             <field id="num_groups" name="num_groups" placeholder="Number of groups..." />
+                        </h2>
+                        <label for="locale" string="Locale:" />
+                        <h2>
+                            <field id="locale" name="locale" placeholder="Locale..." />
                         </h2>
                     </div>
 

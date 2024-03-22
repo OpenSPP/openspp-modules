@@ -5,152 +5,41 @@ import random
 import string
 from datetime import datetime, timedelta
 
-from faker import Faker
-
 from odoo import Command, api, fields, models
 
-from ..tools import generate_polygon, random_location_in_kenya
+from odoo.addons.spp_base_demo.locale_providers import create_faker
 
-NAMES = [
-    "Aguta",
-    "Aprot",
-    "Arusei",
-    "Ayabei",
-    "Barkutwo",
-    "Barmasai",
-    "Barngetuny",
-    "Barsosio",
-    "Bethwell",
-    "Bitok",
-    "Busendich",
-    "Changeywo",
-    "Cheboi",
-    "Cheboiboch",
-    "Cheboror",
-    "Chege",
-    "Chelangat",
-    "Chelule",
-    "Chemjor",
-    "Chemlany",
-    "Chemoiywo",
-    "Chemosin",
-    "Chemutai",
-    "Chenonge",
-    "Chepchirchir",
-    "Chepkemei",
-    "Chepkesis",
-    "Chepkorir",
-    "Chepkosgei",
-    "Chepkurui",
-    "Cheprot",
-    "Cheptais",
-    "Chepyego",
-    "Cherigat",
-    "Cherotich",
-    "Cheyech",
-    "Cheywa",
-    "Chirlee",
-    "Dickson",
-    "Ebuya",
-    "Eyapan",
-    "Gitahi",
-    "Gwako",
-    "Jebet",
-    "Jebiwott",
-    "Jemaiyo",
-    "Jepkesho",
-    "Jepkirui",
-    "Jerop",
-    "Kabiga",
-    "Kagika",
-    "Kamathi",
-    "Kamau",
-    "Kamworor",
-    "Kandie",
-    "Kaptich",
-    "Karoki",
-    "Kasimili",
-    "Kataron",
-    "Kibore",
-    "Kibowen",
-    "Kilel",
-    "Kimani",
-    "Kimeli",
-    "Kimemia",
-    "Kimobwa",
-    "Kimurgor",
-    "Kimwei",
-    "Kinuthia",
-    "Kinyanjui",
-    "Kinyor",
-    "Kiogora",
-    "Kipkoskei",
-    "Kiplitany",
-    "Kipsiele",
-    "Kipterege",
-    "Kirwa",
-    "Kisorio",
-    "Kithuka",
-    "Kitur",
-    "Kitwara",
-    "Kiyara",
-    "Kiyeng",
-    "Kogo",
-    "Koinange",
-    "Komen",
-    "Korikwiang",
-    "Kororia",
-    "Koskei",
-    "Kotut",
-    "Kurgat",
-    "Kuria",
-    "Kwalia",
-    "Kwambai",
-    "Kwemoi",
-    "Larabal",
-    "Lelei",
-    "Lesuuda",
-    "Limo",
-    "Longosiwa",
-    "Loroupe",
-    "Loyanae",
-    "Magut",
-    "Maina",
-    "Makau",
-    "Malakwen",
-    "Masai",
-    "Mburu",
-    "Moiben",
-    "Mugo",
-    "Mumbi",
-    "Musyoki",
-    "Mutahi",
-    "Mutai",
-    "Mwangangi",
-    "Mwangi",
-    "Ndungu",
-    "Ngugi",
-    "Njenga",
-    "Njeri",
-    "Nyambura",
-    "Oduya",
-    "Onyango",
-    "Sigei",
-    "Songok",
-    "Tergat",
-    "Wacera",
-    "Wairimu",
-    "Waithaka",
-    "Wambui",
-    "Wangari",
-    "Wanjiku",
-    "Wanjiru",
-]
+from .. import tools
+
+LOCALES = {
+    "en_KE": {
+        "name": "Kenya (English)",
+        "location_function": tools.random_location_in_kenya,
+    },
+    "sw_KE": {
+        "name": "Kenya (Swahili)",
+        "location_function": tools.random_location_in_kenya,
+    },
+    "lo_LA": {
+        "name": "Laos (Lao)",
+        "location_function": tools.random_location_in_laos,
+    },
+    "si_LK": {
+        "name": "Sri Lanka (Sinhala)",
+        "location_function": tools.random_location_in_sri_lanka,
+    },
+    "ta_LK": {
+        "name": "Sri Lanka (Tamil)",
+        "location_function": tools.random_location_in_sri_lanka,
+    },
+}
 
 
 class SPPGenerateFarmerData(models.Model):
     _name = "spp.generate.farmer.data"
     _description = "Generate Farm Data"
+
+    LOCALE_SELECTION = [(key, value["name"]) for key, value in LOCALES.items()]
 
     name = fields.Char()
     num_groups = fields.Integer("Number of Groups", default=1)
@@ -162,29 +51,26 @@ class SPPGenerateFarmerData(models.Model):
         default="draft",
     )
 
+    locale = fields.Selection(
+        LOCALE_SELECTION,
+        default="en_KE",
+        required=True,
+    )
+
     def generate_sample_data(self):
         batches = math.ceil(self.num_groups / 1000)
 
         for _ in range(0, batches):
             # self.with_delay()._generate_sample_data(res_id=self.id)
-            self._generate_sample_data(res_id=self.id)
+            self._generate_sample_data(res=self)
 
     @api.model
     def _generate_sample_data(self, **kwargs):
-        res_id = kwargs.get("res_id")
-        res = self.browse(res_id)
+        res = kwargs.get("res")
 
         kind_farm_id = self.env.ref("spp_farmer_registry_base.kind_farm").id
 
-        locales = [
-            "en_US",
-            "en_GB",
-            "en_IE",
-            "en_TH",
-            "es_ES",
-            "es_MX",
-        ]
-        fake = Faker(locales)
+        fake = create_faker(res.locale)
 
         # Get available gender field selections
         options = self.env["gender.type"].search([])
@@ -194,9 +80,9 @@ class SPPGenerateFarmerData(models.Model):
         num_groups = min(res.num_groups, 1000)
 
         for i in range(0, num_groups):
-            group_id = res._generate_group_data(i, fake, locales, sex_choice_range, kind_farm_id)
+            group_id = res._generate_group_data(i, fake, sex_choice_range, kind_farm_id)
 
-            land_record_id = res._generate_land_record_record(group_id)
+            land_record_id = res._generate_land_record_record(group_id, res.locale)
             group_id.farm_land_rec_id = land_record_id.id
             group_id.coordinates = land_record_id.land_coordinates
 
@@ -254,14 +140,13 @@ class SPPGenerateFarmerData(models.Model):
             "_generate_sample_data",
         )
 
-        return {"result": msg, "res_model": self._name, "res_ids": [res_id]}
+        return {"result": msg, "res_model": self._name, "res_ids": [res.id]}
 
-    def _generate_group_data(self, index, fake, locales, sex_choice_range, kind_id):
-        locale = random.choice(locales)
+    def _generate_group_data(self, index, fake, sex_choice_range, kind_id):
         sex = random.choice(sex_choice_range)
-        last_name = random.choice(NAMES)
-        first_name = fake[locale].first_name_male() if sex == "Male" else fake[locale].first_name_female()
-        addl_name = fake[locale].first_name_male() if sex == "Male" else fake[locale].first_name_female()
+        last_name = fake.last_name()
+        first_name = fake.first_name_male() if sex == "Male" else fake.first_name_female()
+        addl_name = fake.first_name_male() if sex == "Male" else fake.first_name_female()
 
         group_name = f"{last_name} Farm"
         id_group = "demo." + hashlib.md5(f"{group_name} {index}".encode()).hexdigest()
@@ -315,12 +200,14 @@ class SPPGenerateFarmerData(models.Model):
         }
         return self.env["res.partner"].create(group_vals)
 
-    def _generate_land_record_record(self, group_id):
-        latitude, longitude = random_location_in_kenya()
+    def _generate_land_record_record(self, group_id, locale):
+        random_location_function = LOCALES[locale]["location_function"]
+
+        latitude, longitude = random_location_function()
 
         land_coordinates = {"type": "Point", "coordinates": [longitude, latitude]}
 
-        points = generate_polygon(latitude, longitude, random.randrange(50, 500))
+        points = tools.generate_polygon(latitude, longitude, random.randrange(50, 500))
 
         land_geo_polygon = {"type": "Polygon", "coordinates": [points]}
 
