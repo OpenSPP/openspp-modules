@@ -357,6 +357,7 @@ EVENT_TYPE = [
     "implive",
 ]
 
+
 class SPPLaosGenerateFarmerData(models.Model):
     _name = "spp.laos.generate.farmer.data"
     _description = "Generate Farm Data For Laos"
