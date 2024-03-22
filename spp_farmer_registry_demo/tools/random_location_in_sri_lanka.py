@@ -6,7 +6,7 @@ from shapely.prepared import prep
 
 from odoo.tools.misc import file_open
 
-# Load Laos country border data in GeoJSON format
+# Load Sri Lanka country border data in GeoJSON format
 with file_open("spp_farmer_registry_demo/tools/geoBoundaries-LKA-ADM0_simplified.geojson", "r") as f:
     sri_lanka_geojson = json.load(f)
 
@@ -27,6 +27,6 @@ def random_location_in_sri_lanka():
         longitude = random.uniform(min_lon, max_lon)
         random_point = Point(longitude, latitude)
 
-        # Check if the generated point is within the Laos boundary
+        # Check if the generated point is within the Sri Lanka boundary
         if prepared_sri_lanka_shape.contains(random_point):
             return (latitude, longitude)
