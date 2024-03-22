@@ -50,15 +50,69 @@
                             />
                         </h1>
                     </div>
-                    <group colspan="6" col="6">
-                        <field name="altnames" colspan="6" />
-                        <field name="code" colspan="2" />
-                        <field name="area_level" colspan="2" />
-                        <field name="complete_name" string="Complete Name" />
-                        <field name="level" invisible="1" />
-                        <field name="kind" />
-                        <field name="area_sqkm" />
-                    </group>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-16 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="altnames" />
+                                <div>
+                                </div>
+                                <field name="altnames" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="code" />
+                                <div>
+                                </div>
+                                <field name="code" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="area_level" />
+                                <div>
+                                </div>
+                                <field name="area_level" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="complete_name" string="Complete Name" />
+                                <div>
+                                </div>
+                                <field name="complete_name" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="kind" />
+                                <div>
+                                </div>
+                                <field name="kind" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="area_sqkm" />
+                                <div>
+                                </div>
+                                <field name="area_sqkm" />
+                            </div>
+                        </div>
+                    </div>
+                    <field name="level" invisible="1" />
                     <notebook>
                         <page name="child" string="Child">
                             <field name="child_ids" nolabel="1">
