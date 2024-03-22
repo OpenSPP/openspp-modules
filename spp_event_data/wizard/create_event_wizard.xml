@@ -7,7 +7,7 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
         <field name="name">create_event_data_form_view</field>
         <field name="model">spp.create.event.wizard</field>
         <field name="arch" type="xml">
-            <form>
+            <form edit="0">
                 <sheet>
                     <group>
                       <field name="partner_id" readonly="1" />
@@ -17,10 +17,8 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
                       <field name="expiry_date" />
                     </group>
                 </sheet>
-                <footer>
-                    <button name="next_page" string="Next" type="object" class="oe_highlight" />
-                    <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
+                <button name="next_page" string="Next" type="object" class="oe_highlight" />
+                <button string="Cancel" class="btn-secondary" special="cancel" />
             </form>
         </field>
     </record>

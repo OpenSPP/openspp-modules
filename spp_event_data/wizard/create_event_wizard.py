@@ -10,7 +10,7 @@ class SPPCreateEventWizard(models.TransientModel):
     _description = "Create Event Wizard"
 
     event_data_model = fields.Selection(
-        [("default", "None")],
+        [("default", "")],
         "Event Type",
         default="default",
     )
@@ -32,9 +32,10 @@ class SPPCreateEventWizard(models.TransientModel):
                 wizard_list = model_name.split(".")
                 wizard_model = "%s.create." % wizard_list[0]
                 wizard_list.pop(0)
-                view_name = self.env["ir.model"].search([("model", "=", model_name)]).name
+                view_name = ""
                 for split_wizard in wizard_list:
                     wizard_model += "%s." % split_wizard
+                    view_name += "%s " % split_wizard.capitalize()
                 wizard_model += "wizard"
                 view_id = rec.get_view_id(wizard_model)
                 # create the event data and pass it to event_data_model wizard
@@ -50,7 +51,7 @@ class SPPCreateEventWizard(models.TransientModel):
                 wiz = self.env[wizard_model].create({"event_id": event_id.id})
 
                 return {
-                    "name": _("Create %s", view_name),
+                    "name": _("Create %s Wizard", view_name),
                     "view_mode": "form",
                     "res_model": wizard_model,
                     "res_id": wiz.id,
