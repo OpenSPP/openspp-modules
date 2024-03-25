@@ -13,6 +13,7 @@ class Farmer(models.Model):
         [
             ("single", "Single"),
             ("widowed", "Widowed"),
+            ("married", "Married"),
             ("separated", "Separated"),
         ],
         string="Marital Status",
@@ -59,6 +60,7 @@ class TempFarmer(models.Model):
     farmer_marital_status = fields.Selection(
         [
             ("single", "Single"),
+            ("married", "Married"),
             ("widowed", "Widowed"),
             ("separated", "Separated"),
         ],
