@@ -9,36 +9,28 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <div class="row mt16 o_settings_container">
-                        <div class="col-4 o_setting_box">
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-4 o_setting_box" name="program_id">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
                                 <label for="program_id" />
                                 <div>
                                 </div>
-                                <field
-                                    name="program_id"
-                                    domain="[('id', 'in', program_id_domain)]"
-                                    options="{'no_open':true,'no_create':true}"
-                                />
+                                <field name="program_id" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="cycle_id">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
                                 <label for="cycle_id" />
                                 <div>
                                 </div>
-                                <field
-                                    name="cycle_id"
-                                    domain="[('program_id', '=', program_id)]"
-                                    options="{'no_open':true,'no_create':true}"
-                                />
+                                <field name="cycle_id" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="event_type">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -52,8 +44,9 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     <div
                         class="row mt16 o_settings_container"
                         invisible="event_type not in ('fgmemr1', 'wumem', 'fgmemr2')"
+                        name="container_2"
                     >
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_hh_member">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -63,7 +56,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_hh_member" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_indigenous">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -73,7 +66,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_indigenous" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="percent_indigenous">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -83,7 +76,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="percent_indigenous" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_15_35">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -93,7 +86,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_15_35" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="percent_15_35">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -103,7 +96,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="percent_15_35" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_woman_headed">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -113,7 +106,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_woman_headed" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_better_off">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -123,7 +116,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_better_off" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_medium">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -133,7 +126,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_medium" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_poor">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -143,7 +136,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_poor" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_male">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -153,7 +146,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_male" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_female">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -163,7 +156,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_female" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_both">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -174,8 +167,12 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             </div>
                         </div>
                     </div>
-                    <div class="row mt16 o_settings_container" invisible="event_type != 'impagri'">
-                        <div class="col-4 o_setting_box">
+                    <div
+                        class="row mt16 o_settings_container"
+                        invisible="event_type != 'impagri'"
+                        name="container_3"
+                    >
+                        <div class="col-4 o_setting_box" name="no_implemented">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -185,7 +182,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_implemented" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_on_going">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -195,7 +192,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_on_going" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_not_implemented">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -205,7 +202,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_not_implemented" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="production_area">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -215,7 +212,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="production_area" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="agricultural_yield">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -225,7 +222,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="agricultural_yield" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="agricultural_productivity">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -236,8 +233,12 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             </div>
                         </div>
                     </div>
-                    <div class="row mt16 o_settings_container" invisible="event_type != 'implive'">
-                        <div class="col-4 o_setting_box">
+                    <div
+                        class="row mt16 o_settings_container"
+                        invisible="event_type != 'implive'"
+                        name="container_4"
+                    >
+                        <div class="col-4 o_setting_box" name="no_livestock_project">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -247,7 +248,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_livestock_project" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_livestock_present">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -257,7 +258,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_livestock_present" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_livestock_consumption">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -267,7 +268,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_livestock_consumption" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_livestock_sold">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
@@ -277,7 +278,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <field name="no_livestock_sold" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box">
+                        <div class="col-4 o_setting_box" name="no_livestock_increase">
                             <div class="o_setting_left_pane">
                             </div>
                             <div class="o_setting_right_pane">
