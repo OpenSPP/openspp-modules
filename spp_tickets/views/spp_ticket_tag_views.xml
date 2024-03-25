@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_spp_ticket_tag_tree" model="ir.ui.view">
+        <field name="name">spp.ticket.tag.tree</field>
+        <field name="model">spp.ticket.tag</field>
+        <field name="arch" type="xml">
+            <tree string="Ticket Tags">
+                <field name="name" />
+                <field name="color" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_spp_ticket_tag_form" model="ir.ui.view">
+        <field name="name">spp.ticket.tag.form</field>
+        <field name="model">spp.ticket.tag</field>
+        <field name="arch" type="xml">
+            <form string="Ticket Tag">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="color" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_ticket_tags" model="ir.actions.act_window">
+        <field name="name">Ticket Tags</field>
+        <field name="res_model">spp.ticket.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first ticket tag
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_spp_ticket_tags"
+        name="Ticket Tags"
+        parent="spp_ticket_system_menu"
+        action="action_spp_ticket_tags"
+    />
+</odoo>

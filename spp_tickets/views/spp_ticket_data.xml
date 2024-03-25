@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!-- Ticket Types -->
+        <record id="ticket_type_inquiry" model="spp.ticket.tag">
+            <field name="name">Inquiry</field>
+        </record>
+        <record id="ticket_type_request" model="spp.ticket.tag">
+            <field name="name">Request</field>
+        </record>
+        <record id="ticket_type_complaint" model="spp.ticket.tag">
+            <field name="name">Complaint</field>
+        </record>
+
+        <!-- Ticket Priorities -->
+        <record id="ticket_priority_low" model="spp.ticket.tag">
+            <field name="name">Low</field>
+        </record>
+        <record id="ticket_priority_medium" model="spp.ticket.tag">
+            <field name="name">Medium</field>
+        </record>
+        <record id="ticket_priority_high" model="spp.ticket.tag">
+            <field name="name">High</field>
+        </record>
+        <record id="ticket_priority_urgent" model="spp.ticket.tag">
+            <field name="name">Urgent</field>
+        </record>
+
+        <!-- Ticket Statuses -->
+        <record id="ticket_status_new" model="spp.ticket.tag">
+            <field name="name">New</field>
+        </record>
+        <record id="ticket_status_in_progress" model="spp.ticket.tag">
+            <field name="name">In Progress</field>
+        </record>
+        <record id="ticket_status_resolved" model="spp.ticket.tag">
+            <field name="name">Resolved</field>
+        </record>
+        <record id="ticket_status_closed" model="spp.ticket.tag">
+            <field name="name">Closed</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_spp_ticket_user,spp.ticket.user,model_spp_ticket,base.group_user,1,0,1,0
+access_spp_ticket_manager,spp.ticket.manager,model_spp_ticket,base.group_erp_manager,1,1,1,1
+access_spp_ticket_tag_user,spp.ticket.tag.user,model_spp_ticket_tag,base.group_user,1,0,0,0
+access_spp_ticket_tag_manager,spp.ticket.tag.manager,model_spp_ticket_tag,base.group_erp_manager,1,1,1,1

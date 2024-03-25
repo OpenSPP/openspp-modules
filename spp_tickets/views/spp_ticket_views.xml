@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Tree/List View -->
+    <record id="view_spp_ticket_list" model="ir.ui.view">
+        <field name="name">spp.ticket.list</field>
+        <field name="model">spp.ticket</field>
+        <field name="arch" type="xml">
+            <tree string="Tickets">
+                <field name="name" />
+                <field name="ticket_type" />
+                <field name="priority" />
+                <field name="status" />
+                <field name="assigned_to" />
+                <field name="partner_id" />
+                <field name="creation_date" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_spp_ticket_form" model="ir.ui.view">
+        <field name="name">spp.ticket.form</field>
+        <field name="model">spp.ticket</field>
+        <field name="arch" type="xml">
+            <form string="Ticket">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="description" />
+                        <field name="ticket_type" />
+                        <field name="priority" />
+                        <field name="status" />
+                        <field name="assigned_to" />
+                        <field name="partner_id" />
+                        <field name="creation_date" />
+                        <field name="resolution_date" />
+                        <field name="last_updated" />
+                        <field name="tag_ids" widget="many2many_tags" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_spp_ticket_search" model="ir.ui.view">
+        <field name="name">spp.ticket.search</field>
+        <field name="model">spp.ticket</field>
+        <field name="arch" type="xml">
+            <search string="Search Tickets">
+                <field name="name" />
+                <field name="ticket_type" />
+                <field name="priority" />
+                <field name="status" />
+                <field name="assigned_to" />
+                <field name="partner_id" />
+                <field name="creation_date" />
+                <filter string="New" domain="[('status','=','new')]" />
+                <filter string="In Progress" domain="[('status','=','in_progress')]" />
+                <filter string="Resolved" domain="[('status','=','resolved')]" />
+                <filter string="Closed" domain="[('status','=','closed')]" />
+                <group expand="0" string="Group By">
+                    <filter string="Type" domain="[]" context="{'group_by':'ticket_type'}" />
+                    <filter string="Priority" domain="[]" context="{'group_by':'priority'}" />
+                    <filter string="Status" domain="[]" context="{'group_by':'status'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action to Open the List View -->
+    <record id="action_spp_tickets" model="ir.actions.act_window">
+        <field name="name">Tickets</field>
+        <field name="res_model">spp.ticket</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_spp_ticketing_system" name="Ticketing System" parent="base.menu_management" />
+    <menuitem
+        id="menu_spp_tickets"
+        name="Tickets"
+        action="action_spp_tickets"
+        parent="menu_spp_ticketing_system"
+    />
+</odoo>
