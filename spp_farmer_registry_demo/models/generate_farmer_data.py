@@ -160,6 +160,7 @@ class SPPGenerateFarmerData(models.Model):
 
         marital_status = [
             "single",
+            "married",
             "married_monogamous",
             "married_polygamous",
             "widowed",
