@@ -60,6 +60,14 @@ class SPPDMSFile(models.Model):
     checksum = fields.Char(string="Checksum/SHA1", readonly=True, index="btree")
     content_file = fields.Binary(attachment=True, prefetch=False)
 
+    category_id = fields.Many2one(
+        comodel_name="spp.dms.category",
+        string="Category",
+        ondelete="restrict",
+        auto_join=True,
+        index="btree",
+    )
+
     image_1920 = fields.Image(compute="_compute_image_1920", store=True, readonly=False)
     color = fields.Integer(default=0)
 

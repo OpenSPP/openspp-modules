@@ -20,6 +20,7 @@
         "views/main_view.xml",
         "views/dms_directory_views.xml",
         "views/dms_file_views.xml",
+        "views/dms_category_views.xml",
     ],
     "assets": {
         "web.assets_backend": [],

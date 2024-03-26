@@ -17,6 +17,14 @@
                         domain="[]"
                         context="{'group_by':'directory_id'}"
                     />
+                    <group expand="0" string="Group By">
+                        <filter
+                            name="group_category"
+                            string="Category"
+                            domain="[]"
+                            context="{'group_by':'category_id'}"
+                        />
+                    </group>
                 </group>
                 <searchpanel>
                     <field name="directory_id" icon="fa-folder" limit="0" enable_counters="1" />
@@ -161,6 +169,7 @@
                 <field name="human_size" />
                 <field name="mimetype" />
                 <field name="directory_id" />
+                <field name="category_id" />
             </tree>
         </field>
     </record>
@@ -212,6 +221,7 @@
                     <group name="settings">
                         <group>
                             <field name="directory_id" options="{'no_quick_create': True}" />
+                            <field name="category_id" options="{'no_open': True, 'no_create': True}" />
                         </group>
                     </group>
                     <notebook>
