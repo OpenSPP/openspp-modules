@@ -5,13 +5,10 @@ class Farmer(models.Model):
     _inherit = "res.partner"
 
     marital_status = fields.Selection(
-        [
-            ("single", "Single"),
+        selection_add=[
             ("married_monogamous", "Married Monogamous"),
             ("married_polygamous", "Married Polygamous"),
-            ("widowed", "Widowed"),
-            ("separated", "Separated"),
-        ],
+        ]
     )
     highest_education_level = fields.Selection(
         [
@@ -23,4 +20,15 @@ class Farmer(models.Model):
             ("university", "University"),
             ("tertiary", "Tertiary"),
         ],
+    )
+
+
+class TempFarmer(models.Model):
+    _inherit = "spp.farmer"
+
+    farmer_marital_status = fields.Selection(
+        selection_add=[
+            ("married_monogamous", "Married Monogamous"),
+            ("married_polygamous", "Married Polygamous"),
+        ]
     )
