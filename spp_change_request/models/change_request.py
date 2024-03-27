@@ -935,8 +935,8 @@ class ChangeRequestBase(models.Model):
 
                 validation_stages = (
                     rec.request_type_ref_id.validation_ids
-                    if rec.request_type_ref_id and rec.request_type_ref_id.validation_ids
-                    else self.env["validation.model"].browse()
+                    # if rec.request_type_ref_id and rec.request_type_ref_id.validation_ids
+                    # else self.env["validation.model"].browse()
                 )  # Replace 'validation.model' with the actual model name
 
                 # Filter validation_stages based on validation_stage_ids, if any

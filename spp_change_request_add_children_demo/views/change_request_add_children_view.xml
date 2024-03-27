@@ -257,13 +257,7 @@
                                 nolabel="1"
                                 context="{'form_view_ref':'spp_change_request.view_dms_file_spp_custom_form'}"
                             >
-                                <tree
-                                    js_class="file_list"
-                                    decoration-warning="not active"
-                                    decoration-muted="(is_locked and not is_lock_editor)"
-                                    multi_edit="1"
-                                    create="0"
-                                >
+                                <tree js_class="file_list" multi_edit="1" create="0">
                                     <field name="name" column_invisible="1" />
                                     <field
                                         name="content"
@@ -277,9 +271,6 @@
                                     <field name="mimetype" />
                                     <field name="size" widget="integer" />
                                     <field name="write_date" />
-                                    <field name="active" column_invisible="1" />
-                                    <field name="is_locked" column_invisible="1" />
-                                    <field name="is_lock_editor" column_invisible="1" />
                                 </tree>
                             </field>
                         </page>
@@ -584,13 +575,7 @@
                                     nolabel="1"
                                     context="{'form_view_ref':'spp_change_request.view_dms_file_spp_custom_form'}"
                                 >
-                                    <tree
-                                        js_class="file_list"
-                                        decoration-warning="not active"
-                                        decoration-muted="(is_locked and not is_lock_editor)"
-                                        multi_edit="1"
-                                        create="0"
-                                    >
+                                    <tree js_class="file_list" multi_edit="1" create="0">
                                         <field name="name" column_invisible="1" />
                                         <field
                                             name="content"
@@ -604,9 +589,6 @@
                                         <field name="mimetype" column_invisible="1" />
                                         <field name="size" widget="integer" />
                                         <field name="write_date" />
-                                        <field name="active" column_invisible="1" />
-                                        <field name="is_locked" column_invisible="1" />
-                                        <field name="is_lock_editor" column_invisible="1" />
                                     </tree>
                                 </field>
                             </page>
@@ -630,23 +612,6 @@
                                     <field name="date_validated" readonly="1" />
                                 </group>
                             </page>
-                            <!-- TODO: Fix Javascript error if open and 'Edit' button was clicked.
-                            <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
-                                <field
-                                    name="validation_ids"
-                                    nolabel="1"
-                                    readonly="1"
-                                >
-                                    <tree editable="bottom">
-                                        <field name="request_type" invisible="1" />
-                                        <field name="stage_id" options="{'no_create_edit':true}" />
-                                        <field
-                                            name="validation_group_id"
-                                            string="Validation Group"
-                                        />
-                                    </tree>
-                                </field>
-                            </page> -->
                         </notebook>
                     </group>
 

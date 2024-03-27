@@ -65,23 +65,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     # DMS Field
     dms_directory_ids = fields.One2many(
-        "dms.directory",
-        "res_id",
+        "spp.dms.directory",
+        "change_request_id",
         string="DMS Directories",
-        domain=lambda self: [
-            ("res_model", "=", self._name),
-            ("storage_id.save_type", "!=", "attachment"),
-        ],
         auto_join=True,
     )
     dms_file_ids = fields.One2many(
-        "dms.file",
-        "res_id",
+        "spp.dms.file",
+        "change_request_id",
         string="DMS Files",
-        domain=lambda self: [
-            ("directory_id.res_model", "=", self._name),
-            ("storage_id.save_type", "!=", "attachment"),
-        ],
         auto_join=True,
     )
 
