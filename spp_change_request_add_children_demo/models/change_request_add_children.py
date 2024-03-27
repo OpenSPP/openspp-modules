@@ -166,7 +166,7 @@ class ChangeRequestAddChildren(models.Model):
                         }
                         # TODO: Should be added to vals["dms_file_ids"] but it is
                         # not writing to one2many field using Command.create()
-                        self.env["dms.file"].create(dms_vals)
+                        self.env["spp.dms.file"].create(dms_vals)
 
                     # TODO: grand_father_name and father_name
                     vals = {

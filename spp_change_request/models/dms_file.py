@@ -1,8 +1,10 @@
-from odoo import _, models
+from odoo import _, fields, models
 
 
 class SPPDMSFileCustom(models.Model):
-    _inherit = "dms.file"
+    _inherit = "spp.dms.file"
+
+    change_request_id = fields.Many2one("spp.change.request", "Change Request")
 
     def action_save_and_close(self):
         return {"type": "ir.actions.act_window_close"}
@@ -15,7 +17,7 @@ class SPPDMSFileCustom(models.Model):
                 "view_mode": "form",
                 "view_id": form_id,
                 "view_type": "form",
-                "res_model": "dms.file",
+                "res_model": "spp.dms.file",
                 "target": "new",
                 "res_id": rec.id,
             }

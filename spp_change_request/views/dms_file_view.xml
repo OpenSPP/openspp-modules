@@ -1,12 +1,11 @@
 <odoo>
     <record id="view_dms_file_spp_custom_form" model="ir.ui.view">
         <field name="name">view_dms_file_spp_custom_form</field>
-        <field name="model">dms.file</field>
+        <field name="model">spp.dms.file</field>
         <field name="priority">1000</field>
         <field name="arch" type="xml">
             <form string="Files">
                 <sheet>
-                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active" />
                     <div class="oe_button_box" name="button_box" />
                     <field
                         name="image_1920"
@@ -22,7 +21,6 @@
                                 options="{'no_open': True,'no_create': True,'no_edit':True}"
                                 required="1"
                                 readonly="context.get('category_readonly')"
-                                domain="[('parent_id', 'child_of', %(spp_change_request.pds_dms_extra_documents)d)]"
                             />
                         </h4>
                         <h2>
@@ -45,32 +43,20 @@
                                 options="{'no_quick_create': True,'no_open':True}"
                                 class="oe_read_only"
                             />
-                            <field name="storage_id" options="{'no_open': True}" />
-                            <field
+                            <!-- <field
                                 name="path_json"
                                 widget="path_json"
                                 options="{'prefix': True, 'suffix': False}"
                                 invisible="not name or not directory_id"
                                 string="Path"
-                            />
+                            /> -->
                         </group>
                     </group>
-                    <field name="active" invisible="1" />
-                    <field name="tag_ids" invisible="1" />
                     <field name="extension" invisible="1" />
-                    <field name="storage_id_save_type" invisible="1" />
-                    <field name="res_model" invisible="1" />
-                    <field name="res_id" invisible="1" />
-                    <field name="record_ref" invisible="1" />
                     <field name="create_date" invisible="1" />
                     <field name="create_uid" invisible="1" />
                     <field name="write_date" invisible="1" />
                     <field name="write_uid" invisible="1" />
-                    <field name="permission_write" invisible="1" />
-                    <field name="permission_unlink" invisible="1" />
-                    <field name="is_lock_editor" invisible="1" />
-                    <field name="is_locked" invisible="1" />
-                    <field name="locked_by" invisible="1" />
                 </sheet>
                     <button
                     string="Save"

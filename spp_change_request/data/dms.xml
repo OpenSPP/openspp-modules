@@ -4,32 +4,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo noupdate="0">
 
-    <record id="dms_access_group" model="dms.access.group">
-        <field name="name">Change Request DMS Group</field>
-        <field
-            name="group_ids"
-            eval="[
-            (4, ref('g2p_registry_base.group_g2p_admin')),
-            (4, ref('spp_change_request.group_spp_change_request_administrator')),
-            (4, ref('spp_change_request.group_spp_change_request_validator')),
-            (4, ref('spp_change_request.group_spp_change_request_agent')),
-            (4, ref('spp_change_request.group_spp_change_request_hq_validator')),
-            (4, ref('spp_change_request.group_spp_change_request_local_validator')),
-            (4, ref('spp_change_request.group_spp_change_request_applicator'))
-        ]"
-        />
-        <field name="perm_create" eval="True" />
-        <field name="perm_write" eval="True" />
-        <field name="perm_unlink" eval="True" />
-    </record>
-    <record id="dms_change_request_storage" model="dms.storage">
-        <field name="name">Change Requests storage</field>
-        <field name="save_type">file</field>
-        <field name="field_default_group_id" ref="spp_change_request.dms_access_group" />
-    </record>
-
     <!-- Parent Category -->
-    <record id="pds_dms_extra_documents" model="dms.category">
+    <record id="pds_dms_extra_documents" model="spp.dms.category">
         <field name="name">Extra Documents</field>
     </record>
 
