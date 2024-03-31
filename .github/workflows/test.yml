@@ -43,6 +43,7 @@ jobs:
           - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
             name: test with OCB
             makepot: "true"
+            sonar: "true"
     services:
       postgres:
         image: postgres:15.0
@@ -68,7 +69,7 @@ jobs:
       - name: Copy OpenG2P modules to addons directory
         # exclude openg2p-registry/odoo-addon-base_rest as it is not migrated to 17.0
         run: |
-          rm -rf openg2p-registry/*rest_api* openg2p-program/*rest_api*
+          rm -rf openg2p-registry/*rest_api* openg2p-program/*rest_api* openg2p-program/g2p_payment_files
           cp -r openg2p-registry/* ${ADDONS_DIR}/
           cp -r openg2p-program/* ${ADDONS_DIR}/
           cp -r geospatial/* ${ADDONS_DIR}/
@@ -93,3 +94,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ matrix.sonar == 'true' && github.event_name == 'push' && github.repository_owner == 'openspp' }}
