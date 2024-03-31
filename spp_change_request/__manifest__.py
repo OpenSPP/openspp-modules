@@ -23,7 +23,7 @@
         "spp_service_points",
         "spp_area",
         "spp_scan_id_document",
-        "dms_field",
+        # "dms_field",
     ],
     "data": [
         "security/change_request_security.xml",
