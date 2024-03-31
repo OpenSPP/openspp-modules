@@ -24,6 +24,7 @@
         "spp_area",
         "spp_scan_id_document",
         "spp_dms",
+        # "dms_field",
     ],
     "data": [
         "security/change_request_security.xml",
