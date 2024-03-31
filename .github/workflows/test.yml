@@ -69,7 +69,7 @@ jobs:
       - name: Copy OpenG2P modules to addons directory
         # exclude openg2p-registry/odoo-addon-base_rest as it is not migrated to 17.0
         run: |
-          rm -rf openg2p-registry/*rest_api* openg2p-program/*rest_api* openg2p-program/g2p_payment_files
+          rm -rf openg2p-registry/*rest_api* openg2p-program/*rest_api* openg2p-program/g2p_payment_files openg2p-program/g2p_documents openg2p-program/g2p_program_documents
           cp -r openg2p-registry/* ${ADDONS_DIR}/
           cp -r openg2p-program/* ${ADDONS_DIR}/
           cp -r geospatial/* ${ADDONS_DIR}/
