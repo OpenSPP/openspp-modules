@@ -1,7 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models, Command
-
+from odoo import Command, fields, models
 
 
 class SPPCreateEventAgriLandOwnershipAndUseWizard(models.TransientModel):
@@ -11,7 +10,9 @@ class SPPCreateEventAgriLandOwnershipAndUseWizard(models.TransientModel):
     event_id = fields.Many2one("spp.event.data")
 
     land_ownership_ids = fields.One2many(
-        "spp.create.event.agri.land.ownership.use.lines.wizard", "land_ownership_use_id", string="Land Ownerships and Uses"
+        "spp.create.event.agri.land.ownership.use.lines.wizard",
+        "land_ownership_use_id",
+        string="Land Ownerships and Uses",
     )
     crops_in_irrigated_land = fields.Selection(
         [
@@ -33,7 +34,7 @@ class SPPCreateEventAgriLandOwnershipAndUseWizard(models.TransientModel):
                 ownership_vals = []
                 for ownership in rec.land_ownership_ids:
                     ownership_vals.append(
-                        (Command.create(
+                        Command.create(
                             {
                                 "land_ownership": ownership.land_ownership,
                                 "irrigated_puddy": ownership.irrigated_puddy,
@@ -49,7 +50,7 @@ class SPPCreateEventAgriLandOwnershipAndUseWizard(models.TransientModel):
                                 "oth_agri_land_owned_by_hh": ownership.oth_agri_land_owned_by_hh,
                                 "total": ownership.total,
                             }
-                        ))
+                        )
                     )
 
                 vals_list.update({"land_ownership_ids": ownership_vals})
@@ -64,8 +65,9 @@ class SPPCreateEventAgriLandOwnershipAndUseLinesWizard(models.TransientModel):
     _name = "spp.create.event.agri.land.ownership.use.lines.wizard"
     _description = "VI. Agriculture Land Ownership and Use Lines"
 
-    land_ownership_use_id = fields.Many2one("spp.create.event.agri.land.ownership.use.wizard",
-                                            string="Land Ownership and Use")
+    land_ownership_use_id = fields.Many2one(
+        "spp.create.event.agri.land.ownership.use.wizard", string="Land Ownership and Use"
+    )
     land_ownership = fields.Selection(
         [
             ("1", "Ownership (Land Title)"),

@@ -1,23 +1,24 @@
 from odoo import fields, models
 
 
-class EventDataAgriProdSalesCostTech(models.Model):
-    _name = "spp.event.agri.prod.sales.cost.tech"
+class EventDataAgriProdSalesCostTechDuringWetSeason(models.Model):
+    _name = "spp.event.agri.prod.sales.cost.tech.ws"
     _description = "Agricultural Production, Sales, Cost and Technologies"
 
     agri_prod_sales_cost_tech_ids = fields.One2many(
-        "spp.event.agri.prod.sales.cost.tech.lines",
+        "spp.event.agri.prod.sales.cost.tech.ws.lines",
         "agri_prod_sales_cost_tech_id",
-        string="Agricultural Production, Sales, Cost and Technologies",
+        string="Agricultural Production, Sales, Cost and Technologies during WS",
     )
 
 
-class EventDataAgriProdSalesCostTechLines(models.Model):
-    _name = "spp.event.agri.prod.sales.cost.tech.lines"
+class EventDataAgriProdSalesCostTechDuringWetSeasonLines(models.Model):
+    _name = "spp.event.agri.prod.sales.cost.tech.ws.lines"
     _description = "Agricultural Production, Sales, Cost and Technologies Lines"
 
     agri_prod_sales_cost_tech_id = fields.Many2one(
-        "spp.event.agri.prod.sales.cost.tech", string="Agricultural Production, Sales, Cost and Technologies"
+        "spp.event.agri.prod.sales.cost.tech.ws",
+        string="Agricultural Production, Sales, Cost and Technologies during WS",
     )
     kind = fields.Selection(
         [

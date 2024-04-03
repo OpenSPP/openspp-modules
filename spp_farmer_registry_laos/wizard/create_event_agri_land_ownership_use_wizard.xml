@@ -35,7 +35,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <page string="Land Ownerships and Uses" name="land_ownerships">
                             <field name="land_ownership_ids">
                                 <tree editable="bottom">
-                                    <field name="land_ownership_use_id" invisible="1"/>
+                                    <field name="land_ownership_use_id" invisible="1" />
                                     <field name="land_ownership" />
                                     <field name="irrigated_puddy" />
                                     <field name="rainfed_puddy" />

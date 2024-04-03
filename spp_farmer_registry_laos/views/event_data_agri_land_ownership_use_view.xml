@@ -32,20 +32,20 @@
                         <page string="Land Ownerships and Uses" name="land_ownerships">
                             <field name="land_ownership_ids">
                                 <tree>
-                                    <field name="land_ownership_use_id" invisible="1"/>
-                                    <field name="land_ownership"/>
-                                    <field name="irrigated_puddy"/>
-                                    <field name="rainfed_puddy"/>
-                                    <field name="upland_agriculture"/>
-                                    <field name="coffee_tea_plantation"/>
-                                    <field name="cardamom_plantation"/>
-                                    <field name="orchard"/>
-                                    <field name="pasture"/>
-                                    <field name="fallow_land"/>
-                                    <field name="forest"/>
-                                    <field name="land_rent_oth_hh"/>
-                                    <field name="oth_agri_land_owned_by_hh"/>
-                                    <field name="total"/>
+                                    <field name="land_ownership_use_id" invisible="1" />
+                                    <field name="land_ownership" />
+                                    <field name="irrigated_puddy" />
+                                    <field name="rainfed_puddy" />
+                                    <field name="upland_agriculture" />
+                                    <field name="coffee_tea_plantation" />
+                                    <field name="cardamom_plantation" />
+                                    <field name="orchard" />
+                                    <field name="pasture" />
+                                    <field name="fallow_land" />
+                                    <field name="forest" />
+                                    <field name="land_rent_oth_hh" />
+                                    <field name="oth_agri_land_owned_by_hh" />
+                                    <field name="total" />
                                 </tree>
                             </field>
                         </page>
