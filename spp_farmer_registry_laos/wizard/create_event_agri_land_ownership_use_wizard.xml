@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_agri_land_ownership_use_form_view" model="ir.ui.view">
+        <field name="name">create_event_agri_land_ownership_use_form_view</field>
+        <field name="model">spp.create.event.agri.land.ownership.use.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-8 o_setting_box" name="crops_in_irrigated_land">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="crops_in_irrigated_land" />
+                                <div>
+                                </div>
+                                <field name="crops_in_irrigated_land" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="crops_in_irrigated_land_ha">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="crops_in_irrigated_land_ha" />
+                                <div>
+                                </div>
+                                <field name="crops_in_irrigated_land_ha" />
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Land Ownerships and Uses" name="land_ownerships">
+                            <field name="land_ownership_ids">
+                                <tree editable="bottom">
+                                    <field name="land_ownership_use_id" invisible="1"/>
+                                    <field name="land_ownership" />
+                                    <field name="irrigated_puddy" />
+                                    <field name="rainfed_puddy" />
+                                    <field name="upland_agriculture" />
+                                    <field name="coffee_tea_plantation" />
+                                    <field name="cardamom_plantation" />
+                                    <field name="orchard" />
+                                    <field name="pasture" />
+                                    <field name="fallow_land" />
+                                    <field name="forest" />
+                                    <field name="land_rent_oth_hh" />
+                                    <field name="oth_agri_land_owned_by_hh" />
+                                    <field name="total" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <field name="event_id" invisible="1" />
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

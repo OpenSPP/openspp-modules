@@ -13,6 +13,7 @@ class SPPCreateEventWizard(models.TransientModel):
             ("spp.event.poverty.indicator", "III. Poverty Indicators"),
             ("spp.event.hh.labor", "IV. Household Member and Labor Availability"),
             ("spp.event.hh.assets", "V. Household Assets"),
+            ("spp.event.agri.land.ownership.use", "VI. Agriculture Land Ownership and Use"),
         ]
     )
 

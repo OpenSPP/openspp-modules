@@ -3,7 +3,7 @@ from odoo import fields, models
 
 class OpenSPPEventDataAgriLandOwnershipAndUse(models.Model):
     _name = "spp.event.agri.land.ownership.use"
-    _description = "Agriculture Land Ownership and Use"
+    _description = "VI. Agriculture Land Ownership and Use"
 
     land_ownership_ids = fields.One2many(
         "spp.event.agri.land.ownership.use.lines", "land_ownership_use_id", string="Land Ownerships and Uses"
@@ -17,6 +17,12 @@ class OpenSPPEventDataAgriLandOwnershipAndUse(models.Model):
         string="Rice or any other crops in the irrigated/rainfed paddy field during dry season",
     )
     crops_in_irrigated_land_ha = fields.Float("Area of planting (ha)")
+
+    def get_view_id(self):
+        """
+        This retrieves the View ID of this model
+        """
+        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
 
 
 class OpenSPPEventDataAgriLandOwnershipAndUseLines(models.Model):
