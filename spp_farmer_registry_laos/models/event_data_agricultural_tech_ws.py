@@ -3,7 +3,7 @@ from odoo import fields, models
 
 class OpenSPPEventDataAgriculturalTechWS(models.Model):
     _name = "spp.event.agri.tech.ws"
-    _description = "IX. Agricultural Technologies During the WS 2022 (cont)"
+    _description = "IX. Agricultural Technologies During the WS"
 
     agri_prod_sales_cost_tech_ids = fields.One2many(
         "spp.event.agri.tech.ws.lines",
@@ -11,10 +11,16 @@ class OpenSPPEventDataAgriculturalTechWS(models.Model):
         string="Agricultural Technologies During WS",
     )
 
+    def get_view_id(self):
+        """
+        This retrieves the View ID of this model
+        """
+        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
 
-class OpenSPPEventDataAgriculturalWSLines(models.Model):
+
+class OpenSPPEventDataAgriculturalTechWSLines(models.Model):
     _name = "spp.event.agri.tech.ws.lines"
-    _description = "IX. Agricultural Technologies During the WS 2022 (cont)"
+    _description = "IX. Agricultural Technologies During the WS"
 
     agri_prod_sales_cost_tech_id = fields.Many2one(
         "spp.event.agri.tech.ws",

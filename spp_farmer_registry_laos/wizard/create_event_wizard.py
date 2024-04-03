@@ -17,7 +17,11 @@ class SPPCreateEventWizard(models.TransientModel):
             ("spp.event.food.security", "VII. Food Security"),
             (
                 "spp.event.agri.ws",
-                "VIII. Agricultural Production, Sales, " "Costs and Technologies During the WS 2022 (cont)",
+                "VIII. Agricultural Production, Sales, and Costs During the WS",
+            ),
+            (
+                "spp.event.agri.tech.ws",
+                "IX. Agricultural Technologies During the WS",
             ),
         ]
     )

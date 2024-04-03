@@ -1,0 +1,57 @@
+<odoo>
+    <record id="view_spp_event_agri_tech_ws_form" model="ir.ui.view">
+        <field name="name">view_spp_event_agri_tech_ws_form</field>
+        <field name="model">spp.event.agri.tech.ws</field>
+        <field name="priority">200</field>
+        <field name="arch" type="xml">
+            <form
+                string="Event Data: Agricultural Technologies During the WS"
+                duplicate="0"
+            >
+                <sheet>
+                    <notebook>
+                        <page string="Agricultural Technologies" name="agri_tech">
+                            <field name="agri_prod_sales_cost_tech_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_prod_sales_cost_tech_id" invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="org_felt_pest_herb" />
+                                    <field name="greenhouse" />
+                                    <field name="multing" />
+                                    <field name="irrigation_normal" />
+                                    <field name="water_pump" />
+                                    <field name="drip_irrigation" />
+                                    <field name="sprinkler" />
+                                    <field name="machine_harvest" />
+                                    <field name="dry_processing" />
+                                    <field name="post_harvest_treatment" />
+                                    <field name="other" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_event_agri_tech_ws" model="ir.actions.act_window">
+        <field
+            name="name"
+        >Event Data: Agricultural Technologies During the WS</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.event.agri.tech.ws</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+
+    </record>
+
+    <record id="action_spp_event_agri_tech_ws_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_agri_tech_ws_form" />
+        <field name="act_window_id" ref="action_spp_event_agri_tech_ws" />
+    </record>
+
+  </odoo>

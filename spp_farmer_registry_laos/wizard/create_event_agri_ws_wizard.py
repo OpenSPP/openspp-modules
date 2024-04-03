@@ -5,7 +5,7 @@ from odoo import Command, fields, models
 
 class SPPCreateEventAgriculturalWSWizard(models.TransientModel):
     _name = "spp.create.event.agri.ws.wizard"
-    _description = "VIII. Agricultural Production, Sales, Costs and Technologies During the WS 2022 (cont)"
+    _description = "VIII. Agricultural Production, Sales, Costs and Technologies During the WS"
 
     event_id = fields.Many2one("spp.event.data")
 
