@@ -8,4 +8,5 @@ from . import event_data
 from . import event_data_gen_info
 from . import event_data_poverty_indicator
 from . import event_data_hh_labor
+from . import event_data_hh_assets
 from . import generate_farmer_data

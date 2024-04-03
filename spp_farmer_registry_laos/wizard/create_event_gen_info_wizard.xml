@@ -9,14 +9,17 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="model">spp.create.event.gen.info.wizard</field>
         <field name="arch" type="xml">
             <gis editable="1">
-                <field name="id" select="1"/>
+                <field name="id" select="1" />
                 <field name="gps_location" />
             </gis>
         </field>
     </record>
 
     <record id="gis_data_layer_geo_point_event_gen_info_wizard" model="spp.gis.data.layer">
-        <field name="geo_field_id" ref="spp_farmer_registry_laos.field_spp_create_event_gen_info_wizard__gps_location" />
+        <field
+            name="geo_field_id"
+            ref="spp_farmer_registry_laos.field_spp_create_event_gen_info_wizard__gps_location"
+        />
         <field name="name">GPS Location Coordination</field>
         <field eval="1" name="sequence" />
         <field name="view_id" ref="ir_ui_view_gis_event_gen_info_wizard" />

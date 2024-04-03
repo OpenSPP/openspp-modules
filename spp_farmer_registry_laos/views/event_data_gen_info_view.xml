@@ -398,7 +398,7 @@
         <field name="model">spp.event.gen.info</field>
         <field name="arch" type="xml">
             <gis editable="1">
-                <field name="id" select="1"/>
+                <field name="id" select="1" />
                 <field name="gps_location" />
             </gis>
         </field>

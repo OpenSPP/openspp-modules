@@ -1,5 +1,5 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 
 class SPPCreateEventHHLaborWizard(models.TransientModel):
