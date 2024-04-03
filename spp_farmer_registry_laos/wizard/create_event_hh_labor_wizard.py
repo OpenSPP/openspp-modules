@@ -1,9 +1,12 @@
-from odoo import api, fields, models
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+from odoo import fields, models, api
 
 
-class OpenSPPEventDataHHLabor(models.Model):
-    _name = "spp.event.hh.labor"
+class SPPCreateEventHHLaborWizard(models.TransientModel):
+    _name = "spp.create.event.hh.labor.wizard"
     _description = "IV. Household Member and Labor Availability"
+
+    event_id = fields.Many2one("spp.event.data")
 
     no_hh_members_women = fields.Integer("Number of Women in the Household")
     no_hh_members_men = fields.Integer("Number of Men in the Household")
@@ -81,3 +84,23 @@ class OpenSPPEventDataHHLabor(models.Model):
             rec.tot_labor_availablity_agri_36_60 = (
                 rec.labor_availability_agri_36_60_women + rec.labor_availability_agri_36_60_men
             )
+
+    def create_event(self):
+        for rec in self:
+            vals_list = {
+                "no_hh_members_women": rec.no_hh_members_women,
+                "no_hh_members_men": rec.no_hh_members_men,
+                "hh_labor_availability_15_35_women": rec.hh_labor_availability_15_35_women,
+                "hh_labor_availability_15_35_men": rec.hh_labor_availability_15_35_men,
+                "hh_labor_availability_36_60_women": rec.hh_labor_availability_36_60_women,
+                "hh_labor_availability_36_60_men": rec.hh_labor_availability_36_60_men,
+                "labor_availability_agri_15_35_women": rec.labor_availability_agri_15_35_women,
+                "labor_availability_agri_15_35_men": rec.labor_availability_agri_15_35_men,
+                "labor_availability_agri_36_60_women": rec.labor_availability_agri_36_60_women,
+                "labor_availability_agri_36_60_men": rec.labor_availability_agri_36_60_men,
+            }
+
+            event = self.env["spp.event.hh.labor"].create(vals_list)
+            rec.event_id.res_id = event.id
+
+            return event

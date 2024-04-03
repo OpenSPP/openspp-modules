@@ -15,7 +15,7 @@
         <field name="model">spp.event.poverty.indicator</field>
         <field name="priority">200</field>
         <field name="arch" type="xml">
-            <form string="Event Data: Poverty Information" duplicate="0">
+            <form string="Event Data: Poverty Indicator" duplicate="0">
                 <sheet>
                     <div class="row mt16 o_settings_container" name="container_1">
                         <div class="col-4 o_setting_box" name="type_of_housing">

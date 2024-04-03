@@ -3,7 +3,7 @@ from odoo import fields, models
 
 class OpenSPPEventDataPovertyIndicator(models.Model):
     _name = "spp.event.poverty.indicator"
-    _description = "Event Poverty Indicator"
+    _description = "III. Poverty Indicator"
 
     type_of_housing = fields.Selection([("1", "Not Permanent"), ("2", "Medium permanent"), ("3", "Permanent")])
     atleast_1household_member_completed_sch = fields.Selection(

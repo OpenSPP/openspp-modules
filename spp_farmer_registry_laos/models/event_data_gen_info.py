@@ -3,7 +3,7 @@ from odoo import fields, models
 
 class OpenSPPEventDataGenInfo(models.Model):
     _name = "spp.event.gen.info"
-    _description = "Event General Information"
+    _description = "II. General Information"
 
     interviewees_name = fields.Char("Interviewee's Name")
     ethnic_group_id = fields.Many2one("spp.ethnic.group", "Ethnic Group")

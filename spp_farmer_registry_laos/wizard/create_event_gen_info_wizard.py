@@ -4,7 +4,7 @@ from odoo import fields, models
 
 class SPPCreateEventGenInfoWizard(models.TransientModel):
     _name = "spp.create.event.gen.info.wizard"
-    _description = "Event General Information"
+    _description = "II. General Information"
 
     event_id = fields.Many2one("spp.event.data")
 

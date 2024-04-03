@@ -4,7 +4,7 @@ from odoo import fields, models
 
 class SPPCreateEventPovertyIndicatorWizard(models.TransientModel):
     _name = "spp.create.event.poverty.indicator.wizard"
-    _description = "Event Poverty Indicator"
+    _description = "III. Poverty Indicator"
 
     event_id = fields.Many2one("spp.event.data")
 
