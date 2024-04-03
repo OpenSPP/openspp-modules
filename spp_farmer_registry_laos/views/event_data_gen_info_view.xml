@@ -367,4 +367,34 @@
         <field name="act_window_id" ref="action_spp_event_gen_info" />
     </record>
 
+
+    <record id="ir_ui_view_gis_event_gen_info" model="ir.ui.view">
+        <field name="name">Event General Information view</field>
+        <field eval="16" name="priority" />
+        <field name="model">spp.event.gen.info</field>
+        <field name="arch" type="xml">
+            <gis editable="1">
+                <field name="id" select="1"/>
+                <field name="gps_location" />
+            </gis>
+        </field>
+    </record>
+
+    <record id="gis_data_layer_geo_point_event_gen_info" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_farmer_registry_laos.field_spp_event_gen_info__gps_location" />
+        <field name="name">GPS Location Coordination</field>
+        <field eval="1" name="sequence" />
+        <field name="view_id" ref="ir_ui_view_gis_event_gen_info" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record>
+
+    <record id="gis_raster_layer_event_gen_info_osm" model="spp.gis.raster.layer">
+        <field name="raster_type">osm</field>
+        <field name="name">Event General Information</field>
+        <field name="view_id" ref="ir_ui_view_gis_event_gen_info" />
+    </record>
+
   </odoo>
