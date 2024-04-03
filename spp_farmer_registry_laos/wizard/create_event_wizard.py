@@ -23,6 +23,10 @@ class SPPCreateEventWizard(models.TransientModel):
                 "spp.event.agri.tech.ws",
                 "IX. Agricultural Technologies During the WS",
             ),
+            (
+                "spp.event.agri.ds",
+                "X. Agricultural Production, Sales, Cost and Technologies During Cold DS",
+            ),
         ]
     )
 

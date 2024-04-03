@@ -21,10 +21,16 @@ class OpenSPPEventDataAgriculturalDS(models.Model):
         string="Agricultural Technologies During Cold DS",
     )
 
+    def get_view_id(self):
+        """
+        This retrieves the View ID of this model
+        """
+        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
+
 
 class OpenSPPEventDataAgriculturalDSProduced(models.Model):
     _name = "spp.event.agri.ds.prod"
-    _description = "X. Agricultural Production During Cold DS Lines"
+    _description = "X. Agricultural Production During Cold DS"
 
     agri_ds_id = fields.Many2one(
         "spp.event.agri.ds",
@@ -42,7 +48,7 @@ class OpenSPPEventDataAgriculturalDSProduced(models.Model):
 
 class OpenSPPEventDataAgriculturalDSCost(models.Model):
     _name = "spp.event.agri.ds.cost"
-    _description = "X. Agricultural Cost During Cold DS Lines"
+    _description = "X. Agricultural Cost During Cold DS"
 
     agri_ds_id = fields.Many2one(
         "spp.event.agri.ds",
@@ -64,7 +70,7 @@ class OpenSPPEventDataAgriculturalDSCost(models.Model):
 
 class OpenSPPEventDataAgriculturalDSTech(models.Model):
     _name = "spp.event.agri.ds.tech"
-    _description = "X. Agricultural Technologies During Cold DS Lines"
+    _description = "X. Agricultural Technologies During Cold DS"
 
     agri_ds_id = fields.Many2one(
         "spp.event.agri.ds",
