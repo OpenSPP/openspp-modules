@@ -62,3 +62,62 @@ class OpenSPPEventDataGenInfo(models.Model):
         ],
         string="Project Group/Activity/Supported by Project (Live Stock and Fisheries Product)",
     )
+
+    tech_supported_by_project_org_fert = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Organic Fertilizer)",
+    )
+    tech_supported_by_project_greenhouse = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Greenhouse)",
+    )
+    tech_supported_by_project_mulching = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Mulching)",
+    )
+    tech_supported_by_project_gravity_irrig = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Gravity Irrigation)",
+    )
+    tech_supported_by_project_water_pump = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Water Pump)",
+    )
+    tech_supported_by_project_drip_irrig = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Drip Irrigation)",
+    )
+    tech_supported_by_project_drip_sprinkler = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Sprinkler)",
+    )
+    tech_supported_by_project_machine_harvest = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Machine Harvest)",
+    )
+    tech_supported_by_project_dry_processing = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Dry Processing)",
+    )
+    tech_supported_by_project_agri_oth = fields.Char("Other techniques/ technologies for crops")
+
+    tech_supported_by_project_concent_feed = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Concentrated Feed)",
+    )
+    tech_supported_by_project_grass_planting = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Grass Planting for Forage)",
+    )
+    tech_supported_by_project_vaccination = fields.Selection(
+        [("1", "Selected"), ("2", "Not Selected")],
+        string="Techniques/Technologies Introduced/Supported by Project (Vaccination)",
+    )
+    tech_supported_by_project_livestock_oth = fields.Char("Other techniques/ technologies for livestock")
+
+    irrigation_area_supported = fields.Float("Irrigation area supported by PICSA project (ha)")
+    participation_oth_proj = fields.Selection(
+        [("1", "Yes"), ("2", "No")],
+        string="Participation in other projects",
+    )
+    hhq_number_baseline_survey = fields.Integer("HH.Q No. of Baseline Survey")
