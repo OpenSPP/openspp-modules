@@ -35,6 +35,7 @@
         "views/event_data_poverty_indicator_view.xml",
         "views/event_data_hh_labor_view.xml",
         "views/event_data_hh_assets_view.xml",
+        "wizard/create_event_wizard.xml",
         "wizard/create_event_farm_wizard.xml",
         "wizard/create_event_gen_info_wizard.xml",
         "wizard/create_event_poverty_indicator_wizard.xml",
