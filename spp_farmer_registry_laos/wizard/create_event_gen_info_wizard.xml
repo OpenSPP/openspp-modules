@@ -171,7 +171,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         <field name="grp_act_supported_by_project_agri" />
                                     </div>
                                 </div>
-                                <div class="col-4 o_setting_box" name="grp_act_supported_by_project_livestock_fisheries">
+                                <div
+                                    class="col-4 o_setting_box"
+                                    name="grp_act_supported_by_project_livestock_fisheries"
+                                >
                                     <div class="o_setting_left_pane">
                                     </div>
                                     <div class="o_setting_right_pane">
@@ -211,7 +214,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         <field name="tech_supported_by_project_mulching" />
                                     </div>
                                 </div>
-                                <div class="col-4 o_setting_box" name="tech_supported_by_project_gravity_irrig">
+                                <div
+                                    class="col-4 o_setting_box"
+                                    name="tech_supported_by_project_gravity_irrig"
+                                >
                                     <div class="o_setting_left_pane">
                                     </div>
                                     <div class="o_setting_right_pane">
@@ -241,7 +247,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         <field name="tech_supported_by_project_drip_irrig" />
                                     </div>
                                 </div>
-                                <div class="col-4 o_setting_box" name="tech_supported_by_project_drip_sprinkler">
+                                <div
+                                    class="col-4 o_setting_box"
+                                    name="tech_supported_by_project_drip_sprinkler"
+                                >
                                     <div class="o_setting_left_pane">
                                     </div>
                                     <div class="o_setting_right_pane">
@@ -251,7 +260,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         <field name="tech_supported_by_project_drip_sprinkler" />
                                     </div>
                                 </div>
-                                <div class="col-4 o_setting_box" name="tech_supported_by_project_machine_harvest">
+                                <div
+                                    class="col-4 o_setting_box"
+                                    name="tech_supported_by_project_machine_harvest"
+                                >
                                     <div class="o_setting_left_pane">
                                     </div>
                                     <div class="o_setting_right_pane">
@@ -261,7 +273,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         <field name="tech_supported_by_project_machine_harvest" />
                                     </div>
                                 </div>
-                                <div class="col-4 o_setting_box" name="tech_supported_by_project_dry_processing">
+                                <div
+                                    class="col-4 o_setting_box"
+                                    name="tech_supported_by_project_dry_processing"
+                                >
                                     <div class="o_setting_left_pane">
                                     </div>
                                     <div class="o_setting_right_pane">
@@ -281,7 +296,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         <field name="tech_supported_by_project_agri_oth" />
                                     </div>
                                 </div>
-                                <div class="col-4 o_setting_box" name="tech_supported_by_project_concent_feed">
+                                <div
+                                    class="col-4 o_setting_box"
+                                    name="tech_supported_by_project_concent_feed"
+                                >
                                     <div class="o_setting_left_pane">
                                     </div>
                                     <div class="o_setting_right_pane">
@@ -291,7 +309,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         <field name="tech_supported_by_project_concent_feed" />
                                     </div>
                                 </div>
-                                <div class="col-4 o_setting_box" name="tech_supported_by_project_grass_planting">
+                                <div
+                                    class="col-4 o_setting_box"
+                                    name="tech_supported_by_project_grass_planting"
+                                >
                                     <div class="o_setting_left_pane">
                                     </div>
                                     <div class="o_setting_right_pane">
@@ -311,7 +332,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         <field name="tech_supported_by_project_vaccination" />
                                     </div>
                                 </div>
-                                <div class="col-4 o_setting_box" name="tech_supported_by_project_livestock_oth">
+                                <div
+                                    class="col-4 o_setting_box"
+                                    name="tech_supported_by_project_livestock_oth"
+                                >
                                     <div class="o_setting_left_pane">
                                     </div>
                                     <div class="o_setting_right_pane">
