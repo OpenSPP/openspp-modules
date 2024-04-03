@@ -1,0 +1,132 @@
+<odoo>
+    <record id="view_spp_event_agri_ws_form" model="ir.ui.view">
+        <field name="name">view_spp_event_agri_ws_form</field>
+        <field name="model">spp.event.agri.ws</field>
+        <field name="priority">200</field>
+        <field name="arch" type="xml">
+            <form string="Event Data: Agricultural Production, Sales, Costs and Technologies During the WS 2022 (cont)" duplicate="0">
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-8 o_setting_box" name="experience_dryspell_flood">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="experience_dryspell_flood" />
+                                <div>
+                                </div>
+                                <field name="experience_dryspell_flood" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="experience_dryspell_flood_dates">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="experience_dryspell_flood_dates" />
+                                <div>
+                                </div>
+                                <field name="experience_dryspell_flood_dates" />
+                            </div>
+                        </div>
+                        <div class="col-8 o_setting_box" name="experience_pest_disease_outbreak">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="experience_pest_disease_outbreak" />
+                                <div>
+                                </div>
+                                <field name="experience_pest_disease_outbreak" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="experience_pest_disease_outbreak_dates">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="experience_pest_disease_outbreak_dates" />
+                                <div>
+                                </div>
+                                <field name="experience_pest_disease_outbreak_dates" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="experience_pest_disease_outbreak_type">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="experience_pest_disease_outbreak_type" />
+                                <div>
+                                </div>
+                                <field name="experience_pest_disease_outbreak_type" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="experience_pest_disease_outbreak_affected">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="experience_pest_disease_outbreak_affected" />
+                                <div>
+                                </div>
+                                <field name="experience_pest_disease_outbreak_affected" />
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Crops produce in WS 2022" name="crops_produce">
+                            <field name="agri_ws_produce_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_ws_id" invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="cropping_period_sowing" />
+                                    <field name="cropping_period_harvest" />
+                                    <field name="harvest_area" />
+                                    <field name="harvest_amount" />
+                                    <field name="harvest_share" />
+                                    <field name="sales_qty" />
+                                    <field name="sales_price" />
+                                    <field name="sales_value" />
+                                    <field name="contract_farming" />
+                                    <field name="name_of_partner" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Production cost per crop in WS 2022 (in LAK) " name="production_cost">
+                            <field name="agri_ws_cost_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_ws_id" invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="labor_input" />
+                                    <field name="preparation_farmland" />
+                                    <field name="seeds" />
+                                    <field name="labor_cost" />
+                                    <field name="fertilizer" />
+                                    <field name="pesticide" />
+                                    <field name="herbicide" />
+                                    <field name="water_fee" />
+                                    <field name="tool_equipment" />
+                                    <field name="other_fees" />
+                                    <field name="total_production" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_event_agri_ws" model="ir.actions.act_window">
+        <field name="name">Event Data: Agricultural Production, Sales, Costs and Technologies During the WS 2022 (cont)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.event.agri.ws</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+
+    </record>
+
+    <record id="action_spp_event_agri_ws_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_agri_ws_form" />
+        <field name="act_window_id" ref="action_spp_event_agri_ws" />
+    </record>
+
+  </odoo>

@@ -6,3 +6,4 @@ from . import create_event_hh_labor_wizard
 from . import create_event_hh_assets_wizard
 from . import create_event_agri_land_ownership_use_wizard
 from . import create_event_food_security_wizard
+from . import create_event_agri_ws_wizard

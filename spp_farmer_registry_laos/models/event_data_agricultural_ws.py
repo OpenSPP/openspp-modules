@@ -30,7 +30,7 @@ class OpenSPPEventDataAgriculturalWSProduce(models.Model):
     _description = "Agricultural Production"
 
     agri_ws_id = fields.Many2one("spp.event.agri.ws")
-    crop = fields.Many2one("spp.farm.species", domain="[('species_type', '=', 'crop')]")
+    crop_id = fields.Many2one("spp.farm.species", string="Crop", domain="[('species_type', '=', 'crop')]")
     cropping_period_sowing = fields.Char("Cropping Period: Sowing")
     cropping_period_harvest = fields.Char("Cropping Period: Harvest")
     harvest_area = fields.Float("Harvest area -ha (a)")
