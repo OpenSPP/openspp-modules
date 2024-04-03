@@ -15,4 +15,5 @@ from . import event_data_agricultural_ws
 from . import event_data_agricultural_tech_ws
 from . import event_data_agri_ds
 from . import event_data_agri_ds_hot
+from . import event_data_permanent_crops
 from . import generate_farmer_data
