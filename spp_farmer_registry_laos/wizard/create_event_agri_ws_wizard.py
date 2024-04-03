@@ -9,8 +9,12 @@ class SPPCreateEventAgriculturalWSWizard(models.TransientModel):
 
     event_id = fields.Many2one("spp.event.data")
 
-    agri_ws_produce_ids = fields.One2many("spp.create.event.agri.ws.produce.wizard", "agri_ws_id", string="Crops produce")
-    agri_ws_cost_ids = fields.One2many("spp.create.event.agri.ws.cost.wizard", "agri_ws_id", string="Production cost per crop")
+    agri_ws_produce_ids = fields.One2many(
+        "spp.create.event.agri.ws.produce.wizard", "agri_ws_id", string="Crops produce"
+    )
+    agri_ws_cost_ids = fields.One2many(
+        "spp.create.event.agri.ws.cost.wizard", "agri_ws_id", string="Production cost per crop"
+    )
     experience_dryspell_flood = fields.Integer(
         "Experience any dry spell / " "flood / hailstorm / storm during the WS 2022 cropping season"
     )

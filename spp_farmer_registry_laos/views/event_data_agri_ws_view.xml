@@ -4,7 +4,10 @@
         <field name="model">spp.event.agri.ws</field>
         <field name="priority">200</field>
         <field name="arch" type="xml">
-            <form string="Event Data: Agricultural Production, Sales, Costs and Technologies During the WS 2022 (cont)" duplicate="0">
+            <form
+                string="Event Data: Agricultural Production, Sales, Costs and Technologies During the WS 2022 (cont)"
+                duplicate="0"
+            >
                 <sheet>
                     <div class="row mt16 o_settings_container" name="container_1">
                         <div class="col-8 o_setting_box" name="experience_dryspell_flood">
@@ -113,7 +116,9 @@
     </record>
 
     <record id="action_spp_event_agri_ws" model="ir.actions.act_window">
-        <field name="name">Event Data: Agricultural Production, Sales, Costs and Technologies During the WS 2022 (cont)</field>
+        <field
+            name="name"
+        >Event Data: Agricultural Production, Sales, Costs and Technologies During the WS 2022 (cont)</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.event.agri.ws</field>
         <field name="view_mode">form</field>

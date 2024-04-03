@@ -12,4 +12,6 @@ from . import event_data_hh_assets
 from . import event_data_agri_land_ownership_use
 from . import event_data_food_security
 from . import event_data_agricultural_ws
+from . import event_data_agri_prod_sales_cost_tech_ws
+from . import event_data_agri_prod_sales_cost_tech_ds_crops_prod
 from . import generate_farmer_data
