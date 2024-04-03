@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class OpenSPPEventDataAgriculturalWS(models.Model):
@@ -7,11 +7,13 @@ class OpenSPPEventDataAgriculturalWS(models.Model):
 
     agri_ws_produce_ids = fields.One2many("spp.event.agri.ws.produce", "agri_ws_id", string="Crops produce")
     agri_ws_cost_ids = fields.One2many("spp.event.agri.ws.cost", "agri_ws_id", string="Production cost per crop")
-    experience_dryspell_flood = fields.Integer("Experience any dry spell / "
-                                               "flood / hailstorm / storm during the WS 2022 cropping season")
+    experience_dryspell_flood = fields.Integer(
+        "Experience any dry spell / " "flood / hailstorm / storm during the WS 2022 cropping season"
+    )
     experience_dryspell_flood_dates = fields.Char("If yes, when?")
-    experience_pest_disease_outbreak = fields.Integer("Experience any pest or disease outbreak "
-                                                      "on your farmland during the WS 2022 cropping season")
+    experience_pest_disease_outbreak = fields.Integer(
+        "Experience any pest or disease outbreak " "on your farmland during the WS 2022 cropping season"
+    )
     experience_pest_disease_outbreak_dates = fields.Char("If yes, when?")
     experience_pest_disease_outbreak_type = fields.Char("Type of pest or disease")
     experience_pest_disease_outbreak_affected = fields.Char("Affected crops (crop's code)")
