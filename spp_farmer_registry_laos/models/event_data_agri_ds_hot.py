@@ -1,34 +1,34 @@
 from odoo import fields, models
 
 
-class OpenSPPEventDataAgriculturalDS(models.Model):
-    _name = "spp.event.agri.ds"
-    _description = "X. Agricultural Production, Sales, Cost and Technologies During Cold DS"
+class OpenSPPEventDataAgriculturalDSHot(models.Model):
+    _name = "spp.event.agri.ds.hot"
+    _description = "XI. Agricultural Production, Sales, Costs and Technologies During the Hot DS"
 
     agri_prod_ids = fields.One2many(
-        "spp.event.agri.ds.prod",
+        "spp.event.agri.ds.hot.prod",
         "agri_ds_id",
-        string="Agricultural Production During Cold DS",
+        string="Agricultural Production During the Hot DS",
     )
     agri_cost_ids = fields.One2many(
-        "spp.event.agri.ds.cost",
+        "spp.event.agri.ds.hot.cost",
         "agri_ds_id",
-        string="Agricultural Cost During Cold DS",
+        string="Agricultural Cost During the Hot DS",
     )
     agri_tech_ids = fields.One2many(
-        "spp.event.agri.ds.tech",
+        "spp.event.agri.ds.hot.tech",
         "agri_ds_id",
-        string="Agricultural Technologies During Cold DS",
+        string="Agricultural Technologies During the Hot DS",
     )
 
 
-class OpenSPPEventDataAgriculturalDSProduced(models.Model):
-    _name = "spp.event.agri.ds.prod"
-    _description = "X. Agricultural Production During Cold DS Lines"
+class OpenSPPEventDataAgriculturalDSHotProduced(models.Model):
+    _name = "spp.event.agri.ds.hot.prod"
+    _description = "XI. Agricultural Production During the Hot DS"
 
     agri_ds_id = fields.Many2one(
         "spp.event.agri.ds",
-        string="Agricultural Production, Sales, Cost and Technologies during Cold DS",
+        string="Agricultural Production, Sales, Costs and Technologies During the Hot DS",
     )
     crop_id = fields.Many2one("spp.farm.species", string="Crop", domain="[('species_type', '=', 'crop')]")
     harvest_area = fields.Float("Harvest Area (ha)")
@@ -40,13 +40,13 @@ class OpenSPPEventDataAgriculturalDSProduced(models.Model):
     partner_name = fields.Char("Name of partner in contact farming")
 
 
-class OpenSPPEventDataAgriculturalDSCost(models.Model):
-    _name = "spp.event.agri.ds.cost"
-    _description = "X. Agricultural Cost During Cold DS Lines"
+class OpenSPPEventDataAgriculturalDSHotCost(models.Model):
+    _name = "spp.event.agri.ds.hot.cost"
+    _description = "XI. Agricultural Costs During the Hot DS"
 
     agri_ds_id = fields.Many2one(
         "spp.event.agri.ds",
-        string="Agricultural Production, Sales, Cost and Technologies during Cold DS",
+        string="Agricultural Production, Sales, Costs and Technologies During the Hot DS",
     )
     crop_id = fields.Many2one("spp.farm.species", string="Crop", domain="[('species_type', '=', 'crop')]")
     labor_input_days = fields.Integer("Labor Input (Days)")
@@ -62,13 +62,13 @@ class OpenSPPEventDataAgriculturalDSCost(models.Model):
     total_prod_cost = fields.Float("Total Production Cost")
 
 
-class OpenSPPEventDataAgriculturalDSTech(models.Model):
-    _name = "spp.event.agri.ds.tech"
-    _description = "X. Agricultural Technologies During Cold DS Lines"
+class OpenSPPEventDataAgriculturalDSHotTech(models.Model):
+    _name = "spp.event.agri.ds.hot.tech"
+    _description = "XI. Agricultural Technologies During the Hot DS"
 
     agri_ds_id = fields.Many2one(
         "spp.event.agri.ds",
-        string="Agricultural Production, Sales, Cost and Technologies during Cold DS",
+        string="Agricultural Production, Sales, Costs and Technologies During the Hot DS",
     )
     crop_id = fields.Many2one("spp.farm.species", string="Crop", domain="[('species_type', '=', 'crop')]")
     organic_fertilizer = fields.Selection(
