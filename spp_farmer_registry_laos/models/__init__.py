@@ -14,4 +14,6 @@ from . import event_data_food_security
 from . import event_data_agricultural_ws
 from . import event_data_agri_prod_sales_cost_tech_ws
 from . import event_data_agri_prod_sales_cost_tech_ds_crops_prod
+from . import event_data_agri_prod_sales_cost_tech_ds_prod_cost
+from . import event_data_agri_prod_sales_cost_tech_ds_tech
 from . import generate_farmer_data
