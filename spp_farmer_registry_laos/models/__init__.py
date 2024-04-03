@@ -10,4 +10,6 @@ from . import event_data_poverty_indicator
 from . import event_data_hh_labor
 from . import event_data_hh_assets
 from . import event_data_agri_land_ownership_use
+from . import event_data_food_security
+from . import event_data_agricultural_ws
 from . import generate_farmer_data
