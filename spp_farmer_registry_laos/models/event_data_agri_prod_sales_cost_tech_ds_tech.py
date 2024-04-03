@@ -76,3 +76,7 @@ class EventDataAgriProdSalesCostTechDuringColdDrySeasonTechAppliedLines(models.M
     sprinkler = fields.Selection([("1", "Selected"), ("0", "Not Selected")], string="Sprinkler")
     machine_harvest = fields.Selection([("1", "Selected"), ("0", "Not Selected")], string="Machine Harvest")
     dry_processing = fields.Selection([("1", "Selected"), ("0", "Not Selected")], string="Dry Processing")
+    post_harvest_treatment = fields.Selection(
+        [("1", "Selected"), ("0", "Not Selected")], string="Post Harvest Treatment (Fungicide)"
+    )
+    other = fields.Char("Others")
