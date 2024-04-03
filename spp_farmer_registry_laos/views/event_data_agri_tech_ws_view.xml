@@ -4,10 +4,7 @@
         <field name="model">spp.event.agri.tech.ws</field>
         <field name="priority">200</field>
         <field name="arch" type="xml">
-            <form
-                string="Event Data: Agricultural Technologies During the WS"
-                duplicate="0"
-            >
+            <form string="Event Data: Agricultural Technologies During the WS" duplicate="0">
                 <sheet>
                     <notebook>
                         <page string="Agricultural Technologies" name="agri_tech">
@@ -36,9 +33,7 @@
     </record>
 
     <record id="action_spp_event_agri_tech_ws" model="ir.actions.act_window">
-        <field
-            name="name"
-        >Event Data: Agricultural Technologies During the WS</field>
+        <field name="name">Event Data: Agricultural Technologies During the WS</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.event.agri.tech.ws</field>
         <field name="view_mode">form</field>

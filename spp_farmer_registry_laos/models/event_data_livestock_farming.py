@@ -25,8 +25,9 @@ class OpenSPPEventDataLivestockFarmingCost(models.Model):
         "spp.event.livestock.farming",
         string="Livestock Farming",
     )
-    livestock_id = fields.Many2one("spp.farm.species", string="Livestock",
-                                   domain="[('species_type', '=', 'livestock')]")
+    livestock_id = fields.Many2one(
+        "spp.farm.species", string="Livestock", domain="[('species_type', '=', 'livestock')]"
+    )
     labor_input_days = fields.Integer("Labor Input (Days)")
     purchase_baby_animal = fields.Float("Purchase of Baby Animals")
     feed = fields.Float()
@@ -51,8 +52,9 @@ class OpenSPPEventDataLivestockFarmingTech(models.Model):
         "spp.event.livestock.farming",
         string="Livestock Farming",
     )
-    livestock_id = fields.Many2one("spp.farm.species", string="Livestock",
-                                   domain="[('species_type', '=', 'livestock')]")
+    livestock_id = fields.Many2one(
+        "spp.farm.species", string="Livestock", domain="[('species_type', '=', 'livestock')]"
+    )
     organic_fertilizer = fields.Selection(
         [("1", "Selected"), ("0", "Not Selected")], string="Organic Fertilizer, Pesticide / Herbicide"
     )
@@ -62,7 +64,8 @@ class OpenSPPEventDataLivestockFarmingTech(models.Model):
     vaccination = fields.Selection([("1", "Selected"), ("0", "Not Selected")])
     antibiotics = fields.Selection([("1", "Selected"), ("0", "Not Selected")])
     growth_hormone = fields.Selection([("1", "Selected"), ("0", "Not Selected")])
-    other_disinfect = fields.Selection([("1", "Selected"), ("0", "Not Selected")],
-                                       string="Other disinfection and epidemic")
+    other_disinfect = fields.Selection(
+        [("1", "Selected"), ("0", "Not Selected")], string="Other disinfection and epidemic"
+    )
     shed_livestock = fields.Selection([("1", "Selected"), ("0", "Not Selected")], string="Shed for Livestock")
     other = fields.Char("Others")
