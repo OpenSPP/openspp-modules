@@ -81,3 +81,9 @@ class OpenSPPEventDataHHLabor(models.Model):
             rec.tot_labor_availablity_agri_36_60 = (
                 rec.labor_availability_agri_36_60_women + rec.labor_availability_agri_36_60_men
             )
+
+    def get_view_id(self):
+        """
+        This retrieves the View ID of this model
+        """
+        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id

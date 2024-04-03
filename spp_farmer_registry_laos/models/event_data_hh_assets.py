@@ -3,7 +3,7 @@ from odoo import fields, models
 
 class EventDataHHAssets(models.Model):
     _name = "spp.event.hh.assets"
-    _description = "Event Household Assets"
+    _description = "V. Household Assets"
 
     asset_non_agri_tv = fields.Integer("Number of TV")
     asset_non_agri_refrigerator = fields.Integer("Number of Refrigerator")
@@ -46,3 +46,9 @@ class EventDataHHAssets(models.Model):
     asset_livestock_aquatic_animals = fields.Integer("Number of Aquatic Animals (Fish, Shrimp)")
     asset_livestock_frog = fields.Integer("Number of Frog")
     asset_livestock_horse = fields.Integer("Number of Horse")
+
+    def get_view_id(self):
+        """
+        This retrieves the View ID of this model
+        """
+        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id

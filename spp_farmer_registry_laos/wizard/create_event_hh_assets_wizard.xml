@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_hh_assets_form_view" model="ir.ui.view">
+        <field name="name">create_event_hh_assets_form_view</field>
+        <field name="model">spp.create.event.hh.assets.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <notebook>
+                        <page string="Non-agri Household Assets" name="nonagri">
+                            <div class="row mt16 o_settings_container" name="container_1">
+                                <div class="col-4 o_setting_box" name="asset_non_agri_tv">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_tv" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_tv" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_refrigerator">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_refrigerator" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_refrigerator" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_motobike">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_motobike" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_motobike" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_vehicle">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_vehicle" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_vehicle" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_mobile_dev">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_mobile_dev" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_mobile_dev" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_elec_gas_stove">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_elec_gas_stove" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_elec_gas_stove" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_computer">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_computer" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_computer" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_solar_panel">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_solar_panel" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_solar_panel" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_generator">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_generator" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_generator" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_charcoal_stove">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_charcoal_stove" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_charcoal_stove" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_kerosene_stove">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_kerosene_stove" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_kerosene_stove" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_washing_machine">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_washing_machine" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_washing_machine" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_elec_pot">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_elec_pot" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_elec_pot" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_elec_water_boiler">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_elec_water_boiler" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_elec_water_boiler" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_rice_cooker">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_rice_cooker" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_rice_cooker" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_fan">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_fan" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_fan" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_non_agri_sewing_machine">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_non_agri_sewing_machine" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_non_agri_sewing_machine" />
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                        <page string="Agri Household Assets" name="agri">
+                            <div class="row mt16 o_settings_container" name="container_2">
+                                <div class="col-4 o_setting_box" name="asset_agri_4wd_tractor">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_4wd_tractor" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_4wd_tractor" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_hand_tractor">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_hand_tractor" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_hand_tractor" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_thresher">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_thresher" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_thresher" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_green_house">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_green_house" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_green_house" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_drying_facility">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_drying_facility" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_drying_facility" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_rice_mill">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_rice_mill" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_rice_mill" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_harvester">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_harvester" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_harvester" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_water_pump">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_water_pump" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_water_pump" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_farm_truck_tractor">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_farm_truck_tractor" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_farm_truck_tractor" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_grass_cutter">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_grass_cutter" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_grass_cutter" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_elec_wood_cutting">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_elec_wood_cutting" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_elec_wood_cutting" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_agri_feed_pellet_extruder">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_agri_feed_pellet_extruder" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_agri_feed_pellet_extruder" />
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                        <page string="Livestock Household Assets" name="livestock">
+                            <div class="row mt16 o_settings_container" name="container_3">
+                                <div class="col-4 o_setting_box" name="asset_livestock_buffalo">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_livestock_buffalo" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_livestock_buffalo" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_livestock_cow_meat">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_livestock_cow_meat" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_livestock_cow_meat" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_livestock_cow_milk">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_livestock_cow_milk" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_livestock_cow_milk" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_livestock_goat">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_livestock_goat" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_livestock_goat" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_livestock_pig">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_livestock_pig" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_livestock_pig" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_livestock_piglets">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_livestock_piglets" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_livestock_piglets" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_livestock_paultry">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_livestock_paultry" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_livestock_paultry" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_livestock_aquatic_animals">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_livestock_aquatic_animals" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_livestock_aquatic_animals" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_livestock_frog">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_livestock_frog" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_livestock_frog" />
+                                    </div>
+                                </div>
+                                <div class="col-4 o_setting_box" name="asset_livestock_horse">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="asset_livestock_horse" />
+                                        <div>
+                                        </div>
+                                        <field name="asset_livestock_horse" />
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+                <field name="event_id" invisible="1" />
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
