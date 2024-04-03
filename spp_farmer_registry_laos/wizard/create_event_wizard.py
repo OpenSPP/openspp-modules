@@ -9,5 +9,6 @@ class SPPCreateEventWizard(models.TransientModel):
     event_data_model = fields.Selection(
         selection_add=[
             ("spp.event.cycle", "Event Cycle"),
+            ("spp.event.gen.info", "Event General Information"),
         ]
     )

@@ -20,7 +20,8 @@ class OpenSPPEventDataPovertyIndicator(models.Model):
     access_to_eletricity = fields.Selection(
         [
             ("1", "No Electricity"),
-            ("2", "Private power generation (solar panel, generator, etc.)", ("3", "Connected to power grid")),
+            ("2", "Private power generation (solar panel, generator, etc.)"),
+            ("3", "Connected to power grid"),
         ],
         string="Access to Electricity",
     )
