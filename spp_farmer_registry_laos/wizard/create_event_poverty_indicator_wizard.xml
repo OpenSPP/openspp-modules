@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_poverty_indicator_form_view" model="ir.ui.view">
+        <field name="name">create_event_poverty_indicator_form_view</field>
+        <field name="model">spp.create.event.poverty.indicator.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-4 o_setting_box" name="type_of_housing">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="type_of_housing" />
+                                <div>
+                                </div>
+                                <field name="type_of_housing" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="atleast_1household_member_completed_sch">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="atleast_1household_member_completed_sch" />
+                                <div>
+                                </div>
+                                <field name="atleast_1household_member_completed_sch" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="there_are_children_attend_pri_sch">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="there_are_children_attend_pri_sch" />
+                                <div>
+                                </div>
+                                <field name="there_are_children_attend_pri_sch" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="there_are_children_attend_mid_sch">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="there_are_children_attend_mid_sch" />
+                                <div>
+                                </div>
+                                <field name="there_are_children_attend_mid_sch" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="access_to_electricity">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="access_to_electricity" />
+                                <div>
+                                </div>
+                                <field name="access_to_electricity" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="access_to_basic_health_care">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="access_to_basic_health_care" />
+                                <div>
+                                </div>
+                                <field name="access_to_basic_health_care" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="access_to_internet">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="access_to_internet" />
+                                <div>
+                                </div>
+                                <field name="access_to_internet" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+                <field name="event_id" invisible="1" />
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

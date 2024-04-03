@@ -1,9 +1,12 @@
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 from odoo import fields, models
 
 
-class OpenSPPEventDataPovertyIndicator(models.Model):
-    _name = "spp.event.poverty.indicator"
+class SPPCreateEventPovertyIndicatorWizard(models.TransientModel):
+    _name = "spp.create.event.poverty.indicator.wizard"
     _description = "Event Poverty Indicator"
+
+    event_id = fields.Many2one("spp.event.data")
 
     type_of_housing = fields.Selection([("1", "Not Permanent"), ("2", "Medium permanent"), ("3", "Permanent")])
     atleast_1household_member_completed_sch = fields.Selection(
@@ -35,8 +38,19 @@ class OpenSPPEventDataPovertyIndicator(models.Model):
         string="Access to Internet",
     )
 
-    def get_view_id(self):
-        """
-        This retrieves the View ID of this model
-        """
-        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
+    def create_event(self):
+        for rec in self:
+            vals_list = {
+                "type_of_housing": rec.type_of_housing,
+                "atleast_1household_member_completed_sch": rec.atleast_1household_member_completed_sch,
+                "there_are_children_attend_pri_sch": rec.there_are_children_attend_pri_sch,
+                "there_are_children_attend_mid_sch": rec.there_are_children_attend_mid_sch,
+                "access_to_electricity": rec.access_to_electricity,
+                "access_to_basic_health_care": rec.access_to_basic_health_care,
+                "access_to_internet": rec.access_to_internet,
+            }
+
+            event = self.env["spp.event.poverty.indicator"].create(vals_list)
+            rec.event_id.res_id = event.id
+
+            return event

@@ -1,9 +1,14 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 spp_event_cycle_admin,SPP Event Cycle Admin Access,spp_farmer_registry_laos.model_spp_event_cycle,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_event_gen_info_admin,SPP Event General Information Admin Access,spp_farmer_registry_laos.model_spp_event_gen_info,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_event_poverty_indicator_admin,SPP Event Poverty Indicator Admin Access,spp_farmer_registry_laos.model_spp_event_poverty_indicator,g2p_registry_base.group_g2p_admin,1,1,1,1
 
 spp_create_event_cycle_wizard_admin,SPP Event Cycle Wizard Admin Access,spp_farmer_registry_laos.model_spp_create_event_cycle_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_create_event_gen_info_wizard_admin,SPP Event General Information Wizard Admin Access,spp_farmer_registry_laos.model_spp_create_event_gen_info_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_create_event_poverty_indicator_wizard_admin,SPP Event Poverty Indicator Wizard Admin Access,spp_farmer_registry_laos.model_spp_create_event_poverty_indicator_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
 
 spp_laos_generate_farmer_data_admin,SPP Laos Generate Farmer Data Admin Access,spp_farmer_registry_laos.model_spp_laos_generate_farmer_data,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_laos_generate_farmer_data_registrar,SPP Laos Generate Farmer Data Registrar Access,spp_farmer_registry_laos.model_spp_laos_generate_farmer_data,g2p_registry_base.group_g2p_registrar,1,1,1,1
+
+spp_ethnic_group_registrar,SPP Ethnic Group Registrar Access,spp_farmer_registry_laos.model_spp_ethnic_group,g2p_registry_base.group_g2p_registrar,1,1,1,1
+spp_ethnic_group_admin,SPP Ethnic Group Admin Access,spp_farmer_registry_laos.model_spp_ethnic_group,g2p_registry_base.group_g2p_admin,1,1,1,1

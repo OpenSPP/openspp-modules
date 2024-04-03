@@ -2,7 +2,7 @@
 from odoo import fields, models
 
 
-class SPPCreateEventCycleWizard(models.TransientModel):
+class SPPCreateEventGenInfoWizard(models.TransientModel):
     _name = "spp.create.event.gen.info.wizard"
     _description = "Event General Information"
 
