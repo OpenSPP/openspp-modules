@@ -55,6 +55,10 @@ class SPPCreateEventWizard(models.TransientModel):
                 "spp.event.hh.resilience.index",
                 "XVI. Household Resilience Index",
             ),
+            (
+                "spp.event.min.dietary.score",
+                "XVII. Minimum Dietary Diversity Score",
+            ),
         ]
     )
 

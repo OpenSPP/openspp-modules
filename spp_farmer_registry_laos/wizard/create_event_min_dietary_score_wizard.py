@@ -1,9 +1,13 @@
-from odoo import fields, models
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
+from odoo import Command, fields, models, api
 
 
-class OpenSPPEventDataMinDietaryDiversifyScore(models.Model):
-    _name = "spp.event.min.dietary.score"
+class SPPCreateEventMinimumDietaryDiversityScoreWizard(models.TransientModel):
+    _name = "spp.create.event.min.dietary.score.wizard"
     _description = "XVII. Minimum Dietary Diversity Score"
+
+    event_id = fields.Many2one("spp.event.data")
 
     food_made_grains_roots_tubers = fields.Selection(
         [
@@ -77,12 +81,28 @@ class OpenSPPEventDataMinDietaryDiversifyScore(models.Model):
             ("2", "No"),
         ],
         string="Food mentioned by the respondent not listed in any category, or "
-        + "the enumerator is unsure on where to categorize the food.",
+               + "the enumerator is unsure on where to categorize the food.",
     )
     remarks = fields.Text(string="Remarks")
 
-    def get_view_id(self):
-        """
-        This retrieves the View ID of this model
-        """
-        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
+    def create_event(self):
+        for rec in self:
+            vals_list = {
+                "food_made_grains_roots_tubers": rec.food_made_grains_roots_tubers,
+                "any_beans_peas": rec.any_beans_peas,
+                "any_nuts_seeds": rec.any_nuts_seeds,
+                "any_milk_milk_products": rec.any_milk_milk_products,
+                "any_meat_poultry_fish": rec.any_meat_poultry_fish,
+                "any_eggs": rec.any_eggs,
+                "any_dark_green_leafy_vegetables": rec.any_dark_green_leafy_vegetables,
+                "any_vitamin_a_rich_fruits_vegetables": rec.any_vitamin_a_rich_fruits_vegetables,
+                "any_other_vegetables": rec.any_other_vegetables,
+                "any_other_fruits": rec.any_other_fruits,
+                "food_mentioned_not_listed": rec.food_mentioned_not_listed,
+                "remarks": rec.remarks,
+            }
+
+            event = self.env["spp.event.min.dietary.score"].create(vals_list)
+            rec.event_id.res_id = event.id
+
+            return event
