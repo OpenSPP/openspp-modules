@@ -3,7 +3,7 @@ from odoo import fields, models
 
 class OpenSPPEventDataWashIndicators(models.Model):
     _name = "spp.event.wash.ind"
-    _description = "WASH Indicators"
+    _description = "XV. WASH Indicators"
 
     water_sources = fields.Selection(
         [
@@ -30,3 +30,9 @@ class OpenSPPEventDataWashIndicators(models.Model):
             ("3", "No Facility"),
         ]
     )
+
+    def get_view_id(self):
+        """
+        This retrieves the View ID of this model
+        """
+        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
