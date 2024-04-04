@@ -30,9 +30,7 @@ class SPPCreateEventPermanentCropsWizard(models.TransientModel):
 
     def create_event(self):
         for rec in self:
-            vals_list = {
-                "survey_sched": rec.survey_sched
-            }
+            vals_list = {"survey_sched": rec.survey_sched}
             if rec.crop_prod_ids:
                 produce_vals = []
                 for produce in rec.crop_prod_ids:

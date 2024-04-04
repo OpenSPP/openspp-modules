@@ -49,7 +49,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 <label for="survey_sched" />
                                 <div>
                                 </div>
-                                <field name="survey_sched" required="1"/>
+                                <field name="survey_sched" required="1" />
                             </div>
                         </div>
                     </div>

@@ -19,6 +19,9 @@
             <xpath expr="//page[@name='relationships']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
+            <xpath expr="//field[@name='kind']" position="after">
+                <xpath expr="//field[@name='area_id']" position="move" />
+            </xpath>
             <xpath expr="//page[@name='basic_info']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>

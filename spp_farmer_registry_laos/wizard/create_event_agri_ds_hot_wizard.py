@@ -30,9 +30,7 @@ class SPPCreateEventAgriculturalDSHotWizard(models.TransientModel):
 
     def create_event(self):
         for rec in self:
-            vals_list = {
-                "survey_sched": rec.survey_sched
-            }
+            vals_list = {"survey_sched": rec.survey_sched}
             if rec.agri_prod_ids:
                 produce_vals = []
                 for produce in rec.agri_prod_ids:

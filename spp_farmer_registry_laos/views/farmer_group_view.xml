@@ -123,6 +123,12 @@
                             options="{'no_open':True, 'no_create_edit':True,'no_create':True}"
                             readonly="disabled"
                         />
+                        <field
+                            name="area_id"
+                            placeholder="Area"
+                            options="{'no_open': True, 'no_create': True}"
+                            readonly="disabled"
+                        />
                     </group>
                     <notebook>
                         <page string="Members" name="members">

@@ -20,9 +20,7 @@ class SPPCreateEventAgriculturalTechWSWizard(models.TransientModel):
 
     def create_event(self):
         for rec in self:
-            vals_list = {
-                "survey_sched": rec.survey_sched
-            }
+            vals_list = {"survey_sched": rec.survey_sched}
             if rec.agri_prod_sales_cost_tech_ids:
                 tech_vals = []
                 for tech in rec.agri_prod_sales_cost_tech_ids:

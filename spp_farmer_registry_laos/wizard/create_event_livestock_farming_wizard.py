@@ -25,9 +25,7 @@ class SPPCreateEventLivestockFarmingWizard(models.TransientModel):
 
     def create_event(self):
         for rec in self:
-            vals_list = {
-                "survey_sched": rec.survey_sched
-            }
+            vals_list = {"survey_sched": rec.survey_sched}
 
             if rec.livestock_cost_ids:
                 cost_vals = []
