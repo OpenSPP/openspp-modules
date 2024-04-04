@@ -27,6 +27,8 @@
     "data": [
         "security/ir.model.access.csv",
         "data/group_kind_data.xml",
+        "data/crops_data.xml",
+        "data/livestock_data.xml",
         "views/farmer_group_view.xml",
         "views/group_view.xml",
         "views/event_data_view.xml",
