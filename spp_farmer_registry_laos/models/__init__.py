@@ -18,4 +18,5 @@ from . import event_data_agri_ds_hot
 from . import event_data_permanent_crops
 from . import event_data_livestock_farming
 from . import event_data_inc_agri
+from . import event_data_inc_non_agri
 from . import generate_farmer_data

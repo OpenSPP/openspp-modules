@@ -1,9 +1,13 @@
-from odoo import api, fields, models
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
+from odoo import Command, fields, models, api
 
 
-class OpenSPPEventDataIncomeFromNonAgriculture(models.Model):
-    _name = "spp.event.inc.non.agri"
+class SPPCreateEventIncomeFromNonAgribusinessWizard(models.TransientModel):
+    _name = "spp.create.event.inc.non.agri.wizard"
     _description = "XIV. Non-Agriculture Annual Income Sources (in LAK)"
+
+    event_id = fields.Many2one("spp.event.data")
 
     salary = fields.Float("Income from Salary")
     wages = fields.Float("Income from Wages")
@@ -29,8 +33,20 @@ class OpenSPPEventDataIncomeFromNonAgriculture(models.Model):
                 + rec.other
             )
 
-    def get_view_id(self):
-        """
-        This retrieves the View ID of this model
-        """
-        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
+    def create_event(self):
+        for rec in self:
+            vals_list = {
+                "salary": rec.salary,
+                "wages": rec.wages,
+                "handicraft": rec.handicraft,
+                "ntfp": rec.ntfp,
+                "remittance": rec.remittance,
+                "business": rec.business,
+                "land_lease": rec.land_lease,
+                "other": rec.other,
+            }
+
+            event = self.env["spp.event.inc.non.agri"].create(vals_list)
+            rec.event_id.res_id = event.id
+
+            return event

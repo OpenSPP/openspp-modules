@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_inc_non_agri_form_view" model="ir.ui.view">
+        <field name="name">create_event_inc_non_agri_form_view</field>
+        <field name="model">spp.create.event.inc.non.agri.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-4 o_setting_box" name="salary">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="salary" />
+                                <div>
+                                </div>
+                                <field name="salary" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="wages">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="wages" />
+                                <div>
+                                </div>
+                                <field name="wages" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="handicraft">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="handicraft" />
+                                <div>
+                                </div>
+                                <field name="handicraft" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="ntfp">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="ntfp" />
+                                <div>
+                                </div>
+                                <field name="ntfp" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="remittance">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="remittance" />
+                                <div>
+                                </div>
+                                <field name="remittance" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="business">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="business" />
+                                <div>
+                                </div>
+                                <field name="business" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="land_lease">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="land_lease" />
+                                <div>
+                                </div>
+                                <field name="land_lease" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="other" />
+                                <div>
+                                </div>
+                                <field name="other" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="total">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="total" />
+                                <div>
+                                </div>
+                                <field name="total" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+                <field name="event_id" invisible="1" />
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

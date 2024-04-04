@@ -43,6 +43,10 @@ class SPPCreateEventWizard(models.TransientModel):
                 "spp.event.inc.agri",
                 "XIII. Income from Agribusiness (LAK)",
             ),
+            (
+                "spp.event.inc.non.agri",
+                "XIV. Non-Agriculture Annual Income Sources (in LAK)",
+            ),
         ]
     )
 
