@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_inc_agri_form_view" model="ir.ui.view">
+        <field name="name">create_event_inc_agri_form_view</field>
+        <field name="model">spp.create.event.inc.agri.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-4 o_setting_box" name="sales_of_input">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="sales_of_input" />
+                                <div>
+                                </div>
+                                <field name="sales_of_input" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="sales_baby_animals">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="sales_baby_animals" />
+                                <div>
+                                </div>
+                                <field name="sales_baby_animals" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="sales_of_animal_feeds">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="sales_of_animal_feeds" />
+                                <div>
+                                </div>
+                                <field name="sales_of_animal_feeds" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="rental_agri_machinery">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="rental_agri_machinery" />
+                                <div>
+                                </div>
+                                <field name="rental_agri_machinery" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="processing_agro_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="processing_agro_products" />
+                                <div>
+                                </div>
+                                <field name="processing_agro_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="transport_trade_agro_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="transport_trade_agro_products" />
+                                <div>
+                                </div>
+                                <field name="transport_trade_agro_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="other" />
+                                <div>
+                                </div>
+                                <field name="other" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+                <field name="event_id" invisible="1" />
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

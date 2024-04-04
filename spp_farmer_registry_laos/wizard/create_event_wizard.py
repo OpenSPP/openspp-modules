@@ -39,6 +39,10 @@ class SPPCreateEventWizard(models.TransientModel):
                 "spp.event.livestock.farming",
                 "XII. Livestock Farming",
             ),
+            (
+                "spp.event.inc.agri",
+                "XIII. Income from Agribusiness (LAK)",
+            ),
         ]
     )
 
