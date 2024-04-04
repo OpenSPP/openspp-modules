@@ -21,6 +21,12 @@ class OpenSPPEventDataPermanentCrops(models.Model):
         string="Permanent crops production (Technologies)",
     )
 
+    def get_view_id(self):
+        """
+        This retrieves the View ID of this model
+        """
+        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
+
 
 class OpenSPPEventDataPermanentCropsProduced(models.Model):
     _name = "spp.event.permanent.crops.prod"
