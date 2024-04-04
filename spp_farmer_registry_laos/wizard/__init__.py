@@ -15,3 +15,4 @@ from . import create_event_livestock_farming_wizard
 from . import create_event_inc_agri_wizard
 from . import create_event_inc_non_agri_wizard
 from . import create_event_wash_ind_wizard
+from . import create_event_hh_resilience_index_wizard

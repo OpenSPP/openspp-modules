@@ -51,6 +51,10 @@ class SPPCreateEventWizard(models.TransientModel):
                 "spp.event.wash.ind",
                 "XV. WASH Indicators",
             ),
+            (
+                "spp.event.hh.resilience.index",
+                "XVI. Household Resilience Index",
+            ),
         ]
     )
 

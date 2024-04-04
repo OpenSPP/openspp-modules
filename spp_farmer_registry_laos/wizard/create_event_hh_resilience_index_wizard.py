@@ -1,9 +1,13 @@
-from odoo import api, fields, models
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
+from odoo import Command, fields, models, api
 
 
-class OpenSPPEventDataHouseholdResilienceIndex(models.Model):
-    _name = "spp.event.hh.resilience.index"
+class SPPCreateEventHouseholdResilienceIndexWizard(models.TransientModel):
+    _name = "spp.create.event.hh.resilience.index.wizard"
     _description = "XVI. Household Resilience Index"
+
+    event_id = fields.Many2one("spp.event.data")
 
     village_engaged_in_flood_landslide_prevention = fields.Selection(
         [
@@ -72,7 +76,7 @@ class OpenSPPEventDataHouseholdResilienceIndex(models.Model):
             ("2", "No"),
         ],
         string="Access to quality extension services and technical advice "
-        + "related to crop diversification and climate adaptation ",
+               + "related to crop diversification and climate adaptation ",
     )
     adopted_new_techniques = fields.Selection(
         [
@@ -284,8 +288,43 @@ class OpenSPPEventDataHouseholdResilienceIndex(models.Model):
                 score = "1"
             rec.score_53 = score
 
-    def get_view_id(self):
-        """
-        This retrieves the View ID of this model
-        """
-        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
+    def create_event(self):
+        for rec in self:
+            vals_list = {
+                "village_engaged_in_flood_landslide_prevention": rec.village_engaged_in_flood_landslide_prevention,
+                "experience_losses_due_to_floods_landslides": rec.experience_losses_due_to_floods_landslides,
+                "significant_losses_48": rec.significant_losses_48,
+                "access_to_secure_water_source": rec.access_to_secure_water_source,
+                "member_water_user_group": rec.member_water_user_group,
+                "exp_loss_crops_due_no_access_water": rec.exp_loss_crops_due_no_access_water,
+                "significant_losses_49": rec.significant_losses_49,
+                "access_services_diversification": rec.access_services_diversification,
+                "adopted_new_techniques": rec.adopted_new_techniques,
+                "ben_part_prod_grp": rec.ben_part_prod_grp,
+                "grow_veg_oth": rec.grow_veg_oth,
+                "hh_members_eat_veg": rec.hh_members_eat_veg,
+                "part_training_nutr_food": rec.part_training_nutr_food,
+                "intro_health_food_meal": rec.intro_health_food_meal,
+                "eat_animal_protein": rec.eat_animal_protein,
+                "inc_2_sources": rec.inc_2_sources,
+                "inc_sale_crop_livestock": rec.inc_sale_crop_livestock,
+                "inc_processing_trading": rec.inc_processing_trading,
+                "inc_employment": rec.inc_employment,
+                "inc_own_business": rec.inc_own_business,
+                "inc_other": rec.inc_other,
+                "inc_other_sources": rec.inc_other_sources,
+                "support_2_sources": rec.support_2_sources,
+                "src_savings": rec.src_savings,
+                "src_asset_livestock_sell": rec.src_asset_livestock_sell,
+                "src_village_rice_bank": rec.src_village_rice_bank,
+                "src_other": rec.src_other,
+                "src_other_sources": rec.src_other_sources,
+                "ability_to_cope": rec.ability_to_cope,
+                "comm_engage_contract_farming": rec.comm_engage_contract_farming,
+                "issue_sell_prod": rec.issue_sell_prod,
+            }
+
+            event = self.env["spp.event.hh.resilience.index"].create(vals_list)
+            rec.event_id.res_id = event.id
+
+            return event

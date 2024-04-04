@@ -20,4 +20,5 @@ from . import event_data_livestock_farming
 from . import event_data_inc_agri
 from . import event_data_inc_non_agri
 from . import event_data_wash_ind
+from . import event_data_hh_resilience_index
 from . import generate_farmer_data
