@@ -44,7 +44,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 </tree>
                             </field>
                         </page>
-                        <page string="Technologies/techniques applied for crop production in Cold DS" name="technologies">
+                        <page
+                            string="Technologies/techniques applied for crop production in Cold DS"
+                            name="technologies"
+                        >
                             <field name="agri_tech_ids">
                                 <tree editable="bottom">
                                     <field name="agri_ds_id" invisible="1" />
