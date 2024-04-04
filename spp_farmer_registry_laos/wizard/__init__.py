@@ -9,3 +9,4 @@ from . import create_event_food_security_wizard
 from . import create_event_agri_ws_wizard
 from . import create_event_agri_tech_ws_wizard
 from . import create_event_agri_ds_wizard
+from . import create_event_agri_ds_hot_wizard

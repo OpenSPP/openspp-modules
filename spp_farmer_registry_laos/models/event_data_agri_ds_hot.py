@@ -7,27 +7,33 @@ class OpenSPPEventDataAgriculturalDSHot(models.Model):
 
     agri_prod_ids = fields.One2many(
         "spp.event.agri.ds.hot.prod",
-        "agri_ds_id",
+        "agri_ds_hot_id",
         string="Agricultural Production During the Hot DS",
     )
     agri_cost_ids = fields.One2many(
         "spp.event.agri.ds.hot.cost",
-        "agri_ds_id",
+        "agri_ds_hot_id",
         string="Agricultural Cost During the Hot DS",
     )
     agri_tech_ids = fields.One2many(
         "spp.event.agri.ds.hot.tech",
-        "agri_ds_id",
+        "agri_ds_hot_id",
         string="Agricultural Technologies During the Hot DS",
     )
+
+    def get_view_id(self):
+        """
+        This retrieves the View ID of this model
+        """
+        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
 
 
 class OpenSPPEventDataAgriculturalDSHotProduced(models.Model):
     _name = "spp.event.agri.ds.hot.prod"
     _description = "XI. Agricultural Production During the Hot DS"
 
-    agri_ds_id = fields.Many2one(
-        "spp.event.agri.ds",
+    agri_ds_hot_id = fields.Many2one(
+        "spp.event.agri.ds.hot",
         string="Agricultural Production, Sales, Costs and Technologies During the Hot DS",
     )
     crop_id = fields.Many2one("spp.farm.species", string="Crop", domain="[('species_type', '=', 'crop')]")
@@ -44,8 +50,8 @@ class OpenSPPEventDataAgriculturalDSHotCost(models.Model):
     _name = "spp.event.agri.ds.hot.cost"
     _description = "XI. Agricultural Costs During the Hot DS"
 
-    agri_ds_id = fields.Many2one(
-        "spp.event.agri.ds",
+    agri_ds_hot_id = fields.Many2one(
+        "spp.event.agri.ds.hot",
         string="Agricultural Production, Sales, Costs and Technologies During the Hot DS",
     )
     crop_id = fields.Many2one("spp.farm.species", string="Crop", domain="[('species_type', '=', 'crop')]")
@@ -66,8 +72,8 @@ class OpenSPPEventDataAgriculturalDSHotTech(models.Model):
     _name = "spp.event.agri.ds.hot.tech"
     _description = "XI. Agricultural Technologies During the Hot DS"
 
-    agri_ds_id = fields.Many2one(
-        "spp.event.agri.ds",
+    agri_ds_hot_id = fields.Many2one(
+        "spp.event.agri.ds.hot",
         string="Agricultural Production, Sales, Costs and Technologies During the Hot DS",
     )
     crop_id = fields.Many2one("spp.farm.species", string="Crop", domain="[('species_type', '=', 'crop')]")

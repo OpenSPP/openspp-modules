@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!--
-Part of OpenSPP. See LICENSE file for full copyright and licensing details.
--->
 <odoo>
-    <record id="create_event_agri_ds_form_view" model="ir.ui.view">
-        <field name="name">create_event_agri_ds_form_view</field>
-        <field name="model">spp.create.event.agri.ds.wizard</field>
+    <record id="view_spp_event_agri_ds_hot_form" model="ir.ui.view">
+        <field name="name">view_spp_event_agri_ds_hot_form</field>
+        <field name="model">spp.event.agri.ds.hot</field>
+        <field name="priority">200</field>
         <field name="arch" type="xml">
-            <form>
+            <form
+                string="Event Data: Agricultural Production, Sales, Cost and Technologies During Hot DS"
+                duplicate="0"
+            >
                 <sheet>
                     <notebook>
-                        <page string="Crops produced in Cold DS" name="crops_produce">
+                        <page string="Crops produced in Hot DS" name="crops_produce">
                             <field name="agri_prod_ids">
                                 <tree editable="bottom">
-                                    <field name="agri_ds_id" invisible="1" />
+                                    <field name="agri_ds_hot_id" invisible="1" />
                                     <field name="crop_id" />
                                     <field name="harvest_area" />
                                     <field name="harvest_amt_kg" />
@@ -25,10 +25,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 </tree>
                             </field>
                         </page>
-                        <page string="Production cost per crop in Cold DS" name="production_cost">
+                        <page string="Production cost per crop in Hot DS" name="production_cost">
                             <field name="agri_cost_ids">
                                 <tree editable="bottom">
-                                    <field name="agri_ds_id" invisible="1" />
+                                    <field name="agri_ds_hot_id" invisible="1" />
                                     <field name="crop_id" />
                                     <field name="labor_input_days" />
                                     <field name="preparation_farmland" />
@@ -44,10 +44,10 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 </tree>
                             </field>
                         </page>
-                        <page string="Technologies/techniques applied for crop production in Cold DS" name="technologies">
+                        <page string="Technologies/techniques applied for crop production in Hot DS" name="technologies">
                             <field name="agri_tech_ids">
                                 <tree editable="bottom">
-                                    <field name="agri_ds_id" invisible="1" />
+                                    <field name="agri_ds_hot_id" invisible="1" />
                                     <field name="crop_id" />
                                     <field name="organic_fertilizer" />
                                     <field name="greenhouse" />
@@ -65,13 +65,27 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         </page>
                     </notebook>
                 </sheet>
-                <field name="event_id" invisible="1" />
-                <footer>
-                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
-                    <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
             </form>
         </field>
     </record>
 
-</odoo>
+    <record id="action_spp_event_agri_ds_hot" model="ir.actions.act_window">
+        <field
+            name="name"
+        >Event Data: Agricultural Production, Sales, Cost and Technologies During Hot DS</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.event.agri.ds.hot</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+
+    </record>
+
+    <record id="action_spp_event_agri_ds_hot_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_agri_ds_hot_form" />
+        <field name="act_window_id" ref="action_spp_event_agri_ds_hot" />
+    </record>
+
+  </odoo>
