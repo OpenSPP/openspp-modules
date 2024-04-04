@@ -7,7 +7,10 @@ class SPPCreateEventHHLaborWizard(models.TransientModel):
     _description = "IV. Household Member and Labor Availability"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     no_hh_members_women = fields.Integer("Number of Women in the Household")
     no_hh_members_men = fields.Integer("Number of Men in the Household")
     no_hh_members = fields.Integer("Total Number of Household Members", compute="_compute_total_hh_members")
@@ -98,6 +101,7 @@ class SPPCreateEventHHLaborWizard(models.TransientModel):
                 "labor_availability_agri_15_35_men": rec.labor_availability_agri_15_35_men,
                 "labor_availability_agri_36_60_women": rec.labor_availability_agri_36_60_women,
                 "labor_availability_agri_36_60_men": rec.labor_availability_agri_36_60_men,
+                "survey_sched": rec.survey_sched,
             }
 
             event = self.env["spp.event.hh.labor"].create(vals_list)

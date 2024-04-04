@@ -7,7 +7,10 @@ class SPPCreateEventPovertyIndicatorWizard(models.TransientModel):
     _description = "III. Poverty Indicator"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     type_of_housing = fields.Selection([("1", "Not Permanent"), ("2", "Medium permanent"), ("3", "Permanent")])
     atleast_1household_member_completed_sch = fields.Selection(
         [("1", "Yes"), ("2", "No")], string="At least one household member completed compulsory school"
@@ -48,6 +51,7 @@ class SPPCreateEventPovertyIndicatorWizard(models.TransientModel):
                 "access_to_electricity": rec.access_to_electricity,
                 "access_to_basic_health_care": rec.access_to_basic_health_care,
                 "access_to_internet": rec.access_to_internet,
+                "survey_sched": rec.survey_sched,
             }
 
             event = self.env["spp.event.poverty.indicator"].create(vals_list)

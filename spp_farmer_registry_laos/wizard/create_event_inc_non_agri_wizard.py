@@ -8,7 +8,10 @@ class SPPCreateEventIncomeFromNonAgribusinessWizard(models.TransientModel):
     _description = "XIV. Non-Agriculture Annual Income Sources (in LAK)"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     salary = fields.Float("Income from Salary")
     wages = fields.Float("Income from Wages")
     handicraft = fields.Float("Income from Handicraft")
@@ -44,6 +47,7 @@ class SPPCreateEventIncomeFromNonAgribusinessWizard(models.TransientModel):
                 "business": rec.business,
                 "land_lease": rec.land_lease,
                 "other": rec.other,
+                "survey_sched": rec.survey_sched,
             }
 
             event = self.env["spp.event.inc.non.agri"].create(vals_list)

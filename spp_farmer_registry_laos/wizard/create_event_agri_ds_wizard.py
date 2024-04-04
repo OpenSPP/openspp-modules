@@ -8,7 +8,10 @@ class SPPCreateEventAgriculturalDSWizard(models.TransientModel):
     _description = "X. Agricultural Production, Sales, Cost and Technologies During Cold DS"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     agri_prod_ids = fields.One2many(
         "spp.create.event.agri.ds.prod.wizard",
         "agri_ds_id",
@@ -27,7 +30,9 @@ class SPPCreateEventAgriculturalDSWizard(models.TransientModel):
 
     def create_event(self):
         for rec in self:
-            vals_list = {}
+            vals_list = {
+                "survey_sched": rec.survey_sched
+            }
             if rec.agri_prod_ids:
                 produce_vals = []
                 for produce in rec.agri_prod_ids:

@@ -7,7 +7,10 @@ class SPPCreateEventFoodSecurityWizard(models.TransientModel):
     _description = "VII. Food Security"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     hungry_season_past_12 = fields.Integer("Experience a Hungry season in the past 12 months")
     shortage_january = fields.Integer("January")
     shortage_february = fields.Integer("February")
@@ -38,6 +41,7 @@ class SPPCreateEventFoodSecurityWizard(models.TransientModel):
                 "shortage_october": rec.shortage_october,
                 "shortage_november": rec.shortage_november,
                 "shortage_december": rec.shortage_december,
+                "survey_sched": rec.survey_sched,
             }
 
             event = self.env["spp.event.food.security"].create(vals_list)

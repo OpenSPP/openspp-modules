@@ -8,7 +8,10 @@ class SPPCreateEventMinimumDietaryDiversityScoreWizard(models.TransientModel):
     _description = "XVII. Minimum Dietary Diversity Score"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     food_made_grains_roots_tubers = fields.Selection(
         [
             ("1", "Yes"),
@@ -100,6 +103,7 @@ class SPPCreateEventMinimumDietaryDiversityScoreWizard(models.TransientModel):
                 "any_other_fruits": rec.any_other_fruits,
                 "food_mentioned_not_listed": rec.food_mentioned_not_listed,
                 "remarks": rec.remarks,
+                "survey_sched": rec.survey_sched,
             }
 
             event = self.env["spp.event.min.dietary.score"].create(vals_list)

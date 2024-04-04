@@ -7,7 +7,10 @@ class SPPCreateEventHHAssetsWizard(models.TransientModel):
     _description = "V. Household Assets"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     asset_non_agri_tv = fields.Integer("Number of TV")
     asset_non_agri_refrigerator = fields.Integer("Number of Refrigerator")
     asset_non_agri_motobike = fields.Integer("Number of Motobike")
@@ -92,6 +95,7 @@ class SPPCreateEventHHAssetsWizard(models.TransientModel):
                 "asset_livestock_aquatic_animals": rec.asset_livestock_aquatic_animals,
                 "asset_livestock_frog": rec.asset_livestock_frog,
                 "asset_livestock_horse": rec.asset_livestock_horse,
+                "survey_sched": rec.survey_sched,
             }
 
             event = self.env["spp.event.hh.assets"].create(vals_list)

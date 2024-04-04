@@ -8,7 +8,10 @@ class SPPCreateEventAgriculturalWSWizard(models.TransientModel):
     _description = "VIII. Agricultural Production, Sales, Costs and Technologies During the WS"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     agri_ws_produce_ids = fields.One2many(
         "spp.create.event.agri.ws.produce.wizard", "agri_ws_id", string="Crops produce"
     )
@@ -35,6 +38,7 @@ class SPPCreateEventAgriculturalWSWizard(models.TransientModel):
                 "experience_pest_disease_outbreak_dates": rec.experience_pest_disease_outbreak_dates,
                 "experience_pest_disease_outbreak_type": rec.experience_pest_disease_outbreak_type,
                 "experience_pest_disease_outbreak_affected": rec.experience_pest_disease_outbreak_affected,
+                "survey_sched": rec.survey_sched,
             }
             if rec.agri_ws_produce_ids:
                 produce_vals = []

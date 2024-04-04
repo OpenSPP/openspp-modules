@@ -8,7 +8,10 @@ class SPPCreateEventPermanentCropsWizard(models.TransientModel):
     _description = "XI. Agricultural Production, Sales, Costs and Technologies During the Hot DS"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     crop_prod_ids = fields.One2many(
         "spp.create.event.permanent.crops.prod.wizard",
         "crop_permanent_id",
@@ -27,7 +30,9 @@ class SPPCreateEventPermanentCropsWizard(models.TransientModel):
 
     def create_event(self):
         for rec in self:
-            vals_list = {}
+            vals_list = {
+                "survey_sched": rec.survey_sched
+            }
             if rec.crop_prod_ids:
                 produce_vals = []
                 for produce in rec.crop_prod_ids:

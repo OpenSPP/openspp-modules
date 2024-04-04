@@ -8,7 +8,10 @@ class SPPCreateEventHouseholdResilienceIndexWizard(models.TransientModel):
     _description = "XVI. Household Resilience Index"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     village_engaged_in_flood_landslide_prevention = fields.Selection(
         [
             ("1", "Yes"),
@@ -322,6 +325,7 @@ class SPPCreateEventHouseholdResilienceIndexWizard(models.TransientModel):
                 "ability_to_cope": rec.ability_to_cope,
                 "comm_engage_contract_farming": rec.comm_engage_contract_farming,
                 "issue_sell_prod": rec.issue_sell_prod,
+                "survey_sched": rec.survey_sched,
             }
 
             event = self.env["spp.event.hh.resilience.index"].create(vals_list)

@@ -8,7 +8,10 @@ class SPPCreateEventAgriculturalTechWSWizard(models.TransientModel):
     _description = "IX. Agricultural Technologies During the WS"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     agri_prod_sales_cost_tech_ids = fields.One2many(
         "spp.create.event.agri.tech.ws.lines.wizard",
         "agri_prod_sales_cost_tech_id",
@@ -17,6 +20,9 @@ class SPPCreateEventAgriculturalTechWSWizard(models.TransientModel):
 
     def create_event(self):
         for rec in self:
+            vals_list = {
+                "survey_sched": rec.survey_sched
+            }
             if rec.agri_prod_sales_cost_tech_ids:
                 tech_vals = []
                 for tech in rec.agri_prod_sales_cost_tech_ids:
@@ -38,7 +44,7 @@ class SPPCreateEventAgriculturalTechWSWizard(models.TransientModel):
                             }
                         )
                     )
-                vals_list = {"agri_prod_sales_cost_tech_ids": tech_vals}
+                vals_list.update({"agri_prod_sales_cost_tech_ids": tech_vals})
 
                 event = self.env["spp.event.agri.tech.ws"].create(vals_list)
                 rec.event_id.res_id = event.id

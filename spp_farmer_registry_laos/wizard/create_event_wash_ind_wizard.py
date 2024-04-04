@@ -8,7 +8,10 @@ class SPPCreateEventWashIndicatorsWizard(models.TransientModel):
     _description = "XV. WASH Indicators"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     water_sources = fields.Selection(
         [
             ("1", "Safety Managed"),
@@ -41,6 +44,7 @@ class SPPCreateEventWashIndicatorsWizard(models.TransientModel):
                 "water_sources": rec.water_sources,
                 "latrine_condition": rec.latrine_condition,
                 "handwashing_facility": rec.handwashing_facility,
+                "survey_sched": rec.survey_sched,
             }
 
             event = self.env["spp.event.wash.ind"].create(vals_list)

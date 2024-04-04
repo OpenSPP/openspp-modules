@@ -7,7 +7,10 @@ class SPPCreateEventGenInfoWizard(models.TransientModel):
     _description = "II. General Information"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     interviewees_name = fields.Char("Interviewee's Name")
     ethnic_group_id = fields.Many2one("spp.ethnic.group", "Ethnic Group")
     sex = fields.Selection([("1", "Female"), ("2", "Male")])
@@ -160,6 +163,7 @@ class SPPCreateEventGenInfoWizard(models.TransientModel):
                 "irrigation_area_supported": rec.irrigation_area_supported,
                 "participation_oth_proj": rec.participation_oth_proj,
                 "hhq_number_baseline_survey": rec.hhq_number_baseline_survey,
+                "survey_sched": rec.survey_sched,
             }
 
             event = self.env["spp.event.gen.info"].create(vals_list)

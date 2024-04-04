@@ -3,6 +3,7 @@ import json
 import math
 import random
 
+from datetime import datetime, timedelta, date
 from odoo import api, fields, models
 
 from ..tools import generate_polygon, random_location_in_laos
@@ -357,6 +358,25 @@ EVENT_TYPE = [
     "implive",
 ]
 
+EVENT_DATA_TYPES = [
+    "spp.event.gen.info",
+    "spp.event.poverty.indicator",
+    "spp.event.hh.labor",
+    "spp.event.hh.assets",
+    "spp.event.agri.land.ownership.use",
+    "spp.event.food.security",
+    "spp.event.agri.ws",
+    "spp.event.agri.tech.ws",
+    "spp.event.agri.ds",
+    "spp.event.agri.ds.hot",
+    "spp.event.permanent.crops",
+    "spp.event.livestock.farming",
+    "spp.event.inc.agri",
+    "spp.event.inc.non.agri",
+    "spp.event.wash.ind",
+    "spp.event.hh.resilience.index",
+    "spp.event.min.dietary.score",
+]
 
 class SPPLaosGenerateFarmerData(models.Model):
     _name = "spp.laos.generate.farmer.data"
@@ -391,7 +411,7 @@ class SPPLaosGenerateFarmerData(models.Model):
             # Generate Farmer Group data
             farmer_group_name = f"Farmer Group {random.choice(FARMER_GROUP_NAMES)}"
             farmer_group_id = res._generate_group_data(i, kind_farmer_group_id, farmer_group_name)
-            self._generate_event_data_cycle(farmer_group_id)
+            self._generate_event_datas(farmer_group_id)
             land_record_id = res._generate_land_record_record(farmer_group_id)
             farmer_group_id.farm_land_rec_id = land_record_id.id
             farmer_group_id.coordinates = land_record_id.land_coordinates
@@ -402,7 +422,7 @@ class SPPLaosGenerateFarmerData(models.Model):
                 # Generate Farm data
                 group_name = f"{random.choice(NAMES)} Farm"
                 group_id = res._generate_group_data(j, kind_farm_id, group_name)
-                self._generate_event_data_cycle(group_id)
+                self._generate_event_datas(group_id)
                 land_record_id = res._generate_land_record_record(group_id)
                 group_id.farm_land_rec_id = land_record_id.id
                 group_id.coordinates = land_record_id.land_coordinates
@@ -473,6 +493,29 @@ class SPPLaosGenerateFarmerData(models.Model):
             }
         )
 
+    def _generate_random_phone_number(self):
+        # Generates a random phone number of the format: (XXX) XXX-XXXX
+        area_code = random.randint(100, 999)
+        exchange_code = random.randint(100, 999)
+        subscriber_number = random.randint(1000, 9999)
+
+        phone_number = f"({area_code}) {exchange_code}-{subscriber_number}"
+        return phone_number
+
+    def _generate_random_date(self, start_date, end_date):
+        """
+        Generates a random date between start_date and end_date.
+
+        :param start_date: A datetime.date object representing the start date.
+        :param end_date: A datetime.date object representing the end date.
+        :return: A string representing a random date between start_date and end_date in the format 'YYYY-MM-DD'.
+        """
+        time_between_dates = end_date - start_date
+        days_between_dates = time_between_dates.days
+        random_number_of_days = random.randrange(days_between_dates)
+        random_date = start_date + timedelta(days=random_number_of_days)
+        return random_date
+
     def _create_event_data(self, model_name, group_id):
         vals_list = {
             "model": model_name,
@@ -480,6 +523,53 @@ class SPPLaosGenerateFarmerData(models.Model):
         }
         event_id = self.env["spp.event.data"].create(vals_list)
         return event_id
+
+    def _generate_event_datas(self, registrant):
+        for event_data in EVENT_DATA_TYPES:
+            event_id = self._create_event_data(event_data, registrant)
+            if event_data == "spp.event.gen.info":
+                self._generate_event_gen_info(event_id)
+
+    def _generate_event_gen_info(self, event_id):
+        ethnic_group = self.env["spp.ethnic.group"].search([]).mapped("id")
+        # land_record_id = self._generate_land_record_record(event_id.partner_id)
+        vals_list = {
+            "interviewees_name": f"{random.choice(NAMES)}",
+            "ethnic_group_id": random.choice(ethnic_group),
+            "sex": str(random.randint(1, 2)),
+            "marital_status": str(random.randint(1, 4)),
+            "age": random.randint(20, 80),
+            "educational_qualification": str(random.randint(1, 6)),
+            "head_of_household": str(random.randint(1, 2)),
+            "poverty_status": str(random.randint(1, 3)),
+            # "gps_location": land_record_id.land_coordinates,
+            "phone_number1": self._generate_random_phone_number(),
+            "phone_number2": self._generate_random_phone_number(),
+            "participating": str(random.randint(1, 2)),
+            "date_participated": self._generate_random_date(date.today() - timedelta(days=50), date.today()),
+            "grp_act_supported_by_project_agri": str(random.randint(0, 16)),
+            "grp_act_supported_by_project_livestock_fisheries": random.choice(["0", "19", "20", "21"]),
+            "tech_supported_by_project_org_fert": str(random.randint(1, 2)),
+            "tech_supported_by_project_greenhouse": str(random.randint(1, 2)),
+            "tech_supported_by_project_mulching": str(random.randint(1, 2)),
+            "tech_supported_by_project_gravity_irrig": str(random.randint(1, 2)),
+            "tech_supported_by_project_water_pump": str(random.randint(1, 2)),
+            "tech_supported_by_project_drip_irrig": str(random.randint(1, 2)),
+            "tech_supported_by_project_drip_sprinkler": str(random.randint(1, 2)),
+            "tech_supported_by_project_machine_harvest": str(random.randint(1, 2)),
+            "tech_supported_by_project_dry_processing": str(random.randint(1, 2)),
+            "tech_supported_by_project_agri_oth": str(random.randint(1, 2)),
+            "tech_supported_by_project_concent_feed": str(random.randint(1, 2)),
+            "tech_supported_by_project_grass_planting": str(random.randint(1, 2)),
+            "tech_supported_by_project_vaccination": str(random.randint(1, 2)),
+            "tech_supported_by_project_livestock_oth": random.choice(FARMER_GROUP_NAMES),
+            "irrigation_area_supported": random.randint(1, 999),
+            "participation_oth_proj": str(random.randint(1, 2)),
+            "hhq_number_baseline_survey": random.randint(1, 999),
+        }
+
+        event = self.env["spp.event.gen.info"].create(vals_list)
+        event_id.res_id = event.id
 
     def _generate_event_data_cycle(self, group_id):
         event_id = self._create_event_data("spp.event.cycle", group_id)

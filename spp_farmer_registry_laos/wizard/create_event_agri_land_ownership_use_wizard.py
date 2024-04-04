@@ -8,7 +8,10 @@ class SPPCreateEventAgriLandOwnershipAndUseWizard(models.TransientModel):
     _description = "VI. Agriculture Land Ownership and Use"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     land_ownership_ids = fields.One2many(
         "spp.create.event.agri.land.ownership.use.lines.wizard",
         "land_ownership_use_id",
@@ -29,6 +32,7 @@ class SPPCreateEventAgriLandOwnershipAndUseWizard(models.TransientModel):
             vals_list = {
                 "crops_in_irrigated_land": rec.crops_in_irrigated_land,
                 "crops_in_irrigated_land_ha": rec.crops_in_irrigated_land_ha,
+                "survey_sched": rec.survey_sched,
             }
             if rec.land_ownership_ids:
                 ownership_vals = []

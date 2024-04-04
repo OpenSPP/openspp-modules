@@ -8,7 +8,10 @@ class SPPCreateEventIncomeFromAgribusinessWizard(models.TransientModel):
     _description = "XIII. Income from Agribusiness (LAK)"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     sales_of_input = fields.Float("Income from Sales of Input")
     sales_baby_animals = fields.Float("Income from Sales of Baby Animals")
     sales_of_animal_feeds = fields.Float("Income from Sales of Animal Feeds")
@@ -27,6 +30,7 @@ class SPPCreateEventIncomeFromAgribusinessWizard(models.TransientModel):
                 "processing_agro_products": rec.processing_agro_products,
                 "transport_trade_agro_products": rec.transport_trade_agro_products,
                 "other": rec.other,
+                "survey_sched": rec.survey_sched,
             }
 
             event = self.env["spp.event.inc.agri"].create(vals_list)

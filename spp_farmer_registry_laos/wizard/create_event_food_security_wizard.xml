@@ -9,6 +9,18 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <div class="row mt16 o_settings_container" name="container_0">
+                        <div class="col-4 o_setting_box" name="survey_sched">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="survey_sched" />
+                                <div>
+                                </div>
+                                <field name="survey_sched" required="1"/>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mt16 o_settings_container" name="container_1">
                         <div class="col-10 o_setting_box" name="hungry_season_past_12">
                             <div class="o_setting_left_pane">

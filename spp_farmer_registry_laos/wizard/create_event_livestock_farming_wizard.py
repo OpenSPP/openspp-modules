@@ -8,7 +8,10 @@ class SPPCreateEventLivestockFarmingWizard(models.TransientModel):
     _description = "XII. Livestock Farming"
 
     event_id = fields.Many2one("spp.event.data")
-
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     livestock_cost_ids = fields.One2many(
         "spp.create.event.livestock.farming.cost.wizard",
         "livestock_farming_id",
@@ -22,7 +25,9 @@ class SPPCreateEventLivestockFarmingWizard(models.TransientModel):
 
     def create_event(self):
         for rec in self:
-            vals_list = {}
+            vals_list = {
+                "survey_sched": rec.survey_sched
+            }
 
             if rec.livestock_cost_ids:
                 cost_vals = []
