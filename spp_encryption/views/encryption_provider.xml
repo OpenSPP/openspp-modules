@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_encryption_provider_form" model="ir.ui.view">
+        <field name="name">view_encryption_provider_form</field>
+        <field name="model">g2p.encryption.provider</field>
+        <field name="inherit_id" ref="g2p_encryption.view_encryption_provider_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='Base']" position="after">
+                <field name="jwcrypto_key" invisible="1" />
+                <button
+                    name="generate_and_store_jwcrypto_key"
+                    string="Create Jwcrypto Key"
+                    type="object"
+                    class="oe_highlight btn-primary"
+                    invisible="jwcrypto_key"
+                />
+                <button
+                    name="generate_and_store_jwcrypto_key"
+                    string="Update Jwcrypto Key"
+                    type="object"
+                    class="oe_highlight btn-primary"
+                    invisible="not jwcrypto_key"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
