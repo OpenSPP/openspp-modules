@@ -5,6 +5,10 @@ class OpenSPPEventDataHHLabor(models.Model):
     _name = "spp.event.hh.labor"
     _description = "IV. Household Member and Labor Availability"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     no_hh_members_women = fields.Integer("Number of Women in the Household")
     no_hh_members_men = fields.Integer("Number of Men in the Household")
     no_hh_members = fields.Integer("Total Number of Household Members", compute="_compute_total_hh_members")

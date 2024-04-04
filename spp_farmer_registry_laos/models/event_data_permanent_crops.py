@@ -5,6 +5,10 @@ class OpenSPPEventDataPermanentCrops(models.Model):
     _name = "spp.event.permanent.crops"
     _description = "XI. Permanent crops production"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     crop_prod_ids = fields.One2many(
         "spp.event.permanent.crops.prod",
         "crop_permanent_id",

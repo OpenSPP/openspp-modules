@@ -5,6 +5,10 @@ class OpenSPPEventDataAgriculturalTechWS(models.Model):
     _name = "spp.event.agri.tech.ws"
     _description = "IX. Agricultural Technologies During the WS"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     agri_prod_sales_cost_tech_ids = fields.One2many(
         "spp.event.agri.tech.ws.lines",
         "agri_prod_sales_cost_tech_id",

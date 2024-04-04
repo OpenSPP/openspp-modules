@@ -4,11 +4,11 @@
         <field name="model">spp.event.permanent.crops</field>
         <field name="priority">200</field>
         <field name="arch" type="xml">
-            <form
-                string="Event Data: Permanent crops production"
-                duplicate="0"
-            >
+            <form string="Event Data: Permanent crops production" duplicate="0">
                 <sheet>
+                    <group>
+                        <field name="survey_sched" required="1" />
+                    </group>
                     <notebook>
                         <page string="Produced Crops" name="crops_produce">
                             <field name="crop_prod_ids">
@@ -70,9 +70,7 @@
     </record>
 
     <record id="action_spp_event_permanent_crops" model="ir.actions.act_window">
-        <field
-            name="name"
-        >Event Data: Permanent crops production</field>
+        <field name="name">Event Data: Permanent crops production</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.event.permanent.crops</field>
         <field name="view_mode">form</field>

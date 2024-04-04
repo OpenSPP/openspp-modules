@@ -4,11 +4,11 @@
         <field name="model">spp.event.hh.resilience.index</field>
         <field name="priority">200</field>
         <field name="arch" type="xml">
-            <form
-                string="Event Data: Household Resilience Index"
-                duplicate="0"
-            >
+            <form string="Event Data: Household Resilience Index" duplicate="0">
                 <sheet>
+                    <group>
+                        <field name="survey_sched" required="1" />
+                    </group>
                     <div class="row mt16 o_settings_container" name="container_1">
                         <div class="col-4 o_setting_box" name="village_engaged_in_flood_landslide_prevention">
                             <div class="o_setting_left_pane">
@@ -357,9 +357,7 @@
     </record>
 
     <record id="action_spp_event_hh_resilience_index" model="ir.actions.act_window">
-        <field
-            name="name"
-        >Event Data: Household Resilience Index</field>
+        <field name="name">Event Data: Household Resilience Index</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.event.hh.resilience.index</field>
         <field name="view_mode">form</field>

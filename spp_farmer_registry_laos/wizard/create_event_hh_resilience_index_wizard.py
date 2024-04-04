@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from odoo import Command, fields, models, api
+from odoo import api, fields, models
 
 
 class SPPCreateEventHouseholdResilienceIndexWizard(models.TransientModel):
@@ -76,7 +76,7 @@ class SPPCreateEventHouseholdResilienceIndexWizard(models.TransientModel):
             ("2", "No"),
         ],
         string="Access to quality extension services and technical advice "
-               + "related to crop diversification and climate adaptation ",
+        + "related to crop diversification and climate adaptation ",
     )
     adopted_new_techniques = fields.Selection(
         [

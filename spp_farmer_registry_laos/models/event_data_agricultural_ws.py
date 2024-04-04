@@ -5,6 +5,10 @@ class OpenSPPEventDataAgriculturalWS(models.Model):
     _name = "spp.event.agri.ws"
     _description = "VIII. Agricultural Production and Costs During the WS"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     agri_ws_produce_ids = fields.One2many("spp.event.agri.ws.produce", "agri_ws_id", string="Crops produce")
     agri_ws_cost_ids = fields.One2many("spp.event.agri.ws.cost", "agri_ws_id", string="Production cost per crop")
     experience_dryspell_flood = fields.Integer(

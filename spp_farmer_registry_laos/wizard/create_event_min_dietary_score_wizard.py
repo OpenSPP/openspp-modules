@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from odoo import Command, fields, models, api
+from odoo import fields, models
 
 
 class SPPCreateEventMinimumDietaryDiversityScoreWizard(models.TransientModel):
@@ -81,7 +81,7 @@ class SPPCreateEventMinimumDietaryDiversityScoreWizard(models.TransientModel):
             ("2", "No"),
         ],
         string="Food mentioned by the respondent not listed in any category, or "
-               + "the enumerator is unsure on where to categorize the food.",
+        + "the enumerator is unsure on where to categorize the food.",
     )
     remarks = fields.Text(string="Remarks")
 

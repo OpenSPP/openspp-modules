@@ -5,6 +5,10 @@ class OpenSPPEventDataAgriculturalDSHot(models.Model):
     _name = "spp.event.agri.ds.hot"
     _description = "XI. Agricultural Production, Sales, Costs and Technologies During the Hot DS"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     agri_prod_ids = fields.One2many(
         "spp.event.agri.ds.hot.prod",
         "agri_ds_hot_id",

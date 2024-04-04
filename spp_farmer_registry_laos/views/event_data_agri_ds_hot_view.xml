@@ -9,6 +9,9 @@
                 duplicate="0"
             >
                 <sheet>
+                    <group>
+                        <field name="survey_sched" required="1" />
+                    </group>
                     <notebook>
                         <page string="Crops produced in Hot DS" name="crops_produce">
                             <field name="agri_prod_ids">
@@ -44,7 +47,10 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Technologies/techniques applied for crop production in Hot DS" name="technologies">
+                        <page
+                            string="Technologies/techniques applied for crop production in Hot DS"
+                            name="technologies"
+                        >
                             <field name="agri_tech_ids">
                                 <tree editable="bottom">
                                     <field name="agri_ds_hot_id" invisible="1" />

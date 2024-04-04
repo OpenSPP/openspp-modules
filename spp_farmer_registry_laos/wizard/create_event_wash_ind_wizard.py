@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from odoo import Command, fields, models, api
+from odoo import fields, models
 
 
 class SPPCreateEventWashIndicatorsWizard(models.TransientModel):

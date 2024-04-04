@@ -5,6 +5,10 @@ class OpenSPPEventDataGenInfo(models.Model):
     _name = "spp.event.gen.info"
     _description = "II. General Information"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     interviewees_name = fields.Char("Interviewee's Name")
     ethnic_group_id = fields.Many2one("spp.ethnic.group", "Ethnic Group")
     sex = fields.Selection([("1", "Female"), ("2", "Male")])

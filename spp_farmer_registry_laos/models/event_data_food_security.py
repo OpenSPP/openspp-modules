@@ -5,6 +5,10 @@ class OpenSPPEventDataFoodSecurity(models.Model):
     _name = "spp.event.food.security"
     _description = "VII. Food Security"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     hungry_season_past_12 = fields.Integer("Experience a Hungry season in the past 12 months")
     shortage_january = fields.Integer("January")
     shortage_february = fields.Integer("February")

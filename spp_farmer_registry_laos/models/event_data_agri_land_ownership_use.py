@@ -5,6 +5,10 @@ class OpenSPPEventDataAgriLandOwnershipAndUse(models.Model):
     _name = "spp.event.agri.land.ownership.use"
     _description = "VI. Agriculture Land Ownership and Use"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     land_ownership_ids = fields.One2many(
         "spp.event.agri.land.ownership.use.lines", "land_ownership_use_id", string="Land Ownerships and Uses"
     )

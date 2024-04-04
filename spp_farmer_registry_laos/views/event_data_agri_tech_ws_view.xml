@@ -6,6 +6,9 @@
         <field name="arch" type="xml">
             <form string="Event Data: Agricultural Technologies During the WS" duplicate="0">
                 <sheet>
+                    <group>
+                        <field name="survey_sched" required="1" />
+                    </group>
                     <notebook>
                         <page string="Agricultural Technologies" name="agri_tech">
                             <field name="agri_prod_sales_cost_tech_ids">

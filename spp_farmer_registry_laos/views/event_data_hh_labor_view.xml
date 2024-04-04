@@ -19,6 +19,10 @@
         <field name="arch" type="xml">
             <form string="Event Data: Household Member and Labor Availability" duplicate="0">
                 <sheet>
+                    <group>
+                        <field name="survey_sched" required="1" />
+                    </group>
+
                     <div class="row mt16 o_settings_container" name="container_1">
                         <div class="col-4 o_setting_box" name="no_hh_members_women">
                             <div class="o_setting_left_pane">

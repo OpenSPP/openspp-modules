@@ -5,6 +5,10 @@ class OpenSPPEventDataMinDietaryDiversifyScore(models.Model):
     _name = "spp.event.min.dietary.score"
     _description = "XVII. Minimum Dietary Diversity Score"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     food_made_grains_roots_tubers = fields.Selection(
         [
             ("1", "Yes"),

@@ -4,11 +4,11 @@
         <field name="model">spp.event.livestock.farming</field>
         <field name="priority">200</field>
         <field name="arch" type="xml">
-            <form
-                string="Event Data: Livestock Farming"
-                duplicate="0"
-            >
+            <form string="Event Data: Livestock Farming" duplicate="0">
                 <sheet>
+                    <group>
+                        <field name="survey_sched" required="1" />
+                    </group>
                     <notebook>
                         <page string="Production cost" name="production_cost">
                             <field name="livestock_cost_ids">
@@ -57,9 +57,7 @@
     </record>
 
     <record id="action_spp_event_livestock_farming" model="ir.actions.act_window">
-        <field
-            name="name"
-        >Event Data: Livestock Farming</field>
+        <field name="name">Event Data: Livestock Farming</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.event.livestock.farming</field>
         <field name="view_mode">form</field>

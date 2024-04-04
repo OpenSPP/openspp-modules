@@ -5,6 +5,10 @@ class OpenSPPEventDataWashIndicators(models.Model):
     _name = "spp.event.wash.ind"
     _description = "XV. WASH Indicators"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     water_sources = fields.Selection(
         [
             ("1", "Safety Managed"),

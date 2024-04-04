@@ -4,11 +4,11 @@
         <field name="model">spp.event.min.dietary.score</field>
         <field name="priority">200</field>
         <field name="arch" type="xml">
-            <form
-                string="Event Data: Minimum Dietary Diversity Score"
-                duplicate="0"
-            >
+            <form string="Event Data: Minimum Dietary Diversity Score" duplicate="0">
                 <sheet>
+                    <group>
+                        <field name="survey_sched" required="1" />
+                    </group>
                     <div class="row mt16 o_settings_container" name="container_1">
                         <div class="col-4 o_setting_box" name="food_made_grains_roots_tubers">
                             <div class="o_setting_left_pane">
@@ -137,9 +137,7 @@
     </record>
 
     <record id="action_spp_event_min_dietary_score" model="ir.actions.act_window">
-        <field
-            name="name"
-        >Event Data: Minimum Dietary Diversity Score</field>
+        <field name="name">Event Data: Minimum Dietary Diversity Score</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.event.min.dietary.score</field>
         <field name="view_mode">form</field>

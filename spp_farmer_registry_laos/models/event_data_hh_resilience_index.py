@@ -5,6 +5,10 @@ class OpenSPPEventDataHouseholdResilienceIndex(models.Model):
     _name = "spp.event.hh.resilience.index"
     _description = "XVI. Household Resilience Index"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     village_engaged_in_flood_landslide_prevention = fields.Selection(
         [
             ("1", "Yes"),

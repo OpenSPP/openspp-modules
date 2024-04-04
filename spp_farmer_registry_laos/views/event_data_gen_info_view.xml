@@ -18,6 +18,9 @@
         <field name="arch" type="xml">
             <form string="Event Data: General Information" duplicate="0">
                 <sheet>
+                    <group>
+                        <field name="survey_sched" required="1" />
+                    </group>
                     <notebook>
                         <page string="Information" name="info">
                             <div class="row mt16 o_settings_container" name="container_1">

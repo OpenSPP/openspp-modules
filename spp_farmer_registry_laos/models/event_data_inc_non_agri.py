@@ -5,6 +5,10 @@ class OpenSPPEventDataIncomeFromNonAgriculture(models.Model):
     _name = "spp.event.inc.non.agri"
     _description = "XIV. Non-Agriculture Annual Income Sources (in LAK)"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     salary = fields.Float("Income from Salary")
     wages = fields.Float("Income from Wages")
     handicraft = fields.Float("Income from Handicraft")

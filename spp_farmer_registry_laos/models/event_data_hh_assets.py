@@ -5,6 +5,10 @@ class EventDataHHAssets(models.Model):
     _name = "spp.event.hh.assets"
     _description = "V. Household Assets"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     asset_non_agri_tv = fields.Integer("Number of TV")
     asset_non_agri_refrigerator = fields.Integer("Number of Refrigerator")
     asset_non_agri_motobike = fields.Integer("Number of Motobike")

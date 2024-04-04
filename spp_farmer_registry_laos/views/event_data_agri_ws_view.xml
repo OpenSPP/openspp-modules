@@ -9,6 +9,9 @@
                 duplicate="0"
             >
                 <sheet>
+                    <group>
+                        <field name="survey_sched" required="1" />
+                    </group>
                     <div class="row mt16 o_settings_container" name="container_1">
                         <div class="col-8 o_setting_box" name="experience_dryspell_flood">
                             <div class="o_setting_left_pane">

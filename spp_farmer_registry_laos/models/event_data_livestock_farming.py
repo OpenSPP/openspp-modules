@@ -5,6 +5,10 @@ class OpenSPPEventDataLivestockFarming(models.Model):
     _name = "spp.event.livestock.farming"
     _description = "XII. Livestock Farming"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     livestock_cost_ids = fields.One2many(
         "spp.event.livestock.farming.cost",
         "livestock_farming_id",

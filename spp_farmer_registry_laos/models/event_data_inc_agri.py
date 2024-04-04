@@ -5,6 +5,10 @@ class OpenSPPEventDataIncomeFromAgribusiness(models.Model):
     _name = "spp.event.inc.agri"
     _description = "XIII. Income from Agribusiness (LAK)"
 
+    survey_sched = fields.Selection(
+        [("1", "Baseline"), ("2", "Midline"), ("3", "Endline")],
+        string="Survey Schedule",
+    )
     sales_of_input = fields.Float("Income from Sales of Input")
     sales_baby_animals = fields.Float("Income from Sales of Baby Animals")
     sales_of_animal_feeds = fields.Float("Income from Sales of Animal Feeds")
