@@ -1,0 +1,78 @@
+<odoo>
+    <record id="view_spp_event_livestock_farming_form" model="ir.ui.view">
+        <field name="name">view_spp_event_livestock_farming_form</field>
+        <field name="model">spp.event.livestock.farming</field>
+        <field name="priority">200</field>
+        <field name="arch" type="xml">
+            <form
+                string="Event Data: Livestock Farming"
+                duplicate="0"
+            >
+                <sheet>
+                    <notebook>
+                        <page string="Production cost" name="production_cost">
+                            <field name="livestock_cost_ids">
+                                <tree editable="bottom">
+                                    <field name="livestock_farming_id" invisible="1" />
+                                    <field name="livestock_id" />
+                                    <field name="labor_input_days" />
+                                    <field name="purchase_baby_animal" />
+                                    <field name="feed" />
+                                    <field name="medicine" />
+                                    <field name="electricity_water" />
+                                    <field name="facility_machinery" />
+                                    <field name="labor_cost" />
+                                    <field name="oth_fees" />
+                                    <field name="oth_specify" />
+                                    <field name="total_cost" />
+                                    <field name="farmgate_price" />
+                                    <field name="gross_income" />
+                                    <field name="net_income" />
+                                    <field name="nb_head" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Technologies/techniques" name="technologies">
+                            <field name="livestock_tech_ids">
+                                <tree editable="bottom">
+                                    <field name="livestock_farming_id" invisible="1" />
+                                    <field name="livestock_id" />
+                                    <field name="organic_fertilizer" />
+                                    <field name="hybrid_species" />
+                                    <field name="concentrated_feed" />
+                                    <field name="grass_planting_forage" />
+                                    <field name="vaccination" />
+                                    <field name="antibiotics" />
+                                    <field name="growth_hormone" />
+                                    <field name="other_disinfect" />
+                                    <field name="shed_livestock" />
+                                    <field name="other" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_event_livestock_farming" model="ir.actions.act_window">
+        <field
+            name="name"
+        >Event Data: Livestock Farming</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.event.livestock.farming</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+
+    </record>
+
+    <record id="action_spp_event_livestock_farming_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_livestock_farming_form" />
+        <field name="act_window_id" ref="action_spp_event_livestock_farming" />
+    </record>
+
+  </odoo>

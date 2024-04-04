@@ -11,3 +11,4 @@ from . import create_event_agri_tech_ws_wizard
 from . import create_event_agri_ds_wizard
 from . import create_event_agri_ds_hot_wizard
 from . import create_event_permanent_crops_wizard
+from . import create_event_livestock_farming_wizard

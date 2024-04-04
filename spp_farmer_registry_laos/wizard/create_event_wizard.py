@@ -35,6 +35,10 @@ class SPPCreateEventWizard(models.TransientModel):
                 "spp.event.permanent.crops",
                 "XI. Permanent crops production",
             ),
+            (
+                "spp.event.livestock.farming",
+                "XII. Livestock Farming",
+            ),
         ]
     )
 

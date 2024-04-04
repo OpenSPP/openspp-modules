@@ -10,11 +10,17 @@ class OpenSPPEventDataLivestockFarming(models.Model):
         "livestock_farming_id",
         string="Livestock Farming (Production Cost)",
     )
-    crop_tech_ids = fields.One2many(
+    livestock_tech_ids = fields.One2many(
         "spp.event.livestock.farming.tech",
         "livestock_farming_id",
         string="Livestock Farming (Technologies)",
     )
+
+    def get_view_id(self):
+        """
+        This retrieves the View ID of this model
+        """
+        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
 
 
 class OpenSPPEventDataLivestockFarmingCost(models.Model):
@@ -40,8 +46,13 @@ class OpenSPPEventDataLivestockFarmingCost(models.Model):
     total_cost = fields.Float("Total Cost (a)")
     farmgate_price = fields.Float()
     gross_income = fields.Float("Gross Income from the Sales (b)")
-    net_income = fields.Float("Net Income (c)=(b)-(a)")
+    net_income = fields.Float("Net Income (c)=(b)-(a)", compute="_compute_net_income")
     nb_head = fields.Integer("Nb. Head")
+
+    def _compute_net_income(self):
+        for rec in self:
+            net_income = rec.gross_income - rec.total_cost
+            rec.net_income = net_income
 
 
 class OpenSPPEventDataLivestockFarmingTech(models.Model):

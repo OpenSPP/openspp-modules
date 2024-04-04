@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_livestock_farming_form_view" model="ir.ui.view">
+        <field name="name">create_event_livestock_farming_form_view</field>
+        <field name="model">spp.create.event.livestock.farming.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <notebook>
+                        <page string="Production cost" name="production_cost">
+                            <field name="livestock_cost_ids">
+                                <tree editable="bottom">
+                                    <field name="livestock_farming_id" invisible="1" />
+                                    <field name="livestock_id" />
+                                    <field name="labor_input_days" />
+                                    <field name="purchase_baby_animal" />
+                                    <field name="feed" />
+                                    <field name="medicine" />
+                                    <field name="electricity_water" />
+                                    <field name="facility_machinery" />
+                                    <field name="labor_cost" />
+                                    <field name="oth_fees" />
+                                    <field name="oth_specify" />
+                                    <field name="total_cost" />
+                                    <field name="farmgate_price" />
+                                    <field name="gross_income" />
+                                    <field name="net_income" />
+                                    <field name="nb_head" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Technologies/techniques" name="technologies">
+                            <field name="livestock_tech_ids">
+                                <tree editable="bottom">
+                                    <field name="livestock_farming_id" invisible="1" />
+                                    <field name="livestock_id" />
+                                    <field name="organic_fertilizer" />
+                                    <field name="hybrid_species" />
+                                    <field name="concentrated_feed" />
+                                    <field name="grass_planting_forage" />
+                                    <field name="vaccination" />
+                                    <field name="antibiotics" />
+                                    <field name="growth_hormone" />
+                                    <field name="other_disinfect" />
+                                    <field name="shed_livestock" />
+                                    <field name="other" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <field name="event_id" invisible="1" />
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
