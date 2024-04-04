@@ -1,0 +1,91 @@
+{
+  "@context": {
+    "OpenG2PRegistryVerifiableCredential": {
+      "@id": "https://openg2p.org/credential#OpenG2PRegistryVerifiableCredential",
+      "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        {
+          "@vocab": "https://openg2p.org/credential#OpenG2PRegistryVerifiableCredential#",
+          "credentialSubject": {
+            "@id": "credentialSubject",
+            "@type": "@id",
+            "@context": {
+              "@vocab": "https://openg2p.org/credential#OpenG2PRegistryVerifiableCredential#credentialSubject#",
+              "name": {
+                "@id": "name",
+                "@type": "@id",
+                "@context": {
+                  "value": "@value",
+                  "language": "@language"
+                }
+              },
+              "fullName": {
+                "@id": "fullName",
+                "@type": "@id",
+                "@context": {
+                  "value": "@value",
+                  "language": "@language"
+                }
+              },
+              "gender": {
+                "@id": "gender",
+                "@type": "@id",
+                "@context": {
+                  "value": "@value",
+                  "language": "@language"
+                }
+              },
+              "dateOfBirth": "dateOfBirth",
+              "email": "email",
+              "phone": "phone",
+              "addressLine1": {
+                "@id": "addressLine1",
+                "@type": "@id",
+                "@context": {
+                  "value": "@value",
+                  "language": "@language"
+                }
+              },
+              "addressLine2": {
+                "@id": "addressLine2",
+                "@type": "@id",
+                "@context": {
+                  "value": "@value",
+                  "language": "@language"
+                }
+              },
+              "addressLine3": {
+                "@id": "addressLine3",
+                "@type": "@id",
+                "@context": {
+                  "value": "@value",
+                  "language": "@language"
+                }
+              },
+              "province": {
+                "@id": "province",
+                "@type": "@id",
+                "@context": {
+                  "value": "@value",
+                  "language": "@language"
+                }
+              },
+              "region": {
+                "@id": "region",
+                "@type": "@id",
+                "@context": {
+                  "value": "@value",
+                  "language": "@language"
+                }
+              },
+              "postalCode": "postalCode",
+              "face": "face",
+              "vcVer": "vcVer",
+              "UIN": "UIN"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
