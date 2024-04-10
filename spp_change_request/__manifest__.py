@@ -23,6 +23,7 @@
         "spp_service_points",
         "spp_area",
         "spp_scan_id_document",
+        "spp_dms",
         # "dms_field",
     ],
     "data": [
@@ -56,6 +57,3 @@
     "installable": True,
     "auto_install": False,
 }
-
-# "spp_idqueue",
-# "spp_event_data",
