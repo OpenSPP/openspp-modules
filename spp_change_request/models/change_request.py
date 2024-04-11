@@ -680,8 +680,7 @@ class ChangeRequestBase(models.Model):
                 # Set the request_type_ref_id
                 res_model = rec.request_type
                 # Set the dms directory
-                _logger.info("Change Request: DMS Directory Creation (%s)" % len(self.dms_directory_ids))
-                self.env.ref(self.env[res_model].DMS_STORAGE)
+                _logger.info("Change Request: DMS Directory Creation (%s)" % len(rec.dms_directory_ids))
                 dmsval = {
                     "is_root_directory": True,
                     "name": rec.name,
@@ -935,8 +934,8 @@ class ChangeRequestBase(models.Model):
 
                 validation_stages = (
                     rec.request_type_ref_id.validation_ids
-                    # if rec.request_type_ref_id and rec.request_type_ref_id.validation_ids
-                    # else self.env["validation.model"].browse()
+                    if rec.request_type_ref_id and rec.request_type_ref_id.validation_ids
+                    else self.env["spp.change.request.validation.sequence"].browse()
                 )  # Replace 'validation.model' with the actual model name
 
                 # Filter validation_stages based on validation_stage_ids, if any

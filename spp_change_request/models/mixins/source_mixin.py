@@ -35,9 +35,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     _description = "Change Request Data Source Mixin"
     _rec_name = "change_request_id"
 
-    REQUIRED_DOCUMENT_TYPE = []  # List of required document category `dms.category`
+    REQUIRED_DOCUMENT_TYPE = []  # List of required document category `spp.dms.category`
     VALIDATION_FORM = None
-    DMS_STORAGE = None
     AUTO_APPLY_CHANGES = True
 
     registrant_id = fields.Many2one("res.partner", "Registrant", domain=[("is_registrant", "=", True)])
@@ -814,13 +813,13 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     "view_mode": "form",
                     "view_id": form_id,
                     "view_type": "form",
-                    "res_model": "dms.file",
+                    "res_model": "spp.dms.file",
                     "target": "new",
                     "context": dms_context,
                 }
                 if self.env.context.get("category_id"):
                     category_id = self.env.context.get("category_id")
-                    category = self.env["dms.category"].search([("id", "=", category_id)])
+                    category = self.env["spp.dms.category"].search([("id", "=", category_id)])
                     if category:
                         dms_context.update(
                             {

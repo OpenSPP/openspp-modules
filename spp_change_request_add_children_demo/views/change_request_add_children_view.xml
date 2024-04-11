@@ -224,23 +224,23 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Attachments" invisible="1">
+                        <page string="Attachments">
                             <!-- Attachment UI -->
                             <header invisible="state != 'draft'">
-                                <!-- <button
+                                <button
                                     name="action_attach_documents"
                                     type="object"
                                     string="Request Form"
                                     class="btn-primary"
                                     context="{'category_id':%(spp_dms_add_children)d}"
                                     style="margin-left: 10px;"
-                                /> -->
+                                />
                                 <button
                                     name="action_attach_documents"
                                     type="object"
                                     string="Birth Certificate"
                                     class="btn-primary"
-                                    context="{'category_id':%(spp_dms_birth_certificate)d}"
+                                    context="{'category_id':%(spp_change_request.spp_dms_birth_certificate)d}"
                                     style="margin-left: 10px;"
                                 />
                                 <button

@@ -4,7 +4,23 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo noupdate="0">
 
-    <!-- Parent Category -->
+    <!-- Common Categories -->
+    <record id="spp_dms_birth_certificate" model="spp.dms.category">
+        <field name="name">Birth Certificate</field>
+    </record>
+
+    <record id="spp_dms_applicant_uid_card" model="spp.dms.category">
+        <field name="name">Applicant UID Card</field>
+    </record>
+
+    <record id="spp_dms_custody_certificate" model="spp.dms.category">
+        <field name="name">Custody Certificate</field>
+    </record>
+
+    <record id="spp_dms_uid_card" model="spp.dms.category">
+        <field name="name">UID Card</field>
+    </record>
+
     <record id="pds_dms_extra_documents" model="spp.dms.category">
         <field name="name">Extra Documents</field>
     </record>
