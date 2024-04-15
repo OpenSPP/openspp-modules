@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_spp_gis_api_client_credential,SPP GIS API Client Credential Access,model_spp_gis_api_client_credential,spp_base_gis.group_gis_admin,1,1,1,1

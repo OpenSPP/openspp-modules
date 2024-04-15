@@ -88,7 +88,7 @@ class GisApiClientCredential(models.Model):
 
         if not self.show_button_clicked:
             action = self.env[self._name].get_formview_action()
-            form_id = self.env.ref("spp_base_gis.spp_gis_api_client_credential_view_credentials").id
+            form_id = self.env.ref("spp_base_gis_rest.spp_gis_api_client_credential_view_credentials").id
 
             action.update(
                 {
