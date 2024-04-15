@@ -25,15 +25,23 @@ ALLOWED_SPATIAL_RELATION = [
 
 def is_valid_coordinates(latitude, longitude):
     """
-    Check if the given latitude and longitude are valid.
+    Checks if the provided latitude and longitude values are valid.
+
+    This function checks if the latitude and longitude are of type int or float,
+    and if they fall within the valid range for geographical coordinates.
+    The valid range for latitude is -90 to 90 (inclusive), and for longitude is -180 to 180 (inclusive).
 
     Parameters:
-    - latitude (float): The latitude to check.
-    - longitude (float): The longitude to check.
+    latitude (int, float): The latitude value to check. Should be a number between -90 and 90.
+    longitude (int, float): The longitude value to check. Should be a number between -180 and 180.
 
     Returns:
-    - bool: True if the coordinates are valid, False otherwise.
+    bool: True if the latitude and longitude are valid, False otherwise.
     """
+
+    if not isinstance(latitude, int | float) or not isinstance(longitude, int | float):
+        return False
+
     # Check latitude
     if latitude < -90 or latitude > 90:
         return False
@@ -270,6 +278,11 @@ class Base(models.AbstractModel):
             raise UserError(_("Invalid layer type %s") % layer_type)
         if spatial_relation not in ALLOWED_SPATIAL_RELATION:
             raise UserError(_("Invalid spatial relation %s") % spatial_relation)
+        if distance:
+            if not isinstance(distance, int | float):
+                raise UserError(_("Distance must be a number"))
+            if distance <= 0:
+                raise UserError(_("Distance must be a positive number"))
 
         layer_type = self.get_field_type_from_layer_type(layer_type)
 
@@ -305,13 +318,14 @@ class Base(models.AbstractModel):
         """
         features = []
         for rec in self:
-            feature = {
-                "type": "Feature",
-                "geometry": rec.shape_to_geojson(getattr(rec, field_name)),
-                "properties": {
-                    "name": rec.name,
-                    # TODO: Add more properties
-                },
-            }
-            features.append(feature)
+            if hasattr(rec, field_name) and (geo_shape := getattr(rec, field_name)):
+                feature = {
+                    "type": "Feature",
+                    "geometry": rec.shape_to_geojson(geo_shape),
+                    "properties": {
+                        "name": rec.name,
+                        # TODO: Add more properties
+                    },
+                }
+                features.append(feature)
         return features
