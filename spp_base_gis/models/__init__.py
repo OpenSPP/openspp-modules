@@ -6,3 +6,4 @@ from . import raster_layer_type
 from . import data_layer
 from . import ir_view
 from . import ir_model
+from . import gis_test_model
