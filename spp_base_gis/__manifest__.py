@@ -9,7 +9,7 @@
     "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["base", "web", "contacts"],
+    "depends": ["base", "web", "contacts", "spp_oauth"],
     "external_dependencies": {"python": ["shapely", "pyproj", "geojson"]},
     "data": [
         "security/security.xml",
@@ -18,6 +18,7 @@
         "views/ir_view_view.xml",
         "views/raster_layer_view.xml",
         "views/data_layer_view.xml",
+        "views/api_client_credentials_view.xml",
     ],
     "assets": {
         "web.assets_backend": [

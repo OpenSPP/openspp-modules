@@ -1,11 +1,49 @@
 import logging
 
+from shapely.geometry import mapping
+
 from odoo import _, api, models
 from odoo.exceptions import MissingError, UserError
 
 from .. import fields as geo_fields
+from ..operators import Operator
 
 _logger = logging.getLogger(__name__)
+
+ALLOWED_LAYER_TYPE = [
+    "point",
+    "line",
+    "polygon",
+]
+
+ALLOWED_SPATIAL_RELATION = [
+    "intersects",
+    "within",
+    "contains",
+]
+
+
+def is_valid_coordinates(latitude, longitude):
+    """
+    Check if the given latitude and longitude are valid.
+
+    Parameters:
+    - latitude (float): The latitude to check.
+    - longitude (float): The longitude to check.
+
+    Returns:
+    - bool: True if the coordinates are valid, False otherwise.
+    """
+    # Check latitude
+    if latitude < -90 or latitude > 90:
+        return False
+
+    # Check longitude
+    if longitude < -180 or longitude > 180:
+        return False
+
+    # If both checks pass, the coordinates are valid
+    return True
 
 
 class Base(models.AbstractModel):
@@ -93,3 +131,187 @@ class Base(models.AbstractModel):
             "default_zoom": view.default_zoom,
             "default_center": view.default_center,
         }
+
+    @api.model
+    def get_fields_of_type(self, field_type: str | list) -> list:
+        """
+        This Python function retrieves fields of a specified type from a model object.
+
+        :param field_type: The `field_type` parameter in the `get_fields_of_type` method can be either a
+        string or a list of strings. The method filters fields based on their type, which is specified
+        by the `field_type` parameter. If `field_type` is a string, the method will return a
+        :type field_type: str | list
+        :return: The `get_fields_of_type` method returns a list of fields from the model that match the
+        specified field type or types.
+        """
+
+        # Get the model
+        model = self.env[self._name].sudo()
+
+        # Filter fields by type
+        if isinstance(field_type, str):
+            fields = [field for field in model._fields.values() if field.type == field_type]
+        elif isinstance(field_type, list):
+            fields = [field for field in model._fields.values() if field.type in field_type]
+        else:
+            raise ValueError(_("Invalid field type: %s") % field_type)
+
+        return fields
+
+    @api.model
+    def shape_to_geojson(self, shape):
+        """
+        The function `shape_to_geojson` converts a shape object to a GeoJSON format using the `mapping`
+        function.
+
+        :param shape: The `shape` parameter in the `shape_to_geojson` function is typically a geometric
+        shape object, such as a Point, LineString, Polygon, etc., from a library like Shapely in Python.
+        The `mapping` function is used to convert these geometric shapes into GeoJSON format,
+        :return: The function `shape_to_geojson` is returning the GeoJSON representation of the input
+        `shape` object by using the `mapping` function.
+        """
+        return mapping(shape)
+
+    @api.model
+    def convert_feature_to_featurecollection(self, features: list) -> dict:
+        """
+        The function `convert_feature_to_featurecollection` converts a list of features into a GeoJSON
+        FeatureCollection.
+
+        :param features: The `features` parameter in the `convert_feature_to_featurecollection` function
+        is expected to be a list of feature objects. These feature objects typically represent
+        geographic features and are structured in a specific format, such as GeoJSON format. The
+        function takes this list of features and wraps them in a GeoJSON
+        :type features: list
+        :return: A dictionary is being returned with the keys "type" and "features". The value of the
+        "type" key is set to "FeatureCollection", and the value of the "features" key is set to the
+        input parameter `features`, which is a list of features.
+        """
+        return {
+            "type": "FeatureCollection",
+            "features": features,
+        }
+
+    @api.model
+    def get_field_type_from_layer_type(self, layer_type):
+        """
+        The function `get_field_type_from_layer_type` maps layer types to corresponding field types for
+        geographic data.
+
+        :param layer_type: The `layer_type` parameter is a string that represents the type of geographic
+        layer, such as "point", "line", or "polygon". The function `get_field_type_from_layer_type`
+        takes this `layer_type` as input and returns a corresponding field type, such as "geo_point",
+        :return: The function `get_field_type_from_layer_type` takes a `layer_type` as input and returns
+        the corresponding field type based on the layer type. If the `layer_type` is "point", it returns
+        "geo_point". If the `layer_type` is "line", it returns "geo_line". If the `layer_type` is
+        "polygon", it returns "geo_polygon". If the
+        """
+        if layer_type == "point":
+            return "geo_point"
+        elif layer_type == "line":
+            return "geo_line"
+        elif layer_type == "polygon":
+            return "geo_polygon"
+        else:
+            raise UserError(_("Invalid layer type %s") % layer_type)
+
+    @api.model
+    def raw_postgis_sql_query(self, postgis_query):
+        """
+        The function `raw_postgis_sql_query` executes a raw PostGIS SQL query on a specified table and
+        returns the results.
+
+        :param postgis_query: The `postgis_query` parameter in the `raw_postgis_sql_query` method is
+        expected to be a PostGIS query that will be used in the `WHERE` clause of the SQL query
+        constructed within the method. This query should be a valid PostGIS query that filters the
+        records in the database
+        :return: The method `raw_postgis_sql_query` is returning the result of the SQL query executed on
+        the database using the provided `postgis_query`. The method executes the query using
+        `self.env.cr.execute(query)` and then fetches all the results using `self.env.cr.fetchall()`.
+        The method will return a list of tuples where each tuple represents a row of the result set.
+        """
+        query = f"SELECT id FROM {self._table} WHERE {postgis_query}"
+        self.env.cr.execute(query)
+        return self.env.cr.fetchall()
+
+    @api.model
+    def gis_locational_query(
+        self, longitude: float, latitude: float, layer_type="polygon", spatial_relation="intersects", distance=None
+    ):
+        """
+        The function `gis_locational_query` performs a spatial query based on given coordinates, layer
+        type, and spatial relation.
+
+        :param longitude: The `longitude` parameter in the `gis_locational_query` function is used to
+        specify the longitude coordinate of the location for which you want to perform a spatial query.
+        It is a floating-point number representing the east-west position on the Earth's surface
+        :type longitude: float
+        :param latitude: Latitude is a geographic coordinate that specifies the north-south position of
+        a point on the Earth's surface. It is measured in degrees ranging from -90 degrees (South Pole)
+        to +90 degrees (North Pole)
+        :type latitude: float
+        :param layer_type: Layer type specifies the type of geographic layer being queried, such as
+        "polygon", "point", or "line", defaults to polygon (optional)
+        :param spatial_relation: The `spatial_relation` parameter in the `gis_locational_query` function
+        determines the spatial relationship used in the query to filter the results. It specifies how
+        the provided longitude and latitude coordinates should relate to the geometries in the spatial
+        layer being queried, defaults to intersects (optional)
+        :param distance: The `distance` parameter in the `gis_locational_query` function is used to
+        specify a distance in meters for spatial queries. This parameter allows you to search for
+        features within a certain radius of the specified longitude and latitude coordinates. If a
+        distance is provided, the function will consider this distance when querying
+        :return: The function `gis_locational_query` returns a GeoJSON FeatureCollection containing
+        features that match the specified criteria based on the input longitude, latitude, layer type,
+        spatial relation, and distance.
+        """
+        if not is_valid_coordinates(latitude, longitude):
+            raise UserError(_("Invalid coordinates: latitude=%s, longitude=%s") % (latitude, longitude))
+        if layer_type not in ALLOWED_LAYER_TYPE:
+            raise UserError(_("Invalid layer type %s") % layer_type)
+        if spatial_relation not in ALLOWED_SPATIAL_RELATION:
+            raise UserError(_("Invalid spatial relation %s") % spatial_relation)
+
+        layer_type = self.get_field_type_from_layer_type(layer_type)
+
+        fields = self.get_fields_of_type(layer_type)
+
+        features = []
+
+        for field in fields:
+            operator = Operator(field)
+            postgis_query = operator.get_postgis_query(spatial_relation, longitude, latitude, distance=distance)
+            result = self.raw_postgis_sql_query(postgis_query)
+            if result:
+                result = [item[0] for item in result]
+                records = self.browse(result)
+                features.extend(records.get_feature(field.name))
+
+        return self.convert_feature_to_featurecollection(features)
+
+    def get_feature(self, field_name):
+        """
+        The function `get_feature` generates a list of features with specified properties for each
+        record in a dataset.
+
+        :param field_name: The `field_name` parameter in the `get_feature` method is used to specify the
+        name of the field in the record object from which the geometry data will be extracted. This
+        field name is dynamically retrieved using `getattr(rec, field_name)` within the method to get
+        the geometry data for each record
+        :return: The `get_feature` method returns a list of features, where each feature is a dictionary
+        containing information about a record in the dataset. Each feature has a "type" key with the
+        value "Feature", a "geometry" key with the geojson representation of the record's shape based on
+        the specified field name, and a "properties" key with additional information such as the
+        record's name.
+        """
+        features = []
+        for rec in self:
+            feature = {
+                "type": "Feature",
+                "geometry": rec.shape_to_geojson(getattr(rec, field_name)),
+                "properties": {
+                    "name": rec.name,
+                    # TODO: Add more properties
+                },
+            }
+            features.append(feature)
+        return features

@@ -1,7 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-from . import models
 from . import controllers
+from . import models
 from . import fields
+from . import operators
 
 from odoo import _
 from odoo.exceptions import MissingError
