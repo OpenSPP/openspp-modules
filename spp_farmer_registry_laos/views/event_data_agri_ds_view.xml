@@ -25,7 +25,7 @@
                         <page string="Crops produced in Cold DS" name="crops_produce">
                             <field name="agri_prod_ids">
                                 <tree editable="bottom">
-                                    <field name="agri_ds_id" invisible="1" />
+                                    <field name="agri_ds_id" column_invisible="1" />
                                     <field name="crop_id" />
                                     <field name="harvest_area" />
                                     <field name="harvest_amt_kg" />
@@ -40,7 +40,7 @@
                         <page string="Production cost per crop in Cold DS" name="production_cost">
                             <field name="agri_cost_ids">
                                 <tree editable="bottom">
-                                    <field name="agri_ds_id" invisible="1" />
+                                    <field name="agri_ds_id" column_invisible="1" />
                                     <field name="crop_id" />
                                     <field name="labor_input_days" />
                                     <field name="preparation_farmland" />
@@ -62,7 +62,7 @@
                         >
                             <field name="agri_tech_ids">
                                 <tree editable="bottom">
-                                    <field name="agri_ds_id" invisible="1" />
+                                    <field name="agri_ds_id" column_invisible="1" />
                                     <field name="crop_id" />
                                     <field name="organic_fertilizer" />
                                     <field name="greenhouse" />
@@ -101,6 +101,176 @@
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_spp_event_agri_ds_form" />
         <field name="act_window_id" ref="action_spp_event_agri_ds" />
+    </record>
+
+    <record id="view_farmer_groups_agri_ds_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_agri_ds_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page
+                    name="x_agri_ds"
+                    string="X. Agricultural Production, Sales, Cost and Technologies During Cold DS"
+                >
+                    <div class="row mt16 o_settings_container" name="x_container_0">
+                        <div class="col-4 o_setting_box" name="x_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="x_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="x_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Crops produced in Cold DS" name="x_crops_produce">
+                            <field name="x_agri_prod_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_ds_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="harvest_area" />
+                                    <field name="harvest_amt_kg" />
+                                    <field name="sales_qty_kg" />
+                                    <field name="sales_price_lak_kg" />
+                                    <field name="sales_value" />
+                                    <field name="contract_farming" />
+                                    <field name="partner_name" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Production cost per crop in Cold DS" name="x_production_cost">
+                            <field name="x_agri_cost_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_ds_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="labor_input_days" />
+                                    <field name="preparation_farmland" />
+                                    <field name="seeds" />
+                                    <field name="labor_cost" />
+                                    <field name="fertilizer" />
+                                    <field name="pesticide" />
+                                    <field name="herbicide_oth" />
+                                    <field name="water_fee" />
+                                    <field name="total_equipment" />
+                                    <field name="oth_fees" />
+                                    <field name="total_prod_cost" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page
+                            string="Technologies/techniques applied for crop production in Cold DS"
+                            name="x_technologies"
+                        >
+                            <field name="x_agri_tech_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_ds_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="organic_fertilizer" />
+                                    <field name="greenhouse" />
+                                    <field name="multing" />
+                                    <field name="irrigation" />
+                                    <field name="water_pump" />
+                                    <field name="drip_irrigation" />
+                                    <field name="sprinkler" />
+                                    <field name="machine_harvest" />
+                                    <field name="dry_processing" />
+                                    <field name="post_harvest_treatment" />
+                                    <field name="other" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_agri_ds_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_agri_ds_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page
+                    name="x_agri_ds"
+                    string="X. Agricultural Production, Sales, Cost and Technologies During Cold DS"
+                >
+                    <div class="row mt16 o_settings_container" name="x_container_0">
+                        <div class="col-4 o_setting_box" name="x_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="x_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="x_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Crops produced in Cold DS" name="x_crops_produce">
+                            <field name="x_agri_prod_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_ds_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="harvest_area" />
+                                    <field name="harvest_amt_kg" />
+                                    <field name="sales_qty_kg" />
+                                    <field name="sales_price_lak_kg" />
+                                    <field name="sales_value" />
+                                    <field name="contract_farming" />
+                                    <field name="partner_name" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Production cost per crop in Cold DS" name="x_production_cost">
+                            <field name="x_agri_cost_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_ds_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="labor_input_days" />
+                                    <field name="preparation_farmland" />
+                                    <field name="seeds" />
+                                    <field name="labor_cost" />
+                                    <field name="fertilizer" />
+                                    <field name="pesticide" />
+                                    <field name="herbicide_oth" />
+                                    <field name="water_fee" />
+                                    <field name="total_equipment" />
+                                    <field name="oth_fees" />
+                                    <field name="total_prod_cost" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page
+                            string="Technologies/techniques applied for crop production in Cold DS"
+                            name="x_technologies"
+                        >
+                            <field name="x_agri_tech_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_ds_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="organic_fertilizer" />
+                                    <field name="greenhouse" />
+                                    <field name="multing" />
+                                    <field name="irrigation" />
+                                    <field name="water_pump" />
+                                    <field name="drip_irrigation" />
+                                    <field name="sprinkler" />
+                                    <field name="machine_harvest" />
+                                    <field name="dry_processing" />
+                                    <field name="post_harvest_treatment" />
+                                    <field name="other" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
     </record>
 
   </odoo>

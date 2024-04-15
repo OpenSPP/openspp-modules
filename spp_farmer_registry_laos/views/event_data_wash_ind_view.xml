@@ -72,4 +72,116 @@
         <field name="act_window_id" ref="action_spp_event_wash_ind" />
     </record>
 
+    <record id="view_farmer_groups_wash_ind_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_wash_ind_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xv_wash_ind" string="XV. WASH Indicators">
+                    <div class="row mt16 o_settings_container" name="xv_container_0">
+                        <div class="col-4 o_setting_box" name="xv_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xv_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xv_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="xv_container_1">
+                        <div class="col-4 o_setting_box" name="xv_water_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xv_water_sources" />
+                                <div>
+                                </div>
+                                <field name="xv_water_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xv_latrine_condition">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xv_latrine_condition" />
+                                <div>
+                                </div>
+                                <field name="xv_latrine_condition" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xv_handwashing_facility">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xv_handwashing_facility" />
+                                <div>
+                                </div>
+                                <field name="xv_handwashing_facility" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_wash_ind_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_wash_ind_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xv_wash_ind" string="XV. WASH Indicators">
+                    <div class="row mt16 o_settings_container" name="xv_container_0">
+                        <div class="col-4 o_setting_box" name="xv_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xv_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xv_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="xv_container_1">
+                        <div class="col-4 o_setting_box" name="xv_water_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xv_water_sources" />
+                                <div>
+                                </div>
+                                <field name="xv_water_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xv_latrine_condition">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xv_latrine_condition" />
+                                <div>
+                                </div>
+                                <field name="xv_latrine_condition" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xv_handwashing_facility">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xv_handwashing_facility" />
+                                <div>
+                                </div>
+                                <field name="xv_handwashing_facility" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
   </odoo>

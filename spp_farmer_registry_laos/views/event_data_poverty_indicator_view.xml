@@ -130,4 +130,196 @@
         <field name="act_window_id" ref="action_spp_event_poverty_indicator" />
     </record>
 
+    <record id="view_farmer_groups_poverty_indicator_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_poverty_indicator_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="iii_poverty_indicator" string="III. Poverty Indicators">
+                    <div class="row mt16 o_settings_container" name="container_0">
+                        <div class="col-4 o_setting_box" name="iii_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="iii_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-4 o_setting_box" name="iii_type_of_housing">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_type_of_housing" />
+                                <div>
+                                </div>
+                                <field name="iii_type_of_housing" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_atleast_1household_member_completed_sch">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_atleast_1household_member_completed_sch" />
+                                <div>
+                                </div>
+                                <field name="iii_atleast_1household_member_completed_sch" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_there_are_children_attend_pri_sch">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_there_are_children_attend_pri_sch" />
+                                <div>
+                                </div>
+                                <field name="iii_there_are_children_attend_pri_sch" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_there_are_children_attend_mid_sch">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_there_are_children_attend_mid_sch" />
+                                <div>
+                                </div>
+                                <field name="iii_there_are_children_attend_mid_sch" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_access_to_electricity">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_access_to_electricity" />
+                                <div>
+                                </div>
+                                <field name="iii_access_to_electricity" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_access_to_basic_health_care">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_access_to_basic_health_care" />
+                                <div>
+                                </div>
+                                <field name="iii_access_to_basic_health_care" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_access_to_internet">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_access_to_internet" />
+                                <div>
+                                </div>
+                                <field name="iii_access_to_internet" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_poverty_indicator_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_poverty_indicator_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="iii_poverty_indicator" string="III. Poverty Indicators">
+                    <div class="row mt16 o_settings_container" name="container_0">
+                        <div class="col-4 o_setting_box" name="iii_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="iii_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-4 o_setting_box" name="iii_type_of_housing">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_type_of_housing" />
+                                <div>
+                                </div>
+                                <field name="iii_type_of_housing" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_atleast_1household_member_completed_sch">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_atleast_1household_member_completed_sch" />
+                                <div>
+                                </div>
+                                <field name="iii_atleast_1household_member_completed_sch" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_there_are_children_attend_pri_sch">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_there_are_children_attend_pri_sch" />
+                                <div>
+                                </div>
+                                <field name="iii_there_are_children_attend_pri_sch" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_there_are_children_attend_mid_sch">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_there_are_children_attend_mid_sch" />
+                                <div>
+                                </div>
+                                <field name="iii_there_are_children_attend_mid_sch" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_access_to_electricity">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_access_to_electricity" />
+                                <div>
+                                </div>
+                                <field name="iii_access_to_electricity" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_access_to_basic_health_care">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_access_to_basic_health_care" />
+                                <div>
+                                </div>
+                                <field name="iii_access_to_basic_health_care" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="iii_access_to_internet">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="iii_access_to_internet" />
+                                <div>
+                                </div>
+                                <field name="iii_access_to_internet" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
   </odoo>

@@ -132,4 +132,236 @@
         <field name="act_window_id" ref="action_spp_event_inc_non_agri" />
     </record>
 
+    <record id="view_farmer_groups_inc_non_agri_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_inc_non_agri_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xiv_inc_non_agri" string="XIV. Non-Agriculture Annual Income Sources (in LAK)">
+                    <div class="row mt16 o_settings_container" name="xiv_container_0">
+                        <div class="col-4 o_setting_box" name="xiv_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xiv_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="xiv_container_1">
+                        <div class="col-4 o_setting_box" name="xiv_salary">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_salary" />
+                                <div>
+                                </div>
+                                <field name="xiv_salary" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_wages">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_wages" />
+                                <div>
+                                </div>
+                                <field name="xiv_wages" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_handicraft">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_handicraft" />
+                                <div>
+                                </div>
+                                <field name="xiv_handicraft" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_ntfp">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_ntfp" />
+                                <div>
+                                </div>
+                                <field name="xiv_ntfp" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_remittance">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_remittance" />
+                                <div>
+                                </div>
+                                <field name="xiv_remittance" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_business">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_business" />
+                                <div>
+                                </div>
+                                <field name="xiv_business" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_land_lease">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_land_lease" />
+                                <div>
+                                </div>
+                                <field name="xiv_land_lease" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_other" />
+                                <div>
+                                </div>
+                                <field name="xiv_other" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_total">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_total" />
+                                <div>
+                                </div>
+                                <field name="xiv_total" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_inc_non_agri_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_inc_non_agri_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xiv_inc_non_agri" string="XIV. Non-Agriculture Annual Income Sources (in LAK)">
+                    <div class="row mt16 o_settings_container" name="xiv_container_0">
+                        <div class="col-4 o_setting_box" name="xiv_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xiv_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="xiv_container_1">
+                        <div class="col-4 o_setting_box" name="xiv_salary">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_salary" />
+                                <div>
+                                </div>
+                                <field name="xiv_salary" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_wages">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_wages" />
+                                <div>
+                                </div>
+                                <field name="xiv_wages" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_handicraft">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_handicraft" />
+                                <div>
+                                </div>
+                                <field name="xiv_handicraft" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_ntfp">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_ntfp" />
+                                <div>
+                                </div>
+                                <field name="xiv_ntfp" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_remittance">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_remittance" />
+                                <div>
+                                </div>
+                                <field name="xiv_remittance" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_business">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_business" />
+                                <div>
+                                </div>
+                                <field name="xiv_business" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_land_lease">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_land_lease" />
+                                <div>
+                                </div>
+                                <field name="xiv_land_lease" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_other" />
+                                <div>
+                                </div>
+                                <field name="xiv_other" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiv_total">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiv_total" />
+                                <div>
+                                </div>
+                                <field name="xiv_total" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
   </odoo>

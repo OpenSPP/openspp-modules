@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class OpenSPPEventDataAgriculturalWS(models.Model):
@@ -64,3 +64,51 @@ class OpenSPPEventDataAgriculturalWSCost(models.Model):
     tool_equipment = fields.Integer()
     other_fees = fields.Integer()
     total_production = fields.Integer("Total Production Cost")
+
+
+class OpenSPPEventDataAgriculturalWSResPartner(models.Model):
+    _inherit = "res.partner"
+
+    active_event_agri_ws = fields.Many2one("spp.event.agri.ws", compute="_compute_active_event_agri_ws")
+
+    viii_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_agri_ws.survey_sched")
+    viii_agri_ws_produce_ids = fields.One2many(
+        "spp.event.agri.ws.produce", related="active_event_agri_ws.agri_ws_produce_ids", string="Crops produce"
+    )
+    viii_agri_ws_cost_ids = fields.One2many(
+        "spp.event.agri.ws.cost", related="active_event_agri_ws.agri_ws_cost_ids", string="Production cost per crop"
+    )
+    viii_experience_dryspell_flood = fields.Integer(
+        "Experience any dry spell / flood / hailstorm / storm during the WS 2022 cropping season",
+        related="active_event_agri_ws.experience_dryspell_flood",
+    )
+    viii_experience_dryspell_flood_dates = fields.Char(
+        "If yes, when?", related="active_event_agri_ws.experience_dryspell_flood_dates"
+    )
+    viii_experience_pest_disease_outbreak = fields.Integer(
+        "Experience any pest or disease outbreak on your farmland during the WS 2022 cropping season",
+        related="active_event_agri_ws.experience_pest_disease_outbreak",
+    )
+    viii_experience_pest_disease_outbreak_dates = fields.Char(
+        "If yes, when?", related="active_event_agri_ws.experience_pest_disease_outbreak_dates"
+    )
+    viii_experience_pest_disease_outbreak_type = fields.Char(
+        "Type of pest or disease", related="active_event_agri_ws.experience_pest_disease_outbreak_type"
+    )
+    viii_experience_pest_disease_outbreak_affected = fields.Char(
+        "Affected crops (crop's code)", related="active_event_agri_ws.experience_pest_disease_outbreak_affected"
+    )
+
+    @api.depends("event_data_ids")
+    def _compute_active_event_agri_ws(self):
+        """
+        This computes the active Agricultural Production and Costs During the WS event of the group
+        """
+        for rec in self:
+            event_data = rec._get_active_event_id("spp.event.agri.ws")
+            rec.active_event_agri_ws = None
+            if event_data:
+                event_data_res_id = self.env["spp.event.data"].search([("id", "=", event_data)], limit=1).res_id
+                rec.active_event_agri_ws = (
+                    self.env["spp.event.agri.ws"].search([("id", "=", event_data_res_id)], limit=1).id
+                )

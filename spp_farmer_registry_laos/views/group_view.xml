@@ -27,6 +27,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
+
             <xpath expr="//page[@name='relationships']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
@@ -52,6 +53,10 @@
                             <field name="target_year" width="20%" />
                         </tree>
                     </field>
+                </page>
+                <page name="pisca" string="PISCA BLS">
+                    <notebook>
+                    </notebook>
                 </page>
                 <page name="address_coordinates" string="Address Coordinates">
                     <field name="land_coordinates" />

@@ -382,4 +382,748 @@
         <field name="act_window_id" ref="action_spp_event_hh_resilience_index" />
     </record>
 
+    <record id="view_farmer_groups_hh_resilience_index_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_hh_resilience_index_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xvi_hh_resilience_index" string="XVI. Household Resilience Index">
+                    <div class="row mt16 o_settings_container" name="xvi_container_0">
+                        <div class="col-4 o_setting_box" name="xvi_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xvi_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="xvi_container_1">
+                        <div
+                            class="col-4 o_setting_box"
+                            name="xvi_village_engaged_in_flood_landslide_prevention"
+                        >
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_village_engaged_in_flood_landslide_prevention" />
+                                <div>
+                                </div>
+                                <field name="xvi_village_engaged_in_flood_landslide_prevention" />
+                            </div>
+                        </div>
+                        <div
+                            class="col-4 o_setting_box"
+                            name="xvi_experience_losses_due_to_floods_landslides"
+                        >
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_experience_losses_due_to_floods_landslides" />
+                                <div>
+                                </div>
+                                <field name="xvi_experience_losses_due_to_floods_landslides" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_significant_losses_48">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_significant_losses_48" />
+                                <div>
+                                </div>
+                                <field name="xvi_significant_losses_48" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_access_to_secure_water_source">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_access_to_secure_water_source" />
+                                <div>
+                                </div>
+                                <field name="xvi_access_to_secure_water_source" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_member_water_user_group">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_member_water_user_group" />
+                                <div>
+                                </div>
+                                <field name="xvi_member_water_user_group" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_score_49">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_score_49" />
+                                <div>
+                                </div>
+                                <field name="xvi_score_49" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_exp_loss_crops_due_no_access_water">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_exp_loss_crops_due_no_access_water" />
+                                <div>
+                                </div>
+                                <field name="xvi_exp_loss_crops_due_no_access_water" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_significant_losses_49">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_significant_losses_49" />
+                                <div>
+                                </div>
+                                <field name="xvi_significant_losses_49" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_access_services_diversification">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_access_services_diversification" />
+                                <div>
+                                </div>
+                                <field name="xvi_access_services_diversification" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_adopted_new_techniques">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_adopted_new_techniques" />
+                                <div>
+                                </div>
+                                <field name="xvi_adopted_new_techniques" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_score_50">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_score_50" />
+                                <div>
+                                </div>
+                                <field name="xvi_score_50" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_ben_part_prod_grp">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_ben_part_prod_grp" />
+                                <div>
+                                </div>
+                                <field name="xvi_ben_part_prod_grp" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_grow_veg_oth">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_grow_veg_oth" />
+                                <div>
+                                </div>
+                                <field name="xvi_grow_veg_oth" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_hh_members_eat_veg">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_hh_members_eat_veg" />
+                                <div>
+                                </div>
+                                <field name="xvi_hh_members_eat_veg" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_part_training_nutr_food">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_part_training_nutr_food" />
+                                <div>
+                                </div>
+                                <field name="xvi_part_training_nutr_food" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_intro_health_food_meal">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_intro_health_food_meal" />
+                                <div>
+                                </div>
+                                <field name="xvi_intro_health_food_meal" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_score_53">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_score_53" />
+                                <div>
+                                </div>
+                                <field name="xvi_score_53" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_eat_animal_protein">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_eat_animal_protein" />
+                                <div>
+                                </div>
+                                <field name="xvi_eat_animal_protein" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_2_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_2_sources" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_2_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_sale_crop_livestock">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_sale_crop_livestock" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_sale_crop_livestock" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_processing_trading">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_processing_trading" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_processing_trading" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_employment">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_employment" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_employment" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_own_business">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_own_business" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_own_business" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_other" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_other" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_other_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_other_sources" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_other_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_support_2_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_support_2_sources" />
+                                <div>
+                                </div>
+                                <field name="xvi_support_2_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_src_savings">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_src_savings" />
+                                <div>
+                                </div>
+                                <field name="xvi_src_savings" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_src_asset_livestock_sell">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_src_asset_livestock_sell" />
+                                <div>
+                                </div>
+                                <field name="xvi_src_asset_livestock_sell" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_src_village_rice_bank">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_src_village_rice_bank" />
+                                <div>
+                                </div>
+                                <field name="xvi_src_village_rice_bank" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_src_other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_src_other" />
+                                <div>
+                                </div>
+                                <field name="xvi_src_other" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_src_other_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_src_other_sources" />
+                                <div>
+                                </div>
+                                <field name="xvi_src_other_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_ability_to_cope">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_ability_to_cope" />
+                                <div>
+                                </div>
+                                <field name="xvi_ability_to_cope" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_comm_engage_contract_farming">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_comm_engage_contract_farming" />
+                                <div>
+                                </div>
+                                <field name="xvi_comm_engage_contract_farming" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_issue_sell_prod">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_issue_sell_prod" />
+                                <div>
+                                </div>
+                                <field name="xvi_issue_sell_prod" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_hh_resilience_index_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_hh_resilience_index_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xvi_hh_resilience_index" string="XVI. Household Resilience Index">
+                    <div class="row mt16 o_settings_container" name="xvi_container_0">
+                        <div class="col-4 o_setting_box" name="xvi_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xvi_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="xvi_container_1">
+                        <div
+                            class="col-4 o_setting_box"
+                            name="xvi_village_engaged_in_flood_landslide_prevention"
+                        >
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_village_engaged_in_flood_landslide_prevention" />
+                                <div>
+                                </div>
+                                <field name="xvi_village_engaged_in_flood_landslide_prevention" />
+                            </div>
+                        </div>
+                        <div
+                            class="col-4 o_setting_box"
+                            name="xvi_experience_losses_due_to_floods_landslides"
+                        >
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_experience_losses_due_to_floods_landslides" />
+                                <div>
+                                </div>
+                                <field name="xvi_experience_losses_due_to_floods_landslides" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_significant_losses_48">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_significant_losses_48" />
+                                <div>
+                                </div>
+                                <field name="xvi_significant_losses_48" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_access_to_secure_water_source">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_access_to_secure_water_source" />
+                                <div>
+                                </div>
+                                <field name="xvi_access_to_secure_water_source" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_member_water_user_group">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_member_water_user_group" />
+                                <div>
+                                </div>
+                                <field name="xvi_member_water_user_group" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_score_49">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_score_49" />
+                                <div>
+                                </div>
+                                <field name="xvi_score_49" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_exp_loss_crops_due_no_access_water">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_exp_loss_crops_due_no_access_water" />
+                                <div>
+                                </div>
+                                <field name="xvi_exp_loss_crops_due_no_access_water" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_significant_losses_49">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_significant_losses_49" />
+                                <div>
+                                </div>
+                                <field name="xvi_significant_losses_49" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_access_services_diversification">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_access_services_diversification" />
+                                <div>
+                                </div>
+                                <field name="xvi_access_services_diversification" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_adopted_new_techniques">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_adopted_new_techniques" />
+                                <div>
+                                </div>
+                                <field name="xvi_adopted_new_techniques" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_score_50">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_score_50" />
+                                <div>
+                                </div>
+                                <field name="xvi_score_50" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_ben_part_prod_grp">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_ben_part_prod_grp" />
+                                <div>
+                                </div>
+                                <field name="xvi_ben_part_prod_grp" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_grow_veg_oth">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_grow_veg_oth" />
+                                <div>
+                                </div>
+                                <field name="xvi_grow_veg_oth" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_hh_members_eat_veg">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_hh_members_eat_veg" />
+                                <div>
+                                </div>
+                                <field name="xvi_hh_members_eat_veg" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_part_training_nutr_food">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_part_training_nutr_food" />
+                                <div>
+                                </div>
+                                <field name="xvi_part_training_nutr_food" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_intro_health_food_meal">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_intro_health_food_meal" />
+                                <div>
+                                </div>
+                                <field name="xvi_intro_health_food_meal" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_score_53">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_score_53" />
+                                <div>
+                                </div>
+                                <field name="xvi_score_53" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_eat_animal_protein">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_eat_animal_protein" />
+                                <div>
+                                </div>
+                                <field name="xvi_eat_animal_protein" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_2_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_2_sources" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_2_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_sale_crop_livestock">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_sale_crop_livestock" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_sale_crop_livestock" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_processing_trading">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_processing_trading" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_processing_trading" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_employment">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_employment" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_employment" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_own_business">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_own_business" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_own_business" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_other" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_other" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_inc_other_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_inc_other_sources" />
+                                <div>
+                                </div>
+                                <field name="xvi_inc_other_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_support_2_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_support_2_sources" />
+                                <div>
+                                </div>
+                                <field name="xvi_support_2_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_src_savings">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_src_savings" />
+                                <div>
+                                </div>
+                                <field name="xvi_src_savings" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_src_asset_livestock_sell">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_src_asset_livestock_sell" />
+                                <div>
+                                </div>
+                                <field name="xvi_src_asset_livestock_sell" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_src_village_rice_bank">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_src_village_rice_bank" />
+                                <div>
+                                </div>
+                                <field name="xvi_src_village_rice_bank" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_src_other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_src_other" />
+                                <div>
+                                </div>
+                                <field name="xvi_src_other" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_src_other_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_src_other_sources" />
+                                <div>
+                                </div>
+                                <field name="xvi_src_other_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_ability_to_cope">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_ability_to_cope" />
+                                <div>
+                                </div>
+                                <field name="xvi_ability_to_cope" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_comm_engage_contract_farming">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_comm_engage_contract_farming" />
+                                <div>
+                                </div>
+                                <field name="xvi_comm_engage_contract_farming" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvi_issue_sell_prod">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvi_issue_sell_prod" />
+                                <div>
+                                </div>
+                                <field name="xvi_issue_sell_prod" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
   </odoo>

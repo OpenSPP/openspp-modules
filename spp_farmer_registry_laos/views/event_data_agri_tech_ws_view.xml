@@ -22,7 +22,7 @@
                         <page string="Agricultural Technologies" name="agri_tech">
                             <field name="agri_prod_sales_cost_tech_ids">
                                 <tree editable="bottom">
-                                    <field name="agri_prod_sales_cost_tech_id" invisible="1" />
+                                    <field name="agri_prod_sales_cost_tech_id" column_invisible="1" />
                                     <field name="crop_id" />
                                     <field name="org_felt_pest_herb" />
                                     <field name="greenhouse" />
@@ -59,6 +59,96 @@
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_spp_event_agri_tech_ws_form" />
         <field name="act_window_id" ref="action_spp_event_agri_tech_ws" />
+    </record>
+
+    <record id="view_farmer_groups_agri_tech_ws_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_agri_tech_ws_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="ix_agri_tech_ws" string="IX. Agricultural Technologies During the WS">
+                    <div class="row mt16 o_settings_container" name="ix_container_0">
+                        <div class="col-4 o_setting_box" name="ix_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="ix_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="ix_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Agricultural Technologies" name="ix_agri_tech">
+                            <field name="ix_agri_prod_sales_cost_tech_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_prod_sales_cost_tech_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="org_felt_pest_herb" />
+                                    <field name="greenhouse" />
+                                    <field name="multing" />
+                                    <field name="irrigation_normal" />
+                                    <field name="water_pump" />
+                                    <field name="drip_irrigation" />
+                                    <field name="sprinkler" />
+                                    <field name="machine_harvest" />
+                                    <field name="dry_processing" />
+                                    <field name="post_harvest_treatment" />
+                                    <field name="other" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_agri_tech_ws_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_agri_tech_ws_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="ix_agri_tech_ws" string="IX. Agricultural Technologies During the WS">
+                    <div class="row mt16 o_settings_container" name="ix_container_0">
+                        <div class="col-4 o_setting_box" name="ix_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="ix_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="ix_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Agricultural Technologies" name="ix_agri_tech">
+                            <field name="ix_agri_prod_sales_cost_tech_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_prod_sales_cost_tech_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="org_felt_pest_herb" />
+                                    <field name="greenhouse" />
+                                    <field name="multing" />
+                                    <field name="irrigation_normal" />
+                                    <field name="water_pump" />
+                                    <field name="drip_irrigation" />
+                                    <field name="sprinkler" />
+                                    <field name="machine_harvest" />
+                                    <field name="dry_processing" />
+                                    <field name="post_harvest_treatment" />
+                                    <field name="other" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
     </record>
 
   </odoo>

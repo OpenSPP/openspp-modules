@@ -22,7 +22,7 @@
                         <page string="Produced Crops" name="crops_produce">
                             <field name="crop_prod_ids">
                                 <tree editable="bottom">
-                                    <field name="crop_permanent_id" invisible="1" />
+                                    <field name="crop_permanent_id" column_invisible="1" />
                                     <field name="crop_id" />
                                     <field name="harvest_area" />
                                     <field name="harvest_amt_kg" />
@@ -37,7 +37,7 @@
                         <page string="Production Cost" name="production_cost">
                             <field name="crop_cost_ids">
                                 <tree editable="bottom">
-                                    <field name="crop_permanent_id" invisible="1" />
+                                    <field name="crop_permanent_id" column_invisible="1" />
                                     <field name="crop_id" />
                                     <field name="labor_input_days" />
                                     <field name="preparation_farmland" />
@@ -56,7 +56,7 @@
                         <page string="Technologies/techniques" name="technologies">
                             <field name="crop_tech_ids">
                                 <tree editable="bottom">
-                                    <field name="crop_permanent_id" invisible="1" />
+                                    <field name="crop_permanent_id" column_invisible="1" />
                                     <field name="crop_id" />
                                     <field name="organic_fertilizer" />
                                     <field name="greenhouse" />
@@ -93,6 +93,164 @@
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_spp_event_permanent_crops_form" />
         <field name="act_window_id" ref="action_spp_event_permanent_crops" />
+    </record>
+
+    <record id="view_farmer_groups_permanent_crops_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_permanent_crops_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xi_permanent_crops" string="XI. Permanent crops production">
+                    <div class="row mt16 o_settings_container" name="xib_container_0">
+                        <div class="col-4 o_setting_box" name="xib_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xib_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xib_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Produced Crops" name="xib_crops_produce">
+                            <field name="xib_crop_prod_ids">
+                                <tree editable="bottom">
+                                    <field name="crop_permanent_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="harvest_area" />
+                                    <field name="harvest_amt_kg" />
+                                    <field name="sales_qty_kg" />
+                                    <field name="sales_price_lak_kg" />
+                                    <field name="sales_value" />
+                                    <field name="contract_farming" />
+                                    <field name="partner_name" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Production Cost" name="xib_production_cost">
+                            <field name="xib_crop_cost_ids">
+                                <tree editable="bottom">
+                                    <field name="crop_permanent_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="labor_input_days" />
+                                    <field name="preparation_farmland" />
+                                    <field name="seeds" />
+                                    <field name="labor_cost" />
+                                    <field name="fertilizer" />
+                                    <field name="pesticide" />
+                                    <field name="herbicide_oth" />
+                                    <field name="water_fee" />
+                                    <field name="total_equipment" />
+                                    <field name="oth_fees" />
+                                    <field name="total_prod_cost" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Technologies/techniques" name="xib_technologies">
+                            <field name="xib_crop_tech_ids">
+                                <tree editable="bottom">
+                                    <field name="crop_permanent_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="organic_fertilizer" />
+                                    <field name="greenhouse" />
+                                    <field name="multing" />
+                                    <field name="irrigation" />
+                                    <field name="water_pump" />
+                                    <field name="drip_irrigation" />
+                                    <field name="sprinkler" />
+                                    <field name="machine_harvest" />
+                                    <field name="dry_processing" />
+                                    <field name="post_harvest_treatment" />
+                                    <field name="other" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_permanent_crops_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_permanent_crops_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xi_permanent_crops" string="XI. Permanent crops production">
+                    <div class="row mt16 o_settings_container" name="xib_container_0">
+                        <div class="col-4 o_setting_box" name="xib_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xib_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xib_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Produced Crops" name="xib_crops_produce">
+                            <field name="xib_crop_prod_ids">
+                                <tree editable="bottom">
+                                    <field name="crop_permanent_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="harvest_area" />
+                                    <field name="harvest_amt_kg" />
+                                    <field name="sales_qty_kg" />
+                                    <field name="sales_price_lak_kg" />
+                                    <field name="sales_value" />
+                                    <field name="contract_farming" />
+                                    <field name="partner_name" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Production Cost" name="xib_production_cost">
+                            <field name="xib_crop_cost_ids">
+                                <tree editable="bottom">
+                                    <field name="crop_permanent_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="labor_input_days" />
+                                    <field name="preparation_farmland" />
+                                    <field name="seeds" />
+                                    <field name="labor_cost" />
+                                    <field name="fertilizer" />
+                                    <field name="pesticide" />
+                                    <field name="herbicide_oth" />
+                                    <field name="water_fee" />
+                                    <field name="total_equipment" />
+                                    <field name="oth_fees" />
+                                    <field name="total_prod_cost" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Technologies/techniques" name="xib_technologies">
+                            <field name="xib_crop_tech_ids">
+                                <tree editable="bottom">
+                                    <field name="crop_permanent_id" column_invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="organic_fertilizer" />
+                                    <field name="greenhouse" />
+                                    <field name="multing" />
+                                    <field name="irrigation" />
+                                    <field name="water_pump" />
+                                    <field name="drip_irrigation" />
+                                    <field name="sprinkler" />
+                                    <field name="machine_harvest" />
+                                    <field name="dry_processing" />
+                                    <field name="post_harvest_treatment" />
+                                    <field name="other" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
     </record>
 
   </odoo>

@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class OpenSPPEventDataPermanentCrops(models.Model):
@@ -96,3 +96,44 @@ class OpenSPPEventDataPermanentCropsTech(models.Model):
         [("1", "Selected"), ("0", "Not Selected")], string="Post Harvest Treatment (Fungicide)"
     )
     other = fields.Char("Others")
+
+
+class OpenSPPEventDataPermanentCropsResPartner(models.Model):
+    _inherit = "res.partner"
+
+    active_event_permanent_crops = fields.Many2one(
+        "spp.event.permanent.crops", compute="_compute_active_event_permanent_crops"
+    )
+
+    xib_survey_schedule = fields.Selection(
+        string="Survey Schedule", related="active_event_permanent_crops.survey_sched"
+    )
+    xib_crop_prod_ids = fields.One2many(
+        "spp.event.permanent.crops.prod",
+        string="Permanent crops production (Produced Crops)",
+        related="active_event_permanent_crops.crop_prod_ids",
+    )
+    xib_crop_cost_ids = fields.One2many(
+        "spp.event.permanent.crops.cost",
+        string="Permanent crops production (Cost)",
+        related="active_event_permanent_crops.crop_cost_ids",
+    )
+    xib_crop_tech_ids = fields.One2many(
+        "spp.event.permanent.crops.tech",
+        string="Permanent crops production (Technologies)",
+        related="active_event_permanent_crops.crop_tech_ids",
+    )
+
+    @api.depends("event_data_ids")
+    def _compute_active_event_permanent_crops(self):
+        """
+        This computes the active Permanent crops production event of the group
+        """
+        for rec in self:
+            event_data = rec._get_active_event_id("spp.event.permanent.crops")
+            rec.active_event_permanent_crops = None
+            if event_data:
+                event_data_res_id = self.env["spp.event.data"].search([("id", "=", event_data)], limit=1).res_id
+                rec.active_event_permanent_crops = (
+                    self.env["spp.event.permanent.crops"].search([("id", "=", event_data_res_id)], limit=1).id
+                )

@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class OpenSPPEventDataAgriculturalDS(models.Model):
@@ -96,3 +96,41 @@ class OpenSPPEventDataAgriculturalDSTech(models.Model):
         [("1", "Selected"), ("0", "Not Selected")], string="Post Harvest Treatment (Fungicide)"
     )
     other = fields.Char("Others")
+
+
+class OpenSPPEventDataAgriculturalDSResPartner(models.Model):
+    _inherit = "res.partner"
+
+    active_event_agri_ds = fields.Many2one("spp.event.agri.ds", compute="_compute_active_event_agri_ds")
+
+    x_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_agri_ds.survey_sched")
+    x_agri_prod_ids = fields.One2many(
+        "spp.event.agri.ds.prod",
+        string="Agricultural Production During Cold DS",
+        related="active_event_agri_ds.agri_prod_ids",
+    )
+    x_agri_cost_ids = fields.One2many(
+        "spp.event.agri.ds.cost",
+        string="Agricultural Cost During Cold DS",
+        related="active_event_agri_ds.agri_cost_ids",
+    )
+    x_agri_tech_ids = fields.One2many(
+        "spp.event.agri.ds.tech",
+        string="Agricultural Technologies During Cold DS",
+        related="active_event_agri_ds.agri_tech_ids",
+    )
+
+    @api.depends("event_data_ids")
+    def _compute_active_event_agri_ds(self):
+        """
+        This computes the active Agricultural Production, Sales, Cost
+        and Technologies During Cold DS event of the group
+        """
+        for rec in self:
+            event_data = rec._get_active_event_id("spp.event.agri.ds")
+            rec.active_event_agri_ds = None
+            if event_data:
+                event_data_res_id = self.env["spp.event.data"].search([("id", "=", event_data)], limit=1).res_id
+                rec.active_event_agri_ds = (
+                    self.env["spp.event.agri.ds"].search([("id", "=", event_data_res_id)], limit=1).id
+                )

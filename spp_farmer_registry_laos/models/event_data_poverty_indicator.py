@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class OpenSPPEventDataPovertyIndicator(models.Model):
@@ -44,3 +44,53 @@ class OpenSPPEventDataPovertyIndicator(models.Model):
         This retrieves the View ID of this model
         """
         return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id
+
+
+class OpenSPPEventDataPovertyIndicatorResPartner(models.Model):
+    _inherit = "res.partner"
+
+    active_event_poverty_indicator = fields.Many2one(
+        "spp.event.poverty.indicator", compute="_compute_active_event_poverty_indicator"
+    )
+
+    iii_survey_schedule = fields.Selection(
+        string="Survey Schedule", related="active_event_poverty_indicator.survey_sched"
+    )
+    iii_type_of_housing = fields.Selection(
+        string="Type of Housing", related="active_event_poverty_indicator.type_of_housing"
+    )
+    iii_atleast_1household_member_completed_sch = fields.Selection(
+        string="At least one household member completed compulsory school",
+        related="active_event_poverty_indicator.atleast_1household_member_completed_sch",
+    )
+    iii_there_are_children_attend_pri_sch = fields.Selection(
+        string="There are children attend primary school",
+        related="active_event_poverty_indicator.there_are_children_attend_pri_sch",
+    )
+    iii_there_are_children_attend_mid_sch = fields.Selection(
+        string="There are children attend middle school",
+        related="active_event_poverty_indicator.there_are_children_attend_mid_sch",
+    )
+    iii_access_to_electricity = fields.Selection(
+        string="Access to Electricity", related="active_event_poverty_indicator.access_to_electricity"
+    )
+    iii_access_to_basic_health_care = fields.Selection(
+        string="Access to Basic Health Care", related="active_event_poverty_indicator.access_to_basic_health_care"
+    )
+    iii_access_to_internet = fields.Selection(
+        string="Access to Internet", related="active_event_poverty_indicator.access_to_internet"
+    )
+
+    @api.depends("event_data_ids")
+    def _compute_active_event_poverty_indicator(self):
+        """
+        This computes the active Poverty Indicator event of the group
+        """
+        for rec in self:
+            event_data = rec._get_active_event_id("spp.event.poverty.indicator")
+            rec.active_event_poverty_indicator = None
+            if event_data:
+                event_data_res_id = self.env["spp.event.data"].search([("id", "=", event_data)], limit=1).res_id
+                rec.active_event_poverty_indicator = (
+                    self.env["spp.event.poverty.indicator"].search([("id", "=", event_data_res_id)], limit=1).id
+                )
