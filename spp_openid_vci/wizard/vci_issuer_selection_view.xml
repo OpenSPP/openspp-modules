@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="issue_card_wizard" model="ir.ui.view">
+        <field name="name">issue_card_wizard</field>
+        <field name="model">spp.issue.card.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="partner_id" invisible="1" />
+                        <field name="issuer_id" options="{'no_create':True, 'no_edit':True}" />
+                    </group>
+
+                </sheet>
+                <footer>
+                    <button name="issue_card" string="Confirm" type="object" class="btn btn-success" />
+                    <button string="Cancel" class="btn btn-danger" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_issue_card_wizard" model="ir.actions.act_window">
+        <field name="name">Issue Card</field>
+        <field name="res_model">spp.issue.card.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

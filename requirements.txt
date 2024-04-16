@@ -4,9 +4,11 @@ bravado_core
 faker
 geojson
 jsonschema
+jwcrypto
 pyjwt>=2.4.0
 pyproj
 python-magic
+qrcode
 shapely
 simplejson
 swagger_spec_validator
