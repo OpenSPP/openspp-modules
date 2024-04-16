@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="ir_ui_view_gis_irrigation_asset" model="ir.ui.view">
+        <field name="name">Irrigation GIS View</field>
+        <field eval="16" name="priority" />
+        <field name="model">spp.irrigation.asset</field>
+        <field name="arch" type="xml">
+            <gis editable="1">
+                <field name="id" />
+                <field name="name" select="1" />
+                <field name="display_name" />
+                <field name="coordinates" />
+                <field name="geo_polygon" />
+            </gis>
+        </field>
+    </record>
+
+    <record id="gis_coordinates_irrigation_asset" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_irrigation.field_spp_irrigation_asset__coordinates" />
+        <field name="name">Irrigation Coordinates</field>
+        <field eval="1" name="sequence" />
+        <field name="view_id" ref="ir_ui_view_gis_irrigation_asset" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record>
+
+    <record id="gis_geo_polygon_irrigation_asset" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_irrigation.field_spp_irrigation_asset__geo_polygon" />
+        <field name="name">Irrigation Polygon</field>
+        <field eval="3" name="sequence" />
+        <field name="view_id" ref="ir_ui_view_gis_irrigation_asset" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record>
+
+    <record id="geo_osm_irrigation_asset" model="spp.gis.raster.layer">
+        <field name="raster_type">osm</field>
+        <field name="name">Irrigation background</field>
+        <field name="view_id" ref="ir_ui_view_gis_irrigation_asset" />
+    </record>
+</odoo>
