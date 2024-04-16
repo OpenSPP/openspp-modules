@@ -32,27 +32,11 @@ class LandRecord(models.Model):
         ],
     )
 
-    # list of `spp.species`` for livestock and aquaculture
-    # when land_use is mixed, do not restrict the species
-    species = fields.Many2many(
-        "spp.farm.species"
-        # domain="['|',('species_type', '=', land_use),(land_use, '=', 'mixed')]",
-    )
-    species_domain = fields.Binary(compute="_compute_species_domain")
+    owner_id = fields.Many2one("res.partner")
+    lessee_id = fields.Many2one("res.partner")
 
-    cultivation_method = fields.Selection(
-        [("irrigated", "Irrigated"), ("rainfed", "Rainfed")],
-        help="Relevant if land use is cultivation or mixed",
-    )
-
-    @api.depends("land_use")
-    def _compute_species_domain(self):
-        for rec in self:
-            species_domain = []
-            if rec.land_use != "mixed":
-                species_domain = [("species_type", "=", rec.land_use)]
-
-            rec.species_domain = species_domain
+    lease_start = fields.Date()
+    lease_end = fields.Date()
 
     def _process_record_to_feature(self, record, geometry_type, transformer):
         """
