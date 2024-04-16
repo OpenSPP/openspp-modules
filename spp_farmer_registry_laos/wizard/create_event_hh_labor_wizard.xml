@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_hh_labor_form_view" model="ir.ui.view">
+        <field name="name">create_event_hh_labor_form_view</field>
+        <field name="model">spp.create.event.hh.labor.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_0">
+                        <div class="col-4 o_setting_box" name="survey_sched">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="survey_sched" />
+                                <div>
+                                </div>
+                                <field name="survey_sched" required="1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-4 o_setting_box" name="no_hh_members_women">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_hh_members_women" />
+                                <div>
+                                </div>
+                                <field name="no_hh_members_women" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="no_hh_members_men">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_hh_members_men" />
+                                <div>
+                                </div>
+                                <field name="no_hh_members_men" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="no_hh_members">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="no_hh_members" />
+                                <div>
+                                </div>
+                                <field name="no_hh_members" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="hh_labor_availability_15_35_women">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="hh_labor_availability_15_35_women" />
+                                <div>
+                                </div>
+                                <field name="hh_labor_availability_15_35_women" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="hh_labor_availability_15_35_men">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="hh_labor_availability_15_35_men" />
+                                <div>
+                                </div>
+                                <field name="hh_labor_availability_15_35_men" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="tot_hh_labor_availability_15_35">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="tot_hh_labor_availability_15_35" />
+                                <div>
+                                </div>
+                                <field name="tot_hh_labor_availability_15_35" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="hh_labor_availability_36_60_women">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="hh_labor_availability_36_60_women" />
+                                <div>
+                                </div>
+                                <field name="hh_labor_availability_36_60_women" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="hh_labor_availability_36_60_men">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="hh_labor_availability_36_60_men" />
+                                <div>
+                                </div>
+                                <field name="hh_labor_availability_36_60_men" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="tot_hh_labor_availability_36_60">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="tot_hh_labor_availability_36_60" />
+                                <div>
+                                </div>
+                                <field name="tot_hh_labor_availability_36_60" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="labor_availability_agri_15_35_women">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="labor_availability_agri_15_35_women" />
+                                <div>
+                                </div>
+                                <field name="labor_availability_agri_15_35_women" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="labor_availability_agri_15_35_men">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="labor_availability_agri_15_35_men" />
+                                <div>
+                                </div>
+                                <field name="labor_availability_agri_15_35_men" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="tot_labor_availablity_agri_15_35">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="tot_labor_availablity_agri_15_35" />
+                                <div>
+                                </div>
+                                <field name="tot_labor_availablity_agri_15_35" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="labor_availability_agri_36_60_women">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="labor_availability_agri_36_60_women" />
+                                <div>
+                                </div>
+                                <field name="labor_availability_agri_36_60_women" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="labor_availability_agri_36_60_men">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="labor_availability_agri_36_60_men" />
+                                <div>
+                                </div>
+                                <field name="labor_availability_agri_36_60_men" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="tot_labor_availablity_agri_36_60">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="tot_labor_availablity_agri_36_60" />
+                                <div>
+                                </div>
+                                <field name="tot_labor_availablity_agri_36_60" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+                <field name="event_id" invisible="1" />
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
