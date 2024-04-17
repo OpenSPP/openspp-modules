@@ -41,9 +41,10 @@ class SPPRegistry(models.Model):
         web_base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url").rstrip("/")
 
         url = f"{web_base_url}/api/v1/vci/.well-known/openid-credential-issuer/{vci_issuer.name}"
-
-        credential_issuer_response = requests.get(url)
-
+        try:
+            credential_issuer_response = requests.get(url, timeout=5)
+        except requests.exceptions.Timeout as e:
+            raise UserError("The request to the credential issuer timed out.") from e
         issuer_data = credential_issuer_response.json()
 
         credential_issuer = f"{issuer_data['credential_issuer']}/api/v1/security"
