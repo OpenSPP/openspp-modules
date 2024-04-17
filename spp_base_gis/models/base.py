@@ -181,7 +181,7 @@ class Base(models.AbstractModel):
         return mapping(shape)
 
     @api.model
-    def convert_feature_to_featurecollection(self, features: list) -> dict:
+    def convert_feature_to_featurecollection(self, features: list | dict) -> dict:
         """
         The function `convert_feature_to_featurecollection` converts a list of features into a GeoJSON
         FeatureCollection.
@@ -195,33 +195,32 @@ class Base(models.AbstractModel):
         "type" key is set to "FeatureCollection", and the value of the "features" key is set to the
         input parameter `features`, which is a list of features.
         """
-        return {
-            "type": "FeatureCollection",
-            "features": features,
-        }
+        return {"type": "FeatureCollection", "features": features if isinstance(features, list) else [features]}
 
     @api.model
     def get_field_type_from_layer_type(self, layer_type):
         """
-        The function `get_field_type_from_layer_type` maps layer types to corresponding field types for
-        geographic data.
+        The function `get_field_type_from_layer_type` maps a layer type to a corresponding field type
+        for geographic data, raising a UserError if the layer type is invalid.
 
-        :param layer_type: The `layer_type` parameter is a string that represents the type of geographic
-        layer, such as "point", "line", or "polygon". The function `get_field_type_from_layer_type`
-        takes this `layer_type` as input and returns a corresponding field type, such as "geo_point",
-        :return: The function `get_field_type_from_layer_type` takes a `layer_type` as input and returns
-        the corresponding field type based on the layer type. If the `layer_type` is "point", it returns
-        "geo_point". If the `layer_type` is "line", it returns "geo_line". If the `layer_type` is
-        "polygon", it returns "geo_polygon". If the
+        :param layer_type: The `get_field_type_from_layer_type` function takes a `layer_type` as input
+        and returns the corresponding field type based on a mapping defined in the `layer_type_mapping`
+        dictionary. The mapping assigns a field type to each layer type - "point", "line", and "polygon"
+        :return: The function `get_field_type_from_layer_type` returns the corresponding field type
+        based on the given `layer_type`. If the `layer_type` is "point", it returns "geo_point". If the
+        `layer_type` is "line", it returns "geo_line". If the `layer_type` is "polygon", it returns
+        "geo_polygon". If the `layer_type` is not one
         """
-        if layer_type == "point":
-            return "geo_point"
-        elif layer_type == "line":
-            return "geo_line"
-        elif layer_type == "polygon":
-            return "geo_polygon"
-        else:
-            raise UserError(_("Invalid layer type %s") % layer_type)
+        layer_type_mapping = {
+            "point": "geo_point",
+            "line": "geo_line",
+            "polygon": "geo_polygon",
+        }
+
+        try:
+            return layer_type_mapping[layer_type]
+        except KeyError as e:
+            raise UserError(_("Invalid layer type %s") % layer_type) from e
 
     @api.model
     def raw_postgis_sql_query(self, postgis_query):
