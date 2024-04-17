@@ -1,11 +1,12 @@
 from odoo.tests import TransactionCase
 
-MODEL_NAME = "spp.event.agri.ds"
+MODEL_NAME = "spp.event.hh.labor"
 
-class TestEventDataAgriDS(TransactionCase):
+
+class TestEventDataHHLabor(TransactionCase):
 
     """
-    Test for `spp.event.agri.ds` model.
+    Test for `spp.event.hh.labor` model.
     """
 
     @classmethod
@@ -78,14 +79,14 @@ class TestEventDataAgriDS(TransactionCase):
     def test_04_active_mock_event_data(self):
         mock_event_1 = self.create_mock_event_data()
         mock_event_2 = self.create_mock_event_data()
-        self._test_partner._compute_active_event_agri_ds()
+        self._test_partner._compute_active_event_hh_labor()
         self.assertEqual(
-            self._test_partner.active_event_agri_ds.id,
+            self._test_partner.active_event_hh_labor.id,
             mock_event_2.res_id,
             "Mock event 2 should be the active event data for test_partner!",
         )
         self.assertNotEqual(
-            self._test_partner.active_event_agri_ds.id,
+            self._test_partner.active_event_hh_labor.id,
             mock_event_1.res_id,
             "Mock event 1 should not be the active event data for test_partner!",
         )
