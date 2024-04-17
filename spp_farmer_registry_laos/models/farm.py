@@ -1,6 +1,6 @@
 import logging
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -9,15 +9,6 @@ class Farm(models.Model):
     _inherit = "res.partner"
 
     farm_prod_ids = fields.One2many("spp.farm.activity", "prod_farm_id", string="Products")
-    active_event_cycle = fields.Many2one("spp.event.data", compute="_compute_active_event_cycle")
-
-    @api.depends("event_data_ids")
-    def _compute_active_event_cycle(self):
-        """
-        This computes the active farm event of the group
-        """
-        for rec in self:
-            rec.active_event_cycle = rec._get_active_event_id("spp.event.cycle")
 
     # overwrite for now since we will not create an individual per group in this module
     def create_update_farmer(self, farm):
