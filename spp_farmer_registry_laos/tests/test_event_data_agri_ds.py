@@ -2,6 +2,7 @@ from odoo.tests import TransactionCase
 
 MODEL_NAME = "spp.event.agri.ds"
 
+
 class TestEventDataAgriDS(TransactionCase):
 
     """

@@ -145,7 +145,7 @@ class SPPCreateEventGenInfoWizard(models.TransientModel):
                 "participating": rec.participating,
                 "date_participated": rec.date_participated,
                 "grp_act_supported_by_project_agri": rec.grp_act_supported_by_project_agri,
-                "grp_act_supported_by_project_livestock_fisheries": rec.grp_act_supported_by_project_livestock_fisheries,
+                "grp_act_supported_by_project_livestock_fisheries": rec.grp_act_supported_by_project_livestock_fisheries,  # noqa: E501
                 "tech_supported_by_project_org_fert": rec.tech_supported_by_project_org_fert,
                 "tech_supported_by_project_greenhouse": rec.tech_supported_by_project_greenhouse,
                 "tech_supported_by_project_mulching": rec.tech_supported_by_project_mulching,

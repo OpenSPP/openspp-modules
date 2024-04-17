@@ -540,7 +540,7 @@ class SPPLaosGenerateFarmerData(models.Model):
     def _generate_event_datas(self, registrant):
         for event_data in EVENT_DATA_TYPES:
             event_id = self._create_event_data(event_data, registrant)
-            event_data_model = "_generate_" + event_data.lstrip("spp.").replace(".", "_")
+            event_data_model = "_generate_" + event_data.removeprefix("spp.").replace(".", "_")
             self.call_method_by_name(event_data_model, event_id)
 
     def _generate_event_gen_info(self, event_id):
