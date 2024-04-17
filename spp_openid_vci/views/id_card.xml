@@ -48,7 +48,12 @@
                 <div class="page">
                     <table class="id-card-table">
                         <tr class="tr-title">
-                            <td colspan="2"><h2>ID Card</h2></td>
+                            <td colspan="2"><img
+                                    src="/spp_openid_vci/static/description/icon.png"
+                                    alt="OpenSPP"
+                                    height="100"
+                                    width="100"
+                                /></td>
                         </tr>
                         <tr>
                             <!-- Fields on the left -->
