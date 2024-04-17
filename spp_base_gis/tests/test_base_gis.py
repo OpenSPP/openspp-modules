@@ -1,5 +1,7 @@
 import json
 
+from shapely.geometry import Point, Polygon, shape
+
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
@@ -234,3 +236,81 @@ class BaseGISTest(TransactionCase):
         longitude, latitude = -91, 100
         with self.assertRaisesRegex(UserError, f"Invalid coordinates: latitude={latitude}, longitude={longitude}"):
             self.test_model.gis_locational_query(longitude=longitude, latitude=latitude)
+
+    def test_get_gis_view(self):
+        with self.assertRaisesRegex(
+            UserError,
+            "No GIS view defined for the model spp.base.gis.test.model. Please create a view or modify view mode",
+        ):
+            self.test_model._get_gis_view()
+
+    def test_get_fields_of_type(self):
+        fields_str = self.test_model.get_fields_of_type("geo_polygon")
+        fields_list = self.test_model.get_fields_of_type(["geo_polygon"])
+
+        self.assertIsInstance(fields_str, list)
+        self.assertIsInstance(fields_list, list)
+        self.assertEqual(len(fields_str), 1)
+        self.assertEqual(len(fields_list), 1)
+        self.assertEqual(fields_str[0].name, "geo_polygon_field")
+        self.assertEqual(fields_list[0].name, "geo_polygon_field")
+        self.assertEqual(fields_str[0].type, "geo_polygon")
+        self.assertEqual(fields_list[0].type, "geo_polygon")
+        self.assertEqual(type(fields_list[0]), type(fields_str[0]))
+        self.assertEqual(fields_list[0], fields_str[0])
+
+    def test_shape_to_geojson(self):
+        point = Point(1, 1)
+
+        geojson = self.test_model.shape_to_geojson(point)
+
+        self.assertIsInstance(geojson, dict)
+        self.assertEqual(geojson["type"], "Point")
+        self.assertEqual(geojson["coordinates"], (1.0, 1.0))
+
+    def test_convert_feature_to_featurecollection(self):
+        feature = {
+            "type": "Feature",
+            "properties": {"name": "Test"},
+            "geometry": {"type": "Point", "coordinates": [1, 1]},
+        }
+
+        feature_collection_dict = self.test_model.convert_feature_to_featurecollection(feature)
+        feature_collection_list = self.test_model.convert_feature_to_featurecollection([feature])
+
+        self.assertIsInstance(feature_collection_dict, dict)
+        self.assertIsInstance(feature_collection_list, dict)
+        self.assertEqual(feature_collection_list, feature_collection_dict)
+        self.assertEqual(feature_collection_dict["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_dict["features"]), 1)
+        self.assertEqual(feature_collection_dict["features"][0], feature)
+
+    def test_get_field_type_from_layer_type(self):
+        self.assertEqual(self.test_model.get_field_type_from_layer_type("polygon"), "geo_polygon")
+        self.assertEqual(self.test_model.get_field_type_from_layer_type("point"), "geo_point")
+        self.assertEqual(self.test_model.get_field_type_from_layer_type("line"), "geo_line")
+
+        with self.assertRaisesRegex(UserError, "Invalid layer type error"):
+            self.test_model.get_field_type_from_layer_type("error")
+
+    def test_raw_postgis_sql_query(self):
+        query = f"name = '{self.test_record_1.name}'"
+
+        result = self.test_model.raw_postgis_sql_query(query)
+        self.assertIsInstance(result, list)
+        self.assertIsInstance(result[0], tuple)
+        self.assertIsInstance(result[0][0], int)
+        self.assertEqual(result[0][0], self.test_record_1.id)
+
+    def test_get_feature(self):
+        feature = self.test_record_1.get_feature("geo_polygon_field")
+
+        self.assertIsInstance(feature, list)
+        self.assertEqual(len(feature), 1)
+        self.assertIsInstance(feature[0], dict)
+        self.assertEqual(feature[0]["type"], "Feature")
+        self.assertIsInstance(feature[0]["geometry"], dict)
+        self.assertEqual(feature[0]["geometry"]["type"], "Polygon")
+        self.assertIsInstance(feature[0]["geometry"]["coordinates"], tuple)
+        self.assertEqual(len(feature[0]["geometry"]["coordinates"]), 1)
+        self.assertEqual(type(shape(feature[0]["geometry"])), Polygon)
