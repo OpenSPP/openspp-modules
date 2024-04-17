@@ -60,16 +60,16 @@ jobs:
 
       # Clone OpenG2P Registry repository
       - name: Clone OpenG2P Registry Repository
-        run: git clone https://github.com/OpenG2P/openg2p-registry.git --depth 1 --branch 17.0-fix-build
+        run: git clone https://github.com/OpenG2P/openg2p-registry.git --depth 1 --branch 17.0-develop
       # Clone OpenG2P Programs repository
       - name: Clone OpenG2P Programs Repository
-        run: git clone https://github.com/OpenG2P/openg2p-program.git --depth 1 --branch 17.0-fix-build
+        run: git clone https://github.com/OpenG2P/openg2p-program.git --depth 1 --branch 17.0-develop
       - name: Clone geospatial Repository
         run: git clone https://github.com/OpenSPP/geospatial.git --depth 1 --branch 17.0-mig-base_geoengine
       - name: Copy OpenG2P modules to addons directory
         # exclude openg2p-registry/odoo-addon-base_rest as it is not migrated to 17.0
         run: |
-          rm -rf openg2p-registry/*rest_api* openg2p-program/*rest_api* openg2p-program/g2p_payment_files openg2p-program/g2p_documents openg2p-program/g2p_program_documents
+          # rm -rf openg2p-registry/*rest_api* openg2p-program/*rest_api* openg2p-program/g2p_documents openg2p-program/g2p_program_documents
           cp -r openg2p-registry/* ${ADDONS_DIR}/
           cp -r openg2p-program/* ${ADDONS_DIR}/
           cp -r geospatial/* ${ADDONS_DIR}/
