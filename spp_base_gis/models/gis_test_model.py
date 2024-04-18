@@ -7,3 +7,5 @@ class GisTestModel(models.Model):
 
     name = fields.Char()
     geo_polygon_field = fields.GeoPolygonField()
+    geo_line = fields.GeoLineStringField()
+    geo_point = fields.GeoPointField()

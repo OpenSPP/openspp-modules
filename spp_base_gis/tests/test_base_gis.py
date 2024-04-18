@@ -1,6 +1,6 @@
 import json
 
-from shapely.geometry import Point, Polygon, shape
+from shapely.geometry import Point, Polygon, mapping, shape
 
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
@@ -14,7 +14,7 @@ class BaseGISTest(TransactionCase):
 
         cls.test_model = cls.env["spp.base.gis.test.model"]
 
-        geojson_polygon_1 = {
+        cls.geojson_polygon_1 = {
             "type": "Polygon",
             "coordinates": [
                 [
@@ -31,11 +31,11 @@ class BaseGISTest(TransactionCase):
         cls.test_record_1 = cls.test_model.create(
             {
                 "name": "Record 1",
-                "geo_polygon_field": json.dumps(geojson_polygon_1),
+                "geo_polygon_field": json.dumps(cls.geojson_polygon_1),
             }
         )
 
-        geojson_polygon_2 = {
+        cls.geojson_polygon_2 = {
             "type": "Polygon",
             "coordinates": [
                 [
@@ -50,7 +50,7 @@ class BaseGISTest(TransactionCase):
         cls.test_record_2 = cls.test_model.create(
             {
                 "name": "Record 2",
-                "geo_polygon_field": json.dumps(geojson_polygon_2),
+                "geo_polygon_field": json.dumps(cls.geojson_polygon_2),
             }
         )
 
@@ -188,6 +188,332 @@ class BaseGISTest(TransactionCase):
         self.assertEqual(feature_collection_2["type"], "FeatureCollection")
         self.assertEqual(len(feature_collection_2["features"]), 1)
         self.assertEqual(feature_collection_2["features"][0]["properties"]["name"], self.test_record_2.name)
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 0)
+
+    def test_gis_locational_query_covers(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1, latitude=self.latitude_1, spatial_relation="covers"
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2, latitude=self.latitude_2, spatial_relation="covers"
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3, latitude=self.latitude_3, spatial_relation="covers"
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 0)
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 0)
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 0)
+
+    def test_gis_locational_query_covers_with_distance(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1, latitude=self.latitude_1, spatial_relation="covers", distance=10000
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2, latitude=self.latitude_2, spatial_relation="covers", distance=10000
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3, latitude=self.latitude_3, spatial_relation="covers", distance=1000
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 1)
+        self.assertEqual(feature_collection_1["features"][0]["properties"]["name"], self.test_record_1.name)
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 1)
+        self.assertEqual(feature_collection_2["features"][0]["properties"]["name"], self.test_record_2.name)
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 0)
+
+    def test_gis_locational_query_equals(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1, latitude=self.latitude_1, spatial_relation="equals"
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2, latitude=self.latitude_2, spatial_relation="equals"
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3, latitude=self.latitude_3, spatial_relation="equals"
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 0)
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 0)
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 0)
+
+    def test_gis_locational_query_equals_with_distance(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1, latitude=self.latitude_1, spatial_relation="equals", distance=10000
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2, latitude=self.latitude_2, spatial_relation="equals", distance=10000
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3, latitude=self.latitude_3, spatial_relation="equals", distance=1000
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 0)
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 0)
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 0)
+
+    def test_gis_locational_query_coveredby(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1, latitude=self.latitude_1, spatial_relation="coveredby"
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2, latitude=self.latitude_2, spatial_relation="coveredby"
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3, latitude=self.latitude_3, spatial_relation="coveredby"
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 1)
+        self.assertEqual(feature_collection_1["features"][0]["properties"]["name"], self.test_record_1.name)
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 1)
+        self.assertEqual(feature_collection_2["features"][0]["properties"]["name"], self.test_record_2.name)
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 0)
+
+    def test_gis_locational_query_coveredby_with_distance(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1, latitude=self.latitude_1, spatial_relation="coveredby", distance=1000
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2, latitude=self.latitude_2, spatial_relation="coveredby", distance=1000
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3, latitude=self.latitude_3, spatial_relation="coveredby", distance=1000
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 0)
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 1)
+        self.assertEqual(feature_collection_2["features"][0]["properties"]["name"], self.test_record_2.name)
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 0)
+
+    def test_gis_locational_query_disjoint(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1, latitude=self.latitude_1, spatial_relation="disjoint"
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2, latitude=self.latitude_2, spatial_relation="disjoint"
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3, latitude=self.latitude_3, spatial_relation="disjoint"
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 1)
+        self.assertEqual(feature_collection_1["features"][0]["properties"]["name"], self.test_record_2.name)
+        self.assertEqual(
+            feature_collection_1["features"][0]["geometry"]["coordinates"],
+            mapping(shape(self.geojson_polygon_2))["coordinates"],
+        )
+        self.assertEqual(feature_collection_1["features"][0]["geometry"]["type"], self.geojson_polygon_2["type"])
+        self.assertEqual(feature_collection_1["features"][0]["type"], "Feature")
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 1)
+        self.assertEqual(feature_collection_2["features"][0]["properties"]["name"], self.test_record_1.name)
+        self.assertEqual(
+            feature_collection_2["features"][0]["geometry"]["coordinates"],
+            mapping(shape(self.geojson_polygon_1))["coordinates"],
+        )
+        self.assertEqual(feature_collection_2["features"][0]["geometry"]["type"], self.geojson_polygon_1["type"])
+        self.assertEqual(feature_collection_2["features"][0]["type"], "Feature")
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 2)
+        self.assertEqual(feature_collection_3["features"][0]["properties"]["name"], self.test_record_1.name)
+        self.assertEqual(
+            feature_collection_3["features"][0]["geometry"]["coordinates"],
+            mapping(shape(self.geojson_polygon_1))["coordinates"],
+        )
+        self.assertEqual(feature_collection_3["features"][0]["geometry"]["type"], self.geojson_polygon_1["type"])
+        self.assertEqual(feature_collection_3["features"][0]["type"], "Feature")
+        self.assertEqual(feature_collection_3["features"][1]["properties"]["name"], self.test_record_2.name)
+        self.assertEqual(
+            feature_collection_3["features"][1]["geometry"]["coordinates"],
+            mapping(shape(self.geojson_polygon_2))["coordinates"],
+        )
+        self.assertEqual(feature_collection_3["features"][1]["geometry"]["type"], self.geojson_polygon_2["type"])
+
+    def test_gis_locational_query_disjoint_with_distance(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1,
+            latitude=self.latitude_1,
+            spatial_relation="disjoint",
+            distance=1000,
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2,
+            latitude=self.latitude_2,
+            spatial_relation="disjoint",
+            distance=1000,
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3,
+            latitude=self.latitude_3,
+            spatial_relation="disjoint",
+            distance=1000,
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 1)
+        self.assertEqual(feature_collection_1["features"][0]["properties"]["name"], self.test_record_2.name)
+        self.assertEqual(
+            feature_collection_1["features"][0]["geometry"]["coordinates"],
+            mapping(shape(self.geojson_polygon_2))["coordinates"],
+        )
+        self.assertEqual(feature_collection_1["features"][0]["geometry"]["type"], self.geojson_polygon_2["type"])
+        self.assertEqual(feature_collection_1["features"][0]["type"], "Feature")
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 1)
+        self.assertEqual(feature_collection_2["features"][0]["properties"]["name"], self.test_record_1.name)
+        self.assertEqual(
+            feature_collection_2["features"][0]["geometry"]["coordinates"],
+            mapping(shape(self.geojson_polygon_1))["coordinates"],
+        )
+        self.assertEqual(feature_collection_2["features"][0]["geometry"]["type"], self.geojson_polygon_1["type"])
+        self.assertEqual(feature_collection_2["features"][0]["type"], "Feature")
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 2)
+        self.assertEqual(feature_collection_3["features"][0]["properties"]["name"], self.test_record_1.name)
+        self.assertEqual(
+            feature_collection_3["features"][0]["geometry"]["coordinates"],
+            mapping(shape(self.geojson_polygon_1))["coordinates"],
+        )
+        self.assertEqual(feature_collection_3["features"][0]["geometry"]["type"], self.geojson_polygon_1["type"])
+        self.assertEqual(feature_collection_3["features"][0]["type"], "Feature")
+        self.assertEqual(feature_collection_3["features"][1]["properties"]["name"], self.test_record_2.name)
+        self.assertEqual(
+            feature_collection_3["features"][1]["geometry"]["coordinates"],
+            mapping(shape(self.geojson_polygon_2))["coordinates"],
+        )
+        self.assertEqual(feature_collection_3["features"][1]["geometry"]["type"], self.geojson_polygon_2["type"])
+
+    def test_gis_locational_query_crosses(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1, latitude=self.latitude_1, spatial_relation="crosses"
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2, latitude=self.latitude_2, spatial_relation="crosses"
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3, latitude=self.latitude_3, spatial_relation="crosses"
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 0)
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 0)
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 0)
+
+    def test_gis_locational_query_crosses_with_distance(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1,
+            latitude=self.latitude_1,
+            spatial_relation="crosses",
+            distance=100000,
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2,
+            latitude=self.latitude_2,
+            spatial_relation="crosses",
+            distance=100000,
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3,
+            latitude=self.latitude_3,
+            spatial_relation="crosses",
+            distance=100000,
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 0)
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 0)
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 0)
+
+    def test_gis_locational_query_touches(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1, latitude=self.latitude_1, spatial_relation="touches"
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2, latitude=self.latitude_2, spatial_relation="touches"
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3, latitude=self.latitude_3, spatial_relation="touches"
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 0)
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 0)
+
+        self.assertEqual(feature_collection_3["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_3["features"]), 0)
+
+    def test_gis_locational_query_touches_with_distance(self):
+        feature_collection_1 = self.test_model.gis_locational_query(
+            longitude=self.longitude_1,
+            latitude=self.latitude_1,
+            spatial_relation="touches",
+            distance=1000,
+        )
+        feature_collection_2 = self.test_model.gis_locational_query(
+            longitude=self.longitude_2,
+            latitude=self.latitude_2,
+            spatial_relation="touches",
+            distance=1000,
+        )
+        feature_collection_3 = self.test_model.gis_locational_query(
+            longitude=self.longitude_3,
+            latitude=self.latitude_3,
+            spatial_relation="touches",
+            distance=1000,
+        )
+
+        self.assertEqual(feature_collection_1["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_1["features"]), 0)
+
+        self.assertEqual(feature_collection_2["type"], "FeatureCollection")
+        self.assertEqual(len(feature_collection_2["features"]), 0)
 
         self.assertEqual(feature_collection_3["type"], "FeatureCollection")
         self.assertEqual(len(feature_collection_3["features"]), 0)
