@@ -15,6 +15,3 @@ class CustomOpenIDVCIssuer(models.Model):
         web_base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url").rstrip("/")
         endpoint = "/api/v1/security"
         self.auth_allowed_issuers = f"{web_base_url}{endpoint}"
-
-    def set_default_credential_type_Registry(self):
-        self.credential_type = "Registry"
