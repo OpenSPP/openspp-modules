@@ -16,12 +16,6 @@ ALLOWED_LAYER_TYPE = [
     "polygon",
 ]
 
-ALLOWED_SPATIAL_RELATION = [
-    "intersects",
-    "within",
-    "contains",
-]
-
 
 def is_valid_coordinates(latitude, longitude):
     """
@@ -275,7 +269,7 @@ class Base(models.AbstractModel):
             raise UserError(_("Invalid coordinates: latitude=%s, longitude=%s") % (latitude, longitude))
         if layer_type not in ALLOWED_LAYER_TYPE:
             raise UserError(_("Invalid layer type %s") % layer_type)
-        if spatial_relation not in ALLOWED_SPATIAL_RELATION:
+        if spatial_relation not in Operator.POSTGIS_SPATIAL_RELATION.keys():
             raise UserError(_("Invalid spatial relation %s") % spatial_relation)
         if distance:
             if not isinstance(distance, int | float):

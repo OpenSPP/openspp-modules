@@ -3,6 +3,12 @@ class Operator:
         "intersects": "ST_Intersects",
         "within": "ST_Within",
         "contains": "ST_Contains",
+        "covers": "ST_Covers",
+        "equals": "ST_Equals",
+        "coveredby": "ST_CoveredBy",
+        "disjoint": "ST_Disjoint",
+        "crosses": "ST_Crosses",
+        "touches": "ST_Touches",
     }
 
     def __init__(self, field):
@@ -26,6 +32,9 @@ class Operator:
         functions.
         """
         return f"ST_SetSRID(ST_MakePoint({longitude}, {latitude}), {srid})"
+
+    def st_transform(self, geom, srid):
+        return f"ST_Transform({geom}, {srid})"
 
     def get_postgis_query(self, operation, longitude, latitude, distance=None):
         """
@@ -52,6 +61,9 @@ class Operator:
         distance is provided, it calculates the spatial relation between the point and the field
         directly.
         """
+        if operation not in self.POSTGIS_SPATIAL_RELATION:
+            raise ValueError(f"Invalid operation: {operation}")
+
         point = self.create_point(longitude, latitude, self.field.srid)
 
         if distance:
@@ -60,8 +72,8 @@ class Operator:
 
             # Need to transform srid to 3857 for distance calculation
             if self.field.srid == 4326:
-                left = "ST_Transform(%s, 3857)" % point
-                right = "ST_Transform(%s, 3857)" % self.field.name
+                left = self.st_transform(point, 3857)
+                right = self.st_transform(self.field.name, 3857)
 
             return f"{self.POSTGIS_SPATIAL_RELATION[operation]}(ST_Buffer({left}, {distance}), {right})"
         else:
