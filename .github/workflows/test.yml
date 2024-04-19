@@ -46,7 +46,7 @@ jobs:
             sonar: "true"
     services:
       postgres:
-        image: postgres:15.0
+        image: postgis/postgis:15-3.4
         env:
           POSTGRES_USER: odoo
           POSTGRES_PASSWORD: odoo
