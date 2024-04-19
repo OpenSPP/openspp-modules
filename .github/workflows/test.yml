@@ -79,6 +79,8 @@ jobs:
           # MUK Addons
           cp -r odoo-modules/* ${ADDONS_DIR}/
       - name: Install addons and dependencies
+        env:
+          SKIP_EXT_DEB_DEPENDENCIES: "true"
         run: oca_install_addons
       - name: Check licenses
         run: manifestoo -d . check-licenses
