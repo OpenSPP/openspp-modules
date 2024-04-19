@@ -204,16 +204,9 @@ export class FieldGisEditMap extends Component {
         this.map.on("draw.create", updateArea);
         this.map.on("draw.update", updateArea);
 
-        const model = this.props.record._config.resModel;
-        const url = `${this.webBaseUrl}/web/image?model=${model}&id=${this.props.record._config.resId}&field=geo_img_file`;
+        const url = `/spp_base_gis/static/src/images/laos_farm.png`;
 
         this.map.on("click", `${this.sourceId}-polygon-layerid`, (e) => {
-            new maptilersdk.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(`<img src="${url}" height="200" width="300" alt="Placeholder Image">`)
-                .addTo(this.map);
-        });
-        this.map.on("click", `${this.sourceId}-point-layerid`, (e) => {
             new maptilersdk.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(`<img src="${url}" height="200" width="300" alt="Placeholder Image">`)
