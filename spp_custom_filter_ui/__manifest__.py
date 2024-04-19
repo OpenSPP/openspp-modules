@@ -6,7 +6,7 @@
     "maintainers": ["nhatnm0612"],
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "depends": ["spp_custom_filter"],
+    "depends": ["spp_custom_filter", "g2p_registry_group", "g2p_program"],
     "auto_install": False,
     "application": False,
 }
