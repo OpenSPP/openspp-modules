@@ -33,6 +33,7 @@
         "data/livestock_data.xml",
         "views/farmer_group_view.xml",
         "views/group_view.xml",
+        "views/individual_view.xml",
         "views/event_data_view.xml",
         "views/event_data_gen_info_view.xml",
         "views/generate_farmer_data_view.xml",

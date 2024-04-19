@@ -1,0 +1,189 @@
+<odoo>
+    <record id="view_farmer_alternative_form" model="ir.ui.view">
+        <field name="name">view_farmer_alternative_form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+             <form string="Individual Registrant" duplicate="0">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-ban"
+                            name="%(g2p_registry_base.action_disable_registrant_wizard)d"
+                            invisible="disabled"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Disable</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check"
+                            name="enable_registrant"
+                            invisible="not disabled"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Enable</span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active" />
+
+                    <widget
+                        name="web_ribbon"
+                        title="Disabled"
+                        bg_color="bg-warning"
+                        invisible="not disabled"
+                    />
+                    <div style="width: 100%; padding-top: 10px; padding-left: 10px; ">
+                        <h3>Farmer Details</h3>
+                        <table style="height: 50px; width:100%; vertical-align: top; text-align: left;">
+                            <tr>
+                                <td style="height:100%; width:15%;" />
+                                <td style="width:5%;" />
+                                <td style="width:20%;" />
+                                <td style="width:20%;" />
+                                <td style="width:20%;" />
+                                <td style="width:20%;" />
+                            </tr>
+                            <tr>
+                                <td
+                                    rowspan="4"
+                                    style="height:100%; width:15%; vertical-align: top; text-align: center;"
+                                >
+                                    <field
+                                        name="image_1920"
+                                        widget="image"
+                                        options="{'preview_image': 'avatar_512'}"
+                                    />
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <span>
+                                        National ID Number
+                                    </span>
+                                    <br />
+                                    <field name="farmer_national_id" />
+                                </td>
+                                <td>
+                                    <span>
+                                        Family Name
+                                    </span>
+                                    <br />
+                                    <field name="family_name" />
+                                </td>
+                                <td>
+                                    <span>
+                                        Given Name
+                                    </span>
+                                    <br />
+                                    <field name="given_name" />
+                                </td>
+                                <td>
+                                    <span>
+                                        Additional Name
+                                    </span>
+                                    <br />
+                                    <field name="addl_name" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <span>
+                                        Marital Status
+                                    </span>
+                                    <br />
+                                    <field name="marital_status" />
+                                </td>
+                                <td>
+                                    <span>
+                                        Household Size
+                                    </span>
+                                    <br />
+                                    <field name="farmer_household_size" />
+                                </td>
+                                <td>
+                                    <span>
+                                        Educational Level
+                                    </span>
+                                    <br />
+                                    <field name="highest_education_level" />
+                                </td>
+                                <td>
+                                    <span>
+                                        Years of Experience
+                                    </span>
+                                    <br />
+                                    <field name="experience_years" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td colspan="2">
+                                    <span>
+                                        Postal Address
+                                    </span>
+                                    <br />
+                                    <field name="farmer_postal_address" />
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="width:100%; height:300px; display:flex;">
+
+                        <div
+                            style="padding-top: 10px; padding-left: 10px; width:60%; height:100%; border: 1px solid #f4f4f4; overflow: auto;"
+                        >
+                            <h3>Crops</h3>
+                            <field
+                                name="farm_crop_act_ids"
+                                domain="[('activity_type', '=', 'crop')]"
+                                context="{'default_activity_type': 'crop'}"
+                            >
+                                <tree editable="bottom">
+                                    <field name="activity_type" column_invisible="1" />
+                                    <field name="species_id" width="70%" />
+                                    <field name="purpose" width="30%" />
+                                </tree>
+                            </field>
+
+                        </div>
+                        <div style="width:38%; height:100%; border: 1px solid #f4f4f4; overflow: auto;">
+                            <field name="land_geo_polygon" />
+                        </div>
+                    </div>
+                    <field name="name" invisible="1" />
+                    <field name="disabled" invisible="1" />
+                    <field name="active" invisible="1" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="g2p_registry_individual.action_individuals_form_view" model="ir.actions.act_window.view">
+        <field name="view_id" ref="spp_farmer_registry_laos.view_farmer_alternative_form" />
+    </record>
+</odoo>
