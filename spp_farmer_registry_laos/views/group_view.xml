@@ -41,6 +41,9 @@
                     <field name="land_geo_polygon" />
                 </page>
             </xpath>
+            <xpath expr="//field[@name='disabled_reason']" position="after">
+                <field name="geo_img_file" filename="geo_img_file_filename" />
+            </xpath>
         </field>
     </record>
 

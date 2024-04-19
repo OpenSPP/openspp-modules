@@ -63,6 +63,7 @@ export class FieldGisEditMap extends Component {
             const response = await this.rpc("/get_maptiler_api_key");
             if (response.mapTilerKey) {
                 this.mapTilerKey = response.mapTilerKey;
+                this.webBaseUrl = response.webBaseUrl;
             } else {
                 console.log("Error: Api Key not found.");
             }
@@ -202,6 +203,22 @@ export class FieldGisEditMap extends Component {
 
         this.map.on("draw.create", updateArea);
         this.map.on("draw.update", updateArea);
+
+        const model = this.props.record._config.resModel;
+        const url = `${this.webBaseUrl}/web/image?model=${model}&id=${this.props.record._config.resId}&field=geo_img_file`;
+
+        this.map.on("click", `${this.sourceId}-polygon-layerid`, (e) => {
+            new maptilersdk.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(`<img src="${url}" height="200" width="300" alt="Placeholder Image">`)
+                .addTo(this.map);
+        });
+        this.map.on("click", `${this.sourceId}-point-layerid`, (e) => {
+            new maptilersdk.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(`<img src="${url}" height="200" width="300" alt="Placeholder Image">`)
+                .addTo(this.map);
+        });
     }
 
     addDrawInteractionStyle() {
