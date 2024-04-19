@@ -78,9 +78,12 @@ jobs:
           cp -r geospatial/* ${ADDONS_DIR}/
           # MUK Addons
           cp -r odoo-modules/* ${ADDONS_DIR}/
+      - name: Add g2p-programs to test-requirements.txt
+        run: echo "git+https://github.com/OpenG2P/openg2p-program@17.0-develop#subdirectory=g2p_programs" >> test-requirements.txt
       - name: Install addons and dependencies
         env:
           SKIP_EXT_DEB_DEPENDENCIES: "true"
+          EXCLUDE_REGEX: "odoo-addon-g2p.*|odoo-addon-muk.*"
         run: oca_install_addons
       - name: Check licenses
         run: manifestoo -d . check-licenses
