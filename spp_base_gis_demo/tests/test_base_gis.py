@@ -620,9 +620,12 @@ class BaseGISTest(TransactionCase):
             self.test_model.get_field_type_from_layer_type("error")
 
     def test_raw_postgis_sql_query(self):
-        query = f"name = '{self.test_record_1.name}'"
+        field = self.test_model._fields["geo_polygon_field"]
+        spatial_relation = "intersects"
+        longitude = self.longitude_1
+        latitude = self.latitude_1
 
-        result = self.test_model.raw_postgis_sql_query(query)
+        result = self.test_model.raw_postgis_sql_query(field, spatial_relation, longitude, latitude)
         self.assertIsInstance(result, list)
         self.assertIsInstance(result[0], tuple)
         self.assertIsInstance(result[0][0], int)

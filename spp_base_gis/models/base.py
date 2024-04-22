@@ -217,22 +217,40 @@ class Base(models.AbstractModel):
             raise UserError(_("Invalid layer type %s") % layer_type) from e
 
     @api.model
-    def raw_postgis_sql_query(self, postgis_query):
+    def raw_postgis_sql_query(self, field, spatial_relation, longitude, latitude, distance=None):
         """
-        The function `raw_postgis_sql_query` executes a raw PostGIS SQL query on a specified table and
-        returns the results.
+        The function `raw_postgis_sql_query` executes a raw PostGIS SQL query based on spatial
+        parameters provided.
 
-        :param postgis_query: The `postgis_query` parameter in the `raw_postgis_sql_query` method is
-        expected to be a PostGIS query that will be used in the `WHERE` clause of the SQL query
-        constructed within the method. This query should be a valid PostGIS query that filters the
-        records in the database
-        :return: The method `raw_postgis_sql_query` is returning the result of the SQL query executed on
-        the database using the provided `postgis_query`. The method executes the query using
-        `self.env.cr.execute(query)` and then fetches all the results using `self.env.cr.fetchall()`.
-        The method will return a list of tuples where each tuple represents a row of the result set.
+        :param field: The `field` parameter in the `raw_postgis_sql_query` method likely refers to the
+        field in the database table that contains the spatial data for which you want to perform a
+        PostGIS query. This field would typically store geometries or geographic coordinates that you
+        want to use in your spatial queries
+        :param spatial_relation: Spatial relation refers to the relationship between a spatial object
+        and another object in a spatial database. Common spatial relations include "contains",
+        "intersects", "touches", "within", "overlaps", etc. These relations are used to define how two
+        spatial objects interact with each other in a geographic context
+        :param longitude: Longitude is a geographic coordinate that specifies the east-west position of
+        a point on the Earth's surface. It is measured in degrees, with values ranging from -180 degrees
+        (west) to +180 degrees (east)
+        :param latitude: The latitude parameter represents the geographic coordinate that specifies the
+        north-south position of a point on the Earth's surface. It is measured in degrees ranging from
+        -90 degrees (South Pole) to +90 degrees (North Pole)
+        :param distance: The `distance` parameter in the `raw_postgis_sql_query` method is used to
+        specify the distance within which the spatial relation should be evaluated. It is an optional
+        parameter that allows you to define a radius or distance around a given longitude and latitude
+        point for the spatial query. If provided, the
+        :return: The `raw_postgis_sql_query` method returns the result of the SQL query executed using
+        the provided parameters for field, spatial relation, longitude, latitude, and distance (if
+        provided). The method executes the query and fetches all the results from the database, which
+        are then returned as a list of tuples containing the query results.
         """
-        query = f"SELECT id FROM {self._table} WHERE {postgis_query}"
-        self.env.cr.execute(query)
+        operator = Operator(field)
+        postgis_query = operator.get_postgis_query(spatial_relation, longitude, latitude, distance=distance)
+
+        query = self._where_calc([])
+        query.add_where(postgis_query)
+        self.env.cr.execute(query.select())
         return self.env.cr.fetchall()
 
     @api.model
@@ -284,9 +302,7 @@ class Base(models.AbstractModel):
         features = []
 
         for field in fields:
-            operator = Operator(field)
-            postgis_query = operator.get_postgis_query(spatial_relation, longitude, latitude, distance=distance)
-            result = self.raw_postgis_sql_query(postgis_query)
+            result = self.raw_postgis_sql_query(field, spatial_relation, longitude, latitude, distance=distance)
             if result:
                 result = [item[0] for item in result]
                 records = self.browse(result)

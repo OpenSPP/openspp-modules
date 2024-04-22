@@ -1,6 +1,6 @@
 from odoo.tests.common import TransactionCase
 
-from ..operators import Operator
+from odoo.addons.spp_base_gis.operators import Operator
 
 
 class OperatorTest(TransactionCase):
@@ -56,3 +56,19 @@ class OperatorTest(TransactionCase):
 
         with self.assertRaisesRegex(ValueError, f"Invalid operation: {operation}"):
             self.operator.get_postgis_query(operation, longitude, latitude)
+
+    def test_validate(self):
+        with self.assertRaisesRegex(ValueError, "No keyword arguments provided."):
+            self.operator.validate()
+
+        with self.assertRaisesRegex(ValueError, "Invalid operation: invalid"):
+            self.operator.validate(operation="invalid")
+
+        with self.assertRaisesRegex(TypeError, "Invalid longitude: invalid"):
+            self.operator.validate(longitude="invalid")
+
+        with self.assertRaisesRegex(TypeError, "Invalid latitude: invalid"):
+            self.operator.validate(latitude="invalid")
+
+        with self.assertRaisesRegex(TypeError, "Invalid distance: invalid"):
+            self.operator.validate(distance="invalid")

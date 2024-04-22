@@ -5,7 +5,7 @@ from shapely.wkt import loads as wktloads
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
-from ..fields import GeoField, GeoLineStringField, GeoPointField, GeoPolygonField, value_to_shape
+from odoo.addons.spp_base_gis.fields import GeoField, GeoLineStringField, GeoPointField, GeoPolygonField, value_to_shape
 
 
 class FieldsTest(TransactionCase):

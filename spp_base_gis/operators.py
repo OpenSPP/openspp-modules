@@ -36,33 +36,51 @@ class Operator:
     def st_transform(self, geom, srid):
         return f"ST_Transform({geom}, {srid})"
 
+    def validate(self, **kwargs):
+        """
+        The function `validate` checks the validity of keyword arguments related to spatial operations.
+        """
+        if not kwargs:
+            raise ValueError("No keyword arguments provided.")
+        operation = kwargs.get("operation")
+        longitude = kwargs.get("longitude")
+        latitude = kwargs.get("latitude")
+        distance = kwargs.get("distance")
+
+        if operation and operation not in self.POSTGIS_SPATIAL_RELATION:
+            raise ValueError(f"Invalid operation: {operation}")
+        if longitude and not isinstance(longitude, int | float):
+            raise TypeError(f"Invalid longitude: {longitude}")
+        if latitude and not isinstance(latitude, int | float):
+            raise TypeError(f"Invalid latitude: {latitude}")
+        if distance and not isinstance(distance, int | float):
+            raise TypeError(f"Invalid distance: {distance}")
+
     def get_postgis_query(self, operation, longitude, latitude, distance=None):
         """
-        The function `get_postgis_query` generates a PostGIS spatial query based on the operation,
-        longitude, latitude, and optional distance provided.
+        The function `get_postgis_query` generates a PostGIS spatial query based on the specified
+        operation, longitude, latitude, and optional distance.
 
         :param operation: The `operation` parameter in the `get_postgis_query` method represents the
-        spatial operation to be performed in the PostGIS query. It determines how the spatial
-        relationship between geometries will be evaluated. Examples of spatial operations include
-        `ST_Intersects`, `ST_Contains`, `ST_Distance`,
-        :param longitude: The `longitude` parameter in the `get_postgis_query` method represents the
-        longitude coordinate of a point on the Earth's surface. It is used to create a spatial point in
-        PostGIS for performing spatial operations like distance calculations or spatial relations
+        spatial operation to be performed in the PostGIS query. It could be one of the following spatial
+        operations: 'intersects', 'contains', 'within', 'touches', 'overlaps', 'crosses', 'equals
+        :param longitude: Longitude is a numerical value that represents the east-west position of a
+        point on the Earth's surface. It is measured in degrees and ranges from -180 degrees (west) to
+        +180 degrees (east)
         :param latitude: Latitude is a geographic coordinate that specifies the north-south position of
         a point on the Earth's surface. It is measured in degrees ranging from -90 (South Pole) to 90
         (North Pole)
         :param distance: The `distance` parameter in the `get_postgis_query` method is used to specify
-        the distance for a spatial operation. If a distance is provided, the method will calculate the
-        spatial relation based on the distance from a given point. If no distance is provided, the
-        method will calculate the spatial relation
+        the distance within which the spatial operation should be performed. If a value is provided for
+        `distance`, the method will create a buffer around the specified point within that distance and
+        perform the spatial operation accordingly. If no
         :return: The `get_postgis_query` method returns a PostGIS spatial query based on the provided
         operation, longitude, latitude, and optional distance. If a distance is provided, it calculates
         the spatial relation using a buffered area around the point within the specified distance. If no
-        distance is provided, it calculates the spatial relation between the point and the field
-        directly.
+        distance is provided, it calculates the spatial relation directly between the point and the
+        field name.
         """
-        if operation not in self.POSTGIS_SPATIAL_RELATION:
-            raise ValueError(f"Invalid operation: {operation}")
+        self.validate(operation=operation, longitude=longitude, latitude=latitude, distance=distance)
 
         point = self.create_point(longitude, latitude, self.field.srid)
 
