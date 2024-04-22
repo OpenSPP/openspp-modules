@@ -23,7 +23,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [g2p_connect_demo](g2p_connect_demo/) | 17.0.1.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | G2P Connect Demo
-[g2p_entitlement_cash](g2p_entitlement_cash/) | 17.0.1.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | SPP Program Entitlement (Cash)
+[spp_entitlement_cash](spp_entitlement_cash/) | 17.0.1.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | SPP Program Entitlement (Cash)
 [spp_api](spp_api/) | 17.0.1.0.0 |  | RESTful API for OpenSPP
 [spp_api_records](spp_api_records/) | 17.0.1.0.0 |  | RESTful API routes for OpenSPP
 [spp_area](spp_area/) | 17.0.1.0.0 | [![jeremi](https://github.com/jeremi.png?size=30px)](https://github.com/jeremi) [![gonzalesedwin1123](https://github.com/gonzalesedwin1123.png?size=30px)](https://github.com/gonzalesedwin1123) | OpenSPP Area

@@ -17,7 +17,7 @@
         "product",
         "g2p_programs",
         "spp_programs",
-        "g2p_entitlement_cash",
+        "spp_entitlement_cash",
         "spp_entitlement_in_kind",
         "spp_ent_trans",
         "contacts",

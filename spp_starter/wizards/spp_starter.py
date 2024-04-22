@@ -169,7 +169,7 @@ class SppStarter(models.TransientModel):
         if self.service_point_management == "yes":
             res |= find_module("spp_service_points")
         if self.cash_transfer_needed == "yes":
-            res |= find_module("g2p_entitlement_cash")
+            res |= find_module("spp_entitlement_cash")
         if self.bank_details_needed == "yes":
             res |= find_module("g2p_bank")
         if self.conducting_inkind_transfer == "yes":
