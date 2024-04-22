@@ -208,7 +208,7 @@
                                 </field>
                             </group>
                         </page>
-                        <page name="pisca" string="PISCA BLS">
+                        <page name="pisca" string="PISCA BLS" invisible="1">
                             <notebook>
                             </notebook>
                         </page>
