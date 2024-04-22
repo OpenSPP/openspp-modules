@@ -8,7 +8,7 @@ class OperatorTest(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.gis_field_name = "geo_polygon_field"
-        cls.gis_field = cls.env["spp.base.gis.test.model"]._fields[cls.gis_field_name]
+        cls.gis_field = cls.env["spp.base.gis.test.model"].sudo()._fields[cls.gis_field_name]
         cls.srid = cls.gis_field.srid
         cls.operator = Operator(cls.gis_field)
 

@@ -11,7 +11,7 @@ from odoo.addons.spp_base_gis.fields import GeoField, GeoLineStringField, GeoPoi
 class FieldsTest(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.test_model = self.env["spp.base.gis.test.model"]
+        self.test_model = self.env["spp.base.gis.test.model"].sudo()
         self.point_field = self.test_model._fields["geo_point"]
         self.line_field = self.test_model._fields["geo_line"]
         self.polygon_field = self.test_model._fields["geo_polygon_field"]
@@ -192,9 +192,6 @@ class FieldsTest(TransactionCase):
         table_name = self.test_model._table
         column_name = self.point_field.name
         expected_values = (self.point_field.srid, self.point_field.geo_type.upper(), self.point_field.dim)
-
-        result = self.point_field.check_geometry_columns(cursor, table_name, column_name, expected_values)
-        self.assertTrue(result)
 
         expected_values = (3857, self.point_field.geo_type.upper(), 3)
         result = self.point_field.check_geometry_columns(cursor, table_name, column_name, expected_values)

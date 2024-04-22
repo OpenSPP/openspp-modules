@@ -12,7 +12,7 @@ class BaseGISTest(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.test_model = cls.env["spp.base.gis.test.model"]
+        cls.test_model = cls.env["spp.base.gis.test.model"].sudo()
 
         cls.geojson_polygon_1 = {
             "type": "Polygon",
