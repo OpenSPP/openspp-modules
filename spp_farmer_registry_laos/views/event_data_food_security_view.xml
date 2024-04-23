@@ -1,0 +1,496 @@
+<odoo>
+    <record id="view_spp_event_food_security_form" model="ir.ui.view">
+        <field name="name">view_spp_event_food_security_form</field>
+        <field name="model">spp.event.food.security</field>
+        <field name="priority">200</field>
+        <field name="arch" type="xml">
+            <form string="Event Data: Food Security" duplicate="0">
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_0">
+                        <div class="col-4 o_setting_box" name="survey_sched">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="survey_sched" />
+                                <div>
+                                </div>
+                                <field name="survey_sched" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-10 o_setting_box" name="hungry_season_past_12">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="hungry_season_past_12" />
+                                <div>
+                                </div>
+                                <field name="hungry_season_past_12" />
+                            </div>
+                        </div>
+                    </div>
+                    <h4>In case of shortage</h4>
+                    <div class="row mt16 o_settings_container" name="container_2">
+                        <div class="col-4 o_setting_box" name="shortage_january">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_january" />
+                                <div>
+                                </div>
+                                <field name="shortage_january" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_february">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_february" />
+                                <div>
+                                </div>
+                                <field name="shortage_february" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_march">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_march" />
+                                <div>
+                                </div>
+                                <field name="shortage_march" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_april">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_april" />
+                                <div>
+                                </div>
+                                <field name="shortage_april" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_may">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_may" />
+                                <div>
+                                </div>
+                                <field name="shortage_may" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_june">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_june" />
+                                <div>
+                                </div>
+                                <field name="shortage_june" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_july">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_july" />
+                                <div>
+                                </div>
+                                <field name="shortage_july" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_august">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_august" />
+                                <div>
+                                </div>
+                                <field name="shortage_august" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_september">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_september" />
+                                <div>
+                                </div>
+                                <field name="shortage_september" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_october">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_october" />
+                                <div>
+                                </div>
+                                <field name="shortage_october" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_november">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_november" />
+                                <div>
+                                </div>
+                                <field name="shortage_november" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="shortage_february">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shortage_december" />
+                                <div>
+                                </div>
+                                <field name="shortage_december" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_event_food_security" model="ir.actions.act_window">
+        <field name="name">Event Data: Food Security</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.event.food.security</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+
+    </record>
+
+    <record id="action_spp_event_food_security_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_food_security_form" />
+        <field name="act_window_id" ref="action_spp_event_food_security" />
+    </record>
+
+    <record id="view_farmer_groups_food_security_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_food_security_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="vii_food_security" string="VII. Food Security">
+                    <div class="row mt16 o_settings_container" name="vii_container_0">
+                        <div class="col-4 o_setting_box" name="vii_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="vii_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="vii_container_1">
+                        <div class="col-10 o_setting_box" name="vii_hungry_season_past_12">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_hungry_season_past_12" />
+                                <div>
+                                </div>
+                                <field name="vii_hungry_season_past_12" />
+                            </div>
+                        </div>
+                    </div>
+                    <h4>In case of shortage</h4>
+                    <div class="row mt16 o_settings_container" name="vii_container_2">
+                        <div class="col-4 o_setting_box" name="vii_shortage_january">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_january" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_january" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_february">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_february" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_february" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_march">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_march" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_march" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_april">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_april" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_april" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_may">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_may" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_may" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_june">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_june" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_june" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_july">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_july" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_july" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_august">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_august" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_august" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_september">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_september" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_september" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_october">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_october" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_october" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_november">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_november" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_november" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_february">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_december" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_december" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_food_security_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_food_security_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="vii_food_security" string="VII. Food Security">
+                    <div class="row mt16 o_settings_container" name="vii_container_0">
+                        <div class="col-4 o_setting_box" name="vii_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="vii_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="vii_container_1">
+                        <div class="col-10 o_setting_box" name="vii_hungry_season_past_12">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_hungry_season_past_12" />
+                                <div>
+                                </div>
+                                <field name="vii_hungry_season_past_12" />
+                            </div>
+                        </div>
+                    </div>
+                    <h4>In case of shortage</h4>
+                    <div class="row mt16 o_settings_container" name="vii_container_2">
+                        <div class="col-4 o_setting_box" name="vii_shortage_january">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_january" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_january" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_february">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_february" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_february" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_march">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_march" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_march" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_april">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_april" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_april" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_may">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_may" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_may" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_june">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_june" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_june" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_july">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_july" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_july" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_august">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_august" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_august" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_september">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_september" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_september" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_october">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_october" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_october" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_november">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_november" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_november" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="vii_shortage_february">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="vii_shortage_december" />
+                                <div>
+                                </div>
+                                <field name="vii_shortage_december" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+  </odoo>
