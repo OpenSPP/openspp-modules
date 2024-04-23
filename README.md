@@ -10,7 +10,7 @@
 
 # OpenSPP Registry
 
-OpenSPP’s key feature is a 360-degree view of the registrant and beneficiary. The information is stored in one place and can be easily accessed by key stakeholders while providing advanced access management, auditability, and accountability.
+OpenSPP’s key feature is a 360-degree view of the registrant and beneficiary. The information is stored in one place and can be easily accessed by key stakeholders while providing advanced access management, auditability, and accountability..
 
 <!-- /!\ do not modify below this line -->
 
