@@ -217,36 +217,38 @@ class Base(models.AbstractModel):
             raise UserError(_("Invalid layer type %s") % layer_type) from e
 
     @api.model
-    def raw_postgis_sql_query(self, field, spatial_relation, longitude, latitude, distance=None):
+    def raw_postgis_sql_query(self, field, spatial_relation, coordinates, distance=None, layer_type="point"):
         """
-        The function `raw_postgis_sql_query` executes a raw PostGIS SQL query based on spatial
-        parameters provided.
+        The function `raw_postgis_sql_query` executes a raw PostGIS SQL query based on the provided
+        field, spatial relation, coordinates, distance, and layer type.
 
-        :param field: The `field` parameter in the `raw_postgis_sql_query` method likely refers to the
-        field in the database table that contains the spatial data for which you want to perform a
-        PostGIS query. This field would typically store geometries or geographic coordinates that you
-        want to use in your spatial queries
+        :param field: The `field` parameter in the `raw_postgis_sql_query` method represents the field
+        or attribute in the database table that you want to perform the spatial query on. It is used to
+        specify the column in the database table that contains the spatial data for the PostGIS query
         :param spatial_relation: Spatial relation refers to the relationship between a spatial object
-        and another object in a spatial database. Common spatial relations include "contains",
-        "intersects", "touches", "within", "overlaps", etc. These relations are used to define how two
+        and another object in a spatial database. Common spatial relations include "intersects",
+        "contains", "within", "touches", "overlaps", etc. These relations are used to define how two
         spatial objects interact with each other in a geographic context
-        :param longitude: Longitude is a geographic coordinate that specifies the east-west position of
-        a point on the Earth's surface. It is measured in degrees, with values ranging from -180 degrees
-        (west) to +180 degrees (east)
-        :param latitude: The latitude parameter represents the geographic coordinate that specifies the
-        north-south position of a point on the Earth's surface. It is measured in degrees ranging from
-        -90 degrees (South Pole) to +90 degrees (North Pole)
-        :param distance: The `distance` parameter in the `raw_postgis_sql_query` method is used to
+        :param coordinates: Coordinates are the geographic points or locations for which you want to
+        perform a spatial query in the PostGIS database. These coordinates typically consist of latitude
+        and longitude values that define a specific point on the Earth's surface
+        :param distance: The `distance` parameter in the `raw_postgis_sql_query` function is used to
         specify the distance within which the spatial relation should be evaluated. It is an optional
-        parameter that allows you to define a radius or distance around a given longitude and latitude
-        point for the spatial query. If provided, the
+        parameter, meaning it does not have to be provided when calling the function. If a distance is
+        provided, the function will consider this
+        :param layer_type: The `layer_type` parameter in the `raw_postgis_sql_query` method is used to
+        specify the type of spatial layer being queried. The default value for `layer_type` is set to
+        "point", but you can provide other values such as "line" or "polygon" depending on the, defaults
+        to point (optional)
         :return: The `raw_postgis_sql_query` method returns the result of the SQL query executed using
-        the provided parameters for field, spatial relation, longitude, latitude, and distance (if
-        provided). The method executes the query and fetches all the results from the database, which
-        are then returned as a list of tuples containing the query results.
+        the provided parameters. The method executes a PostGIS query based on the field, spatial
+        relation, coordinates, distance, and layer type provided, fetches the results from the database,
+        and returns them as a list of tuples containing the query results.
         """
         operator = Operator(field)
-        postgis_query = operator.get_postgis_query(spatial_relation, longitude, latitude, distance=distance)
+        postgis_query = operator.get_postgis_query(
+            spatial_relation, coordinates, distance=distance, layer_type=layer_type
+        )
 
         query = self._where_calc([])
         query.add_where(postgis_query)
@@ -302,7 +304,9 @@ class Base(models.AbstractModel):
         features = []
 
         for field in fields:
-            result = self.raw_postgis_sql_query(field, spatial_relation, longitude, latitude, distance=distance)
+            result = self.raw_postgis_sql_query(
+                field, spatial_relation, coordinates=[[longitude, latitude]], distance=distance, layer_type="point"
+            )
             if result:
                 result = [item[0] for item in result]
                 records = self.browse(result)

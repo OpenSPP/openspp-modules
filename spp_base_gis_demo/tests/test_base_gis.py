@@ -619,13 +619,37 @@ class BaseGISTest(TransactionCase):
         with self.assertRaisesRegex(UserError, "Invalid layer type error"):
             self.test_model.get_field_type_from_layer_type("error")
 
-    def test_raw_postgis_sql_query(self):
+    def test_raw_postgis_sql_query_point(self):
         field = self.test_model._fields["geo_polygon_field"]
         spatial_relation = "intersects"
         longitude = self.longitude_1
         latitude = self.latitude_1
 
-        result = self.test_model.raw_postgis_sql_query(field, spatial_relation, longitude, latitude)
+        result = self.test_model.raw_postgis_sql_query(field, spatial_relation, [[longitude, latitude]])
+        self.assertIsInstance(result, list)
+        self.assertIsInstance(result[0], tuple)
+        self.assertIsInstance(result[0][0], int)
+        self.assertEqual(result[0][0], self.test_record_1.id)
+
+    def test_raw_postgis_sql_query_line(self):
+        field = self.test_model._fields["geo_polygon_field"]
+        spatial_relation = "intersects"
+        line = [[self.longitude_1, self.latitude_1], self.geojson_polygon_1["coordinates"][0][0]]
+
+        result = self.test_model.raw_postgis_sql_query(field, spatial_relation, line, layer_type="line")
+
+        self.assertIsInstance(result, list)
+        self.assertIsInstance(result[0], tuple)
+        self.assertIsInstance(result[0][0], int)
+        self.assertEqual(result[0][0], self.test_record_1.id)
+
+    def test_raw_postgis_sql_query_polygon(self):
+        field = self.test_model._fields["geo_polygon_field"]
+        spatial_relation = "intersects"
+        polygon = self.geojson_polygon_1["coordinates"][0]
+
+        result = self.test_model.raw_postgis_sql_query(field, spatial_relation, polygon, layer_type="polygon")
+
         self.assertIsInstance(result, list)
         self.assertIsInstance(result[0], tuple)
         self.assertIsInstance(result[0][0], int)
