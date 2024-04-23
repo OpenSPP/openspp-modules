@@ -1,0 +1,307 @@
+<odoo>
+    <record id="view_spp_event_inc_agri_form" model="ir.ui.view">
+        <field name="name">view_spp_event_inc_agri_form</field>
+        <field name="model">spp.event.inc.agri</field>
+        <field name="priority">200</field>
+        <field name="arch" type="xml">
+            <form string="Event Data: Income from Agribusiness (LAK)" duplicate="0">
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_0">
+                        <div class="col-4 o_setting_box" name="survey_sched">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="survey_sched" />
+                                <div>
+                                </div>
+                                <field name="survey_sched" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-4 o_setting_box" name="sales_of_input">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="sales_of_input" />
+                                <div>
+                                </div>
+                                <field name="sales_of_input" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="sales_baby_animals">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="sales_baby_animals" />
+                                <div>
+                                </div>
+                                <field name="sales_baby_animals" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="sales_of_animal_feeds">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="sales_of_animal_feeds" />
+                                <div>
+                                </div>
+                                <field name="sales_of_animal_feeds" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="rental_agri_machinery">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="rental_agri_machinery" />
+                                <div>
+                                </div>
+                                <field name="rental_agri_machinery" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="processing_agro_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="processing_agro_products" />
+                                <div>
+                                </div>
+                                <field name="processing_agro_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="transport_trade_agro_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="transport_trade_agro_products" />
+                                <div>
+                                </div>
+                                <field name="transport_trade_agro_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="other" />
+                                <div>
+                                </div>
+                                <field name="other" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_event_inc_agri" model="ir.actions.act_window">
+        <field name="name">Event Data: Income from Agribusiness (LAK)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.event.inc.agri</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+
+    </record>
+
+    <record id="action_spp_event_inc_agri_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_inc_agri_form" />
+        <field name="act_window_id" ref="action_spp_event_inc_agri" />
+    </record>
+
+    <record id="view_farmer_groups_inc_agri_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_inc_agri_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xiii_inc_agri" string="XIII. Income from Agribusiness (LAK)">
+                    <div class="row mt16 o_settings_container" name="xiii_container_0">
+                        <div class="col-4 o_setting_box" name="xiii_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xiii_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="xiii_container_1">
+                        <div class="col-4 o_setting_box" name="xiii_sales_of_input">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_sales_of_input" />
+                                <div>
+                                </div>
+                                <field name="xiii_sales_of_input" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_sales_baby_animals">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_sales_baby_animals" />
+                                <div>
+                                </div>
+                                <field name="xiii_sales_baby_animals" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_sales_of_animal_feeds">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_sales_of_animal_feeds" />
+                                <div>
+                                </div>
+                                <field name="xiii_sales_of_animal_feeds" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_rental_agri_machinery">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_rental_agri_machinery" />
+                                <div>
+                                </div>
+                                <field name="xiii_rental_agri_machinery" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_processing_agro_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_processing_agro_products" />
+                                <div>
+                                </div>
+                                <field name="xiii_processing_agro_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_transport_trade_agro_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_transport_trade_agro_products" />
+                                <div>
+                                </div>
+                                <field name="xiii_transport_trade_agro_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_other" />
+                                <div>
+                                </div>
+                                <field name="xiii_other" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_inc_agri_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_inc_agri_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xiii_inc_agri" string="XIII. Income from Agribusiness (LAK)">
+                    <div class="row mt16 o_settings_container" name="xiii_container_0">
+                        <div class="col-4 o_setting_box" name="xiii_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xiii_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="xiii_container_1">
+                        <div class="col-4 o_setting_box" name="xiii_sales_of_input">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_sales_of_input" />
+                                <div>
+                                </div>
+                                <field name="xiii_sales_of_input" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_sales_baby_animals">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_sales_baby_animals" />
+                                <div>
+                                </div>
+                                <field name="xiii_sales_baby_animals" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_sales_of_animal_feeds">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_sales_of_animal_feeds" />
+                                <div>
+                                </div>
+                                <field name="xiii_sales_of_animal_feeds" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_rental_agri_machinery">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_rental_agri_machinery" />
+                                <div>
+                                </div>
+                                <field name="xiii_rental_agri_machinery" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_processing_agro_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_processing_agro_products" />
+                                <div>
+                                </div>
+                                <field name="xiii_processing_agro_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_transport_trade_agro_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_transport_trade_agro_products" />
+                                <div>
+                                </div>
+                                <field name="xiii_transport_trade_agro_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xiii_other">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xiii_other" />
+                                <div>
+                                </div>
+                                <field name="xiii_other" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+  </odoo>

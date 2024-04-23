@@ -14,6 +14,7 @@
         "g2p_programs",
         # "spp_helpdesk",
         "product",
+        "stock",
     ],
     "data": [
         "data/users_data.xml",

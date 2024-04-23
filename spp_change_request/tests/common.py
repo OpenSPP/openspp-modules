@@ -34,10 +34,11 @@ class Common(TransactionCase):
         )
         return super().setUpClass()
 
-    def _create_registrant(self, vals):
-        self.assertTrue(isinstance(vals, dict), "Return vals should be a dict!")
+    @classmethod
+    def _create_registrant(cls, vals):
+        cls.assertTrue(isinstance(vals, dict), "Return vals should be a dict!")
         vals.update({"is_registrant": True})
-        return self.env["res.partner"].create(vals)
+        return cls.env["res.partner"].create(vals)
 
     @patch("odoo.addons.spp_change_request.models.change_request.ChangeRequestBase._selection_request_type_ref_id")
     def _create_change_request(self, mock_request_type_selection):

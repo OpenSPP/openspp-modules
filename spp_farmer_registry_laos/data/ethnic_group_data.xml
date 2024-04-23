@@ -1,0 +1,61 @@
+<odoo noupdate="1">
+
+    <!-- Ethnic Groups -->
+    <record id="lao_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Lao</field>
+        <field name="ethnic_group_id">1</field>
+    </record>
+    <record id="hmong_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Hmong</field>
+        <field name="ethnic_group_id">2</field>
+    </record>
+    <record id="khmu_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Khmu</field>
+        <field name="ethnic_group_id">3</field>
+    </record>
+    <record id="lue_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Lue</field>
+        <field name="ethnic_group_id">4</field>
+    </record>
+    <record id="youan_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Youan</field>
+        <field name="ethnic_group_id">5</field>
+    </record>
+    <record id="taidam_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Taidam</field>
+        <field name="ethnic_group_id">6</field>
+    </record>
+    <record id="taideng_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Taideng</field>
+        <field name="ethnic_group_id">7</field>
+    </record>
+    <record id="pailor_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Pailor</field>
+        <field name="ethnic_group_id">8</field>
+    </record>
+    <record id="iu_mien_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Iu-Mien</field>
+        <field name="ethnic_group_id">9</field>
+    </record>
+    <record id="tai_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Tai</field>
+        <field name="ethnic_group_id">10</field>
+    </record>
+    <record id="edu_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Edu</field>
+        <field name="ethnic_group_id">11</field>
+    </record>
+    <record id="taiphouan_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Taiphouan</field>
+        <field name="ethnic_group_id">12</field>
+    </record>
+    <record id="phorng_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Phorng</field>
+        <field name="ethnic_group_id">13</field>
+    </record>
+    <record id="others_ethnic_group" model="spp.ethnic.group">
+        <field name="name">Others</field>
+        <field name="ethnic_group_id">14</field>
+    </record>
+
+</odoo>

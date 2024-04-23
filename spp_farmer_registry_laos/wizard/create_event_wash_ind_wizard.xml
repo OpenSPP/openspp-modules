@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_wash_ind_form_view" model="ir.ui.view">
+        <field name="name">create_event_wash_ind_form_view</field>
+        <field name="model">spp.create.event.wash.ind.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_0">
+                        <div class="col-4 o_setting_box" name="survey_sched">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="survey_sched" />
+                                <div>
+                                </div>
+                                <field name="survey_sched" required="1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-4 o_setting_box" name="water_sources">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="water_sources" />
+                                <div>
+                                </div>
+                                <field name="water_sources" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="latrine_condition">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="latrine_condition" />
+                                <div>
+                                </div>
+                                <field name="latrine_condition" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="handwashing_facility">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="handwashing_facility" />
+                                <div>
+                                </div>
+                                <field name="handwashing_facility" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+                <field name="event_id" invisible="1" />
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
