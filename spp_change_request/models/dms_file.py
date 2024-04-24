@@ -1,4 +1,8 @@
+import logging
+
 from odoo import _, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class SPPDMSFileCustom(models.Model):
@@ -6,7 +10,14 @@ class SPPDMSFileCustom(models.Model):
 
     change_request_id = fields.Many2one("spp.change.request", "Change Request")
 
+    def create(self, vals):
+        _logger.info("DEBUG vals: %s", vals)
+        return super().create(vals)
+
     def action_save_and_close(self):
+        return {"type": "ir.actions.act_window_close"}
+
+    def action_close(self):
         return {"type": "ir.actions.act_window_close"}
 
     def action_attach_documents(self):

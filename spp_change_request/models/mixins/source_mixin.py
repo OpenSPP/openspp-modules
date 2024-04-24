@@ -1,7 +1,11 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
+import logging
+
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class ChangeRequestSourceMixin(models.AbstractModel):
@@ -823,10 +827,12 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     if category:
                         dms_context.update(
                             {
-                                "default_category_id": category_id,
+                                "default_change_request_id": rec.id,
+                                "default_category_id": category.id,
                                 "category_readonly": True,
                             }
                         )
+                        _logger.debug("action_attach_documents dms_context: %s", dms_context)
                         action.update(
                             {
                                 "name": _("Upload Document: %s", category.name),
