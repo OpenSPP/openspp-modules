@@ -43,12 +43,7 @@
                                 readonly="1"
                                 force_save="1"
                             />
-                            <field
-                                name="change_request_id"
-                                options="{'no_open':True}"
-                                readonly="1"
-                                force_save="1"
-                            />
+                            <field name="change_request_id" options="{'no_open':True}" invisible="1" />
                             <!-- <field
                                 name="path_json"
                                 widget="path_json"

@@ -821,26 +821,29 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     "target": "new",
                     "context": dms_context,
                 }
+                category_name = "Other Documents"
                 if self.env.context.get("category_id"):
                     category_id = self.env.context.get("category_id")
                     category = self.env["spp.dms.category"].search([("id", "=", category_id)])
                     if category:
                         dms_context.update(
                             {
-                                "default_change_request_id": rec.id,
                                 "default_category_id": category.id,
                                 "category_readonly": True,
                             }
                         )
-                        _logger.debug("action_attach_documents dms_context: %s", dms_context)
-                        action.update(
-                            {
-                                "name": _("Upload Document: %s", category.name),
-                                "context": dms_context,
-                            }
-                        )
+                        category_name = category.name
                     else:
                         raise UserError(_("The required document category is not configured."))
+
+                dms_context.update({"default_change_request_id": rec.id})
+                _logger.debug("action_attach_documents dms_context: %s", dms_context)
+                action.update(
+                    {
+                        "name": _("Upload Document: %s", category_name),
+                        "context": dms_context,
+                    }
+                )
                 return action
             else:
                 raise UserError(_("There are no directories defined for this change request."))
