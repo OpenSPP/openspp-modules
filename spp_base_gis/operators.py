@@ -9,35 +9,61 @@ from odoo.tools import SQL
 
 class Operator:
     """
-    The Operator class facilitates the creation and manipulation of spatial geometries and queries within a PostgreSQL
-    database using the PostGIS extension. It offers methods for constructing geometries (points, lines, polygons),
-    setting and transforming spatial reference identifiers (SRIDs), and generating spatial queries based on specified
-    operations and geometries.
+    The Operator class is designed to facilitate spatial operations and queries within a PostgreSQL database
+    using the PostGIS extension. It provides a suite of methods for constructing geometries (such as points,
+    lines, and polygons), setting and transforming spatial reference identifiers (SRIDs), and generating
+    spatial queries based on specified operations and geometries. This class serves as a utility for
+    interacting with spatial data, making it easier to perform common spatial operations and integrate
+    spatial data processing into applications.
 
     Attributes:
-        field (Field): An object representing the field associated with spatial data, containing SRID information.
-        POSTGIS_SPATIAL_RELATION (dict): Maps spatial operation names to their corresponding PostGIS function names.
+        field (Field): An object representing the spatial field associated with the class. This field
+                       contains information about the spatial reference identifier (SRID) and is used
+                       in spatial operations to ensure geometries are correctly interpreted within the
+                       spatial reference system.
+        POSTGIS_SPATIAL_RELATION (dict): A dictionary mapping spatial operation names (as used within
+                                         the application) to their corresponding PostGIS function names.
+                                         This allows for a flexible interface to PostGIS functions by
+                                         abstracting the actual function names behind more intuitive operation
+                                         names.
+        ALLOWED_LAYER_TYPE (dict): A dictionary defining the allowed types of spatial layers (e.g., Point,
+                                   LineString, Polygon) that can be used within the class. This ensures
+                                   that operations are only performed on supported geometry types, helping
+                                   to maintain data integrity and prevent errors.
 
     Methods:
-        __init__(self, field): Initializes a new instance of the Operator class with the specified field.
-        st_makepoint(self, longitude, latitude): Returns a string for a PostGIS call to create a point from
-                                                  longitude and latitude.
-        st_makeline(self, points): Returns a string for a PostGIS call to create a line geometry from an array of
-                                   points.
-        st_makepolygon(self, points): Returns a string for a PostGIS call to create a polygon geometry from a list
-                                      of points.
-        st_setsrid(self, geom, srid): Returns a string for a PostGIS call to set the SRID for a geometry object.
-        st_transform(self, geom, srid): Returns a string for a PostGIS call to transform a geometry object to a
-                                        different spatial reference system.
-        create_point(self, coordinate, srid): Creates a point geometry with given coordinates and SRID.
-        create_line(self, coordinates, srid): Creates a line geometry from coordinates and assigns the specified SRID.
-        create_polygon(self, coordinates, srid): Creates a polygon geometry from coordinates and assigns the specified
-                                                 SRID.
-        clean_and_validate(self, **kwargs): Validates provided keyword arguments for spatial operations, coordinates,
-                                             distance, and layer types.
-        get_postgis_query(self, operation, coordinates, distance=None, layer_type="point"): Generates and returns a
-                                      PostGIS spatial query based on specified operation, coordinates, distance, and
-                                      layer type.
+        __init__(self, field): Constructor method that initializes a new instance of the Operator class
+                               with the specified spatial field.
+        st_makepoint(self, longitude, latitude): Constructs a SQL string for a PostGIS call to create a
+                                                  point geometry from longitude and latitude values.
+        st_makeline(self, points): Constructs a SQL string for a PostGIS call to create a line geometry
+                                   from an array of point geometries.
+        st_makepolygon(self, points): Constructs a SQL string for a PostGIS call to create a polygon
+                                      geometry from a list of point geometries defining the polygon's
+                                      boundary.
+        st_setsrid(self, geom, srid): Constructs a SQL string for a PostGIS call to set the SRID for a
+                                      geometry object, ensuring it is interpreted within the correct
+                                      spatial reference system.
+        st_transform(self, geom, srid): Constructs a SQL string for a PostGIS call to transform a
+                                        geometry object to a different spatial reference system.
+        create_point(self, coordinate, srid): Creates a point geometry with the given coordinates and
+                                              SRID.
+        create_line(self, coordinates, srid): Creates a line geometry from a list of coordinates and
+                                              assigns the specified SRID.
+        create_polygon(self, coordinates, srid): Creates a polygon geometry from a list of coordinates
+                                                 and assigns the specified SRID.
+        clean_and_validate(self, **kwargs): Validates provided keyword arguments for spatial operations,
+                                            ensuring that coordinates, distances, and layer types are
+                                            correctly specified and supported.
+        get_postgis_query(self, operation, coordinates, distance=None, layer_type="point"): Generates
+                                      and returns a PostGIS spatial query based on the specified operation,
+                                      coordinates, distance, and layer type.
+        validate_coordinates_for_point(self, coordinates): Validates a set of coordinates for creating
+                                                           a point geometry, ensuring they represent a
+                                                           valid location on Earth's surface.
+        validate_coordinates_for_line_or_polygon(self, coordinates, is_polygon=False): Validates a set
+                                                           of coordinates for creating line or polygon
+                                                           geometries, ensuring they form valid shapes.
     """
 
     OPERATION_TO_RELATION = {
