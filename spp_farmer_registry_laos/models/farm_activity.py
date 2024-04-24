@@ -9,3 +9,4 @@ class FarmActivity(models.Model):
     product_name_eng = fields.Char("Product Name (English)")
     prod_farm_id = fields.Many2one("res.partner", string="Product Farm")
     target_year = fields.Char("Target Year")
+
