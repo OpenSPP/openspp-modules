@@ -2,7 +2,7 @@
 
 
 {
-    "name": "OpenSPP: Land Record",
+    "name": "OpenSPP: Irrigation",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
