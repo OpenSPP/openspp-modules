@@ -15,73 +15,33 @@
                 "@id": "name",
                 "@type": "@id",
                 "@context": {
-                  "value": "@value",
-                  "language": "@language"
+                  "value": "@value"
                 }
               },
-              "fullName": {
-                "@id": "fullName",
-                "@type": "@id",
-                "@context": {
-                  "value": "@value",
-                  "language": "@language"
-                }
-              },
-              "gender": {
-                "@id": "gender",
-                "@type": "@id",
-                "@context": {
-                  "value": "@value",
-                  "language": "@language"
-                }
-              },
-              "dateOfBirth": "dateOfBirth",
-              "email": "email",
               "phone": "phone",
               "addressLine1": {
                 "@id": "addressLine1",
                 "@type": "@id",
                 "@context": {
-                  "value": "@value",
-                  "language": "@language"
-                }
-              },
-              "addressLine2": {
-                "@id": "addressLine2",
-                "@type": "@id",
-                "@context": {
-                  "value": "@value",
-                  "language": "@language"
-                }
-              },
-              "addressLine3": {
-                "@id": "addressLine3",
-                "@type": "@id",
-                "@context": {
-                  "value": "@value",
-                  "language": "@language"
+                  "value": "@value"
                 }
               },
               "province": {
                 "@id": "province",
                 "@type": "@id",
                 "@context": {
-                  "value": "@value",
-                  "language": "@language"
+                  "value": "@value"
                 }
               },
               "region": {
                 "@id": "region",
                 "@type": "@id",
                 "@context": {
-                  "value": "@value",
-                  "language": "@language"
+                  "value": "@value"
                 }
               },
               "postalCode": "postalCode",
-              "face": "face",
-              "vcVer": "vcVer",
-              "UIN": "UIN"
+              "vcVer": "vcVer"
             }
           }
         }

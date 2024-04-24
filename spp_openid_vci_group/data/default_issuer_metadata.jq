@@ -18,26 +18,10 @@
                 .credential_type
             ],
             "credentialSubject": {
-                "fullName": {
+                "name": {
                     "display": [
                         {
                             "name": "Name",
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "gender": {
-                    "display": [
-                        {
-                            "name": "Gender",
-                            "locale": "en"
-                        }
-                    ]
-                },
-               "dateOfBirth": {
-                    "display": [
-                        {
-                            "name": "Date of Birth",
                             "locale": "en"
                         }
                     ]
@@ -50,22 +34,6 @@
                         }
                     ]
                 },
-                "UIN": {
-                    "display": [
-                        {
-                            "name": "Beneficiary ID",
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "nationalID": {
-                    "display": [
-                        {
-                            "name": "National ID",
-                            "locale": "en"
-                        }
-                    ]
-                }
             }
         },
         "display": [

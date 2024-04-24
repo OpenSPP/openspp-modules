@@ -9,13 +9,28 @@
     "issuanceDate": .curr_datetime,
     "credentialSubject": {
         "vcVer": "VC-V1",
-        "id": (.partner.id | tostring),
-        "name": (.partner.name // null),
-        "email": (.partner.email // null),
+        "id": (.web_base_url  + "/api/v1/registry/individual/" + (.partner.id | tostring)),
+        "name": [
+            {
+                "value": (.partner.name // null)
+            }
+        ],
         "phone": (.partner.phone // null),
-        "addressLine1": .partner_address.street_address,
-        "province": .partner_address.locality,
-        "region": .partner_address.region,
+        "addressLine1": (if .partner_address.street_address then [
+            {
+                "value": .partner_address.street_address
+            }
+        ] else null end),
+        "province": (if .partner_address.locality then [
+            {
+                "value": .partner_address.locality
+            }
+        ] else null end),
+        "region": (if .partner_address.region then [
+            {
+                "value": .partner_address.region
+            }
+        ] else null end),
         "postalCode": .partner_address.postal_code,
     }
 }
