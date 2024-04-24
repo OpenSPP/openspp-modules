@@ -16,6 +16,9 @@ ALLOWED_LAYER_TYPE = [
     "polygon",
 ]
 
+# Interchange keys and values
+RELATION_TO_OPERATION = {value: key for key, value in Operator.OPERATION_TO_RELATION.items()}
+
 
 def is_valid_coordinates(latitude, longitude):
     """
@@ -217,73 +220,35 @@ class Base(models.AbstractModel):
             raise UserError(_("Invalid layer type %s") % layer_type) from e
 
     @api.model
-    def raw_postgis_sql_query(self, field, spatial_relation, coordinates, distance=None, layer_type="point"):
-        """
-        The function `raw_postgis_sql_query` executes a raw PostGIS SQL query based on the provided
-        field, spatial relation, coordinates, distance, and layer type.
-
-        :param field: The `field` parameter in the `raw_postgis_sql_query` method represents the field
-        or attribute in the database table that you want to perform the spatial query on. It is used to
-        specify the column in the database table that contains the spatial data for the PostGIS query
-        :param spatial_relation: Spatial relation refers to the relationship between a spatial object
-        and another object in a spatial database. Common spatial relations include "intersects",
-        "contains", "within", "touches", "overlaps", etc. These relations are used to define how two
-        spatial objects interact with each other in a geographic context
-        :param coordinates: Coordinates are the geographic points or locations for which you want to
-        perform a spatial query in the PostGIS database. These coordinates typically consist of latitude
-        and longitude values that define a specific point on the Earth's surface
-        :param distance: The `distance` parameter in the `raw_postgis_sql_query` function is used to
-        specify the distance within which the spatial relation should be evaluated. It is an optional
-        parameter, meaning it does not have to be provided when calling the function. If a distance is
-        provided, the function will consider this
-        :param layer_type: The `layer_type` parameter in the `raw_postgis_sql_query` method is used to
-        specify the type of spatial layer being queried. The default value for `layer_type` is set to
-        "point", but you can provide other values such as "line" or "polygon" depending on the, defaults
-        to point (optional)
-        :return: The `raw_postgis_sql_query` method returns the result of the SQL query executed using
-        the provided parameters. The method executes a PostGIS query based on the field, spatial
-        relation, coordinates, distance, and layer type provided, fetches the results from the database,
-        and returns them as a list of tuples containing the query results.
-        """
-        operator = Operator(field)
-        postgis_query = operator.get_postgis_query(
-            spatial_relation, coordinates, distance=distance, layer_type=layer_type
-        )
-
-        query = self._where_calc([])
-        query.add_where(postgis_query)
-        self.env.cr.execute(query.select())
-        return self.env.cr.fetchall()
-
-    @api.model
     def gis_locational_query(
         self, longitude: float, latitude: float, layer_type="polygon", spatial_relation="intersects", distance=None
     ):
         """
         The function `gis_locational_query` performs a spatial query based on given coordinates, layer
-        type, and spatial relation.
+        type, spatial relation, and optional distance.
 
-        :param longitude: The `longitude` parameter in the `gis_locational_query` function is used to
-        specify the longitude coordinate of the location for which you want to perform a spatial query.
-        It is a floating-point number representing the east-west position on the Earth's surface
+        :param longitude: The `longitude` parameter is a float value representing the longitudinal
+        coordinate of a location
         :type longitude: float
-        :param latitude: Latitude is a geographic coordinate that specifies the north-south position of
-        a point on the Earth's surface. It is measured in degrees ranging from -90 degrees (South Pole)
-        to +90 degrees (North Pole)
+        :param latitude: Latitude is the angular distance of a location north or south of the earth's
+        equator, measured in degrees. It ranges from -90 degrees (South Pole) to +90 degrees (North
+        Pole)
         :type latitude: float
-        :param layer_type: Layer type specifies the type of geographic layer being queried, such as
-        "polygon", "point", or "line", defaults to polygon (optional)
+        :param layer_type: The `layer_type` parameter in the `gis_locational_query` function specifies
+        the type of layer to query. It can be set to "polygon" or any other allowed layer type. If the
+        provided `layer_type` is not in the list of allowed layer types, an error will be raised,
+        defaults to polygon (optional)
         :param spatial_relation: The `spatial_relation` parameter in the `gis_locational_query` function
         determines the spatial relationship used in the query to filter the results. It specifies how
-        the provided longitude and latitude coordinates should relate to the geometries in the spatial
-        layer being queried, defaults to intersects (optional)
+        the provided point (defined by the longitude and latitude) should relate to the geometries in
+        the spatial layer being queried. The possible values for, defaults to intersects (optional)
         :param distance: The `distance` parameter in the `gis_locational_query` function is used to
-        specify a distance in meters for spatial queries. This parameter allows you to search for
-        features within a certain radius of the specified longitude and latitude coordinates. If a
-        distance is provided, the function will consider this distance when querying
-        :return: The function `gis_locational_query` returns a GeoJSON FeatureCollection containing
-        features that match the specified criteria based on the input longitude, latitude, layer type,
-        spatial relation, and distance.
+        specify a distance in meters for a spatial query. If provided, the function will search for
+        features within the specified distance from the given latitude and longitude coordinates. If the
+        `distance` parameter is not provided (i.e
+        :return: The function `gis_locational_query` returns a FeatureCollection containing features
+        that match the specified criteria based on the provided longitude, latitude, layer type, spatial
+        relation, and optional distance.
         """
         if not is_valid_coordinates(latitude, longitude):
             raise UserError(_("Invalid coordinates: latitude=%s, longitude=%s") % (latitude, longitude))
@@ -304,13 +269,16 @@ class Base(models.AbstractModel):
         features = []
 
         for field in fields:
-            result = self.raw_postgis_sql_query(
-                field, spatial_relation, coordinates=[[longitude, latitude]], distance=distance, layer_type="point"
-            )
+            value_wkt = f"POINT({longitude} {latitude})"
+            if distance:
+                value = (value_wkt, distance)
+            else:
+                value = value_wkt
+
+            domain = [(field.name, RELATION_TO_OPERATION[spatial_relation], value)]
+            result = self.search(domain)
             if result:
-                result = [item[0] for item in result]
-                records = self.browse(result)
-                features.extend(records.get_feature(field.name))
+                features.extend(result.get_feature(field.name))
 
         return self.convert_feature_to_featurecollection(features)
 

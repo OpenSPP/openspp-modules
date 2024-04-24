@@ -1,3 +1,7 @@
+import json
+
+from shapely.geometry import Point
+
 from odoo.tests.common import TransactionCase
 
 from odoo.addons.spp_base_gis.operators import Operator
@@ -14,7 +18,7 @@ class OperatorTest(TransactionCase):
 
     def test_create_point(self):
         longitude, latitude = 1, 2
-        point = self.operator.create_point([[longitude, latitude]], self.srid)
+        point = self.operator.create_point([longitude, latitude], self.srid)
 
         self.assertEqual(point, f"ST_SetSRID(ST_MakePoint({longitude}, {latitude}), {self.srid})")
 
@@ -27,7 +31,7 @@ class OperatorTest(TransactionCase):
         )
 
     def test_create_polygon(self):
-        polygon = [[1, 2], [3, 4], [5, 6], [1, 2]]
+        polygon = [[[1, 2], [3, 4], [5, 6]]]
         polygon_string = self.operator.create_polygon(polygon, self.srid)
 
         expected_string = (
@@ -47,7 +51,7 @@ class OperatorTest(TransactionCase):
     def test_get_postgis_query_point(self):
         operation = "touches"
         longitude, latitude = 1, 2
-        query = self.operator.get_postgis_query(operation, [[longitude, latitude]])
+        query = self.operator.get_postgis_query(operation, [longitude, latitude])
 
         self.assertEqual(
             query, f"ST_Touches(ST_SetSRID(ST_MakePoint({longitude}, {latitude}), {self.srid}), {self.gis_field_name})"
@@ -71,7 +75,7 @@ class OperatorTest(TransactionCase):
 
     def test_get_postgis_query_polygon(self):
         operation = "contains"
-        polygon = [[1, 2], [3, 4], [5, 6]]
+        polygon = [[[1, 2], [3, 4], [5, 6], [1, 2]]]
         query = self.operator.get_postgis_query(operation, polygon, layer_type="polygon")
 
         expected_query = (
@@ -91,7 +95,7 @@ class OperatorTest(TransactionCase):
         operation = "touches"
         longitude, latitude = 1, 2
         distance = 10
-        query = self.operator.get_postgis_query(operation, [[longitude, latitude]], distance)
+        query = self.operator.get_postgis_query(operation, [longitude, latitude], distance)
 
         expected_query = (
             f"ST_Touches("
@@ -121,7 +125,7 @@ class OperatorTest(TransactionCase):
 
     def test_get_postgis_query_polygon_with_distance(self):
         operation = "contains"
-        polygon = [[1, 2], [3, 4], [5, 6], [1, 2]]
+        polygon = [[[1, 2], [3, 4], [5, 6], [1, 2]]]
         distance = 10
         query = self.operator.get_postgis_query(operation, polygon, distance, layer_type="polygon")
 
@@ -154,61 +158,126 @@ class OperatorTest(TransactionCase):
         with self.assertRaisesRegex(ValueError, "Invalid operation: invalid"):
             self.operator.clean_and_validate(operation="invalid")
 
-        coordinates = "invalid"
-        with self.assertRaisesRegex(TypeError, f"Invalid coordinates: {coordinates}"):
-            self.operator.clean_and_validate(coordinates=coordinates)
-
-        coordinates = [1]
-        with self.assertRaisesRegex(TypeError, f"Invalid coordinate: {coordinates[0]}"):
-            self.operator.clean_and_validate(coordinates=coordinates)
-
-        coordinates = [["one", 2]]
-        with self.assertRaisesRegex(TypeError, f"Invalid coordinate: {', '.join(str(c) for c in coordinates[0])}"):
-            self.operator.clean_and_validate(coordinates=coordinates)
-
-        coordinates = [[1]]
-        with self.assertRaisesRegex(ValueError, f"Invalid coordinate: {', '.join(str(c) for c in coordinates[0])}"):
-            self.operator.clean_and_validate(coordinates=coordinates)
-
-        coordinates = [[-181, 2]]
-        with self.assertRaisesRegex(ValueError, f"Invalid coordinate: {', '.join(str(c) for c in coordinates[0])}"):
-            self.operator.clean_and_validate(coordinates=coordinates)
-
-        coordinates = [[-181, 2]]
-        with self.assertRaisesRegex(ValueError, f"Invalid coordinate: {', '.join(str(c) for c in coordinates[0])}"):
-            self.operator.clean_and_validate(coordinates=coordinates)
-
-        coordinates = [[1, -91]]
-        with self.assertRaisesRegex(ValueError, f"Invalid coordinate: {', '.join(str(c) for c in coordinates[0])}"):
-            self.operator.clean_and_validate(coordinates=coordinates)
-
-        coordinates = [[1, 91]]
-        with self.assertRaisesRegex(ValueError, f"Invalid coordinate: {', '.join(str(c) for c in coordinates[0])}"):
-            self.operator.clean_and_validate(coordinates=coordinates)
-
         layer_type = "invalid"
         with self.assertRaisesRegex(ValueError, f"Invalid layer type: {layer_type}"):
             self.operator.clean_and_validate(layer_type=layer_type)
 
-        coordinates = [[1, 2]]
-        layer_type = "polygon"
-        with self.assertRaises(ValueError):
-            self.operator.clean_and_validate(coordinates=coordinates, layer_type=layer_type)
-
-        coordinates = [[1, 2], [3, 4]]
-        layer_type = "point"
-
-        with self.assertRaises(ValueError):
-            self.operator.clean_and_validate(coordinates=coordinates, layer_type=layer_type)
-
-        coordinates = [[1, 2], [3, 4]]
-        layer_type = "polygon"
-        with self.assertRaises(ValueError):
-            self.operator.clean_and_validate(coordinates=coordinates, layer_type=layer_type)
+        coordinates = "invalid"
+        with self.assertRaisesRegex(TypeError, f"Invalid coordinates: {coordinates}"):
+            self.operator.clean_and_validate(coordinates=coordinates)
 
         distance = "invalid"
         with self.assertRaisesRegex(TypeError, f"Invalid distance: {distance}"):
             self.operator.clean_and_validate(distance=distance)
+
+    def test_validate_coordinates_for_point(self):
+        coordinates = [1]
+        with self.assertRaisesRegex(ValueError, "Point coordinates should have 2 elements of type int or float."):
+            self.operator.validate_coordinates_for_point(coordinates)
+
+        coordinates = [1, "two"]
+        with self.assertRaisesRegex(ValueError, "Point coordinates should have 2 elements of type int or float."):
+            self.operator.validate_coordinates_for_point(coordinates)
+
+        coordinates = ["two", 1]
+        with self.assertRaisesRegex(ValueError, "Point coordinates should have 2 elements of type int or float."):
+            self.operator.validate_coordinates_for_point(coordinates)
+
+        coordinates = [-181, 2]
+        with self.assertRaisesRegex(
+            ValueError, "Longitude should be between -180 and 180, latitude should be between -90 and 90."
+        ):
+            self.operator.validate_coordinates_for_point(coordinates)
+
+        coordinates = [181, 2]
+        with self.assertRaisesRegex(
+            ValueError, "Longitude should be between -180 and 180, latitude should be between -90 and 90."
+        ):
+            self.operator.validate_coordinates_for_point(coordinates)
+
+        coordinates = [1, -91]
+        with self.assertRaisesRegex(
+            ValueError, "Longitude should be between -180 and 180, latitude should be between -90 and 90."
+        ):
+            self.operator.validate_coordinates_for_point(coordinates)
+
+        coordinates = [1, 91]
+        with self.assertRaisesRegex(
+            ValueError, "Longitude should be between -180 and 180, latitude should be between -90 and 90."
+        ):
+            self.operator.validate_coordinates_for_point(coordinates)
+
+        # Correct coordinates for point, must not have error
+        coordinates = [1, 2]
+        self.operator.validate_coordinates_for_point(coordinates)
+
+    def test_validate_coordinates_for_line_or_polygon(self):
+        coordinates = [1]
+        with self.assertRaisesRegex(
+            ValueError, "Line/Polygon coordinates should be tuples/lists with 2 elements of type int or float."
+        ):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates)
+
+        coordinates = [[1]]
+        with self.assertRaisesRegex(
+            ValueError, "Line/Polygon coordinates should be tuples/lists with 2 elements of type int or float."
+        ):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates)
+
+        coordinates = [[1, "two"]]
+        with self.assertRaisesRegex(ValueError, "Line/Polygon longitude and latitude should be of type int or float."):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates)
+
+        coordinates = [["two", 1]]
+        with self.assertRaisesRegex(ValueError, "Line/Polygon longitude and latitude should be of type int or float."):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates)
+
+        coordinates = [[-181, 2]]
+        with self.assertRaisesRegex(
+            ValueError, "Longitude should be between -180 and 180, latitude should be between -90 and 90."
+        ):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates)
+
+        coordinates = [[181, 2]]
+        with self.assertRaisesRegex(
+            ValueError, "Longitude should be between -180 and 180, latitude should be between -90 and 90."
+        ):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates)
+
+        coordinates = [[1, -91]]
+        with self.assertRaisesRegex(
+            ValueError, "Longitude should be between -180 and 180, latitude should be between -90 and 90."
+        ):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates)
+
+        coordinates = [[1, 91]]
+        with self.assertRaisesRegex(
+            ValueError, "Longitude should be between -180 and 180, latitude should be between -90 and 90."
+        ):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates)
+
+        coordinates = [[1, 2]]
+        with self.assertRaisesRegex(ValueError, "Line coordinates should have at least 2 points."):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates)
+
+        with self.assertRaisesRegex(
+            ValueError, "Polygon coordinates should have at least 4 points and start and end points must be the same."
+        ):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates, is_polygon=True)
+
+        coordinates = [[1, 2], [3, 4], [5, 6], [7, 8]]
+        with self.assertRaisesRegex(
+            ValueError, "Polygon coordinates should have at least 4 points and start and end points must be the same."
+        ):
+            self.operator.validate_coordinates_for_line_or_polygon(coordinates, is_polygon=True)
+
+        # Correct coordinates for line, must not have error
+        coordinates = [[1, 2], [3, 4]]
+        self.operator.validate_coordinates_for_line_or_polygon(coordinates)
+
+        # Correct coordinates for polygon, must not have error
+        coordinates = [[1, 2], [3, 4], [5, 6], [1, 2]]
+        self.operator.validate_coordinates_for_line_or_polygon(coordinates, is_polygon=True)
 
     def test_st_makepoint(self):
         longitude, latitude = 1, 2
@@ -245,3 +314,86 @@ class OperatorTest(TransactionCase):
         point_result = self.operator.st_setsrid(point, srid)
 
         self.assertEqual(point_result, f"ST_SetSRID({point}, {srid})")
+
+    def test_domain_query(self):
+        operator = "gis_intersects"
+
+        value = 1
+        with self.assertRaisesRegex(
+            ValueError, "Value should be a geojson, WKT, a list or tuple with 2 elements, or a shapely geometry."
+        ):
+            self.operator.domain_query(operator, value)
+
+        value = [1]
+        with self.assertRaisesRegex(
+            ValueError,
+            "Value should be a list or tuple with 2 elements: a geojson/WKT/shapely geometry and a positive distance.",
+        ):
+            self.operator.domain_query(operator, value)
+
+        value = [1, 2]
+        with self.assertRaisesRegex(ValueError, "Invalid value type."):
+            self.operator.domain_query(operator, value)
+
+        value = ["geojson", "distance"]
+        with self.assertRaisesRegex(
+            ValueError,
+            "Value should be a list or tuple with 2 elements: a geojson/WKT/shapely geometry and a positive distance.",
+        ):
+            self.operator.domain_query(operator, value)
+
+        value = ["geojson", 0]
+        with self.assertRaisesRegex(
+            ValueError,
+            "Value should be a list or tuple with 2 elements: a geojson/WKT/shapely geometry and a positive distance.",
+        ):
+            self.operator.domain_query(operator, value)
+
+        value = "Invalid Geojson"
+        with self.assertRaisesRegex(ValueError, "Invalid value: should be a geojson, WKT, or a shapely geometry."):
+            self.operator.domain_query(operator, value)
+
+        value = {"type": "Invalid", "coordinates": [1, 2]}
+        with self.assertRaisesRegex(
+            ValueError, "Invalid geojson type. Allowed types are Point, LineString, and Polygon."
+        ):
+            self.operator.domain_query(operator, value)
+
+        value = {"type": "Point", "coordinates": [1]}
+        with self.assertRaisesRegex(ValueError, "Invalid geojson."):
+            self.operator.domain_query(operator, value)
+
+        operator = "invalid_operator"
+        value = {"type": "Point", "coordinates": [1, 2]}
+        with self.assertRaisesRegex(ValueError, "Invalid operator."):
+            self.operator.domain_query(operator, value)
+
+        operator = "gis_intersects"
+
+        # correct value (json), must not have error
+        value = json.dumps({"type": "Point", "coordinates": [1, 2]})
+        self.operator.domain_query(operator, value)
+
+        # correct value (json) with distance, must not have error
+        value = [value, 10]
+        self.operator.domain_query(operator, value)
+
+        # correct value (wkt), must not have error
+        value = "POINT(1 2)"
+        self.operator.domain_query(operator, value)
+
+        # correct value (wkt) with distance, must not have error
+        value = [value, 10]
+        self.operator.domain_query(operator, value)
+
+        # correct value (dict), must not have error
+        value = {"type": "Point", "coordinates": [1, 2]}
+        self.operator.domain_query(operator, value)
+
+        # correct value (dict) with distance, must not have error
+        value = [value, 10]
+        self.operator.domain_query(operator, value)
+
+        # correct value (shape), must not have error
+        value = Point(1, 2)
+        self.operator.domain_query(operator, value)

@@ -1,3 +1,12 @@
+import json
+
+from shapely import wkt
+from shapely.geometry import mapping, shape
+from shapely.geometry.base import BaseGeometry
+
+from odoo.tools import SQL
+
+
 class Operator:
     """
     The Operator class facilitates the creation and manipulation of spatial geometries and queries within a PostgreSQL
@@ -31,6 +40,18 @@ class Operator:
                                       layer type.
     """
 
+    OPERATION_TO_RELATION = {
+        "gis_intersects": "intersects",
+        "gis_contains": "contains",
+        "gis_within": "within",
+        "gis_touches": "touches",
+        "gis_crosses": "crosses",
+        "gis_equals": "equals",
+        "gis_disjoint": "disjoint",
+        "gis_covers": "covers",
+        "gis_coveredby": "coveredby",
+    }
+
     POSTGIS_SPATIAL_RELATION = {
         "intersects": "ST_Intersects",
         "within": "ST_Within",
@@ -41,6 +62,11 @@ class Operator:
         "disjoint": "ST_Disjoint",
         "crosses": "ST_Crosses",
         "touches": "ST_Touches",
+    }
+    ALLOWED_LAYER_TYPE = {
+        "Point": "point",
+        "LineString": "line",
+        "Polygon": "polygon",
     }
 
     def __init__(self, field):
@@ -129,16 +155,17 @@ class Operator:
         The function creates a point with the given coordinates and spatial reference identifier (SRID)
         in Python.
 
-        :param coordinate: The `coordinate` parameter is a list containing a pair of coordinates in the
-        form of (x, y). The function `create_point` takes the first pair of coordinates from the
-        `coordinate` list and creates a point using those coordinates
-        :param srid: The SRID (Spatial Reference System Identifier) is a unique value that identifies a
-        specific spatial reference system. It is commonly used in GIS (Geographic Information Systems)
-        to define the coordinate system and spatial properties of geographic data. Examples of SRID
-        values include 4326 for WGS 84 and
-        :return: a point with the specified coordinates and spatial reference identifier (SRID).
+        :param coordinate: The `coordinate` parameter is a tuple containing the latitude and longitude
+        values of a point. For example, `coordinate = (40.7128, -74.0060)` represents the coordinates of
+        New York City
+        :param srid: The SRID (Spatial Reference System Identifier) is a unique identifier that
+        represents a specific spatial reference system. It defines the coordinate system and projection
+        used in spatial data. When creating a point geometry, specifying the SRID helps ensure that the
+        point is correctly located in geographic space
+        :return: The function `create_point` returns a point with the specified coordinates and spatial
+        reference identifier (SRID).
         """
-        point = self.st_makepoint(coordinate[0][0], coordinate[0][1])
+        point = self.st_makepoint(coordinate[0], coordinate[1])
         return self.st_setsrid(point, srid)
 
     def create_line(self, coordinates, srid):
@@ -162,39 +189,81 @@ class Operator:
 
     def create_polygon(self, coordinates, srid):
         """
-        The function creates a polygon from a list of coordinates and assigns a spatial reference system
-        identifier (SRID) to it.
+        The function creates a polygon geometry from a list of coordinates and assigns a spatial
+        reference system identifier (SRID) to it.
 
-        :param coordinates: Coordinates is a list of tuples representing the vertices of the polygon.
-        Each tuple contains the latitude and longitude values of a point on the polygon's boundary
-        :param srid: SRID stands for Spatial Reference System Identifier. It is a unique identifier that
-        defines the spatial reference system used by the geometry data. It specifies the coordinate
-        system and projection information for spatial data
+        :param coordinates: Coordinates is a list of lists where each inner list represents a coordinate
+        pair (x, y) of a point in the polygon. The first and last coordinates should be the same to
+        close the polygon. The `srid` parameter is the Spatial Reference System Identifier, which
+        defines the coordinate system and projection
+        :param srid: The SRID (Spatial Reference System Identifier) is a unique value that identifies a
+        specific coordinate system or projection in which geometric data is represented. It is typically
+        a number that corresponds to a specific spatial reference system
         :return: The function `create_polygon` returns a polygon geometry with the specified coordinates
-        and spatial reference identifier (SRID). The polygon is created by connecting the given
-        coordinates in the order they are provided, and if the first and last coordinates are not the
-        same, the function adds the first coordinate to the end of the list to close the polygon. The
-        resulting polygon geometry is then assigned the specified SRID before being
+        and spatial reference identifier (SRID). The polygon is created by connecting the points in the
+        `coordinates` list to form a closed shape. The function then sets the SRID for the polygon
+        before returning it.
         """
-        first_coord = coordinates[0]
-        last_coord = coordinates[-1]
+        first_coord = coordinates[0][0]
+        last_coord = coordinates[0][-1]
 
         # Check if the first and last coordinates are not the same
         # if not, add the first coordinate to the end of the list
         # to close the polygon
         if first_coord != last_coord:
-            coordinates.append(first_coord)
+            coordinates[0].append(first_coord)
 
-        points = [self.st_makepoint(*coord) for coord in coordinates]
+        points = [self.st_makepoint(*coord) for coord in coordinates[0]]
         polygon = self.st_makepolygon(points)
         return self.st_setsrid(polygon, srid)
 
+    def validate_coordinates_for_point(self, coordinates):
+        """
+        The function `validate_coordinates_for_point` checks if a set of coordinates represents a valid
+        point on Earth's surface.
+
+        :param coordinates: The `validate_coordinates_for_point` method is used to validate a set of
+        coordinates for a point. The method checks if the coordinates have exactly 2 elements, and if
+        each element is of type `int` or `float`. It also ensures that the first element (longitude) is
+        between -180
+        """
+        if len(coordinates) != 2 or not all(isinstance(coord, int | float) for coord in coordinates):
+            raise ValueError("Point coordinates should have 2 elements of type int or float.")
+        if not -180 <= coordinates[0] <= 180 or not -90 <= coordinates[1] <= 90:
+            raise ValueError("Longitude should be between -180 and 180, latitude should be between -90 and 90.")
+
+    def validate_coordinates_for_line_or_polygon(self, coordinates, is_polygon=False):
+        """
+        The function `validate_coordinates_for_line_or_polygon` checks if the provided coordinates are
+        valid for a line or polygon based on certain criteria.
+
+        :param coordinates: The `coordinates` parameter is expected to be a list of tuples or lists,
+        where each tuple or list contains two elements representing longitude and latitude values. The
+        function validates these coordinates based on certain criteria depending on whether it is for a
+        line or a polygon
+        :param is_polygon: The `is_polygon` parameter is a boolean flag that indicates whether the
+        coordinates provided are for a polygon (True) or a line (False). This parameter helps
+        differentiate between validating coordinates for a line or a polygon based on the requirements
+        specified in the function, defaults to False (optional)
+        """
+        if not all(isinstance(coord, tuple | list) and len(coord) == 2 for coord in coordinates):
+            raise ValueError("Line/Polygon coordinates should be tuples/lists with 2 elements of type int or float.")
+        if not all(isinstance(coord[0], int | float) and isinstance(coord[1], int | float) for coord in coordinates):
+            raise ValueError("Line/Polygon longitude and latitude should be of type int or float.")
+        if not all(-180 <= coord[0] <= 180 and -90 <= coord[1] <= 90 for coord in coordinates):
+            raise ValueError("Longitude should be between -180 and 180, latitude should be between -90 and 90.")
+        if not is_polygon and len(coordinates) < 2:
+            raise ValueError("Line coordinates should have at least 2 points.")
+        if is_polygon and (len(coordinates) < 4 or coordinates[0] != coordinates[-1]):
+            raise ValueError(
+                "Polygon coordinates should have at least 4 points and start and end points must be the same."
+            )
+
     def clean_and_validate(self, **kwargs):
         """
-        The function `clean_and_validate` in Python validates keyword arguments for spatial operations,
-        coordinates, distance, and layer types, with specific checks for each parameter.
+        The function `clean_and_validate` in Python validates and cleans keyword arguments for spatial
+        operations.
         """
-
         if not kwargs:
             raise ValueError("No keyword arguments provided.")
 
@@ -203,45 +272,23 @@ class Operator:
         distance = kwargs.get("distance")
         layer_type = kwargs.get("layer_type")
 
-        # validating operation
         if operation and operation not in self.POSTGIS_SPATIAL_RELATION:
             raise ValueError(f"Invalid operation: {operation}")
 
-        # validating coordinates
-        if coordinates and not isinstance(coordinates, list | tuple):
-            raise TypeError(f"Invalid coordinates: {coordinates}")
-        for coordinate in coordinates:
-            if not isinstance(coordinate, list | tuple):
-                raise TypeError(f"Invalid coordinate: {coordinate}")
-            if not all(isinstance(coord, int | float) for coord in coordinate):
-                raise TypeError(f"Invalid coordinate: {', '.join(str(c) for c in coordinate)}")
-            if len(coordinate) != 2:
-                raise ValueError(f"Invalid coordinate: {', '.join(str(c) for c in coordinate)}")
-            if not -180 <= coordinate[0] <= 180 or not -90 <= coordinate[1] <= 90:
-                raise ValueError(f"Invalid coordinate: {', '.join(str(c) for c in coordinate)}")
-
-        # validating layer_type
-        if layer_type and layer_type not in ["point", "line", "polygon"]:
+        if layer_type and layer_type not in self.ALLOWED_LAYER_TYPE.values():
             raise ValueError(f"Invalid layer type: {layer_type}")
-        if len(coordinates) == 1 and layer_type != "point" or len(coordinates) > 1 and layer_type == "point":
-            raise ValueError(f"Invalid coordinates for {layer_type}: {coordinates}")
 
-        # validating distance
-        if distance and not isinstance(distance, int | float):
+        if not isinstance(coordinates, list | tuple):
+            raise TypeError(f"Invalid coordinates: {coordinates}")
+
+        if distance is not None and not isinstance(distance, int | float):
             raise TypeError(f"Invalid distance: {distance}")
 
-        if coordinates and layer_type == "polygon":
-            first_coord = coordinates[0]
-            last_coord = coordinates[-1]
-
-            # Check if the first and last coordinates are not the same
-            # if not, add the first coordinate to the end of the list
-            # to close the polygon
-            if first_coord != last_coord:
-                coordinates.append(first_coord)
-
-            if len(coordinates) < 4:
-                raise ValueError(f"Invalid coordinates for polygon: {coordinates}")
+        if layer_type == "point":
+            self.validate_coordinates_for_point(coordinates)
+        elif layer_type in ["line", "polygon"]:
+            coord = coordinates if layer_type == "line" else coordinates[0]
+            self.validate_coordinates_for_line_or_polygon(coord, is_polygon=(layer_type == "polygon"))
 
     def get_postgis_query(
         self,
@@ -299,3 +346,105 @@ class Operator:
             return f"{self.POSTGIS_SPATIAL_RELATION[operation]}(ST_Buffer({left}, {distance}), {right})"
         else:
             return f"{self.POSTGIS_SPATIAL_RELATION[operation]}({geom}, {self.field.name})"
+
+    def validate_and_extract_value(self, value):
+        """
+        The function `validate_and_extract_value` checks if the input value is of the specified types
+        and extracts a distance value if present in a list or tuple.
+
+        :param value: The `validate_and_extract_value` method is designed to validate the input `value`
+        and extract a distance value if it is provided as part of a list or tuple. The method checks if
+        the `value` is of type string, dictionary, list, tuple, or a `BaseGeometry` object
+        :return: The function `validate_and_extract_value` returns two values: `value` and `distance`.
+        If the input `value` is a list or tuple with 2 elements, it unpacks the elements and returns
+        them as `value` and `distance`. Otherwise, it returns the original `value` and `None` for
+        `distance`.
+        """
+        if not isinstance(value, str | dict | list | tuple | BaseGeometry):
+            raise ValueError(
+                "Value should be a geojson, WKT, a list or tuple with 2 elements, " "or a shapely geometry."
+            )
+
+        distance = None
+        if isinstance(value, list | tuple):
+            if len(value) != 2 or not isinstance(value[1], int | float) or value[1] <= 0:
+                raise ValueError(
+                    "Value should be a list or tuple with 2 elements: a geojson/WKT/shapely geometry "
+                    "and a positive distance."
+                )
+            value, distance = value  # Unpack the tuple/list
+
+        return value, distance
+
+    def parse_geometry(self, value):
+        """
+        The function `parse_geometry` attempts to parse a given value as GeoJSON, WKT, or a Shapely
+        geometry and returns the corresponding representation.
+
+        :param value: The `parse_geometry` method is designed to parse different types of geometry
+        representations. The method first checks if the input `value` is a string, dictionary, or a
+        Shapely geometry object, and then attempts to parse it accordingly
+        :return: The `parse_geometry` method is designed to parse a given value into a GeoJSON format.
+        Depending on the type of the input value, it will attempt to parse it as GeoJSON, WKT, or a
+        Shapely geometry. Here is what is being returned based on the type of the input value:
+        """
+        if isinstance(value, str):
+            try:
+                return json.loads(value)  # Attempt to parse as GeoJSON
+            except json.JSONDecodeError:
+                try:
+                    return mapping(wkt.loads(value))  # Attempt to parse as WKT
+                except Exception as e:
+                    raise ValueError("Invalid value: should be a geojson, WKT, or a shapely geometry.") from e
+        elif isinstance(value, dict):
+            return value  # Already in GeoJSON format
+        elif isinstance(value, BaseGeometry):
+            return mapping(value)  # Convert Shapely Geometry to GeoJSON
+        else:
+            raise ValueError("Invalid value type.")
+
+    def validate_geojson(self, geojson):
+        """
+        The function `validate_geojson` checks if a given GeoJSON object has a valid type and structure.
+
+        :param geojson: The `validate_geojson` method is used to validate a GeoJSON object. The method
+        checks if the GeoJSON object has a valid type (Point, LineString, or Polygon) and then attempts
+        to validate the structure of the GeoJSON using the `shape` function
+        """
+        if geojson.get("type") not in self.ALLOWED_LAYER_TYPE:
+            raise ValueError("Invalid geojson type. Allowed types are Point, LineString, and Polygon.")
+        try:
+            shape(geojson)
+        except Exception as e:
+            raise ValueError("Invalid geojson.") from e
+
+    def domain_query(self, operator, value):
+        """
+        The `domain_query` function validates and extracts a value, parses a geometry, validates the
+        geometry, checks the operator, and then generates a PostGIS query based on the input parameters.
+
+        :param operator: The `operator` parameter in the `domain_query` method is used to specify the
+        type of operation to be performed on the given value. It is checked against a dictionary
+        `OPERATION_TO_RELATION` to determine the corresponding operation to be executed
+        :param value: The `value` parameter in the `domain_query` method is the input value that you
+        want to query against a specific domain. This value will be validated, extracted, and parsed as
+        a geometry object (geojson_val) before being used in the query operation. The `distance`
+        variable is also
+        :return: The code snippet is returning an SQL query generated based on the input parameters
+        provided to the `domain_query` method. The SQL query is constructed using the
+        `get_postgis_query` method from the class, passing in the operation, coordinates, distance, and
+        layer type extracted from the input values.
+        """
+
+        val, distance = self.validate_and_extract_value(value)
+        geojson_val = self.parse_geometry(val)
+        self.validate_geojson(geojson_val)
+
+        if operator not in self.OPERATION_TO_RELATION:
+            raise ValueError("Invalid operator.")
+
+        operation = self.OPERATION_TO_RELATION[operator]
+        layer_type = self.ALLOWED_LAYER_TYPE[geojson_val["type"]]
+        coordinates = geojson_val["coordinates"]
+
+        return SQL(self.get_postgis_query(operation, coordinates, distance=distance, layer_type=layer_type))

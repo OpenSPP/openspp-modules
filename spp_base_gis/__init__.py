@@ -1,5 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 from . import controllers
+from . import expression
 from . import models
 from . import fields
 from . import operators
