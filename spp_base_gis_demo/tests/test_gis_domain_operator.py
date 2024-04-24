@@ -327,3 +327,14 @@ class GisDomainOperatorTest(Common):
         self.assertEqual(record_1, self.test_record_1)
         self.assertEqual(record_2, self.test_record_2)
         self.assertFalse(record_3)
+
+    def test_normal_query(self):
+        # Just to check if normal query is still working as expected
+        domain = [("name", "=", "Record 1")]
+        record_1 = self.test_model.search(domain, limit=1)
+
+        domain = [("name", "=", "Record 2")]
+        record_2 = self.test_model.search(domain, limit=1)
+
+        self.assertEqual(record_1, self.test_record_1)
+        self.assertEqual(record_2, self.test_record_2)
