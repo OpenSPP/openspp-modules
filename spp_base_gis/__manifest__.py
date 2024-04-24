@@ -8,7 +8,7 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "development_status": "Beta",
-    "maintainers": ["jeremi", "gonzalesedwin1123"],
+    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": ["base", "web", "contacts"],
     "external_dependencies": {"python": ["shapely", "pyproj", "geojson"]},
     "data": [
