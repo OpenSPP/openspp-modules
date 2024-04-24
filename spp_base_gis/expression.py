@@ -6,17 +6,7 @@ from odoo.tools import SQL
 from .fields import GeoField
 from .operators import Operator
 
-GIS_OPERATORS = [
-    "gis_intersects",
-    "gis_contains",
-    "gis_within",
-    "gis_touches",
-    "gis_crosses",
-    "gis_equals",
-    "gis_disjoint",
-    "gis_covers",
-    "gis_coveredby",
-]
+GIS_OPERATORS = list(Operator.OPERATION_TO_RELATION.keys())
 
 term_operators_list = list(TERM_OPERATORS)
 for op in GIS_OPERATORS:

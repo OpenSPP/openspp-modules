@@ -10,11 +10,7 @@ from ..operators import Operator
 
 _logger = logging.getLogger(__name__)
 
-ALLOWED_LAYER_TYPE = [
-    "point",
-    "line",
-    "polygon",
-]
+ALLOWED_LAYER_TYPE = list(Operator.ALLOWED_LAYER_TYPE.values())
 
 # Interchange keys and values
 RELATION_TO_OPERATION = {value: key for key, value in Operator.OPERATION_TO_RELATION.items()}
