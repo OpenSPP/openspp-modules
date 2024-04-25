@@ -522,20 +522,25 @@
                         <notebook colspan="2" class="o_container_right">
                             <page string="Request Details">
                                 <group colspan="2" col="2" string="Applicant Information">
-                                    <field
-                                            name="applicant_id"
-                                            options="{'no_create': True,'no_open':True}"
-                                            readonly="1"
-                                        />
-                                    <button
-                                            name="open_applicant_details_form"
-                                            type="object"
-                                            icon="fa-external-link"
-                                            class="btn-success"
-                                            invisible="not applicant_id"
-                                            style="margin-left: 10px;"
-                                            colspan="2"
-                                        />
+                                    <div colspan="2">
+                                        <label for="applicant_id" string="Applicant:" />
+                                        <h3>
+                                            <field
+                                                    name="applicant_id"
+                                                    options="{'no_create': True,'no_open':True}"
+                                                    readonly="1"
+                                                    class="oe_inline"
+                                                />
+                                            <button
+                                                    name="open_applicant_details_form"
+                                                    type="object"
+                                                    icon="fa-external-link"
+                                                    class="btn-success oe_inline"
+                                                    invisible="not applicant_id"
+                                                    style="padding-left: 10px !important;"
+                                                />
+                                        </h3>
+                                    </div>
                                     <field
                                             name="applicant_phone"
                                             string="Phone No."
@@ -544,9 +549,9 @@
                                             options="{'enable_sms': false}"
                                         />
                                 </group>
-                                <group colspan="4" col="4" string="New Information">
-                                    <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
-                                    <field name="family_name" readonly="1" colspan="4" class="oe_edit_only" />
+                                <group colspan="2" col="2" string="New Information">
+                                    <field name="full_name" readonly="1" class="oe_read_only" />
+                                    <field name="family_name" readonly="1" class="oe_edit_only" />
                                     <field name="given_name" readonly="1" class="oe_edit_only" />
                                     <field name="addl_name" readonly="1" class="oe_edit_only" />
                                     <field name="gender" readonly="1" />
@@ -557,15 +562,13 @@
                                             options="{'enable_sms': false}"
                                         />
                                     <field name="uid_number" readonly="1" />
-                                    <newline />
-                                    <field name="birth_place" colspan="4" readonly="1" />
+                                    <field name="birth_place" readonly="1" />
                                     <field name="birthdate_not_exact" readonly="1" />
                                     <field name="birthdate" readonly="1" />
                                     <field
                                             name="kind"
                                             widget="many2many_tags"
                                             options="{'no_open':True}"
-                                            colspan="4"
                                             readonly="1"
                                         />
                                 </group>
@@ -595,13 +598,12 @@
                                 </field>
                             </page>
                             <page string="Other Information">
-                                <group colspan="4" col="4">
+                                <group colspan="2" col="2">
                                     <field
                                             name="change_request_id"
                                             string="Request No."
                                             readonly="1"
                                             options="{'no_open':True}"
-                                            colspan="4"
                                         />
                                     <field
                                             name="assign_to_id"
@@ -609,7 +611,7 @@
                                             options="{'no_open':True}"
                                             readonly="1"
                                         />
-                                    <field name="current_user_assigned" invisible="1" colspan="4" />
+                                    <field name="current_user_assigned" invisible="1" />
                                     <field name="last_validated_by_id" readonly="1" />
                                     <field name="date_validated" readonly="1" />
                                 </group>
