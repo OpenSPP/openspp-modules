@@ -130,6 +130,14 @@ class ChangeRequestBase(models.Model):
 
     current_user_assigned = fields.Boolean(compute="_compute_current_user_assigned", default=False)
 
+    # DMS Directories
+    dms_directory_ids = fields.One2many(
+        "spp.dms.directory",
+        "change_request_id",
+        string="DMS Directories",
+        auto_join=True,
+    )
+
     @api.model
     def create(self, vals):
         """
@@ -672,15 +680,10 @@ class ChangeRequestBase(models.Model):
                 # Set the request_type_ref_id
                 res_model = rec.request_type
                 # Set the dms directory
-                _logger.info("Change Request: DMS Directory Creation (%s)" % len(self.dms_directory_ids))
-                storage = self.env.ref(self.env[res_model].DMS_STORAGE)
+                _logger.info("Change Request: DMS Directory Creation (%s)" % len(rec.dms_directory_ids))
                 dmsval = {
-                    "storage_id": storage.id,
-                    # "res_id": rec.id,
-                    "res_model": res_model,
                     "is_root_directory": True,
                     "name": rec.name,
-                    "group_ids": [(4, storage.field_default_group_id.id)],
                 }
 
                 # Prepare CR type model data
@@ -695,7 +698,7 @@ class ChangeRequestBase(models.Model):
                 ref_id = self.env[res_model].create(cr_type_vals)
                 directory_id = ref_id.dms_directory_ids[0].id
 
-                self.env["dms.directory"].create(
+                self.env["spp.dms.directory"].create(
                     {
                         "name": "Applicant",
                         "parent_id": directory_id,
@@ -932,7 +935,7 @@ class ChangeRequestBase(models.Model):
                 validation_stages = (
                     rec.request_type_ref_id.validation_ids
                     if rec.request_type_ref_id and rec.request_type_ref_id.validation_ids
-                    else self.env["validation.model"].browse()
+                    else self.env["spp.change.request.validation.sequence"].browse()
                 )  # Replace 'validation.model' with the actual model name
 
                 # Filter validation_stages based on validation_stage_ids, if any

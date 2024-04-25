@@ -1,10 +1,23 @@
-from odoo import _, models
+import logging
+
+from odoo import _, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class SPPDMSFileCustom(models.Model):
-    _inherit = "dms.file"
+    _inherit = "spp.dms.file"
+
+    change_request_id = fields.Many2one("spp.change.request", "Change Request")
+
+    def create(self, vals):
+        _logger.info("DEBUG vals: %s", vals)
+        return super().create(vals)
 
     def action_save_and_close(self):
+        return {"type": "ir.actions.act_window_close"}
+
+    def action_close(self):
         return {"type": "ir.actions.act_window_close"}
 
     def action_attach_documents(self):
@@ -15,7 +28,7 @@ class SPPDMSFileCustom(models.Model):
                 "view_mode": "form",
                 "view_id": form_id,
                 "view_type": "form",
-                "res_model": "dms.file",
+                "res_model": "spp.dms.file",
                 "target": "new",
                 "res_id": rec.id,
             }

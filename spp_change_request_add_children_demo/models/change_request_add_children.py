@@ -36,15 +36,14 @@ class ChangeRequestAddChildren(models.Model):
     _description = "Add Child/Member Change Request Type"
     _order = "id desc"
 
-    # Initialize DMS Storage
-    DMS_STORAGE = "spp_change_request_add_children_demo.attachment_storage_add_children"
+    # Initialize CR constants
     VALIDATION_FORM = "spp_change_request_add_children_demo.view_change_request_add_children_validation_form"
     REQUIRED_DOCUMENT_TYPE = [
-        # "spp_change_request_add_children_demo.spp_dms_add_children",
-        # "spp_change_request_add_children_demo.spp_dms_birth_certificate",
-        # "spp_change_request_add_children_demo.spp_dms_applicant_spp_card",
-        # "spp_change_request_add_children_demo.spp_dms_applicant_uid_card",
-        # "spp_change_request_add_children_demo.spp_dms_custody_certificate",
+        "spp_change_request_add_children_demo.spp_dms_add_children",
+        # "spp_change_request.spp_dms_birth_certificate",
+        # "spp_change_request.spp_dms_applicant_spp_card",
+        # "spp_change_request.spp_dms_applicant_uid_card",
+        # "spp_change_request.spp_dms_custody_certificate",
     ]
 
     # Mandatory initialize source and destination center areas
@@ -166,7 +165,7 @@ class ChangeRequestAddChildren(models.Model):
                         }
                         # TODO: Should be added to vals["dms_file_ids"] but it is
                         # not writing to one2many field using Command.create()
-                        self.env["dms.file"].create(dms_vals)
+                        self.env["spp.dms.file"].create(dms_vals)
 
                     # TODO: grand_father_name and father_name
                     vals = {

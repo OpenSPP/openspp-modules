@@ -1,7 +1,11 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
+import logging
+
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class ChangeRequestSourceMixin(models.AbstractModel):
@@ -35,9 +39,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     _description = "Change Request Data Source Mixin"
     _rec_name = "change_request_id"
 
-    REQUIRED_DOCUMENT_TYPE = []  # List of required document category `dms.category`
+    REQUIRED_DOCUMENT_TYPE = []  # List of required document category `spp.dms.category`
     VALIDATION_FORM = None
-    DMS_STORAGE = None
     AUTO_APPLY_CHANGES = True
 
     registrant_id = fields.Many2one("res.partner", "Registrant", domain=[("is_registrant", "=", True)])
@@ -65,23 +68,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     # DMS Field
     dms_directory_ids = fields.One2many(
-        "dms.directory",
-        "res_id",
+        "spp.dms.directory",
+        "change_request_id",
         string="DMS Directories",
-        domain=lambda self: [
-            ("res_model", "=", self._name),
-            ("storage_id.save_type", "!=", "attachment"),
-        ],
         auto_join=True,
     )
     dms_file_ids = fields.One2many(
-        "dms.file",
-        "res_id",
+        "spp.dms.file",
+        "change_request_id",
         string="DMS Files",
-        domain=lambda self: [
-            ("directory_id.res_model", "=", self._name),
-            ("storage_id.save_type", "!=", "attachment"),
-        ],
         auto_join=True,
     )
 
@@ -822,28 +817,33 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     "view_mode": "form",
                     "view_id": form_id,
                     "view_type": "form",
-                    "res_model": "dms.file",
+                    "res_model": "spp.dms.file",
                     "target": "new",
                     "context": dms_context,
                 }
+                category_name = "Other Documents"
                 if self.env.context.get("category_id"):
                     category_id = self.env.context.get("category_id")
-                    category = self.env["dms.category"].search([("id", "=", category_id)])
+                    category = self.env["spp.dms.category"].search([("id", "=", category_id)])
                     if category:
                         dms_context.update(
                             {
-                                "default_category_id": category_id,
+                                "default_category_id": category.id,
                                 "category_readonly": True,
                             }
                         )
-                        action.update(
-                            {
-                                "name": _("Upload Document: %s", category.name),
-                                "context": dms_context,
-                            }
-                        )
+                        category_name = category.name
                     else:
                         raise UserError(_("The required document category is not configured."))
+
+                dms_context.update({"default_change_request_id": rec.id})
+                _logger.debug("action_attach_documents dms_context: %s", dms_context)
+                action.update(
+                    {
+                        "name": _("Upload Document: %s", category_name),
+                        "context": dms_context,
+                    }
+                )
                 return action
             else:
                 raise UserError(_("There are no directories defined for this change request."))

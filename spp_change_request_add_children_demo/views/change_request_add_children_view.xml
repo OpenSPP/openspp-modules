@@ -224,23 +224,23 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Attachments" invisible="1">
+                        <page string="Attachments">
                             <!-- Attachment UI -->
                             <header invisible="state != 'draft'">
-                                <!-- <button
+                                <button
                                     name="action_attach_documents"
                                     type="object"
                                     string="Request Form"
                                     class="btn-primary"
                                     context="{'category_id':%(spp_dms_add_children)d}"
                                     style="margin-left: 10px;"
-                                /> -->
+                                />
                                 <button
                                     name="action_attach_documents"
                                     type="object"
                                     string="Birth Certificate"
                                     class="btn-primary"
-                                    context="{'category_id':%(spp_dms_birth_certificate)d}"
+                                    context="{'category_id':%(spp_change_request.spp_dms_birth_certificate)d}"
                                     style="margin-left: 10px;"
                                 />
                                 <button
@@ -257,13 +257,7 @@
                                 nolabel="1"
                                 context="{'form_view_ref':'spp_change_request.view_dms_file_spp_custom_form'}"
                             >
-                                <tree
-                                    js_class="file_list"
-                                    decoration-warning="not active"
-                                    decoration-muted="(is_locked and not is_lock_editor)"
-                                    multi_edit="1"
-                                    create="0"
-                                >
+                                <tree js_class="file_list" multi_edit="1" create="0">
                                     <field name="name" column_invisible="1" />
                                     <field
                                         name="content"
@@ -277,9 +271,6 @@
                                     <field name="mimetype" />
                                     <field name="size" widget="integer" />
                                     <field name="write_date" />
-                                    <field name="active" column_invisible="1" />
-                                    <field name="is_locked" column_invisible="1" />
-                                    <field name="is_lock_editor" column_invisible="1" />
                                 </tree>
                             </field>
                         </page>
@@ -433,76 +424,77 @@
                         statusbar_visible="draft,pending,validated,applied"
                     />
                 </header>
+                <sheet>
                 <!-- Form Body -->
                 <div class="oe_button_box" name="button_box">
                 </div>
                 <group colspan="4" col="4">
                     <!-- Left Panel -->
-                    <group colspan="2" col="4" class="o_left_panel">
-                        <div class="o_header_label1">
+                    <group colspan="2" col="2" class="o_left_panel">
+                        <div class="o_header_label1" colspan="2">
                             <label for="registrant_id" string="ADD CHILD/MEMBER TO GROUP:" />
                             <h2>
                                 <field name="registrant_id" readonly="1" options="{'no_open':True}" />
                                 <button
-                                    name="open_registrant_details_form"
-                                    type="object"
-                                    string="Open Details"
-                                    icon="fa-external-link "
-                                    class="btn-success"
-                                    style="margin-left: 10px;"
-                                    invisible="not registrant_id"
-                                />
+                                        name="open_registrant_details_form"
+                                        type="object"
+                                        string="Open Details"
+                                        icon="fa-external-link "
+                                        class="btn-success"
+                                        style="margin-left: 10px;"
+                                        invisible="not registrant_id"
+                                    />
                             </h2>
                         </div>
                         <newline />
                         <notebook colspan="2" class="o_container_left">
                             <page string="TARGET GROUP INFORMATION">
-                                <group colspan="4" col="4" name="target_group">
-                                    <field name="group_address" colspan="4" />
-                                    <field name="group_registration_date" />
+                                <group colspan="2" col="2" name="target_group">
+                                    <field name="group_address" colspan="2" string="Address:" />
+                                    <field name="group_registration_date" string="Registration Date:" />
                                 </group>
                                 <group
-                                    colspan="4"
-                                    col="4"
-                                    string="Current Group Members"
-                                    name="group_members"
-                                >
-                                    <field name="group_member_ids" readonly="1" nolabel="1" colspan="4">
+                                        colspan="2"
+                                        col="2"
+                                        string="Current Group Members"
+                                        name="group_members"
+                                    >
+                                    <field name="group_member_ids" readonly="1" nolabel="1" colspan="2">
                                         <tree>
                                             <button
-                                                name="open_individual_form"
-                                                type="object"
-                                                help="Open Member Form"
-                                                icon="fa-external-link "
-                                                class="btn-success"
-                                            />
-                                            <field name="group_add_children_id" invisible="1" />
+                                                    name="open_individual_form"
+                                                    type="object"
+                                                    help="Open Member Form"
+                                                    icon="fa-external-link "
+                                                    class="btn-success"
+                                                />
+                                            <field name="group_add_children_id" column_invisible="1" />
                                             <field name="individual_id" string="Members" />
                                             <field
-                                                name="kind_ids"
-                                                widget="many2many_tags"
-                                                options="{'no_open':True}"
-                                            />
+                                                    name="kind_ids"
+                                                    widget="many2many_tags"
+                                                    options="{'no_open':True}"
+                                                />
                                         </tree>
                                         <form string="Group Membership">
                                             <sheet>
                                                 <div class="oe_title mb24">
                                                     <h1>
                                                         <field
-                                                            name="individual_id"
-                                                            string="Member"
-                                                            options="{'no_open':True}"
-                                                            readonly="1"
-                                                        />
+                                                                name="individual_id"
+                                                                string="Member"
+                                                                options="{'no_open':True}"
+                                                                readonly="1"
+                                                            />
                                                     </h1>
                                                     <div class="o_row">
                                                         <label for="kind_ids" string="Membership Types:" />
                                                         <field
-                                                            name="kind_ids"
-                                                            widget="many2many_tags"
-                                                            options="{'no_open':True}"
-                                                            readonly="1"
-                                                        />
+                                                                name="kind_ids"
+                                                                widget="many2many_tags"
+                                                                options="{'no_open':True}"
+                                                                readonly="1"
+                                                            />
                                                     </div>
                                                 </div>
                                                 <group colspan="4" col="4">
@@ -519,8 +511,8 @@
                         </notebook>
                     </group>
                     <!-- Right Panel -->
-                    <group colspan="2" col="4" class="o_right_panel">
-                        <div class="o_header_label1">
+                    <group colspan="2" col="2" class="o_right_panel">
+                        <div class="o_header_label1" colspan="2">
                             <label for="request_type" string="Request Type:" />
                             <h2>
                                 <field name="request_type" readonly="1" />
@@ -529,128 +521,105 @@
                         <newline />
                         <notebook colspan="2" class="o_container_right">
                             <page string="Request Details">
-                                <group colspan="4" col="4" string="Applicant Information">
+                                <group colspan="2" col="2" string="Applicant Information">
+                                    <div colspan="2">
+                                        <label for="applicant_id" string="Applicant:" />
+                                        <h3>
+                                            <field
+                                                    name="applicant_id"
+                                                    options="{'no_create': True,'no_open':True}"
+                                                    readonly="1"
+                                                    class="oe_inline"
+                                                />
+                                            <button
+                                                    name="open_applicant_details_form"
+                                                    type="object"
+                                                    icon="fa-external-link"
+                                                    class="btn-success oe_inline"
+                                                    invisible="not applicant_id"
+                                                    style="padding-left: 10px !important;"
+                                                />
+                                        </h3>
+                                    </div>
                                     <field
-                                        name="applicant_id"
-                                        options="{'no_create': True,'no_open':True}"
-                                        readonly="1"
-                                    />
-                                    <button
-                                        name="open_applicant_details_form"
-                                        type="object"
-                                        icon="fa-external-link"
-                                        class="btn-success"
-                                        invisible="not applicant_id"
-                                        style="margin-left: 10px;"
-                                        colspan="2"
-                                    />
-                                    <field
-                                        name="applicant_phone"
-                                        string="Phone No."
-                                        readonly="1"
-                                        widget="phone"
-                                        options="{'enable_sms': false}"
-                                    />
+                                            name="applicant_phone"
+                                            string="Phone No."
+                                            readonly="1"
+                                            widget="phone"
+                                            options="{'enable_sms': false}"
+                                        />
                                 </group>
-                                <group colspan="4" col="4" string="New Information">
-                                    <field name="full_name" readonly="1" colspan="4" class="oe_read_only" />
-                                    <field name="family_name" readonly="1" colspan="4" class="oe_edit_only" />
+                                <group colspan="2" col="2" string="New Information">
+                                    <field name="full_name" readonly="1" class="oe_read_only" />
+                                    <field name="family_name" readonly="1" class="oe_edit_only" />
                                     <field name="given_name" readonly="1" class="oe_edit_only" />
                                     <field name="addl_name" readonly="1" class="oe_edit_only" />
                                     <field name="gender" readonly="1" />
                                     <field
-                                        name="phone"
-                                        readonly="1"
-                                        widget="phone"
-                                        options="{'enable_sms': false}"
-                                    />
+                                            name="phone"
+                                            readonly="1"
+                                            widget="phone"
+                                            options="{'enable_sms': false}"
+                                        />
                                     <field name="uid_number" readonly="1" />
-                                    <field name="birth_place" colspan="4" readonly="1" />
+                                    <field name="birth_place" readonly="1" />
                                     <field name="birthdate_not_exact" readonly="1" />
                                     <field name="birthdate" readonly="1" />
                                     <field
-                                        name="kind"
-                                        widget="many2many_tags"
-                                        options="{'no_open':True}"
-                                        colspan="4"
-                                        readonly="1"
-                                    />
+                                            name="kind"
+                                            widget="many2many_tags"
+                                            options="{'no_open':True}"
+                                            readonly="1"
+                                        />
                                 </group>
                             </page>
                             <page string="Attachments">
                                 <field
-                                    name="dms_file_ids"
-                                    readonly="1"
-                                    nolabel="1"
-                                    context="{'form_view_ref':'spp_change_request.view_dms_file_spp_custom_form'}"
-                                >
-                                    <tree
-                                        js_class="file_list"
-                                        decoration-warning="not active"
-                                        decoration-muted="(is_locked and not is_lock_editor)"
-                                        multi_edit="1"
-                                        create="0"
+                                        name="dms_file_ids"
+                                        readonly="1"
+                                        nolabel="1"
+                                        context="{'form_view_ref':'spp_change_request.view_dms_file_spp_custom_form'}"
                                     >
+                                    <tree js_class="file_list" multi_edit="1" create="0">
                                         <field name="name" column_invisible="1" />
                                         <field
-                                            name="content"
-                                            filename="name"
-                                            mimetype="mimetype"
-                                            widget="preview_binary"
-                                            string="File"
-                                        />
+                                                name="content"
+                                                filename="name"
+                                                mimetype="mimetype"
+                                                widget="preview_binary"
+                                                string="File"
+                                            />
                                         <field name="category_id" />
                                         <field name="directory_id" />
                                         <field name="mimetype" column_invisible="1" />
                                         <field name="size" widget="integer" />
                                         <field name="write_date" />
-                                        <field name="active" column_invisible="1" />
-                                        <field name="is_locked" column_invisible="1" />
-                                        <field name="is_lock_editor" column_invisible="1" />
                                     </tree>
                                 </field>
                             </page>
                             <page string="Other Information">
-                                <group colspan="4" col="4">
+                                <group colspan="2" col="2">
                                     <field
-                                        name="change_request_id"
-                                        string="Request No."
-                                        readonly="1"
-                                        options="{'no_open':True}"
-                                        colspan="4"
-                                    />
+                                            name="change_request_id"
+                                            string="Request No."
+                                            readonly="1"
+                                            options="{'no_open':True}"
+                                        />
                                     <field
-                                        name="assign_to_id"
-                                        string="Assigned To"
-                                        options="{'no_open':True}"
-                                        readonly="1"
-                                    />
-                                    <field name="current_user_assigned" invisible="1" colspan="4" />
+                                            name="assign_to_id"
+                                            string="Assigned To"
+                                            options="{'no_open':True}"
+                                            readonly="1"
+                                        />
+                                    <field name="current_user_assigned" invisible="1" />
                                     <field name="last_validated_by_id" readonly="1" />
                                     <field name="date_validated" readonly="1" />
                                 </group>
                             </page>
-                            <!-- TODO: Fix Javascript error if open and 'Edit' button was clicked.
-                            <page string="Validation Sequence" groups="g2p_registry_base.group_g2p_admin">
-                                <field
-                                    name="validation_ids"
-                                    nolabel="1"
-                                    readonly="1"
-                                >
-                                    <tree editable="bottom">
-                                        <field name="request_type" invisible="1" />
-                                        <field name="stage_id" options="{'no_create_edit':true}" />
-                                        <field
-                                            name="validation_group_id"
-                                            string="Validation Group"
-                                        />
-                                    </tree>
-                                </field>
-                            </page> -->
                         </notebook>
                     </group>
-
                 </group>
+                </sheet>
             </form>
         </field>
     </record>
