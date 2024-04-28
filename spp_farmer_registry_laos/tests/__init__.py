@@ -16,3 +16,4 @@ from . import test_event_data_permanent_crops
 from . import test_event_data_poverty_indicator
 from . import test_event_data_statistics
 from . import test_event_data_wash_ind
+from . import test_generate_farmer_data
