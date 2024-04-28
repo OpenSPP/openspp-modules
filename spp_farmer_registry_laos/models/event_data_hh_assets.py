@@ -61,7 +61,11 @@ class EventDataHHAssets(models.Model):
 class EventDataHHAssetsResPartner(models.Model):
     _inherit = "res.partner"
 
-    active_event_hh_assets = fields.Many2one("spp.event.hh.assets", compute="_compute_active_event_hh_assets")
+    active_event_hh_assets = fields.Many2one(
+        "spp.event.hh.assets",
+        compute="_compute_active_event_hh_assets",
+        store=True
+    )
 
     v_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_hh_assets.survey_sched")
     v_asset_non_agri_tv = fields.Integer("Number of TV", related="active_event_hh_assets.asset_non_agri_tv")

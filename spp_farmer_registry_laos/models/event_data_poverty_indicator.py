@@ -50,7 +50,9 @@ class OpenSPPEventDataPovertyIndicatorResPartner(models.Model):
     _inherit = "res.partner"
 
     active_event_poverty_indicator = fields.Many2one(
-        "spp.event.poverty.indicator", compute="_compute_active_event_poverty_indicator"
+        "spp.event.poverty.indicator",
+        compute="_compute_active_event_poverty_indicator",
+        store=True
     )
 
     iii_survey_schedule = fields.Selection(

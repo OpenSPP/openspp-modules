@@ -54,7 +54,11 @@ class OpenSPPStatisticsCycle(models.Model):
 class OpenSPPStatisticsCycleResPartner(models.Model):
     _inherit = "res.partner"
 
-    active_event_cycle = fields.Many2one("spp.event.cycle", compute="_compute_active_event_cycle")
+    active_event_cycle = fields.Many2one(
+        "spp.event.cycle",
+        compute="_compute_active_event_cycle",
+        store=True
+    )
 
     statistics_program_id = fields.Many2one("g2p.program", "Program", related="active_event_cycle.program_id")
     statistics_cycle_id = fields.Many2one("g2p.cycle", "Cycle", related="active_event_cycle.cycle_id")

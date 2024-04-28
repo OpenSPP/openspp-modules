@@ -45,7 +45,11 @@ class OpenSPPEventDataWashIndicators(models.Model):
 class OpenSPPEventDataWashIndicatorsResPartner(models.Model):
     _inherit = "res.partner"
 
-    active_event_wash_ind = fields.Many2one("spp.event.wash.ind", compute="_compute_active_event_wash_ind")
+    active_event_wash_ind = fields.Many2one(
+        "spp.event.wash.ind",
+        compute="_compute_active_event_wash_ind",
+        store=True
+    )
 
     xv_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_wash_ind.survey_sched")
     xv_water_sources = fields.Selection(string="Water Sources", related="active_event_wash_ind.water_sources")

@@ -51,7 +51,9 @@ class OpenSPPEventDataAgriculturalTechWSLines(models.Model):
 class OpenSPPEventDataAgriculturalTechWSResPartner(models.Model):
     _inherit = "res.partner"
 
-    active_event_agri_tech_ws = fields.Many2one("spp.event.agri.tech.ws", compute="_compute_active_event_agri_tech_ws")
+    active_event_agri_tech_ws = fields.Many2one("spp.event.agri.tech.ws",
+                                                compute="_compute_active_event_agri_tech_ws",
+                                                store=True)
 
     ix_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_agri_tech_ws.survey_sched")
     ix_agri_prod_sales_cost_tech_ids = fields.One2many(
