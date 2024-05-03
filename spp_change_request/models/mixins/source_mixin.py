@@ -67,18 +67,18 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     group_registration_date = fields.Date(related="registrant_id.registration_date", readonly=True)
 
     # DMS Field
-    dms_directory_ids = fields.One2many(
-        "spp.dms.directory",
-        "change_request_id",
-        string="DMS Directories",
-        auto_join=True,
-    )
-    dms_file_ids = fields.One2many(
-        "spp.dms.file",
-        "change_request_id",
-        string="DMS Files",
-        auto_join=True,
-    )
+    # dms_directory_ids = fields.One2many(
+    #    "spp.dms.directory",
+    #    "change_request_id",
+    #    string="DMS Directories",
+    #    auto_join=True,
+    # )
+    # dms_file_ids = fields.One2many(
+    #    "spp.dms.file",
+    #    "change_request_id",
+    #    string="DMS Files",
+    #    auto_join=True,
+    # )
 
     current_user_assigned = fields.Boolean(compute="_compute_current_user_assigned", default=False)
 
@@ -836,7 +836,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     else:
                         raise UserError(_("The required document category is not configured."))
 
-                dms_context.update({"default_change_request_id": rec.id})
+                default_cr_id_field = self._get_default_change_request_id()
+                dms_context.update({default_cr_id_field: rec.id})
                 _logger.debug("action_attach_documents dms_context: %s", dms_context)
                 action.update(
                     {
@@ -847,6 +848,13 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 return action
             else:
                 raise UserError(_("There are no directories defined for this change request."))
+
+    def _get_default_change_request_id(self):
+        """
+        Get the default field name for change request id.
+        Must be overriden in the inheriting model.
+        """
+        return "default_change_request_id"
 
     def open_registrant_details_form(self):
         """

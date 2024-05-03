@@ -96,6 +96,20 @@ class ChangeRequestAddChildren(models.Model):
         domain=[("request_type", "=", _name)],
     )
 
+    # DMS Field
+    dms_directory_ids = fields.One2many(
+        "spp.dms.directory",
+        "change_request_add_children_id",
+        string="DMS Directories",
+        auto_join=True,
+    )
+    dms_file_ids = fields.One2many(
+        "spp.dms.file",
+        "change_request_add_children_id",
+        string="DMS Files",
+        auto_join=True,
+    )
+
     @api.onchange("birthdate")
     def _onchange_birthdate(self):
         if self.birthdate and self.birthdate > fields.date.today():
@@ -181,6 +195,12 @@ class ChangeRequestAddChildren(models.Model):
                     self.update(vals)
         else:
             raise UserError(_("There are no directories defined for this change request."))
+
+    def _get_default_change_request_id(self):
+        """
+        Get the default field name for change request id.
+        """
+        return "default_change_request_add_children_id"
 
     def validate_data(self):
         super().validate_data()
