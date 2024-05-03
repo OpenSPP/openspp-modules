@@ -13,7 +13,7 @@
     "depends": [
         "base",
     ],
-    "external_dependencies": {"python": ["PIL"]},
+    "external_dependencies": {"python": ["Pillow==9.3.0"]},
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
