@@ -1,13 +1,13 @@
 import os
+import re
 import sys
 import xmlrpc.client
-import re
 
 # Sanitize user inputs
 
 
 def sanitize(input_string):
-    return re.sub(r'[^a-zA-Z0-9 ]', '', input_string)
+    return re.sub(r"[^a-zA-Z0-9 ]", "", input_string)
 
 
 # Ensure the URL is correctly formatted
