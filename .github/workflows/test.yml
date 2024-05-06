@@ -77,8 +77,6 @@ jobs:
       - name: Copy OpenG2P modules to addons directory
         # exclude openg2p-program/odoo-addon-base_rest as it is not migrated to 17.0
         run: |
-          pwd
-          echo ${ADDONS_DIR}
           rm -rf openg2p-program/*rest_api* openg2p-program/g2p_documents
           rm -rf odoo-modules/muk_web_enterprise_theme
           cp -r openg2p-registry/* ${ADDONS_DIR}/
@@ -101,6 +99,10 @@ jobs:
         run: |
           cp spp-test-requirements.txt test-requirements.txt
           cat test-requirements.txt
+      - name: Installing specific Debian packages to be able to pip install pyjq
+        run: |
+          apt update
+          apt install -y autoconf automake libtool libtool-bin bison flex
       - name: Install addons and dependencies
         env:
           SKIP_EXT_DEB_DEPENDENCIES: "true"
