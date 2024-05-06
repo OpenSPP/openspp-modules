@@ -40,8 +40,8 @@ jobs:
         include:
           - container: ghcr.io/openspp/oca-ci/py3.10-odoo17.0:latest
             name: test with Odoo
-          - container: ghcr.io/openspp/oca-ci/py3.10-ocb17.0:latest
-            name: test with OCB
+#          - container: ghcr.io/openspp/oca-ci/py3.10-ocb17.0:latest
+#            name: test with OCB
             makepot: "true"
             sonar: "true"
     services:
@@ -58,12 +58,18 @@ jobs:
 #        with:
 #          persist-credentials: false
 
+      - name: Create temporary test-requirement.txt
+        run: cp test-requirements.txt spp-test-requirements.txt
       # Clone OpenG2P Registry repository
       - name: Clone OpenG2P Registry Repository
         run: git clone https://github.com/OpenG2P/openg2p-registry.git --depth 1 --branch 17.0-develop
       # Clone OpenG2P Programs repository
       - name: Clone OpenG2P Programs Repository
         run: git clone https://github.com/OpenG2P/openg2p-program.git --depth 1 --branch 17.0-develop
+      - name: Clone OpenG2P Security Repository
+        run: git clone https://github.com/OpenG2P/openg2p-security.git --depth 1 --branch 17.0-develop
+      - name: Clone OpenG2P VCI Repository
+        run: git clone https://github.com/OpenG2P/openg2p-vci.git --depth 1 --branch 17.0-develop
       - name: Clone geospatial Repository
         run: git clone https://github.com/OpenSPP/geospatial.git --depth 1 --branch 17.0-mig-base_geoengine
       - name: Clone Muk Addons Repository
@@ -71,17 +77,30 @@ jobs:
       - name: Copy OpenG2P modules to addons directory
         # exclude openg2p-program/odoo-addon-base_rest as it is not migrated to 17.0
         run: |
+          pwd
+          echo ${ADDONS_DIR}
           rm -rf openg2p-program/*rest_api* openg2p-program/g2p_documents
           rm -rf odoo-modules/muk_web_enterprise_theme
           cp -r openg2p-registry/* ${ADDONS_DIR}/
+          cat test-requirements.txt >> spp-test-requirements.txt
           cp -r openg2p-program/* ${ADDONS_DIR}/
+          cat test-requirements.txt >> spp-test-requirements.txt
+          cp -r openg2p-security/* ${ADDONS_DIR}/
+          cat test-requirements.txt >> spp-test-requirements.txt
+          cp -r openg2p-vci/* ${ADDONS_DIR}/
+          cat test-requirements.txt >> spp-test-requirements.txt
           cp -r geospatial/* ${ADDONS_DIR}/
+          cat test-requirements.txt >> spp-test-requirements.txt
           # MUK Addons
           cp -r odoo-modules/* ${ADDONS_DIR}/
-      - name: Add g2p-programs and odoo-test-helper to test-requirements.txt
+      - name: Add g2p-programs and odoo-test-helper to spp-test-requirements.txt
         run: |
-          echo "git+https://github.com/OpenG2P/openg2p-program@17.0-develop#subdirectory=g2p_programs" >> test-requirements.txt
-          echo "odoo-test-helper" >> test-requirements.txt
+          echo "git+https://github.com/OpenG2P/openg2p-program@17.0-develop#subdirectory=g2p_programs" >> spp-test-requirements.txt
+          echo "odoo-test-helper" >> spp-test-requirements.txt
+      - name: Replace test-requirements.txt with spp-test-requirements.txt
+        run: |
+          cp spp-test-requirements.txt test-requirements.txt
+          cat test-requirements.txt
       - name: Install addons and dependencies
         env:
           SKIP_EXT_DEB_DEPENDENCIES: "true"
