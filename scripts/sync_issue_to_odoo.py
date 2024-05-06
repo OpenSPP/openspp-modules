@@ -20,9 +20,9 @@ db = os.getenv("ODOO_DB")
 username = os.getenv("ODOO_USERNAME")  # Odoo login username
 password = os.getenv("ODOO_PASSWORD")  # API Key is used
 project_name = "OpenSPP"  # Project name in Odoo
-issue_title = os.getenv("TITLE", "")[:256]
-issue_body = os.getenv("BODY", "")[:256]
-github_issue_id = os.getenv("ISSUE", "")[:256]
+issue_title = sanitize(os.getenv("TITLE", "")[:256])
+issue_body = sanitize(os.getenv("BODY", "")[:256])
+github_issue_id = sanitize(os.getenv("ISSUE", "")[:256])
 
 
 # XML-RPC endpoints for Odoo
