@@ -24,10 +24,6 @@ issue_title = os.getenv("TITLE", "")[:256]
 issue_body = os.getenv("BODY", "")[:256]
 github_issue_id = os.getenv("ISSUE", "")[:256]
 
-# GitHub issue data, passed as script arguments and sanitized
-issue_title = sanitize(issue_title)
-issue_body = sanitize(issue_body)
-github_issue_id = sanitize(github_issue_id)
 
 # XML-RPC endpoints for Odoo
 common = xmlrpc.client.ServerProxy(f"{url}/xmlrpc/2/common")
