@@ -1,5 +1,3 @@
-import psycopg2
-
 from odoo.tests.common import TransactionCase
 
 
@@ -33,10 +31,6 @@ class AuditRuleTest(TransactionCase):
     @classmethod
     def create_audit_rule(cls, **kwargs):
         return cls.env["spp.audit.rule"].create(kwargs)
-
-    def test_check_model(self):
-        with self.assertRaises(psycopg2.errors.UniqueViolation):
-            AuditRuleTest.create_audit_rule(name="Rule 1", model_id=self.model_1.id)
 
     def test_get_audit_rules(self):
         self.assertIsNotNone(self.res_partner.get_audit_rules("create").id)

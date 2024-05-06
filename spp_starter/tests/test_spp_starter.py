@@ -90,7 +90,7 @@ class TestSppStarter(TransactionCase):
         def find_module(module_name):
             return self.env.ref(f"base.module_{module_name}", raise_if_not_found=False)
 
-        spp_theme = find_module("theme_openspp")
+        spp_theme = find_module("theme_openspp_muk")
         self.assertIn(spp_theme, self.test_record._install_modules())
         gp2_individual = find_module("g2p_registry_individual")
         gp2_group = find_module("g2p_registry_group")

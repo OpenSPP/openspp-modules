@@ -243,6 +243,5 @@ class OpenSPPAreaKind(models.Model):
                 [("res_id", "=", rec.id), ("model", "=", "spp.area.kind")]
             )
             if external_identifier and external_identifier.name:
-                raise ValidationError(_("Can't edit default Area Type"))
-            else:
-                return super().write(vals)
+                vals = {}
+            return super().write(vals)

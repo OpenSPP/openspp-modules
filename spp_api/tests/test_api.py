@@ -8,7 +8,6 @@ import uuid
 
 import requests
 
-from odoo import api
 from odoo.tests import tagged
 from odoo.tests.common import HttpCase, get_db_name
 from odoo.tools import config, mute_logger
@@ -33,16 +32,68 @@ class TestAPI(HttpCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.db_name = get_db_name()
-        cls.phantom_env = api.Environment(cls.registry.test_cr, cls.uid, {})
-        cls.demo_user = cls.phantom_env.ref(USER_DEMO)
-        cls.admin_user = cls.phantom_env.ref(USER_ADMIN)
+        cls.partner_demo_id = cls.env["res.partner"].create(
+            {
+                "name": "Marc Demo",
+                "company_id": cls.env.ref("base.main_company").id,
+                "company_name": "YourCompany",
+                "street": "3575  Buena Vista Avenue",
+                "city": "Eugene",
+                "state_id": cls.env.ref("base.state_us_41").id,
+                "zip": "97401",
+                "country_id": cls.env.ref("base.us").id,
+                "tz": "Europe/Brussels",
+                "email": "",
+                "phone": "(441)-695-2334",
+            }
+        )
+        cls.demo_user = cls.env["res.users"].create(
+            {
+                "partner_id": cls.partner_demo_id.id,
+                "login": "demo",
+                "password": "demo",
+                "signature": "<span>-- <br/>+Mr Demo</span>",
+                "company_id": cls.env.ref("base.main_company").id,
+                "groups_id": [
+                    (
+                        6,
+                        0,
+                        [
+                            cls.env.ref("base.group_user").id,
+                            cls.env.ref("base.group_partner_manager").id,
+                            cls.env.ref("base.group_allow_export").id,
+                        ],
+                    )
+                ],
+            }
+        )
+        cls.admin_user = cls.env["res.users"].create(
+            {
+                "login": "admin",
+                "password": "admin",
+                "partner_id": cls.env.ref("base.partner_admin").id,
+                "company_id": cls.env.ref("base.main_company").id,
+            }
+        )
+
+        cls.namespace_id = cls.env["spp_api.namespace"].create(
+            {
+                "name": "demo",
+                "log_request": "debug",
+                "log_response": "debug",
+                "token": "demo_token",
+                "version_name": "v1",
+                "user_ids": [(4, cls.demo_user.id)],
+            }
+        )
+
         cls.model_name = "res.partner"
-        cls.phantom_env["spp_api.path"].create(
+        cls.env["spp_api.path"].create(
             [
                 {
                     "name": "res.partner",
                     "model_id": cls.env.ref("base.model_res_partner").id,
-                    "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
+                    "namespace_id": cls.namespace_id.id,
                     "description": "GET res.partner",
                     "method": "get",
                     "field_ids": [
@@ -58,7 +109,7 @@ class TestAPI(HttpCase):
                 {
                     "name": "res.partner",
                     "model_id": cls.env.ref("base.model_res_partner").id,
-                    "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
+                    "namespace_id": cls.namespace_id.id,
                     "description": "POST res.partner",
                     "method": "post",
                     "api_field_ids": [
@@ -77,7 +128,7 @@ class TestAPI(HttpCase):
                 {
                     "name": "res.partner",
                     "model_id": cls.env.ref("base.model_res_partner").id,
-                    "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
+                    "namespace_id": cls.namespace_id.id,
                     "description": "UPDATE res.partner",
                     "method": "put",
                     "api_field_ids": [
@@ -96,7 +147,7 @@ class TestAPI(HttpCase):
                 {
                     "name": "res.partner",
                     "model_id": cls.env.ref("base.model_res_partner").id,
-                    "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
+                    "namespace_id": cls.namespace_id.id,
                     "description": "DELETE res.partner",
                     "method": "delete",
                 },
@@ -136,7 +187,7 @@ class TestAPI(HttpCase):
 
     @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_read_one(self):
-        record_id = self.phantom_env[self.model_name].search([], limit=1).id
+        record_id = self.env[self.model_name].search([], limit=1).id
         resp = self.request_from_user(self.demo_user, "GET", "/{model}/{record_id}", record_id=record_id)
         self.assertEqual(resp.status_code, pinguin.CODE__success)
         # TODO check content
@@ -167,7 +218,7 @@ class TestAPI(HttpCase):
         data_for_update = {
             "name": "for update in test",
         }
-        partner = self.phantom_env[self.model_name].search([], limit=1)
+        partner = self.env[self.model_name].search([], limit=1)
         resp = self.request_from_user(
             self.demo_user,
             "PUT",
@@ -183,12 +234,12 @@ class TestAPI(HttpCase):
     @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug", "odoo.models.unlink")
     def test_unlink_one(self):
         with self.env.cr.savepoint():
-            partner = self.phantom_env[self.model_name].create({"name": "record for deleting from test"})
-            self.phantom_env[self.model_name].invalidate_model()
+            partner = self.env[self.model_name].create({"name": "record for deleting from test"})
+            self.env[self.model_name].invalidate_model()
 
             resp = self.request_from_user(self.admin_user, "DELETE", "/{model}/{record_id}", record_id=partner.id)
             self.assertEqual(resp.status_code, pinguin.CODE__success)
-            self.assertFalse(self.phantom_env[self.model_name].browse(partner.id).exists())
+            self.assertFalse(self.env[self.model_name].browse(partner.id).exists())
 
     @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_unauthorized_user(self):
@@ -244,7 +295,7 @@ class TestAPI(HttpCase):
             {
                 "name": "res.partner",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "namespace_id": self.namespace_id.id,
                 "description": "PATCH res.partner",
                 "method": "patch",
                 "function": "message_post",
@@ -253,7 +304,7 @@ class TestAPI(HttpCase):
                 ],
             }
         )
-        partner = self.phantom_env[self.model_name].search([], limit=1)
+        partner = self.env[self.model_name].search([], limit=1)
         method_name = "message_post"
         method_params = {"body": MESSAGE}
         resp = self.request_from_user(
@@ -273,7 +324,7 @@ class TestAPI(HttpCase):
             {
                 "name": "res.partner",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "namespace_id": self.namespace_id.id,
                 "description": "PATCH res.partner",
                 "method": "patch",
                 "function": "write",
@@ -282,7 +333,7 @@ class TestAPI(HttpCase):
                 ],
             }
         )
-        partners = self.phantom_env[self.model_name].search([], limit=5)
+        partners = self.env[self.model_name].search([], limit=5)
         method_name = "write"
         method_params = {
             "vals": {"name": "changed from write method called from api"},
@@ -307,7 +358,7 @@ class TestAPI(HttpCase):
             {
                 "name": "res.partner",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "namespace_id": self.namespace_id.id,
                 "description": "PATCH res.partner",
                 "method": "patch",
                 "function": "search_read",
@@ -318,7 +369,7 @@ class TestAPI(HttpCase):
             }
         )
         domain = [["id", "=", 1]]
-        record = self.phantom_env[self.model_name].search(domain)
+        record = self.env[self.model_name].search(domain)
         self.assertTrue(record, "Record with ID 1 is not available")
 
         method_name = "search_read"
@@ -341,9 +392,9 @@ class TestAPI(HttpCase):
 
     @mute_logger("odoo.addons.spp_api.controllers.pinguin", "werkzeug")
     def test_log_creating(self):
-        logs_count_before_request = len(self.phantom_env["spp_api.log"].search([]))
+        logs_count_before_request = len(self.env["spp_api.log"].search([]))
         self.request_from_user(self.demo_user, "GET", "/{model}")
-        logs_count_after_request = len(self.phantom_env["spp_api.log"].search([]))
+        logs_count_after_request = len(self.env["spp_api.log"].search([]))
         self.assertTrue(logs_count_after_request > logs_count_before_request)
 
     # # TODO test is not update for the latest module version
@@ -397,7 +448,7 @@ class TestAPI(HttpCase):
             {
                 "name": "res.partner",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "namespace_id": self.env.ref("spp_api.namespace_demo").id,
+                "namespace_id": self.namespace_id.id,
                 "description": "PATCH res.partner",
                 "method": "patch",
                 "function": "search_read",

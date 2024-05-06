@@ -1,9 +1,10 @@
 from odoo.exceptions import ValidationError
-from odoo.tests import TransactionCase
 from odoo.tools import mute_logger
 
+from .common import Common
 
-class TestSppApiFieldAlias(TransactionCase):
+
+class TestSppApiFieldAlias(Common):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -11,7 +12,7 @@ class TestSppApiFieldAlias(TransactionCase):
             {
                 "name": "res.partner",
                 "model_id": cls.env.ref("base.model_res_partner").id,
-                "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
+                "namespace_id": cls.namespace_id.id,
                 "description": "GET res.partner",
                 "method": "get",
                 "field_ids": [

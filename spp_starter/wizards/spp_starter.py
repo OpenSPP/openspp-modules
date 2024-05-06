@@ -20,23 +20,19 @@ class SppStarter(models.TransientModel):
     # STEP 1
     org_name = fields.Char(
         readonly=True,
-        states={"0": [("readonly", False), ("required", True)]},
         help="Identify the company for record-keeping and customization.",
     )
     org_address = fields.Char(
         readonly=True,
-        states={"0": [("readonly", False), ("required", True)]},
         help="For record-keeping and location-based features.",
     )
     org_phone = fields.Char(
         readonly=True,
-        states={"0": [("readonly", False), ("required", True)]},
         help="For contact and possibly for integrations like SMS alerts.",
     )
     org_currency_id = fields.Many2one(
         comodel_name="res.currency",
         readonly=True,
-        states={"0": [("readonly", False), ("required", True)]},
         context={"active_test": False},
         help="To set the default currency for financial transactions.",
     )
@@ -48,7 +44,6 @@ class SppStarter(models.TransientModel):
             ("both", "Both"),
         ],
         readonly=True,
-        states={"1": [("readonly", False), ("required", True)]},
         default="both",
         help="To customize data models and interfaces.",
     )
@@ -58,7 +53,6 @@ class SppStarter(models.TransientModel):
             ("no", "No"),
         ],
         readonly=True,
-        states={"1": [("readonly", False), ("required", True)]},
         default="yes",
         help="To decide whether geo-tagging modules are needed.",
     )
@@ -68,7 +62,6 @@ class SppStarter(models.TransientModel):
             ("no", "No"),
         ],
         readonly=True,
-        states={"1": [("readonly", False), ("required", True)]},
         default="yes",
         help="To determine if identity management modules should be installed.",
     )
@@ -79,7 +72,6 @@ class SppStarter(models.TransientModel):
             ("no", "No"),
         ],
         readonly=True,
-        states={"2": [("readonly", False), ("required", True)]},
         default="yes",
         help="To gauge whether additional logistics modules are needed.",
     )
@@ -90,7 +82,6 @@ class SppStarter(models.TransientModel):
             ("no", "No"),
         ],
         readonly=True,
-        states={"3": [("readonly", False), ("required", True)]},
         default="yes",
         help="To install cash transfer modules.",
     )
@@ -100,7 +91,6 @@ class SppStarter(models.TransientModel):
             ("no", "No"),
         ],
         readonly=True,
-        states={"3": [("readonly", False), ("required", True)]},
         default="yes",
         help="To add functionality for storing financial information.",
     )
@@ -111,7 +101,6 @@ class SppStarter(models.TransientModel):
             ("no", "No"),
         ],
         readonly=True,
-        states={"4": [("readonly", False), ("required", True)]},
         default="yes",
         help="To decide if modules for inventory management are needed.",
     )
@@ -122,7 +111,6 @@ class SppStarter(models.TransientModel):
             ("no", "No"),
         ],
         readonly=True,
-        states={"5": [("readonly", False), ("required", True)]},
         default="yes",
         help="To add modules for complaint management if needed.",
     )
@@ -167,7 +155,7 @@ class SppStarter(models.TransientModel):
         def find_module(module_name):
             return self.env.ref(f"base.module_{module_name}", raise_if_not_found=False)
 
-        res = find_module("theme_openspp")
+        res = find_module("theme_openspp_muk")
         if self.managing_target == "individual":
             res |= find_module("g2p_registry_individual")
         if self.managing_target == "group":
