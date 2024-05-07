@@ -59,11 +59,11 @@ class GeoField(fields.Field):
     column_type = ("geometry", "geometry")
     dim = 2
 
-    def __init__(self, string="GeoField", **kwargs):
+    def __init__(self, *args, **kwargs):
         self.index = kwargs.get("index", True)  # Enable GiST index by default
         if isinstance(self, GeoField) and self.geo_type and self.geo_class:
             geo_types.update({self.geo_type: self.geo_class})
-        super().__init__(string=string, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def validate_value(self, value):
         try:
