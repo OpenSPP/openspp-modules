@@ -94,16 +94,12 @@ class OpenSPPServicePoint(models.Model):
         for rec in self:
             rec.phone_sanitized = ""
             if rec.phone_no:
-                country_fname = "country_id"
                 number = rec["phone_no"]
-                sanitized = str(
-                    phone_validation.phone_sanitize_numbers_w_record(
-                        [number],
-                        rec,
-                        record_country_fname=country_fname,
-                        force_format="E164",
-                    )[number]["sanitized"]
-                )
+                # phone_sanitize_numbers_w_record is now deprecated and was replaced by phone_parse
+                # TODO: discuss to jeremi/edwin about pip install phonenumbers
+                sanitized = phone_validation.phone_parse(number, None)
+                if sanitized:
+                    sanitized = str(sanitized)
                 rec.phone_sanitized = sanitized
 
     @api.onchange("phone_no", "country_id")
