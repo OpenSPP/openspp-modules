@@ -42,11 +42,11 @@ class Common(TransactionCase):
         )
         cls.namespace_id = cls.env["spp_api.namespace"].create(
             {
-                "name": "demo",
+                "name": "demo_namespace",
                 "log_request": "debug",
                 "log_response": "debug",
                 "token": "demo_token",
-                "version_name": "v1",
+                "version_name": "v2",
                 "user_ids": [(4, cls.demo_user.id)],
             }
         )
