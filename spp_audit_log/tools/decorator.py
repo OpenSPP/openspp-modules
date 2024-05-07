@@ -13,7 +13,7 @@ def get_new_values(records):
     for record in records:
         vals = {}
         for fname in records._fields:
-            vals[fname] = records._fields[fname].convert_to_read(record[fname], record, use_display_name=False)
+            vals[fname] = records._fields[fname].convert_to_read(record[fname], record)
         new_values.append(vals)
     return new_values
 

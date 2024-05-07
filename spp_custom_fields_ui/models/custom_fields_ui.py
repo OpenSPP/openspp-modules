@@ -17,7 +17,7 @@ class OpenSPPCustomFieldsUI(models.Model):
         default="cst",
     )
     prefix = fields.Char(compute="_compute_prefix")
-    draft_name = fields.Char(string="Field Name", required=True, index=True)
+    draft_name = fields.Char(string="Field Draft Name", index=True)
     kinds = fields.Many2many("g2p.group.membership.kind", string="Kind")
     has_presence = fields.Boolean("Presence", default=False)
 

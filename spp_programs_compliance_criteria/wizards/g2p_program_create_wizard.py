@@ -20,14 +20,14 @@ class G2pProgramCreateWizard(models.TransientModel):
     )
     compliance_domain = fields.Text(default="[]")
     compliance_tag_id = fields.Many2one(comodel_name="g2p.registrant.tags", string="Compliance Tag")
-    compliance_sql = fields.Text(string="SQL Query")
+    compliance_sql = fields.Text(string="Compliance SQL Query")
     compliance_sql_query_valid = fields.Selection(
         [
             ("need_checking", "Need Checking"),
             ("valid", "Valid"),
             ("invalid", "Invalid"),
         ],
-        string="SQL Query Status",
+        string="Compliance SQL Query Status",
         default="need_checking",
     )
 

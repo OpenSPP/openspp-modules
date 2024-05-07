@@ -55,7 +55,7 @@ class TempFarmer(models.Model):
             ("secondary", "Secondary"),
             ("tertiary", "Tertiary"),
         ],
-        string="Highest Educational Level",
+        string="Farmer Highest Educational Level",
     )
     farmer_marital_status = fields.Selection(
         [

@@ -30,7 +30,13 @@
                   <group>
                     <field name="event_data_ids" readonly="1">
                       <tree>
-                        <button name="open_form" type="object" icon="fa-external-link" class="btn-success" />
+                        <button
+                                    name="open_form"
+                                    type="object"
+                                    icon="fa-external-link"
+                                    title="Open Form"
+                                    class="btn-success"
+                                />
                         <field name="name" />
                         <field name="event_type" />
                         <field name="collection_date" />
@@ -79,7 +85,13 @@
                   <group>
                     <field name="event_data_ids" readonly="1">
                       <tree>
-                        <button name="open_form" type="object" icon="fa-external-link" class="btn-success" />
+                        <button
+                                    name="open_form"
+                                    type="object"
+                                    icon="fa-external-link"
+                                    title="Open Form"
+                                    class="btn-success"
+                                />
                         <field name="name" />
                         <field name="event_type" />
                         <field name="collection_date" />

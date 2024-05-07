@@ -118,7 +118,9 @@ class ChangeRequestBase(models.Model):
     cancelled_by_id = fields.Many2one("res.users", "Cancelled by")  #: user that cancelled the change request
     date_cancelled = fields.Datetime()  #: date the change request was cancelled
 
-    reset_to_draft_by_id = fields.Many2one("res.users", "Cancelled by")  #: user that reset the change request to draft
+    reset_to_draft_by_id = fields.Many2one(
+        "res.users", "Reset to Draft by"
+    )  #: user that reset the change request to draft
     date_reset_to_draft = fields.Datetime()  #: date the change request was reset to draft
 
     validation_group_id = fields.Many2one(

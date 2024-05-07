@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <!--
 Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
@@ -17,6 +16,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 name="open_entitlement_form"
                                 type="object"
                                 icon="fa-external-link"
+                                title="Open Form"
                                 class="btn-success"
                             />
                           <field name="name" />
@@ -48,6 +48,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 name="open_entitlement_form"
                                 type="object"
                                 icon="fa-external-link"
+                                title="Open Form"
                                 class="btn-success"
                             />
                         <field name="name" />

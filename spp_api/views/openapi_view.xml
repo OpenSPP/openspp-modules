@@ -58,7 +58,13 @@
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree decoration-muted="not active">
-                <button icon="fa-external-link" name="open_self_form" type="object" class="btn btn-success" />
+                <button
+                    icon="fa-external-link"
+                    title="Open Form"
+                    name="open_self_form"
+                    type="object"
+                    class="btn btn-success"
+                />
                 <field name="namespace_id" />
                 <field name="name" />
                 <field name="active" widget="boolean_toggle" />

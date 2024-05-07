@@ -51,7 +51,7 @@ class SPPDMSDirectory(models.Model):
     count_total_directories = fields.Integer(compute="_compute_count_total_directories", string="Total Subdirectories")
     count_total_files = fields.Integer(compute="_compute_count_total_files", string="Total Files")
     size = fields.Float(compute="_compute_size")
-    human_size = fields.Char(compute="_compute_human_size", string="Size")
+    human_size = fields.Char(compute="_compute_human_size")
 
     def _default_parent_id(self):
         context = self.env.context

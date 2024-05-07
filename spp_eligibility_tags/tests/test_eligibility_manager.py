@@ -33,7 +33,7 @@ class TestTagBasedEligibilityManager(TransactionCase):
 
         cls.area_id = cls.env["spp.area"].create(
             {
-                "code": "101",
+                "code": "101-1",
                 "kind": cls.env.ref("spp_area.admin_area_kind").id,
                 "draft_name": "1",
             }

@@ -29,7 +29,7 @@ class SppAuditRule(models.Model):
         readonly=True,
     )
 
-    parent_path = fields.Char()
+    parent_path = fields.Char(index=True)
 
     @api.onchange("model_id")
     def _onchange_model_id(self):

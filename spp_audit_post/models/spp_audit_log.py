@@ -8,7 +8,7 @@ class SppAuditLog(models.Model):
     parent_data_html = fields.Html("Parent HTML Data", readonly=True, compute="_compute_parent_data_html")
 
     # Parent model based on audit rule
-    parent_model_id = fields.Many2one("ir.model", "Model", readonly=True, ondelete="cascade")
+    parent_model_id = fields.Many2one("ir.model", "Parent Model", readonly=True, ondelete="cascade")
     parent_res_ids_str = fields.Text(readonly=True)
 
     # Where to log
