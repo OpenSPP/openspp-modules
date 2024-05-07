@@ -23,7 +23,7 @@ class Common(TransactionCase):
         cls.demo_user = cls.env["res.users"].create(
             {
                 "partner_id": cls.partner_demo_id.id,
-                "login": "demo",
+                "login": "random_demo_user",
                 "password": "demo",
                 "signature": "<span>-- <br/>+Mr Demo</span>",
                 "company_id": cls.env.ref("base.main_company").id,

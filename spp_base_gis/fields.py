@@ -139,7 +139,7 @@ class GeoField(fields.Field):
             return False
         return value_to_shape(value, use_wkb=True)
 
-    def convert_to_read(self, value, record, use_name_get=True):
+    def convert_to_read(self, value, record, use_display_name=True):
         if not isinstance(value, BaseGeometry):
             shape = wkbloads(value, hex=True) if value else False
         else:
