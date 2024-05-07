@@ -680,7 +680,7 @@ class ChangeRequestBase(models.Model):
                 # Set the request_type_ref_id
                 res_model = rec.request_type
                 # Set the dms directory
-                _logger.info("Change Request: DMS Directory Creation (%s)" % len(rec.dms_directory_ids))
+                _logger.debug("Change Request: DMS Directory Creation (%s)" % len(rec.dms_directory_ids))
                 dmsval = {
                     "is_root_directory": True,
                     "name": rec.name,
