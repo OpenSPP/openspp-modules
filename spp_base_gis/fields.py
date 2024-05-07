@@ -63,7 +63,6 @@ class GeoField(fields.Field):
         self.index = kwargs.get("index", True)  # Enable GiST index by default
         if isinstance(self, GeoField) and self.geo_type and self.geo_class:
             geo_types.update({self.geo_type: self.geo_class})
-            string = self.geo_type
         super().__init__(string=string, **kwargs)
 
     def validate_value(self, value):
