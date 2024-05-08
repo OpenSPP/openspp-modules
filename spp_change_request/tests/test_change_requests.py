@@ -1,4 +1,3 @@
-import json
 from unittest.mock import patch
 
 from odoo import fields
@@ -39,21 +38,19 @@ class TestChangeRequests(Common):
     def test_04_compute_applicant_id_domain(self):
         self.assertEqual(
             self._test_change_request.applicant_id_domain,
-            json.dumps([("id", "=", 0)]),
-            "Without resgistrant, applicant selections should not be available!",
+            [("id", "=", 0)],
+            "Without registrant, applicant selections should not be available!",
         )
         self._test_change_request.registrant_id = self._test_group
         self.assertEqual(
             self._test_change_request.applicant_id_domain,
-            json.dumps(
-                [
-                    (
-                        "id",
-                        "in",
-                        self._test_change_request.registrant_id.group_membership_ids.individual.ids,
-                    )
-                ]
-            ),
+            [
+                (
+                    "id",
+                    "in",
+                    self._test_change_request.registrant_id.group_membership_ids.individual.ids,
+                )
+            ],
             "With registrant, applicant selection should be available!",
         )
 

@@ -16,6 +16,7 @@
         "g2p_registry_base",
         "spp_idpass",
         "queue_job",
+        "spp_area",
     ],
     "data": [
         "data/id_pass.xml",

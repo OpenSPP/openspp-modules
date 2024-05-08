@@ -17,8 +17,8 @@ class LandRecord(models.Model):
     land_acreage = fields.Float()
 
     # TODO: Change to geo_point and geo_polygon
-    land_coordinates = fields.GeoPointField()
-    land_geo_polygon = fields.GeoPolygonField()
+    land_coordinates = fields.GeoPointField(string="Land Coordinates")
+    land_geo_polygon = fields.GeoPolygonField(string="Land Polygons")
 
     land_use = fields.Selection(
         [

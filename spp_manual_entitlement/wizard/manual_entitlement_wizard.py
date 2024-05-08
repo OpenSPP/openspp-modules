@@ -33,7 +33,7 @@ class SPPPrepareManualEntitlementWizard(models.TransientModel):
         default="step1",
     )
     file = fields.Binary("File")
-    final_file = fields.Binary("File")
+    final_file = fields.Binary()
     filename = fields.Char("Filename")
 
     @api.onchange("file")

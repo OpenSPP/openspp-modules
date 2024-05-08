@@ -56,7 +56,7 @@ class SPPDMSFile(models.Model):
     mimetype = fields.Char(compute="_compute_mimetype", string="Type", readonly=True, store=True)
 
     size = fields.Float(readonly=True)
-    human_size = fields.Char(readonly=True, string="Size", compute="_compute_human_size", store=True)
+    human_size = fields.Char(readonly=True, compute="_compute_human_size", store=True)
     checksum = fields.Char(string="Checksum/SHA1", readonly=True, index="btree")
     content_file = fields.Binary(attachment=True, prefetch=False)
 

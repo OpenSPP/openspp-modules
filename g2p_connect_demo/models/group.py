@@ -14,7 +14,8 @@ ELDERLY_AGE_LIMIT = 65
 
 
 class G2PGroup(models.Model):
-    _inherit = "res.partner"
+    _name = "res.partner"
+    _inherit = ["res.partner", "custom.filter.mixin"]
 
     z_ind_grp_num_children = fields.Integer(
         "Number of children",

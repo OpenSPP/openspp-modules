@@ -2,14 +2,13 @@ from odoo.tests import TransactionCase
 
 
 class TestIrModelFields(TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.test_model = cls.env["spp.test.daily.recompute.model"]
-        cls.test_field_1 = cls.test_model._fields["field_to_test_1"]
-        cls.test_field_2 = cls.test_model._fields["field_to_test_2"]
-        cls.test_field_3 = cls.test_model._fields["field_to_test_3"]
-        cls.model_id = cls.env.ref("spp_custom_field_recompute_daily.model_spp_test_daily_recompute_model").id
+    def setUp(self):
+        super().setUp()
+        self.test_model = self.env["spp.test.daily.recompute.model"]
+        self.test_field_1 = self.test_model._fields["field_to_test_1"]
+        self.test_field_2 = self.test_model._fields["field_to_test_2"]
+        self.test_field_3 = self.test_model._fields["field_to_test_3"]
+        self.model_id = self.env.ref("spp_custom_field_recompute_daily.model_spp_test_daily_recompute_model").id
 
     def _create_test_record(self):
         return self.test_model.create(

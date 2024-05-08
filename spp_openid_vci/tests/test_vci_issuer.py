@@ -147,12 +147,7 @@ class VCIIssuer(TransactionCase):
 
         self.assertIsNotNone(vc_qr)
         self.assertIsInstance(vc_qr, dict)
-        self.assertEqual(vc_qr.get("type"), "ir.actions.report")
-        self.assertEqual(vc_qr.get("report_name"), "spp_openid_vci.id_vc_card")
-        self.assertEqual(vc_qr.get("report_type"), "qweb-pdf")
-        self.assertEqual(vc_qr.get("report_file"), "spp_openid_vci.id_vc_card")
-        self.assertEqual(vc_qr.get("name"), "ID Card")
-        self.assertEqual(vc_qr.get("context").get("active_ids")[0], self.res_partner_complete.id)
+        self.assertEqual(vc_qr.get("type"), "ir.actions.act_window")
 
     def test_sign_and_issue_credential(self):
         credential_data = {

@@ -14,6 +14,7 @@ class Common(TransactionCase):
         )
         cls._tag = cls.env["g2p.registrant.tags"].create({"name": "Tag 1 [TEST]"})
 
+    @classmethod
     def program_create_wizard(self, vals):
         vals.update(
             {

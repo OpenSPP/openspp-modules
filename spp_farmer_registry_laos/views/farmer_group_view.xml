@@ -144,6 +144,7 @@
                                             name="open_member_form"
                                             type="object"
                                             icon="fa-external-link"
+                                            title="Open Form"
                                             class="btn-success"
                                             help="Open Member Form"
                                         />
@@ -236,6 +237,7 @@
                                             name="open_form"
                                             type="object"
                                             icon="fa-external-link"
+                                            title="Open Form"
                                             class="btn-success"
                                         />
                                         <field name="name" />

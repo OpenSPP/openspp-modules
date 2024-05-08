@@ -33,6 +33,7 @@
         # "spp_sms",
         "queue_job",
         # "spp_change_request_add_children_demo",
+        "spp_custom_filter",
     ],
     "external_dependencies": {"python": ["faker"]},
     "data": [

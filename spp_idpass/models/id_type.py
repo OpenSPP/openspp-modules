@@ -38,6 +38,6 @@ class OpenG2PIDType(models.Model):
             [("res_id", "=", self.id), ("model", "=", "g2p.id.type")]
         )
         if external_identifier.name == "id_type_idpass":
-            raise ValidationError(_("Can't edit default ID Type"))
+            vals = {}
         else:
             return super().write(vals)

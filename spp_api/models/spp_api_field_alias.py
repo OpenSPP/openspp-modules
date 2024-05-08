@@ -52,7 +52,6 @@ class SppApiFieldAlias(models.Model):
     @api.constrains(
         "alias_name",
         "field_id",
-        "field_id.name",
     )
     def _check_field_name_alias_name(self):
         for rec in self:
