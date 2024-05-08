@@ -69,7 +69,7 @@ class TestAPI(HttpCase):
         )
         cls.admin_user = cls.env["res.users"].create(
             {
-                "login": "admin",
+                "login": "admin_spp_api",
                 "password": "admin",
                 "partner_id": cls.env.ref("base.partner_admin").id,
                 "company_id": cls.env.ref("base.main_company").id,
