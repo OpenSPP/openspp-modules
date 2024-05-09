@@ -4,7 +4,9 @@ from odoo import api, fields, models
 class OpenSPPIndividual(models.Model):
     _inherit = "res.partner"
 
-    ind_is_imported_from_crvs = fields.Boolean("Imported from CRVS", compute="_compute_ind_is_imported_from_crvs")
+    ind_is_imported_from_crvs = fields.Boolean(
+        "Individual Imported from CRVS", compute="_compute_ind_is_imported_from_crvs"
+    )
 
     crvs_import_ids = fields.One2many("spp.crvs.imported.individuals", "individual_id", "CRVS Import")
 

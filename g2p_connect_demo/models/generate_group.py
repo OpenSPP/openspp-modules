@@ -17,6 +17,7 @@ _logger = logging.getLogger(__name__)
 
 class OpenG2PGenerateData(models.Model):
     _name = "g2p.generate.data"
+    _description = "Generate Sample Data"
 
     LOCALE_SELECTION = [
         ("en_US", "United States (English)"),

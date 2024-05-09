@@ -15,12 +15,18 @@ class TestIdType(TransactionCase):
         )
 
     def test_01_write_default_id_type(self):
-        with self.assertRaises(ValidationError):
-            self._default_id_type.write(
-                {
-                    "name": "1",
-                }
-            )
+        new_name = "New Default ID Type"
+        self._default_id_type.write(
+            {
+                "name": new_name,
+            }
+        )
+
+        self.assertNotEqual(
+            self._default_id_type.name,
+            new_name,
+            "Default Id Type should not be editable!",
+        )
 
     def test_02_unlink_default_id_type(self):
         with self.assertRaises(ValidationError):

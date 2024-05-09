@@ -6,6 +6,7 @@ from odoo.tests import TransactionCase
 class Common(TransactionCase):
     @classmethod
     def setUpClass(cls):
+        super().setUpClass()
         cls._test_individual_1 = cls._create_registrant({"name": "Liu Bei"})
         cls._test_individual_2 = cls._create_registrant({"name": "Guan Yu"})
         cls._test_individual_3 = cls._create_registrant({"name": "Zhang Fei"})
@@ -32,7 +33,6 @@ class Common(TransactionCase):
                 ],
             }
         )
-        return super().setUpClass()
 
     @classmethod
     def _create_registrant(cls, vals):
@@ -40,6 +40,7 @@ class Common(TransactionCase):
         vals.update({"is_registrant": True})
         return cls.env["res.partner"].create(vals)
 
+    @classmethod
     @patch("odoo.addons.spp_change_request.models.change_request.ChangeRequestBase._selection_request_type_ref_id")
     def _create_change_request(self, mock_request_type_selection):
         mock_request_type_selection.return_value = [("test.request.type", "Test Request Type")]

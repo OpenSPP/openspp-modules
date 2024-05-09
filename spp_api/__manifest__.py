@@ -10,6 +10,7 @@
     "application": False,
     "author": "OpenSPP.org",
     "development_status": "Alpha",
+    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "depends": ["spp_base_api", "mail", "spp_oauth"],

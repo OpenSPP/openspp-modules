@@ -18,7 +18,7 @@ class SPPAPIField(models.Model):
     )
     field_name = fields.Char(related="field_id.name", readonly=True)
     description = fields.Char()
-    force_required = fields.Boolean(related="field_id.required", readonly=True)
+    force_required = fields.Boolean(string="Force Required", related="field_id.required", readonly=True)
     required = fields.Boolean()
     default_value = fields.Char()
 

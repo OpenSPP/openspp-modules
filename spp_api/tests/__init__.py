@@ -7,3 +7,4 @@ from . import test_spp_api_field_path
 from . import test_spp_api_fields
 from . import test_spp_api_log
 from . import test_spp_api_namespace
+from . import common

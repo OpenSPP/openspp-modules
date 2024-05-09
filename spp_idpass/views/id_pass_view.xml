@@ -18,6 +18,7 @@
                 <button
                     name="generate_auth_token"
                     type="object"
+                    title="Generate Auth Token"
                     icon="fa-key"
                     class="btn-success"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"

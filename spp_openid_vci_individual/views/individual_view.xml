@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_individual_form" model="ir.ui.view">
+        <field name="name">view_individual_form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@name='button_box']/button[@name='%(g2p_registry_base.action_disable_registrant_wizard)d']"
+                position="before"
+            >
+                <button type="object" class="oe_stat_button" icon="fa-indent" name="registry_issue_card">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Issue Card</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

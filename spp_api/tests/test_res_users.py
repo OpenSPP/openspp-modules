@@ -6,11 +6,19 @@ class TestResUser(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
 
+        cls.partner_id = cls.env["res.partner"].create(
+            {
+                "name": "TestPartnerResUser",
+                "company_id": cls.env.ref("base.main_company").id,
+            }
+        )
         cls.user = cls.env["res.users"].create(
             {
                 "name": "TestUserResUser",
                 "login": "test_user_res_user",
                 "password": "test_user_res_user",
+                "partner_id": cls.partner_id.id,
+                "company_id": cls.env.ref("base.main_company").id,
             }
         )
 
