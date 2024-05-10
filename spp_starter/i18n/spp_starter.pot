@@ -1,0 +1,417 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_starter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid ""
+"1. Organization Setup\n"
+"                            &gt; 2. Registry Setup\n"
+"                            &gt; 3. Service Points\n"
+"                            &gt; 4. Cash Transfer\n"
+"                            &gt; 5. In-Kind Transfer\n"
+"                            &gt; <strong>6. Grievance Redress Mechanism (GRM)</strong>"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid ""
+"1. Organization Setup\n"
+"                            &gt; 2. Registry Setup\n"
+"                            &gt; 3. Service Points\n"
+"                            &gt; 4. Cash Transfer\n"
+"                            &gt; <strong>5. In-Kind Transfer</strong>\n"
+"                            &gt; 6. Grievance Redress Mechanism (GRM)"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid ""
+"1. Organization Setup\n"
+"                            &gt; 2. Registry Setup\n"
+"                            &gt; 3. Service Points\n"
+"                            &gt; <strong>4. Cash Transfer</strong>\n"
+"                            &gt; 5. In-Kind Transfer\n"
+"                            &gt; 6. Grievance Redress Mechanism (GRM)"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid ""
+"1. Organization Setup\n"
+"                            &gt; 2. Registry Setup\n"
+"                            &gt; <strong>3. Service Points</strong>\n"
+"                            &gt; 4. Cash Transfer\n"
+"                            &gt; 5. In-Kind Transfer\n"
+"                            &gt; 6. Grievance Redress Mechanism (GRM)"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid ""
+"1. Organization Setup\n"
+"                            &gt; <strong>2. Registry Setup</strong>\n"
+"                            &gt; 3. Service Points\n"
+"                            &gt; 4. Cash Transfer\n"
+"                            &gt; 5. In-Kind Transfer\n"
+"                            &gt; 6. Grievance Redress Mechanism (GRM)"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid ""
+"<strong>1. Organization Setup</strong>\n"
+"                            &gt; 2. Registry Setup\n"
+"                            &gt; 3. Service Points\n"
+"                            &gt; 4. Cash Transfer\n"
+"                            &gt; 5. In-Kind Transfer\n"
+"                            &gt; 6. Grievance Redress Mechanism (GRM)"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.ui.menu,name:spp_starter.spp_starter_menu
+msgid "Apps"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Back"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__bank_details_needed
+msgid "Bank Details Needed"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__managing_target__both
+msgid "Both"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state__3
+msgid "Cash Transfer"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__cash_transfer_needed
+msgid "Cash Transfer Needed"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__complaint_management
+msgid "Complaint Management"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__conducting_inkind_transfer
+msgid "Conducting Inkind Transfer"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Do you need to capture bank details?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Do you need to manage service points?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Do you require a Grievance Redress Mechanism?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Done"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Enter the organization's address."
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Enter the organization's phone number."
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Enter your organization name."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__org_phone
+msgid "For contact and possibly for integrations like SMS alerts."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__org_address
+msgid "For record-keeping and location-based features."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state__5
+msgid "Grievance Redress Mechanism"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__managing_target__group
+msgid "Group"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__id_management
+msgid "Id Management"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__org_name
+msgid "Identify the company for record-keeping and customization."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state__4
+msgid "In-Kind Transfer"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__managing_target__individual
+msgid "Individual"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Is location assignment for registrants needed?"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__location_assignment
+msgid "Location Assignment"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__managing_target
+msgid "Managing Target"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model,name:spp_starter.model_ir_ui_menu
+msgid "Menu"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Next"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__bank_details_needed__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__cash_transfer_needed__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__complaint_management__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__conducting_inkind_transfer__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__id_management__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__location_assignment__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__service_point_management__no
+msgid "No"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__org_address
+msgid "Org Address"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__org_currency_id
+msgid "Org Currency"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__org_name
+msgid "Org Name"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__org_phone
+msgid "Org Phone"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state__0
+msgid "Organization"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Organization Name"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Organization's Address"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Organization's Phone Number"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state__1
+msgid "Registry"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model,name:spp_starter.model_spp_starter
+msgid "SPP Starter"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Select the organization's operating currency."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__service_point_management
+msgid "Service Point Management"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state__2
+msgid "Service Points"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__state
+msgid "State"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__bank_details_needed
+msgid "To add functionality for storing financial information."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__complaint_management
+msgid "To add modules for complaint management if needed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__managing_target
+msgid "To customize data models and interfaces."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__conducting_inkind_transfer
+msgid "To decide if modules for inventory management are needed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__location_assignment
+msgid "To decide whether geo-tagging modules are needed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__id_management
+msgid "To determine if identity management modules should be installed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__service_point_management
+msgid "To gauge whether additional logistics modules are needed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__cash_transfer_needed
+msgid "To install cash transfer modules."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__org_currency_id
+msgid "To set the default currency for financial transactions."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.actions.act_window,name:spp_starter.spp_starter_action
+msgid "Welcome to OpenSPP!"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Will you be conducting cash transfers?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Will you be conducting in-kind transfers?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Will you manage groups, individuals, or both?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Would you like to issue functional IDs?"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__bank_details_needed__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__cash_transfer_needed__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__complaint_management__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__conducting_inkind_transfer__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__id_management__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__location_assignment__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__service_point_management__yes
+msgid "Yes"
+msgstr ""
