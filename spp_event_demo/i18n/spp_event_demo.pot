@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,20 +14,30 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_g2p_program_membership__active_house_visit
 #: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__active_house_visit
 #: model:ir.model.fields,field_description:spp_event_demo.field_res_users__active_house_visit
 msgid "Active House Visit"
 msgstr ""
 
 #. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_g2p_program_membership__active_phone_survey
 #: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__active_phone_survey
 #: model:ir.model.fields,field_description:spp_event_demo.field_res_users__active_phone_survey
 msgid "Active Phone Survey"
 msgstr ""
 
 #. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_g2p_program_membership__active_school_enrolment_record
+#: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__active_school_enrolment_record
+#: model:ir.model.fields,field_description:spp_event_demo.field_res_users__active_school_enrolment_record
+msgid "Active School Enrolment Record"
+msgstr ""
+
+#. module: spp_event_demo
 #: model_terms:ir.ui.view,arch_db:spp_event_demo.create_event_house_visit_form_view
 #: model_terms:ir.ui.view,arch_db:spp_event_demo.create_event_phone_survey_form_view
+#: model_terms:ir.ui.view,arch_db:spp_event_demo.create_event_school_enrolment_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -60,6 +70,11 @@ msgid "Create Event Phone Survey Wizard"
 msgstr ""
 
 #. module: spp_event_demo
+#: model:ir.model,name:spp_event_demo.model_spp_create_event_schoolenrolment_record_wizard
+msgid "Create Event School Enrolment Wizard"
+msgstr ""
+
+#. module: spp_event_demo
 #: model:ir.model,name:spp_event_demo.model_spp_create_event_wizard
 msgid "Create Event Wizard"
 msgstr ""
@@ -77,27 +92,27 @@ msgstr ""
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__create_uid
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_schoolenrolment_record_wizard__create_uid
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__create_uid
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__create_uid
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_schoolenrolment_record__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__create_date
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__create_date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_schoolenrolment_record_wizard__create_date
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__create_date
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__create_date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_schoolenrolment_record__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: spp_event_demo
-#: model:ir.model.fields,field_description:spp_event_demo.field_res_partner__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__dms_directory_ids
-msgid "DMS Directories"
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_schoolenrolment_record_wizard__date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_schoolenrolment_record__date
+msgid "Date"
 msgstr ""
 
 #. module: spp_event_demo
@@ -115,14 +130,23 @@ msgstr ""
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__display_name
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__display_name
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_schoolenrolment_record_wizard__display_name
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__display_name
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__display_name
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_schoolenrolment_record__display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_schoolenrolment_record_wizard__enrolment_type
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_schoolenrolment_record__enrolment_type
+msgid "Enrolment Type"
 msgstr ""
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__event_id
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__event_id
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_schoolenrolment_record_wizard__event_id
 msgid "Event"
 msgstr ""
 
@@ -158,8 +182,10 @@ msgstr ""
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__id
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__id
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_schoolenrolment_record_wizard__id
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__id
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__id
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_schoolenrolment_record__id
 msgid "ID"
 msgstr ""
 
@@ -170,26 +196,22 @@ msgid "Is Farm"
 msgstr ""
 
 #. module: spp_event_demo
-#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard____last_update
-#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard____last_update
-#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit____last_update
-#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_schoolenrolment_record_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__write_uid
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__write_uid
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_schoolenrolment_record__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: spp_event_demo
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_house_visit_wizard__write_date
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_phone_survey_wizard__write_date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_schoolenrolment_record_wizard__write_date
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_house_visit__write_date
 #: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_phone_survey__write_date
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_schoolenrolment_record__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -232,7 +254,20 @@ msgstr ""
 #. module: spp_event_demo
 #: model_terms:ir.ui.view,arch_db:spp_event_demo.create_event_house_visit_form_view
 #: model_terms:ir.ui.view,arch_db:spp_event_demo.create_event_phone_survey_form_view
+#: model_terms:ir.ui.view,arch_db:spp_event_demo.create_event_school_enrolment_form_view
 msgid "Save"
+msgstr ""
+
+#. module: spp_event_demo
+#: model:ir.model,name:spp_event_demo.model_spp_event_schoolenrolment_record
+#: model:ir.model.fields.selection,name:spp_event_demo.selection__spp_create_event_wizard__event_data_model__spp_event_schoolenrolment_record
+msgid "School Enrolment Record"
+msgstr ""
+
+#. module: spp_event_demo
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_create_event_schoolenrolment_record_wizard__school_name
+#: model:ir.model.fields,field_description:spp_event_demo.field_spp_event_schoolenrolment_record__school_name
+msgid "School Name"
 msgstr ""
 
 #. module: spp_event_demo
