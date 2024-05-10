@@ -1,0 +1,67 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_programs_sp
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_programs_sp
+#: model:ir.model,name:spp_programs_sp.model_g2p_program_entitlement_manager_cash
+msgid "Cash Entitlement Manager"
+msgstr ""
+
+#. module: spp_programs_sp
+#: model:ir.model,name:spp_programs_sp.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr ""
+
+#. module: spp_programs_sp
+#: model:ir.model,name:spp_programs_sp.model_g2p_program_entitlement_manager_default
+msgid "Default Entitlement Manager"
+msgstr ""
+
+#. module: spp_programs_sp
+#: model:ir.model,name:spp_programs_sp.model_g2p_entitlement
+#: model:ir.model,name:spp_programs_sp.model_g2p_entitlement_inkind
+msgid "Entitlement"
+msgstr ""
+
+#. module: spp_programs_sp
+#: model:ir.model,name:spp_programs_sp.model_g2p_program_entitlement_manager_inkind
+msgid "In-Kind Entitlement Manager"
+msgstr ""
+
+#. module: spp_programs_sp
+#: model_terms:ir.ui.view,arch_db:spp_programs_sp.view_program_list_custom_spp_sp_form
+msgid "Other Configurations"
+msgstr ""
+
+#. module: spp_programs_sp
+#: model:ir.model,name:spp_programs_sp.model_g2p_program
+msgid "Program"
+msgstr ""
+
+#. module: spp_programs_sp
+#: model:ir.model.fields,field_description:spp_programs_sp.field_g2p_entitlement__service_point_id
+msgid "Service Point"
+msgstr ""
+
+#. module: spp_programs_sp
+#: model:ir.model.fields,field_description:spp_programs_sp.field_g2p_entitlement__service_point_ids
+#: model:ir.model.fields,field_description:spp_programs_sp.field_g2p_entitlement_inkind__service_point_ids
+msgid "Service Points"
+msgstr ""
+
+#. module: spp_programs_sp
+#: model:ir.model.fields,field_description:spp_programs_sp.field_g2p_program__store_sp_in_entitlements
+#: model:ir.model.fields,field_description:spp_programs_sp.field_g2p_program_create_wizard__store_sp_in_entitlements
+msgid "Store Service Points to Entitlements"
+msgstr ""
