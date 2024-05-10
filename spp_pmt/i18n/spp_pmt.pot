@@ -1,0 +1,138 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_pmt
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_spp_fields_area__name
+msgid "Area"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_g2p_program_membership__area_calc
+#: model:ir.model.fields,field_description:spp_pmt.field_res_partner__area_calc
+#: model:ir.model.fields,field_description:spp_pmt.field_res_users__area_calc
+msgid "Area Calc"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_ir_model_fields__area_ids
+msgid "Areas"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model,name:spp_pmt.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_spp_fields_area__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_spp_fields_area__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_g2p_program_membership__x_cst_indv_school_age
+#: model:ir.model.fields,field_description:spp_pmt.field_res_partner__x_cst_indv_school_age
+#: model:ir.model.fields,field_description:spp_pmt.field_res_users__x_cst_indv_school_age
+msgid "Currently not attending school or other educational institution"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_ir_model_fields__field_weight
+msgid "Default Weight"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_g2p_program_membership__x_cst_indv_disability
+#: model:ir.model.fields,field_description:spp_pmt.field_res_partner__x_cst_indv_disability
+#: model:ir.model.fields,field_description:spp_pmt.field_res_users__x_cst_indv_disability
+msgid "Disability"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_spp_fields_area__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_spp_fields_area__field_id
+msgid "Field"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model,name:spp_pmt.model_ir_model_fields
+msgid "Fields"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model,name:spp_pmt.model_spp_fields_area
+msgid "Fields Area"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_spp_fields_area__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_spp_fields_area__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_spp_fields_area__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_g2p_program_membership__x_cst_indv_chronic_disease
+#: model:ir.model.fields,field_description:spp_pmt.field_res_partner__x_cst_indv_chronic_disease
+#: model:ir.model.fields,field_description:spp_pmt.field_res_users__x_cst_indv_chronic_disease
+msgid "Long-term (chronic) disease"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_g2p_program_membership__x_cst_indv_gce_ol
+#: model:ir.model.fields,field_description:spp_pmt.field_res_partner__x_cst_indv_gce_ol
+#: model:ir.model.fields,field_description:spp_pmt.field_res_users__x_cst_indv_gce_ol
+msgid "Lower than G.C.E. Ordinary Level"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_g2p_program_membership__grp_pmt_score
+#: model:ir.model.fields,field_description:spp_pmt.field_res_partner__grp_pmt_score
+#: model:ir.model.fields,field_description:spp_pmt.field_res_users__grp_pmt_score
+msgid "PMT Score of group"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_g2p_program_membership__z_ind_grp_pmt_score
+#: model:ir.model.fields,field_description:spp_pmt.field_res_partner__z_ind_grp_pmt_score
+#: model:ir.model.fields,field_description:spp_pmt.field_res_users__z_ind_grp_pmt_score
+msgid "PMT Score of the group"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_spp_fields_area__weight
+msgid "Weight"
+msgstr ""
+
+#. module: spp_pmt
+#: model:ir.model.fields,field_description:spp_pmt.field_ir_model_fields__with_weight
+msgid "With Weight"
+msgstr ""
