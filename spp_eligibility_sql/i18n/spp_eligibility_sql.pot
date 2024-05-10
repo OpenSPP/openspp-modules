@@ -1,0 +1,259 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_eligibility_sql
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_eligibility_sql
+#. odoo-python
+#: code:addons/spp_eligibility_sql/wizard/create_program_wizard.py:0
+#, python-format
+msgid "A SQL Query is needed for this eligibility criteria type."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model_terms:ir.actions.act_window,help:spp_eligibility_sql.action_eligibility_manager_sql
+msgid "Add an Eligibility Manager!"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model_terms:ir.actions.act_window,help:spp_eligibility_sql.action_eligibility_manager_sql
+msgid "Click the create button to enter a new eligibility manager."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model,name:spp_eligibility_sql.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#. odoo-python
+#: code:addons/spp_eligibility_sql/models/eligibility_manager.py:0
+#: code:addons/spp_eligibility_sql/models/eligibility_manager.py:0
+#: code:addons/spp_eligibility_sql/wizard/create_program_wizard.py:0
+#, python-format
+msgid "Database Query Error: %s"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model,name:spp_eligibility_sql.model_g2p_eligibility_manager
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_create_wizard__eligibility_kind
+msgid "Eligibility Manager"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_sql.view_eligibility_manager_sql_form
+msgid "Enter the Manager Name..."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_sql.eligibility_manager_sql_filter
+msgid "Group By"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#. odoo-python
+#: code:addons/spp_eligibility_sql/models/eligibility_manager.py:0
+#, python-format
+msgid "Import finished."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields.selection,name:spp_eligibility_sql.selection__g2p_program_create_wizard__sql_query_valid__invalid
+#: model:ir.model.fields.selection,name:spp_eligibility_sql.selection__g2p_program_membership_manager_sql__sql_query_valid__invalid
+msgid "Invalid"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__name
+msgid "Manager Name"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_sql.view_eligibility_manager_sql_form
+msgid "Name:"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields.selection,name:spp_eligibility_sql.selection__g2p_program_create_wizard__sql_query_valid__recheck
+#: model:ir.model.fields.selection,name:spp_eligibility_sql.selection__g2p_program_membership_manager_sql__sql_query_valid__recheck
+msgid "Needs Re-checking"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields.selection,name:spp_eligibility_sql.selection__g2p_program_create_wizard__sql_query_valid__new
+#: model:ir.model.fields.selection,name:spp_eligibility_sql.selection__g2p_program_membership_manager_sql__sql_query_valid__new
+msgid "New"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model,name:spp_eligibility_sql.model_g2p_program
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__program_id
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_sql.eligibility_manager_sql_filter
+msgid "Program"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_sql.view_eligibility_manager_sql_form
+msgid "Program:"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_create_wizard__sql_query_valid_message
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__sql_query_valid_message
+msgid "Query Validation Message"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_create_wizard__sql_record_count
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__sql_record_count
+msgid "Record Count"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_create_wizard__sql_query
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__sql_query
+msgid "SQL Query"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_create_wizard__sql_query_valid
+#: model:ir.model.fields,field_description:spp_eligibility_sql.field_g2p_program_membership_manager_sql__sql_query_valid
+msgid "SQL Query Status"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields.selection,name:spp_eligibility_sql.selection__g2p_program_create_wizard__eligibility_kind__sql_eligibility
+msgid "SQL-base Eligibility"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.actions.act_window,name:spp_eligibility_sql.action_eligibility_manager_sql
+#: model:ir.ui.menu,name:spp_eligibility_sql.menu_eligibility_manager_sql
+msgid "SQL-base Eligibility Managers"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model,name:spp_eligibility_sql.model_g2p_program_membership_manager_sql
+msgid "SQL-based Eligibility"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_sql.view_eligibility_manager_sql_form
+msgid "SQL-based Eligibility Manager"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_sql.eligibility_manager_sql_filter
+msgid "Search Eligibility Manager"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_sql.view_eligibility_manager_sql_form
+msgid "Select a program..."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#. odoo-python
+#: code:addons/spp_eligibility_sql/models/eligibility_manager.py:0
+#, python-format
+msgid ""
+"The SQL Query is not valid. Be sure to validate this in the Eligibility "
+"Manager."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#. odoo-python
+#: code:addons/spp_eligibility_sql/models/eligibility_manager.py:0
+#: code:addons/spp_eligibility_sql/wizard/create_program_wizard.py:0
+#, python-format
+msgid "The SQL Query is valid but it did not return any record."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#. odoo-python
+#: code:addons/spp_eligibility_sql/wizard/create_program_wizard.py:0
+#, python-format
+msgid "The SQL Query must be validated first."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#. odoo-python
+#: code:addons/spp_eligibility_sql/wizard/create_program_wizard.py:0
+#, python-format
+msgid "The SQL Query must return 1 or more record."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#. odoo-python
+#: code:addons/spp_eligibility_sql/models/eligibility_manager.py:0
+#: code:addons/spp_eligibility_sql/wizard/create_program_wizard.py:0
+#, python-format
+msgid "The SQL Query must return the record ID field."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#. odoo-python
+#: code:addons/spp_eligibility_sql/models/programs.py:0
+#, python-format
+msgid "The entitlement kind must be specified."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#. odoo-python
+#: code:addons/spp_eligibility_sql/models/programs.py:0
+#, python-format
+msgid ""
+"The program name, SQL query, and entitlement dictionary must be provided."
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model:ir.model.fields.selection,name:spp_eligibility_sql.selection__g2p_program_create_wizard__sql_query_valid__valid
+#: model:ir.model.fields.selection,name:spp_eligibility_sql.selection__g2p_program_membership_manager_sql__sql_query_valid__valid
+msgid "Valid"
+msgstr ""
+
+#. module: spp_eligibility_sql
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_sql.create_program_wizard_form_view_custom_eligibility_sql
+#: model_terms:ir.ui.view,arch_db:spp_eligibility_sql.view_eligibility_manager_sql_form
+msgid "Validate Query"
+msgstr ""
