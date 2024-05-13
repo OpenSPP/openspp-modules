@@ -15,6 +15,7 @@ _logger = logging.getLogger(__name__)
 
 class G2PGenerateData(models.Model):
     _name = "spp.generate.data"
+    _description = "Generate Sample Data"
 
     name = fields.Char()
     num_groups = fields.Integer("Number of Groups", default=1)

@@ -1,0 +1,136 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_openid_vci
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_openid_vci
+#: model:ir.actions.report,print_report_name:spp_openid_vci.action_generate_id_card
+msgid "'ID Card - %s' % (object.name).replace('/', '').strip()"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+msgid ""
+"<br/>\n"
+"                                    <strong>Gender:</strong>"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+msgid "<strong>Address:</strong>"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+msgid "<strong>Birthdate:</strong>"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+msgid "<strong>Name:</strong>"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.issue_card_wizard
+msgid "Cancel"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.issue_card_wizard
+msgid "Confirm"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model,name:spp_openid_vci.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.actions.report,name:spp_openid_vci.action_generate_id_card
+msgid "ID Card"
+msgstr ""
+
+#. module: spp_openid_vci
+#. odoo-python
+#: code:addons/spp_openid_vci/models/res_partner.py:0
+#: model:ir.actions.act_window,name:spp_openid_vci.action_issue_card_wizard
+#, python-format
+msgid "Issue Card"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__issuer_id
+msgid "Issuer"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model,name:spp_openid_vci.model_g2p_openid_vci_issuers
+msgid "OpenID VCI Issuer"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+msgid "OpenSPP"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+msgid "QR Code"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__partner_id
+msgid "Registrant"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_g2p_program_membership__vc_qr_code
+#: model:ir.model.fields,field_description:spp_openid_vci.field_res_partner__vc_qr_code
+#: model:ir.model.fields,field_description:spp_openid_vci.field_res_users__vc_qr_code
+msgid "VC QR Code"
+msgstr ""
+
+#. module: spp_openid_vci
+#: model:ir.model,name:spp_openid_vci.model_spp_issue_card_wizard
+msgid "spp.issue.card.wizard"
+msgstr ""

@@ -328,4 +328,588 @@
         <field name="act_window_id" ref="action_spp_event_cycle" />
     </record>
 
+    <record id="view_farmer_groups_event_cycle_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_event_cycle_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']" position="before">
+                <page name="event_cycle" string="Statistics Cycle">
+                    <div class="row mt16 o_settings_container" name="statistics_container_1">
+                        <div class="col-4 o_setting_box" name="statistics_program_id">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_program_id" />
+                                <div>
+                                </div>
+                                <field name="statistics_program_id" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_cycle_id">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_cycle_id" />
+                                <div>
+                                </div>
+                                <field name="statistics_cycle_id" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_event_type">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_event_type" />
+                                <div>
+                                </div>
+                                <field name="statistics_event_type" />
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        invisible="statistics_event_type not in ('fgmemr1', 'wumem', 'fgmemr2')"
+                        name="statistics_container_2"
+                    >
+                        <div class="col-4 o_setting_box" name="statistics_no_hh_member">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_hh_member" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_hh_member" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_indigenous">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_indigenous" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_indigenous" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_percent_indigenous">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_percent_indigenous" />
+                                <div>
+                                </div>
+                                <field name="statistics_percent_indigenous" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_15_35">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_15_35" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_15_35" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_percent_15_35">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_percent_15_35" />
+                                <div>
+                                </div>
+                                <field name="statistics_percent_15_35" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_woman_headed">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_woman_headed" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_woman_headed" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_better_off">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_better_off" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_better_off" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_medium">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_medium" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_medium" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_poor">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_poor" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_poor" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_male">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_male" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_male" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_female">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_female" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_female" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_both">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_both" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_both" />
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        invisible="statistics_event_type != 'impagri'"
+                        name="statistics_container_3"
+                    >
+                        <div class="col-4 o_setting_box" name="statistics_no_implemented">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_implemented" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_implemented" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_on_going">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_on_going" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_on_going" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_not_implemented">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_not_implemented" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_not_implemented" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_production_area">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_production_area" />
+                                <div>
+                                </div>
+                                <field name="statistics_production_area" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_agricultural_yield">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_agricultural_yield" />
+                                <div>
+                                </div>
+                                <field name="statistics_agricultural_yield" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_agricultural_productivity">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_agricultural_productivity" />
+                                <div>
+                                </div>
+                                <field name="statistics_agricultural_productivity" />
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        invisible="statistics_event_type != 'implive'"
+                        name="statistics_container_4"
+                    >
+                        <div class="col-4 o_setting_box" name="statistics_no_livestock_project">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_livestock_project" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_livestock_project" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_livestock_present">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_livestock_present" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_livestock_present" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_livestock_consumption">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_livestock_consumption" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_livestock_consumption" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_livestock_sold">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_livestock_sold" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_livestock_sold" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_livestock_increase">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_livestock_increase" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_livestock_increase" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_event_cycle_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_event_cycle_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']" position="before">
+                <page name="event_cycle" string="Statistics Cycle">
+                    <div class="row mt16 o_settings_container" name="statistics_container_1">
+                        <div class="col-4 o_setting_box" name="statistics_program_id">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_program_id" />
+                                <div>
+                                </div>
+                                <field name="statistics_program_id" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_cycle_id">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_cycle_id" />
+                                <div>
+                                </div>
+                                <field name="statistics_cycle_id" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_event_type">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_event_type" />
+                                <div>
+                                </div>
+                                <field name="statistics_event_type" />
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        invisible="statistics_event_type not in ('fgmemr1', 'wumem', 'fgmemr2')"
+                        name="statistics_container_2"
+                    >
+                        <div class="col-4 o_setting_box" name="statistics_no_hh_member">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_hh_member" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_hh_member" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_indigenous">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_indigenous" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_indigenous" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_percent_indigenous">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_percent_indigenous" />
+                                <div>
+                                </div>
+                                <field name="statistics_percent_indigenous" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_15_35">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_15_35" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_15_35" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_percent_15_35">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_percent_15_35" />
+                                <div>
+                                </div>
+                                <field name="statistics_percent_15_35" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_woman_headed">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_woman_headed" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_woman_headed" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_better_off">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_better_off" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_better_off" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_medium">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_medium" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_medium" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_poor">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_poor" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_poor" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_male">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_male" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_male" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_female">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_female" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_female" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_both">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_both" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_both" />
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        invisible="statistics_event_type != 'impagri'"
+                        name="statistics_container_3"
+                    >
+                        <div class="col-4 o_setting_box" name="statistics_no_implemented">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_implemented" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_implemented" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_on_going">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_on_going" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_on_going" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_not_implemented">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_not_implemented" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_not_implemented" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_production_area">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_production_area" />
+                                <div>
+                                </div>
+                                <field name="statistics_production_area" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_agricultural_yield">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_agricultural_yield" />
+                                <div>
+                                </div>
+                                <field name="statistics_agricultural_yield" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_agricultural_productivity">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_agricultural_productivity" />
+                                <div>
+                                </div>
+                                <field name="statistics_agricultural_productivity" />
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        invisible="statistics_event_type != 'implive'"
+                        name="statistics_container_4"
+                    >
+                        <div class="col-4 o_setting_box" name="statistics_no_livestock_project">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_livestock_project" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_livestock_project" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_livestock_present">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_livestock_present" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_livestock_present" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_livestock_consumption">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_livestock_consumption" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_livestock_consumption" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_livestock_sold">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_livestock_sold" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_livestock_sold" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="statistics_no_livestock_increase">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="statistics_no_livestock_increase" />
+                                <div>
+                                </div>
+                                <field name="statistics_no_livestock_increase" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
   </odoo>

@@ -15,6 +15,7 @@
                     widget="id_document_reader"
                     classes="btn oe_stat_button oe_edit_only"
                     icon="fa-external-link"
+                    title="Scan Document"
                     text="Scan Document"
                 />
             </xpath>

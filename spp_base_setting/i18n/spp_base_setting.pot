@@ -1,0 +1,92 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_base_setting
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "Address"
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "City"
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "Country"
+msgstr ""
+
+#. module: spp_base_setting
+#: model:ir.actions.act_window,name:spp_base_setting.action_res_country_office
+#: model:ir.ui.menu,name:spp_base_setting.menu_action_res_country_office
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_tree
+msgid "Country Office"
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "Country Office Name"
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.actions.act_window,help:spp_base_setting.action_res_country_office
+msgid "Create a new Country Office"
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "General Information"
+msgstr ""
+
+#. module: spp_base_setting
+#: model:ir.ui.menu,name:spp_base_setting.menu_action_res_groups
+msgid "Groups"
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "State"
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "Street 2..."
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "Street..."
+msgstr ""
+
+#. module: spp_base_setting
+#: model:ir.ui.menu,name:spp_base_setting.menu_action_res_users
+msgid "Users"
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "Website"
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "ZIP"
+msgstr ""
+
+#. module: spp_base_setting
+#: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
+msgid "e.g. https://www.odoo.com"
+msgstr ""

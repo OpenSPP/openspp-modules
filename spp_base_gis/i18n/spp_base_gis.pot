@@ -1,0 +1,746 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_base_gis
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/fields.py:0
+#, python-format
+msgid "%(geo_type)s is not a valid type."
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid "%s column does not exists or is not a geo field"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__active_on_startup
+msgid "Active On Startup"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.xml:0
+#, python-format
+msgid "Add New Layer"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__backdrop
+msgid "Backdrop"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__backdrop-dark
+msgid "Backdrop-Dark"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__backdrop-light
+msgid "Backdrop-Light"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model,name:spp_base_gis.model_base
+msgid "Base"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_data_layer__geo_repr__basic
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__basic
+msgid "Basic"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__basic-dark
+msgid "Basic-Dark"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__basic-light
+msgid "Basic-Light"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__bright
+msgid "Bright"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__bright-dark
+msgid "Bright-Dark"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__bright-light
+msgid "Bright-Light"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__bright-pastel
+msgid "Bright-Pastel"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__type
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__code
+msgid "Code"
+msgstr ""
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_data_layer_form
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_data_layer_view_form
+msgid "Colors"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.xml:0
+#, python-format
+msgid "Create Raster"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_model_fields__gist_index
+msgid "Create gist index"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__create_uid
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__create_uid
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__create_date
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__create_date
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.esm.js:0
+#, python-format
+msgid "Creating Raster Layer"
+msgstr ""
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.gis_view_form
+msgid "Data (Active layers)"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__begin_color
+msgid "Data Color "
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.actions.act_window,name:spp_base_gis.action_data_layer_view
+#: model:ir.actions.act_window,name:spp_base_gis.action_spp_gis_data_layer_view
+#: model:ir.model,name:spp_base_gis.model_spp_gis_data_layer
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_data_layer_form
+msgid "Data Layer"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_ui_view__data_layer_ids
+msgid "Data layers"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__dataviz
+msgid "Dataviz"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__dataviz-dark
+msgid "Dataviz-Dark"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__dataviz-light
+msgid "Dataviz-Light"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_ui_view__default_center
+msgid "Default map center"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_ui_view__default_zoom
+msgid "Default map zoom"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__display_name
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__display_name
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_type__d_wms
+msgid "Distant WMS"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.xml:0
+#, python-format
+msgid "Edit Data"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.xml:0
+#, python-format
+msgid "Edit Layer"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.esm.js:0
+#, python-format
+msgid "Editing Data layer"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.esm.js:0
+#, python-format
+msgid "Editing Raster Layer"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/__init__.py:0
+#, python-format
+msgid ""
+"Error, can not automatically initialize spatial postgis support. Database user may have to be superuser and postgres/postgis extensions with their devel header have to be installed. If you do not want Odoo to connect with a super user you can manually prepare your database. To do this, open a client to your database using a super user and run:\n"
+"CREATE EXTENSION postgis;\n"
+"CREATE EXTENSION postgis_topology;\n"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_model_fields__ttype
+msgid "Field Type"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model,name:spp_base_gis.model_ir_model_fields
+msgid "Fields"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/gis_view.esm.js:0
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_ui_view__type__gis
+#, python-format
+msgid "GIS"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:res.groups,name:spp_base_gis.group_gis_admin
+msgid "GIS Admin"
+msgstr ""
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.gis_view_form
+msgid "GIS Data"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:res.groups,name:spp_base_gis.group_gis_user
+msgid "GIS User"
+msgstr ""
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_data_layer_form
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_data_layer_view_form
+msgid "General"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__geo_field_id
+msgid "Geo field"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__hybrid
+msgid "Hybrid"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__id
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__id
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_type__image
+msgid "Image"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__image_opacity
+msgid "Image Opacity"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__image_url
+msgid "Image Url"
+msgstr ""
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
+msgid "Image options"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__is_wms
+msgid "Is Wms"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__visible_on_load
+msgid "Is visible on load?"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__geo_type__linestring
+msgid "LINESTRING"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__write_uid
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__write_uid
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__write_date
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__write_date
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__type_id
+msgid "Layer"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__name
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__name
+msgid "Layer Name"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__layer_opacity
+msgid "Layer Opacity"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__sequence
+msgid "Layer Priority"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__layer_transparent
+msgid "Layer Transparent"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__sequence
+msgid "Layer priority"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,help:spp_base_gis.field_spp_gis_data_layer__active_on_startup
+msgid "Layer will be shown on startup if checked."
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__geo_type__multipolygon
+msgid "MULTIPOLYGON"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__model_name
+msgid "Model"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__model_id
+msgid "Model to use"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__model_view_id
+msgid "Model view"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__name
+msgid "Name"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid ""
+"No GIS view defined for the model %s. Please create a view or modify view "
+"mode"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid "No raster layer for view %s"
+msgstr ""
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
+msgid "OSM options"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__ocean
+msgid "Ocean"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__opacity
+msgid "Opacity"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_type__osm
+msgid "OpenStreetMap"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__openstreetmap
+msgid "Openstreetmap"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__outdoor
+msgid "Outdoor"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__outdoor-dark
+msgid "Outdoor-Dark"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__geo_type__point
+msgid "POINT"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__geo_type__polygon
+msgid "POLYGON"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_model_fields__dim
+msgid "PostGIS Dimension"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_model_fields__geo_type
+msgid "PostGIS type"
+msgstr ""
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.gis_view_form
+msgid "Raster (Background layers)"
+msgstr ""
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
+msgid "Raster Data"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.actions.act_window,name:spp_base_gis.action_spp_gis_raster_layer
+#: model:ir.actions.act_window,name:spp_base_gis.action_spp_gis_raster_layer_form
+#: model:ir.model,name:spp_base_gis.model_spp_gis_raster_layer
+msgid "Raster Layer"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model,name:spp_base_gis.model_spp_gis_raster_layer_type
+msgid "Raster Layer Type"
+msgstr ""
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
+msgid "Raster Layer View"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__raster_style
+msgid "Raster Style"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__raster_type
+msgid "Raster layer type"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_ui_view__raster_layer_ids
+msgid "Raster layers"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__view_id
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__view_id
+msgid "Related View"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__geo_repr
+msgid "Representation mode"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__satellite
+msgid "Satellite"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__service
+msgid "Service"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__url
+msgid "Service URL"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__streets
+msgid "Streets"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__streets-dark
+msgid "Streets-Dark"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__streets-light
+msgid "Streets-Light"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__streets-night
+msgid "Streets-Night"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__streets-pastel
+msgid "Streets-Pastel"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/data_layer.py:0
+#, python-format
+msgid "The geo_field_id must be a field in %s model"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.xml:0
+#, python-format
+msgid "Toggle Fold"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__toner
+msgid "Toner"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__toner-background
+msgid "Toner-Background"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__toner-lines
+msgid "Toner-Lines"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__toner-lite
+msgid "Toner-Lite"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__topo
+msgid "Topo"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__topo-pastel
+msgid "Topo-Pastel"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__topo-shiny
+msgid "Topo-Shiny"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__topo-topographique
+msgid "Topo-Topographique"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/fields.py:0
+#, python-format
+msgid "Value must ba a Shapely %(type)s"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model,name:spp_base_gis.model_ir_ui_view
+msgid "View"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_ui_view__type
+msgid "View Type"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.actions.act_window,name:spp_base_gis.gis_view_action
+msgid "Views"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__voyager
+msgid "Voyager"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__voyager-dark
+msgid "Voyager-Dark"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__voyager-light
+msgid "Voyager-Light"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__voyager-vintage
+msgid "Voyager-Vintage"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__wms_layer_name
+msgid "WMS Layer Name"
+msgstr ""
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
+msgid "WMS options"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__winter
+msgid "Winter"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__winter-dark
+msgid "Winter-Dark"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/fields.py:0
+#, python-format
+msgid ""
+"Write/create/search geo type must be wkt/geojson string or must respond to "
+"wkt"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__x_max
+msgid "X Max"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__x_min
+msgid "X Min"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__y_max
+msgid "Y Max"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__y_min
+msgid "Y Min"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__ttype__geo_line
+msgid "geo_line"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__ttype__geo_point
+msgid "geo_point"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__ttype__geo_polygon
+msgid "geo_polygon"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,help:spp_base_gis.field_spp_gis_data_layer__begin_color
+msgid "hex value"
+msgstr ""
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_model_fields__srid
+msgid "srid"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/fields.py:0
+#, python-format
+msgid "type and coordinates should be in the geojson"
+msgstr ""

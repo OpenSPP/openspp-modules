@@ -1,8 +1,9 @@
 from odoo.exceptions import ValidationError
-from odoo.tests import TransactionCase
+
+from .common import Common
 
 
-class TestIrModelFields(TransactionCase):
+class TestIrModelFields(Common):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -10,7 +11,7 @@ class TestIrModelFields(TransactionCase):
             {
                 "name": "res.partner",
                 "model_id": cls.env.ref("base.model_res_partner").id,
-                "namespace_id": cls.env.ref("spp_api.namespace_demo").id,
+                "namespace_id": cls.namespace_id.id,
                 "description": "GET res.partner",
                 "method": "get",
                 "field_ids": [

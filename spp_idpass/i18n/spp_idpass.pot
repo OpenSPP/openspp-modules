@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -65,15 +65,10 @@ msgid "Both"
 msgstr ""
 
 #. module: spp_idpass
+#. odoo-python
 #: code:addons/spp_idpass/models/id_type.py:0
 #, python-format
 msgid "Can't delete default ID Type"
-msgstr ""
-
-#. module: spp_idpass
-#: code:addons/spp_idpass/models/id_type.py:0
-#, python-format
-msgid "Can't edit default ID Type"
 msgstr ""
 
 #. module: spp_idpass
@@ -84,6 +79,11 @@ msgstr ""
 #. module: spp_idpass
 #: model_terms:ir.actions.act_window,help:spp_idpass.action_spp_idpass
 msgid "Click the create button to enter the configuration of the IP PASS."
+msgstr ""
+
+#. module: spp_idpass
+#: model:ir.ui.menu,name:spp_idpass.id_pass_configuration_menu_root
+msgid "Configuration"
 msgstr ""
 
 #. module: spp_idpass
@@ -106,14 +106,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__create_date
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__create_date
 msgid "Created on"
-msgstr ""
-
-#. module: spp_idpass
-#: model:ir.model.fields,field_description:spp_idpass.field_g2p_id_type__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__dms_directory_ids
-msgid "DMS Directories"
 msgstr ""
 
 #. module: spp_idpass
@@ -143,6 +135,11 @@ msgid "Followers (Partners)"
 msgstr ""
 
 #. module: spp_idpass
+#: model_terms:ir.ui.view,arch_db:spp_idpass.view_spp_idpass_tree
+msgid "Generate Auth Token"
+msgstr ""
+
+#. module: spp_idpass
 #: model:ir.model.fields.selection,name:spp_idpass.selection__g2p_id_type__target_type__group
 msgid "Group"
 msgstr ""
@@ -164,15 +161,21 @@ msgid "ID Expiry Length"
 msgstr ""
 
 #. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_g2p_program_membership__id_pdf_filename
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__id_pdf_filename
 #: model:ir.model.fields,field_description:spp_idpass.field_res_users__id_pdf_filename
 msgid "ID File Name"
 msgstr ""
 
 #. module: spp_idpass
+#: model:ir.ui.menu,name:spp_idpass.id_pass_main_menu_root
+msgid "ID Management"
+msgstr ""
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_g2p_program_membership__id_pdf
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__id_pdf
 #: model:ir.model.fields,field_description:spp_idpass.field_res_users__id_pdf
-#: model:ir.ui.menu,name:spp_idpass.menu_spp_idpass
 msgid "ID PASS"
 msgstr ""
 
@@ -188,18 +191,21 @@ msgid "ID PASS Configuration"
 msgstr ""
 
 #. module: spp_idpass
+#. odoo-python
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
 msgid "ID PASS Error: %(reason)s Code: %(code)s"
 msgstr ""
 
 #. module: spp_idpass
+#. odoo-python
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
 msgid "ID PASS Error: No Head or Principal Recipient assigned to this Group"
 msgstr ""
 
 #. module: spp_idpass
+#. odoo-python
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
 msgid "ID PASS Error: Please try reuploading the ID Picture"
@@ -211,6 +217,7 @@ msgid "ID Pass"
 msgstr ""
 
 #. module: spp_idpass
+#. odoo-python
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
 msgid "ID Pass Error: No API set"
@@ -239,7 +246,6 @@ msgstr ""
 
 #. module: spp_idpass
 #: model:ir.model.fields,help:spp_idpass.field_res_partner__message_needaction
-#: model:ir.model.fields,help:spp_idpass.field_res_partner__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
@@ -250,6 +256,7 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_g2p_program_membership__image_1920_filename
 #: model:ir.model.fields,field_description:spp_idpass.field_res_partner__image_1920_filename
 #: model:ir.model.fields,field_description:spp_idpass.field_res_users__image_1920_filename
 msgid "Image 1920 FileName"
@@ -266,6 +273,7 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: spp_idpass
+#. odoo-python
 #: code:addons/spp_idpass/models/registrant.py:0
 #, python-format
 msgid "Issue ID Pass"
@@ -279,12 +287,6 @@ msgstr ""
 #. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
 msgid "Issue IDPass"
-msgstr ""
-
-#. module: spp_idpass
-#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass____last_update
-#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: spp_idpass
@@ -302,11 +304,6 @@ msgstr ""
 #. module: spp_idpass
 #: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__expiry_length_type
 msgid "Length Type"
-msgstr ""
-
-#. module: spp_idpass
-#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: spp_idpass
@@ -336,7 +333,7 @@ msgstr ""
 
 #. module: spp_idpass
 #: model:ir.model.fields,help:spp_idpass.field_res_partner__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: spp_idpass
@@ -345,11 +342,7 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: spp_idpass
-#: model:ir.model.fields,help:spp_idpass.field_res_partner__message_unread_counter
-msgid "Number of unread messages"
-msgstr ""
-
-#. module: spp_idpass
+#. odoo-python
 #: code:addons/spp_idpass/tests/test_registrant.py:0
 #, python-format
 msgid "Object `OpenSPPIDQueue` not yet existed!"
@@ -386,19 +379,10 @@ msgid "Template Name"
 msgstr ""
 
 #. module: spp_idpass
+#. odoo-python
 #: code:addons/spp_idpass/wizard/issue_id_pass_wizard.py:0
 #, python-format
 msgid "There are no selected Template!"
-msgstr ""
-
-#. module: spp_idpass
-#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: spp_idpass
-#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_unread_counter
-msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: spp_idpass

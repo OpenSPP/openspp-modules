@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_data_custom_form_view" model="ir.ui.view">
+        <field name="name">create_event_data_custom_form_view</field>
+        <field name="model">spp.create.event.wizard</field>
+        <field name="inherit_id" ref="spp_event_data.create_event_data_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='registrar']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='collection_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='expiry_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="string">Registrant</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

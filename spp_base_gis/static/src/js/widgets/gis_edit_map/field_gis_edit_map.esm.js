@@ -63,6 +63,7 @@ export class FieldGisEditMap extends Component {
             const response = await this.rpc("/get_maptiler_api_key");
             if (response.mapTilerKey) {
                 this.mapTilerKey = response.mapTilerKey;
+                this.webBaseUrl = response.webBaseUrl;
             } else {
                 console.log("Error: Api Key not found.");
             }
@@ -202,6 +203,15 @@ export class FieldGisEditMap extends Component {
 
         this.map.on("draw.create", updateArea);
         this.map.on("draw.update", updateArea);
+
+        const url = `/spp_base_gis/static/src/images/laos_farm.png`;
+
+        this.map.on("click", `${this.sourceId}-polygon-layerid`, (e) => {
+            new maptilersdk.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(`<img src="${url}" height="200" width="300" alt="Placeholder Image">`)
+                .addTo(this.map);
+        });
     }
 
     addDrawInteractionStyle() {

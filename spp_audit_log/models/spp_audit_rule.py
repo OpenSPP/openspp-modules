@@ -152,7 +152,7 @@ class SppAuditRule(models.Model):
                     RecordModel._patch_method(method, audit_decorator(method))
             updated = bool(ids)
         if updated:
-            self.clear_caches()
+            self.env.registry.clear_cache()
         return updated
 
     @api.model

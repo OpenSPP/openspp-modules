@@ -1,0 +1,457 @@
+<odoo>
+    <record id="view_spp_event_min_dietary_score_form" model="ir.ui.view">
+        <field name="name">view_spp_event_min_dietary_score_form</field>
+        <field name="model">spp.event.min.dietary.score</field>
+        <field name="priority">200</field>
+        <field name="arch" type="xml">
+            <form string="Event Data: Minimum Dietary Diversity Score" duplicate="0">
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_0">
+                        <div class="col-4 o_setting_box" name="survey_sched">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="survey_sched" />
+                                <div>
+                                </div>
+                                <field name="survey_sched" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="container_1">
+                        <div class="col-4 o_setting_box" name="food_made_grains_roots_tubers">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="food_made_grains_roots_tubers" />
+                                <div>
+                                </div>
+                                <field name="food_made_grains_roots_tubers" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="any_beans_peas">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="any_beans_peas" />
+                                <div>
+                                </div>
+                                <field name="any_beans_peas" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="any_nuts_seeds">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="any_nuts_seeds" />
+                                <div>
+                                </div>
+                                <field name="any_nuts_seeds" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="any_milk_milk_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="any_milk_milk_products" />
+                                <div>
+                                </div>
+                                <field name="any_milk_milk_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="any_meat_poultry_fish">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="any_meat_poultry_fish" />
+                                <div>
+                                </div>
+                                <field name="any_meat_poultry_fish" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="any_eggs">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="any_eggs" />
+                                <div>
+                                </div>
+                                <field name="any_eggs" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="any_dark_green_leafy_vegetables">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="any_dark_green_leafy_vegetables" />
+                                <div>
+                                </div>
+                                <field name="any_dark_green_leafy_vegetables" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="any_vitamin_a_rich_fruits_vegetables">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="any_vitamin_a_rich_fruits_vegetables" />
+                                <div>
+                                </div>
+                                <field name="any_vitamin_a_rich_fruits_vegetables" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="any_other_vegetables">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="any_other_vegetables" />
+                                <div>
+                                </div>
+                                <field name="any_other_vegetables" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="any_other_fruits">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="any_other_fruits" />
+                                <div>
+                                </div>
+                                <field name="any_other_fruits" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="food_mentioned_not_listed">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="food_mentioned_not_listed" />
+                                <div>
+                                </div>
+                                <field name="food_mentioned_not_listed" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="remarks">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="remarks" />
+                                <div>
+                                </div>
+                                <field name="remarks" />
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_spp_event_min_dietary_score" model="ir.actions.act_window">
+        <field name="name">Event Data: Minimum Dietary Diversity Score</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.event.min.dietary.score</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+
+    </record>
+
+    <record id="action_spp_event_min_dietary_score_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_spp_event_min_dietary_score_form" />
+        <field name="act_window_id" ref="action_spp_event_min_dietary_score" />
+    </record>
+
+    <record id="view_farmer_groups_min_dietary_score_form" model="ir.ui.view">
+        <field name="name">view_farmer_groups_min_dietary_score_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farmer_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xvii_min_dietary_score" string="XVII. Minimum Dietary Diversity Score">
+                    <div class="row mt16 o_settings_container" name="xvii_container_0">
+                        <div class="col-4 o_setting_box" name="xvii_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xvii_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="xvii_container_1">
+                        <div class="col-4 o_setting_box" name="xvii_food_made_grains_roots_tubers">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_food_made_grains_roots_tubers" />
+                                <div>
+                                </div>
+                                <field name="xvii_food_made_grains_roots_tubers" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_beans_peas">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_beans_peas" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_beans_peas" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_nuts_seeds">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_nuts_seeds" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_nuts_seeds" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_milk_milk_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_milk_milk_products" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_milk_milk_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_meat_poultry_fish">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_meat_poultry_fish" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_meat_poultry_fish" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_eggs">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_eggs" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_eggs" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_dark_green_leafy_vegetables">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_dark_green_leafy_vegetables" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_dark_green_leafy_vegetables" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_vitamin_a_rich_fruits_vegetables">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_vitamin_a_rich_fruits_vegetables" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_vitamin_a_rich_fruits_vegetables" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_other_vegetables">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_other_vegetables" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_other_vegetables" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_other_fruits">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_other_fruits" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_other_fruits" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_food_mentioned_not_listed">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_food_mentioned_not_listed" />
+                                <div>
+                                </div>
+                                <field name="xvii_food_mentioned_not_listed" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_remarks">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_remarks" />
+                                <div>
+                                </div>
+                                <field name="xvii_remarks" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_farm_groups_min_dietary_score_form" model="ir.ui.view">
+        <field name="name">view_farm_groups_min_dietary_score_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_farmer_registry_laos.view_farm_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pisca']/notebook[1]" position="inside">
+                <page name="xvii_min_dietary_score" string="XVII. Minimum Dietary Diversity Score">
+                    <div class="row mt16 o_settings_container" name="xvii_container_0">
+                        <div class="col-4 o_setting_box" name="xvii_survey_schedule">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_survey_schedule" />
+                                <div>
+                                </div>
+                                <field name="xvii_survey_schedule" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" name="xvii_container_1">
+                        <div class="col-4 o_setting_box" name="xvii_food_made_grains_roots_tubers">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_food_made_grains_roots_tubers" />
+                                <div>
+                                </div>
+                                <field name="xvii_food_made_grains_roots_tubers" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_beans_peas">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_beans_peas" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_beans_peas" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_nuts_seeds">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_nuts_seeds" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_nuts_seeds" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_milk_milk_products">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_milk_milk_products" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_milk_milk_products" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_meat_poultry_fish">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_meat_poultry_fish" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_meat_poultry_fish" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_eggs">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_eggs" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_eggs" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_dark_green_leafy_vegetables">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_dark_green_leafy_vegetables" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_dark_green_leafy_vegetables" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_vitamin_a_rich_fruits_vegetables">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_vitamin_a_rich_fruits_vegetables" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_vitamin_a_rich_fruits_vegetables" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_other_vegetables">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_other_vegetables" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_other_vegetables" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_any_other_fruits">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_any_other_fruits" />
+                                <div>
+                                </div>
+                                <field name="xvii_any_other_fruits" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_food_mentioned_not_listed">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_food_mentioned_not_listed" />
+                                <div>
+                                </div>
+                                <field name="xvii_food_mentioned_not_listed" />
+                            </div>
+                        </div>
+                        <div class="col-4 o_setting_box" name="xvii_remarks">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="xvii_remarks" />
+                                <div>
+                                </div>
+                                <field name="xvii_remarks" />
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+  </odoo>

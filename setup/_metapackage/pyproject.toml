@@ -7,6 +7,7 @@ dependencies = [
     "odoo-addon-spp_api>=17.0dev,<17.1dev",
     "odoo-addon-spp_api_records>=17.0dev,<17.1dev",
     "odoo-addon-spp_area>=17.0dev,<17.1dev",
+    "odoo-addon-spp_area_gis>=17.0dev,<17.1dev",
     "odoo-addon-spp_audit_config>=17.0dev,<17.1dev",
     "odoo-addon-spp_audit_log>=17.0dev,<17.1dev",
     "odoo-addon-spp_audit_post>=17.0dev,<17.1dev",
@@ -59,6 +60,7 @@ dependencies = [
     "odoo-addon-spp_service_points>=17.0dev,<17.1dev",
     "odoo-addon-spp_starter>=17.0dev,<17.1dev",
     "odoo-addon-spp_user_roles>=17.0dev,<17.1dev",
+    "odoo-addon-spp_openid_vci>=17.0dev,<17.1dev",
     "odoo-addon-theme_openspp_muk>=17.0dev,<17.1dev",
 ]
 classifiers=[

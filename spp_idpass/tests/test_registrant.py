@@ -14,7 +14,6 @@ class TestRegistrant(TransactionCase):
             {
                 "name": "Jon Snow",
                 "given_name": "Jon",
-                "gender": "Male",
                 "family_name": "Targaryen",
                 "birth_place": "Tower of Joy",
                 "is_registrant": True,

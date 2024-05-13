@@ -123,6 +123,12 @@
                             options="{'no_open':True, 'no_create_edit':True,'no_create':True}"
                             readonly="disabled"
                         />
+                        <field
+                            name="area_id"
+                            placeholder="Area"
+                            options="{'no_open': True, 'no_create': True}"
+                            readonly="disabled"
+                        />
                     </group>
                     <notebook>
                         <page string="Members" name="members">
@@ -138,6 +144,7 @@
                                             name="open_member_form"
                                             type="object"
                                             icon="fa-external-link"
+                                            title="Open Form"
                                             class="btn-success"
                                             help="Open Member Form"
                                         />
@@ -202,6 +209,10 @@
                                 </field>
                             </group>
                         </page>
+                        <page name="pisca" string="PISCA BLS" invisible="1">
+                            <notebook>
+                            </notebook>
+                        </page>
                         <page name="section_farm_act" string="Farm Activity">
                             <field name="farm_prod_ids">
                                 <tree editable="bottom">
@@ -226,6 +237,7 @@
                                             name="open_form"
                                             type="object"
                                             icon="fa-external-link"
+                                            title="Open Form"
                                             class="btn-success"
                                         />
                                         <field name="name" />

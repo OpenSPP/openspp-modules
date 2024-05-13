@@ -14,6 +14,8 @@ class Farmer(models.Model):
             ("married_polygamous", "Married Polygamous"),
         ]
     )
+    geo_img_file = fields.Binary(string="Geometry Image File")
+    geo_img_file_filename = fields.Char(string="File Name")
 
 
 class TempFarmer(models.Model):

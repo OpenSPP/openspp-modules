@@ -1,0 +1,108 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* g2p_registry_encryption
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: g2p_registry_encryption
+#: model_terms:ir.ui.view,arch_db:g2p_registry_encryption.openg2p_inherit_res_config_settings_view_form
+msgid ""
+"By choosing this, you are consenting to decrypting fields on registry. So be"
+" careful"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model:ir.model,name:g2p_registry_encryption.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model:ir.model,name:g2p_registry_encryption.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model:ir.model.fields,field_description:g2p_registry_encryption.field_res_config_settings__decrypt_registry
+msgid "Decrypt Registry"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model_terms:ir.ui.view,arch_db:g2p_registry_encryption.openg2p_inherit_res_config_settings_view_form
+msgid "Decrypt Registry Config"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model:ir.model.fields,field_description:g2p_registry_encryption.field_res_config_settings__encrypt_registry
+msgid "Encrypt Registry"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model_terms:ir.ui.view,arch_db:g2p_registry_encryption.openg2p_inherit_res_config_settings_view_form
+msgid "Encrypt Registry Config"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model:ir.model.fields,field_description:g2p_registry_encryption.field_res_partner__encrypted_val
+#: model:ir.model.fields,field_description:g2p_registry_encryption.field_res_users__encrypted_val
+msgid "Encrypted value"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model:ir.model,name:g2p_registry_encryption.model_g2p_encryption_provider
+msgid "G2P Encryption Provider"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model_terms:ir.ui.view,arch_db:g2p_registry_encryption.openg2p_inherit_res_config_settings_view_form
+msgid "G2P Registry Encryption Settings"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model:ir.model.fields,field_description:g2p_registry_encryption.field_res_partner__is_encrypted
+#: model:ir.model.fields,field_description:g2p_registry_encryption.field_res_users__is_encrypted
+msgid "Is Encrypted"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model:ir.model.fields,field_description:g2p_registry_encryption.field_g2p_encryption_provider__registry_enc_field_placeholder
+msgid "Registry Encrypted Field Placeholder"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model:ir.model.fields,field_description:g2p_registry_encryption.field_res_config_settings__registry_encryption_provider
+msgid "Registry Encryption Provider"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model_terms:ir.ui.view,arch_db:g2p_registry_encryption.openg2p_inherit_res_config_settings_view_form
+msgid "Registry Encryption Provider Config"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model:ir.model.fields,field_description:g2p_registry_encryption.field_g2p_encryption_provider__registry_fields_to_enc
+msgid "Registry Fields to Encrypt"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model_terms:ir.ui.view,arch_db:g2p_registry_encryption.view_registry_encryption_provider_form
+msgid "Registry Settings"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model_terms:ir.ui.view,arch_db:g2p_registry_encryption.openg2p_inherit_res_config_settings_view_form
+msgid "Select the encryption provider to encrypt the registry"
+msgstr ""
+
+#. module: g2p_registry_encryption
+#: model_terms:ir.ui.view,arch_db:g2p_registry_encryption.openg2p_inherit_res_config_settings_view_form
+msgid "This option enables registry fields encrpytion"
+msgstr ""

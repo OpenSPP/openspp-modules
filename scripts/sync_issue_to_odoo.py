@@ -1,6 +1,14 @@
 import os
+import re
 import sys
 import xmlrpc.client
+
+# Sanitize user inputs
+
+
+def sanitize(input_string):
+    return re.sub(r"[^a-zA-Z0-9 ]", "", input_string)
+
 
 # Ensure the URL is correctly formatted
 url = os.getenv("ODOO_URL")
@@ -12,11 +20,10 @@ db = os.getenv("ODOO_DB")
 username = os.getenv("ODOO_USERNAME")  # Odoo login username
 password = os.getenv("ODOO_PASSWORD")  # API Key is used
 project_name = "OpenSPP"  # Project name in Odoo
+issue_title = sanitize(os.getenv("TITLE", "")[:256])
+issue_body = sanitize(os.getenv("BODY", "")[:256])
+github_issue_id = sanitize(os.getenv("ISSUE", "")[:256])
 
-# GitHub issue data, passed as script arguments
-issue_title = sys.argv[1]
-issue_body = sys.argv[2]
-github_issue_id = sys.argv[3]  # Unique GitHub Issue ID
 
 # XML-RPC endpoints for Odoo
 common = xmlrpc.client.ServerProxy(f"{url}/xmlrpc/2/common")

@@ -1,11 +1,15 @@
 import hashlib
 import json
+import logging
 import math
 import random
+from datetime import date, timedelta
 
-from odoo import api, fields, models
+from odoo import Command, api, fields, models
 
 from ..tools import generate_polygon, random_location_in_laos
+
+_logger = logging.getLogger(__name__)
 
 NAMES = [
     "Aguta",
@@ -357,6 +361,26 @@ EVENT_TYPE = [
     "implive",
 ]
 
+EVENT_DATA_TYPES = [
+    "spp.event.gen.info",
+    "spp.event.poverty.indicator",
+    "spp.event.hh.labor",
+    "spp.event.hh.assets",
+    "spp.event.agri.land.ownership.use",
+    "spp.event.food.security",
+    "spp.event.agri.ws",
+    "spp.event.agri.tech.ws",
+    "spp.event.agri.ds",
+    "spp.event.agri.ds.hot",
+    "spp.event.permanent.crops",
+    "spp.event.livestock.farming",
+    "spp.event.inc.agri",
+    "spp.event.inc.non.agri",
+    "spp.event.wash.ind",
+    "spp.event.hh.resilience.index",
+    "spp.event.min.dietary.score",
+]
+
 
 class SPPLaosGenerateFarmerData(models.Model):
     _name = "spp.laos.generate.farmer.data"
@@ -391,7 +415,7 @@ class SPPLaosGenerateFarmerData(models.Model):
             # Generate Farmer Group data
             farmer_group_name = f"Farmer Group {random.choice(FARMER_GROUP_NAMES)}"
             farmer_group_id = res._generate_group_data(i, kind_farmer_group_id, farmer_group_name)
-            self._generate_event_data_cycle(farmer_group_id)
+            self._generate_event_datas(farmer_group_id)
             land_record_id = res._generate_land_record_record(farmer_group_id)
             farmer_group_id.farm_land_rec_id = land_record_id.id
             farmer_group_id.coordinates = land_record_id.land_coordinates
@@ -402,7 +426,7 @@ class SPPLaosGenerateFarmerData(models.Model):
                 # Generate Farm data
                 group_name = f"{random.choice(NAMES)} Farm"
                 group_id = res._generate_group_data(j, kind_farm_id, group_name)
-                self._generate_event_data_cycle(group_id)
+                self._generate_event_datas(group_id)
                 land_record_id = res._generate_land_record_record(group_id)
                 group_id.farm_land_rec_id = land_record_id.id
                 group_id.coordinates = land_record_id.land_coordinates
@@ -473,6 +497,29 @@ class SPPLaosGenerateFarmerData(models.Model):
             }
         )
 
+    def _generate_random_phone_number(self):
+        # Generates a random phone number of the format: (XXX) XXX-XXXX
+        area_code = random.randint(100, 999)
+        exchange_code = random.randint(100, 999)
+        subscriber_number = random.randint(1000, 9999)
+
+        phone_number = f"({area_code}) {exchange_code}-{subscriber_number}"
+        return phone_number
+
+    def _generate_random_date(self, start_date, end_date):
+        """
+        Generates a random date between start_date and end_date.
+
+        :param start_date: A datetime.date object representing the start date.
+        :param end_date: A datetime.date object representing the end date.
+        :return: A string representing a random date between start_date and end_date in the format 'YYYY-MM-DD'.
+        """
+        time_between_dates = end_date - start_date
+        days_between_dates = time_between_dates.days
+        random_number_of_days = random.randrange(days_between_dates)
+        random_date = start_date + timedelta(days=random_number_of_days)
+        return random_date
+
     def _create_event_data(self, model_name, group_id):
         vals_list = {
             "model": model_name,
@@ -480,6 +527,602 @@ class SPPLaosGenerateFarmerData(models.Model):
         }
         event_id = self.env["spp.event.data"].create(vals_list)
         return event_id
+
+    def call_method_by_name(self, method_name, event_id):
+        # Dynamically call a method based on its name
+        _logger.info(method_name)
+        method = getattr(self, method_name, None)
+        if method:
+            return method(event_id)
+        else:
+            return None
+
+    def _generate_event_datas(self, registrant):
+        for event_data in EVENT_DATA_TYPES:
+            event_id = self._create_event_data(event_data, registrant)
+            event_data_model = "_generate_" + event_data.removeprefix("spp.").replace(".", "_")
+            self.call_method_by_name(event_data_model, event_id)
+
+    def _generate_event_gen_info(self, event_id):
+        ethnic_group = self.env["spp.ethnic.group"].search([]).mapped("id")
+        # land_record_id = self._generate_land_record_record(event_id.partner_id)
+        vals_list = {
+            "interviewees_name": f"{random.choice(NAMES)}",
+            "ethnic_group_id": random.choice(ethnic_group),
+            "sex": str(random.randint(1, 2)),
+            "marital_status": str(random.randint(1, 4)),
+            "age": random.randint(20, 80),
+            "educational_qualification": str(random.randint(1, 6)),
+            "head_of_household": str(random.randint(1, 2)),
+            "poverty_status": str(random.randint(1, 3)),
+            # "gps_location": land_record_id.land_coordinates,
+            "phone_number1": self._generate_random_phone_number(),
+            "phone_number2": self._generate_random_phone_number(),
+            "participating": str(random.randint(1, 2)),
+            "date_participated": self._generate_random_date(date.today() - timedelta(days=50), date.today()),
+            "grp_act_supported_by_project_agri": str(random.randint(0, 16)),
+            "grp_act_supported_by_project_livestock_fisheries": random.choice(["0", "19", "20", "21"]),
+            "tech_supported_by_project_org_fert": str(random.randint(1, 2)),
+            "tech_supported_by_project_greenhouse": str(random.randint(1, 2)),
+            "tech_supported_by_project_mulching": str(random.randint(1, 2)),
+            "tech_supported_by_project_gravity_irrig": str(random.randint(1, 2)),
+            "tech_supported_by_project_water_pump": str(random.randint(1, 2)),
+            "tech_supported_by_project_drip_irrig": str(random.randint(1, 2)),
+            "tech_supported_by_project_drip_sprinkler": str(random.randint(1, 2)),
+            "tech_supported_by_project_machine_harvest": str(random.randint(1, 2)),
+            "tech_supported_by_project_dry_processing": str(random.randint(1, 2)),
+            "tech_supported_by_project_agri_oth": str(random.randint(1, 2)),
+            "tech_supported_by_project_concent_feed": str(random.randint(1, 2)),
+            "tech_supported_by_project_grass_planting": str(random.randint(1, 2)),
+            "tech_supported_by_project_vaccination": str(random.randint(1, 2)),
+            "tech_supported_by_project_livestock_oth": random.choice(FARMER_GROUP_NAMES),
+            "irrigation_area_supported": random.randint(1, 999),
+            "participation_oth_proj": str(random.randint(1, 2)),
+            "hhq_number_baseline_survey": random.randint(1, 999),
+            "survey_sched": str(random.randint(1, 3)),
+        }
+
+        event = self.env["spp.event.gen.info"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_poverty_indicator(self, event_id):
+        vals_list = {
+            "type_of_housing": str(random.randint(1, 3)),
+            "atleast_1household_member_completed_sch": str(random.randint(1, 2)),
+            "there_are_children_attend_pri_sch": str(random.randint(1, 3)),
+            "there_are_children_attend_mid_sch": str(random.randint(1, 3)),
+            "access_to_electricity": str(random.randint(1, 3)),
+            "access_to_basic_health_care": str(random.randint(1, 2)),
+            "access_to_internet": str(random.randint(1, 3)),
+            "survey_sched": str(random.randint(1, 3)),
+        }
+
+        event = self.env["spp.event.poverty.indicator"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_hh_labor(self, event_id):
+        vals_list = {
+            "no_hh_members_women": random.randint(1, 50),
+            "no_hh_members_men": random.randint(1, 50),
+            "hh_labor_availability_15_35_women": random.randint(1, 50),
+            "hh_labor_availability_15_35_men": random.randint(1, 50),
+            "hh_labor_availability_36_60_women": random.randint(1, 50),
+            "hh_labor_availability_36_60_men": random.randint(1, 50),
+            "labor_availability_agri_15_35_women": random.randint(1, 50),
+            "labor_availability_agri_15_35_men": random.randint(1, 50),
+            "labor_availability_agri_36_60_women": random.randint(1, 50),
+            "labor_availability_agri_36_60_men": random.randint(1, 50),
+            "survey_sched": str(random.randint(1, 3)),
+        }
+
+        event = self.env["spp.event.hh.labor"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_hh_assets(self, event_id):
+        vals_list = {
+            "asset_non_agri_tv": random.randint(1, 50),
+            "asset_non_agri_refrigerator": random.randint(1, 50),
+            "asset_non_agri_motobike": random.randint(1, 50),
+            "asset_non_agri_vehicle": random.randint(1, 50),
+            "asset_non_agri_mobile_dev": random.randint(1, 50),
+            "asset_non_agri_elec_gas_stove": random.randint(1, 50),
+            "asset_non_agri_computer": random.randint(1, 50),
+            "asset_non_agri_solar_panel": random.randint(1, 50),
+            "asset_non_agri_generator": random.randint(1, 50),
+            "asset_non_agri_charcoal_stove": random.randint(1, 50),
+            "asset_non_agri_kerosene_stove": random.randint(1, 50),
+            "asset_non_agri_washing_machine": random.randint(1, 50),
+            "asset_non_agri_elec_pot": random.randint(1, 50),
+            "asset_non_agri_elec_water_boiler": random.randint(1, 50),
+            "asset_non_agri_rice_cooker": random.randint(1, 50),
+            "asset_non_agri_fan": random.randint(1, 50),
+            "asset_non_agri_sewing_machine": random.randint(1, 50),
+            "asset_agri_4wd_tractor": random.randint(1, 50),
+            "asset_agri_hand_tractor": random.randint(1, 50),
+            "asset_agri_thresher": random.randint(1, 50),
+            "asset_agri_green_house": random.randint(1, 50),
+            "asset_agri_drying_facility": random.randint(1, 50),
+            "asset_agri_rice_mill": random.randint(1, 50),
+            "asset_agri_harvester": random.randint(1, 50),
+            "asset_agri_water_pump": random.randint(1, 50),
+            "asset_agri_farm_truck_tractor": random.randint(1, 50),
+            "asset_agri_grass_cutter": random.randint(1, 50),
+            "asset_agri_elec_wood_cutting": random.randint(1, 50),
+            "asset_agri_feed_pellet_extruder": random.randint(1, 50),
+            "asset_livestock_buffalo": random.randint(1, 50),
+            "asset_livestock_cow_meat": random.randint(1, 50),
+            "asset_livestock_cow_milk": random.randint(1, 50),
+            "asset_livestock_goat": random.randint(1, 50),
+            "asset_livestock_pig": random.randint(1, 50),
+            "asset_livestock_piglets": random.randint(1, 50),
+            "asset_livestock_paultry": random.randint(1, 50),
+            "asset_livestock_aquatic_animals": random.randint(1, 50),
+            "asset_livestock_frog": random.randint(1, 50),
+            "asset_livestock_horse": random.randint(1, 50),
+            "survey_sched": str(random.randint(1, 3)),
+        }
+
+        event = self.env["spp.event.hh.assets"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_agri_land_ownership_use(self, event_id):
+        vals_list = {
+            "crops_in_irrigated_land": str(random.randint(0, 2)),
+            "crops_in_irrigated_land_ha": random.randint(1, 50),
+            "survey_sched": str(random.randint(1, 3)),
+            "land_ownership_ids": [
+                Command.create(
+                    {
+                        "land_ownership": str(random.randint(1, 4)),
+                        "irrigated_puddy": random.randint(1, 50),
+                        "rainfed_puddy": random.randint(1, 50),
+                        "upland_agriculture": random.randint(1, 50),
+                        "coffee_tea_plantation": random.randint(1, 50),
+                        "cardamom_plantation": random.randint(1, 50),
+                        "orchard": random.randint(1, 50),
+                        "pasture": random.randint(1, 50),
+                        "fallow_land": random.randint(1, 50),
+                        "forest": random.randint(1, 50),
+                        "land_rent_oth_hh": random.randint(1, 50),
+                        "oth_agri_land_owned_by_hh": random.randint(1, 50),
+                        "total": random.randint(1, 50),
+                    }
+                )
+            ],
+        }
+
+        event = self.env["spp.event.agri.land.ownership.use"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_food_security(self, event_id):
+        vals_list = {
+            "hungry_season_past_12": random.randint(1, 50),
+            "shortage_january": random.randint(1, 50),
+            "shortage_february": random.randint(1, 50),
+            "shortage_march": random.randint(1, 50),
+            "shortage_april": random.randint(1, 50),
+            "shortage_may": random.randint(1, 50),
+            "shortage_june": random.randint(1, 50),
+            "shortage_july": random.randint(1, 50),
+            "shortage_august": random.randint(1, 50),
+            "shortage_september": random.randint(1, 50),
+            "shortage_october": random.randint(1, 50),
+            "shortage_november": random.randint(1, 50),
+            "shortage_december": random.randint(1, 50),
+            "survey_sched": str(random.randint(1, 3)),
+        }
+
+        event = self.env["spp.event.food.security"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_agri_ws(self, event_id):
+        crops = self.env["spp.farm.species"].search([("species_type", "=", "crop")]).mapped("id")
+        vals_list = {
+            "experience_dryspell_flood": random.randint(1, 50),
+            "experience_dryspell_flood_dates": str(
+                self._generate_random_date(date.today() - timedelta(days=50), date.today())
+            ),
+            "experience_pest_disease_outbreak": random.randint(1, 50),
+            "experience_pest_disease_outbreak_dates": str(
+                self._generate_random_date(date.today() - timedelta(days=50), date.today())
+            ),
+            "experience_pest_disease_outbreak_type": random.choice(FARMER_GROUP_NAMES),
+            "experience_pest_disease_outbreak_affected": str(random.randint(1, 50)),
+            "survey_sched": str(random.randint(1, 3)),
+            "agri_ws_produce_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "cropping_period_sowing": str(
+                            self._generate_random_date(date.today() - timedelta(days=50), date.today())
+                        ),
+                        "cropping_period_harvest": str(
+                            self._generate_random_date(date.today() - timedelta(days=50), date.today())
+                        ),
+                        "harvest_area": random.randint(1, 50),
+                        "harvest_amount": random.randint(1, 50),
+                        "harvest_share": random.randint(1, 50),
+                        "sales_qty": random.randint(1, 50),
+                        "sales_price": random.randint(1, 50),
+                        "sales_value": random.randint(1, 50),
+                        "contract_farming": random.randint(1, 50),
+                        "name_of_partner": random.choice(FARMER_GROUP_NAMES),
+                    }
+                )
+            ],
+            "agri_ws_cost_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "labor_input": random.randint(1, 50),
+                        "preparation_farmland": random.randint(1, 50),
+                        "seeds": random.randint(1, 50),
+                        "labor_cost": random.randint(1, 50),
+                        "fertilizer": random.randint(1, 50),
+                        "pesticide": random.randint(1, 50),
+                        "herbicide": random.randint(1, 50),
+                        "water_fee": random.randint(1, 50),
+                        "tool_equipment": random.randint(1, 50),
+                        "other_fees": random.randint(1, 50),
+                        "total_production": random.randint(1, 50),
+                    }
+                )
+            ],
+        }
+
+        event = self.env["spp.event.agri.ws"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_agri_tech_ws(self, event_id):
+        crops = self.env["spp.farm.species"].search([("species_type", "=", "crop")]).mapped("id")
+        vals_list = {
+            "survey_sched": str(random.randint(1, 3)),
+            "agri_prod_sales_cost_tech_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "org_felt_pest_herb": str(random.randint(0, 1)),
+                        "greenhouse": str(random.randint(0, 1)),
+                        "multing": str(random.randint(0, 1)),
+                        "irrigation_normal": str(random.randint(0, 1)),
+                        "water_pump": str(random.randint(0, 1)),
+                        "drip_irrigation": str(random.randint(0, 1)),
+                        "sprinkler": str(random.randint(0, 1)),
+                        "machine_harvest": str(random.randint(0, 1)),
+                        "dry_processing": str(random.randint(0, 1)),
+                        "post_harvest_treatment": str(random.randint(0, 1)),
+                        "other": random.choice(FARMER_GROUP_NAMES),
+                    }
+                )
+            ],
+        }
+
+        event = self.env["spp.event.agri.tech.ws"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_agri_ds(self, event_id):
+        crops = self.env["spp.farm.species"].search([("species_type", "=", "crop")]).mapped("id")
+        vals_list = {
+            "survey_sched": str(random.randint(1, 3)),
+            "agri_prod_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "harvest_area": random.randint(1, 50),
+                        "harvest_amt_kg": random.randint(1, 50),
+                        "sales_qty_kg": random.randint(1, 50),
+                        "sales_price_lak_kg": random.randint(1, 50),
+                        "sales_value": random.randint(1, 50),
+                        "contract_farming": str(random.randint(1, 2)),
+                        "partner_name": random.choice(FARMER_GROUP_NAMES),
+                    }
+                )
+            ],
+            "agri_cost_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "labor_input_days": random.randint(1, 50),
+                        "preparation_farmland": random.randint(1, 50),
+                        "seeds": random.randint(1, 50),
+                        "labor_cost": random.randint(1, 50),
+                        "fertilizer": random.randint(1, 50),
+                        "pesticide": random.randint(1, 50),
+                        "herbicide_oth": random.randint(1, 50),
+                        "water_fee": random.randint(1, 50),
+                        "total_equipment": random.randint(1, 50),
+                        "oth_fees": random.randint(1, 50),
+                        "total_prod_cost": random.randint(1, 50),
+                    }
+                )
+            ],
+            "agri_tech_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "organic_fertilizer": str(random.randint(0, 1)),
+                        "greenhouse": str(random.randint(0, 1)),
+                        "multing": str(random.randint(0, 1)),
+                        "irrigation": str(random.randint(0, 1)),
+                        "water_pump": str(random.randint(0, 1)),
+                        "drip_irrigation": str(random.randint(0, 1)),
+                        "sprinkler": str(random.randint(0, 1)),
+                        "machine_harvest": str(random.randint(0, 1)),
+                        "dry_processing": str(random.randint(0, 1)),
+                        "post_harvest_treatment": str(random.randint(0, 1)),
+                        "other": random.choice(FARMER_GROUP_NAMES),
+                    }
+                )
+            ],
+        }
+
+        event = self.env["spp.event.agri.ds"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_agri_ds_hot(self, event_id):
+        crops = self.env["spp.farm.species"].search([("species_type", "=", "crop")]).mapped("id")
+        vals_list = {
+            "survey_sched": str(random.randint(1, 3)),
+            "agri_prod_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "harvest_area": random.randint(1, 50),
+                        "harvest_amt_kg": random.randint(1, 50),
+                        "sales_qty_kg": random.randint(1, 50),
+                        "sales_price_lak_kg": random.randint(1, 50),
+                        "sales_value": random.randint(1, 50),
+                        "contract_farming": str(random.randint(1, 2)),
+                        "partner_name": random.choice(FARMER_GROUP_NAMES),
+                    }
+                )
+            ],
+            "agri_cost_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "labor_input_days": random.randint(1, 50),
+                        "preparation_farmland": random.randint(1, 50),
+                        "seeds": random.randint(1, 50),
+                        "labor_cost": random.randint(1, 50),
+                        "fertilizer": random.randint(1, 50),
+                        "pesticide": random.randint(1, 50),
+                        "herbicide_oth": random.randint(1, 50),
+                        "water_fee": random.randint(1, 50),
+                        "total_equipment": random.randint(1, 50),
+                        "oth_fees": random.randint(1, 50),
+                        "total_prod_cost": random.randint(1, 50),
+                    }
+                )
+            ],
+            "agri_tech_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "organic_fertilizer": str(random.randint(0, 1)),
+                        "greenhouse": str(random.randint(0, 1)),
+                        "multing": str(random.randint(0, 1)),
+                        "irrigation": str(random.randint(0, 1)),
+                        "water_pump": str(random.randint(0, 1)),
+                        "drip_irrigation": str(random.randint(0, 1)),
+                        "sprinkler": str(random.randint(0, 1)),
+                        "machine_harvest": str(random.randint(0, 1)),
+                        "dry_processing": str(random.randint(0, 1)),
+                        "post_harvest_treatment": str(random.randint(0, 1)),
+                        "other": random.choice(FARMER_GROUP_NAMES),
+                    }
+                )
+            ],
+        }
+
+        event = self.env["spp.event.agri.ds.hot"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_permanent_crops(self, event_id):
+        crops = self.env["spp.farm.species"].search([("species_type", "=", "crop")]).mapped("id")
+        vals_list = {
+            "survey_sched": str(random.randint(1, 3)),
+            "crop_prod_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "harvest_area": random.randint(1, 50),
+                        "harvest_amt_kg": random.randint(1, 50),
+                        "sales_qty_kg": random.randint(1, 50),
+                        "sales_price_lak_kg": random.randint(1, 50),
+                        "sales_value": random.randint(1, 50),
+                        "contract_farming": str(random.randint(1, 2)),
+                        "partner_name": random.choice(FARMER_GROUP_NAMES),
+                    }
+                )
+            ],
+            "crop_cost_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "labor_input_days": random.randint(1, 50),
+                        "preparation_farmland": random.randint(1, 50),
+                        "seeds": random.randint(1, 50),
+                        "labor_cost": random.randint(1, 50),
+                        "fertilizer": random.randint(1, 50),
+                        "pesticide": random.randint(1, 50),
+                        "herbicide_oth": random.randint(1, 50),
+                        "water_fee": random.randint(1, 50),
+                        "total_equipment": random.randint(1, 50),
+                        "oth_fees": random.randint(1, 50),
+                        "total_prod_cost": random.randint(1, 50),
+                    }
+                )
+            ],
+            "crop_tech_ids": [
+                Command.create(
+                    {
+                        "crop_id": random.choice(crops),
+                        "organic_fertilizer": str(random.randint(0, 1)),
+                        "greenhouse": str(random.randint(0, 1)),
+                        "multing": str(random.randint(0, 1)),
+                        "irrigation": str(random.randint(0, 1)),
+                        "water_pump": str(random.randint(0, 1)),
+                        "drip_irrigation": str(random.randint(0, 1)),
+                        "sprinkler": str(random.randint(0, 1)),
+                        "machine_harvest": str(random.randint(0, 1)),
+                        "dry_processing": str(random.randint(0, 1)),
+                        "post_harvest_treatment": str(random.randint(0, 1)),
+                        "other": random.choice(FARMER_GROUP_NAMES),
+                    }
+                )
+            ],
+        }
+
+        event = self.env["spp.event.permanent.crops"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_livestock_farming(self, event_id):
+        livestock = self.env["spp.farm.species"].search([("species_type", "=", "livestock")]).mapped("id")
+        vals_list = {
+            "survey_sched": str(random.randint(1, 3)),
+            "livestock_cost_ids": [
+                Command.create(
+                    {
+                        "livestock_id": random.choice(livestock),
+                        "labor_input_days": random.randint(1, 50),
+                        "purchase_baby_animal": random.randint(1, 50),
+                        "feed": random.randint(1, 50),
+                        "medicine": random.randint(1, 50),
+                        "electricity_water": random.randint(1, 50),
+                        "facility_machinery": random.randint(1, 50),
+                        "labor_cost": random.randint(1, 50),
+                        "oth_fees": random.randint(1, 50),
+                        "oth_specify": random.randint(1, 50),
+                        "total_cost": random.randint(1, 50),
+                        "farmgate_price": random.randint(1, 50),
+                        "gross_income": random.randint(1, 50),
+                        "nb_head": random.randint(1, 50),
+                    }
+                )
+            ],
+            "livestock_tech_ids": [
+                Command.create(
+                    {
+                        "livestock_id": random.choice(livestock),
+                        "organic_fertilizer": str(random.randint(0, 1)),
+                        "hybrid_species": str(random.randint(0, 1)),
+                        "concentrated_feed": str(random.randint(0, 1)),
+                        "grass_planting_forage": str(random.randint(0, 1)),
+                        "vaccination": str(random.randint(0, 1)),
+                        "antibiotics": str(random.randint(0, 1)),
+                        "growth_hormone": str(random.randint(0, 1)),
+                        "other_disinfect": str(random.randint(0, 1)),
+                        "shed_livestock": str(random.randint(0, 1)),
+                        "other": random.choice(FARMER_GROUP_NAMES),
+                    }
+                )
+            ],
+        }
+
+        event = self.env["spp.event.livestock.farming"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_inc_agri(self, event_id):
+        vals_list = {
+            "sales_of_input": random.randint(1, 50),
+            "sales_baby_animals": random.randint(1, 50),
+            "sales_of_animal_feeds": random.randint(1, 50),
+            "rental_agri_machinery": random.randint(1, 50),
+            "processing_agro_products": random.randint(1, 50),
+            "transport_trade_agro_products": random.randint(1, 50),
+            "other": random.randint(1, 50),
+            "survey_sched": str(random.randint(1, 3)),
+        }
+
+        event = self.env["spp.event.inc.agri"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_inc_non_agri(self, event_id):
+        vals_list = {
+            "salary": random.randint(1, 50),
+            "wages": random.randint(1, 50),
+            "handicraft": random.randint(1, 50),
+            "ntfp": random.randint(1, 50),
+            "remittance": random.randint(1, 50),
+            "business": random.randint(1, 50),
+            "land_lease": random.randint(1, 50),
+            "other": random.randint(1, 50),
+            "survey_sched": str(random.randint(1, 3)),
+        }
+
+        event = self.env["spp.event.inc.non.agri"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_wash_ind(self, event_id):
+        vals_list = {
+            "water_sources": str(random.randint(1, 5)),
+            "latrine_condition": str(random.randint(1, 5)),
+            "handwashing_facility": str(random.randint(1, 3)),
+            "survey_sched": str(random.randint(1, 3)),
+        }
+
+        event = self.env["spp.event.wash.ind"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_hh_resilience_index(self, event_id):
+        vals_list = {
+            "village_engaged_in_flood_landslide_prevention": str(random.randint(1, 2)),
+            "experience_losses_due_to_floods_landslides": str(random.randint(1, 2)),
+            "significant_losses_48": str(random.randint(0, 2)),
+            "access_to_secure_water_source": str(random.randint(1, 2)),
+            "member_water_user_group": str(random.randint(1, 2)),
+            "exp_loss_crops_due_no_access_water": str(random.randint(1, 2)),
+            "significant_losses_49": str(random.randint(0, 2)),
+            "access_services_diversification": str(random.randint(1, 2)),
+            "adopted_new_techniques": str(random.randint(1, 2)),
+            "ben_part_prod_grp": str(random.randint(0, 2)),
+            "grow_veg_oth": str(random.randint(0, 2)),
+            "hh_members_eat_veg": str(random.randint(0, 2)),
+            "part_training_nutr_food": str(random.randint(1, 2)),
+            "intro_health_food_meal": str(random.randint(1, 2)),
+            "eat_animal_protein": str(random.randint(0, 2)),
+            "inc_2_sources": str(random.randint(1, 2)),
+            "inc_sale_crop_livestock": str(random.randint(0, 1)),
+            "inc_processing_trading": str(random.randint(0, 1)),
+            "inc_employment": str(random.randint(0, 1)),
+            "inc_own_business": str(random.randint(0, 1)),
+            "inc_other": str(random.randint(0, 1)),
+            "inc_other_sources": random.choice(FARMER_GROUP_NAMES),
+            "support_2_sources": str(random.randint(1, 2)),
+            "src_savings": str(random.randint(0, 1)),
+            "src_asset_livestock_sell": str(random.randint(0, 1)),
+            "src_village_rice_bank": str(random.randint(0, 1)),
+            "src_other": str(random.randint(0, 1)),
+            "src_other_sources": random.choice(FARMER_GROUP_NAMES),
+            "ability_to_cope": str(random.randint(0, 2)),
+            "comm_engage_contract_farming": str(random.randint(1, 2)),
+            "issue_sell_prod": str(random.randint(0, 2)),
+            "survey_sched": str(random.randint(1, 3)),
+        }
+
+        event = self.env["spp.event.hh.resilience.index"].create(vals_list)
+        event_id.res_id = event.id
+
+    def _generate_event_min_dietary_score(self, event_id):
+        vals_list = {
+            "food_made_grains_roots_tubers": str(random.randint(1, 2)),
+            "any_beans_peas": str(random.randint(1, 2)),
+            "any_nuts_seeds": str(random.randint(1, 2)),
+            "any_milk_milk_products": str(random.randint(1, 2)),
+            "any_meat_poultry_fish": str(random.randint(1, 2)),
+            "any_eggs": str(random.randint(1, 2)),
+            "any_dark_green_leafy_vegetables": str(random.randint(1, 2)),
+            "any_vitamin_a_rich_fruits_vegetables": str(random.randint(1, 2)),
+            "any_other_vegetables": str(random.randint(1, 2)),
+            "any_other_fruits": str(random.randint(1, 2)),
+            "food_mentioned_not_listed": str(random.randint(1, 2)),
+            "remarks": random.choice(FARMER_GROUP_NAMES),
+            "survey_sched": str(random.randint(1, 3)),
+        }
+
+        event = self.env["spp.event.min.dietary.score"].create(vals_list)
+        event_id.res_id = event.id
 
     def _generate_event_data_cycle(self, group_id):
         event_id = self._create_event_data("spp.event.cycle", group_id)

@@ -8,12 +8,13 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "development_status": "Beta",
-    "maintainers": ["jeremi", "gonzalesedwin1123"],
+    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "g2p_registry_base",
         "g2p_programs",
         # "spp_helpdesk",
         "product",
+        "stock",
     ],
     "data": [
         "data/users_data.xml",

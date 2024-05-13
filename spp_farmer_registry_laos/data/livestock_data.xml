@@ -1,0 +1,46 @@
+<odoo noupdate="1">
+
+    <!-- Livestock -->
+    <record id="buffalo_farm_species" model="spp.farm.species">
+        <field name="name">Buffalo</field>
+        <field name="species_type">livestock</field>
+    </record>
+    <record id="cow_meat_farm_species" model="spp.farm.species">
+        <field name="name">Cow (Meat)</field>
+        <field name="species_type">livestock</field>
+    </record>
+    <record id="cow_milk_farm_species" model="spp.farm.species">
+        <field name="name">Cow (Milk)</field>
+        <field name="species_type">livestock</field>
+    </record>
+    <record id="goat_farm_species" model="spp.farm.species">
+        <field name="name">Goat</field>
+        <field name="species_type">livestock</field>
+    </record>
+    <record id="pig_farm_species" model="spp.farm.species">
+        <field name="name">Pig</field>
+        <field name="species_type">livestock</field>
+    </record>
+    <record id="piglets_farm_species" model="spp.farm.species">
+        <field name="name">Piglets</field>
+        <field name="species_type">livestock</field>
+    </record>
+    <record id="poultry_farm_species" model="spp.farm.species">
+        <field name="name">Poultry (Eggs, Chicken, Duck, Goose)</field>
+        <field name="species_type">livestock</field>
+    </record>
+    <record id="aquatic_animals_farm_species" model="spp.farm.species">
+        <field name="name">Aquatic animals (Fish, Shrimp)</field>
+        <field name="species_type">livestock</field>
+    </record>
+    <record id="frog_farm_species" model="spp.farm.species">
+        <field name="name">Frog</field>
+        <field name="species_type">livestock</field>
+    </record>
+    <record id="other_livestock_farm_species" model="spp.farm.species">
+        <field name="name">Other Livestock</field>
+        <field name="species_type">livestock</field>
+    </record>
+
+
+</odoo>

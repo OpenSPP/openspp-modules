@@ -8,7 +8,7 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "development_status": "Alpha",
-    "maintainers": ["jeremi", "gonzalesedwin1123"],
+    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "external_dependencies": {
         "python": [
             "python-magic",
@@ -23,6 +23,7 @@
         "spp_service_points",
         "spp_area",
         "spp_scan_id_document",
+        "spp_dms",
         # "dms_field",
     ],
     "data": [
@@ -56,6 +57,3 @@
     "installable": True,
     "auto_install": False,
 }
-
-# "spp_idqueue",
-# "spp_event_data",

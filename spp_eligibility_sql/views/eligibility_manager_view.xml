@@ -56,6 +56,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 name="test_sql_query"
                                 type="object"
                                 icon="fa-check-square-o"
+                                title="Validate Query"
                                 class="btn-success"
                                 style="margin-left: 10px;"
                                 string="Validate Query"

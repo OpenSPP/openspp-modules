@@ -16,7 +16,7 @@ class SppAuditLog(models.Model):
     create_date = fields.Datetime("Date", readonly=True)
     user_id = fields.Many2one("res.users", "User", required=True, readonly=True)
     model_id = fields.Many2one("ir.model", "Model", required=True, readonly=True, ondelete="cascade")
-    model = fields.Char(related="model_id.model")
+    model = fields.Char(related="model_id.model", string="Model Name")
     res_id = fields.Integer("Resource Id", readonly=True)
     method = fields.Char(size=64, readonly=True)
     data = fields.Text(readonly=True)

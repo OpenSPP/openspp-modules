@@ -25,7 +25,7 @@ class AreaImportTest(AreaImportTestMixin):
         self.assertEqual(0, self.area_import_id.tot_rows_error)
         self.assertEqual(self.area_import_id.state, "Imported")
         self.assertEqual(
-            self.env["spp.area.import.raw"].search([("id", "in", raw_data_ids.ids), ("state", "=", "New")], count=True),
+            len(self.env["spp.area.import.raw"].search([("id", "in", raw_data_ids.ids), ("state", "=", "New")])),
             self.area_import_id.tot_rows_imported,
         )
 
@@ -53,9 +53,10 @@ class AreaImportTest(AreaImportTestMixin):
         self.assertFalse(self.area_import_id_2.locked)
         self.assertFalse(self.area_import_id_2.locked_reason)
         self.assertEqual(
-            self.env["spp.area.import.raw"].search(
-                [("id", "in", raw_data_ids.ids), ("state", "=", "Validated")],
-                count=True,
+            len(
+                self.env["spp.area.import.raw"].search(
+                    [("id", "in", raw_data_ids.ids), ("state", "=", "Validated")],
+                )
             ),
             self.area_import_id_2.tot_rows_imported,
         )

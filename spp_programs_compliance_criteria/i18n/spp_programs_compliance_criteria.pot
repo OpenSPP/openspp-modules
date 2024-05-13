@@ -1,0 +1,307 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_programs_compliance_criteria
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_programs_compliance_criteria
+#. odoo-javascript
+#: code:addons/spp_programs_compliance_criteria/static/src/xml/field_domain.xml:0
+#, python-format
+msgid "Add condition"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_cycle__allow_filter_compliance_criteria
+msgid "Allow Filter Compliance Criteria"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,help:spp_programs_compliance_criteria.field_res_config_settings__beneficiaries_automated_filtering_mechanism
+msgid ""
+"Automated Filtering Beneficiaries Mechanism:\n"
+"0. No Automated Filtering Mechanism\n"
+"1. On Cycle Memberships Creating Event\n"
+"2. On Entitlement Creating Event\n"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_res_config_settings__beneficiaries_automated_filtering_mechanism
+#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.res_config_settings_programs_view_form
+msgid "Beneficiaries Automated Filtering Mechanism"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_program_create_wizard__compliance_criteria
+#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.view_cycle_form_inherit_spp_programs_compliance_criteria
+msgid "Compliance Criteria"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model,name:spp_programs_compliance_criteria.model_spp_compliance_manager
+msgid "Compliance Criteria Manager"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_program_create_wizard__compliance_domain
+msgid "Compliance Domain"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_program_create_wizard__compliance_kind
+msgid "Compliance Kind"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.view_program_list_form_inherit_spp_programs_compliance_criteria
+msgid "Compliance Manager"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_program__compliance_managers
+#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.view_program_list_form_inherit_spp_programs_compliance_criteria
+msgid "Compliance Managers"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_program_create_wizard__compliance_sql
+msgid "Compliance SQL Query"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_program_create_wizard__compliance_sql_query_valid
+msgid "Compliance SQL Query Status"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_program_create_wizard__compliance_tag_id
+msgid "Compliance Tag"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model,name:spp_programs_compliance_criteria.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.create_program_wizard_form_view_inherit_spp_programs_compliance_criteria
+msgid "Configure the Compliance Criteria"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model,name:spp_programs_compliance_criteria.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_spp_compliance_manager__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_spp_compliance_manager__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model,name:spp_programs_compliance_criteria.model_g2p_cycle
+msgid "Cycle"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#. odoo-python
+#: code:addons/spp_programs_compliance_criteria/models/g2p_cycle.py:0
+#, python-format
+msgid "Cycle is not on correct condition to filter by compliance!"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__g2p_program_create_wizard__compliance_kind__g2p_program_membership_manager_default
+msgid "Default"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model,name:spp_programs_compliance_criteria.model_g2p_cycle_manager_default
+msgid "Default Cycle Manager"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model,name:spp_programs_compliance_criteria.model_g2p_program_entitlement_manager_default
+msgid "Default Entitlement Manager"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_spp_compliance_manager__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.view_cycle_form_inherit_spp_programs_compliance_criteria
+msgid "Filtering is one way action. Are you sure to do this?"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.ui.menu,name:spp_programs_compliance_criteria.menu_programs_settings_general
+msgid "General Settings"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_spp_compliance_manager__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__g2p_program_create_wizard__compliance_sql_query_valid__invalid
+msgid "Invalid"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_spp_compliance_manager__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_spp_compliance_manager__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_spp_compliance_manager__manager_ref_id
+msgid "Manager"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_spp_compliance_manager__manager_id
+msgid "Manager ID"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.view_program_list_form_inherit_spp_programs_compliance_criteria
+msgid "Managers"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#. odoo-javascript
+#: code:addons/spp_programs_compliance_criteria/static/src/xml/field_domain.xml:0
+#, python-format
+msgid "Match"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#. odoo-javascript
+#: code:addons/spp_programs_compliance_criteria/static/src/xml/field_domain.xml:0
+#, python-format
+msgid "Modify filter"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__g2p_program_create_wizard__compliance_sql_query_valid__need_checking
+msgid "Need Checking"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__res_config_settings__beneficiaries_automated_filtering_mechanism__0
+msgid "No Automated Filtering Mechanism"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#. odoo-python
+#: code:addons/spp_programs_compliance_criteria/wizards/g2p_program_create_wizard.py:0
+#, python-format
+msgid "Not enough information for creating compliance manager!"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__res_config_settings__beneficiaries_automated_filtering_mechanism__1
+msgid "On Cycle Memberships Creating Event"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__res_config_settings__beneficiaries_automated_filtering_mechanism__2
+msgid "On Entitlement Creating Event"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.view_program_list_form_inherit_spp_programs_compliance_criteria
+msgid "Open Form"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model,name:spp_programs_compliance_criteria.model_g2p_program
+#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_spp_compliance_manager__program_id
+msgid "Program"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.res_config_settings_programs_view_form
+msgid "Programs Settings"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#. odoo-python
+#: code:addons/spp_programs_compliance_criteria/wizards/g2p_program_create_wizard.py:0
+#, python-format
+msgid "Query is not valid!"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__g2p_program_create_wizard__compliance_kind__g2p_program_membership_manager_sql
+msgid "SQL-based"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#. odoo-javascript
+#: code:addons/spp_programs_compliance_criteria/static/src/xml/field_domain.xml:0
+#, python-format
+msgid "Select a model to add a filter."
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.actions.act_window,name:spp_programs_compliance_criteria.res_config_settings_menu_programs_action
+msgid "Settings"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#. odoo-javascript
+#: code:addons/spp_programs_compliance_criteria/static/src/xml/field_domain.xml:0
+#, python-format
+msgid "Show matching records"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__g2p_program_create_wizard__compliance_kind__g2p_program_membership_manager_tags
+msgid "Tag-based"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__g2p_program_create_wizard__compliance_sql_query_valid__valid
+msgid "Valid"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.create_program_wizard_form_view_inherit_spp_programs_compliance_criteria
+msgid "Validate Query"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#. odoo-javascript
+#: code:addons/spp_programs_compliance_criteria/static/src/xml/field_domain.xml:0
+#, python-format
+msgid "all records"
+msgstr ""
+
+#. module: spp_programs_compliance_criteria
+#. odoo-javascript
+#: code:addons/spp_programs_compliance_criteria/static/src/xml/field_domain.xml:0
+#, python-format
+msgid "record(s)"
+msgstr ""

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_event_agri_tech_ws_form_view" model="ir.ui.view">
+        <field name="name">create_event_agri_tech_ws_form_view</field>
+        <field name="model">spp.create.event.agri.tech.ws.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="row mt16 o_settings_container" name="container_0">
+                        <div class="col-4 o_setting_box" name="survey_sched">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="survey_sched" />
+                                <div>
+                                </div>
+                                <field name="survey_sched" required="1" />
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Agricultural Technologies" name="agri_tech">
+                            <field name="agri_prod_sales_cost_tech_ids">
+                                <tree editable="bottom">
+                                    <field name="agri_prod_sales_cost_tech_id" invisible="1" />
+                                    <field name="crop_id" />
+                                    <field name="org_felt_pest_herb" />
+                                    <field name="greenhouse" />
+                                    <field name="multing" />
+                                    <field name="irrigation_normal" />
+                                    <field name="water_pump" />
+                                    <field name="drip_irrigation" />
+                                    <field name="sprinkler" />
+                                    <field name="machine_harvest" />
+                                    <field name="dry_processing" />
+                                    <field name="post_harvest_treatment" />
+                                    <field name="other" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <field name="event_id" invisible="1" />
+                <footer>
+                    <button name="create_event" string="Save" type="object" class="oe_highlight" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

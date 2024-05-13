@@ -19,10 +19,10 @@ class G2PGroupPMT(models.Model):
     # Floating-point field to store the computed PMT score of the group
     z_ind_grp_pmt_score = fields.Float(
         "PMT Score of the group",
-        compute="_compute_pmt_score",
+        compute="_compute_z_ind_grp_pmt_score",
         compute_sudo=True,
     )
-    grp_pmt_score = fields.Float("PMT Score of the group", compute="_compute_pmt_score", store=True)
+    grp_pmt_score = fields.Float("PMT Score of group", compute="_compute_grp_pmt_score", store=True)
     area_calc = fields.Many2one("spp.area", compute="_compute_area")
 
     def _compute_area(self):
@@ -40,7 +40,7 @@ class G2PGroupPMT(models.Model):
 
             rec.area_calc = area_calc
 
-    def _compute_pmt_score(self):
+    def compute_score(self, field_name):
         hh_area = self.area_id
 
         model = self.env["ir.model"].search([("model", "=", "res.partner")])
@@ -77,9 +77,12 @@ class G2PGroupPMT(models.Model):
                                 total_score += getattr(ind.individual, field) * weight
                                 total_weight += weight
                     z_ind_grp_pmt_score = total_score / total_weight
-
-                record.z_ind_grp_pmt_score = z_ind_grp_pmt_score
-                record.grp_pmt_score = z_ind_grp_pmt_score
+                setattr(record, field_name, z_ind_grp_pmt_score)
             else:
-                record.z_ind_grp_pmt_score = 0
-                record.grp_pmt_score = 0
+                setattr(record, field_name, 0)
+
+    def _compute_z_ind_grp_pmt_score(self):
+        self.compute_score("z_ind_grp_pmt_score")
+
+    def _compute_grp_pmt_score(self):
+        self.compute_score("grp_pmt_score")

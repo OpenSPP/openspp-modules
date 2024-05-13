@@ -1,0 +1,110 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_custom_field_recompute_daily
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model,name:spp_custom_field_recompute_daily.model_base
+msgid "Base"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model,name:spp_custom_field_recompute_daily.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_spp_test_daily_recompute_model__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_spp_test_daily_recompute_model__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_ir_model_fields__recompute_daily
+#: model_terms:ir.ui.view,arch_db:spp_custom_field_recompute_daily.view_model_fields_search_inherit_spp_custom_field_recompute_daily
+msgid "Daily Recompute"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model_terms:ir.ui.view,arch_db:spp_custom_field_recompute_daily.res_config_settings_view_form_inherit_spp_custom_field_recompute_daily
+msgid "Daily Recomputing"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_spp_test_daily_recompute_model__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_spp_test_daily_recompute_model__field_to_test_1
+msgid "Field to Test 1"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_spp_test_daily_recompute_model__field_to_test_2
+msgid "Field to Test 2"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_spp_test_daily_recompute_model__field_to_test_3
+msgid "Field to Test 3"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model,name:spp_custom_field_recompute_daily.model_ir_model_fields
+msgid "Fields"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_spp_test_daily_recompute_model__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_spp_test_daily_recompute_model__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_spp_test_daily_recompute_model__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,field_description:spp_custom_field_recompute_daily.field_res_config_settings__maximum_daily_recompute_count
+msgid "Maximum Daily Recompute Records Count"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,help:spp_custom_field_recompute_daily.field_res_config_settings__maximum_daily_recompute_count
+msgid "Maximum number of records for synchronous recomputing fields."
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model_terms:ir.ui.view,arch_db:spp_custom_field_recompute_daily.res_config_settings_view_form_inherit_spp_custom_field_recompute_daily
+msgid "Set maximum number of records for synchronous recomputing fields."
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model,name:spp_custom_field_recompute_daily.model_spp_test_daily_recompute_model
+msgid "Test Daily Recompute Model"
+msgstr ""
+
+#. module: spp_custom_field_recompute_daily
+#: model:ir.model.fields,help:spp_custom_field_recompute_daily.field_ir_model_fields__recompute_daily
+msgid "Whether or not this field should be recompute daily by cron jobs!"
+msgstr ""

@@ -1,0 +1,258 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_audit_log
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_rule.py:0
+#, python-format
+msgid "A rule is already existed for the selected model."
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__action_id
+msgid "Add in the 'More' menu"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.ui.menu,name:spp_audit_log.audit_submenu
+msgid "Audit"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.actions.act_window,name:spp_audit_log.spp_audit_log_action_window
+#: model:ir.module.category,name:spp_audit_log.module_management
+#: model:ir.ui.menu,name:spp_audit_log.menu_root
+#: model_terms:ir.ui.view,arch_db:spp_audit_log.spp_audit_log_form
+msgid "Audit Log"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.actions.act_window,name:spp_audit_log.spp_audit_rule_action_window
+#: model_terms:ir.ui.view,arch_db:spp_audit_log.spp_audit_rule_form
+msgid "Audit Rule"
+msgstr ""
+
+#. module: spp_audit_log
+#: model_terms:ir.ui.view,arch_db:spp_audit_log.spp_audit_log_form
+msgid "Changes"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model,name:spp_audit_log.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_audit_log
+#: model_terms:ir.actions.act_window,help:spp_audit_log.spp_audit_log_action_window
+msgid "Create and manage the audit log."
+msgstr ""
+
+#. module: spp_audit_log
+#: model_terms:ir.actions.act_window,help:spp_audit_log.spp_audit_rule_action_window
+msgid "Create and manage the audit rule."
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__create_uid
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__data
+msgid "Data"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__create_date
+msgid "Date"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__display_name
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_log.py:0
+#, python-format
+msgid "Field"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__field_to_log_ids_domain
+msgid "Field To Log Ids Domain"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__field_to_log_ids
+msgid "Fields to log"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_g2p_program_membership__grp_member_names
+#: model:ir.model.fields,field_description:spp_audit_log.field_res_partner__grp_member_names
+#: model:ir.model.fields,field_description:spp_audit_log.field_res_users__grp_member_names
+msgid "Group Member Names"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__data_html
+msgid "HTML Data"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__id
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__write_uid
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__write_date
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.ui.menu,name:spp_audit_log.log_menu
+msgid "Log"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__log_create
+msgid "Log Creation"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__log_unlink
+msgid "Log Deletion"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__log_write
+msgid "Log Update"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:res.groups,name:spp_audit_log.group_manager
+msgid "Manager"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__method
+msgid "Method"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__model_id
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__model_id
+msgid "Model"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__model
+msgid "Model Name"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__name
+msgid "Name"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.constraint,message:spp_audit_log.constraint_spp_audit_rule_name_uniq
+msgid "Name must be unique"
+msgstr ""
+
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_log.py:0
+#, python-format
+msgid "New value"
+msgstr ""
+
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_log.py:0
+#, python-format
+msgid "Old value"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__res_id
+msgid "Resource Id"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__name
+msgid "Resource Name"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.ui.menu,name:spp_audit_log.rule_menu
+msgid "Rule"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model,name:spp_audit_log.model_spp_audit_log
+msgid "SPP Audit Log"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model,name:spp_audit_log.model_spp_audit_rule
+msgid "SPP Audit Rule"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__user_id
+msgid "User"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.module.category,description:spp_audit_log.module_management
+msgid "User access level for Audit Log"
+msgstr ""
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__view_logs
+msgid "View Logs Action Menu"
+msgstr ""
+
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_rule.py:0
+#, python-format
+msgid "View logs"
+msgstr ""
+
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_log.py:0
+#, python-format
+msgid "You cannot remove audit logs!"
+msgstr ""

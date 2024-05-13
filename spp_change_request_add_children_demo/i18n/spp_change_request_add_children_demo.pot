@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -49,11 +49,6 @@ msgid "Add Child/Member Change Requests"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
-#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_add_children
-msgid "Add Children Request Form"
-msgstr ""
-
-#. module: spp_change_request_add_children_demo
 #: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__registrant_id
 msgid "Add to Group"
 msgstr ""
@@ -74,6 +69,11 @@ msgid "Address"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Address:"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
 #: model:ir.ui.menu,name:spp_change_request_add_children_demo.menu_change_request_add_children
 msgid "All Add Child/Member Requests"
 msgstr ""
@@ -89,11 +89,6 @@ msgid "Applicant Information"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
-#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_applicant_uid_card
-msgid "Applicant UID Card"
-msgstr ""
-
-#. module: spp_change_request_add_children_demo
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
 msgid "Applicant's Phone #"
 msgstr ""
@@ -105,6 +100,7 @@ msgstr ""
 
 #. module: spp_change_request_add_children_demo
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
 msgid "Applicant:"
 msgstr ""
 
@@ -142,7 +138,6 @@ msgid "Attachments"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
-#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_birth_certificate
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
 msgid "Birth Certificate"
 msgstr ""
@@ -158,6 +153,7 @@ msgid "Birthdate Not Exact"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#. odoo-python
 #: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
 #, python-format
 msgid "Birthdate should not be on a later date."
@@ -170,11 +166,6 @@ msgid "Cancel Change Request"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
-#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_certificates
-msgid "Certificates"
-msgstr ""
-
-#. module: spp_change_request_add_children_demo
 #: model:ir.model,name:spp_change_request_add_children_demo.model_spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__change_request_id
 msgid "Change Request"
@@ -183,6 +174,12 @@ msgstr ""
 #. module: spp_change_request_add_children_demo
 #: model:ir.model,name:spp_change_request_add_children_demo.model_spp_change_request_validation_sequence
 msgid "Change Request Validation Sequence"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_dms_directory__change_request_add_children_id
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_dms_file__change_request_add_children_id
+msgid "Change request"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
@@ -206,16 +203,18 @@ msgid "Current User Assigned"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
-#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_custody_certificate
-msgid "Custody Certificate"
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__dms_directory_ids
+msgid "DMS Directories"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
-#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_group_members__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_validation_sequence__dms_directory_ids
-msgid "DMS Directories"
+#: model:ir.model,name:spp_change_request_add_children_demo.model_spp_dms_directory
+msgid "DMS Directory"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model,name:spp_change_request_add_children_demo.model_spp_dms_file
+msgid "DMS File"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
@@ -246,11 +245,6 @@ msgstr ""
 #. module: spp_change_request_add_children_demo
 #: model:ir.model.fields.selection,name:spp_change_request_add_children_demo.selection__spp_change_request_add_children__applicant_relation__father
 msgid "Father"
-msgstr ""
-
-#. module: spp_change_request_add_children_demo
-#: model:ir.model.fields.selection,name:spp_change_request_add_children_demo.selection__spp_change_request_add_children__gender__female
-msgid "Female"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
@@ -291,6 +285,7 @@ msgid "Group Add Children"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#. odoo-python
 #: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
 #, python-format
 msgid "Group Details"
@@ -323,19 +318,10 @@ msgid "ID Document"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
-#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_identification_documents
-msgid "Identification Documents"
-msgstr ""
-
-#. module: spp_change_request_add_children_demo
+#. odoo-python
 #: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
 #, python-format
 msgid "Incorrect phone number format"
-msgstr ""
-
-#. module: spp_change_request_add_children_demo
-#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
@@ -351,11 +337,6 @@ msgstr ""
 #. module: spp_change_request_add_children_demo
 #: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__last_validated_by_id
 msgid "Last Validator"
-msgstr ""
-
-#. module: spp_change_request_add_children_demo
-#: model:ir.model.fields.selection,name:spp_change_request_add_children_demo.selection__spp_change_request_add_children__gender__male
-msgid "Male"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
@@ -394,6 +375,12 @@ msgid "No pending 'Add Child/Member' change requests found!"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Open Applicant Details"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
 msgid "Open Details"
 msgstr ""
@@ -401,6 +388,11 @@ msgstr ""
 #. module: spp_change_request_add_children_demo
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
 msgid "Open Member Form"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+msgid "Open Registrant Details"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
@@ -445,9 +437,20 @@ msgid "Registration Date"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Registration Date:"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
 msgid "Reject"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Reject Change Request"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
@@ -462,8 +465,8 @@ msgid "Request Details"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
-#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_request_form_document
-msgid "Request Form Document"
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+msgid "Request Form"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
@@ -511,36 +514,42 @@ msgid "TARGET GROUP INFORMATION"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#. odoo-python
 #: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
 #, python-format
 msgid "The Date of Birth is required."
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#. odoo-python
 #: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
 #, python-format
 msgid "The Family Name is required."
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#. odoo-python
 #: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
 #, python-format
 msgid "The First Name is required."
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#. odoo-python
 #: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
 #, python-format
 msgid "The Gender is required."
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#. odoo-python
 #: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
 #, python-format
 msgid "The Relationship to Applicant is required."
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#. odoo-python
 #: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
 #, python-format
 msgid "There are no directories defined for this change request."
@@ -553,16 +562,12 @@ msgid "There are no records found based on the current filter."
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
-#: model:dms.category,name:spp_change_request_add_children_demo.spp_dms_uid_card
-msgid "UID Card"
-msgstr ""
-
-#. module: spp_change_request_add_children_demo
 #: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__uid_number
 msgid "UID Number"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#. odoo-python
 #: code:addons/spp_change_request_add_children_demo/models/change_request_add_children.py:0
 #, python-format
 msgid "UID Number must be 12 digits long."
@@ -572,6 +577,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
 msgid "Validate"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_validation_form
+msgid "Validate Change Request"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo

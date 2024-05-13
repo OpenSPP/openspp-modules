@@ -8,7 +8,7 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "development_status": "Alpha",
-    "maintainers": ["jeremi", "gonzalesedwin1123"],
+    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "spp_base_demo",
         "g2p_registry_base",
@@ -16,7 +16,7 @@
         "g2p_registry_group",
         "g2p_registry_membership",
         "g2p_programs",
-        "g2p_bank",
+        # "g2p_bank",
         "spp_custom_field",
         # "spp_custom_fields_ui",
         "g2p_entitlement_cash",
@@ -33,6 +33,7 @@
         # "spp_sms",
         "queue_job",
         # "spp_change_request_add_children_demo",
+        "spp_custom_filter",
     ],
     "external_dependencies": {"python": ["faker"]},
     "data": [

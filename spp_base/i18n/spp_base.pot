@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_base
+#: model:ir.model.fields,field_description:spp_base.field_g2p_reg_id__card_uid
+msgid "Card UID"
+msgstr ""
+
+#. module: spp_base
+#: model:res.groups,name:spp_base.hide_menu
+msgid "Hide Menu"
+msgstr ""
+
+#. module: spp_base
+#: model:ir.model,name:spp_base.model_g2p_reg_id
+msgid "Registrant ID"
+msgstr ""
+
+#. module: spp_base
+#. odoo-python
+#: code:addons/spp_base/models/reg_id.py:0
+#, python-format
+msgid "Top-up Card UID should have 10 characters"
+msgstr ""
+
+#. module: spp_base
+#: model:ir.model,name:spp_base.model_spp_unique_id
+#: model:ir.model.fields,field_description:spp_base.field_spp_unique_id__spp_id
+msgid "Unique ID"
+msgstr ""
+
+#. module: spp_base
+#. odoo-python
+#: code:addons/spp_base/models/spp_unique_id.py:0
+#, python-format
+msgid "Unique ID is not following correct format!"
+msgstr ""
+
+#. module: spp_base
+#: model:ir.model.constraint,message:spp_base.constraint_res_partner_spp_id_uniq
+#: model:ir.model.constraint,message:spp_base.constraint_spp_area_spp_id_uniq
+#: model:ir.model.constraint,message:spp_base.constraint_spp_service_point_spp_id_uniq
+#: model:ir.model.constraint,message:spp_base.constraint_spp_unique_id_spp_id_uniq
+msgid "spp_id is an unique identifier!"
+msgstr ""

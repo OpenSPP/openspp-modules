@@ -1,0 +1,843 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* g2p_registry_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_phone_number_form
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "<span class=\"o_stat_text\">Disable</span>"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "<span class=\"o_stat_text\">Enable</span>"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_phone_number_form
+msgid ""
+"<span class=\"o_stat_text\">Enable</span>\n"
+"                                <span class=\"o_stat_text\">Phone No.</span>"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_registrant_tags__active
+msgid "Active"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_reg_rel
+msgid "Add a Registrant Relationship!"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_reg_id
+msgid "Add a Registrant's ID!"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_phone_number
+msgid "Add a Registrant's Phone Number!"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_registrant_tags
+msgid "Add a Registrant's Tags!"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_relationship
+msgid "Add a Relationship!"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_district_config
+msgid "Add a district!"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_id_type
+msgid "Add an ID Type!"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__address
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__address
+msgid "Address"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:res.groups,name:g2p_registry_base.group_g2p_admin
+msgid "Administrator"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,help:g2p_registry_base.field_g2p_registrant_tags__active
+msgid "Archive to hide the RegistrantTag without removing it."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.registrant_tags_filter
+msgid "Archived"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__bidirectional
+msgid "Bi-directional"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.disable_registrant_wizard_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__civil_status
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__civil_status
+msgid "CivilState"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_id_type
+msgid "Click the create button to enter a new ID type."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_district_config
+msgid "Click the create button to enter a new district."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_relationship
+msgid "Click the create button to enter a new relationship."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_phone_number
+msgid "Click the create button to enter a registrant's phone number."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_reg_id
+msgid "Click the create button to enter the new registrant's ID information."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_registrant_tags
+msgid ""
+"Click the create button to enter the new registrant's Tags information."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.actions.act_window,help:g2p_registry_base.action_reg_rel
+msgid ""
+"Click the create button to enter the new registrant's relationship "
+"information."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_registrant_tags__color
+msgid "Color"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__company_id
+msgid "Company"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model,name:g2p_registry_base.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.ui.menu,name:g2p_registry_base.g2p_configuration_menu_root
+msgid "Configuration"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model,name:g2p_registry_base.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__country_id
+msgid "Country"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_disable_registrant_wizard__create_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_district__create_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_id_type__create_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__create_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__create_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__create_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_registrant_tags__create_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_disable_registrant_wizard__create_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_district__create_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_id_type__create_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__create_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__create_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__create_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_registrant_tags__create_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.ui.menu,name:g2p_registry_base.g2p_data_mgmt_menu_root
+msgid "Data Management"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__date_collected
+msgid "Date Collected"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__disabled
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__disabled
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__disabled
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__disabled
+msgid "Date Disabled"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "Date Range"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/phone_number.py:0
+#: code:addons/g2p_registry_base/models/phone_number.py:0
+#, python-format
+msgid "Date collected cannot be in the future."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__destination
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_rel_filter
+msgid "Destination"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__destination_type
+msgid "Destination partner type"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.actions.act_window,name:g2p_registry_base.action_disable_registrant_wizard
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.disable_registrant_wizard_form_view
+msgid "Disable"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_phone_number_form
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "Disable Info"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model,name:g2p_registry_base.model_g2p_disable_registrant_wizard
+msgid "Disable Registrant Wizard"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__disabled_by
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__disabled_by
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__disabled_by
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__disabled_by
+msgid "Disabled By"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_disable_registrant_wizard__display_name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_district__display_name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_id_type__display_name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__display_name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__display_name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__display_name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_registrant_tags__display_name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__district
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__district
+msgid "District"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.actions.act_window,name:g2p_registry_base.action_district_config
+#: model:ir.ui.menu,name:g2p_registry_base.menu_district_config
+msgid "District Configuration"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__end_date
+msgid "End Date"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__expiry_date
+msgid "Expiry Date"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model,name:g2p_registry_base.model_g2p_district
+msgid "G2P District"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.openg2p_inherit_res_config_settings_view_form
+msgid "G2P Registry Settings"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#: code:addons/g2p_registry_base/tests/test_reg_relationship.py:0
+#: code:addons/g2p_registry_base/tests/test_reg_relationship.py:0
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__is_group
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__is_group
+#, python-format
+msgid "Group"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.phone_number_filter
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_id_filter
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_rel_filter
+msgid "Group By"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_disable_registrant_wizard__id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_district__id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_id_type__id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_registrant_tags__id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__id
+msgid "ID"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model,name:g2p_registry_base.model_g2p_id_type
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__id_type
+msgid "ID Type"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_id_type_tree
+msgid "ID Type Validation"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.actions.act_window,name:g2p_registry_base.action_id_type
+#: model:ir.ui.menu,name:g2p_registry_base.menu_id_type
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_id_filter
+msgid "ID Types"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_id_type__id_validation
+msgid "Id Validation"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/reg_id.py:0
+#: code:addons/g2p_registry_base/models/reg_id.py:0
+#, python-format
+msgid "Id type already exists"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/reg_id.py:0
+#: code:addons/g2p_registry_base/models/reg_id.py:0
+#, python-format
+msgid "Id type should not empty."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,help:g2p_registry_base.field_g2p_reg_rel__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,help:g2p_registry_base.field_g2p_reg_rel__message_has_error
+#: model:ir.model.fields,help:g2p_registry_base.field_g2p_reg_rel__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__income
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__income
+msgid "Income"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#: code:addons/g2p_registry_base/tests/test_reg_relationship.py:0
+#: code:addons/g2p_registry_base/tests/test_reg_relationship.py:0
+#, python-format
+msgid "Individual"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/registrant.py:0
+#: code:addons/g2p_registry_base/models/registrant.py:0
+#, python-format
+msgid "Invalid mobile number!"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/phone_number.py:0
+#: code:addons/g2p_registry_base/models/phone_number.py:0
+#: code:addons/g2p_registry_base/models/registrant.py:0
+#: code:addons/g2p_registry_base/models/registrant.py:0
+#, python-format
+msgid "Invalid phone number!"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__name_inverse
+msgid "Inverse name"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "Is Related to:"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_disable_registrant_wizard__write_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_district__write_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_id_type__write_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__write_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__write_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__write_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_registrant_tags__write_uid
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_disable_registrant_wizard__write_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_district__write_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_id_type__write_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__write_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__write_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__write_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_registrant_tags__write_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_config_settings__max_registrants_count_job_queue
+msgid "Maximum Registrants Before Using Job Queue"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_district__name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_id_type__name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__id_type_as_str
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__relation_as_str
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__name
+msgid "Name"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_config_settings__batch_registrants_count_job_queue
+msgid "Number of Registrants Per Batch"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,help:g2p_registry_base.field_g2p_reg_rel__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,help:g2p_registry_base.field_g2p_reg_rel__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__occupation
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__occupation
+msgid "Occupation"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.module.category,name:g2p_registry_base.openg2p_module
+msgid "OpenG2P Module Access"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model,name:g2p_registry_base.model_g2p_phone_number
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__phone_no
+msgid "Phone Number"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.actions.act_window,name:g2p_registry_base.action_phone_number
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__phone_number_ids
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__phone_number_ids
+msgid "Phone Numbers"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_config_settings__phone_regex
+msgid "Phone Regex"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__phone_sanitized
+msgid "Phone Sanitized"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.openg2p_inherit_res_config_settings_view_form
+msgid "Phone number validation"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__disabled_reason
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__disabled_reason
+msgid "Reason for Disabling"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_disable_registrant_wizard__disabled_reason
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.disable_registrant_wizard_form_view
+msgid "Reason for disabling"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_disable_registrant_wizard__partner_id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_phone_number__partner_id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__partner_id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__is_registrant
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__is_registrant
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.phone_number_filter
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_id_filter
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_rel_filter
+msgid "Registrant"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#, python-format
+msgid "Registrant 1 and Registrant 2 cannot be the same."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model,name:g2p_registry_base.model_g2p_reg_id
+msgid "Registrant ID"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.actions.act_window,name:g2p_registry_base.action_reg_id
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__reg_ids
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__reg_ids
+msgid "Registrant IDs"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_phone_number_form
+msgid "Registrant Phone Number"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model,name:g2p_registry_base.model_g2p_reg_rel
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "Registrant Relationship"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.actions.act_window,name:g2p_registry_base.action_reg_rel
+msgid "Registrant Relationships"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.actions.act_window,name:g2p_registry_base.action_registrant_tags
+#: model:ir.model,name:g2p_registry_base.model_g2p_registrant_tags
+#: model:ir.ui.menu,name:g2p_registry_base.menu_registrant_tags
+msgid "Registrant Tags"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_phone_number_form
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "Registrant:"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:res.groups,name:g2p_registry_base.group_g2p_registrar
+msgid "Registrar"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__registration_date
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__registration_date
+msgid "Registration Date"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.ui.menu,name:g2p_registry_base.g2p_main_menu_root
+msgid "Registry"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__related_1_ids
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__related_1_ids
+msgid "Related to registrant 1"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__related_2_ids
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__related_2_ids
+msgid "Related to registrant 2"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__relation
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_rel_filter
+msgid "Relation"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "Relation:"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.actions.act_window,name:g2p_registry_base.action_relationship
+#: model:ir.model,name:g2p_registry_base.model_g2p_relationship
+msgid "Relationship"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.ui.menu,name:g2p_registry_base.menu_relationship
+msgid "Relationships"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.phone_number_filter
+msgid "Search Phone Number"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_id_filter
+msgid "Search Registrant IDs"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_rel_filter
+msgid "Search Registrant Relationships"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.registrant_tags_filter
+msgid "Search Registrant Tags"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "Select Destination..."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_phone_number_form
+msgid "Select Registrant..."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "Select Relationship..."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_reg_rel_form
+msgid "Select Source..."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.openg2p_inherit_res_config_settings_view_form
+msgid "Set up phone regex based on country."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__source
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_rel_filter
+msgid "Source"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_relationship__source_type
+msgid "Source partner type"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__start_date
+msgid "Start Date"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_district__state_id
+#: model_terms:ir.ui.view,arch_db:g2p_registry_base.view_district_config_tree
+msgid "State"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/tags.py:0
+#: code:addons/g2p_registry_base/models/tags.py:0
+#, python-format
+msgid "Tag already Exists"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/tags.py:0
+#: code:addons/g2p_registry_base/models/tags.py:0
+#, python-format
+msgid "Tag name should not empty."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_registrant_tags__name
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__tags_ids
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__tags_ids
+msgid "Tags"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#, python-format
+msgid "The starting date cannot be after the ending date."
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#, python-format
+msgid "There is already a similar relation with overlapping dates"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#: code:addons/g2p_registry_base/models/reg_relationship.py:0
+#, python-format
+msgid "This registrant is not applicable for this relation type."
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.module.category,description:g2p_registry_base.openg2p_module
+msgid "User access level for the OpenG2P module"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__value
+msgid "Value"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields,help:g2p_registry_base.field_g2p_reg_rel__website_message_ids
+msgid "Website communication history"
+msgstr ""
