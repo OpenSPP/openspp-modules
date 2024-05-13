@@ -1,0 +1,109 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* g2p_encryption_keymanager
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model,name:g2p_encryption_keymanager.model_g2p_encryption_provider
+msgid "G2P Encryption Provider"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields.selection,name:g2p_encryption_keymanager.selection__g2p_encryption_provider__type__keymanager
+msgid "Keymanager"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_api_base_url
+msgid "Keymanager API Base URL"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_api_timeout
+msgid "Keymanager API Timeout"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_access_token
+msgid "Keymanager Access Token"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_access_token_expiry
+msgid "Keymanager Access Token Expiry"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model_terms:ir.ui.view,arch_db:g2p_encryption_keymanager.view_keymanager_encryption_provider_form
+msgid "Keymanager Additional Settings"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_auth_client_id
+msgid "Keymanager Auth Client ID"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_auth_client_secret
+msgid "Keymanager Auth Client Secret"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_auth_grant_type
+msgid "Keymanager Auth Grant Type"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_auth_url
+msgid "Keymanager Auth URL"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_encrypt_aad
+msgid "Keymanager Encrypt Aad"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_encrypt_application_id
+msgid "Keymanager Encrypt Application ID"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_encrypt_reference_id
+msgid "Keymanager Encrypt Reference ID"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_encrypt_salt
+msgid "Keymanager Encrypt Salt"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model_terms:ir.ui.view,arch_db:g2p_encryption_keymanager.view_keymanager_encryption_provider_form
+msgid "Keymanager Settings"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_sign_application_id
+msgid "Keymanager Sign Application ID"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__keymanager_sign_reference_id
+msgid "Keymanager Sign Reference ID"
+msgstr ""
+
+#. module: g2p_encryption_keymanager
+#: model:ir.model.fields,field_description:g2p_encryption_keymanager.field_g2p_encryption_provider__type
+msgid "Type"
+msgstr ""

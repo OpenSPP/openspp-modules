@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,66 +14,77 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #, python-format
 msgid "%s - 1"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "%s batch(es) are being printed."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "%s batch(es) are distributed."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "%s batch(es) are printed."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "%s batch(es) are validated."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #, python-format
 msgid "%s batch(es) created."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "%s request(s) are distributed."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "%s request(s) are now being generated."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "%s request(s) are printed."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "%s request(s) are validated."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
 #, python-format
 msgid "%s request(s) created."
@@ -116,6 +127,11 @@ msgid "Activity Type Icon"
 msgstr ""
 
 #. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
+msgid "Approve Batch"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
 msgid "Approve Request"
 msgstr ""
@@ -149,6 +165,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_res_config_settings__auto_approve_id_request
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.res_config_settings_view_form
 msgid "Auto-approve ID Requests"
 msgstr ""
 
@@ -171,6 +188,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
 msgid "Batch Printed"
 msgstr ""
 
@@ -284,18 +302,6 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_idqueue
-#: model:ir.model.fields,field_description:spp_idqueue.field_queue_job_channel__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_idqueue.field_res_config_settings__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_idqueue.field_res_partner__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__dms_directory_ids
-msgid "DMS Directories"
-msgstr ""
-
-#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__date_approved
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__date_approved
 msgid "Date Approved"
@@ -344,6 +350,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
 msgid "Distribute Batch"
 msgstr ""
 
@@ -432,6 +439,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
 msgid "Generate Batch"
 msgstr ""
 
@@ -491,6 +499,7 @@ msgid "ID"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_batch.py:0
@@ -515,11 +524,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__id_pdf_filename
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id_pdf_filename
 msgid "ID File Name"
-msgstr ""
-
-#. module: spp_idqueue
-#: model:ir.ui.menu,name:spp_idqueue.menuspp_id_mgmt
-msgid "ID Management"
 msgstr ""
 
 #. module: spp_idqueue
@@ -550,9 +554,11 @@ msgid "ID Requestor"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
+#: model:ir.model.fields,field_description:spp_idqueue.field_g2p_program_membership__id_requests
 #: model:ir.model.fields,field_description:spp_idqueue.field_res_partner__id_requests
 #: model:ir.model.fields,field_description:spp_idqueue.field_res_users__id_requests
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_requests_form
@@ -587,24 +593,28 @@ msgid "ID Validator"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "ID can only be distributed if it has been printed"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "ID cannot be canceled if it has been printed"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "ID in a batch cannot be printed individually"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
@@ -658,9 +668,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_needaction
-#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_unread
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_needaction
-#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
@@ -690,15 +698,6 @@ msgid "Job Channels"
 msgstr ""
 
 #. module: spp_idqueue
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard____last_update
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard____last_update
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch____last_update
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id____last_update
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: spp_idqueue
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__write_uid
@@ -714,12 +713,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__write_date
 #: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
-
-#. module: spp_idqueue
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_main_attachment_id
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: spp_idqueue
@@ -806,12 +799,14 @@ msgid "Next Step"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "No Auth Token or API URL"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #, python-format
 msgid "No approved id requests selected!"
@@ -832,7 +827,7 @@ msgstr ""
 #. module: spp_idqueue
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_needaction_counter
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: spp_idqueue
@@ -842,9 +837,8 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: spp_idqueue
-#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_unread_counter
-#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_unread_counter
-msgid "Number of unread messages"
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_requests_form
+msgid "Open Form"
 msgstr ""
 
 #. module: spp_idqueue
@@ -853,60 +847,70 @@ msgid "Other Info"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/queue_job_channel.py:0
 #, python-format
 msgid "Parent channel required."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "Please select at least 1 approved batch need to approve!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "Please select at least 1 approved request which need to generate!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "Please select at least 1 generated batch need to print!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "Please select at least 1 generated request which need to print!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "Please select at least 1 new batch need to approve!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "Please select at least 1 new request which need to approve!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "Please select at least 1 printed batch need to distribute!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "Please select at least 1 printed request which need to distribute!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "Please select at least 1 printing batch need to printed!"
@@ -919,6 +923,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
 msgid "Print Batch"
 msgstr ""
 
@@ -999,6 +1004,7 @@ msgid "Request Details"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/registrant.py:0
 #: model:ir.actions.server,name:spp_idqueue.multi_id_request
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
@@ -1029,6 +1035,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
 msgid "Retry Sending"
 msgstr ""
 
@@ -1069,6 +1076,7 @@ msgid "Settings"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "Some IDs are not generated"
@@ -1109,6 +1117,7 @@ msgid "Template"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
 #: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
 #, python-format
@@ -1116,6 +1125,7 @@ msgid "There are no selected Registrants!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
 #: code:addons/spp_idqueue/wizard/request_id_wizard.py:0
 #, python-format
@@ -1123,12 +1133,14 @@ msgid "There are no selected Template!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #, python-format
 msgid "There are no selected id requests!"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "Token %s"
@@ -1138,18 +1150,6 @@ msgstr ""
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_exception_decoration
 #: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
-
-#. module: spp_idqueue
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_unread
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: spp_idqueue
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_unread_counter
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_unread_counter
-msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: spp_idqueue
@@ -1190,18 +1190,21 @@ msgid "to check changes."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "{} Batch(es) with total of {} IDs are being generated."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "{} cancelled this request on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
@@ -1209,6 +1212,7 @@ msgid "{} distributed this batch on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
@@ -1217,30 +1221,35 @@ msgid "{} distributed this request on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "{} generated this batch on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "{} generated this request on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "{} printed this batch on {}"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "{} printed this batch on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
@@ -1249,12 +1258,14 @@ msgid "{} printed this request on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "{} started to generate this batch on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
@@ -1262,6 +1273,7 @@ msgid "{} started to generate this request on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
@@ -1269,6 +1281,7 @@ msgid "{} started to print this batch on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
@@ -1276,18 +1289,21 @@ msgid "{} started to print this request on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "{} validated this batch on {}"
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_batch.py:0
 #, python-format
 msgid "{} validated this batch on {}."
 msgstr ""
 
 #. module: spp_idqueue
+#. odoo-python
 #: code:addons/spp_idqueue/models/id_queue.py:0
 #, python-format
 msgid "{} validated this request on {}."

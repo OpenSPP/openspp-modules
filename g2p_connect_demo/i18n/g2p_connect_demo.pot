@@ -1,0 +1,498 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* g2p_connect_demo
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: g2p_connect_demo
+#: model:spp.area,name:g2p_connect_demo.demo_branch_1
+msgid "1 - Demo Branch 1"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,name:g2p_connect_demo.demo_center_1
+msgid "101 - Demo Center 1"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,name:g2p_connect_demo.demo_center_2
+msgid "102 - Demo Center 2"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,name:g2p_connect_demo.demo_branch_2
+msgid "2 - Demo Branch 2"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,name:g2p_connect_demo.demo_area_1
+msgid "201 - Demo Area 1"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,name:g2p_connect_demo.demo_area_2
+msgid "202 - Demo Area 2"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_groups_form_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_individuals_form_demo
+msgid ""
+"<span class=\"o_form_label o_td_label\" name=\"address_name\">\n"
+"                  <b>Address</b>\n"
+"              </span>"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_generate_data_form
+msgid ""
+"<span class=\"o_stat_text\">Generate</span>\n"
+"                                <span class=\"o_stat_text\">Sample Data</span>"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_groups_list_tree_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_individuals_list_tree_demo
+msgid "Address"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_groups_form_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_individuals_form_demo
+msgid "Area"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,name:g2p_connect_demo.demo_center_201
+msgid "C201 - Demo Center 201"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,name:g2p_connect_demo.demo_center_202
+msgid "C202 - Demo Center 202"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_groups_form_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_individuals_form_demo
+msgid "City"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.actions.act_window,help:g2p_connect_demo.action_generate_data
+msgid "Click the create button to enter the new record."
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model,name:g2p_connect_demo.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_generate_data__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_generate_data__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,draft_name:g2p_connect_demo.demo_area_1
+msgid "Demo Area 1"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,draft_name:g2p_connect_demo.demo_area_2
+msgid "Demo Area 2"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,draft_name:g2p_connect_demo.demo_branch_1
+msgid "Demo Branch 1"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,draft_name:g2p_connect_demo.demo_branch_2
+msgid "Demo Branch 2"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,draft_name:g2p_connect_demo.demo_center_1
+msgid "Demo Center 1"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,draft_name:g2p_connect_demo.demo_center_2
+msgid "Demo Center 2"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,draft_name:g2p_connect_demo.demo_center_201
+msgid "Demo Center 201"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:spp.area,draft_name:g2p_connect_demo.demo_center_202
+msgid "Demo Center 202"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_cst_indv_disability_level
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_cst_indv_disability_level
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_cst_indv_disability_level
+msgid "Disability level"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_generate_data__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields.selection,name:g2p_connect_demo.selection__g2p_generate_data__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,help:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_is_elderly_head_hh
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_partner__z_ind_grp_is_elderly_head_hh
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_users__z_ind_grp_is_elderly_head_hh
+msgid ""
+"Elderly-headed HHs - extracted from demographic data of HH adult members"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__full_address
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__full_address
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__full_address
+msgid "Full Address"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.actions.act_window,name:g2p_connect_demo.action_generate_data
+#: model_terms:ir.actions.act_window,help:g2p_connect_demo.action_generate_data
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_generate_data_form
+msgid "Generate Data"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model,name:g2p_connect_demo.model_g2p_generate_data
+#: model:ir.ui.menu,name:g2p_connect_demo.menu_generate_data
+msgid "Generate Sample Data"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields.selection,name:g2p_connect_demo.selection__g2p_generate_data__state__generate
+msgid "Generated"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,help:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_is_hh_with_disabled
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_partner__z_ind_grp_is_hh_with_disabled
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_users__z_ind_grp_is_hh_with_disabled
+msgid "HHs with disabled (mental or physical) members"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_cst_indv_has_birth_certificate
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_cst_indv_has_birth_certificate
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_cst_indv_has_birth_certificate
+msgid "Has birth certificate"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_generate_data__id
+msgid "ID"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_cst_indv_cyclone_aug_2022_injured
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_cst_indv_cyclone_aug_2022_injured
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_cst_indv_cyclone_aug_2022_injured
+msgid "Injured during Cyclone Aug 2022"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_is_elderly_head_hh
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_is_elderly_head_hh
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_is_elderly_head_hh
+msgid "Is elderly-headed household"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_is_hh_with_disabled
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_is_hh_with_disabled
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_is_hh_with_disabled
+msgid "Is household disabled (mental or physical) members"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_is_single_head_hh
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_is_single_head_hh
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_is_single_head_hh
+msgid "Is single-headed household"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields.selection,name:g2p_connect_demo.selection__g2p_generate_data__locale__en_ke
+msgid "Kenya (English)"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields.selection,name:g2p_connect_demo.selection__g2p_generate_data__locale__sw_ke
+msgid "Kenya (Swahili)"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields.selection,name:g2p_connect_demo.selection__g2p_generate_data__locale__lo_la
+msgid "Laos (Lao)"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_generate_data__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_generate_data__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_generate_data__locale
+msgid "Locale"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_generate_data_form
+msgid "Locale..."
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_generate_data_form
+msgid "Locale:"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_cst_indv_cyclone_aug_2022_lost_primary_source_income
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_cst_indv_cyclone_aug_2022_lost_primary_source_income
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_cst_indv_cyclone_aug_2022_lost_primary_source_income
+msgid "Lost primary source income during Cyclone Aug 2022"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_cst_indv_cyclone_aug_2022_lost_livestock
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_cst_indv_cyclone_aug_2022_lost_livestock
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_cst_indv_cyclone_aug_2022_lost_livestock
+msgid "Lost significant livestock during Cyclone Aug 2022"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_generate_data__name
+msgid "Name"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_generate_data_form
+msgid "Name:"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_single_child_less_36m_with_birth_cert
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_single_child_less_36m_with_birth_cert
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_single_child_less_36m_with_birth_cert
+msgid "Number of Children of less than 36 months old with birth certificate"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_generate_data__num_groups
+msgid "Number of Groups"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_generate_data_form
+msgid "Number of Groups:"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_adults_male_not_elderly
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_adults_male_not_elderly
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_adults_male_not_elderly
+msgid "Number of adults male not elderly"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_adults_female_not_elderly
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_adults_female_not_elderly
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_adults_female_not_elderly
+msgid "Number of adults woman not elderly"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_children
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_children
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_children
+#: model:ir.model.fields,help:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_children
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_partner__z_ind_grp_num_children
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_users__z_ind_grp_num_children
+msgid "Number of children"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_elderly
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_elderly
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_elderly
+msgid "Number of eldery"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_generate_data_form
+msgid "Number of groups..."
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,help:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_cyclone_aug_2022_injured
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_partner__z_ind_grp_num_cyclone_aug_2022_injured
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_users__z_ind_grp_num_cyclone_aug_2022_injured
+msgid "Number of injured"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_cyclone_aug_2022_injured
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_cyclone_aug_2022_injured
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_cyclone_aug_2022_injured
+msgid "Number of members injured during Cyclone Aug 2022"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income
+#: model:ir.model.fields,help:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_partner__z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_users__z_ind_grp_num_cyclone_aug_2022_lost_primary_source_income
+msgid "Number of members lost primary source income during Cyclone Aug 2022"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_cyclone_aug_2022_lost_livestock
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_cyclone_aug_2022_lost_livestock
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_cyclone_aug_2022_lost_livestock
+#: model:ir.model.fields,help:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_cyclone_aug_2022_lost_livestock
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_partner__z_ind_grp_num_cyclone_aug_2022_lost_livestock
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_users__z_ind_grp_num_cyclone_aug_2022_lost_livestock
+msgid "Number of members lost significant livestock during Cyclone Aug 2022"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_receive_government_benefits
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_receive_government_benefits
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_receive_government_benefits
+#: model:ir.model.fields,help:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_receive_government_benefits
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_partner__z_ind_grp_num_receive_government_benefits
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_users__z_ind_grp_num_receive_government_benefits
+msgid "Number of members received government benefits"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_disability
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_disability
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_disability
+#: model:ir.model.fields,help:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_disability
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_partner__z_ind_grp_num_disability
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_users__z_ind_grp_num_disability
+msgid "Number of members with disability"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_triplets_more_less_36m_with_birth_cert
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_triplets_more_less_36m_with_birth_cert
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_triplets_more_less_36m_with_birth_cert
+msgid ""
+"Number of triplets or more of less than 36 months old with birth certificate"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_num_twin_less_36m_with_birth_cert
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_ind_grp_num_twin_less_36m_with_birth_cert
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_ind_grp_num_twin_less_36m_with_birth_cert
+msgid "Number of twins of less than 36 months old with birth certificate"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_groups_form_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_individuals_form_demo
+msgid "Postal"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_program_membership__z_cst_indv_receive_government_benefits
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_partner__z_cst_indv_receive_government_benefits
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_res_users__z_cst_indv_receive_government_benefits
+msgid "Receive government benefits"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,help:g2p_connect_demo.field_g2p_program_membership__z_ind_grp_is_single_head_hh
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_partner__z_ind_grp_is_single_head_hh
+#: model:ir.model.fields,help:g2p_connect_demo.field_res_users__z_ind_grp_is_single_head_hh
+msgid "Single-headed HH - extracted from demographic data of HH adult members"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields.selection,name:g2p_connect_demo.selection__g2p_generate_data__locale__si_lk
+msgid "Sri Lanka (Sinhala)"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields.selection,name:g2p_connect_demo.selection__g2p_generate_data__locale__ta_lk
+msgid "Sri Lanka (Tamil)"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields,field_description:g2p_connect_demo.field_g2p_generate_data__state
+msgid "State"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_groups_form_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_individuals_form_demo
+msgid "Street"
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_groups_form_demo
+#: model_terms:ir.ui.view,arch_db:g2p_connect_demo.view_individuals_form_demo
+msgid "Street2"
+msgstr ""
+
+#. module: g2p_connect_demo
+#. odoo-python
+#: code:addons/g2p_connect_demo/models/generate_change_request.py:0
+#, python-format
+msgid "There are no membership kinds defined."
+msgstr ""
+
+#. module: g2p_connect_demo
+#. odoo-python
+#: code:addons/g2p_connect_demo/models/generate_change_request.py:0
+#, python-format
+msgid ""
+"There are no registrants that can be used for generating change requests."
+msgstr ""
+
+#. module: g2p_connect_demo
+#: model:ir.model.fields.selection,name:g2p_connect_demo.selection__g2p_generate_data__locale__en_us
+msgid "United States (English)"
+msgstr ""

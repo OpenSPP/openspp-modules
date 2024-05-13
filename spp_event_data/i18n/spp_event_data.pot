@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -48,12 +48,14 @@ msgid "Contact"
 msgstr ""
 
 #. module: spp_event_data
+#. odoo-python
 #: code:addons/spp_event_data/wizard/create_event_wizard.py:0
 #, python-format
-msgid "Create %s Wizard"
+msgid "Create %s"
 msgstr ""
 
 #. module: spp_event_data
+#. odoo-python
 #: code:addons/spp_event_data/models/registrant.py:0
 #, python-format
 msgid "Create Event Data"
@@ -79,13 +81,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__create_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__create_date
 msgid "Created on"
-msgstr ""
-
-#. module: spp_event_data
-#: model:ir.model.fields,field_description:spp_event_data.field_res_partner__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__dms_directory_ids
-msgid "DMS Directories"
 msgstr ""
 
 #. module: spp_event_data
@@ -134,12 +129,6 @@ msgid "Inactive"
 msgstr ""
 
 #. module: spp_event_data
-#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard____last_update
-#: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__write_uid
 msgid "Last Updated by"
@@ -159,6 +148,18 @@ msgstr ""
 #. module: spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.create_event_data_form_view
 msgid "Next"
+msgstr ""
+
+#. module: spp_event_data
+#: model:ir.model.fields.selection,name:spp_event_data.selection__spp_create_event_wizard__event_data_model__default
+msgid "None"
+msgstr ""
+
+#. module: spp_event_data
+#: model_terms:ir.ui.view,arch_db:spp_event_data.view_groups_event_data_form
+#: model_terms:ir.ui.view,arch_db:spp_event_data.view_individual_event_data_form
+#: model_terms:ir.ui.view,arch_db:spp_event_data.view_spp_event_data_tree
+msgid "Open Form"
 msgstr ""
 
 #. module: spp_event_data

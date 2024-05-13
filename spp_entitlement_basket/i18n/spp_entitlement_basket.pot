@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -97,6 +97,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_entitlement_basket
+#. odoo-python
 #: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
 #, python-format
 msgid "Cycle Basket Entitlements"
@@ -124,6 +125,7 @@ msgid "Enter the Manager Name..."
 msgstr ""
 
 #. module: spp_entitlement_basket
+#. odoo-python
 #: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
 #: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
 #: model:ir.model,name:spp_entitlement_basket.model_g2p_entitlement_inkind
@@ -181,6 +183,7 @@ msgid "Entitlement Managers"
 msgstr ""
 
 #. module: spp_entitlement_basket
+#. odoo-python
 #: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
 #, python-format
 msgid ""
@@ -193,6 +196,7 @@ msgid "Entitlement Validation Group"
 msgstr ""
 
 #. module: spp_entitlement_basket
+#. odoo-python
 #: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
 #, python-format
 msgid "Entitlements are validated and approved."
@@ -209,6 +213,7 @@ msgid "Food Basket Entitlement Managers"
 msgstr ""
 
 #. module: spp_entitlement_basket
+#. odoo-python
 #: code:addons/spp_entitlement_basket/wizard/create_program_wizard.py:0
 #, python-format
 msgid ""
@@ -231,6 +236,11 @@ msgid "ID"
 msgstr ""
 
 #. module: spp_entitlement_basket
+#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket__id_type
+msgid "ID Type to store in entitlements"
+msgstr ""
+
+#. module: spp_entitlement_basket
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.create_program_wizard_form_view_custom_basket
 #: model_terms:ir.ui.view,arch_db:spp_entitlement_basket.view_entitlement_manager_basket_form
 msgid "Inventory Settings"
@@ -242,18 +252,10 @@ msgid "Items"
 msgstr ""
 
 #. module: spp_entitlement_basket
+#. odoo-python
 #: code:addons/spp_entitlement_basket/wizard/create_program_wizard.py:0
 #, python-format
 msgid "Items are required in the Basket entitlement manager."
-msgstr ""
-
-#. module: spp_entitlement_basket
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_create_wizard_basket_entitlement_item____last_update
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket____last_update
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_g2p_program_entitlement_manager_basket_item____last_update
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket____last_update
-#: model:ir.model.fields,field_description:spp_entitlement_basket.field_spp_entitlement_basket_product____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: spp_entitlement_basket
@@ -350,6 +352,7 @@ msgid "Program:"
 msgstr ""
 
 #. module: spp_entitlement_basket
+#. odoo-python
 #: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
 #, python-format
 msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
@@ -378,6 +381,7 @@ msgid "Select a program..."
 msgstr ""
 
 #. module: spp_entitlement_basket
+#. odoo-python
 #: code:addons/spp_entitlement_basket/wizard/create_program_wizard.py:0
 #, python-format
 msgid ""
@@ -386,6 +390,7 @@ msgid ""
 msgstr ""
 
 #. module: spp_entitlement_basket
+#. odoo-python
 #: code:addons/spp_entitlement_basket/models/entitlement_manager.py:0
 #, python-format
 msgid "There are no items entered for this entitlement manager."
