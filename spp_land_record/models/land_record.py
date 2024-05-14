@@ -67,7 +67,7 @@ class LandRecord(models.Model):
             feature["geometry"] = mapping(transform(transformer, record.land_geo_polygon))
         # Fallback to point geometry if requested or no polygon is available
         elif geometry_type in ["point", "all"] and record.land_coordinates:
-            feature["geometry"] = mapping(transform(transformer, record.coordinates))
+            feature["geometry"] = mapping(transform(transformer, record.land_coordinates))
 
         else:
             # No valid geometry found based on the preferences
@@ -76,7 +76,7 @@ class LandRecord(models.Model):
         return feature
 
     @api.model
-    def get_geojson(self, geometry_type="all"):
+    def get_geojson(self, geometry_type="all", from_srid=3857, to_srid=4326):
         """
         Generate a GeoJSON representation of land records.
 
@@ -89,9 +89,8 @@ class LandRecord(models.Model):
         # Construct GeoJSON structure
         geojson = {"type": "FeatureCollection", "features": []}
 
-        # Assuming coordinates are in EPSG:3857 (Pseudo-Mercator)
-        proj_from = pyproj.Proj("epsg:3857")  # EPSG:3857 - WGS 84 / Pseudo-Mercator
-        proj_to = pyproj.Proj("epsg:4326")  # WGS84
+        proj_from = pyproj.Proj(f"epsg:{from_srid}")
+        proj_to = pyproj.Proj(f"epsg:{to_srid}")
         transformer = pyproj.Transformer.from_proj(proj_from, proj_to, always_xy=True).transform
 
         for record in land_records:

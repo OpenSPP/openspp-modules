@@ -272,31 +272,15 @@ class SPPFetchCRVSBeneficiary(models.Model):
             rec.location_id_domain = json.dumps(domain)
 
     def get_data_source_paths(self):
-        """
-        The function `get_data_source_paths` returns a dictionary of data source paths, with names as
-        keys and paths as values, and raises a validation error if certain paths are not configured.
-        :return: a dictionary containing the names and paths of data sources.
-        """
         self.ensure_one()
 
-        paths = {}
+        paths = {path_id.key: path_id.value for path_id in self.data_source_id.data_source_path_ids}
 
-        for path_id in self.data_source_id.data_source_path_ids:
-            paths[path_id.key] = path_id.value
+        required_paths = [constants.DATA_SOURCE_SEARCH_PATH_NAME, constants.DATA_SOURCE_AUTH_PATH_NAME]
 
-        if constants.DATA_SOURCE_SEARCH_PATH_NAME not in paths:
-            raise ValidationError(
-                _("No path in data source named {path} is configured!").format(
-                    path=constants.DATA_SOURCE_SEARCH_PATH_NAME
-                )
-            )
-
-        if constants.DATA_SOURCE_AUTH_PATH_NAME not in paths:
-            raise ValidationError(
-                _("No path in data source named {path} is configured!").format(
-                    path=constants.DATA_SOURCE_AUTH_PATH_NAME
-                )
-            )
+        for path in required_paths:
+            if path not in paths:
+                raise ValidationError(_("No path in data source named {path} is configured!").format(path=path))
 
         return paths
 
