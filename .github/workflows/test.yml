@@ -70,8 +70,6 @@ jobs:
         run: git clone https://github.com/OpenG2P/openg2p-security.git --depth 1 --branch 17.0-develop
       - name: Clone OpenG2P VCI Repository
         run: git clone https://github.com/OpenG2P/openg2p-vci.git --depth 1 --branch 17.0-develop
-      - name: Clone geospatial Repository
-        run: git clone https://github.com/OpenSPP/geospatial.git --depth 1 --branch 17.0-mig-base_geoengine
       - name: Clone Muk Addons Repository
         run: git clone https://github.com/muk-it/odoo-modules.git --depth 1 --branch 17.0
       - name: Copy OpenG2P modules to addons directory
@@ -86,8 +84,6 @@ jobs:
           cp -r openg2p-security/* ${ADDONS_DIR}/
           cat test-requirements.txt >> spp-test-requirements.txt
           cp -r openg2p-vci/* ${ADDONS_DIR}/
-          cat test-requirements.txt >> spp-test-requirements.txt
-          cp -r geospatial/* ${ADDONS_DIR}/
           cat test-requirements.txt >> spp-test-requirements.txt
           # MUK Addons
           cp -r odoo-modules/* ${ADDONS_DIR}/
