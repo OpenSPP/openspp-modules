@@ -173,7 +173,9 @@
                             /> -->
                             <div style="width: 100%; padding-top: 10px; padding-left: 10px; ">
                                 <h3>Farmer Details</h3>
-                                <table style="height: 50px; width:100%; vertical-align: top; text-align: left;">
+                                <table
+                                    style="height: 50px; width:100%; vertical-align: top; text-align: left;"
+                                >
                                     <tr>
                                         <td style="height:100%; width:15%;" />
                                         <td style="width:5%;" />
