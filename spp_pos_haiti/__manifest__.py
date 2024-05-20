@@ -9,7 +9,15 @@
     "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
-    "depends": ["base", "point_of_sale", "spp_pos", "g2p_registry_base", "g2p_programs"],
+    "depends": [
+        "base",
+        "point_of_sale",
+        "spp_pos",
+        "g2p_registry_base",
+        "g2p_registry_individual",
+        "g2p_registry_group",
+        "g2p_programs",
+    ],
     "assets": {
         "point_of_sale._assets_pos": [
             "spp_pos_haiti/static/src/view/popup_voucher.xml",
@@ -19,7 +27,9 @@
             "spp_pos_haiti/static/src/js/pos_store.js",
         ],
     },
-    "data": [],
+    "data": [
+        "views/registrant_view.xml",
+    ],
     "demo": [],
     "images": [],
     "application": True,
