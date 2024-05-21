@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
-    <t t-name="spp_pos_haiti.EntitlementPopup">
+    <t t-name="spp_pos_id_redemption.EntitlementPopup">
         <div class="popup popup-textarea">
             <div class="modal-header">
                 <h4 class="modal-title"><t t-esc="props.title" /></h4>
             </div>
             <div class="modal-body">
-                <HaitiProductsWidget partner="partner" />
+                <IdRedemptionProductsWidget partner="partner" />
             </div>
             <footer class="footer footer-flex modal-footer">
                 <div class="button confirm highlight btn btn-lg btn-primary" t-on-click="getEntitlement">

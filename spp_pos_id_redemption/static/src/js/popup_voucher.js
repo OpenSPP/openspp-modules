@@ -1,7 +1,7 @@
 /** @odoo-module */
 
 import {EntitlementPopup} from "@spp_pos/js/popup_voucher";
-import {HaitiProductsWidget} from "@spp_pos_haiti/js/product_list";
+import {IdRedemptionProductsWidget} from "@spp_pos_id_redemption/js/product_list";
 import {patch} from "@web/core/utils/patch";
 
 patch(EntitlementPopup.prototype, {
@@ -17,5 +17,5 @@ patch(EntitlementPopup.prototype, {
     },
 });
 
-EntitlementPopup.template = "spp_pos_haiti.EntitlementPopup";
-EntitlementPopup.components = {HaitiProductsWidget};
+EntitlementPopup.template = "spp_pos_id_redemption.EntitlementPopup";
+EntitlementPopup.components = {IdRedemptionProductsWidget};

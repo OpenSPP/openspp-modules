@@ -20,11 +20,11 @@
     ],
     "assets": {
         "point_of_sale._assets_pos": [
-            "spp_pos_haiti/static/src/view/popup_voucher.xml",
-            "spp_pos_haiti/static/src/view/product_list.xml",
-            "spp_pos_haiti/static/src/js/popup_voucher.js",
-            "spp_pos_haiti/static/src/js/product_list.js",
-            "spp_pos_haiti/static/src/js/pos_store.js",
+            "spp_pos_id_redemption/static/src/view/popup_voucher.xml",
+            "spp_pos_id_redemption/static/src/view/product_list.xml",
+            "spp_pos_id_redemption/static/src/js/popup_voucher.js",
+            "spp_pos_id_redemption/static/src/js/product_list.js",
+            "spp_pos_id_redemption/static/src/js/pos_store.js",
         ],
     },
     "data": [

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
 
-    <t t-name="spp_pos_haiti.HaitiProductsWidget">
+    <t t-name="spp_pos_id_redemption.IdRedemptionProductsWidget">
         <div class="products-widget d-flex flex-column flex-grow-1 overflow-auto" t-ref="products-widget">
             <t t-set="showCategoryImages" t-value="getShowCategoryImages()" />
             <div class="product-list-container flex-grow-1 overflow-y-auto">
