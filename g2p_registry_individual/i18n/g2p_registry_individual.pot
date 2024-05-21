@@ -59,6 +59,14 @@ msgid "Age"
 msgstr ""
 
 #. module: g2p_registry_individual
+#. odoo-python
+#: code:addons/g2p_registry_individual/models/individual.py:0
+#: code:addons/g2p_registry_individual/models/individual.py:0
+#, python-format
+msgid "Age must be a valid integer."
+msgstr ""
+
+#. module: g2p_registry_individual
 #: model:ir.model.fields,field_description:g2p_registry_individual.field_res_partner__birthdate_not_exact
 #: model:ir.model.fields,field_description:g2p_registry_individual.field_res_users__birthdate_not_exact
 msgid "Approximate Birthdate"
@@ -315,6 +323,11 @@ msgstr ""
 #: code:addons/g2p_registry_individual/models/individual.py:0
 #, python-format
 msgid "You can't select a date of birth greater than today"
+msgstr ""
+
+#. module: g2p_registry_individual
+#: model_terms:ir.ui.view,arch_db:g2p_registry_individual.view_individuals_form
+msgid "mm/dd/yyyy"
 msgstr ""
 
 #. module: g2p_registry_individual
