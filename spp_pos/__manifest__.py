@@ -11,15 +11,12 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": ["base", "point_of_sale", "g2p_registry_base", "g2p_programs"],
     "assets": {
-        "point_of_sale.assets": [
-            "spp_pos/static/src/js/models.js",
+        "point_of_sale._assets_pos": [
+            "spp_pos/static/src/view/action_button.xml",
+            "spp_pos/static/src/view/popup_voucher.xml",
             "spp_pos/static/src/js/action_button.js",
             "spp_pos/static/src/js/popup_voucher.js",
             "spp_pos/static/src/js/check_keypress_entitlement.js",
-        ],
-        "web.assets_qweb": [
-            "spp_pos/static/src/view/action_button.xml",
-            "spp_pos/static/src/view/popup_voucher.xml",
         ],
     },
     "data": [

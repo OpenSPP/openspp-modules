@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
-   <t t-name="EntitlementPopup">
-       <div role="dialog" class="modal-dialog">
-           <div class="popup popup-couponproducts">
-               <p class="title">
-                   <t t-esc="props.title" />
-               </p>
-               <span class="body">
-                 <div style="margin:20px;">
-
-                   <div class="row" style="border:1px solid black;">
-                     <h1><i class="fa fa-qrcode fa-2xl" /></h1>
-                     <h2>Scan Entitlement QR Code</h2>
-                   </div>
-                   --Or--
-                   <div class="row" style="border:1px solid black;">
-                      <h2>Enter Entitlement Code Manually</h2>
-                      <input type="text" name="qr_code" id="qr_code" />
-                      <br />
-                      <br />
-                   </div>
-                 </div>
-               </span>
-               <div class="footer">
-                   <div style="background-color: #890202" class="button cancel" t-on-click="confirm">
-                       <span style="color: #ffffff">Close</span>
-                   </div>
-                   <div style="background-color: #020b89" class="button" t-on-click="get_entitlement">
-                       <span style="color: #ffffff">Search</span>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </t>
+    <t t-name="spp_pos.EntitlementPopup">
+        <div class="popup popup-textarea">
+            <div class="modal-header">
+                <h4 class="modal-title"><t t-esc="props.title" /></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <h1><i class="fa fa-qrcode fa-2xl" /></h1>
+                    <h2><t t-esc="props.qrCodeText" /></h2>
+                </div>
+                --Or--
+                <div class="row">
+                    <h2><t t-esc="props.entitlementCodeText" /></h2>
+                    <input
+                        type="text"
+                        name="qr_code"
+                        id="qr_code"
+                        style="display: block; margin-right: auto; margin-left: auto; width: 50%; border: 1px solid blue; border-radius: 4px;"
+                    />
+                    <br />
+                    <br />
+                </div>
+            </div>
+            <footer class="footer footer-flex modal-footer">
+                <div class="button confirm highlight btn btn-lg btn-primary" t-on-click="getEntitlement">
+                    <t t-esc="props.searchText" />
+                </div>
+                <div class="button cancel btn btn-lg btn-secondary" t-on-click="cancel">
+                    <t t-esc="props.closeText" />
+                </div>
+            </footer>
+        </div>
+    </t>
 </templates>
