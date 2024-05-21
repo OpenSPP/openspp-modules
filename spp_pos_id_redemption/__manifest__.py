@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP POS: Haiti",
+    "name": "OpenSPP POS: ID Redemption",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
