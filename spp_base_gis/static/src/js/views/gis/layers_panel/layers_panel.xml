@@ -39,7 +39,7 @@
                             </button>
                         </header>
                         <ul class="raster list-group d-block o_search_panel_field">
-                            <li t-foreach="state.gisLayers.backgrounds" t-as="layer" t-key="layer.id">
+                            <li t-foreach="rasterLayersStore.getLayers" t-as="layer" t-key="layer.id">
                                 <div class="d-flex align-items-center">
                                     <button
                                         type="button"

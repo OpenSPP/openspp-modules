@@ -21,6 +21,7 @@ export class LayersPanel extends Component {
         // Initialize gisLayers with the expected structure
         this.state = useState({gisLayers: {actives: [], backgrounds: []}, isFolded: false});
         this.addDialog = useOwnedDialogs();
+        this.rasterLayersStore = rasterLayersStore;
 
         onWillStart(async () => {
             try {
@@ -119,12 +120,14 @@ export class LayersPanel extends Component {
         }
 
         // Use map to create a new array with updated visibility based on the layer name
-        const newRasters = rasterLayersStore.getLayers.map((item) => ({
-            ...item,
-            isVisible: item.name === layer.name,
-        }));
+        if (!value) {
+            const newRasters = rasterLayersStore.getLayers.map((item) => ({
+                ...item,
+                isVisible: item.name === layer.name,
+            }));
+            rasterLayersStore.onRasterLayerChanged(newRasters);
+        }
         // Notify the store that the raster layers have changed
-        rasterLayersStore.onRasterLayerChanged(newRasters);
     }
 
     /**
