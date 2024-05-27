@@ -5,7 +5,7 @@ from odoo import api, fields, models
 class G2PRegistrant(models.Model):
     _inherit = "res.partner"
 
-    full_address = fields.Text(compute="_compute_address", string="Address")
+    full_address = fields.Text(compute="_compute_address")
 
     @api.depends("street", "street2", "city", "zip")
     def _compute_address(self):

@@ -1,0 +1,319 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* g2p_registry_membership
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: g2p_registry_membership
+#: model_terms:ir.actions.act_window,help:g2p_registry_membership.action_group_membership_kind
+msgid "Add a group membership kind!"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.actions.act_window,help:g2p_registry_membership.action_group_membership
+msgid "Add an individual to a group!"
+msgstr ""
+
+#. module: g2p_registry_membership
+#. odoo-python
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#, python-format
+msgid "Can't delete default kinds"
+msgstr ""
+
+#. module: g2p_registry_membership
+#. odoo-python
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#, python-format
+msgid "Can't edit default kinds"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.actions.act_window,help:g2p_registry_membership.action_group_membership
+msgid "Click the create button to enter the new group information."
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.actions.act_window,help:g2p_registry_membership.action_group_membership_kind
+msgid "Click the create button to enter the new group membership kind."
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model,name:g2p_registry_membership.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__create_uid
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership_kind__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__create_date
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership_kind__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_group_membership_form
+msgid "Date Range"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__individual_birthdate
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_groups_form_membership
+msgid "Date of Birth"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__display_name
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership_kind__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: g2p_registry_membership
+#. odoo-python
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#, python-format
+msgid "Duplication of Member is not allowed "
+msgstr ""
+
+#. module: g2p_registry_membership
+#. odoo-python
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#, python-format
+msgid "End Date cannot be earlier than Start Date"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_groups_form_membership
+msgid "End date"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__ended_date
+msgid "Ended Date"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_res_partner__force_recompute_canary
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_res_users__force_recompute_canary
+msgid "Force Recompute Canary"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__individual_gender
+msgid "Gender"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__group
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.group_membership_filter
+msgid "Group"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.group_membership_filter
+msgid "Group By"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_res_partner__group_membership_ids
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_res_users__group_membership_ids
+msgid "Group Members"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.actions.act_window,name:g2p_registry_membership.action_group_membership
+#: model:ir.model,name:g2p_registry_membership.model_g2p_group_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_group_membership_form
+msgid "Group Membership"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.actions.act_window,name:g2p_registry_membership.action_group_membership_kind
+#: model:ir.model,name:g2p_registry_membership.model_g2p_group_membership_kind
+#: model:ir.ui.menu,name:g2p_registry_membership.menu_group_membership_kind
+msgid "Group Membership Kind"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_individuals_form_membership
+msgid "Group Name"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_group_membership_form
+msgid "Group:"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_individuals_form_membership
+msgid "Groups"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__id
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership_kind__id
+msgid "ID"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields.selection,name:g2p_registry_membership.selection__g2p_group_membership__status__inactive
+msgid "Inactive"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__individual
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.group_membership_filter
+msgid "Individual"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_group_membership_form
+msgid "Individual:"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__is_ended
+msgid "Is Ended"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__kind
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership_kind__name
+msgid "Kind"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__write_uid
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership_kind__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__write_date
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership_kind__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_groups_form_membership
+msgid "Member Name"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_groups_form_membership
+msgid "Members"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_res_partner__individual_membership_ids
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_res_users__individual_membership_ids
+msgid "Membership to Groups"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_res_partner__z_ind_grp_num_individuals
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_res_users__z_ind_grp_num_individuals
+msgid "Number of individuals"
+msgstr ""
+
+#. module: g2p_registry_membership
+#. odoo-python
+#: code:addons/g2p_registry_membership/models/group.py:0
+#: code:addons/g2p_registry_membership/models/group.py:0
+#: code:addons/g2p_registry_membership/models/group.py:0
+#: code:addons/g2p_registry_membership/models/group.py:0
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#, python-format
+msgid "Only one %s is allowed per group"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_groups_form_membership
+msgid "Open Individual Form"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_individuals_form_membership
+msgid "Open group form"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_group_membership_tree
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_groups_form_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_individuals_form_membership
+msgid "Role"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_group_membership_form
+msgid "Role:"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.group_membership_filter
+msgid "Search Group Memberships"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_group_membership_form
+msgid "Select a Group..."
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_group_membership_form
+msgid "Select an Individual..."
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model_terms:ir.ui.view,arch_db:g2p_registry_membership.view_groups_form_membership
+msgid "Sex"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__start_date
+msgid "Start Date"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership__status
+msgid "Status"
+msgstr ""
+
+#. module: g2p_registry_membership
+#: model:ir.model.fields,field_description:g2p_registry_membership.field_g2p_group_membership_kind__is_unique
+msgid "Unique"
+msgstr ""
+
+#. module: g2p_registry_membership
+#. odoo-python
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#, python-format
+msgid "kind already exists"
+msgstr ""
+
+#. module: g2p_registry_membership
+#. odoo-python
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#: code:addons/g2p_registry_membership/models/group_membership.py:0
+#, python-format
+msgid "kind should not empty."
+msgstr ""

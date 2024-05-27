@@ -1,23 +1,25 @@
-odoo.define("spp_pos.KeyPressEntitlement", function (require) {
-    const {patch} = require("web.utils");
+/** @odoo-module **/
+import {ProductScreen} from "@point_of_sale/app/screens/product_screen/product_screen";
+import {patch} from "@web/core/utils/patch";
+import {useService} from "@web/core/utils/hooks";
 
-    const KeyPressCheck = {
-        ProductScreen: require("point_of_sale.ProductScreen"),
-    };
+patch(ProductScreen.prototype, {
+    setup() {
+        super.setup(...arguments);
+        this.sound = useService("sound");
+        this.orm = useService("orm");
+    },
 
-    patch(KeyPressCheck.ProductScreen.prototype, "spp_pos.KeyPressEntitlement", {
-        async _updateSelectedOrderline() {
-            const _super = this._super.bind(this);
-            // Await Promise.resolve();
+    async updateSelectedOrderline({buffer, key}) {
+        const selectedProduct = this.currentOrder.get_selected_orderline().get_product();
 
-            const selectedProduct = this.env.pos.get_order().get_selected_orderline().get_product();
-            console.log("DEBUG: " + selectedProduct.is_locked);
-            if (selectedProduct.is_locked === true) {
-                this.playSound("error");
-            } else {
-                await _super(...arguments);
-            }
-        },
-    });
-    console.log(KeyPressCheck.ProductScreen.prototype);
+        const result = await this.orm.call("product.template", "get_is_locked", [selectedProduct.id]);
+        console.log("DEBUG: " + result.is_locked);
+
+        if (result.is_locked) {
+            this.sound.play("error");
+        } else {
+            return super.updateSelectedOrderline({buffer, key});
+        }
+    },
 });

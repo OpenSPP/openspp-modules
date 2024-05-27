@@ -22,7 +22,7 @@
         # "spp_helpdesk",
         "spp_area",
         "theme_openspp_muk",
-        "spp_pos",
+        # "spp_pos",
         # "spp_sms",
         "queue_job",
     ],

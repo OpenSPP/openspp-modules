@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,29 +14,28 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: spp_pos
-#. openerp-web
+#. odoo-javascript
 #: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
 #, python-format
 msgid "--Or--"
 msgstr ""
 
 #. module: spp_pos
-#. openerp-web
-#: code:addons/spp_pos/static/src/js/action_button.js:0
-#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#. odoo-javascript
+#: code:addons/spp_pos/static/src/js/popup_voucher.js:0
 #, python-format
 msgid "Close"
 msgstr ""
 
 #. module: spp_pos
-#. openerp-web
-#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#. odoo-javascript
+#: code:addons/spp_pos/static/src/js/popup_voucher.js:0
 #, python-format
 msgid "Enter Entitlement Code Manually"
 msgstr ""
 
 #. module: spp_pos
-#. openerp-web
+#. odoo-javascript
 #: code:addons/spp_pos/static/src/view/action_button.xml:0
 #: model:ir.model,name:spp_pos.model_g2p_entitlement
 #: model:pos.category,name:spp_pos.entitlement_product_categ_pos
@@ -58,32 +57,27 @@ msgstr ""
 
 #. module: spp_pos
 #: model:ir.model,name:spp_pos.model_product_template
-msgid "Product Template"
+msgid "Product"
 msgstr ""
 
 #. module: spp_pos
-#. openerp-web
-#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#. odoo-javascript
+#: code:addons/spp_pos/static/src/js/popup_voucher.js:0
 #, python-format
 msgid "Scan Entitlement QR Code"
 msgstr ""
 
 #. module: spp_pos
-#. openerp-web
-#: code:addons/spp_pos/static/src/js/action_button.js:0
-#: code:addons/spp_pos/static/src/view/popup_voucher.xml:0
+#. odoo-javascript
+#: code:addons/spp_pos/static/src/js/popup_voucher.js:0
 #, python-format
 msgid "Search"
 msgstr ""
 
 #. module: spp_pos
-#. openerp-web
+#. odoo-javascript
 #: code:addons/spp_pos/static/src/js/action_button.js:0
+#: code:addons/spp_pos/static/src/js/popup_voucher.js:0
 #, python-format
 msgid "Select Entitlement"
-msgstr ""
-
-#. module: spp_pos
-#: model:product.template,uom_name:spp_pos.entitlement_product
-msgid "Units"
 msgstr ""

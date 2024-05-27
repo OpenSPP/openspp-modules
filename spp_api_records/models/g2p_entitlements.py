@@ -6,7 +6,7 @@ class G2pEntitlements(models.Model):
 
     partner_type = fields.Char(compute="_compute_partner_type")
     type = fields.Char(compute="_compute_type")
-    cycle_number = fields.Char(related="cycle_id.name")
+    cycle_number = fields.Char(related="cycle_id.name", string="Cycle Number")
     program_id = fields.Many2one(related="cycle_id.program_id")
 
     @api.depends("partner_id")
@@ -35,7 +35,7 @@ class G2pEntitlementsInKind(models.Model):
 
     partner_type = fields.Char(compute="_compute_partner_type")
     type = fields.Char(compute="_compute_type")
-    cycle_number = fields.Char(related="cycle_id.name")
+    cycle_number = fields.Char(related="cycle_id.name", string="Cycle Number")
 
     @api.depends("partner_id")
     def _compute_partner_type(self):

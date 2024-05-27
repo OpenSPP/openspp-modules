@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="action_generate_id_card" model="ir.actions.report">
+        <field name="name">ID Card</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">spp_openid_vci.id_vc_card</field>
+        <field name="report_file">spp_openid_vci.id_vc_card</field>
+        <field name="print_report_name">'ID Card - %s' % (object.name).replace('/', '').strip()</field>
+        <field name="paperformat_id" ref="spp_openid_vci.paperformat_a4" />
+        <field name="binding_model_id" ref="model_res_partner" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="id_vc_card">
+        <t t-call="web.basic_layout">
+            <style>
+                .id-card-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }
+                .id-card-table{
+                    border: 2px solid black;
+                }
+                .id-card-table td {
+                    padding: 10px;
+                    vertical-align: middle;
+                }
+                .id-card-fields {
+                    width: 65%;
+                }
+                .id-card-image {
+                    width: 35%;
+                    text-align: left;
+                }
+                .id-card-image img {
+                    max-width: 100%;
+                    height: auto;
+                }
+                .tr-title td {
+                    text-align: center;
+                    margin-bottom: 16px;
+                }
+            </style>
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <table class="id-card-table">
+                        <tr class="tr-title">
+                            <td colspan="2"><img
+                                    src="/spp_openid_vci/static/description/icon.png"
+                                    alt="OpenSPP"
+                                    height="100"
+                                    width="100"
+                                /></td>
+                        </tr>
+                        <tr>
+                            <!-- Fields on the left -->
+                            <td class="id-card-fields">
+                                <strong>Name:</strong> <small t-field="doc.name" /><br />
+                                <t t-if="not doc.is_group">
+                                    <strong>Birthdate:</strong> <small t-field="doc.birthdate" /><br />
+                                    <strong>Gender:</strong> <small t-field="doc.gender" /><br />
+                                </t>
+                                <strong>Address:</strong>  <small t-field="doc.address" /><br />
+                            </td>
+                            <!-- QR Code on the right -->
+                            <td class="id-card-image">
+                                <img
+                                    t-att-src="'data:image/png;base64,%s' % doc.vc_qr_code.decode()"
+                                    alt="QR Code"
+                                    class="fit-image"
+                                />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -36,15 +36,14 @@ class ChangeRequestAddChildren(models.Model):
     _description = "Add Child/Member Change Request Type"
     _order = "id desc"
 
-    # Initialize DMS Storage
-    DMS_STORAGE = "spp_change_request_add_children_demo.attachment_storage_add_children"
+    # Initialize CR constants
     VALIDATION_FORM = "spp_change_request_add_children_demo.view_change_request_add_children_validation_form"
     REQUIRED_DOCUMENT_TYPE = [
-        # "spp_change_request_add_children_demo.spp_dms_add_children",
-        # "spp_change_request_add_children_demo.spp_dms_birth_certificate",
-        # "spp_change_request_add_children_demo.spp_dms_applicant_spp_card",
-        # "spp_change_request_add_children_demo.spp_dms_applicant_uid_card",
-        # "spp_change_request_add_children_demo.spp_dms_custody_certificate",
+        "spp_change_request_add_children_demo.spp_dms_add_children",
+        # "spp_change_request.spp_dms_birth_certificate",
+        # "spp_change_request.spp_dms_applicant_spp_card",
+        # "spp_change_request.spp_dms_applicant_uid_card",
+        # "spp_change_request.spp_dms_custody_certificate",
     ]
 
     # Mandatory initialize source and destination center areas
@@ -95,6 +94,20 @@ class ChangeRequestAddChildren(models.Model):
     validation_ids = fields.Many2many(
         relation="spp_change_request_add_children_demo_rel",
         domain=[("request_type", "=", _name)],
+    )
+
+    # DMS Field
+    dms_directory_ids = fields.One2many(
+        "spp.dms.directory",
+        "change_request_add_children_id",
+        string="DMS Directories",
+        auto_join=True,
+    )
+    dms_file_ids = fields.One2many(
+        "spp.dms.file",
+        "change_request_add_children_id",
+        string="DMS Files",
+        auto_join=True,
     )
 
     @api.onchange("birthdate")
@@ -166,7 +179,7 @@ class ChangeRequestAddChildren(models.Model):
                         }
                         # TODO: Should be added to vals["dms_file_ids"] but it is
                         # not writing to one2many field using Command.create()
-                        self.env["dms.file"].create(dms_vals)
+                        self.env["spp.dms.file"].create(dms_vals)
 
                     # TODO: grand_father_name and father_name
                     vals = {
@@ -182,6 +195,12 @@ class ChangeRequestAddChildren(models.Model):
                     self.update(vals)
         else:
             raise UserError(_("There are no directories defined for this change request."))
+
+    def _get_default_change_request_id(self):
+        """
+        Get the default field name for change request id.
+        """
+        return "default_change_request_add_children_id"
 
     def validate_data(self):
         super().validate_data()

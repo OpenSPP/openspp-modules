@@ -26,11 +26,11 @@ class Log(models.Model):
         ],
         required=True,
     )
-    model = fields.Char(required=True)
+    model = fields.Char(required=True, string="Model Name")
     namespace_id = fields.Many2one("spp_api.namespace", "Integration")
-    request = fields.Text()  # full_path
+    request = fields.Text(string="Request")  # full_path
 
-    request_id = fields.Text()
+    request_id = fields.Text(string="Request ID")
     request_parameter = fields.Text()
     request_data = fields.Text()
 

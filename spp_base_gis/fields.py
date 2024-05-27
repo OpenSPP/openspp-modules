@@ -59,12 +59,11 @@ class GeoField(fields.Field):
     column_type = ("geometry", "geometry")
     dim = 2
 
-    def __init__(self, string="GeoField", **kwargs):
+    def __init__(self, *args, **kwargs):
         self.index = kwargs.get("index", True)  # Enable GiST index by default
         if isinstance(self, GeoField) and self.geo_type and self.geo_class:
             geo_types.update({self.geo_type: self.geo_class})
-            string = self.geo_type
-        super().__init__(string=string, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def validate_value(self, value):
         try:
@@ -140,7 +139,7 @@ class GeoField(fields.Field):
             return False
         return value_to_shape(value, use_wkb=True)
 
-    def convert_to_read(self, value, record, use_name_get=True):
+    def convert_to_read(self, value, record, use_display_name=True):
         if not isinstance(value, BaseGeometry):
             shape = wkbloads(value, hex=True) if value else False
         else:

@@ -19,7 +19,6 @@
     ],
     "data": [
         "wizard/create_program_wizard.xml",
-        "wizard/create_program_wizard.xml",
         "views/programs_view.xml",
         "views/entitlements_view.xml",
     ],

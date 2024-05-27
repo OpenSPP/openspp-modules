@@ -8,7 +8,7 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "development_status": "Alpha",
-    "maintainers": ["jeremi", "gonzalesedwin1123"],
+    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "spp_base_demo",
         "g2p_registry_base",
@@ -33,6 +33,7 @@
         # "spp_sms",
         "queue_job",
         # "spp_change_request_add_children_demo",
+        "spp_custom_filter",
     ],
     "external_dependencies": {"python": ["faker"]},
     "data": [

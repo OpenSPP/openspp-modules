@@ -24,6 +24,7 @@
                             <span />
                             <button
                                 icon="fa-key"
+                                title="View Bearer Token"
                                 name="action_view_bearer_token"
                                 type="object"
                                 class="oe_highlight"

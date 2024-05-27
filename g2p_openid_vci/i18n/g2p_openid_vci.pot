@@ -1,0 +1,155 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* g2p_openid_vci
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__auth_allowed_auds
+msgid "Auth Allowed Audiences"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__auth_allowed_client_ids
+msgid "Auth Allowed Client IDs"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__auth_allowed_issuers
+msgid "Auth Allowed Issuers"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__auth_issuer_jwks_mapping
+msgid "Auth Issuer Jwks Mapping"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__auth_sub_id_type_id
+msgid "Auth Subject ID Type"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model_terms:ir.ui.view,arch_db:g2p_openid_vci.view_g2p_openid_vci_issuers_form
+msgid "Base"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__contexts_json
+msgid "Contexts Json"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__credential_format
+msgid "Credential Format"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__credential_type
+msgid "Credential Type"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__encryption_provider_id
+msgid "Encryption Provider"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__id
+msgid "ID"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__issuer_metadata_text
+msgid "Issuer Metadata Text"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__issuer_type
+msgid "Issuer Type"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model_terms:ir.actions.act_window,help:g2p_openid_vci.action_vci_issuers
+msgid "Manage allowed VCI issuers."
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__name
+msgid "Name"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model,name:g2p_openid_vci.model_g2p_openid_vci_issuers
+msgid "OpenID VCI Issuer"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields.selection,name:g2p_openid_vci.selection__g2p_openid_vci_issuers__issuer_type__registry
+msgid "Registry"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__scope
+msgid "Scope"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__supported_format
+msgid "Supported Format"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields,field_description:g2p_openid_vci.field_g2p_openid_vci_issuers__unique_issuer_id
+msgid "Unique Issuer ID"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.ui.menu,name:g2p_openid_vci.menu_vci_issuers
+msgid "VCI Issuers"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.actions.act_window,name:g2p_openid_vci.action_vci_issuers
+#: model_terms:ir.ui.view,arch_db:g2p_openid_vci.view_g2p_openid_vci_issuers_form
+msgid "VCI issuers"
+msgstr ""
+
+#. module: g2p_openid_vci
+#: model:ir.model.fields.selection,name:g2p_openid_vci.selection__g2p_openid_vci_issuers__supported_format__ldp_vc
+msgid "ldp_vc"
+msgstr ""

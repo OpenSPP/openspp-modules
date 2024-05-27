@@ -35,6 +35,7 @@ class Common(TransactionCase):
             }
         )
 
+    @classmethod
     def _create_registrant(self, vals):
         self.assertTrue(isinstance(vals, dict), "Return vals should be a dict!")
         vals.update({"is_registrant": True})

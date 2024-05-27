@@ -4,7 +4,7 @@ from odoo import _, http
 from odoo.exceptions import ValidationError
 from odoo.http import request
 
-from odoo.addons.web.controllers.main import ExcelExport
+from odoo.addons.web.controllers.export import ExcelExport
 
 EXCEL_ROW_LIMIT = 1_048_576
 

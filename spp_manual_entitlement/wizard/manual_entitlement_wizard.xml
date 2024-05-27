@@ -74,6 +74,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         type="object"
                         class="btn-primary"
                         icon="fa-check"
+                        title="Create Entitlements"
                         name="create_entitlement"
                         string="Create Entitlements"
                         invisible="step != 'step3'"

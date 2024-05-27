@@ -10,3 +10,4 @@ from . import farm_details
 from . import farmer
 from . import species
 from . import farm
+from . import land_record

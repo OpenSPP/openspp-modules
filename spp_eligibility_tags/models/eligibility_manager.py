@@ -32,7 +32,7 @@ class TagBasedEligibilityManager(models.Model):
         domain=lambda self: [("kind", "=", self.env.ref("spp_area.admin_area_kind").id)],
     )
 
-    custom_domain = fields.Text(string="Domain", default="[]", readonly=True, compute="_compute_custom_domain")
+    custom_domain = fields.Text(string="Tags Domain", default="[]", readonly=True, compute="_compute_custom_domain")
 
     target_type = fields.Selection(related="program_id.target_type")
 

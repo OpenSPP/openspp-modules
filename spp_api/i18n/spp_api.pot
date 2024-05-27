@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,12 +14,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "%s (copy)"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "(Maximum: {})"
@@ -35,6 +37,16 @@ msgstr ""
 msgid ""
 "A namespace already exists with this name and version number. Namespace's "
 "name and version must be unique!"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__spec_url_v2
+msgid "API Document Link"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__api_field_ids
+msgid "API Fields"
 msgstr ""
 
 #. module: spp_api
@@ -54,12 +66,14 @@ msgid "API Path"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "API need a specific fields list!"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/ir_model_fields.py:0
 #, python-format
 msgid "API path is not specify!"
@@ -93,6 +107,7 @@ msgid "Alias Name"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_field_alias.py:0
 #, python-format
 msgid "Alias Name should be different from its field name!"
@@ -132,12 +147,18 @@ msgstr ""
 
 #. module: spp_api
 #: model:ir.model.fields,help:spp_api.field_res_users__openapi_token
+#: model:ir.model.fields,help:spp_api.field_spp_users_bearer_token__user_token
 msgid "Authentication token for access to API (/api)."
 msgstr ""
 
 #. module: spp_api
 #: model:ir.model.fields.selection,name:spp_api.selection__spp_api_function_parameter__type__boolean
 msgid "Boolean"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.spp_users_bearer_token_view_form
+msgid "Cancel"
 msgstr ""
 
 #. module: spp_api
@@ -158,6 +179,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_log__create_uid
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__create_uid
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_path__create_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_users_bearer_token__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -168,6 +190,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_log__create_date
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__create_date
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_path__create_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_users_bearer_token__create_date
 msgid "Created on"
 msgstr ""
 
@@ -175,6 +198,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_api.selection__spp_api_log__method__patch
 #: model:ir.model.fields.selection,name:spp_api.selection__spp_api_path__method__patch
 msgid "Custom function"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_users_bearer_token__db_name
+msgid "Database Name"
 msgstr ""
 
 #. module: spp_api
@@ -204,6 +232,7 @@ msgid "Description"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Description of the error"
@@ -222,6 +251,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_log__display_name
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__display_name
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_path__display_name
+#: model:ir.model.fields,field_description:spp_api.field_spp_users_bearer_token__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -232,6 +262,7 @@ msgid "Do you want to proceed reset token?"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Error code"
@@ -243,36 +274,42 @@ msgid "Errors only"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Example: `YYYY-MM-DD'T'HH:MM:ss.SSSZ`"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Example: `YYYY-MM-DD`"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Example: `['id', 'name']`"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Example: `[('name', '=', 'Test')]`"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Example: `{\"lang\": \"fr_FR\"}`"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Example: {}"
@@ -309,6 +346,7 @@ msgid "Field Name"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/ir_model_fields.py:0
 #: code:addons/spp_api/models/spp_api_path.py:0
 #: model:ir.model,name:spp_api.model_spp_api_field_alias
@@ -325,7 +363,6 @@ msgstr ""
 
 #. module: spp_api
 #: model:ir.model,name:spp_api.model_ir_model_fields
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__api_field_ids
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_path__field_ids
 msgid "Fields"
 msgstr ""
@@ -338,6 +375,11 @@ msgstr ""
 #. module: spp_api
 #: model:ir.model.fields.selection,name:spp_api.selection__spp_api_function_parameter__type__float
 msgid "Float"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__force_required
+msgid "Force Required"
 msgstr ""
 
 #. module: spp_api
@@ -384,6 +426,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_log__id
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__id
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_path__id
+#: model:ir.model.fields,field_description:spp_api.field_spp_users_bearer_token__id
 msgid "ID"
 msgstr ""
 
@@ -393,6 +436,7 @@ msgid "Identification token"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Identifier of the resource created."
@@ -422,22 +466,13 @@ msgid ""
 msgstr ""
 
 #. module: spp_api
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_field____last_update
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias____last_update
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter____last_update
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_log____last_update
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace____last_update
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_path____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: spp_api
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_field__write_uid
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__write_uid
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__write_uid
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_log__write_uid
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__write_uid
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_path__write_uid
+#: model:ir.model.fields,field_description:spp_api.field_spp_users_bearer_token__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -448,6 +483,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_log__write_date
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_namespace__write_date
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_path__write_date
+#: model:ir.model.fields,field_description:spp_api.field_spp_users_bearer_token__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -467,6 +503,7 @@ msgid "List of API Logs."
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "List of fields to read. (Defaults to all fields)"
@@ -504,6 +541,7 @@ msgid "Manager"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Maximum number of records to return. {}"
@@ -519,10 +557,14 @@ msgstr ""
 #. module: spp_api
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_field__model_id
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_field_alias__model_id
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__model
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__model
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_path__model_id
 msgid "Model"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__model
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_path__model
+msgid "Model Name"
 msgstr ""
 
 #. module: spp_api
@@ -539,6 +581,7 @@ msgid "Name"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Name of error"
@@ -555,6 +598,7 @@ msgid "Number Version"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Number of records to skip. (Defaults to 0)"
@@ -563,6 +607,11 @@ msgstr ""
 #. module: spp_api
 #: model:ir.model.fields.selection,name:spp_api.selection__spp_api_function_parameter__type__object
 msgid "Object (Dictionary)"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.view_api_rest_path_tree
+msgid "Open Form"
 msgstr ""
 
 #. module: spp_api
@@ -599,6 +648,7 @@ msgid "OpenAPI logs"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid ""
@@ -644,7 +694,6 @@ msgstr ""
 
 #. module: spp_api
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_log__request
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__request_id
 #: model:ir.model.fields.selection,name:spp_api.selection__spp_api_log__http_type__request
 msgid "Request"
 msgstr ""
@@ -655,12 +704,16 @@ msgid "Request Data"
 msgstr ""
 
 #. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_api_log__request_id
+msgid "Request ID"
+msgstr ""
+
+#. module: spp_api
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_log__request_parameter
 msgid "Request Parameter"
 msgstr ""
 
 #. module: spp_api
-#: model:ir.model.fields,field_description:spp_api.field_spp_api_field__force_required
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_field__required
 #: model:ir.model.fields,field_description:spp_api.field_spp_api_function_parameter__required
 msgid "Required"
@@ -687,12 +740,14 @@ msgid "Response Data"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Return a boolean if delete is a success."
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Return a boolean if update is a success."
@@ -704,13 +759,12 @@ msgid "Scoped Alias"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid ""
 "Search domain to read. (Defaults to an empty domain that will match all "
-"records) <a "
-"href=\"https://www.odoo.com/documentation/15.0/en/developer/reference/addons/orm.html#reference-"
-"orm-domains\" target=\"_blank\">Documentation</a>"
+"records) "
 msgstr ""
 
 #. module: spp_api
@@ -750,6 +804,7 @@ msgid "Short"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "Specific context to method"
@@ -771,6 +826,7 @@ msgid "The model this field belongs to"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_field_alias.py:0
 #, python-format
 msgid "There is another global alias for this field!"
@@ -803,8 +859,20 @@ msgid "Update Domain"
 msgstr ""
 
 #. module: spp_api
+#: model:ir.model,name:spp_api.model_res_users
+#: model:ir.model.fields,field_description:spp_api.field_spp_users_bearer_token__user_id
 #: model:res.groups,name:spp_api.group_user
 msgid "User"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_users_bearer_token__calculated_token
+msgid "User Bearer Token"
+msgstr ""
+
+#. module: spp_api
+#: model:ir.model.fields,field_description:spp_api.field_spp_users_bearer_token__user_token
+msgid "User OpenAPI Token"
 msgstr ""
 
 #. module: spp_api
@@ -813,8 +881,17 @@ msgid "User access level for OpenAPI"
 msgstr ""
 
 #. module: spp_api
-#: model:ir.model,name:spp_api.model_res_users
-msgid "Users"
+#. odoo-python
+#: code:addons/spp_api/models/res_users.py:0
+#: model:ir.model,name:spp_api.model_spp_users_bearer_token
+#: model_terms:ir.ui.view,arch_db:spp_api.spp_users_bearer_token_view_form
+#, python-format
+msgid "Users Bearer Token"
+msgstr ""
+
+#. module: spp_api
+#: model_terms:ir.ui.view,arch_db:spp_api.res_users_view_form
+msgid "View Bearer Token"
 msgstr ""
 
 #. module: spp_api
@@ -823,6 +900,7 @@ msgid "Warning Required"
 msgstr ""
 
 #. module: spp_api
+#. odoo-python
 #: code:addons/spp_api/models/spp_api_path.py:0
 #, python-format
 msgid "or"

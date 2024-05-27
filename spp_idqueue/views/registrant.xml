@@ -73,6 +73,7 @@
                                 name="open_request_form"
                                 type="object"
                                 icon="fa-external-link"
+                                title="Open Form"
                                 class="btn-success"
                             />
                         <field name="idpass_id" string="Template" />

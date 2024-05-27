@@ -1,0 +1,149 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_user_roles
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_user_roles
+#: model_terms:ir.ui.view,arch_db:spp_user_roles.view_res_users_role_spp_custom_form
+msgid ""
+"<span class=\"o_stat_text\">Update</span>\n"
+"                        <span class=\"o_stat_text\">User Roles</span>"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:ir.model.fields,field_description:spp_user_roles.field_res_users_role_line__local_area_id
+msgid "Center Area"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:ir.model.fields,field_description:spp_user_roles.field_res_users__center_area_ids
+msgid "Center Areas"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:ir.model,name:spp_user_roles.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:ir.model.fields.selection,name:spp_user_roles.selection__res_users_role__role_type__global
+msgid "Global"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.global_role_finance_res_groups
+msgid "Global Finance"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.global_role_program_manager_res_groups
+msgid "Global Program Manager"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.global_role_registrar_res_groups
+msgid "Global Registrar"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.global_role_support_res_groups
+msgid "Global Support"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.global_role_support_manager_res_groups
+msgid "Global Support Manager"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:ir.model.fields.selection,name:spp_user_roles.selection__res_users_role__role_type__local
+msgid "Local"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.local_role_registrar_res_groups
+msgid "Local Registrar"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.local_role_support_res_groups
+msgid "Local Support"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:ir.model.fields,field_description:spp_user_roles.field_res_users_role__role_type
+#: model:ir.model.fields,field_description:spp_user_roles.field_res_users_role_line__role_type
+msgid "Role Type"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.global_role_admin_res_groups
+msgid "System Admin"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,comment:spp_user_roles.global_role_support_manager_res_groups
+msgid ""
+"This role can supervise and manage all support requests and activities "
+"across all areas."
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,comment:spp_user_roles.global_role_program_manager_res_groups
+msgid ""
+"This role has access to all area-specific data to allow for effective "
+"program coordination and management."
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,comment:spp_user_roles.global_role_finance_res_groups
+msgid "This role has access to financial data across all areas."
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,comment:spp_user_roles.global_role_admin_res_groups
+msgid ""
+"This role has universal access and permissions to all system data and "
+"features."
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,comment:spp_user_roles.global_role_registrar_res_groups
+#: model:res.groups,comment:spp_user_roles.local_role_registrar_res_groups
+msgid ""
+"This role is allowed to capture data related to their assigned area but "
+"doesn't have access to any other information."
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,comment:spp_user_roles.global_role_support_res_groups
+#: model:res.groups,comment:spp_user_roles.local_role_support_res_groups
+msgid ""
+"This role is allowed to view and respond to support requests only from their"
+" assigned area."
+msgstr ""
+
+#. module: spp_user_roles
+#: model:ir.model,name:spp_user_roles.model_res_users
+msgid "User"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:ir.model,name:spp_user_roles.model_res_users_role
+msgid "User role"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:ir.model,name:spp_user_roles.model_res_users_role_line
+msgid "Users associated to a role"
+msgstr ""

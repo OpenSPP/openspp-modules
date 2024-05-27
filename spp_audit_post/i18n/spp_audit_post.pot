@@ -1,0 +1,111 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_audit_post
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_audit_post
+#. odoo-python
+#: code:addons/spp_audit_post/models/spp_audit_log.py:0
+#: model:ir.model.fields,field_description:spp_audit_post.field_spp_audit_rule__field_id
+#, python-format
+msgid "Field"
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model.fields,field_description:spp_audit_post.field_spp_audit_rule__field_id_domain
+msgid "Field Id Domain"
+msgstr ""
+
+#. module: spp_audit_post
+#. odoo-python
+#: code:addons/spp_audit_post/models/spp_audit_rule.py:0
+#, python-format
+msgid "Field is required if the rule is a child rule."
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model.fields,help:spp_audit_post.field_spp_audit_rule__field_id
+msgid "Field that connects this model to the model of the parent rule."
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model.fields,field_description:spp_audit_post.field_spp_audit_rule__is_mail_thread
+msgid "Has Mail Thread"
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model.fields,field_description:spp_audit_post.field_spp_audit_log__log_to
+msgid "Log To"
+msgstr ""
+
+#. module: spp_audit_post
+#. odoo-python
+#: code:addons/spp_audit_post/models/spp_audit_log.py:0
+#, python-format
+msgid "Model"
+msgstr ""
+
+#. module: spp_audit_post
+#. odoo-python
+#: code:addons/spp_audit_post/models/spp_audit_log.py:0
+#, python-format
+msgid "New value"
+msgstr ""
+
+#. module: spp_audit_post
+#. odoo-python
+#: code:addons/spp_audit_post/models/spp_audit_log.py:0
+#, python-format
+msgid "Old value"
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model.fields,field_description:spp_audit_post.field_spp_audit_log__parent_data_html
+msgid "Parent HTML Data"
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model.fields,field_description:spp_audit_post.field_spp_audit_log__parent_model_id
+msgid "Parent Model"
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model.fields,field_description:spp_audit_post.field_spp_audit_rule__parent_path
+msgid "Parent Path"
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model.fields,field_description:spp_audit_post.field_spp_audit_log__parent_res_ids_str
+msgid "Parent Res Ids Str"
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model.fields,field_description:spp_audit_post.field_spp_audit_rule__parent_id
+msgid "Parent Rule"
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model.fields,field_description:spp_audit_post.field_spp_audit_rule__child_ids
+#: model_terms:ir.ui.view,arch_db:spp_audit_post.spp_audit_rule_form_custom
+msgid "Related Rules"
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model,name:spp_audit_post.model_spp_audit_log
+msgid "SPP Audit Log"
+msgstr ""
+
+#. module: spp_audit_post
+#: model:ir.model,name:spp_audit_post.model_spp_audit_rule
+msgid "SPP Audit Rule"
+msgstr ""

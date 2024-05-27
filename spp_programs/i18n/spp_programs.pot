@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,12 +15,15 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__inkind_entitlements_count
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership__inkind_entitlements_count
 #: model:ir.model.fields,field_description:spp_programs.field_res_partner__inkind_entitlements_count
 #: model:ir.model.fields,field_description:spp_programs.field_res_users__inkind_entitlements_count
 msgid "# In-kind Entitlements"
 msgstr ""
 
 #. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/programs.py:0
 #: code:addons/spp_programs/models/programs.py:0
 #, python-format
 msgid "%s Imported Beneficiaries"
@@ -87,6 +90,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
 msgid "Approved"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_base_program_entitlement_manager
+msgid "Base Entitlement Manager"
 msgstr ""
 
 #. module: spp_programs
@@ -177,22 +185,6 @@ msgid "Cycle Id Domain"
 msgstr ""
 
 #. module: spp_programs
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle_manager_default__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_program__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership_manager_default__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_procurement_group__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_res_partner__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_stock_move__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_stock_picking__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_programs.field_stock_rule__dms_directory_ids
-msgid "DMS Directories"
-msgstr ""
-
-#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__date_approved
 msgid "Date Approved"
 msgstr ""
@@ -205,6 +197,11 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model,name:spp_programs.model_g2p_cycle_manager_default
 msgid "Default Cycle Manager"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_program_entitlement_manager_default
+msgid "Default Entitlement Manager"
 msgstr ""
 
 #. module: spp_programs
@@ -237,7 +234,10 @@ msgid "Enter the program name..."
 msgstr ""
 
 #. module: spp_programs
+#. odoo-python
 #: code:addons/spp_programs/models/entitlement.py:0
+#: code:addons/spp_programs/models/entitlement.py:0
+#: model:ir.model,name:spp_programs.model_g2p_entitlement
 #: model:ir.model,name:spp_programs.model_g2p_entitlement_inkind
 #, python-format
 msgid "Entitlement"
@@ -250,6 +250,8 @@ msgid "Entitlement:"
 msgstr ""
 
 #. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/entitlement.py:0
 #: code:addons/spp_programs/models/entitlement.py:0
 #, python-format
 msgid "Entitlement: (%s)"
@@ -305,6 +307,21 @@ msgid "ID"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_base_program_entitlement_manager__id_type
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__id_type
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_entitlement_manager_default__id_type
+msgid "ID Type to store in entitlements"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement__id_number
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__id_number
+msgid "Id Number"
+msgstr ""
+
+#. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/programs.py:0
 #: code:addons/spp_programs/models/programs.py:0
 #, python-format
 msgid "Import"
@@ -346,6 +363,8 @@ msgid "In-kind Entitlement"
 msgstr ""
 
 #. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/wizard/inkind_entitlement_report_wiz.py:0
 #: code:addons/spp_programs/wizard/inkind_entitlement_report_wiz.py:0
 #: model:ir.actions.act_window,name:spp_programs.action_inkind_entitlement_report_wizard
 #, python-format
@@ -359,6 +378,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.actions.act_window,name:spp_programs.action_entitlement_inkind
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership__inkind_entitlement_ids
 #: model:ir.model.fields,field_description:spp_programs.field_res_partner__inkind_entitlement_ids
 #: model:ir.model.fields,field_description:spp_programs.field_res_users__inkind_entitlement_ids
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_tree
@@ -381,12 +401,6 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__journal_id
 msgid "Journal"
-msgstr ""
-
-#. module: spp_programs
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind____last_update
-#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: spp_programs
@@ -417,6 +431,8 @@ msgid "Name"
 msgstr ""
 
 #. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/programs.py:0
 #: code:addons/spp_programs/models/programs.py:0
 #, python-format
 msgid "No Eligibility Manager defined."
@@ -429,9 +445,17 @@ msgid "One-time Distribution"
 msgstr ""
 
 #. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/entitlement.py:0
 #: code:addons/spp_programs/models/entitlement.py:0
 #, python-format
 msgid "Only draft entitlements are allowed to be deleted"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_group_ext_form_custom_spp
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_registrant_ext_form_custom_spp
+msgid "Open Form"
 msgstr ""
 
 #. module: spp_programs
@@ -470,6 +494,8 @@ msgid "Program Approval Receipt"
 msgstr ""
 
 #. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/wizard/create_program_wizard.py:0
 #: code:addons/spp_programs/wizard/create_program_wizard.py:0
 #, python-format
 msgid "Programs"
@@ -532,6 +558,8 @@ msgid "Simple Eligibility"
 msgstr ""
 
 #. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/programs.py:0
 #: code:addons/spp_programs/models/programs.py:0
 #, python-format
 msgid "Started importing %s beneficiaries"
@@ -592,6 +620,16 @@ msgid "There are no entitlements retrieved based on the filters specified."
 msgstr ""
 
 #. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_form
+msgid "To Approve"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_form
+msgid "To approve"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__total_amount
 msgid "Total Value"
 msgstr ""
@@ -641,6 +679,8 @@ msgid "Warehouse"
 msgstr ""
 
 #. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/entitlement.py:0
 #: code:addons/spp_programs/models/entitlement.py:0
 #, python-format
 msgid "You have no access in the Entitlement List View"

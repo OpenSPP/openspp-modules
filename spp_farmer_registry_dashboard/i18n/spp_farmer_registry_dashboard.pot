@@ -1,0 +1,278 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_farmer_registry_dashboard
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__financial_services_main_income_source__cash_transfer
+msgid "Cash transfer"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__financial_services_main_income_source__casual_labor_elsewhere
+msgid "Casual labor elsewhere"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farm_details_report__land_water_management_contour_ploughing
+msgid "Contour ploughing/Ridging"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farm_details_report__land_water_management_crop_rotation
+msgid "Crop Rotation"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farm_details_report__display_name
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_registry_report__display_name
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_with_without_training_report__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__details_legal_status__unknown
+msgid "Do not Know"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_with_without_training_report__formal_agricultural_training
+msgid "Do you have formal training in agriculture?"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model,name:spp_farmer_registry_dashboard.model_farm_details_report
+msgid "Farm Details Statistics"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farm_details_report__name
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_registry_report__name
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_with_without_training_report__name
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.farmer_formal_training_report_view_tree
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.farmer_registry_report_view_tree
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.farmer_sus_land_env_report_view_tree
+msgid "Farm Name"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#. odoo-javascript
+#: code:addons/spp_farmer_registry_dashboard/data/files/farmer_registry_dashboard.json:0
+#: model:ir.actions.act_window,name:spp_farmer_registry_dashboard.action_farmer_registry_legstat_report
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.view_farmer_registry_legstat_report_graph
+#, python-format
+msgid "Farmer Registration by Legal Status"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.actions.act_window,name:spp_farmer_registry_dashboard.action_farmer_registry_month_report
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.view_farmer_registry_month_report_graph
+msgid "Farmer Registration by Month"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:spreadsheet.dashboard,name:spp_farmer_registry_dashboard.dashboard_farmer_registry
+#: model:spreadsheet.dashboard.group,name:spp_farmer_registry_dashboard.spreadsheet_dashboard_group_farmer_registry
+msgid "Farmer Registry"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.farmer_registry_report_search
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.view_farmer_registry_report_pivot
+msgid "Farmer Registry Analysis"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#. odoo-javascript
+#: code:addons/spp_farmer_registry_dashboard/data/files/farmer_registry_dashboard.json:0
+#, python-format
+msgid "Farmer Registry Analysis by Legal Status"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model_terms:ir.actions.act_window,help:spp_farmer_registry_dashboard.action_farmer_registry_legstat_report
+#: model_terms:ir.actions.act_window,help:spp_farmer_registry_dashboard.action_farmer_registry_month_report
+msgid "Farmer Registry Report"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model,name:spp_farmer_registry_dashboard.model_farmer_registry_report
+msgid "Farmer Registry Statistics"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.ui.menu,name:spp_farmer_registry_dashboard.menu_farmer_registry_legstat_report
+msgid "Farmer Registry by Legal Status"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.ui.menu,name:spp_farmer_registry_dashboard.menu_farmer_registry_month_report
+msgid "Farmer Registry by Month"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.actions.act_window,name:spp_farmer_registry_dashboard.action_farmer_formal_training_report
+#: model:ir.actions.act_window,name:spp_farmer_registry_dashboard.action_farmer_sus_land_env_report
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.farmer_formal_training_report_search
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.view_farmer_formal_training_report_pivot
+msgid "Farmer With Formal Training Statistics"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model,name:spp_farmer_registry_dashboard.model_farmer_with_without_training_report
+#: model_terms:ir.actions.act_window,help:spp_farmer_registry_dashboard.action_farmer_formal_training_report
+msgid "Farmer With/Without Formal Training Statistics"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.ui.menu,name:spp_farmer_registry_dashboard.menu_farmer_formal_training_report
+msgid "Farmer with/without Training Statistics"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#. odoo-javascript
+#: code:addons/spp_farmer_registry_dashboard/data/files/farmer_registry_dashboard.json:0
+#, python-format
+msgid "Farms"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farm_details_report__graph_footer
+msgid "Graph Footer"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farm_details_report__land_water_management_green_cover_crop
+msgid "Green cover crop"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farm_details_report__id
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_registry_report__id
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_with_without_training_report__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_registry_report__land_acreage
+msgid "Land Acreage"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.farmer_registry_report_view_tree
+msgid "Land Legal Status"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__details_legal_status__leased
+msgid "Leased from actual owner"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_registry_report__details_legal_status
+msgid "Legal Status"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__financial_services_main_income_source__non-farm_trading
+msgid "Non-farm trading"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__financial_services_main_income_source__other
+msgid "Other"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__details_legal_status__government
+msgid "Owned by Government"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__details_legal_status__cooperative
+msgid "Owned by cooperative"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__details_legal_status__extended_community
+msgid "Owned by extended community"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__details_legal_status__family
+msgid "Owned by family"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__details_legal_status__self
+msgid "Owned by self"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__financial_services_main_income_source__pension
+msgid "Pension"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farm_details_report__registration_date
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_registry_report__registration_date
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_with_without_training_report__registration_date
+msgid "Registration Date"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__financial_services_main_income_source__remittances
+msgid "Remittances"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.ui.menu,name:spp_farmer_registry_dashboard.g2p_report_menu_root
+msgid "Reports"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__financial_services_main_income_source__salary_from_employment_elsewhere
+msgid "Salary from employment elsewhere"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields.selection,name:spp_farmer_registry_dashboard.selection__farmer_registry_report__financial_services_main_income_source__sale_of_farming_produce
+msgid "Sale of farming produce"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.view_farmer_sus_land_env_report_graph
+msgid "Sustainable Land and Environmental Management"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.ui.menu,name:spp_farmer_registry_dashboard.menu_farmer_sus_land_env_report
+#: model_terms:ir.actions.act_window,help:spp_farmer_registry_dashboard.action_farmer_sus_land_env_report
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_dashboard.farmer_sus_land_env_report_search
+msgid "Sustainable Land and Environmental Management Statistics"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_registry_report__financial_services_main_income_source
+msgid "What is your main source of income by priority?"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_registry_report__financial_services_percentage_of_income_from_farming
+msgid "What percentage of your income comes from farming activities?"
+msgstr ""
+
+#. module: spp_farmer_registry_dashboard
+#: model:ir.model.fields,field_description:spp_farmer_registry_dashboard.field_farmer_with_without_training_report__formal_agricultural_training_yn
+msgid "With formal training in agriculture"
+msgstr ""

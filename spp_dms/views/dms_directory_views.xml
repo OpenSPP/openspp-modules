@@ -1,0 +1,302 @@
+<odoo>
+
+    <record id="action_spp_dms_directories_directory" model="ir.actions.act_window">
+        <field name="name">action_spp_dms_directories_directory</field>
+        <field name="res_model">spp.dms.directory</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">
+            {
+                'default_parent_id': active_id,
+                'searchpanel_default_parent_id': active_id
+            }
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click to add a new directory.
+            </p>
+            <p>
+                Directories can be used to structure and organize files.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_dms_files_directory" model="ir.actions.act_window">
+        <field name="name">action_spp_dms_files_directory</field>
+        <field name="res_model">spp.dms.file</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">
+            {
+                'default_directory_id': active_id,
+                'searchpanel_default_directory_id': active_id
+            }
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click to add a new file.
+            </p>
+            <p>
+                Files are used to save content.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_dms_directories_all_directory" model="ir.actions.act_window">
+        <field name="name">action_spp_dms_directories_all_directory</field>
+        <field name="res_model">spp.dms.directory</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">
+            [
+                ("parent_id", "child_of", active_id),
+                ("id", "!=", active_id),
+            ]
+        </field>
+        <field name="context">
+            {
+                'default_parent_id': active_id,
+            }
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click to add a new directory.
+            </p>
+            <p>
+                Directories can be used to structure and organize
+                files.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_dms_files_all_directory" model="ir.actions.act_window">
+        <field name="name">action_spp_dms_files_all_directory</field>
+        <field name="res_model">spp.dms.file</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">
+            [
+                ("directory_id", "child_of", active_id),
+            ]
+        </field>
+        <field name="context">
+            {
+                'default_directory_id': active_id,
+            }
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click to add a new file.
+            </p>
+            <p>
+                Files are used to save content.
+            </p>
+        </field>
+    </record>
+
+    <record id="search_spp_dms_directory" model="ir.ui.view">
+        <field name="name">search_spp_dms_directory</field>
+        <field name="model">spp.dms.directory</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="complete_name" />
+                <filter string="My Directories" name="filter_user" domain="[('create_uid', '=', uid)]" />
+                <separator />
+                <filter
+                    string="Root Directories"
+                    name="filter_root"
+                    domain="[('is_root_directory', '=', True)]"
+                />
+                <separator />
+                <filter string="Creation Date" name="filter_create" date="create_date" />
+                <filter string="Modification Date" name="filter_write" date="write_date" />
+                <searchpanel>
+                    <field name="parent_id" icon="fa-folder" limit="0" enable_counters="1" operator="=" />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_spp_dms_directory_tree" model="ir.ui.view">
+        <field name="name">view_spp_dms_directory_tree</field>
+        <field name="model">spp.dms.directory</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="write_date" />
+                <field name="count_files" string="Files" />
+                <field name="count_directories" string="Directories" />
+                <field name="complete_name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_spp_dms_directory_form" model="ir.ui.view">
+        <field name="name">view_spp_dms_directory_form</field>
+        <field name="model">spp.dms.directory</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_spp_dms_directories_all_directory"
+                            class="oe_stat_button"
+                            icon="fa-folder-open-o"
+                        >
+                            <field string="Subdirectories" name="count_total_directories" widget="statinfo" />
+                        </button>
+                        <button
+                            type="object"
+                            name="action_spp_dms_files_all_directory"
+                            class="oe_stat_button"
+                            icon="fa-file-text-o"
+                        >
+                            <field string="Files" name="count_total_files" widget="statinfo" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" placeholder="Directory Name" />
+                        </h1>
+                        <h4>
+                            <field name="complete_name" />
+                        </h4>
+                    </div>
+                    <group name="settings">
+                        <group>
+                            <field name="is_root_directory" invisible="1" />
+                        </group>
+                        <group>
+                            <field
+                                name="parent_id"
+                                options="{'no_quick_create': True}"
+                                invisible="is_root_directory"
+                                required="is_root_directory"
+                            />
+                        </group>
+                    </group>
+                    <group name="data">
+                        <group>
+                            <field name="human_size" />
+                            <field name="count_elements" string="Elements" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="page_directories" string="Subdirectories">
+                            <field
+                                name="child_directory_ids"
+                                context="{'default_parent_id': active_id, 'mail_create_nolog': True}"
+                            >
+                                <tree limit="10">
+                                    <field name="name" />
+                                    <field name="count_directories" string="Directories" />
+                                    <field name="count_total_files" string="Files" />
+                                    <field name="human_size" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="page_files" string="Files">
+                            <field
+                                name="file_ids"
+                                context="{'default_directory_id': active_id, 'mail_create_nolog': True}"
+                            >
+                                <tree limit="10">
+                                    <field name="name" />
+                                    <field name="mimetype" />
+                                     <field name="human_size" />
+                                    <field name="write_date" readonly="1" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="page_meta" string="Meta Information">
+                            <group>
+                                <group>
+                                    <field name="create_date" readonly="1" />
+                                    <field name="create_uid" readonly="1" />
+                                </group>
+                                <group>
+                                    <field name="write_date" readonly="1" />
+                                    <field name="write_uid" readonly="1" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_spp_dms_directory_manager_form" model="ir.ui.view">
+        <field name="name">view_spp_dms_directory_manager_form</field>
+        <field name="model">spp.dms.directory</field>
+        <field name="inherit_id" ref="view_spp_dms_directory_form" />
+        <field name="arch" type="xml">
+            <field name="is_root_directory" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_spp_dms_directory" model="ir.actions.act_window">
+        <field name="name">Directories</field>
+        <field name="res_model">spp.dms.directory</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new Directory.
+            </p>
+            <p>
+                Directories can be used to structure and organize
+                files.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_spp_dms_directory"
+        name="Directories"
+        sequence="30"
+        parent="main_menu_spp_dms"
+        action="action_spp_dms_directory"
+    />
+
+    <record id="view_spp_dms_directory_new_form" model="ir.ui.view">
+        <field name="name">view_spp_dms_directory_new_form</field>
+        <field name="model">spp.dms.directory</field>
+        <field name="inherit_id" ref="view_spp_dms_directory_form" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//div[hasclass('oe_button_box')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//group[@name='settings']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//group[@name='data']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//group[@name='data']" position="after">
+                <group>
+                    <group>
+                        <field name="is_root_directory" readonly="1" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_spp_dms_directory_new" model="ir.actions.act_window">
+        <field name="name">New Root Directory</field>
+        <field name="res_model">spp.dms.directory</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_spp_dms_directory_new_form" />
+    </record>
+
+</odoo>

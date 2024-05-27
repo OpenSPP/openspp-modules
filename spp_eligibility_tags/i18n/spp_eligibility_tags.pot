@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,6 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: spp_eligibility_tags
+#. odoo-python
 #: code:addons/spp_eligibility_tags/wizard/create_program_wizard.py:0
 #, python-format
 msgid "A tag is needed for this eligibility criteria type."
@@ -51,21 +52,8 @@ msgid "Created on"
 msgstr ""
 
 #. module: spp_eligibility_tags
-#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_eligibility_manager__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_create_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__dms_directory_ids
-msgid "DMS Directories"
-msgstr ""
-
-#. module: spp_eligibility_tags
 #: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__display_name
 msgid "Display Name"
-msgstr ""
-
-#. module: spp_eligibility_tags
-#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_create_wizard__custom_domain
-#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__custom_domain
-msgid "Domain"
 msgstr ""
 
 #. module: spp_eligibility_tags
@@ -90,14 +78,10 @@ msgid "ID"
 msgstr ""
 
 #. module: spp_eligibility_tags
+#. odoo-python
 #: code:addons/spp_eligibility_tags/models/eligibility_manager.py:0
 #, python-format
 msgid "Import finished."
-msgstr ""
-
-#. module: spp_eligibility_tags
-#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: spp_eligibility_tags
@@ -162,6 +146,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_create_wizard__tags_id
 #: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__tags_id
 msgid "Tags"
+msgstr ""
+
+#. module: spp_eligibility_tags
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_create_wizard__custom_domain
+#: model:ir.model.fields,field_description:spp_eligibility_tags.field_g2p_program_membership_manager_tags__custom_domain
+msgid "Tags Domain"
 msgstr ""
 
 #. module: spp_eligibility_tags

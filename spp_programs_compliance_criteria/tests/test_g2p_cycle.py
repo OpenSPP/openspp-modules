@@ -22,6 +22,7 @@ class TestG2pCycle(common.Common):
         action = cls._test.create_program()
         cls.program = cls.env["g2p.program"].browse(action["res_id"])
 
+    @classmethod
     def _create_individual(self, vals):
         vals.update(
             {

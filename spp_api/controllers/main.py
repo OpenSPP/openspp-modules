@@ -12,7 +12,7 @@ from odoo import http
 from odoo.http import request
 from odoo.tools import date_utils
 
-from odoo.addons.web.controllers.main import ensure_db
+from odoo.addons.web.controllers.utils import ensure_db
 
 from ..config import BASE_API
 

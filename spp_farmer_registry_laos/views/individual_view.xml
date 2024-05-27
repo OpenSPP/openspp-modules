@@ -11,6 +11,7 @@
                             type="action"
                             class="oe_stat_button"
                             icon="fa-ban"
+                            title="Disable Registrant"
                             name="%(g2p_registry_base.action_disable_registrant_wizard)d"
                             invisible="disabled"
                         >
@@ -22,6 +23,7 @@
                             type="object"
                             class="oe_stat_button"
                             icon="fa-check"
+                            title="Enable Registrant"
                             name="enable_registrant"
                             invisible="not disabled"
                         >
