@@ -11,6 +11,8 @@ spp_programs_stock_location_admin,SPP Entitlement Stock Location Admin Access,st
 spp_programs_stock_route_admin,SPP Entitlement Stock Location Route Admin Access,stock.model_stock_route,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_programs_stock_move_admin,SPP Entitlement Stock Move Admin Access,stock.model_stock_move,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_programs_stock_rule_admin,SPP Entitlement Stock Rule Admin Access,stock.model_stock_rule,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_multi_inkind_entitlement_approval_wizard_admin_access,Multi Inkind Entitlement Approval Wizard Admin Access,spp_programs.model_spp_multi_inkind_entitlement_approval_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_multi_inkind_entitlement_approval_admin_access,Multi Inkind Entitlement Approval Admin Access,spp_programs.model_spp_multi_inkind_entitlement_approval,g2p_registry_base.group_g2p_admin,1,1,1,1
 
 spp_programs_entitlement_inkind_registrar,SPP Entitlement In-Kind Registrar Access,spp_programs.model_g2p_entitlement_inkind,g2p_registry_base.group_g2p_registrar,1,1,1,1
 g2p_entitlement_inkind_report_wizard_registrar,SPP Entitlement In-Kind Report Wizard Registrar Access,spp_programs.model_g2p_entitlement_inkind_report_wizard,g2p_registry_base.group_g2p_registrar,1,1,1,1

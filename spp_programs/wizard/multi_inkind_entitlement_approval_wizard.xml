@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="multi_inkind_entitlement_approval_wizard_form_view" model="ir.ui.view">
+        <field name="name">multi_inkind_entitlement_approval_wizard_form_view</field>
+        <field name="model">spp.multi.inkind.entitlement.approval.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="entitlement_ids" nolabel="1" colspan="2">
+                        <tree create="0" editable="bottom">
+                            <field name="entitlement_id" invisible="1" />
+                            <field name="partner_id" readonly="1" />
+                            <field name="code" readonly="1" />
+                            <field name="product_id" />
+                            <field name="qty" />
+                            <field name="unit_price" />
+                            <field name="total_amount" />
+                            <field name="currency_id" invisible="1" />
+                            <field
+                                name="state"
+                                decoration-secondary="state=='New'"
+                                decoration-primary="state=='Okay'"
+                                decoration-success="state=='Approved'"
+                                decoration-danger="state=='Conflict'"
+                                widget="badge"
+                                readonly="1"
+                            />
+                        </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <button
+                        name="approve_entitlements"
+                        string="Approve"
+                        type="object"
+                        class="oe_highlight"
+                        title="Approve entitlement"
+                    />
+                    <button
+                        name="close_wizard"
+                        string="Cancel"
+                        type="object"
+                        class="btn-secondary"
+                        title="Cancel"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
