@@ -75,7 +75,12 @@ jobs:
       - name: Copy OpenG2P modules to addons directory
         # exclude openg2p-program/odoo-addon-base_rest as it is not migrated to 17.0
         run: |
+
           rm -rf openg2p-program/*rest_api* openg2p-program/g2p_documents
+          rm -rf openg2p-registry/*/tests
+          rm -rf openg2p-program/*/tests
+          rm -rf openg2p-security/*/tests
+          rm -rf openg2p-vci/*/tests
           rm -rf odoo-modules/muk_web_enterprise_theme
           cp -r openg2p-registry/* ${ADDONS_DIR}/
           cat test-requirements.txt >> spp-test-requirements.txt
