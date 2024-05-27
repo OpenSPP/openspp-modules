@@ -1358,8 +1358,9 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__6
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__6
+#: model:spp.farm.species,name:spp_farmer_registry_laos.cucumber_farm_species
 msgid "Cucumber"
-msgstr ""
+msgstr "ໝາກແຕງ"
 
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_g2p_program_membership__statistics_cycle_id
@@ -2865,24 +2866,8 @@ msgid "March"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
-#: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_g2p_program_membership__ii_marital_status
-#: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_g2p_program_membership__marital_status
-#: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_res_partner__ii_marital_status
-#: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_res_partner__marital_status
-#: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_res_users__ii_marital_status
-#: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_res_users__marital_status
-#: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_create_event_gen_info_wizard__marital_status
-#: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_gen_info__marital_status
-msgid "Marital Status"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__marital_status__1
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__marital_status__1
-msgid "Married"
-msgstr "ແຕ່ງງານ"
-
-#. module: spp_farmer_registry_base
 #: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__res_partner__marital_status__married
 msgid "Married"
 msgstr "ແຕ່ງງານ"
@@ -4516,12 +4501,6 @@ msgid "Remarks"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
-#: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__2
-#: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__2
-msgid "Rice"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_g2p_program_membership__vi_crops_in_irrigated_land
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_res_partner__vi_crops_in_irrigated_land
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_res_users__vi_crops_in_irrigated_land
@@ -5763,8 +5742,3 @@ msgstr ""
 #: model:spp.farm.species,name:spp_farmer_registry_laos.rice_farm_species
 msgid "Rice"
 msgstr "ເຂົ້າ"
-
-#. module: spp_farmer_registry_laos
-#: model:spp.farm.species,name:spp_farmer_registry_laos.cucumber_farm_species
-msgid "Cucumber"
-msgstr "ໝາກແຕງ"
