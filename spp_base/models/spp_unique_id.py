@@ -23,6 +23,7 @@ def _generate_unique_id():
 
 class SppUniqueId(models.AbstractModel):
     _name = "spp.unique.id"
+    _description = "Unique ID"
 
     spp_id = fields.Char(
         string="Unique ID",

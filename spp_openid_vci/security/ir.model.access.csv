@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ir_attachment_crypto_admin_access,IR Attachment Crypto Admin Access,base.model_ir_attachment,g2p_encryption.crypto_admin,1,1,1,1
+ir_attachment_admin_access,IR Attachment Admin Access,base.model_ir_attachment,g2p_registry_base.group_g2p_admin,1,1,1,1
+ir_attachment_registrar_access,IR Attachment Registrar Access,base.model_ir_attachment,g2p_registry_base.group_g2p_registrar,1,1,1,1
+
+spp_issue_card_wizard_crypto_admin,Issue Card Wizard Crypto Admin Access,spp_openid_vci.model_spp_issue_card_wizard,g2p_encryption.crypto_admin,1,1,1,1
+spp_issue_card_wizard_admin,Issue Card Wizard Admin Access,spp_openid_vci.model_spp_issue_card_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_issue_card_wizard_registrar,Issue Card Wizard Registrar Access,spp_openid_vci.model_spp_issue_card_wizard,g2p_registry_base.group_g2p_registrar,1,1,1,0

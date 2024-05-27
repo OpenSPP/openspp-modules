@@ -7,7 +7,7 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "development_status": "Production/Stable",
-    "maintainers": ["jeremi", "gonzalesedwin1123"],
+    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "g2p_registry_membership",
         "spp_programs",

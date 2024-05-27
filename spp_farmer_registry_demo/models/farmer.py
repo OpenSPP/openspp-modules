@@ -11,7 +11,7 @@ class Farmer(models.Model):
         ]
     )
     highest_education_level = fields.Selection(
-        [
+        selection_add=[
             ("none", "None"),
             ("primary", "Primary"),
             ("secondary", "Secondary"),

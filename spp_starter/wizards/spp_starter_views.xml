@@ -19,13 +19,21 @@
                         </div>
                         <label for="org_name" string="Organization Name" />
                         <br />
-                        <field name="org_name" nolabel="1" placeholder="Enter your organization name." />
+                        <field
+                            name="org_name"
+                            nolabel="1"
+                            placeholder="Enter your organization name."
+                            readonly="state != '0'"
+                            required="state == '0'"
+                        />
                         <label for="org_address" string="Organization's Address" />
                         <br />
                         <field
                             name="org_address"
                             nolabel="1"
                             placeholder="Enter the organization's address."
+                            readonly="state != '0'"
+                            required="state == '0'"
                         />
                         <label for="org_phone" string="Organization's Phone Number" />
                         <br />
@@ -33,6 +41,8 @@
                             name="org_phone"
                             nolabel="1"
                             placeholder="Enter the organization's phone number."
+                            readonly="state != '0'"
+                            required="state == '0'"
                         />
                         <label for="org_currency_id" string="Select the organization's operating currency." />
                         <br />
@@ -40,6 +50,8 @@
                             name="org_currency_id"
                             nolabel="1"
                             options="{'no_create': True, 'no_open': True}"
+                            readonly="state != '0'"
+                            required="state == '0'"
                         />
                     </div>
                     <div invisible="state != '1'">
@@ -58,6 +70,8 @@
                             nolabel="1"
                             widget="radio"
                             options="{'horizontal': true}"
+                            readonly="state != '1'"
+                            required="state == '1'"
                         />
                         <br />
                         <label
@@ -70,6 +84,8 @@
                             nolabel="1"
                             widget="radio"
                             options="{'horizontal': true}"
+                            readonly="state != '1'"
+                            required="state == '1'"
                         />
                         <br />
                         <label for="id_management" string="Would you like to issue functional IDs?" />
@@ -79,6 +95,8 @@
                             nolabel="1"
                             widget="radio"
                             options="{'horizontal': true}"
+                            readonly="state != '1'"
+                            required="state == '1'"
                         />
                     </div>
                     <div invisible="state != '2'">
@@ -100,6 +118,8 @@
                             nolabel="1"
                             widget="radio"
                             options="{'horizontal': true}"
+                            readonly="state != '2'"
+                            required="state == '2'"
                         />
                     </div>
                     <div invisible="state != '3'">
@@ -118,6 +138,8 @@
                             nolabel="1"
                             widget="radio"
                             options="{'horizontal': true}"
+                            readonly="state != '3'"
+                            required="state == '3'"
                         />
                         <br />
                         <label for="bank_details_needed" string="Do you need to capture bank details?" />
@@ -127,6 +149,8 @@
                             nolabel="1"
                             widget="radio"
                             options="{'horizontal': true}"
+                            readonly="state != '3'"
+                            required="state == '3'"
                         />
                     </div>
                     <div invisible="state != '4'">
@@ -148,6 +172,8 @@
                             nolabel="1"
                             widget="radio"
                             options="{'horizontal': true}"
+                            readonly="state != '4'"
+                            required="state == '4'"
                         />
                     </div>
                     <div invisible="state != '5'">
@@ -169,6 +195,8 @@
                             nolabel="1"
                             widget="radio"
                             options="{'horizontal': true}"
+                            readonly="state != '5'"
+                            required="state == '5'"
                         />
                     </div>
                 </sheet>

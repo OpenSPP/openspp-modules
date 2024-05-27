@@ -1,0 +1,1808 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_farmer_registry_demo
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_generate_farmer_data_form
+msgid ""
+"<span class=\"o_stat_text\">Generate</span>\n"
+"                                <span class=\"o_stat_text\">Sample Data</span>"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_asset__active_area
+msgid "Active Area"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_asset__active_volume
+msgid "Active Volume"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Additional Name"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Address Coordinates"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__adjacent_water_body
+msgid "Adjacent water body"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model,name:spp_farmer_registry_demo.model_spp_farm_activity
+msgid "Agricultural Activities"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__cultivation_production_system__agroforestry
+msgid "Agroforestry"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_animal_dip
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_animal_dip
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_animal_dip
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_animal_dip
+msgid "Animal Dip"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_animal_crush
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_animal_crush
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_animal_crush
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_animal_crush
+msgid "Animal crush"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_power_source__animal_drought
+msgid "Animal drought"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__livestock_assisted_reproductive_health_technology_animal_horm
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__livestock_assisted_reproductive_health_technology_animal_horm
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__livestock_assisted_reproductive_health_technology_animal_horm
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__livestock_assisted_reproductive_health_technology_animal_horm
+msgid "Animal hormones"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_apriary
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_apriary
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_apriary
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_apriary
+msgid "Apriary"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Aquaculture"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_activity__aquaculture_production_system
+msgid "Aquaculture Production system"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__aquaculture_sale
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__aquaculture_sale
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__aquaculture_sale
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__aquaculture_sale
+msgid "Aquaculture for sale?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__aquaculture_subsistence
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__aquaculture_subsistence
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__aquaculture_subsistence
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__aquaculture_subsistence
+msgid "Aquaculture for subsistence?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__aquaponics
+msgid "Aquaponics"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__aquaculture_beneficiary_esp
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__aquaculture_beneficiary_esp
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__aquaculture_beneficiary_esp
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__aquaculture_beneficiary_esp
+msgid ""
+"Are you a beneficiary of the government of Kenya's economic stimulus "
+"programme (ESP)?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__livestock_assisted_reproductive_health_technology_ai
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__livestock_assisted_reproductive_health_technology_ai
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__livestock_assisted_reproductive_health_technology_ai
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__livestock_assisted_reproductive_health_technology_ai
+msgid "Artificial Insemination (AI)"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__basin
+msgid "Basin"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_bee_house
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_bee_house
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_bee_house
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_bee_house
+msgid "Bee House"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_biogas_production
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_biogas_production
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_biogas_production
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_biogas_production
+msgid "Biogas production"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__aquaculture_type__brackish
+msgid "Brackish"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__bucket
+msgid "Bucket"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_business_partners
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_business_partners
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_business_partners
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_business_partners
+msgid "Business partners"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__cages
+msgid "Cages"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_cambered_beds
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_cambered_beds
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_cambered_beds
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_cambered_beds
+msgid "Cambered beds"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__cash_transfer
+msgid "Cash transfer"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__casual_labor_elsewhere
+msgid "Casual labor elsewhere"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_cattle_boma
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_cattle_boma
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_cattle_boma
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_cattle_boma
+msgid "Cattle Boma"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__centre_pivot
+msgid "Centre Pivot"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__res_partner__highest_education_level__certificate
+msgid "Certificate"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_activity__cultivation_chemical_interventions
+msgid "Chemical interventions"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.actions.act_window,help:spp_farmer_registry_demo.action_generate_farmer_data
+msgid "Click the create button to enter the new record."
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_commercial_bank
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_commercial_bank
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_commercial_bank
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_commercial_bank
+msgid "Commercial Bank"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_common_interest_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_common_interest_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_common_interest_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_common_interest_group
+msgid "Common Interest Group"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__communal_grazing
+msgid "Communal Grazing"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_own_equipment__community
+msgid "Community"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_community_based_organization
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_community_based_organization
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_community_based_organization
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_community_based_organization
+msgid "Community Based Organization"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_type_of_irrigation_project__community_scheme
+msgid "Community scheme"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_conservation_agriculture
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_conservation_agriculture
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_conservation_agriculture
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_conservation_agriculture
+msgid "Conservation agriculture"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model,name:spp_farmer_registry_demo.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_contour_ploughing
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_contour_ploughing
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_contour_ploughing
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_contour_ploughing
+msgid "Contour ploughing/Ridging"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_cooperatives
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_cooperatives
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_cooperatives
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_cooperatives
+msgid "Cooperatives"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_extension_service_provider__county_government
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_implementing_body__county_government
+msgid "County Government"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Crop Agriculture"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_crop_rotation
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_crop_rotation
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_crop_rotation
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_crop_rotation
+msgid "Crop Rotation"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_activity__cultivation_production_system
+msgid "Cultivation Production system"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_cut_off_drains
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_cut_off_drains
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_cut_off_drains
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_cut_off_drains
+msgid "Cut-off drains"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Date of Birth"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_deep_ripping
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_deep_ripping
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_deep_ripping
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_deep_ripping
+msgid "Deep ripping"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__res_partner__highest_education_level__diploma
+msgid "Diploma"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__livestock_animal_health_services_disease_control
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__livestock_animal_health_services_disease_control
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__livestock_animal_health_services_disease_control
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__livestock_animal_health_services_disease_control
+msgid "Disease control / curative measures"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Do you belong to any of the following types of groups?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__another_farm
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__another_farm
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__another_farm
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__another_farm
+msgid "Do you have another farm?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Do you have formal training in agriculture?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_crop_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_crop_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_crop_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_crop_insurance
+msgid "Do you insure your crops?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_farm_building_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_farm_building_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_farm_building_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_farm_building_insurance
+msgid "Do you insure your farm buildings and other assets?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_fish_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_fish_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_fish_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_fish_insurance
+msgid "Do you insure your fish?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_livestock_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_livestock_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_livestock_insurance
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_livestock_insurance
+msgid "Do you insure your livestock?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_written_farm_records
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_written_farm_records
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_written_farm_records
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_written_farm_records
+msgid "Do you keep written farm records?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_undertake_irrigation
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_undertake_irrigation
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_undertake_irrigation
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_undertake_irrigation
+msgid "Do you undertake irrigation?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__livestock_certified_pasture
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__livestock_certified_pasture
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__livestock_certified_pasture
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__livestock_certified_pasture
+msgid "Do you use certified pasture & fodder seeds?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_use_lime
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_use_lime
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_use_lime
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_use_lime
+msgid "Do you use lime on your soil?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__livestock_fertilizer_for_fodder
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__livestock_fertilizer_for_fodder
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__livestock_fertilizer_for_fodder
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__livestock_fertilizer_for_fodder
+msgid "Do you utilize fertilizer for fodder and pasture?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__aquaculture_utilize_fertilizer
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__aquaculture_utilize_fertilizer
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__aquaculture_utilize_fertilizer
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__aquaculture_utilize_fertilizer
+msgid "Do you utilize fertilizer in the ponds?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__drip
+msgid "Drip"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_mode_of_extension_service__e-extension
+msgid "E-Extension"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__livestock_assisted_reproductive_health_technology_embryo_transf
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__livestock_assisted_reproductive_health_technology_embryo_transf
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__livestock_assisted_reproductive_health_technology_embryo_transf
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__livestock_assisted_reproductive_health_technology_embryo_transf
+msgid "Embryo Transfer"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "End date"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Enterprises"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__ke_access_cities_reg
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__ke_access_cities_reg
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__ke_access_cities_reg
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_land_record__ke_access_cities_reg
+msgid "Estimated cumulative travel time/cost to the nearest regional city"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_source_of_information_on_good_agricultu__extension_services
+msgid "Extension services"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__aquaculture_production_level__extensive
+msgid "Extensive"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_mode_of_extension_service__face-to-face
+msgid "Face-to-face"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_faith_based_organization
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_faith_based_organization
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_faith_based_organization
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_faith_based_organization
+msgid "Faith Based Organization"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_family
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_family
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_family
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_family
+msgid "Family"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Family Name"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_labor_source__family_members
+msgid "Family members"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model,name:spp_farmer_registry_demo.model_spp_farm_asset
+msgid "Farm Assets and Technology"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model,name:spp_farmer_registry_demo.model_spp_farm_details
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Farm Details"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Farm Land"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Farmer"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farmer_marital_status
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farmer_marital_status
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farmer_marital_status
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farmer__farmer_marital_status
+msgid "Farmer Marital Status"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_farmer_organization
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_farmer_organization
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_farmer_organization
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_farmer_organization
+msgid "Farmer Organization"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_mode_of_extension_service__farmer_field_schools
+msgid "Farmer field schools"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_feed_store
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_feed_store
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_feed_store
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_feed_store
+msgid "Feed Store"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_activity__livestock_feed_items
+msgid "Feed items"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__feedlots
+msgid "Feedlots"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_activity__cultivation_fertilizer_interventions
+msgid "Fertilizer interventions"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__aquaculture_main_inputs_fertilizers
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__aquaculture_main_inputs_fertilizers
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__aquaculture_main_inputs_fertilizers
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__aquaculture_main_inputs_fertilizers
+msgid "Fertilizers"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Financials and Services"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__aquaculture_main_inputs_fingerlings
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__aquaculture_main_inputs_fingerlings
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__aquaculture_main_inputs_fingerlings
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__aquaculture_main_inputs_fingerlings
+msgid "Fingerlings"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__flooding
+msgid "Flooding"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "For irrigation schemes, what is the implementing body?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_labor_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_labor_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_labor_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_labor_source
+msgid "For labor, what is the main source?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__free_range
+msgid "Free Range"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__aquaculture_type__freshwater
+msgid "Freshwater"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_scheme_membership__full_member
+msgid "Full member"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__furrow
+msgid "Furrow"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__furrow_canal
+msgid "Furrow Canal"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_general_store
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_general_store
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_general_store
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_general_store
+msgid "General Store"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model,name:spp_farmer_registry_demo.model_spp_generate_farmer_data
+msgid "Generate Farm Data"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.actions.act_window,name:spp_farmer_registry_demo.action_generate_farmer_data
+#: model_terms:ir.actions.act_window,help:spp_farmer_registry_demo.action_generate_farmer_data
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_generate_farmer_data_form
+msgid "Generate Farmer Data"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.ui.menu,name:spp_farmer_registry_demo.menu_generate_farmer_data
+msgid "Generate Sample Farmer Data"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__state__generate
+msgid "Generated"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Given Name"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_grass_strips
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_grass_strips
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_grass_strips
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_grass_strips
+msgid "Grass strips"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_green_cover_crop
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_green_cover_crop
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_green_cover_crop
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_green_cover_crop
+msgid "Green cover crop"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_green_house
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_green_house
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_green_house
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_green_house
+msgid "Green house"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__cultivation_production_system__greenhouse
+msgid "Greenhouse"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_power_source__grid_electricity
+msgid "Grid electricity"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_mode_of_extension_service__group_demonstrations
+msgid "Group demonstrations"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__growing_crops_sale
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__growing_crops_sale
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__growing_crops_sale
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__growing_crops_sale
+msgid "Growing crops for sale?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__growing_crops_subsistence
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__growing_crops_subsistence
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__growing_crops_subsistence
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__growing_crops_subsistence
+msgid "Growing crops for subsistence?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__harvested_water
+msgid "Harvested water"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_hatchery
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_hatchery
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_hatchery
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_hatchery
+msgid "Hatchery"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_subsidized_fertilizer
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_subsidized_fertilizer
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_subsidized_fertilizer
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_subsidized_fertilizer
+msgid "Have you benefited from Govt. Subsidized fertilizer?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_soil_testing
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_soil_testing
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_soil_testing
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_soil_testing
+msgid "Have you done soil testing in the last 3 years?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_hay_bailers
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_hay_bailers
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_hay_bailers
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_hay_bailers
+msgid "Hay Bailers"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_hay_store
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_hay_store
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_hay_store
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_hay_store
+msgid "Hay Store"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__highest_education_level
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__highest_education_level
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__highest_education_level
+msgid "Highest Educational Level"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_own_equipment__hirer
+msgid "Hirer"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__household_size
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__household_size
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__household_size
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Household Size"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__lease_term
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__lease_term
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__lease_term
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__lease_term
+msgid "If leased (lease term in years)"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_implementing_body__implementing_agents
+msgid "Implementing Agents"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_implementing_body
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_implementing_body
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_implementing_body
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_implementing_body
+msgid "Implementing body"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_asset__inactive_area
+msgid "Inactive Area"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_asset__inactive_volume
+msgid "Inactive Volume"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_integrated_pest_management
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_integrated_pest_management
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_integrated_pest_management
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_integrated_pest_management
+msgid "Integrated pest management"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__aquaculture_production_level__intensive
+msgid "Intensive"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_source_of_information_on_good_agricultu__internet
+msgid "Internet"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__cultivation_water_source__irrigated
+msgid "Irrigated"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_irrigation_scheme_membership
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_irrigation_scheme_membership
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_irrigation_scheme_membership
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_irrigation_scheme_membership
+msgid "Irrigation scheme membership"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__locale__en_ke
+msgid "Kenya (English)"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__locale__sw_ke
+msgid "Kenya (Swahili)"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__lease_agreement_number
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__lease_agreement_number
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__lease_agreement_number
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__lease_agreement_number
+msgid "LR/Cert. No/Agreement no"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model,name:spp_farmer_registry_demo.model_spp_land_record
+msgid "Land Record Details"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_irrigation_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_irrigation_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_irrigation_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_irrigation_source
+msgid "Land Water Management Irrigation Source"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Land and Water Management"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__locale__lo_la
+msgid "Laos (Lao)"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Livestock"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_activity__livestock_production_system
+msgid "Livestock Production system"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_loading_ramp
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_loading_ramp
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_loading_ramp
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_loading_ramp
+msgid "Loading Ramp"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__locale
+msgid "Locale"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_generate_farmer_data_form
+msgid "Locale..."
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_generate_farmer_data_form
+msgid "Locale:"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__locality_water_supply
+msgid "Locality water supply"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__man_made_dam
+msgid "Man made dam"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_power_source__manual_labor
+msgid "Manual labor"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__aquaculture_main_inputs_feeds
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__aquaculture_main_inputs_feeds
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__aquaculture_main_inputs_feeds
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__aquaculture_main_inputs_feeds
+msgid "Manufactured feeds"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_manuring_composting
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_manuring_composting
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_manuring_composting
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_manuring_composting
+msgid "Manuring/Composting"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__aquaculture_type__marine
+msgid "Marine"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__marital_status
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__marital_status
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__marital_status
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Marital Status"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_marketing_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_marketing_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_marketing_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_marketing_group
+msgid "Marketing Group"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__res_partner__marital_status__married_monogamous
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farmer__farmer_marital_status__married_monogamous
+msgid "Married Monogamous"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__res_partner__marital_status__married_polygamous
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farmer__farmer_marital_status__married_polygamous
+msgid "Married Polygamous"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Member Name"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Members"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_micro_finance_institutions
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_micro_finance_institutions
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_micro_finance_institutions
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_micro_finance_institutions
+msgid "Micro-finance institutions"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_milking_parlor
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_milking_parlor
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_milking_parlor
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_milking_parlor
+msgid "Milking parlor"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_minimum_tillage
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_minimum_tillage
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_minimum_tillage
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_minimum_tillage
+msgid "Minimum Tillage"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__cultivation_production_system__mixed-cropping
+msgid "Mixed-cropping"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_mobile_money_saving_loans
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_mobile_money_saving_loans
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_mobile_money_saving_loans
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_mobile_money_saving_loans
+msgid "Mobile Money saving & loans"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_modern_granary
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_modern_granary
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_modern_granary
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_modern_granary
+msgid "Modern Granary"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__cultivation_production_system__mono-cropping
+msgid "Mono-cropping"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_power_source__motorized
+msgid "Motorized (fossil fuels)"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_mulching
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_mulching
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_mulching
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_mulching
+msgid "Mulching"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_extension_service_provider__ngo
+msgid "NGO"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__name
+msgid "Name"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_generate_farmer_data_form
+msgid "Name..."
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_generate_farmer_data_form
+msgid "Name:"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_implementing_body__national_government
+msgid "National Government"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_extension_service_provider__national_government
+msgid "National Govt."
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_implementing_body__national_govt_ministry
+msgid "National Govt. Ministry"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__natural_rivers_and_streams
+msgid "Natural rivers and streams"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_source_of_information_on_good_agricultu__newspaper
+msgid "Newspaper"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__non-farm_trading
+msgid "Non-farm trading"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_non_governmental_donors
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_non_governmental_donors
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_non_governmental_donors
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_non_governmental_donors
+msgid "Non-governmental donors"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__res_partner__highest_education_level__none
+msgid "None"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_asset__number_active
+msgid "Number Active"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_asset__number_inactive
+msgid "Number Inactive"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__num_groups
+msgid "Number of Groups"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_generate_farmer_data_form
+msgid "Number of Groups:"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_activity__aquaculture_number_of_fingerlings
+msgid "Number of fingerlings"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_generate_farmer_data_form
+msgid "Number of groups..."
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Open Individual Form"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_organic_farming
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_organic_farming
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_organic_farming
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_organic_farming
+msgid "Organic farming"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__other
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__other
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_power_source__other
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_extension_service_provider__other
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__other
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_mode_of_extension_service__other
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_implementing_body__other
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__other
+msgid "Other"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_other_money_lenders
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_other_money_lenders
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_other_money_lenders
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_other_money_lenders
+msgid "Other money lenders"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_scheme_membership__out_grower
+msgid "Out grower"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__pastoralism
+msgid "Pastoralism"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_mode_of_extension_service__peer-to-peer
+msgid "Peer-to-Peer"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__pension
+msgid "Pension"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_labor_source__permanent_hired_help
+msgid "Permanent Hired Help"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_individual_form
+msgid "Personal Info"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_individual_form
+msgid "Phone Numbers"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__cultivation_production_system__plantation
+msgid "Plantation"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__ponds
+msgid "Ponds"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__res_partner__highest_education_level__primary
+msgid "Primary"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_extension_service_provider__private
+msgid "Private"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_type_of_irrigation_project__private_on_farm_initiative
+msgid "Private on farm initiative"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_producer_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_producer_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_producer_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_producer_group
+msgid "Producer Group"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Production System"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Production Systems"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_source_of_information_on_good_agricultu__public_gatherings
+msgid "Public gatherings"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_type_of_irrigation_project__public_irrigation_scheme
+msgid "Public irrigation scheme"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__raceways
+msgid "Raceways"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_source_of_information_on_good_agricultu__radio
+msgid "Radio"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__rain
+msgid "Rain"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__cultivation_water_source__rainfed
+msgid "Rainfed"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__ranching
+msgid "Ranching"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__rearing_livestock_sale
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__rearing_livestock_sale
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__rearing_livestock_sale
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__rearing_livestock_sale
+msgid "Rearing livestock for sale?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__rearing_livestock_subsistence
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__rearing_livestock_subsistence
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__rearing_livestock_subsistence
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__rearing_livestock_subsistence
+msgid "Rearing livestock for subsistence?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__recirculating_systems
+msgid "Recirculating Aquaculture Systems"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_source_of_information_on_good_agricultu__relatives
+msgid "Relatives"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__remittances
+msgid "Remittances"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__road_runoff
+msgid "Road runoff"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Role"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__rotational_grazing
+msgid "Rotational Grazing"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__livestock_animal_health_services_routine_vaccination
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__livestock_animal_health_services_routine_vaccination
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__livestock_animal_health_services_routine_vaccination
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__livestock_animal_health_services_routine_vaccination
+msgid "Routine vaccination"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__salary_from_employment_elsewhere
+msgid "Salary from employment elsewhere"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__sale_of_farming_produce
+msgid "Sale of farming produce"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_savings_credit_groups
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_savings_credit_groups
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_savings_credit_groups
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_savings_credit_groups
+msgid "Savings & Credit groups"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__res_partner__highest_education_level__secondary
+msgid "Secondary"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_implementing_body__self
+msgid "Self (Private)"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_self_salary_or_savings
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_self_salary_or_savings
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_self_salary_or_savings
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_self_salary_or_savings
+msgid "Self (Salary or Savings)"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_own_equipment__self
+msgid "Self / Family"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__semi_zero_grazing
+msgid "Semi Zero Grazing"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__aquaculture_production_level__semi-intensive
+msgid "Semi-intensive"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_individual_form
+msgid "Sex"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__shallow_well_or_borehole
+msgid "Shallow well or borehole"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_sick_bay
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_sick_bay
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_sick_bay
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_sick_bay
+msgid "Sick Bay"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_power_source__solar
+msgid "Solar"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_spray_race
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_spray_race
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_spray_race
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_spray_race
+msgid "Spray Race"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__sprinkler
+msgid "Sprinkler"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__locale__si_lk
+msgid "Sri Lanka (Sinhala)"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__locale__ta_lk
+msgid "Sri Lanka (Tamil)"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__state
+msgid "State"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_table_banking_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_table_banking_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_table_banking_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_table_banking_group
+msgid "Table Banking Group"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__tanks
+msgid "Tanks"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Technology and Assets"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_source_of_information_on_good_agricultu__television
+msgid "Television"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model,name:spp_farmer_registry_demo.model_spp_farmer
+msgid "Temporary Model for Farmer"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_labor_source__temporary_hired_help
+msgid "Temporary hired help"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_terracing
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_terracing
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_terracing
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_terracing
+msgid "Terracing"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__res_partner__highest_education_level__tertiary
+msgid "Tertiary"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__tethering
+msgid "Tethering"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_total_irrigated_area
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_total_irrigated_area
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_total_irrigated_area
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_total_irrigated_area
+msgid "Total irrigated area"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_traditional_granary
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_traditional_granary
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_traditional_granary
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_traditional_granary
+msgid "Traditional Granary"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_trash_line
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_trash_line
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_trash_line
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_trash_line
+msgid "Trash line"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__tree_farming
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__tree_farming
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__tree_farming
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__tree_farming
+msgid "Tree farming?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_irrigation_type
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_irrigation_type
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_irrigation_type
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_irrigation_type
+msgid "Type of irrigation"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_type_of_irrigation_project
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_type_of_irrigation_project
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_type_of_irrigation_project
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_type_of_irrigation_project
+msgid "Type of irrigation project"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_type_of_irrigation_project_name
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_type_of_irrigation_project_name
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_type_of_irrigation_project_name
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_type_of_irrigation_project_name
+msgid "Type of irrigation project name"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__res_partner__highest_education_level__university
+msgid "University"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_vulnerable_marginalized_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_vulnerable_marginalized_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_vulnerable_marginalized_group
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_vulnerable_marginalized_group
+msgid "Vulnerable/ Marginalized Group"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__aquaculture_type
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__aquaculture_type
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__aquaculture_type
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__aquaculture_type
+msgid "Water Body Type"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_water_harvesting
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_water_harvesting
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_water_harvesting
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_water_harvesting
+msgid "Water harvesting"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__water_pan
+msgid "Water pan"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_activity__cultivation_water_source
+msgid "Water source"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__water_trucking
+msgid "Water trucking"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_power_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_power_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_power_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_power_source
+msgid "What are the sources of power for farm activities?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "What are your main inputs?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "What farm structures do you have?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_mode_of_extension_service
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_mode_of_extension_service
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_mode_of_extension_service
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_mode_of_extension_service
+msgid "What is the mode of extension service that you receive?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "What is the total area under irrigation?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_main_extension_service_provider
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_main_extension_service_provider
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_main_extension_service_provider
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_main_extension_service_provider
+msgid "What is your main extension service provider?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_main_income_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_main_income_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_main_income_source
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_main_income_source
+msgid "What is your main source of income by priority?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_main_source_of_information_on_good_agricultu
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_main_source_of_information_on_good_agricultu
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_main_source_of_information_on_good_agricultu
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_main_source_of_information_on_good_agricultu
+msgid ""
+"What is your main source of information on good agricultural practices "
+"(GAP)?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "What is your operational irrigation scheme membership?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__aquaculture_production_level
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__aquaculture_production_level
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__aquaculture_production_level
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__aquaculture_production_level
+msgid "What is your production level?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_percentage_of_income_from_farming
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_percentage_of_income_from_farming
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_percentage_of_income_from_farming
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_percentage_of_income_from_farming
+msgid "What percentage of your income comes from farming activities?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid ""
+"What sustainable land and environmental management practices do you carry "
+"out?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid ""
+"Where do you access financial / credit services to facilitate your farming "
+"operations?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Which Animal health services do you use?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Which assisted reproductive health technology do you use?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_own_equipment
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_own_equipment
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_own_equipment
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_own_equipment
+msgid "Who Owns Most Of The Frequently Used Equipment?"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_power_source__wind
+msgid "Wind"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_zai_pits
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_zai_pits
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_zai_pits
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_zai_pits
+msgid "Zai pits"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__zero_grazing
+msgid "Zero Grazing"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_zero_grazing_unit
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_zero_grazing_unit
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_zero_grazing_unit
+#: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_zero_grazing_unit
+msgid "Zero Grazing Unit"
+msgstr ""

@@ -62,6 +62,7 @@
                         type="object"
                         class="btn_warning"
                         icon="fa-refresh"
+                        title="Refresh Page"
                         string="Refresh"
                     />
                 </div>

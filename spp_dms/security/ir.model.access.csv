@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_dms_directory_admin,DMS Directory Admin Access,spp_dms.model_spp_dms_directory,spp_dms.group_spp_dms_manager,1,1,1,1
+spp_dms_file_admin,DMS File Admin Access,spp_dms.model_spp_dms_file,spp_dms.group_spp_dms_manager,1,1,1,1
+spp_dms_category_admin,DMS Category Admin Access,spp_dms.model_spp_dms_category,spp_dms.group_spp_dms_manager,1,1,1,1
+
+spp_dms_directory_user,DMS Directory User Access,spp_dms.model_spp_dms_directory,spp_dms.group_spp_dms_user,1,0,0,0
+spp_dms_file_user,DMS File User Access,spp_dms.model_spp_dms_file,spp_dms.group_spp_dms_user,1,0,0,0
+spp_dms_category_user,DMS Category User Access,spp_dms.model_spp_dms_category,spp_dms.group_spp_dms_user,1,0,0,0

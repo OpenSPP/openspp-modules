@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_encryption
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_encryption
+#: model_terms:ir.ui.view,arch_db:spp_encryption.view_encryption_provider_form
+msgid "Create Jwcrypto Key"
+msgstr ""
+
+#. module: spp_encryption
+#: model:ir.model,name:spp_encryption.model_g2p_encryption_provider
+msgid "G2P Encryption Provider"
+msgstr ""
+
+#. module: spp_encryption
+#: model:ir.model.fields.selection,name:spp_encryption.selection__g2p_encryption_provider__type__jwcrypto
+msgid "JWCrypto"
+msgstr ""
+
+#. module: spp_encryption
+#: model:ir.model.fields,help:spp_encryption.field_g2p_encryption_provider__jwcrypto_key
+msgid ""
+"JWK key in JSON format for encryption, decryption, signing, and verification"
+msgstr ""
+
+#. module: spp_encryption
+#: model:ir.model.fields,field_description:spp_encryption.field_g2p_encryption_provider__jwcrypto_key
+msgid "Jwcrypto Key"
+msgstr ""
+
+#. module: spp_encryption
+#: model:ir.model.fields,field_description:spp_encryption.field_g2p_encryption_provider__type
+msgid "Type"
+msgstr ""
+
+#. module: spp_encryption
+#: model_terms:ir.ui.view,arch_db:spp_encryption.view_encryption_provider_form
+msgid "Update Jwcrypto Key"
+msgstr ""

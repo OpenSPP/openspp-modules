@@ -6,7 +6,7 @@ from odoo import api, fields, models
 class OpenSPPGroup(models.Model):
     _inherit = "res.partner"
 
-    grp_is_created_from_crvs = fields.Boolean("Imported from CRVS", store=True)
+    grp_is_created_from_crvs = fields.Boolean("Group Imported from CRVS", store=True)
 
     no_of_child_under_12_months = fields.Integer(
         "Number of child under 12 months",

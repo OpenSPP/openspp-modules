@@ -33,11 +33,9 @@ spp_change_request_g2p_phone_number_validator,G2P Phone Number CR Validator Acce
 spp_change_request_g2p_reg_id_validator,G2P Registrant ID CR Validator Access,g2p_registry_base.model_g2p_reg_id,spp_change_request.group_spp_change_request_validator,1,1,1,0
 spp_change_request_cancel_wizard_validator,Change Request Cancel Validator Access,spp_change_request.model_spp_change_request_cancel_wizard,spp_change_request.group_spp_change_request_validator,1,1,1,1
 
-spp_dms_storage_validator,SPP DMS Storage Validator Access,dms.model_dms_storage,spp_change_request.group_spp_change_request_validator,1,0,0,0
-spp_dms_directory_validator,SPP DMS Directory Validator Access,dms.model_dms_directory,spp_change_request.group_spp_change_request_validator,1,0,0,0
-spp_dms_category_validator,SPP DMS Category Validator Access,dms.model_dms_category,spp_change_request.group_spp_change_request_validator,1,0,0,0
-spp_dms_tag_validator,SPP DMS Tag Validator Access,dms.model_dms_tag,spp_change_request.group_spp_change_request_validator,1,0,0,0
-spp_dms_file_validator,SPP DMS File Validator Access,dms.model_dms_file,spp_change_request.group_spp_change_request_validator,1,0,0,0
+spp_dms_directory_validator,SPP DMS Directory Validator Access,spp_dms.model_spp_dms_directory,spp_change_request.group_spp_change_request_validator,1,0,0,0
+spp_dms_category_validator,SPP DMS Category Validator Access,spp_dms.model_spp_dms_category,spp_change_request.group_spp_change_request_validator,1,0,0,0
+spp_dms_file_validator,SPP DMS File Validator Access,spp_dms.model_spp_dms_file,spp_change_request.group_spp_change_request_validator,1,0,0,0
 
 spp_res_partner_validator,SPP Contacts Validator Access,base.model_res_partner,spp_change_request.group_spp_change_request_validator,1,1,1,0
 spp_ir_model_validator,SPP IR Model Validator Access,base.model_ir_model,spp_change_request.group_spp_change_request_validator,1,0,0,0
@@ -60,11 +58,9 @@ spp_change_request_g2p_phone_number_hq_validator,G2P Phone Number CR HQ Validato
 spp_change_request_g2p_reg_id_hq_validator,G2P Registrant ID CR HQ Validator Access,g2p_registry_base.model_g2p_reg_id,spp_change_request.group_spp_change_request_hq_validator,1,1,1,0
 spp_change_request_cancel_wizard_hq_validator,Change Request Cancel HQ Validator Access,spp_change_request.model_spp_change_request_cancel_wizard,spp_change_request.group_spp_change_request_hq_validator,1,1,1,1
 
-spp_dms_storage_hq_validator,SPP DMS Storage HQ Validator Access,dms.model_dms_storage,spp_change_request.group_spp_change_request_hq_validator,1,0,0,0
-spp_dms_directory_hq_validator,SPP DMS Directory HQ Validator Access,dms.model_dms_directory,spp_change_request.group_spp_change_request_hq_validator,1,0,0,0
-spp_dms_category_hq_validator,SPP DMS Category HQ Validator Access,dms.model_dms_category,spp_change_request.group_spp_change_request_hq_validator,1,0,0,0
-spp_dms_tag_hq_validator,SPP DMS Tag HQ Validator Access,dms.model_dms_tag,spp_change_request.group_spp_change_request_hq_validator,1,0,0,0
-spp_dms_file_hq_validator,SPP DMS File HQ Validator Access,dms.model_dms_file,spp_change_request.group_spp_change_request_hq_validator,1,0,0,0
+spp_dms_directory_hq_validator,SPP DMS Directory HQ Validator Access,spp_dms.model_spp_dms_directory,spp_change_request.group_spp_change_request_hq_validator,1,0,0,0
+spp_dms_category_hq_validator,SPP DMS Category HQ Validator Access,spp_dms.model_spp_dms_category,spp_change_request.group_spp_change_request_hq_validator,1,0,0,0
+spp_dms_file_hq_validator,SPP DMS File HQ Validator Access,spp_dms.model_spp_dms_file,spp_change_request.group_spp_change_request_hq_validator,1,0,0,0
 
 spp_res_partner_hq_validator,SPP Contacts HQ Validator Access,base.model_res_partner,spp_change_request.group_spp_change_request_hq_validator,1,1,1,0
 spp_ir_model_hq_validator,SPP IR Model HQ Validator Access,base.model_ir_model,spp_change_request.group_spp_change_request_hq_validator,1,0,0,0
@@ -87,11 +83,9 @@ spp_change_request_g2p_phone_number_administrator,G2P Phone Number CR Administra
 spp_change_request_g2p_reg_id_administrator,G2P Registrant ID CR Administrator Access,g2p_registry_base.model_g2p_reg_id,spp_change_request.group_spp_change_request_administrator,1,1,1,0
 spp_change_request_cancel_wizard_administrator,Change Request Cancel Administrator Access,spp_change_request.model_spp_change_request_cancel_wizard,spp_change_request.group_spp_change_request_administrator,1,1,1,1
 
-spp_dms_storage_administrator,SPP DMS Storage Administrator Access,dms.model_dms_storage,spp_change_request.group_spp_change_request_administrator,1,1,1,0
-spp_dms_directory_administrator,SPP DMS Directory Administrator Access,dms.model_dms_directory,spp_change_request.group_spp_change_request_administrator,1,1,1,0
-spp_dms_category_administrator,SPP DMS Category Administrator Access,dms.model_dms_category,spp_change_request.group_spp_change_request_administrator,1,1,1,0
-spp_dms_tag_administrator,SPP DMS Tag Administrator Access,dms.model_dms_tag,spp_change_request.group_spp_change_request_administrator,1,1,1,0
-spp_dms_file_administrator,SPP DMS File Administrator Access,dms.model_dms_file,spp_change_request.group_spp_change_request_administrator,1,1,1,1
+spp_dms_directory_administrator,SPP DMS Directory Administrator Access,spp_dms.model_spp_dms_directory,spp_change_request.group_spp_change_request_administrator,1,1,1,0
+spp_dms_category_administrator,SPP DMS Category Administrator Access,spp_dms.model_spp_dms_category,spp_change_request.group_spp_change_request_administrator,1,1,1,0
+spp_dms_file_administrator,SPP DMS File Administrator Access,spp_dms.model_spp_dms_file,spp_change_request.group_spp_change_request_administrator,1,1,1,1
 
 spp_res_partner_administrator,SPP Contacts Administrator Access,base.model_res_partner,spp_change_request.group_spp_change_request_administrator,1,1,1,0
 spp_ir_model_administrator,SPP IR Model Administrator Access,base.model_ir_model,spp_change_request.group_spp_change_request_administrator,1,0,0,0
@@ -114,11 +108,9 @@ spp_change_request_g2p_phone_number_applicator,G2P Phone Number CR Applicator Ac
 spp_change_request_g2p_reg_id_applicator,G2P Registrant ID CR Applicator Access,g2p_registry_base.model_g2p_reg_id,spp_change_request.group_spp_change_request_applicator,1,1,1,0
 spp_change_request_cancel_wizard_applicator,Change Request Cancel Applicator Access,spp_change_request.model_spp_change_request_cancel_wizard,spp_change_request.group_spp_change_request_applicator,1,1,1,1
 
-spp_dms_storage_applicator,SPP DMS Storage Applicator Access,dms.model_dms_storage,spp_change_request.group_spp_change_request_applicator,1,0,0,0
-spp_dms_directory_applicator,SPP DMS Directory Applicator Access,dms.model_dms_directory,spp_change_request.group_spp_change_request_applicator,1,0,0,0
-spp_dms_category_applicator,SPP DMS Category Applicator Access,dms.model_dms_category,spp_change_request.group_spp_change_request_applicator,1,0,0,0
-spp_dms_tag_applicator,SPP DMS Tag Applicator Access,dms.model_dms_tag,spp_change_request.group_spp_change_request_applicator,1,0,0,0
-spp_dms_file_applicator,SPP DMS File Applicator Access,dms.model_dms_file,spp_change_request.group_spp_change_request_applicator,1,0,0,0
+spp_dms_directory_applicator,SPP DMS Directory Applicator Access,spp_dms.model_spp_dms_directory,spp_change_request.group_spp_change_request_applicator,1,0,0,0
+spp_dms_category_applicator,SPP DMS Category Applicator Access,spp_dms.model_spp_dms_category,spp_change_request.group_spp_change_request_applicator,1,0,0,0
+spp_dms_file_applicator,SPP DMS File Applicator Access,spp_dms.model_spp_dms_file,spp_change_request.group_spp_change_request_applicator,1,0,0,0
 
 spp_res_partner_applicator,SPP Contacts Applicator Access,base.model_res_partner,spp_change_request.group_spp_change_request_applicator,1,1,1,0
 spp_ir_model_applicator,SPP IR Model Applicator Access,base.model_ir_model,spp_change_request.group_spp_change_request_applicator,1,0,0,0
@@ -138,11 +130,9 @@ spp_change_request_g2p_reg_rel_agent,G2P Registry Relationship CR Agent Access,g
 spp_change_request_g2p_phone_number_agent,G2P Phone Number CR Agent Access,g2p_registry_base.model_g2p_phone_number,spp_change_request.group_spp_change_request_agent,1,0,0,0
 spp_change_request_g2p_reg_id_agent,G2P Registrant ID CR Agent Access,g2p_registry_base.model_g2p_reg_id,spp_change_request.group_spp_change_request_agent,1,0,0,0
 
-spp_dms_storage_agent,SPP DMS Storage Agent Access,dms.model_dms_storage,spp_change_request.group_spp_change_request_agent,1,1,1,0
-spp_dms_directory_agent,SPP DMS Directory Agent Access,dms.model_dms_directory,spp_change_request.group_spp_change_request_agent,1,1,1,0
-spp_dms_category_agent,SPP DMS Category Agent Access,dms.model_dms_category,spp_change_request.group_spp_change_request_agent,1,0,0,0
-spp_dms_tag_agent,SPP DMS Tag Agent Access,dms.model_dms_tag,spp_change_request.group_spp_change_request_agent,1,1,1,0
-spp_dms_file_agent,SPP DMS File Agent Access,dms.model_dms_file,spp_change_request.group_spp_change_request_agent,1,1,1,1
+spp_dms_directory_agent,SPP DMS Directory Agent Access,spp_dms.model_spp_dms_directory,spp_change_request.group_spp_change_request_agent,1,1,1,0
+spp_dms_category_agent,SPP DMS Category Agent Access,spp_dms.model_spp_dms_category,spp_change_request.group_spp_change_request_agent,1,0,0,0
+spp_dms_file_agent,SPP DMS File Agent Access,spp_dms.model_spp_dms_file,spp_change_request.group_spp_change_request_agent,1,1,1,1
 
 spp_res_partner_agent,SPP Contacts Agent Access,base.model_res_partner,spp_change_request.group_spp_change_request_agent,1,0,0,0
 spp_ir_model_agent,SPP IR Model Agent Access,base.model_ir_model,spp_change_request.group_spp_change_request_agent,1,0,0,0

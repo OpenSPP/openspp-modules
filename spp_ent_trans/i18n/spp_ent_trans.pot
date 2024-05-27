@@ -1,0 +1,212 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_ent_trans
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__amount_charged_by_service_point
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__amount_charged_by_service_point
+msgid "Amount Charged By Service Point"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__card_number
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__card_number
+msgid "Card Number"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__card_type
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__card_type
+msgid "Card Type"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__create_uid
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__create_date
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__currency_id
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__cycle_id
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__cycle_id
+msgid "Cycle"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__display_name
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__entitlement_id
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__entitlement_id
+#: model_terms:ir.ui.view,arch_db:spp_ent_trans.spp_entitlement_transactions_filter
+#: model_terms:ir.ui.view,arch_db:spp_ent_trans.spp_inkind_entitlement_transactions_filter
+msgid "Entitlement"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.actions.act_window,name:spp_ent_trans.action_spp_entitlement_transactions
+#: model:ir.model,name:spp_ent_trans.model_spp_entitlement_transactions
+#: model:ir.ui.menu,name:spp_ent_trans.menu_spp_entitlement_transactions
+#: model:ir.ui.menu,name:spp_ent_trans.menu_spp_inkind_entitlement_transactions
+#: model_terms:ir.actions.act_window,help:spp_ent_trans.action_spp_entitlement_transactions
+msgid "Entitlement Transactions"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model_terms:ir.ui.view,arch_db:spp_ent_trans.spp_entitlement_transactions_filter
+#: model_terms:ir.ui.view,arch_db:spp_ent_trans.spp_inkind_entitlement_transactions_filter
+msgid "Group By"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__id
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model,name:spp_ent_trans.model_spp_inkind_entitlement_transactions
+msgid "In-Kind Entitlement Transactions"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.actions.act_window,name:spp_ent_trans.action_spp_inkind_entitlement_transactions
+#: model_terms:ir.actions.act_window,help:spp_ent_trans.action_spp_inkind_entitlement_transactions
+msgid "In-kind Entitlement Transactions"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__write_uid
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__write_date
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__user_id
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__user_id
+msgid "POS User"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__product_id
+msgid "Product"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__program_id
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__program_id
+msgid "Program"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__quantity
+msgid "Quantity"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__quantity_remaining
+msgid "Quantity Remaining"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__receipt_number
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__receipt_number
+msgid "Receipt Number"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model_terms:ir.ui.view,arch_db:spp_ent_trans.spp_entitlement_transactions_filter
+msgid "Search Entitlement Transactions"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model_terms:ir.ui.view,arch_db:spp_ent_trans.spp_inkind_entitlement_transactions_filter
+msgid "Search In-kind Entitlement Transactions"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__service_point_id
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__service_point_id
+#: model_terms:ir.ui.view,arch_db:spp_ent_trans.spp_entitlement_transactions_filter
+#: model_terms:ir.ui.view,arch_db:spp_ent_trans.spp_inkind_entitlement_transactions_filter
+msgid "Service Point"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__service_point_device_id
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__service_point_device_id
+msgid "Service Point Device ID"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.constraint,message:spp_ent_trans.constraint_spp_entitlement_transactions_transaction_uuid_unique
+#: model:ir.model.constraint,message:spp_ent_trans.constraint_spp_inkind_entitlement_transactions_transaction_uuid_unique
+msgid "The transaction UUID must be unique!"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model_terms:ir.actions.act_window,help:spp_ent_trans.action_spp_entitlement_transactions
+#: model_terms:ir.actions.act_window,help:spp_ent_trans.action_spp_inkind_entitlement_transactions
+msgid "There are no data returned based on the defined filters."
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__timestamp_transaction_created
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__timestamp_transaction_created
+msgid "Transaction Created"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__transaction_type
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__transaction_type
+msgid "Transaction Type"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__transaction_uuid
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__transaction_uuid
+msgid "Transaction UUID"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__uom_id
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: spp_ent_trans
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_entitlement_transactions__value_remaining
+#: model:ir.model.fields,field_description:spp_ent_trans.field_spp_inkind_entitlement_transactions__value_remaining
+msgid "Value Remaining"
+msgstr ""

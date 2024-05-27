@@ -73,7 +73,7 @@ class SPPAPIPath(models.Model):
     active = fields.Boolean(default=True)
     namespace_id = fields.Many2one("spp_api.namespace", string="API Namespace", required=True, ondelete="cascade")
     model_id = fields.Many2one("ir.model", required=True, ondelete="cascade")
-    model = fields.Char(related="model_id.model", readonly=True)
+    model = fields.Char(related="model_id.model", readonly=True, string="Model Name")
     method = fields.Selection(
         [
             ("get", "Read"),
@@ -92,7 +92,7 @@ class SPPAPIPath(models.Model):
     limit = fields.Integer(string="Limit of results", default=500)
     # Create / Update
     warning_required = fields.Boolean(compute="_compute_warning_required", compute_sudo=True)
-    api_field_ids = fields.One2many("spp_api.field", "path_id", string="Fields", copy=True)
+    api_field_ids = fields.One2many("spp_api.field", "path_id", string="API Fields", copy=True)
     update_domain = fields.Char(default="[]")
     # Unlink
     unlink_domain = fields.Char(default="[]")

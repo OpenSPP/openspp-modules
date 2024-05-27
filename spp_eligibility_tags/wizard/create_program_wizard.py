@@ -21,7 +21,7 @@ class SPPCreateNewProgramWiz(models.TransientModel):
         "spp.area",
         domain=lambda self: [("kind", "=", self.env.ref("spp_area.admin_area_kind").id)],
     )
-    custom_domain = fields.Text(string="Domain", default="[]", readonly=True)
+    custom_domain = fields.Text(string="Tags Domain", default="[]", readonly=True)
 
     @api.onchange("tags_id", "area_id")
     def on_tags_area_change(self):

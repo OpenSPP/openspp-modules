@@ -1,0 +1,134 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_land_record
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__aquaculture
+msgid "Aquaculture"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__cultivation
+msgid "Cultivation"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__fallow
+msgid "Fallow"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_farm_id
+msgid "Farm"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_acreage
+msgid "Land Acreage"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_coordinates
+msgid "Land Coordinates"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_geo_polygon
+msgid "Land Polygons"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model,name:spp_land_record.model_spp_land_record
+msgid "Land Record Details"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_use
+msgid "Land Use"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__lease_end
+msgid "Lease End"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__lease_start
+msgid "Lease Start"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__leased_out
+msgid "Leased Out"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__lessee_id
+msgid "Lessee"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__livestock
+msgid "Livestock"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__mixed
+msgid "Mixed Use"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__other
+msgid "Other"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__owner_id
+msgid "Owner"
+msgstr ""
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_name
+msgid "Parcel Name/ID"
+msgstr ""

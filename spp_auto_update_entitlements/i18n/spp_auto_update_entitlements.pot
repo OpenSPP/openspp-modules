@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_auto_update_entitlements
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_auto_update_entitlements
+#: model_terms:ir.ui.view,arch_db:spp_auto_update_entitlements.view_entitlement_custom_form
+msgid "Amount Charged"
+msgstr ""
+
+#. module: spp_auto_update_entitlements
+#: model:ir.model,name:spp_auto_update_entitlements.model_g2p_cycle
+msgid "Cycle"
+msgstr ""
+
+#. module: spp_auto_update_entitlements
+#: model:ir.model,name:spp_auto_update_entitlements.model_g2p_cycle_manager_default
+msgid "Default Cycle Manager"
+msgstr ""
+
+#. module: spp_auto_update_entitlements
+#: model:ir.model,name:spp_auto_update_entitlements.model_g2p_entitlement
+msgid "Entitlement"
+msgstr ""
+
+#. module: spp_auto_update_entitlements
+#: model:ir.model.fields,field_description:spp_auto_update_entitlements.field_g2p_entitlement__entitlement_balance
+msgid "Entitlement Balance"
+msgstr ""
+
+#. module: spp_auto_update_entitlements
+#: model:ir.model.fields,field_description:spp_auto_update_entitlements.field_g2p_cycle__is_expired
+msgid "Is Expired"
+msgstr ""
+
+#. module: spp_auto_update_entitlements
+#: model:ir.model.fields.selection,name:spp_auto_update_entitlements.selection__g2p_entitlement__state__parrdpd2ben
+msgid "Partially Redeemed/Paid to Beneficiary"
+msgstr ""
+
+#. module: spp_auto_update_entitlements
+#: model_terms:ir.ui.view,arch_db:spp_auto_update_entitlements.view_cycle_custom_spp_form
+msgid "Set as Ended"
+msgstr ""
+
+#. module: spp_auto_update_entitlements
+#: model:ir.model.fields,field_description:spp_auto_update_entitlements.field_g2p_entitlement__state
+msgid "Status"
+msgstr ""
+
+#. module: spp_auto_update_entitlements
+#: model:ir.model.fields,field_description:spp_auto_update_entitlements.field_g2p_entitlement__transaction_ids
+msgid "Transactions"
+msgstr ""

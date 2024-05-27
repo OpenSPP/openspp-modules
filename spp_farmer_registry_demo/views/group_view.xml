@@ -30,6 +30,7 @@
                                     name="open_individual_form"
                                     type="object"
                                     icon="fa-external-link"
+                                    title="Open Individual Form"
                                     class="btn-success"
                                     string="Open Individual Form"
                                 />

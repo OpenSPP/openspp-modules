@@ -144,7 +144,7 @@
                                             name="open_member_form"
                                             type="object"
                                             icon="fa-external-link"
-                                            title="Open Member Form"
+                                            title="Open Form"
                                             class="btn-success"
                                             help="Open Member Form"
                                         />
