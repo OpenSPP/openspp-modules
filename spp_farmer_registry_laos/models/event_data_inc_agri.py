@@ -27,11 +27,7 @@ class OpenSPPEventDataIncomeFromAgribusiness(models.Model):
 class OpenSPPEventDataIncomeFromAgribusinessResPartner(models.Model):
     _inherit = "res.partner"
 
-    active_event_inc_agri = fields.Many2one(
-        "spp.event.inc.agri",
-        compute="_compute_active_event_inc_agri",
-        store=True
-    )
+    active_event_inc_agri = fields.Many2one("spp.event.inc.agri", compute="_compute_active_event_inc_agri", store=True)
 
     xiii_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_inc_agri.survey_sched")
     xiii_sales_of_input = fields.Float("Income from Sales of Input", related="active_event_inc_agri.sales_of_input")

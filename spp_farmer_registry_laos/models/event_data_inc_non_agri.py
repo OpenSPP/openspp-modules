@@ -44,9 +44,7 @@ class OpenSPPEventDataIncomeFromNonAgricultureResPartner(models.Model):
     _inherit = "res.partner"
 
     active_event_inc_non_agri = fields.Many2one(
-        "spp.event.inc.non.agri",
-        compute="_compute_active_event_inc_non_agri",
-        store=True
+        "spp.event.inc.non.agri", compute="_compute_active_event_inc_non_agri", store=True
     )
 
     xiv_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_inc_non_agri.survey_sched")

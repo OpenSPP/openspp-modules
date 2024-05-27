@@ -90,9 +90,7 @@ class OpenSPPEventDataLivestockFarmingResPartner(models.Model):
     _inherit = "res.partner"
 
     active_event_livestock_farming = fields.Many2one(
-        "spp.event.livestock.farming",
-        compute="_compute_active_event_livestock_farming",
-        store=True
+        "spp.event.livestock.farming", compute="_compute_active_event_livestock_farming", store=True
     )
 
     xii_survey_schedule = fields.Selection(

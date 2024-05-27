@@ -299,9 +299,7 @@ class OpenSPPEventDataHouseholdResilienceIndexResPartner(models.Model):
     _inherit = "res.partner"
 
     active_event_hh_resilience_index = fields.Many2one(
-        "spp.event.hh.resilience.index",
-        compute="_compute_active_event_hh_resilience_index",
-        store=True
+        "spp.event.hh.resilience.index", compute="_compute_active_event_hh_resilience_index", store=True
     )
 
     xvi_survey_schedule = fields.Selection(

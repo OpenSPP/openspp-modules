@@ -34,9 +34,7 @@ class OpenSPPEventDataFoodSecurityResPartner(models.Model):
     _inherit = "res.partner"
 
     active_event_food_security = fields.Many2one(
-        "spp.event.food.security",
-        compute="_compute_active_event_food_security",
-        store=True
+        "spp.event.food.security", compute="_compute_active_event_food_security", store=True
     )
 
     vii_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_food_security.survey_sched")

@@ -96,9 +96,7 @@ class OpenSPPEventDataMinDietaryDiversifyScoreResPartner(models.Model):
     _inherit = "res.partner"
 
     active_event_min_dietary_score = fields.Many2one(
-        "spp.event.min.dietary.score",
-        compute="_compute_active_event_min_dietary_score",
-        store=True
+        "spp.event.min.dietary.score", compute="_compute_active_event_min_dietary_score", store=True
     )
 
     xvii_survey_schedule = fields.Selection(

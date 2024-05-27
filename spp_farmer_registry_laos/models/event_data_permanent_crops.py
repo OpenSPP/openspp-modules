@@ -102,9 +102,7 @@ class OpenSPPEventDataPermanentCropsResPartner(models.Model):
     _inherit = "res.partner"
 
     active_event_permanent_crops = fields.Many2one(
-        "spp.event.permanent.crops",
-        compute="_compute_active_event_permanent_crops",
-        store=True
+        "spp.event.permanent.crops", compute="_compute_active_event_permanent_crops", store=True
     )
 
     xib_survey_schedule = fields.Selection(
