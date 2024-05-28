@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_program_list_form_manual" model="ir.ui.view">
+        <field name="name">view_program_list_form_manual</field>
+        <field name="model">g2p.program</field>
+        <field name="priority">1010</field>
+        <field name="inherit_id" ref="g2p_programs.view_program_list_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_ended']" position="after">
+                <field name="is_manual_eligibility" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_program_list_custom_spp_form_manual" model="ir.ui.view">
+        <field name="name">view_program_list_custom_spp_form_manual</field>
+        <field name="model">g2p.program</field>
+        <field name="priority">1010</field>
+        <field name="inherit_id" ref="spp_programs.view_program_list_custom_spp_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='import_eligible_registrants']" position="attributes">
+                <attribute name="invisible">
+                    is_manual_eligibility
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
