@@ -66,28 +66,28 @@
                                 </td>
                                 <td>
                                     <span>
-                                        National ID Number
+                                        <label for="farmer_national_id" />
                                     </span>
                                     <br />
                                     <field name="farmer_national_id" />
                                 </td>
                                 <td>
                                     <span>
-                                        Family Name
+                                        <label for="family_name" />
                                     </span>
                                     <br />
                                     <field name="family_name" />
                                 </td>
                                 <td>
                                     <span>
-                                        Given Name
+                                        <label for="given_name" />
                                     </span>
                                     <br />
                                     <field name="given_name" />
                                 </td>
                                 <td>
                                     <span>
-                                        Additional Name
+                                        <label for="addl_name" />
                                     </span>
                                     <br />
                                     <field name="addl_name" />
@@ -98,28 +98,28 @@
                                 </td>
                                 <td>
                                     <span>
-                                        Marital Status
+                                        <label for="marital_status" />
                                     </span>
                                     <br />
                                     <field name="marital_status" />
                                 </td>
                                 <td>
                                     <span>
-                                        Household Size
+                                        <label for="farmer_household_size" />
                                     </span>
                                     <br />
                                     <field name="farmer_household_size" />
                                 </td>
                                 <td>
                                     <span>
-                                        Educational Level
+                                        <label for="highest_education_level" />
                                     </span>
                                     <br />
                                     <field name="highest_education_level" />
                                 </td>
                                 <td>
                                     <span>
-                                        Years of Experience
+                                        <label for="experience_years" />
                                     </span>
                                     <br />
                                     <field name="experience_years" />
@@ -130,7 +130,7 @@
                                 </td>
                                 <td colspan="2">
                                     <span>
-                                        Postal Address
+                                        <label for="farmer_postal_address" />
                                     </span>
                                     <br />
                                     <field name="farmer_postal_address" />

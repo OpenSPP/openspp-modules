@@ -23,3 +23,4 @@ from . import event_data_min_dietary_score
 from . import farm
 from . import farmer
 from . import generate_farmer_data
+from . import species
