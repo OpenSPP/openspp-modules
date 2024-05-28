@@ -136,7 +136,7 @@ class OpenSPPEventDataGenInfo(models.Model):
 class OpenSPPEventDataGenInfoResPartner(models.Model):
     _inherit = "res.partner"
 
-    active_event_gen_info = fields.Many2one("spp.event.gen.info", compute="_compute_active_event_gen_info")
+    active_event_gen_info = fields.Many2one("spp.event.gen.info", compute="_compute_active_event_gen_info", store=True)
 
     ii_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_gen_info.survey_sched")
     ii_interviewees_name = fields.Char("Interviewee's Name", related="active_event_gen_info.interviewees_name")

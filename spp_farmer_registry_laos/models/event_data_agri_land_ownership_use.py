@@ -61,7 +61,7 @@ class OpenSPPEventDataAgriLandOwnershipAndUseResPartner(models.Model):
     _inherit = "res.partner"
 
     active_event_agri_land_ownership_use = fields.Many2one(
-        "spp.event.agri.land.ownership.use", compute="_compute_active_event_agri_land_ownership_use"
+        "spp.event.agri.land.ownership.use", compute="_compute_active_event_agri_land_ownership_use", store=True
     )
 
     vi_survey_schedule = fields.Selection(

@@ -96,7 +96,7 @@ class OpenSPPEventDataHHLabor(models.Model):
 class OpenSPPEventDataHHLaborResPartner(models.Model):
     _inherit = "res.partner"
 
-    active_event_hh_labor = fields.Many2one("spp.event.hh.labor", compute="_compute_active_event_hh_labor")
+    active_event_hh_labor = fields.Many2one("spp.event.hh.labor", compute="_compute_active_event_hh_labor", store=True)
 
     iv_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_hh_labor.survey_sched")
     iv_no_hh_members_women = fields.Integer(

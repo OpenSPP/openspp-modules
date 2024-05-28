@@ -101,7 +101,9 @@ class OpenSPPEventDataAgriculturalDSHotTech(models.Model):
 class OpenSPPEventDataAgriculturalDSHotResPartner(models.Model):
     _inherit = "res.partner"
 
-    active_event_agri_ds_hot = fields.Many2one("spp.event.agri.ds.hot", compute="_compute_active_event_agri_ds_hot")
+    active_event_agri_ds_hot = fields.Many2one(
+        "spp.event.agri.ds.hot", compute="_compute_active_event_agri_ds_hot", store=True
+    )
 
     xia_survey_schedule = fields.Selection(string="Survey Schedule", related="active_event_agri_ds_hot.survey_sched")
     xia_agri_prod_ids = fields.One2many(
