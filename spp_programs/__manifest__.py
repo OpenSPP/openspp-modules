@@ -31,6 +31,7 @@
         "views/managers/entitlement_manager_view.xml",
         "wizard/inkind_entitlement_report_wiz.xml",
         "wizard/create_program_wizard.xml",
+        "wizard/multi_inkind_entitlement_approval_wizard.xml",
         "report/program_approval_receipt.xml",
         "report/report_format.xml",
     ],

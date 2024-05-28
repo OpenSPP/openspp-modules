@@ -204,6 +204,15 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="act_window_id" ref="action_entitlement_inkind" />
     </record>
 
+    <record model="ir.actions.server" id="multiple_inkind_entitlement_approval">
+        <field name="name">Approve</field>
+        <field name="model_id" ref="spp_programs.model_spp_multi_inkind_entitlement_approval_wizard" />
+        <field name="binding_model_id" ref="spp_programs.model_g2p_entitlement_inkind" />
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">action = model.open_wizard()</field>
+    </record>
+
     <menuitem
         id="menu_entitlement_inkind"
         name="Entitlements"
