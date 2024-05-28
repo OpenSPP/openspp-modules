@@ -7,14 +7,12 @@ if "gis" not in base.models.ir_actions.VIEW_TYPES:
 
 GEO_TYPES = [
     ("geo_polygon", "geo_polygon"),
-    # ("geo_multi_polygon", "geo_multi_polygon"),
     ("geo_point", "geo_point"),
     ("geo_line", "geo_line"),
 ]
 
 GEO_TYPES_ONDELETE = {
     "geo_polygon": "cascade",
-    # "geo_multi_polygon": "cascade",
     "geo_point": "cascade",
     "geo_line": "cascade",
 }
@@ -23,7 +21,6 @@ POSTGIS_GEO_TYPES = [
     ("POINT", "POINT"),
     ("LINESTRING", "LINESTRING"),
     ("POLYGON", "POLYGON"),
-    ("MULTIPOLYGON", "MULTIPOLYGON"),
 ]
 
 

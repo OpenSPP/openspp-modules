@@ -47,6 +47,25 @@ def value_to_shape(value, use_wkb=False):
         raise TypeError(_("Write/create/search geo type must be wkt/geojson " "string or must respond to wkt"))
 
 
+def load_geojson(value):
+    result = json.loads(value)
+    if not isinstance(result, dict):
+        raise ValidationError("Value should be a geojson")
+    return result
+
+
+def validate_geojson(geojson):
+    if "coordinates" not in geojson or "type" not in geojson:
+        raise ValidationError(_("type and coordinates should be in the geojson"))
+    elif geojson["type"] not in geo_types:
+        raise ValidationError(_("%(geo_type)s is not a valid type.") % {"geo_type": geojson["type"]})
+
+
+def validate_shapely_geometry(shapely_geometry):
+    if shapely_geometry.is_empty:
+        raise ValidationError(_("Geometry is empty."))
+
+
 class GeoField(fields.Field):
     """
     Base class for geospatial fields, handling common attributes and methods.
@@ -67,17 +86,10 @@ class GeoField(fields.Field):
 
     def validate_value(self, value):
         try:
-            result = json.loads(value)
-            if isinstance(result, dict):
-                shapely_geometry = shape(result)
-                if not result.get("coordinates") or not result.get("type"):
-                    raise ValidationError(_("type and coordinates should be in the geojson"))
-                elif result["type"] not in geo_types:
-                    raise ValidationError(_("%(geo_type)s is not a valid type.") % {"geo_type": result["type"]})
-                elif not isinstance(shapely_geometry, geo_types[result["type"]]):
-                    raise ValidationError(_("Value must ba a Shapely %(type)s") % {"type": result["type"]})
-            else:
-                raise ValidationError("Value should be a geojson")
+            result = load_geojson(value)
+            validate_geojson(result)
+            shapely_geometry = shape(result)
+            validate_shapely_geometry(shapely_geometry)
         except json.JSONDecodeError as e:
             raise ValidationError(e) from e
 
@@ -178,15 +190,6 @@ class GeoField(fields.Field):
         expected_geo_values = (self.srid, self.geo_type.upper(), self.dim)
         self.update_geometry_columns(cursor, table_name, column_name, expected_geo_values)
 
-        # if column_info["udt_name"] in self.column_cast_from:
-        #     sql.convert_column(cursor, table_name, column_name, self.column_type[1])
-        # else:
-        #     new_column_name = sql.find_unique_column_name(cursor, table_name, self.name)
-        #     if column_info["is_nullable"] == "NO":
-        #         sql.drop_not_null(cursor, table_name, column_name)
-        #     sql.rename_column(cursor, table_name, column_name, new_column_name)
-        #     sql.create_column(cursor, table_name, column_name, self.column_type[1], self.string)
-
 
 class GeoPointField(GeoField):
     type = "geo_point"
@@ -206,13 +209,6 @@ class GeoPolygonField(GeoField):
     geo_type = Polygon.__name__
 
 
-# class GeoMultiPolygonField(GeoField):
-#     type = "geo_multi_polygon"
-#     geo_class = MultiPolygon
-#     geo_type = MultiPolygon.__name__
-
-
 fields.GeoPointField = GeoPointField
 fields.GeoLineStringField = GeoLineStringField
 fields.GeoPolygonField = GeoPolygonField
-# fields.GeoMultiPolygonField = GeoMultiPolygonField
