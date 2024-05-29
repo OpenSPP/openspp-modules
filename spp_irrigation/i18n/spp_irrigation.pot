@@ -1,0 +1,119 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_irrigation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__category
+msgid "Category"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__coordinates
+msgid "Coordinates"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__geo_polygon
+msgid "Geo Polygon"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.module.category,name:spp_irrigation.module_management
+msgid "Irrigation"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model,name:spp_irrigation.model_spp_irrigation_asset
+msgid "Irrigation Asset Details"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:spp.gis.data.layer,name:spp_irrigation.gis_coordinates_irrigation_asset
+msgid "Irrigation Coordinates"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__irrigation_destination_ids
+msgid "Irrigation Destinations"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__name
+msgid "Irrigation Name/ID"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:spp.gis.data.layer,name:spp_irrigation.gis_geo_polygon_irrigation_asset
+msgid "Irrigation Polygon"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__irrigation_source_ids
+msgid "Irrigation Sources"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:spp.gis.raster.layer,name:spp_irrigation.geo_osm_irrigation_asset
+msgid "Irrigation background"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:res.groups,name:spp_irrigation.group_manager
+msgid "Manager"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields.selection,name:spp_irrigation.selection__spp_irrigation_asset__category__reservoir
+msgid "Reservoir"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.model.fields,field_description:spp_irrigation.field_spp_irrigation_asset__total_capacity
+msgid "Total Capacity"
+msgstr ""
+
+#. module: spp_irrigation
+#: model:ir.module.category,description:spp_irrigation.module_management
+msgid "User access level for Irrigation"
+msgstr ""
