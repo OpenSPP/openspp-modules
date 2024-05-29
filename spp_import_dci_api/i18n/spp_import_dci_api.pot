@@ -350,7 +350,6 @@ msgstr ""
 #. module: spp_import_dci_api
 #. odoo-python
 #: code:addons/spp_import_dci_api/models/fetch_crvs_beneficiary.py:0
-#: code:addons/spp_import_dci_api/models/fetch_crvs_beneficiary.py:0
 #, python-format
 msgid "No path in data source named {path} is configured!"
 msgstr ""
