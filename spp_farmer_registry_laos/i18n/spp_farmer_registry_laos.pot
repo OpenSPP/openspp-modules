@@ -87,87 +87,6 @@ msgid ""
 msgstr ""
 
 #. module: spp_farmer_registry_laos
-#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_alternative_form
-msgid ""
-"<span>\n"
-"                                        Additional Name\n"
-"                                    </span>\n"
-"                                    <br/>"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
-#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_alternative_form
-msgid ""
-"<span>\n"
-"                                        Educational Level\n"
-"                                    </span>\n"
-"                                    <br/>"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
-#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_alternative_form
-msgid ""
-"<span>\n"
-"                                        Family Name\n"
-"                                    </span>\n"
-"                                    <br/>"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
-#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_alternative_form
-msgid ""
-"<span>\n"
-"                                        Given Name\n"
-"                                    </span>\n"
-"                                    <br/>"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
-#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_alternative_form
-msgid ""
-"<span>\n"
-"                                        Household Size\n"
-"                                    </span>\n"
-"                                    <br/>"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
-#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_alternative_form
-msgid ""
-"<span>\n"
-"                                        Marital Status\n"
-"                                    </span>\n"
-"                                    <br/>"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
-#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_alternative_form
-msgid ""
-"<span>\n"
-"                                        National ID Number\n"
-"                                    </span>\n"
-"                                    <br/>"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
-#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_alternative_form
-msgid ""
-"<span>\n"
-"                                        Postal Address\n"
-"                                    </span>\n"
-"                                    <br/>"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
-#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_alternative_form
-msgid ""
-"<span>\n"
-"                                        Years of Experience\n"
-"                                    </span>\n"
-"                                    <br/>"
-msgstr ""
-
-#. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_hh_resilience_index_wizard__hh_members_eat_veg__1
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_hh_resilience_index__hh_members_eat_veg__1
 msgid "> 3 times per week in > 10 months per year"
@@ -702,6 +621,11 @@ msgid "April"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.aquatic_animals_farm_species
+msgid "Aquatic animals (Fish, Shrimp)"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_alternative_form
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_groups_form
 msgid "Archived"
@@ -864,9 +788,19 @@ msgid "Benefit of participating in producers' groups"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.black_red_beans_farm_species
+msgid "Black and red beans"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_hh_resilience_index_wizard__grow_veg_oth__2
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_hh_resilience_index__grow_veg_oth__2
 msgid "Both Seasons"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.buffalo_farm_species
+msgid "Buffalo"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -898,8 +832,19 @@ msgid "Cancel"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.cantaloup_farm_species
+msgid "Cantaloup (melon)"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.cardamon_farm_species
+msgid "Cardamom"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__9
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__9
+#: model:spp.farm.species,name:spp_farmer_registry_laos.cassave_farm_species
 msgid "Cassava"
 msgstr ""
 
@@ -933,6 +878,11 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_ethnic_group__ethnic_group_id
 msgid "Code"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.coffee_farm_species
+msgid "Coffee"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -978,6 +928,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_agri_ws_produce__contract_farming
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_permanent_crops_prod__contract_farming
 msgid "Contract Farming"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.corn_animal_feed_farm_species
+msgid "Corn (animal feed)"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.corn_human_cons_farm_species
+msgid "Corn (human consumption)"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -1048,6 +1008,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_agri_ds_hot_cost__total_equipment
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_permanent_crops_cost__total_equipment
 msgid "Cost of Tools or Equipment"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.cow_meat_farm_species
+msgid "Cow (Meat)"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.cow_milk_farm_species
+msgid "Cow (Milk)"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -1285,6 +1255,7 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__6
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__6
+#: model:spp.farm.species,name:spp_farmer_registry_laos.cucumber_farm_species
 msgid "Cucumber"
 msgstr ""
 
@@ -1879,6 +1850,16 @@ msgid ""
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.frog_farm_species
+msgid "Frog"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.fruitbearing_veg_farm_species
+msgid "Fruitbearing vegetables (tomatoes, chili, sweet peppers, eggplants…)"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_g2p_program_membership__ii_gps_location
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_res_partner__ii_gps_location
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_res_users__ii_gps_location
@@ -1931,7 +1912,13 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_livestock_fisheries__21
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_livestock_fisheries__21
+#: model:spp.farm.species,name:spp_farmer_registry_laos.goat_farm_species
 msgid "Goat"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.gourd_farm_species
+msgid "Gourd (snake gourd, luffah, squash, chayote…)"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -1944,6 +1931,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__15
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__15
 msgid "Grass planting for forage"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.green_manure_farm_species
+msgid "Green manure"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -2443,6 +2435,11 @@ msgid "Job'tears"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.jobs_tear_farm_species
+msgid "Job’s tear"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_g2p_program_membership__vii_shortage_july
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_res_partner__vii_shortage_july
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_res_users__vii_shortage_july
@@ -2677,6 +2674,13 @@ msgid "Latrine Condition"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.leafy_stem_veg_farm_species
+msgid ""
+"Leafy stem vegetables (lettuces, cabbages, cauliflower, pakchoi, mustard, "
+"kale, coriander, morning glory…)"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_hh_resilience_index_wizard__eat_animal_protein__0
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_hh_resilience_index__eat_animal_protein__0
 msgid "Lest than 2 days per week"
@@ -2732,6 +2736,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_groups_hh_assets_form
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_spp_event_hh_assets_form
 msgid "Livestock Household Assets"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.long_beans_farm_species
+msgid "Long beans"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -2907,6 +2916,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_agri_ds_tech__multing
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_permanent_crops_tech__multing
 msgid "Multying"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.mungbeans_farm_species
+msgid "Mungbeans"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -3981,6 +3995,11 @@ msgid "Other"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.other_crops_farm_species
+msgid "Other Crops"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_create_event_agri_ds_cost_wizard__oth_fees
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_create_event_agri_ds_hot_cost_wizard__oth_fees
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_create_event_agri_ws_cost_wizard__other_fees
@@ -4015,6 +4034,11 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_groups_form
 msgid "Other Information"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.other_livestock_farm_species
+msgid "Other Livestock"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -4079,6 +4103,11 @@ msgid "PISCA BLS"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.palm_tree_farm_species
+msgid "Palm tree"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_groups_form
 msgid "Parent:"
 msgstr ""
@@ -4115,6 +4144,7 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__5
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__5
+#: model:spp.farm.species,name:spp_farmer_registry_laos.peanuts_farm_species
 msgid "Peanuts"
 msgstr ""
 
@@ -4187,7 +4217,18 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_livestock_fisheries__19
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_livestock_fisheries__19
+#: model:spp.farm.species,name:spp_farmer_registry_laos.pig_farm_species
 msgid "Pig"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.piglets_farm_species
+msgid "Piglets"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.pine_farm_species
+msgid "Pine"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -4228,6 +4269,16 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__8
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__8
 msgid "Potato"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.potatoes_farm_species
+msgid "Potatoes"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.poultry_farm_species
+msgid "Poultry (Eggs, Chicken, Duck, Goose)"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -4402,6 +4453,11 @@ msgid ""
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.pumpkin_farm_species
+msgid "Pumpkin"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_create_event_livestock_farming_cost_wizard__purchase_baby_animal
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_livestock_farming_cost__purchase_baby_animal
 msgid "Purchase of Baby Animals"
@@ -4424,6 +4480,7 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__2
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__2
+#: model:spp.farm.species,name:spp_farmer_registry_laos.rice_farm_species
 msgid "Rice"
 msgstr ""
 
@@ -4452,6 +4509,16 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_groups_form
 msgid "Role:"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.roots_bulbs_tuberous_farm_species
+msgid "Roots, bulbs and tuberous (ginger, onions, garlic…)"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.ruber_farm_species
+msgid "Ruber"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -4731,6 +4798,7 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__16
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__16
+#: model:spp.farm.species,name:spp_farmer_registry_laos.sesame_farm_species
 msgid "Sesame"
 msgstr ""
 
@@ -4786,6 +4854,21 @@ msgid "Since the beginning of the project"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.soybean_farm_species
+msgid "Soybean"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:ir.model,name:spp_farmer_registry_laos.model_spp_farm_species
+msgid "Species"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_farm_species__name
+msgid "Species Name"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_create_event_livestock_farming_cost_wizard__oth_specify
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_livestock_farming_cost__oth_specify
 msgid "Specify Other"
@@ -4817,6 +4900,7 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__13
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__13
+#: model:spp.farm.species,name:spp_farmer_registry_laos.sugarcane_farm_species
 msgid "Sugarcane"
 msgstr ""
 
@@ -4916,6 +5000,11 @@ msgid "Survey Schedule"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.sweet_potatoes_farm_species
+msgid "Sweet potatoes"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_groups_form
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_laos.view_farmer_groups_list_tree
 msgid "Tags"
@@ -4939,7 +5028,13 @@ msgstr ""
 #. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__grp_act_supported_by_project_agri__11
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__grp_act_supported_by_project_agri__11
+#: model:spp.farm.species,name:spp_farmer_registry_laos.tea_farm_species
 msgid "Tea"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.teak_farm_species
+msgid "Teak"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -5122,6 +5217,11 @@ msgid "There is no puddy"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.tobacco_farm_species
+msgid "Tobacco"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_create_event_agri_ws_cost_wizard__tool_equipment
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_agri_ws_cost__tool_equipment
 msgid "Tool Equipment"
@@ -5210,6 +5310,11 @@ msgid ""
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.tree_fruits_farm_species
+msgid "Tree fruits"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_create_event_poverty_indicator_wizard__type_of_housing
 #: model:ir.model.fields,field_description:spp_farmer_registry_laos.field_spp_event_poverty_indicator__type_of_housing
 msgid "Type Of Housing"
@@ -5237,6 +5342,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_wash_ind__latrine_condition__4
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_wash_ind__water_sources__4
 msgid "Unimproved"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.upland_rice_farm_species
+msgid "Upland rice"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
@@ -5383,9 +5493,24 @@ msgid "Water Sources"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.watermelon_farm_species
+msgid "Watermelon"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.weet_falang_farm_species
+msgid "Weet / falang beans"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_create_event_gen_info_wizard__marital_status__3
 #: model:ir.model.fields.selection,name:spp_farmer_registry_laos.selection__spp_event_gen_info__marital_status__3
 msgid "Widow/er"
+msgstr ""
+
+#. module: spp_farmer_registry_laos
+#: model:spp.farm.species,name:spp_farmer_registry_laos.winged_beans_farm_species
+msgid "Winged beans"
 msgstr ""
 
 #. module: spp_farmer_registry_laos
