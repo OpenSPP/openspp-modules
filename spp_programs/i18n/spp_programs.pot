@@ -66,6 +66,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,help:spp_programs.field_g2p_entitlement_inkind__partner_id
+#: model:ir.model.fields,help:spp_programs.field_spp_multi_inkind_entitlement_approval__partner_id
 msgid "A beneficiary"
 msgstr ""
 
@@ -81,12 +82,24 @@ msgid "Admin Area"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.actions.server,name:spp_programs.multiple_inkind_entitlement_approval
+#: model_terms:ir.ui.view,arch_db:spp_programs.multi_inkind_entitlement_approval_wizard_form_view
+msgid "Approve"
+msgstr ""
+
+#. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
 msgid "Approve Entitlement"
 msgstr ""
 
 #. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.multi_inkind_entitlement_approval_wizard_form_view
+msgid "Approve entitlement"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__approved
+#: model:ir.model.fields.selection,name:spp_programs.selection__spp_multi_inkind_entitlement_approval__state__approved
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
 msgid "Approved"
@@ -99,6 +112,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.inkind_entitlement_report_wizard
+#: model_terms:ir.ui.view,arch_db:spp_programs.multi_inkind_entitlement_approval_wizard_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -122,6 +136,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__code
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__code
 msgid "Code"
 msgstr ""
 
@@ -144,6 +159,11 @@ msgid "Configuration"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__spp_multi_inkind_entitlement_approval__state__conflict
+msgid "Conflict"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model,name:spp_programs.model_res_partner
 msgid "Contact"
 msgstr ""
@@ -156,17 +176,22 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__create_uid
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__create_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__create_date
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__create_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__create_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__currency_id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__currency_id
 msgid "Currency"
 msgstr ""
 
@@ -207,6 +232,8 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__display_name
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__display_name
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__display_name
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -258,6 +285,7 @@ msgid "Entitlement: (%s)"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__entitlement_ids
 #: model:ir.ui.menu,name:spp_programs.menu_entitlement_inkind
 #: model:ir.ui.menu,name:spp_programs.menu_entitlement_report_inkind
 msgid "Entitlements"
@@ -303,6 +331,8 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__id
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__id
 msgid "ID"
 msgstr ""
 
@@ -343,6 +373,11 @@ msgid "In-Kind Entitlement"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model,name:spp_programs.model_spp_multi_inkind_entitlement_approval
+msgid "In-Kind Entitlement Approval"
+msgstr ""
+
+#. module: spp_programs
 #: model_terms:ir.actions.act_window,help:spp_programs.action_entitlement_report_inkind
 msgid "In-Kind Entitlement Report"
 msgstr ""
@@ -358,6 +393,7 @@ msgid "In-Kind Item"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__entitlement_id
 #: model:ir.model.fields,field_description:spp_programs.field_stock_move__entitlement_id
 msgid "In-kind Entitlement"
 msgstr ""
@@ -406,12 +442,16 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__write_uid
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__write_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__write_date
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__write_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__write_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -426,8 +466,23 @@ msgid "Manage Inventory"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model,name:spp_programs.model_spp_multi_inkind_entitlement_approval_wizard
+msgid "Multi In-Kind Entitlement Approval Wizard"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__wizard_id
+msgid "Multi In-kind Entitlement Approval Wizard"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__name
 msgid "Name"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__spp_multi_inkind_entitlement_approval__state__new
+msgid "New"
 msgstr ""
 
 #. module: spp_programs
@@ -436,6 +491,11 @@ msgstr ""
 #: code:addons/spp_programs/models/programs.py:0
 #, python-format
 msgid "No Eligibility Manager defined."
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__spp_multi_inkind_entitlement_approval__state__okay
+msgid "Okay"
 msgstr ""
 
 #. module: spp_programs
@@ -478,6 +538,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__product_id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__product_id
 msgid "Product"
 msgstr ""
 
@@ -503,6 +564,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__qty
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__qty
 msgid "QTY"
 msgstr ""
 
@@ -513,6 +575,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__partner_id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__partner_id
 msgid "Registrant"
 msgstr ""
 
@@ -576,6 +639,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__state
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__state
 msgid "Status"
 msgstr ""
 
@@ -606,6 +670,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,help:spp_programs.field_g2p_entitlement_inkind__currency_id
+#: model:ir.model.fields,help:spp_programs.field_spp_multi_inkind_entitlement_approval__currency_id
 msgid "The currency used to enter statement"
 msgstr ""
 
@@ -631,6 +696,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__total_amount
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__total_amount
 msgid "Total Value"
 msgstr ""
 
@@ -670,6 +736,7 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__unit_price
+#: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__unit_price
 msgid "Value/Unit"
 msgstr ""
 
