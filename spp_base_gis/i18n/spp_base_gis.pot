@@ -196,6 +196,20 @@ msgid "Display Name"
 msgstr ""
 
 #. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid "Distance must be a number"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid "Distance must be a positive number"
+msgstr ""
+
+#. module: spp_base_gis
 #: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_type__d_wms
 msgid "Distant WMS"
 msgstr ""
@@ -283,6 +297,13 @@ msgid "Geo field"
 msgstr ""
 
 #. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/fields.py:0
+#, python-format
+msgid "Geometry is empty."
+msgstr ""
+
+#. module: spp_base_gis
 #: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__hybrid
 msgid "Hybrid"
 msgstr ""
@@ -312,6 +333,35 @@ msgstr ""
 #. module: spp_base_gis
 #: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
 msgid "Image options"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid "Invalid coordinates: latitude=%s, longitude=%s"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid "Invalid field type: %s"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid "Invalid layer type %s"
+msgstr ""
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid "Invalid spatial relation %s"
 msgstr ""
 
 #. module: spp_base_gis
@@ -377,11 +427,6 @@ msgstr ""
 #. module: spp_base_gis
 #: model:ir.model.fields,help:spp_base_gis.field_spp_gis_data_layer__active_on_startup
 msgid "Layer will be shown on startup if checked."
-msgstr ""
-
-#. module: spp_base_gis
-#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__geo_type__multipolygon
-msgid "MULTIPOLYGON"
 msgstr ""
 
 #. module: spp_base_gis
@@ -620,13 +665,6 @@ msgstr ""
 #. module: spp_base_gis
 #: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__topo-topographique
 msgid "Topo-Topographique"
-msgstr ""
-
-#. module: spp_base_gis
-#. odoo-python
-#: code:addons/spp_base_gis/fields.py:0
-#, python-format
-msgid "Value must ba a Shapely %(type)s"
 msgstr ""
 
 #. module: spp_base_gis
