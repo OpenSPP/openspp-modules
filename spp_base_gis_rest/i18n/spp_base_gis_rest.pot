@@ -1,0 +1,162 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_base_gis_rest
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__auth_type
+msgid "Auth Type"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields.selection,name:spp_base_gis_rest.selection__spp_gis_api_client_credential__auth_type__basic
+msgid "Basic"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields.selection,name:spp_base_gis_rest.selection__spp_gis_api_client_credential__auth_type__bearer
+msgid "Bearer"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__client_id
+msgid "Client"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model_terms:ir.ui.view,arch_db:spp_base_gis_rest.spp_gis_api_client_credential_form
+#: model_terms:ir.ui.view,arch_db:spp_base_gis_rest.spp_gis_api_client_credential_view_credentials
+msgid "Client ID"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#. odoo-python
+#: code:addons/spp_base_gis_rest/models/api_client_credentials.py:0
+#, python-format
+msgid "Client ID and Client Secret is already showed once."
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.constraint,message:spp_base_gis_rest.constraint_spp_gis_api_client_credential_client_id_uniq
+msgid "Client ID must be unique !"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__name
+msgid "Client Name"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.constraint,message:spp_base_gis_rest.constraint_spp_gis_api_client_credential_name_uniq
+msgid "Client Name must be unique !"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__client_secret
+msgid "Client Secret"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.constraint,message:spp_base_gis_rest.constraint_spp_gis_api_client_credential_client_secret_uniq
+msgid "Client Secret must be unique !"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__client_token
+msgid "Client Token"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model_terms:ir.actions.act_window,help:spp_base_gis_rest.spp_gis_api_client_credential_window
+msgid "Create and manage the GIS API Client Credentials."
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.actions.act_window,name:spp_base_gis_rest.spp_gis_api_client_credential_window
+msgid "DCI GIS Client Credentials"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.ui.menu,name:spp_base_gis_rest.menu_gis_api_client_credentiale
+msgid "GIS API Client Credentials"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model_terms:ir.ui.view,arch_db:spp_base_gis_rest.spp_gis_api_client_credential_form
+#: model_terms:ir.ui.view,arch_db:spp_base_gis_rest.spp_gis_api_client_credential_view_credentials
+msgid "GIS Client Credentials"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model_terms:ir.ui.view,arch_db:spp_base_gis_rest.spp_gis_api_client_credential_view_credentials
+msgid ""
+"Make sure to copy your client id and client secret now. You won't be able to"
+" see it again!"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#. odoo-python
+#: code:addons/spp_base_gis_rest/models/api_client_credentials.py:0
+#, python-format
+msgid "Not allowed to export on this model."
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model_terms:ir.ui.view,arch_db:spp_base_gis_rest.spp_gis_api_client_credential_view_credentials
+msgid "OK"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model,name:spp_base_gis_rest.model_spp_gis_api_client_credential
+msgid "SPP GIS Client Credential"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model_terms:ir.ui.view,arch_db:spp_base_gis_rest.spp_gis_api_client_credential_form
+msgid "Show"
+msgstr ""
+
+#. module: spp_base_gis_rest
+#: model:ir.model.fields,field_description:spp_base_gis_rest.field_spp_gis_api_client_credential__show_button_clicked
+msgid "Viewed?"
+msgstr ""
