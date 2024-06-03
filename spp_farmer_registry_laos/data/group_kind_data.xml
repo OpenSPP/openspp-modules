@@ -1,8 +1,0 @@
-<odoo noupdate="1">
-
-    <record id="kind_farmer_group" model="g2p.group.kind">
-        <field name="name">Farmer Group</field>
-        <field name="allow_all_member_type">True</field>
-    </record>
-
-</odoo>
