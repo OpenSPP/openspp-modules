@@ -1,3 +1,4 @@
+
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* g2p_entitlement_cash

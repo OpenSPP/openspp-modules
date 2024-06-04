@@ -19,7 +19,7 @@
         # "g2p_bank",
         "spp_custom_field",
         # "spp_custom_fields_ui",
-        "g2p_entitlement_cash",
+        "spp_entitlement_cash",
         # "spp_dashboard",
         "spp_idpass",
         "spp_idqueue",

@@ -1996,11 +1996,6 @@ msgid "Employee"
 msgstr ""
 
 #. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__encrypted_val
-msgid "Encrypted value"
-msgstr ""
-
-#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_cycle__end_date
 #: model_terms:ir.ui.view,arch_db:g2p_programs.cycle_filter
 msgid "End Date"
@@ -2761,11 +2756,6 @@ msgstr ""
 #. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__invoice_ids
 msgid "Invoices"
-msgstr ""
-
-#. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__is_encrypted
-msgid "Is Encrypted"
 msgstr ""
 
 #. module: g2p_programs

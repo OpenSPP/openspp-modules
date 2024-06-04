@@ -1,0 +1,346 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_entitlement_cash
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ckb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,help:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__max_multiplier
+#: model:ir.model.fields,help:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__max_multiplier
+msgid "0 means no limit"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.actions.act_window,help:spp_entitlement_cash.action_entitlement_manager_cash
+msgid "Add an Entitlement Manager!"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__amount
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__amount
+msgid "Amount per cycle"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields.selection,name:spp_entitlement_cash.selection__g2p_program_create_wizard__entitlement_kind__cash
+msgid "Cash"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__entitlement_id
+msgid "Cash Entitlement"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.create_program_wizard_form_view_custom_cash
+msgid "Cash Entitlement Item"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard__entitlement_cash_item_ids
+msgid "Cash Entitlement Items"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model,name:spp_entitlement_cash.model_g2p_program_entitlement_manager
+#: model:ir.model,name:spp_entitlement_cash.model_g2p_program_entitlement_manager_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.view_entitlement_manager_cash_form
+msgid "Cash Entitlement Manager"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model,name:spp_entitlement_cash.model_g2p_program_entitlement_manager_cash_item
+msgid "Cash Entitlement Manager Items"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.ui.menu,name:spp_entitlement_cash.menu_entitlement_manager_cash
+msgid "Cash Entitlement Managers"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Cash Entitlements"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.actions.act_window,help:spp_entitlement_cash.action_entitlement_manager_cash
+msgid "Click the create button to enter a new cash entitlement manager."
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__condition
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__condition
+msgid "Condition Domain"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model,name:spp_entitlement_cash.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model,name:spp_entitlement_cash.model_g2p_program_create_wizard_entitlement_cash_item
+msgid "Create a New Program Wizard Entitlement Cash Items"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__create_uid
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__create_uid
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__create_date
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__create_date
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__currency_id
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__currency_id
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__display_name
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__display_name
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.view_entitlement_manager_cash_form
+msgid "Enter the Manager Name..."
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Entitlement"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.view_entitlement_manager_cash_form
+msgid "Entitlement Item"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__entitlement_item_ids
+msgid "Entitlement Items"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.actions.act_window,name:spp_entitlement_cash.action_entitlement_manager_cash
+msgid "Entitlement Managers"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid ""
+"Entitlement State Error! Entitlements not in 'pending validation' state:\n"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__entitlement_validation_group_id
+msgid "Entitlement Validation Group"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Entitlements Validated and Approved."
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid ""
+"Entitlements are not approved due to some issues. Kindly address the issue."
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Entitlements are validated and approved."
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard__evaluate_one_item
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__evaluate_one_item
+msgid "Evaluate One Item"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.create_program_wizard_form_view_custom_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.view_entitlement_manager_cash_form
+msgid "Evaluate one item"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.entitlement_manager_cash_filter
+msgid "Group By"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__id
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__id
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/wizard/create_program_wizard.py:0
+#, python-format
+msgid "Items are required in the Cash entitlement manager."
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item____last_update
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash____last_update
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__write_uid
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__write_uid
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__write_date
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__write_date
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard__entitlement_kind
+msgid "Manager"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__name
+msgid "Manager Name"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard__max_amount
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__max_amount
+msgid "Maximum Amount"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.create_program_wizard_form_view_custom_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.view_entitlement_manager_cash_form
+msgid "Maximum Amount:"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__max_multiplier
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__max_multiplier
+msgid "Maximum number"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__multiplier_field
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__multiplier_field
+msgid "Multiplier"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.view_entitlement_manager_cash_form
+msgid "Name:"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__program_id
+msgid "New Program"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__program_id
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.entitlement_manager_cash_filter
+msgid "Program"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.view_entitlement_manager_cash_form
+msgid "Program:"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.view_entitlement_manager_cash_tree
+msgid "Rules"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.entitlement_manager_cash_filter
+msgid "Search Cash Entitlement Manager"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model_terms:ir.ui.view,arch_db:spp_entitlement_cash.view_entitlement_manager_cash_form
+msgid "Select a program..."
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_create_wizard_entitlement_cash_item__sequence
+#: model:ir.model.fields,field_description:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: model:ir.model.fields,help:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash__currency_id
+#: model:ir.model.fields,help:spp_entitlement_cash.field_g2p_program_entitlement_manager_cash_item__currency_id
+msgid "The currency used to enter statement"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid ""
+"The fund for the program: %(program)s [%(fund).2f] is insufficient for the "
+"entitlement: %(entitlement)s"
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "There are no items entered for this entitlement manager."
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Validate %s entitlements started."
+msgstr ""
+
+#. module: spp_entitlement_cash
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#, python-format
+msgid "Validate and approve entitlements for cycle."
+msgstr ""

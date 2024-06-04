@@ -14,7 +14,7 @@
         "g2p_programs",
         "spp_programs",
         "spp_service_points",
-        "g2p_entitlement_cash",
+        "spp_entitlement_cash",
         "spp_entitlement_in_kind",
     ],
     "data": [
