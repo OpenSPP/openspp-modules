@@ -241,6 +241,8 @@ msgstr ""
 #: code:addons/g2p_registry_membership/models/group.py:0
 #: code:addons/g2p_registry_membership/models/group_membership.py:0
 #: code:addons/g2p_registry_membership/models/group_membership.py:0
+#: code:addons/g2p_registry_membership/models/individual.py:0
+#: code:addons/g2p_registry_membership/models/individual.py:0
 #, python-format
 msgid "Only one %s is allowed per group"
 msgstr ""
