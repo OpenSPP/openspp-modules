@@ -21,11 +21,6 @@ msgid ""
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_aberdeen_angus_cattle
-msgid "Aberdeen angus cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_asset__active_area
 msgid "Active Area"
 msgstr ""
@@ -51,16 +46,6 @@ msgid "Adjacent water body"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_african_carp
-msgid "African Carp"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_african_catfish
-msgid "African Catfish"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model,name:spp_farmer_registry_demo.model_spp_farm_activity
 msgid "Agricultural Activities"
 msgstr ""
@@ -68,26 +53,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__cultivation_production_system__agroforestry
 msgid "Agroforestry"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_aloe
-msgid "Aloe"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_alstroemeria
-msgid "Alstroemeria"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_amaranths
-msgid "Amaranths"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_angora_rex_rabbit
-msgid "Angora rex rabbit"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -120,26 +85,11 @@ msgid "Animal hormones"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_anthurium
-msgid "Anthurium"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_apples
-msgid "Apples"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_apriary
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_apriary
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_apriary
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_apriary
 msgid "Apriary"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_apricots
-msgid "Apricots"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -174,11 +124,6 @@ msgid "Aquaponics"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_arabicum
-msgid "Arabicum"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__aquaculture_beneficiary_esp
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__aquaculture_beneficiary_esp
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__aquaculture_beneficiary_esp
@@ -186,26 +131,6 @@ msgstr ""
 msgid ""
 "Are you a beneficiary of the government of Kenya's economic stimulus "
 "programme (ESP)?"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_arrow_root
-msgid "Arrow root"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_artemia
-msgid "Artemia"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_artemisia
-msgid "Artemisia"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_artichoke
-msgid "Artichoke"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -217,58 +142,8 @@ msgid "Artificial Insemination (AI)"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_asparagus
-msgid "Asparagus"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_avocados
-msgid "Avocados"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_ayrshire_cattle
-msgid "Ayrshire cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_baby_corn
-msgid "Baby Corn"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_bambara
-msgid "Bambara"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_bamboo
-msgid "Bamboo"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_bananas
-msgid "Bananas"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_barley
-msgid "Barley"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_basil
-msgid "Basil"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__basin
 msgid "Basin"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_beans
-msgid "Beans"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -280,16 +155,6 @@ msgid "Bee House"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_beetroot
-msgid "Beetroot"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_begonia
-msgid "Begonia"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_biogas_production
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_biogas_production
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_biogas_production
@@ -298,78 +163,13 @@ msgid "Biogas production"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_bixa
-msgid "Bixa"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_black_nightshade
-msgid "Black Nightshade"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_black_persian_sheep
-msgid "Black Persian sheep"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_blackhead_sheep
-msgid "Blackhead sheep"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_boer_goat
-msgid "Boer Goat"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_boran_cattle
-msgid "Boran cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_box_bee_hives
-msgid "Box Bee hives"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_bracharia
-msgid "Bracharia"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__aquaculture_type__brackish
 msgid "Brackish"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_broad_beans
-msgid "Broad Beans"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_broccoli
-msgid "Broccoli"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_broiler_chicken
-msgid "Broiler Chicken"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_brown_swiss_cattle
-msgid "Brown swiss cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__bucket
 msgid "Bucket"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_bulb_onion
-msgid "Bulb Onion"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -381,28 +181,8 @@ msgid "Business partners"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_butter_nut
-msgid "Butter Nut"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_cabbages
-msgid "Cabbages"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__cages
 msgid "Cages"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_californian_white_rabbit
-msgid "Californian white rabbit"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_calliandra
-msgid "Calliandra"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -414,43 +194,8 @@ msgid "Cambered beds"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_capsicum
-msgid "Capsicum"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_carnations
-msgid "Carnations"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_carrots
-msgid "Carrots"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_carthamus
-msgid "Carthamus"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__cash_transfer
 msgid "Cash transfer"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_cashew_nuts
-msgid "Cashew nuts"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_cassava
-msgid "Cassava"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_castor
-msgid "Castor"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -459,26 +204,11 @@ msgid "Casual labor elsewhere"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_catfish
-msgid "Catfish"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_cattle_boma
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_cattle_boma
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_cattle_boma
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_cattle_boma
 msgid "Cattle Boma"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_cauliflower
-msgid "Cauliflower"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_celery
-msgid "Celery"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -492,38 +222,8 @@ msgid "Certificate"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_charolais_cattle
-msgid "Charolais cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_activity__cultivation_chemical_interventions
 msgid "Chemical interventions"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_chickpeas
-msgid "Chickpeas"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_chilies
-msgid "Chilies"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_chinchilla_rabbit
-msgid "Chinchilla rabbit"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_chives
-msgid "Chives"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_cinnamon
-msgid "Cinnamon"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -532,41 +232,11 @@ msgid "Click the create button to enter the new record."
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_clover
-msgid "Clover"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_cloves
-msgid "Cloves"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_cocoa
-msgid "Cocoa"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_coconuts
-msgid "Coconuts"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_coffee
-msgid "Coffee"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_commercial_bank
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_commercial_bank
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_commercial_bank
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_commercial_bank
 msgid "Commercial Bank"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_common_carp
-msgid "Common Carp"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -630,39 +300,9 @@ msgid "Cooperatives"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_corriander
-msgid "Corriander"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_corriedale_sheep
-msgid "Corriedale sheep"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_cotton
-msgid "Cotton"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_extension_service_provider__county_government
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_implementing_body__county_government
 msgid "County Government"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_courgettes
-msgid "Courgettes"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_cowpeas
-msgid "Cowpeas"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_crabs
-msgid "Crabs"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -673,11 +313,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__create_date
 msgid "Created on"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_crocodiles
-msgid "Crocodiles"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -694,18 +329,8 @@ msgid "Crop Rotation"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_cucumbers
-msgid "Cucumbers"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_activity__cultivation_production_system
 msgid "Cultivation Production system"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_custard_apple
-msgid "Custard Apple"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -722,26 +347,11 @@ msgid "Date of Birth"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_dates
-msgid "Dates"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_deep_ripping
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_deep_ripping
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_deep_ripping
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_deep_ripping
 msgid "Deep ripping"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_desmodium
-msgid "Desmodium"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_dexter_cattle
-msgid "Dexter cattle"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -861,21 +471,6 @@ msgid "Do you utilize fertilizer in the ponds?"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_dolichos
-msgid "Dolichos"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_donkeys
-msgid "Donkeys"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_dorper_sheep
-msgid "Dorper sheep"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__state__draft
 msgid "Draft"
 msgstr ""
@@ -886,43 +481,8 @@ msgid "Drip"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_ducks
-msgid "Ducks"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_dudhi
-msgid "Dudhi"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_duroc_pig
-msgid "Duroc pig"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_dutch_rabit
-msgid "Dutch Rabit"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_mode_of_extension_service__e-extension
 msgid "E-Extension"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_ear_lope_rabbit
-msgid "Ear lope rabbit"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_easter_lilly
-msgid "Easter Lilly"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_eggplant
-msgid "Eggplant"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -941,11 +501,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
 msgid "Enterprises"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_erygium
-msgid "Erygium"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1084,16 +639,6 @@ msgid "Fingerlings"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_fleckvieh_cattle
-msgid "Fleckvieh cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_flemish_giant_rabbit
-msgid "Flemish giant Rabbit"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__flooding
 msgid "Flooding"
 msgstr ""
@@ -1117,18 +662,8 @@ msgid "Free Range"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_french_beans
-msgid "French Beans"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__aquaculture_type__freshwater
 msgid "Freshwater"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_friesian_cattle
-msgid "Friesian cattle"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1144,31 +679,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__furrow_canal
 msgid "Furrow Canal"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_gabbra_camels
-msgid "Gabbra Camels"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_galla_goat
-msgid "Galla Goat"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_galloway_cattle
-msgid "Galloway cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_garlic
-msgid "Garlic"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_geese
-msgid "Geese"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1202,28 +712,8 @@ msgid "Generated"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_ginger
-msgid "Ginger"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
 msgid "Given Name"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_gladiolus
-msgid "Gladiolus"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_grain_amaranthus
-msgid "Grain Amaranthus"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_grapefruits
-msgid "Grapefruits"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1232,11 +722,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_grass_strips
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_grass_strips
 msgid "Grass strips"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_green_grams
-msgid "Green Grams"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1266,18 +751,8 @@ msgid "Grid electricity"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_groundnuts
-msgid "Groundnuts"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_mode_of_extension_service__group_demonstrations
 msgid "Group demonstrations"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_groupers
-msgid "Groupers"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1294,51 +769,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__growing_crops_subsistence
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__growing_crops_subsistence
 msgid "Growing crops for subsistence?"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_guard
-msgid "Guard"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_guatemala
-msgid "Guatemala"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_guavas
-msgid "Guavas"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_guernsey_cattle
-msgid "Guernsey cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_guinea_fowl
-msgid "Guinea fowl"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_gypsophilla
-msgid "Gypsophilla"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_hair_sheep
-msgid "Hair sheep"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_hampshire_pig
-msgid "Hampshire pig"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_hampshire_sheep
-msgid "Hampshire sheep"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1387,11 +817,6 @@ msgid "Hay Store"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_hereford_cattle
-msgid "Hereford cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__highest_education_level
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__highest_education_level
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__highest_education_level
@@ -1401,16 +826,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_own_equipment__hirer
 msgid "Hirer"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_hops
-msgid "Hops"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_horses
-msgid "Horses"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1448,11 +863,6 @@ msgid "Implementing body"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_improved_kienyeji
-msgid "Improved Kienyeji"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_asset__inactive_area
 msgid "Inactive Area"
 msgstr ""
@@ -1460,11 +870,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_asset__inactive_volume
 msgid "Inactive Volume"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_indigenous_chicken
-msgid "Indigenous Chicken"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1486,11 +891,6 @@ msgid "Internet"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_invertebrates
-msgid "Invertebrates"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__cultivation_water_source__irrigated
 msgid "Irrigated"
 msgstr ""
@@ -1504,41 +904,6 @@ msgid "Irrigation scheme membership"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_jatropha
-msgid "Jatropha"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_jersey_cattle
-msgid "Jersey cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_jojoba
-msgid "Jojoba"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_jute_plant
-msgid "Jute plant"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_kales
-msgid "Kales"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_karella
-msgid "Karella"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_kenaf
-msgid "Kenaf"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__locale__en_ke
 msgid "Kenya (English)"
 msgstr ""
@@ -1546,26 +911,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__locale__sw_ke
 msgid "Kenya (Swahili)"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_kenya_top_bar_hives
-msgid "Kenya Top Bar Hives"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_kenyan_alpine_goat
-msgid "Kenyan Alpine goat"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_kikuyu_grass
-msgid "Kikuyu grass"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_koi_carp_large
-msgid "Koi carp Large"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1595,23 +940,8 @@ msgid "Land and Water Management"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_land_race_pig
-msgid "Land race pig"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_langstroth_bee_hives
-msgid "Langstroth Bee hives"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_generate_farmer_data__locale__lo_la
 msgid "Laos (Lao)"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_large_white_pig
-msgid "Large white pig"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1622,61 +952,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__write_date
 msgid "Last Updated on"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_lavender
-msgid "Lavender"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_layer_chicken
-msgid "Layer Chicken"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_leaf_amaranth
-msgid "Leaf Amaranth"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_leeks
-msgid "Leeks"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_lemon_grass
-msgid "Lemon Grass"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_lemons
-msgid "Lemons"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_lentils
-msgid "Lentils"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_lettuce
-msgid "Lettuce"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_leucaena
-msgid "Leucaena"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_lime
-msgid "Lime"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_linseed
-msgid "Linseed"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1695,11 +970,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_loading_ramp
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_loading_ramp
 msgid "Loading Ramp"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_lobsters
-msgid "Lobsters"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1723,48 +993,8 @@ msgid "Locality water supply"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_log_bee_hives
-msgid "Log Bee hives"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_love_grass
-msgid "Love grass"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_lucerne
-msgid "Lucerne"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_lungfish
-msgid "Lungfish"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_lupins
-msgid "Lupins"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_macadamia_nuts
-msgid "Macadamia nuts"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_maize
-msgid "Maize"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__man_made_dam
 msgid "Man made dam"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_mangoes
-msgid "Mangoes"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1832,21 +1062,11 @@ msgid "Members"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_merino_sheep
-msgid "Merino sheep"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_micro_finance_institutions
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_micro_finance_institutions
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_micro_finance_institutions
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_micro_finance_institutions
 msgid "Micro-finance institutions"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_milk_fish
-msgid "Milk fish"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1858,26 +1078,11 @@ msgid "Milking parlor"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_millet
-msgid "Millet"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_minimum_tillage
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_minimum_tillage
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_minimum_tillage
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_minimum_tillage
 msgid "Minimum Tillage"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_mint
-msgid "Mint"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_miraa
-msgid "Miraa"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1894,11 +1099,6 @@ msgid "Mobile Money saving & loans"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_mobydick
-msgid "Mobydick"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_modern_granary
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_modern_granary
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_modern_granary
@@ -1912,23 +1112,8 @@ msgid "Mono-cropping"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_moringa
-msgid "Moringa"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_power_source__motorized
 msgid "Motorized (fossil fuels)"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_mouth_bass
-msgid "Mouth Bass"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_mud_crabs
-msgid "Mud crabs"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1937,21 +1122,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_mulching
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_mulching
 msgid "Mulching"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_mules
-msgid "Mules"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_mullet
-msgid "Mullet"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_mushroom
-msgid "Mushroom"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -1975,11 +1145,6 @@ msgid "Name:"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_napier
-msgid "Napier"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_implementing_body__national_government
 msgid "National Government"
 msgstr ""
@@ -1997,11 +1162,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__natural_rivers_and_streams
 msgid "Natural rivers and streams"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_new_zealand_white
-msgid "New Zealand white"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2058,43 +1218,8 @@ msgid "Number of groups..."
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_oats
-msgid "Oats"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_oil_palm
-msgid "Oil Palm"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_okra
-msgid "Okra"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_olives
-msgid "Olives"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_onions
-msgid "Onions"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
 msgid "Open Individual Form"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_oranges
-msgid "Oranges"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_orchids
-msgid "Orchids"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2106,16 +1231,6 @@ msgid "Organic farming"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_ornamentals
-msgid "Ornamentals"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_ostriches
-msgid "Ostriches"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__other
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__other
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_power_source__other
@@ -2124,8 +1239,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_mode_of_extension_service__other
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_implementing_body__other
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_type__other
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_other
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_other
 msgid "Other"
 msgstr ""
 
@@ -2143,53 +1256,8 @@ msgid "Out grower"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_oyster_prawns
-msgid "Oyster Prawns"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_pakistan_camels
-msgid "Pakistan Camels"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_papyrus
-msgid "Papyrus"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_parsley
-msgid "Parsley"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_passion_fruits
-msgid "Passion fruits"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__pastoralism
 msgid "Pastoralism"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_pawpaws
-msgid "Pawpaws"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_peaches
-msgid "Peaches"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_pears
-msgid "Pears"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_peas
-msgid "Peas"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2198,18 +1266,8 @@ msgid "Peer-to-Peer"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_pennisetum
-msgid "Pennisetum"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__pension
 msgid "Pension"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_peppers
-msgid "Peppers"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2228,43 +1286,13 @@ msgid "Phone Numbers"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_pigeon_peas
-msgid "Pigeon Peas"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_pigeons
-msgid "Pigeons"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_pineapples
-msgid "Pineapples"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_plantains
-msgid "Plantains"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__cultivation_production_system__plantation
 msgid "Plantation"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_plums
-msgid "Plums"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__ponds
 msgid "Ponds"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_potatoes
-msgid "Potatoes"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2311,26 +1339,6 @@ msgid "Public irrigation scheme"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_pumpkins
-msgid "Pumpkins"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_pyrethrum
-msgid "Pyrethrum"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_quails
-msgid "Quails"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_rabbit
-msgid "Rabbit"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__raceways
 msgid "Raceways"
 msgstr ""
@@ -2338,11 +1346,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_source_of_information_on_good_agricultu__radio
 msgid "Radio"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_radish
-msgid "Radish"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2358,11 +1361,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__livestock_production_system__ranching
 msgid "Ranching"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_rapeseed
-msgid "Rapeseed"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2387,16 +1385,6 @@ msgid "Recirculating Aquaculture Systems"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_red_maasai_sheep
-msgid "Red Maasai sheep"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_red_poll_cattle
-msgid "Red poll cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_source_of_information_on_good_agricultu__relatives
 msgid "Relatives"
 msgstr ""
@@ -2407,21 +1395,6 @@ msgid "Remittances"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_rendille_camels
-msgid "Rendille Camels"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_rhodes_grass
-msgid "Rhodes grass"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_rice
-msgid "Rice"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__land_water_management_irrigation_source__road_runoff
 msgid "Road runoff"
 msgstr ""
@@ -2429,21 +1402,6 @@ msgstr ""
 #. module: spp_farmer_registry_demo
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
 msgid "Role"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_romney_mash_sheep
-msgid "Romney mash sheep"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_rosemary
-msgid "Rosemary"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_roses
-msgid "Roses"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2460,21 +1418,6 @@ msgid "Routine vaccination"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_rye
-msgid "Rye"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_saanen_goat
-msgid "Saanen Goat"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_sahiwal_cattle
-msgid "Sahiwal cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_main_income_source__salary_from_employment_elsewhere
 msgid "Salary from employment elsewhere"
 msgstr ""
@@ -2485,26 +1428,11 @@ msgid "Sale of farming produce"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_santa_getrudis_cattle
-msgid "Santa getrudis cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_savings_credit_groups
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_savings_credit_groups
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_savings_credit_groups
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__financial_services_savings_credit_groups
 msgid "Savings & Credit groups"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_scabiosa
-msgid "Scabiosa"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_seaweed
-msgid "Seaweed"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2541,16 +1469,6 @@ msgid "Semi-intensive"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_sesbania
-msgid "Sesbania"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_setaria
-msgid "Setaria"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_individual_form
 msgid "Sex"
@@ -2562,16 +1480,6 @@ msgid "Shallow well or borehole"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_shellfish
-msgid "Shellfish"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_shrimp
-msgid "Shrimp"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_structure_sick_bay
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_structure_sick_bay
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_sick_bay
@@ -2580,83 +1488,8 @@ msgid "Sick Bay"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_silkworms
-msgid "Silkworms"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_silver_pompano
-msgid "Silver Pompano"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_simmental_cattle
-msgid "Simmental cattle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_simsim
-msgid "Simsim"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_sisal
-msgid "Sisal"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_slender_leaf
-msgid "Slender Leaf"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_small_east_african_goats
-msgid "Small East African Goats"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_snails
-msgid "Snails"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__farm_technology_power_source__solar
 msgid "Solar"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_somali_camels
-msgid "Somali Camels"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_somali_goat
-msgid "Somali Goat"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_sorghum
-msgid "Sorghum"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_southdown_sheep
-msgid "Southdown sheep"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_soybeans
-msgid "Soybeans"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_spider_plant
-msgid "Spider plant"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_spinach
-msgid "Spinach"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2665,11 +1498,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_spray_race
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_spray_race
 msgid "Spray Race"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_spring_onion
-msgid "Spring Onion"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2688,58 +1516,8 @@ msgid "Sri Lanka (Tamil)"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_star_grass
-msgid "Star grass"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_generate_farmer_data__state
 msgid "State"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_stevia
-msgid "Stevia"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_stinging_nettle
-msgid "Stinging Nettle"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_strawberries
-msgid "Strawberries"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_sugar_beet
-msgid "Sugar Beet"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_sugar_cane
-msgid "Sugar Cane"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_sunflower
-msgid "Sunflower"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_sweet_potatoes
-msgid "Sweet Potatoes"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_sweet_sorghum
-msgid "Sweet Sorghum"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_swordtail
-msgid "Swordtail"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2751,18 +1529,8 @@ msgid "Table Banking Group"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_tangerines
-msgid "Tangerines"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_activity__aquaculture_production_system__tanks
 msgid "Tanks"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_tea
-msgid "Tea"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2804,36 +1572,6 @@ msgid "Tethering"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_themeda_grass
-msgid "Themeda Grass"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_tilapia
-msgid "Tilapia"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_tindori
-msgid "Tindori"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_tobacco
-msgid "Tobacco"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_toggenburg_goat
-msgid "Toggenburg goat"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_tomatoes
-msgid "Tomatoes"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_total_irrigated_area
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_total_irrigated_area
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_total_irrigated_area
@@ -2858,51 +1596,11 @@ msgid "Trash line"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_tree_tomato
-msgid "Tree Tomato"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__tree_farming
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__tree_farming
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__tree_farming
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__tree_farming
 msgid "Tree farming?"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_trout
-msgid "Trout"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_tumeric
-msgid "Tumeric"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_tunguja
-msgid "Tunguja"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_turia
-msgid "Turia"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_turkana_camels
-msgid "Turkana Camels"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_turkeys
-msgid "Turkeys"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_turnip
-msgid "Turnip"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -2935,26 +1633,6 @@ msgid "University"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_valore
-msgid "Valore"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_vanilla
-msgid "Vanilla"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_veronica
-msgid "Veronica"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_vetches
-msgid "Vetches"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__financial_services_vulnerable_marginalized_group
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__financial_services_vulnerable_marginalized_group
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__financial_services_vulnerable_marginalized_group
@@ -2976,11 +1654,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_water_harvesting
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_water_harvesting
 msgid "Water harvesting"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_water_melon
-msgid "Water melon"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -3084,11 +1757,6 @@ msgid ""
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_wheat
-msgid "Wheat"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
 msgid ""
 "Where do you access financial / credit services to facilitate your farming "
@@ -3106,11 +1774,6 @@ msgid "Which assisted reproductive health technology do you use?"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_white_sapote
-msgid "White Sapote"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__farm_technology_own_equipment
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__farm_technology_own_equipment
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_own_equipment
@@ -3124,21 +1787,11 @@ msgid "Wind"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_yams
-msgid "Yams"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_g2p_program_membership__land_water_management_zai_pits
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_partner__land_water_management_zai_pits
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__land_water_management_zai_pits
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__land_water_management_zai_pits
 msgid "Zai pits"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_live_zebu_cattle
-msgid "Zebu cattle"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
@@ -3152,10 +1805,4 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_res_users__farm_technology_structure_zero_grazing_unit
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_details__farm_technology_structure_zero_grazing_unit
 msgid "Zero Grazing Unit"
-msgstr ""
-
-#. module: spp_farmer_registry_demo
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_aqua_test
-#: model:spp.farm.species,name:spp_farmer_registry_demo.species_crop_test
-msgid "test"
 msgstr ""
