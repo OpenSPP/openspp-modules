@@ -135,4 +135,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=OpenSPP_openspp-modules
+            -Dsonar.organization=openspp
+            -Dsonar.host.url=https://sonarcloud.io
         if: ${{ matrix.sonar == 'true' && github.event_name == 'push' && github.repository_owner == 'openspp' }}
