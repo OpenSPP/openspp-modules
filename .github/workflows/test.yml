@@ -130,13 +130,3 @@ jobs:
       - name: Update .pot files
         run: oca_export_and_push_pot https://x-access-token:${{ secrets.GIT_PUSH_TOKEN }}@github.com/${{ github.repository }}
         if: ${{ matrix.makepot == 'true' && github.event_name == 'push' && github.repository_owner == 'openspp' }}
-      - uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: >
-            -Dsonar.projectKey=OpenSPP_openspp-modules
-            -Dsonar.organization=openspp
-            -Dsonar.host.url=https://sonarcloud.io
-        if: ${{ matrix.sonar == 'true' && github.event_name == 'push' && github.repository_owner == 'openspp' }}
