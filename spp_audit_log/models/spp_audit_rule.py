@@ -84,7 +84,8 @@ class SppAuditRule(models.Model):
                             "res_model": "spp.audit.log",
                             "binding_model_id": rec.model_id.id,
                             "binding_view_types": "form",
-                            "domain": "[('model_id','=', {}), " "('res_id', '=', id), ('method', 'in', {})]".format(
+                            "domain": "[('model_id','=', {}), "
+                            "('res_id', '=', active_id), ('method', 'in', {})]".format(
                                 rec.model_id.id,
                                 [method.replace("_", "") for method in self._methods],
                             ),
@@ -174,18 +175,13 @@ class SppAuditRule(models.Model):
     def unlink(self):
         for rec in self:
             # get number of audit rule with the same model
-            audit_rule_count = self.env["spp.audit.rule"].search(
-                [("model_id", "=", rec.model_id.id)],
-                count=True,
-            )
+            audit_rule_count = len(self.env["spp.audit.rule"].search([("model_id", "=", rec.model_id.id)]))
 
             # if only 1 and with menu action, unlink menu action
             if audit_rule_count == 1 and rec.action_id:
                 rec.action_id.unlink()
 
-            super(SppAuditRule, rec).unlink()
-
-        return
+            return super(SppAuditRule, rec).unlink()
 
     @classmethod
     def _format_data_to_log(cls, old_values, new_values, fields_to_log):
