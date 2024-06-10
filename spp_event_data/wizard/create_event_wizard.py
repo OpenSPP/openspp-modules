@@ -19,6 +19,20 @@ class SPPCreateEventWizard(models.TransientModel):
     collection_date = fields.Date(default=date.today())
     expiry_date = fields.Date()
 
+    def get_event_data_vals(self):
+        """
+        This returns the event data values
+        :return: Event Data Values
+        """
+        self.ensure_one()
+        return {
+            "model": self.event_data_model,
+            "partner_id": self.partner_id.id,
+            "registrar": self.registrar or False,
+            "collection_date": self.collection_date or False,
+            "expiry_date": self.expiry_date or False,
+        }
+
     def next_page(self):
         """
         These set up the event data model then proceed to its view for the
@@ -37,14 +51,9 @@ class SPPCreateEventWizard(models.TransientModel):
                     wizard_model += "%s." % split_wizard
                 wizard_model += "wizard"
                 view_id = rec.get_view_id(wizard_model)
+
                 # create the event data and pass it to event_data_model wizard
-                vals_list = {
-                    "model": model_name,
-                    "partner_id": rec.partner_id.id,
-                    "registrar": rec.registrar or False,
-                    "collection_date": rec.collection_date or False,
-                    "expiry_date": rec.expiry_date or False,
-                }
+                vals_list = rec.get_event_data_vals()
                 event_id = self.env["spp.event.data"].create(vals_list)
 
                 wiz = self.env[wizard_model].create({"event_id": event_id.id})
