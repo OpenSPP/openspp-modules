@@ -116,6 +116,65 @@ class OpenSPPAreaImport(models.Model):
         for rec in self:
             rec.update({"state": self.UPLOADED})
 
+    def get_column_indexes(self, columns, area_level):
+        self.ensure_one()
+
+        # Get column prefix and the language iso code used in the name header
+        name_iso_code = columns[0].split("_")[1]
+        column_name_prefix = f"ADM{area_level}"
+
+        # Get Column name to be used as name field in the area
+        name_header = f"{column_name_prefix}_{name_iso_code}"
+
+        # Get Column name to be used as code field in the area
+        code_header = f"{column_name_prefix}_PCODE"
+
+        # get name and code column indexes
+        name_index = columns.index(name_header)
+        code_index = columns.index(code_header)
+
+        # Get index of the Parent header of the area if area level is not 0
+        parent_name_index = None
+        parent_code_index = None
+        if area_level != 0:
+            parent_name_header = f"{column_name_prefix[:3]}{area_level - 1}_{name_iso_code}"
+            parent_code_header = f"{column_name_prefix[:3]}{area_level - 1}_PCODE"
+
+            parent_name_index = columns.index(parent_name_header)
+            parent_code_index = columns.index(parent_code_header)
+
+        # Get area_sqkm column index
+        area_sqkm_index = None
+        if "AREA_SQKM" in columns:
+            area_sqkm_index = columns.index("AREA_SQKM")
+
+        return {
+            "name_index": name_index,
+            "code_index": code_index,
+            "parent_name_index": parent_name_index,
+            "parent_code_index": parent_code_index,
+            "area_sqkm_index": area_sqkm_index,
+        }
+
+    def get_area_vals(self, column_indexes, row, sheet, area_level):
+        self.ensure_one()
+
+        vals = {
+            "admin_name": sheet.cell(row, column_indexes["name_index"]).value,
+            "admin_code": sheet.cell(row, column_indexes["code_index"]).value,
+            "parent_name": "",
+            "parent_code": "",
+            "level": area_level,
+        }
+        if column_indexes["area_sqkm_index"]:
+            vals["area_sqkm"] = sheet.cell(row, column_indexes["area_sqkm_index"]).value
+
+        if column_indexes["parent_name_index"] is not None and column_indexes["parent_code_index"] is not None:
+            vals["parent_name"] = sheet.cell(row, column_indexes["parent_name_index"]).value
+            vals["parent_code"] = sheet.cell(row, column_indexes["parent_code_index"]).value
+
+        return vals
+
     def import_data(self):
         """
         The `import_data` function imports data from an Excel file, processes it, and updates the record
@@ -152,57 +211,11 @@ class OpenSPPAreaImport(models.Model):
                 # get column list of sheet
                 columns = sheet.row_values(0)
 
-                # Get column prefix and the language iso code used in the name header
-                name_iso_code = columns[0].split("_")[1]
-                column_name_prefix = f"ADM{area_level}"
-
-                # Get Column name to be used as name field in the area
-                name_header = f"{column_name_prefix}_{name_iso_code}"
-
-                # Get Column name to be used as code field in the area
-                code_header = f"{column_name_prefix}_PCODE"
-
-                # get name and code column indexes
-                name_index = columns.index(name_header)
-                code_index = columns.index(code_header)
-
-                # Get index of the Parent header of the area if area level is not 0
-                parent_name_index = None
-                parent_code_index = None
-                if area_level != 0:
-                    parent_name_header = f"{column_name_prefix[:3]}{area_level - 1}_{name_iso_code}"
-                    parent_code_header = f"{column_name_prefix[:3]}{area_level - 1}_PCODE"
-
-                    parent_name_index = columns.index(parent_name_header)
-                    parent_code_index = columns.index(parent_code_header)
-
-                # Get area_sqkm column index
-                area_sqkm_index = None
-                if "AREA_SQKM" in columns:
-                    area_sqkm_index = columns.index("AREA_SQKM")
+                column_indexes = rec.get_column_indexes(columns, area_level)
 
                 # Get the required values for area in each row
                 for row in range(1, sheet.nrows):
-                    vals = {
-                        "admin_name": sheet.cell(row, name_index).value,
-                        "admin_code": sheet.cell(row, code_index).value,
-                        "parent_name": "",
-                        "parent_code": "",
-                        "level": area_level,
-                    }
-                    if area_sqkm_index:
-                        vals.update(
-                            {
-                                "area_sqkm": sheet.cell(row, area_sqkm_index).value,
-                            }
-                        )
-                    if parent_name_index is not None and parent_code_index is not None:
-                        vals.update(
-                            {
-                                "parent_name": sheet.cell(row, parent_name_index).value,
-                                "parent_code": sheet.cell(row, parent_code_index).value,
-                            }
-                        )
+                    vals = rec.get_area_vals(column_indexes, row, sheet, area_level)
                     row_data_vals.append([0, 0, vals])
 
             rec.update(
@@ -227,36 +240,30 @@ class OpenSPPAreaImport(models.Model):
         for rec in self:
             raw_data_count = len(rec.raw_data_ids)
             if raw_data_count < self.MIN_ROW_JOB_QUEUE:
-                rec._validate_raw_data()
+                rec._validate_raw_data(rec.raw_data_ids)
+                rec._validate_mark_done()
             else:
-                rec._async_function(raw_data_count, _("Validating data."), "_validate_raw_data")
+                rec._async_function(
+                    rec.raw_data_ids, _("Validating data."), "_validate_raw_data", "_validate_mark_done"
+                )
 
-    def _validate_raw_data(self):
+    def _validate_raw_data(self, raw_data_ids):
         """
         The function validates raw data and updates the state if there are no errors.
         """
         self.ensure_one()
+        raw_data_ids.validate_raw_data()
 
-        has_error = self.raw_data_ids.validate_raw_data()
-        if not has_error:
+    def _validate_mark_done(self):
+        self.ensure_one()
+        if not self.env["spp.area.import.raw"].search([("id", "in", self.raw_data_ids.ids), ("state", "=", "Error")]):
             self.update(
                 {
                     "state": self.VALIDATED,
                 }
             )
 
-    def _async_function(self, raw_data_count, reason_message, function_name):
-        """
-        The above function is an asynchronous function that locks the current record, executes a delayed
-        job, and marks the job as done when it completes.
-
-        :param raw_data_count: The `raw_data_count` parameter represents the number of raw data items
-        that will be processed in the async function
-        :param reason_message: The `reason_message` parameter is a string that represents the reason for
-        locking the object
-        :param function_name: The `function_name` parameter is the name of the function that will be
-        called asynchronously
-        """
+    def _async_function(self, raw_data, reason_message, function_name, function_mark_done):
         self.ensure_one()
 
         self.write(
@@ -267,17 +274,14 @@ class OpenSPPAreaImport(models.Model):
         )
 
         jobs = []
-
-        func = getattr(self.delayable(channel="root.area_import"), function_name)
-
-        jobs.append(func())
+        jobs.append(getattr(self.delayable(channel="root.area_import"), function_name)(raw_data))
 
         main_job = group(*jobs)
 
-        main_job.on_done(self.delayable(channel="root.area_import")._async_mark_done())
+        main_job.on_done(self.delayable(channel="root.area_import")._async_mark_done(function_mark_done))
         main_job.delay()
 
-    def _async_mark_done(self):
+    def _async_mark_done(self, function_mark_done=None):
         """
         The function `_async_mark_done` unlocks a resource by setting the `locked` attribute to `False`
         and clearing the `locked_reason` attribute.
@@ -286,6 +290,9 @@ class OpenSPPAreaImport(models.Model):
 
         self.locked = False
         self.locked_reason = None
+
+        if function_mark_done:
+            getattr(self, function_mark_done)()
 
     def save_to_area(self):
         """
@@ -296,18 +303,29 @@ class OpenSPPAreaImport(models.Model):
             raw_data_count = len(rec.raw_data_ids)
 
             if raw_data_count < self.MIN_ROW_JOB_QUEUE:
-                rec._save_to_area()
+                rec._save_to_area(rec.raw_data_ids)
+                rec._save_to_area_mark_done()
             else:
-                rec._async_function(raw_data_count, _("Saving to Area."), "_save_to_area")
+                rec._async_function(rec.raw_data_ids, _("Saving to Area."), "_save_to_area", "_save_to_area_mark_done")
 
-    def _save_to_area(self):
+    def _save_to_area(self, raw_data_ids):
         """
         The function saves raw data to an area and updates the state to "DONE".
         """
         self.ensure_one()
 
-        self.raw_data_ids.save_to_area()
-        self.state = self.DONE
+        raw_data_ids.save_to_area()
+
+    def _save_to_area_mark_done(self):
+        self.ensure_one()
+        if not self.env["spp.area.import.raw"].search(
+            [("id", "in", self.raw_data_ids.ids), ("state", "=", "Validated")]
+        ):
+            self.update(
+                {
+                    "state": self.DONE,
+                }
+            )
 
     def refresh_page(self):
         """
@@ -360,36 +378,32 @@ class OpenSPPAreaImportActivities(models.Model):
         default="New",
     )
 
+    def check_errors(self):
+        self.ensure_one()
+        errors = []
+        if not self.admin_name or not self.admin_code:
+            errors.append(_("Name and Code of area is required."))
+
+        if self.area_sqkm:
+            try:
+                float(self.area_sqkm)
+            except ValueError:
+                errors.append(_("AREA_SQKM should be numerical."))
+
+        if self.level == 0 and (self.parent_name or self.parent_code):
+            errors.append(_("Level 0 area should not have a parent name and parent code."))
+
+        if self.level != 0 and (not self.parent_name or not self.parent_code):
+            errors.append(_("Level 1 and above area should have a parent name and parent code."))
+        return errors
+
     def validate_raw_data(self):
-        """
-        The function `validate_raw_data` checks the validity of raw data by validating various fields
-        and updating the state and remarks of each record accordingly.
-        :return: a boolean value indicating whether there are any errors in the raw data. If there are
-        errors, the value returned will be True. If there are no errors, the value returned will be
-        False.
-        """
-        has_error = False
         for rec in self:
-            errors = []
-            if not rec.admin_name or not rec.admin_code:
-                errors.append(_("Name and Code of area is required."))
-
-            if rec.area_sqkm:
-                try:
-                    float(rec.area_sqkm)
-                except ValueError:
-                    errors.append(_("AREA_SQKM should be numerical."))
-
-            if rec.level == 0 and (rec.parent_name or rec.parent_code):
-                errors.append(_("Level 0 area should not have a parent name and parent code."))
-
-            if rec.level != 0 and (not rec.parent_name or not rec.parent_code):
-                errors.append(_("Level 1 and above area should have a parent name and parent code."))
+            errors = rec.check_errors()
 
             if errors:
                 state = self.ERROR
                 remarks = "\n".join(errors)
-                has_error = True
             else:
                 state = self.VALIDATED
                 remarks = "No Error"
@@ -401,7 +415,36 @@ class OpenSPPAreaImportActivities(models.Model):
                 }
             )
 
-        return has_error
+    def get_area_vals(self):
+        self.ensure_one()
+
+        parent_id = None
+        if self.parent_name and self.parent_code:
+            parent_id = (
+                self.env["spp.area"]
+                .search(
+                    [
+                        ("draft_name", "=", self.parent_name),
+                        ("code", "=", self.parent_code),
+                    ],
+                    limit=1,
+                )
+                .id
+            )
+
+        area_sqkm = self.area_sqkm
+
+        try:
+            area_sqkm = float(area_sqkm)
+        except ValueError:
+            area_sqkm = 0.0
+
+        return {
+            "parent_id": parent_id,
+            "draft_name": self.admin_name,
+            "code": self.admin_code,
+            "area_sqkm": area_sqkm,
+        }
 
     def save_to_area(self):
         """
@@ -409,33 +452,7 @@ class OpenSPPAreaImportActivities(models.Model):
         they exist and creating new records if they don't.
         """
         for rec in self:
-            parent_id = None
-            if rec.parent_name and rec.parent_code:
-                parent_id = (
-                    self.env["spp.area"]
-                    .search(
-                        [
-                            ("draft_name", "=", rec.parent_name),
-                            ("code", "=", rec.parent_code),
-                        ],
-                        limit=1,
-                    )
-                    .id
-                )
-
-            area_sqkm = rec.area_sqkm
-
-            try:
-                area_sqkm = float(area_sqkm)
-            except ValueError:
-                area_sqkm = 0.0
-
-            area_vals = {
-                "parent_id": parent_id,
-                "draft_name": rec.admin_name,
-                "code": rec.admin_code,
-                "area_sqkm": area_sqkm,
-            }
+            area_vals = rec.get_area_vals()
             if area_id := self.env["spp.area"].search([("code", "=", rec.admin_code)]):
                 state = self.UPDATED
                 area_id.update(area_vals)
