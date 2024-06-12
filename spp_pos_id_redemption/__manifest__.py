@@ -21,6 +21,7 @@
     ],
     "assets": {
         "point_of_sale._assets_pos": [
+            "spp_pos_id_redemption/static/src/view/customer_button.xml",
             "spp_pos_id_redemption/static/src/view/popup_voucher.xml",
             "spp_pos_id_redemption/static/src/view/entitlement_product_list.xml",
             "spp_pos_id_redemption/static/src/view/product_screen.xml",

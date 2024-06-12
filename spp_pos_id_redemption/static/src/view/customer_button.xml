@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="spp_pos_id_redemption.CustomerButton" t-inherit="point_of_sale.CustomerButton">
+        <xpath expr="//div[hasclass('control-button')]" position="replace">
+            <div
+                class="control-button customer-button btn rounded-0 fw-bolder text-truncate"
+                t-attf-class="{{this.partner ? 'btn-primary' : 'btn-light'}}"
+                t-on-click="() => this.pos.selectPartner()"
+            >
+                <i class="fa fa-user me-1" role="img" aria-label="Customer" title="Beneficiary" />
+                <t t-esc="this.partner.name" t-if="this.partner" />
+                <t t-else="">
+                    Beneficiary
+                </t>
+            </div>
+        </xpath>
+    </t>
+
+</templates>
