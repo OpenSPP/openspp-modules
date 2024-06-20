@@ -1,0 +1,31 @@
+<odoo>
+    <record id="view_spp_event_data_form_custom" model="ir.ui.view">
+        <field name="name">view_spp_event_data_form_custom</field>
+        <field name="model">spp.event.data</field>
+        <field name="inherit_id" ref="spp_event_data.view_spp_event_data_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit" />
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="program_membership_id_domain" invisible="1" />
+                <field name="program_membership_id" domain="program_membership_id_domain" />
+            </xpath>
+            <xpath expr="//field[@name='model']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='res_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='registrar']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='collection_date']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='expiry_date']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

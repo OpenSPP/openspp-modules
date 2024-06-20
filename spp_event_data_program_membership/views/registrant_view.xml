@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_groups_event_data_form_custom" model="ir.ui.view">
+        <field name="name">view_groups_event_data_form_custom</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="spp_event_data.view_groups_event_data_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='event_data_ids']" position="attributes">
+                <attribute name="readonly" />
+                <attribute name="options">{'create': False, 'delete': False}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
