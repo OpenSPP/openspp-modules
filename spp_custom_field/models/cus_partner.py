@@ -32,7 +32,8 @@ class OpenSPPResPartner(models.Model):
                 order="ttype, field_description",
             )
             if basic_info_page:
-                action_id = action_id.context.replace("'", '"')
+                if action_id.context:
+                    action_id = action_id.context.replace("'", '"')
                 is_group = ast.literal_eval(action_id).get("default_is_group")
 
                 custom_page = etree.Element("page", {"string": "Additional Details"})
