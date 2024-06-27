@@ -88,7 +88,13 @@ class Base(models.AbstractModel):
             return in_tuple
         field_obj = self.env["ir.model.fields"]
         name = field_obj.browse(in_tuple[0]).name
-        return (in_tuple[0], name, in_tuple[1], field_obj.browse(in_tuple[0]).field_description)
+        return (
+            in_tuple[0],
+            name,
+            in_tuple[1],
+            field_obj.browse(in_tuple[0]).field_description,
+            field_obj.browse(in_tuple[0]).ttype,
+        )
 
     @api.model
     def get_gis_layers(self, view_id=None, view_type="gis", **options):
