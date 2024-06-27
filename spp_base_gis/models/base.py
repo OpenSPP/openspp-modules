@@ -140,6 +140,14 @@ class Base(models.AbstractModel):
         }
 
     @api.model
+    def get_edit_info_for_gis(self):
+        view = self._get_gis_view()
+        return {
+            "default_zoom": view.default_zoom,
+            "default_center": view.default_center,
+        }
+
+    @api.model
     def get_fields_of_type(self, field_type: str | list) -> list:
         """
         This Python function retrieves fields of a specified type from a model object.

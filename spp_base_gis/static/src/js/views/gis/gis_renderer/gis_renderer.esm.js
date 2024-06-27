@@ -151,6 +151,15 @@ export class GisRenderer extends Component {
 
     async renderMap() {
         let defaultCenter = [124.74037191, 7.83479874];
+        let defaultZoom = 6;
+        const editInfo = await this.orm.call(this.props.data._config.resModel, "get_edit_info_for_gis", []);
+
+        if (editInfo.default_center) {
+            defaultCenter = JSON.parse(editInfo.default_center);
+        }
+        if (editInfo.default_zoom) {
+            defaultZoom = editInfo.default_zoom;
+        }
 
         if (this.featureCollection.features.length > 0) {
             const centroid = turf.centroid(this.featureCollection);
@@ -172,7 +181,7 @@ export class GisRenderer extends Component {
             container: "olmap",
             style: defaultMapStyle,
             center: defaultCenter,
-            zoom: 6,
+            zoom: defaultZoom,
         });
 
         this.map.on("styledata", () => {
