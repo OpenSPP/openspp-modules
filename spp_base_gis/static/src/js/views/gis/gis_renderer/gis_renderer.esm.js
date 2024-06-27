@@ -311,10 +311,10 @@ export class GisRenderer extends Component {
     createDefaultDataLayers(layer) {
         let layer_obj = {};
         const visibility = layer.isVisible ? "visible" : "none";
-        const geoType = layer.geo_field_id[3];
+        const geoType = layer.geo_field_id[4];
         const opacity = Math.min(1, Math.max(0, layer.layer_opacity));
 
-        if (geoType === "Polygon") {
+        if (geoType === "geo_polygon") {
             layer_obj = {
                 id: layer.id,
                 type: "fill",
@@ -330,7 +330,7 @@ export class GisRenderer extends Component {
             };
         }
 
-        if (geoType === "Point") {
+        if (geoType === "geo_point") {
             layer_obj = {
                 id: layer.id,
                 type: "circle",
@@ -346,7 +346,7 @@ export class GisRenderer extends Component {
             };
         }
 
-        if (geoType === "LineString") {
+        if (geoType === "geo_line") {
             layer_obj = {
                 id: layer.id,
                 type: "line",
@@ -445,17 +445,17 @@ export class GisRenderer extends Component {
     async onDataLayerChanged() {
         for (const layer of this.dataLayersStore.getLayers) {
             const visibility = layer.isVisible ? "visible" : "none";
-            const geoType = layer.geo_field_id[3];
+            const geoType = layer.geo_field_id[4];
             const opacity = Math.min(1, Math.max(0, layer.layer_opacity));
             let layerType = "";
 
-            if (geoType === "Point") {
+            if (geoType === "geo_point") {
                 layerType = "circle";
             }
-            if (geoType === "LineString") {
+            if (geoType === "geo_line") {
                 layerType = "line";
             }
-            if (geoType === "Polygon") {
+            if (geoType === "geo_polygon") {
                 layerType = "fill";
             }
 
