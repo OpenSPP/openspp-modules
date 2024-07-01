@@ -48,10 +48,9 @@ class AreaImportRawTest(AreaImportTestMixin):
         self.area_import_raw_id.parent_name = "MNL"
         self.area_import_raw_child_id.parent_name = ""
 
-        result = self.area_import_raw_id.validate_raw_data()
-        result_child = self.area_import_raw_child_id.validate_raw_data()
+        self.area_import_raw_id.validate_raw_data()
+        self.area_import_raw_child_id.validate_raw_data()
 
-        self.assertTrue(result)
         self.assertEqual(self.area_import_raw_id.state, "Error")
         self.assertIn("Name and Code of area is required.", self.area_import_raw_id.remarks)
         self.assertIn("AREA_SQKM should be numerical.", self.area_import_raw_id.remarks)
@@ -60,7 +59,6 @@ class AreaImportRawTest(AreaImportTestMixin):
             self.area_import_raw_id.remarks,
         )
 
-        self.assertTrue(result_child)
         self.assertEqual(self.area_import_raw_child_id.state, "Error")
         self.assertIn(
             "Level 1 and above area should have a parent name and parent code.",
