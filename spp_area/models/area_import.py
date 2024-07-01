@@ -35,7 +35,7 @@ class OpenSPPAreaImport(models.Model):
         (CANCELLED, CANCELLED),
     ]
 
-    name = fields.Char("File Name", required=True)
+    name = fields.Char("File Name", required=True, translate=True)
     excel_file = fields.Binary("Area Excel File")
     date_uploaded = fields.Datetime()
 
@@ -118,26 +118,39 @@ class OpenSPPAreaImport(models.Model):
 
     def get_column_indexes(self, columns, area_level):
         self.ensure_one()
+        default_lang = self.env.context.get("lang", "en_US")
+        if default_lang not in columns:
+            default_lang = "en_US"
+        default_iso_code = default_lang.split("_")[0].upper()
+
+        active_languages = self.env["res.lang"].search([("active", "=", True)])
+        if not active_languages:
+            raise ValidationError(_("No active language found."))
 
         # Get column prefix and the language iso code used in the name header
-        name_iso_code = columns[0].split("_")[1]
+        lang_codes = active_languages.read(fields=["code", "iso_code"])
         column_name_prefix = f"ADM{area_level}"
 
         # Get Column name to be used as name field in the area
-        name_header = f"{column_name_prefix}_{name_iso_code}"
+        name_headers = {code["code"]: f"{column_name_prefix}_{code['iso_code'].upper()}" for code in lang_codes}
 
         # Get Column name to be used as code field in the area
         code_header = f"{column_name_prefix}_PCODE"
 
         # get name and code column indexes
-        name_index = columns.index(name_header)
+        name_indexes = {}
+        for name_header in name_headers:
+            try:
+                name_indexes.update({name_header: columns.index(name_headers[name_header])})
+            except ValueError:
+                pass
         code_index = columns.index(code_header)
 
         # Get index of the Parent header of the area if area level is not 0
         parent_name_index = None
         parent_code_index = None
         if area_level != 0:
-            parent_name_header = f"{column_name_prefix[:3]}{area_level - 1}_{name_iso_code}"
+            parent_name_header = f"{column_name_prefix[:3]}{area_level - 1}_{default_iso_code}"
             parent_code_header = f"{column_name_prefix[:3]}{area_level - 1}_PCODE"
 
             parent_name_index = columns.index(parent_name_header)
@@ -149,7 +162,7 @@ class OpenSPPAreaImport(models.Model):
             area_sqkm_index = columns.index("AREA_SQKM")
 
         return {
-            "name_index": name_index,
+            "name_indexes": name_indexes,
             "code_index": code_index,
             "parent_name_index": parent_name_index,
             "parent_code_index": parent_code_index,
@@ -158,13 +171,16 @@ class OpenSPPAreaImport(models.Model):
 
     def get_area_vals(self, column_indexes, row, sheet, area_level):
         self.ensure_one()
-
+        default_lang = self.env.context.get("lang", "en_US")
+        if default_lang not in column_indexes["name_indexes"]:
+            default_lang = "en_US"
         vals = {
-            "admin_name": sheet.cell(row, column_indexes["name_index"]).value,
+            "admin_name": sheet.cell(row, column_indexes["name_indexes"][default_lang]).value,
             "admin_code": sheet.cell(row, column_indexes["code_index"]).value,
             "parent_name": "",
             "parent_code": "",
             "level": area_level,
+            "area_import_id": self.id,
         }
         if column_indexes["area_sqkm_index"]:
             vals["area_sqkm"] = sheet.cell(row, column_indexes["area_sqkm_index"]).value
@@ -174,6 +190,17 @@ class OpenSPPAreaImport(models.Model):
             vals["parent_code"] = sheet.cell(row, column_indexes["parent_code_index"]).value
 
         return vals
+
+    def create_import_raw(self, vals, column_indexes, row, sheet):
+        self.ensure_one()
+        import_raw_id = self.env["spp.area.import.raw"].create(vals)
+        for lang_code in column_indexes["name_indexes"]:
+            lang_name = sheet.cell(row, column_indexes["name_indexes"][lang_code]).value
+            import_raw_id.with_context(lang=lang_code).write(
+                {
+                    "admin_name": lang_name,
+                }
+            )
 
     def import_data(self):
         """
@@ -202,7 +229,6 @@ class OpenSPPAreaImport(models.Model):
             sheet_names = book.sheet_names()
             sheet_names.sort()
 
-            row_data_vals = []
             # Iterate sheet name and their index as area level
             for area_level, sheet_name in enumerate(sheet_names):
                 # get sheet object by sheet name
@@ -215,8 +241,9 @@ class OpenSPPAreaImport(models.Model):
 
                 # Get the required values for area in each row
                 for row in range(1, sheet.nrows):
-                    vals = rec.get_area_vals(column_indexes, row, sheet, area_level)
-                    row_data_vals.append([0, 0, vals])
+                    import_raw_vals = rec.get_area_vals(column_indexes, row, sheet, area_level)
+
+                    rec.create_import_raw(import_raw_vals, column_indexes, row, sheet)
 
             rec.update(
                 {
@@ -225,7 +252,6 @@ class OpenSPPAreaImport(models.Model):
                     "date_validated": fields.Datetime.now(),
                     "validate_id": self.env.user,
                     "state": self.IMPORTED,
-                    "raw_data_ids": row_data_vals,
                 }
             )
 
@@ -361,7 +387,7 @@ class OpenSPPAreaImportActivities(models.Model):
     ]
 
     area_import_id = fields.Many2one("spp.area.import", "Area Import", required=True)
-    admin_name = fields.Char()
+    admin_name = fields.Char(translate=True)
     admin_code = fields.Char()
 
     parent_name = fields.Char()
@@ -424,7 +450,6 @@ class OpenSPPAreaImportActivities(models.Model):
                 self.env["spp.area"]
                 .search(
                     [
-                        ("draft_name", "=", self.parent_name),
                         ("code", "=", self.parent_code),
                     ],
                     limit=1,
@@ -451,6 +476,7 @@ class OpenSPPAreaImportActivities(models.Model):
         The function saves data to the "spp.area" model in the database, updating existing records if
         they exist and creating new records if they don't.
         """
+        active_languages = self.env["res.lang"].search([("active", "=", True)])
         for rec in self:
             area_vals = rec.get_area_vals()
             if area_id := self.env["spp.area"].search([("code", "=", rec.admin_code)]):
@@ -458,7 +484,16 @@ class OpenSPPAreaImportActivities(models.Model):
                 area_id.update(area_vals)
             else:
                 state = self.POSTED
-                self.env["spp.area"].create(area_vals)
+                area_id = self.env["spp.area"].create(area_vals)
+
+            for lang in active_languages:
+                area_id.with_context(lang=lang.code).write(
+                    {
+                        "draft_name": rec.with_context(lang=lang.code).admin_name,
+                    }
+                )
+                area_id.with_context(lang=lang.code)._compute_name()
+                area_id.with_context(lang=lang.code)._compute_complete_name()
 
             rec.update(
                 {
