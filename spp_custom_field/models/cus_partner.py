@@ -15,6 +15,49 @@ _logger = logging.getLogger(__name__)
 class OpenSPPResPartner(models.Model):
     _inherit = "res.partner"
 
+    def create_field_element(self, div_element, model_field_id, is_ind=False):
+        div_element2 = etree.SubElement(
+            div_element,
+            "div",
+            {"class": "col-12 col-lg-6 o_setting_box"},
+        )
+        div_element_left = etree.SubElement(div_element2, "div", {"class": "o_setting_left_pane"})
+        div_element_right = etree.SubElement(div_element2, "div", {"class": "o_setting_right_pane"})
+
+        if model_field_id.ttype == "boolean":
+            sub_element_params = {
+                "name": model_field_id.name,
+            }
+            if is_ind:
+                sub_element_params["readonly"] = "1"
+                sub_element_params["class"] = "oe_read_only"
+            new_field = etree.SubElement(
+                div_element_left,
+                "field",
+                sub_element_params,
+            )
+            etree.SubElement(div_element_right, "label", {"for": model_field_id.name})
+            if model_field_id.help:
+                div_element_right_help = etree.SubElement(div_element_right, "div", {"class": "text-muted"})
+                span = etree.SubElement(div_element_right_help, "span")
+                span.text = model_field_id.help
+
+        else:
+            etree.SubElement(div_element_right, "label", {"for": model_field_id.name})
+
+            if model_field_id.help:
+                div_element_right_help = etree.SubElement(div_element_right, "div", {"class": "text-muted"})
+                span = etree.SubElement(div_element_right_help, "span")
+                span.text = model_field_id.help
+
+            div_element_right_inner_div = etree.SubElement(div_element_right, "div", {"class": "text-muted"})
+            new_field = etree.SubElement(div_element_right_inner_div, "field", {"name": model_field_id.name})
+
+        if is_ind:
+            new_field.set("readonly", "1")
+            modifiers = {"readonly": True}
+            new_field.set("modifiers", json.dumps(modifiers))
+
     def _get_view(self, view_id=None, view_type="form", **options):
         arch, view = super()._get_view(view_id, view_type, **options)
 
@@ -47,85 +90,10 @@ class OpenSPPResPartner(models.Model):
                         continue
 
                     if len(els) >= 2 and els[1] == "cst":
-                        custom_div2 = etree.SubElement(
-                            custom_div,
-                            "div",
-                            {"class": "col-12 col-lg-6 o_setting_box"},
-                        )
-                        custom_div_left = etree.SubElement(custom_div2, "div", {"class": "o_setting_left_pane"})
-                        custom_div_right = etree.SubElement(custom_div2, "div", {"class": "o_setting_right_pane"})
-                        if rec.ttype == "boolean":
-                            etree.SubElement(custom_div_left, "field", {"name": rec.name})
-                            etree.SubElement(custom_div_right, "label", {"for": rec.name})
-                            if rec.help:
-                                custom_div_right_help = etree.SubElement(
-                                    custom_div_right, "div", {"class": "text-muted"}
-                                )
-                                span = etree.SubElement(custom_div_right_help, "span")
-                                span.text = rec.help
-
-                        else:
-                            etree.SubElement(custom_div_right, "label", {"for": rec.name})
-
-                            if rec.help:
-                                custom_div_right_help = etree.SubElement(
-                                    custom_div_right, "div", {"class": "text-muted"}
-                                )
-                                span = etree.SubElement(custom_div_right_help, "span")
-                                span.text = rec.help
-
-                            custom_div_right_inner_div = etree.SubElement(
-                                custom_div_right, "div", {"class": "text-muted"}
-                            )
-                            etree.SubElement(custom_div_right_inner_div, "field", {"name": rec.name})
+                        self.create_field_element(custom_div, rec)
 
                     elif len(els) >= 2 and els[1] == "ind":
-                        indicators_div2 = etree.SubElement(
-                            indicators_div,
-                            "div",
-                            {"class": "col-12 col-lg-6 o_setting_box"},
-                        )
-                        indicators_div_left = etree.SubElement(indicators_div2, "div", {"class": "o_setting_left_pane"})
-                        indicators_div_right = etree.SubElement(
-                            indicators_div2, "div", {"class": "o_setting_right_pane"}
-                        )
-                        if rec.ttype == "boolean":
-                            new_field = etree.SubElement(
-                                indicators_div_left,
-                                "field",
-                                {
-                                    "name": rec.name,
-                                    "readonly": "1",
-                                    "class": "oe_read_only",
-                                },
-                            )
-                            etree.SubElement(indicators_div_right, "label", {"for": rec.name})
-                            if rec.help:
-                                indicators_div_right_help = etree.SubElement(
-                                    indicators_div_right, "div", {"class": "text-muted"}
-                                )
-                                span = etree.SubElement(indicators_div_right_help, "span")
-                                span.text = rec.help
-                        else:
-                            etree.SubElement(indicators_div_right, "label", {"for": rec.name})
-                            if rec.help:
-                                indicators_div_right_help = etree.SubElement(
-                                    indicators_div_right, "div", {"class": "text-muted"}
-                                )
-                                span = etree.SubElement(indicators_div_right_help, "span")
-                                span.text = rec.help
-                            indicators_div_right_inner_div = etree.SubElement(
-                                indicators_div_right, "div", {"class": "text-muted"}
-                            )
-                            new_field = etree.SubElement(
-                                indicators_div_right_inner_div,
-                                "field",
-                                {"name": rec.name},
-                            )
-
-                        new_field.set("readonly", "1")
-                        modifiers = {"readonly": True}
-                        new_field.set("modifiers", json.dumps(modifiers))
+                        self.create_field_element(indicators_div, rec, is_ind=True)
 
                 if custom_div.getchildren():
                     basic_info_page[0].addnext(custom_page)
