@@ -394,6 +394,14 @@ msgid "New"
 msgstr ""
 
 #. module: spp_area
+#. odoo-python
+#: code:addons/spp_area/models/area_import.py:0
+#: code:addons/spp_area/models/area_import.py:0
+#, python-format
+msgid "No active language found."
+msgstr ""
+
+#. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area__parent_id
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_kind__parent_id
 #: model_terms:ir.ui.view,arch_db:spp_area.spparea_filter
