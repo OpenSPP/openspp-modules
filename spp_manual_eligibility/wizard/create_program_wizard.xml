@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="create_program_wizard_form_view_manual" model="ir.ui.view">
+        <field name="name">create_program_wizard_form_view_manual</field>
+        <field name="model">g2p.program.create.wizard</field>
+        <field name="priority">1010</field>
+        <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='next_step']" position="attributes">
+                <attribute name="invisible">
+                    eligibility_kind == 'manual_eligibility' or state == 'step2'
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="invisible">
+                    eligibility_kind == 'manual_eligibility'
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='create_program']" position="attributes">
+                <attribute name="invisible">
+                    state == 'step1' and eligibility_kind != 'manual_eligibility'
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
