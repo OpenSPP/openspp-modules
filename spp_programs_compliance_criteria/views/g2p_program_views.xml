@@ -8,9 +8,9 @@
         <field name="priority">1000000</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_managers']/parent::group/parent::group" position="after">
-                <group colspan="2" string="Compliance Managers">
-                    <group colspan="2">
-                        <field name="compliance_managers" nolabel="1" widget="many2many">
+                <group>
+                    <group string="Compliance Managers">
+                        <field name="compliance_managers" nolabel="1" widget="many2many" colspan="2">
                             <tree editable="top">
                                 <button
                                     name="open_manager_form"
