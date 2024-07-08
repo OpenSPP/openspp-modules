@@ -61,6 +61,8 @@ class SppUniqueId(models.AbstractModel):
     @api.depends("create_date")
     def _compute_spp_id(self):
         for rec in self:
+            if not rec.create_date:
+                continue
             prefix = rec._get_spp_id_prefix()
             if not prefix:
                 rec.spp_id = False
