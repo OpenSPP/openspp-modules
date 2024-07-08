@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//group/field[@name='entitlement_kind']" position="after">
-                <field name="store_sp_in_entitlements" colspan="4" />
+                <field name="store_sp_in_entitlements" />
             </xpath>
         </field>
     </record>
