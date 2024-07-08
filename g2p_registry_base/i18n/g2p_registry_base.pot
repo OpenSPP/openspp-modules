@@ -378,6 +378,14 @@ msgid "ID Type Validation"
 msgstr ""
 
 #. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/reg_id.py:0
+#: code:addons/g2p_registry_base/models/reg_id.py:0
+#, python-format
+msgid "ID Type must be unique."
+msgstr ""
+
+#. module: g2p_registry_base
 #: model:ir.actions.act_window,name:g2p_registry_base.action_id_type
 #: model:ir.ui.menu,name:g2p_registry_base.menu_id_type
 #: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_id_filter
@@ -838,4 +846,14 @@ msgstr ""
 #. module: g2p_registry_base
 #: model:ir.model.fields,help:g2p_registry_base.field_g2p_reg_rel__website_message_ids
 msgid "Website communication history"
+msgstr ""
+
+#. module: g2p_registry_base
+#. odoo-python
+#: code:addons/g2p_registry_base/models/registrant.py:0
+#: code:addons/g2p_registry_base/models/registrant.py:0
+#, python-format
+msgid ""
+"You do not have the necessary permissions to delete partner records. Please "
+"contact the administrator."
 msgstr ""
