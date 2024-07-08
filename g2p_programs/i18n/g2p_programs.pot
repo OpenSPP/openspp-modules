@@ -92,6 +92,14 @@ msgstr ""
 #: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
 #: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
 #, python-format
+msgid "%(registrant)s is added to the Program %(program)s"
+msgstr ""
+
+#. module: g2p_programs
+#. odoo-python
+#: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
+#: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
+#, python-format
 msgid "%(registrant)s was already in the Program %(program)s"
 msgstr ""
 
@@ -99,8 +107,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/g2p_programs/models/program_membership.py:0
 #: code:addons/g2p_programs/models/program_membership.py:0
-#: code:addons/g2p_programs/models/programs.py:0
-#: code:addons/g2p_programs/models/programs.py:0
 #, python-format
 msgid "%s Beneficiaries duplicate."
 msgstr ""
@@ -113,6 +119,14 @@ msgstr ""
 #: code:addons/g2p_programs/models/program_membership.py:0
 #, python-format
 msgid "%s Beneficiaries enrolled."
+msgstr ""
+
+#. module: g2p_programs
+#. odoo-python
+#: code:addons/g2p_programs/models/programs.py:0
+#: code:addons/g2p_programs/models/programs.py:0
+#, python-format
+msgid "%s Instances of Beneficiaries duplicate."
 msgstr ""
 
 #. module: g2p_programs
@@ -247,6 +261,11 @@ msgstr ""
 #: model:ir.model.fields,help:g2p_programs.field_g2p_assign_program_wizard__program_id
 #: model:ir.model.fields,help:g2p_programs.field_g2p_program_membership__program_id
 msgid "A program"
+msgstr ""
+
+#. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.view_program_list_form
+msgid "ARCHIVED"
 msgstr ""
 
 #. module: g2p_programs
@@ -796,11 +815,19 @@ msgstr ""
 #. odoo-python
 #: code:addons/g2p_programs/models/cycle_membership.py:0
 #: code:addons/g2p_programs/models/cycle_membership.py:0
+#, python-format
+msgid ""
+"Beneficiaries can only be deleted when both the cycle and entitlement are "
+"unapproved."
+msgstr ""
+
+#. module: g2p_programs
+#. odoo-python
 #: code:addons/g2p_programs/models/cycle_membership.py:0
 #: code:addons/g2p_programs/models/cycle_membership.py:0
 #, python-format
 msgid ""
-"Beneficiaries can only be deleted when both the cycle and entitlement are "
+"Beneficiaries can only be deleted when both the cycle andentitlement are "
 "unapproved."
 msgstr ""
 
@@ -1135,6 +1162,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_entitlement__company_id
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_payment__company_id
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program__company_id
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_create_wizard__company_id
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_fund__company_id
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_fund_report_view__company_id
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__company_id
@@ -1173,6 +1201,7 @@ msgid "Company database ID"
 msgstr ""
 
 #. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.create_program_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:g2p_programs.view_program_fund_form
 msgid "Company:"
 msgstr ""
@@ -1533,7 +1562,7 @@ msgstr ""
 
 #. module: g2p_programs
 #: model:ir.model.constraint,message:g2p_programs.constraint_g2p_cycle_unique_cycle_name_program
-msgid "Cycle with this name already exists. Please choose a different name."
+msgid "Cycle with this name already exists.Please choose a different name."
 msgstr ""
 
 #. module: g2p_programs
@@ -1796,7 +1825,31 @@ msgstr ""
 #: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
 #: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
 #, python-format
+msgid "Disabled Individual(s) can't be added to the program %s"
+msgstr ""
+
+#. module: g2p_programs
+#. odoo-python
+#: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
+#: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
+#, python-format
 msgid "Disabled group can't be added to the program."
+msgstr ""
+
+#. module: g2p_programs
+#. odoo-python
+#: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
+#: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
+#, python-format
+msgid "Disabled group(s) can't be added to the program %s"
+msgstr ""
+
+#. module: g2p_programs
+#. odoo-python
+#: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
+#: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
+#, python-format
+msgid "Disabled individaul can't be added to the program."
 msgstr ""
 
 #. module: g2p_programs
@@ -5046,6 +5099,14 @@ msgstr ""
 
 #. module: g2p_programs
 #. odoo-python
+#: code:addons/g2p_programs/models/entitlement.py:0
+#: code:addons/g2p_programs/models/entitlement.py:0
+#, python-format
+msgid "The \"Valid Until\" date cannot be earlier than the \"Valid From\" date."
+msgstr ""
+
+#. module: g2p_programs
+#. odoo-python
 #: code:addons/g2p_programs/wizard/create_program_wizard.py:0
 #: code:addons/g2p_programs/wizard/create_program_wizard.py:0
 #, python-format
@@ -5393,6 +5454,11 @@ msgstr ""
 #. module: g2p_programs
 #: model:ir.model.fields,help:g2p_programs.field_g2p_program_membership__barcode
 msgid "Use a barcode to identify this contact."
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model,name:g2p_programs.model_res_users
+msgid "User"
 msgstr ""
 
 #. module: g2p_programs
