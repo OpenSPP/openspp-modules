@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_event_data_program_membership
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_event_data_program_membership
+#: model:ir.model,name:spp_event_data_program_membership.model_spp_create_event_wizard
+msgid "Create Event Wizard"
+msgstr ""
+
+#. module: spp_event_data_program_membership
+#: model:ir.model,name:spp_event_data_program_membership.model_spp_event_data
+msgid "Event Data"
+msgstr ""
+
+#. module: spp_event_data_program_membership
+#: model:ir.model,name:spp_event_data_program_membership.model_g2p_program_membership
+#: model:ir.model.fields,field_description:spp_event_data_program_membership.field_spp_create_event_wizard__program_membership_id
+#: model:ir.model.fields,field_description:spp_event_data_program_membership.field_spp_event_data__program_membership_id
+msgid "Program Membership"
+msgstr ""
+
+#. module: spp_event_data_program_membership
+#: model:ir.model.fields,field_description:spp_event_data_program_membership.field_spp_create_event_wizard__program_membership_id_domain
+#: model:ir.model.fields,field_description:spp_event_data_program_membership.field_spp_event_data__program_membership_id_domain
+msgid "Program Membership Id Domain"
+msgstr ""
