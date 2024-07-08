@@ -28,7 +28,7 @@
                             class="oe_stat_button"
                             icon="fa-address-card-o"
                             name="create_user"
-                            invisible="not is_disabled or not res_partner_company_id"
+                            invisible="is_disabled or not res_partner_company_id"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Create SP User</span>
