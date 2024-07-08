@@ -24,9 +24,9 @@ class StockMove(models.Model):
             picking_id = self.mapped("picking_id")
             entitlement_ids = self.mapped("entitlement_id.cycle_id")
             for entitlement_id in entitlement_ids:
-                picking_id.message_post_with_view(
+                picking_id.message_post_with_source(
                     "mail.message_origin_link",
-                    values={"self": picking_id, "origin": entitlement_id},
+                    render_values={"self": picking_id, "origin": entitlement_id},
                     subtype_id=self.env.ref("mail.mt_note").id,
                 )
         return
