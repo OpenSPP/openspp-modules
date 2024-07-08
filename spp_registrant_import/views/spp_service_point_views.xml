@@ -6,8 +6,10 @@
         <field name="model">spp.service.point</field>
         <field name="inherit_id" ref="spp_service_points.view_service_points_form" />
         <field name="arch" type="xml">
-            <xpath expr="//group" position="inside">
-                <field name="spp_id" />
+            <xpath expr="//group" position="before">
+                <group>
+                    <field name="spp_id" />
+                </group>
             </xpath>
         </field>
     </record>
