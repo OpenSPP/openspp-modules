@@ -162,7 +162,7 @@ class G2PGroup(models.Model):
         """
         now = datetime.datetime.now()
         domain = [
-            ("birthdate", ">=", now - relativedelta(years=11)),
+            ("birthdate", ">", now - relativedelta(years=12)),
         ]
         self.compute_count_and_set_indicator("z_ind_grp_num_children_11_and_below", None, domain)
 

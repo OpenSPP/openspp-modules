@@ -42,6 +42,9 @@ class OpenSPPResPartner(models.Model):
                 span = etree.SubElement(div_element_right_help, "span")
                 span.text = model_field_id.help
 
+            div_element_right_inner_div = etree.SubElement(div_element_right, "div", {"class": "text-muted"})
+            new_field = etree.SubElement(div_element_right_inner_div, "field", {"name": model_field_id.name})
+
         else:
             etree.SubElement(div_element_right, "label", {"for": model_field_id.name})
 
