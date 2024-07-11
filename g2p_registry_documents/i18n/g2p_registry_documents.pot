@@ -1,0 +1,52 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* g2p_registry_documents
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: g2p_registry_documents
+#: model:ir.model,name:g2p_registry_documents.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: g2p_registry_documents
+#: model_terms:ir.ui.view,arch_db:g2p_registry_documents.view_registrant_documents_form_group
+#: model_terms:ir.ui.view,arch_db:g2p_registry_documents.view_registrant_documents_form_individual
+msgid "Documents"
+msgstr ""
+
+#. module: g2p_registry_documents
+#: model_terms:ir.ui.view,arch_db:g2p_registry_documents.view_registrant_documents_form_group
+#: model_terms:ir.ui.view,arch_db:g2p_registry_documents.view_registrant_documents_form_individual
+msgid "Name"
+msgstr ""
+
+#. module: g2p_registry_documents
+#: model:ir.model.fields,field_description:g2p_registry_documents.field_storage_file__registrant_id
+msgid "Registrant"
+msgstr ""
+
+#. module: g2p_registry_documents
+#: model:ir.model,name:g2p_registry_documents.model_storage_backend
+msgid "Storage Backend"
+msgstr ""
+
+#. module: g2p_registry_documents
+#: model:ir.model,name:g2p_registry_documents.model_storage_file
+msgid "Storage File"
+msgstr ""
+
+#. module: g2p_registry_documents
+#: model:ir.model.fields,field_description:g2p_registry_documents.field_res_partner__supporting_documents_ids
+#: model:ir.model.fields,field_description:g2p_registry_documents.field_res_users__supporting_documents_ids
+msgid "Supporting Documents"
+msgstr ""
