@@ -84,35 +84,33 @@
                             />
                         </h2>
                     </div>
-                    <group colspan="4" col="4">
-                        <field
-                            name="service_type_ids"
-                            widget="many2many_tags"
-                            options="{'no_create_edit':true,'no_open':true}"
-                            readonly="is_disabled"
-                            colspan="4"
-                        />
-                        <field name="phone_no" readonly="is_disabled" />
-                        <field name="phone_sanitized" />
-                        <field
-                            name="country_id"
-                            options="{'no_create':true,'no_edit':true,'no_open':true}"
-                            readonly="is_disabled"
-                        />
-                        <field name="shop_address" readonly="is_disabled" colspan="4" />
-                        <field name="is_contract_active" readonly="is_disabled" colspan="4" />
-                        <field
-                            name="res_partner_company_id"
-                            options="{'no_create':true,'no_edit':true,'no_open':true}"
-                        />
-                        <field name="is_disabled" readonly="True" />
-                        <field name="disabled_date" readonly="True" />
-                        <field
-                            name="disabled_reason"
-                            readonly="not is_disabled"
-                            required="is_disabled"
-                            colspan="4"
-                        />
+                    <group>
+                        <group>
+                            <field
+                                name="service_type_ids"
+                                widget="many2many_tags"
+                                options="{'no_create_edit':true,'no_open':true}"
+                                readonly="is_disabled"
+                            />
+                            <field name="shop_address" readonly="is_disabled" />
+                            <field name="is_contract_active" readonly="is_disabled" />
+                            <field
+                                name="res_partner_company_id"
+                                options="{'no_create':true,'no_edit':true,'no_open':true}"
+                            />
+                            <field name="is_disabled" readonly="True" />
+                            <field name="disabled_date" readonly="True" />
+                            <field name="disabled_reason" readonly="not is_disabled" required="is_disabled" />
+                        </group>
+                        <group>
+                            <field name="phone_no" readonly="is_disabled" />
+                            <field name="phone_sanitized" />
+                            <field
+                                name="country_id"
+                                options="{'no_create':true,'no_edit':true,'no_open':true}"
+                                readonly="is_disabled"
+                            />
+                        </group>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
