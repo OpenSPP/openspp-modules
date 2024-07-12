@@ -14,5 +14,11 @@ class CustomSPPProgramEntitlementCash(models.Model):
 
     _inherit = "g2p.entitlement"
 
-    service_point_ids = fields.Many2many("spp.service.point", string="Service Points")
+    service_point_ids = fields.Many2many(
+        comodel_name="spp.service.point",
+        relation="g2p_entitlement_spp_service_point_rel",
+        column1="g2p_entitlement_id",
+        column2="spp_service_point_id",
+        string="Service Points",
+    )
     service_point_id = fields.Many2one("spp.service.point", "Service Point")
