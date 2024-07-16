@@ -15,6 +15,7 @@
         "g2p_registry_group",
         "g2p_registry_membership",
         "spp_service_points",
+        "spp_land_record",
     ],
     "data": [
         "security/change_request_security.xml",
