@@ -9,8 +9,13 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="priority">1010</field>
         <field name="inherit_id" ref="g2p_programs.view_program_list_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='date_ended']" position="after">
+            <xpath expr="//field[@name='target_type']" position="after">
                 <field name="is_manual_eligibility" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@name='verify_eligibility']" position="attributes">
+                <attribute name="invisible">
+                    is_manual_eligibility or state != 'active'
+                </attribute>
             </xpath>
         </field>
     </record>
@@ -23,9 +28,46 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="arch" type="xml">
             <xpath expr="//button[@name='import_eligible_registrants']" position="attributes">
                 <attribute name="invisible">
+                    is_manual_eligibility or state != 'active'
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='enroll_eligible_registrants']" position="attributes">
+                <attribute name="invisible">
+                    is_manual_eligibility or state != 'active'
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_eligibility_manager_default_form_manual_eligibility" model="ir.ui.view">
+        <field name="name">view_eligibility_manager_default_form_manual_eligibility</field>
+        <field name="model">g2p.program_membership.manager.default</field>
+        <field name="priority">1010</field>
+        <field name="inherit_id" ref="g2p_programs.view_eligibility_manager_default_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='eligibility_domain']" position="after">
+                <field name="is_manual_eligibility" invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='eligibility_domain']" position="attributes">
+                <attribute name="invisible">
                     is_manual_eligibility
                 </attribute>
             </xpath>
         </field>
     </record>
+
+    <record id="view_eligibility_manager_default_form_spp_manual" model="ir.ui.view">
+        <field name="name">view_eligibility_manager_default_form_spp_manual</field>
+        <field name="model">g2p.program_membership.manager.default</field>
+        <field name="priority">1010</field>
+        <field name="inherit_id" ref="spp_programs.view_eligibility_manager_default_form_spp" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='admin_area_ids']" position="attributes">
+                <attribute name="invisible">
+                    is_manual_eligibility
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
 </odoo>
