@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class G2PCycle(models.Model):
@@ -49,3 +50,11 @@ class G2PCycle(models.Model):
         if count:
             return self.env["g2p.cycle.membership"].search_count(domain, limit=limit)
         return self.env[entitlement_model].search(domain, offset=offset, limit=limit, order=order)
+
+    @api.constrains("start_date", "end_date")
+    def _check_dates(self):
+        for record in self:
+            if record.start_date and record.start_date < fields.Date.today():
+                raise ValidationError(_('The "Start Date" cannot be earlier than today.'))
+            if record.end_date and record.start_date and record.end_date < record.start_date:
+                raise ValidationError(_('The "End Date" cannot be earlier than the "Start Date".'))
