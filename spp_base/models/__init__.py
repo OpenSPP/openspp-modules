@@ -2,3 +2,4 @@
 
 from . import reg_id
 from . import spp_unique_id
+from . import registrant
