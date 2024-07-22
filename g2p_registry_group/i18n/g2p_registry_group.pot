@@ -151,9 +151,7 @@ msgstr ""
 #. module: g2p_registry_group
 #: model:ir.model.fields,field_description:g2p_registry_group.field_g2p_group_kind__name
 #: model:ir.model.fields,field_description:g2p_registry_group.field_res_partner__kind
-#: model:ir.model.fields,field_description:g2p_registry_group.field_res_partner__kind_as_str
 #: model:ir.model.fields,field_description:g2p_registry_group.field_res_users__kind
-#: model:ir.model.fields,field_description:g2p_registry_group.field_res_users__kind_as_str
 msgid "Kind"
 msgstr ""
 
@@ -211,6 +209,12 @@ msgstr ""
 #. module: g2p_registry_group
 #: model_terms:ir.ui.view,arch_db:g2p_registry_group.view_registry_groups_filter
 msgid "Search Partner"
+msgstr ""
+
+#. module: g2p_registry_group
+#: model:ir.model.fields,field_description:g2p_registry_group.field_res_partner__kind_as_str
+#: model:ir.model.fields,field_description:g2p_registry_group.field_res_users__kind_as_str
+msgid "String Kind"
 msgstr ""
 
 #. module: g2p_registry_group
