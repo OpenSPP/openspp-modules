@@ -21,6 +21,7 @@
         "wizard/create_program_wizard.xml",
         "views/programs_view.xml",
         "views/entitlements_view.xml",
+        "views/service_point_views.xml",
     ],
     "assets": {},
     "demo": [],
