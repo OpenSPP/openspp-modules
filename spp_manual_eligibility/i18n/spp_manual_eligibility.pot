@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: spp_manual_eligibility
+#: model:ir.model,name:spp_manual_eligibility.model_g2p_assign_program_wizard
+msgid "Add Registrants to Program Wizard"
+msgstr ""
+
+#. module: spp_manual_eligibility
 #: model:ir.model,name:spp_manual_eligibility.model_g2p_program_create_wizard
 msgid "Create a New Program Wizard"
 msgstr ""
