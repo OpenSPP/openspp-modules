@@ -669,6 +669,22 @@ msgid "Target Type"
 msgstr ""
 
 #. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/cycle.py:0
+#: code:addons/spp_programs/models/cycle.py:0
+#, python-format
+msgid "The \"End Date\" cannot be earlier than the \"Start Date\"."
+msgstr ""
+
+#. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/cycle.py:0
+#: code:addons/spp_programs/models/cycle.py:0
+#, python-format
+msgid "The \"Start Date\" cannot be earlier than today."
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,help:spp_programs.field_g2p_entitlement_inkind__currency_id
 #: model:ir.model.fields,help:spp_programs.field_spp_multi_inkind_entitlement_approval__currency_id
 msgid "The currency used to enter statement"
