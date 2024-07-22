@@ -208,14 +208,18 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             domain = [("id", "=", 0)]
             if rec.registrant_id:
-                # TODO: Use the is_ended field to filter
-                # Get only the members with non-expired membership
-                group_memberships = rec.registrant_id.group_membership_ids.filtered(
-                    lambda a: not a.ended_date or a.ended_date > fields.Datetime.now()
-                )
-                if group_memberships:
-                    group_membership_ids = group_memberships.mapped("individual.id")
-                    domain = [("id", "in", group_membership_ids)]
+                if rec.registrant_id.is_group:
+                    # TODO: Use the is_ended field to filter
+                    # Get only the members with non-expired membership
+                    group_memberships = rec.registrant_id.group_membership_ids.filtered(
+                        lambda a: not a.ended_date or a.ended_date > fields.Datetime.now()
+                    )
+                    if group_memberships:
+                        group_membership_ids = group_memberships.mapped("individual.id")
+                        domain = [("id", "in", group_membership_ids)]
+                else:
+                    domain = [("is_registrant", "=", True), ("is_group", "=", False)]
+
             rec.applicant_id_domain = domain
 
     @api.onchange("registrant_id")
