@@ -140,11 +140,8 @@ msgstr ""
 
 #. module: spp_custom_filter_ui
 #: model:ir.model.fields,field_description:spp_custom_filter_ui.field_g2p_program_membership__kind
-#: model:ir.model.fields,field_description:spp_custom_filter_ui.field_g2p_program_membership__kind_as_str
 #: model:ir.model.fields,field_description:spp_custom_filter_ui.field_res_partner__kind
-#: model:ir.model.fields,field_description:spp_custom_filter_ui.field_res_partner__kind_as_str
 #: model:ir.model.fields,field_description:spp_custom_filter_ui.field_res_users__kind
-#: model:ir.model.fields,field_description:spp_custom_filter_ui.field_res_users__kind_as_str
 msgid "Kind"
 msgstr ""
 
@@ -240,6 +237,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_custom_filter_ui.field_res_partner__related_2_ids
 #: model:ir.model.fields,field_description:spp_custom_filter_ui.field_res_users__related_2_ids
 msgid "Related to registrant 2"
+msgstr ""
+
+#. module: spp_custom_filter_ui
+#: model:ir.model.fields,field_description:spp_custom_filter_ui.field_g2p_program_membership__kind_as_str
+#: model:ir.model.fields,field_description:spp_custom_filter_ui.field_res_partner__kind_as_str
+#: model:ir.model.fields,field_description:spp_custom_filter_ui.field_res_users__kind_as_str
+msgid "String Kind"
 msgstr ""
 
 #. module: spp_custom_filter_ui
