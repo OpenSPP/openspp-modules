@@ -23,8 +23,8 @@
                 <field name="quantity" />
                 <field name="uom_id" options="{'no_open':true,'no_create':true}" optional="hide" />
                 <field name="currency_id" options="{'no_open':true,'no_create':true}" optional="hide" />
-                <field name="amount_charged_by_service_point" column_invisible="1"/>
-                <field name="value_remaining" column_invisible="1"/>
+                <field name="amount_charged_by_service_point" column_invisible="1" />
+                <field name="value_remaining" column_invisible="1" />
             </tree>
         </field>
     </record>
