@@ -649,6 +649,8 @@ msgstr ""
 #. module: g2p_registry_base
 #: model:ir.actions.act_window,name:g2p_registry_base.action_registrant_tags
 #: model:ir.model,name:g2p_registry_base.model_g2p_registrant_tags
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__tags_ids
+#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__tags_ids
 #: model:ir.ui.menu,name:g2p_registry_base.menu_registrant_tags
 msgid "Registrant Tags"
 msgstr ""
@@ -799,8 +801,6 @@ msgstr ""
 
 #. module: g2p_registry_base
 #: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_registrant_tags__name
-#: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__tags_ids
-#: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__tags_ids
 msgid "Tags"
 msgstr ""
 
