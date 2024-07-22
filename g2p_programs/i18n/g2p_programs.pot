@@ -2911,7 +2911,6 @@ msgstr ""
 
 #. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__kind
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__kind_as_str
 msgid "Kind"
 msgstr ""
 
@@ -4450,6 +4449,11 @@ msgid "Registrant IDs"
 msgstr ""
 
 #. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__tags_ids
+msgid "Registrant Tags"
+msgstr ""
+
+#. module: g2p_programs
 #: model_terms:ir.ui.view,arch_db:g2p_programs.view_program_membership_form
 msgid "Registrant is related to:"
 msgstr ""
@@ -5037,6 +5041,11 @@ msgid "Street2"
 msgstr ""
 
 #. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__kind_as_str
+msgid "String Kind"
+msgstr ""
+
+#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_cycle_manager_default__sun
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_cycle_recurrence_mixin__sun
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_create_wizard__sun
@@ -5070,7 +5079,6 @@ msgstr ""
 
 #. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__category_id
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__tags_ids
 msgid "Tags"
 msgstr ""
 
