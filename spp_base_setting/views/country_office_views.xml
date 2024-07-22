@@ -62,6 +62,8 @@
                                         widget="url"
                                         placeholder="e.g. https://www.odoo.com"
                                     />
+                                    <field name="parent_id" groups="base.group_no_one" />
+                                    <field name="parent_id" invisible="1" />
                                 </group>
                                 <group name="social_media" />
                             </group>
