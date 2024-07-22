@@ -28,9 +28,6 @@ class OpenSPPResPartner(models.Model):
             sub_element_params = {
                 "name": model_field_id.name,
             }
-            if is_ind:
-                sub_element_params["readonly"] = "1"
-                sub_element_params["class"] = "oe_read_only"
             new_field = etree.SubElement(
                 div_element_left,
                 "field",
@@ -41,9 +38,6 @@ class OpenSPPResPartner(models.Model):
                 div_element_right_help = etree.SubElement(div_element_right, "div", {"class": "text-muted"})
                 span = etree.SubElement(div_element_right_help, "span")
                 span.text = model_field_id.help
-
-            div_element_right_inner_div = etree.SubElement(div_element_right, "div", {"class": "text-muted"})
-            new_field = etree.SubElement(div_element_right_inner_div, "field", {"name": model_field_id.name})
 
         else:
             etree.SubElement(div_element_right, "label", {"for": model_field_id.name})
@@ -82,8 +76,8 @@ class OpenSPPResPartner(models.Model):
                     action_id = action_id.context.replace("'", '"')
                 is_group = ast.literal_eval(action_id).get("default_is_group")
 
-                custom_page = etree.Element("page", {"string": "Additional Details"})
-                indicators_page = etree.Element("page", {"string": "Indicators"})
+                custom_page = etree.Element("page", {"string": "Additional Details", "name": "additional_details"})
+                indicators_page = etree.Element("page", {"string": "Indicators", "name": "indicators"})
 
                 custom_div = etree.SubElement(custom_page, "div", {"class": "row mt16 o_settings_container"})
                 indicators_div = etree.SubElement(indicators_page, "div", {"class": "row mt16 o_settings_container"})
