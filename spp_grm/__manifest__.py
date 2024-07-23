@@ -1,0 +1,35 @@
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+{
+    "name": "OpenSPP - Grievance Redress Mechanism",
+    "summary": """
+        Grievance redress mechanism module for OpenSPP""",
+    "version": "17.0.1.0.0",
+    "sequence": 1,
+    "author": "OpenSPP.org",
+    "website": "https://github.com/OpenSPP/openspp-modules",
+    "license": "LGPL-3",
+    "development_status": "Beta",
+    "category": "OpenSPP",
+    "external_dependencies": {"python": []},
+    "maintainers": ["jeremi", "gonzalesedwin1123"],
+    "depends": ["base", "mail", "g2p_registry_base", "g2p_registry_individual", "g2p_registry_group"],
+    "data": [
+        "data/grm_data.xml",
+        "security/grm_security.xml",
+        "security/ir.model.access.csv",
+        # "views/res_partner_views.xml",
+        "views/grm_ticket_menu.xml",
+        # "views/grm_ticket_stage_views.xml",
+        # "views/grm_ticket_category_views.xml",
+        # "views/grm_ticket_channel_views.xml",
+        # "views/grm_ticket_tag_views.xml",
+        "views/grm_ticket_views.xml",
+    ],
+    "assets": {},
+    "demo": [],
+    "images": [],
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+}
