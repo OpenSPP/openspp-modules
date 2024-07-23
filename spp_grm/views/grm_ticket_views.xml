@@ -297,4 +297,19 @@
         </field>
     </record>
 
+    <record id="spp_grm_ticket_action" model="ir.actions.act_window">
+        <field name="name">Tickets</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.grm.ticket</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem
+        id="spp_grm_ticket_menu"
+        name="Tickets"
+        parent="spp_grm_ticket_main_menu"
+        action="spp_grm_ticket_action"
+        sequence="10"
+    />
+
 </odoo>

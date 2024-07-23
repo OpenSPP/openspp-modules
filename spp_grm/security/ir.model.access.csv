@@ -10,3 +10,9 @@ access_spp_grm_ticket_stage_user,GRM Ticket Stage User Access,model_spp_grm_tick
 access_spp_grm_ticket_tag_user,GRM Ticket Tags User Access,model_spp_grm_ticket_tag,group_grm_manager,1,1,1,1
 access_spp_grm_ticket_channel_user,GRM Ticket Channels User Access,model_spp_grm_ticket_channel,group_grm_manager,1,0,0,0
 access_spp_grm_ticket_category_user,GRM Ticket Category User Access,model_spp_grm_ticket_category,group_grm_manager,1,0,0,0
+
+access_spp_grm_ticket_base_user,GRM Ticket Base User Access,model_spp_grm_ticket,base.group_user,1,1,1,0
+access_spp_grm_ticket_stage_base_user,GRM Ticket Stage Base User Access,model_spp_grm_ticket_stage,base.group_user,1,0,0,0
+access_spp_grm_ticket_tag_base_user,GRM Ticket Tags Base User Access,model_spp_grm_ticket_tag,base.group_user,1,1,1,0
+access_spp_grm_ticket_channel_base_user,GRM Ticket Channels Base User Access,model_spp_grm_ticket_channel,base.group_user,1,0,0,0
+access_spp_grm_ticket_category_base_user,GRM Ticket Category Base User Access,model_spp_grm_ticket_category,base.group_user,1,0,0,0
