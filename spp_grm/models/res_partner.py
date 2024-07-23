@@ -27,7 +27,7 @@ class ResPartner(models.Model):
 
     def action_view_grm_tickets(self):
         return {
-            "name": self.name,
+            "name": "Tickets",  # self.name,
             "view_mode": "tree,form",
             "res_model": "spp.grm.ticket",
             "type": "ir.actions.act_window",
