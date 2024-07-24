@@ -1,17 +1,7 @@
-import os
-
 from odoo.addons.spp_area.tests.test_area_import_raw import AreaImportRawTest as AreaImportRawTestMixin
 
 
 class AreaImportRawTest(AreaImportRawTestMixin):
-    @staticmethod
-    def get_file_path_1():
-        return f"{os.path.dirname(os.path.abspath(__file__))}/irq_adminboundaries_tabulardata.xlsx"
-
-    @staticmethod
-    def get_file_path_2():
-        return f"{os.path.dirname(os.path.abspath(__file__))}/pse_adminboundaries_tabulardata.xlsx"
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

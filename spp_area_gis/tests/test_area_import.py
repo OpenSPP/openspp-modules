@@ -1,17 +1,7 @@
-import os
-
 from odoo.addons.spp_area.tests.test_area_import import AreaImportTest as AreaImportTestMixin
 
 
 class AreaImportTest(AreaImportTestMixin):
-    @staticmethod
-    def get_file_path_1():
-        return f"{os.path.dirname(os.path.abspath(__file__))}/irq_adminboundaries_tabulardata.xlsx"
-
-    @staticmethod
-    def get_file_path_2():
-        return f"{os.path.dirname(os.path.abspath(__file__))}/pse_adminboundaries_tabulardata.xlsx"
-
     def test_get_column_indexes(self):
         columns = {
             "ADM2_EN": 0,
