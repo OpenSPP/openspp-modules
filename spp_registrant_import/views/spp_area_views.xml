@@ -6,8 +6,17 @@
         <field name="model">spp.area</field>
         <field name="inherit_id" ref="spp_area.view_spparea_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='kind']" position="after">
-                <field name="spp_id" />
+            <xpath expr="//div[@name='kind']" position="after">
+                <div class="col-4 o_setting_box" name="spp_id">
+                    <div class="o_setting_left_pane">
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="spp_id" />
+                        <div>
+                        </div>
+                        <field name="spp_id" optional="show" />
+                    </div>
+                </div>
             </xpath>
         </field>
     </record>
