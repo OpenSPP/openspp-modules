@@ -76,7 +76,10 @@ class G2PGroupPMT(models.Model):
                             if hasattr(ind.individual, field):
                                 total_score += getattr(ind.individual, field) * weight
                                 total_weight += weight
-                    z_ind_grp_pmt_score = total_score / total_weight
+                    if total_weight > 0:
+                        z_ind_grp_pmt_score = total_score / total_weight
+                    else:
+                        z_ind_grp_pmt_score = 0
                 setattr(record, field_name, z_ind_grp_pmt_score)
             else:
                 setattr(record, field_name, 0)
