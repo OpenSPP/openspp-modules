@@ -49,11 +49,19 @@ class ChangeRequestBase(models.Model):
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
     date_requested = fields.Datetime()  # Date the change request was submitted
     request_type = fields.Selection(selection="_selection_request_type_ref_id", required=True)
+    request_type_target = fields.Many2one(
+        "spp.change.request.targets", compute="_compute_request_type_target", store=True
+    )
     registrant_id = fields.Many2one(
         "res.partner",
         "Registrant",
         domain=[("is_registrant", "=", True)],
     )  #: Registrant who submitted the change request
+    registrant_id_domain = fields.Binary(
+        compute="_compute_registrant_id_domain",
+        readonly=True,
+        store=False,
+    )
 
     # For ID Scanner Widget
     id_document_details = fields.Text("Scanned ID Document")
@@ -139,6 +147,42 @@ class ChangeRequestBase(models.Model):
         string="DMS Directories",
         auto_join=True,
     )
+
+    @api.onchange("request_type")
+    def _onchange_request_type(self):
+        self._compute_request_type_target()
+        self.registrant_id = None
+
+    def _compute_request_type_target(self):
+        request_type_target = None
+        for rec in self:
+            if rec.request_type:
+                request_type_targets = self.env["spp.change.request.targets"].search(
+                    [("name", "=", rec.request_type)], limit=1
+                )
+                if request_type_targets:
+                    request_type_target = request_type_targets.id
+
+            rec.request_type_target = request_type_target
+
+    @api.depends("request_type_target")
+    def _compute_registrant_id_domain(self):
+        """
+        Called whenever request_type_target field is changed
+
+        This method is used for dynamic domain of registrant_id field
+        """
+        for rec in self:
+            domain = [("id", "=", 0)]
+            if rec.request_type_target:
+                if rec.request_type_target.target == "individual":
+                    domain = [("is_registrant", "=", True), ("is_group", "=", False)]
+                elif rec.request_type_target.target == "group":
+                    domain = [("is_registrant", "=", True), ("is_group", "=", True)]
+                else:
+                    domain = [("is_registrant", "=", True)]
+
+            rec.registrant_id_domain = domain
 
     @api.model
     def create(self, vals):

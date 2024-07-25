@@ -176,6 +176,8 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <h2>
                             <field name="request_type" readonly="state != 'draft' or request_type_ref_id" />
                         </h2>
+                        <field name="request_type_target" invisible="1" />
+                        <field name="registrant_id_domain" invisible="1" />
                         <label for="registrant_id" string="Registrant:" />
                         <h2>
                             <field
@@ -183,6 +185,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 options="{'no_create': True,'no_open':True}"
                                 readonly="state != 'draft' or request_type_ref_id"
                                 class="oe_inline"
+                                domain="registrant_id_domain"
                             />
                             <!-- <field
                                 name="qr_code_details"
