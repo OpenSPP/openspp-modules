@@ -10,6 +10,8 @@
     "development_status": "Alpha",
     "maintainers": ["jeremi", "gonzalesedwin1123", "nhatnm0612"],
     "depends": [
+        "base_import",
+        "web",
         "spp_base",
     ],
     "data": [
@@ -17,6 +19,11 @@
         "views/spp_area_views.xml",
         "views/spp_service_point_views.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "spp_registrant_import/static/src/import_records/import_records.js",
+        ],
+    },
     "application": False,
     "installable": True,
     "auto_install": False,
