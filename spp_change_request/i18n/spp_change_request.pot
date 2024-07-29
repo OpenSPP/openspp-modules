@@ -224,6 +224,11 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_targets__target__both
+msgid "Both"
+msgstr ""
+
+#. module: spp_change_request
 #. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
@@ -433,6 +438,11 @@ msgid "Change Requests"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_targets
+msgid "Change Requests' Targets"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
 #: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validated
 msgid "Click the create button to enter a new change request."
@@ -474,6 +484,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_uid
@@ -486,6 +497,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__create_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_date
@@ -573,6 +585,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__display_name
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__display_name
@@ -660,6 +673,11 @@ msgid "For Validation"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_targets__target__group
+msgid "Group"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
 msgid "Group By"
 msgstr ""
@@ -686,6 +704,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__id
@@ -722,6 +741,11 @@ msgid "Incorrect phone number format"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_targets__target__individual
+msgid "Individual"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_is_follower
 msgid "Is Follower"
 msgstr ""
@@ -736,6 +760,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__write_uid
@@ -748,6 +773,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__write_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__write_date
@@ -773,6 +799,11 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_ids
 msgid "Messages"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__name
+msgid "Model Name"
 msgstr ""
 
 #. module: spp_change_request
@@ -902,6 +933,11 @@ msgid "Registrant"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__registrant_id_domain
+msgid "Registrant Id Domain"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Registrant:"
 msgstr ""
@@ -960,6 +996,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__request_type
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
 msgid "Request Type"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__request_type_target
+msgid "Request Type Target"
 msgstr ""
 
 #. module: spp_change_request
@@ -1065,6 +1106,11 @@ msgstr ""
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
 msgid "Submitted By"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__target
+msgid "Target"
 msgstr ""
 
 #. module: spp_change_request
