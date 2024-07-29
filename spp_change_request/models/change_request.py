@@ -154,8 +154,8 @@ class ChangeRequestBase(models.Model):
         self.registrant_id = None
 
     def _compute_request_type_target(self):
-        request_type_target = None
         for rec in self:
+            request_type_target = None
             if rec.request_type:
                 request_type_targets = self.env["spp.change.request.targets"].search(
                     [("name", "=", rec.request_type)], limit=1
