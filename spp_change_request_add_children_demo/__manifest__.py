@@ -22,6 +22,7 @@
         "data/dms.xml",
         "data/change_request_stage.xml",
         "data/change_request_sequence.xml",
+        "data/change_request_target.xml",
         "views/change_request_add_children_view.xml",
         "views/dms_file_view.xml",
     ],

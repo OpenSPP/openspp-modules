@@ -7,3 +7,4 @@ from . import dms_file
 from . import dms_directory
 from . import registry
 from . import mixins
+from . import change_request_targets
