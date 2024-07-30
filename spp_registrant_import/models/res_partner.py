@@ -45,7 +45,14 @@ class Registrant(models.Model):
                 rec.given_name = name[0]
             elif len(name) == 2:
                 rec.family_name = name[0]
-                rec.given_name = name[1]
+                # Added to resolve the issue of names not from import
+                # That the given_name is appended with the addl_name
+                if rec.given_name and rec.addl_name:
+                    name_check = rec.given_name + " " + rec.addl_name
+                    if not name_check.lower() == name[1].lower():
+                        rec.given_name = name[1]
+                else:
+                    rec.given_name = name[1]
             else:
                 rec.family_name = name[0]
                 rec.given_name = name[1]
