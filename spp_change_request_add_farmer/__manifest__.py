@@ -24,6 +24,7 @@
         "data/change_request_stage.xml",
         "data/change_request_sequence.xml",
         "data/change_request_target.xml",
+        "data/id_type.xml",
         "views/change_request_add_farmer_view.xml",
         "views/dms_file_view.xml",
     ],
