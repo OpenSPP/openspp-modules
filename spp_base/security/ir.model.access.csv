@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_ir_actions_act_window_user,IR Actions Act Window User Access,base.model_ir_actions_act_window,base.group_user,1,0,0,0
+spp_ir_actions_act_window_view_user,IR Actions Act Window View User Access,base.model_ir_actions_act_window_view,base.group_user,1,0,0,0

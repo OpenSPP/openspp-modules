@@ -1,6 +1,6 @@
 <odoo noupdate="1">
     <record id="id_type_national_id" model="g2p.id.type">
-        <field name="name">National ID</field>
+        <field name="name">Farmer National ID</field>
     </record>
 
 </odoo>
