@@ -29,6 +29,7 @@
     ],
     "external_dependencies": {},
     "data": [
+        "security/ir.model.access.csv",
         "data/top_up_card.xml",
         "views/registrant_view.xml",
         "views/hide_menu_view.xml",
