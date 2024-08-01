@@ -207,11 +207,15 @@ class ChangeRequestAddChildren(models.Model):
         return "default_change_request_change_info_id"
 
     def validate_data(self):
-        if not self.given_name:
-            raise ValidationError("Given Name is required!")
-        if not self.family_name:
-            raise ValidationError("Family Name is required!")
         super().validate_data()
+        error_message = []
+        if not self.given_name:
+            error_message.append(_("The Given Name is required!"))
+        if not self.family_name:
+            error_message.append(_("The Family Name is required!"))
+
+        if error_message:
+            raise ValidationError("\n".join(error_message))
         return
 
     def update_live_data(self):
@@ -264,7 +268,7 @@ class ChangeRequestAddChildren(models.Model):
         if nid_rec:
             vals.update({"reg_ids": nid_rec})
         # Updating Registrant
-        self.registrant_id.sudo().write(vals)
+        self.registrant_id.write(vals)
 
     def open_registrant_details_form(self):
         self.ensure_one()
