@@ -260,21 +260,25 @@ class ChangeRequestAddChildren(models.Model):
             ]
         else:
             uid_rec = None
-        individual_id = self.env["res.partner"].create(
-            {
-                "is_registrant": True,
-                "is_group": False,
-                "name": self.full_name,
-                "family_name": self.family_name,
-                "given_name": self.given_name,
-                "addl_name": self.addl_name,
-                "birth_place": self.birth_place,
-                "birthdate_not_exact": self.birthdate_not_exact,
-                "birthdate": self.birthdate,
-                "gender": self.gender,
-                "phone_number_ids": phone_rec,
-                "reg_ids": uid_rec,
-            }
+        individual_id = (
+            self.env["res.partner"]
+            .sudo()
+            .create(
+                {
+                    "is_registrant": True,
+                    "is_group": False,
+                    "name": self.full_name,
+                    "family_name": self.family_name,
+                    "given_name": self.given_name,
+                    "addl_name": self.addl_name,
+                    "birth_place": self.birth_place,
+                    "birthdate_not_exact": self.birthdate_not_exact,
+                    "birthdate": self.birthdate,
+                    "gender": self.gender,
+                    "phone_number_ids": phone_rec,
+                    "reg_ids": uid_rec,
+                }
+            )
         )
         individual_id.phone_number_ids_change()
         # Add to group
