@@ -204,32 +204,20 @@ class ChangeRequestAddChildren(models.Model):
 
     def validate_data(self):
         super().validate_data()
+        error_message = []
         if not self.family_name:
-            raise ValidationError(_("The Family Name is required."))
+            error_message.append(_("The Family Name is required!"))
         if not self.given_name:
-            raise ValidationError(_("The First Name is required."))
+            error_message.append(_("The First Name is required!"))
         if not self.birthdate:
-            raise ValidationError(_("The Date of Birth is required."))
+            error_message.append(_("The Date of Birth is required!"))
         if not self.applicant_relation:
-            raise ValidationError(_("The Relationship to Applicant is required."))
+            error_message.append(_("The Relationship to Applicant is required!"))
         if not self.gender:
-            raise ValidationError(_("The Gender is required."))
-        # If mother or father, make the custody certificate required
-        # if self.applicant_relation in ("mother", "grandfather"):
-        #     custody_docs = self.env["dms.file"].search(
-        #         [
-        #             (
-        #                 "category_id",
-        #                 "=",
-        #                 self.env.ref(
-        #                     "spp_change_request_add_children_demo.spp_dms_custody_certificate"
-        #                 ).id,
-        #             ),
-        #             ("res_id", "=", self.id),
-        #         ]
-        #     )
-        #     if not custody_docs:
-        #         raise ValidationError(_("The Custody Certificate is required."))
+            error_message.append(_("The Gender is required!"))
+
+        if error_message:
+            raise ValidationError("\n".join(error_message))
 
         return
 
@@ -260,25 +248,21 @@ class ChangeRequestAddChildren(models.Model):
             ]
         else:
             uid_rec = None
-        individual_id = (
-            self.env["res.partner"]
-            .sudo()
-            .create(
-                {
-                    "is_registrant": True,
-                    "is_group": False,
-                    "name": self.full_name,
-                    "family_name": self.family_name,
-                    "given_name": self.given_name,
-                    "addl_name": self.addl_name,
-                    "birth_place": self.birth_place,
-                    "birthdate_not_exact": self.birthdate_not_exact,
-                    "birthdate": self.birthdate,
-                    "gender": self.gender,
-                    "phone_number_ids": phone_rec,
-                    "reg_ids": uid_rec,
-                }
-            )
+        individual_id = self.env["res.partner"].create(
+            {
+                "is_registrant": True,
+                "is_group": False,
+                "name": self.full_name,
+                "family_name": self.family_name,
+                "given_name": self.given_name,
+                "addl_name": self.addl_name,
+                "birth_place": self.birth_place,
+                "birthdate_not_exact": self.birthdate_not_exact,
+                "birthdate": self.birthdate,
+                "gender": self.gender,
+                "phone_number_ids": phone_rec,
+                "reg_ids": uid_rec,
+            }
         )
         individual_id.phone_number_ids_change()
         # Add to group
