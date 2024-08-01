@@ -284,29 +284,33 @@ class ChangeRequestAddChildren(models.Model):
             ]
         else:
             uid_rec = None
-        individual_id = self.env["res.partner"].create(
-            {
-                "is_registrant": True,
-                "is_group": False,
-                "name": self.full_name,
-                "family_name": self.family_name,
-                "given_name": self.given_name,
-                "addl_name": self.addl_name,
-                "birth_place": self.birth_place,
-                "birthdate_not_exact": self.birthdate_not_exact,
-                "birthdate": self.birthdate,
-                "gender": self.gender,
-                "image_1920": self.image_1920,
-                "experience_years": self.experience_years,
-                "formal_agricultural_training": self.formal_agricultural_training,
-                "farmer_national_id": self.farmer_national_id,
-                "farmer_household_size": self.farmer_household_size,
-                "farmer_postal_address": self.farmer_postal_address,
-                "marital_status": self.marital_status,
-                "highest_education_level": self.highest_education_level,
-                "phone_number_ids": phone_rec,
-                "reg_ids": uid_rec,
-            }
+        individual_id = (
+            self.env["res.partner"]
+            .sudo()
+            .create(
+                {
+                    "is_registrant": True,
+                    "is_group": False,
+                    "name": self.full_name,
+                    "family_name": self.family_name,
+                    "given_name": self.given_name,
+                    "addl_name": self.addl_name,
+                    "birth_place": self.birth_place,
+                    "birthdate_not_exact": self.birthdate_not_exact,
+                    "birthdate": self.birthdate,
+                    "gender": self.gender,
+                    "image_1920": self.image_1920,
+                    "experience_years": self.experience_years,
+                    "formal_agricultural_training": self.formal_agricultural_training,
+                    "farmer_national_id": self.farmer_national_id,
+                    "farmer_household_size": self.farmer_household_size,
+                    "farmer_postal_address": self.farmer_postal_address,
+                    "marital_status": self.marital_status,
+                    "highest_education_level": self.highest_education_level,
+                    "phone_number_ids": phone_rec,
+                    "reg_ids": uid_rec,
+                }
+            )
         )
         individual_id.phone_number_ids_change()
         # Add to group
