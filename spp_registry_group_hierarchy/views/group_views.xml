@@ -57,6 +57,7 @@
                                     name="individual"
                                     options="{'no_open':True,'no_create_edit':True,'no_create':True}"
                                     domain="individual_domain"
+                                    string="Member"
                                 />
                             </h1>
                             <div class="o_row">
