@@ -14,6 +14,9 @@
                     Parent:
                 </attribute>
             </xpath>
+            <xpath expr="//field[@name='group']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
             <xpath expr="//label[@for='individual']" position="attributes">
                 <attribute name="string">
                     Child:
@@ -25,6 +28,12 @@
             <xpath expr="//field[@name='individual']" position="attributes">
                 <attribute name="domain">
                     individual_domain
+                </attribute>
+                <attribute name="placeholder">
+                    Select Member...
+                </attribute>
+                <attribute name="string">
+                    Member
                 </attribute>
             </xpath>
         </field>
