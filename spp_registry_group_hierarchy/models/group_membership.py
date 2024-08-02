@@ -51,4 +51,4 @@ class SPPGroupMembership(models.Model):
                 else:
                     return rec.open_individual_form()
             else:
-                raise UserError(_("A group or individual must be speficied for this member."))
+                raise UserError(_("A group or individual must be specified for this member."))
