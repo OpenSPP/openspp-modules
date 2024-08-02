@@ -27,12 +27,12 @@
                         <field name="group_membership_ids" readonly="disabled" nolabel="1" colspan="4">
                             <tree default_order='status asc,ended_date asc'>
                                 <button
-                                    name="open_individual_form"
+                                    name="open_member_form"
                                     type="object"
                                     icon="fa-external-link"
-                                    title="Open Individual Form"
+                                    title="Open Form"
                                     class="btn-success"
-                                    string="Open Individual Form"
+                                    help="Open Member Form"
                                 />
                                 <field
                                     name="individual"
