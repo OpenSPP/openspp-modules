@@ -29,9 +29,7 @@
                 <attribute name="domain">
                     individual_domain
                 </attribute>
-                <attribute name="placeholder">
-                    Select Member...
-                </attribute>
+                <attribute name="placeholder">Select Member...</attribute>
                 <attribute name="string">
                     Member
                 </attribute>
