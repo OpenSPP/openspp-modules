@@ -17,6 +17,7 @@
     ],
     "data": [
         "views/program_view.xml",
+        "views/program_membership_view.xml",
         "wizard/create_program_wizard.xml",
     ],
     "assets": {},
