@@ -66,6 +66,7 @@ class SPPImportMatch(models.Model):
                         domain.append((field_value, "=", row_value))
             if not combination_valid:
                 continue
+            _logger.info("DOMAIN: %s" % domain)
             match = model.search(domain)
             if len(match) == 1:
                 return match
@@ -85,6 +86,8 @@ class SPPImportMatch(models.Model):
             for f in record.field_ids:
                 if f.name in fields or f.field_id.name in fields:
                     result |= record
+        _logger.info("FIELD TO MATCH: %s" % field_to_match)
+        _logger.info("RESULT: %s" % result.ids)
         return result.ids, field_to_match
 
 
