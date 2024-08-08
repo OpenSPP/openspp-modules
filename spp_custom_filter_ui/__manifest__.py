@@ -1,7 +1,7 @@
 {
-    "name": "SPP Custom Filter Base config",
+    "name": "OpenSPP Custom Filter UI",
     "version": "17.0.1.0.0",
-    "summary": "Base config for SPP Custom Filter to only display useful fields",
+    "summary": "Customizes the OpenSPP UI to enhance filtering for Res Partners, improving usability and efficiency in managing registrants within social protection programs.",
     "author": "OpenSPP.org",
     "maintainers": ["nhatnm0612"],
     "website": "https://github.com/OpenSPP/openspp-modules",

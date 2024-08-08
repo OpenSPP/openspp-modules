@@ -2,7 +2,7 @@
 
 
 {
-    "name": "SPP Registry OpenID VCI: Base",
+    "name": "OpenSPP OpenID VCI",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

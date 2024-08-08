@@ -24,4 +24,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "This module allows managing terminal devices associated with each service point, tracking their model, Android version, and active status.",
 }

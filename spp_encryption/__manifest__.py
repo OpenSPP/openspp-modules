@@ -2,7 +2,7 @@
 
 
 {
-    "name": "SPP Encryption",
+    "name": "OpenSPP Encryption Module",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

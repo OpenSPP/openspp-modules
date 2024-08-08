@@ -27,4 +27,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Provides enhanced tagging capabilities for registrants in OpenSPP, allowing for better organization and management of registrant data.",
 }

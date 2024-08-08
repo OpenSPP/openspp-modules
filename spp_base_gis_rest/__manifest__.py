@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Base GIS: REST",
+    "name": "OpenSPP Base GIS REST",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -20,4 +20,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Provides RESTful API endpoints for accessing and querying geospatial data within OpenSPP, secured with OAuth 2.0.",
 }

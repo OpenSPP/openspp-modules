@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "SPP Program Entitlement basic cash spent",
+    "name": "OpenSPP Program Entitlement Basic Cash Spent",
     "category": "G2P",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -20,4 +20,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Tracks cash spending by beneficiaries against allocated entitlements in basic cash programs, calculating remaining balances and supporting program monitoring.",
 }

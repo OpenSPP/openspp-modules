@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Change Request",
+    "summary": "Streamlines the process of handling changes to registrant information within the OpenSPP system, providing a structured framework for submitting, reviewing, approving, and applying modifications.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

@@ -2,7 +2,8 @@
 
 
 {
-    "name": "OpenSPP Area",
+    "name": "OpenSPP Area Management",
+    "summary": "This module enables management of geographical areas, linking them to registrants for targeted interventions and analysis in social protection programs.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

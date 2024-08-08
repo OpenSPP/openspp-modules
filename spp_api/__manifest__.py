@@ -2,8 +2,8 @@
 # Copyright 2021 Denis Mudarisov <https://github.com/trojikman>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 {
-    "name": """OpenSPP REST API""",
-    "summary": """RESTful API for OpenSPP""",
+    "name": "OpenSPP API",
+    "summary": "Provides a framework for building and managing a RESTful API for the OpenSPP platform, including API definition, documentation, security, and logging.",
     "category": "",
     "images": ["images/icon.png"],
     "version": "17.0.1.0.0",

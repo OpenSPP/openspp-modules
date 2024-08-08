@@ -2,7 +2,7 @@
 
 
 {
-    "name": "SPP Registry OpenID VCI: Group",
+    "name": "OpenSPP OpenID VCI Group",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -25,4 +25,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Enables the issuance of Verifiable Credentials (VCs) for groups of registrants, integrating with group management to represent group identity and attributes.",
 }

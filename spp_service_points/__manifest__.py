@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Service Points",
+    "name": "OpenSPP Service Points Management",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -26,4 +26,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "This module enables the management of service points, linking them to geographical areas, company entities, and user accounts for streamlined service delivery within OpenSPP.",
 }

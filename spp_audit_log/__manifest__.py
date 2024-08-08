@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "SPP Audit Log",
+    "name": "OpenSPP Audit Log",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
