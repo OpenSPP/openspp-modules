@@ -1,7 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "OpenSPP Import Matching",
+    "name": "OpenSPP Import Match",
+    "summary": "Enhances data imports in OpenSPP by enabling the matching of imported records with existing data to prevent duplicates and ensure data integrity.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

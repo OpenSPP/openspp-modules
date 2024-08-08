@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Create Program Wizard Exclusion",
+    "name": "OpenSPP Exclusion Filter",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -25,4 +25,5 @@
     "application": False,
     "installable": True,
     "auto_install": False,
+    "summary": "This module enhances the OpenSPP program creation process by enabling the configuration and application of exclusion filters, ensuring that only eligible registrants are considered for enrollment in new programs.",
 }

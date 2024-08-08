@@ -26,4 +26,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Define eligibility criteria for programs based on registrant tags and geographical areas, automating beneficiary identification and improving targeting accuracy.",
 }

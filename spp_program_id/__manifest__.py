@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Programs: Import",
+    "name": "OpenSPP Program ID",
+    "summary": "Generates and manages unique IDs for social protection programs, enhancing identification and integration within the OpenSPP platform.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

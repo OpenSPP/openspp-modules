@@ -2,8 +2,8 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
 {
-    "name": """Base API""",
-    "summary": """Basic function and methods of API for openapi or XML-RPC""",
+    "name": """OpenSPP Base API""",
+    "summary": """Provides foundational API functions and methods for seamless interaction with the OpenSPP system, enabling data exchange via APIs or XML-RPC.""",
     "category": "Hidden",
     "version": "17.0.1.0.0",
     "application": False,

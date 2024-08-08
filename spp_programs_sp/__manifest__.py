@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Programs (Service Points Integration)",
+    "name": "OpenSPP Programs: Service Points Integration",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

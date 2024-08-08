@@ -2,7 +2,7 @@
 
 
 {
-    "name": "User Roles Management",
+    "name": "OpenSPP User Roles",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

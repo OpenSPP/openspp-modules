@@ -1,5 +1,6 @@
 {
-    "name": "CR Demo: Add Child/Member",
+    "name": "OpenSPP Change Request Demo: Add Child/Member",
+    "summary": "Provides a demonstration of adding children or members to an existing group in the registry using the OpenSPP Change Request framework, including a dedicated form, ID scanning integration, and automated data updates.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -34,5 +35,3 @@
     "installable": True,
     "auto_install": False,
 }
-
-# "data/id_type.xml",

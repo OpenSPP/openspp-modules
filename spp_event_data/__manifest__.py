@@ -2,7 +2,7 @@
 
 
 {
-    "name": "Event Data",
+    "name": "OpenSPP Event Data",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
