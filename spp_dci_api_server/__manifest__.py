@@ -12,7 +12,7 @@
         "gonzalesedwin1123",
         "reichie020212",
     ],
-    "external_dependencies": {'python': ['PyLD', 'pyjwt>=2.4.0']},
+    "external_dependencies": {"python": ["PyLD", "pyjwt>=2.4.0"]},
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "depends": [

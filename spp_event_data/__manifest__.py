@@ -26,11 +26,9 @@
         "views/registrant_view.xml",
         "wizard/create_event_wizard.xml",
     ],
-    "assets": {} ,
-    "demo": [
-    ],
-    "images": [
-    ],
+    "assets": {},
+    "demo": [],
+    "images": [],
     "application": True,
     "installable": True,
     "auto_install": False,
