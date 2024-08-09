@@ -24,7 +24,7 @@
         "spp_oauth",
         "web",
     ],
-    "external_dependencies": {'python': ['bravado_core', 'swagger_spec_validator', 'jsonschema'], 'bin': []},
+    "external_dependencies": {"python": ["bravado_core", "swagger_spec_validator", "jsonschema"], "bin": []},
     "data": [
         "security/openapi_security.xml",
         "security/ir.model.access.csv",
