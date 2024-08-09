@@ -54,7 +54,12 @@ class ChangeRequestChangeInfoTest(TransactionCase):
             self.res_id.action_submit()
 
     def test_02_validate_cr_with_complete_data(self):
-        self.res_id.write({"family_name": "Test"})
+        self.res_id.write(
+            {
+                "family_name": "Test",
+                "given_name": "Test",
+            }
+        )
         file = None
         filename = None
         file_path = f"{os.path.dirname(os.path.abspath(__file__))}/sample_document.jpeg"
