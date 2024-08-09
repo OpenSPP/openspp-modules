@@ -1606,6 +1606,11 @@ msgid "DUPLICATE"
 msgstr ""
 
 #. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__data_collection_date
+msgid "Data Collection Date"
+msgstr ""
+
+#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_fund_report_view__date_posted
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__date
 msgid "Date"
@@ -2266,6 +2271,16 @@ msgstr ""
 #: code:addons/g2p_programs/models/managers/entitlement_manager.py:0
 #, python-format
 msgid "Entitlements Validated and Approved."
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__enumerator_id
+msgid "Enumerator"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__enumerator_user_id
+msgid "Enumerator User"
 msgstr ""
 
 #. module: g2p_programs
