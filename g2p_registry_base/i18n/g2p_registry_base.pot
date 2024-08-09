@@ -242,6 +242,11 @@ msgid "Date collected cannot be in the future."
 msgstr ""
 
 #. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__description
+msgid "Description"
+msgstr ""
+
+#. module: g2p_registry_base
 #: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__destination
 #: model_terms:ir.ui.view,arch_db:g2p_registry_base.reg_rel_filter
 msgid "Destination"
@@ -437,6 +442,11 @@ msgstr ""
 #: code:addons/g2p_registry_base/tests/test_reg_relationship.py:0
 #, python-format
 msgid "Individual"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields.selection,name:g2p_registry_base.selection__g2p_reg_id__status__invalid
+msgid "Invalid"
 msgstr ""
 
 #. module: g2p_registry_base
@@ -784,6 +794,11 @@ msgid "State"
 msgstr ""
 
 #. module: g2p_registry_base
+#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_id__status
+msgid "Status"
+msgstr ""
+
+#. module: g2p_registry_base
 #. odoo-python
 #: code:addons/g2p_registry_base/models/tags.py:0
 #: code:addons/g2p_registry_base/models/tags.py:0
@@ -831,6 +846,11 @@ msgstr ""
 #. module: g2p_registry_base
 #: model:ir.module.category,description:g2p_registry_base.openg2p_module
 msgid "User access level for the OpenG2P module"
+msgstr ""
+
+#. module: g2p_registry_base
+#: model:ir.model.fields.selection,name:g2p_registry_base.selection__g2p_reg_id__status__valid
+msgid "Valid"
 msgstr ""
 
 #. module: g2p_registry_base
