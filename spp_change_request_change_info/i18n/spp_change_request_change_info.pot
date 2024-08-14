@@ -575,6 +575,20 @@ msgstr ""
 #. odoo-python
 #: code:addons/spp_change_request_change_info/models/change_request_change_info.py:0
 #, python-format
+msgid "The Family Name is required!"
+msgstr ""
+
+#. module: spp_change_request_change_info
+#. odoo-python
+#: code:addons/spp_change_request_change_info/models/change_request_change_info.py:0
+#, python-format
+msgid "The Given Name is required!"
+msgstr ""
+
+#. module: spp_change_request_change_info
+#. odoo-python
+#: code:addons/spp_change_request_change_info/models/change_request_change_info.py:0
+#, python-format
 msgid "There are no directories defined for this change request."
 msgstr ""
 

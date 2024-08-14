@@ -213,6 +213,36 @@ msgid "<span>Warning: Operation in progress: </span>"
 msgstr ""
 
 #. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "<strong>Cycle Approved By:</strong>"
+msgstr ""
+
+#. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "<strong>Cycle Approved Date:</strong>"
+msgstr ""
+
+#. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "<strong>Cycle Name:</strong>"
+msgstr ""
+
+#. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "<strong>Number of Beneficiaries:</strong>"
+msgstr ""
+
+#. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "<strong>Program Name:</strong>"
+msgstr ""
+
+#. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "<strong>Total Amount (in words):</strong>"
+msgstr ""
+
+#. module: g2p_programs
 #: model:ir.model.fields,help:g2p_programs.field_g2p_multi_entitlement_approval__cycle_id
 #: model:ir.model.fields,help:g2p_programs.field_g2p_multi_entitlement_approval_wizard__cycle_id
 msgid "A Cycle"
@@ -1181,6 +1211,11 @@ msgid "Company ID"
 msgstr ""
 
 #. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "Company Logo"
+msgstr ""
+
+#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__company_name
 msgid "Company Name"
 msgstr ""
@@ -1437,6 +1472,7 @@ msgid "Credit limit specific to this partner."
 msgstr ""
 
 #. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_cycle__currency_id
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_entitlement__currency_id
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_multi_entitlement_approval__currency_id
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_payment__currency_id
@@ -1495,6 +1531,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:g2p_programs.view_program_list_form
 #, python-format
 msgid "Cycle"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_cycle__approved_by
+msgid "Cycle Approved By"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_cycle__approved_date
+msgid "Cycle Approved Date"
 msgstr ""
 
 #. module: g2p_programs
@@ -1606,6 +1652,11 @@ msgid "DUPLICATE"
 msgstr ""
 
 #. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__data_collection_date
+msgid "Data Collection Date"
+msgstr ""
+
+#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_fund_report_view__date_posted
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__date
 msgid "Date"
@@ -1642,6 +1693,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__birthdate
 #: model_terms:ir.ui.view,arch_db:g2p_programs.view_program_membership_form
 msgid "Date of Birth"
+msgstr ""
+
+#. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "Date:"
 msgstr ""
 
 #. module: g2p_programs
@@ -1872,6 +1928,16 @@ msgstr ""
 #. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_entitlement__disbursement_id
 msgid "Disbursement Journal Entry"
+msgstr ""
+
+#. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "Disbursement Summary"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.actions.report,name:g2p_programs.action_generate_summary
+msgid "Disbursement summary"
 msgstr ""
 
 #. module: g2p_programs
@@ -2266,6 +2332,16 @@ msgstr ""
 #: code:addons/g2p_programs/models/managers/entitlement_manager.py:0
 #, python-format
 msgid "Entitlements Validated and Approved."
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__enumerator_id
+msgid "Enumerator"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__enumerator_user_id
+msgid "Enumerator User"
 msgstr ""
 
 #. module: g2p_programs
@@ -3887,6 +3963,11 @@ msgid "Payment In Progress"
 msgstr ""
 
 #. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "Payment Information"
+msgstr ""
+
+#. module: g2p_programs
 #: model:ir.model,name:g2p_programs.model_g2p_program_payment_manager
 #: model_terms:ir.ui.view,arch_db:g2p_programs.view_payment_manager_form
 #: model_terms:ir.ui.view,arch_db:g2p_programs.view_program_list_form
@@ -4024,6 +4105,11 @@ msgid "Phone/Mobile"
 msgstr ""
 
 #. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "Place:"
+msgstr ""
+
+#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__pos_order_ids
 msgid "Pos Order"
 msgstr ""
@@ -4136,6 +4222,11 @@ msgid "Pricelist"
 msgstr ""
 
 #. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.view_cycle_form
+msgid "Print Summary"
+msgstr ""
+
+#. module: g2p_programs
 #: model:ir.actions.report,name:g2p_programs.action_print_entitlement
 msgid "Print Vouchers"
 msgstr ""
@@ -4212,6 +4303,11 @@ msgstr ""
 #. module: g2p_programs
 #: model:res.groups,name:g2p_programs.g2p_program_cycle_approver
 msgid "Program Cycle Approver"
+msgstr ""
+
+#. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "Program Details"
 msgstr ""
 
 #. module: g2p_programs
@@ -5370,6 +5466,21 @@ msgstr ""
 #. module: g2p_programs
 #: model_terms:ir.ui.view,arch_db:g2p_programs.entitlement_filter
 msgid "To be Paid"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_cycle__total_amount
+msgid "Total Amount"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_cycle__total_amount_in_words
+msgid "Total Amount In Words"
+msgstr ""
+
+#. module: g2p_programs
+#: model_terms:ir.ui.view,arch_db:g2p_programs.print_summary
+msgid "Total Amount(in"
 msgstr ""
 
 #. module: g2p_programs
