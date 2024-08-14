@@ -14,18 +14,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: muk_web_colors
-#: model:ir.model,name:muk_web_colors.model_ir_asset
-msgid "Asset"
-msgstr ""
-
-#. module: muk_web_colors
 #: model:ir.model,name:muk_web_colors.model_web_editor_assets
 msgid "Assets Utils"
-msgstr ""
-
-#. module: muk_web_colors
-#: model:ir.model,name:muk_web_colors.model_ir_attachment
-msgid "Attachment"
 msgstr ""
 
 #. module: muk_web_colors

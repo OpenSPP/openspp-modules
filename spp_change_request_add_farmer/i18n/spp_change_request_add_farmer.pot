@@ -691,28 +691,28 @@ msgstr ""
 #. odoo-python
 #: code:addons/spp_change_request_add_farmer/models/change_request_add_farmer.py:0
 #, python-format
-msgid "The Date of Birth is required."
+msgid "The Date of Birth is required!"
 msgstr ""
 
 #. module: spp_change_request_add_farmer
 #. odoo-python
 #: code:addons/spp_change_request_add_farmer/models/change_request_add_farmer.py:0
 #, python-format
-msgid "The Family Name is required."
+msgid "The Family Name is required!"
 msgstr ""
 
 #. module: spp_change_request_add_farmer
 #. odoo-python
 #: code:addons/spp_change_request_add_farmer/models/change_request_add_farmer.py:0
 #, python-format
-msgid "The First Name is required."
+msgid "The First Name is required!"
 msgstr ""
 
 #. module: spp_change_request_add_farmer
 #. odoo-python
 #: code:addons/spp_change_request_add_farmer/models/change_request_add_farmer.py:0
 #, python-format
-msgid "The Gender is required."
+msgid "The Gender is required!"
 msgstr ""
 
 #. module: spp_change_request_add_farmer
