@@ -83,5 +83,5 @@ class MembershipTest(TransactionCase):
         self.assertEqual(member_form["flags"], {"mode": "readonly"})
 
         self.group_membership_1.individual = False
-        with self.assertRaisesRegex(UserError, "A group or individual must be speficied for this member."):
+        with self.assertRaisesRegex(UserError, "A group or individual must be specified for this member."):
             self.group_membership_1.open_member_form()
