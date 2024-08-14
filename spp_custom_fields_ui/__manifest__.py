@@ -9,7 +9,7 @@
     "license": "LGPL-3",
     "development_status": "Alpha",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["base", "g2p_registry_base"],
+    "depends": ["base", "g2p_registry_base", "g2p_registry_membership"],
     "data": [
         "views/custom_fields_ui.xml",
     ],
