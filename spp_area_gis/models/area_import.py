@@ -37,6 +37,10 @@ class OpenSPPAreaImportActivities(models.Model):
             errors.append(_("Latitude must be between -90 and 90"))
         if self.longitude and (self.longitude < -180 or self.longitude > 180):
             errors.append(_("Longitude must be between -180 and 180"))
+        if self.latitude and not self.longitude:
+            errors.append(_("Longitude is required if Latitude is provided"))
+        if self.longitude and not self.latitude:
+            errors.append(_("Latitude is required if Longitude is provided"))
         return errors
 
     def get_area_vals(self):
