@@ -1,7 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 {
-
     "name": "OpenSPP DCI API Server",
     "summary": "Provides a DCI-compliant RESTful API for secure data exchange with OpenSPP's registry.",
     "category": "",
