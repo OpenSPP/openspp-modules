@@ -386,6 +386,14 @@ class OpenSPPAreaImportActivities(models.Model):
         (POSTED, POSTED),
     ]
 
+    STATE_ORDER = {
+        ERROR: 0,
+        NEW: 1,
+        VALIDATED: 2,
+        UPDATED: 3,
+        POSTED: 4,
+    }
+
     area_import_id = fields.Many2one("spp.area.import", "Area Import", required=True)
     admin_name = fields.Char(translate=True)
     admin_code = fields.Char()
@@ -403,6 +411,15 @@ class OpenSPPAreaImportActivities(models.Model):
         "Status",
         default="New",
     )
+    state_order = fields.Integer(
+        compute="_compute_state_order",
+        store=True,
+    )
+
+    @api.depends("state")
+    def _compute_state_order(self):
+        for rec in self:
+            rec.state_order = self.STATE_ORDER[rec.state]
 
     def check_errors(self):
         self.ensure_one()

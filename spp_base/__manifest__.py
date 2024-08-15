@@ -3,7 +3,7 @@
 
 {
     "name": "OpenSPP Base",
-    "category": "OpenSPP",
+    "category": "OpenSPP/OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",
@@ -41,4 +41,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Provides essential configurations, UI customizations, and base functionalities for the OpenSPP system, including top-up card management and integration with other OpenSPP modules for areas, service points, programs, and custom fields.",
 }

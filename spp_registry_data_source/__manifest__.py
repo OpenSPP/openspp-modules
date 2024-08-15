@@ -1,7 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "SPP Data Source",
+    "name": "OpenSPP Data Source",
+    "summary": "Provides a framework for integrating external data sources into OpenSPP, enabling connection to and retrieval of data from external systems like farmer registries and social protection programs.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

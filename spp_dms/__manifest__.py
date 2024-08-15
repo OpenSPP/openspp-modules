@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "SPP Document Management System",
+    "name": "OpenSPP Document Management System",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -30,4 +30,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Provides a centralized system for managing and organizing documents within OpenSPP, facilitating efficient storage, retrieval, and categorization of files related to social protection programs.",
 }

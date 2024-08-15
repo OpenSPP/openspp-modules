@@ -1,23 +1,30 @@
-# Copyright 2018-2019 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
-# Copyright 2021 Denis Mudarisov <https://github.com/trojikman>
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
 {
-    "name": """OpenSPP REST API""",
-    "summary": """RESTful API for OpenSPP""",
+    "name": "OpenSPP API",
+    "summary": "Provides a framework for building and managing a RESTful API for the OpenSPP platform, including API definition, documentation, security, and logging.",
     "category": "",
-    "images": ["images/icon.png"],
+    "images": [
+        "images/icon.png",
+    ],
     "version": "17.0.1.0.0",
     "application": False,
     "author": "OpenSPP.org",
     "development_status": "Alpha",
-    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
+    "maintainers": [
+        "jeremi",
+        "gonzalesedwin1123",
+        "reichie020212",
+    ],
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "depends": ["spp_base_api", "mail", "spp_oauth"],
-    "external_dependencies": {
-        "python": ["bravado_core", "swagger_spec_validator", "jsonschema"],
-        "bin": [],
-    },
+    "depends": [
+        "mail",
+        "spp_base_api",
+        "spp_oauth",
+        "web",
+    ],
+    "external_dependencies": {"python": ["bravado_core", "swagger_spec_validator", "jsonschema"], "bin": []},
     "data": [
         "security/openapi_security.xml",
         "security/ir.model.access.csv",
@@ -29,7 +36,10 @@
         "views/spp_api_field_alias_views.xml",
         "wizards/res_users_bearer_token_views.xml",
     ],
-    "demo": ["demo/openapi_demo.xml", "demo/openapi_security_demo.xml"],
+    "demo": [
+        "demo/openapi_demo.xml",
+        "demo/openapi_security_demo.xml",
+    ],
     "post_load": "post_load",
     "pre_init_hook": None,
     "post_init_hook": None,

@@ -24,6 +24,20 @@ msgid "Contact"
 msgstr ""
 
 #. module: spp_registrant_import
+#. odoo-python
+#: code:addons/spp_registrant_import/models/res_partner.py:0
+#, python-format
+msgid "Import Template for Groups"
+msgstr ""
+
+#. module: spp_registrant_import
+#. odoo-python
+#: code:addons/spp_registrant_import/models/res_partner.py:0
+#, python-format
+msgid "Import Template for Individuals"
+msgstr ""
+
+#. module: spp_registrant_import
 #: model:ir.model.fields,field_description:spp_registrant_import.field_g2p_program_membership__name
 #: model:ir.model.fields,field_description:spp_registrant_import.field_res_partner__name
 #: model:ir.model.fields,field_description:spp_registrant_import.field_res_users__name

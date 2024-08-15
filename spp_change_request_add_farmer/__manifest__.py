@@ -1,5 +1,6 @@
 {
-    "name": "Farmer Registry: Add Farmer Change Request",
+    "name": "OpenSPP Change Request: Add Farmer",
+    "summary": "Provides a specialized workflow for adding new farmers to existing groups in the registry.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -35,5 +36,3 @@
     "installable": True,
     "auto_install": False,
 }
-
-# "data/id_type.xml",

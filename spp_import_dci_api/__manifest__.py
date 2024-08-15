@@ -1,6 +1,6 @@
 {
-    "name": """OpenSPP Import: DCI API""",
-    "summary": """RESTful API routes for OpenSPP""",
+    "name": "OpenSPP Import: DCI API",
+    "summary": "Enables integration with external registries, particularly those adhering to the DCI (Digital Civil Identity) standard, for importing and synchronizing registrant data into OpenSPP.",
     "category": "",
     "version": "17.0.1.0.0",
     "author": "OpenSPP.org",

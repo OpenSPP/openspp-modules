@@ -118,6 +118,7 @@
                             decoration-it="state=='Error'"
                             decoration-danger="state=='Error'"
                             decoration-success="state=='Posted'"
+                            default_order="state_order"
                         >
                             <field
                                 name="state"
@@ -134,6 +135,7 @@
                             <field name="parent_name" />
                             <field name="parent_code" />
                             <field name="level" />
+                            <field name="state_order" column_invisible="1" />
                         </tree>
                         <form string="Raw Data" duplicate="0" create="0">
                             <header>
