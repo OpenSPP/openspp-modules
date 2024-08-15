@@ -13,7 +13,7 @@ class TestManualEligibility(TransactionCase):
                 "is_group": True,
             }
         )
-        cls.registrant_1 = cls.env["res.partner"].create(
+        cls.registrant_2 = cls.env["res.partner"].create(
             {
                 "name": "Registrant 2 [MANUAL ELIGIBILITY TEST]",
                 "is_registrant": True,
