@@ -7,8 +7,17 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "development_status": "Beta",
-    "maintainers": ["jeremi", "gonzalesedwin1123", "emjay0921"],
-    "depends": ["base", "g2p_registry_base", "g2p_registry_group"],
+    "maintainers": [
+        "jeremi",
+        "gonzalesedwin1123",
+        "emjay0921",
+    ],
+    "depends": [
+        "base",
+        "g2p_registry_base",
+        "g2p_registry_group",
+        "g2p_registry_individual",
+    ],
     "data": [
         "security/ir.model.access.csv",
         "views/event_data_view.xml",
