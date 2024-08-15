@@ -1,7 +1,6 @@
-# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-
 {
-    "name": "OpenSPP Audit Log",
+    "name": "SPP Audit Log",
+    "summary": "Provides audit logging functionality to track data changes and user actions within OpenSPP, enhancing transparency and accountability.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -10,11 +9,7 @@
     "license": "LGPL-3",
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
-    "depends": [
-        "base",
-        "mail",
-        "g2p_registry_membership",
-    ],
+    "depends": ["base", "mail", "g2p_registry_membership"],
     "external_dependencies": {},
     "data": [
         "security/audit_log_security.xml",

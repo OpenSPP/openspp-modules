@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Point of Sale",
+    "name": "OpenSPP POS",
+    "summary": "Extend Odoo POS to redeem entitlements from OpenSPP for secure and efficient beneficiary transactions.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

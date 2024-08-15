@@ -1,5 +1,5 @@
 {
-    "name": """OpenSPP API Records""",
+    "name": "OpenSPP API Records",
     "summary": """Provides RESTful API endpoints for accessing and managing OpenSPP's core data, including service points, programs, products, and entitlements.""",
     "category": "",
     "version": "17.0.1.0.0",

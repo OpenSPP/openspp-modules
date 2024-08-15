@@ -1,6 +1,3 @@
-# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-
-
 {
     "name": "OpenSPP Event Data",
     "category": "OpenSPP",
@@ -24,4 +21,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Records and tracks events related to individual and group registrants, providing a chronological history of changes and actions within the OpenSPP system.",
 }

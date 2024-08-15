@@ -1,4 +1,3 @@
-# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Programs: Service Points Integration",
     "category": "OpenSPP",
@@ -29,4 +28,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Extends OpenSPP Programs to integrate service points, enabling the association of beneficiaries and entitlements with designated service delivery locations for improved program efficiency and targeted benefit distribution.",
 }
