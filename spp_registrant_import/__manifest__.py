@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP: Import Improvement",
+    "name": "OpenSPP Registrant Import",
+    "summary": "Streamlines the import of registrant data into OpenSPP, simplifies data mapping, and automates unique ID generation.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Registry - Scan ID Document",
+    "name": "OpenSPP Registry: Scan ID Document",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -23,4 +23,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Enables the scanning of physical ID documents directly into a registrant's profile, streamlining data entry and improving accuracy in the OpenSPP Registry.",
 }

@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Program Entitlement (In-Kind)",
+    "name": "OpenSPP In-Kind Entitlement",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -29,4 +29,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Manages the distribution of in-kind entitlements within social protection programs, handling inventory, service points, and beneficiary redemption.",
 }

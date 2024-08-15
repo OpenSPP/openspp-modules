@@ -1,4 +1,3 @@
-# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Custom Fields UI",
     "category": "OpenSPP",
@@ -19,4 +18,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Provides a user-friendly interface for defining and managing custom fields for registrants within the OpenSPP platform, allowing implementers to tailor data collection to program-specific needs.",
 }

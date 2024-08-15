@@ -1,5 +1,5 @@
 {
-    "name": "SPP Custom field-Custom filter Integrate",
+    "name": "OpenSPP Custom Field Custom Filter Integration",
     "version": "17.0.1.0.0",
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -14,4 +14,5 @@
     ],
     "auto_install": True,
     "application": False,
+    "summary": "Allows administrators to enable custom fields for filtering, enhancing data analysis and program operations.",
 }

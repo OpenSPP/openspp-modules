@@ -2,7 +2,8 @@
 
 
 {
-    "name": "Farmer Registry: Base",
+    "name": "OpenSPP Farmer Registry Base",
+    "summary": "Base module for managing farmer registries, linking farmers to farms, land, and agricultural activities.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "SPP Program: Manual Entitlement",
+    "name": "OpenSPP Manual Entitlement",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -26,4 +26,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Provides a mechanism for manually creating entitlements for beneficiaries within specific program cycles in OpenSPP, offering flexibility for programs with unique eligibility criteria or situations not covered by automated rules.",
 }

@@ -61,10 +61,13 @@ Maintainers
 .. |maintainer-gonzalesedwin1123| image:: https://github.com/gonzalesedwin1123.png?size=40px
     :target: https://github.com/gonzalesedwin1123
     :alt: gonzalesedwin1123
+.. |maintainer-reichie020212| image:: https://github.com/reichie020212.png?size=40px
+    :target: https://github.com/reichie020212
+    :alt: reichie020212
 
 Current maintainers:
 
-|maintainer-jeremi| |maintainer-gonzalesedwin1123| 
+|maintainer-jeremi| |maintainer-gonzalesedwin1123| |maintainer-reichie020212| 
 
 This module is part of the `OpenSPP/openspp-modules <https://github.com/OpenSPP/openspp-modules/tree/17.0/g2p_connect_demo>`_ project on GitHub.
 

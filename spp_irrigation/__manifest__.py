@@ -2,7 +2,7 @@
 
 
 {
-    "name": "OpenSPP: Irrigation",
+    "name": "OpenSPP Irrigation",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -26,4 +26,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Provides tools for managing and visualizing irrigation infrastructure within OpenSPP, enabling efficient tracking, planning, and analysis of irrigation systems and their impact.",
 }
