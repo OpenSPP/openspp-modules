@@ -245,6 +245,13 @@ msgid "Sub-Field"
 msgstr ""
 
 #. module: spp_import_match
+#. odoo-javascript
+#: code:addons/spp_import_match/static/src/legacy/js/custom_base_import.js:0
+#, python-format
+msgid "Successfully added on Queue"
+msgstr ""
+
+#. module: spp_import_match
 #: model:ir.model.fields,help:spp_import_match.field_spp_import_match_fields__imported_value
 msgid "This will be used as a condition to disregard this field if matched"
 msgstr ""
