@@ -25,11 +25,44 @@ INIT_PRIORITY = 100
 DEFAULT_CHUNK_SIZE = 100
 
 
+class ImportValidationError(Exception):
+    """
+    This class is made to correctly format all the different error types that
+    can occur during the pre-validation of the import that is made before
+    calling the data loading itself. The Error data structure is meant to copy
+    the one of the errors raised during the data loading. It simplifies the
+    error management at client side as all errors can be treated the same way.
+
+    This exception is typically raised when there is an error during data
+    parsing (image, int, dates, etc..) or if the user did not select at least
+    one field to map with a column.
+    """
+
+    def __init__(self, message, **kwargs):
+        super().__init__(message)
+        self.type = kwargs.get("error_type", "error")
+        self.message = message
+        self.record = False
+        self.not_matching_error = True
+        self.field_path = [kwargs["field"]] if kwargs.get("field") else False
+        self.field_type = kwargs.get("field_type")
+
+
 class SPPBaseImport(models.TransientModel):
     _inherit = "base_import.import"
 
     def execute_import(self, fields, columns, options, dryrun=False):
-        if dryrun or not options.get(OPT_USE_QUEUE):
+        try:
+            input_file_data, import_fields = self._convert_import_data(fields, options)
+            # Parse date and float field
+            input_file_data = self._parse_import_data(input_file_data, import_fields, options)
+        except ImportValidationError as error:
+            return {"messages": [error.__dict__]}
+
+        _logger.info(f"Started Import: {self.res_model} with rows {len(input_file_data)}")
+        _logger.info("Number of Fields: %s" % len(fields))
+        _logger.info("Number of Columns: %s" % len(columns))
+        if dryrun or not len(input_file_data) > 100:
             # normal import
             _logger.info("Doing Normal Import")
             import_match_ids = options.get("import_match_ids", [])
@@ -64,7 +97,7 @@ class SPPBaseImport(models.TransientModel):
             file_name=self.file_name,
         )
         self._link_attachment_to_job(delayed_job, attachment)
-        return {}
+        return {"async": True}
 
     def _link_attachment_to_job(self, delayed_job, attachment):
         queue_job = self.env["queue.job"].search([("uuid", "=", delayed_job.uuid)], limit=1)

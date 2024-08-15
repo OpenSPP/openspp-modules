@@ -1,82 +1,49 @@
-odoo.define("spp_import_match.import", function (require) {
-    var rpc = require("web.rpc");
-    var DataImport = require("base_import.import").DataImport;
+/** @odoo-module */
+import {BaseImportModel} from "@base_import/import_model";
+import {patch} from "@web/core/utils/patch";
+import {_t} from "@web/core/l10n/translation";
 
-    DataImport.include({
-        events: _.extend({}, DataImport.prototype.events, {
-            "change input.oe_import_match": "_onImportMatchChanges",
-        }),
+patch(BaseImportModel.prototype, {
+    setup() {
+        super.setup();
+    },
 
-        init: function () {
-            this._super.apply(this, arguments);
-            this.importMatchIds = [];
-        },
-
-        import_options: function () {
-            var options = this._super.apply(this, arguments);
-            options.use_queue = this.$("input.oe_import_queue").prop("checked");
-            options.import_match_ids = this.importMatchIds;
-            return options;
-        },
-
-        onimported: function () {
-            if (this.$("input.oe_import_queue").prop("checked")) {
-                this.displayNotification({
-                    title: "Your request is being processed",
-                    message: "You can check the status of this job in menu 'Queue / Jobs'.",
-                    type: "success",
-                });
-                this.exit();
-            } else {
-                this._super.apply(this, arguments);
-            }
-        },
-
-        exit: function () {
-            this.trigger_up("history_back");
-        },
-
-        start: function () {
-            var sup = this._super.apply(this, arguments);
-            this.setup_import_match_selection();
-            return sup;
-        },
-
-        setup_import_match_selection: function () {
-            var self = this;
-
-            rpc.query({
-                model: "spp.import.match",
-                method: "search_read",
-                args: [[["model_id.model", "=", this.res_model]]],
-                fields: ["id", "name"],
-            }).then(function (data) {
-                if (data.length <= 0) {
-                    self.$("div#oe_config_import_matching").hide();
-                    return;
-                }
-                var content = "";
-                for (const [, value] of Object.entries(data)) {
-                    const id_for_label = "o_config_checkbox_import_match_" + value.id;
-                    content += `
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" id="${id_for_label}" class="custom-control-input oe_import_match"/>
-                            <label for="${id_for_label}" class="custom-control-label o_form_label">${value.name}</label>
-                        </div>`;
-                }
-                self.$("div#oe_import_match").html(content);
+    async _callImport(dryrun, args) {
+        try {
+            const res = await this.orm.silent.call("base_import.import", "execute_import", args, {
+                dryrun,
+                context: {
+                    ...this.context,
+                    tracking_disable: this.importOptions.tracking_disable,
+                },
             });
-        },
-
-        _onImportMatchChanges: function (ev) {
-            const targetIdSplited = ev.target.id.split("_");
-            const importMatchId = parseInt(targetIdSplited[targetIdSplited.length - 1], 10);
-            const importMatchIdIndex = this.importMatchIds.indexOf(importMatchId);
-            if (importMatchIdIndex === -1) {
-                this.importMatchIds.push(importMatchId);
-            } else {
-                this.importMatchIds.splice(importMatchIdIndex, 1);
+            if ("async" in res) {
+                if (res.async === true) {
+                    this.displayNotification(_t("Successfully added on Queue"));
+                    history.go(-1);
+                }
             }
-        },
-    });
+            console.log(res);
+            return res;
+        } catch (error) {
+            // This pattern isn't optimal but it is need to have
+            // similar behaviours as in legacy. That is, catching
+            // all import errors and showing them inside the top
+            // "messages" area.
+            return {error};
+        }
+    },
+
+    displayNotification(message) {
+        this.env.services.action.doAction({
+            type: "ir.actions.client",
+            tag: "display_notification",
+            params: {
+                title: "Queued",
+                message: message,
+                type: "success",
+                sticky: false,
+            },
+        });
+    },
 });
