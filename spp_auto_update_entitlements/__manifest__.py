@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Auto-Update Entitlements when cycle are closed",
+    "name": "OpenSPP Auto-Update Entitlements",
+    "summary": "Automatically updates entitlement states based on their redemption status at the end of program cycles in OpenSPP.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

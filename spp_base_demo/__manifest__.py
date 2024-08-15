@@ -27,4 +27,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Provides demonstration data for the OpenSPP system, including sample registrants, programs, and products to facilitate user exploration and training.",
 }

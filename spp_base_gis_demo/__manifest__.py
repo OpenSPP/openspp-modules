@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Base GIS: Demo",
+    "name": "OpenSPP Base GIS Demo",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "author": "OpenSPP.org",
@@ -12,4 +12,5 @@
     "data": ["views/partner.xml"],
     "application": True,
     "installable": True,
+    "summary": "Demonstrates the GIS capabilities of the OpenSPP Base GIS module by providing practical examples and use cases with GIS views, data layers, and raster layers.",
 }

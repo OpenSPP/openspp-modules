@@ -1,7 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "SPP Registry Group Hierarchy",
+    "name": "OpenSPP Registry Group Hierarchy",
+    "summary": "Introduces hierarchical relationships between groups, allowing for nested group structures within social protection programs and farmer registries.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

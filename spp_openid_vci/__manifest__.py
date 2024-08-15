@@ -1,8 +1,5 @@
-# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-
-
 {
-    "name": "SPP Registry OpenID VCI: Base",
+    "name": "OpenSPP OpenID VCI",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -10,7 +7,7 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "development_status": "Beta",
-    "maintainers": ["jeremi", "gonzalesedwin1123"],
+    "maintainers": ["jeremi", "gonzalesedwin1 123"],
     "depends": [
         "spp_encryption",
         "g2p_encryption_rest_api",
@@ -31,4 +28,5 @@
     "application": False,
     "installable": True,
     "auto_install": False,
+    "summary": "Enables the issuance and management of Verifiable Credentials (VCs) within the OpenSPP platform, leveraging OpenID Connect for Verifiable Presentations (OpenID4VP) to provide secure and verifiable digital credentials for registrants.",
 }

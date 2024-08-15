@@ -1,8 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "OpenSPP REST API",
-    "summary": "RESTful API for OpenSPP",
+    "name": "OpenSPP API",
+    "summary": "Provides a framework for building and managing a RESTful API for the OpenSPP platform, including API definition, documentation, security, and logging.",
     "category": "",
     "images": [
         "images/icon.png",

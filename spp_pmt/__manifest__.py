@@ -2,7 +2,8 @@
 
 
 {
-    "name": "Proxy Means Testing",
+    "name": "OpenSPP Proxy Means Testing",
+    "summary": "Calculates a Proxy Means Testing (PMT) score for groups of registrants to aid in beneficiary identification and prioritization for social protection programs.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

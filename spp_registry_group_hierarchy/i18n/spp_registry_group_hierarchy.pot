@@ -17,7 +17,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/spp_registry_group_hierarchy/models/group_membership.py:0
 #, python-format
-msgid "A group or individual must be speficied for this member."
+msgid "A group or individual must be specified for this member."
 msgstr ""
 
 #. module: spp_registry_group_hierarchy
@@ -53,6 +53,12 @@ msgid "Individual Domain"
 msgstr ""
 
 #. module: spp_registry_group_hierarchy
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_group_membership_form_spp_custom
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
+msgid "Member"
+msgstr ""
+
+#. module: spp_registry_group_hierarchy
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
 msgid "Open Form"
 msgstr ""
@@ -71,4 +77,9 @@ msgstr ""
 #. module: spp_registry_group_hierarchy
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
 msgid "Role:"
+msgstr ""
+
+#. module: spp_registry_group_hierarchy
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_group_membership_form_spp_custom
+msgid "Select Member..."
 msgstr ""

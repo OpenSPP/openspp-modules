@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Custom Field: Recompute Daily",
+    "name": "OpenSPP Custom Field Recompute Daily",
+    "summary": "Enables daily recomputation of specified fields to maintain data accuracy and improve performance by offloading intensive calculations.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
