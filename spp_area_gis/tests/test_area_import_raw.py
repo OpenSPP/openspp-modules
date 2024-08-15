@@ -18,6 +18,18 @@ class AreaImportRawTest(AreaImportRawTestMixin):
         self.assertIn("Latitude must be between -90 and 90", self.area_import_raw_id.remarks)
         self.assertIn("Longitude must be between -180 and 180", self.area_import_raw_id.remarks)
 
+        self.area_import_raw_id.latitude = False
+        self.area_import_raw_id.longitude = 179
+        self.area_import_raw_id.validate_raw_data()
+        self.assertEqual(self.area_import_raw_id.state, "Error")
+        self.assertIn("Latitude is required if Longitude is provided", self.area_import_raw_id.remarks)
+
+        self.area_import_raw_id.latitude = 89
+        self.area_import_raw_id.longitude = False
+        self.area_import_raw_id.validate_raw_data()
+        self.assertEqual(self.area_import_raw_id.state, "Error")
+        self.assertIn("Longitude is required if Latitude is provided", self.area_import_raw_id.remarks)
+
     def test_get_area_vals(self):
         area_vals = self.area_import_raw_id.get_area_vals()
 
