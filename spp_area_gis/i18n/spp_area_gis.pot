@@ -54,12 +54,26 @@ msgstr ""
 #. odoo-python
 #: code:addons/spp_area_gis/models/area_import.py:0
 #, python-format
+msgid "Latitude is required if Longitude is provided"
+msgstr ""
+
+#. module: spp_area_gis
+#. odoo-python
+#: code:addons/spp_area_gis/models/area_import.py:0
+#, python-format
 msgid "Latitude must be between -90 and 90"
 msgstr ""
 
 #. module: spp_area_gis
 #: model:ir.model.fields,field_description:spp_area_gis.field_spp_area_import_raw__longitude
 msgid "Longitude"
+msgstr ""
+
+#. module: spp_area_gis
+#. odoo-python
+#: code:addons/spp_area_gis/models/area_import.py:0
+#, python-format
+msgid "Longitude is required if Latitude is provided"
 msgstr ""
 
 #. module: spp_area_gis
