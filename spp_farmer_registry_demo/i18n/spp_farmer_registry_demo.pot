@@ -21,6 +21,13 @@ msgid ""
 msgstr ""
 
 #. module: spp_farmer_registry_demo
+#. odoo-python
+#: code:addons/spp_farmer_registry_demo/models/farm.py:0
+#, python-format
+msgid "A group or individual must be specified for this member."
+msgstr ""
+
+#. module: spp_farmer_registry_demo
 #: model:ir.model.fields,field_description:spp_farmer_registry_demo.field_spp_farm_asset__active_area
 msgid "Active Area"
 msgstr ""
@@ -751,6 +758,11 @@ msgid "Grid electricity"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
+#: model:ir.model,name:spp_farmer_registry_demo.model_g2p_group_membership
+msgid "Group Membership"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
 #: model:ir.model.fields.selection,name:spp_farmer_registry_demo.selection__spp_farm_details__financial_services_mode_of_extension_service__group_demonstrations
 msgid "Group demonstrations"
 msgstr ""
@@ -1219,7 +1231,12 @@ msgstr ""
 
 #. module: spp_farmer_registry_demo
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
-msgid "Open Individual Form"
+msgid "Open Form"
+msgstr ""
+
+#. module: spp_farmer_registry_demo
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_demo.view_farm_groups_form
+msgid "Open Member Form"
 msgstr ""
 
 #. module: spp_farmer_registry_demo
