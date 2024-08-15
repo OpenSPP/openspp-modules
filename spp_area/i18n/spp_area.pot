@@ -495,6 +495,11 @@ msgid "State"
 msgstr ""
 
 #. module: spp_area
+#: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__state_order
+msgid "State Order"
+msgstr ""
+
+#. module: spp_area
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import__state
 #: model:ir.model.fields,field_description:spp_area.field_spp_area_import_raw__state
 msgid "Status"
