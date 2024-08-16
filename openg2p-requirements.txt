@@ -13,6 +13,7 @@ odoo-addon-g2p-program-approval==17.0.1.0.0.7
 odoo-addon-g2p-program-assessment==17.0.1.0.0.13
 odoo-addon-g2p-program-cycleless==17.0.1.0.0.13
 odoo-addon-g2p-bank==17.0.1.0.0.6
+odoo-addon-extendable_fastapi @ git+https://github.com/OpenG2P/rest-framework@17.0
 odoo-addon-g2p-bank-rest-api==17.0.1.0.0.5
 odoo-addon-g2p-registry-rest-api==17.0.1.0.0.17
 odoo-addon-g2p-connect-demo==17.0.1.0.0.16
