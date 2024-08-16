@@ -5,7 +5,8 @@ import pyproj
 from shapely.geometry import mapping
 from shapely.ops import transform
 
-from odoo import Command, api, fields, models
+from odoo import Command, _, api, fields, models
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -48,11 +49,76 @@ class Farm(models.Model):
 
         return farm
 
+    def get_group_head_member(self):
+        self.ensure_one()
+        if not self.is_registrant or not self.is_group:
+            return None
+
+        head_kind_id = self.env.ref("g2p_registry_membership.group_membership_kind_head")
+        for member in self.group_membership_ids:
+            if head_kind_id in member.kind:
+                return member.individual
+
+    def update_group_head_member(self, new_group_head):
+        self.ensure_one()
+        current_phone = self.env["g2p.phone.number"].search([("partner_id", "=", new_group_head.id)], limit=1)
+        phone_number = None
+        if current_phone:
+            phone_number = current_phone.phone_no
+
+        current_id = self.env["g2p.reg.id"].search(
+            [
+                ("partner_id", "=", new_group_head.id),
+                (
+                    "id_type",
+                    "=",
+                    self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                ),
+            ]
+        )
+        national_id = None
+        if current_id:
+            national_id = current_id.value
+
+        self.farmer_id.write(
+            {
+                "farmer_individual_id": new_group_head.id,
+                "farmer_family_name": new_group_head.family_name,
+                "farmer_given_name": new_group_head.given_name,
+                "farmer_addtnl_name": new_group_head.addl_name,
+                "farmer_sex": new_group_head.gender,
+                "farmer_marital_status": new_group_head.marital_status,
+                "farmer_birthdate": new_group_head.birthdate,
+                "farmer_household_size": new_group_head.farmer_household_size,
+                "farmer_postal_address": new_group_head.farmer_postal_address,
+                "farmer_email": new_group_head.email,
+                "farmer_formal_agricultural": new_group_head.formal_agricultural_training,
+                "farmer_highest_education_level": new_group_head.highest_education_level,
+                "farmer_national_id": national_id,
+                "farmer_mobile_tel": phone_number,
+            }
+        )
+        self.write(
+            {
+                "farmer_national_id": national_id,
+                "farmer_household_size": new_group_head.farmer_household_size,
+                "farmer_postal_address": new_group_head.farmer_postal_address,
+            }
+        )
+        new_group_head.farmer_id = self.farmer_id.id
+
     @api.model
     def write(self, vals):
         farm = super().write(vals)
         for rec in self:
             if rec.is_group:
+                head_member = rec.get_group_head_member()
+                if not head_member:
+                    raise ValidationError(_("Farm must have a head member."))
+                if head_member and head_member.id != rec.farmer_individual_id.id:
+                    rec.update_group_head_member(head_member)
+                    continue
+
                 rec.create_update_farmer(rec)
             elif not rec.is_group and rec.is_registrant:
                 rec.update_farmer(rec)
@@ -140,12 +206,6 @@ class Farm(models.Model):
         }
         if not farm.farmer_individual_id:
             individual = self.env["res.partner"].create(individual_vals)
-            individual.farmer_id = farm.farmer_id.id
-            farm.farmer_individual_id = individual.id
-            if farm.farmer_mobile_tel:
-                self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
-            if farm.farmer_national_id:
-                self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
             # Create Membership
             membership_vals = {
                 "group": farm.id,
@@ -153,6 +213,12 @@ class Farm(models.Model):
                 "kind": [Command.link(self.env.ref("g2p_registry_membership.group_membership_kind_head").id)],
             }
             self.env["g2p.group.membership"].create(membership_vals)
+            individual.farmer_id = farm.farmer_id.id
+            farm.farmer_individual_id = individual.id
+            if farm.farmer_mobile_tel:
+                self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
+            if farm.farmer_national_id:
+                self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
 
         else:
             farm.farmer_individual_id.write(individual_vals)
