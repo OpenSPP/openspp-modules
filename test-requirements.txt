@@ -1,1 +1,2 @@
+-r openg2p-requirements.txt
 odoo-test-helper
