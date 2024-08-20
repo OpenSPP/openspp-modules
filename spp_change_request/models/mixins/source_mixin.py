@@ -552,7 +552,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             self.copy_group_member_ids("group_member_id")
             self.copy_group_member_ids("group_member_id", group_ref_field="registrant_id")
             self.copy_group_member_ids("group_member_id", model_name="spp.change.request")
-            self.copy_group_member_ids("group_member_id", model_name=["spp.change.request", "pds.change.request"])
 
             def my_condition(self):
                 if self.state == 'draft':
@@ -584,7 +583,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     change_request_field: rec.id,
                     "service_point_id": mrec.id,
                 }
-                self.env["pds.change.request.service.point"].create(service_points)
+                self.env["spp.change.request.service.point"].create(service_points)
 
     def _copy_from_group_member_ids(self, group_ref_field, group_id_field, skip_head=True):
         for rec in self:
@@ -603,7 +602,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                         "kind_ids": kind_ids,
                         "new_relation_to_head": None,
                     }
-                    self.env["pds.change.request.src.grp"].create(group_members)
+                    self.env["spp.change.request.src.grp"].create(group_members)
 
     def open_applicant_details_form(self):
         """
