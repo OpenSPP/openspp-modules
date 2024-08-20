@@ -17,6 +17,5 @@ odoo-addon-extendable-fastapi==17.0.2.1.1
 odoo-addon-g2p-encryption==17.0.1.2.0.2
 odoo-addon-g2p-bank-rest-api==17.0.1.0.0.5
 odoo-addon-g2p-registry-rest-api==17.0.1.0.0.17
-odoo-addon-g2p-connect-demo==17.0.1.0.0.16
 odoo-addon-g2p-openid-vci==17.0.1.2.0.5
 odoo-addon-g2p-openid-vci-rest-api==17.0.1.2.0.4
