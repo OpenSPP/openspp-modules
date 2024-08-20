@@ -15,3 +15,5 @@ assignees: ""
 **Screenshots**
 
 **Additional context**
+
+🔔 Note: This ticket should address common considerations without including country-specific content. Please ensure all references are generic and applicable across various contexts.
