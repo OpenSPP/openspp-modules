@@ -15,25 +15,8 @@ odoo-addon-g2p-program-cycleless==17.0.1.0.0.13
 odoo-addon-g2p-bank==17.0.1.0.0.6
 odoo-addon-extendable-fastapi==17.0.2.1.1
 odoo-addon-g2p-encryption==17.0.1.2.0.2
-odoo-addon-muk-web-theme @ git+https://github.com/OpenSPP/mukit-modules@17.0
 odoo-addon-g2p-bank-rest-api==17.0.1.0.0.5
 odoo-addon-g2p-registry-rest-api==17.0.1.0.0.17
 odoo-addon-g2p-connect-demo==17.0.1.0.0.16
 odoo-addon-g2p-openid-vci==17.0.1.2.0.5
 odoo-addon-g2p-openid-vci-rest-api==17.0.1.2.0.4
-# generated from manifests external_dependencies
-Pillow>=9.3.0
-PyLD
-bravado_core
-faker
-geojson
-jsonschema
-jwcrypto
-pyjwt>=2.4.0
-pyproj
-python-magic
-qrcode
-shapely
-simplejson
-swagger_spec_validator
-xlrd
