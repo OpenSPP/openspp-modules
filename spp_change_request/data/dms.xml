@@ -21,7 +21,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="name">UID Card</field>
     </record>
 
-    <record id="pds_dms_extra_documents" model="spp.dms.category">
+    <record id="spp_dms_extra_documents" model="spp.dms.category">
         <field name="name">Extra Documents</field>
     </record>
 
