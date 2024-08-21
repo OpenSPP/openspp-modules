@@ -60,7 +60,6 @@ jobs:
 
       - name: Remove OpenG2P stubs from openspp-modules
         run: |
-            ls -la
             rm -rf g2p_bank
             rm -rf g2p_bank_rest_api
             rm -rf g2p_encryption
@@ -129,7 +128,7 @@ jobs:
         run: |
           cp spp-test-requirements.txt test-requirements.txt
           cat test-requirements.txt
-          sed -i '/OpenG2P\/\(openg2p\)/! { s|OpenG2P/|OpenSPP/openg2p-|; }; /OpenG2P/ { /openspp-modules/! { s/OpenG2P/OpenSPP/g; s/@17.0\(-develop\)\?/@v17.0.1.2-openspp/; } }' test-requirements.txt
+          sed -i '/openspp-modules/! { /OpenG2P\/\(openg2p\)/! { s|OpenG2P/|OpenSPP/openg2p-|; s/@17.0\(-develop\)\?/@v17.0.1.2-openspp/; }; /OpenG2P/ { s/OpenG2P/OpenSPP/g; s/@17.0\(-develop\)\?/@v17.0.1.2-openspp/; } }' test-requirements.txt
           cat test-requirements.txt
       - name: Installing specific Debian packages to be able to pip install pyjq
         run: |
