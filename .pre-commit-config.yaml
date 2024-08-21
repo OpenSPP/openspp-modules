@@ -43,7 +43,7 @@ repos:
     hooks:
       - id: whool-init
   - repo: https://github.com/OpenSPP/maintainer-tools
-    rev: 1b216173c7d11cf682492aefc149f02627068174
+    rev: 023b81eebac4264b4ad48fbe6c1e56cb762decd6
     hooks:
       # update the NOT INSTALLABLE ADDONS section above
       - id: oca-update-pre-commit-excluded-addons
@@ -55,8 +55,6 @@ repos:
           - --branch=17.0
           - --org-name=OpenSPP
           - --repo-name=openspp-modules
-          - --if-source-changed
-          - --keep-source-digest
           - --convert-fragments-to-markdown
         stages: [manual]
       - id: oca-gen-addons-table
