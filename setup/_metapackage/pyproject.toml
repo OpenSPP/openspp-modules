@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-openspp-openspp-modules"
-version = "17.0.20240809.0"
+version = "17.0.20240821.0"
 dependencies = [
     "odoo-addon-g2p_connect_demo>=17.0dev,<17.1dev",
     "odoo-addon-spp_api>=17.0dev,<17.1dev",
@@ -41,6 +41,7 @@ dependencies = [
     "odoo-addon-spp_entitlement_basket>=17.0dev,<17.1dev",
     "odoo-addon-spp_entitlement_cash>=17.0dev,<17.1dev",
     "odoo-addon-spp_entitlement_in_kind>=17.0dev,<17.1dev",
+    "odoo-addon-spp_ethnic_group>=17.0dev,<17.1dev",
     "odoo-addon-spp_event_data>=17.0dev,<17.1dev",
     "odoo-addon-spp_event_data_program_membership>=17.0dev,<17.1dev",
     "odoo-addon-spp_event_demo>=17.0dev,<17.1dev",
