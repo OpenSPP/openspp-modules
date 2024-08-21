@@ -10,8 +10,10 @@ def parse_linting_output(output):
     """Parse the linting output to get a list of files with issues."""
     files_with_issues = set()
     for line in output.splitlines():
-        if '************* Module' in line:
-            file_path = line.split()[-1].replace('.', '/') + '.py'
+        if line.startswith('************* Module'):
+            continue
+        if ':' in line:
+            file_path = line.split(':')[0]
             files_with_issues.add(file_path)
     return list(files_with_issues)
 
