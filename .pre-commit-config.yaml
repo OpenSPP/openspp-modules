@@ -135,12 +135,6 @@ repos:
     rev: v9.0.4
     hooks:
       - id: pylint_odoo
-        name: pylint with optional checks
-        args:
-          - --rcfile=.pylintrc
-          - --exit-zero
-        verbose: true
-      - id: pylint_odoo
         args:
           - --rcfile=.pylintrc-mandatory
   - repo: https://github.com/zricethezav/gitleaks
