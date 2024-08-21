@@ -145,7 +145,12 @@ Credits
 Authors
 -------
 
+* `David Arnold <dar@xoe.solutions>`__
+* `Ivan Yelizariev <https://it-projects.info/team/yelizariev>`__
+* `Rafis Bikbov <https://it-projects.info/team/RafiZz>`__
+* `Stanislav Krotov <https://it-projects.info/team/ufaks>`__
 * OpenSPP.org
+* `XOE Solutions <https://xoe.solutions>`__
 
 Maintainers
 -----------
