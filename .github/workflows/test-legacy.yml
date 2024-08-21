@@ -1,4 +1,4 @@
-name: tests
+name: tests fetching the OpenG2P dependencies from the OpenG2P repositories, using latest revision of branch 17.0/17.0-develop
 
 on:
   pull_request:
@@ -72,6 +72,9 @@ jobs:
         run: git clone https://github.com/OpenG2P/openg2p-vci.git --depth 1 --branch 17.0-develop
       - name: Clone Muk Addons Repository
         run: git clone https://github.com/muk-it/odoo-modules.git --depth 1 --branch 17.0
+      - name: Remove g2p_connect_demo from openspp-modules as it is not compatible with all OpenSPP variants
+        run: |
+          rm -rf g2p_connect_demo
       - name: Copy OpenG2P modules to addons directory
         # exclude openg2p-program/odoo-addon-base_rest as it is not migrated to 17.0
         run: |

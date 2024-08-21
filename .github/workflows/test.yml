@@ -1,4 +1,4 @@
-name: tests
+name: tests fetching the OpenG2P dependencies from the OpenSPP forks of OpenG2P, locked to the version of the OpenSPP 17.0.1.2 (batanes) release
 
 on:
   pull_request:
@@ -83,7 +83,9 @@ jobs:
             rm -rf muk_web_colors
             rm -rf muk_web_dialog
             rm -rf muk_web_theme
-            ls -la
+      - name: Remove g2p_connect_demo from openspp-modules as it is not compatible with all OpenSPP variants
+        run: |
+            rm -rf g2p_connect_demo
       - name: Create temporary test-requirement.txt
         run: cp test-requirements.txt spp-test-requirements.txt
       # Clone OpenG2P Registry repository
