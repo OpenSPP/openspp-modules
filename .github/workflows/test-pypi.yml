@@ -1,4 +1,5 @@
-name: tests (PyPI) - fetching the OpenG2P dependencies from OpenSPP PyPI, locked to the version of the OpenSPP 17.0.1.2 (batanes) release
+name: tests (PyPI)
+# fetching the OpenG2P dependencies from OpenSPP PyPI, locked to the version of the OpenSPP 17.0.1.2 (batanes) release
 
 on:
   pull_request:
