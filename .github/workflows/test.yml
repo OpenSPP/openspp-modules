@@ -1,5 +1,4 @@
 name: tests
-description: Run tests on Odoo 17.0 using the OpenG2P packages from the OpenSPP 17.0.1.2 (batanes) release
 
 on:
   pull_request:
