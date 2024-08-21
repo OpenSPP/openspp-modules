@@ -17,7 +17,7 @@ class OpenSPPArea(models.Model):
     _order = "parent_id,name"
 
     parent_id = fields.Many2one("spp.area", "Parent")
-    complete_name = fields.Char("Complete Name", compute="_compute_complete_name", recursive=True, translate=True)
+    complete_name = fields.Char(compute="_compute_complete_name", recursive=True, translate=True)
     name = fields.Char(translate=True, compute="_compute_name", store=True)
     draft_name = fields.Char(required=True, translate=True)
     parent_path = fields.Char(index=True)
@@ -198,7 +198,7 @@ class OpenSPPAreaKind(models.Model):
     parent_id = fields.Many2one("spp.area.kind", "Parent")
     parent_path = fields.Char(index=True)
     name = fields.Char(required=True)
-    complete_name = fields.Char("Complete Name", compute="_compute_complete_name", recursive=True, translate=True)
+    complete_name = fields.Char(compute="_compute_complete_name", recursive=True, translate=True)
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
