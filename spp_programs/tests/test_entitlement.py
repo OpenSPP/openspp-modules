@@ -2,7 +2,7 @@ from datetime import date
 from unittest.mock import Mock, patch
 
 from odoo import Command, fields
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools import mute_logger
 
 from .common import Common
@@ -230,3 +230,22 @@ class TestEntitlement(Common):
             self.entitlement.partner_id.id,
             "Partner Id should be entitlement partner!",
         )
+
+    def test_12_approve_entitlement(self):
+        entitlement_id = self.env["g2p.entitlement"].create(
+            {
+                "partner_id": self.registrant.id,
+                "initial_amount": 1.0,
+                "cycle_id": self.cycle.id,
+                "state": "approved",
+                "valid_until": fields.Date.add(fields.Date.today(), days=1),
+            }
+        )
+        entitlement_state = entitlement_id.state
+        with self.assertRaisesRegex(ValidationError, "The cycle must be approved before approving entitlement"):
+            entitlement_id.approve_entitlement()
+        self.assertEqual(entitlement_id.state, entitlement_state)
+
+        self.cycle.write({"state": "approved"})
+        with self.assertRaisesRegex(UserError, "No Entitlement Manager defined."):
+            entitlement_id.approve_entitlement()
