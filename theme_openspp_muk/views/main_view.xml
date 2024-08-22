@@ -1,0 +1,10 @@
+<odoo>
+
+    <menuitem
+        id="g2p_registry_base.g2p_main_menu_root"
+        name="Registry"
+        web_icon="theme_openspp_muk,static/description/icon_registry.png"
+        active="True"
+        sequence="-1"
+    />
+</odoo>
