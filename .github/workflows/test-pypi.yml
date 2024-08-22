@@ -1,5 +1,5 @@
-name: tests (forked+locked)
-# fetching the OpenG2P dependencies from the OpenSPP forks of OpenG2P, locked to the version of the OpenSPP 17.0.1.2 (batanes) release
+name: tests (PyPI)
+# fetching the OpenG2P dependencies from OpenSPP PyPI, locked to the version of the OpenSPP 17.0.1.2 (batanes) release
 
 on:
   pull_request:
@@ -58,79 +58,15 @@ jobs:
       - uses: actions/checkout@v4
 #        with:
 #          persist-credentials: false
-
-      - name: Remove OpenG2P stubs from openspp-modules
-        run: |
-            rm -rf g2p_bank
-            rm -rf g2p_bank_rest_api
-            rm -rf g2p_encryption
-            rm -rf g2p_encryption_keymanager
-            rm -rf g2p_encyption_rest_api
-            rm -rf g2p_entitlement_cash
-            rm -rf g2p_enumerator
-            rm -rf g2p_openid_vci
-            rm -rf g2p_openid_vci_rest_api
-            rm -rf g2p_programs
-            rm -rf g2p_registry_base
-            rm -rf g2p_registry_documents
-            rm -rf g2p_registry_encryption
-            rm -rf g2p_registry_group
-            rm -rf g2p_registry_individual
-            rm -rf g2p_registry_membership
-            rm -rf g2p_registry_rest_api
-            rm -rf muk_web_appsbar
-            rm -rf muk_web_chatter
-            rm -rf muk_web_colors
-            rm -rf muk_web_dialog
-            rm -rf muk_web_theme
       - name: Remove g2p_connect_demo from openspp-modules as it is not compatible with all OpenSPP variants
         run: |
-            rm -rf g2p_connect_demo
-      - name: Create temporary test-requirement.txt
-        run: cp test-requirements.txt spp-test-requirements.txt
-      # Clone OpenG2P Registry repository
-      - name: Turn off git detached head warnings
-        run: git config --global advice.detachedHead false
-      - name: Clone OpenG2P Registry Repository
-        run: git clone https://github.com/OpenSPP/openg2p-registry.git --depth 1 --branch v17.0.1.2-openspp
-      # Clone OpenG2P Programs repository
-      - name: Clone OpenG2P Programs Repository
-        run: git clone https://github.com/OpenSPP/openg2p-program.git --depth 1 --branch v17.0.1.2-openspp
-      - name: Clone OpenG2P Security Repository
-        run: git clone https://github.com/OpenSPP/openg2p-security.git --depth 1 --branch v17.0.1.2-openspp
-      - name: Clone OpenG2P VCI Repository
-        run: git clone https://github.com/OpenSPP/openg2p-vci.git --depth 1 --branch v17.0.1.2-openspp
-      - name: Clone Muk Addons Repository
-        run: git clone https://github.com/OpenSPP/mukit-modules.git --depth 1 --branch 17.0
-      - name: Copy OpenG2P modules to addons directory
-        # exclude openg2p-program/odoo-addon-base_rest as it is not migrated to 17.0
+          rm -rf g2p_connect_demo
+      - name: Create tests-requirements file
         run: |
-          # rm -rf openg2p-program/*rest_api* openg2p-program/g2p_documents
-          rm -rf openg2p-registry/*/tests
-          rm -rf openg2p-program/*/tests
-          rm -rf openg2p-security/*/tests
-          rm -rf openg2p-vci/*/tests
-          rm -rf mukit-modules/muk_web_enterprise_theme
-          cp -r openg2p-registry/* ${ADDONS_DIR}/
-          cat test-requirements.txt >> spp-test-requirements.txt
-          cp -r openg2p-program/* ${ADDONS_DIR}/
-          cat test-requirements.txt >> spp-test-requirements.txt
-          cp -r openg2p-security/* ${ADDONS_DIR}/
-          cat test-requirements.txt >> spp-test-requirements.txt
-          cp -r openg2p-vci/* ${ADDONS_DIR}/
-          cat test-requirements.txt >> spp-test-requirements.txt
-          # MUK Addons
-          cp -r mukit-modules/* ${ADDONS_DIR}/
-      - name: Add g2p-programs and odoo-test-helper to spp-test-requirements.txt
-        run: |
-          echo "git+https://github.com/OpenSPP/openg2p-program@v17.0.1.2-openspp#subdirectory=g2p_programs" >> spp-test-requirements.txt
-          echo "odoo-test-helper" >> spp-test-requirements.txt
-      - name: Replace test-requirements.txt with spp-test-requirements.txt
-        run: |
-          cp spp-test-requirements.txt test-requirements.txt
-          cat test-requirements.txt
-          sed -i '/openspp-modules/! { /OpenG2P\/\(openg2p\)/! { s|OpenG2P/|OpenSPP/openg2p-|; s/@17.0\(-develop\)\?/@v17.0.1.2-openspp/; }; /OpenG2P/ { s/OpenG2P/OpenSPP/g; s/@17.0\(-develop\)\?/@v17.0.1.2-openspp/; } }' test-requirements.txt
-          cat test-requirements.txt
+          touch tmp-requirements.txt
+          echo "-r openg2p-requirements.txt" >> tmp-requirements.txt
+          cat test-requirements.txt >> tmp-requirements.txt
+          cp tmp-requirements.txt test-requirements.txt
       - name: Installing specific Debian packages to be able to pip install pyjq
         run: |
           apt-get update

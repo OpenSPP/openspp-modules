@@ -1,0 +1,2 @@
+--extra-index-url=https://pypi.openspp.org/simple/
+odoo-addon-spp-farmer-registry-base==17.0.1.0.0.34
