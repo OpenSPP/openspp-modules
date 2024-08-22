@@ -1,4 +1,5 @@
---extra-index-url=https://pypi.openspp.org/simple/
+--index-url=https://pypi.openspp.org/simple/
+--extra-index-url=https://pypi.org/simple/
 odoo-addon-g2p-registry-base==17.0.1.0.0.38
 odoo-addon-g2p-registry-group==17.0.1.0.0.18
 odoo-addon-g2p-registry-individual==17.0.1.0.0.25
@@ -19,3 +20,4 @@ odoo-addon-g2p-bank-rest-api==17.0.1.0.0.5
 odoo-addon-g2p-registry-rest-api==17.0.1.0.0.17
 odoo-addon-g2p-openid-vci==17.0.1.2.0.5
 odoo-addon-g2p-openid-vci-rest-api==17.0.1.2.0.4
+odoo-addon-g2p-encryption-rest-api==17.0.1.2.0.2
