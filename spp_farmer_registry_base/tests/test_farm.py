@@ -26,6 +26,7 @@ class MembershipTest(TransactionCase):
         )
 
     def test_get_group_head_member(self):
+        self.farm_1.create_update_farmer(self.farm_1)
         head_id = self.farm_1.get_group_head_member()
         self.assertTrue(head_id)
 
