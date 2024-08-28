@@ -2,7 +2,8 @@
 
 
 {
-    "name": "Farmer Registry: Dashboard",
+    "name": "OpenSPP Farmer Registry Dashboard",
+    "summary": "Provides interactive dashboards and reports for visualizing data from the OpenSPP Farmer Registry, offering insights into key metrics and trends related to registered farmers.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

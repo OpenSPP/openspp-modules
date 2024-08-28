@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Entitlement Transactions",
+    "summary": "This module records and manages transactions related to entitlement redemptions, providing a transparent history for both cash and in-kind benefits.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

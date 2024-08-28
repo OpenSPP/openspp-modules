@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Programs",
+    "summary": "Manage cash and in-kind entitlements, integrate with inventory, and enhance program management features for comprehensive social protection and agricultural support.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

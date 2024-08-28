@@ -1,5 +1,6 @@
 {
-    "name": "SPP Audit Config",
+    "name": "OpenSPP Audit Config",
+    "summary": "This module allows administrators to define and manage audit rules to track and log changes made to critical data within the OpenSPP platform, ensuring data security and integrity.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

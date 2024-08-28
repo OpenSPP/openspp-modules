@@ -1,8 +1,5 @@
-# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-
-
 {
-    "name": "OpenSPP ID Printing Queue",
+    "name": "OpenSPP ID Queue",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -11,13 +8,7 @@
     "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": [
-        "base",
-        "g2p_registry_base",
-        "spp_idpass",
-        "queue_job",
-        "spp_area",
-    ],
+    "depends": ["base", "g2p_registry_base", "spp_idpass", "queue_job", "spp_area"],
     "data": [
         "data/id_pass.xml",
         "data/queue_data.xml",
@@ -31,15 +22,11 @@
         "views/registrant.xml",
         "views/res_config_settings.xml",
     ],
-    "assets": {
-        "web.assets_backend": [
-            # web.FormController is already obsolete in odoo 17
-            "spp_idqueue/static/src/js/form_controller.js",
-        ],
-    },
+    "assets": {"web.assets_backend": ["spp_idqueue/static/src/js/form_controller.js"]},
     "demo": [],
     "images": [],
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Manages ID card requests, approvals, batch printing, and distribution for registrants within social protection programs and farmer registries.",
 }

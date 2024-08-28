@@ -1,8 +1,5 @@
-# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-
-
 {
-    "name": "User Roles Management",
+    "name": "OpenSPP User Roles",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -21,17 +18,12 @@
         "base_user_role",
         "spp_api",
     ],
-    "data": [
-        "data/local_roles.xml",
-        "data/global_roles.xml",
-        "data/ir_cron.xml",
-        "views/role.xml",
-        "views/user.xml",
-    ],
+    "data": ["data/local_roles.xml", "data/global_roles.xml", "data/ir_cron.xml", "views/role.xml", "views/user.xml"],
     "assets": {},
     "demo": [],
     "images": [],
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Enhances user role management with local roles and area-based access control for improved data security and granularity in OpenSPP.",
 }

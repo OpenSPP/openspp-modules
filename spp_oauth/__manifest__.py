@@ -1,6 +1,6 @@
 {
-    "name": """OpenSPP API: Oauth""",
-    "summary": """Authentication for API""",
+    "name": "OpenSPP API: Oauth",
+    "summary": "Provides OAuth 2.0 authentication for secure access to the OpenSPP API.",
     "category": "",
     "version": "17.0.1.0.0",
     "author": "OpenSPP.org",

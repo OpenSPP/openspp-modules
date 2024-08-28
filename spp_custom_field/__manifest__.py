@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenSPP Custom Field",
+    "name": "OpenSPP Custom Fields",
+    "summary": "Adds customizable fields to registrant profiles for enhanced data collection and program management in OpenSPP.",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,

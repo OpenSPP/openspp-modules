@@ -1,4 +1,3 @@
-# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Base GIS",
     "category": "OpenSPP",
@@ -36,4 +35,5 @@
     "installable": True,
     "auto_install": False,
     "pre_init_hook": "init_postgis",
+    "summary": "Provides Geographical Information System (GIS) capabilities to OpenSPP, enabling visualization and interaction with geospatial data on maps, integrating with modules like Registries and Targeting & Eligibility for enhanced program management.",
 }

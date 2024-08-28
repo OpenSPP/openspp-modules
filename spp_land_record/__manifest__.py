@@ -2,7 +2,7 @@
 
 
 {
-    "name": "OpenSPP: Land Record",
+    "name": "OpenSPP Land Record",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -25,4 +25,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "This module enables the management and geospatial visualization of land records within OpenSPP, linking land parcels to farms, tracking ownership, and supporting land governance initiatives.",
 }

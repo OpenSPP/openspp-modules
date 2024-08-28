@@ -23,4 +23,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Provides essential settings and customizations for OpenSPP implementations, including Country Office management and user interface adaptations.",
 }

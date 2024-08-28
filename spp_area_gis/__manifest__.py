@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "OpenSPP Area: GIS",
+    "name": "OpenSPP Area GIS",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -24,4 +24,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "summary": "Integrates GIS capabilities into OpenSPP's Area management, enabling visualization on maps, associating coordinates, defining polygons, and facilitating spatial analysis for improved targeting and monitoring of social protection programs.",
 }
