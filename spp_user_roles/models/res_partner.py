@@ -12,23 +12,23 @@ class ResPartnerCustomSPP(models.Model):
 
     @api.model
     def search_read(self, domain=None, fields=None, offset=0, limit=None, order=None):
-        """
-        Override search_read to inject the center_area_ids in domain
-        :param domain: String domain
-        :param fields: List of fields
-        :param offset: Query offset
-        :param limit: Query limit
-        :param order: Query order
-        :return:
-        """
-        _logger.debug("FILTER: user: %s" % self.env.user.name)
-        # Determine if the domain is for group or individual
-        # grp_dom = list(filter(lambda x: x[0] == "is_group" and x[2], domain))
-        # _logger.info("FILTER: grp_dom: %s" % grp_dom)
+        _logger.debug("RES.PARTNER: search_read user: %s" % self.env.user.name)
+        if domain is None:
+            domain = []
         if self.env.user.center_area_ids:
-            # if grp_dom:
-            domain.append(("area_id", "child_of", self.env.user.center_area_ids.ids))
+            domain += [("area_id", "child_of", self.env.user.center_area_ids.ids)]
 
         res = super().search_read(domain, fields, offset, limit, order)
-        _logger.debug("FILTER: domain: %s" % domain)
+        _logger.debug("RES.PARTNER: search_read domain: %s" % domain)
         return res
+
+    @api.model
+    def web_search_read(self, domain, specification, offset=0, limit=None, order=None, count_limit=None):
+        _logger.debug("RES.PARTNER: web_search_read user: %s" % self.env.user.name)
+        if domain is None:
+            domain = []
+        if self.env.user.center_area_ids:
+            domain += [("area_id", "child_of", self.env.user.center_area_ids.ids)]
+
+        _logger.debug("RES.PARTNER: web_search_read domain: %s" % domain)
+        return super().web_search_read(domain, specification, offset, limit, order, count_limit)

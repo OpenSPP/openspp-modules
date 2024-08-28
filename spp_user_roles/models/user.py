@@ -10,7 +10,7 @@ class ResUsersCustomSPP(models.Model):
         comodel_name="spp.area",
         string="Center Areas",
         compute="_compute_center_area_ids",
-        compute_sudo=True,
+        store=True,
     )
 
     @api.depends("role_line_ids.role_id")
