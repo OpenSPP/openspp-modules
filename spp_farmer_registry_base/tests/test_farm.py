@@ -44,6 +44,16 @@ class MembershipTest(TransactionCase):
         self.farm_1.create_update_farmer(self.farm_1)
         self.assertEqual(self.farm_1.farmer_individual_id.given_name, "Noah")
 
+        # Test vice versa if updating the individual will update the farmer in the farm
+        vals = {
+            "given_name": "Chin",
+            "family_name": "Franco",
+        }
+        self.registrant_1 = self.farm_1.farmer_individual_id
+        self.registrant_1.write(vals)
+        self.registrant_1.update_farmer(self.registrant_1)
+        self.assertEqual(self.farm_1.farmer_given_name, "Chin")
+
     # def test_write(self):
     #     with self.assertRaisesRegex(ValidationError, "Farm must have a head member."):
     #         self.farm_1.write({"group_membership_ids": [(2, self.farm_1.group_membership_ids.id)]})
