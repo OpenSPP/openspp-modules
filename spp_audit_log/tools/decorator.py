@@ -2,10 +2,13 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
 import copy
+import logging
 
 from odoo import api
 
 long = int
+
+_logger = logging.getLogger(__name__)
 
 
 def get_new_values(records):
