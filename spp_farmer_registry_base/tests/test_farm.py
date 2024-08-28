@@ -27,13 +27,22 @@ class MembershipTest(TransactionCase):
             }
         )
 
-    def test_get_group_head_member(self):
+    def test_01_create_and_update(self):
         self.farm_1.create_update_farmer(self.farm_1)
         head_id = self.farm_1.get_group_head_member()
         self.assertTrue(head_id)
 
         ind_head_id = self.registrant_1.get_group_head_member()
         self.assertFalse(ind_head_id)
+        vals = {
+            "farmer_family_name": "Miller",
+            "farmer_given_name": "Noah",
+            "farmer_mobile_tel": "09223456789",
+            "farmer_national_id": "1222334455",
+        }
+        self.farm_1.write(vals)
+        self.farm_1.create_update_farmer(self.farm_1)
+        self.assertEqual(self.farm_1.farmer_individual_id.given_name, "Noah")
 
     # def test_write(self):
     #     with self.assertRaisesRegex(ValidationError, "Farm must have a head member."):
