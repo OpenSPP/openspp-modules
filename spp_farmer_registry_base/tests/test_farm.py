@@ -25,15 +25,12 @@ class MembershipTest(TransactionCase):
             }
         )
 
-    # Commented out because of errors when running in CI
-    # Need to further investigate since the error is not showing on local
+    def test_get_group_head_member(self):
+        head_id = self.farm_1.get_group_head_member()
+        self.assertTrue(head_id)
 
-    # def test_get_group_head_member(self):
-    #     head_id = self.farm_1.get_group_head_member()
-    #     self.assertTrue(head_id)
-
-    #     ind_head_id = self.registrant_1.get_group_head_member()
-    #     self.assertFalse(ind_head_id)
+        ind_head_id = self.registrant_1.get_group_head_member()
+        self.assertFalse(ind_head_id)
 
     # def test_write(self):
     #     with self.assertRaisesRegex(ValidationError, "Farm must have a head member."):
