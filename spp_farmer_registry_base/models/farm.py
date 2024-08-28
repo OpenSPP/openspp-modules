@@ -215,42 +215,29 @@ class Farm(models.Model):
             self.env["g2p.group.membership"].create(membership_vals)
             individual.farmer_id = farm.farmer_id.id
             farm.farmer_individual_id = individual.id
-            if farm.farmer_mobile_tel:
-                self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
-            if farm.farmer_national_id:
-                self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
+            self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
+            self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
 
         else:
-            if farm.farmer_mobile_tel:
-                self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
-            if farm.farmer_national_id:
-                self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
+            self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
+            self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
             farm.farmer_individual_id.write(individual_vals)
 
     def insert_phone_number(self, individual_id, mobile_no):
-        current_phone = self.env["g2p.phone.number"].search([("partner_id", "=", individual_id)], limit=1)
-        if not current_phone:
-            individual_phone_vals = {"partner_id": individual_id, "phone_no": mobile_no}
-            self.env["g2p.phone.number"].create(individual_phone_vals)
-        else:
-            current_phone.write({"phone_no": mobile_no})
+        if mobile_no:
+            current_phone = self.env["g2p.phone.number"].search([("partner_id", "=", individual_id)], limit=1)
+            if not current_phone:
+                individual_phone_vals = {"partner_id": individual_id, "phone_no": mobile_no}
+                self.env["g2p.phone.number"].create(individual_phone_vals)
+            else:
+                current_phone.write({"phone_no": mobile_no})
 
     def insert_id(self, individual_id, national_id):
-        current_id = self.env["g2p.reg.id"].search(
-            [
-                ("partner_id", "=", individual_id),
-                ("value", "=", national_id),
-                (
-                    "id_type",
-                    "=",
-                    self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
-                ),
-            ]
-        )
-        if not current_id:
-            existing_national_id = self.env["g2p.reg.id"].search(
+        if national_id:
+            current_id = self.env["g2p.reg.id"].search(
                 [
                     ("partner_id", "=", individual_id),
+                    ("value", "=", national_id),
                     (
                         "id_type",
                         "=",
@@ -258,15 +245,26 @@ class Farm(models.Model):
                     ),
                 ]
             )
-            id_vals = {
-                "partner_id": individual_id,
-                "value": national_id,
-                "id_type": self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
-            }
-            if existing_national_id:
-                existing_national_id.write(id_vals)
-            else:
-                self.env["g2p.reg.id"].create(id_vals)
+            if not current_id:
+                existing_national_id = self.env["g2p.reg.id"].search(
+                    [
+                        ("partner_id", "=", individual_id),
+                        (
+                            "id_type",
+                            "=",
+                            self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                        ),
+                    ]
+                )
+                id_vals = {
+                    "partner_id": individual_id,
+                    "value": national_id,
+                    "id_type": self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                }
+                if existing_national_id:
+                    existing_national_id.write(id_vals)
+                else:
+                    self.env["g2p.reg.id"].create(id_vals)
 
     def update_farmer(self, individual):
         farmer_vals = {
