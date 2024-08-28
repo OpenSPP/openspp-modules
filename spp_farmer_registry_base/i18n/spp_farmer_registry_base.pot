@@ -102,6 +102,11 @@ msgid "Asset Type"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model:ir.model,name:spp_farmer_registry_base.model_base_import_import
+msgid "Base Import"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__spp_farm_activity__purpose__both
 msgid "Both"
 msgstr ""
@@ -343,6 +348,13 @@ msgid "Farm Type"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm.py:0
+#, python-format
+msgid "Farm must have a head member."
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_g2p_program_membership__farmer_id
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_partner__farmer_id
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__farmer_id
@@ -387,6 +399,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__farmer_given_name
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farmer__farmer_given_name
 msgid "Farmer Given Name"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/base_import.py:0
+#, python-format
+msgid "Farmer Given Name or Farmer Family Name is required"
 msgstr ""
 
 #. module: spp_farmer_registry_base
