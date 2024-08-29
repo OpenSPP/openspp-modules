@@ -20,7 +20,7 @@
         <value name="model">res.partner</value>
         <value
             name="fields_to_log"
-            eval="['name', 'registration_date', 'active_group', 'address', 'age', 'area_center_id', 'area_id', 'birth_place', 'birthdate', 'email', 'gender', 'grp_member_names', 'grp_member_uid', 'individual_status', 'lang', 'molsa_vulnerability_level', 'mother_name', 'pds_number', 'phone', 'phone_number_ids', 'relation_to_head', 'service_point_ids', 'unified_id']"
+            eval="['name', 'registration_date', 'active_group', 'address', 'age', 'area_center_id', 'area_id', 'birth_place', 'birthdate', 'email', 'gender', 'grp_member_names', 'grp_member_uid', 'individual_status', 'lang', 'molsa_vulnerability_level', 'mother_name', 'phone', 'phone_number_ids', 'relation_to_head', 'service_point_ids', 'unified_id']"
         />
     </function>
 

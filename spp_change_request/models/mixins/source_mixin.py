@@ -553,7 +553,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             self.copy_group_member_ids("group_member_id")
             self.copy_group_member_ids("group_member_id", group_ref_field="registrant_id")
             self.copy_group_member_ids("group_member_id", model_name="spp.change.request")
-            self.copy_group_member_ids("group_member_id", model_name=["spp.change.request", "pds.change.request"])
 
             def my_condition(self):
                 if self.state == 'draft':
@@ -577,34 +576,6 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     else:
                         for model in model_name:
                             self.env[model].create(group_members)
-
-    def _copy_service_point_ids(self, change_request_field):
-        for rec in self:
-            for mrec in rec.registrant_id.service_point_ids:
-                service_points = {
-                    change_request_field: rec.id,
-                    "service_point_id": mrec.id,
-                }
-                self.env["pds.change.request.service.point"].create(service_points)
-
-    def _copy_from_group_member_ids(self, group_ref_field, group_id_field, skip_head=True):
-        for rec in self:
-            for mrec in rec[group_ref_field].group_membership_ids:
-                kind_ids = mrec.kind and mrec.kind.ids or None
-                if (
-                    kind_ids
-                    and (
-                        not skip_head
-                        or self.env.ref("g2p_registry_membership.group_membership_kind_head").id not in kind_ids
-                    )
-                ) or not kind_ids:
-                    group_members = {
-                        group_id_field: rec.id,
-                        "individual_id": mrec.individual.id,
-                        "kind_ids": kind_ids,
-                        "new_relation_to_head": None,
-                    }
-                    self.env["pds.change.request.src.grp"].create(group_members)
 
     def open_applicant_details_form(self):
         """

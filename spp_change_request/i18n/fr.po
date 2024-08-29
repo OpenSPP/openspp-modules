@@ -636,12 +636,6 @@ msgstr ""
 "cette validation."
 
 #. module: spp_change_request
-#: model:dms.category,name:spp_change_request.pds_dms_extra_documents
-#, fuzzy
-msgid "Extra Documents"
-msgstr "Documents supplémentaires"
-
-#. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_dms_file
 #, fuzzy
 msgid "File"
