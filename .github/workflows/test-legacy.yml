@@ -2,9 +2,6 @@ name: tests (legacy)
 # fetching the OpenG2P dependencies from the OpenG2P repositories, using latest revision of branch 17.0/17.0-develop
 
 on:
-  pull_request:
-    branches:
-      - "17.0*"
   push:
     branches:
       - "17.0"
