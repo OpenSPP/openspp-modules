@@ -116,5 +116,5 @@ class SPPRegistry(models.Model):
 
         self.vc_qr_code = qr_img
 
-        admission_form = self.env.ref("spp_openid_vci.action_generate_id_card").report_action(self)
+        admission_form = self.env.ref("spp_openid_vci.action_generate_id_card").report_action(self, config=False)
         return admission_form
