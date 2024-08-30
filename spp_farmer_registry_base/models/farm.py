@@ -52,6 +52,7 @@ class Farm(models.Model):
     def get_group_head_member(self):
         self.ensure_one()
         if not self.is_registrant or not self.is_group:
+            _logger.debug(f"No group head member defined for farm {self}")
             return None
 
         head_kind_id = self.env.ref("g2p_registry_membership.group_membership_kind_head")

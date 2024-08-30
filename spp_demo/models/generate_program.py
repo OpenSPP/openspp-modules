@@ -58,8 +58,8 @@ class OpenSPPGenerateProgramData(models.Model):
             }
 
             # # create_program_id = program_data
-            create_program_id = self.env["g2p.program"].create(program_data)
-            _logger.debug(f"program--- {create_program_id}: {create_program_id.target_type}")
+            program = self.env["g2p.program"].create(program_data)
+            _logger.debug(f"program--- {program}: {program.target_type}")
 
             #  Default Enrollment indicator
 
@@ -77,22 +77,22 @@ class OpenSPPGenerateProgramData(models.Model):
             def_eli_mgr_obj = "g2p.program_membership.manager.default"
             eligibility_manager_data = {
                 "name": "Default",
-                "program_id": create_program_id.id,
+                "program_id": program.id,
                 "eligibility_domain": str(eligibility_domain),
             }
 
-            def_eli_mgr_id = self.env[def_eli_mgr_obj].create(eligibility_manager_data)
+            def_eli_mgr = self.env[def_eli_mgr_obj].create(eligibility_manager_data)
 
             # Add a new record to eligibility manager parent model
             eli_man_obj = self.env["g2p.eligibility.manager"]
-            eli_mgr_id = eli_man_obj.create(
+            eli_mgr = eli_man_obj.create(
                 {
-                    "program_id": create_program_id.id,
-                    "manager_ref_id": f"{def_eli_mgr_obj},{str(def_eli_mgr_id.id)}",
+                    "program_id": program.id,
+                    "manager_ref_id": f"{def_eli_mgr_obj},{str(def_eli_mgr.id)}",
                 }
             )
 
-            vals.update({"eligibility_managers": [(4, eli_mgr_id.id)]})
+            vals.update({"eligibility_managers": [(4, eli_mgr.id)]})
 
             auto_approve_entitlements = random.choice(cycle_auto_approve_range)
             cycle_duration = random.choice(cycle_duration_range)
@@ -101,7 +101,7 @@ class OpenSPPGenerateProgramData(models.Model):
             def_cycle_mgr_obj = "g2p.cycle.manager.default"
             cycle_manager_data = {
                 "name": "Default",
-                "program_id": create_program_id.id,
+                "program_id": program.id,
                 "auto_approve_entitlements": auto_approve_entitlements,
                 "cycle_duration": cycle_duration,
                 "approver_group_id": self.env.ref("g2p_registry_base.group_g2p_admin").id,
@@ -110,37 +110,39 @@ class OpenSPPGenerateProgramData(models.Model):
 
             # Add a new record to cycle manager parent model
             cycle_man_obj = self.env["g2p.cycle.manager"]
-            cycle_man_id = cycle_man_obj.create(
+            cycle_man = cycle_man_obj.create(
                 {
-                    "program_id": create_program_id.id,
+                    "program_id": program.id,
                     "manager_ref_id": f"{def_cycle_mgr_obj},{str(def_cycle_mgr_id.id)}",
                 }
             )
-            vals.update({"cycle_managers": [(4, cycle_man_id.id)]})
+            vals.update({"cycle_managers": [(4, cycle_man.id)]})
 
             # # Entitle Manageer
             # # TODO: entitlement_validation_group_id
             def_prog_ent_mgr_obj = "g2p.program.entitlement.manager.default"
             entitlement_manager_data = {
                 "name": "Default",
-                "program_id": create_program_id.id,
+                "program_id": program.id,
                 "amount_per_cycle": random.choice([1000, 2000, 3000]),
                 "amount_per_individual_in_group": random.choice([1000, 2000, 3000]),
                 "max_individual_in_group": random.randint(0, 10),
                 "entitlement_validation_group_id": None,
             }
 
-            def_prog_ent_mgr_id = self.env[def_prog_ent_mgr_obj].create(entitlement_manager_data)
+            def_prog_ent_mgr = self.env[def_prog_ent_mgr_obj].create(entitlement_manager_data)
+            _logger.debug(f"def_prog_ent_mgr--- {def_prog_ent_mgr}")
+            _logger.debug(f"max_individual_in_group--- {def_prog_ent_mgr.max_individual_in_group}")
 
             # Add a new record to entitlement manager parent model
             prog_ent_obj = self.env["g2p.program.entitlement.manager"]
-            prog_ent_id = prog_ent_obj.create(
+            prog_ent = prog_ent_obj.create(
                 {
-                    "program_id": create_program_id.id,
-                    "manager_ref_id": f"{def_prog_ent_mgr_obj},{str(def_prog_ent_mgr_id.id)}",
+                    "program_id": program.id,
+                    "manager_ref_id": f"{def_prog_ent_mgr_obj},{str(def_prog_ent_mgr.id)}",
                 }
             )
-            vals.update({"entitlement_managers": [(4, prog_ent_id.id)]})
+            vals.update({"entitlement_managers": [(4, prog_ent.id)]})
 
             # Create Beneficiaries
             benificiaries_count = self.num_beneficicaries
@@ -152,22 +154,23 @@ class OpenSPPGenerateProgramData(models.Model):
             for r_id in range(len(registrant_ids)):
                 benificiary_data = {
                     "partner_id": registrant_ids[r_id],
-                    "program_id": create_program_id.id,
+                    "program_id": program.id,
                 }
                 benificiary_lines.append((0, 0, benificiary_data))
 
+            _logger.debug(f"benificiary_lines-- {len(benificiary_lines)} : {benificiary_lines}")
             vals.update({"program_membership_ids": benificiary_lines})
 
             # self.cycle_ids = [(4, beneficiary_id.id for beneficiary_id in benificiary_lines)]
             # Complete the program data
-            create_program_id.update(vals)
+            program.update(vals)
 
             # Enroll Registrant
-            create_program_id.enroll_eligible_registrants()
+            program.enroll_eligible_registrants()
 
             # Create New Cycle
             # TODO: generate cycles
-            program_manager = create_program_id.get_manager(create_program_id.MANAGER_PROGRAM)
+            program_manager = program.get_manager(program.MANAGER_PROGRAM)
 
             ######################################################################################
             # cycle_id = program_manager.new_cycle()
@@ -177,7 +180,7 @@ class OpenSPPGenerateProgramData(models.Model):
                 _logger.debug(f"cycle--- {cycle_id}")
 
                 # Create Entitlements
-                cycle_manager = create_program_id.get_manager(create_program_id.MANAGER_CYCLE)
+                cycle_manager = program.get_manager(program.MANAGER_CYCLE)
                 cycle_manager.prepare_entitlements(cycle_id)
 
                 self.cycle_ids = [(4, cycle_id.id)]
@@ -190,7 +193,7 @@ class OpenSPPGenerateProgramData(models.Model):
 
                 program_fund_data = {
                     "name": "Draft",
-                    "program_id": create_program_id.id,
+                    "program_id": program.id,
                     "amount": total_initial_amount,
                 }
 
@@ -221,7 +224,7 @@ class OpenSPPGenerateProgramData(models.Model):
             # NOTE: Commented out since spp_helpdesk is removed in manifest
             # ######################################################################################
             # # Create Helpdesk Tickets in Beneficiaries
-            # beneficiary_ids = create_program_id.get_beneficiaries(["enrolled"]).mapped("partner_id.id")
+            # beneficiary_ids = program.get_beneficiaries(["enrolled"]).mapped("partner_id.id")
 
             # for beneficiary_id in beneficiary_ids:
             #     tx_name = random.choice(ticket_name_range)
