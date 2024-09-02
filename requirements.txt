@@ -6,6 +6,7 @@ faker
 geojson
 jsonschema
 jwcrypto
+numpy>=1.22.2
 pyjwt>=2.4.0
 pyproj
 python-magic
@@ -13,4 +14,6 @@ qrcode
 shapely
 simplejson
 swagger_spec_validator
+urllib3>=2.2.2
 xlrd
+zipp>=3.19.1
