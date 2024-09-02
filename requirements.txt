@@ -1,5 +1,5 @@
 # generated from manifests external_dependencies
-Pillow>=10.3.0
+Pillow>=9.3.0
 PyLD
 bravado_core
 faker
