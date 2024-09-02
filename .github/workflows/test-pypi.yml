@@ -39,10 +39,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - container: ghcr.io/openspp/oca-ci/py3.10-odoo17.0:latest
-            name: test with Odoo
-#          - container: ghcr.io/openspp/oca-ci/py3.10-ocb17.0:latest
-#            name: test with OCB
+          - container: ghcr.io/openspp/oca-ci/py3.10-odoo17.0:jammy
+            name: test with Odoo 17/Ubuntu 22.04
             makepot: "true"
             sonar: "true"
     services:
