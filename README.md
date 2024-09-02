@@ -61,6 +61,7 @@ addon | summary
 [spp_entitlement_basket](spp_entitlement_basket/) | This module allows you to define baskets of goods and services that beneficiaries are entitled to receive, simplifying in-kind entitlement management within social protection programs.
 [spp_entitlement_cash](spp_entitlement_cash/) | Manage cash-based entitlements for beneficiaries within social protection programs, including defining calculation rules, automating disbursement, and tracking payments.
 [spp_entitlement_in_kind](spp_entitlement_in_kind/) | Manages the distribution of in-kind entitlements within social protection programs, handling inventory, service points, and beneficiary redemption.
+[spp_ethnic_group](spp_ethnic_group/) | Manages ethnic group
 [spp_event_data](spp_event_data/) | Records and tracks events related to individual and group registrants, providing a chronological history of changes and actions within the OpenSPP system.
 [spp_event_data_program_membership](spp_event_data_program_membership/) | This module allows users to record and track program membership-related events, such as enrollment, suspension, or exit, and link them to specific program membership records within OpenSPP.
 [spp_event_demo](spp_event_demo/) | Provides demonstration data and functionalities for the OpenSPP event tracking system, showcasing practical applications through predefined event types, data models, views, and wizards.
