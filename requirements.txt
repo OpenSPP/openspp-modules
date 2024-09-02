@@ -1,11 +1,12 @@
 # generated from manifests external_dependencies
-Pillow>=10.3.0
+Pillow>=9.3.0
 PyLD
 bravado_core
 faker
 geojson
 jsonschema
 jwcrypto
+numpy>=1.22.2
 pyjwt>=2.4.0
 pyproj
 python-magic
@@ -13,6 +14,6 @@ qrcode
 shapely
 simplejson
 swagger_spec_validator
+urllib3>=2.2.2
 xlrd
-numpy>=1.22.2 # not directly required, pinned by Snyk to avoid a vulnerability
-zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
+zipp>=3.19.1
