@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Program Entitlement Basic Cash Spent",
-    "category": "G2P",
+    "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
     "author": "OpenSPP.org",

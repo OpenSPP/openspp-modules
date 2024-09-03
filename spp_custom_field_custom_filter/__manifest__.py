@@ -4,7 +4,7 @@
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "category": "",
+    "category": "OpenSPP",
     "depends": [
         "spp_custom_fields_ui",
         "spp_custom_filter",
