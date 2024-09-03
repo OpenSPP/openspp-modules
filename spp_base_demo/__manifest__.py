@@ -12,7 +12,6 @@
     "depends": [
         "g2p_registry_base",
         "g2p_programs",
-        # "spp_helpdesk",
         "product",
         "stock",
     ],

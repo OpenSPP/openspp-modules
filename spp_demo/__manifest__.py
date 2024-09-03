@@ -20,7 +20,6 @@
         "spp_custom_field",
         "spp_custom_field_recompute_daily",
         "spp_idpass",
-        # "spp_helpdesk",
         "spp_area",
         "theme_openspp_muk",
         # "spp_pos",
