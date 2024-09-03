@@ -34,6 +34,24 @@ class TestUserRole(TransactionCase):
         result = self.user.set_groups_from_roles(force=True)
         self.assertTrue(result)
 
+        if not self.env["res.users.role.line"].search(
+            [("role_id", "=", self.env.ref("spp_user_roles.global_role_admin").id), ("user_id", "=", self.user.id)]
+        ):
+            self.env["res.users.role.line"].create(
+                {
+                    "role_id": self.env.ref("spp_user_roles.global_role_admin").id,
+                    "user_id": self.user.id,
+                }
+            )
+        self.user.set_groups_from_roles()
+        self.assertIn(self.env.ref("base.group_user").id, self.user.groups_id.ids)
+        self.assertIn(self.env.ref("base.group_no_one").id, self.user.groups_id.ids)
+
+        self.user.write({"role_line_ids": [(5)]})
+        self.user.set_groups_from_roles()
+        self.assertIn(self.env.ref("base.group_user").id, self.user.groups_id.ids)
+        self.assertIn(self.env.ref("base.group_no_one").id, self.user.groups_id.ids)
+
     def test_default_role_lines(self):
         default_user = self.env.ref("base.default_user", raise_if_not_found=False)
         default_user.role_line_ids = [
