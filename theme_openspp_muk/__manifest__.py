@@ -2,7 +2,7 @@
     "name": "OpenSPP Theme (Muk Theme)",
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
-    "category": "Theme",
+    "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "depends": [
         "base",

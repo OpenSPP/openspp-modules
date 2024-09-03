@@ -3,7 +3,7 @@
 {
     "name": "OpenSPP API",
     "summary": "Provides a framework for building and managing a RESTful API for the OpenSPP platform, including API definition, documentation, security, and logging.",
-    "category": "",
+    "category": "OpenSPP",
     "images": [
         "images/icon.png",
     ],
