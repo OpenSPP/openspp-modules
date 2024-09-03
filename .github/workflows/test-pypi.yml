@@ -70,10 +70,6 @@ jobs:
           echo "odoo-addon-muk-web-theme==17.0.1.2.1.3" >> tmp-requirements.txt
           cat test-requirements.txt >> tmp-requirements.txt
           cp tmp-requirements.txt test-requirements.txt
-      - name: Installing specific Debian packages to be able to pip install pyjq
-        run: |
-          apt-get update
-          apt-get install -y autoconf automake libtool libtool-bin bison flex
       - name: Install addons and dependencies
         env:
           SKIP_EXT_DEB_DEPENDENCIES: "true"
