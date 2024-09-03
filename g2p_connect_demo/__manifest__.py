@@ -23,7 +23,6 @@
         # "spp_dashboard",
         "spp_idpass",
         "spp_idqueue",
-        # "spp_helpdesk",
         "spp_area",
         # "spp_change_request",
         "spp_event_data",
