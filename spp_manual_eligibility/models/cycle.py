@@ -9,15 +9,4 @@ _logger = logging.getLogger(__name__)
 class G2PCycle(models.Model):
     _inherit = "g2p.cycle"
 
-    is_manual_eligibility = fields.Boolean(compute="_compute_is_manual_eligibility")
-
-    def _compute_is_manual_eligibility(self):
-        for rec in self:
-            is_manual_eligibility = False
-            curr_eligibility_manager = self.env["g2p.program_membership.manager.default"].search(
-                [("program_id", "=", rec.program_id.id), ("is_manual_eligibility", "=", True)]
-            )
-            if curr_eligibility_manager:
-                is_manual_eligibility = True
-
-            rec.is_manual_eligibility = is_manual_eligibility
+    is_manual_eligibility = fields.Boolean(related="program_id.is_manual_eligibility")
