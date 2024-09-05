@@ -29,4 +29,6 @@ class FarmGroupMembership(models.Model):
                 else:
                     return rec.open_individual_form()
             else:
+                # TODO: check and investigate if the else statement is needed
+                # since the individual field is a required field
                 raise UserError(_("A group or individual must be specified for this member."))
