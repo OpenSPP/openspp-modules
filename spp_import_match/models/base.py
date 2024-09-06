@@ -16,6 +16,12 @@ class Base(models.AbstractModel):
             fields,
             option_config_ids=self.env.context.get("import_match_ids", []),
         )
+        model_id = self.env["ir.model"].search([("model", "=", self._name)])
+        overwrite_match = True
+        import_match = self.env["spp.import.match"].search([("model_id", "=", model_id.id)])
+        if import_match:
+            overwrite_match = import_match.overwrite_match
+
         if usable:
             newdata = list()
             if ".id" in fields:
@@ -37,34 +43,44 @@ class Base(models.AbstractModel):
                     field_name += "/" + f[1]
                 clean_fields.append(field_name)
             for dbid, xmlid, record, info in converted_data:
+                if len(clean_fields) > len(data[info["record"]]):
+                    data[info["record"]].append(None)
+
+                _logger.info("CLEAN FIELDS: %s" % clean_fields)
+                _logger.info("RECORD: %s" % data[info["record"]])
                 row = dict(zip(clean_fields, data[info["record"]], strict=True))
 
                 match = self
                 if xmlid:
+                    _logger.info("XMLID: %s" % xmlid)
                     row["id"] = xmlid
                     newdata.append(tuple(row[f] for f in clean_fields))
                     continue
                 elif dbid:
+                    _logger.info("DBID: %s" % dbid)
                     match = self.browse(dbid)
                 else:
                     match = self.env["spp.import.match"]._match_find(self, record, row)
-
-                if match:
-                    flat_fields_to_remove = [item for sublist in field_to_match for item in sublist]
-                    for fields_pop in flat_fields_to_remove:
-                        # TODO: @eMJay0921: import matching should not remove any
-                        # value of importing row, this should be removed.
-                        if fields_pop in row and match._fields[fields_pop].type in [
-                            "one2many",
-                            "many2many",
-                        ]:
-                            row[fields_pop] = False
+                    _logger.info("MATCH: %s" % match)
 
                 match.export_data(fields)
 
                 ext_id = match.get_external_id()
                 row["id"] = ext_id[match.id] if match else row.get("id", "")
-                newdata.append(tuple(row[f] for f in fields))
+                if match:
+                    if overwrite_match:
+                        flat_fields_to_remove = [item for sublist in field_to_match for item in sublist]
+                        for fields_pop in flat_fields_to_remove:
+                            # Set one2many and many2many fields to False if matched
+                            # to avoid duplicates in one2many or many2many when exporting data
+                            if fields_pop in row and match._fields[fields_pop].type in [
+                                "one2many",
+                                "many2many",
+                            ]:
+                                row[fields_pop] = False
+                        newdata.append(tuple(row[f] for f in clean_fields))
+                else:
+                    newdata.append(tuple(row[f] for f in fields))
             data = newdata
         return super().load(fields, data)
 
