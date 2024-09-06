@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP API Records",
     "summary": """Provides RESTful API endpoints for accessing and managing OpenSPP's core data, including service points, programs, products, and entitlements.""",
-    "category": "",
+    "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "author": "OpenSPP.org",
     "development_status": "Alpha",
