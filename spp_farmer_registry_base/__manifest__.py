@@ -20,6 +20,7 @@
         "g2p_registry_membership",
         "spp_base_gis",
         "spp_land_record",
+        "base_import",
     ],
     "external_dependencies": {"python": ["shapely", "geojson", "simplejson", "pyproj"]},
     "data": [
@@ -29,7 +30,11 @@
         "views/res_partner.xml",
         "views/configuration_view.xml",
     ],
-    "assets": {},
+    "assets": {
+        "web.assets_backend": [
+            "spp_farmer_registry_base/static/src/import_records/import_records.js",
+        ],
+    },
     "demo": [],
     "images": [],
     "application": False,
