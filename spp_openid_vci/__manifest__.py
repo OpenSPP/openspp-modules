@@ -11,7 +11,7 @@
     "depends": [
         "spp_encryption",
         "g2p_encryption_rest_api",
-        "g2p_registry_base",
+        "spp_registry",
         "g2p_openid_vci",
         "g2p_openid_vci_rest_api",
     ],

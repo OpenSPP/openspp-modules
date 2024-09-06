@@ -21,7 +21,7 @@
         "spp_entitlement_in_kind",
         "spp_ent_trans",
         "contacts",
-        "g2p_registry_base",
+        "spp_registry",
         "spp_area",
         "spp_programs_sp",
     ],

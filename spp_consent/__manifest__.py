@@ -11,9 +11,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "base",
-        "g2p_registry_base",
-        "g2p_registry_individual",
-        "g2p_registry_group",
+        "spp_registry",
     ],
     "data": [
         "security/ir.model.access.csv",

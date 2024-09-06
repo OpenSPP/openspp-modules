@@ -14,10 +14,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "base",
-        "g2p_registry_base",
-        "g2p_registry_individual",
-        "g2p_registry_group",
-        "g2p_registry_membership",
+        "spp_registry",
         "spp_base_gis",
         "spp_land_record",
         "base_import",
@@ -30,11 +27,7 @@
         "views/res_partner.xml",
         "views/configuration_view.xml",
     ],
-    "assets": {
-        "web.assets_backend": [
-            "spp_farmer_registry_base/static/src/import_records/import_records.js",
-        ],
-    },
+    "assets": {},
     "demo": [],
     "images": [],
     "application": False,

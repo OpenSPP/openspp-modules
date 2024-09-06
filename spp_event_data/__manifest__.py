@@ -14,9 +14,7 @@
     ],
     "depends": [
         "base",
-        "g2p_registry_base",
-        "g2p_registry_group",
-        "g2p_registry_individual",
+        "spp_registry",
     ],
     "data": [
         "security/ir.model.access.csv",

@@ -10,7 +10,7 @@
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
-        "g2p_registry_membership",
+        "spp_registry",
         "spp_programs",
         "spp_service_points",
         "spp_audit_log",

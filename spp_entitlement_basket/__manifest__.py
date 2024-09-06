@@ -8,7 +8,7 @@
     "license": "LGPL-3",
     "development_status": "Alpha",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["base", "g2p_registry_base", "g2p_programs", "spp_programs", "spp_service_points", "product", "stock"],
+    "depends": ["base", "spp_registry", "g2p_programs", "spp_programs", "spp_service_points", "product", "stock"],
     "data": [
         "security/ir.model.access.csv",
         "wizard/create_program_wizard.xml",

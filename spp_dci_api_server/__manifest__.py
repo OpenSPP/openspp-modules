@@ -17,8 +17,7 @@
     "license": "LGPL-3",
     "depends": [
         "base",
-        "g2p_registry_base",
-        "g2p_registry_individual",
+        "spp_registry",
         "spp_oauth",
     ],
     "data": [
