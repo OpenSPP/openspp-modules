@@ -3,7 +3,7 @@
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "category": "OpenSPP",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.2.1",
     "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],

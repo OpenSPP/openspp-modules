@@ -5,7 +5,7 @@
     "name": "OpenSPP Base API",
     "summary": """Provides foundational API functions and methods for seamless interaction with the OpenSPP system, enabling data exchange via APIs or XML-RPC.""",
     "category": "OpenSPP",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.2.1",
     "application": False,
     "author": "OpenSPP.org",
     "support": "apps@itpp.dev",

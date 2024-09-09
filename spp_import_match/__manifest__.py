@@ -4,7 +4,7 @@
     "name": "OpenSPP Import Match",
     "summary": "Enhances data imports in OpenSPP by enabling the matching of imported records with existing data to prevent duplicates and ensure data integrity.",
     "category": "OpenSPP",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.2.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
