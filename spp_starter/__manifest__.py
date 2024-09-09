@@ -2,7 +2,7 @@
     "name": "OpenSPP: Starter",
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
-    "category": "Theme",
+    "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "license": "LGPL-3",
     "development_status": "Beta",
