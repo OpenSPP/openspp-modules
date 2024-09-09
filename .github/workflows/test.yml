@@ -103,12 +103,13 @@ jobs:
         run: git clone https://github.com/OpenSPP/mukit-modules.git --depth 1 --branch 17.0-openspp
       - name: Copy OpenG2P modules to addons directory, remove tests and unsupported modules
         run: |
-          # rm -rf openg2p-program/*rest_api*
+          rm -rf openg2p-registry/*/tests
           rm -rf openg2p-registry/g2p_documents
           rm -rf openg2p-registry/g2p_odk_importer
           rm -rf openg2p-registry/g2p_odk_user_mapping
           rm -rf openg2p-registry/g2p_profile_image
           rm -rf openg2p-registry/g2p_registry_documents
+          rm -rf openg2p-program/*/tests
           rm -rf openg2p-program/g2p_entitlement_voucher
           rm -rf openg2p-program/g2p_odk_importer_program
           rm -rf openg2p-program/g2p_formio
@@ -116,9 +117,9 @@ jobs:
           rm -rf openg2p-program/g2p_payment_cash
           rm -rf openg2p-program/g2p_payment_g2p_connect
           rm -rf openg2p-program/g2p_program_documents
-          rm -rf openg2p-registry/*/tests
-          rm -rf openg2p-program/*/tests
           rm -rf openg2p-security/*/tests
+          rm -rf openg2p-security/g2p_encryption_keymanager
+          rm -rf openg2p-security/g2p_registry_encryption
           rm -rf openg2p-storage/*/tests
           rm -rf openg2p-vci/*/tests
           rm -rf mukit-modules/muk_web_enterprise_theme
@@ -137,8 +138,6 @@ jobs:
       - name: Add g2p-programs and odoo-test-helper to spp-test-requirements.txt
         run: |
           echo "git+https://github.com/OpenSPP/openg2p-program@17.0-develop-openspp#subdirectory=g2p_programs" >> spp-test-requirements.txt
-          # echo "git+https://github.com/OpenSPP/openg2p-storage@17.0-openspp#subdirectory=storage_backend_s3" >> spp-test-requirements.txt
-          # echo "git+https://github.com/OpenSPP/openg2p-storage@17.0-openspp#subdirectory=storage_backend" >> spp-test-requirements.txt
           echo "odoo-test-helper" >> spp-test-requirements.txt
       - name: Replace test-requirements.txt with spp-test-requirements.txt
         run: |
