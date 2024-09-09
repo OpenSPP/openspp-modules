@@ -1,23 +1,26 @@
-import unittest
 from odoo.tests.common import TransactionCase
 
-class SPPGRMTicketStageTests(TransactionCase):
 
+class SPPGRMTicketStageTests(TransactionCase):
     def setUp(self):
-        super(SPPGRMTicketStageTests, self).setUp()
-        self.stage = self.env['spp.grm.ticket.stage'].create({
-            'name': 'Test Stage',
-            'sequence': 1,
-            'active': True,
-        })
+        super().setUp()
+        self.stage = self.env["spp.grm.ticket.stage"].create(
+            {
+                "name": "Test Stage",
+                "sequence": 1,
+                "active": True,
+            }
+        )
 
     def stage_creation(self):
-        new_stage = self.env['spp.grm.ticket.stage'].create({
-            'name': 'New Stage',
-            'sequence': 2,
-            'active': False,
-        })
-        self.assertEqual(new_stage.name, 'New Stage')
+        new_stage = self.env["spp.grm.ticket.stage"].create(
+            {
+                "name": "New Stage",
+                "sequence": 2,
+                "active": False,
+            }
+        )
+        self.assertEqual(new_stage.name, "New Stage")
 
     def stage_sequence_order(self):
         self.assertEqual(self.stage.sequence, 1)
@@ -35,5 +38,5 @@ class SPPGRMTicketStageTests(TransactionCase):
         self.assertFalse(self.stage.fold)
 
     def stage_onchange_closed(self):
-        self.stage.write({'closed': True})
+        self.stage.write({"closed": True})
         self.assertFalse(self.stage.fold)
