@@ -3,6 +3,7 @@ Pillow>=10.3.0
 PyLD
 bravado_core
 faker
+fastapi==0.112.2
 geojson
 jsonschema
 jwcrypto
