@@ -1,36 +1,37 @@
-import unittest
-from unittest.mock import patch
 from odoo.tests.common import TransactionCase
-from odoo.exceptions import ValidationError
+
 
 class SPPGRMTicketTests(TransactionCase):
-
     def setUp(self):
-        super(SPPGRMTicketTests, self).setUp()
-        self.ticket = self.env['spp.grm.ticket'].create({
-            'name': 'Test Ticket',
-            'description': 'Test Description',
-            'partner_id': self.env.ref('base.res_partner_1').id,
-        })
+        super().setUp()
+        self.ticket = self.env["spp.grm.ticket"].create(
+            {
+                "name": "Test Ticket",
+                "description": "Test Description",
+                "partner_id": self.env.ref("base.res_partner_1").id,
+            }
+        )
 
     def ticket_creation(self):
-        new_ticket = self.env['spp.grm.ticket'].create({
-            'name': 'New Ticket',
-            'description': 'New Description',
-            'partner_id': self.env.ref('base.res_partner_2').id,
-        })
-        self.assertEqual(new_ticket.name, 'New Ticket')
+        new_ticket = self.env["spp.grm.ticket"].create(
+            {
+                "name": "New Ticket",
+                "description": "New Description",
+                "partner_id": self.env.ref("base.res_partner_2").id,
+            }
+        )
+        self.assertEqual(new_ticket.name, "New Ticket")
 
     def ticket_number_generation(self):
-        self.assertNotEqual(self.ticket.number, '/')
+        self.assertNotEqual(self.ticket.number, "/")
 
     def ticket_assignment(self):
-        self.ticket.write({'user_id': self.env.ref('base.user_admin').id})
-        self.assertEqual(self.ticket.user_id, self.env.ref('base.user_admin'))
+        self.ticket.write({"user_id": self.env.ref("base.user_admin").id})
+        self.assertEqual(self.ticket.user_id, self.env.ref("base.user_admin"))
 
     def ticket_stage_transition(self):
-        stage_closed = self.env['spp.grm.ticket.stage'].search([('closed', '=', True)], limit=1)
-        self.ticket.write({'stage_id': stage_closed.id})
+        stage_closed = self.env["spp.grm.ticket.stage"].search([("closed", "=", True)], limit=1)
+        self.ticket.write({"stage_id": stage_closed.id})
         self.assertEqual(self.ticket.stage_id, stage_closed)
 
     def ticket_copy(self):
