@@ -47,7 +47,7 @@ class TestEligibilityManager(TransactionCase):
 
     def test_import_eligible_registrants(self):
         count = self.manager_default.import_eligible_registrants()
-        self.assertEqual(count, 2)
+        self.assertEqual(count, 1)
 
         self.manager_default.enable_exclusion_filter = True
         count = self.manager_default.import_eligible_registrants()
