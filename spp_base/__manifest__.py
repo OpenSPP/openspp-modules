@@ -28,7 +28,7 @@
         "spp_programs",
     ],
     "external_dependencies": {
-        "python": ["numpy>=1.22.2", "urllib3>=2.2.2", "zipp>=3.19.1"]
+        "python": ["fastapi==0.112.2", "numpy>=1.22.2", "urllib3>=2.2.2", "zipp>=3.19.1"]
     },  # not directly required, pinned by Snyk to avoid a vulnerability
     "data": [
         "security/ir.model.access.csv",
