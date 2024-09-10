@@ -6,20 +6,24 @@
         <field name="model">spp.starter</field>
         <field name="arch" type="xml">
             <form>
-                <field name="state" widget="statusbar" invisible="1" />
-                <field name="state_spmis" widget="statusbar" invisible="1" />
-                <field name="state_farmer" widget="statusbar" invisible="1" />
                 <sheet>
+                    <div class="alert alert-info text-center" role="alert">
+                        <field name="state" widget="statusbar" />
+                        <br />
+                        <field
+                            name="state_spmis"
+                            widget="statusbar"
+                            invisible="state != '2' or registry_target != 'spmis'"
+                        />
+                        <field
+                            name="state_farmer"
+                            widget="statusbar"
+                            invisible="state != '2' or registry_target != 'farmer'"
+                        />
+                    </div>
+
                     <!-- STEP 1 -->
                     <div invisible="state != '0'">
-                        <div class="alert alert-info text-center" role="alert">
-                            <strong>1. Organization Setup</strong>
-                            &gt; 2. Registry Setup
-                            <!-- &gt; 3. Service Points
-                            &gt; 4. Cash Transfer
-                            &gt; 5. In-Kind Transfer
-                            &gt; 6. Grievance Redress Mechanism (GRM) -->
-                        </div>
                         <label for="org_name" string="Organization Name:" />
                         <field
                             name="org_name"
@@ -58,14 +62,6 @@
                     </div>
                     <!-- STEP 2 -->
                     <div invisible="state != '1'">
-                        <div class="alert alert-info text-center" role="alert">
-                            1. Organization Setup
-                            &gt; <strong>2. Registry Setup</strong>
-                            <!-- &gt; 3. Service Points
-                            &gt; 4. Cash Transfer
-                            &gt; 5. In-Kind Transfer
-                            &gt; 6. Grievance Redress Mechanism (GRM) -->
-                        </div>
                         <label for="registry_target" string="WIll you manage SP-MIS or Farmer Registry?" />
                         <br />
                         <field
@@ -104,14 +100,6 @@
                     </div>
                     <!-- STEP 3 SP-MIS -->
                     <div invisible="state != '2' or registry_target != 'spmis' or state_spmis != '0'">
-                        <div class="alert alert-info text-center" role="alert">
-                            1. Organization Setup
-                            &gt; 2. Registry Setup
-                            &gt; <strong>3. Service Points</strong>
-                            &gt; 4. Cash Transfer
-                            &gt; 5. In-Kind Transfer
-                            <!-- &gt; 6. Grievance Redress Mechanism (GRM) -->
-                        </div>
                         <label
                             for="service_point_management"
                             string="Do you need to manage service points?"
@@ -127,14 +115,6 @@
                     </div>
                     <!-- STEP 4 SP-MIS -->
                     <div invisible="state != '2' or registry_target != 'spmis' or state_spmis != '1'">
-                        <div class="alert alert-info text-center" role="alert">
-                            1. Organization Setup
-                            &gt; 2. Registry Setup
-                            &gt; 3. Service Points
-                            &gt; <strong>4. Cash Transfer</strong>
-                            &gt; 5. In-Kind Transfer
-                            <!-- &gt; 6. Grievance Redress Mechanism (GRM) -->
-                        </div>
                         <label for="cash_transfer_needed" string="Will you be conducting cash transfers?" />
                         <br />
                         <field
@@ -157,14 +137,6 @@
                     </div>
                     <!-- STEP 5 SP-MIS -->
                     <div invisible="state != '2' or registry_target != 'spmis' or state_spmis != '2'">
-                        <div class="alert alert-info text-center" role="alert">
-                            1. Organization Setup
-                            &gt; 2. Registry Setup
-                            &gt; 3. Service Points
-                            &gt; 4. Cash Transfer
-                            &gt; <strong>5. In-Kind Transfer</strong>
-                            <!-- &gt; 6. Grievance Redress Mechanism (GRM) -->
-                        </div>
                         <label
                             for="conducting_inkind_transfer"
                             string="Will you be conducting in-kind transfers?"
@@ -180,11 +152,6 @@
                     </div>
                     <!-- STEP 3 Farmer Registry -->
                     <div invisible="state != '2' or registry_target != 'farmer' or state_spmis != '0'">
-                        <div class="alert alert-info text-center" role="alert">
-                            1. Organization Setup
-                            &gt; 2. Registry Setup
-                            &gt; <strong>3. Farmer Registry</strong>
-                        </div>
                         <label
                             for="farmer_demo_management"
                             string="Will you manage Demo for Farmer Registry?"

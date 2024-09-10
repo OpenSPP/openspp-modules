@@ -6,9 +6,9 @@ class SppStarter(models.TransientModel):
     _description = "SPP Starter"
 
     STATE_SELECTION = [
-        ("0", "Organization"),
-        ("1", "Registry"),
-        ("2", "Next-Step"),
+        ("0", "Organization Setup"),
+        ("1", "Registry Setup"),
+        ("2", "Chosen Registry Setup"),
     ]
     SP_MIS_STATE_SELECTION = [
         ("0", "Service Points"),
@@ -216,6 +216,7 @@ class SppStarter(models.TransientModel):
                 res |= find_module("spp_entitlement_in_kind")
 
         if self.registry_target == "farmer":
+            # TODO: needs to change this once the module for farmer registry default UI is created
             res |= find_module("spp_farmer_registry_base")
             if self.location_assignment == "yes":
                 res |= find_module("spp_area_gis")
