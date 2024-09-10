@@ -8,11 +8,17 @@ class SPPGRMTicketTests(TransactionCase):
         super().setUpClass()
         cls.ticket_stage_open = cls.env["spp.grm.ticket.stage"].create({"name": "Open", "closed": False})
         cls.ticket_stage_closed = cls.env["spp.grm.ticket.stage"].create({"name": "Closed", "closed": True})
+        cls.partner_1 = cls.env['res.partner'].create({
+            'name': 'Test Partner 1',
+        })
+        cls.partner_2 = cls.env['res.partner'].create({
+            'name': 'Test Partner 2',
+        })
         cls.ticket = cls.env["spp.grm.ticket"].create(
             {
                 "name": "Test Ticket",
                 "description": "Test Description",
-                "partner_id": cls.env.ref("base.res_partner_1").id,
+                "partner_id": cls.partner_1.id,
                 "stage_id": cls.ticket_stage_open.id,
             }
         )
@@ -23,7 +29,7 @@ class SPPGRMTicketTests(TransactionCase):
             {
                 "name": "New Ticket",
                 "description": "New Description",
-                "partner_id": self.env.ref("base.res_partner_2").id,
+                "partner_id": self.partner_2.id,
                 "number": "/",  # Explicitly use "/" to trigger number generation
             }
         )
@@ -36,7 +42,7 @@ class SPPGRMTicketTests(TransactionCase):
             {
                 "name": "Assigned Ticket",
                 "description": "Assigned Description",
-                "partner_id": self.env.ref("base.res_partner_2").id,
+                "partner_id": self.partner_2.id,
                 "user_id": self.env.ref("base.user_admin").id,  # Assign user
                 # Do not provide assigned_date
             }
