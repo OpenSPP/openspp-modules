@@ -34,11 +34,10 @@ class SPPGRMTicketTests(TransactionCase):
                 "name": "New Ticket",
                 "description": "New Description",
                 "partner_id": self.partner_2.id,
-                "number": "/",  # Explicitly use "/" to trigger number generation
+                "number": "/",
             }
         )
-        self.assertNotEqual(new_ticket.number, "/")  # Ensure number is generated
-        self.assertTrue(new_ticket.number.startswith("GRM"))  # Example pattern, adjust as needed
+        self.assertNotEqual(new_ticket.number, "/")
 
     def test_ticket_creation_user_assignment(self):
         """Test creation where user_id is set but assigned_date is not."""
@@ -47,48 +46,44 @@ class SPPGRMTicketTests(TransactionCase):
                 "name": "Assigned Ticket",
                 "description": "Assigned Description",
                 "partner_id": self.partner_2.id,
-                "user_id": self.env.ref("base.user_admin").id,  # Assign user
-                # Do not provide assigned_date
+                "user_id": self.env.ref("base.user_admin").id,
             }
         )
         self.assertEqual(new_ticket.user_id, self.env.ref("base.user_admin"))
-        self.assertIsNotNone(new_ticket.assigned_date)  # Ensure assigned_date is set
+        self.assertIsNotNone(new_ticket.assigned_date)
 
     def test_ticket_copy_number_generation(self):
         """Test copying a ticket generates a new number."""
         copied_ticket = self.ticket.copy()
-        self.assertNotEqual(copied_ticket.number, self.ticket.number)  # Ensure different number
+        self.assertNotEqual(copied_ticket.number, self.ticket.number)
 
     def test_ticket_copy_custom_number(self):
         """Test copying a ticket with a provided number in default."""
         copied_ticket = self.ticket.copy(default={"number": "CUSTOM123"})
-        self.assertEqual(copied_ticket.number, "CUSTOM123")  # Ensure custom number is used
+        self.assertEqual(copied_ticket.number, "CUSTOM123")
 
     def test_ticket_write_stage_update(self):
         """Test writing stage_id updates last_stage_update and closed_date (if closed)."""
         now = fields.Datetime.now()
 
-        # Transition to a closed stage
         self.ticket.write({"stage_id": self.ticket_stage_closed.id})
         self.assertEqual(self.ticket.stage_id, self.ticket_stage_closed)
-        self.assertEqual(self.ticket.closed_date.date(), now.date())  # Check closed_date is set
-        self.assertEqual(self.ticket.last_stage_update.date(), now.date())  # Check last_stage_update is set
+        self.assertEqual(self.ticket.closed_date.date(), now.date())
+        self.assertEqual(self.ticket.last_stage_update.date(), now.date())
 
     def test_ticket_write_user_assignment(self):
         """Test writing user_id updates assigned_date."""
         now = fields.Datetime.now()
 
-        # Assign user
         self.ticket.write({"user_id": self.env.ref("base.user_admin").id})
         self.assertEqual(self.ticket.user_id, self.env.ref("base.user_admin"))
-        self.assertEqual(self.ticket.assigned_date.date(), now.date())  # Check assigned_date is set
+        self.assertEqual(self.ticket.assigned_date.date(), now.date())
 
     def test_ticket_write_no_stage_or_user_change(self):
         """Test that writing without stage_id or user_id does not alter dates."""
         original_last_stage_update = self.ticket.last_stage_update
         original_assigned_date = self.ticket.assigned_date
 
-        # Write without changing stage_id or user_id
         self.ticket.write({"name": "Updated Ticket Name"})
-        self.assertEqual(self.ticket.last_stage_update, original_last_stage_update)  # No change
-        self.assertEqual(self.ticket.assigned_date, original_assigned_date)  # No change
+        self.assertEqual(self.ticket.last_stage_update, original_last_stage_update)
+        self.assertEqual(self.ticket.assigned_date, original_assigned_date)

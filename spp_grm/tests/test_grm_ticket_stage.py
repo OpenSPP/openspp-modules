@@ -2,9 +2,10 @@ from odoo.tests.common import TransactionCase
 
 
 class SPPGRMTicketStageTests(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.stage = self.env["spp.grm.ticket.stage"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.stage = cls.env["spp.grm.ticket.stage"].create(
             {
                 "name": "Test Stage",
                 "sequence": 1,

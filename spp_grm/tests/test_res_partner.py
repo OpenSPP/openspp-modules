@@ -2,17 +2,18 @@ from odoo.tests.common import TransactionCase
 
 
 class ResPartnerTicketTests(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.partner = self.env["res.partner"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.partner = cls.env["res.partner"].create(
             {
                 "name": "Test Partner",
             }
         )
-        self.ticket = self.env["spp.grm.ticket"].create(
+        cls.ticket = cls.env["spp.grm.ticket"].create(
             {
                 "name": "Test Ticket",
-                "partner_id": self.partner.id,
+                "partner_id": cls.partner.id,
             }
         )
 
