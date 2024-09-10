@@ -3,8 +3,9 @@ from odoo.tests.common import TransactionCase
 
 
 class SPPGRMTicketTests(TransactionCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(self):
+        super().setUpClass()
         self.ticket_stage_open = self.env["spp.grm.ticket.stage"].create({"name": "Open", "closed": False})
         self.ticket_stage_closed = self.env["spp.grm.ticket.stage"].create({"name": "Closed", "closed": True})
         self.ticket = self.env["spp.grm.ticket"].create(
