@@ -97,8 +97,6 @@ jobs:
         run: git clone https://github.com/OpenSPP/openg2p-program.git --depth 1 --branch 17.0-develop-openspp
       - name: Clone OpenG2P Security Repository
         run: git clone https://github.com/OpenSPP/openg2p-security.git --depth 1 --branch 17.0-develop-openspp
-      - name: Clone OpenG2P VCI Repository
-        run: git clone https://github.com/OpenSPP/openg2p-vci.git --depth 1 --branch 17.0-develop-openspp
       - name: Clone Muk Addons Repository
         run: git clone https://github.com/OpenSPP/mukit-modules.git --depth 1 --branch 17.0-openspp
       - name: Copy OpenG2P modules to addons directory, remove tests and unsupported modules
