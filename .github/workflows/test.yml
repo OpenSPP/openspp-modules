@@ -100,20 +100,18 @@ jobs:
         run: git clone https://github.com/OpenSPP/openg2p-registry.git --depth 1 --branch 17.0-develop-openspp
       - name: Clone OpenG2P Programs Repository
         run: git clone https://github.com/OpenSPP/openg2p-program.git --depth 1 --branch 17.0-develop-openspp
-      - name: Clone OpenG2P Security Repository
-        run: git clone https://github.com/OpenSPP/openg2p-security.git --depth 1 --branch 17.0-develop-openspp
-      - name: Clone OpenG2P VCI Repository
-        run: git clone https://github.com/OpenSPP/openg2p-vci.git --depth 1 --branch 17.0-develop-openspp
       - name: Clone Muk Addons Repository
         run: git clone https://github.com/OpenSPP/mukit-modules.git --depth 1 --branch 17.0-openspp
       - name: Copy OpenG2P modules to addons directory, remove tests and unsupported modules
         run: |
           rm -rf openg2p-registry/*/tests
           rm -rf openg2p-registry/g2p_documents
+          rm -rf openg2p-registry/g2p_encryption_keymanager
           rm -rf openg2p-registry/g2p_odk_importer
           rm -rf openg2p-registry/g2p_odk_user_mapping
           rm -rf openg2p-registry/g2p_profile_image
           rm -rf openg2p-registry/g2p_registry_documents
+          rm -rf openg2p-registry/g2p_registry_encryption
           rm -rf openg2p-program/*/tests
           rm -rf openg2p-program/g2p_entitlement_voucher
           rm -rf openg2p-program/g2p_odk_importer_program
@@ -122,22 +120,13 @@ jobs:
           rm -rf openg2p-program/g2p_payment_cash
           rm -rf openg2p-program/g2p_payment_g2p_connect
           rm -rf openg2p-program/g2p_program_documents
-          rm -rf openg2p-security/*/tests
-          rm -rf openg2p-security/g2p_encryption_keymanager
-          rm -rf openg2p-security/g2p_registry_encryption
-          rm -rf openg2p-storage/*/tests
-          rm -rf openg2p-vci/*/tests
           rm -rf mukit-modules/muk_web_enterprise_theme
           cp -r openg2p-registry/* ${ADDONS_DIR}/
           cat test-requirements.txt >> spp-test-requirements.txt
           cp -r openg2p-program/* ${ADDONS_DIR}/
           cat test-requirements.txt >> spp-test-requirements.txt
-          cp -r openg2p-security/* ${ADDONS_DIR}/
-          cat test-requirements.txt >> spp-test-requirements.txt
           # cp -r openg2p-storage/* ${ADDONS_DIR}/
           # cat test-requirements.txt >> spp-test-requirements.txt
-          cp -r openg2p-vci/* ${ADDONS_DIR}/
-          cat test-requirements.txt >> spp-test-requirements.txt
           # MUK Addons
           cp -r mukit-modules/* ${ADDONS_DIR}/
       - name: Add g2p-programs and odoo-test-helper to spp-test-requirements.txt

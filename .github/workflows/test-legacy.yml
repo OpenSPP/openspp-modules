@@ -71,8 +71,6 @@ jobs:
         run: git clone https://github.com/OpenG2P/openg2p-program.git --depth 1 --branch 17.0-develop
       - name: Clone OpenG2P Security Repository
         run: git clone https://github.com/OpenG2P/openg2p-security.git --depth 1 --branch 17.0-develop
-      - name: Clone OpenG2P VCI Repository
-        run: git clone https://github.com/OpenG2P/openg2p-vci.git --depth 1 --branch 17.0-develop
       - name: Clone Muk Addons Repository
         run: git clone https://github.com/muk-it/odoo-modules.git --depth 1 --branch 17.0
       - name: Remove g2p_connect_demo from openspp-modules as it is not compatible with all OpenSPP variants
