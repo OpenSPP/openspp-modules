@@ -8,12 +8,16 @@ class SPPGRMTicketTests(TransactionCase):
         super().setUpClass()
         cls.ticket_stage_open = cls.env["spp.grm.ticket.stage"].create({"name": "Open", "closed": False})
         cls.ticket_stage_closed = cls.env["spp.grm.ticket.stage"].create({"name": "Closed", "closed": True})
-        cls.partner_1 = cls.env['res.partner'].create({
-            'name': 'Test Partner 1',
-        })
-        cls.partner_2 = cls.env['res.partner'].create({
-            'name': 'Test Partner 2',
-        })
+        cls.partner_1 = cls.env["res.partner"].create(
+            {
+                "name": "Test Partner 1",
+            }
+        )
+        cls.partner_2 = cls.env["res.partner"].create(
+            {
+                "name": "Test Partner 2",
+            }
+        )
         cls.ticket = cls.env["spp.grm.ticket"].create(
             {
                 "name": "Test Ticket",
