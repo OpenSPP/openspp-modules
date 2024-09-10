@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_program_membership_manual_eligibility_form" model="ir.ui.view">
+        <field name="name">view_program_membership_manual_eligibility_form</field>
+        <field name="model">g2p.program_membership</field>
+        <field name="priority">1010</field>
+        <field name="inherit_id" ref="g2p_programs.view_program_membership_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_group']" position="after">
+                <field name="is_manual_eligibility" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@name='verify_eligibility']" position="attributes">
+                <attribute name="invisible">
+                    is_manual_eligibility or state not in ('draft','enrolled')
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='enroll_eligible_registrants']" position="attributes">
+                <attribute name="invisible">
+                    is_manual_eligibility or state != 'draft'
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
