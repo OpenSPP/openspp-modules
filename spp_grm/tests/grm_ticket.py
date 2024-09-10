@@ -4,16 +4,16 @@ from odoo.tests.common import TransactionCase
 
 class SPPGRMTicketTests(TransactionCase):
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
         super().setUpClass()
-        self.ticket_stage_open = self.env["spp.grm.ticket.stage"].create({"name": "Open", "closed": False})
-        self.ticket_stage_closed = self.env["spp.grm.ticket.stage"].create({"name": "Closed", "closed": True})
-        self.ticket = self.env["spp.grm.ticket"].create(
+        cls.ticket_stage_open = cls.env["spp.grm.ticket.stage"].create({"name": "Open", "closed": False})
+        cls.ticket_stage_closed = cls.env["spp.grm.ticket.stage"].create({"name": "Closed", "closed": True})
+        cls.ticket = cls.env["spp.grm.ticket"].create(
             {
                 "name": "Test Ticket",
                 "description": "Test Description",
-                "partner_id": self.env.ref("base.res_partner_1").id,
-                "stage_id": self.ticket_stage_open.id,
+                "partner_id": cls.env.ref("base.res_partner_1").id,
+                "stage_id": cls.ticket_stage_open.id,
             }
         )
 
