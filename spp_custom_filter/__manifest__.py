@@ -1,5 +1,6 @@
 {
     "name": "OpenSPP Custom Filter",
+    "category": "OpenSPP",
     "version": "17.0.1.2.1",
     "summary": "Enhances Odoo's filtering system by allowing administrators to control which fields are displayed in filter dropdowns, improving user experience and data management.",
     "author": "OpenSPP.org",
