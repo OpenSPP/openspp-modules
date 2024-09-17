@@ -23,7 +23,7 @@ class SPPDMSFile(models.Model):
     _description = "DMS File"
     _order = "name asc"
 
-    name = fields.Char(required=True, index="btree")
+    name = fields.Char(required=True, index="btree", string="Filename")
     directory_id = fields.Many2one(
         comodel_name="spp.dms.directory",
         string="Directory",
