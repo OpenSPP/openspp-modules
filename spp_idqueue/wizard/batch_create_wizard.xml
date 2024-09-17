@@ -57,21 +57,23 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         <field name="batches_count" />
                     </group>
                 </sheet>
+                <footer>
                     <button
-                    name="next_step"
-                    string="Next Step"
-                    type="object"
-                    class="oe_highlight"
-                    invisible="state == 'step2'"
-                />
+                        name="next_step"
+                        string="Next Step"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="state == 'step2'"
+                    />
                     <button
-                    name="create_batch"
-                    string="Create Batch"
-                    type="object"
-                    class="oe_highlight"
-                    invisible="state == 'step1'"
-                />
+                        name="create_batch"
+                        string="Create Batch"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="state == 'step1'"
+                    />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
             </form>
         </field>
     </record>
