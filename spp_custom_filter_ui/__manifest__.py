@@ -1,5 +1,6 @@
 {
     "name": "OpenSPP Custom Filter UI",
+    "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "summary": "Customizes the OpenSPP UI to enhance filtering for Res Partners, improving usability and efficiency in managing registrants within social protection programs.",
     "author": "OpenSPP.org",
