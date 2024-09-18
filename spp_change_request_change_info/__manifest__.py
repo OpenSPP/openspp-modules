@@ -10,10 +10,9 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "spp_change_request",
-        "g2p_registry_individual",
-        "g2p_registry_group",
-        "g2p_registry_membership",
+        "spp_registry",
         "spp_service_points",
+        "spp_idpass",  # added this module because of the field target_type in data/id_type.xml
     ],
     "data": [
         "security/change_request_security.xml",

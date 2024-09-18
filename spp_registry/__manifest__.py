@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
 {
-    "name": "OpenSPP Base Demo",
+    "name": "OpenSPP Registry: Base",
     "category": "OpenSPP",
     "version": "17.0.1.0.0",
     "sequence": 1,
@@ -10,22 +11,22 @@
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
-        "spp_registry",
-        "g2p_programs",
-        # "spp_helpdesk",
-        "product",
-        "stock",
+        "base_import",
+        "web",
+        "g2p_registry_base",
+        "g2p_registry_individual",
+        "g2p_registry_group",
+        "g2p_registry_membership",
     ],
-    "data": [
-        "data/users_data.xml",
-        "data/gender_data.xml",
-        "data/product_data.xml",
-    ],
-    "assets": {},
+    "data": [],
+    "assets": {
+        "web.assets_backend": [
+            "spp_registry/static/src/import_records/import_records.js",
+        ],
+    },
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides demonstration data for the OpenSPP system, including sample registrants, programs, and products to facilitate user exploration and training.",
 }

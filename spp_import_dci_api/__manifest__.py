@@ -13,8 +13,7 @@
         "base",
         "g2p_programs",
         "spp_programs",
-        "g2p_registry_base",
-        "g2p_registry_individual",
+        "spp_registry",
         "spp_registry_data_source",
     ],
     "data": [

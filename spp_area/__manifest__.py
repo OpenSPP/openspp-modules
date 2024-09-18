@@ -14,9 +14,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "base",
-        "g2p_registry_base",
-        "g2p_registry_individual",
-        "g2p_registry_group",
+        "spp_registry",
         "queue_job",
     ],
     "external_dependencies": {

@@ -11,10 +11,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "spp_base_demo",
-        "g2p_registry_base",
-        "g2p_registry_individual",
-        "g2p_registry_group",
-        "g2p_registry_membership",
+        "spp_registry",
         "g2p_programs",
         # "g2p_bank",
         "spp_custom_field",
