@@ -68,7 +68,7 @@ class TestSPPDMSFile(TransactionCase):
 
     def test_checksum_calculation(self):
         binary_data = b"Test Content for Checksum"
-        expected_checksum = hashlib.sha1(binary_data).hexdigest()
+        expected_checksum = hashlib.sha512(binary_data).hexdigest()
         checksum = self.dms_file._get_checksum(binary_data)
         self.assertEqual(checksum, expected_checksum)
 
@@ -86,7 +86,7 @@ class TestSPPDMSFile(TransactionCase):
 
         self.assertEqual(self.dms_file.content, new_content)
         self.assertEqual(self.dms_file.size, len(base64.b64decode(new_content)))
-        self.assertEqual(self.dms_file.checksum, hashlib.sha1(base64.b64decode(new_content)).hexdigest())
+        self.assertEqual(self.dms_file.checksum, hashlib.sha512(base64.b64decode(new_content)).hexdigest())
 
     def test_compute_image_1920_with_unknown_mimetype(self):
         self.dms_file.mimetype = "application/unknown"
