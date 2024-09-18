@@ -1,0 +1,96 @@
+name: tests (PyPI)
+# fetching the OpenG2P dependencies from OpenSPP PyPI, locked to the version of the OpenSPP 17.0.1.2 (batanes) release
+
+on:
+  push:
+    branches:
+      - "17.0"
+      - "17.0-ocabot-*"
+      - "farmer-registry"
+env:
+  OCA_GIT_USER_NAME: openspp
+  OCA_GIT_USER_EMAIL: bot@openspp.org
+jobs:
+  unreleased-deps:
+    runs-on: ubuntu-latest
+    name: Detect unreleased dependencies
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          for reqfile in requirements.txt test-requirements.txt ; do
+              if [ -f ${reqfile} ] ; then
+                  result=0
+                  # reject non-comment lines that contain a / (i.e. URLs, relative paths)
+                  grep "^[^#].*/" ${reqfile} || result=$?
+                  if [ $result -eq 0 ] ; then
+                      echo "Unreleased dependencies found in ${reqfile}."
+                      # exit 1
+                  fi
+              fi
+          done
+  test:
+    runs-on: ubuntu-22.04
+    container: ${{ matrix.container }}
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - container: ghcr.io/openspp/oca-ci/py3.10-odoo17.0:jammy
+            name: test with Odoo 17/Ubuntu 22.04
+            makepot: "true"
+            sonar: "true"
+    services:
+      postgres:
+        image: postgis/postgis:15-3.4
+        env:
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_DB: odoo
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v4
+#        with:
+#          persist-credentials: false
+      - name: Disable demo data
+        run: |
+          echo "without_demo = all" >> /etc/odoo.cfg
+          cat /etc/odoo.cfg
+      - name: Remove g2p_connect_demo from openspp-modules as it is not compatible with all OpenSPP variants
+        run: |
+          rm -rf g2p_connect_demo
+      - name: Create tests-requirements file
+        run: |
+          touch tmp-requirements.txt
+          echo "-r openg2p-requirements.txt" >> tmp-requirements.txt
+          echo "odoo-addon-muk-web-theme==17.0.1.2.1.3" >> tmp-requirements.txt
+          cat test-requirements.txt >> tmp-requirements.txt
+          cp tmp-requirements.txt test-requirements.txt
+      - name: Install addons and dependencies
+        env:
+          SKIP_EXT_DEB_DEPENDENCIES: "true"
+          EXCLUDE_REGEX: "odoo-addon-g2p.*|odoo-addon-muk.*"
+        run: oca_install_addons
+      - name: Check licenses
+        run: manifestoo -d . check-licenses
+        continue-on-error: true
+      - name: Check development status
+        run: manifestoo -d . check-dev-status --default-dev-status=Beta
+        continue-on-error: true
+      - name: Initialize test db
+        run: oca_init_test_database
+      - name: Remove test files from pip-installed addons
+        run: |
+          rm -rf /opt/odoo-venv/lib/python3.10/site-packages/odoo/addons/g2p_programs/tests
+          rm -rf /opt/odoo-venv/lib/python3.10/site-packages/odoo/addons/g2p_registry_individual/tests
+      - name: Run tests
+        env:
+          EXCLUDE: "g2p_bank,g2p_entitlement_differential,g2p_entitlement_in_kind,g2p_entitlement_voucher,g2p_payment_cash,g2p_payment_files,g2p_payment_g2p_connect,g2p_payment_interop_layer,g2p_payment_phee,g2p_payment_simple_mpesa,g2p_program_approval,g2p_program_assessment,g2p_program_autoenrol,g2p_program_cycleless,g2p_program_documents,g2p_program_registrant_info,g2p_program_reimbursement,g2p_programs,g2p_proxy_means_test,g2p_registry_addl_info,g2p_registry_base,g2p_registry_group,g2p_registry_individual,g2p_registry_membership,muk_product,muk_web_appsbar,muk_web_chatter,muk_web_colors,muk_web_dialog,muk_web_theme,g2p_openid_vci_rest_api,g2p_openid_vci,g2p_registry_encryption,g2p_encryption,g2p_encryption_keymanager"
+        run: oca_run_tests
+      - uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Update .pot files
+        run: oca_export_and_push_pot https://x-access-token:${{ secrets.GIT_PUSH_TOKEN }}@github.com/${{ github.repository }}
+        if: ${{ matrix.makepot == 'true' && github.event_name == 'push' && github.repository_owner == 'openspp' }}
