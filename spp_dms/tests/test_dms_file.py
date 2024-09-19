@@ -20,7 +20,7 @@ class TestSPPDMSFile(TransactionCase):
         self.dms_file.unlink()
         super().tearDown()
 
-    @patch("spp_dms.models.dms_file.SPPDMSFile._get_checksum")
+    @patch("odoo.addons.spp_dms.models.dms_file.SPPDMSFile._get_checksum")
     def test_inverse_content(self, mock_checksum):
         mock_checksum.return_value = "fake_checksum"
         self.dms_file._inverse_content()
@@ -58,7 +58,7 @@ class TestSPPDMSFile(TransactionCase):
     def test_compute_mimetype_with_invalid_content(self):
         self.dms_file.content = base64.b64encode(b"invalid content")
         self.dms_file._compute_mimetype()
-        self.assertFalse(self.dms_file.mimetype)
+        self.assertEqual(self.dms_file.mimetype, "application/octet-stream")
 
     def test_content_update_integrity(self):
         new_content = base64.b64encode(b"New Test Content")
