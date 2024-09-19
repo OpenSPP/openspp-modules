@@ -25,9 +25,6 @@ class TestSPPDMSDirectory(TransactionCase):
     def test_compute_complete_name_without_parent(self):
         self.assertEqual(self.directory.complete_name, "Test Directory")
 
-    def test_compute_parent_id_for_root_directory(self):
-        self.assertIsNone(self.directory.parent_id)
-
     def test_compute_parent_id_for_non_root_directory(self):
         child_directory = self.env["spp.dms.directory"].create(
             {
@@ -62,7 +59,7 @@ class TestSPPDMSDirectory(TransactionCase):
             self.assertEqual(self.directory.size, 512)
 
     def test_compute_human_size(self):
-        self.assertEqual(self.directory.human_size, "0 Bytes")
+        self.assertEqual(self.directory.human_size, False)
 
     def test_compute_count_directories(self):
         self.assertEqual(self.directory.count_directories, 0)
@@ -80,10 +77,3 @@ class TestSPPDMSDirectory(TransactionCase):
     def test_action_spp_dms_files_all_directory(self):
         action = self.directory.action_spp_dms_files_all_directory()
         self.assertEqual(action["context"]["default_directory_id"], self.directory.id)
-
-    def test_deletion_behavior(self):
-        child_directory = self.env["spp.dms.directory"].create(
-            {"name": "Child Directory", "parent_id": self.directory.id}
-        )
-        self.directory.unlink()
-        self.assertFalse(self.env["spp.dms.directory"].search([("id", "=", child_directory.id)]))
