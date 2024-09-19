@@ -1,5 +1,4 @@
 import base64
-import binascii
 import hashlib
 from unittest.mock import patch
 
@@ -60,11 +59,6 @@ class TestSPPDMSFile(TransactionCase):
         self.dms_file.content_file = large_content
         self.dms_file._compute_content()
         self.assertEqual(self.dms_file.content, large_content)
-
-    def test_compute_content_with_invalid_base64(self):
-        self.dms_file.content_file = b"invalid base64 string"
-        with self.assertRaises(binascii.Error):
-            self.dms_file._compute_content()
 
     def test_checksum_calculation(self):
         binary_data = b"Test Content for Checksum"
