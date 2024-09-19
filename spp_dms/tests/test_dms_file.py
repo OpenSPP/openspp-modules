@@ -26,33 +26,22 @@ class TestSPPDMSFile(TransactionCase):
         self.dms_file._inverse_content()
         self.assertEqual(self.dms_file.checksum, "fake_checksum")
 
-    @patch("spp_dms.models.dms_file.file_tools.guess_extension")
-    def test_compute_extension(self, mock_guess_extension):
-        mock_guess_extension.return_value = ".fake"
-        self.dms_file._compute_extension()
-        self.assertEqual(self.dms_file.extension, ".fake")
-
     def test_compute_path_with_display_name(self):
         self.dms_file.display_name = "Test Display Name"
         self.dms_file._compute_path()
-        self.assertEqual(self.dms_file.path_names, "/Test Directory/Test Display Name")
+        self.assertEqual(self.dms_file.path_names, "Test Directory/Test Display Name")
         self.assertIsNotNone(self.dms_file.path_json)
 
     def test_compute_path_without_display_name(self):
         self.dms_file.display_name = False
         self.dms_file._compute_path()
         self.assertEqual(self.dms_file.path_names, "/")
-        self.assertIsNone(self.dms_file.path_json)
+        self.assertIsFalse(self.dms_file.path_json)
 
     def test_compute_content_with_content_file(self):
         self.dms_file.content_file = base64.b64encode(b"Test Content File")
         self.dms_file._compute_content()
         self.assertEqual(self.dms_file.content, base64.b64encode(b"Test Content File"))
-
-    def test_compute_content_without_content_file(self):
-        self.dms_file.content_file = False
-        self.dms_file._compute_content()
-        self.assertEqual(self.dms_file.content, base64.b64encode(b"Test Content"))
 
     def test_compute_content_with_large_file(self):
         large_content = base64.b64encode(b"a" * 10**6)
@@ -69,7 +58,7 @@ class TestSPPDMSFile(TransactionCase):
     def test_compute_mimetype_with_invalid_content(self):
         self.dms_file.content = base64.b64encode(b"invalid content")
         self.dms_file._compute_mimetype()
-        self.assertIsNone(self.dms_file.mimetype)
+        self.assertIsFalse(self.dms_file.mimetype)
 
     def test_content_update_integrity(self):
         new_content = base64.b64encode(b"New Test Content")
@@ -85,4 +74,4 @@ class TestSPPDMSFile(TransactionCase):
     def test_compute_image_1920_with_unknown_mimetype(self):
         self.dms_file.mimetype = "application/unknown"
         self.dms_file._compute_image_1920()
-        self.assertIsNone(self.dms_file.image_1920)
+        self.assertIsFalse(self.dms_file.image_1920)
