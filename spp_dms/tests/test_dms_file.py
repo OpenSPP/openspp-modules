@@ -36,7 +36,7 @@ class TestSPPDMSFile(TransactionCase):
         self.dms_file.display_name = False
         self.dms_file._compute_path()
         self.assertEqual(self.dms_file.path_names, "/")
-        self.assertIsFalse(self.dms_file.path_json)
+        self.assertFalse(self.dms_file.path_json)
 
     def test_compute_content_with_content_file(self):
         self.dms_file.content_file = base64.b64encode(b"Test Content File")
@@ -58,7 +58,7 @@ class TestSPPDMSFile(TransactionCase):
     def test_compute_mimetype_with_invalid_content(self):
         self.dms_file.content = base64.b64encode(b"invalid content")
         self.dms_file._compute_mimetype()
-        self.assertIsFalse(self.dms_file.mimetype)
+        self.assertFalse(self.dms_file.mimetype)
 
     def test_content_update_integrity(self):
         new_content = base64.b64encode(b"New Test Content")
@@ -74,4 +74,4 @@ class TestSPPDMSFile(TransactionCase):
     def test_compute_image_1920_with_unknown_mimetype(self):
         self.dms_file.mimetype = "application/unknown"
         self.dms_file._compute_image_1920()
-        self.assertIsFalse(self.dms_file.image_1920)
+        self.assertFalse(self.dms_file.image_1920)
