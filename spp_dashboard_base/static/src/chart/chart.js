@@ -9,7 +9,8 @@ export class ChartComponent extends Component {
         this.canvasRef = useRef("canvas");
 
         this.chartTitle = "";
-        if (this.props.chart_type === "pie") {
+        const chartTypesWithTitle = ["pie", "doughnut"];
+        if (chartTypesWithTitle.includes(this.props.chart_type)) {
             this.chartTitle = this.props.data_label;
         }
 
