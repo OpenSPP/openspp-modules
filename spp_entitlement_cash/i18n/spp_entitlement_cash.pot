@@ -70,6 +70,7 @@ msgstr ""
 #. module: spp_entitlement_cash
 #. odoo-python
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Cash Entitlements"
 msgstr ""
@@ -132,6 +133,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Entitlement"
 msgstr ""
@@ -154,6 +157,7 @@ msgstr ""
 #. module: spp_entitlement_cash
 #. odoo-python
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid ""
 "Entitlement State Error! Entitlements not in 'pending validation' state:\n"
@@ -167,12 +171,14 @@ msgstr ""
 #. module: spp_entitlement_cash
 #. odoo-python
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Entitlements Validated and Approved."
 msgstr ""
 
 #. module: spp_entitlement_cash
 #. odoo-python
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid ""
@@ -181,6 +187,7 @@ msgstr ""
 
 #. module: spp_entitlement_cash
 #. odoo-python
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Entitlements are validated and approved."
@@ -221,6 +228,7 @@ msgstr ""
 
 #. module: spp_entitlement_cash
 #. odoo-python
+#: code:addons/spp_entitlement_cash/wizard/create_program_wizard.py:0
 #: code:addons/spp_entitlement_cash/wizard/create_program_wizard.py:0
 #, python-format
 msgid "Items are required in the Cash entitlement manager."
@@ -298,6 +306,7 @@ msgstr ""
 #. module: spp_entitlement_cash
 #. odoo-python
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Program: %(prg)s, Beneficiary: %(partner)s.\n"
 msgstr ""
@@ -332,6 +341,7 @@ msgstr ""
 #. module: spp_entitlement_cash
 #. odoo-python
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid ""
 "The fund for the program: %(program)s [%(fund).2f] is insufficient for the "
@@ -341,6 +351,7 @@ msgstr ""
 #. module: spp_entitlement_cash
 #. odoo-python
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "There are no items entered for this entitlement manager."
 msgstr ""
@@ -348,12 +359,14 @@ msgstr ""
 #. module: spp_entitlement_cash
 #. odoo-python
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Validate %s entitlements started."
 msgstr ""
 
 #. module: spp_entitlement_cash
 #. odoo-python
+#: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #: code:addons/spp_entitlement_cash/models/entitlement_manager.py:0
 #, python-format
 msgid "Validate and approve entitlements for cycle."
