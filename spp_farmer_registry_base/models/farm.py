@@ -110,6 +110,12 @@ class Farm(models.Model):
     @api.model
     def write(self, vals):
         farm = super().write(vals)
+
+        self._create_update_farmer()
+
+        return farm
+
+    def _create_update_farmer(self):
         for rec in self:
             if rec.is_group and rec.kind.id == self.env.ref("spp_farmer_registry_base.kind_farm").id:
                 head_member = rec.get_group_head_member()
@@ -122,8 +128,6 @@ class Farm(models.Model):
                 rec.create_update_farmer(rec)
             elif not rec.is_group and rec.is_registrant:
                 rec.update_farmer(rec)
-
-        return farm
 
     def _process_record_to_feature(self, record, transformer):
         """
