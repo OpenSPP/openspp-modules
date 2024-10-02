@@ -1,0 +1,87 @@
+from odoo import api, fields, models
+
+
+class AttendanceSubscriber(models.Model):
+    _name = "spp.attendance.subscriber"
+    _description = "Attendance Subscriber"
+
+    name = fields.Char(compute="_compute_name")
+    active = fields.Boolean(default=True)
+    partner_id = fields.Many2one("res.partner", readonly=True)
+    attendance_list_ids = fields.One2many("spp.attendance.list", "subscriber_id")
+    person_identifier = fields.Char(required=True)
+
+    partner_name = fields.Char(compute="_compute_partner_name", string="Complete Name")
+    family_name = fields.Char(inverse="_inverse_partner", required=True)
+    given_name = fields.Char(inverse="_inverse_partner", required=True)
+    email = fields.Char(compute="_compute_partner", inverse="_inverse_partner", store=True)
+    phone = fields.Char(compute="_compute_partner", inverse="_inverse_partner", store=True)
+    mobile = fields.Char(compute="_compute_partner", inverse="_inverse_partner", store=True)
+
+    _sql_constraints = [
+        (
+            "partner_id_uniq",
+            "unique(partner_id)",
+            "A subscriber with the same partner already exists.",
+        ),
+        (
+            "person_identifier_uniq",
+            "unique(person_identifier)",
+            "A subscriber with the same person identifier already exists.",
+        ),
+    ]
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if "partner_id" not in vals:
+                if partner_id := self.env["res.partner"].search([("name", "=", vals.get("partner_name"))], limit=1):
+                    vals["partner_id"] = partner_id.id
+                else:
+                    partner_id = self.env["res.partner"].create(
+                        {
+                            "name": f"{vals.get('given_name')} {vals.get('family_name')}",
+                            "email": vals.get("email"),
+                            "phone": vals.get("phone"),
+                            "mobile": vals.get("mobile"),
+                        }
+                    )
+                    vals["partner_id"] = partner_id.id
+        return super().create(vals_list)
+
+    @api.depends("partner_id")
+    def _compute_name(self):
+        for record in self:
+            record.name = f"Attendance for {record.partner_id.name}"
+
+    @api.depends("partner_id.name", "partner_id.email", "partner_id.phone", "partner_id.mobile")
+    def _compute_partner(self):
+        for record in self:
+            if record.partner_id:
+                record.write(
+                    {
+                        "email": record.partner_id.email,
+                        "phone": record.partner_id.phone,
+                        "mobile": record.partner_id.mobile,
+                    }
+                )
+
+    def _inverse_partner(self):
+        for record in self:
+            if record.partner_id:
+                record.partner_id.write(
+                    {
+                        "name": f"{record.given_name} {record.family_name}",
+                        "email": record.email,
+                        "phone": record.phone,
+                        "mobile": record.mobile,
+                    }
+                )
+
+    @api.depends("family_name", "given_name")
+    def _compute_partner_name(self):
+        for record in self:
+            if record.family_name and record.given_name:
+                record.partner_name = f"{record.given_name} {record.family_name}"
+            else:
+                record.partner_name = ""

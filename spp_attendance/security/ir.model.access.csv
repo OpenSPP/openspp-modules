@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+attendance_subscriber_manager,Attendance Subscriber Manager,model_spp_attendance_subscriber,spp_attendance.attendance_manager,1,1,1,1
+attendance_list_manager,Attendance List Manager,model_spp_attendance_list,spp_attendance.attendance_manager,1,1,1,1
+attendance_api_client_manager,Attendance API Client Manager,model_spp_attendance_api_client_credential,spp_attendance.attendance_manager,1,1,1,1
+import_attendance_wizard_manager,Import Attendance Wizard Manager,model_spp_import_attendance_wizard,spp_attendance.attendance_manager,1,1,1,1
