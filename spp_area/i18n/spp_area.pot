@@ -44,6 +44,7 @@ msgstr ""
 #. module: spp_area
 #: model:ir.actions.act_window,name:spp_area.action_spparea
 #: model:ir.model,name:spp_area.model_spp_area
+#: model:ir.model.fields,field_description:spp_area.field_g2p_program_membership__area_id
 #: model:ir.model.fields,field_description:spp_area.field_res_partner__area_id
 #: model:ir.model.fields,field_description:spp_area.field_res_users__area_id
 #: model:ir.ui.menu,name:spp_area.area_main_menu_root
