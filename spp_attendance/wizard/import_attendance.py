@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 
 DEFAULT_RAW_BODY_FOR_AUTH = """{
     "client_id": "<insert client id>",
-    "client_secret": "<insert client id>",
+    "client_secret": "<insert client secret>",
     "grant_type": "client_credentials",
     "db_name": "<insert db name>"
 }"""
