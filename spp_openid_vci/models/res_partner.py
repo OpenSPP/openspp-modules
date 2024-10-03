@@ -1,6 +1,7 @@
 import base64
 import calendar
 import json
+import logging
 from datetime import datetime
 from io import BytesIO
 
@@ -9,7 +10,9 @@ import requests
 from qrcode.image.pil import PilImage
 
 from odoo import _, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import AccessError, UserError
+
+_logger = logging.getLogger(__name__)
 
 
 class SPPRegistry(models.Model):
@@ -44,7 +47,16 @@ class SPPRegistry(models.Model):
         try:
             credential_issuer_response = requests.get(url, timeout=5)
         except requests.exceptions.Timeout as e:
-            raise UserError("The request to the credential issuer timed out.") from e
+            raise AccessError("The request to the credential issuer timed out.") from e
+
+        if not credential_issuer_response.ok:
+            _logger.error(f"Request to the url {url} failed.")
+            _logger.error(credential_issuer_response.json())
+            _logger.error("Status code: %s", credential_issuer_response.status_code)
+            raise AccessError(
+                f"Failed to get credential issuer data. Status code: {credential_issuer_response.status_code}"
+            )
+
         issuer_data = credential_issuer_response.json()
 
         credential_issuer = f"{issuer_data['credential_issuer']}/api/v1/security"
