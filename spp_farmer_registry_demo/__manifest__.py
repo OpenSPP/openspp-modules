@@ -18,7 +18,6 @@
         "g2p_registry_base",
         "spp_farmer_registry_base",
         "queue_job",
-        "spp_base_demo",
     ],
     "data": [
         "security/ir.model.access.csv",
@@ -30,6 +29,7 @@
         "data/chemical_data.xml",
         "data/fertilizer_data.xml",
         "data/feed_items_data.xml",
+        "data/gender_data.xml",
         "views/group_view.xml",
         "views/individual_view.xml",
         "views/generate_farmer_data_view.xml",
