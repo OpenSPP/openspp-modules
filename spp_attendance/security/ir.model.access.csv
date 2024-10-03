@@ -4,3 +4,6 @@ attendance_subscriber_manager,Attendance Subscriber Manager,model_spp_attendance
 attendance_list_manager,Attendance List Manager,model_spp_attendance_list,spp_attendance.attendance_manager,1,1,1,1
 attendance_api_client_manager,Attendance API Client Manager,model_spp_attendance_api_client_credential,spp_attendance.attendance_manager,1,1,1,1
 import_attendance_wizard_manager,Import Attendance Wizard Manager,model_spp_import_attendance_wizard,spp_attendance.attendance_manager,1,1,1,1
+
+attendance_subscriber_viewer,Attendance Subscriber Viewer,model_spp_attendance_subscriber,spp_attendance.attendance_viewer,1,0,0,0
+attendance_list_viewer,Attendance List Viewer,model_spp_attendance_list,spp_attendance.attendance_viewer,1,0,0,0

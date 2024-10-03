@@ -25,12 +25,7 @@
                     <notebook>
                         <page name="attendance_list" string="Attendance">
                             <field name="attendance_list_ids">
-                                <tree
-                                    editable="top"
-                                    create="false"
-                                    edit="false"
-                                    default_order="attendance_date, attendance_time"
-                                >
+                                <tree default_order="attendance_date, attendance_time">
                                     <field name="attendance_date" />
                                     <field name="attendance_time" />
                                     <field name="attendance_location" />
@@ -62,7 +57,7 @@
         <field name="help">Create and manage the attendance.</field>
     </record>
 
-    <menuitem name="Attendance" id="spp_attendance.menu_root" groups="spp_attendance.attendance_manager" />
+    <menuitem name="Attendance" id="spp_attendance.menu_root" />
 
     <menuitem
         name="Subscriber"
