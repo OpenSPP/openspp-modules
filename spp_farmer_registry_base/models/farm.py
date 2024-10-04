@@ -117,7 +117,7 @@ class Farm(models.Model):
 
     def _create_update_farmer(self):
         for rec in self:
-            if rec.is_group and rec.kind.id == self.env.ref("spp_farmer_registry_base.kind_farm").id:
+            if rec.is_group:
                 head_member = rec.get_group_head_member()
                 if not head_member:
                     raise ValidationError(_("Farm must have a head member."))
