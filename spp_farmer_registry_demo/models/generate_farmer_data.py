@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 from odoo import Command, api, fields, models
 
-from ..locale_providers import create_faker
+from odoo.addons.spp_base_demo.locale_providers import create_faker
 
 from .. import tools
 
