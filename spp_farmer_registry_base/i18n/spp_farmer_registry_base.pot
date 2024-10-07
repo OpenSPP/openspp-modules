@@ -102,6 +102,11 @@ msgid "Asset Type"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model:ir.model,name:spp_farmer_registry_base.model_base_import_import
+msgid "Base Import"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__spp_farm_activity__purpose__both
 msgid "Both"
 msgstr ""
@@ -340,6 +345,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__details_farm_type
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_details__details_farm_type
 msgid "Farm Type"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm.py:0
+#, python-format
+msgid "Farm must have a head member."
 msgstr ""
 
 #. module: spp_farmer_registry_base
@@ -852,4 +864,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_partner__experience_years
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__experience_years
 msgid "Years of Experience"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/base_import.py:0
+#, python-format
+msgid ""
+"farmer_given_name and farmer_family_name must be present in the excel file."
 msgstr ""

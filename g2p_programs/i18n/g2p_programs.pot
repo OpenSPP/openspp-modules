@@ -943,6 +943,11 @@ msgid "Calendar Event"
 msgstr ""
 
 #. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__can_publish
+msgid "Can Publish"
+msgstr ""
+
+#. module: g2p_programs
 #. odoo-python
 #: code:addons/g2p_programs/models/duplicate.py:0
 #: code:addons/g2p_programs/models/duplicate.py:0
@@ -1652,11 +1657,6 @@ msgid "DUPLICATE"
 msgstr ""
 
 #. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__data_collection_date
-msgid "Data Collection Date"
-msgstr ""
-
-#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_fund_report_view__date_posted
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__date
 msgid "Date"
@@ -2335,16 +2335,6 @@ msgid "Entitlements Validated and Approved."
 msgstr ""
 
 #. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__enumerator_id
-msgid "Enumerator"
-msgstr ""
-
-#. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__enumerator_user_id
-msgid "Enumerator User"
-msgstr ""
-
-#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__event_data_ids
 msgid "Event Data IDs"
 msgstr ""
@@ -2899,6 +2889,11 @@ msgstr ""
 #. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__is_public
 msgid "Is Public"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__is_published
+msgid "Is Published"
 msgstr ""
 
 #. module: g2p_programs
@@ -3981,11 +3976,6 @@ msgid "Payment Managers"
 msgstr ""
 
 #. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__property_payment_method_id
-msgid "Payment Method"
-msgstr ""
-
-#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_entitlement__payment_status
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_payment__status
 #: model_terms:ir.ui.view,arch_db:g2p_programs.view_cycle_form
@@ -4133,14 +4123,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:g2p_programs.selection__g2p_program_fund__state__posted
 #: model_terms:ir.ui.view,arch_db:g2p_programs.program_fund_filter
 msgid "Posted"
-msgstr ""
-
-#. module: g2p_programs
-#: model:ir.model.fields,help:g2p_programs.field_g2p_program_membership__property_payment_method_id
-msgid ""
-"Preferred payment method when paying this vendor. This is used to filter "
-"vendor bills by preferred payment method to register payments in mass. Use "
-"cases: create bank files for batch wires, check runs."
 msgstr ""
 
 #. module: g2p_programs
@@ -4648,6 +4630,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__activity_user_id
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership_duplicate__activity_user_id
 msgid "Responsible User"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,help:g2p_programs.field_g2p_program_membership__website_id
+msgid "Restrict publishing to this website."
 msgstr ""
 
 #. module: g2p_programs
@@ -5159,11 +5146,6 @@ msgid "Supported ID Document Types"
 msgstr ""
 
 #. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__supporting_documents_ids
-msgid "Supporting Documents"
-msgstr ""
-
-#. module: g2p_programs
 #: model_terms:ir.ui.view,arch_db:g2p_programs.view_notification_manager_sms_form
 msgid "TEMPLATES"
 msgstr ""
@@ -5274,6 +5256,11 @@ msgstr ""
 #: model:ir.model.fields,help:g2p_programs.field_g2p_program_membership__property_account_position_id
 msgid ""
 "The fiscal position determines the taxes/accounts used for this contact."
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,help:g2p_programs.field_g2p_program_membership__website_url
+msgid "The full URL to access the document through the website."
 msgstr ""
 
 #. module: g2p_programs
@@ -5661,6 +5648,21 @@ msgid "Verify eligibility"
 msgstr ""
 
 #. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__website_published
+msgid "Visible on current website"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__visitor_ids
+msgid "Visitors"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__website_id
+msgid "Website"
+msgstr ""
+
+#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__website
 msgid "Website Link"
 msgstr ""
@@ -5672,6 +5674,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__website_message_ids
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership_duplicate__website_message_ids
 msgid "Website Messages"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__website_url
+msgid "Website URL"
 msgstr ""
 
 #. module: g2p_programs

@@ -88,7 +88,12 @@ jobs:
         run: |
           rm -rf g2p_connect_demo
       - name: Create temporary test-requirement.txt
-        run: cp test-requirements.txt spp-test-requirements.txt
+        run: |
+          touch spp-test-requirements.txt
+          echo "--index-url=https://pypi.openspp.org/simple/" >> spp-test-requirements.txt
+          echo "--extra-index-url=https://pypi.org/simple/" >> spp-test-requirements.txt
+          cat test-requirements.txt >> spp-test-requirements.txt
+      # Clone OpenG2P Registry repository
       - name: Turn off git detached head warnings
         run: git config --global advice.detachedHead false
       - name: Clone OpenG2P Registry Repository

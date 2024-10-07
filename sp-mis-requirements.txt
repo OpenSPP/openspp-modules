@@ -1,0 +1,3 @@
+--extra-index-url=https://pypi.openspp.org/simple/
+odoo-addon-spp-base==17.0.1.0.0.20
+odoo-addon-spp-service-points==17.0.1.0.0.10

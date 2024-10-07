@@ -156,10 +156,13 @@ msgid "HHs with members that have chronic illness/medical conditions"
 msgstr ""
 
 #. module: spp_demo
+#: model:ir.model.fields,help:spp_demo.field_g2p_program_membership__z_ind_grp_num_children
 #: model:ir.model.fields,help:spp_demo.field_g2p_program_membership__z_ind_grp_num_children_11_and_below
 #: model:ir.model.fields,help:spp_demo.field_g2p_program_membership__z_ind_grp_num_children_12_and_above
+#: model:ir.model.fields,help:spp_demo.field_res_partner__z_ind_grp_num_children
 #: model:ir.model.fields,help:spp_demo.field_res_partner__z_ind_grp_num_children_11_and_below
 #: model:ir.model.fields,help:spp_demo.field_res_partner__z_ind_grp_num_children_12_and_above
+#: model:ir.model.fields,help:spp_demo.field_res_users__z_ind_grp_num_children
 #: model:ir.model.fields,help:spp_demo.field_res_users__z_ind_grp_num_children_11_and_below
 #: model:ir.model.fields,help:spp_demo.field_res_users__z_ind_grp_num_children_12_and_above
 msgid ""
@@ -317,9 +320,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_demo.field_g2p_program_membership__z_ind_grp_num_children
 #: model:ir.model.fields,field_description:spp_demo.field_res_partner__z_ind_grp_num_children
 #: model:ir.model.fields,field_description:spp_demo.field_res_users__z_ind_grp_num_children
-#: model:ir.model.fields,help:spp_demo.field_g2p_program_membership__z_ind_grp_num_children
-#: model:ir.model.fields,help:spp_demo.field_res_partner__z_ind_grp_num_children
-#: model:ir.model.fields,help:spp_demo.field_res_users__z_ind_grp_num_children
 msgid "Number of children"
 msgstr ""
 
