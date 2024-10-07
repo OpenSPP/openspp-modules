@@ -17,7 +17,7 @@
         "g2p_registry_group",
     ],
     "license": "LGPL-3",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "data": [
         "views/hide_menu_view.xml",

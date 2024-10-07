@@ -8,7 +8,7 @@
     "version": "17.0.1.2.1",
     "application": False,
     "author": "OpenSPP.org",
-    "support": "apps@itpp.dev",
+    "development_status": "Production/Stable",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "depends": [],
