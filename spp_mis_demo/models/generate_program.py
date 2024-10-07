@@ -40,10 +40,6 @@ class OpenSPPGenerateProgramData(models.Model):
         cycle_auto_approve_range = [True, False]
         cycle_duration_range = [30] * 5 + [15, 60]
 
-        ticket_name_range = ["Need to Fix", "Issue"]
-        ticket_disc_beneficiary_range = ["Name", "Address", "Birthdate", "Group Member"]
-        ticket_disc_cycle_range = ["Voucher", "Entitlement Expiration"]
-
         for i in range(0, self.num_programs):
             program_name = f"GenProgram {i+1}"
             target_type = random.choice(group_target_type_range)
