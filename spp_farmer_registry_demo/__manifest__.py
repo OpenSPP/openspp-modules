@@ -17,8 +17,8 @@
         "base",
         "g2p_registry_base",
         "spp_farmer_registry_base",
-        "queue_job",
         "spp_base_demo",
+        "queue_job",
     ],
     "data": [
         "security/ir.model.access.csv",
