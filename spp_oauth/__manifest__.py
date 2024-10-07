@@ -4,7 +4,7 @@
     "category": "OpenSPP",
     "version": "17.0.1.2.1",
     "author": "OpenSPP.org",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "external_dependencies": {"python": ["pyjwt>=2.4.0"]},
     "website": "https://github.com/OpenSPP/openspp-modules",

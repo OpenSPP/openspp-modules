@@ -10,7 +10,7 @@
     "version": "17.0.1.2.1",
     "application": False,
     "author": "OpenSPP.org",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": [
         "jeremi",
         "gonzalesedwin1123",
