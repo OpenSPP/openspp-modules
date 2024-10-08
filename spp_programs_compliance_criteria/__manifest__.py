@@ -3,7 +3,7 @@
     "name": "OpenSPP Programs: Compliance Criteria",
     "summary": "Manages compliance criteria within social protection programs, allowing administrators to define and enforce additional eligibility requirements beyond initial program criteria.",
     "category": "OpenSPP",
-    "version": "17.0.1.2.1",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
