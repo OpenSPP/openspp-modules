@@ -7,10 +7,10 @@
     "images": [
         "images/icon.png",
     ],
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.2.1",
     "application": False,
     "author": "OpenSPP.org",
-    "development_status": "Alpha",
+    "development_status": "Production/Stable",
     "maintainers": [
         "jeremi",
         "gonzalesedwin1123",

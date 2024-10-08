@@ -142,8 +142,8 @@ class OpenSPPAreaImport(models.Model):
         for name_header in name_headers:
             try:
                 name_indexes.update({name_header: columns.index(name_headers[name_header])})
-            except ValueError:
-                pass
+            except ValueError as e:
+                _logger.warning("Column header not found: %s", e)
         code_index = columns.index(code_header)
 
         # Get index of the Parent header of the area if area level is not 0
