@@ -3,7 +3,7 @@
     "name": "OpenSPP Auto-Update Entitlements",
     "summary": "Automatically updates entitlement states based on their redemption status at the end of program cycles in OpenSPP.",
     "category": "OpenSPP",
-    "version": "17.0.1.2.1",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

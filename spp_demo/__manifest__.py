@@ -3,7 +3,7 @@
     "name": "OpenSPP Demo",
     "summary": "Provides demonstration data and functionalities for the OpenSPP system, showcasing its capabilities in managing social protection programs and registries with pre-populated data for exploration and testing.",
     "category": "OpenSPP",
-    "version": "17.0.1.2.1",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

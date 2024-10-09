@@ -4,7 +4,7 @@
     "name": "OpenSPP Data Source",
     "summary": "Provides a framework for integrating external data sources into OpenSPP, enabling connection to and retrieval of data from external systems like farmer registries and social protection programs.",
     "category": "OpenSPP",
-    "version": "17.0.1.2.1",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

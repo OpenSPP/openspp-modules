@@ -2,7 +2,7 @@
     "name": "SPP Audit Log",
     "summary": "Provides audit logging functionality to track data changes and user actions within OpenSPP, enhancing transparency and accountability.",
     "category": "OpenSPP",
-    "version": "17.0.1.2.1",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

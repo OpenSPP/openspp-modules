@@ -3,7 +3,7 @@
     "name": "OpenSPP Entitlement Transactions",
     "summary": "This module records and manages transactions related to entitlement redemptions, providing a transparent history for both cash and in-kind benefits.",
     "category": "OpenSPP",
-    "version": "17.0.1.2.1",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

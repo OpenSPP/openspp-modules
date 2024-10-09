@@ -3,7 +3,7 @@
     "name": "OpenSPP Program ID",
     "summary": "Generates and manages unique IDs for social protection programs, enhancing identification and integration within the OpenSPP platform.",
     "category": "OpenSPP",
-    "version": "17.0.1.2.1",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

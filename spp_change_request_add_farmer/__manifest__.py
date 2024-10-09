@@ -2,7 +2,7 @@
     "name": "OpenSPP Change Request: Add Farmer",
     "summary": "Provides a specialized workflow for adding new farmers to existing groups in the registry.",
     "category": "OpenSPP",
-    "version": "17.0.1.2.1",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
