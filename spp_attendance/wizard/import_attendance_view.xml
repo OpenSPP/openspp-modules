@@ -9,12 +9,16 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <group>
+                    <group string="Authentication">
                         <field name="auth_type" />
+                        <field name="auth_header" widget="code" options="{'mode': 'js'}" />
                         <field name="raw_body" widget="code" options="{'mode': 'js'}" />
                     </group>
-                    <group>
+                    <group string="Import">
+                        <field name="import_header" widget="code" options="{'mode': 'js'}" />
                         <field name="raw_body_for_import" widget="code" options="{'mode': 'js'}" />
+                        <field name="page" />
+                        <field name="limit" />
                     </group>
                 </sheet>
                 <footer>

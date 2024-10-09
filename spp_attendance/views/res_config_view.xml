@@ -7,7 +7,11 @@
         <field name="inherit_id" ref="base.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
-                <app string="SPP Attendance Settings" name="spp_attendance_config_settings">
+                <app
+                    string="SPP Attendance Settings"
+                    name="spp_attendance_config_settings"
+                    logo="/spp_attendance/static/src/img/icons/attendance.png"
+                >
                     <block title="URL and Auth Settings">
                         <setting string="Auth URL" help="URL of the API to Authenticate.">
                             <field name="attendance_auth_url" />

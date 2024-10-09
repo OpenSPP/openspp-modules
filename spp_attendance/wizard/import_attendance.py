@@ -1,9 +1,13 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import copy
+import json
+import uuid
+from urllib.parse import urlencode, urljoin
 
+import pytz
 import requests
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 DEFAULT_RAW_BODY_FOR_AUTH = """{
@@ -16,18 +20,18 @@ DEFAULT_RAW_BODY_FOR_AUTH = """{
 
 DEFAULT_RAW_BODY_FOR_IMPORT = """{
     "header": {
-        "message_id": "123456789020211216223812",
-        "message_ts": "2022-12-04T18:01:07+00:00",
+        "message_id": "%(message_id)s",
+        "message_ts": "%(message_ts)s",
         "action": "search",
-        "sender_id": "https://integrating-server.com",
+        "sender_id": "%(sender_id)s",
         "total_count": 10
     },
     "message": {
-        "transaction_id": "123456789020211216223812",
+        "transaction_id": "%(transaction_id)s",
         "search_request": [
             {
-                "reference_id": "123456789020211216223812",
-                "timestamp": "2022-12-04T17:20:07-04:00",
+                "reference_id": "%(reference_id)s",
+                "timestamp": "%(timestamp)s",
                 "search_criteria": {
                     "reg_type": "SPP:RegistryType:Individual",
                     "query_type": "predicate",
@@ -43,6 +47,23 @@ class ImportAttendanceWiz(models.TransientModel):
     _name = "spp.import.attendance.wizard"
     _description = "Import Attendance Wizard"
 
+    @api.model
+    def _get_default_raw_body_for_import(self):
+        tz = self._context.get("tz") or self.env.user.tz or "UTC"
+        local = pytz.timezone(tz)
+
+        current_datetime = local.localize(fields.Datetime.now())
+
+        formatted_datetime = current_datetime.strftime("%Y-%m-%dT%H:%M:%S%z")
+        return DEFAULT_RAW_BODY_FOR_IMPORT % {
+            "message_id": uuid.uuid4(),
+            "transaction_id": uuid.uuid4(),
+            "reference_id": uuid.uuid4(),
+            "timestamp": formatted_datetime,
+            "message_ts": formatted_datetime,
+            "sender_id": self.env["ir.config_parameter"].get_param("web.base.url"),
+        }
+
     auth_type = fields.Selection(
         selection=[("Basic", "Basic"), ("Bearer", "Bearer")],
         string="Auth Type",
@@ -54,20 +75,37 @@ class ImportAttendanceWiz(models.TransientModel):
         help=_("The raw body to be sent to the auth URL. Must be in JSON format."),
         default=DEFAULT_RAW_BODY_FOR_AUTH,
     )
+    auth_header = fields.Text(string="Auth Headers", default="{}")
 
     raw_body_for_import = fields.Text(
         string="Raw Body for Import",
         required=True,
         help=_("The raw body to be sent to the import URL. Must be in JSON format."),
-        default=DEFAULT_RAW_BODY_FOR_IMPORT,
+        default=_get_default_raw_body_for_import,
     )
+    import_header = fields.Text(string="Import Headers", default="{}")
+    page = fields.Integer(string="Page", default=1)
+    limit = fields.Integer(string="Limit", default=30)
 
     def action_import_attendance(self):
         self.ensure_one()
 
         auth_url = self.env["ir.config_parameter"].get_param("spp_attendance.attendance_auth_url")
+
         try:
-            r = requests.post(auth_url, data=self.raw_body)
+            auth_header = self.auth_header or "{}"
+            auth_header = json.loads(auth_header)
+        except json.JSONDecodeError as e:
+            raise UserError(_("Auth Headers must be in JSON format")) from e
+
+        try:
+            import_header = self.import_header or "{}"
+            import_header = json.loads(import_header)
+        except json.JSONDecodeError as e:
+            raise UserError(_("Import Headers must be in JSON format")) from e
+
+        try:
+            r = requests.post(auth_url, data=self.raw_body, headers=auth_header)
         except requests.exceptions.ConnectionError as e:
             raise UserError(_("Unable to connect to the server. Please check your internet connection.")) from e
 
@@ -87,13 +125,22 @@ class ImportAttendanceWiz(models.TransientModel):
         if not access_token.startswith("Bearer") or access_token.startswith("Basic"):
             access_token = f"{self.auth_type} {access_token}"
 
+        params = {
+            "page": self.page,
+            "limit": self.limit,
+        }
         import_url = self.env["ir.config_parameter"].get_param("spp_attendance.attendance_import_url")
+        full_import_url = urljoin(import_url, "?" + urlencode(params))
+
         try:
-            header = {
-                "Authorization": access_token,
-                "Content-Type": "application/json",
-            }
-            r = requests.post(import_url, headers=header, data=self.raw_body_for_import)
+            import_header.update(
+                {
+                    "Authorization": access_token,
+                }
+            )
+            if "Content-Type" not in import_header:
+                import_header["Content-Type"] = "application/json"
+            r = requests.post(full_import_url, headers=import_header, data=self.raw_body_for_import)
         except requests.exceptions.ConnectionError as e:
             raise UserError(_("Unable to connect to the server. Please check your internet connection.")) from e
 
@@ -190,9 +237,6 @@ class ImportAttendanceWiz(models.TransientModel):
                 "message": _("Imported %s persons.", imported_count),
                 "sticky": False,
                 "type": "success",
-                "next": {
-                    "type": "ir.actions.act_window_close",
-                },
             },
         }
 

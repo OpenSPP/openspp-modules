@@ -21,7 +21,7 @@ class AttendanceApiClientCredential(models.Model):
         while self.search_count([("client_id", "=", client_id)]):
             client_id = str(uuid.uuid4())
 
-        return client_id
+        return f"c-id-{client_id}"
 
     @api.model
     def _generate_client_secret(self):
@@ -29,7 +29,7 @@ class AttendanceApiClientCredential(models.Model):
         while self.search_count([("client_secret", "=", client_secret)]):
             client_secret = str(uuid.uuid4())
 
-        return client_secret
+        return f"c-secret-{client_secret}"
 
     name = fields.Char("Client Name", required=True)
 

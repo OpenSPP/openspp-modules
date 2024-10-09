@@ -85,3 +85,37 @@ class AttendanceSubscriber(models.Model):
                 record.partner_name = f"{record.given_name} {record.family_name}"
             else:
                 record.partner_name = ""
+
+    def get_attendance_list(self, from_date=None, to_date=None, attendance_type_id=None, offset=0, limit=None):
+        domain = [("subscriber_id", "=", self.id)]
+        if from_date and to_date:
+            domain += [("attendance_date", ">=", from_date), ("attendance_date", "<=", to_date)]
+        if attendance_type_id:
+            domain += [("attendance_type_id", "=", attendance_type_id.id)]
+
+        attendance_list_ids = self.env["spp.attendance.list"].search(
+            domain, offset=offset, limit=limit, order="attendance_date desc, attendance_time desc"
+        )
+        total_attendances = self.env["spp.attendance.list"].sudo().search_count(domain)
+        number_of_days_present = list(
+            set(self.env["spp.attendance.list"].sudo().search(domain).mapped("attendance_date"))
+        )
+
+        return total_attendances, {
+            "PersonID": self.person_identifier,
+            "DatesPresent": number_of_days_present,
+            "NumberofDaysPresent": len(number_of_days_present),
+            "AttendanceList": [
+                {
+                    "Date": attendance.attendance_date,
+                    "Time": attendance.attendance_time,
+                    "AttendanceType": attendance.attendance_type_id.name if attendance.attendance_type_id else "",
+                    "AttendanceLocation": attendance.attendance_location,
+                    "AttendanceDescription": attendance.attendance_description or "",
+                    "AttendanceExternalURL": attendance.attendance_external_url or "",
+                    "SubmittedBy": attendance.submitted_by,
+                    "SubmittedDate": attendance.submitted_date,
+                }
+                for attendance in attendance_list_ids
+            ],
+        }

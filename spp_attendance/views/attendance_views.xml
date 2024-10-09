@@ -16,7 +16,7 @@
         <field name="name">attendance_subscriber_form</field>
         <field name="model">spp.attendance.subscriber</field>
         <field name="arch" type="xml">
-            <form string="Audit Rule">
+            <form>
                 <sheet>
                     <group name="attendance_subscriber_fields">
                         <field name="name" />
@@ -28,10 +28,29 @@
                                 <tree default_order="attendance_date, attendance_time">
                                     <field name="attendance_date" />
                                     <field name="attendance_time" />
+                                    <field name="attendance_type_id" />
                                     <field name="attendance_location" />
+                                    <field name="attendance_description" />
                                     <field name="submitted_by" />
                                     <field name="submitted_date" />
                                 </tree>
+                                <form>
+                                    <group string="Attendance Information">
+                                        <field name="attendance_date" />
+                                        <field name="attendance_time" />
+                                        <field
+                                            name="attendance_type_id"
+                                            options="{'no_create': True, 'no_open': True}"
+                                        />
+                                        <field name="attendance_location" />
+                                        <field name="attendance_description" />
+                                        <field name="attendance_external_url" />
+                                    </group>
+                                    <group string="Submitted Information">
+                                        <field name="submitted_by" />
+                                        <field name="submitted_date" />
+                                    </group>
+                                </form>
                             </field>
                         </page>
                         <page name="person_information" string="Person Information">
@@ -57,13 +76,12 @@
         <field name="help">Create and manage the attendance.</field>
     </record>
 
-    <menuitem name="Attendance" id="spp_attendance.menu_root" />
-
     <menuitem
         name="Subscriber"
         id="spp_attendance.attendance_subscriber_menu"
         parent="spp_attendance.menu_root"
         action="attendance_subscriber_action_windown"
+        sequence="10"
     />
 
 </odoo>

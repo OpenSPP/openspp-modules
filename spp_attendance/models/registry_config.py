@@ -55,8 +55,5 @@ class RegistryConfig(models.TransientModel):
             "view_type": "form",
             "res_model": "spp.import.attendance.wizard",
             "target": "new",
-            # "context": {
-            #     "res_config_id": self.id,
-            # },
         }
         return action
