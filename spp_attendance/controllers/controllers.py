@@ -406,26 +406,30 @@ class SppGisApiController(Controller):
         except json.decoder.JSONDecodeError:
             return error_wrapper(400, "data must be in JSON format.")
 
-        from_date = data.get("FromDate")
-        to_date = data.get("ToDate")
+        from_date = kwargs.get("FromDate", None)
+        to_date = kwargs.get("ToDate", None)
+        attendance_type = kwargs.get("AttendanceType", None)
+        attendance_type_id = None
 
-        if not from_date or not to_date:
-            return error_wrapper(400, "FromDate and ToDate are required.")
+        if from_date and to_date:
+            if date_error_message := validate_date(from_date, to_date):
+                return error_wrapper(400, date_error_message)
+            else:
+                from_date = datetime.strptime(from_date, "%Y-%m-%d")
+                to_date = datetime.strptime(to_date, "%Y-%m-%d")
 
-        try:
-            from_date = datetime.strptime(from_date, "%Y-%m-%d")
-            to_date = datetime.strptime(to_date, "%Y-%m-%d")
-        except ValueError:
-            return error_wrapper(400, "FromDate and ToDate must be in the format YYYY-MM-DD.")
+        if attendance_type:
+            attendance_type_id = req.env["spp.attendance.type"].sudo().search([("name", "=", attendance_type)], limit=1)
+            if not attendance_type_id:
+                return error_wrapper(400, "Attendance Type does not exist.")
 
-        if from_date > to_date:
-            return error_wrapper(400, "FromDate must be less than or equal to ToDate.")
+        domain = []
+        if from_date and to_date:
+            domain += [("attendance_date", ">=", from_date), ("attendance_date", "<=", to_date)]
+        if attendance_type_id:
+            domain += [("attendance_type_id", "=", attendance_type_id.id)]
 
-        attendance_list_ids = (
-            req.env["spp.attendance.list"]
-            .sudo()
-            .search([("attendance_date", ">=", from_date), ("attendance_date", "<=", to_date)])
-        )
+        attendance_list_ids = req.env["spp.attendance.list"].sudo().search(domain)
 
         subscriber_ids = attendance_list_ids.mapped("subscriber_id")
 
