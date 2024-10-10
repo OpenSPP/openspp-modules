@@ -1,4 +1,3 @@
-from odoo import fields
 from odoo.tests.common import TransactionCase
 
 
@@ -25,10 +24,11 @@ class TestManualEntitlement(TransactionCase):
         membership_vals = {
             "partner_id": cls.registrant_1.id,
             "program_id": cls.program.id,
-            "state": "enrolled",
-            "enrollment_date": fields.Datetime.now(),
         }
+
         cls.env["g2p.program_membership"].create(membership_vals)
+        cls.program.verify_eligibility()
+        cls.program.enroll_eligible_registrants()
         cls.program.create_new_cycle()
 
     def set_cycle(self):
