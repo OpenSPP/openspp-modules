@@ -415,58 +415,6 @@ class SppGisApiController(Controller):
         )
 
     @route(
-        "/attendance/ids",
-        type="http",
-        auth="none",
-        methods=["GET"],
-        csrf=False,
-    )
-    def present_subscriber(self, **kwargs):
-        req = request
-        if not verify_auth_header():
-            return error_wrapper(401, "Unauthorized")
-
-        data = req.httprequest.data or "{}"
-        try:
-            data = json.loads(data)
-        except json.decoder.JSONDecodeError:
-            return error_wrapper(400, "data must be in JSON format.")
-
-        from_date = kwargs.get("from_date", None)
-        to_date = kwargs.get("to_date", None)
-        attendance_type = kwargs.get("attendance_type", None)
-        attendance_type_id = None
-
-        if from_date and to_date:
-            if date_error_message := validate_date(from_date, to_date):
-                return error_wrapper(400, date_error_message)
-            else:
-                from_date = datetime.strptime(from_date, "%Y-%m-%d")
-                to_date = datetime.strptime(to_date, "%Y-%m-%d")
-
-        if attendance_type:
-            attendance_type_id = req.env["spp.attendance.type"].sudo().search([("name", "=", attendance_type)], limit=1)
-            if not attendance_type_id:
-                return error_wrapper(400, "Attendance Type does not exist.")
-
-        domain = []
-        if from_date and to_date:
-            domain += [("attendance_date", ">=", from_date), ("attendance_date", "<=", to_date)]
-        if attendance_type_id:
-            domain += [("attendance_type_id", "=", attendance_type_id.id)]
-
-        attendance_list_ids = req.env["spp.attendance.list"].sudo().search(domain)
-
-        subscriber_ids = attendance_list_ids.mapped("subscriber_id")
-
-        return response_wrapper(
-            200,
-            {
-                "person_ids": subscriber_ids.mapped("person_identifier"),
-            },
-        )
-
-    @route(
         "/attendance/types",
         type="http",
         auth="none",
