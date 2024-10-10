@@ -16,6 +16,7 @@
     "depends": ["base", "mail", "g2p_registry_base", "g2p_registry_individual", "g2p_registry_group"],
     "data": [
         "data/grm_data.xml",
+        "data/mail_alias.xml",
         "security/grm_security.xml",
         "security/ir.model.access.csv",
         "views/res_partner_views.xml",

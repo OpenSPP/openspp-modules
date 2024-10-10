@@ -73,6 +73,9 @@
         <record id="grm_ticket_channel_web" model="spp.grm.ticket.channel">
             <field name="name">Web</field>
         </record>
+        <record id="grm_ticket_channel_email" model="spp.grm.ticket.channel">
+            <field name="name">Email</field>
+        </record>
         <record id="grm_ticket_channel_other" model="spp.grm.ticket.channel">
             <field name="name">Other</field>
         </record>

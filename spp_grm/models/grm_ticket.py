@@ -1,4 +1,5 @@
 import logging
+from email.utils import parseaddr
 
 from odoo import api, fields, models
 
@@ -12,7 +13,76 @@ class SPPGRMTicket(models.Model):
     _rec_names_search = ["number", "name"]
     _order = "priority desc, sequence, number desc, id desc"
     _mail_post_access = "read"
-    _inherit = ["mail.thread.cc", "mail.activity.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin"]
+
+    @api.model
+    def message_new(self, msg_dict, custom_values=None):
+        """Create a new ticket from an inbound email"""
+        _logger.debug("Creating new ticket from email")
+        # Extract values from the email
+        subject = msg_dict.get("subject") or "No Subject"
+        body = msg_dict.get("body") or "No Content"
+        email_from = msg_dict.get("email_from")
+        email_address = parseaddr(email_from)[1]
+        _logger.debug(f"Email from: {email_address}")
+        # TODO: What to do if the registrant is a group?
+        partner = self.env["res.partner"].search([("email", "=", email_address)], limit=1)
+        if not partner:
+            self._send_custom_error_notification(email_address, subject, email_from)
+            _logger.warning(
+                "No matching registrant found for email: %s. Email processed but a ticket is not created."
+                % email_address
+            )
+
+        # Prepare default values for the new ticket
+        vals = {
+            "name": subject,
+            "description": body,
+            "partner_id": partner.id if partner else False,
+            "partner_email": email_from,
+            "channel_id": self.env.ref("spp_grm.grm_ticket_channel_email").id,
+            "priority": "1",  # Default priority
+        }
+
+        if custom_values:
+            vals.update(custom_values)
+
+        # Create the new GRM ticket
+        ticket = super().message_new(msg_dict, custom_values=vals)
+        if ticket:
+            _logger.info(f"New ticket created from email: {ticket.number}")
+        else:
+            _logger.info("No ticket was created from email.")
+        return ticket
+
+    def message_update(self, msg_dict, update_vals=None):
+        """Update an existing ticket from an inbound email reply"""
+        res = super().message_update(msg_dict, update_vals=update_vals)
+        _logger.info(f"Ticket {self.number} updated from email")
+        return res
+
+    def _send_custom_error_notification(self, email_address, subject, email_from):
+        """Send a custom email notification to the sender of the email if no registrant is found.
+        :param email_address: The email address of the sender
+        :param subject: The subject of the email
+        :param email_from: The email address of the recipient
+        """
+        mail_values = {
+            "subject": subject,
+            "body_html": """
+                <p>Dear Sender,</p>
+                <p>We could not process your request because your email address <strong>%s</strong> is not
+                in our record of registrants.</p>
+                <p>Kind Regards</p>
+            """
+            % email_address,
+            "email_to": email_address,
+            "email_from": email_from,
+        }
+
+        # Send the email
+        mail = self.env["mail.mail"].create(mail_values)
+        mail.send()
 
     def _default_stage_id(self):
         stages = self.env["spp.grm.ticket.stage"].search([])
@@ -107,12 +177,17 @@ class SPPGRMTicket(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if vals.get("number", "/") == "/":
-                vals["number"] = self._prepare_ticket_number()
-            _logger.debug(f"Creating ticket {vals['number']}")
-            if vals.get("user_id") and not vals.get("assigned_date"):
-                vals["assigned_date"] = fields.Datetime.now()
-        return super().create(vals_list)
+            proceed = True
+            if not vals.get("partner_id"):
+                proceed = False
+            else:
+                if vals.get("number", "/") == "/":
+                    vals["number"] = self._prepare_ticket_number()
+                _logger.debug(f"Creating ticket {vals['number']}")
+                if vals.get("user_id") and not vals.get("assigned_date"):
+                    vals["assigned_date"] = fields.Datetime.now()
+        if proceed:
+            return super().create(vals_list)
 
     def copy(self, default=None):
         self.ensure_one()
