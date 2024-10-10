@@ -12,6 +12,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "base",
+        "web",
     ],
     "external_dependencies": {"python": ["Pillow>=10.3.0"]},
     "data": [
@@ -23,7 +24,10 @@
         "views/dms_category_views.xml",
     ],
     "assets": {
-        "web.assets_backend": [],
+        "web.assets_backend": [
+            "spp_dms/static/src/js/preview_binary_field.esm.js",
+            "spp_dms/static/src/xml/preview_binary_field.xml",
+        ],
     },
     "demo": [],
     "images": [],
