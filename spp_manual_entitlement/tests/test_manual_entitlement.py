@@ -3,7 +3,6 @@ from odoo.tests.common import TransactionCase
 
 
 class TestManualEntitlement(TransactionCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -14,10 +13,12 @@ class TestManualEntitlement(TransactionCase):
                 "is_group": True,
             }
         )
-        cls.program_wizard = cls.env["g2p.program.create.wizard"].create({
-            "name": "Program 1 [MANUAL ENTITLEMENT TEST]",
-            "entitlement_kind": "manual_cash",
-        })
+        cls.program_wizard = cls.env["g2p.program.create.wizard"].create(
+            {
+                "name": "Program 1 [MANUAL ENTITLEMENT TEST]",
+                "entitlement_kind": "manual_cash",
+            }
+        )
         cls.program_wizard.create_program()
         cls.program = cls.env["g2p.program"].search([("name", "=", "Program 1 [MANUAL ENTITLEMENT TEST]")])
 
@@ -48,13 +49,10 @@ class TestManualEntitlement(TransactionCase):
             {
                 "cycle_id": cycle.id,
                 "step": "step1",
-                "cycle_membership_ids": [(0, 0, {
-                    "partner_id": self.registrant_1.id,
-                    "entitlement_amount": 100,
-                    "selected": True
-                })],
+                "cycle_membership_ids": [
+                    (0, 0, {"partner_id": self.registrant_1.id, "entitlement_amount": 100, "selected": True})
+                ],
             }
         )
         wizard.create_entitlement()
         self.assertTrue(wizard.search_existing_entitlement(self.registrant_1.id), "Correct value")
-
