@@ -22,6 +22,8 @@ class MembershipTest(TransactionCase):
                 "is_registrant": True,
                 "farmer_family_name": "Butay",
                 "farmer_given_name": "Red",
+                "farmer_mobile_tel": "09123456789",
+                "farmer_national_id": "1122334455",
             }
         )
 
