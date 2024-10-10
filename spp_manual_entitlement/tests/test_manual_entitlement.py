@@ -181,7 +181,7 @@ class TestManualEntitlement(TransactionCase):
         csv_file = None
         csv_file_name = None
 
-        file_path = self.get_file_path_1()
+        file_path = self.get_file_path_2()
         with open(file_path, "rb") as f:
             csv_file_name = f.name
             csv_file = base64.b64encode(f.read())
