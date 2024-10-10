@@ -154,7 +154,7 @@ class SppGisApiController(Controller):
         return response_wrapper(200, data)
 
     @route(
-        "/attendance",
+        "/attendances",
         type="http",
         auth="none",
         methods=["POST"],
@@ -491,6 +491,7 @@ class SppGisApiController(Controller):
             {
                 "records": [
                     {
+                        "id": attendance_type.id,
                         "attendance_type_name": attendance_type.name,
                         "attendance_type_description": attendance_type.description,
                     }
