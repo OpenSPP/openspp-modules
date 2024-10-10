@@ -16,3 +16,9 @@ access_spp_grm_ticket_stage_base_user,GRM Ticket Stage Base User Access,model_sp
 access_spp_grm_ticket_tag_base_user,GRM Ticket Tags Base User Access,model_spp_grm_ticket_tag,base.group_user,1,1,1,0
 access_spp_grm_ticket_channel_base_user,GRM Ticket Channels Base User Access,model_spp_grm_ticket_channel,base.group_user,1,0,0,0
 access_spp_grm_ticket_category_base_user,GRM Ticket Category Base User Access,model_spp_grm_ticket_category,base.group_user,1,0,0,0
+
+access_spp_grm_ticket_portal_user,GRM Ticket Portal User Access,model_spp_grm_ticket,base.group_portal,1,1,1,0
+access_spp_grm_ticket_stage_portal_user,GRM Ticket Stage Portal User Access,model_spp_grm_ticket_stage,base.group_portal,1,0,0,0
+access_spp_grm_ticket_tag_portal_user,GRM Ticket Tags Portal User Access,model_spp_grm_ticket_tag,base.group_portal,1,1,1,0
+access_spp_grm_ticket_channel_portal_user,GRM Ticket Channels Portal User Access,model_spp_grm_ticket_channel,base.group_portal,1,0,0,0
+access_spp_grm_ticket_category_portal_user,GRM Ticket Category Portal User Access,model_spp_grm_ticket_category,base.group_portal,1,0,0,0

@@ -221,3 +221,8 @@ class SPPGRMTicket(models.Model):
     def _prepare_ticket_number(self):
         # Generate ticket number
         return self.env["ir.sequence"].next_by_code("spp.grm.ticket.sequence")
+
+    def get_portal_url(self):
+        """Get the URL for the ticket's portal page."""
+        self.ensure_one()
+        return "/my/tickets/%s" % self.id

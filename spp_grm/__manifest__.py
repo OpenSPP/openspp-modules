@@ -13,7 +13,7 @@
     "category": "OpenSPP",
     "external_dependencies": {"python": []},
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["base", "mail", "g2p_registry_base", "g2p_registry_individual", "g2p_registry_group"],
+    "depends": ["base", "mail", "portal", "g2p_registry_base", "g2p_registry_individual", "g2p_registry_group"],
     "data": [
         "data/grm_data.xml",
         "data/mail_alias.xml",
@@ -26,6 +26,7 @@
         "views/grm_ticket_channel_views.xml",
         "views/grm_ticket_tag_views.xml",
         "views/grm_ticket_views.xml",
+        "views/grm_portal_templates.xml",
     ],
     "assets": {},
     "demo": [],
