@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_config_settings_programs_view_form" model="ir.ui.view">
+        <field name="name">res_config_settings_programs_view_form</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='program_settings']/block/setting" position="after">
+                <setting string="Authentication URL">
+                    <field name="attendance_auth_url" />
+                </setting>
+                <setting string="Client ID">
+                    <field name="attendance_client_id" />
+                </setting>
+                <setting string="Client Secret">
+                    <field name="attendance_client_secret" />
+                </setting>
+                <setting string="Compliance URL">
+                    <field name="attendance_compliance_url" />
+                </setting>
+                <!-- <setting string="Result Mapping">
+                    <field name="result_mapping" />
+                </setting> -->
+                <button
+                    name="test_connection"
+                    type="object"
+                    icon="fa-check-square-o"
+                    title="Test Compliance URL"
+                    class="btn-success"
+                    style="margin-left: 10px;"
+                    string="Test Compliance URL"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
