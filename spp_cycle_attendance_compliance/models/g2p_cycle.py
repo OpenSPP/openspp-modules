@@ -57,11 +57,11 @@ class G2pCycle(models.Model):
 
         params = {"limit": max(len(registrant_satisfied), 30)}
         if self.from_date:
-            params["FromDate"] = self.from_date
+            params["from_date"] = self.from_date
         if self.to_date:
-            params["ToDate"] = self.to_date
+            params["to_date"] = self.to_date
         if self.attendance_type:
-            params["AttendanceType"] = self.attendance_type
+            params["attendance_type"] = self.attendance_type
 
         full_attendance_compliance_url = urljoin(attendance_compliance_url, "?" + urlencode(params))
         response = requests.get(full_attendance_compliance_url, headers=header, data=data)
