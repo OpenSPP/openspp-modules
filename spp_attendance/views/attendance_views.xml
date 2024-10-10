@@ -31,6 +31,7 @@
                                     <field name="attendance_type_id" />
                                     <field name="attendance_location" />
                                     <field name="attendance_description" />
+                                    <field name="attendance_external_url" />
                                     <field name="submitted_by" />
                                     <field name="submitted_date" />
                                 </tree>

@@ -102,19 +102,19 @@ class AttendanceSubscriber(models.Model):
         )
 
         return total_attendances, {
-            "PersonID": self.person_identifier,
-            "DatesPresent": number_of_days_present,
-            "NumberofDaysPresent": len(number_of_days_present),
-            "AttendanceList": [
+            "person_id": self.person_identifier,
+            "dates_present": number_of_days_present,
+            "number_of_days_present": len(number_of_days_present),
+            "attendance_list": [
                 {
-                    "Date": attendance.attendance_date,
-                    "Time": attendance.attendance_time,
-                    "AttendanceType": attendance.attendance_type_id.name if attendance.attendance_type_id else "",
-                    "AttendanceLocation": attendance.attendance_location,
-                    "AttendanceDescription": attendance.attendance_description or "",
-                    "AttendanceExternalURL": attendance.attendance_external_url or "",
-                    "SubmittedBy": attendance.submitted_by,
-                    "SubmittedDate": attendance.submitted_date,
+                    "date": attendance.attendance_date,
+                    "time": attendance.attendance_time,
+                    "attendance_type": attendance.attendance_type_id.name if attendance.attendance_type_id else "",
+                    "attendance_location": attendance.attendance_location,
+                    "attendance_description": attendance.attendance_description or "",
+                    "attendance_external_url": attendance.attendance_external_url or "",
+                    "submitted_by": attendance.submitted_by,
+                    "submitted_date": attendance.submitted_date,
                 }
                 for attendance in attendance_list_ids
             ],

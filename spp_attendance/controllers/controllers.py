@@ -99,7 +99,7 @@ def validate_date(from_date, to_date):
 
 class SppGisApiController(Controller):
     @route(
-        "/api/attendance/oauth2/client/token",
+        "/auth/token",
         type="http",
         auth="none",
         methods=["POST"],
@@ -125,7 +125,7 @@ class SppGisApiController(Controller):
         if not all([client_id, client_secret]):
             error = {
                 "error": "Bad Request",
-                "error_description": "client_id and client_secret are required.",
+                "error_description": ("client_id and client_secret are required."),
             }
             return response_wrapper(400, error)
 
@@ -154,7 +154,7 @@ class SppGisApiController(Controller):
         return response_wrapper(200, data)
 
     @route(
-        "/api/attendance/list/create",
+        "/attendance",
         type="http",
         auth="none",
         methods=["POST"],
@@ -171,87 +171,97 @@ class SppGisApiController(Controller):
         except json.decoder.JSONDecodeError:
             return error_wrapper(400, "data must be in JSON format.")
 
-        missing_required_fields = check_required_fields(data, ["TimeCard", "PersonID", "SubmittedBy"])
-
-        if missing_required_fields:
+        if missing_required_fields := check_required_fields(data, ["records", "submitted_by", "submitted_date"]):
             return error_wrapper(400, f"Missing required fields: {', '.join(missing_required_fields)}")
 
-        person_identifier = data.get("PersonID")
-        subscriber_id = (
-            req.env["spp.attendance.subscriber"].sudo().search([("person_identifier", "=", person_identifier)], limit=1)
-        )
-        if not subscriber_id:
-            return error_wrapper(400, "PersonID does not exist.")
-
         current_date = datetime.now().strftime("%Y-%m-%d")
-        submitted_date = data.get("SubmittedDate", current_date)
+        submitted_date = data.get("submitted_date", current_date)
+        submitted_by = data.get("submitted_by")
 
-        submitted_by = data.get("SubmittedBy")
+        attendance_list_data = []
+        person_id_list = []
 
-        time_cards = data.get("TimeCard")
-        for time_card in time_cards:
-            missing_required_fields = check_required_fields(
-                time_card, ["DateTime", "AttendanceLocation", "AttendanceType"]
+        for person_data in data["records"]:
+            if missing_required_fields := check_required_fields(person_data, ["time_card", "person_id"]):
+                return error_wrapper(400, f"Missing required fields: {', '.join(missing_required_fields)}")
+
+            person_id = person_data.get("person_id")
+            subscriber_id = (
+                req.env["spp.attendance.subscriber"].sudo().search([("person_identifier", "=", person_id)], limit=1)
             )
-            if missing_required_fields:
-                return error_wrapper(400, f"Missing required fields for TimeCard: {', '.join(missing_required_fields)}")
+            if not subscriber_id:
+                return error_wrapper(400, "person_id does not exist.")
 
-            attendance_datetime = time_card.get("DateTime")
-            attendance_datetime = datetime.strptime(attendance_datetime, "%Y-%m-%d %H:%M:%S")
-
-            attendance_date = str(attendance_datetime.date())
-            attendance_time = str(attendance_datetime.time())
-
-            if check_date_time_exists(attendance_date, attendance_time, subscriber_id):
-                return error_wrapper(
-                    400,
-                    _("Attendance list already exists for the date %(date)s and time %(time)s.")
-                    % {"date": attendance_date, "time": attendance_time},
+            time_cards = person_data.get("time_card")
+            for time_card in time_cards:
+                missing_required_fields = check_required_fields(
+                    time_card, ["date_time", "attendance_location", "attendance_type"]
                 )
+                if missing_required_fields:
+                    return error_wrapper(
+                        400, f"Missing required fields for time_card: {', '.join(missing_required_fields)}"
+                    )
 
-            attendance_type_id = False
-            attendance_type = time_card.get("AttendanceType")
+                attendance_datetime = time_card.get("date_time")
+                attendance_datetime = datetime.strptime(attendance_datetime, "%Y-%m-%d %H:%M:%S")
 
-            if attendance_type:
-                attendance_type_id = (
-                    req.env["spp.attendance.type"].sudo().search([("name", "=", attendance_type)], limit=1)
-                )
+                attendance_date = str(attendance_datetime.date())
+                attendance_time = str(attendance_datetime.time())
 
-                if not attendance_type_id:
-                    attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).mapped("name")
-                    if attendance_type_ids:
-                        available_types = ", ".join(attendance_type_ids)
-                        error_message = (
-                            f"Attendance Type does not exist. Available Attendance Types: {available_types}. "
-                            "Leave it blank if desired type is not existing."
+                if check_date_time_exists(attendance_date, attendance_time, subscriber_id):
+                    return error_wrapper(
+                        400,
+                        _(
+                            "Attendance list already exists "
+                            + "for the date %(date)s and time %(time)s for %(person_identifier)s."
                         )
-                    else:
-                        error_message = "Attendance Type does not exist. Leave it blank."
-                    return error_wrapper(400, error_message)
+                        % {"date": attendance_date, "time": attendance_time, "person_identifier": person_id},
+                    )
 
-            attendance_location = time_card.get("AttendanceLocation")
-            attendance_description = time_card.get("AttendanceDescription", "")
-            attendance_external_url = time_card.get("AttendanceExternalURL", "")
-            req.env["spp.attendance.list"].sudo().create(
-                {
-                    "subscriber_id": subscriber_id.id,
-                    "attendance_date": attendance_date,
-                    "attendance_time": attendance_time,
-                    "attendance_type_id": attendance_type_id.id if attendance_type_id else False,
-                    "attendance_location": attendance_location,
-                    "attendance_description": attendance_description,
-                    "attendance_external_url": attendance_external_url,
-                    "submitted_by": submitted_by,
-                    "submitted_date": submitted_date,
-                }
-            )
+                attendance_type_id = False
+                attendance_type = time_card.get("attendance_type")
 
-        return response_wrapper(
-            200, {"message": "Attendance list created successfully.", "PersonID": person_identifier}
-        )
+                if attendance_type:
+                    attendance_type_id = (
+                        req.env["spp.attendance.type"].sudo().search([("name", "=", attendance_type)], limit=1)
+                    )
+
+                    if not attendance_type_id:
+                        attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).mapped("name")
+                        if attendance_type_ids:
+                            available_types = ", ".join(attendance_type_ids)
+                            error_message = (
+                                f"Attendance Type does not exist. Available Attendance Types: {available_types}. "
+                                "Leave it blank if desired type is not existing."
+                            )
+                        else:
+                            error_message = "Attendance Type does not exist. Leave it blank."
+                        return error_wrapper(400, error_message)
+
+                attendance_location = time_card.get("attendance_location")
+                attendance_description = time_card.get("attendance_description", "")
+                attendance_external_url = time_card.get("attendance_external_url", "")
+                attendance_list_data.append(
+                    {
+                        "subscriber_id": subscriber_id.id,
+                        "attendance_date": attendance_date,
+                        "attendance_time": attendance_time,
+                        "attendance_type_id": attendance_type_id.id if attendance_type_id else False,
+                        "attendance_location": attendance_location,
+                        "attendance_description": attendance_description,
+                        "attendance_external_url": attendance_external_url,
+                        "submitted_by": submitted_by,
+                        "submitted_date": submitted_date,
+                    }
+                )
+                person_id_list.append(person_id)
+
+        req.env["spp.attendance.list"].sudo().create(attendance_list_data)
+
+        return response_wrapper(200, {"message": "Attendance list created successfully.", "person_ids": person_id_list})
 
     @route(
-        "/api/attendance/list/<string:person_identifier>",
+        "/attendance/<string:person_identifier>",
         type="http",
         auth="none",
         methods=["GET"],
@@ -273,7 +283,7 @@ class SppGisApiController(Controller):
         )
 
         if not subscriber_id:
-            return error_wrapper(400, "PersonID does not exist.")
+            return error_wrapper(400, f"PersonID {person_identifier} does not exist.")
 
         if page_limit_error_message := validate_page_and_limit(page, limit):
             return error_wrapper(400, page_limit_error_message)
@@ -282,9 +292,9 @@ class SppGisApiController(Controller):
         limit = int(limit)
         offset = (page - 1) * limit
 
-        from_date = kwargs.get("FromDate", None)
-        to_date = kwargs.get("ToDate", None)
-        attendance_type = kwargs.get("AttendanceType", None)
+        from_date = kwargs.get("from_date", None)
+        to_date = kwargs.get("to_date", None)
+        attendance_type = kwargs.get("attendance_type", None)
         attendance_type_id = None
 
         if from_date and to_date:
@@ -297,6 +307,11 @@ class SppGisApiController(Controller):
         if attendance_type:
             attendance_type_id = req.env["spp.attendance.type"].sudo().search([("name", "=", attendance_type)], limit=1)
             if not attendance_type_id:
+                attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).mapped("name")
+                if attendance_type_ids:
+                    available_types = ", ".join(attendance_type_ids)
+                    error_message = f"Attendance Type does not exist. Available Attendance Types: {available_types}."
+                    return error_wrapper(400, error_message)
                 return error_wrapper(400, "Attendance Type does not exist.")
 
         total_attendance, attendance_record = subscriber_id.get_attendance_list(
@@ -319,7 +334,7 @@ class SppGisApiController(Controller):
         )
 
     @route(
-        "/api/attendance/list",
+        "/attendances",
         type="http",
         auth="none",
         methods=["GET"],
@@ -343,9 +358,9 @@ class SppGisApiController(Controller):
         limit = int(limit)
         offset = (page - 1) * limit
 
-        from_date = kwargs.get("FromDate", None)
-        to_date = kwargs.get("ToDate", None)
-        attendance_type = kwargs.get("AttendanceType", None)
+        from_date = kwargs.get("from_date", None)
+        to_date = kwargs.get("to_date", None)
+        attendance_type = kwargs.get("attendance_type", None)
         attendance_type_id = None
 
         if from_date and to_date:
@@ -358,11 +373,22 @@ class SppGisApiController(Controller):
         if attendance_type:
             attendance_type_id = req.env["spp.attendance.type"].sudo().search([("name", "=", attendance_type)], limit=1)
             if not attendance_type_id:
+                attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).mapped("name")
+                if attendance_type_ids:
+                    available_types = ", ".join(attendance_type_ids)
+                    error_message = f"Attendance Type does not exist. Available Attendance Types: {available_types}."
+                    return error_wrapper(400, error_message)
                 return error_wrapper(400, "Attendance Type does not exist.")
 
+        domain = []
+
+        person_identifier_list = data.get("person_ids", [])
+        if person_identifier_list:
+            domain.append(("person_identifier", "in", person_identifier_list))
+
         subscriber_model = request.env["spp.attendance.subscriber"].sudo()
-        subscriber_ids = subscriber_model.search([], offset=offset, limit=limit, order="id")
-        total_records = subscriber_model.search_count([])
+        subscriber_ids = subscriber_model.search(domain, offset=offset, limit=limit, order="id")
+        total_records = subscriber_model.search_count(domain)
 
         records = []
         for subscriber_id in subscriber_ids:
@@ -389,7 +415,7 @@ class SppGisApiController(Controller):
         )
 
     @route(
-        "/api/present/subscriber",
+        "/attendance/ids",
         type="http",
         auth="none",
         methods=["GET"],
@@ -406,9 +432,9 @@ class SppGisApiController(Controller):
         except json.decoder.JSONDecodeError:
             return error_wrapper(400, "data must be in JSON format.")
 
-        from_date = kwargs.get("FromDate", None)
-        to_date = kwargs.get("ToDate", None)
-        attendance_type = kwargs.get("AttendanceType", None)
+        from_date = kwargs.get("from_date", None)
+        to_date = kwargs.get("to_date", None)
+        attendance_type = kwargs.get("attendance_type", None)
         attendance_type_id = None
 
         if from_date and to_date:
@@ -436,6 +462,40 @@ class SppGisApiController(Controller):
         return response_wrapper(
             200,
             {
-                "PersonID": subscriber_ids.mapped("person_identifier"),
+                "person_ids": subscriber_ids.mapped("person_identifier"),
+            },
+        )
+
+    @route(
+        "/attendance/types",
+        type="http",
+        auth="none",
+        methods=["GET"],
+        csrf=False,
+    )
+    def get_attendance_types(self):
+        req = request
+        if not verify_auth_header():
+            return error_wrapper(401, "Unauthorized")
+
+        data = req.httprequest.data or "{}"
+        try:
+            data = json.loads(data)
+        except json.decoder.JSONDecodeError:
+            return error_wrapper(400, "data must be in JSON format.")
+
+        attendance_type_ids = req.env["spp.attendance.type"].sudo().search([])
+
+        return response_wrapper(
+            200,
+            {
+                "records": [
+                    {
+                        "attendance_type_name": attendance_type.name,
+                        "attendance_type_description": attendance_type.description,
+                    }
+                    for attendance_type in attendance_type_ids
+                ],
+                "attendance_types": attendance_type_ids.mapped("name"),
             },
         )
