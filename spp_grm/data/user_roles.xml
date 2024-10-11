@@ -11,7 +11,7 @@
             eval="
             [
                 Command.link(ref('base.group_user')),
-                Command.link(ref('group_grm_manager')),
+                Command.link(ref('spp_grm.group_grm_manager')),
                 Command.link(ref('g2p_registry_base.group_g2p_registrar')),
             ]"
         />
@@ -29,7 +29,7 @@
             eval="
             [
                 Command.link(ref('base.group_user')),
-                Command.link(ref('group_grm_user')),
+                Command.link(ref('spp_grm.group_grm_user')),
                 Command.link(ref('g2p_registry_base.group_g2p_registrar')),
             ]"
         />
@@ -47,7 +47,7 @@
             eval="
             [
                 Command.link(ref('base.group_user')),
-                Command.link(ref('group_grm_user')),
+                Command.link(ref('spp_grm.group_grm_user')),
                 Command.link(ref('g2p_registry_base.group_g2p_registrar')),
             ]"
         />

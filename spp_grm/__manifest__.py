@@ -26,9 +26,9 @@
     "data": [
         "data/grm_data.xml",
         "data/mail_alias.xml",
-        "data/user_roles.xml",
         "security/grm_security.xml",
         "security/ir.model.access.csv",
+        "data/user_roles.xml",
         "views/res_partner_views.xml",
         "views/grm_ticket_menu.xml",
         "views/grm_ticket_stage_views.xml",
