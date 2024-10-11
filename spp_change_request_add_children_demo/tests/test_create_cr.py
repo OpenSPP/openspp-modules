@@ -72,8 +72,8 @@ class ChangeRequestAddChildrenDemoTest(TransactionCase):
             gender = self.env["gender.type"].search([])[0]
 
         return {
-            "full_name": "Test Farmer",
-            "family_name": "Farmer",
+            "full_name": "Test Child",
+            "family_name": "Child",
             "given_name": "Test",
             "addl_name": "Jr",
             "applicant_relation": "mother",
@@ -210,6 +210,18 @@ class ChangeRequestAddChildrenDemoTest(TransactionCase):
         self.env["spp.dms.file"].create(vals)
         self.res_id.update_live_data()
 
-        individual_id = self.env["res.partner"].search([("name", "=", "Test Farmer")])
+        individual_id = self.env["res.partner"].search([("name", "=", "Test Child")])
         self.assertFalse(individual_id.phone_number_ids, "Should not have phone number!")
         self.assertFalse(individual_id.reg_ids, "Should not have registrant ID!")
+
+    def test_06_create_request_detail_demo(self):
+        change_request = self.env["spp.change.request"].create(
+            {
+                "request_type": "spp.change.request.add.children",
+                "registrant_id": self.group.id,
+                "applicant_id": self.individual.id,
+                "applicant_phone": "09123456789",
+            }
+        )
+        change_request.create_request_detail_demo()
+        self.assertTrue(change_request.request_type_ref_id, "Request Type Reference ID not set!")
