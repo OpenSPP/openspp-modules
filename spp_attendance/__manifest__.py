@@ -6,7 +6,7 @@
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "development_status": "Production/Stable",
+    "development_status": "Alpha",
     "maintainers": ["reichie020212"],
     "depends": ["base", "spp_oauth"],
     "external_dependencies": {"python": ["pytz"]},
