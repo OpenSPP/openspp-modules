@@ -1,6 +1,6 @@
 <odoo noupdate="0">
     <!-- Customize the spp_user_roles Global Registrar role -->
-    <record id="global_role_registrar" model="res.users.role">
+    <record id="spp_user_roles.global_role_registrar" model="res.users.role">
         <field
             name="implied_ids"
             eval="
