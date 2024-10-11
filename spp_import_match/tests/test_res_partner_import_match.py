@@ -34,12 +34,12 @@ class TestResPartnerImportMatch(TransactionCase):
         return f"{os.path.dirname(os.path.abspath(__file__))}/res_partner_group_name.csv"
 
     @staticmethod
-    def get_file_path_excel_1():
-        return f"{os.path.dirname(os.path.abspath(__file__))}/res_partner_group_name.xls"
-
-    @staticmethod
     def get_file_path_2():
         return f"{os.path.dirname(os.path.abspath(__file__))}/res_partner_name.csv"
+
+    @staticmethod
+    def get_file_path_3():
+        return f"{os.path.dirname(os.path.abspath(__file__))}/res_partner_group_async.csv"
 
     def setUp(self):
         super().setUp()
@@ -125,3 +125,12 @@ class TestResPartnerImportMatch(TransactionCase):
         record.execute_import(["name", "email"], ["name", "email"], OPTIONS)
         self._test_hh.env.cache.invalidate()
         self.assertEqual(self._test_hh.email, "renaudhh@gmail.com")
+
+    def test_03_res_partner_group_async(self):
+        """Trigger Async."""
+        file_path = self.get_file_path_3()
+        record = self._base_import_record("res.partner", file_path)
+
+        async_rec = record.execute_import(["name", "email"], ["name", "email"], OPTIONS)
+        self._test_hh.env.cache.invalidate()
+        self.assertEqual(async_rec["async"], True)
