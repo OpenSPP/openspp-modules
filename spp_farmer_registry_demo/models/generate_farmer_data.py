@@ -61,8 +61,7 @@ class SPPGenerateFarmerData(models.Model):
         batches = math.ceil(self.num_groups / 1000)
 
         for _ in range(0, batches):
-            # self.with_delay()._generate_sample_data(res_id=self.id)
-            self._generate_sample_data(res=self)
+            self.with_delay()._generate_sample_data(res=self)
 
     @api.model
     def _generate_sample_data(self, **kwargs):
