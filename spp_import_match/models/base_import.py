@@ -75,7 +75,6 @@ class SPPBaseImport(models.TransientModel):
             self._cr.execute("ROLLBACK TO SAVEPOINT import")
             self.pool.clear_all_caches()
             self.pool.reset_changes()
-            _logger.info(f"import_result: {import_result}")
             return import_result
 
         if dryrun or not len(input_file_data) > 100:
