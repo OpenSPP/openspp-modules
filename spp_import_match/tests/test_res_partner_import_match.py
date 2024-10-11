@@ -134,3 +134,12 @@ class TestResPartnerImportMatch(TransactionCase):
         async_rec = record.execute_import(["name", "email"], ["name", "email"], OPTIONS)
         self._test_hh.env.cache.invalidate()
         self.assertEqual(async_rec["async"], True)
+
+    def test_04_res_partner_group_async_dryrun(self):
+        """Trigger Async."""
+        file_path = self.get_file_path_3()
+        record = self._base_import_record("res.partner", file_path)
+
+        async_rec = record.execute_import(["name", "email"], ["name", "email"], OPTIONS, True)
+        self._test_hh.env.cache.invalidate()
+        self.assertTrue(async_rec, "Result should have value")
