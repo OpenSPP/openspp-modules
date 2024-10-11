@@ -1,6 +1,8 @@
 import logging
 import os
 
+from odoo import _
+from odoo.exceptions import ValidationError
 from odoo.tests import TransactionCase
 
 _logger = logging.getLogger(__name__)
@@ -143,3 +145,29 @@ class TestResPartnerImportMatch(TransactionCase):
         async_rec = record.execute_import(["name", "email"], ["name", "email"], OPTIONS, True)
         self._test_hh.env.cache.invalidate()
         self.assertTrue(async_rec, "Result should have value")
+
+    def test_05_check_duplication_on_import_match_config(self):
+        """Check duplication on import match config."""
+        import_match = self.create_matching_name()
+        with self.assertRaisesRegex(ValidationError, _("Field 'Name', already exists!")):
+            import_match.write(
+                {
+                    "field_ids": [
+                        (0, 0, {"field_id": import_match.field_ids[0].field_id.id, "match_id": import_match.id})
+                    ]
+                }
+            )
+            import_match.field_ids[0]._onchange_field_id()
+
+        self.assertEqual(len(import_match.field_ids), 2)
+
+    def test_06_test_match_find(self):
+        """Test match find."""
+        import_match = self.create_matching_name()
+        import_match.field_ids[0].imported_value = "Rufin Renaud"
+        import_match.field_ids[0].conditional = True
+        result = import_match._match_find(
+            import_match.model_id, {"name": "Rufino Renaud"}, {"name": "Rufino Renaud", "id": None}
+        )
+
+        self.assertEqual(result, import_match.model_id)
