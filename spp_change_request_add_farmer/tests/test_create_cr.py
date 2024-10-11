@@ -1,7 +1,7 @@
 import base64
 import os
 
-from odoo import Command
+from odoo import Command, _
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
@@ -130,3 +130,101 @@ class ChangeRequestAddFarmerTest(TransactionCase):
             "applied",
             "CR should now be in Applied!",
         )
+        open_form = self.res_id.open_registrant_details_form()
+        self.assertEqual(
+            open_form["name"],
+            _("Group Details"),
+            "Incorrect Name!",
+        )
+
+    def test_03_validate_cr_with_invalid_data(self):
+        reg_vals = {
+            "birth_place": "Hometown",
+            "birthdate_not_exact": True,
+            "image_1920": None,
+            "experience_years": 2,
+            "formal_agricultural_training": True,
+            "farmer_national_id": "1234567890",
+            "farmer_household_size": 5,
+            "farmer_postal_address": "123 Main St",
+            "marital_status": "single",
+            "highest_education_level": "primary",
+            "phone": "09123456789",
+            "uid_number": "123456789125",
+        }
+        self.res_id.write(reg_vals)
+
+        file_path = f"{os.path.dirname(os.path.abspath(__file__))}/sample_document.jpeg"
+        with open(file_path, "rb") as f:
+            filename = f.name
+            file = base64.b64encode(f.read())
+
+        vals = {
+            "content": file,
+            "name": filename,
+            "category_id": self.env.ref("spp_change_request_add_farmer.spp_dms_add_farmer").id,
+            "directory_id": self.res_id.dms_directory_ids[0].id,
+            "change_request_add_farmer_id": self.res_id.id,
+        }
+        self.env["spp.dms.file"].create(vals)
+        error_message = [
+            _("The Family Name is required!"),
+            _("The First Name is required!"),
+            _("The Date of Birth is required!"),
+            _("The Gender is required!"),
+        ]
+        error_message = "\n".join(error_message)
+        with self.assertRaisesRegex(ValidationError, error_message):
+            self.res_id.validate_data()
+
+    def test_04_update_live_data_with_kinds(self):
+        vals = self.get_vals()
+        kind = self.env.ref("g2p_registry_membership.group_membership_kind_head").id
+        vals["kind"] = [(6, 0, [kind])]
+        self.res_id.write(vals)
+        file = None
+        filename = None
+        file_path = f"{os.path.dirname(os.path.abspath(__file__))}/sample_document.jpeg"
+        with open(file_path, "rb") as f:
+            filename = f.name
+            file = base64.b64encode(f.read())
+
+        vals = {
+            "content": file,
+            "name": filename,
+            "category_id": self.env.ref("spp_change_request_add_farmer.spp_dms_add_farmer").id,
+            "directory_id": self.res_id.dms_directory_ids[0].id,
+            "change_request_add_farmer_id": self.res_id.id,
+        }
+        self.env["spp.dms.file"].create(vals)
+        self.res_id.update_live_data()
+
+        individual_id = self.env["g2p.group.membership"].search([("group", "=", self.group.id), ("kind", "in", kind)])
+        self.assertTrue(individual_id, "Individual not found!")
+
+    def test_05_update_live_data_without_phone_uid(self):
+        vals = self.get_vals()
+        vals.pop("phone")
+        vals.pop("uid_number")
+
+        self.res_id.write(vals)
+        file = None
+        filename = None
+        file_path = f"{os.path.dirname(os.path.abspath(__file__))}/sample_document.jpeg"
+        with open(file_path, "rb") as f:
+            filename = f.name
+            file = base64.b64encode(f.read())
+
+        vals = {
+            "content": file,
+            "name": filename,
+            "category_id": self.env.ref("spp_change_request_add_farmer.spp_dms_add_farmer").id,
+            "directory_id": self.res_id.dms_directory_ids[0].id,
+            "change_request_add_farmer_id": self.res_id.id,
+        }
+        self.env["spp.dms.file"].create(vals)
+        self.res_id.update_live_data()
+
+        individual_id = self.env["res.partner"].search([("name", "=", "Test Farmer")])
+        self.assertFalse(individual_id.phone_number_ids, "Should not have phone number!")
+        self.assertFalse(individual_id.reg_ids, "Should not have registrant ID!")
