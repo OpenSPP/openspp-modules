@@ -1,4 +1,4 @@
-<odoo noupdate="0">
+<odoo noupdate="1">
     <!-- Customize the spp_user_roles Local Registrar role -->
     <record id="spp_user_roles.local_role_registrar" model="res.users.role">
         <field

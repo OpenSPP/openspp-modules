@@ -1,4 +1,4 @@
-<odoo noupdate="0">
+<odoo noupdate="1">
 
     <!-- Admin -->
     <record id="global_role_admin" model="res.users.role">

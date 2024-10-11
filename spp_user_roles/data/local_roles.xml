@@ -1,4 +1,4 @@
-<odoo noupdate="0">
+<odoo noupdate="1">
 
     <!-- Registrar -->
     <record id="local_role_registrar" model="res.users.role">
