@@ -99,9 +99,9 @@ class AttendanceSubscriber(models.Model):
         if from_date and to_date:
             domain += [("attendance_date", ">=", from_date), ("attendance_date", "<=", to_date)]
         if attendance_type_id:
-            domain += [("attendance_type_id", "=", attendance_type_id.id)]
+            domain += [("attendance_type_id", "=", attendance_type_id)]
         if attendance_location_id:
-            domain += [("attendance_location_id", "=", attendance_location_id.id)]
+            domain += [("attendance_location_id", "=", attendance_location_id)]
 
         attendance_list_ids = self.env["spp.attendance.list"].search(
             domain, offset=offset, limit=limit, order="attendance_date desc, attendance_time desc"

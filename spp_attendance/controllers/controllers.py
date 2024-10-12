@@ -97,6 +97,56 @@ def validate_date(from_date, to_date):
     return None
 
 
+def validate_request_header_and_body():
+    if not verify_auth_header():
+        return error_wrapper(401, "Unauthorized")
+
+    req = request
+    data = req.httprequest.data or "{}"
+    try:
+        data = json.loads(data)
+    except json.decoder.JSONDecodeError:
+        return error_wrapper(400, "data must be in JSON format.")
+
+    return None
+
+
+def validate_attendance_type(attendance_type):
+    if attendance_type:
+        try:
+            attendance_type = int(attendance_type)
+        except ValueError:
+            return error_wrapper(400, "Attendance Type must be an integer.")
+        attendance_type_id = request.env["spp.attendance.type"].sudo().search([("id", "=", attendance_type)], limit=1)
+        if not attendance_type_id:
+            attendance_type_ids = request.env["spp.attendance.type"].sudo().search([]).ids
+            error_message = "Attendance Type does not exist."
+            if attendance_type_ids:
+                error_message = f"Attendance Type does not exist. Available Attendance Types: {attendance_type_ids}."
+            return error_wrapper(400, error_message)
+    return None
+
+
+def validate_attendance_location(attendance_location):
+    if attendance_location:
+        try:
+            attendance_location = int(attendance_location)
+        except ValueError:
+            return error_wrapper(400, "Attendance Location must be an integer.")
+        attendance_location_id = (
+            request.env["spp.attendance.location"].sudo().search([("id", "=", attendance_location)], limit=1)
+        )
+        if not attendance_location_id:
+            attendance_location_ids = request.env["spp.attendance.location"].sudo().search([]).ids
+            error_message = "Attendance Location does not exist."
+            if attendance_location_ids:
+                error_message = (
+                    "Attendance Location does not exist. " f"Available Attendance Locations: {attendance_location_ids}."
+                )
+            return error_wrapper(400, error_message)
+    return None
+
+
 class SppGisApiController(Controller):
     @route(
         "/auth/token",
@@ -161,15 +211,12 @@ class SppGisApiController(Controller):
         csrf=False,
     )
     def create_attendance_list(self, **kwargs):
-        req = request
-        if not verify_auth_header():
-            return error_wrapper(401, "Unauthorized")
+        if error := validate_request_header_and_body():
+            return error
 
+        req = request
         data = req.httprequest.data or "{}"
-        try:
-            data = json.loads(data)
-        except json.decoder.JSONDecodeError:
-            return error_wrapper(400, "data must be in JSON format.")
+        data = json.loads(data)
 
         if missing_required_fields := check_required_fields(data, ["records", "submitted_by", "submitted_datetime"]):
             return error_wrapper(400, f"Missing required fields: {', '.join(missing_required_fields)}")
@@ -219,52 +266,15 @@ class SppGisApiController(Controller):
                         % {"date": attendance_date, "time": attendance_time, "person_identifier": person_id},
                     )
 
-                attendance_type_id = False
-                attendance_type = time_card.get("attendance_type")
+                attendance_type = time_card.get("attendance_type", False)
+                if result := validate_attendance_type(attendance_type):
+                    return result
+                attendance_type = int(attendance_type)
 
-                if attendance_type:
-                    try:
-                        attendance_type = int(attendance_type)
-                    except ValueError:
-                        return error_wrapper(400, "Attendance Type must be an integer.")
-
-                    attendance_type_id = (
-                        req.env["spp.attendance.type"].sudo().search([("id", "=", attendance_type)], limit=1)
-                    )
-
-                    if not attendance_type_id:
-                        attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).ids
-                        if attendance_type_ids:
-                            error_message = (
-                                f"Attendance Type does not exist. Available Attendance Types: {attendance_type_ids}. "
-                                "Leave it blank if desired type is not existing."
-                            )
-                        else:
-                            error_message = "Attendance Type does not exist. Leave it blank."
-                        return error_wrapper(400, error_message)
-
-                attendance_location_id = False
-                attendance_location = time_card.get("attendance_location")
-                if attendance_location:
-                    try:
-                        attendance_location = int(attendance_location)
-                    except ValueError:
-                        return error_wrapper(400, "Attendance Location must be an integer.")
-
-                    attendance_location_id = (
-                        req.env["spp.attendance.location"].sudo().search([("id", "=", attendance_location)], limit=1)
-                    )
-                    if not attendance_location_id:
-                        attendance_location_ids = req.env["spp.attendance.location"].sudo().search([]).ids
-                        if attendance_location_ids:
-                            error_message = (
-                                "Attendance Location does not exist. "
-                                f"Available Attendance Locations: {attendance_location_ids}. "
-                                "Leave it blank if desired location is not existing."
-                            )
-                        else:
-                            error_message = "Attendance Location does not exist. Leave it blank."
-                        return error_wrapper(400, error_message)
+                attendance_location = time_card.get("attendance_location", False)
+                if result := validate_attendance_location(attendance_location):
+                    return result
+                attendance_location = int(attendance_location)
 
                 attendance_description = time_card.get("attendance_description", "")
                 attendance_external_url = time_card.get("attendance_external_url", "")
@@ -273,7 +283,7 @@ class SppGisApiController(Controller):
                         "subscriber_id": subscriber_id.id,
                         "attendance_date": attendance_date,
                         "attendance_time": attendance_time,
-                        "attendance_type_id": attendance_type_id.id if attendance_type_id else False,
+                        "attendance_type_id": attendance_type,
                         "attendance_location_id": attendance_location,
                         "attendance_description": attendance_description,
                         "attendance_external_url": attendance_external_url,
@@ -296,15 +306,12 @@ class SppGisApiController(Controller):
         csrf=False,
     )
     def attendance_list_person(self, person_identifier, page=1, limit=30, **kwargs):
-        req = request
-        if not verify_auth_header():
-            return error_wrapper(401, "Unauthorized")
+        if error := validate_request_header_and_body():
+            return error
 
+        req = request
         data = req.httprequest.data or "{}"
-        try:
-            data = json.loads(data)
-        except json.decoder.JSONDecodeError:
-            return error_wrapper(400, "data must be in JSON format.")
+        data = json.loads(data)
 
         subscriber_id = (
             req.env["spp.attendance.subscriber"].sudo().search([("person_identifier", "=", person_identifier)], limit=1)
@@ -322,11 +329,6 @@ class SppGisApiController(Controller):
 
         from_date = kwargs.get("from_date", None)
         to_date = kwargs.get("to_date", None)
-        attendance_type = kwargs.get("attendance_type", None)
-        attendance_type_id = None
-
-        attendance_location = kwargs.get("attendance_location", None)
-        attendance_location_id = None
 
         if from_date and to_date:
             if date_error_message := validate_date(from_date, to_date):
@@ -335,44 +337,21 @@ class SppGisApiController(Controller):
                 from_date = datetime.strptime(from_date, "%Y-%m-%d")
                 to_date = datetime.strptime(to_date, "%Y-%m-%d")
 
-        if attendance_type:
-            try:
-                attendance_type = int(attendance_type)
-            except ValueError:
-                return error_wrapper(400, "Attendance Type must be an integer.")
-            attendance_type_id = req.env["spp.attendance.type"].sudo().search([("id", "=", attendance_type)], limit=1)
-            if not attendance_type_id:
-                attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).ids
-                if attendance_type_ids:
-                    error_message = (
-                        f"Attendance Type does not exist. Available Attendance Types: {attendance_type_ids}."
-                    )
-                    return error_wrapper(400, error_message)
-                return error_wrapper(400, "Attendance Type does not exist.")
+        attendance_type = kwargs.get("attendance_type", False)
+        if result := validate_attendance_type(attendance_type):
+            return result
+        attendance_type = int(attendance_type)
 
-        if attendance_location:
-            try:
-                attendance_location = int(attendance_location)
-            except ValueError:
-                return error_wrapper(400, "Attendance Location must be an integer.")
-            attendance_location_id = (
-                req.env["spp.attendance.location"].sudo().search([("id", "=", attendance_location)], limit=1)
-            )
-            if not attendance_location_id:
-                attendance_location_ids = req.env["spp.attendance.location"].sudo().search([]).ids
-                if attendance_location_ids:
-                    error_message = (
-                        "Attendance Location does not exist. "
-                        f"Available Attendance Locations: {attendance_location_ids}."
-                    )
-                    return error_wrapper(400, error_message)
-                return error_wrapper(400, "Attendance Location does not exist.")
+        attendance_location = kwargs.get("attendance_location", False)
+        if result := validate_attendance_location(attendance_location):
+            return result
+        attendance_location = int(attendance_location)
 
         total_attendance, attendance_record = subscriber_id.get_attendance_list(
             from_date=from_date,
             to_date=to_date,
-            attendance_type_id=attendance_type_id,
-            attendance_location_id=attendance_location_id,
+            attendance_type_id=attendance_type,
+            attendance_location_id=attendance_location,
             offset=offset,
             limit=limit,
         )
@@ -396,15 +375,12 @@ class SppGisApiController(Controller):
         csrf=False,
     )
     def attendance_list(self, page=1, limit=30, **kwargs):
-        req = request
-        if not verify_auth_header():
-            return error_wrapper(401, "Unauthorized")
+        if error := validate_request_header_and_body():
+            return error
 
+        req = request
         data = req.httprequest.data or "{}"
-        try:
-            data = json.loads(data)
-        except json.decoder.JSONDecodeError:
-            return error_wrapper(400, "data must be in JSON format.")
+        data = json.loads(data)
 
         if page_limit_error_message := validate_page_and_limit(page, limit):
             return error_wrapper(400, page_limit_error_message)
@@ -415,11 +391,6 @@ class SppGisApiController(Controller):
 
         from_date = kwargs.get("from_date", None)
         to_date = kwargs.get("to_date", None)
-        attendance_type = kwargs.get("attendance_type", None)
-        attendance_type_id = None
-
-        attendance_location = kwargs.get("attendance_location", None)
-        attendance_location_id = None
 
         if from_date and to_date:
             if date_error_message := validate_date(from_date, to_date):
@@ -428,38 +399,15 @@ class SppGisApiController(Controller):
                 from_date = datetime.strptime(from_date, "%Y-%m-%d")
                 to_date = datetime.strptime(to_date, "%Y-%m-%d")
 
-        if attendance_type:
-            try:
-                attendance_type = int(attendance_type)
-            except ValueError:
-                return error_wrapper(400, "Attendance Type must be an integer.")
-            attendance_type_id = req.env["spp.attendance.type"].sudo().search([("id", "=", attendance_type)], limit=1)
-            if not attendance_type_id:
-                attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).ids
-                if attendance_type_ids:
-                    error_message = (
-                        f"Attendance Type does not exist. Available Attendance Types: {attendance_type_ids}."
-                    )
-                    return error_wrapper(400, error_message)
-                return error_wrapper(400, "Attendance Type does not exist.")
+        attendance_type = kwargs.get("attendance_type", False)
+        if result := validate_attendance_type(attendance_type):
+            return result
+        attendance_type = int(attendance_type)
 
-        if attendance_location:
-            try:
-                attendance_location = int(attendance_location)
-            except ValueError:
-                return error_wrapper(400, "Attendance Location must be an integer.")
-            attendance_location_id = (
-                req.env["spp.attendance.location"].sudo().search([("id", "=", attendance_location)], limit=1)
-            )
-            if not attendance_location_id:
-                attendance_location_ids = req.env["spp.attendance.location"].sudo().search([]).ids
-                if attendance_location_ids:
-                    error_message = (
-                        "Attendance Location does not exist. "
-                        f"Available Attendance Locations: {attendance_location_ids}."
-                    )
-                    return error_wrapper(400, error_message)
-                return error_wrapper(400, "Attendance Location does not exist.")
+        attendance_location = kwargs.get("attendance_location", False)
+        if result := validate_attendance_location(attendance_location):
+            return result
+        attendance_location = int(attendance_location)
 
         domain = []
 
@@ -476,8 +424,8 @@ class SppGisApiController(Controller):
             total_attendance, attendance_record = subscriber_id.get_attendance_list(
                 from_date=from_date,
                 to_date=to_date,
-                attendance_type_id=attendance_type_id,
-                attendance_location_id=attendance_location_id,
+                attendance_type_id=attendance_type,
+                attendance_location_id=attendance_location,
             )
             records.append(attendance_record)
 
@@ -504,15 +452,12 @@ class SppGisApiController(Controller):
         csrf=False,
     )
     def get_attendance_types(self):
-        req = request
-        if not verify_auth_header():
-            return error_wrapper(401, "Unauthorized")
+        if error := validate_request_header_and_body():
+            return error
 
+        req = request
         data = req.httprequest.data or "{}"
-        try:
-            data = json.loads(data)
-        except json.decoder.JSONDecodeError:
-            return error_wrapper(400, "data must be in JSON format.")
+        data = json.loads(data)
 
         attendance_type_ids = req.env["spp.attendance.type"].sudo().search([])
 
@@ -539,15 +484,12 @@ class SppGisApiController(Controller):
         csrf=False,
     )
     def get_attendance_locations(self):
-        req = request
-        if not verify_auth_header():
-            return error_wrapper(401, "Unauthorized")
+        if error := validate_request_header_and_body():
+            return error
 
+        req = request
         data = req.httprequest.data or "{}"
-        try:
-            data = json.loads(data)
-        except json.decoder.JSONDecodeError:
-            return error_wrapper(400, "data must be in JSON format.")
+        data = json.loads(data)
 
         attendance_location_ids = req.env["spp.attendance.location"].sudo().search([])
 
