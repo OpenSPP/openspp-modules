@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="custom_view_spparea_form" model="ir.ui.view">
+        <field name="name">custom_view_spparea_form</field>
+        <field name="model">spp.area</field>
+        <field name="inherit_id" ref="spp_area.view_spparea_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='area_sqkm']" position="after">
+                <div class="o_setting_left_pane">
+                </div>
+                <div class="o_setting_right_pane">
+                    <label for="gida" />
+                    <div>
+                    </div>
+                    <field name="gida" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

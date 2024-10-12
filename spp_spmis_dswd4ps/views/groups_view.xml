@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="inherit_view_groups_form" model="ir.ui.view">
+        <field name="name">inherit_view_groups_form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">200</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='relationships']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="inherit_view_group_ext_form_custom_spp" model="ir.ui.view">
+        <field name="name">inherit_view_group_ext_form_custom_spp</field>
+        <field name="model">res.partner</field>
+        <field name="priority">200</field>
+        <field name="inherit_id" ref="spp_programs.view_group_ext_form_custom_spp" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='inkind_entitlement']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
