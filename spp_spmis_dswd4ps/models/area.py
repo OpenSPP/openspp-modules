@@ -7,5 +7,4 @@ class OpenSPPArea(models.Model):
     gida = fields.Selection(
         string="GIDA?",
         selection=[("yes", "Yes"), ("no", "No"), ("undetermined", "Undetermined")],
-        default="undetermined",
     )

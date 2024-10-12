@@ -6,13 +6,15 @@
         <field name="inherit_id" ref="spp_area.view_spparea_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[@name='area_sqkm']" position="after">
-                <div class="o_setting_left_pane">
-                </div>
-                <div class="o_setting_right_pane">
-                    <label for="gida" />
-                    <div>
+                <div class="col-4 o_setting_box" name="gida">
+                    <div class="o_setting_left_pane">
                     </div>
-                    <field name="gida" />
+                    <div class="o_setting_right_pane">
+                        <label for="gida" />
+                        <div>
+                        </div>
+                        <field name="gida" />
+                    </div>
                 </div>
             </xpath>
         </field>
