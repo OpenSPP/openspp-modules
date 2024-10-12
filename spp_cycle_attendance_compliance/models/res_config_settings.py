@@ -77,8 +77,8 @@ class ResConfigSettings(models.TransientModel):
             if not attendance_type:
                 self.env["spp.res.config.attendance.type"].create(
                     {
-                        "name": record.get("attendance_type_name"),
-                        "description": record.get("attendance_type_description"),
+                        "name": record.get("name"),
+                        "description": record.get("description"),
                         "external_id": record.get("id"),
                         "external_source": self.attendance_server_url,
                     }
@@ -86,8 +86,8 @@ class ResConfigSettings(models.TransientModel):
             else:
                 attendance_type.write(
                     {
-                        "name": record.get("attendance_type_name"),
-                        "description": record.get("attendance_type_description"),
+                        "name": record.get("name"),
+                        "description": record.get("description"),
                     }
                 )
 

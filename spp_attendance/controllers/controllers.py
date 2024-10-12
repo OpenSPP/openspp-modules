@@ -111,40 +111,29 @@ def validate_request_header_and_body():
     return None
 
 
-def validate_attendance_type(attendance_type):
-    if attendance_type:
+def validate_entity(model_name, model_id, model_label):
+    if model_id:
         try:
-            attendance_type = int(attendance_type)
+            model_id = int(model_id)
         except ValueError:
-            return error_wrapper(400, "Attendance Type must be an integer.")
-        attendance_type_id = request.env["spp.attendance.type"].sudo().search([("id", "=", attendance_type)], limit=1)
-        if not attendance_type_id:
-            attendance_type_ids = request.env["spp.attendance.type"].sudo().search([]).ids
-            error_message = "Attendance Type does not exist."
-            if attendance_type_ids:
-                error_message = f"Attendance Type does not exist. Available Attendance Types: {attendance_type_ids}."
+            return error_wrapper(400, f"{model_label} must be an integer.")
+
+        entity = request.env[model_name].sudo().search([("id", "=", model_id)], limit=1)
+        if not entity:
+            model_ids = request.env[model_name].sudo().search([]).ids
+            error_message = f"{model_label} does not exist."
+            if model_ids:
+                error_message = f"{model_label} does not exist. Available {model_label}s: {model_ids}."
             return error_wrapper(400, error_message)
     return None
+
+
+def validate_attendance_type(attendance_type):
+    return validate_entity("spp.attendance.type", attendance_type, "Attendance Type")
 
 
 def validate_attendance_location(attendance_location):
-    if attendance_location:
-        try:
-            attendance_location = int(attendance_location)
-        except ValueError:
-            return error_wrapper(400, "Attendance Location must be an integer.")
-        attendance_location_id = (
-            request.env["spp.attendance.location"].sudo().search([("id", "=", attendance_location)], limit=1)
-        )
-        if not attendance_location_id:
-            attendance_location_ids = request.env["spp.attendance.location"].sudo().search([]).ids
-            error_message = "Attendance Location does not exist."
-            if attendance_location_ids:
-                error_message = (
-                    "Attendance Location does not exist. " f"Available Attendance Locations: {attendance_location_ids}."
-                )
-            return error_wrapper(400, error_message)
-    return None
+    return validate_entity("spp.attendance.location", attendance_location, "Attendance Location")
 
 
 class SppGisApiController(Controller):
@@ -467,12 +456,11 @@ class SppGisApiController(Controller):
                 "records": [
                     {
                         "id": attendance_type.id,
-                        "attendance_type_name": attendance_type.name,
-                        "attendance_type_description": attendance_type.description,
+                        "name": attendance_type.name,
+                        "description": attendance_type.description,
                     }
                     for attendance_type in attendance_type_ids
                 ],
-                "attendance_types": attendance_type_ids.mapped("name"),
             },
         )
 
