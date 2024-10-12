@@ -171,12 +171,13 @@ class SppGisApiController(Controller):
         except json.decoder.JSONDecodeError:
             return error_wrapper(400, "data must be in JSON format.")
 
-        if missing_required_fields := check_required_fields(data, ["records", "submitted_by", "submitted_date"]):
+        if missing_required_fields := check_required_fields(data, ["records", "submitted_by", "submitted_datetime"]):
             return error_wrapper(400, f"Missing required fields: {', '.join(missing_required_fields)}")
 
         current_date = datetime.now().strftime("%Y-%m-%d")
-        submitted_date = data.get("submitted_date", current_date)
+        submitted_datetime = data.get("submitted_datetime", current_date)
         submitted_by = data.get("submitted_by")
+        submission_source = data.get("submission_source", "")
 
         attendance_list_data = []
         person_id_list = []
@@ -222,23 +223,49 @@ class SppGisApiController(Controller):
                 attendance_type = time_card.get("attendance_type")
 
                 if attendance_type:
+                    try:
+                        attendance_type = int(attendance_type)
+                    except ValueError:
+                        return error_wrapper(400, "Attendance Type must be an integer.")
+
                     attendance_type_id = (
-                        req.env["spp.attendance.type"].sudo().search([("name", "=", attendance_type)], limit=1)
+                        req.env["spp.attendance.type"].sudo().search([("id", "=", attendance_type)], limit=1)
                     )
 
                     if not attendance_type_id:
-                        attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).mapped("name")
+                        attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).ids
                         if attendance_type_ids:
-                            available_types = ", ".join(attendance_type_ids)
                             error_message = (
-                                f"Attendance Type does not exist. Available Attendance Types: {available_types}. "
+                                f"Attendance Type does not exist. Available Attendance Types: {attendance_type_ids}. "
                                 "Leave it blank if desired type is not existing."
                             )
                         else:
                             error_message = "Attendance Type does not exist. Leave it blank."
                         return error_wrapper(400, error_message)
 
+                attendance_location_id = False
                 attendance_location = time_card.get("attendance_location")
+                if attendance_location:
+                    try:
+                        attendance_location = int(attendance_location)
+                    except ValueError:
+                        return error_wrapper(400, "Attendance Location must be an integer.")
+
+                    attendance_location_id = (
+                        req.env["spp.attendance.location"].sudo().search([("id", "=", attendance_location)], limit=1)
+                    )
+                    if not attendance_location_id:
+                        attendance_location_ids = req.env["spp.attendance.location"].sudo().search([]).ids
+                        if attendance_location_ids:
+                            error_message = (
+                                "Attendance Location does not exist. "
+                                f"Available Attendance Locations: {attendance_location_ids}. "
+                                "Leave it blank if desired location is not existing."
+                            )
+                        else:
+                            error_message = "Attendance Location does not exist. Leave it blank."
+                        return error_wrapper(400, error_message)
+
                 attendance_description = time_card.get("attendance_description", "")
                 attendance_external_url = time_card.get("attendance_external_url", "")
                 attendance_list_data.append(
@@ -247,11 +274,12 @@ class SppGisApiController(Controller):
                         "attendance_date": attendance_date,
                         "attendance_time": attendance_time,
                         "attendance_type_id": attendance_type_id.id if attendance_type_id else False,
-                        "attendance_location": attendance_location,
+                        "attendance_location_id": attendance_location,
                         "attendance_description": attendance_description,
                         "attendance_external_url": attendance_external_url,
                         "submitted_by": submitted_by,
-                        "submitted_date": submitted_date,
+                        "submitted_datetime": submitted_datetime,
+                        "submission_source": submission_source,
                     }
                 )
                 person_id_list.append(person_id)
@@ -297,6 +325,9 @@ class SppGisApiController(Controller):
         attendance_type = kwargs.get("attendance_type", None)
         attendance_type_id = None
 
+        attendance_location = kwargs.get("attendance_location", None)
+        attendance_location_id = None
+
         if from_date and to_date:
             if date_error_message := validate_date(from_date, to_date):
                 return error_wrapper(400, date_error_message)
@@ -305,19 +336,43 @@ class SppGisApiController(Controller):
                 to_date = datetime.strptime(to_date, "%Y-%m-%d")
 
         if attendance_type:
-            attendance_type_id = req.env["spp.attendance.type"].sudo().search([("name", "=", attendance_type)], limit=1)
+            try:
+                attendance_type = int(attendance_type)
+            except ValueError:
+                return error_wrapper(400, "Attendance Type must be an integer.")
+            attendance_type_id = req.env["spp.attendance.type"].sudo().search([("id", "=", attendance_type)], limit=1)
             if not attendance_type_id:
-                attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).mapped("name")
+                attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).ids
                 if attendance_type_ids:
-                    available_types = ", ".join(attendance_type_ids)
-                    error_message = f"Attendance Type does not exist. Available Attendance Types: {available_types}."
+                    error_message = (
+                        f"Attendance Type does not exist. Available Attendance Types: {attendance_type_ids}."
+                    )
                     return error_wrapper(400, error_message)
                 return error_wrapper(400, "Attendance Type does not exist.")
+
+        if attendance_location:
+            try:
+                attendance_location = int(attendance_location)
+            except ValueError:
+                return error_wrapper(400, "Attendance Location must be an integer.")
+            attendance_location_id = (
+                req.env["spp.attendance.location"].sudo().search([("id", "=", attendance_location)], limit=1)
+            )
+            if not attendance_location_id:
+                attendance_location_ids = req.env["spp.attendance.location"].sudo().search([]).ids
+                if attendance_location_ids:
+                    error_message = (
+                        "Attendance Location does not exist. "
+                        f"Available Attendance Locations: {attendance_location_ids}."
+                    )
+                    return error_wrapper(400, error_message)
+                return error_wrapper(400, "Attendance Location does not exist.")
 
         total_attendance, attendance_record = subscriber_id.get_attendance_list(
             from_date=from_date,
             to_date=to_date,
             attendance_type_id=attendance_type_id,
+            attendance_location_id=attendance_location_id,
             offset=offset,
             limit=limit,
         )
@@ -363,6 +418,9 @@ class SppGisApiController(Controller):
         attendance_type = kwargs.get("attendance_type", None)
         attendance_type_id = None
 
+        attendance_location = kwargs.get("attendance_location", None)
+        attendance_location_id = None
+
         if from_date and to_date:
             if date_error_message := validate_date(from_date, to_date):
                 return error_wrapper(400, date_error_message)
@@ -371,14 +429,37 @@ class SppGisApiController(Controller):
                 to_date = datetime.strptime(to_date, "%Y-%m-%d")
 
         if attendance_type:
-            attendance_type_id = req.env["spp.attendance.type"].sudo().search([("name", "=", attendance_type)], limit=1)
+            try:
+                attendance_type = int(attendance_type)
+            except ValueError:
+                return error_wrapper(400, "Attendance Type must be an integer.")
+            attendance_type_id = req.env["spp.attendance.type"].sudo().search([("id", "=", attendance_type)], limit=1)
             if not attendance_type_id:
-                attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).mapped("name")
+                attendance_type_ids = req.env["spp.attendance.type"].sudo().search([]).ids
                 if attendance_type_ids:
-                    available_types = ", ".join(attendance_type_ids)
-                    error_message = f"Attendance Type does not exist. Available Attendance Types: {available_types}."
+                    error_message = (
+                        f"Attendance Type does not exist. Available Attendance Types: {attendance_type_ids}."
+                    )
                     return error_wrapper(400, error_message)
                 return error_wrapper(400, "Attendance Type does not exist.")
+
+        if attendance_location:
+            try:
+                attendance_location = int(attendance_location)
+            except ValueError:
+                return error_wrapper(400, "Attendance Location must be an integer.")
+            attendance_location_id = (
+                req.env["spp.attendance.location"].sudo().search([("id", "=", attendance_location)], limit=1)
+            )
+            if not attendance_location_id:
+                attendance_location_ids = req.env["spp.attendance.location"].sudo().search([]).ids
+                if attendance_location_ids:
+                    error_message = (
+                        "Attendance Location does not exist. "
+                        f"Available Attendance Locations: {attendance_location_ids}."
+                    )
+                    return error_wrapper(400, error_message)
+                return error_wrapper(400, "Attendance Location does not exist.")
 
         domain = []
 
@@ -396,6 +477,7 @@ class SppGisApiController(Controller):
                 from_date=from_date,
                 to_date=to_date,
                 attendance_type_id=attendance_type_id,
+                attendance_location_id=attendance_location_id,
             )
             records.append(attendance_record)
 
@@ -446,5 +528,39 @@ class SppGisApiController(Controller):
                     for attendance_type in attendance_type_ids
                 ],
                 "attendance_types": attendance_type_ids.mapped("name"),
+            },
+        )
+
+    @route(
+        "/attendance/locations",
+        type="http",
+        auth="none",
+        methods=["GET"],
+        csrf=False,
+    )
+    def get_attendance_locations(self):
+        req = request
+        if not verify_auth_header():
+            return error_wrapper(401, "Unauthorized")
+
+        data = req.httprequest.data or "{}"
+        try:
+            data = json.loads(data)
+        except json.decoder.JSONDecodeError:
+            return error_wrapper(400, "data must be in JSON format.")
+
+        attendance_location_ids = req.env["spp.attendance.location"].sudo().search([])
+
+        return response_wrapper(
+            200,
+            {
+                "records": [
+                    {
+                        "id": attendance_location.id,
+                        "name": attendance_location.name,
+                        "description": attendance_location.description,
+                    }
+                    for attendance_location in attendance_location_ids
+                ],
             },
         )

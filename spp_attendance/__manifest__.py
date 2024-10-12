@@ -18,6 +18,7 @@
         "views/res_config_view.xml",
         "views/main_views.xml",
         "views/attendance_type_views.xml",
+        "views/attendance_location_views.xml",
         "wizard/import_attendance_view.xml",
     ],
     "assets": {},

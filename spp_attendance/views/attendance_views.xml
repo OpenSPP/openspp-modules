@@ -29,11 +29,11 @@
                                     <field name="attendance_date" />
                                     <field name="attendance_time" />
                                     <field name="attendance_type_id" />
-                                    <field name="attendance_location" />
+                                    <field name="attendance_location_id" />
                                     <field name="attendance_description" />
                                     <field name="attendance_external_url" />
                                     <field name="submitted_by" />
-                                    <field name="submitted_date" />
+                                    <field name="submitted_datetime" />
                                 </tree>
                                 <form>
                                     <group string="Attendance Information">
@@ -43,13 +43,13 @@
                                             name="attendance_type_id"
                                             options="{'no_create': True, 'no_open': True}"
                                         />
-                                        <field name="attendance_location" />
+                                        <field name="attendance_location_id" />
                                         <field name="attendance_description" />
                                         <field name="attendance_external_url" />
                                     </group>
                                     <group string="Submitted Information">
                                         <field name="submitted_by" />
-                                        <field name="submitted_date" />
+                                        <field name="submitted_datetime" />
                                     </group>
                                 </form>
                             </field>

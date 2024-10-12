@@ -86,12 +86,22 @@ class AttendanceSubscriber(models.Model):
             else:
                 record.partner_name = ""
 
-    def get_attendance_list(self, from_date=None, to_date=None, attendance_type_id=None, offset=0, limit=None):
+    def get_attendance_list(
+        self,
+        from_date=None,
+        to_date=None,
+        attendance_type_id=None,
+        attendance_location_id=None,
+        offset=0,
+        limit=None,
+    ):
         domain = [("subscriber_id", "=", self.id)]
         if from_date and to_date:
             domain += [("attendance_date", ">=", from_date), ("attendance_date", "<=", to_date)]
         if attendance_type_id:
             domain += [("attendance_type_id", "=", attendance_type_id.id)]
+        if attendance_location_id:
+            domain += [("attendance_location_id", "=", attendance_location_id.id)]
 
         attendance_list_ids = self.env["spp.attendance.list"].search(
             domain, offset=offset, limit=limit, order="attendance_date desc, attendance_time desc"
@@ -109,12 +119,25 @@ class AttendanceSubscriber(models.Model):
                 {
                     "date": attendance.attendance_date,
                     "time": attendance.attendance_time,
-                    "attendance_type": attendance.attendance_type_id.name if attendance.attendance_type_id else "",
-                    "attendance_location": attendance.attendance_location,
+                    "attendance_type": {
+                        "id": attendance.attendance_type_id.id,
+                        "name": attendance.attendance_type_id.name,
+                        "description": attendance.attendance_type_id.description,
+                    }
+                    if attendance.attendance_type_id
+                    else {},
+                    "attendance_location": {
+                        "id": attendance.attendance_location_id.id,
+                        "name": attendance.attendance_location_id.name,
+                        "description": attendance.attendance_location_id.description,
+                    }
+                    if attendance.attendance_location_id
+                    else {},
                     "attendance_description": attendance.attendance_description or "",
                     "attendance_external_url": attendance.attendance_external_url or "",
                     "submitted_by": attendance.submitted_by,
-                    "submitted_date": attendance.submitted_date,
+                    "submitted_datetime": attendance.submitted_datetime,
+                    "submission_source": attendance.submission_source or "",
                 }
                 for attendance in attendance_list_ids
             ],
