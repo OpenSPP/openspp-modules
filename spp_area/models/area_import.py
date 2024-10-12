@@ -240,7 +240,10 @@ class OpenSPPAreaImport(models.Model):
 
             batches = math.ceil(sheet.nrows / 1000)
             for i in range(batches):
-                start = i * 1000 + 1
+                if i == 0:
+                    start = 1
+                else:
+                    start = i * 1000
                 end = min((i + 1) * 1000, sheet.nrows)
                 jobs.append(
                     self.delayable(channel="root.area_import")._import_data(
