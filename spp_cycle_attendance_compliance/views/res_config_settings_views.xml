@@ -7,31 +7,39 @@
         <field name="priority" eval="10" />
         <field name="inherit_id" ref="base.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//app[@name='program_settings']/block/setting" position="after">
-                <setting string="Authentication URL">
-                    <field name="attendance_auth_url" />
-                </setting>
-                <setting string="Client ID">
-                    <field name="attendance_client_id" />
-                </setting>
-                <setting string="Client Secret">
-                    <field name="attendance_client_secret" />
-                </setting>
-                <setting string="Compliance URL">
-                    <field name="attendance_compliance_url" />
-                </setting>
-                <!-- <setting string="Result Mapping">
-                    <field name="result_mapping" />
-                </setting> -->
-                <button
-                    name="test_connection"
-                    type="object"
-                    icon="fa-check-square-o"
-                    title="Test Compliance URL"
-                    class="btn-success"
-                    style="margin-left: 10px;"
-                    string="Test Compliance URL"
-                />
+            <xpath expr="//app[@name='program_settings']/block" position="after">
+                <block title="Attendance Settings">
+                    <setting string="Attendance Server URL">
+                        <field name="attendance_server_url" />
+                    </setting>
+                    <setting string="Authentication Endpoint">
+                        <field name="attendance_auth_url" />
+                    </setting>
+                    <setting string="Compliance Endpoint">
+                        <field name="attendance_compliance_url" />
+                    </setting>
+                    <setting string="Attendance Type Endpoint">
+                        <field name="attendance_type_url" />
+                    </setting>
+                    <setting string="Attendance Location Endpoint">
+                        <field name="attendance_location_url" />
+                    </setting>
+                    <setting string="Client ID">
+                        <field name="attendance_client_id" />
+                    </setting>
+                    <setting string="Client Secret">
+                        <field name="attendance_client_secret" />
+                    </setting>
+                    <button
+                        name="test_connection"
+                        type="object"
+                        icon="fa-check-square-o"
+                        title="Test and Import"
+                        class="btn-success"
+                        style="margin-left: 10px;"
+                        string="Test and Import"
+                    />
+                </block>
             </xpath>
         </field>
     </record>

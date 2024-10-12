@@ -15,9 +15,13 @@
     "data": [
         "views/res_config_settings_views.xml",
         "views/g2p_cycle_views.xml",
+        "views/main_attendance_view.xml",
+        "views/config_attendance_type_view.xml",
+        "views/config_attendance_location_view.xml",
+        "security/ir.model.access.csv",
     ],
     "assets": {},
-    "application": False,
+    "application": True,
     "installable": True,
     "auto_install": False,
 }

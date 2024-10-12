@@ -11,9 +11,17 @@ from odoo.osv.expression import AND
 class G2pCycle(models.Model):
     _inherit = "g2p.cycle"
 
-    attendance_type = fields.Char(
+    attendance_type_id = fields.Many2one(
+        "spp.res.config.attendance.type",
         string="Attendance Type",
         help=_("Type of attendance to be taken for this program. Should be existing in the system of the API Server."),
+    )
+    attendance_location_id = fields.Many2one(
+        "spp.res.config.attendance.location",
+        string="Attendance Location",
+        help=_(
+            "Location of attendance to be taken for this program. Should be existing in the system of the API Server."
+        ),
     )
     required_number_of_attendance = fields.Integer(
         string="Required Number of Attendance (Days)",
@@ -29,12 +37,21 @@ class G2pCycle(models.Model):
             domain += AND([[("personal_identifier", "!=", False)]])
         registrant_satisfied = self.env["res.partner"].sudo().search(domain)
 
-        attendance_auth_url = self.env["ir.config_parameter"].sudo().get_param("spp_attendance.attendance_auth_url")
-        attendance_client_id = self.env["ir.config_parameter"].sudo().get_param("spp_attendance.attendance_client_id")
-        attendance_client_secret = (
-            self.env["ir.config_parameter"].sudo().get_param("spp_attendance.attendance_client_secret")
+        attendance_server_url = (
+            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_server_url")
         )
-        # access_token_mapping = self.env['ir.config_parameter'].sudo().get_param('spp_attendance.access_token_mapping')
+        auth_endpoint = (
+            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_auth_url")
+        )
+
+        # attendance_auth_url = f"{attendance_server_url}{auth_endpoint}"
+        attendance_auth_url = urljoin(attendance_server_url, auth_endpoint)
+        attendance_client_id = (
+            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_client_id")
+        )
+        attendance_client_secret = (
+            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_client_secret")
+        )
         data = json.dumps({"client_id": attendance_client_id, "client_secret": attendance_client_secret})
         response = requests.post(attendance_auth_url, data=data)
         if response.status_code != 200:
@@ -45,11 +62,12 @@ class G2pCycle(models.Model):
         if not access_token:
             raise UserError("Access Token not found in response.")
 
-        attendance_compliance_url = (
+        attendance_compliance_endpoint = (
             self.env["ir.config_parameter"]
             .sudo()
             .get_param("spp_cycle_attendance_compliance.attendance_compliance_url")
         )
+        attendance_compliance_url = urljoin(attendance_server_url, attendance_compliance_endpoint)
 
         header = {"Authorization": f"Bearer {access_token}"}
         if self.program_id.target_type == "individual":
@@ -68,8 +86,10 @@ class G2pCycle(models.Model):
             params["from_date"] = self.from_date
         if self.to_date:
             params["to_date"] = self.to_date
-        if self.attendance_type:
-            params["attendance_type"] = self.attendance_type
+        if self.attendance_type_id:
+            params["attendance_type"] = self.attendance_type_id.external_id
+        if self.attendance_location_id:
+            params["attendance_location"] = self.attendance_location_id.external_id
 
         full_attendance_compliance_url = urljoin(attendance_compliance_url, "?" + urlencode(params))
         response = requests.get(full_attendance_compliance_url, headers=header, data=data)

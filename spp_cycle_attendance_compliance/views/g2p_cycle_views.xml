@@ -15,7 +15,8 @@
                     <group>
                         <field name="from_date" />
                         <field name="to_date" />
-                        <field name="attendance_type" />
+                        <field name="attendance_type_id" options="{'no_open': True, 'no_create': True}" />
+                        <field name="attendance_location_id" options="{'no_open': True, 'no_create': True}" />
                         <field name="required_number_of_attendance" />
                     </group>
                 </page>
