@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class SPPIndividualCustom(models.Model):
@@ -9,6 +9,7 @@ class SPPIndividualCustom(models.Model):
         store=True,
     )
 
+    @api.depends("reg_ids")
     def _compute_personal_identifier(self):
         for rec in self:
             for reg_id in rec.reg_ids:

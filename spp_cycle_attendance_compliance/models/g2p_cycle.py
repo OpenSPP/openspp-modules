@@ -24,11 +24,10 @@ class G2pCycle(models.Model):
 
     def action_filter_beneficiaries_by_compliance_criteria(self):
         super().action_filter_beneficiaries_by_compliance_criteria()
-        registrant_satisfied = (
-            self.env["res.partner"]
-            .sudo()
-            .search(self._get_compliance_criteria_domain() + AND([[("personal_identifier", "!=", False)]]))
-        )
+        domain = self._get_compliance_criteria_domain()
+        if self.program_id.target_type == "individual":
+            domain += AND([[("personal_identifier", "!=", False)]])
+        registrant_satisfied = self.env["res.partner"].sudo().search(domain)
 
         attendance_auth_url = self.env["ir.config_parameter"].sudo().get_param("spp_attendance.attendance_auth_url")
         attendance_client_id = self.env["ir.config_parameter"].sudo().get_param("spp_attendance.attendance_client_id")
@@ -53,7 +52,16 @@ class G2pCycle(models.Model):
         )
 
         header = {"Authorization": f"Bearer {access_token}"}
-        data = json.dumps({"person_ids": registrant_satisfied.mapped("personal_identifier")})
+        if self.program_id.target_type == "individual":
+            data = json.dumps({"person_ids": registrant_satisfied.mapped("personal_identifier")})
+        else:
+            data = json.dumps(
+                {
+                    "person_ids": registrant_satisfied.group_membership_ids.mapped("individual").mapped(
+                        "personal_identifier"
+                    )
+                }
+            )
 
         params = {"limit": max(len(registrant_satisfied), 30)}
         if self.from_date:
@@ -76,7 +84,19 @@ class G2pCycle(models.Model):
             number_of_attendance = record.get("number_of_days_present", 0)
             if number_of_attendance >= self.required_number_of_attendance:
                 verified_person_id.append(person_id)
-        registrant_satisfied = registrant_satisfied.filtered(lambda r: r.personal_identifier in verified_person_id)
+
+        if self.program_id.target_type == "individual":
+            registrant_satisfied = registrant_satisfied.filtered(lambda r: r.personal_identifier in verified_person_id)
+        else:
+            compliant_members_ids = []
+            for group in registrant_satisfied:
+                members = group.group_membership_ids.mapped("individual")
+                for member in members:
+                    if member.personal_identifier in verified_person_id:
+                        compliant_members_ids.append(group.id)
+            compliant_members_ids = list(set(compliant_members_ids))
+            registrant_satisfied = registrant_satisfied.filtered(lambda r: r.id in compliant_members_ids)
+
         membership_to_paused = self.cycle_membership_ids.filtered(lambda cm: cm.partner_id not in registrant_satisfied)
         membership_to_paused.state = "non_compliant"
         membership_to_enrolled = self.cycle_membership_ids - membership_to_paused
