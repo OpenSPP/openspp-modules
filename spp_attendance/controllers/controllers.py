@@ -120,10 +120,11 @@ def validate_entity(model_name, model_id, model_label):
 
         entity = request.env[model_name].sudo().search([("id", "=", model_id)], limit=1)
         if not entity:
-            model_ids = request.env[model_name].sudo().search([]).ids
+            model_ids = request.env[model_name].sudo().search([])
             error_message = f"{model_label} does not exist."
             if model_ids:
-                error_message = f"{model_label} does not exist. Available {model_label}s: {model_ids}."
+                choices = ", ".join([f"{model.id} for {model.name}" for model in model_ids])
+                error_message = f"{model_label} does not exist. Available {model_label}s: {choices}."
             return error_wrapper(400, error_message)
     return None
 
