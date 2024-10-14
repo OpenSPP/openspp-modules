@@ -318,7 +318,7 @@ class OpenSPPAreaImport(models.Model):
                 }
             )
 
-    def fix_area_level(self):
+    def fix_area_level_and_kind(self):
         for rec in self:
             rec.locked = True
             rec.locked_reason = _("Fixing area level.")
@@ -327,17 +327,19 @@ class OpenSPPAreaImport(models.Model):
             for i in range(batches):
                 start = i * 1000
                 end = min((i + 1) * 1000, len(rec.raw_data_ids))
-                jobs.append(rec.delayable(channel="root.area_import")._fix_area_level(rec.raw_data_ids[start:end]))
+                jobs.append(
+                    rec.delayable(channel="root.area_import")._fix_area_level_and_kind(rec.raw_data_ids[start:end])
+                )
             main_job = group(*jobs)
             main_job.on_done(rec.delayable(channel="root.area_import")._async_mark_done())
             main_job.delay()
 
-    def _fix_area_level(self, raw_data_ids):
+    def _fix_area_level_and_kind(self, raw_data_ids):
         """
-        The function `_fix_area_level` fixes the area level of the raw data.
+        The function `fix_area_level_and_kind` fixes the area level of the raw data.
         """
         self.ensure_one()
-        raw_data_ids.fix_area_level()
+        raw_data_ids.fix_area_level_and_kind()
 
     def _async_mark_done(self, function_mark_done=None):
         """
@@ -535,6 +537,7 @@ class OpenSPPAreaImportActivities(models.Model):
             "draft_name": self.admin_name,
             "code": self.admin_code,
             "area_sqkm": area_sqkm,
+            "kind": self.env.ref("spp_area.admin_area_kind").id,
         }
 
     def save_to_area(self):
@@ -569,9 +572,9 @@ class OpenSPPAreaImportActivities(models.Model):
                 }
             )
 
-    def fix_area_level(self):
+    def fix_area_level_and_kind(self):
         for rec in self:
-            if rec.area_id and rec.area_id.area_level != rec.level:
+            if rec.area_id and (rec.area_id.area_level != rec.level or not rec.area_id.kind):
                 parent_id = None
                 if rec.parent_name and rec.parent_code:
                     parent_id = (
@@ -584,4 +587,9 @@ class OpenSPPAreaImportActivities(models.Model):
                         )
                         .id
                     )
-                rec.area_id.parent_id = parent_id
+                rec.area_id.update(
+                    {
+                        "kind": rec.env.ref("spp_area.admin_area_kind").id,
+                        "parent_id": parent_id,
+                    }
+                )
