@@ -254,12 +254,12 @@ class SppGisApiController(Controller):
                         % {"date": attendance_date, "time": attendance_time, "person_identifier": person_id},
                     )
 
-                attendance_type = time_card.get("attendance_type", False)
+                attendance_type = time_card.get("attendance_type", False) or False
                 if result := validate_attendance_type(attendance_type):
                     return result
                 attendance_type = int(attendance_type)
 
-                attendance_location = time_card.get("attendance_location", False)
+                attendance_location = time_card.get("attendance_location", False) or False
                 if result := validate_attendance_location(attendance_location):
                     return result
                 attendance_location = int(attendance_location)
@@ -325,12 +325,12 @@ class SppGisApiController(Controller):
                 from_date = datetime.strptime(from_date, "%Y-%m-%d")
                 to_date = datetime.strptime(to_date, "%Y-%m-%d")
 
-        attendance_type = kwargs.get("attendance_type", False)
+        attendance_type = kwargs.get("attendance_type", False) or False
         if result := validate_attendance_type(attendance_type):
             return result
         attendance_type = int(attendance_type)
 
-        attendance_location = kwargs.get("attendance_location", False)
+        attendance_location = kwargs.get("attendance_location", False) or False
         if result := validate_attendance_location(attendance_location):
             return result
         attendance_location = int(attendance_location)
@@ -387,12 +387,12 @@ class SppGisApiController(Controller):
                 from_date = datetime.strptime(from_date, "%Y-%m-%d")
                 to_date = datetime.strptime(to_date, "%Y-%m-%d")
 
-        attendance_type = kwargs.get("attendance_type", False)
+        attendance_type = kwargs.get("attendance_type", False) or False
         if result := validate_attendance_type(attendance_type):
             return result
         attendance_type = int(attendance_type)
 
-        attendance_location = kwargs.get("attendance_location", False)
+        attendance_location = kwargs.get("attendance_location", False) or False
         if result := validate_attendance_location(attendance_location):
             return result
         attendance_location = int(attendance_location)
