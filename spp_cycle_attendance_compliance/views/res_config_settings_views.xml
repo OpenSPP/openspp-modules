@@ -16,13 +16,13 @@
                         <field name="attendance_auth_endpoint" />
                     </setting>
                     <setting string="Compliance Endpoint">
-                        <field name="attendance_compliance_url" />
+                        <field name="attendance_compliance_endpoint" />
                     </setting>
                     <setting string="Attendance Type Endpoint">
-                        <field name="attendance_type_url" />
+                        <field name="attendance_type_endpoint" />
                     </setting>
                     <setting string="Attendance Location Endpoint">
-                        <field name="attendance_location_url" />
+                        <field name="attendance_location_endpoint" />
                     </setting>
                     <setting string="Client ID">
                         <field name="attendance_client_id" />

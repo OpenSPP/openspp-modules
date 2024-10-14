@@ -64,7 +64,7 @@ class G2pCycle(models.Model):
         attendance_compliance_endpoint = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("spp_cycle_attendance_compliance.attendance_compliance_url")
+            .get_param("spp_cycle_attendance_compliance.attendance_compliance_endpoint")
         )
         attendance_compliance_url = urljoin(attendance_server_url, attendance_compliance_endpoint)
 

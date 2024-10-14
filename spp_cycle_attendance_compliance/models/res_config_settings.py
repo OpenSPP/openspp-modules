@@ -32,19 +32,19 @@ class ResConfigSettings(models.TransientModel):
         string="Client Secret",
         config_parameter="spp_cycle_attendance_compliance.attendance_client_secret",
     )
-    attendance_compliance_url = fields.Char(
+    attendance_compliance_endpoint = fields.Char(
         string="Compliance Endpoint",
-        config_parameter="spp_cycle_attendance_compliance.attendance_compliance_url",
+        config_parameter="spp_cycle_attendance_compliance.attendance_compliance_endpoint",
         default="/attendances",
     )
-    attendance_type_url = fields.Char(
+    attendance_type_endpoint = fields.Char(
         string="Attendance Type Endpoint",
-        config_parameter="spp_cycle_attendance_compliance.attendance_type_url",
+        config_parameter="spp_cycle_attendance_compliance.attendance_type_endpoint",
         default="/attendance/types",
     )
-    attendance_location_url = fields.Char(
+    attendance_location_endpoint = fields.Char(
         string="Attendance Location Endpoint",
-        config_parameter="spp_cycle_attendance_compliance.attendance_location_url",
+        config_parameter="spp_cycle_attendance_compliance.attendance_location_endpoint",
         default="/attendance/locations",
     )
 
@@ -63,7 +63,7 @@ class ResConfigSettings(models.TransientModel):
 
         header = {"Authorization": f"Bearer {access_token}"}
 
-        attendance_type_url = f"{self.attendance_server_url}{self.attendance_type_url}"
+        attendance_type_url = f"{self.attendance_server_url}{self.attendance_type_endpoint}"
         response = requests.get(attendance_type_url, headers=header)
 
         if not response.status_code == 200:
@@ -91,7 +91,7 @@ class ResConfigSettings(models.TransientModel):
                     }
                 )
 
-        attendance_location_url = f"{self.attendance_server_url}{self.attendance_location_url}"
+        attendance_location_url = f"{self.attendance_server_url}{self.attendance_location_endpoint}"
 
         response = requests.get(attendance_location_url, headers=header)
         if not response.status_code == 200:
