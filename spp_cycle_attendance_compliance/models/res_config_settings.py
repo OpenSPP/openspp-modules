@@ -19,9 +19,9 @@ class ResConfigSettings(models.TransientModel):
         config_parameter="spp_cycle_attendance_compliance.attendance_server_url",
         default=_get_default_attendance_server_url,
     )
-    attendance_auth_url = fields.Char(
+    attendance_auth_endpoint = fields.Char(
         string="Auth Endpoint",
-        config_parameter="spp_cycle_attendance_compliance.attendance_auth_url",
+        config_parameter="spp_cycle_attendance_compliance.attendance_auth_endpoint",
         default="/auth/token",
     )
     attendance_client_id = fields.Char(
@@ -50,7 +50,7 @@ class ResConfigSettings(models.TransientModel):
 
     def test_connection(self):
         self.ensure_one()
-        auth_url = f"{self.attendance_server_url}{self.attendance_auth_url}"
+        auth_url = f"{self.attendance_server_url}{self.attendance_auth_endpoint}"
         client_id = self.attendance_client_id
         client_secret = self.attendance_client_secret
         data = json.dumps({"client_id": client_id, "client_secret": client_secret})

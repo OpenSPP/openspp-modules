@@ -13,7 +13,7 @@
                         <field name="attendance_server_url" />
                     </setting>
                     <setting string="Authentication Endpoint">
-                        <field name="attendance_auth_url" />
+                        <field name="attendance_auth_endpoint" />
                     </setting>
                     <setting string="Compliance Endpoint">
                         <field name="attendance_compliance_url" />

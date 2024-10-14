@@ -41,10 +41,9 @@ class G2pCycle(models.Model):
             self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_server_url")
         )
         auth_endpoint = (
-            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_auth_url")
+            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_auth_endpoint")
         )
 
-        # attendance_auth_url = f"{attendance_server_url}{auth_endpoint}"
         attendance_auth_url = urljoin(attendance_server_url, auth_endpoint)
         attendance_client_id = (
             self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_client_id")
