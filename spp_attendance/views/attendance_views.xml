@@ -70,7 +70,7 @@
         </field>
     </record>
 
-    <record id="attendance_subscriber_action_windown" model="ir.actions.act_window">
+    <record id="attendance_subscriber_action_window" model="ir.actions.act_window">
         <field name="name">Attendance Subscriber</field>
         <field name="res_model">spp.attendance.subscriber</field>
         <field name="view_mode">tree,form</field>
@@ -81,7 +81,7 @@
         name="Subscriber"
         id="spp_attendance.attendance_subscriber_menu"
         parent="spp_attendance.menu_root"
-        action="attendance_subscriber_action_windown"
+        action="attendance_subscriber_action_window"
         sequence="10"
     />
 

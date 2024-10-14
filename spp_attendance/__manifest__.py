@@ -13,10 +13,10 @@
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
+        "views/main_views.xml",
         "views/attendance_views.xml",
         "views/attendance_api_client_views.xml",
         "views/res_config_view.xml",
-        "views/main_views.xml",
         "views/attendance_type_views.xml",
         "views/attendance_location_views.xml",
         "wizard/import_attendance_view.xml",
