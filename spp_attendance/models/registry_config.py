@@ -1,13 +1,23 @@
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 
 
 class RegistryConfig(models.TransientModel):
     _inherit = "res.config.settings"
 
+    @api.model
+    def _get_default_attendance_auth_url(self):
+        web_base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
+        return web_base_url + "/oauth2/client/token"
+
+    @api.model
+    def _get_default_attendance_import_url(self):
+        web_base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
+        return web_base_url + "/registry/sync/search"
+
     attendance_auth_url = fields.Char(
         string="Auth URL",
         config_parameter="spp_attendance.attendance_auth_url",
-        default="http://localhost:8080/oauth2/client/token",
+        default=_get_default_attendance_auth_url,
     )
     access_token_mapping = fields.Char(
         string="Access Token Mapping",
@@ -17,7 +27,7 @@ class RegistryConfig(models.TransientModel):
     attendance_import_url = fields.Char(
         string="Import URL",
         config_parameter="spp_attendance.attendance_import_url",
-        default="http://localhost:8080/registry/sync/search",
+        default=_get_default_attendance_import_url,
     )
 
     personal_information_mapping = fields.Char(
