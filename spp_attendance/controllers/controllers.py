@@ -232,9 +232,7 @@ class SppGisApiController(Controller):
 
             time_cards = person_data.get("time_card")
             for time_card in time_cards:
-                missing_required_fields = check_required_fields(
-                    time_card, ["date_time", "attendance_location", "attendance_type"]
-                )
+                missing_required_fields = check_required_fields(time_card, ["date_time"])
                 if missing_required_fields:
                     return error_wrapper(
                         400, f"Missing required fields for time_card: {', '.join(missing_required_fields)}"
