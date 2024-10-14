@@ -10,6 +10,9 @@
             <xpath expr="//page[@name='relationships']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
+            <xpath expr="//field[@name='kind']" position="after">
+                <field name="ethnic_group_id" />
+            </xpath>
         </field>
     </record>
 
