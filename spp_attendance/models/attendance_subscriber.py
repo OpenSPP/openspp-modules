@@ -35,12 +35,12 @@ class AttendanceSubscriber(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if "partner_id" not in vals:
-                if partner_id := self.env["res.partner"].search([("name", "=", vals.get("partner_name"))], limit=1):
+                if partner_id := self.env["res.partner"].search([("name", "ilike", vals.get("partner_name"))], limit=1):
                     vals["partner_id"] = partner_id.id
                 else:
                     partner_id = self.env["res.partner"].create(
                         {
-                            "name": f"{vals.get('given_name')} {vals.get('family_name')}",
+                            "name": f"{vals.get('family_name')}, {vals.get('given_name')}",
                             "email": vals.get("email"),
                             "phone": vals.get("phone"),
                             "mobile": vals.get("mobile"),
@@ -71,7 +71,7 @@ class AttendanceSubscriber(models.Model):
             if record.partner_id:
                 record.partner_id.write(
                     {
-                        "name": f"{record.given_name} {record.family_name}",
+                        "name": f"{record.family_name}, {record.given_name}",
                         "email": record.email,
                         "phone": record.phone,
                         "mobile": record.mobile,
@@ -82,7 +82,7 @@ class AttendanceSubscriber(models.Model):
     def _compute_partner_name(self):
         for record in self:
             if record.family_name and record.given_name:
-                record.partner_name = f"{record.given_name} {record.family_name}"
+                record.partner_name = f"{record.family_name}, {record.given_name}"
             else:
                 record.partner_name = ""
 
