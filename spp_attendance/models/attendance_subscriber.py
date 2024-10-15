@@ -35,12 +35,13 @@ class AttendanceSubscriber(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if "partner_id" not in vals:
-                if partner_id := self.env["res.partner"].search([("name", "ilike", vals.get("partner_name"))], limit=1):
+                partner_name = f"{vals.get('family_name')}, {vals.get('given_name')}"
+                if partner_id := self.env["res.partner"].search([("name", "ilike", partner_name)], limit=1):
                     vals["partner_id"] = partner_id.id
                 else:
                     partner_id = self.env["res.partner"].create(
                         {
-                            "name": f"{vals.get('family_name')}, {vals.get('given_name')}",
+                            "name": partner_name,
                             "email": vals.get("email"),
                             "phone": vals.get("phone"),
                             "mobile": vals.get("mobile"),
