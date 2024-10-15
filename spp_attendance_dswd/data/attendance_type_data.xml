@@ -1,0 +1,11 @@
+<odoo noupdate="1">
+    <record id="education_attendance_type" model="spp.attendance.type">
+        <field name="name">Education</field>
+    </record>
+    <record id="health_attendance_type" model="spp.attendance.type">
+        <field name="name">Health</field>
+    </record>
+    <record id="fds_attendance_type" model="spp.attendance.type">
+        <field name="name">FDS</field>
+    </record>
+</odoo>
