@@ -11,6 +11,12 @@ from odoo.osv.expression import AND
 class G2pCycle(models.Model):
     _inherit = "g2p.cycle"
 
+    use_attendance_criteria = fields.Boolean(
+        string="Use Attendance Criteria",
+        help=_("If checked, attendance criteria will be used to filter beneficiaries."),
+        default=True,
+    )
+
     attendance_type_id = fields.Many2one(
         "spp.res.config.attendance.type",
         string="Attendance Type",
@@ -30,11 +36,30 @@ class G2pCycle(models.Model):
     from_date = fields.Date()
     to_date = fields.Date()
 
-    def action_filter_beneficiaries_by_compliance_criteria(self):
-        super().action_filter_beneficiaries_by_compliance_criteria()
+    def _get_domain(self):
         domain = self._get_compliance_criteria_domain()
         if self.program_id.target_type == "individual":
             domain += AND([[("personal_identifier", "!=", False)]])
+        return domain
+
+    def default_url_params(self):
+        params = {}
+        if self.from_date:
+            params["from_date"] = self.from_date
+        if self.to_date:
+            params["to_date"] = self.to_date
+        if self.attendance_type_id:
+            params["attendance_type"] = self.attendance_type_id.external_id
+        if self.attendance_location_id:
+            params["attendance_location"] = self.attendance_location_id.external_id
+        return params
+
+    def action_filter_beneficiaries_by_compliance_criteria(self):
+        super().action_filter_beneficiaries_by_compliance_criteria()
+        if not self.use_attendance_criteria:
+            return
+
+        domain = self._get_domain()
         registrant_satisfied = self.env["res.partner"].sudo().search(domain)
 
         attendance_server_url = (
@@ -80,15 +105,8 @@ class G2pCycle(models.Model):
                 }
             )
 
-        params = {"limit": max(len(registrant_satisfied), 30)}
-        if self.from_date:
-            params["from_date"] = self.from_date
-        if self.to_date:
-            params["to_date"] = self.to_date
-        if self.attendance_type_id:
-            params["attendance_type"] = self.attendance_type_id.external_id
-        if self.attendance_location_id:
-            params["attendance_location"] = self.attendance_location_id.external_id
+        params = self.default_url_params()
+        params["limit"] = max(len(registrant_satisfied), 30)
 
         full_attendance_compliance_url = urljoin(attendance_compliance_url, "?" + urlencode(params))
         response = requests.get(full_attendance_compliance_url, headers=header, data=data)

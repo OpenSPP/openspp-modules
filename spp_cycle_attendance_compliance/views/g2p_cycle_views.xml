@@ -13,6 +13,7 @@
                     invisible="not allow_filter_compliance_criteria"
                 >
                     <group>
+                        <field name="use_attendance_criteria" />
                         <field name="from_date" />
                         <field name="to_date" />
                         <field name="attendance_type_id" options="{'no_open': True, 'no_create': True}" />
