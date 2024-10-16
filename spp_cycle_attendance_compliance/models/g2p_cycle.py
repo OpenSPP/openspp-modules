@@ -12,7 +12,7 @@ class G2pCycle(models.Model):
     _inherit = "g2p.cycle"
 
     use_attendance_criteria = fields.Boolean(
-        string="Use Attendance Criteria",
+        string="Use Attendance Compliance Criteria",
         help=_("If checked, attendance criteria will be used to filter beneficiaries."),
         default=True,
     )
