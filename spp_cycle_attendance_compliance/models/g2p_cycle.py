@@ -54,6 +54,12 @@ class G2pCycle(models.Model):
             params["attendance_location"] = self.attendance_location_id.external_id
         return params
 
+    def _check_and_retrieve_config_params(self, param, name):
+        config_param = self.env["ir.config_parameter"].sudo().get_param(param)
+        if not config_param:
+            raise UserError(f"{name} is not configured.")
+        return config_param
+
     def action_filter_beneficiaries_by_compliance_criteria(self):
         super().action_filter_beneficiaries_by_compliance_criteria()
         if not self.use_attendance_criteria:
@@ -62,19 +68,20 @@ class G2pCycle(models.Model):
         domain = self._get_domain()
         registrant_satisfied = self.env["res.partner"].sudo().search(domain)
 
-        attendance_server_url = (
-            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_server_url")
+        attendance_server_url = self._check_and_retrieve_config_params(
+            "spp_cycle_attendance_compliance.attendance_server_url", "Attendance Server URL"
         )
-        auth_endpoint = (
-            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_auth_endpoint")
+        auth_endpoint = self._check_and_retrieve_config_params(
+            "spp_cycle_attendance_compliance.attendance_auth_endpoint", "Attendance Auth Endpoint"
         )
 
         attendance_auth_url = urljoin(attendance_server_url, auth_endpoint)
-        attendance_client_id = (
-            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_client_id")
+
+        attendance_client_id = self._check_and_retrieve_config_params(
+            "spp_cycle_attendance_compliance.attendance_client_id", "Attendance Client ID"
         )
-        attendance_client_secret = (
-            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_client_secret")
+        attendance_client_secret = self._check_and_retrieve_config_params(
+            "spp_cycle_attendance_compliance.attendance_client_secret", "Attendance Client Secret"
         )
         data = json.dumps({"client_id": attendance_client_id, "client_secret": attendance_client_secret})
         response = requests.post(attendance_auth_url, data=data)
@@ -86,10 +93,8 @@ class G2pCycle(models.Model):
         if not access_token:
             raise UserError("Access Token not found in response.")
 
-        attendance_compliance_endpoint = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("spp_cycle_attendance_compliance.attendance_compliance_endpoint")
+        attendance_compliance_endpoint = self._check_and_retrieve_config_params(
+            "spp_cycle_attendance_compliance.attendance_compliance_endpoint", "Attendance Compliance Endpoint"
         )
         attendance_compliance_url = urljoin(attendance_server_url, attendance_compliance_endpoint)
 

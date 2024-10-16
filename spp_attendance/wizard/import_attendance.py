@@ -87,10 +87,18 @@ class ImportAttendanceWiz(models.TransientModel):
     page = fields.Integer(string="Page", default=1)
     limit = fields.Integer(string="Limit", default=30)
 
+    def _check_and_retrieve_urls(self, param, name):
+        self.ensure_one()
+        url = self.env["ir.config_parameter"].get_param(param)
+        if not url:
+            raise UserError(_("%(name)s is not set.") % {"name": name})
+        return url
+
     def action_import_attendance(self):
         self.ensure_one()
 
-        auth_url = self.env["ir.config_parameter"].get_param("spp_attendance.attendance_auth_url")
+        auth_url = self._check_and_retrieve_urls("spp_attendance.attendance_auth_url", "Authentication URL")
+        import_url = self._check_and_retrieve_urls("spp_attendance.attendance_import_url", "Import URL")
 
         try:
             auth_header = self.auth_header or "{}"
@@ -129,7 +137,6 @@ class ImportAttendanceWiz(models.TransientModel):
             "page": self.page,
             "limit": self.limit,
         }
-        import_url = self.env["ir.config_parameter"].get_param("spp_attendance.attendance_import_url")
         full_import_url = urljoin(import_url, "?" + urlencode(params))
 
         try:
