@@ -43,12 +43,12 @@ class ResPartnerTest(TransactionCase):
         partners = self.env["res.partner"]
 
         # Test the standard web_search_read behavior
-        result = partners.web_search_read(domain=[], specification=[])
+        result = partners.web_search_read(domain=[])
         self.assertEqual(len(result["records"]), partners.search_count([]))
 
         # Test web_search_read with mocked area
         with self._mock_center_area_ids():
-            result = partners.web_search_read(domain=[], specification=[])
+            result = partners.web_search_read(domain=[])
             self.assertEqual(len(result["records"]), 1)
             self.assertEqual(result["records"][0]["id"], self.partner_1.id)
 
