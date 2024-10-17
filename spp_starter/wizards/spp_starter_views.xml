@@ -100,6 +100,18 @@
                     </div>
                     <!-- STEP 3 SP-MIS -->
                     <div invisible="state != '2' or registry_target != 'spmis' or state_spmis != '0'">
+                        <label for="sp_mis_demo_management" string="Will you manage Demo for SP-MIS?" />
+                        <br />
+                        <field
+                            name="sp_mis_demo_management"
+                            nolabel="1"
+                            widget="radio"
+                            options="{'horizontal': true}"
+                            readonly="0"
+                        />
+                    </div>
+                    <!-- STEP 4 SP-MIS -->
+                    <div invisible="state != '2' or registry_target != 'spmis' or state_spmis != '1'">
                         <label
                             for="service_point_management"
                             string="Do you need to manage service points?"
@@ -113,8 +125,8 @@
                             readonly="0"
                         />
                     </div>
-                    <!-- STEP 4 SP-MIS -->
-                    <div invisible="state != '2' or registry_target != 'spmis' or state_spmis != '1'">
+                    <!-- STEP 5 SP-MIS -->
+                    <div invisible="state != '2' or registry_target != 'spmis' or state_spmis != '2'">
                         <label for="cash_transfer_needed" string="Will you be conducting cash transfers?" />
                         <br />
                         <field
@@ -135,8 +147,8 @@
                             readonly="0"
                         />
                     </div>
-                    <!-- STEP 5 SP-MIS -->
-                    <div invisible="state != '2' or registry_target != 'spmis' or state_spmis != '2'">
+                    <!-- STEP 6 SP-MIS -->
+                    <div invisible="state != '2' or registry_target != 'spmis' or state_spmis != '3'">
                         <label
                             for="conducting_inkind_transfer"
                             string="Will you be conducting in-kind transfers?"
@@ -169,13 +181,6 @@
                 <footer>
                     <field name="is_last_step" invisible="1" />
                     <button
-                        string="Back"
-                        name="action_last_state"
-                        type="object"
-                        invisible="state == '0'"
-                        class="btn btn-secondary"
-                    />
-                    <button
                         string="Next"
                         name="action_next_state"
                         type="object"
@@ -188,6 +193,13 @@
                         type="object"
                         invisible="not is_last_step"
                         class="btn btn-success"
+                    />
+                    <button
+                        string="Back"
+                        name="action_last_state"
+                        type="object"
+                        invisible="state == '0'"
+                        class="btn btn-secondary"
                     />
                     <button string="Cancel" special="cancel" class="btn btn-danger" />
                 </footer>

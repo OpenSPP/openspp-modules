@@ -11,9 +11,10 @@ class SppStarter(models.TransientModel):
         ("2", "Chosen Registry Setup"),
     ]
     SP_MIS_STATE_SELECTION = [
-        ("0", "Service Points"),
-        ("1", "Cash Transfer"),
-        ("2", "In-Kind Transfer"),
+        ("0", "SP-MIS"),
+        ("1", "Service Points"),
+        ("2", "Cash Transfer"),
+        ("3", "In-Kind Transfer"),
     ]
     FARMER_STATE_SELECTION = [
         ("0", "Farmer Registry"),
@@ -84,6 +85,17 @@ class SppStarter(models.TransientModel):
         help="To determine if identity management modules should be installed.",
     )
     # STEP 3 SP-MIS
+    sp_mis_demo_management = fields.Selection(
+        selection=[
+            ("yes", "Yes"),
+            ("no", "No"),
+        ],
+        readonly=True,
+        default="yes",
+        help="To gauge whether demo module for SP-MIS is needed.",
+    )
+
+    # STEP 4 SP-MIS
     service_point_management = fields.Selection(
         selection=[
             ("yes", "Yes"),
@@ -93,7 +105,7 @@ class SppStarter(models.TransientModel):
         default="yes",
         help="To gauge whether additional logistics modules are needed.",
     )
-    # STEP 4 SP-MIS
+    # STEP 5 SP-MIS
     cash_transfer_needed = fields.Selection(
         selection=[
             ("yes", "Yes"),
@@ -112,7 +124,7 @@ class SppStarter(models.TransientModel):
         default="yes",
         help="To add functionality for storing financial information.",
     )
-    # STEP 5 SP-MIS
+    # STEP 6 SP-MIS
     conducting_inkind_transfer = fields.Selection(
         selection=[
             ("yes", "Yes"),
@@ -204,6 +216,8 @@ class SppStarter(models.TransientModel):
             res |= find_module("spp_change_request")
             res |= find_module("spp_change_request_change_info")
             res |= find_module("spp_event_data")
+            if self.sp_mis_demo_management == "yes":
+                res |= find_module("spp_demo")
             if self.location_assignment == "yes":
                 res |= find_module("spp_area")
             if self.service_point_management == "yes":
