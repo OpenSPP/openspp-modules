@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_res_config_attendance_type,Access Config Attendance Type,model_spp_res_config_attendance_type,base.group_system,1,1,1,1
+access_res_config_attendance_location,Access Config Attendance Location,model_spp_res_config_attendance_location,base.group_system,1,1,1,1
