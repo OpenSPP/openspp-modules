@@ -13,6 +13,9 @@
             <xpath expr="//field[@name='kind']" position="after">
                 <field name="ethnic_group_id" />
             </xpath>
+            <xpath expr="//field[@name='kind']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
         </field>
     </record>
 
@@ -26,6 +29,10 @@
                 <attribute name="invisible">1</attribute>
             </xpath>
         </field>
+    </record>
+
+    <record id="g2p_registry_group.menu_groups_list" model="ir.ui.menu">
+        <field name="name">Household</field>
     </record>
 
 </odoo>
