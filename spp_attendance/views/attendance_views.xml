@@ -32,6 +32,7 @@
                                     <field name="attendance_location_id" />
                                     <field name="attendance_description" />
                                     <field name="attendance_external_url" />
+                                    <field name="submission_source" />
                                     <field name="submitted_by" />
                                     <field name="submitted_datetime" />
                                 </tree>

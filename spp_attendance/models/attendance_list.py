@@ -10,7 +10,6 @@ class Attendance(models.Model):
     attendance_time = fields.Char(required=True, string="Time", default="00:00:00")
 
     attendance_type_id = fields.Many2one("spp.attendance.type", string="Type")
-    # attendance_location = fields.Char(required=True, string="Location")
     attendance_location_id = fields.Many2one("spp.attendance.location", string="Location")
     attendance_description = fields.Text(Char="Description")
     attendance_external_url = fields.Char(string="External URL")
@@ -20,3 +19,11 @@ class Attendance(models.Model):
         required=True, default=lambda self: fields.Datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     )
     submission_source = fields.Char()
+
+    _sql_constraints = [
+        (
+            "attendance_uniq",
+            "unique(subscriber_id, attendance_date, attendance_time, attendance_type_id)",
+            "An attendance with the same subscriber, date, time, and type already exists.",
+        )
+    ]

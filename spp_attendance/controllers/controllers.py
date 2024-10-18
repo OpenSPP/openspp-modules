@@ -2,8 +2,8 @@ import json
 from datetime import datetime
 
 import werkzeug.wrappers
+from psycopg2.errors import UniqueViolation
 
-from odoo import _
 from odoo.http import Controller, request, route
 from odoo.tools import date_utils
 
@@ -221,8 +221,6 @@ class SppGisApiController(Controller):
         attendance_list_data = []
         person_id_list = []
 
-        person_datetime_mapping = []
-
         for person_data in data["records"]:
             if missing_required_fields := check_required_fields(person_data, ["time_card", "person_id"]):
                 return error_wrapper(400, f"Missing required fields: {', '.join(missing_required_fields)}")
@@ -247,19 +245,6 @@ class SppGisApiController(Controller):
 
                 attendance_date = str(attendance_datetime.date())
                 attendance_time = str(attendance_datetime.time())
-
-                if check_date_time_exists(
-                    attendance_date, attendance_time, subscriber_id, person_datetime_mapping=person_datetime_mapping
-                ):
-                    return error_wrapper(
-                        400,
-                        _(
-                            "Attendance list already exists "
-                            + "for the date %(date)s and time %(time)s for %(person_identifier)s."
-                        )
-                        % {"date": attendance_date, "time": attendance_time, "person_identifier": person_id},
-                    )
-                person_datetime_mapping.append((subscriber_id, attendance_date, attendance_time))
 
                 attendance_type = time_card.get("attendance_type", False) or False
                 if result := validate_attendance_type(attendance_type):
@@ -290,7 +275,10 @@ class SppGisApiController(Controller):
                 if person_id not in person_id_list:
                     person_id_list.append(person_id)
 
-        req.env["spp.attendance.list"].sudo().create(attendance_list_data)
+        try:
+            req.env["spp.attendance.list"].sudo().create(attendance_list_data)
+        except UniqueViolation:
+            return error_wrapper(400, "An attendance with the same subscriber, date, time, and type already exists.")
 
         return response_wrapper(200, {"message": "Attendance list created successfully.", "person_ids": person_id_list})
 
