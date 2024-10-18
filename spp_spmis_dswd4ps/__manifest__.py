@@ -27,6 +27,8 @@
         "views/groups_view.xml",
         "views/individual_view.xml",
         "views/hide_menu_view.xml",
+        "views/programs_view.xml",
+        "views/entitlement_view.xml",
     ],
     "assets": {},
     "demo": [],
