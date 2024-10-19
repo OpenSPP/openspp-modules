@@ -2,3 +2,8 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_res_config_attendance_type,Access Config Attendance Type,model_spp_res_config_attendance_type,base.group_system,1,1,1,1
 access_res_config_attendance_location,Access Config Attendance Location,model_spp_res_config_attendance_location,base.group_system,1,1,1,1
+
+
+spp_event_attendance_system,Event Attendance System Access,spp_cycle_attendance_compliance.model_spp_event_attendance,base.group_system,1,1,1,1
+spp_event_attendance_admin,Event Attendance Admin Access,spp_cycle_attendance_compliance.model_spp_event_attendance,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_event_attendance_registrar,Event Attendance Registrar Access,spp_cycle_attendance_compliance.model_spp_event_attendance,g2p_registry_base.group_g2p_registrar,1,1,1,1

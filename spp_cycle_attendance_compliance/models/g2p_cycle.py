@@ -119,20 +119,24 @@ class G2pCycle(models.Model):
         if response.status_code != 200:
             raise UserError(f"Connection to Attendance Compliance Server Failed. Reason: {response.text}")
 
+        record_per_person = {}
         verified_person_id = []
         records = response.json().get("records", [])
         for record in records:
             person_id = record.get("person_id", None)
             number_of_attendance = record.get("number_of_days_present", 0)
+            record_per_person[person_id] = record
             if number_of_attendance >= self.required_number_of_attendance:
                 verified_person_id.append(person_id)
 
         if self.program_id.target_type == "individual":
+            self._create_attendance_event_data(registrant_satisfied, record_per_person)
             registrant_satisfied = registrant_satisfied.filtered(lambda r: r.personal_identifier in verified_person_id)
         else:
             compliant_members_ids = []
             for group in registrant_satisfied:
                 members = group.group_membership_ids.mapped("individual")
+                self._create_attendance_event_data(members, record_per_person)
                 for member in members:
                     if member.personal_identifier in verified_person_id:
                         compliant_members_ids.append(group.id)
@@ -143,3 +147,83 @@ class G2pCycle(models.Model):
         membership_to_paused.state = "non_compliant"
         membership_to_enrolled = self.cycle_membership_ids - membership_to_paused
         membership_to_enrolled.state = "enrolled"
+
+    def _create_attendance_event_data(self, individual_ids, record_per_person):
+        server_url = (
+            self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_server_url")
+        )
+        attendance_type_mapping = {}
+        attendance_type_ids = self.env["spp.res.config.attendance.type"].search([])
+        for attendance_type in attendance_type_ids:
+            attendance_type_mapping[
+                f"{attendance_type.external_source}-{attendance_type.external_id}"
+            ] = attendance_type.id
+
+        attendance_location_mapping = {}
+        attendance_location_ids = self.env["spp.res.config.attendance.location"].search([])
+        for attendance_location in attendance_location_ids:
+            attendance_location_mapping[
+                f"{attendance_location.external_source}-{attendance_location.external_id}"
+            ] = attendance_location.id
+
+        for individual_id in individual_ids:
+            record = record_per_person.get(individual_id.personal_identifier, {})
+            if record:
+                external_ids = []
+                for attendance in record.get("attendance_list", []):
+                    external_ids.append(attendance.get("id"))
+                    attendance_type = attendance.get("attendance_type", {})
+                    attendance_location = attendance.get("attendance_location", {})
+                    event_attendance_vals = {
+                        "individual_id": individual_id.id,
+                        "attendance_date": attendance.get("date"),
+                        "attendance_time": attendance.get("time"),
+                        "attendance_type_id": attendance_type_mapping.get(
+                            f"{server_url}-{attendance_type.get('id')}", False
+                        ),
+                        "attendance_location_id": attendance_location_mapping.get(
+                            f"{server_url}-{attendance_location.get('id')}", False
+                        ),
+                        "attendance_description": attendance.get("attendance_description"),
+                        "attendance_external_url": attendance.get("attendance_external_url"),
+                        "submitted_by": attendance.get("submitted_by"),
+                        "submitted_datetime": attendance.get("submitted_datetime"),
+                        "submission_source": attendance.get("submission_source"),
+                        "event_data_source": server_url,
+                        "event_data_external_id": attendance.get("id"),
+                    }
+                    domain = [
+                        ("individual_id", "=", individual_id.id),
+                        ("event_data_source", "=", server_url),
+                        ("event_data_external_id", "=", attendance.get("id")),
+                    ]
+                    event_attendance_id = self.env["spp.event.attendance"].search(domain, limit=1)
+                    if not event_attendance_id:
+                        new_event_attendance_id = self.env["spp.event.attendance"].create(event_attendance_vals)
+                        self._create_event_data(individual_id, new_event_attendance_id)
+                    else:
+                        event_attendance_id.write(event_attendance_vals)
+
+                # Delete all the attendance records that are not in the external_ids
+                event_attendance_ids = self.env["spp.event.attendance"].search(
+                    [
+                        ("individual_id", "=", individual_id.id),
+                        ("event_data_source", "=", server_url),
+                        ("event_data_external_id", "not in", external_ids),
+                    ]
+                )
+                if event_attendance_ids:
+                    event_data_to_delete = self.env["spp.event.data"].search(
+                        [("res_id", "in", event_attendance_ids.ids), ("model", "=", event_attendance_ids._name)]
+                    )
+                    event_attendance_ids.unlink()
+                    event_data_to_delete.unlink()
+
+    def _create_event_data(self, partner_id, res_id):
+        return self.env["spp.event.data"].create(
+            {
+                "model": res_id._name,
+                "partner_id": partner_id.id,
+                "res_id": res_id.id,
+            }
+        )

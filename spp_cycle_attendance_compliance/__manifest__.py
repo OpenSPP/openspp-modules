@@ -18,6 +18,7 @@
         "views/main_attendance_view.xml",
         "views/config_attendance_type_view.xml",
         "views/config_attendance_location_view.xml",
+        "views/event_data_attendance_view.xml",
         "security/ir.model.access.csv",
     ],
     "assets": {},
