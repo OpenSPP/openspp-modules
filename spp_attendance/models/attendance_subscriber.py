@@ -118,6 +118,7 @@ class AttendanceSubscriber(models.Model):
             "number_of_days_present": len(number_of_days_present),
             "attendance_list": [
                 {
+                    "id": attendance.id,
                     "date": attendance.attendance_date,
                     "time": attendance.attendance_time,
                     "attendance_type": {
