@@ -174,8 +174,6 @@ class SppStarter(models.TransientModel):
             res |= find_module("g2p_bank")
         if self.conducting_inkind_transfer == "yes":
             res |= find_module("spp_entitlement_in_kind")
-        if self.complaint_management == "yes":
-            res |= find_module("spp_helpdesk")
         return res
 
     def _remove_default_products_if_needed(self):
