@@ -11,6 +11,7 @@
     "maintainers": ["reichie020212"],
     "depends": [
         "spp_programs_compliance_criteria",
+        "spp_event_data",
     ],
     "data": [
         "views/res_config_settings_views.xml",
