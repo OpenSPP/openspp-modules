@@ -2,7 +2,6 @@ import json
 from datetime import datetime
 
 import werkzeug.wrappers
-from psycopg2.errors import UniqueViolation
 
 from odoo.http import Controller, request, route
 from odoo.tools import date_utils
@@ -258,27 +257,30 @@ class SppGisApiController(Controller):
 
                 attendance_description = time_card.get("attendance_description", "")
                 attendance_external_url = time_card.get("attendance_external_url", "")
-                attendance_list_data.append(
-                    {
-                        "subscriber_id": subscriber_id.id,
-                        "attendance_date": attendance_date,
-                        "attendance_time": attendance_time,
-                        "attendance_type_id": attendance_type,
-                        "attendance_location_id": attendance_location,
-                        "attendance_description": attendance_description,
-                        "attendance_external_url": attendance_external_url,
-                        "submitted_by": submitted_by,
-                        "submitted_datetime": submitted_datetime,
-                        "submission_source": submission_source,
-                    }
-                )
+                attendane_list_vals = {
+                    "subscriber_id": subscriber_id.id,
+                    "attendance_date": attendance_date,
+                    "attendance_time": attendance_time,
+                    "attendance_type_id": attendance_type,
+                    "attendance_location_id": attendance_location,
+                    "attendance_description": attendance_description,
+                    "attendance_external_url": attendance_external_url,
+                    "submitted_by": submitted_by,
+                    "submitted_datetime": submitted_datetime,
+                    "submission_source": submission_source,
+                }
+
+                new_attendance_list_ids = req.env["spp.attendance.list"].sudo().new(attendane_list_vals)
+                if not new_attendance_list_ids.check_uniqueness():
+                    return error_wrapper(
+                        400, "An attendance record is already exists. Please check the date, time, type, location."
+                    )
+
+                attendance_list_data.append(attendane_list_vals)
                 if person_id not in person_id_list:
                     person_id_list.append(person_id)
 
-        try:
-            req.env["spp.attendance.list"].sudo().create(attendance_list_data)
-        except UniqueViolation:
-            return error_wrapper(400, "An attendance with the same subscriber, date, time, and type already exists.")
+        req.env["spp.attendance.list"].sudo().create(attendance_list_data)
 
         return response_wrapper(200, {"message": "Attendance list created successfully.", "person_ids": person_id_list})
 

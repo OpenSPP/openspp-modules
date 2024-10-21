@@ -53,6 +53,30 @@ class RegistryConfig(models.TransientModel):
     email_mapping = fields.Char(string="Email", config_parameter="spp_attendance.email_mapping")
     phone_mapping = fields.Char(string="Phone", config_parameter="spp_attendance.phone_mapping")
 
+    date_unique = fields.Boolean(
+        string="Unique Date",
+        config_parameter="spp_attendance.date_unique",
+        default=False,
+        inverse="_onchange_unique_fields",
+    )
+    time_unique = fields.Boolean(
+        string="Unique Time",
+        config_parameter="spp_attendance.time_unique",
+        default=False,
+        inverse="_onchange_unique_fields",
+    )
+    type_unique = fields.Boolean(
+        string="Unique Type",
+        config_parameter="spp_attendance.type_unique",
+        default=False,
+        inverse="_onchange_unique_fields",
+    )
+    location_unique = fields.Boolean(
+        string="Unique Location",
+        config_parameter="spp_attendance.location_unique",
+        default=False,
+    )
+
     def action_import(self):
         self.ensure_one()
 
@@ -67,3 +91,15 @@ class RegistryConfig(models.TransientModel):
             "target": "new",
         }
         return action
+
+    @api.onchange("date_unique", "time_unique", "type_unique")
+    def _onchange_unique_fields(self):
+        if not self.date_unique:
+            self.time_unique = False
+            self.type_unique = False
+            self.location_unique = False
+        if not self.time_unique:
+            self.type_unique = False
+            self.location_unique = False
+        if not self.type_unique:
+            self.location_unique = False

@@ -11,6 +11,7 @@
     "depends": ["spp_attendance"],
     "data": [
         "data/attendance_type_data.xml",
+        "data/ir_config_parameter_data.xml",
     ],
     "assets": {},
     "demo": [],
