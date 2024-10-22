@@ -148,6 +148,23 @@ class G2pCycle(models.Model):
         membership_to_enrolled = self.cycle_membership_ids - membership_to_paused
         membership_to_enrolled.state = "enrolled"
 
+        message = _("Successfully applied compliance criteria.")
+
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Compliance Criteria"),
+                "message": message,
+                "sticky": False,
+                "type": "success",
+                "next": {
+                    "type": "ir.actions.client",
+                    "tag": "reload",
+                },
+            },
+        }
+
     def _create_attendance_event_data(self, individual_ids, record_per_person):
         server_url = (
             self.env["ir.config_parameter"].sudo().get_param("spp_cycle_attendance_compliance.attendance_server_url")
