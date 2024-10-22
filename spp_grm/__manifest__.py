@@ -26,6 +26,7 @@
     "data": [
         "data/grm_data.xml",
         "data/mail_alias.xml",
+        "data/mail_templates.xml",
         "security/grm_security.xml",
         "security/ir.model.access.csv",
         "data/user_roles.xml",

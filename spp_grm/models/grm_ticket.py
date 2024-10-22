@@ -226,3 +226,17 @@ class SPPGRMTicket(models.Model):
         """Get the URL for the ticket's portal page."""
         self.ensure_one()
         return "/my/tickets/%s" % self.id
+
+    def send_ticket_confirmation_email(self, ticket):
+        """Send the ticket submission confirmation email."""
+        template = self.env.ref("spp_grm.ticket_submission_confirmation", raise_if_not_found=False)
+        if template:
+            template.sudo().send_mail(
+                ticket.id,
+                force_send=True,
+                email_values={
+                    "email_to": ticket.partner_id.email,
+                },
+            )
+        else:
+            _logger.warning("Email template not found: spp_grm.ticket_submission_confirmation")

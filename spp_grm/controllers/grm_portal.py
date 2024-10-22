@@ -1,7 +1,11 @@
+import logging
+
 from odoo import http
 from odoo.http import request
 
 from odoo.addons.portal.controllers.portal import CustomerPortal
+
+_logger = logging.getLogger(__name__)
 
 
 class SPPGrmPortal(CustomerPortal):
@@ -43,5 +47,8 @@ class SPPGrmPortal(CustomerPortal):
             "channel_id": request.env.ref("spp_grm.grm_ticket_channel_web").id,
             "partner_id": partner.id,
         }
-        request.env["spp.grm.ticket"].sudo().create(vals)
+        ticket = request.env["spp.grm.ticket"].sudo().create(vals)
+
+        ticket.send_ticket_confirmation_email(ticket)
+
         return request.redirect("/my/tickets")
