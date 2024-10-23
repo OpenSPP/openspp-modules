@@ -1,4 +1,5 @@
 import json
+import logging
 from datetime import datetime
 
 import werkzeug.wrappers
@@ -7,6 +8,8 @@ from odoo.http import Controller, request, route
 from odoo.tools import date_utils
 
 from odoo.addons.spp_oauth.tools import OpenSPPOAuthJWTException, verify_and_decode_signature
+
+_logger = logging.getLogger(__name__)
 
 
 def response_wrapper(status, data):
@@ -283,6 +286,116 @@ class SppGisApiController(Controller):
         req.env["spp.attendance.list"].sudo().create(attendance_list_data)
 
         return response_wrapper(200, {"message": "Attendance list created successfully.", "person_ids": person_id_list})
+
+    @route(
+        "/attendances",
+        type="http",
+        auth="none",
+        methods=["PUT"],
+        csrf=False,
+    )
+    def update_attendance_list(self, **kwargs):
+        if error := validate_request_header_and_body():
+            return error
+
+        req = request
+        data = req.httprequest.data or "{}"
+        data = json.loads(data)
+
+        if missing_required_fields := check_required_fields(data, ["records", "submitted_by", "submitted_datetime"]):
+            return error_wrapper(400, f"Missing required fields: {', '.join(missing_required_fields)}")
+
+        current_date = datetime.now().strftime("%Y-%m-%d")
+        submitted_datetime = data.get("submitted_datetime", current_date)
+        submitted_by = data.get("submitted_by")
+        submission_source = data.get("submission_source", "")
+
+        for attendance_data in data["records"]:
+            if missing_required_fields := check_required_fields(attendance_data, ["time_card", "id"]):
+                return error_wrapper(400, f"Missing required fields for records: {', '.join(missing_required_fields)}")
+
+            attendance_id = attendance_data.get("id")
+            if not isinstance(attendance_id, int):
+                return error_wrapper(400, "id must be an integer.")
+
+            attendance_list_id = req.env["spp.attendance.list"].sudo().search([("id", "=", attendance_id)], limit=1)
+
+            if not attendance_list_id:
+                return error_wrapper(400, f"Attendance ID {attendance_id} does not exist.")
+
+            time_card = attendance_data.get("time_card")
+            if not isinstance(time_card, dict):
+                return error_wrapper(400, "time_card must be an object.")
+
+            vals = {}
+
+            if "date_time" in time_card:
+                attendance_datetime = time_card.get("date_time")
+                attendance_datetime = datetime.strptime(attendance_datetime, "%Y-%m-%d %H:%M:%S")
+                attendance_date = str(attendance_datetime.date())
+                attendance_time = str(attendance_datetime.time())
+
+                vals["attendance_date"] = attendance_date
+                vals["attendance_time"] = attendance_time
+
+            if "attendance_type" in time_card:
+                attendance_type = time_card.get("attendance_type")
+                if result := validate_attendance_type(attendance_type):
+                    return result
+                attendance_type = int(attendance_type)
+                vals["attendance_type_id"] = attendance_type
+
+            if "attendance_location" in time_card:
+                attendance_location = time_card.get("attendance_location")
+                if result := validate_attendance_location(attendance_location):
+                    return result
+                attendance_location = int(attendance_location)
+                vals["attendance_location_id"] = attendance_location
+
+            if "attendance_description" in time_card:
+                attendance_description = time_card.get("attendance_description")
+                vals["attendance_description"] = attendance_description
+
+            if "attendance_external_url" in time_card:
+                attendance_external_url = time_card.get("attendance_external_url")
+                vals["attendance_external_url"] = attendance_external_url
+
+            if vals:
+                vals["submitted_by"] = submitted_by
+                vals["submitted_datetime"] = submitted_datetime
+                vals["submission_source"] = submission_source
+                attendance_list_id.write(vals)
+
+        return response_wrapper(200, {"message": "Attendance list updated successfully."})
+
+    @route(
+        "/attendances",
+        type="http",
+        auth="none",
+        methods=["DELETE"],
+        csrf=False,
+    )
+    def delete_attendance_list(self, ids=None, **kwargs):
+        if error := validate_request_header_and_body():
+            return error
+
+        if not ids:
+            ids = []
+        else:
+            try:
+                ids = [int(item) for item in ids.split(",")]
+            except ValueError as e:
+                _logger.error(e)
+                return error_wrapper(400, "ids must be a list of integers.")
+
+        req = request
+        attendance_list_ids = req.env["spp.attendance.list"].sudo().search([("id", "in", ids)])
+
+        if not attendance_list_ids:
+            return error_wrapper(400, "Attendance list does not exist.")
+
+        attendance_list_ids.unlink()
+        return response_wrapper(200, {"message": "Attendance list deleted successfully."})
 
     @route(
         "/attendance/<string:person_identifier>",
