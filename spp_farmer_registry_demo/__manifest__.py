@@ -18,6 +18,9 @@
         "queue_job",
         "spp_base_demo",
     ],
+    "excludes": [
+        "spp_base",
+    ],
     "data": [
         "security/ir.model.access.csv",
         "data/asset_type_data.xml",

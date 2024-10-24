@@ -15,6 +15,9 @@
         "base",
         "spp_base_gis",
     ],
+    "excludes": [
+        "spp_base",
+    ],
     "data": [
         "security/irrigation_security.xml",
         "security/ir.model.access.csv",
