@@ -18,6 +18,9 @@
         "spp_service_points",
         "spp_land_record",
     ],
+    "excludes": [
+        "spp_base",
+    ],
     "data": [
         "security/change_request_security.xml",
         "security/ir.model.access.csv",

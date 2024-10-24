@@ -17,6 +17,9 @@
         "g2p_registry_membership",
         "spp_service_points",
     ],
+    "excludes": [
+        "spp_farmer_registry_base",
+    ],
     "data": [
         "security/change_request_security.xml",
         "security/ir.model.access.csv",

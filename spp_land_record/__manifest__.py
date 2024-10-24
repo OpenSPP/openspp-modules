@@ -16,6 +16,9 @@
         "spp_base_gis",
         "g2p_registry_base",
     ],
+    "excludes": [
+        "spp_base",
+    ],
     "data": [
         "security/ir.model.access.csv",
     ],
