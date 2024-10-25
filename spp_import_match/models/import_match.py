@@ -70,7 +70,7 @@ class SPPImportMatch(models.Model):
             if len(match) == 1:
                 return match
             elif len(match) > 1:
-                raise ValidationError(_(f"Multiple matches found for '{match[0].name}'!"))
+                raise ValidationError(_("Multiple matches found for '%s'!" % match[0].name))
 
         return model
 
