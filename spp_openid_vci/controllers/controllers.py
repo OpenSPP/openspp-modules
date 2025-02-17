@@ -1,7 +1,6 @@
 import json
 import logging
 
-import requests
 import werkzeug.wrappers
 
 from odoo.http import Controller, request, route
@@ -98,17 +97,5 @@ class SppOpenIDVCIController(Controller):
             return self.error_wrapper(401, "Invalid JWS provided.")
 
         data = json.loads(jwt.claims)
-        _logger.info(data)
-        individual_id_url = data.get("credential", {}).get("credentialSubject", {}).get("id")
 
-        response = requests.get(individual_id_url, json={"api_key": api_key})
-        _logger.info("Requesting individual data from %s", individual_id_url)
-        _logger.info(response.status_code)
-
-        if response.status_code != 200:
-            response_data = response.json()
-            error_code = response_data.get("error", {}).get("code", "Unknown error")
-            error_message = response_data.get("error", {}).get("message", "Unknown error")
-            return self.error_wrapper(error_code, error_message)
-
-        return self.response_wrapper(200, {"verified": True, **response.json()})
+        return self.response_wrapper(200, {"verified": True, **data})
