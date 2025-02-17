@@ -1,6 +1,6 @@
 /** @odoo-module */
 
-import {Component, onWillDestroy, onWillStart, useRef, useState} from "@odoo/owl";
+import {Component, onWillDestroy, onWillStart, useEffect, useRef, useState} from "@odoo/owl";
 import {loadBundle} from "@web/core/assets";
 
 export class QRScanner extends Component {
@@ -9,12 +9,13 @@ export class QRScanner extends Component {
     static props = {
         onScanned: {type: Function},
         isActive: {type: Boolean, optional: true},
+        errorMessage: {type: String, optional: true},
     };
 
     setup() {
         this.state = useState({
             isScanning: false,
-            error: null,
+            error: this.props.errorMessage || null,
         });
         this.videoContainer = useRef("videoContainer");
 
@@ -31,6 +32,14 @@ export class QRScanner extends Component {
                 }),
             ]);
         });
+
+        useEffect(
+            () => {
+                // Handle prop changes here
+                this.state.error = this.props.errorMessage;
+            },
+            () => [this.props.errorMessage]
+        );
     }
 
     get hasRtcSupport() {
