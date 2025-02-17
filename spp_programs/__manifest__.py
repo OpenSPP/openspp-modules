@@ -20,6 +20,7 @@
         "stock",
         "spp_user_roles",
         "spp_registry_base",
+        "account",
     ],
     "data": [
         "data/user_roles.xml",
