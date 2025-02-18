@@ -83,3 +83,6 @@ class ApiJsonRequest(Dispatcher):
             error["message"] = "Odoo Session Expired"
 
         return self._response(error=error)
+
+    def _response(self, error=None):
+        return self.request.make_json_response(error)
