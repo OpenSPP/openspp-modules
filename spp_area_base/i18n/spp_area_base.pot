@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* spp_area
+# 	* spp_area_base
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-02-24 02:22+0000\n"
-"Last-Translator: Ammar ALBAYATI <ammar.albayati@wfp.org>\n"
-"Language-Team: Arabic <https://translate.openspp.org/projects/openspp/"
-"spp_area/ar/>\n"
-"Language: ar\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.14\n"
+"Plural-Forms: \n"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
@@ -53,7 +48,7 @@ msgstr ""
 #: model:ir.ui.menu,name:spp_area_base.menu_spparea
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_form
 msgid "Area"
-msgstr "المركز"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__area_sqkm
@@ -91,15 +86,14 @@ msgstr ""
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_form
 msgid "Area Name..."
-msgstr "المركز..."
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.actions.act_window,name:spp_area_base.action_spparea_kind
 #: model:ir.model,name:spp_area_base.model_spp_area_kind
 #: model:ir.ui.menu,name:spp_area_base.menu_spparea_kind
-#, fuzzy
 msgid "Area Type"
-msgstr "المركز"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.actions.act_window,name:spp_area_base.action_view_spparea_import
@@ -108,6 +102,7 @@ msgstr ""
 
 #. module: spp_area_base
 #. odoo-python
+#: code:addons/spp_area_base/models/area.py:0
 #: code:addons/spp_area_base/models/area.py:0
 #, python-format
 msgid "Area already exist!"
@@ -140,12 +135,12 @@ msgstr ""
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Cancel"
-msgstr "الغاء"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import__state__cancelled
 msgid "Cancelled"
-msgstr "ألغيت"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__child_ids
@@ -203,7 +198,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__create_uid
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__create_uid
 msgid "Created by"
-msgstr "انشأ من قبل"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__create_date
@@ -211,7 +206,7 @@ msgstr "انشأ من قبل"
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__create_date
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__create_date
 msgid "Created on"
-msgstr "انشأ على"
+msgstr ""
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
@@ -231,7 +226,7 @@ msgstr ""
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__date_validated
 msgid "Date Validated"
-msgstr "تاريخ التحقق"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__display_name
@@ -239,7 +234,7 @@ msgstr "تاريخ التحقق"
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__display_name
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__display_name
 msgid "Display Name"
-msgstr "الاسم"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import__state__done
@@ -249,9 +244,8 @@ msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__draft_name
-#, fuzzy
 msgid "Draft Name"
-msgstr "المركز..."
+msgstr ""
 
 #. module: spp_area_base
 #. odoo-python
@@ -286,7 +280,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_filter
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_import_filter
 msgid "Group By"
-msgstr "مجموعة من"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__id
@@ -319,6 +313,7 @@ msgstr ""
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
+#: code:addons/spp_area_base/models/area_import.py:0
 #, python-format
 msgid "Importing data."
 msgstr ""
@@ -343,7 +338,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__write_uid
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__write_uid
 msgid "Last Updated by"
-msgstr "آخر تحديث بواسطة"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__write_date
@@ -351,7 +346,7 @@ msgstr "آخر تحديث بواسطة"
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__write_date
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__write_date
 msgid "Last Updated on"
-msgstr "آخر تحديث في"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__level
@@ -393,7 +388,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__name
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__name
 msgid "Name"
-msgstr "الإسم"
+msgstr ""
 
 #. module: spp_area_base
 #. odoo-python
@@ -405,7 +400,7 @@ msgstr ""
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_form
 msgid "Name:"
-msgstr "اسم:"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import__state__new
@@ -435,9 +430,8 @@ msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__parent_name
-#, fuzzy
 msgid "Parent Name"
-msgstr "المركز..."
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__parent_path
@@ -516,7 +510,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__state
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__state
 msgid "Status"
-msgstr "الحالة"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,help:spp_area_base.field_spp_area__level
@@ -566,38 +560,23 @@ msgstr ""
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
-#, fuzzy
 msgid "Validate Data"
-msgstr "تم التحقق"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import__state__validated
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import_raw__state__validated
 msgid "Validated"
-msgstr "تم التحقق"
+msgstr ""
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__validate_id
 msgid "Validated by"
-msgstr "تم التحقق من قبل"
+msgstr ""
 
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Validating data."
-msgstr "تم التحقق"
-
-#, fuzzy
-#~ msgid "Area Kind"
-#~ msgstr "المركز"
-
-#~ msgid "Contact"
-#~ msgstr "اتصال"
-
-#, fuzzy
-#~ msgid "DMS Directories"
-#~ msgstr "دليل الوثائق"
-
-#~ msgid "Last Modified on"
-#~ msgstr "تاريخ آخر تعديل"
+msgstr ""
