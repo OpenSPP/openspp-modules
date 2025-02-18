@@ -137,3 +137,9 @@ entitlement_inkind_read_registry_access,Entitlement Inkind Read Access,spp_progr
 
 reject_entitlement_wizard_finance_validator_access,Reject Entitlement Wizard Finance Validator Access,spp_programs.model_spp_reject_entitlement_wizard,g2p_programs.g2p_finance_validator,1,1,1,1
 spp_entitlement_reject_finance_validator_access,SPP Entitlement Reject Finance Validator Access,spp_programs.model_spp_entitlement_reject,g2p_programs.g2p_finance_validator,1,1,1,1
+
+g2p_account_journal_g2p_program_cycle_approver,Account Journal Program Cycle Manager Access,account.model_account_journal,g2p_programs.g2p_program_cycle_approver,1,1,1,1
+g2p_account_move_g2p_program_cycle_approver,Account Move Program Cycle Manager Access,account.model_account_move,g2p_programs.g2p_program_cycle_approver,1,1,1,1
+g2p_account_move_line_g2p_program_cycle_approver,Account Move Line Program cycle Manager Access,account.model_account_move_line,g2p_programs.g2p_program_cycle_approver,1,1,1,1
+g2p_entitlement_g2p_program_cycle_approver,Entitlement Program Cycle Manager Access,g2p_programs.model_g2p_entitlement,g2p_programs.g2p_program_cycle_approver,1,1,1,1
+g2p_account_payment_g2p_program_cycle_approver,Account Payment Program Cycle Manager Access,account.model_account_payment,g2p_programs.g2p_program_cycle_approver,1,1,1,1
