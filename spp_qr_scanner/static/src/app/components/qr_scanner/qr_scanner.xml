@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="spp_qr_scanner.QRScanner">
+        <div t-if="state.error" class="alert alert-danger">
+            <t t-esc="state.error" />
+        </div>
+
+        <div
+            t-ref="videoContainer"
+            class="video-container fixed-center"
+            t-att-class="{ 'scanning': state.isScanning }"
+        >
+            <video
+                t-ref="video"
+                autoplay="true"
+                playsinline="true"
+                t-att-class="{ 'd-none': !state.isScanning }"
+            />
+            <canvas t-ref="canvas" class="d-none" />
+        </div>
+        <div class="qr-scanner-container">
+            <button
+                class="btn btn-primary"
+                t-on-click="state.isScanning ? () => this.stopScanning() : () => this.startScanning()"
+            >
+                <t t-esc="state.isScanning ? 'Stop Scanner' : 'Start Scanner'" />
+            </button>
+        </div>
+    </t>
+</templates>
