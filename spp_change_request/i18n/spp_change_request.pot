@@ -331,6 +331,11 @@ msgid "Change Request Data Source Mixin"
 msgstr ""
 
 #. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_external_api
+msgid "Change Request External API"
+msgstr ""
+
+#. module: spp_change_request
 #: model:mail.activity.type,name:spp_change_request.validation_activity
 msgid "Change Request For Validation"
 msgstr ""
@@ -1127,6 +1132,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
+msgid "The change request has been approved."
+msgstr ""
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
 msgid "The change request has been fully validated"
 msgstr ""
 
@@ -1204,6 +1216,15 @@ msgstr ""
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The request must be in draft state to be set to pending validation."
+msgstr ""
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid ""
+"The request must be in draft, pending, or validated state for changes to be "
+"applied."
 msgstr ""
 
 #. module: spp_change_request
@@ -1357,6 +1378,13 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.module.category,description:spp_change_request.spp_change_request_module
 msgid "User access level for the OpenSPP change request module"
+msgstr ""
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "User is not allowed to approve CRs directly."
 msgstr ""
 
 #. module: spp_change_request
