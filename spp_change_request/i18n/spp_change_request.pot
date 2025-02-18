@@ -125,9 +125,29 @@ msgid "Applicant Information"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_information_visible
+msgid "Applicant Information Visible"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id_required
+msgid "Applicant Required"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id_visible
+msgid "Applicant Visible"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_phone
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__applicant_phone
 msgid "Applicant's Phone Number"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_phone_required
+msgid "Applicant's Phone Required"
 msgstr ""
 
 #. module: spp_change_request
@@ -328,6 +348,11 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model,name:spp_change_request.model_spp_change_request_source_mixin
 msgid "Change Request Data Source Mixin"
+msgstr ""
+
+#. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_external_api
+msgid "Change Request External API"
 msgstr ""
 
 #. module: spp_change_request
@@ -934,6 +959,11 @@ msgid "Registrant Id Domain"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__registrant_id_visible
+msgid "Registrant Visible"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Registrant:"
 msgstr ""
@@ -1127,6 +1157,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
+msgid "The change request has been approved."
+msgstr ""
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
 msgid "The change request has been fully validated"
 msgstr ""
 
@@ -1204,6 +1241,15 @@ msgstr ""
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The request must be in draft state to be set to pending validation."
+msgstr ""
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid ""
+"The request must be in draft, pending, or validated state for changes to be "
+"applied."
 msgstr ""
 
 #. module: spp_change_request
@@ -1357,6 +1403,13 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.module.category,description:spp_change_request.spp_change_request_module
 msgid "User access level for the OpenSPP change request module"
+msgstr ""
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "User is not allowed to approve CRs directly."
 msgstr ""
 
 #. module: spp_change_request
