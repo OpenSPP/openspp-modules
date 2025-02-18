@@ -125,9 +125,29 @@ msgid "Applicant Information"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_information_visible
+msgid "Applicant Information Visible"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id_required
+msgid "Applicant Required"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id_visible
+msgid "Applicant Visible"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_phone
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__applicant_phone
 msgid "Applicant's Phone Number"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_phone_required
+msgid "Applicant's Phone Required"
 msgstr ""
 
 #. module: spp_change_request
@@ -936,6 +956,11 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__registrant_id_domain
 msgid "Registrant Id Domain"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__registrant_id_visible
+msgid "Registrant Visible"
 msgstr ""
 
 #. module: spp_change_request
