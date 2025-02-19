@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="0">
+
+    <!-- Category Documents-->
+    <record id="spp_dms_add_group_to_group" model="spp.dms.category">
+        <field name="name">Add Group to a Group Request Form</field>
+    </record>
+
+</odoo>

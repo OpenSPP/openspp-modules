@@ -83,21 +83,6 @@ msgid "Compliance Managers"
 msgstr ""
 
 #. module: spp_programs_compliance_criteria
-#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_program_create_wizard__compliance_sql
-msgid "Compliance SQL Query"
-msgstr ""
-
-#. module: spp_programs_compliance_criteria
-#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_program_create_wizard__compliance_sql_query_valid
-msgid "Compliance SQL Query Status"
-msgstr ""
-
-#. module: spp_programs_compliance_criteria
-#: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_program_create_wizard__compliance_tag_id
-msgid "Compliance Tag"
-msgstr ""
-
-#. module: spp_programs_compliance_criteria
 #: model:ir.model,name:spp_programs_compliance_criteria.model_res_config_settings
 msgid "Config Settings"
 msgstr ""
@@ -189,11 +174,6 @@ msgid "ID"
 msgstr ""
 
 #. module: spp_programs_compliance_criteria
-#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__g2p_program_create_wizard__compliance_sql_query_valid__invalid
-msgid "Invalid"
-msgstr ""
-
-#. module: spp_programs_compliance_criteria
 #: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_spp_compliance_manager__write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -230,11 +210,6 @@ msgstr ""
 #: code:addons/spp_programs_compliance_criteria/static/src/xml/field_domain.xml:0
 #, python-format
 msgid "Modify filter"
-msgstr ""
-
-#. module: spp_programs_compliance_criteria
-#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__g2p_program_create_wizard__compliance_sql_query_valid__need_checking
-msgid "Need Checking"
 msgstr ""
 
 #. module: spp_programs_compliance_criteria
@@ -287,18 +262,6 @@ msgid "Programs Settings"
 msgstr ""
 
 #. module: spp_programs_compliance_criteria
-#. odoo-python
-#: code:addons/spp_programs_compliance_criteria/wizards/g2p_program_create_wizard.py:0
-#, python-format
-msgid "Query is not valid!"
-msgstr ""
-
-#. module: spp_programs_compliance_criteria
-#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__g2p_program_create_wizard__compliance_kind__g2p_program_membership_manager_sql
-msgid "SQL-based"
-msgstr ""
-
-#. module: spp_programs_compliance_criteria
 #. odoo-javascript
 #: code:addons/spp_programs_compliance_criteria/static/src/xml/field_domain.xml:0
 #, python-format
@@ -320,16 +283,6 @@ msgstr ""
 #. module: spp_programs_compliance_criteria
 #: model:ir.model.fields,field_description:spp_programs_compliance_criteria.field_g2p_cycle_membership__state
 msgid "State"
-msgstr ""
-
-#. module: spp_programs_compliance_criteria
-#: model:ir.model.fields.selection,name:spp_programs_compliance_criteria.selection__g2p_program_create_wizard__compliance_sql_query_valid__valid
-msgid "Valid"
-msgstr ""
-
-#. module: spp_programs_compliance_criteria
-#: model_terms:ir.ui.view,arch_db:spp_programs_compliance_criteria.create_program_wizard_form_view_inherit_spp_programs_compliance_criteria
-msgid "Validate Query"
 msgstr ""
 
 #. module: spp_programs_compliance_criteria
