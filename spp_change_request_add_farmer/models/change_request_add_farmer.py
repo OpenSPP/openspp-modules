@@ -4,7 +4,6 @@ from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
-
 # Constants for model names
 MODEL_ADD_FARMER = "spp.change.request.add.farmer"
 MODEL_PARTNER = "res.partner"
@@ -178,7 +177,7 @@ class ChangeRequestAddChildren(models.Model):
         self.ensure_one()
         res_id = self.registrant_id.id
         form_id = self.env.ref("g2p_registry_group.view_groups_form").id
-        action = self.env["res.partner"].get_formview_action()
+        action = self.env[MODEL_PARTNER].get_formview_action()
         context = {
             "create": False,
             "edit": False,
