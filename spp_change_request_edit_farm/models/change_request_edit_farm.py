@@ -192,21 +192,19 @@ class ChangeRequestEditFarm(models.Model):
         group = self.registrant_id
         group.write(group_vals)
 
-        if self.farm_crop_act_ids:
-            for act in self.farm_crop_act_ids:
-                act.crop_farm_id = group.id
-        if self.farm_live_act_ids:
-            for act in self.farm_live_act_ids:
-                act.live_farm_id = group.id
-        if self.farm_aqua_act_ids:
-            for act in self.farm_aqua_act_ids:
-                act.aqua_farm_id = group.id
-        if self.farm_asset_ids:
-            for asset in self.farm_asset_ids:
-                asset.asset_farm_id = group.id
-        if self.farm_machinery_ids:
-            for machinery in self.farm_machinery_ids:
-                machinery.machinery_farm_id = group.id
+        # Define mapping of One2many fields to their target fields
+        activity_mappings = {
+            "farm_crop_act_ids": "crop_farm_id",
+            "farm_live_act_ids": "live_farm_id",
+            "farm_aqua_act_ids": "aqua_farm_id",
+            "farm_asset_ids": "asset_farm_id",
+            "farm_machinery_ids": "machinery_farm_id",
+        }
+
+        # Update related records
+        for source_field, target_field in activity_mappings.items():
+            if records := self[source_field]:
+                records.write({target_field: group.id})
 
         cr_vals = {
             "registrant_id": group.id,
