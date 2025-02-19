@@ -177,7 +177,7 @@ class ChangeRequestAddChildren(models.Model):
         self.ensure_one()
         res_id = self.registrant_id.id
         form_id = self.env.ref("g2p_registry_group.view_groups_form").id
-        action = self.env[PARTNER_MODEL].get_formview_action()
+        action = self.env[MODEL_PARTNER].get_formview_action()
         context = {
             "create": False,
             "edit": False,
