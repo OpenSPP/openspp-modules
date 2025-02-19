@@ -1,14 +1,14 @@
 <odoo>
     <menuitem
-        id="menu_change_request_add_farmer_root"
-        name="Add Farmer Change Requests"
+        id="menu_change_request_add_group_to_group_root"
+        name="Add Group to a Group Change Requests"
         parent="spp_change_request.spp_change_request_request_root"
         sequence="10"
     />
 
-    <record id="view_change_request_add_farmer_tree" model="ir.ui.view">
-        <field name="name">change_request_add_farmer_tree</field>
-        <field name="model">spp.change.request.add.farmer</field>
+    <record id="view_change_request_add_group_to_group_tree" model="ir.ui.view">
+        <field name="name">change_request_add_group_to_group_tree</field>
+        <field name="model">spp.change.request.add.group.to.group</field>
         <field name="priority">0</field>
         <field name="arch" type="xml">
             <tree sample="1" create="0">
@@ -30,12 +30,12 @@
         </field>
     </record>
 
-    <record id="view_change_request_add_farmer_form" model="ir.ui.view">
-        <field name="name">view_change_request_add_farmer_form</field>
-        <field name="model">spp.change.request.add.farmer</field>
+    <record id="view_change_request_add_group_to_group_form" model="ir.ui.view">
+        <field name="name">view_change_request_add_group_to_group_form</field>
+        <field name="model">spp.change.request.add.group.to.group</field>
         <field name="priority">0</field>
         <field name="arch" type="xml">
-            <form string="Add Farmer Change Request">
+            <form string="Add Group to a Group Change Request">
                 <header>
                     <button
                         name="action_submit"
@@ -143,7 +143,7 @@
                     </div>
                     <notebook>
                         <page string="Request Details">
-                            <field name="group_member_ids">
+                            <field name="group_member_ids" context="{'default_registrant_id': registrant_id}">
                                 <tree editable="bottom">
                                     <field
                                         name="individual_id"
@@ -167,7 +167,7 @@
                                     type="object"
                                     string="Request Form"
                                     class="btn-primary"
-                                    context="{'category_id':%(spp_dms_add_farmer)d}"
+                                    context="{'category_id':%(spp_dms_add_group_to_group)d}"
                                     style="margin-left: 10px;"
                                 />
                                 <button
@@ -264,12 +264,12 @@
         </field>
     </record>
 
-    <record id="view_change_request_add_farmer_validation_form" model="ir.ui.view">
-        <field name="name">view_change_request_add_farmer_validation_form</field>
-        <field name="model">spp.change.request.add.farmer</field>
+    <record id="view_change_request_add_group_to_group_validation_form" model="ir.ui.view">
+        <field name="name">view_change_request_add_group_to_group_validation_form</field>
+        <field name="model">spp.change.request.add.group.to.group</field>
         <field name="priority">100</field>
         <field name="arch" type="xml">
-            <form string="Add Farmer Change Request" edit="0">
+            <form string="Add Group to a Group Change Request" edit="0">
                 <header>
                     <button
                         name="open_user_assignment_wiz"
@@ -359,7 +359,7 @@
                     <!-- Left Panel -->
                     <group colspan="2" col="2" class="o_left_panel">
                         <div class="o_header_label1" colspan="2">
-                            <label for="registrant_id" string="ADD FARMER TO GROUP:" />
+                            <label for="registrant_id" string="ADD FARM TO GROUP:" />
                             <h2>
                                 <field name="registrant_id" readonly="1" options="{'no_open':True}" />
                                 <button
@@ -446,12 +446,12 @@
         </field>
     </record>
 
-    <record id="change_request_add_farmer_filter" model="ir.ui.view">
-        <field name="name">change_request_add_farmer_filter</field>
-        <field name="model">spp.change.request.add.farmer</field>
+    <record id="change_request_add_group_to_group_filter" model="ir.ui.view">
+        <field name="name">change_request_add_group_to_group_filter</field>
+        <field name="model">spp.change.request.add.group.to.group</field>
         <field name="priority" eval="1" />
         <field name="arch" type="xml">
-            <search string="Search Change Request: Add Farmer">
+            <search string="Search Change Request: Add Group to a Group">
                 <field name="registrant_id" string="Adding to Group" />
                 <filter
                     name="filter_validator"
@@ -463,91 +463,97 @@
     </record>
 
     <!-- All Add Children Change Requests -->
-    <record id="action_change_request_add_farmer" model="ir.actions.act_window">
-        <field name="name">Add Farmer Change Request</field>
+    <record id="action_change_request_add_group_to_group" model="ir.actions.act_window">
+        <field name="name">Add Group to a Group Change Request</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">spp.change.request.add.farmer</field>
+        <field name="res_model">spp.change.request.add.group.to.group</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="change_request_add_farmer_filter" />
+        <field name="search_view_id" ref="change_request_add_group_to_group_filter" />
         <field name="context">{}</field>
         <field name="domain">[]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No 'Add Farmer' change requests found!
+                No 'Add Group to a Group' change requests found!
             </p><p>
                 There are no records found based on the current filter.
             </p>
         </field>
     </record>
 
-    <record id="action_change_request_add_farmer_tree_view" model="ir.actions.act_window.view">
+    <record id="action_change_request_add_group_to_group_tree_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_change_request_add_farmer_tree" />
-        <field name="act_window_id" ref="action_change_request_add_farmer" />
+        <field name="view_id" ref="view_change_request_add_group_to_group_tree" />
+        <field name="act_window_id" ref="action_change_request_add_group_to_group" />
     </record>
 
-    <record id="action_change_request_add_farmer_form_view" model="ir.actions.act_window.view">
+    <record id="action_change_request_add_group_to_group_form_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_change_request_add_farmer_validation_form" />
-        <field name="act_window_id" ref="action_change_request_add_farmer" />
+        <field name="view_id" ref="view_change_request_add_group_to_group_validation_form" />
+        <field name="act_window_id" ref="action_change_request_add_group_to_group" />
     </record>
 
     <menuitem
-        id="menu_change_request_add_farmer"
-        name="All Add Farmer Requests"
-        action="action_change_request_add_farmer"
-        parent="menu_change_request_add_farmer_root"
+        id="menu_change_request_add_group_to_group"
+        name="All Add Group to a Group Requests"
+        action="action_change_request_add_group_to_group"
+        parent="menu_change_request_add_group_to_group_root"
         sequence="0"
         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
     />
 
     <!-- Pending Validation -->
-    <record id="action_change_request_add_farmer_pending" model="ir.actions.act_window">
-        <field name="name">Add Farmer</field>
+    <record id="action_change_request_add_group_to_group_pending" model="ir.actions.act_window">
+        <field name="name">Add Group to a Group</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">spp.change.request.add.farmer</field>
+        <field name="res_model">spp.change.request.add.group.to.group</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="change_request_add_farmer_filter" />
+        <field name="search_view_id" ref="change_request_add_group_to_group_filter" />
         <field name="context">{'search_default_filter_validator': 1}</field>
         <field name="domain">[('state','=','pending')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No pending 'Add Farmer' change requests found!
+                No pending 'Add Group to a Group' change requests found!
             </p><p>
                 There are no records found based on the current filter.
             </p>
         </field>
     </record>
 
-    <record id="action_change_request_add_farmer_pending_tree_view" model="ir.actions.act_window.view">
+    <record
+        id="action_change_request_add_group_to_group_pending_tree_view"
+        model="ir.actions.act_window.view"
+    >
         <field name="sequence" eval="1" />
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_change_request_add_farmer_tree" />
-        <field name="act_window_id" ref="action_change_request_add_farmer_pending" />
+        <field name="view_id" ref="view_change_request_add_group_to_group_tree" />
+        <field name="act_window_id" ref="action_change_request_add_group_to_group_pending" />
     </record>
 
-    <record id="action_change_request_add_farmer_pending_form_view" model="ir.actions.act_window.view">
+    <record
+        id="action_change_request_add_group_to_group_pending_form_view"
+        model="ir.actions.act_window.view"
+    >
         <field name="sequence" eval="1" />
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_change_request_add_farmer_validation_form" />
-        <field name="act_window_id" ref="action_change_request_add_farmer_pending" />
+        <field name="view_id" ref="view_change_request_add_group_to_group_validation_form" />
+        <field name="act_window_id" ref="action_change_request_add_group_to_group_pending" />
     </record>
 
     <menuitem
-        id="menu_change_request_add_farmer_pending"
+        id="menu_change_request_add_group_to_group_pending"
         name="Pending Validation"
-        action="action_change_request_add_farmer_pending"
-        parent="menu_change_request_add_farmer_root"
+        action="action_change_request_add_group_to_group_pending"
+        parent="menu_change_request_add_group_to_group_root"
         sequence="10"
         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
     />
 
     <menuitem
-        id="menu_change_request_add_farmer_for_validation"
-        name="Add Farmer"
-        action="action_change_request_add_farmer_pending"
+        id="menu_change_request_add_group_to_group_for_validation"
+        name="Add Group to a Group"
+        action="action_change_request_add_group_to_group_pending"
         parent="spp_change_request.spp_change_request_pending_validation_root"
         sequence="10"
         groups="spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"

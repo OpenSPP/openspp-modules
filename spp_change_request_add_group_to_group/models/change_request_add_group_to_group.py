@@ -4,12 +4,13 @@ from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
+
 # Constants for model names
-MODEL_ADD_FARMER = "spp.change.request.add.farmer"
+MODEL_ADD_GROUP_TO_GROUP = "spp.change.request.add.group.to.group"
 MODEL_PARTNER = "res.partner"
 
 
-class ChangeRequestTypeCustomAddFarmer(models.Model):
+class ChangeRequestTypeCustomAddFarm(models.Model):
     _inherit = "spp.change.request"  # Not merging classes as it might require significant refactoring.
 
     registrant_id = fields.Many2one(
@@ -25,31 +26,31 @@ class ChangeRequestTypeCustomAddFarmer(models.Model):
         :raise UserError: Exception raised when applicant_phone is not existing.
         """
         request_type = self.request_type
-        if "farm" not in request_type and not self.applicant_phone:
+        if "add.group.to.group" not in request_type and not self.applicant_phone:
             raise UserError(_("Phone No. is required."))
 
     @api.model
     def _selection_request_type_ref_id(self):
         selection = super()._selection_request_type_ref_id()
-        new_request_type = (MODEL_ADD_FARMER, "Add Farmer")
+        new_request_type = (MODEL_ADD_GROUP_TO_GROUP, "Add Group to a Group")
         if new_request_type not in selection:
             selection.append(new_request_type)
         return selection
 
 
 class ChangeRequestAddChildren(models.Model):
-    _name = MODEL_ADD_FARMER
+    _name = MODEL_ADD_GROUP_TO_GROUP
     _inherit = [
         "spp.change.request.source.mixin",
         "spp.change.request.validation.sequence.mixin",
     ]
-    _description = "Add Farmer Change Request Type"
+    _description = "Add Group to a Group Change Request Type"
     _order = "id desc"
 
     # Initialize CR constants
-    VALIDATION_FORM = "spp_change_request_add_farmer.view_change_request_add_farmer_validation_form"
+    VALIDATION_FORM = "spp_change_request_add_group_to_group.view_change_request_add_group_to_group_validation_form"
     REQUIRED_DOCUMENT_TYPE = [
-        "spp_change_request_add_farmer.spp_dms_add_farmer",
+        "spp_change_request_add_group_to_group.spp_dms_add_group_to_group",
     ]
 
     # Mandatory initialize source and destination center areas
@@ -70,24 +71,26 @@ class ChangeRequestAddChildren(models.Model):
     id_document_details = fields.Text("ID Document")
 
     # Target Group Fields
-    group_member_ids = fields.One2many("spp.change.request.group.members", "group_add_farmer_id", "Group Members")
+    group_member_ids = fields.One2many(
+        "spp.change.request.group.members", "group_add_group_to_group_id", "Group Members"
+    )
 
     # Add domain to inherited field: validation_ids
     validation_ids = fields.Many2many(
-        relation="spp_change_request_add_farmer_rel",
+        relation="spp_change_request_add_group_to_group_rel",
         domain=[("request_type", "=", _name)],
     )
 
     # DMS Field
     dms_directory_ids = fields.One2many(
         "spp.dms.directory",
-        "change_request_add_farmer_id",
+        "change_request_add_group_to_group_id",
         string="DMS Directories",
         auto_join=True,
     )
     dms_file_ids = fields.One2many(
         "spp.dms.file",
-        "change_request_add_farmer_id",
+        "change_request_add_group_to_group_id",
         string="DMS Files",
         auto_join=True,
     )
@@ -122,9 +125,9 @@ class ChangeRequestAddChildren(models.Model):
         Returns the default field name for change request id.
 
         Returns:
-            str: The default field name 'default_change_request_add_farmer_id'
+            str: The default field name 'default_change_request_add_group_to_group_id'
         """
-        return "default_change_request_add_farmer_id"
+        return "default_change_request_add_group_to_group_id"
 
     def validate_data(self):
         """
@@ -177,7 +180,7 @@ class ChangeRequestAddChildren(models.Model):
         self.ensure_one()
         res_id = self.registrant_id.id
         form_id = self.env.ref("g2p_registry_group.view_groups_form").id
-        action = self.env[PARTNER_MODEL].get_formview_action()
+        action = self.env["res.partner"].get_formview_action()
         context = {
             "create": False,
             "edit": False,
