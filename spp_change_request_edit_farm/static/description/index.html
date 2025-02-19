@@ -5,6 +5,109 @@
 <meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
 <title>OpenSPP Change Request: Edit Farm</title>
 <style type="text/css">
+/* Base Elements */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+h1.title {
+  text-align: center;
+}
+
+h2.subtitle {
+  text-align: center;
+}
+
+/* Text Styles */
+.first {
+  margin-top: 0 !important;
+}
+
+.last, .with-subtitle {
+  margin-bottom: 0 !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+/* Links */
+a.toc-backref {
+  text-decoration: none;
+  color: black;
+}
+
+/* Layout & Alignment */
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  clear: both;
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.align-bottom {
+  vertical-align: bottom;
+}
+
+/* Tables */
+.borderless, table.borderless td, table.borderless th {
+  border: 0;
+}
+
+table.borderless td, table.borderless th {
+  padding: 0 0.5em 0 0 !important;
+}
+
+/* Lists */
+ol.simple, ul.simple {
+  margin-bottom: 1em;
+}
+
+/* Code Blocks */
+pre.code .ln { 
+  color: gray; 
+}
+
+pre.code, code { 
+  background-color: #eeeeee;
+}
+
+pre.code .comment, code .comment { 
+  color: #5C6576;
+}
+
+pre.code .keyword, code .keyword { 
+  color: #3B0D06; 
+  font-weight: bold;
+}
+
+/* Rest of existing styles... */
 
 /*
 :Author: David Goodger (goodger@python.org)
@@ -146,12 +249,6 @@ h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
 h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
   margin-top: 0.4em }
 
-h1.title {
-  text-align: center }
-
-h2.subtitle {
-  text-align: center }
-
 hr.docutils {
   width: 75% }
 
@@ -176,16 +273,6 @@ table.align-center {
   margin-right: auto;
 }
 
-.align-left {
-  text-align: left }
-
-.align-center {
-  clear: both ;
-  text-align: center }
-
-.align-right {
-  text-align: right }
-
 /* reset inner alignment in figures */
 div.align-right {
   text-align: inherit }
@@ -201,9 +288,6 @@ div.align-right {
 
 .align-bottom {
   vertical-align: bottom }
-
-ol.simple, ul.simple {
-  margin-bottom: 1em }
 
 ol.arabic {
   list-style: decimal }
@@ -260,15 +344,6 @@ pre.address {
 pre.literal-block, pre.doctest-block, pre.math, pre.code {
   margin-left: 2em ;
   margin-right: 2em }
-
-pre.code .ln { color: gray; } /* line numbers */
-pre.code, code { background-color: #eeeeee }
-pre.code .comment, code .comment { color: #5C6576 }
-pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
-pre.code .literal.string, code .literal.string { color: #0C5404 }
-pre.code .name.builtin, code .name.builtin { color: #352B84 }
-pre.code .deleted, code .deleted { background-color: #DEB0A1}
-pre.code .inserted, code .inserted { background-color: #A3D289}
 
 span.classifier {
   font-family: sans-serif ;
@@ -350,7 +425,7 @@ ul.auto-toc {
 </style>
 </head>
 <body>
-<div class="document" id="openspp-change-request-add-farmer">
+<div class="document" id="openspp-change-request-edit-farm">
 <h1 class="title">OpenSPP Change Request: Edit Farm</h1>
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -360,65 +435,52 @@ ul.auto-toc {
 !! source digest: sha256:acaecaa0c5a4b0eeeacac2e19f416521d252c7c913eff91aeb22d41b9d7de0b8
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Alpha" src="https://img.shields.io/badge/maturity-Alpha-red.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_change_request_edit_farm"><img alt="OpenSPP/openspp-modules" src="https://img.shields.io/badge/github-OpenSPP%2Fopenspp--modules-lightgray.png?logo=github" /></a></p>
-<div class="section" id="openspp-change-request-add-farmer-1">
+<div class="section" id="openspp-change-request-edit-farm-1">
 <h1>OpenSPP Change Request: Edit Farm</h1>
 <div class="section" id="overview">
 <h2>Overview</h2>
 <p>The <a class="reference external" href="spp_change_request_edit_farm">spp_change_request_edit_farm</a>
-module extends the OpenSPP Change Request system to specifically handle
-requests for adding new farmers to existing groups within the registry.
-It leverages the framework provided by the
-<a class="reference external" href="spp_change_request">spp_change_request</a> module and integrates with
-other registry modules to streamline the process of adding farmers while
-maintaining data integrity and consistency.</p>
+module extends the OpenSPP Change Request system to handle modifications to existing farm records
+within the registry. It provides a structured workflow for updating farm information while
+maintaining data integrity and proper approval processes.</p>
 </div>
 <div class="section" id="purpose">
 <h2>Purpose</h2>
 <ul class="simple">
-<li><strong>Specialized Change Request Type</strong>: Introduce a dedicated change
-request type for adding farmers, distinct from other types of
-registrant modifications.</li>
-<li><strong>Streamlined Data Collection</strong>: Provide a tailored form for
-capturing essential information about the new farmer, including
-personal details, farmer-specific attributes, and desired group
-membership details.</li>
-<li><strong>Group Membership Management</strong>: Integrate with the
-<a class="reference external" href="g2p_registry_membership">g2p_registry_membership</a> module to
-seamlessly add the new farmer to the specified group upon approval.</li>
-<li><strong>Enhanced Validation</strong>: Implement specific validation rules relevant
-to adding farmers, ensuring the accuracy and completeness of the
-submitted information.</li>
+<li><strong>Specialized Change Request Type</strong>: Provides a dedicated change request type
+for modifying farm details, including size, location, crops, and other farm-specific attributes.</li>
+<li><strong>Structured Data Updates</strong>: Offers a comprehensive form for updating farm
+information, ensuring all modifications are properly tracked and validated.</li>
+<li><strong>Change History Tracking</strong>: Maintains a detailed record of all modifications
+made to farm records, including who made the changes and when.</li>
+<li><strong>Validation Workflow</strong>: Implements specific validation rules to ensure
+accuracy and consistency of farm data modifications.</li>
 </ul>
 </div>
-<div class="section" id="module-integration">
-<h2>Module Integration</h2>
+<div class="section" id="key-features">
+<h2>Key Features</h2>
+<ul class="simple">
+<li><strong>Farm Data Management</strong>: Update various aspects of farm records including:
+    <ul>
+    <li>Farm size and boundaries</li>
+    <li>Cultivation details and crop information</li>
+    <li>Farm ownership and management details</li>
+    <li>Agricultural practices and certifications</li>
+    </ul>
+</li>
+<li><strong>Change Validation</strong>: Multi-level verification process to ensure accuracy of updates</li>
+<li><strong>Document Attachment</strong>: Support for attaching relevant documentation to justify changes</li>
+<li><strong>Approval Workflow</strong>: Structured approval process for farm modifications</li>
+</ul>
 </div>
 <div class="section" id="dependencies">
 <h2>Dependencies</h2>
-<p>The module relies heavily on the following modules:</p>
+<p>The module relies on the following core modules:</p>
 <ul class="simple">
-<li><a class="reference external" href="spp_change_request">spp_change_request</a>: Inherits the core change
-request functionality, including the request workflow, validation
-processes, approval mechanisms, and integration with the Document
-Management System (<a class="reference external" href="spp_dms">spp_dms</a>).</li>
-<li><a class="reference external" href="spp_farmer_registry_base">spp_farmer_registry_base</a>: Leverages
-the farmer-specific data models and attributes to capture and store
-information about the new farmer.</li>
-<li><a class="reference external" href="g2p_registry_membership">g2p_registry_membership</a>: Integrates
-with the membership management system to create the appropriate group
-membership record for the new farmer upon change request approval.</li>
-<li><a class="reference external" href="phone_validation">phone_validation</a>: Utilizes the phone
-validation module to ensure phone number entries for the new farmer
-adhere to correct formatting.</li>
-<li><a class="reference external" href="g2p_registry_group">g2p_registry_group</a>: Accesses group
-information and functionality to display details about the target
-group for the new farmer.</li>
-<li><a class="reference external" href="g2p_registry_individual">g2p_registry_individual</a>: Leverages
-individual registrant management features, inheriting from the
-individual registrant model.</li>
-<li><a class="reference external" href="spp_service_points">spp_service_points</a>: Integrates with service
-points, allowing change requests to be initiated and managed through
-designated service points.</li>
+<li><a class="reference external" href="spp_change_request">spp_change_request</a>: Core change request functionality</li>
+<li><a class="reference external" href="spp_farmer_registry_base">spp_farmer_registry_base</a>: Base farm and farmer data models</li>
+<li><a class="reference external" href="g2p_registry_membership">g2p_registry_membership</a>: Membership management</li>
+<li><a class="reference external" href="spp_service_points">spp_service_points</a>: Service point integration</li>
 </ul>
 </div>
 <div class="section" id="additional-functionality">

@@ -154,19 +154,39 @@ class ChangeRequestEditFarm(models.Model):
 
     @api.onchange("registrant_id")
     def _onchange_registrant_id(self):
+        """
+        Handles changes to the registrant_id field.
+        Currently a placeholder for future implementation.
+        """
         return
 
     @api.onchange("id_document_details")
     def _onchange_scan_id_document_details(self):
+        """
+        Handles changes to the id_document_details field.
+        Currently a placeholder for future implementation.
+        """
         return
 
     def _get_default_change_request_id(self):
         """
-        Get the default field name for change request id.
+        Returns the default field name for change request id.
+
+        Returns:
+            str: The default field name 'default_change_request_edit_farm_id'
         """
         return "default_change_request_edit_farm_id"
 
     def validate_data(self):
+        """
+        Validates the change request data.
+
+        Raises:
+            ValidationError: If the registrant_id (Group or Farm) is not set
+
+        Returns:
+            bool: Result of the parent class's validate_data method
+        """
         validate_data = super().validate_data()
         error_message = []
         if not self.registrant_id:
@@ -177,6 +197,17 @@ class ChangeRequestEditFarm(models.Model):
         return validate_data
 
     def update_live_data(self):
+        """
+        Updates the live data for the farm/group after change request approval.
+
+        This method:
+        1. Updates the group (res.partner) with new field values
+        2. Updates related records (activities and assets) with new relationships
+        3. Updates the change request with group and applicant information
+
+        Returns:
+            res.partner: The updated group record
+        """
         self.ensure_one()
 
         # Update the group (res.partner)
@@ -217,6 +248,12 @@ class ChangeRequestEditFarm(models.Model):
         return group
 
     def open_registrant_details_form(self):
+        """
+        Opens a form view showing the registrant's details in readonly mode.
+
+        Returns:
+            dict: Action dictionary for opening the form view
+        """
         self.ensure_one()
         res_id = self.registrant_id.id
         form_id = self.env.ref("g2p_registry_group.view_groups_form").id
