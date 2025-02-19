@@ -8,12 +8,16 @@ from odoo.addons.phone_validation.tools import phone_validation
 
 _logger = logging.getLogger(__name__)
 
+# Shared Constants
+PARTNER_MODEL = "res.partner"
+CHANGE_REQUEST_ADD_FARMER_MODEL = "spp.change.request.add.farmer"
+
 
 class ChangeRequestTypeCustomAddFarmer(models.Model):
     _inherit = "spp.change.request"  # Not merging classes as it might require significant refactoring.
 
     registrant_id = fields.Many2one(
-        "res.partner",
+        PARTNER_MODEL,
         "Registrant",
         domain=[("is_registrant", "=", True), ("is_group", "=", True)],
     )
@@ -21,14 +25,14 @@ class ChangeRequestTypeCustomAddFarmer(models.Model):
     @api.model
     def _selection_request_type_ref_id(self):
         selection = super()._selection_request_type_ref_id()
-        new_request_type = ("spp.change.request.add.farmer", "Add Farmer")
+        new_request_type = (CHANGE_REQUEST_ADD_FARMER_MODEL, "Add Farmer")
         if new_request_type not in selection:
             selection.append(new_request_type)
         return selection
 
 
 class ChangeRequestAddChildren(models.Model):
-    _name = "spp.change.request.add.farmer"
+    _name = CHANGE_REQUEST_ADD_FARMER_MODEL
     _inherit = [
         "spp.change.request.source.mixin",
         "spp.change.request.validation.sequence.mixin",
@@ -40,10 +44,6 @@ class ChangeRequestAddChildren(models.Model):
     VALIDATION_FORM = "spp_change_request_add_farmer.view_change_request_add_farmer_validation_form"
     REQUIRED_DOCUMENT_TYPE = [
         "spp_change_request_add_farmer.spp_dms_add_farmer",
-        # "spp_change_request.spp_dms_birth_certificate",
-        # "spp_change_request.spp_dms_applicant_spp_card",
-        # "spp_change_request.spp_dms_applicant_uid_card",
-        # "spp_change_request.spp_dms_custody_certificate",
     ]
 
     # Mandatory initialize source and destination center areas
@@ -53,7 +53,7 @@ class ChangeRequestAddChildren(models.Model):
 
     # Redefine registrant_id to set specific domain and label
     registrant_id = fields.Many2one(
-        "res.partner",
+        PARTNER_MODEL,
         "Add to Group",
         domain=[("is_registrant", "=", True), ("is_group", "=", True)],
     )
@@ -224,7 +224,7 @@ class ChangeRequestAddChildren(models.Model):
         return "default_change_request_add_farmer_id"
 
     def validate_data(self):
-        super().validate_data()
+        validate_data = super().validate_data()
         error_message = []
         if not self.family_name:
             error_message.append(_("The Family Name is required!"))
@@ -238,7 +238,7 @@ class ChangeRequestAddChildren(models.Model):
         if error_message:
             raise ValidationError("\n".join(error_message))
 
-        return
+        return validate_data
 
     def update_live_data(self):
         self.ensure_one()
@@ -267,7 +267,7 @@ class ChangeRequestAddChildren(models.Model):
             ]
         else:
             uid_rec = None
-        individual_id = self.env["res.partner"].create(
+        individual_id = self.env[PARTNER_MODEL].create(
             {
                 "is_registrant": True,
                 "is_group": False,
@@ -305,7 +305,7 @@ class ChangeRequestAddChildren(models.Model):
         self.ensure_one()
         res_id = self.registrant_id.id
         form_id = self.env.ref("g2p_registry_group.view_groups_form").id
-        action = self.env["res.partner"].get_formview_action()
+        action = self.env[PARTNER_MODEL].get_formview_action()
         context = {
             "create": False,
             "edit": False,
