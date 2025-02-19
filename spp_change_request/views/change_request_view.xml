@@ -17,7 +17,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                     class="btn-success"
                     invisible="not request_type_ref_id"
                     context="{'show_validation_form':True}"
-                    groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
+                    groups="base.group_system,g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
                 />
                 <field name="name" />
                 <field name="date_requested" />
@@ -61,7 +61,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         icon="fa-paper-plane"
                         class="btn-primary"
                         invisible="state != 'draft'"
-                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_agent"
+                        groups="base.group_system,g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_agent"
                     />
                     <button
                         name="action_validate"
@@ -71,7 +71,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         title="Validate Change Request"
                         class="btn-warning"
                         invisible="state != 'pending'"
-                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
+                        groups="base.group_system,g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator"
                     />
                     <button
                         name="action_apply"
@@ -80,7 +80,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         icon="fa-thumbs-o-up"
                         class="btn-success"
                         invisible="state != 'validated'"
-                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
+                        groups="base.group_system,g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
                     />
                     <button
                         name="action_reject"
@@ -90,7 +90,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         title="Reject Change Request"
                         class="btn-danger"
                         invisible="state != 'pending'"
-                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator"
+                        groups="base.group_system,g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator"
                     />
                     <button
                         name="action_cancel"
@@ -99,7 +99,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         icon="fa-times-circle"
                         class="btn-default"
                         invisible="state not in  ['draft', 'pending', 'rejected', 'validated']"
-                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
+                        groups="base.group_system,g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
                     />
                     <button
                         name="action_reset_to_draft"
@@ -108,7 +108,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                         icon="fa-rotate-left"
                         class="btn-success"
                         invisible="state != 'rejected'"
-                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
+                        groups="base.group_system,g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent"
                     />
                     <field
                         name="state"
@@ -131,7 +131,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                             type="object"
                             icon="fa-user-circle"
                             class="oe_stat_button"
-                            groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_agent,spp_change_request.group_spp_change_request_administrator"
+                            groups="base.group_system,g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_agent,spp_change_request.group_spp_change_request_administrator"
                         >
                             <div class="o_form_field o_stat_info" invisible="current_user_assigned">
                                 <span class="o_stat_text">Assign</span>
@@ -416,7 +416,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         action="action_change_request"
         parent="spp_change_request_request_root"
         sequence="0"
-        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent,spp_change_request.group_spp_change_request_hq_validator"
+        groups="base.group_system,g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_agent,spp_change_request.group_spp_change_request_hq_validator"
     />
 
     <!-- Validated Requests -->
@@ -457,7 +457,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         action="action_change_request_validated"
         parent="spp_change_request_for_application_root"
         sequence="10"
-        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
+        groups="base.group_system,g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
     />
 
 </odoo>

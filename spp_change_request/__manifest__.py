@@ -17,6 +17,7 @@
     },
     "depends": [
         "base",
+        "spp_change_request_base",
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_registry_group",
@@ -25,13 +26,10 @@
         "spp_area",
         "spp_scan_id_document",
         "spp_dms",
-        # "dms_field",
     ],
     "data": [
         "security/change_request_security.xml",
         "security/ir.model.access.csv",
-        "data/sequences.xml",
-        "data/mail_activity.xml",
         "data/dms.xml",
         "wizard/confirm_user_assignment_view.xml",
         "wizard/reject_change_request_view.xml",
