@@ -24,6 +24,7 @@ class ChangeRequestBase(models.Model):
         "Registrant",
         domain=[("is_registrant", "=", True)],
     )  #: Registrant who submitted the change request
+    registrant_id_visible = fields.Boolean("Registrant Visible", compute="_compute_registrant_id_visible")
     registrant_id_domain = fields.Binary(
         compute="_compute_registrant_id_domain",
         readonly=True,
@@ -40,6 +41,8 @@ class ChangeRequestBase(models.Model):
         "Applicant",
         domain=[("is_registrant", "=", True), ("is_group", "=", False)],
     )
+    applicant_id_required = fields.Boolean("Applicant Required", compute="_compute_applicant_id_required")
+    applicant_id_visible = fields.Boolean("Applicant Visible", compute="_compute_applicant_id_visible")
     # Applicant who submitted the change request (In case the registrant is a group, the applicant is the individual)
     applicant_id_domain = fields.Binary(
         compute="_compute_applicant_id_domain",
@@ -47,10 +50,66 @@ class ChangeRequestBase(models.Model):
         store=False,
     )
     applicant_phone = fields.Char("Applicant's Phone Number")  #: Applicant's phone number
+    applicant_phone_required = fields.Boolean("Applicant's Phone Required", compute="_compute_applicant_phone_required")
+    applicant_information_visible = fields.Boolean(
+        "Applicant Information Visible", compute="_compute_applicant_information_visible"
+    )
 
     next_area_center_ids = fields.Many2many(
         "spp.area", string="Next Area"
     )  #: When the change request change the area, we store the destination in case a validation based on it is required
+
+    @api.model
+    def _registrant_id_not_visible_in_request_type(self):
+        return []
+
+    @api.depends("request_type")
+    def _compute_registrant_id_visible(self):
+        for rec in self:
+            rec.registrant_id_visible = (
+                bool(rec.request_type) and rec.request_type not in self._registrant_id_not_visible_in_request_type()
+            )
+
+    @api.model
+    def _applicant_id_not_required_in_request_type(self):
+        return []
+
+    @api.model
+    def _applicant_id_not_visible_in_request_type(self):
+        return []
+
+    @api.depends("request_type")
+    def _compute_applicant_id_required(self):
+        for rec in self:
+            rec.applicant_id_required = rec.request_type not in self._applicant_id_not_required_in_request_type()
+
+    @api.depends("request_type")
+    def _compute_applicant_id_visible(self):
+        for rec in self:
+            rec.applicant_id_visible = (
+                bool(rec.request_type) and rec.request_type not in self._applicant_id_not_visible_in_request_type()
+            )
+
+    @api.model
+    def _applicant_phone_not_required_in_request_type(self):
+        return []
+
+    @api.depends("request_type")
+    def _compute_applicant_phone_required(self):
+        for rec in self:
+            rec.applicant_phone_required = rec.request_type not in self._applicant_phone_not_required_in_request_type()
+
+    @api.model
+    def _applicant_information_not_visible_in_request_type(self):
+        return []
+
+    @api.depends("request_type")
+    def _compute_applicant_information_visible(self):
+        for rec in self:
+            rec.applicant_information_visible = (
+                bool(rec.request_type)
+                and rec.request_type not in self._applicant_information_not_visible_in_request_type()
+            )
 
     @api.onchange("request_type")
     def _onchange_request_type(self):
@@ -61,6 +120,7 @@ class ChangeRequestBase(models.Model):
         self._compute_request_type_target()
         self.registrant_id = None
 
+    @api.depends("request_type")
     def _compute_request_type_target(self):
         for rec in self:
             request_type_target = None
@@ -259,6 +319,19 @@ class ChangeRequestBase(models.Model):
             else:
                 raise UserError(_("There are no data captured from the QR Code scanner."))
 
+    def approve_cr(self):
+        """
+        Approve the change request when the user is allowed to directly apply the changes.
+        Usage:
+        - Call this function via XMLRPC
+        :raise ValidationError: Exception raised when user is allowed to directly approve the CR.
+        """
+        self.ensure_one()
+        # Check if user is allowed to directly approve the CR
+        if not self.env.user.has_group("spp_change_request.group_spp_change_request_external_api"):
+            raise ValidationError(_("User is not allowed to approve CRs directly."))
+        return self.request_type_ref_id._approve_cr(self)
+
     def open_applicant_form(self, target="current", mode="readonly"):
         """
         Get and opens the form view of the applicant_id to view details
@@ -339,7 +412,7 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             # Open Request Form
             mode = "edit"
-            if self.env.user.id not in [self.assign_to_id.id, self.create_uid]:
+            if self.env.user.id not in [self.assign_to_id.id, self.create_uid.id]:
                 mode = "readonly"
             return rec.open_change_request_form(target="current", mode=mode)
 
@@ -349,7 +422,7 @@ class ChangeRequestBase(models.Model):
 
         :raise UserError: Exception raised when applicant_phone is not existing.
         """
-        if not self.applicant_phone:
+        if not self.applicant_phone and self.applicant_phone_required:
             raise UserError(_("Phone No. is required."))
 
     def create_request_detail(self):
