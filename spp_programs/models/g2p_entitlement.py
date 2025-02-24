@@ -97,7 +97,7 @@ class G2PEntitlement(models.Model):
             "tag": "display_notification",
             "params": {
                 "title": _("Entitlement"),
-                "message": "Entitlement Rejected",
+                "message": "Entitlement Reset to Pending",
                 "sticky": False,
                 "type": "success",
                 "next": {
