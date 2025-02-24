@@ -114,7 +114,6 @@
                     decoration-info="state == 'draft'"
                     decoration-success="state == 'active'"
                     decoration-danger="state == 'closed'"
-                    invisible="1"
                 />
                 <field name="create_date" optional="hide" />
                 <field name="write_date" optional="hide" />
