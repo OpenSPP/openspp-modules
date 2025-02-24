@@ -31,3 +31,10 @@ class SPPDefaultEligibilityManager(models.Model):
         domain += [("is_registrant", "=", True)]
 
         return domain
+
+    def verify_cycle_eligibility(self, cycle, membership):
+        for rec in self:
+            beneficiaries = rec._verify_eligibility(membership)
+            return self.env["g2p.cycle.membership"].search(
+                [("partner_id", "in", beneficiaries), ("cycle_id", "=", cycle.id)]
+            )

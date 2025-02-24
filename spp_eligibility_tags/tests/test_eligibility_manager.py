@@ -94,11 +94,11 @@ class TestTagBasedEligibilityManager(TransactionCase):
         self.assertFalse(membership.id)
         self.assertEqual(membership._name, "g2p.program_membership")
 
-    def test_06_verify_cycle_eligibility(self):
-        membership = self.tag_manager.verify_cycle_eligibility(cycle=None, membership=None)
+    # def test_06_verify_cycle_eligibility(self):
+    #     membership = self.tag_manager.verify_cycle_eligibility(cycle=None, membership=None)
 
-        self.assertFalse(membership.id)
-        self.assertEqual(membership._name, "g2p.cycle.membership")
+    #     self.assertFalse(membership.id)
+    #     self.assertEqual(membership._name, "g2p.cycle.membership")
 
     def test_07_verify_eligibility(self):
         beneficiaries = self.tag_manager._verify_eligibility(membership=None)

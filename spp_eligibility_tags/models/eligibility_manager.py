@@ -92,7 +92,9 @@ class TagBasedEligibilityManager(models.Model):
     def verify_cycle_eligibility(self, cycle, membership):
         for rec in self:
             beneficiaries = rec._verify_eligibility(membership)
-            return self.env["g2p.cycle.membership"].search([("partner_id", "in", beneficiaries)])
+            return self.env["g2p.cycle.membership"].search(
+                [("partner_id", "in", beneficiaries), ("cycle_id", "=", cycle.id)]
+            )
 
     def _verify_eligibility(self, membership):
         domain = self._prepare_eligible_domain(membership=membership)
