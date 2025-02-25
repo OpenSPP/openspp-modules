@@ -20,4 +20,4 @@ swagger_spec_validator
 urllib3>=2.2.2
 xlrd
 zipp>=3.19.1
-setuptools>=61
+setuptools-scm<=8.1.0
