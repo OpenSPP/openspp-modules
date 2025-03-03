@@ -1003,6 +1003,16 @@ msgid "code..."
 msgstr ""
 
 #. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.inherit_view_payment_tree
+msgid "total_amount_issued"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.inherit_view_payment_tree
+msgid "total_amount_paid"
+msgstr ""
+
+#. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.inherit_multi_entitlement_approval_wizard_form_view
 #: model_terms:ir.ui.view,arch_db:spp_programs.inherit_view_entitlement_tree
 #: model_terms:ir.ui.view,arch_db:spp_programs.reject_entitlement_wizard
