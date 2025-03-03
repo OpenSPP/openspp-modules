@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="inherit_view_payment_tree" model="ir.ui.view">
+        <field name="name">inherit_view_payment_tree</field>
+        <field name="model">g2p.payment</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="g2p_programs.view_payment_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_issued']" position="before">
+                <field name="currency_id" column_invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='amount_issued']" position="attributes">
+                <attribute name="sum">total_amount_issued</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_paid']" position="attributes">
+                <attribute name="sum">total_amount_paid</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
