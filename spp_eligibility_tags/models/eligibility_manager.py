@@ -29,7 +29,7 @@ class TagBasedEligibilityManager(models.Model):
     tags_id = fields.Many2one("g2p.registrant.tags", string="Tags")
     area_id = fields.Many2one(
         "spp.area",
-        domain=lambda self: [("kind", "=", self.env.ref("spp_area.admin_area_kind").id)],
+        domain=lambda self: [("kind", "=", self.env.ref("spp_area_base.admin_area_kind").id)],
     )
 
     custom_domain = fields.Text(string="Tags Domain", default="[]", readonly=True, compute="_compute_custom_domain")
@@ -92,7 +92,9 @@ class TagBasedEligibilityManager(models.Model):
     def verify_cycle_eligibility(self, cycle, membership):
         for rec in self:
             beneficiaries = rec._verify_eligibility(membership)
-            return self.env["g2p.cycle.membership"].search([("partner_id", "in", beneficiaries)])
+            return self.env["g2p.cycle.membership"].search(
+                [("partner_id", "in", beneficiaries), ("cycle_id", "=", cycle.id)]
+            )
 
     def _verify_eligibility(self, membership):
         domain = self._prepare_eligible_domain(membership=membership)

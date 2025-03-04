@@ -11,7 +11,7 @@ class SPPDefaultEligibilityManager(models.Model):
 
     @api.model
     def _get_admin_area_domain(self):
-        return [("kind", "=", self.env.ref("spp_area.admin_area_kind").id)]
+        return [("kind", "=", self.env.ref("spp_area_base.admin_area_kind").id)]
 
     admin_area_ids = fields.Many2many("spp.area", domain=_get_admin_area_domain)
     target_type = fields.Selection(related="program_id.target_type")
@@ -31,3 +31,10 @@ class SPPDefaultEligibilityManager(models.Model):
         domain += [("is_registrant", "=", True)]
 
         return domain
+
+    def verify_cycle_eligibility(self, cycle, membership):
+        for rec in self:
+            beneficiaries = rec._verify_eligibility(membership)
+            return self.env["g2p.cycle.membership"].search(
+                [("partner_id", "in", beneficiaries), ("cycle_id", "=", cycle.id)]
+            )
