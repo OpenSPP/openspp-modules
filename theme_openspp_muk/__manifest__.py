@@ -12,9 +12,7 @@
     "license": "LGPL-3",
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "data": [
-        "views/main_view.xml",
-    ],
+    "data": [],
     "assets": {
         "web._assets_primary_variables": [
             "theme_openspp_muk/static/src/scss/colors.scss",
