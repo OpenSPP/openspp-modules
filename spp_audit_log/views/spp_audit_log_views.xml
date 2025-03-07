@@ -8,6 +8,8 @@
     <field name="arch" type="xml">
       <tree create="false">
         <field name="create_date" />
+        <field name="audit_rule_id" />
+        <field name="user_id" />
         <field name="name" />
         <field name="model" />
         <field name="res_id" />
