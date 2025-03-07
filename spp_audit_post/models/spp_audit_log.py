@@ -21,8 +21,9 @@ class SppAuditLog(models.Model):
         records = []
         msg = ""
         if res.parent_model_id and res.parent_model_id.is_mail_thread:
-            res_ids = list(map(int, res.parent_res_ids_str.split(",")))
-            records = self.env[res.parent_model_id.model].browse(res_ids)
+            if res.parent_res_ids_str:
+                res_ids = list(map(int, res.parent_res_ids_str.split(",")))
+                records = self.env[res.parent_model_id.model].browse(res_ids)
             msg = res.parent_data_html
         elif res.model_id and res.model_id.is_mail_thread:
             records = self.env[res.model_id.model].browse(res.res_id)
