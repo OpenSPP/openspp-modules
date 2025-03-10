@@ -1019,6 +1019,11 @@ msgid "Cash Entitlements"
 msgstr ""
 
 #. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__change_request_ids
+msgid "Change Requests"
+msgstr ""
+
+#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__channel_ids
 msgid "Channels"
 msgstr ""
