@@ -96,7 +96,7 @@ msgid "Show Menu"
 msgstr ""
 
 #. module: spp_hide_menus
-#: model:res.groups,name:spp_hide_menus.show_non_openspp_menu_group
+#: model:res.groups,name:spp_hide_menu_base.show_non_openspp_menu_group
 msgid "Show Non-OpenSPP Menu"
 msgstr ""
 

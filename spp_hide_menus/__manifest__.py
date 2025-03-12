@@ -11,11 +11,9 @@
     "license": "LGPL-3",
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["base", "calendar", "contacts", "account", "event", "stock", "utm", "web", "g2p_registry_base"],
+    "depends": ["base", "spp_hide_menus_base", "calendar", "contacts", "account", "event", "stock", "utm", "web"],
     "data": [
-        "security/ir.model.access.csv",
         "data/hide_menu_data.xml",
-        "views/hide_menu_view.xml",
     ],
     "assets": {},
     "demo": [],
