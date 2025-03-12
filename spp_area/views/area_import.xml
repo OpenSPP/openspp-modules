@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Add g2p admin group in Area Import Menu -->
+    <record id="spp_area_base.menu_spparea_import" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('g2p_registry_base.group_g2p_admin'))]" />
+    </record>
+</odoo>
