@@ -20,7 +20,7 @@
                     help="Hide Menu"
                     class="btn-danger"
                     invisible="state == 'hide'"
-                    groups="g2p_registry_base.group_g2p_admin"
+                    groups="base.group_system"
                 />
                 <button
                     name="show_menu"
@@ -30,7 +30,7 @@
                     help="Show Menu"
                     class="btn-primary"
                     invisible="state == 'show'"
-                    groups="g2p_registry_base.group_g2p_admin"
+                    groups="base.group_system"
                 />
             </tree>
         </field>

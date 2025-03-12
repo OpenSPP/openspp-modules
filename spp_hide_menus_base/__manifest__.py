@@ -2,18 +2,19 @@
 
 
 {
-    "name": "Hide Non-OpenSPP Menus",
+    "name": "Hide Non-OpenSPP Menus: Base",
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "development_status": "Production/Stable",
-    "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["base", "spp_hide_menus_base", "calendar", "contacts", "account", "event", "stock", "utm", "web"],
+    "maintainers": ["reichie020212"],
+    "depends": ["base"],
     "data": [
-        "data/hide_menu_data.xml",
+        "security/ir.model.access.csv",
+        "security/security.xml",
+        "views/hide_menu_view.xml",
     ],
     "assets": {},
     "demo": [],

@@ -24,7 +24,7 @@ class OpenSPPHideMenu(models.Model):
             record = self.browse(menu_id)
         for rec in record:
             if rec.state == "show" and rec.name:
-                show_non_openspp_group = [(6, 0, [self.env.ref("spp_hide_menus.show_non_openspp_menu_group").id])]
+                show_non_openspp_group = [(6, 0, [self.env.ref("spp_hide_menus_base.show_non_openspp_menu_group").id])]
                 rec.default_groups_id = rec.name.groups_id
                 rec.name.write(
                     {
