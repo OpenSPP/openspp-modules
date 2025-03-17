@@ -1,64 +1,57 @@
 ---
-description: Follow Odoo 17 and OpenSPP best practices when developing modules and customizations
-globs: *.py,**/models/*.py,**/controllers/*.py,**/wizard/*.py
+description: Odoo 17 and OpenSPP codebase patterns for module structure, coding standards, and conventions in the OpenSPP ecosystem
+globs: *.py,**/models/*.py,**/controllers/*.py,**/wizards/*.py,**/security/*.py,**/tests/*.py
 alwaysApply: false
 ---
-
-# Odoo 17 and OpenSPP Development General Guidelines
+# Odoo 17 and OpenSPP Development Reference
 
 ## Context
-- When developing Python modules for Odoo 17 in OpenSPP environment
-- When customizing or extending OpenSPP functionality
-- When implementing new features in the OpenSPP ecosystem
-
-## Requirements
-- Follow Odoo and OCA coding guidelines
-- Structure modules according to Odoo's standard directory structure
-- Follow OpenSPP's specific naming conventions and patterns
-- Ensure backward compatibility with API decorators
-- Prioritize security best practices
-- Write comprehensive test cases for all functionality
+This reference applies to Python modules developed in the OpenSPP ecosystem built on Odoo 17. OpenSPP extends Odoo's functionality with specialized modules for social protection programs.
 
 ## Module Structure
-- Organize files in standard Odoo module structure:
-  - `__init__.py` - Module entry point with imports
-  - `__manifest__.py` - Module descriptor with metadata
-  - `README.md` - Module documentation with installation and usage instructions
-  - `models/` - Business object definitions
-  - `views/` - XML view definitions
-  - `data/` - XML data files
-  - `security/` - Access controls and rules
-  - `wizards/` - Transient models
-  - `static/` - Static assets
-  - `controllers/` - HTTP controllers
-  - `reports/` - QWeb reports
-  - `tests/` - Test files for the module
+The standard Odoo module structure in OpenSPP consists of these directories and files:
+
+- `__init__.py` - Module entry point with imports
+- `__manifest__.py` - Module descriptor with metadata
+- `README.md` - Module documentation with installation and usage instructions
+- `models/` - Business object definitions
+- `views/` - XML view definitions
+- `data/` - XML data files
+- `security/` - Access controls and rules
+- `wizards/` - Transient models
+- `static/` - Static assets
+- `controllers/` - HTTP controllers
+- `reports/` - QWeb reports
+- `tests/` - Test files for the module
 
 ## Python Coding Standards
-- Use 4 spaces for indentation, no tabs
+Odoo 17 in OpenSPP follows these Python coding patterns:
+
+- 4 spaces for indentation, no tabs
 - Maximum line length of 79 characters
-- Follow PEP 8 naming conventions:
+- PEP 8 naming conventions:
   - `snake_case` for variables, methods, functions
   - `CamelCase` for classes
   - `UPPER_SNAKE_CASE` for constants
-- Order imports properly:
+- Import ordering:
   1. Standard library imports
   2. Third-party imports
   3. Odoo imports
   4. Module imports (relative)
-- Group imports logically and alphabetically within each group
 
-## Security Practices
-- Define access rights in CSV files (ir.model.access.csv)
-- Use record rules for complex security requirements
-- Avoid `sudo()` when possible, prefer `with self.env.su():` if needed
-- Validate all user inputs to prevent injection attacks
-- Sanitize inputs for HTML display
-- Never store sensitive data in plain text
+## Security Implementation
+Security in OpenSPP modules uses these patterns:
+
+- Access rights defined in CSV files (ir.model.access.csv)
+- Record rules for complex security requirements
+- Environment switching with `with self.env.su():` when required
+- Input validation to prevent injection attacks
+- HTML sanitization for display
+- Sensitive data encryption
 
 ## Examples
 <example>
-# Good Odoo 17 module structure example
+# Standard Odoo 17 module structure example
 
 addons/openspp_extension/
 |-- __init__.py
@@ -85,7 +78,7 @@ addons/openspp_extension/
 </example>
 
 <example type="invalid">
-# Poor module structure with missing key files and non-standard organization
+# Non-standard module structure with pattern issues
 
 my_openspp_mod/
 |-- main.py  # Non-standard entry point
@@ -94,9 +87,10 @@ my_openspp_mod/
 |-- demo.xml
 </example>
 
-## Documentation
-- Include docstrings for all classes and methods
-- Document complex business logic and algorithms
-- Add helpful comments for non-obvious code
-- Keep README.md updated with installation and usage instructions
-- Use Odoo standard method ordering within model classes
+## Documentation Patterns
+Effective documentation in OpenSPP includes:
+
+- Docstrings for all classes and methods
+- Comments explaining complex business logic
+- Updated README.md with installation and usage instructions
+- Standard method ordering within model classes

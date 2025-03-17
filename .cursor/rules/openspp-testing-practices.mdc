@@ -1,34 +1,25 @@
 ---
-description: Follow OpenSPP best practices for testing custom fields, indicators, and functionality
-globs: **/tests/*.py
+description: OpenSPP testing architecture and patterns for indicators, custom fields, and module functionality verification
+globs: *.py,**/tests/*.py
 alwaysApply: false
 ---
-
-# OpenSPP Testing Best Practices
+# OpenSPP Testing Architecture Reference
 
 ## Context
-- When writing tests for custom OpenSPP modules
-- When validating custom fields and computed indicators
-- When implementing new OpenSPP functionality
-- When ensuring backward compatibility
+OpenSPP extends Odoo's testing framework to validate custom fields, computed indicators, and social protection functionality. This reference documents the testing patterns used throughout the OpenSPP ecosystem.
 
-## Requirements
-- Aim for comprehensive test coverage
-- Structure tests systematically
-- Follow OpenSPP's testing patterns and conventions
-- Test both normal and edge cases
-- Validate custom fields and indicators
+## Test Structure Patterns
+OpenSPP tests use these structural patterns:
 
-## Test Structure Guidelines
-- Use `@tagged("post_install", "-at_install")` for most tests
-- Extend `TransactionCase` for single transaction tests or `SavepointCase` for more complex scenarios
-- Use meaningful test method names with `test_XX_` prefix
-- Include setup and teardown methods as needed
-- Group related test cases together
+- `@tagged("post_install", "-at_install")` decorator for most tests
+- `TransactionCase` for single transaction tests
+- `SavepointCase` for more complex scenarios
+- Method naming with `test_XX_` prefix for sequence control
+- Setup and teardown methods for test data preparation
 
 ## Examples
 <example>
-# Proper test case for custom indicators
+# OpenSPP test structure for indicator validation
 
 import datetime
 import logging
@@ -143,7 +134,7 @@ class ComputeIndicatorFieldsTest(TransactionCase):
 </example>
 
 <example type="invalid">
-# Poor test implementation
+# Test implementation with structural issues
 
 from odoo.tests import common
 
@@ -165,47 +156,52 @@ class TestCustomFields(common.HttpCase):  # Using HttpCase unnecessarily
         # Missing cleanup
 </example>
 
-## Test Coverage Guidelines
-- Test all custom fields and indicators
-- Test all compute methods for correct calculation
-- Include tests for edge cases (empty groups, boundary conditions)
-- Verify data integrity constraints
-- Test UI interactions when relevant
+## Test Coverage Patterns
+Effective test coverage in OpenSPP includes:
 
-## Performance Testing Guidelines
-- Include tests for performance-critical features
-- Use `with self.profile()` for profiling test execution time
-- Test with realistic data volumes
-- Benchmark critical operations
+- Validation for all custom fields and indicators
+- Verification of compute methods for correct calculations
+- Testing of edge cases (empty groups, boundary conditions)
+- Validation of data integrity constraints
+- Testing of UI interactions when relevant
 
-## Test Data Management
-- Create minimal test data required for each test
-- Use factories or helpers for complex data setup
-- Clean up test data in tearDown when needed
-- Use savepoints to isolate test state changes
+## Performance Testing Patterns
+Performance testing in OpenSPP uses:
 
-## Specific OpenSPP Testing Patterns
-- For group/individual dynamics:
-  ```python
-  def test_group_indicator_update_on_membership_change(self):
-      """Test that indicators update when group membership changes"""
-      # Initial state verification
-      self.group._compute_ind_grp_num_children()
-      initial_count = self.group.z_ind_grp_num_children
+- `with self.profile()` for profiling test execution time
+- Testing with realistic data volumes
+- Benchmarking of critical operations
 
-      # Add a new child to the group
-      child = self.env["res.partner"].create({
-          "name": "New Child",
-          "is_group": False,
-          "is_registrant": True,
-          "birthdate": datetime.datetime.now() - relativedelta(years=5),
-      })
-      self.group.write({"group_membership_ids": [(0, 0, {"individual": child.id})]})
+## Test Data Architecture
+Test data management in OpenSPP follows these patterns:
 
-      # Verify indicator updated correctly
-      self.group._compute_ind_grp_num_children()
-      self.assertEqual(
-          self.group.z_ind_grp_num_children,
-          initial_count + 1,
-          "Adding a child should increase the children count"
-      )
+- Creation of minimal test data for each test
+- Use of factories or helpers for complex data setup
+- Use of savepoints to isolate test state changes
+
+## Specific Testing Patterns
+For testing group/individual dynamics in OpenSPP:
+
+```python
+def test_group_indicator_update_on_membership_change(self):
+    """Test that indicators update when group membership changes"""
+    # Initial state verification
+    self.group._compute_ind_grp_num_children()
+    initial_count = self.group.z_ind_grp_num_children
+
+    # Add a new child to the group
+    child = self.env["res.partner"].create({
+        "name": "New Child",
+        "is_group": False,
+        "is_registrant": True,
+        "birthdate": datetime.datetime.now() - relativedelta(years=5),
+    })
+    self.group.write({"group_membership_ids": [(0, 0, {"individual": child.id})]})
+
+    # Verify indicator updated correctly
+    self.group._compute_ind_grp_num_children()
+    self.assertEqual(
+        self.group.z_ind_grp_num_children,
+        initial_count + 1,
+        "Adding a child should increase the children count"
+    )

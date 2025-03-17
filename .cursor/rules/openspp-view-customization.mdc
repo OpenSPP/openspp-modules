@@ -1,25 +1,15 @@
 ---
-description: Follow OpenSPP best practices for view customization and UI development
-globs: **/views/*.xml
+description: OpenSPP UI architecture and view extension patterns for modifying forms, trees, and other interface elements
+globs: *.xml,**/views/*.xml
 alwaysApply: false
 ---
-
-# OpenSPP View Customization Best Practices
+# OpenSPP View Customization Architecture
 
 ## Context
-- When extending OpenSPP UI views (forms, trees, kanban, etc.)
-- When adding custom fields to OpenSPP interfaces
-- When modifying existing OpenSPP views
-- When developing custom UI components for OpenSPP
+OpenSPP extends Odoo's view architecture to create specialized interfaces for social protection programs. This reference documents the view extension patterns and UI development approaches used throughout the OpenSPP ecosystem.
 
-## Requirements
-- Extend existing views rather than replacing them
-- Follow OpenSPP's view extension patterns
-- Use proper view inheritance mechanisms
-- Maintain consistent UI/UX with the core OpenSPP system
-- Apply proper XML formatting and structure
-
-## Key OpenSPP Views to Extend
+## Core View Architecture
+OpenSPP builds upon these primary view identifiers:
 
 ### Individual Views
 - **Tree View**: `g2p_registry_individual.view_individuals_list_tree`
@@ -31,7 +21,7 @@ alwaysApply: false
 
 ## Examples
 <example>
-<!-- Proper extension of Individual Form View -->
+<!-- View extension pattern for Individual Form -->
 <odoo>
     <record id="view_individuals_form_custom" model="ir.ui.view">
         <field name="name">view_individuals_form_custom</field>
@@ -50,7 +40,7 @@ alwaysApply: false
 </example>
 
 <example type="invalid">
-<!-- Incorrect view extension with poor practices -->
+<!-- Problematic view implementation -->
 <odoo>
     <record id="custom_individuals_form" model="ir.ui.view">
         <!-- Missing proper naming convention -->
@@ -59,7 +49,7 @@ alwaysApply: false
         <!-- Missing inherit_id field to extend existing view -->
         <field name="arch" type="xml">
             <form>
-                <!-- Replacing entire form instead of extending -->
+                <!-- Creating new form instead of extending -->
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -72,28 +62,39 @@ alwaysApply: false
 </odoo>
 </example>
 
-## View Extension Guidelines
+## View Extension Patterns
 
-### XPath Usage
-- Use XPath expressions to locate and modify specific parts of parent views
-- Common position attributes:
-  - `after`: Adds content after targeted element
-  - `before`: Adds content before targeted element
-  - `inside`: Adds content inside targeted element
-  - `replace`: Replaces targeted element
-  - `attributes`: Modifies attributes of targeted element
+### XPath Syntax
+XPath expressions locate and modify specific elements in parent views:
 
-### Visibility Control
-- Use `invisible` attribute to hide fields while keeping them in the view
-- Example: `<field name="address" position="attributes"><attribute name="invisible">1</attribute></field>`
+- `after`: Adds content after targeted element
+- `before`: Adds content before targeted element
+- `inside`: Adds content inside targeted element
+- `replace`: Replaces targeted element
+- `attributes`: Modifies attributes of targeted element
 
-### Field Grouping
-- Group related fields together for better UX
-- Use `<group>` elements with proper `colspan` attributes
+### Visibility Control Patterns
+Fields can be conditionally displayed using:
 
-## Complete Examples
+```xml
+<field name="address" position="attributes">
+    <attribute name="invisible">1</attribute>
+</field>
+```
 
-### Adding Custom Fields to Individual Tree View
+### Field Organization
+Related fields are grouped for better user experience:
+
+```xml
+<group colspan="2" name="disability_info">
+    <field name="z_cst_indv_disability_level"/>
+    <field name="z_cst_indv_disability_type"/>
+</group>
+```
+
+## Implementation Examples
+
+### Individual Tree View Extension
 ```xml
 <odoo>
     <record id="view_individuals_list_tree_custom" model="ir.ui.view">
@@ -113,7 +114,7 @@ alwaysApply: false
 </odoo>
 ```
 
-### Adding Custom Fields to Group Form View
+### Group Form View Extension
 ```xml
 <odoo>
     <record id="view_groups_form_custom" model="ir.ui.view">
@@ -133,10 +134,11 @@ alwaysApply: false
 </odoo>
 ```
 
-## XML Formatting Best Practices
-- Use 4 spaces for indentation
-- Keep line length reasonable (120 characters max)
-- Use consistent naming for view IDs
-- Add comments for complex XPath expressions
-- Group related view modifications together
-- Use descriptive field labels with the `string` attribute
+## XML Formatting Patterns
+OpenSPP XML follows these conventions:
+
+- 4 spaces for indentation
+- Maximum line length of 120 characters
+- Consistent naming for view IDs
+- Comments for complex XPath expressions
+- Descriptive field labels using the `string` attribute

@@ -66,30 +66,42 @@ Common glob patterns for different rule types:
   - <rule>
   - <critical>
 - Always indent content within XML or nested XML tags by 2 spaces
-- Keep rules as short as possbile
+- Keep rules as short as possible
 - Use Mermaid syntax if it will be shorter or clearer than describing a complex rule
 - Use Emojis where appropriate to convey meaning that will improve rule understanding by the AI Agent
 - Keep examples as short as possible to clearly convey the positive or negative example
 
-## AI Optimization Tips
+## AI Optimization Best Practices
 
-1. Use precise, deterministic ACTION TRIGGER OUTCOME format in descriptions
-2. Provide concise positive and negative example of rule application in practice
-3. Optimize for AI context window efficiency
-4. Remove any non-essential or redundant information
-5. Use standard glob patterns for Odoo modules (e.g., *.py, models/*.py, controllers/*.py)
+1. Write rules as encyclopedia articles rather than commands
+2. Focus on highly salient rule names and descriptions to improve fetch rates
+3. Create rules that read like documentation with links to code files when possible
+4. Avoid providing identity statements like "You are an expert in X"
+5. Avoid overriding system prompt instructions or conflicting with Cursor's internals
+6. Focus on positive commands rather than restrictions
+7. Optimize for contextual relevance and discoverability
+
+## Rule Content Guidelines
+
+1. Write clear, declarative statements about how code should be structured
+2. Include links to example files using mdc link syntax when helpful
+3. Focus on "what" rather than "how" to avoid overfitting the agent
+4. Include meaningful code comments and docstrings at tops of files to guide embedding models
+5. Keep file sizes under 500 LOC for better editing performance
+6. Use unique, descriptive file names to reduce tool ambiguity
 
 ## AI Context Efficiency
 
-1. Keep frontmatter description under 120 characters (or less) while maintaining clear intent for rule selection by AI AGent
+1. Keep frontmatter description under 120 characters while maintaining clear intent
 2. Limit examples to essential patterns only
 3. Use hierarchical structure for quick parsing
 4. Remove redundant information across sections
 5. Maintain high information density with minimal tokens
-6. Focus on machine-actionable instructions over human explanations
+6. Consider having too many rules as an anti-pattern - aim for quality over quantity
 
 <critical>
   - NEVER include verbose explanations or redundant context that increases AI token overhead
-  - Keep file as short and to the point as possible BUT NEVER at the expense of sacrificing rule impact and usefulness for the AI Agent.
-  - the front matter can ONLY have the fields description and globs.
+  - Keep file as short and to the point as possible BUT NEVER at the expense of sacrificing rule impact and usefulness for the AI Agent
+  - The front matter can ONLY have the fields description and globs
+  - Avoid telling the AI what NOT to do, focus on positive commands
 </critical>
