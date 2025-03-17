@@ -1,0 +1,102 @@
+---
+description: Follow Odoo 17 and OpenSPP best practices when developing modules and customizations
+globs: *.py,**/models/*.py,**/controllers/*.py,**/wizard/*.py
+alwaysApply: false
+---
+
+# Odoo 17 and OpenSPP Development General Guidelines
+
+## Context
+- When developing Python modules for Odoo 17 in OpenSPP environment
+- When customizing or extending OpenSPP functionality
+- When implementing new features in the OpenSPP ecosystem
+
+## Requirements
+- Follow Odoo and OCA coding guidelines
+- Structure modules according to Odoo's standard directory structure
+- Follow OpenSPP's specific naming conventions and patterns
+- Ensure backward compatibility with API decorators
+- Prioritize security best practices
+- Write comprehensive test cases for all functionality
+
+## Module Structure
+- Organize files in standard Odoo module structure:
+  - `__init__.py` - Module entry point with imports
+  - `__manifest__.py` - Module descriptor with metadata
+  - `README.md` - Module documentation with installation and usage instructions
+  - `models/` - Business object definitions
+  - `views/` - XML view definitions
+  - `data/` - XML data files
+  - `security/` - Access controls and rules
+  - `wizards/` - Transient models
+  - `static/` - Static assets
+  - `controllers/` - HTTP controllers
+  - `reports/` - QWeb reports
+  - `tests/` - Test files for the module
+
+## Python Coding Standards
+- Use 4 spaces for indentation, no tabs
+- Maximum line length of 79 characters
+- Follow PEP 8 naming conventions:
+  - `snake_case` for variables, methods, functions
+  - `CamelCase` for classes
+  - `UPPER_SNAKE_CASE` for constants
+- Order imports properly:
+  1. Standard library imports
+  2. Third-party imports
+  3. Odoo imports
+  4. Module imports (relative)
+- Group imports logically and alphabetically within each group
+
+## Security Practices
+- Define access rights in CSV files (ir.model.access.csv)
+- Use record rules for complex security requirements
+- Avoid `sudo()` when possible, prefer `with self.env.su():` if needed
+- Validate all user inputs to prevent injection attacks
+- Sanitize inputs for HTML display
+- Never store sensitive data in plain text
+
+## Examples
+<example>
+# Good Odoo 17 module structure example
+
+addons/openspp_extension/
+|-- __init__.py
+|-- __manifest__.py
+|-- models/
+|   |-- __init__.py
+|   |-- res_partner.py
+|   |-- entitlement.py
+|-- views/
+|   |-- res_partner_views.xml
+|   |-- entitlement_views.xml
+|-- security/
+|   |-- ir.model.access.csv
+|   |-- security_rules.xml
+|-- data/
+|   |-- demo_data.xml
+|-- static/
+|   |-- description/
+|   |-- src/
+|-- tests/
+|   |-- __init__.py
+|   |-- test_partner.py
+|   |-- test_entitlement.py
+</example>
+
+<example type="invalid">
+# Poor module structure with missing key files and non-standard organization
+
+my_openspp_mod/
+|-- main.py  # Non-standard entry point
+|-- models.py  # All models in one file
+|-- views.xml  # All views in one file
+|-- demo.xml
+</example>
+
+## Documentation
+- Include docstrings for all classes and methods
+- Document complex business logic and algorithms
+- Add helpful comments for non-obvious code
+- Keep README.md updated with installation and usage instructions
+- Use Odoo standard method ordering within model classes

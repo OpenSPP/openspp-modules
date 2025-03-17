@@ -1,0 +1,138 @@
+---
+description: Follow OpenSPP field naming conventions and model extension best practices
+globs: **/models/*.py
+alwaysApply: false
+---
+
+# OpenSPP Field Naming and Model Extension Conventions
+
+## Context
+- When extending res.partner model to customize Groups or Individuals
+- When adding custom fields to OpenSPP entities
+- When implementing indicators or computed fields
+- When differentiating between group and individual fields
+
+## Requirements
+- Follow OpenSPP naming conventions for all custom fields
+- Use appropriate prefixes for field types
+- Apply proper model inheritance patterns
+- Implement computed fields using OpenSPP's helper methods
+
+## Field Naming Conventions
+- All custom fields should follow these prefix patterns:
+  - `z_`: Prefix for custom fields (`x_` when created directly from UI)
+  - `ind`: For indicator fields (computed values)
+  - `grp`: For group-related fields
+  - `cst`: For custom/arbitrary fields
+  - `indv`: For individual-related fields
+
+## Group vs Individual Pattern
+- Groups and individuals are both based on `res.partner` but differentiated by:
+  - `is_group = True` for groups (Family, Household)
+  - `is_group = False` for individuals
+- Groups and individuals are linked via `G2PGroupMembership` model
+
+## Examples
+<example>
+# Proper field naming and model extension for OpenSPP
+
+from odoo import api, fields, models
+from dateutil.relativedelta import relativedelta
+import datetime
+
+class G2PGroup(models.Model):
+    _inherit = "res.partner"
+
+    # Group indicator field
+    z_ind_grp_num_children = fields.Integer(
+        "Number of Children",
+        compute="_compute_ind_grp_num_children",
+        help="Number of children in the group",
+        store=True,
+        allow_filter=True,
+    )
+
+    # Custom group field
+    z_cst_grp_poverty_level = fields.Selection(
+        [
+            ("0", "Not Poor"),
+            ("1", "Poor"),
+            ("2", "Extremely Poor"),
+        ],
+        string="Poverty Level",
+        default="0",
+    )
+
+    def _compute_ind_grp_num_children(self):
+        """Compute the number of children in the group using OpenSPP's helper function"""
+        now = datetime.datetime.now()
+        children = now - relativedelta(years=18)
+        domain = [("birthdate", ">=", children)]
+        self.compute_count_and_set_indicator("z_ind_grp_num_children", None, domain)
+
+    # Manual implementation without helper
+    def _compute_ind_grp_is_single_head_hh(self):
+        for record in self:
+            adult_count = record.group_membership_ids.filtered(
+                lambda member: member.individual.birthdate <= (
+                    datetime.datetime.now() - relativedelta(years=18)
+                )
+            ).mapped('individual')
+            record.z_ind_grp_is_single_head_hh = len(adult_count) == 1
+</example>
+
+<example type="invalid">
+# Poor field naming and incorrect implementation
+
+from odoo import models, api, fields
+
+class ResPartner(models.Model):
+    _inherit = "res.partner"
+
+    # Missing proper prefix pattern
+    children_count = fields.Integer(
+        "Children Count",
+        compute="_count_children"
+    )
+
+    # Missing indication of group vs individual field
+    poverty_status = fields.Selection(
+        [("poor", "Poor"), ("not_poor", "Not Poor")],
+        string="Poverty Status"
+    )
+
+    # Incorrect compute method with api.depends
+    @api.depends("group_membership_ids.individual.birthdate")
+    def _count_children(self):
+        for partner in self:
+            if partner.is_group:
+                children = 0
+                for member in partner.group_membership_ids:
+                    # Missing calculations
+                    pass
+                partner.children_count = children
+            else:
+                partner.children_count = 0
+</example>
+
+## Compute Field Guidelines
+- Do not use `@api.depends` for indicators based on individual information
+- Use the `compute_count_and_set_indicator` helper method when possible
+- Implement manual compute logic for complex indicators
+- Always set `store=True` and `allow_filter=True` for indicators that will be used in filtering
+- Consider performance implications for complex computed fields
+
+## Individual Field Guidelines
+- For individual-specific fields:
+```python
+class G2PIndividual(models.Model):
+    _inherit = "res.partner"
+
+    z_cst_indv_disability_level = fields.Integer("Disability Level")
+    z_cst_indv_education_level = fields.Selection([
+        ("none", "None"),
+        ("primary", "Primary"),
+        ("secondary", "Secondary"),
+        ("tertiary", "Tertiary"),
+    ], string="Education Level")
+```
