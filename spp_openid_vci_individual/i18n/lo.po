@@ -1,0 +1,25 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_openid_vci_individual
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: lo\n"
+
+#. module: spp_openid_vci_individual
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci_individual.view_individual_form
+msgid "<span class=\"o_stat_text\">Issue Card</span>"
+msgstr ""
+
+#. module: spp_openid_vci_individual
+#: model:ir.model,name:spp_openid_vci_individual.model_g2p_openid_vci_issuers
+msgid "OpenID VCI Issuer"
+msgstr ""

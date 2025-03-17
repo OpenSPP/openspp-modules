@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_area_gis
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: lo\n"
+
+#. module: spp_area_gis
+#: model:ir.model,name:spp_area_gis.model_spp_area
+msgid "Area"
+msgstr ""
+
+#. module: spp_area_gis
+#: model:ir.model,name:spp_area_gis.model_spp_area_import_raw
+msgid "Area Import Raw Data"
+msgstr ""
+
+#. module: spp_area_gis
+#: model:ir.model,name:spp_area_gis.model_spp_area_import
+msgid "Areas Import Table"
+msgstr ""
+
+#. module: spp_area_gis
+#: model:ir.model.fields,field_description:spp_area_gis.field_spp_area__coordinates
+#: model:spp.gis.data.layer,name:spp_area_gis.gis_vector_layer_area_coordinates
+#: model_terms:ir.ui.view,arch_db:spp_area_gis.custom_view_spparea_form
+msgid "Coordinates"
+msgstr ""
+
+#. module: spp_area_gis
+#: model:spp.gis.raster.layer,name:spp_area_gis.gis_raster_layer_area_osm
+msgid "Default"
+msgstr ""
+
+#. module: spp_area_gis
+#: model:ir.model.fields,field_description:spp_area_gis.field_spp_area__geo_polygon
+msgid "Geo Polygon"
+msgstr ""
+
+#. module: spp_area_gis
+#: model:ir.model.fields,field_description:spp_area_gis.field_spp_area_import_raw__latitude
+msgid "Latitude"
+msgstr ""
+
+#. module: spp_area_gis
+#. odoo-python
+#: code:addons/spp_area_gis/models/area_import.py:0
+#, python-format
+msgid "Latitude is required if Longitude is provided"
+msgstr ""
+
+#. module: spp_area_gis
+#. odoo-python
+#: code:addons/spp_area_gis/models/area_import.py:0
+#, python-format
+msgid "Latitude must be between -90 and 90"
+msgstr ""
+
+#. module: spp_area_gis
+#: model:ir.model.fields,field_description:spp_area_gis.field_spp_area_import_raw__longitude
+msgid "Longitude"
+msgstr ""
+
+#. module: spp_area_gis
+#. odoo-python
+#: code:addons/spp_area_gis/models/area_import.py:0
+#, python-format
+msgid "Longitude is required if Latitude is provided"
+msgstr ""
+
+#. module: spp_area_gis
+#. odoo-python
+#: code:addons/spp_area_gis/models/area_import.py:0
+#, python-format
+msgid "Longitude must be between -180 and 180"
+msgstr ""
+
+#. module: spp_area_gis
+#: model_terms:ir.ui.view,arch_db:spp_area_gis.custom_view_spparea_form
+msgid "Polygon"
+msgstr ""
+
+#. module: spp_area_gis
+#: model:spp.gis.data.layer,name:spp_area_gis.gis_vector_layer_area_polygons
+msgid "Polygons"
+msgstr ""

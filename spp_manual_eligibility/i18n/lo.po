@@ -1,0 +1,63 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_manual_eligibility
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: lo\n"
+
+#. module: spp_manual_eligibility
+#: model:ir.model,name:spp_manual_eligibility.model_g2p_assign_program_wizard
+msgid "Add Registrants to Program Wizard"
+msgstr ""
+
+#. module: spp_manual_eligibility
+#: model:ir.model,name:spp_manual_eligibility.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr ""
+
+#. module: spp_manual_eligibility
+#: model:ir.model,name:spp_manual_eligibility.model_g2p_cycle
+msgid "Cycle"
+msgstr ""
+
+#. module: spp_manual_eligibility
+#: model:ir.model.fields,field_description:spp_manual_eligibility.field_g2p_program_create_wizard__eligibility_kind
+msgid "Eligibility Manager"
+msgstr ""
+
+#. module: spp_manual_eligibility
+#: model:ir.model.fields,field_description:spp_manual_eligibility.field_g2p_cycle__is_manual_eligibility
+#: model:ir.model.fields,field_description:spp_manual_eligibility.field_g2p_program__is_manual_eligibility
+#: model:ir.model.fields,field_description:spp_manual_eligibility.field_g2p_program_membership__is_manual_eligibility
+#: model:ir.model.fields,field_description:spp_manual_eligibility.field_g2p_program_membership_manager_default__is_manual_eligibility
+msgid "Is Manual Eligibility"
+msgstr ""
+
+#. module: spp_manual_eligibility
+#: model:ir.model.fields.selection,name:spp_manual_eligibility.selection__g2p_program_create_wizard__eligibility_kind__manual_eligibility
+msgid "Manual Eligibility"
+msgstr ""
+
+#. module: spp_manual_eligibility
+#: model:ir.model,name:spp_manual_eligibility.model_g2p_program
+msgid "Program"
+msgstr ""
+
+#. module: spp_manual_eligibility
+#: model:ir.model,name:spp_manual_eligibility.model_g2p_program_membership
+msgid "Program Membership"
+msgstr ""
+
+#. module: spp_manual_eligibility
+#: model:ir.model,name:spp_manual_eligibility.model_g2p_program_membership_manager_default
+msgid "Simple Eligibility"
+msgstr ""

@@ -1,0 +1,35 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_custom_filter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: lo\n"
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,help:spp_custom_filter.field_ir_model_fields__allow_filter
+msgid "Allow to show this field on Custom filter!"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model,name:spp_custom_filter.model_custom_filter_mixin
+msgid "Custom Filter Mixin"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model,name:spp_custom_filter.model_ir_model_fields
+msgid "Fields"
+msgstr ""
+
+#. module: spp_custom_filter
+#: model:ir.model.fields,field_description:spp_custom_filter.field_ir_model_fields__allow_filter
+msgid "Show on Custom Filter"
+msgstr ""

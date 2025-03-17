@@ -27,12 +27,14 @@ msgid "<span class=\"o_stat_text\">Reassign</span>"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "A group must be selected."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid ""
@@ -93,6 +95,7 @@ msgid "All Requests"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "An error was encountered in applying the changes: %s"
@@ -105,6 +108,7 @@ msgid "Applicant"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
@@ -122,9 +126,29 @@ msgid "Applicant Information"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_information_visible
+msgid "Applicant Information Visible"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id_required
+msgid "Applicant Required"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id_visible
+msgid "Applicant Visible"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_phone
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__applicant_phone
 msgid "Applicant's Phone Number"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_phone_required
+msgid "Applicant's Phone Required"
 msgstr ""
 
 #. module: spp_change_request
@@ -159,23 +183,21 @@ msgid "Apply to Both"
 msgstr ""
 
 #. module: spp_change_request
-#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
-msgid "Archived"
-msgstr ""
-
-#. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/wizard/cancel_change_request.py:0
 #, python-format
 msgid "Are you sure you would like to cancel this request: %s"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/wizard/reject_change_request.py:0
 #, python-format
 msgid "Are you sure you would like to reject this request: %s"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_user_assign_wizard
@@ -199,6 +221,7 @@ msgid "Assign To Id Domain"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
 #, python-format
 msgid "Assign this change request to:"
@@ -221,6 +244,12 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_targets__target__both
+msgid "Both"
+msgstr ""
+
+#. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "CR Reset to Draft"
@@ -238,6 +267,7 @@ msgid "Cancel"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_cancel_wizard
@@ -258,7 +288,6 @@ msgstr ""
 
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__cancelled_by_id
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__reset_to_draft_by_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__cancelled_by_id
 msgid "Cancelled by"
 msgstr ""
@@ -270,6 +299,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__change_request_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__change_request_id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__request_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_dms_directory__change_request_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_dms_file__change_request_id
 #: model:ir.ui.menu,name:spp_change_request.spp_change_request_menu_root
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Change Request"
@@ -296,6 +327,7 @@ msgid "Change Request Applicator"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "Change Request Applied"
@@ -307,19 +339,20 @@ msgid "Change Request Cancel Wizard"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "Change Request Cancelled"
 msgstr ""
 
 #. module: spp_change_request
-#: model:dms.access.group,name:spp_change_request.dms_access_group
-msgid "Change Request DMS Group"
+#: model:ir.model,name:spp_change_request.model_spp_change_request_source_mixin
+msgid "Change Request Data Source Mixin"
 msgstr ""
 
 #. module: spp_change_request
-#: model:ir.model,name:spp_change_request.model_spp_change_request_source_mixin
-msgid "Change Request Data Source Mixin"
+#: model:res.groups,name:spp_change_request.group_spp_change_request_external_api
+msgid "Change Request External API"
 msgstr ""
 
 #. module: spp_change_request
@@ -333,6 +366,7 @@ msgid "Change Request Module Access"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "Change Request Partially Validated"
@@ -344,6 +378,7 @@ msgid "Change Request Pending Validation"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "Change Request Rejected"
@@ -370,6 +405,7 @@ msgid "Change Request User Assignment Wizard"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "Change Request Validated"
@@ -418,10 +454,16 @@ msgid "Change Request Validators"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_g2p_program_membership__change_request_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_res_partner__change_request_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_res_users__change_request_ids
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_group_ext_form_custom_spp_cr
 msgid "Change Requests"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_targets
+msgid "Change Requests' Targets"
 msgstr ""
 
 #. module: spp_change_request
@@ -466,6 +508,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__create_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_uid
@@ -478,6 +521,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__create_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__create_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_date
@@ -497,24 +541,18 @@ msgid "Currently Assigned to"
 msgstr ""
 
 #. module: spp_change_request
-#: model:ir.model.fields,field_description:spp_change_request.field_dms_file__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request.field_res_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence_mixin__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__dms_directory_ids
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__dms_directory_ids
 msgid "DMS Directories"
 msgstr ""
 
 #. module: spp_change_request
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__dms_file_ids
-msgid "DMS Files"
+#: model:ir.model,name:spp_change_request.model_spp_dms_directory
+msgid "DMS Directory"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_dms_file
+msgid "DMS File"
 msgstr ""
 
 #. module: spp_change_request
@@ -571,6 +609,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__display_name
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__display_name
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__display_name
@@ -585,6 +624,7 @@ msgid "Draft"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "ERROR!"
@@ -596,20 +636,11 @@ msgid "End Date"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid ""
 "Error in validation stages. No available stage to assign to this validation."
-msgstr ""
-
-#. module: spp_change_request
-#: model:ir.model,name:spp_change_request.model_dms_file
-msgid "File"
-msgstr ""
-
-#. module: spp_change_request
-#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
-msgid "Filename"
 msgstr ""
 
 #. module: spp_change_request
@@ -638,22 +669,30 @@ msgid "For Application"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "For Application of Changes"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "For Pending Validation"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.ui.menu,name:spp_change_request.spp_change_request_pending_validation_root
 #, python-format
 msgid "For Validation"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_targets__target__group
+msgid "Group"
 msgstr ""
 
 #. module: spp_change_request
@@ -662,6 +701,7 @@ msgid "Group By"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "Group Details"
@@ -682,6 +722,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__id
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__id
@@ -701,7 +742,6 @@ msgstr ""
 
 #. module: spp_change_request
 #: model:ir.model.fields,help:spp_change_request.field_spp_change_request__message_needaction
-#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
@@ -712,9 +752,15 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "Incorrect phone number format"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_targets__target__individual
+msgid "Individual"
 msgstr ""
 
 #. module: spp_change_request
@@ -728,22 +774,11 @@ msgid "Last Activity"
 msgstr ""
 
 #. module: spp_change_request
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request____last_update
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard____last_update
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members____last_update
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard____last_update
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard____last_update
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence____last_update
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage____last_update
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__write_uid
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__write_uid
@@ -756,6 +791,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__write_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__write_date
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__write_date
@@ -766,11 +802,6 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__last_validated_by_id
 msgid "Last Validator"
-msgstr ""
-
-#. module: spp_change_request
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: spp_change_request
@@ -786,6 +817,11 @@ msgstr ""
 #. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_ids
 msgid "Messages"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__name
+msgid "Model Name"
 msgstr ""
 
 #. module: spp_change_request
@@ -850,7 +886,7 @@ msgstr ""
 
 #. module: spp_change_request
 #: model:ir.model.fields,help:spp_change_request.field_spp_change_request__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: spp_change_request
@@ -859,17 +895,14 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: spp_change_request
-#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__message_unread_counter
-msgid "Number of unread messages"
-msgstr ""
-
-#. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "Only draft change requests can be deleted by its creator."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid ""
@@ -878,13 +911,13 @@ msgid ""
 msgstr ""
 
 #. module: spp_change_request
-#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_tree
-msgid "Open Details"
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Open Applicant Form"
 msgstr ""
 
 #. module: spp_change_request
-#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
-msgid "Path"
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_tree
+msgid "Open Details"
 msgstr ""
 
 #. module: spp_change_request
@@ -899,6 +932,7 @@ msgid "Phone No."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "Phone No. is required."
@@ -917,6 +951,16 @@ msgid "Registrant"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__registrant_id_domain
+msgid "Registrant Id Domain"
+msgstr ""
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__registrant_id_visible
+msgid "Registrant Visible"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Registrant:"
 msgstr ""
@@ -932,10 +976,12 @@ msgid "Reject"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #: model:ir.actions.act_window,name:spp_change_request.action_change_request_reject_wizard
 #: model:mail.activity.type,name:spp_change_request.reject_activity
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #, python-format
 msgid "Reject Change Request"
 msgstr ""
@@ -976,6 +1022,11 @@ msgid "Request Type"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__request_type_target
+msgid "Request Type Target"
+msgstr ""
+
+#. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_form
 msgid "Request Type:"
@@ -1004,6 +1055,11 @@ msgid "Reset to Draft"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__reset_to_draft_by_id
+msgid "Reset to Draft by"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_user_id
 msgid "Responsible User"
 msgstr ""
@@ -1016,16 +1072,6 @@ msgstr ""
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
 msgid "Save"
-msgstr ""
-
-#. module: spp_change_request
-#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
-msgid "Scan ID Document"
-msgstr ""
-
-#. module: spp_change_request
-#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
-msgid "Scan QR Code"
 msgstr ""
 
 #. module: spp_change_request
@@ -1086,36 +1132,54 @@ msgid "Submitted By"
 msgstr ""
 
 #. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__target
+msgid "Target"
+msgstr ""
+
+#. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "The Applicant field must be filled-up."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "The Request Type field must be filled-up."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request has been approved."
+msgstr ""
+
+#. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The change request has been fully validated"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The change request has been partially validated"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The change request has been validated and the changes has been applied"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid ""
@@ -1124,6 +1188,7 @@ msgid ""
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid ""
@@ -1132,6 +1197,7 @@ msgid ""
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid ""
@@ -1140,42 +1206,58 @@ msgid ""
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "The change request type must be properly filled-up."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The change request was cancelled by %s."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The change request was rejected by %s."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The change request was reset to draft."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The request must be in draft state to be set to pending validation."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid ""
+"The request must be in draft, pending, or validated state for changes to be "
+"applied."
+msgstr ""
+
+#. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The request must be in validated state for changes to be applied."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
@@ -1185,6 +1267,7 @@ msgid ""
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid ""
@@ -1192,30 +1275,35 @@ msgid ""
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The request to be validated must be in submitted state."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The required document %s is missing."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The required document category is not configured."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "The required documents %s are missing."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/wizard/cancel_change_request.py:0
 #: code:addons/spp_change_request/wizard/reject_change_request.py:0
 #, python-format
@@ -1223,48 +1311,56 @@ msgid "There are no change request selected."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "There are no data captured from the ID scanner."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "There are no data captured from the QR Code scanner."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
 msgid "There are no directories defined for this change request."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "There are no group found with the ID number from the QR Code scanned."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "There are no registrant found with the ID number scanned."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "There are no user assigned to this change request."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "There are no validators defined for this request."
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "This change request does not have any validation sequence defined."
@@ -1281,16 +1377,7 @@ msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: spp_change_request
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: spp_change_request
-#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr ""
-
-#. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/dms_file.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
@@ -1303,19 +1390,32 @@ msgid "User"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "User %(user)s does not have access to apply changes. %(error)s"
+msgstr ""
+
+#. module: spp_change_request
 #: model:ir.module.category,description:spp_change_request.spp_change_request_module
 msgid "User access level for the OpenSPP change request module"
 msgstr ""
 
 #. module: spp_change_request
-#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
-msgid "User {} does not have access to apply changes.{}"
+msgid "User is not allowed to approve CRs directly."
 msgstr ""
 
 #. module: spp_change_request
 #: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
 msgid "Validate"
+msgstr ""
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Validate Change Request"
 msgstr ""
 
 #. module: spp_change_request
@@ -1386,20 +1486,23 @@ msgid "YES"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid "You are not allowed to %s this change request"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #, python-format
 msgid ""
-"You are not allowed to validate this request! Stage: {}. Allowed Validator "
-"Group: {}"
+"You are not allowed to validate this request! Stage: %(stage)s. Allowed "
+"Validator Group: %(group)s"
 msgstr ""
 
 #. module: spp_change_request
+#. odoo-python
 #: code:addons/spp_change_request/models/change_request.py:0
 #: code:addons/spp_change_request/models/mixins/source_mixin.py:0
 #, python-format
