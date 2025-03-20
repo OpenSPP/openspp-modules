@@ -72,11 +72,17 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                         widget="domain"
                                         options="{'model': 'res.partner'}"
                                     />
-                                    <field
-                                        name="multiplier_field"
-                                        options="{'no_open':True,'no_create':True,'no_create_edit':True}"
-                                    />
-                                    <field name="max_multiplier" />
+                                </group>
+                                <group colspan="4" col="4">
+                                    <group colspan="2">
+                                        <field
+                                            name="multiplier_field"
+                                            options="{'no_open':True,'no_create':True,'no_create_edit':True}"
+                                        />
+                                    </group>
+                                    <group colspan="2">
+                                        <field name="max_multiplier" />
+                                    </group>
                                 </group>
                             </form>
                         </field>
