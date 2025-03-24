@@ -62,20 +62,6 @@ class TestAttendanceList(TransactionCase):
         self.env["ir.config_parameter"].sudo().set_param("spp_attendance.type_unique", True)
         self.env["ir.config_parameter"].sudo().set_param("spp_attendance.location_unique", True)
 
-        # Create first attendance
-        attendance1 = self.env["spp.attendance.list"].create(
-            {
-                "subscriber_id": self.subscriber.id,
-                "attendance_date": "2024-03-20",
-                "attendance_time": "10:00:00",
-                "attendance_type_id": self.type.id,
-                "attendance_location_id": self.location.id,
-                "attendance_category": "present",
-                "submitted_by": "Test User",
-                "submitted_datetime": "2024-03-20 10:00:00",
-            }
-        )
-
         # Try to create duplicate attendance
         attendance2 = self.env["spp.attendance.list"].new(
             {

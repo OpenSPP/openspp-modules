@@ -56,15 +56,6 @@ class TestAttendanceControllers(HttpCase):
         )
         token = json.loads(auth_response.content)["access_token"]
 
-        # Create subscriber
-        subscriber = self.env["spp.attendance.subscriber"].create(
-            {
-                "family_name": "Test",
-                "given_name": "Subscriber",
-                "person_identifier": "TEST123",
-            }
-        )
-
         # Create attendance
         attendance_data = {
             "records": [
