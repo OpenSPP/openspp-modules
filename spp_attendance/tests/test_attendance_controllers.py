@@ -118,49 +118,46 @@ class TestAttendanceControllers(HttpCase):
         mock_jwt_encode.return_value = "test_token"
         mock_jwt_decode.return_value = {"iss": "openspp:auth-service"}
 
-        # Setup auth and create some attendance records first
-        auth_data = {
-            "client_id": self.client.client_id,
-            "client_secret": self.client.client_secret,
-        }
-        auth_response = self.url_open(
-            "/auth/token",
-            data=json.dumps(auth_data),
-            headers={"Content-Type": "application/json"},
-        )
-        token = json.loads(auth_response.content)["access_token"]
-
-        subscriber = self.env["spp.attendance.subscriber"].create(
-            {
-                "family_name": "Test",
-                "given_name": "Subscriber",
-                "person_identifier": "TEST123",
+        try:
+            # Setup auth
+            auth_data = {
+                "client_id": self.client.client_id,
+                "client_secret": self.client.client_secret,
             }
-        )
+            auth_response = self.url_open(
+                "/auth/token",
+                data=json.dumps(auth_data),
+                headers={"Content-Type": "application/json"},
+            )
+            token = json.loads(auth_response.content)["access_token"]
 
-        self.env["spp.attendance.list"].create(
-            {
-                "subscriber_id": subscriber.id,
-                "attendance_date": datetime.now().strftime("%Y-%m-%d"),
-                "attendance_time": "10:00:00",
-                "attendance_type_id": self.type.id,
-                "attendance_location_id": self.location.id,
-                "attendance_category": "present",
-                "submitted_by": "Test User",
-                "submitted_datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            }
-        )
+            # Create attendance record for existing subscriber
+            self.env["spp.attendance.list"].create(
+                {
+                    "subscriber_id": self.subscriber.id,
+                    "attendance_date": datetime.now().strftime("%Y-%m-%d"),
+                    "attendance_time": "10:00:00",
+                    "attendance_type_id": self.type.id,
+                    "attendance_location_id": self.location.id,
+                    "attendance_category": "present",
+                    "submitted_by": "Test User",
+                    "submitted_datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                }
+            )
 
-        # Test get attendance
-        response = self.url_open(
-            f"/attendance/{subscriber.person_identifier}",
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {token}",
-            },
-        )
+            # Test get attendance
+            response = self.url_open(
+                f"/attendance/{self.subscriber.person_identifier}",
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {token}",
+                },
+            )
 
-        self.assertEqual(response.status_code, 200)
-        result = json.loads(response.content)
-        self.assertEqual(result["person_id"], "TEST123")
-        self.assertEqual(len(result["attendance_list"]), 1)
+            self.assertEqual(response.status_code, 200)
+            result = json.loads(response.content)
+            self.assertEqual(result["person_id"], self.subscriber.person_identifier)
+            self.assertEqual(len(result["attendance_list"]), 1)
+
+        except Exception as e:
+            self.fail(f"Request failed: {str(e)}")
