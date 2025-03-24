@@ -62,24 +62,35 @@ class TestAttendanceList(TransactionCase):
         self.env["ir.config_parameter"].sudo().set_param("spp_attendance.type_unique", True)
         self.env["ir.config_parameter"].sudo().set_param("spp_attendance.location_unique", True)
 
-        # Try to create duplicate attendance
-        attendance2 = self.env["spp.attendance.list"].new(
-            {
-                "subscriber_id": self.subscriber.id,
-                "attendance_date": "2024-03-20",
-                "attendance_time": "10:00:00",
-                "attendance_type_id": self.type.id,
-                "attendance_location_id": self.location.id,
-                "attendance_category": "present",
-                "submitted_by": "Test User",
-                "submitted_datetime": "2024-03-20 10:00:00",
-            }
-        )
+        # Create first attendance
+        attendance1 = self.env["spp.attendance.list"].create({
+            "subscriber_id": self.subscriber.id,
+            "attendance_date": "2024-03-20",
+            "attendance_time": "10:00:00",
+            "attendance_type_id": self.type.id,
+            "attendance_location_id": self.location.id,
+            "attendance_category": "present",
+            "submitted_by": "Test User",
+            "submitted_datetime": "2024-03-20 10:00:00",
+        })
 
+        # Try to create duplicate attendance
+        attendance2 = self.env["spp.attendance.list"].new({
+            "subscriber_id": self.subscriber.id,
+            "attendance_date": attendance1.attendance_date,  # Use same date as attendance1
+            "attendance_time": attendance1.attendance_time,  # Use same time as attendance1
+            "attendance_type_id": attendance1.attendance_type_id.id,  # Use same type as attendance1
+            "attendance_location_id": attendance1.attendance_location_id.id,  # Use same location as attendance1
+            "attendance_category": "present",
+            "submitted_by": "Test User",
+            "submitted_datetime": "2024-03-20 10:00:00",
+        })
+
+        # Check uniqueness should return False since this would be a duplicate
         self.assertFalse(attendance2.check_uniqueness())
 
-        # Change time should allow creation
-        attendance2.attendance_time = "11:00:00"
+        # Verify that changing any of the unique fields allows creation
+        attendance2.attendance_time = "11:00:00"  # Change time
         self.assertTrue(attendance2.check_uniqueness())
 
     def test_attendance_categories(self):

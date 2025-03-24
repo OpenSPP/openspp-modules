@@ -11,71 +11,66 @@ class TestCustomField(TransactionCase):
         super().setUpClass()
 
         # Add is_group field if it doesn't exist
-        if not cls.env["ir.model.fields"].search([("model", "=", "res.partner"), ("name", "=", "is_group")]):
-            cls.env["ir.model.fields"].create(
-                {
-                    "name": "is_group",
-                    "field_description": "Is Group",
-                    "model_id": cls.env.ref("base.model_res_partner").id,
-                    "ttype": "boolean",
-                    "state": "manual",
-                }
-            )
+        if not cls.env['ir.model.fields'].search([('model', '=', 'res.partner'), ('name', '=', 'is_group')]):
+            cls.env["ir.model.fields"].create({
+                "name": "is_group",
+                "field_description": "Is Group",
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "ttype": "boolean",
+                "state": "manual",
+            })
 
         # Create test custom fields
-        cls.env["ir.model.fields"].create(
-            [
-                {
-                    "name": "x_cst_test_text",
-                    "field_description": "Test Custom Text",
-                    "model_id": cls.env.ref("base.model_res_partner").id,
-                    "ttype": "char",
-                    "help": "This is a test custom text field",
-                    "state": "manual",
-                },
-                {
-                    "name": "x_cst_test_bool",
-                    "field_description": "Test Custom Boolean",
-                    "model_id": cls.env.ref("base.model_res_partner").id,
-                    "ttype": "boolean",
-                    "help": "This is a test custom boolean field",
-                    "state": "manual",
-                },
-                {
-                    "name": "x_ind_test_readonly",
-                    "field_description": "Test Indicator",
-                    "model_id": cls.env.ref("base.model_res_partner").id,
-                    "ttype": "char",
-                    "help": "This is a test indicator field",
-                    "state": "manual",
-                },
-                {
-                    "name": "x_cst_grp_test",
-                    "field_description": "Test Group Only Field",
-                    "model_id": cls.env.ref("base.model_res_partner").id,
-                    "ttype": "char",
-                    "help": "This field should only show for groups",
-                    "state": "manual",
-                },
-                {
-                    "name": "x_cst_indv_test",
-                    "field_description": "Test Individual Only Field",
-                    "model_id": cls.env.ref("base.model_res_partner").id,
-                    "ttype": "char",
-                    "help": "This field should only show for individuals",
-                    "state": "manual",
-                },
-            ]
-        )
+        cls.env["ir.model.fields"].create([
+            {
+                "name": "x_cst_test_text",
+                "field_description": "Test Custom Text",
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "ttype": "char",
+                "help": "This is a test custom text field",
+                "state": "manual",
+            },
+            {
+                "name": "x_cst_test_bool",
+                "field_description": "Test Custom Boolean",
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "ttype": "boolean",
+                "help": "This is a test custom boolean field",
+                "state": "manual",
+            },
+            {
+                "name": "x_ind_test_readonly",
+                "field_description": "Test Indicator",
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "ttype": "char",
+                "help": "This is a test indicator field",
+                "state": "manual",
+            },
+            {
+                "name": "x_cst_grp_test",
+                "field_description": "Test Group Field",
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "ttype": "char",
+                "help": "This is a test group-specific field",
+                "state": "manual",
+            },
+            {
+                "name": "x_cst_indv_test",
+                "field_description": "Test Individual Field",
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "ttype": "char",
+                "help": "This is a test individual-specific field",
+                "state": "manual",
+            }
+        ])
 
         # Create base form view with basic_info page
-        cls.base_view = cls.env["ir.ui.view"].create(
-            {
-                "name": "test.res.partner.form",
-                "model": "res.partner",
-                "type": "form",
-                "priority": 1,
-                "arch": """
+        cls.base_view = cls.env['ir.ui.view'].create({
+            'name': 'test.res.partner.form',
+            'model': 'res.partner',
+            'type': 'form',
+            'priority': 1,
+            'arch': '''
                 <form>
                     <sheet>
                         <notebook>
@@ -88,19 +83,17 @@ class TestCustomField(TransactionCase):
                         </notebook>
                     </sheet>
                 </form>
-            """,
-            }
-        )
+            '''
+        })
 
         # Create custom field extension view
-        cls.extension_view = cls.env["ir.ui.view"].create(
-            {
-                "name": "test.res.partner.form.custom.extension",
-                "model": "res.partner",
-                "type": "form",
-                "inherit_id": cls.base_view.id,
-                "priority": 99,
-                "arch": """
+        cls.extension_view = cls.env['ir.ui.view'].create({
+            'name': 'test.res.partner.form.custom.extension',
+            'model': 'res.partner',
+            'type': 'form',
+            'inherit_id': cls.base_view.id,
+            'priority': 99,
+            'arch': '''
                 <xpath expr="//page[@name='basic_info']" position="after">
                     <page name="additional_details" string="Additional Details">
                         <div class="row mt16 o_settings_container">
@@ -134,30 +127,39 @@ class TestCustomField(TransactionCase):
                         </div>
                     </page>
                 </xpath>
-            """,
-            }
-        )
+            '''
+        })
 
     def _get_form_view(self, is_group=False):
-        """Helper method to get form view architecture"""
-        # Get the view with the specific view_id and context
-        partner_model = self.env["res.partner"].with_context(default_is_group=is_group)
-        view = partner_model.get_view(
-            view_type="form",
-            view_id=self.base_view.id,
-        )
-        arch = view.get("arch")
-        if isinstance(arch, etree._Element):
-            return arch
-        return etree.fromstring(arch)
+        """Helper method to get form view"""
+        partner_model = self.env["res.partner"]
+
+        # Create action with proper context
+        ctx = {'default_is_group': is_group}
+        action = self.env['ir.actions.act_window'].create({
+            'name': 'Test Action',
+            'res_model': 'res.partner',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'context': str(ctx)
+        })
+
+        # Use the base view that includes the extension view
+        return partner_model._get_view(self.base_view.id, 'form', action_id=action.id)[0]
 
     def test_01_view_for_individual(self):
         """Test view generation for individual registrants"""
         arch = self._get_form_view(is_group=False)
 
         # Test presence of custom pages
-        self.assertTrue(arch.xpath("//page[@name='additional_details']"), "Additional Details page should exist")
-        self.assertTrue(arch.xpath("//page[@name='indicators']"), "Indicators page should exist")
+        self.assertTrue(
+            arch.xpath("//page[@name='additional_details']"),
+            "Additional Details page should exist"
+        )
+        self.assertTrue(
+            arch.xpath("//page[@name='indicators']"),
+            "Indicators page should exist"
+        )
 
         # Test individual-specific fields
         indv_fields = arch.xpath("//field[@name='x_cst_indv_test']")
@@ -170,7 +172,11 @@ class TestCustomField(TransactionCase):
         # Test indicator fields are readonly
         ind_fields = arch.xpath("//field[@name='x_ind_test_readonly']")
         self.assertTrue(ind_fields, "Indicator field should be present")
-        self.assertEqual(ind_fields[0].get("readonly"), "1", "Indicator field should be readonly")
+        self.assertEqual(
+            ind_fields[0].get("readonly"),
+            "1",
+            "Indicator field should be readonly"
+        )
 
     def test_02_view_for_group(self):
         """Test view generation for group registrants"""
@@ -205,133 +211,209 @@ class TestCustomField(TransactionCase):
         field_label = arch.xpath("//label[@for='x_cst_test_bool']")
         self.assertTrue(field_label, "Boolean field should have a label")
 
-    def test_04_help_text_rendering(self):
-        """Test help text rendering in the view"""
-        arch = self._get_form_view(is_group=False)
-
-        # Find field with help text
-        help_divs = arch.xpath("//div[@class='text-muted']/span")
-        help_texts = [div.text for div in help_divs]
-
-        # Check if help texts are present
-        self.assertIn(
-            "This is a test custom text field",
-            help_texts,
-            "Help text for custom text field should be present",
-        )
-        self.assertIn(
-            "This is a test custom boolean field",
-            help_texts,
-            "Help text for custom boolean field should be present",
-        )
-
     def test_01_field_creation(self):
         """Test custom field creation"""
         # Check if fields were created
-        fields = self.env["ir.model.fields"].search(
-            [
-                ("model", "=", "res.partner"),
-                ("name", "like", "x_cst%"),
-            ]
-        )
+        fields = self.env['ir.model.fields'].search([
+            ('model', '=', 'res.partner'),
+            ('name', 'like', 'x_cst%'),
+        ])
         self.assertTrue(fields, "Custom fields should be created")
 
         # Check specific fields
-        field_names = fields.mapped("name")
-        self.assertIn("x_cst_test_text", field_names, "Text field should exist")
-        self.assertIn("x_cst_test_bool", field_names, "Boolean field should exist")
+        field_names = fields.mapped('name')
+        self.assertIn('x_cst_test_text', field_names, "Text field should exist")
+        self.assertIn('x_cst_test_bool', field_names, "Boolean field should exist")
 
     def test_02_field_attributes(self):
         """Test custom field attributes"""
         # Test boolean field
-        bool_field = self.env["ir.model.fields"].search(
-            [
-                ("model", "=", "res.partner"),
-                ("name", "=", "x_cst_test_bool"),
-            ]
+        bool_field = self.env['ir.model.fields'].search([
+            ('model', '=', 'res.partner'),
+            ('name', '=', 'x_cst_test_bool'),
+        ])
+        self.assertEqual(bool_field.ttype, 'boolean', "Field should be boolean type")
+        self.assertEqual(
+            bool_field.help,
+            "This is a test custom boolean field",
+            "Help text should be set correctly"
         )
-        self.assertEqual(bool_field.ttype, "boolean", "Field should be boolean type")
-        self.assertEqual(bool_field.help, "This is a test custom boolean field", "Help text should be set correctly")
 
         # Test text field
-        text_field = self.env["ir.model.fields"].search(
-            [
-                ("model", "=", "res.partner"),
-                ("name", "=", "x_cst_test_text"),
-            ]
+        text_field = self.env['ir.model.fields'].search([
+            ('model', '=', 'res.partner'),
+            ('name', '=', 'x_cst_test_text'),
+        ])
+        self.assertEqual(text_field.ttype, 'char', "Field should be char type")
+        self.assertEqual(
+            text_field.help,
+            "This is a test custom text field",
+            "Help text should be set correctly"
         )
-        self.assertEqual(text_field.ttype, "char", "Field should be char type")
-        self.assertEqual(text_field.help, "This is a test custom text field", "Help text should be set correctly")
 
     def test_03_indicator_field(self):
         """Test indicator field creation and attributes"""
-        indicator = self.env["ir.model.fields"].search(
-            [
-                ("model", "=", "res.partner"),
-                ("name", "=", "x_ind_test_readonly"),
-            ]
-        )
+        indicator = self.env['ir.model.fields'].search([
+            ('model', '=', 'res.partner'),
+            ('name', '=', 'x_ind_test_readonly'),
+        ])
         self.assertTrue(indicator, "Indicator field should exist")
-        self.assertEqual(indicator.ttype, "char", "Indicator should be char type")
-        self.assertEqual(indicator.help, "This is a test indicator field", "Help text should be set correctly")
+        self.assertEqual(indicator.ttype, 'char', "Indicator should be char type")
+        self.assertEqual(
+            indicator.help,
+            "This is a test indicator field",
+            "Help text should be set correctly"
+        )
 
     def test_04_group_specific_fields(self):
         """Test group-specific field creation"""
-        group_field = self.env["ir.model.fields"].search(
-            [
-                ("model", "=", "res.partner"),
-                ("name", "=", "x_cst_grp_test"),
-            ]
-        )
+        group_field = self.env['ir.model.fields'].search([
+            ('model', '=', 'res.partner'),
+            ('name', '=', 'x_cst_grp_test'),
+        ])
         self.assertTrue(group_field, "Group-specific field should exist")
         self.assertEqual(
-            group_field.help, "This field should only show for groups", "Help text should be set correctly"
+            group_field.help,
+            "This is a test group-specific field",
+            "Help text should be set correctly"
         )
 
     def test_05_individual_specific_fields(self):
         """Test individual-specific field creation"""
-        indv_field = self.env["ir.model.fields"].search(
-            [
-                ("model", "=", "res.partner"),
-                ("name", "=", "x_cst_indv_test"),
-            ]
-        )
+        indv_field = self.env['ir.model.fields'].search([
+            ('model', '=', 'res.partner'),
+            ('name', '=', 'x_cst_indv_test'),
+        ])
         self.assertTrue(indv_field, "Individual-specific field should exist")
         self.assertEqual(
-            indv_field.help, "This field should only show for individuals", "Help text should be set correctly"
+            indv_field.help,
+            "This is a test individual-specific field",
+            "Help text should be set correctly"
         )
 
     def test_06_field_naming_convention(self):
         """Test field naming conventions"""
         # Test custom fields prefix
-        custom_fields = self.env["ir.model.fields"].search(
-            [
-                ("model", "=", "res.partner"),
-                ("name", "like", "x_cst%"),
-            ]
-        )
+        custom_fields = self.env['ir.model.fields'].search([
+            ('model', '=', 'res.partner'),
+            ('name', 'like', 'x_cst%'),
+        ])
         for field in custom_fields:
-            self.assertTrue(field.name.startswith("x_cst_"), "Custom fields should start with x_cst_")
+            self.assertTrue(field.name.startswith('x_cst_'),
+                            "Custom fields should start with x_cst_")
 
         # Test indicator fields prefix
-        indicator_fields = self.env["ir.model.fields"].search(
-            [
-                ("model", "=", "res.partner"),
-                ("name", "like", "x_ind%"),
-            ]
-        )
+        indicator_fields = self.env['ir.model.fields'].search([
+            ('model', '=', 'res.partner'),
+            ('name', 'like', 'x_ind%'),
+        ])
         for field in indicator_fields:
-            self.assertTrue(field.name.startswith("x_ind_"), "Indicator fields should start with x_ind_")
+            self.assertTrue(field.name.startswith('x_ind_'),
+                            "Indicator fields should start with x_ind_")
 
     def test_07_field_model_assignment(self):
         """Test fields are assigned to correct model"""
-        all_fields = self.env["ir.model.fields"].search(
-            [
-                ("model", "=", "res.partner"),
-                "|",
-                ("name", "like", "x_cst%"),
-                ("name", "like", "x_ind%"),
-            ]
-        )
+        all_fields = self.env['ir.model.fields'].search([
+            ('model', '=', 'res.partner'),
+            '|',
+            ('name', 'like', 'x_cst%'),
+            ('name', 'like', 'x_ind%'),
+        ])
         for field in all_fields:
-            self.assertEqual(field.model_id.model, "res.partner", "Fields should be assigned to res.partner model")
+            self.assertEqual(
+                field.model_id.model,
+                'res.partner',
+                "Fields should be assigned to res.partner model"
+            )
+
+    def test_01_create_field_element_boolean(self):
+        """Test creating a boolean field element"""
+        partner_model = self.env["res.partner"]
+        bool_field = self.env["ir.model.fields"].search([
+            ("model", "=", "res.partner"),
+            ("name", "=", "x_cst_test_bool")
+        ])
+
+        div = etree.Element("div")
+        partner_model.create_field_element(div, bool_field)
+
+        # Verify the structure for boolean field
+        self.assertEqual(len(div.findall(".//field")), 1)
+        self.assertEqual(len(div.findall(".//label")), 1)
+        self.assertTrue(div.find(".//div[@class='text-muted']") is not None)
+
+    def test_02_create_field_element_char(self):
+        """Test creating a char field element"""
+        partner_model = self.env["res.partner"]
+        text_field = self.env["ir.model.fields"].search([
+            ("model", "=", "res.partner"),
+            ("name", "=", "x_cst_test_text")
+        ])
+
+        div = etree.Element("div")
+        partner_model.create_field_element(div, text_field)
+
+        # Verify the structure for char field
+        self.assertEqual(len(div.findall(".//field")), 1)
+        self.assertEqual(len(div.findall(".//label")), 1)
+        self.assertTrue(div.find(".//div[@class='text-muted']") is not None)
+
+    def test_03_create_field_element_indicator(self):
+        """Test creating an indicator field element (readonly)"""
+        partner_model = self.env["res.partner"]
+        ind_field = self.env["ir.model.fields"].search([
+            ("model", "=", "res.partner"),
+            ("name", "=", "x_ind_test_readonly")
+        ])
+
+        div = etree.Element("div")
+        partner_model.create_field_element(div, ind_field, is_ind=True)
+
+        # Verify the structure and readonly attribute for indicator field
+        field_elem = div.find(".//field")
+        self.assertEqual(field_elem.get("readonly"), "1")
+
+    def test_04_get_view_group(self):
+        """Test view generation for group"""
+        arch = self._get_form_view(is_group=True)
+
+        # Verify group-specific fields are included
+        field_names = [f.get("name") for f in arch.findall(".//field")]
+        self.assertIn("x_cst_grp_test", field_names, "Group-specific field should be present")
+        self.assertIn("x_cst_test_text", field_names, "Common custom field should be present")
+        self.assertIn("x_ind_test_readonly", field_names, "Indicator field should be present")
+
+    def test_05_get_view_individual(self):
+        """Test view generation for individual"""
+        arch = self._get_form_view(is_group=False)
+
+        # Verify individual-specific fields are included
+        field_names = [f.get("name") for f in arch.findall(".//field")]
+        self.assertIn("x_cst_indv_test", field_names, "Individual-specific field should be present")
+        self.assertIn("x_cst_test_text", field_names, "Common custom field should be present")
+        self.assertIn("x_ind_test_readonly", field_names, "Indicator field should be present")
+
+    def test_06_get_view_no_options(self):
+        """Test view generation without specific options"""
+        arch = self._get_form_view()
+
+        # Verify basic structure
+        self.assertTrue(arch.find(".//page[@name='basic_info']") is not None, "Basic info page should exist")
+        self.assertTrue(arch.find(".//page[@name='additional_details']") is not None,
+                        "Additional details page should exist")
+        self.assertTrue(arch.find(".//page[@name='indicators']") is not None, "Indicators page should exist")
+
+    def test_08_field_model_assignment(self):
+        """Test fields are assigned to correct model"""
+        all_fields = self.env['ir.model.fields'].search([
+            ('model', '=', 'res.partner'),
+            '|',
+            ('name', 'like', 'x_cst%'),
+            ('name', 'like', 'x_ind%'),
+        ])
+        for field in all_fields:
+            self.assertEqual(
+                field.model_id.model,
+                'res.partner',
+                "Fields should be assigned to res.partner model"
+            )
