@@ -1,1 +1,3 @@
-from . import test_spp_custom_field
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
+from . import test_custom_field 
