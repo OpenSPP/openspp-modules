@@ -153,6 +153,11 @@ msgid "Registrant ({registry_name}) does not have ID with ID Type {id_type}."
 msgstr ""
 
 #. module: spp_openid_vci
+#: model:ir.model,name:spp_openid_vci.model_ir_actions_report
+msgid "Report Action"
+msgstr ""
+
+#. module: spp_openid_vci
 #: model:ir.module.category,description:spp_openid_vci.verifiable_credential_access_module
 msgid "User access level for Verifiable Credential"
 msgstr ""
