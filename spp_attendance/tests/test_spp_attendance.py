@@ -21,7 +21,6 @@ class TestSPPAttendance(TransactionCase):
         self.test_registrant = self.env["res.partner"].create(
             {
                 "name": "Test Registrant",
-                "is_registrant": True,
             }
         )
 
