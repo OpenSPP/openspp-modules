@@ -75,4 +75,4 @@ class TestAttendanceSubscriber(TransactionCase):
         info = self.subscriber.get_attendance_subscriber_info()
         self.assertEqual(info["person_id"], "TEST123")
         self.assertEqual(info["name"], "Test, Subscriber")
-        self.assertEqual(info["email"], "test@example.com") 
+        self.assertEqual(info["email"], "test@example.com")

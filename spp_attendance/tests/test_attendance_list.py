@@ -111,4 +111,4 @@ class TestAttendanceList(TransactionCase):
         self.assertEqual(attendance.attendance_category, "present")
 
         attendance.attendance_category = "absent"
-        self.assertEqual(attendance.attendance_category, "absent") 
+        self.assertEqual(attendance.attendance_category, "absent")

@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
-from unittest.mock import patch, Mock
-import jwt  # Add this import
+from unittest.mock import patch
 
 from odoo.exceptions import UserError
 from odoo.tests import TransactionCase
@@ -31,8 +30,8 @@ class TestAttendanceApiClient(TransactionCase):
         client2 = self.env["spp.attendance.api.client.credential"].create({"name": "Test Client 2"})
         self.assertNotEqual(client_secret, client2.client_secret)
 
-    @patch('jwt.encode')
-    @patch('odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key')
+    @patch("jwt.encode")
+    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key")
     def test_generate_access_token(self, mock_get_private_key, mock_jwt_encode):
         """Test access token generation"""
         mock_get_private_key.return_value = "test_private_key"
@@ -57,8 +56,8 @@ class TestAttendanceApiClient(TransactionCase):
         with self.assertRaises(UserError):
             self.client.export_data(["name", "client_id"])
 
-    @patch('jwt.encode')
-    @patch('odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key')
+    @patch("jwt.encode")
+    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key")
     @patch("odoo.addons.spp_attendance.models.attendance_api_client_credentials.TOKEN_EXPIRATION_MIN", 10)
     def test_token_expiration(self, mock_get_private_key, mock_jwt_encode):
         """Test token expiration time"""
@@ -76,4 +75,4 @@ class TestAttendanceApiClient(TransactionCase):
             # Token should be valid for TOKEN_EXPIRATION_MIN minutes
             mock_datetime.today.return_value = now + timedelta(minutes=9)
             token2 = self.client.generate_access_token()
-            self.assertEqual(token2, "token2") 
+            self.assertEqual(token2, "token2")

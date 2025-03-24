@@ -1,11 +1,8 @@
 import json
 from datetime import datetime
-
-import werkzeug
+from unittest.mock import patch
 
 from odoo.tests import HttpCase, tagged
-from unittest.mock import patch
-import jwt
 
 
 @tagged("-at_install", "post_install")
@@ -16,8 +13,8 @@ class TestAttendanceControllers(HttpCase):
         self.type = self.env["spp.attendance.type"].create({"name": "Test Type"})
         self.location = self.env["spp.attendance.location"].create({"name": "Test Location"})
 
-    @patch('jwt.encode')
-    @patch('odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key')
+    @patch("jwt.encode")
+    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key")
     def test_auth_token(self, mock_get_private_key, mock_jwt_encode):
         """Test authentication token endpoint"""
         mock_get_private_key.return_value = "test_private_key"
@@ -36,10 +33,10 @@ class TestAttendanceControllers(HttpCase):
         self.assertEqual(result.get("access_token"), "test_token")
         self.assertEqual(result.get("token_type"), "Bearer")
 
-    @patch('jwt.encode')
-    @patch('odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key')
-    @patch('odoo.addons.spp_oauth.tools.rsa_encode_decode.get_public_key')
-    @patch('jwt.decode')
+    @patch("jwt.encode")
+    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key")
+    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.get_public_key")
+    @patch("jwt.decode")
     def test_create_attendance(self, mock_jwt_decode, mock_get_public_key, mock_get_private_key, mock_jwt_encode):
         """Test attendance creation endpoint"""
         mock_get_private_key.return_value = "test_private_key"
@@ -101,10 +98,10 @@ class TestAttendanceControllers(HttpCase):
         self.assertEqual(result["message"], "Attendance list created successfully.")
         self.assertEqual(result["person_ids"], ["TEST123"])
 
-    @patch('jwt.encode')
-    @patch('odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key')
-    @patch('odoo.addons.spp_oauth.tools.rsa_encode_decode.get_public_key')
-    @patch('jwt.decode')
+    @patch("jwt.encode")
+    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key")
+    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.get_public_key")
+    @patch("jwt.decode")
     def test_get_attendance(self, mock_jwt_decode, mock_get_public_key, mock_get_private_key, mock_jwt_encode):
         """Test attendance retrieval endpoint"""
         mock_get_private_key.return_value = "test_private_key"
@@ -157,4 +154,4 @@ class TestAttendanceControllers(HttpCase):
         self.assertEqual(response.status_code, 200)
         result = json.loads(response.content)
         self.assertEqual(result["person_id"], "TEST123")
-        self.assertEqual(len(result["attendance_list"]), 1) 
+        self.assertEqual(len(result["attendance_list"]), 1)
