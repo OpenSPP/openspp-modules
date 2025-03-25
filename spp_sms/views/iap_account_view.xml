@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="iap_account_view_form" model="ir.ui.view">
+        <field name="model">iap.account</field>
+        <field name="inherit_id" ref="iap.iap_account_view_form" />
+        <field name="arch" type="xml">
+          <xpath expr="//group[@name='account']" position="before">
+              <group string="Info" name="info">
+                  <field name="active_status" />
+                  <field name="provider" />
+                  <field name="service_name" />
+                  <field name="company_ids" position="move" />
+              </group>
+          </xpath>
+          <!-- field is not existing anymore in 17.0 -->
+          <!-- <xpath expr="//group[@name='account']/field[@name='company_ids']" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath> -->
+
+          <!-- field is not existing anymore in 17.0 -->
+          <!-- <xpath expr="//group[@name='account']/field[@name='service_name']" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath> -->
+          <xpath expr="//group[@name='account']" position="attributes">
+            <attribute name="invisible">provider != 'odoo'</attribute>
+          </xpath>
+          <xpath expr="//group[@name='account']" position="after">
+              <group string="Twilio account" name="twilio" invisible="provider != 'sms_twilio'">
+                  <field name="sms_twilio_account_id" />
+                  <field name="sms_twilio_token_id" />
+                  <field name="sms_twilio_from" />
+              </group>
+          </xpath>
+          <xpath expr="//group[@name='account']" position="after">
+              <group string="Amazon SNS account" name="twilio" invisible="provider != 'sns_amazon'">
+                  <field name="sns_amazon_key" />
+                  <field name="sns_amazon_secret" />
+                  <field name="sns_amazon_region" />
+              </group>
+          </xpath>
+        </field>
+    </record>
+
+    <record id="iap_account_view_tree" model="ir.ui.view">
+        <field name="model">iap.account</field>
+        <field name="inherit_id" ref="iap.iap_account_view_tree" />
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='account_token']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='account_token']" position="after">
+              <field name="provider" />
+              <field name="active_status" />
+          </xpath>
+        </field>
+    </record>
+</odoo>

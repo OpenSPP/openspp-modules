@@ -1,0 +1,244 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_sms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ckb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_iap_account__sns_amazon_key
+msgid "Access Key"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_iap_account__sms_twilio_account_id
+msgid "Account ID"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_iap_account__active_status
+msgid "Active"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields.selection,name:spp_sms.selection__iap_account__provider__sns_amazon
+msgid "Amazon SNS"
+msgstr ""
+
+#. module: spp_sms
+#: model_terms:ir.ui.view,arch_db:spp_sms.iap_account_view_form
+msgid "Amazon SNS account"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model,name:spp_sms.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_sms
+#: model_terms:ir.ui.view,arch_db:spp_sms.view_mail_mass_mailing_form
+msgid "Contact Type"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_mailing_mailing__mailing_cycle_ids
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__cycle_id
+#: model:ir.model.fields.selection,name:spp_sms.selection__mailing_mailing__mailing_registrant_type__cycle
+#: model_terms:ir.ui.view,arch_db:spp_sms.view_mail_mass_mailing_form
+msgid "Cycle"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_iap_account__sms_twilio_from
+msgid "From"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields.selection,name:spp_sms.selection__mailing_mailing__mailing_registrant_type__group
+#: model_terms:ir.ui.view,arch_db:spp_sms.view_mail_mass_mailing_form
+msgid "Group"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_mailing_mailing__mailing_registrant_group_ids
+msgid "Groups"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model,name:spp_sms.model_iap_account
+msgid "IAP Account"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_mailing_mailing__mailing_registrant_individual_ids
+#: model:ir.model.fields.selection,name:spp_sms.selection__mailing_mailing__mailing_registrant_type__individual
+#: model_terms:ir.ui.view,arch_db:spp_sms.view_mail_mass_mailing_form
+msgid "Individual"
+msgstr ""
+
+#. module: spp_sms
+#: model_terms:ir.ui.view,arch_db:spp_sms.iap_account_view_form
+msgid "Info"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_mailing_mailing__mailing_registrant_type
+msgid "Mailing Registrant Type"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_res_partner__mailing_sms_id
+#: model:ir.model.fields,field_description:spp_sms.field_res_users__mailing_sms_id
+msgid "Mailing SMS ID"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model,name:spp_sms.model_mailing_mailing
+msgid "Mass Mailing"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__mailing_cycle_id
+msgid "Mass SMS Mail Cycle"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__mailing_group_id
+msgid "Mass SMS Mail Group"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__mailing_individual_id
+msgid "Mass SMS Mail Individual"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__mailing_program_id
+msgid "Mass SMS Mail Program"
+msgstr ""
+
+#. module: spp_sms
+#: model_terms:ir.ui.view,arch_db:spp_sms.view_mail_mass_mailing_form
+msgid "Name"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields.selection,name:spp_sms.selection__iap_account__provider__odoo
+msgid "Odoo IAP"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__program_id
+#: model:ir.model.fields.selection,name:spp_sms.selection__mailing_mailing__mailing_registrant_type__program
+#: model_terms:ir.ui.view,arch_db:spp_sms.view_mail_mass_mailing_form
+msgid "Program"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_mailing_mailing__mailing_program_ids
+msgid "Programs"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_iap_account__provider
+msgid "Provider"
+msgstr ""
+
+#. module: spp_sms
+#: model_terms:ir.ui.view,arch_db:spp_sms.view_mail_mass_mailing_form
+msgid "Recipients"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_iap_account__sns_amazon_region
+msgid "Region"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model,name:spp_sms.model_spp_mailing_registrants
+msgid "Registrant Mailing"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_spp_mailing_registrants__registrant_id
+msgid "Registrants"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model,name:spp_sms.model_sms_api
+msgid "SMS API"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_iap_account__sns_amazon_secret
+msgid "Secret Access Key"
+msgstr ""
+
+#. module: spp_sms
+#: model_terms:ir.ui.view,arch_db:spp_sms.view_mail_mass_mailing_form
+msgid "Subject"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields,field_description:spp_sms.field_iap_account__sms_twilio_token_id
+msgid "Token ID"
+msgstr ""
+
+#. module: spp_sms
+#: model:ir.model.fields.selection,name:spp_sms.selection__iap_account__provider__sms_twilio
+msgid "Twilio"
+msgstr ""
+
+#. module: spp_sms
+#: model_terms:ir.ui.view,arch_db:spp_sms.iap_account_view_form
+msgid "Twilio account"
+msgstr ""
+
+#. module: spp_sms
+#: model_terms:ir.ui.view,arch_db:spp_sms.view_mail_mass_mailing_form
+msgid "e.g. New Sale on all T-shirts"
+msgstr ""
