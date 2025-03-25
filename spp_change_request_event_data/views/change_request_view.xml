@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Inherit change request form view to add event data tab -->
+    <record id="view_change_request_form_inherit_event_data" model="ir.ui.view">
+        <field name="name">spp.change.request.form.inherit.event.data</field>
+        <field name="model">spp.change.request</field>
+        <field name="inherit_id" ref="spp_change_request.view_change_request_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page string="Event History" name="event_history">
+                        <field
+                            name="event_data_ids"
+                            readonly="1"
+                            context="{'default_change_request_id': active_id}"
+                        >
+                            <tree>
+                                <field name="partner_id" />
+                                <field name="event_type" />
+                                <field name="collection_date" />
+                                <field name="registrar" />
+                                <field name="state" widget="badge" />
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

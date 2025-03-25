@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_spp_event_data_change_request_validator,SPP Event Data Change Request Validator Access,spp_event_data.model_spp_event_data,spp_change_request.group_spp_change_request_validator,1,1,1,0
+access_spp_event_data_change_request_hq_validator,SPP Event Data Change Request HQ Validator Access,spp_event_data.model_spp_event_data,spp_change_request.group_spp_change_request_hq_validator,1,1,1,0
+access_spp_event_data_change_request_applicator,SPP Event Data Change Request Applicator Access,spp_event_data.model_spp_event_data,spp_change_request.group_spp_change_request_applicator,1,1,1,0
