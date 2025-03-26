@@ -3,9 +3,6 @@
 
 from . import iap_account
 
-# sms_api is obsolete in 17.0
-# from . import sms_api
-
 from . import registrant
 from . import mailing_mailing
 from . import mailing_registrants
