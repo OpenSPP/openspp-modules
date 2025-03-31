@@ -19,13 +19,10 @@ original_get_sms_api_error_messages = SmsApi._get_sms_api_error_messages
 def _send_sms_batch(self, messages, delivery_reports_url=False):
     account = self.env["iap.account"].search([("active_status", "=", True)]).get("sms")
 
-    if not account:
-        return
+    if not account or account[0].provider != "sms_twilio":
+        return original_send_sms_batch(self, messages, delivery_reports_url)
 
     _logger.info("SMS Provider: %s" % account[0].provider)
-
-    if account[0].provider != "sms_twilio":
-        return
 
     account_id = account[0].sms_twilio_account_id
     account_token = account[0].sms_twilio_token_id
@@ -84,29 +81,17 @@ def _send_sms_batch(self, messages, delivery_reports_url=False):
     #     _logger.info("Amazon SNS: %s" % message)
     #     return [{"state": state, "credit": 0, "res_id": messages[0]["res_id"]}]
 
-    return original_send_sms_batch(self, messages, delivery_reports_url)
-
 
 def _get_sms_api_error_messages(self):
     error_messages = original_get_sms_api_error_messages(self)
-    error_messages["invalid_to_number"] = _(
-        "The number you're trying to reach is not correctly formatted."
-    )
-    error_messages["invalid_from_number"] = _(
-        "The number you're trying to send from is not correctly formatted."
-    )
-    error_messages["cannot_be_reached"] = _(
-        "The number you're trying to reach is not correctly formatted."
-    )
-    error_messages["reached_rate_limit"] = _(
-        "The number you're trying to reach has reached the rate limit."
-    )
+    error_messages["invalid_to_number"] = _("The number you're trying to reach is not correctly formatted.")
+    error_messages["invalid_from_number"] = _("The number you're trying to send from is not correctly formatted.")
+    error_messages["cannot_be_reached"] = _("The number you're trying to reach is not correctly formatted.")
+    error_messages["reached_rate_limit"] = _("The number you're trying to reach has reached the rate limit.")
     error_messages["invalid_from_number_mismatch"] = _(
         "'From' number is not a Twilio phone number or Short Code country mismatch"
     )
-    error_messages["invalid_from_number_alphanumeric"] = _(
-        "Alphanumeric Sender ID cannot be used as the 'From' number"
-    )
+    error_messages["invalid_from_number_alphanumeric"] = _("Alphanumeric Sender ID cannot be used as the 'From' number")
     return error_messages
 
 

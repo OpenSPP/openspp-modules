@@ -23,15 +23,9 @@ class Mailing(models.Model):
     mailing_registrant_individual_ids = fields.One2many(
         SPP_MAILING_REGISTRANTS, "mailing_individual_id", string="Individual"
     )
-    mailing_registrant_group_ids = fields.One2many(
-        SPP_MAILING_REGISTRANTS, "mailing_group_id", string="Groups"
-    )
-    mailing_program_ids = fields.One2many(
-        SPP_MAILING_REGISTRANTS, "mailing_program_id", string="Programs"
-    )
-    mailing_cycle_ids = fields.One2many(
-        SPP_MAILING_REGISTRANTS, "mailing_cycle_id", string="Cycle"
-    )
+    mailing_registrant_group_ids = fields.One2many(SPP_MAILING_REGISTRANTS, "mailing_group_id", string="Groups")
+    mailing_program_ids = fields.One2many(SPP_MAILING_REGISTRANTS, "mailing_program_id", string="Programs")
+    mailing_cycle_ids = fields.One2many(SPP_MAILING_REGISTRANTS, "mailing_cycle_id", string="Cycle")
 
     def _update_mailing_domain(self, vals):
         """Update mailing domain and log the change.
@@ -85,14 +79,10 @@ class Mailing(models.Model):
         elif self.mailing_registrant_type == "Program":
             vals = []
             for rec in self.mailing_program_ids:
-                vals = self._get_enrolled_members(
-                    rec.program_id, "program_id", "program_membership_ids"
-                )
+                vals = self._get_enrolled_members(rec.program_id, "program_id", "program_membership_ids")
             self._update_mailing_domain(vals)
         elif self.mailing_registrant_type == "Cycle":
-            vals = self._get_enrolled_members(
-                self.mailing_cycle_ids, "cycle_id", "cycle_membership_ids"
-            )
+            vals = self._get_enrolled_members(self.mailing_cycle_ids, "cycle_id", "cycle_membership_ids")
             self._update_mailing_domain(vals)
 
     def _get_enrolled_members(self, records, record_field, membership_field):
@@ -112,10 +102,7 @@ class Mailing(models.Model):
             for rec_line in getattr(main_record, membership_field):
                 if rec_line.state == "enrolled":
                     if rec_line.partner_id.is_group:
-                        vals.extend(
-                            member.individual.id
-                            for member in rec_line.partner_id.group_membership_ids
-                        )
+                        vals.extend(member.individual.id for member in rec_line.partner_id.group_membership_ids)
                     else:
                         vals.append(rec_line.partner_id.id)
         return vals
@@ -123,15 +110,11 @@ class Mailing(models.Model):
     @api.onchange("mailing_program_ids")
     def _program_ids_onchange(self):
         if self.mailing_type == "sms" and self.mailing_registrant_type == "Program":
-            vals = self._get_enrolled_members(
-                self.mailing_program_ids, "program_id", "program_membership_ids"
-            )
+            vals = self._get_enrolled_members(self.mailing_program_ids, "program_id", "program_membership_ids")
             self._update_mailing_domain(vals)
 
     @api.onchange("mailing_cycle_ids")
     def _cycle_ids_onchange(self):
         if self.mailing_type == "sms" and self.mailing_registrant_type == "Cycle":
-            vals = self._get_enrolled_members(
-                self.mailing_cycle_ids, "cycle_id", "cycle_membership_ids"
-            )
+            vals = self._get_enrolled_members(self.mailing_cycle_ids, "cycle_id", "cycle_membership_ids")
             self._update_mailing_domain(vals)
