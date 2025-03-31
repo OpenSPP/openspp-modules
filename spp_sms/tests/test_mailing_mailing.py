@@ -1,8 +1,10 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+from datetime import timedelta
+
+from odoo.fields import Date
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
-from odoo.fields import Date
-from datetime import timedelta
+from odoo.tools.safe_eval import safe_eval
 
 
 @tagged("post_install", "-at_install")
@@ -121,7 +123,7 @@ class TestMailingMailing(TransactionCase):
         mailing._group_ids_onchange()
 
         # Get actual domain and expected domain as lists of IDs
-        actual_ids = eval(mailing.mailing_domain)[0][2]
+        actual_ids = safe_eval(mailing.mailing_domain)[0][2]
         expected_ids = [self.individual_1.id, self.individual_2.id]
 
         # Sort both lists before comparison
@@ -146,7 +148,7 @@ class TestMailingMailing(TransactionCase):
         mailing._program_ids_onchange()
 
         # Get actual domain and expected domain as lists of IDs
-        actual_ids = eval(mailing.mailing_domain)[0][2]
+        actual_ids = safe_eval(mailing.mailing_domain)[0][2]
         expected_ids = [self.individual_1.id, self.individual_2.id]
 
         # Sort both lists before comparison
@@ -171,7 +173,7 @@ class TestMailingMailing(TransactionCase):
         mailing._cycle_ids_onchange()
 
         # Get actual domain and expected domain as lists of IDs
-        actual_ids = eval(mailing.mailing_domain)[0][2]
+        actual_ids = safe_eval(mailing.mailing_domain)[0][2]
         expected_ids = [self.individual_1.id, self.individual_2.id]
 
         # Sort both lists before comparison
@@ -193,7 +195,7 @@ def test_05_registrant_type_change(self):
     # Initially should have no target recipients
     actual_ids = []
     if mailing.mailing_domain:
-        domain = eval(mailing.mailing_domain)
+        domain = safe_eval(mailing.mailing_domain)
         if domain and len(domain) > 0 and len(domain[0]) > 2:
             actual_ids = domain[0][2]
     self.assertEqual(actual_ids, [])
@@ -209,7 +211,7 @@ def test_05_registrant_type_change(self):
     mailing._registrant_type_onchange()
 
     # Get actual domain and expected domain as lists of IDs
-    actual_ids = eval(mailing.mailing_domain)[0][2]
+    actual_ids = safe_eval(mailing.mailing_domain)[0][2]
     expected_ids = [self.individual_1.id]
 
     # Sort both lists before comparison

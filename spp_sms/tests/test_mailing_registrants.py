@@ -1,8 +1,9 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+from datetime import timedelta
+
+from odoo.fields import Date
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
-from odoo.fields import Date
-from datetime import timedelta
 
 
 @tagged("post_install", "-at_install")
