@@ -4,7 +4,7 @@ from odoo.tests.common import TransactionCase
 
 
 @tagged("post_install", "-at_install")
-class BaseIapAccountTest(TransactionCase):
+class TestIapAccount(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -42,7 +42,7 @@ class BaseIapAccountTest(TransactionCase):
             }
         )
 
-    def test_create_iap_account(self):
+    def test_01_create_iap_account(self):
         """Test IAP account creation with different providers"""
         # Test Odoo IAP
         self.assertEqual(self.iap_odoo.provider, "odoo")
@@ -62,7 +62,7 @@ class BaseIapAccountTest(TransactionCase):
         self.assertEqual(self.iap_sns.sns_amazon_region, "us-east-1")
         self.assertTrue(self.iap_sns.active_status)
 
-    def test_update_iap_account(self):
+    def test_02_update_iap_account(self):
         """Test updating IAP account fields"""
         # Update Twilio account
         self.iap_twilio.write(
