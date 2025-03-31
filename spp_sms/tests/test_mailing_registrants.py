@@ -1,10 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
-import logging
-
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
-
-_logger = logging.getLogger(__name__)
+from odoo.fields import Date
+from datetime import timedelta
 
 
 @tagged("post_install", "-at_install")
@@ -38,6 +36,8 @@ class TestMailingRegistrants(TransactionCase):
             {
                 "name": "Test Cycle",
                 "program_id": cls.program.id,
+                "start_date": Date.today(),
+                "end_date": Date.today() + timedelta(days=30),
             }
         )
 

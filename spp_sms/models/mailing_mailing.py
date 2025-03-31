@@ -40,6 +40,9 @@ class Mailing(models.Model):
             vals: List of IDs to include in domain
         """
 
+        if not vals:
+            return
+
         vals = list(dict.fromkeys(vals))  # Remove duplicates
         m_domain = "[('id', 'in', " + str(vals) + ")]"
         self.mailing_domain = m_domain
@@ -49,7 +52,6 @@ class Mailing(models.Model):
     def _individual_ids_onchange(self):
         if self.mailing_type == "sms" and self.mailing_registrant_type == "Individual":
             vals = []
-            m_domain = ""
             for rec in self.mailing_registrant_individual_ids:
                 vals.append(rec.registrant_id.id)
             self._update_mailing_domain(vals)
@@ -58,7 +60,6 @@ class Mailing(models.Model):
     def _group_ids_onchange(self):
         if self.mailing_type == "sms" and self.mailing_registrant_type == "Group":
             vals = []
-            m_domain = ""
             for rec in self.mailing_registrant_group_ids:
                 for rec_line in rec.registrant_id.group_membership_ids:
                     vals.append(rec_line.individual.id)
@@ -66,56 +67,32 @@ class Mailing(models.Model):
 
     @api.onchange("mailing_registrant_type")
     def _registrant_type_onchange(self):  # noqa: C901
+        if self.mailing_type != "sms":
+            return
+
         self.mailing_domain = ""
-        if (
-            self.mailing_type == "sms"
-            and self.mailing_registrant_type == "Group"
-            and self.mailing_registrant_group_ids
-        ):
+        if self.mailing_registrant_type == "Group":
             vals = []
             for rec in self.mailing_registrant_group_ids:
                 for rec_line in rec.registrant_id.group_membership_ids:
                     vals.append(rec_line.individual.id)
             self._update_mailing_domain(vals)
-        elif (
-            self.mailing_type == "sms"
-            and self.mailing_registrant_type == "Individual"
-            and self.mailing_registrant_individual_ids
-        ):
+        elif self.mailing_registrant_type == "Individual":
             vals = []
             for rec in self.mailing_registrant_individual_ids:
                 vals.append(rec.registrant_id.id)
             self._update_mailing_domain(vals)
-        elif (
-            self.mailing_type == "sms"
-            and self.mailing_registrant_type == "Program"
-            and self.mailing_program_ids
-        ):
+        elif self.mailing_registrant_type == "Program":
             vals = []
             for rec in self.mailing_program_ids:
-                for rec_line in rec.program_id.program_membership_ids:
-                    if rec_line.state == "enrolled":
-                        if rec_line.partner_id.is_group:
-                            for rec_member in rec_line.partner_id.group_membership_ids:
-                                vals.append(rec_member.individual.id)
-                        else:
-                            vals.append(rec_line.partner_id.id)
-
+                vals = self._get_enrolled_members(
+                    rec.program_id, "program_id", "program_membership_ids"
+                )
             self._update_mailing_domain(vals)
-        elif (
-            self.mailing_type == "sms"
-            and self.mailing_registrant_type == "Cycle"
-            and self.mailing_cycle_ids
-        ):
-            vals = []
-            for rec in self.mailing_cycle_ids:
-                for rec_line in rec.cycle_id.cycle_membership_ids:
-                    if rec_line.state == "enrolled":
-                        if rec_line.partner_id.is_group:
-                            for rec_member in rec_line.partner_id.group_membership_ids:
-                                vals.append(rec_member.individual.id)
-                        else:
-                            vals.append(rec_line.partner_id.id)
+        elif self.mailing_registrant_type == "Cycle":
+            vals = self._get_enrolled_members(
+                self.mailing_cycle_ids, "cycle_id", "cycle_membership_ids"
+            )
             self._update_mailing_domain(vals)
 
     def _get_enrolled_members(self, records, record_field, membership_field):

@@ -12,15 +12,6 @@
                   <field name="company_ids" position="move" />
               </group>
           </xpath>
-          <!-- field is not existing anymore in 17.0 -->
-          <!-- <xpath expr="//group[@name='account']/field[@name='company_ids']" position="attributes">
-            <attribute name="invisible">1</attribute>
-          </xpath> -->
-
-          <!-- field is not existing anymore in 17.0 -->
-          <!-- <xpath expr="//group[@name='account']/field[@name='service_name']" position="attributes">
-            <attribute name="invisible">1</attribute>
-          </xpath> -->
           <xpath expr="//group[@name='account']" position="attributes">
             <attribute name="invisible">provider != 'odoo'</attribute>
           </xpath>
