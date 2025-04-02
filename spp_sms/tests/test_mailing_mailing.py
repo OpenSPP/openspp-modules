@@ -493,3 +493,90 @@ class TestMailingMailing(TransactionCase):
             sorted(list(set(expected_ids))),
             "Domain should include both individual and group members",
         )
+
+    def test_10_program_type_onchange(self):
+        """Test program type onchange with multiple programs and member states"""
+        # Create additional test data
+        individual_3 = self.env["res.partner"].create(
+            {
+                "name": "Test Individual 3",
+                "is_group": False,
+                "is_registrant": True,
+                "phone": "+1234567892",
+            }
+        )
+
+        # Create a new program with mixed membership states
+        program_2 = self.env["g2p.program"].create(
+            {
+                "name": "Test Program 2",
+            }
+        )
+
+        # Create memberships with different states
+        memberships = [
+            # Enrolled individual
+            {
+                "partner_id": individual_3.id,
+                "program_id": self.program.id,
+                "state": "enrolled",
+            },
+            # Draft state - should not be included
+            {
+                "partner_id": self.individual_2.id,
+                "program_id": program_2.id,
+                "state": "draft",
+            },
+            # Enrolled group
+            {
+                "partner_id": self.group.id,
+                "program_id": program_2.id,
+                "state": "enrolled",
+            },
+        ]
+
+        for membership in memberships:
+            self.env["g2p.program_membership"].create(membership)
+
+        # Create mailing targeting both programs
+        mailing = self.env["mailing.mailing"].create(
+            {
+                "subject": "Test Subject",
+                "name": "Test Program Type Onchange",
+                "mailing_type": "sms",
+                "mailing_registrant_type": "Program",
+                "body_plaintext": "Test SMS",
+                "mailing_program_ids": [
+                    (0, 0, {"program_id": self.program.id}),
+                    (0, 0, {"program_id": program_2.id}),
+                ],
+            }
+        )
+
+        # Trigger program_ids onchange instead of registrant_type_onchange
+        # This is the correct method to test since it properly handles the program records
+        mailing._program_ids_onchange()
+
+        # Get actual domain and verify it includes only enrolled members
+        actual_ids = safe_eval(mailing.mailing_domain)[0][2]
+        expected_ids = [
+            individual_3.id,  # Enrolled individual in program 1
+            self.individual_1.id,  # From enrolled group in program 2
+            self.individual_2.id,  # From enrolled group in program 2
+        ]
+
+        # Sort and remove duplicates before comparison
+        self.assertEqual(
+            sorted(list(set(actual_ids))),
+            sorted(list(set(expected_ids))),
+            "Domain should only include enrolled members from both programs",
+        )
+
+        # Test changing registrant type clears domain
+        mailing.mailing_registrant_type = "Individual"
+        mailing._registrant_type_onchange()
+        self.assertEqual(
+            mailing.mailing_domain,
+            "",
+            "Domain should be cleared when changing registrant type",
+        )
