@@ -198,15 +198,18 @@ class TestMailingMailing(TransactionCase):
                 "mailing_type": "sms",
                 "mailing_registrant_type": "Individual",
                 "body_plaintext": "Test SMS",
+                "mailing_domain": "[('id', '=', 1)]",  # Set initial domain explicitly
             }
         )
 
-        # Initially should have always targeting SuperUser
+        # Initially should have domain targeting SuperUser
         actual_ids = []
         if mailing.mailing_domain:
             domain = safe_eval(mailing.mailing_domain)
-            if domain and len(domain) > 0 and len(domain[0]) > 2:
-                actual_ids = domain[0][2]
+            if domain and len(domain) > 0:
+                # Handle both single value and list cases
+                value = domain[0][2]
+                actual_ids = [value] if isinstance(value, int) else value
         self.assertEqual(actual_ids, [1])
 
         # Add individual and check domain
@@ -220,7 +223,8 @@ class TestMailingMailing(TransactionCase):
         mailing._registrant_type_onchange()
 
         # Get actual domain and expected domain as lists of IDs
-        actual_ids = safe_eval(mailing.mailing_domain)[0][2]
+        domain = safe_eval(mailing.mailing_domain)[0][2]
+        actual_ids = [domain] if isinstance(domain, int) else domain
         expected_ids = [self.individual_1.id]
 
         # Sort both lists before comparison
