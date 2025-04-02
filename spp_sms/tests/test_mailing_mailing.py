@@ -201,13 +201,13 @@ class TestMailingMailing(TransactionCase):
             }
         )
 
-        # Initially should have no target recipients
+        # Initially should have always targeting SuperUser
         actual_ids = []
         if mailing.mailing_domain:
             domain = safe_eval(mailing.mailing_domain)
             if domain and len(domain) > 0 and len(domain[0]) > 2:
                 actual_ids = domain[0][2]
-        self.assertEqual(actual_ids, [])
+        self.assertEqual(actual_ids, [1])
 
         # Add individual and check domain
         mailing.write(
