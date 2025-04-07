@@ -34,9 +34,9 @@ class Farm(models.Model):
     )
 
     farm_asset_id = fields.Many2one("spp.farm.asset", string="Farm Asset")
-    farm_detail_id = fields.Many2one("spp.farm.details", ondelete="cascade", string="Farm Detail")
-    farm_land_rec_id = fields.Many2one("spp.land.record", ondelete="cascade", string="Land Record")
-    farmer_id = fields.Many2one("spp.farmer", ondelete="cascade", string="Farmer")
+    farm_detail_id = fields.Many2one("spp.farm.details", required=True, ondelete="cascade", string="Farm Detail")
+    farm_land_rec_id = fields.Many2one("spp.land.record", required=True, ondelete="cascade", string="Land Record")
+    farmer_id = fields.Many2one("spp.farmer", required=True, ondelete="cascade", string="Farmer")
 
     @api.model_create_multi
     def create(self, vals):
