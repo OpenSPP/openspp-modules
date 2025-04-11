@@ -88,6 +88,21 @@ class TestSmsApi(TransactionCase):
             mock_original.assert_called_once()
             self.assertEqual(result, [{"state": "success", "credit": 1}])
 
+    def test_non_twilio_provider_fallback(self):
+        """Test fallback to original API when provider is not Twilio"""
+        # Set provider to a different valid value
+        self.iap_account.provider = "odoo"
+        self.iap_account.active_status = True
+
+        with patch("odoo.addons.sms.tools.sms_api.SmsApi._send_sms_batch") as mock_original:
+            mock_original.return_value = [{"state": "success", "credit": 1}]
+
+            result = self.sms_api._send_sms_batch([self.test_message])
+
+            # Verify original API was called
+            mock_original.assert_called_once()
+            self.assertEqual(result, [{"state": "success", "credit": 1}])
+
     def test_sms_error_messages(self):
         """Test custom error messages for Twilio"""
         error_messages = self.sms_api._get_sms_api_error_messages()
