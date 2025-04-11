@@ -17,7 +17,9 @@ original_get_sms_api_error_messages = SmsApi._get_sms_api_error_messages
 
 
 def _send_sms_batch(self, messages, delivery_reports_url=False):
-    account = self.env["iap.account"].search([("active_status", "=", True)]).get("sms")
+    account = self.env["iap.account"].search(
+        [("active_status", "=", True), ("provider", "=", "sms_twilio")], order_by="sequence", limit=1
+    )
 
     if not account or account[0].provider != "sms_twilio":
         return original_send_sms_batch(self, messages, delivery_reports_url)

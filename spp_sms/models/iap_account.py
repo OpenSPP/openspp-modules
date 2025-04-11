@@ -19,3 +19,4 @@ class IapAccount(models.Model):
     sns_amazon_region = fields.Char(string="Region")
 
     active_status = fields.Boolean(string="Active", default=True)
+    sequence = fields.Integer(default=1)

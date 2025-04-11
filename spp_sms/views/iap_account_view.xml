@@ -43,6 +43,9 @@
               <field name="provider" />
               <field name="active_status" />
           </xpath>
+          <xpath expr="//field[@name='name']" position="before">
+                <field name="sequence" widget="handle" />
+          </xpath>
         </field>
     </record>
 </odoo>
