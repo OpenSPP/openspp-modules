@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="iap_account_sms_twilio" model="iap.account">
+        <field name="name">SMS Twilio</field>
+        <field name="provider">sms_twilio</field>
+        <field name="service_name">sms</field>
+        <field name="sequence">1</field>
+    </record>
+
+</odoo>

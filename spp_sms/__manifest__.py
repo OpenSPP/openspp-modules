@@ -19,6 +19,7 @@
         ]
     },
     "data": [
+        "data/iap_account_data.xml",
         "views/iap_account_view.xml",
         "views/mailing_mailing.xml",
         "security/ir.model.access.csv",
