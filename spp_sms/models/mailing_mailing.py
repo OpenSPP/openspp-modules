@@ -35,6 +35,7 @@ class Mailing(models.Model):
         """
 
         if not vals:
+            self.mailing_domain = "[]"
             return
 
         vals = list(dict.fromkeys(vals))  # Remove duplicates
@@ -56,7 +57,7 @@ class Mailing(models.Model):
             vals = []
             for rec in self.mailing_registrant_group_ids:
                 for rec_line in rec.registrant_id.group_membership_ids:
-                    vals.append(rec_line.individual.id)
+                    vals.extend(self._get_members(rec_line.individual))
             self._update_mailing_domain(vals)
 
     @api.onchange("mailing_registrant_type")
@@ -101,10 +102,16 @@ class Mailing(models.Model):
             main_record = getattr(rec, record_field)
             for rec_line in getattr(main_record, membership_field):
                 if rec_line.state == "enrolled":
-                    if rec_line.partner_id.is_group:
-                        vals.extend(member.individual.id for member in rec_line.partner_id.group_membership_ids)
-                    else:
-                        vals.append(rec_line.partner_id.id)
+                    vals.extend(self._get_members(rec_line.partner_id))
+        return vals
+
+    def _get_members(self, res_partner_record):
+        vals = []
+        if res_partner_record.is_group:
+            for member in res_partner_record.group_membership_ids:
+                vals.extend(self._get_members(member.individual))
+        else:
+            vals.append(res_partner_record.id)
         return vals
 
     @api.onchange("mailing_program_ids")
