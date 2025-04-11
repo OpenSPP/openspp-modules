@@ -79,7 +79,7 @@ class Mailing(models.Model):
         elif self.mailing_registrant_type == "Program":
             vals = []
             for rec in self.mailing_program_ids:
-                vals = self._get_enrolled_members(rec.program_id, "program_id", "program_membership_ids")
+                vals.extend(self._get_enrolled_members(rec.program_id, "program_id", "program_membership_ids"))
             self._update_mailing_domain(vals)
         elif self.mailing_registrant_type == "Cycle":
             vals = self._get_enrolled_members(self.mailing_cycle_ids, "cycle_id", "cycle_membership_ids")
