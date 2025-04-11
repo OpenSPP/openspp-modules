@@ -10,7 +10,7 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "AGPL-3",
     "depends": ["iap", "sms", "mass_mailing_sms", "g2p_registry_base", "g2p_programs"],
-    "development_status": "Beta",
+    "development_status": "Alpha",
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "external_dependencies": {
         "python": [
