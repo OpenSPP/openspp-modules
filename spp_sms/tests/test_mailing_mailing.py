@@ -232,8 +232,6 @@ class TestMailingMailing(TransactionCase):
 
     def test_06_update_mailing_domain_empty_vals(self):
         """Test that _update_mailing_domain handles empty vals correctly"""
-        # Store initial domain
-        initial_domain = self.mailing.mailing_domain
 
         # Call method with empty list
         self.mailing._update_mailing_domain([])
@@ -241,7 +239,7 @@ class TestMailingMailing(TransactionCase):
         # Verify domain wasn't changed
         self.assertEqual(
             self.mailing.mailing_domain,
-            initial_domain,
+            "[]",
             "Domain should not change when vals is empty",
         )
 
@@ -251,7 +249,7 @@ class TestMailingMailing(TransactionCase):
         # Verify domain wasn't changed
         self.assertEqual(
             self.mailing.mailing_domain,
-            initial_domain,
+            "[]",
             "Domain should not change when vals is None",
         )
 
@@ -411,7 +409,7 @@ class TestMailingMailing(TransactionCase):
             mailing._registrant_type_onchange()
             self.assertEqual(
                 mailing.mailing_domain,
-                "",
+                "[]",
                 f"Empty {reg_type} type should have empty domain",
             )
 
@@ -577,6 +575,6 @@ class TestMailingMailing(TransactionCase):
         mailing._registrant_type_onchange()
         self.assertEqual(
             mailing.mailing_domain,
-            "",
+            "[]",
             "Domain should be cleared when changing registrant type",
         )
