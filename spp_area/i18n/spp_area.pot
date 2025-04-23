@@ -14,9 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: spp_area
-#: model:ir.model.fields,field_description:spp_area.field_res_partner__area_id
-#: model:ir.model.fields,field_description:spp_area.field_res_users__area_id
-#: model:ir.model.fields,field_description:spp_area.field_spp_attendance_subscriber__area_id
 #: model_terms:ir.ui.view,arch_db:spp_area.view_area_groups_form
 #: model_terms:ir.ui.view,arch_db:spp_area.view_area_individuals_form
 msgid "Area"
@@ -25,4 +22,10 @@ msgstr ""
 #. module: spp_area
 #: model:ir.model,name:spp_area.model_res_partner
 msgid "Contact"
+msgstr ""
+
+#. module: spp_area
+#: model:ir.model.fields,field_description:spp_area.field_res_partner__area_id
+#: model:ir.model.fields,field_description:spp_area.field_res_users__area_id
+msgid "Village"
 msgstr ""

@@ -107,7 +107,6 @@ msgstr ""
 
 #. module: spp_farmer_registry_base
 #: model:ir.model,name:spp_farmer_registry_base.model_spp_farm_season
-#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_activity__season_id
 msgid "Agricultural Season"
 msgstr ""
 
@@ -995,6 +994,11 @@ msgstr ""
 #. module: spp_farmer_registry_base
 #: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_form
 msgid "Reset to Draft"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_activity__season_id
+msgid "Season"
 msgstr ""
 
 #. module: spp_farmer_registry_base
