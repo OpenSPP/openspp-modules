@@ -215,6 +215,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_service_points.field_g2p_program_membership__ind_service_points_ids
 #: model:ir.model.fields,field_description:spp_service_points.field_res_partner__ind_service_points_ids
 #: model:ir.model.fields,field_description:spp_service_points.field_res_users__ind_service_points_ids
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_attendance_subscriber__ind_service_points_ids
 msgid "Ind Service Points"
 msgstr ""
 
@@ -312,6 +313,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_service_points.field_g2p_program_membership__service_point_ids
 #: model:ir.model.fields,field_description:spp_service_points.field_res_partner__service_point_ids
 #: model:ir.model.fields,field_description:spp_service_points.field_res_users__service_point_ids
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_attendance_subscriber__service_point_ids
 #: model:ir.ui.menu,name:spp_service_points.menu_service_points
 #: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_point_groups_form
 msgid "Service Points"
