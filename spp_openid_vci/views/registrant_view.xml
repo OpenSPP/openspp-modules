@@ -3,6 +3,7 @@
     <record model="ir.actions.server" id="vc_modal_generator">
         <field name="name">Issue Card</field>
         <field name="model_id" ref="base.model_res_partner" />
+        <field name="binding_model_id" ref="base.model_res_partner" />
         <field name="binding_view_types">list</field>
         <field name="state">code</field>
         <field name="code">action = model.registry_issue_card()</field>
