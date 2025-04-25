@@ -45,5 +45,6 @@
     "images": [],
     "application": True,
     "installable": True,
+    "post_init_hook": "_spp_farmer_registry_base_post_init",
     "auto_install": False,
 }

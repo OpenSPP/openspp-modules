@@ -18,6 +18,8 @@ class Farm(models.Model):
         "spp.farmer": "farmer_id",
     }
 
+    is_farm = fields.Boolean(string="Is a Farm", default=False, help="Check if this partner record represents a farm.")
+
     coordinates = fields.GeoPointField(string="GPS Coordinates")
     farm_asset_ids = fields.One2many("spp.farm.asset", "asset_farm_id", string="Farm Assets")
     farm_machinery_ids = fields.One2many("spp.farm.asset", "machinery_farm_id", string="Farm Machinery")
@@ -34,9 +36,9 @@ class Farm(models.Model):
     )
 
     farm_asset_id = fields.Many2one("spp.farm.asset", string="Farm Asset")
-    farm_detail_id = fields.Many2one("spp.farm.details", required=True, ondelete="cascade", string="Farm Detail")
-    farm_land_rec_id = fields.Many2one("spp.land.record", required=True, ondelete="cascade", string="Land Record")
-    farmer_id = fields.Many2one("spp.farmer", required=True, ondelete="cascade", string="Farmer")
+    farm_detail_id = fields.Many2one("spp.farm.details", ondelete="cascade", string="Farm Detail")
+    farm_land_rec_id = fields.Many2one("spp.land.record", ondelete="cascade", string="Land Record")
+    farmer_id = fields.Many2one("spp.farmer", ondelete="cascade", string="Farmer")
 
     @api.model_create_multi
     def create(self, vals):
