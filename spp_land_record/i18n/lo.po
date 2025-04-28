@@ -17,119 +17,130 @@ msgstr ""
 #. module: spp_land_record
 #: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__aquaculture
 msgid "Aquaculture"
-msgstr ""
+msgstr "ການລ້ຽງສັດນ້ຳ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "ສ້າງໂດຍ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__create_date
 msgid "Created on"
-msgstr ""
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
 
 #. module: spp_land_record
 #: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__cultivation
 msgid "Cultivation"
-msgstr ""
+msgstr "ການປູກຝັງ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "ຊື່ສະແດງ"
 
 #. module: spp_land_record
 #: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__fallow
 msgid "Fallow"
-msgstr ""
+msgstr "ດິນປະ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_farm_id
 msgid "Farm"
-msgstr ""
+msgstr "ຟາມ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__id
 msgid "ID"
-msgstr ""
+msgstr "ລະຫັດ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_acreage
 msgid "Land Acreage"
-msgstr ""
+msgstr "ເນື້ອທີ່ດິນ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_coordinates
 msgid "Land Coordinates"
-msgstr ""
+msgstr "ທີ່ຕັ້ງຂອງທີ່ດິນ"
 
+# Review needed: Technical term for geographic data representation. Need
+# confirmation if "ຂອບເຂດທີ່ດິນ" is the standard way to refer to land polygon
+# data in Lao GIS/mapping contexts within Odoo. A more literal translation
+# like "ຮູບຫຼາຍແຈທີ່ດິນ" might be possible but less intuitive.
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_geo_polygon
+#, fuzzy
 msgid "Land Polygons"
-msgstr ""
+msgstr "ຂອບເຂດທີ່ດິນ"
 
 #. module: spp_land_record
 #: model:ir.model,name:spp_land_record.model_spp_land_record
 msgid "Land Record Details"
-msgstr ""
+msgstr "ລາຍລະອຽດຂໍ້ມູນທີ່ດິນ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_use
 msgid "Land Use"
-msgstr ""
+msgstr "ການນຳໃຊ້ທີ່ດິນ"
 
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__write_uid
+#, fuzzy
 msgid "Last Updated by"
-msgstr ""
+msgstr "ແກ້ໄຂຫຼ້າສຸດໂດຍ"
 
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__write_date
+#, fuzzy
 msgid "Last Updated on"
-msgstr ""
+msgstr "ແກ້ໄຂຫຼ້າສຸດເມື່ອ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__lease_end
 msgid "Lease End"
-msgstr ""
+msgstr "ວັນສິ້ນສຸດການເຊົ່າ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__lease_start
 msgid "Lease Start"
-msgstr ""
+msgstr "ວັນເລີ່ມຕົ້ນການເຊົ່າ"
 
 #. module: spp_land_record
 #: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__leased_out
 msgid "Leased Out"
-msgstr ""
+msgstr "ໃຫ້ເຊົ່າ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__lessee_id
 msgid "Lessee"
-msgstr ""
+msgstr "ຜູ້ເຊົ່າ"
 
 #. module: spp_land_record
 #: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__livestock
 msgid "Livestock"
-msgstr ""
+msgstr "ສັດລ້ຽງ"
 
 #. module: spp_land_record
 #: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__mixed
 msgid "Mixed Use"
-msgstr ""
+msgstr "ນຳໃຊ້ແບບປະສົມ"
 
 #. module: spp_land_record
 #: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__other
 msgid "Other"
-msgstr ""
+msgstr "ອື່ນໆ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__owner_id
 msgid "Owner"
-msgstr ""
+msgstr "ເຈົ້າຂອງ"
 
 #. module: spp_land_record
 #: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_name
 msgid "Parcel Name/ID"
-msgstr ""
+msgstr "ຊື່/ລະຫັດຕອນດິນ"

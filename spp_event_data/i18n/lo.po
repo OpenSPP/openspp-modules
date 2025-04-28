@@ -14,81 +14,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 
+# Review needed: Translated based on individual words in spans. Review if
+# 'ຂໍ້ມູນເຫດການ' as a single phrase is visually preferred in the UI context.
 #. module: spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_groups_event_data_form
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_individual_event_data_form
+#, fuzzy
 msgid ""
 "<span class=\"o_stat_text\">Event</span>\n"
 "                        <span class=\"o_stat_text\">Data</span>"
 msgstr ""
+"<span class=\"o_stat_text\">ເຫດການ</span>                         <span "
+"class=\"o_stat_text\">ຂໍ້ມູນ</span>"
 
 #. module: spp_event_data
 #: model:ir.model.fields.selection,name:spp_event_data.selection__spp_event_data__state__active
 msgid "Active"
-msgstr ""
+msgstr "ດໍາເນີນຢູ່"
 
 #. module: spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.create_event_data_form_view
 msgid "Cancel"
-msgstr ""
+msgstr "ຍົກເລີກ"
 
 #. module: spp_event_data
 #: model_terms:ir.actions.act_window,help:spp_event_data.action_spp_event_data
 msgid "Click the create button to enter the configuration of the Event Data."
-msgstr ""
+msgstr "ກົດປຸ່ມສ້າງເພື່ອປ້ອນການຕັ້ງຄ່າຂອງຂໍ້ມູນເຫດການ."
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__collection_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__collection_date
 msgid "Collection Date"
-msgstr ""
+msgstr "ວັນທີເກັບກຳຂໍ້ມູນ"
 
 #. module: spp_event_data
 #: model:ir.model,name:spp_event_data.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "ຕິດຕໍ່ພົວພັນ"
 
 #. module: spp_event_data
 #. odoo-python
 #: code:addons/spp_event_data/wizard/create_event_wizard.py:0
 #, python-format
 msgid "Create %s"
-msgstr ""
+msgstr "ສ້າງ %s"
 
 #. module: spp_event_data
 #. odoo-python
 #: code:addons/spp_event_data/models/registrant.py:0
 #, python-format
 msgid "Create Event Data"
-msgstr ""
+msgstr "ສ້າງຂໍ້ມູນເຫດການ"
 
 #. module: spp_event_data
 #: model:ir.model,name:spp_event_data.model_spp_create_event_wizard
 msgid "Create Event Wizard"
-msgstr ""
+msgstr "ຕົວຊ່ວຍສ້າງເຫດການ"
 
 #. module: spp_event_data
 #: model_terms:ir.actions.act_window,help:spp_event_data.action_spp_event_data
 msgid "Create a new Event Data!"
-msgstr ""
+msgstr "ສ້າງຂໍ້ມູນເຫດການໃໝ່!"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__create_uid
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "ສ້າງໂດຍ"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__create_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__create_date
 msgid "Created on"
-msgstr ""
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__display_name
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "ຊື່ສະແດງ"
 
 #. module: spp_event_data
 #: model:ir.actions.act_window,name:spp_event_data.action_spp_event_data
@@ -98,94 +103,106 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_individual_event_data_form
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_spp_event_data_form
 msgid "Event Data"
-msgstr ""
+msgstr "ຂໍ້ມູນເຫດການ"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_res_partner__event_data_ids
 #: model:ir.model.fields,field_description:spp_event_data.field_res_users__event_data_ids
 msgid "Event Data IDs"
-msgstr ""
+msgstr "ID ຂໍ້ມູນເຫດການ"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__event_data_model
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__event_type
 msgid "Event Type"
-msgstr ""
+msgstr "ປະເພດຂອງເຫດການ"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__expiry_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__expiry_date
 msgid "Expiry Date"
-msgstr ""
+msgstr "ວັນທີໝົດອາຍຸ"
 
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__id
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__id
+#, fuzzy
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: spp_event_data
 #: model:ir.model.fields.selection,name:spp_event_data.selection__spp_event_data__state__inactive
+#, fuzzy
 msgid "Inactive"
-msgstr ""
+msgstr "ບໍ່ໄດ້ໃຊ້ງານ"
 
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__write_uid
+#, fuzzy
 msgid "Last Updated by"
-msgstr ""
+msgstr "ອັບເດດລ່າສຸດໂດຍ"
 
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__write_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__write_date
+#, fuzzy
 msgid "Last Updated on"
-msgstr ""
+msgstr "ອັບເດດລ່າສຸດເມື່ອ"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__name
 msgid "Name"
-msgstr ""
+msgstr "ຊື່"
 
 #. module: spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.create_event_data_form_view
 msgid "Next"
-msgstr ""
+msgstr "ຕໍ່ໄປ"
 
 #. module: spp_event_data
 #: model:ir.model.fields.selection,name:spp_event_data.selection__spp_create_event_wizard__event_data_model__default
 msgid "None"
-msgstr ""
+msgstr "ບໍ່ມີ"
 
 #. module: spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_groups_event_data_form
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_individual_event_data_form
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_spp_event_data_tree
 msgid "Open Form"
-msgstr ""
+msgstr "ເປີດແບບຟອມ"
 
+# Review needed: Used standard Odoo term 'ຄູ່ຄ້າ' instead of glossary's
+# 'ຄູ່ຮ່ວມງານ' for 'Partner'. Confirm preferred term in this context.
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__partner_id
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__partner_id
+#, fuzzy
 msgid "Partner"
-msgstr ""
+msgstr "ຄູ່ຄ້າ"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__registrar
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__registrar
 msgid "Registrar"
-msgstr ""
+msgstr "ຜູ້ລົງທະບຽນ"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__model
 msgid "Related Document Model"
-msgstr ""
+msgstr "ໂມເດວເອກະສານທີ່ກ່ຽວຂ້ອງ"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__res_id
 msgid "Related data"
-msgstr ""
+msgstr "ຂໍ້ມູນທີ່ກ່ຽວຂ້ອງ"
 
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__state
 msgid "State"
-msgstr ""
+msgstr "ລັດ"

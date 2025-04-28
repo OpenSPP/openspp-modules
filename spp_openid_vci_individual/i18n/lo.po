@@ -8,18 +8,27 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
+"Language: lo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
-"Language: lo\n"
 
+# Review needed: Unsure about the specific technical term for 'Issue Card' in
+# the context of OpenID VCI. 'ອອກບັດ' is a general translation but might need
+# refinement based on the exact function.
 #. module: spp_openid_vci_individual
 #: model_terms:ir.ui.view,arch_db:spp_openid_vci_individual.view_individual_form
+#, fuzzy
 msgid "<span class=\"o_stat_text\">Issue Card</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">ອອກບັດ</span>"
 
+# Review needed: Technical terms 'OpenID' and 'VCI' kept untranslated.
+# 'Issuer' translated as 'ຜູ້ອອກ' (issuer), but a more specific term might be
+# preferred in the OpenID/VCI context. Placed 'ຜູ້ອອກ' after the acronyms for
+# better flow in Lao.
 #. module: spp_openid_vci_individual
 #: model:ir.model,name:spp_openid_vci_individual.model_g2p_openid_vci_issuers
+#, fuzzy
 msgid "OpenID VCI Issuer"
-msgstr ""
+msgstr "ຜູ້ອອກ OpenID VCI"

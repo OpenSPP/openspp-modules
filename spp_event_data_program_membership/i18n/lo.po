@@ -17,22 +17,26 @@ msgstr ""
 #. module: spp_event_data_program_membership
 #: model:ir.model,name:spp_event_data_program_membership.model_spp_create_event_wizard
 msgid "Create Event Wizard"
-msgstr ""
+msgstr "ຕົວຊ່ວຍສ້າງເຫດການ"
 
 #. module: spp_event_data_program_membership
 #: model:ir.model,name:spp_event_data_program_membership.model_spp_event_data
 msgid "Event Data"
-msgstr ""
+msgstr "ຂໍ້ມູນເຫດການ"
 
 #. module: spp_event_data_program_membership
 #: model:ir.model,name:spp_event_data_program_membership.model_g2p_program_membership
 #: model:ir.model.fields,field_description:spp_event_data_program_membership.field_spp_create_event_wizard__program_membership_id
 #: model:ir.model.fields,field_description:spp_event_data_program_membership.field_spp_event_data__program_membership_id
 msgid "Program Membership"
-msgstr ""
+msgstr "ສະມາຊິກແຜນງານ"
 
+# Review needed: Technical term 'Domain' combined with other terms. Ensuring
+# the structure 'ໂດເມນຂອງ [Thing]' is the standard convention for field
+# descriptions involving domains in Lao Odoo localization.
 #. module: spp_event_data_program_membership
 #: model:ir.model.fields,field_description:spp_event_data_program_membership.field_spp_create_event_wizard__program_membership_id_domain
 #: model:ir.model.fields,field_description:spp_event_data_program_membership.field_spp_event_data__program_membership_id_domain
+#, fuzzy
 msgid "Program Membership Id Domain"
-msgstr ""
+msgstr "ໂດເມນຂອງລະຫັດສະມາຊິກແຜນງານ"

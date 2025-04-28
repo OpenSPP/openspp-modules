@@ -17,15 +17,19 @@ msgstr ""
 #. module: spp_scan_id_document
 #: model:ir.model,name:spp_scan_id_document.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "ຕິດຕໍ່ພົວພັນ"
 
 #. module: spp_scan_id_document
 #: model:ir.model.fields,field_description:spp_scan_id_document.field_res_partner__id_document_details
 #: model:ir.model.fields,field_description:spp_scan_id_document.field_res_users__id_document_details
 msgid "Id Document Details"
-msgstr ""
+msgstr "ລາຍລະອຽດລະຫັດເອກະສານ"
 
+# Review needed: The term 'Scan' is not in the glossary. Used the common Lao
+# transliteration 'ສະແກນ' which is widely understood in technical contexts,
+# especially for UI actions like scanning documents.
 #. module: spp_scan_id_document
 #: model_terms:ir.ui.view,arch_db:spp_scan_id_document.registrant_form
+#, fuzzy
 msgid "Scan Document"
-msgstr ""
+msgstr "ສະແກນເອກະສານ"
