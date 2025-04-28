@@ -17,29 +17,31 @@ msgstr ""
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "<span>Warning: Operation in progress: </span>"
-msgstr ""
+msgstr "<span>ຄຳເຕືອນ: ການດຳເນີນງານກຳລັງດຳເນີນຢູ່: </span>"
 
+# Review needed: Confirming the placeholder AREA_SQKM should remain
+# untranslated and the overall sentence structure is natural.
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
-#, python-format
+#, python-format, fuzzy
 msgid "AREA_SQKM should be numerical."
-msgstr ""
+msgstr "AREA_SQKM ຄວນເປັນຕົວເລກ."
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__admin_code
 msgid "Admin Code"
-msgstr ""
+msgstr "ລະຫັດການປົກຄອງ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__admin_name
 msgid "Admin Name"
-msgstr ""
+msgstr "ຊື່ການປົກຄອງ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__altnames
 msgid "Alternate Name"
-msgstr ""
+msgstr "ຊື່ອື່ນ"
 
 #. module: spp_area_base
 #: model:ir.actions.act_window,name:spp_area_base.action_spparea
@@ -49,129 +51,133 @@ msgstr ""
 #: model:ir.ui.menu,name:spp_area_base.menu_spparea
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_form
 msgid "Area"
-msgstr ""
+msgstr "ພື້ນທີ່"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__area_sqkm
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__area_sqkm
 msgid "Area (sq/km)"
-msgstr ""
+msgstr "ພື້ນທີ່ (ຕລ.ກມ.)"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__excel_file
 msgid "Area Excel File"
-msgstr ""
+msgstr "ໄຟລ໌ Excel ພື້ນທີ່"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Area Excel File:"
-msgstr ""
+msgstr "ໄຟລ໌ Excel ພື້ນທີ່:"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__area_import_id
 #: model:ir.ui.menu,name:spp_area_base.menu_spparea_import
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Area Import"
-msgstr ""
+msgstr "ການນຳເຂົ້າພື້ນທີ່"
 
 #. module: spp_area_base
 #: model:ir.model,name:spp_area_base.model_spp_area_import_raw
 msgid "Area Import Raw Data"
-msgstr ""
+msgstr "ຂໍ້ມູນດິບການນຳເຂົ້າພື້ນທີ່"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__area_level
 msgid "Area Level"
-msgstr ""
+msgstr "ລະດັບພື້ນທີ່"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_form
 msgid "Area Name..."
-msgstr ""
+msgstr "ຊື່ພື້ນທີ່..."
 
 #. module: spp_area_base
 #: model:ir.actions.act_window,name:spp_area_base.action_spparea_kind
 #: model:ir.model,name:spp_area_base.model_spp_area_kind
 #: model:ir.ui.menu,name:spp_area_base.menu_spparea_kind
 msgid "Area Type"
-msgstr ""
+msgstr "ປະເພດພື້ນທີ່"
 
 #. module: spp_area_base
 #: model:ir.actions.act_window,name:spp_area_base.action_view_spparea_import
 msgid "Area Upload"
-msgstr ""
+msgstr "ການອັບໂຫຼດພື້ນທີ່"
 
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area.py:0
 #, python-format
 msgid "Area already exist!"
-msgstr ""
+msgstr "ພື້ນທີ່ມີຢູ່ນີ້ແລ້ວ!"
 
 #. module: spp_area_base
 #: model:ir.ui.menu,name:spp_area_base.area_main_top_menu
 msgid "Areas"
-msgstr ""
+msgstr "ພື້ນທີ່"
 
 #. module: spp_area_base
 #: model:ir.model,name:spp_area_base.model_spp_area_import
 msgid "Areas Import Table"
-msgstr ""
+msgstr "ຕາຕະລາງນຳເຂົ້າພື້ນທີ່"
 
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area.py:0
 #, python-format
 msgid "Can't delete default Area Type"
-msgstr ""
+msgstr "ບໍ່ສາມາດລຶບປະເພດພື້ນທີ່ເລີ່ມຕົ້ນໄດ້"
 
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area.py:0
 #, python-format
 msgid "Can't delete used Area Type"
-msgstr ""
+msgstr "ບໍ່ສາມາດລຶບປະເພດພື້ນທີ່ທີ່ຖືກນຳໃຊ້ໄດ້"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Cancel"
-msgstr ""
+msgstr "ຍົກເລີກ"
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import__state__cancelled
 msgid "Cancelled"
-msgstr ""
+msgstr "ຖືກຍົກເລີກ"
 
+# Review needed: Translated 'Child' as 'ລະດັບຍ່ອຍ' (Sub-level) based on the
+# hierarchical context of administrative areas. The literal translation 'ລູກ'
+# might be confusing. Needs confirmation.
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__child_ids
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_form
+#, fuzzy
 msgid "Child"
-msgstr ""
+msgstr "ລະດັບຍ່ອຍ"
 
 #. module: spp_area_base
 #: model_terms:ir.actions.act_window,help:spp_area_base.action_spparea_kind
 msgid "Click the create button to enter the information of the Area Type."
-msgstr ""
+msgstr "ກົດປຸ່ມ ສ້າງ ເພື່ອປ້ອນຂໍ້ມູນປະເພດພື້ນທີ່."
 
 #. module: spp_area_base
 #: model_terms:ir.actions.act_window,help:spp_area_base.action_spparea
 msgid "Click the create button to enter the information of the Area."
-msgstr ""
+msgstr "ກົດປຸ່ມ ສ້າງ ເພື່ອປ້ອນຂໍ້ມູນພື້ນທີ່."
 
 #. module: spp_area_base
 #: model_terms:ir.actions.act_window,help:spp_area_base.action_view_spparea_import
 msgid "Click the create button to upload a new excel file."
-msgstr ""
+msgstr "ກົດປຸ່ມສ້າງເພື່ອອັບໂຫຼດໄຟລ໌ Excel ໃໝ່"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__code
 msgid "Code"
-msgstr ""
+msgstr "ລະຫັດ"
 
 #. module: spp_area_base
 #: model:ir.model.constraint,message:spp_area_base.constraint_spp_area_code_unique
 msgid "Code is already exists!"
-msgstr ""
+msgstr "ລະຫັດນີ້ມີຢູ່ແລ້ວ!"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__complete_name
@@ -180,17 +186,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_kind_tree
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_tree
 msgid "Complete Name"
-msgstr ""
+msgstr "ຊື່ເຕັມ"
 
 #. module: spp_area_base
 #: model_terms:ir.actions.act_window,help:spp_area_base.action_spparea_kind
 msgid "Create a new Area Type!"
-msgstr ""
+msgstr "ສ້າງປະເພດພື້ນທີ່ໃໝ່!"
 
 #. module: spp_area_base
 #: model_terms:ir.actions.act_window,help:spp_area_base.action_spparea
 msgid "Create a new Area!"
-msgstr ""
+msgstr "ສ້າງພື້ນທີ່ໃໝ່!"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__create_uid
@@ -198,7 +204,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__create_uid
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "ສ້າງໂດຍ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__create_date
@@ -206,27 +212,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__create_date
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__create_date
 msgid "Created on"
-msgstr ""
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "DONE"
-msgstr ""
+msgstr "ສຳເລັດ"
 
+# Review needed: Glossary term 'imported' found, but target 'ນໍາເຂົ້າ' missing
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__date_imported
+#, fuzzy
 msgid "Date Imported"
-msgstr ""
+msgstr "ວັນທີນຳເຂົ້າ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__date_uploaded
 msgid "Date Uploaded"
-msgstr ""
+msgstr "ວັນທີອັບໂຫຼດ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__date_validated
 msgid "Date Validated"
-msgstr ""
+msgstr "ວັນທີຢັ້ງຢືນ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__display_name
@@ -234,53 +242,53 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__display_name
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "ຊື່ສະແດງ"
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import__state__done
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_import_filter
 msgid "Done"
-msgstr ""
+msgstr "ສຳເລັດ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__draft_name
 msgid "Draft Name"
-msgstr ""
+msgstr "ຊື່ຂອງສະບັບຮ່າງ"
 
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
 #, python-format
 msgid "ERROR: {}"
-msgstr ""
+msgstr "ຜິດພາດ: {}"
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import_raw__state__error
 msgid "Error"
-msgstr ""
+msgstr "ຜິດພາດ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__name
 msgid "File Name"
-msgstr ""
+msgstr "ຊື່ແຟ້ມ"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Fix Area Level and Kind"
-msgstr ""
+msgstr "ແກ້ໄຂລະດັບ ແລະ ປະເພດພື້ນທີ່"
 
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
 #, python-format
 msgid "Fixing area level."
-msgstr ""
+msgstr "ກຳລັງແກ້ໄຂລະດັບພື້ນທີ່."
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_filter
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_import_filter
 msgid "Group By"
-msgstr ""
+msgstr "ຈັດກຸ່ມໂດຍ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__id
@@ -288,294 +296,323 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__id
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__id
 msgid "ID"
-msgstr ""
+msgstr "ລະຫັດ"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "IMPORTED"
-msgstr ""
+msgstr "ນໍາເຂົ້າ"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Import"
-msgstr ""
+msgstr "ນຳເຂົ້າ"
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import__state__imported
 msgid "Imported"
-msgstr ""
+msgstr "ນໍາເຂົ້າ"
 
+# Review needed: Glossary term 'imported' found, but target 'ນໍາເຂົ້າ' missing
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__import_id
+#, fuzzy
 msgid "Imported by"
-msgstr ""
+msgstr "ນຳເຂົ້າໂດຍ"
 
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
 #, python-format
 msgid "Importing data."
-msgstr ""
+msgstr "ກຳລັງນຳເຂົ້າຂໍ້ມູນ."
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__kind
 msgid "Kind"
-msgstr ""
+msgstr "ປະເພດ"
 
+# Review needed: Glossary term 'active' found, but target 'ດໍາເນີນຢູ່' missing
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
-#, python-format
+#, python-format, fuzzy
 msgid ""
 "Language with ISO Code %s is not active.\n"
 "Please request the administrator to enable the desired language."
 msgstr ""
+"ພາສາທີ່ມີລະຫັດ ISO %s ບໍ່ໄດ້ເປີດໃຊ້ງານ. "
+"ກະລຸນາຮ້ອງຂໍໃຫ້ຜູ້ເບິ່ງແຍງລະບົບເປີດໃຊ້ພາສາທີ່ຕ້ອງການ."
 
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__write_uid
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__write_uid
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__write_uid
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__write_uid
+#, fuzzy
 msgid "Last Updated by"
-msgstr ""
+msgstr "ອັບເດດຫຼ້າສຸດໂດຍ"
 
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__write_date
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__write_date
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__write_date
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__write_date
+#, fuzzy
 msgid "Last Updated on"
-msgstr ""
+msgstr "ອັບເດດລ່າສຸດເມື່ອ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__level
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__level
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_filter
 msgid "Level"
-msgstr ""
+msgstr "ລະດັບ"
 
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
 #, python-format
 msgid "Level 0 area should not have a parent name and parent code."
-msgstr ""
+msgstr "ພື້ນທີ່ລະດັບ 0 ບໍ່ຄວນມີຊື່ ແລະ ລະຫັດຂັ້ນເທິງ."
 
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
 #, python-format
 msgid "Level 1 and above area should have a parent name and parent code."
-msgstr ""
+msgstr "ພື້ນທີ່ລະດັບ 1 ຂຶ້ນໄປຄວນມີຊື່ ແລະ ລະຫັດຂັ້ນເທິງ."
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__locked
 msgid "Locked"
-msgstr ""
+msgstr "ຖືກລັອກ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__locked_reason
 msgid "Locked Reason"
-msgstr ""
+msgstr "ເຫດຜົນທີ່ຖືກລັອກ."
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "NEW"
-msgstr ""
+msgstr "ໃໝ່"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__name
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__name
 msgid "Name"
-msgstr ""
+msgstr "ຊື່"
 
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
 #, python-format
 msgid "Name and Code of area is required."
-msgstr ""
+msgstr "ຕ້ອງລະບຸຊື່ ແລະ ລະຫັດຂອງພື້ນທີ່."
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_form
 msgid "Name:"
-msgstr ""
+msgstr "ຊື່:"
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import__state__new
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import_raw__state__new
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_import_filter
 msgid "New"
-msgstr ""
+msgstr "ໃໝ່"
 
+# Review needed: Glossary term 'active' found, but target 'ດໍາເນີນຢູ່' missing
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
-#, python-format
+#, python-format, fuzzy
 msgid "No active language found."
-msgstr ""
+msgstr "ບໍ່ພົບພາສາທີ່ໃຊ້ງານຢູ່."
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__parent_id
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__parent_id
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_filter
 msgid "Parent"
-msgstr ""
+msgstr "ຂັ້ນເທິງ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__parent_code
 msgid "Parent Code"
-msgstr ""
+msgstr "ລະຫັດຂັ້ນເທິງ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__parent_name
 msgid "Parent Name"
-msgstr ""
+msgstr "ຊື່ຂັ້ນເທິງ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area__parent_path
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_kind__parent_path
 msgid "Parent Path"
-msgstr ""
+msgstr "ເສັ້ນທາງຂັ້ນເທິງ"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_form
 msgid "Parent:"
-msgstr ""
+msgstr "ຂັ້ນເທີງ"
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import_raw__state__posted
 msgid "Posted"
-msgstr ""
+msgstr "ແຈ້ງ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__raw_data_ids
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Raw Data"
-msgstr ""
+msgstr "ຂໍ້ມູນດິບ"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Refresh"
-msgstr ""
+msgstr "ເຮັດຄືນໃໝ່"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Refresh Page"
-msgstr ""
+msgstr "ໂຫຼດໜ້າໃໝ່"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__remarks
 msgid "Remarks/Errors"
-msgstr ""
+msgstr "ໝາຍເຫດ/ຂໍ້ຜິດພາດ"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Reset to Uploaded"
-msgstr ""
+msgstr "ຣີເຊັດເປັນອັບໂຫຼດແລ້ວ"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "Save to Area"
-msgstr ""
+msgstr "ບັນທຶກໃສ່ພື້ນທີ່"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_filter
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_kind_filter
 msgid "Search Area"
-msgstr ""
+msgstr "ຄົ້ນຫາພື້ນທີ່"
 
+# Review needed: Glossary term 'imported' found, but target 'ນໍາເຂົ້າ' missing
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_import_filter
+#, fuzzy
 msgid "Search Imported File"
-msgstr ""
+msgstr "ຄົ້ນຫາແຟ້ມທີ່ນຳເຂົ້າ"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_form
 msgid "Select a Parent..."
-msgstr ""
+msgstr "ເລືອກຂັ້ນເທິງ..."
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_import_filter
 msgid "State"
-msgstr ""
+msgstr "ລັດ"
 
+# Review needed: Glossary term 'state' found, but target 'ລັດ' missing
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__state_order
+#, fuzzy
 msgid "State Order"
-msgstr ""
+msgstr "ລຳດັບສະຖານະ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__state
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import_raw__state
 msgid "Status"
-msgstr ""
+msgstr "ສະຖານະພາບ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,help:spp_area_base.field_spp_area__level
 msgid "This is the area level for importing"
-msgstr ""
+msgstr "ນີ້ແມ່ນລະດັບພື້ນທີ່ສຳລັບການນຳເຂົ້າ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,help:spp_area_base.field_spp_area__area_level
 msgid "This is the main area level"
-msgstr ""
+msgstr "ນີ້ແມ່ນລະດັບພື້ນທີ່ຫຼັກ"
 
+# Review needed: Glossary term 'imported' found, but target 'ນໍາເຂົ້າ' missing
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__tot_rows_imported
+#, fuzzy
 msgid "Total Rows Imported"
-msgstr ""
+msgstr "ຈຳນວນແຖວທີ່ນຳເຂົ້າທັງໝົດ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__tot_rows_error
 msgid "Total Rows with Error"
-msgstr ""
+msgstr "ຈຳນວນແຖວທີ່ມີຂໍ້ຜິດພາດທັງໝົດ"
 
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
 msgid "UPLOADED"
-msgstr ""
+msgstr "ອັບໂຫຼດແລ້ວ"
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import_raw__state__updated
 msgid "Updated"
-msgstr ""
+msgstr "ອັບເດດແລ້ວ"
 
 #. module: spp_area_base
 #: model_terms:ir.actions.act_window,help:spp_area_base.action_view_spparea_import
 msgid "Upload an excel file!"
-msgstr ""
+msgstr "ອັບໂຫຼດໄຟລ໌ Excel!"
 
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import__state__uploaded
 #: model_terms:ir.ui.view,arch_db:spp_area_base.spparea_import_filter
 msgid "Uploaded"
-msgstr ""
+msgstr "ອັບໂຫຼດແລ້ວ"
 
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__upload_id
 msgid "Uploaded by"
-msgstr ""
+msgstr "ອັບໂຫຼດໂດຍ"
 
+# Review needed: No direct glossary term for 'Validate'. Using 'ກວດສອບຂໍ້ມູນ'
+# (Check data) as the most likely intended action for the user on a button.
 #. module: spp_area_base
 #: model_terms:ir.ui.view,arch_db:spp_area_base.view_spparea_import_form
+#, fuzzy
 msgid "Validate Data"
-msgstr ""
+msgstr "ກວດສອບຂໍ້ມູນ"
 
+# Review needed: Derived from 'Validate', which needed review. Using
+# 'ກວດສອບແລ້ວ' (Checked) for the status/selection value.
 #. module: spp_area_base
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import__state__validated
 #: model:ir.model.fields.selection,name:spp_area_base.selection__spp_area_import_raw__state__validated
+#, fuzzy
 msgid "Validated"
-msgstr ""
+msgstr "ກວດສອບແລ້ວ"
 
+# Review needed: Derived from 'Validate', which needed review. Using
+# 'ກວດສອບໂດຍ' (Checked by) for the field label.
 #. module: spp_area_base
 #: model:ir.model.fields,field_description:spp_area_base.field_spp_area_import__validate_id
+#, fuzzy
 msgid "Validated by"
-msgstr ""
+msgstr "ກວດສອບໂດຍ"
 
+# Review needed: Derived from 'Validate', which needed review. Using
+# 'ກຳລັງກວດສອບຂໍ້ມູນ' (Checking data) for the process message.
 #. module: spp_area_base
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
-#, python-format
+#, python-format, fuzzy
 msgid "Validating data."
-msgstr ""
+msgstr "ກຳລັງກວດສອບຂໍ້ມູນ."

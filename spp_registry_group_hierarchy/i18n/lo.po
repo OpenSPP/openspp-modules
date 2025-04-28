@@ -19,68 +19,75 @@ msgstr ""
 #: code:addons/spp_registry_group_hierarchy/models/group_membership.py:0
 #, python-format
 msgid "A group or individual must be specified for this member."
-msgstr ""
+msgstr "ຕ້ອງລະບຸເປັນກຸ່ມ ຫຼືບຸກຄົນສຳລັບສະມາຊິກນີ້"
 
+# Review needed: Glossary term 'individual members' found, but target
+# 'ສະມາຊິກແຕ່ລະບຸກຄົນ' missing
 #. module: spp_registry_group_hierarchy
 #: model:ir.model.fields,field_description:spp_registry_group_hierarchy.field_g2p_group_kind__allow_all_member_type
+#, fuzzy
 msgid "Allow group and individual members"
-msgstr ""
+msgstr "ອະນຸຍາດສະມາຊິກແບບກຸ່ມ ແລະ ບຸກຄົນ"
 
+# Review needed: The term 'Child' in a hierarchy context could be 'ລູກ'
+# (literal) or 'ຍ່ອຍ' (sub-). 'ຍ່ອຍ' seems more appropriate for a technical
+# hierarchy, but confirmation is advised.
 #. module: spp_registry_group_hierarchy
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_group_membership_form_spp_custom
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
+#, fuzzy
 msgid "Child:"
-msgstr ""
+msgstr "ຍ່ອຍ:"
 
 #. module: spp_registry_group_hierarchy
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
 msgid "Date Range"
-msgstr ""
+msgstr "ຊ່ວງວັນທີ"
 
 #. module: spp_registry_group_hierarchy
 #: model:ir.model,name:spp_registry_group_hierarchy.model_g2p_group_kind
 msgid "Group Kind"
-msgstr ""
+msgstr "ປະເພດກຸ່ມ"
 
 #. module: spp_registry_group_hierarchy
 #: model:ir.model,name:spp_registry_group_hierarchy.model_g2p_group_membership
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
 msgid "Group Membership"
-msgstr ""
+msgstr "ສະມາຊິກກຸ່ມ"
 
 #. module: spp_registry_group_hierarchy
 #: model:ir.model.fields,field_description:spp_registry_group_hierarchy.field_g2p_group_membership__individual_domain
 msgid "Individual Domain"
-msgstr ""
+msgstr "ໂດເມນສ່ວນບຸກຄົນ"
 
 #. module: spp_registry_group_hierarchy
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_group_membership_form_spp_custom
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
 msgid "Member"
-msgstr ""
+msgstr "ສະມາຊິກ"
 
 #. module: spp_registry_group_hierarchy
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
 msgid "Open Form"
-msgstr ""
+msgstr "ເປີດຟອມ"
 
 #. module: spp_registry_group_hierarchy
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
 msgid "Open Member Form"
-msgstr ""
+msgstr "ເປີດຟອມສະມາຊິກ"
 
 #. module: spp_registry_group_hierarchy
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_group_membership_form_spp_custom
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
 msgid "Parent:"
-msgstr ""
+msgstr "ຂັ້ນເທີງ"
 
 #. module: spp_registry_group_hierarchy
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
 msgid "Role:"
-msgstr ""
+msgstr "ບົດບາດ:"
 
 #. module: spp_registry_group_hierarchy
 #: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_group_membership_form_spp_custom
 msgid "Select Member..."
-msgstr ""
+msgstr "ເລືອກສະມາຊິກ..."
