@@ -188,7 +188,7 @@ class TestFetchCRVSBeneficiary(TransactionCase):
         paths = self.fetch_crvs_beneficiary_id.get_data_source_paths()
         search_url = self.fetch_crvs_beneficiary_id.get_crvs_search_url(paths)
 
-        self.assertEqual(search_url, "https://dci.opencrvs.lab.cdpi.dev/registry/sync/search")
+        self.assertEqual(search_url, "https://--Not Set--/registry/sync/search")
 
     def test_get_crvs_auth_url(self):
         paths = self.fetch_crvs_beneficiary_id.get_data_source_paths()

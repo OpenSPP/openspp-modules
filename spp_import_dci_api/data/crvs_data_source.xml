@@ -2,7 +2,7 @@
 <odoo>
     <record id="spp_crvs_data_source" model="spp.data.source">
         <field name="name">CRVS</field>
-        <field name="url">https://dci.opencrvs.lab.cdpi.dev</field>
+        <field name="url">https://--Not Set--</field>
         <field name="auth_type">bearer_authentication</field>
     </record>
     <record id="spp_crvs_registry_path" model="spp.data.source.path">
