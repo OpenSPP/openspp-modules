@@ -15,7 +15,13 @@
 
                 </sheet>
                 <footer>
-                    <button name="issue_card" string="Confirm" type="object" class="btn btn-success" />
+                    <button
+                        name="issue_card"
+                        string="Confirm"
+                        type="object"
+                        class="btn btn-success"
+                        close="1"
+                    />
                     <button string="Cancel" class="btn btn-danger" special="cancel" />
                 </footer>
             </form>
