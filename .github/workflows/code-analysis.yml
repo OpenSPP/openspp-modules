@@ -82,4 +82,4 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
-          extra_args: --debug --only-verified # Scanning the entire repo
+          extra_args: --debug --only-verified --all # Scanning the entire repo
