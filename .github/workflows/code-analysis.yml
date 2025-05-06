@@ -67,8 +67,17 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
-
-      - name: TruffleHog OSS
+        
+  Trufflehog-Scan:
+    runs-on: ubuntu-latest
+    needs: CodeQL-Build
+    steps:
+      - name: Checkout repository (for Trufflehog - full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+            
+      - name: TruffleHog OSS (on pull_request)
         if: github.event_name == 'pull_request'
         uses: trufflesecurity/trufflehog@main
         with:
@@ -82,4 +91,4 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
-          extra_args: --debug --only-verified --all # Scanning the entire repo
+          extra_args: --debug --only-verified # Scanning the entire repo
