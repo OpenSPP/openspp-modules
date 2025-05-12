@@ -373,29 +373,28 @@ def _create_log_record(
     :returns: New 'openapi.log' record.
     :rtype: ..models.openapi_log.Log
     """
-    if True:  # just to keep original indent
-        log_data = {
-            "namespace_id": namespace_id,
-            "request": "%s | %s | %d" % (user_request.url, user_request.method, user_response.status_code),
-            "request_data": None,
-            "response_data": None,
-        }
-        if namespace_log_request == "debug":
-            log_data["request_data"] = user_request.__dict__
-        elif namespace_log_request == "info":
-            log_data["request_data"] = user_request.__dict__
-            for k in ["form", "files"]:
-                try:
-                    del log_data["request_data"][k]
-                except KeyError:
-                    _logger.debug("Key %s not found in request_data" % k)
+    log_data = {
+        "namespace_id": namespace_id,
+        "request": "%s | %s | %d" % (user_request.url, user_request.method, user_response.status_code),
+        "request_data": None,
+        "response_data": None,
+    }
+    if namespace_log_request == "debug":
+        log_data["request_data"] = user_request.__dict__
+    elif namespace_log_request == "info":
+        log_data["request_data"] = user_request.__dict__
+        for k in ["form", "files"]:
+            try:
+                del log_data["request_data"][k]
+            except KeyError:
+                _logger.debug("Key %s not found in request_data" % k)
 
-        if namespace_log_response == "debug":
-            log_data["response_data"] = user_response.__dict__
-        elif namespace_log_response == "error" and user_response.status_code > 400:
-            log_data["response_data"] = user_response.__dict__
+    if namespace_log_response == "debug":
+        log_data["response_data"] = user_response.__dict__
+    elif namespace_log_response == "error" and user_response.status_code > 400:
+        log_data["response_data"] = user_response.__dict__
 
-        return env["spp_api.log"].create(log_data)
+    return env["spp_api.log"].create(log_data)
 
 
 # Patched http route
