@@ -63,6 +63,7 @@ class OpenG2PGenerateData(models.Model):
         fake = create_faker(res.locale)
 
         res_partner_model_obj = self.env["res.partner"]
+        g2p_group_membership_model_obj = self.env["g2p.group.membership"]
 
         # sex_choice_range = ["Female", "Male"] * 50 + ["Other"]
         sex_choices = self.env["gender.type"].search([]).mapped("value")
@@ -172,7 +173,7 @@ class OpenG2PGenerateData(models.Model):
                     member.pop("is_head", None)
                     member.pop("is_principal_recipient", None)
                     create_member_id = res_partner_model_obj.create(member)
-                    self.env["g2p.group.membership"].create(
+                    g2p_group_membership_model_obj.create(
                         {
                             "group": create_group_id.id,
                             "individual": create_member_id.id,
@@ -189,7 +190,7 @@ class OpenG2PGenerateData(models.Model):
                     member.pop("is_head", None)
                     member.pop("is_principal_recipient", None)
                     create_member_id = res_partner_model_obj.create(member)
-                    self.env["g2p.group.membership"].create(
+                    g2p_group_membership_model_obj.create(
                         {
                             "group": create_group_id.id,
                             "individual": create_member_id.id,
@@ -199,7 +200,7 @@ class OpenG2PGenerateData(models.Model):
 
                 else:
                     create_member_id = res_partner_model_obj.create(member)
-                    self.env["g2p.group.membership"].create(
+                    g2p_group_membership_model_obj.create(
                         {
                             "group": create_group_id.id,
                             "individual": create_member_id.id,
