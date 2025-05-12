@@ -65,15 +65,13 @@ class OpenG2PGenerateData(models.Model):
         res_partner_model_obj = self.env["res.partner"]
         g2p_group_membership_model_obj = self.env["g2p.group.membership"]
 
-        # sex_choice_range = ["Female", "Male"] * 50 + ["Other"]
-        sex_choices = self.env["gender.type"].search([]).mapped("value")
-        sex_choice_range = sex_choices * 50
+        gender_choices = self.env["gender.type"].search([]).mapped("value")
+        gender_choice_range = gender_choices * 50
         age_group_range = ["A", "C", "N"] * 2 + ["E"]
         group_size_range = list(range(1, 2)) * 2 + list(range(3, 5)) * 4 + list(range(6, 8))
 
         group_membership_kind_head_id = self.env.ref("g2p_registry_membership.group_membership_kind_head").id
         group_kind_household_id = self.env.ref("g2p_registry_group.group_kind_household").id
-        # group_kind_family_id = self.env.ref("g2p_registry_group.group_kind_family").id
 
         num_groups = min(res.num_groups, 1000)
 
@@ -101,7 +99,7 @@ class OpenG2PGenerateData(models.Model):
             head = res._generate_individual_data(
                 fake,
                 last_name,
-                sex_choice_range,
+                gender_choice_range,
                 ["A", "E"],
                 registration_date,
                 bank_id,
@@ -150,7 +148,7 @@ class OpenG2PGenerateData(models.Model):
                 data = res._generate_individual_data(
                     fake,
                     last_name,
-                    sex_choice_range,
+                    gender_choice_range,
                     age_group_range,
                     registration_date,
                     bank_id,
@@ -213,8 +211,6 @@ class OpenG2PGenerateData(models.Model):
         )
         _logger.info(msg)
         return {"result": msg, "res_model": self._name, "res_ids": [res_id]}
-        # _logger.info("-" * 80)
-        # _logger.info(json.dumps({"group": group, "members": members}, indent=4))
 
     def mark_as_done(self):
         self.update({"state": "generate"})
@@ -223,14 +219,14 @@ class OpenG2PGenerateData(models.Model):
         self,
         fake,
         last_name,
-        sex_choice_range,
+        gender_choice_range,
         age_group_range,
         registration_date,
         bank_id,
     ):
-        sex = random.choice(sex_choice_range)
+        gender = random.choice(gender_choice_range)
         age_group = random.choice(age_group_range)
-        first_name = fake.first_name_male() if sex == "Male" else fake.first_name_female()
+        first_name = fake.first_name_male() if gender == "Male" else fake.first_name_female()
         different_last_name = random.randint(0, 100) < 10
         if age_group == "N":
             date_start = datetime.datetime.now() - relativedelta(years=1)
@@ -272,10 +268,11 @@ class OpenG2PGenerateData(models.Model):
         registration_date = fake.date_between_dates(date_start=dob, date_end=datetime.datetime.now()).isoformat()
         dob = dob.isoformat()
 
-        fullname = f"{first_name} {last_name}"
+        full_name = f"{first_name} {last_name}"
         bank_ids = []
         phone = ""
-        # Do not give bank account to kids
+
+        # Do not assign bank accounts to children
         if age_group != "C":
             val = {
                 "bank_id": bank_id.id,
@@ -283,11 +280,12 @@ class OpenG2PGenerateData(models.Model):
             }
             bank_ids.append([0, 0, val])
             phone = fake.phone_number()
+
         data = {
-            "name": fullname,
+            "name": full_name,
             "given_name": first_name,
             "family_name": last_name,
-            "gender": sex,
+            "gender": gender,
             "birthdate": dob,
             "is_registrant": True,
             "is_group": False,
