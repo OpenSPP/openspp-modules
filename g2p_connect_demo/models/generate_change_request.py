@@ -128,7 +128,6 @@ class OpenG2PGenerateChangeRequestData(models.Model):
             date_start = datetime.datetime.now() - relativedelta(years=100)
             date_end = datetime.datetime.now()
             birthdate = fake.date_between_dates(date_start=date_start, date_end=date_end).isoformat()
-            # phone = fake.phone_number()
             uid_number = str(random.randint(100000000000, 999999999999))
             kind = random.choice(membership_kinds)
             applicant_relation = random.choice(["father", "mother", "grandfather"] * 50)

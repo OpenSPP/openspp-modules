@@ -28,10 +28,6 @@ class OAS(http.Controller):
     )
     def index(self, **params):
         primary_name = params.get("urls.primaryName")
-        # swagger_settings = {
-        #     "urls": self._get_api_urls(),
-        #     "urls.primaryName": primary_name,
-        # }
 
         values = {
             "urls": json.dumps(self._get_api_urls()),
@@ -56,20 +52,6 @@ class OAS(http.Controller):
                 }
             )
 
-        # services_registry = _rest_services_databases.get(request.env.cr.dbname, {})
-        # api_urls = []
-        # for rest_root_path, spec in list(services_registry.items()):
-        #     collection_path = rest_root_path[1:-1]  # remove '/'
-        #     collection_name = spec["collection_name"]
-        #     for service in self._get_service_in_collection(collection_name):
-        #         api_urls.append(
-        #             {
-        #                 "name": "{}: {}".format(collection_path, service._usage),
-        #                 "url": "/api-docs/%s/%s.json"
-        #                 % (collection_path, service._usage),
-        #             }
-        #         )
-        # api_urls = sorted(api_urls, key=lambda k: k["name"])
         return api_urls
 
     @http.route(
