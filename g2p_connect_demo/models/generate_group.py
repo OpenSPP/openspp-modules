@@ -62,6 +62,8 @@ class OpenG2PGenerateData(models.Model):
         res = self.browse(res_id)
         fake = create_faker(res.locale)
 
+        res_partner_model_obj = self.env["res.partner"]
+
         # sex_choice_range = ["Female", "Male"] * 50 + ["Other"]
         sex_choices = self.env["gender.type"].search([]).mapped("value")
         sex_choice_range = sex_choices * 50
@@ -138,7 +140,7 @@ class OpenG2PGenerateData(models.Model):
                 "bank_ids": bank_ids,
             }
 
-            create_group_id = self.env["res.partner"].create(group)
+            create_group_id = res_partner_model_obj.create(group)
 
             head["id"] = f"{group_id}-0"
             members = [head]
@@ -169,7 +171,7 @@ class OpenG2PGenerateData(models.Model):
                 if is_head:
                     member.pop("is_head", None)
                     member.pop("is_principal_recipient", None)
-                    create_member_id = self.env["res.partner"].create(member)
+                    create_member_id = res_partner_model_obj.create(member)
                     self.env["g2p.group.membership"].create(
                         {
                             "group": create_group_id.id,
@@ -186,7 +188,7 @@ class OpenG2PGenerateData(models.Model):
                 elif is_principal_recipient:
                     member.pop("is_head", None)
                     member.pop("is_principal_recipient", None)
-                    create_member_id = self.env["res.partner"].create(member)
+                    create_member_id = res_partner_model_obj.create(member)
                     self.env["g2p.group.membership"].create(
                         {
                             "group": create_group_id.id,
@@ -196,7 +198,7 @@ class OpenG2PGenerateData(models.Model):
                     )
 
                 else:
-                    create_member_id = self.env["res.partner"].create(member)
+                    create_member_id = res_partner_model_obj.create(member)
                     self.env["g2p.group.membership"].create(
                         {
                             "group": create_group_id.id,
