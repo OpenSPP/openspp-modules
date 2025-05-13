@@ -45,9 +45,9 @@
     <menuitem
         id="menu_registry_donor"
         name="Donors"
-        parent="g2p_registry_base.g2p_main_menu"
+        parent="g2p_registry_base.g2p_main_menu_root"
         action="action_registry_donor"
-        sequence="30"
+        sequence="100"
         groups="spp_registry_donor.group_donor_user,spp_registry_donor.group_donor_manager"
     />
 </odoo>
