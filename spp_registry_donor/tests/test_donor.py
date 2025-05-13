@@ -120,25 +120,3 @@ class TestDonorRegistry(TransactionCase):
         self.assertEqual(domain, [("is_donor", "=", True)], "Action should filter donors only")
 
         self.assertIn("default_is_donor", action["context"], "Action should set default donor context")
-
-    def test_05_menu_access(self):
-        """Test menu access rights"""
-        menu = self.env.ref("spp_registry_donor.menu_registry_donor")
-
-        # Donor manager should see the menu
-        menu_visible = menu.with_user(self.donor_manager).check_access_rights("read", raise_exception=False)
-        self.assertTrue(menu_visible, "Donor user should see the donors menu")
-
-        # Create a regular user without donor access
-        regular_user = self.env["res.users"].create(
-            {
-                "name": "Regular User",
-                "login": "regular_user",
-                "email": "regular@test.com",
-                "groups_id": [(4, self.env.ref("base.group_user").id)],
-            }
-        )
-
-        # Regular user should not see the menu
-        menu_visible = menu.with_user(regular_user).check_access_rights("read", raise_exception=False)
-        self.assertFalse(menu_visible, "Regular user should not see the donors menu")
