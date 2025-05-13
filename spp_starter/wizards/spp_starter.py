@@ -203,45 +203,66 @@ class SppStarter(models.TransientModel):
             }
         )
 
+    def _find_module(self, module_name):
+        return self.env.ref(f"base.module_{module_name}", raise_if_not_found=False)
+
+    def _add_module_if_found(self, res, module_name):
+        if module := self._find_module(module_name):
+            res |= module
+        return res
+
+    def _install_spmis_base_modules(self, res):
+        for module_name in [
+            "spp_base",
+            "spp_programs",
+            "spp_change_request",
+            "spp_change_request_change_info",
+            "spp_event_data",
+        ]:
+            res = self._add_module_if_found(res, module_name)
+        return res
+
+    def _install_spmis_demo_modules(self, res):
+        if self.sp_mis_demo_management == "yes":
+            for module_name in ["spp_base_demo", "spp_mis_demo"]:
+                res = self._add_module_if_found(res, module_name)
+        return res
+
+    def _install_spmis_feature_modules(self, res):
+        module_map = {
+            "location_assignment": "spp_area",
+            "service_point_management": "spp_service_points",
+            "cash_transfer_needed": "spp_entitlement_cash",
+            "bank_details_needed": "g2p_bank",
+            "conducting_inkind_transfer": "spp_entitlement_in_kind",
+        }
+        for field, module_name in module_map.items():
+            if getattr(self, field) == "yes":
+                res = self._add_module_if_found(res, module_name)
+        return res
+
+    def _install_farmer_modules(self, res):
+        res = self._add_module_if_found(res, "spp_farmer_registry_base")
+        if self.location_assignment == "yes":
+            res = self._add_module_if_found(res, "spp_area_gis")
+        if self.farmer_demo_management == "yes":
+            for module_name in ["spp_base_demo", "spp_farmer_registry_demo", "spp_programs"]:
+                res = self._add_module_if_found(res, module_name)
+        return res
+
     def _install_modules(self):
         self.ensure_one()
+        res = self._find_module("theme_openspp_muk") or self.env["ir.module.module"]
 
-        def find_module(module_name):
-            return self.env.ref(f"base.module_{module_name}", raise_if_not_found=False)
-
-        res = find_module("theme_openspp_muk")
         if self.registry_target == "spmis":
-            res |= find_module("spp_base")
-            res |= find_module("spp_programs")
-            res |= find_module("spp_change_request")
-            res |= find_module("spp_change_request_change_info")
-            res |= find_module("spp_event_data")
-            if self.sp_mis_demo_management == "yes":
-                res |= find_module("spp_base_demo")
-                res |= find_module("spp_mis_demo")
-            if self.location_assignment == "yes":
-                res |= find_module("spp_area")
-            if self.service_point_management == "yes":
-                res |= find_module("spp_service_points")
-            if self.cash_transfer_needed == "yes":
-                res |= find_module("spp_entitlement_cash")
-            if self.bank_details_needed == "yes":
-                res |= find_module("g2p_bank")
-            if self.conducting_inkind_transfer == "yes":
-                res |= find_module("spp_entitlement_in_kind")
-
-        if self.registry_target == "farmer":
-            # TODO: needs to change this once the module for farmer registry default UI is created
-            res |= find_module("spp_farmer_registry_base")
-            if self.location_assignment == "yes":
-                res |= find_module("spp_area_gis")
-            if self.farmer_demo_management == "yes":
-                res |= find_module("spp_base_demo")
-                res |= find_module("spp_farmer_registry_demo")
-                res |= find_module("spp_programs")
+            res = self._install_spmis_base_modules(res)
+            res = self._install_spmis_demo_modules(res)
+            res = self._install_spmis_feature_modules(res)
+        elif self.registry_target == "farmer":
+            res = self._install_farmer_modules(res)
 
         if self.id_management == "yes":
-            res |= find_module("spp_idpass")
+            res = self._add_module_if_found(res, "spp_idpass")
 
         return res
 
