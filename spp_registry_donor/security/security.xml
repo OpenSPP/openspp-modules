@@ -28,7 +28,9 @@
         <record id="rule_donor_user" model="ir.rule">
             <field name="name">Donor Users: Read Access</field>
             <field name="model_id" ref="base.model_res_partner" />
-            <field name="domain_force">[('is_donor', '=', True)]</field>
+            <field
+                name="domain_force"
+            >['|', ('is_donor', '=', True), ('is_company', '=', False), ('type', '=', 'contact')]</field>
             <field name="groups" eval="[(4, ref('group_donor_user'))]" />
             <field name="perm_read" eval="True" />
             <field name="perm_write" eval="False" />
@@ -39,7 +41,9 @@
         <record id="rule_donor_manager" model="ir.rule">
             <field name="name">Donor Managers: Full Access</field>
             <field name="model_id" ref="base.model_res_partner" />
-            <field name="domain_force">[('is_donor', '=', True)]</field>
+            <field
+                name="domain_force"
+            >['|', ('is_donor', '=', True), ('is_company', '=', False), ('type', '=', 'contact')]</field>
             <field name="groups" eval="[(4, ref('group_donor_manager'))]" />
             <field name="perm_read" eval="True" />
             <field name="perm_write" eval="True" />
