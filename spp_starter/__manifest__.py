@@ -7,7 +7,7 @@
     "license": "LGPL-3",
     "development_status": "Beta",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["base"],
+    "depends": ["base", "product"],
     "data": [
         "security/ir.model.access.csv",
         "wizards/spp_starter_views.xml",

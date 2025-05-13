@@ -1,4 +1,4 @@
-from odoo.tests import TransactionCase, tagged
+from odoo.tests import TransactionCase, patch, tagged
 from odoo.tools.safe_eval import safe_eval
 
 
@@ -10,9 +10,9 @@ class TestSppStarter(TransactionCase):
         cls.sgd = cls.env.ref("base.SGD").id
         cls.test_record = cls.env["spp.starter"].create(
             {
-                "org_name": "Newlogic",
-                "org_address": "160 Robinson Rd #14-04 SBF Centre Singapore 068914",
-                "org_phone": "+65 3138 4664",
+                "org_name": "The Company",
+                "org_address": "The Address, 12345, Country",
+                "org_phone": "+1234567890",
                 "org_currency_id": cls.sgd,
             }
         )
@@ -97,8 +97,12 @@ class TestSppStarter(TransactionCase):
 
     def test_05_remove_default_products_if_needed(self):
         self.test_record.conducting_inkind_transfer = "yes"
+        # Skip product-related tests if product module is not installed
         if "product.template" not in self.env:
-            self.test_record._remove_default_products_if_needed()
+            result = self.test_record._remove_default_products_if_needed()
+            self.assertIsNone(result)
+            return
+
         fake_product_template = self.env["product.template"].create(
             {
                 "name": "Fake Test Product",
@@ -122,30 +126,35 @@ class TestSppStarter(TransactionCase):
         self.assertEqual(company.phone, self.test_record.org_phone)
         self.assertEqual(company.currency_id, self.test_record.org_currency_id)
 
-    # TODO: removed below test cases because they are having errors in the CI
-    # but they are working fine in the local machine
+    def test_08_install_modules(self):
+        def find_module(module_name):
+            return self.env.ref(f"base.module_{module_name}", raise_if_not_found=False)
 
-    # def test_08_install_modules(self):
-    #     def find_module(module_name):
-    #         return self.env.ref(f"base.module_{module_name}", raise_if_not_found=False)
+        # Test SP-MIS modules
+        self.test_record.registry_target = "spmis"
+        modules = self.test_record._install_modules()
+        self.assertTrue(modules, "Should return some modules for SP-MIS")
 
-    #     spp_theme = find_module("theme_openspp_muk")
-    #     self.assertIn(spp_theme, self.test_record._install_modules())
-    #     gp2_individual = find_module("g2p_registry_individual")
-    #     gp2_group = find_module("g2p_registry_group")
-    #     self.test_record.managing_target = "group"
-    #     self.assertIn(gp2_group, self.test_record._install_modules())
-    #     self.test_record.managing_target = "individual"
-    #     self.assertIn(gp2_individual, self.test_record._install_modules())
+        # Check for theme module which should always be available
+        theme_module = find_module("theme_openspp_muk")
+        self.assertIn(theme_module, modules, "Theme module should be included")
 
-    # @patch("odoo.addons.base.models.ir_module.Module.button_immediate_install")
-    # def test_09_action_done(self, mock_button_immediate_install):
-    #     mock_button_immediate_install.return_value = None
-    #     action = self.test_record.action_done()
-    #     self.assertEqual(
-    #         action,
-    #         {
-    #             "type": "ir.actions.client",
-    #             "tag": "reload",
-    #         },
-    #     )
+        # Test Farmer Registry modules
+        self.test_record.registry_target = "farmer"
+        modules = self.test_record._install_modules()
+        self.assertTrue(modules, "Should return some modules for Farmer Registry")
+
+        # Check for theme module which should always be available
+        self.assertIn(theme_module, modules, "Theme module should be included")
+
+    @patch("odoo.addons.base.models.ir_module.Module.button_immediate_install")
+    def test_09_action_done(self, mock_button_immediate_install):
+        mock_button_immediate_install.return_value = None
+        action = self.test_record.action_done()
+        self.assertEqual(
+            action,
+            {
+                "type": "ir.actions.client",
+                "tag": "reload",
+            },
+        )
