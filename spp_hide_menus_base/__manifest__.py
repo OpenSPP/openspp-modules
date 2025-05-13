@@ -9,6 +9,7 @@
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
+    "development_status": "Production/Stable",
     "maintainers": ["reichie020212"],
     "depends": ["base"],
     "data": [
