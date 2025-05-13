@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Form View Extension -->
+    <record id="view_registry_donor_form" model="ir.ui.view">
+        <field name="name">view.registry.donor.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_type']" position="after">
+                <field name="is_donor"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search View Extension -->
+    <record id="view_registry_donor_filter" model="ir.ui.view">
+        <field name="name">view.registry.donor.filter</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <filter name="type_company" position="after">
+                <filter string="Donors" name="group_donor" domain="[('is_donor', '=', True)]"/>
+            </filter>
+        </field>
+    </record>
+
+    <!-- Action for Donors -->
+    <record id="action_registry_donor" model="ir.actions.act_window">
+        <field name="name">Donors</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_donor', '=', True)]</field>
+        <field name="context">{
+            'default_is_donor': True,
+            'search_default_group_donor': True,
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new donor
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_registry_donor"
+              name="Donors"
+              parent="g2p_registry_base.g2p_main_menu"
+              action="action_registry_donor"
+              sequence="30"
+              groups="spp_registry_donor.group_donor_user,spp_registry_donor.group_donor_manager"/>
+</odoo> 
