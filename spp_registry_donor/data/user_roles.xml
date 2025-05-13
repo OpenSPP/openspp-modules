@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="user_role_donor_user" model="spp.user.role">
         <field name="name">Donor User</field>
-        <field name="implied_ids" eval="[(4, ref('group_donor_user'))]"/>
+        <field name="implied_ids" eval="[(4, ref('group_donor_user'))]" />
     </record>
 
     <record id="user_role_donor_manager" model="spp.user.role">
         <field name="name">Donor Manager</field>
-        <field name="implied_ids" eval="[(4, ref('group_donor_manager'))]"/>
+        <field name="implied_ids" eval="[(4, ref('group_donor_manager'))]" />
     </record>
-</odoo> 
+</odoo>

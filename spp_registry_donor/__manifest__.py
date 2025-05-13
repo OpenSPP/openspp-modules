@@ -21,10 +21,8 @@
         # Security
         "security/security.xml",
         "security/ir.model.access.csv",
-        
         # Views
         "views/res_partner_views.xml",
-        
         # Data
         "data/user_roles.xml",
     ],
