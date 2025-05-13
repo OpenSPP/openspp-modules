@@ -125,18 +125,8 @@ class TestDonorRegistry(TransactionCase):
         """Test menu access rights"""
         menu = self.env.ref("spp_registry_donor.menu_registry_donor")
 
-        # Add necessary groups for menu access
-        self.donor_user.write(
-            {
-                "groups_id": [
-                    (4, self.env.ref("base.group_user").id),
-                    (4, self.env.ref("g2p_registry_base.group_g2p_registrar").id),
-                ]
-            }
-        )
-
-        # Donor user should see the menu
-        menu_visible = menu.with_user(self.donor_user).check_access_rights("read", raise_exception=False)
+        # Donor manager should see the menu
+        menu_visible = menu.with_user(self.donor_manager).check_access_rights("read", raise_exception=False)
         self.assertTrue(menu_visible, "Donor user should see the donors menu")
 
         # Create a regular user without donor access
