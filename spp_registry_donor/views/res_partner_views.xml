@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_type']" position="after">
-                <field name="is_donor" />
+                <field name="is_donor" string="Is a Donor" />
             </xpath>
         </field>
     </record>
