@@ -32,6 +32,7 @@ class TestDonorRegistry(TransactionCase):
                 "groups_id": [
                     (4, cls.env.ref("spp_registry_donor.group_donor_manager").id),
                     (4, cls.env.ref("base.group_user").id),  # Internal User group
+                    (4, cls.env.ref("g2p_registry_base.group_g2p_admin").id),
                 ],
             }
         )
