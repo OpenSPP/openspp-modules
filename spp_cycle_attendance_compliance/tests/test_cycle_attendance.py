@@ -27,7 +27,7 @@ class TestCycleAttendance(TransactionCase):
             {
                 "name": "Test Attendance Type",
                 "external_id": 1,
-                "external_source": "http://test.com",
+                "external_source": "https://test.example",
             }
         )
 
@@ -35,7 +35,7 @@ class TestCycleAttendance(TransactionCase):
             {
                 "name": "Test Location",
                 "external_id": 1,
-                "external_source": "http://test.com",
+                "external_source": "https://test.example",
             }
         )
 
@@ -46,9 +46,9 @@ class TestCycleAttendance(TransactionCase):
             }
         )
 
-    def test_01_create_cycle_attendance(self):
-        """Test creating cycle attendance"""
-        attendance = self.env["spp.event.attendance"].create(
+    def _create_attendance(self, external_id=1):
+        """Helper function to create attendance records with given parameters"""
+        return self.env["spp.event.attendance"].create(
             {
                 "individual_id": self.individual.id,
                 "attendance_date": datetime.now(),
@@ -57,77 +57,30 @@ class TestCycleAttendance(TransactionCase):
                 "attendance_location_id": self.attendance_location.id,
                 "submitted_by": "Test User",
                 "submitted_datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "event_data_source": "http://test.com",
-                "event_data_external_id": 1,
+                "event_data_source": "https://test.example",
+                "event_data_external_id": external_id,
             }
         )
 
+    def test_01_create_cycle_attendance(self):
+        """Test creating cycle attendance"""
+        attendance = self._create_attendance()
         self.assertTrue(attendance, "Attendance should be created")
 
     def test_02_validate_attendance(self):
         """Test attendance validation"""
-        attendance = self.env["spp.event.attendance"].create(
-            {
-                "individual_id": self.individual.id,
-                "attendance_date": datetime.now(),
-                "attendance_time": "10:00:00",
-                "attendance_type_id": self.attendance_type.id,
-                "attendance_location_id": self.attendance_location.id,
-                "submitted_by": "Test User",
-                "submitted_datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "event_data_source": "http://test.com",
-                "event_data_external_id": 1,
-            }
-        )
-
+        attendance = self._create_attendance()
         self.assertTrue(attendance, "Attendance should be created")
 
     def test_03_duplicate_attendance(self):
         """Test duplicate attendance validation"""
-        self.env["spp.event.attendance"].create(
-            {
-                "individual_id": self.individual.id,
-                "attendance_date": datetime.now(),
-                "attendance_time": "10:00:00",
-                "attendance_type_id": self.attendance_type.id,
-                "attendance_location_id": self.attendance_location.id,
-                "submitted_by": "Test User",
-                "submitted_datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "event_data_source": "http://test.com",
-                "event_data_external_id": 1,
-            }
-        )
+        # Create first attendance
+        self._create_attendance(external_id=1)
 
-        # Creating another attendance with same external ID should not raise error
-        # as it will update the existing record
-        self.env["spp.event.attendance"].create(
-            {
-                "individual_id": self.individual.id,
-                "attendance_date": datetime.now(),
-                "attendance_time": "10:00:00",
-                "attendance_type_id": self.attendance_type.id,
-                "attendance_location_id": self.attendance_location.id,
-                "submitted_by": "Test User",
-                "submitted_datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "event_data_source": "http://test.com",
-                "event_data_external_id": 2,  # Different external ID
-            }
-        )
+        # Creating another attendance with different external ID
+        self._create_attendance(external_id=2)
 
     def test_04_attendance_date_validation(self):
         """Test attendance date validation"""
-        attendance = self.env["spp.event.attendance"].create(
-            {
-                "individual_id": self.individual.id,
-                "attendance_date": datetime.now(),
-                "attendance_time": "10:00:00",
-                "attendance_type_id": self.attendance_type.id,
-                "attendance_location_id": self.attendance_location.id,
-                "submitted_by": "Test User",
-                "submitted_datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "event_data_source": "http://test.com",
-                "event_data_external_id": 1,
-            }
-        )
-
+        attendance = self._create_attendance()
         self.assertTrue(attendance, "Attendance should be created")

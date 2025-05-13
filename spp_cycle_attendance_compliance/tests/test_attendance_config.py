@@ -16,7 +16,7 @@ class TestAttendanceConfig(TransactionCase):
                 "name": "Test Type",
                 "description": "Test Description",
                 "external_id": 1,
-                "external_source": "http://test.com",
+                "external_source": "https://test.example",
             }
         )
 
@@ -24,7 +24,7 @@ class TestAttendanceConfig(TransactionCase):
         self.assertEqual(attendance_type.name, "Test Type", "Name should match")
         self.assertEqual(attendance_type.description, "Test Description", "Description should match")
         self.assertEqual(attendance_type.external_id, 1, "External ID should match")
-        self.assertEqual(attendance_type.external_source, "http://test.com", "External source should match")
+        self.assertEqual(attendance_type.external_source, "https://test.example", "External source should match")
         self.assertFalse(attendance_type.set_as_default, "Default should be False initially")
 
     @mute_logger("odoo.sql_db")
@@ -35,7 +35,7 @@ class TestAttendanceConfig(TransactionCase):
             {
                 "name": "Test Type 1",
                 "external_id": 1,
-                "external_source": "http://test.com",
+                "external_source": "https://test.example",
             }
         )
         self.assertTrue(attendance_type1, "First attendance type should be created")
@@ -46,7 +46,7 @@ class TestAttendanceConfig(TransactionCase):
                 """
                 INSERT INTO spp_res_config_attendance_type
                 (name, external_id, external_source, create_uid, create_date, write_uid, write_date)
-                VALUES ('Test Type 1', 2, 'http://test.com', 1, now(), 1, now())
+                VALUES ('Test Type 1', 2, 'https://test.example', 1, now(), 1, now())
             """
             )
             self.env.cr.commit()  # Need to commit to see the UniqueViolation
@@ -60,7 +60,7 @@ class TestAttendanceConfig(TransactionCase):
                 """
                 INSERT INTO spp_res_config_attendance_type
                 (external_id, external_source, create_uid, create_date, write_uid, write_date)
-                VALUES (1, 'http://test.com', 1, now(), 1, now())
+                VALUES (1, 'https://test.example', 1, now(), 1, now())
             """
             )
             self.env.cr.commit()
@@ -71,7 +71,7 @@ class TestAttendanceConfig(TransactionCase):
                 """
                 INSERT INTO spp_res_config_attendance_type
                 (name, external_source, create_uid, create_date, write_uid, write_date)
-                VALUES ('Test Type', 'http://test.com', 1, now(), 1, now())
+                VALUES ('Test Type', 'https://test.example', 1, now(), 1, now())
             """
             )
             self.env.cr.commit()
@@ -94,7 +94,7 @@ class TestAttendanceConfig(TransactionCase):
             {
                 "name": "Type 1",
                 "external_id": 1,
-                "external_source": "http://test.com",
+                "external_source": "https://test.example",
                 "set_as_default": True,
             }
         )
@@ -105,7 +105,7 @@ class TestAttendanceConfig(TransactionCase):
             {
                 "name": "Type 2",
                 "external_id": 2,
-                "external_source": "http://test.com",
+                "external_source": "https://test.example",
             }
         )
 
@@ -128,7 +128,7 @@ class TestAttendanceConfig(TransactionCase):
                 "name": "Test Location",
                 "description": "Test Location Description",
                 "external_id": 1,
-                "external_source": "http://test.com",
+                "external_source": "https://test.example",
             }
         )
 
@@ -136,7 +136,7 @@ class TestAttendanceConfig(TransactionCase):
         self.assertEqual(location.name, "Test Location", "Name should match")
         self.assertEqual(location.description, "Test Location Description", "Description should match")
         self.assertEqual(location.external_id, 1, "External ID should match")
-        self.assertEqual(location.external_source, "http://test.com", "External source should match")
+        self.assertEqual(location.external_source, "https://test.example", "External source should match")
 
     @mute_logger("odoo.sql_db")
     def test_06_duplicate_location_name(self):
@@ -146,7 +146,7 @@ class TestAttendanceConfig(TransactionCase):
             {
                 "name": "Test Location 1",
                 "external_id": 1,
-                "external_source": "http://test.com",
+                "external_source": "https://test.example",
             }
         )
         self.assertTrue(location1, "First location should be created")
@@ -157,7 +157,7 @@ class TestAttendanceConfig(TransactionCase):
                 """
                 INSERT INTO spp_res_config_attendance_location
                 (name, external_id, external_source, create_uid, create_date, write_uid, write_date)
-                VALUES ('Test Location 1', 2, 'http://test.com', 1, now(), 1, now())
+                VALUES ('Test Location 1', 2, 'https://test.example', 1, now(), 1, now())
             """
             )
             self.env.cr.commit()  # Need to commit to see the UniqueViolation
@@ -171,7 +171,7 @@ class TestAttendanceConfig(TransactionCase):
                 """
                 INSERT INTO spp_res_config_attendance_location
                 (external_id, external_source, create_uid, create_date, write_uid, write_date)
-                VALUES (1, 'http://test.com', 1, now(), 1, now())
+                VALUES (1, 'https://test.example', 1, now(), 1, now())
             """
             )
             self.env.cr.commit()
@@ -182,7 +182,7 @@ class TestAttendanceConfig(TransactionCase):
                 """
                 INSERT INTO spp_res_config_attendance_location
                 (name, external_source, create_uid, create_date, write_uid, write_date)
-                VALUES ('Test Location', 'http://test.com', 1, now(), 1, now())
+                VALUES ('Test Location', 'https://test.example', 1, now(), 1, now())
             """
             )
             self.env.cr.commit()
@@ -206,7 +206,7 @@ class TestAttendanceConfig(TransactionCase):
             {
                 "name": special_name,
                 "external_id": 1,
-                "external_source": "http://test.com",
+                "external_source": "https://test.example",
             }
         )
         self.assertEqual(location.name, special_name, "Special characters should be allowed in name")
@@ -217,7 +217,7 @@ class TestAttendanceConfig(TransactionCase):
                 "name": "Test Empty Desc",
                 "description": "",
                 "external_id": 1,
-                "external_source": "http://test.com",
+                "external_source": "https://test.example",
             }
         )
         self.assertEqual(type_empty_desc.description, "", "Empty description should be allowed")
