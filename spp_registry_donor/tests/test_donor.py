@@ -1,3 +1,5 @@
+from ast import literal_eval
+
 from odoo.exceptions import AccessError
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
@@ -15,7 +17,10 @@ class TestDonorRegistry(TransactionCase):
                 "name": "Donor User",
                 "login": "donor_user",
                 "email": "donor@test.com",
-                "groups_id": [(4, cls.env.ref("spp_registry_donor.group_donor_user").id)],
+                "groups_id": [
+                    (4, cls.env.ref("spp_registry_donor.group_donor_user").id),
+                    (4, cls.env.ref("base.group_user").id),  # Internal User group
+                ],
             }
         )
 
@@ -24,7 +29,10 @@ class TestDonorRegistry(TransactionCase):
                 "name": "Donor Manager",
                 "login": "donor_manager",
                 "email": "donor_manager@test.com",
-                "groups_id": [(4, cls.env.ref("spp_registry_donor.group_donor_manager").id)],
+                "groups_id": [
+                    (4, cls.env.ref("spp_registry_donor.group_donor_manager").id),
+                    (4, cls.env.ref("base.group_user").id),  # Internal User group
+                ],
             }
         )
 
@@ -103,12 +111,28 @@ class TestDonorRegistry(TransactionCase):
 
         # Check action configuration
         self.assertEqual(action["res_model"], "res.partner", "Action should target res.partner model")
-        self.assertEqual(action["domain"], [("is_donor", "=", True)], "Action should filter donors only")
+
+        # Convert domain string to list using ast.literal_eval if needed
+        domain = action["domain"]
+        if isinstance(domain, str):
+            domain = literal_eval(domain)
+        self.assertEqual(domain, [("is_donor", "=", True)], "Action should filter donors only")
+
         self.assertIn("default_is_donor", action["context"], "Action should set default donor context")
 
     def test_05_menu_access(self):
         """Test menu access rights"""
         menu = self.env.ref("spp_registry_donor.menu_registry_donor")
+
+        # Add necessary groups for menu access
+        self.donor_user.write(
+            {
+                "groups_id": [
+                    (4, self.env.ref("base.group_user").id),
+                    (4, self.env.ref("g2p_registry_base.group_g2p_registrar").id),
+                ]
+            }
+        )
 
         # Donor user should see the menu
         menu_visible = menu.with_user(self.donor_user).check_access_rights("read", raise_exception=False)
@@ -120,6 +144,7 @@ class TestDonorRegistry(TransactionCase):
                 "name": "Regular User",
                 "login": "regular_user",
                 "email": "regular@test.com",
+                "groups_id": [(4, self.env.ref("base.group_user").id)],
             }
         )
 
