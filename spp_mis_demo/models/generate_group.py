@@ -69,8 +69,8 @@ class G2PGenerateData(models.Model):
         fake = Faker(locales)
 
         # Get available gender field selections
-        sex_choices = self.env["gender.type"].search([]).mapped("id")
-        sex_choice_range = sex_choices * 50
+        gender_choices = self.env["gender.type"].search([]).mapped("id")
+        gender_choice_range = gender_choices * 50
 
         age_group_range = ["A", "C"] * 2 + ["E"]
         group_size_range = list(range(1, 2)) * 2 + list(range(3, 5)) * 4 + list(range(6, 8))
@@ -97,7 +97,7 @@ class G2PGenerateData(models.Model):
             head = res._generate_individual_data(
                 fake[locale],
                 last_name,
-                sex_choice_range,
+                gender_choice_range,
                 age_group_range,
                 registration_date,
             )
@@ -126,7 +126,7 @@ class G2PGenerateData(models.Model):
                 data = res._generate_individual_data(
                     fake[locale],
                     last_name,
-                    sex_choice_range,
+                    gender_choice_range,
                     age_group_range,
                     registration_date,
                 )
@@ -191,13 +191,11 @@ class G2PGenerateData(models.Model):
         )
         _logger.info(msg)
         return {"result": msg, "res_model": self._name, "res_ids": [res_id]}
-        # _logger.info("-" * 80)
-        # _logger.info(json.dumps({"group": group, "members": members}, indent=4))
 
-    def _generate_individual_data(self, fake, last_name, sex_choice_range, age_group_range, registration_date):
-        sex = random.choice(sex_choice_range)
+    def _generate_individual_data(self, fake, last_name, gender_choice_range, age_group_range, registration_date):
+        gender = random.choice(gender_choice_range)
         age_group = random.choice(age_group_range)
-        first_name = fake.first_name_male() if sex == "Male" else fake.first_name_female()
+        first_name = fake.first_name_male() if gender == "Male" else fake.first_name_female()
         different_last_name = random.randint(0, 100) < 10
         registration_date_days = datetime.datetime.now() - datetime.datetime.strptime(registration_date, "%Y-%m-%d")
         registration_date_days = registration_date_days.days + 1
@@ -223,7 +221,7 @@ class G2PGenerateData(models.Model):
 
         pregnancy_start = None
         lactation_start = None
-        if sex == "Female" and age_group == "A":
+        if gender == "Female" and age_group == "A":
             rnd = random.randint(0, 100)
             if rnd < 15:
                 pregnancy_start = fake.date_between_dates(
@@ -237,13 +235,13 @@ class G2PGenerateData(models.Model):
                 ).isoformat()
 
         dob = fake.date_between_dates(date_start=date_start, date_end=date_end).isoformat()
-        fullname = f"{first_name} {last_name}"
+        full_name = f"{first_name} {last_name}"
 
         return {
-            "name": fullname,
+            "name": full_name,
             "given_name": first_name,
             "family_name": last_name,
-            "gender": sex,
+            "gender": gender,
             "birthdate": dob,
             "is_registrant": True,
             "is_group": False,

@@ -110,13 +110,13 @@ class SPPGenerateFarmerData(models.Model):
         fake = create_faker(res.locale)
 
         # Get available gender field selections
-        sex_choices = self.env["gender.type"].search([]).mapped("id")
-        sex_choice_range = sex_choices * 50
+        gender_choices = self.env["gender.type"].search([]).mapped("id")
+        gender_choice_range = gender_choices * 50
 
         num_groups = min(num_groups, self.GROUPS_PER_BATCH)
 
         for i in range(0, num_groups):
-            group_id = res._generate_group_data(i, fake, sex_choice_range, kind_farm_id)
+            group_id = res._generate_group_data(i, fake, gender_choice_range, kind_farm_id)
 
             land_record_id = res._generate_land_record_record(group_id, res.locale)
             group_id.farm_land_rec_id = land_record_id.id
@@ -178,8 +178,8 @@ class SPPGenerateFarmerData(models.Model):
 
         return {"result": msg, "res_model": self._name, "res_ids": [res.id]}
 
-    def _generate_group_data(self, index, fake, sex_choice_range, kind_id):
-        sex = random.choice(sex_choice_range)
+    def _generate_group_data(self, index, fake, gender_choice_range, kind_id):
+        sex = random.choice(gender_choice_range)
         last_name = fake.last_name()
         first_name = fake.first_name_male() if sex == "Male" else fake.first_name_female()
         addl_name = fake.first_name_male() if sex == "Male" else fake.first_name_female()

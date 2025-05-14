@@ -72,6 +72,8 @@ class OpenG2PGenerateChangeRequestData(models.Model):
         res_id = kwargs.get("res_id")
         res = self.browse(res_id)
 
+        res_partner_model_obj = self.env["res.partner"]
+
         registrants = kwargs.get("registrant_ids")
         membership_kinds = kwargs.get("membership_kinds")
         num_crs = min(res.num_crs, 1000)
@@ -83,7 +85,7 @@ class OpenG2PGenerateChangeRequestData(models.Model):
             registrant_id = random.choice(registrants)
 
             # Get applicants based on registrant_id
-            registrant = self.env["res.partner"].search([("id", "=", registrant_id)])[0]
+            registrant = res_partner_model_obj.search([("id", "=", registrant_id)])[0]
             if registrant.lang:
                 lang = registrant.lang
             else:
@@ -95,7 +97,7 @@ class OpenG2PGenerateChangeRequestData(models.Model):
             applicant_id = random.choice(applicant_ids)
 
             # TODO: Fix error in phone number format
-            applicant = self.env["res.partner"].search([("id", "=", applicant_id)])
+            applicant = res_partner_model_obj.search([("id", "=", applicant_id)])
             if applicant.phone:
                 applicant_phone = applicant.phone
             else:
@@ -126,7 +128,6 @@ class OpenG2PGenerateChangeRequestData(models.Model):
             date_start = datetime.datetime.now() - relativedelta(years=100)
             date_end = datetime.datetime.now()
             birthdate = fake.date_between_dates(date_start=date_start, date_end=date_end).isoformat()
-            # phone = fake.phone_number()
             uid_number = str(random.randint(100000000000, 999999999999))
             kind = random.choice(membership_kinds)
             applicant_relation = random.choice(["father", "mother", "grandfather"] * 50)
