@@ -53,7 +53,12 @@
   </record>
 
   <!-- Top menu item -->
-  <menuitem name="Audit Log" id="spp_audit_log.menu_root" groups="spp_audit_log.group_manager" />
+  <menuitem
+    name="Audit Log"
+    id="spp_audit_log.menu_root"
+    groups="spp_audit_log.group_manager"
+    web_icon="spp_audit_log,static/description/OpenSPP-Icons-Audit.png"
+  />
 
   <!-- Sub-menu item -->
 
