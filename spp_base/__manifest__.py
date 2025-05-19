@@ -29,6 +29,13 @@
         "spp_programs",
         "spp_user_roles",
         "spp_custom_filter_ui",
+        "project_todo",
+        "spreadsheet_dashboard",
+        "queue_job",
+        "mass_mailing",
+        "project",
+        "hr",
+        "survey",
     ],
     "excludes": [
         "spp_farmer_registry_base",
