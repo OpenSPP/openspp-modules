@@ -38,10 +38,10 @@
             "fastapi==0.112.2",
             "extendable_pydantic==1.3.0",
             "numpy>=1.22.2",
-            "urllib3>=2.4.0",
+            "urllib3>=1.26.5",
             "zipp>=3.19.1",
             "jwcrypto>=1.5.6",
-            "requests>=2.32.3",
+            "requests>=2.25.1",
         ]
     },  # not directly required, pinned by Snyk to avoid a vulnerability and for fastapi, compatibility issues.
     "data": [

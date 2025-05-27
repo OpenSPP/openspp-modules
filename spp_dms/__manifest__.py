@@ -14,7 +14,7 @@
         "base",
         "web",
     ],
-    "external_dependencies": {"python": ["Pillow>=10.3.0"]},
+    "external_dependencies": {"python": ["Pillow>=9.0.1"]},
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
