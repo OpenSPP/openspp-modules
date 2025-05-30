@@ -35,6 +35,7 @@
         "data/id_data.xml",
         "views/res_partner.xml",
         "views/configuration_view.xml",
+        "views/res_users.xml",
     ],
     "assets": {
         "web.assets_backend": [
