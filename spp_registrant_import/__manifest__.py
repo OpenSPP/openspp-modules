@@ -13,6 +13,7 @@
     "depends": [
         "spp_registry_base",
         "spp_base",
+        "spp_area_base",
     ],
     "excludes": [
         "spp_farmer_registry_base",
