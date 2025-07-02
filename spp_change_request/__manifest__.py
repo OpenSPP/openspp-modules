@@ -30,26 +30,12 @@
     "data": [
         "security/change_request_security.xml",
         "security/ir.model.access.csv",
-        "data/sequences.xml",
-        "data/mail_activity.xml",
         "data/dms.xml",
-        "wizard/confirm_user_assignment_view.xml",
-        "wizard/reject_change_request_view.xml",
-        "wizard/cancel_change_request_view.xml",
         "views/main_view.xml",
         "views/change_request_view.xml",
-        "views/change_request_validation_sequence_view.xml",
-        "views/dms_file_view.xml",
         "views/registrant_view.xml",
     ],
-    "assets": {
-        "web.assets_backend": [
-            "spp_change_request/static/src/scss/change_request.scss",
-        ],
-        "web.assets_qweb": {
-            "/spp_change_request/static/src/xml/dms_preview_widget.xml",
-        },
-    },
+    "assets": {},
     "demo": [],
     "images": [],
     "application": True,
