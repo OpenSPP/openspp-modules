@@ -2,7 +2,7 @@
 import json
 import logging
 
-from odoo import Command, _, api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 from odoo.addons.phone_validation.tools import phone_validation
@@ -476,80 +476,6 @@ class ChangeRequestBase(models.Model):
         # Called the function without return
         self.create_request_detail()
 
-    def create_request_detail(self):
-        """
-        Creates the request_type_ref record then opens the form view of the selected request type
-
-        Usage:
-        - Add this function in the name of button with type object in XML
-
-        example:
-            <button
-                name="create_request_detail"
-                type="object"
-            />
-
-        :return dict action: form view action
-
-        :raise UserError: Exception raised when applicant_phone is not existing.
-        """
-        self._check_phone_exist()
-
-        for rec in self:
-            if rec.state in ("draft", "pending"):
-                # Set the request_type_ref_id
-                res_model = rec.request_type
-                # Set the dms directory
-                _logger.debug("Change Request: DMS Directory Creation (%s)" % len(rec.dms_directory_ids))
-                dmsval = {
-                    "is_root_directory": True,
-                    "name": rec.name,
-                }
-
-                # Prepare CR type model data
-                cr_type_vals = {
-                    "registrant_id": rec.registrant_id.id,
-                    "applicant_id": rec.applicant_id.id,
-                    "change_request_id": rec.id,
-                    "dms_directory_ids": [(Command.create(dmsval))],
-                }
-
-                # Create the change request detail record
-                ref_id = self.env[res_model].create(cr_type_vals)
-                directory_id = ref_id.dms_directory_ids[0].id
-
-                self.env["spp.dms.directory"].create(
-                    {
-                        "name": "Applicant",
-                        "parent_id": directory_id,
-                        "is_root_directory": False,
-                    }
-                )
-
-                # Upload Scanned IDs to DMS
-                dms_file_ids = []
-                for id_fld in ["id_document_details", "qr_code_details"]:
-                    if rec[id_fld]:
-                        dms_id_doc = rec._get_id_doc_vals(directory_id, id_fld)
-                        if dms_id_doc:
-                            dms_file_ids.append(Command.create(dms_id_doc))
-                if dms_file_ids:
-                    ref_id.update({"dms_file_ids": dms_file_ids})
-
-                ref_id._onchange_registrant_id()
-                request_type_ref_id = f"{res_model},{ref_id.id}"
-                _logger.debug("DEBUG! request_type_ref_id: %s", request_type_ref_id)
-                rec.update(
-                    {
-                        "request_type_ref_id": request_type_ref_id,
-                        "id_document_details": "",
-                    }
-                )
-                # Open Request Form
-                return rec.open_change_request_form(target="current", mode="edit")
-            else:
-                raise UserError(_("The change request to be created must be in draft or pending validation state."))
-
     def _get_id_doc_vals(self, directory_id, id_fld, file_name_prefix: str = ""):
         try:
             details = json.loads(id_fld)
@@ -607,78 +533,6 @@ class ChangeRequestBase(models.Model):
         note = _("A new change request was submitted. The next step will set this request to 'Pending Validation'.")
         res._generate_activity(activity_type, summary, note)
         return res
-
-    # Override the _generate_activity method to use the correct activity type
-    def _generate_activity(self, activity_type, summary, note):
-        self.ensure_one()
-        activity_type_id = self.env.ref(activity_type).id
-        next_activity = {
-            "res_id": self.id,
-            "res_model_id": self.env["ir.model"]._get(self._name).id,
-            "user_id": self.env.user.id,
-            "summary": summary,
-            "note": note,
-            "activity_type_id": activity_type_id,
-            "date_deadline": fields.Date.today(),
-        }
-        activity = self.env["mail.activity"].create(next_activity)
-        # Mark cancel activity as 'done' because there are no re-activation after cancellation of CR
-        if activity_type == "spp_change_request_base.cancel_activity":
-            activity.action_done()
-            return
-
-        # When calling action_done this return below is no longer possible as the activity will be deleted
-        return self.update({"last_activity_id": activity.id})
-
-    # Override the open_user_assignment_wiz method to use the correct admin group
-    def open_user_assignment_wiz(self):
-        """
-        Called whenever a user reassign the CR to him/her or to other user
-
-        Reassign a CR to current user if CR is assigned to other user else
-        Opens a wizard form to show a selection of users to be reassign
-
-        Usage:
-        - Add this function in the name of button with type object in XML
-
-        example:
-            <button
-                name="open_user_assignment_wiz"
-                type="object"
-            />
-
-        :return: action
-
-        :raise UserError: Exception raised when something is not valid.
-        """
-        for rec in self:
-            is_admin = self.env.user.has_group("spp_change_request_base.group_spp_change_request_administrator")
-            assign_self = False
-            if rec.assign_to_id:
-                if rec.assign_to_id.id != self.env.user.id:
-                    if self.env.user.id == self.create_uid:
-                        assign_self = True
-                    elif is_admin:
-                        assign_self = False
-                    else:
-                        raise ValidationError(_("You're not allowed to re-assign this CR."))
-            else:
-                assign_self = True
-            if not assign_self:
-                form_id = self.env.ref("spp_change_request_base.change_request_user_assign_wizard").id
-                action = {
-                    "name": _("Assign Change Request to User"),
-                    "type": "ir.actions.act_window",
-                    "view_mode": "form",
-                    "view_id": form_id,
-                    "view_type": "form",
-                    "res_model": "spp.change.request.user.assign.wizard",
-                    "target": "new",
-                    "context": {"curr_assign_to_id": rec.assign_to_id.id},
-                }
-                return action
-            else:
-                self.assign_to_user(self.env.user)
 
     # Override the action_cancel method to use the correct wizard reference
     def action_cancel(self):
