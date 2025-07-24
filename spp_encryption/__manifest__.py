@@ -6,7 +6,7 @@
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": ["g2p_encryption"],
     "external_dependencies": {"python": ["jwcrypto>=1.5.6"]},
