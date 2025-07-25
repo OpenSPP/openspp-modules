@@ -1278,7 +1278,7 @@ msgstr ""
 
 #. module: g2p_programs
 #: model_terms:ir.ui.view,arch_db:g2p_programs.create_program_wizard_form_view
-msgid "Configure the Eligibility Criteria"
+msgid "Configure the Default Eligibility Criteria"
 msgstr ""
 
 #. module: g2p_programs
