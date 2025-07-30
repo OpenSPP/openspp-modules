@@ -5,6 +5,8 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "category": "OpenSPP",
+    "development_status": "Production/Stable",
+    "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "spp_custom_fields_ui",
         "spp_custom_filter",

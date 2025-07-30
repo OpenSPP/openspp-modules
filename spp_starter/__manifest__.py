@@ -5,7 +5,7 @@
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
     "license": "LGPL-3",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": ["base", "product"],
     "data": [
