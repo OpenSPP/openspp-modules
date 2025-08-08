@@ -110,6 +110,13 @@ install_macos_dependencies() {
         if ! command_exists brew;
         then
             print_status "Installing Homebrew..."
+            print_warning "The script will now attempt to install Homebrew by executing a script from the official Homebrew repository."
+            read -p "This is a standard procedure, but please ensure you trust the source. Continue? (y/n) " -n 1 -r
+            echo
+            if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                print_error "Homebrew installation cancelled by user."
+                exit 1
+            fi
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             if [ -x "/opt/homebrew/bin/brew" ]; then
                 eval "$(/opt/homebrew/bin/brew shellenv)"
