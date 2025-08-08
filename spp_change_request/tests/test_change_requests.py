@@ -1,3 +1,4 @@
+import json
 import logging
 from unittest.mock import patch
 
@@ -38,6 +39,18 @@ class TestChangeRequestBase(TransactionCase):
                 "is_registrant": True,
                 "is_group": False,
                 "phone": "+1234567890",
+            }
+        )
+        cls.id_type_1 = cls.env["g2p.id.type"].create(
+            {
+                "name": "Passport",
+            }
+        )
+        cls.id_document_1 = cls.env["g2p.reg.id"].create(
+            {
+                "partner_id": cls.individual_1.id,
+                "value": "1234567890",
+                "id_type": cls.id_type_1.id,
             }
         )
         cls.individual_2 = cls.env["res.partner"].create(
@@ -231,6 +244,41 @@ class TestChangeRequestBase(TransactionCase):
         change_request.applicant_phone = "+1234567890"
         result = change_request.open_request_detail()
         self.assertIsInstance(result, dict)
+
+    def test_15_action_reject(self):
+        """Test action reject"""
+        change_request = self._create_test_change_request()
+        change_request.state = "pending"
+        action = change_request.action_reject()
+        self.assertEqual(action["name"], "Reject Change Request")
+
+    def test_16_compute_current_user_assigned(self):
+        """Test current user computation"""
+        change_request = self._create_test_change_request()
+        change_request.assign_to_id = self.user_admin
+        change_request.with_context(uid=self.user_admin.id)._compute_current_user_assigned()
+        self.assertEqual(change_request.current_user_assigned, True)
+
+    def test_17_generate_activity(self):
+        """Test activity generation"""
+        change_request = self._create_test_change_request()
+        change_request._generate_activity("spp_change_request.cancel_activity", "sample summary", "sample note")
+        self.assertEqual(change_request.last_activity_id.state, "today")
+
+    def test_18_action_cancel(self):
+        """Test action cancel"""
+        change_request = self._create_test_change_request()
+        change_request.state = "pending"
+        action = change_request.action_cancel()
+        self.assertEqual(action["name"], "Cancel Change Request")
+
+    def test_19_onchange_scan_id_document_details(self):
+        """Test onchange scan id document details"""
+        change_request = self._create_test_change_request()
+        change_request.registrant_id = self.group
+        change_request.id_document_details = json.dumps({"document_number": "1234567890", "document_type": "passport"})
+        change_request._onchange_scan_id_document_details()
+        self.assertEqual(change_request.applicant_id.id, self.individual_1.id)
 
     def test_23_check_user(self):
         """Test user permission check"""
