@@ -421,10 +421,10 @@ main() {
     DRY_RUN=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --branch) OPENSPP_BRANCH="$2"; shift 2;;
-            --python) PYTHON_VERSION="$2"; shift 2;;
-            --odoo-version) ODOO_VERSION="$2"; shift 2;;
-            --path) INSTALL_PATH="$2"; shift 2;;
+            --branch) if [[ -z "$2" || "$2" == --* ]]; then print_error "Missing argument for --branch"; exit 1; fi; OPENSPP_BRANCH="$2"; shift 2;;
+            --python) if [[ -z "$2" || "$2" == --* ]]; then print_error "Missing argument for --python"; exit 1; fi; PYTHON_VERSION="$2"; shift 2;;
+            --odoo-version) if [[ -z "$2" || "$2" == --* ]]; then print_error "Missing argument for --odoo-version"; exit 1; fi; ODOO_VERSION="$2"; shift 2;;
+            --path) if [[ -z "$2" || "$2" == --* ]]; then print_error "Missing argument for --path"; exit 1; fi; INSTALL_PATH="$2"; shift 2;;
             --dry-run) DRY_RUN=true; shift 1;;
             --help)
                 echo "Usage: $0 [options]"
