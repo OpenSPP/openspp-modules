@@ -32,8 +32,8 @@ OPENSPP_BRANCH="main"
 INSTALL_PATH="$HOME/openspp-dev"
 
 # Database settings
-DB_USER="$USER"
-DB_PASSWORD="" # Leave empty for passwordless access (recommended for local dev)
+DB_USER="$USER" # Defaults to the current system user.
+# Note: For simplicity, this script uses passwordless (peer) authentication for PostgreSQL.
 DB_PROMPT="true" # Set to "false" to disable the database creation prompt
 
 # -----------------------------------------------------------------------------
@@ -147,9 +147,16 @@ install_redhat_dependencies() {
 # Function to set up the Python virtual environment for OpenSPP
 setup_python_env() {
     print_status "Setting up Python virtual environment..."
+
+    if ! command_exists "python${PYTHON_VERSION}"; then
+        print_error "Python executable 'python${PYTHON_VERSION}' not found."
+        print_error "Please ensure Python ${PYTHON_VERSION} is installed and available in your PATH."
+        exit 1
+    fi
+
     mkdir -p "$INSTALL_PATH"
     cd "$INSTALL_PATH"
-    python"$PYTHON_VERSION" -m venv venv
+    python"${PYTHON_VERSION}" -m venv venv
     source venv/bin/activate
     pip install --upgrade pip wheel setuptools
     print_status "Python virtual environment created and activated at $INSTALL_PATH/venv"
@@ -217,12 +224,8 @@ setup_database() {
 
     if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='$DB_USER'" | grep -q 1;
     then
-        print_status "Creating PostgreSQL user '$DB_USER'..."
-        if [ -z "$DB_PASSWORD" ]; then
-            sudo -u postgres createuser --createdb --superuser --replication "$DB_USER"
-        else
-            sudo -u postgres createuser --createdb --superuser --replication --pwprompt "$DB_USER"
-        fi
+        print_status "Creating PostgreSQL user '$DB_USER' for passwordless (peer) authentication..."
+        sudo -u postgres createuser --createdb --superuser --replication "$DB_USER"
     else
         print_warning "PostgreSQL user '$DB_USER' already exists."
     fi
@@ -423,7 +426,11 @@ main() {
         exit 1
     fi
 
-    if [ "$OS" == "debian" ]; then install_debian_dependencies; elif [ "$OS" == "redhat" ]; then install_redhat_dependencies; elif [ "$OS" == "macos" ]; then install_macos_dependencies; fi
+    case "$OS" in
+        debian) install_debian_dependencies ;;
+        redhat) install_redhat_dependencies ;;
+        macos) install_macos_dependencies ;;
+    esac
     setup_python_env
     clone_repositories
     install_python_dependencies

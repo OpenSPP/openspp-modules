@@ -82,7 +82,6 @@ You can customize the installation by editing the configuration variables at the
 -`POSTGRES_VERSION`: The version of PostgreSQL to use (e.g., `14`).
 -`NODE_VERSION`: The version of Node.js to use (e.g., `18`).
 -`DB_USER`: The username for the PostgreSQL database (default: your system username).
--`DB_PASSWORD`: The password for the PostgreSQL database (default: empty).
 -`DB_PROMPT`: Whether to prompt before creating the databases (default: `true`).
 
 ---
@@ -116,7 +115,7 @@ The setup script supports the following options:
 
 ### System Dependencies
 
--Python 3.10+ and development headers
+-Python 3.10 (default) and development headers
 -PostgreSQL 14
 -Node.js 18
 -Git
