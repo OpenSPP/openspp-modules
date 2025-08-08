@@ -94,6 +94,7 @@ The setup script supports the following options:
 -`--python VERSION`: Specify the Python version to use (default: `3.10`)
 -`--odoo-version VERSION`: Specify the Odoo version to clone (default: `15.0`)
 -`--path PATH`: Set a custom absolute path for the installation (default: `~/openspp-dev`)
+-`--dry-run`: Run the script without executing installation commands.
 -`--help`: Display the help message
 
 **Examples:**
