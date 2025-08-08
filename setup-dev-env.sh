@@ -413,6 +413,11 @@ main() {
     echo
     print_warning "This script requires sudo privileges for system-wide installations."
 
+    if [[ "$(id -u)" -eq 0 ]]; then
+        print_error "This script must not be run as root. Please run as a regular user."
+        exit 1
+    fi
+
     DRY_RUN=false
     while [[ $# -gt 0 ]]; do
         case "$1" in
