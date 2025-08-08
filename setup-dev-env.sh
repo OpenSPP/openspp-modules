@@ -226,7 +226,8 @@ setup_database() {
         if [ -z "$DB_PASSWORD" ]; then
             sudo -u postgres createuser --createdb --superuser --replication "$DB_USER"
         else
-            sudo -u postgres createuser --createdb --superuser --replication --pwprompt "$DB_USER"
+            print_error "Password-based authentication is not supported by this script. Please leave DB_PASSWORD empty."
+            exit 1
         fi
     else
         print_warning "PostgreSQL user '$DB_USER' already exists."
