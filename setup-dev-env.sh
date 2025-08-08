@@ -429,7 +429,11 @@ main() {
         exit 1
     fi
 
-    if [ "$OS" == "debian" ]; then install_debian_dependencies; elif [ "$OS" == "redhat" ]; then install_redhat_dependencies; elif [ "$OS" == "macos" ]; then install_macos_dependencies; fi
+    case "$OS" in
+        debian) install_debian_dependencies ;;
+        redhat) install_redhat_dependencies ;;
+        macos) install_macos_dependencies ;;
+    esac
     setup_python_env
     clone_repositories
     install_python_dependencies
