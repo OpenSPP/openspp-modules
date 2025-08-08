@@ -5,7 +5,7 @@
 # This script automates the setup of a complete OpenSPP development environment
 # including all dependencies, database configuration, and development tools.
 
-set -e    # Exit on error if any command fails
+set -euo pipefail    # Exit on error, on unset variable, or pipe failure
 
 # Color codes for output to make messages more readable
 RED='\033[0;31m'
