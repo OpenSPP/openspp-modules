@@ -342,7 +342,7 @@ EOF
 source "$INSTALL_PATH/venv/bin/activate"
 echo "Updating openspp-modules repository..."
 cd "$INSTALL_PATH/openspp-modules"
-git pull origin main
+git pull origin "$OPENSPP_BRANCH"
 echo "Updating Odoo repository..."
 cd "$INSTALL_PATH/odoo"
 git pull origin $ODOO_VERSION
