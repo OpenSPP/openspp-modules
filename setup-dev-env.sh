@@ -124,7 +124,9 @@ install_macos_dependencies() {
             libxml2 libxslt libjpeg libpng freetype openssl
 
         print_status "Starting PostgreSQL service..."
-        brew services start postgresql@$POSTGRES_VERSION || print_warning "PostgreSQL service might already be running or failed to start."
+        if ! brew services start postgresql@$POSTGRES_VERSION; then
+            print_warning "PostgreSQL service might already be running or failed to start."
+        fi
     fi
 }
 
