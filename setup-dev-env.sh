@@ -364,6 +364,7 @@ EOF
 
 # Function to verify the installation by checking key components
 verify_installation() {
+    source "$INSTALL_PATH/venv/bin/activate"
     print_status "Verifying installation..."
     local errors=0
     if command_exists python3 && [[ $(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")') == "$PYTHON_VERSION" ]]; then print_status "✓ Python installed: $(python3 --version)"; else print_error "✗ Python not found or version mismatch. Expected ~$PYTHON_VERSION"; ((errors++)); fi
