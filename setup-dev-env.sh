@@ -270,6 +270,8 @@ configure_odoo() {
 db_host = localhost
 db_port = 5432
 db_user = $DB_USER
+db_user = $DB_USER
+admin_passwd = admin
 db_password = False
 addons_path = $INSTALL_PATH/openspp-modules,$INSTALL_PATH/odoo/addons
 http_port = 8069
