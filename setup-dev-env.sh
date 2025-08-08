@@ -364,7 +364,7 @@ EOF
 verify_installation() {
     print_status "Verifying installation..."
     local errors=0
-    if command_exists python3 && [[ $(python3 --version) == *"$PYTHON_VERSION"* ]]; then print_status "✓ Python installed: $(python3 --version)"; else print_error "✗ Python not found or version mismatch. Expected ~$PYTHON_VERSION"; ((errors++)); fi
+    if command_exists python3 && [[ $(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")') == "$PYTHON_VERSION" ]]; then print_status "✓ Python installed: $(python3 --version)"; else print_error "✗ Python not found or version mismatch. Expected ~$PYTHON_VERSION"; ((errors++)); fi
     if command_exists node && [[ $(node --version) == *"v$NODE_VERSION"* ]]; then print_status "✓ Node.js installed: $(node --version)"; else print_error "✗ Node.js not found or version mismatch. Expected ~$NODE_VERSION"; ((errors++)); fi
     if command_exists psql; then print_status "✓ PostgreSQL client installed: $(psql --version)"; else print_error "✗ PostgreSQL client not found"; ((errors++)); fi
     if command_exists git; then print_status "✓ Git installed: $(git --version)"; else print_error "✗ Git not found"; ((errors++)); fi
