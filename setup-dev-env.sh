@@ -149,7 +149,12 @@ setup_python_env() {
     print_status "Setting up Python virtual environment..."
     mkdir -p "$INSTALL_PATH"
     cd "$INSTALL_PATH"
-    python"$PYTHON_VERSION" -m venv venv
+    if ! command_exists "python${PYTHON_VERSION}"; then
+        print_error "Python executable 'python${PYTHON_VERSION}' not found."
+        print_error "Please ensure Python ${PYTHON_VERSION} is installed and available in your PATH."
+        exit 1
+    fi
+    python"${PYTHON_VERSION}" -m venv venv
     source venv/bin/activate
     pip install --upgrade pip wheel setuptools
     print_status "Python virtual environment created and activated at $INSTALL_PATH/venv"
