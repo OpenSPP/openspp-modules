@@ -116,7 +116,7 @@ The setup script supports the following options:
 
 ### System Dependencies
 
--Python 3.10+ and development headers
+-Python 3.10 (default) and development headers
 -PostgreSQL 14
 -Node.js 18
 -Git
