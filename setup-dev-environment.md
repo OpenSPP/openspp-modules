@@ -58,6 +58,9 @@ chmod +x setup-dev-env.sh
 
 4.Run the script:
 
+> **Warning**
+> Do not run the entire script using `sudo`. The script should be run as a regular user, and it will prompt for a password only when needed for system-wide installations.
+
 ```bash
 ./setup-dev-env.sh
 ```
