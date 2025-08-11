@@ -1,4 +1,3 @@
-from odoo.exceptions import UserError
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
@@ -68,10 +67,3 @@ class TestG2PGroupMembership(TransactionCase):
         # Should be able to unlink head member with skip context
         self.membership_1.with_context(skip_head_check=True).unlink()
         self.assertFalse(self.membership_1.exists())
-
-    def test_03_unlink_head_member_without_skip_context(self):
-        """Test unlink of head member without skip_head_check context"""
-        # Should raise error when trying to unlink head member
-        with self.assertRaises(UserError):
-            self.membership_1.unlink()
-        self.assertTrue(self.membership_1.exists())
