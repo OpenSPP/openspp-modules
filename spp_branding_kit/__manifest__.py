@@ -54,6 +54,9 @@
             "spp_branding_kit/static/src/js/telemetry_manager.js",
             "spp_branding_kit/static/src/js/apps_filter.js",
         ],
+        "web.assets_frontend": [
+            "spp_branding_kit/static/src/css/login_branding.css",
+        ],
     },
     "images": [
         "static/description/icon.png",
