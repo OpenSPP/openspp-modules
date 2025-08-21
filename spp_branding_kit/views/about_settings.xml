@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- ABOUTME: Customizes the About section in settings -->
+<!-- ABOUTME: Adds OpenSPP information while crediting Odoo -->
+<odoo>
+    <record id="res_config_settings_view_form_openspp_about" model="ir.ui.view">
+        <field name="priority">99</field>
+        <field name="name">res.config.settings.view.form.inherit.openspp.about</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <!-- Replace the app store links with OpenSPP information -->
+            <xpath expr="//div[@id='about']//setting[@id='appstore']" position="replace">
+                <setting id='openspp_about'>
+                    <div class="text-center">
+                        <h4>OpenSPP Platform</h4>
+                        <p class="text-muted">
+                            Social Protection Platform<br />
+                            <small>Powered by Odoo Community Edition</small>
+                        </p>
+                        <div class="mt-3">
+                            <a
+                                href="https://openspp.org"
+                                target="_blank"
+                                class="btn btn-primary"
+                                role="button"
+                            >
+                                Visit OpenSPP Website
+                            </a>
+                        </div>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

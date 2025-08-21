@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- ABOUTME: Backend UI customization templates for OpenSPP -->
+<!-- ABOUTME: Additional backend interface modifications and branding elements -->
+<odoo>
+        <!-- This file is kept for future backend customizations -->
+        <!-- Most template customizations have been moved to webclient_templates.xml -->
+</odoo>

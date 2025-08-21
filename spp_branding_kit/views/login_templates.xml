@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- ABOUTME: Login page templates for OpenSPP branding -->
+<!-- ABOUTME: Customizes the login interface with OpenSPP branding -->
+<odoo>
+        <!-- Custom Login Page Layout -->
+        <template
+        id="custom_login_layout_openspp"
+        inherit_id="web.login_layout"
+        name="OpenSPP Custom Login Layout"
+        priority="99"
+    >
+            <!-- Replace "Powered by Odoo" in login footer -->
+            <xpath expr="//a[contains(@href, 'www.odoo.com')]" position="replace">
+                <span>Powered by OpenSPP</span>
+            </xpath>
+
+            <!-- Remove "Manage Databases" link if configured -->
+            <xpath expr="//a[@href='/web/database/manager']" position="attributes">
+                <attribute name="class" add="d-none" separator=" " />
+            </xpath>
+        </template>
+
+
+</odoo>

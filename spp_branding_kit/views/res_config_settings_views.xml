@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- ABOUTME: Configuration settings views for OpenSPP branding customization -->
+<!-- ABOUTME: Provides UI for managing system branding and telemetry settings -->
+<odoo>
+    <record id="res_config_settings_view_form_openspp" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.openspp</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="OpenSPP Branding" string="OpenSPP Branding" name="spp_branding_kit">
+                    <block title="System Branding" name="openspp_branding_block">
+                        <setting help="Set your organization's system name for the interface">
+                            <field name="openspp_system_name" />
+                        </setting>
+                        <setting help="Display 'Powered by OpenSPP' branding">
+                            <field name="openspp_show_powered_by" />
+                        </setting>
+                        <setting help="Customize interface for OpenSPP-specific workflows">
+                            <field name="openspp_hide_odoo_referral" />
+                        </setting>
+                        <setting
+                            help="Hide paid Odoo apps (Enterprise and OPL licensed modules) from the Apps list"
+                        >
+                            <field name="openspp_hide_paid_apps" />
+                        </setting>
+                        <setting help="Choose which modules to show by default in the Apps menu">
+                            <field name="openspp_default_app_filter" widget="radio" />
+                        </setting>
+                    </block>
+
+                    <block title="Help &amp; Support" name="openspp_links_block">
+                        <setting help="Documentation link for your OpenSPP users">
+                            <field name="openspp_documentation_url" placeholder="https://docs.openspp.org" />
+                        </setting>
+                        <setting help="Support website for your OpenSPP implementation">
+                            <field name="openspp_support_url" placeholder="https://openspp.org" />
+                        </setting>
+                    </block>
+
+                    <block title="Analytics &amp; Improvement" name="openspp_telemetry_block">
+                        <setting help="Help improve OpenSPP by sharing anonymous usage statistics">
+                            <field name="openspp_telemetry_enabled" />
+                        </setting>
+                        <setting
+                            help="Analytics collection endpoint"
+                            invisible="not openspp_telemetry_enabled"
+                        >
+                            <field
+                                name="openspp_telemetry_endpoint"
+                                placeholder="https://telemetry.openspp.org"
+                            />
+                        </setting>
+                    </block>
+
+                    <block title="Security" name="openspp_security_block">
+                        <setting help="Limit debug mode access to system administrators">
+                            <field name="openspp_debug_admin_only" />
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action to open settings -->
+    <record id="action_openspp_branding_config" model="ir.actions.act_window">
+        <field name="name">OpenSPP Branding Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'spp_branding_kit'}</field>
+    </record>
+
+    <!-- Menu item -->
+    <menuitem
+        id="menu_openspp_branding_config"
+        name="OpenSPP Branding"
+        parent="base.menu_administration"
+        action="action_openspp_branding_config"
+        sequence="99"
+    />
+</odoo>

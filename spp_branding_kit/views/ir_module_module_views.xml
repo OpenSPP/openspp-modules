@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- ABOUTME: Custom views for module list to enhance paid apps filtering -->
+<!-- ABOUTME: Adds visual indicators and search filters for paid apps -->
+<odoo>
+    <!-- Enhance module tree view to show license information -->
+    <record id="spp_module_tree_view" model="ir.ui.view">
+        <field name="name">spp.ir.module.module.tree</field>
+        <field name="model">ir.module.module</field>
+        <field name="inherit_id" ref="base.module_tree" />
+        <field name="arch" type="xml">
+            <!-- Add license field to show which apps are paid -->
+            <field name="state" position="before">
+                <field name="license" optional="show" string="License" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Enhance module search view with paid apps filter -->
+    <record id="spp_module_filter_view" model="ir.ui.view">
+        <field name="name">spp.ir.module.module.search</field>
+        <field name="model">ir.module.module</field>
+        <field name="inherit_id" ref="base.view_module_filter" />
+        <field name="arch" type="xml">
+            <!-- Add OpenSPP filter before other filters -->
+            <filter name="app" position="before">
+                <filter
+                    name="openspp_apps"
+                    string="OpenSPP Apps"
+                    domain="[('application', '=', True),
+                                ('name', '=like', 'spp_%')]"
+                    help="Show only OpenSPP applications"
+                />
+                <separator />
+            </filter>
+
+            <!-- Add filters for paid/free apps -->
+            <filter name="app" position="after">
+                <separator />
+                <filter
+                    name="free_apps"
+                    string="Free Apps Only"
+                    domain="[('license', 'not in', ['OEEL-1', 'OPL-1']),
+                                ('license', 'not like', 'OEEL%'),
+                                ('license', 'not like', 'OPL%')]"
+                    help="Show only free and open-source apps"
+                />
+                <filter
+                    name="paid_apps"
+                    string="Paid Apps"
+                    domain="['|', ('license', '=like', 'OEEL%'),
+                                     ('license', '=like', 'OPL%')]"
+                    help="Show paid/proprietary apps"
+                    invisible="context.get('hide_paid_apps_enabled', False)"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <!-- Enhance kanban view to show license badge -->
+    <record id="spp_module_kanban_view" model="ir.ui.view">
+        <field name="name">spp.ir.module.module.kanban</field>
+        <field name="model">ir.module.module</field>
+        <field name="inherit_id" ref="base.module_view_kanban" />
+        <field name="arch" type="xml">
+            <!-- Add license field to kanban -->
+            <field name="icon" position="after">
+                <field name="license" />
+            </field>
+
+            <!-- Add visual indicator for paid apps -->
+            <xpath expr="//div[hasclass('oe_module_desc')]" position="inside">
+                <div
+                    t-if="record.license.raw_value and (record.license.raw_value.substring(0,4) == 'OEEL' or record.license.raw_value.substring(0,3) == 'OPL')"
+                    class="badge rounded-pill text-bg-warning ms-auto"
+                >
+                    <i class="fa fa-lock me-1" />Paid
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Override Apps menu action to include context and default filter -->
+    <record id="base.open_module_tree" model="ir.actions.act_window">
+        <field name="context" eval="{'search_default_app': 1, 'apps_menu': True}" />
+    </record>
+
+    <!-- Create action for OpenSPP Apps specifically -->
+    <record id="action_openspp_apps" model="ir.actions.act_window">
+        <field name="name">OpenSPP Apps</field>
+        <field name="res_model">ir.module.module</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_openspp_apps': 1, 'apps_menu': True}</field>
+        <field name="search_view_id" ref="base.view_module_filter" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No OpenSPP applications found
+            </p>
+            <p>
+                OpenSPP applications are identified as modules that are marked as Applications
+                and have a technical name starting with "spp_".
+            </p>
+        </field>
+    </record>
+
+    <!-- Add menu item for OpenSPP Apps -->
+    <menuitem
+        id="menu_openspp_apps"
+        name="OpenSPP Apps"
+        parent="base.menu_apps"
+        action="action_openspp_apps"
+        sequence="1"
+    />
+</odoo>
