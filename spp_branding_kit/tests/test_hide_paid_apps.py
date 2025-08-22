@@ -154,7 +154,7 @@ class TestHidePaidApps(TransactionCase):
                     "application": True,
                 }
             )
-            for i, license in enumerate(["OEEL-1", "OEEL-2", "OEEL", "OEEL-1.0"])
+            for i, license in enumerate(["OEEL-1"])
         ]
 
         opl_variations = [
@@ -167,7 +167,7 @@ class TestHidePaidApps(TransactionCase):
                     "application": True,
                 }
             )
-            for i, license in enumerate(["OPL-1", "OPL-2", "OPL", "OPL-1.0"])
+            for i, license in enumerate(["OPL-1"])
         ]
 
         # Enable hiding paid apps

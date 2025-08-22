@@ -51,10 +51,9 @@ class TestIrModuleModuleHelpers(TransactionCase):
         filter_domain = self.Module._get_paid_app_filter()
 
         # Should return correct domain to exclude paid apps
-        self.assertEqual(filter_domain[0], "!")
-        self.assertEqual(filter_domain[1], "|")
-        self.assertIn(("license", "=like", "OEEL%"), filter_domain)
-        self.assertIn(("license", "=like", "OPL%"), filter_domain)
+        self.assertEqual(filter_domain[0], "&")
+        self.assertIn(("license", "not like", "OEEL%"), filter_domain)
+        self.assertIn(("license", "not like", "OPL%"), filter_domain)
 
     def test_apply_paid_app_filter_when_enabled(self):
         """Test _apply_paid_app_filter when hiding is enabled"""
@@ -71,11 +70,13 @@ class TestIrModuleModuleHelpers(TransactionCase):
         # Should combine with AND operator
         self.assertEqual(filtered_domain[0], "&")
         self.assertIn(("application", "=", True), filtered_domain)
-        self.assertIn("!", filtered_domain)
+        # Check for the new filter format
+        self.assertIn(("license", "not like", "OEEL%"), filtered_domain)
+        self.assertIn(("license", "not like", "OPL%"), filtered_domain)
 
         # Test with empty domain
         filtered_domain = Module._apply_paid_app_filter([])
-        self.assertEqual(filtered_domain[0], "!")
+        self.assertEqual(filtered_domain[0], "&")
 
     def test_apply_paid_app_filter_when_disabled(self):
         """Test _apply_paid_app_filter when hiding is disabled"""

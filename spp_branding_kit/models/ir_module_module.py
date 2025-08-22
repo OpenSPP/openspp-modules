@@ -16,7 +16,9 @@ class IrModuleModule(models.Model):
     @api.model
     def _get_paid_app_filter(self):
         """Helper method to get the domain filter for paid apps"""
-        return ["!", "|", ("license", "=like", "OEEL%"), ("license", "=like", "OPL%")]
+        # This filter excludes modules with OEEL or OPL licenses
+        # The correct way to exclude paid apps while including modules with no license
+        return ["&", ("license", "not like", "OEEL%"), ("license", "not like", "OPL%")]
 
     @api.model
     def _apply_paid_app_filter(self, domain):
