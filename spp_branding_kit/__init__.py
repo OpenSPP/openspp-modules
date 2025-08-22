@@ -40,23 +40,20 @@ def post_init_hook(env):
             brand_promotion.active = False
             _logger.info("Disabled Odoo brand promotion message")
 
-        # Disable update notification cron jobs (search by model/method)
-        Cron = env["ir.cron"].sudo()
+        # Disable specific Odoo telemetry and update cron jobs by their external IDs
+        crons_to_disable = [
+            "mail.ir_cron_module_update_notification",  # Module update notification
+            "base.ir_cron_res_partner_clear_caches",  # Partner cache clearing (if telemetry related)
+        ]
 
-        # Disable module update related cron jobs
-        module_update_crons = Cron.search(
-            [
-                "|",
-                "|",
-                ("model", "=", "ir.module.module"),
-                ("model", "=", "publisher_warranty.contract"),
-                ("cron_name", "ilike", "module"),
-            ]
-        )
-        for cron in module_update_crons:
-            if cron.active:
-                cron.active = False
-                _logger.info(f"Disabled cron job: {cron.name}")
+        for cron_xml_id in crons_to_disable:
+            try:
+                cron = env.ref(cron_xml_id, raise_if_not_found=False)
+                if cron and cron.active:
+                    cron.active = False
+                    _logger.info(f"Disabled cron job: {cron.name} ({cron_xml_id})")
+            except Exception as e:
+                _logger.debug(f"Could not disable cron {cron_xml_id}: {e}")
 
         # Disable theme store menu if it exists
         theme_menu = env["ir.ui.menu"].sudo().search([("name", "ilike", "Theme Store")], limit=1)
@@ -67,19 +64,19 @@ def post_init_hook(env):
     except Exception as e:
         _logger.warning(f"Error during branding setup: {e}")
 
-    # Update company information
+    # Update company information for all companies
     try:
         Company = env["res.company"].sudo()
-        main_company = Company.browse(1)  # Main company
-        if main_company.exists():
-            main_company.write(
+        companies = Company.search([])
+        for company in companies:
+            company.write(
                 {
                     "report_header": "OpenSPP Platform",
                     "report_footer": "OpenSPP - Open Source Social Protection Platform",
                     "website": "https://openspp.org",
                 }
             )
-            _logger.info("Updated main company branding")
+        _logger.info(f"Updated branding for {len(companies)} companies")
     except Exception as e:
         _logger.warning(f"Error updating company data: {e}")
 
@@ -92,15 +89,16 @@ def uninstall_hook(env):
     """
     _logger.info("OpenSPP Branding Kit: Running uninstall cleanup...")
 
-    # Remove the hide_paid_apps parameter
+    # Remove all openspp.* configuration parameters
     try:
         IrConfigParam = env["ir.config_parameter"].sudo()
-        param = IrConfigParam.search([("key", "=", "openspp.hide_paid_apps")])
-        if param:
-            param.unlink()
-            _logger.info("Removed hide_paid_apps parameter")
+        params = IrConfigParam.search([("key", "=like", "openspp.%")])
+        if params:
+            param_count = len(params)
+            params.unlink()
+            _logger.info(f"Removed {param_count} OpenSPP configuration parameters")
     except Exception as e:
-        _logger.warning(f"Error removing configuration parameter: {e}")
+        _logger.warning(f"Error removing configuration parameters: {e}")
 
     # Optionally re-enable Odoo branding elements
     # This is commented out by default to maintain debranding even after uninstall

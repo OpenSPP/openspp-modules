@@ -15,21 +15,19 @@ class OpenSPPHome(Home):
     @http.route()
     def web_client(self, s_action=None, **kw):
         """Override web client to enforce debug mode restrictions"""
-        res = super().web_client(s_action, **kw)
-
-        # Check if debug mode is restricted to admins
+        # Check if debug mode is restricted to admins BEFORE rendering
         if kw.get("debug", False):
             config_parameter = request.env["ir.config_parameter"].sudo()
             debug_admin_only = config_parameter.get_param("openspp.debug_admin_only", "True") == "True"
 
             if debug_admin_only and request.session.uid:
                 # Check if current user is admin
-                user = request.env.user.browse(request.session.uid)
-                if not user._is_admin():
-                    # Redirect non-admin users trying to access debug mode
-                    return request.redirect("/web?debug=0")
+                if not request.env.user._is_admin():
+                    # Remove debug parameter and redirect
+                    kw.pop("debug", None)
+                    return request.redirect("/web", 303)
 
-        return res
+        return super().web_client(s_action, **kw)
 
 
 class OpenSPPBrandingController(http.Controller):

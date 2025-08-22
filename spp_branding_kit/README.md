@@ -51,7 +51,7 @@ For complete debranding, install these modules from the
 
 ```bash
 cd /path/to/your/custom-addons
-git clone [repository-url] openspp_branding_kit
+git clone [repository-url] spp_branding_kit
 ```
 
 ### 2. Install OCA Dependencies (Recommended)
@@ -67,7 +67,7 @@ Add the module paths to your `odoo.conf`:
 
 ```ini
 [options]
-addons_path = /path/to/openspp_branding_kit,/path/to/server-brand,/path/to/odoo/addons
+addons_path = /path/to/your/custom-addons,/path/to/server-brand,/path/to/odoo/addons
 
 # Recommended security settings
 list_db = False

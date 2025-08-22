@@ -4,39 +4,12 @@
 import logging
 
 from odoo import models
-from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 
 
 class IrHttp(models.AbstractModel):
     _inherit = "ir.http"
-
-    @classmethod
-    def _get_frontend_session_info(cls):
-        """Override to add OpenSPP-specific session information"""
-        session_info = super()._get_frontend_session_info()
-
-        # Add OpenSPP configuration to session
-        IrConfig = request.env["ir.config_parameter"].sudo()
-
-        session_info.update(
-            {
-                "openspp_system_name": IrConfig.get_param("openspp.system_name", "OpenSPP Platform"),
-                "openspp_documentation_url": IrConfig.get_param(
-                    "openspp.documentation_url", "https://docs.openspp.org"
-                ),
-                "openspp_support_url": IrConfig.get_param("openspp.support_url", "https://openspp.org"),
-                "openspp_show_powered_by": IrConfig.get_param("openspp.show_powered_by", "True") == "True",
-                "openspp_telemetry_enabled": IrConfig.get_param("openspp.telemetry_enabled", "True") == "True",
-                "openspp_telemetry_endpoint": IrConfig.get_param(
-                    "openspp.telemetry_endpoint", "https://telemetry.openspp.org"
-                ),
-                "openspp_debug_admin_only": IrConfig.get_param("openspp.debug_admin_only", "True") == "True",
-            }
-        )
-
-        return session_info
 
     def session_info(self):
         """Override session info to customize branding"""
