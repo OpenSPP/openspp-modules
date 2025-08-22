@@ -118,3 +118,64 @@ class TestHidePaidApps(TransactionCase):
             if r.get("license") and (r["license"].startswith("OEEL") or r["license"].startswith("OPL"))
         ]
         self.assertFalse(paid_in_web, "web_search_read should filter paid apps")
+
+    def test_edge_cases_with_none_license(self):
+        """Test handling of modules with None or empty license"""
+        # Create module with no license
+        no_license_module = self.Module.create(
+            {
+                "name": "test_no_license",
+                "shortdesc": "Test No License",
+                "state": "installed",
+                "license": False,  # No license
+                "application": True,
+            }
+        )
+
+        # Enable hiding paid apps
+        self.IrConfigParam.set_param("openspp.hide_paid_apps", True)
+
+        # Search for modules in Apps context
+        modules = self.Module.with_context(apps_menu=True).search([])
+
+        # Module with no license should be visible
+        self.assertIn(no_license_module, modules, "Modules with no license should be visible")
+
+    def test_paid_license_variations(self):
+        """Test that different variations of paid licenses are filtered"""
+        # Create modules with various paid license formats
+        oeel_variations = [
+            self.Module.create(
+                {
+                    "name": f"test_oeel_{i}",
+                    "shortdesc": f"Test OEEL {i}",
+                    "state": "installed",
+                    "license": license,
+                    "application": True,
+                }
+            )
+            for i, license in enumerate(["OEEL-1", "OEEL-2", "OEEL", "OEEL-1.0"])
+        ]
+
+        opl_variations = [
+            self.Module.create(
+                {
+                    "name": f"test_opl_{i}",
+                    "shortdesc": f"Test OPL {i}",
+                    "state": "installed",
+                    "license": license,
+                    "application": True,
+                }
+            )
+            for i, license in enumerate(["OPL-1", "OPL-2", "OPL", "OPL-1.0"])
+        ]
+
+        # Enable hiding paid apps
+        self.IrConfigParam.set_param("openspp.hide_paid_apps", True)
+
+        # Search for modules in Apps context
+        modules = self.Module.with_context(apps_menu=True).search([])
+
+        # All paid license variations should be hidden
+        for module in oeel_variations + opl_variations:
+            self.assertNotIn(module, modules, f"Module with license {module.license} should be hidden")
