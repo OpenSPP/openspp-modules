@@ -30,7 +30,7 @@ class TestOpenSPPHome(TransactionCase):
         )
 
         # Mock request
-        with patch("spp_branding_kit.controllers.main.request") as mock_request:
+        with patch("odoo.addons.spp_branding_kit.controllers.main.request") as mock_request:
             mock_request.env = self.env.sudo(non_admin_user)
             mock_request.session.uid = non_admin_user.id
             mock_request.env.user = non_admin_user
@@ -58,7 +58,7 @@ class TestOpenSPPHome(TransactionCase):
         admin_user = self.env.ref("base.user_admin")
 
         # Mock request
-        with patch("spp_branding_kit.controllers.main.request") as mock_request:
+        with patch("odoo.addons.spp_branding_kit.controllers.main.request") as mock_request:
             mock_request.env = self.env.sudo(admin_user)
             mock_request.session.uid = admin_user.id
             mock_request.env.user = admin_user
@@ -91,7 +91,7 @@ class TestOpenSPPHome(TransactionCase):
         )
 
         # Mock request
-        with patch("spp_branding_kit.controllers.main.request") as mock_request:
+        with patch("odoo.addons.spp_branding_kit.controllers.main.request") as mock_request:
             mock_request.env = self.env.sudo(non_admin_user)
             mock_request.session.uid = non_admin_user.id
             mock_request.env.user = non_admin_user
@@ -139,7 +139,7 @@ class TestOpenSPPBrandingController(TransactionCase):
         self.IrConfigParam.set_param("openspp.support_url", "https://test-support.org")
 
         # Mock request
-        with patch("spp_branding_kit.controllers.main.request") as mock_request:
+        with patch("odoo.addons.spp_branding_kit.controllers.main.request") as mock_request:
             mock_request.env = self.env
 
             controller = OpenSPPBrandingController()
@@ -162,7 +162,7 @@ class TestOpenSPPBrandingController(TransactionCase):
         self.IrConfigParam.search([("key", "=like", "openspp.%")]).unlink()
 
         # Mock request
-        with patch("spp_branding_kit.controllers.main.request") as mock_request:
+        with patch("odoo.addons.spp_branding_kit.controllers.main.request") as mock_request:
             mock_request.env = self.env
 
             controller = OpenSPPBrandingController()
@@ -185,7 +185,7 @@ class TestOpenSPPBrandingController(TransactionCase):
         self.IrConfigParam.set_param("openspp.system_name", "Custom OpenSPP")
 
         # Mock request
-        with patch("spp_branding_kit.controllers.main.request") as mock_request:
+        with patch("odoo.addons.spp_branding_kit.controllers.main.request") as mock_request:
             mock_request.env = self.env
 
             controller = OpenSPPBrandingController()
@@ -204,7 +204,7 @@ class TestOpenSPPBrandingController(TransactionCase):
         self.IrConfigParam.set_param("openspp.telemetry_endpoint", "https://custom-telemetry.org")
 
         # Mock request
-        with patch("spp_branding_kit.controllers.main.request") as mock_request:
+        with patch("odoo.addons.spp_branding_kit.controllers.main.request") as mock_request:
             mock_request.env = self.env
 
             controller = OpenSPPBrandingController()
@@ -225,7 +225,7 @@ class TestOpenSPPBrandingController(TransactionCase):
         self.IrConfigParam.set_param("openspp.telemetry_enabled", "False")
 
         # Mock request
-        with patch("spp_branding_kit.controllers.main.request") as mock_request:
+        with patch("odoo.addons.spp_branding_kit.controllers.main.request") as mock_request:
             mock_request.env = self.env
 
             controller = OpenSPPBrandingController()
@@ -249,7 +249,7 @@ class TestOpenSPPBrandingController(TransactionCase):
             param.unlink()
 
         # Mock request
-        with patch("spp_branding_kit.controllers.main.request") as mock_request:
+        with patch("odoo.addons.spp_branding_kit.controllers.main.request") as mock_request:
             mock_request.env = self.env
 
             controller = OpenSPPBrandingController()

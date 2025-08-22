@@ -51,7 +51,7 @@ class TestHidePaidApps(TransactionCase):
     def test_paid_apps_visible_when_disabled(self):
         """Test that paid apps are visible when setting is explicitly disabled"""
         # Explicitly disable the setting
-        self.IrConfigParam.set_param("openspp.hide_paid_apps", False)
+        self.IrConfigParam.set_param("openspp.hide_paid_apps", "False")
 
         # Search for modules in Apps context
         modules = self.Module.with_context(apps_menu=True).search([])
@@ -64,7 +64,7 @@ class TestHidePaidApps(TransactionCase):
     def test_paid_apps_hidden_when_enabled(self):
         """Test that paid apps are hidden when setting is enabled"""
         # Enable hiding paid apps
-        self.IrConfigParam.set_param("openspp.hide_paid_apps", True)
+        self.IrConfigParam.set_param("openspp.hide_paid_apps", "True")
 
         # Search for modules in Apps context
         modules = self.Module.with_context(apps_menu=True).search([])
@@ -77,7 +77,7 @@ class TestHidePaidApps(TransactionCase):
     def test_paid_apps_visible_outside_apps_menu(self):
         """Test that paid apps remain visible in module management views"""
         # Enable hiding paid apps
-        self.IrConfigParam.set_param("openspp.hide_paid_apps", True)
+        self.IrConfigParam.set_param("openspp.hide_paid_apps", "True")
 
         # Search without apps_menu context (simulating module management view)
         modules = self.Module.search([])
@@ -90,7 +90,7 @@ class TestHidePaidApps(TransactionCase):
     def test_search_methods_respect_setting(self):
         """Test that all search methods respect the hide paid apps setting"""
         # Enable hiding paid apps
-        self.IrConfigParam.set_param("openspp.hide_paid_apps", True)
+        self.IrConfigParam.set_param("openspp.hide_paid_apps", "True")
 
         # Test _search method
         domain = [("application", "=", True)]
@@ -133,7 +133,7 @@ class TestHidePaidApps(TransactionCase):
         )
 
         # Enable hiding paid apps
-        self.IrConfigParam.set_param("openspp.hide_paid_apps", True)
+        self.IrConfigParam.set_param("openspp.hide_paid_apps", "True")
 
         # Search for modules in Apps context
         modules = self.Module.with_context(apps_menu=True).search([])
@@ -171,7 +171,7 @@ class TestHidePaidApps(TransactionCase):
         ]
 
         # Enable hiding paid apps
-        self.IrConfigParam.set_param("openspp.hide_paid_apps", True)
+        self.IrConfigParam.set_param("openspp.hide_paid_apps", "True")
 
         # Search for modules in Apps context
         modules = self.Module.with_context(apps_menu=True).search([])

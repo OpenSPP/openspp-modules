@@ -21,7 +21,8 @@ class IrModuleModule(models.Model):
     @api.model
     def _apply_paid_app_filter(self, domain):
         """Helper method to apply paid app filter to a domain"""
-        hide_paid_apps = self.env["ir.config_parameter"].sudo().get_param("openspp.hide_paid_apps", False)
+        hide_paid_apps = self.env["ir.config_parameter"].sudo().get_param("openspp.hide_paid_apps", "False")
+        hide_paid_apps = hide_paid_apps == "True"
 
         if hide_paid_apps and self.env.context.get("apps_menu", False):
             paid_app_filter = self._get_paid_app_filter()
@@ -38,8 +39,8 @@ class IrModuleModule(models.Model):
         domain = self._apply_paid_app_filter(domain)
 
         # Add context to inform views about the setting
-        hide_paid_apps = self.env["ir.config_parameter"].sudo().get_param("openspp.hide_paid_apps", False)
-        if hide_paid_apps:
+        hide_paid_apps = self.env["ir.config_parameter"].sudo().get_param("openspp.hide_paid_apps", "False")
+        if hide_paid_apps == "True":
             self = self.with_context(hide_paid_apps_enabled=True)
 
         return super()._search(domain, offset=offset, limit=limit, order=order, access_rights_uid=access_rights_uid)
@@ -51,8 +52,8 @@ class IrModuleModule(models.Model):
         domain = self._apply_paid_app_filter(domain)
 
         # Add context to inform views about the setting
-        hide_paid_apps = self.env["ir.config_parameter"].sudo().get_param("openspp.hide_paid_apps", False)
-        if hide_paid_apps:
+        hide_paid_apps = self.env["ir.config_parameter"].sudo().get_param("openspp.hide_paid_apps", "False")
+        if hide_paid_apps == "True":
             self = self.with_context(hide_paid_apps_enabled=True)
 
         return super().search_fetch(domain, field_names, offset=offset, limit=limit, order=order)
@@ -64,8 +65,8 @@ class IrModuleModule(models.Model):
         domain = self._apply_paid_app_filter(domain)
 
         # Add context to inform views about the setting
-        hide_paid_apps = self.env["ir.config_parameter"].sudo().get_param("openspp.hide_paid_apps", False)
-        if hide_paid_apps:
+        hide_paid_apps = self.env["ir.config_parameter"].sudo().get_param("openspp.hide_paid_apps", "False")
+        if hide_paid_apps == "True":
             self = self.with_context(hide_paid_apps_enabled=True)
 
         return super().web_search_read(
