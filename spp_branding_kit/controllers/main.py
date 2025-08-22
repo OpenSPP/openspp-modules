@@ -14,19 +14,7 @@ class OpenSPPHome(Home):
 
     @http.route()
     def web_client(self, s_action=None, **kw):
-        """Override web client to enforce debug mode restrictions"""
-        # Check if debug mode is restricted to admins BEFORE rendering
-        if kw.get("debug", False):
-            config_parameter = request.env["ir.config_parameter"].sudo()
-            debug_admin_only = config_parameter.get_param("openspp.debug_admin_only", "True") == "True"
-
-            if debug_admin_only and request.session.uid:
-                # Check if current user is admin
-                if not request.env.user._is_admin():
-                    # Remove debug parameter and redirect
-                    kw.pop("debug", None)
-                    return request.redirect("/web", 303)
-
+        """Override web client for branding"""
         return super().web_client(s_action, **kw)
 
 

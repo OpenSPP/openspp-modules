@@ -30,7 +30,6 @@ class IrHttp(models.AbstractModel):
                 "openspp_telemetry_endpoint": IrConfig.get_param(
                     "openspp.telemetry_endpoint", "https://telemetry.openspp.org"
                 ),
-                "openspp_debug_admin_only": IrConfig.get_param("openspp.debug_admin_only", "True") == "True",
             }
         )
 

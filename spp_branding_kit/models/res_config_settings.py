@@ -51,13 +51,6 @@ class ResConfigSettings(models.TransientModel):
         config_parameter="openspp.telemetry_endpoint",
     )
 
-    openspp_debug_admin_only = fields.Boolean(
-        "Admin-Only Debug Mode",
-        help="Limit debug mode access to administrators",
-        default=True,
-        config_parameter="openspp.debug_admin_only",
-    )
-
     openspp_hide_odoo_referral = fields.Boolean(
         "OpenSPP Interface Mode",
         help="Optimize interface for OpenSPP-specific workflows",

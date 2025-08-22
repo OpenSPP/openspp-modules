@@ -9,7 +9,7 @@ The **OpenSPP Branding Kit** module is designed to:
 * **Apply OpenSPP Branding**: Replace removed Odoo branding with OpenSPP-specific branding elements, including logos, colors, text, and system information.
 * **Control Telemetry and External Communications**: Provide administrators with control over telemetry data collection and external service communications.
 * **Hide Paid Applications**: Optionally filter out enterprise and paid Odoo applications from the Apps menu to focus on open-source modules.
-* **Customize System Behavior**: Offer configuration options for debug mode access, system naming, documentation URLs, and support links.
+* **Customize System Behavior**: Offer configuration options for system naming, documentation URLs, and support links.
 
 ## Dependencies and Integration
 
@@ -23,7 +23,7 @@ The **OpenSPP Branding Kit** module is designed to:
 * **Configuration Management ([ir.config_parameter](ir.config_parameter))**:
     * Introduces system-wide configuration parameters with the `openspp.*` prefix for centralized branding control.
     * Provides settings for system name, documentation URLs, support links, and telemetry endpoints.
-    * Enables toggle options for features like hiding paid apps and restricting debug mode access.
+    * Enables toggle options for features like hiding paid apps.
 
 * **Module Filtering ([ir.module.module](ir.module.module))**:
     * Implements intelligent filtering of paid applications (OEEL and OPL licensed modules) from the Apps menu.
@@ -31,7 +31,6 @@ The **OpenSPP Branding Kit** module is designed to:
     * Provides helper methods for counting and filtering paid applications.
 
 * **Web Interface Customization**:
-    * Customizes the web client to enforce debug mode restrictions based on user permissions.
     * Provides custom routes for OpenSPP-specific information pages.
     * Modifies session information to include OpenSPP branding data.
     * Implements telemetry redirection to OpenSPP endpoints when enabled.
@@ -50,7 +49,6 @@ The **OpenSPP Branding Kit** module is designed to:
 * **Security and Privacy Features**:
     * Disables unnecessary telemetry and external communications by default.
     * Removes promotional content and enterprise upselling elements.
-    * Provides administrator-only debug mode option for enhanced security.
     * Implements proper permission controls for branding configuration.
 
 ## Module Components
@@ -73,7 +71,6 @@ The module provides various configuration parameters that can be adjusted throug
 
 * `openspp.system_name`: Custom system name displayed throughout the interface
 * `openspp.hide_paid_apps`: Toggle to hide paid applications from the Apps menu
-* `openspp.debug_admin_only`: Restrict debug mode access to administrators only
 * `openspp.telemetry_enabled`: Enable or disable telemetry data collection
 * `openspp.documentation_url`: Custom documentation URL for help links
 * `openspp.support_url`: Custom support URL for assistance

@@ -52,12 +52,6 @@
                             />
                         </setting>
                     </block>
-
-                    <block title="Security" name="openspp_security_block">
-                        <setting help="Limit debug mode access to system administrators">
-                            <field name="openspp_debug_admin_only" />
-                        </setting>
-                    </block>
                 </app>
             </xpath>
         </field>
