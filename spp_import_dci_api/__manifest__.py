@@ -1,6 +1,6 @@
 {
     "name": "OpenSPP Import: DCI API",
-    "summary": "Enables integration with external registries, particularly those adhering to the DCI (Digital Civil Identity) standard, for importing and synchronizing registrant data into OpenSPP.",
+    "summary": "Integrates OpenSPP with external Digital Civil Identity (DCI) compliant registries for automated import and synchronization of individual and family registrant data. It automatically creates or updates registrant profiles, manages hierarchical location data, and facilitates family group creation within OpenSPP.",
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
     "author": "OpenSPP.org",

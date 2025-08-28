@@ -12,5 +12,5 @@
     "data": ["views/partner.xml"],
     "application": True,
     "installable": True,
-    "summary": "Demonstrates the GIS capabilities of the OpenSPP Base GIS module by providing practical examples and use cases with GIS views, data layers, and raster layers.",
+    "summary": "Demonstrates the integration of Geographical Information System (GIS) capabilities within OpenSPP, illustrating how to extend data models with various geographical field types. It provides examples for defining custom geospatial data models and visualizing diverse geographical entities, including points, lines, and polygons, on interactive maps.",
 }

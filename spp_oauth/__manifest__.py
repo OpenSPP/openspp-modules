@@ -1,6 +1,6 @@
 {
     "name": "OpenSPP API: Oauth",
-    "summary": "Provides OAuth 2.0 authentication for secure access to the OpenSPP API.",
+    "summary": "The module establishes an OAuth 2. 0 authentication framework, securing OpenSPP API communication for integrated systems and applications.",
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
     "author": "OpenSPP.org",

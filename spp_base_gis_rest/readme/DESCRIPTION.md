@@ -1,38 +1,43 @@
-# OpenSPP Base GIS REST
+# OpenSPP Base Gis Rest
 
-This module extends the [spp_base_gis](spp_base_gis) by providing RESTful API endpoints for accessing and querying geospatial data. It depends on the following modules:
+The OpenSPP Base GIS REST module provides secure, programmatic access to OpenSPP's Geographical Information System (GIS) data through a set of RESTful API endpoints. It leverages industry-standard OAuth 2.0 for robust authentication, enabling external applications and services to integrate with and consume geospatial information from the OpenSPP platform.
 
-- **[spp_base_gis](spp_base_gis):**  Provides the core GIS functionalities and data models.
-- **[spp_oauth](spp_oauth):**  Enables secure authentication and authorization for API requests using OAuth 2.0.
+## Purpose
 
-## Functionality
+This module empowers external systems to securely interact with OpenSPP's GIS capabilities, facilitating data exchange and integration. It achieves this by:
 
-The `spp_base_gis_rest` module offers a set of RESTful API endpoints that allow external applications and services to:
+*   **Enabling Programmatic GIS Access:** Provides secure API endpoints, allowing external applications to query and retrieve geospatial data like administrative boundaries or beneficiary locations.
+*   **Supporting Industry-Standard Authentication:** Offers robust security through OAuth 2.0 (Bearer tokens) and Basic authentication for API clients, ensuring only authorized systems access sensitive data.
+*   **Managing API Client Credentials:** Allows for the creation and management of unique Client IDs, Client Secrets, and Client Tokens required for API access, ensuring controlled and traceable interactions.
+*   **Facilitating External System Integration:** Bridges OpenSPP's rich GIS data with other platforms, supporting custom dashboards, analytical tools, and broader data ecosystems.
+*   **Enhancing Data Interoperability:** Makes OpenSPP's geospatial data readily available for consumption by other systems, promoting seamless data flow and collaborative program management.
 
-- **Authenticate and Obtain Access Tokens:**  Utilizes the [spp_oauth](spp_oauth) module to implement OAuth 2.0 flows for secure authentication and token generation.
-- **Perform Locational Queries:**  Enables querying geospatial data based on location coordinates (latitude and longitude), layer type (point, line, polygon), and spatial relationships (intersects, within, contains). 
-- **Execute Attribute Queries:**  Allows filtering data based on attribute values using operators such as equals, not equals, greater than, etc. 
-- **Retrieve Feature Data:** Returns geospatial data in standard formats like GeoJSON, suitable for consumption by GIS clients or other applications.
+## Dependencies and Integration
 
-## Integration with Other Modules
+The OpenSPP Base GIS REST module is foundational for exposing geospatial data programmatically and relies on other core OpenSPP modules to function effectively.
 
-The `spp_base_gis_rest` module seamlessly integrates with:
+It primarily depends on the [OpenSPP Base GIS](spp_base_gis) module, which provides the underlying GIS data models, mapping capabilities, and spatial querying functionalities. This module acts as the API layer, making the rich geospatial information managed by `spp_base_gis` accessible to external systems.
 
-- **OpenSPP Base GIS:**  It directly leverages the GIS functionalities and data models provided by this module to process queries and return geospatial information.
-- **OpenSPP API: Oauth Module:**  It relies on the [spp_oauth](spp_oauth) module for handling API authentication, ensuring that only authorized clients can access the GIS data.
+For secure access, the module integrates with the [OpenSPP API: Oauth](spp_oauth) module. `spp_oauth` provides the robust OAuth 2.0 authentication framework, ensuring that all API requests to the GIS endpoints are properly authenticated and authorized before data is exposed. This synergy ensures both functionality and security for GIS data access.
 
-## API Endpoints
+## Additional Functionality
 
-The module exposes the following key API endpoints:
+### API Client Credential Management
 
-- `/v1/gisBB/oauth2/client/token`:  Used by clients to obtain access tokens through OAuth 2.0 flows.
-- `/v1/gisBB/query/locationalQuery`:  Performs locational queries based on coordinates and spatial relationships.
-- `/v1/gisBB/query/attributeQuery`:  Executes attribute-based queries to filter data. 
+The module enables administrators to create and manage credentials for various external applications that require access to OpenSPP's GIS APIs. Each client can be configured with a unique name and assigned specific authentication details. It supports both Bearer token (OAuth 2.0) and Basic authentication methods, generating unique Client IDs, Client Secrets, or Client Tokens as required.
 
-## Security
+### Secure Credential Viewing
 
-The module inherits its security model from the [spp_oauth](spp_oauth) module. All API endpoints are protected and require valid access tokens for authorization. This ensures that only authorized clients and applications can access and query the geospatial data.
+For enhanced security, sensitive API client credentials, such as the Client ID and Client Secret, are displayed only once upon their initial creation. This design choice prevents accidental exposure and encourages best practices for handling confidential access keys. If credentials are lost or compromised, administrators must generate new ones to maintain security.
+
+### Programmatic GIS Data Access
+
+This module provides the necessary RESTful API endpoints that allow authorized external systems to programmatically query and retrieve geospatial data. This includes accessing administrative boundaries (e.g., country > province > district), locations of program sites, or spatial data associated with beneficiaries. This capability is crucial for integrating OpenSPP's GIS information into custom dashboards, analytical platforms, or other applications that require real-time geospatial insights.
+
+### Access Token Generation
+
+The module includes functionality to generate time-limited access tokens for authenticated API clients. These tokens, typically valid for a short duration (e.g., 10 minutes), provide temporary authorization for API requests. This mechanism enhances security by limiting the window of opportunity for token misuse and requires clients to periodically refresh their access.
 
 ## Conclusion
 
-The `spp_base_gis_rest` module enhances the OpenSPP Base GIS module by providing a secure and standardized way to access and query geospatial data through RESTful API endpoints. This empowers external applications, services, and GIS clients to integrate with OpenSPP and leverage its geospatial capabilities. 
+The OpenSPP Base GIS REST module is critical for extending OpenSPP's geospatial capabilities, securely exposing GIS data via RESTful APIs for integration with external applications and services. It ensures that valuable geographic insights from social protection programs are accessible and actionable across a broader digital ecosystem.

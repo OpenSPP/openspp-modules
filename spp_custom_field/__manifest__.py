@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Custom Fields",
-    "summary": "Adds customizable fields to registrant profiles for enhanced data collection and program management in OpenSPP.",
+    "summary": "The module enables administrators to define and add custom data fields directly to registrant profiles, tailoring data collection for specific social protection programs. It supports field differentiation by registrant type, integrates new data points into records, and provides dedicated sections for read-only program indicators.",
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
     "sequence": 1,

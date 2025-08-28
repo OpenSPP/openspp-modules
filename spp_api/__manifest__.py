@@ -2,7 +2,7 @@
 
 {
     "name": "OpenSPP API",
-    "summary": "Provides a framework for building and managing a RESTful API for the OpenSPP platform, including API definition, documentation, security, and logging.",
+    "summary": "Establishes a RESTful API framework for OpenSPP, allowing external systems to securely read, create, update, and delete platform data. Customizable API endpoints, robust authentication, comprehensive logging, and flexible data field mapping enhance integration and auditing capabilities.",
     "category": "OpenSPP",
     "images": [
         "images/icon.png",

@@ -29,5 +29,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Manages ID card requests, approvals, batch printing, and distribution for registrants within social protection programs and farmer registries.",
+    "summary": "Manages the complete lifecycle of ID card requests for registrants, centralizing their creation, tracking, and final distribution. It streamlines approval workflows, automates ID card generation through integration with external services, and facilitates batch processing with comprehensive audit trails.",
 }

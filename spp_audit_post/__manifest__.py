@@ -17,5 +17,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Enables posting of audit log messages to related parent records, providing a centralized view of changes across interconnected data in social protection programs.",
+    "summary": "OpenSPP Audit Post extends core audit logging by automatically posting audit log messages to related parent records. It consolidates changes from child records onto the parent's communication timeline, leveraging the mail module for message posting.",
 }

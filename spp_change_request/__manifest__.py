@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Change Request",
-    "summary": "Streamlines the process of handling changes to registrant information within the OpenSPP system, providing a structured framework for submitting, reviewing, approving, and applying modifications.",
+    "summary": "The OpenSPP Change Request module streamlines the modification of registrant information through a structured, auditable framework. Configurable multi-stage validation workflows ensure proper review and approval, while a comprehensive audit trail records all actions before systematically applying approved changes to registrant records.",
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
     "sequence": 1,

@@ -26,5 +26,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Define eligibility criteria for programs based on registrant tags and geographical areas, automating beneficiary identification and improving targeting accuracy.",
+    "summary": "OpenSPP Eligibility Tags defines and manages program eligibility criteria based on registrant tags and geographical areas. It automates beneficiary identification by dynamically combining selected tags and areas, extending G2P Programs with a specific eligibility calculation method.",
 }

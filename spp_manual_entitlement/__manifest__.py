@@ -26,5 +26,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides a mechanism for manually creating entitlements for beneficiaries within specific program cycles in OpenSPP, offering flexibility for programs with unique eligibility criteria or situations not covered by automated rules.",
+    "summary": "Administrators directly create entitlements for beneficiaries within specific program cycles, accommodating exceptional eligibility criteria not covered by automated rules. A step-by-step wizard guides entitlement creation, preventing duplicates for beneficiaries within a program cycle and supporting scalable asynchronous processing.",
 }

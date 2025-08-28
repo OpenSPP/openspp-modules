@@ -25,5 +25,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Enables the issuance of Verifiable Credentials (VCs) for groups of registrants, integrating with group management to represent group identity and attributes.",
+    "summary": "Extends OpenSPP's Verifiable Credential issuance capabilities to manage and represent groups of registrants. Generates standardized VCs encapsulating group information from registry data, providing a verifiable digital identity for efficient verification and integration with group management.",
 }

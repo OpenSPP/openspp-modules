@@ -32,5 +32,5 @@
     "application": False,
     "installable": True,
     "auto_install": False,
-    "summary": "Enables the issuance and management of Verifiable Credentials (VCs) within the OpenSPP platform, leveraging OpenID Connect for Verifiable Presentations (OpenID4VP) to provide secure and verifiable digital credentials for registrants.",
+    "summary": "The module issues and manages Verifiable Credentials for OpenSPP program registrants, leveraging OpenID Connect for Verifiable Presentations. It generates QR codes for secure digital sharing, integrates registrant data into VCs, and ensures credential authenticity through digital signing and encryption.",
 }

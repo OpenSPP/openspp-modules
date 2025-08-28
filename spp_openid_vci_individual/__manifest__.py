@@ -18,5 +18,5 @@
     "installable": True,
     "auto_install": False,
     # odoo-upgrades
-    "summary": "Enables the issuance of Verifiable Credentials (VCs) for individual registrants within the OpenSPP platform, integrating with OpenID Connect for Verifiable Presentations and Decentralized Identifiers.",
+    "summary": "The spp_openid_vci_individual module extends OpenSPP's Verifiable Credential issuance to individual registrants, enabling secure digital identity and attribute proofs using OpenID4VP and DIDs. It integrates VC issuance directly into individual profiles, supporting verifiable presentations and customizable issuer configurations for program-specific data.",
 }

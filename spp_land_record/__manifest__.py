@@ -25,5 +25,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "This module enables the management and geospatial visualization of land records within OpenSPP, linking land parcels to farms, tracking ownership, and supporting land governance initiatives.",
+    "summary": "The OpenSPP Land Record module digitizes and centralizes land parcel information, linking it to associated farms, ownership details, and lease agreements. It captures and displays geographical boundaries and coordinates on interactive maps, supporting land use classification and program planning.",
 }

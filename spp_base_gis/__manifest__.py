@@ -35,5 +35,5 @@
     "installable": True,
     "auto_install": False,
     "pre_init_hook": "init_postgis",
-    "summary": "Provides Geographical Information System (GIS) capabilities to OpenSPP, enabling visualization and interaction with geospatial data on maps, integrating with modules like Registries and Targeting & Eligibility for enhanced program management.",
+    "summary": "This module stores and organizes geospatial data, including points, lines, and polygons, for visualization on interactive maps. It enables spatial querying, custom map layer configuration, and integrates location awareness across OpenSPP modules for targeted program management.",
 }

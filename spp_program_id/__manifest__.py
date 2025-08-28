@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Program ID",
-    "summary": "Generates and manages unique IDs for social protection programs, enhancing identification and integration within the OpenSPP platform.",
+    "summary": "Assigns and manages unique, immutable identifiers for every social protection program within the OpenSPP platform. This core component extends program records to ensure distinct identification, facilitating streamlined data management, enhanced reporting, and seamless system integration.",
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
     "sequence": 1,
