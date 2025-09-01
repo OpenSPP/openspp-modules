@@ -14,10 +14,10 @@
                 >
                     <block title="OAuth Settings">
                         <setting string="Private Key">
-                            <field name="oauth_priv_key" password="true"/>
+                            <field name="oauth_priv_key" password="true" />
                         </setting>
                         <setting string="Public Key">
-                            <field name="oauth_pub_key" password="true"/>
+                            <field name="oauth_pub_key" password="true" />
                         </setting>
                     </block>
                 </app>

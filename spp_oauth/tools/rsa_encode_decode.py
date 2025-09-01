@@ -42,7 +42,7 @@ def calculate_signature(env, header, payload):
     :param payload: The JWT payload.
     :return: The encoded JWT.
     """
-    
+
     privkey = get_private_key(env)
     return jwt.encode(headers=header, payload=payload, key=privkey, algorithm=JWT_ALGORITHM)
 
