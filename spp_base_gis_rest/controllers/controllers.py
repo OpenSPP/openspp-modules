@@ -108,7 +108,7 @@ def verify_auth_header():
     if auth_header.startswith("Bearer "):
         access_token = auth_header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
         try:
-            verify_and_decode_signature(access_token)
+            verify_and_decode_signature(request.env, access_token)
             verified = True
         except OpenSPPOAuthJWTException:
             verified = False

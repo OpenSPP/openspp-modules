@@ -233,7 +233,7 @@ def get_data_from_bearer_auth_header(header):
     normalized_token = header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
 
     try:
-        res = verify_and_decode_signature(normalized_token)
+        res = verify_and_decode_signature(request.env, normalized_token)
     except OpenSPPOAuthJWTException as e:
         raise werkzeug.exceptions.HTTPException(response=error_response(*CODE__no_user_auth)) from e
 

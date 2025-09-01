@@ -61,7 +61,7 @@ class ClientCredential(models.Model):
             "db_name": db_name,
         }
 
-        return calculate_signature(header, payload)
+        return calculate_signature(self.env, header, payload)
 
     def show_credentials(self):
         self.ensure_one()
