@@ -140,7 +140,7 @@ class SppDciApiServer(Controller):
         access_token = auth_header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
 
         try:
-            payload = verify_and_decode_signature(access_token)
+            payload = verify_and_decode_signature(request.env, access_token)
         except OpenSPPOAuthJWTException:
             return error_wrapper(401, "Invalid Access Token.")
 

@@ -82,7 +82,7 @@ class GisApiClientCredential(models.Model):
             "iss": "openspp:auth-service",
         }
 
-        return calculate_signature(header, payload)
+        return calculate_signature(self.env, header, payload)
 
     def show_credentials(self):
         self.ensure_one()
