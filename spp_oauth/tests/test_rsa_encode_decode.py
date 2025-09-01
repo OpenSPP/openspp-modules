@@ -18,7 +18,7 @@ class TestRSA(TransactionCase):
 
         header = {"typ": "JWT"}
         payload = {"data": "test"}
-        signature = calculate_signature(header, payload)
+        signature = calculate_signature(self.env, header, payload)
 
         self.assertEqual(signature, "mocked_signature")
 
@@ -30,6 +30,6 @@ class TestRSA(TransactionCase):
 
         access_token = "mocked_access_token"
 
-        decoded = verify_and_decode_signature(access_token)
+        decoded = verify_and_decode_signature(self.env, access_token)
 
         self.assertEqual(decoded, {"data": "test"})
