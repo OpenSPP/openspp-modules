@@ -12,7 +12,7 @@
                     name="spp_oauth_config_settings"
                     logo="/spp_attendance/static/description/icon.png"
                 >
-                    <block title="OAuth Settings">
+                    <block title="OAuth Settings (4096 bits RSA keys)">
                         <setting string="Private Key">
                             <field name="oauth_priv_key" password="true" />
                         </setting>
