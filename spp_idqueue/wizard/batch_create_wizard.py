@@ -90,7 +90,12 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
             batch_name = rec.name
             if batches_count > 1:
                 batch_name = _("%s - 1", rec.name)
-            batch_id = self.env["spp.print.queue.batch"].create({"name": batch_name})
+            vals = {
+                "name": batch_name,
+                "id_type": rec.id_type.id or False,
+                "idpass_id": rec.idpass_id.id or False,
+            }
+            batch_id = self.env["spp.print.queue.batch"].create(vals)
             current_batch_count = 1
             queue_ids = []
             for queue in rec.queue_ids:
@@ -103,7 +108,12 @@ class OpenSPPBatchCreateWizard(models.TransientModel):
                         queue_ids = []
                         if not current_batch_count == batches_count:
                             batch_name = f"{rec.name or ''} - {current_batch_count + 1}"
-                            batch_id = self.env["spp.print.queue.batch"].create({"name": batch_name})
+                            vals = {
+                                "name": batch_name,
+                                "id_type": rec.id_type.id or False,
+                                "idpass_id": rec.idpass_id.id or False,
+                            }
+                            batch_id = self.env["spp.print.queue.batch"].create(vals)
                             queue_ids.append([4, queue.id])
                             id_count = 1
                             current_batch_count += 1

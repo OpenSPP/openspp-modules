@@ -12,12 +12,14 @@ spp_idpass_requestor,ID Pass Requestor Access,spp_idpass.model_spp_id_pass,spp_i
 spp_idbatch_requestor,ID Batch Requestor Access,spp_idqueue.model_spp_print_queue_batch,spp_idqueue.group_g2p_id_requestor,1,1,1,0
 spp_batch_create_wizard_requestor,Batch Create Wizard Requestor Access,spp_idqueue.model_spp_batch_create_wizard,spp_idqueue.group_g2p_id_requestor,1,1,1,0
 spp_multi_id_request_wizard_requestor,Multiple ID Request Wizard Requestor Access,spp_idqueue.model_spp_multi_id_request_wizard,spp_idqueue.group_g2p_id_requestor,1,1,1,0
+spp_area_requestor,Area Requestor Access,spp_area_base.model_spp_area,spp_idqueue.group_g2p_id_requestor,1,1,1,0
 
 spp_idpass_valdiator,ID Pass Validator Access,spp_idpass.model_spp_id_pass,spp_idqueue.group_g2p_id_validator,1,1,1,0
 spp_idqueue_validator,ID Queue Validator Access,spp_idqueue.model_spp_print_queue_id,spp_idqueue.group_g2p_id_validator,1,1,1,0
 spp_idbatch_validator,ID Batch Validator Access,spp_idqueue.model_spp_print_queue_batch,spp_idqueue.group_g2p_id_validator,1,1,1,0
 spp_batch_create_wizard_validator,Batch Create Wizard Validator Access,spp_idqueue.model_spp_batch_create_wizard,spp_idqueue.group_g2p_id_validator,1,1,1,0
 spp_multi_id_request_wizard_validator,Multiple ID Request Wizard Validator Access,spp_idqueue.model_spp_multi_id_request_wizard,spp_idqueue.group_g2p_id_validator,1,1,1,0
+spp_area_validator,Area Validator Access,spp_area_base.model_spp_area,spp_idqueue.group_g2p_id_validator,1,1,1,0
 
 spp_idpass_distributor,ID Pass Distributor Access,spp_idpass.model_spp_id_pass,spp_idqueue.group_g2p_id_distributor,1,1,1,0
 spp_idqueue_distributor,ID Queue Distributor Access,spp_idqueue.model_spp_print_queue_id,spp_idqueue.group_g2p_id_distributor,1,1,1,0
@@ -25,3 +27,4 @@ ir_model_distributor_access,IR Model Data Distributor Access,base.model_ir_model
 spp_idbatch_distributor,ID Batch Distributor Access,spp_idqueue.model_spp_print_queue_batch,spp_idqueue.group_g2p_id_distributor,1,1,1,0
 spp_batch_create_wizard_distributor,Batch Create Wizard Distributor Access,spp_idqueue.model_spp_batch_create_wizard,spp_idqueue.group_g2p_id_distributor,1,1,1,0
 spp_multi_id_request_wizard_distributor,Multiple ID Request Wizard Distributor Access,spp_idqueue.model_spp_multi_id_request_wizard,spp_idqueue.group_g2p_id_distributor,1,1,1,0
+spp_area_distributor,Area Distributor Access,spp_area_base.model_spp_area,spp_idqueue.group_g2p_id_distributor,1,1,1,0

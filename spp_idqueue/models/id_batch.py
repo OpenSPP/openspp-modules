@@ -49,6 +49,8 @@ class OpenSPPPrintBatch(models.Model):
         ],
         default="draft",
     )
+    id_type = fields.Many2one("g2p.id.type")
+    idpass_id = fields.Many2one("spp.id.pass", string="ID Pass Template")
     approved_by = fields.Many2one("res.users")
     printed_by = fields.Many2one("res.users")
     distributed_by = fields.Many2one("res.users")
@@ -157,7 +159,10 @@ class OpenSPPPrintBatch(models.Model):
                 "date": datetime.now().strftime("%B %d, %Y at %H:%M"),
             }
             rec.save_to_mail_thread(message)
-            rec.pass_api_param()
+            if rec.idpass_id:
+                rec.pass_api_param()
+            else:
+                rec.merge_status = "merged"
         else:
             raise ValidationError(_("Some IDs are not generated"))
 
