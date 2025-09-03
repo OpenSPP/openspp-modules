@@ -4,7 +4,6 @@ import {Component} from "@odoo/owl";
 import {registry} from "@web/core/registry";
 import {useFileViewer} from "@web/core/file_viewer/file_viewer_hook";
 import {useService} from "@web/core/utils/hooks";
-import {url} from "@web/core/utils/urls";
 
 export class PreviewRecordWidget extends Component {
     setup() {
@@ -40,17 +39,13 @@ export class PreviewRecordWidget extends Component {
         if (record.mimetype === "application/pdf") {
             window.open(fileUrl, "_blank");
         } else {
-            const imageUrl = url("/web/image", {
-                model: resModel,
-                id: resId,
-                field: "content",
-            });
             const fileModel = {
-                isImage: true,
+                isImage: Boolean(record.mimetype.startsWith("image/")),
+                isVideo: Boolean(record.mimetype.startsWith("video/")),
                 isViewable: true,
                 displayName: record.name,
-                defaultSource: imageUrl,
-                downloadUrl: imageUrl,
+                defaultSource: fileUrl,
+                downloadUrl: fileUrl,
             };
 
             this.fileViewer.open(fileModel);
