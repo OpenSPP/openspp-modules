@@ -90,4 +90,49 @@
         />
     </record>
 
+    <!-- ID Requestor -->
+    <record id="role_id_requestor" model="res.users.role">
+        <field name="name">ID Requestor</field>
+        <field name="role_type">global</field>
+        <field name="comment">This role is allowed to read the Registry and Request IDs.</field>
+        <field
+            name="implied_ids"
+            eval="
+            [
+                Command.link(ref('base.group_user')),
+                Command.link(ref('spp_idqueue.group_g2p_id_requestor')),
+            ]"
+        />
+    </record>
+
+    <!-- ID Validator -->
+    <record id="role_id_validator" model="res.users.role">
+        <field name="name">ID Validator</field>
+        <field name="role_type">global</field>
+        <field name="comment">This role is allowed to Approve ID Requests.</field>
+        <field
+            name="implied_ids"
+            eval="
+            [
+                Command.link(ref('base.group_user')),
+                Command.link(ref('spp_idqueue.group_g2p_id_validator')),
+            ]"
+        />
+    </record>
+
+    <!-- ID Distributor -->
+    <record id="role_id_distributor" model="res.users.role">
+        <field name="name">ID Distributor</field>
+        <field name="role_type">global</field>
+        <field name="comment">This role is allowed to Generate, Print, and Distribute IDs.</field>
+        <field
+            name="implied_ids"
+            eval="
+            [
+                Command.link(ref('base.group_user')),
+                Command.link(ref('spp_idqueue.group_g2p_id_distributor')),
+            ]"
+        />
+    </record>
+
 </odoo>
