@@ -4,6 +4,7 @@ import {Component} from "@odoo/owl";
 import {registry} from "@web/core/registry";
 import {useFileViewer} from "@web/core/file_viewer/file_viewer_hook";
 import {useService} from "@web/core/utils/hooks";
+import {url} from "@web/core/utils/urls";
 
 export class PreviewRecordWidget extends Component {
     setup() {
@@ -39,16 +40,20 @@ export class PreviewRecordWidget extends Component {
         if (record.mimetype === "application/pdf") {
             window.open(fileUrl, "_blank");
         } else {
-            const attachment = this.store.Attachment.insert({
+            const imageUrl = url("/web/image", {
+                model: resModel,
                 id: resId,
-                filename: record.name || "",
-                name: record.name || "",
-                mimetype: record.mimetype,
-                model_name: resModel,
-                url: fileUrl,
+                field: "content",
             });
+            const fileModel = {
+                isImage: true,
+                isViewable: true,
+                displayName: record.name,
+                defaultSource: imageUrl,
+                downloadUrl: imageUrl,
+            };
 
-            this.fileViewer.open(attachment);
+            this.fileViewer.open(fileModel);
         }
     }
 }
