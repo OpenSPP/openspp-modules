@@ -2,12 +2,12 @@
     "name": "OpenSPP Change Request: Add Farmer",
     "summary": "Provides a specialized workflow for adding new farmers to existing groups in the registry.",
     "category": "OpenSPP",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "development_status": "Alpha",
+    "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "spp_change_request",
@@ -17,6 +17,11 @@
         "g2p_registry_membership",
         "spp_service_points",
         "spp_land_record",
+        "spp_idpass",
+    ],
+    "excludes": [
+        "spp_base",
+        "spp_change_request_create_group",
     ],
     "data": [
         "security/change_request_security.xml",

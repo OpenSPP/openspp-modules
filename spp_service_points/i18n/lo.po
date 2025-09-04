@@ -1,0 +1,419 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_service_points
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "<span class=\"o_stat_text\">Create SP User</span>"
+msgstr "<span class=\"o_stat_text\">ສ້າງຜູ້ໃຊ້ SP</span>"
+
+# Review needed: Glossary term 'disable' found, but target 'ພິການ' missing
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+#, fuzzy
+msgid "<span class=\"o_stat_text\">Disable</span>"
+msgstr "<span class=\"o_stat_text\">ປິດໃຊ້ງານ</span>"
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "<span class=\"o_stat_text\">Enable</span>"
+msgstr "<span class=\"o_stat_text\">ເປີດໃຊ້ງານ</span>"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_needaction
+msgid "Action Needed"
+msgstr "ຕ້ອງການການກະທຳ"
+
+# Review needed: Glossary term 'active' found, but target 'ດໍາເນີນຢູ່' missing
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__is_contract_active
+#, fuzzy
+msgid "Active Contract"
+msgstr "ສັນຍາທີ່ດຳເນີນຢູ່"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__shop_address
+msgid "Address"
+msgstr "ທີ່ຢູ່"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__name
+msgid "Agent"
+msgstr "ຕົວແທນ"
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Agent Name..."
+msgstr "ຊື່ຕົວແທນ..."
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Agent:"
+msgstr "ຕົວແທນ:"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__area_id
+#: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
+msgid "Area"
+msgstr "ພື້ນທີ່"
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Area Name..."
+msgstr "ຊື່ພື້ນທີ່..."
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Area:"
+msgstr "ພື້ນທີ່:"
+
+# Review needed: The term 'Attachment Count' could be phrased differently for
+# better flow, e.g., 'ຈຳນວນເອກະສານແນບ'. This translation is literal.
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_attachment_count
+#, fuzzy
+msgid "Attachment Count"
+msgstr "ຈຳນວນໄຟລ໌ແນບ"
+
+#. module: spp_service_points
+#: model_terms:ir.actions.act_window,help:spp_service_points.action_service_points
+msgid "Click the create button to enter a new service point."
+msgstr "ກົດປຸ່ມສ້າງເພື່ອປ້ອນຂໍ້ມູນຈຸດບໍລິການໃໝ່."
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__res_partner_company_id
+msgid "Company"
+msgstr "ບໍລິສັດ"
+
+# Review needed: Glossary term 'contact' found, but target 'ຕິດຕໍ່ພົວພັນ'
+# missing
+#. module: spp_service_points
+#. odoo-python
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format, fuzzy
+msgid "Company does not have contacts."
+msgstr "ບໍລິສັດບໍ່ມີຜູ້ຕິດຕໍ່."
+
+#. module: spp_service_points
+#: model:ir.ui.menu,name:spp_service_points.service_points_configuration_menu_root
+msgid "Configuration"
+msgstr "ການຕັ້ງຄ່າ"
+
+#. module: spp_service_points
+#: model:ir.model,name:spp_service_points.model_res_partner
+msgid "Contact"
+msgstr "ຕິດຕໍ່ພົວພັນ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__country_id
+msgid "Country"
+msgstr "ປະເທດ"
+
+#. module: spp_service_points
+#. odoo-python
+#: code:addons/spp_service_points/models/registrant.py:0
+#: code:addons/spp_service_points/tests/test_service_point.py:0
+#, python-format
+msgid "Create SP User"
+msgstr "ສ້າງຜູ້ໃຊ້ SP"
+
+#. module: spp_service_points
+#: model_terms:ir.actions.act_window,help:spp_service_points.action_service_points
+msgid "Create a new Service Point!"
+msgstr "ສ້າງຈຸດບໍລິການໃໝ່!"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__create_uid
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__create_date
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+# Review needed: Glossary term 'disable' found, but target 'ພິການ' missing;
+# Glossary term 'disabled' found, but target 'ພິການ' missing
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__disabled_date
+#, fuzzy
+msgid "Date Disabled"
+msgstr "ວັນທີປິດໃຊ້ງານ"
+
+# Review needed: Glossary term 'disable' found, but target 'ພິການ' missing
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__disabled_reason
+#, fuzzy
+msgid "Disable Reason"
+msgstr "ເຫດຜົນການປິດໃຊ້ງານ"
+
+# Review needed: Glossary term 'disable' found, but target 'ພິການ' missing
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+#, fuzzy
+msgid "Disable Service Point"
+msgstr "ປິດໃຊ້ງານຈຸດບໍລິການ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__is_disabled
+msgid "Disabled"
+msgstr "ພິການ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__display_name
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Enable Service Point"
+msgstr "ເປີດໃຊ້ງານຈຸດບໍລິການ"
+
+#. module: spp_service_points
+#. odoo-python
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format
+msgid "Error on individual {child_name}: {error}"
+msgstr "ຜິດພາດໃນສ່ວນບຸກຄົນ {child_name}: {error}"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_follower_ids
+msgid "Followers"
+msgstr "ຜູ້ຕິດຕາມ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "ຜູ້ຕິດຕາມ (ຄູ່ຮ່ວມງານ)"
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
+msgid "Group By"
+msgstr "ຈັດກຸ່ມຕາມ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__has_message
+msgid "Has Message"
+msgstr "ມີຂໍ້ຄວາມ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__id
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__id
+#, fuzzy
+msgid "ID"
+msgstr "ID"
+
+#. module: spp_service_points
+#: model:ir.model.fields,help:spp_service_points.field_spp_service_point__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "ຖ້າຖືກໝາຍຖືກ, ຂໍ້ຄວາມໃໝ່ຕ້ອງການຄວາມສົນໃຈຂອງທ່ານ."
+
+#. module: spp_service_points
+#: model:ir.model.fields,help:spp_service_points.field_spp_service_point__message_has_error
+#: model:ir.model.fields,help:spp_service_points.field_spp_service_point__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "ຖ້າຖືກໝາຍຖືກ, ບາງຂໍ້ຄວາມມີຂໍ້ຜິດພາດໃນການສົ່ງ."
+
+# Review needed: Assumed 'Ind' stands for 'Individual'. Needs confirmation if
+# 'Ind' has a specific Lao abbreviation in this context.
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_g2p_program_membership__ind_service_points_ids
+#: model:ir.model.fields,field_description:spp_service_points.field_res_partner__ind_service_points_ids
+#: model:ir.model.fields,field_description:spp_service_points.field_res_users__ind_service_points_ids
+#, fuzzy
+msgid "Ind Service Points"
+msgstr "ຈຸດບໍລິການສ່ວນບຸກຄົນ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__individual_ids
+msgid "Individual"
+msgstr "ບຸກຄົນ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_is_follower
+msgid "Is Follower"
+msgstr "ແມ່ນຜູ້ຕິດຕາມ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__write_uid
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ອັບເດດລ່າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__write_date
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ອັບເດດລ່າສຸດເມື່ອ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_has_error
+msgid "Message Delivery error"
+msgstr "ຂໍ້ຜິດພາດໃນການສົ່ງຂໍ້ຄວາມ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_ids
+msgid "Messages"
+msgstr "ຂໍ້ຄວາມ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_needaction_counter
+msgid "Number of Actions"
+msgstr "ຈຳນວນການກະທຳ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_has_error_counter
+msgid "Number of errors"
+msgstr "ຈຳນວນຂໍ້ຜິດພາດ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,help:spp_service_points.field_spp_service_point__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ຕ້ອງການການກະທຳ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,help:spp_service_points.field_spp_service_point__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ມີຂໍ້ຜິດພາດໃນການສົ່ງ"
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Open Area Details"
+msgstr "ເປີດລາຍລະອຽດພື້ນທີ່"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__phone_no
+msgid "Phone Number"
+msgstr "ເບີໂທລະສັບ"
+
+# Review needed: 'Sanitized' is a technical term meaning cleaned or formatted
+# for consistency. This translation attempts to convey that but might need
+# refinement by a domain expert.
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__phone_sanitized
+#, fuzzy
+msgid "Phone Sanitized"
+msgstr "ເບີໂທລະສັບທີ່ຖືກຈັດຮູບແບບ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "ຂໍ້ຜິດພາດໃນການສົ່ງ SMS"
+
+#. module: spp_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
+msgid "Search Service Points"
+msgstr "ຄົ້ນຫາຈຸດບໍລິການ"
+
+#. module: spp_service_points
+#: model:ir.actions.act_window,name:spp_service_points.action_service_points
+#: model:ir.model,name:spp_service_points.model_spp_service_point
+#: model:ir.ui.menu,name:spp_service_points.service_points_main_menu_root
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_points_form
+msgid "Service Point"
+msgstr "ຈຸດບໍລິການ"
+
+#. module: spp_service_points
+#: model:res.groups,name:spp_service_points.service_point_users
+msgid "Service Point User"
+msgstr "ຜູ້ໃຊ້ຈຸດບໍລິການ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_g2p_program_membership__service_point_ids
+#: model:ir.model.fields,field_description:spp_service_points.field_res_partner__service_point_ids
+#: model:ir.model.fields,field_description:spp_service_points.field_res_users__service_point_ids
+#: model:ir.ui.menu,name:spp_service_points.menu_service_points
+#: model_terms:ir.ui.view,arch_db:spp_service_points.view_service_point_groups_form
+msgid "Service Points"
+msgstr "ຈຸດບໍລິການ"
+
+#. module: spp_service_points
+#: model:ir.model,name:spp_service_points.model_spp_service_type
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_type__name
+#: model_terms:ir.ui.view,arch_db:spp_service_points.service_points_filter
+msgid "Service Type"
+msgstr "ປະເພດບໍລິການ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__service_type_ids
+msgid "Service Types"
+msgstr "ປະເພດບໍລິການ"
+
+#. module: spp_service_points
+#. odoo-python
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format
+msgid "Service point does not have company."
+msgstr "ຈຸດບໍລິການບໍ່ມີບໍລິສັດ."
+
+# Review needed: Glossary term 'disable' found, but target 'ພິການ' missing;
+# Glossary term 'disabled' found, but target 'ພິການ' missing; Confirming the
+# best translation for 'disabled' in this software context. Glossary term
+# 'ພິການ' is incorrect.
+#. module: spp_service_points
+#. odoo-python
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format, fuzzy
+msgid "Service point is already disabled."
+msgstr "ຈຸດບໍລິການຖືກປິດໃຊ້ງານຢູ່ແລ້ວ."
+
+#. module: spp_service_points
+#. odoo-python
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format
+msgid "Service point is already enabled."
+msgstr "ຈຸດບໍລິການຖືກເປີດໃຊ້ງານຢູ່ແລ້ວ."
+
+# Review needed: Glossary term 'contact' found, but target 'ຕິດຕໍ່ພົວພັນ'
+# missing
+#. module: spp_service_points
+#. odoo-python
+#: code:addons/spp_service_points/models/registrant.py:0
+#: code:addons/spp_service_points/tests/test_service_point.py:0
+#, python-format, fuzzy
+msgid "Successfully created users for the contacts of the company"
+msgstr "ສ້າງຜູ້ໃຊ້ສຳລັບຜູ້ຕິດຕໍ່ຂອງບໍລິສັດສຳເລັດແລ້ວ"
+
+#. module: spp_service_points
+#: model:ir.model,name:spp_service_points.model_res_users
+msgid "User"
+msgstr "ຜູ້ໃຊ້"
+
+#. module: spp_service_points
+#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__website_message_ids
+msgid "Website Messages"
+msgstr "ຂໍ້ຄວາມເວັບໄຊ"
+
+#. module: spp_service_points
+#: model:ir.model.fields,help:spp_service_points.field_spp_service_point__website_message_ids
+msgid "Website communication history"
+msgstr "ປະຫວັດການຕິດຕໍ່ເວັບໄຊ"
+
+#. module: spp_service_points
+#. odoo-python
+#: code:addons/spp_service_points/models/registrant.py:0
+#, python-format
+msgid "{child_name} does not have email."
+msgstr "{child_name} ບໍ່ມີອີເມວ."

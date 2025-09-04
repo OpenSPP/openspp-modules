@@ -1,0 +1,898 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_change_request_create_farm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid ""
+"<span class=\"o_stat_text\">Assign</span>\n"
+"                                <span class=\"o_stat_text\">To Me</span>"
+msgstr ""
+"<span class=\"o_stat_text\">ມອບໝາຍ</span> <span "
+"class=\"o_stat_text\">ໃຫ້ຂ້ອຍ</span>"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__registrant_id
+msgid "Add to Group"
+msgstr "ເພີ່ມໃສ່ກຸ່ມ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Additional Name"
+msgstr "ຊື່ເພີ່ມເຕີມ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__group_address
+msgid "Address"
+msgstr "ທີ່ຢູ່"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Address Coordinates"
+msgstr "ພິກັດທີ່ຢູ່"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_farm_activity
+msgid "Agricultural Activities"
+msgstr "ກິດຈະກຳດ້ານກະສິກຳ"
+
+# Review needed: Confirming the term 'ຟາມ' for Farm and 'ຄຳຮ້ອງຂໍ' for Request
+# in this context.
+#. module: spp_change_request_create_farm
+#: model:ir.ui.menu,name:spp_change_request_create_farm.menu_change_request_create_farm
+#, fuzzy
+msgid "All Create Farm Requests"
+msgstr "ຄຳຮ້ອງຂໍສ້າງຟາມທັງໝົດ"
+
+# Review needed: Confirming the standard Lao term for 'Applicant' in the
+# context of submitting a request.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__applicant_id
+#, fuzzy
+msgid "Applicant"
+msgstr "ຜູ້ຍື່ນຄຳຮ້ອງ"
+
+# Review needed: Depends on the confirmation of 'Applicant'.
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+#, fuzzy
+msgid "Applicant Information"
+msgstr "ຂໍ້ມູນຜູ້ຍື່ນຄຳຮ້ອງ"
+
+# Review needed: Depends on the confirmation of 'Applicant'.
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#, fuzzy
+msgid "Applicant's Phone #"
+msgstr "ເບີໂທລະສັບຜູ້ຍື່ນຄຳຮ້ອງ"
+
+# Review needed: Depends on the confirmation of 'Applicant'.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__applicant_phone
+#, fuzzy
+msgid "Applicant's Phone Number"
+msgstr "ເບີໂທລະສັບຜູ້ຍື່ນຄຳຮ້ອງ"
+
+# Review needed: Depends on the confirmation of 'Applicant'.
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+#, fuzzy
+msgid "Applicant:"
+msgstr "ຜູ້ຍື່ນຄຳຮ້ອງ:"
+
+# Review needed: Confirming the translation for 'Application' as 'ຄຳຮ້ອງ' in
+# this context.
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+#, fuzzy
+msgid "Application Details"
+msgstr "ລາຍລະອຽດຄຳຮ້ອງ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Apply Changes"
+msgstr "ນຳໃຊ້ການປ່ຽນແປງ"
+
+# Review needed: Depends on the confirmation of 'ຟາມ' for Farm.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_farm_activity__aqua_cr_farm_id
+#, fuzzy
+msgid "Aqua Farm"
+msgstr "ຟາມລ້ຽງສັດນ້ຳ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Aquaculture"
+msgstr "ການລ້ຽງສັດນ້ຳ"
+
+# Review needed: Glossary term 'agricultural activities' found, but target
+# 'ກິດຈະກຳດ້ານກະສິກຳ' missing
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farm_aqua_act_ids
+#, fuzzy
+msgid "Aquaculture Agricultural Activities"
+msgstr "ກິດຈະກຳກະສິກຳດ້ານການລ້ຽງສັດນ້ຳ"
+
+# Review needed: The term 'ຟາມຊັບສິນ' might be too literal. Needs context
+# check for a better term if available.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_farm_asset__asset_cr_farm_id
+#, fuzzy
+msgid "Asset Farm"
+msgstr "ຟາມຊັບສິນ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Assign To Me"
+msgstr "ມອບໝາຍໃຫ້ຂ້ອຍ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Assigned To"
+msgstr "ມອບໝາຍໃຫ້"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__assign_to_id
+msgid "Assigned to"
+msgstr "ມອບໝາຍໃຫ້"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.change_request_create_farm_filter
+msgid "Assigned to me"
+msgstr "ມອບໝາຍໃຫ້ຂ້ອຍ"
+
+# Review needed: Glossary term 'ການຕິດຂັດແຟ້ມ' seems too literal. Confirming
+# 'ໄຟລ໌ແນບ' or 'ເອກະສານຄັດຕິດ' as the standard term in Odoo.
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+#, fuzzy
+msgid "Attachments"
+msgstr "ໄຟລ໌ແນບ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Birth Certificate"
+msgstr "ໃບຢັ້ງຢືນການເກີດ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Birthdate"
+msgstr "ວັນເດືອນປີເກີດ"
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "Birthdate should not be on a later date."
+msgstr "ວັນເດືອນປີເກີດຕ້ອງບໍ່ແມ່ນວັນທີໃນອະນາຄົດ."
+
+# Review needed: Depends on the confirmation of 'Change Request'.
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+#, fuzzy
+msgid "Cancel Change Request"
+msgstr "ຍົກເລີກຄຳຮ້ອງຂໍການປ່ຽນແປງ"
+
+# Review needed: Confirming the standard Lao term for 'Change Request' in
+# Odoo.
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__change_request_id
+#, fuzzy
+msgid "Change Request"
+msgstr "ຄຳຮ້ອງຂໍການປ່ຽນແປງ"
+
+# Review needed: Depends on the confirmation of 'Change Request' and 'Farm'.
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_change_request_create_farm
+#, fuzzy
+msgid "Change Request Create Farm"
+msgstr "ຄຳຮ້ອງຂໍການປ່ຽນແປງສ້າງຟາມ"
+
+# Review needed: Depends on the confirmation of 'Change Request' and 'Farm'.
+#. module: spp_change_request_create_farm
+#: model:spp.gis.data.layer,name:spp_change_request_create_farm.gis_data_layer_cr_create_farm_coordinates
+#, fuzzy
+msgid "Change Request Farm Coordinates"
+msgstr "ພິກັດຟາມຂອງຄຳຮ້ອງຂໍການປ່ຽນແປງ"
+
+# Review needed: Confirming term for 'Geo Polygon'. Depends on confirmation of
+# 'Change Request' and 'Farm'.
+#. module: spp_change_request_create_farm
+#: model:spp.gis.data.layer,name:spp_change_request_create_farm.gis_data_layer_cr_create_farm_geo_polygon
+#, fuzzy
+msgid "Change Request Farm Geo Polygon"
+msgstr "ໂພລີກອນພູມສາດຟາມຂອງຄຳຮ້ອງຂໍການປ່ຽນແປງ"
+
+# Review needed: Glossary term 'farm land' found, but target 'ທີ່ດິນກະສິກຳ'
+# missing; Depends on the confirmation of 'Change Request' and 'Farm'.
+#. module: spp_change_request_create_farm
+#: model:spp.gis.raster.layer,name:spp_change_request_create_farm.gis_raster_layer_cr_create_farm_osm
+#, fuzzy
+msgid "Change Request Farm Land Information"
+msgstr "ຂໍ້ມູນທີ່ດິນຟາມຂອງຄຳຮ້ອງຂໍການປ່ຽນແປງ"
+
+# Review needed: Confirming terms for 'Validation Sequence'. Depends on
+# confirmation of 'Change Request'.
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_change_request_validation_sequence
+#, fuzzy
+msgid "Change Request Validation Sequence"
+msgstr "ລຳດັບການກວດສອບຄຳຮ້ອງຂໍການປ່ຽນແປງ"
+
+# Review needed: Depends on the confirmation of 'Change Request'.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_dms_directory__change_request_create_farm_id
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_dms_file__change_request_create_farm_id
+#, fuzzy
+msgid "Change request"
+msgstr "ຄຳຮ້ອງຂໍການປ່ຽນແປງ"
+
+# Review needed: Depends on the confirmation of 'Farm'.
+#. module: spp_change_request_create_farm
+#: model:ir.actions.act_window,name:spp_change_request_create_farm.action_change_request_create_farm_pending
+#: model:ir.ui.menu,name:spp_change_request_create_farm.menu_change_request_create_farm_for_validation
+#, fuzzy
+msgid "Create Farm"
+msgstr "ສ້າງຟາມ"
+
+# Review needed: Depends on the confirmation of 'Farm' and 'Change Request'.
+#. module: spp_change_request_create_farm
+#: model:ir.actions.act_window,name:spp_change_request_create_farm.action_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+#, fuzzy
+msgid "Create Farm Change Request"
+msgstr "ສ້າງຄຳຮ້ອງຂໍການປ່ຽນແປງຟາມ"
+
+# Review needed: Depends on the confirmation of 'Farm' and 'Change Request'.
+#. module: spp_change_request_create_farm
+#: model:ir.ui.menu,name:spp_change_request_create_farm.menu_change_request_create_farm_root
+#, fuzzy
+msgid "Create Farm Change Requests"
+msgstr "ສ້າງຄຳຮ້ອງຂໍການປ່ຽນແປງຟາມ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farm_crop_act_ids
+msgid "Crop Agricultural Activities"
+msgstr "ກິດຈະກຳດ້ານກະສິກຳກ່ຽວກັບພືດ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Crop Agriculture"
+msgstr "ກະສິກຳປູກພືດ"
+
+# Review needed: Depends on the confirmation of 'Farm'.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_farm_activity__crop_cr_farm_id
+#, fuzzy
+msgid "Crop Farm"
+msgstr "ຟາມປູກພືດ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__current_user_assigned
+msgid "Current User Assigned"
+msgstr "ຜູ້ໃຊ້ປັດຈຸບັນທີ່ຖືກມອບໝາຍ"
+
+# Review needed: Confirming the standard term for 'DMS Directories' in Odoo
+# context. Using 'ໄດເລກະທໍຣີ' instead of 'ຖານຮີບໂຮມ'.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__dms_directory_ids
+#, fuzzy
+msgid "DMS Directories"
+msgstr "ໄດເລກະທໍຣີ DMS"
+
+# Review needed: Depends on the confirmation of 'DMS Directory'.
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_dms_directory
+#, fuzzy
+msgid "DMS Directory"
+msgstr "ໄດເລກະທໍຣີ DMS"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_dms_file
+msgid "DMS File"
+msgstr "ໄຟລ໌ DMS"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__dms_file_ids
+msgid "DMS Files"
+msgstr "ໄຟລ໌ DMS"
+
+# Review needed: Depends on the confirmation of 'Validated'.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__date_validated
+#, fuzzy
+msgid "Date Validated"
+msgstr "ວັນທີກວດສອບ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__unknown
+msgid "Do not Know"
+msgstr "ບໍ່ຮູ້"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Do you have formal training in agriculture?"
+msgstr "ທ່ານເຄີຍໄດ້ຮັບການຝຶກອົບຮົມດ້ານກະສິກຳຢ່າງເປັນທາງການບໍ່?"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_email
+msgid "E-mail Address"
+msgstr "ທີ່ຢູ່ອີເມວ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Email"
+msgstr "ອີເມວ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Family Name"
+msgstr "ນາມສະກຸນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farm_asset_ids
+msgid "Farm Assets"
+msgstr "ຊັບສິນຂອງຟາມ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_farm_asset
+msgid "Farm Assets and Technology"
+msgstr "ຊັບສິນ ແລະ ເຕັກໂນໂລຊີຂອງຟາມ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Farm Details"
+msgstr "ລາຍລະອຽດຂອງຟາມ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Farm Land"
+msgstr "ທີ່ດິນກະສິກຳ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farm_machinery_ids
+msgid "Farm Machinery"
+msgstr "ເຄື່ອງຈັກຂອງຟາມ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Farmer"
+msgstr "ຊາວກະສິກອນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_addtnl_name
+msgid "Farmer Additional Name"
+msgstr "ຊື່ເພີ່ມເຕີມຂອງຊາວກະສິກອນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_birthdate
+msgid "Farmer Date of Birth"
+msgstr "ວັນເດືອນປີເກີດຂອງຊາວກະສິກອນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_family_name
+msgid "Farmer Family Name"
+msgstr "ນາມສະກຸນຂອງຊາວກະສິກອນ"
+
+# Review needed: Ambiguous source term "Formal Agricultural". Assumed it
+# relates to formal training/education in agriculture.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_formal_agricultural
+#, fuzzy
+msgid "Farmer Formal Agricultural"
+msgstr "ການຝຶກອົບຮົມກະສິກຳທາງການຂອງຊາວກະສິກອນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_given_name
+msgid "Farmer Given Name"
+msgstr "ຊື່ (ຊື່ແທ້) ຂອງຊາວກະສິກອນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_highest_education_level
+msgid "Farmer Highest Educational Level"
+msgstr "ລະດັບການສຶກສາສູງສຸດຂອງຊາວກະສິກອນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_household_size
+msgid "Farmer Household Size"
+msgstr "ຂະໜາດຄົວເຮືອນຂອງຊາວກະສິກອນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_marital_status
+msgid "Farmer Marital Status"
+msgstr "ສະຖານະການແຕ່ງງານຂອງຊາວກະສິກອນ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "File"
+msgstr "ແຟ້ມ"
+
+# Review needed: Ambiguous source term "Formal Agricultural". Assumed it
+# relates to formal training/education in agriculture. Using a shorter version
+# for the label.
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#, fuzzy
+msgid "Formal Agricultural"
+msgstr "ກະສິກຳທາງການ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Gender"
+msgstr "ເພດ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Given Name"
+msgstr "ຊື່ (ຊື່ແທ້)"
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "Group Details"
+msgstr "ລາຍລະອຽດກຸ່ມ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Group Information"
+msgstr "ຂໍ້ມູນກຸ່ມ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__group_kind
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Group Kind"
+msgstr "ປະເພດກຸ່ມ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__group_name
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Group Name"
+msgstr "ຊື່ກຸ່ມ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Household Size"
+msgstr "ຂະໜາດຄົວເຮືອນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__id
+msgid "ID"
+msgstr "ລະຫັດ"
+
+# Review needed: Translated "ID Document" as "ເອກະສານຢັ້ງຢືນຕົວຕົນ"
+# (Identification Document) for better clarity in Lao, as "ເອກະສານລະຫັດ" might
+# be confusing.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__id_document_details
+#, fuzzy
+msgid "ID Document"
+msgstr "ເອກະສານຢັ້ງຢືນຕົວຕົນ"
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "Incorrect phone number format"
+msgstr "ຮູບແບບເບີໂທລະສັບບໍ່ຖືກຕ້ອງ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__land_acreage
+msgid "Land Acreage"
+msgstr "ເນື້ອທີ່ດິນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__land_coordinates
+msgid "Land Coordinates"
+msgstr "ທີ່ຕັ້ງຂອງທີ່ດິນ"
+
+# Review needed: Translated "Land Polygons" as "ຂອບເຂດທີ່ດິນ (Polygons)" (Land
+# Boundaries (Polygons)) for clarity, as the literal translation
+# "ຮູບຫຼາຍແຈຂອງທີ່ດິນ" is awkward.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__land_geo_polygon
+#, fuzzy
+msgid "Land Polygons"
+msgstr "ຂອບເຂດທີ່ດິນ (Polygons)"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ປັບປຸງລ່າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ປັບປຸງລ່າສຸດເມື່ອ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__last_validated_by_id
+msgid "Last Validator"
+msgstr "ຜູ້ກວດສອບລ່າສຸດ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__leased
+msgid "Leased from actual owner"
+msgstr "ເຊົ່າຈາກເຈົ້າຂອງຕົວຈິງ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__details_legal_status
+msgid "Legal Status"
+msgstr "ສະຖານະທາງກົດໝາຍ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Livestock"
+msgstr "ສັດລ້ຽງ"
+
+# Review needed: Glossary term 'agricultural activities' found, but target
+# 'ກິດຈະກຳດ້ານກະສິກຳ' missing; Glossary term 'livestock' found, but target
+# 'ສັດລ້ຽງ' missing
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farm_live_act_ids
+#, fuzzy
+msgid "Livestock Agricultural Activities"
+msgstr "ກິດຈະກຳກະສິກຳດ້ານການລ້ຽງສັດ"
+
+# Review needed: Glossary term 'livestock' found, but target 'ສັດລ້ຽງ' missing
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_farm_activity__live_cr_farm_id
+#, fuzzy
+msgid "Livestock Farm"
+msgstr "ຟາມລ້ຽງສັດ"
+
+# Review needed: The source "Machinery Farm" is slightly awkward. It likely
+# refers to the farm associated with the machinery asset. Translated as "ຟາມ
+# (ສຳລັບເຄື່ອງຈັກ)" to clarify this relationship.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_farm_asset__machinery_cr_farm_id
+#, fuzzy
+msgid "Machinery Farm"
+msgstr "ຟາມ (ສຳລັບເຄື່ອງຈັກ)"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Marital Status"
+msgstr "ສະຖານະພາບການແຕ່ງງານ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_marital_status__married
+msgid "Married"
+msgstr "ແຕ່ງງານແລ້ວ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Mobile Number"
+msgstr "ເບີໂທລະສັບມືຖື"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_mobile_tel
+msgid "Mobile Telephone Number"
+msgstr "ເບີໂທລະສັບມືຖື"
+
+# Review needed: Translated "National ID Number" to the common Lao equivalent
+# "ເລກບັດປະຈຳຕົວປະຊາຊົນ" (Citizen ID Card Number) for cultural and practical
+# accuracy.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_national_id
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#, fuzzy
+msgid "National ID Number"
+msgstr "ເລກບັດປະຈຳຕົວປະຊາຊົນ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "New Group Information"
+msgstr "ຂໍ້ມູນກຸ່ມໃໝ່"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "New Group Member"
+msgstr "ສະມາຊິກກຸ່ມໃໝ່"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.actions.act_window,help:spp_change_request_create_farm.action_change_request_create_farm
+msgid "No 'Create Farm' change requests found!"
+msgstr "ບໍ່ພົບຄຳຮ້ອງຂໍການປ່ຽນແປງປະເພດ 'ສ້າງຟາມ'!"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.actions.act_window,help:spp_change_request_create_farm.action_change_request_create_farm_pending
+msgid "No pending 'Create Farm' change requests found!"
+msgstr "ບໍ່ພົບຄຳຮ້ອງຂໍການປ່ຽນແປງປະເພດ 'ສ້າງຟາມ' ທີ່ຄ້າງຢູ່!"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_highest_education_level__none
+msgid "None"
+msgstr "ບໍ່ມີ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Open Applicant Details"
+msgstr "ເປີດລາຍລະອຽດຜູ້ສະໝັກ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Other Documents"
+msgstr "ເອກະສານອື່ນໆ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Other Information"
+msgstr "ຂໍ້ມູນອື່ນໆ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__government
+msgid "Owned by Government"
+msgstr "ເປັນກຳມະສິດຂອງລັດຖະບານ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__cooperative
+msgid "Owned by cooperative"
+msgstr "ເປັນກຳມະສິດຂອງສະຫະກອນ"
+
+# Review needed: The term 'extended community' is slightly ambiguous in the
+# context of land ownership. This translation is literal and might need
+# cultural/legal refinement.
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__extended_community
+#, fuzzy
+msgid "Owned by extended community"
+msgstr "ເປັນກຳມະສິດຂອງຊຸມຊົນຂະຫຍາຍ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__family
+msgid "Owned by family"
+msgstr "ເປັນກຳມະສິດຂອງຄອບຄົວ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__self
+msgid "Owned by self"
+msgstr "ເປັນກຳມະສິດຂອງຕົນເອງ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__land_name
+msgid "Parcel Name/ID"
+msgstr "ຊື່/ລະຫັດຕອນດິນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.ui.menu,name:spp_change_request_create_farm.menu_change_request_create_farm_pending
+msgid "Pending Validation"
+msgstr "ລໍຖ້າການກວດສອບ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Phone No."
+msgstr "ເບີໂທລະສັບ."
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "Phone No. is required."
+msgstr "ກະລຸນາປ້ອນເບີໂທລະສັບ."
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_postal_address
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Postal Address"
+msgstr "ທີ່ຢູ່"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_highest_education_level__primary
+msgid "Primary"
+msgstr "ປະຖົມ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Production Systems"
+msgstr "ລະບົບການຜະລິດ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Reassign"
+msgstr "ມອບໝາຍໃໝ່"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request__registrant_id
+msgid "Registrant"
+msgstr "ຜູ້ລົງທະບຽນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__group_registration_date
+msgid "Registration Date"
+msgstr "ວັນທີລົງທະບຽນ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Reject"
+msgstr "ປະຕິເສດ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Reject Change Request"
+msgstr "ປະຕິເສດຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Request Details"
+msgstr "ລາຍລະອຽດຄຳຮ້ອງຂໍ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Request Form"
+msgstr "ແບບຟອມຄຳຮ້ອງຂໍ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Request No."
+msgstr "ເລກທີຄຳຮ້ອງຂໍ."
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__request_type
+msgid "Request Type"
+msgstr "ປະເພດຄຳຮ້ອງຂໍ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Request Type:"
+msgstr "ປະເພດຄຳຮ້ອງຂໍ:"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Request Validation"
+msgstr "ການກວດສອບຄຳຮ້ອງຂໍ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Reset to Draft"
+msgstr "ກັບຄືນເປັນສະບັບຮ່າງ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.change_request_create_farm_filter
+msgid "Search Change Request: Create Farm"
+msgstr "ຄົ້ນຫາຄຳຮ້ອງຂໍປ່ຽນແປງ: ສ້າງຟາມ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_highest_education_level__secondary
+msgid "Secondary"
+msgstr "ມັດທະຍົມ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_marital_status__separated
+msgid "Separated"
+msgstr "ແຍກກັນຢູ່"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_sex
+msgid "Sex"
+msgstr "ເພດ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_marital_status__single
+msgid "Single"
+msgstr "ໂສດ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__state
+msgid "Status"
+msgstr "ສະຖານະ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Technology and Assets"
+msgstr "ເຕັກໂນໂລຊີ ແລະ ຊັບສິນ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_highest_education_level__tertiary
+msgid "Tertiary"
+msgstr "ຂະແໜງບໍລິການ"
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "The Family Name is required!"
+msgstr "ຕ້ອງລະບຸນາມສະກຸນ"
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "The Given Name is required!"
+msgstr "ຕ້ອງລະບຸຊື່!"
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "The Group Kind is required!"
+msgstr "ຕ້ອງລະບຸປະເພດກຸ່ມ!"
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "The Group Name is required!"
+msgstr "ຕ້ອງລະບຸຊື່ກຸ່ມ!"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.actions.act_window,help:spp_change_request_create_farm.action_change_request_create_farm
+#: model_terms:ir.actions.act_window,help:spp_change_request_create_farm.action_change_request_create_farm_pending
+msgid "There are no records found based on the current filter."
+msgstr "ບໍ່ມີບັນທຶກໃດໆທີ່ກົງກັບຕົວກັ່ນຕອງປັດຈຸບັນ."
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Validate"
+msgstr "ກວດສອບ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Validate Change Request"
+msgstr "ກວດສອບຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Validation Group"
+msgstr "ກຸ່ມກວດສອບ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__validation_ids
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Validation Sequence"
+msgstr "ລຳດັບການກວດສອບ"
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_marital_status__widowed
+msgid "Widowed"
+msgstr "ເປັນໝ້າຍ"

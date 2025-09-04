@@ -32,6 +32,7 @@ class SppUsersBearerToken(models.TransientModel):
     def _compute_bearer_token(self):
         for rec in self:
             rec.calculated_token = calculate_signature(
+                env=rec.env,
                 header=None,
                 payload={
                     "database": rec.db_name,

@@ -1,0 +1,793 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_change_request_create_farm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid ""
+"<span class=\"o_stat_text\">Assign</span>\n"
+"                                <span class=\"o_stat_text\">To Me</span>"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__registrant_id
+msgid "Add to Group"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Additional Name"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__group_address
+msgid "Address"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Address Coordinates"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_farm_activity
+msgid "Agricultural Activities"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.ui.menu,name:spp_change_request_create_farm.menu_change_request_create_farm
+msgid "All Create Farm Requests"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__applicant_id
+msgid "Applicant"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Applicant Information"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Applicant's Phone #"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__applicant_phone
+msgid "Applicant's Phone Number"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Applicant:"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Application Details"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Apply Changes"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_farm_activity__aqua_cr_farm_id
+msgid "Aqua Farm"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Aquaculture"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farm_aqua_act_ids
+msgid "Aquaculture Agricultural Activities"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_farm_asset__asset_cr_farm_id
+msgid "Asset Farm"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Assign To Me"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Assigned To"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__assign_to_id
+msgid "Assigned to"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.change_request_create_farm_filter
+msgid "Assigned to me"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Attachments"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Birth Certificate"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Birthdate"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "Birthdate should not be on a later date."
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Cancel Change Request"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__change_request_id
+msgid "Change Request"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_change_request_create_farm
+msgid "Change Request Create Farm"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:spp.gis.data.layer,name:spp_change_request_create_farm.gis_data_layer_cr_create_farm_coordinates
+msgid "Change Request Farm Coordinates"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:spp.gis.data.layer,name:spp_change_request_create_farm.gis_data_layer_cr_create_farm_geo_polygon
+msgid "Change Request Farm Geo Polygon"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:spp.gis.raster.layer,name:spp_change_request_create_farm.gis_raster_layer_cr_create_farm_osm
+msgid "Change Request Farm Land Information"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_change_request_validation_sequence
+msgid "Change Request Validation Sequence"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_dms_directory__change_request_create_farm_id
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_dms_file__change_request_create_farm_id
+msgid "Change request"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.actions.act_window,name:spp_change_request_create_farm.action_change_request_create_farm_pending
+#: model:ir.ui.menu,name:spp_change_request_create_farm.menu_change_request_create_farm_for_validation
+msgid "Create Farm"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.actions.act_window,name:spp_change_request_create_farm.action_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Create Farm Change Request"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.ui.menu,name:spp_change_request_create_farm.menu_change_request_create_farm_root
+msgid "Create Farm Change Requests"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farm_crop_act_ids
+msgid "Crop Agricultural Activities"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Crop Agriculture"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_farm_activity__crop_cr_farm_id
+msgid "Crop Farm"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__current_user_assigned
+msgid "Current User Assigned"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__dms_directory_ids
+msgid "DMS Directories"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_dms_directory
+msgid "DMS Directory"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_dms_file
+msgid "DMS File"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__dms_file_ids
+msgid "DMS Files"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__date_validated
+msgid "Date Validated"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__unknown
+msgid "Do not Know"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Do you have formal training in agriculture?"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_email
+msgid "E-mail Address"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Email"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Family Name"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farm_asset_ids
+msgid "Farm Assets"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model,name:spp_change_request_create_farm.model_spp_farm_asset
+msgid "Farm Assets and Technology"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Farm Details"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Farm Land"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farm_machinery_ids
+msgid "Farm Machinery"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Farmer"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_addtnl_name
+msgid "Farmer Additional Name"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_birthdate
+msgid "Farmer Date of Birth"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_family_name
+msgid "Farmer Family Name"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_formal_agricultural
+msgid "Farmer Formal Agricultural"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_given_name
+msgid "Farmer Given Name"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_highest_education_level
+msgid "Farmer Highest Educational Level"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_household_size
+msgid "Farmer Household Size"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_marital_status
+msgid "Farmer Marital Status"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "File"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Formal Agricultural"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Gender"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Given Name"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "Group Details"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Group Information"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__group_kind
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Group Kind"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__group_name
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Group Name"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Household Size"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__id_document_details
+msgid "ID Document"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "Incorrect phone number format"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__land_acreage
+msgid "Land Acreage"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__land_coordinates
+msgid "Land Coordinates"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__land_geo_polygon
+msgid "Land Polygons"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__last_validated_by_id
+msgid "Last Validator"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__leased
+msgid "Leased from actual owner"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__details_legal_status
+msgid "Legal Status"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Livestock"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farm_live_act_ids
+msgid "Livestock Agricultural Activities"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_farm_activity__live_cr_farm_id
+msgid "Livestock Farm"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_farm_asset__machinery_cr_farm_id
+msgid "Machinery Farm"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Marital Status"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_marital_status__married
+msgid "Married"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Mobile Number"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_mobile_tel
+msgid "Mobile Telephone Number"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_national_id
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "National ID Number"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "New Group Information"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "New Group Member"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.actions.act_window,help:spp_change_request_create_farm.action_change_request_create_farm
+msgid "No 'Create Farm' change requests found!"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.actions.act_window,help:spp_change_request_create_farm.action_change_request_create_farm_pending
+msgid "No pending 'Create Farm' change requests found!"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_highest_education_level__none
+msgid "None"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Open Applicant Details"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Other Documents"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Other Information"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__government
+msgid "Owned by Government"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__cooperative
+msgid "Owned by cooperative"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__extended_community
+msgid "Owned by extended community"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__family
+msgid "Owned by family"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__details_legal_status__self
+msgid "Owned by self"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__land_name
+msgid "Parcel Name/ID"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.ui.menu,name:spp_change_request_create_farm.menu_change_request_create_farm_pending
+msgid "Pending Validation"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Phone No."
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "Phone No. is required."
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_postal_address
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Postal Address"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_highest_education_level__primary
+msgid "Primary"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Production Systems"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Reassign"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request__registrant_id
+msgid "Registrant"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__group_registration_date
+msgid "Registration Date"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Reject"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Reject Change Request"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Request Details"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Request Form"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Request No."
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__request_type
+msgid "Request Type"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Request Type:"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Request Validation"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Reset to Draft"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.change_request_create_farm_filter
+msgid "Search Change Request: Create Farm"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_highest_education_level__secondary
+msgid "Secondary"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_marital_status__separated
+msgid "Separated"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__farmer_sex
+msgid "Sex"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_marital_status__single
+msgid "Single"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__state
+msgid "Status"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Technology and Assets"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_highest_education_level__tertiary
+msgid "Tertiary"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "The Family Name is required!"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "The Given Name is required!"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "The Group Kind is required!"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#. odoo-python
+#: code:addons/spp_change_request_create_farm/models/change_request_create_farm.py:0
+#, python-format
+msgid "The Group Name is required!"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.actions.act_window,help:spp_change_request_create_farm.action_change_request_create_farm
+#: model_terms:ir.actions.act_window,help:spp_change_request_create_farm.action_change_request_create_farm_pending
+msgid "There are no records found based on the current filter."
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Validate"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_validation_form
+msgid "Validate Change Request"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Validation Group"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields,field_description:spp_change_request_create_farm.field_spp_change_request_create_farm__validation_ids
+#: model_terms:ir.ui.view,arch_db:spp_change_request_create_farm.view_change_request_create_farm_form
+msgid "Validation Sequence"
+msgstr ""
+
+#. module: spp_change_request_create_farm
+#: model:ir.model.fields.selection,name:spp_change_request_create_farm.selection__spp_change_request_create_farm__farmer_marital_status__widowed
+msgid "Widowed"
+msgstr ""

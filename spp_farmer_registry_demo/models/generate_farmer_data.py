@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 
 from odoo import Command, api, fields, models
 
+from odoo.addons.queue_job.delay import group
 from odoo.addons.spp_base_demo.locale_providers import create_faker
 
 from .. import tools
@@ -57,30 +58,65 @@ class SPPGenerateFarmerData(models.Model):
         required=True,
     )
 
+    locked = fields.Boolean(default=False)
+    locked_reason = fields.Char(readonly=True)
+
+    GROUPS_PER_BATCH = 100
+
     def generate_sample_data(self):
-        batches = math.ceil(self.num_groups / 1000)
+        batches = math.ceil(self.num_groups / self.GROUPS_PER_BATCH)
+
+        self.locked = True
+        self.locked_reason = "Generating Sample Data"
+        num_groups = self.num_groups
+
+        jobs = []
 
         for _ in range(0, batches):
+            jobs.append(self.delayable()._generate_sample_data(res=self, num_groups=num_groups))
+            batch_num_groups = min(num_groups, self.GROUPS_PER_BATCH)
+            num_groups -= batch_num_groups
             # self.with_delay()._generate_sample_data(res_id=self.id)
-            self._generate_sample_data(res=self)
+            # self._generate_sample_data(res=self)
+
+        main_job = group(*jobs)
+        main_job.on_done(self.delayable()._mark_done())
+        main_job.delay()
+
+    def _mark_done(self):
+        self.ensure_one()
+        self.locked = False
+        self.locked_reason = ""
+
+    def refresh_page(self):
+        """
+        The function `refresh_page` returns a dictionary with the type and tag values to reload the
+        page.
+        :return: The code is returning a dictionary with two key-value pairs. The "type" key has the
+        value "ir.actions.client" and the "tag" key has the value "reload".
+        """
+        return {
+            "type": "ir.actions.client",
+            "tag": "reload",
+        }
 
     @api.model
     def _generate_sample_data(self, **kwargs):
         res = kwargs.get("res")
+        num_groups = kwargs.get("num_groups")
 
         kind_farm_id = self.env.ref("spp_farmer_registry_base.kind_farm").id
 
         fake = create_faker(res.locale)
 
         # Get available gender field selections
-        options = self.env["gender.type"].search([])
-        sex_choices = [option.value for option in options]
-        sex_choice_range = sex_choices * 50
+        gender_choices = self.env["gender.type"].search([]).mapped("id")
+        gender_choice_range = gender_choices * 50
 
-        num_groups = min(res.num_groups, 1000)
+        num_groups = min(num_groups, self.GROUPS_PER_BATCH)
 
         for i in range(0, num_groups):
-            group_id = res._generate_group_data(i, fake, sex_choice_range, kind_farm_id)
+            group_id = res._generate_group_data(i, fake, gender_choice_range, kind_farm_id)
 
             land_record_id = res._generate_land_record_record(group_id, res.locale)
             group_id.farm_land_rec_id = land_record_id.id
@@ -142,8 +178,8 @@ class SPPGenerateFarmerData(models.Model):
 
         return {"result": msg, "res_model": self._name, "res_ids": [res.id]}
 
-    def _generate_group_data(self, index, fake, sex_choice_range, kind_id):
-        sex = random.choice(sex_choice_range)
+    def _generate_group_data(self, index, fake, gender_choice_range, kind_id):
+        sex = random.choice(gender_choice_range)
         last_name = fake.last_name()
         first_name = fake.first_name_male() if sex == "Male" else fake.first_name_female()
         addl_name = fake.first_name_male() if sex == "Male" else fake.first_name_female()

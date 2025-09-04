@@ -1,0 +1,146 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_land_record
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__aquaculture
+msgid "Aquaculture"
+msgstr "ການລ້ຽງສັດນ້ຳ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__cultivation
+msgid "Cultivation"
+msgstr "ການປູກຝັງ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__fallow
+msgid "Fallow"
+msgstr "ດິນປະ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_farm_id
+msgid "Farm"
+msgstr "ຟາມ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__id
+msgid "ID"
+msgstr "ລະຫັດ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_acreage
+msgid "Land Acreage"
+msgstr "ເນື້ອທີ່ດິນ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_coordinates
+msgid "Land Coordinates"
+msgstr "ທີ່ຕັ້ງຂອງທີ່ດິນ"
+
+# Review needed: Technical term for geographic data representation. Need
+# confirmation if "ຂອບເຂດທີ່ດິນ" is the standard way to refer to land polygon
+# data in Lao GIS/mapping contexts within Odoo. A more literal translation
+# like "ຮູບຫຼາຍແຈທີ່ດິນ" might be possible but less intuitive.
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_geo_polygon
+#, fuzzy
+msgid "Land Polygons"
+msgstr "ຂອບເຂດທີ່ດິນ"
+
+#. module: spp_land_record
+#: model:ir.model,name:spp_land_record.model_spp_land_record
+msgid "Land Record Details"
+msgstr "ລາຍລະອຽດຂໍ້ມູນທີ່ດິນ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_use
+msgid "Land Use"
+msgstr "ການນຳໃຊ້ທີ່ດິນ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ແກ້ໄຂຫຼ້າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ແກ້ໄຂຫຼ້າສຸດເມື່ອ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__lease_end
+msgid "Lease End"
+msgstr "ວັນສິ້ນສຸດການເຊົ່າ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__lease_start
+msgid "Lease Start"
+msgstr "ວັນເລີ່ມຕົ້ນການເຊົ່າ"
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__leased_out
+msgid "Leased Out"
+msgstr "ໃຫ້ເຊົ່າ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__lessee_id
+msgid "Lessee"
+msgstr "ຜູ້ເຊົ່າ"
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__livestock
+msgid "Livestock"
+msgstr "ສັດລ້ຽງ"
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__mixed
+msgid "Mixed Use"
+msgstr "ນຳໃຊ້ແບບປະສົມ"
+
+#. module: spp_land_record
+#: model:ir.model.fields.selection,name:spp_land_record.selection__spp_land_record__land_use__other
+msgid "Other"
+msgstr "ອື່ນໆ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__owner_id
+msgid "Owner"
+msgstr "ເຈົ້າຂອງ"
+
+#. module: spp_land_record
+#: model:ir.model.fields,field_description:spp_land_record.field_spp_land_record__land_name
+msgid "Parcel Name/ID"
+msgstr "ຊື່/ລະຫັດຕອນດິນ"

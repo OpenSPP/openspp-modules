@@ -10,8 +10,7 @@ class SppAuditLog(models.Model):
     _description = "SPP Audit Log"
     _order = "create_date desc, id desc"
 
-    # TODO: should we need to connect spp.audit.log to spp.audit.rule?
-    # audit_rule_id = fields.Many2one('spp.audit.rule', required=True)
+    audit_rule_id = fields.Many2one("spp.audit.rule", required=True)
     name = fields.Char("Resource Name", size=256, compute="_compute_name")
     create_date = fields.Datetime("Date", readonly=True)
     user_id = fields.Many2one("res.users", "User", required=True, readonly=True)

@@ -5,12 +5,12 @@
     "name": "OpenSPP Farmer Registry Base",
     "summary": "Base module for managing farmer registries, linking farmers to farms, land, and agricultural activities.",
     "category": "OpenSPP",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "base",
@@ -20,15 +20,22 @@
         "g2p_registry_membership",
         "spp_base_gis",
         "spp_land_record",
+        "spp_hide_menus",
         "base_import",
+    ],
+    "excludes": [
+        "spp_base",
     ],
     "external_dependencies": {"python": ["shapely", "geojson", "simplejson", "pyproj"]},
     "data": [
+        "security/security.xml",
         "security/ir.model.access.csv",
+        "views/farm_season_view.xml",
         "data/kind_data.xml",
         "data/id_data.xml",
         "views/res_partner.xml",
         "views/configuration_view.xml",
+        "views/res_users.xml",
     ],
     "assets": {
         "web.assets_backend": [
@@ -37,7 +44,7 @@
     },
     "demo": [],
     "images": [],
-    "application": False,
+    "application": True,
     "installable": True,
     "auto_install": False,
 }

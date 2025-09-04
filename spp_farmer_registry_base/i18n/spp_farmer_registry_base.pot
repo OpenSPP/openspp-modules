@@ -14,6 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "%s (Copy)"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_g2p_program_membership__farm_size_idle
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_partner__farm_size_idle
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__farm_size_idle
@@ -46,8 +53,32 @@ msgid "Acreage Under Livestock"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_form
+msgid "Activate"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__active
+#: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__spp_farm_season__state__active
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_search
+msgid "Active"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__activity_count
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_form
+msgid "Activities"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_activity__activity_type
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__activity_type
 msgid "Activity Type"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_form
+msgid "Add a description..."
 msgstr ""
 
 #. module: spp_farmer_registry_base
@@ -67,7 +98,23 @@ msgstr ""
 
 #. module: spp_farmer_registry_base
 #: model:ir.model,name:spp_farmer_registry_base.model_spp_farm_activity
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__activity_ids
 msgid "Agricultural Activities"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model,name:spp_farmer_registry_base.model_spp_farm_season
+msgid "Agricultural Season"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.actions.act_window,name:spp_farmer_registry_base.action_spp_farm_season
+msgid "Agricultural Seasons"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__allow_overlap
+msgid "Allow Overlap with Other Seasons"
 msgstr ""
 
 #. module: spp_farmer_registry_base
@@ -87,6 +134,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_partner__farm_aqua_act_ids
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__farm_aqua_act_ids
 msgid "Aquaculture Agricultural Activities"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_search
+msgid "Archived"
 msgstr ""
 
 #. module: spp_farmer_registry_base
@@ -112,6 +164,52 @@ msgid "Both"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__can_activate
+msgid "Can Activate"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__can_close
+msgid "Can Close"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__can_edit
+msgid "Can Edit"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid ""
+"Cannot close season with ongoing activities. Please complete or cancel them "
+"first."
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/agricultural_activity.py:0
+#: code:addons/spp_farmer_registry_base/models/agricultural_activity.py:0
+#, python-format
+msgid "Cannot modify activities in closed seasons"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "Cannot reactivate closed season with existing activities"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "Cannot reset to draft when activities exist"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_chemical__name
 msgid "Chemical Interventions Type"
 msgstr ""
@@ -127,6 +225,31 @@ msgid "Click the create button to enter a new species."
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_form
+msgid "Close"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__spp_farm_season__state__closed
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_search
+msgid "Closed"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "Closed seasons cannot be deleted"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "Closed seasons cannot be reopened"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__spp_farm_activity__purpose__commercial
 msgid "Commercial"
 msgstr ""
@@ -137,6 +260,11 @@ msgid "Contact"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model_terms:ir.actions.act_window,help:spp_farmer_registry_base.action_spp_farm_season
+msgid "Create your first agricultural season!"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_asset_type__create_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_machinery_type__create_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_activity__create_uid
@@ -144,6 +272,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_chemical__create_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_details__create_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_extension__create_uid
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__create_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_species__create_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farmer__create_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_feed_items__create_uid
@@ -159,6 +288,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_chemical__create_date
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_details__create_date
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_extension__create_date
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__create_date
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_species__create_date
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farmer__create_date
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_feed_items__create_date
@@ -198,7 +328,14 @@ msgid "Cultivation Method"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_search
+msgid "Current Season"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__description
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_species__description
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_form
 msgid "Description"
 msgstr ""
 
@@ -218,6 +355,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_chemical__display_name
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_details__display_name
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_extension__display_name
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__display_name
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_species__display_name
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farmer__display_name
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_feed_items__display_name
@@ -238,11 +376,31 @@ msgid "Do you have formal training in agriculture?"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__spp_farm_season__state__draft
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_search
+msgid "Draft"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_g2p_program_membership__farmer_email
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_partner__farmer_email
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__farmer_email
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farmer__farmer_email
 msgid "E-mail Address"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__date_end
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_search
+msgid "End Date"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#: model:ir.model.constraint,message:spp_farmer_registry_base.constraint_spp_farm_season_date_check
+#, python-format
+msgid "End date must be after start date"
 msgstr ""
 
 #. module: spp_farmer_registry_base
@@ -332,6 +490,16 @@ msgid "Farm Machinery"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model:ir.module.category,name:spp_farmer_registry_base.module_category_spp_farm
+msgid "Farm Management"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:res.groups,name:spp_farmer_registry_base.group_spp_farm_manager
+msgid "Farm Manager"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_g2p_program_membership__farm_total_size
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_partner__farm_total_size
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__farm_total_size
@@ -348,8 +516,13 @@ msgid "Farm Type"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model:res.groups,name:spp_farmer_registry_base.group_spp_farm_user
+msgid "Farm User"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #. odoo-python
-#: code:addons/spp_farmer_registry_base/models/farm.py:0
+#: code:addons/spp_farmer_registry_base/models/group_membership.py:0
 #, python-format
 msgid "Farm must have a head member."
 msgstr ""
@@ -399,13 +572,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__farmer_given_name
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farmer__farmer_given_name
 msgid "Farmer Given Name"
-msgstr ""
-
-#. module: spp_farmer_registry_base
-#. odoo-python
-#: code:addons/spp_farmer_registry_base/models/base_import.py:0
-#, python-format
-msgid "Farmer Given Name or Farmer Family Name is required"
 msgstr ""
 
 #. module: spp_farmer_registry_base
@@ -473,6 +639,24 @@ msgid "GPS Coordinates"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_g2p_group_membership__individual_gender
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_g2p_program_membership__gender
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_partner__gender
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__gender
+msgid "Gender"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_search
+msgid "Group By"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model,name:spp_farmer_registry_base.model_g2p_group_membership
+msgid "Group Membership"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_g2p_program_membership__highest_education_level
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_partner__highest_education_level
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__highest_education_level
@@ -487,11 +671,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_chemical__id
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_details__id
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_extension__id
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__id
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_species__id
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farmer__id
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_feed_items__id
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_fertilizer__id
 msgid "ID"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,help:spp_farmer_registry_base.field_spp_farm_season__allow_overlap
+msgid "If checked, this season can overlap with other active seasons"
 msgstr ""
 
 #. module: spp_farmer_registry_base
@@ -566,6 +756,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_chemical__write_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_details__write_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_extension__write_uid
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__write_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_species__write_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farmer__write_uid
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_feed_items__write_uid
@@ -581,6 +772,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_chemical__write_date
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_details__write_date
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_extension__write_date
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__write_date
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_species__write_date
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farmer__write_date
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_feed_items__write_date
@@ -698,6 +890,34 @@ msgid "None"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "Only active seasons can be closed"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "Only draft seasons can be activated"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "Only managers can create seasons"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model_terms:ir.actions.act_window,help:spp_farmer_registry_base.action_spp_farm_season
+msgid ""
+"Organize your farming activities by seasons to better track and manage "
+"agricultural operations."
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__spp_farm_details__details_legal_status__government
 msgid "Owned by Government"
 msgstr ""
@@ -774,6 +994,39 @@ msgid "Relevant if land use is cultivation or mixed"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_form
+msgid "Reset to Draft"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_activity__season_id
+msgid "Season"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "Season Activities"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__name
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_form
+msgid "Season Name"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.constraint,message:spp_farmer_registry_base.constraint_spp_farm_season_name_uniq
+msgid "Season name must be unique!"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.ui.menu,name:spp_farmer_registry_base.menu_farm_season
+msgid "Seasons"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__res_partner__highest_education_level__secondary
 #: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__spp_farmer__farmer_highest_education_level__secondary
 msgid "Secondary"
@@ -825,6 +1078,18 @@ msgid "Species Name"
 msgstr ""
 
 #. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__date_start
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_search
+msgid "Start Date"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#: model:ir.model.fields,field_description:spp_farmer_registry_base.field_spp_farm_season__state
+#: model_terms:ir.ui.view,arch_db:spp_farmer_registry_base.view_spp_farm_season_search
+msgid "Status"
+msgstr ""
+
+#. module: spp_farmer_registry_base
 #: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__spp_farm_activity__purpose__subsistence
 msgid "Subsistence"
 msgstr ""
@@ -843,6 +1108,15 @@ msgstr ""
 #: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__res_partner__highest_education_level__tertiary
 #: model:ir.model.fields.selection,name:spp_farmer_registry_base.selection__spp_farmer__farmer_highest_education_level__tertiary
 msgid "Tertiary"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid ""
+"This season overlaps with existing active seasons: %s. If this is intended, "
+"please use the 'Allow Overlap' option."
 msgstr ""
 
 #. module: spp_farmer_registry_base
@@ -871,4 +1145,41 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_partner__experience_years
 #: model:ir.model.fields,field_description:spp_farmer_registry_base.field_res_users__experience_years
 msgid "Years of Experience"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "You don't have permission to activate seasons"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "You don't have permission to close seasons"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "You don't have permission to delete this season"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#: code:addons/spp_farmer_registry_base/models/farm_season.py:0
+#, python-format
+msgid "You don't have permission to modify this season"
+msgstr ""
+
+#. module: spp_farmer_registry_base
+#. odoo-python
+#: code:addons/spp_farmer_registry_base/models/base_import.py:0
+#, python-format
+msgid ""
+"farmer_given_name and farmer_family_name must be present in the excel file."
 msgstr ""

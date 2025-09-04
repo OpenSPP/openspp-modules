@@ -1,0 +1,489 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_idpass
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+# Review needed: Ambiguous source term "Issue". Could mean "Problem" (ບັນຫາ),
+# "Topic" (ປະເດັນ), or relate to the action "Issue Card" (ອອກບັດ). Needs UI
+# context to confirm.
+#. module: spp_idpass
+#: model_terms:ir.ui.view,arch_db:spp_idpass.view_groups_idpass_form
+#: model_terms:ir.ui.view,arch_db:spp_idpass.view_individuals_idpass_form
+#, fuzzy
+msgid "<span class=\"o_stat_text\">Issue</span>"
+msgstr "<span class=\"o_stat_text\">ປະເດັນ</span>"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__api_password
+msgid "API Password"
+msgstr "ລະຫັດຜ່ານ API"
+
+# Review needed: Missing Lao characters
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__api_url
+#, fuzzy
+msgid "API URL"
+msgstr "URL API"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__api_username
+msgid "API Username"
+msgstr "ຊື່ຜູ້ໃຊ້ API"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_needaction
+msgid "Action Needed"
+msgstr "ຕ້ອງການດຳເນີນການ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__is_active
+msgid "Active"
+msgstr "ດໍາເນີນຢູ່"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_attachment_count
+msgid "Attachment Count"
+msgstr "ຈຳນວນໄຟລ໌ແນບ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Kept technical term "Auth Token" in English. Verify if Lao equivalent is
+# preferred (e.g., ໂທເຄັນຢືນຢັນຕົວຕົນ).
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__auth_token
+#, fuzzy
+msgid "Auth Token"
+msgstr "Auth Token"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Kept technical term "Auth Token Url" in English. Verify if Lao equivalent is
+# preferred.
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__auth_token_url
+#, fuzzy
+msgid "Auth Token Url"
+msgstr "Auth Token Url"
+
+#. module: spp_idpass
+#: model:ir.model.fields.selection,name:spp_idpass.selection__g2p_id_type__target_type__both
+msgid "Both"
+msgstr "ທັງສອງ"
+
+#. module: spp_idpass
+#. odoo-python
+#: code:addons/spp_idpass/models/id_type.py:0
+#, python-format
+msgid "Can't delete default ID Type"
+msgstr "ບໍ່ສາມາດລຶບປະເພດ ID ທີ່ເປັນຄ່າເລີ່ມຕົ້ນໄດ້"
+
+#. module: spp_idpass
+#: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
+msgid "Cancel"
+msgstr "ຍົກເລີກ"
+
+# Review needed: Assumed "IP PASS" is a proper name/term and kept it
+# untranslated.
+#. module: spp_idpass
+#: model_terms:ir.actions.act_window,help:spp_idpass.action_spp_idpass
+#, fuzzy
+msgid "Click the create button to enter the configuration of the IP PASS."
+msgstr "ກົດປຸ່ມສ້າງເພື່ອປ້ອນການກຳນົດຄ່າຂອງ IP PASS."
+
+#. module: spp_idpass
+#: model:ir.ui.menu,name:spp_idpass.id_pass_configuration_menu_root
+msgid "Configuration"
+msgstr "ການກຳນົດຄ່າ"
+
+#. module: spp_idpass
+#: model:ir.model,name:spp_idpass.model_res_partner
+msgid "Contact"
+msgstr "ຕິດຕໍ່ພົວພັນ"
+
+# Review needed: Assumed "ID PASS" is a proper name/term and kept it
+# untranslated.
+#. module: spp_idpass
+#: model_terms:ir.actions.act_window,help:spp_idpass.action_spp_idpass
+#, fuzzy
+msgid "Create a new ID PASS Configuration!"
+msgstr "ສ້າງການກຳນົດຄ່າ ID PASS ໃໝ່!"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__create_uid
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__create_date
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+#. module: spp_idpass
+#: model:ir.model.fields.selection,name:spp_idpass.selection__spp_id_pass__expiry_length_type__days
+msgid "Days"
+msgstr "ມື້"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__display_name
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__filename_prefix
+msgid "File Name Prefix"
+msgstr "ຄຳນຳໜ້າຊື່ໄຟລ໌"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_follower_ids
+msgid "Followers"
+msgstr "ຜູ້ຕິດຕາມ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "ຜູ້ຕິດຕາມ (ຄູ່ຄ້າ)"
+
+# Review needed: Uses English term "Auth Token". Verify if Lao equivalent is
+# preferred.
+#. module: spp_idpass
+#: model_terms:ir.ui.view,arch_db:spp_idpass.view_spp_idpass_tree
+#, fuzzy
+msgid "Generate Auth Token"
+msgstr "ສ້າງ Auth Token"
+
+#. module: spp_idpass
+#: model:ir.model.fields.selection,name:spp_idpass.selection__g2p_id_type__target_type__group
+msgid "Group"
+msgstr "ກຸ່ມ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__has_message
+msgid "Has Message"
+msgstr "ມີຂໍ້ຄວາມ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__id
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__id
+#, fuzzy
+msgid "ID"
+msgstr "ID"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__expiry_length
+msgid "ID Expiry Length"
+msgstr "ໄລຍະເວລາໝົດອາຍຸ ID"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_g2p_program_membership__id_pdf_filename
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__id_pdf_filename
+#: model:ir.model.fields,field_description:spp_idpass.field_res_users__id_pdf_filename
+msgid "ID File Name"
+msgstr "ຊື່ໄຟລ໌ ID"
+
+#. module: spp_idpass
+#: model:ir.ui.menu,name:spp_idpass.id_pass_main_menu_root
+msgid "ID Management"
+msgstr "ການຈັດການ ID"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Assumed "ID PASS" is a proper name/term and kept it untranslated.
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_g2p_program_membership__id_pdf
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__id_pdf
+#: model:ir.model.fields,field_description:spp_idpass.field_res_users__id_pdf
+#, fuzzy
+msgid "ID PASS"
+msgstr "ID PASS"
+
+# Review needed: Assumed "ID PASS" is a proper name/term and kept it
+# untranslated.
+#. module: spp_idpass
+#: model_terms:ir.ui.view,arch_db:spp_idpass.view_groups_idpass_form
+#: model_terms:ir.ui.view,arch_db:spp_idpass.view_individuals_idpass_form
+#, fuzzy
+msgid "ID PASS Card"
+msgstr "ບັດ ID PASS"
+
+# Review needed: Assumed "ID PASS" is a proper name/term and kept it
+# untranslated.
+#. module: spp_idpass
+#: model:ir.actions.act_window,name:spp_idpass.action_spp_idpass
+#, fuzzy
+msgid "ID PASS Configuration"
+msgstr "ການກຳນົດຄ່າ ID PASS"
+
+# Review needed: Assumed "ID PASS" is a proper name/term and kept it
+# untranslated.
+#. module: spp_idpass
+#. odoo-python
+#: code:addons/spp_idpass/models/registrant.py:0
+#, python-format, fuzzy
+msgid "ID PASS Error: %(reason)s Code: %(code)s"
+msgstr "ຂໍ້ຜິດພາດ ID PASS: %(reason)s ລະຫັດ: %(code)s"
+
+# Review needed: Assumed "ID PASS" is a proper name/term. Translated
+# "Principal Recipient" contextually.
+#. module: spp_idpass
+#. odoo-python
+#: code:addons/spp_idpass/models/registrant.py:0
+#, python-format, fuzzy
+msgid "ID PASS Error: No Head or Principal Recipient assigned to this Group"
+msgstr "ຂໍ້ຜິດພາດ ID PASS: ບໍ່ມີຫົວໜ້າ ຫຼື ຜູ້ຮັບຫຼັກຖືກມອບໝາຍໃຫ້ກຸ່ມນີ້"
+
+# Review needed: Assumed "ID PASS" is a proper name/term and kept it
+# untranslated.
+#. module: spp_idpass
+#. odoo-python
+#: code:addons/spp_idpass/models/registrant.py:0
+#, python-format, fuzzy
+msgid "ID PASS Error: Please try reuploading the ID Picture"
+msgstr "ຂໍ້ຜິດພາດ ID PASS: ກະລຸນາລອງອັບໂຫຼດຮູບ ID ຄືນໃໝ່"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Assumed "ID Pass" is a proper name/term and kept it untranslated.
+#. module: spp_idpass
+#: model:ir.model,name:spp_idpass.model_spp_id_pass
+#, fuzzy
+msgid "ID Pass"
+msgstr "ID Pass"
+
+# Review needed: Assumed "ID Pass" is a proper name/term and kept it
+# untranslated.
+#. module: spp_idpass
+#. odoo-python
+#: code:addons/spp_idpass/models/registrant.py:0
+#, python-format, fuzzy
+msgid "ID Pass Error: No API set"
+msgstr "ຂໍ້ຜິດພາດ ID Pass: ບໍ່ມີ API ຖືກກຳນົດ"
+
+# Review needed: Assumed "ID Pass" is a proper name/term and kept it
+# untranslated.
+#. module: spp_idpass
+#: model_terms:ir.ui.view,arch_db:spp_idpass.view_groups_idpass_form
+#: model_terms:ir.ui.view,arch_db:spp_idpass.view_individuals_idpass_form
+#, fuzzy
+msgid "ID Pass has been Generated:"
+msgstr "ID Pass ໄດ້ຖືກສ້າງຂຶ້ນແລ້ວ:"
+
+#. module: spp_idpass
+#: model:ir.model,name:spp_idpass.model_g2p_id_type
+msgid "ID Type"
+msgstr "ປະເພດ ID"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Assumed "IDPass" is a proper name/term and kept it untranslated.
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__idpass_id
+#, fuzzy
+msgid "IDPass ID"
+msgstr "IDPass ID"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__id_type
+msgid "Id Type"
+msgstr "ປະເພດ Id"
+
+#. module: spp_idpass
+#: model:ir.model.fields,help:spp_idpass.field_res_partner__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "ຖ້າຖືກເລືອກ, ຂໍ້ຄວາມໃໝ່ຕ້ອງການການດຳເນີນການຂອງທ່ານ."
+
+#. module: spp_idpass
+#: model:ir.model.fields,help:spp_idpass.field_res_partner__message_has_error
+#: model:ir.model.fields,help:spp_idpass.field_res_partner__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "ຖ້າຖືກເລືອກ, ບາງຂໍ້ຄວາມມີຂໍ້ຜິດພາດໃນການສົ່ງ."
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_g2p_program_membership__image_1920_filename
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__image_1920_filename
+#: model:ir.model.fields,field_description:spp_idpass.field_res_users__image_1920_filename
+msgid "Image 1920 FileName"
+msgstr "ຊື່ໄຟລ໌ຮູບພາບ 1920"
+
+#. module: spp_idpass
+#: model:ir.model.fields.selection,name:spp_idpass.selection__g2p_id_type__target_type__individual
+msgid "Individual"
+msgstr "ບຸກຄົນ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_is_follower
+msgid "Is Follower"
+msgstr "ເປັນຜູ້ຕິດຕາມ"
+
+# Review needed: Assumed "ID Pass" is a proper name/term. Translated "Issue"
+# as "Issue Card" (ອອກບັດ) for clarity.
+#. module: spp_idpass
+#. odoo-python
+#: code:addons/spp_idpass/models/registrant.py:0
+#, python-format, fuzzy
+msgid "Issue ID Pass"
+msgstr "ອອກບັດ ID Pass"
+
+# Review needed: Follows translation from previous string. Assumed "ID Pass"
+# is a proper name/term.
+#. module: spp_idpass
+#: model:ir.model,name:spp_idpass.model_spp_issue_idpass_wizard
+#, fuzzy
+msgid "Issue ID Pass Wizard"
+msgstr "ຕົວຊ່ວຍອອກບັດ ID Pass"
+
+# Review needed: Assumed "IDPass" is a proper name/term. Translated "Issue" as
+# "Issue Card" (ອອກບັດ) for clarity.
+#. module: spp_idpass
+#: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
+#, fuzzy
+msgid "Issue IDPass"
+msgstr "ອອກບັດ IDPass"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__write_uid
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ປັບປຸງຫຼ້າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__write_date
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ປັບປຸງຫຼ້າສຸດເມື່ອ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__expiry_length_type
+msgid "Length Type"
+msgstr "ປະເພດໄລຍະເວລາ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_has_error
+msgid "Message Delivery error"
+msgstr "ຂໍ້ຜິດພາດໃນການນຳສົ່ງຂໍ້ຄວາມ"
+
+# Review needed: Glossary lists "ບັນຊີ" for "Messages", but context
+# (message_ids field) suggests communication messages, leading to the
+# translation "ຂໍ້ຄວາມ".
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_ids
+#, fuzzy
+msgid "Messages"
+msgstr "ຂໍ້ຄວາມ"
+
+#. module: spp_idpass
+#: model:ir.model.fields.selection,name:spp_idpass.selection__spp_id_pass__expiry_length_type__months
+msgid "Months"
+msgstr "ເດືອນ"
+
+# Review needed: Glossary lists "ສ່ວນ" for "Actions", which seems contextually
+# incorrect for a counter of actions needed. Used "ການກະທຳ" instead.
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_needaction_counter
+#, fuzzy
+msgid "Number of Actions"
+msgstr "ຈຳນວນການກະທຳ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_has_error_counter
+msgid "Number of errors"
+msgstr "ຈຳນວນຂໍ້ຜິດພາດ"
+
+# Review needed: Relies on interpretations of "Messages" (ຂໍ້ຄວາມ) and
+# "Action" (ການກະທຳ) that differ from potentially misleading glossary entries
+# ("ບັນຊີ", "ສ່ວນ").
+#. module: spp_idpass
+#: model:ir.model.fields,help:spp_idpass.field_res_partner__message_needaction_counter
+#, fuzzy
+msgid "Number of messages requiring action"
+msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ຕ້ອງການການກະທຳ"
+
+# Review needed: Relies on interpretation of "Messages" (ຂໍ້ຄວາມ) instead of
+# glossary entry "ບັນຊີ".
+#. module: spp_idpass
+#: model:ir.model.fields,help:spp_idpass.field_res_partner__message_has_error_counter
+#, fuzzy
+msgid "Number of messages with delivery error"
+msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ມີຂໍ້ຜິດພາດໃນການນຳສົ່ງ"
+
+#. module: spp_idpass
+#. odoo-python
+#: code:addons/spp_idpass/tests/test_registrant.py:0
+#, python-format
+msgid "Object `OpenSPPIDQueue` not yet existed!"
+msgstr "ວັດຖຸ `OpenSPPIDQueue` ຍັງບໍ່ທັນມີຢູ່!"
+
+#. module: spp_idpass
+#: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
+msgid "Registrant"
+msgstr "ຜູ້ລົງທະບຽນ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_issue_idpass_wizard__registrant_id
+msgid "Registrant ID"
+msgstr "ລະຫັດຜູ້ລົງທະບຽນ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "ຂໍ້ຜິດພາດໃນການນຳສົ່ງ SMS"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_g2p_id_type__target_type
+msgid "Target Type"
+msgstr "ຊະນິດເປົ້າໝາຍ"
+
+#. module: spp_idpass
+#: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
+msgid "Template"
+msgstr "ແບບ"
+
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_spp_id_pass__name
+msgid "Template Name"
+msgstr "ຊື່ແບບ"
+
+#. module: spp_idpass
+#. odoo-python
+#: code:addons/spp_idpass/wizard/issue_id_pass_wizard.py:0
+#, python-format
+msgid "There are no selected Template!"
+msgstr "ບໍ່ມີແບບທີ່ຖືກເລືອກ!"
+
+# Review needed: Relies on interpretation of "Messages" (ຂໍ້ຄວາມ) instead of
+# glossary entry "ບັນຊີ". "Website" is not in the glossary, used standard
+# "ເວັບໄຊ".
+#. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__website_message_ids
+#, fuzzy
+msgid "Website Messages"
+msgstr "ຂໍ້ຄວາມເວັບໄຊ"
+
+# Review needed: "Website" is not in the glossary, used standard "ເວັບໄຊ".
+# Adapted glossary term "ປະຫວັດສາດ" (history - the subject) to "ປະຫວັດ"
+# (history - the record) for better context.
+#. module: spp_idpass
+#: model:ir.model.fields,help:spp_idpass.field_res_partner__website_message_ids
+#, fuzzy
+msgid "Website communication history"
+msgstr "ປະຫວັດການຕິດຕໍ່ຜ່ານເວັບໄຊ"
+
+#. module: spp_idpass
+#: model:ir.model.fields.selection,name:spp_idpass.selection__spp_id_pass__expiry_length_type__years
+msgid "Years"
+msgstr "ປີ"

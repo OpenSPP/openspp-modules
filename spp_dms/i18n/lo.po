@@ -1,0 +1,506 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_dms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_dms
+#. odoo-python
+#: code:addons/spp_dms/models/dms_directory.py:0
+#, python-format
+msgid "%s Files"
+msgstr "%s ແຟ້ມ"
+
+#. module: spp_dms
+#. odoo-python
+#: code:addons/spp_dms/models/dms_directory.py:0
+#, python-format
+msgid "%s Subdirectories"
+msgstr "%s ຖານຮີບໂຮມຍ່ອຍ"
+
+#. module: spp_dms
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_directory
+msgid "Add a new Directory."
+msgstr "ເພີ່ມຖານຮີບໂຮມໃໝ່."
+
+#. module: spp_dms
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_file
+msgid "Add a new File."
+msgstr "ເພີ່ມແຟ້ມໃໝ່."
+
+#. module: spp_dms
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_file_new_form
+msgid "Cancel"
+msgstr "ຍົກເລີກ"
+
+#. module: spp_dms
+#: model:ir.actions.act_window,name:spp_dms.action_spp_dms_category
+#: model:ir.ui.menu,name:spp_dms.menu_spp_dms_category
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_category_search
+msgid "Categories"
+msgstr "ປະເພດ"
+
+#. module: spp_dms
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_category
+msgid "Categories are used to categorize Documents."
+msgstr "ປະເພດແມ່ນໃຊ້ເພື່ອຈັດໝວດໝູ່ເອກະສານ."
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__category_id
+#: model_terms:ir.ui.view,arch_db:spp_dms.search_spp_dms_file
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_category_form
+msgid "Category"
+msgstr "ປະເພດ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Technical term Checksum/SHA512 kept as is. Needs verification if a standard
+# Lao equivalent exists or if keeping the English term is acceptable.
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__checksum
+#, fuzzy
+msgid "Checksum/SHA512"
+msgstr "Checksum/SHA512"
+
+#. module: spp_dms
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_directories_all_directory
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_directories_directory
+msgid "Click to add a new directory."
+msgstr "ກົດເພື່ອເພີ່ມຖານຮີບໂຮມໃໝ່."
+
+#. module: spp_dms
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_files_all_directory
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_files_directory
+msgid "Click to add a new file."
+msgstr "ກົດເພື່ອເພີ່ມແຟ້ມໃໝ່."
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__color
+msgid "Color"
+msgstr "ສີ"
+
+#. module: spp_dms
+#: model:ir.ui.menu,name:spp_dms.menu_spp_dms_config
+msgid "Configuration"
+msgstr "ການຕັ້ງຄ່າ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__content
+msgid "Content"
+msgstr "ເນື້ອໃນ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__content_file
+msgid "Content File"
+msgstr "ແຟ້ມເນື້ອໃນ"
+
+# Review needed: Translated 'Elements' as 'ອົງປະກອບ'. The glossary has
+# 'element' as 'ການເລືອກ', which seems context-specific. Needs review to
+# confirm the best term for 'Elements' in a DMS context (items within a
+# directory).
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__count_elements
+#, fuzzy
+msgid "Count Elements"
+msgstr "ນັບອົງປະກອບ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__count_files_title
+msgid "Count Files"
+msgstr "ນັບຈຳນວນແຟ້ມ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__count_files
+msgid "Count Files Title"
+msgstr "ຫົວຂໍ້ນັບຈຳນວນແຟ້ມ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__count_directories_title
+msgid "Count Subdirectories"
+msgstr "ນັບຈຳນວນຖານຮີບໂຮມຍ່ອຍ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__count_directories
+msgid "Count Subdirectories Title"
+msgstr "ຫົວຂໍ້ນັບຈຳນວນຖານຮີບໂຮມຍ່ອຍ"
+
+#. module: spp_dms
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_category
+msgid "Create a new Category."
+msgstr "ສ້າງປະເພດໃໝ່."
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_category__create_uid
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__create_uid
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_category__create_date
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__create_date
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+#. module: spp_dms
+#: model_terms:ir.ui.view,arch_db:spp_dms.search_spp_dms_directory
+#: model_terms:ir.ui.view,arch_db:spp_dms.search_spp_dms_file
+msgid "Creation Date"
+msgstr "ວັນທີສ້າງ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_dms
+#: model:ir.module.category,name:spp_dms.category_spp_dms
+#: model:ir.ui.menu,name:spp_dms.main_menu_spp_dms
+#, fuzzy
+msgid "DMS"
+msgstr "DMS"
+
+#. module: spp_dms
+#: model:ir.model,name:spp_dms.model_spp_dms_category
+msgid "DMS Category"
+msgstr "ປະເພດ DMS"
+
+#. module: spp_dms
+#: model:ir.model,name:spp_dms.model_spp_dms_directory
+msgid "DMS Directory"
+msgstr "ຖານຮີບໂຮມ DMS"
+
+#. module: spp_dms
+#: model:ir.model,name:spp_dms.model_spp_dms_file
+msgid "DMS File"
+msgstr "ແຟ້ມ DMS"
+
+# Review needed: Technical term 'mixin' kept as is. Needs verification by a
+# technical expert for an appropriate Lao equivalent or confirmation that
+# keeping the English term is standard practice.
+#. module: spp_dms
+#: model:ir.model,name:spp_dms.model_spp_dms_mixins_thumbnail
+#, fuzzy
+msgid "DMS thumbnail and icon mixin"
+msgstr "DMS thumbnail ແລະ icon mixin"
+
+#. module: spp_dms
+#: model:ir.actions.act_window,name:spp_dms.action_spp_dms_directory
+#: model:ir.ui.menu,name:spp_dms.menu_spp_dms_directory
+#: model_terms:ir.ui.view,arch_db:spp_dms.search_spp_dms_file
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_directory_tree
+msgid "Directories"
+msgstr "ຖານຮີບໂຮມ"
+
+#. module: spp_dms
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_directories_all_directory
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_directory
+msgid ""
+"Directories can be used to structure and organize\n"
+"                files."
+msgstr "ຖານຮີບໂຮມສາມາດໃຊ້ເພື່ອຈັດໂຄງສ້າງ ແລະ ຈັດລະບຽບແຟ້ມຕ່າງໆ."
+
+#. module: spp_dms
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_directories_directory
+msgid "Directories can be used to structure and organize files."
+msgstr "ຖານຮີບໂຮມສາມາດໃຊ້ເພື່ອຈັດໂຄງສ້າງ ແລະ ຈັດລະບຽບແຟ້ມຕ່າງໆ."
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__directory_id
+msgid "Directory"
+msgstr "ຖານຮີບໂຮມ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__complete_name
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_directory_form
+msgid "Directory Name"
+msgstr "ຊື່ຖານຮີບໂຮມ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_category__display_name
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__display_name
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+# Review needed: Translated 'Elements' as 'ອົງປະກອບ'. The glossary has
+# 'element' as 'ການເລືອກ', which seems context-specific. Needs review to
+# confirm the best term for 'Elements' in a DMS context (items within a
+# directory).
+#. module: spp_dms
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_directory_form
+#, fuzzy
+msgid "Elements"
+msgstr "ອົງປະກອບ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__extension
+msgid "Extension"
+msgstr "ສ່ວນຂະຫຍາຍ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__name
+msgid "Filename"
+msgstr "ຊື່ແຟ້ມ"
+
+#. module: spp_dms
+#: model:ir.actions.act_window,name:spp_dms.action_spp_dms_file
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_category__file_ids
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__file_ids
+#: model:ir.ui.menu,name:spp_dms.menu_spp_dms_file
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_directory_tree
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_file_form
+msgid "Files"
+msgstr "ແຟ້ມ"
+
+#. module: spp_dms
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_file
+msgid "Files are used to save content directly in OpenSPP."
+msgstr "ແຟ້ມຕ່າງໆແມ່ນໃຊ້ເພື່ອບັນທຶກເນື້ອໃນໂດຍກົງໃນ OpenSPP."
+
+#. module: spp_dms
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_files_all_directory
+#: model_terms:ir.actions.act_window,help:spp_dms.action_spp_dms_files_directory
+msgid "Files are used to save content."
+msgstr "ແຟ້ມຕ່າງໆແມ່ນໃຊ້ເພື່ອບັນທຶກເນື້ອໃນ."
+
+#. module: spp_dms
+#: model_terms:ir.ui.view,arch_db:spp_dms.search_spp_dms_file
+msgid "Group By"
+msgstr "ຈັດກຸ່ມຕາມ"
+
+# Review needed: Descriptive translation for 'Human Size' (human-readable
+# size). Might need refinement for conciseness or a better technical
+# equivalent.
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__human_size
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__human_size
+#, fuzzy
+msgid "Human Size"
+msgstr "ຂະໜາດທີ່ຄົນອ່ານໄດ້"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_category__id
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__id
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__id
+#, fuzzy
+msgid "ID"
+msgstr "ID"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__icon_url
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_mixins_thumbnail__icon_url
+msgid "Icon URL"
+msgstr "URL ໄອຄອນ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__image_1920
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_mixins_thumbnail__image_1920
+msgid "Image"
+msgstr "ຮູບພາບ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__image_1024
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_mixins_thumbnail__image_1024
+msgid "Image 1024"
+msgstr "ຮູບພາບ 1024"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__image_128
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_mixins_thumbnail__image_128
+msgid "Image 128"
+msgstr "ຮູບພາບ 128"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__image_256
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_mixins_thumbnail__image_256
+msgid "Image 256"
+msgstr "ຮູບພາບ 256"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__image_512
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_mixins_thumbnail__image_512
+msgid "Image 512"
+msgstr "ຮູບພາບ 512"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__is_root_directory
+msgid "Is Root Directory"
+msgstr "ແມ່ນຖານຮີບໂຮມຫຼັກ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_category__write_uid
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__write_uid
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ອັບເດດລ່າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_category__write_date
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__write_date
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ອັບເດດລ່າສຸດເມື່ອ"
+
+#. module: spp_dms
+#: model:res.groups,name:spp_dms.group_spp_dms_manager
+msgid "Manager"
+msgstr "ຜູ້ຈັດການ"
+
+#. module: spp_dms
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_file_form
+msgid "Meta Information"
+msgstr "ຂໍ້ມູນເມຕາ"
+
+#. module: spp_dms
+#: model_terms:ir.ui.view,arch_db:spp_dms.search_spp_dms_directory
+#: model_terms:ir.ui.view,arch_db:spp_dms.search_spp_dms_file
+msgid "Modification Date"
+msgstr "ວັນທີແກ້ໄຂ"
+
+#. module: spp_dms
+#: model_terms:ir.ui.view,arch_db:spp_dms.search_spp_dms_directory
+msgid "My Directories"
+msgstr "ໄດເຣັກທໍຣີຂອງຂ້ອຍ"
+
+#. module: spp_dms
+#: model_terms:ir.ui.view,arch_db:spp_dms.search_spp_dms_file
+msgid "My Files"
+msgstr "ແຟ້ມຂອງຂ້ອຍ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_category__name
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__name
+msgid "Name"
+msgstr "ຊື່"
+
+# Review needed: Unsure about the best Lao term for 'Root Directory'.
+# 'ໂຟເດີຫຼັກໃໝ່' (New main folder) might be an alternative.
+#. module: spp_dms
+#: model:ir.actions.act_window,name:spp_dms.action_spp_dms_directory_new
+#: model:ir.actions.act_window,name:spp_dms.action_spp_dms_file_new
+#, fuzzy
+msgid "New Root Directory"
+msgstr "ໄດເຣັກທໍຣີຮາກໃໝ່"
+
+# Review needed: Unsure about the standard Lao term for 'Parent Directory'.
+# 'ໂຟເດີແມ່' might be an alternative.
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__parent_id
+#, fuzzy
+msgid "Parent Directory"
+msgstr "ໄດເຣັກທໍຣີແມ່"
+
+# Review needed: Unsure about the standard Lao term for 'Parent Path'.
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__parent_path
+#, fuzzy
+msgid "Parent Path"
+msgstr "ເສັ້ນທາງແມ່"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__path_json
+msgid "Path Json"
+msgstr "ເສັ້ນທາງ Json"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__path_names
+msgid "Path Names"
+msgstr "ຊື່ເສັ້ນທາງ"
+
+# Review needed: Unsure about the best Lao term for 'Root Directory' (plural
+# context).
+#. module: spp_dms
+#: model_terms:ir.ui.view,arch_db:spp_dms.search_spp_dms_directory
+#, fuzzy
+msgid "Root Directories"
+msgstr "ໄດເຣັກທໍຣີຮາກ"
+
+# Review needed: Unsure about the best Lao term for 'Root Directory'.
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__root_directory_id
+#, fuzzy
+msgid "Root Directory"
+msgstr "ໄດເຣັກທໍຣີຮາກ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__size
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__size
+msgid "Size"
+msgstr "ຂະໜາດ"
+
+# Review needed: Unsure about the best Lao term for 'Subdirectory'. Used
+# 'ຖານຮີບໂຮມຍ່ອຍ' in glossary example. 'ໂຟເດີຍ່ອຍ' might be more user-
+# friendly.
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__child_directory_ids
+#: model_terms:ir.ui.view,arch_db:spp_dms.view_spp_dms_directory_form
+#, fuzzy
+msgid "Subdirectories"
+msgstr "ໄດເຣັກທໍຣີຍ່ອຍ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__count_total_files
+msgid "Total Files"
+msgstr "ຈຳນວນແຟ້ມທັງໝົດ"
+
+# Review needed: Depends on the chosen translation for 'Subdirectory'.
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_directory__count_total_directories
+#, fuzzy
+msgid "Total Subdirectories"
+msgstr "ຈຳນວນໄດເຣັກທໍຣີຍ່ອຍທັງໝົດ"
+
+#. module: spp_dms
+#: model:ir.model.fields,field_description:spp_dms.field_spp_dms_file__mimetype
+msgid "Type"
+msgstr "ຊະນິດ"
+
+#. module: spp_dms
+#: model:res.groups,name:spp_dms.group_spp_dms_user
+msgid "User"
+msgstr "ຜູ້ໃຊ້"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_dms
+#: model:ir.actions.act_window,name:spp_dms.action_spp_dms_directories_all_directory
+#, fuzzy
+msgid "action_spp_dms_directories_all_directory"
+msgstr "action_spp_dms_directories_all_directory"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_dms
+#: model:ir.actions.act_window,name:spp_dms.action_spp_dms_directories_directory
+#, fuzzy
+msgid "action_spp_dms_directories_directory"
+msgstr "action_spp_dms_directories_directory"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_dms
+#: model:ir.actions.act_window,name:spp_dms.action_spp_dms_files_all_directory
+#, fuzzy
+msgid "action_spp_dms_files_all_directory"
+msgstr "action_spp_dms_files_all_directory"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_dms
+#: model:ir.actions.act_window,name:spp_dms.action_spp_dms_files_directory
+#, fuzzy
+msgid "action_spp_dms_files_directory"
+msgstr "action_spp_dms_files_directory"

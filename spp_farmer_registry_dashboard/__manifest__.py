@@ -5,12 +5,12 @@
     "name": "OpenSPP Farmer Registry Dashboard",
     "summary": "Provides interactive dashboards and reports for visualizing data from the OpenSPP Farmer Registry, offering insights into key metrics and trends related to registered farmers.",
     "category": "OpenSPP",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "base",
@@ -21,6 +21,9 @@
         "spp_farmer_registry_base",
         "spp_farmer_registry_demo",
         "spreadsheet_dashboard",
+    ],
+    "excludes": [
+        "spp_base",
     ],
     "data": [
         "security/ir.model.access.csv",

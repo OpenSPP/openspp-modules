@@ -1,0 +1,207 @@
+---
+description: OpenSPP testing architecture and patterns for indicators, custom fields, and module functionality verification
+globs: *.py,**/tests/*.py
+alwaysApply: false
+---
+# OpenSPP Testing Architecture Reference
+
+## Context
+OpenSPP extends Odoo's testing framework to validate custom fields, computed indicators, and social protection functionality. This reference documents the testing patterns used throughout the OpenSPP ecosystem.
+
+## Test Structure Patterns
+OpenSPP tests use these structural patterns:
+
+- `@tagged("post_install", "-at_install")` decorator for most tests
+- `TransactionCase` for single transaction tests
+- `SavepointCase` for more complex scenarios
+- Method naming with `test_XX_` prefix for sequence control
+- Setup and teardown methods for test data preparation
+
+## Examples
+<example>
+# OpenSPP test structure for indicator validation
+
+import datetime
+import logging
+
+from dateutil.relativedelta import relativedelta
+from odoo.tests import tagged
+from odoo.tests.common import TransactionCase
+
+_logger = logging.getLogger(__name__)
+
+@tagged("post_install", "-at_install")
+class ComputeIndicatorFieldsTest(TransactionCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        # Set context to avoid job queue delay
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                test_queue_job_no_delay=True,
+            )
+        )
+
+        # Create test data
+        cls.individual_1 = cls.env["res.partner"].create(
+            {
+                "name": "Test Individual 1",
+                "is_group": False,
+                "is_registrant": True,
+                "gender": "Female",
+                "birthdate": datetime.datetime.now() - relativedelta(years=30),
+                "z_cst_indv_disability_level": 2,
+            }
+        )
+        cls.individual_2 = cls.env["res.partner"].create(
+            {
+                "name": "Test Individual 2",
+                "is_group": False,
+                "is_registrant": True,
+                "gender": "Male",
+                "birthdate": datetime.datetime.now() - relativedelta(years=10),
+            }
+        )
+        cls.group = cls.env["res.partner"].create(
+            {
+                "name": "Test Group",
+                "is_group": True,
+                "is_registrant": True,
+            }
+        )
+
+        # Add individuals to group
+        members = [
+            {"individual": cls.individual_1.id},
+            {"individual": cls.individual_2.id}
+        ]
+        group_members = [[0, 0, val] for val in members]
+        cls.group.write({"group_membership_ids": group_members})
+
+    def test_01_num_children(self):
+        """Test children count indicator computation"""
+        self.group._compute_ind_grp_num_children()
+        self.assertEqual(
+            self.group.z_ind_grp_num_children,
+            1,  # Only individual_2 is under 18
+            "The number of children should be 1"
+        )
+
+    def test_02_is_single_head_hh(self):
+        """Test single-headed household indicator computation"""
+        self.group._compute_ind_grp_is_single_head_hh()
+        self.assertEqual(
+            self.group.z_ind_grp_is_single_head_hh,
+            True,  # Only individual_1 is an adult
+            "The group should be a single-headed household"
+        )
+
+    def test_03_edge_cases(self):
+        """Test edge cases for indicators"""
+        # Test with empty group
+        empty_group = self.env["res.partner"].create(
+            {
+                "name": "Empty Group",
+                "is_group": True,
+                "is_registrant": True,
+            }
+        )
+        empty_group._compute_ind_grp_num_children()
+        self.assertEqual(
+            empty_group.z_ind_grp_num_children,
+            0,
+            "Empty group should have 0 children"
+        )
+
+        # Test with adding another adult
+        adult = self.env["res.partner"].create(
+            {
+                "name": "Another Adult",
+                "is_group": False,
+                "is_registrant": True,
+                "gender": "Male",
+                "birthdate": datetime.datetime.now() - relativedelta(years=40),
+            }
+        )
+        self.group.write({"group_membership_ids": [(0, 0, {"individual": adult.id})]})
+        self.group._compute_ind_grp_is_single_head_hh()
+        self.assertEqual(
+            self.group.z_ind_grp_is_single_head_hh,
+            False,  # Now there are two adults
+            "Group with two adults should not be a single-headed household"
+        )
+</example>
+
+<example type="invalid">
+# Test implementation with structural issues
+
+from odoo.tests import common
+
+class TestCustomFields(common.HttpCase):  # Using HttpCase unnecessarily
+    def test_all(self):  # Too broad test method, no specific focus
+        # Missing setup of test data
+        group = self.env["res.partner"].create({
+            "name": "Test Group",
+            "is_group": True
+        })
+        # Direct data modification without proper model methods
+        self.env.cr.execute(
+            "UPDATE res_partner SET z_ind_grp_num_children = 2 WHERE id = %s",
+            (group.id,)
+        )
+        # Manual verification without assertions
+        if group.z_ind_grp_num_children != 2:
+            print("Test failed")
+        # Missing cleanup
+</example>
+
+## Test Coverage Patterns
+Effective test coverage in OpenSPP includes:
+
+- Validation for all custom fields and indicators
+- Verification of compute methods for correct calculations
+- Testing of edge cases (empty groups, boundary conditions)
+- Validation of data integrity constraints
+- Testing of UI interactions when relevant
+
+## Performance Testing Patterns
+Performance testing in OpenSPP uses:
+
+- `with self.profile()` for profiling test execution time
+- Testing with realistic data volumes
+- Benchmarking of critical operations
+
+## Test Data Architecture
+Test data management in OpenSPP follows these patterns:
+
+- Creation of minimal test data for each test
+- Use of factories or helpers for complex data setup
+- Use of savepoints to isolate test state changes
+
+## Specific Testing Patterns
+For testing group/individual dynamics in OpenSPP:
+
+```python
+def test_group_indicator_update_on_membership_change(self):
+    """Test that indicators update when group membership changes"""
+    # Initial state verification
+    self.group._compute_ind_grp_num_children()
+    initial_count = self.group.z_ind_grp_num_children
+
+    # Add a new child to the group
+    child = self.env["res.partner"].create({
+        "name": "New Child",
+        "is_group": False,
+        "is_registrant": True,
+        "birthdate": datetime.datetime.now() - relativedelta(years=5),
+    })
+    self.group.write({"group_membership_ids": [(0, 0, {"individual": child.id})]})
+
+    # Verify indicator updated correctly
+    self.group._compute_ind_grp_num_children()
+    self.assertEqual(
+        self.group.z_ind_grp_num_children,
+        initial_count + 1,
+        "Adding a child should increase the children count"
+    )

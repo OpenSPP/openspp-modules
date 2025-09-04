@@ -1,0 +1,135 @@
+---
+description: OpenSPP field naming patterns and model extension techniques for groups, individuals, indicators, and customizations
+globs: *.py,**/models/*.py,**/controllers/*.py,**/wizards/*.py
+alwaysApply: false
+---
+# OpenSPP Field Naming and Model Extension Reference
+
+## Context
+OpenSPP extends the Odoo `res.partner` model to represent both groups (households, families) and individuals in social protection programs. This reference documents the field naming patterns and model extension techniques used throughout the codebase.
+
+## Field Naming Patterns
+OpenSPP uses systematic field naming prefixes to categorize different field types:
+
+- `z_`: General prefix for all custom fields
+- `ind`: Indicator fields (computed values)
+- `grp`: Group-related fields
+- `cst`: Custom/arbitrary fields
+- `indv`: Individual-related fields
+
+These prefixes combine to create structured field names like `z_ind_grp_num_children` for a group-level indicator showing the number of children.
+
+## Group vs Individual Architecture
+OpenSPP's architecture differentiates groups and individuals:
+
+- Both are implemented as `res.partner` records
+- Groups use `is_group = True` (families, households)
+- Individuals use `is_group = False`
+- Connection happens through the `G2PGroupMembership` model
+
+## Examples
+<example>
+# Field naming and model extension patterns for OpenSPP
+
+from odoo import api, fields, models
+from dateutil.relativedelta import relativedelta
+import datetime
+
+class G2PGroup(models.Model):
+    _inherit = "res.partner"
+
+    # Group indicator field
+    z_ind_grp_num_children = fields.Integer(
+        "Number of Children",
+        compute="_compute_ind_grp_num_children",
+        help="Number of children in the group",
+        store=True,
+        allow_filter=True,
+    )
+
+    # Custom group field
+    z_cst_grp_poverty_level = fields.Selection(
+        [
+            ("0", "Not Poor"),
+            ("1", "Poor"),
+            ("2", "Extremely Poor"),
+        ],
+        string="Poverty Level",
+        default="0",
+    )
+
+    def _compute_ind_grp_num_children(self):
+        """Compute the number of children in the group using OpenSPP's helper function"""
+        now = datetime.datetime.now()
+        children = now - relativedelta(years=18)
+        domain = [("birthdate", ">=", children)]
+        self.compute_count_and_set_indicator("z_ind_grp_num_children", None, domain)
+
+    # Manual implementation alternative
+    def _compute_ind_grp_is_single_head_hh(self):
+        for record in self:
+            adult_count = record.group_membership_ids.filtered(
+                lambda member: member.individual.birthdate <= (
+                    datetime.datetime.now() - relativedelta(years=18)
+                )
+            ).mapped('individual')
+            record.z_ind_grp_is_single_head_hh = len(adult_count) == 1
+</example>
+
+<example type="invalid">
+# Inconsistent field naming not following OpenSPP patterns
+
+from odoo import models, api, fields
+
+class ResPartner(models.Model):
+    _inherit = "res.partner"
+
+    # Missing proper prefix pattern
+    children_count = fields.Integer(
+        "Children Count",
+        compute="_count_children"
+    )
+
+    # Missing indication of group vs individual field
+    poverty_status = fields.Selection(
+        [("poor", "Poor"), ("not_poor", "Not Poor")],
+        string="Poverty Status"
+    )
+
+    # Incorrect compute method with api.depends
+    @api.depends("group_membership_ids.individual.birthdate")
+    def _count_children(self):
+        for partner in self:
+            if partner.is_group:
+                children = 0
+                for member in partner.group_membership_ids:
+                    # Missing calculations
+                    pass
+                partner.children_count = children
+            else:
+                partner.children_count = 0
+</example>
+
+## Compute Field Patterns
+Indicator fields in OpenSPP follow these patterns:
+
+- Avoid `@api.depends` for individual-based indicators
+- Use the `compute_count_and_set_indicator` helper method when possible
+- Implement manual compute logic for complex calculations
+- Set `store=True` and `allow_filter=True` for filterable indicators
+
+## Individual Field Patterns
+Individual-specific fields follow this pattern:
+
+```python
+class G2PIndividual(models.Model):
+    _inherit = "res.partner"
+
+    z_cst_indv_disability_level = fields.Integer("Disability Level")
+    z_cst_indv_education_level = fields.Selection([
+        ("none", "None"),
+        ("primary", "Primary"),
+        ("secondary", "Secondary"),
+        ("tertiary", "Tertiary"),
+    ], string="Education Level")
+```

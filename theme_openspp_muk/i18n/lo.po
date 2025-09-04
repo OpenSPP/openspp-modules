@@ -1,0 +1,20 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* theme_openspp_muk
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: theme_openspp_muk
+#: model:ir.model,name:theme_openspp_muk.model_res_config_settings
+msgid "Config Settings"
+msgstr ""

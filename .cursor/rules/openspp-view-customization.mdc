@@ -1,0 +1,144 @@
+---
+description: OpenSPP UI architecture and view extension patterns for modifying forms, trees, and other interface elements
+globs: *.xml,**/views/*.xml
+alwaysApply: false
+---
+# OpenSPP View Customization Architecture
+
+## Context
+OpenSPP extends Odoo's view architecture to create specialized interfaces for social protection programs. This reference documents the view extension patterns and UI development approaches used throughout the OpenSPP ecosystem.
+
+## Core View Architecture
+OpenSPP builds upon these primary view identifiers:
+
+### Individual Views
+- **Tree View**: `g2p_registry_individual.view_individuals_list_tree`
+- **Form View**: `g2p_registry_individual.view_individuals_form`
+
+### Group Views
+- **Tree View**: `g2p_registry_group.view_groups_list_tree`
+- **Form View**: `g2p_registry_group.view_groups_form`
+
+## Examples
+<example>
+<!-- View extension pattern for Individual Form -->
+<odoo>
+    <record id="view_individuals_form_custom" model="ir.ui.view">
+        <field name="name">view_individuals_form_custom</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='basic_info']/group/group[1]" position="after">
+                <group colspan="2">
+                    <field name="z_cst_indv_disability_level"/>
+                    <field name="z_cst_indv_education_level"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+</example>
+
+<example type="invalid">
+<!-- Problematic view implementation -->
+<odoo>
+    <record id="custom_individuals_form" model="ir.ui.view">
+        <!-- Missing proper naming convention -->
+        <field name="name">custom.form</field>
+        <field name="model">res.partner</field>
+        <!-- Missing inherit_id field to extend existing view -->
+        <field name="arch" type="xml">
+            <form>
+                <!-- Creating new form instead of extending -->
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="disability_level"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
+</example>
+
+## View Extension Patterns
+
+### XPath Syntax
+XPath expressions locate and modify specific elements in parent views:
+
+- `after`: Adds content after targeted element
+- `before`: Adds content before targeted element
+- `inside`: Adds content inside targeted element
+- `replace`: Replaces targeted element
+- `attributes`: Modifies attributes of targeted element
+
+### Visibility Control Patterns
+Fields can be conditionally displayed using:
+
+```xml
+<field name="address" position="attributes">
+    <attribute name="invisible">1</attribute>
+</field>
+```
+
+### Field Organization
+Related fields are grouped for better user experience:
+
+```xml
+<group colspan="2" name="disability_info">
+    <field name="z_cst_indv_disability_level"/>
+    <field name="z_cst_indv_disability_type"/>
+</group>
+```
+
+## Implementation Examples
+
+### Individual Tree View Extension
+```xml
+<odoo>
+    <record id="view_individuals_list_tree_custom" model="ir.ui.view">
+        <field name="name">view_individuals_list_tree_custom</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_list_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='address']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='address']" position="after">
+                <field name="z_cst_indv_disability_level" string="Disability Level" />
+                <field name="z_cst_indv_education_level" string="Education" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
+```
+
+### Group Form View Extension
+```xml
+<odoo>
+    <record id="view_groups_form_custom" model="ir.ui.view">
+        <field name="name">view_groups_form_custom</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='basic_info']/group/group[1]" position="after">
+                <group colspan="2">
+                    <field name="z_ind_grp_num_children"/>
+                    <field name="z_ind_grp_is_single_head_hh"/>
+                    <field name="z_cst_grp_poverty_level"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+```
+
+## XML Formatting Patterns
+OpenSPP XML follows these conventions:
+
+- 4 spaces for indentation
+- Maximum line length of 120 characters
+- Consistent naming for view IDs
+- Comments for complex XPath expressions
+- Descriptive field labels using the `string` attribute

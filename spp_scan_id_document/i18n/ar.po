@@ -24,14 +24,17 @@ msgid "Contact"
 msgstr "اتصال"
 
 #. module: spp_scan_id_document
-#: model:ir.model.fields,field_description:spp_scan_id_document.field_res_partner__dms_directory_ids
-#, fuzzy
-msgid "DMS Directories"
-msgstr "دليل الوثائق"
-
-#. module: spp_scan_id_document
 #: model:ir.model.fields,field_description:spp_scan_id_document.field_res_partner__id_document_details
 #: model:ir.model.fields,field_description:spp_scan_id_document.field_res_users__id_document_details
 #, fuzzy
 msgid "Id Document Details"
 msgstr "تفاصيل وثيقة الهوية"
+
+#. module: spp_scan_id_document
+#: model_terms:ir.ui.view,arch_db:spp_scan_id_document.registrant_form
+msgid "Scan Document"
+msgstr ""
+
+#, fuzzy
+#~ msgid "DMS Directories"
+#~ msgstr "دليل الوثائق"

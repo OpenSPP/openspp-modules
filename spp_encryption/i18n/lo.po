@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_encryption
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_encryption
+#: model_terms:ir.ui.view,arch_db:spp_encryption.view_encryption_provider_form
+msgid "Create Jwcrypto Key"
+msgstr "ສ້າງລະຫັດ Jwcrypto"
+
+# Review needed: The term 'Provider' was translated as 'ຜູ້ໃຫ້ບໍລິການ' which
+# is a standard term but not explicitly in the provided glossary. The acronym
+# 'G2P' is kept untranslated assuming it's a specific identifier.
+#. module: spp_encryption
+#: model:ir.model,name:spp_encryption.model_g2p_encryption_provider
+#, fuzzy
+msgid "G2P Encryption Provider"
+msgstr "ຜູ້ໃຫ້ບໍລິການການເຂົ້າລະຫັດ G2P"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_encryption
+#: model:ir.model.fields.selection,name:spp_encryption.selection__g2p_encryption_provider__type__jwcrypto
+#, fuzzy
+msgid "JWCrypto"
+msgstr "JWCrypto"
+
+# Review needed: The term 'decryption' was translated as 'ການຖອດລະຫັດ', which
+# is the logical counterpart to 'encryption' (ການເຂົ້າລະຫັດ) from the
+# glossary, but 'decryption' itself is not listed. Verification needed for
+# this technical term.
+#. module: spp_encryption
+#: model:ir.model.fields,help:spp_encryption.field_g2p_encryption_provider__jwcrypto_key
+#, fuzzy
+msgid ""
+"JWK key in JSON format for encryption, decryption, signing, and verification"
+msgstr ""
+"ລະຫັດ JWK ໃນຮູບແບບ JSON ສຳລັບການເຂົ້າລະຫັດ, ການຖອດລະຫັດ, ການລົງນາມ, ແລະ "
+"ການຢັ້ງຢືນ"
+
+#. module: spp_encryption
+#: model:ir.model.fields,field_description:spp_encryption.field_g2p_encryption_provider__jwcrypto_key
+msgid "Jwcrypto Key"
+msgstr "ລະຫັດ Jwcrypto"
+
+#. module: spp_encryption
+#: model:ir.model.fields,field_description:spp_encryption.field_g2p_encryption_provider__type
+msgid "Type"
+msgstr "ຊະນິດ"
+
+#. module: spp_encryption
+#: model_terms:ir.ui.view,arch_db:spp_encryption.view_encryption_provider_form
+msgid "Update Jwcrypto Key"
+msgstr "ປັບປຸງລະຫັດ Jwcrypto"

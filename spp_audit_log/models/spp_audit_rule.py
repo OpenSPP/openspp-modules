@@ -245,8 +245,7 @@ class SppAuditRule(models.Model):
     def get_audit_log_vals(self, res_id, method, data):
         self.ensure_one()
         return {
-            # TODO: should we need to connect spp.audit.log to spp.audit.rule?
-            # 'audit_rule_id': self.id,
+            "audit_rule_id": self.id,
             "user_id": self._uid,
             "model_id": self.sudo().model_id.id,
             "res_id": res_id,

@@ -1,0 +1,1464 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_idqueue
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+# Review needed: Unsure about the best Lao term for 'Batch' in this specific
+# Odoo context (print queue batch). Using 'ຊຸດ' for now.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid ""
+"%(batch_count)s Batch(es) with total of %(id_count)s IDs are being "
+"generated."
+msgstr "%(batch_count)s ຊຸດ ທີ່ມີລະຫັດທັງໝົດ %(id_count)s ລະຫັດ ກຳລັງຖືກສ້າງ."
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%(user)s cancelled this request on %(date)s."
+msgstr "%(user)s ໄດ້ຍົກເລີກຄຳຮ້ອງຂໍນີ້ໃນວັນທີ %(date)s."
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "%(user)s distributed this batch on %(date)s."
+msgstr "%(user)s ໄດ້ແຈກຈ່າຍຊຸດນີ້ໃນວັນທີ %(date)s."
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%(user)s distributed this request on %(date)s."
+msgstr "%(user)s ໄດ້ແຈກຈ່າຍຄຳຮ້ອງຂໍນີ້ໃນວັນທີ %(date)s."
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "%(user)s generated this batch on %(date)s."
+msgstr "%(user)s ໄດ້ສ້າງຊຸດນີ້ໃນວັນທີ %(date)s."
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%(user)s generated this request on %(date)s."
+msgstr "%(user)s ໄດ້ສ້າງຄຳຮ້ອງຂໍນີ້ໃນວັນທີ %(date)s."
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "%(user)s printed this batch on %(date)s."
+msgstr "%(user)s ໄດ້ພິມຊຸດນີ້ໃນວັນທີ %(date)s."
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%(user)s printed this request on %(date)s."
+msgstr "%(user)s ໄດ້ພິມຄຳຮ້ອງຂໍນີ້ໃນວັນທີ %(date)s."
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "%(user)s started to generate this batch on %(date)s."
+msgstr "%(user)s ໄດ້ເລີ່ມສ້າງຊຸດນີ້ໃນວັນທີ %(date)s."
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%(user)s started to generate this request on %(date)s."
+msgstr "%(user)s ໄດ້ເລີ່ມສ້າງຄຳຮ້ອງຂໍນີ້ໃນວັນທີ %(date)s."
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "%(user)s started to print this batch on %(date)s."
+msgstr "%(user)s ໄດ້ເລີ່ມພິມຊຸດນີ້ໃນວັນທີ %(date)s."
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "%(user)s started to print this request on %(date)s."
+msgstr "%(user)s ໄດ້ເລີ່ມພິມຄຳຮ້ອງຂໍນີ້ໃນວັນທີ %(date)s."
+
+# Review needed: Unsure about the best Lao term for 'Batch' and 'validated' in
+# this context. Using 'ຢືນຢັນ' based on 'confirm'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "%(user)s validated this batch on %(date)s."
+msgstr "%(user)s ໄດ້ຢືນຢັນຊຸດນີ້ໃນວັນທີ %(date)s."
+
+# Review needed: Unsure about the best Lao term for 'validated'. Using
+# 'ຢືນຢັນ' based on 'confirm'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format, fuzzy
+msgid "%(user)s validated this request on %(date)s."
+msgstr "%(user)s ໄດ້ຢືນຢັນຄຳຮ້ອງຂໍນີ້ໃນວັນທີ %(date)s."
+
+# Review needed: Repetition (msgstr same as msgid)
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
+#, python-format, fuzzy
+msgid "%s - 1"
+msgstr "%s - 1"
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "%s batch(es) are being printed."
+msgstr "%s ຊຸດກຳລັງຖືກພິມ."
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "%s batch(es) are distributed."
+msgstr "%s ຊຸດຖືກແຈກຈ່າຍແລ້ວ."
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "%s batch(es) are printed."
+msgstr "%s ຊຸດຖືກພິມແລ້ວ."
+
+# Review needed: Unsure about the best Lao term for 'Batch' and 'validated'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "%s batch(es) are validated."
+msgstr "%s ຊຸດຖືກຢືນຢັນແລ້ວ."
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
+#, python-format, fuzzy
+msgid "%s batch(es) created."
+msgstr "%s ຊຸດຖືກສ້າງແລ້ວ."
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%s request(s) are distributed."
+msgstr "%s ຄຳຮ້ອງຂໍຖືກແຈກຈ່າຍແລ້ວ."
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%s request(s) are now being generated."
+msgstr "%s ຄຳຮ້ອງຂໍຕອນນີ້ກຳລັງຖືກສ້າງ."
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "%s request(s) are printed."
+msgstr "%s ຄຳຮ້ອງຂໍຖືກພິມແລ້ວ."
+
+# Review needed: Unsure about the best Lao term for 'validated'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format, fuzzy
+msgid "%s request(s) are validated."
+msgstr "%s ຄຳຮ້ອງຂໍຖືກຢືນຢັນແລ້ວ."
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
+#, python-format
+msgid "%s request(s) created."
+msgstr "%s ຄຳຮ້ອງຂໍຖືກສ້າງແລ້ວ."
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_individuals_idqueue_form
+msgid "<span class=\"o_stat_text\">Request</span>"
+msgstr "<span class=\"o_stat_text\">ຄຳຮ້ອງຂໍ</span>"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_needaction
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_needaction
+msgid "Action Needed"
+msgstr "ຕ້ອງການການດຳເນີນການ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_ids
+msgid "Activities"
+msgstr "ກິດຈະກຳ"
+
+# Review needed: Technical term 'Decoration' might have a specific meaning in
+# Odoo UI context. Translated literally as 'ເຄື່ອງໝາຍ'.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_exception_decoration
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_exception_decoration
+#, fuzzy
+msgid "Activity Exception Decoration"
+msgstr "ເຄື່ອງໝາຍຂໍ້ຍົກເວັ້ນກິດຈະກຳ"
+
+# Review needed: Glossary term 'state' found, but target 'ລັດ' missing
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_state
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_state
+#, fuzzy
+msgid "Activity State"
+msgstr "ສະຖານະກິດຈະກຳ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_type_icon
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "ໄອຄອນປະເພດກິດຈະກຳ"
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
+#, fuzzy
+msgid "Approve Batch"
+msgstr "ອະນຸມັດຊຸດ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "Approve Request"
+msgstr "ອະນຸມັດຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__approved
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__approved
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Approved"
+msgstr "ອະນຸມັດແລ້ວ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__approved_by
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__approved_by
+msgid "Approved By"
+msgstr "ອະນຸມັດໂດຍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__area_id
+msgid "Area"
+msgstr "ພື້ນທີ່"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_attachment_count
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_attachment_count
+msgid "Attachment Count"
+msgstr "ຈຳນວນໄຟລ໌ແນບ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_res_config_settings__auto_approve_id_request
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.res_config_settings_view_form
+msgid "Auto-approve ID Requests"
+msgstr "ອະນຸມັດຄຳຮ້ອງຂໍລະຫັດອັດຕະໂນມັດ"
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__batch_id
+#, fuzzy
+msgid "Batch"
+msgstr "ຊຸດ"
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#, fuzzy
+msgid "Batch Details"
+msgstr "ລາຍລະອຽດຊຸດ"
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__name
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#, fuzzy
+msgid "Batch Name"
+msgstr "ຊື່ຊຸດ"
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
+#, fuzzy
+msgid "Batch Printed"
+msgstr "ຊຸດພິມແລ້ວ"
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__name
+#, fuzzy
+msgid "Batch name"
+msgstr "ຊື່ຊຸດ"
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_printed_batch
+#, fuzzy
+msgid "Batches Printed"
+msgstr "ພິມຊຸດຕ່າງໆແລ້ວ"
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__batches_count
+#, fuzzy
+msgid "Batches to be created"
+msgstr "ຊຸດທີ່ຈະສ້າງ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Cancel"
+msgstr "ຍົກເລີກ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "Cancel Request"
+msgstr "ຍົກເລີກຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__cancelled
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Cancelled"
+msgstr "ຍົກເລີກແລ້ວ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_res_config_settings__auto_approve_id_request
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.res_config_settings_view_form
+msgid "Check if you want to auto-approve ID requests"
+msgstr "ໝາຍຖືກຖ້າທ່ານຕ້ອງການອະນຸມັດຄຳຮ້ອງຂໍລະຫັດອັດຕະໂນມັດ"
+
+# Review needed: Unsure about the best Lao term for 'Batch'.
+#. module: spp_idqueue
+#: model_terms:ir.actions.act_window,help:spp_idqueue.action_spp_print_queue_batch
+#, fuzzy
+msgid "Click the create button to enter the information of the ID Batch."
+msgstr "ກົດປຸ່ມສ້າງເພື່ອປ້ອນຂໍ້ມູນຂອງຊຸດລະຫັດ."
+
+# Review needed: Technical term 'ID Queue' kept in English. Reviewer should
+# confirm if a Lao equivalent or transliteration is preferred.
+#. module: spp_idqueue
+#: model_terms:ir.actions.act_window,help:spp_idqueue.action_spp_idqueue
+#, fuzzy
+msgid "Click the create button to enter the information of the ID Queue."
+msgstr "ກົດປຸ່ມ ສ້າງ ເພື່ອປ້ອນຂໍ້ມູນຂອງ ID Queue."
+
+# Review needed: Uncertain about the best translation for 'Config Settings' as
+# a title. Used 'ການຕັ້ງຄ່າ Config', but 'ການຕັ້ງຄ່າ' or 'ການຕັ້ງຄ່າການກຳນົດ'
+# might be alternatives.
+#. module: spp_idqueue
+#: model:ir.model,name:spp_idqueue.model_res_config_settings
+#, fuzzy
+msgid "Config Settings"
+msgstr "ການຕັ້ງຄ່າ Config"
+
+#. module: spp_idqueue
+#: model:ir.model,name:spp_idqueue.model_res_partner
+msgid "Contact"
+msgstr "ຕິດຕໍ່ພົວພັນ"
+
+# Review needed: Technical term 'Batch' kept in English. Reviewer should
+# confirm if a Lao equivalent or transliteration is preferred.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
+#, fuzzy
+msgid "Create Batch"
+msgstr "ສ້າງ Batch"
+
+# Review needed: Technical term 'Batch' kept in English. Reviewer should
+# confirm if a Lao equivalent or transliteration is preferred.
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.id_batch_print
+#, fuzzy
+msgid "Create Batch Printing"
+msgstr "ສ້າງການພິມ Batch"
+
+# Review needed: Technical term 'Batch' kept in English. Reviewer should
+# confirm if a Lao equivalent or transliteration is preferred.
+#. module: spp_idqueue
+#: model:ir.model,name:spp_idqueue.model_spp_batch_create_wizard
+#, fuzzy
+msgid "Create Batch Wizard"
+msgstr "ຕົວຊ່ວຍສ້າງ Batch"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
+msgid "Create Requests"
+msgstr "ສ້າງຄຳຮ້ອງຂໍ"
+
+# Review needed: Technical term 'ID Batch' kept in English. Reviewer should
+# confirm if a Lao equivalent or transliteration is preferred.
+#. module: spp_idqueue
+#: model_terms:ir.actions.act_window,help:spp_idqueue.action_spp_print_queue_batch
+#, fuzzy
+msgid "Create a new ID Batch!"
+msgstr "ສ້າງ ID Batch ໃໝ່!"
+
+# Review needed: Technical term 'ID Queue' kept in English. Reviewer should
+# confirm if a Lao equivalent or transliteration is preferred.
+#. module: spp_idqueue
+#: model_terms:ir.actions.act_window,help:spp_idqueue.action_spp_idqueue
+#, fuzzy
+msgid "Create a new ID Queue!"
+msgstr "ສ້າງ ID Queue ໃໝ່!"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__create_uid
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__create_uid
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__create_date
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__create_date
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__create_date
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__create_date
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__date_approved
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__date_approved
+msgid "Date Approved"
+msgstr "ວັນທີອະນຸມັດ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__date_distributed
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__date_distributed
+msgid "Date Distributed"
+msgstr "ວັນທີແຈກຢາຍ"
+
+# Review needed: Translated 'Generated' as 'ສ້າງ' (Created). Reviewer to
+# confirm if a more specific term for generation is needed, e.g.,
+# 'ວັນທີຖືກສ້າງ'.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__date_generated
+#, fuzzy
+msgid "Date Generated"
+msgstr "ວັນທີສ້າງ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__date_merged
+msgid "Date Merged"
+msgstr "ວັນທີຮວມເຂົ້າກັນ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__date_printed
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__date_printed
+msgid "Date Printed"
+msgstr "ວັນທີພິມ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__date_requested
+msgid "Date Requested"
+msgstr "ວັນທີຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__display_name
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__display_name
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__display_name
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__display_name
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Distribute"
+msgstr "ແຈກຢາຍ"
+
+# Review needed: Technical term 'Batch' kept in English. Reviewer should
+# confirm if a Lao equivalent or transliteration is preferred.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
+#, fuzzy
+msgid "Distribute Batch"
+msgstr "ແຈກຢາຍ Batch"
+
+# Review needed: Technical term 'Batches' kept in English. Reviewer should
+# confirm if a Lao equivalent or transliteration is preferred.
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_distribute_batch
+#, fuzzy
+msgid "Distribute Batches"
+msgstr "ແຈກຢາຍ Batches"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "Distribute Request"
+msgstr "ແຈກຢາຍຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.distribute_requests
+msgid "Distribute Requests"
+msgstr "ແຈກຢາຍຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__distributed
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__distributed
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Distributed"
+msgstr "ແຈກຢາຍແລ້ວ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__distributed_by
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__distributed_by
+msgid "Distributed By"
+msgstr "ແຈກຢາຍໂດຍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__draft
+msgid "Draft"
+msgstr "ສະບັບຮ່າງ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__error_merging
+msgid "Error Merging"
+msgstr "ການຮວມຜິດພາດ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__error_sending
+msgid "Error Sending"
+msgstr "ການສົ່ງຜິດພາດ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
+msgid "File"
+msgstr "ແຟ້ມ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_follower_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_follower_ids
+msgid "Followers"
+msgstr "ຜູ້ຕິດຕາມ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_partner_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "ຜູ້ຕິດຕາມ (ຄູ່ຮ່ວມ)"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_type_icon
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "ປຸ່ມພາບ Font awesome ເຊັ່ນ: fa-tasks"
+
+# Review needed: Technical terms 'ID Types', 'ID Type', and 'Batch' kept in
+# English. Reviewer should confirm if Lao equivalents or transliterations are
+# preferred.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
+#, fuzzy
+msgid ""
+"Found multiple ID Types or Templates, please select an ID Type and Template "
+"below for this batch."
+msgstr ""
+"ພົບ ID Types ຫຼື ແບບ ຫຼາຍອັນ, ກະລຸນາເລືອກ ID Type ແລະ ແບບ ຂ້າງລຸ່ມນີ້ສຳລັບ "
+"Batch ນີ້."
+
+# Review needed: Translated 'Generate' as 'ສ້າງ' (Create). Reviewer to confirm
+# if a more specific term for generation is needed, e.g., 'ຜະລິດ'.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#, fuzzy
+msgid "Generate"
+msgstr "ສ້າງ"
+
+# Review needed: Technical term 'Batch' kept in English. Translation for
+# 'Generate' as 'ສ້າງ' might need review for specificity.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
+#, fuzzy
+msgid "Generate Batch"
+msgstr "ສ້າງ Batch"
+
+# Review needed: Technical term 'Batches' kept in English. Translation for
+# 'Generate' as 'ສ້າງ' might need review for specificity.
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_generate_batch
+#, fuzzy
+msgid "Generate Batches"
+msgstr "ສ້າງ Batches"
+
+# Review needed: Translation for 'Generate' as 'ສ້າງ' might need review for
+# specificity.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+#, fuzzy
+msgid "Generate Request"
+msgstr "ສ້າງຄຳຮ້ອງຂໍ"
+
+# Review needed: Translation for 'Generate' as 'ສ້າງ' might need review for
+# specificity.
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.generate_requests
+#, fuzzy
+msgid "Generate Requests"
+msgstr "ສ້າງຄຳຮ້ອງຂໍ"
+
+# Review needed: Translated 'Generated' as 'ສ້າງແລ້ວ' (Created). Reviewer to
+# confirm if a more specific term for generation status is needed, e.g.,
+# 'ຜະລິດແລ້ວ'.
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__generated
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__generated
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#, fuzzy
+msgid "Generated"
+msgstr "ສ້າງແລ້ວ"
+
+# Review needed: Translated 'Generated' as 'ສ້າງ' (Created). Reviewer to
+# confirm if a more specific term for generation is needed.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__generated_by
+#, fuzzy
+msgid "Generated By"
+msgstr "ສ້າງໂດຍ"
+
+# Review needed: Translated 'Generating' as 'ກຳລັງສ້າງ' (Creating). Reviewer
+# to confirm if a more specific term for generation process is needed, e.g.,
+# 'ກຳລັງຜະລິດ'.
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__generating
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__generating
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#, fuzzy
+msgid "Generating"
+msgstr "ກຳລັງສ້າງ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__has_message
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__has_message
+msgid "Has Message"
+msgstr "ມີຂໍ້ຄວາມ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__id
+msgid "ID"
+msgstr "ລະຫັດ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Technical term 'ID Batch' kept in English. Reviewer should confirm if a Lao
+# equivalent or transliteration is preferred.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "ID Batch"
+msgstr "ID Batch"
+
+# Review needed: Translation depends on the final decision for 'ID'. Used
+# 'ຈຳນວນ ID'.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__id_count
+#, fuzzy
+msgid "ID Count"
+msgstr "ຈຳນວນ ID"
+
+# Review needed: Translation depends on the final decision for 'ID'. Used
+# 'ຜູ້ແຈກຢາຍ ID'.
+#. module: spp_idqueue
+#: model:res.groups,name:spp_idqueue.group_g2p_id_distributor
+#, fuzzy
+msgid "ID Distributor"
+msgstr "ຜູ້ແຈກຢາຍ ID"
+
+# Review needed: Translation depends on the final decision for 'ID'. Used
+# 'ຊື່ແຟ້ມ ID'.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__id_pdf_filename
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id_pdf_filename
+#, fuzzy
+msgid "ID File Name"
+msgstr "ຊື່ແຟ້ມ ID"
+
+# Review needed: Source 'ID PASS' is ambiguous. Translated as 'ເອກະສານ ID
+# (PDF)' based on field name `id_pdf`. Reviewer needs to confirm the intended
+# meaning.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__id_pdf
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id_pdf
+#, fuzzy
+msgid "ID PASS"
+msgstr "ເອກະສານ ID (PDF)"
+
+# Review needed: Technical terms 'ID' and 'Batch' kept in
+# English/transliterated. Reviewer should confirm.
+#. module: spp_idqueue
+#: model:ir.actions.act_window,name:spp_idqueue.action_spp_print_queue_batch
+#: model:ir.ui.menu,name:spp_idqueue.menu_spp_print_queue_batch
+#, fuzzy
+msgid "ID Print Batch"
+msgstr "Batch ພິມ ID"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Technical term 'ID Queue' kept in English. Reviewer should confirm if a Lao
+# equivalent or transliteration is preferred.
+#. module: spp_idqueue
+#: model:ir.model,name:spp_idqueue.model_spp_print_queue_id
+#, fuzzy
+msgid "ID Queue"
+msgstr "ID Queue"
+
+# Review needed: Translation depends on the final decision for 'ID'. Used
+# 'ຄຳຮ້ອງຂໍ ID'.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
+#, fuzzy
+msgid "ID Request"
+msgstr "ຄຳຮ້ອງຂໍ ID"
+
+# Review needed: Translation depends on the final decision for 'ID'. Used
+# 'ຜູ້ຮ້ອງຂໍ ID'.
+#. module: spp_idqueue
+#: model:res.groups,name:spp_idqueue.group_g2p_id_requestor
+#, fuzzy
+msgid "ID Requestor"
+msgstr "ຜູ້ຮ້ອງຂໍ ID"
+
+# Review needed: Translation depends on the final decision for 'ID'. Used
+# 'ຄຳຮ້ອງຂໍ ID'.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
+#: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
+#: model:ir.model.fields,field_description:spp_idqueue.field_g2p_program_membership__id_requests
+#: model:ir.model.fields,field_description:spp_idqueue.field_res_partner__id_requests
+#: model:ir.model.fields,field_description:spp_idqueue.field_res_users__id_requests
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_attendance_subscriber__id_requests
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_requests_form
+#, python-format, fuzzy
+msgid "ID Requests"
+msgstr "ຄຳຮ້ອງຂໍ ID"
+
+#. module: spp_idqueue
+#: model:ir.actions.act_window,name:spp_idqueue.action_spp_idqueue
+#: model:ir.ui.menu,name:spp_idqueue.menu_spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.res_config_settings_view_form
+msgid "ID Requests Queue"
+msgstr "ຄິວຄຳຮ້ອງຂໍລະຫັດ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.res_config_settings_view_form
+msgid "ID Requests Settings"
+msgstr "ການຕັ້ງຄ່າຄຳຮ້ອງຂໍລະຫັດ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__id_type
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "ID Type"
+msgstr "ຊະນິດລະຫັດ"
+
+#. module: spp_idqueue
+#: model:res.groups,name:spp_idqueue.group_g2p_id_validator
+msgid "ID Validator"
+msgstr "ຜູ້ກວດສອບລະຫັດ"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "ID can only be distributed if it has been printed"
+msgstr "ສາມາດແຈກຢາຍລະຫັດໄດ້ກໍຕໍ່ເມື່ອພິມແລ້ວເທົ່ານັ້ນ"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "ID cannot be canceled if it has been printed"
+msgstr "ບໍ່ສາມາດຍົກເລີກລະຫັດທີ່ພິມແລ້ວໄດ້"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "ID in a batch cannot be printed individually"
+msgstr "ລະຫັດໃນຊຸດບໍ່ສາມາດພິມແຕ່ລະອັນໄດ້"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "ID must be approved before printing"
+msgstr "ລະຫັດຕ້ອງຖືກອະນຸມັດກ່ອນການພິມ"
+
+#. module: spp_idqueue
+#: model:ir.model,name:spp_idqueue.model_spp_print_queue_batch
+msgid "ID print Batch"
+msgstr "ຊຸດພິມລະຫັດ"
+
+# Review needed: Uncertain about the term "IDPass". Kept as is, assuming it is
+# a proper name/system identifier. Needs confirmation.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__idpass_id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__idpass_id
+#, fuzzy
+msgid "IDPass ID"
+msgstr "ລະຫັດ IDPass"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "IDs for this Batch is being generated. Click"
+msgstr "ລະຫັດຕ່າງໆສຳລັບຊຸດນີ້ກຳລັງຖືກສ້າງ. ກົດ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "IDs for this Batch is being merged. Click"
+msgstr "ລະຫັດຕ່າງໆສຳລັບຊຸດນີ້ກຳລັງຖືກຮວມ. ກົດ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_exception_icon
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_exception_icon
+msgid "Icon"
+msgstr "ປຸ່ມພາບ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_exception_icon
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "ປຸ່ມພາບເພື່ອຊີ້ບອກກິດຈະກຳຍົກເວັ້ນ."
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__id_type
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__id_type
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__id_type
+msgid "Id Type"
+msgstr "ຊະນິດລະຫັດ"
+
+# Review needed: Missing Lao characters; Uncertain about the term "IDPass".
+# Kept as is, assuming it is a proper name/system identifier. Needs
+# confirmation.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__idpass_id
+#, fuzzy
+msgid "Idpass"
+msgstr "IDPass"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_needaction
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "ຖ້າຖືກໝາຍຖືກ, ຂໍ້ຄວາມໃໝ່ຕ້ອງການຄວາມສົນໃຈຈາກທ່ານ."
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_has_error
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_has_sms_error
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_has_error
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "ຖ້າຖືກໝາຍຖືກ, ບາງຂໍ້ຄວາມມີຂໍ້ຜິດພາດໃນການສົ່ງ."
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_is_follower
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_is_follower
+msgid "Is Follower"
+msgstr "ເປັນຜູ້ຕິດຕາມ"
+
+# Review needed: Uncertain about the term "IDPass". Kept as is, assuming it is
+# a proper name/system identifier. Needs confirmation.
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__is_idpass
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__is_idpass
+#, fuzzy
+msgid "Is Idpass"
+msgstr "ແມ່ນ IDPass"
+
+#. module: spp_idqueue
+#: model:ir.model,name:spp_idqueue.model_queue_job_channel
+msgid "Job Channels"
+msgstr "ຊ່ອງທາງວຽກ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__write_uid
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__write_uid
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ອັບເດດລ່າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__write_date
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__write_date
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__write_date
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__write_date
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ອັບເດດລ່າສຸດເມື່ອ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__max_id_per_batch
+msgid "Max ID per batch"
+msgstr "ຈຳນວນລະຫັດສູງສຸດຕໍ່ຊຸດ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__merge_status
+msgid "Merge Status"
+msgstr "ສະຖານະການຮວມ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__merged
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+msgid "Merged"
+msgstr "ຮວມແລ້ວ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Merged File"
+msgstr "ໄຟລ໌ທີ່ຖືກຮວມ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_has_error
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_has_error
+msgid "Message Delivery error"
+msgstr "ຂໍ້ຜິດພາດໃນການສົ່ງຂໍ້ຄວາມ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_ids
+msgid "Messages"
+msgstr "ຂໍ້ຄວາມຕ່າງໆ"
+
+#. module: spp_idqueue
+#: model:ir.model,name:spp_idqueue.model_spp_multi_id_request_wizard
+msgid "Multiple ID Request Wizard"
+msgstr "ຕົວຊ່ວຍສ້າງຄຳຮ້ອງຂໍຫຼາຍລະຫັດ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__my_activity_date_deadline
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "ກຳນົດສົ່ງກິດຈະກຳຂອງຂ້ອຍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__new
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__new
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "New"
+msgstr "ໃໝ່"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_calendar_event_id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "ເຫດການໃນປະຕິທິນຂອງກິດຈະກຳຕໍ່ໄປ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_date_deadline
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "ກຳນົດສົ່ງກິດຈະກຳຕໍ່ໄປ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_summary
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_summary
+msgid "Next Activity Summary"
+msgstr "ສະຫຼຸບກິດຈະກຳຕໍ່ໄປ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_type_id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_type_id
+msgid "Next Activity Type"
+msgstr "ຊະນິດກິດຈະກຳຕໍ່ໄປ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
+msgid "Next Step"
+msgstr "ຂັ້ນຕອນຕໍ່ໄປ"
+
+# Review needed: Technical terms "Auth Token" and "API URL" kept in English.
+# Needs confirmation if standard Lao equivalents exist or if English is
+# preferred.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "No Auth Token or API URL"
+msgstr "ບໍ່ມີ Auth Token ຫຼື API URL"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
+#, python-format
+msgid "No approved id requests selected!"
+msgstr "ບໍ່ມີຄຳຮ້ອງຂໍລະຫັດທີ່ຖືກອະນຸມັດຖືກເລືອກ!"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_needaction_counter
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_needaction_counter
+msgid "Number of Actions"
+msgstr "ຈຳນວນການດຳເນີນການ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_has_error_counter
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_has_error_counter
+msgid "Number of errors"
+msgstr "ຈຳນວນຂໍ້ຜິດພາດ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_needaction_counter
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ຕ້ອງການການດຳເນີນການ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__message_has_error_counter
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ມີຂໍ້ຜິດພາດໃນການສົ່ງ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_requests_form
+msgid "Open Form"
+msgstr "ເປີດຟອມ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Other Info"
+msgstr "ຂໍ້ມູນອື່ນໆ"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/queue_job_channel.py:0
+#, python-format
+msgid "Parent channel required."
+msgstr "ຕ້ອງການຊ່ອງທາງແມ່."
+
+# Review needed: Source text "Please select at least 1 approved batch need to
+# approve!" is ambiguous and likely grammatically incorrect. Translated based
+# on the interpretation "Please select at least 1 batch that needs approval!".
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "Please select at least 1 approved batch need to approve!"
+msgstr "ກະລຸນາເລືອກຢ່າງໜ້ອຍ 1 ຊຸດທີ່ຕ້ອງການອະນຸມັດ!"
+
+# Review needed: Source text "which need to generate" is ambiguous. Translated
+# based on the interpretation "which need to *be* generated".
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format, fuzzy
+msgid "Please select at least 1 approved request which need to generate!"
+msgstr "ກະລຸນາເລືອກຢ່າງໜ້ອຍ 1 ຄຳຮ້ອງຂໍທີ່ອະນຸມັດແລ້ວທີ່ຕ້ອງການສ້າງ!"
+
+# Review needed: Source text "need to print" is ambiguous. Translated based on
+# the interpretation "need to *be* printed".
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "Please select at least 1 generated batch need to print!"
+msgstr "ກະລຸນາເລືອກຢ່າງໜ້ອຍ 1 ຊຸດທີ່ສ້າງແລ້ວທີ່ຕ້ອງການພິມ!"
+
+# Review needed: Source text "which need to print" is ambiguous. Translated
+# based on the interpretation "which need to *be* printed".
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format, fuzzy
+msgid "Please select at least 1 generated request which need to print!"
+msgstr "ກະລຸນາເລືອກຢ່າງໜ້ອຍ 1 ຄຳຮ້ອງຂໍທີ່ສ້າງແລ້ວທີ່ຕ້ອງການພິມ!"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Please select at least 1 new batch need to approve!"
+msgstr "ກະລຸນາເລືອກຢ່າງໜ້ອຍ 1 ຊຸດຂໍ້ມູນໃໝ່ທີ່ຕ້ອງການອະນຸມັດ!"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "Please select at least 1 new request which need to approve!"
+msgstr "ກະລຸນາເລືອກຢ່າງໜ້ອຍ 1 ຄຳຮ້ອງຂໍໃໝ່ທີ່ຕ້ອງການອະນຸມັດ!"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Please select at least 1 printed batch need to distribute!"
+msgstr "ກະລຸນາເລືອກຢ່າງໜ້ອຍ 1 ຊຸດຂໍ້ມູນທີ່ພິມແລ້ວທີ່ຕ້ອງການແຈກຢາຍ!"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_queue.py:0
+#, python-format
+msgid "Please select at least 1 printed request which need to distribute!"
+msgstr "ກະລຸນາເລືອກຢ່າງໜ້ອຍ 1 ຄຳຮ້ອງຂໍທີ່ພິມແລ້ວທີ່ຕ້ອງການແຈກຢາຍ!"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Please select at least 1 printing batch need to printed!"
+msgstr "ກະລຸນາເລືອກຢ່າງໜ້ອຍ 1 ຊຸດຂໍ້ມູນທີ່ກຳລັງພິມທີ່ຕ້ອງການພິມ!"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Print"
+msgstr "ພິມ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
+msgid "Print Batch"
+msgstr "ພິມຊຸດຂໍ້ມູນ"
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_print_batch
+msgid "Print Batches"
+msgstr "ພິມຊຸດຂໍ້ມູນ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+msgid "Print Request"
+msgstr "ພິມຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.print_requests
+msgid "Print Requests"
+msgstr "ພິມຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__printed
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_id__status__printed
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Printed"
+msgstr "ພິມແລ້ວ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__printed_by
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__printed_by
+msgid "Printed By"
+msgstr "ພິມໂດຍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__status__printing
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Printing"
+msgstr "ກຳລັງພິມ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__queue_ids
+msgid "Queue"
+msgstr "ຄິວ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__queued_ids
+msgid "Queued IDs"
+msgstr "ລະຫັດທີ່ຢູ່ໃນຄິວ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Refresh Data"
+msgstr "ໂຫຼດຂໍ້ມູນຄືນໃໝ່"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__registrant_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__registrant_id
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Registrant"
+msgstr "ຜູ້ລົງທະບຽນ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__registrant_id
+msgid "Registrant ID"
+msgstr "ລະຫັດຜູ້ລົງທະບຽນ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
+msgid "Registrants"
+msgstr "ຜູ້ລົງທະບຽນ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+msgid "Request Details"
+msgstr "ລາຍລະອຽດຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/registrant.py:0
+#: model:ir.actions.server,name:spp_idqueue.multi_id_request
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
+#, python-format
+msgid "Request ID"
+msgstr "ລະຫັດຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.model,name:spp_idqueue.model_spp_print_queue_wizard
+msgid "Request ID Wizard"
+msgstr "ຕົວຊ່ວຍສ້າງລະຫັດຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__name
+msgid "Request Name"
+msgstr "ຊື່ຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__requested_by
+msgid "Requested By"
+msgstr "ຮ້ອງຂໍໂດຍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__activity_user_id
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__activity_user_id
+msgid "Responsible User"
+msgstr "ຜູ້ໃຊ້ທີ່ຮັບຜິດຊອບ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_tree
+msgid "Retry Sending"
+msgstr "ລອງສົ່ງໃໝ່"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__message_has_sms_error
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "ຂໍ້ຜິດພາດໃນການຈັດສົ່ງ SMS"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_filter
+msgid "Search Partner"
+msgstr "ຄົ້ນຫາຄູ່ຮ່ວມງານ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_filter
+msgid "Search Print Batch"
+msgstr "ຄົ້ນຫາຊຸດຂໍ້ມູນພິມ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_print_queue_batch__merge_status__sent
+msgid "Sent"
+msgstr "ສົ່ງແລ້ວ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_batch_create_wizard__state__step2
+msgid "Set Batch"
+msgstr "ກຳນົດຊຸດຂໍ້ມູນ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields.selection,name:spp_idqueue.selection__spp_batch_create_wizard__state__step1
+msgid "Set Template"
+msgstr "ກຳນົດແມ່ແບບ"
+
+#. module: spp_idqueue
+#: model:ir.actions.act_window,name:spp_idqueue.res_config_settings_menu_action
+msgid "Settings"
+msgstr "ການຕັ້ງຄ່າ"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format
+msgid "Some IDs are not generated"
+msgstr "ບາງລະຫັດບໍ່ໄດ້ຖືກສ້າງຂຶ້ນ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__state
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__status
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__status
+msgid "Status"
+msgstr "ສະຖານະ"
+
+# Review needed: Help text translation might need refinement for better flow
+# and clarity in Lao.
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_state
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__activity_state
+#, fuzzy
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"ສະຖານະຕາມກິດຈະກຳ - ກາຍກຳນົດ: ວັນຄົບກຳນົດໄດ້ຜ່ານໄປແລ້ວ; ມື້ນີ້: "
+"ວັນທີກິດຈະກຳແມ່ນມື້ນີ້; ວາງແຜນໄວ້: ກິດຈະກຳໃນອະນາຄົດ."
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_multi_id_request_wizard__target_type
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_wizard__target_type
+msgid "Target Type"
+msgstr "ປະເພດເປົ້າໝາຍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_batch_create_wizard__idpass_id
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.batch_create_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.multi_id_request_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.request_id_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_groups_requests_form
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_tree
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Template"
+msgstr "ແມ່ແບບ"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
+#, python-format
+msgid "There are no selected Registrants!"
+msgstr "ບໍ່ມີຜູ້ລົງທະບຽນທີ່ຖືກເລືອກ!"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/wizard/multi_id_request_wizard.py:0
+#: code:addons/spp_idqueue/wizard/request_id_wizard.py:0
+#, python-format
+msgid "There are no selected Template!"
+msgstr "ບໍ່ມີແມ່ແບບທີ່ຖືກເລືອກ!"
+
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
+#, python-format
+msgid "There are no selected id requests!"
+msgstr "ບໍ່ມີຄຳຮ້ອງຂໍລະຫັດທີ່ຖືກເລືອກ!"
+
+# Review needed: Transliteration of 'Token' as 'ໂຕເຄັນ' should be confirmed by
+# a domain expert.
+#. module: spp_idqueue
+#. odoo-python
+#: code:addons/spp_idqueue/models/id_batch.py:0
+#, python-format, fuzzy
+msgid "Token %s"
+msgstr "ໂຕເຄັນ %s"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__activity_exception_decoration
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "ປະເພດຂອງກິດຈະກຳຂໍ້ຍົກເວັ້ນໃນບັນທຶກ."
+
+# Review needed: The term 'Validate' could also be translated as
+# 'ກວດສອບຄວາມຖືກຕ້ອງ'. 'ຢືນຢັນ' was chosen based on likely context (approval),
+# but needs confirmation.
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_idqueue_form
+#, fuzzy
+msgid "Validate"
+msgstr "ຢືນຢັນ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "Validate Batch"
+msgstr "ຢືນຢັນຊຸດຂໍ້ມູນ"
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.multi_approve_batch
+msgid "Validate Batches"
+msgstr "ຢືນຢັນຊຸດຂໍ້ມູນ"
+
+#. module: spp_idqueue
+#: model:ir.actions.server,name:spp_idqueue.validate_requests
+msgid "Validate Requests"
+msgstr "ຢືນຢັນຄຳຮ້ອງຂໍ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__website_message_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__website_message_ids
+msgid "Website Messages"
+msgstr "ຂໍ້ຄວາມເວັບໄຊ"
+
+#. module: spp_idqueue
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_batch__website_message_ids
+#: model:ir.model.fields,help:spp_idqueue.field_spp_print_queue_id__website_message_ids
+msgid "Website communication history"
+msgstr "ປະຫວັດການຕິດຕໍ່ຜ່ານເວັບໄຊ"
+
+#. module: spp_idqueue
+#: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
+msgid "to check changes."
+msgstr "ເພື່ອກວດສອບການປ່ຽນແປງ."

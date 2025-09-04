@@ -1,0 +1,83 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_ethnic_group
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_ethnic_group
+#: model:ir.model.fields,field_description:spp_ethnic_group.field_spp_ethnic_group__ethnic_group_id
+msgid "Code"
+msgstr "ລະຫັດ"
+
+#. module: spp_ethnic_group
+#: model:ir.model.constraint,message:spp_ethnic_group.constraint_spp_ethnic_group_ethnic_group_id_uniq
+msgid "Code must be unique!"
+msgstr "ລະຫັດຕ້ອງບໍ່ຊ້ຳກັນ!"
+
+#. module: spp_ethnic_group
+#: model_terms:ir.actions.act_window,help:spp_ethnic_group.ethnic_group_action_window
+msgid "Create and manage the ethnig group."
+msgstr "ສ້າງ ແລະ ຈັດການກຸ່ມຊົນເຜົ່າ."
+
+#. module: spp_ethnic_group
+#: model:ir.model.fields,field_description:spp_ethnic_group.field_spp_ethnic_group__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_ethnic_group
+#: model:ir.model.fields,field_description:spp_ethnic_group.field_spp_ethnic_group__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+#. module: spp_ethnic_group
+#: model:ir.model.fields,field_description:spp_ethnic_group.field_spp_ethnic_group__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+#. module: spp_ethnic_group
+#: model:ir.actions.act_window,name:spp_ethnic_group.ethnic_group_action_window
+#: model:ir.model,name:spp_ethnic_group.model_spp_ethnic_group
+#: model:ir.model.fields,field_description:spp_ethnic_group.field_spp_ethnic_group__name
+#: model:ir.ui.menu,name:spp_ethnic_group.ethnic_group_menu
+msgid "Ethnic Group"
+msgstr "ກຸ່ມຊົນເຜົ່າ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Kept English 'ID' for technical clarity, but a Lao equivalent like 'ລະຫັດ'
+# or 'ລຳດັບ' might be preferred by some reviewers.
+#. module: spp_ethnic_group
+#: model:ir.model.fields,field_description:spp_ethnic_group.field_spp_ethnic_group__id
+#, fuzzy
+msgid "ID"
+msgstr "ID"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_ethnic_group
+#: model:ir.model.fields,field_description:spp_ethnic_group.field_spp_ethnic_group__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ອັບເດດຫຼ້າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_ethnic_group
+#: model:ir.model.fields,field_description:spp_ethnic_group.field_spp_ethnic_group__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ອັບເດດຫຼ້າສຸດເມື່ອ"
+
+#. module: spp_ethnic_group
+#: model:ir.model.constraint,message:spp_ethnic_group.constraint_spp_ethnic_group_name_uniq
+msgid "Name must be unique!"
+msgstr "ຊື່ຕ້ອງບໍ່ຊ້ຳກັນ!"

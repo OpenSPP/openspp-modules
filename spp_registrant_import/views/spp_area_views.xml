@@ -4,7 +4,7 @@
     <record id="view_spparea_form_inherit_spp_registrant_import" model="ir.ui.view">
         <field name="name">spp.area.view.form.inherit</field>
         <field name="model">spp.area</field>
-        <field name="inherit_id" ref="spp_area.view_spparea_form" />
+        <field name="inherit_id" ref="spp_area_base.view_spparea_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[@name='kind']" position="after">
                 <div class="col-4 o_setting_box" name="spp_id">
@@ -24,7 +24,7 @@
     <record id="view_spparea_tree_inherit_spp_registrant_import" model="ir.ui.view">
         <field name="name">spp.area.view.list.inherit</field>
         <field name="model">spp.area</field>
-        <field name="inherit_id" ref="spp_area.view_spparea_tree" />
+        <field name="inherit_id" ref="spp_area_base.view_spparea_tree" />
         <field name="arch" type="xml">
             <xpath expr="//tree" position="inside">
                 <field name="spp_id" optional="show" />
@@ -35,7 +35,7 @@
     <record id="spparea_filter_inherit_spp_registrant_import" model="ir.ui.view">
         <field name="name">spp.area.view.search.inherit</field>
         <field name="model">spp.area</field>
-        <field name="inherit_id" ref="spp_area.spparea_filter" />
+        <field name="inherit_id" ref="spp_area_base.spparea_filter" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
                 <field name="spp_id" />

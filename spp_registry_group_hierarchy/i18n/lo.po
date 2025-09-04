@@ -1,0 +1,93 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_registry_group_hierarchy
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_registry_group_hierarchy
+#. odoo-python
+#: code:addons/spp_registry_group_hierarchy/models/group_membership.py:0
+#, python-format
+msgid "A group or individual must be specified for this member."
+msgstr "ຕ້ອງລະບຸເປັນກຸ່ມ ຫຼືບຸກຄົນສຳລັບສະມາຊິກນີ້"
+
+# Review needed: Glossary term 'individual members' found, but target
+# 'ສະມາຊິກແຕ່ລະບຸກຄົນ' missing
+#. module: spp_registry_group_hierarchy
+#: model:ir.model.fields,field_description:spp_registry_group_hierarchy.field_g2p_group_kind__allow_all_member_type
+#, fuzzy
+msgid "Allow group and individual members"
+msgstr "ອະນຸຍາດສະມາຊິກແບບກຸ່ມ ແລະ ບຸກຄົນ"
+
+# Review needed: The term 'Child' in a hierarchy context could be 'ລູກ'
+# (literal) or 'ຍ່ອຍ' (sub-). 'ຍ່ອຍ' seems more appropriate for a technical
+# hierarchy, but confirmation is advised.
+#. module: spp_registry_group_hierarchy
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_group_membership_form_spp_custom
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
+#, fuzzy
+msgid "Child:"
+msgstr "ຍ່ອຍ:"
+
+#. module: spp_registry_group_hierarchy
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
+msgid "Date Range"
+msgstr "ຊ່ວງວັນທີ"
+
+#. module: spp_registry_group_hierarchy
+#: model:ir.model,name:spp_registry_group_hierarchy.model_g2p_group_kind
+msgid "Group Kind"
+msgstr "ປະເພດກຸ່ມ"
+
+#. module: spp_registry_group_hierarchy
+#: model:ir.model,name:spp_registry_group_hierarchy.model_g2p_group_membership
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
+msgid "Group Membership"
+msgstr "ສະມາຊິກກຸ່ມ"
+
+#. module: spp_registry_group_hierarchy
+#: model:ir.model.fields,field_description:spp_registry_group_hierarchy.field_g2p_group_membership__individual_domain
+msgid "Individual Domain"
+msgstr "ໂດເມນສ່ວນບຸກຄົນ"
+
+#. module: spp_registry_group_hierarchy
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_group_membership_form_spp_custom
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
+msgid "Member"
+msgstr "ສະມາຊິກ"
+
+#. module: spp_registry_group_hierarchy
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
+msgid "Open Form"
+msgstr "ເປີດຟອມ"
+
+#. module: spp_registry_group_hierarchy
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
+msgid "Open Member Form"
+msgstr "ເປີດຟອມສະມາຊິກ"
+
+#. module: spp_registry_group_hierarchy
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_group_membership_form_spp_custom
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
+msgid "Parent:"
+msgstr "ຂັ້ນເທີງ"
+
+#. module: spp_registry_group_hierarchy
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_groups_form_membership_spp_custom
+msgid "Role:"
+msgstr "ບົດບາດ:"
+
+#. module: spp_registry_group_hierarchy
+#: model_terms:ir.ui.view,arch_db:spp_registry_group_hierarchy.view_group_membership_form_spp_custom
+msgid "Select Member..."
+msgstr "ເລືອກສະມາຊິກ..."

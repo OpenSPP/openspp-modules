@@ -199,7 +199,11 @@
                             </group>
                             <group colspan="6" col="6">
                                 <group colspan="2">
-                                    <field name="gender" readonly="state != 'draft'" />
+                                    <field
+                                        name="gender"
+                                        readonly="state != 'draft'"
+                                        options="{'no_open':true,'no_edit':true,'no_create':true}"
+                                    />
                                 </group>
                                 <group colspan="2">
                                     <field
@@ -261,15 +265,9 @@
                                 nolabel="1"
                                 context="{'form_view_ref':'spp_change_request.view_dms_file_spp_custom_form'}"
                             >
-                                <tree js_class="file_list" multi_edit="1" create="0">
-                                    <field name="name" column_invisible="1" />
-                                    <field
-                                        name="content"
-                                        filename="name"
-                                        mimetype="mimetype"
-                                        widget="preview_binary"
-                                        string="File"
-                                    />
+                                <tree create="0">
+                                    <field name="content" widget="preview_widget" />
+                                    <field name="name" />
                                     <field name="category_id" />
                                     <field name="directory_id" />
                                     <field name="mimetype" />
@@ -563,7 +561,7 @@
                                     <field name="family_name" readonly="1" class="oe_edit_only" />
                                     <field name="given_name" readonly="1" class="oe_edit_only" />
                                     <field name="addl_name" readonly="1" class="oe_edit_only" />
-                                    <field name="gender" readonly="1" />
+                                    <field name="gender" readonly="1" options="{'no_open':true}" />
                                     <field
                                             name="phone"
                                             readonly="1"
@@ -589,15 +587,9 @@
                                         nolabel="1"
                                         context="{'form_view_ref':'spp_change_request.view_dms_file_spp_custom_form'}"
                                     >
-                                    <tree js_class="file_list" multi_edit="1" create="0">
-                                        <field name="name" column_invisible="1" />
-                                        <field
-                                                name="content"
-                                                filename="name"
-                                                mimetype="mimetype"
-                                                widget="preview_binary"
-                                                string="File"
-                                            />
+                                    <tree create="0">
+                                        <field name="content" widget="preview_widget" />
+                                        <field name="name" />
                                         <field name="category_id" />
                                         <field name="directory_id" />
                                         <field name="mimetype" column_invisible="1" />

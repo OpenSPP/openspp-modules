@@ -22,11 +22,13 @@ class MembershipTest(TransactionCase):
                 "is_registrant": True,
                 "farmer_family_name": "Butay",
                 "farmer_given_name": "Red",
+                "farmer_mobile_tel": "09123456789",
+                "farmer_national_id": "1122334455",
             }
         )
 
-    # Commented out because of errors when running in CI
-    # Need to further investigate since the error is not showing on local
+    # TODO: removed below test cases because they are having errors in the CI
+    # but they are working fine in the local machine
 
     # def test_get_group_head_member(self):
     #     head_id = self.farm_1.get_group_head_member()

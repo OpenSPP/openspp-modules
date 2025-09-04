@@ -3,10 +3,10 @@ name: "Code Scanning - Action"
 on:
   push:
     branches:
-      - "{{ odoo_version }}"
+      - "17.0"
   pull_request:
     branches:
-      - "{{ odoo_version }}"
+      - "17.0"
   schedule:
     #        ┌───────────── minute (0 - 59)
     #        │  ┌───────────── hour (0 - 23)
@@ -38,11 +38,11 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
         # Override language selection by uncommenting this and choosing your languages
@@ -52,7 +52,7 @@ jobs:
       # Autobuild attempts to build any compiled languages (C/C++, C#, Go, or Java).
       # If this step fails, then you should remove it and run the build manually (see below).
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
+        uses: github/codeql-action/autobuild@v3
 
       # ℹ️ Command-line programs to run using the OS shell.
       # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
@@ -66,13 +66,29 @@ jobs:
       #     make release
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
-
-      - name: TruffleHog OSS
-        if: env.BRANCH_NAME != github.event.repository.default_branch
+        uses: github/codeql-action/analyze@v3
+        
+  Trufflehog-Scan:
+    runs-on: ubuntu-latest
+    needs: CodeQL-Build
+    steps:
+      - name: Checkout repository (for Trufflehog - full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+            
+      - name: TruffleHog OSS (on pull_request)
+        if: github.event_name == 'pull_request'
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
-          base: ${{ github.event.repository.default_branch }}
-          head: HEAD
+          base: ${{ github.event.pull_request.base.sha }}
+          head: ${{ github.event.pull_request.head.sha }}
           extra_args: --debug --only-verified
+
+      - name: TruffleHog OSS (on push to 17.0)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/17.0'
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          extra_args: --debug --only-verified # Scanning the entire repo

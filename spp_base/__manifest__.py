@@ -4,7 +4,7 @@
 {
     "name": "OpenSPP Base",
     "category": "OpenSPP/OpenSPP",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -25,17 +25,33 @@
         "spp_service_points",
         "spp_custom_field",
         "spp_custom_fields_ui",
+        "spp_hide_menus",
         "spp_programs",
+        "spp_user_roles",
+        "spp_custom_filter_ui",
+    ],
+    "excludes": [
+        "spp_farmer_registry_base",
     ],
     "external_dependencies": {
-        "python": ["numpy>=1.22.2", "urllib3>=2.2.2", "zipp>=3.19.1"]
-    },  # not directly required, pinned by Snyk to avoid a vulnerability
+        "python": [
+            "fastapi==0.112.2",
+            "extendable_pydantic==1.3.0",
+            "numpy>=1.22.2",
+            "urllib3>=1.26.5",
+            "zipp>=3.19.1",
+            "jwcrypto>=1.5.6",
+            "requests>=2.25.1",
+        ]
+    },  # not directly required, pinned by Snyk to avoid a vulnerability and for fastapi, compatibility issues.
     "data": [
-        "security/ir.model.access.csv",
+        "data/global_roles.xml",
+        "data/local_roles.xml",
         "data/top_up_card.xml",
+        "security/ir.model.access.csv",
         "views/registrant_view.xml",
-        "views/hide_menu_view.xml",
         "views/main_view.xml",
+        "views/users_view.xml",
     ],
     "assets": {},
     "demo": [],

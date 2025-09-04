@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class Registrant(models.Model):
@@ -33,14 +33,14 @@ class Registrant(models.Model):
             if rec.given_name:
                 name.append(rec.given_name)
             if rec.addl_name:
-                name.append(self.addl_name)
+                name.append(rec.addl_name)
             rec.name = ", ".join(name).upper()
 
     def _inverse_name(self):
         for rec in self:
             if not rec.is_registrant or rec.is_group:
                 continue
-            name = list(map(lambda i: i.capitalize(), self.name.split(", ")))
+            name = list(map(lambda i: i, rec.name.split(", ")))
             if len(name) == 1:
                 rec.given_name = name[0]
             elif len(name) == 2:
@@ -71,25 +71,3 @@ class Registrant(models.Model):
         if self.is_group:
             return r"^GRP_[0-9A-Z]{8}$"
         return r"^IND_[0-9A-Z]{8}$"
-
-    @api.model
-    def get_import_templates(self):
-        context = self.env.context
-        if context.get("default_is_registrant"):
-            if context.get("default_is_group"):
-                import_templates = [
-                    {
-                        "label": _("Import Template for Groups"),
-                        "template": "/spp_registrant_import/static/xls/group_registry.xlsx",
-                    }
-                ]
-            else:
-                import_templates = [
-                    {
-                        "label": _("Import Template for Individuals"),
-                        "template": "/spp_registrant_import/static/xls/individual_registry.xlsx",
-                    }
-                ]
-
-            return import_templates
-        return super().get_import_templates()

@@ -1,0 +1,1737 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_change_request
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid ""
+"<span class=\"o_stat_text\">Assign</span>\n"
+"                                <span class=\"o_stat_text\">To Me</span>"
+msgstr ""
+"<span class=\"o_stat_text\">ມອບໝາຍ</span>                                 "
+"<span class=\"o_stat_text\">ໃຫ້ຂ້ອຍ</span>"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "<span class=\"o_stat_text\">Reassign</span>"
+msgstr "<span class=\"o_stat_text\">ມອບໝາຍຄືນ</span>"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "A group must be selected."
+msgstr "ຕ້ອງເລືອກກຸ່ມໃດໜຶ່ງ."
+
+# Review needed: Translated 'Pending Validation' as 'ລໍຖ້າການຢັ້ງຢືນ'. Another
+# option could be 'ລໍຖ້າການກວດສອບ'. Confirmation needed for the best term in
+# this context.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format, fuzzy
+msgid ""
+"A new change request was submitted. The next step will set this request to "
+"'Pending Validation'."
+msgstr ""
+"ຄຳຮ້ອງຂໍປ່ຽນແປງໃໝ່ໄດ້ຖືກສົ່ງແລ້ວ. ຂັ້ນຕອນຕໍ່ໄປຈະຕັ້ງຄຳຮ້ອງຂໍນີ້ເປັນ "
+"'ລໍຖ້າການຢັ້ງຢືນ'."
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_needaction
+msgid "Action Needed"
+msgstr "ຕ້ອງການການກະທຳ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_ids
+msgid "Activities"
+msgstr "ກິດຈະກຳ"
+
+# Review needed: Translated 'Decoration' as 'ສັນຍາລັກ'. The term might refer
+# to a visual indicator or flag, and this translation might need refinement
+# based on the UI context.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_exception_decoration
+#, fuzzy
+msgid "Activity Exception Decoration"
+msgstr "ສັນຍາລັກຂໍ້ຍົກເວັ້ນກິດຈະກຳ"
+
+# Review needed: Glossary term 'state' found, but target 'ລັດ' missing
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_state
+#, fuzzy
+msgid "Activity State"
+msgstr "ສະຖານະກິດຈະກຳ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "ສັນຍາລັກປະເພດກິດຈະກຳ"
+
+#. module: spp_change_request
+#: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
+#: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validated
+msgid "Add a new change request!"
+msgstr "ເພີ່ມຄຳຮ້ອງຂໍປ່ຽນແປງໃໝ່!"
+
+# Review needed: Translated 'Validation Sequence' as 'ລຳດັບການຢັ້ງຢືນ'.
+# Another option could be 'ລຳດັບການກວດສອບ'. Confirmation needed.
+#. module: spp_change_request
+#: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validation_sequence
+#, fuzzy
+msgid "Add a new validation sequence by request type!"
+msgstr "ເພີ່ມລຳດັບການຢັ້ງຢືນໃໝ່ຕາມປະເພດຄຳຮ້ອງຂໍ!"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__group_address
+msgid "Address"
+msgstr "ທີ່ຢູ່"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__age
+msgid "Age"
+msgstr "ອາຍຸ"
+
+#. module: spp_change_request
+#: model:ir.actions.act_window,name:spp_change_request.action_change_request
+#: model:ir.ui.menu,name:spp_change_request.menu_change_request
+msgid "All Requests"
+msgstr "ຄຳຮ້ອງຂໍທັງໝົດ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "An error was encountered in applying the changes: %s"
+msgstr "ພົບຂໍ້ຜິດພາດໃນການນຳໃຊ້ການປ່ຽນແປງ: %s"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__applicant_id
+msgid "Applicant"
+msgstr "ຜູ້ຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Applicant Details"
+msgstr "ລາຍລະອຽດຜູ້ຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id_domain
+msgid "Applicant Id Domain"
+msgstr "ໂດເມນລະຫັດຜູ້ຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Applicant Information"
+msgstr "ຂໍ້ມູນຜູ້ຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_information_visible
+msgid "Applicant Information Visible"
+msgstr "ຂໍ້ມູນຜູ້ຮ້ອງຂໍທີ່ເຫັນໄດ້"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id_required
+msgid "Applicant Required"
+msgstr "ຕ້ອງການຜູ້ຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_id_visible
+msgid "Applicant Visible"
+msgstr "ຜູ້ຮ້ອງຂໍທີ່ເຫັນໄດ້"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_phone
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__applicant_phone
+msgid "Applicant's Phone Number"
+msgstr "ເບີໂທລະສັບຂອງຜູ້ຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applicant_phone_required
+msgid "Applicant's Phone Required"
+msgstr "ຕ້ອງການເບີໂທລະສັບຂອງຜູ້ຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Applicant:"
+msgstr "ຜູ້ຮ້ອງຂໍ:"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__applied
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Applied"
+msgstr "ນຳໃຊ້ແລ້ວ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__applied_by_id
+msgid "Applied by"
+msgstr "ນຳໃຊ້ໂດຍ"
+
+#. module: spp_change_request
+#: model:mail.activity.type,name:spp_change_request.apply_changes_activity
+msgid "Apply Change Request"
+msgstr "ນຳໃຊ້ຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Apply Changes"
+msgstr "ນຳໃຊ້ການປ່ຽນແປງ"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_validation_sequence__validation_group_state__both
+msgid "Apply to Both"
+msgstr "ນຳໃຊ້ກັບທັງສອງ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/wizard/cancel_change_request.py:0
+#, python-format
+msgid "Are you sure you would like to cancel this request: %s"
+msgstr "ເຈົ້າແນ່ໃຈບໍ່ວ່າຕ້ອງການຍົກເລີກຄຳຮ້ອງຂໍນີ້: %s?"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/wizard/reject_change_request.py:0
+#, python-format
+msgid "Are you sure you would like to reject this request: %s"
+msgstr "ເຈົ້າແນ່ໃຈບໍ່ວ່າຕ້ອງການປະຕິເສດຄຳຮ້ອງຂໍນີ້: %s?"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#: model:ir.actions.act_window,name:spp_change_request.action_change_request_user_assign_wizard
+#, python-format
+msgid "Assign Change Request to User"
+msgstr "ມອບໝາຍຄຳຮ້ອງຂໍປ່ຽນແປງໃຫ້ຜູ້ໃຊ້"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to
+msgid "Assign To"
+msgstr "ມອບໝາຍໃຫ້"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_any
+msgid "Assign To Any"
+msgstr "ມອບໝາຍໃຫ້ຜູ້ໃດກໍໄດ້"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_id_domain
+msgid "Assign To Id Domain"
+msgstr "ໂດເມນລະຫັດຜູ້ຮັບມອບໝາຍ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/wizard/confirm_user_assignment.py:0
+#, python-format
+msgid "Assign this change request to:"
+msgstr "ມອບໝາຍຄຳຮ້ອງຂໍປ່ຽນແປງນີ້ໃຫ້:"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Assigned To"
+msgstr "ມອບໝາຍໃຫ້"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__assign_to_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__assign_to_id
+msgid "Assigned to"
+msgstr "ຖືກມອບໝາຍໃຫ້"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_attachment_count
+msgid "Attachment Count"
+msgstr "ຈຳນວນໄຟລ໌ແນບ"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_targets__target__both
+msgid "Both"
+msgstr "ທັງສອງ"
+
+# Review needed: Assumed 'CR' stands for 'Change Request' and translated
+# accordingly. Confirmation needed if 'CR' should be kept as is or expanded.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid "CR Reset to Draft"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງຖືກຣີເຊັດເປັນສະບັບຮ່າງ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "CREATE"
+msgstr "ສ້າງ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
+msgid "Cancel"
+msgstr "ຍົກເລີກ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#: model:ir.actions.act_window,name:spp_change_request.action_change_request_cancel_wizard
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+#, python-format
+msgid "Cancel Change Request"
+msgstr "ຍົກເລີກຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+#. module: spp_change_request
+#: model:mail.activity.type,name:spp_change_request.cancel_activity
+msgid "Cancel Request"
+msgstr "ຍົກເລີກຄຳຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__cancelled
+msgid "Cancelled"
+msgstr "ຖືກຍົກເລີກແລ້ວ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__cancelled_by_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__cancelled_by_id
+msgid "Cancelled by"
+msgstr "ຍົກເລີກໂດຍ"
+
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__change_request_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__change_request_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__change_request_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__change_request_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__request_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_dms_directory__change_request_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_dms_file__change_request_id
+#: model:ir.ui.menu,name:spp_change_request.spp_change_request_menu_root
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Change Request"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
+msgid "Change Request #"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງ #"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Administrator' translation chosen for context over
+# glossary entry 'ການບໍລິຫານ'.
+#. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_administrator
+#, fuzzy
+msgid "Change Request Administrator"
+msgstr "ຜູ້ບໍລິຫານຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Agent' is from the glossary.
+#. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_agent
+#, fuzzy
+msgid "Change Request Agent"
+msgstr "ຕົວແທນຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Applicator' is not in the glossary and translated as
+# 'ຜູ້ນຳໃຊ້' based on assumed meaning.
+#. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_applicator
+#, fuzzy
+msgid "Change Request Applicator"
+msgstr "ຜູ້ນຳໃຊ້ຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Applied' is based on the glossary term 'Apply'.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid "Change Request Applied"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງໄດ້ຖືກນຳໃຊ້ແລ້ວ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Cancel Wizard' uses glossary terms.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_cancel_wizard
+#, fuzzy
+msgid "Change Request Cancel Wizard"
+msgstr "ຕົວຊ່ວຍຍົກເລີກຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Cancelled' is based on the glossary term 'Cancel'.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid "Change Request Cancelled"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງຖືກຍົກເລີກແລ້ວ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Data Source' is from the glossary. 'Mixin' is a
+# technical term left untranslated.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_source_mixin
+#, fuzzy
+msgid "Change Request Data Source Mixin"
+msgstr "Mixin ແຫຼ່ງຂໍ້ມູນຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'External' is translated contextually. 'API' is a
+# technical term left untranslated.
+#. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_external_api
+#, fuzzy
+msgid "Change Request External API"
+msgstr "API ພາຍນອກສຳລັບຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The terms 'Change Request' and 'Validation' are translated
+# based on context but not in the glossary.
+#. module: spp_change_request
+#: model:mail.activity.type,name:spp_change_request.validation_activity
+#, fuzzy
+msgid "Change Request For Validation"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງເພື່ອການຢັ້ງຢືນ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Module' and 'Access' are from the glossary.
+#. module: spp_change_request
+#: model:ir.module.category,name:spp_change_request.spp_change_request_module
+#, fuzzy
+msgid "Change Request Module Access"
+msgstr "ການເຂົ້າເຖິງໂມດູລຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The terms 'Change Request' and 'Validated' are translated
+# based on context but not in the glossary. 'Partially' is translated
+# contextually.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid "Change Request Partially Validated"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງຖືກຢັ້ງຢືນແລ້ວສ່ວນໜຶ່ງ"
+
+# Review needed: The terms 'Change Request', 'Pending', and 'Validation' are
+# translated based on context but not in the glossary.
+#. module: spp_change_request
+#: model:mail.activity.type,name:spp_change_request.pending_validation_activity
+#, fuzzy
+msgid "Change Request Pending Validation"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງລໍຖ້າການຢັ້ງຢືນ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Rejected' is from the glossary.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid "Change Request Rejected"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງຖືກປະຕິເສດແລ້ວ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Rejection' is based on the glossary term 'Reject'.
+# 'Wizard' is from the glossary.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_reject_wizard
+#, fuzzy
+msgid "Change Request Rejection Wizard"
+msgstr "ຕົວຊ່ວຍການປະຕິເສດຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The terms 'Change Request', 'Reset', and 'Draft' are
+# translated based on context but not in the glossary.
+#. module: spp_change_request
+#: model:mail.activity.type,name:spp_change_request.reset_draft_activity
+#, fuzzy
+msgid "Change Request Reset to Draft"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງຖືກຕັ້ງຄ່າໃໝ່ເປັນສະບັບຮ່າງ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'Template' is from the glossary.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__request_type_ref_id
+#, fuzzy
+msgid "Change Request Template"
+msgstr "ແບບຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The term 'Change Request' is translated based on context but
+# not in the glossary. 'User', 'Assignment', and 'Wizard' are translated based
+# on glossary or context.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_user_assign_wizard
+#, fuzzy
+msgid "Change Request User Assignment Wizard"
+msgstr "ຕົວຊ່ວຍການມອບໝາຍຜູ້ໃຊ້ສຳລັບຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The terms 'Change Request' and 'Validated' are translated
+# based on context but not in the glossary.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid "Change Request Validated"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງຖືກຢັ້ງຢືນແລ້ວ"
+
+# Review needed: The terms 'Change Request' and 'Validation' are translated
+# based on context but not in the glossary. 'Group' is from the glossary.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__validation_group_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__validation_group_id
+#, fuzzy
+msgid "Change Request Validation Group"
+msgstr "ກຸ່ມການຢັ້ງຢືນຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The terms 'Change Request', 'Validation', and 'Sequence' are
+# translated based on context but not in the glossary.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_validation_sequence
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_form
+#, fuzzy
+msgid "Change Request Validation Sequence"
+msgstr "ລຳດັບການຢັ້ງຢືນຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The terms 'Change Request', 'Validation', and 'Sequence' are
+# translated based on context but not in the glossary. 'Mixin' is a technical
+# term left untranslated.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_validation_sequence_mixin
+#, fuzzy
+msgid "Change Request Validation Sequence Mixin"
+msgstr "Mixin ລຳດັບການຢັ້ງຢືນຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The terms 'Change Request', 'Validation', and 'Stage' are
+# translated based on context but not in the glossary.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_validation_stage
+#, fuzzy
+msgid "Change Request Validation Stage"
+msgstr "ຂັ້ນຕອນການຢັ້ງຢືນຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The terms 'Change Request' and 'Validator' (derived from
+# Validation) are translated based on context but not in the glossary.
+#. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_validator
+#, fuzzy
+msgid "Change Request Validator"
+msgstr "ຜູ້ຢັ້ງຢືນຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The terms 'Change Request' and 'Validator' are translated
+# based on context but not in the glossary. 'HQ' is assumed to mean
+# Headquarters and translated accordingly.
+#. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_hq_validator
+#, fuzzy
+msgid "Change Request Validator HQ"
+msgstr "ຜູ້ຢັ້ງຢືນຄຳຮ້ອງຂໍປ່ຽນແປງ (ສຳນັກງານໃຫຍ່)"
+
+# Review needed: The terms 'Change Request' and 'Validator' are translated
+# based on context but not in the glossary. 'Local' is translated
+# contextually.
+#. module: spp_change_request
+#: model:res.groups,name:spp_change_request.group_spp_change_request_local_validator
+#, fuzzy
+msgid "Change Request Validator Local"
+msgstr "ຜູ້ຢັ້ງຢືນຄຳຮ້ອງຂໍປ່ຽນແປງ (ທ້ອງຖິ່ນ)"
+
+# Review needed: The terms 'Change Request' and 'Validators' (plural of
+# Validator) are translated based on context but not in the glossary. Plural
+# is implied in Lao.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_validators
+#, fuzzy
+msgid "Change Request Validators"
+msgstr "ຜູ້ຢັ້ງຢືນຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The term 'Change Requests' (plural) is translated based on
+# context but not in the glossary. Plural is implied in Lao.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_g2p_program_membership__change_request_ids
+#: model:ir.model.fields,field_description:spp_change_request.field_res_partner__change_request_ids
+#: model:ir.model.fields,field_description:spp_change_request.field_res_users__change_request_ids
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_group_ext_form_custom_spp_cr
+#, fuzzy
+msgid "Change Requests"
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The term 'Change Requests' is translated based on context but
+# not in the glossary. 'Targets' is translated contextually.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_targets
+#, fuzzy
+msgid "Change Requests' Targets"
+msgstr "ເປົ້າໝາຍຂອງຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+# Review needed: The term 'change request' is translated based on context but
+# not in the glossary. Other terms are standard UI elements.
+#. module: spp_change_request
+#: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request
+#: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validated
+#, fuzzy
+msgid "Click the create button to enter a new change request."
+msgstr "ກົດປຸ່ມສ້າງເພື່ອປ້ອນຄຳຮ້ອງຂໍປ່ຽນແປງໃໝ່."
+
+# Review needed: The term 'validation sequence' is translated based on context
+# but not in the glossary. Other terms are standard UI elements.
+#. module: spp_change_request
+#: model_terms:ir.actions.act_window,help:spp_change_request.action_change_request_validation_sequence
+#, fuzzy
+msgid "Click the create button to enter a new validation sequence."
+msgstr "ກົດປຸ່ມສ້າງເພື່ອປ້ອນລຳດັບການຢັ້ງຢືນໃໝ່."
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
+msgid "Close"
+msgstr "ປິດ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__company_id
+msgid "Company"
+msgstr "ບໍລິສັດ"
+
+#. module: spp_change_request
+#: model:ir.ui.menu,name:spp_change_request.spp_change_request_config_root
+msgid "Configuration"
+msgstr "ການກຳນົດຄ່າ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_cancel_wizard
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_reject_wizard
+msgid "Confirm"
+msgstr "ຢືນຢັນ"
+
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_res_partner
+msgid "Contact"
+msgstr "ຕິດຕໍ່ພົວພັນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__create_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__create_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__create_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__create_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__create_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__create_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__create_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__create_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__create_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__create_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__create_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__create_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+# Review needed: Phrasing might need adjustment for naturalness.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__current_user_assigned
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__current_user_assigned
+#, fuzzy
+msgid "Current User Assigned"
+msgstr "ຜູ້ໃຊ້ປະຈຸບັນທີ່ຖືກມອບໝາຍ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__curr_assign_to_id
+msgid "Currently Assigned to"
+msgstr "ປະຈຸບັນນີ້ມອບໝາຍໃຫ້"
+
+# Review needed: DMS is an abbreviation, kept untranslated. Assumed meaning is
+# Document Management System.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__dms_directory_ids
+#, fuzzy
+msgid "DMS Directories"
+msgstr "ຖານຂໍ້ມູນ DMS"
+
+# Review needed: DMS is an abbreviation, kept untranslated. Assumed meaning is
+# Document Management System.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_dms_directory
+#, fuzzy
+msgid "DMS Directory"
+msgstr "ຖານຂໍ້ມູນ DMS"
+
+# Review needed: DMS is an abbreviation, kept untranslated. Assumed meaning is
+# Document Management System.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_dms_file
+#, fuzzy
+msgid "DMS File"
+msgstr "ແຟ້ມ DMS"
+
+# Review needed: Based on 'Applied' meaning 'put into effect'. Confirmed
+# context might be needed.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_applied
+#, fuzzy
+msgid "Date Applied"
+msgstr "ວັນທີນຳໃຊ້"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_cancelled
+msgid "Date Cancelled"
+msgstr "ວັນທີຍົກເລີກ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_rejected
+msgid "Date Rejected"
+msgstr "ວັນທີປະຕິເສດ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_requested
+msgid "Date Requested"
+msgstr "ວັນທີຮ້ອງຂໍ"
+
+# Review needed: The terms 'Reset' and 'Draft' are translated based on context
+# but not in the glossary.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_reset_to_draft
+#, fuzzy
+msgid "Date Reset To Draft"
+msgstr "ວັນທີຕັ້ງຄ່າໃໝ່ເປັນສະບັບຮ່າງ"
+
+# Review needed: The term 'Validated' is translated based on context but not
+# in the glossary.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__date_validated
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__date_validated
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__date_validated
+#, fuzzy
+msgid "Date Validated"
+msgstr "ວັນທີຢັ້ງຢືນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__birthdate
+msgid "Date of Birth"
+msgstr "ວັນເດືອນປີເກີດ"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_validation_sequence__validation_group_state__destination
+msgid "Destination Area"
+msgstr "ພື້ນທີ່ປາຍທາງ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__dialog_message
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__dialog_message
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__dialog_message
+msgid "Dialog Message"
+msgstr "ຂໍ້ຄວາມກອບສົນທະນາ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__display_name
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__display_name
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__display_name
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__display_name
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__display_name
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__display_name
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__display_name
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__display_name
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__draft
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Draft"
+msgstr "ສະບັບຮ່າງ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "ERROR!"
+msgstr "ຜິດພາດ!"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__end_date
+msgid "End Date"
+msgstr "ມື້ສິ້ນສຸດ"
+
+# Review needed: Technical error message context, ensuring "validation stages"
+# is correctly translated in Odoo's context.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format, fuzzy
+msgid ""
+"Error in validation stages. No available stage to assign to this validation."
+msgstr ""
+"ຜິດພາດໃນຂັ້ນຕອນການກວດສອບ. ບໍ່ມີຂັ້ນຕອນທີ່ສາມາດມອບໝາຍໃຫ້ກັບການກວດສອບນີ້ໄດ້."
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
+msgid "Files"
+msgstr "ແຟ້ມ"
+
+# Review needed: Odoo specific term "Followers". Need confirmation of the
+# standard Lao term.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_follower_ids
+#, fuzzy
+msgid "Followers"
+msgstr "ຜູ້ຕິດຕາມ"
+
+# Review needed: Odoo specific term "Followers (Partners)". Need confirmation
+# of the standard Lao term.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_partner_ids
+#, fuzzy
+msgid "Followers (Partners)"
+msgstr "ຜູ້ຕິດຕາມ (ຄູ່ຮ່ວມງານ)"
+
+# Review needed: Technical help text including a brand name ("Font awesome")
+# and technical term ("icon").
+#. module: spp_change_request
+#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__activity_type_icon
+#, fuzzy
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "ໄອຄອນ Font awesome ຕົວຢ່າງ: fa-tasks"
+
+# Review needed: Ambiguity of "Application" in this context. Needs
+# clarification based on surrounding UI elements.
+#. module: spp_change_request
+#: model:ir.ui.menu,name:spp_change_request.spp_change_request_for_application_root
+#, fuzzy
+msgid "For Application"
+msgstr "ສຳລັບການນຳໃຊ້"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "For Application of Changes"
+msgstr "ສຳລັບການນຳໃຊ້ການປ່ຽນແປງ"
+
+# Review needed: Common workflow status "Pending Validation". Need
+# confirmation of the standard Lao term in Odoo.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format, fuzzy
+msgid "For Pending Validation"
+msgstr "ສຳລັບການກວດສອບທີ່ຄ້າງຢູ່"
+
+# Review needed: Key term "Validation". Needs standard Odoo Lao term.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#: model:ir.ui.menu,name:spp_change_request.spp_change_request_pending_validation_root
+#, python-format, fuzzy
+msgid "For Validation"
+msgstr "ສຳລັບການກວດສອບ"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_targets__target__group
+msgid "Group"
+msgstr "ກຸ່ມ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
+msgid "Group By"
+msgstr "ຈັດກຸ່ມດ້ວຍ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Group Details"
+msgstr "ລາຍລະອຽດກຸ່ມ"
+
+# Review needed: Translation of a model name ("Group Membership"). Needs
+# confirmation of standard practice.
+#. module: spp_change_request
+#: model:ir.model,name:spp_change_request.model_spp_change_request_group_members
+#, fuzzy
+msgid "Group Membership"
+msgstr "ສະມາຊິກກຸ່ມ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__has_message
+msgid "Has Message"
+msgstr "ມີຂໍ້ຄວາມ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__id
+msgid "ID"
+msgstr "ລະຫັດ"
+
+# Review needed: Consistency check for the term "icon".
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_exception_icon
+#, fuzzy
+msgid "Icon"
+msgstr "ໄອຄອນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "ໄອຄອນເພື່ອບົ່ງບອກກິດຈະກຳທີ່ເປັນຂໍ້ຍົກເວັ້ນ."
+
+#. module: spp_change_request
+#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "ຖ້າໝາຍຖືກ, ຂໍ້ຄວາມໃໝ່ຕ້ອງການການເອົາໃຈໃສ່ຂອງທ່ານ."
+
+#. module: spp_change_request
+#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__message_has_error
+#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "ຖ້າໝາຍຖືກ, ບາງຂໍ້ຄວາມມີຂໍ້ຜິດພາດໃນການຈັດສົ່ງ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "Incorrect phone number format"
+msgstr "ຮູບແບບເບີໂທລະສັບບໍ່ຖືກຕ້ອງ"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_targets__target__individual
+msgid "Individual"
+msgstr "ສ່ວນບຸກຄົນ"
+
+# Review needed: Depends on the standard term for "Follower".
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_is_follower
+#, fuzzy
+msgid "Is Follower"
+msgstr "ເປັນຜູ້ຕິດຕາມ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__last_activity_id
+msgid "Last Activity"
+msgstr "ກິດຈະກຳລ່າສຸດ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__write_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__write_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__write_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__write_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__write_uid
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ປັບປຸງລ່າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__write_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_cancel_wizard__write_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__write_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__write_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__write_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__write_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__write_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__write_date
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ປັບປຸງລ່າສຸດເມື່ອ"
+
+# Review needed: Depends on the standard term for "Validator" / "Validation".
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__last_validated_by_id
+#, fuzzy
+msgid "Last Validator"
+msgstr "ຜູ້ກວດສອບຄົນລ່າສຸດ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__kind_ids
+msgid "Membership Types"
+msgstr "ປະເພດສະມາຊິກ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_has_error
+msgid "Message Delivery error"
+msgstr "ຂໍ້ຜິດພາດໃນການຈັດສົ່ງຂໍ້ຄວາມ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_ids
+msgid "Messages"
+msgstr "ຂໍ້ຄວາມ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__name
+msgid "Model Name"
+msgstr "ຊື່ແບບຈຳລອງ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Monitoring"
+msgstr "ການຕິດຕາມ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "ກຳນົດສົ່ງກິດຈະກຳຂອງຂ້ອຍ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "NEXT"
+msgstr "ຕໍ່ໄປ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_user_assign_wizard
+msgid "NO"
+msgstr "ບໍ່"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "ເຫດການປະຕິທິນຂອງກິດຈະກຳຕໍ່ໄປ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "ກຳນົດສົ່ງກິດຈະກຳຕໍ່ໄປ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_summary
+msgid "Next Activity Summary"
+msgstr "ສະຫຼຸບກິດຈະກຳຕໍ່ໄປ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_type_id
+msgid "Next Activity Type"
+msgstr "ປະເພດກິດຈະກຳຕໍ່ໄປ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__next_area_center_ids
+msgid "Next Area"
+msgstr "ພື້ນທີ່ຕໍ່ໄປ"
+
+# Review needed: Depends on standard terms for "Validation" and "Sequence" in
+# Odoo workflows.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__next_validation_sequence_id
+#, fuzzy
+msgid "Next Validation Sequence"
+msgstr "ລຳດັບການກວດສອບຕໍ່ໄປ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_needaction_counter
+msgid "Number of Actions"
+msgstr "ຈຳນວນການກະທຳ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_has_error_counter
+msgid "Number of errors"
+msgstr "ຈຳນວນຂໍ້ຜິດພາດ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ຕ້ອງການການກະທຳ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ມີຂໍ້ຜິດພາດໃນການຈັດສົ່ງ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "Only draft change requests can be deleted by its creator."
+msgstr "ສະເພາະຜູ້ສ້າງເທົ່ານັ້ນທີ່ສາມາດລຶບການຮ້ອງຂໍປ່ຽນແປງສະບັບຮ່າງໄດ້."
+
+# Review needed: Depends on standard terms for "validation sequence" and
+# "assigned". Complex sentence structure.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format, fuzzy
+msgid ""
+"Only users of groups defined in the validation sequence can be assigned to "
+"this change request."
+msgstr ""
+"ສະເພາະຜູ້ໃຊ້ຂອງກຸ່ມທີ່ກຳນົດໄວ້ໃນລຳດັບການກວດສອບເທົ່ານັ້ນທີ່ສາມາດຖືກມອບໝາຍໃຫ້ກັບການຮ້ອງຂໍປ່ຽນແປງນີ້ໄດ້."
+
+# Review needed: Need standard term for "Applicant".
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+#, fuzzy
+msgid "Open Applicant Form"
+msgstr "ເປີດແບບຟອມຜູ້ຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_tree
+msgid "Open Details"
+msgstr "ເປີດລາຍລະອຽດ"
+
+# Review needed: Common workflow status "Pending Validation". Need
+# confirmation of the standard Lao term in Odoo. Consistency check with string
+# 9.
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__pending
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+#, fuzzy
+msgid "Pending Validation"
+msgstr "ລໍຖ້າການກວດສອບ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Phone No."
+msgstr "ເບີໂທລະສັບ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "Phone No. is required."
+msgstr "ກະລຸນາປ້ອນເບີໂທລະສັບ."
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__phone
+msgid "Phone Numbers"
+msgstr "ເບີໂທລະສັບ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__registrant_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__individual_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__registrant_id
+msgid "Registrant"
+msgstr "ຜູ້ລົງທະບຽນ"
+
+# Review needed: Unsure about the exact meaning of 'Registrant Id Domain' in
+# this specific Odoo context. Translated literally.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__registrant_id_domain
+#, fuzzy
+msgid "Registrant Id Domain"
+msgstr "ໂດເມນ ID ຜູ້ລົງທະບຽນ"
+
+# Review needed: Unsure about the exact meaning of 'Registrant Visible' in
+# this specific Odoo context. Translated literally.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__registrant_id_visible
+#, fuzzy
+msgid "Registrant Visible"
+msgstr "ການເບິ່ງເຫັນຜູ້ລົງທະບຽນ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Registrant:"
+msgstr "ຜູ້ລົງທະບຽນ:"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__group_registration_date
+msgid "Registration Date"
+msgstr "ວັນທີລົງທະບຽນ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Reject"
+msgstr "ປະຕິເສດ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#: model:ir.actions.act_window,name:spp_change_request.action_change_request_reject_wizard
+#: model:mail.activity.type,name:spp_change_request.reject_activity
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+#, python-format
+msgid "Reject Change Request"
+msgstr "ປະຕິເສດຄຳຮ້ອງຂໍການປ່ຽນແປງ"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__rejected
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Rejected"
+msgstr "ຖືກປະຕິເສດ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__rejected_by_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__rejected_by_id
+msgid "Rejected by"
+msgstr "ປະຕິເສດໂດຍ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__rejected_remarks
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_reject_wizard__rejected_remarks
+msgid "Rejection Remarks"
+msgstr "ໝາຍເຫດການປະຕິເສດ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__name
+msgid "Request #"
+msgstr "ຄຳຮ້ອງຂໍ #"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Request #:"
+msgstr "ຄຳຮ້ອງຂໍ #:"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__request_type
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__request_type
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
+msgid "Request Type"
+msgstr "ປະເພດຄຳຮ້ອງຂໍ"
+
+# Review needed: Uncertain about the precise meaning of 'Target' in this
+# context. Used the glossary term 'ເປົ້າໝາຍ'.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__request_type_target
+#, fuzzy
+msgid "Request Type Target"
+msgstr "ເປົ້າໝາຍປະເພດຄຳຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_form
+msgid "Request Type:"
+msgstr "ປະເພດຄຳຮ້ອງຂໍ:"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Request Validation"
+msgstr "ການກວດສອບຄຳຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_tree
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_group_ext_form_custom_spp_cr
+msgid "Requested By"
+msgstr "ຮ້ອງຂໍໂດຍ"
+
+#. module: spp_change_request
+#: model:ir.ui.menu,name:spp_change_request.spp_change_request_request_root
+msgid "Requests"
+msgstr "ຄຳຮ້ອງຂໍ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Reset to Draft"
+msgstr "ຣີເຊັດເປັນສະບັບຮ່າງ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__reset_to_draft_by_id
+msgid "Reset to Draft by"
+msgstr "ຣີເຊັດເປັນສະບັບຮ່າງໂດຍ"
+
+# Review needed: Translation assumes 'Responsible User' means the user
+# assigned to handle the task. Context might imply a different nuance.
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__activity_user_id
+#, fuzzy
+msgid "Responsible User"
+msgstr "ຜູ້ໃຊ້ທີ່ຮັບຜິດຊອບ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "ຂໍ້ຜິດພາດໃນການສົ່ງ SMS"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_dms_file_spp_custom_form
+msgid "Save"
+msgstr "ບັນທຶກ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__id_document_details
+msgid "Scanned ID Document"
+msgstr "ເອກະສານປະຈຳຕົວທີ່ສະແກນແລ້ວ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__qr_code_details
+msgid "Scanned QR Card"
+msgstr "ບັດ QR ທີ່ສະແກນແລ້ວ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
+msgid "Search Change Request"
+msgstr "ຄົ້ນຫາຄຳຮ້ອງຂໍການປ່ຽນແປງ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__sequence
+msgid "Sequence"
+msgstr "ລຳດັບ"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request_validation_sequence__validation_group_state__source
+msgid "Source Area"
+msgstr "ພື້ນທີ່ແຫຼ່ງຂໍ້ມູນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_stage__name
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
+msgid "Stage"
+msgstr "ຂັ້ນຕອນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_group_members__start_date
+msgid "Start Date"
+msgstr "ວັນທີເລີ່ມຕົ້ນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__state
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_source_mixin__state
+msgid "Status"
+msgstr "ສະຖານະ"
+
+# Review needed: Complex sentence describing status logic. Needs review for
+# clarity and accuracy in conveying the different states (Overdue, Today,
+# Planned).
+#. module: spp_change_request
+#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__activity_state
+#, fuzzy
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"ສະຖານະໂດຍອີງຕາມກິດຈະກຳ ຄ້າງກຳນົດ: ວັນຄົບກຳນົດຜ່ານໄປແລ້ວ ມື້ນີ້: "
+"ວັນທີກິດຈະກຳແມ່ນມື້ນີ້ ວາງແຜນໄວ້: ກິດຈະກຳໃນອະນາຄົດ."
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_filter
+msgid "Submitted By"
+msgstr "ສົ່ງໂດຍ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_targets__target
+msgid "Target"
+msgstr "ເປົ້າໝາຍ"
+
+# Review needed: Translated 'Applicant' as 'ຜູ້ສະໝັກ'. Context might require
+# 'ຜູ້ຮ້ອງຂໍ'.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format, fuzzy
+msgid "The Applicant field must be filled-up."
+msgstr "ຕ້ອງປ້ອນຂໍ້ມູນໃສ່ຊ່ອງຜູ້ສະໝັກ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "The Request Type field must be filled-up."
+msgstr "ຕ້ອງປ້ອນຂໍ້ມູນໃສ່ຊ່ອງປະເພດຄຳຮ້ອງຂໍ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request has been approved."
+msgstr "ຄຳຮ້ອງຂໍການປ່ຽນແປງໄດ້ຮັບການອະນຸມັດແລ້ວ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request has been fully validated"
+msgstr "ຄຳຮ້ອງຂໍການປ່ຽນແປງໄດ້ຮັບການກວດສອບຄົບຖ້ວນແລ້ວ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request has been partially validated"
+msgstr "ຄຳຮ້ອງຂໍການປ່ຽນແປງໄດ້ຮັບການກວດສອບບາງສ່ວນແລ້ວ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request has been validated and the changes has been applied"
+msgstr "ຄຳຮ້ອງຂໍການປ່ຽນແປງໄດ້ຮັບການກວດສອບ ແລະ ການປ່ຽນແປງໄດ້ຖືກນຳໃຊ້ແລ້ວ"
+
+# Review needed: Complex sentence describing workflow state. Needs review for
+# accuracy and natural phrasing in Lao.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid ""
+"The change request is now fully validated. It is now submitted for final "
+"application of changes."
+msgstr ""
+"ຄຳຮ້ອງຂໍການປ່ຽນແປງຕອນນີ້ໄດ້ຮັບການກວດສອບຄົບຖ້ວນແລ້ວ. "
+"ຕອນນີ້ມັນຖືກສົ່ງເພື່ອການນຳໃຊ້ການປ່ຽນແປງຂັ້ນສຸດທ້າຍ."
+
+# Review needed: Glossary term 'may' found, but target 'ເດືອນພືດສະພາ' missing;
+# Complex sentence describing workflow state and dependencies. Needs review
+# for accuracy and clarity.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid ""
+"The change request is now set for validation. Depending on the validation "
+"sequence, this may be subjected to one or more validations."
+msgstr ""
+"ຄຳຮ້ອງຂໍການປ່ຽນແປງຕອນນີ້ຖືກຕັ້ງຄ່າສຳລັບການກວດສອບ. ອີງຕາມລຳດັບການກວດສອບ, "
+"ອັນນີ້ອາດຈະຂຶ້ນກັບການກວດສອບໜຶ່ງ ຫຼື ຫຼາຍຄັ້ງ."
+
+# Review needed: Glossary term 'state' found, but target 'ລັດ' missing;
+# Complex sentence describing state prerequisites. Needs review for accuracy.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format, fuzzy
+msgid ""
+"The change request to be created must be in draft or pending validation "
+"state."
+msgstr ""
+"ຄຳຮ້ອງຂໍການປ່ຽນແປງທີ່ຈະສ້າງຕ້ອງຢູ່ໃນສະຖານະສະບັບຮ່າງ ຫຼື ລໍຖ້າການກວດສອບ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "The change request type must be properly filled-up."
+msgstr "ປະເພດຄຳຮ້ອງຂໍການປ່ຽນແປງຕ້ອງຖືກປ້ອນຂໍ້ມູນໃຫ້ຖືກຕ້ອງ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request was cancelled by %s."
+msgstr "ຄຳຮ້ອງຂໍການປ່ຽນແປງຖືກຍົກເລີກໂດຍ %s."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request was rejected by %s."
+msgstr "ຄຳຮ້ອງຂໍການປ່ຽນແປງຖືກປະຕິເສດໂດຍ %s."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The change request was reset to draft."
+msgstr "ຄຳຮ້ອງຂໍການປ່ຽນແປງຖືກຣີເຊັດເປັນສະບັບຮ່າງແລ້ວ."
+
+# Review needed: Glossary term 'state' found, but target 'ລັດ' missing;
+# Complex sentence describing state transition rules. Needs review for
+# accuracy.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid "The request must be in draft state to be set to pending validation."
+msgstr "ຄຳຮ້ອງຂໍຕ້ອງຢູ່ໃນສະຖານະສະບັບຮ່າງເພື່ອຕັ້ງເປັນລໍຖ້າການກວດສອບ."
+
+# Review needed: Glossary term 'state' found, but target 'ລັດ' missing;
+# Complex sentence describing state prerequisites for applying changes. Needs
+# review for accuracy.
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid ""
+"The request must be in draft, pending, or validated state for changes to be "
+"applied."
+msgstr ""
+"ຄຳຮ້ອງຂໍຕ້ອງຢູ່ໃນສະຖານະສະບັບຮ່າງ, ລໍຖ້າ, ຫຼື ກວດສອບແລ້ວ "
+"ເພື່ອໃຫ້ການປ່ຽນແປງຖືກນຳໃຊ້."
+
+# Review needed: Glossary term 'state' found, but target 'ລັດ' missing
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid "The request must be in validated state for changes to be applied."
+msgstr "ຄຳຮ້ອງຂໍຕ້ອງຢູ່ໃນສະຖານະທີ່ຖືກຢັ້ງຢືນແລ້ວເພື່ອໃຫ້ການປ່ຽນແປງຖືກນຳໃຊ້."
+
+# Review needed: Glossary term 'state' found, but target 'ລັດ' missing
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid ""
+"The request to be cancelled must be in draft, pending, or rejected "
+"validation state."
+msgstr ""
+"ຄຳຮ້ອງຂໍທີ່ຈະຖືກຍົກເລີກຕ້ອງຢູ່ໃນສະຖານະສະບັບຮ່າງ, ລໍຖ້າ, ຫຼື "
+"ຖືກປະຕິເສດການຢັ້ງຢືນ."
+
+# Review needed: Glossary term 'state' found, but target 'ລັດ' missing
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid ""
+"The request to be rejected must be in draft or pending validation state."
+msgstr "ຄຳຮ້ອງຂໍທີ່ຈະຖືກປະຕິເສດຕ້ອງຢູ່ໃນສະຖານະສະບັບຮ່າງ ຫຼື ລໍຖ້າການຢັ້ງຢືນ."
+
+# Review needed: Glossary term 'state' found, but target 'ລັດ' missing
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format, fuzzy
+msgid "The request to be validated must be in submitted state."
+msgstr "ຄຳຮ້ອງຂໍທີ່ຈະຖືກຢັ້ງຢືນຕ້ອງຢູ່ໃນສະຖານະສົ່ງແລ້ວ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The required document %s is missing."
+msgstr "ເອກະສານທີ່ຕ້ອງການ %s ແມ່ນຂາດຫາຍໄປ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The required document category is not configured."
+msgstr "ປະເພດເອກະສານທີ່ຕ້ອງການບໍ່ໄດ້ຖືກຕັ້ງຄ່າ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "The required documents %s are missing."
+msgstr "ເອກະສານທີ່ຕ້ອງການ %s ແມ່ນຂາດຫາຍໄປ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/wizard/cancel_change_request.py:0
+#: code:addons/spp_change_request/wizard/reject_change_request.py:0
+#, python-format
+msgid "There are no change request selected."
+msgstr "ບໍ່ມີຄຳຮ້ອງຂໍປ່ຽນແປງໃດຖືກເລືອກ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no data captured from the ID scanner."
+msgstr "ບໍ່ມີຂໍ້ມູນໃດຖືກບັນທຶກຈາກເຄື່ອງສະແກນບັດປະຈຳຕົວ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no data captured from the QR Code scanner."
+msgstr "ບໍ່ມີຂໍ້ມູນໃດຖືກບັນທຶກຈາກເຄື່ອງສະແກນລະຫັດ QR."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "There are no directories defined for this change request."
+msgstr "ບໍ່ມີຖານຂໍ້ມູນໃດຖືກກຳນົດໄວ້ສຳລັບຄຳຮ້ອງຂໍປ່ຽນແປງນີ້."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no group found with the ID number from the QR Code scanned."
+msgstr "ບໍ່ພົບກຸ່ມທີ່ມີໝາຍເລກປະຈຳຕົວຈາກລະຫັດ QR ທີ່ສະແກນແລ້ວ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no registrant found with the ID number scanned."
+msgstr "ບໍ່ພົບຜູ້ລົງທະບຽນທີ່ມີໝາຍເລກປະຈຳຕົວທີ່ສະແກນແລ້ວ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no user assigned to this change request."
+msgstr "ບໍ່ມີຜູ້ໃຊ້ໃດຖືກມອບໝາຍໃຫ້ກັບຄຳຮ້ອງຂໍປ່ຽນແປງນີ້."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "There are no validators defined for this request."
+msgstr "ບໍ່ມີຜູ້ກວດສອບໃດຖືກກຳນົດໄວ້ສຳລັບຄຳຮ້ອງຂໍນີ້."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "This change request does not have any validation sequence defined."
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງນີ້ບໍ່ມີລຳດັບການຢັ້ງຢືນໃດຖືກກຳນົດໄວ້."
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "This change request was REJECTED."
+msgstr "ຄຳຮ້ອງຂໍປ່ຽນແປງນີ້ຖືກປະຕິເສດແລ້ວ."
+
+#. module: spp_change_request
+#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "ປະເພດຂອງກິດຈະກຳຂໍ້ຍົກເວັ້ນເທິງບັນທຶກ."
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/dms_file.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "Upload Document: %s"
+msgstr "ອັບໂຫຼດເອກະສານ: %s"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_user_assign_wizard__assign_to_id
+msgid "User"
+msgstr "ຜູ້ໃຊ້"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "User %(user)s does not have access to apply changes. %(error)s"
+msgstr "ຜູ້ໃຊ້ %(user)s ບໍ່ມີສິດໃນການນຳໃຊ້ການປ່ຽນແປງ. %(error)s"
+
+#. module: spp_change_request
+#: model:ir.module.category,description:spp_change_request.spp_change_request_module
+msgid "User access level for the OpenSPP change request module"
+msgstr "ລະດັບການເຂົ້າເຖິງຂອງຜູ້ໃຊ້ສຳລັບໂມດູລຄຳຮ້ອງຂໍປ່ຽນແປງ OpenSPP"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "User is not allowed to approve CRs directly."
+msgstr "ຜູ້ໃຊ້ບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ອະນຸມັດຄຳຮ້ອງຂໍປ່ຽນແປງໂດຍກົງ."
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Validate"
+msgstr "ຢັ້ງຢືນ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Validate Change Request"
+msgstr "ຢັ້ງຢືນຄຳຮ້ອງຂໍປ່ຽນແປງ"
+
+#. module: spp_change_request
+#: model:ir.model.fields.selection,name:spp_change_request.selection__spp_change_request__state__validated
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_form
+msgid "Validated"
+msgstr "ຢັ້ງຢືນແລ້ວ"
+
+#. module: spp_change_request
+#: model:ir.actions.act_window,name:spp_change_request.action_change_request_validated
+#: model:ir.ui.menu,name:spp_change_request.menu_change_request_validated
+msgid "Validated Requests"
+msgstr "ຄຳຮ້ອງຂໍທີ່ຢັ້ງຢືນແລ້ວ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__last_validated_by_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__validator_id
+msgid "Validated by"
+msgstr "ຢັ້ງຢືນໂດຍ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_validation_sequence_filter
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_form
+#: model_terms:ir.ui.view,arch_db:spp_change_request.view_change_request_validation_sequence_tree
+msgid "Validation Group"
+msgstr "ກຸ່ມການຢັ້ງຢືນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__validation_group_state
+msgid "Validation Group Application"
+msgstr "ການນຳໃຊ້ກຸ່ມການຢັ້ງຢືນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__validator_ids
+msgid "Validation Records"
+msgstr "ບັນທຶກການຢັ້ງຢືນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence_mixin__validation_ids
+#: model:ir.ui.menu,name:spp_change_request.menu_change_request_validation_sequence
+msgid "Validation Sequence"
+msgstr "ລຳດັບການຢັ້ງຢືນ"
+
+#. module: spp_change_request
+#: model:ir.actions.act_window,name:spp_change_request.action_change_request_validation_sequence
+msgid "Validation Sequences"
+msgstr "ລຳດັບການຢັ້ງຢືນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validation_sequence__stage_id
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request_validators__stage_id
+msgid "Validation Stage"
+msgstr "ຂັ້ນຕອນການຢັ້ງຢືນ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,field_description:spp_change_request.field_spp_change_request__website_message_ids
+msgid "Website Messages"
+msgstr "ຂໍ້ຄວາມເວັບໄຊ"
+
+#. module: spp_change_request
+#: model:ir.model.fields,help:spp_change_request.field_spp_change_request__website_message_ids
+msgid "Website communication history"
+msgstr "ປະຫວັດການຕິດຕໍ່ຜ່ານເວັບໄຊ"
+
+#. module: spp_change_request
+#: model_terms:ir.ui.view,arch_db:spp_change_request.change_request_user_assign_wizard
+msgid "YES"
+msgstr "ແມ່ນແລ້ວ"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid "You are not allowed to %s this change request"
+msgstr "ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ %s ຄຳຮ້ອງຂໍປ່ຽນແປງນີ້"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#, python-format
+msgid ""
+"You are not allowed to validate this request! Stage: %(stage)s. Allowed "
+"Validator Group: %(group)s"
+msgstr ""
+"ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ຢັ້ງຢືນຄຳຮ້ອງຂໍນີ້! ຂັ້ນຕອນ: %(stage)s. "
+"ກຸ່ມຜູ້ກວດສອບທີ່ໄດ້ຮັບອະນຸຍາດ: %(group)s"
+
+#. module: spp_change_request
+#. odoo-python
+#: code:addons/spp_change_request/models/change_request.py:0
+#: code:addons/spp_change_request/models/mixins/source_mixin.py:0
+#, python-format
+msgid "You're not allowed to re-assign this CR."
+msgstr "ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ມອບໝາຍຄຳຮ້ອງຂໍປ່ຽນແປງນີ້ຄືນ."

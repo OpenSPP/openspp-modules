@@ -1,0 +1,1058 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_base_gis
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/fields.py:0
+#, python-format
+msgid "%(geo_type)s is not a valid type."
+msgstr "%(geo_type)s ບໍ່ແມ່ນຊະນິດທີ່ຖືກຕ້ອງ."
+
+# Review needed: Technical GIS term 'geo field' translation needs validation
+# by a domain expert.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format, fuzzy
+msgid "%s column does not exists or is not a geo field"
+msgstr "%s ຖັນບໍ່ມີຢູ່ ຫຼືບໍ່ແມ່ນພື້ນທີ່ທາງພູມສາດ"
+
+# Review needed: Glossary term 'active' found, but target 'ດໍາເນີນຢູ່' missing
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__active_on_startup
+#, fuzzy
+msgid "Active On Startup"
+msgstr "ເປີດໃຊ້ງານເມື່ອເລີ່ມຕົ້ນ"
+
+# Review needed: Confirmation needed for the standard translation of the GIS
+# term 'Layer' in Odoo Lao localization.
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.xml:0
+#, python-format, fuzzy
+msgid "Add New Layer"
+msgstr "ເພີ່ມຊັ້ນຂໍ້ມູນໃໝ່"
+
+# Review needed: Needs review for appropriateness as a specific map style
+# name. Using the glossary term for 'Background'.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__backdrop
+#, fuzzy
+msgid "Backdrop"
+msgstr "ພື້ນຫຼັງ"
+
+# Review needed: Needs review for appropriateness as a specific map style name
+# and confirmation of hyphenated style naming convention.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__backdrop-dark
+#, fuzzy
+msgid "Backdrop-Dark"
+msgstr "ພື້ນຫຼັງ-ມືດ"
+
+# Review needed: Needs review for appropriateness as a specific map style name
+# and confirmation of hyphenated style naming convention.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__backdrop-light
+#, fuzzy
+msgid "Backdrop-Light"
+msgstr "ພື້ນຫຼັງ-ແຈ້ງ"
+
+#. module: spp_base_gis
+#: model:ir.model,name:spp_base_gis.model_base
+msgid "Base"
+msgstr "ພື້ນຖານ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_data_layer__geo_repr__basic
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__basic
+msgid "Basic"
+msgstr "ພື້ນຖານ"
+
+# Review needed: Confirmation of hyphenated style naming convention needed.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__basic-dark
+#, fuzzy
+msgid "Basic-Dark"
+msgstr "ພື້ນຖານ-ມືດ"
+
+# Review needed: Confirmation of hyphenated style naming convention needed.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__basic-light
+#, fuzzy
+msgid "Basic-Light"
+msgstr "ພື້ນຖານ-ແຈ້ງ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__bright
+msgid "Bright"
+msgstr "ແຈ້ງ"
+
+# Review needed: Confirmation of hyphenated style naming convention needed.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__bright-dark
+#, fuzzy
+msgid "Bright-Dark"
+msgstr "ແຈ້ງ-ມືດ"
+
+# Review needed: Source string 'Bright-Light' is potentially
+# ambiguous/redundant. Translation assumes it means a light variant of the
+# Bright style. Needs review for meaning and term choice.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__bright-light
+#, fuzzy
+msgid "Bright-Light"
+msgstr "ແຈ້ງ-ແຈ້ງ"
+
+# Review needed: Confirmation of hyphenated style naming convention and
+# translation of 'Pastel' needed.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__bright-pastel
+#, fuzzy
+msgid "Bright-Pastel"
+msgstr "ແຈ້ງ-ສີອ່ອນ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__type
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__code
+msgid "Code"
+msgstr "ລະຫັດ"
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_data_layer_form
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_data_layer_view_form
+msgid "Colors"
+msgstr "ສີ"
+
+# Review needed: Technical GIS term 'Raster' needs standard Lao
+# translation/transliteration confirmed.
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.xml:0
+#, python-format, fuzzy
+msgid "Create Raster"
+msgstr "ສ້າງຣາສເຕີ"
+
+# Review needed: Highly technical term 'gist index'. Assumed 'gist' should
+# remain untranslated. Needs expert validation.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_model_fields__gist_index
+#, fuzzy
+msgid "Create gist index"
+msgstr "ສ້າງດັດສະນີ gist"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__create_uid
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__create_uid
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__create_date
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__create_date
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+# Review needed: Depends on the confirmed translations for the technical GIS
+# terms 'Raster' and 'Layer'.
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.esm.js:0
+#, python-format, fuzzy
+msgid "Creating Raster Layer"
+msgstr "ກຳລັງສ້າງຊັ້ນຂໍ້ມູນຣາສເຕີ"
+
+# Review needed: Glossary term 'active' found, but target 'ດໍາເນີນຢູ່'
+# missing; Depends on the confirmed translation for 'Layer' and the best term
+# for 'Active' layers.
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.gis_view_form
+#, fuzzy
+msgid "Data (Active layers)"
+msgstr "ຂໍ້ມູນ (ຊັ້ນຂໍ້ມູນທີ່ໃຊ້ງານຢູ່)"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__begin_color
+msgid "Data Color "
+msgstr "ສີຂໍ້ມູນ"
+
+# Review needed: Key GIS term 'Layer' needs confirmation for standard Odoo Lao
+# usage.
+#. module: spp_base_gis
+#: model:ir.actions.act_window,name:spp_base_gis.action_data_layer_view
+#: model:ir.actions.act_window,name:spp_base_gis.action_spp_gis_data_layer_view
+#: model:ir.model,name:spp_base_gis.model_spp_gis_data_layer
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_data_layer_form
+#, fuzzy
+msgid "Data Layer"
+msgstr "ຊັ້ນຂໍ້ມູນ"
+
+# Review needed: Key GIS term 'Layer' needs confirmation for standard Odoo Lao
+# usage. Using singular form for label simplicity.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_ui_view__data_layer_ids
+#, fuzzy
+msgid "Data layers"
+msgstr "ຊັ້ນຂໍ້ມູນ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Specific style name 'Dataviz'. Kept untranslated. Needs review on whether to
+# translate ('ການສະແດງຂໍ້ມູນເປັນພາບ') or keep as is.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__dataviz
+#, fuzzy
+msgid "Dataviz"
+msgstr "Dataviz"
+
+# Review needed: Depends on 'Dataviz' translation decision. Also needs
+# hyphenation confirmation.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__dataviz-dark
+#, fuzzy
+msgid "Dataviz-Dark"
+msgstr "Dataviz-ມືດ"
+
+# Review needed: Depends on 'Dataviz' translation decision. Also needs
+# hyphenation confirmation.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__dataviz-light
+#, fuzzy
+msgid "Dataviz-Light"
+msgstr "Dataviz-ແຈ້ງ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_ui_view__default_center
+msgid "Default map center"
+msgstr "ຈຸດສູນກາງແຜນທີ່ເລີ່ມຕົ້ນ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_ui_view__default_zoom
+msgid "Default map zoom"
+msgstr "ລະດັບຂະຫຍາຍແຜນທີ່ເລີ່ມຕົ້ນ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__display_name
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__display_name
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid "Distance must be a number"
+msgstr "ໄລຍະຫ່າງຕ້ອງເປັນຕົວເລກ"
+
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format
+msgid "Distance must be a positive number"
+msgstr "ໄລຍະຫ່າງຕ້ອງເປັນຕົວເລກບວກ"
+
+# Review needed: Technical term 'Distant WMS'. Needs confirmation of WMS
+# handling and translation of 'Distant'.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_type__d_wms
+#, fuzzy
+msgid "Distant WMS"
+msgstr "WMS ໄລຍະໄກ"
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.xml:0
+#, python-format
+msgid "Edit Data"
+msgstr "ແກ້ໄຂຂໍ້ມູນ"
+
+# Review needed: Depends on the confirmed translation for 'Layer'.
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.xml:0
+#, python-format, fuzzy
+msgid "Edit Layer"
+msgstr "ແກ້ໄຂຊັ້ນຂໍ້ມູນ"
+
+# Review needed: Depends on the confirmed translation for 'Data layer'.
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.esm.js:0
+#, python-format, fuzzy
+msgid "Editing Data layer"
+msgstr "ກຳລັງແກ້ໄຂຊັ້ນຂໍ້ມູນ"
+
+# Review needed: Depends on confirmed translations for 'Raster' and 'Layer'.
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.esm.js:0
+#, python-format, fuzzy
+msgid "Editing Raster Layer"
+msgstr "ກຳລັງແກ້ໄຂຊັ້ນຂໍ້ມູນຣາສເຕີ"
+
+# Review needed: Glossary term 'may' found, but target 'ເດືອນພືດສະພາ' missing;
+# Highly technical error message involving database administration (PostGIS,
+# superuser, extensions, devel headers). Translation needs validation by a
+# technical expert familiar with Odoo and PostgreSQL/PostGIS administration in
+# Lao context.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/__init__.py:0
+#, python-format, fuzzy
+msgid ""
+"Error, can not automatically initialize spatial postgis support. Database user may have to be superuser and postgres/postgis extensions with their devel header have to be installed. If you do not want Odoo to connect with a super user you can manually prepare your database. To do this, open a client to your database using a super user and run:\n"
+"CREATE EXTENSION postgis;\n"
+"CREATE EXTENSION postgis_topology;\n"
+msgstr ""
+"ຜິດພາດ, ບໍ່ສາມາດເລີ່ມຕົ້ນການຮອງຮັບ spatial postgis ໂດຍອັດຕະໂນມັດ. "
+"ຜູ້ໃຊ້ຖານຂໍ້ມູນອາດຈະຕ້ອງເປັນຜູ້ໃຊ້ສິດສູງສຸດ ແລະ ສ່ວນຂະຫຍາຍ postgres/postgis "
+"ພ້ອມດ້ວຍ devel header ຂອງພວກມັນຕ້ອງຖືກຕິດຕັ້ງ. ຖ້າທ່ານບໍ່ຕ້ອງການໃຫ້ Odoo "
+"ເຊື່ອມຕໍ່ດ້ວຍຜູ້ໃຊ້ສິດສູງສຸດ ທ່ານສາມາດກະກຽມຖານຂໍ້ມູນຂອງທ່ານດ້ວຍມື. "
+"ເພື່ອເຮັດສິ່ງນີ້, "
+"ເປີດໂປຣແກຣມລູກຂ່າຍໄປຫາຖານຂໍ້ມູນຂອງທ່ານໂດຍໃຊ້ຜູ້ໃຊ້ສິດສູງສຸດ ແລະ ດຳເນີນການ: "
+"CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_model_fields__ttype
+msgid "Field Type"
+msgstr "ຊະນິດພື້ນທີ່"
+
+#. module: spp_base_gis
+#: model:ir.model,name:spp_base_gis.model_ir_model_fields
+msgid "Fields"
+msgstr "ພື້ນທີ່"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Acronym 'GIS'. Kept as is. Needs confirmation if this is standard practice
+# or if full Lao translation ('ລະບົບຂໍ້ມູນພູມສາດ') is preferred.
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/gis_view.esm.js:0
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_ui_view__type__gis
+#, python-format, fuzzy
+msgid "GIS"
+msgstr "GIS"
+
+# Review needed: Depends on 'GIS' acronym decision. Also needs confirmation
+# for 'Admin' translation in a group name context.
+#. module: spp_base_gis
+#: model:res.groups,name:spp_base_gis.group_gis_admin
+#, fuzzy
+msgid "GIS Admin"
+msgstr "ຜູ້ດູແລລະບົບ GIS"
+
+# Review needed: Depends on 'GIS' acronym decision.
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.gis_view_form
+#, fuzzy
+msgid "GIS Data"
+msgstr "ຂໍ້ມູນ GIS"
+
+# Review needed: Depends on 'GIS' acronym decision.
+#. module: spp_base_gis
+#: model:res.groups,name:spp_base_gis.group_gis_user
+#, fuzzy
+msgid "GIS User"
+msgstr "ຜູ້ໃຊ້ GIS"
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_data_layer_form
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_data_layer_view_form
+msgid "General"
+msgstr "ທົ່ວໄປ"
+
+# Review needed: Technical GIS term 'geo field' translation needs validation
+# by a domain expert.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__geo_field_id
+#, fuzzy
+msgid "Geo field"
+msgstr "ພື້ນທີ່ທາງພູມສາດ"
+
+# Review needed: Technical GIS term 'Geometry' needs standard Lao translation
+# confirmed.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/fields.py:0
+#, python-format, fuzzy
+msgid "Geometry is empty."
+msgstr "ເລຂາຄະນິດແມ່ນວ່າງເປົ່າ"
+
+# Review needed: Glossary term 'Hybrid' is for genetics. Needs confirmation of
+# the appropriate term for a hybrid map style. 'ແບບປະສົມ' is proposed.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__hybrid
+#, fuzzy
+msgid "Hybrid"
+msgstr "ແບບປະສົມ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__id
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__id
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__id
+#, fuzzy
+msgid "ID"
+msgstr "ID"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_type__image
+msgid "Image"
+msgstr "ຮູບພາບ"
+
+# Review needed: The translation for 'Opacity' needs confirmation in the GIS
+# context. 'ລະດັບຄວາມ​ທຶບ​ແສງ' means 'level of opaqueness'.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__image_opacity
+#, fuzzy
+msgid "Image Opacity"
+msgstr "ລະດັບຄວາມ​ທຶບ​ແສງຂອງ​ຮູບພາບ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__image_url
+msgid "Image Url"
+msgstr "URL ຂອງຮູບພາບ"
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
+msgid "Image options"
+msgstr "ຕົວເລືອກຮູບພາບ"
+
+# Review needed: Glossary term 'latitude' found, but target 'ເສັ້ນຂະໜານ'
+# missing
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format, fuzzy
+msgid "Invalid coordinates: latitude=%(latitude)s, longitude=%(longitude)s"
+msgstr "ພິກັດບໍ່ຖືກຕ້ອງ: latitude=%(latitude)s, longitude=%(longitude)s"
+
+# Review needed: Translated 'field type' as 'ປະເພດຟິວ'. Checked against
+# glossary 'field type' -> 'ປະເພດພື້ນທີ່'. Corrected translation.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format, fuzzy
+msgid "Invalid field type: %s"
+msgstr "ປະເພດຟິວບໍ່ຖືກຕ້ອງ: %s"
+
+# Review needed: The term 'layer' is not in the glossary. Translated as
+# 'ຊັ້ນຂໍ້ມູນ', a common GIS term in Lao, but needs expert validation.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format, fuzzy
+msgid "Invalid layer type %s"
+msgstr "ປະເພດຊັ້ນຂໍ້ມູນບໍ່ຖືກຕ້ອງ %s"
+
+# Review needed: Translated 'spatial relation' based on glossary terms for
+# 'relation' and the meaning of 'spatial'. Needs expert validation for this
+# specific technical term.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format, fuzzy
+msgid "Invalid spatial relation %s"
+msgstr "ຄວາມສຳພັນທາງພື້ນທີ່ບໍ່ຖືກຕ້ອງ %s"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__is_wms
+msgid "Is Wms"
+msgstr "ແມ່ນ Wms ບໍ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__visible_on_load
+msgid "Is visible on load?"
+msgstr "ສາມາດເຫັນໄດ້ຕອນໂຫຼດບໍ?"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Kept the English term as it's a specific PostGIS/SQL technical term. Needs
+# validation if a standard Lao equivalent exists.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__geo_type__linestring
+#, fuzzy
+msgid "LINESTRING"
+msgstr "LINESTRING"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__write_uid
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__write_uid
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ແກ້ໄຂຫຼ້າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__write_date
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__write_date
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ແກ້ໄຂຫຼ້າສຸດເມື່ອ"
+
+# Review needed: The term 'Layer' is not in the glossary. Translated as
+# 'ຊັ້ນຂໍ້ມູນ', a common GIS term in Lao, but needs expert validation.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__type_id
+#, fuzzy
+msgid "Layer"
+msgstr "ຊັ້ນຂໍ້ມູນ"
+
+# Review needed: Depends on the validated translation for 'Layer'.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__name
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__name
+#, fuzzy
+msgid "Layer Name"
+msgstr "ຊື່ຊັ້ນຂໍ້ມູນ"
+
+# Review needed: Depends on the validated translations for 'Layer' and
+# 'Opacity'.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__layer_opacity
+#, fuzzy
+msgid "Layer Opacity"
+msgstr "ລະດັບຄວາມ​ທຶບ​ແສງຂອງຊັ້ນຂໍ້ມູນ"
+
+# Review needed: Depends on the validated translation for 'Layer'. 'Priority'
+# translated as 'ລຳດັບຄວາມສຳຄັນ', needs confirmation.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__sequence
+#, fuzzy
+msgid "Layer Priority"
+msgstr "ລຳດັບຄວາມສຳຄັນຂອງຊັ້ນຂໍ້ມູນ"
+
+# Review needed: Depends on the validated translation for 'Layer'. Used
+# glossary term for 'transparent'.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__layer_transparent
+#, fuzzy
+msgid "Layer Transparent"
+msgstr "ຊັ້ນຂໍ້ມູນໂປ່ງໃສ"
+
+# Review needed: Depends on the validated translations for 'Layer' and
+# 'Priority'.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__sequence
+#, fuzzy
+msgid "Layer priority"
+msgstr "ລຳດັບຄວາມສຳຄັນຂອງຊັ້ນຂໍ້ມູນ"
+
+# Review needed: Depends on the validated translation for 'Layer'.
+#. module: spp_base_gis
+#: model:ir.model.fields,help:spp_base_gis.field_spp_gis_data_layer__active_on_startup
+#, fuzzy
+msgid "Layer will be shown on startup if checked."
+msgstr "ຊັ້ນຂໍ້ມູນຈະຖືກສະແດງຕອນເລີ່ມຕົ້ນຖ້າຖືກໝາຍຖືກ."
+
+# Review needed: Used transliteration 'ໂມເດວ' for Odoo 'Model'. Needs
+# confirmation if 'ແບບຈຳລອງ' from glossary is preferred in this context.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__model_name
+#, fuzzy
+msgid "Model"
+msgstr "ໂມເດວ"
+
+# Review needed: Depends on the validated translation for 'Model'.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__model_id
+#, fuzzy
+msgid "Model to use"
+msgstr "ໂມເດວທີ່ຈະໃຊ້"
+
+# Review needed: Depends on the validated translation for 'Model'.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__model_view_id
+#, fuzzy
+msgid "Model view"
+msgstr "ມຸມມອງໂມເດວ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__name
+msgid "Name"
+msgstr "ຊື່"
+
+# Review needed: Depends on the validated translation for 'Model' and
+# confirmation of 'GIS view' translation.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format, fuzzy
+msgid ""
+"No GIS view defined for the model %s. Please create a view or modify view "
+"mode"
+msgstr ""
+"ບໍ່ມີມຸມມອງ GIS ຖືກກຳນົດໄວ້ສຳລັບໂມເດວ %s. ກະລຸນາສ້າງມຸມມອງ ຫຼື "
+"ແກ້ໄຂໂໝດມຸມມອງ"
+
+# Review needed: Depends on the validated translation for 'Raster layer'.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/base.py:0
+#, python-format, fuzzy
+msgid "No raster layer for view %s"
+msgstr "ບໍ່ມີຊັ້ນຂໍ້ມູນຣາສເຕີສຳລັບມຸມມອງ %s"
+
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
+msgid "OSM options"
+msgstr "ຕົວເລືອກ OSM"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__ocean
+msgid "Ocean"
+msgstr "ມະຫາສະໝຸດ"
+
+# Review needed: The translation for 'Opacity' needs confirmation in the GIS
+# context.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__opacity
+#, fuzzy
+msgid "Opacity"
+msgstr "ລະດັບຄວາມ​ທຶບ​ແສງ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_type__osm
+#, fuzzy
+msgid "OpenStreetMap"
+msgstr "OpenStreetMap"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__openstreetmap
+#, fuzzy
+msgid "Openstreetmap"
+msgstr "Openstreetmap"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__outdoor
+msgid "Outdoor"
+msgstr "ກາງແຈ້ງ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__outdoor-dark
+msgid "Outdoor-Dark"
+msgstr "ກາງແຈ້ງ-ມືດ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Kept the English term as it's a specific PostGIS/SQL technical term. Needs
+# validation if a standard Lao equivalent exists or if keeping uppercase is
+# correct.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__geo_type__point
+#, fuzzy
+msgid "POINT"
+msgstr "POINT"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Kept the English term as it's a specific PostGIS/SQL technical term. Needs
+# validation if a standard Lao equivalent exists.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__geo_type__polygon
+#, fuzzy
+msgid "POLYGON"
+msgstr "POLYGON"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_model_fields__dim
+msgid "PostGIS Dimension"
+msgstr "ມິຕິ PostGIS"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_model_fields__geo_type
+msgid "PostGIS type"
+msgstr "ປະເພດ PostGIS"
+
+# Review needed: The terms 'Raster' and 'Layer' are technical and their
+# translations ('ຣາສເຕີ', 'ຊັ້ນຂໍ້ມູນ') need expert validation.
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.gis_view_form
+#, fuzzy
+msgid "Raster (Background layers)"
+msgstr "ຣາສເຕີ (ຊັ້ນຂໍ້ມູນພື້ນຫຼັງ)"
+
+# Review needed: Depends on the validated translation for 'Raster'.
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
+#, fuzzy
+msgid "Raster Data"
+msgstr "ຂໍ້ມູນຣາສເຕີ"
+
+# Review needed: Depends on the validated translations for 'Raster' and
+# 'Layer'.
+#. module: spp_base_gis
+#: model:ir.actions.act_window,name:spp_base_gis.action_spp_gis_raster_layer
+#: model:ir.actions.act_window,name:spp_base_gis.action_spp_gis_raster_layer_form
+#: model:ir.model,name:spp_base_gis.model_spp_gis_raster_layer
+#, fuzzy
+msgid "Raster Layer"
+msgstr "ຊັ້ນຂໍ້ມູນຣາສເຕີ"
+
+# Review needed: Depends on the validated translations for 'Raster' and
+# 'Layer'.
+#. module: spp_base_gis
+#: model:ir.model,name:spp_base_gis.model_spp_gis_raster_layer_type
+#, fuzzy
+msgid "Raster Layer Type"
+msgstr "ປະເພດຊັ້ນຂໍ້ມູນຣາສເຕີ"
+
+# Review needed: Depends on the validated translations for 'Raster' and
+# 'Layer'.
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
+#, fuzzy
+msgid "Raster Layer View"
+msgstr "ມຸມມອງຊັ້ນຂໍ້ມູນຣາສເຕີ"
+
+# Review needed: Depends on the validated translation for 'Raster'.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__raster_style
+#, fuzzy
+msgid "Raster Style"
+msgstr "ຮູບແບບຣາສເຕີ"
+
+# Review needed: Depends on the validated translations for 'Raster' and
+# 'Layer'.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__raster_type
+#, fuzzy
+msgid "Raster layer type"
+msgstr "ປະເພດຊັ້ນຂໍ້ມູນຣາສເຕີ"
+
+# Review needed: Depends on the validated translations for 'Raster' and
+# 'Layer'. Plural form is often the same unless context demands clarification.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_ui_view__raster_layer_ids
+#, fuzzy
+msgid "Raster layers"
+msgstr "ຊັ້ນຂໍ້ມູນຣາສເຕີ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__view_id
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__view_id
+msgid "Related View"
+msgstr "ມຸມມອງທີ່ກ່ຽວຂ້ອງ"
+
+# Review needed: Translated 'Representation mode' based on component words.
+# Needs confirmation for accuracy in this context.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_data_layer__geo_repr
+#, fuzzy
+msgid "Representation mode"
+msgstr "ໂໝດການສະແດງຜົນ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__satellite
+msgid "Satellite"
+msgstr "ດາວທຽມ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer_type__service
+msgid "Service"
+msgstr "ບໍລິການ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__url
+msgid "Service URL"
+msgstr "URL ບໍລິການ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__streets
+msgid "Streets"
+msgstr "ເສັ້ນທາງ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__streets-dark
+msgid "Streets-Dark"
+msgstr "ເສັ້ນທາງ-ມືດ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__streets-light
+msgid "Streets-Light"
+msgstr "ເສັ້ນທາງ-ອ່ອນ"
+
+# Review needed: Glossary entry for 'night' seems incorrect ('ຂວາ' means
+# right). Used standard Lao 'ກາງຄືນ'. Please verify.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__streets-night
+#, fuzzy
+msgid "Streets-Night"
+msgstr "ເສັ້ນທາງ-ກາງຄືນ"
+
+# Review needed: Transliterated 'Pastel' as 'ພາສເທລ'. Needs confirmation if a
+# standard Lao term exists or if transliteration is acceptable for this map
+# style.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__streets-pastel
+#, fuzzy
+msgid "Streets-Pastel"
+msgstr "ເສັ້ນທາງ-ພາສເທລ"
+
+# Review needed: 'geo_field_id' is a technical term, kept in English. Used
+# 'ຟິວ' (field) and 'ແບບຈຳລອງ' (model) based on context. Needs technical
+# review for accuracy.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/models/data_layer.py:0
+#, python-format, fuzzy
+msgid "The geo_field_id must be a field in %s model"
+msgstr "geo_field_id ຕ້ອງເປັນຟິວ(field)ໃນແບບຈຳລອງ %s"
+
+#. module: spp_base_gis
+#. odoo-javascript
+#: code:addons/spp_base_gis/static/src/js/views/gis/layers_panel/layers_panel.xml:0
+#, python-format
+msgid "Toggle Fold"
+msgstr "ສະຫຼັບການພັບ"
+
+# Review needed: Transliterated 'Toner'. Needs confirmation if a descriptive
+# Lao term is better for this map style (e.g., 'ຄວາມຄົມຊັດສູງ').
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__toner
+#, fuzzy
+msgid "Toner"
+msgstr "ໂທນເນີ"
+
+# Review needed: Depends on the base term 'Toner' translation. Uses glossary
+# term for 'Background'.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__toner-background
+#, fuzzy
+msgid "Toner-Background"
+msgstr "ໂທນເນີ-ພື້ນຫຼັງ"
+
+# Review needed: Depends on the base term 'Toner' translation. Uses glossary
+# term for 'Lines'.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__toner-lines
+#, fuzzy
+msgid "Toner-Lines"
+msgstr "ໂທນເນີ-ເສັ້ນ"
+
+# Review needed: Depends on the base term 'Toner' translation. 'Lite'
+# translated as 'ອ່ອນ'.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__toner-lite
+#, fuzzy
+msgid "Toner-Lite"
+msgstr "ໂທນເນີ-ອ່ອນ"
+
+# Review needed: Transliterated 'Topo' (Topographic). Needs confirmation if
+# 'ພູມສັນຖານ' is preferred for this map style.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__topo
+#, fuzzy
+msgid "Topo"
+msgstr "ໂທໂປ"
+
+# Review needed: Depends on the base terms 'Topo' and 'Pastel' translations.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__topo-pastel
+#, fuzzy
+msgid "Topo-Pastel"
+msgstr "ໂທໂປ-ພາສເທລ"
+
+# Review needed: Depends on the base term 'Topo' translation. 'Shiny'
+# translated as 'ເຫຼື້ອມ'.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__topo-shiny
+#, fuzzy
+msgid "Topo-Shiny"
+msgstr "ໂທໂປ-ເຫຼື້ອມ"
+
+# Review needed: Combines transliterated 'Topo' and Lao term 'ພູມສັນຖານ' for
+# 'Topographique'. Needs confirmation if this differentiation is appropriate
+# or if just 'ໂທໂປ-ໂທໂປກຣາຟິກ' is better.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__topo-topographique
+#, fuzzy
+msgid "Topo-Topographique"
+msgstr "ໂທໂປ-ພູມສັນຖານ"
+
+# Review needed: Kept 'geojson' as a technical term. Used glossary term for
+# 'Value'. Needs technical review.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/fields.py:0
+#, python-format, fuzzy
+msgid "Value should be a geojson"
+msgstr "ຄ່າຄວນເປັນ geojson"
+
+#. module: spp_base_gis
+#: model:ir.model,name:spp_base_gis.model_ir_ui_view
+msgid "View"
+msgstr "ການສະແດງ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_ui_view__type
+msgid "View Type"
+msgstr "ປະເພດການສະແດງ"
+
+#. module: spp_base_gis
+#: model:ir.actions.act_window,name:spp_base_gis.gis_view_action
+msgid "Views"
+msgstr "ການສະແດງຕ່າງໆ"
+
+# Review needed: Transliterated 'Voyager'. Needs confirmation if a descriptive
+# Lao term is better for this map style.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__voyager
+#, fuzzy
+msgid "Voyager"
+msgstr "ວອຍເອເຈີ"
+
+# Review needed: Depends on the base term 'Voyager' translation.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__voyager-dark
+#, fuzzy
+msgid "Voyager-Dark"
+msgstr "ວອຍເອເຈີ-ມືດ"
+
+# Review needed: Depends on the base term 'Voyager' translation. 'Light'
+# translated as 'ອ່ອນ'.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__voyager-light
+#, fuzzy
+msgid "Voyager-Light"
+msgstr "ວອຍເອເຈີ-ອ່ອນ"
+
+# Review needed: Depends on the base term 'Voyager' translation.
+# Transliterated 'Vintage' as 'ວິນເທດ'.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__voyager-vintage
+#, fuzzy
+msgid "Voyager-Vintage"
+msgstr "ວອຍເອເຈີ-ວິນເທດ"
+
+# Review needed: Kept 'WMS' as a technical acronym. 'Layer Name' translated as
+# 'ຊື່ຊັ້ນຂໍ້ມູນ'. Needs technical review.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__wms_layer_name
+#, fuzzy
+msgid "WMS Layer Name"
+msgstr "ຊື່ຊັ້ນຂໍ້ມູນ WMS"
+
+# Review needed: Kept 'WMS' as a technical acronym. Used glossary term for
+# 'options'.
+#. module: spp_base_gis
+#: model_terms:ir.ui.view,arch_db:spp_base_gis.spp_gis_raster_layer_view_form
+#, fuzzy
+msgid "WMS options"
+msgstr "ຕົວເລືອກ WMS"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__winter
+msgid "Winter"
+msgstr "ລະດູໜາວ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__spp_gis_raster_layer__raster_style__winter-dark
+msgid "Winter-Dark"
+msgstr "ລະດູໜາວ-ມືດ"
+
+# Review needed: Highly technical terms (geo type, wkt, geojson, string)
+# kept/transliterated. Needs expert review for clarity and correctness in Lao
+# technical context.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/fields.py:0
+#, python-format, fuzzy
+msgid ""
+"Write/create/search geo type must be wkt/geojson string or must respond to "
+"wkt"
+msgstr ""
+"ປະເພດ geo ສຳລັບ ຂຽນ/ສ້າງ/ຄົ້ນຫາ ຕ້ອງເປັນສະຕຣິງ wkt/geojson ຫຼື "
+"ຕ້ອງຕອບສະໜອງຕໍ່ wkt"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__x_max
+msgid "X Max"
+msgstr "X ສູງສຸດ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__x_min
+msgid "X Min"
+msgstr "X ຕ່ຳສຸດ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__y_max
+msgid "Y Max"
+msgstr "Y ສູງສຸດ"
+
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_spp_gis_raster_layer__y_min
+msgid "Y Min"
+msgstr "Y ຕ່ຳສຸດ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Technical term for field type. Kept as is. Needs confirmation if a Lao
+# equivalent or description (e.g., 'ເສັ້ນ_ພູມສາດ') is preferred.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__ttype__geo_line
+#, fuzzy
+msgid "geo_line"
+msgstr "geo_line"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Technical term for field type. Kept as is. Needs confirmation if a Lao
+# equivalent or description (e.g., 'ຈຸດ_ພູມສາດ') is preferred.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__ttype__geo_point
+#, fuzzy
+msgid "geo_point"
+msgstr "geo_point"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Technical term for field type. Kept as is. Needs confirmation if a Lao
+# equivalent or description (e.g., 'ຮູບຫຼາຍແຈ_ພູມສາດ') is preferred.
+#. module: spp_base_gis
+#: model:ir.model.fields.selection,name:spp_base_gis.selection__ir_model_fields__ttype__geo_polygon
+#, fuzzy
+msgid "geo_polygon"
+msgstr "geo_polygon"
+
+# Review needed: Technical term 'hex' (hexadecimal). Needs confirmation if
+# 'ຄ່າເລກຖານສິບຫົກ' is better or if 'ຄ່າ hex' is commonly understood.
+#. module: spp_base_gis
+#: model:ir.model.fields,help:spp_base_gis.field_spp_gis_data_layer__begin_color
+#, fuzzy
+msgid "hex value"
+msgstr "ຄ່າ hex"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Technical acronym (Spatial Reference System Identifier). Kept as is. Needs
+# confirmation.
+#. module: spp_base_gis
+#: model:ir.model.fields,field_description:spp_base_gis.field_ir_model_fields__srid
+#, fuzzy
+msgid "srid"
+msgstr "srid"
+
+# Review needed: Kept 'geojson' as a technical term. Used 'ພິກັດ' for
+# coordinates based on glossary context 'address coordinates'. Needs technical
+# review.
+#. module: spp_base_gis
+#. odoo-python
+#: code:addons/spp_base_gis/fields.py:0
+#, python-format, fuzzy
+msgid "type and coordinates should be in the geojson"
+msgstr "ປະເພດ ແລະ ພິກັດ ຄວນຢູ່ໃນ geojson"

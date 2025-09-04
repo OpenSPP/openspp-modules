@@ -4,12 +4,12 @@
 {
     "name": "OpenSPP: Ethnic Group",
     "category": "OpenSPP",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "base",
@@ -17,6 +17,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "views/ethnic_group_views.xml",
     ],
     "assets": {},
     "demo": [],

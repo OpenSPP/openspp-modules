@@ -1,0 +1,381 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_starter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: lo\n"
+
+#. module: spp_starter
+#: model:ir.ui.menu,name:spp_starter.spp_starter_menu
+msgid "Apps"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Back"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__bank_details_needed
+msgid "Bank Details Needed"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state_spmis__2
+msgid "Cash Transfer"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__cash_transfer_needed
+msgid "Cash Transfer Needed"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state__2
+msgid "Chosen Registry Setup"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__conducting_inkind_transfer
+msgid "Conducting Inkind Transfer"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Do you need to capture bank details?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Do you need to manage service points?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Done"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Enter the organization's address."
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Enter the organization's phone number."
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Enter your organization name."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__farmer_demo_management
+msgid "Farmer Demo Management"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__registry_target__farmer
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state_farmer__0
+msgid "Farmer Registry"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__org_phone
+msgid "For contact and possibly for integrations like SMS alerts."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__org_address
+msgid "For record-keeping and location-based features."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__id_management
+msgid "Id Management"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__org_name
+msgid "Identify the company for record-keeping and customization."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state_spmis__3
+msgid "In-Kind Transfer"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__is_last_step
+msgid "Is Last Step"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Is location assignment for registrants needed?"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__location_assignment
+msgid "Location Assignment"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model,name:spp_starter.model_ir_ui_menu
+msgid "Menu"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Next"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__bank_details_needed__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__cash_transfer_needed__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__conducting_inkind_transfer__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__farmer_demo_management__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__id_management__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__location_assignment__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__service_point_management__no
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__sp_mis_demo_management__no
+msgid "No"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__org_address
+msgid "Org Address"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__org_currency_id
+msgid "Org Currency"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__org_name
+msgid "Org Name"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__org_phone
+msgid "Org Phone"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Organization Name:"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state__0
+msgid "Organization Setup"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Organization's Address:"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Organization's Phone Number:"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state__1
+msgid "Registry Setup"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__registry_target
+msgid "Registry Target"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__registry_target__spmis
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state_spmis__0
+msgid "SP-MIS"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model,name:spp_starter.model_spp_starter
+msgid "SPP Starter"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Select the organization's operating currency:"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__service_point_management
+msgid "Service Point Management"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__state_spmis__1
+msgid "Service Points"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__sp_mis_demo_management
+msgid "Sp Mis Demo Management"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__state
+msgid "State"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__state_farmer
+msgid "State Farmer"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,field_description:spp_starter.field_spp_starter__state_spmis
+msgid "State Spmis"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__bank_details_needed
+msgid "To add functionality for storing financial information."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__registry_target
+msgid "To customize data models and interfaces."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__conducting_inkind_transfer
+msgid "To decide if modules for inventory management are needed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__location_assignment
+msgid "To decide whether geo-tagging modules are needed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__id_management
+msgid "To determine if identity management modules should be installed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__service_point_management
+msgid "To gauge whether additional logistics modules are needed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__sp_mis_demo_management
+msgid "To gauge whether demo module for SP-MIS is needed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__farmer_demo_management
+msgid "To gauge whether demo module for farmer registry is needed."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__cash_transfer_needed
+msgid "To install cash transfer modules."
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields,help:spp_starter.field_spp_starter__org_currency_id
+msgid "To set the default currency for financial transactions."
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "WIll you manage SP-MIS or Farmer Registry?"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.actions.act_window,name:spp_starter.spp_starter_action
+msgid "Welcome to OpenSPP!"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Will you be conducting cash transfers?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Will you be conducting in-kind transfers?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Will you manage Demo for Farmer Registry?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Will you manage Demo for SP-MIS?"
+msgstr ""
+
+#. module: spp_starter
+#: model_terms:ir.ui.view,arch_db:spp_starter.spp_starter_view_form
+msgid "Would you like to issue functional IDs?"
+msgstr ""
+
+#. module: spp_starter
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__bank_details_needed__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__cash_transfer_needed__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__conducting_inkind_transfer__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__farmer_demo_management__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__id_management__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__location_assignment__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__service_point_management__yes
+#: model:ir.model.fields.selection,name:spp_starter.selection__spp_starter__sp_mis_demo_management__yes
+msgid "Yes"
+msgstr ""

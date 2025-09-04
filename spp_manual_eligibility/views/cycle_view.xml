@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_cycle_manual_eligibility_form" model="ir.ui.view">
+        <field name="name">view_cycle_manual_eligibility_form</field>
+        <field name="model">g2p.cycle</field>
+        <field name="priority">1010</field>
+        <field name="inherit_id" ref="g2p_programs.view_cycle_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='locked']" position="before">
+                <field name="is_manual_eligibility" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@name='check_eligibility']" position="attributes">
+                <attribute name="invisible">
+                    is_manual_eligibility or state not in ('draft','enrolled')
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

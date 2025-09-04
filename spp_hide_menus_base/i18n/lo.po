@@ -1,0 +1,115 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_hide_menus_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_hide_menus_base
+#: model_terms:ir.actions.act_window,help:spp_hide_menus_base.action_spp_hide_menu
+msgid ""
+"Click the create button to enter the information of the Menu to be hidden."
+msgstr "ກົດປຸ່ມສ້າງເພື່ອປ້ອນຂໍ້ມູນຂອງເມນູທີ່ຈະເຊື່ອງ."
+
+#. module: spp_hide_menus_base
+#: model_terms:ir.actions.act_window,help:spp_hide_menus_base.action_spp_hide_menu
+msgid "Create a new Hide Menu Configuration!"
+msgstr "ສ້າງການກຳນົດຄ່າການເຊື່ອງເມນູໃໝ່!"
+
+#. module: spp_hide_menus_base
+#: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_hide_menus_base
+#: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+#. module: spp_hide_menus_base
+#: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__default_groups_id
+msgid "Default Groups"
+msgstr "ກຸ່ມຄ່າເລີ່ມຕົ້ນ"
+
+#. module: spp_hide_menus_base
+#: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+#. module: spp_hide_menus_base
+#: model:ir.model.fields.selection,name:spp_hide_menus_base.selection__spp_hide_menu__state__hide
+msgid "Hidden"
+msgstr "ທີ່ເຊື່ອງໄວ້"
+
+#. module: spp_hide_menus_base
+#: model:ir.ui.menu,name:spp_hide_menus_base.menu_spp_hide_menu
+msgid "Hidden Menus"
+msgstr "ເມນູທີ່ເຊື່ອງໄວ້"
+
+#. module: spp_hide_menus_base
+#: model_terms:ir.ui.view,arch_db:spp_hide_menus_base.view_spp_hide_menu_tree
+msgid "Hide Menu"
+msgstr "ເຊື່ອງເມນູ"
+
+#. module: spp_hide_menus_base
+#: model:ir.actions.act_window,name:spp_hide_menus_base.action_spp_hide_menu
+#: model:ir.model,name:spp_hide_menus_base.model_spp_hide_menu
+msgid "Hide Menu Configuration"
+msgstr "ການກຳນົດຄ່າການເຊື່ອງເມນູ"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_hide_menus_base
+#: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__id
+#, fuzzy
+msgid "ID"
+msgstr "ID"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_hide_menus_base
+#: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ປັບປຸງຫຼ້າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_hide_menus_base
+#: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ປັບປຸງຫຼ້າສຸດເມື່ອ"
+
+#. module: spp_hide_menus_base
+#: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__name
+msgid "Name"
+msgstr "ຊື່"
+
+#. module: spp_hide_menus_base
+#: model:ir.model.fields.selection,name:spp_hide_menus_base.selection__spp_hide_menu__state__show
+msgid "Show"
+msgstr "ສະແດງ"
+
+#. module: spp_hide_menus_base
+#: model_terms:ir.ui.view,arch_db:spp_hide_menus_base.view_spp_hide_menu_tree
+msgid "Show Menu"
+msgstr "ສະແດງເມນູ"
+
+#. module: spp_hide_menus_base
+#: model:res.groups,name:spp_hide_menus_base.show_non_openspp_menu_group
+msgid "Show Non-OpenSPP Menu"
+msgstr "ສະແດງເມນູທີ່ບໍ່ແມ່ນ OpenSPP"
+
+#. module: spp_hide_menus_base
+#: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__state
+msgid "State"
+msgstr "ລັດ"

@@ -4,9 +4,9 @@
     "name": "OpenSPP DCI API Server",
     "summary": "Provides a DCI-compliant RESTful API for secure data exchange with OpenSPP's registry.",
     "category": "OpenSPP",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.3.0",
     "author": "OpenSPP.org",
-    "development_status": "Alpha",
+    "development_status": "Production/Stable",
     "maintainers": [
         "jeremi",
         "gonzalesedwin1123",
@@ -19,6 +19,8 @@
         "base",
         "g2p_registry_base",
         "g2p_registry_individual",
+        "g2p_registry_group",
+        "g2p_registry_membership",
         "spp_oauth",
     ],
     "data": [

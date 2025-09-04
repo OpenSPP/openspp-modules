@@ -1,0 +1,89 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_registry_approval_individual
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_registry_approval_individual
+#: model:ir.ui.menu,name:spp_registry_approval_individual.menu_all_individuals_list
+msgid "All Individuals"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model_terms:ir.ui.view,arch_db:spp_registry_approval_individual.view_individuals_form
+msgid "Approve"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model:ir.actions.act_window,name:spp_registry_approval_individual.action_approve_individuals_list
+#: model:ir.ui.menu,name:spp_registry_approval_individual.menu_approve_individuals_list
+msgid "Approved Individuals"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model_terms:ir.ui.view,arch_db:spp_registry_approval_individual.view_individuals_form
+msgid "Are you sure you want to approve this registry?"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model_terms:ir.ui.view,arch_db:spp_registry_approval_individual.view_individuals_form
+msgid "Are you sure you want to reject this registry?"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model_terms:ir.ui.view,arch_db:spp_registry_approval_individual.view_individuals_form
+msgid "Are you sure you want to reset this registry back to draft?"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model_terms:ir.actions.act_window,help:spp_registry_approval_individual.action_approve_individuals_list
+#: model_terms:ir.actions.act_window,help:spp_registry_approval_individual.action_draft_individuals_list
+#: model_terms:ir.actions.act_window,help:spp_registry_approval_individual.action_rejected_individuals_list
+msgid "Click the create button to enter the new registrant's information."
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model_terms:ir.actions.act_window,help:spp_registry_approval_individual.action_draft_individuals_list
+msgid "Create a new individual registrant!"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model_terms:ir.actions.act_window,help:spp_registry_approval_individual.action_approve_individuals_list
+#: model_terms:ir.actions.act_window,help:spp_registry_approval_individual.action_rejected_individuals_list
+msgid "Create a new individuals registrant!"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model:ir.actions.act_window,name:spp_registry_approval_individual.action_draft_individuals_list
+#: model:ir.ui.menu,name:spp_registry_approval_individual.menu_draft_individuals_list
+msgid "Draft Individuals"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model_terms:ir.ui.view,arch_db:spp_registry_approval_individual.view_individuals_form
+msgid "Reject"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model:ir.ui.menu,name:spp_registry_approval_individual.menu_rejected_individuals_list
+msgid "Rejected Individuals"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model:ir.actions.act_window,name:spp_registry_approval_individual.action_rejected_individuals_list
+msgid "Rejected Individualss"
+msgstr ""
+
+#. module: spp_registry_approval_individual
+#: model_terms:ir.ui.view,arch_db:spp_registry_approval_individual.view_individuals_form
+msgid "Reset to Draft"
+msgstr ""

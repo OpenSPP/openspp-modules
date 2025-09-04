@@ -18,12 +18,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership__inkind_entitlements_count
 #: model:ir.model.fields,field_description:spp_programs.field_res_partner__inkind_entitlements_count
 #: model:ir.model.fields,field_description:spp_programs.field_res_users__inkind_entitlements_count
+#: model:ir.model.fields,field_description:spp_programs.field_spp_attendance_subscriber__inkind_entitlements_count
 msgid "# In-kind Entitlements"
 msgstr ""
 
 #. module: spp_programs
 #. odoo-python
-#: code:addons/spp_programs/models/programs.py:0
 #: code:addons/spp_programs/models/programs.py:0
 #, python-format
 msgid "%s Imported Beneficiaries"
@@ -65,7 +65,27 @@ msgid "<strong>Target Type:</strong>"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,help:spp_programs.field_spp_entitlement_reject__cycle_id
+#: model:ir.model.fields,help:spp_programs.field_spp_entitlement_reset_pending__cycle_id
+msgid "A Cycle"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,help:spp_programs.field_spp_entitlement_reject__entitlement_id
+#: model:ir.model.fields,help:spp_programs.field_spp_entitlement_reset_pending__entitlement_id
+msgid "A Entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,help:spp_programs.field_spp_entitlement_reject__wizard_id
+#: model:ir.model.fields,help:spp_programs.field_spp_entitlement_reset_pending__wizard_id
+msgid "A Wizard"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields,help:spp_programs.field_g2p_entitlement_inkind__partner_id
+#: model:ir.model.fields,help:spp_programs.field_spp_entitlement_reject__partner_id
+#: model:ir.model.fields,help:spp_programs.field_spp_entitlement_reset_pending__partner_id
 #: model:ir.model.fields,help:spp_programs.field_spp_multi_inkind_entitlement_approval__partner_id
 msgid "A beneficiary"
 msgstr ""
@@ -82,12 +102,19 @@ msgid "Admin Area"
 msgstr ""
 
 #. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.reject_entitlement_wizard
+#: model_terms:ir.ui.view,arch_db:spp_programs.reset_to_pending_entitlement_wizard
+msgid "Amount"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.actions.server,name:spp_programs.multiple_inkind_entitlement_approval
 #: model_terms:ir.ui.view,arch_db:spp_programs.multi_inkind_entitlement_approval_wizard_form_view
 msgid "Approve"
 msgstr ""
 
 #. module: spp_programs
+#: model:res.groups,name:spp_programs.approve_entitlement
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
 msgid "Approve Entitlement"
 msgstr ""
@@ -113,6 +140,8 @@ msgstr ""
 #. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.inkind_entitlement_report_wizard
 #: model_terms:ir.ui.view,arch_db:spp_programs.multi_inkind_entitlement_approval_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_programs.reject_entitlement_wizard
+#: model_terms:ir.ui.view,arch_db:spp_programs.reset_to_pending_entitlement_wizard
 msgid "Cancel"
 msgstr ""
 
@@ -136,6 +165,8 @@ msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__code
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__code
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__code
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__code
 msgid "Code"
 msgstr ""
@@ -169,6 +200,16 @@ msgid "Contact"
 msgstr ""
 
 #. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_form
+msgid "Copy New Beneficiaries from Program"
+msgstr ""
+
+#. module: spp_programs
+#: model:res.groups,name:spp_programs.create_program_cycle_entitlement
+msgid "Create Program/Cycle/Entitlement"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model,name:spp_programs.model_g2p_program_create_wizard
 msgid "Create a New Program Wizard"
 msgstr ""
@@ -176,21 +217,31 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__create_uid
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__create_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__create_uid
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__create_uid
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reject_entitlement_wizard__create_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reset_pending_entitlement_wizard__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__create_date
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__create_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__create_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__create_date
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__create_date
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__create_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reject_entitlement_wizard__create_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reset_pending_entitlement_wizard__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__currency_id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__currency_id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__currency_id
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__currency_id
 msgid "Currency"
 msgstr ""
@@ -200,6 +251,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__cycle_id
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__cycle_id
 #: model:ir.model.fields,field_description:spp_programs.field_procurement_group__cycle_id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__cycle_id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__cycle_id
 #: model:ir.model.fields,field_description:spp_programs.field_stock_picking__cycle_id
 msgid "Cycle"
 msgstr ""
@@ -212,6 +265,11 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__date_approved
 msgid "Date Approved"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement__date_rejected
+msgid "Date Rejected"
 msgstr ""
 
 #. module: spp_programs
@@ -232,8 +290,12 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__display_name
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__display_name
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__display_name
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__display_name
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__display_name
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__display_name
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reject_entitlement_wizard__display_name
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reset_pending_entitlement_wizard__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -263,9 +325,12 @@ msgstr ""
 #. module: spp_programs
 #. odoo-python
 #: code:addons/spp_programs/models/entitlement.py:0
-#: code:addons/spp_programs/models/entitlement.py:0
+#: code:addons/spp_programs/models/g2p_entitlement.py:0
+#: code:addons/spp_programs/models/g2p_entitlement.py:0
 #: model:ir.model,name:spp_programs.model_g2p_entitlement
 #: model:ir.model,name:spp_programs.model_g2p_entitlement_inkind
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__entitlement_id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__entitlement_id
 #, python-format
 msgid "Entitlement"
 msgstr ""
@@ -279,13 +344,14 @@ msgstr ""
 #. module: spp_programs
 #. odoo-python
 #: code:addons/spp_programs/models/entitlement.py:0
-#: code:addons/spp_programs/models/entitlement.py:0
 #, python-format
 msgid "Entitlement: (%s)"
 msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__entitlement_ids
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reject_entitlement_wizard__entitlement_ids
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reset_pending_entitlement_wizard__entitlement_ids
 #: model:ir.ui.menu,name:spp_programs.menu_entitlement_inkind
 #: model:ir.ui.menu,name:spp_programs.menu_entitlement_report_inkind
 msgid "Entitlements"
@@ -323,6 +389,16 @@ msgid "Generate Report"
 msgstr ""
 
 #. module: spp_programs
+#: model:res.groups,name:spp_programs.global_role_program_cycle_approver_res_groups
+msgid "Global Program Cycle Approver"
+msgstr ""
+
+#. module: spp_programs
+#: model:res.groups,name:spp_programs.global_role_program_validator_res_groups
+msgid "Global Program Validator"
+msgstr ""
+
+#. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_filter
 #: model_terms:ir.ui.view,arch_db:spp_programs.entitlement_inkind_report_filter
 msgid "Group By"
@@ -331,8 +407,12 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__id
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__id
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__id
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reject_entitlement_wizard__id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reset_pending_entitlement_wizard__id
 msgid "ID"
 msgstr ""
 
@@ -352,14 +432,13 @@ msgstr ""
 #. module: spp_programs
 #. odoo-python
 #: code:addons/spp_programs/models/programs.py:0
-#: code:addons/spp_programs/models/programs.py:0
 #, python-format
 msgid "Import"
 msgstr ""
 
 #. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
-msgid "Import Eligible Registrants"
+msgid "Import New Eligible Registrants"
 msgstr ""
 
 #. module: spp_programs
@@ -401,7 +480,6 @@ msgstr ""
 #. module: spp_programs
 #. odoo-python
 #: code:addons/spp_programs/wizard/inkind_entitlement_report_wiz.py:0
-#: code:addons/spp_programs/wizard/inkind_entitlement_report_wiz.py:0
 #: model:ir.actions.act_window,name:spp_programs.action_inkind_entitlement_report_wizard
 #, python-format
 msgid "In-kind Entitlement Report"
@@ -417,6 +495,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_program_membership__inkind_entitlement_ids
 #: model:ir.model.fields,field_description:spp_programs.field_res_partner__inkind_entitlement_ids
 #: model:ir.model.fields,field_description:spp_programs.field_res_users__inkind_entitlement_ids
+#: model:ir.model.fields,field_description:spp_programs.field_spp_attendance_subscriber__inkind_entitlement_ids
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_tree
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_group_ext_form_custom_spp
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
@@ -427,6 +506,12 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.actions.act_window,name:spp_programs.action_entitlement_report_inkind
 msgid "In-kind Entitlements Report"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__initial_amount
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__initial_amount
+msgid "Initial Amount"
 msgstr ""
 
 #. module: spp_programs
@@ -442,16 +527,24 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__write_uid
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__write_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__write_uid
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__write_uid
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reject_entitlement_wizard__write_uid
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reset_pending_entitlement_wizard__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__write_date
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind_report_wizard__write_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__write_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__write_date
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__write_date
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval_wizard__write_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reject_entitlement_wizard__write_date
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reset_pending_entitlement_wizard__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -463,6 +556,21 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__manage_inventory
 msgid "Manage Inventory"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_g2p_multi_entitlement_approval_wizard
+msgid "Multi Entitlement Approval Wizard"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_spp_entitlement_reject
+msgid "Multi Entitlement Reject"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_spp_entitlement_reset_pending
+msgid "Multi Entitlement Reset to Pending"
 msgstr ""
 
 #. module: spp_programs
@@ -486,11 +594,21 @@ msgid "New"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__next_cycle_id
+msgid "Next Cycle"
+msgstr ""
+
+#. module: spp_programs
 #. odoo-python
-#: code:addons/spp_programs/models/programs.py:0
 #: code:addons/spp_programs/models/programs.py:0
 #, python-format
 msgid "No Eligibility Manager defined."
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_multi_entitlement_approval_wizard__number_of_beneficiaries
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reject_entitlement_wizard__number_of_beneficiaries
+msgid "Number of Beneficiaries"
 msgstr ""
 
 #. module: spp_programs
@@ -506,7 +624,6 @@ msgstr ""
 
 #. module: spp_programs
 #. odoo-python
-#: code:addons/spp_programs/models/entitlement.py:0
 #: code:addons/spp_programs/models/entitlement.py:0
 #, python-format
 msgid "Only draft entitlements are allowed to be deleted"
@@ -531,6 +648,11 @@ msgid "Pending Validation"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__prev_cycle_id
+msgid "Previous Cycle"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model,name:spp_programs.model_procurement_group
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_cycle__procurement_group_id
 msgid "Procurement Group"
@@ -550,13 +672,23 @@ msgid "Program"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.module.category,name:spp_programs.program_access_module
+msgid "Program Access"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.actions.report,name:spp_programs.action_print_program_approval_receipt
 msgid "Program Approval Receipt"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program__view_id
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_program_create_wizard__view_id
+msgid "Program UI Template"
+msgstr ""
+
+#. module: spp_programs
 #. odoo-python
-#: code:addons/spp_programs/wizard/create_program_wizard.py:0
 #: code:addons/spp_programs/wizard/create_program_wizard.py:0
 #, python-format
 msgid "Programs"
@@ -569,14 +701,64 @@ msgid "QTY"
 msgstr ""
 
 #. module: spp_programs
+#: model:res.groups,name:spp_programs.read_program_cycle_entitlement
+msgid "Read Program/Cycle/Entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reject_entitlement_wizard__reject_reason
+msgid "Reason"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement_inkind__state__rdpd2ben
 msgid "Redeemed/Paid to Beneficiary"
 msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__partner_id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__partner_id
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__partner_id
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__partner_id
 msgid "Registrant"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.actions.server,name:spp_programs.reject_entitlement_modal
+#: model_terms:ir.ui.view,arch_db:spp_programs.reject_entitlement_wizard
+msgid "Reject"
+msgstr ""
+
+#. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/g2p_entitlement.py:0
+#: model:ir.actions.act_window,name:spp_programs.action_reject_entitlement_wizard
+#: model:res.groups,name:spp_programs.reject_entitlement
+#: model_terms:ir.ui.view,arch_db:spp_programs.inherit_view_entitlement_form
+#: model_terms:ir.ui.view,arch_db:spp_programs.reject_entitlement_wizard
+#, python-format
+msgid "Reject Entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_spp_reject_entitlement_wizard
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reject__wizard_id
+msgid "Reject Entitlement Wizard"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.inherit_view_entitlement_form
+msgid "Reject entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields.selection,name:spp_programs.selection__g2p_entitlement__state__reject
+msgid "Rejected"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement__rejected_reason
+msgid "Rejected Reason"
 msgstr ""
 
 #. module: spp_programs
@@ -597,6 +779,27 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.ui.menu,name:spp_programs.spp_programs_reports_menu_root
 msgid "Reports"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.actions.server,name:spp_programs.reset_to_pending_entitlement_modal
+#: model_terms:ir.ui.view,arch_db:spp_programs.inherit_view_entitlement_form
+#: model_terms:ir.ui.view,arch_db:spp_programs.reset_to_pending_entitlement_wizard
+msgid "Reset to Pending"
+msgstr ""
+
+#. module: spp_programs
+#. odoo-python
+#: code:addons/spp_programs/models/g2p_entitlement.py:0
+#: model:ir.actions.act_window,name:spp_programs.action_reset_to_pending_entitlement_wizard
+#, python-format
+msgid "Reset to Pending Entitlement"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model,name:spp_programs.model_spp_reset_pending_entitlement_wizard
+#: model:ir.model.fields,field_description:spp_programs.field_spp_entitlement_reset_pending__wizard_id
+msgid "Reset to Pending Entitlement Wizard"
 msgstr ""
 
 #. module: spp_programs
@@ -623,7 +826,6 @@ msgstr ""
 #. module: spp_programs
 #. odoo-python
 #: code:addons/spp_programs/models/programs.py:0
-#: code:addons/spp_programs/models/programs.py:0
 #, python-format
 msgid "Started importing %s beneficiaries"
 msgstr ""
@@ -638,6 +840,7 @@ msgid "State"
 msgstr ""
 
 #. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement__state
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__state
 #: model:ir.model.fields,field_description:spp_programs.field_spp_multi_inkind_entitlement_approval__state
 msgid "Status"
@@ -671,7 +874,6 @@ msgstr ""
 #. module: spp_programs
 #. odoo-python
 #: code:addons/spp_programs/models/cycle.py:0
-#: code:addons/spp_programs/models/cycle.py:0
 #, python-format
 msgid "The \"End Date\" cannot be earlier than the \"Start Date\"."
 msgstr ""
@@ -679,13 +881,14 @@ msgstr ""
 #. module: spp_programs
 #. odoo-python
 #: code:addons/spp_programs/models/cycle.py:0
-#: code:addons/spp_programs/models/cycle.py:0
 #, python-format
 msgid "The \"Start Date\" cannot be earlier than today."
 msgstr ""
 
 #. module: spp_programs
 #: model:ir.model.fields,help:spp_programs.field_g2p_entitlement_inkind__currency_id
+#: model:ir.model.fields,help:spp_programs.field_spp_entitlement_reject__currency_id
+#: model:ir.model.fields,help:spp_programs.field_spp_entitlement_reset_pending__currency_id
 #: model:ir.model.fields,help:spp_programs.field_spp_multi_inkind_entitlement_approval__currency_id
 msgid "The currency used to enter statement"
 msgstr ""
@@ -701,8 +904,23 @@ msgid "There are no entitlements retrieved based on the filters specified."
 msgstr ""
 
 #. module: spp_programs
+#: model:res.groups,comment:spp_programs.global_role_program_cycle_approver_res_groups
+msgid "This role allows users to approve program cycles."
+msgstr ""
+
+#. module: spp_programs
+#: model:res.groups,comment:spp_programs.global_role_program_validator_res_groups
+msgid "This role allows users to validate programs."
+msgstr ""
+
+#. module: spp_programs
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_cycle_custom_spp_form
 msgid "To Approve"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.model.fields,field_description:spp_programs.field_spp_reject_entitlement_wizard__to_state
+msgid "To State"
 msgstr ""
 
 #. module: spp_programs
@@ -729,6 +947,11 @@ msgstr ""
 #. module: spp_programs
 #: model:ir.model.fields,field_description:spp_programs.field_g2p_entitlement_inkind__uom_id
 msgid "Unit of Measure"
+msgstr ""
+
+#. module: spp_programs
+#: model:ir.module.category,description:spp_programs.program_access_module
+msgid "User access level for Program"
 msgstr ""
 
 #. module: spp_programs
@@ -762,8 +985,12 @@ msgid "Warehouse"
 msgstr ""
 
 #. module: spp_programs
+#: model:res.groups,name:spp_programs.write_program_cycle_entitlement
+msgid "Write Program/Cycle/Entitlement"
+msgstr ""
+
+#. module: spp_programs
 #. odoo-python
-#: code:addons/spp_programs/models/entitlement.py:0
 #: code:addons/spp_programs/models/entitlement.py:0
 #, python-format
 msgid "You have no access in the Entitlement List View"
@@ -773,4 +1000,21 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_entitlement_inkind_form
 #: model_terms:ir.ui.view,arch_db:spp_programs.view_program_list_custom_spp_form
 msgid "code..."
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.inherit_view_payment_tree
+msgid "total_amount_issued"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.inherit_view_payment_tree
+msgid "total_amount_paid"
+msgstr ""
+
+#. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.inherit_multi_entitlement_approval_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spp_programs.inherit_view_entitlement_tree
+#: model_terms:ir.ui.view,arch_db:spp_programs.reject_entitlement_wizard
+msgid "total_initial_amount"
 msgstr ""

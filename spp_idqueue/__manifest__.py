@@ -1,12 +1,12 @@
 {
     "name": "OpenSPP ID Queue",
     "category": "OpenSPP",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.3.0",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": ["base", "g2p_registry_base", "spp_idpass", "queue_job", "spp_area"],
     "data": [
@@ -20,6 +20,7 @@
         "wizard/batch_create_wizard.xml",
         "wizard/multi_id_request_wizard.xml",
         "views/registrant.xml",
+        "views/id_pass_view.xml",
         "views/res_config_settings.xml",
     ],
     "assets": {"web.assets_backend": ["spp_idqueue/static/src/js/form_controller.js"]},

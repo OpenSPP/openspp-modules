@@ -1,0 +1,213 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_openid_vci
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters;
+# Source string appears to be code, left untranslated. Confirm if this is
+# correct usage or if it should represent a user-facing label.
+#. module: spp_openid_vci
+#: model:ir.actions.report,print_report_name:spp_openid_vci.action_generate_id_card
+#, fuzzy
+msgid "(object._get_vc_issue_file_name())"
+msgstr "(object._get_vc_issue_file_name())"
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+msgid ""
+"<br/>\n"
+"                                    <strong>Gender:</strong>"
+msgstr "<br/>                                     <strong>ເພດ:</strong>"
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+msgid "<strong>Address:</strong>"
+msgstr "<strong>ທີ່ຢູ່:</strong>"
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+msgid "<strong>Birthdate:</strong>"
+msgstr "<strong>ວັນເດືອນປີເກີດ:</strong>"
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+msgid "<strong>Name:</strong>"
+msgstr "<strong>ຊື່:</strong>"
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.issue_card_wizard
+msgid "Cancel"
+msgstr "ຍົກເລີກ"
+
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.issue_card_wizard
+msgid "Confirm"
+msgstr "ຢືນຢັນ"
+
+#. module: spp_openid_vci
+#: model:ir.model,name:spp_openid_vci.model_res_partner
+msgid "Contact"
+msgstr "ຕິດຕໍ່ພົວພັນ"
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+#. module: spp_openid_vci
+#: model:res.groups,name:spp_openid_vci.generate_vc
+msgid "Generator"
+msgstr "ຜູ້ສ້າງ"
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__id
+msgid "ID"
+msgstr "ລະຫັດ"
+
+#. module: spp_openid_vci
+#: model:ir.actions.report,name:spp_openid_vci.action_generate_id_card
+msgid "ID Card"
+msgstr "ບັດປະຈຳຕົວ"
+
+#. module: spp_openid_vci
+#. odoo-python
+#: code:addons/spp_openid_vci/models/res_partner.py:0
+#: model:ir.actions.act_window,name:spp_openid_vci.action_issue_card_wizard
+#: model:ir.actions.server,name:spp_openid_vci.vc_modal_generator
+#, python-format
+msgid "Issue Card"
+msgstr "ອອກບັດ"
+
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__issuer_id
+msgid "Issuer"
+msgstr "ຜູ້ອອກໃຫ້"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ປັບປຸງລ່າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_issue_card_wizard__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ປັບປຸງລ່າສຸດເມື່ອ"
+
+# Review needed: Technical term "auth sub id type" translated based on
+# assumption. Human review needed for accuracy.
+#. module: spp_openid_vci
+#. odoo-python
+#: code:addons/spp_openid_vci/models/res_partner.py:0
+#, python-format, fuzzy
+msgid "No auth sub id type found in the issuer."
+msgstr "ບໍ່ພົບຊະນິດ ID ຍ່ອຍສຳລັບການຢືນຢັນຕົວຕົນໃນຜູ້ອອກໃຫ້."
+
+#. module: spp_openid_vci
+#. odoo-python
+#: code:addons/spp_openid_vci/models/res_partner.py:0
+#, python-format
+msgid "No encryption provider found in the issuer."
+msgstr "ບໍ່ພົບຜູ້ໃຫ້ບໍລິການການເຂົ້າລະຫັດໃນຜູ້ອອກໃຫ້."
+
+#. module: spp_openid_vci
+#. odoo-python
+#: code:addons/spp_openid_vci/models/res_partner.py:0
+#, python-format
+msgid "No issuer found."
+msgstr "ບໍ່ພົບຜູ້ອອກໃຫ້."
+
+#. module: spp_openid_vci
+#: model:ir.model,name:spp_openid_vci.model_g2p_openid_vci_issuers
+msgid "OpenID VCI Issuer"
+msgstr "ຜູ້ອອກ OpenID VCI"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+#, fuzzy
+msgid "OpenSPP"
+msgstr "OpenSPP"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_openid_vci
+#: model_terms:ir.ui.view,arch_db:spp_openid_vci.id_vc_card
+#, fuzzy
+msgid "QR Code"
+msgstr "QR Code"
+
+# Review needed: Glossary term 'registry' found, but target 'ການລົງທະບຽນ'
+# missing
+#. module: spp_openid_vci
+#. odoo-python
+#: code:addons/spp_openid_vci/models/res_partner.py:0
+#, python-format, fuzzy
+msgid "Registrant ({registry_name}) does not have ID with ID Type {id_type}."
+msgstr "ຜູ້ລົງທະບຽນ ({registry_name}) ບໍ່ມີລະຫັດກັບຊະນິດ ID {id_type}."
+
+# Review needed: Translation of the technical term "Verifiable Credential"
+# needs review for accuracy and standard usage in Lao technical contexts.
+#. module: spp_openid_vci
+#: model:ir.module.category,description:spp_openid_vci.verifiable_credential_access_module
+#, fuzzy
+msgid "User access level for Verifiable Credential"
+msgstr "ລະດັບການເຂົ້າເຖິງຂອງຜູ້ໃຊ້ສຳລັບຂໍ້ມູນຢັ້ງຢືນທີ່ກວດສອບໄດ້"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_openid_vci
+#: model:ir.model.fields,field_description:spp_openid_vci.field_g2p_program_membership__vc_qr_code
+#: model:ir.model.fields,field_description:spp_openid_vci.field_res_partner__vc_qr_code
+#: model:ir.model.fields,field_description:spp_openid_vci.field_res_users__vc_qr_code
+#: model:ir.model.fields,field_description:spp_openid_vci.field_spp_attendance_subscriber__vc_qr_code
+#, fuzzy
+msgid "VC QR Code"
+msgstr "VC QR Code"
+
+# Review needed: Translation depends on the accuracy of the term "Verifiable
+# Credential".
+#. module: spp_openid_vci
+#: model:res.groups,name:spp_openid_vci.global_vc_generator_res_groups
+#, fuzzy
+msgid "Verifiable Credential Generator"
+msgstr "ຜູ້ສ້າງຂໍ້ມູນຢັ້ງຢືນທີ່ກວດສອບໄດ້"
+
+# Review needed: Translation depends on the accuracy of the term "Verifiable
+# Credential".
+#. module: spp_openid_vci
+#: model:ir.module.category,name:spp_openid_vci.verifiable_credential_access_module
+#, fuzzy
+msgid "Verifiable Credential Module Access"
+msgstr "ການເຂົ້າເຖິງໂມດູນຂໍ້ມູນຢັ້ງຢືນທີ່ກວດສອບໄດ້"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_openid_vci
+#: model:ir.model,name:spp_openid_vci.model_spp_issue_card_wizard
+#, fuzzy
+msgid "spp.issue.card.wizard"
+msgstr "spp.issue.card.wizard"

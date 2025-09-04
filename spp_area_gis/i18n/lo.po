@@ -1,0 +1,131 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_area_gis
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_area_gis
+#: model:ir.model,name:spp_area_gis.model_spp_area
+msgid "Area"
+msgstr "ພື້ນທີ່"
+
+# Review needed: Combined multiple glossary terms; phrasing might need
+# adjustment for natural flow and precise meaning in context (data vs. import
+# process).
+#. module: spp_area_gis
+#: model:ir.model,name:spp_area_gis.model_spp_area_import_raw
+#, fuzzy
+msgid "Area Import Raw Data"
+msgstr "ຂໍ້ມູນດິບການນຳເຂົ້າພື້ນທີ່"
+
+# Review needed: Combined glossary terms. Plural 'Areas' translated as
+# singular 'ພື້ນທີ່' in the compound noun, which is common but needs
+# confirmation. Exact meaning (table *for* import vs. table *of* imports)
+# might affect phrasing.
+#. module: spp_area_gis
+#: model:ir.model,name:spp_area_gis.model_spp_area_import
+#, fuzzy
+msgid "Areas Import Table"
+msgstr "ຕາຕະລາງການນຳເຂົ້າພື້ນທີ່"
+
+#. module: spp_area_gis
+#: model:ir.model.fields,field_description:spp_area_gis.field_spp_area__coordinates
+#: model:spp.gis.data.layer,name:spp_area_gis.gis_vector_layer_area_coordinates
+#: model_terms:ir.ui.view,arch_db:spp_area_gis.custom_view_spparea_form
+msgid "Coordinates"
+msgstr "ພິກັດ"
+
+# Review needed: Glossary term 'ຄ່າຕັ້ງຕົ້ນ' used. Context is a layer name,
+# which might require a different phrasing like 'ຄ່າເລີ່ມຕົ້ນ' for
+# naturalness.
+#. module: spp_area_gis
+#: model:spp.gis.raster.layer,name:spp_area_gis.gis_raster_layer_area_osm
+#, fuzzy
+msgid "Default"
+msgstr "ຄ່າຕັ້ງຕົ້ນ"
+
+# Review needed: Used loanword 'ໂພລີກອນ' for Polygon based on technical GIS
+# context, instead of literal glossary translation 'ຮູບທີ່ມີຫຼາຍດ້ານ'.
+# Combined with 'ພູມສາດ' for 'Geo'. Needs review for technical accuracy and
+# naturalness.
+#. module: spp_area_gis
+#: model:ir.model.fields,field_description:spp_area_gis.field_spp_area__geo_polygon
+#, fuzzy
+msgid "Geo Polygon"
+msgstr "ໂພລີກອນພູມສາດ"
+
+#. module: spp_area_gis
+#: model:ir.model.fields,field_description:spp_area_gis.field_spp_area_import_raw__latitude
+msgid "Latitude"
+msgstr "ເສັ້ນຂະໜານ"
+
+# Review needed: 'Longitude' not in glossary, used standard term 'ເສັ້ນແວງ'.
+# Phrasing of the validation message needs review for naturalness and clarity.
+#. module: spp_area_gis
+#. odoo-python
+#: code:addons/spp_area_gis/models/area_import.py:0
+#, python-format, fuzzy
+msgid "Latitude is required if Longitude is provided"
+msgstr "ຕ້ອງລະບຸເສັ້ນຂະໜານ ຖ້າມີການລະບຸເສັ້ນແວງ"
+
+#. module: spp_area_gis
+#. odoo-python
+#: code:addons/spp_area_gis/models/area_import.py:0
+#, python-format
+msgid "Latitude must be between -90 and 90"
+msgstr "ເສັ້ນຂະໜານຕ້ອງຢູ່ລະຫວ່າງ -90 ແລະ 90"
+
+# Review needed: Term 'Longitude' not in glossary. Used standard Lao term
+# 'ເສັ້ນແວງ'. Needs validation.
+#. module: spp_area_gis
+#: model:ir.model.fields,field_description:spp_area_gis.field_spp_area_import_raw__longitude
+#, fuzzy
+msgid "Longitude"
+msgstr "ເສັ້ນແວງ"
+
+# Review needed: 'Longitude' not in glossary, used standard term 'ເສັ້ນແວງ'.
+# Phrasing of the validation message needs review for naturalness and clarity.
+#. module: spp_area_gis
+#. odoo-python
+#: code:addons/spp_area_gis/models/area_import.py:0
+#, python-format, fuzzy
+msgid "Longitude is required if Latitude is provided"
+msgstr "ຕ້ອງລະບຸເສັ້ນແວງ ຖ້າມີການລະບຸເສັ້ນຂະໜານ"
+
+# Review needed: Uses non-glossary term 'ເສັ້ນແວງ' for Longitude. Needs
+# validation.
+#. module: spp_area_gis
+#. odoo-python
+#: code:addons/spp_area_gis/models/area_import.py:0
+#, python-format, fuzzy
+msgid "Longitude must be between -180 and 180"
+msgstr "ເສັ້ນແວງຕ້ອງຢູ່ລະຫວ່າງ -180 ແລະ 180"
+
+# Review needed: Used loanword 'ໂພລີກອນ' for Polygon based on technical GIS
+# context, instead of literal glossary translation 'ຮູບທີ່ມີຫຼາຍດ້ານ'. Needs
+# validation.
+#. module: spp_area_gis
+#: model_terms:ir.ui.view,arch_db:spp_area_gis.custom_view_spparea_form
+#, fuzzy
+msgid "Polygon"
+msgstr "ໂພລີກອນ"
+
+# Review needed: Used singular loanword 'ໂພລີກອນ' for plural 'Polygons' in a
+# layer name context, instead of literal glossary translation
+# 'ຫລາຍຮູບຫລາຍຫລ່ຽມ'. Needs validation for technical accuracy and plural
+# handling.
+#. module: spp_area_gis
+#: model:spp.gis.data.layer,name:spp_area_gis.gis_vector_layer_area_polygons
+#, fuzzy
+msgid "Polygons"
+msgstr "ໂພລີກອນ"

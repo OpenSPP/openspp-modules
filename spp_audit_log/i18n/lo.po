@@ -1,0 +1,317 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_audit_log
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_rule.py:0
+#, python-format
+msgid "A rule is already existed for the selected model."
+msgstr "ມີກົດລະບຽບຢູ່ແລ້ວສຳລັບໂມເດວທີ່ເລືອກ."
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__action_id
+msgid "Add in the 'More' menu"
+msgstr "ເພີ່ມໃນເມນູ 'ເພີ່ມເຕີມ'"
+
+# Review needed: Confirmation needed for the standard Lao term for 'Audit' in
+# an ERP/accounting context.
+#. module: spp_audit_log
+#: model:ir.ui.menu,name:spp_audit_log.audit_submenu
+#, fuzzy
+msgid "Audit"
+msgstr "ກວດສອບ"
+
+# Review needed: Core technical term combination ('Audit Log'). Needs
+# confirmation for standard Lao ERP terminology.
+#. module: spp_audit_log
+#: model:ir.actions.act_window,name:spp_audit_log.spp_audit_log_action_window
+#: model:ir.module.category,name:spp_audit_log.module_management
+#: model:ir.ui.menu,name:spp_audit_log.menu_root
+#: model_terms:ir.ui.view,arch_db:spp_audit_log.spp_audit_log_form
+#, fuzzy
+msgid "Audit Log"
+msgstr "ປະຫວັດການກວດສອບ"
+
+# Review needed: Core technical term combination ('Audit Rule'). Needs
+# confirmation for standard Lao ERP terminology.
+#. module: spp_audit_log
+#: model:ir.actions.act_window,name:spp_audit_log.spp_audit_rule_action_window
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__audit_rule_id
+#: model_terms:ir.ui.view,arch_db:spp_audit_log.spp_audit_rule_form
+#, fuzzy
+msgid "Audit Rule"
+msgstr "ກົດລະບຽບການກວດສອບ"
+
+#. module: spp_audit_log
+#: model_terms:ir.ui.view,arch_db:spp_audit_log.spp_audit_log_form
+msgid "Changes"
+msgstr "ການປ່ຽນແປງ"
+
+#. module: spp_audit_log
+#: model:ir.model,name:spp_audit_log.model_res_partner
+msgid "Contact"
+msgstr "ຕິດຕໍ່ພົວພັນ"
+
+# Review needed: Translation depends on the confirmed term for 'Audit Log'.
+#. module: spp_audit_log
+#: model_terms:ir.actions.act_window,help:spp_audit_log.spp_audit_log_action_window
+#, fuzzy
+msgid "Create and manage the audit log."
+msgstr "ສ້າງ ແລະ ຈັດການປະຫວັດການກວດສອບ."
+
+# Review needed: Translation depends on the confirmed term for 'Audit Rule'.
+#. module: spp_audit_log
+#: model_terms:ir.actions.act_window,help:spp_audit_log.spp_audit_rule_action_window
+#, fuzzy
+msgid "Create and manage the audit rule."
+msgstr "ສ້າງ ແລະ ຈັດການກົດລະບຽບການກວດສອບ."
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__create_uid
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__create_uid
+msgid "Created by"
+msgstr "ສ້າງໂດຍ"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__create_date
+msgid "Created on"
+msgstr "ສ້າງຂຶ້ນເມື່ອ"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__data
+msgid "Data"
+msgstr "ຂໍ້ມູນ"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__create_date
+msgid "Date"
+msgstr "ວັນທີ"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__display_name
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__display_name
+msgid "Display Name"
+msgstr "ຊື່ສະແດງ"
+
+# Review needed: Glossary uses 'ພື້ນທີ່' for 'Field', but 'ຟິວ' or 'ເຂດຂໍ້ມູນ'
+# might be used elsewhere in Odoo Lao translations. Consistency check needed.
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_log.py:0
+#, python-format, fuzzy
+msgid "Field"
+msgstr "ພື້ນທີ່"
+
+# Review needed: Very technical field name ('Field To Log Ids Domain'),
+# translation might be awkward. Relies on glossary term for 'Field'.
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__field_to_log_ids_domain
+#, fuzzy
+msgid "Field To Log Ids Domain"
+msgstr "ໂດເມນລະຫັດພື້ນທີ່ທີ່ຈະບັນທຶກ"
+
+# Review needed: Relies on glossary term for 'Field' and chosen term for
+# 'log'. Needs confirmation.
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__field_to_log_ids
+#, fuzzy
+msgid "Fields to log"
+msgstr "ພື້ນທີ່ທີ່ຈະບັນທຶກ"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_g2p_program_membership__grp_member_names
+#: model:ir.model.fields,field_description:spp_audit_log.field_res_partner__grp_member_names
+#: model:ir.model.fields,field_description:spp_audit_log.field_res_users__grp_member_names
+msgid "Group Member Names"
+msgstr "ຊື່ສະມາຊິກກຸ່ມ"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__data_html
+msgid "HTML Data"
+msgstr "ຂໍ້ມູນ HTML"
+
+# Review needed: Repetition (msgstr same as msgid); Missing Lao characters
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__id
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__id
+#, fuzzy
+msgid "ID"
+msgstr "ID"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__write_uid
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "ປັບປຸງລ່າສຸດໂດຍ"
+
+# Review needed: Glossary term 'updated' found, but target 'ອັບເດດແລ້ວ'
+# missing
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__write_date
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "ປັບປຸງລ່າສຸດເມື່ອ"
+
+# Review needed: Confirmation needed for the standard Lao term for 'Log' in
+# this context (consistent with 'Audit Log').
+#. module: spp_audit_log
+#: model:ir.ui.menu,name:spp_audit_log.log_menu
+#, fuzzy
+msgid "Log"
+msgstr "ປະຫວັດ"
+
+# Review needed: Relies on the confirmed term for 'Log'.
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__log_create
+#, fuzzy
+msgid "Log Creation"
+msgstr "ບັນທຶກການສ້າງ"
+
+# Review needed: Relies on the confirmed term for 'Log'.
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__log_unlink
+#, fuzzy
+msgid "Log Deletion"
+msgstr "ບັນທຶກການລຶບ"
+
+# Review needed: Relies on the confirmed term for 'Log'.
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__log_write
+#, fuzzy
+msgid "Log Update"
+msgstr "ບັນທຶກການປັບປຸງ"
+
+#. module: spp_audit_log
+#: model:res.groups,name:spp_audit_log.group_manager
+msgid "Manager"
+msgstr "ຜູ້ຈັດການ"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__method
+msgid "Method"
+msgstr "ວິທີ"
+
+# Review needed: Technical Odoo term ('Model'). Needs confirmation if 'ໂມເດວ'
+# is the standard Lao term.
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__model_id
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__model_id
+#, fuzzy
+msgid "Model"
+msgstr "ໂມເດວ"
+
+# Review needed: Relies on the confirmed term for 'Model'.
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__model
+#, fuzzy
+msgid "Model Name"
+msgstr "ຊື່ໂມເດວ"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__name
+msgid "Name"
+msgstr "ຊື່"
+
+#. module: spp_audit_log
+#: model:ir.model.constraint,message:spp_audit_log.constraint_spp_audit_rule_name_uniq
+msgid "Name must be unique"
+msgstr "ຊື່ຕ້ອງບໍ່ຊ້ຳກັນ"
+
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_log.py:0
+#, python-format
+msgid "New value"
+msgstr "ຄ່າໃໝ່"
+
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_log.py:0
+#, python-format
+msgid "Old value"
+msgstr "ຄ່າເກົ່າ"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__res_id
+msgid "Resource Id"
+msgstr "ລະຫັດຊັບພະຍາກອນ"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__name
+msgid "Resource Name"
+msgstr "ຊື່ຊັບພະຍາກອນ"
+
+# Review needed: Confirmation needed for the standard Lao term for 'Rule' in
+# this context (consistent with 'Audit Rule').
+#. module: spp_audit_log
+#: model:ir.ui.menu,name:spp_audit_log.rule_menu
+#, fuzzy
+msgid "Rule"
+msgstr "ກົດລະບຽບ"
+
+# Review needed: Relies on the confirmed term for 'Audit Log'.
+#. module: spp_audit_log
+#: model:ir.model,name:spp_audit_log.model_spp_audit_log
+#, fuzzy
+msgid "SPP Audit Log"
+msgstr "ປະຫວັດການກວດສອບ SPP"
+
+# Review needed: Relies on the confirmed term for 'Audit Rule'.
+#. module: spp_audit_log
+#: model:ir.model,name:spp_audit_log.model_spp_audit_rule
+#, fuzzy
+msgid "SPP Audit Rule"
+msgstr "ກົດລະບຽບການກວດສອບ SPP"
+
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_log__user_id
+msgid "User"
+msgstr "ຜູ້ໃຊ້"
+
+# Review needed: Relies on the confirmed term for 'Audit Log'.
+#. module: spp_audit_log
+#: model:ir.module.category,description:spp_audit_log.module_management
+#, fuzzy
+msgid "User access level for Audit Log"
+msgstr "ລະດັບການເຂົ້າເຖິງຂອງຜູ້ໃຊ້ສຳລັບປະຫວັດການກວດສອບ"
+
+# Review needed: Technical field name ('View Logs Action Menu'), translation
+# might be awkward. Relies on confirmed term for 'Log'.
+#. module: spp_audit_log
+#: model:ir.model.fields,field_description:spp_audit_log.field_spp_audit_rule__view_logs
+#, fuzzy
+msgid "View Logs Action Menu"
+msgstr "ເມນູການກະທຳເບິ່ງປະຫວັດ"
+
+# Review needed: Relies on the confirmed term for 'Log'.
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_rule.py:0
+#, python-format, fuzzy
+msgid "View logs"
+msgstr "ເບິ່ງປະຫວັດ"
+
+# Review needed: Relies on the confirmed term for 'Audit Log'.
+#. module: spp_audit_log
+#. odoo-python
+#: code:addons/spp_audit_log/models/spp_audit_log.py:0
+#, python-format, fuzzy
+msgid "You cannot remove audit logs!"
+msgstr "ທ່ານບໍ່ສາມາດລຶບປະຫວັດການກວດສອບໄດ້!"
