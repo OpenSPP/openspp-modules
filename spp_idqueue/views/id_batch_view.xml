@@ -395,7 +395,7 @@
         action="action_spp_print_queue_batch"
         parent="spp_idpass.id_pass_main_menu_root"
         sequence="20"
-        groups="g2p_registry_base.group_g2p_admin,group_g2p_id_validator,group_g2p_id_distributor"
+        groups="g2p_registry_base.group_g2p_admin,group_g2p_id_requestor,group_g2p_id_validator,group_g2p_id_distributor"
     />
 
     <record model="ir.actions.server" id="multi_approve_batch">
