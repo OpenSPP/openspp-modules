@@ -1,10 +1,6 @@
 import json
-from unittest.mock import patch
 
-from odoo.exceptions import ValidationError
 from odoo.tests.common import HttpCase
-
-from odoo.addons.spp_data_export.controllers.main import EXCEL_ROW_LIMIT
 
 
 class DataExportTest(HttpCase):
