@@ -21,7 +21,7 @@ class DataExportTest(HttpCase):
     def test_01_export_with_ids_bypasses_check(self):
         """Test that the record check is bypassed when specific record IDs are provided for export."""
         self.authenticate("admin", "admin")
-        with patch("odoo.addons.web.controllers.export.ExcelExport.index") as mock_super_index:
+        with patch("odoo.addons.web.controllers.export.Export.index") as mock_super_index:
             mock_super_index.return_value = "Success"
             data = {
                 "model": self.test_model,
@@ -38,7 +38,7 @@ class DataExportTest(HttpCase):
     def test_02_export_below_limit_succeeds(self):
         """Test that export proceeds when record count is below the limit."""
         self.authenticate("admin", "admin")
-        with patch("odoo.addons.web.controllers.export.ExcelExport.index") as mock_super_index:
+        with patch("odoo.addons.web.controllers.export.Export.index") as mock_super_index:
             mock_super_index.return_value = "Success"
             data = {
                 "model": self.test_model,
