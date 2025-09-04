@@ -281,7 +281,7 @@
         action="action_spp_idqueue"
         parent="spp_idpass.id_pass_main_menu_root"
         sequence="10"
-        groups="g2p_registry_base.group_g2p_admin,group_g2p_id_validator,group_g2p_id_distributor"
+        groups="g2p_registry_base.group_g2p_admin,group_g2p_id_requestor,group_g2p_id_validator,group_g2p_id_distributor"
     />
 
     <record model="ir.actions.server" id="id_batch_print">
