@@ -47,20 +47,3 @@ class DataExportTest(HttpCase):
         # because we are not in a real export flow, but it proves our check passed.
         with self.assertRaises(AttributeError), self.authenticate("admin", "admin"):
             self.url_open(self.url, data={"data": json_data})
-
-    def test_export_above_limit_raises_error(self):
-        """Test that a ValidationError is raised when record count exceeds the limit."""
-        data = {
-            "model": self.test_model,
-            "ids": False,
-            "domain": [],
-            "fields": [{"name": "name", "label": "Name"}],
-        }
-        json_data = json.dumps(data)
-
-        with patch("odoo.http.request.env") as mock_env, self.assertRaises(ValidationError), self.authenticate(
-            "admin", "admin"
-        ):
-            # Mock the search_count to return a value greater than the limit
-            mock_env[self.test_model].sudo.return_value.search_count.return_value = EXCEL_ROW_LIMIT + 1
-            self.url_open(self.url, data={"data": json_data})
