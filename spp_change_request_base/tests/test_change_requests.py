@@ -49,10 +49,19 @@ class TestChangeRequestBase(TransactionCase):
                 "phone": "+0987654321",
             }
         )
+        cls.validation_ids = []
 
         # Patch to allow creating spp.change.request
         patcher = patch(
             "odoo.addons.spp_change_request_base.models.change_request.ChangeRequestBase._selection_request_type_ref_id"
+        )
+        mock_selection = patcher.start()
+        mock_selection.return_value = [("test.cr.type", "Test CR Type")]
+        mock_selection.__name__ = "_mocked__selection_request_type_ref_id"
+        cls.addClassCleanup(patcher.stop)
+
+        patcher = patch(
+            "odoo.addons.spp_change_request_base.models.change_request.ChangeRequestValidationSequence._selection_request_type_ref_id"
         )
         mock_selection = patcher.start()
         mock_selection.return_value = [("test.cr.type", "Test CR Type")]
@@ -65,6 +74,36 @@ class TestChangeRequestBase(TransactionCase):
             "request_type": "test.cr.type",
             "registrant_id": self.registrant_1.id,
         }
+
+        stage_local = self.env["spp.change.request.validation.stage"].create(
+            {
+                "name": "Local Stage",
+            }
+        )
+        stage_global = self.env["spp.change.request.validation.stage"].create(
+            {
+                "name": "Global Stage",
+            }
+        )
+        validations_local = self.env["spp.change.request.validation.sequence"].create(
+            {
+                "sequence": 10,
+                "stage_id": stage_local.id,
+                "request_type": "test.cr.type",
+                "validation_group_id": self.env.ref("base.group_system").id,
+                "validation_group_state": "both",
+            }
+        )
+        validations_global = self.env["spp.change.request.validation.sequence"].create(
+            {
+                "sequence": 20,
+                "stage_id": stage_global.id,
+                "request_type": "test.cr.type",
+                "validation_group_id": self.env.ref("base.group_system").id,
+                "validation_group_state": "both",
+            }
+        )
+        self.validation_ids = [(4, validations_local.id), (4, validations_global.id)]
 
         return self.env["spp.change.request"].create(default_vals)
 
@@ -248,3 +287,105 @@ class TestChangeRequestBase(TransactionCase):
 
         action = change_request.create_request_detail()
         self.assertEqual(action["res_model"], "test.cr.type")
+
+    @patch(
+        "odoo.addons.spp_change_request_base.models.mixins.source_mixin.ChangeRequestSourceMixin.AUTO_APPLY_CHANGES",
+        False,
+    )
+    def test_19_action_validate(self):
+        """Test action_validate method."""
+        change_request = self._create_test_cr()
+        change_request.request_type = "test.cr.type"
+        test_cr_type_record = self.env["test.cr.type"].create(
+            {
+                "change_request_id": change_request.id,
+            }
+        )
+        self.user_demo.groups_id = [(4, self.env.ref("base.group_system").id)]
+        test_cr_type_record.validation_ids = self.validation_ids
+        change_request.request_type_ref_id = test_cr_type_record
+        change_request.state = "pending"
+        change_request.assign_to_id = self.user_demo.id
+
+        # Validate with correct user
+        change_request.with_user(self.user_demo).action_validate()
+        # Validate again to move to validated state as there are 2 validations
+        change_request.with_user(self.user_demo).action_validate()
+
+        self.assertEqual(change_request.state, "validated")
+
+    def test_20_action_apply(self):
+        """Test action_apply method."""
+        change_request = self._create_test_cr()
+        change_request.request_type = "test.cr.type"
+        test_cr_type_record = self.env["test.cr.type"].create(
+            {
+                "change_request_id": change_request.id,
+            }
+        )
+        self.user_demo.groups_id = [(4, self.env.ref("base.group_system").id)]
+        test_cr_type_record.validation_ids = self.validation_ids
+        change_request.request_type_ref_id = test_cr_type_record
+        change_request.state = "validated"
+        change_request.assign_to_id = self.user_demo.id
+
+        # Apply with correct user
+        change_request.with_user(self.user_demo).action_apply()
+        self.assertEqual(change_request.state, "applied")
+        self.assertEqual(change_request.applied_by_id, self.user_demo)
+
+    def test_21_action_cancel(self):
+        """Test action_cancel method."""
+        change_request = self._create_test_cr()
+        change_request.request_type = "test.cr.type"
+        test_cr_type_record = self.env["test.cr.type"].create(
+            {
+                "change_request_id": change_request.id,
+            }
+        )
+        self.user_demo.groups_id = [(4, self.env.ref("base.group_system").id)]
+        test_cr_type_record.validation_ids = self.validation_ids
+        change_request.request_type_ref_id = test_cr_type_record
+        change_request.state = "pending"
+
+        # Cancel the change request
+        change_request._cancel(change_request)
+        self.assertEqual(change_request.state, "cancelled")
+        self.assertEqual(change_request.cancelled_by_id, self.env.user)
+
+    def test_22_action_reset_to_draft(self):
+        """Test action_reset_to_draft method."""
+        change_request = self._create_test_cr()
+        change_request.request_type = "test.cr.type"
+        test_cr_type_record = self.env["test.cr.type"].create(
+            {
+                "change_request_id": change_request.id,
+            }
+        )
+        self.user_demo.groups_id = [(4, self.env.ref("base.group_system").id)]
+        test_cr_type_record.validation_ids = self.validation_ids
+        change_request.request_type_ref_id = test_cr_type_record
+        change_request.state = "rejected"
+
+        # Reset to draft
+        change_request.action_reset_to_draft()
+        self.assertEqual(change_request.state, "draft")
+
+    def test_23_action_reject(self):
+        """Test action_reject method."""
+        change_request = self._create_test_cr()
+        change_request.request_type = "test.cr.type"
+        test_cr_type_record = self.env["test.cr.type"].create(
+            {
+                "change_request_id": change_request.id,
+            }
+        )
+        self.user_demo.groups_id = [(4, self.env.ref("base.group_system").id)]
+        test_cr_type_record.validation_ids = self.validation_ids
+        change_request.request_type_ref_id = test_cr_type_record
+        change_request.state = "pending"
+        change_request.assign_to_id = self.user_demo.id
+
+        # Reject with correct user
+        action = change_request.with_user(self.user_demo).action_reject()
+        self.assertEqual(action["res_model"], "spp.change.request.reject.wizard")
