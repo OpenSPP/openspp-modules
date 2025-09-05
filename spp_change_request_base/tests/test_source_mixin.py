@@ -174,3 +174,27 @@ class TestChangeRequestSourceMixin(TransactionCase):
         self.test_cr_type_record.with_user(self.user_demo).action_validate()
         self.assertEqual(self.change_request.state, "applied")
         self.assertIsNotNone(self.change_request.date_validated)
+
+    def test_11_approve_cr_directly(self):
+        """Test approving a CR directly without validations."""
+        self.change_request.request_type_ref_id = self.test_cr_type_record
+        self.test_cr_type_record._approve_cr(self.change_request)
+        self.assertEqual(self.change_request.state, "applied")
+
+    def test_12_call_action_cancel(self):
+        """Test action_cancel method."""
+        self.change_request.state = "pending"
+        action = self.test_cr_type_record.action_cancel()
+        self.assertEqual(action["res_model"], "spp.change.request.cancel.wizard")
+
+    def test_13_call_action_reject(self):
+        """Test action_reject method."""
+        self.change_request.state = "pending"
+        action = self.test_cr_type_record.action_reject()
+        self.assertEqual(action["res_model"], "spp.change.request.reject.wizard")
+
+    def test_14_on_reject(self):
+        """Test _on_reject method."""
+        self.change_request.state = "pending"
+        self.test_cr_type_record._on_reject(self.change_request, "Rejection Reason")
+        self.assertEqual(self.change_request.state, "rejected")
