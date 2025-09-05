@@ -228,3 +228,27 @@ class TestChangeRequestSourceMixin(TransactionCase):
         action = self.test_cr_type_record.with_user(self.user_demo).open_registrant_details_form()
 
         self.assertEqual(action["res_model"], "res.partner")
+
+    def test_18_on_validate_raise_user_error(self):
+        """Test _on_validate error path."""
+        self.change_request.assign_to_id = self.user_demo.id
+        self.change_request.request_type_ref_id = self.test_cr_type_record
+        self.test_cr_type_record.action_submit()
+        self.test_cr_type_record.with_user(self.user_demo).action_validate()
+
+        # Second Call for Global Stage Validation
+        self.user_demo.groups_id = [(6, 0, [self.env.ref("base.group_user").id])]
+        with self.assertRaises(UserError):
+            self.test_cr_type_record.with_user(self.user_demo).action_validate()
+
+    def test_19_call_action_attach_documents(self):
+        """Test action_attach_documents method."""
+        category = self.env["spp.dms.category"].create({"name": "Test Category"})
+        dms_directory = self.env["spp.dms.directory"].create(
+            {
+                "name": "Test Directory",
+            }
+        )
+        self.test_cr_type_record.dms_directory_ids = [(4, dms_directory.id)]
+        action = self.test_cr_type_record.with_context({"category_id": category.id}).action_attach_documents()
+        self.assertEqual(action["res_model"], "spp.dms.file")

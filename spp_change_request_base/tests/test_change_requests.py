@@ -50,19 +50,22 @@ class TestChangeRequestBase(TransactionCase):
             }
         )
 
-    @patch("odoo.addons.spp_change_request_base.models.change_request.ChangeRequestBase._selection_request_type_ref_id")
-    def _create_test_cr(self, mock_request_type_selection, **kwargs):
-        """Helper method to create a test change request"""
-        mock_request_type_selection.return_value = [("test.request.type", "Test Request Type")]
-        mock_request_type_selection.__name__ = "_mocked__selection_request_type_ref_id"
+        # Patch to allow creating spp.change.request
+        patcher = patch(
+            "odoo.addons.spp_change_request_base.models.change_request.ChangeRequestBase._selection_request_type_ref_id"
+        )
+        mock_selection = patcher.start()
+        mock_selection.return_value = [("test.cr.type", "Test CR Type")]
+        mock_selection.__name__ = "_mocked__selection_request_type_ref_id"
+        cls.addClassCleanup(patcher.stop)
 
+    def _create_test_cr(self):
         default_vals = {
             "name": "Test Request",
-            "request_type": "test.request.type",
+            "request_type": "test.cr.type",
             "registrant_id": self.registrant_1.id,
         }
 
-        default_vals.update(kwargs)
         return self.env["spp.change.request"].create(default_vals)
 
     def test_01_cr_creation(self):
@@ -72,7 +75,7 @@ class TestChangeRequestBase(TransactionCase):
         self.assertEqual(change_request.state, "draft")
         self.assertEqual(change_request.assign_to_id, self.env.user)
         self.assertIsNotNone(change_request.date_requested)
-        self.assertEqual(change_request.request_type, "test.request.type")
+        self.assertEqual(change_request.request_type, "test.cr.type")
 
     def test_02_cr_unlink_draft(self):
         """Test that draft change requests can be deleted by creator"""
@@ -143,7 +146,8 @@ class TestChangeRequestBase(TransactionCase):
 
     def test_10_create_request_detail_not_draft_or_pending_error(self):
         """Test creating request detail for a CR not in draft or pending state raises an error."""
-        change_request = self._create_test_cr(state="applied")
+        change_request = self._create_test_cr()
+        change_request.state = "applied"
 
         with self.assertRaises(UserError) as e:
             change_request.create_request_detail()
@@ -153,8 +157,8 @@ class TestChangeRequestBase(TransactionCase):
 
     def test_11_cancel_cr_not_in_allowed_state_error(self):
         """Test that cancelling a CR not in draft, pending, or rejected state raises an error."""
-        change_request = self._create_test_cr(state="applied")
-
+        change_request = self._create_test_cr()
+        change_request.state = "applied"
         with self.assertRaises(UserError) as e:
             change_request._cancel(change_request)
         self.assertEqual(
@@ -172,7 +176,8 @@ class TestChangeRequestBase(TransactionCase):
 
     def test_13_check_user_not_assigned_error(self):
         """Test _check_user when no user is assigned raises an error."""
-        change_request = self._create_test_cr(assign_to_id=False)
+        change_request = self._create_test_cr()
+        change_request.assign_to_id = False
 
         with self.assertRaises(UserError) as e:
             change_request._check_user("validate")
@@ -180,7 +185,8 @@ class TestChangeRequestBase(TransactionCase):
 
     def test_14_check_user_wrong_user_error(self):
         """Test _check_user when a different user tries to process raises an error."""
-        change_request = self._create_test_cr(assign_to_id=self.user_demo.id)
+        change_request = self._create_test_cr()
+        change_request.assign_to_id = self.user_demo.id
 
         with self.assertRaises(UserError) as e:
             change_request.with_user(self.user_admin)._check_user("validate")
@@ -188,7 +194,8 @@ class TestChangeRequestBase(TransactionCase):
 
     def test_15_check_user_correct_user(self):
         """Test _check_user with the correct assigned user."""
-        change_request = self._create_test_cr(assign_to_id=self.user_demo.id)
+        change_request = self._create_test_cr()
+        change_request.assign_to_id = self.user_demo.id
 
         result = change_request.with_user(self.user_demo)._check_user("validate")
         self.assertTrue(result)
@@ -206,3 +213,30 @@ class TestChangeRequestBase(TransactionCase):
 
         self.assertEqual(action["type"], "ir.actions.act_window")
         self.assertEqual(action["res_model"], "spp.change.request.user.assign.wizard")
+
+    def test_17_open_change_request_form(self):
+        """Test opening the change request form with a valid request_type_ref_id."""
+        change_request = self._create_test_cr()
+        change_request.request_type = "test.cr.type"
+        test_cr_type_record = self.env["test.cr.type"].create(
+            {
+                "change_request_id": change_request.id,
+            }
+        )
+        change_request.request_type_ref_id = test_cr_type_record
+        self.env["ir.ui.view"].create(
+            {
+                "name": "test.cr.type.form",
+                "type": "form",
+                "model": "test.cr.type",
+                "arch_db": """<form string="Test CR Type">
+                                <sheet>
+                                    <group>
+                                        <field name="change_request_id"/>
+                                    </group>
+                                </sheet>
+                             </form>""",
+            }
+        )
+        action = change_request.open_change_request_form()
+        self.assertEqual(action["res_model"], "test.cr.type")
