@@ -198,3 +198,33 @@ class TestChangeRequestSourceMixin(TransactionCase):
         self.change_request.state = "pending"
         self.test_cr_type_record._on_reject(self.change_request, "Rejection Reason")
         self.assertEqual(self.change_request.state, "rejected")
+
+    @patch(
+        "odoo.addons.spp_change_request_base.models.mixins.source_mixin.ChangeRequestSourceMixin.ADMIN_GROUP_NAME",
+        "base.group_system",
+    )
+    def test_15_call_open_user_assignment_wiz(self):
+        """Test open_user_assignment_wiz method."""
+        self.change_request.assign_to_id = False
+        action = self.test_cr_type_record.with_user(self.user_demo).open_user_assignment_wiz()
+        # First without assigned user
+        self.assertEqual(self.change_request.assign_to_id, self.user_demo)
+
+        action = self.test_cr_type_record.with_user(self.user_demo).open_user_assignment_wiz()
+
+        self.assertEqual(action["res_model"], "spp.change.request.user.assign.wizard")
+
+    def test_16_call_open_user_assignment_to_wiz(self):
+        """Test open_user_assignment_to_wiz method."""
+        action = self.test_cr_type_record.with_user(self.user_demo).open_user_assignment_to_wiz()
+        self.assertEqual(action["res_model"], "spp.change.request.user.assign.wizard")
+
+    @patch(
+        "odoo.addons.spp_change_request_base.models.mixins.source_mixin.ChangeRequestSourceMixin.REGISTRANT_FORM_ID",
+        "base.view_partner_form",
+    )
+    def test_17_call_open_registrant_details_form(self):
+        """Test open_user_assignment_wiz method."""
+        action = self.test_cr_type_record.with_user(self.user_demo).open_registrant_details_form()
+
+        self.assertEqual(action["res_model"], "res.partner")
