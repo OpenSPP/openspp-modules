@@ -238,5 +238,13 @@ class TestChangeRequestBase(TransactionCase):
                              </form>""",
             }
         )
-        action = change_request.open_change_request_form()
+        action = change_request.with_user(self.user_demo).open_request_detail()
+        self.assertEqual(action["res_model"], "test.cr.type")
+
+    def test_18_create_request_detail(self):
+        """Test creating request detail without redirection."""
+        change_request = self._create_test_cr()
+        change_request.request_type = "test.cr.type"
+
+        action = change_request.create_request_detail()
         self.assertEqual(action["res_model"], "test.cr.type")

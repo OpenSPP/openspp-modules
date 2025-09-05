@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class TestCRType(models.Model):
@@ -24,6 +24,10 @@ class TestCRType(models.Model):
 
     def update_live_data(self):
         return
+
+    @api.onchange("registrant_id")
+    def _onchange_registrant_id(self):
+        pass
 
 
 class SPPDMSDirectory(models.Model):
