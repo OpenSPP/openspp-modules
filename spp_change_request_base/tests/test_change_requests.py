@@ -28,6 +28,13 @@ class TestChangeRequestBase(TransactionCase):
                 "password": "test_password",
             }
         )
+        cls.user_demo2 = cls.env["res.users"].create(
+            {
+                "name": "Test User2",
+                "login": "test_user2",
+                "password": "test_password2",
+            }
+        )
 
         # Create test registrants
         cls.registrant_1 = cls.env["res.partner"].create(
@@ -194,7 +201,7 @@ class TestChangeRequestBase(TransactionCase):
         """Test opening the change request wizard."""
         change_request = self._create_test_cr()
         self.user_demo.groups_id = [(4, self.env.ref("base.group_system").id)]
-        change_request.assign_to_id = self.user_demo.id
+        change_request.assign_to_id = self.user_demo2.id
         action = change_request.open_user_assignment_wiz()
 
         self.assertEqual(action["type"], "ir.actions.act_window")
