@@ -20,8 +20,10 @@ class TestCRType(models.Model):
         auto_join=True,
     )
 
+    validation_ids = fields.Many2many("spp.change.request.validation.sequence", string="Validations")
+
     def update_live_data(self):
-        return super().update_live_data()
+        return
 
 
 class SPPDMSDirectory(models.Model):

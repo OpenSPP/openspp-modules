@@ -14,6 +14,7 @@
     "depends": [
         "base",
         "spp_dms",
+        "mail",
     ],
     "data": [
         "security/ir.model.access.csv",

@@ -9,17 +9,26 @@ class TestChangeRequestSourceMixin(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.user_admin = cls.env.ref("base.user_admin")
+        cls.user_admin = cls.env.ref("base.group_system")
         cls.user_demo = cls.env["res.users"].create(
             {
                 "name": "Test User",
                 "login": "test_user",
             }
         )
+        cls.user_demo.groups_id = [(4, cls.user_admin.id)]
 
         # Patch to allow creating spp.change.request
         patcher = patch(
             "odoo.addons.spp_change_request_base.models.change_request.ChangeRequestBase._selection_request_type_ref_id"
+        )
+        mock_selection = patcher.start()
+        mock_selection.return_value = [("test.cr.type", "Test CR Type")]
+        mock_selection.__name__ = "_mocked__selection_request_type_ref_id"
+        cls.addClassCleanup(patcher.stop)
+
+        patcher = patch(
+            "odoo.addons.spp_change_request_base.models.change_request.ChangeRequestValidationSequence._selection_request_type_ref_id"
         )
         mock_selection = patcher.start()
         mock_selection.return_value = [("test.cr.type", "Test CR Type")]
@@ -40,38 +49,75 @@ class TestChangeRequestSourceMixin(TransactionCase):
                 "change_request_id": self.change_request.id,
             }
         )
+        stage_local = self.env["spp.change.request.validation.stage"].create(
+            {
+                "name": "Local Stage",
+            }
+        )
+        stage_global = self.env["spp.change.request.validation.stage"].create(
+            {
+                "name": "Global Stage",
+            }
+        )
+        validations_local = self.env["spp.change.request.validation.sequence"].create(
+            {
+                "sequence": 10,
+                "stage_id": stage_local.id,
+                "request_type": "test.cr.type",
+                "validation_group_id": self.env.ref("base.user_admin").id,
+                "validation_group_state": "both",
+            }
+        )
+        validations_global = self.env["spp.change.request.validation.sequence"].create(
+            {
+                "sequence": 20,
+                "stage_id": stage_global.id,
+                "request_type": "test.cr.type",
+                "validation_group_id": self.env.ref("base.user_admin").id,
+                "validation_group_state": "both",
+            }
+        )
+        self.test_cr_type_record.validation_ids = [(4, validations_local.id), (4, validations_global.id)]
 
-    def test_update_live_data_not_implemented(self):
-        """Test that update_live_data raises NotImplementedError."""
-        # We create a fresh record that will use the default implementation
-        test_record = self.env["test.cr.type"].new()
-        with self.assertRaises(NotImplementedError):
-            test_record.update_live_data()
+    def test_01_update_registrant_id(self):
+        """Test that registrant_id is updated based on request_type_ref_id."""
+        # Initially, registrant_id should be empty
+        self.assertFalse(self.change_request.registrant_id)
 
-    def test_on_submit_draft_state(self):
+        # Set a registrant and request_type_ref_id
+        partner = self.env["res.partner"].create({"name": "Test Partner"})
+        self.test_cr_type_record.registrant_id = partner.id
+        self.change_request.request_type_ref_id = self.test_cr_type_record
+        # Simulate onchange
+        self.test_cr_type_record._update_registrant_id(self.test_cr_type_record)
+
+        # Now, registrant_id should be cleared
+        self.assertEqual(self.change_request.registrant_id, partner)
+
+    def test_02_on_submit_draft_state(self):
         """Test _on_submit when the request is in 'draft' state."""
         dms_directory = self.env["spp.dms.directory"].create({"name": "Test Directory"})
         self.change_request.dms_directory_ids = [(4, dms_directory.id)]
         self.assertEqual(self.change_request.state, "draft")
-        self.test_cr_type_record._on_submit(self.change_request)
+        self.test_cr_type_record.action_submit()
         self.assertEqual(self.change_request.state, "pending")
         self.assertIsNotNone(self.change_request.date_requested)
 
-    def test_on_submit_not_draft_state_error(self):
+    def test_03_on_submit_not_draft_state_error(self):
         """Test _on_submit raises ValidationError if not in 'draft' state."""
         self.change_request.state = "pending"
         with self.assertRaises(ValidationError) as e:
             self.test_cr_type_record._on_submit(self.change_request)
         self.assertEqual(str(e.exception), "The request must be in draft state to be set to pending validation.")
 
-    def test_apply_not_validated_state_error(self):
+    def test_04_apply_not_validated_state_error(self):
         """Test _apply raises ValidationError if not in 'validated' state."""
         self.change_request.state = "pending"
         with self.assertRaises(ValidationError) as e:
             self.test_cr_type_record._apply(self.change_request)
         self.assertEqual(str(e.exception), "The request must be in validated state for changes to be applied.")
 
-    def test_apply_success(self):
+    def test_05_apply_success(self):
         """Test _apply success path."""
         self.change_request.state = "validated"
         self.change_request.assign_to_id = self.env.user
@@ -85,7 +131,7 @@ class TestChangeRequestSourceMixin(TransactionCase):
         self.assertEqual(self.change_request.applied_by_id, self.env.user)
         self.assertIsNotNone(self.change_request.date_applied)
 
-    def test_cancel_in_valid_state(self):
+    def test_06_cancel_in_valid_state(self):
         """Test _cancel when request is in a cancellable state."""
         self.change_request.state = "pending"
         self.test_cr_type_record._cancel(self.change_request)
@@ -93,7 +139,7 @@ class TestChangeRequestSourceMixin(TransactionCase):
         self.assertEqual(self.change_request.cancelled_by_id, self.env.user)
         self.assertIsNotNone(self.change_request.date_cancelled)
 
-    def test_cancel_in_invalid_state_error(self):
+    def test_07_cancel_in_invalid_state_error(self):
         """Test _cancel raises UserError if in a non-cancellable state."""
         self.change_request.state = "applied"
         with self.assertRaises(UserError) as e:
@@ -102,14 +148,14 @@ class TestChangeRequestSourceMixin(TransactionCase):
             str(e.exception), "The request to be cancelled must be in draft, pending, or rejected validation state."
         )
 
-    def test_reset_to_draft_in_rejected_state(self):
+    def test_08_reset_to_draft_in_rejected_state(self):
         """Test _reset_to_draft when request is in 'rejected' state."""
         self.change_request.state = "rejected"
         self.test_cr_type_record._reset_to_draft(self.change_request)
         self.assertEqual(self.change_request.state, "draft")
         self.assertEqual(self.change_request.reset_to_draft_by_id, self.env.user)
 
-    def test_reset_to_draft_not_in_rejected_state_error(self):
+    def test_09_reset_to_draft_not_in_rejected_state_error(self):
         """Test _reset_to_draft raises UserError if not in 'rejected' state."""
         self.change_request.state = "pending"
         with self.assertRaises(UserError) as e:
@@ -117,3 +163,14 @@ class TestChangeRequestSourceMixin(TransactionCase):
         self.assertEqual(
             str(e.exception), "The request to be cancelled must be in draft, pending, or rejected validation state."
         )
+
+    def test_10_on_validate(self):
+        """Test _on_validate success path."""
+        self.change_request.assign_to_id = self.user_demo.id
+        self.change_request.request_type_ref_id = self.test_cr_type_record
+        self.test_cr_type_record.action_submit()
+        self.test_cr_type_record.with_user(self.user_demo).action_validate()
+        # Second Call for Global Stage Validation
+        self.test_cr_type_record.with_user(self.user_demo).action_validate()
+        self.assertEqual(self.change_request.state, "applied")
+        self.assertIsNotNone(self.change_request.date_validated)
