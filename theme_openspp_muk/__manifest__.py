@@ -1,5 +1,5 @@
 {
-    "name": "OpenSPP Theme (Muk Theme)",
+    "name": "OpenSPP Theme",
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "category": "OpenSPP",
