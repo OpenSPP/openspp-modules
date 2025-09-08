@@ -2,7 +2,7 @@
 
 
 {
-    "name": "Hide Non-OpenSPP Menus",
+    "name": "OpenSPP Hide Non-OpenSPP Menus",
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
     "sequence": 1,

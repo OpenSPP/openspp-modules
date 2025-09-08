@@ -1,5 +1,5 @@
 {
-    "name": "SPP Audit Log",
+    "name": "OpenSPP Audit Log",
     "summary": "Provides audit logging functionality to track data changes and user actions within OpenSPP, enhancing transparency and accountability.",
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
