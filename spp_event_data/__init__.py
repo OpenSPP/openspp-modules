@@ -2,3 +2,4 @@
 
 from . import models
 from . import wizard
+from .tests import test_model_event_data_type
