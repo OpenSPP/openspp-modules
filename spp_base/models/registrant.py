@@ -12,3 +12,4 @@ class OpenSPPResPartner(models.Model):
     tags_ids = fields.Many2many("g2p.registrant.tags", string="Registrant Tags", allow_filter=True)
     kind_as_str = fields.Char(related="kind.name", string="String Kind")
     gender = fields.Many2one("gender.type", ondelete="restrict")
+    company_id = fields.Many2one("res.company", required=False)
