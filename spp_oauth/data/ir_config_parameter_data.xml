@@ -3,11 +3,9 @@
     <record id="oauth_priv_key" model="ir.config_parameter">
         <field name="key">spp_oauth.oauth_priv_key</field>
         <field name="value">YourPrivateKeyHere</field>
-        <field name="hidden">True</field>
     </record>
     <record id="oauth_pub_key" model="ir.config_parameter">
         <field name="key">spp_oauth.oauth_pub_key</field>
         <field name="value">YourPublicKeyHere</field>
-        <field name="hidden">True</field>
     </record>
 </odoo>
