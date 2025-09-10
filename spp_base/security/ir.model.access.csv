@@ -1,3 +1,13 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 spp_ir_actions_act_window_user,IR Actions Act Window User Access,base.model_ir_actions_act_window,base.group_user,1,0,0,0
 spp_ir_actions_act_window_view_user,IR Actions Act Window View User Access,base.model_ir_actions_act_window_view,base.group_user,1,0,0,0
+
+
+ir_model_requestor,IR Model Requestor Access,base.model_ir_model,spp_idqueue.group_g2p_id_requestor,1,0,0,0
+g2p_entitlement_inkind_requestor,G2P Entitlement In-Kind Requestor Access,spp_programs.model_g2p_entitlement_inkind,spp_idqueue.group_g2p_id_requestor,1,0,0,0
+
+ir_model_validator_access,IR Model Validator Access,base.model_ir_model,spp_idqueue.group_g2p_id_validator,1,1,1,0
+g2p_entitlement_inkind_validator,G2P Entitlement In-Kind Validator Access,spp_programs.model_g2p_entitlement_inkind,spp_idqueue.group_g2p_id_validator,1,0,0,0
+
+ir_model_distributor_access,IR Model Distributor Access,base.model_ir_model,spp_idqueue.group_g2p_id_distributor,1,1,1,0
+g2p_entitlement_inkind_distributor,G2P Entitlement In-Kind Distributor Access,spp_programs.model_g2p_entitlement_inkind,spp_idqueue.group_g2p_id_distributor,1,0,0,0

@@ -19,6 +19,7 @@ spp_id_type_requestor,ID Type Requestor Access,g2p_registry_base.model_g2p_id_ty
 spp_reg_id_requestor,Registry ID Requestor Access,g2p_registry_base.model_g2p_reg_id,spp_idqueue.group_g2p_id_requestor,1,0,0,0
 spp_reg_rel_requestor,Registry Relationship Requestor Access,g2p_registry_base.model_g2p_reg_rel,spp_idqueue.group_g2p_id_requestor,1,0,0,0
 spp_phone_number_requestor,Phone Number Requestor Access,g2p_registry_base.model_g2p_phone_number,spp_idqueue.group_g2p_id_requestor,1,0,0,0
+ir_model_fields_requestor,IR Model Fields Requestor Access,base.model_ir_model_fields,spp_idqueue.group_g2p_id_requestor,1,0,0,0
 
 spp_idpass_valdiator,ID Pass Validator Access,spp_idpass.model_spp_id_pass,spp_idqueue.group_g2p_id_validator,1,1,1,0
 spp_idqueue_validator,ID Queue Validator Access,spp_idqueue.model_spp_print_queue_id,spp_idqueue.group_g2p_id_validator,1,1,1,0
@@ -32,6 +33,7 @@ spp_id_type_validator,ID Type Validator Access,g2p_registry_base.model_g2p_id_ty
 spp_reg_id_validator,Registry ID Validator Access,g2p_registry_base.model_g2p_reg_id,spp_idqueue.group_g2p_id_validator,1,0,0,0
 spp_reg_rel_validator,Registry Relationship Validator Access,g2p_registry_base.model_g2p_reg_rel,spp_idqueue.group_g2p_id_validator,1,0,0,0
 spp_phone_number_validator,Phone Number Validator Access,g2p_registry_base.model_g2p_phone_number,spp_idqueue.group_g2p_id_validator,1,0,0,0
+ir_model_validator_access,IR Model Data Validator Access,base.model_ir_model_data,spp_idqueue.group_g2p_id_validator,1,1,1,0
 
 spp_idpass_distributor,ID Pass Distributor Access,spp_idpass.model_spp_id_pass,spp_idqueue.group_g2p_id_distributor,1,1,1,0
 spp_idqueue_distributor,ID Queue Distributor Access,spp_idqueue.model_spp_print_queue_id,spp_idqueue.group_g2p_id_distributor,1,1,1,0
@@ -46,3 +48,4 @@ spp_id_type_distributor,ID Type Distributor Access,g2p_registry_base.model_g2p_i
 spp_reg_id_distributor,Registry ID Distributor Access,g2p_registry_base.model_g2p_reg_id,spp_idqueue.group_g2p_id_distributor,1,0,0,0
 spp_reg_rel_distributor,Registry Relationship Distributor Access,g2p_registry_base.model_g2p_reg_rel,spp_idqueue.group_g2p_id_distributor,1,0,0,0
 spp_phone_number_distributor,Phone Number Distributor Access,g2p_registry_base.model_g2p_phone_number,spp_idqueue.group_g2p_id_distributor,1,0,0,0
+ir_model_distributor_access,IR Model Data Distributor Access,base.model_ir_model_data,spp_idqueue.group_g2p_id_distributor,1,1,1,0
