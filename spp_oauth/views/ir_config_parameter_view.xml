@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-    <record id="base.ir_config_list_action" model="ir.actions.act_window">
-        <field name="domain">[('hidden', '=', False)]</field>
-    </record>
-</odoo>

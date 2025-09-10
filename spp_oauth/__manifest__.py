@@ -15,7 +15,6 @@
     "data": [
         "data/ir_config_parameter_data.xml",
         "views/res_config_view.xml",
-        "views/ir_config_parameter_view.xml",
     ],
     "application": True,
     "auto_install": False,
