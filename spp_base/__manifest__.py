@@ -36,6 +36,7 @@
         "project",
         "hr",
         "survey",
+        "spp_registry_base",
     ],
     "excludes": [
         "spp_farmer_registry_base",
