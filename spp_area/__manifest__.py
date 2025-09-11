@@ -29,6 +29,7 @@
         "views/area.xml",
         "views/area_import.xml",
         "views/area_kind.xml",
+        "views/user.xml",
     ],
     "assets": {},
     "demo": [],

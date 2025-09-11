@@ -22,6 +22,7 @@
     "data": [
         "data/id_pass.xml",
         "data/queue_data.xml",
+        "data/roles.xml",
         "security/g2p_security.xml",
         "security/ir.model.access.csv",
         "views/id_queue_view.xml",

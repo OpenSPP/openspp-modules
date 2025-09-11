@@ -27,7 +27,6 @@
         "spp_custom_fields_ui",
         "spp_hide_menus",
         "spp_programs",
-        "spp_user_roles",
         "spp_custom_filter_ui",
         "project_todo",
         "spreadsheet_dashboard",

@@ -13,8 +13,6 @@
         "mail",
         "g2p_registry_base",
         "g2p_registry_group",
-        "spp_area",
-        "spp_idqueue",
         "base_user_role",
     ],
     "data": [
