@@ -2,5 +2,3 @@
 
 
 from . import registrant
-from . import area
-from . import user
