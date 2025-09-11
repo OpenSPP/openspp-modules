@@ -14,6 +14,7 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "g2p_registry_membership",
+        "spp_registry_base",
         "spp_idpass",
         "queue_job",
         "spp_area",
