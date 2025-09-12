@@ -39,16 +39,16 @@ export class PreviewRecordWidget extends Component {
         if (record.mimetype === "application/pdf") {
             window.open(fileUrl, "_blank");
         } else {
-            const attachment = this.store.Attachment.insert({
-                id: resId,
-                filename: record.name || "",
-                name: record.name || "",
-                mimetype: record.mimetype,
-                model_name: resModel,
-                url: fileUrl,
-            });
+            const fileModel = {
+                isImage: Boolean(record.mimetype.startsWith("image/")),
+                isVideo: Boolean(record.mimetype.startsWith("video/")),
+                isViewable: true,
+                displayName: record.name,
+                defaultSource: fileUrl,
+                downloadUrl: fileUrl,
+            };
 
-            this.fileViewer.open(attachment);
+            this.fileViewer.open(fileModel);
         }
     }
 }

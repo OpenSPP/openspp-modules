@@ -13,6 +13,7 @@
     "external_dependencies": {},
     "depends": [
         "base",
+        "mail",
         "spp_dms",
         "mail",
     ],
