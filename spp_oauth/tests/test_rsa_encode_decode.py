@@ -1,35 +1,64 @@
-from unittest.mock import patch
+import uuid
 
-from odoo.tests.common import TransactionCase
-
-from ..tools.rsa_encode_decode import calculate_signature, verify_and_decode_signature
-
-MOCK_PRIVATE_KEY = "any_private_key"
-
-MOCK_PUBLIC_KEY = "any_public_key"
+from ..tools.rsa_encode_decode import calculate_signature
+from .common import Common
 
 
-class TestRSA(TransactionCase):
-    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.jwt.encode")
-    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.get_private_key")
-    def test_calculate_signature(self, mock_get_private_key, mock_encode):
-        mock_encode.return_value = "mocked_signature"
-        mock_get_private_key.return_value = MOCK_PRIVATE_KEY
+class TestRSA(Common):
+    def test_01_get_private_key(self):
+        self.set_parameters()
 
-        header = {"typ": "JWT"}
-        payload = {"data": "test"}
-        signature = calculate_signature(header, payload)
+        from ..tools.rsa_encode_decode import get_private_key
 
-        self.assertEqual(signature, "mocked_signature")
+        private_key = get_private_key(self.env)
+        self.assertTrue(private_key is not None)
 
-    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.jwt.decode")
-    @patch("odoo.addons.spp_oauth.tools.rsa_encode_decode.get_public_key")
-    def test_verify_and_decode_signature(self, mock_get_public_key, mock_decode):
-        mock_decode.return_value = {"data": "test"}
-        mock_get_public_key.return_value = MOCK_PUBLIC_KEY
+    def test_02_get_public_key(self):
+        self.set_parameters()
 
-        access_token = "mocked_access_token"
+        from ..tools.rsa_encode_decode import get_public_key
 
-        decoded = verify_and_decode_signature(access_token)
+        public_key = get_public_key(self.env)
+        self.assertTrue(public_key is not None)
 
-        self.assertEqual(decoded, {"data": "test"})
+    def test_03_calculate_signature(self):
+        self.set_parameters()
+
+        from ..tools.rsa_encode_decode import calculate_signature
+
+        openapi_token = str(uuid.uuid4())
+
+        token = calculate_signature(
+            env=self.env,
+            header=None,
+            payload={
+                "database": self.env.cr.dbname,
+                "token": openapi_token,
+            },
+        )
+        self.assertTrue(token is not None)
+
+    def test_04_verify_and_decode_signature(self):
+        self.set_parameters()
+
+        from ..tools.rsa_encode_decode import verify_and_decode_signature
+
+        openapi_token = str(uuid.uuid4())
+
+        token = calculate_signature(
+            env=self.env,
+            header=None,
+            payload={
+                "database": self.env.cr.dbname,
+                "token": openapi_token,
+            },
+        )
+        self.assertTrue(token is not None)
+
+        decoded = verify_and_decode_signature(
+            env=self.env,
+            access_token=token,
+        )
+        self.assertTrue(decoded is not None)
+        self.assertEqual(decoded.get("database"), self.env.cr.dbname)
+        self.assertEqual(decoded.get("token"), openapi_token)
