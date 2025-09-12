@@ -1,5 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+# 	* spp_oauth
 #
 msgid ""
 msgstr ""
@@ -11,3 +12,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: spp_oauth
+#: model:ir.model,name:spp_oauth.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: spp_oauth
+#: model:ir.model.fields,field_description:spp_oauth.field_res_config_settings__oauth_priv_key
+msgid "OAuth Private Key"
+msgstr ""
+
+#. module: spp_oauth
+#: model:ir.model.fields,field_description:spp_oauth.field_res_config_settings__oauth_pub_key
+msgid "OAuth Public Key"
+msgstr ""
+
+#. module: spp_oauth
+#: model_terms:ir.ui.view,arch_db:spp_oauth.spp_oauth_config_view
+msgid "OAuth Settings (4096 bits RSA keys)"
+msgstr ""
+
+#. module: spp_oauth
+#: model_terms:ir.ui.view,arch_db:spp_oauth.spp_oauth_config_view
+msgid "Private Key"
+msgstr ""
+
+#. module: spp_oauth
+#: model_terms:ir.ui.view,arch_db:spp_oauth.spp_oauth_config_view
+msgid "Public Key"
+msgstr ""
+
+#. module: spp_oauth
+#: model_terms:ir.ui.view,arch_db:spp_oauth.spp_oauth_config_view
+msgid "SPP OAuth Settings"
+msgstr ""
