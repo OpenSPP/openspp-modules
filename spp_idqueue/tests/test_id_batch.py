@@ -129,3 +129,98 @@ class TestIdBatch(Common):
                 ["distributed", False, date.today()],
                 "Test Queue status should be `distributed`!",
             )
+
+    def create_test_batch(self):
+        queue_1 = self._create_test_queue(self._test_individual_1.id, self.id_type)
+        queue_2 = self._create_test_queue(self._test_individual_1.id, self.id_type)
+        queue_3 = self._create_test_queue(self._test_individual_1.id, self.id_type)
+        queue_4 = self._create_test_queue(self._test_individual_1.id, self.id_type)
+        batch = self.env["spp.print.queue.batch"].create(
+            {
+                "name": "TEST BATCH 02",
+                "queued_ids": [
+                    (4, queue_1.id),
+                    (4, queue_2.id),
+                    (4, queue_3.id),
+                    (4, queue_4.id),
+                ],
+            }
+        )
+        return batch
+
+    def test_07_multi_approve_batch(self):
+        batch = self.create_test_batch()
+        batch.multi_approve_batch()
+        self.assertListEqual(
+            [
+                batch.status,
+            ],
+            ["approved"],
+            "Test batches should now be in `approved` status!",
+        )
+
+    def test_08_multi_generate_batch(self):
+        batch = self.create_test_batch()
+        batch.multi_approve_batch()
+        batch.multi_generate_batch()
+        self.assertListEqual(
+            [
+                batch.status,
+            ],
+            ["generating"],
+            "Test batches should now be in `generating` status!",
+        )
+
+    def test_09_multi_print_batch(self):
+        batch = self.create_test_batch()
+        batch.multi_approve_batch()
+        batch.status = "generated"
+        batch.merge_status = "merged"
+        for queues in batch.queued_ids:
+            queues.status = "approved"
+
+        batch.multi_print_batch()
+        self.assertListEqual(
+            [
+                batch.status,
+            ],
+            ["printing"],
+            "Test batches should now be in `printing` status!",
+        )
+
+    def test_10_multi_printed_batch(self):
+        batch = self.create_test_batch()
+        batch.multi_approve_batch()
+        batch.status = "generated"
+        batch.merge_status = "merged"
+        for queues in batch.queued_ids:
+            queues.status = "approved"
+
+        batch.multi_print_batch()
+        batch.multi_printed_batch()
+        self.assertListEqual(
+            [
+                batch.status,
+            ],
+            ["printed"],
+            "Test batches should now be in `printed` status!",
+        )
+
+    def test_11_multi_distributed_batch(self):
+        batch = self.create_test_batch()
+        batch.multi_approve_batch()
+        batch.status = "generated"
+        batch.merge_status = "merged"
+        for queues in batch.queued_ids:
+            queues.status = "approved"
+
+        batch.multi_print_batch()
+        batch.multi_printed_batch()
+        batch.multi_distribute_batch()
+        self.assertListEqual(
+            [
+                batch.status,
+            ],
+            ["distributed"],
+            "Test batches should now be in `distributed` status!",
+        )
