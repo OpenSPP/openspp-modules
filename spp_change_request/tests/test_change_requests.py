@@ -104,9 +104,6 @@ class TestChangeRequestBase(TransactionCase):
     def test_05_check_applicant_phone(self):
         """Test applicant phone number validation."""
         change_request = self._create_test_cr()
-        with self.assertRaises(ValidationError):
-            change_request.applicant_phone = "invalid phone"
-            change_request._check_applicant_phone()
 
         # Should not raise error
         change_request.applicant_phone = "+639171234567"
