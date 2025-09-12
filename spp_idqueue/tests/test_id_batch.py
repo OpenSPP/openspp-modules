@@ -10,9 +10,18 @@ class TestIdBatch(Common):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls._test_queue_1 = cls._create_test_queue(cls._test_individual_1.id)
-        cls._test_queue_2 = cls._create_test_queue(cls._test_individual_2.id)
-        cls._test_queue_3 = cls._create_test_queue(cls._test_individual_3.id)
+        cls.id_type = (
+            cls.env["g2p.id.type"]
+            .create(
+                {
+                    "name": "Test ID Type",
+                }
+            )
+            .id
+        )
+        cls._test_queue_1 = cls._create_test_queue(cls._test_individual_1.id, cls.id_type)
+        cls._test_queue_2 = cls._create_test_queue(cls._test_individual_2.id, cls.id_type)
+        cls._test_queue_3 = cls._create_test_queue(cls._test_individual_3.id, cls.id_type)
         cls.test_batch = cls.env["spp.print.queue.batch"].create(
             {
                 "name": "TEST BATCH 01",
@@ -49,32 +58,8 @@ class TestIdBatch(Common):
         with self.assertRaisesRegex(ValidationError, "Some IDs are not generated"):
             self.test_batch.mark_as_done(self.test_batch)
 
-    def test_03_mark_as_done_raise_error_02(self):
-        self.test_batch.queued_ids.write({"status": "generated"})
-        with self.assertRaisesRegex(ValidationError, "No Auth Token or API URL"):
-            self.test_batch.mark_as_done(self.test_batch)
-
     @patch("requests.post")
-    def test_04_mark_as_done_response_403(self, mock_post):
-        self.test_batch.queued_ids.write({"status": "generated"})
-        template_batch_print = self.env.ref("spp_idqueue.id_template_batch_print")
-        template_batch_print.write(
-            {
-                "auth_token": "AUTHENTIFICATION-TOKEN",
-                "api_url": "http://127.0.0.1:8080/",
-            }
-        )
-        mock_post.return_value = Mock(status_code=403)
-        self.test_batch.mark_as_done(self.test_batch)
-        self.assertEqual(
-            self.test_batch.merge_status,
-            "error_sending",
-            "Merge status should be error, since the response status code is 403!",
-        )
-        self.assertEqual(self.test_batch.status, "generated", "Status should be generated!")
-
-    @patch("requests.post")
-    def test_04_mark_as_done_response_200(self, mock_post):
+    def test_03_mark_as_done_response_200(self, mock_post):
         self.test_batch.queued_ids.write({"status": "generated"})
         template_batch_print = self.env.ref("spp_idqueue.id_template_batch_print")
         template_batch_print.write(
@@ -87,17 +72,17 @@ class TestIdBatch(Common):
         self.test_batch.mark_as_done(self.test_batch)
         self.assertEqual(
             self.test_batch.merge_status,
-            "sent",
-            "Merge status should be sent, since the response status code is 200!",
+            "merged",
+            "Merge status should be merged, since this is not idpass!",
         )
         self.assertEqual(self.test_batch.status, "generated", "Status should be generated!")
 
-    def test_05_print_batch(self):
+    def test_04_print_batch(self):
         self.assertEqual(self.test_batch.status, "new", "Status should be new!")
         self.test_batch.print_batch()
         self.assertEqual(self.test_batch.status, "printing", "Status should be printing!")
 
-    def test_06_batch_printed(self):
+    def test_05_batch_printed(self):
         self.assertEqual(self.test_batch.status, "new", "Status should be new!")
         self.assertListEqual(
             self.test_batch.queued_ids.mapped("status"),
@@ -121,7 +106,7 @@ class TestIdBatch(Common):
                 "Test Queue status should be `printed`!",
             )
 
-    def test_07_batch_distributed(self):
+    def test_06_batch_distributed(self):
         self.assertEqual(self.test_batch.status, "new", "Status should be new!")
         self.assertListEqual(
             self.test_batch.queued_ids.mapped("status"),
