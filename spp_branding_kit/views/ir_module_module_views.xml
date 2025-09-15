@@ -47,10 +47,8 @@
                 <filter
                     name="paid_apps"
                     string="Paid Apps"
-                    domain="['|', ('license', '=like', 'OEEL%'),
-                                     ('license', '=like', 'OPL%')]"
+                    domain="['|', ('license', '=like', 'OEEL%'), ('license', '=like', 'OPL%')]"
                     help="Show paid/proprietary apps"
-                    invisible="context.get('hide_paid_apps_enabled', False)"
                 />
             </filter>
         </field>

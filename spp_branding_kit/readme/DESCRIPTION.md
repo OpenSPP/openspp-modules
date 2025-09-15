@@ -69,11 +69,10 @@ The **OpenSPP Branding Kit** module is designed to:
 
 The module provides various configuration parameters that can be adjusted through the Settings interface or directly via system parameters:
 
-* `openspp.system_name`: Custom system name displayed throughout the interface
-* `openspp.hide_paid_apps`: Toggle to hide paid applications from the Apps menu
-* `openspp.telemetry_enabled`: Enable or disable telemetry data collection
-* `openspp.documentation_url`: Custom documentation URL for help links
-* `openspp.support_url`: Custom support URL for assistance
+* `openspp.system.name`: Custom system name displayed throughout the interface
+* `openspp.telemetry.enabled`: Enable or disable telemetry data collection
+* `openspp.documentation.url`: Custom documentation URL for help links
+* `openspp.support.url`: Custom support URL for assistance
 
 ## Conclusion
 

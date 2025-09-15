@@ -58,22 +58,4 @@ class ResConfigSettings(models.TransientModel):
         config_parameter="openspp.ui.hide_odoo_referral",
     )
 
-    openspp_hide_paid_apps = fields.Boolean(
-        "Hide Paid Apps",
-        help="Hide paid Odoo apps (Enterprise and OPL licensed modules) from the Apps list",
-        default=True,
-        config_parameter="openspp.hide_paid_apps",
-    )
-
-    openspp_default_app_filter = fields.Selection(
-        [
-            ("all", "All Modules"),
-            ("apps_only", "Apps Only"),
-            ("openspp", "OpenSPP Apps Only"),
-            ("free", "Free Apps Only"),
-        ],
-        string="Default Apps Filter",
-        help="Choose which modules to show by default in the Apps menu",
-        default="apps_only",
-        config_parameter="openspp.default_app_filter",
-    )
+    # Apps filtering is now handled in the UI via default search filters.
