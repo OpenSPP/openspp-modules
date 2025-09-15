@@ -1,4 +1,4 @@
-# OpenSPP Change Request Add Children Demo
+# OpenSPP Change Request: Add Children Demo
 
 This module provides a demonstration of how OpenSPP manages the process of adding new children or members to an existing group within the registry. It integrates a dedicated form, ID scanning capabilities, and automated data updates through the OpenSPP Change Request framework, ensuring a structured and auditable process.
 

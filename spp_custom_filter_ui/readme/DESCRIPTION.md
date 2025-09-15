@@ -1,4 +1,4 @@
-# OpenSPP Custom Filter Ui
+# OpenSPP Custom Filter UI
 
 The OpenSPP Custom Filter UI module customizes the OpenSPP user interface to significantly enhance filtering capabilities for registrant partners (`res.partner` records). This improves usability and efficiency for program managers and administrators in managing individuals and groups within social protection programs and farmer registries.
 

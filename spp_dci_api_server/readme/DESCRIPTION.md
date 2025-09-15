@@ -1,4 +1,4 @@
-# OpenSPP Dci Api Server
+# OpenSPP DCI API Server
 
 The OpenSPP DCI API Server module provides a secure, standardized interface for external systems to access and exchange registry data with OpenSPP. It acts as a bridge, enabling interoperability and data sharing in a consistent, DCI-compliant format.
 
