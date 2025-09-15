@@ -1,5 +1,5 @@
 
-# - Grievance Redress Mechanism
+# Grievance Redress Mechanism
 
 The OpenSPP Grm module provides a robust Grievance Redress Mechanism (GRM) for managing and resolving complaints and feedback within social protection programs and farmer registries. It offers a structured way to receive, track, and address issues raised by registrants.
 
