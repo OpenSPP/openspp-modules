@@ -1,4 +1,4 @@
-# OpenSPP Base Gis
+# OpenSPP Base GIS
 
 The `spp_base_gis` module provides foundational Geographical Information System (GIS) capabilities to the OpenSPP platform. It enables the visualization, management, and interaction with geospatial data, which is essential for geographically-aware program management and decision-making.
 
