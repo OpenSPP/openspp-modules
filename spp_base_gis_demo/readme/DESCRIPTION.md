@@ -1,4 +1,4 @@
-# OpenSPP Base Gis Demo
+# OpenSPP Base GIS Demo
 
 The OpenSPP Base GIS Demo module provides practical examples and use cases for integrating and leveraging the Geographical Information System (GIS) capabilities within the OpenSPP platform. It demonstrates how to add and visualize geospatial data using the foundational OpenSPP Base GIS module.
 
