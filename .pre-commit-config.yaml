@@ -55,7 +55,7 @@ repos:
           - --branch=17.0
           - --org-name=OpenSPP
           - --repo-name=openspp-modules
-          - --convert-fragments-to-markdown
+          - --convert-fragments-to-rst
         stages: [manual]
       - id: oca-gen-addons-table
         stages: [manual]
