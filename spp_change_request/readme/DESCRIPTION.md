@@ -41,19 +41,16 @@ Each change request follows a defined lifecycle with distinct statuses: `Draft`,
 
 The status transitions are designed for clarity:
 
-.. graphviz::
-
-   digraph {
-      "draft" -> "pending";
-      "draft" -> "cancelled";
-      "pending" -> "validated";
-      "validated" -> "validated";
-      "validated" -> "applied";
-      "validated" -> "rejected";
-      "rejected" -> "pending";
-      "rejected" -> "draft";
-      "rejected" -> "cancelled";
-   }
+```
+draft -> pending
+draft -> cancelled
+pending -> validated
+validated -> applied
+validated -> rejected
+rejected -> pending
+rejected -> draft
+rejected -> cancelled
+```
 
 This flow ensures that changes are systematically reviewed and either incorporated or formally declined.
 

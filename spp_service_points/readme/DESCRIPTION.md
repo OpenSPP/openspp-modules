@@ -42,9 +42,7 @@ Service points can be actively managed by enabling or disabling them as needed. 
 
 Service points are directly linked to OpenSPP users (service agents) and registrant records. This allows the system to automatically assign individuals and companies to relevant service points, ensuring that beneficiaries are directed to appropriate locations and that agents only have access to data pertinent to their operational scope. The module also supports the creation of user accounts for contacts associated with a service point's company.
 
-```{note}
-When creating users for a service point's company contacts, the system automatically assigns them to the "Service Point Users" group, ensuring appropriate access rights.
-```
+Note: When creating users for a service point's company contacts, the system automatically assigns them to the "Service Point Users" group, ensuring appropriate access rights.
 
 ## Conclusion
 

@@ -41,9 +41,7 @@ Based on the selected tags and geographical area, the module automatically const
 
 Once eligibility criteria are set, users can initiate the enrollment of all identified eligible registrants into the program. For programs with a large number of potential beneficiaries, the module uses asynchronous processing to import registrants efficiently without impacting system performance, providing updates on the import progress.
 
-```{note}
-For very large beneficiary populations, the system intelligently queues import jobs to ensure smooth operation and provide administrators with progress updates.
-```
+Note: For very large beneficiary populations, the system intelligently queues import jobs to ensure smooth operation and provide administrators with progress updates.
 
 ## Conclusion
 

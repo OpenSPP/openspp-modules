@@ -28,9 +28,7 @@ By establishing these core organizational and user interface settings, `spp_base
 ### Country Office Administration
 Users can define and manage the organizational structure for OpenSPP program delivery within a country. This includes establishing various administrative units, such as a National Office, Regional Offices, or District Offices. Each Country Office can represent a distinct operational area or administrative level, facilitating structured program management and reporting across diverse geographical zones.
 
-```{note}
-While Country Offices define administrative structures, they often align with or operate within the geographical districts managed by the [G2P Registry Base](g2p_registry_base) module. This ensures a consistent framework for both administrative oversight and beneficiary location data.
-```
+Note: While Country Offices define administrative structures, they often align with or operate within the geographical districts managed by the [G2P Registry Base](g2p_registry_base) module. This ensures a consistent framework for both administrative oversight and beneficiary location data.
 
 ### User Context and Interface Customization
 This module allows administrators to link OpenSPP users to specific Country Offices. This capability is crucial for defining the operational context for each user, potentially influencing data visibility, access permissions, and reporting scope. It also provides the foundation for adapting elements of the OpenSPP user interface to better suit local operational workflows and user preferences, ensuring a more intuitive and efficient experience for staff.

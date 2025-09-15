@@ -54,9 +54,7 @@ The module provides a clear workflow for entitlements, moving them through `Draf
 
 The system provides dedicated views to track all in-kind entitlements for a program cycle. This allows administrators to monitor distribution progress, view beneficiary details, and manage the redemption process efficiently at the designated service points.
 
-```{note}
-While the module primarily focuses on in-kind distributions, it works alongside cash entitlement features provided by the `spp_programs` module, offering a comprehensive benefit management solution.
-```
+Note: While the module primarily focuses on in-kind distributions, it works alongside cash entitlement features provided by the `spp_programs` module, offering a comprehensive benefit management solution.
 
 ## Conclusion
 

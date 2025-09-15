@@ -39,9 +39,7 @@ The module supports conditional matching, allowing users to apply specific match
 ### Asynchronous Bulk Import Processing
 For very large datasets, the module integrates with the OpenSPP queuing system to perform matching and import operations in the background. This "asynchronous" processing ensures that the user interface remains responsive during extensive imports, providing status updates without blocking user interaction.
 
-```{note}
-When updating existing records through import matching, the system intelligently handles one-to-many and many-to-many relationships by clearing existing associations for matched fields before applying new ones, preventing the accumulation of duplicate related entries.
-```
+Note: When updating existing records through import matching, the system intelligently handles one-to-many and many-to-many relationships by clearing existing associations for matched fields before applying new ones, preventing the accumulation of duplicate related entries.
 
 ## Conclusion
 
