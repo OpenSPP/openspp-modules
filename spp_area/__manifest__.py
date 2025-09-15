@@ -5,7 +5,7 @@
     "name": "OpenSPP Area Management",
     "summary": "This module extends the OpenSPP Area (Base) module to include additional features for managing and organizing geographical areas within the system.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
