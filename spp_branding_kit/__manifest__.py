@@ -48,7 +48,6 @@
         "web.assets_backend": [
             "spp_branding_kit/static/src/js/webclient.js",
             "spp_branding_kit/static/src/js/user_menu.js",
-            "spp_branding_kit/static/src/js/telemetry_manager.js",
         ],
         "web.assets_frontend": [
             "spp_branding_kit/static/src/css/login_branding.css",

@@ -2,6 +2,8 @@ import logging
 
 from odoo import models
 
+from ..utils import get_branding_config
+
 _logger = logging.getLogger(__name__)
 
 
@@ -12,23 +14,8 @@ class IrHttp(models.AbstractModel):
         """Override session info to customize branding"""
         result = super().session_info()
 
-        IrConfig = self.env["ir.config_parameter"].sudo()
-
         # Add OpenSPP configuration
-        result.update(
-            {
-                "openspp_system_name": IrConfig.get_param("openspp.system.name", "OpenSPP Platform"),
-                "openspp_documentation_url": IrConfig.get_param(
-                    "openspp.documentation.url", "https://docs.openspp.org"
-                ),
-                "openspp_support_url": IrConfig.get_param("openspp.support.url", "https://openspp.org"),
-                "openspp_show_powered_by": IrConfig.get_param("openspp.show.powered_by", "True") == "True",
-                "openspp_telemetry_enabled": IrConfig.get_param("openspp.telemetry.enabled", "True") == "True",
-                "openspp_telemetry_endpoint": IrConfig.get_param(
-                    "openspp.telemetry.endpoint", "https://telemetry.openspp.org"
-                ),
-            }
-        )
+        result.update(get_branding_config(self.env))
 
         # Customize server version info while keeping the correct Odoo series
         if "server_version_info" in result:
