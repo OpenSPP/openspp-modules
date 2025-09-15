@@ -1,4 +1,4 @@
-# OpenSPP Entitlement In Kind
+# OpenSPP Entitlement In-Kind
 
 The OpenSPP Entitlement In Kind module manages the end-to-end process of distributing non-cash benefits, such as food items, agricultural inputs, or school supplies, within social protection programs. It ensures that beneficiaries receive the correct goods or services, tracks inventory, and integrates with designated service points for redemption.
 
