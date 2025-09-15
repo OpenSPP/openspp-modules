@@ -71,6 +71,21 @@ msgid "Global Support Manager"
 msgstr ""
 
 #. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.role_id_distributor_res_groups
+msgid "ID Distributor"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.role_id_requestor_res_groups
+msgid "ID Requestor"
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,name:spp_user_roles.role_id_validator_res_groups
+msgid "ID Validator"
+msgstr ""
+
+#. module: spp_user_roles
 #: model:ir.model.fields.selection,name:spp_user_roles.selection__res_users_role__role_type__local
 msgid "Local"
 msgstr ""
@@ -124,11 +139,26 @@ msgid ""
 msgstr ""
 
 #. module: spp_user_roles
+#: model:res.groups,comment:spp_user_roles.role_id_validator_res_groups
+msgid "This role is allowed to Approve ID Requests."
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,comment:spp_user_roles.role_id_distributor_res_groups
+msgid "This role is allowed to Generate, Print, and Distribute IDs."
+msgstr ""
+
+#. module: spp_user_roles
 #: model:res.groups,comment:spp_user_roles.global_role_registrar_res_groups
 #: model:res.groups,comment:spp_user_roles.local_role_registrar_res_groups
 msgid ""
 "This role is allowed to capture data related to their assigned area but "
 "doesn't have access to any other information."
+msgstr ""
+
+#. module: spp_user_roles
+#: model:res.groups,comment:spp_user_roles.role_id_requestor_res_groups
+msgid "This role is allowed to read the Registry and Request IDs."
 msgstr ""
 
 #. module: spp_user_roles
