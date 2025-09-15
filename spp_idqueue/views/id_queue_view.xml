@@ -4,7 +4,7 @@
         <field name="model">spp.print.queue.id</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <tree create="false" edit="false" delete="false">
                 <field name="name" column_invisible="1" />
                 <field name="registrant_id" />
                 <field name="area_id" />
@@ -65,7 +65,6 @@
                     type="object"
                     icon="fa-ban"
                     title="Cancel Request"
-                    help="Cancel Request"
                     class="btn-danger"
                     invisible="status in ('cancelled', 'printed', 'distributed') or batch_id"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
@@ -79,7 +78,7 @@
         <field name="model">spp.print.queue.id</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <form>
+            <form create="false" edit="false" delete="false">
                 <header>
                     <button
                         name="on_approve"
