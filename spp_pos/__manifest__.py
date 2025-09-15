@@ -3,7 +3,7 @@
     "name": "OpenSPP POS",
     "summary": "The OpenSPP Pos module extends the standard Odoo Point of Sale system to facilitate secure redemption of social protection entitlements for beneficiaries. It performs real-time validation of entitlement codes and designates specific products purchasable using these benefits.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

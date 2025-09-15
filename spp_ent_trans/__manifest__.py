@@ -3,7 +3,7 @@
     "name": "OpenSPP Entitlement Transactions",
     "summary": "The OpenSPP Ent Trans module records and manages all entitlement redemption transactions, establishing a transparent and auditable history for cash and in-kind benefits delivered to beneficiaries. It captures detailed information for each redemption, linking transactions to specific entitlements, service points, and devices, and employs UUIDs to ensure data integrity.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

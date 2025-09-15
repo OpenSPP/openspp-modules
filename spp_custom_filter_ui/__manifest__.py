@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Custom Filter UI",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "summary": "The module customizes the OpenSPP user interface to enable advanced filtering of res. partner records.",
     "author": "OpenSPP.org",
     "development_status": "Production/Stable",

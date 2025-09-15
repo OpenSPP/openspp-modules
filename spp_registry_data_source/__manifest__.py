@@ -4,7 +4,7 @@
     "name": "OpenSPP Data Source",
     "summary": "Establishes a secure framework for OpenSPP to connect with external data systems like national registries and social protection databases. It facilitates structured data retrieval, defines field mapping, configures secure authentication methods, and manages specific API endpoints.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

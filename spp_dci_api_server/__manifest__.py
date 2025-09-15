@@ -4,7 +4,7 @@
     "name": "OpenSPP DCI API Server",
     "summary": "Exposes OpenSPP's individual and household registry data via a DCI-compliant RESTful API. Secures data exchange through client credential management and token-based authentication for external systems.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "author": "OpenSPP.org",
     "development_status": "Production/Stable",
     "maintainers": [

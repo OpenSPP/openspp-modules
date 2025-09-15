@@ -3,7 +3,7 @@
     "name": "OpenSPP Change Request",
     "summary": "The OpenSPP Change Request module streamlines the modification of registrant information through a structured, auditable framework. Configurable multi-stage validation workflows ensure proper review and approval, while a comprehensive audit trail records all actions before systematically applying approved changes to registrant records.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

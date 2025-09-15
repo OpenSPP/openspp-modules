@@ -5,7 +5,7 @@
     "name": "OpenSPP Event Demo",
     "summary": "OpenSPP Event Demo offers predefined event types, data models, and user interfaces for tracking specific social protection program interactions. It extends registrant profiles to display active event statuses and serves as a practical blueprint for custom event type implementation, leveraging the spp_event_data framework.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

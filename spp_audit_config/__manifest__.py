@@ -2,7 +2,7 @@
     "name": "OpenSPP Audit Config",
     "summary": "Administrators define and manage comprehensive audit rules within this module, specifying which data models, fields, and operations require tracking across the OpenSPP platform. The module ensures data integrity and accountability by logging user and timestamp details, and it enables cross-record auditing through parent-child relationships for consolidated change views.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

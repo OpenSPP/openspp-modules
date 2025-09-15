@@ -3,7 +3,7 @@
     "name": "OpenSPP Program ID",
     "summary": "Assigns and manages unique, immutable identifiers for every social protection program within the OpenSPP platform. This core component extends program records to ensure distinct identification, facilitating streamlined data management, enhanced reporting, and seamless system integration.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

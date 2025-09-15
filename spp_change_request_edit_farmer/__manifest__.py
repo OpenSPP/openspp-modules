@@ -2,7 +2,7 @@
     "name": "OpenSPP Change Request: Edit Farmer",
     "summary": "Provides a specialized workflow for updating existing Farmer in the registry.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

@@ -4,7 +4,7 @@
 {
     "name": "ID PASS",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "summary": "OpenSPP Idpass securely generates and manages digital identification passes for program registrants, streamlining beneficiary verification and access to social protection services. The module automates ID generation using existing registrant data, offers configurable templates with expiry rules, and integrates with external services via secure API calls.",
     "sequence": 1,
     "author": "OpenSPP.org",

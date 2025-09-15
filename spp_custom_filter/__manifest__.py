@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Custom Filter",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "summary": "The module empowers administrators to precisely control which fields appear in Odoo's filtering interface. This capability streamlines data searches, reduces UI clutter, and enhances the user experience by ensuring only relevant fields are available for filtering.",
     "author": "OpenSPP.org",
     "development_status": "Production/Stable",

@@ -5,7 +5,7 @@
     "name": "OpenSPP Farmer Registry Base",
     "summary": "Manages comprehensive farmer profiles, detailing farm operations, size, legal status, and specific agricultural practices. Furthermore, it links farmers and farms to land records with geographic data, tracks agricultural activities by season, and oversees farm assets and extension services.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

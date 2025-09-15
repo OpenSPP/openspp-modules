@@ -3,7 +3,7 @@
     "name": "OpenSPP Programs: Compliance Criteria",
     "summary": "Administrators can define and manage dynamic compliance criteria for social protection program beneficiaries, extending initial enrollment requirements. The module automates beneficiary evaluation against these rules, flags non-compliant individuals, and enables configurable compliance filtering during program operations.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
