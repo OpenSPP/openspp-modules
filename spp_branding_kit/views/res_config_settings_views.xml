@@ -19,14 +19,6 @@
                         <setting help="Customize interface for OpenSPP-specific workflows">
                             <field name="openspp_hide_odoo_referral" />
                         </setting>
-                        <setting
-                            help="Hide paid Odoo apps (Enterprise and OPL licensed modules) from the Apps list"
-                        >
-                            <field name="openspp_hide_paid_apps" />
-                        </setting>
-                        <setting help="Choose which modules to show by default in the Apps menu">
-                            <field name="openspp_default_app_filter" widget="radio" />
-                        </setting>
                     </block>
 
                     <block title="Help &amp; Support" name="openspp_links_block">

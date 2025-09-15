@@ -15,22 +15,7 @@ def post_init_hook(env):
     """
     _logger.info("OpenSPP Branding Kit: Running post-installation setup...")
 
-    # Set default configuration parameters
-    try:
-        IrConfigParam = env["ir.config_parameter"].sudo()
-
-        # Set hide paid apps to True by default (if not already set)
-        if not IrConfigParam.get_param("openspp.hide_paid_apps"):
-            IrConfigParam.set_param("openspp.hide_paid_apps", "True")
-            _logger.info("Set hide paid apps to True by default")
-
-        # Set default app filter to 'apps_only' (if not already set)
-        if not IrConfigParam.get_param("openspp.default_app_filter"):
-            IrConfigParam.set_param("openspp.default_app_filter", "apps_only")
-            _logger.info("Set default app filter to 'apps_only'")
-
-    except Exception as e:
-        _logger.warning(f"Error setting default parameters: {e}")
+    # No default parameters for app filtering; UI handles Apps filters now
 
     # Disable Odoo branding elements
     try:

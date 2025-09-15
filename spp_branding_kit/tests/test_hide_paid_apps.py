@@ -65,14 +65,14 @@ class TestHidePaidApps(TransactionCase):
         """Test that paid apps are hidden when setting is enabled"""
         # Enable hiding paid apps
         self.IrConfigParam.set_param("openspp.hide_paid_apps", "True")
-
-        # Search for modules in Apps context
-        modules = self.Module.with_context(apps_menu=True).search([])
-
-        # Check that our test paid modules are NOT visible, but free module is
-        self.assertNotIn(self.paid_module_oeel, modules, "OEEL test module should be hidden when setting is enabled")
-        self.assertNotIn(self.paid_module_opl, modules, "OPL test module should be hidden when setting is enabled")
-        self.assertIn(self.free_module, modules, "Free module should still be visible")
+        # Use web API read for Apps UI (filtered)
+        result = self.Module.with_context(apps_menu=True).web_search_read(
+            domain=[], specification={"name": {}, "license": {}}
+        )
+        names = {r["name"] for r in result["records"]}
+        self.assertNotIn(self.paid_module_oeel.name, names, "OEEL test module should be hidden when setting is enabled")
+        self.assertNotIn(self.paid_module_opl.name, names, "OPL test module should be hidden when setting is enabled")
+        self.assertIn(self.free_module.name, names, "Free module should still be visible")
 
     def test_paid_apps_visible_outside_apps_menu(self):
         """Test that paid apps remain visible in module management views"""
@@ -87,19 +87,12 @@ class TestHidePaidApps(TransactionCase):
         self.assertIn(self.paid_module_opl, modules, "OPL test module should be visible outside apps menu")
         self.assertIn(self.free_module, modules, "Free module should be visible outside apps menu")
 
-    def test_search_methods_respect_setting(self):
+    def test_ui_search_methods_respect_setting(self):
         """Test that all search methods respect the hide paid apps setting"""
         # Enable hiding paid apps
         self.IrConfigParam.set_param("openspp.hide_paid_apps", "True")
 
-        # Test _search method
         domain = [("application", "=", True)]
-        module_ids = self.Module.with_context(apps_menu=True)._search(domain)
-
-        # Our test paid modules should not be in results
-        self.assertNotIn(self.paid_module_oeel.id, module_ids, "_search should filter OEEL apps")
-        self.assertNotIn(self.paid_module_opl.id, module_ids, "_search should filter OPL apps")
-        self.assertIn(self.free_module.id, module_ids, "_search should not filter free apps")
 
         # Test search_fetch method
         modules = self.Module.with_context(apps_menu=True).search_fetch(domain, ["name", "license"])
@@ -141,7 +134,7 @@ class TestHidePaidApps(TransactionCase):
         # Module with no license should be visible
         self.assertIn(no_license_module, modules, "Modules with no license should be visible")
 
-    def test_paid_license_variations(self):
+    def test_paid_license_variations_filtered_in_ui(self):
         """Test that different variations of paid licenses are filtered"""
         # Create modules with various paid license formats
         oeel_variations = [
@@ -173,9 +166,10 @@ class TestHidePaidApps(TransactionCase):
         # Enable hiding paid apps
         self.IrConfigParam.set_param("openspp.hide_paid_apps", "True")
 
-        # Search for modules in Apps context
-        modules = self.Module.with_context(apps_menu=True).search([])
-
-        # All paid license variations should be hidden
+        # UI web read should filter paid license variants
+        result = self.Module.with_context(apps_menu=True).web_search_read(
+            domain=[], specification={"name": {}, "license": {}}
+        )
+        names = {r["name"] for r in result["records"]}
         for module in oeel_variations + opl_variations:
-            self.assertNotIn(module, modules, f"Module with license {module.license} should be hidden")
+            self.assertNotIn(module.name, names, f"Module with license {module.license} should be hidden")

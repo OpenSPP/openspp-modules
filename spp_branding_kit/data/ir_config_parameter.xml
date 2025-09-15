@@ -85,7 +85,7 @@
         <!-- Custom Favicon Path -->
         <record id="param_favicon_path" model="ir.config_parameter">
             <field name="key">openspp.favicon_path</field>
-            <field name="value">/openspp_branding_kit/static/description/icon.png</field>
+            <field name="value">/spp_branding_kit/static/description/icon.png</field>
         </record>
 
         <!-- Theme Configuration -->

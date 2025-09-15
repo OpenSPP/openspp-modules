@@ -82,7 +82,7 @@
 
     <!-- Override Apps menu action to include context and default filter -->
     <record id="base.open_module_tree" model="ir.actions.act_window">
-        <field name="context" eval="{'search_default_app': 1, 'apps_menu': True}" />
+        <field name="context" eval="{'search_default_openspp_apps': 1}" />
     </record>
 
     <!-- Create action for OpenSPP Apps specifically -->
@@ -90,7 +90,7 @@
         <field name="name">OpenSPP Apps</field>
         <field name="res_model">ir.module.module</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="context">{'search_default_openspp_apps': 1, 'apps_menu': True}</field>
+        <field name="context">{'search_default_openspp_apps': 1}</field>
         <field name="search_view_id" ref="base.view_module_filter" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
