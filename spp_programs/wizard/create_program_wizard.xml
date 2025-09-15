@@ -9,6 +9,9 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="priority">1000</field>
         <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
         <field name="arch" type="xml">
+            <xpath expr="//page[@name='eligibility']" position="attributes">
+                <attribute name="string">Configure the Eligibility Criteria</attribute>
+            </xpath>
             <xpath expr="//page[@name='eligibility']/group[1]" position="replace">
                 <group colspan="4" col="4">
                     <field
