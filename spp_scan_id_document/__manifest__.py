@@ -23,5 +23,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Enables the scanning of physical ID documents directly into a registrant's profile, streamlining data entry and improving accuracy in the OpenSPP Registry.",
+    "summary": "The module integrates direct ID document scanning into OpenSPP, enabling users to capture physical identification documents directly within registrant profiles. This functionality streamlines identity data collection by minimizing manual transcription errors and provides a verifiable digital record for compliance and auditing.",
 }

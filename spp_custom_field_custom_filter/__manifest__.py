@@ -16,5 +16,5 @@
     ],
     "auto_install": True,
     "application": False,
-    "summary": "Allows administrators to enable custom fields for filtering, enhancing data analysis and program operations.",
+    "summary": "OpenSPP's filtering system gains custom-defined data field integration, allowing administrators to use program-specific criteria for record segmentation. This enables the construction of highly specific queries, enhancing data analysis and streamlining operational processes for targeted interventions.",
 }

@@ -1,6 +1,6 @@
 {
     "name": "OpenSPP Audit Config",
-    "summary": "This module allows administrators to define and manage audit rules to track and log changes made to critical data within the OpenSPP platform, ensuring data security and integrity.",
+    "summary": "Administrators define and manage comprehensive audit rules within this module, specifying which data models, fields, and operations require tracking across the OpenSPP platform. The module ensures data integrity and accountability by logging user and timestamp details, and it enables cross-record auditing through parent-child relationships for consolidated change views.",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
     "sequence": 1,

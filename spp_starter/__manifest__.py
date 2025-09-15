@@ -4,6 +4,7 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
+    "summary": "A guided setup wizard configures new OpenSPP instances, defining core program requirements and automatically installing relevant OpenSPP modules. It specializes system deployment based on program type selection and performs initial data cleanup for a production-ready environment.",
     "license": "LGPL-3",
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],

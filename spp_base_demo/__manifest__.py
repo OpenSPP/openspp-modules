@@ -22,5 +22,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides demonstration data for the OpenSPP system, including sample registrants, programs, and products to facilitate user exploration and training.",
+    "summary": "The OpenSPP Base Demo module populates the system with essential sample data, enabling immediate exploration and understanding of core functionalities. It includes diverse sample registrants, social protection programs, and products, providing foundational demo data while conforming to the g2p_registry_individual module's data models.",
 }

@@ -20,5 +20,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Tracks cash spending by beneficiaries against allocated entitlements in basic cash programs, calculating remaining balances and supporting program monitoring.",
+    "summary": "Records beneficiary expenditures against allocated cash entitlements within social protection programs to monitor utilization. It automatically calculates remaining balances and extends the g2p.entitlement model.",
 }

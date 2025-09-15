@@ -3,7 +3,7 @@
 
 {
     "name": "OpenSPP Base API",
-    "summary": """Provides foundational API functions and methods for seamless interaction with the OpenSPP system, enabling data exchange via APIs or XML-RPC.""",
+    "summary": "Provides foundational API functions and methods for robust data exchange between OpenSPP and external systems or internal modules. It enables efficient record management, complex data retrieval, and external system integration primarily through APIs and XML-RPC protocols.",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
     "application": False,

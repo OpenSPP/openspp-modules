@@ -59,5 +59,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides essential configurations, UI customizations, and base functionalities for the OpenSPP system, including top-up card management and integration with other OpenSPP modules for areas, service points, programs, and custom fields.",
+    "summary": "Establishes core system settings and generates unique identifiers for records, enhancing registrant profiles with attributes like tags, gender, and type. The module also integrates Top-up Cards for identification and provides fundamental user interface elements with initial security configurations for user roles.",
 }

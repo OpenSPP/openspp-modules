@@ -27,5 +27,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides enhanced tagging capabilities for registrants in OpenSPP, allowing for better organization and management of registrant data.",
+    "summary": "OpenSPP registrants gain enhanced tagging capabilities through this module, allowing granular categorization by specific attributes, program statuses, or needs. It extends the G2P Registry Base module, improving data findability and facilitating targeted interventions with flexible tag management.",
 }

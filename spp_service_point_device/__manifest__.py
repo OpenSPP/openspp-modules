@@ -24,5 +24,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "This module allows managing terminal devices associated with each service point, tracking their model, Android version, and active status.",
+    "summary": "Registers and tracks physical terminal devices, maintaining a comprehensive inventory of operational hardware within the OpenSPP platform. It captures device specifications, manages operational status, and associates each terminal with a specific service point, including designation of top-up locations.",
 }

@@ -28,5 +28,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Extends OpenSPP Programs to integrate service points, enabling the association of beneficiaries and entitlements with designated service delivery locations for improved program efficiency and targeted benefit distribution.",
+    "summary": "OpenSPP Programs Sp extends core program management by integrating service points directly into entitlement and beneficiary processes. It automatically links beneficiaries' assigned service points to their entitlements, supporting both cash and in-kind benefit distribution.",
 }

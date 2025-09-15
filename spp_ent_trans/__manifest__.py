@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Entitlement Transactions",
-    "summary": "This module records and manages transactions related to entitlement redemptions, providing a transparent history for both cash and in-kind benefits.",
+    "summary": "The OpenSPP Ent Trans module records and manages all entitlement redemption transactions, establishing a transparent and auditable history for cash and in-kind benefits delivered to beneficiaries. It captures detailed information for each redemption, linking transactions to specific entitlements, service points, and devices, and employs UUIDs to ensure data integrity.",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
     "sequence": 1,

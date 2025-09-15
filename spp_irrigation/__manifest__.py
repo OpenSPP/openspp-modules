@@ -26,5 +26,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides tools for managing and visualizing irrigation infrastructure within OpenSPP, enabling efficient tracking, planning, and analysis of irrigation systems and their impact.",
+    "summary": "Manages detailed irrigation assets by type, capacity, and unique identifiers, leveraging integrated GIS capabilities to map and display infrastructure locations and boundaries. The module models water distribution networks by defining and linking irrigation sources to destinations, providing critical data for strategic planning of resource allocation and infrastructure projects.",
 }

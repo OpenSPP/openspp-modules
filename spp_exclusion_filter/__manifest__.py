@@ -25,5 +25,5 @@
     "application": False,
     "installable": True,
     "auto_install": False,
-    "summary": "This module enhances the OpenSPP program creation process by enabling the configuration and application of exclusion filters, ensuring that only eligible registrants are considered for enrollment in new programs.",
+    "summary": "Administrators can define and apply specific exclusion criteria based on registrant attributes or existing program participation. The module automates eligibility checks during program creation, systematically filtering out ineligible individuals to refine the beneficiary pool.",
 }
