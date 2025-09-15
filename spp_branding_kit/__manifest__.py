@@ -1,6 +1,3 @@
-# ABOUTME: This is the manifest file for the OpenSPP Branding Kit module
-# ABOUTME: It defines module metadata, dependencies, and data files for Odoo 17
-
 {
     "name": "OpenSPP Branding Kit",
     "version": "17.0.1.0.0",

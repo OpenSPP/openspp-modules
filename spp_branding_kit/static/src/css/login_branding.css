@@ -1,6 +1,3 @@
-/* ABOUTME: CSS for OpenSPP branding on login pages */
-/* ABOUTME: Hides Odoo branding and adds OpenSPP branding */
-
 /* Hide any existing Odoo branding */
 a[href*="odoo.com"] {
     display: none !important;

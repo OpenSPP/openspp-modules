@@ -1,5 +1,3 @@
-# ABOUTME: HttpCase tests for controller endpoints and session info
-
 import json
 
 from odoo.tests import HttpCase, tagged

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- ABOUTME: Configuration settings views for OpenSPP branding customization -->
-<!-- ABOUTME: Provides UI for managing system branding and telemetry settings -->
 <odoo>
     <record id="res_config_settings_view_form_openspp" model="ir.ui.view">
         <field name="name">res.config.settings.view.form.inherit.openspp</field>

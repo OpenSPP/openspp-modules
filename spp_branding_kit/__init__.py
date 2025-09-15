@@ -1,6 +1,3 @@
-# ABOUTME: Module initialization file for OpenSPP Branding Kit
-# ABOUTME: Imports models, controllers and defines hooks for the module
-
 from . import models
 from . import controllers
 

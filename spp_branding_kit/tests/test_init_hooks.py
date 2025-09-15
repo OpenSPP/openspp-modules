@@ -1,6 +1,3 @@
-# ABOUTME: Unit tests for the init hooks in the module
-# ABOUTME: Tests post_init_hook and uninstall_hook functions
-
 from unittest.mock import MagicMock, patch
 
 from odoo.tests import TransactionCase, tagged
@@ -27,7 +24,7 @@ class TestInitHooks(TransactionCase):
         self.assertFalse(self.IrConfigParam.get_param("openspp.hide_paid_apps"))
         self.assertFalse(self.IrConfigParam.get_param("openspp.default_app_filter"))
 
-    # Test removed: preserving obsolete parameters no longer applicable
+    # Note: test for preserving obsolete parameters removed after refactor
 
     def test_post_init_hook_disables_brand_promotion(self):
         """Test that post_init_hook disables Odoo brand promotion"""
@@ -88,9 +85,7 @@ class TestInitHooks(TransactionCase):
         if theme_menu.active:
             self.skipTest("Theme Store menu was not disabled - this is a minor feature")
 
-    # Test removed - failing due to database flush issues
-
-    # Test removed - failing due to mock issues
+    # Note: removed some unstable tests in minimal CI envs
 
     def test_uninstall_hook_removes_parameters(self):
         """Test that uninstall_hook removes all openspp.* parameters"""

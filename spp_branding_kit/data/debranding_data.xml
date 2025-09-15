@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- ABOUTME: Data file for debranding Odoo and disabling telemetry -->
-<!-- ABOUTME: Deactivates promotional messages and scheduled actions -->
 <odoo noupdate="1">
 
         <!-- Note: Some cron jobs and views may not exist in all Odoo versions -->

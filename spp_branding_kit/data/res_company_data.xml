@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- ABOUTME: Company data configuration for OpenSPP branding -->
-<!-- ABOUTME: Sets default company information and branding elements -->
 <odoo noupdate="1">
 
         <!-- Paper Format Customization -->

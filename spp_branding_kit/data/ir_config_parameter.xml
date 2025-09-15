@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- ABOUTME: System configuration parameters for OpenSPP branding -->
-<!-- ABOUTME: Sets various system-level configuration values -->
 <odoo noupdate="1">
 
         <!-- System Information Parameters -->

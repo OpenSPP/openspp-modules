@@ -1,7 +1,3 @@
-# ABOUTME: Unit tests for the models in spp_branding_kit
-# ABOUTME: Tests IrHttp, IrModuleModule helpers, and ResUsers
-
-
 from odoo.tests import TransactionCase, tagged
 
 # Note: IrHttp session_info tests have been removed because they require HTTP request context

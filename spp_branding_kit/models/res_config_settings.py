@@ -1,6 +1,3 @@
-# ABOUTME: Configuration settings for OpenSPP branding and telemetry
-# ABOUTME: Provides centralized settings for debranding customization
-
 from odoo import fields, models
 
 
@@ -57,5 +54,3 @@ class ResConfigSettings(models.TransientModel):
         default=True,
         config_parameter="openspp.ui.hide_odoo_referral",
     )
-
-    # Apps filtering is now handled in the UI via default search filters.

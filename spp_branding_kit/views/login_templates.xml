@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- ABOUTME: Login page templates for OpenSPP branding -->
-<!-- ABOUTME: Customizes the login interface with OpenSPP branding -->
 <odoo>
         <!-- Custom Login Page Layout - Minimal override -->
         <template

@@ -1,6 +1,3 @@
-# ABOUTME: Minimal extension of ir.module.module for helper counts only
-# ABOUTME: Server-side filtering is intentionally avoided; UI handles filters
-
 from odoo import api, models
 
 

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- ABOUTME: Custom views for module list to enhance paid apps filtering -->
-<!-- ABOUTME: Adds visual indicators and search filters for paid apps -->
 <odoo>
     <!-- Enhance module tree view to show license information -->
     <record id="spp_module_tree_view" model="ir.ui.view">

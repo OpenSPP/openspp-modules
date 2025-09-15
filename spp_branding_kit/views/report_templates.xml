@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- ABOUTME: Report templates for PDF generation with OpenSPP branding -->
-<!-- ABOUTME: Customizes footers for PDF reports -->
 <odoo>
         <!-- External Layout Footer - Add OpenSPP branding -->
         <template

@@ -1,6 +1,3 @@
-# ABOUTME: Override ir.http to customize HTTP behavior and configure telemetry
-# ABOUTME: Provides session info for frontend debranding and telemetry settings
-
 import logging
 
 from odoo import models

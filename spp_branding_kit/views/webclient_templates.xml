@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- ABOUTME: Backend webclient templates for OpenSPP branding -->
-<!-- ABOUTME: Customizes the main backend interface with OpenSPP branding -->
 <odoo>
         <!-- Disable Odoo Brand Promotion Message -->
         <template

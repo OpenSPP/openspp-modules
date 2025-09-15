@@ -1,7 +1,3 @@
-# ABOUTME: Unit tests for the controllers in spp_branding_kit
-# ABOUTME: Tests OpenSPPHome controller functionality
-
-
 from odoo.tests import TransactionCase, tagged
 
 
@@ -11,13 +7,7 @@ class TestOpenSPPHome(TransactionCase):
         super().setUp()
         self.IrConfigParam = self.env["ir.config_parameter"].sudo()
 
-    # Test removed - failing due to mock environment issues
-
-    # Test removed - failing due to mock environment issues
-
-    # Test removed - failing due to mock environment issues
-
-    # Test removed - failing due to mock environment issues
+    # Note: HTTP-specific tests moved to HttpCase in test_http_endpoints.py
 
 
 # Note: Controller tests that require HTTP request context have been removed

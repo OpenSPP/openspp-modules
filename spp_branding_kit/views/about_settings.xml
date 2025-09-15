@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- ABOUTME: Customizes the About section in settings -->
-<!-- ABOUTME: Adds OpenSPP information while crediting Odoo -->
 <odoo>
     <record id="res_config_settings_view_form_openspp_about" model="ir.ui.view">
         <field name="priority">99</field>

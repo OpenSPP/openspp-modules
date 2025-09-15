@@ -1,6 +1,3 @@
-# ABOUTME: Main controller for OpenSPP Branding Kit
-# ABOUTME: Handles custom routes and branding-related endpoints
-
 import json
 
 from werkzeug.wrappers import Response
