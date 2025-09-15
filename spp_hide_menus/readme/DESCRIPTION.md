@@ -1,38 +1,34 @@
+# OpenSPP Hide Menus
 
-# Hide Non-OpenSPP Menus
-
-The OpenSPP Hide Menus module streamlines the OpenSPP platform by automatically hiding standard Odoo menu items that are not typically essential for core social protection program management. This creates a focused user interface, ensuring users primarily interact with functionalities relevant to their specific roles and program objectives.
+The OpenSPP Hide Menus module streamlines the OpenSPP user interface by automatically hiding specific menus not directly related to core social protection program management or farmer registries. This ensures users encounter a cleaner, more focused environment tailored for their primary responsibilities.
 
 ## Purpose
 
-This module is designed to declutter the OpenSPP interface by pre-configuring the visibility of common Odoo menus. It establishes a more focused and efficient working environment, particularly beneficial for OpenSPP users involved in field operations or specialized program tasks.
+This module optimizes the OpenSPP user experience by removing visual clutter and directing attention to essential program functionalities. It simplifies navigation and enhances operational efficiency for users.
 
-*   **Streamline User Experience:** Automatically hides menus from modules like Calendar, Contacts, Accounting, and Inventory, providing a cleaner, OpenSPP-centric interface. This ensures field agents or case workers see only relevant program functions.
-*   **Enhance Operational Focus:** Reduces distractions and simplifies navigation, allowing users to quickly access the tools they need for managing beneficiaries, programs, or farmer registries without sifting through unrelated options.
-*   **Improve System Adoption:** A less cluttered interface is easier to learn and navigate, which helps increase user comfort and reduces the training overhead for new OpenSPP users.
-*   **Tailor for Specific Deployments:** While [OpenSPP Hide Menus Base](spp_hide_menus_base) offers granular control, this module provides an immediate, default simplification, making OpenSPP more ready-to-use for typical social protection deployments.
+*   **Streamline User Interface:** Presents a focused OpenSPP experience by hiding general-purpose modules, ensuring users see only what is relevant to their social protection program work.
+*   **Reduce Menu Clutter:** Automatically removes menus such as Calendar, Contacts, Accounting, Event, Stock, and UTM from the main navigation, preventing distractions and improving clarity.
+*   **Enhance User Focus:** Guides users directly to program-specific functionalities, allowing them to quickly access tools for beneficiary management, payment processing, or farmer data.
+*   **Optimize Workflow:** Ensures that field agents, program managers, and data entry specialists can efficiently navigate the platform without sifting through irrelevant options.
 
 ## Dependencies and Integration
 
-The `spp_hide_menus` module leverages the foundational capabilities of the [OpenSPP Hide Menus Base](spp_hide_menus_base) module to manage menu visibility.
+The `spp_hide_menus` module integrates with the core OpenSPP framework to manage interface elements, building upon the capabilities of its base module.
 
-*   It directly depends on [OpenSPP Hide Menus Base](spp_hide_menus_base), which provides the core mechanism for administrators to define and control menu visibility. This module builds upon that foundation by applying a specific set of predefined visibility rules.
-*   This module interacts with standard Odoo modules such as Calendar, Contacts, Account, Event, Stock, and UTM. Its primary function is to hide the default menu items provided by these modules, thereby creating a more focused OpenSPP environment.
-*   By pre-hiding these menus, `spp_hide_menus` ensures that users primarily interact with modules central to social protection, like beneficiary management or program enrollment, immediately upon system deployment.
+*   This module depends on the foundational [Hide Non-OpenSPP Menus: Base](spp_hide_menus_base) module, which provides the underlying mechanism for controlling menu visibility. `spp_hide_menus` leverages this base functionality to apply specific hiding configurations.
+*   It interacts with standard Odoo modules like `Calendar`, `Contacts`, `Account`, `Event`, `Stock`, and `UTM` by setting their main menu items to be hidden by default. This ensures that a typical OpenSPP deployment starts with a user interface optimized for social protection programs.
+*   While `spp_hide_menus` itself does not provide services to other modules, it sets a default, cleaner interface that benefits all users interacting with other OpenSPP modules by reducing cognitive load and simplifying navigation.
 
 ## Additional Functionality
 
-This module's core functionality is to apply a predefined set of menu visibility rules to simplify the OpenSPP interface.
+### Default OpenSPP Interface Optimization
 
-### Default Menu Simplification
-Upon installation, this module automatically sets common Odoo menu items to be hidden from most OpenSPP users. This includes menus typically found in areas like general accounting, inventory management, and broad contact lists, which are often not directly relevant to the daily tasks of social protection program staff. This immediate simplification helps focus users on core program activities.
+This module comes pre-configured to hide several common Odoo modules that are often not central to social protection program operations. By default, menus for **Calendar**, **Contacts**, **Accounting**, **Events**, **Stock**, and **UTM (marketing tools)** are hidden. This configuration ensures that users immediately experience an interface focused on beneficiary management, program enrollment, and other core OpenSPP functions, reducing the need for manual setup.
 
-### Enhanced User Focus
-By default, the module configures the system so that users will primarily see menus related to OpenSPP's core functions. This ensures a streamlined experience, reducing the time users spend searching for specific features and minimizing cognitive load. For instance, a field agent will directly access beneficiary registration or case management without navigating through unrelated business modules.
+### Administrator Control and Flexibility
 
-### Administrator Override
-While this module provides a default simplified view, administrators retain full control. They can use the underlying [OpenSPP Hide Menus Base](spp_hide_menus_base) module to unhide any of these menus if a specific deployment requires access to, for example, the Calendar or Contacts module for certain user groups. This flexibility ensures the system can adapt to evolving program needs without losing the initial benefit of a focused interface.
+While `spp_hide_menus` applies a default set of hidden menus, administrators retain full control over their visibility. Leveraging the capabilities of the [Hide Non-OpenSPP Menus: Base](spp_hide_menus_base) module, administrators can easily unhide any of these menus if they become necessary for specific program requirements or user roles. This flexibility allows organizations to tailor the interface precisely to their operational needs.
 
 ## Conclusion
 
-The `spp_hide_menus` module delivers a focused and efficient OpenSPP user experience by strategically hiding non-essential standard Odoo menus, thus optimizing the platform for social protection program management.
+The OpenSPP Hide Menus module plays a crucial role in delivering a focused and efficient user experience by pre-configuring the visibility of non-core menus, thereby streamlining navigation for all OpenSPP users.

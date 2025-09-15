@@ -2,6 +2,7 @@
     "name": "OpenSPP QR Scanner",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
+    "summary": "The OpenSPP QR Scanner module identifies individuals and accesses information through scanning beneficiary-specific QR codes. This capability streamlines field operations by enabling rapid data retrieval and minimizing manual data entry errors for program delivery and monitoring.",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

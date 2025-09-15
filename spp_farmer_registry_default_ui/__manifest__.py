@@ -3,7 +3,7 @@
 
 {
     "name": "OpenSPP Farmer Registry Default UI",
-    "summary": "Provides UI for Farmer Registry Base.",
+    "summary": "This module delivers the essential user interface components for managing OpenSPP farmer and farm registry data. It enables streamlined farmer registration, efficient farm management, and accessible entry of agricultural activity and asset information.",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
     "sequence": 1,
