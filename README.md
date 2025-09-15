@@ -41,7 +41,6 @@ addon | summary
 [spp_base_gis_rest](spp_base_gis_rest/) | Provides RESTful API endpoints for accessing and querying geospatial data within OpenSPP, secured with OAuth 2.0.
 [spp_base_setting](spp_base_setting/) | Provides essential settings and customizations for OpenSPP implementations, including Country Office management and user interface adaptations.
 [spp_basic_cash_entitlement_spent](spp_basic_cash_entitlement_spent/) | Tracks cash spending by beneficiaries against allocated entitlements in basic cash programs, calculating remaining balances and supporting program monitoring.
-[spp_branding_kit](spp_branding_kit/) | Branding customization and telemetry management for OpenSPP
 [spp_change_request](spp_change_request/) | Streamlines the process of handling changes to registrant information within the OpenSPP system, providing a structured framework for submitting, reviewing, approving, and applying modifications.
 [spp_change_request_add_children_demo](spp_change_request_add_children_demo/) | Provides a demonstration of adding children or members to an existing group in the registry using the OpenSPP Change Request framework, including a dedicated form, ID scanning integration, and automated data updates.
 [spp_change_request_add_farmer](spp_change_request_add_farmer/) | Provides a specialized workflow for adding new farmers to existing groups in the registry.
