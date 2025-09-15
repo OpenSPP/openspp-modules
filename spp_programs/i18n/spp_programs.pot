@@ -190,6 +190,11 @@ msgid "Configuration"
 msgstr ""
 
 #. module: spp_programs
+#: model_terms:ir.ui.view,arch_db:spp_programs.create_program_wizard_form_view_spp
+msgid "Configure the Eligibility Criteria"
+msgstr ""
+
+#. module: spp_programs
 #: model:ir.model.fields.selection,name:spp_programs.selection__spp_multi_inkind_entitlement_approval__state__conflict
 msgid "Conflict"
 msgstr ""
