@@ -33,8 +33,8 @@ class IrHttp(models.AbstractModel):
             }
         )
 
-        # Customize server version info
+        # Customize server version info while keeping the correct Odoo series
         if "server_version_info" in result:
-            result["server_version_info"] = ["OpenSPP", "1.0", "", "", ""]
+            result["server_version_info"] = ["OpenSPP", "17.0", "", "", ""]
 
         return result

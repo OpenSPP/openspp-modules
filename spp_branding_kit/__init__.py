@@ -25,10 +25,9 @@ def post_init_hook(env):
             brand_promotion.active = False
             _logger.info("Disabled Odoo brand promotion message")
 
-        # Disable specific Odoo telemetry and update cron jobs by their external IDs
+        # Disable specific Odoo update notification cron (if present)
         crons_to_disable = [
             "mail.ir_cron_module_update_notification",  # Module update notification
-            "base.ir_cron_res_partner_clear_caches",  # Partner cache clearing (if telemetry related)
         ]
 
         for cron_xml_id in crons_to_disable:

@@ -7,10 +7,10 @@ const telemetryEnabled = session.openspp_telemetry_enabled !== false;
 const telemetryEndpoint = session.openspp_telemetry_endpoint || "https://telemetry.openspp.org";
 
 // Log telemetry configuration for debugging
-if (!telemetryEnabled) {
-    console.log("OpenSPP: Telemetry is disabled");
-} else {
+if (telemetryEnabled) {
     console.log("OpenSPP: Telemetry endpoint:", telemetryEndpoint);
+} else {
+    console.log("OpenSPP: Telemetry is disabled");
 }
 
 // In Odoo 17, telemetry blocking is better handled at the controller level
@@ -28,24 +28,17 @@ XMLHttpRequest.prototype.open = function (method, url, ...args) {
     if (shouldBlock) {
         if (!telemetryEnabled) {
             console.log("OpenSPP: Blocked telemetry call to", url);
-            // Return a dummy request that does nothing
+            // Replace send/abort with harmless stubs
             this.send = function () {
-                // Intentionally empty to block telemetry
+                return false;
             };
             this.abort = function () {
-                // Intentionally empty to block telemetry
+                return null;
             };
             return;
         }
-        console.log("OpenSPP: Would redirect telemetry from", url, "to", telemetryEndpoint);
-        // For now, block the call as redirection requires backend implementation
-        this.send = function () {
-            // Intentionally empty to block telemetry
-        };
-        this.abort = function () {
-            // Intentionally empty to block telemetry
-        };
-        return;
+        // When telemetry is enabled, do not intercept; server handles /publisher-warranty
+        // Optionally, you could redirect here, but we keep the default behavior
     }
 
     return originalOpen.call(this, method, url, ...args);

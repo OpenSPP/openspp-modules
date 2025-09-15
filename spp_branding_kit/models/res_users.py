@@ -22,5 +22,5 @@ class ResUsers(models.Model):
             user.odoo_account_url = False
 
     odoo_account_url = fields.Char(
-        compute="_compute_odoo_account_url", string="Account URL", help="OpenSPP Account Management"
+        compute="_compute_odoo_account_url", string="Account URL", help="OpenSPP Account Management", readonly=True
     )

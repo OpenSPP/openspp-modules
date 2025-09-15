@@ -1,21 +1,12 @@
 # ABOUTME: Main controller for OpenSPP Branding Kit
-# ABOUTME: Handles custom routes, branding overrides, and security enforcement
+# ABOUTME: Handles custom routes and branding-related endpoints
 
 import json
 
+from werkzeug.wrappers import Response
+
 from odoo import http
 from odoo.http import request
-
-from odoo.addons.portal.controllers.web import Home
-
-
-class OpenSPPHome(Home):
-    """Override Home controller to enforce branding and security settings"""
-
-    @http.route()
-    def web_client(self, s_action=None, **kw):
-        """Override web client for branding"""
-        return super().web_client(s_action, **kw)
 
 
 class OpenSPPBrandingController(http.Controller):
@@ -44,7 +35,8 @@ class OpenSPPBrandingController(http.Controller):
         system_name = config_parameter.get_param("openspp.system_name", "OpenSPP Platform")
         return {
             "server_version": system_name,
-            "server_serie": "1.0",
+            # Keep the server series aligned with the actual Odoo major version
+            "server_serie": "17.0",
             "protocol_version": 1,
         }
 
@@ -55,12 +47,16 @@ class OpenSPPBrandingController(http.Controller):
         telemetry_enabled = config_parameter.get_param("openspp.telemetry_enabled", "True") == "True"
 
         if not telemetry_enabled:
-            return json.dumps({"status": "disabled", "message": "Telemetry disabled"})
+            payload = {"status": "disabled", "message": "Telemetry disabled"}
         else:
             # Redirect to OpenSPP telemetry endpoint
             telemetry_endpoint = config_parameter.get_param(
                 "openspp.telemetry_endpoint", "https://telemetry.openspp.org"
             )
-            return json.dumps(
-                {"status": "redirected", "endpoint": telemetry_endpoint, "message": "Telemetry redirected to OpenSPP"}
-            )
+            payload = {
+                "status": "redirected",
+                "endpoint": telemetry_endpoint,
+                "message": "Telemetry redirected to OpenSPP",
+            }
+
+        return Response(json.dumps(payload), content_type="application/json")
