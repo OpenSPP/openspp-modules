@@ -2,7 +2,7 @@
 
 
 {
-    "name": "ID PASS",
+    "name": "OpenSPP ID PASS",
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
     "sequence": 1,
