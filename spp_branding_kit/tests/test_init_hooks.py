@@ -13,8 +13,8 @@ class TestInitHooks(TransactionCase):
         self.IrConfigParam = self.env["ir.config_parameter"].sudo()
         self.Company = self.env["res.company"].sudo()
 
-    def test_post_init_hook_sets_default_parameters(self):
-        """Test that post_init_hook sets default configuration parameters"""
+    def test_post_init_hook_runs_without_setting_filter_params(self):
+        """Test that post_init_hook runs and does not set obsolete filter parameters"""
         from .. import post_init_hook
 
         # Clear any existing parameters
@@ -23,38 +23,11 @@ class TestInitHooks(TransactionCase):
         # Run the hook
         post_init_hook(self.env)
 
-        # Check that default parameters are set
-        self.assertEqual(
-            self.IrConfigParam.get_param("openspp.hide_paid_apps"), "True", "Hide paid apps should be set to True"
-        )
-        self.assertEqual(
-            self.IrConfigParam.get_param("openspp.default_app_filter"),
-            "apps_only",
-            "Default app filter should be set to apps_only",
-        )
+        # Obsolete parameters should not be set anymore
+        self.assertFalse(self.IrConfigParam.get_param("openspp.hide_paid_apps"))
+        self.assertFalse(self.IrConfigParam.get_param("openspp.default_app_filter"))
 
-    def test_post_init_hook_preserves_existing_parameters(self):
-        """Test that post_init_hook doesn't overwrite existing parameters"""
-        from .. import post_init_hook
-
-        # Set existing parameters
-        self.IrConfigParam.set_param("openspp.hide_paid_apps", "False")
-        self.IrConfigParam.set_param("openspp.default_app_filter", "all")
-
-        # Run the hook
-        post_init_hook(self.env)
-
-        # Check that existing parameters are preserved
-        self.assertEqual(
-            self.IrConfigParam.get_param("openspp.hide_paid_apps"),
-            "False",
-            "Existing hide_paid_apps value should be preserved",
-        )
-        self.assertEqual(
-            self.IrConfigParam.get_param("openspp.default_app_filter"),
-            "all",
-            "Existing default_app_filter value should be preserved",
-        )
+    # Test removed: preserving obsolete parameters no longer applicable
 
     def test_post_init_hook_disables_brand_promotion(self):
         """Test that post_init_hook disables Odoo brand promotion"""
@@ -124,22 +97,16 @@ class TestInitHooks(TransactionCase):
         from .. import uninstall_hook
 
         # Create test parameters
-        self.IrConfigParam.set_param("openspp.hide_paid_apps", "True")
-        self.IrConfigParam.set_param("openspp.default_app_filter", "apps_only")
-        self.IrConfigParam.set_param("openspp.system_name", "Test System")
+        self.IrConfigParam.set_param("openspp.system.name", "Test System")
+        self.IrConfigParam.set_param("openspp.telemetry.enabled", "True")
         self.IrConfigParam.set_param("other.parameter", "Should remain")
 
         # Run the uninstall hook
         uninstall_hook(self.env)
 
         # Check that openspp.* parameters were removed
-        self.assertFalse(
-            self.IrConfigParam.get_param("openspp.hide_paid_apps"), "openspp.hide_paid_apps should be removed"
-        )
-        self.assertFalse(
-            self.IrConfigParam.get_param("openspp.default_app_filter"), "openspp.default_app_filter should be removed"
-        )
-        self.assertFalse(self.IrConfigParam.get_param("openspp.system_name"), "openspp.system_name should be removed")
+        self.assertFalse(self.IrConfigParam.get_param("openspp.system.name"), "openspp.system.name should be removed")
+        self.assertFalse(self.IrConfigParam.get_param("openspp.telemetry.enabled"), "telemetry param removed")
 
         # Check that other parameters remain
         self.assertEqual(

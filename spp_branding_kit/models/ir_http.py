@@ -20,15 +20,15 @@ class IrHttp(models.AbstractModel):
         # Add OpenSPP configuration
         result.update(
             {
-                "openspp_system_name": IrConfig.get_param("openspp.system_name", "OpenSPP Platform"),
+                "openspp_system_name": IrConfig.get_param("openspp.system.name", "OpenSPP Platform"),
                 "openspp_documentation_url": IrConfig.get_param(
-                    "openspp.documentation_url", "https://docs.openspp.org"
+                    "openspp.documentation.url", "https://docs.openspp.org"
                 ),
-                "openspp_support_url": IrConfig.get_param("openspp.support_url", "https://openspp.org"),
-                "openspp_show_powered_by": IrConfig.get_param("openspp.show_powered_by", "True") == "True",
-                "openspp_telemetry_enabled": IrConfig.get_param("openspp.telemetry_enabled", "True") == "True",
+                "openspp_support_url": IrConfig.get_param("openspp.support.url", "https://openspp.org"),
+                "openspp_show_powered_by": IrConfig.get_param("openspp.show.powered_by", "True") == "True",
+                "openspp_telemetry_enabled": IrConfig.get_param("openspp.telemetry.enabled", "True") == "True",
                 "openspp_telemetry_endpoint": IrConfig.get_param(
-                    "openspp.telemetry_endpoint", "https://telemetry.openspp.org"
+                    "openspp.telemetry.endpoint", "https://telemetry.openspp.org"
                 ),
             }
         )

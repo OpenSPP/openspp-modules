@@ -20,11 +20,11 @@ class OpenSPPBrandingController(http.Controller):
             {
                 "title": "About OpenSPP",
                 "version": "1.0.0",
-                "system_name": config_parameter.get_param("openspp.system_name", "OpenSPP Platform"),
+                "system_name": config_parameter.get_param("openspp.system.name", "OpenSPP Platform"),
                 "documentation_url": config_parameter.get_param(
-                    "openspp.documentation_url", "https://docs.openspp.org"
+                    "openspp.documentation.url", "https://docs.openspp.org"
                 ),
-                "support_url": config_parameter.get_param("openspp.support_url", "https://openspp.org"),
+                "support_url": config_parameter.get_param("openspp.support.url", "https://openspp.org"),
             }
         )
 
@@ -32,7 +32,7 @@ class OpenSPPBrandingController(http.Controller):
     def version_info(self):
         """Override version info to show OpenSPP branding"""
         config_parameter = request.env["ir.config_parameter"].sudo()
-        system_name = config_parameter.get_param("openspp.system_name", "OpenSPP Platform")
+        system_name = config_parameter.get_param("openspp.system.name", "OpenSPP Platform")
         return {
             "server_version": system_name,
             # Keep the server series aligned with the actual Odoo major version
@@ -44,14 +44,14 @@ class OpenSPPBrandingController(http.Controller):
     def publisher_warranty(self, **kwargs):
         """Handle telemetry based on configuration"""
         config_parameter = request.env["ir.config_parameter"].sudo()
-        telemetry_enabled = config_parameter.get_param("openspp.telemetry_enabled", "True") == "True"
+        telemetry_enabled = config_parameter.get_param("openspp.telemetry.enabled", "True") == "True"
 
         if not telemetry_enabled:
             payload = {"status": "disabled", "message": "Telemetry disabled"}
         else:
             # Redirect to OpenSPP telemetry endpoint
             telemetry_endpoint = config_parameter.get_param(
-                "openspp.telemetry_endpoint", "https://telemetry.openspp.org"
+                "openspp.telemetry.endpoint", "https://telemetry.openspp.org"
             )
             payload = {
                 "status": "redirected",
