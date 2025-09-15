@@ -5,6 +5,7 @@
     "name": "OpenSPP Dashboard: Base",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
+    "summary": "Establishes the foundational framework and consistent user interface components for analytical dashboards across the OpenSPP platform. It delivers core data visualization elements, including reusable metrics, charts, and data cards, enabling other modules to build specialized program-specific dashboards.",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

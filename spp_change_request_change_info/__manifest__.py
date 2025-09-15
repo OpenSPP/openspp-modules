@@ -2,6 +2,7 @@
     "name": "Change Information Change Request",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
+    "summary": "Manages a structured process for updating an individual registrant's core personal and identification details within the OpenSPP platform. It integrates ID scanning for automatic data population, enforces data integrity with validation rules, and securely stores supporting documents in dedicated DMS directories.",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

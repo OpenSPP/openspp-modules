@@ -5,6 +5,7 @@
     "name": "OpenSPP: Ethnic Group",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
+    "summary": "Establishes a standardized framework for defining and managing ethnic group classifications within the OpenSPP platform. It enhances demographic data accuracy in registrant profiles, supporting targeted program design and detailed reporting by integrating with g2p_registry_base.",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
