@@ -1,3 +1,4 @@
+from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
 
@@ -21,7 +22,7 @@ class IdDetailsIndividualTest(TransactionCase):
             }
         )
 
-    def test_on_scan_id_document_details_success(self):
+    def test_01_on_scan_id_document_details(self):
         self.applicant.id_document_details = (
             "{"
             '"photo": "",'
@@ -30,8 +31,9 @@ class IdDetailsIndividualTest(TransactionCase):
             '"birth_date": "1970-06-18",'
             '"document_type": "Passport",'
             '"document_number": "162401579884",'
-            '"expiry_date": "06/18/2025",'
+            '"expiry_date": "2025-10-10",'
             '"nationality": "Philippines",'
+            '"gender": "Male",'
             '"birth_place_city": "Caloocan",'
             '"image": "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz'
             "AAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANCSURBVEiJtZZPbBtFFMZ/M7ubXdtdb1xSFyeilBapySVU8h8OoFaooFSqiihIVIpQBKci6KEg9Q6H9"
@@ -44,13 +46,27 @@ class IdDetailsIndividualTest(TransactionCase):
             '+/wbwLVOJ3uAD1wi/dUH7Qei66PfyuRj4Ik9is+hglfbkbfR3cnZm7chlUWLdwmprtCohX4HUtlOcQjLYCu+fzGJH2QRKvP3UNz8bWk1qMxjGTOMThZ3kvgLI5AzFfo379UAAAAASUVORK5CYII="'
             "}"
         )
+        # Should raise a user error since gender type does not exist
+        with self.assertRaises(UserError):
+            self.applicant.on_scan_id_document_details()
 
+        # Create the gender type
+        self.env["gender.type"].create({"code": "Male", "value": "Male"})
+
+        # Should still raise a user error since document type does not exist
+        with self.assertRaises(UserError):
+            self.applicant.on_scan_id_document_details()
+
+        # Create the document type
+        self.env["g2p.id.type"].create({"name": "Passport"})
+
+        # Now it should work
         self.applicant.on_scan_id_document_details()
 
         self.assertEqual(self.applicant.family_name, "Red")
         self.assertEqual(self.applicant.given_name, "Blue")
 
-    def test_on_scan_id_document_details_failure(self):
+    def test_02_on_scan_id_document_details_failure(self):
         # Invalid JSON
         self.applicant.id_document_details = """{
             "photo": "",
@@ -69,7 +85,7 @@ class IdDetailsIndividualTest(TransactionCase):
         self.assertEqual(self.applicant.given_name, "Chin")
         self.assertEqual(self.applicant.id_document_details, "")
 
-    def test_scan_id_document_details_vals(self):
+    def test_03_scan_id_document_details_vals(self):
         details = {
             "photo": "",
             "given_name": "Blue",
@@ -82,7 +98,9 @@ class IdDetailsIndividualTest(TransactionCase):
             "nationality": "Philippines",
             "birth_place_city": "Caloocan",
         }
-
+        # create the gender type and document type
+        self.env["gender.type"].create({"code": "Male", "value": "Male"})
+        self.env["g2p.id.type"].create({"name": "Passport"})
         vals = self.applicant.scan_id_document_details_vals(details)
 
         self.assertEqual(
@@ -90,14 +108,12 @@ class IdDetailsIndividualTest(TransactionCase):
                 details["family_name"],
                 details["given_name"],
                 details["birth_date"],
-                details["gender"],
                 details["birth_place_city"],
             ],
             [
                 vals.get("family_name"),
                 vals.get("given_name"),
                 vals.get("birthdate"),
-                vals.get("gender"),
                 vals.get("birth_place"),
             ],
         )
