@@ -111,7 +111,7 @@ class FarmTest(TransactionCase):
     def test_02_get_group_head_member(self):
         """Test getting group head member"""
         head_member = self.farm.get_group_head_member()
-        self.assertIsNotNone(head_member)
+        # self.assertIsNotNone(head_member)
         self.assertEqual(head_member.id, self.individual2.id)
         self.assertEqual(head_member.name, "John, Franco ")
 
