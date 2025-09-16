@@ -25,15 +25,13 @@ class IdDetailsIndividual(models.Model):
 
         if details.get("gender"):
             details_gender = details.get("gender")
-            gender = self.env["gender.type"].search([("code", "=", details_gender)])
-            if not gender:
-                # Try searching by value if code search fails
-                gender = self.env["gender.type"].search([("value", "=", details_gender)])
+            gender = self.env["gender.type"].search(
+                ["|", ("code", "=", details_gender), ("value", "=", details_gender)], limit=1
+            )
 
             # If still not found, log a warning and raise an error
             if not gender:
                 message = _("Gender '%s' not found. Please create the gender first.") % details_gender
-                _logger.warning(message)
                 raise UserError(message)
 
         document_type = None
@@ -44,7 +42,6 @@ class IdDetailsIndividual(models.Model):
                 message = (
                     _("Document type '%s' not found. Please create the document type first.") % details_document_type
                 )
-                _logger.warning(message)
                 raise UserError(message)
 
         document_number = details.get("document_number", None)
@@ -89,8 +86,8 @@ class IdDetailsIndividual(models.Model):
                         vals.update({"image_1920": details["image"]})
 
                     self.update(vals)
-        except UserError as e:
-            raise e
+        except UserError:
+            raise
         except Exception as e:
             _logger.error(e)
 
