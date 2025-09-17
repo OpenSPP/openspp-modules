@@ -46,6 +46,12 @@ class IdDetailsIndividual(models.Model):
 
         document_number = details.get("document_number", None)
         document_expiry_date = details.get("expiry_date", None)
+        if document_expiry_date:
+            self._validate_scan_dates(document_expiry_date, "expiry_date")
+
+        birth_date = details.get("birth_date", None)
+        if birth_date:
+            self._validate_scan_dates(birth_date, "birth_date")
 
         vals = {
             "family_name": details.get("family_name"),
@@ -74,6 +80,18 @@ class IdDetailsIndividual(models.Model):
             )
 
         return vals
+
+    def _validate_scan_dates(self, scanned_date, field_name):
+        if scanned_date:
+            try:
+                # Try to parse the date in YYYY-MM-DD format
+                parsed_date = fields.Date.from_string(scanned_date)
+                return parsed_date
+            except ValueError as err:
+                raise UserError(
+                    _("Invalid date format for %s: %s. Expected format is YYYY-MM-DD.") % (field_name, scanned_date)
+                ) from err
+        return
 
     @api.onchange("id_document_details")
     def on_scan_id_document_details(self):

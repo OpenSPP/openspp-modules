@@ -29,11 +29,11 @@ class IdDetailsIndividualTest(TransactionCase):
             '"given_name": "Blue",'
             '"family_name": "Red",'
             '"birth_date": "1970-06-18",'
-            '"document_type": "Passport",'
+            '"document_type": "PassportTest",'
             '"document_number": "162401579884",'
             '"expiry_date": "2025-10-10",'
             '"nationality": "Philippines",'
-            '"gender": "Male",'
+            '"gender": "MaleTest",'
             '"birth_place_city": "Caloocan",'
             '"image": "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz'
             "AAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANCSURBVEiJtZZPbBtFFMZ/M7ubXdtdb1xSFyeilBapySVU8h8OoFaooFSqiihIVIpQBKci6KEg9Q6H9"
@@ -46,23 +46,26 @@ class IdDetailsIndividualTest(TransactionCase):
             '+/wbwLVOJ3uAD1wi/dUH7Qei66PfyuRj4Ik9is+hglfbkbfR3cnZm7chlUWLdwmprtCohX4HUtlOcQjLYCu+fzGJH2QRKvP3UNz8bWk1qMxjGTOMThZ3kvgLI5AzFfo379UAAAAASUVORK5CYII="'
             "}"
         )
+
         # Should raise a user error since gender type does not exist
         with self.assertRaises(UserError):
             self.applicant.on_scan_id_document_details()
 
         # Create the gender type
-        gender_type = self.env["gender.type"].search(["|", ("code", "=", "Male"), ("value", "=", "Male")], limit=1)
+        gender_type = self.env["gender.type"].search(
+            ["|", ("code", "=", "MaleTest"), ("value", "=", "MaleTest")], limit=1
+        )
         if not gender_type:
-            self.env["gender.type"].create({"code": "Male", "value": "Male"})
+            self.env["gender.type"].create({"code": "MaleTest", "value": "MaleTest"})
 
         # Should still raise a user error since document type does not exist
         with self.assertRaises(UserError):
             self.applicant.on_scan_id_document_details()
 
         # Create the document type
-        doc_type = self.env["g2p.id.type"].search([("name", "=", "Passport")], limit=1)
+        doc_type = self.env["g2p.id.type"].search([("name", "=", "PassportTest")], limit=1)
         if not doc_type:
-            self.env["g2p.id.type"].create({"name": "Passport"})
+            self.env["g2p.id.type"].create({"name": "PassportTest"})
 
         # Now it should work
         self.applicant.on_scan_id_document_details()
@@ -77,7 +80,7 @@ class IdDetailsIndividualTest(TransactionCase):
             "given_name": "Blue",
             "family_name": "Red",
             "birth_date": "1970-06-18",
-            "document_type": "Passport",
+            "document_type": "PassportTest",
             "document_number": "162401579884",
             "expiry_date": "06/18/2025",
             "nationality": "Philippines",
@@ -95,20 +98,20 @@ class IdDetailsIndividualTest(TransactionCase):
             "given_name": "Blue",
             "family_name": "Red",
             "birth_date": "1970-06-18",
-            "gender": "Male",
-            "document_type": "Passport",
+            "gender": "MaleTest",
+            "document_type": "PassportTest",
             "document_number": "162401579884",
-            "expiry_date": "06/18/2025",
+            "expiry_date": "2025-06-18",
             "nationality": "Philippines",
             "birth_place_city": "Caloocan",
         }
         # create the gender type and document type
-        gender_male = self.env["gender.type"].search([("code", "=", "Male")], limit=1)
+        gender_male = self.env["gender.type"].search([("code", "=", "MaleTest")], limit=1)
         if not gender_male:
-            gender_male = self.env["gender.type"].create({"code": "Male", "value": "Male"})
-        doc_type_passport = self.env["g2p.id.type"].search([("name", "=", "Passport")], limit=1)
+            gender_male = self.env["gender.type"].create({"code": "MaleTest", "value": "MaleTest"})
+        doc_type_passport = self.env["g2p.id.type"].search([("name", "=", "PassportTest")], limit=1)
         if not doc_type_passport:
-            doc_type_passport = self.env["g2p.id.type"].create({"name": "Passport"})
+            doc_type_passport = self.env["g2p.id.type"].create({"name": "PassportTest"})
         vals = self.applicant.scan_id_document_details_vals(details)
 
         self.assertEqual(vals.get("family_name"), details["family_name"])
@@ -128,3 +131,27 @@ class IdDetailsIndividualTest(TransactionCase):
         self.assertEqual(reg_id_vals.get("id_type"), doc_type_passport.id)
         self.assertEqual(reg_id_vals.get("value"), details["document_number"])
         self.assertEqual(reg_id_vals.get("expiry_date"), details["expiry_date"])
+
+    def test_04_scan_id_document_details_vals_invalid_date(self):
+        details = {
+            "photo": "",
+            "given_name": "Blue",
+            "family_name": "Red",
+            "birth_date": "1970-06-18",
+            "gender": "MaleTest",
+            "document_type": "PassportTest",
+            "document_number": "162401579884",
+            "expiry_date": "06/18/2025",
+            "nationality": "Philippines",
+            "birth_place_city": "Caloocan",
+        }
+        # create the gender type and document type
+        gender_male = self.env["gender.type"].search([("code", "=", "Male")], limit=1)
+        if not gender_male:
+            gender_male = self.env["gender.type"].create({"code": "MaleTest", "value": "MaleTest"})
+        doc_type_passport = self.env["g2p.id.type"].search([("name", "=", "PassportTest")], limit=1)
+        if not doc_type_passport:
+            doc_type_passport = self.env["g2p.id.type"].create({"name": "PassportTest"})
+
+        with self.assertRaises(UserError):
+            self.applicant.scan_id_document_details_vals(details)
