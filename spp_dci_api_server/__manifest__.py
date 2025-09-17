@@ -27,7 +27,7 @@
         "security/ir.model.access.csv",
         "views/client_credentials_view.xml",
     ],
-    "application": True,
+    "application": False,
     "auto_install": False,
     "installable": True,
 }

@@ -29,7 +29,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
     "summary": "Records and tracks events related to individual and group registrants, providing a chronological history of changes and actions within the OpenSPP system.",

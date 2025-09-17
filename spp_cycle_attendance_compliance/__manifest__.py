@@ -26,7 +26,7 @@
         "views/cycle_membership_view.xml",
     ],
     "assets": {},
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
 }

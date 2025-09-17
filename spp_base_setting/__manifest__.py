@@ -20,7 +20,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
     "summary": "OpenSPP Base Setting provides fundamental configurations for country implementations, establishing core organizational structures such as Country Offices. It also enables tailored user interface adaptations and streamlines user management by linking individuals to specific Country Offices for context-aware data access.",

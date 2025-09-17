@@ -1,5 +1,5 @@
 {
-    "name": "G2P Registry: Audit Post",
+    "name": "OpenSPP Audit Post",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
     "sequence": 1,
@@ -14,7 +14,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
     "summary": "OpenSPP Audit Post extends core audit logging by automatically posting audit log messages to related parent records. It consolidates changes from child records onto the parent's communication timeline, leveraging the mail module for message posting.",

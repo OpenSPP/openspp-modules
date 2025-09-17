@@ -1,6 +1,6 @@
 {
     "name": "OpenSPP Change Request: Edit Farm",
-    "summary": "Provides a specialized workflow for adding new farm in the registry.",
+    "summary": "Supports change requests to update existing farm groups, covering land records, assets, and registrant details.",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
     "sequence": 1,
@@ -35,7 +35,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
 }

@@ -17,7 +17,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
     "summary": "Records beneficiary expenditures against allocated cash entitlements within social protection programs to monitor utilization. It automatically calculates remaining balances and extends the g2p.entitlement model.",

@@ -17,7 +17,7 @@
         "views/ir_model_fields_views.xml",
         "views/res_config_settings_views.xml",
     ],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
 }

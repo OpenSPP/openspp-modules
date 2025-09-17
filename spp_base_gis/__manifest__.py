@@ -31,7 +31,7 @@
     },
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
     "pre_init_hook": "init_postgis",

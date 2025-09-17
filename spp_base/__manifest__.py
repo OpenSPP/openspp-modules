@@ -56,7 +56,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
     "summary": "Establishes core system settings and generates unique identifiers for records, enhancing registrant profiles with attributes like tags, gender, and type. The module also integrates Top-up Cards for identification and provides fundamental user interface elements with initial security configurations for user roles.",

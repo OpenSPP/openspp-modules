@@ -13,7 +13,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
     "summary": "Define complex program eligibility criteria using SQL queries for flexible and automated beneficiary enrollment within OpenSPP.",

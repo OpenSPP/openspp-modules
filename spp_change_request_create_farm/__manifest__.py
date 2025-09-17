@@ -1,6 +1,6 @@
 {
     "name": "OpenSPP Change Request: Create Farm",
-    "summary": "Provides a specialized workflow for adding new farm in the registry.",
+    "summary": "Facilitates change requests to register new farms, capturing farmer, land, and asset details before approval.",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
     "sequence": 1,
@@ -36,7 +36,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
 }

@@ -17,7 +17,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
     "summary": "The module provides RESTful API endpoints for secure, programmatic access to OpenSPP's Geographical Information System data, leveraging OAuth 2.0 and Basic authentication.",

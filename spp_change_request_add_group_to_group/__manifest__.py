@@ -1,6 +1,6 @@
 {
     "name": "OpenSPP Change Request: Add Group to a Group",
-    "summary": "Provides a specialized workflow for adding new farmers to existing groups in the registry.",
+    "summary": "Facilitates change requests to add individual farmers to an existing group with membership validation and document tracking.",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
     "sequence": 1,
@@ -31,7 +31,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
 }
