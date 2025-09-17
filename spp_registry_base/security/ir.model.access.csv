@@ -10,6 +10,7 @@ id_type_read_registry_access,ID Type Read Access,g2p_registry_base.model_g2p_id_
 group_kind_read_registry_access,Group Kind Read Access,g2p_registry_group.model_g2p_group_kind,spp_registry_base.read_registry,1,0,0,0
 spp_read_res_model_access,Res Model Read Access,base.model_ir_model,spp_registry_base.read_registry,1,0,0,0
 spp_read_res_model_fields_access,Res Model Fields Read Access,base.model_ir_model_fields,spp_registry_base.read_registry,1,0,0,0
+spp_phone_number_validation_read_access,Phone Number Validation Read Access,spp_registry_base.model_spp_phone_validation,spp_registry_base.read_registry,1,0,0,0
 
 res_partner_write_registry_access,Registry Write Access,base.model_res_partner,spp_registry_base.write_registry,1,1,0,0
 group_membership_write_registry_access,Group Membership Write Access,g2p_registry_membership.model_g2p_group_membership,spp_registry_base.write_registry,1,1,0,0
@@ -21,6 +22,7 @@ id_type_write_registry_access,ID Type Write Access,g2p_registry_base.model_g2p_i
 group_kind_write_registry_access,Group Kind Write Access,g2p_registry_group.model_g2p_group_kind,spp_registry_base.write_registry,1,1,0,0
 spp_write_res_model_access,Res Model Write Access,base.model_ir_model,spp_registry_base.write_registry,1,1,0,0
 spp_write_res_model_fields_access,Res Model Fields Write Access,base.model_ir_model_fields,spp_registry_base.write_registry,1,1,0,0
+spp_phone_number_validation_write_access,Phone Number Validation Write Access,spp_registry_base.model_spp_phone_validation,spp_registry_base.write_registry,1,1,0,0
 
 res_partner_create_registry_access,Registry Create Access,base.model_res_partner,spp_registry_base.create_registry,1,0,1,0
 group_membership_create_registry_access,Group Membership Create Access,g2p_registry_membership.model_g2p_group_membership,spp_registry_base.create_registry,1,1,1,0
@@ -32,3 +34,4 @@ id_type_create_registry_access,ID Type Create Access,g2p_registry_base.model_g2p
 group_kind_create_registry_access,Group Kind Create Access,g2p_registry_group.model_g2p_group_kind,spp_registry_base.create_registry,1,0,1,0
 spp_create_res_model_access,Res Model Create Access,base.model_ir_model,spp_registry_base.create_registry,1,0,1,0
 spp_create_res_model_fields_access,Res Model Fields Create Access,base.model_ir_model_fields,spp_registry_base.create_registry,1,0,1,0
+spp_phone_number_validation_create_access,Phone Number Validation Create Access,spp_registry_base.model_spp_phone_validation,spp_registry_base.create_registry,1,0,1,0

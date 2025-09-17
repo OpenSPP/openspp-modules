@@ -24,6 +24,7 @@
         "views/groups_view.xml",
         "views/individuals_view.xml",
         "views/main_view.xml",
+        "views/phone_validation_view.xml",
     ],
     "assets": {
         "web.assets_backend": [
