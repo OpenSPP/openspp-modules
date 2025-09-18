@@ -254,7 +254,12 @@ class OpenSPPAreaImport(models.Model):
         _logger.info("Area Import: Loading Excel File: %s" % fields.Datetime.now())
         # Wrap binary to BytesIO
 
-        book = self._get_book()
+        # Check if file is valid
+        if self.excel_file:
+            try:
+                book = self._get_book()
+            except Exception as e:
+                raise ValidationError(_("Unsupported file format. Only .xlsx files are accepted.")) from e
 
         sheet_names = book.sheet_names()
         sheet_names.sort()
