@@ -17,13 +17,6 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "g2p_registry_membership",
-        # "project_todo",
-        # "spreadsheet_dashboard",
-        # "queue_job",
-        # "mass_mailing",
-        # "project",
-        # "hr",
-        # "survey",
         "theme_openspp_muk",
     ],
     "data": [
@@ -31,7 +24,7 @@
         "security/ir.model.access.csv",
         "views/groups_view.xml",
         "views/individuals_view.xml",
-        # "views/main_view.xml",
+        "views/main_view.xml",
     ],
     "assets": {
         "web.assets_backend": [
