@@ -21,7 +21,11 @@ class IrModuleModule(models.Model):
         for module in self:
             icon_info = self.ICON_MAP.get(module.name)
             if icon_info:
-                menu = self.env['ir.ui.menu'].search([('xml_id', '=', icon_info['menu_xml_id'])], limit=1)
+                try:
+                    menu = self.env.ref(icon_info['menu_xml_id'])
+                except ValueError:
+                    menu = False
+                    
                 if menu:
                     menu.write({'web_icon': icon_info['icon']})
                     _logger.info(
