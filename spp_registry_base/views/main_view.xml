@@ -7,4 +7,61 @@
         active="True"
         sequence="-1"
     />
+
+    <menuitem
+        id="base.menu_management"
+        name="Apps"
+        web_icon="spp_registry_base,static/description/OpenSPP-Icons-App.png"
+    />
+    <menuitem
+        id="base.menu_administration"
+        name="Settings"
+        web_icon="spp_registry_base,static/description/OpenSPP-Icons-Setting.png"
+    />
+    <menuitem
+        id="project_todo.menu_todo_todos"
+        name="To-do"
+        web_icon="spp_registry_base,static/description/icon-To-do-White-line.png"
+    />
+    <menuitem
+        id="mail.menu_root_discuss"
+        name="Discuss"
+        web_icon="spp_registry_base,static/description/icon-Discuss-White-line.png"
+        groups="base.group_user"
+    />
+    <menuitem
+        id="queue_job.menu_queue_job_root"
+        name="Job Queue"
+        web_icon="spp_registry_base,static/description/icon-Job-Queue-White-line.png"
+        groups="queue_job.group_queue_job_manager"
+    />
+    <menuitem
+        id="spreadsheet_dashboard.spreadsheet_dashboard_menu_root"
+        name="Dashboards"
+        web_icon="spp_registry_base,static/description/icon-Dashboards-White-line.png"
+    />
+    <menuitem
+        id="project.menu_main_pm"
+        name="Projects"
+        web_icon="spp_registry_base,static/description/icon-Project-White-line.png"
+        groups="project.group_project_manager,project.group_project_user"
+    />
+    <menuitem
+        id="mass_mailing.mass_mailing_menu_root"
+        name="Email Marketing"
+        web_icon="spp_registry_base,static/description/icon-Email-Marketing-White-line.png"
+        groups="mass_mailing.group_mass_mailing_user"
+    />
+    <menuitem
+        id="survey.menu_surveys"
+        name="Surveys"
+        web_icon="spp_registry_base,static/description/icon-Surveys-White-line.png"
+        groups="survey.group_survey_user"
+    />
+    <menuitem
+        id="hr.menu_hr_root"
+        name="Employees"
+        web_icon="spp_registry_base,static/description/icon-Employees-White-line.png"
+        groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"
+    />
 </odoo>

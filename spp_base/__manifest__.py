@@ -57,7 +57,6 @@
         "data/top_up_card.xml",
         "security/ir.model.access.csv",
         "views/registrant_view.xml",
-        "views/main_view.xml",
         "views/users_view.xml",
     ],
     "assets": {},

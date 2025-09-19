@@ -28,6 +28,7 @@
         "spreadsheet_dashboard",
         "queue_job",
         "mass_mailing",
+        "spp_registry_base",
     ],
     "excludes": [
         "spp_base",
@@ -41,7 +42,6 @@
         "data/id_data.xml",
         "views/res_partner.xml",
         "views/configuration_view.xml",
-        "views/main_view.xml",
         "views/res_users.xml",
     ],
     "assets": {
