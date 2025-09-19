@@ -31,7 +31,7 @@
         "security/ir.model.access.csv",
         "views/groups_view.xml",
         "views/individuals_view.xml",
-        "views/main_view.xml",
+        # "views/main_view.xml",
     ],
     "assets": {
         "web.assets_backend": [
