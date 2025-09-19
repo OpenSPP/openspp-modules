@@ -22,12 +22,6 @@
         "spp_land_record",
         "spp_hide_menus",
         "base_import",
-        "project",
-        "hr",
-        "survey",
-        "spreadsheet_dashboard",
-        "queue_job",
-        "mass_mailing",
         "spp_registry_base",
     ],
     "excludes": [
