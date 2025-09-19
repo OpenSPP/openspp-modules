@@ -28,8 +28,14 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "spp_registry/static/src/import_records/import_records.js",
+            "spp_registry_base/static/src/import_records/import_records.js",
+            "spp_registry_base/static/src/scss/navbar.scss",
         ],
+        "web._assets_primary_variables": [
+            "spp_registry_base/static/src/scss/colors.scss",
+            "spp_registry_base/static/src/scss/colors_light.scss",
+        ],
+        "web.assets_web_dark": ["spp_registry_base/static/src/scss/colors_dark.scss"],
     },
     "demo": [],
     "images": [],
