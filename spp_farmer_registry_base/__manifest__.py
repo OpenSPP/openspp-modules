@@ -14,6 +14,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "base",
+        "spp_registry_base",
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_registry_group",
@@ -22,7 +23,6 @@
         "spp_land_record",
         "spp_hide_menus",
         "base_import",
-        "spp_registry_base",
     ],
     "excludes": [
         "spp_base",
