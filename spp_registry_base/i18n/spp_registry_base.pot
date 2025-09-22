@@ -38,6 +38,11 @@ msgid "Import Template for Individuals"
 msgstr ""
 
 #. module: spp_registry_base
+#: model:ir.model,name:spp_registry_base.model_ir_module_module
+msgid "Module"
+msgstr ""
+
+#. module: spp_registry_base
 #: model:res.groups,name:spp_registry_base.read_registry
 msgid "Read Registry"
 msgstr ""
