@@ -12,6 +12,6 @@ class TestIRModuleModule(TransactionCase):
 
     def test_01_update_menu_icons(self):
         # Verify that the icon was updated
-        self.survey_module.update_menu_icons()
+        self.survey_module.next()
         menu = self.env.ref("mail.menu_root_discuss")
         self.assertEqual(menu.web_icon, "spp_registry_base,static/description/icon-Discuss-White-line.png")

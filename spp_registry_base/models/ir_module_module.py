@@ -56,16 +56,6 @@ class IrModuleModule(models.Model):
 
                 if menu:
                     menu.write({"web_icon": icon_info["icon"]})
-                    _logger.info(
-                        "Updated icon for menu '%s' (module '%s') to '%s'",
-                        icon_info["menu_xml_id"],
-                        module.name,
-                        icon_info["icon"],
-                    )
-                else:
-                    _logger.warning(
-                        "Menu with xml_id '%s' not found for module '%s'", icon_info["menu_xml_id"], module.name
-                    )
 
     def next(self):
         # Call your icon update logic first
