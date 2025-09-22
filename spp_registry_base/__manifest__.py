@@ -17,7 +17,6 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "g2p_registry_membership",
-        # "spp_user_roles",
     ],
     "data": [
         "security/security_access.xml",

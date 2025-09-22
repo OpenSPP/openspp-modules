@@ -1,0 +1,79 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_registry_donor
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_registry_donor
+#: model:res.groups,comment:spp_registry_donor.user_role_donor_manager_res_groups
+msgid "Admin access to Donor Management."
+msgstr ""
+
+#. module: spp_registry_donor
+#: model:ir.model.fields,help:spp_registry_donor.field_g2p_program_membership__is_donor
+#: model:ir.model.fields,help:spp_registry_donor.field_res_partner__is_donor
+#: model:ir.model.fields,help:spp_registry_donor.field_res_users__is_donor
+#: model:ir.model.fields,help:spp_registry_donor.field_spp_attendance_subscriber__is_donor
+msgid "Check if this partner is a donor"
+msgstr ""
+
+#. module: spp_registry_donor
+#: model:ir.model,name:spp_registry_donor.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_registry_donor
+#: model_terms:ir.actions.act_window,help:spp_registry_donor.action_registry_donor
+msgid "Create a new donor"
+msgstr ""
+
+#. module: spp_registry_donor
+#: model:ir.module.category,name:spp_registry_donor.module_category_donor
+msgid "Donor Management"
+msgstr ""
+
+#. module: spp_registry_donor
+#: model:res.groups,name:spp_registry_donor.group_donor_manager
+#: model:res.groups,name:spp_registry_donor.user_role_donor_manager_res_groups
+msgid "Donor Manager"
+msgstr ""
+
+#. module: spp_registry_donor
+#: model:res.groups,name:spp_registry_donor.group_donor_user
+#: model:res.groups,name:spp_registry_donor.user_role_donor_user_res_groups
+msgid "Donor User"
+msgstr ""
+
+#. module: spp_registry_donor
+#: model:ir.actions.act_window,name:spp_registry_donor.action_registry_donor
+#: model:ir.ui.menu,name:spp_registry_donor.menu_registry_donor
+#: model_terms:ir.ui.view,arch_db:spp_registry_donor.view_registry_donor_filter
+msgid "Donors"
+msgstr ""
+
+#. module: spp_registry_donor
+#: model:ir.model.fields,field_description:spp_registry_donor.field_g2p_program_membership__is_donor
+#: model:ir.model.fields,field_description:spp_registry_donor.field_res_partner__is_donor
+#: model:ir.model.fields,field_description:spp_registry_donor.field_res_users__is_donor
+#: model:ir.model.fields,field_description:spp_registry_donor.field_spp_attendance_subscriber__is_donor
+msgid "Is Donor"
+msgstr ""
+
+#. module: spp_registry_donor
+#: model_terms:ir.ui.view,arch_db:spp_registry_donor.view_registry_donor_form
+msgid "Is a Donor"
+msgstr ""
+
+#. module: spp_registry_donor
+#: model:res.groups,comment:spp_registry_donor.user_role_donor_user_res_groups
+msgid "Readonly access to Donor Management."
+msgstr ""

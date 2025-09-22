@@ -103,5 +103,9 @@
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
       <field name="code">action = model.open_wizard()</field>
+      <field
+            name="groups_id"
+            eval="[(4, ref('g2p_registry_base.group_g2p_admin')), (4, ref('spp_idqueue.group_g2p_id_requestor'))]"
+        />
     </record>
 </odoo>

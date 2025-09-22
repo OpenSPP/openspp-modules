@@ -1,5 +1,5 @@
 {
-    "name": "Change Information Change Request",
+    "name": "OpenSPP Change Information Change Request",
     "category": "OpenSPP",
     "version": "17.0.1.3.0",
     "sequence": 1,

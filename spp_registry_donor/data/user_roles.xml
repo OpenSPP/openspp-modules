@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="user_role_donor_user" model="res.users.role">
+        <field name="name">Donor User</field>
+        <field name="role_type">global</field>
+        <field name="comment">Readonly access to Donor Management.</field>
+        <field name="implied_ids" eval="[(4, ref('group_donor_user'))]" />
+    </record>
+
+    <record id="user_role_donor_manager" model="res.users.role">
+        <field name="name">Donor Manager</field>
+        <field name="role_type">global</field>
+        <field name="comment">Admin access to Donor Management.</field>
+        <field name="implied_ids" eval="[(4, ref('group_donor_manager'))]" />
+    </record>
+</odoo>
