@@ -169,7 +169,6 @@ msgstr ""
 
 #. module: g2p_registry_individual
 #: model:ir.model.fields,field_description:g2p_registry_individual.field_res_partner__gender
-#: model:ir.model.fields,field_description:g2p_registry_individual.field_res_users__gender
 #: model:ir.model.fields,field_description:g2p_registry_individual.field_spp_attendance_subscriber__gender
 msgid "Gender"
 msgstr ""
