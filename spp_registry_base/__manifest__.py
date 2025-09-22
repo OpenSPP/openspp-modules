@@ -17,7 +17,6 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "g2p_registry_membership",
-        "theme_openspp_muk",
     ],
     "data": [
         "security/security_access.xml",
@@ -28,14 +27,8 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "spp_registry_base/static/src/import_records/import_records.js",
-            "spp_registry_base/static/src/scss/navbar.scss",
+            "spp_registry/static/src/import_records/import_records.js",
         ],
-        "web._assets_primary_variables": [
-            "spp_registry_base/static/src/scss/colors.scss",
-            "spp_registry_base/static/src/scss/colors_light.scss",
-        ],
-        "web.assets_web_dark": ["spp_registry_base/static/src/scss/colors_dark.scss"],
     },
     "demo": [],
     "images": [],
