@@ -12,37 +12,36 @@ class IrModuleModule(models.Model):
     ICON_MAP = {
         "project_todo": {
             "menu_xml_id": "project_todo.menu_todo_todos",
-            "icon": "spp_registry_base,static/description/icon-To-do-White-line.png",
+            "icon": "spp_base_common,static/description/icon-To-do-White-line.png",
         },
         "mail": {
             "menu_xml_id": "mail.menu_root_discuss",
-            "icon": "spp_registry_base,static/description/icon-Discuss-White-line.png",
+            "icon": "spp_base_common,static/description/icon-Discuss-White-line.png",
         },
         "queue_job": {
             "menu_xml_id": "queue_job.menu_queue_job_root",
-            "icon": "spp_registry_base,static/description/icon-Job-Queue-White-line.png",
+            "icon": "spp_base_common,static/description/icon-Job-Queue-White-line.png",
         },
         "spreadsheet_dashboard": {
             "menu_xml_id": "spreadsheet_dashboard.spreadsheet_dashboard_menu_root",
-            "icon": "spp_registry_base,static/description/icon-Dashboards-White-line.png",
+            "icon": "spp_base_common,static/description/icon-Dashboards-White-line.png",
         },
         "project": {
             "menu_xml_id": "project.menu_main_pm",
-            "icon": "spp_registry_base,static/description/icon-Project-White-line.png",
+            "icon": "spp_base_common,static/description/icon-Project-White-line.png",
         },
         "mass_mailing": {
             "menu_xml_id": "mass_mailing.mass_mailing_menu_root",
-            "icon": "spp_registry_base,static/description/icon-Email-Marketing-White-line.png",
+            "icon": "spp_base_common,static/description/icon-Email-Marketing-White-line.png",
         },
         "survey": {
             "menu_xml_id": "survey.menu_surveys",
-            "icon": "spp_registry_base,static/description/icon-Surveys-White-line.png",
+            "icon": "spp_base_common,static/description/icon-Surveys-White-line.png",
         },
         "hr": {
             "menu_xml_id": "hr.menu_hr_root",
-            "icon": "spp_registry_base,static/description/icon-Employees-White-line.png",
+            "icon": "spp_base_common,static/description/icon-Employees-White-line.png",
         },
-        # Add more modules as needed
     }
 
     def update_menu_icons(self):

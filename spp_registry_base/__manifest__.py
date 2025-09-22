@@ -17,17 +17,17 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "g2p_registry_membership",
+        "theme_openspp_muk",
     ],
     "data": [
         "security/security_access.xml",
         "security/ir.model.access.csv",
         "views/groups_view.xml",
         "views/individuals_view.xml",
-        "views/main_view.xml",
     ],
     "assets": {
         "web.assets_backend": [
-            "spp_registry/static/src/import_records/import_records.js",
+            "spp_registry_base/static/src/import_records/import_records.js",
         ],
     },
     "demo": [],
