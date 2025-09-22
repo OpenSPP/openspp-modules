@@ -3,7 +3,7 @@
     <menuitem
         id="main_menu_spp_dms"
         name="DMS"
-        web_icon="dms,static/description/icon.png"
+        web_icon="spp_dms,static/description/OpenSPP-Icons-DMS.png"
         groups="group_spp_dms_user"
     />
     <menuitem id="menu_spp_dms_config" name="Configuration" parent="main_menu_spp_dms" sequence="100" />

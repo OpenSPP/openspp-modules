@@ -2,7 +2,6 @@
 Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
-
     <menuitem
         id="spp_change_request_pending_validation_root"
         name="For Validation"
