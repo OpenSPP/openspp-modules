@@ -1105,6 +1105,12 @@ msgid "Queued IDs"
 msgstr ""
 
 #. module: spp_idqueue
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__rating_ids
+#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Refresh Data"
 msgstr ""
