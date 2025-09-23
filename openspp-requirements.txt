@@ -90,3 +90,4 @@ shapely
 simplejson
 swagger_spec_validator
 xlrd
+openpyxl
