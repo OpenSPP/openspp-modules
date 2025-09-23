@@ -37,7 +37,6 @@ class ResPartner(models.Model):
     individual_membership_ids = fields.One2many(allow_filter=True)
     kind_as_str = fields.Char(allow_filter=True)
     phone_number_ids = fields.One2many(allow_filter=True)
-    program_membership_ids = fields.One2many(allow_filter=True)
     reg_ids = fields.One2many(allow_filter=True)
     related_1_ids = fields.One2many(allow_filter=True)
     related_2_ids = fields.One2many(allow_filter=True)

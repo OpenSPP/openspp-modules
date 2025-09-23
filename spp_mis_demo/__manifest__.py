@@ -29,7 +29,8 @@
         "g2p_programs",
         "product",
         "stock",
-        "spp_custom_filter_ui",
+        "spp_custom_filter_program_ui",
+        "spp_custom_filter_registry_ui",
     ],
     "excludes": [
         "spp_farmer_registry_base",
