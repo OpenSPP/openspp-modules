@@ -5,11 +5,15 @@ on:
   pull_request:
     branches:
       - "17.0*"
+      - "release/*"
   push:
     branches:
       - "17.0"
       - "17.0-ocabot-*"
       - "farmer-registry"
+      - "release/*"
+    tags:
+      - "v*"
 env:
   OCA_GIT_USER_NAME: openspp
   OCA_GIT_USER_EMAIL: bot@openspp.org
