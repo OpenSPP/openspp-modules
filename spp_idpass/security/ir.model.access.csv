@@ -1,3 +1,12 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 spp_idpass_admin,ID Pass Admin Access,spp_idpass.model_spp_id_pass,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_issue_idpass_wizard_admin,Issue ID Pass Wizard Admin Access,spp_idpass.model_spp_issue_idpass_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+spp_read_idpass,ID Pass Read Access,spp_idpass.model_spp_id_pass,spp_registry_base.read_registry,1,0,0,0
+spp_read_idpass_wizard,Issue ID Pass Wizard Read Access,spp_idpass.model_spp_issue_idpass_wizard,spp_registry_base.read_registry,1,0,0,0
+
+spp_write_idpass,ID Pass Write Access,spp_idpass.model_spp_id_pass,spp_registry_base.write_registry,1,1,0,0
+spp_write_idpass_wizard,Issue ID Pass Wizard Write Access,spp_idpass.model_spp_issue_idpass_wizard,spp_registry_base.write_registry,1,1,0,0
+
+spp_create_idpass,ID Pass Create Access,spp_idpass.model_spp_id_pass,spp_registry_base.create_registry,1,1,1,0
+spp_create_idpass_wizard,Issue ID Pass Wizard Create Access,spp_idpass.model_spp_issue_idpass_wizard,spp_registry_base.create_registry,1,1,1,0

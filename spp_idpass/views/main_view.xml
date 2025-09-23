@@ -5,7 +5,7 @@
         id="id_pass_main_menu_root"
         name="ID Management"
         active="True"
-        web_icon="spp_idpass,static/description/icon_id.png"
+        web_icon="spp_idpass,static/description/OpenSPP-Icons-ID-Management.png"
         sequence="1"
     />
 

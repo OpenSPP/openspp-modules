@@ -178,7 +178,7 @@
     <menuitem
         id="area_main_menu_root"
         name="Area"
-        web_icon="spp_area_base,static/description/icon_area.png"
+        web_icon="spp_area_base,static/description/OpenSPP-Icons-Area.png"
         active="True"
         sequence="0"
     />

@@ -4,7 +4,7 @@
         <field name="model">spp.print.queue.id</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <tree create="false" edit="false" delete="false">
                 <field name="name" column_invisible="1" />
                 <field name="registrant_id" />
                 <field name="area_id" />
@@ -65,7 +65,6 @@
                     type="object"
                     icon="fa-ban"
                     title="Cancel Request"
-                    help="Cancel Request"
                     class="btn-danger"
                     invisible="status in ('cancelled', 'printed', 'distributed') or batch_id"
                     groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
@@ -79,7 +78,7 @@
         <field name="model">spp.print.queue.id</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <form>
+            <form create="false" edit="false" delete="false">
                 <header>
                     <button
                         name="on_approve"
@@ -281,7 +280,7 @@
         action="action_spp_idqueue"
         parent="spp_idpass.id_pass_main_menu_root"
         sequence="10"
-        groups="g2p_registry_base.group_g2p_admin,group_g2p_id_validator,group_g2p_id_distributor"
+        groups="g2p_registry_base.group_g2p_admin,group_g2p_id_requestor,group_g2p_id_validator,group_g2p_id_distributor"
     />
 
     <record model="ir.actions.server" id="id_batch_print">
@@ -311,7 +310,7 @@
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
       <field name="code">action = records.generate_validate_requests()</field>
-      <field name="groups_id" eval="[(4, ref('spp_idqueue.group_g2p_id_validator'))]" />
+      <field name="groups_id" eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_distributor')])]" />
     </record>
 
     <record model="ir.actions.server" id="print_requests">
@@ -321,7 +320,7 @@
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
       <field name="code">action = records.print_requests()</field>
-      <field name="groups_id" eval="[(4, ref('spp_idqueue.group_g2p_id_validator'))]" />
+      <field name="groups_id" eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_distributor')])]" />
     </record>
 
     <record model="ir.actions.server" id="distribute_requests">
@@ -331,7 +330,7 @@
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
       <field name="code">action = records.distribute_requests()</field>
-      <field name="groups_id" eval="[(4, ref('spp_idqueue.group_g2p_id_distributor'))]" />
+      <field name="groups_id" eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_distributor')])]" />
     </record>
 
 </odoo>

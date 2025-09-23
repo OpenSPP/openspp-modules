@@ -1,0 +1,31 @@
+// Colors
+
+$mk_color_brand: #3264c8;
+$mk_color_primary: #5d8da8;
+
+$mk_color_success: #1dc959;
+$mk_color_info: #6ab5fb;
+$mk_color_warning: #fbb56a;
+$mk_color_danger: #ff5757;
+
+// Override
+
+$o-community-color: $mk-color-brand;
+$o-enterprise-color: $mk-color-brand;
+$o-enterprise-action-color: $mk-color-primary;
+
+$o-brand-odoo: $mk-color-brand;
+$o-brand-primary: $mk-color-primary;
+
+$o-success: $mk-color-success;
+$o-info: $mk-color-info;
+$o-warning: $mk-color-warning;
+$o-danger: $mk-color-danger;
+
+$o-theme-text-colors: (
+    "primary": $mk-color-brand,
+    "success": $o-success,
+    "info": $o-info,
+    "warning": $o-warning,
+    "danger": $o-danger,
+);

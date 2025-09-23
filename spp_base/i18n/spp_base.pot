@@ -27,7 +27,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_base.field_g2p_group_membership__individual_gender
 #: model:ir.model.fields,field_description:spp_base.field_g2p_program_membership__gender
 #: model:ir.model.fields,field_description:spp_base.field_res_partner__gender
-#: model:ir.model.fields,field_description:spp_base.field_res_users__gender
 #: model:ir.model.fields,field_description:spp_base.field_spp_attendance_subscriber__gender
 msgid "Gender"
 msgstr ""

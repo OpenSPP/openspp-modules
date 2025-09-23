@@ -670,6 +670,11 @@ msgid "Pending Validation"
 msgstr ""
 
 #. module: spp_change_request_base
+#: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: spp_change_request_base
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request__registrant_id
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_source_mixin__registrant_id
 msgid "Registrant"

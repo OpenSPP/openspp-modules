@@ -49,7 +49,24 @@ class OpenSPPRequestIDWizard(models.TransientModel):
                     "status": status,
                     "registrant_id": rec.registrant_id.id,
                 }
-                return self.env["spp.print.queue.id"].create(vals)
+                self.env["spp.print.queue.id"].create(vals)
+                message = _(
+                    "A new ID request has been successfully created for registrant: %s.", rec.registrant_id.name
+                )
+                kind = "info"
+                return {
+                    "type": "ir.actions.client",
+                    "tag": "display_notification",
+                    "params": {
+                        "title": _("ID Request"),
+                        "message": message,
+                        "sticky": True,
+                        "type": kind,
+                        "next": {
+                            "type": "ir.actions.act_window_close",
+                        },
+                    },
+                }
             else:
                 raise UserError(_("There are no selected Template!"))
 

@@ -19,6 +19,7 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "queue_job",
+        "spp_registry_base",
     ],
     "external_dependencies": {},
     "data": [

@@ -40,7 +40,7 @@ class SppAttendanceController(Controller):
 
         access_token = auth_header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
         try:
-            verify_and_decode_signature(access_token)
+            verify_and_decode_signature(request.env, access_token)
         except OpenSPPOAuthJWTException:
             return False
 

@@ -23,6 +23,7 @@
         "data/local_roles.xml",
         "data/global_roles.xml",
         "data/ir_cron.xml",
+        "data/roles.xml",
         "views/role.xml",
         "views/user.xml",
     ],

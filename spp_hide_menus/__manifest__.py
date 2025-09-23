@@ -2,7 +2,7 @@
 
 
 {
-    "name": "Hide Non-OpenSPP Menus",
+    "name": "OpenSPP Hide Non-OpenSPP Menus",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
     "summary": "The module automatically hides non-core OpenSPP menus to streamline the user interface. It removes Calendar, Contacts, Accounting, Event, Stock, and UTM from the main navigation, focusing users on social protection program management.",

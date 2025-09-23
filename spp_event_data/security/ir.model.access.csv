@@ -3,3 +3,12 @@ spp_event_data_admin,Event Data Admin Access,spp_event_data.model_spp_event_data
 spp_create_event_wizard_admin,Create Event Wizard Admin Access,spp_event_data.model_spp_create_event_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
 
 spp_event_data_registrar,Event Data Registrar Access,spp_event_data.model_spp_event_data,g2p_registry_base.group_g2p_registrar,1,1,1,0
+
+spp_read_event_data,Event Data Read Access,spp_event_data.model_spp_event_data,spp_registry_base.read_registry,1,0,0,0
+spp_read_create_event_wizard,Create Event Wizard Read Access,spp_event_data.model_spp_create_event_wizard,spp_registry_base.read_registry,1,0,0,0
+
+spp_write_event_data,Event Data Write Access,spp_event_data.model_spp_event_data,spp_registry_base.write_registry,1,1,0,0
+spp_write_create_event_wizard,Create Event Wizard Write Access,spp_event_data.model_spp_create_event_wizard,spp_registry_base.write_registry,1,1,0,0
+
+spp_create_event_data,Event Data Create Access,spp_event_data.model_spp_event_data,spp_registry_base.create_registry,1,1,1,0
+spp_create_create_event_wizard,Create Event Wizard Create Access,spp_event_data.model_spp_create_event_wizard,spp_registry_base.create_registry,1,1,1,0

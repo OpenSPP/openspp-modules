@@ -24,6 +24,11 @@ msgid "# Meetings"
 msgstr ""
 
 #. module: spp_attendance
+#: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__task_count
+msgid "# Tasks"
+msgstr ""
+
+#. module: spp_attendance
 #. odoo-python
 #: code:addons/spp_attendance/wizard/import_attendance.py:0
 #, python-format
@@ -340,6 +345,11 @@ msgid "Category"
 msgstr ""
 
 #. module: spp_attendance
+#: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__certifications_count
+msgid "Certifications Count"
+msgstr ""
+
+#. module: spp_attendance
 #: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__channel_ids
 msgid "Channels"
 msgstr ""
@@ -427,6 +437,11 @@ msgstr ""
 #. module: spp_attendance
 #: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__company_id
 msgid "Company"
+msgstr ""
+
+#. module: spp_attendance
+#: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__certifications_company_count
+msgid "Company Certifications Count"
 msgstr ""
 
 #. module: spp_attendance
@@ -641,6 +656,16 @@ msgstr ""
 #. module: spp_attendance
 #: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__employee
 msgid "Employee"
+msgstr ""
+
+#. module: spp_attendance
+#: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__employee_ids
+msgid "Employees"
+msgstr ""
+
+#. module: spp_attendance
+#: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__employees_count
+msgid "Employees Count"
 msgstr ""
 
 #. module: spp_attendance
@@ -1312,6 +1337,16 @@ msgid "Pricelist"
 msgstr ""
 
 #. module: spp_attendance
+#: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__project_ids
+msgid "Projects"
+msgstr ""
+
+#. module: spp_attendance
+#: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: spp_attendance
 #: model:ir.model.fields,field_description:spp_attendance.field_spp_import_attendance_wizard__raw_body
 msgid "Raw Body for Authentication"
 msgstr ""
@@ -1329,6 +1364,11 @@ msgstr ""
 #. module: spp_attendance
 #: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__parent_id
 msgid "Related Company"
+msgstr ""
+
+#. module: spp_attendance
+#: model:ir.model.fields,help:spp_attendance.field_spp_attendance_subscriber__employee_ids
+msgid "Related employees based on their private address"
 msgstr ""
 
 #. module: spp_attendance
@@ -1509,6 +1549,11 @@ msgstr ""
 #. module: spp_attendance
 #: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__category_id
 msgid "Tags"
+msgstr ""
+
+#. module: spp_attendance
+#: model:ir.model.fields,field_description:spp_attendance.field_spp_attendance_subscriber__task_ids
+msgid "Tasks"
 msgstr ""
 
 #. module: spp_attendance

@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
-    "name": "SPP Program: Manual Eligibility",
+    "name": "OpenSPP Program: Manual Eligibility",
     "category": "OpenSPP",
     "version": "17.0.1.3.1",
     "sequence": 1,

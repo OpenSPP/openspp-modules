@@ -352,6 +352,11 @@ msgid "Object `OpenSPPIDQueue` not yet existed!"
 msgstr ""
 
 #. module: spp_idpass
+#: model:ir.model.fields,field_description:spp_idpass.field_res_partner__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: spp_idpass
 #: model_terms:ir.ui.view,arch_db:spp_idpass.issue_id_pass_wizard_form_view
 msgid "Registrant"
 msgstr ""
