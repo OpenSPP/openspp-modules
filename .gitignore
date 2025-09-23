@@ -77,4 +77,5 @@ docs/_build/
 .ruff_cache
 .aider*
 
-.release
+# Local release planning files (ignored)
+.release/

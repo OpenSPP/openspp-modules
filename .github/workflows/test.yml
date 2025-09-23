@@ -121,6 +121,8 @@ jobs:
           rm -rf openg2p-program/g2p_payment_files
           rm -rf openg2p-program/g2p_payment_g2p_connect
           rm -rf openg2p-program/g2p_program_documents
+          rm -rf openg2p-program/g2p_theme
+          rm -rf openg2p_registry/g2p_service_provider_portal_base
           rm -rf mukit-modules/muk_web_enterprise_theme
           cp -r openg2p-registry/* ${ADDONS_DIR}/
           cat test-requirements.txt >> spp-test-requirements.txt
