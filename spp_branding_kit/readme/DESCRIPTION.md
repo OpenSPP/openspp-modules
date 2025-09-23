@@ -1,79 +1,42 @@
+
 # OpenSPP Branding Kit
 
-This document describes the **OpenSPP Branding Kit** module, which provides comprehensive debranding and rebranding functionality for Odoo 17 installations used within the OpenSPP ecosystem.
+The OpenSPP Branding Kit module enables administrators to fully customize the visual identity of their OpenSPP instance and manage its telemetry settings. This module ensures that the platform consistently reflects an organization's brand and provides granular control over data sharing practices.
 
 ## Purpose
 
-The **OpenSPP Branding Kit** module is designed to:
+The OpenSPP Branding Kit module accomplishes several key objectives to present a unified and controlled platform experience:
 
-* **Apply OpenSPP Branding**: Replace removed Odoo branding with OpenSPP-specific branding elements, including logos, colors, text, and system information.
-* **Control Telemetry and External Communications**: Provide administrators with control over telemetry data collection and external service communications.
-* **Hide Paid Applications**: Optionally filter out enterprise and paid Odoo applications from the Apps menu to focus on open-source modules.
-* **Customize System Behavior**: Offer configuration options for system naming, documentation URLs, and support links.
+*   **Customizes System Branding**: It allows organizations to replace default branding elements across all interfaces with their own, ensuring a consistent and professional appearance for users. This includes custom system names, logos, and support information.
+*   **Manages Telemetry Data**: The module provides explicit control over the collection and redirection of anonymous usage statistics, allowing organizations to comply with privacy policies or disable telemetry entirely. This supports data sovereignty requirements.
+*   **Removes Non-OpenSPP Elements**: It removes or replaces references to other platforms and promotional content, presenting a clean, OpenSPP-centric user experience. This helps avoid confusion and maintains focus on the social protection program.
+*   **Standardizes System Messages**: It customizes default system messages and email signatures to align with OpenSPP branding and communication standards. This reinforces the platform's identity in all user interactions.
+*   **Optimizes User Interface**: The module streamlines the user interface for OpenSPP-specific workflows, enhancing usability and relevance for social protection program managers and field staff.
 
 ## Dependencies and Integration
 
-1. **Odoo 17 Core**: This module is built specifically for Odoo 17 and utilizes its standard extension mechanisms.
+The OpenSPP Branding Kit is a foundational module that integrates deeply with the OpenSPP core and other thematic modules to provide a consistent user experience.
 
-2. **OpenSPP Muk Theme ([theme_openspp_muk](theme_openspp_muk))**: Depends on the OpenSPP Muk theme module which provides the base visual theme and styling framework for the OpenSPP platform.
-
+*   It depends on the `base`, `web`, and `base_setup` modules for core system functionality, web client operations, and basic configuration settings, respectively.
+*   Crucially, it relies on the :ref:`theme_openspp_muk` module to apply the visual styling and layout that defines the OpenSPP aesthetic. The Branding Kit then layers specific customizations on top of this theme.
+*   This module serves other OpenSPP modules by establishing a standardized visual and operational environment. By setting system-wide branding and telemetry rules, it ensures that all other modules operate within a consistent, OpenSPP-branded framework.
 
 ## Additional Functionality
 
-* **Configuration Management ([ir.config_parameter](ir.config_parameter))**:
-    * Introduces system-wide configuration parameters with the `openspp.*` prefix for centralized branding control.
-    * Provides settings for system name, documentation URLs, support links, and telemetry endpoints.
-    * Enables toggle options for features like hiding paid apps.
+The module offers comprehensive features for brand management and operational control within the OpenSPP platform.
 
-* **Module Filtering ([ir.module.module](ir.module.module))**:
-    * Implements intelligent filtering of paid applications (OEEL and OPL licensed modules) from the Apps menu.
-    * Maintains visibility of paid modules in administrative views while hiding them from the standard Apps interface.
-    * Provides helper methods for counting and filtering paid applications.
+### Customizing System Information and Visuals
 
-* **Web Interface Customization**:
-    * Provides custom routes for OpenSPP-specific information pages.
-    * Modifies session information to include OpenSPP branding data.
-    * Implements telemetry redirection to OpenSPP endpoints when enabled.
+Administrators can personalize various aspects of the OpenSPP interface to match their organization's identity. This includes setting a custom system name, defining specific documentation and support URLs, and controlling the visibility of "Powered by OpenSPP" branding. These changes are reflected across the entire platform, including the login page, system reports, and the backend user interface, ensuring a cohesive look and feel. The module also overrides default email signatures to incorporate OpenSPP branding automatically.
 
-* **Company Branding Updates ([res.company](res.company))**:
-    * Automatically updates company information with OpenSPP branding during module installation.
-    * Sets default report headers and footers with OpenSPP information.
-    * Updates company website references to OpenSPP URLs.
+### Telemetry and Data Privacy Control
 
-* **User Interface Enhancements**:
-    * Customizes login page styling with OpenSPP branding.
-    * Modifies backend interface colors and styling.
-    * Updates user menu items and removes Odoo-specific links.
-    * Provides custom email signature templates.
+The Branding Kit provides essential tools for managing data privacy. Organizations can easily enable or disable the collection of anonymous usage statistics (telemetry) directly from the system settings. For active telemetry, administrators can configure a custom endpoint where this data is sent, allowing for compliance with specific data governance policies or redirection to internal analytics services. This feature empowers organizations to control their data footprint effectively.
 
-* **Security and Privacy Features**:
-    * Disables unnecessary telemetry and external communications by default.
-    * Removes promotional content and enterprise upselling elements.
-    * Implements proper permission controls for branding configuration.
+### Interface Optimization
 
-## Module Components
-
-* **Controllers**: Custom HTTP routes for OpenSPP-specific pages and version information.
-* **Models**: Extensions to core Odoo models for branding customization.
-* **Data Files**: XML configuration for default parameters and company settings.
-* **Views**: XML templates for UI customization across backend, login, and report interfaces.
-* **Static Assets**: CSS, JavaScript, and image files for visual branding.
-* **Tests**: Comprehensive test suite ensuring proper functionality and coverage.
-
-## Installation Hooks
-
-* **Post-Installation Hook**: Automatically applies initial branding configuration, disables Odoo promotional elements, and updates company information.
-* **Uninstall Hook**: Cleanly removes OpenSPP configuration parameters while preserving user data.
-
-## Configuration Options
-
-The module provides various configuration parameters that can be adjusted through the Settings interface or directly via system parameters:
-
-* `openspp.system.name`: Custom system name displayed throughout the interface
-* `openspp.telemetry.enabled`: Enable or disable telemetry data collection
-* `openspp.documentation.url`: Custom documentation URL for help links
-* `openspp.support.url`: Custom support URL for assistance
+To provide a focused OpenSPP experience, this module removes or modifies elements that refer to other platforms or promote non-OpenSPP services. This includes removing external account URLs from user profiles and optimizing the interface to highlight OpenSPP-specific workflows. By streamlining the user experience and eliminating extraneous content, the module ensures that the platform remains dedicated to its primary mission of social protection program management.
 
 ## Conclusion
 
-The **OpenSPP Branding Kit** module provides a complete solution for transforming an Odoo 17 installation into a fully branded OpenSPP platform. It ensures consistent branding across all interfaces while maintaining system functionality and providing administrators with granular control over branding and behavior settings. The module's modular architecture and adherence to Odoo best practices ensure compatibility with future updates and seamless integration with other OpenSPP modules.
+The OpenSPP Branding Kit is a pivotal module that empowers organizations to fully brand their OpenSPP instance and manage telemetry, delivering a professional, consistent, and privacy-compliant platform for social protection programs.
