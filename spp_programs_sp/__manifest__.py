@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Programs: Service Points Integration",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -28,5 +28,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Extends OpenSPP Programs to integrate service points, enabling the association of beneficiaries and entitlements with designated service delivery locations for improved program efficiency and targeted benefit distribution.",
+    "summary": "OpenSPP Programs Sp extends core program management by integrating service points directly into entitlement and beneficiary processes. It automatically links beneficiaries' assigned service points to their entitlements, supporting both cash and in-kind benefit distribution.",
 }

@@ -2,7 +2,8 @@
 {
     "name": "OpenSPP Cycle: Attendance Compliance",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
+    "summary": "Program managers define and enforce attendance requirements as eligibility criteria for beneficiaries within social protection program cycles. The module integrates with external attendance systems to automatically fetch records, then evaluates beneficiaries against defined thresholds to ensure ongoing program eligibility.",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -25,7 +26,7 @@
         "views/cycle_membership_view.xml",
     ],
     "assets": {},
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
 }

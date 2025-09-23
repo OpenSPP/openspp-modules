@@ -1,8 +1,8 @@
 {
     "name": "OpenSPP API Records",
-    "summary": """Provides RESTful API endpoints for accessing and managing OpenSPP's core data, including service points, programs, products, and entitlements.""",
+    "summary": "It exposes RESTful API endpoints, enabling external systems to programmatically access and manage OpenSPP's core operational data. These endpoints facilitate querying, creating, updating, and deleting records for entities like service points, social protection programs, product definitions, and beneficiary entitlements.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "author": "OpenSPP.org",
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],

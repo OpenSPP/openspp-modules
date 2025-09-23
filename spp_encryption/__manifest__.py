@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Encryption Module",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -17,5 +17,5 @@
     "application": False,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides secure encryption, decryption, signing, and verification of data within OpenSPP using JWCrypto.",
+    "summary": "Implements advanced cryptographic services for OpenSPP, enabling data encryption, decryption, digital signing, and signature verification for sensitive program information. It securely manages cryptographic keys in JWK format and distributes public keys via JWKS, facilitating secure inter-system verification and data integrity.",
 }

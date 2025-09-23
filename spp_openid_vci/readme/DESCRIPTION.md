@@ -1,44 +1,53 @@
-# OpenSPP OpenID VCI
+# OpenSPP Openid Vci
 
-## Overview
-
-The [spp_openid_vci](spp_openid_vci.md) module enhances the functionality of the OpenSPP platform by enabling the issuance of Verifiable Credentials (VCs) to registrants. These VCs, based on OpenID Connect for Verifiable Presentations (OpenID4VP) and Decentralized Identifiers (DIDs), provide a secure and verifiable way to represent claims about a registrant's identity or attributes. 
-
-This module builds upon the capabilities provided by several other modules, including [spp_encryption](spp_encryption.md), [g2p_openid_vci](g2p_openid_vci.md), [g2p_registry_base](g2p_registry_base.md), and [g2p_encryption_rest_api](g2p_encryption_rest_api.md), to offer a comprehensive VC issuance solution. 
+The `spp_openid_vci` module empowers the OpenSPP platform to issue and manage Verifiable Credentials (VCs) for program registrants. It leverages OpenID Connect for Verifiable Presentations (OpenID4VP) to provide secure, tamper-proof digital proofs of identity and program eligibility.
 
 ## Purpose
 
-This module aims to:
+This module equips OpenSPP with the capability to provide registrants with trusted digital credentials, streamlining verification processes and enhancing data security. It addresses the need for secure, standardized, and easily verifiable digital proofs within social protection programs.
 
-- **Issue Verifiable Credentials:** Generate and issue standardized VCs containing information drawn from the registry data. 
-- **Generate QR Codes:**  Create scannable QR codes that encode the issued VCs, allowing for easy verification using mobile devices.
-- **Provide a User Interface:** Offer an intuitive interface within the OpenSPP backend for managing VCI issuers and issuing VCs to registrants.
+Key capabilities include:
 
-## Role and Integration
+-   **Issue Verifiable Credentials (VCs):** Generate and issue secure digital credentials to individual registrants, representing claims about their identity or program eligibility.
+-   **Generate VC QR Codes:** Automatically create QR codes for each issued VC, enabling quick and secure digital sharing and verification by authorized parties.
+-   **Secure Credential Management:** Ensure the authenticity and integrity of VCs through robust digital signing and encryption, preventing tampering and fraud.
+-   **Integrate Registrant Data:** Seamlessly pull and incorporate relevant registrant data from the core OpenSPP registry into issued VCs.
+-   **Support Physical ID Cards:** Facilitate the printing of physical ID cards that include the digital VC QR code, bridging the gap between physical and digital identity.
 
-The [spp_openid_vci](spp_openid_vci.md) module relies on the foundational elements provided by its dependencies:
+This module's value lies in its ability to empower registrants with portable, verifiable digital identities, reducing administrative burdens and improving the efficiency and trustworthiness of social protection program operations. For example, a registrant can present a digital VC (via QR code) to prove eligibility for a food assistance program without needing physical documents.
 
-- **[spp_encryption](spp_encryption.md):** Leverages this module to digitally sign issued VCs, ensuring their authenticity and integrity.
-- **[g2p_openid_vci](g2p_openid_vci.md):**  Utilizes the core VC issuance logic and issuer management functionalities provided by this module.
-- **[g2p_registry_base](g2p_registry_base.md):**  Fetches the necessary registrant data (name, address, etc.) from this module to populate the claims within the VCs.
-- **[g2p_encryption_rest_api](g2p_encryption_rest_api.md):** This module is not directly utilized by [spp_openid_vci](spp_openid_vci.md) but is essential for external systems to interact with the encryption and VC verification mechanisms.
+## Dependencies and Integration
+
+The `spp_openid_vci` module is a crucial component that builds upon and extends several core OpenSPP modules to deliver comprehensive verifiable credential functionality.
+
+-   **[G2P OpenID VCI](g2p_openid_vci):** This module directly extends the core `g2p_openid_vci` module, inheriting its foundational logic for defining VCI issuers, credential types, and the underlying mechanisms for credential generation.
+-   **[G2P Openid Vci Rest Api](g2p_openid_vci_rest_api):** It integrates with this module to ensure that the credential issuance capabilities are exposed through a standardized RESTful API, allowing external digital wallets and applications to securely request and receive VCs.
+-   **[OpenSPP Encryption Module](spp_encryption) and [G2P Encryption REST API](g2p_encryption_rest_api):** `spp_openid_vci` relies on these modules to perform the cryptographic signing and encryption of Verifiable Credentials. This ensures the integrity, authenticity, and confidentiality of the issued VCs.
+-   **[G2P Registry Base](g2p_registry_base):** This module sources registrant data from `g2p_registry_base` (specifically `res.partner` records) to populate the claims within the Verifiable Credentials. It ensures VCs accurately reflect registered identities and attributes.
+-   **[OpenSPP User Roles](spp_user_roles):** It integrates with `spp_user_roles` to manage and restrict user permissions for issuing VCs and configuring related settings, ensuring that only authorized personnel can perform these sensitive operations.
+
+Together, these modules form a robust ecosystem where registrant data is securely transformed into verifiable digital credentials, accessible both within OpenSPP and to authorized external systems.
 
 ## Additional Functionality
 
-This module extends the capabilities of its dependencies by adding:
+The `spp_openid_vci` module introduces several key features to manage and issue verifiable credentials effectively.
 
-- **VC QR Code Generation:**  It generates and stores QR code representations of issued VCs, directly associating them with registrant records. 
-- **ID Card Template:** Includes a customizable ID card template that incorporates the VC QR code, providing a tangible representation of a registrant's verifiable credentials. 
-- **Issuance Wizard:** Introduces a user-friendly wizard within the registrant's profile to guide the VC issuance process. This wizard allows users to select the appropriate VCI issuer and generate the VC and corresponding QR code.
+### Streamlined Verifiable Credential Issuance
 
-## Example Usage Scenario:
+This module enables users to easily issue Verifiable Credentials (VCs) to individual registrants. The process links a registrant's unique identifier (e.g., National ID) with a configured VCI issuer, ensuring that the issued credential is tied to a verified identity. Upon successful issuance, the system generates the digital VC, containing relevant registrant data and secured by cryptographic signatures.
 
-1. **Configuration:**  An administrator configures a VCI issuer within the [g2p_openid_vci](g2p_openid_vci.md) module to represent their organization and defines the format and data fields for the VC, including the scope of the credential (e.g., proof of address).
-2. **Data Fetching:** When a user initiates the VC issuance process for a registrant, the module retrieves the relevant information from the registrant's profile managed by [g2p_registry_base](g2p_registry_base.md).
-3. **VC Generation and Signing:** The module leverages the [g2p_openid_vci](g2p_openid_vci.md) module to construct the VC, populating it with the fetched data. The VC is then digitally signed using the encryption provider configured in the [spp_encryption](spp_encryption.md) module.
-4. **QR Code Generation:** A QR code, encoding the signed VC, is generated. This QR code is then associated with the registrant's record.
-5. **ID Card Printing (Optional):** Users can opt to print an ID card for the registrant, which includes the generated QR code. This provides a physical credential that can be easily verified using a QR code scanner.
+### Automatic VC QR Code Generation
+
+For every Verifiable Credential issued, the module automatically generates a corresponding QR code. This QR code encapsulates the digital VC, making it highly portable and easy to share. The generated QR code is stored directly on the registrant's record, allowing for quick retrieval and presentation, for instance, during field verification or program access.
+
+### Integrated ID Card Printing
+
+The module facilitates the printing of physical ID cards that incorporate the digital Verifiable Credential. Each printed ID card includes the VC QR code, effectively bridging the gap between physical and digital identity. This feature ensures that registrants have a tangible proof of identity or eligibility while also carrying a digitally verifiable credential for enhanced security and convenience.
+
+### Enhanced Issuer Configuration and Security
+
+The module extends the core VCI issuer management to allow for more flexible configuration. It automatically retrieves public keys (JWKS) from all configured encryption providers, ensuring broader interoperability for verifying credentials. This enhancement strengthens the security posture and flexibility of the VCI system.
 
 ## Conclusion
 
-The [spp_openid_vci](spp_openid_vci) module enhances OpenSPP by providing a streamlined and user-friendly way to issue and manage Verifiable Credentials. By integrating seamlessly with other key modules, it enables organizations to leverage the power of VCs to enhance trust and streamline data sharing within their ecosystems and with external parties. 
+The `spp_openid_vci` module is essential for empowering OpenSPP with robust, secure digital credentialing capabilities, enabling efficient and trustworthy verification of registrant identities and program eligibility.

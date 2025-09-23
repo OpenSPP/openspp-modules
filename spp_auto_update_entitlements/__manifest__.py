@@ -1,9 +1,9 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Auto-Update Entitlements",
-    "summary": "Automatically updates entitlement states based on their redemption status at the end of program cycles in OpenSPP.",
+    "summary": "Automatically reviews and updates the state of entitlements based on their redemption status at the end of each program cycle. It assigns precise states, including a new 'Partially Redeemed' status, to ensure accurate records for program closure, reporting, and auditing.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

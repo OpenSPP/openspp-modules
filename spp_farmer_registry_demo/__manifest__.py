@@ -3,9 +3,9 @@
 
 {
     "name": "OpenSPP Farmer Registry Demo",
-    "summary": "Provides pre-populated demo data for the OpenSPP Farmer Registry, showcasing its features with realistic sample data.",
+    "summary": "Generates and populates the OpenSPP Farmer Registry with comprehensive, realistic sample data. It integrates with core registry models to provide diverse farmer profiles, farm details, and agricultural activities, facilitating system exploration, training, and testing.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

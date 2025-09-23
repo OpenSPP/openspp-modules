@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Custom Fields UI",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -16,5 +16,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides a user-friendly interface for defining and managing custom fields for registrants within the OpenSPP platform, allowing implementers to tailor data collection to program-specific needs.",
+    "summary": "The OpenSPP Custom Fields UI module provides a user interface for program implementers to define and manage custom data fields for registrants. It extends registrant profiles by associating custom data with individuals or groups, supporting program-specific indicators and calculated data points within the OpenSPP platform.",
 }

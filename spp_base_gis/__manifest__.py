@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Base GIS",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -31,9 +31,9 @@
     },
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
     "pre_init_hook": "init_postgis",
-    "summary": "Provides Geographical Information System (GIS) capabilities to OpenSPP, enabling visualization and interaction with geospatial data on maps, integrating with modules like Registries and Targeting & Eligibility for enhanced program management.",
+    "summary": "This module stores and organizes geospatial data, including points, lines, and polygons, for visualization on interactive maps. It enables spatial querying, custom map layer configuration, and integrates location awareness across OpenSPP modules for targeted program management.",
 }

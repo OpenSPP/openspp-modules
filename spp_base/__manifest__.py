@@ -4,7 +4,7 @@
 {
     "name": "OpenSPP Base",
     "category": "OpenSPP/OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -56,8 +56,8 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides essential configurations, UI customizations, and base functionalities for the OpenSPP system, including top-up card management and integration with other OpenSPP modules for areas, service points, programs, and custom fields.",
+    "summary": "Establishes core system settings and generates unique identifiers for records, enhancing registrant profiles with attributes like tags, gender, and type. The module also integrates Top-up Cards for identification and provides fundamental user interface elements with initial security configurations for user roles.",
 }

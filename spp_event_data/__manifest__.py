@@ -3,7 +3,7 @@
 {
     "name": "OpenSPP Event Data",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -29,7 +29,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
     "summary": "Records and tracks events related to individual and group registrants, providing a chronological history of changes and actions within the OpenSPP system.",

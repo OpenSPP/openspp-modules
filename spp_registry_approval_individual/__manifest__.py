@@ -3,7 +3,8 @@
 {
     "name": "OpenSPP Registry Approval: Individual",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
+    "summary": "Manages the validation and official status of individual registrants by extending the base registry approval process within social protection programs. It ensures individual beneficiary data undergoes a dedicated review workflow, applying core approval states to enhance data quality and enable precise program enrollment.",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -19,7 +20,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
 }

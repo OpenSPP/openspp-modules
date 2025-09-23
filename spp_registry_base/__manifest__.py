@@ -3,7 +3,8 @@
 {
     "name": "OpenSPP Registry: Base",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
+    "summary": "The module establishes the OpenSPP-specific foundation for managing individual beneficiaries and various group types. It extends core G2P Registry functionalities by providing specialized import templates and tools for efficient registrant data population.",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

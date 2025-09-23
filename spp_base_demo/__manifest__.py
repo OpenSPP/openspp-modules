@@ -2,7 +2,7 @@
 {
     "name": "OpenSPP Base Demo",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -19,8 +19,8 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides demonstration data for the OpenSPP system, including sample registrants, programs, and products to facilitate user exploration and training.",
+    "summary": "The OpenSPP Base Demo module populates the system with essential sample data, enabling immediate exploration and understanding of core functionalities. It includes diverse sample registrants, social protection programs, and products, providing foundational demo data while conforming to the g2p_registry_individual module's data models.",
 }

@@ -3,7 +3,8 @@
 {
     "name": "OpenSPP Registry Approval: Group",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
+    "summary": "Extending the OpenSPP registry's approval framework, this module enables formal validation and management of collective entity records. It integrates the existing workflow to ensure group data undergoes a structured review process, maintaining data integrity for program enrollment.",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -19,7 +20,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
 }

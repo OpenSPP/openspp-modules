@@ -1,9 +1,9 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 {
     "name": "OpenSPP Cash Entitlement",
-    "summary": "Manage cash-based entitlements for beneficiaries within social protection programs, including defining calculation rules, automating disbursement, and tracking payments.",
+    "summary": "OpenSPP Entitlement Cash establishes a framework for managing cash-based benefits within social protection programs, allowing administrators to define detailed calculation rules and automate the disbursement process. It automatically computes entitlements, manages payment validation workflows, and facilitates secure fund disbursement, incorporating financial controls and maintaining comprehensive audit trails.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

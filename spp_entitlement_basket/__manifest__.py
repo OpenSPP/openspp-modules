@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Entitlement Basket",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -21,5 +21,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "This module allows you to define baskets of goods and services that beneficiaries are entitled to receive, simplifying in-kind entitlement management within social protection programs.",
+    "summary": "The OpenSPP Entitlement Basket module enables program administrators to define and manage structured baskets of goods and services for beneficiary entitlements. It automates entitlement calculation, integrates with inventory management, and supports a controlled lifecycle with role-based validation for in-kind distributions.",
 }
