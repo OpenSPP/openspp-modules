@@ -1,6 +1,6 @@
 {
     "name": "OpenSPP Branding Kit",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.3.1",
     "summary": "Branding customization and telemetry management for OpenSPP",
     "description": """
         OpenSPP Branding Kit
@@ -24,6 +24,8 @@
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
     "category": "Theme/Backend",
+    "development_status": "Production/Stable",
+    "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "base",
         "web",
