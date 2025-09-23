@@ -13,8 +13,6 @@
         "mail",
         "g2p_registry_base",
         "g2p_registry_group",
-        "spp_area",
-        "spp_idqueue",
         "base_user_role",
     ],
     "data": [
@@ -23,7 +21,6 @@
         "data/local_roles.xml",
         "data/global_roles.xml",
         "data/ir_cron.xml",
-        "data/roles.xml",
         "views/role.xml",
         "views/user.xml",
     ],

@@ -1,0 +1,18 @@
+<odoo>
+
+    <record id="view_res_users_role_spp_area_form" model="ir.ui.view">
+        <field name="name">view_res_users_role_spp_area_form</field>
+        <field name="model">res.users.role</field>
+        <field name="inherit_id" ref="base_user_role.view_res_users_role_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='user_id']" position="after">
+                <field
+                    name="local_area_id"
+                    options="{'no_open':True,'no_create':True,'no_edit':True}"
+                    readonly="parent.role_type != 'local'"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

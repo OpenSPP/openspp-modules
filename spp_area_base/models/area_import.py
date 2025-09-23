@@ -4,6 +4,7 @@ import logging
 import math
 from io import BytesIO
 
+from openpyxl import load_workbook, workbook
 from xlrd import open_workbook
 
 from odoo import _, api, fields, models
@@ -121,7 +122,7 @@ class OpenSPPAreaImport(models.Model):
         for rec in self:
             rec.update({"state": self.UPLOADED})
 
-    def get_column_indexes(self, columns, area_level):
+    def get_column_indexes(self, columns, area_level, workbook_type):
         self.ensure_one()
         default_lang = self.env.context.get("lang", "en_US")
         if default_lang not in columns:
@@ -146,10 +147,13 @@ class OpenSPPAreaImport(models.Model):
         name_indexes = {}
         for name_header in name_headers:
             try:
-                name_indexes.update({name_header: columns.index(name_headers[name_header])})
+                if workbook_type == "xlrd":
+                    name_indexes.update({name_header: columns.index(name_headers[name_header])})
+                elif workbook_type == "openpyxl":
+                    name_indexes.update({name_header: columns.index(name_headers[name_header]) + 1})
             except ValueError as e:
                 _logger.warning("Column header not found: %s", e)
-        code_index = columns.index(code_header)
+        code_index = columns.index(code_header) + 1 if workbook_type == "openpyxl" else columns.index(code_header)
 
         # Get index of the Parent header of the area if area level is not 0
         parent_name_index = None
@@ -158,13 +162,23 @@ class OpenSPPAreaImport(models.Model):
             parent_name_header = f"{column_name_prefix[:3]}{area_level - 1}_{default_iso_code}"
             parent_code_header = f"{column_name_prefix[:3]}{area_level - 1}_PCODE"
 
-            parent_name_index = columns.index(parent_name_header)
-            parent_code_index = columns.index(parent_code_header)
+            parent_name_index = (
+                columns.index(parent_name_header) + 1
+                if workbook_type == "openpyxl"
+                else columns.index(parent_name_header)
+            )
+            parent_code_index = (
+                columns.index(parent_code_header) + 1
+                if workbook_type == "openpyxl"
+                else columns.index(parent_code_header)
+            )
 
         # Get area_sqkm column index
         area_sqkm_index = None
         if "AREA_SQKM" in columns:
-            area_sqkm_index = columns.index("AREA_SQKM")
+            area_sqkm_index = (
+                columns.index("AREA_SQKM") + 1 if workbook_type == "openpyxl" else columns.index("AREA_SQKM")
+            )
 
         return {
             "name_indexes": name_indexes,
@@ -174,7 +188,7 @@ class OpenSPPAreaImport(models.Model):
             "area_sqkm_index": area_sqkm_index,
         }
 
-    def get_area_vals(self, column_indexes, row, sheet, area_level):
+    def get_area_vals(self, column_indexes, row, sheet, area_level, workbook_type):
         self.ensure_one()
         default_lang = self.env.context.get("lang", "en_US")
         if default_lang not in column_indexes["name_indexes"]:
@@ -193,14 +207,21 @@ class OpenSPPAreaImport(models.Model):
         if column_indexes["parent_name_index"] is not None and column_indexes["parent_code_index"] is not None:
             vals["parent_name"] = sheet.cell(row, column_indexes["parent_name_index"]).value
             vals["parent_code"] = sheet.cell(row, column_indexes["parent_code_index"]).value
-
         return vals
+
+    def get_cell_value(self, sheet, row, col):
+        # openpyxl worksheet
+        # if isinstance(sheet, (Worksheet, ReadOnlyWorksheet)):
+        #     return sheet.cell(row=row+1, column=col+1).value
+        # else:
+        #     # xlrd sheet
+        return sheet.cell(row, col).value
 
     def create_import_raw(self, vals, column_indexes, row, sheet):
         self.ensure_one()
         import_raw_id = self.env[_area_import_raw_model].create(vals)
         for lang_code in column_indexes["name_indexes"]:
-            lang_name = sheet.cell(row, column_indexes["name_indexes"][lang_code]).value
+            lang_name = self.get_cell_value(sheet, row, column_indexes["name_indexes"][lang_code])
             import_raw_id.with_context(lang=lang_code).write(
                 {
                     "admin_name": lang_name,
@@ -214,7 +235,20 @@ class OpenSPPAreaImport(models.Model):
             inputx.write(base64.decodebytes(self.excel_file))
         except TypeError as e:
             raise ValidationError(_("ERROR: {}").format(e)) from e
-        return open_workbook(file_contents=inputx.getvalue())
+
+        # Try to open with openpyxl first for .xlsx files
+        try:
+            book = load_workbook(inputx, read_only=True)
+            return book
+        except Exception as e:
+            _logger.warning("Failed to open with openpyxl: %s", e)
+
+        # Fallback to xlrd for .xls files
+        try:
+            book = open_workbook(inputx)
+            return book
+        except Exception as e:
+            raise ValidationError(_("ERROR: {}").format(e)) from e
 
     def check_all_languages_activated(self, columns, area_level):
         """Check if all languages in the specified columns are activated.
@@ -242,40 +276,63 @@ class OpenSPPAreaImport(models.Model):
                         % lang.upper()
                     )
 
+    def get_sheet_openpyxl(self, book, name):
+        return book[name]
+
+    def get_columns_openpyxl(self, sheet):
+        return [cell.value for cell in next(sheet.iter_rows(min_row=1, max_row=1))]
+
+    def get_nrows_openpyxl(self, sheet):
+        # Counts only rows with any data, skipping header
+        return sum(1 for row in sheet.iter_rows(min_row=2, values_only=True) if any(row)) + 2
+
+    def get_sheet_xlrd(self, book, name):
+        return book.sheet_by_name(name)
+
+    def get_columns_xlrd(self, sheet):
+        return sheet.row_values(0)
+
+    def get_nrows_xlrd(sheet):
+        return sheet.nrows
+
     def import_data(self):
         self.ensure_one()
-
         _logger.info("Area Import: Started: %s" % fields.Datetime.now())
-        # Delete all existing import data for this record
-        # This can only be happen if the Area Upload record is reset back to Uploaded state
         if self.raw_data_ids:
             self.raw_data_ids.unlink()
-
         _logger.info("Area Import: Loading Excel File: %s" % fields.Datetime.now())
-        # Wrap binary to BytesIO
-
         book = self._get_book()
 
-        sheet_names = book.sheet_names()
+        # Detect workbook type
+        if isinstance(book, workbook.workbook.Workbook):
+            sheet_names = book.sheetnames
+            workbook_type = "openpyxl"
+        else:
+            sheet_names = book.sheet_names()
+            workbook_type = "xlrd"
+
         sheet_names.sort()
         self.locked = True
         self.locked_reason = _("Importing data.")
-
         jobs = []
 
         for area_level, sheet_name in enumerate(sheet_names):
-            sheet = book.sheet_by_name(sheet_name)
-            columns = sheet.row_values(0)
+            sheet = (
+                self.get_sheet_openpyxl(book, sheet_name)
+                if workbook_type == "openpyxl"
+                else self.get_sheet_xlrd(sheet_name)
+            )
+            columns = self.get_columns_openpyxl(sheet) if workbook_type == "openpyxl" else self.get_columns_xlrd(sheet)
             self.check_all_languages_activated(columns, area_level)
-            column_indexes = self.get_column_indexes(columns, area_level)
-
-            batches = math.ceil(sheet.nrows / 1000)
+            column_indexes = self.get_column_indexes(columns, area_level, workbook_type)
+            nrows = self.get_nrows_openpyxl(sheet) if workbook_type == "openpyxl" else self.get_nrows_xlrd(sheet)
+            batches = math.ceil(nrows / 1000)
             for i in range(batches):
-                if i == 0:
-                    start = 1
+                if workbook_type == "openpyxl":
+                    start = 2 if i == 0 else i * 1000
                 else:
-                    start = i * 1000
-                end = min((i + 1) * 1000, sheet.nrows)
+                    start = 1 if i == 0 else i * 1000
+                end = min((i + 1) * 1000, nrows)
                 jobs.append(
                     self.delayable(channel=_area_import_channel)._import_data(
                         sheet_name, column_indexes, start, end, area_level
@@ -283,7 +340,6 @@ class OpenSPPAreaImport(models.Model):
                 )
 
         main_job = group(*jobs)
-
         main_job.on_done(self.delayable(channel=_area_import_channel)._async_mark_done())
         main_job.delay()
 
@@ -295,10 +351,18 @@ class OpenSPPAreaImport(models.Model):
         self.ensure_one()
 
         book = self._get_book()
+        if isinstance(book, workbook.workbook.Workbook):
+            workbook_type = "openpyxl"
+        else:
+            workbook_type = "xlrd"
 
-        sheet = book.sheet_by_name(sheet_name)
+        sheet = (
+            self.get_sheet_openpyxl(book, sheet_name)
+            if workbook_type == "openpyxl"
+            else self.get_sheet_xlrd(sheet_name)
+        )
         for row in range(start, end):
-            import_raw_vals = self.get_area_vals(column_indexes, row, sheet, area_level)
+            import_raw_vals = self.get_area_vals(column_indexes, row, sheet, area_level, workbook_type)
             self.create_import_raw(import_raw_vals, column_indexes, row, sheet)
 
         self.update(

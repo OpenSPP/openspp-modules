@@ -3,7 +3,7 @@
 from odoo import api, models
 
 
-class AreaCustomSPPRole(models.Model):
+class SPPAreaCustom(models.Model):
     _inherit = "spp.area"
 
     @api.model

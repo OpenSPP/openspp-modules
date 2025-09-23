@@ -21,7 +21,7 @@ class ResPartnerTest(TransactionCase):
         """Helper to mock the center_area_ids as a recordset."""
         mock_recordset = self.env["spp.area"].browse([self.center_area_1.id])
         return patch(
-            "odoo.addons.spp_user_roles.models.user.ResUsersCustomSPP.center_area_ids",
+            "odoo.addons.spp_area.models.user.SPPUserCustom.center_area_ids",
             new_callable=lambda: mock_recordset,
         )
 
