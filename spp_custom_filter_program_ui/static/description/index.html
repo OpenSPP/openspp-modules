@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
-<title>OpenSPP Custom Filter UI</title>
+<title>OpenSPP Custom Filter Program UI</title>
 <style type="text/css">
 
 /*
@@ -371,11 +371,11 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_custom_filter_program_ui"><img alt="OpenSPP/openspp-modules" src="https://img.shields.io/badge/github-OpenSPP%2Fopenspp--modules-lightgray.png?logo=github" /></a></p>
 <div class="section" id="openspp-custom-filter-ui-1">
-<h1>OpenSPP Custom Filter UI</h1>
+<h1>OpenSPP Custom Filter Program UI</h1>
 <div class="section" id="overview">
 <h2>Overview</h2>
-<p>The <strong>SPP Custom Filter UI</strong> module customizes the user interface (UI)
-for filtering in specific OpenSPP modules, enhancing usability and
+<p>The <strong>SPP Custom Filter Program UI</strong> module customizes the user interface (UI)
+for filtering in the OpenSPP Programs module, enhancing usability and
 simplifying data management. It builds upon the
 <a class="reference external" href="spp_custom_filter">spp_custom_filter</a> module, which provides the
 underlying functionality for controlling which fields are displayed in
@@ -406,14 +406,9 @@ platform.</li>
 <ol class="arabic simple">
 <li><a class="reference external" href="spp_custom_filter">spp_custom_filter</a>: This module directly
 depends on the <strong>SPP Custom Filter</strong> module, inheriting its core
-functionality for managing the visibility of fields in filter
-dropdown menus. The <strong>SPP Custom Filter UI</strong> module leverages this
-capability to configure the UI for specific models.</li>
-<li><a class="reference external" href="g2p_registry_group">g2p_registry_group</a>: This module utilizes
-functionalities from the <strong>G2P Registry: Group</strong> module, particularly
-those related to managing groups of registrants. The UI
-customizations implemented by this module are relevant for filtering
-both individual and group registrants.</li>
+functionality for managing the visibility of fields in filter dropdown
+menus. The <strong>SPP Custom Filter Program UI</strong> module leverages this
+capability to configure the UI for the Programs module.</li>
 <li><a class="reference external" href="g2p_programs">g2p_programs</a>: The module interacts with the <strong>G2P
 Programs</strong> module to ensure that the filtering UI aligns with
 program-specific data and workflows. This integration is crucial for
@@ -423,27 +418,24 @@ protection programs.</li>
 </div>
 <div class="section" id="additional-functionality">
 <h2>Additional Functionality</h2>
-<p>The <strong>SPP Custom Filter UI</strong> module provides the following additional
+<p>The <strong>SPP Custom Filter Program UI</strong> module provides the following additional
 functionality:</p>
 <ul class="simple">
 <li><strong>UI Configuration for Res Partner</strong>: The module specifically
 customizes the filter UI for the <strong>Res Partner</strong> model, which is
-central to OpenSPP’s registrant management system. It selectively
+central to OpenSPP’s registrant management system within programs. It selectively
 enables the “Show on Custom Filter” option for relevant fields within
 this model, ensuring that only those fields appear in the filter
 dropdown menus.</li>
 <li><strong>Integration with OpenSPP Modules</strong>: The module’s UI configurations
-are designed to seamlessly integrate with the
-<a class="reference external" href="g2p_registry_group">g2p_registry_group</a> and
-[g2p_programs](g2p_registry_group](g2p_programs](g2p_registry_group)
-and [g2p_programs) modules. This ensures that the filtering
+are designed to seamlessly integrate with <a class="reference external" href="g2p_programs">g2p_programs</a>, ensuring that the filtering
 experience is consistent and user-friendly across different parts of
 the OpenSPP system.</li>
 </ul>
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion</h2>
-<p>The <strong>SPP Custom Filter UI</strong> module plays a crucial role in enhancing
+<p>The <strong>SPP Custom Filter Program UI</strong> module plays a crucial role in enhancing
 the usability and efficiency of the OpenSPP platform. By customizing the
 filtering UI for key models like <strong>Res Partner</strong>, the module simplifies
 data management tasks for users, particularly those working with
@@ -457,8 +449,8 @@ user-centric experience across the platform.</p>
 <h1>Bug Tracker</h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
-If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues/new?body=module:%20spp_custom_filter_ui%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+If you spotted it first, help us to smash it by providing detailed and welcomed feedback.</p>
+<a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues/new?body=module:%20spp_custom_filter_program_ui%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">

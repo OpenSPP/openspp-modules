@@ -292,7 +292,7 @@ class OpenSPPAreaImport(models.Model):
     def get_columns_xlrd(self, sheet):
         return sheet.row_values(0)
 
-    def get_nrows_xlrd(sheet):
+    def get_nrows_xlrd(self, sheet):
         return sheet.nrows
 
     def import_data(self):
@@ -320,7 +320,7 @@ class OpenSPPAreaImport(models.Model):
             sheet = (
                 self.get_sheet_openpyxl(book, sheet_name)
                 if workbook_type == "openpyxl"
-                else self.get_sheet_xlrd(sheet_name)
+                else self.get_sheet_xlrd(book, sheet_name)
             )
             columns = self.get_columns_openpyxl(sheet) if workbook_type == "openpyxl" else self.get_columns_xlrd(sheet)
             self.check_all_languages_activated(columns, area_level)
@@ -359,7 +359,7 @@ class OpenSPPAreaImport(models.Model):
         sheet = (
             self.get_sheet_openpyxl(book, sheet_name)
             if workbook_type == "openpyxl"
-            else self.get_sheet_xlrd(sheet_name)
+            else self.get_sheet_xlrd(book, sheet_name)
         )
         for row in range(start, end):
             import_raw_vals = self.get_area_vals(column_indexes, row, sheet, area_level, workbook_type)
