@@ -193,4 +193,5 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Update .pot files
         run: oca_export_and_push_pot https://x-access-token:${{ secrets.GIT_PUSH_TOKEN }}@github.com/${{ github.repository }}
-        if: ${{ matrix.makepot == 'true' && github.event_name == 'push' && github.repository_owner == 'openspp' }}
+        # Only update POT files when pushing to the canonical 17.0 branch in org repo.
+        if: ${{ matrix.makepot == 'true' && github.event_name == 'push' && github.repository_owner == 'openspp' && startsWith(github.ref, 'refs/heads/17.0') }}
