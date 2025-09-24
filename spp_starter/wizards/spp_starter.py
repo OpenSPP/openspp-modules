@@ -213,7 +213,7 @@ class SppStarter(models.TransientModel):
 
     def _install_spmis_base_modules(self, res):
         for module_name in [
-            "spp_base",
+            "spp_base_spmis",
             "spp_programs",
             "spp_change_request",
             "spp_change_request_change_info",

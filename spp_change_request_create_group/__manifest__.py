@@ -16,7 +16,7 @@
         "g2p_registry_membership",
         "spp_service_points",
         "spp_idpass",
-        "spp_base",
+        "spp_base_spmis",
     ],
     "excludes": [
         "spp_change_request_create_farm",

@@ -1,6 +1,6 @@
-============
-OpenSPP Base
-============
+==================
+OpenSPP SPMIS Base
+==================
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -17,15 +17,15 @@ OpenSPP Base
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OpenSPP%2Fopenspp--modules-lightgray.png?logo=github
-    :target: https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base
+    :target: https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base_spmis
     :alt: OpenSPP/openspp-modules
 
 |badge1| |badge2| |badge3|
 
-OpenSPP Base
+OpenSPP SPMIS Base
 ============
 
-This document outlines the functionality of the **OpenSPP Base** module,
+This document outlines the functionality of the **OpenSPP SPMIS Base** module,
 the core module for the OpenSPP system. It builds upon existing G2P
 Registry modules, providing essential customizations and configurations
 for OpenSPP's specialized functionalities.
@@ -33,7 +33,7 @@ for OpenSPP's specialized functionalities.
 Purpose
 -------
 
-The **OpenSPP Base** module serves as the foundation for other OpenSPP
+The **OpenSPP SPMIS Base** module serves as the foundation for other OpenSPP
 modules, offering:
 
 -  **Centralized configurations**: Provides essential settings and
@@ -46,7 +46,7 @@ modules, offering:
 Module Dependencies and Integration
 -----------------------------------
 
-The **OpenSPP Base** module depends on several other modules,
+The **OpenSPP SPMIS Base** module depends on several other modules,
 integrating their features and extending them for OpenSPP:
 
 -  `spp_idqueue <spp_idqueue>`__ : Leverages this module for managing ID
@@ -83,7 +83,7 @@ integrating their features and extending them for OpenSPP:
 Additional Functionality
 ------------------------
 
-The **OpenSPP Base** module introduces the following key
+The **OpenSPP SPMIS Base** module introduces the following key
 functionalities:
 
 -  **Top-up Card ID Type**: Adds a new ID type specifically for managing
@@ -102,7 +102,7 @@ functionalities:
 Conclusion
 ----------
 
-The **OpenSPP Base** module acts as the backbone of the OpenSPP system,
+The **OpenSPP SPMIS Base** module acts as the backbone of the OpenSPP system,
 integrating and extending the functionalities of its dependencies to
 create a cohesive and tailored platform. Its role in providing central
 configurations, UI modifications, and extension points makes it
@@ -120,7 +120,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OpenSPP/openspp-modules/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OpenSPP/openspp-modules/issues/new?body=module:%20spp_base%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OpenSPP/openspp-modules/issues/new?body=module:%20spp_base_spmis%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -144,11 +144,14 @@ Maintainers
 .. |maintainer-reichie020212| image:: https://github.com/reichie020212.png?size=40px
     :target: https://github.com/reichie020212
     :alt: reichie020212
+.. |maintainer-emjay0921| image:: https://github.com/emjay0921.png?size=40px
+    :target: https://github.com/emjay0921
+    :alt: emjay0921
 
 Current maintainers:
 
-|maintainer-jeremi| |maintainer-gonzalesedwin1123| |maintainer-reichie020212| 
+|maintainer-jeremi| |maintainer-gonzalesedwin1123| |maintainer-reichie020212| |maintainer-emjay0921|
 
-This module is part of the `OpenSPP/openspp-modules <https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base>`_ project on GitHub.
+This module is part of the `OpenSPP/openspp-modules <https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base_spmis>`_ project on GitHub.
 
 You are welcome to contribute.

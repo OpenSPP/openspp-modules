@@ -13,7 +13,7 @@ class TestTopUpID(TransactionCase):
     @mute_logger("py.warnings")
     def test_01_create_and_check_error(self):
         vals = {
-            "id_type": self.env.ref("spp_base.id_top_up_card").id,
+            "id_type": self.env.ref("spp_base_spmis.id_top_up_card").id,
             "card_uid": 123456789,
         }
         with self.assertRaisesRegex(ValidationError, "Top-up Card UID should have 10 characters"):

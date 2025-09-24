@@ -31,7 +31,7 @@ addon | summary
 [spp_audit_log](spp_audit_log/) | Provides audit logging functionality to track data changes and user actions within OpenSPP, enhancing transparency and accountability.
 [spp_audit_post](spp_audit_post/) | Enables posting of audit log messages to related parent records, providing a centralized view of changes across interconnected data in social protection programs.
 [spp_auto_update_entitlements](spp_auto_update_entitlements/) | Automatically updates entitlement states based on their redemption status at the end of program cycles in OpenSPP.
-[spp_base](spp_base/) | Provides essential configurations, UI customizations, and base functionalities for the OpenSPP system, including top-up card management and integration with other OpenSPP modules for areas, service points, programs, and custom fields.
+[spp_base_spmis](spp_base_spmis/) | Provides essential configurations, UI customizations, and base functionalities for the OpenSPP system, including top-up card management and integration with other OpenSPP modules for areas, service points, programs, and custom fields.
 [spp_base_api](spp_base_api/) | Provides foundational API functions and methods for seamless interaction with the OpenSPP system, enabling data exchange via APIs or XML-RPC.
 [spp_base_demo](spp_base_demo/) | Provides demonstration data for the OpenSPP system, including sample registrants, programs, and products to facilitate user exploration and training.
 [spp_base_gis](spp_base_gis/) | Provides Geographical Information System (GIS) capabilities to OpenSPP, enabling visualization and interaction with geospatial data on maps, integrating with modules like Registries and Targeting & Eligibility for enhanced program management.

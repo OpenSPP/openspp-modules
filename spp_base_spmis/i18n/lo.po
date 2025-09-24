@@ -1,0 +1,85 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_base_spmis
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: lo\n"
+
+#. module: spp_base_spmis
+#: model:ir.model.fields,field_description:spp_base_spmis.field_g2p_reg_id__card_uid
+msgid "Card UID"
+msgstr ""
+
+#. module: spp_base_spmis
+#: model:ir.model,name:spp_base_spmis.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: spp_base_spmis
+#: model:ir.model.fields,field_description:spp_base_spmis.field_g2p_group_membership__individual_gender
+#: model:ir.model.fields,field_description:spp_base_spmis.field_g2p_program_membership__gender
+#: model:ir.model.fields,field_description:spp_base_spmis.field_res_partner__gender
+#: model:ir.model.fields,field_description:spp_base_spmis.field_res_users__gender
+#: model:ir.model.fields,field_description:spp_base_spmis.field_spp_attendance_subscriber__gender
+msgid "Gender"
+msgstr ""
+
+#. module: spp_base_spmis
+#: model:ir.model,name:spp_base_spmis.model_g2p_group_membership
+msgid "Group Membership"
+msgstr ""
+
+#. module: spp_base_spmis
+#: model:ir.model,name:spp_base_spmis.model_g2p_reg_id
+msgid "Registrant ID"
+msgstr ""
+
+#. module: spp_base_spmis
+#: model:ir.model.fields,field_description:spp_base_spmis.field_g2p_program_membership__tags_ids
+#: model:ir.model.fields,field_description:spp_base_spmis.field_res_partner__tags_ids
+#: model:ir.model.fields,field_description:spp_base_spmis.field_res_users__tags_ids
+#: model:ir.model.fields,field_description:spp_base_spmis.field_spp_attendance_subscriber__tags_ids
+msgid "Registrant Tags"
+msgstr ""
+
+#. module: spp_base_spmis
+#: model:ir.model.fields,field_description:spp_base_spmis.field_g2p_program_membership__kind_as_str
+#: model:ir.model.fields,field_description:spp_base_spmis.field_res_partner__kind_as_str
+#: model:ir.model.fields,field_description:spp_base_spmis.field_res_users__kind_as_str
+#: model:ir.model.fields,field_description:spp_base_spmis.field_spp_attendance_subscriber__kind_as_str
+msgid "String Kind"
+msgstr ""
+
+#. module: spp_base_spmis
+#. odoo-python
+#: code:addons/spp_base/models/reg_id.py:0
+#, python-format
+msgid "Top-up Card UID should have 10 characters"
+msgstr ""
+
+#. module: spp_base_spmis
+#: model:ir.model,name:spp_base_spmis.model_spp_unique_id
+#: model:ir.model.fields,field_description:spp_base_spmis.field_spp_unique_id__spp_id
+msgid "Unique ID"
+msgstr ""
+
+#. module: spp_base_spmis
+#. odoo-python
+#: code:addons/spp_base/models/spp_unique_id.py:0
+#, python-format
+msgid "Unique ID is not following correct format!"
+msgstr ""
+
+#. module: spp_base_spmis
+#: model:ir.model.constraint,message:spp_base_spmis.constraint_spp_unique_id_spp_id_uniq
+msgid "spp_id is an unique identifier!"
+msgstr ""

@@ -16,7 +16,7 @@
         "spp_farmer_registry_base",
     ],
     "excludes": [
-        "spp_base",
+        "spp_base_spmis",
     ],
     "data": [
         "views/group_view.xml",

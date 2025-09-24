@@ -11,7 +11,7 @@
     "development_status": "Production/Stable",
     "maintainers": ["reichie020212"],
     "depends": [
-        "spp_registry_base",
+        "spp_base_common",
     ],
     "data": [
         "security/security_access.xml",

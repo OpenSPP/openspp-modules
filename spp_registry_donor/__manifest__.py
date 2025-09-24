@@ -14,7 +14,7 @@
     "depends": [
         "base",
         "g2p_registry_base",
-        "spp_registry_base",
+        "spp_base_common",
         "spp_user_roles",
     ],
     "data": [

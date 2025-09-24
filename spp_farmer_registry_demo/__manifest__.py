@@ -23,7 +23,7 @@
         "spp_custom_filter_farmer_registry",
     ],
     "excludes": [
-        "spp_base",
+        "spp_base_spmis",
     ],
     "data": [
         "security/ir.model.access.csv",

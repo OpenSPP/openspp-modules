@@ -20,7 +20,7 @@
         "spp_idpass",
     ],
     "excludes": [
-        "spp_base",
+        "spp_base_spmis",
         "spp_change_request_create_group",
     ],
     "data": [

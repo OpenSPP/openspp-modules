@@ -23,7 +23,7 @@
         "spreadsheet_dashboard",
     ],
     "excludes": [
-        "spp_base",
+        "spp_base_spmis",
     ],
     "data": [
         "security/ir.model.access.csv",

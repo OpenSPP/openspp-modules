@@ -14,7 +14,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "base",
-        "spp_registry_base",
+        "spp_base_common",
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_registry_group",
@@ -25,7 +25,7 @@
         "base_import",
     ],
     "excludes": [
-        "spp_base",
+        "spp_base_spmis",
     ],
     "external_dependencies": {"python": ["shapely", "geojson", "simplejson", "pyproj"]},
     "data": [

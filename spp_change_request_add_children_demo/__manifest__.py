@@ -10,7 +10,7 @@
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
-        "spp_base",
+        "spp_base_spmis",
         "spp_change_request",
         "g2p_registry_base",
         "g2p_registry_individual",

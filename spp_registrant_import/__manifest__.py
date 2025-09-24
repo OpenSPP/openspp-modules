@@ -11,8 +11,8 @@
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123", "nhatnm0612"],
     "depends": [
-        "spp_registry_base",
-        "spp_base",
+        "spp_base_common",
+        "spp_base_spmis",
         "spp_area_base",
     ],
     "excludes": [
