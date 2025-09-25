@@ -66,6 +66,10 @@ class IrModuleModule(models.Model):
             "menu_xml_id": "utm.menu_link_tracker_root",
             "icon": "spp_base_common,static/description/OpenSPP-Icons-Menu-Link-Tracker.png",
         },
+        "fastapi": {
+            "menu_xml_id": "fastapi.menu_fastapi_root",
+            "icon": "spp_base_common,static/description/icon-fast-api.png",
+        },
     }
 
     def update_menu_icons(self):
