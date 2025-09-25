@@ -42,6 +42,30 @@ class IrModuleModule(models.Model):
             "menu_xml_id": "hr.menu_hr_root",
             "icon": "spp_base_common,static/description/icon-Employees-White-line.png",
         },
+        "calendars": {
+            "menu_xml_id": "calendar.mail_menu_calendar",
+            "icon": "spp_base_common,static/description/OpenSPP-Icons-Menu-Calendar.png",
+        },
+        "contacts": {
+            "menu_xml_id": "contacts.menu_contacts",
+            "icon": "spp_base_common,static/description/OpenSPP-Icons-Menu-Contacts.png",
+        },
+        "account": {
+            "menu_xml_id": "account.menu_finance",
+            "icon": "spp_base_common,static/description/OpenSPP-Icons-Menu-Invoicing.png",
+        },
+        "event": {
+            "menu_xml_id": "event.event_main_menu",
+            "icon": "spp_base_common,static/description/OpenSPP-Icons-Menu-Events.png",
+        },
+        "stock": {
+            "menu_xml_id": "stock.menu_stock_root",
+            "icon": "spp_base_common,static/description/OpenSPP-Icons-Menu-Inventory.png",
+        },
+        "utm": {
+            "menu_xml_id": "utm.menu_link_tracker_root",
+            "icon": "spp_base_common,static/description/OpenSPP-Icons-Menu-Link-Tracker.png",
+        },
     }
 
     def update_menu_icons(self):
