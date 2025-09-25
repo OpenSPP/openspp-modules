@@ -27,7 +27,7 @@
         "spp_entitlement_cash",
         "spp_entitlement_in_kind",
         "spp_ent_trans",
-        # "spp_openid_vci_individual",
+        "spp_openid_vci_individual",
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_registry_group",
@@ -39,7 +39,7 @@
     "external_dependencies": {
         "python": [
             "fastapi==0.112.2",
-            "ujson==1.35",
+            "ujson==5.11.0",
             "extendable_pydantic==1.3.0",
             "numpy>=1.22.2",
             "urllib3>=1.26.5",

@@ -19,7 +19,7 @@ requests>=2.25.1
 shapely
 simplejson
 swagger_spec_validator
-ujson==1.35
+ujson==5.11.0
 urllib3>=1.26.5
 xlrd
 zipp>=3.19.1

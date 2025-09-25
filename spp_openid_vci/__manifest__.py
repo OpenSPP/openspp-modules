@@ -16,7 +16,13 @@
         "g2p_openid_vci_rest_api",
         "spp_user_roles",
     ],
-    "external_dependencies": {"python": ["qrcode"]},
+    "external_dependencies": {
+        "python": [
+            "qrcode",
+            "fastapi==0.112.2",
+            "ujson==5.11.0",
+        ]
+    },
     "data": [
         "security/security_access.xml",
         "security/security_user_roles.xml",
