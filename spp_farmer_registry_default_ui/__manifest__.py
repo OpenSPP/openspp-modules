@@ -13,7 +13,7 @@
     "development_status": "Production/Stable",
     "maintainers": ["reichie020212"],
     "depends": [
-        "spp_farmer_registry_base",
+        "spp_base_farmer_registry",
     ],
     "excludes": [
         "spp_base_spmis",

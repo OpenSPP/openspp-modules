@@ -61,7 +61,7 @@ Module Dependencies and Integration
     dropdown menus. The **SPP Custom Filter Farmer Registry** module leverages this capability
     to configure the UI for specific models.
 
-2. `spp_farmer_registry_base <spp_farmer_registry_base>`__: The module interacts with the
+2. `spp_base_farmer_registry <spp_base_farmer_registry>`__: The module interacts with the
     **OpenSPP Farmer Registry Base** module
 
 Additional Functionality

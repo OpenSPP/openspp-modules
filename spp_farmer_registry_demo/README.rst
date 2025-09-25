@@ -31,7 +31,7 @@ Overview
 The `spp_farmer_registry_demo <spp_farmer_registry_demo>`__ module is a
 demonstration module for OpenSPP that provides pre-populated data for
 the farmer registry. It builds upon the
-`spp_farmer_registry_base <spp_farmer_registry_base>`__ module and its
+`spp_base_farmer_registry <spp_base_farmer_registry>`__ module and its
 dependencies to showcase the functionalities of the farmer registry with
 realistic sample data.
 
@@ -52,9 +52,9 @@ This module aims to:
 Module Dependencies and Integration
 -----------------------------------
 
--  `spp_farmer_registry_base <spp_farmer_registry_base>`__\ **:** This
+-  `spp_base_farmer_registry <spp_base_farmer_registry>`__\ **:** This
    module depends heavily on
-   `spp_farmer_registry_base <spp_farmer_registry_base>`__, inheriting
+   `spp_base_farmer_registry <spp_base_farmer_registry>`__, inheriting
    its models and views to extend them with demo data generation
    capabilities.
 -  `g2p_registry_membership <g2p_registry_membership>`__\ **:**
@@ -116,7 +116,7 @@ introduces the following key functionalities:
 
 -  **GIS Integration:** The demo data integrates with the GIS
    functionalities of
-   `spp_farmer_registry_base <spp_farmer_registry_base>`__ to visualize
+   `spp_base_farmer_registry <spp_base_farmer_registry>`__ to visualize
    the generated farms and land parcels on a map, providing a visual
    representation of the farmer registry.
 

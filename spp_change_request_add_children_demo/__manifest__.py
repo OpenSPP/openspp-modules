@@ -20,7 +20,7 @@
         "spp_idpass",
     ],
     "excludes": [
-        "spp_farmer_registry_base",
+        "spp_base_farmer_registry",
     ],
     "data": [
         "security/change_request_security.xml",

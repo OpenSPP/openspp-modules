@@ -34,7 +34,7 @@
         "g2p_registry_membership",
     ],
     "excludes": [
-        "spp_farmer_registry_base",
+        "spp_base_farmer_registry",
     ],
     "external_dependencies": {
         "python": [

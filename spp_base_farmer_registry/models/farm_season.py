@@ -74,7 +74,7 @@ class SPPFarmSeason(models.Model):
     @api.depends("state")
     def _compute_access_rights(self):
         """Compute access rights based on user and state"""
-        is_manager = self.env.user.has_group("spp_farmer_registry_base.group_spp_farm_manager")
+        is_manager = self.env.user.has_group("spp_base_farmer_registry.group_spp_farm_manager")
         for record in self:
             record.can_edit = is_manager and record.state != "closed"
             record.can_activate = is_manager and record.state == "draft"
@@ -213,7 +213,7 @@ class SPPFarmSeason(models.Model):
     @api.model
     def create(self, vals):
         """Override create to implement creation access control"""
-        if not self.env.user.has_group("spp_farmer_registry_base.group_spp_farm_manager"):
+        if not self.env.user.has_group("spp_base_farmer_registry.group_spp_farm_manager"):
             raise ValidationError(_("Only managers can create seasons"))
         return super().create(vals)
 

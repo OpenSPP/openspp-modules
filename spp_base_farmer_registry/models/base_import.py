@@ -18,7 +18,7 @@ class SPPBaseImport(models.TransientModel):
                 if self.env.context["default_is_group"]:
                     with_is_group = True
             if "default_kind" in self.env.context:
-                if self.env.context["default_kind"] == self.env.ref("spp_farmer_registry_base.kind_farm").id:
+                if self.env.context["default_kind"] == self.env.ref("spp_base_farmer_registry.kind_farm").id:
                     with_is_group = True
                 else:
                     with_is_group = False

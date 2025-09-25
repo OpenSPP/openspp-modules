@@ -66,7 +66,7 @@ addon | summary
 [spp_event_data_program_membership](spp_event_data_program_membership/) | This module allows users to record and track program membership-related events, such as enrollment, suspension, or exit, and link them to specific program membership records within OpenSPP.
 [spp_event_demo](spp_event_demo/) | Provides demonstration data and functionalities for the OpenSPP event tracking system, showcasing practical applications through predefined event types, data models, views, and wizards.
 [spp_exclusion_filter](spp_exclusion_filter/) | This module enhances the OpenSPP program creation process by enabling the configuration and application of exclusion filters, ensuring that only eligible registrants are considered for enrollment in new programs.
-[spp_farmer_registry_base](spp_farmer_registry_base/) | Base module for managing farmer registries, linking farmers to farms, land, and agricultural activities.
+[spp_base_farmer_registry](spp_base_farmer_registry/) | Base module for managing farmer registries, linking farmers to farms, land, and agricultural activities.
 [spp_farmer_registry_dashboard](spp_farmer_registry_dashboard/) | Provides interactive dashboards and reports for visualizing data from the OpenSPP Farmer Registry, offering insights into key metrics and trends related to registered farmers.
 [spp_farmer_registry_demo](spp_farmer_registry_demo/) | Provides pre-populated demo data for the OpenSPP Farmer Registry, showcasing its features with realistic sample data.
 [spp_idpass](spp_idpass/) | ID PASS

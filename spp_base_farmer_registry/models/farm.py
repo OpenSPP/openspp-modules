@@ -72,7 +72,7 @@ class Farm(models.Model):
                 (
                     "id_type",
                     "=",
-                    self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                    self.env.ref("spp_base_farmer_registry.id_type_national_id").id,
                 ),
             ]
         )
@@ -242,7 +242,7 @@ class Farm(models.Model):
                     (
                         "id_type",
                         "=",
-                        self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                        self.env.ref("spp_base_farmer_registry.id_type_national_id").id,
                     ),
                 ]
             )
@@ -253,14 +253,14 @@ class Farm(models.Model):
                         (
                             "id_type",
                             "=",
-                            self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                            self.env.ref("spp_base_farmer_registry.id_type_national_id").id,
                         ),
                     ]
                 )
                 id_vals = {
                     "partner_id": individual_id,
                     "value": national_id,
-                    "id_type": self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                    "id_type": self.env.ref("spp_base_farmer_registry.id_type_national_id").id,
                 }
                 if existing_national_id:
                     existing_national_id.write(id_vals)
@@ -287,7 +287,7 @@ class Farm(models.Model):
                 (
                     "id_type",
                     "=",
-                    self.env.ref("spp_farmer_registry_base.id_type_national_id").id,
+                    self.env.ref("spp_base_farmer_registry.id_type_national_id").id,
                 ),
             ],
             limit=1,

@@ -13,7 +13,7 @@ class TestSPPFarmSeason(TransactionCase):
             {
                 "name": "Farm User",
                 "login": "farm_user",
-                "groups_id": [(4, cls.env.ref("spp_farmer_registry_base.group_spp_farm_user").id)],
+                "groups_id": [(4, cls.env.ref("spp_base_farmer_registry.group_spp_farm_user").id)],
             }
         )
 
@@ -21,7 +21,7 @@ class TestSPPFarmSeason(TransactionCase):
             {
                 "name": "Farm Manager",
                 "login": "farm_manager",
-                "groups_id": [(4, cls.env.ref("spp_farmer_registry_base.group_spp_farm_manager").id)],
+                "groups_id": [(4, cls.env.ref("spp_base_farmer_registry.group_spp_farm_manager").id)],
             }
         )
 

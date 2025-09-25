@@ -14,11 +14,11 @@ This module aims to:
 
 ## Module Dependencies and Integration
 
-* **[spp_farmer_registry_base](spp_farmer_registry_base)** : The dashboard module heavily relies on the data models and functionalities provided by [spp_farmer_registry_base](spp_farmer_registry_base). It fetches data about farmers, farm groups, land records, agricultural activities, and other relevant information from this core module.
+* **[spp_base_farmer_registry](spp_base_farmer_registry)** : The dashboard module heavily relies on the data models and functionalities provided by [spp_base_farmer_registry](spp_base_farmer_registry). It fetches data about farmers, farm groups, land records, agricultural activities, and other relevant information from this core module.
 * **[g2p_registry_membership](g2p_registry_membership)** : Utilizes this module to display data related to group memberships, such as the number of farmers belonging to different types of farmer groups. 
 * **[spp_farmer_registry_demo](spp_farmer_registry_demo)** :  While not a strict dependency, the dashboard module is particularly useful when used in conjunction with [spp_farmer_registry_demo](spp_farmer_registry_demo). The demo data provides a rich dataset for the dashboards to visualize, showcasing the module's capabilities.
 * **spreadsheet_dashboard**: Leverages the `spreadsheet_dashboard` module to create dynamic and interactive dashboards. This dependency provides the framework for embedding charts and graphs directly within the Odoo interface.
-* **[g2p_registry_base](g2p_registry_base)** :  Indirectly depends on this module through its reliance on [spp_farmer_registry_base](spp_farmer_registry_base).  The core registrant data structures and relationships defined in [g2p_registry_base](g2p_registry_base) are essential for the dashboard's functionality.
+* **[g2p_registry_base](g2p_registry_base)** :  Indirectly depends on this module through its reliance on [spp_base_farmer_registry](spp_base_farmer_registry).  The core registrant data structures and relationships defined in [g2p_registry_base](g2p_registry_base) are essential for the dashboard's functionality.
 * **[g2p_registry_group](g2p_registry_group)** :  Utilized indirectly to access and display information about different types of farmer groups, which are defined and managed by this module.
 * **[g2p_registry_individual](g2p_registry_individual)** : Also indirectly relied upon to access and visualize data related to individual farmers, such as their demographic information and registration details. 
 

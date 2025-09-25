@@ -16,7 +16,7 @@
         "spp_area_base",
     ],
     "excludes": [
-        "spp_farmer_registry_base",
+        "spp_base_farmer_registry",
     ],
     "data": [
         "views/res_partner_views.xml",

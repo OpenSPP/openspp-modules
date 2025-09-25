@@ -98,7 +98,7 @@ class ChangeRequestEditFarm(models.Model):
     group_kind = fields.Many2one(
         "g2p.group.kind",
         string="Group Kind",
-        default=lambda self: self.env.ref("spp_farmer_registry_base.kind_farm", raise_if_not_found=False),
+        default=lambda self: self.env.ref("spp_base_farmer_registry.kind_farm", raise_if_not_found=False),
     )
     farm_crop_act_ids = fields.One2many(FARM_ACTIVITY, "crop_cr_edit_farm_id", string="Crop Agricultural Activities")
     farm_live_act_ids = fields.One2many(

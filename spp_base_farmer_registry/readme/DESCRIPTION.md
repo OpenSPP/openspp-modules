@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `spp_farmer_registry_base` module serves as the foundation for managing farmer registries within the OpenSPP system. It builds upon several core OpenSPP modules to provide functionalities specific to farmer registration and farm data management. 
+The `spp_base_farmer_registry` module serves as the foundation for managing farmer registries within the OpenSPP system. It builds upon several core OpenSPP modules to provide functionalities specific to farmer registration and farm data management. 
 
 ## Purpose
 
@@ -59,4 +59,4 @@ This module aims to:
 
 ## Conclusion
 
-The `spp_farmer_registry_base` module, through its integration with various other OpenSPP modules, provides a comprehensive system for creating and managing detailed farmer registries.  It not only facilitates the collection of essential farmer and farm data but also enables spatial analysis and visualization, making it a powerful tool for agricultural development programs and initiatives. 
+The `spp_base_farmer_registry` module, through its integration with various other OpenSPP modules, provides a comprehensive system for creating and managing detailed farmer registries.  It not only facilitates the collection of essential farmer and farm data but also enables spatial analysis and visualization, making it a powerful tool for agricultural development programs and initiatives. 

@@ -18,7 +18,7 @@
         "g2p_registry_individual",
         "g2p_registry_group",
         "g2p_registry_membership",
-        "spp_farmer_registry_base",
+        "spp_base_farmer_registry",
         "spp_farmer_registry_demo",
         "spreadsheet_dashboard",
     ],

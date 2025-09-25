@@ -16,7 +16,7 @@
     "depends": [
         "base",
         "g2p_registry_base",
-        "spp_farmer_registry_base",
+        "spp_base_farmer_registry",
         "spp_farmer_registry_default_ui",
         "spp_base_demo",
         "queue_job",
