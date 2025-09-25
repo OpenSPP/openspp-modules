@@ -42,7 +42,7 @@ class IrModuleModule(models.Model):
             "menu_xml_id": "hr.menu_hr_root",
             "icon": "spp_base_common,static/description/icon-Employees-White-line.png",
         },
-        "calendars": {
+        "calendar": {
             "menu_xml_id": "calendar.mail_menu_calendar",
             "icon": "spp_base_common,static/description/OpenSPP-Icons-Menu-Calendar.png",
         },
