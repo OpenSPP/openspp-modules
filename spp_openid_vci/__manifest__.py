@@ -20,7 +20,7 @@
         "python": [
             "qrcode",
             "fastapi==0.112.2",
-            "ujson==5.4.0",
+            "ujson>=5.4.0",
         ]
     },
     "data": [
