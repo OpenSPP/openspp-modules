@@ -16,9 +16,6 @@ class IrModuleModule(models.Model):
         "mail": {
             "menu_xml_id": "mail.menu_root_discuss",
         },
-        "queue_job": {
-            "menu_xml_id": "queue_job.menu_queue_job_root",
-        },
         "spreadsheet_dashboard": {
             "menu_xml_id": "spreadsheet_dashboard.spreadsheet_dashboard_menu_root",
         },
