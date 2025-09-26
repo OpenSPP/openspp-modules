@@ -3,7 +3,7 @@
     <record id="view_farm_groups_form" model="ir.ui.view">
         <field name="name">view_farm_groups_form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="spp_farmer_registry_default_ui.view_farm_groups_form" />
+        <field name="inherit_id" ref="spp_base_farmer_registry.view_farm_groups_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[@name='div_land_name']" position="before">
                 <div class="col-12 o_setting_box" name="div_lease_agreement_number">

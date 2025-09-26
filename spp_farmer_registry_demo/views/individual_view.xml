@@ -3,7 +3,7 @@
     <record id="view_farm_individual_form" model="ir.ui.view">
         <field name="name">view_farm_individual_form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="spp_farmer_registry_default_ui.view_farm_individual_form" />
+        <field name="inherit_id" ref="spp_base_farmer_registry.view_farm_individual_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[@name='div_birthdate']" position="inside">
                 <div class="col-6 o_setting_box" name="div_household_size">
