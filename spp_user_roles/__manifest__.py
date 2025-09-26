@@ -12,7 +12,6 @@
         "base",
         "mail",
         "g2p_registry_base",
-        "g2p_registry_group",
         "base_user_role",
     ],
     "data": [

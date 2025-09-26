@@ -35,6 +35,7 @@
     ],
     "excludes": [
         "spp_base_farmer_registry",
+        "spp_base_social_registry",
     ],
     "external_dependencies": {
         "python": [
