@@ -40,7 +40,7 @@
     "external_dependencies": {
         "python": [
             "fastapi==0.112.2",
-            "ujson>=1.35",
+            "ujson==5.4.0",
             "extendable_pydantic==1.3.0",
             "numpy>=1.22.2",
             "urllib3>=1.26.5",
