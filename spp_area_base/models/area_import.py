@@ -233,12 +233,12 @@ class OpenSPPAreaImport(models.Model):
         try:
             inputx = BytesIO()
             inputx.write(base64.decodebytes(self.excel_file))
-            inputx.seek(0)
         except TypeError as e:
             raise ValidationError(_("ERROR: {}").format(e)) from e
 
         filename = self.name.lower()
         if filename.endswith(".xlsx"):
+            _logger.info("Opening .xlsx file: %s", filename)
             # Try to open with openpyxl first for .xlsx files
             try:
                 book = load_workbook(inputx, read_only=True)
@@ -248,6 +248,7 @@ class OpenSPPAreaImport(models.Model):
 
         if filename.endswith(".xls"):
             # Fallback to xlrd for .xls files
+            _logger.info("Opening .xls file: %s", filename)
             try:
                 book = open_workbook(inputx)
                 return book
