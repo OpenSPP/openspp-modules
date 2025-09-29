@@ -1,525 +1,456 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/">
 <title>OpenSPP Farmer Registry Base</title>
-<style type="text/css">
+<style>
+/* Core Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/*
-:Author: David Goodger (goodger@python.org)
-:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
-:Copyright: This stylesheet has been placed in the public domain.
+body {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.65;
+  color: #2c3e50;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
 
-Default cascading style sheet for the HTML output of Docutils.
-Despite the name, some widely supported CSS2 features are used.
+.document {
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
 
-See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
-customize this style sheet.
-*/
+/* Page Title */
+h1.title {
+  text-align: center;
+  color: #1a202c;
+  font-size: 2.8em;
+  margin-bottom: 1.2em;
+  border-bottom: 4px solid #48bb78;
+  padding-bottom: 0.6em;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
 
-/* used to remove borders from tables and images */
-.borderless, table.borderless td, table.borderless th {
-  border: 0 }
+/* Section Headings */
+h1 {
+  color: #1a202c;
+  font-size: 2.2em;
+  margin: 2em 0 0.8em 0;
+  font-weight: 600;
+}
 
-table.borderless td, table.borderless th {
-  /* Override padding for "table.docutils td" with "! important".
-     The right padding separates the table cells. */
-  padding: 0 0.5em 0 0 ! important }
+h2 {
+  color: #2d3748;
+  font-size: 1.6em;
+  margin: 1.5em 0 0.7em 0;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.4em;
+  font-weight: 600;
+}
+
+/* Paragraph Styling */
+p {
+  margin: 1.2em 0;
+  text-align: justify;
+  line-height: 1.7;
+}
 
 .first {
-  /* Override more specific margin styles with "! important". */
-  margin-top: 0 ! important }
+  margin-top: 0 !important;
+}
 
-.last, .with-subtitle {
-  margin-bottom: 0 ! important }
+.last {
+  margin-bottom: 0 !important;
+}
 
-.hidden {
-  display: none }
+/* Hyperlinks */
+a {
+  color: #48bb78;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
 
-.subscript {
-  vertical-align: sub;
-  font-size: smaller }
+a:hover {
+  color: #38a169;
+  border-bottom-color: #38a169;
+}
 
-.superscript {
-  vertical-align: super;
-  font-size: smaller }
+a.reference.external {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
 
-a.toc-backref {
-  text-decoration: none ;
-  color: black }
+/* Badge Images */
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border-radius: 4px;
+}
 
-blockquote.epigraph {
-  margin: 2em 5em ; }
+img.align-left {
+  float: left;
+  margin: 0 1.5em 1em 0;
+  clear: left;
+}
 
-dl.docutils dd {
-  margin-bottom: 0.5em }
+img.align-right {
+  float: right;
+  margin: 0 0 1em 1.5em;
+  clear: right;
+}
 
-object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+img.align-center {
+  display: block;
+  margin: 1em auto;
+}
+
+img[alt*="jeremi"],
+img[alt*="gonzalesedwin1123"],
+img[alt*="reichie020212"] {
+  border-radius: 50%;
+  margin: 0 8px;
+  transition: transform 0.2s ease;
+}
+
+img[alt*="jeremi"]:hover,
+img[alt*="gonzalesedwin1123"]:hover,
+img[alt*="reichie020212"]:hover {
+  transform: scale(1.1);
+}
+
+/* List Formatting */
+ul, ol {
+  margin: 1.2em 0;
+  padding-left: 2.5em;
+}
+
+ul.simple li,
+ol.simple li {
+  margin: 0.6em 0;
+  line-height: 1.6;
+}
+
+ol.arabic {
+  list-style-type: decimal;
+}
+
+ul.auto-toc {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Code Elements */
+code, tt.docutils {
+  background: linear-gradient(135deg, #fef5e7 0%, #fadbd8 100%);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: "Courier New", Monaco, monospace;
+  font-size: 0.88em;
+  color: #c0392b;
+  border: 1px solid #f5b7b1;
+}
+
+pre {
+  background: linear-gradient(135deg, #eef2f3 0%, #d7dee3 100%);
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  padding: 20px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  border: none;
+}
+
+/* Table Formatting */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5em 0;
+}
+
+table.borderless,
+table.borderless td,
+table.borderless th {
+  border: 0;
+}
+
+table.docutils {
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
   overflow: hidden;
 }
 
-/* Uncomment (and remove this text!) to get bold-faced definition list terms
-dl.docutils dt {
-  font-weight: bold }
-*/
-
-div.abstract {
-  margin: 2em 5em }
-
-div.abstract p.topic-title {
-  font-weight: bold ;
-  text-align: center }
-
-div.admonition, div.attention, div.caution, div.danger, div.error,
-div.hint, div.important, div.note, div.tip, div.warning {
-  margin: 2em ;
-  border: medium outset ;
-  padding: 1em }
-
-div.admonition p.admonition-title, div.hint p.admonition-title,
-div.important p.admonition-title, div.note p.admonition-title,
-div.tip p.admonition-title {
-  font-weight: bold ;
-  font-family: sans-serif }
-
-div.attention p.admonition-title, div.caution p.admonition-title,
-div.danger p.admonition-title, div.error p.admonition-title,
-div.warning p.admonition-title, .code .error {
-  color: red ;
-  font-weight: bold ;
-  font-family: sans-serif }
-
-/* Uncomment (and remove this text!) to get reduced vertical space in
-   compound paragraphs.
-div.compound .compound-first, div.compound .compound-middle {
-  margin-bottom: 0.5em }
-
-div.compound .compound-last, div.compound .compound-middle {
-  margin-top: 0.5em }
-*/
-
-div.dedication {
-  margin: 2em 5em ;
-  text-align: center ;
-  font-style: italic }
-
-div.dedication p.topic-title {
-  font-weight: bold ;
-  font-style: normal }
-
-div.figure {
-  margin-left: 2em ;
-  margin-right: 2em }
-
-div.footer, div.header {
-  clear: both;
-  font-size: smaller }
-
-div.line-block {
-  display: block ;
-  margin-top: 1em ;
-  margin-bottom: 1em }
-
-div.line-block div.line-block {
-  margin-top: 0 ;
-  margin-bottom: 0 ;
-  margin-left: 1.5em }
-
-div.sidebar {
-  margin: 0 0 0.5em 1em ;
-  border: medium outset ;
-  padding: 1em ;
-  background-color: #ffffee ;
-  width: 40% ;
-  float: right ;
-  clear: right }
-
-div.sidebar p.rubric {
-  font-family: sans-serif ;
-  font-size: medium }
-
-div.system-messages {
-  margin: 5em }
-
-div.system-messages h1 {
-  color: red }
-
-div.system-message {
-  border: medium outset ;
-  padding: 1em }
-
-div.system-message p.system-message-title {
-  color: red ;
-  font-weight: bold }
-
-div.topic {
-  margin: 2em }
-
-h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
-h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
-  margin-top: 0.4em }
-
-h1.title {
-  text-align: center }
-
-h2.subtitle {
-  text-align: center }
-
-hr.docutils {
-  width: 75% }
-
-img.align-left, .figure.align-left, object.align-left, table.align-left {
-  clear: left ;
-  float: left ;
-  margin-right: 1em }
-
-img.align-right, .figure.align-right, object.align-right, table.align-right {
-  clear: right ;
-  float: right ;
-  margin-left: 1em }
-
-img.align-center, .figure.align-center, object.align-center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+table.docutils td,
+table.docutils th {
+  padding: 12px 16px;
+  vertical-align: top;
+  border: 1px solid #e2e8f0;
 }
 
-table.align-center {
-  margin-left: auto;
-  margin-right: auto;
+table.docutils th {
+  background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
+  font-weight: 600;
+  text-align: left;
+  color: #2d3748;
 }
 
+/* Section Containers */
+.section {
+  margin: 2.5em 0;
+}
+
+div.admonition,
+div.note,
+div.warning,
+div.tip {
+  margin: 2.5em 0;
+  padding: 1.2em 1.5em;
+  border-left: 5px solid #48bb78;
+  background: linear-gradient(90deg, #f0fff4 0%, #ffffff 100%);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+div.warning {
+  border-left-color: #f56565;
+  background: linear-gradient(90deg, #fff5f5 0%, #ffffff 100%);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Text Alignment */
 .align-left {
-  text-align: left }
-
-.align-center {
-  clear: both ;
-  text-align: center }
-
-.align-right {
-  text-align: right }
-
-/* reset inner alignment in figures */
-div.align-right {
-  text-align: inherit }
-
-/* div.align-center * { */
-/*   text-align: left } */
-
-.align-top    {
-  vertical-align: top }
-
-.align-middle {
-  vertical-align: middle }
-
-.align-bottom {
-  vertical-align: bottom }
-
-ol.simple, ul.simple {
-  margin-bottom: 1em }
-
-ol.arabic {
-  list-style: decimal }
-
-ol.loweralpha {
-  list-style: lower-alpha }
-
-ol.upperalpha {
-  list-style: upper-alpha }
-
-ol.lowerroman {
-  list-style: lower-roman }
-
-ol.upperroman {
-  list-style: upper-roman }
-
-p.attribution {
-  text-align: right ;
-  margin-left: 50% }
-
-p.caption {
-  font-style: italic }
-
-p.credits {
-  font-style: italic ;
-  font-size: smaller }
-
-p.label {
-  white-space: nowrap }
-
-p.rubric {
-  font-weight: bold ;
-  font-size: larger ;
-  color: maroon ;
-  text-align: center }
-
-p.sidebar-title {
-  font-family: sans-serif ;
-  font-weight: bold ;
-  font-size: larger }
-
-p.sidebar-subtitle {
-  font-family: sans-serif ;
-  font-weight: bold }
-
-p.topic-title {
-  font-weight: bold }
-
-pre.address {
-  margin-bottom: 0 ;
-  margin-top: 0 ;
-  font: inherit }
-
-pre.literal-block, pre.doctest-block, pre.math, pre.code {
-  margin-left: 2em ;
-  margin-right: 2em }
-
-pre.code .ln { color: gray; } /* line numbers */
-pre.code, code { background-color: #eeeeee }
-pre.code .comment, code .comment { color: #5C6576 }
-pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
-pre.code .literal.string, code .literal.string { color: #0C5404 }
-pre.code .name.builtin, code .name.builtin { color: #352B84 }
-pre.code .deleted, code .deleted { background-color: #DEB0A1}
-pre.code .inserted, code .inserted { background-color: #A3D289}
-
-span.classifier {
-  font-family: sans-serif ;
-  font-style: oblique }
-
-span.classifier-delimiter {
-  font-family: sans-serif ;
-  font-weight: bold }
-
-span.interpreted {
-  font-family: sans-serif }
-
-span.option {
-  white-space: nowrap }
-
-span.pre {
-  white-space: pre }
-
-span.problematic, pre.problematic {
-  color: red }
-
-span.section-subtitle {
-  /* font-size relative to parent (h1..h6 element) */
-  font-size: 80% }
-
-table.citation {
-  border-left: solid 1px gray;
-  margin-left: 1px }
-
-table.docinfo {
-  margin: 2em 4em }
-
-table.docutils {
-  margin-top: 0.5em ;
-  margin-bottom: 0.5em }
-
-table.footnote {
-  border-left: solid 1px black;
-  margin-left: 1px }
-
-table.docutils td, table.docutils th,
-table.docinfo td, table.docinfo th {
-  padding-left: 0.5em ;
-  padding-right: 0.5em ;
-  vertical-align: top }
-
-table.docutils th.field-name, table.docinfo th.docinfo-name {
-  font-weight: bold ;
-  text-align: left ;
-  white-space: nowrap ;
-  padding-left: 0 }
-
-/* "booktabs" style (no vertical lines) */
-table.docutils.booktabs {
-  border: 0px;
-  border-top: 2px solid;
-  border-bottom: 2px solid;
-  border-collapse: collapse;
-}
-table.docutils.booktabs * {
-  border: 0px;
-}
-table.docutils.booktabs th {
-  border-bottom: thin solid;
   text-align: left;
 }
 
-h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
-h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
-  font-size: 100% }
+.align-center {
+  text-align: center;
+  clear: both;
+}
 
-ul.auto-toc {
-  list-style-type: none }
+.align-right {
+  text-align: right;
+}
 
+.align-top {
+  vertical-align: top;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.align-bottom {
+  vertical-align: bottom;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  
+  .document {
+    padding: 25px;
+  }
+  
+  h1.title {
+    font-size: 2em;
+  }
+  
+  h1 {
+    font-size: 1.6em;
+  }
+  
+  h2 {
+    font-size: 1.3em;
+  }
+  
+  ul, ol {
+    padding-left: 1.5em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1.title {
+    font-size: 1.6em;
+  }
+  
+  h1 {
+    font-size: 1.4em;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+  }
+}
 </style>
 </head>
 <body>
 <div class="document" id="openspp-farmer-registry-base">
 <h1 class="title">OpenSPP Farmer Registry Base</h1>
 
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! This file is generated by oca-gen-addon-readme !!
-!! changes will be overwritten.                   !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! source digest: sha256:f03ad61a7b9eccd36509060af53986783411b4fcd858d78f5810f349ead02d34
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base_farmer_registry"><img alt="OpenSPP/openspp-modules" src="https://img.shields.io/badge/github-OpenSPP%2Fopenspp--modules-lightgray.png?logo=github" /></a></p>
+<p>
+  <a class="reference external" href="https://odoo-community.org/page/development-status">
+    <img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png">
+  </a>
+  <a class="reference external" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html">
+    <img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png">
+  </a>
+  <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base_farmer_registry">
+    <img alt="OpenSPP/openspp-modules" src="https://img.shields.io/badge/github-OpenSPP%2Fopenspp--modules-lightgray.png?logo=github">
+  </a>
+</p>
+
 <div class="section" id="openspp-farmer-registry-base-1">
 <h1>OpenSPP Farmer Registry Base</h1>
+
 <div class="section" id="overview">
 <h2>Overview</h2>
-<p>The <tt class="docutils literal">spp_base_farmer_registry</tt> module serves as the foundation for
-managing farmer registries within the OpenSPP system. It builds upon
-several core OpenSPP modules to provide functionalities specific to
-farmer registration and farm data management.</p>
+<p>The <code>spp_base_farmer_registry</code> module serves as the foundation for managing farmer registries within the OpenSPP system. It builds upon several core OpenSPP modules to provide functionalities specific to farmer registration and farm data management.</p>
 </div>
+
 <div class="section" id="purpose">
 <h2>Purpose</h2>
 <p>This module aims to:</p>
 <ul class="simple">
-<li>Extend the generic registry features to capture data relevant to
-farmers and their agricultural practices.</li>
-<li>Model the relationships between farmers, farms, land parcels, and
-agricultural activities.</li>
-<li>Integrate with GIS capabilities to visualize farm locations and land
-boundaries.</li>
+<li>Extend the generic registry features to capture data relevant to farmers and their agricultural practices.</li>
+<li>Model the relationships between farmers, farms, land parcels, and agricultural activities.</li>
+<li>Integrate with GIS capabilities to visualize farm locations and land boundaries.</li>
 </ul>
 </div>
+
 <div class="section" id="module-dependencies-and-integration">
 <h2>Module Dependencies and Integration</h2>
 <ol class="arabic simple">
-<li><a class="reference external" href="g2p_registry_membership">g2p_registry_membership</a>: Used to manage
-memberships between individual registrants and groups.</li>
-<li><a class="reference external" href="spp_base_gis">spp_base_gis</a>: Provides the foundation for
-visualizing and interacting with geospatial data.</li>
-<li><a class="reference external" href="spp_land_record">spp_land_record</a>: Enables managing and
-visualizing land records, linking them to farms and registrants.</li>
-<li><a class="reference external" href="g2p_registry_base">g2p_registry_base</a>: Provides the basic
-structure for managing registrant data, relationships, and
-identification.</li>
-<li><a class="reference external" href="g2p_registry_group">g2p_registry_group</a>: Extends the base
-registry to handle groups of registrants, such as farmer
-cooperatives.</li>
-<li><a class="reference external" href="g2p_registry_individual">g2p_registry_individual</a>: Extends the
-base registry with functionalities for managing individual registrant
-data.</li>
+<li><strong>g2p_registry_membership</strong>: Used to manage memberships between individual registrants and groups.</li>
+<li><strong>spp_base_gis</strong>: Provides the foundation for visualizing and interacting with geospatial data.</li>
+<li><strong>spp_land_record</strong>: Enables managing and visualizing land records, linking them to farms and registrants.</li>
+<li><strong>g2p_registry_base</strong>: Provides the basic structure for managing registrant data, relationships, and identification.</li>
+<li><strong>g2p_registry_group</strong>: Extends the base registry to handle groups of registrants, such as farmer cooperatives.</li>
+<li><strong>g2p_registry_individual</strong>: Extends the base registry with functionalities for managing individual registrant data.</li>
 </ol>
 </div>
+
 <div class="section" id="functionality-and-integration-details">
 <h2>Functionality and Integration Details</h2>
 </div>
+
 <div class="section" id="farmer-information">
 <h2>Farmer Information</h2>
 <ul class="simple">
-<li>Extends the <tt class="docutils literal">res.partner</tt> model (from
-<a class="reference external" href="g2p_registry_base">g2p_registry_base</a>) to include farmer-specific
-details like years of experience, formal agricultural training,
-household size, etc.</li>
-<li>Introduces a temporary model <tt class="docutils literal">spp.farmer</tt> to store farmer-specific
-information that can be later transferred to the main <tt class="docutils literal">res.partner</tt>
-model, ensuring data consistency.</li>
-<li>Integrates with <a class="reference external" href="g2p_registry_individual">g2p_registry_individual</a>
-to leverage existing features for managing individual registrant
-profiles.</li>
+<li>Extends the <code>res.partner</code> model (from <strong>g2p_registry_base</strong>) to include farmer-specific details like years of experience, formal agricultural training, household size, etc.</li>
+<li>Introduces a temporary model <code>spp.farmer</code> to store farmer-specific information that can be later transferred to the main <code>res.partner</code> model, ensuring data consistency.</li>
+<li>Integrates with <strong>g2p_registry_individual</strong> to leverage existing features for managing individual registrant profiles.</li>
 </ul>
 </div>
+
 <div class="section" id="farm-management">
 <h2>Farm Management</h2>
 <ul class="simple">
-<li>Introduces the <tt class="docutils literal">Farm</tt> model (inheriting from <tt class="docutils literal">res.partner</tt>) to
-represent individual farms.</li>
-<li>Links farms to land records using the <tt class="docutils literal">spp.land.record</tt> model,
-enabling the tracking of land parcels associated with each farm.</li>
-<li>Allows recording details about farm types, sizes, legal status, and
-other relevant information.</li>
+<li>Introduces the <code>Farm</code> model (inheriting from <code>res.partner</code>) to represent individual farms.</li>
+<li>Links farms to land records using the <code>spp.land.record</code> model, enabling the tracking of land parcels associated with each farm.</li>
+<li>Allows recording details about farm types, sizes, legal status, and other relevant information.</li>
 </ul>
 </div>
+
 <div class="section" id="agricultural-activities">
 <h2>Agricultural Activities</h2>
 <ul class="simple">
-<li>Introduces the <tt class="docutils literal">spp.farm.activity</tt> model to record information
-about agricultural activities undertaken on each farm.</li>
-<li>Captures data on crop cultivation, livestock rearing, and aquaculture
-practices.</li>
-<li>Links activities to specific land parcels using the
-<tt class="docutils literal">spp.land.record</tt> model, providing a granular view of land use
-within a farm.</li>
+<li>Introduces the <code>spp.farm.activity</code> model to record information about agricultural activities undertaken on each farm.</li>
+<li>Captures data on crop cultivation, livestock rearing, and aquaculture practices.</li>
+<li>Links activities to specific land parcels using the <code>spp.land.record</code> model, providing a granular view of land use within a farm.</li>
 </ul>
 </div>
+
 <div class="section" id="farm-assets-and-inputs">
 <h2>Farm Assets and Inputs</h2>
 <ul class="simple">
-<li>Introduces models for managing farm assets (<tt class="docutils literal">spp.farm.asset</tt>) and
-inputs like fertilizers (<tt class="docutils literal">spp.fertilizer</tt>), chemicals
-(<tt class="docutils literal">spp.farm.chemical</tt>), and feed items (<tt class="docutils literal">spp.feed.items</tt>).</li>
-<li>Allows associating these assets and inputs with specific farms and,
-optionally, to specific land parcels within a farm.</li>
+<li>Introduces models for managing farm assets (<code>spp.farm.asset</code>) and inputs like fertilizers (<code>spp.fertilizer</code>), chemicals (<code>spp.farm.chemical</code>), and feed items (<code>spp.feed.items</code>).</li>
+<li>Allows associating these assets and inputs with specific farms and, optionally, to specific land parcels within a farm.</li>
 </ul>
 </div>
+
 <div class="section" id="gis-integration">
 <h2>GIS Integration</h2>
 <ul class="simple">
-<li>Leverages the <a class="reference external" href="spp_base_gis">spp_base_gis</a> module to enable
-visualization of farm locations and land boundaries on a map.</li>
-<li>Provides a dedicated GIS view for <tt class="docutils literal">res.partner</tt> to display farms
-and their associated land parcels.</li>
-<li>Utilizes GeoJSON representations of land records from
-<a class="reference external" href="spp_land_record">spp_land_record</a> to display farm boundaries as
-data layers on the map.</li>
+<li>Leverages the <strong>spp_base_gis</strong> module to enable visualization of farm locations and land boundaries on a map.</li>
+<li>Provides a dedicated GIS view for <code>res.partner</code> to display farms and their associated land parcels.</li>
+<li>Utilizes GeoJSON representations of land records from <strong>spp_land_record</strong> to display farm boundaries as data layers on the map.</li>
 </ul>
 </div>
+
 <div class="section" id="additional-features">
 <h2>Additional Features</h2>
 <ul class="simple">
-<li><strong>Extension Services:</strong> Records details about extension services
-provided to farmers, linked to specific farms and optionally to
-specific land parcels.</li>
-<li><strong>Species Information:</strong> Includes a dedicated model
-(<tt class="docutils literal">spp.farm.species</tt>) for managing information about crop,
-livestock, and aquaculture species relevant to the registry.</li>
+<li><strong>Extension Services:</strong> Records details about extension services provided to farmers, linked to specific farms and optionally to specific land parcels.</li>
+<li><strong>Species Information:</strong> Includes a dedicated model (<code>spp.farm.species</code>) for managing information about crop, livestock, and aquaculture species relevant to the registry.</li>
 </ul>
 </div>
+
 <div class="section" id="conclusion">
 <h2>Conclusion</h2>
-<p>The <tt class="docutils literal">spp_base_farmer_registry</tt> module, through its integration with
-various other OpenSPP modules, provides a comprehensive system for
-creating and managing detailed farmer registries. It not only
-facilitates the collection of essential farmer and farm data but also
-enables spatial analysis and visualization, making it a powerful tool
-for agricultural development programs and initiatives.</p>
-<p><strong>Table of contents</strong></p>
+<p>The <code>spp_base_farmer_registry</code> module, through its integration with various other OpenSPP modules, provides a comprehensive system for creating and managing detailed farmer registries. It not only facilitates the collection of essential farmer and farm data but also enables spatial analysis and visualization, making it a powerful tool for agricultural development programs and initiatives.</p>
 </div>
 </div>
+
 <div class="section" id="bug-tracker">
 <h1>Bug Tracker</h1>
-<p>Bugs are tracked on <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues">GitHub Issues</a>.
-In case of trouble, please check there if your issue has already been reported.
-If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues/new?body=module:%20spp_base_farmer_registry%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues">GitHub Issues</a>. In case of trouble, please check there if your issue has already been reported. If you spotted it first, help us to smash it by providing a detailed and welcomed <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues/new?body=module:%20spp_base_farmer_registry%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
+
 <div class="section" id="credits">
 <h1>Credits</h1>
+
 <div class="section" id="authors">
 <h2>Authors</h2>
 <ul class="simple">
 <li>OpenSPP.org</li>
 </ul>
 </div>
+
 <div class="section" id="maintainers">
 <h2>Maintainers</h2>
 <p>Current maintainers:</p>
-<p><a class="reference external image-reference" href="https://github.com/jeremi"><img alt="jeremi" src="https://github.com/jeremi.png?size=40px" /></a> <a class="reference external image-reference" href="https://github.com/gonzalesedwin1123"><img alt="gonzalesedwin1123" src="https://github.com/gonzalesedwin1123.png?size=40px" /></a> <a class="reference external image-reference" href="https://github.com/reichie020212"><img alt="reichie020212" src="https://github.com/reichie020212.png?size=40px" /></a></p>
+<p>
+  <a class="reference external" href="https://github.com/jeremi">
+    <img alt="jeremi" src="https://github.com/jeremi.png?size=40px">
+  </a>
+  <a class="reference external" href="https://github.com/gonzalesedwin1123">
+    <img alt="gonzalesedwin1123" src="https://github.com/gonzalesedwin1123.png?size=40px">
+  </a>
+  <a class="reference external" href="https://github.com/reichie020212">
+    <img alt="reichie020212" src="https://github.com/reichie020212.png?size=40px">
+  </a>
+</p>
 <p>This module is part of the <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base_farmer_registry">OpenSPP/openspp-modules</a> project on GitHub.</p>
 <p>You are welcome to contribute.</p>
 </div>
 </div>
+
 </div>
 </body>
 </html>
