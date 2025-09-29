@@ -236,19 +236,22 @@ class OpenSPPAreaImport(models.Model):
         except TypeError as e:
             raise ValidationError(_("ERROR: {}").format(e)) from e
 
-        # Try to open with openpyxl first for .xlsx files
-        try:
-            book = load_workbook(inputx, read_only=True)
-            return book
-        except Exception as e:
-            _logger.warning("Failed to open with openpyxl: %s", e)
+        filename = self.name.lower()
+        if filename.endswith(".xlsx"):
+            # Try to open with openpyxl first for .xlsx files
+            try:
+                book = load_workbook(inputx, read_only=True)
+                return book
+            except Exception as e:
+                _logger.warning("Failed to open with openpyxl: %s", e)
 
-        # Fallback to xlrd for .xls files
-        try:
-            book = open_workbook(inputx)
-            return book
-        except Exception as e:
-            raise ValidationError(_("ERROR: {}").format(e)) from e
+        if filename.endswith(".xls"):
+            # Fallback to xlrd for .xls files
+            try:
+                book = open_workbook(inputx)
+                return book
+            except Exception as e:
+                raise ValidationError(_("ERROR: {}").format(e)) from e
 
     def check_all_languages_activated(self, columns, area_level):
         """Check if all languages in the specified columns are activated.
