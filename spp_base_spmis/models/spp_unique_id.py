@@ -1,5 +1,5 @@
-import random
 import re
+import secrets
 import string
 
 from odoo import _, api, fields, models
@@ -16,7 +16,7 @@ def _generate_unique_id():
     # Filter the characters to exclude
     allowed_characters = [c for c in characters if c not in excluded_characters]
     # Generate the unique identifier by randomly selecting characters
-    unique_id = "".join(random.choice(allowed_characters) for _ in range(length))
+    unique_id = "".join(secrets.choice(allowed_characters) for _ in range(length))
 
     return unique_id
 
