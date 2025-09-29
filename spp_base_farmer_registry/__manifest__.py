@@ -25,6 +25,7 @@
         "spp_irrigation",
         "spp_land_record",
         "spp_openid_vci_individual",
+        "spp_registry_group_hierarchy",
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_registry_group",
