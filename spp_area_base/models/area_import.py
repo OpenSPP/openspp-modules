@@ -250,6 +250,7 @@ class OpenSPPAreaImport(models.Model):
             # Fallback to xlrd for .xls files
             _logger.info("Opening .xls file: %s", filename)
             try:
+                _logger.info("InputX: %s", inputx)
                 book = open_workbook(inputx)
                 return book
             except Exception as e:
