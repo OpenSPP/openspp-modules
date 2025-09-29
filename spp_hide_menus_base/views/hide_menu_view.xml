@@ -4,7 +4,7 @@
         <field name="model">spp.hide.menu</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <tree edit="false" create="true" delete="false">
                 <button
                     name="hide_menu"
                     type="object"
@@ -24,6 +24,7 @@
                     groups="base.group_system"
                 />
                 <field name="name" />
+                <field name="xml_id" />
                 <field
                     name="state"
                     decoration-primary="state=='show'"

@@ -69,6 +69,7 @@ class IrModuleModule(models.Model):
                         hidden_menu = self.env["spp.hide.menu"].create(
                             {
                                 "name": menu.id,
+                                "xml_id": menu_info["menu_xml_id"],
                             }
                         )
                         hidden_menu.hide_menu()
