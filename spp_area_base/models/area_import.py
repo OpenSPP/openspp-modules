@@ -233,6 +233,7 @@ class OpenSPPAreaImport(models.Model):
         try:
             inputx = BytesIO()
             inputx.write(base64.decodebytes(self.excel_file))
+            inputx.seek(0)
         except TypeError as e:
             raise ValidationError(_("ERROR: {}").format(e)) from e
 
