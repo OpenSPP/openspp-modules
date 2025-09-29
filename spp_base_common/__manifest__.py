@@ -38,5 +38,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "",
+    "summary": "The OpenSPP base module that provides the main menu, generic configuration, user role management base module, area management base module, hiding of non-openspp menus, and theme. All implementation specific base modules depends on this module.",
 }
