@@ -22,7 +22,12 @@
     ],
     "excludes": [],
     "external_dependencies": {},
-    "data": ["security/security_access.xml", "security/ir.model.access.csv", "views/main_view.xml"],
+    "data": [
+        "security/security_access.xml",
+        "security/ir.model.access.csv",
+        "views/main_view.xml",
+        "views/phone_validation_view.xml",
+    ],
     "assets": {
         "web.assets_backend": [
             "spp_base_common/static/src/scss/navbar.scss",
