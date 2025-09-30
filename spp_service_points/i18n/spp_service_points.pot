@@ -287,11 +287,6 @@ msgid "Phone Sanitized"
 msgstr ""
 
 #. module: spp_service_points
-#: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__rating_ids
-msgid "Ratings"
-msgstr ""
-
-#. module: spp_service_points
 #: model:ir.model.fields,field_description:spp_service_points.field_spp_service_point__message_has_sms_error
 msgid "SMS Delivery error"
 msgstr ""
