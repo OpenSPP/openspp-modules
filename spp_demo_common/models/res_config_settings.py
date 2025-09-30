@@ -20,3 +20,7 @@ class RegistryConfig(models.TransientModel):
         string="Batch Size",
         config_parameter="spp_demo_common.batch_size",
     )
+    queue_job_minimum_size = fields.Integer(
+        string="Queue Job Minimum Size",
+        config_parameter="spp_demo_common.queue_job_minimum_size",
+    )

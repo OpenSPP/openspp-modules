@@ -16,4 +16,8 @@
         <field name="key">spp_demo_common.batch_size</field>
         <field name="value">20</field>
     </record>
+    <record id="queue_job_minimum_size" model="ir.config_parameter">
+        <field name="key">spp_demo_common.queue_job_minimum_size</field>
+        <field name="value">100</field>
+    </record>
 </odoo>

@@ -52,6 +52,11 @@ class SPPDemoDataGenerator(models.Model):
     locked = fields.Boolean(string="Locked", default=False)
     locked_reason = fields.Text(string="Locked Reason")
 
+    queue_job_minimum_size = fields.Integer(
+        string="Queue Job Minimum Size",
+        compute="_compute_queue_job_minimum_size",
+    )
+
     def generate_demo_data(self):
         self.ensure_one()
 
@@ -61,3 +66,9 @@ class SPPDemoDataGenerator(models.Model):
             "type": "ir.actions.client",
             "tag": "reload",
         }
+
+    def _compute_queue_job_minimum_size(self):
+        default_settings = self.env["ir.config_parameter"].sudo()
+        queue_job_minimum_size = int(default_settings.get_param("spp_demo_common.queue_job_minimum_size", 100))
+        for record in self:
+            record.queue_job_minimum_size = queue_job_minimum_size
