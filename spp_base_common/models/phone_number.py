@@ -46,3 +46,8 @@ class G2PPhoneNumber(models.Model):
                 message = "Phone number must match one of the following formats: " + ", ".join(error_msg)
                 raise ValidationError(_(message))
         return
+
+    @api.depends("phone_no", "country_id")
+    def _compute_phone_sanitized(self):
+        for rec in self:
+            rec.phone_sanitized = rec.phone_no
