@@ -36,10 +36,12 @@ class G2PPhoneNumber(models.Model):
             error_msgs.append(_("Phone number must not contain letters."))
 
         # Check for invalid special characters (allow only digits and '+')
+        # Only allow '+' at the start, rest must be digits
         if re.search(r"[^\d+]", phone_no):
-            # Only allow '+' at the start
             if not re.match(r"^\+?\d+$", phone_no):
-                error_msgs.append(_("Phone number contains invalid special characters."))
+                # Only add this error if there are special characters (not letters)
+                if not re.search(r"[A-Za-z]", phone_no):
+                    error_msgs.append(_("Phone number contains invalid special characters."))
 
         # Format validation
         if phone_validation:
