@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+demo_data_generator_read_registry_access,Demo Data Generator Read Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.read_registry,1,0,0,0
+
+demo_data_generator_write_registry_access,Demo Data Generator Write Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.write_registry,1,1,0,0
+
+demo_data_generator_create_registry_access,Demo Data Generator Create Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.create_registry,1,0,1,0
