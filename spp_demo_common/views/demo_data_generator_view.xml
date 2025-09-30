@@ -118,12 +118,15 @@
                                     invisible="number_of_groups &lt; queue_job_minimum_size"
                                 >
                                     <div style="display: flex; gap: 20px; margin-bottom: 10px;">
-                                        <div style="flex: 2;">
-                                            <h2>Warning</h2>
-                                            <p
-                                            >The number of groups you are trying to generate are greater than the minimum
-                                            size for Job Queues. This operation will use Job Queues to process the request in
-                                            the background. You can choose the batch size you want to batch this generation.</p>
+                                        <div style="flex: 1;">
+                                            <p>Job Queue will be used in this Generation</p>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <h4><label
+                                                    for="queue_job_minimum_size"
+                                                    class="o_form_label"
+                                                /><div /></h4>
+                                            <field name="queue_job_minimum_size" readonly="1" />
                                         </div>
                                         <div style="flex: 1;">
                                             <h4><label for="batch_size" class="o_form_label" /><div /></h4>

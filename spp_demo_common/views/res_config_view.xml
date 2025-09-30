@@ -31,11 +31,19 @@
                         >
                             <field name="members_range_to" />
                         </setting>
+                    </block>
+                    <block title="Job Queue Settings">
                         <setting
                             string="Batch Size"
-                            help="Specifies the default batch size when generating demo data."
+                            help="Specifies the default batch size when generating demo data with Job Queue."
                         >
                             <field name="batch_size" />
+                        </setting>
+                        <setting
+                            string="Queue Job Minimum Size"
+                            help="Specifies the minimum number of groups to be processed in the queue when generating demo data."
+                        >
+                            <field name="queue_job_minimum_size" />
                         </setting>
                     </block>
                 </app>
