@@ -52,11 +52,6 @@ msgid "General Information"
 msgstr ""
 
 #. module: spp_base_setting
-#: model:ir.ui.menu,name:spp_base_setting.menu_action_res_groups
-msgid "Groups"
-msgstr ""
-
-#. module: spp_base_setting
 #: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
 msgid "State"
 msgstr ""
@@ -69,11 +64,6 @@ msgstr ""
 #. module: spp_base_setting
 #: model_terms:ir.ui.view,arch_db:spp_base_setting.view_country_office_form
 msgid "Street..."
-msgstr ""
-
-#. module: spp_base_setting
-#: model:ir.ui.menu,name:spp_base_setting.menu_action_res_users
-msgid "Users"
 msgstr ""
 
 #. module: spp_base_setting
