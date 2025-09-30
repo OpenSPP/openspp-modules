@@ -33,6 +33,10 @@ class SPPDemoDataGenerator(models.Model):
             if lang:
                 return lang
         return self.env.ref("base.lang_en")
+    
+    def _default_queue_job_minimum_size(self):
+        default_settings = self.env["ir.config_parameter"].sudo()
+        return int(default_settings.get_param("spp_demo_common.queue_job_minimum_size", 500))
 
     name = fields.Char(string="Name", required=True)
     remember_settings = fields.Boolean(string="Remember Settings", default=False)
@@ -54,7 +58,7 @@ class SPPDemoDataGenerator(models.Model):
 
     queue_job_minimum_size = fields.Integer(
         string="Queue Job Minimum Size",
-        compute="_compute_queue_job_minimum_size",
+        default=_default_queue_job_minimum_size,
     )
 
     def generate_demo_data(self):
@@ -67,8 +71,3 @@ class SPPDemoDataGenerator(models.Model):
             "tag": "reload",
         }
 
-    def _compute_queue_job_minimum_size(self):
-        default_settings = self.env["ir.config_parameter"].sudo()
-        queue_job_minimum_size = int(default_settings.get_param("spp_demo_common.queue_job_minimum_size", 100))
-        for record in self:
-            record.queue_job_minimum_size = queue_job_minimum_size
