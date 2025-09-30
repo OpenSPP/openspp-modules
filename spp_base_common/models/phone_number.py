@@ -29,9 +29,22 @@ class G2PPhoneNumber(models.Model):
             return
 
         phone_no = self.phone_no
+        error_msgs = []
+
+        # Check for letters
+        if re.search(r"[A-Za-z]", phone_no):
+            error_msgs.append(_("Phone number must not contain letters."))
+
+        # Check for invalid special characters (allow only digits and '+')
+        if re.search(r"[^\d+]", phone_no):
+            # Only allow '+' at the start
+            if not re.match(r"^\+?\d+$", phone_no):
+                error_msgs.append(_("Phone number contains invalid special characters."))
+
+        # Format validation
         if phone_validation:
+            format_msgs = []
             validated_success_count = 0
-            error_msg = []
             for validation in phone_validation:
                 if validation.with_prefix:
                     pattern = r"^\+?" + re.escape(validation.prefix) + r"\d{" + str(validation.number_of_digits) + r"}$"
@@ -40,11 +53,13 @@ class G2PPhoneNumber(models.Model):
                 if re.match(pattern, phone_no):
                     validated_success_count += 1
                 else:
-                    error_msg.append(validation.name)
+                    format_msgs.append(validation.name)
 
-            if validated_success_count == 0:
-                message = "Phone number must match one of the following formats: " + ", ".join(error_msg)
-                raise ValidationError(_(message))
+            if validated_success_count == 0 and not error_msgs:
+                error_msgs.append(_("Phone number must match one of the following formats: ") + ", ".join(format_msgs))
+
+        if error_msgs:
+            raise ValidationError("\n".join(error_msgs))
         return
 
     @api.depends("phone_no", "country_id")
