@@ -91,11 +91,6 @@ msgid "# Program Memberships"
 msgstr ""
 
 #. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__task_count
-msgid "# Tasks"
-msgstr ""
-
-#. module: g2p_programs
 #. odoo-python
 #: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
 #: code:addons/g2p_programs/wizard/assign_to_program_wizard.py:0
@@ -1019,11 +1014,6 @@ msgid "Cash Entitlements"
 msgstr ""
 
 #. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__certifications_count
-msgid "Certifications Count"
-msgstr ""
-
-#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__change_request_ids
 msgid "Change Requests"
 msgstr ""
@@ -1221,11 +1211,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:g2p_programs.program_fund_report_filter
 #: model_terms:ir.ui.view,arch_db:g2p_programs.program_list_filter
 msgid "Company"
-msgstr ""
-
-#. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__certifications_company_count
-msgid "Company Certifications Count"
 msgstr ""
 
 #. module: g2p_programs
@@ -2129,16 +2114,6 @@ msgid "Employee"
 msgstr ""
 
 #. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__employee_ids
-msgid "Employees"
-msgstr ""
-
-#. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__employees_count
-msgid "Employees Count"
-msgstr ""
-
-#. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_cycle__end_date
 #: model_terms:ir.ui.view,arch_db:g2p_programs.cycle_filter
 msgid "End Date"
@@ -2686,8 +2661,18 @@ msgid "ID Document Eligibility Managers"
 msgstr ""
 
 #. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__id_pdf_filename
+msgid "ID File Name"
+msgstr ""
+
+#. module: g2p_programs
 #: model_terms:ir.ui.view,arch_db:g2p_programs.view_program_membership_form
 msgid "ID Number"
+msgstr ""
+
+#. module: g2p_programs
+#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__id_pdf
+msgid "ID PASS"
 msgstr ""
 
 #. module: g2p_programs
@@ -4459,20 +4444,6 @@ msgid "Project"
 msgstr ""
 
 #. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__project_ids
-msgid "Projects"
-msgstr ""
-
-#. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_cycle__rating_ids
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program__rating_ids
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_fund__rating_ids
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__rating_ids
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership_duplicate__rating_ids
-msgid "Ratings"
-msgstr ""
-
-#. module: g2p_programs
 #: model:ir.actions.server,name:g2p_programs.reactivate_program
 msgid "Re-activate Program"
 msgstr ""
@@ -4614,11 +4585,6 @@ msgstr ""
 #. module: g2p_programs
 #: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__parent_id
 msgid "Related Company"
-msgstr ""
-
-#. module: g2p_programs
-#: model:ir.model.fields,help:g2p_programs.field_g2p_program_membership__employee_ids
-msgid "Related employees based on their private address"
 msgstr ""
 
 #. module: g2p_programs
@@ -5221,11 +5187,6 @@ msgstr ""
 #. module: g2p_programs
 #: model_terms:ir.ui.view,arch_db:g2p_programs.view_program_list_form
 msgid "Target Type:"
-msgstr ""
-
-#. module: g2p_programs
-#: model:ir.model.fields,field_description:g2p_programs.field_g2p_program_membership__task_ids
-msgid "Tasks"
 msgstr ""
 
 #. module: g2p_programs
