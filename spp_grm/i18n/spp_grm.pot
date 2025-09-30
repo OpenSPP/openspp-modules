@@ -621,11 +621,6 @@ msgid "Priority"
 msgstr ""
 
 #. module: spp_grm
-#: model:ir.model.fields,field_description:spp_grm.field_spp_grm_ticket__rating_ids
-msgid "Ratings"
-msgstr ""
-
-#. module: spp_grm
 #: model:ir.model.fields.selection,name:spp_grm.selection__spp_grm_ticket__kanban_state__done
 msgid "Ready for next stage"
 msgstr ""
