@@ -606,11 +606,6 @@ msgid "Phone number validation"
 msgstr ""
 
 #. module: g2p_registry_base
-#: model:ir.model.fields,field_description:g2p_registry_base.field_g2p_reg_rel__rating_ids
-msgid "Ratings"
-msgstr ""
-
-#. module: g2p_registry_base
 #: model:ir.model.fields,field_description:g2p_registry_base.field_res_partner__disabled_reason
 #: model:ir.model.fields,field_description:g2p_registry_base.field_res_users__disabled_reason
 #: model:ir.model.fields,field_description:g2p_registry_base.field_spp_attendance_subscriber__disabled_reason
