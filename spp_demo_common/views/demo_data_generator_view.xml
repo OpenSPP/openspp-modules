@@ -139,14 +139,14 @@
     <record id="action_demo_data_generator_tree_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_generate_demo_data_tree" />
+        <field name="view_id" ref="view_demo_data_generator_tree" />
         <field name="act_window_id" ref="action_demo_data_generator" />
     </record>
 
     <record id="action_demo_data_generator_form_view" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_generate_demo_data_form" />
+        <field name="view_id" ref="view_demo_data_generator_form" />
         <field name="act_window_id" ref="action_demo_data_generator" />
     </record>
 
