@@ -27,7 +27,7 @@ class SPPDemoDataGenerator(models.Model):
         return int(default_settings.get_param("spp_demo_common.batch_size", 100))
 
     def _default_locale_origin(self):
-        company_lang = self.env.user.company_id.partner_id.language
+        company_lang = self.env.user.company_id.partner_id.lang
         if company_lang:
             lang = self.env["res.lang"].search([("code", "=", company_lang)], limit=1)
             if lang:
