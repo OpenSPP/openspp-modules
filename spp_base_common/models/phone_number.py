@@ -55,30 +55,16 @@ class G2PPhoneNumber(models.Model):
         if phone_validation:
             format_msgs = []
             validated_success_count = 0
-            # Remove all dashes for digit counting and prefix matching
-            phone_no_digits = phone_no.replace("-", "")
             for validation in phone_validation:
                 if validation.with_prefix:
-                    # Build expected prefix pattern (with optional '+')
-                    prefix_pattern = r"^\+?" + re.escape(validation.prefix)
-                    # Check prefix and digit count
-                    if re.match(prefix_pattern, phone_no_digits):
-                        # After prefix, should have exact number_of_digits
-                        digits_after_prefix = phone_no_digits[
-                            len(validation.prefix) + (1 if phone_no_digits.startswith("+") else 0) :
-                        ]
-                        if len(digits_after_prefix) == validation.number_of_digits and digits_after_prefix.isdigit():
-                            validated_success_count += 1
-                        else:
-                            format_msgs.append(validation.name)
-                    else:
-                        format_msgs.append(validation.name)
+                    pattern = r"^\+?" + re.escape(validation.prefix) + r"\d{" + str(validation.number_of_digits) + r"}$"
                 else:
-                    # No prefix, just check digit count
-                    if phone_no_digits.isdigit() and len(phone_no_digits) == validation.number_of_digits:
-                        validated_success_count += 1
-                    else:
-                        format_msgs.append(validation.name)
+                    pattern = r"^\d{" + str(validation.number_of_digits) + r"}$"
+                phone_digits = phone_no.replace("-", "")
+                if re.match(pattern, phone_digits):
+                    validated_success_count += 1
+                else:
+                    format_msgs.append(validation.name)
 
             if validated_success_count == 0 and not error_msgs:
                 error_msgs.append(_("Phone number must match one of the following formats: ") + ", ".join(format_msgs))
