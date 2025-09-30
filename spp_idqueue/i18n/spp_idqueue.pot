@@ -635,6 +635,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model:res.groups,name:spp_idqueue.group_g2p_id_distributor
+#: model:res.groups,name:spp_idqueue.role_id_distributor_res_groups
 msgid "ID Distributor"
 msgstr ""
 
@@ -677,6 +678,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model:res.groups,name:spp_idqueue.group_g2p_id_requestor
+#: model:res.groups,name:spp_idqueue.role_id_requestor_res_groups
 msgid "ID Requestor"
 msgstr ""
 
@@ -717,6 +719,7 @@ msgstr ""
 
 #. module: spp_idqueue
 #: model:res.groups,name:spp_idqueue.group_g2p_id_validator
+#: model:res.groups,name:spp_idqueue.role_id_validator_res_groups
 msgid "ID Validator"
 msgstr ""
 
@@ -1105,12 +1108,6 @@ msgid "Queued IDs"
 msgstr ""
 
 #. module: spp_idqueue
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_batch__rating_ids
-#: model:ir.model.fields,field_description:spp_idqueue.field_spp_print_queue_id__rating_ids
-msgid "Ratings"
-msgstr ""
-
-#. module: spp_idqueue
 #: model_terms:ir.ui.view,arch_db:spp_idqueue.view_spp_print_queue_batch_form
 msgid "Refresh Data"
 msgstr ""
@@ -1272,6 +1269,21 @@ msgstr ""
 #: code:addons/spp_idqueue/wizard/batch_create_wizard.py:0
 #, python-format
 msgid "There are no selected id requests!"
+msgstr ""
+
+#. module: spp_idqueue
+#: model:res.groups,comment:spp_idqueue.role_id_validator_res_groups
+msgid "This role is allowed to Approve ID Requests."
+msgstr ""
+
+#. module: spp_idqueue
+#: model:res.groups,comment:spp_idqueue.role_id_distributor_res_groups
+msgid "This role is allowed to Generate, Print, and Distribute IDs."
+msgstr ""
+
+#. module: spp_idqueue
+#: model:res.groups,comment:spp_idqueue.role_id_requestor_res_groups
+msgid "This role is allowed to read the Registry and Request IDs."
 msgstr ""
 
 #. module: spp_idqueue
