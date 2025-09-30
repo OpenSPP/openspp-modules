@@ -105,7 +105,7 @@ class SPPGenerateFarmerData(models.Model):
         res = kwargs.get("res")
         num_groups = kwargs.get("num_groups")
 
-        kind_farm_id = self.env.ref("spp_farmer_registry_base.kind_farm").id
+        kind_farm_id = self.env.ref("spp_base_farmer_registry.kind_farm").id
 
         fake = create_faker(res.locale)
 

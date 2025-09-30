@@ -17,6 +17,7 @@ class OpenSPPHideMenu(models.Model):
         default="show",
     )
     default_groups_id = fields.Many2many("res.groups")
+    xml_id = fields.Char()
 
     def hide_menu(self, menu_id=None):
         record = self

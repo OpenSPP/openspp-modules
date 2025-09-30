@@ -15,7 +15,7 @@
     ],
     "data": [
         "views/country_office_views.xml",
-        "views/res_users_views.xml",
+        # "views/res_users_views.xml",
     ],
     "assets": {},
     "demo": [],

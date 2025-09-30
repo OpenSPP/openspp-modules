@@ -11,7 +11,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": [
         "spp_change_request",
-        "spp_farmer_registry_base",
+        "spp_base_farmer_registry",
         "g2p_registry_individual",
         "g2p_registry_group",
         "g2p_registry_membership",
@@ -20,7 +20,7 @@
         "spp_idpass",
     ],
     "excludes": [
-        "spp_base",
+        "spp_base_spmis",
         "spp_change_request_create_group",
     ],
     "data": [

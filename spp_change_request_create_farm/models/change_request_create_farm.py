@@ -84,7 +84,7 @@ class ChangeRequestCreateFarm(models.Model):
     group_kind = fields.Many2one(
         "g2p.group.kind",
         string="Group Kind",
-        default=lambda self: self.env.ref("spp_farmer_registry_base.kind_farm", raise_if_not_found=False),
+        default=lambda self: self.env.ref("spp_base_farmer_registry.kind_farm", raise_if_not_found=False),
     )
     farm_crop_act_ids = fields.One2many(FARM_ACTIVITY_MODEL, "crop_cr_farm_id", string="Crop Agricultural Activities")
     farm_live_act_ids = fields.One2many(
@@ -243,7 +243,7 @@ class ChangeRequestCreateFarm(models.Model):
             error_message.append(_("The Group Name is required!"))
         if not self.group_kind:
             error_message.append(_("The Group Kind is required!"))
-        if self.group_kind and self.group_kind.id == self.env.ref("spp_farmer_registry_base.kind_farm").id:
+        if self.group_kind and self.group_kind.id == self.env.ref("spp_base_farmer_registry.kind_farm").id:
             if not self.farmer_family_name:
                 error_message.append(_("The Family Name is required!"))
             if not self.farmer_given_name:

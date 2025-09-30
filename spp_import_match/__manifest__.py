@@ -11,7 +11,7 @@
     "license": "LGPL-3",
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["base", "spp_registry_base", "base_import", "queue_job"],
+    "depends": ["base", "spp_base_common", "base_import", "queue_job"],
     "data": [
         "data/queue_job_data.xml",
         "security/ir.model.access.csv",

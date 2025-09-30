@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/">
+<title>OpenSPP Farmer Registry Base</title>
+<style>
+/* Core Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.65;
+  color: #2c3e50;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+.document {
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Page Title */
+h1.title {
+  text-align: center;
+  color: #1a202c;
+  font-size: 2.8em;
+  margin-bottom: 1.2em;
+  border-bottom: 4px solid #48bb78;
+  padding-bottom: 0.6em;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* Section Headings */
+h1 {
+  color: #1a202c;
+  font-size: 2.2em;
+  margin: 2em 0 0.8em 0;
+  font-weight: 600;
+}
+
+h2 {
+  color: #2d3748;
+  font-size: 1.6em;
+  margin: 1.5em 0 0.7em 0;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.4em;
+  font-weight: 600;
+}
+
+/* Paragraph Styling */
+p {
+  margin: 1.2em 0;
+  text-align: justify;
+  line-height: 1.7;
+}
+
+.first {
+  margin-top: 0 !important;
+}
+
+.last {
+  margin-bottom: 0 !important;
+}
+
+/* Hyperlinks */
+a {
+  color: #48bb78;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+a:hover {
+  color: #38a169;
+  border-bottom-color: #38a169;
+}
+
+a.reference.external {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Badge Images */
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border-radius: 4px;
+}
+
+img.align-left {
+  float: left;
+  margin: 0 1.5em 1em 0;
+  clear: left;
+}
+
+img.align-right {
+  float: right;
+  margin: 0 0 1em 1.5em;
+  clear: right;
+}
+
+img.align-center {
+  display: block;
+  margin: 1em auto;
+}
+
+img[alt*="jeremi"],
+img[alt*="gonzalesedwin1123"],
+img[alt*="reichie020212"] {
+  border-radius: 50%;
+  margin: 0 8px;
+  transition: transform 0.2s ease;
+}
+
+img[alt*="jeremi"]:hover,
+img[alt*="gonzalesedwin1123"]:hover,
+img[alt*="reichie020212"]:hover {
+  transform: scale(1.1);
+}
+
+/* List Formatting */
+ul, ol {
+  margin: 1.2em 0;
+  padding-left: 2.5em;
+}
+
+ul.simple li,
+ol.simple li {
+  margin: 0.6em 0;
+  line-height: 1.6;
+}
+
+ol.arabic {
+  list-style-type: decimal;
+}
+
+ul.auto-toc {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Code Elements */
+code, tt.docutils {
+  background: linear-gradient(135deg, #fef5e7 0%, #fadbd8 100%);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: "Courier New", Monaco, monospace;
+  font-size: 0.88em;
+  color: #c0392b;
+  border: 1px solid #f5b7b1;
+}
+
+pre {
+  background: linear-gradient(135deg, #eef2f3 0%, #d7dee3 100%);
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  padding: 20px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  border: none;
+}
+
+/* Table Formatting */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5em 0;
+}
+
+table.borderless,
+table.borderless td,
+table.borderless th {
+  border: 0;
+}
+
+table.docutils {
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table.docutils td,
+table.docutils th {
+  padding: 12px 16px;
+  vertical-align: top;
+  border: 1px solid #e2e8f0;
+}
+
+table.docutils th {
+  background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
+  font-weight: 600;
+  text-align: left;
+  color: #2d3748;
+}
+
+/* Section Containers */
+.section {
+  margin: 2.5em 0;
+}
+
+div.admonition,
+div.note,
+div.warning,
+div.tip {
+  margin: 2.5em 0;
+  padding: 1.2em 1.5em;
+  border-left: 5px solid #48bb78;
+  background: linear-gradient(90deg, #f0fff4 0%, #ffffff 100%);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+div.warning {
+  border-left-color: #f56565;
+  background: linear-gradient(90deg, #fff5f5 0%, #ffffff 100%);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Text Alignment */
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+  clear: both;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.align-bottom {
+  vertical-align: bottom;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  
+  .document {
+    padding: 25px;
+  }
+  
+  h1.title {
+    font-size: 2em;
+  }
+  
+  h1 {
+    font-size: 1.6em;
+  }
+  
+  h2 {
+    font-size: 1.3em;
+  }
+  
+  ul, ol {
+    padding-left: 1.5em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1.title {
+    font-size: 1.6em;
+  }
+  
+  h1 {
+    font-size: 1.4em;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+  }
+}
+</style>
+</head>
+<body>
+<div class="document" id="openspp-farmer-registry-base">
+<h1 class="title">OpenSPP Farmer Registry Base</h1>
+
+<p>
+  <a class="reference external" href="https://odoo-community.org/page/development-status">
+    <img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png">
+  </a>
+  <a class="reference external" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html">
+    <img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png">
+  </a>
+  <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base_farmer_registry">
+    <img alt="OpenSPP/openspp-modules" src="https://img.shields.io/badge/github-OpenSPP%2Fopenspp--modules-lightgray.png?logo=github">
+  </a>
+</p>
+
+<div class="section" id="openspp-farmer-registry-base-1">
+<h1>OpenSPP Farmer Registry Base</h1>
+
+<div class="section" id="overview">
+<h2>Overview</h2>
+<p>The <code>spp_base_farmer_registry</code> module serves as the foundation for managing farmer registries within the OpenSPP system. It builds upon several core OpenSPP modules to provide functionalities specific to farmer registration and farm data management.</p>
+</div>
+
+<div class="section" id="purpose">
+<h2>Purpose</h2>
+<p>This module aims to:</p>
+<ul class="simple">
+<li>Extend the generic registry features to capture data relevant to farmers and their agricultural practices.</li>
+<li>Model the relationships between farmers, farms, land parcels, and agricultural activities.</li>
+<li>Integrate with GIS capabilities to visualize farm locations and land boundaries.</li>
+</ul>
+</div>
+
+<div class="section" id="module-dependencies-and-integration">
+<h2>Module Dependencies and Integration</h2>
+<ol class="arabic simple">
+<li><strong>g2p_registry_membership</strong>: Used to manage memberships between individual registrants and groups.</li>
+<li><strong>spp_base_gis</strong>: Provides the foundation for visualizing and interacting with geospatial data.</li>
+<li><strong>spp_land_record</strong>: Enables managing and visualizing land records, linking them to farms and registrants.</li>
+<li><strong>g2p_registry_base</strong>: Provides the basic structure for managing registrant data, relationships, and identification.</li>
+<li><strong>g2p_registry_group</strong>: Extends the base registry to handle groups of registrants, such as farmer cooperatives.</li>
+<li><strong>g2p_registry_individual</strong>: Extends the base registry with functionalities for managing individual registrant data.</li>
+</ol>
+</div>
+
+<div class="section" id="functionality-and-integration-details">
+<h2>Functionality and Integration Details</h2>
+</div>
+
+<div class="section" id="farmer-information">
+<h2>Farmer Information</h2>
+<ul class="simple">
+<li>Extends the <code>res.partner</code> model (from <strong>g2p_registry_base</strong>) to include farmer-specific details like years of experience, formal agricultural training, household size, etc.</li>
+<li>Introduces a temporary model <code>spp.farmer</code> to store farmer-specific information that can be later transferred to the main <code>res.partner</code> model, ensuring data consistency.</li>
+<li>Integrates with <strong>g2p_registry_individual</strong> to leverage existing features for managing individual registrant profiles.</li>
+</ul>
+</div>
+
+<div class="section" id="farm-management">
+<h2>Farm Management</h2>
+<ul class="simple">
+<li>Introduces the <code>Farm</code> model (inheriting from <code>res.partner</code>) to represent individual farms.</li>
+<li>Links farms to land records using the <code>spp.land.record</code> model, enabling the tracking of land parcels associated with each farm.</li>
+<li>Allows recording details about farm types, sizes, legal status, and other relevant information.</li>
+</ul>
+</div>
+
+<div class="section" id="agricultural-activities">
+<h2>Agricultural Activities</h2>
+<ul class="simple">
+<li>Introduces the <code>spp.farm.activity</code> model to record information about agricultural activities undertaken on each farm.</li>
+<li>Captures data on crop cultivation, livestock rearing, and aquaculture practices.</li>
+<li>Links activities to specific land parcels using the <code>spp.land.record</code> model, providing a granular view of land use within a farm.</li>
+</ul>
+</div>
+
+<div class="section" id="farm-assets-and-inputs">
+<h2>Farm Assets and Inputs</h2>
+<ul class="simple">
+<li>Introduces models for managing farm assets (<code>spp.farm.asset</code>) and inputs like fertilizers (<code>spp.fertilizer</code>), chemicals (<code>spp.farm.chemical</code>), and feed items (<code>spp.feed.items</code>).</li>
+<li>Allows associating these assets and inputs with specific farms and, optionally, to specific land parcels within a farm.</li>
+</ul>
+</div>
+
+<div class="section" id="gis-integration">
+<h2>GIS Integration</h2>
+<ul class="simple">
+<li>Leverages the <strong>spp_base_gis</strong> module to enable visualization of farm locations and land boundaries on a map.</li>
+<li>Provides a dedicated GIS view for <code>res.partner</code> to display farms and their associated land parcels.</li>
+<li>Utilizes GeoJSON representations of land records from <strong>spp_land_record</strong> to display farm boundaries as data layers on the map.</li>
+</ul>
+</div>
+
+<div class="section" id="additional-features">
+<h2>Additional Features</h2>
+<ul class="simple">
+<li><strong>Extension Services:</strong> Records details about extension services provided to farmers, linked to specific farms and optionally to specific land parcels.</li>
+<li><strong>Species Information:</strong> Includes a dedicated model (<code>spp.farm.species</code>) for managing information about crop, livestock, and aquaculture species relevant to the registry.</li>
+</ul>
+</div>
+
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>The <code>spp_base_farmer_registry</code> module, through its integration with various other OpenSPP modules, provides a comprehensive system for creating and managing detailed farmer registries. It not only facilitates the collection of essential farmer and farm data but also enables spatial analysis and visualization, making it a powerful tool for agricultural development programs and initiatives.</p>
+</div>
+</div>
+
+<div class="section" id="bug-tracker">
+<h1>Bug Tracker</h1>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues">GitHub Issues</a>. In case of trouble, please check there if your issue has already been reported. If you spotted it first, help us to smash it by providing a detailed and welcomed <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues/new?body=module:%20spp_base_farmer_registry%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+
+<div class="section" id="credits">
+<h1>Credits</h1>
+
+<div class="section" id="authors">
+<h2>Authors</h2>
+<ul class="simple">
+<li>OpenSPP.org</li>
+</ul>
+</div>
+
+<div class="section" id="maintainers">
+<h2>Maintainers</h2>
+<p>Current maintainers:</p>
+<p>
+  <a class="reference external" href="https://github.com/jeremi">
+    <img alt="jeremi" src="https://github.com/jeremi.png?size=40px">
+  </a>
+  <a class="reference external" href="https://github.com/gonzalesedwin1123">
+    <img alt="gonzalesedwin1123" src="https://github.com/gonzalesedwin1123.png?size=40px">
+  </a>
+  <a class="reference external" href="https://github.com/reichie020212">
+    <img alt="reichie020212" src="https://github.com/reichie020212.png?size=40px">
+  </a>
+</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base_farmer_registry">OpenSPP/openspp-modules</a> project on GitHub.</p>
+<p>You are welcome to contribute.</p>
+</div>
+</div>
+
+</div>
+</body>
+</html>

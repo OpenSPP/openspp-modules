@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/">
+<title>OpenSPP SPMIS Base</title>
+<style>
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.document {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Typography */
+h1.title {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.5em;
+  margin-bottom: 1em;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 0.5em;
+}
+
+h1 {
+  color: #2c3e50;
+  font-size: 2em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  color: #34495e;
+  font-size: 1.5em;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 0.3em;
+}
+
+p {
+  margin: 1em 0;
+  text-align: justify;
+}
+
+.first {
+  margin-top: 0 !important;
+}
+
+.last {
+  margin-bottom: 0 !important;
+}
+
+/* Links */
+a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+a.reference.external {
+  word-wrap: break-word;
+}
+
+/* Images and Badges */
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+img.align-left {
+  float: left;
+  margin-right: 1em;
+  clear: left;
+}
+
+img.align-right {
+  float: right;
+  margin-left: 1em;
+  clear: right;
+}
+
+img.align-center {
+  display: block;
+  margin: 0 auto;
+}
+
+img[alt*="jeremi"],
+img[alt*="gonzalesedwin1123"],
+img[alt*="reichie020212"] {
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+/* Lists */
+ul, ol {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+
+ul.simple li,
+ol.simple li {
+  margin: 0.5em 0;
+}
+
+ul.auto-toc {
+  list-style-type: none;
+}
+
+/* Code and Preformatted Text */
+code, tt.docutils {
+  background-color: #f8f9fa;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: "Monaco", "Menlo", "Consolas", monospace;
+  font-size: 0.9em;
+  color: #e74c3c;
+}
+
+pre {
+  background-color: #f8f9fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+table.borderless,
+table.borderless td,
+table.borderless th {
+  border: 0;
+}
+
+table.docutils {
+  border: 1px solid #ddd;
+}
+
+table.docutils td,
+table.docutils th {
+  padding: 8px 12px;
+  vertical-align: top;
+  border: 1px solid #ddd;
+}
+
+table.docutils th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Sections and Divisions */
+.section {
+  margin: 2em 0;
+}
+
+div.admonition,
+div.note,
+div.warning,
+div.tip {
+  margin: 2em 0;
+  padding: 1em;
+  border-left: 4px solid #3498db;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+div.warning {
+  border-left-color: #e74c3c;
+  background-color: #fef5f5;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Alignment Utilities */
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+  clear: both;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.align-bottom {
+  vertical-align: bottom;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  
+  .document {
+    padding: 20px;
+  }
+  
+  h1.title {
+    font-size: 2em;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+  }
+}
+</style>
+</head>
+<body>
+<div class="document" id="openspp-base">
+<h1 class="title">OpenSPP SPMIS Base</h1>
+
+<p>
+  <a class="reference external" href="https://odoo-community.org/page/development-status">
+    <img alt="Production/Stable" src="https://img.shields.io/badge/maturity-Production%2FStable-green.png">
+  </a>
+  <a class="reference external" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html">
+    <img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png">
+  </a>
+  <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base_spmis">
+    <img alt="OpenSPP/openspp-modules" src="https://img.shields.io/badge/github-OpenSPP%2Fopenspp--modules-lightgray.png?logo=github">
+  </a>
+</p>
+
+<div class="section" id="openspp-base-1">
+<h1>OpenSPP SPMIS Base</h1>
+<p>This document outlines the functionality of the <strong>OpenSPP SPMIS Base</strong> module, the core module for the OpenSPP system. It builds upon existing G2P Registry modules, providing essential customizations and configurations for OpenSPP's specialized functionalities.</p>
+
+<div class="section" id="purpose">
+<h2>Purpose</h2>
+<p>The <strong>OpenSPP SPMIS Base</strong> module serves as the foundation for other OpenSPP modules, offering:</p>
+<ul class="simple">
+<li><strong>Centralized configurations</strong>: Provides essential settings and options that apply across the entire OpenSPP system.</li>
+<li><strong>UI modifications</strong>: Customizes the user interface (UI) to align with OpenSPP's look and feel, enhancing user experience.</li>
+<li><strong>Extension points</strong>: Acts as a base for other modules to inherit and extend functionalities specific to OpenSPP requirements.</li>
+</ul>
+</div>
+
+<div class="section" id="module-dependencies-and-integration">
+<h2>Module Dependencies and Integration</h2>
+<p>The <strong>OpenSPP SPMIS Base</strong> module depends on several other modules, integrating their features and extending them for OpenSPP:</p>
+<ul class="simple">
+<li><strong>spp_idqueue</strong>: Leverages this module for managing ID card printing requests and workflows.</li>
+<li><strong>spp_service_points</strong>: Utilizes this module to manage service points and their association with areas, companies, and users.</li>
+<li><strong>spp_custom_fields_ui</strong>: Depends on this module for a user-friendly interface to manage custom fields for registrants.</li>
+<li><strong>g2p_registry_membership</strong>: Integrates with this module to manage memberships between individual registrants and groups.</li>
+<li><strong>spp_custom_field</strong>: Extends this module's functionality to add and manage custom fields for registrants, enhancing data collection capabilities.</li>
+<li><strong>spp_programs</strong>: Integrates with this module for managing both cash and in-kind programs and entitlements.</li>
+<li><strong>spp_area</strong>: Utilizes this module to manage geographical areas and link them to registrants and other relevant data.</li>
+<li><strong>g2p_registry_base</strong>: Inherits core registry functionalities from this module, including registrant management, IDs, relationships, and districts.</li>
+<li><strong>g2p_registry_group</strong>: Integrates with this module to manage groups of registrants, extending the concept of registrants beyond individuals.</li>
+<li><strong>utm</strong>: Leverages this module for tracking and managing UTM (Urchin Tracking Module) parameters, commonly used in digital marketing campaigns.</li>
+<li><strong>g2p_registry_individual</strong>: Integrates with this module to manage individual registrant data, including specific attributes and validations.</li>
+</ul>
+</div>
+
+<div class="section" id="additional-functionality">
+<h2>Additional Functionality</h2>
+<p>The <strong>OpenSPP SPMIS Base</strong> module introduces the following key functionalities:</p>
+<ul class="simple">
+<li><strong>Top-up Card ID Type</strong>: Adds a new ID type specifically for managing "Top-up Cards", including a dedicated field (<code>card_uid</code>) for storing the unique 10-character UID of each card.</li>
+<li><strong>Registrant View Enhancements</strong>: Modifies the registrant views (both individual and group) to include the <code>card_uid</code> field, making it accessible for data entry and display.</li>
+<li><strong>Menu Icon Customization</strong>: Replaces the default icon for the "Registry" menu item with a custom OpenSPP icon, enhancing visual branding.</li>
+<li><strong>Menu Item Hiding</strong>: Hides specific menu items related to "Link Tracker" and "Discuss" to streamline the OpenSPP user interface and focus on relevant functionalities.</li>
+</ul>
+</div>
+
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>The <strong>OpenSPP SPMIS Base</strong> module acts as the backbone of the OpenSPP system, integrating and extending the functionalities of its dependencies to create a cohesive and tailored platform. Its role in providing central configurations, UI modifications, and extension points makes it essential for the proper functioning and customization of OpenSPP's specialized features.</p>
+</div>
+</div>
+
+<div class="section" id="bug-tracker">
+<h1>Bug Tracker</h1>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues">GitHub Issues</a>. In case of trouble, please check there if your issue has already been reported. If you spotted it first, help us to smash it by providing a detailed and welcomed <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues/new?body=module:%20spp_base_spmis%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+
+<div class="section" id="credits">
+<h1>Credits</h1>
+
+<div class="section" id="authors">
+<h2>Authors</h2>
+<ul class="simple">
+<li>OpenSPP.org</li>
+</ul>
+</div>
+
+<div class="section" id="maintainers">
+<h2>Maintainers</h2>
+<p>Current maintainers:</p>
+<p>
+  <a class="reference external" href="https://github.com/jeremi">
+    <img alt="jeremi" src="https://github.com/jeremi.png?size=40px">
+  </a>
+  <a class="reference external" href="https://github.com/gonzalesedwin1123">
+    <img alt="gonzalesedwin1123" src="https://github.com/gonzalesedwin1123.png?size=40px">
+  </a>
+  <a class="reference external" href="https://github.com/reichie020212">
+    <img alt="reichie020212" src="https://github.com/reichie020212.png?size=40px">
+  </a>
+</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_base_spmis">OpenSPP/openspp-modules</a> project on GitHub.</p>
+<p>You are welcome to contribute.</p>
+</div>
+</div>
+
+</div>
+</body>
+</html>

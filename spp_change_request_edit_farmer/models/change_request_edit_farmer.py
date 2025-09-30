@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 
 RES_PARTNER_MODEL = "res.partner"
 G2P_REG_ID_MODEL = "g2p.reg.id"
-NATIONAL_ID_TYPE_REF = "spp_farmer_registry_base.id_type_national_id"
+NATIONAL_ID_TYPE_REF = "spp_base_farmer_registry.id_type_national_id"
 
 
 class ChangeRequestTypeCustomEditFarmer(models.Model):

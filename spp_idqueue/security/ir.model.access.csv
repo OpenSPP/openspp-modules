@@ -1,21 +1,21 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-spp_read_idqueue,ID Queue Read Access,spp_idqueue.model_spp_print_queue_id,spp_registry_base.read_registry,1,0,0,0
-spp_read_idbatch,ID Batch Read Access,spp_idqueue.model_spp_print_queue_batch,spp_registry_base.read_registry,1,0,0,0
-spp_read_request_id_wizard,Request ID Wizard Read Access,spp_idqueue.model_spp_print_queue_wizard,spp_registry_base.read_registry,1,0,0,0
-spp_read_batch_create_wizard,Batch Create Wizard Read Access,spp_idqueue.model_spp_batch_create_wizard,spp_registry_base.read_registry,1,0,0,0
-spp_read_multi_id_request_wizard,Multiple ID Request Wizard Read Access,spp_idqueue.model_spp_multi_id_request_wizard,spp_registry_base.read_registry,1,0,0,0
+spp_read_idqueue,ID Queue Read Access,spp_idqueue.model_spp_print_queue_id,spp_base_common.read_registry,1,0,0,0
+spp_read_idbatch,ID Batch Read Access,spp_idqueue.model_spp_print_queue_batch,spp_base_common.read_registry,1,0,0,0
+spp_read_request_id_wizard,Request ID Wizard Read Access,spp_idqueue.model_spp_print_queue_wizard,spp_base_common.read_registry,1,0,0,0
+spp_read_batch_create_wizard,Batch Create Wizard Read Access,spp_idqueue.model_spp_batch_create_wizard,spp_base_common.read_registry,1,0,0,0
+spp_read_multi_id_request_wizard,Multiple ID Request Wizard Read Access,spp_idqueue.model_spp_multi_id_request_wizard,spp_base_common.read_registry,1,0,0,0
 
-spp_write_idqueue,ID Queue Write Access,spp_idqueue.model_spp_print_queue_id,spp_registry_base.write_registry,1,1,0,0
-spp_write_idbatch,ID Batch Write Access,spp_idqueue.model_spp_print_queue_batch,spp_registry_base.write_registry,1,1,0,0
-spp_write_request_id_wizard,Request ID Wizard Write Access,spp_idqueue.model_spp_print_queue_wizard,spp_registry_base.write_registry,1,1,0,0
-spp_write_batch_create_wizard,Batch Create Wizard Write Access,spp_idqueue.model_spp_batch_create_wizard,spp_registry_base.write_registry,1,1,0,0
-spp_write_multi_id_request_wizard,Multiple ID Request Wizard Write Access,spp_idqueue.model_spp_multi_id_request_wizard,spp_registry_base.write_registry,1,1,0,0
+spp_write_idqueue,ID Queue Write Access,spp_idqueue.model_spp_print_queue_id,spp_base_common.write_registry,1,1,0,0
+spp_write_idbatch,ID Batch Write Access,spp_idqueue.model_spp_print_queue_batch,spp_base_common.write_registry,1,1,0,0
+spp_write_request_id_wizard,Request ID Wizard Write Access,spp_idqueue.model_spp_print_queue_wizard,spp_base_common.write_registry,1,1,0,0
+spp_write_batch_create_wizard,Batch Create Wizard Write Access,spp_idqueue.model_spp_batch_create_wizard,spp_base_common.write_registry,1,1,0,0
+spp_write_multi_id_request_wizard,Multiple ID Request Wizard Write Access,spp_idqueue.model_spp_multi_id_request_wizard,spp_base_common.write_registry,1,1,0,0
 
-spp_create_idqueue,ID Queue Create Access,spp_idqueue.model_spp_print_queue_id,spp_registry_base.create_registry,1,1,1,0
-spp_create_idbatch,ID Batch Create Access,spp_idqueue.model_spp_print_queue_batch,spp_registry_base.create_registry,1,1,1,0
-spp_create_request_id_wizard,Request ID Wizard Create Access,spp_idqueue.model_spp_print_queue_wizard,spp_registry_base.create_registry,1,1,1,0
-spp_create_batch_create_wizard,Batch Create Wizard Create Access,spp_idqueue.model_spp_batch_create_wizard,spp_registry_base.create_registry,1,1,1,0
-spp_create_multi_id_request_wizard,Multiple ID Request Wizard Create Access,spp_idqueue.model_spp_multi_id_request_wizard,spp_registry_base.create_registry,1,1,1,0
+spp_create_idqueue,ID Queue Create Access,spp_idqueue.model_spp_print_queue_id,spp_base_common.create_registry,1,1,1,0
+spp_create_idbatch,ID Batch Create Access,spp_idqueue.model_spp_print_queue_batch,spp_base_common.create_registry,1,1,1,0
+spp_create_request_id_wizard,Request ID Wizard Create Access,spp_idqueue.model_spp_print_queue_wizard,spp_base_common.create_registry,1,1,1,0
+spp_create_batch_create_wizard,Batch Create Wizard Create Access,spp_idqueue.model_spp_batch_create_wizard,spp_base_common.create_registry,1,1,1,0
+spp_create_multi_id_request_wizard,Multiple ID Request Wizard Create Access,spp_idqueue.model_spp_multi_id_request_wizard,spp_base_common.create_registry,1,1,1,0
 
 spp_request_id_wizard_admin,Request ID Wizard Admin Access,spp_idqueue.model_spp_print_queue_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
 spp_idqueue_admin,ID Queue Admin Access,spp_idqueue.model_spp_print_queue_id,g2p_registry_base.group_g2p_admin,1,1,1,1

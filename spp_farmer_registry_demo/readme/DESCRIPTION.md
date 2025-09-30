@@ -2,7 +2,7 @@
 
 ## Overview
 
-The [spp_farmer_registry_demo](spp_farmer_registry_demo) module is a demonstration module for OpenSPP that provides pre-populated data for the farmer registry. It builds upon the [spp_farmer_registry_base](spp_farmer_registry_base) module and its dependencies to showcase the functionalities of the farmer registry with realistic sample data.
+The [spp_farmer_registry_demo](spp_farmer_registry_demo) module is a demonstration module for OpenSPP that provides pre-populated data for the farmer registry. It builds upon the [spp_base_farmer_registry](spp_base_farmer_registry) module and its dependencies to showcase the functionalities of the farmer registry with realistic sample data.
 
 ## Purpose
 
@@ -14,7 +14,7 @@ This module aims to:
 
 ## Module Dependencies and Integration
 
-* **[spp_farmer_registry_base](spp_farmer_registry_base):** This module depends heavily on [spp_farmer_registry_base](spp_farmer_registry_base), inheriting its models and views to extend them with demo data generation capabilities.
+* **[spp_base_farmer_registry](spp_base_farmer_registry):** This module depends heavily on [spp_base_farmer_registry](spp_base_farmer_registry), inheriting its models and views to extend them with demo data generation capabilities.
 * **[g2p_registry_membership](g2p_registry_membership):** Leverages [g2p_registry_membership](g2p_registry_membership) for creating group memberships between individual farmers and farm groups.
 * **[queue_job](queue_job):** Uses [queue_job](queue_job) to handle the generation of large datasets in the background, improving performance and user experience.
 * **[g2p_registry_base](g2p_registry_base):** Depends on [g2p_registry_base](g2p_registry_base) for the basic registrant models and functionalities.
@@ -38,7 +38,7 @@ The [spp_farmer_registry_demo](spp_farmer_registry_demo) module introduces the f
         * Farm Assets: Data on farm machinery and other assets owned by each farm group, categorized by type and quantity.
 
 * **Data Realism:**  The module utilizes external libraries like `faker` to generate realistic and region-specific data for names, contact details, and other attributes. This ensures that the sample data reflects real-world scenarios.
-* **GIS Integration:** The demo data integrates with the GIS functionalities of [spp_farmer_registry_base](spp_farmer_registry_base) to visualize the generated farms and land parcels on a map, providing a visual representation of the farmer registry.
+* **GIS Integration:** The demo data integrates with the GIS functionalities of [spp_base_farmer_registry](spp_base_farmer_registry) to visualize the generated farms and land parcels on a map, providing a visual representation of the farmer registry.
 
 ## Conclusion
 

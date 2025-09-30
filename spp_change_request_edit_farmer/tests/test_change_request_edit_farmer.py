@@ -88,7 +88,7 @@ class TestChangeRequestEditFarmer(TransactionCase):
         reg_id = self.env["g2p.reg.id"].search(
             [
                 ("partner_id", "=", updated_farmer.id),
-                ("id_type", "=", self.env.ref("spp_farmer_registry_base.id_type_national_id").id),
+                ("id_type", "=", self.env.ref("spp_base_farmer_registry.id_type_national_id").id),
             ]
         )
         self.assertEqual(reg_id.value, "ID123456")

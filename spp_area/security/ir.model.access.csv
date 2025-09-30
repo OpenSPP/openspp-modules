@@ -6,17 +6,17 @@ spp_area_kind_admin,Area Kind Admin Access,spp_area_base.model_spp_area_kind,g2p
 
 spp_area_registrar,Area Registrar Access,spp_area_base.model_spp_area,g2p_registry_base.group_g2p_registrar,1,1,1,0
 
-spp_read_area,spp Area Read Access,spp_area_base.model_spp_area,spp_registry_base.read_registry,1,0,0,0
-spp_read_area_import,spp Area Import Read Access,spp_area_base.model_spp_area_import,spp_registry_base.read_registry,1,0,0,0
-spp_read_area_import_raw,spp Area Import Raw Read Access,spp_area_base.model_spp_area_import_raw,spp_registry_base.read_registry,1,0,0,0
-spp_read_area_kind,spp Area Kind Read Access,spp_area_base.model_spp_area_kind,spp_registry_base.read_registry,1,0,0,0
+spp_read_area,spp Area Read Access,spp_area_base.model_spp_area,spp_base_common.read_registry,1,0,0,0
+spp_read_area_import,spp Area Import Read Access,spp_area_base.model_spp_area_import,spp_base_common.read_registry,1,0,0,0
+spp_read_area_import_raw,spp Area Import Raw Read Access,spp_area_base.model_spp_area_import_raw,spp_base_common.read_registry,1,0,0,0
+spp_read_area_kind,spp Area Kind Read Access,spp_area_base.model_spp_area_kind,spp_base_common.read_registry,1,0,0,0
 
-spp_write_area,spp Area Write Access,spp_area_base.model_spp_area,spp_registry_base.write_registry,1,1,0,0
-spp_write_area_import,spp Area Import Write Access,spp_area_base.model_spp_area_import,spp_registry_base.write_registry,1,1,0,0
-spp_write_area_import_raw,spp Area Import Raw Write Access,spp_area_base.model_spp_area_import_raw,spp_registry_base.write_registry,1,1,0,0
-spp_write_area_kind,spp Area Kind Write Access,spp_area_base.model_spp_area_kind,spp_registry_base.write_registry,1,1,0,0
+spp_write_area,spp Area Write Access,spp_area_base.model_spp_area,spp_base_common.write_registry,1,1,0,0
+spp_write_area_import,spp Area Import Write Access,spp_area_base.model_spp_area_import,spp_base_common.write_registry,1,1,0,0
+spp_write_area_import_raw,spp Area Import Raw Write Access,spp_area_base.model_spp_area_import_raw,spp_base_common.write_registry,1,1,0,0
+spp_write_area_kind,spp Area Kind Write Access,spp_area_base.model_spp_area_kind,spp_base_common.write_registry,1,1,0,0
 
-spp_create_area,spp Area Create Access,spp_area_base.model_spp_area,spp_registry_base.create_registry,1,1,1,0
-spp_create_area_import,spp Area Import Create Access,spp_area_base.model_spp_area_import,spp_registry_base.create_registry,1,1,1,0
-spp_create_area_import_raw,spp Area Import Raw Create Access,spp_area_base.model_spp_area_import_raw,spp_registry_base.create_registry,1,1,1,0
-spp_create_area_kind,spp Area Kind Create Access,spp_area_base.model_spp_area_kind,spp_registry_base.create_registry,1,1,1,0
+spp_create_area,spp Area Create Access,spp_area_base.model_spp_area,spp_base_common.create_registry,1,1,1,0
+spp_create_area_import,spp Area Import Create Access,spp_area_base.model_spp_area_import,spp_base_common.create_registry,1,1,1,0
+spp_create_area_import_raw,spp Area Import Raw Create Access,spp_area_base.model_spp_area_import_raw,spp_base_common.create_registry,1,1,1,0
+spp_create_area_kind,spp Area Kind Create Access,spp_area_base.model_spp_area_kind,spp_base_common.create_registry,1,1,1,0

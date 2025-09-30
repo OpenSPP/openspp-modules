@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="ir_ui_view_geo_partner" model="ir.ui.view">
+        <field name="name">Partner view</field>
+        <field eval="16" name="priority" />
+        <field name="model">res.partner</field>
+        <field name="default_zoom">10</field>
+        <field name="arch" type="xml">
+            <gis editable="1">
+                <field name="id" select="1" />
+                <field name="name" select="1" />
+                <field name="display_name" select="1" />
+                <field name="land_coordinates" />
+                <field name="land_geo_polygon" />
+                <field name="farmer_family_name" />
+                <field name="farmer_given_name" />
+              </gis>
+        </field>
+    </record>
+
+    <record id="gis_data_layer_geo_point_res_partner" model="spp.gis.data.layer">
+        <field name="geo_field_id" ref="spp_base_farmer_registry.field_res_partner__land_coordinates" />
+        <field name="name">Address Coordination</field>
+        <field eval="1" name="sequence" />
+        <field name="view_id" ref="ir_ui_view_geo_partner" />
+        <field name="geo_repr">basic</field>
+        <field name="active_on_startup" eval="True" />
+        <field name="layer_opacity">0.8</field>
+        <field name="begin_color">#FF680A</field>
+    </record>
+    <record id="gis_data_layer_geo_multi_poly_res_partner" model="spp.gis.data.layer">
+      <field name="geo_field_id" ref="spp_base_farmer_registry.field_res_partner__land_geo_polygon" />
+      <field name="name">Farm Land</field>
+      <field eval="1" name="sequence" />
+      <field name="view_id" ref="ir_ui_view_geo_partner" />
+      <field name="geo_repr">basic</field>
+      <field name="active_on_startup" eval="True" />
+      <field name="layer_opacity">0.8</field>
+      <field name="begin_color">#FF680A</field>
+  </record>
+    <record id="gis_raster_layer_res_partner_osm" model="spp.gis.raster.layer">
+        <field name="raster_type">osm</field>
+        <field name="name">Farmer Land Information</field>
+        <field name="view_id" ref="ir_ui_view_geo_partner" />
+    </record>
+
+    <record id="g2p_registry_group.action_groups_list" model="ir.actions.act_window">
+      <field name="view_mode">tree,form,gis</field>
+  </record>
+
+    <record id="action_groups_list_gis_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3" />
+        <field name="view_mode">gis</field>
+        <field name="view_id" ref="ir_ui_view_geo_partner" />
+        <field name="act_window_id" ref="g2p_registry_group.action_groups_list" />
+    </record>
+
+</odoo>

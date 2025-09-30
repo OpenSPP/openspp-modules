@@ -26,7 +26,7 @@
         "spp_area",
         "spp_scan_id_document",
         "spp_dms",
-        "spp_registry_base",
+        "spp_base_common",
     ],
     "data": [
         "security/change_request_security.xml",

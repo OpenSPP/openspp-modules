@@ -18,7 +18,7 @@ The [spp_change_request_add_farmer](spp_change_request_add_farmer) module extend
 The module relies heavily on the following modules:
 
 * **[spp_change_request](spp_change_request)**: Inherits the core change request functionality, including the request workflow, validation processes, approval mechanisms, and integration with the Document Management System ([spp_dms](spp_dms)).
-* **[spp_farmer_registry_base](spp_farmer_registry_base)**: Leverages the farmer-specific data models and attributes to capture and store information about the new farmer.
+* **[spp_base_farmer_registry](spp_base_farmer_registry)**: Leverages the farmer-specific data models and attributes to capture and store information about the new farmer.
 * **[g2p_registry_membership](g2p_registry_membership)**: Integrates with the membership management system to create the appropriate group membership record for the new farmer upon change request approval. 
 * **[phone_validation](phone_validation)**: Utilizes the phone validation module to ensure phone number entries for the new farmer adhere to correct formatting.
 * **[g2p_registry_group](g2p_registry_group)**:  Accesses group information and functionality to display details about the target group for the new farmer.

@@ -50,10 +50,10 @@ This module aims to:
 Module Dependencies and Integration
 -----------------------------------
 
--  `spp_farmer_registry_base <spp_farmer_registry_base>`__ : The
+-  `spp_base_farmer_registry <spp_base_farmer_registry>`__ : The
    dashboard module heavily relies on the data models and
    functionalities provided by
-   `spp_farmer_registry_base <spp_farmer_registry_base>`__. It fetches
+   `spp_base_farmer_registry <spp_base_farmer_registry>`__. It fetches
    data about farmers, farm groups, land records, agricultural
    activities, and other relevant information from this core module.
 -  `g2p_registry_membership <g2p_registry_membership>`__ : Utilizes this
@@ -71,7 +71,7 @@ Module Dependencies and Integration
    within the Odoo interface.
 -  `g2p_registry_base <g2p_registry_base>`__ : Indirectly depends on
    this module through its reliance on
-   `spp_farmer_registry_base <spp_farmer_registry_base>`__. The core
+   `spp_base_farmer_registry <spp_base_farmer_registry>`__. The core
    registrant data structures and relationships defined in
    `g2p_registry_base <g2p_registry_base>`__ are essential for the
    dashboard's functionality.

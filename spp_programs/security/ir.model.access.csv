@@ -133,7 +133,7 @@ reject_entitlement_access,Reject Entitlement Access,g2p_programs.model_g2p_entit
 reject_entitlement_wizard_access,Reject Entitlement Wizard Access,spp_programs.model_spp_reject_entitlement_wizard,spp_programs.reject_entitlement,1,1,1,1
 spp_entitlement_reject_access,SPP Entitlement Reject Access,spp_programs.model_spp_entitlement_reject,spp_programs.reject_entitlement,1,1,1,1
 
-entitlement_inkind_read_registry_access,Entitlement Inkind Read Access,spp_programs.model_g2p_entitlement_inkind,spp_registry_base.read_registry,1,0,0,0
+entitlement_inkind_read_registry_access,Entitlement Inkind Read Access,spp_programs.model_g2p_entitlement_inkind,spp_base_common.read_registry,1,0,0,0
 
 reject_entitlement_wizard_finance_validator_access,Reject Entitlement Wizard Finance Validator Access,spp_programs.model_spp_reject_entitlement_wizard,g2p_programs.g2p_finance_validator,1,1,1,1
 spp_entitlement_reject_finance_validator_access,SPP Entitlement Reject Finance Validator Access,spp_programs.model_spp_entitlement_reject,g2p_programs.g2p_finance_validator,1,1,1,1

@@ -1,0 +1,40 @@
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
+
+{
+    "name": "OpenSPP Social Registry Base",
+    "category": "OpenSPP/OpenSPP",
+    "version": "17.0.1.3.0",
+    "sequence": 1,
+    "author": "OpenSPP.org",
+    "website": "https://github.com/OpenSPP/openspp-modules",
+    "license": "LGPL-3",
+    "development_status": "Production/Stable",
+    "maintainers": ["jeremi", "gonzalesedwin1123", "emjay0921"],
+    "depends": [
+        "base",
+        "spp_base_common",
+        "spp_area",
+        "spp_custom_field",
+        "spp_custom_fields_ui",
+        "spp_custom_filter_registry_ui",
+        "spp_openid_vci_individual",
+        "g2p_registry_base",
+        "g2p_registry_individual",
+        "g2p_registry_group",
+        "g2p_registry_membership",
+    ],
+    "excludes": [
+        "spp_base_farmer_registry",
+        "spp_base_spmis",
+    ],
+    "external_dependencies": {},
+    "data": [],
+    "assets": {},
+    "demo": [],
+    "images": [],
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+    "summary": "Initializes the Social Registry system, enabling the management of registrants and their data for social protection programs.",
+}
