@@ -67,7 +67,7 @@ class TestPhoneValidation(TransactionCase):
         )
         phone._onchange_phone_validation()
         self.assertEqual(phone.phone_no, "09123456789")
-    
+
     def test_04_create_phone_with_letters_in_number(self):
         phone = self.phone_model.create(
             {
@@ -79,7 +79,7 @@ class TestPhoneValidation(TransactionCase):
         with self.assertRaises(ValidationError) as cm:
             phone._onchange_phone_validation()
         self.assertIn("Phone number must not contain letters", str(cm.exception))
-    
+
     def test_05_create_phone_with_invalid_special_characters(self):
         phone = self.phone_model.create(
             {
