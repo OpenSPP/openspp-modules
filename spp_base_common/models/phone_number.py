@@ -29,6 +29,9 @@ class G2PPhoneNumber(models.Model):
             return
 
         phone_no = self.phone_no
+        # Remove spaces, parentheses, and dashes for validation purposes
+        phone_no = phone_no.replace(" ", "").replace("(", "").replace(")", "").replace("-", "")
+
         error_msgs = []
 
         # Check for letters
@@ -60,8 +63,7 @@ class G2PPhoneNumber(models.Model):
                     pattern = r"^\+?" + re.escape(validation.prefix) + r"\d{" + str(validation.number_of_digits) + r"}$"
                 else:
                     pattern = r"^\d{" + str(validation.number_of_digits) + r"}$"
-                phone_digits = phone_no.replace("-", "")
-                if re.match(pattern, phone_digits):
+                if re.match(pattern, phone_no):
                     validated_success_count += 1
                 else:
                     format_msgs.append(validation.name)
