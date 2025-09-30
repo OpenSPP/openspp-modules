@@ -57,6 +57,17 @@ class TestPhoneValidation(TransactionCase):
         phone._onchange_phone_validation()
         self.assertEqual(phone.phone_no, "+639123456789")
 
+        phone = self.phone_model.create(
+            {
+                "partner_id": self.registrant.id,
+                "phone_no": "+639-1234-56789",
+                "country_id": self.env.ref("base.ph").id,
+            }
+        )
+        phone._onchange_phone_validation()
+        self.assertEqual(phone.phone_no, "+639-1234-56789")
+        self.assertEqual(phone.phone_sanitized, "+639123456789")
+
     def test_03_create_phone_with_valid_number_without_prefix(self):
         phone = self.phone_model.create(
             {

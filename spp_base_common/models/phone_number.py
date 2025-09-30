@@ -78,4 +78,6 @@ class G2PPhoneNumber(models.Model):
     @api.depends("phone_no", "country_id")
     def _compute_phone_sanitized(self):
         for rec in self:
-            rec.phone_sanitized = rec.phone_no
+            phone_no = rec.phone_no
+            phone_no = phone_no.replace(" ", "").replace("(", "").replace(")", "").replace("-", "")
+            rec.phone_sanitized = phone_no
