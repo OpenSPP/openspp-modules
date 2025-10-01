@@ -102,7 +102,7 @@ class SPPDemoDataGenerator(models.Model):
                     individual_vals = self.get_individual_vals(fake)
                     individual = self.env["g2p.individual"].create(individual_vals)
                     self.create_ids(fake, individual)
-                    membership_vals = self.get_group_membership_vals(group, individual)
+                    membership_vals = self.get_group_membership_vals(fake, group, individual)
                     if is_head_member:
                         have_head_member = True
                         membership_vals["kind"] = self.env.ref("g2p_group_membership.group_membership_kind_head").id
@@ -116,6 +116,7 @@ class SPPDemoDataGenerator(models.Model):
 
     def get_group_vals(self, fake):
         registration_date = self.get_random_date(
+            fake,
             datefrom=fields.Date.today().replace(year=fields.Date.today().year - 5),
             dateto=fields.Date.today(),
         )
@@ -132,10 +133,12 @@ class SPPDemoDataGenerator(models.Model):
 
     def get_individual_vals(self, fake):
         birth_date = self.get_random_date(
+            fake,
             datefrom=fields.Date.today().replace(year=fields.Date.today().year - 70),
             dateto=fields.Date.today().replace(year=fields.Date.today().year - 1),
         )
         registration_date = self.get_random_date(
+            fake,
             datefrom=birth_date.replace(year=birth_date.year + 1),
             dateto=fields.Date.today(),
         )
@@ -157,8 +160,9 @@ class SPPDemoDataGenerator(models.Model):
         }
         return individual_vals
 
-    def get_group_membership_vals(self, group, individual):
+    def get_group_membership_vals(self, fake, group, individual):
         start_date = self.get_random_date(
+            fake,
             datefrom=group.registration_date,
             dateto=fields.Date.today(),
         )
@@ -195,10 +199,12 @@ class SPPDemoDataGenerator(models.Model):
         id_type_id = self.get_id_type(id_type)
         id_number = fake.bothify(text="??######")
         issue_date = self.get_random_date(
+            fake,
             datefrom=registrant.registration_date,
             dateto=fields.Date.today(),
         )
         id_expiry_date = self.get_random_date(
+            fake,
             datefrom=issue_date.replace(year=issue_date.year + 1),
             dateto=issue_date.replace(year=issue_date.year + 10),
         )
