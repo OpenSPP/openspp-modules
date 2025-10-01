@@ -100,7 +100,7 @@ class SPPDemoDataGenerator(models.Model):
                 for _ in range(num_members):
                     is_head_member = random.choice([True, False]) if not have_head_member else False
                     individual_vals = self.get_individual_vals(fake)
-                    individual = self.env["g2p.individual"].create(individual_vals)
+                    individual = self.env["res.partner"].create(individual_vals)
                     self.create_ids(fake, individual)
                     membership_vals = self.get_group_membership_vals(fake, group, individual)
                     if is_head_member:
