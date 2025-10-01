@@ -182,7 +182,7 @@ class SPPDemoDataGenerator(models.Model):
         return self.env["gender.type"].search([("name", "=", gender)], limit=1).id
 
     def get_random_date(self, fake, datefrom, dateto):
-        return fake.date_between_dates(datefrom=datefrom, dateto=dateto)
+        return fake.date_between_dates(date_start=datefrom, date_end=dateto)
 
     def get_id_type(self, id_type):
         id_type_id = self.env["g2p.id.type"].search([("name", "=", id_type)], limit=1)
