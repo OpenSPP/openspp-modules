@@ -105,7 +105,7 @@ class SPPDemoDataGenerator(models.Model):
                     membership_vals = self.get_group_membership_vals(fake, group, individual)
                     if is_head_member:
                         have_head_member = True
-                        membership_vals["kind"] = self.env.ref("g2p_group_membership.group_membership_kind_head").id
+                        membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
                     members.append((4, membership_vals))
                 if members:
                     self.env["g2p.group.membership"].create(members)
