@@ -117,6 +117,7 @@ class SPPDemoDataGenerator(models.Model):
             datefrom=fields.Date.today().replace(year=fields.Date.today().year - 5),
             dateto=fields.Date.today(),
         )
+        address = fake.address()
 
         group_vals = {
             "name": fake.company(),
@@ -124,6 +125,7 @@ class SPPDemoDataGenerator(models.Model):
             "is_group": True,
             "registration_date": registration_date,
             "create_date": registration_date,
+            "address": address,
         }
 
         return group_vals
@@ -145,6 +147,8 @@ class SPPDemoDataGenerator(models.Model):
         last_name = fake.last_name()
         name = f"{first_name} {last_name}"
 
+        address = fake.address()
+        
         individual_vals = {
             "name": name,
             "family_name": last_name,
@@ -154,6 +158,8 @@ class SPPDemoDataGenerator(models.Model):
             "gender": gender_id,
             "birthdate": birth_date,
             "registration_date": registration_date,
+            "create_date": registration_date,
+            "address": address,
         }
         return individual_vals
 
