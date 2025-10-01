@@ -91,16 +91,12 @@ class SPPDemoDataGenerator(models.Model):
             self.locked = True
             self.locked_reason = "Data generation in progress..."
             for _ in range(self.number_of_groups):
-                group_vals = self.get_group_vals(fake)
-                group = self.env["res.partner"].create(group_vals)
-                self.create_ids(fake, group)
+                group = self.generate_groups(fake)
                 num_members = fake.random_int(self.members_range_from, self.members_range_to)
                 have_head_member = False
                 for _ in range(num_members):
                     is_head_member = random.choice([True, False]) if not have_head_member else False
-                    individual_vals = self.get_individual_vals(fake)
-                    individual = self.env["res.partner"].create(individual_vals)
-                    self.create_ids(fake, individual)
+                    individual = self.generate_individuals(fake)
                     membership_vals = self.get_group_membership_vals(fake, group, individual)
                     if is_head_member:
                         have_head_member = True
@@ -110,6 +106,20 @@ class SPPDemoDataGenerator(models.Model):
             self.state = "completed"
             self.locked = False
             self.locked_reason = "Data generation completed."
+
+    def generate_groups(self, fake):
+        group_vals = self.get_group_vals(fake)
+        group = self.env["res.partner"].create(group_vals)
+        self.create_ids(fake, group)
+        self.create_phone_numbers(fake, group)
+        return group
+    
+    def generate_individuals(self, fake):
+        individual_vals = self.get_individual_vals(fake)
+        individual = self.env["res.partner"].create(individual_vals)
+        self.create_ids(fake, individual)
+        self.create_phone_numbers(fake, individual)
+        return individual
 
     def get_group_vals(self, fake):
         registration_date = self.get_random_date(
@@ -148,7 +158,7 @@ class SPPDemoDataGenerator(models.Model):
         name = f"{first_name} {last_name}"
 
         address = fake.address()
-        
+
         individual_vals = {
             "name": name,
             "family_name": last_name,
@@ -219,6 +229,20 @@ class SPPDemoDataGenerator(models.Model):
             "expiry_date": id_expiry_date,
         }
         self.env["g2p.reg.id"].create(id_vals)
+    
+    def create_phone_numbers(self, fake, registrant):
+        phone_number = fake.phone_number()
+        date_collected = self.get_random_date(
+            fake,
+            datefrom=registrant.registration_date,
+            dateto=fields.Date.today(),
+        )
+        phone_vals = {
+            "partner_id": registrant.id,
+            "phone_no": phone_number,
+            "date_collected": date_collected,
+        }
+        self.env["g2p.phone.number"].create(phone_vals)
 
     def refresh_page(self):
         self.ensure_one()
