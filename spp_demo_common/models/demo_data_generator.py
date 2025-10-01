@@ -95,7 +95,6 @@ class SPPDemoDataGenerator(models.Model):
                 group = self.env["res.partner"].create(group_vals)
                 self.create_ids(fake, group)
                 num_members = fake.random_int(self.members_range_from, self.members_range_to)
-                members = []
                 have_head_member = False
                 for _ in range(num_members):
                     is_head_member = random.choice([True, False]) if not have_head_member else False
@@ -106,9 +105,7 @@ class SPPDemoDataGenerator(models.Model):
                     if is_head_member:
                         have_head_member = True
                         membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
-                    members.append((4, membership_vals))
-                if members:
-                    self.env["g2p.group.membership"].create(members)
+                    self.env["g2p.group.membership"].create(membership_vals)
 
             self.state = "completed"
             self.locked = False
