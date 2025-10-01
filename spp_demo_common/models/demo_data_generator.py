@@ -215,7 +215,7 @@ class SPPDemoDataGenerator(models.Model):
             "value": id_number,
             "expiry_date": id_expiry_date,
         }
-        self.env["g2p.identification"].create(id_vals)
+        self.env["g2p.reg.id"].create(id_vals)
 
     def refresh_page(self):
         self.ensure_one()
