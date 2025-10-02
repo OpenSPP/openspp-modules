@@ -48,14 +48,20 @@
                 <filter
                     string="Active"
                     name="active"
-                    domain="[('active', '=', True)]"
+                    domain="[('state', '=', 'active')]"
                     help="Filter to show only active phone validations."
                 />
                 <filter
                     string="Inactive"
-                    name="inactive"
-                    domain="[('active', '=', False)]"
+                    name="active"
+                    domain="[('state', '=', 'inactive')]"
                     help="Filter to show only inactive phone validations."
+                />
+                <filter
+                    string="Archived"
+                    name="archived"
+                    domain="[('active', '=', False)]"
+                    help="Filter to show only archived phone validations."
                 />
             </search>
         </field>
