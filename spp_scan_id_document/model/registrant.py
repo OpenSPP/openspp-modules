@@ -1,7 +1,8 @@
 import json
 import logging
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -20,16 +21,77 @@ class IdDetailsIndividual(models.Model):
         if self.addl_name:
             name += f"{self.addl_name} "
 
+        gender = None
+
+        if details.get("gender"):
+            details_gender = details.get("gender")
+            gender = self.env["gender.type"].search(
+                ["|", ("code", "=", details_gender), ("value", "=", details_gender)], limit=1
+            )
+
+            # If still not found, log a warning and raise an error
+            if not gender:
+                message = _("Gender '%s' not found. Please create the gender first.") % details_gender
+                raise UserError(message)
+
+        document_type = None
+        if details.get("document_type"):
+            details_document_type = details.get("document_type")
+            document_type = self.env["g2p.id.type"].search([("name", "=", details_document_type)], limit=1)
+            if not document_type:
+                message = (
+                    _("Document type '%s' not found. Please create the document type first.") % details_document_type
+                )
+                raise UserError(message)
+
+        document_number = details.get("document_number", None)
+        document_expiry_date = details.get("expiry_date", None)
+        if document_expiry_date:
+            self._validate_scan_dates(document_expiry_date, "expiry_date")
+
+        birth_date = details.get("birth_date", None)
+        if birth_date:
+            self._validate_scan_dates(birth_date, "birth_date")
+
         vals = {
             "family_name": details.get("family_name"),
             "given_name": details.get("given_name"),
             "name": name,
             "birthdate": details.get("birth_date"),
-            "gender": details.get("gender"),
+            "gender": gender.id if gender else False,
             "id_document_details": "",
             "birth_place": details.get("birth_place_city", None),
         }
+        if document_type:
+            vals.update(
+                {
+                    "reg_ids": [
+                        (
+                            0,
+                            0,
+                            {
+                                "id_type": document_type.id,
+                                "value": document_number,
+                                "expiry_date": document_expiry_date,
+                            },
+                        )
+                    ]
+                }
+            )
+
         return vals
+
+    def _validate_scan_dates(self, scanned_date, field_name):
+        if scanned_date:
+            try:
+                # Try to parse the date in YYYY-MM-DD format
+                parsed_date = fields.Date.from_string(scanned_date)
+                return parsed_date
+            except ValueError as err:
+                raise UserError(
+                    _("Invalid date format for %s: %s. Expected format is YYYY-MM-DD.") % (field_name, scanned_date)
+                ) from err
+        return
 
     @api.onchange("id_document_details")
     def on_scan_id_document_details(self):
@@ -42,6 +104,8 @@ class IdDetailsIndividual(models.Model):
                         vals.update({"image_1920": details["image"]})
 
                     self.update(vals)
+        except UserError:
+            raise
         except Exception as e:
             _logger.error(e)
 

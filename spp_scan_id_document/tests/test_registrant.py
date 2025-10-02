@@ -1,3 +1,4 @@
+from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
 
@@ -21,17 +22,18 @@ class IdDetailsIndividualTest(TransactionCase):
             }
         )
 
-    def test_on_scan_id_document_details_success(self):
+    def test_01_on_scan_id_document_details(self):
         self.applicant.id_document_details = (
             "{"
             '"photo": "",'
             '"given_name": "Blue",'
             '"family_name": "Red",'
             '"birth_date": "1970-06-18",'
-            '"document_type": "Passport",'
+            '"document_type": "PassportTest",'
             '"document_number": "162401579884",'
-            '"expiry_date": "06/18/2025",'
+            '"expiry_date": "2025-10-10",'
             '"nationality": "Philippines",'
+            '"gender": "MaleTest",'
             '"birth_place_city": "Caloocan",'
             '"image": "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz'
             "AAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANCSURBVEiJtZZPbBtFFMZ/M7ubXdtdb1xSFyeilBapySVU8h8OoFaooFSqiihIVIpQBKci6KEg9Q6H9"
@@ -45,19 +47,40 @@ class IdDetailsIndividualTest(TransactionCase):
             "}"
         )
 
+        # Should raise a user error since gender type does not exist
+        with self.assertRaises(UserError):
+            self.applicant.on_scan_id_document_details()
+
+        # Create the gender type
+        gender_type = self.env["gender.type"].search(
+            ["|", ("code", "=", "MaleTest"), ("value", "=", "MaleTest")], limit=1
+        )
+        if not gender_type:
+            self.env["gender.type"].create({"code": "MaleTest", "value": "MaleTest"})
+
+        # Should still raise a user error since document type does not exist
+        with self.assertRaises(UserError):
+            self.applicant.on_scan_id_document_details()
+
+        # Create the document type
+        doc_type = self.env["g2p.id.type"].search([("name", "=", "PassportTest")], limit=1)
+        if not doc_type:
+            self.env["g2p.id.type"].create({"name": "PassportTest"})
+
+        # Now it should work
         self.applicant.on_scan_id_document_details()
 
         self.assertEqual(self.applicant.family_name, "Red")
         self.assertEqual(self.applicant.given_name, "Blue")
 
-    def test_on_scan_id_document_details_failure(self):
+    def test_02_on_scan_id_document_details_failure(self):
         # Invalid JSON
         self.applicant.id_document_details = """{
             "photo": "",
             "given_name": "Blue",
             "family_name": "Red",
             "birth_date": "1970-06-18",
-            "document_type": "Passport",
+            "document_type": "PassportTest",
             "document_number": "162401579884",
             "expiry_date": "06/18/2025",
             "nationality": "Philippines",
@@ -69,35 +92,66 @@ class IdDetailsIndividualTest(TransactionCase):
         self.assertEqual(self.applicant.given_name, "Chin")
         self.assertEqual(self.applicant.id_document_details, "")
 
-    def test_scan_id_document_details_vals(self):
+    def test_03_scan_id_document_details_vals(self):
         details = {
             "photo": "",
             "given_name": "Blue",
             "family_name": "Red",
             "birth_date": "1970-06-18",
-            "gender": "Male",
-            "document_type": "Passport",
+            "gender": "MaleTest",
+            "document_type": "PassportTest",
+            "document_number": "162401579884",
+            "expiry_date": "2025-06-18",
+            "nationality": "Philippines",
+            "birth_place_city": "Caloocan",
+        }
+        # create the gender type and document type
+        gender_male = self.env["gender.type"].search([("code", "=", "MaleTest")], limit=1)
+        if not gender_male:
+            gender_male = self.env["gender.type"].create({"code": "MaleTest", "value": "MaleTest"})
+        doc_type_passport = self.env["g2p.id.type"].search([("name", "=", "PassportTest")], limit=1)
+        if not doc_type_passport:
+            doc_type_passport = self.env["g2p.id.type"].create({"name": "PassportTest"})
+        vals = self.applicant.scan_id_document_details_vals(details)
+
+        self.assertEqual(vals.get("family_name"), details["family_name"])
+        self.assertEqual(vals.get("given_name"), details["given_name"])
+        self.assertEqual(vals.get("birthdate"), details["birth_date"])
+        self.assertEqual(vals.get("birth_place"), details["birth_place_city"])
+        self.assertEqual(vals.get("gender"), gender_male.id)
+
+        self.assertIn("reg_ids", vals)
+        self.assertEqual(len(vals["reg_ids"]), 1)
+
+        reg_id_command = vals["reg_ids"][0]
+        self.assertEqual(reg_id_command[0], 0)
+        self.assertEqual(reg_id_command[1], 0)
+
+        reg_id_vals = reg_id_command[2]
+        self.assertEqual(reg_id_vals.get("id_type"), doc_type_passport.id)
+        self.assertEqual(reg_id_vals.get("value"), details["document_number"])
+        self.assertEqual(reg_id_vals.get("expiry_date"), details["expiry_date"])
+
+    def test_04_scan_id_document_details_vals_invalid_date(self):
+        details = {
+            "photo": "",
+            "given_name": "Blue",
+            "family_name": "Red",
+            "birth_date": "1970-06-18",
+            "gender": "MaleTest",
+            "document_type": "PassportTest",
             "document_number": "162401579884",
             "expiry_date": "06/18/2025",
             "nationality": "Philippines",
             "birth_place_city": "Caloocan",
         }
+        # create the gender type and document type
+        gender_male = self.env["gender.type"].search([("code", "=", "Male")], limit=1)
+        if not gender_male:
+            gender_male = self.env["gender.type"].create({"code": "MaleTest", "value": "MaleTest"})
+        doc_type_passport = self.env["g2p.id.type"].search([("name", "=", "PassportTest")], limit=1)
+        if not doc_type_passport:
+            doc_type_passport = self.env["g2p.id.type"].create({"name": "PassportTest"})
 
-        vals = self.applicant.scan_id_document_details_vals(details)
-
-        self.assertEqual(
-            [
-                details["family_name"],
-                details["given_name"],
-                details["birth_date"],
-                details["gender"],
-                details["birth_place_city"],
-            ],
-            [
-                vals.get("family_name"),
-                vals.get("given_name"),
-                vals.get("birthdate"),
-                vals.get("gender"),
-                vals.get("birth_place"),
-            ],
-        )
+        with self.assertRaises(UserError):
+            self.applicant.scan_id_document_details_vals(details)
