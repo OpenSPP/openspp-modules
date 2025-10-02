@@ -80,25 +80,24 @@ class TestPhoneValidation(TransactionCase):
         self.assertEqual(phone.phone_no, "09123456789")
 
     def test_04_create_phone_with_letters_in_number(self):
-        phone = self.phone_model.create(
-            {
-                "partner_id": self.registrant.id,
-                "phone_no": "09123A56789",
-                "country_id": self.env.ref("base.ph").id,
-            }
-        )
+        phone_vals = {
+            "partner_id": self.registrant.id,
+            "phone_no": "09123A56789",
+            "country_id": self.env.ref("base.ph").id,
+        }
         with self.assertRaises(ValidationError) as cm:
-            phone._onchange_phone_validation()
+            self.phone_model.create(phone_vals)
+
         self.assertIn("Phone number must not contain letters", str(cm.exception))
 
     def test_05_create_phone_with_invalid_special_characters(self):
-        phone = self.phone_model.create(
-            {
-                "partner_id": self.registrant.id,
-                "phone_no": "09123$$456789",
-                "country_id": self.env.ref("base.ph").id,
-            }
-        )
+        phone_vals = {
+            "partner_id": self.registrant.id,
+            "phone_no": "09123@456789",
+            "country_id": self.env.ref("base.ph").id,
+        }
+
         with self.assertRaises(ValidationError) as cm:
-            phone._onchange_phone_validation()
+            self.phone_model.create(phone_vals)
+
         self.assertIn("Phone number contains invalid special characters", str(cm.exception))
