@@ -233,7 +233,14 @@ class SPPDemoDataGenerator(models.Model):
         self.env["g2p.reg.id"].create(id_vals)
 
     def create_phone_numbers(self, fake, registrant):
-        phone_number = fake.phone_number()
+        while True:
+            phone_number = fake.phone_number()
+            # Accept only numbers, spaces, dashes, parentheses, and leading +
+            cleaned = phone_number.replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
+            if cleaned.startswith("+"):
+                cleaned = cleaned[1:]
+            if cleaned.isdigit():
+                break
         date_collected = self.get_random_date(
             fake,
             datefrom=registrant.registration_date,
