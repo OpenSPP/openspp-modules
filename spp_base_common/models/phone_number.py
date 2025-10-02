@@ -61,7 +61,9 @@ class G2PPhoneNumber(models.Model):
                 validated_success_count = 0
                 for validation in phone_validation:
                     if validation.with_prefix:
-                        pattern = r"^\+?" + re.escape(validation.prefix) + r"\d{" + str(validation.number_of_digits) + r"}$"
+                        pattern = (
+                            r"^\+?" + re.escape(validation.prefix) + r"\d{" + str(validation.number_of_digits) + r"}$"
+                        )
                     else:
                         pattern = r"^\d{" + str(validation.number_of_digits) + r"}$"
                     if re.match(pattern, phone_no):
@@ -70,7 +72,9 @@ class G2PPhoneNumber(models.Model):
                         format_msgs.append(validation.name)
 
                 if validated_success_count == 0 and not error_msgs:
-                    error_msgs.append(_("Phone number must match one of the following formats: ") + ", ".join(format_msgs))
+                    error_msgs.append(
+                        _("Phone number must match one of the following formats: ") + ", ".join(format_msgs)
+                    )
 
             if error_msgs:
                 raise ValidationError("\n".join(error_msgs))
