@@ -100,7 +100,9 @@ class SPPDemoDataGenerator(models.Model):
                     membership_vals = self.get_group_membership_vals(fake, group, individual)
                     if is_head_member:
                         have_head_member = True
-                        membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
+                        membership_vals["kind"] = [
+                            (4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)
+                        ]
                     self.env["g2p.group.membership"].create(membership_vals)
 
             self.state = "completed"
@@ -113,7 +115,7 @@ class SPPDemoDataGenerator(models.Model):
         self.create_ids(fake, group)
         self.create_phone_numbers(fake, group)
         return group
-    
+
     def generate_individuals(self, fake):
         individual_vals = self.get_individual_vals(fake)
         individual = self.env["res.partner"].create(individual_vals)
@@ -229,7 +231,7 @@ class SPPDemoDataGenerator(models.Model):
             "expiry_date": id_expiry_date,
         }
         self.env["g2p.reg.id"].create(id_vals)
-    
+
     def create_phone_numbers(self, fake, registrant):
         phone_number = fake.phone_number()
         date_collected = self.get_random_date(
