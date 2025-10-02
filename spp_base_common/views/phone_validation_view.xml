@@ -35,6 +35,7 @@
                     class="btn-danger"
                     invisible="state == 'inactive'"
                 />
+                <field name="active" invisible="1" />
             </tree>
         </field>
     </record>

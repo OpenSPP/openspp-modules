@@ -14,6 +14,7 @@ class SPPPhoneValidation(models.Model):
         string="State",
         default="active",
     )
+    active = fields.Boolean(string="Active", default=True)
 
     @api.depends("number_of_digits", "with_prefix", "prefix")
     def _compute_name(self):
