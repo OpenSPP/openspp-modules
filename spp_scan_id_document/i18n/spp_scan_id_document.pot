@@ -19,10 +19,31 @@ msgid "Contact"
 msgstr ""
 
 #. module: spp_scan_id_document
+#. odoo-python
+#: code:addons/spp_scan_id_document/model/registrant.py:0
+#, python-format
+msgid "Document type '%s' not found. Please create the document type first."
+msgstr ""
+
+#. module: spp_scan_id_document
+#. odoo-python
+#: code:addons/spp_scan_id_document/model/registrant.py:0
+#, python-format
+msgid "Gender '%s' not found. Please create the gender first."
+msgstr ""
+
+#. module: spp_scan_id_document
 #: model:ir.model.fields,field_description:spp_scan_id_document.field_res_partner__id_document_details
 #: model:ir.model.fields,field_description:spp_scan_id_document.field_res_users__id_document_details
 #: model:ir.model.fields,field_description:spp_scan_id_document.field_spp_attendance_subscriber__id_document_details
 msgid "Id Document Details"
+msgstr ""
+
+#. module: spp_scan_id_document
+#. odoo-python
+#: code:addons/spp_scan_id_document/model/registrant.py:0
+#, python-format
+msgid "Invalid date format for %s: %s. Expected format is YYYY-MM-DD."
 msgstr ""
 
 #. module: spp_scan_id_document
