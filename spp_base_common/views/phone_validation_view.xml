@@ -59,6 +59,7 @@
                 />
             </search>
         </field>
+    </record>
 
     <record id="action_phone_validation" model="ir.actions.act_window">
         <field name="name">Phone Validation</field>
