@@ -1,0 +1,37 @@
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
+
+{
+    "name": "OpenSPP Demo (Common)",
+    "category": "OpenSPP/OpenSPP",
+    "version": "17.0.1.3.0",
+    "sequence": 1,
+    "author": "OpenSPP.org",
+    "website": "https://github.com/OpenSPP/openspp-modules",
+    "license": "LGPL-3",
+    "development_status": "Production/Stable",
+    "maintainers": ["jeremi", "gonzalesedwin1123", "emjay0921"],
+    "depends": [
+        "base",
+        "spp_base_common",
+        "g2p_registry_base",
+        "g2p_registry_individual",
+        "g2p_registry_group",
+        "g2p_registry_membership",
+    ],
+    "excludes": [],
+    "external_dependencies": {},
+    "data": [
+        "security/ir.model.access.csv",
+        "data/ir_config_parameter_data.xml",
+        "views/res_config_view.xml",
+        "views/demo_data_generator_view.xml",
+    ],
+    "assets": {},
+    "demo": [],
+    "images": [],
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+    "summary": "Base demo module with generic data generator and sample data for OpenSPP modules.",
+}

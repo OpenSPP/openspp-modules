@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="number_of_groups" model="ir.config_parameter">
+        <field name="key">spp_demo_common.number_of_groups</field>
+        <field name="value">10</field>
+    </record>
+    <record id="members_range_from" model="ir.config_parameter">
+        <field name="key">spp_demo_common.members_range_from</field>
+        <field name="value">1</field>
+    </record>
+    <record id="members_range_to" model="ir.config_parameter">
+        <field name="key">spp_demo_common.members_range_to</field>
+        <field name="value">10</field>
+    </record>
+    <record id="batch_size" model="ir.config_parameter">
+        <field name="key">spp_demo_common.batch_size</field>
+        <field name="value">20</field>
+    </record>
+    <record id="queue_job_minimum_size" model="ir.config_parameter">
+        <field name="key">spp_demo_common.queue_job_minimum_size</field>
+        <field name="value">100</field>
+    </record>
+</odoo>

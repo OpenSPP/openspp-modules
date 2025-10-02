@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="spp_demo_data_generator_config_view" model="ir.ui.view">
+        <field name="name">spp_demo_data_generator_config_view</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="999" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app
+                    string="SPP Demo Data Generator Settings"
+                    name="spp_demo_data_generator_settings"
+                    logo="/spp_demo_common/static/description/icon.png"
+                >
+                    <block title="Default Settings for Demo Data Generator">
+                        <setting
+                            string="Number of Groups"
+                            help="Specifies the default number of groups to be created when generating demo data."
+                        >
+                            <field name="number_of_groups" />
+                        </setting>
+                        <setting
+                            string="Members per Group (From)"
+                            help="Specifies the default minimum number of members per group when generating demo data."
+                        >
+                            <field name="members_range_from" />
+                        </setting>
+                        <setting
+                            string="Members per Group (To)"
+                            help="Specifies the default maximum number of members per group when generating demo data."
+                        >
+                            <field name="members_range_to" />
+                        </setting>
+                    </block>
+                    <block title="Job Queue Settings">
+                        <setting
+                            string="Batch Size"
+                            help="Specifies the default batch size when generating demo data with Job Queue."
+                        >
+                            <field name="batch_size" />
+                        </setting>
+                        <setting
+                            string="Queue Job Minimum Size"
+                            help="Specifies the minimum number of groups to be processed in the queue when generating demo data."
+                        >
+                            <field name="queue_job_minimum_size" />
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>
