@@ -79,5 +79,5 @@ class G2PPhoneNumber(models.Model):
     def _compute_phone_sanitized(self):
         for rec in self:
             phone_no = rec.phone_no
-            phone_no = phone_no.replace(" ", "").replace("(", "").replace(")", "").replace("-", "")
+            phone_no = phone_no.replace(" ", "").replace("(", "").replace(")", "").replace("-", "") if phone_no else ""
             rec.phone_sanitized = phone_no
