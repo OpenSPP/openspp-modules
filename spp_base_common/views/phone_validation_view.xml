@@ -8,7 +8,7 @@
         <field name="model">spp.phone.validation</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree create="true" edit="true" delete="false" editable="top">
+            <tree create="true" edit="true" delete="false" duplicate="false" editable="top">
                 <field name="number_of_digits" />
                 <field name="with_prefix" />
                 <field name="prefix" />
@@ -40,6 +40,26 @@
         </field>
     </record>
 
+    <record id="phone_validation_search_view" model="ir.ui.view">
+        <field name="name">phone.validation.search.view</field>
+        <field name="model">spp.phone.validation</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+                    string="Active"
+                    name="active"
+                    domain="[('active', '=', True)]"
+                    help="Filter to show only active phone validations."
+                />
+                <filter
+                    string="Inactive"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                    help="Filter to show only inactive phone validations."
+                />
+            </search>
+        </field>
+
     <record id="action_phone_validation" model="ir.actions.act_window">
         <field name="name">Phone Validation</field>
         <field name="type">ir.actions.act_window</field>
@@ -47,6 +67,7 @@
         <field name="view_mode">tree</field>
         <field name="context">{}</field>
         <field name="domain">[]</field>
+        <field name="search_view_id" ref="phone_validation_search_view" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Add a Phone Validation!
