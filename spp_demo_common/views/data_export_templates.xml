@@ -10,7 +10,7 @@
                 <field name="name" />
                 <field name="model_ids" />
                 <field name="module_ids" readonly="1" force_save="1" />
-                <field name="active" invisible="1" />
+                <field name="active" column_invisible="1" />
             </tree>
         </field>
     </record>
