@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_cel_registrant_filter_wizard_form" model="ir.ui.view">
+    <field name="name">cel.registrant.filter.wizard.form</field>
+    <field name="model">cel.registrant.filter.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Filter Registry (CEL)">
+        <group>
+          <field name="profile" />
+          <field
+                        name="cel_expression"
+                        placeholder="e.g., members.exists(m, head(m)) and age_years(me.birthdate) &gt;= 60"
+                    />
+        </group>
+        <footer>
+          <button name="action_preview" type="object" string="Preview" class="btn-primary" />
+          <button name="action_open_list" type="object" string="Open List" class="btn-secondary" />
+          <button special="cancel" string="Close" />
+        </footer>
+        <group>
+          <field name="result_domain_text" readonly="1" nolabel="1" />
+          <field name="explain_text" readonly="1" />
+          <field name="preview_count" readonly="1" />
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_cel_registry_individuals" model="ir.actions.act_window">
+    <field name="name">Individuals (CEL)</field>
+    <field name="res_model">cel.registrant.filter.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+    <field name="context">{"default_profile": "registry_individuals"}</field>
+  </record>
+
+  <record id="action_cel_registry_groups" model="ir.actions.act_window">
+    <field name="name">Groups (CEL)</field>
+    <field name="res_model">cel.registrant.filter.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+    <field name="context">{"default_profile": "registry_groups"}</field>
+  </record>
+
+</odoo>

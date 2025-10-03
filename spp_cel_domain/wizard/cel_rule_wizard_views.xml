@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_cel_rule_wizard_form" model="ir.ui.view">
+    <field name="name">cel.rule.wizard.form</field>
+    <field name="model">cel.rule.wizard</field>
+    <field name="arch" type="xml">
+      <form string="CEL Rule Preview">
+        <group>
+          <field name="profile" />
+          <field name="model_id" />
+          <field name="cel_expression" widget="text" placeholder="e.g., count(members, m, head(m)) == 1" />
+        </group>
+        <footer>
+          <button
+                        string="Validate &amp; Preview"
+                        type="object"
+                        name="action_validate_preview"
+                        class="btn-primary"
+                    />
+          <button string="Close" class="btn-secondary" special="cancel" />
+        </footer>
+        <notebook>
+          <page string="Summary">
+            <group>
+              <field name="preview_count" readonly="1" />
+              <field name="result_domain_text" readonly="1" nolabel="1" />
+              <field name="explain_text" readonly="1" />
+            </group>
+          </page>
+          <page string="Metrics Explain">
+            <group>
+              <field name="metrics_explain_text" readonly="1" />
+              <field name="metric_line_ids" readonly="1" context="{'no_create': True}">
+                <tree editable="bottom">
+                  <field name="metric" />
+                  <field name="period_key" />
+                  <field name="requested" />
+                  <field name="cache_hits" />
+                  <field name="misses" />
+                  <field name="fresh_fetches" />
+                  <field name="coverage" />
+                </tree>
+              </field>
+            </group>
+          </page>
+        </notebook>
+      </form>
+    </field>
+  </record>
+</odoo>
