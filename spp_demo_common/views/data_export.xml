@@ -126,6 +126,7 @@
                                         <h4><field
                                                 name="include_installed_modules"
                                                 readonly="include_all_data or state != 'draft'"
+                                                force_save="1"
                                             />
                                         <label
                                                 for="include_installed_modules"
