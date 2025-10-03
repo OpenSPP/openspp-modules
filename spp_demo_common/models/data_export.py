@@ -25,22 +25,45 @@ class SPPDataExporter(models.Model):
     export_file = fields.Binary(string="Exported File", readonly=True)
     export_filename = fields.Char(string="Export Filename", readonly=True)
 
-    module_ids = fields.Many2many(
+    template_module_ids = fields.Many2many(
         "ir.module.module",
         string="Modules",
         related="template_id.module_ids",
         readonly=True,
     )
-    model_ids = fields.Many2many(
+    template_model_ids = fields.Many2many(
         "ir.model",
         string="Models",
         related="template_id.model_ids",
         readonly=True,
     )
+    module_ids = fields.Many2many(
+        "ir.module.module",
+        string="Modules",
+        help="Select the modules to include in the export.",
+        compute="_compute_module_ids",
+    )
+    model_ids = fields.Many2many(
+        "ir.model",
+        string="Models",
+        help="Select the models to include in the export.",
+        compute="_compute_model_ids",
+    )
     include_installed_modules = fields.Boolean(
         string="Include Installed Modules",
         default=False,
         help="Include all installed modules in the export.",
+    )
+    include_all_data = fields.Boolean(
+        string="Include All Data",
+        default=False,
+        help="Include all data across the entire database in the export.",
+    )
+    raw_ids = fields.One2many(
+        "spp.data.exporter.raw",
+        "export_id",
+        string="Raw Data",
+        readonly=True,
     )
 
     def start_export(self):
@@ -48,12 +71,56 @@ class SPPDataExporter(models.Model):
         self.state = "in_progress"
         self.locked = True
         self.locked_reason = "Export in progress..."
+        self.read_models_records()
+
+    def read_models_records(self):
+        for rec in self:
+            raw_data_records = []
+            for model in rec.model_ids:
+                model_obj = self.env[model.model]
+                records = model_obj.search([])
+                record_count = len(records)
+                json_data = records.read() if record_count > 0 else []
+                raw_data_records.append(
+                    {
+                        "name": model.id,
+                        "record_count": record_count,
+                        "json_data": json_data,
+                        "export_id": rec.id,
+                    }
+                )
+            self.env["spp.data.exporter.raw"].create(raw_data_records)
 
     def refresh_page(self):
         return {
             "type": "ir.actions.client",
             "tag": "reload",
         }
+
+    @api.onchange("include_all_data")
+    def _onchange_include_all_data(self):
+        if self.include_all_data:
+            self.include_installed_modules = True
+
+    @api.depends("template_id", "include_installed_modules")
+    def _compute_module_ids(self):
+        for rec in self:
+            rec.module_ids = False
+            if rec.include_installed_modules:
+                installed_modules = self.env["ir.module.module"].search([("state", "=", "installed")]).ids
+                rec.module_ids = [(6, 0, installed_modules)]
+            elif rec.template_id and not rec.include_installed_modules:
+                rec.module_ids = [(6, 0, rec.template_id.module_ids.ids)]
+
+    @api.depends("template_id", "include_all_data")
+    def _compute_model_ids(self):
+        for rec in self:
+            rec.model_ids = False
+            if rec.include_all_data:
+                all_models = self.env["ir.model"].search([]).ids
+                rec.model_ids = [(6, 0, all_models)]
+            elif rec.template_id and not rec.include_all_data:
+                rec.model_ids = [(6, 0, rec.template_id.model_ids.ids)]
 
 
 class SPPDataExporterTemplates(models.Model):

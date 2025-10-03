@@ -71,9 +71,14 @@
                                     <div style="flex: 1;">
                                         <h4><label for="name" string="Description" class="o_form_label" /><div
                                             /></h4>
-                                        <field name="name" required="1" style="width: 90%;" />
+                                        <field
+                                            name="name"
+                                            required="1"
+                                            readonly="state != 'draft'"
+                                            style="width: 90%;"
+                                        />
                                     </div>
-                                    <div style="flex: 1;">
+                                    <div style="flex: 1;" invisible="include_all_data">
                                         <h4><label
                                                 for="template_id"
                                                 string="Export Template"
@@ -84,6 +89,7 @@
                                             required="1"
                                             style="width: 90%;"
                                             options="{'no_create': True}"
+                                            readonly="state != 'draft'"
                                         />
                                     </div>
                                 </div>
@@ -117,10 +123,21 @@
                                     style="display: flex; gap: 20px; margin-bottom: 10px;"
                                 >
                                     <div style="flex: 1;">
-                                        <field name="include_installed_modules" style="width: 90%;" />
-                                        <h4><label
+                                        <h4><field
+                                                name="include_installed_modules"
+                                                readonly="include_all_data or state != 'draft"
+                                            />
+                                        <label
                                                 for="include_installed_modules"
                                                 string="Include Installed Modules"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4><field name="include_all_data" readonly="state != 'draft'" />
+                                        <label
+                                                for="include_all_data"
+                                                string="Include All Data"
                                                 class="o_form_label"
                                             /><div /></h4>
                                     </div>
@@ -131,7 +148,7 @@
                         </div>
                     </div>
                     <notebook>
-                        <page string="Template Modules" name="modules_included">
+                        <page string="Modules" name="module_ids">
                             <field name="module_ids" readonly="1">
                                 <tree>
                                     <field name="shortdesc" />
@@ -139,11 +156,23 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Template Models" name="models_included">
+                        <page string="Models" name="model_ids">
                             <field name="model_ids" readonly="1">
                                 <tree>
                                     <field name="name" />
                                     <field name="model" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page
+                            string="Summary"
+                            name="raw_ids"
+                            invisible="state not in ['in_progress','completed']"
+                        >
+                            <field name="raw_ids" readonly="1">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="record_count" />
                                 </tree>
                             </field>
                         </page>
