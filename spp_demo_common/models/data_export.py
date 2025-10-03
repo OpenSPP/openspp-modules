@@ -30,6 +30,12 @@ class SPPDataExporter(models.Model):
         self.state = "in_progress"
         self.locked = True
         self.locked_reason = "Export in progress..."
+    
+    def refresh_page(self):
+        return {
+            "type": "ir.actions.client",
+            "tag": "reload",
+        }
 
 
 class SPPDataExporterTemplates(models.Model):
