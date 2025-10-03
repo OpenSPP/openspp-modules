@@ -1,3 +1,4 @@
+import base64
 import json
 import logging
 
@@ -89,7 +90,8 @@ class SPPDataExporter(models.Model):
                     }
                 )
             export_filename = f"{self.name.replace(' ', '_').lower()}.json"
-            self.export_file = json.dumps(export_data, indent=4).encode("utf-8")
+            json_bytes = json.dumps(export_data, indent=4).encode("utf-8")
+            self.export_file = base64.b64encode(json_bytes)  # <-- base64 encode here
             self.export_filename = export_filename
             self.state = "completed"
             self.locked = False
