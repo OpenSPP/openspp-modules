@@ -37,6 +37,11 @@ class SPPDataExporter(models.Model):
         related="template_id.model_ids",
         readonly=True,
     )
+    include_installed_modules = fields.Boolean(
+        string="Include Installed Modules",
+        default=False,
+        help="Include all installed modules in the export.",
+    )
 
     def start_export(self):
         self.ensure_one()
