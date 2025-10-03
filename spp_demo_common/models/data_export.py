@@ -104,7 +104,17 @@ class SPPDataExporter(models.Model):
                 model_obj = self.env[model.model]
                 records = model_obj.search([])
                 record_count = len(records)
-                json_data = json.dumps(records.read()) if record_count > 0 else "[]"
+                data = []
+                if record_count > 0:
+                    for record in records.read():
+                        # Convert bytes fields to base64 strings
+                        for key, value in record.items():
+                            if isinstance(value, bytes):
+                                record[key] = base64.b64encode(value).decode('utf-8')
+                        data.append(record)
+                    json_data = json.dumps(data)
+                else:
+                    json_data = "[]"
                 raw_data_records.append(
                     {
                         "name": model.model,
