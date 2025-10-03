@@ -60,8 +60,6 @@
                         </button>
                     </div>
                      <div style="width: 100%; padding-top: 10px; padding-left: 10px;">
-                        <field name="name" invisible="1" />
-                        <field name="queue_job_minimum_size" invisible="1" />
                         <div style="display: flex; gap: 20px;">
                             <field name="name" invisible="1" />
                             <!-- Data Exporter Section -->
