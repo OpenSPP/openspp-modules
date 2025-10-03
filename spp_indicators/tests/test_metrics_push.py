@@ -7,7 +7,7 @@ from urllib.error import HTTPError
 from odoo.tests import HttpCase, tagged
 
 
-@tagged("post_install", "-at_install", "openspp_metrics")
+@tagged("post_install", "-at_install", "spp_indicators")
 class TestMetricsPush(HttpCase):
     def setUp(self):
         super().setUp()

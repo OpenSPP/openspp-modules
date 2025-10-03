@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from odoo.tests import TransactionCase, tagged
 
 
-@tagged("post_install", "-at_install", "openspp_metrics")
+@tagged("post_install", "-at_install", "spp_indicators")
 class TestMetricsService(TransactionCase):
     def setUp(self):
         super().setUp()
