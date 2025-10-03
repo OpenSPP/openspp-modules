@@ -59,9 +59,10 @@
                             </div>
                         </button>
                     </div>
-                     <div style="width: 100%; padding-top: 10px; padding-left: 10px;">
+                    <div style="width: 100%; padding-top: 10px; padding-left: 10px;">
                         <div style="display: flex; gap: 20px;">
                             <field name="name" invisible="1" />
+                            <field name="export_filename" invisible="1" />
                             <!-- Data Exporter Section -->
                             <div style="flex: 1;">
                                 <h3>Data Exporter</h3>
@@ -95,12 +96,40 @@
 
                             <!-- Other Details Section -->
                             <div style="flex: 1;">
-                                <h3>Other Details</h3>
+                                <h3 />
                                 <hr />
+                                <div
+                                    name="div_export_file"
+                                    style="display: flex; gap: 20px; margin-bottom: 10px;"
+                                >
+                                    <div style="flex: 1;">
+                                        <h4><label
+                                                for="export_file"
+                                                string="Exported File"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="export_file"
+                                            readonly="1"
+                                            widget="binary"
+                                            filename="export_filename"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
                     </div>
+                    <notebook>
+                        <page string="Modules Included" name="modules_included">
+                            <field name="module_ids" readonly="1">
+                                <tree>
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
 
                 </sheet>
             </form>

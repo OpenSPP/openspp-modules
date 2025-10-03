@@ -25,6 +25,13 @@ class SPPDataExporter(models.Model):
     export_file = fields.Binary(string="Exported File", readonly=True)
     export_filename = fields.Char(string="Export Filename", readonly=True)
 
+    module_ids = fields.Many2many(
+        "ir.module.module",
+        string="Modules",
+        related="template_id.module_ids",
+        readonly=True,
+    )
+
     def start_export(self):
         self.ensure_one()
         self.state = "in_progress"
