@@ -97,7 +97,8 @@ class SPPDataExporter(models.Model):
                         "data": json_data,
                     }
                 )
-            export_filename = f"{self.name.replace(' ', '_').lower()}.json"
+            filename = self.name
+            export_filename = f"{filename.replace(' ', '_').lower()}.json"
             json_bytes = json.dumps(export_data, indent=4).encode("utf-8")
             self.export_file = base64.b64encode(json_bytes)  # <-- base64 encode here
             self.export_filename = export_filename

@@ -86,7 +86,7 @@
                                             /><div /></h4>
                                         <field
                                             name="template_id"
-                                            required="1"
+                                            required="not include_all_data"
                                             style="width: 90%;"
                                             options="{'no_create': True}"
                                             readonly="state != 'draft'"
