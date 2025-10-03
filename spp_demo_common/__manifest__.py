@@ -24,8 +24,11 @@
     "data": [
         "security/ir.model.access.csv",
         "data/ir_config_parameter_data.xml",
+        "views/main_view.xml",
         "views/res_config_view.xml",
         "views/demo_data_generator_view.xml",
+        "views/data_export.xml",
+        "views/data_export_templates.xml",
     ],
     "assets": {},
     "demo": [],

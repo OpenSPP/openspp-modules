@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_data_exporter_tree" model="ir.ui.view">
+        <field name="name">view_data_exporter_tree</field>
+        <field name="model">spp.data.exporter</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="template_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_data_exporter_form" model="ir.ui.view">
+        <field name="name">view_data_exporter_form</field>
+        <field name="model">spp.data.exporter</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Export Data">
+                <header>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,in_progress,completed,cancelled"
+                    />
+                </header>
+                <field name="locked" invisible="True" />
+                <div
+                    class="alert alert-warning text-center o_form_header"
+                    role="status"
+                    invisible="not locked"
+                >
+                    <span>Warning: Operation in progress: </span>
+                    <field name="locked_reason" class="o_stat_value" />
+                    <button
+                        name="refresh_page"
+                        type="object"
+                        class="btn_warning"
+                        icon="fa-refresh"
+                        title="Refresh Page"
+                        string="Refresh"
+                    />
+                </div>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" invisible="locked">
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-thumbs-o-up"
+                            name="start_export"
+                            invisible="state != 'draft'"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Start</span>
+                                <span class="o_stat_text">Export</span>
+                            </div>
+                        </button>
+                    </div>
+                     <div style="width: 100%; padding-top: 10px; padding-left: 10px;">
+                        <field name="name" invisible="1" />
+                        <field name="queue_job_minimum_size" invisible="1" />
+                        <div style="display: flex; gap: 20px;">
+                            <field name="name" invisible="1" />
+                            <!-- Data Exporter Section -->
+                            <div style="flex: 1;">
+                                <h3>Data Exporter</h3>
+                                <hr />
+                                <div name="div_name" style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                    <div style="flex: 1;">
+                                        <h4><label for="name" string="Description" class="o_form_label" /><div
+                                            /></h4>
+                                        <field name="name" required="1" style="width: 90%;" />
+                                    </div>
+                                </div>
+                                <div
+                                    name="div_template_id"
+                                    style="display: flex; gap: 20px; margin-bottom: 10px;"
+                                >
+                                    <div style="flex: 1;">
+                                        <h4><label
+                                                for="template_id"
+                                                string="Export Template"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="template_id"
+                                            required="1"
+                                            style="width: 90%;"
+                                            options="{'no_create': True}"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Other Details Section -->
+                            <div style="flex: 1;">
+                                <h3>Other Details</h3>
+                                <hr />
+
+                            </div>
+                        </div>
+                    </div>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_data_exporter" model="ir.actions.act_window">
+        <field name="name">Data Exporter</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.data.exporter</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Export data from the system using predefined templates.
+            </p><p>
+                Click the create button to set up a new data export task.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_data_exporter_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_data_exporter_tree" />
+        <field name="act_window_id" ref="action_data_exporter" />
+    </record>
+
+    <record id="action_data_exporter_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_data_exporter_form" />
+        <field name="act_window_id" ref="action_data_exporter" />
+    </record>
+
+    <menuitem
+        id="menu_data_exporter"
+        name="Export Data"
+        action="action_data_exporter"
+        parent="spp_demo_common.menu_import_export"
+        sequence="50"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
+    />
+
+</odoo>

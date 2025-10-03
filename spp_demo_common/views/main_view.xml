@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem
+        id="menu_import_export"
+        name="Import/Export"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="999"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
+    />
+</odoo>
