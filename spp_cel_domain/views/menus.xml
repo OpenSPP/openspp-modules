@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <menuitem
+        id="menu_cel_domain_root"
+        name="CEL Domain"
+        parent="base.menu_custom"
+        groups="spp_cel_domain.group_cel_domain_manager"
+        sequence="50"
+    />
+  <record id="action_cel_rule_wizard" model="ir.actions.act_window">
+    <field name="name">Rule Preview</field>
+    <field name="res_model">cel.rule.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">current</field>
+    <field name="context">{}</field>
+  </record>
+  <menuitem
+        id="menu_cel_rule_wizard"
+        name="Rule Preview"
+        parent="menu_cel_domain_root"
+        action="action_cel_rule_wizard"
+        groups="spp_cel_domain.group_cel_domain_manager"
+    />
+</odoo>
