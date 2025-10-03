@@ -6,10 +6,11 @@
         <field name="model">spp.data.exporter.templates</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree create="true" edit="true" delete="false">
                 <field name="name" />
                 <field name="model_ids" />
                 <field name="module_ids" readonly="1" force_save="1" />
+                <field name="active" invisible="1" />
             </tree>
         </field>
     </record>

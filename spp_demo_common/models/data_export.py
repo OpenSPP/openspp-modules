@@ -56,6 +56,7 @@ class SPPDataExporterTemplates(models.Model):
         compute="_compute_module_ids",
         store=True,
     )
+    active = fields.Boolean(string="Active", default=True)
 
     @api.depends("model_ids")
     def _compute_module_ids(self):
