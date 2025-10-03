@@ -83,7 +83,8 @@ class SPPDataExporter(models.Model):
                 json_data = records.read() if record_count > 0 else []
                 raw_data_records.append(
                     {
-                        "name": model.id,
+                        "name": model.model,
+                        "model_id": model.id,
                         "record_count": record_count,
                         "json_data": json_data,
                         "export_id": rec.id,
