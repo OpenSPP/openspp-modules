@@ -31,6 +31,12 @@ class SPPDataExporter(models.Model):
         related="template_id.module_ids",
         readonly=True,
     )
+    model_ids = fields.Many2many(
+        "ir.model",
+        string="Models",
+        related="template_id.model_ids",
+        readonly=True,
+    )
 
     def start_export(self):
         self.ensure_one()
