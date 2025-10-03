@@ -1,3 +1,4 @@
+import json
 import logging
 
 from odoo import api, fields, models
@@ -72,6 +73,27 @@ class SPPDataExporter(models.Model):
         self.locked = True
         self.locked_reason = "Export in progress..."
         self.read_models_records()
+        if self.raw_ids:
+            export_data = []
+            for raw in self.raw_ids:
+                try:
+                    json_data = json.loads(raw.json_data) if raw.json_data else []
+                except Exception as e:
+                    _logger.error(f"Error decoding JSON data for model {raw.model_name}: {e}")
+                    json_data = []
+                export_data.append(
+                    {
+                        "model": raw.model_name,
+                        "record_count": raw.record_count,
+                        "data": json_data,
+                    }
+                )
+            export_filename = f"{self.name.replace(' ', '_').lower()}.json"
+            self.export_file = json.dumps(export_data, indent=4).encode("utf-8")
+            self.export_filename = export_filename
+            self.state = "completed"
+            self.locked = False
+            self.locked_reason = "Export completed successfully."
 
     def read_models_records(self):
         for rec in self:
@@ -84,6 +106,7 @@ class SPPDataExporter(models.Model):
                 raw_data_records.append(
                     {
                         "name": model.model,
+                        "model_name": model.name,
                         "record_count": record_count,
                         "json_data": json_data,
                         "export_id": rec.id,

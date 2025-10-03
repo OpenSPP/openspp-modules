@@ -6,7 +6,7 @@
         <field name="model">spp.data.exporter</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree delete="true">
                 <field name="name" />
                 <field name="template_id" />
                 <field name="state" />
@@ -171,6 +171,7 @@
                         >
                             <field name="raw_ids" readonly="1">
                                 <tree>
+                                    <field name="model_name" />
                                     <field name="name" />
                                     <field name="record_count" />
                                 </tree>
