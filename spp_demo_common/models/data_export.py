@@ -1,4 +1,5 @@
 import base64
+from datetime import datetime
 import json
 import logging
 
@@ -111,6 +112,8 @@ class SPPDataExporter(models.Model):
                         for key, value in record.items():
                             if isinstance(value, bytes):
                                 record[key] = base64.b64encode(value).decode('utf-8')
+                            elif isinstance(value, (datetime.datetime, datetime.date)):
+                                record[key] = value.isoformat()
                         data.append(record)
                     json_data = json.dumps(data)
                 else:
