@@ -125,7 +125,7 @@
                                     <div style="flex: 1;">
                                         <h4><field
                                                 name="include_installed_modules"
-                                                readonly="include_all_data or state != 'draft"
+                                                readonly="include_all_data or state != 'draft'"
                                             />
                                         <label
                                                 for="include_installed_modules"
