@@ -84,7 +84,6 @@ class SPPDataExporter(models.Model):
                 raw_data_records.append(
                     {
                         "name": model.model,
-                        "model_id": model.id,
                         "record_count": record_count,
                         "json_data": json_data,
                         "export_id": rec.id,

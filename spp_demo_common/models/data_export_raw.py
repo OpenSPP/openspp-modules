@@ -10,11 +10,6 @@ class SPPDataExporterRaw(models.Model):
     _description = "SPP Data Exporter Raw"
 
     name = fields.Char(string="Name", required=True)
-    model_id = fields.Many2one(
-        "ir.model",
-        string="Model",
-        required=True,
-    )
     export_id = fields.Many2one(
         "spp.data.exporter",
         string="Export",
