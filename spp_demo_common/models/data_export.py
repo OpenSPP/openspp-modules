@@ -30,7 +30,7 @@ class SPPDataExporter(models.Model):
         self.state = "in_progress"
         self.locked = True
         self.locked_reason = "Export in progress..."
-    
+
     def refresh_page(self):
         return {
             "type": "ir.actions.client",
@@ -47,6 +47,8 @@ class SPPDataExporterTemplates(models.Model):
         "ir.model",
         string="Models",
         help="Select the models to include in the export template.",
+        readonly=False,
+        required=True,
     )
     module_ids = fields.Many2many(
         "ir.module.module",

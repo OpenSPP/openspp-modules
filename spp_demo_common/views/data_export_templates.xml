@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <tree create="true" edit="true" delete="false" editable="bottom">
                 <field name="name" />
-                <field name="model_ids" />
+                <field name="model_ids" widget="many2many_tags" options="{'no_create': True}" />
                 <field name="module_ids" readonly="1" force_save="1" />
                 <field name="active" column_invisible="1" />
             </tree>
