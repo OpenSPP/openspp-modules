@@ -104,7 +104,7 @@ class SPPDataExporter(models.Model):
                 model_obj = self.env[model.model]
                 records = model_obj.search([])
                 record_count = len(records)
-                json_data = records.read() if record_count > 0 else []
+                json_data = json.dumps(records.read()) if record_count > 0 else "[]"
                 raw_data_records.append(
                     {
                         "name": model.model,
