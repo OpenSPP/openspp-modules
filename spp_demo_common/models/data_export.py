@@ -85,7 +85,7 @@ class SPPDataExporter(models.Model):
                     json_data = []
                 export_data.append(
                     {
-                        "model": raw.model_name,
+                        "model": raw.name,
                         "record_count": raw.record_count,
                         "data": json_data,
                     }
@@ -111,8 +111,8 @@ class SPPDataExporter(models.Model):
                         # Convert bytes fields to base64 strings
                         for key, value in record.items():
                             if isinstance(value, bytes):
-                                record[key] = base64.b64encode(value).decode('utf-8')
-                            elif isinstance(value, (datetime.datetime, datetime.date)):
+                                record[key] = base64.b64encode(value).decode("utf-8")
+                            elif isinstance(value, datetime.datetime | datetime.date):
                                 record[key] = value.isoformat()
                         data.append(record)
                     json_data = json.dumps(data)
