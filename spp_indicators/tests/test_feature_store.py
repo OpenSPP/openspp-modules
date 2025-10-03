@@ -6,7 +6,7 @@ from odoo import fields
 from odoo.tests import TransactionCase, tagged
 
 
-@tagged("post_install", "-at_install", "openspp_metrics")
+@tagged("post_install", "-at_install", "spp_indicators")
 class TestFeatureStore(TransactionCase):
     def setUp(self):
         super().setUp()
@@ -178,7 +178,7 @@ class TestFeatureStore(TransactionCase):
         self.assertTrue(all(err["code"] == "mapping_missing" for err in errors))
 
 
-@tagged("post_install", "-at_install", "openspp_metrics")
+@tagged("post_install", "-at_install", "spp_indicators")
 class TestFeatureStoreTTL(TransactionCase):
     """Ensure TTL resolution logic behaves as expected without providers."""
 
