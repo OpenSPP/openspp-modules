@@ -77,6 +77,13 @@ class SPPDataExporter(models.Model):
         self.read_models_records()
         if self.raw_ids:
             export_data = []
+            module_list = []
+            for module in self.module_ids:
+                if module.name not in module_list:
+                    module_list.append(module.name)
+
+            export_data.append({"modules": module_list})
+
             for raw in self.raw_ids:
                 try:
                     json_data = json.loads(raw.json_data) if raw.json_data else []
