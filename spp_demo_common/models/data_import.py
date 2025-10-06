@@ -60,8 +60,17 @@ class SPPDataImporter(models.Model):
             file_data = base64.b64decode(self.import_file)
             json_data = json.loads(file_data)
             raw_vals = []
+            summary_data = []
             for data in json_data[1:]:
                 model_name = data.get("model")
+                summary_data.append(
+                        {
+                            "name": data.get("model", ""),
+                            "importer_id": self.id,
+                            "model_name": data.get("model", ""),
+                            "record_count": data.get("record_count", 0),
+                        }
+                    )
                 
                 for record in data.get("data", []):
                     model_data = record
@@ -75,6 +84,7 @@ class SPPDataImporter(models.Model):
                             "json_data": model_data,
                         }
                     )
+            self.summary_ids = [(0, 0, vals) for vals in summary_data]
             self.raw_ids = [(0, 0, vals) for vals in raw_vals]
             self.state = "imported"
             self.locked = False
@@ -116,19 +126,9 @@ class SPPDataImporter(models.Model):
                 else:
                     self.module_list = modules or ""
                 models = []
-                summary_data = []
                 for data in json_data[1:]:
                     models.append(data.get("model", ""))
-                    summary_data.append(
-                        {
-                            "name": data.get("model", ""),
-                            "importer_id": self.id,
-                            "model_name": data.get("model", ""),
-                            "record_count": data.get("record_count", 0),
-                        }
-                    )
                 self.model_list = ", ".join(models)
-                self.summary_ids = [(0, 0, vals) for vals in summary_data]
             except Exception as e:
                 raise ValidationError(f"Failed to parse import file: {e}") from e
 

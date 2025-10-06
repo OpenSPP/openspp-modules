@@ -129,8 +129,8 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Summary" name="summary_ids">
-                            <field name="summary_ids" readonly="1" force_save="1">
+                        <page string="Summary" name="summary_ids" invisible="state in ['draft','cancelled']">
+                            <field name="summary_ids" readonly="1">
                                 <tree>
                                     <field name="model_name" />
                                     <field name="name" column_invisible="1" />
