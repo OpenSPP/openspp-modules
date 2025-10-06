@@ -130,10 +130,9 @@
                             </field>
                         </page>
                         <page string="Summary" name="summary_ids">
-                            <field name="summary_ids" readonly="1">
+                            <field name="summary_ids" readonly="1" force_save="1">
                                 <tree>
                                     <field name="model_name" />
-                                    <field name="name" />
                                     <field name="record_count" />
                                     <field name="success_count" />
                                     <field name="error_count" />
