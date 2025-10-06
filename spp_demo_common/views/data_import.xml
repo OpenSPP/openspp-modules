@@ -152,7 +152,7 @@
     </record>
 
     <record id="action_data_importer" model="ir.actions.act_window">
-        <field name="name">Data importer</field>
+        <field name="name">Data Importer</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">spp.data.importer</field>
         <field name="view_mode">tree,form</field>
