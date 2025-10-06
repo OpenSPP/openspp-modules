@@ -9,6 +9,8 @@ id_type_read_registry_access,ID Type Read Access,g2p_registry_base.model_g2p_id_
 spp_read_res_model_access,Res Model Read Access,base.model_ir_model,spp_base_common.read_registry,1,0,0,0
 spp_read_res_model_fields_access,Res Model Fields Read Access,base.model_ir_model_fields,spp_base_common.read_registry,1,0,0,0
 spp_phone_number_validation_read_access,Phone Number Validation Read Access,spp_base_common.model_spp_phone_validation,spp_base_common.read_registry,1,0,0,0
+spp_ir_action_act_window_read_access,IR Actions Act Window Read Access,base.model_ir_actions_act_window,spp_base_common.read_registry,1,0,0,0
+spp_ir_action_act_window_view_read_access,IR Actions Act Window View Read Access,base.model_ir_actions_act_window_view,spp_base_common.read_registry,1,0,0,0
 
 res_partner_write_registry_access,Registry Write Access,base.model_res_partner,spp_base_common.write_registry,1,1,0,0
 phone_number_write_registry_access,Phone Number Write Access,g2p_registry_base.model_g2p_phone_number,spp_base_common.write_registry,1,1,0,0
@@ -19,6 +21,8 @@ id_type_write_registry_access,ID Type Write Access,g2p_registry_base.model_g2p_i
 spp_write_res_model_access,Res Model Write Access,base.model_ir_model,spp_base_common.write_registry,1,1,0,0
 spp_write_res_model_fields_access,Res Model Fields Write Access,base.model_ir_model_fields,spp_base_common.write_registry,1,1,0,0
 spp_phone_number_validation_write_access,Phone Number Validation Write Access,spp_base_common.model_spp_phone_validation,spp_base_common.write_registry,1,1,0,0
+spp_ir_action_act_window_write_access,IR Actions Act Window Write Access,base.model_ir_actions_act_window,spp_base_common.write_registry,1,1,0,0
+spp_ir_action_act_window_view_write_access,IR Actions Act Window View Write Access,base.model_ir_actions_act_window_view,spp_base_common.write_registry,1,1,0,0
 
 res_partner_create_registry_access,Registry Create Access,base.model_res_partner,spp_base_common.create_registry,1,0,1,0
 phone_number_create_registry_access,Phone Number Create Access,g2p_registry_base.model_g2p_phone_number,spp_base_common.create_registry,1,0,1,0
@@ -29,3 +33,8 @@ id_type_create_registry_access,ID Type Create Access,g2p_registry_base.model_g2p
 spp_create_res_model_access,Res Model Create Access,base.model_ir_model,spp_base_common.create_registry,1,0,1,0
 spp_create_res_model_fields_access,Res Model Fields Create Access,base.model_ir_model_fields,spp_base_common.create_registry,1,0,1,0
 spp_phone_number_validation_create_access,Phone Number Validation Create Access,spp_base_common.model_spp_phone_validation,spp_base_common.create_registry,1,0,1,0
+spp_ir_action_act_window_create_access,IR Actions Act Window Create Access,base.model_ir_actions_act_window,spp_base_common.create_registry,1,0,1,0
+spp_ir_action_act_window_view_create_access,IR Actions Act Window View Create Access,base.model_ir_actions_act_window_view,spp_base_common.create_registry,1,0,1,0
+
+spp_ir_actions_act_window_user,IR Actions Act Window User Access,base.model_ir_actions_act_window,base.group_user,1,0,0,0
+spp_ir_actions_act_window_view_user,IR Actions Act Window View User Access,base.model_ir_actions_act_window_view,base.group_user,1,0,0,0
