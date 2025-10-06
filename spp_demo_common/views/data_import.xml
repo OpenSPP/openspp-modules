@@ -50,7 +50,7 @@
                         <button
                             type="object"
                             class="oe_stat_button"
-                            icon="fa-thumbs-o-up"
+                            icon="fa-check"
                             name="start_import"
                             invisible="state != 'draft'"
                         >
@@ -62,7 +62,7 @@
                         <button
                             type="object"
                             class="oe_stat_button"
-                            icon="fa-check"
+                            icon="fa-refresh"
                             name="validate_import"
                             invisible="state in ['draft','in_progress','completed','cancelled']"
                         >
@@ -132,7 +132,12 @@
                     <notebook>
                         <page string="Details" name="raw_ids" invisible="state in ['draft','cancelled']">
                             <field name="raw_ids" readonly="1">
-                                <tree>
+                                <tree
+                                    decoration-danger="state=='error'"
+                                    decoration-info="state=='validated'"
+                                    decoration-success="state=='imported'"
+                                    decoration-muted="state=='draft'"
+                                >
                                     <field name="model_name" />
                                     <field name="name" />
                                     <field name="json_data" optional="hide" />
@@ -147,6 +152,7 @@
                                     <field name="model_name" />
                                     <field name="name" column_invisible="1" />
                                     <field name="record_count" />
+                                    <field name="validated_count" />
                                     <field name="success_count" />
                                     <field name="error_count" />
                                     <field name="state" />

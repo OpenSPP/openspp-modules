@@ -20,7 +20,13 @@ class SPPDataImporterRaw(models.Model):
     db_id = fields.Integer(string="DB ID", readonly=True)
     json_data = fields.Text(string="JSON Data", readonly=True)
     state = fields.Selection(
-        [("draft", "Draft"), ("validated", "Validated"), ("created", "Created"), ("saved", "Saved"), ("error", "Error")],
+        [
+            ("draft", "Draft"),
+            ("validated", "Validated"),
+            ("created", "Created"),
+            ("saved", "Saved"),
+            ("error", "Error"),
+        ],
         string="State",
         default="draft",
         required=True,
@@ -40,11 +46,19 @@ class SPPDataImporterSummary(models.Model):
     )
     model_name = fields.Char(string="Model Name", readonly=True)
     record_count = fields.Integer(string="Record Count", readonly=True)
-    success_count = fields.Integer(string="Success Count", default=0, readonly=True)
-    error_count = fields.Integer(string="Error Count", default=0, readonly=True)
+    success_count = fields.Integer(string="Success Count", compute="_compute_counts", readonly=True)
+    validated_count = fields.Integer(string="Validated Count", compute="_compute_counts", readonly=True)
+    error_count = fields.Integer(string="Error Count", compute="_compute_counts", readonly=True)
     state = fields.Selection(
         [("draft", "Draft"), ("completed", "Completed"), ("error", "Error")],
         string="State",
         default="draft",
         required=True,
     )
+
+    def _compute_counts(self):
+        for rec in self:
+            importer_raw = self.importer_id.raw_ids
+            rec.success_count = len(importer_raw.filtered(lambda r: r.state == "created"))
+            rec.validated_count = len(importer_raw.filtered(lambda r: r.state == "validated"))
+            rec.error_count = len(importer_raw.filtered(lambda r: r.state == "error"))
