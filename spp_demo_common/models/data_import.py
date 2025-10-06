@@ -111,10 +111,11 @@ class SPPDataImporter(models.Model):
 
         # Build mapping: (model_name, old_record_id) -> raw_record
         raw_mapping = {}
+        
         for raw in self.raw_ids:
+            raw.json_data = raw.json_data.replace("'", '"')  # Ensure proper JSON format
             try:
                 json_data = json.loads(raw.json_data)
-                json_data = json_data.replace("'", '"')  # Ensure proper JSON format
                 old_id = json_data.get("id") or raw.record_id
                 key = (raw.model_name, old_id)
                 raw_mapping[key] = raw
