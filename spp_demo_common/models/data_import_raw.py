@@ -16,6 +16,8 @@ class SPPDataImporterRaw(models.Model):
         string="Importer",
         required=True,
     )
+    record_id = fields.Integer(string="Record ID", readonly=True)
+    db_id = fields.Integer(string="DB ID", readonly=True)
     json_data = fields.Text(string="JSON Data", readonly=True)
     state = fields.Selection(
         [("draft", "Draft"), ("saved", "Saved"), ("error", "Error")],
@@ -23,7 +25,7 @@ class SPPDataImporterRaw(models.Model):
         default="draft",
         required=True,
     )
-    error_message = fields.Text(string="Error Message", readonly=True)
+    remarks = fields.Text(string="Remarks", readonly=True)
 
 
 class SPPDataImporterSummary(models.Model):

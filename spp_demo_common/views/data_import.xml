@@ -59,6 +59,18 @@
                                 <span class="o_stat_text">Import</span>
                             </div>
                         </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-times"
+                            name="validate_import"
+                            states="imported"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Validate</span>
+                                <span class="o_stat_text">Import</span>
+                            </div>
+                        </button>
                     </div>
                     <div style="width: 100%; padding-top: 10px; padding-left: 10px;">
                         <div style="display: flex; gap: 20px;">
@@ -125,7 +137,7 @@
                                     <field name="name" />
                                     <field name="json_data" optional="hide" />
                                     <field name="state" />
-                                    <field name="error_message" />
+                                    <field name="remarks" />
                                 </tree>
                             </field>
                         </page>
