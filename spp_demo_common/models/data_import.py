@@ -80,6 +80,10 @@ class SPPDataImporter(models.Model):
                     self.module_list = ", ".join(modules)
                 else:
                     self.module_list = modules or ""
+                models = []
+                for data in json_data[1:]:
+                    models.append(data.get("model", ""))
+                self.model_list = ", ".join(models)
             except Exception as e:
                 raise ValidationError(f"Failed to parse import file: {e}") from e
 

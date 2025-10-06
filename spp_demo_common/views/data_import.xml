@@ -8,7 +8,8 @@
         <field name="arch" type="xml">
             <tree delete="true">
                 <field name="name" />
-                <field name="import_file" />
+                <field name="import_file" filename="import_filename"/>
+                <field name="import_filename" column_invisible="1" />
                 <field name="state" />
             </tree>
         </field>
