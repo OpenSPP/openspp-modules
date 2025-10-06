@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <tree delete="true">
                 <field name="name" />
-                <field name="import_file" widget="binary" filename="import_filename"/>
+                <field name="import_file" widget="binary" filename="import_filename" />
                 <field name="import_filename" column_invisible="1" />
                 <field name="state" />
             </tree>
@@ -25,7 +25,7 @@
                     <field
                         name="state"
                         widget="statusbar"
-                        statusbar_visible="draft,in_progress,completed,cancelled"
+                        statusbar_visible="draft,imported,in_progress,completed,cancelled"
                     />
                 </header>
                 <field name="locked" invisible="True" />
@@ -64,8 +64,8 @@
                         <div style="display: flex; gap: 20px;">
                             <field name="name" invisible="1" />
                             <field name="import_filename" invisible="1" />
-                            <field name="module_list" invisible="1" force_save="1"/>
-                            <field name="model_list" invisible="1" force_save="1"/>
+                            <field name="module_list" invisible="1" force_save="1" />
+                            <field name="model_list" invisible="1" force_save="1" />
                             <!-- Data Importer Section -->
                             <div style="flex: 1;">
                                 <h3>Data Importer</h3>
@@ -118,6 +118,29 @@
                         </div>
                     </div>
                     <notebook>
+                        <page string="Details" name="raw_ids" invisible="state in ['draft','cancelled']">
+                            <field name="raw_ids" readonly="1">
+                                <tree>
+                                    <field name="model_name" />
+                                    <field name="name" />
+                                    <field name="json_data" />
+                                    <field name="state" />
+                                    <field name="error_message" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Summary" name="summary_ids">
+                            <field name="summary_ids" readonly="1">
+                                <tree>
+                                    <field name="model_name" />
+                                    <field name="name" />
+                                    <field name="record_count" />
+                                    <field name="success_count" />
+                                    <field name="error_count" />
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
                         <page string="Modules" name="module_ids">
                             <field name="module_ids" readonly="1">
                                 <tree>
@@ -131,19 +154,6 @@
                                 <tree>
                                     <field name="name" />
                                     <field name="model" />
-                                </tree>
-                            </field>
-                        </page>
-                        <page
-                            string="Summary"
-                            name="raw_ids"
-                            invisible="state not in ['in_progress','completed']"
-                        >
-                            <field name="raw_ids" readonly="1">
-                                <tree>
-                                    <field name="model_name" />
-                                    <field name="name" />
-                                    <field name="json_data" />
                                 </tree>
                             </field>
                         </page>

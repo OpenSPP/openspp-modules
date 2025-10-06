@@ -33,9 +33,16 @@ class SPPDataImporter(models.Model):
     model_list = fields.Text(string="Model List", readonly=True)
 
     raw_ids = fields.One2many("spp.data.importer.raw", "importer_id", string="Raw Data", readonly=True)
+    summary_ids = fields.One2many("spp.data.importer.summary", "importer_id", string="Summary", readonly=True)
 
     state = fields.Selection(
-        [("draft", "Draft"), ("in_progress", "In Progress"), ("completed", "Completed"), ("cancelled", "Cancelled")],
+        [
+            ("draft", "Draft"),
+            ("imported", "Imported"),
+            ("in_progress", "In Progress"),
+            ("completed", "Completed"),
+            ("cancelled", "Cancelled"),
+        ],
         string="State",
         default="draft",
         required=True,
@@ -48,6 +55,32 @@ class SPPDataImporter(models.Model):
         self.state = "in_progress"
         self.locked = True
         self.locked_reason = "Import in progress..."
+        self.raw_ids = False
+        try:
+            file_data = base64.b64decode(self.import_file)
+            json_data = json.loads(file_data)
+            raw_vals = []
+            for data in json_data[1:]:
+                model_name = data.get("model")
+                for record in data.get("data", []):
+                    model_data = record
+                    name = record.get("name", f"Import {model_name}")
+
+                    raw_vals.append(
+                        {
+                            "name": name,
+                            "model_name": model_name,
+                            "importer_id": self.id,
+                            "json_data": model_data,
+                        }
+                    )
+            self.raw_ids = [(0, 0, vals) for vals in raw_vals]
+            self.state = "imported"
+            self.locked = False
+            self.locked_reason = "Import completed successfully."
+
+        except Exception as e:
+            raise ValidationError(f"Failed to parse import file: {e}") from e
 
     @api.depends("module_list")
     def _compute_module_ids(self):
@@ -71,6 +104,7 @@ class SPPDataImporter(models.Model):
     def _onchange_import_file(self):
         self.module_list = ""
         self.model_list = ""
+        self.summary_ids = False
         if self.import_file:
             try:
                 file_data = base64.b64decode(self.import_file)
@@ -81,9 +115,19 @@ class SPPDataImporter(models.Model):
                 else:
                     self.module_list = modules or ""
                 models = []
+                summary_data = []
                 for data in json_data[1:]:
                     models.append(data.get("model", ""))
+                    summary_data.append(
+                        {
+                            "name": data.get("model", ""),
+                            "importer_id": self.id,
+                            "model_name": data.get("model", ""),
+                            "record_count": data.get("record_count", 0),
+                        }
+                    )
                 self.model_list = ", ".join(models)
+                self.summary_ids = [(0, 0, vals) for vals in summary_data]
             except Exception as e:
                 raise ValidationError(f"Failed to parse import file: {e}") from e
 
