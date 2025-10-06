@@ -122,7 +122,7 @@ class SPPDataImporter(models.Model):
                 old_id = json_data.get("id") or raw.record_id
                 key = (raw.model_name, old_id)
                 raw_mapping[key] = raw
-                raw.state = "draft""
+                raw.state = "draft"
                 raw.remarks = False
             except Exception as e:
                 raw.state = "error"
