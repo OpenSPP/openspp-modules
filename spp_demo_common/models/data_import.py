@@ -84,7 +84,7 @@ class SPPDataImporter(models.Model):
                             "name": name,
                             "model_name": model_name,
                             "importer_id": self.id,
-                            "json_data": model_data,
+                            "json_data": json.dumps(model_data),
                         }
                     )
             self.summary_ids = [(0, 0, vals) for vals in summary_data]
