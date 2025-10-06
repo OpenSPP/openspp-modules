@@ -51,6 +51,7 @@ class SPPDataImporter(models.Model):
     )
     locked = fields.Boolean(string="Locked", default=False)
     locked_reason = fields.Text(string="Locked Reason")
+    remarks = fields.Text(string="Remarks")
 
     def start_import(self):
         self.ensure_one()
@@ -151,10 +152,13 @@ class SPPDataImporter(models.Model):
         failed_count = self.raw_ids.filtered(lambda r: r.state == "error")
         if failed_count:
             self.state = "error"
-            self.locked_reason = f"Validation failed for {len(failed_count)} records."
+            self.remarks = f"Validation failed for {len(failed_count)} records."
+            self.locked = False
         else:
             self.state = "validated"
-            self.locked_reason = "Import validated successfully."
+            self.remarks = "Import validated successfully."
+            self.locked = False
+
 
     def _process_related_fields(self, model, json_data, raw_mapping):
         """
