@@ -91,7 +91,6 @@
                                             /><div /></h4>
                                         <field
                                             name="import_file"
-                                            readonly="1"
                                             widget="binary"
                                             filename="import_filename"
                                             style="width: 90%;"
