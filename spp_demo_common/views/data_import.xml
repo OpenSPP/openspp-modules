@@ -25,7 +25,7 @@
                     <field
                         name="state"
                         widget="statusbar"
-                        statusbar_visible="draft,imported,in_progress,completed,cancelled"
+                        statusbar_visible="draft,imported,in_progress,completed,cancelled,error"
                     />
                 </header>
                 <field name="locked" invisible="True" />
@@ -64,7 +64,7 @@
                             class="oe_stat_button"
                             icon="fa-times"
                             name="validate_import"
-                            invisible="state != 'imported'"
+                            invisible="state in ['draft','in_progress','completed','cancelled']"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Validate</span>

@@ -43,6 +43,7 @@ class SPPDataImporter(models.Model):
             ("in_progress", "In Progress"),
             ("completed", "Completed"),
             ("cancelled", "Cancelled"),
+            ("error", "Error"),
         ],
         string="State",
         default="draft",
