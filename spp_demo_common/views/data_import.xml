@@ -62,7 +62,7 @@
                         <button
                             type="object"
                             class="oe_stat_button"
-                            icon="fa-times"
+                            icon="fa-check"
                             name="validate_import"
                             invisible="state in ['draft','in_progress','completed','cancelled']"
                         >

@@ -103,8 +103,8 @@ class SPPDataImporter(models.Model):
         Maps: old_id -> raw_record_id for later creation.
         """
         self.ensure_one()
-        if self.state != "imported":
-            raise ValidationError("Import must be in 'Imported' state to validate.")
+        if self.state not in ["imported", "error"]:
+            raise ValidationError("Import must be in 'Imported' or 'Error' state to validate.")
 
         self.locked = True
         self.locked_reason = "Import being validated."
