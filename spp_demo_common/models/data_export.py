@@ -163,7 +163,7 @@ class SPPDataExporter(models.Model):
         for rec in self:
             rec.model_ids = False
             if rec.include_all_data:
-                all_models = self.env["ir.model"].search([]).ids
+                all_models = self.env["ir.model"].search([("transient", "=", False)]).ids
                 rec.model_ids = [(6, 0, all_models)]
             elif rec.template_id and not rec.include_all_data:
                 rec.model_ids = [(6, 0, rec.template_id.model_ids.ids)]
