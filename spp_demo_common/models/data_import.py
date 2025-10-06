@@ -131,9 +131,12 @@ class SPPDataImporter(models.Model):
         for raw in self.raw_ids:
             if raw.state == "error":
                 continue
-
+            
+            if isinstance(raw.json_data, str):
+                    json_data = json.loads(raw.json_data)
+                else:
+                    json_data = raw.json_data
             try:
-                json_data = json.loads(raw.json_data)
                 model = self.env[raw.model_name]
 
                 # Process and update related fields
