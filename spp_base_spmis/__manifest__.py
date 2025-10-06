@@ -50,8 +50,6 @@
         ]
     },  # not directly required, pinned by Snyk to avoid a vulnerability and for fastapi, compatibility issues.
     "data": [
-        "data/global_roles.xml",
-        "data/local_roles.xml",
         "data/top_up_card.xml",
         "security/ir.model.access.csv",
         "views/registrant_view.xml",
