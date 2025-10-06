@@ -20,7 +20,7 @@ class SPPDataImporterRaw(models.Model):
     db_id = fields.Integer(string="DB ID", readonly=True)
     json_data = fields.Text(string="JSON Data", readonly=True)
     state = fields.Selection(
-        [("draft", "Draft"), ("validated", "Validated"), ("created", "Created"),")("saved", "Saved"), ("error", "Error")],
+        [("draft", "Draft"), ("validated", "Validated"), ("created", "Created"), ("saved", "Saved"), ("error", "Error")],
         string="State",
         default="draft",
         required=True,
