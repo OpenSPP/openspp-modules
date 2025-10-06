@@ -66,20 +66,6 @@ class Farm(models.Model):
         if current_phone:
             phone_number = current_phone.phone_no
 
-        current_id = self.env["g2p.reg.id"].search(
-            [
-                ("partner_id", "=", new_group_head.id),
-                (
-                    "id_type",
-                    "=",
-                    self.env.ref("spp_base_farmer_registry.id_type_national_id").id,
-                ),
-            ]
-        )
-        national_id = None
-        if current_id:
-            national_id = current_id.value
-
         self.farmer_id.write(
             {
                 "farmer_individual_id": new_group_head.id,
@@ -94,13 +80,11 @@ class Farm(models.Model):
                 "farmer_email": new_group_head.email,
                 "farmer_formal_agricultural": new_group_head.formal_agricultural_training,
                 "farmer_highest_education_level": new_group_head.highest_education_level,
-                "farmer_national_id": national_id,
                 "farmer_mobile_tel": phone_number,
             }
         )
         self.write(
             {
-                "farmer_national_id": national_id,
                 "farmer_household_size": new_group_head.farmer_household_size,
                 "farmer_postal_address": new_group_head.farmer_postal_address,
             }
@@ -193,7 +177,6 @@ class Farm(models.Model):
             "given_name": farm.farmer_given_name,
             "name": farmer_name,
             "addl_name": farm.farmer_addtnl_name or None,
-            "farmer_national_id": farm.farmer_national_id or None,
             "gender": farm.farmer_sex.id or None,
             "marital_status": farm.farmer_marital_status or None,
             "birthdate": farm.farmer_birthdate or None,
@@ -217,11 +200,9 @@ class Farm(models.Model):
             individual.farmer_id = farm.farmer_id.id
             farm.farmer_individual_id = individual.id
             self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
-            self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
 
         else:
             self.insert_phone_number(farm.farmer_individual_id.id, farm.farmer_mobile_tel)
-            self.insert_id(farm.farmer_individual_id.id, farm.farmer_national_id)
             farm.farmer_individual_id.write(individual_vals)
 
     def insert_phone_number(self, individual_id, mobile_no):
@@ -232,40 +213,6 @@ class Farm(models.Model):
                 self.env["g2p.phone.number"].create(individual_phone_vals)
             else:
                 current_phone.write({"phone_no": mobile_no})
-
-    def insert_id(self, individual_id, national_id):
-        if national_id:
-            current_id = self.env["g2p.reg.id"].search(
-                [
-                    ("partner_id", "=", individual_id),
-                    ("value", "=", national_id),
-                    (
-                        "id_type",
-                        "=",
-                        self.env.ref("spp_base_farmer_registry.id_type_national_id").id,
-                    ),
-                ]
-            )
-            if not current_id:
-                existing_national_id = self.env["g2p.reg.id"].search(
-                    [
-                        ("partner_id", "=", individual_id),
-                        (
-                            "id_type",
-                            "=",
-                            self.env.ref("spp_base_farmer_registry.id_type_national_id").id,
-                        ),
-                    ]
-                )
-                id_vals = {
-                    "partner_id": individual_id,
-                    "value": national_id,
-                    "id_type": self.env.ref("spp_base_farmer_registry.id_type_national_id").id,
-                }
-                if existing_national_id:
-                    existing_national_id.write(id_vals)
-                else:
-                    self.env["g2p.reg.id"].create(id_vals)
 
     def update_farmer(self, individual):
         farmer_vals = {
@@ -281,19 +228,6 @@ class Farm(models.Model):
             "farmer_formal_agricultural": individual.formal_agricultural_training or None,
             "farmer_highest_education_level": individual.highest_education_level or None,
         }
-        farmer_national_id = self.env["g2p.reg.id"].search(
-            [
-                ("partner_id", "=", individual.id),
-                (
-                    "id_type",
-                    "=",
-                    self.env.ref("spp_base_farmer_registry.id_type_national_id").id,
-                ),
-            ],
-            limit=1,
-        )
-        if farmer_national_id:
-            farmer_vals.update({"farmer_national_id": farmer_national_id.value or None})
 
         farmer_phone = self.env["g2p.phone.number"].search(
             [

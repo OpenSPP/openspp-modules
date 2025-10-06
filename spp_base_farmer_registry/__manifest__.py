@@ -41,7 +41,6 @@
         "security/ir.model.access.csv",
         "views/farm_season_view.xml",
         "data/kind_data.xml",
-        "data/id_data.xml",
         "views/res_partner.xml",
         "views/configuration_view.xml",
         "views/res_users.xml",

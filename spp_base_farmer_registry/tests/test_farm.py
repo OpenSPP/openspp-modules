@@ -13,9 +13,6 @@ class FarmTest(TransactionCase):
 
         cls.gender_female = cls.env["gender.type"].create({"code": "F", "value": "female"})
 
-        # Create ID type reference
-        cls.national_id_type = cls.env["g2p.id.type"].search([("name", "=", "Farmer National ID")], limit=1)
-
         # Create group membership kind for head
         cls.head_membership_kind = cls.env["g2p.group.membership.kind"].search([("name", "=", "Head")], limit=1)
 
@@ -32,7 +29,6 @@ class FarmTest(TransactionCase):
             {
                 "farmer_family_name": "Test",
                 "farmer_given_name": "Farmer",
-                "farmer_national_id": "123456789",
                 "farmer_mobile_tel": "09123456789",
             }
         )
@@ -64,7 +60,6 @@ class FarmTest(TransactionCase):
                 "farmer_family_name": "John",
                 "farmer_given_name": "Franco",
                 "farmer_mobile_tel": "09123456789",
-                "farmer_national_id": "1122334455",
                 "farmer_sex": cls.gender_male.id,
                 "farmer_birthdate": "1990-01-01",
                 "farmer_household_size": 4,
@@ -95,7 +90,6 @@ class FarmTest(TransactionCase):
             "farmer_family_name": "Smith",
             "farmer_given_name": "John",
             "farmer_mobile_tel": "09876543210",
-            "farmer_national_id": "987654321",
             "farmer_sex": self.gender_male.id,
             "farm_detail_id": self.farm_details.id,
             "farm_land_rec_id": self.land_record.id,
@@ -138,7 +132,6 @@ class FarmTest(TransactionCase):
     #             "farmer_family_name": "Doe",
     #             "farmer_given_name": "Jane",
     #             "farmer_mobile_tel": "09111111111",
-    #             "farmer_national_id": "111222333",
     #             "farmer_sex": self.gender_female.id,
     #             "farm_detail_id": self.farm_details.id,
     #             "farm_land_rec_id": self.land_record.id,
@@ -171,30 +164,10 @@ class FarmTest(TransactionCase):
         self.farm.insert_phone_number(self.individual.id, "08888888888")
         self.assertEqual(phone_record.phone_no, "08888888888")
 
-    # def test_07_insert_id(self):
-    #     """Test inserting national ID"""
-    #     # Test creating new ID
-    #     self.farm.insert_id(self.individual2.id, "123456789")
-
-    #     id_record = self.env["g2p.reg.id"].search(
-    #         [("partner_id", "=", self.individual2.id), ("id_type", "=", self.national_id_type.id)], limit=1
-    #     )
-
-    #     self.assertTrue(id_record)
-    #     self.assertEqual(id_record.value, "123456789")
-
-    #     # Test updating existing ID
-    #     self.farm.insert_id(self.individual2.id, "987654321")
-    #     self.assertEqual(id_record.value, "987654321")
-
     def test_08_update_farmer(self):
         """Test updating farmer from individual"""
         # Create phone number and ID for individual
         self.env["g2p.phone.number"].create({"partner_id": self.individual.id, "phone_no": "07777777777"})
-
-        self.env["g2p.reg.id"].create(
-            {"partner_id": self.individual.id, "value": "555444333", "id_type": self.national_id_type.id}
-        )
 
         # Create farmer record for individual
         individual_farmer = self.env["spp.farmer"].create(
@@ -209,7 +182,6 @@ class FarmTest(TransactionCase):
         self.assertEqual(individual_farmer.farmer_family_name, "Franco")
         self.assertEqual(individual_farmer.farmer_given_name, "Chin")
         self.assertEqual(individual_farmer.farmer_mobile_tel, "07777777777")
-        self.assertEqual(individual_farmer.farmer_national_id, "555444333")
 
     def test_09_get_geojson(self):
         """Test generating GeoJSON from farms"""
@@ -274,7 +246,6 @@ class FarmTest(TransactionCase):
                 "farmer_given_name": "John",
                 "farmer_addtnl_name": "Middle",
                 "farmer_mobile_tel": "09111111111",
-                "farmer_national_id": "111222333",
                 "farmer_sex": self.gender_male.id,
                 "farm_detail_id": self.farm_details.id,
                 "farm_land_rec_id": self.land_record.id,
@@ -300,17 +271,6 @@ class FarmTest(TransactionCase):
         phone_record = self.env["g2p.phone.number"].search([("partner_id", "=", self.individual.id)], limit=1)
 
         self.assertFalse(phone_record)
-
-    def test_14_insert_id_empty(self):
-        """Test inserting empty national ID"""
-        # Should not create ID record for empty value
-        self.farm.insert_id(self.individual.id, "")
-
-        id_record = self.env["g2p.reg.id"].search(
-            [("partner_id", "=", self.individual.id), ("id_type", "=", self.national_id_type.id)], limit=1
-        )
-
-        self.assertFalse(id_record)
 
     def test_15_update_farmer_no_phone_or_id(self):
         """Test updating farmer when individual has no phone or ID"""

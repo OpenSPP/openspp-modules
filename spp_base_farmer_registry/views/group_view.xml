@@ -91,16 +91,6 @@
                                 <field name="farmer_addtnl_name" />
                             </div>
                         </div>
-                        <div class="col-4 o_setting_box" name="div_farmer_national_id">
-                            <div class="o_setting_left_pane">
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="farmer_national_id" />
-                                <div>
-                                </div>
-                                <field name="farmer_national_id" />
-                            </div>
-                        </div>
                         <div class="col-4 o_setting_box" name="div_farmer_mobile_tel">
                             <div class="o_setting_left_pane">
                             </div>
