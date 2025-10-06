@@ -29,6 +29,7 @@
         "views/demo_data_generator_view.xml",
         "views/data_export.xml",
         "views/data_export_templates.xml",
+        "views/data_import.xml",
     ],
     "assets": {},
     "demo": [],
