@@ -159,7 +159,6 @@ class SPPDataImporter(models.Model):
             self.remarks = "Import validated successfully."
             self.locked = False
 
-
     def _process_related_fields(self, model, json_data, raw_mapping):
         """
         Process all fields in json_data and convert old IDs to raw record references.
@@ -209,11 +208,11 @@ class SPPDataImporter(models.Model):
         comodel_name = field.comodel_name
 
         # If already processed, return as-is
-        if isinstance(field_value | str) and field_value.startswith("raw:"):
+        if isinstance(field_value, str) and field_value.startswith("raw:"):
             return field_value
 
         # If it's a list/tuple (shouldn't be for many2one), take first element
-        if isinstance(field_value | (list, tuple)):
+        if isinstance(field_value, list | tuple):
             field_value = field_value[0] if field_value else False
 
         if not field_value:
@@ -246,12 +245,12 @@ class SPPDataImporter(models.Model):
         comodel_name = field.comodel_name
 
         # If already processed (list of command tuples), return as-is
-        if isinstance(field_value | list) and field_value:
-            if isinstance(field_value[0] | (list, tuple)):
+        if isinstance(field_value, list) and field_value:
+            if isinstance(field_value[0], list | tuple):
                 return field_value
 
         # Ensure field_value is a list
-        if not isinstance(field_value | list):
+        if not isinstance(field_value, list):
             field_value = [field_value] if field_value else []
 
         commands = []
@@ -261,7 +260,7 @@ class SPPDataImporter(models.Model):
                 continue
 
             # Extract old_id (could be just ID or dict with 'id' key)
-            if isinstance(item | dict):
+            if isinstance(item, dict):
                 old_id = item.get("id")
             else:
                 old_id = item
@@ -370,17 +369,17 @@ class SPPDataImporter(models.Model):
         :param created_mapping: Mapping of "raw:{id}" to actual new Odoo IDs
         :return: Data with resolved references
         """
-        if isinstance(data | dict):
+        if isinstance(data, dict):
             resolved = {}
             for k, v in data.items():
                 resolved[k] = self._resolve_raw_references(v, created_mapping)
             return resolved
 
-        elif isinstance(data | list):
+        elif isinstance(data, list):
             resolved = []
             for item in data:
                 # Handle command tuples (0, 0, {dict})
-                if isinstance(item | (list, tuple)) and len(item) == 3:
+                if isinstance(item, list | tuple) and len(item) == 3:
                     cmd, _, vals = item
                     resolved_vals = self._resolve_raw_references(vals, created_mapping)
                     resolved.append((cmd, 0, resolved_vals))
@@ -388,7 +387,7 @@ class SPPDataImporter(models.Model):
                     resolved.append(self._resolve_raw_references(item, created_mapping))
             return resolved
 
-        elif isinstance(data | str) and data.startswith("raw:"):
+        elif isinstance(data, str) and data.startswith("raw:"):
             # Resolve the reference
             new_id = created_mapping.get(data)
             if new_id is None:
@@ -452,15 +451,15 @@ class SPPDataImporter(models.Model):
         """
         dependencies = set()
 
-        if isinstance(data | dict):
+        if isinstance(data, dict):
             for value in data.values():
                 dependencies.update(self._extract_raw_dependencies(value))
 
-        elif isinstance(data | list):
+        elif isinstance(data, list):
             for item in data:
                 dependencies.update(self._extract_raw_dependencies(item))
 
-        elif isinstance(data | str) and data.startswith("raw:"):
+        elif isinstance(data, str) and data.startswith("raw:"):
             # Extract the raw record ID
             raw_id = int(data.split(":")[1])
             dependencies.add(raw_id)
@@ -495,7 +494,7 @@ class SPPDataImporter(models.Model):
                 file_data = base64.b64decode(self.import_file)
                 json_data = json.loads(file_data)
                 modules = json_data[0].get("modules", [])
-                if isinstance(modules | list):
+                if isinstance(modules, list):
                     self.module_list = ", ".join(modules)
                 else:
                     self.module_list = modules or ""
