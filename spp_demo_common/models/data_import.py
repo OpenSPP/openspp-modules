@@ -62,9 +62,10 @@ class SPPDataImporter(models.Model):
             raw_vals = []
             for data in json_data[1:]:
                 model_name = data.get("model")
+                
                 for record in data.get("data", []):
                     model_data = record
-                    name = record.get("name", f"Import {model_name}")
+                    name = record.get("name", f"ID: {record.get('id', '')}")
 
                     raw_vals.append(
                         {

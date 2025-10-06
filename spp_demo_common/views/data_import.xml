@@ -123,7 +123,7 @@
                                 <tree>
                                     <field name="model_name" />
                                     <field name="name" />
-                                    <field name="json_data" />
+                                    <field name="json_data" optional="hide" />
                                     <field name="state" />
                                     <field name="error_message" />
                                 </tree>
