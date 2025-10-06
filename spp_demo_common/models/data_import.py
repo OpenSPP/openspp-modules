@@ -75,7 +75,11 @@ class SPPDataImporter(models.Model):
             try:
                 file_data = base64.b64decode(self.import_file)
                 json_data = json.loads(file_data)
-                self.module_list = json_data[0].get("modules", "")
+                modules = json_data[0].get("modules", [])
+                if isinstance(modules, list):
+                    self.module_list = ", ".join(modules)
+                else:
+                    self.module_list = modules or ""
             except Exception as e:
                 raise ValidationError(f"Failed to parse import file: {e}") from e
 
