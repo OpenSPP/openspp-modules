@@ -41,6 +41,7 @@ class SPPDataImporter(models.Model):
             ("imported", "Imported"),
             ("validated", "Validated"),
             ("in_progress", "In Progress"),
+            ("partial", "Partial"),
             ("completed", "Completed"),
             ("cancelled", "Cancelled"),
             ("error", "Error"),
