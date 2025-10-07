@@ -309,8 +309,8 @@ class SPPDataImporter(models.Model):
     def create_records(self):
         """
         Creates actual Odoo records from validated raw data.
-        First pass: Create records without many2one references.
-        Second pass: Update records with many2one references once they exist.
+        Recursively creates many2one dependencies as needed.
+        Skips one2many and many2many for first pass.
         """
         self.ensure_one()
 
@@ -323,147 +323,25 @@ class SPPDataImporter(models.Model):
         # Maps "raw:{raw_id}" to actual created Odoo record ID
         created_mapping = {}
 
-        # First pass: Create records without many2one fields
-        _logger.info("Starting first pass: Creating records without many2one fields.")
+        # First pass: Create records (handling many2one recursively)
         for raw in self.raw_ids:
             if raw.state != "validated":
                 continue
 
             try:
-                json_data = json.loads(raw.json_data)
-                model = self.env[raw.model_name]
-                _logger.info(f"Processing raw record {raw.id} for model {raw.model_name}")
-                
-                # Prepare creation data and store many2one fields separately
-                creation_data = {}
-                many2one_fields = {}
-                
-                for field_name, value in json_data.items():
-                    _logger.info(f"Field: {field_name}, Value: {value}")
-                    if field_name not in model._fields:
-                        continue
-                        
-                    field = model._fields[field_name]
-                    
-                    # Handle many2one fields with raw references
-                    if field.type == 'many2one' and isinstance(value, str) and value.startswith('raw:'):
-                        _logger.info(f"Deferring many2one field {field_name} with value {value}")
-                        many2one_fields[field_name] = value
-                        continue
-                    
-                    # Handle date fields
-                    if field.type == "date" and isinstance(value, str):
-                        try:
-                            if "T" in value:
-                                value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d")
-                            else:
-                                value = datetime.datetime.strptime(value, "%Y-%m-%d").strftime("%Y-%m-%d")
-                        except Exception:
-                            value = False
-                    
-                    # Handle datetime fields
-                    elif field.type == "datetime" and isinstance(value, str):
-                        try:
-                            if "T" in value:
-                                value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
-                            else:
-                                value = datetime.datetime.strptime(value, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
-                        except Exception:
-                            value = False
-                    
-                    creation_data[field_name] = value
-                
-                # Try to create the record
-                try:
-                    new_record = model.create(creation_data)
-                    
-                    # Store mapping
-                    created_mapping[f"raw:{raw.id}"] = new_record.id
-                    
-                    # Update raw record
-                    raw.write({
-                        "state": "created",
-                        "db_id": new_record.id,
-                        "remarks": json.dumps(many2one_fields) if many2one_fields else False,
-                    })
-                    
-                    _logger.info(f"Created {raw.model_name} record ID {new_record.id} from raw {raw.id}")
-                    
-                except Exception as e:
-                    error_msg = str(e)
-                    if "required" in error_msg.lower():
-                        raw.write({
-                            "state": "pending",
-                            "remarks": f"Required many2one field needed: {error_msg}",
-                        })
-                    else:
-                        raw.write({
-                            "state": "error",
-                            "remarks": f"Creation failed: {error_msg}",
-                        })
-                    _logger.error(f"Error creating record from raw {raw.id}: {error_msg}")
-                    
+                self._create_single_record(raw, created_mapping)
             except Exception as e:
                 raw.write({"state": "error", "remarks": f"Processing failed: {str(e)}"})
                 _logger.error(f"Error processing raw {raw.id}: {str(e)}")
 
-        # Second pass: Update records with many2one references
-        max_iterations = 10  # Prevent infinite loop
-        iteration = 0
-        
-        while iteration < max_iterations:
-            iteration += 1
-            updated_count = 0
-            
-            for raw in self.raw_ids.filtered(lambda r: r.state == "created" and r.remarks):
-                try:
-                    many2one_fields = json.loads(raw.remarks)
-                    if not many2one_fields:
-                        continue
-                    
-                    update_data = {}
-                    unresolved_fields = {}
-                    
-                    for field_name, raw_ref in many2one_fields.items():
-                        # Check if the referenced record has been created
-                        resolved_id = created_mapping.get(raw_ref)
-                        
-                        if resolved_id:
-                            update_data[field_name] = resolved_id
-                        else:
-                            # Still unresolved, keep for next iteration
-                            unresolved_fields[field_name] = raw_ref
-                    
-                    # Update the record if we have resolved fields
-                    if update_data:
-                        record = self.env[raw.model_name].browse(raw.db_id)
-                        record.write(update_data)
-                        updated_count += 1
-                        _logger.info(f"Updated {raw.model_name} record ID {raw.db_id} with many2one fields: {list(update_data.keys())}")
-                    
-                    # Update remarks with remaining unresolved fields
-                    raw.write({
-                        "remarks": json.dumps(unresolved_fields) if unresolved_fields else False,
-                    })
-                    
-                except Exception as e:
-                    raw.write({
-                        "state": "error",
-                        "remarks": f"Update failed: {str(e)}",
-                    })
-                    _logger.error(f"Error updating raw {raw.id}: {str(e)}")
-            
-            # If no records were updated, we're done or have circular dependencies
-            if updated_count == 0:
-                break
-        
-        # Third pass: Handle pending records (those that failed due to required many2one)
-        for raw in self.raw_ids.filtered(lambda r: r.state == "pending"):
+        # Second pass: Handle one2many and many2many fields
+        for raw in self.raw_ids.filtered(lambda r: r.state == "created" and r.db_id):
             try:
                 json_data = json.loads(raw.json_data)
                 model = self.env[raw.model_name]
+                record = model.browse(raw.db_id)
                 
-                creation_data = {}
+                update_data = {}
                 
                 for field_name, value in json_data.items():
                     if field_name not in model._fields:
@@ -471,71 +349,187 @@ class SPPDataImporter(models.Model):
                     
                     field = model._fields[field_name]
                     
-                    # Resolve many2one fields
-                    if field.type == 'many2one' and isinstance(value, str) and value.startswith('raw:'):
-                        resolved_id = created_mapping.get(value)
-                        if resolved_id:
-                            creation_data[field_name] = resolved_id
-                        else:
-                            creation_data[field_name] = False
-                    else:
-                        # Handle date/datetime as before
-                        if field.type == "date" and isinstance(value, str):
-                            try:
-                                if "T" in value:
-                                    value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d")
-                                else:
-                                    value = datetime.datetime.strptime(value, "%Y-%m-%d").strftime("%Y-%m-%d")
-                            except Exception:
-                                value = False
-                        elif field.type == "datetime" and isinstance(value, str):
-                            try:
-                                if "T" in value:
-                                    value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
-                                else:
-                                    value = datetime.datetime.strptime(value, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
-                            except Exception:
-                                value = False
-                        
-                        creation_data[field_name] = value
+                    # Handle one2many fields
+                    if field.type == 'one2many' and isinstance(value, list):
+                        resolved_commands = []
+                        for item in value:
+                            if isinstance(item, (list, tuple)) and len(item) == 3:
+                                cmd, _, vals = item
+                                resolved_vals = self._resolve_references(vals, created_mapping)
+                                resolved_commands.append((cmd, 0, resolved_vals))
+                        if resolved_commands:
+                            update_data[field_name] = resolved_commands
+                    
+                    # Handle many2many fields
+                    elif field.type == 'many2many' and isinstance(value, list):
+                        resolved_ids = []
+                        for item in value:
+                            if isinstance(item, str) and item.startswith('raw:'):
+                                resolved_id = created_mapping.get(item)
+                                if resolved_id:
+                                    resolved_ids.append(resolved_id)
+                            elif isinstance(item, int):
+                                resolved_ids.append(item)
+                        if resolved_ids:
+                            update_data[field_name] = [(6, 0, resolved_ids)]
                 
-                # Try to create again
-                try:
-                    new_record = model.create(creation_data)
-                    created_mapping[f"raw:{raw.id}"] = new_record.id
-                    
-                    raw.write({
-                        "state": "created",
-                        "db_id": new_record.id,
-                        "remarks": False,
-                    })
-                    
-                    _logger.info(f"Created {raw.model_name} record ID {new_record.id} from pending raw {raw.id}")
-                    
-                except Exception as e:
-                    raw.write({
-                        "state": "error",
-                        "remarks": f"Creation failed after resolution: {str(e)}",
-                    })
-                    _logger.error(f"Error creating pending record from raw {raw.id}: {str(e)}")
+                # Update record with one2many/many2many
+                if update_data:
+                    record.write(update_data)
+                    _logger.info(f"Updated {raw.model_name} record ID {raw.db_id} with relational fields")
                     
             except Exception as e:
-                raw.write({"state": "error", "remarks": f"Processing failed: {str(e)}"})
-                _logger.error(f"Error processing pending raw {raw.id}: {str(e)}")
+                _logger.error(f"Error updating relational fields for raw {raw.id}: {str(e)}")
 
         # Update import state
         failed_count = len(self.raw_ids.filtered(lambda r: r.state == "error"))
         success_count = len(self.raw_ids.filtered(lambda r: r.state == "created"))
-        pending_count = len(self.raw_ids.filtered(lambda r: r.state == "pending"))
 
-        if failed_count > 0 or pending_count > 0:
+        if failed_count > 0:
             self.state = "error"
             self.locked = False
-            self.remarks = f"Creation completed with issues: {success_count} created, {failed_count} failed, {pending_count} pending."
+            self.remarks = f"Creation completed with issues: {success_count} created, {failed_count} failed."
         elif success_count == len(self.raw_ids):
             self.state = "completed"
             self.locked = True
             self.remarks = f"Import completed successfully: {success_count} records created."
+
+
+    def _create_single_record(self, raw, created_mapping, _creating=None):
+        """
+        Creates a single record, handling many2one dependencies recursively.
+        
+        :param raw: The raw record to create
+        :param created_mapping: Dict mapping raw:{id} to created record IDs
+        :param _creating: Set to track records being created (prevents circular dependencies)
+        :return: Created record ID
+        """
+        if _creating is None:
+            _creating = set()
+        
+        # Check if already created
+        raw_ref = f"raw:{raw.id}"
+        if raw_ref in created_mapping:
+            return created_mapping[raw_ref]
+        
+        # Check for circular dependency
+        if raw.id in _creating:
+            raise ValidationError(f"Circular dependency detected for raw {raw.id}")
+        
+        _creating.add(raw.id)
+        
+        try:
+            json_data = json.loads(raw.json_data)
+            model = self.env[raw.model_name]
+            
+            creation_data = {}
+            
+            for field_name, value in json_data.items():
+                if field_name not in model._fields:
+                    continue
+                
+                field = model._fields[field_name]
+                
+                # Skip one2many and many2many for first pass
+                if field.type in ('one2many', 'many2many'):
+                    continue
+                
+                # Handle many2one with raw reference
+                if field.type == 'many2one' and isinstance(value, str) and value.startswith('raw:'):
+                    # Get the referenced raw record
+                    ref_raw_id = int(value.split(':')[1])
+                    ref_raw = self.raw_ids.filtered(lambda r: r.id == ref_raw_id)
+                    
+                    if ref_raw:
+                        # Recursively create the referenced record first
+                        resolved_id = self._create_single_record(ref_raw, created_mapping, _creating)
+                        creation_data[field_name] = resolved_id
+                    else:
+                        _logger.warning(f"Referenced raw {value} not found for field {field_name}")
+                        creation_data[field_name] = False
+                    continue
+                
+                # Handle date fields
+                if field.type == "date" and isinstance(value, str):
+                    try:
+                        if "T" in value:
+                            value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d")
+                        else:
+                            value = datetime.datetime.strptime(value, "%Y-%m-%d").strftime("%Y-%m-%d")
+                    except Exception:
+                        value = False
+                
+                # Handle datetime fields
+                elif field.type == "datetime" and isinstance(value, str):
+                    try:
+                        if "T" in value:
+                            value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                        else:
+                            value = datetime.datetime.strptime(value, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                    except Exception:
+                        value = False
+                
+                creation_data[field_name] = value
+            
+            # Create the record
+            new_record = model.create(creation_data)
+            
+            # Store mapping
+            created_mapping[raw_ref] = new_record.id
+            
+            # Update raw record
+            raw.write({
+                "state": "created",
+                "db_id": new_record.id,
+                "remarks": False,
+            })
+            
+            _logger.info(f"Created {raw.model_name} record ID {new_record.id} from raw {raw.id}")
+            
+            return new_record.id
+            
+        except Exception as e:
+            error_msg = str(e)
+            raw.write({
+                "state": "error",
+                "remarks": f"Creation failed: {error_msg}",
+            })
+            _logger.error(f"Error creating record from raw {raw.id}: {error_msg}")
+            raise
+        finally:
+            _creating.discard(raw.id)
+
+
+    def _resolve_references(self, data, created_mapping):
+        """
+        Recursively resolve raw references in data structures.
+        
+        :param data: Dict or value containing potential raw references
+        :param created_mapping: Mapping of raw:{id} to actual record IDs
+        :return: Data with resolved references
+        """
+        if isinstance(data, dict):
+            resolved = {}
+            for k, v in data.items():
+                resolved[k] = self._resolve_references(v, created_mapping)
+            return resolved
+        
+        elif isinstance(data, list):
+            resolved = []
+            for item in data:
+                resolved.append(self._resolve_references(item, created_mapping))
+            return resolved
+        
+        elif isinstance(data, str) and data.startswith('raw:'):
+            resolved_id = created_mapping.get(data)
+            if resolved_id:
+                return resolved_id
+            else:
+                _logger.warning(f"Unresolved reference: {data}")
+                return False
+        
+        else:
+            return data
 
     def _topological_sort_raws(self):
         """
