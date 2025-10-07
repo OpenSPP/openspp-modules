@@ -442,10 +442,12 @@ class SPPDataImporter(models.Model):
                     ref_raw_id = int(value.split(':')[1])
                     ref_raw = self.raw_ids.filtered(lambda r: r.id == ref_raw_id)
                     
-                    if ref_raw:
+                    if ref_raw and not ref_raw.db_id:
                         # Recursively create the referenced record first
                         resolved_id = self._create_single_record(ref_raw, created_mapping, _creating)
                         creation_data[field_name] = resolved_id
+                    elif ref_raw and ref_raw.db_id:
+                        creation_data[field_name] = ref_raw.db_id
                     else:
                         _logger.warning(f"Referenced raw {value} not found for field {field_name}")
                         creation_data[field_name] = False
