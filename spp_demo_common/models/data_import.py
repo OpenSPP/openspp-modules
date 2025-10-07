@@ -373,7 +373,7 @@ class SPPDataImporter(models.Model):
     def _get_creation_vals(self, raw, created_mapping):
         json_data = json.loads(raw.json_data)
         model = self.env[raw.model_name]
-
+        _logger.info(f"Processing raw {raw.id} for model {raw.model_name} with data: {json_data}")
         # Replace "raw:{id}" references with actual new record IDs
         final_data = self._resolve_raw_references(json_data, created_mapping)
         
@@ -418,9 +418,7 @@ class SPPDataImporter(models.Model):
         :param created_mapping: Mapping of "raw:{id}" to actual new Odoo IDs
         :return: Data with resolved references
         """
-        _logger.info(f"Resolving data: {data}")
-        _logger.info(f"Using mapping: {created_mapping}")
-        
+
         if isinstance(data, dict):
             resolved = {}
             for k, v in data.items():
@@ -457,6 +455,7 @@ class SPPDataImporter(models.Model):
 
         :param raw_ref: The raw reference string "raw:{id}"
         """
+        _logger.info(f"Creating unresolved raw for reference: {raw_ref}")
         try:
             raw_id = int(raw_ref.split(":")[1])
             existing = self.raw_ids.filtered(lambda r: r.id == raw_id)
