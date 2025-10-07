@@ -309,7 +309,8 @@ class SPPDataImporter(models.Model):
     def create_records(self):
         """
         Creates actual Odoo records from validated raw data.
-        Processes records in dependency order and maps old IDs to new IDs.
+        First pass: Create records without many2one references.
+        Second pass: Update records with many2one references once they exist.
         """
         self.ensure_one()
 
@@ -322,188 +323,215 @@ class SPPDataImporter(models.Model):
         # Maps "raw:{raw_id}" to actual created Odoo record ID
         created_mapping = {}
 
-        # Sort raw records by dependencies (topological sort)
-        sorted_raws = self._topological_sort_raws()
-
-        for raw in sorted_raws:
+        # First pass: Create records without many2one fields
+        for raw in self.raw_ids:
             if raw.state != "validated":
                 continue
 
             try:
-                final_data = self._get_creation_vals(raw, created_mapping)
-
-                # Create the record
+                json_data = json.loads(raw.json_data)
                 model = self.env[raw.model_name]
-                new_record = model.create(final_data)
-
-                # Store mapping: raw reference -> new Odoo ID
-                created_mapping[f"raw:{raw.id}"] = new_record.id
-
-                # Update raw record with new DB ID
-                raw.write(
-                    {
+                
+                # Prepare creation data and store many2one fields separately
+                creation_data = {}
+                many2one_fields = {}
+                
+                for field_name, value in json_data.items():
+                    if field_name not in model._fields:
+                        continue
+                        
+                    field = model._fields[field_name]
+                    
+                    # Handle many2one fields with raw references
+                    if field.type == 'many2one' and isinstance(value, str) and value.startswith('raw:'):
+                        many2one_fields[field_name] = value
+                        continue
+                    
+                    # Handle date fields
+                    if field.type == "date" and isinstance(value, str):
+                        try:
+                            if "T" in value:
+                                value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d")
+                            else:
+                                value = datetime.datetime.strptime(value, "%Y-%m-%d").strftime("%Y-%m-%d")
+                        except Exception:
+                            value = False
+                    
+                    # Handle datetime fields
+                    elif field.type == "datetime" and isinstance(value, str):
+                        try:
+                            if "T" in value:
+                                value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                            else:
+                                value = datetime.datetime.strptime(value, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                        except Exception:
+                            value = False
+                    
+                    creation_data[field_name] = value
+                
+                # Try to create the record
+                try:
+                    new_record = model.create(creation_data)
+                    
+                    # Store mapping
+                    created_mapping[f"raw:{raw.id}"] = new_record.id
+                    
+                    # Update raw record
+                    raw.write({
                         "state": "created",
-                        "db_id": new_record.id,  # Store the actual new Odoo ID
-                        "remarks": False,
-                    }
-                )
-
-                _logger.info(
-                    f"Created {raw.model_name} record ID {new_record.id} "
-                    f"from raw {raw.id} (old ID: {raw.record_id})"
-                )
-
+                        "db_id": new_record.id,
+                        "remarks": json.dumps(many2one_fields) if many2one_fields else False,
+                    })
+                    
+                    _logger.info(f"Created {raw.model_name} record ID {new_record.id} from raw {raw.id}")
+                    
+                except Exception as e:
+                    error_msg = str(e)
+                    if "required" in error_msg.lower():
+                        raw.write({
+                            "state": "pending",
+                            "remarks": f"Required many2one field needed: {error_msg}",
+                        })
+                    else:
+                        raw.write({
+                            "state": "error",
+                            "remarks": f"Creation failed: {error_msg}",
+                        })
+                    _logger.error(f"Error creating record from raw {raw.id}: {error_msg}")
+                    
             except Exception as e:
-                raw.write({"state": "error", "remarks": f"Creation failed: {str(e)}"})
-                _logger.error(f"Error creating record from raw {raw.id}: {str(e)}")
+                raw.write({"state": "error", "remarks": f"Processing failed: {str(e)}"})
+                _logger.error(f"Error processing raw {raw.id}: {str(e)}")
+
+        # Second pass: Update records with many2one references
+        max_iterations = 10  # Prevent infinite loop
+        iteration = 0
+        
+        while iteration < max_iterations:
+            iteration += 1
+            updated_count = 0
+            
+            for raw in self.raw_ids.filtered(lambda r: r.state == "created" and r.remarks):
+                try:
+                    many2one_fields = json.loads(raw.remarks)
+                    if not many2one_fields:
+                        continue
+                    
+                    update_data = {}
+                    unresolved_fields = {}
+                    
+                    for field_name, raw_ref in many2one_fields.items():
+                        # Check if the referenced record has been created
+                        resolved_id = created_mapping.get(raw_ref)
+                        
+                        if resolved_id:
+                            update_data[field_name] = resolved_id
+                        else:
+                            # Still unresolved, keep for next iteration
+                            unresolved_fields[field_name] = raw_ref
+                    
+                    # Update the record if we have resolved fields
+                    if update_data:
+                        record = self.env[raw.model_name].browse(raw.db_id)
+                        record.write(update_data)
+                        updated_count += 1
+                        _logger.info(f"Updated {raw.model_name} record ID {raw.db_id} with many2one fields: {list(update_data.keys())}")
+                    
+                    # Update remarks with remaining unresolved fields
+                    raw.write({
+                        "remarks": json.dumps(unresolved_fields) if unresolved_fields else False,
+                    })
+                    
+                except Exception as e:
+                    raw.write({
+                        "state": "error",
+                        "remarks": f"Update failed: {str(e)}",
+                    })
+                    _logger.error(f"Error updating raw {raw.id}: {str(e)}")
+            
+            # If no records were updated, we're done or have circular dependencies
+            if updated_count == 0:
+                break
+        
+        # Third pass: Handle pending records (those that failed due to required many2one)
+        for raw in self.raw_ids.filtered(lambda r: r.state == "pending"):
+            try:
+                json_data = json.loads(raw.json_data)
+                model = self.env[raw.model_name]
+                
+                creation_data = {}
+                
+                for field_name, value in json_data.items():
+                    if field_name not in model._fields:
+                        continue
+                    
+                    field = model._fields[field_name]
+                    
+                    # Resolve many2one fields
+                    if field.type == 'many2one' and isinstance(value, str) and value.startswith('raw:'):
+                        resolved_id = created_mapping.get(value)
+                        if resolved_id:
+                            creation_data[field_name] = resolved_id
+                        else:
+                            creation_data[field_name] = False
+                    else:
+                        # Handle date/datetime as before
+                        if field.type == "date" and isinstance(value, str):
+                            try:
+                                if "T" in value:
+                                    value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d")
+                                else:
+                                    value = datetime.datetime.strptime(value, "%Y-%m-%d").strftime("%Y-%m-%d")
+                            except Exception:
+                                value = False
+                        elif field.type == "datetime" and isinstance(value, str):
+                            try:
+                                if "T" in value:
+                                    value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                                else:
+                                    value = datetime.datetime.strptime(value, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                            except Exception:
+                                value = False
+                        
+                        creation_data[field_name] = value
+                
+                # Try to create again
+                try:
+                    new_record = model.create(creation_data)
+                    created_mapping[f"raw:{raw.id}"] = new_record.id
+                    
+                    raw.write({
+                        "state": "created",
+                        "db_id": new_record.id,
+                        "remarks": False,
+                    })
+                    
+                    _logger.info(f"Created {raw.model_name} record ID {new_record.id} from pending raw {raw.id}")
+                    
+                except Exception as e:
+                    raw.write({
+                        "state": "error",
+                        "remarks": f"Creation failed after resolution: {str(e)}",
+                    })
+                    _logger.error(f"Error creating pending record from raw {raw.id}: {str(e)}")
+                    
+            except Exception as e:
+                raw.write({"state": "error", "remarks": f"Processing failed: {str(e)}"})
+                _logger.error(f"Error processing pending raw {raw.id}: {str(e)}")
 
         # Update import state
         failed_count = len(self.raw_ids.filtered(lambda r: r.state == "error"))
         success_count = len(self.raw_ids.filtered(lambda r: r.state == "created"))
+        pending_count = len(self.raw_ids.filtered(lambda r: r.state == "pending"))
 
-        if failed_count > 0:
+        if failed_count > 0 or pending_count > 0:
             self.state = "error"
             self.locked = False
-            self.remarks = f"Creation failed for {failed_count} records."
+            self.remarks = f"Creation completed with issues: {success_count} created, {failed_count} failed, {pending_count} pending."
         elif success_count == len(self.raw_ids):
             self.state = "completed"
             self.locked = True
             self.remarks = f"Import completed successfully: {success_count} records created."
-        
-
-    def _get_creation_vals(self, raw, created_mapping, _creating=None):
-        json_data = json.loads(raw.json_data)
-        model = self.env[raw.model_name]
-        _logger.info(f"Processing raw {raw.id} for model {raw.model_name} with data: {json_data}")
-        
-        # Replace "raw:{id}" references with actual new record IDs
-        final_data = self._resolve_raw_references(json_data, created_mapping, _creating)
-        
-        # Convert date fields if necessary
-        for field_name, field in model._fields.items():
-            if field.type == "date" and field_name in final_data:
-                val = final_data[field_name]
-                if isinstance(val, str):
-                    try:
-                        # Accept ISO or standard date
-                        if "T" in val:
-                            val = datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d")
-                        else:
-                            val = datetime.datetime.strptime(val, "%Y-%m-%d").strftime("%Y-%m-%d")
-                        final_data[field_name] = val
-                    except Exception:
-                        final_data[field_name] = False
-                else:
-                    final_data[field_name] = False
-            elif field.type == "datetime" and field_name in final_data:
-                val = final_data[field_name]
-                if isinstance(val, str):
-                    try:
-                        # Accept ISO or standard datetime
-                        if "T" in val:
-                            val = datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
-                        else:
-                            val = datetime.datetime.strptime(val, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
-                        final_data[field_name] = val
-                    except Exception:
-                        final_data[field_name] = False
-                else:
-                    final_data[field_name] = False
-
-        return final_data
-
-
-    def _resolve_raw_references(self, data, created_mapping, _creating=None):
-        """
-        Recursively resolve "raw:{id}" references to actual new record IDs.
-
-        :param data: Dictionary, list, or value that may contain raw references
-        :param created_mapping: Mapping of "raw:{id}" to actual new Odoo IDs
-        :param _creating: Set of raw references currently being created (prevents recursion)
-        :return: Data with resolved references
-        """
-
-        if isinstance(data, dict):
-            resolved = {}
-            for k, v in data.items():
-                resolved[k] = self._resolve_raw_references(v, created_mapping, _creating)
-            return resolved
-
-        elif isinstance(data, list):
-            resolved = []
-            for item in data:
-                # Handle command tuples (0, 0, {dict})
-                if isinstance(item, list | tuple) and len(item) == 3:
-                    cmd, _, vals = item
-                    resolved_vals = self._resolve_raw_references(vals, created_mapping, _creating)
-                    resolved.append((cmd, 0, resolved_vals))
-                else:
-                    resolved.append(self._resolve_raw_references(item, created_mapping, _creating))
-            return resolved
-
-        elif isinstance(data, str) and data.startswith("raw:"):
-            # Resolve the reference
-            new_id = created_mapping.get(data)
-            if new_id is None:
-                _logger.warning(f"Unresolved raw reference: {data}")
-                new_id = self._create_unresolved_raw(data, created_mapping, _creating)
-
-            return new_id
-
-        else:
-            return data
-
-
-    def _create_unresolved_raw(self, raw_ref, created_mapping, _creating=None):
-        """
-        Create a placeholder raw record for unresolved references to avoid repeated warnings.
-
-        :param raw_ref: The raw reference string "raw:{id}"
-        :param created_mapping: Mapping of "raw:{id}" to actual new Odoo IDs
-        :param _creating: Set of raw references currently being created (prevents recursion)
-        """
-        if _creating is None:
-            _creating = set()
-        
-        # Prevent circular dependencies
-        if raw_ref in _creating:
-            _logger.error(f"Circular dependency detected for {raw_ref}")
-            return False
-        
-        _creating.add(raw_ref)
-        
-        _logger.info(f"Creating unresolved raw for reference: {raw_ref}")
-        try:
-            raw_id = int(raw_ref.split(":")[1])
-            existing = self.raw_ids.filtered(lambda r: r.id == raw_id)
-            if existing:
-                final_data = self._get_creation_vals(existing, created_mapping, _creating)
-                model = self.env[existing.model_name]
-                new_record = model.create(final_data)
-                
-                # Store mapping: raw reference -> new Odoo ID
-                created_mapping[raw_ref] = new_record.id
-                
-                existing.write({
-                    "state": "created",
-                    "db_id": new_record.id,  # Store the actual new Odoo ID
-                    "remarks": False,
-                })
-
-                _logger.info(
-                    f"Created {existing.model_name} record ID {new_record.id} "
-                    f"from raw {existing.id} (old ID: {existing.record_id})"
-                )
-                return new_record.id
-            else:
-                _logger.error(f"Raw record not found for reference: {raw_ref}")
-                return False
-                
-        except Exception as e:
-            _logger.error(f"Error creating placeholder for unresolved raw reference {raw_ref}: {str(e)}")
-            return False
-        finally:
-            _creating.discard(raw_ref)
 
     def _topological_sort_raws(self):
         """
