@@ -428,9 +428,9 @@ class SPPDataImporter(models.Model):
                             "remarks": "Record already exists, skipped creation.",
                         }
                     )
-                    created_mapping[raw_ref] = existing.id
-                    _logger.info(f"Skipped creation for raw {raw.id}, record already exists with ID {existing.id}")
-                    return existing.id
+                created_mapping[raw_ref] = existing.id
+                _logger.info(f"Skipped creation for raw {raw.id}, record already exists with ID {existing.id}")
+                return existing.id
 
         return None
 
