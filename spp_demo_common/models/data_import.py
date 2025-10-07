@@ -435,6 +435,10 @@ class SPPDataImporter(models.Model):
                 # Skip one2many and many2many for first pass
                 if field.type in ('one2many', 'many2many'):
                     continue
+
+                # Skip many2one fields that are in the same model
+                if field.type == 'many2one' and field.comodel_name == raw.model_name:
+                    continue
                 
                 # Handle many2one with raw reference
                 if field.type == 'many2one' and isinstance(value, str) and value.startswith('raw:'):
