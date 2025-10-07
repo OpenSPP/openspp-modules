@@ -64,11 +64,23 @@
                             class="oe_stat_button"
                             icon="fa-refresh"
                             name="validate_import"
-                            invisible="state in ['draft','in_progress','completed','cancelled']"
+                            invisible="state in ['draft','validated','in_progress','completed','cancelled']"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Validate</span>
                                 <span class="o_stat_text">Import</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check-circle"
+                            name="create_records"
+                            invisible="state not in ['validated','error']"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Create</span>
+                                <span class="o_stat_text">Imported Records</span>
                             </div>
                         </button>
                     </div>
