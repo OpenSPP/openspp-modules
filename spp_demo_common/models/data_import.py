@@ -333,6 +333,7 @@ class SPPDataImporter(models.Model):
                 final_data = self._get_creation_vals(raw, created_mapping)
 
                 # Create the record
+                model = self.env[raw.model_name]
                 new_record = model.create(final_data)
 
                 # Store mapping: raw reference -> new Odoo ID
@@ -369,13 +370,14 @@ class SPPDataImporter(models.Model):
             self.locked = True
             self.remarks = f"Import completed successfully: {success_count} records created."
         
-    
-    def _get_creation_vals(self, raw, created_mapping):
+
+    def _get_creation_vals(self, raw, created_mapping, _creating=None):
         json_data = json.loads(raw.json_data)
         model = self.env[raw.model_name]
         _logger.info(f"Processing raw {raw.id} for model {raw.model_name} with data: {json_data}")
+        
         # Replace "raw:{id}" references with actual new record IDs
-        final_data = self._resolve_raw_references(json_data, created_mapping)
+        final_data = self._resolve_raw_references(json_data, created_mapping, _creating)
         
         # Convert date fields if necessary
         for field_name, field in model._fields.items():
@@ -410,19 +412,21 @@ class SPPDataImporter(models.Model):
 
         return final_data
 
-    def _resolve_raw_references(self, data, created_mapping):
+
+    def _resolve_raw_references(self, data, created_mapping, _creating=None):
         """
         Recursively resolve "raw:{id}" references to actual new record IDs.
 
         :param data: Dictionary, list, or value that may contain raw references
         :param created_mapping: Mapping of "raw:{id}" to actual new Odoo IDs
+        :param _creating: Set of raw references currently being created (prevents recursion)
         :return: Data with resolved references
         """
 
         if isinstance(data, dict):
             resolved = {}
             for k, v in data.items():
-                resolved[k] = self._resolve_raw_references(v, created_mapping)
+                resolved[k] = self._resolve_raw_references(v, created_mapping, _creating)
             return resolved
 
         elif isinstance(data, list):
@@ -431,10 +435,10 @@ class SPPDataImporter(models.Model):
                 # Handle command tuples (0, 0, {dict})
                 if isinstance(item, list | tuple) and len(item) == 3:
                     cmd, _, vals = item
-                    resolved_vals = self._resolve_raw_references(vals, created_mapping)
+                    resolved_vals = self._resolve_raw_references(vals, created_mapping, _creating)
                     resolved.append((cmd, 0, resolved_vals))
                 else:
-                    resolved.append(self._resolve_raw_references(item, created_mapping))
+                    resolved.append(self._resolve_raw_references(item, created_mapping, _creating))
             return resolved
 
         elif isinstance(data, str) and data.startswith("raw:"):
@@ -442,43 +446,64 @@ class SPPDataImporter(models.Model):
             new_id = created_mapping.get(data)
             if new_id is None:
                 _logger.warning(f"Unresolved raw reference: {data}")
-                new_id = self._create_unresolved_raw(data, created_mapping)
+                new_id = self._create_unresolved_raw(data, created_mapping, _creating)
 
             return new_id
 
         else:
             return data
 
-    def _create_unresolved_raw(self, raw_ref, created_mapping):
+
+    def _create_unresolved_raw(self, raw_ref, created_mapping, _creating=None):
         """
         Create a placeholder raw record for unresolved references to avoid repeated warnings.
 
         :param raw_ref: The raw reference string "raw:{id}"
+        :param created_mapping: Mapping of "raw:{id}" to actual new Odoo IDs
+        :param _creating: Set of raw references currently being created (prevents recursion)
         """
+        if _creating is None:
+            _creating = set()
+        
+        # Prevent circular dependencies
+        if raw_ref in _creating:
+            _logger.error(f"Circular dependency detected for {raw_ref}")
+            return False
+        
+        _creating.add(raw_ref)
+        
         _logger.info(f"Creating unresolved raw for reference: {raw_ref}")
         try:
             raw_id = int(raw_ref.split(":")[1])
             existing = self.raw_ids.filtered(lambda r: r.id == raw_id)
             if existing:
-                final_data = self._get_creation_vals(existing, created_mapping)
+                final_data = self._get_creation_vals(existing, created_mapping, _creating)
                 model = self.env[existing.model_name]
                 new_record = model.create(final_data)
-                existing.write(
-                    {
-                        "state": "created",
-                        "db_id": new_record.id,  # Store the actual new Odoo ID
-                        "remarks": False,
-                    }
-                )
+                
+                # Store mapping: raw reference -> new Odoo ID
+                created_mapping[raw_ref] = new_record.id
+                
+                existing.write({
+                    "state": "created",
+                    "db_id": new_record.id,  # Store the actual new Odoo ID
+                    "remarks": False,
+                })
 
                 _logger.info(
-                    f"Created {existing.model_name} record ID {existing.id} "
+                    f"Created {existing.model_name} record ID {new_record.id} "
                     f"from raw {existing.id} (old ID: {existing.record_id})"
                 )
                 return new_record.id
+            else:
+                _logger.error(f"Raw record not found for reference: {raw_ref}")
+                return False
                 
         except Exception as e:
             _logger.error(f"Error creating placeholder for unresolved raw reference {raw_ref}: {str(e)}")
+            return False
+        finally:
+            _creating.discard(raw_ref)
 
     def _topological_sort_raws(self):
         """
