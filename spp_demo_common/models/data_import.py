@@ -418,6 +418,9 @@ class SPPDataImporter(models.Model):
         :param created_mapping: Mapping of "raw:{id}" to actual new Odoo IDs
         :return: Data with resolved references
         """
+        _logger.info(f"Resolving data: {data}")
+        _logger.info(f"Using mapping: {created_mapping}")
+        
         if isinstance(data, dict):
             resolved = {}
             for k, v in data.items():
