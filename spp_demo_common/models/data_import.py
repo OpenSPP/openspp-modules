@@ -424,8 +424,8 @@ class SPPDataImporter(models.Model):
                 raw.write(
                     {
                         "state": "saved",
-                            "db_id": existing.id,
-                            "remarks": "Record already exists, skipped creation.",
+                        "db_id": existing.id,
+                        "remarks": "Record already exists, skipped creation.",
                         }
                     )
                 created_mapping[raw_ref] = existing.id
@@ -453,6 +453,7 @@ class SPPDataImporter(models.Model):
                 creation_data[field_name] = self._create_process_many2many_field(
                     field_name, value, created_mapping, _creating
                 )
+                _logger.info(f"Processed many2many field {field_name} with value {creation_data[field_name]}")
                 continue
 
             # Skip self-referencing many2one fields
