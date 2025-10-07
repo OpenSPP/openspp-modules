@@ -325,7 +325,7 @@ class SPPDataImporter(models.Model):
 
         # First pass: Create records (handling many2one recursively)
         for raw in self.raw_ids:
-            if raw.state != "validated":
+            if raw.state not in ["validated", "error"]:
                 continue
 
             try:
