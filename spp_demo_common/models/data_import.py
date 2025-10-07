@@ -1,6 +1,7 @@
 import base64
 import json
 import logging
+import datetime
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
@@ -335,7 +336,38 @@ class SPPDataImporter(models.Model):
 
                 # Replace "raw:{id}" references with actual new record IDs
                 final_data = self._resolve_raw_references(json_data, created_mapping)
-
+                
+                # Convert date fields if necessary
+                for field_name, field in model._fields.items():
+                    if field.type == "date" and field_name in final_data:
+                        val = final_data[field_name]
+                        if isinstance(val, str):
+                            try:
+                                # Accept ISO or standard date
+                                if "T" in val:
+                                    val = datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d")
+                                else:
+                                    val = datetime.datetime.strptime(val, "%Y-%m-%d").strftime("%Y-%m-%d")
+                                final_data[field_name] = val
+                            except Exception:
+                                final_data[field_name] = False
+                        else:
+                            final_data[field_name] = False
+                    elif field.type == "datetime" and field_name in final_data:
+                        val = final_data[field_name]
+                        if isinstance(val, str):
+                            try:
+                                # Accept ISO or standard datetime
+                                if "T" in val:
+                                    val = datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                                else:
+                                    val = datetime.datetime.strptime(val, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                                final_data[field_name] = val
+                            except Exception:
+                                final_data[field_name] = False
+                        else:
+                            final_data[field_name] = False
+                            
                 # Create the record
                 new_record = model.create(final_data)
 
