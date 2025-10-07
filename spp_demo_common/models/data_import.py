@@ -442,6 +442,8 @@ class SPPDataImporter(models.Model):
                     ref_raw_id = int(value.split(':')[1])
                     ref_raw = self.raw_ids.filtered(lambda r: r.id == ref_raw_id)
                     
+                    _logger.info(f"Resolving many2one for field {field_name} with value {value} | referencing raw {ref_raw_id}")
+
                     if ref_raw and not ref_raw.db_id:
                         # Recursively create the referenced record first
                         resolved_id = self._create_single_record(ref_raw, created_mapping, _creating)
