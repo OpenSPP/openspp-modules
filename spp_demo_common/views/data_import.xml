@@ -45,6 +45,9 @@
                         string="Refresh"
                     />
                 </div>
+                <div class="alert alert-info text-center o_form_header" role="status" invisible="not remarks">
+                    <field name="remarks" class="o_stat_value" />
+                </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box" invisible="locked">
                         <button
@@ -64,7 +67,7 @@
                             class="oe_stat_button"
                             icon="fa-refresh"
                             name="validate_import"
-                            invisible="state in ['draft','validated','in_progress','completed','cancelled']"
+                            invisible="validated"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Validate</span>
@@ -80,7 +83,7 @@
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Create</span>
-                                <span class="o_stat_text">Imported Records</span>
+                                <span class="o_stat_text">Imported</span>
                             </div>
                         </button>
                     </div>
@@ -90,6 +93,8 @@
                             <field name="import_filename" invisible="1" />
                             <field name="module_list" invisible="1" force_save="1" />
                             <field name="model_list" invisible="1" force_save="1" />
+                            <field name="validated" invisible="1" force_save="1" />
+                            <field name="remarks" invisible="1" force_save="1" />
                             <!-- Data Importer Section -->
                             <div style="flex: 1;">
                                 <h3>Data Importer</h3>
@@ -147,7 +152,7 @@
                                 <tree
                                     decoration-danger="state=='error'"
                                     decoration-info="state=='validated'"
-                                    decoration-success="state=='imported'"
+                                    decoration-success="state in ('completed','imported', 'saved')"
                                     decoration-muted="state=='draft'"
                                 >
                                     <field name="model_name" />
