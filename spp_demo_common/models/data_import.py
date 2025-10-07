@@ -263,7 +263,7 @@ class SPPDataImporter(models.Model):
         if not isinstance(field_value, list):
             field_value = [field_value] if field_value else []
 
-        commands = []
+        x2_many_vals = []
 
         for item in field_value:
             if not item:
@@ -284,19 +284,9 @@ class SPPDataImporter(models.Model):
 
             if raw_record:
                 try:
-                    # Parse the raw record's json_data
-                    related_json_data = json.loads(raw_record.json_data)
-
-                    # Recursively process related fields in this data
-                    processed_data = self._process_related_fields(
-                        self.env[comodel_name], related_json_data, raw_mapping
-                    )
-
-                    # Remove old ID
-                    processed_data.pop("id", None)
-
-                    # Add create command (0, 0, {fields})
-                    commands.append((0, 0, processed_data))
+                    raw_id = raw_record.id
+                    processed_raw = f"raw:{raw_id}"
+                    x2_many_vals.append(processed_raw)
 
                 except Exception as e:
                     _logger.error(f"Error processing x2many for {comodel_name} " f"old_id {old_id}: {str(e)}")
@@ -304,7 +294,7 @@ class SPPDataImporter(models.Model):
             else:
                 _logger.warning(f"No raw record found for {comodel_name} with old ID {old_id}")
 
-        return commands if commands else False
+        return x2_many_vals if x2_many_vals else False
 
     def create_records(self):
         """
@@ -362,17 +352,18 @@ class SPPDataImporter(models.Model):
                     
                     # Handle many2many fields
                     # elif field.type == 'many2many' and isinstance(value, list):
-                    if field.type == 'many2many' and isinstance(value, list):
-                        resolved_ids = []
-                        for item in value:
-                            if isinstance(item, str) and item.startswith('raw:'):
-                                resolved_id = created_mapping.get(item)
-                                if resolved_id:
-                                    resolved_ids.append(resolved_id)
-                            elif isinstance(item, int):
-                                resolved_ids.append(item)
-                        if resolved_ids:
-                            update_data[field_name] = [(6, 0, resolved_ids)]
+
+                    # if field.type == 'many2many' and isinstance(value, list):
+                    #     resolved_ids = []
+                    #     for item in value:
+                    #         if isinstance(item, str) and item.startswith('raw:'):
+                    #             resolved_id = created_mapping.get(item)
+                    #             if resolved_id:
+                    #                 resolved_ids.append(resolved_id)
+                    #         elif isinstance(item, int):
+                    #             resolved_ids.append(item)
+                    #     if resolved_ids:
+                    #         update_data[field_name] = [(6, 0, resolved_ids)]
                 
                 # Update record with one2many/many2many
                 if update_data:
@@ -427,6 +418,21 @@ class SPPDataImporter(models.Model):
             
             creation_data = {}
             
+            # First check if record already exists
+            possible_fields = ["name", "code", "value"]
+            for field in possible_fields:
+                if field in json_data and field in model._fields:
+                    existing = model.search([(field, "=", json_data[field])], limit=1)
+                    if existing:
+                        raw.write({
+                            "state": "created",
+                            "db_id": existing.id,
+                            "remarks": "Record already exists, skipped creation.",
+                        })
+                        created_mapping[raw_ref] = existing.id
+                        _logger.info(f"Skipped creation for raw {raw.id}, record already exists with ID {existing.id}")
+                        return existing.id
+                
             for field_name, value in json_data.items():
                 if field_name not in model._fields:
                     continue
@@ -434,7 +440,26 @@ class SPPDataImporter(models.Model):
                 field = model._fields[field_name]
                 
                 # Skip one2many and many2many for first pass
-                if field.type in ('one2many', 'many2many'):
+                if field.type == 'one2many':
+                    continue
+
+                if field.type == 'many2many':
+                    many2many_ids = []
+                    for item in value:
+                        if isinstance(item, str) and item.startswith('raw:'):
+                            ref_raw_id = int(item.split(':')[1])
+                            ref_raw = self.raw_ids.filtered(lambda r: r.id == ref_raw_id)
+                            _logger.info(f"Resolving many2many for field {field_name} with value {value} | referencing raw {ref_raw_id}")
+
+                            if ref_raw and not ref_raw.db_id:
+                                # Recursively create the referenced record first
+                                resolved_id = self._create_single_record(ref_raw, created_mapping, _creating)
+                                many2many_ids.append(resolved_id)
+                            elif ref_raw and ref_raw.db_id:
+                                many2many_ids.append(ref_raw.db_id)
+                            else:
+                                _logger.warning(f"Referenced raw {value} not found for field {field_name}")
+                    creation_data[field_name] = [(6, 0, many2many_ids)]
                     continue
 
                 # Skip many2one fields that are in the same model
