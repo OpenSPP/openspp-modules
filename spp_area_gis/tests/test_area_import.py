@@ -18,7 +18,7 @@ class AreaImportTest(AreaImportTestMixin):
             "latitude": 11,
         }
         area_level = 1
-        column_indexes = self.area_import_id_2.get_column_indexes(list(columns.keys()), area_level)
+        column_indexes = self.area_import_id_2.get_column_indexes(list(columns.keys()), area_level, "openpyxl")
 
         self.assertIn("latitude_index", column_indexes)
         self.assertIn("longitude_index", column_indexes)

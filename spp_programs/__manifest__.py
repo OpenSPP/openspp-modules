@@ -19,7 +19,7 @@
         "product",
         "stock",
         "spp_user_roles",
-        "spp_registry_base",
+        "spp_base_common",
         "account",
     ],
     "data": [

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Part of OpenSPP Registry. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="view_phone_validation_tree" model="ir.ui.view">
+        <field name="name">view_phone_validation_tree</field>
+        <field name="model">spp.phone.validation</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree create="true" edit="true" delete="false" duplicate="false" editable="top">
+                <field name="number_of_digits" />
+                <field name="with_prefix" />
+                <field name="prefix" />
+                <field name="name" />
+                <field
+                    name="state"
+                    decoration-danger="state == 'inactive'"
+                    decoration-success="state == 'active'"
+                    readonly="1"
+                />
+                <button
+                    name="activate_phone_validation"
+                    title="Activate"
+                    type="object"
+                    icon="fa-check"
+                    class="btn-success"
+                    invisible="state == 'active'"
+                />
+                <button
+                    name="deactivate_phone_validation"
+                    title="Deactivate"
+                    type="object"
+                    icon="fa-times"
+                    class="btn-danger"
+                    invisible="state == 'inactive'"
+                />
+                <field name="active" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="phone_validation_search_view" model="ir.ui.view">
+        <field name="name">phone.validation.search.view</field>
+        <field name="model">spp.phone.validation</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+                    string="Active"
+                    name="active"
+                    domain="[('state', '=', 'active')]"
+                    help="Filter to show only active phone validations."
+                />
+                <filter
+                    string="Inactive"
+                    name="active"
+                    domain="[('state', '=', 'inactive')]"
+                    help="Filter to show only inactive phone validations."
+                />
+                <filter
+                    string="Archived"
+                    name="archived"
+                    domain="[('active', '=', False)]"
+                    help="Filter to show only archived phone validations."
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_phone_validation" model="ir.actions.act_window">
+        <field name="name">Phone Validation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.phone.validation</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="search_view_id" ref="phone_validation_search_view" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a Phone Validation!
+            </p><p>
+                Click the create button to enter a phone validation.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_phone_validation_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_phone_validation_tree" />
+        <field name="act_window_id" ref="action_phone_validation" />
+    </record>
+
+    <menuitem
+        id="menu_phone_validation"
+        name="Phone Validation"
+        action="action_phone_validation"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
+    />
+
+</odoo>

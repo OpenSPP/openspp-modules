@@ -81,6 +81,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: spp_hide_menus_base
+#: model:ir.model,name:spp_hide_menus_base.model_ir_module_module
+msgid "Module"
+msgstr ""
+
+#. module: spp_hide_menus_base
 #: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__name
 msgid "Name"
 msgstr ""
@@ -103,4 +108,9 @@ msgstr ""
 #. module: spp_hide_menus_base
 #: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__state
 msgid "State"
+msgstr ""
+
+#. module: spp_hide_menus_base
+#: model:ir.model.fields,field_description:spp_hide_menus_base.field_spp_hide_menu__xml_id
+msgid "Xml"
 msgstr ""

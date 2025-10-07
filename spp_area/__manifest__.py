@@ -14,12 +14,13 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "base",
+        "spp_base_common",
+        "spp_user_roles",
         "spp_area_base",
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_registry_group",
         "queue_job",
-        "spp_registry_base",
     ],
     "external_dependencies": {},
     "data": [
@@ -29,6 +30,8 @@
         "views/area.xml",
         "views/area_import.xml",
         "views/area_kind.xml",
+        "views/role.xml",
+        "views/user.xml",
     ],
     "assets": {},
     "demo": [],

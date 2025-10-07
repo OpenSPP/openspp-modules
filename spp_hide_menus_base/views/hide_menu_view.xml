@@ -4,20 +4,12 @@
         <field name="model">spp.hide.menu</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
-                <field name="name" />
-                <field
-                    name="state"
-                    decoration-primary="state=='show'"
-                    decoration-danger="state=='hide'"
-                    widget="badge"
-                />
+            <tree edit="false" create="true" delete="false">
                 <button
                     name="hide_menu"
                     type="object"
                     icon="fa-eye-slash"
-                    title="Hide Menu"
-                    help="Hide Menu"
+                    string="Hide Menu"
                     class="btn-danger"
                     invisible="state == 'hide'"
                     groups="base.group_system"
@@ -26,11 +18,18 @@
                     name="show_menu"
                     type="object"
                     icon="fa-eye"
-                    title="Show Menu"
-                    help="Show Menu"
+                    string="Show Menu"
                     class="btn-primary"
                     invisible="state == 'show'"
                     groups="base.group_system"
+                />
+                <field name="name" />
+                <field name="xml_id" />
+                <field
+                    name="state"
+                    decoration-primary="state=='show'"
+                    decoration-danger="state=='hide'"
+                    widget="badge"
                 />
             </tree>
         </field>

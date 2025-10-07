@@ -251,6 +251,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/spp_area_base/models/area_import.py:0
 #, python-format
+msgid "ERROR: Unsupported file format. Please upload a .xlsx file."
+msgstr ""
+
+#. module: spp_area_base
+#. odoo-python
+#: code:addons/spp_area_base/models/area_import.py:0
+#, python-format
 msgid "ERROR: {}"
 msgstr ""
 

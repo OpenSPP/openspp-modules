@@ -68,7 +68,7 @@
     </record>
 
     <record id="g2p_registry_group.menu_groups_list" model="ir.ui.menu">
-        <field name="groups_id" eval="[(4,ref('spp_registry_base.read_registry'))]" />
+        <field name="groups_id" eval="[(4,ref('spp_base_common.read_registry'))]" />
         <field name="action" eval="False" />
     </record>
 
@@ -79,7 +79,7 @@
         action="g2p_registry_group.action_groups_list"
         parent="g2p_registry_group.menu_groups_list"
         sequence="10"
-        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_registry_base.read_registry"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_base_common.read_registry"
     />
 
     <!-- For Draft Groups -->
@@ -124,7 +124,7 @@
         action="action_draft_groups_list"
         parent="g2p_registry_group.menu_groups_list"
         sequence="15"
-        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_registry_base.read_registry"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_base_common.read_registry"
     />
 
     <!-- For Approved Groups -->
@@ -169,7 +169,7 @@
         action="action_approve_groups_list"
         parent="g2p_registry_group.menu_groups_list"
         sequence="20"
-        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_registry_base.read_registry"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_base_common.read_registry"
     />
 
     <!-- For Rejected Groups -->
@@ -214,6 +214,6 @@
         action="action_rejected_groups_list"
         parent="g2p_registry_group.menu_groups_list"
         sequence="25"
-        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_registry_base.read_registry"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_base_common.read_registry"
     />
 </odoo>

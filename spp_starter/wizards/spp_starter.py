@@ -213,7 +213,7 @@ class SppStarter(models.TransientModel):
 
     def _install_spmis_base_modules(self, res):
         for module_name in [
-            "spp_base",
+            "spp_base_spmis",
             "spp_programs",
             "spp_change_request",
             "spp_change_request_change_info",
@@ -242,7 +242,7 @@ class SppStarter(models.TransientModel):
         return res
 
     def _install_farmer_modules(self, res):
-        res = self._add_module_if_found(res, "spp_farmer_registry_base")
+        res = self._add_module_if_found(res, "spp_base_farmer_registry")
         if self.location_assignment == "yes":
             res = self._add_module_if_found(res, "spp_area_gis")
         if self.farmer_demo_management == "yes":

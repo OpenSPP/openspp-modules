@@ -14,30 +14,10 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: spp_user_roles
-#: model_terms:ir.ui.view,arch_db:spp_user_roles.view_res_users_role_spp_custom_form
+#: model_terms:ir.ui.view,arch_db:spp_user_roles.view_res_users_role_spp_user_roles_form
 msgid ""
 "<span class=\"o_stat_text\">Update</span>\n"
 "                        <span class=\"o_stat_text\">User Roles</span>"
-msgstr ""
-
-#. module: spp_user_roles
-#: model:ir.model,name:spp_user_roles.model_spp_area
-msgid "Area"
-msgstr ""
-
-#. module: spp_user_roles
-#: model:ir.model.fields,field_description:spp_user_roles.field_res_users_role_line__local_area_id
-msgid "Center Area"
-msgstr ""
-
-#. module: spp_user_roles
-#: model:ir.model.fields,field_description:spp_user_roles.field_res_users__center_area_ids
-msgid "Center Areas"
-msgstr ""
-
-#. module: spp_user_roles
-#: model:ir.model,name:spp_user_roles.model_res_partner
-msgid "Contact"
 msgstr ""
 
 #. module: spp_user_roles
@@ -68,21 +48,6 @@ msgstr ""
 #. module: spp_user_roles
 #: model:res.groups,name:spp_user_roles.global_role_support_manager_res_groups
 msgid "Global Support Manager"
-msgstr ""
-
-#. module: spp_user_roles
-#: model:res.groups,name:spp_user_roles.role_id_distributor_res_groups
-msgid "ID Distributor"
-msgstr ""
-
-#. module: spp_user_roles
-#: model:res.groups,name:spp_user_roles.role_id_requestor_res_groups
-msgid "ID Requestor"
-msgstr ""
-
-#. module: spp_user_roles
-#: model:res.groups,name:spp_user_roles.role_id_validator_res_groups
-msgid "ID Validator"
 msgstr ""
 
 #. module: spp_user_roles
@@ -139,26 +104,11 @@ msgid ""
 msgstr ""
 
 #. module: spp_user_roles
-#: model:res.groups,comment:spp_user_roles.role_id_validator_res_groups
-msgid "This role is allowed to Approve ID Requests."
-msgstr ""
-
-#. module: spp_user_roles
-#: model:res.groups,comment:spp_user_roles.role_id_distributor_res_groups
-msgid "This role is allowed to Generate, Print, and Distribute IDs."
-msgstr ""
-
-#. module: spp_user_roles
 #: model:res.groups,comment:spp_user_roles.global_role_registrar_res_groups
 #: model:res.groups,comment:spp_user_roles.local_role_registrar_res_groups
 msgid ""
 "This role is allowed to capture data related to their assigned area but "
 "doesn't have access to any other information."
-msgstr ""
-
-#. module: spp_user_roles
-#: model:res.groups,comment:spp_user_roles.role_id_requestor_res_groups
-msgid "This role is allowed to read the Registry and Request IDs."
 msgstr ""
 
 #. module: spp_user_roles

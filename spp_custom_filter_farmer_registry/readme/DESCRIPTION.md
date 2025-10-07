@@ -18,7 +18,7 @@ The primary purpose of the **SPP Custom Filter Farmer Registry** module is to:
 
 1. **[spp_custom_filter UI](spp_custom_filter_ui)**: This module directly depends on the **SPP Custom Filter UI** module, inheriting its core functionality for managing the visibility of fields in filter dropdown menus. The **SPP Custom Filter UI** module leverages this capability to configure the UI for specific models.
 
-2. **[OpenSPP Farmer Registry Base](spp_farmer_registry_base)**: The module interacts with the **OpenSPP Farmer Registry Base** module
+2. **[OpenSPP Farmer Registry Base](spp_base_farmer_registry)**: The module interacts with the **OpenSPP Farmer Registry Base** module
 
 ## Additional Functionality
 

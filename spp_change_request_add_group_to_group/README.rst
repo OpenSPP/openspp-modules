@@ -66,7 +66,7 @@ The module relies heavily on the following modules:
    request functionality, including the request workflow, validation
    processes, approval mechanisms, and integration with the Document
    Management System (`spp_dms <spp_dms>`__).
--  `spp_farmer_registry_base <spp_farmer_registry_base>`__: Leverages
+-  `spp_base_farmer_registry <spp_base_farmer_registry>`__: Leverages
    the farmer-specific data models and attributes to capture and store
    information about the new farmer.
 -  `g2p_registry_membership <g2p_registry_membership>`__: Integrates

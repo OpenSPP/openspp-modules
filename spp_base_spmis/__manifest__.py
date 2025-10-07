@@ -1,0 +1,67 @@
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
+
+{
+    "name": "OpenSPP SPMIS Base",
+    "category": "OpenSPP/OpenSPP",
+    "version": "17.0.1.3.1",
+    "sequence": 1,
+    "author": "OpenSPP.org",
+    "website": "https://github.com/OpenSPP/openspp-modules",
+    "license": "LGPL-3",
+    "development_status": "Production/Stable",
+    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
+    "depends": [
+        "base",
+        "utm",
+        "mail",
+        "spp_base_common",
+        "spp_area",
+        "spp_custom_field",
+        "spp_custom_fields_ui",
+        "spp_custom_filter_registry_ui",
+        "spp_custom_filter_program_ui",
+        "spp_exclusion_filter",
+        "spp_programs",
+        "spp_program_id",
+        "spp_entitlement_cash",
+        "spp_entitlement_in_kind",
+        "spp_ent_trans",
+        "spp_openid_vci_individual",
+        "g2p_registry_base",
+        "g2p_registry_individual",
+        "g2p_registry_group",
+        "g2p_registry_membership",
+    ],
+    "excludes": [
+        "spp_base_farmer_registry",
+        "spp_base_social_registry",
+    ],
+    "external_dependencies": {
+        "python": [
+            "fastapi==0.112.2",
+            "ujson>=5.4.0",
+            "extendable_pydantic==1.3.0",
+            "numpy>=1.22.2",
+            "urllib3>=1.26.5",
+            "zipp>=3.19.1",
+            "jwcrypto>=1.5.6",
+            "requests>=2.25.1",
+        ]
+    },  # not directly required, pinned by Snyk to avoid a vulnerability and for fastapi, compatibility issues.
+    "data": [
+        "data/global_roles.xml",
+        "data/local_roles.xml",
+        "data/top_up_card.xml",
+        "security/ir.model.access.csv",
+        "views/registrant_view.xml",
+        "views/users_view.xml",
+    ],
+    "assets": {},
+    "demo": [],
+    "images": [],
+    "application": False,
+    "installable": True,
+    "auto_install": False,
+    "summary": "Establishes core system settings and generates unique identifiers for records, enhancing registrant profiles with attributes like tags, gender, and type. The module also integrates Top-up Cards for identification and provides fundamental user interface elements with initial security configurations for user roles.",
+}

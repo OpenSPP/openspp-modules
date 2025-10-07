@@ -11,12 +11,12 @@
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123", "nhatnm0612"],
     "depends": [
-        "spp_registry_base",
-        "spp_base",
+        "spp_base_common",
+        "spp_base_spmis",
         "spp_area_base",
     ],
     "excludes": [
-        "spp_farmer_registry_base",
+        "spp_base_farmer_registry",
     ],
     "data": [
         "views/res_partner_views.xml",

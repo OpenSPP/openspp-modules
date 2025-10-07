@@ -16,7 +16,7 @@ class TestChangeRequestCreateFarm(TransactionCase):
         )
 
         # Create farm group kind if not exists
-        self.farm_kind = self.env.ref("spp_farmer_registry_base.kind_farm", raise_if_not_found=False)
+        self.farm_kind = self.env.ref("spp_base_farmer_registry.kind_farm", raise_if_not_found=False)
         if not self.farm_kind:
             self.farm_kind = self.env["g2p.group.kind"].create({"name": "Farm", "code": "farm"})
 

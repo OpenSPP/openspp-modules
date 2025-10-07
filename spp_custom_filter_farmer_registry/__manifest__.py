@@ -8,7 +8,7 @@
     "license": "LGPL-3",
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["spp_custom_filter", "spp_farmer_registry_base"],
+    "depends": ["spp_custom_filter", "spp_base_farmer_registry"],
     "auto_install": False,
     "application": False,
 }

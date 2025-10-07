@@ -6,8 +6,8 @@ from odoo import _, fields, models
 class OpenSPPAreaImport(models.Model):
     _inherit = "spp.area.import"
 
-    def get_column_indexes(self, columns, area_level):
-        column_indexes = super().get_column_indexes(columns, area_level)
+    def get_column_indexes(self, columns, area_level, workbook_type):
+        column_indexes = super().get_column_indexes(columns, area_level, workbook_type)
 
         if "latitude" in columns and "longitude" in columns:
             column_indexes["latitude_index"] = columns.index("latitude")

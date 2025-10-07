@@ -1,0 +1,31 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+res_partner_read_registry_access,Registry Read Access,base.model_res_partner,spp_base_common.read_registry,1,0,0,0
+phone_number_read_registry_access,Phone Number Read Access,g2p_registry_base.model_g2p_phone_number,spp_base_common.read_registry,1,0,0,0
+reg_id_read_registry_access,Reg ID Read Access,g2p_registry_base.model_g2p_reg_id,spp_base_common.read_registry,1,0,0,0
+reg_rel_read_registry_access,Reg Rel Read Access,g2p_registry_base.model_g2p_reg_rel,spp_base_common.read_registry,1,0,0,0
+registrant_tag_read_registry_access,Registrant Tags Read Access,g2p_registry_base.model_g2p_registrant_tags,spp_base_common.read_registry,1,0,0,0
+id_type_read_registry_access,ID Type Read Access,g2p_registry_base.model_g2p_id_type,spp_base_common.read_registry,1,0,0,0
+spp_read_res_model_access,Res Model Read Access,base.model_ir_model,spp_base_common.read_registry,1,0,0,0
+spp_read_res_model_fields_access,Res Model Fields Read Access,base.model_ir_model_fields,spp_base_common.read_registry,1,0,0,0
+spp_phone_number_validation_read_access,Phone Number Validation Read Access,spp_base_common.model_spp_phone_validation,spp_base_common.read_registry,1,0,0,0
+
+res_partner_write_registry_access,Registry Write Access,base.model_res_partner,spp_base_common.write_registry,1,1,0,0
+phone_number_write_registry_access,Phone Number Write Access,g2p_registry_base.model_g2p_phone_number,spp_base_common.write_registry,1,1,0,0
+reg_id_write_registry_access,Reg ID Write Access,g2p_registry_base.model_g2p_reg_id,spp_base_common.write_registry,1,1,0,0
+reg_rel_write_registry_access,Reg Rel Write Access,g2p_registry_base.model_g2p_reg_rel,spp_base_common.write_registry,1,1,0,0
+registrant_tag_write_registry_access,Registrant Tags Write Access,g2p_registry_base.model_g2p_registrant_tags,spp_base_common.write_registry,1,1,0,0
+id_type_write_registry_access,ID Type Write Access,g2p_registry_base.model_g2p_id_type,spp_base_common.write_registry,1,1,0,0
+spp_write_res_model_access,Res Model Write Access,base.model_ir_model,spp_base_common.write_registry,1,1,0,0
+spp_write_res_model_fields_access,Res Model Fields Write Access,base.model_ir_model_fields,spp_base_common.write_registry,1,1,0,0
+spp_phone_number_validation_write_access,Phone Number Validation Write Access,spp_base_common.model_spp_phone_validation,spp_base_common.write_registry,1,1,0,0
+
+res_partner_create_registry_access,Registry Create Access,base.model_res_partner,spp_base_common.create_registry,1,0,1,0
+phone_number_create_registry_access,Phone Number Create Access,g2p_registry_base.model_g2p_phone_number,spp_base_common.create_registry,1,0,1,0
+reg_id_create_registry_access,Reg ID Create Access,g2p_registry_base.model_g2p_reg_id,spp_base_common.create_registry,1,0,1,0
+reg_rel_create_registry_access,Reg Rel Create Access,g2p_registry_base.model_g2p_reg_rel,spp_base_common.create_registry,1,0,1,0
+registrant_tag_create_registry_access,Registrant Tags Create Access,g2p_registry_base.model_g2p_registrant_tags,spp_base_common.create_registry,1,0,1,0
+id_type_create_registry_access,ID Type Create Access,g2p_registry_base.model_g2p_id_type,spp_base_common.create_registry,1,0,1,0
+spp_create_res_model_access,Res Model Create Access,base.model_ir_model,spp_base_common.create_registry,1,0,1,0
+spp_create_res_model_fields_access,Res Model Fields Create Access,base.model_ir_model_fields,spp_base_common.create_registry,1,0,1,0
+spp_phone_number_validation_create_access,Phone Number Validation Create Access,spp_base_common.model_spp_phone_validation,spp_base_common.create_registry,1,0,1,0

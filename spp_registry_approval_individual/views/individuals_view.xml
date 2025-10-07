@@ -77,7 +77,7 @@
         action="g2p_registry_individual.action_individuals_list"
         parent="g2p_registry_individual.menu_individuals_list"
         sequence="10"
-        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_registry_base.read_registry"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_base_common.read_registry"
     />
 
     <!-- For Draft Individuals -->
@@ -122,7 +122,7 @@
         action="action_draft_individuals_list"
         parent="g2p_registry_individual.menu_individuals_list"
         sequence="15"
-        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_registry_base.read_registry"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_base_common.read_registry"
     />
 
     <!-- For Approved Individuals -->
@@ -167,7 +167,7 @@
         action="action_approve_individuals_list"
         parent="g2p_registry_individual.menu_individuals_list"
         sequence="20"
-        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_registry_base.read_registry"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_base_common.read_registry"
     />
 
     <!-- For Rejected Individuals -->
@@ -212,6 +212,6 @@
         action="action_rejected_individuals_list"
         parent="g2p_registry_individual.menu_individuals_list"
         sequence="25"
-        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_registry_base.read_registry"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar,spp_base_common.read_registry"
     />
 </odoo>

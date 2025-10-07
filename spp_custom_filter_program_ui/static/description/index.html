@@ -1,0 +1,843 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>OpenSPP Custom Filter Program UI</title>
+<style type="text/css">
+
+/* ==========================================
+   RESET AND BASE STYLES
+   ========================================== */
+
+/* Reset borders and basic layout */
+.borderless, table.borderless td, table.borderless th {
+  border: 0;
+}
+
+table.borderless td, table.borderless th {
+  padding: 0 0.5em 0 0 !important;
+}
+
+.first {
+  margin-top: 0 !important;
+}
+
+.last, .with-subtitle {
+  margin-bottom: 0 !important;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ==========================================
+   TYPOGRAPHY
+   ========================================== */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 20px;
+}
+
+h1.title {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.5em;
+  margin-bottom: 1em;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 0.5em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+}
+
+h1 { font-size: 2.2em; }
+h2 { 
+  font-size: 1.8em; 
+  border-left: 4px solid #3498db;
+  padding-left: 15px;
+}
+h3 { font-size: 1.5em; }
+h4 { font-size: 1.3em; }
+h5 { font-size: 1.1em; }
+h6 { font-size: 1em; }
+
+h2.subtitle {
+  text-align: center;
+  color: #7f8c8d;
+  font-weight: 400;
+}
+
+/* Subscript and superscript */
+.subscript {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+/* ==========================================
+   CONTENT SECTIONS
+   ========================================== */
+
+.document {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+  margin-bottom: 2.5em;
+  padding: 20px 0;
+}
+
+.section:not(:last-child) {
+  border-bottom: 1px solid #ecf0f1;
+}
+
+p {
+  margin-bottom: 1.2em;
+  text-align: justify;
+}
+
+/* ==========================================
+   LINKS AND NAVIGATION
+   ========================================== */
+
+a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+a.toc-backref {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==========================================
+   LISTS
+   ========================================== */
+
+ul, ol {
+  margin-bottom: 1.5em;
+  padding-left: 2em;
+}
+
+ul.simple, ol.simple {
+  margin-bottom: 1em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+ul.simple li, ol.simple li {
+  margin-bottom: 0.3em;
+}
+
+/* List style variations */
+ol.arabic { list-style: decimal; }
+ol.loweralpha { list-style: lower-alpha; }
+ol.upperalpha { list-style: upper-alpha; }
+ol.lowerroman { list-style: lower-roman; }
+ol.upperroman { list-style: upper-roman; }
+
+ul.auto-toc {
+  list-style-type: none;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+/* ==========================================
+   TABLES
+   ========================================== */
+
+table.docutils {
+  margin: 1.5em auto;
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding: 12px 15px;
+  vertical-align: top;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+table.docutils th {
+  background-color: #3498db;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+}
+
+table.docutils tr:hover {
+  background-color: #f8f9fa;
+}
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold;
+  text-align: left;
+  white-space: nowrap;
+  padding-left: 0;
+  background-color: #34495e;
+}
+
+/* Booktabs style tables */
+table.docutils.booktabs {
+  border: 0;
+  border-top: 2px solid #2c3e50;
+  border-bottom: 2px solid #2c3e50;
+  border-collapse: collapse;
+}
+
+table.docutils.booktabs * {
+  border: 0;
+}
+
+table.docutils.booktabs th {
+  border-bottom: thin solid #34495e;
+  text-align: left;
+}
+
+/* Special tables */
+table.docinfo {
+  margin: 2em auto;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+table.citation {
+  border-left: solid 4px #95a5a6;
+  margin-left: 1px;
+  background: #f8f9fa;
+}
+
+table.footnote {
+  border-left: solid 4px #e74c3c;
+  margin-left: 1px;
+  background: #fdf2f2;
+}
+
+/* ==========================================
+   ADMONITIONS AND ALERTS
+   ========================================== */
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em 0;
+  border-radius: 8px;
+  padding: 20px;
+  border-left: 5px solid #3498db;
+  background: #f8f9fa;
+}
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold;
+  font-family: sans-serif;
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+/* Warning and error states */
+div.attention, div.caution, div.danger, div.error, div.warning {
+  border-left-color: #e74c3c;
+  background: #fdf2f2;
+}
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: #e74c3c;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+/* Success states */
+div.tip {
+  border-left-color: #27ae60;
+  background: #f1f8e9;
+}
+
+div.tip p.admonition-title {
+  color: #27ae60;
+}
+
+/* ==========================================
+   CODE AND PREFORMATTED TEXT
+   ========================================== */
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin: 1.5em 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+code {
+  background-color: #f8f9fa;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+  color: #e74c3c;
+}
+
+/* Code syntax highlighting */
+pre.code .ln { color: #95a5a6; }
+pre.code .comment, code .comment { color: #5C6576; }
+pre.code .keyword, code .keyword { color: #8e44ad; font-weight: bold; }
+pre.code .literal.string, code .literal.string { color: #27ae60; }
+pre.code .name.builtin, code .name.builtin { color: #3498db; }
+pre.code .deleted, code .deleted { background-color: #fdf2f2; }
+pre.code .inserted, code .inserted { background-color: #f1f8e9; }
+
+pre.address {
+  margin-bottom: 0;
+  margin-top: 0;
+  font: inherit;
+}
+
+/* ==========================================
+   SPECIAL ELEMENTS
+   ========================================== */
+
+/* Quotes and citations */
+blockquote.epigraph {
+  margin: 2em 0;
+  padding: 20px;
+  background: #f8f9fa;
+  border-left: 4px solid #3498db;
+  font-style: italic;
+}
+
+p.attribution {
+  text-align: right;
+  margin-left: 50%;
+  font-weight: 600;
+  color: #7f8c8d;
+}
+
+/* Figures and images */
+div.figure {
+  margin: 2em auto;
+  text-align: center;
+}
+
+p.caption {
+  font-style: italic;
+  color: #7f8c8d;
+  margin-top: 0.5em;
+}
+
+/* Alignment classes */
+.align-left { text-align: left; }
+.align-center { 
+  clear: both;
+  text-align: center; 
+}
+.align-right { text-align: right; }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left;
+  float: left;
+  margin-right: 1em;
+}
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right;
+  float: right;
+  margin-left: 1em;
+}
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-top { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+/* ==========================================
+   SIDEBARS AND SPECIAL CONTENT
+   ========================================== */
+
+div.sidebar {
+  margin: 0 0 0.5em 1em;
+  border: 1px solid #bdc3c7;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  width: 40%;
+  float: right;
+  clear: right;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+div.sidebar p.rubric {
+  font-family: sans-serif;
+  font-size: medium;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+p.sidebar-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  color: #2c3e50;
+  margin-top: 0;
+}
+
+p.sidebar-subtitle {
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #7f8c8d;
+}
+
+/* Topics and abstracts */
+div.topic {
+  margin: 2em 0;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #ecf0f1;
+}
+
+div.abstract {
+  margin: 2em 0;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #9b59b6;
+}
+
+div.abstract p.topic-title {
+  font-weight: bold;
+  text-align: center;
+  color: #9b59b6;
+  margin-top: 0;
+}
+
+p.topic-title {
+  font-weight: bold;
+  color: #2c3e50;
+  margin-top: 0;
+}
+
+/* ==========================================
+   SYSTEM MESSAGES AND ERRORS
+   ========================================== */
+
+div.system-messages {
+  margin: 2em 0;
+  padding: 20px;
+  background: #fdf2f2;
+  border-radius: 8px;
+  border-left: 4px solid #e74c3c;
+}
+
+div.system-messages h1 {
+  color: #e74c3c;
+  margin-top: 0;
+}
+
+div.system-message {
+  border: 1px solid #e74c3c;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 1em;
+  background: white;
+}
+
+div.system-message p.system-message-title {
+  color: #e74c3c;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+span.problematic, pre.problematic {
+  color: #e74c3c;
+  background: #fdf2f2;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.code .error {
+  color: #e74c3c;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+/* ==========================================
+   MISCELLANEOUS ELEMENTS
+   ========================================== */
+
+/* Definition lists */
+dl.docutils dd {
+  margin-bottom: 0.8em;
+  margin-left: 2em;
+}
+
+span.classifier {
+  font-family: sans-serif;
+  font-style: oblique;
+  color: #7f8c8d;
+}
+
+span.classifier-delimiter {
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #7f8c8d;
+}
+
+span.interpreted {
+  font-family: sans-serif;
+  color: #8e44ad;
+}
+
+span.option {
+  white-space: nowrap;
+  font-family: monospace;
+  background: #f8f9fa;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+span.pre {
+  white-space: pre;
+}
+
+/* Line blocks */
+div.line-block {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+div.line-block div.line-block {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 1.5em;
+}
+
+/* Headers and footers */
+div.footer, div.header {
+  clear: both;
+  font-size: smaller;
+  color: #7f8c8d;
+  padding: 20px 0;
+  text-align: center;
+}
+
+/* Document utilities */
+hr.docutils {
+  width: 75%;
+  margin: 2em auto;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #bdc3c7, transparent);
+}
+
+p.label {
+  white-space: nowrap;
+  font-weight: bold;
+  color: #34495e;
+}
+
+p.rubric {
+  font-weight: bold;
+  font-size: larger;
+  color: #8e44ad;
+  text-align: center;
+  margin: 2em 0;
+}
+
+p.credits {
+  font-style: italic;
+  font-size: smaller;
+  color: #7f8c8d;
+}
+
+span.section-subtitle {
+  font-size: 80%;
+  color: #7f8c8d;
+}
+
+/* Section subtitle headings */
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em;
+  color: #7f8c8d;
+}
+
+/* Dedication */
+div.dedication {
+  margin: 2em 0;
+  text-align: center;
+  font-style: italic;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+div.dedication p.topic-title {
+  font-weight: bold;
+  font-style: normal;
+  color: #2c3e50;
+  margin-top: 0;
+}
+
+/* SVG and multimedia objects */
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Reset inner alignment in figures */
+div.align-right {
+  text-align: inherit;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 768px) {
+  .document {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  h1.title {
+    font-size: 2em;
+  }
+  
+  div.sidebar {
+    width: 100%;
+    float: none;
+    margin: 1em 0;
+  }
+  
+  table.docutils {
+    font-size: 0.9em;
+  }
+  
+  table.docutils td, table.docutils th {
+    padding: 8px 10px;
+  }
+}
+
+/* ==========================================
+   BADGE STYLING (for GitHub badges)
+   ========================================== */
+
+.reference.external.image-reference img {
+  border-radius: 4px;
+  margin: 2px;
+  transition: transform 0.2s ease;
+}
+
+.reference.external.image-reference img:hover {
+  transform: scale(1.05);
+}
+
+</style>
+</head>
+<body>
+<div class="document" id="openspp-custom-filter-ui">
+<h1 class="title">OpenSPP Custom Filter Program UI</h1>
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! This file is generated by oca-gen-addon-readme !!
+!! changes will be overwritten.                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! source digest: sha256:dd00856445c395a846d81f4165af1980684728e1abf2e25e82ede60c05cad815
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+<div class="section" id="badges">
+<p style="text-align: center; margin-bottom: 2em;">
+<a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> 
+<a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> 
+<a class="reference external image-reference" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_custom_filter_program_ui"><img alt="OpenSPP/openspp-modules" src="https://img.shields.io/badge/github-OpenSPP%2Fopenspp--modules-lightgray.png?logo=github" /></a>
+</p>
+</div>
+
+<div class="section" id="openspp-custom-filter-ui-1">
+<h1>OpenSPP Custom Filter Program UI</h1>
+
+<div class="section" id="overview">
+<h2>Overview</h2>
+<p>The <strong>SPP Custom Filter Program UI</strong> module provides a sophisticated and user-friendly interface for filtering within the OpenSPP Programs module. This module significantly enhances usability and streamlines data management workflows by building upon the robust foundation provided by the <a class="reference external" href="spp_custom_filter">spp_custom_filter</a> module.</p>
+
+<p>At its core, this module focuses on optimizing the filtering experience for the <strong>Res Partner</strong> model, which serves as the backbone of OpenSPP's registrant management system. By intelligently controlling which fields appear in filter dropdown menus, the module creates a more intuitive and efficient user interface that reduces complexity while maintaining full functionality.</p>
+</div>
+
+<div class="section" id="purpose">
+<h2>Purpose</h2>
+<p>The <strong>SPP Custom Filter Program UI</strong> module addresses critical usability challenges in data management systems. Its primary objectives include:</p>
+
+<div class="admonition tip">
+<p class="admonition-title">Key Benefits</p>
+<ul class="simple">
+<li><strong>Enhanced Usability</strong>: Streamlines the filtering process by presenting a carefully curated selection of relevant filterable fields, significantly reducing visual clutter and cognitive overhead for users navigating complex datasets.</li>
+<li><strong>Improved Operational Efficiency</strong>: Enables users to locate and filter data with greater speed and precision, particularly beneficial when working with models containing extensive field collections.</li>
+<li><strong>OpenSPP-Optimized Interface</strong>: Delivers a tailored filtering experience specifically designed to complement OpenSPP's unique data structures, user workflows, and operational requirements.</li>
+</ul>
+</div>
+</div>
+
+<div class="section" id="module-dependencies-and-integration">
+<h2>Module Dependencies and Integration</h2>
+<p>The module's architecture is built on strategic integrations with core OpenSPP components:</p>
+
+<div class="section" id="core-dependencies">
+<h3>Core Dependencies</h3>
+
+<div class="admonition important">
+<p class="admonition-title">Primary Dependency</p>
+<p><strong><a class="reference external" href="spp_custom_filter">spp_custom_filter</a></strong>: This module serves as the foundational layer, providing essential functionality for managing field visibility in filter dropdown menus. The SPP Custom Filter Program UI module leverages and extends these capabilities to create program-specific UI configurations.</p>
+</div>
+
+<div class="admonition note">
+<p class="admonition-title">Program Integration</p>
+<p><strong><a class="reference external" href="g2p_programs">g2p_programs</a></strong>: Seamless integration with the G2P Programs module ensures that filtering interfaces align perfectly with program-specific data structures and operational workflows. This integration is essential for users managing registrant information within social protection program contexts.</p>
+</div>
+</div>
+</div>
+
+<div class="section" id="additional-functionality">
+<h2>Key Features and Functionality</h2>
+
+<div class="section" id="ui-customization">
+<h3>Advanced UI Customization</h3>
+<ul class="simple">
+<li><strong>Res Partner Model Optimization</strong>: The module implements sophisticated customizations specifically for the Res Partner model, which forms the central component of OpenSPP's registrant management ecosystem. It strategically enables the "Show on Custom Filter" option for carefully selected fields, ensuring optimal balance between functionality and simplicity.</li>
+<li><strong>Dynamic Field Selection</strong>: Implements intelligent algorithms to determine which fields should be exposed in filtering interfaces, based on usage patterns, data importance, and user workflow requirements.</li>
+</ul>
+</div>
+
+<div class="section" id="integration-features">
+<h3>Seamless System Integration</h3>
+<ul class="simple">
+<li><strong>Cross-Module Compatibility</strong>: The module's UI configurations are architected to integrate flawlessly with <a class="reference external" href="g2p_programs">g2p_programs</a> and other OpenSPP modules, providing a consistent and intuitive user experience across all system components.</li>
+<li><strong>Workflow Optimization</strong>: Specifically designed to support complex social protection program workflows, ensuring that filtering capabilities enhance rather than complicate daily operations.</li>
+</ul>
+</div>
+</div>
+
+<div class="section" id="technical-specifications">
+<h2>Technical Specifications</h2>
+
+<div class="admonition important">
+<p class="admonition-title">Technical Details</p>
+<ul class="simple">
+<li><strong>Version Compatibility</strong>: Designed for Odoo 17.0 and OpenSPP ecosystem</li>
+<li><strong>License</strong>: LGPL-3</li>
+<li><strong>Development Status</strong>: Beta (actively maintained and feature-complete)</li>
+<li><strong>Target Models</strong>: Primarily Res Partner with extensibility for additional models</li>
+</ul>
+</div>
+</div>
+
+<div class="section" id="conclusion">
+<h2>Impact and Value Proposition</h2>
+<p>The <strong>SPP Custom Filter Program UI</strong> module represents a significant advancement in OpenSPP platform usability and operational efficiency. By implementing thoughtful UI customizations for critical models like <strong>Res Partner</strong>, the module transforms complex data management tasks into streamlined, intuitive processes.</p>
+
+<p>This module is particularly valuable for organizations managing large-scale social protection programs, where efficient data filtering and management directly impact program effectiveness and beneficiary outcomes. Its seamless integration with core OpenSPP modules ensures that users experience a cohesive, professional-grade interface that scales with organizational needs.</p>
+
+<div class="admonition tip">
+<p class="admonition-title">Business Value</p>
+<p>Organizations implementing this module typically observe significant improvements in user productivity, data accuracy, and overall system satisfaction, making it an essential component of any comprehensive OpenSPP deployment.</p>
+</div>
+</div>
+</div>
+
+<div class="section" id="bug-tracker">
+<h1>Bug Tracker</h1>
+<p>Issues and feature requests are tracked through our comprehensive GitHub Issues system at <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues">GitHub Issues</a>. Our development team actively monitors and responds to all reported issues.</p>
+
+<div class="admonition important">
+<p class="admonition-title">Reporting Issues</p>
+<p>Before submitting a new issue, please search existing reports to avoid duplicates. When reporting bugs, please provide detailed reproduction steps, expected behavior, and system environment information to help our team resolve issues efficiently.</p>
+</div>
+
+<p><a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues/new?body=module:%20spp_custom_filter_program_ui%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">Submit New Issue</a></p>
+
+<div class="admonition note">
+<p class="admonition-title">Support Guidelines</p>
+<p>For technical support and implementation assistance, please use our issue tracking system rather than contacting contributors directly. This ensures your questions receive proper attention and benefit the broader community.</p>
+</div>
+</div>
+
+<div class="section" id="credits">
+<h1>Credits</h1>
+
+<div class="section" id="authors">
+<h2>Authors</h2>
+<ul class="simple">
+<li><strong>OpenSPP.org</strong> - Leading the development of open-source social protection platforms</li>
+</ul>
+</div>
+
+<div class="section" id="maintainers">
+<h2>Project Maintainers</h2>
+<p><strong>Current Lead Maintainer:</strong></p>
+<p><a class="reference external image-reference" href="https://github.com/nhatnm0612"><img alt="nhatnm0612" src="https://github.com/nhatnm0612.png?size=40px" /></a></p>
+
+<div class="admonition note">
+<p class="admonition-title">Contributing</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_custom_filter_program_ui">OpenSPP/openspp-modules</a> project on GitHub. We welcome contributions from the community, including bug reports, feature suggestions, documentation improvements, and code contributions.</p>
+</div>
+
+<p><strong>How to Contribute:</strong></p>
+<ul class="simple">
+<li>Fork the repository and create feature branches</li>
+<li>Follow our coding standards and contribution guidelines</li>
+<li>Submit pull requests with detailed descriptions</li>
+<li>Participate in code reviews and community discussions</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>

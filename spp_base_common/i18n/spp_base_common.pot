@@ -1,0 +1,191 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spp_base_common
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spp_base_common
+#: model_terms:ir.ui.view,arch_db:spp_base_common.view_phone_validation_tree
+msgid "Activate"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__active
+#: model:ir.model.fields.selection,name:spp_base_common.selection__spp_phone_validation__state__active
+#: model_terms:ir.ui.view,arch_db:spp_base_common.phone_validation_search_view
+msgid "Active"
+msgstr ""
+
+#. module: spp_base_common
+#: model_terms:ir.actions.act_window,help:spp_base_common.action_phone_validation
+msgid "Add a Phone Validation!"
+msgstr ""
+
+#. module: spp_base_common
+#: model_terms:ir.ui.view,arch_db:spp_base_common.phone_validation_search_view
+msgid "Archived"
+msgstr ""
+
+#. module: spp_base_common
+#: model_terms:ir.actions.act_window,help:spp_base_common.action_phone_validation
+msgid "Click the create button to enter a phone validation."
+msgstr ""
+
+#. module: spp_base_common
+#: model:res.groups,name:spp_base_common.create_registry
+msgid "Create Registry"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spp_base_common
+#: model_terms:ir.ui.view,arch_db:spp_base_common.view_phone_validation_tree
+msgid "Deactivate"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spp_base_common
+#: model_terms:ir.ui.view,arch_db:spp_base_common.phone_validation_search_view
+msgid "Filter to show only active phone validations."
+msgstr ""
+
+#. module: spp_base_common
+#: model_terms:ir.ui.view,arch_db:spp_base_common.phone_validation_search_view
+msgid "Filter to show only archived phone validations."
+msgstr ""
+
+#. module: spp_base_common
+#: model_terms:ir.ui.view,arch_db:spp_base_common.phone_validation_search_view
+msgid "Filter to show only inactive phone validations."
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__id
+msgid "ID"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields.selection,name:spp_base_common.selection__spp_phone_validation__state__inactive
+#: model_terms:ir.ui.view,arch_db:spp_base_common.phone_validation_search_view
+msgid "Inactive"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model,name:spp_base_common.model_ir_module_module
+msgid "Module"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__number_of_digits
+msgid "Number of Digits"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model,name:spp_base_common.model_g2p_phone_number
+msgid "Phone Number"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.actions.act_window,name:spp_base_common.action_phone_validation
+#: model:ir.ui.menu,name:spp_base_common.menu_phone_validation
+msgid "Phone Validation"
+msgstr ""
+
+#. module: spp_base_common
+#. odoo-python
+#: code:addons/spp_base_common/models/phone_number.py:0
+#, python-format
+msgid ""
+"Phone number contains invalid special characters. Only digits, '-', and an "
+"optional leading '+' are allowed."
+msgstr ""
+
+#. module: spp_base_common
+#. odoo-python
+#: code:addons/spp_base_common/models/phone_number.py:0
+#, python-format
+msgid "Phone number must match one of the following formats: "
+msgstr ""
+
+#. module: spp_base_common
+#. odoo-python
+#: code:addons/spp_base_common/models/phone_number.py:0
+#, python-format
+msgid "Phone number must not contain letters."
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__prefix
+msgid "Prefix"
+msgstr ""
+
+#. module: spp_base_common
+#: model:res.groups,name:spp_base_common.read_registry
+msgid "Read Registry"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.module.category,name:spp_base_common.registry_access_module
+msgid "Registry Access"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model,name:spp_base_common.model_spp_phone_validation
+msgid "SPP Phone Validation"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__name
+msgid "Sample Format"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__state
+msgid "State"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.module.category,description:spp_base_common.registry_access_module
+msgid "User access level for Registry"
+msgstr ""
+
+#. module: spp_base_common
+#: model:ir.model.fields,field_description:spp_base_common.field_spp_phone_validation__with_prefix
+msgid "With Prefix"
+msgstr ""
+
+#. module: spp_base_common
+#: model:res.groups,name:spp_base_common.write_registry
+msgid "Write Registry"
+msgstr ""

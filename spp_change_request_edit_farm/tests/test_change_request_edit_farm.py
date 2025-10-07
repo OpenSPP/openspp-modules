@@ -6,7 +6,7 @@ class TestChangeRequestEditFarm(TransactionCase):
     def setUp(self):
         super().setUp()
         # Create test data
-        self.group_kind = self.env.ref("spp_farmer_registry_base.kind_farm")
+        self.group_kind = self.env.ref("spp_base_farmer_registry.kind_farm")
 
         # Create a test farm/group
         self.test_farm = self.env["res.partner"].create(
