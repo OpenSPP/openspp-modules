@@ -419,7 +419,7 @@ class SPPDataImporter(models.Model):
             creation_data = {}
             
             # First check if record already exists
-            possible_fields = ["name", "code", "value"]
+            possible_fields = ["name", "code", "value", "phone_no", "display_name", "email"]
             for field in possible_fields:
                 if field in json_data and field in model._fields:
                     existing = model.search([(field, "=", json_data[field])], limit=1)
@@ -445,21 +445,24 @@ class SPPDataImporter(models.Model):
 
                 if field.type == 'many2many':
                     many2many_ids = []
-                    for item in value:
-                        if isinstance(item, str) and item.startswith('raw:'):
-                            ref_raw_id = int(item.split(':')[1])
-                            ref_raw = self.raw_ids.filtered(lambda r: r.id == ref_raw_id)
-                            _logger.info(f"Resolving many2many for field {field_name} with value {value} | referencing raw {ref_raw_id}")
+                    if isinstance(value, list):
+                        for item in value:
+                            if isinstance(item, str) and item.startswith('raw:'):
+                                ref_raw_id = int(item.split(':')[1])
+                                ref_raw = self.raw_ids.filtered(lambda r: r.id == ref_raw_id)
+                                _logger.info(f"Resolving many2many for field {field_name} with value {value} | referencing raw {ref_raw_id}")
 
-                            if ref_raw and not ref_raw.db_id:
-                                # Recursively create the referenced record first
-                                resolved_id = self._create_single_record(ref_raw, created_mapping, _creating)
-                                many2many_ids.append(resolved_id)
-                            elif ref_raw and ref_raw.db_id:
-                                many2many_ids.append(ref_raw.db_id)
-                            else:
-                                _logger.warning(f"Referenced raw {value} not found for field {field_name}")
-                    creation_data[field_name] = [(6, 0, many2many_ids)]
+                                if ref_raw and not ref_raw.db_id:
+                                    # Recursively create the referenced record first
+                                    resolved_id = self._create_single_record(ref_raw, created_mapping, _creating)
+                                    many2many_ids.append(resolved_id)
+                                elif ref_raw and ref_raw.db_id:
+                                    many2many_ids.append(ref_raw.db_id)
+                                else:
+                                    _logger.warning(f"Referenced raw {value} not found for field {field_name}")
+                        creation_data[field_name] = [(6, 0, many2many_ids)]
+                    else:
+                        creation_data[field_name] = False
                     continue
 
                 # Skip many2one fields that are in the same model
