@@ -331,42 +331,7 @@ class SPPDataImporter(models.Model):
                 continue
 
             try:
-                json_data = json.loads(raw.json_data)
-                model = self.env[raw.model_name]
-
-                # Replace "raw:{id}" references with actual new record IDs
-                final_data = self._resolve_raw_references(json_data, created_mapping)
-                
-                # Convert date fields if necessary
-                for field_name, field in model._fields.items():
-                    if field.type == "date" and field_name in final_data:
-                        val = final_data[field_name]
-                        if isinstance(val, str):
-                            try:
-                                # Accept ISO or standard date
-                                if "T" in val:
-                                    val = datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d")
-                                else:
-                                    val = datetime.datetime.strptime(val, "%Y-%m-%d").strftime("%Y-%m-%d")
-                                final_data[field_name] = val
-                            except Exception:
-                                final_data[field_name] = False
-                        else:
-                            final_data[field_name] = False
-                    elif field.type == "datetime" and field_name in final_data:
-                        val = final_data[field_name]
-                        if isinstance(val, str):
-                            try:
-                                # Accept ISO or standard datetime
-                                if "T" in val:
-                                    val = datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
-                                else:
-                                    val = datetime.datetime.strptime(val, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
-                                final_data[field_name] = val
-                            except Exception:
-                                final_data[field_name] = False
-                        else:
-                            final_data[field_name] = False
+                final_data = self._get_creation_vals(raw)
 
                 # Create the record
                 new_record = model.create(final_data)
@@ -402,6 +367,46 @@ class SPPDataImporter(models.Model):
         else:
             self.state = "completed"
             self.locked_reason = f"Import completed successfully: {success_count} records created."
+    
+    def _get_creation_vals(self, raw):
+        json_data = json.loads(raw.json_data)
+        model = self.env[raw.model_name]
+
+        # Replace "raw:{id}" references with actual new record IDs
+        final_data = self._resolve_raw_references(json_data, created_mapping)
+        
+        # Convert date fields if necessary
+        for field_name, field in model._fields.items():
+            if field.type == "date" and field_name in final_data:
+                val = final_data[field_name]
+                if isinstance(val, str):
+                    try:
+                        # Accept ISO or standard date
+                        if "T" in val:
+                            val = datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d")
+                        else:
+                            val = datetime.datetime.strptime(val, "%Y-%m-%d").strftime("%Y-%m-%d")
+                        final_data[field_name] = val
+                    except Exception:
+                        final_data[field_name] = False
+                else:
+                    final_data[field_name] = False
+            elif field.type == "datetime" and field_name in final_data:
+                val = final_data[field_name]
+                if isinstance(val, str):
+                    try:
+                        # Accept ISO or standard datetime
+                        if "T" in val:
+                            val = datetime.datetime.strptime(val, "%Y-%m-%dT%H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                        else:
+                            val = datetime.datetime.strptime(val, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                        final_data[field_name] = val
+                    except Exception:
+                        final_data[field_name] = False
+                else:
+                    final_data[field_name] = False
+
+        return final_data
 
     def _resolve_raw_references(self, data, created_mapping):
         """
@@ -434,11 +439,42 @@ class SPPDataImporter(models.Model):
             new_id = created_mapping.get(data)
             if new_id is None:
                 _logger.warning(f"Unresolved raw reference: {data}")
-                return False
+                new_id = self._create_unresolved_raw(data)
+                
             return new_id
 
         else:
             return data
+    
+    def _create_unresolved_raw(self, raw_ref):
+        """
+        Create a placeholder raw record for unresolved references to avoid repeated warnings.
+
+        :param raw_ref: The raw reference string "raw:{id}"
+        """
+        try:
+            raw_id = int(raw_ref.split(":")[1])
+            existing = self.raw_ids.filtered(lambda r: r.id == raw_id)
+            if existing:
+                final_data = self._get_creation_vals(existing)
+                model = self.env[existing.model_name]
+                new_record = model.create(final_data)
+                existing.write(
+                    {
+                        "state": "created",
+                        "db_id": new_record.id,  # Store the actual new Odoo ID
+                        "remarks": False,
+                    }
+                )
+
+                _logger.info(
+                    f"Created {existing.model_name} record ID {existing.id} "
+                    f"from raw {existing.id} (old ID: {existing.record_id})"
+                )
+                return new_record.id
+                
+        except Exception as e:
+            _logger.error(f"Error creating placeholder for unresolved raw reference {raw_ref}: {str(e)}")
 
     def _topological_sort_raws(self):
         """
