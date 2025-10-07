@@ -324,6 +324,7 @@ class SPPDataImporter(models.Model):
         created_mapping = {}
 
         # First pass: Create records without many2one fields
+        _logger.info("Starting first pass: Creating records without many2one fields.")
         for raw in self.raw_ids:
             if raw.state != "validated":
                 continue
@@ -331,12 +332,14 @@ class SPPDataImporter(models.Model):
             try:
                 json_data = json.loads(raw.json_data)
                 model = self.env[raw.model_name]
+                _logger.info(f"Processing raw record {raw.id} for model {raw.model_name}")
                 
                 # Prepare creation data and store many2one fields separately
                 creation_data = {}
                 many2one_fields = {}
                 
                 for field_name, value in json_data.items():
+                    _logger.info(f"Field: {field_name}, Value: {value}")
                     if field_name not in model._fields:
                         continue
                         
@@ -344,6 +347,7 @@ class SPPDataImporter(models.Model):
                     
                     # Handle many2one fields with raw references
                     if field.type == 'many2one' and isinstance(value, str) and value.startswith('raw:'):
+                        _logger.info(f"Deferring many2one field {field_name} with value {value}")
                         many2one_fields[field_name] = value
                         continue
                     
