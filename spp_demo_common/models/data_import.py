@@ -410,14 +410,20 @@ class SPPDataImporter(models.Model):
     def _check_existing_record(self, raw, json_data, model, created_mapping, raw_ref):
         """Check if record already exists based on common identifying fields."""
         possible_fields = ["name", "code", "value", "phone_no", "display_name", "email"]
-
+        domain = []
         for field in possible_fields:
             if field in json_data and field in model._fields:
-                existing = model.search([(field, "=", json_data[field])], limit=1)
-                if existing:
-                    raw.write(
-                        {
-                            "state": "saved",
+                # Check if field is a stored field
+                if not model._fields[field].store:
+                    continue
+                domain.append((field, "=", json_data[field]))
+
+        if domain:
+            existing = model.search(domain, limit=1)
+            if existing:
+                raw.write(
+                    {
+                        "state": "saved",
                             "db_id": existing.id,
                             "remarks": "Record already exists, skipped creation.",
                         }
