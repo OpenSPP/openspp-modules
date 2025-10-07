@@ -231,17 +231,6 @@ class ChangeRequestAddChildren(models.Model):
             ]
         else:
             phone_rec = None
-        if self.national_id_number:
-            nid_rec = [
-                Command.create(
-                    {
-                        "id_type": self.env.ref("spp_change_request_change_info.national_id_type").id,
-                        "value": self.national_id_number,
-                    }
-                )
-            ]
-        else:
-            nid_rec = None
         vals = {}
         if self.full_name:
             vals.update({"name": self.full_name})
@@ -265,8 +254,6 @@ class ChangeRequestAddChildren(models.Model):
             vals.update({"highest_education_level": self.highest_education_level})
         if phone_rec:
             vals.update({"phone_number_ids": phone_rec})
-        if nid_rec:
-            vals.update({"reg_ids": nid_rec})
         # Updating Registrant
         self.registrant_id.write(vals)
 
