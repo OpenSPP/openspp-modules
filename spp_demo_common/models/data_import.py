@@ -328,7 +328,7 @@ class SPPDataImporter(models.Model):
 
         # Update import state
         failed_count = len(self.raw_ids.filtered(lambda r: r.state == "error"))
-        success_count = len(self.raw_ids.filtered(lambda r: r.state == "created"))
+        success_count = len(self.raw_ids.filtered(lambda r: r.state in ["created", "saved"]))
 
         if failed_count > 0:
             self.state = "error"
