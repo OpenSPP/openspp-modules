@@ -42,7 +42,6 @@ class SPPDataImporter(models.Model):
             ("imported", "Imported"),
             ("validated", "Validated"),
             ("in_progress", "In Progress"),
-            ("partial", "Partial"),
             ("completed", "Completed"),
             ("cancelled", "Cancelled"),
             ("error", "Error"),
@@ -331,7 +330,7 @@ class SPPDataImporter(models.Model):
                 continue
 
             try:
-                final_data = self._get_creation_vals(raw)
+                final_data = self._get_creation_vals(raw, created_mapping)
 
                 # Create the record
                 new_record = model.create(final_data)
@@ -362,13 +361,16 @@ class SPPDataImporter(models.Model):
         success_count = len(self.raw_ids.filtered(lambda r: r.state == "created"))
 
         if failed_count > 0:
-            self.state = "partial"
-            self.locked_reason = f"Import completed: {success_count} created, {failed_count} failed."
-        else:
+            self.state = "error"
+            self.locked = False
+            self.remarks = f"Creation failed for {failed_count} records."
+        elif success_count == len(self.raw_ids):
             self.state = "completed"
-            self.locked_reason = f"Import completed successfully: {success_count} records created."
+            self.locked = True
+            self.remarks = f"Import completed successfully: {success_count} records created."
+        
     
-    def _get_creation_vals(self, raw):
+    def _get_creation_vals(self, raw, created_mapping):
         json_data = json.loads(raw.json_data)
         model = self.env[raw.model_name]
 
@@ -439,14 +441,14 @@ class SPPDataImporter(models.Model):
             new_id = created_mapping.get(data)
             if new_id is None:
                 _logger.warning(f"Unresolved raw reference: {data}")
-                new_id = self._create_unresolved_raw(data)
-                
+                new_id = self._create_unresolved_raw(data, created_mapping)
+
             return new_id
 
         else:
             return data
-    
-    def _create_unresolved_raw(self, raw_ref):
+
+    def _create_unresolved_raw(self, raw_ref, created_mapping):
         """
         Create a placeholder raw record for unresolved references to avoid repeated warnings.
 
@@ -456,7 +458,7 @@ class SPPDataImporter(models.Model):
             raw_id = int(raw_ref.split(":")[1])
             existing = self.raw_ids.filtered(lambda r: r.id == raw_id)
             if existing:
-                final_data = self._get_creation_vals(existing)
+                final_data = self._get_creation_vals(existing, created_mapping)
                 model = self.env[existing.model_name]
                 new_record = model.create(final_data)
                 existing.write(
