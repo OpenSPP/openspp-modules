@@ -361,7 +361,8 @@ class SPPDataImporter(models.Model):
                     #         update_data[field_name] = resolved_commands
                     
                     # Handle many2many fields
-                    elif field.type == 'many2many' and isinstance(value, list):
+                    # elif field.type == 'many2many' and isinstance(value, list):
+                    if field.type == 'many2many' and isinstance(value, list):
                         resolved_ids = []
                         for item in value:
                             if isinstance(item, str) and item.startswith('raw:'):
