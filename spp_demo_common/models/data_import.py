@@ -404,6 +404,8 @@ class SPPDataImporter(models.Model):
         :param _creating: Set to track records being created (prevents circular dependencies)
         :return: Created record ID
         """
+        _logger.info(f"Creating record for raw {raw.id} ({raw.model_name})")
+        _logger.info(f"_creating: {_creating}, created_mapping keys: {list(created_mapping.keys())}")
         if _creating is None:
             _creating = set()
         
