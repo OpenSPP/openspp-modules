@@ -1,68 +1,44 @@
-# OpenSPP Import: DCI API
+# OpenSPP Import DCI API
 
-## Overview
-
-The [spp_import_dci_api](spp_import_dci_api.md) module is an OpenSPP extension that enables the integration of external registries, particularly those adhering to the [DCI (Digital Convergence Initiative)](https://spdci.org/) standard, into the OpenSPP ecosystem. 
+The `spp_import_dci_api` module integrates OpenSPP with external Digital Civil Identity (DCI) compliant registries, enabling the secure and automated import and synchronization of individual and family registrant data. This module ensures OpenSPP programs have access to current and validated information from authoritative sources.
 
 ## Purpose
 
-This module streamlines the process of importing and synchronizing registrant data from DCI-compliant registries into the OpenSPP registry. This facilitates efficient data sharing and interoperability between different systems. For more information, visit [Digital Convergence Initiative](https://spdci.org/).
+This module streamlines the process of populating and updating OpenSPP's registrant database, providing a robust bridge to external civil registries. It accomplishes the following key objectives:
 
-## Key Features
+*   **Integrate with External Registries**: Establishes secure connections to DCI-compliant external systems, such as national birth or civil registries.
+*   **Import and Synchronize Registrant Data**: Fetches and imports individual demographic data, including names, birthdates, gender, and identifiers, ensuring OpenSPP's records are up-to-date.
+*   **Automate Registrant Profile Management**: Automatically creates new individual registrant profiles or updates existing ones in OpenSPP based on the imported data, reducing manual data entry and errors.
+*   **Manage Hierarchical Location Data**: Imports and structures geographical location data, such as birthplaces, from external sources, allowing for detailed spatial analysis (e.g., country > province > district).
+*   **Facilitate Family Group Creation**: Identifies family relationships (e.g., mother-child) from external data and automatically creates corresponding family groups within OpenSPP, improving household-level program targeting.
 
-* **API Endpoints:**
-    *  Exposes RESTful API routes specifically designed for interacting with DCI-compliant systems. 
-    *  Handles authentication and authorization for secure data exchange.
-* **Data Mapping:**
-    *  Maps incoming DCI data fields to the corresponding fields within the OpenSPP registry.
-    *  Handles data transformations to ensure compatibility between the two systems.
-* **Import Processes:**
-    *  Provides automated workflows for importing new registrants and updating existing records.
-    *  Includes data validation steps to maintain data integrity within the OpenSPP registry.
+This module is crucial for maintaining data accuracy and consistency, allowing social protection programs and farmer registries to operate with reliable and current beneficiary information.
 
 ## Dependencies and Integration
 
-## 1. G2P Programs ([g2p_programs](g2p_programs.md))
+The `spp_import_dci_api` module builds upon and integrates with several core OpenSPP modules to deliver its functionality:
 
-* **Integration:** Utilizes program definitions and eligibility criteria from [g2p_programs](g2p_programs.md) to potentially assign imported registrants to relevant programs based on their DCI attributes. 
-
-## 2. SPP Programs ([spp_programs](spp_programs.md))
-
-* **Integration:** Similar to [g2p_programs](g2p_programs.md), this module might utilize in-kind entitlement logic from [spp_programs](spp_programs.md) if the imported DCI data includes information relevant to in-kind benefits.
-
-## 3. G2P Registry: Base ([g2p_registry_base](g2p_registry_base.md))
-
-* **Integration:**  Relies heavily on [g2p_registry_base](g2p_registry_base.md) for core registry functionality:
-    *   **Registrant Creation:** Creates new registrant records using the base model provided by [g2p_registry_base](g2p_registry_base.md).
-    *   **ID Management:** Leverages `g2p.reg.id` from [g2p_registry_base](g2p_registry_base.md) to store and manage DCI-provided identifiers.
-    *   **Relationships:**  Potentially utilizes the `g2p.reg.rel` model to establish relationships between imported registrants based on DCI data. 
-
-## 4. SPP Registry Data Source ([spp_registry_data_source](spp_registry_data_source.md))
-
-* **Integration:** Depends on [spp_registry_data_source](spp_registry_data_source.md) for:
-    * **Data Source Configuration:** Retrieves connection details and API specifications of the external DCI registry from data source configurations defined in this module. 
-
-## 5. G2P Registry: Individual ([g2p_registry_individual](g2p_registry_individual.md))
-
-* **Integration:**  Extends the individual registrant model (`res.partner`) from [g2p_registry_individual](g2p_registry_individual.md):
-    *   **Data Population:** Populates individual-specific fields within the OpenSPP registry using mapped DCI data (e.g., name, birthdate, gender). 
+*   **[OpenSPP Data Source](spp_registry_data_source)**: This foundational module is essential for configuring the connection details, API endpoints, and authentication methods required to communicate with external DCI registries. It defines *how* OpenSPP connects to external systems.
+*   **[G2P Registry: Base](g2p_registry_base)**: It extends the core registrant model, using its framework for managing basic registrant data and identification types. Imported individuals and groups are stored within the base registry structure.
+*   **[G2P Registry: Individual](g2p_registry_individual)**: This module is extended to store the detailed demographic information of imported individuals, such as names, birthdates, and gender, enriching individual registrant profiles.
+*   **[G2P Programs](g2p_programs)** and **[OpenSPP Programs](spp_programs)**: The imported and synchronized registrant data, including individuals and their associated family groups, directly informs program eligibility and entitlement management within these modules. Programs can then leverage this accurate data for beneficiary selection.
 
 ## Additional Functionality
 
-## CRVS Integration
+The `spp_import_dci_api` module provides a suite of features to manage the import process efficiently:
 
-The module includes specialized components for interacting with CRVS (Civil Registration and Vital Statistics) systems, which are often DCI-compliant. These components include:
+### External Registry Connection and Search Criteria
+Users define specific search criteria to fetch data from external DCI registries. This involves selecting a configured external data source and specifying filters such as birthdate ranges (e.g., "beneficiaries born between 2020-01-01 and 2021-12-31") or specific geographical locations. The module then securely authenticates with the external registry and initiates data retrieval based on these criteria.
 
-* **Location Management:**
-    *   Models CRVS-specific location hierarchies (`spp.crvs.location.type`, `spp.crvs.location`).
-    *   Imports and synchronizes location data from the CRVS system.
-* **Beneficiary Fetching:**
-    *   Provides tools (`spp.fetch.crvs.beneficiary`) to search and retrieve beneficiary data from CRVS systems based on specific criteria.
-    *   Supports complex search queries using logical operators and field filters. 
-* **Data Import and Processing:**
-    *   Processes retrieved CRVS data, creating or updating registrant records in OpenSPP (`spp.crvs.imported.individuals`).
-    *   Handles the creation of family groups and relationships based on CRVS data. 
+### Automated Registrant Import and Updates
+Upon successful data retrieval, the module automatically processes individual records. It checks if an individual already exists in OpenSPP using unique identifiers. If a record is new, it creates a complete registrant profile (`res.partner`), including their full name, family name, given name, middle name, gender, and birthdate. If an individual already exists, their profile is updated with the latest information from the DCI registry. The system tracks whether a record was newly created or updated.
+
+### Hierarchical Location Data Management
+The module imports and structures geographical data from external registries, such as birthplaces. It maintains a hierarchical structure for locations (e.g., `spp.crvs.location.type` for 'Country', 'Province', 'District', and `spp.crvs.location` for specific instances like 'Philippines', 'Central Luzon', 'Pampanga'). This allows OpenSPP to accurately record and search for registrants based on their geographical attributes.
+
+### Family Group Creation and Relationship Management
+The module identifies relationships within the imported data, particularly mother-child links. If a mother and child are imported, it automatically creates or updates a family group (`res.partner` with `is_group=True`) and links both the mother and child to this group using `g2p.group.membership`. This feature also calculates and stores the number of children under 12 months within a family group, enabling programs to target specific household compositions.
 
 ## Conclusion
 
-The [spp_import_dci_api](spp_import_dci_api) module enhances the OpenSPP platform by enabling seamless data exchange with external DCI-compliant registries, including specialized integration with CRVS systems. This promotes interoperability, streamlines data management, and expands the potential reach of OpenSPP implementations. For more information, visit [Digital Convergence Initiative](https://spdci.org/).
+The `spp_import_dci_api` module is a vital component of OpenSPP, enabling efficient, accurate, and automated integration with external civil registries to ensure that social protection programs and farmer registries operate with reliable and current beneficiary data.

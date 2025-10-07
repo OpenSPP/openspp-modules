@@ -1,0 +1,51 @@
+# ABOUTME: External dependencies and OCA modules required for OpenSPP Branding Kit
+# ABOUTME: Lists the OCA debranding modules that should be installed alongside this module
+
+# OCA Server Brand Repository
+# Repository: https://github.com/OCA/server-brand
+# Branch: 17.0
+# Installation: Add this repository to your addons path
+
+# Required OCA Modules for Odoo 17:
+# ====================================
+
+# disable_odoo_online (17.0.1.0.0)
+# - Removes odoo.com bindings and telemetry
+# - Disables update notifier code
+# - Hides apps and updates menu items
+# Repository: https://github.com/OCA/server-brand/tree/17.0/disable_odoo_online
+
+# portal_odoo_debranding (17.0.1.0.0)
+# - Removes Odoo branding from website portal
+# - Customizes frontend elements
+# Repository: https://github.com/OCA/server-brand/tree/17.0/portal_odoo_debranding
+
+# remove_odoo_enterprise (17.0.1.0.1)
+# - Removes enterprise modules references
+# - Hides enterprise-specific settings
+# Repository: https://github.com/OCA/server-brand/tree/17.0/remove_odoo_enterprise
+
+# hr_expense_remove_mobile_link (17.0.1.0.0) [Optional]
+# - Removes Odoo Enterprise mobile app download links
+# Repository: https://github.com/OCA/server-brand/tree/17.0/hr_expense_remove_mobile_link
+
+# Installation Instructions:
+# ==========================
+# 1. Clone the OCA server-brand repository:
+#    git clone --branch 17.0 https://github.com/OCA/server-brand.git
+#
+# 2. Add the path to your Odoo configuration file (odoo.conf):
+#    addons_path = /path/to/server-brand,...
+#
+# 3. Update the __manifest__.py file to include these modules in dependencies:
+#    'depends': [
+#        'disable_odoo_online',
+#        'portal_odoo_debranding',
+#        'remove_odoo_enterprise',
+#    ]
+#
+# 4. Install the openspp_branding_kit module through Odoo interface or CLI
+
+# Python Dependencies (if any additional are needed)
+# ==================================================
+# None required beyond standard Odoo 17 dependencies

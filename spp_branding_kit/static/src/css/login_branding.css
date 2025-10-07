@@ -1,0 +1,36 @@
+/* Hide any existing Odoo branding */
+a[href*="odoo.com"] {
+    display: none !important;
+}
+
+.o_footer_copyright a[href*="odoo.com"] {
+    display: none !important;
+}
+
+footer a[href*="odoo.com"] {
+    display: none !important;
+}
+
+/* Hide "Manage Databases" link */
+a[href="/web/database/manager"] {
+    display: none !important;
+}
+
+/* Add OpenSPP branding */
+body::after {
+    content: "Powered by OpenSPP";
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #777;
+    font-size: 12px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Ensure footer is visible when present */
+.oe_login_form ~ footer,
+.o_database_list ~ footer {
+    display: block !important;
+}

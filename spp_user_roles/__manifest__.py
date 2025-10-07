@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP User Roles",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -29,5 +29,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Enhances user role management with local roles and area-based access control for improved data security and granularity in OpenSPP.",
+    "summary": "The OpenSPP User Roles module defines and manages distinct user roles, categorizing them as global or local, to implement area-based access control. It restricts user access to specific geographical areas by leveraging the spp_area module and automates underlying system permission assignments.",
 }

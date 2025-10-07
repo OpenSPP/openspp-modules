@@ -2,7 +2,7 @@
 {
     "name": "OpenSPP Base GIS Demo",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
     "license": "LGPL-3",
@@ -10,7 +10,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": ["base", "spp_base_gis"],
     "data": ["views/partner.xml"],
-    "application": True,
+    "application": False,
     "installable": True,
-    "summary": "Demonstrates the GIS capabilities of the OpenSPP Base GIS module by providing practical examples and use cases with GIS views, data layers, and raster layers.",
+    "summary": "Demonstrates the integration of Geographical Information System (GIS) capabilities within OpenSPP, illustrating how to extend data models with various geographical field types. It provides examples for defining custom geospatial data models and visualizing diverse geographical entities, including points, lines, and polygons, on interactive maps.",
 }

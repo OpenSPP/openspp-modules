@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+        <!-- Custom Login Page Layout - Minimal override -->
+        <template
+        id="custom_login_layout_openspp"
+        inherit_id="web.login_layout"
+        name="OpenSPP Custom Login Layout"
+        priority="100"
+    >
+            <!-- Only override g2p_theme's no_footer setting - branding handled via CSS assets -->
+        </template>
+
+
+</odoo>

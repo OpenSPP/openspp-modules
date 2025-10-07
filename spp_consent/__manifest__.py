@@ -2,7 +2,8 @@
 {
     "name": "OpenSPP Consent",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
+    "summary": "This module establishes a comprehensive system for managing and tracking explicit consent from individuals and groups within social protection programs. It records specific consent agreements linked to registrants, tracks consent validity with expiry dates, and enables configuration of diverse consent types.",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

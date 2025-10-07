@@ -2,7 +2,7 @@
 {
     "name": "OpenSPP Base GIS REST",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -17,8 +17,8 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides RESTful API endpoints for accessing and querying geospatial data within OpenSPP, secured with OAuth 2.0.",
+    "summary": "The module provides RESTful API endpoints for secure, programmatic access to OpenSPP's Geographical Information System data, leveraging OAuth 2.0 and Basic authentication.",
 }

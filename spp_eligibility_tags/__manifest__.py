@@ -2,7 +2,7 @@
 {
     "name": "OpenSPP Tag Based Eligibility Manager",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -26,5 +26,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Define eligibility criteria for programs based on registrant tags and geographical areas, automating beneficiary identification and improving targeting accuracy.",
+    "summary": "OpenSPP Eligibility Tags defines and manages program eligibility criteria based on registrant tags and geographical areas. It automates beneficiary identification by dynamically combining selected tags and areas, extending G2P Programs with a specific eligibility calculation method.",
 }

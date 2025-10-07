@@ -5,11 +5,15 @@ on:
   pull_request:
     branches:
       - "17.0*"
+      - "release/*"
   push:
     branches:
       - "17.0"
       - "17.0-ocabot-*"
       - "farmer-registry"
+      - "release/*"
+    tags:
+      - "v*"
 env:
   OCA_GIT_USER_NAME: openspp
   OCA_GIT_USER_EMAIL: bot@openspp.org
@@ -121,6 +125,8 @@ jobs:
           rm -rf openg2p-program/g2p_payment_files
           rm -rf openg2p-program/g2p_payment_g2p_connect
           rm -rf openg2p-program/g2p_program_documents
+          rm -rf openg2p-program/g2p_theme
+          rm -rf openg2p_registry/g2p_service_provider_portal_base
           rm -rf mukit-modules/muk_web_enterprise_theme
           cp -r openg2p-registry/* ${ADDONS_DIR}/
           cat test-requirements.txt >> spp-test-requirements.txt
@@ -201,4 +207,5 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Update .pot files
         run: oca_export_and_push_pot https://x-access-token:${{ secrets.GIT_PUSH_TOKEN }}@github.com/${{ github.repository }}
-        if: ${{ matrix.makepot == 'true' && github.event_name == 'push' && github.repository_owner == 'openspp' }}
+        # Only update POT files when pushing to the canonical 17.0 branch in org repo.
+        if: ${{ matrix.makepot == 'true' && github.event_name == 'push' && github.repository_owner == 'openspp' && startsWith(github.ref, 'refs/heads/17.0') }}

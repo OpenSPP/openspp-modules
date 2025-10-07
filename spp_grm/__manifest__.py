@@ -2,9 +2,8 @@
 
 {
     "name": "OpenSPP - Grievance Redress Mechanism",
-    "summary": """
-        Grievance redress mechanism module for OpenSPP""",
-    "version": "17.0.1.3.0",
+    "summary": "Provides a centralized Grievance Redress Mechanism for receiving, tracking, and resolving beneficiary complaints and feedback. It supports multi-channel submission, manages resolution workflows through customizable stages, and links grievances directly to individual or group registrants.",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",

@@ -2,7 +2,7 @@
 {
     "name": "OpenSPP Program Entitlement Basic Cash Spent",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -17,8 +17,8 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
-    "summary": "Tracks cash spending by beneficiaries against allocated entitlements in basic cash programs, calculating remaining balances and supporting program monitoring.",
+    "summary": "Records beneficiary expenditures against allocated cash entitlements within social protection programs to monitor utilization. It automatically calculates remaining balances and extends the g2p.entitlement model.",
 }

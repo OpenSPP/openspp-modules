@@ -3,7 +3,7 @@
 {
     "name": "OpenSPP Document Management System",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -34,5 +34,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Provides a centralized system for managing and organizing documents within OpenSPP, facilitating efficient storage, retrieval, and categorization of files related to social protection programs.",
+    "summary": "The OpenSPP Dms module provides a centralized system for managing and organizing program-related documents within a structured directory tree. It facilitates efficient document retrieval through categorization and indexed storage, automatically capturing essential file metadata such as size, type, and data integrity checksums.",
 }

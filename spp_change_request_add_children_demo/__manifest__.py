@@ -1,8 +1,8 @@
 {
     "name": "OpenSPP Change Request Demo: Add Child/Member",
-    "summary": "Provides a demonstration of adding children or members to an existing group in the registry using the OpenSPP Change Request framework, including a dedicated form, ID scanning integration, and automated data updates.",
+    "summary": "The module formalizes the process of adding new individuals to existing groups within the OpenSPP registry via a dedicated Change Request framework. It integrates ID scanning for rapid data entry, automates new registrant profile creation and group membership updates, and stores supporting documents in the DMS.",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -36,7 +36,7 @@
     "assets": {},
     "demo": [],
     "images": [],
-    "application": True,
+    "application": False,
     "installable": True,
     "auto_install": False,
 }

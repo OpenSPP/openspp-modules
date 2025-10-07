@@ -1,7 +1,7 @@
 {
     "name": "OpenSPP Data Export",
     "category": "OpenSPP",
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.3.1",
     "sequence": 1,
     "author": "OpenSPP.org",
     "website": "https://github.com/OpenSPP/openspp-modules",
@@ -14,5 +14,5 @@
     "application": False,
     "installable": True,
     "auto_install": False,
-    "summary": "Enables exporting large datasets to Excel by overriding the default export functionality and providing error handling for exceeding Excel row limits.",
+    "summary": "The spp_data_export module enhances OpenSPP's capability to extract large volumes of program data to Excel, overcoming standard export tool limitations regarding file size and row capacity. It proactively manages Excel's maximum row capacity and overrides default export functionality to ensure complete and reliable data for external analysis.",
 }

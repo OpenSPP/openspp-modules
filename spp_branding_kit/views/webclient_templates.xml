@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+        <!-- Disable Odoo Brand Promotion Message -->
+        <template
+        id="disable_brand_promotion"
+        inherit_id="web.brand_promotion_message"
+        name="Disable Brand Promotion"
+        priority="99"
+    >
+            <xpath expr="//t[@t-set='odoo_logo']" position="replace">
+                <t t-set="odoo_logo">
+                    <span class="badge text-bg-light">OpenSPP</span>
+                </t>
+            </xpath>
+            <xpath expr="//t[@t-set='final_message']" position="replace">
+                <t t-set="final_message">Powered by %s%s</t>
+            </xpath>
+        </template>
+
+        <!-- Backend Title Customization -->
+        <template
+        id="custom_backend_title"
+        inherit_id="web.layout"
+        name="OpenSPP Backend Title"
+        priority="99"
+    >
+            <xpath expr="//title" position="replace">
+                <title t-if="title">
+                    <t t-esc="title" /> - OpenSPP
+                </title>
+                <title t-else="">OpenSPP Platform</title>
+            </xpath>
+        </template>
+
+        <!-- Favicon Customization -->
+        <template id="custom_favicon" inherit_id="web.layout" name="OpenSPP Favicon" priority="99">
+            <xpath expr="//link[@rel='shortcut icon']" position="replace">
+                <link
+                rel="shortcut icon"
+                href="/spp_branding_kit/static/description/icon.png"
+                type="image/png"
+            />
+            </xpath>
+        </template>
+
+</odoo>
