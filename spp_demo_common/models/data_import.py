@@ -350,15 +350,15 @@ class SPPDataImporter(models.Model):
                     field = model._fields[field_name]
                     
                     # Handle one2many fields
-                    if field.type == 'one2many' and isinstance(value, list):
-                        resolved_commands = []
-                        for item in value:
-                            if isinstance(item, (list, tuple)) and len(item) == 3:
-                                cmd, _, vals = item
-                                resolved_vals = self._resolve_references(vals, created_mapping)
-                                resolved_commands.append((cmd, 0, resolved_vals))
-                        if resolved_commands:
-                            update_data[field_name] = resolved_commands
+                    # if field.type == 'one2many' and isinstance(value, list):
+                    #     resolved_commands = []
+                    #     for item in value:
+                    #         if isinstance(item, (list, tuple)) and len(item) == 3:
+                    #             cmd, _, vals = item
+                    #             resolved_vals = self._resolve_references(vals, created_mapping)
+                    #             resolved_commands.append((cmd, 0, resolved_vals))
+                    #     if resolved_commands:
+                    #         update_data[field_name] = resolved_commands
                     
                     # Handle many2many fields
                     elif field.type == 'many2many' and isinstance(value, list):
