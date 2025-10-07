@@ -314,8 +314,8 @@ class SPPDataImporter(models.Model):
         """
         self.ensure_one()
 
-        if self.state != "validated":
-            raise ValidationError("Import must be validated before creating records.")
+        # if self.state != "validated":
+        #     raise ValidationError("Import must be validated before creating records.")
 
         self.locked = True
         self.locked_reason = "Creating records..."
