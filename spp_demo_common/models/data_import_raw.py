@@ -61,7 +61,7 @@ class SPPDataImporterSummary(models.Model):
         for rec in self:
             importer_raw = rec.importer_id.raw_ids.filtered(
                 lambda r, model_name=rec.model_name: r.model_name == model_name
-            ).first()
+            )
             rec.success_count = len(importer_raw.filtered(lambda r: r.state == "created"))
             rec.validated_count = len(importer_raw.filtered(lambda r: r.state == "validated"))
             rec.error_count = len(importer_raw.filtered(lambda r: r.state == "error"))

@@ -478,7 +478,7 @@ class SPPDataImporter(models.Model):
         for item in value:
             if isinstance(item, str) and item.startswith("raw:"):
                 ref_raw_id = int(item.split(":")[1])
-                ref_raw = self.raw_ids.filtered(lambda r, ref_raw_id=ref_raw_id: r.id == ref_raw_id).first()
+                ref_raw = self.raw_ids.filtered(lambda r, ref_raw_id=ref_raw_id: r.id == ref_raw_id)
 
                 _logger.info(
                     f"Resolving many2many for field {field_name} with value {value} | referencing raw {ref_raw_id}"
