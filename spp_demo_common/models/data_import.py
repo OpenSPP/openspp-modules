@@ -367,7 +367,7 @@ class SPPDataImporter(models.Model):
                                 final_data[field_name] = False
                         else:
                             final_data[field_name] = False
-                            
+
                 # Create the record
                 new_record = model.create(final_data)
 
@@ -379,7 +379,7 @@ class SPPDataImporter(models.Model):
                     {
                         "state": "created",
                         "db_id": new_record.id,  # Store the actual new Odoo ID
-                        "error_message": False,
+                        "remarks": False,
                     }
                 )
 
@@ -389,7 +389,7 @@ class SPPDataImporter(models.Model):
                 )
 
             except Exception as e:
-                raw.write({"state": "error", "error_message": f"Creation failed: {str(e)}"})
+                raw.write({"state": "error", "remarks": f"Creation failed: {str(e)}"})
                 _logger.error(f"Error creating record from raw {raw.id}: {str(e)}")
 
         # Update import state
