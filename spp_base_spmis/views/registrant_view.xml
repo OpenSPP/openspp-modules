@@ -25,4 +25,26 @@
         </field>
     </record>
 
+    <record id="view_individuals_list_spmis_tree" model="ir.ui.view">
+        <field name="name">view_individuals_list_spmis_tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_list_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">0</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_groups_list_spmis_tree" model="ir.ui.view">
+        <field name="name">view_groups_list_spmis_tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_list_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">0</attribute>
+            </xpath>
+        </field>
+    </record>
+
 </odoo>
