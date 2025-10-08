@@ -23,6 +23,8 @@
     "excludes": [],
     "external_dependencies": {},
     "data": [
+        "data/global_roles.xml",
+        "data/local_roles.xml",
         "security/security_access.xml",
         "security/ir.model.access.csv",
         "views/main_view.xml",

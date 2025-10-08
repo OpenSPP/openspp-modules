@@ -878,14 +878,6 @@ msgid "Mobile Telephone Number"
 msgstr ""
 
 #. module: spp_base_farmer_registry
-#: model:ir.model.fields,field_description:spp_base_farmer_registry.field_g2p_program_membership__farmer_national_id
-#: model:ir.model.fields,field_description:spp_base_farmer_registry.field_res_partner__farmer_national_id
-#: model:ir.model.fields,field_description:spp_base_farmer_registry.field_res_users__farmer_national_id
-#: model:ir.model.fields,field_description:spp_base_farmer_registry.field_spp_farmer__farmer_national_id
-msgid "National ID Number"
-msgstr ""
-
-#. module: spp_base_farmer_registry
 #: model:ir.model.fields.selection,name:spp_base_farmer_registry.selection__res_partner__highest_education_level__none
 #: model:ir.model.fields.selection,name:spp_base_farmer_registry.selection__spp_farmer__farmer_highest_education_level__none
 msgid "None"

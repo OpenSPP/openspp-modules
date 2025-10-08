@@ -278,7 +278,6 @@ class ChangeRequestCreateFarm(models.Model):
             "farmer_family_name": self.farmer_family_name or None,
             "farmer_given_name": self.farmer_given_name or None,
             "farmer_addtnl_name": self.farmer_addtnl_name or None,
-            "farmer_national_id": self.farmer_national_id or None,
             "farmer_mobile_tel": self.farmer_mobile_tel or None,
             "farmer_sex": self.farmer_sex.id if self.farmer_sex else None,
             "farmer_birthdate": self.farmer_birthdate or None,
