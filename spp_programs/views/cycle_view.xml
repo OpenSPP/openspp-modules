@@ -15,7 +15,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                 <field name="inkind_entitlements_count" string="In-kind Entitlements" />
             </xpath>
             <xpath expr="//tree" position="attributes">
-                <attribute name="create">0</attribute>
+                <attribute name="delete">0</attribute>
             </xpath>
         </field>
     </record>
@@ -26,7 +26,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
         <field name="inherit_id" ref="g2p_programs.view_cycle_membership_tree" />
         <field name="arch" type="xml">
             <xpath expr="//tree" position="attributes">
-                <attribute name="create">0</attribute>
+                <attribute name="delete">0</attribute>
             </xpath>
         </field>
     </record>
