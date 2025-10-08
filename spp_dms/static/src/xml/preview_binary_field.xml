@@ -7,7 +7,7 @@
                 class="btn btn-success"
                 t-on-click="onFilePreview"
                 t-att-title="'View ' + props.record.data.name"
-                t-if="props.record.data.name and (props.record.data.id or props.record.id)"
+                t-if="props.record.data.create_date"
             >
                 <i class="fa fa-eye" />
             </button>
