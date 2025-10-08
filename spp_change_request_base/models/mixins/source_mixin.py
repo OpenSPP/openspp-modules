@@ -63,6 +63,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         string="Validation Stage",
         related="change_request_id.validation_stage",
     )
+    show_cr_actions = fields.Boolean(compute="_compute_show_cr_actions")
+
+    def _compute_show_cr_actions(self):
+        for rec in self:
+            user = self.env.user
+            rec.show_cr_actions = (
+                (rec.validation_stage == "local" and user.has_group("spp_change_request_base.local_validator_group"))
+                or (rec.validation_stage == "hq" and user.has_group("spp_change_request_base.hq_validator_group"))
+            )
 
     def _update_registrant_id(self, res):
         for rec in res:
