@@ -96,7 +96,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 and user.has_group("spp_change_request.group_spp_change_request_hq_validator")
                 and user.id == rec.assign_to_id.id
             )
-    
+
     def _compute_show_assign_button(self):
         for rec in self:
             user = self.env.user
@@ -107,12 +107,15 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 and (
                     rec.validation_stage == "local"
                     and user.has_group("spp_change_request.group_spp_change_request_validator")
-                ) or (
+                )
+                or (
                     rec.validation_stage == "hq"
                     and user.has_group("spp_change_request.group_spp_change_request_hq_validator")
-                ) and (user_not_assigned or not rec.assign_to_id) or user.has_group("g2p_registry_base.group_g2p_admin")
+                )
+                and (user_not_assigned or not rec.assign_to_id)
+                or user.has_group("g2p_registry_base.group_g2p_admin")
             )
-    
+
     def _compute_show_reassign_button(self):
         for rec in self:
             user = self.env.user
@@ -121,10 +124,12 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 and (
                     rec.validation_stage == "local"
                     and user.has_group("spp_change_request.group_spp_change_request_validator")
-                ) or (
+                )
+                or (
                     rec.validation_stage == "hq"
                     and user.has_group("spp_change_request.group_spp_change_request_hq_validator")
-                ) or user.has_group("g2p_registry_base.group_g2p_admin")
+                )
+                or user.has_group("g2p_registry_base.group_g2p_admin")
             ) and rec.assign_to_id.id == user.id
 
     def _copy_group_member_ids(self, group_id_field, group_ref_field="registrant_id"):
