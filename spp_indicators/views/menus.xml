@@ -43,7 +43,7 @@
 
   <record id="action_openspp_metrics_prefetch" model="ir.actions.act_window">
     <field name="name">Prefetch Metrics</field>
-    <field name="res_model">openspp.metrics.prefetch.wizard</field>
+    <field name="res_model">openspp.indicator.prefetch.wizard</field>
     <field name="view_mode">form</field>
     <field name="target">new</field>
   </record>
@@ -58,7 +58,7 @@
 
   <record id="action_openspp_metrics_invalidate" model="ir.actions.act_window">
     <field name="name">Invalidate Cache</field>
-    <field name="res_model">openspp.metrics.invalidate.wizard</field>
+    <field name="res_model">openspp.indicator.invalidate.wizard</field>
     <field name="view_mode">form</field>
     <field name="target">new</field>
   </record>

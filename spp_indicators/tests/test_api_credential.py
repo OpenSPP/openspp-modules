@@ -11,7 +11,7 @@ from odoo.tests import TransactionCase, tagged
 class TestApiCredential(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.Cred = self.env["openspp.metrics.api_credential"].sudo()
+        self.Cred = self.env["openspp.indicator.api_credential"].sudo()
 
     def test_token_hash_and_lookup(self):
         cred = self.Cred.create(

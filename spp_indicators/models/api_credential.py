@@ -6,8 +6,8 @@ from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
-class OpensppMetricsApiCredential(models.Model):
-    _name = "openspp.metrics.api_credential"
+class OpensppIndicatorApiCredential(models.Model):
+    _name = "openspp.indicator.api_credential"
     _description = "OpenSPP Metrics API Credential"
     _order = "name"
 

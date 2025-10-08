@@ -11,8 +11,8 @@ _logger = logging.getLogger(__name__)
 _REGISTRY: dict[str, dict[str, Any]] = {}
 
 
-class OpensppMetricRegistry(models.AbstractModel):
-    _name = "openspp.metric.registry"
+class OpensppIndicatorRegistry(models.AbstractModel):
+    _name = "openspp.indicator.registry"
     _description = "OpenSPP Metric Provider Registry"
 
     @api.model
@@ -75,4 +75,4 @@ def register_static(
         "capabilities": capabilities or {},
         "provider": provider or name,
     }
-    _logger.info("[openspp.metrics] (static) Registered metric provider %s", name)
+    _logger.info("[openspp.indicator] (static) Registered indicator provider %s", name)

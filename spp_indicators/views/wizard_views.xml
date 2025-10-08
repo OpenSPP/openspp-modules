@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
   <record id="view_openspp_metrics_prefetch_wizard" model="ir.ui.view">
-    <field name="name">openspp.metrics.prefetch.wizard.form</field>
-    <field name="model">openspp.metrics.prefetch.wizard</field>
+    <field name="name">openspp.indicator.prefetch.wizard.form</field>
+    <field name="model">openspp.indicator.prefetch.wizard</field>
     <field name="arch" type="xml">
       <form string="Prefetch/Refresh Metrics">
         <group>
@@ -25,8 +25,8 @@
   </record>
 
   <record id="view_openspp_metrics_invalidate_wizard" model="ir.ui.view">
-    <field name="name">openspp.metrics.invalidate.wizard.form</field>
-    <field name="model">openspp.metrics.invalidate.wizard</field>
+    <field name="name">openspp.indicator.invalidate.wizard.form</field>
+    <field name="model">openspp.indicator.invalidate.wizard</field>
     <field name="arch" type="xml">
       <form string="Invalidate Metrics Cache">
         <group>

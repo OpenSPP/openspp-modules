@@ -28,7 +28,7 @@ class TestProviderConfigOverrides(TransactionCase):
         )
 
         # Provider config override: very short TTL
-        Prov = self.env["openspp.metrics.provider"]
+        Prov = self.env["openspp.indicator.provider"]
         Prov.create(
             {
                 "name": "Household Size TTL Short",
@@ -39,7 +39,7 @@ class TestProviderConfigOverrides(TransactionCase):
         )
 
         # Evaluate refresh to materialize the value with TTL override
-        svc = self.env["openspp.metrics"]
+        svc = self.env["openspp.indicator"]
         svc.evaluate("test_household.size", "res.partner", [hh.id], "current", mode="refresh")
 
         # Validate expires_at is close (<< 1 minute), and company_id is set

@@ -4,8 +4,8 @@ from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
-class OpensppMetricsDefinition(models.Model):
-    _name = "openspp.metrics.definition"
+class OpensppIndicatorDefinition(models.Model):
+    _name = "openspp.indicator.definition"
     _description = "OpenSPP Metric Definition"
     _order = "name"
 

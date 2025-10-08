@@ -11,7 +11,7 @@ from odoo.exceptions import ValidationError
 from odoo.http import request
 
 
-class MetricsController(http.Controller):
+class IndicatorsController(http.Controller):
     def _json(self, payload: dict[str, Any], status: int = 200):
         return request.make_json_response(payload, status=status)
 
@@ -49,7 +49,7 @@ class MetricsController(http.Controller):
         env = request.env
         credential = None
         if token:
-            credential = env["openspp.metrics.api_credential"].sudo().find_by_token(token)
+            credential = env["openspp.indicator.api_credential"].sudo().find_by_token(token)
             if not credential:
                 return None, self._json({"error": "invalid_token"}, status=401)
             try:
@@ -122,7 +122,7 @@ class MetricsController(http.Controller):
         company_id = payload.get("company_id") or (credential and credential.company_id.id) or request.env.company.id
         company = request.env["res.company"].browse(int(company_id))
         definition = (
-            request.env["openspp.metrics.definition"]
+            request.env["openspp.indicator.definition"]
             .with_company(company)
             .sudo()
             .search(
@@ -178,7 +178,7 @@ class MetricsController(http.Controller):
         errors_only = bool(payload.get("errors_only"))
         source_default = payload.get("source_ref")
         provider_cfg = (
-            request.env["openspp.metrics.provider"]
+            request.env["openspp.indicator.provider"]
             .with_company(company)
             .sudo()
             .search(
@@ -191,7 +191,7 @@ class MetricsController(http.Controller):
         )
         if not provider_cfg:
             provider_cfg = (
-                request.env["openspp.metrics.provider"]
+                request.env["openspp.indicator.provider"]
                 .with_company(company)
                 .sudo()
                 .search([("metric", "=", metric)], limit=1)
@@ -202,7 +202,7 @@ class MetricsController(http.Controller):
         ttl_seconds = self._resolve_default_ttl(definition, provider_cfg)
         now_str = fields.Datetime.now()
         now_dt = fields.Datetime.to_datetime(now_str)
-        resolver = request.env["openspp.metrics.resolver"].with_company(company).sudo()
+        resolver = request.env["openspp.indicator.resolver"].with_company(company).sudo()
         pending: list[dict[str, Any]] = []
         resolver_entries: list[dict[str, Any]] = []
         errors: list[dict[str, Any]] = []
@@ -308,7 +308,7 @@ class MetricsController(http.Controller):
             )
         result = {"inserted": 0, "updated": 0}
         if rows and not errors_only:
-            fv = request.env["openspp.feature.value"].with_company(company).sudo()
+            fv = request.env["openspp.indicator.value"].with_company(company).sudo()
             result = fv.upsert_values(rows)
             # Normalize provider label if older rows exist with empty provider
             if provider_label:
@@ -317,7 +317,7 @@ class MetricsController(http.Controller):
                     ids = [int(r.get("subject_id")) for r in rows]
                     q.execute(
                         """
-                        UPDATE openspp_feature_value
+                        UPDATE openspp_indicator_value
                            SET provider = %s
                          WHERE company_id = %s AND metric = %s AND subject_model = %s
                            AND period_key = %s AND params_hash = %s AND provider = ''
@@ -328,7 +328,7 @@ class MetricsController(http.Controller):
                 except Exception:
                     # best-effort; ignore if table not yet present during init
                     pass
-        error_model = request.env["openspp.metrics.push.error"].with_company(company).sudo()
+        error_model = request.env["openspp.indicator.push.error"].with_company(company).sudo()
         for err in errors:
             payload_item = (
                 entry_by_index.get(err.get("index"), {}).get("raw") if err.get("index") in entry_by_index else None
@@ -390,7 +390,7 @@ class MetricsController(http.Controller):
             return error
         company_id = payload.get("company_id") or (credential and credential.company_id.id) or request.env.company.id
         definition = (
-            request.env["openspp.metrics.definition"]
+            request.env["openspp.indicator.definition"]
             .with_company(request.env["res.company"].browse(int(company_id)))
             .sudo()
             .search(
@@ -415,7 +415,7 @@ class MetricsController(http.Controller):
         params_hash = payload.get("params_hash") or ""
         mapping_cfg = self._prepare_mapping_config(
             definition,
-            request.env["openspp.metrics.provider"]
+            request.env["openspp.indicator.provider"]
             .with_company(request.env["res.company"].browse(int(company_id)))
             .sudo()
             .search(
@@ -427,7 +427,7 @@ class MetricsController(http.Controller):
             ),
         )
         resolver = (
-            request.env["openspp.metrics.resolver"]
+            request.env["openspp.indicator.resolver"]
             .with_company(request.env["res.company"].browse(int(company_id)))
             .sudo()
         )
@@ -444,7 +444,7 @@ class MetricsController(http.Controller):
             ordered = [mapped[idx] for idx in sorted(mapped.keys())]
             subject_ids.extend(ordered)
         subject_ids = list({int(sid) for sid in subject_ids if sid})
-        request.env["openspp.feature.value"].with_company(
+        request.env["openspp.indicator.value"].with_company(
             request.env["res.company"].browse(int(company_id))
         ).sudo().invalidate(
             metric,

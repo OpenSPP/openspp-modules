@@ -7,10 +7,10 @@ from odoo.tests import HttpCase, tagged
 class TestParamsHashNegative(HttpCase):
     def setUp(self):
         super().setUp()
-        self.Def = self.env["openspp.metrics.definition"].sudo()
-        self.Cred = self.env["openspp.metrics.api_credential"].sudo()
-        self.Metrics = self.env["openspp.metrics"].sudo()
-        self.Feature = self.env["openspp.feature.value"].sudo()
+        self.Def = self.env["openspp.indicator.definition"].sudo()
+        self.Cred = self.env["openspp.indicator.api_credential"].sudo()
+        self.Metrics = self.env["openspp.indicator"].sudo()
+        self.Feature = self.env["openspp.indicator.value"].sudo()
         self.metric = "test.params.neg"
         self.period = "2025-09"
         self.partner = self.env["res.partner"].create({"name": "Params Neg", "is_registrant": True})

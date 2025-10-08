@@ -2,12 +2,12 @@ from odoo import api, fields, models
 from odoo.tools.safe_eval import safe_eval
 
 
-class OpensppMetricsInvalidateWizard(models.TransientModel):
-    _name = "openspp.metrics.invalidate.wizard"
+class OpensppIndicatorInvalidateWizard(models.TransientModel):
+    _name = "openspp.indicator.invalidate.wizard"
     _description = "Invalidate Cached Metrics"
 
     metric_id = fields.Many2one(
-        "openspp.metrics.definition", string="Metric Definition", domain=[("active", "=", True)]
+        "openspp.indicator.definition", string="Indicator Definition", domain=[("active", "=", True)]
     )
     metric = fields.Char(required=True)
     subject_model = fields.Selection(selection=[("res.partner", "Partner")], default="res.partner", required=True)
@@ -51,7 +51,7 @@ class OpensppMetricsInvalidateWizard(models.TransientModel):
             self.recent_push_summary = False
 
     def _build_push_summary(self, metric_name: str) -> str:
-        error_model = self.env["openspp.metrics.push.error"].sudo()
+        error_model = self.env["openspp.indicator.push.error"].sudo()
         unresolved = error_model.search_count([("metric", "=", metric_name), ("resolved", "=", False)])
         last_error = error_model.search([("metric", "=", metric_name)], order="create_date desc", limit=1)
         parts = [f"Unresolved errors: {unresolved}"]

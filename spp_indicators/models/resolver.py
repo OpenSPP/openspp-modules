@@ -5,8 +5,8 @@ from collections.abc import Iterable, Sequence
 from odoo import models
 
 
-class OpensppMetricsResolver(models.AbstractModel):
-    _name = "openspp.metrics.resolver"
+class OpensppIndicatorResolver(models.AbstractModel):
+    _name = "openspp.indicator.resolver"
     _description = "OpenSPP Metrics Resolver"
 
     def map_subjects_to_external(

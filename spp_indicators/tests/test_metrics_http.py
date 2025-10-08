@@ -11,9 +11,9 @@ from odoo.tests import HttpCase, tagged
 class TestMetricsHttp(HttpCase):
     def setUp(self):
         super().setUp()
-        self.Definition = self.env["openspp.metrics.definition"].sudo()
-        self.Credential = self.env["openspp.metrics.api_credential"].sudo()
-        self.Feature = self.env["openspp.feature.value"].sudo()
+        self.Definition = self.env["openspp.indicator.definition"].sudo()
+        self.Credential = self.env["openspp.indicator.api_credential"].sudo()
+        self.Feature = self.env["openspp.indicator.value"].sudo()
         self.Icp = self.env["ir.config_parameter"].sudo()
         self._param_backups = {}
         self.addCleanup(self._restore_params)
@@ -175,7 +175,7 @@ class TestMetricsHttp(HttpCase):
         self.assertTrue(result["ok"])
         self.assertEqual(result["inserted"], 0)
         self.assertGreater(len(result["errors"]), 0)
-        logged = self.env["openspp.metrics.push.error"].sudo().search([("metric", "=", self.metric)], limit=1)
+        logged = self.env["openspp.indicator.push.error"].sudo().search([("metric", "=", self.metric)], limit=1)
         self.assertTrue(logged)
         self.assertEqual(logged.error_code, "mapping_missing")
 

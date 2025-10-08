@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
   <record id="view_openspp_metrics_provider_tree" model="ir.ui.view">
-    <field name="name">openspp.metrics.provider.tree</field>
-    <field name="model">openspp.metrics.provider</field>
+    <field name="name">openspp.indicator.provider.tree</field>
+    <field name="model">openspp.indicator.provider</field>
     <field name="arch" type="xml">
       <tree>
         <field name="name" />
@@ -16,8 +16,8 @@
   </record>
 
   <record id="view_openspp_metrics_provider_form" model="ir.ui.view">
-    <field name="name">openspp.metrics.provider.form</field>
-    <field name="model">openspp.metrics.provider</field>
+    <field name="name">openspp.indicator.provider.form</field>
+    <field name="model">openspp.indicator.provider</field>
     <field name="arch" type="xml">
       <form string="Metrics Provider">
         <sheet>
@@ -43,7 +43,7 @@
 
   <record id="action_openspp_metrics_providers" model="ir.actions.act_window">
     <field name="name">Providers</field>
-    <field name="res_model">openspp.metrics.provider</field>
+    <field name="res_model">openspp.indicator.provider</field>
     <field name="view_mode">tree,form</field>
   </record>
 

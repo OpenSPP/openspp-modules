@@ -5,8 +5,8 @@ from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 
 
-class OpensppMetricsPushError(models.Model):
-    _name = "openspp.metrics.push.error"
+class OpensppIndicatorPushError(models.Model):
+    _name = "openspp.indicator.push.error"
     _description = "OpenSPP Metrics Push Error"
     _order = "create_date desc"
 
@@ -15,7 +15,7 @@ class OpensppMetricsPushError(models.Model):
     error_code = fields.Char(required=True, help="Stable error code to help integrations react.")
     error_message = fields.Text(required=True)
     payload = fields.Json(help="Original payload item (sanitized) to aid debugging.")
-    credential_id = fields.Many2one("openspp.metrics.api_credential", index=True)
+    credential_id = fields.Many2one("openspp.indicator.api_credential", index=True)
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company, required=True, index=True)
     resolved = fields.Boolean(default=False)
     resolved_at = fields.Datetime(readonly=True)
