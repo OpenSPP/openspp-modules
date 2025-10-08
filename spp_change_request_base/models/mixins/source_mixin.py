@@ -67,11 +67,21 @@ class ChangeRequestSourceMixin(models.AbstractModel):
 
     def _compute_show_cr_actions(self):
         for rec in self:
-            user = self.env.user
-            rec.show_cr_actions = (
-                (rec.validation_stage == "local" and user.has_group("spp_change_request_base.local_validator_group"))
-                or (rec.validation_stage == "hq" and user.has_group("spp_change_request_base.hq_validator_group"))
-            )
+            current_user = self.env.user
+            is_local_validator = False
+            is_hq_validator = False
+            rec.show_cr_actions = False
+
+            if current_user.has_group("spp_change_request_base.local_validator_group"):
+                is_local_validator = True
+            if current_user.has_group("spp_change_request_base.hq_validator_group"):
+                is_hq_validator = True
+            
+            if rec.validation_stage == "local" and is_local_validator:
+                rec.show_cr_actions = True
+            if rec.validation_stage == "hq" and is_hq_validator:
+                rec.show_cr_actions = True
+                
 
     def _update_registrant_id(self, res):
         for rec in res:
