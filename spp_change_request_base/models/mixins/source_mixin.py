@@ -59,6 +59,10 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     )
 
     current_user_assigned = fields.Boolean(compute="_compute_current_user_assigned", default=False)
+    validation_stage = fields.Selection(
+        string="Validation Stage",
+        related="change_request_id.validation_stage",
+    )
 
     def _update_registrant_id(self, res):
         for rec in res:
