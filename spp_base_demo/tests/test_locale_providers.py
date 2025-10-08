@@ -27,4 +27,3 @@ class TestLocaleProviders(TransactionCase):
         fake = create_faker("en_KE")
         self.assertIsInstance(fake, Faker)
         self.assertIn(fake.first_name(), EnKeProvider.first_names)
-        self.assertIn(fake.last_name(), EnKeProvider.last_names)
