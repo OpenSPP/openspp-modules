@@ -280,7 +280,7 @@
                         class="btn-primary"
                         string="Assign To Me"
                         invisible="current_user_assigned or state not in ('draft', 'pending','validated', 'rejected')"
-                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button
                         name="open_user_assignment_to_wiz"
