@@ -12,7 +12,7 @@
                 </button>
                 <button
                     type="action"
-                    name="%(action_openspp_refresh_metrics_wizard)d"
+                    name="%(action_openspp_refresh_indicators_wizard)d"
                     class="oe_stat_button"
                     icon="fa-refresh"
                     groups="base.group_system"
@@ -37,7 +37,7 @@
                 </button>
                 <button
                     type="action"
-                    name="%(action_openspp_refresh_metrics_wizard)d"
+                    name="%(action_openspp_refresh_indicators_wizard)d"
                     class="oe_stat_button"
                     icon="fa-refresh"
                     groups="base.group_system"
@@ -62,7 +62,7 @@
                 </button>
                 <button
                     type="action"
-                    name="%(action_openspp_refresh_metrics_wizard)d"
+                    name="%(action_openspp_refresh_indicators_wizard)d"
                     class="oe_stat_button"
                     icon="fa-refresh"
                     groups="base.group_system"
@@ -78,7 +78,7 @@
     <!-- Action to open metrics for a partner -->
     <record id="action_openspp_partner_metrics" model="ir.actions.act_window">
         <field name="name">Metrics</field>
-        <field name="res_model">openspp.feature.value</field>
+        <field name="res_model">openspp.indicator.value</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{"search_default_my_subject": 1}</field>
         <field name="domain">[("subject_model","=","res.partner"), ("subject_id","=", active_id)]</field>

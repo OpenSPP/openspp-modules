@@ -28,5 +28,5 @@ def post_init_hook(env_or_cr, registry=None):
                 env = api.Environment(env_or_cr, SUPERUSER_ID, {})
         except Exception:
             env = api.Environment(env_or_cr, SUPERUSER_ID, {})
-    env["openspp.feature.value"]._ensure_base_table()
-    env["openspp.feature.value"]._ensure_partitions()
+    env["openspp.indicator.value"]._ensure_base_table()
+    env["openspp.indicator.value"]._ensure_partitions()

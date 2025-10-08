@@ -11,9 +11,9 @@ from odoo.tests import HttpCase, tagged
 class TestMetricsPush(HttpCase):
     def setUp(self):
         super().setUp()
-        self.Definition = self.env["openspp.metrics.definition"].sudo()
-        self.Credential = self.env["openspp.metrics.api_credential"].sudo()
-        self.Feature = self.env["openspp.feature.value"].sudo()
+        self.Definition = self.env["openspp.indicator.definition"].sudo()
+        self.Credential = self.env["openspp.indicator.api_credential"].sudo()
+        self.Feature = self.env["openspp.indicator.value"].sudo()
         # clean up existing demo rows for our test metrics
         self.Feature.search([("metric", "ilike", "test.push%")]).unlink()
 

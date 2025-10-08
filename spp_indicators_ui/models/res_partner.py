@@ -8,7 +8,7 @@ class ResPartner(models.Model):
     metrics_count = fields.Integer(compute="_compute_metrics_count", string="Metrics")
 
     def _compute_metrics_count(self):
-        Feature = self.env["openspp.feature.value"].sudo()
+        Feature = self.env["openspp.indicator.value"].sudo()
         # Scope by company for safety; subject_model is always res.partner here
         company_id = self.env.company.id
         for partner in self:

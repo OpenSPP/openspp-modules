@@ -2,8 +2,8 @@
 <odoo>
   <!-- Metric Definitions -->
     <record id="view_openspp_metrics_definition_tree" model="ir.ui.view">
-      <field name="name">openspp.metrics.definition.tree</field>
-      <field name="model">openspp.metrics.definition</field>
+      <field name="name">openspp.indicator.definition.tree</field>
+      <field name="model">openspp.indicator.definition</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name" />
@@ -19,8 +19,8 @@
     </record>
 
     <record id="view_openspp_metrics_definition_form" model="ir.ui.view">
-      <field name="name">openspp.metrics.definition.form</field>
-      <field name="model">openspp.metrics.definition</field>
+      <field name="name">openspp.indicator.definition.form</field>
+      <field name="model">openspp.indicator.definition</field>
       <field name="arch" type="xml">
         <form string="Metric Definition">
           <sheet>
@@ -50,14 +50,14 @@
 
     <record id="action_openspp_metrics_definitions" model="ir.actions.act_window">
       <field name="name">Metric Definitions</field>
-      <field name="res_model">openspp.metrics.definition</field>
+      <field name="res_model">openspp.indicator.definition</field>
       <field name="view_mode">tree,form</field>
     </record>
 
     <!-- API Credentials -->
     <record id="view_openspp_metrics_api_credential_tree" model="ir.ui.view">
-      <field name="name">openspp.metrics.api_credential.tree</field>
-      <field name="model">openspp.metrics.api_credential</field>
+      <field name="name">openspp.indicator.api_credential.tree</field>
+      <field name="model">openspp.indicator.api_credential</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name" />
@@ -74,8 +74,8 @@
     </record>
 
     <record id="view_openspp_metrics_api_credential_form" model="ir.ui.view">
-      <field name="name">openspp.metrics.api_credential.form</field>
-      <field name="model">openspp.metrics.api_credential</field>
+      <field name="name">openspp.indicator.api_credential.form</field>
+      <field name="model">openspp.indicator.api_credential</field>
       <field name="arch" type="xml">
         <form string="Metrics API Credential">
           <sheet>
@@ -107,14 +107,14 @@
 
     <record id="action_openspp_metrics_api_credentials" model="ir.actions.act_window">
       <field name="name">API Credentials</field>
-      <field name="res_model">openspp.metrics.api_credential</field>
+      <field name="res_model">openspp.indicator.api_credential</field>
       <field name="view_mode">tree,form</field>
     </record>
 
     <!-- Push Errors -->
     <record id="view_openspp_metrics_push_error_tree" model="ir.ui.view">
-      <field name="name">openspp.metrics.push.error.tree</field>
-      <field name="model">openspp.metrics.push.error</field>
+      <field name="name">openspp.indicator.push.error.tree</field>
+      <field name="model">openspp.indicator.push.error</field>
       <field name="arch" type="xml">
         <tree>
           <field name="create_date" />
@@ -128,8 +128,8 @@
     </record>
 
     <record id="view_openspp_metrics_push_error_form" model="ir.ui.view">
-      <field name="name">openspp.metrics.push.error.form</field>
-      <field name="model">openspp.metrics.push.error</field>
+      <field name="name">openspp.indicator.push.error.form</field>
+      <field name="model">openspp.indicator.push.error</field>
       <field name="arch" type="xml">
         <form string="Push Error">
           <sheet>
@@ -155,15 +155,15 @@
 
     <record id="action_openspp_metrics_push_errors" model="ir.actions.act_window">
       <field name="name">Push Errors</field>
-      <field name="res_model">openspp.metrics.push.error</field>
+      <field name="res_model">openspp.indicator.push.error</field>
       <field name="view_mode">tree,form,pivot</field>
       <field name="context">{"search_default_resolved": 0}</field>
     </record>
 
     <!-- Feature Store Inspection -->
     <record id="view_openspp_feature_value_tree" model="ir.ui.view">
-      <field name="name">openspp.feature.value.tree</field>
-      <field name="model">openspp.feature.value</field>
+      <field name="name">openspp.indicator.value.tree</field>
+      <field name="model">openspp.indicator.value</field>
       <field name="arch" type="xml">
         <tree create="false" delete="false">
           <field name="metric" />
@@ -184,8 +184,8 @@
     </record>
 
     <record id="view_openspp_feature_value_search" model="ir.ui.view">
-      <field name="name">openspp.feature.value.search</field>
-      <field name="model">openspp.feature.value</field>
+      <field name="name">openspp.indicator.value.search</field>
+      <field name="model">openspp.indicator.value</field>
       <field name="arch" type="xml">
         <search>
           <field name="metric" />
@@ -200,14 +200,14 @@
 
     <record id="action_openspp_feature_value_inspector" model="ir.actions.act_window">
       <field name="name">Feature Store</field>
-      <field name="res_model">openspp.feature.value</field>
+      <field name="res_model">openspp.indicator.value</field>
       <field name="view_mode">tree</field>
       <field name="search_view_id" ref="view_openspp_feature_value_search" />
     </record>
 
     <record id="action_openspp_feature_value_dashboard" model="ir.actions.act_window">
       <field name="name">Metrics Dashboard</field>
-      <field name="res_model">openspp.feature.value</field>
+      <field name="res_model">openspp.indicator.value</field>
       <field name="view_mode">graph,pivot,tree</field>
       <field name="search_view_id" ref="view_openspp_feature_value_search" />
     </record>

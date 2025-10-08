@@ -432,7 +432,7 @@ class CelExecutor(models.AbstractModel):
         # Evaluate/batch or preview fallback (small cohorts): compute via service
         # Compute candidate size cheaply via search_count
         base_count = self.env[subject_model].search_count(base_dom)
-        svc = self.env["openspp.metrics"]
+        svc = self.env["openspp.indicator"]
         default_mode = "refresh" if (base_count < async_threshold) else "fallback"
         if default_mode == "fallback" and status.get("status") != "fresh" and not preview_cache_only_mode:
             # large + not fresh → enqueue refresh and report queued
@@ -597,7 +597,7 @@ class CelExecutor(models.AbstractModel):
         str_ops = {"==": "=", "!=": "!="}
         clause, clause_args = self._provider_clause(provider, params_hash, allow_any_provider)
         base_sql = (
-            "SELECT DISTINCT fv.subject_id FROM openspp_feature_value fv "
+            "SELECT DISTINCT fv.subject_id FROM openspp_indicator_value fv "
             "WHERE fv.company_id = %s AND fv.metric = %s AND fv.subject_model = %s "
             "AND fv.period_key = %s AND ("
             + clause
@@ -651,7 +651,7 @@ class CelExecutor(models.AbstractModel):
         clause, clause_args = self._provider_clause(provider, params_hash, allow_any_provider)
         tail = f" {extra_clause}" if extra_clause else ""
         sql = (
-            "SELECT DISTINCT fv.subject_id FROM openspp_feature_value fv "
+            "SELECT DISTINCT fv.subject_id FROM openspp_indicator_value fv "
             "WHERE fv.company_id = %s AND fv.metric = %s AND fv.subject_model = %s "
             "AND fv.period_key = %s AND (" + clause + ") AND fv.error_code IS NULL" + tail
         )
@@ -775,7 +775,7 @@ class CelExecutor(models.AbstractModel):
         all_child_ids = sorted({cid for lst in parent_map.values() for cid in lst})
         if not all_child_ids:
             return []
-        svc = self.env["openspp.metrics"]
+        svc = self.env["openspp.indicator"]
         values, stats = svc.evaluate(
             p.metric, p.child_model, all_child_ids, str(p.period_key or "default"), mode="fallback"
         )

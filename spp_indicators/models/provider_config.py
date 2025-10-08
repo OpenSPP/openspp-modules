@@ -3,8 +3,8 @@ from __future__ import annotations
 from odoo import api, fields, models
 
 
-class OpensppMetricsProvider(models.Model):
-    _name = "openspp.metrics.provider"
+class OpensppIndicatorProvider(models.Model):
+    _name = "openspp.indicator.provider"
     _description = "OpenSPP Metrics Provider Configuration"
 
     name = fields.Char(required=True)

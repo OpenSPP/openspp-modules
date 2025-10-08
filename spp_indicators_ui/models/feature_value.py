@@ -3,8 +3,8 @@ import json
 from odoo import fields, models
 
 
-class OpensppFeatureValue(models.Model):
-    _inherit = "openspp.feature.value"
+class OpensppIndicatorValueUI(models.Model):
+    _inherit = "openspp.indicator.value"
 
     value_text = fields.Char(string="Value", compute="_compute_value_text")
     value_pretty = fields.Text(string="Value (pretty)", compute="_compute_value_pretty")

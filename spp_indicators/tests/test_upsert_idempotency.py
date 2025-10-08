@@ -7,8 +7,8 @@ from odoo.tests import TransactionCase, tagged
 class TestUpsertIdempotency(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.Feature = self.env["openspp.feature.value"].sudo()
-        self.Def = self.env["openspp.metrics.definition"].sudo()
+        self.Feature = self.env["openspp.indicator.value"].sudo()
+        self.Def = self.env["openspp.indicator.definition"].sudo()
         self.metric = "test.upsert.idem"
         self.Def.create(
             {

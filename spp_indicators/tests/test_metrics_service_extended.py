@@ -10,10 +10,10 @@ from odoo.tests import TransactionCase, tagged
 class TestMetricsServiceExtended(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.metrics = self.env["openspp.metrics"].sudo()
-        self.Feature = self.env["openspp.feature.value"].sudo()
-        self.Registry = self.env["openspp.metric.registry"].sudo()
-        self.Def = self.env["openspp.metrics.definition"].sudo()
+        self.metrics = self.env["openspp.indicator"].sudo()
+        self.Feature = self.env["openspp.indicator.value"].sudo()
+        self.Registry = self.env["openspp.indicator.registry"].sudo()
+        self.Def = self.env["openspp.indicator.definition"].sudo()
         self.partner = self.env["res.partner"].create({"name": "SvcSubj", "is_registrant": True})
 
     def test_any_provider_fallback_reads_cached_value(self):

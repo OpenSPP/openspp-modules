@@ -8,10 +8,10 @@ from odoo.tests import HttpCase, tagged
 class TestTTLMatrix(HttpCase):
     def setUp(self):
         super().setUp()
-        self.Def = self.env["openspp.metrics.definition"].sudo()
-        self.Prov = self.env["openspp.metrics.provider"].sudo()
-        self.Cred = self.env["openspp.metrics.api_credential"].sudo()
-        self.Feature = self.env["openspp.feature.value"].sudo()
+        self.Def = self.env["openspp.indicator.definition"].sudo()
+        self.Prov = self.env["openspp.indicator.provider"].sudo()
+        self.Cred = self.env["openspp.indicator.api_credential"].sudo()
+        self.Feature = self.env["openspp.indicator.value"].sudo()
         self.Icp = self.env["ir.config_parameter"].sudo()
         self.metric = "test.ttl.matrix"
         self.partner = self.env["res.partner"].create({"name": "TTL Matrix", "is_registrant": True})

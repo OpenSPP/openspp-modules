@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
   <record id="view_openspp_metrics_settings_wizard_form" model="ir.ui.view">
-    <field name="name">openspp.metrics.settings.wizard.form</field>
-    <field name="model">openspp.metrics.settings.wizard</field>
+    <field name="name">openspp.indicator.settings.wizard.form</field>
+    <field name="model">openspp.indicator.settings.wizard</field>
     <field name="arch" type="xml">
       <form string="Metrics Settings">
         <sheet>
@@ -20,7 +20,7 @@
 
   <record id="action_openspp_metrics_settings_wizard" model="ir.actions.act_window">
     <field name="name">Settings</field>
-    <field name="res_model">openspp.metrics.settings.wizard</field>
+    <field name="res_model">openspp.indicator.settings.wizard</field>
     <field name="view_mode">form</field>
     <field name="target">new</field>
   </record>

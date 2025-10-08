@@ -2,12 +2,12 @@ from odoo import api, fields, models
 from odoo.tools.safe_eval import safe_eval
 
 
-class OpensppMetricsPrefetchWizard(models.TransientModel):
-    _name = "openspp.metrics.prefetch.wizard"
-    _description = "Prefetch/Refresh Metrics"
+class OpensppIndicatorPrefetchWizard(models.TransientModel):
+    _name = "openspp.indicator.prefetch.wizard"
+    _description = "Prefetch/Refresh Indicators"
 
     metric_id = fields.Many2one(
-        "openspp.metrics.definition", string="Metric Definition", domain=[("active", "=", True)]
+        "openspp.indicator.definition", string="Indicator Definition", domain=[("active", "=", True)]
     )
     metric = fields.Char(required=True)
     subject_model = fields.Selection(selection=[("res.partner", "Partner")], default="res.partner", required=True)
@@ -28,7 +28,7 @@ class OpensppMetricsPrefetchWizard(models.TransientModel):
             if not isinstance(dom, list):
                 dom = []
         subject_ids = Model.search(dom).ids
-        svc = self.env["openspp.metrics"]
+        svc = self.env["openspp.indicator"]
         if self.enqueue:
             jobs = svc.enqueue_refresh(
                 self.metric, model_name, subject_ids, self.period_key, chunk_size=self.chunk_size
@@ -52,8 +52,8 @@ class OpensppMetricsPrefetchWizard(models.TransientModel):
             self.recent_push_summary = False
 
     def _build_push_summary(self, metric_name: str) -> str:
-        error_model = self.env["openspp.metrics.push.error"].sudo()
-        value_model = self.env["openspp.feature.value"].sudo()
+        error_model = self.env["openspp.indicator.push.error"].sudo()
+        value_model = self.env["openspp.indicator.value"].sudo()
         unresolved = error_model.search_count([("metric", "=", metric_name), ("resolved", "=", False)])
         last_error = error_model.search([("metric", "=", metric_name)], order="create_date desc", limit=1)
         last_value = value_model.search([("metric", "=", metric_name)], order="fetched_at desc", limit=1)

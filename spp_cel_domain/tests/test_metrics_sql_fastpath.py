@@ -211,7 +211,7 @@ class TestMetricsSqlFastPath(common.TransactionCase):
         self._seed_cache([(self.p_ko.id, 88)])
         self.env.cr.execute(
             """
-            UPDATE openspp_feature_value SET expires_at = NOW() - interval '1 minute'
+            UPDATE openspp_indicator_value SET expires_at = NOW() - interval '1 minute'
             WHERE metric = %s AND subject_id = %s AND period_key = %s
             """,
             (self.metric, self.p_ok.id, self.period),

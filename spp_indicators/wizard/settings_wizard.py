@@ -3,9 +3,9 @@ from __future__ import annotations
 from odoo import api, fields, models
 
 
-class OpensppMetricsSettings(models.TransientModel):
-    _name = "openspp.metrics.settings.wizard"
-    _description = "Metrics Settings"
+class OpensppIndicatorSettings(models.TransientModel):
+    _name = "openspp.indicator.settings.wizard"
+    _description = "Indicator Settings"
 
     allow_any_provider_fallback = fields.Boolean(
         string="Allow provider-agnostic cache fallback",

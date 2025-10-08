@@ -9,9 +9,9 @@ from odoo import api, fields, models
 _logger = logging.getLogger(__name__)
 
 
-class OpensppMetricsService(models.AbstractModel):
-    _name = "openspp.metrics"
-    _description = "OpenSPP Metrics Service"
+class OpensppIndicatorService(models.AbstractModel):
+    _name = "openspp.indicator"
+    _description = "OpenSPP Indicator Service"
 
     @api.model
     def evaluate(  # noqa: C901
@@ -42,12 +42,12 @@ class OpensppMetricsService(models.AbstractModel):
                 "period_key": period_key,
             }
 
-        feature = self.env["openspp.feature.value"]
-        registry = self.env["openspp.metric.registry"]
+        feature = self.env["openspp.indicator.value"]
+        registry = self.env["openspp.indicator.registry"]
         provider_info = registry.get(metric)
         company_id = self.env.company.id
         definition = (
-            self.env["openspp.metrics.definition"]
+            self.env["openspp.indicator.definition"]
             .sudo()
             .search(
                 [
@@ -75,7 +75,7 @@ class OpensppMetricsService(models.AbstractModel):
             self.env.cr.execute("SELECT to_regclass('public.openspp_metrics_provider')")
             exists = self.env.cr.fetchone()[0]
             if exists:
-                cfg_rec = self.env["openspp.metrics.provider"].search([("metric", "=", metric)], limit=1)
+                cfg_rec = self.env["openspp.indicator.provider"].search([("metric", "=", metric)], limit=1)
         except Exception:
             cfg_rec = None
         now = fields.Datetime.now()
@@ -287,7 +287,7 @@ class OpensppMetricsService(models.AbstractModel):
     ) -> tuple[dict[int, Any], list[int]]:
         if not fields_chain:
             return {sid: sid for sid in subject_ids}, []
-        resolver = self.env["openspp.metrics.resolver"]
+        resolver = self.env["openspp.indicator.resolver"]
         mapped, unmapped = resolver.map_subjects_to_external(
             subject_model, subject_ids, fields_chain, required=required
         )

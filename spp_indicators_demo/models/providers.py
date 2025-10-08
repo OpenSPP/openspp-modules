@@ -59,7 +59,7 @@ def post_init_hook(cr, registry):
     env = api.Environment(cr, 1, {})
     _ensure_demo_definitions(env)
     _ensure_demo_credential(env)
-    reg = env["openspp.metric.registry"]
+    reg = env["openspp.indicator.registry"]
     # Register sample providers
     reg.register(
         name="household.size",
@@ -81,7 +81,7 @@ def post_init_hook(cr, registry):
 
 
 # Also register providers at import-time via static registry so they survive server restarts
-try:  # pragma: no cover - defensive; safe if metrics not yet installed
+try:  # pragma: no cover - defensive; safe if indicators not yet installed
     from odoo.addons.spp_indicators.models.metric_registry import register_static as _reg_static
 
     _reg_static(
@@ -102,11 +102,11 @@ try:  # pragma: no cover - defensive; safe if metrics not yet installed
         provider="openspp_metrics_demo.education",
     )
 except Exception as e:
-    _logger.info("[openspp.metrics.demo] Static registration skipped: %s", e)
+    _logger.info("[openspp.indicator.demo] Static registration skipped: %s", e)
 
 
 def _ensure_demo_definitions(env):
-    Definition = env["openspp.metrics.definition"].sudo()
+    Definition = env["openspp.indicator.definition"].sudo()
     company = env.company
     demo_defs = [
         {
@@ -147,7 +147,7 @@ def _ensure_demo_definitions(env):
 
 
 def _ensure_demo_credential(env):
-    Credential = env["openspp.metrics.api_credential"].sudo()
+    Credential = env["openspp.indicator.api_credential"].sudo()
     company = env.company
     name = "Demo OpenFn Token"
     existing = Credential.search([("name", "=", name), ("company_id", "=", company.id)], limit=1)

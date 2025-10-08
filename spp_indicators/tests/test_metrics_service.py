@@ -11,11 +11,11 @@ class TestMetricsService(TransactionCase):
     def setUp(self):
         super().setUp()
         self.Feature = self.env["openspp.feature.value"].sudo()
-        self.metrics = self.env["openspp.metrics"].sudo()
+        self.metrics = self.env["openspp.indicator"].sudo()
         self.metric_name = "test.service.metric"
         self.period_key = "current"
         self.partner = self.env["res.partner"].create({"name": "Service HH", "is_registrant": True, "is_group": True})
-        self.env["openspp.metrics.definition"].sudo().create(
+        self.env["openspp.indicator.definition"].sudo().create(
             {
                 "name": self.metric_name,
                 "subject_model": "res.partner",

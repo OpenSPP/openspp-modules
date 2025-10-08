@@ -11,11 +11,11 @@ from odoo import api, fields, models
 _logger = logging.getLogger(__name__)
 
 
-class OpensppFeatureValue(models.Model):
-    _name = "openspp.feature.value"
-    _description = "OpenSPP Feature Store Value"
+class OpensppIndicatorValue(models.Model):
+    _name = "openspp.indicator.value"
+    _description = "OpenSPP Indicator Store Value"
     _rec_name = "metric"
-    _table = "openspp_feature_value"
+    _table = "openspp_indicator_value"
     _log_access = False
     _order = "id DESC"
 
@@ -65,7 +65,7 @@ class OpensppFeatureValue(models.Model):
         """
         cr = self.env.cr
         # Detect existing table and whether it's partitioned
-        cr.execute("SELECT to_regclass('public.openspp_feature_value') IS NOT NULL")
+        cr.execute("SELECT to_regclass('public.openspp_indicator_value') IS NOT NULL")
         exists = cr.fetchone()[0]
         if not exists:
             # Create as standard heap table; partitioning is disabled in 17.4 because
@@ -73,7 +73,7 @@ class OpensppFeatureValue(models.Model):
             # Odoo models depend on a single-column `id` primary key.
             cr.execute(
                 """
-                CREATE TABLE openspp_feature_value (
+                CREATE TABLE openspp_indicator_value (
                     id serial PRIMARY KEY,
                     metric varchar NOT NULL,
                     provider varchar NOT NULL DEFAULT '',
@@ -94,13 +94,13 @@ class OpensppFeatureValue(models.Model):
                     company_id integer NOT NULL,
                     UNIQUE(metric, provider, subject_model, subject_id, period_key, params_hash, company_id)
                 );
-                CREATE INDEX IF NOT EXISTS idx_ofv_metric_subject_period ON openspp_feature_value (
+                CREATE INDEX IF NOT EXISTS idx_ofv_metric_subject_period ON openspp_indicator_value (
                     company_id, metric, provider, subject_model, subject_id, period_key, params_hash
                 );
-                CREATE INDEX IF NOT EXISTS idx_ofv_metric_period ON openspp_feature_value (
+                CREATE INDEX IF NOT EXISTS idx_ofv_metric_period ON openspp_indicator_value (
                     company_id, metric, period_key
                 );
-                CREATE INDEX IF NOT EXISTS idx_ofv_provider ON openspp_feature_value (
+                CREATE INDEX IF NOT EXISTS idx_ofv_provider ON openspp_indicator_value (
                     company_id, provider
                 );
                 """
@@ -119,14 +119,14 @@ class OpensppFeatureValue(models.Model):
         cr = self.env.cr
         # Create critical indexes if missing
         cr.execute(
-            "CREATE INDEX IF NOT EXISTS idx_ofv_metric_subject_period ON openspp_feature_value ("
+            "CREATE INDEX IF NOT EXISTS idx_ofv_metric_subject_period ON openspp_indicator_value ("
             "company_id, metric, provider, subject_model, subject_id, period_key, params_hash)"
         )
         cr.execute(
-            "CREATE INDEX IF NOT EXISTS idx_ofv_metric_period ON openspp_feature_value ("
+            "CREATE INDEX IF NOT EXISTS idx_ofv_metric_period ON openspp_indicator_value ("
             "company_id, metric, period_key)"
         )
-        cr.execute("CREATE INDEX IF NOT EXISTS idx_ofv_provider ON openspp_feature_value (company_id, provider)")
+        cr.execute("CREATE INDEX IF NOT EXISTS idx_ofv_provider ON openspp_indicator_value (company_id, provider)")
         # Subject-first composite index to accelerate INSELECT lookups from the subject side
         cr.execute(
             "CREATE INDEX IF NOT EXISTS idx_ofv_subject_company_metric_period ON openspp_feature_value ("
@@ -170,7 +170,7 @@ class OpensppFeatureValue(models.Model):
                 )
             )
         query = """
-            INSERT INTO openspp_feature_value (
+            INSERT INTO openspp_indicator_value (
                 metric, provider, subject_model, subject_id, period_key, value_json, value_type,
                 params_hash, coverage, as_of, fetched_at, expires_at, source, error_code, error_message, company_id
             )
@@ -209,11 +209,11 @@ class OpensppFeatureValue(models.Model):
         cr.execute(
             """
             WITH cte AS (
-                SELECT id FROM openspp_feature_value
+                SELECT id FROM openspp_indicator_value
                 WHERE expires_at IS NOT NULL AND expires_at < NOW()
                 LIMIT %s
             )
-            DELETE FROM openspp_feature_value WHERE id IN (SELECT id FROM cte)
+            DELETE FROM openspp_indicator_value WHERE id IN (SELECT id FROM cte)
             RETURNING id
             """,
             (batch_size,),
@@ -242,7 +242,7 @@ class OpensppFeatureValue(models.Model):
             """
             SELECT subject_id, value_json, value_type, coverage, as_of, fetched_at, expires_at,
                    error_code, error_message
-            FROM openspp_feature_value
+            FROM openspp_indicator_value
             WHERE company_id = %s AND metric = %s AND provider = %s AND subject_model = %s
               AND period_key = %s AND params_hash = %s AND subject_id = ANY(%s)
             """,
@@ -287,7 +287,7 @@ class OpensppFeatureValue(models.Model):
             """
             SELECT subject_id, value_json, value_type, coverage, as_of, fetched_at, expires_at,
                    error_code, error_message
-            FROM openspp_feature_value
+            FROM openspp_indicator_value
             WHERE company_id = %s AND metric = %s AND subject_model = %s AND period_key = %s
               AND params_hash = %s AND subject_id = ANY(%s)
             """,
@@ -326,7 +326,7 @@ class OpensppFeatureValue(models.Model):
         if subject_ids and period_key:
             cr.execute(
                 """
-                UPDATE openspp_feature_value SET expires_at = NOW()
+                UPDATE openspp_indicator_value SET expires_at = NOW()
                 WHERE company_id = %s AND metric = %s AND provider = %s AND subject_model = %s
                   AND period_key = %s AND params_hash = %s AND subject_id = ANY(%s)
                 """,
@@ -335,7 +335,7 @@ class OpensppFeatureValue(models.Model):
         elif period_key:
             cr.execute(
                 """
-                UPDATE openspp_feature_value SET expires_at = NOW()
+                UPDATE openspp_indicator_value SET expires_at = NOW()
                 WHERE company_id = %s AND metric = %s AND provider = %s AND subject_model = %s
                   AND period_key = %s AND params_hash = %s
                 """,
@@ -344,7 +344,7 @@ class OpensppFeatureValue(models.Model):
         else:
             cr.execute(
                 """
-                UPDATE openspp_feature_value SET expires_at = NOW()
+                UPDATE openspp_indicator_value SET expires_at = NOW()
                 WHERE company_id = %s AND metric = %s AND provider = %s AND subject_model = %s AND params_hash = %s
                 """,
                 (company_id, metric, provider or "", subject_model, params_hash or ""),

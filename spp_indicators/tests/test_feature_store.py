@@ -11,9 +11,9 @@ class TestFeatureStore(TransactionCase):
     def setUp(self):
         super().setUp()
         self.company = self.env.company
-        self.Feature = self.env["openspp.feature.value"].sudo()
-        self.Definition = self.env["openspp.metrics.definition"].sudo()
-        self.Resolver = self.env["openspp.metrics.resolver"].sudo()
+        self.Feature = self.env["openspp.indicator.value"].sudo()
+        self.Definition = self.env["openspp.indicator.definition"].sudo()
+        self.Resolver = self.env["openspp.indicator.resolver"].sudo()
         self.metric_name = "test.feature.metric"
         self.period_key = "2025-09"
 
@@ -184,12 +184,12 @@ class TestFeatureStoreTTL(TransactionCase):
 
     def setUp(self):
         super().setUp()
-        self.metrics = self.env["openspp.metrics"].sudo()
+        self.metrics = self.env["openspp.indicator"].sudo()
         self.Feature = self.env["openspp.feature.value"].sudo()
         self.metric = "test.ttl.metric"
         self.period_key = "rolling_30d"
         self.partner = self.env["res.partner"].create({"name": "TTL Subject", "is_registrant": True})
-        self.env["openspp.metrics.definition"].sudo().create(
+        self.env["openspp.indicator.definition"].sudo().create(
             {
                 "name": self.metric,
                 "subject_model": "res.partner",
@@ -231,7 +231,7 @@ class TestFeatureStoreTTL(TransactionCase):
         self.Feature.invalidate(self.metric, "res.partner", self.period_key, [self.partner.id])
         self.env.cr.execute(
             """
-            UPDATE openspp_feature_value
+            UPDATE openspp_indicator_value
             SET expires_at = expires_at - interval '5 seconds'
             WHERE metric = %s AND subject_id = %s AND period_key = %s
             """,

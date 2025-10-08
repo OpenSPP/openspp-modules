@@ -3,17 +3,17 @@ from __future__ import annotations
 from odoo import api, fields, models
 
 
-class MetricsRegistryInspect(models.TransientModel):
-    _name = "openspp.metrics.registry.inspect"
-    _description = "Metrics Runtime Registry"
+class IndicatorsRegistryInspect(models.TransientModel):
+    _name = "openspp.indicator.registry.inspect"
+    _description = "Indicator Runtime Registry"
 
-    line_ids = fields.One2many("openspp.metrics.registry.inspect.line", "wizard_id", string="Entries")
+    line_ids = fields.One2many("openspp.indicator.registry.inspect.line", "wizard_id", string="Entries")
 
     @api.model
     def default_get(self, fields_list):
         vals = super().default_get(fields_list)
         lines = []
-        reg = self.env["openspp.metric.registry"]
+        reg = self.env["openspp.indicator.registry"]
         data = reg.list() or {}
         for name, info in sorted(data.items()):
             id_fields = []
@@ -40,11 +40,11 @@ class MetricsRegistryInspect(models.TransientModel):
         return vals
 
 
-class MetricsRegistryInspectLine(models.TransientModel):
-    _name = "openspp.metrics.registry.inspect.line"
-    _description = "Metrics Runtime Registry Entry"
+class IndicatorsRegistryInspectLine(models.TransientModel):
+    _name = "openspp.indicator.registry.inspect.line"
+    _description = "Indicator Runtime Registry Entry"
 
-    wizard_id = fields.Many2one("openspp.metrics.registry.inspect", ondelete="cascade")
+    wizard_id = fields.Many2one("openspp.indicator.registry.inspect", ondelete="cascade")
     name = fields.Char(required=True)
     provider = fields.Char()
     subject_model = fields.Char()

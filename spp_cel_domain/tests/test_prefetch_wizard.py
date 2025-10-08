@@ -9,7 +9,7 @@ class TestPrefetchWizard(TransactionCase):
         self.partners = [P.create({"name": f"S{i}", "is_registrant": True, "is_group": False}) for i in range(5)]
 
     def test_prefetch_chunking(self):
-        Wiz = self.env["openspp.metrics.prefetch.wizard"]
+        Wiz = self.env["openspp.indicator.prefetch.wizard"]
         domain_text = str([("id", "in", [p.id for p in self.partners])])
         w = Wiz.create(
             {
