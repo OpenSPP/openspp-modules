@@ -72,26 +72,33 @@ msgid "Create a new Event Data!"
 msgstr ""
 
 #. module: spp_event_data
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_data_test_wizard__create_uid
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__create_uid
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__create_uid
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data_test__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: spp_event_data
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_data_test_wizard__create_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__create_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__create_date
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data_test__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: spp_event_data
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_data_test_wizard__display_name
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__display_name
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__display_name
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data_test__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: spp_event_data
 #: model:ir.actions.act_window,name:spp_event_data.action_spp_event_data
 #: model:ir.model,name:spp_event_data.model_spp_event_data
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_data_test_wizard__event_id
 #: model:ir.ui.menu,name:spp_event_data.menu_spp_event_data
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_groups_event_data_form
 #: model_terms:ir.ui.view,arch_db:spp_event_data.view_individual_event_data_form
@@ -120,8 +127,10 @@ msgid "Expiry Date"
 msgstr ""
 
 #. module: spp_event_data
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_data_test_wizard__id
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__id
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__id
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data_test__id
 msgid "ID"
 msgstr ""
 
@@ -131,18 +140,23 @@ msgid "Inactive"
 msgstr ""
 
 #. module: spp_event_data
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_data_test_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__write_uid
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__write_uid
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data_test__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: spp_event_data
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_data_test_wizard__write_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_wizard__write_date
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__write_date
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data_test__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: spp_event_data
+#: model:ir.model.fields,field_description:spp_event_data.field_spp_create_event_data_test_wizard__name
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__name
 msgid "Name"
 msgstr ""
@@ -189,4 +203,14 @@ msgstr ""
 #. module: spp_event_data
 #: model:ir.model.fields,field_description:spp_event_data.field_spp_event_data__state
 msgid "State"
+msgstr ""
+
+#. module: spp_event_data
+#: model:ir.model,name:spp_event_data.model_spp_create_event_data_test_wizard
+msgid "Test Create Event Data Wizard"
+msgstr ""
+
+#. module: spp_event_data
+#: model:ir.model,name:spp_event_data.model_spp_event_data_test
+msgid "Test Event Data Type"
 msgstr ""
