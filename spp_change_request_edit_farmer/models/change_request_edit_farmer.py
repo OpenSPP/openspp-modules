@@ -65,7 +65,6 @@ class ChangeRequestEditFarmer(models.Model):
         "family_name",
         "given_name",
         "addl_name",
-        "farmer_national_id",
         "gender",
         "marital_status",
         "birthdate",

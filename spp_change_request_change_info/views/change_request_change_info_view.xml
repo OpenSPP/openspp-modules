@@ -252,11 +252,6 @@
                                             <field name="birthdate_not_exact" />
                                         </td>
                                         <td>
-                                            <span>
-                                                National ID Number
-                                            </span>
-                                            <br />
-                                            <field name="national_id_number" />
                                         </td>
                                         <td>
                                         </td>
@@ -564,7 +559,6 @@
                                             options="{'enable_sms': false}"
                                         />
                                     <field name="highest_education_level" readonly="1" />
-                                    <field name="national_id_number" readonly="1" />
                                     <field name="birth_place" readonly="1" />
                                     <field name="birthdate_not_exact" readonly="1" />
                                     <field name="birthdate" readonly="1" />
