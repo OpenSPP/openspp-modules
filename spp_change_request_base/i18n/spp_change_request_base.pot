@@ -128,6 +128,7 @@ msgstr ""
 #. module: spp_change_request_base
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request__assign_to_id
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_source_mixin__assign_to_id
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__assign_to_id
 msgid "Assigned to"
 msgstr ""
 
@@ -183,8 +184,15 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validators__request_id
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_dms_directory__change_request_id
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_dms_file__change_request_id
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__change_request_id
 #: model:ir.ui.menu,name:spp_change_request_base.spp_change_request_menu_root
 msgid "Change Request"
+msgstr ""
+
+#. module: spp_change_request_base
+#: model:ir.model.fields,field_description:spp_change_request_base.field_spp_dms_directory__change_request_test_cr_id
+#: model:ir.model.fields,field_description:spp_change_request_base.field_spp_dms_file__change_request_test_cr_id
+msgid "Change Request (Test CR Type)"
 msgstr ""
 
 #. module: spp_change_request_base
@@ -341,6 +349,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_sequence__create_uid
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_stage__create_uid
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validators__create_uid
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -352,12 +361,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_sequence__create_date
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_stage__create_date
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validators__create_date
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: spp_change_request_base
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request__current_user_assigned
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_source_mixin__current_user_assigned
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__current_user_assigned
 msgid "Current User Assigned"
 msgstr ""
 
@@ -368,6 +379,7 @@ msgstr ""
 
 #. module: spp_change_request_base
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request__dms_directory_ids
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__dms_directory_ids
 msgid "DMS Directories"
 msgstr ""
 
@@ -379,6 +391,11 @@ msgstr ""
 #. module: spp_change_request_base
 #: model:ir.model,name:spp_change_request_base.model_spp_dms_file
 msgid "DMS File"
+msgstr ""
+
+#. module: spp_change_request_base
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__dms_file_ids
+msgid "DMS Files"
 msgstr ""
 
 #. module: spp_change_request_base
@@ -410,6 +427,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request__date_validated
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_source_mixin__date_validated
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validators__date_validated
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__date_validated
 msgid "Date Validated"
 msgstr ""
 
@@ -433,6 +451,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_sequence__display_name
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_stage__display_name
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validators__display_name
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -522,6 +541,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_sequence__id
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_stage__id
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validators__id
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__id
 msgid "ID"
 msgstr ""
 
@@ -564,6 +584,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_sequence__write_uid
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_stage__write_uid
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validators__write_uid
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -575,11 +596,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_sequence__write_date
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_stage__write_date
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validators__write_date
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: spp_change_request_base
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_source_mixin__last_validated_by_id
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__last_validated_by_id
 msgid "Last Validator"
 msgstr ""
 
@@ -672,6 +695,7 @@ msgstr ""
 #. module: spp_change_request_base
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request__registrant_id
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_source_mixin__registrant_id
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__registrant_id
 msgid "Registrant"
 msgstr ""
 
@@ -763,6 +787,7 @@ msgstr ""
 #. module: spp_change_request_base
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request__state
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_source_mixin__state
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__state
 msgid "Status"
 msgstr ""
 
@@ -773,6 +798,11 @@ msgid ""
 "Overdue: Due date is already passed\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
+msgstr ""
+
+#. module: spp_change_request_base
+#: model:ir.model,name:spp_change_request_base.model_test_cr_type
+msgid "Test CR Type for Source Mixin"
 msgstr ""
 
 #. module: spp_change_request_base
@@ -1051,6 +1081,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validation_sequence__stage_id
 #: model:ir.model.fields,field_description:spp_change_request_base.field_spp_change_request_validators__stage_id
 msgid "Validation Stage"
+msgstr ""
+
+#. module: spp_change_request_base
+#: model:ir.model.fields,field_description:spp_change_request_base.field_test_cr_type__validation_ids
+msgid "Validations"
 msgstr ""
 
 #. module: spp_change_request_base
