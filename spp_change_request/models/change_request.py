@@ -88,6 +88,38 @@ class ChangeRequestBase(models.Model):
         domain=[("is_registrant", "=", True)],
     )  #: Registrant who submitted the change request
 
+    validation_stage = fields.Selection(
+        [
+            ("local", "Local"),
+            ("hq", "HQ"),
+            ("completed", "Completed"),
+        ],
+        string="Validation Stage",
+        default="local",
+        compute="_compute_validation_stage",
+        store=True,
+    )
+
+    @api.depends("validator_ids")
+    def _compute_validation_stage(self):
+        for rec in self:
+            validation_sequences = self.env["spp.change.request.validation.sequence"].search(
+                [("request_type", "=", rec.request_type)]
+            )
+            total_sequences = len(validation_sequences)
+            total_validators = len(rec.validator_ids)
+            if not validation_sequences or total_sequences == 0:
+                rec.validation_stage = "local"
+            else:
+                if total_validators == 0:
+                    rec.validation_stage = "local"
+                elif total_validators < total_sequences - 1:
+                    rec.validation_stage = "local"
+                elif total_validators == total_sequences - 1:
+                    rec.validation_stage = "hq"
+                elif total_validators >= total_sequences:
+                    rec.validation_stage = "completed"
+
     @api.model
     def _registrant_id_not_visible_in_request_type(self):
         return []
