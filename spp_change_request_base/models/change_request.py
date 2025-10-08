@@ -284,9 +284,7 @@ class ChangeRequestBase(models.Model):
                 if rec.assign_to_id.id != self.env.user.id:
                     assign_self = True
                     if self.env.user.id != (
-                        self.change_request_id.last_validated_by_id.id
-                        if self.change_request_id.last_validated_by_id
-                        else self.assign_to_id.id
+                        self.last_validated_by_id.id if self.last_validated_by_id else self.assign_to_id.id
                     ):
                         assign_self = True
                     elif is_admin:
@@ -363,7 +361,11 @@ class ChangeRequestBase(models.Model):
         for rec in self:
             # Open Request Form
             mode = "edit"
-            if self.env.user.id not in [self.assign_to_id.id, self.create_uid]:
+            user = self.env.user.id if self.env.user else None
+            assigned_id = rec.assign_to_id.id if rec.assign_to_id else None
+            create_uid = rec.create_uid.id if rec.create_uid else None
+            read_mode = True if user and user not in [assigned_id, create_uid] else False
+            if read_mode:
                 mode = "readonly"
             return rec.open_change_request_form(target="current", mode=mode)
 
