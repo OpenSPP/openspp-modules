@@ -248,7 +248,7 @@ class TestChangeRequestBase(TransactionCase):
         change_request = self._create_test_cr()
         self.user_demo.groups_id = [(4, self.env.ref("base.group_system").id)]
         change_request.assign_to_id = self.user_demo2.id
-        action = change_request.open_user_assignment_wiz()
+        action = change_request.with_user(self.user_demo2).open_user_assignment_wiz()
 
         self.assertEqual(action["type"], "ir.actions.act_window")
         self.assertEqual(action["res_model"], "spp.change.request.user.assign.wizard")
