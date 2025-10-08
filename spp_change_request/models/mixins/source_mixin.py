@@ -88,9 +88,11 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             rec.show_cr_actions = (
                 rec.validation_stage == "local"
                 and user.has_group("spp_change_request.group_spp_change_request_validator")
+                and user.id == rec.assign_to_id.id
             ) or (
                 rec.validation_stage == "hq"
                 and user.has_group("spp_change_request.group_spp_change_request_hq_validator")
+                and user.id == rec.assign_to_id.id
             )
 
     def _copy_group_member_ids(self, group_id_field, group_ref_field="registrant_id"):
