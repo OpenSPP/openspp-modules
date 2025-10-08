@@ -59,7 +59,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
     )
 
     current_user_assigned = fields.Boolean(compute="_compute_current_user_assigned", default=False)
-                
+
     def _update_registrant_id(self, res):
         for rec in res:
             if rec.registrant_id:
