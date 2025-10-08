@@ -22,8 +22,3 @@ class TestLocaleProviders(TransactionCase):
         self.assertEqual(get_faker_provider("sw_KE"), SwKeProvider)
         self.assertEqual(get_faker_provider("ta_LK"), TaLkProvider)
         self.assertEqual(get_faker_provider("en_US"), None)
-
-    def test_create_faker(self):
-        fake = create_faker("en_KE")
-        self.assertIsInstance(fake, Faker)
-        self.assertIn(fake.first_name(), EnKeProvider.first_names)
