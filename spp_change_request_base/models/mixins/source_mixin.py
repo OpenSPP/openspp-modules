@@ -535,7 +535,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
             assign_self = False
             if rec.change_request_id.assign_to_id:
                 if rec.change_request_id.assign_to_id.id != self.env.user.id:
-                    if self.env.user.id == self.change_request_id.create_uid:
+                    assign_self = True
+                    if self.env.user.id != (self.change_request_id.last_validate_by_id.id if self.change_request_id.last_validate_by_id else self.assign_to_id.id):
                         assign_self = True
                     elif is_admin:
                         assign_self = False

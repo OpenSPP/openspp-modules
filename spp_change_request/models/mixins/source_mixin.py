@@ -81,6 +81,8 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         related="change_request_id.validation_stage",
     )
     show_cr_actions = fields.Boolean(compute="_compute_show_cr_actions")
+    show_assign_button = fields.Boolean(compute="_compute_show_assign_button")
+    show_reassign_button = fields.Boolean(compute="_compute_show_reassign_button")
 
     def _compute_show_cr_actions(self):
         for rec in self:
@@ -94,6 +96,34 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                 and user.has_group("spp_change_request.group_spp_change_request_hq_validator")
                 and user.id == rec.assign_to_id.id
             )
+    
+    def _compute_show_assign_button(self):
+        for rec in self:
+            user = self.env.user
+            rec.show_assign_button = (
+                rec.state in ("draft", "pending", "validated", "rejected")
+                and (
+                    rec.validation_stage == "local"
+                    and user.has_group("spp_change_request.group_spp_change_request_validator")
+                ) or (
+                    rec.validation_stage == "hq"
+                    and user.has_group("spp_change_request.group_spp_change_request_hq_validator")
+                ) or user.has_group("g2p_registry_base.group_g2p_admin")
+            )
+    
+    def _compute_show_reassign_button(self):
+        for rec in self:
+            user = self.env.user
+            rec.show_reassign_button = (
+                rec.state in ("draft", "pending", "validated", "rejected")
+                and (
+                    rec.validation_stage == "local"
+                    and user.has_group("spp_change_request.group_spp_change_request_validator")
+                ) or (
+                    rec.validation_stage == "hq"
+                    and user.has_group("spp_change_request.group_spp_change_request_hq_validator")
+                ) or user.has_group("g2p_registry_base.group_g2p_admin")
+            ) and rec.assign_to_id and rec.assign_to_id.id != user.id
 
     def _copy_group_member_ids(self, group_id_field, group_ref_field="registrant_id"):
         for rec in self:
