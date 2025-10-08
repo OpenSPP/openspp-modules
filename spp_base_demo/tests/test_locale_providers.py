@@ -1,8 +1,6 @@
-from faker import Faker
-
 from odoo.tests.common import TransactionCase
 
-from ..locale_providers import create_faker, get_faker_provider
+from ..locale_providers import get_faker_provider
 from ..locale_providers.en_KE import Provider as EnKeProvider
 from ..locale_providers.lo_LA import Provider as LoLaProvider
 from ..locale_providers.si_LK import Provider as SiLkProvider
