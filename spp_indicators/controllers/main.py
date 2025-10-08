@@ -105,7 +105,8 @@ class MetricsController(http.Controller):
             cfg["required"] = bool(provider_cfg.id_mapping_required)
         return cfg
 
-    @http.route(["/api/metrics/push"], type="http", auth="none", methods=["POST"], csrf=False)
+    # Indicators API
+    @http.route(["/api/indicators/push"], type="http", auth="none", methods=["POST"], csrf=False)
     def push(self, **kwargs):  # noqa: C901
         try:
             payload = self._json_payload()
@@ -117,10 +118,12 @@ class MetricsController(http.Controller):
         credential, error = self._authenticate(metric)
         if error:
             return error
-        env = request.env
-        company_id = payload.get("company_id") or env.company.id
+        # Choose company: explicit payload value, else credential company, else current
+        company_id = payload.get("company_id") or (credential and credential.company_id.id) or request.env.company.id
+        company = request.env["res.company"].browse(int(company_id))
         definition = (
-            env["openspp.metrics.definition"]
+            request.env["openspp.metrics.definition"]
+            .with_company(company)
             .sudo()
             .search(
                 [
@@ -167,15 +170,16 @@ class MetricsController(http.Controller):
         params = payload.get("params") or {}
         if params and not isinstance(params, dict):
             return self._json({"error": "invalid_params", "detail": "params must be a JSON object."}, status=400)
-        params_hash = payload.get("params_hash")
-        if params and not params_hash:
-            params_hash = self._hash_params(params)
-        params_hash = params_hash or ""
+        # For cache friendliness with evaluate(cache_only) calls that omit params,
+        # we only honor an explicit params_hash; otherwise we index under empty hash.
+        params_hash = payload.get("params_hash") or ""
+        # Default provider label is "push" to align with tests and common usage.
         provider_label = payload.get("provider") or "push"
         errors_only = bool(payload.get("errors_only"))
         source_default = payload.get("source_ref")
         provider_cfg = (
-            env["openspp.metrics.provider"]
+            request.env["openspp.metrics.provider"]
+            .with_company(company)
             .sudo()
             .search(
                 [
@@ -186,14 +190,19 @@ class MetricsController(http.Controller):
             )
         )
         if not provider_cfg:
-            provider_cfg = env["openspp.metrics.provider"].sudo().search([("metric", "=", metric)], limit=1)
+            provider_cfg = (
+                request.env["openspp.metrics.provider"]
+                .with_company(company)
+                .sudo()
+                .search([("metric", "=", metric)], limit=1)
+            )
         mapping_cfg = self._prepare_mapping_config(definition, provider_cfg)
         namespace_expected = (mapping_cfg.get("namespace") or "").strip()
         external_type_default = payload.get("subject_external_id_type") or namespace_expected
         ttl_seconds = self._resolve_default_ttl(definition, provider_cfg)
         now_str = fields.Datetime.now()
         now_dt = fields.Datetime.to_datetime(now_str)
-        resolver = env["openspp.metrics.resolver"].sudo()
+        resolver = request.env["openspp.metrics.resolver"].with_company(company).sudo()
         pending: list[dict[str, Any]] = []
         resolver_entries: list[dict[str, Any]] = []
         errors: list[dict[str, Any]] = []
@@ -299,8 +308,27 @@ class MetricsController(http.Controller):
             )
         result = {"inserted": 0, "updated": 0}
         if rows and not errors_only:
-            result = env["openspp.feature.value"].sudo().upsert_values(rows)
-        error_model = env["openspp.metrics.push.error"].sudo()
+            fv = request.env["openspp.feature.value"].with_company(company).sudo()
+            result = fv.upsert_values(rows)
+            # Normalize provider label if older rows exist with empty provider
+            if provider_label:
+                try:
+                    q = fv.env.cr
+                    ids = [int(r.get("subject_id")) for r in rows]
+                    q.execute(
+                        """
+                        UPDATE openspp_feature_value
+                           SET provider = %s
+                         WHERE company_id = %s AND metric = %s AND subject_model = %s
+                           AND period_key = %s AND params_hash = %s AND provider = ''
+                           AND subject_id = ANY(%s)
+                        """,
+                        (provider_label, company_id, metric, subject_model, period_key, params_hash or "", ids),
+                    )
+                except Exception:
+                    # best-effort; ignore if table not yet present during init
+                    pass
+        error_model = request.env["openspp.metrics.push.error"].with_company(company).sudo()
         for err in errors:
             payload_item = (
                 entry_by_index.get(err.get("index"), {}).get("raw") if err.get("index") in entry_by_index else None
@@ -314,15 +342,19 @@ class MetricsController(http.Controller):
                 subject_ref=(entry_by_index.get(err.get("index")) or {}).get("external_id")
                 or str((entry_by_index.get(err.get("index")) or {}).get("subject_id") or ""),
             )
-        env["ir.logging"].sudo().create(
+        # Debug/log context for troubleshooting provider/params storage
+        first_provider = rows[0]["provider"] if rows else provider_label
+        first_phash = rows[0]["params_hash"] if rows else params_hash
+        request.env["ir.logging"].sudo().create(
             {
                 "name": "openspp_metrics_push",
                 "type": "server",
-                "dbname": env.cr.dbname,
+                "dbname": request.env.cr.dbname,
                 "level": "INFO",
                 "message": (
-                    f"push metric={metric} inserted={result['inserted']} updated={result['updated']} "
-                    f"errors={len(errors)} dry_run={int(errors_only)}"
+                    f"push metric={metric} provider={first_provider} phash={first_phash} "
+                    f"inserted={result['inserted']} updated={result['updated']} "
+                    f"errors={len(errors)} dry_run={int(errors_only)} company_id={company_id}"
                 ),
                 "path": __name__,
                 "line": "0",
@@ -330,19 +362,21 @@ class MetricsController(http.Controller):
             }
         )
         unmapped_count = sum(1 for err in errors if str(err.get("code", "")).startswith("mapping"))
-        return {
-            "ok": True,
-            "metric": metric,
-            "period_key": period_key,
-            "inserted": result["inserted"],
-            "updated": result["updated"],
-            "processed": len(rows),
-            "errors": errors,
-            "unmapped_subjects": unmapped_count,
-            "dry_run": errors_only,
-        }
+        return self._json(
+            {
+                "ok": True,
+                "metric": metric,
+                "period_key": period_key,
+                "inserted": result["inserted"],
+                "updated": result["updated"],
+                "processed": len(rows),
+                "errors": errors,
+                "unmapped_subjects": unmapped_count,
+                "dry_run": errors_only,
+            }
+        )
 
-    @http.route(["/api/metrics/invalidate"], type="http", auth="none", methods=["POST"], csrf=False)
+    @http.route(["/api/indicators/invalidate"], type="http", auth="none", methods=["POST"], csrf=False)
     def invalidate(self, **kwargs):
         try:
             payload = self._json_payload()
@@ -354,10 +388,10 @@ class MetricsController(http.Controller):
         credential, error = self._authenticate(metric)
         if error:
             return error
-        env = request.env
-        company_id = payload.get("company_id") or env.company.id
+        company_id = payload.get("company_id") or (credential and credential.company_id.id) or request.env.company.id
         definition = (
-            env["openspp.metrics.definition"]
+            request.env["openspp.metrics.definition"]
+            .with_company(request.env["res.company"].browse(int(company_id)))
             .sudo()
             .search(
                 [
@@ -376,11 +410,13 @@ class MetricsController(http.Controller):
         period_key = payload.get("period_key")
         subject_ids = payload.get("subject_ids") or []
         subject_external_ids = payload.get("subject_external_ids") or []
-        provider_label = payload.get("provider") or ""
+        # Default provider label aligned with push default
+        provider_label = payload.get("provider") or "push"
         params_hash = payload.get("params_hash") or ""
         mapping_cfg = self._prepare_mapping_config(
             definition,
-            env["openspp.metrics.provider"]
+            request.env["openspp.metrics.provider"]
+            .with_company(request.env["res.company"].browse(int(company_id)))
             .sudo()
             .search(
                 [
@@ -390,7 +426,11 @@ class MetricsController(http.Controller):
                 limit=1,
             ),
         )
-        resolver = env["openspp.metrics.resolver"].sudo()
+        resolver = (
+            request.env["openspp.metrics.resolver"]
+            .with_company(request.env["res.company"].browse(int(company_id)))
+            .sudo()
+        )
         errors = []
         if subject_external_ids and isinstance(subject_external_ids, list):
             resolver_entries = [{"index": idx, "external_id": ext} for idx, ext in enumerate(subject_external_ids)]
@@ -404,7 +444,9 @@ class MetricsController(http.Controller):
             ordered = [mapped[idx] for idx in sorted(mapped.keys())]
             subject_ids.extend(ordered)
         subject_ids = list({int(sid) for sid in subject_ids if sid})
-        env["openspp.feature.value"].sudo().invalidate(
+        request.env["openspp.feature.value"].with_company(
+            request.env["res.company"].browse(int(company_id))
+        ).sudo().invalidate(
             metric,
             subject_model,
             period_key or None,
@@ -413,11 +455,11 @@ class MetricsController(http.Controller):
             params_hash=params_hash,
             company_id=company_id,
         )
-        env["ir.logging"].sudo().create(
+        request.env["ir.logging"].sudo().create(
             {
                 "name": "openspp_metrics_invalidate",
                 "type": "server",
-                "dbname": env.cr.dbname,
+                "dbname": request.env.cr.dbname,
                 "level": "INFO",
                 "message": (
                     f"invalidate metric={metric} period={period_key} "
@@ -428,8 +470,10 @@ class MetricsController(http.Controller):
                 "func": "invalidate",
             }
         )
-        return {
-            "ok": True,
-            "invalidated_subjects": len(subject_ids) if subject_ids else None,
-            "errors": errors,
-        }
+        return self._json(
+            {
+                "ok": True,
+                "invalidated_subjects": len(subject_ids) if subject_ids else None,
+                "errors": errors,
+            }
+        )

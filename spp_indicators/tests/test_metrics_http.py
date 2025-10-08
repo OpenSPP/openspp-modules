@@ -76,7 +76,7 @@ class TestMetricsHttp(HttpCase):
         headers = {}
         if token:
             headers["X-Api-Key"] = token
-        return self._post_json("/api/metrics/push", payload, headers=headers)
+        return self._post_json("/api/indicators/push", payload, headers=headers)
 
     # Tests ------------------------------------------------------------------
     def test_push_requires_token_when_enforced(self):
@@ -147,7 +147,7 @@ class TestMetricsHttp(HttpCase):
             "subject_external_ids": ["EXT-123"],
         }
         headers = {"Content-Type": "application/json", "X-Api-Key": "invalidate-token"}
-        result = self._post_json("/api/metrics/invalidate", payload, headers=headers)
+        result = self._post_json("/api/indicators/invalidate", payload, headers=headers)
         self.assertTrue(result["ok"])
         row = self.Feature.search(
             [
