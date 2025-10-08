@@ -499,6 +499,21 @@ msgid "Search Change Request: Add Child/Member"
 msgstr ""
 
 #. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__show_assign_button
+msgid "Show Assign Button"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__show_cr_actions
+msgid "Show Cr Actions"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__show_reassign_button
+msgid "Show Reassign Button"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
 #: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__state
 msgid "Status"
 msgstr ""
@@ -594,4 +609,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__validation_ids
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_children_demo.view_change_request_add_children_form
 msgid "Validation Sequence"
+msgstr ""
+
+#. module: spp_change_request_add_children_demo
+#: model:ir.model.fields,field_description:spp_change_request_add_children_demo.field_spp_change_request_add_children__validation_stage
+msgid "Validation Stage"
 msgstr ""
