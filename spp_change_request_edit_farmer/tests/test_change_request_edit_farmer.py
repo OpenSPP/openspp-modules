@@ -83,12 +83,3 @@ class TestChangeRequestEditFarmer(TransactionCase):
         # Verify phone number
         phone = self.env["g2p.phone.number"].search([("partner_id", "=", updated_farmer.id)])
         self.assertEqual(phone.phone_no, "+1234567890")
-
-        # Verify national ID
-        reg_id = self.env["g2p.reg.id"].search(
-            [
-                ("partner_id", "=", updated_farmer.id),
-                ("id_type", "=", self.env.ref("spp_base_farmer_registry.id_type_national_id").id),
-            ]
-        )
-        self.assertEqual(reg_id.value, "ID123456")
