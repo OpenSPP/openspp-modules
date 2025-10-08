@@ -744,7 +744,10 @@ class ChangeRequestBase(models.Model):
         """
         for rec in self:
             rec.current_user_assigned = False
-            if self.env.context.get("uid", False) == rec.assign_to_id.id:
+            user_id = self.env.user
+            if not rec.assign_to_id:
+                continue
+            if user_id.id == rec.assign_to_id.id:
                 rec.current_user_assigned = True
 
 
