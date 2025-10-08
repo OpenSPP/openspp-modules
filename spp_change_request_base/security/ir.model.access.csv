@@ -6,3 +6,5 @@ spp_change_request_validation_stage_sysadmin,Change Request Validation Stage Adm
 spp_change_request_user_assign_wizard_sysadmin,Change Request User Assignment Admin Access,spp_change_request_base.model_spp_change_request_user_assign_wizard,base.group_system,1,1,1,1
 spp_change_request_reject_wizard_sysadmin,Change Request Reject Admin Access,spp_change_request_base.model_spp_change_request_reject_wizard,base.group_system,1,1,1,1
 spp_change_request_cancel_wizard_sysadmin,Change Request Cancel Admin Access,spp_change_request_base.model_spp_change_request_cancel_wizard,base.group_system,1,1,1,1
+
+test_cr_type_admin,Change Request Test CR Admin Access,spp_change_request_base.model_test_cr_type,base.group_system,1,1,1,1
