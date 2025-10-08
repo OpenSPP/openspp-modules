@@ -207,9 +207,6 @@ class ChangeRequestEditFarmer(models.Model):
         if self.mobile_tel:
             self.insert_phone_number(self.farmer_id.id, self.mobile_tel)
 
-        if self.farmer_national_id:
-            self.insert_id(self.farmer_id.id, self.farmer_national_id)
-
         self.farmer_id.name_change()
 
         return self.farmer_id
