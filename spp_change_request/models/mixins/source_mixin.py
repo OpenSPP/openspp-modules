@@ -101,7 +101,11 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         for rec in self:
             user = self.env.user
             assigned_id = rec.assign_to_id.id if rec.assign_to_id else None
-            user_not_assigned = True if assigned_id and assigned_id != user.id else False
+            if assigned_id:
+                user_not_assigned = True if assigned_id != user.id else False
+            else:
+                user_not_assigned = True
+
             rec.show_assign_button = (
                 rec.state in ("draft", "pending", "validated", "rejected")
                 and (
@@ -112,7 +116,7 @@ class ChangeRequestSourceMixin(models.AbstractModel):
                     rec.validation_stage == "hq"
                     and user.has_group("spp_change_request.group_spp_change_request_hq_validator")
                 )
-                and (user_not_assigned or not rec.assign_to_id)
+                and user_not_assigned
                 or user.has_group("g2p_registry_base.group_g2p_admin")
             )
 
