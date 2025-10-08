@@ -84,15 +84,6 @@ msgid ""
 msgstr ""
 
 #. module: spp_change_request_change_info
-#: model_terms:ir.ui.view,arch_db:spp_change_request_change_info.view_change_request_change_info_form
-msgid ""
-"<span>\n"
-"                                                National ID Number\n"
-"                                            </span>\n"
-"                                            <br/>"
-msgstr ""
-
-#. module: spp_change_request_change_info
 #: model:ir.model.fields,field_description:spp_change_request_change_info.field_spp_change_request_change_info__registrant_id
 msgid "Add to Group"
 msgstr ""
@@ -557,6 +548,21 @@ msgid "Secondary"
 msgstr ""
 
 #. module: spp_change_request_change_info
+#: model:ir.model.fields,field_description:spp_change_request_change_info.field_spp_change_request_change_info__show_assign_button
+msgid "Show Assign Button"
+msgstr ""
+
+#. module: spp_change_request_change_info
+#: model:ir.model.fields,field_description:spp_change_request_change_info.field_spp_change_request_change_info__show_cr_actions
+msgid "Show Cr Actions"
+msgstr ""
+
+#. module: spp_change_request_change_info
+#: model:ir.model.fields,field_description:spp_change_request_change_info.field_spp_change_request_change_info__show_reassign_button
+msgid "Show Reassign Button"
+msgstr ""
+
+#. module: spp_change_request_change_info
 #: model:ir.model.fields,field_description:spp_change_request_change_info.field_spp_change_request_change_info__state
 msgid "Status"
 msgstr ""
@@ -615,4 +621,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_change_info.field_spp_change_request_change_info__validation_ids
 #: model_terms:ir.ui.view,arch_db:spp_change_request_change_info.view_change_request_change_info_form
 msgid "Validation Sequence"
+msgstr ""
+
+#. module: spp_change_request_change_info
+#: model:ir.model.fields,field_description:spp_change_request_change_info.field_spp_change_request_change_info__validation_stage
+msgid "Validation Stage"
 msgstr ""
