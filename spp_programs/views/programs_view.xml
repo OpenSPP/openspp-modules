@@ -166,4 +166,15 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
     <record id="g2p_programs.menu_program_list" model="ir.ui.menu">
         <field name="groups_id" eval="[(4,ref('spp_programs.read_program_cycle_entitlement'))]" />
     </record>
+
+    <record id="view_program_membership_custom_tree" model="ir.ui.view">
+        <field name="name">view_program_membership_custom_tree</field>
+        <field name="model">g2p.program_membership</field>
+        <field name="inherit_id" ref="g2p_programs.view_program_membership_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">0</attribute>
+            </xpath>
+        </field>
+    </record>
 </odoo>
