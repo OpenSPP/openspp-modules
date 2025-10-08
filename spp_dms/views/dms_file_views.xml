@@ -45,6 +45,8 @@
                 <field name="mimetype" />
                 <field name="directory_id" />
                 <field name="category_id" />
+                <field name="create_date" column_invisible="1" />
+
             </tree>
         </field>
     </record>
