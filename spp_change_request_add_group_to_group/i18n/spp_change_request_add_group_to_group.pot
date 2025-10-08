@@ -367,6 +367,21 @@ msgid "Search Change Request: Add Group to a Group"
 msgstr ""
 
 #. module: spp_change_request_add_group_to_group
+#: model:ir.model.fields,field_description:spp_change_request_add_group_to_group.field_spp_change_request_add_group_to_group__show_assign_button
+msgid "Show Assign Button"
+msgstr ""
+
+#. module: spp_change_request_add_group_to_group
+#: model:ir.model.fields,field_description:spp_change_request_add_group_to_group.field_spp_change_request_add_group_to_group__show_cr_actions
+msgid "Show Cr Actions"
+msgstr ""
+
+#. module: spp_change_request_add_group_to_group
+#: model:ir.model.fields,field_description:spp_change_request_add_group_to_group.field_spp_change_request_add_group_to_group__show_reassign_button
+msgid "Show Reassign Button"
+msgstr ""
+
+#. module: spp_change_request_add_group_to_group
 #: model:ir.model.fields,field_description:spp_change_request_add_group_to_group.field_spp_change_request_add_group_to_group__state
 msgid "Status"
 msgstr ""
@@ -398,4 +413,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_change_request_add_group_to_group.field_spp_change_request_add_group_to_group__validation_ids
 #: model_terms:ir.ui.view,arch_db:spp_change_request_add_group_to_group.view_change_request_add_group_to_group_form
 msgid "Validation Sequence"
+msgstr ""
+
+#. module: spp_change_request_add_group_to_group
+#: model:ir.model.fields,field_description:spp_change_request_add_group_to_group.field_spp_change_request_add_group_to_group__validation_stage
+msgid "Validation Stage"
 msgstr ""
