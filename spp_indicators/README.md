@@ -10,8 +10,8 @@ filters.
 - Feature store model: `openspp.feature.value` (table `openspp_feature_value`).
 - Service: `openspp.metrics.evaluate(metric, subject_model, subject_ids, period_key, mode)`.
 - HTTP endpoints:
-  - `POST /api/metrics/push` — push metric values (auth: `X-Api-Key` or admin session).
-  - `POST /api/metrics/invalidate` — expire cached values.
+  - `POST /api/indicators/push` — push indicator values (auth: `X-Api-Key` or admin session).
+  - `POST /api/indicators/invalidate` — expire cached values.
 - API credential model: `openspp.metrics.api_credential` (per-integration tokens, rate limits).
 - Push error log: `openspp.metrics.push.error` for monitoring inbound failures.
 - Built-in provider example: `household.size` (active member count by group).

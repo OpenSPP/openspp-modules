@@ -60,7 +60,7 @@ class TestMetricsPush(HttpCase):
 
     def _push(self, payload: dict, token: str):
         headers = {"X-Api-Key": token}
-        return self._post_json("/api/metrics/push", payload, headers=headers)
+        return self._post_json("/api/indicators/push", payload, headers=headers)
 
     # Tests ------------------------------------------------------------------
     def test_push_with_external_id_mapping(self):
@@ -181,7 +181,7 @@ class TestMetricsPush(HttpCase):
         }
         headers = {"X-Api-Key": "unknown-token"}
         with self.assertRaises(HTTPError) as err:
-            self._post_json("/api/metrics/push", payload, headers=headers)
+            self._post_json("/api/indicators/push", payload, headers=headers)
         self.assertEqual(err.exception.code, 404)
         body = json.loads(err.exception.read().decode("utf-8") or "{}")
         self.assertEqual(body.get("error"), "unknown_metric")

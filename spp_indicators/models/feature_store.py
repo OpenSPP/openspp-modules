@@ -17,6 +17,7 @@ class OpensppFeatureValue(models.Model):
     _rec_name = "metric"
     _table = "openspp_feature_value"
     _log_access = False
+    _order = "id DESC"
 
     metric = fields.Char(required=True, index=True)
     provider = fields.Char(index=True, default="")
@@ -43,6 +44,16 @@ class OpensppFeatureValue(models.Model):
             "Metric value must be unique per subject/period/provider/params/company",
         ),
     ]
+
+    def read(self, fields=None, load="_classic_read"):
+        records = super().read(fields=fields, load=load)
+        # Backward compatibility: expose provider="push" when rows were inserted
+        # via the push API but stored with an empty provider label.
+        if not fields or "provider" in fields:
+            for vals in records:
+                if (vals.get("provider") in (None, "")) and vals.get("source") == "push":
+                    vals["provider"] = "push"
+        return records
 
     @api.model
     def _ensure_base_table(self):

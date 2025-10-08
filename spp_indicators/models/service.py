@@ -100,9 +100,30 @@ class OpensppMetricsService(models.AbstractModel):
                 params_hash=params_hash,
                 company_id=company_id,
             )
+        # Also try the HTTP push default provider label "push" (explicit fallback)
+        if not cached:
+            cached = feature.read_values(
+                metric,
+                subject_model,
+                subject_ids,
+                period_key,
+                provider="push",
+                params_hash=params_hash,
+                company_id=company_id,
+            )
         if not cached and params_hash:
             cached = feature.read_values(
                 metric, subject_model, subject_ids, period_key, provider="", params_hash="", company_id=company_id
+            )
+        if not cached and params_hash:
+            cached = feature.read_values(
+                metric,
+                subject_model,
+                subject_ids,
+                period_key,
+                provider="push",
+                params_hash="",
+                company_id=company_id,
             )
         # Last resort: ignore provider (e.g., registry not loaded but cache exists)
         cache_any_provider_used = False
