@@ -37,6 +37,7 @@
         <field name="arch" type="xml">
             <form string="Add Farmer Change Request">
                 <header>
+                    <field name="show_cr_actions" invisible="1" />
                     <button
                         name="action_submit"
                         type="object"
@@ -53,7 +54,7 @@
                         icon="fa-check-square-o"
                         title="Validate Change Request"
                         class="btn-warning"
-                        invisible="state != 'pending'"
+                        invisible="state != 'pending' or not show_cr_actions"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button
@@ -62,7 +63,7 @@
                         string="Apply Changes"
                         icon="fa-thumbs-o-up"
                         class="btn-success"
-                        invisible="state != 'validated'"
+                        invisible="state != 'validated' or not show_cr_actions"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
                     />
                     <button
@@ -72,7 +73,7 @@
                         icon="fa-ban"
                         title="Reject Change Request"
                         class="btn-danger"
-                        invisible="state != 'pending'"
+                        invisible="state != 'pending' or not show_cr_actions"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button
@@ -271,14 +272,17 @@
         <field name="arch" type="xml">
             <form string="Add Farmer Change Request" edit="0">
                 <header>
+                    <field name="show_cr_actions" invisible="1" />
+                    <field name="show_assign_button" invisible="1" />
+                    <field name="show_reassign_button" invisible="1" />
                     <button
                         name="open_user_assignment_wiz"
                         type="object"
                         icon="fa-user-circle"
                         class="btn-primary"
                         string="Assign To Me"
-                        invisible="current_user_assigned or state not in ('draft', 'pending','validated', 'rejected')"
-                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator"
+                        invisible="not show_assign_button"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button
                         name="open_user_assignment_to_wiz"
@@ -286,8 +290,8 @@
                         icon="fa-user-circle"
                         class="btn-primary"
                         string="Reassign"
-                        invisible="not current_user_assigned or state not in ('pending','validated')"
-                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator"
+                        invisible="not show_reassign_button"
+                        groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_applicator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button
                         name="action_submit"
@@ -305,7 +309,7 @@
                         icon="fa-check-square-o"
                         title="Validate Change Request"
                         class="btn-warning"
-                        invisible="state != 'pending'"
+                        invisible="state != 'pending' or not show_cr_actions"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button
@@ -314,7 +318,7 @@
                         string="Apply Changes"
                         icon="fa-thumbs-o-up"
                         class="btn-success"
-                        invisible="state != 'validated'"
+                        invisible="state != 'validated' or not show_cr_actions"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_applicator"
                     />
                     <button
@@ -324,7 +328,7 @@
                         icon="fa-ban"
                         title="Reject Change Request"
                         class="btn-danger"
-                        invisible="state != 'pending'"
+                        invisible="state != 'pending' or not show_cr_actions"
                         groups="g2p_registry_base.group_g2p_admin,spp_change_request.group_spp_change_request_administrator,spp_change_request.group_spp_change_request_validator,spp_change_request.group_spp_change_request_hq_validator"
                     />
                     <button

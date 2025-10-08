@@ -531,11 +531,16 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         :raise UserError: Exception raised when something is not valid.
         """
         for rec in self:
-            is_admin = self.env.user.has_group(self.ADMIN_GROUP_NAME)
+            is_admin = self.env.user.has_group(self.ADMIN_GROUP_NAME) if self.ADMIN_GROUP_NAME else False
             assign_self = False
             if rec.change_request_id.assign_to_id:
                 if rec.change_request_id.assign_to_id.id != self.env.user.id:
-                    if self.env.user.id == self.change_request_id.create_uid:
+                    assign_self = True
+                    if self.env.user.id != (
+                        self.change_request_id.last_validated_by_id.id
+                        if self.change_request_id.last_validated_by_id
+                        else self.assign_to_id.id
+                    ):
                         assign_self = True
                     elif is_admin:
                         assign_self = False
@@ -610,7 +615,10 @@ class ChangeRequestSourceMixin(models.AbstractModel):
         """
         for rec in self:
             rec.current_user_assigned = False
-            if self.env.context.get("uid", False) == rec.assign_to_id.id:
+            user_id = self.env.user
+            if not rec.assign_to_id:
+                continue
+            if user_id.id == rec.assign_to_id.id:
                 rec.current_user_assigned = True
 
     def check_required_documents(self, additional_required_doc_type=None):

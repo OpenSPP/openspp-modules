@@ -290,7 +290,10 @@
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
       <field name="code">action = model.open_wizard()</field>
-      <field name="groups_id" eval="[(4, ref('spp_idqueue.group_g2p_id_validator'))]" />
+      <field
+            name="groups_id"
+            eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_validator'), ref('g2p_registry_base.group_g2p_admin')])]"
+        />
     </record>
 
     <record model="ir.actions.server" id="validate_requests">
@@ -300,7 +303,10 @@
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
       <field name="code">action = records.validate_requests()</field>
-      <field name="groups_id" eval="[(4, ref('spp_idqueue.group_g2p_id_validator'))]" />
+      <field
+            name="groups_id"
+            eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_validator'), ref('g2p_registry_base.group_g2p_admin')])]"
+        />
     </record>
 
     <record model="ir.actions.server" id="generate_requests">
@@ -310,7 +316,10 @@
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
       <field name="code">action = records.generate_validate_requests()</field>
-      <field name="groups_id" eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_distributor')])]" />
+      <field
+            name="groups_id"
+            eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_distributor'), ref('g2p_registry_base.group_g2p_admin')])]"
+        />
     </record>
 
     <record model="ir.actions.server" id="print_requests">
@@ -320,7 +329,10 @@
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
       <field name="code">action = records.print_requests()</field>
-      <field name="groups_id" eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_distributor')])]" />
+      <field
+            name="groups_id"
+            eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_distributor'), ref('g2p_registry_base.group_g2p_admin')])]"
+        />
     </record>
 
     <record model="ir.actions.server" id="distribute_requests">
@@ -330,7 +342,10 @@
       <field name="binding_view_types">list</field>
       <field name="state">code</field>
       <field name="code">action = records.distribute_requests()</field>
-      <field name="groups_id" eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_distributor')])]" />
+      <field
+            name="groups_id"
+            eval="[(6, 0, [ref('spp_idqueue.group_g2p_id_distributor'), ref('g2p_registry_base.group_g2p_admin')])]"
+        />
     </record>
 
 </odoo>

@@ -65,7 +65,6 @@ class ChangeRequestEditFarmer(models.Model):
         "family_name",
         "given_name",
         "addl_name",
-        "farmer_national_id",
         "gender",
         "marital_status",
         "birthdate",
@@ -219,40 +218,6 @@ class ChangeRequestEditFarmer(models.Model):
                 self.env["g2p.phone.number"].create(individual_phone_vals)
             else:
                 current_phone.write({"phone_no": mobile_no})
-
-    def insert_id(self, individual_id, national_id):
-        if national_id:
-            current_id = self.env[G2P_REG_ID_MODEL].search(
-                [
-                    ("partner_id", "=", individual_id),
-                    ("value", "=", national_id),
-                    (
-                        "id_type",
-                        "=",
-                        self.env.ref(NATIONAL_ID_TYPE_REF).id,
-                    ),
-                ]
-            )
-            if not current_id:
-                existing_national_id = self.env[G2P_REG_ID_MODEL].search(
-                    [
-                        ("partner_id", "=", individual_id),
-                        (
-                            "id_type",
-                            "=",
-                            self.env.ref(NATIONAL_ID_TYPE_REF).id,
-                        ),
-                    ]
-                )
-                id_vals = {
-                    "partner_id": individual_id,
-                    "value": national_id,
-                    "id_type": self.env.ref(NATIONAL_ID_TYPE_REF).id,
-                }
-                if existing_national_id:
-                    existing_national_id.write(id_vals)
-                else:
-                    self.env[G2P_REG_ID_MODEL].create(id_vals)
 
     def open_registrant_details_form(self):
         self.ensure_one()

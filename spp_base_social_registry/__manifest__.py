@@ -29,7 +29,9 @@
         "spp_base_spmis",
     ],
     "external_dependencies": {},
-    "data": [],
+    "data": [
+        "views/registrant_view.xml",
+    ],
     "assets": {},
     "demo": [],
     "images": [],

@@ -249,3 +249,96 @@ class TestEntitlement(Common):
         self.cycle.write({"state": "approved"})
         with self.assertRaisesRegex(UserError, "No Entitlement Manager defined."):
             entitlement_id.approve_entitlement()
+
+    def test_13_reject_entitlement_wizard(self):
+        """Test that `reject_entitlement` returns the correct wizard action."""
+        entitlement_id = self.env["g2p.entitlement"].create(
+            {
+                "partner_id": self.registrant.id,
+                "initial_amount": 1.0,
+                "cycle_id": self.cycle.id,
+                "state": "draft",
+                "valid_until": fields.Date.add(fields.Date.today(), days=1),
+            }
+        )
+        self.entitlement = entitlement_id
+        action = self.entitlement.reject_entitlement()
+        self.assertEqual(action["res_model"], "spp.reject.entitlement.wizard")
+        self.assertEqual(action["view_mode"], "form")
+        self.assertEqual(action["target"], "new")
+        self.assertIn("to_state", action["context"])
+        self.assertEqual(action["context"]["to_state"], "reject")
+
+    def test_14_internal_reject_entitlement(self):
+        """Test the internal `_reject_entitlement` method."""
+        # Test rejection from a valid state ('draft')
+        entitlement_id = self.env["g2p.entitlement"].create(
+            {
+                "partner_id": self.registrant.id,
+                "initial_amount": 1.0,
+                "cycle_id": self.cycle.id,
+                "state": "draft",
+                "valid_until": fields.Date.add(fields.Date.today(), days=1),
+            }
+        )
+        self.entitlement = entitlement_id
+        self.entitlement.state = "draft"
+        rejection_reason = "Invalid data provided."
+
+        with patch("odoo.fields.Date.today", return_value=date(2024, 1, 1)):
+            action = self.entitlement._reject_entitlement(to_state="reject", reject_reason=rejection_reason)
+
+        self.assertEqual(self.entitlement.state, "reject")
+        self.assertEqual(self.entitlement.rejected_reason, rejection_reason)
+        self.assertEqual(self.entitlement.date_rejected, date(2024, 1, 1))
+
+        # Check notification
+        self.assertEqual(action["type"], "ir.actions.client")
+        self.assertEqual(action["tag"], "display_notification")
+        self.assertEqual(action["params"]["type"], "danger")
+        self.assertEqual(action["params"]["message"], "Entitlement Rejected")
+
+        # Test rejection from an invalid state ('approved')
+        self.entitlement.state = "approved"
+        self.entitlement._reject_entitlement(to_state="reject", reject_reason="Should not work")
+        self.assertEqual(self.entitlement.state, "approved", "Entitlement in 'approved' state should not be rejected.")
+
+    def test_15_reset_to_pending_wizard(self):
+        """Test that `reset_to_pending` returns the correct wizard action."""
+        entitlement_id = self.env["g2p.entitlement"].create(
+            {
+                "partner_id": self.registrant.id,
+                "initial_amount": 1.0,
+                "cycle_id": self.cycle.id,
+                "state": "draft",
+                "valid_until": fields.Date.add(fields.Date.today(), days=1),
+            }
+        )
+        self.entitlement = entitlement_id
+        action = self.entitlement.reset_to_pending()
+        self.assertEqual(action["res_model"], "spp.reset.pending.entitlement.wizard")
+        self.assertEqual(action["view_mode"], "form")
+        self.assertEqual(action["target"], "new")
+
+    def test_16_internal_reset_to_pending(self):
+        """Test the internal `_reset_to_pending` method."""
+        entitlement_id = self.env["g2p.entitlement"].create(
+            {
+                "partner_id": self.registrant.id,
+                "initial_amount": 1.0,
+                "cycle_id": self.cycle.id,
+                "state": "draft",
+                "valid_until": fields.Date.add(fields.Date.today(), days=1),
+            }
+        )
+        self.entitlement = entitlement_id
+        self.entitlement.state = "reject"
+        action = self.entitlement._reset_to_pending()
+
+        self.assertEqual(self.entitlement.state, "pending_validation")
+
+        # Check notification
+        self.assertEqual(action["type"], "ir.actions.client")
+        self.assertEqual(action["tag"], "display_notification")
+        self.assertEqual(action["params"]["type"], "success")
+        self.assertEqual(action["params"]["message"], "Entitlement Reset to Pending")

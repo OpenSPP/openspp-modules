@@ -14,6 +14,20 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
             <xpath expr="//field[@name='entitlements_count']" position="after">
                 <field name="inkind_entitlements_count" string="In-kind Entitlements" />
             </xpath>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">0</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_cycle_membership_custom_tree" model="ir.ui.view">
+        <field name="name">view_cycle_membership_custom_tree</field>
+        <field name="model">g2p.cycle.membership</field>
+        <field name="inherit_id" ref="g2p_programs.view_cycle_membership_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">0</attribute>
+            </xpath>
         </field>
     </record>
 

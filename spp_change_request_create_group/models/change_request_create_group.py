@@ -254,23 +254,6 @@ class ChangeRequestCreateGroup(models.Model):
             if phone:
                 individual_vals["phone_number_ids"] = phone
 
-            reg_ids = (
-                [
-                    (
-                        Command.create(
-                            {
-                                "id_type": self.env.ref("spp_change_request_create_group.unified_id_type").id,
-                                "value": self.uid_number,
-                            }
-                        )
-                    )
-                ]
-                if self.uid_number
-                else []
-            )
-            if reg_ids:
-                individual_vals["reg_ids"] = reg_ids
-
             individual = self.env[MODEL_RES_PARTNER].create(individual_vals)
 
         # Create the group (res.partner)

@@ -313,6 +313,7 @@ Part of OpenSPP. See LICENSE file for full copyright and licensing details.
                                 force_save="1"
                                 readonly="state != 'draft'"
                             />
+                            <field name="validation_stage" string="Validation Stage" readonly="1" />
                         </group>
                     </group>
                     <field name="validator_ids" readonly="1" colspan="4" nolabel="1">
