@@ -111,7 +111,7 @@ class SPPDataExporter(models.Model):
             raw_data_records = []
             for model in rec.model_ids:
                 model_obj = self.env[model.model]
-                records = model_obj.search([])
+                records = model_obj.sudo().search([])
                 record_count = len(records)
                 data = []
                 if record_count > 0:
