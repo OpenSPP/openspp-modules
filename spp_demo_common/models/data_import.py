@@ -13,6 +13,10 @@ class SPPDataImporter(models.Model):
     _name = "spp.data.importer"
     _description = "SPP Data Importer"
 
+    SKIP_FIELDS = [
+        "message_partner_ids"
+    ]
+
     name = fields.Char(string="Name", required=True)
     import_file = fields.Binary(string="Import File", required=True)
     import_filename = fields.Char(string="Import Filename", required=True)
@@ -340,6 +344,13 @@ class SPPDataImporter(models.Model):
             self.locked_reason = f"Import completed successfully: {success_count} records created."
             self.remarks = f"Import completed successfully: {success_count} records created."
 
+    def _check_skip_fields(self, json_data):
+        """Remove fields that should be skipped during record creation."""
+        for field in self.SKIP_FIELDS:
+            if field in json_data:
+                json_data.pop(field, None)
+        return json_data
+    
     def _create_single_record(self, raw, created_mapping, _creating=None):
         """
         Creates a single record, handling many2one dependencies recursively.
@@ -369,6 +380,8 @@ class SPPDataImporter(models.Model):
 
         try:
             json_data = json.loads(raw.json_data)
+            json_data = self._check_skip_fields(json_data)
+            
             model = self.env[raw.model_name]
 
             # Check if record already exists
