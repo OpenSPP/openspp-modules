@@ -380,6 +380,7 @@ class SPPDataImporter(models.Model):
             creation_data = self._build_creation_data(raw, json_data, model, created_mapping, _creating)
 
             # Create the record
+            _logger.info(f"Creating {raw.model_name} with data: {creation_data}")
             new_record = model.create(creation_data)
             created_mapping[raw_ref] = new_record.id
 
