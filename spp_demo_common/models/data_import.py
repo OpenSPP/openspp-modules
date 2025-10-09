@@ -418,7 +418,7 @@ class SPPDataImporter(models.Model):
                 if not model._fields[field].store:
                     continue
                 domain.append((field, "=", json_data[field]))
-
+        _logger.info(f"Checking existing record for raw {raw.id} with domain: {domain}")
         if domain:
             existing = model.search(domain, limit=1)
             if existing:
@@ -444,6 +444,7 @@ class SPPDataImporter(models.Model):
                 continue
 
             field = model._fields[field_name]
+
 
             # Skip one2many fields
             if field.type == "one2many":
