@@ -13,9 +13,7 @@ class SPPDataImporter(models.Model):
     _name = "spp.data.importer"
     _description = "SPP Data Importer"
 
-    SKIP_FIELDS = [
-        "message_partner_ids"
-    ]
+    SKIP_FIELDS = ["message_partner_ids"]
 
     name = fields.Char(string="Name", required=True)
     import_file = fields.Binary(string="Import File", required=True)
@@ -337,11 +335,12 @@ class SPPDataImporter(models.Model):
         if failed_count > 0:
             self.state = "error"
             self.locked = False
+            self.locked_reason = None
             self.remarks = f"Creation completed with issues: {success_count} created, {failed_count} failed."
         elif success_count == len(self.raw_ids):
             self.state = "completed"
             self.locked = True
-            self.locked_reason = f"Import completed successfully: {success_count} records created."
+            self.locked_reason = None
             self.remarks = f"Import completed successfully: {success_count} records created."
 
     def _check_skip_fields(self, json_data):
@@ -350,7 +349,7 @@ class SPPDataImporter(models.Model):
             if field in json_data:
                 json_data.pop(field, None)
         return json_data
-    
+
     def _create_single_record(self, raw, created_mapping, _creating=None):
         """
         Creates a single record, handling many2one dependencies recursively.
@@ -381,7 +380,7 @@ class SPPDataImporter(models.Model):
         try:
             json_data = json.loads(raw.json_data)
             json_data = self._check_skip_fields(json_data)
-            
+
             model = self.env[raw.model_name]
 
             # Check if record already exists
@@ -440,8 +439,8 @@ class SPPDataImporter(models.Model):
                         "state": "saved",
                         "db_id": existing.id,
                         "remarks": "Record already exists, skipped creation.",
-                        }
-                    )
+                    }
+                )
                 created_mapping[raw_ref] = existing.id
                 _logger.info(f"Skipped creation for raw {raw.id}, record already exists with ID {existing.id}")
                 return existing.id
@@ -457,7 +456,6 @@ class SPPDataImporter(models.Model):
                 continue
 
             field = model._fields[field_name]
-
 
             # Skip one2many fields
             if field.type == "one2many":
@@ -505,9 +503,7 @@ class SPPDataImporter(models.Model):
                 _logger.info(
                     f"Resolving many2many for field {field_name} with value {value} | referencing raw {ref_raw_id}"
                 )
-                _logger.info(
-                    f"Raw JSON DATA {ref_raw.json_data}"
-                )
+                _logger.info(f"Raw JSON DATA {ref_raw.json_data}")
 
                 if ref_raw and not ref_raw.db_id:
                     resolved_id = self._create_single_record(ref_raw, created_mapping, _creating)

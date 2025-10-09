@@ -32,7 +32,7 @@
                 <div
                     class="alert alert-warning text-center o_form_header"
                     role="status"
-                    invisible="not locked"
+                    invisible="not locked and not locked_reason"
                 >
                     <span>Warning: Operation in progress: </span>
                     <field name="locked_reason" class="o_stat_value" />
