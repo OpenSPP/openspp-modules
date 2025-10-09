@@ -51,10 +51,9 @@ class SPPDataImporterSummary(models.Model):
     validated_count = fields.Integer(string="Validated Count", compute="_compute_counts", readonly=True)
     error_count = fields.Integer(string="Error Count", compute="_compute_counts", readonly=True)
     state = fields.Selection(
-        [("draft", "Draft"), ("completed", "Completed"), ("error", "Error")],
+        [("draft", "Draft"), ("completed", "Completed"), ("partial", "Partial"), ("error", "Error")],
         string="State",
-        default="draft",
-        required=True,
+        compute="_compute_state",
     )
 
     def _compute_counts(self):
@@ -63,5 +62,18 @@ class SPPDataImporterSummary(models.Model):
                 lambda r, model_name=rec.model_name: r.model_name == model_name
             )
             rec.success_count = len(importer_raw.filtered(lambda r: r.state in ["saved", "created"]))
-            rec.validated_count = len(importer_raw.filtered(lambda r: r.state == "validated"))
+            rec.validated_count = len(importer_raw.filtered(lambda r: r.validated))
             rec.error_count = len(importer_raw.filtered(lambda r: r.state == "error"))
+
+    def _compute_state(self):
+        for rec in self:
+            if rec.importer_id.state == "error":
+                rec.state = "error"
+            elif rec.error_count > 0 and rec.success_count > 0:
+                rec.state = "partial"
+            elif rec.error_count > 0:
+                rec.state = "error"
+            elif rec.success_count == rec.record_count and rec.record_count > 0:
+                rec.state = "completed"
+            else:
+                rec.state = "draft"

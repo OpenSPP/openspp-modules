@@ -165,7 +165,12 @@
                         </page>
                         <page string="Summary" name="summary_ids" invisible="state in ['draft','cancelled']">
                             <field name="summary_ids" readonly="1">
-                                <tree>
+                                <tree
+                                    decoration-danger="state=='error'"
+                                    decoration-info="state=='partial'"
+                                    decoration-success="state=='completed'"
+                                    decoration-muted="state=='draft'"
+                                >
                                     <field name="model_name" />
                                     <field name="name" column_invisible="1" />
                                     <field name="record_count" />
