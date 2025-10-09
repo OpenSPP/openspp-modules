@@ -45,7 +45,7 @@ class OpensppIndicatorRegistry(models.AbstractModel):
             "capabilities": capabilities or {},
             "provider": provider or name,
         }
-        _logger.info("[openspp.metrics] Registered metric provider %s", name)
+        _logger.info("[openspp.indicator] Registered indicator provider %s", name)
 
     @api.model
     def get(self, name: str) -> dict[str, Any] | None:

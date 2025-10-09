@@ -22,7 +22,7 @@ class ResPartner(models.Model):
 
     def action_open_metrics(self):
         self.ensure_one()
-        action = self.env.ref("openspp_metrics_ui.action_openspp_partner_metrics").read()[0]
+        action = self.env.ref("spp_indicators_ui.action_openspp_partner_metrics").read()[0]
         # Filter to this partner
         action["domain"] = [
             ("company_id", "=", self.env.company.id),

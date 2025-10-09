@@ -648,6 +648,37 @@ class CelTranslator(models.AbstractModel):
                             break
                 resolved_ids: list[int] = []
                 if comodel and isinstance(right, str):
+                    if "value" in self.env[comodel]._fields:
+                        direct = (
+                            self.env[comodel]
+                            .with_context(active_test=False)
+                            .search([("value", "=", right.capitalize())], limit=None)
+                        )
+                        if not direct and right.lower() in {"male", "female"}:
+                            code_defaults = {"male": "M", "female": "F"}
+                            direct = (
+                                self.env[comodel]
+                                .with_context(active_test=False)
+                                .sudo()
+                                .create(
+                                    {
+                                        "value": right.capitalize(),
+                                        "code": code_defaults[right.lower()],
+                                    }
+                                )
+                            )
+                        if direct:
+                            resolved_ids = direct.ids
+                            if op in ("=", "=="):
+                                if len(resolved_ids) == 1:
+                                    return [(field, "=", resolved_ids[0])]
+                                return [(field, "in", resolved_ids)]
+                            if op == "in":
+                                return [(field, "in", resolved_ids)]
+                            if op == "ilike":
+                                base_domain = [(field, "in", resolved_ids)]
+                                return expression.OR([base_domain, [(f"{field}.{label_field}", "ilike", right)]])
+
                     name_clauses: list[list[Any]] = []
                     for attr in ("value", "name", "code"):
                         if attr in self.env[comodel]._fields:
@@ -658,6 +689,17 @@ class CelTranslator(models.AbstractModel):
                     else:
                         lookup_domain = [("name", "ilike", right)]
                     matches = self.env[comodel].with_context(active_test=False).search(lookup_domain, limit=None)
+                    try:
+                        _logger.info(
+                            "[CEL TRANSLATOR] smart-op lookup model=%s field=%s op=%s value=%s matches=%s",
+                            model_name,
+                            field,
+                            op,
+                            right,
+                            [(m.id, getattr(m, "value", None), getattr(m, "name", None)) for m in matches],
+                        )
+                    except Exception:
+                        pass
                     if matches:
                         target = right.casefold()
                         exact = matches.filtered(
@@ -666,7 +708,7 @@ class CelTranslator(models.AbstractModel):
                                 for attr in ("value", "name", "code")
                             )
                         )
-                        resolved_ids = exact.ids or []
+                        resolved_ids = exact.ids if exact else []
                 if resolved_ids:
                     if op in ("=", "=="):
                         if len(resolved_ids) == 1:

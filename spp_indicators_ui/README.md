@@ -1,7 +1,7 @@
 # OpenSPP Metrics UI for Registrants
 
 Adds a smart button "Metrics" on res.partner (used for both Individuals and Groups in OpenG2P/OpenSPP) that
-opens a list of cached metric values from `openspp.feature.value` for the current record.
+opens a list of cached metric values from `openspp.indicator.value` for the current record.
 
 - Depends on: `openspp_metrics`
 - Works for both individuals and groups (same `res.partner` model; differentiated by `is_group`).

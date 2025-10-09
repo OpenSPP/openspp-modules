@@ -34,7 +34,7 @@ Modules
 
 - `openspp_metrics` (new core)
   - Owns feature store, provider registry, push/pull APIs, invalidation, admin dashboards.
-  - Exposes Odoo models: `openspp.metric.registry`, `openspp.function.registry`, `openspp.feature.store`.
+  - Exposes Odoo models: `openspp.indicator.registry`, `openspp.function.registry`, `openspp.feature.store`.
 - `cel_domain` (existing)
   - Soft‑depends at runtime; uses the registries to evaluate metrics in CEL expressions.
 - Reuse elsewhere
@@ -126,7 +126,7 @@ Preview vs Evaluate
 
 6.1 Registration (soft dependency)
 
-- Providers register metrics in `post_init_hook` only if `openspp.metric.registry` exists.
+- Providers register metrics in `post_init_hook` only if `openspp.indicator.registry` exists.
 - Example
 
 ```
@@ -135,10 +135,10 @@ from odoo import api, SUPERUSER_ID
 
 def post_init_hook(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
-    if 'openspp.metric.registry' not in env:
+    if 'openspp.indicator.registry' not in env:
         return
     from .providers.attendance import AttendanceProvider
-    env['openspp.metric.registry'].register(
+    env['openspp.indicator.registry'].register(
         name='education.attendance_pct',
         handler=AttendanceProvider(),
         return_type='number',
@@ -431,12 +431,12 @@ This repository now ships Phase 1 fully and key Phase 2 items:
 
 - New addon `openspp_metrics`
 
-  - Feature store model/table: `openspp.feature.value`.
+  - Feature store model/table: `openspp.indicator.value`.
     - Columns now include: `metric`, `provider`, `subject_model`, `subject_id`, `period_key`, `value_json`,
       `value_type`, `params_hash`, `coverage`, `as_of`, `fetched_at`, `expires_at`, `source`, `error_code`,
       `error_message`, `updated_at`, `company_id`.
     - Unique key: `(metric, provider, subject_model, subject_id, period_key, params_hash, company_id)`.
-  - Registry: `openspp.metric.registry` (Python‑backed) + `register_static()` for deterministic startup.
+  - Registry: `openspp.indicator.registry` (Python‑backed) + `register_static()` for deterministic startup.
   - Service: `openspp.metrics.evaluate()` with cache_only/refresh/fallback, ID mapping chain, and stats
     (requested/hits/misses/fresh/coverage).
   - HTTP: `POST /api/metrics/push`, `POST /api/metrics/invalidate` (X‑Api‑Key or admin session).

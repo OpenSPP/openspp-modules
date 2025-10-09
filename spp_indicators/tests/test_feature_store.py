@@ -185,7 +185,7 @@ class TestFeatureStoreTTL(TransactionCase):
     def setUp(self):
         super().setUp()
         self.metrics = self.env["openspp.indicator"].sudo()
-        self.Feature = self.env["openspp.feature.value"].sudo()
+        self.Feature = self.env["openspp.indicator.value"].sudo()
         self.metric = "test.ttl.metric"
         self.period_key = "rolling_30d"
         self.partner = self.env["res.partner"].create({"name": "TTL Subject", "is_registrant": True})

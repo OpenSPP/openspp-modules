@@ -11,7 +11,7 @@ class TestMetricsNamespaced(TransactionCase):
 
     def test_namespaced_metric_compare_individuals(self):
         # Seed cached values without provider (provider-agnostic push)
-        FV = self.env["openspp.feature.value"]
+        FV = self.env["openspp.indicator.value"]
         FV.sudo().upsert_values(
             [
                 {
@@ -51,7 +51,7 @@ class TestMetricsNamespaced(TransactionCase):
         M = self.env["g2p.group.membership"]
         M.create({"group": G.id, "individual": c1.id, "is_ended": False})
         M.create({"group": G.id, "individual": c2.id, "is_ended": False})
-        FV = self.env["openspp.feature.value"]
+        FV = self.env["openspp.indicator.value"]
         # Values 90 and 100 → avg 95
         FV.sudo().upsert_values(
             [

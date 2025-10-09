@@ -7,6 +7,7 @@ from typing import Any
 from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
+_PARAMS_UNSPECIFIED = object()
 
 
 class OpensppIndicatorService(models.AbstractModel):
@@ -22,7 +23,7 @@ class OpensppIndicatorService(models.AbstractModel):
         period_key: str,
         *,
         mode: str = "fallback",
-        params: dict[str, Any] | None = None,
+        params: Any = _PARAMS_UNSPECIFIED,
     ) -> tuple[dict[int, Any], dict[str, Any]]:
         """Evaluate a metric for many subjects.
 
@@ -63,19 +64,36 @@ class OpensppIndicatorService(models.AbstractModel):
         import hashlib as _hashlib
         import json as _json
 
-        params_norm = params or {}
-        try:
-            params_json = _json.dumps(params_norm, sort_keys=True, separators=(",", ":"))
-        except Exception:
-            params_json = "{}"
-        params_hash = _hashlib.sha1(params_json.encode("utf-8")).hexdigest() if params_json else ""
+        params_specified = params is not _PARAMS_UNSPECIFIED and params is not None
+        params_norm: dict[str, Any] = {}
+        if params_specified:
+            if isinstance(params, dict):
+                params_norm = params
+            else:
+                params_norm = dict(params or {})
+        params_hash = ""
+        if params_specified:
+            try:
+                params_json = _json.dumps(params_norm, sort_keys=True, separators=(",", ":"))
+            except Exception:
+                params_json = ""
+            else:
+                params_hash = _hashlib.sha1(params_json.encode("utf-8")).hexdigest() if params_json else ""
+        else:
+            params_norm = {}
         # Apply provider config (optional, non-invasive overrides); avoid querying if table missing
         cfg_rec = None
         try:
-            self.env.cr.execute("SELECT to_regclass('public.openspp_metrics_provider')")
+            self.env.cr.execute("SELECT to_regclass('public.openspp_indicator_provider')")
             exists = self.env.cr.fetchone()[0]
             if exists:
-                cfg_rec = self.env["openspp.indicator.provider"].search([("metric", "=", metric)], limit=1)
+                # company = self.env["res.company"].browse(company_id)
+                Provider = self.env["openspp.indicator.provider"].with_company(self.env.company).sudo()
+                domain_common = [("metric", "=", metric), ("company_id", "=", company_id)]
+                if provider_name:
+                    cfg_rec = Provider.search(domain_common + [("name", "=", provider_name)], limit=1)
+                if not cfg_rec:
+                    cfg_rec = Provider.search(domain_common, order="write_date desc, id desc", limit=1)
         except Exception:
             cfg_rec = None
         now = fields.Datetime.now()
@@ -111,11 +129,41 @@ class OpensppIndicatorService(models.AbstractModel):
                 params_hash=params_hash,
                 company_id=company_id,
             )
-        if not cached and params_hash:
+        if not cached and not params_specified:
+            cached = feature.read_values(
+                metric,
+                subject_model,
+                subject_ids,
+                period_key,
+                provider=provider_name,
+                params_hash=None,
+                company_id=company_id,
+            )
+        if not cached and not params_specified:
+            cached = feature.read_values(
+                metric,
+                subject_model,
+                subject_ids,
+                period_key,
+                provider="",
+                params_hash=None,
+                company_id=company_id,
+            )
+        if not cached and not params_specified:
+            cached = feature.read_values(
+                metric,
+                subject_model,
+                subject_ids,
+                period_key,
+                provider="push",
+                params_hash=None,
+                company_id=company_id,
+            )
+        if not cached and params_hash and not params_norm:
             cached = feature.read_values(
                 metric, subject_model, subject_ids, period_key, provider="", params_hash="", company_id=company_id
             )
-        if not cached and params_hash:
+        if not cached and params_hash and not params_norm:
             cached = feature.read_values(
                 metric,
                 subject_model,
@@ -143,7 +191,12 @@ class OpensppIndicatorService(models.AbstractModel):
             if allow_any_provider:
                 try:
                     cached = feature.read_values_any_provider(
-                        metric, subject_model, subject_ids, period_key, params_hash=params_hash, company_id=company_id
+                        metric,
+                        subject_model,
+                        subject_ids,
+                        period_key,
+                        params_hash=(params_hash if params_specified else None),
+                        company_id=company_id,
                     )
                     if cached:
                         cache_any_provider_used = True
@@ -155,7 +208,10 @@ class OpensppIndicatorService(models.AbstractModel):
             row = cached.get(sid)
             if row and row.get("value") is not None:
                 exp = row.get("expires_at")
-                if mode == "refresh" or (mode == "fallback" and exp and exp < now):
+                if mode == "refresh":
+                    values[sid] = row["value"]
+                    missing.append(sid)
+                elif mode == "fallback" and exp and exp < now:
                     missing.append(sid)
                 else:
                     values[sid] = row["value"]
@@ -222,7 +278,7 @@ class OpensppIndicatorService(models.AbstractModel):
                 try:
                     computed = handler.compute_batch(self.env, ctx, batch_ids)
                 except Exception as e:
-                    _logger.exception("[openspp.metrics] provider %s failed: %s", metric, e)
+                    _logger.exception("[openspp.indicator] provider %s failed: %s", metric, e)
                     computed = {}
                 rows = []
                 for sid, val in (computed or {}).items():

@@ -18,7 +18,7 @@ class TestProviderConfigOverrides(TransactionCase):
             def compute_batch(self, env, ctx, subject_ids):
                 return {int(s): 1 for s in subject_ids}
 
-        self.env["openspp.metric.registry"].register(
+        self.env["openspp.indicator.registry"].register(
             name="test_household.size",
             handler=_MiniHHProvider(),
             return_type="number",
@@ -43,7 +43,7 @@ class TestProviderConfigOverrides(TransactionCase):
         svc.evaluate("test_household.size", "res.partner", [hh.id], "current", mode="refresh")
 
         # Validate expires_at is close (<< 1 minute), and company_id is set
-        row = self.env["openspp.feature.value"].search(
+        row = self.env["openspp.indicator.value"].search(
             [
                 ("metric", "=", "test_household.size"),
                 ("subject_model", "=", "res.partner"),

@@ -170,9 +170,15 @@ class IndicatorsController(http.Controller):
         params = payload.get("params") or {}
         if params and not isinstance(params, dict):
             return self._json({"error": "invalid_params", "detail": "params must be a JSON object."}, status=400)
-        # For cache friendliness with evaluate(cache_only) calls that omit params,
-        # we only honor an explicit params_hash; otherwise we index under empty hash.
-        params_hash = payload.get("params_hash") or ""
+        # For cache friendliness we derive a deterministic params hash for non-empty params;
+        # fallback to the empty hash so cache_only lookups without params still match.
+        params_hash = payload.get("params_hash")
+        if params_hash:
+            params_hash = str(params_hash)
+        elif params:
+            params_hash = self._hash_params(params)
+        else:
+            params_hash = ""
         # Default provider label is "push" to align with tests and common usage.
         provider_label = payload.get("provider") or "push"
         errors_only = bool(payload.get("errors_only"))

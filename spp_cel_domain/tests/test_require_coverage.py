@@ -14,7 +14,7 @@ class TestRequireCoverage(TransactionCase):
         self.exec = self.env["cel.executor"].with_context(cel_profile="registry_individuals", cel_cfg=self.cfg)
 
     def test_require_coverage_gate(self):
-        FV = self.env["openspp.feature.value"]
+        FV = self.env["openspp.indicator.value"]
         # Only one value present → coverage=0.5 < 0.8
         FV.sudo().upsert_values(
             [

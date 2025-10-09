@@ -21,6 +21,20 @@ class OpensppIndicatorProvider(models.Model):
     retry_max = fields.Integer(default=0)
     id_mapping_fields = fields.Char(help="Comma-separated field chain e.g. school_student_id,external_id,national_id")
     id_mapping_required = fields.Boolean(default=False)
+    company_id = fields.Many2one(
+        "res.company",
+        required=True,
+        default=lambda self: self.env.company,
+        index=True,
+    )
+
+    _sql_constraints = [
+        (
+            "openspp_provider_name_metric_company_unique",
+            "unique(name, metric, company_id)",
+            "A provider with the same name and metric already exists for this company.",
+        )
+    ]
 
     @api.model
     def to_registry_info(self, rec):

@@ -43,7 +43,7 @@ class TestCycles(TransactionCase):
 
     def test_last_first_previous_next(self):
         # Push values for each cycle to exercise cycle helpers with metrics
-        FV = self.env["openspp.feature.value"]
+        FV = self.env["openspp.indicator.value"]
         FV.sudo().upsert_values(
             [
                 {
