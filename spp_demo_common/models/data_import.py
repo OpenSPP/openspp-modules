@@ -490,6 +490,9 @@ class SPPDataImporter(models.Model):
                 _logger.info(
                     f"Resolving many2many for field {field_name} with value {value} | referencing raw {ref_raw_id}"
                 )
+                _logger.info(
+                    f"Raw JSON DATA {ref_raw.json_data}"
+                )
 
                 if ref_raw and not ref_raw.db_id:
                     resolved_id = self._create_single_record(ref_raw, created_mapping, _creating)
