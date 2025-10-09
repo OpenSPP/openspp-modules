@@ -14,6 +14,16 @@ class SPPDataImporter(models.Model):
     _description = "SPP Data Importer"
 
     SKIP_FIELDS = ["message_partner_ids"]
+    DOMAIN_FIELDS = [
+        "name", 
+        "code", 
+        "value", 
+        "phone_no", 
+        "email", 
+        "display_name", 
+        "group",
+        "individual"
+        ]
 
     name = fields.Char(string="Name", required=True)
     import_file = fields.Binary(string="Import File", required=True)
@@ -104,6 +114,10 @@ class SPPDataImporter(models.Model):
                     "message": "The data import has been completed successfully.",
                     "sticky": False,
                     "type": "success",
+                    "next": {
+                        "type": "ir.actions.client",
+                        "tag": "reload",
+                    },
                 },
             }
 
@@ -188,6 +202,10 @@ class SPPDataImporter(models.Model):
                     "message": f"Validation failed for {len(failed_count)} records. Please check the details.",
                     "sticky": False,
                     "type": "danger",
+                    "next": {
+                        "type": "ir.actions.client",
+                        "tag": "reload",
+                    },
                 },
             }
         
@@ -206,6 +224,10 @@ class SPPDataImporter(models.Model):
                     "message": f"Validation succeeded for {len(failed_count)} records.",
                     "sticky": False,
                     "type": "success",
+                    "next": {
+                        "type": "ir.actions.client",
+                        "tag": "reload",
+                    },
                 },
             }
 
@@ -381,6 +403,10 @@ class SPPDataImporter(models.Model):
                     "message": self.remarks,
                     "sticky": False,
                     "type": "warning",
+                    "next": {
+                        "type": "ir.actions.client",
+                        "tag": "reload",
+                    },
                 },
             }
         elif success_count == len(self.raw_ids):
@@ -396,6 +422,10 @@ class SPPDataImporter(models.Model):
                     "message": self.remarks,
                     "sticky": False,
                     "type": "success",
+                    "next": {
+                        "type": "ir.actions.client",
+                        "tag": "reload",
+                    },
                 },
             }
 
@@ -479,7 +509,7 @@ class SPPDataImporter(models.Model):
 
     def _check_existing_record(self, raw, json_data, model, created_mapping, raw_ref):
         """Check if record already exists based on common identifying fields."""
-        possible_fields = ["name", "code", "value", "phone_no", "display_name", "email"]
+        possible_fields = self.DOMAIN_FIELDS
         domain = []
         for field in possible_fields:
             if field in json_data and field in model._fields:

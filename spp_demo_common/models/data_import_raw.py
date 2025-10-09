@@ -67,11 +67,9 @@ class SPPDataImporterSummary(models.Model):
 
     def _compute_state(self):
         for rec in self:
-            if rec.importer_id.state == "error":
-                rec.state = "error"
-            elif rec.error_count > 0 and rec.success_count > 0:
+            if rec.error_count > 0 and rec.success_count > 0:
                 rec.state = "partial"
-            elif rec.error_count > 0:
+            elif rec.error_count > 0 and rec.success_count == 0:
                 rec.state = "error"
             elif rec.success_count == rec.record_count and rec.record_count > 0:
                 rec.state = "completed"
