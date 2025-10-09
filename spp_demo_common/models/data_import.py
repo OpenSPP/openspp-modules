@@ -105,18 +105,19 @@ class SPPDataImporter(models.Model):
             self.state = "imported"
             self.locked = False
             self.locked_reason = None
-            # Return a notification
+            total_records = len(self.raw_ids)
+
             return {
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
                     "title": "Import Completed",
-                    "message": "The data import has been completed successfully.",
+                    "message": f"The data import has been completed successfully. {total_records} records processed.",
                     "sticky": False,
                     "type": "success",
                     "next": {
                         "type": "ir.actions.client",
-                        "tag": "reload",
+                        "tag": "reload_view",
                     },
                 },
             }
@@ -188,48 +189,37 @@ class SPPDataImporter(models.Model):
 
         # Check if all records validated successfully
         failed_count = self.raw_ids.filtered(lambda r: r.state == "error")
+        success_count = self.raw_ids.filtered(lambda r: r.state == "validated")
+        total_count = len(self.raw_ids)
+        message = ""
+        kind = "success"
         if failed_count:
             self.state = "error"
-            self.remarks = f"Validation failed for {len(failed_count)} records."
-            self.locked = False
-
-            # Return a notification
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": "Validation Failed",
-                    "message": f"Validation failed for {len(failed_count)} records. Please check the details.",
-                    "sticky": False,
-                    "type": "danger",
-                    "next": {
-                        "type": "ir.actions.client",
-                        "tag": "reload",
-                    },
-                },
-            }
-        
+            message = f"Validation failed for {len(failed_count)} out of {total_count} records."
+            kind = "danger"
         else:
             self.state = "validated"
-            self.validated = True
-            self.remarks = "Import validated successfully."
-            self.locked = False
+            message = f"Validation succeeded for {total_count} records."
 
-            # Return a notification
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": "Successful Validation",
-                    "message": f"Validation succeeded for {len(failed_count)} records.",
-                    "sticky": False,
-                    "type": "success",
-                    "next": {
-                        "type": "ir.actions.client",
-                        "tag": "reload",
-                    },
+        self.remarks = message
+        self.locked = False
+        self.locked_reason = None
+
+        # Return a notification
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": "Validation Result",
+                "message": message,
+                "sticky": False,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.client",
+                    "tag": "reload",
                 },
-            }
+            },
+        }
 
     def _process_related_fields(self, model, json_data, raw_mapping):
         """
@@ -389,45 +379,35 @@ class SPPDataImporter(models.Model):
         # Update import state
         failed_count = len(self.raw_ids.filtered(lambda r: r.state == "error"))
         success_count = len(self.raw_ids.filtered(lambda r: r.state in ["created", "saved"]))
-
+        total_count = len(self.raw_ids)
+        message = ""
+        kind = "success"
         if failed_count > 0:
             self.state = "error"
-            self.locked = False
-            self.locked_reason = None
-            self.remarks = f"Creation completed with issues: {success_count} created, {failed_count} failed."
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": "Creation Completed with Issues",
-                    "message": self.remarks,
-                    "sticky": False,
-                    "type": "warning",
-                    "next": {
-                        "type": "ir.actions.client",
-                        "tag": "reload",
-                    },
-                },
-            }
-        elif success_count == len(self.raw_ids):
+            message = f"Creation completed with issues: {success_count} created, {failed_count} failed."
+            kind = "warning"
+        elif success_count == total_count:
             self.state = "completed"
-            self.locked = True
-            self.locked_reason = None
-            self.remarks = f"Import completed successfully: {success_count} records created."
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": "Import Completed",
-                    "message": self.remarks,
-                    "sticky": False,
-                    "type": "success",
-                    "next": {
-                        "type": "ir.actions.client",
-                        "tag": "reload",
-                    },
+            message = f"Import completed successfully: {success_count} records created."
+        
+        self.locked = False
+        self.locked_reason = None
+        self.remarks = message
+
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": "Creation Result",
+                "message": message,
+                "sticky": False,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.client",
+                    "tag": "reload",
                 },
-            }
+            },
+        }
 
 
     def _check_skip_fields(self, json_data):
