@@ -94,7 +94,18 @@ class SPPDataImporter(models.Model):
             self.raw_ids = [(0, 0, vals) for vals in raw_vals]
             self.state = "imported"
             self.locked = False
-            self.locked_reason = "Import completed successfully."
+            self.locked_reason = None
+            # Return a notification
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Import Completed",
+                    "message": "The data import has been completed successfully.",
+                    "sticky": False,
+                    "type": "success",
+                },
+            }
 
         except Exception as e:
             raise ValidationError(f"Failed to parse import file: {e}") from e
@@ -167,11 +178,36 @@ class SPPDataImporter(models.Model):
             self.state = "error"
             self.remarks = f"Validation failed for {len(failed_count)} records."
             self.locked = False
+
+            # Return a notification
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Validation Failed",
+                    "message": f"Validation failed for {len(failed_count)} records. Please check the details.",
+                    "sticky": False,
+                    "type": "danger",
+                },
+            }
+        
         else:
             self.state = "validated"
             self.validated = True
             self.remarks = "Import validated successfully."
             self.locked = False
+
+            # Return a notification
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Successful Validation",
+                    "message": f"Validation succeeded for {len(failed_count)} records.",
+                    "sticky": False,
+                    "type": "success",
+                },
+            }
 
     def _process_related_fields(self, model, json_data, raw_mapping):
         """
@@ -337,11 +373,32 @@ class SPPDataImporter(models.Model):
             self.locked = False
             self.locked_reason = None
             self.remarks = f"Creation completed with issues: {success_count} created, {failed_count} failed."
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Creation Completed with Issues",
+                    "message": self.remarks,
+                    "sticky": False,
+                    "type": "warning",
+                },
+            }
         elif success_count == len(self.raw_ids):
             self.state = "completed"
             self.locked = True
             self.locked_reason = None
             self.remarks = f"Import completed successfully: {success_count} records created."
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Import Completed",
+                    "message": self.remarks,
+                    "sticky": False,
+                    "type": "success",
+                },
+            }
+
 
     def _check_skip_fields(self, json_data):
         """Remove fields that should be skipped during record creation."""
