@@ -10,7 +10,7 @@ from odoo.tests import TransactionCase, tagged
 class TestMetricsService(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.Feature = self.env["openspp.feature.value"].sudo()
+        self.Feature = self.env["openspp.indicator.value"].sudo()
         self.metrics = self.env["openspp.indicator"].sudo()
         self.metric_name = "test.service.metric"
         self.period_key = "current"

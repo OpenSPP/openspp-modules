@@ -104,7 +104,7 @@ class TestMetricsPush(HttpCase):
         self.assertEqual(row.provider, payload.get("provider", "push"))
 
         values, stats = (
-            self.env["openspp.metrics"]
+            self.env["openspp.indicator"]
             .sudo()
             .evaluate(
                 metric,

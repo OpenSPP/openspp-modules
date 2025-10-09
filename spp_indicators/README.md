@@ -6,8 +6,8 @@ filters.
 ## What it provides
 
 - Metric definition registry: `openspp.metrics.definition` (names, types, periods, TTL, ID mapping).
-- In-memory provider registry: `openspp.metric.registry` (Python-backed store).
-- Feature store model: `openspp.feature.value` (table `openspp_feature_value`).
+- In-memory provider registry: `openspp.indicator.registry` (Python-backed store).
+- Feature store model: `openspp.indicator.value` (table `openspp_feature_value`).
 - Service: `openspp.metrics.evaluate(metric, subject_model, subject_ids, period_key, mode)`.
 - HTTP endpoints:
   - `POST /api/indicators/push` — push indicator values (auth: `X-Api-Key` or admin session).
@@ -58,7 +58,7 @@ register_static(
 - Dynamic (via Odoo model):
 
 ```python
-self.env['openspp.metric.registry'].register(
+self.env['openspp.indicator.registry'].register(
     name='education.attendance_pct', handler=MyAttendanceProvider(), return_type='number'
 )
 ```

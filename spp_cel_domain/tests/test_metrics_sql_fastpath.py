@@ -32,7 +32,7 @@ class TestMetricsSqlFastPath(common.TransactionCase):
             def compute_batch(self, env, ctx, subject_ids):
                 return {sid: self._test.seed_values.get(sid) for sid in subject_ids if sid in self._test.seed_values}
 
-        self.env["openspp.metric.registry"].register(
+        self.env["openspp.indicator.registry"].register(
             self.metric,
             _FakeProvider(self),
             return_type="number",
@@ -63,7 +63,7 @@ class TestMetricsSqlFastPath(common.TransactionCase):
             }
             for sid, val in rows
         ]
-        self.env["openspp.feature.value"].sudo().upsert_values(rows_payload)
+        self.env["openspp.indicator.value"].sudo().upsert_values(rows_payload)
         self.seed_values = {sid: val for sid, val in rows}
 
     def test_sql_fast_path_numeric(self):
@@ -109,7 +109,7 @@ class TestMetricsSqlFastPath(common.TransactionCase):
         plan, _ = Translator.translate("res.partner", expr, cfg)
         calls = {}
         # Patch enqueue_refresh to capture calls without relying on queue_job runtime
-        OpensppMetricsService = import_module("odoo.addons.spp_indicators.models.service").OpensppMetricsService
+        OpensppIndicatorService = import_module("odoo.addons.spp_indicators.models.service").OpensppIndicatorService
 
         def _fake_enqueue(self_, metric, subject_model, subject_ids, period_key, *, chunk_size=2000):
             calls["metric"] = metric
@@ -118,7 +118,7 @@ class TestMetricsSqlFastPath(common.TransactionCase):
             calls["count"] = len(subject_ids)
             return 1
 
-        with patch.object(OpensppMetricsService, "enqueue_refresh", _fake_enqueue):
+        with patch.object(OpensppIndicatorService, "enqueue_refresh", _fake_enqueue):
             metrics_info = []
             _ = (
                 self.env["cel.executor"]
@@ -195,7 +195,7 @@ class TestMetricsSqlFastPath(common.TransactionCase):
         assert status_fresh["status"] == "fresh"
 
         # incomplete: remove one row
-        self.env["openspp.feature.value"].sudo().search(
+        self.env["openspp.indicator.value"].sudo().search(
             [
                 ("metric", "=", self.metric),
                 ("subject_id", "=", self.p_ko.id),
@@ -228,7 +228,7 @@ class TestMetricsSqlFastPath(common.TransactionCase):
         self._seed_cache([(self.p_ok.id, 82), (self.p_ko.id, 84)])
         cfg = {"root_model": "res.partner", "base_domain": [("email", "ilike", "fastpath@test.local")]}
         expr = f'metric("{self.metric}", me, "{self.period}") >= 80'
-        FV = self.env["openspp.feature.value"].sudo()
+        FV = self.env["openspp.indicator.value"].sudo()
         assert (
             FV.search_count(
                 [

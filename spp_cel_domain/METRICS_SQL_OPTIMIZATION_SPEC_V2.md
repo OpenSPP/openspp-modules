@@ -162,7 +162,7 @@ Queue details (existing API)
 
 ### 5) Provider/params resolution
 
-- Provider label comes from `openspp.metric.registry.get(metric)['provider']` if present; fallback to
+- Provider label comes from `openspp.indicator.registry.get(metric)['provider']` if present; fallback to
   `metric`.
 - `params_hash` should be `""` for CEL V2 unless the CEL translator passes explicit params; keep code ready to
   accept it.
@@ -211,7 +211,7 @@ File: `cel_domain/models/cel_executor.py`
 
 2. Add helper `_metric_registry_info(metric) -> (provider, return_type)`
 
-   - Query `openspp.metric.registry.get(metric)`; default provider to metric name.
+   - Query `openspp.indicator.registry.get(metric)`; default provider to metric name.
 
 3. Add helper
    `_metric_cache_status_sql(model, base_domain, metric, period_key, provider, params_hash) -> dict`

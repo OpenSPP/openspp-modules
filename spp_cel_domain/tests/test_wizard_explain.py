@@ -16,7 +16,7 @@ class TestWizardExplain(TransactionCase):
 
     def test_metrics_explain_tab(self):
         # Seed attendance metrics for both members to drive metrics explain
-        FV = self.env["openspp.feature.value"]
+        FV = self.env["openspp.indicator.value"]
         member_ids = [
             m.id for m in self.env["g2p.group.membership"].search([("group", "=", self.g.id)]).mapped("individual")
         ]

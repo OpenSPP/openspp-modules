@@ -28,7 +28,7 @@ class OpensppIndicatorInvalidateWizard(models.TransientModel):
                     subject_ids = Model.search(dom).ids
             except Exception:
                 subject_ids = []
-        self.env["openspp.feature.value"].sudo().invalidate(
+        self.env["openspp.indicator.value"].sudo().invalidate(
             self.metric, model_name, self.period_key or None, subject_ids or None
         )
         return {

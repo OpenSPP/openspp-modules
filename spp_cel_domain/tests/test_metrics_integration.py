@@ -23,7 +23,7 @@ class TestMetricsIntegration(common.TransactionCase):
                 # p3 missing
             ],
         }
-        self.env["openspp.feature.value"].sudo().upsert_values(
+        self.env["openspp.indicator.value"].sudo().upsert_values(
             [
                 {
                     "metric": payload["metric"],
@@ -59,7 +59,7 @@ class TestMetricsIntegration(common.TransactionCase):
                 counts = {r["group"][0]: r["group_count"] for r in rows if r.get("group")}
                 return {int(sid): int(counts.get(sid, 0)) for sid in subject_ids}
 
-        self.env["openspp.metric.registry"].register(
+        self.env["openspp.indicator.registry"].register(
             name="test_household.size",
             handler=_TestHouseholdSizeProvider(),
             return_type="number",
@@ -78,7 +78,7 @@ class TestMetricsIntegration(common.TransactionCase):
         Membership.create({"group": group.id, "individual": ind2.id, "is_ended": False})
 
         # Seed the value (cache path) to make the test robust across environments
-        self.env["openspp.feature.value"].sudo().upsert_values(
+        self.env["openspp.indicator.value"].sudo().upsert_values(
             [
                 {
                     "metric": "test_household.size",

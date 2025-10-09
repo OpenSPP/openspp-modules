@@ -18,7 +18,7 @@ class TestAggregators(TransactionCase):
         M.create({"group": self.g1.id, "individual": self.m2.id, "is_ended": False})
         M.create({"group": self.g2.id, "individual": self.m3.id, "is_ended": False})
         # Push metric values for September
-        FV = self.env["openspp.feature.value"]
+        FV = self.env["openspp.indicator.value"]
         # G1 avg = (90 + 100) / 2 = 95, coverage=1.0
         FV.sudo().upsert_values(
             [

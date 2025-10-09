@@ -236,10 +236,23 @@ class CelExecutor(models.AbstractModel):
             dom = self._and_domains(dom, mem_dom)
         if child_subplan is not None:
             child_domain, requires_exec_child = self._plan_to_domain(p.child_model, child_subplan)
+            try:
+                self._logger.info(
+                    "[CEL EXISTS] child_subplan model=%s plan=%s requires_exec=%s",
+                    getattr(child_subplan, "model", None),
+                    getattr(child_subplan, "domain", None),
+                    requires_exec_child,
+                )
+            except Exception:
+                pass
             if requires_exec_child:
                 child_ids = self._execute_plan(p.child_model, child_subplan)
             else:
                 child_domain = self._ensure_domain_list(child_domain)
+                try:
+                    self._logger.info("[CEL EXISTS] applying child domain=%s on model=%s", child_domain, p.child_model)
+                except Exception:
+                    pass
                 child_ids = self.env[p.child_model].search(child_domain).ids
             child_ids = [int(i) for i in child_ids if i]
             if not child_ids:
@@ -302,8 +315,28 @@ class CelExecutor(models.AbstractModel):
                 child_ids = self._execute_plan(p.child_model, child_subplan)
             else:
                 child_domain = self._ensure_domain_list(child_domain)
+                try:
+                    self._logger.info("[CEL EXISTS] applying child domain=%s on model=%s", child_domain, p.child_model)
+                except Exception:
+                    pass
                 child_ids = self.env[p.child_model].search(child_domain).ids
             child_ids = [int(i) for i in child_ids if i]
+            try:
+                sample_labels = []
+                if child_ids:
+                    records = self.env[p.child_model].browse(child_ids[:5])
+                    sample_labels = [
+                        getattr(rec, "name", None) or getattr(rec, "display_name", None) for rec in records
+                    ]
+                self._logger.info(
+                    "[CEL EXISTS] child filter results child_model=%s domain=%s ids=%s sample=%s",
+                    p.child_model,
+                    child_domain,
+                    child_ids[:10],
+                    sample_labels,
+                )
+            except Exception:
+                pass
             if not child_ids:
                 # No matching children; counts are zero for all candidate parents
                 if not candidate_parents and parent_model_name:
@@ -386,7 +419,7 @@ class CelExecutor(models.AbstractModel):
         # Resolve flags
         ICP = self.env["ir.config_parameter"].sudo()
         enable_sql = bool(int(ICP.get_param("cel.enable_sql_metrics", "1")))
-        preview_cache_only = bool(int(ICP.get_param("cel.preview_cache_only", "1")))
+        preview_cache_only = bool(int(ICP.get_param("cel.preview_cache_only", "0")))
         async_threshold = int(ICP.get_param("cel.async_threshold", "50000") or 50000)
         allow_any_provider = self._allow_any_provider_fallback()
         # Provider resolution
@@ -483,12 +516,17 @@ class CelExecutor(models.AbstractModel):
         if total_requested:
             stats_total["requested"] = total_requested
             stats_total["coverage"] = len(aggregated_values) / float(base_count or 1)
+        incomplete_cache = eval_mode == "cache_only" and total_requested and len(aggregated_values) < total_requested
         if eval_mode == "cache_only":
             path_flag = "cache_only"
         else:
             path_flag = "python" if status.get("status") != "fresh" else "cache"
+        stats_total.update({"path": path_flag})
+        if incomplete_cache:
+            if metrics_info is not None:
+                metrics_info.append(stats_total)
+            return []
         if metrics_info is not None:
-            stats_total.update({"path": path_flag})
             metrics_info.append(stats_total)
         res = []
         for sid, val in aggregated_values.items():
@@ -498,7 +536,7 @@ class CelExecutor(models.AbstractModel):
         return res
 
     def _metric_registry_info(self, metric: str) -> tuple[str, str]:
-        info = self.env["openspp.metric.registry"].get(metric) or {}
+        info = self.env["openspp.indicator.registry"].get(metric) or {}
         provider = info.get("provider") or metric
         return_type = info.get("return_type") or "json"
         return provider, return_type

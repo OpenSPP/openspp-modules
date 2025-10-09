@@ -11,9 +11,9 @@
     <field name="active">True</field>
   </record>
 
-  <record id="ir_cron_openspp_metrics_purge_push_errors" model="ir.cron">
-    <field name="name">OpenSPP Metrics: Purge Push Errors</field>
-    <field name="model_id" ref="model_openspp_metrics_push_error" />
+  <record id="ir_cron_openspp_indicators_purge_push_errors" model="ir.cron">
+    <field name="name">OpenSPP Indicators: Purge Push Errors</field>
+    <field name="model_id" ref="model_openspp_indicator_push_error" />
     <field name="state">code</field>
     <field name="code">model.cron_purge_old()</field>
     <field name="interval_number">1</field>

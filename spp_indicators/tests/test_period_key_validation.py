@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from odoo.tests import TransactionCase, tagged
 
-from odoo.addons.spp_indicators.controllers.main import MetricsController
+from odoo.addons.spp_indicators.controllers.main import IndicatorsController
 
 
 @tagged("post_install", "-at_install", "spp_indicators")
 class TestPeriodKeyValidation(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.ctrl = MetricsController()
+        self.ctrl = IndicatorsController()
 
     def _ok(self, granularity: str, key: str):
         self.assertIsNone(self.ctrl._validate_period_key(granularity, key))

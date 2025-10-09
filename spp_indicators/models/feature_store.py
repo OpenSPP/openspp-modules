@@ -129,7 +129,7 @@ class OpensppIndicatorValue(models.Model):
         cr.execute("CREATE INDEX IF NOT EXISTS idx_ofv_provider ON openspp_indicator_value (company_id, provider)")
         # Subject-first composite index to accelerate INSELECT lookups from the subject side
         cr.execute(
-            "CREATE INDEX IF NOT EXISTS idx_ofv_subject_company_metric_period ON openspp_feature_value ("
+            "CREATE INDEX IF NOT EXISTS idx_ofv_subject_company_metric_period ON openspp_indicator_value ("
             "subject_id, company_id, metric, subject_model, period_key, provider, params_hash)"
         )
 
@@ -230,7 +230,7 @@ class OpensppIndicatorValue(models.Model):
         period_key: str,
         *,
         provider: str = "",
-        params_hash: str = "",
+        params_hash: str | None = "",
         company_id: int | None = None,
     ) -> dict[int, dict[str, Any]]:
         if not subject_ids:
@@ -238,15 +238,22 @@ class OpensppIndicatorValue(models.Model):
         q = self.env.cr
         if company_id is None:
             company_id = self.env.company.id
+        params_filter = " AND params_hash = %s"
+        args: list[Any] = [company_id, metric, provider or "", subject_model, period_key]
+        if params_hash is None:
+            params_filter = ""
+        else:
+            args.append(params_hash or "")
+        args.append(subject_ids)
         q.execute(
-            """
+            f"""
             SELECT subject_id, value_json, value_type, coverage, as_of, fetched_at, expires_at,
                    error_code, error_message
             FROM openspp_indicator_value
             WHERE company_id = %s AND metric = %s AND provider = %s AND subject_model = %s
-              AND period_key = %s AND params_hash = %s AND subject_id = ANY(%s)
+              AND period_key = %s{params_filter} AND subject_id = ANY(%s)
             """,
-            (company_id, metric, provider or "", subject_model, period_key, params_hash or "", subject_ids),
+            tuple(args),
         )
         res = {}
         for sid, vj, vt, cov, as_of, fetched_at, expires_at, ec, em in q.fetchall():
@@ -270,7 +277,7 @@ class OpensppIndicatorValue(models.Model):
         subject_ids: list[int],
         period_key: str,
         *,
-        params_hash: str = "",
+        params_hash: str | None = "",
         company_id: int | None = None,
     ) -> dict[int, dict[str, Any]]:
         """Read cached values ignoring provider filter (best-effort fallback).
@@ -283,15 +290,22 @@ class OpensppIndicatorValue(models.Model):
         q = self.env.cr
         if company_id is None:
             company_id = self.env.company.id
+        params_filter = " AND params_hash = %s"
+        args: list[Any] = [company_id, metric, subject_model, period_key]
+        if params_hash is None:
+            params_filter = ""
+        else:
+            args.append(params_hash or "")
+        args.append(subject_ids)
         q.execute(
-            """
+            f"""
             SELECT subject_id, value_json, value_type, coverage, as_of, fetched_at, expires_at,
                    error_code, error_message
             FROM openspp_indicator_value
             WHERE company_id = %s AND metric = %s AND subject_model = %s AND period_key = %s
-              AND params_hash = %s AND subject_id = ANY(%s)
+              {params_filter} AND subject_id = ANY(%s)
             """,
-            (company_id, metric, subject_model, period_key, params_hash or "", subject_ids),
+            tuple(args),
         )
         res: dict[int, dict[str, Any]] = {}
         for sid, vj, vt, cov, as_of, fetched_at, expires_at, ec, em in q.fetchall():

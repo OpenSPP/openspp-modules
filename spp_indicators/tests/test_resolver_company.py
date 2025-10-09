@@ -7,7 +7,7 @@ from odoo.tests import TransactionCase, tagged
 class TestResolverCompany(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.Resolver = self.env["openspp.metrics.resolver"].sudo()
+        self.Resolver = self.env["openspp.indicator.resolver"].sudo()
         self.Company = self.env["res.company"].sudo()
         self.Partner = self.env["res.partner"].sudo()
 
