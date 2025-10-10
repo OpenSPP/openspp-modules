@@ -6,6 +6,8 @@ import logging
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
+from odoo.addons.queue_job.delay import group
+
 _logger = logging.getLogger(__name__)
 
 
@@ -15,6 +17,10 @@ class SPPDataImporter(models.Model):
 
     SKIP_FIELDS = ["message_partner_ids"]
     DOMAIN_FIELDS = ["name", "code", "value", "phone_no", "email", "display_name", "group", "individual"]
+
+    def _default_queue_job_minimum_size(self):
+        default_settings = self.env["ir.config_parameter"].sudo()
+        return int(default_settings.get_param("spp_demo_common.queue_job_minimum_size", 500))
 
     name = fields.Char(string="Name", required=True)
     import_file = fields.Binary(string="Import File", required=True)
@@ -57,12 +63,84 @@ class SPPDataImporter(models.Model):
     locked_reason = fields.Text(string="Locked Reason")
     remarks = fields.Text(string="Remarks")
 
+    total_number_of_records = fields.Integer(
+        string="Total Number of Records", compute="_compute_total_number_of_records"
+    )
+    total_number_of_models = fields.Integer(string="Total Number of Models", compute="_compute_total_number_of_models")
+
+    queue_job_minimum_size = fields.Integer(
+        string="Queue Job Minimum Size",
+        default=_default_queue_job_minimum_size,
+    )
+    use_job_queue = fields.Boolean(
+        string="Use Job Queue",
+        compute="_compute_use_job_queue",
+    )
+
+    @api.depends("model_ids")
+    def _compute_total_number_of_models(self):
+        for record in self:
+            record.total_number_of_models = len(record.model_ids)
+
+    @api.depends("summary_ids")
+    def _compute_total_number_of_records(self):
+        for record in self:
+            total = 0
+            for summary in record.summary_ids:
+                total += summary.record_count
+
+            record.total_number_of_records = total
+
+    def _compute_use_job_queue(self):
+        for rec in self:
+            rec.use_job_queue = rec.total_number_of_records >= rec.queue_job_minimum_size
+
     def start_import(self):
         self.ensure_one()
         self.state = "in_progress"
         self.locked = True
         self.locked_reason = "Import in progress..."
         self.raw_ids = False
+        if self.total_number_of_models > 5:
+            self._async_start_import()
+            message = "The data import has been started and is running in the background."
+            kind = "info"
+            title = "Import Started"
+
+        else:
+            self._start_import()
+            self._start_import_as_done()
+            total_records = len(self.raw_ids)
+            message = f"The data import has been completed. {total_records} records were imported."
+            kind = "success"
+            title = "Import Completed"
+
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": title,
+                "message": message,
+                "sticky": False,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.client",
+                    "tag": "reload_view",
+                },
+            },
+        }
+
+    def _async_start_import(self):
+        jobs = []
+        jobs.append(self.delayable()._start_import())
+        main_job = group(*jobs)
+        main_job.on_done(self.delayable()._async_start_import_as_done())
+        main_job.delay()
+
+    def _async_start_import_as_done(self):
+        self._start_import_as_done()
+
+    def _start_import(self):
         try:
             file_data = base64.b64decode(self.import_file)
             json_data = json.loads(file_data)
@@ -93,28 +171,14 @@ class SPPDataImporter(models.Model):
                     )
             self.summary_ids = [(0, 0, vals) for vals in summary_data]
             self.raw_ids = [(0, 0, vals) for vals in raw_vals]
-            self.state = "imported"
-            self.locked = False
-            self.locked_reason = None
-            total_records = len(self.raw_ids)
-
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": "Import Completed",
-                    "message": f"The data import has been completed successfully. {total_records} records processed.",
-                    "sticky": False,
-                    "type": "success",
-                    "next": {
-                        "type": "ir.actions.client",
-                        "tag": "reload_view",
-                    },
-                },
-            }
 
         except Exception as e:
             raise ValidationError(f"Failed to parse import file: {e}") from e
+
+    def _start_import_as_done(self):
+        self.state = "imported"
+        self.locked = False
+        self.locked_reason = None
 
     def validate_import(self):
         """
