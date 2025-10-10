@@ -77,6 +77,7 @@ class SPPDataImporter(models.Model):
         compute="_compute_use_job_queue",
     )
     raw_mapping_json = fields.Text("Raw Mapping", default="{}")
+    created_raw_mapping_json = fields.Text("Raw Mapping", default="{}")
 
     @api.depends("model_ids")
     def _compute_total_number_of_models(self):
@@ -465,21 +466,41 @@ class SPPDataImporter(models.Model):
         self.locked = True
         self.locked_reason = "Creating records..."
 
-        # Maps "raw:{raw_id}" to actual created Odoo record ID
-        created_mapping = {}
+        self.created_raw_mapping_json = json.dumps({})
 
-        # First pass: Create records (handling many2one recursively)
         for raw in self.raw_ids:
-            if raw.state not in ["validated", "error"]:
-                continue
-
-            try:
-                self._create_single_record(raw, created_mapping)
-            except Exception as e:
-                raw.write({"state": "error", "remarks": f"Processing failed: {str(e)}"})
-                _logger.error(f"Error processing raw {raw.id}: {str(e)}")
+            self._create_records(raw)
 
         # Update import state
+        message, kind = self._create_records_as_done()
+
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": "Creation Result",
+                "message": message,
+                "sticky": False,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
+
+    def _create_records(self, raw):
+        created_mapping = json.loads(self.created_raw_mapping_json or "{}")
+
+        if raw.state not in ["validated", "error"]:
+            return
+
+        try:
+            self._create_single_record(raw, created_mapping)
+        except Exception as e:
+            raw.write({"state": "error", "remarks": f"Processing failed: {str(e)}"})
+            _logger.error(f"Error processing raw {raw.id}: {str(e)}")
+
+    def _create_records_as_done(self):
         failed_count = len(self.raw_ids.filtered(lambda r: r.state == "error"))
         success_count = len(self.raw_ids.filtered(lambda r: r.state in ["created", "saved"]))
         total_count = len(self.raw_ids)
@@ -497,20 +518,7 @@ class SPPDataImporter(models.Model):
         self.locked_reason = None
         self.remarks = message
 
-        return {
-            "type": "ir.actions.client",
-            "tag": "display_notification",
-            "params": {
-                "title": "Creation Result",
-                "message": message,
-                "sticky": False,
-                "type": kind,
-                "next": {
-                    "type": "ir.actions.client",
-                    "tag": "reload",
-                },
-            },
-        }
+        return message, kind
 
     def _check_skip_fields(self, json_data):
         """Remove fields that should be skipped during record creation."""
@@ -555,6 +563,8 @@ class SPPDataImporter(models.Model):
             # Check if record already exists
             existing_id = self._check_existing_record(raw, json_data, model, created_mapping, raw_ref)
             if existing_id:
+                # Save the mapping
+                self.created_raw_mapping_json = json.dumps(created_mapping)
                 return existing_id
 
             # Build creation data
@@ -572,6 +582,9 @@ class SPPDataImporter(models.Model):
                     "remarks": False,
                 }
             )
+
+            # Save the mapping to the field
+            self.created_raw_mapping_json = json.dumps(created_mapping)
 
             _logger.info(f"Created {raw.model_name} record ID {new_record.id} from raw {raw.id}")
             return new_record.id
@@ -682,7 +695,7 @@ class SPPDataImporter(models.Model):
                 else:
                     _logger.warning(f"Referenced raw {item} not found for field {field_name}")
 
-        return [(6, 0, many2many_ids)]
+        return [(6, 0, many2many_ids)] if many2many_ids else False
 
     def _create_process_many2one_field(self, field_name, value, created_mapping, _creating):
         """Process many2one field with raw reference."""
