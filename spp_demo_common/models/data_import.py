@@ -14,16 +14,7 @@ class SPPDataImporter(models.Model):
     _description = "SPP Data Importer"
 
     SKIP_FIELDS = ["message_partner_ids"]
-    DOMAIN_FIELDS = [
-        "name", 
-        "code", 
-        "value", 
-        "phone_no", 
-        "email", 
-        "display_name", 
-        "group",
-        "individual"
-        ]
+    DOMAIN_FIELDS = ["name", "code", "value", "phone_no", "email", "display_name", "group", "individual"]
 
     name = fields.Char(string="Name", required=True)
     import_file = fields.Binary(string="Import File", required=True)
@@ -199,7 +190,7 @@ class SPPDataImporter(models.Model):
             kind = "danger"
         else:
             self.state = "validated"
-            message = f"Validation succeeded for {total_count} records."
+            message = f"Validation succeeded for {success_count} records."
 
         self.remarks = message
         self.locked = False
@@ -389,7 +380,7 @@ class SPPDataImporter(models.Model):
         elif success_count == total_count:
             self.state = "completed"
             message = f"Import completed successfully: {success_count} records created."
-        
+
         self.locked = False
         self.locked_reason = None
         self.remarks = message
@@ -408,7 +399,6 @@ class SPPDataImporter(models.Model):
                 },
             },
         }
-
 
     def _check_skip_fields(self, json_data):
         """Remove fields that should be skipped during record creation."""

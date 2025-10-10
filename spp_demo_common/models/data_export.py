@@ -5,12 +5,18 @@ import logging
 
 from odoo import api, fields, models
 
+from odoo.addons.queue_job.delay import group
+
 _logger = logging.getLogger(__name__)
 
 
 class SPPDataExporter(models.Model):
     _name = "spp.data.exporter"
     _description = "SPP Data Exporter"
+
+    def _default_queue_job_minimum_size(self):
+        default_settings = self.env["ir.config_parameter"].sudo()
+        return int(default_settings.get_param("spp_demo_common.queue_job_minimum_size", 500))
 
     name = fields.Char(string="Name", required=True)
     template_id = fields.Many2one(
@@ -68,74 +74,116 @@ class SPPDataExporter(models.Model):
         string="Raw Data",
         readonly=True,
     )
+    total_number_of_records = fields.Integer(
+        string="Total Number of Records", compute="_compute_total_number_of_records"
+    )
+    total_number_of_models = fields.Integer(string="Total Number of Models", compute="_compute_total_number_of_models")
+
+    queue_job_minimum_size = fields.Integer(
+        string="Queue Job Minimum Size",
+        default=_default_queue_job_minimum_size,
+    )
+    use_job_queue = fields.Boolean(
+        string="Use Job Queue",
+        compute="_compute_use_job_queue",
+    )
+
+    @api.depends("model_ids")
+    def _compute_total_number_of_models(self):
+        for record in self:
+            record.total_number_of_models = len(record.model_ids)
+
+    @api.depends("raw_ids")
+    def _compute_total_number_of_records(self):
+        for record in self:
+            record.total_number_of_records = sum(record.raw_ids.mapped("record_count"))
 
     def start_export(self):
         self.ensure_one()
         self.state = "in_progress"
         self.locked = True
         self.locked_reason = "Export in progress..."
-        self.read_models_records()
-        if self.raw_ids:
-            export_data = []
-            module_list = []
-            for module in self.module_ids:
-                if module.name not in module_list:
-                    module_list.append(module.name)
+        if not self.use_job_queue:
+            self.read_models_records()
+            self._mark_done()
+        else:
+            self._async_start_export()
 
-            export_data.append({"modules": module_list})
+    def _async_start_export(self):
+        jobs = []
+        for model in self.model_ids:
+            jobs.append(self.delayable()._read_models_records(model))
 
-            for raw in self.raw_ids:
-                try:
-                    json_data = json.loads(raw.json_data) if raw.json_data else []
-                except Exception as e:
-                    _logger.error(f"Error decoding JSON data for model {raw.model_name}: {e}")
-                    json_data = []
-                export_data.append(
-                    {
-                        "model": raw.name,
-                        "record_count": raw.record_count,
-                        "data": json_data,
-                    }
-                )
-            filename = self.name
-            export_filename = f"{filename.replace(' ', '_').lower()}.json"
-            json_bytes = json.dumps(export_data, indent=4).encode("utf-8")
-            self.export_file = base64.b64encode(json_bytes)  # <-- base64 encode here
-            self.export_filename = export_filename
-            self.state = "completed"
-            self.locked = False
-            self.locked_reason = "Export completed successfully."
+        main_job = group(*jobs)
+        main_job.on_done(self.delayable()._async_mark_done())
+        main_job.delay()
+
+    def _async_mark_done(self):
+        self._mark_done()
+
+    def _mark_done(self):
+        export_data = []
+        module_list = []
+        for module in self.module_ids:
+            if module.name not in module_list:
+                module_list.append(module.name)
+
+        export_data.append({"modules": module_list})
+
+        for raw in self.raw_ids:
+            try:
+                json_data = json.loads(raw.json_data) if raw.json_data else []
+            except Exception as e:
+                _logger.error(f"Error decoding JSON data for model {raw.model_name}: {e}")
+                json_data = []
+            export_data.append(
+                {
+                    "model": raw.name,
+                    "record_count": raw.record_count,
+                    "data": json_data,
+                }
+            )
+        filename = self.name
+        export_filename = f"{filename.replace(' ', '_').lower()}.json"
+        json_bytes = json.dumps(export_data, indent=4).encode("utf-8")
+        self.export_file = base64.b64encode(json_bytes)  # <-- base64 encode here
+        self.export_filename = export_filename
+        self.state = "completed"
+        self.locked = False
+        self.locked_reason = "Export completed successfully."
 
     def read_models_records(self):
         for rec in self:
-            raw_data_records = []
             for model in rec.model_ids:
-                model_obj = self.env[model.model]
-                records = model_obj.search([])
-                record_count = len(records)
-                data = []
-                if record_count > 0:
-                    for record in records.read():
-                        # Convert bytes fields to base64 strings
-                        for key, value in record.items():
-                            if isinstance(value, bytes):
-                                record[key] = base64.b64encode(value).decode("utf-8")
-                            elif isinstance(value, datetime.datetime | datetime.date):
-                                record[key] = value.isoformat()
-                        data.append(record)
-                    json_data = json.dumps(data)
-                else:
-                    json_data = "[]"
-                raw_data_records.append(
-                    {
-                        "name": model.model,
-                        "model_name": model.name,
-                        "record_count": record_count,
-                        "json_data": json_data,
-                        "export_id": rec.id,
-                    }
-                )
-            self.env["spp.data.exporter.raw"].create(raw_data_records)
+                rec._read_models_records(model)
+
+    def _read_models_records(self, model_id):
+        model_obj = self.env[model_id.model]
+        records = model_obj.search([])
+        record_count = len(records)
+        data = []
+        if record_count > 0:
+            for record in records.read():
+                # Convert bytes fields to base64 strings
+                for key, value in record.items():
+                    if isinstance(value, bytes):
+                        record[key] = base64.b64encode(value).decode("utf-8")
+                    elif isinstance(value, datetime.datetime | datetime.date):
+                        record[key] = value.isoformat()
+                data.append(record)
+            json_data = json.dumps(data)
+        else:
+            json_data = "[]"
+
+        raw_data_records = {
+            "name": model_id.model,
+            "model_name": model_id.name,
+            "record_count": record_count,
+            "json_data": json_data,
+            "export_id": self.id,
+        }
+
+        self.env["spp.data.exporter.raw"].create(raw_data_records)
 
     def refresh_page(self):
         return {
@@ -167,6 +215,10 @@ class SPPDataExporter(models.Model):
                 rec.model_ids = [(6, 0, all_models)]
             elif rec.template_id and not rec.include_all_data:
                 rec.model_ids = [(6, 0, rec.template_id.model_ids.ids)]
+
+    def _compute_use_job_queue(self):
+        for rec in self:
+            rec.use_job_queue = rec.total_number_of_records >= rec.queue_job_minimum_size
 
 
 class SPPDataExporterTemplates(models.Model):

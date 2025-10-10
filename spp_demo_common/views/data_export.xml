@@ -135,16 +135,26 @@
                                             /><div /></h4>
                                     </div>
                                     <div style="flex: 1;">
-                                        <h4><field name="include_all_data" readonly="state != 'draft'" />
-                                        <label
-                                                for="include_all_data"
-                                                string="Include All Data"
+                                        <h4>
+                                            <label
+                                                for="total_number_of_records"
+                                                string=" No. of Records"
                                                 class="o_form_label"
-                                            /><div /></h4>
+                                            /><div />
+                                            <field name="total_number_of_records" />
+                                        </h4>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4>
+                                            <label
+                                                for="total_number_of_models"
+                                                string=" No. of Models"
+                                                class="o_form_label"
+                                            /><div />
+                                            <field name="total_number_of_models" />
+                                        </h4>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
