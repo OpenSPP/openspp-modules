@@ -561,11 +561,16 @@ class SPPDataImporter(models.Model):
 
             model = self.env[raw.model_name]
             
-            # Build creation data
-            creation_data = self._build_creation_data(raw, json_data, model, created_mapping, _creating)
-
             # Check if record already exists
-            existing_id = self._check_existing_record(raw, creation_data, model, created_mapping, raw_ref)
+            existing_id = self._check_existing_record(raw, json_data, model, created_mapping, raw_ref)
+            if existing_id:
+                # Save the mapping
+                self.created_raw_mapping_json = json.dumps(created_mapping)
+                return existing_id
+            
+            # Build creation data
+            creation_data, existing_id = self._build_creation_data(raw, json_data, model, created_mapping, _creating)            
+            
             if existing_id:
                 # Save the mapping
                 self.created_raw_mapping_json = json.dumps(created_mapping)
@@ -603,17 +608,17 @@ class SPPDataImporter(models.Model):
         finally:
             _creating.discard(raw.id)
 
-    def _check_existing_record(self, raw, creation_data, model, created_mapping, raw_ref):
+    def _check_existing_record(self, raw, json_data, model, created_mapping, raw_ref):
         """Check if record already exists based on common identifying fields."""
         possible_fields = self.DOMAIN_FIELDS
         domain = []
         for field in possible_fields:
-            if field in creation_data and field in model._fields:
+            if field in json_data and field in model._fields:
                 # Check if field is a stored field
                 if not model._fields[field].store:
                     continue
 
-                domain.append((field, "=", creation_data[field]))
+                domain.append((field, "=", json_data[field]))
         _logger.info(f"Checking existing record for raw {raw.id} with domain: {domain}")
         if domain:
             existing = model.search(domain, limit=1)
@@ -625,7 +630,6 @@ class SPPDataImporter(models.Model):
                         "remarks": "Record already exists, skipped creation.",
                     }
                 )
-                raw_ref = f"raw:{raw.id}"
                 created_mapping[raw_ref] = existing.id
                 self.created_raw_mapping_json = json.dumps(created_mapping)
                 _logger.info(f"Skipped creation for raw {raw.id}, record already exists with ID {existing.id}")
@@ -674,8 +678,9 @@ class SPPDataImporter(models.Model):
             creation_data[field_name] = value
 
         # Do a recheck of existing records based on identifying fields
+        raw_ref = f"raw:{raw.id}"
         existing_id = self._check_existing_record(raw, creation_data, model, created_mapping, raw_ref)
-        return creation_data
+        return creation_data, existing_id
 
     def _create_process_many2many_field(self, field_name, value, created_mapping, _creating):
         """Process many2many field values."""
