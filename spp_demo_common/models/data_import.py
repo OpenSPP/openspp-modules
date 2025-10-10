@@ -76,6 +76,7 @@ class SPPDataImporter(models.Model):
         string="Use Job Queue",
         compute="_compute_use_job_queue",
     )
+    raw_mapping_json = fields.Text("Raw Mapping", default="{}")
 
     @api.depends("model_ids")
     def _compute_total_number_of_models(self):
@@ -123,8 +124,8 @@ class SPPDataImporter(models.Model):
                 "message": message,
                 "sticky": False,
                 "type": kind,
-                'next': {
-                    'type': 'ir.actions.act_window_close',
+                "next": {
+                    "type": "ir.actions.act_window_close",
                 },
             },
         }
@@ -191,57 +192,105 @@ class SPPDataImporter(models.Model):
 
         self.locked = True
         self.locked_reason = "Import being validated."
+        self.raw_mapping_json = json.dumps({})
 
-        # Build mapping: (model_name, old_record_id) -> raw_record
-        raw_mapping = {}
+        if not self.use_job_queue:
+            for raw in self.raw_ids:
+                self._validate_import(raw)
+
+            # Check if all records validated successfully
+            message, kind = self._validate_import_as_done()
+        else:
+            self._async_validate_import()
+            message = "The data validation has been started and is running in the background."
+            kind = "info"
+
+        # Return a notification
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": "Validation Result",
+                "message": message,
+                "sticky": False,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
+                },
+            },
+        }
+
+    def _async_validate_import(self):
+        jobs = []
 
         for raw in self.raw_ids:
-            raw.json_data = raw.json_data.replace("'", '"')  # Ensure proper JSON format
-            if isinstance(raw.json_data, str):
-                json_data = json.loads(raw.json_data)
-            else:
-                json_data = raw.json_data
-            try:
-                old_id = json_data.get("id") or raw.record_id
-                key = (raw.model_name, old_id)
-                raw_mapping[key] = raw
-                raw.state = "draft"
-                raw.remarks = False
-            except Exception as e:
-                raw.state = "error"
-                raw.remarks = f"Failed to build mapping: {str(e)}"
-                _logger.error(f"Error mapping raw record {raw.id}: {str(e)}")
+            jobs.append(self.delayable()._validate_import(raw))
+        main_job = group(*jobs)
+        main_job.on_done(self.delayable()._async_validate_import_as_done())
+        main_job.delay()
 
-        # Process each raw record and update json_data
-        for raw in self.raw_ids:
-            if raw.state == "error":
-                continue
+    def _async_validate_import_as_done(self):
+        self._validate_import_as_done()
 
-            if isinstance(raw.json_data, str):
-                json_data = json.loads(raw.json_data)
-            else:
-                json_data = raw.json_data
-            try:
-                model = self.env[raw.model_name]
+    def _validate_import(self, raw):
+        raw_mapping = json.loads(self.raw_mapping_json or "{}")
 
-                # Process and update related fields
-                updated_json_data = self._process_related_fields(model, json_data, raw_mapping)
+        raw_mapping = self._validate_import_mapping(raw, raw_mapping)
+        if raw.state == "error":
+            return
 
-                # Remove the old 'id' field as Odoo will generate new one
-                updated_json_data.pop("id", None)
+        self._validate_import_json_update(raw, raw_mapping)
+        return
 
-                # Update the raw record with processed data
-                raw.json_data = json.dumps(updated_json_data)
-                raw.state = "validated"
-                raw.validated = True
-                raw.remarks = False
+    def _validate_import_mapping(self, raw, raw_mapping):
+        raw.json_data = raw.json_data.replace("'", '"')  # Ensure proper JSON format
+        if isinstance(raw.json_data, str):
+            json_data = json.loads(raw.json_data)
+        else:
+            json_data = raw.json_data
+        try:
+            old_id = json_data.get("id") or raw.record_id
+            key = (raw.model_name, old_id)
+            raw_mapping[key] = raw
+            raw.state = "draft"
+            raw.remarks = False
+            self.raw_mapping_json = json.dumps(raw_mapping)
+            raw_mapping = json.loads(self.raw_mapping_json or "{}")
+            return raw_mapping
+        except Exception as e:
+            raw.state = "error"
+            raw.remarks = f"Failed to build mapping: {str(e)}"
+            _logger.error(f"Error mapping raw record {raw.id}: {str(e)}")
 
-            except Exception as e:
-                raw.state = "error"
-                raw.remarks = f"Validation failed: {str(e)}"
-                _logger.error(f"Error validating raw record {raw.id}: {str(e)}")
+    def _validate_import_json_update(self, raw, raw_mapping):
+        if isinstance(raw.json_data, str):
+            json_data = json.loads(raw.json_data)
+        else:
+            json_data = raw.json_data
+        try:
+            model = self.env[raw.model_name]
 
-        # Check if all records validated successfully
+            # Process and update related fields
+            updated_json_data = self._process_related_fields(model, json_data, raw_mapping)
+
+            # Remove the old 'id' field as Odoo will generate new one
+            updated_json_data.pop("id", None)
+
+            # Update the raw record with processed data
+            raw.json_data = json.dumps(updated_json_data)
+            raw.state = "validated"
+            raw.validated = True
+            raw.remarks = False
+            self.raw_mapping_json = json.dumps(raw_mapping)
+            raw_mapping = json.loads(self.raw_mapping_json or "{}")
+            return raw_mapping
+
+        except Exception as e:
+            raw.state = "error"
+            raw.remarks = f"Validation failed: {str(e)}"
+            _logger.error(f"Error validating raw record {raw.id}: {str(e)}")
+
+    def _validate_import_as_done(self):
         failed_count = self.raw_ids.filtered(lambda r: r.state == "error")
         success_count = self.raw_ids.filtered(lambda r: r.state == "validated")
         total_count = len(self.raw_ids)
@@ -258,22 +307,7 @@ class SPPDataImporter(models.Model):
         self.remarks = message
         self.locked = False
         self.locked_reason = None
-
-        # Return a notification
-        return {
-            "type": "ir.actions.client",
-            "tag": "display_notification",
-            "params": {
-                "title": "Validation Result",
-                "message": message,
-                "sticky": False,
-                "type": kind,
-                "next": {
-                    "type": "ir.actions.client",
-                    "tag": "reload",
-                },
-            },
-        }
+        return message, kind
 
     def _process_related_fields(self, model, json_data, raw_mapping):
         """
