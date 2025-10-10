@@ -35,7 +35,7 @@
                     invisible="not locked and not locked_reason"
                 >
                     <span>Warning: Operation in progress: </span>
-                    <field name="locked_reason" class="o_stat_value" />
+                    <field name="locked_reason" class="o_stat_value" readonly="1" />
                     <button
                         name="refresh_page"
                         type="object"
@@ -46,7 +46,7 @@
                     />
                 </div>
                 <div class="alert alert-info text-center o_form_header" role="status" invisible="not remarks">
-                    <field name="remarks" class="o_stat_value" />
+                    <field name="remarks" class="o_stat_value" readonly="1" />
                 </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box" invisible="locked">

@@ -195,6 +195,9 @@ class SPPDataImporter(models.Model):
 
         self.locked = True
         self.locked_reason = "Import being validated."
+        self.remarks = False
+        self.state = "in_progress"
+
         self.raw_mapping_json = json.dumps({})
         raw_mapping = json.loads(self.raw_mapping_json or "{}")
         self._validate_import_mapping(raw_mapping)
@@ -462,6 +465,8 @@ class SPPDataImporter(models.Model):
 
         self.locked = True
         self.locked_reason = "Creating records..."
+        self.remarks = False
+        self.state = "in_progress"
 
         self.created_raw_mapping_json = json.dumps({})
         if not self.use_job_queue:
