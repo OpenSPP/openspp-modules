@@ -24,6 +24,7 @@
     "external_dependencies": {},
     "data": [
         "security/ir.model.access.csv",
+        "data/export_templates.xml",
         "data/ir_config_parameter_data.xml",
         "views/main_view.xml",
         "views/res_config_view.xml",
