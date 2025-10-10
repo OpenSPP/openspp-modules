@@ -27,7 +27,9 @@
                         statusbar_visible="draft,in_progress,completed,cancelled"
                     />
                 </header>
-                <field name="locked" invisible="True" />
+                <field name="locked" invisible="1" />
+                <field name="include_all_data" invisible="1" />
+
                 <div
                     class="alert alert-warning text-center o_form_header"
                     role="status"
