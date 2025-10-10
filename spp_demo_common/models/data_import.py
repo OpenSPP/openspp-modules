@@ -308,10 +308,12 @@ class SPPDataImporter(models.Model):
         kind = "success"
         if failed_count:
             self.state = "error"
-            message = f"Validation failed for {len(failed_count)} out of {total_count} records."
+            message = f"Validation failed for {failed_count} out of {total_count} records."
             kind = "danger"
+            self.validated = False
         else:
             self.state = "validated"
+            self.validated = True
             message = f"Validation succeeded for {success_count} records."
 
         self.remarks = message
