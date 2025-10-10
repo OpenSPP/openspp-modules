@@ -161,6 +161,7 @@ class SPPDataImporter(models.Model):
                 for record in data.get("data", []):
                     model_data = record
                     name = record.get("name", f"ID: {record.get('id', '')}")
+                    record_id = record.get("id", False)
 
                     raw_vals.append(
                         {
@@ -168,6 +169,7 @@ class SPPDataImporter(models.Model):
                             "model_name": model_name,
                             "importer_id": self.id,
                             "json_data": json.dumps(model_data),
+                            "record_id": record_id,
                         }
                     )
             self.summary_ids = [(0, 0, vals) for vals in summary_data]
@@ -194,6 +196,8 @@ class SPPDataImporter(models.Model):
         self.locked = True
         self.locked_reason = "Import being validated."
         self.raw_mapping_json = json.dumps({})
+        raw_mapping = json.loads(self.raw_mapping_json or "{}")
+        self._validate_import_mapping(raw_mapping)
 
         if not self.use_job_queue:
             for raw in self.raw_ids:
@@ -234,9 +238,6 @@ class SPPDataImporter(models.Model):
         self._validate_import_as_done()
 
     def _validate_import(self, raw):
-        raw_mapping = json.loads(self.raw_mapping_json or "{}")
-        
-        raw_mapping = self._validate_import_mapping(raw, raw_mapping)
         if raw.state == "error":
             return
         
@@ -244,33 +245,34 @@ class SPPDataImporter(models.Model):
         return
 
     def _validate_import_mapping(self, raw, raw_mapping):
-        raw.json_data = raw.json_data.replace("'", '"')  # Ensure proper JSON format
-        if isinstance(raw.json_data, str):
-            json_data = json.loads(raw.json_data)
-        else:
-            json_data = raw.json_data
-        try:
-            _logger.info(f"Building mapping for raw {raw.id} ({raw.model_name})")
-            _logger.info(f"Current raw_mapping keys: {list(raw_mapping.keys())}")
-            
-            old_id = json_data.get("id") or raw.record_id
-            # Convert tuple to string key for JSON serialization
-            key = f"{raw.model_name}|{old_id}"
-            
-            # Store raw.id instead of the raw object (objects can't be serialized)
-            raw_mapping[key] = raw.id
-            
-            raw.state = "draft"
-            raw.remarks = False
-            
-            self.raw_mapping_json = json.dumps(raw_mapping)
-            return raw_mapping
-            
-        except Exception as e:
-            raw.state = "error"
-            raw.remarks = f"Failed to build mapping: {str(e)}"
-            _logger.error(f"Error mapping raw record {raw.id}: {str(e)}")
-            return raw_mapping
+        for raw in self.raw_ids:
+            raw.json_data = raw.json_data.replace("'", '"')  # Ensure proper JSON format
+            if isinstance(raw.json_data, str):
+                json_data = json.loads(raw.json_data)
+            else:
+                json_data = raw.json_data
+            try:
+                _logger.info(f"Building mapping for raw {raw.id} ({raw.model_name})")
+                _logger.info(f"Current raw_mapping keys: {list(raw_mapping.keys())}")
+                
+                old_id = json_data.get("id") or raw.record_id
+                # Convert tuple to string key for JSON serialization
+                key = f"{raw.model_name}|{old_id}"
+                
+                # Store raw.id instead of the raw object (objects can't be serialized)
+                raw_mapping[key] = raw.id
+                
+                raw.state = "draft"
+                raw.remarks = False
+                
+                self.raw_mapping_json = json.dumps(raw_mapping)
+                return raw_mapping
+                
+            except Exception as e:
+                raw.state = "error"
+                raw.remarks = f"Failed to build mapping: {str(e)}"
+                _logger.error(f"Error mapping raw record {raw.id}: {str(e)}")
+                return raw_mapping
 
     def _validate_import_json_update(self, raw, raw_mapping):
         if isinstance(raw.json_data, str):
@@ -383,8 +385,6 @@ class SPPDataImporter(models.Model):
 
         # Look up the raw record by old ID using string key
         key = f"{comodel_name}|{field_value}"
-        _logger.info(f"Looking up many2one for {comodel_name} with key {key} and field_value {field_value}")
-        _logger.info(f"raw_mapping: {raw_mapping}")
         raw_record_id = raw_mapping.get(key)
 
         if raw_record_id:
