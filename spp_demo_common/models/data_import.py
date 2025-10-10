@@ -625,6 +625,7 @@ class SPPDataImporter(models.Model):
                         "remarks": "Record already exists, skipped creation.",
                     }
                 )
+                raw_ref = f"raw:{raw.id}"
                 created_mapping[raw_ref] = existing.id
                 self.created_raw_mapping_json = json.dumps(created_mapping)
                 _logger.info(f"Skipped creation for raw {raw.id}, record already exists with ID {existing.id}")
