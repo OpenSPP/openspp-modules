@@ -153,7 +153,7 @@ jobs:
       - name: Install addons and dependencies
         env:
           SKIP_EXT_DEB_DEPENDENCIES: "true"
-          EXCLUDE_REGEX: "odoo-addon-g2p.*|odoo-addon-muk.*"
+          EXCLUDE_REGEX: "odoo-addon-g2p.*|odoo-addon-muk.*|odoo-addon-spp.*"
         run: oca_install_addons
       - name: Check licenses
         run: manifestoo -d . check-licenses

@@ -8,7 +8,7 @@
     "category": "Tools",
     "depends": [
         "base",
-        "spp_registry_base",
+        "spp_base_common",
     ],
     "data": [
         "security/ir.model.access.csv",
