@@ -241,7 +241,7 @@ class SPPDataImporter(models.Model):
         raw_mapping = json.loads(self.raw_mapping_json or "{}")
         if raw.state == "error":
             return
-        
+
         self._validate_import_json_update(raw, raw_mapping)
         return
 
@@ -255,17 +255,17 @@ class SPPDataImporter(models.Model):
             try:
                 _logger.info(f"Building mapping for raw {raw.id} ({raw.model_name})")
                 _logger.info(f"Current raw_mapping keys: {list(raw_mapping.keys())}")
-                
+
                 old_id = json_data.get("id") or raw.record_id
                 # Convert tuple to string key for JSON serialization
                 key = f"{raw.model_name}|{old_id}"
-                
+
                 # Store raw.id instead of the raw object (objects can't be serialized)
                 raw_mapping[key] = raw.id
-                
+
                 raw.state = "draft"
                 raw.remarks = False
-                
+
             except Exception as e:
                 raw.state = "error"
                 raw.remarks = f"Failed to build mapping: {str(e)}"
@@ -280,22 +280,22 @@ class SPPDataImporter(models.Model):
             json_data = raw.json_data
         try:
             model = self.env[raw.model_name]
-            
+
             # Process and update related fields
             updated_json_data = self._process_related_fields(model, json_data, raw_mapping)
-            
+
             # Remove the old 'id' field as Odoo will generate new one
             updated_json_data.pop("id", None)
-            
+
             # Update the raw record with processed data
             raw.json_data = json.dumps(updated_json_data)
             raw.state = "validated"
             raw.validated = True
             raw.remarks = False
-            
+
             self.raw_mapping_json = json.dumps(raw_mapping)
             return raw_mapping
-            
+
         except Exception as e:
             raw.state = "error"
             raw.remarks = f"Validation failed: {str(e)}"
@@ -392,8 +392,7 @@ class SPPDataImporter(models.Model):
 
         # No raw record found - might be a system record or not exported
         _logger.warning(
-            f"No raw record found for {comodel_name} with old ID {field_value}. "
-            f"Field will be set to False."
+            f"No raw record found for {comodel_name} with old ID {field_value}. " f"Field will be set to False."
         )
         return False
 
@@ -443,10 +442,7 @@ class SPPDataImporter(models.Model):
                     x2_many_vals.append(processed_raw)
 
                 except Exception as e:
-                    _logger.error(
-                        f"Error processing x2many for {comodel_name} "
-                        f"old_id {old_id}: {str(e)}"
-                    )
+                    _logger.error(f"Error processing x2many for {comodel_name} " f"old_id {old_id}: {str(e)}")
                     continue
             else:
                 _logger.warning(f"No raw record found for {comodel_name} with old ID {old_id}")
@@ -468,12 +464,17 @@ class SPPDataImporter(models.Model):
         self.locked_reason = "Creating records..."
 
         self.created_raw_mapping_json = json.dumps({})
+        if not self.use_job_queue:
+            for raw in self.raw_ids:
+                self._create_records(raw)
 
-        for raw in self.raw_ids:
-            self._create_records(raw)
+            # Update import state
+            message, kind = self._create_records_as_done()
 
-        # Update import state
-        message, kind = self._create_records_as_done()
+        else:
+            self._async_create_records()
+            message = "The record creation has been started and is running in the background."
+            kind = "info"
 
         return {
             "type": "ir.actions.client",
@@ -488,6 +489,18 @@ class SPPDataImporter(models.Model):
                 },
             },
         }
+
+    def _async_create_records(self):
+        jobs = []
+
+        for raw in self.raw_ids:
+            jobs.append(self.delayable()._create_records(raw))
+        main_job = group(*jobs)
+        main_job.on_done(self.delayable()._async_create_records_as_done())
+        main_job.delay()
+
+    def _async_create_records_as_done(self):
+        self._create_records_as_done()
 
     def _create_records(self, raw):
         created_mapping = json.loads(self.created_raw_mapping_json or "{}")
@@ -560,22 +573,22 @@ class SPPDataImporter(models.Model):
             json_data = self._check_skip_fields(json_data)
 
             model = self.env[raw.model_name]
-            
+
             # Check if record already exists
             existing_id = self._check_existing_record(raw, json_data, model, created_mapping, raw_ref)
             if existing_id:
                 # Save the mapping
                 self.created_raw_mapping_json = json.dumps(created_mapping)
                 return existing_id
-            
+
             # Build creation data
-            creation_data, existing_id = self._build_creation_data(raw, json_data, model, created_mapping, _creating)            
-            
+            creation_data, existing_id = self._build_creation_data(raw, json_data, model, created_mapping, _creating)
+
             if existing_id:
                 # Save the mapping
                 self.created_raw_mapping_json = json.dumps(created_mapping)
                 return existing_id
-            
+
             # Create the record
             _logger.info(f"Creating {raw.model_name} with data: {creation_data}")
             new_record = model.create(creation_data)

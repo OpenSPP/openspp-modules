@@ -2,7 +2,9 @@
 <odoo noupdate="1">
     <record id="default_spp_exporter_template" model="spp.data.exporter.templates">
         <field name="name">Default OpenSPP Export Template</field>
-        <field name="model_ids" eval="[(6, 0, [
+        <field
+            name="model_ids"
+            eval="[(6, 0, [
             ref('base.model_res_users'),
             ref('base.model_res_partner'),
             ref('base.model_res_company'),
@@ -17,6 +19,7 @@
             ref('g2p_registry_individual.model_gender_type'),
             ref('g2p_registry_membership.model_g2p_group_membership'),
             ref('g2p_registry_membership.model_g2p_group_membership_kind'),
-        ])]"/>
+        ])]"
+        />
     </record>
 </odoo>
