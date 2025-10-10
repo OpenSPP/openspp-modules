@@ -383,6 +383,8 @@ class SPPDataImporter(models.Model):
 
         # Look up the raw record by old ID using string key
         key = f"{comodel_name}|{field_value}"
+        _logger.info(f"Looking up many2one for {comodel_name} with key {key} and field_value {field_value}")
+        _logger.info(f"raw_mapping: {raw_mapping}")
         raw_record_id = raw_mapping.get(key)
 
         if raw_record_id:
