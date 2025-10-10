@@ -123,9 +123,8 @@ class SPPDataImporter(models.Model):
                 "message": message,
                 "sticky": False,
                 "type": kind,
-                "next": {
-                    "type": "ir.actions.client",
-                    "tag": "reload_view",
+                'next': {
+                    'type': 'ir.actions.act_window_close',
                 },
             },
         }
