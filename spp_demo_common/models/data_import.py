@@ -238,13 +238,14 @@ class SPPDataImporter(models.Model):
         self._validate_import_as_done()
 
     def _validate_import(self, raw):
+        raw_mapping = json.loads(self.raw_mapping_json or "{}")
         if raw.state == "error":
             return
         
         self._validate_import_json_update(raw, raw_mapping)
         return
 
-    def _validate_import_mapping(self, raw, raw_mapping):
+    def _validate_import_mapping(self, raw_mapping):
         for raw in self.raw_ids:
             raw.json_data = raw.json_data.replace("'", '"')  # Ensure proper JSON format
             if isinstance(raw.json_data, str):
@@ -265,14 +266,12 @@ class SPPDataImporter(models.Model):
                 raw.state = "draft"
                 raw.remarks = False
                 
-                self.raw_mapping_json = json.dumps(raw_mapping)
-                return raw_mapping
-                
             except Exception as e:
                 raw.state = "error"
                 raw.remarks = f"Failed to build mapping: {str(e)}"
                 _logger.error(f"Error mapping raw record {raw.id}: {str(e)}")
-                return raw_mapping
+
+        self.raw_mapping_json = json.dumps(raw_mapping)
 
     def _validate_import_json_update(self, raw, raw_mapping):
         if isinstance(raw.json_data, str):
