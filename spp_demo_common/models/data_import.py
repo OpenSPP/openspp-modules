@@ -301,8 +301,8 @@ class SPPDataImporter(models.Model):
             return raw_mapping
 
     def _validate_import_as_done(self):
-        failed_count = self.raw_ids.filtered(lambda r: r.state == "error")
-        success_count = self.raw_ids.filtered(lambda r: r.state == "validated")
+        failed_count = len(self.raw_ids.filtered(lambda r: r.state == "error"))
+        success_count = len(self.raw_ids.filtered(lambda r: r.state == "validated"))
         total_count = len(self.raw_ids)
         message = ""
         kind = "success"
