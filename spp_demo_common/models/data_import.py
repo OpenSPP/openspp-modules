@@ -15,7 +15,7 @@ class SPPDataImporter(models.Model):
     _name = "spp.data.importer"
     _description = "SPP Data Importer"
 
-    SKIP_FIELDS = ["message_partner_ids"]
+    SKIP_FIELDS = ["message_partner_ids", "age"]
     DOMAIN_FIELDS = ["name", "code", "value", "phone_no", "email", "display_name", "group", "individual"]
 
     def _default_queue_job_minimum_size(self):
