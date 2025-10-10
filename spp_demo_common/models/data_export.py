@@ -93,10 +93,15 @@ class SPPDataExporter(models.Model):
         for record in self:
             record.total_number_of_models = len(record.model_ids)
 
-    @api.depends("raw_ids")
+    @api.depends("model_ids")
     def _compute_total_number_of_records(self):
         for record in self:
-            record.total_number_of_records = sum(record.raw_ids.mapped("record_count"))
+            total = 0
+            for model in record.model_ids:
+                model_obj = self.env[model.model]
+                total += model_obj.search_count([])
+
+            record.total_number_of_records = total
 
     def start_export(self):
         self.ensure_one()
