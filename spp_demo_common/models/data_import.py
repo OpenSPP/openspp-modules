@@ -627,6 +627,21 @@ class SPPDataImporter(models.Model):
                 created_mapping[raw_ref] = existing.id
                 _logger.info(f"Skipped creation for raw {raw.id}, record already exists with ID {existing.id}")
                 return existing.id
+            
+        # Special case for res.users
+        if raw.model_name == "res.users" and "login" in json_data:
+            existing = model.search([("login", "=", json_data["login"])], limit=1)
+            if existing:
+                raw.write(
+                    {
+                        "state": "saved",
+                        "db_id": existing.id,
+                        "remarks": "User already exists, skipped creation.",
+                    }
+                )
+                created_mapping[raw_ref] = existing.id
+                _logger.info(f"Skipped creation for raw {raw.id}, user already exists with ID {existing.id}")
+                return existing.id
 
         return None
 
