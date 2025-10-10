@@ -94,36 +94,35 @@ class SPPDemoDataGenerator(models.Model):
     def generate_demo_data(self):
         self.ensure_one()
         fake = Faker(self.locale_origin.code)
+        self.state = "in_progress"
+        self.locked = True
+        self.locked_reason = "Data generation in progress..."
         if not self.use_job_queue:
-            self.state = "in_progress"
-            self.locked = True
-            self.locked_reason = "Data generation in progress..."
-            if not self.use_job_queue:
-                for _ in range(self.number_of_groups):
-                    self._generate_demo_data(fake)
-                self.state = "completed"
-                self.locked = False
-                message = "The data generation has been completed."
-                self.locked_reason = message
-                kind = "success"
-            else:
-                self._async_generate_demo_data()
-                message = "The data generation has been started and is running in the background."
-                kind = "info"
+            for _ in range(self.number_of_groups):
+                self._generate_demo_data(fake)
+            self.state = "completed"
+            self.locked = False
+            message = "The data generation has been completed."
+            self.locked_reason = message
+            kind = "success"
+        else:
+            self._async_generate_demo_data()
+            message = "The data generation has been started and is running in the background."
+            kind = "info"
 
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": "Data Generation",
-                    "message": message,
-                    "sticky": False,
-                    "type": kind,
-                    "next": {
-                        "type": "ir.actions.act_window_close",
-                    },
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": "Data Generation",
+                "message": message,
+                "sticky": False,
+                "type": kind,
+                "next": {
+                    "type": "ir.actions.act_window_close",
                 },
-            }
+            },
+        }
 
     def _generate_demo_data(self, fake):
         group = self.generate_groups(fake)
