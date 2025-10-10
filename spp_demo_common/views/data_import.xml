@@ -139,6 +139,26 @@
                                     name="div_other_details_1"
                                     style="display: flex; gap: 20px; margin-bottom: 10px;"
                                 >
+                                    <div style="flex: 1;">
+                                        <h4>
+                                            <label
+                                                for="total_number_of_records"
+                                                string=" No. of Records"
+                                                class="o_form_label"
+                                            /><div />
+                                            <field name="total_number_of_records" />
+                                        </h4>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4>
+                                            <label
+                                                for="total_number_of_models"
+                                                string=" No. of Models"
+                                                class="o_form_label"
+                                            /><div />
+                                            <field name="total_number_of_models" />
+                                        </h4>
+                                    </div>
 
                                 </div>
 
