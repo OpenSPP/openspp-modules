@@ -234,11 +234,11 @@ class SPPDataImporter(models.Model):
 
     def _validate_import(self, raw):
         raw_mapping = json.loads(self.raw_mapping_json or "{}")
-
+        
         raw_mapping = self._validate_import_mapping(raw, raw_mapping)
         if raw.state == "error":
             return
-
+        
         self._validate_import_json_update(raw, raw_mapping)
         return
 
@@ -251,18 +251,25 @@ class SPPDataImporter(models.Model):
         try:
             _logger.info(f"Building mapping for raw {raw.id} ({raw.model_name})")
             _logger.info(f"Current raw_mapping keys: {list(raw_mapping.keys())}")
+            
             old_id = json_data.get("id") or raw.record_id
-            key = (raw.model_name, old_id)
-            raw_mapping[key] = raw
+            # Convert tuple to string key for JSON serialization
+            key = f"{raw.model_name}|{old_id}"
+            
+            # Store raw.id instead of the raw object (objects can't be serialized)
+            raw_mapping[key] = raw.id
+            
             raw.state = "draft"
             raw.remarks = False
+            
             self.raw_mapping_json = json.dumps(raw_mapping)
-            raw_mapping = json.loads(self.raw_mapping_json or "{}")
             return raw_mapping
+            
         except Exception as e:
             raw.state = "error"
             raw.remarks = f"Failed to build mapping: {str(e)}"
             _logger.error(f"Error mapping raw record {raw.id}: {str(e)}")
+            return raw_mapping
 
     def _validate_import_json_update(self, raw, raw_mapping):
         if isinstance(raw.json_data, str):
@@ -271,26 +278,27 @@ class SPPDataImporter(models.Model):
             json_data = raw.json_data
         try:
             model = self.env[raw.model_name]
-
+            
             # Process and update related fields
             updated_json_data = self._process_related_fields(model, json_data, raw_mapping)
-
+            
             # Remove the old 'id' field as Odoo will generate new one
             updated_json_data.pop("id", None)
-
+            
             # Update the raw record with processed data
             raw.json_data = json.dumps(updated_json_data)
             raw.state = "validated"
             raw.validated = True
             raw.remarks = False
+            
             self.raw_mapping_json = json.dumps(raw_mapping)
-            raw_mapping = json.loads(self.raw_mapping_json or "{}")
             return raw_mapping
-
+            
         except Exception as e:
             raw.state = "error"
             raw.remarks = f"Validation failed: {str(e)}"
             _logger.error(f"Error validating raw record {raw.id}: {str(e)}")
+            return raw_mapping
 
     def _validate_import_as_done(self):
         failed_count = self.raw_ids.filtered(lambda r: r.state == "error")
@@ -317,7 +325,7 @@ class SPPDataImporter(models.Model):
 
         :param model: Odoo model object
         :param json_data: Dictionary of field values from source DB
-        :param raw_mapping: Mapping of (model_name, old_id) to raw records
+        :param raw_mapping: Mapping of "model_name|old_id" to raw record IDs
         :return: Updated json_data dictionary
         """
         updated_data = json_data.copy()
@@ -354,7 +362,7 @@ class SPPDataImporter(models.Model):
 
         :param field: Odoo field object
         :param field_value: Old record ID from source database
-        :param raw_mapping: Mapping of (model_name, old_id) to raw records
+        :param raw_mapping: Mapping of "model_name|old_id" to raw record IDs
         :return: String reference to raw record or False
         """
         comodel_name = field.comodel_name
@@ -370,17 +378,18 @@ class SPPDataImporter(models.Model):
         if not field_value:
             return False
 
-        # Look up the raw record by old ID
-        key = (comodel_name, field_value)
-        raw_record = raw_mapping.get(key)
+        # Look up the raw record by old ID using string key
+        key = f"{comodel_name}|{field_value}"
+        raw_record_id = raw_mapping.get(key)
 
-        if raw_record:
+        if raw_record_id:
             # Return reference to raw record for later creation
-            return f"raw:{raw_record.id}"
+            return f"raw:{raw_record_id}"
 
         # No raw record found - might be a system record or not exported
         _logger.warning(
-            f"No raw record found for {comodel_name} with old ID {field_value}. " f"Field will be set to False."
+            f"No raw record found for {comodel_name} with old ID {field_value}. "
+            f"Field will be set to False."
         )
         return False
 
@@ -391,7 +400,7 @@ class SPPDataImporter(models.Model):
 
         :param field: Odoo field object
         :param field_value: List of old record IDs or list of dicts
-        :param raw_mapping: Mapping of (model_name, old_id) to raw records
+        :param raw_mapping: Mapping of "model_name|old_id" to raw record IDs
         :return: List of Odoo command tuples
         """
         comodel_name = field.comodel_name
@@ -420,18 +429,20 @@ class SPPDataImporter(models.Model):
             if not old_id:
                 continue
 
-            # Look up the raw record by old ID
-            key = (comodel_name, old_id)
-            raw_record = raw_mapping.get(key)
+            # Look up the raw record by old ID using string key
+            key = f"{comodel_name}|{old_id}"
+            raw_record_id = raw_mapping.get(key)
 
-            if raw_record:
+            if raw_record_id:
                 try:
-                    raw_id = raw_record.id
-                    processed_raw = f"raw:{raw_id}"
+                    processed_raw = f"raw:{raw_record_id}"
                     x2_many_vals.append(processed_raw)
 
                 except Exception as e:
-                    _logger.error(f"Error processing x2many for {comodel_name} " f"old_id {old_id}: {str(e)}")
+                    _logger.error(
+                        f"Error processing x2many for {comodel_name} "
+                        f"old_id {old_id}: {str(e)}"
+                    )
                     continue
             else:
                 _logger.warning(f"No raw record found for {comodel_name} with old ID {old_id}")
