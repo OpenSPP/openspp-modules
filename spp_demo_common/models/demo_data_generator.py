@@ -6,6 +6,8 @@ from faker import Faker
 
 from odoo import fields, models
 
+from odoo.addons.queue_job.delay import group
+
 _logger = logging.getLogger(__name__)
 
 
@@ -82,6 +84,12 @@ class SPPDemoDataGenerator(models.Model):
         string="Use Job Queue",
         compute="_compute_use_job_queue",
     )
+    generated_ids = fields.One2many(
+        "res.partner",
+        "demo_data_generator_id",
+        string="Generated Registrants",
+        readonly=True,
+    )
 
     def generate_demo_data(self):
         self.ensure_one()
@@ -90,24 +98,70 @@ class SPPDemoDataGenerator(models.Model):
             self.state = "in_progress"
             self.locked = True
             self.locked_reason = "Data generation in progress..."
-            for _ in range(self.number_of_groups):
-                group = self.generate_groups(fake)
-                num_members = fake.random_int(self.members_range_from, self.members_range_to)
-                have_head_member = False
-                for _ in range(num_members):
-                    is_head_member = random.choice([True, False]) if not have_head_member else False
-                    individual = self.generate_individuals(fake)
-                    membership_vals = self.get_group_membership_vals(fake, group, individual)
-                    if is_head_member:
-                        have_head_member = True
-                        membership_vals["kind"] = [
-                            (4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)
-                        ]
-                    self.env["g2p.group.membership"].create(membership_vals)
+            if not self.use_job_queue:
+                for _ in range(self.number_of_groups):
+                    self._generate_demo_data(fake)
+                self.state = "completed"
+                self.locked = False
+                message = "The data generation has been completed."
+                self.locked_reason = message
+                kind = "success"
+            else:
+                self._async_generate_demo_data()
+                message = "The data generation has been started and is running in the background."
+                kind = "info"
 
-            self.state = "completed"
-            self.locked = False
-            self.locked_reason = "Data generation completed."
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Data Generation",
+                    "message": message,
+                    "sticky": False,
+                    "type": kind,
+                    "next": {
+                        "type": "ir.actions.act_window_close",
+                    },
+                },
+            }
+
+    def _generate_demo_data(self, fake):
+        group = self.generate_groups(fake)
+        num_members = fake.random_int(self.members_range_from, self.members_range_to)
+        have_head_member = False
+        for _ in range(num_members):
+            is_head_member = random.choice([True, False]) if not have_head_member else False
+            individual = self.generate_individuals(fake)
+            membership_vals = self.get_group_membership_vals(fake, group, individual)
+            if is_head_member:
+                have_head_member = True
+                membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
+            self.env["g2p.group.membership"].create(membership_vals)
+
+    def _async_generate_demo_data(self):
+        jobs = []
+        batch_size = self.batch_size
+        batches = [
+            (start, min(start + batch_size, self.number_of_groups))
+            for start in range(0, self.number_of_groups, batch_size)
+        ]
+        for batch in batches:
+            jobs.append(self.delayable()._process_batch(batch))
+        main_job = group(*jobs)
+        main_job.on_done(self.delayable()._mark_done())
+        main_job.delay()
+
+    def _process_batch(self, batch):
+        self.ensure_one()
+        fake = Faker(self.locale_origin.code)
+        for _ in range(batch[0], batch[1]):
+            self._generate_demo_data(fake)
+
+    def _mark_done(self):
+        self.state = "completed"
+        self.locked = False
+        message = "The data generation has been completed."
+        self.locked_reason = message
 
     def generate_groups(self, fake):
         group_vals = self.get_group_vals(fake)
@@ -132,6 +186,7 @@ class SPPDemoDataGenerator(models.Model):
         address = fake.address()
 
         group_vals = {
+            "demo_data_generator_id": self.id,
             "name": fake.company(),
             "is_registrant": True,
             "is_group": True,
@@ -162,6 +217,7 @@ class SPPDemoDataGenerator(models.Model):
         address = fake.address()
 
         individual_vals = {
+            "demo_data_generator_id": self.id,
             "name": name,
             "family_name": last_name,
             "given_name": first_name,
