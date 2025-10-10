@@ -273,11 +273,7 @@ class SPPDemoDataGenerator(models.Model):
             datefrom=registrant.registration_date,
             dateto=fields.Date.today(),
         )
-        id_expiry_date = self.get_random_date(
-            fake,
-            datefrom=issue_date.replace(year=issue_date.year + 1),
-            dateto=issue_date.replace(year=issue_date.year + 10),
-        )
+        id_expiry_date = issue_date.replace(year=issue_date.year + 1)
 
         id_vals = {
             "partner_id": registrant.id,
