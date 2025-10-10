@@ -249,6 +249,8 @@ class SPPDataImporter(models.Model):
         else:
             json_data = raw.json_data
         try:
+            _logger.info(f"Building mapping for raw {raw.id} ({raw.model_name})")
+            _logger.info(f"Current raw_mapping keys: {list(raw_mapping.keys())}")
             old_id = json_data.get("id") or raw.record_id
             key = (raw.model_name, old_id)
             raw_mapping[key] = raw
