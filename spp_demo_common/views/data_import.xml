@@ -67,7 +67,7 @@
                             class="oe_stat_button"
                             icon="fa-refresh"
                             name="validate_import"
-                            invisible="validated or state != 'imported'"
+                            invisible="validated or state not in ['imported','error']"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Validate</span>
@@ -79,7 +79,7 @@
                             class="oe_stat_button"
                             icon="fa-check-circle"
                             name="create_records"
-                            invisible="state not in ['validated','error']"
+                            invisible="state not in ['validated','error'] and not validated"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Create</span>
