@@ -137,7 +137,15 @@
                             </div>
                         </div>
                     </div>
-
+                    <notebook>
+                        <page string="Generated Records">
+                            <field name="generated_ids" readonly="1" force_save="1">
+                                <tree>
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
