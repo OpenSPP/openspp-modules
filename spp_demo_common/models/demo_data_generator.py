@@ -5,6 +5,7 @@ import random
 from faker import Faker
 
 from odoo import fields, models
+from odoo.exceptions import ValidationError
 
 from odoo.addons.queue_job.delay import group
 
@@ -95,7 +96,7 @@ class SPPDemoDataGenerator(models.Model):
         if self.members_range_from > self.members_range_to:
             self.members_range_from = self._default_members_range_from()
             self.members_range_to = self._default_members_range_to()
-            raise ValueError(
+            raise ValidationError(
                 "Members per Group (From) cannot be greater than Members per Group (To)."
                 " Resetting to default values."
             )
