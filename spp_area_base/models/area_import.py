@@ -249,7 +249,6 @@ class OpenSPPAreaImport(models.Model):
         active_langs = self.env[_res_lang_model].search([("active", "=", True)]).mapped("iso_code")
 
         for col in columns:
-            _logger.info(col)
             if col and col.startswith(prefix):
                 lang = col.split("_", 1)[1]
                 if len(lang) == 2 and lang.lower() not in active_langs:
