@@ -128,7 +128,7 @@
                                             <field
                                                 name="locale_origin"
                                                 options="{'no_create': True}"
-                                                readonly="locked or state != 'draft"
+                                                readonly="locked or state != 'draft'"
                                             />
                                         </div>
                                     </div>
@@ -180,7 +180,7 @@
                                         </div>
                                         <div style="flex: 1;">
                                             <h4><label for="batch_size" class="o_form_label" /><div /></h4>
-                                            <field name="batch_size" readonly="locked or state != 'draft" />
+                                            <field name="batch_size" readonly="locked or state != 'draft'" />
                                         </div>
                                     </div>
                                 </div>
