@@ -161,7 +161,7 @@
                         </div>
                     </div>
                     <notebook>
-                        <page string="Modules" name="module_ids">
+                        <page string="Modules" name="module_ids" invisible="1">
                             <field name="module_ids" readonly="1">
                                 <tree>
                                     <field name="shortdesc" />
