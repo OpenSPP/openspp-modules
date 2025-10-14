@@ -43,16 +43,6 @@ class SPPDemoDataGenerator(models.Model):
         default_settings = self.env["ir.config_parameter"].sudo()
         return int(default_settings.get_param("spp_demo_common.queue_job_minimum_size", 500))
 
-    ID_TYPES_INDIVIDUAL = [
-        "Passport",
-        "National ID",
-    ]
-
-    ID_TYPES_GROUP = [
-        "Business Permit",
-        "Registration Certificate",
-    ]
-
     GENDERS = [
         "Male",
         "Female",
@@ -78,6 +68,8 @@ class SPPDemoDataGenerator(models.Model):
     group_type_id = fields.Many2one("g2p.group.kind", string="Group Type")
     id_type_ids = fields.One2many("spp.demo.data.id.types", "demo_data_generator_id", string="ID Types")
     bank_type_ids = fields.One2many("spp.demo.data.bank.types", "demo_data_generator_id", string="Bank Types")
+    percentage_with_bank_account = fields.Float(string="% with Banks", default=100.0, required=True)
+    percentage_with_ids = fields.Float(string="% with IDs", default=100.0, required=True)
 
     locked = fields.Boolean(string="Locked", default=False)
     locked_reason = fields.Text(string="Locked Reason")
@@ -100,6 +92,14 @@ class SPPDemoDataGenerator(models.Model):
     def generate_demo_data(self):
         self.ensure_one()
         fake = Faker(self.locale_origin.code)
+        if self.members_range_from > self.members_range_to:
+            self.members_range_from = self._default_members_range_from()
+            self.members_range_to = self._default_members_range_to()
+            raise ValueError(
+                "Members per Group (From) cannot be greater than Members per Group (To)."
+                " Resetting to default values."
+            )
+
         self.state = "in_progress"
         self.locked = True
         self.locked_reason = "Data generation in progress..."
@@ -176,6 +176,7 @@ class SPPDemoDataGenerator(models.Model):
         group = self.env["res.partner"].create(group_vals)
         self.create_ids(fake, group)
         self.create_phone_numbers(fake, group)
+        self.create_bank_accounts(fake, group)
         return group
 
     def generate_individuals(self, fake):
@@ -183,6 +184,7 @@ class SPPDemoDataGenerator(models.Model):
         individual = self.env["res.partner"].create(individual_vals)
         self.create_ids(fake, individual)
         self.create_phone_numbers(fake, individual)
+        self.create_bank_accounts(fake, individual)
         return individual
 
     def get_group_vals(self, fake):
@@ -202,6 +204,12 @@ class SPPDemoDataGenerator(models.Model):
             "create_date": registration_date,
             "address": address,
         }
+        if self.group_type_id:
+            group_vals["kind"] = self.group_type_id.id
+        else:
+            group_types = self.env["g2p.group.kind"].search([])
+            if group_types:
+                group_vals["kind"] = random.choice(group_types).id
 
         return group_vals
 
@@ -263,34 +271,73 @@ class SPPDemoDataGenerator(models.Model):
     def get_random_date(self, fake, datefrom, dateto):
         return fake.date_between_dates(date_start=datefrom, date_end=dateto)
 
-    def get_id_type(self, id_type):
-        id_type_id = self.env["g2p.id.type"].search([("name", "=", id_type)], limit=1)
-        if not id_type_id:
-            id_type_id = self.env["g2p.id.type"].create(
-                {
-                    "name": id_type,
-                }
+    def get_id_type(self, target_type):
+        if self.id_type_ids:
+            id_type = self.env["spp.demo.data.id.types"].search(
+                [("target_type", "=", target_type), ("demo_data_generator_id", "=", self.id)]
             )
-        return id_type_id.id
+            if id_type:
+                if len(self.id_type_ids) == 1:
+                    return id_type.name.id
+                return random.choice(id_type.name.ids)
+            return None
+
+        id_type_id = self.env["g2p.id.type"].search([])
+        if id_type_id:
+            return random.choice(id_type_id).id if len(id_type_id) > 1 else id_type_id.id
+
+        return None
 
     def create_ids(self, fake, registrant):
-        id_type = random.choice(self.ID_TYPES_GROUP if registrant.is_group else self.ID_TYPES_INDIVIDUAL)
-        id_type_id = self.get_id_type(id_type)
-        id_number = fake.bothify(text="??######")
-        issue_date = self.get_random_date(
-            fake,
-            datefrom=registrant.registration_date,
-            dateto=fields.Date.today(),
-        )
-        id_expiry_date = issue_date.replace(year=issue_date.year + 1)
+        if random.uniform(0, 100) > self.percentage_with_ids:
+            return
+        id_type_id = self.get_id_type("group" if registrant.is_group else "individual")
+        if id_type_id:
+            id_number = fake.bothify(text="??######")
+            issue_date = self.get_random_date(
+                fake,
+                datefrom=registrant.registration_date,
+                dateto=fields.Date.today(),
+            )
+            id_expiry_date = issue_date.replace(year=issue_date.year + 1)
 
-        id_vals = {
-            "partner_id": registrant.id,
-            "id_type": id_type_id,
-            "value": id_number,
-            "expiry_date": id_expiry_date,
-        }
-        self.env["g2p.reg.id"].create(id_vals)
+            id_vals = {
+                "partner_id": registrant.id,
+                "id_type": id_type_id,
+                "value": id_number,
+                "expiry_date": id_expiry_date,
+            }
+            self.env["g2p.reg.id"].create(id_vals)
+
+    def get_bank_type(self, target_type):
+        if self.bank_type_ids:
+            bank_type = self.env["spp.demo.data.bank.types"].search(
+                [("target_type", "=", target_type), ("demo_data_generator_id", "=", self.id)]
+            )
+            if bank_type:
+                if len(self.bank_type_ids) == 1:
+                    return bank_type.name.id
+                return random.choice(bank_type.name.ids)
+            return None
+
+        bank_type_id = self.env["res.bank"].search([])
+        if bank_type_id:
+            return random.choice(bank_type_id).id if len(bank_type_id) > 1 else bank_type_id.id
+
+        return None
+
+    def create_bank_accounts(self, fake, registrant):
+        if random.uniform(0, 100) > self.percentage_with_bank_account:
+            return
+        bank_type_id = self.get_bank_type("group" if registrant.is_group else "individual")
+        if bank_type_id:
+            account_number = fake.bothify(text="??######")
+            bank_account_vals = {
+                "partner_id": registrant.id,
+                "bank_id": bank_type_id,
+                "acc_number": account_number,
+            }
+            self.env["res.partner.bank"].create(bank_account_vals)
 
     def create_phone_numbers(self, fake, registrant):
         while True:

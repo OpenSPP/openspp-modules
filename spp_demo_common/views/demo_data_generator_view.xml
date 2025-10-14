@@ -119,6 +119,18 @@
                                             <h4><label for="group_type_id" class="o_form_label" /><div /></h4>
                                             <field name="group_type_id" options="{'no_create': True}" />
                                         </div>
+                                        <div style="flex: 1;">
+                                            <h4><label
+                                                    for="percentage_with_bank_account"
+                                                    class="o_form_label"
+                                                /><div /></h4>
+                                            <field name="percentage_with_bank_account" />
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <h4><label for="percentage_with_ids" class="o_form_label" /><div
+                                                /></h4>
+                                            <field name="percentage_with_ids" />
+                                        </div>
                                     </div>
                                 </div>
                                 <div
