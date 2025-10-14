@@ -175,7 +175,7 @@ class OpenSPPAreaImport(models.Model):
             "area_sqkm_index": area_sqkm_index,
         }
 
-    def get_area_vals(self, column_indexes, row, sheet, area_level, workbook_type):
+    def get_area_vals(self, column_indexes, row, sheet, area_level):
         self.ensure_one()
         default_lang = self.env.context.get("lang", "en_US")
         if default_lang not in column_indexes["name_indexes"]:
@@ -314,11 +314,10 @@ class OpenSPPAreaImport(models.Model):
         self.ensure_one()
 
         book = self._get_book()
-        workbook_type = "openpyxl"
 
         sheet = self.get_sheet_openpyxl(book, sheet_name)
         for row in range(start, end):
-            import_raw_vals = self.get_area_vals(column_indexes, row, sheet, area_level, workbook_type)
+            import_raw_vals = self.get_area_vals(column_indexes, row, sheet, area_level)
             self.create_import_raw(import_raw_vals, column_indexes, row, sheet)
 
         self.update(
