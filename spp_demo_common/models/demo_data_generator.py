@@ -137,6 +137,11 @@ class SPPDemoDataGenerator(models.Model):
         new_group_name = False
         for _ in range(num_members):
             is_head_member = random.choice([True, False]) if not have_head_member else False
+
+            # Check if last member and no head member assigned yet
+            if _ == num_members - 1 and not have_head_member:
+                is_head_member = True
+                
             individual = self.generate_individuals(fake)
             membership_vals = self.get_group_membership_vals(fake, group, individual)
             if is_head_member:
