@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_origins_afrikaans" model="spp.demo.origins">
+        <field name="name">Afrikaans</field>
+        <field name="code">af_ZA</field>
+    </record>
+    <record id="demo_origins_arabic" model="spp.demo.origins">
+        <field name="name">Arabic</field>
+        <field name="code">ar</field>
+        <field name="lang_id" ref="base.lang_ar" />
+    </record>
+    <record id="demo_origins_hy" model="spp.demo.origins">
+        <field name="name">Armenian</field>
+        <field name="code">hy</field>
+    </record>
+    <record id="demo_origins_azerbaijani" model="spp.demo.origins">
+        <field name="name">Azerbaijani</field>
+        <field name="code">az</field>
+        <field name="lang_id" ref="base.lang_az" />
+    </record>
+    <record id="demo_origins_china_cn" model="spp.demo.origins">
+        <field name="name">Chinese (Simplified)</field>
+        <field name="code">zh_CN</field>
+        <field name="lang_id" ref="base.lang_zh_CN" />
+    </record>
+    <record id="demo_origins_china_taiwan" model="spp.demo.origins">
+        <field name="name">Chinese (Taiwan)</field>
+        <field name="code">zh_TW</field>
+        <field name="lang_id" ref="base.lang_zh_TW" />
+    </record>
+    <record id="demo_origins_czech" model="spp.demo.origins">
+        <field name="name">Czech</field>
+        <field name="code">cz</field>
+        <field name="lang_id" ref="base.lang_cs_CZ" />
+    </record>
+    <record id="demo_origins_dutch" model="spp.demo.origins">
+        <field name="name">Dutch</field>
+        <field name="code">nl</field>
+        <field name="lang_id" ref="base.lang_nl" />
+    </record>
+    <record id="demo_origins_dutch_belgium" model="spp.demo.origins">
+        <field name="name">Dutch (Belgium)</field>
+        <field name="code">nl_BE</field>
+        <field name="lang_id" ref="base.lang_nl_BE" />
+    </record>
+    <record id="demo_origins_english" model="spp.demo.origins">
+        <field name="name">English</field>
+        <field name="code">en</field>
+    </record>
+    <record id="demo_origins_english_au" model="spp.demo.origins">
+        <field name="name">English (Australia)</field>
+        <field name="code">en_AU</field>
+        <field name="lang_id" ref="base.lang_en_AU" />
+    </record>
+    <record id="demo_origins_english_au_ocker" model="spp.demo.origins">
+        <field name="name">English (Australia - Ocker)</field>
+        <field name="code">en_AU_ocker</field>
+    </record>
+    <record id="demo_origins_english_bork" model="spp.demo.origins">
+        <field name="name">English (Bork)</field>
+        <field name="code">en_BORK</field>
+    </record>
+    <record id="demo_origins_english_canada" model="spp.demo.origins">
+        <field name="name">English (Canada)</field>
+        <field name="code">en_CA</field>
+        <field name="lang_id" ref="base.lang_en_CA" />
+    </record>
+    <record id="demo_origins_english_gb" model="spp.demo.origins">
+        <field name="name">English (Great Britain)</field>
+        <field name="code">en_GB</field>
+    </record>
+    <record id="demo_origins_english_gh" model="spp.demo.origins">
+        <field name="name">English (Ghana)</field>
+        <field name="code">en_GH</field>
+    </record>
+    <record id="demo_origins_english_ie" model="spp.demo.origins">
+        <field name="name">English (Ireland)</field>
+        <field name="code">en_IE</field>
+    </record>
+    <record id="demo_origins_english_ind" model="spp.demo.origins">
+        <field name="name">English (India)</field>
+        <field name="code">en_IND</field>
+        <field name="lang_id" ref="base.lang_en_IN" />
+    </record>
+    <record id="demo_origins_english_ng" model="spp.demo.origins">
+        <field name="name">English (Nigeria)</field>
+        <field name="code">en_NG</field>
+    </record>
+    <record id="demo_origins_english_us" model="spp.demo.origins">
+        <field name="name">English (United States)</field>
+        <field name="code">en_US</field>
+        <field name="lang_id" ref="base.lang_en" />
+    </record>
+    <record id="demo_origins_english_za" model="spp.demo.origins">
+        <field name="name">English (South Africa)</field>
+        <field name="code">en_ZA</field>
+    </record>
+    <record id="demo_origins_fa" model="spp.demo.origins">
+        <field name="name">Farsi</field>
+        <field name="code">fa</field>
+    </record>
+    <record id="demo_origins_fi" model="spp.demo.origins">
+        <field name="name">Finnish</field>
+        <field name="code">fi</field>
+        <field name="lang_id" ref="base.lang_fi" />
+    </record>
+    <record id="demo_origins_fr" model="spp.demo.origins">
+        <field name="name">French</field>
+        <field name="code">fr</field>
+        <field name="lang_id" ref="base.lang_fr" />
+    </record>
+    <record id="demo_origins_fr_be" model="spp.demo.origins">
+        <field name="name">French (Belgique)</field>
+        <field name="code">fr_BE</field>
+        <field name="lang_id" ref="base.lang_fr_BE" />
+    </record>
+    <record id="demo_origins_fr_ca" model="spp.demo.origins">
+        <field name="name">French (Canada)</field>
+        <field name="code">fr_CA</field>
+        <field name="lang_id" ref="base.lang_fr_CA" />
+    </record>
+    <record id="demo_origins_fr_ch" model="spp.demo.origins">
+        <field name="name">French (Switzerland)</field>
+        <field name="code">fr_CH</field>
+        <field name="lang_id" ref="base.lang_fr_CH" />
+    </record>
+    <record id="demo_origins_german" model="spp.demo.origins">
+        <field name="name">German</field>
+        <field name="code">de</field>
+        <field name="lang_id" ref="base.lang_de" />
+    </record>
+    <record id="demo_origins_german_at" model="spp.demo.origins">
+        <field name="name">German (Austria)</field>
+        <field name="code">de_AT</field>
+    </record>
+    <record id="demo_origins_german_ch" model="spp.demo.origins">
+        <field name="name">German (Switzerland)</field>
+        <field name="code">de_CH</field>
+        <field name="lang_id" ref="base.lang_de_CH" />
+    </record>
+    <record id="demo_origins_greek" model="spp.demo.origins">
+        <field name="name">Greek</field>
+        <field name="code">el</field>
+        <field name="lang_id" ref="base.lang_el_GR" />
+    </record>
+    <record id="demo_origins_ge" model="spp.demo.origins">
+        <field name="name">Georgian</field>
+        <field name="code">ge</field>
+        <field name="lang_id" ref="base.lang_ka_GE" />
+    </record>
+    <record id="demo_origins_hebrew" model="spp.demo.origins">
+        <field name="name">Hebrew</field>
+        <field name="code">he</field>
+        <field name="lang_id" ref="base.lang_he_IL" />
+    </record>
+    <record id="demo_origins_hrvatski" model="spp.demo.origins">
+        <field name="name">Hrvatski</field>
+        <field name="code">hr</field>
+        <field name="lang_id" ref="base.lang_hr" />
+    </record>
+    <record id="demo_origins_hungarian" model="spp.demo.origins">
+        <field name="name">Hungarian</field>
+        <field name="code">hu</field>
+        <field name="lang_id" ref="base.lang_hu" />
+    </record>
+    <record id="demo_origins_indonesian" model="spp.demo.origins">
+        <field name="name">Indonesian</field>
+        <field name="code">id_ID</field>
+        <field name="lang_id" ref="base.lang_id" />
+    </record>
+    <record id="demo_origins_italian" model="spp.demo.origins">
+        <field name="name">Italian</field>
+        <field name="code">it</field>
+        <field name="lang_id" ref="base.lang_it" />
+    </record>
+    <record id="demo_origins_japanese" model="spp.demo.origins">
+        <field name="name">Japanese</field>
+        <field name="code">ja</field>
+        <field name="lang_id" ref="base.lang_ja_JP" />
+    </record>
+    <record id="demo_origins_korean" model="spp.demo.origins">
+        <field name="name">Korean</field>
+        <field name="code">ko</field>
+        <field name="lang_id" ref="base.lang_ko_KR" />
+    </record>
+    <record id="demo_origins_latv" model="spp.demo.origins">
+        <field name="name">Latvian</field>
+        <field name="code">lv</field>
+        <field name="lang_id" ref="base.lang_lv" />
+    </record>
+    <record id="demo_origins_macedonian" model="spp.demo.origins">
+        <field name="name">Macedonian</field>
+        <field name="code">mk</field>
+        <field name="lang_id" ref="base.lang_mk" />
+    </record>
+    <record id="demo_origins_norwegian" model="spp.demo.origins">
+        <field name="name">Norwegian</field>
+        <field name="code">nb_NO</field>
+        <field name="lang_id" ref="base.lang_nb_NO" />
+    </record>
+    <record id="demo_origins_nepalese" model="spp.demo.origins">
+        <field name="name">Nepalese</field>
+        <field name="code">ne</field>
+    </record>
+    <record id="demo_origins_polish" model="spp.demo.origins">
+        <field name="name">Polish</field>
+        <field name="code">pl</field>
+        <field name="lang_id" ref="base.lang_pl" />
+    </record>
+    <record id="demo_origins_portuguese_brazil" model="spp.demo.origins">
+        <field name="name">Portuguese (Brazil)</field>
+        <field name="code">pt_BR</field>
+        <field name="lang_id" ref="base.lang_pt_BR" />
+    </record>
+    <record id="demo_origins_portuguese_portugal" model="spp.demo.origins">
+        <field name="name">Portuguese (Portugal)</field>
+        <field name="code">pt_PT</field>
+    </record>
+    <record id="demo_origins_romanian" model="spp.demo.origins">
+        <field name="name">Romanian</field>
+        <field name="code">ro</field>
+        <field name="lang_id" ref="base.lang_ro" />
+    </record>
+    <record id="demo_origins_russian" model="spp.demo.origins">
+        <field name="name">Russian</field>
+        <field name="code">ru</field>
+        <field name="lang_id" ref="base.lang_ru" />
+    </record>
+    <record id="demo_origins_slovak" model="spp.demo.origins">
+        <field name="name">Slovak</field>
+        <field name="code">sk</field>
+        <field name="lang_id" ref="base.lang_sk" />
+    </record>
+    <record id="demo_origins_spanish" model="spp.demo.origins">
+        <field name="name">Spanish</field>
+        <field name="code">es</field>
+        <field name="lang_id" ref="base.lang_es" />
+    </record>
+    <record id="demo_origins_spanish_mx" model="spp.demo.origins">
+        <field name="name">Spanish (Mexico)</field>
+        <field name="code">es_MX</field>
+        <field name="lang_id" ref="base.lang_es_MX" />
+    </record>
+    <record id="demo_origins_swedish" model="spp.demo.origins">
+        <field name="name">Swedish</field>
+        <field name="code">sv</field>
+        <field name="lang_id" ref="base.lang_sv_SE" />
+    </record>
+    <record id="demo_origins_turkish" model="spp.demo.origins">
+        <field name="name">Turkish</field>
+        <field name="code">tr</field>
+        <field name="lang_id" ref="base.lang_tr" />
+    </record>
+    <record id="demo_origins_ukrainian" model="spp.demo.origins">
+        <field name="name">Ukrainian</field>
+        <field name="code">uk</field>
+        <field name="lang_id" ref="base.lang_uk_UA" />
+    </record>
+    <record id="demo_origins_vietnamese" model="spp.demo.origins">
+        <field name="name">Vietnamese</field>
+        <field name="code">vi</field>
+        <field name="lang_id" ref="base.lang_vi_VN" />
+    </record>
+    <record id="demo_origins_zulu" model="spp.demo.origins">
+        <field name="name">Zulu</field>
+        <field name="code">zu</field>
+    </record>
+
+</odoo>

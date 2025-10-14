@@ -34,10 +34,10 @@ class SPPDemoDataGenerator(models.Model):
     def _default_locale_origin(self):
         company_lang = self.env.user.company_id.partner_id.lang
         if company_lang:
-            lang = self.env["res.lang"].search([("code", "=", company_lang)], limit=1)
+            lang = self.env["spp.demo.origins"].search([("code", "=", company_lang)], limit=1)
             if lang:
                 return lang
-        return self.env.ref("base.lang_en")
+        return self.env.ref("spp_demo_common.demo_origins_english_us")
 
     def _default_queue_job_minimum_size(self):
         default_settings = self.env["ir.config_parameter"].sudo()
@@ -65,7 +65,9 @@ class SPPDemoDataGenerator(models.Model):
         string="Members per Group (From)", default=_default_members_range_from, required=True
     )
     members_range_to = fields.Integer(string="Members per Group (To)", default=_default_members_range_to, required=True)
-    locale_origin = fields.Many2one("res.lang", string="Locale Origin", required=True, default=_default_locale_origin)
+    locale_origin = fields.Many2one(
+        "spp.demo.origins", string="Locale Origin", required=True, default=_default_locale_origin
+    )
     batch_size = fields.Integer(string="Batch Size", default=_default_batch_size, required=True)
     state = fields.Selection(
         [("draft", "Draft"), ("in_progress", "In Progress"), ("completed", "Completed"), ("cancelled", "Cancelled")],
