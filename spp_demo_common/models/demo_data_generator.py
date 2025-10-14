@@ -75,6 +75,10 @@ class SPPDemoDataGenerator(models.Model):
         default="draft",
         required=True,
     )
+    group_type_id = fields.Many2one("g2p.group.kind", string="Group Type")
+    id_type_ids = fields.One2many("spp.demo.data.id.types", "demo_data_generator_id", string="ID Types")
+    bank_type_ids = fields.One2many("spp.demo.data.bank.types", "demo_data_generator_id", string="Bank Types")
+
     locked = fields.Boolean(string="Locked", default=False)
     locked_reason = fields.Text(string="Locked Reason")
 
@@ -319,3 +323,34 @@ class SPPDemoDataGenerator(models.Model):
     def _compute_use_job_queue(self):
         for rec in self:
             rec.use_job_queue = rec.number_of_groups >= rec.queue_job_minimum_size
+
+
+class SPPDemoDataIDTypes(models.Model):
+    _name = "spp.demo.data.id.types"
+    _description = "SPP Demo Data ID Types"
+
+    name = fields.Many2one("g2p.id.type", string="ID Type", required=True)
+    target_type = fields.Selection(
+        [("individual", "Individual"), ("group", "Group")],
+        string="Target Type",
+        required=True,
+    )
+    demo_data_generator_id = fields.Many2one(
+        "spp.demo.data.generator", string="Demo Data Generator", ondelete="cascade"
+    )
+
+
+class SPPDemoDataBankTypes(models.Model):
+    _name = "spp.demo.data.bank.types"
+    _description = "SPP Demo Data Bank Types"
+
+    name = fields.Many2one("res.bank", string="Bank Type", required=True)
+    target_type = fields.Selection(
+        [("individual", "Individual"), ("group", "Group")],
+        string="Target Type",
+        default="individual",
+        required=True,
+    )
+    demo_data_generator_id = fields.Many2one(
+        "spp.demo.data.generator", string="Demo Data Generator", ondelete="cascade"
+    )

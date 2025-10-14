@@ -8,6 +8,8 @@ data_importer_read_access,Data Importer Read Access,spp_demo_common.model_spp_da
 data_importer_raw_read_access,Data Importer Raw Read Access,spp_demo_common.model_spp_data_importer_raw,spp_base_common.read_registry,1,0,0,0
 data_importer_summary_read_access,Data Importer Summary Read Access,spp_demo_common.model_spp_data_importer_summary,spp_base_common.read_registry,1,0,0,0
 demo_origins_read_access,Demo Origins Read Access,spp_demo_common.model_spp_demo_origins,spp_base_common.read_registry,1,0,0,0
+demo_id_types_read_access,Demo ID Types Read Access,spp_demo_common.model_spp_demo_data_id_types,spp_base_common.read_registry,1,0,0,0
+demo_bank_types_read_access,Demo Bank Types Read Access,spp_demo_common.model_spp_demo_data_bank_types,spp_base_common.read_registry,1,0,0,0
 
 demo_data_generator_write_registry_access,Demo Data Generator Write Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.write_registry,1,1,0,0
 data_exporter_write_access,Data Exporter Write Access,spp_demo_common.model_spp_data_exporter,spp_base_common.write_registry,1,1,0,0
@@ -17,6 +19,8 @@ data_importer_write_access,Data Importer Write Access,spp_demo_common.model_spp_
 data_importer_raw_write_access,Data Importer Raw Write Access,spp_demo_common.model_spp_data_importer_raw,spp_base_common.write_registry,1,1,0,0
 data_importer_summary_write_access,Data Importer Summary Write Access,spp_demo_common.model_spp_data_importer_summary,spp_base_common.write_registry,1,1,0,0
 demo_origins_write_access,Demo Origins Write Access,spp_demo_common.model_spp_demo_origins,spp_base_common.write_registry,1,1,0,0
+demo_id_types_write_access,Demo ID Types Write Access,spp_demo_common.model_spp_demo_data_id_types,spp_base_common.write_registry,1,1,0,0
+demo_bank_types_write_access,Demo Bank Types Write Access,spp_demo_common.model_spp_demo_data_bank_types,spp_base_common.write_registry,1,1,0,0
 
 demo_data_generator_create_registry_access,Demo Data Generator Create Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.create_registry,1,0,1,0
 data_exporter_create_access,Data Exporter Create Access,spp_demo_common.model_spp_data_exporter,spp_base_common.create_registry,1,0,1,0
@@ -26,3 +30,5 @@ data_importer_create_access,Data Importer Create Access,spp_demo_common.model_sp
 data_importer_raw_create_access,Data Importer Raw Create Access,spp_demo_common.model_spp_data_importer_raw,spp_base_common.create_registry,1,0,1,0
 data_importer_summary_create_access,Data Importer Summary Create Access,spp_demo_common.model_spp_data_importer_summary,spp_base_common.create_registry,1,0,1,0
 demo_origins_create_access,Demo Origins Create Access,spp_demo_common.model_spp_demo_origins,spp_base_common.create_registry,1,0,1,0
+demo_id_types_create_access,Demo ID Types Create Access,spp_demo_common.model_spp_demo_data_id_types,spp_base_common.create_registry,1,0,1,0
+demo_bank_types_create_access,Demo Bank Types Create Access,spp_demo_common.model_spp_demo_data_bank_types,spp_base_common.create_registry,1,0,1,0
