@@ -250,7 +250,7 @@ class OpenSPPAreaImport(models.Model):
 
         for col in columns:
             _logger.info(col)
-            if col.startswith(prefix):
+            if col and col.startswith(prefix):
                 lang = col.split("_", 1)[1]
                 if len(lang) == 2 and lang.lower() not in active_langs:
                     raise ValidationError(
