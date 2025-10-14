@@ -130,12 +130,15 @@ class SPPDemoDataGenerator(models.Model):
         group = self.generate_groups(fake)
         num_members = fake.random_int(self.members_range_from, self.members_range_to)
         have_head_member = False
+        new_group_name = False
         for _ in range(num_members):
             is_head_member = random.choice([True, False]) if not have_head_member else False
             individual = self.generate_individuals(fake)
             membership_vals = self.get_group_membership_vals(fake, group, individual)
             if is_head_member:
                 have_head_member = True
+                new_group_name = individual.family_name
+                group.name = new_group_name
                 membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
             self.env["g2p.group.membership"].create(membership_vals)
 
