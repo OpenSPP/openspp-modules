@@ -234,7 +234,7 @@
                         <tree editable="bottom">
                             <field name="crop_farm_id" column_invisible="1" />
                             <field name="activity_type" column_invisible="1" />
-                            <field name="species_id" context="{'default_species_type': 'crop'}" />
+                            <field name="species_id" context="{'default_species_type': 'crop'}" required="1" />
                             <field name="purpose" />
                             <field name="season_id" />
                         </tree>
@@ -249,7 +249,7 @@
                         <tree editable="bottom">
                             <field name="live_farm_id" column_invisible="1" />
                             <field name="activity_type" column_invisible="1" />
-                            <field name="species_id" context="{'default_species_type': 'livestock'}" />
+                            <field name="species_id" context="{'default_species_type': 'livestock'}" required="1" />
                             <field name="season_id" />
                         </tree>
                     </field>
@@ -267,6 +267,7 @@
                                 name="species_id"
                                 context="{'default_species_type': 'aquaculture'}"
                                 width="50%"
+                                required="1" 
                             />
                             <field name="season_id" />
                         </tree>
@@ -276,7 +277,7 @@
                         <field name="farm_asset_ids">
                             <tree editable="bottom">
                                 <field name="asset_farm_id" column_invisible="1" />
-                                <field name="asset_type" width="40%" />
+                                <field name="asset_type" width="40%" required="1" />
                             </tree>
                         </field>
                     </div>
@@ -285,7 +286,7 @@
                     <field name="farm_machinery_ids">
                         <tree editable="bottom">
                             <field name="machinery_farm_id" column_invisible="1" />
-                            <field name="machinery_type" />
+                            <field name="machinery_type" required="1" />
                             <field name="quantity" width="20%" />
                             <field name="machine_working_status" />
                         </tree>
