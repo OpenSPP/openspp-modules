@@ -83,10 +83,16 @@ class SPPDemoDataGenerator(models.Model):
         string="Use Job Queue",
         compute="_compute_use_job_queue",
     )
-    generated_ids = fields.One2many(
+    generated_group_ids = fields.One2many(
         "res.partner",
-        "demo_data_generator_id",
+        "demo_data_group_generator_id",
         string="Generated Registrants",
+        readonly=True,
+    )
+    generated_individual_ids = fields.One2many(
+        "res.partner",
+        "demo_data_individual_generator_id",
+        string="Generated Individuals",
         readonly=True,
     )
 
@@ -205,7 +211,7 @@ class SPPDemoDataGenerator(models.Model):
         address = fake.address()
 
         group_vals = {
-            "demo_data_generator_id": self.id,
+            "demo_data_group_generator_id": self.id,
             "name": fake.company(),
             "is_registrant": True,
             "is_group": True,
@@ -242,7 +248,7 @@ class SPPDemoDataGenerator(models.Model):
         address = fake.address()
 
         individual_vals = {
-            "demo_data_generator_id": self.id,
+            "demo_data_individual_generator_id": self.id,
             "name": name,
             "family_name": last_name,
             "given_name": first_name,
