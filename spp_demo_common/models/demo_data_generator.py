@@ -57,8 +57,9 @@ class SPPDemoDataGenerator(models.Model):
     )
     members_range_to = fields.Integer(string="Members per Group (To)", default=_default_members_range_to, required=True)
     locale_origin = fields.Many2one(
-        "spp.demo.origins", string="Locale Origin", required=True, default=_default_locale_origin
+        "res.country", string="Locale Origin", required=True, default=_default_locale_origin
     )
+    locale_origin_faker_locale = fields.Char(string="Locale Origin Faker Locale", related="locale_origin.faker_locale")
     batch_size = fields.Integer(string="Batch Size", default=_default_batch_size, required=True)
     state = fields.Selection(
         [("draft", "Draft"), ("in_progress", "In Progress"), ("completed", "Completed"), ("cancelled", "Cancelled")],
@@ -69,8 +70,9 @@ class SPPDemoDataGenerator(models.Model):
     group_type_id = fields.Many2one("g2p.group.kind", string="Group Type")
     id_type_ids = fields.One2many("spp.demo.data.id.types", "demo_data_generator_id", string="ID Types")
     bank_type_ids = fields.One2many("spp.demo.data.bank.types", "demo_data_generator_id", string="Bank Types")
-    percentage_with_bank_account = fields.Float(string="% with Banks", default=100.0, required=True)
-    percentage_with_ids = fields.Float(string="% with IDs", default=100.0, required=True)
+    percentage_with_bank_account = fields.Integer(string="% with Banks", default=100, required=True)
+    percentage_with_ids = fields.Integer(string="% with IDs", default=100, required=True)
+    percentage_with_gps = fields.Integer(string="% with GPS Coordinates", default=100, required=True)
 
     locked = fields.Boolean(string="Locked", default=False)
     locked_reason = fields.Text(string="Locked Reason")
@@ -92,7 +94,8 @@ class SPPDemoDataGenerator(models.Model):
 
     def generate_demo_data(self):
         self.ensure_one()
-        fake = Faker(self.locale_origin.code)
+        faker_code = self.locale_origin.faker_locale or "en_US"
+        fake = Faker(faker_code)
         if self.members_range_from > self.members_range_to:
             self.members_range_from = self._default_members_range_from()
             self.members_range_to = self._default_members_range_to()
@@ -365,6 +368,13 @@ class SPPDemoDataGenerator(models.Model):
             "date_collected": date_collected,
         }
         self.env["g2p.phone.number"].create(phone_vals)
+
+    def create_gps_coordinates(self, fake, registrant):
+        if random.uniform(0, 100) > self.percentage_with_gps:
+            return
+        latitude = fake.latitude()
+        longitude = fake.longitude()
+        registrant.gps_coordinates = f"{latitude}, {longitude}"
 
     def refresh_page(self):
         self.ensure_one()

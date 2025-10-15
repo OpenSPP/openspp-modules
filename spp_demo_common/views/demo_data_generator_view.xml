@@ -45,6 +45,17 @@
                         string="Refresh"
                     />
                 </div>
+                <field name="locale_origin_faker_locale" invisible="1" />
+                <div
+                    class="alert alert-warning text-center o_form_header"
+                    role="status"
+                    invisible="locale_origin_faker_locale or not locale_origin"
+                >
+                    <span>
+                    Warning: There's no generation locale available for this country.
+                    Defaulting to 'en_US' locale.
+                    </span>
+                </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box" invisible="locked">
                         <button
@@ -98,6 +109,14 @@
                                             style="width: 90%;"
                                         />
                                     </div>
+                                    <div style="flex: 1;">
+                                        <h4><label for="group_type_id" class="o_form_label" /><div /></h4>
+                                        <field
+                                            name="group_type_id"
+                                            options="{'no_create': True}"
+                                            readonly="locked or state != 'draft'"
+                                        />
+                                    </div>
                                 </div>
                             </div>
 
@@ -136,10 +155,10 @@
                                 <div style="display: flex; flex-direction: column; gap: 20px;">
                                     <div style="display: flex; gap: 20px; margin-bottom: 10px;">
                                         <div style="flex: 1;">
-                                            <h4><label for="group_type_id" class="o_form_label" /><div /></h4>
+                                            <h4><label for="percentage_with_gps" class="o_form_label" /><div
+                                                /></h4>
                                             <field
-                                                name="group_type_id"
-                                                options="{'no_create': True}"
+                                                name="percentage_with_gps"
                                                 readonly="locked or state != 'draft'"
                                             />
                                         </div>

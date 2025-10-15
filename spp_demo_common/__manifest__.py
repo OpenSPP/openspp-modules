@@ -26,7 +26,7 @@
         "security/ir.model.access.csv",
         "data/export_templates.xml",
         "data/ir_config_parameter_data.xml",
-        "data/demo_origins.xml",
+        "data/res_country.xml",
         "views/main_view.xml",
         "views/res_config_view.xml",
         "views/demo_data_generator_view.xml",
