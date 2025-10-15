@@ -392,18 +392,13 @@ class SPPDemoDataGenerator(models.Model):
         if random.uniform(0, 100) > self.percentage_with_gps:
             return
 
-        # Generate random latitude/longitude within bounds if available
-        if self.locale_origin.lat_min is not None and self.locale_origin.lat_max is not None:
-            latitude = random.uniform(self.locale_origin.lat_min, self.locale_origin.lat_max)
-        else:
-            latitude = float(fake.latitude())
+        lat_min, lat_max = self.locale_origin.lat_min, self.locale_origin.lat_max
+        lon_min, lon_max = self.locale_origin.lon_min, self.locale_origin.lon_max
 
-        if self.locale_origin.lon_min is not None and self.locale_origin.lon_max is not None:
-            longitude = random.uniform(self.locale_origin.lon_min, self.locale_origin.lon_max)
-        else:
-            longitude = float(fake.longitude())
-
-        registrant.gps_coordinates = f"{latitude}, {longitude}"
+        if None not in (lat_min, lat_max, lon_min, lon_max):
+            latitude = round(random.uniform(lat_min, lat_max), 6)
+            longitude = round(random.uniform(lon_min, lon_max), 6)
+            registrant.gps_coordinates = f"{latitude}, {longitude}"
 
     def refresh_page(self):
         self.ensure_one()
