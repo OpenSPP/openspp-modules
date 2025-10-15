@@ -359,7 +359,10 @@ class SPPDemoDataGenerator(models.Model):
             try:
                 phone_number = fake.phone_number()
             except Exception:
-                phone_number = f"+{random.randint(1000000000, 9999999999)}"
+                try:
+                    phone_number = fake.mobile_number()
+                except Exception:
+                    phone_number = f"+{random.randint(1000000000, 9999999999)}"
                 
             # Accept only numbers, spaces, dashes, parentheses, and leading +
             cleaned = phone_number.replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
