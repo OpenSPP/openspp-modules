@@ -1714,13 +1714,6 @@
         <field name="lon_max">56.3960</field>
         <field name="faker_locale">ar_SA</field>
     </record>
-    <record id="base.gb" model="res.country">
-        <field name="lat_min">49.9599</field>
-        <field name="lat_max">58.6350</field>
-        <field name="lon_min">-8.6494</field>
-        <field name="lon_max">1.7636</field>
-        <field name="faker_locale">en_GB</field>
-    </record>
     <record id="base.us" model="res.country">
         <field name="lat_min">24.3963</field>
         <field name="lat_max">49.3845</field>
