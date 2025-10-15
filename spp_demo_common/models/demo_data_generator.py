@@ -355,27 +355,18 @@ class SPPDemoDataGenerator(models.Model):
             self.env["res.partner.bank"].create(bank_account_vals)
 
     def create_phone_numbers(self, fake, registrant):
-        phone_number = None
-        max_attempts = 10
-        for _ in range(max_attempts):
+        while True:
             try:
-                # Some locales may not have phone_number; fallback to random digits
-                if hasattr(fake, "phone_number"):
-                    phone_number = fake.phone_number()
-                else:
-                    phone_number = f"+{random.randint(1000000000, 9999999999)}"
-                cleaned = phone_number.replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
-                if cleaned.startswith("+"):
-                    cleaned = cleaned[1:]
-                if cleaned.isdigit():
-                    break
+                phone_number = fake.phone_number()
             except Exception:
                 phone_number = f"+{random.randint(1000000000, 9999999999)}"
+                
+            # Accept only numbers, spaces, dashes, parentheses, and leading +
+            cleaned = phone_number.replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
+            if cleaned.startswith("+"):
+                cleaned = cleaned[1:]
+            if cleaned.isdigit():
                 break
-        else:
-            # Fallback if all attempts fail
-            phone_number = f"+{random.randint(1000000000, 9999999999)}"
-
         date_collected = self.get_random_date(
             fake,
             datefrom=registrant.registration_date,
