@@ -33,12 +33,10 @@ class SPPDemoDataGenerator(models.Model):
         return int(default_settings.get_param("spp_demo_common.batch_size", 100))
 
     def _default_locale_origin(self):
-        company_lang = self.env.user.company_id.partner_id.lang
-        if company_lang:
-            lang = self.env["spp.demo.origins"].search([("code", "=", company_lang)], limit=1)
-            if lang:
-                return lang
-        return self.env.ref("spp_demo_common.demo_origins_english_us")
+        country = self.env.user.company_id.country_id
+        if country:
+            return country.id
+        return self.env.ref("base.us").id
 
     def _default_queue_job_minimum_size(self):
         default_settings = self.env["ir.config_parameter"].sudo()
