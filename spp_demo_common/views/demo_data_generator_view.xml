@@ -207,10 +207,24 @@
                         </div>
                     </div>
                     <notebook>
-                        <page string="Generated Records" invisible="not generated_ids">
-                            <field name="generated_ids" readonly="1" force_save="1">
+                        <page string="Generated Groups" invisible="not generated_ids">
+                            <field name="generated_ids" domain="[('is_group', '=', True)]" readonly="1" force_save="1">
                                 <tree>
                                     <field name="name" />
+                                    <field name="group_type_id" />
+                                    <field name="group_membership_ids" />
+                                    <field name="reg_ids"/>
+                                    <field name="phone_number_ids"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Generated Individuals" invisible="not generated_ids">
+                            <field name="generated_ids" domain="[('is_group', '=', False), ('is_registrant', '=', True)]" readonly="1" force_save="1">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="individual_membership_ids" />
+                                    <field name="reg_ids"/>
+                                    <field name="phone_number_ids"/>
                                 </tree>
                             </field>
                         </page>

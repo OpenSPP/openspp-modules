@@ -186,6 +186,7 @@ class SPPDemoDataGenerator(models.Model):
         self.create_ids(fake, group)
         self.create_phone_numbers(fake, group)
         self.create_bank_accounts(fake, group)
+        self.create_gps_coordinates(fake, group)
         return group
 
     def generate_individuals(self, fake):
@@ -194,6 +195,7 @@ class SPPDemoDataGenerator(models.Model):
         self.create_ids(fake, individual)
         self.create_phone_numbers(fake, individual)
         self.create_bank_accounts(fake, individual)
+        self.create_gps_coordinates(fake, individual)
         return individual
 
     def get_group_vals(self, fake):
@@ -372,8 +374,18 @@ class SPPDemoDataGenerator(models.Model):
     def create_gps_coordinates(self, fake, registrant):
         if random.uniform(0, 100) > self.percentage_with_gps:
             return
-        latitude = fake.latitude()
-        longitude = fake.longitude()
+
+        # Use locale bounds if available, otherwise fallback to random
+        if self.locale_origin.lat_min is not None and self.locale_origin.lat_max is not None:
+            latitude = fake.latitude(self.locale_origin.lat_min, self.locale_origin.lat_max)
+        else:
+            latitude = fake.latitude()
+
+        if self.locale_origin.lon_min is not None and self.locale_origin.lon_max is not None:
+            longitude = fake.longitude(self.locale_origin.lon_min, self.locale_origin.lon_max)
+        else:
+            longitude = fake.longitude()
+
         registrant.gps_coordinates = f"{latitude}, {longitude}"
 
     def refresh_page(self):
