@@ -893,6 +893,52 @@ class SPPDataImporter(models.Model):
                 for data in json_data[1:]:
                     models.append(data.get("model", ""))
                 self.model_list = ", ".join(models)
+
+                module_names = [name.strip() for name in modules.split(",") if name.strip()]
+                not_installed_modules = self.env["ir.module.module"].search(
+                    [
+                        ("name", "in", module_names),
+                        ("state", "=", "uninstalled")
+                    ]
+                )
+                missing_modules = []
+                for module_name in module_names:
+                    if not self.env["ir.module.module"].search([("name", "=", module_name)], limit=1):
+                        missing_modules.append(module_name)
+
+                wizard = False
+                if not_installed_modules:
+                    wizard = self.env["spp.apps.wizard"].create(
+                        {
+                            "not_installed_module_ids": [(6, 0, not_installed_modules.ids)],
+                        }
+                    )
+                if missing_modules:
+                    missing_vals = []
+                    for module_name in missing_modules:
+                            missing_vals.append((0, 0, {"name": module_name, "wizard_id": wizard.id}))
+                    if wizard:
+                        wizard.update({"missing_module_ids": missing_vals})
+                    else:
+                        wizard = self.env["spp.apps.wizard"].create(
+                            {
+                                "missing_module_ids": missing_vals,
+                            }
+                        )
+                if wizard:
+                    action_id = self.env.ref("openspp_modules.spp_apps_wizard_action").id
+                    return {
+                        "type": "ir.actions.act_window",
+                        "res_model": "spp.apps.wizard",
+                        "view_mode": "form",
+                        "res_id": wizard.id,
+                        "views": [(False, "form")],
+                        "target": "new",
+                        "name": "Module Installation Required",
+                        "context": self.env.context,
+                        "action_id": action_id,
+                    }
+
             except Exception as e:
                 raise ValidationError(f"Failed to parse import file: {e}") from e
 
