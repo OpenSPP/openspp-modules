@@ -312,16 +312,16 @@ class SPPDemoDataGenerator(models.Model):
         """
         if not regex_pattern:
             return None
-
+        
         # Remove anchors if present
         pattern = regex_pattern.strip()
         pattern = re.sub(r'^\^', '', pattern)
         pattern = re.sub(r'\$$', '', pattern)
-
+        
         result = []
         i = 0
         prev_type = None  # Track what we just generated
-
+        
         while i < len(pattern):
             char = pattern[i]
             
@@ -391,11 +391,14 @@ class SPPDemoDataGenerator(models.Model):
                 if i + 1 < len(pattern):
                     next_char = pattern[i + 1]
                     
+                    # Move past the backslash and the character
+                    i += 2
+                    
                     # Check for quantifier after shortcut
                     quantifier_count = 1
-                    if i + 2 < len(pattern) and pattern[i + 2] == '{':
-                        q_end = pattern.index('}', i + 2)
-                        quantifier = pattern[i + 3:q_end]
+                    if i < len(pattern) and pattern[i] == '{':
+                        q_end = pattern.index('}', i)
+                        quantifier = pattern[i + 1:q_end]
                         
                         if ',' in quantifier:
                             min_c, max_c = quantifier.split(',')
@@ -406,8 +409,6 @@ class SPPDemoDataGenerator(models.Model):
                         
                         quantifier_count = random.randint(min_c, max_c)
                         i = q_end + 1
-                    else:
-                        i += 2
                     
                     for _ in range(quantifier_count):
                         if next_char == 'd':  # Digit
@@ -450,7 +451,7 @@ class SPPDemoDataGenerator(models.Model):
                 result.append(char)
                 i += 1
                 prev_type = None
-
+        
         return ''.join(result)
 
     def create_ids(self, fake, registrant):
