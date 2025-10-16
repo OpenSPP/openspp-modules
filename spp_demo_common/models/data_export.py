@@ -164,7 +164,7 @@ class SPPDataExporter(models.Model):
 
     def _read_models_records(self, model_id):
         model_obj = self.env[model_id.model]
-        records = model_obj.search([])
+        records = model_obj.search([("active", "in", [True, False])])
         record_count = len(records)
         data = []
         if record_count > 0:
