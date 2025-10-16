@@ -2,6 +2,7 @@
 import datetime
 import logging
 import random
+import re
 
 from faker import Faker
 
@@ -304,12 +305,139 @@ class SPPDemoDataGenerator(models.Model):
 
         return None
 
+    def generate_id_from_regex(self, regex_pattern):  # noqa: C901
+        """
+        Generate a string that matches the given regex pattern.
+        Supports common regex patterns used in ID validation.
+        """
+        if not regex_pattern:
+            return None
+
+        # Remove anchors if present
+        pattern = regex_pattern.strip()
+        pattern = re.sub(r"^\^", "", pattern)
+        pattern = re.sub(r"\$$", "", pattern)
+
+        result = []
+        i = 0
+
+        while i < len(pattern):
+            char = pattern[i]
+
+            # Handle character classes
+            if char == "[":
+                end = pattern.index("]", i)
+                char_class = pattern[i + 1 : end]
+
+                # Handle ranges like [A-Z], [0-9], [a-z]
+                if "-" in char_class and len(char_class) == 3:
+                    start_char = ord(char_class[0])
+                    end_char = ord(char_class[2])
+                    result.append(chr(random.randint(start_char, end_char)))
+                # Handle negation [^...]
+                elif char_class.startswith("^"):
+                    # For simplicity, generate a random alphanumeric
+                    result.append(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"))
+                # Handle explicit character list [ABC123]
+                else:
+                    result.append(random.choice(char_class))
+
+                i = end + 1
+
+            # Handle quantifiers
+            elif char == "{":
+                end = pattern.index("}", i)
+                quantifier = pattern[i + 1 : end]
+
+                if "," in quantifier:
+                    min_count, max_count = quantifier.split(",")
+                    min_count = int(min_count) if min_count else 0
+                    max_count = int(max_count) if max_count else min_count + 5
+                else:
+                    min_count = max_count = int(quantifier)
+
+                count = random.randint(min_count, max_count)
+                # Repeat the last generated character
+                if result:
+                    last_char = result[-1]
+                    result.extend([last_char] * (count - 1))
+
+                i = end + 1
+
+            # Handle common shortcuts
+            elif char == "\\":
+                if i + 1 < len(pattern):
+                    next_char = pattern[i + 1]
+                    if next_char == "d":  # Digit
+                        result.append(str(random.randint(0, 9)))
+                    elif next_char == "w":  # Word character
+                        result.append(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_"))
+                    elif next_char == "D":  # Non-digit
+                        result.append(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+                    elif next_char == "s":  # Whitespace
+                        result.append(" ")
+                    else:
+                        result.append(next_char)
+                    i += 2
+                else:
+                    i += 1
+
+            # Handle quantifiers *, +, ?
+            elif char in "*+?" and result:
+                if char == "*":
+                    count = random.randint(0, 5)
+                elif char == "+":
+                    count = random.randint(1, 5)
+                else:  # ?
+                    count = random.randint(0, 1)
+
+                last_char = result[-1]
+                result.extend([last_char] * (count - 1))
+                i += 1
+
+            # Handle dot (any character)
+            elif char == ".":
+                result.append(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"))
+                i += 1
+
+            # Regular character
+            else:
+                result.append(char)
+                i += 1
+
+        return "".join(result)
+
     def create_ids(self, fake, registrant):
+        """
+        Create IDs for registrants with dynamic ID number generation based on regex.
+        """
         if random.uniform(0, 100) > self.percentage_with_ids:
             return
+
         id_type_id = self.get_id_type("group" if registrant.is_group else "individual")
+
         if id_type_id:
-            id_number = fake.bothify(text="??######")
+            # Get the id_validation regex from id_type
+            id_validation_regex = None
+            if hasattr(id_type_id, "id_validation") and id_type_id.id_validation:
+                id_validation_regex = id_type_id.id_validation
+
+            # Generate ID number based on regex or fallback to default
+            if id_validation_regex:
+                try:
+                    id_number = self.generate_id_from_regex(id_validation_regex)
+
+                    # Validate generated ID against the regex
+                    if not re.match(id_validation_regex, id_number):
+                        # Fallback if generation failed
+                        id_number = fake.bothify(text="??######")
+                except Exception:
+                    # Fallback to default generation
+                    id_number = fake.bothify(text="??######")
+            else:
+                # No regex provided, use default generation
+                id_number = fake.bothify(text="??######")
+
             issue_date = self.get_random_date(
                 fake,
                 datefrom=registrant.registration_date,
