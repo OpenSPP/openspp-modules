@@ -301,7 +301,8 @@ class SPPDemoDataGenerator(models.Model):
 
         id_type_id = self.env["g2p.id.type"].search([])
         if id_type_id:
-            return random.choice(id_type_id).id if len(id_type_id) > 1 else id_type_id.id
+            id_type = random.choice(id_type_id)
+            return id_type.id if len(id_type_id) > 1 else id_type.id, id_type.id_validation
 
         return None
 
@@ -427,13 +428,13 @@ class SPPDemoDataGenerator(models.Model):
         if random.uniform(0, 100) > self.percentage_with_ids:
             return
 
-        id_type_id = self.get_id_type("group" if registrant.is_group else "individual")
+        id_type_id, id_validation = self.get_id_type("group" if registrant.is_group else "individual")
 
         if id_type_id:
             # Get the id_validation regex from id_type
             id_validation_regex = None
-            if id_type_id.id_validation:
-                id_validation_regex = id_type_id.id_validation
+            if id_validation:
+                id_validation_regex = id_validation
             _logger.info(f"ID Validation Regex: {id_validation_regex}")
             # Generate ID number based on regex or fallback to default
             if id_validation_regex:
