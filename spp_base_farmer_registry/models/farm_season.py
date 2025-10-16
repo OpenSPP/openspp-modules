@@ -107,7 +107,7 @@ class SPPFarmSeason(models.Model):
             raise ValidationError(_("You don't have permission to close seasons"))
         if self.state != "active":
             raise ValidationError(_("Only active seasons can be closed"))
-        self.write({"state": "closed"})
+        self.update({"state": "closed"})
 
     def action_draft(self):
         """Reset season to draft state with proper security checks"""
