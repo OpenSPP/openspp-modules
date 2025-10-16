@@ -213,9 +213,9 @@
                                     <field name="name" />
                                     <field name="kind" />
                                     <field name="group_membership_ids" />
-                                    <field name="reg_ids"/>
-                                    <field name="phone_number_ids"/>
-                                    <field name="gps_coordinates"/>
+                                    <field name="reg_ids" />
+                                    <field name="phone_number_ids" />
+                                    <field name="gps_coordinates" />
                                 </tree>
                             </field>
                         </page>
@@ -224,9 +224,9 @@
                                 <tree>
                                     <field name="name" />
                                     <field name="individual_membership_ids" />
-                                    <field name="reg_ids"/>
-                                    <field name="phone_number_ids"/>
-                                    <field name="gps_coordinates"/>
+                                    <field name="reg_ids" />
+                                    <field name="phone_number_ids" />
+                                    <field name="gps_coordinates" />
                                 </tree>
                             </field>
                         </page>

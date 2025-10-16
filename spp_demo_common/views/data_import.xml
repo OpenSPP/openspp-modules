@@ -206,6 +206,8 @@
                                 <tree>
                                     <field name="shortdesc" />
                                     <field name="name" />
+                                    <field name="state" />
+                                    <button name="button_immediate_install" string="Activate" invisible="to_buy or state != 'uninstalled'" type="object" class="btn btn-primary me-1" groups="base.group_system"/>
                                 </tree>
                             </field>
                         </page>
