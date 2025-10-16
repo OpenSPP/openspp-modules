@@ -635,6 +635,7 @@ class SPPDataImporter(models.Model):
             existing_id = self._check_existing_record(raw, json_data, model, created_mapping, raw_ref)
             if existing_id:
                 # Save the mapping
+                _logger.info(f"1st checking existing_id found: {existing_id}")
                 created_mapping[raw_ref] = existing_id
                 self.created_raw_mapping_json = json.dumps(created_mapping)
                 _creating.discard(raw.id)
@@ -645,6 +646,7 @@ class SPPDataImporter(models.Model):
 
             if existing_id:
                 # Save the mapping
+                _logger.info(f"2nd checking existing_id found: {existing_id}")
                 created_mapping[raw_ref] = existing_id
                 self.created_raw_mapping_json = json.dumps(created_mapping)
                 _creating.discard(raw.id)
