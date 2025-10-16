@@ -78,7 +78,7 @@
                             />
                         </page>
                         <page string="Activities" name="activities" invisible="state == 'draft'">
-                            <field name="activity_ids" readonly="1">
+                            <field name="activity_ids" readonly="1" force_save="1">
                                 <tree>
                                     <field name="activity_type" />
                                     <field name="species_id" />
