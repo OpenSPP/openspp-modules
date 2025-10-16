@@ -933,7 +933,7 @@ class SPPDataImporter(models.Model):
                         "view_mode": "form",
                         "res_id": wizard.id,
                         "views": [(False, "form")],
-                        "target": "new",
+                        "target": "current",
                         "name": "Module Installation Required",
                         "context": self.env.context,
                         "action_id": action_id,
