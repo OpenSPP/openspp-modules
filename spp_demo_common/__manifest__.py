@@ -33,6 +33,7 @@
         "views/data_export.xml",
         "views/data_export_templates.xml",
         "views/data_import.xml",
+        "wizard/apps_wizard_view.xml",
     ],
     "assets": {},
     "demo": [],
