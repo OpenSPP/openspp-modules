@@ -1,6 +1,7 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
+
 class SPPFarmSeason(models.Model):
     _name = "spp.farm.season"
     _description = "Agricultural Season"
