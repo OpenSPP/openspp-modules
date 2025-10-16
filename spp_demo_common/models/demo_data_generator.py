@@ -348,18 +348,14 @@ class SPPDemoDataGenerator(models.Model):
                 
                 # Generate characters based on character class
                 for _ in range(count):
-                    # Handle ranges like [A-Z], [0-9], [a-z]
-                    if '-' in char_class and len(char_class) >= 3:
-                        # Find the range pattern
-                        for j in range(len(char_class) - 2):
-                            if char_class[j + 1] == '-':
-                                start_char = ord(char_class[j])
-                                end_char = ord(char_class[j + 2])
-                                result.append(chr(random.randint(start_char, end_char)))
-                                break
                     # Handle negation [^...]
-                    elif char_class.startswith('^'):
+                    if char_class.startswith('^'):
                         result.append(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'))
+                    # Handle ranges like [A-Z], [0-9], [a-z]
+                    elif '-' in char_class and len(char_class) == 3 and char_class[1] == '-':
+                        start_char = ord(char_class[0])
+                        end_char = ord(char_class[2])
+                        result.append(chr(random.randint(start_char, end_char)))
                     # Handle explicit character list [ABC123]
                     else:
                         result.append(random.choice(char_class))
