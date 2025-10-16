@@ -926,7 +926,7 @@ class SPPDataImporter(models.Model):
                             }
                         )
                 if wizard:
-                    action_id = self.env.ref("openspp_modules.spp_apps_wizard_action").id
+                    action_id = self.env.ref("spp_demo_common.spp_apps_wizard_action").id
                     return {
                         "type": "ir.actions.act_window",
                         "res_model": "spp.apps.wizard",
