@@ -16,7 +16,7 @@ class SPPDataImporter(models.Model):
     _description = "SPP Data Importer"
 
     SKIP_FIELDS = ["message_partner_ids", "age"]
-    DOMAIN_FIELDS = ["name", "code", "value", "phone_no", "email", "display_name", "group", "individual", "login"]
+    DOMAIN_FIELDS = ["name", "code", "value", "phone_no", "email", "display_name", "group", "individual", "login", "active"]
 
     def _default_queue_job_minimum_size(self):
         default_settings = self.env["ir.config_parameter"].sudo()
@@ -698,8 +698,8 @@ class SPPDataImporter(models.Model):
         _logger.info(f"Checking existing record for raw {raw.id} with domain: {domain}")
         if domain:
             existing = model.search(domain, limit=1)
-            _logger.info(f"Existing record search result for raw {raw.id}: {existing}")
             if existing:
+                _logger.info(f"Existing record search result for raw {raw.id}: {existing}")
                 raw.write(
                     {
                         "state": "saved",
