@@ -315,97 +315,143 @@ class SPPDemoDataGenerator(models.Model):
 
         # Remove anchors if present
         pattern = regex_pattern.strip()
-        pattern = re.sub(r"^\^", "", pattern)
-        pattern = re.sub(r"\$$", "", pattern)
+        pattern = re.sub(r'^\^', '', pattern)
+        pattern = re.sub(r'\$$', '', pattern)
 
         result = []
         i = 0
+        prev_type = None  # Track what we just generated
 
         while i < len(pattern):
             char = pattern[i]
-
+            
+            # Check if next character is a quantifier
+            next_is_quantifier = (i + 1 < len(pattern) and pattern[i + 1] in '{*+?')
+            
             # Handle character classes
-            if char == "[":
-                end = pattern.index("]", i)
-                char_class = pattern[i + 1 : end]
-
+            if char == '[':
+                end = pattern.index(']', i)
+                char_class = pattern[i+1:end]
+                
                 # Handle ranges like [A-Z], [0-9], [a-z]
-                if "-" in char_class and len(char_class) == 3:
+                if '-' in char_class and len(char_class) == 3:
                     start_char = ord(char_class[0])
                     end_char = ord(char_class[2])
-                    result.append(chr(random.randint(start_char, end_char)))
+                    
+                    # Check for quantifier
+                    if i + (end - i + 1) < len(pattern) and pattern[end + 1] == '{':
+                        q_end = pattern.index('}', end + 1)
+                        quantifier = pattern[end + 2:q_end]
+                        
+                        if ',' in quantifier:
+                            min_c, max_c = quantifier.split(',')
+                            min_c = int(min_c) if min_c else 0
+                            max_c = int(max_c) if max_c else min_c + 5
+                        else:
+                            min_c = max_c = int(quantifier)
+                        
+                        count = random.randint(min_c, max_c)
+                        for _ in range(count):
+                            result.append(chr(random.randint(start_char, end_char)))
+                        
+                        i = q_end + 1
+                    else:
+                        result.append(chr(random.randint(start_char, end_char)))
+                        i = end + 1
+                        
                 # Handle negation [^...]
-                elif char_class.startswith("^"):
-                    # For simplicity, generate a random alphanumeric
-                    result.append(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"))
+                elif char_class.startswith('^'):
+                    result.append(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'))
+                    i = end + 1
                 # Handle explicit character list [ABC123]
                 else:
                     result.append(random.choice(char_class))
-
-                i = end + 1
-
-            # Handle quantifiers
-            elif char == "{":
-                end = pattern.index("}", i)
-                quantifier = pattern[i + 1 : end]
-
-                if "," in quantifier:
-                    min_count, max_count = quantifier.split(",")
+                    i = end + 1
+                
+                prev_type = 'class'
+                
+            # Handle quantifiers (now only for non-bracket cases)
+            elif char == '{' and prev_type != 'class':
+                end = pattern.index('}', i)
+                quantifier = pattern[i+1:end]
+                
+                if ',' in quantifier:
+                    min_count, max_count = quantifier.split(',')
                     min_count = int(min_count) if min_count else 0
                     max_count = int(max_count) if max_count else min_count + 5
                 else:
                     min_count = max_count = int(quantifier)
-
+                
                 count = random.randint(min_count, max_count)
-                # Repeat the last generated character
-                if result:
-                    last_char = result[-1]
-                    result.extend([last_char] * (count - 1))
-
                 i = end + 1
-
+                prev_type = None
+                
             # Handle common shortcuts
-            elif char == "\\":
+            elif char == '\\':
                 if i + 1 < len(pattern):
                     next_char = pattern[i + 1]
-                    if next_char == "d":  # Digit
-                        result.append(str(random.randint(0, 9)))
-                    elif next_char == "w":  # Word character
-                        result.append(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_"))
-                    elif next_char == "D":  # Non-digit
-                        result.append(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
-                    elif next_char == "s":  # Whitespace
-                        result.append(" ")
+                    
+                    # Check for quantifier after shortcut
+                    quantifier_count = 1
+                    if i + 2 < len(pattern) and pattern[i + 2] == '{':
+                        q_end = pattern.index('}', i + 2)
+                        quantifier = pattern[i + 3:q_end]
+                        
+                        if ',' in quantifier:
+                            min_c, max_c = quantifier.split(',')
+                            min_c = int(min_c) if min_c else 0
+                            max_c = int(max_c) if max_c else min_c + 5
+                        else:
+                            min_c = max_c = int(quantifier)
+                        
+                        quantifier_count = random.randint(min_c, max_c)
+                        i = q_end + 1
                     else:
-                        result.append(next_char)
-                    i += 2
+                        i += 2
+                    
+                    for _ in range(quantifier_count):
+                        if next_char == 'd':  # Digit
+                            result.append(str(random.randint(0, 9)))
+                        elif next_char == 'w':  # Word character
+                            result.append(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_'))
+                        elif next_char == 'D':  # Non-digit
+                            result.append(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
+                        elif next_char == 's':  # Whitespace
+                            result.append(' ')
+                        else:
+                            result.append(next_char)
                 else:
                     i += 1
-
+                
+                prev_type = 'shortcut'
+                    
             # Handle quantifiers *, +, ?
-            elif char in "*+?" and result:
-                if char == "*":
+            elif char in '*+?' and result:
+                if char == '*':
                     count = random.randint(0, 5)
-                elif char == "+":
+                elif char == '+':
                     count = random.randint(1, 5)
                 else:  # ?
                     count = random.randint(0, 1)
-
+                
                 last_char = result[-1]
                 result.extend([last_char] * (count - 1))
                 i += 1
-
+                prev_type = None
+                
             # Handle dot (any character)
-            elif char == ".":
-                result.append(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"))
+            elif char == '.':
+                result.append(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'))
                 i += 1
-
+                prev_type = None
+                
             # Regular character
             else:
                 result.append(char)
                 i += 1
+                prev_type = None
 
-        return "".join(result)
+        return ''.join(result)
 
     def create_ids(self, fake, registrant):
         """
