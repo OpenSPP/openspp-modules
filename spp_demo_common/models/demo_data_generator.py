@@ -310,6 +310,7 @@ class SPPDemoDataGenerator(models.Model):
         Generate a string that matches the given regex pattern.
         Supports common regex patterns used in ID validation.
         """
+        _logger.info(f"Generating ID from regex: {regex_pattern}")
         if not regex_pattern:
             return None
         
