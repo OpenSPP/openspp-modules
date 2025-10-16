@@ -425,14 +425,16 @@ class SPPDemoDataGenerator(models.Model):
             # Generate ID number based on regex or fallback to default
             if id_validation_regex:
                 try:
-                    id_number = self.generate_id_from_regex(id_validation_regex)
+                    while True:
+                        id_number = self.generate_id_from_regex(id_validation_regex)
 
-                    # Validate generated ID against the regex
-                    if not re.match(id_validation_regex, id_number):
-                        # Fallback if generation failed
-                        id_number = fake.bothify(text="??######")
+                        # Validate generated ID against the regex
+                        if not re.match(id_validation_regex, id_number):
+                            continue
+
+                        break
                 except Exception:
-                    # Fallback to default generation
+                    # Fallback if generation failed
                     id_number = fake.bothify(text="??######")
             else:
                 # No regex provided, use default generation
