@@ -692,6 +692,7 @@ class SPPDataImporter(models.Model):
         _logger.info(f"Checking existing record for raw {raw.id} with domain: {domain}")
         if domain:
             existing = model.search(domain, limit=1)
+            _logger.info(f"Existing record search result for raw {raw.id}: {existing}")
             if existing:
                 raw.write(
                     {
