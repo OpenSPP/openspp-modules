@@ -432,7 +432,7 @@ class SPPDemoDataGenerator(models.Model):
         if id_type_id:
             # Get the id_validation regex from id_type
             id_validation_regex = None
-            if hasattr(id_type_id, "id_validation") and id_type_id.id_validation:
+            if id_type_id.id_validation:
                 id_validation_regex = id_type_id.id_validation
             _logger.info(f"ID Validation Regex: {id_validation_regex}")
             # Generate ID number based on regex or fallback to default
