@@ -295,16 +295,17 @@ class SPPDemoDataGenerator(models.Model):
             )
             if id_type:
                 if len(self.id_type_ids) == 1:
-                    return id_type.name.id
-                return random.choice(id_type.name.ids)
-            return None
+                    return id_type.name.id, id_type.name.id_validation
+                random_id = random.choice(id_type.name)
+                return random_id.id, random_id.id_validation
+            return None, None
 
         id_type_id = self.env["g2p.id.type"].search([])
         if id_type_id:
             id_type = random.choice(id_type_id)
             return id_type.id if len(id_type_id) > 1 else id_type.id, id_type.id_validation
 
-        return None
+        return None, None
 
     def generate_id_from_regex(self, regex_pattern):  # noqa: C901
         """
