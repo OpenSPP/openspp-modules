@@ -1,8 +1,5 @@
-import logging
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-
-_logger = logging.getLogger(__name__)
 
 class SPPFarmSeason(models.Model):
     _name = "spp.farm.season"
@@ -109,9 +106,7 @@ class SPPFarmSeason(models.Model):
             raise ValidationError(_("You don't have permission to close seasons"))
         if self.state != "active":
             raise ValidationError(_("Only active seasons can be closed"))
-        _logger.info("Before close, activity_ids: %s", self.activity_ids.ids)
         self.write({"state": "closed"})
-        _logger.info("After close, activity_ids: %s", self.activity_ids.ids)
 
     def action_draft(self):
         """Reset season to draft state with proper security checks"""
@@ -212,7 +207,6 @@ class SPPFarmSeason(models.Model):
         for record in self:
             if not record.can_edit and (set(vals.keys()) - {"message_ids", "message_follower_ids"}):
                 raise ValidationError(_("You don't have permission to modify this season"))
-        _logger.info("Writing values: %s", vals)
         return super().write(vals)
 
     @api.model
