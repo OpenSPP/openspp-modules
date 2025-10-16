@@ -119,17 +119,17 @@ class SPPFarmSeason(models.Model):
             raise ValidationError(_("Cannot reset to draft when activities exist"))
         self.write({"state": "draft"})
 
-    # @api.constrains("state")
-    # def _check_state_transition(self):
-    #     """Validate state transitions"""
-    #     for record in self:
-    #         if record.state == "closed":
-    #             # Check for ongoing activities
-    #             ongoing = self.env["spp.farm.activity"].search_count([("season_id", "=", record.id)])
-    #             if ongoing:
-    #                 raise ValidationError(
-    #                     _("Cannot close season with ongoing activities. " "Please complete or cancel them first.")
-    #                 )
+    @api.constrains("state")
+    def _check_state_transition(self):
+        """Validate state transitions"""
+        for record in self:
+            if record.state == "closed":
+                # Check for ongoing activities
+                ongoing = self.env["spp.farm.activity"].search_count([("season_id", "=", record.id)])
+                if ongoing:
+                    raise ValidationError(
+                        _("Cannot close season with ongoing activities. " "Please complete or cancel them first.")
+                    )
 
     @api.constrains("date_start", "date_end", "state")
     def _check_overlapping_active_seasons(self):
