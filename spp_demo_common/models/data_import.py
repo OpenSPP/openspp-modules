@@ -916,7 +916,7 @@ class SPPDataImporter(models.Model):
                 if missing_modules:
                     missing_vals = []
                     for module_name in missing_modules:
-                            missing_vals.append((0, 0, {"name": module_name, "wizard_id": wizard.id}))
+                            missing_vals.append((0, 0, {"name": module_name}))
                     if wizard:
                         wizard.update({"missing_module_ids": missing_vals})
                     else:
