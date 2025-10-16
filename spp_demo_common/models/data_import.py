@@ -137,7 +137,7 @@ class SPPDataImporter(models.Model):
         }
     
     def _check_missing_not_installed_modules(self):
-        module_names = list(self.module_list)
+        module_names = [name.strip() for name in self.module_list.split(",") if name.strip()]
         not_installed_modules = self.env["ir.module.module"].search(
             [
                 ("name", "in", module_names),
@@ -159,7 +159,7 @@ class SPPDataImporter(models.Model):
         if missing_modules:
             missing_vals = []
             for module_name in missing_modules:
-                    missing_vals.append((0, 0, {"name": module_name}))
+                missing_vals.append((0, 0, {"name": module_name}))
             if wizard:
                 wizard.update({"missing_module_ids": missing_vals})
             else:
@@ -176,7 +176,7 @@ class SPPDataImporter(models.Model):
                 "view_mode": "form",
                 "res_id": wizard.id,
                 "views": [(False, "form")],
-                "target": "current",
+                "target": "new",
                 "name": "Module Installation Required",
                 "context": self.env.context,
                 "action_id": action_id,
