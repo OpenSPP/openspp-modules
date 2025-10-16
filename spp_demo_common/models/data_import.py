@@ -894,7 +894,7 @@ class SPPDataImporter(models.Model):
                     models.append(data.get("model", ""))
                 self.model_list = ", ".join(models)
 
-                module_names = self.module_list
+                module_names = list(self.module_list)
                 not_installed_modules = self.env["ir.module.module"].search(
                     [
                         ("name", "in", module_names),
