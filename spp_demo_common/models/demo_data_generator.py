@@ -1,7 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import logging
 import random
-
+import datetime
 from faker import Faker
 
 from odoo import fields, models
@@ -231,12 +231,12 @@ class SPPDemoDataGenerator(models.Model):
     def get_individual_vals(self, fake):
         birth_date = self.get_random_date(
             fake,
-            datefrom=fields.Date.today().replace(year=fields.Date.today().year - 70),
+            datefrom=fields.Date.today().replace(year=fields.Date.today().year - 50),
             dateto=fields.Date.today().replace(year=fields.Date.today().year - 1),
         )
         registration_date = self.get_random_date(
             fake,
-            datefrom=birth_date.replace(year=birth_date.year + 1),
+            datefrom=birth_date + datetime.timedelta(days=365),
             dateto=fields.Date.today(),
         )
         gender = random.choice(self.GENDERS)
@@ -314,7 +314,7 @@ class SPPDemoDataGenerator(models.Model):
                 datefrom=registrant.registration_date,
                 dateto=fields.Date.today(),
             )
-            id_expiry_date = issue_date.replace(year=issue_date.year + 1)
+            id_expiry_date = issue_date + datetime.timedelta(days=365)
 
             id_vals = {
                 "partner_id": registrant.id,
