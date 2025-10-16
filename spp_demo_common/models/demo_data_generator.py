@@ -1,7 +1,8 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+import datetime
 import logging
 import random
-import datetime
+
 from faker import Faker
 
 from odoo import fields, models

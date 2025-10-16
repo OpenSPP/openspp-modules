@@ -16,7 +16,18 @@ class SPPDataImporter(models.Model):
     _description = "SPP Data Importer"
 
     SKIP_FIELDS = ["message_partner_ids", "age"]
-    DOMAIN_FIELDS = ["name", "code", "value", "phone_no", "email", "display_name", "group", "individual", "login", "active"]
+    DOMAIN_FIELDS = [
+        "name",
+        "code",
+        "value",
+        "phone_no",
+        "email",
+        "display_name",
+        "group",
+        "individual",
+        "login",
+        "active",
+    ]
 
     def _default_queue_job_minimum_size(self):
         default_settings = self.env["ir.config_parameter"].sudo()
@@ -135,14 +146,11 @@ class SPPDataImporter(models.Model):
                 },
             },
         }
-    
+
     def _check_missing_not_installed_modules(self):
         module_names = [name.strip() for name in self.module_list.split(",") if name.strip()]
         not_installed_modules = self.env["ir.module.module"].search(
-            [
-                ("name", "in", module_names),
-                ("state", "=", "uninstalled")
-            ]
+            [("name", "in", module_names), ("state", "=", "uninstalled")]
         )
         missing_modules = []
         for module_name in module_names:
@@ -707,9 +715,9 @@ class SPPDataImporter(models.Model):
                         "remarks": "Record already exists, skipped creation.",
                     }
                 )
-                
+
                 _logger.info(f"Skipped creation for raw {raw.id}, record already exists with ID {existing.id}")
-                return existing.id,
+                return (existing.id,)
 
         return None
 

@@ -232,7 +232,7 @@
                         </page>
                         <page string="ID Types">
                             <field name="id_type_ids" readonly="locked or state != 'draft'">
-                                <tree editable="bottom">
+                                <tree editable="bottom" delete="true">
                                     <field name="name" options="{'no_create': True}" />
                                     <field name="target_type" />
                                 </tree>
@@ -240,7 +240,7 @@
                         </page>
                         <page string="Bank Types">
                             <field name="bank_type_ids" readonly="locked or state != 'draft'">
-                                <tree editable="bottom">
+                                <tree editable="bottom" delete="true">
                                     <field name="name" options="{'no_create': True}" />
                                     <field name="target_type" />
                                 </tree>
