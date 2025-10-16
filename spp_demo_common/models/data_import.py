@@ -636,6 +636,7 @@ class SPPDataImporter(models.Model):
             if existing_id:
                 # Save the mapping
                 self.created_raw_mapping_json = json.dumps(created_mapping)
+                _creating.discard(raw.id)
                 return existing_id
 
             # Build creation data
@@ -644,6 +645,7 @@ class SPPDataImporter(models.Model):
             if existing_id:
                 # Save the mapping
                 self.created_raw_mapping_json = json.dumps(created_mapping)
+                _creating.discard(raw.id)
                 return existing_id
 
             # Create the record
