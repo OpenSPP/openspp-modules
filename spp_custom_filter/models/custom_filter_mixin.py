@@ -79,12 +79,17 @@ class CustomFilterMixin(models.AbstractModel):
         res = super()._get_view(view_id=view_id, view_type=view_type, **options)
         context = self.env.context.copy()
         _logger.info("Custom Filter Mixin _get_view Context: %s", context)
+        # Log the options to see if they contain relevant info
+        _logger.info("Custom Filter Mixin _get_view Options: %s", options)
+        # Log the result to see its structure
+        _logger.info("Custom Filter Mixin _get_view Result: %s", res)
+        
         if isinstance(res, tuple):
             view_arch, fields = res
         else:
             view_arch = res.get('arch')
             fields = res.get('fields', {})
-            
+
         if isinstance(fields, dict):
             for fname, field in fields.items():
                 if fname == "id":
