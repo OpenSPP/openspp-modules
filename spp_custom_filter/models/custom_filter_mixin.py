@@ -75,11 +75,10 @@ class CustomFilterMixin(models.AbstractModel):
         return res
 
     @api.model
-    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
-        res = super().fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
+    def _get_view(self, view_id=None, view_type='form', **options):
+        res = super()._get_view(view_id=view_id, view_type=view_type, **options)
         context = self.env.context.copy()
-        _logger.info("FIELDS VIEW GET called")
-        _logger.info("Custom Filter Mixin fields_view_get Context: %s", context)
+        _logger.info("Custom Filter Mixin _get_view Context: %s", context)
         fields = res.get('fields', {})
         for fname, field in fields.items():
             if fname == "id":
