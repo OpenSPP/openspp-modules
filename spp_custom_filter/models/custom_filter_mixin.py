@@ -84,26 +84,27 @@ class CustomFilterMixin(models.AbstractModel):
         else:
             view_arch = res.get('arch')
             fields = res.get('fields', {})
+            
+        if isinstance(fields, dict):
+            for fname, field in fields.items():
+                if fname == "id":
+                    allow_filter = getattr(self._fields[fname], "allow_filter", True)
+                    filter_target = getattr(self._fields[fname], "filter_target", "both")
+                else:
+                    allow_filter = getattr(self._fields[fname], "allow_filter", False)
+                    filter_target = getattr(self._fields[fname], "filter_target", "both")
 
-        for fname, field in fields.items():
-            if fname == "id":
-                allow_filter = getattr(self._fields[fname], "allow_filter", True)
-                filter_target = getattr(self._fields[fname], "filter_target", "both")
-            else:
-                allow_filter = getattr(self._fields[fname], "allow_filter", False)
-                filter_target = getattr(self._fields[fname], "filter_target", "both")
+                if filter_target == "individual" and context.get("is_group"):
+                    allow_filter = False
+                if filter_target == "group" and not context.get("is_group"):
+                    allow_filter = False
+                if filter_target == "both":
+                    allow_filter = allow_filter
 
-            if filter_target == "individual" and context.get("is_group"):
-                allow_filter = False
-            if filter_target == "group" and not context.get("is_group"):
-                allow_filter = False
-            if filter_target == "both":
-                allow_filter = allow_filter
-
-            if field.get("searchable"):
-                field["searchable"] = allow_filter and field["searchable"]
-            if field.get("exportable"):
-                field["exportable"] = allow_filter and field["exportable"]
+                if field.get("searchable"):
+                    field["searchable"] = allow_filter and field["searchable"]
+                if field.get("exportable"):
+                    field["exportable"] = allow_filter and field["exportable"]
 
         if isinstance(res, tuple):
             return (view_arch, fields)
