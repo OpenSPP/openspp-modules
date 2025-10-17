@@ -79,7 +79,12 @@ class CustomFilterMixin(models.AbstractModel):
         res = super()._get_view(view_id=view_id, view_type=view_type, **options)
         context = self.env.context.copy()
         _logger.info("Custom Filter Mixin _get_view Context: %s", context)
-        fields = res.get('fields', {})
+        if isinstance(res, tuple):
+            view_arch, fields = res
+        else:
+            view_arch = res.get('arch')
+            fields = res.get('fields', {})
+
         for fname, field in fields.items():
             if fname == "id":
                 allow_filter = getattr(self._fields[fname], "allow_filter", True)
@@ -100,7 +105,11 @@ class CustomFilterMixin(models.AbstractModel):
             if field.get("exportable"):
                 field["exportable"] = allow_filter and field["exportable"]
 
-        return res
+        if isinstance(res, tuple):
+            return (view_arch, fields)
+        else:
+            res['fields'] = fields
+            return res
     
     def _valid_field_parameter(self, field, name):
         return name in ["allow_filter", "filter_target"] or super()._valid_field_parameter(field, name)
