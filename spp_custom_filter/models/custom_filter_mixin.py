@@ -74,5 +74,33 @@ class CustomFilterMixin(models.AbstractModel):
 
         return res
 
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+        res = super().fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
+        context = self.env.context.copy()
+        _logger.info("Custom Filter Mixin fields_view_get Context: %s", context)
+        fields = res.get('fields', {})
+        for fname, field in fields.items():
+            if fname == "id":
+                allow_filter = getattr(self._fields[fname], "allow_filter", True)
+                filter_target = getattr(self._fields[fname], "filter_target", "both")
+            else:
+                allow_filter = getattr(self._fields[fname], "allow_filter", False)
+                filter_target = getattr(self._fields[fname], "filter_target", "both")
+
+            if filter_target == "individual" and context.get("is_group"):
+                allow_filter = False
+            if filter_target == "group" and not context.get("is_group"):
+                allow_filter = False
+            if filter_target == "both":
+                allow_filter = allow_filter
+
+            if field.get("searchable"):
+                field["searchable"] = allow_filter and field["searchable"]
+            if field.get("exportable"):
+                field["exportable"] = allow_filter and field["exportable"]
+
+        return res
+    
     def _valid_field_parameter(self, field, name):
         return name in ["allow_filter", "filter_target"] or super()._valid_field_parameter(field, name)
