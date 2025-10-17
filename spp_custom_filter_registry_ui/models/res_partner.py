@@ -31,7 +31,7 @@ class ResPartner(models.Model):
     family_name = fields.Char(allow_filter=True, filter_target="individual")
     # gender = fields.Selection(allow_filter=True)
     given_name = fields.Char(allow_filter=True, filter_target="individual")
-    marital_status = fields.Selection(allow_filter=True, filter_target="individual")
+    # marital_status = fields.Selection(allow_filter=True, filter_target="individual")
     group_membership_ids = fields.One2many(allow_filter=True, filter_target="group")
     id_pdf = fields.Binary(allow_filter=True)
     id_pdf_filename = fields.Char(allow_filter=True)
