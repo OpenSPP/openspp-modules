@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -11,19 +11,14 @@ class SPPRegistrantRelationship(models.Model):
         """Validate that relation is required"""
         for record in self:
             # Skip validation for completely new records (no ID and no other fields filled)
-            if not record.id or not any([
-                record.source,
-                record.destination,
-                record.start_date
-            ]):
+            if not record.id or not any([record.source, record.destination, record.start_date]):
                 continue
-                
+
             if not record.relation:
                 raise ValidationError(
-                    "The Relation field is required for registrant relationships. "
-                    "Please select a relation type from the dropdown. "
-                    "If no relation types are available, please go to "
-                    "Configuration > Relationships to create them first."
+                    "Relation field required. To complete registrant relation, "
+                    "please select a relation type from the dropdown. If no options are available, "
+                    "go to Configuration > Relation Types to create relation types first."
                 )
 
     @api.constrains("relation")

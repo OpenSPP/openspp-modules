@@ -18,4 +18,6 @@
         name="Settings"
         web_icon="spp_base_common,static/description/OpenSPP-Icons-Setting.png"
     />
+
+    <menuitem id="g2p_registry_base.menu_relationship" name="Relation Types" />
 </odoo>
