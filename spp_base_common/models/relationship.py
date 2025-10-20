@@ -11,7 +11,7 @@ class SPPRegistrantRelationship(models.Model):
         """Validate that relation is required"""
         for record in self:
             # Skip validation for completely new records (no ID and no other fields filled)
-            if not record.id and not any([
+            if not record.id or not any([
                 record.source,
                 record.destination,
                 record.start_date
