@@ -19,12 +19,12 @@ class SPPRegistrantRelationship(models.Model):
                 continue
                 
             if not record.relation:
-                raise ValidationError("Registrant Relationship's relation is required")
-
-    @api.onchange("relation")
-    def _onchange_relation(self):
-        """Validate that relation is required"""
-        self._validate_relation_required()
+                raise ValidationError(
+                    "The Relation field is required for registrant relationships. "
+                    "Please select a relation type from the dropdown. "
+                    "If no relation types are available, please go to "
+                    "Configuration > Relationships to create them first."
+                )
 
     @api.constrains("relation")
     def _check_relation_required(self):
