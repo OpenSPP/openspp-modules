@@ -58,11 +58,21 @@ class SPPFarmSeason(models.Model):
         string="Can Close",
         compute="_compute_access_rights",
     )
+    show_close_button = fields.Boolean(
+        string="Show Close Button",
+        compute="_compute_show_close_button",
+    )
 
     allow_overlap = fields.Boolean(
         string="Allow Overlap with Other Seasons",
         default=False,
         help="If checked, this season can overlap with other active seasons",
+    )
+
+    force_close = fields.Boolean(
+        string="Force Close",
+        default=False,
+        help="If checked, allows closing the season before the end date",
     )
 
     activity_type = fields.Selection(
@@ -79,6 +89,11 @@ class SPPFarmSeason(models.Model):
             record.can_edit = is_manager and record.state != "closed"
             record.can_activate = is_manager and record.state == "draft"
             record.can_close = is_manager and record.state == "active"
+
+    @api.depends("date_end")
+    def _compute_show_close_button(self):
+        for record in self:
+            record.show_close_button = record.date_end >= fields.Date.today()
 
     @api.depends("activity_ids")
     def _compute_activity_count(self):
@@ -109,6 +124,15 @@ class SPPFarmSeason(models.Model):
             raise ValidationError(_("Only active seasons can be closed"))
         self.write({"state": "closed"})
 
+    def action_force_close(self):
+        """Force close the season even before end date"""
+        self.ensure_one()
+        if not self.can_close:
+            raise ValidationError(_("You don't have permission to close seasons"))
+        if self.state != "active":
+            raise ValidationError(_("Only active seasons can be closed"))
+        self.write({"state": "closed", "force_close": True})
+
     def action_draft(self):
         """Reset season to draft state with proper security checks"""
         self.ensure_one()
@@ -125,11 +149,13 @@ class SPPFarmSeason(models.Model):
         """Validate state transitions"""
         for record in self:
             if record.state == "closed":
-                # Check for ongoing activities
-                ongoing = self.env["spp.farm.activity"].search_count([("season_id", "=", record.id)])
-                if ongoing:
+                # Check if season has ended (date validation) unless force close is enabled
+                if (record.date_end and record.date_end > fields.Date.today() 
+                    and not record.force_close):
                     raise ValidationError(
-                        _("Cannot close season with ongoing activities. " "Please complete or cancel them first.")
+                        _("Cannot close season before the end date. "
+                          "Please wait until the season end date, adjust the end date, "
+                          "or enable 'Force Close' to override this restriction.")
                     )
 
     @api.constrains("date_start", "date_end", "state")

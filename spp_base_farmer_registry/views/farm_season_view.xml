@@ -9,6 +9,7 @@
                 <field name="can_activate" invisible="1" />
                 <field name="can_close" invisible="1" />
                 <field name="can_edit" invisible="1" />
+                <field name="show_close_button" invisible="1" />
                 <header>
                     <button
                         name="action_activate"
@@ -22,7 +23,15 @@
                         string="Close"
                         type="object"
                         class="oe_highlight"
-                        invisible="not can_close"
+                        invisible="not can_close or not show_close_button"
+                    />
+                    <button
+                        name="action_force_close"
+                        string="Force Close"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="not can_close or state != 'active'"
+                        groups="spp_base_farmer_registry.group_spp_farm_manager"
                     />
                     <button
                         name="action_draft"
