@@ -10,6 +10,14 @@ class SPPRegistrantRelationship(models.Model):
     def _validate_relation_required(self):
         """Validate that relation is required"""
         for record in self:
+            # Skip validation for completely new records (no ID and no other fields filled)
+            if not record.id and not any([
+                record.individual,
+                record.related_individual,
+                record.relation
+            ]):
+                continue
+                
             if not record.relation:
                 raise ValidationError("Registrant Relationship's relation is required")
 
