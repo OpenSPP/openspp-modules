@@ -8,10 +8,10 @@
             <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="after">
                 <field name="relation_inverse" />
             </xpath>
-            <xpath expr="//field[@name='related_2_ids']/tree/" position="attributes">
+            <xpath expr="//field[@name='related_2_ids']" position="attributes">
                 <attribute name="readonly">1</attribute>
             </xpath>
-            <xpath expr="//field[@name='related_2_ids']/tree/" position="attributes">
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="attributes">
                 <attribute name="column_invisible">1</attribute>
             </xpath>
         </field>
