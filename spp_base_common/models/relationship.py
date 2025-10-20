@@ -12,9 +12,9 @@ class SPPRegistrantRelationship(models.Model):
         for record in self:
             # Skip validation for completely new records (no ID and no other fields filled)
             if not record.id and not any([
-                record.individual,
-                record.related_individual,
-                record.relation
+                record.source,
+                record.destination,
+                record.start_date
             ]):
                 continue
                 
