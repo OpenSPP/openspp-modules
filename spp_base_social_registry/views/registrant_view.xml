@@ -12,8 +12,8 @@
         </field>
     </record>
 
-    <record id="view_individuals_base_custom_form" model="ir.ui.view">
-        <field name="name">view_individuals_base_custom_form</field>
+    <record id="view_individuals_social_registry_form" model="ir.ui.view">
+        <field name="name">view_individuals_social_registry_form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
         <field name="arch" type="xml">
@@ -41,6 +41,9 @@
             <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']" position="attributes">
                 <attribute name="column_invisible">1</attribute>
             </xpath>
+            <xpath expr="//page[@name='relationships']" position="attributes">
+                <attribute name="string">Relations</attribute>
+            </xpath>
         </field>
     </record>
 
@@ -55,8 +58,8 @@
         </field>
     </record>
 
-    <record id="view_groups_base_custom_form" model="ir.ui.view">
-        <field name="name">view_groups_base_custom_form</field>
+    <record id="view_groups_social_registry_form" model="ir.ui.view">
+        <field name="name">view_groups_social_registry_form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
@@ -83,6 +86,9 @@
             </xpath>
             <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']" position="attributes">
                 <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='relationships']" position="attributes">
+                <attribute name="string">Relations</attribute>
             </xpath>
         </field>
     </record>

@@ -34,6 +34,9 @@
             <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']" position="attributes">
                 <attribute name="column_invisible">1</attribute>
             </xpath>
+            <xpath expr="//page[@name='relationships']" position="attributes">
+                <attribute name="string">Relations</attribute>
+            </xpath>
         </field>
     </record>
 
@@ -69,6 +72,9 @@
             </xpath>
             <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']" position="attributes">
                 <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='relationships']" position="attributes">
+                <attribute name="string">Relations</attribute>
             </xpath>
         </field>
     </record>
