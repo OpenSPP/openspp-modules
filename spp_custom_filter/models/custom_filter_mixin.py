@@ -1,7 +1,9 @@
 import logging
+
 from odoo import api, models
 
 _logger = logging.getLogger(__name__)
+
 
 class CustomFilterMixin(models.AbstractModel):
     _name = "custom.filter.mixin"
@@ -59,7 +61,7 @@ class CustomFilterMixin(models.AbstractModel):
 
             if filter_target == "individual" and context.get("is_group"):
                 allow_filter = False
-            
+
             if filter_target == "group" and not context.get("is_group"):
                 allow_filter = False
 
@@ -72,6 +74,6 @@ class CustomFilterMixin(models.AbstractModel):
                 res[fname]["exportable"] = allow_filter and res[fname]["exportable"]
 
         return res
-    
+
     def _valid_field_parameter(self, field, name):
         return name in ["allow_filter", "filter_target"] or super()._valid_field_parameter(field, name)
