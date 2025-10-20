@@ -103,7 +103,8 @@ class SPPFarmSeason(models.Model):
             if record.state != "active":
                 record.show_close_button = False
                 return
-            record.show_close_button = record.date_end >= fields.Date.today()
+            # Show normal close button when season has ended or is ending today
+            record.show_close_button = record.date_end <= fields.Date.today()
     
     @api.depends("date_end")
     def _compute_show_force_close_button(self):
@@ -114,7 +115,8 @@ class SPPFarmSeason(models.Model):
             if record.state != "active":
                 record.show_force_close_button = False
                 return
-            record.show_force_close_button = record.date_end < fields.Date.today()
+            # Show force close button when season hasn't ended yet
+            record.show_force_close_button = record.date_end > fields.Date.today()
 
     @api.depends("activity_ids")
     def _compute_activity_count(self):
