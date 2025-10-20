@@ -50,7 +50,7 @@ class SPPRegistrantRelationship(models.Model):
                 raise ValidationError(
                     _(
                         "Duplicate Relation Detected !\n\n"
-                        "A record with the same relation type already exists and has overlapping dates. \n\n"
+                        "A record with the same relation type already exists and has overlapping dates. \n"
                         "To save multiple entries of the same relation, please define distinct start and end dates."
                     )
                 )
