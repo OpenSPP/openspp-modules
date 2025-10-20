@@ -24,7 +24,12 @@
             <xpath expr="//page[@name='other']" position="before">
                 <page string="Members" name="members_page">
                     <group col="4" colspan="4">
-                        <field name="group_membership_ids" readonly="disabled or not create_date" nolabel="1" colspan="4">
+                        <field
+                            name="group_membership_ids"
+                            readonly="disabled or not create_date"
+                            nolabel="1"
+                            colspan="4"
+                        >
                             <tree default_order='status asc,ended_date asc'>
                                 <button
                                     name="open_individual_form"
