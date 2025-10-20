@@ -22,7 +22,7 @@
     <menuitem 
         id="g2p_registry_base.menu_relationship" 
         name="Relation Types"
-        action="action_relationship"
+        action="g2p_registry_base.action_relationship"
         parent="g2p_registry_base.g2p_configuration_menu_root"
         sequence="20"
         groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar" 
