@@ -29,8 +29,6 @@
         "security/ir.model.access.csv",
         "views/main_view.xml",
         "views/phone_validation_view.xml",
-        "views/group_view.xml",
-        "views/individual_view.xml",
     ],
     "assets": {
         "web.assets_backend": [
