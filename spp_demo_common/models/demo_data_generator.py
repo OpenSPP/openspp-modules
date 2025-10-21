@@ -174,7 +174,7 @@ class SPPDemoDataGenerator(models.Model):
         main_job.on_done(self.delayable()._mark_done())
         main_job.delay()
 
-    def _process_batch(self, batch):
+    def _process_batch(self, batch, fake):
         self.ensure_one()
         for _ in range(batch[0], batch[1]):
             self._generate_demo_data(fake)
