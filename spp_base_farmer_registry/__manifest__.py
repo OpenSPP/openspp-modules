@@ -22,7 +22,6 @@
         "spp_custom_field",
         "spp_custom_fields_ui",
         "spp_custom_filter_registry_ui",
-        "spp_hide_menus_base",
         "spp_irrigation",
         "spp_land_record",
         "spp_openid_vci_individual",
