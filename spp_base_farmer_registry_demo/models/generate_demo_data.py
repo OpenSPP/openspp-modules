@@ -78,8 +78,13 @@ class SPPDemoDataGenerator(models.Model):
     ]
 
     CULTIVATION_METHODS = [
-        ("irrigated", "Irrigated"),
-        ("rainfed", "Rainfed"),
+        ("cultivation", "Cultivation"),
+        ("livestock", "Livestock"),
+        ("aquaculture", "Aquaculture"),
+        ("mixed", "Mixed Use"),
+        ("fallow", "Fallow"),
+        ("leased_out", "Leased Out"),
+        ("other", "Other"),
     ]
 
     LEGAL_STATUSES = [
