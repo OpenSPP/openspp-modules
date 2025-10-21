@@ -22,6 +22,7 @@
         "spp_custom_field",
         "spp_custom_fields_ui",
         "spp_custom_filter_registry_ui",
+        "spp_hide_menus_base",
         "spp_irrigation",
         "spp_land_record",
         "spp_openid_vci_individual",
@@ -39,8 +40,8 @@
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
+        "data/hide_relation_types_menu.xml",
         "views/farm_season_view.xml",
-        "views/hide_relation_types_menu.xml",
         "data/kind_data.xml",
         "views/res_partner.xml",
         "views/configuration_view.xml",

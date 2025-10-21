@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-    <!-- Hide Relation Types menu item -->
-    <record id="g2p_registry_base.menu_relationship" model="ir.ui.menu">
-        <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]" />
-    </record>
-</odoo>
