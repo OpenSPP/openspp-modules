@@ -36,7 +36,6 @@
         "data/feed_items_data.xml",
         "views/group_view.xml",
         "views/individual_view.xml",
-        "views/generate_farmer_data_view.xml",
     ],
     "assets": {},
     "demo": [],

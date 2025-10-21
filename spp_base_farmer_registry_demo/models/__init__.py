@@ -6,4 +6,5 @@ from . import farm_asset
 from . import farm_details
 from . import farmer
 from . import generate_farmer_data
+from . import generate_demo_data
 from . import land_record
