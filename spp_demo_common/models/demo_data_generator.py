@@ -155,10 +155,13 @@ class SPPDemoDataGenerator(models.Model):
             individual = self.generate_individuals(fake)
             membership_vals = self.get_group_membership_vals(fake, group, individual)
             if is_head_member:
-                have_head_member = True
-                new_group_name = individual.family_name
-                group.name = new_group_name
-                membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
+                # Check if the group doesn't have a head member before proceeding
+                if not group.group_membership_ids.filtered(lambda x: x.kind in [self.env.ref("g2p_registry_membership.group_membership_kind_head").id]):
+                    have_head_member = True
+                    new_group_name = individual.family_name
+                    group.name = new_group_name
+                    membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
+
             self.env["g2p.group.membership"].create(membership_vals)
 
     def _async_generate_demo_data(self):

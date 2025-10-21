@@ -78,13 +78,8 @@ class SPPDemoDataGenerator(models.Model):
     ]
 
     CULTIVATION_METHODS = [
-        ("cultivation", "Cultivation"),
-        ("livestock", "Livestock"),
-        ("aquaculture", "Aquaculture"),
-        ("mixed", "Mixed Use"),
-        ("fallow", "Fallow"),
-        ("leased_out", "Leased Out"),
-        ("other", "Other"),
+        ("irrigated", "Irrigated"),
+        ("rainfed", "Rainfed"),
     ]
 
     LEGAL_STATUSES = [
@@ -141,6 +136,30 @@ class SPPDemoDataGenerator(models.Model):
             "highest_education_level": random.choice([
                 "none", "primary", "secondary", "certificate", 
                 "diploma", "university", "tertiary"
+            ]),
+        })
+
+        # Specific Head Farmer details on Group
+        group_vals.update({
+            "farmer_family_name": fake.last_name(),
+            "farmer_given_name": fake.first_name(),
+            "farmer_addtnl_name": fake.first_name() if random.choice([True, False]) else None,
+            "farmer_mobile_tel": fake.phone_number(),
+            "farmer_sex": self.get_gender_id(random.choice(self.GENDERS)),
+            "farmer_birthdate": self.get_random_date(
+                fake,
+                datefrom=fields.Date.today().replace(year=fields.Date.today().year - 70),
+                dateto=fields.Date.today().replace(year=fields.Date.today().year - 18),
+            ),
+            "farmer_household_size": group_vals.get("household_size", random.randint(1, 15)),
+            "farmer_postal_address": fake.address(),
+            "farmer_email": fake.email(),
+            "farmer_formal_agricultural": random.choice([True, False]),
+            "farmer_highest_education_level": random.choice([
+                "none", "primary", "secondary", "tertiary"
+            ]),
+            "farmer_marital_status": random.choice([
+                "single", "married", "widowed", "separated"
             ]),
         })
         
@@ -220,8 +239,8 @@ class SPPDemoDataGenerator(models.Model):
             self._generate_agricultural_activities(fake, group)
             
         # Generate extension services if applicable
-        if random.uniform(0, 100) <= self.percentage_with_extension_services:
-            self._generate_extension_services(fake, group)
+        # if random.uniform(0, 100) <= self.percentage_with_extension_services:
+        #     self._generate_extension_services(fake, group)
 
     def _get_farm_details_vals(self, fake):
         """Get farm details values"""
@@ -410,7 +429,7 @@ class SPPDemoDataGenerator(models.Model):
         """Get extension service values"""
         return {
             "farm_id": group.id,
-            "service_type": fake.word(),
+            "extension_services_type": fake.word(),
             "service_provider": fake.company(),
             "service_date": fake.date_between_dates(
                 date_start=fields.Date.today() - datetime.timedelta(days=365),
