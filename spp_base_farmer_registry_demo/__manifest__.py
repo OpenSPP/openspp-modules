@@ -17,7 +17,7 @@
         "base",
         "g2p_registry_base",
         "spp_base_farmer_registry",
-        "spp_base_demo",
+        "spp_demo_common",
         "queue_job",
         "spp_custom_filter_farmer_registry",
     ],

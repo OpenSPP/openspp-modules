@@ -649,7 +649,7 @@ class SPPGenerateFarmerData(models.Model):
         else:
             species_data = random.choice(livestock_data)
 
-        return self.env.ref(f"spp_farmer_registry_demo.{species_data}")
+        return self.env.ref(f"spp_base_farmer_registry_demo.{species_data}")
 
     def _get_machinery_type_data(self):
         machinery_types = self.env["machinery.type"].search([]).mapped("id")

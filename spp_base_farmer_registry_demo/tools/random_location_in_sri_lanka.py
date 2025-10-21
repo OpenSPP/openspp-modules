@@ -7,7 +7,7 @@ from shapely.prepared import prep
 from odoo.tools.misc import file_open
 
 # Load Sri Lanka country border data in GeoJSON format
-with file_open("spp_farmer_registry_demo/tools/geoBoundaries-LKA-ADM0_simplified.geojson", "r") as f:
+with file_open("spp_base_farmer_registry_demo/tools/geoBoundaries-LKA-ADM0_simplified.geojson", "r") as f:
     sri_lanka_geojson = json.load(f)
 
 # Create a shape object from the GeoJSON data

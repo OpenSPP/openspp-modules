@@ -2,7 +2,7 @@
 
 ## Overview
 
-The [spp_farmer_registry_demo](spp_farmer_registry_demo) module is a demonstration module for OpenSPP that provides pre-populated data for the farmer registry. It builds upon the [spp_base_farmer_registry](spp_base_farmer_registry) module and its dependencies to showcase the functionalities of the farmer registry with realistic sample data.
+The [spp_base_farmer_registry_demo](spp_base_farmer_registry_demo) module is a demonstration module for OpenSPP that provides pre-populated data for the farmer registry. It builds upon the [spp_base_farmer_registry](spp_base_farmer_registry) module and its dependencies to showcase the functionalities of the farmer registry with realistic sample data.
 
 ## Purpose
 
@@ -24,7 +24,7 @@ This module aims to:
 
 ## Additional Functionality
 
-The [spp_farmer_registry_demo](spp_farmer_registry_demo) module introduces the following key functionalities:
+The [spp_base_farmer_registry_demo](spp_base_farmer_registry_demo) module introduces the following key functionalities:
 
 * **Sample Data Generation:** The module includes a dedicated model, `spp.generate.farmer.data`, and a corresponding form view for generating sample farmer data. This form allows users to specify:
     * The number of farm groups to generate.
@@ -42,4 +42,4 @@ The [spp_farmer_registry_demo](spp_farmer_registry_demo) module introduces the f
 
 ## Conclusion
 
-The [spp_farmer_registry_demo](spp_farmer_registry_demo) module provides a valuable tool for understanding and demonstrating the functionalities of the OpenSPP farmer registry system. By populating the database with realistic sample data, it allows users to explore the system, understand its data structures, and test its various features without having to manually create large datasets. This module simplifies the process of getting started with OpenSPP and showcases the platform's capabilities for managing comprehensive and detailed farmer registries. 
+The [spp_base_farmer_registry_demo](spp_base_farmer_registry_demo) module provides a valuable tool for understanding and demonstrating the functionalities of the OpenSPP farmer registry system. By populating the database with realistic sample data, it allows users to explore the system, understand its data structures, and test its various features without having to manually create large datasets. This module simplifies the process of getting started with OpenSPP and showcases the platform's capabilities for managing comprehensive and detailed farmer registries. 
