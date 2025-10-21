@@ -278,13 +278,27 @@ class SPPFarmSeason(models.Model):
     def _compute_display_name(self):
         """Modern approach to custom display names"""
         for record in self:
-            record.display_name = f"{record.name} ({record.date_start} to {record.date_end})"
+            if record.date_start and record.date_end:
+                record.display_name = f"{record.name} ({record.date_start} to {record.date_end})"
+            elif record.date_start:
+                record.display_name = f"{record.name} (from {record.date_start})"
+            elif record.date_end:
+                record.display_name = f"{record.name} (until {record.date_end})"
+            else:
+                record.display_name = record.name if record.name else _("New Season")
 
     def name_get(self):
         """Custom name display including dates"""
         result = []
         for record in self:
-            name = f"{record.name} ({record.date_start.strftime('%Y-%m-%d')} to {record.date_end.strftime('%Y-%m-%d')})"
+            if record.date_start and record.date_end:
+                name = f"{record.name} ({record.date_start.strftime('%Y-%m-%d')} to {record.date_end.strftime('%Y-%m-%d')})"
+            elif record.date_start:
+                name = f"{record.name} (from {record.date_start.strftime('%Y-%m-%d')})"
+            elif record.date_end:
+                name = f"{record.name} (until {record.date_end.strftime('%Y-%m-%d')})"
+            else:
+                name = record.name if record.name else _("New Season")
             result.append((record.id, name))
         return result
 
