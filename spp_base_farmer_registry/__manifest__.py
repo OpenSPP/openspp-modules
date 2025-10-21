@@ -40,6 +40,7 @@
         "security/security.xml",
         "security/ir.model.access.csv",
         "views/farm_season_view.xml",
+        "views/hide_relation_types_menu.xml",
         "data/kind_data.xml",
         "views/res_partner.xml",
         "views/configuration_view.xml",
