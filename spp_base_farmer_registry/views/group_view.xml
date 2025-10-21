@@ -242,7 +242,6 @@
                             <field
                                 name="species_id"
                                 context="{'default_species_type': 'crop'}"
-                                required="1"
                             />
                             <field name="purpose" />
                             <field name="season_id" />
@@ -261,7 +260,6 @@
                             <field
                                 name="species_id"
                                 context="{'default_species_type': 'livestock'}"
-                                required="1"
                             />
                             <field name="season_id" />
                         </tree>
@@ -280,7 +278,6 @@
                                 name="species_id"
                                 context="{'default_species_type': 'aquaculture'}"
                                 width="50%"
-                                required="1"
                             />
                             <field name="season_id" />
                         </tree>
