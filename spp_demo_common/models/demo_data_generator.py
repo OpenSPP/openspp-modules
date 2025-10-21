@@ -122,7 +122,7 @@ class SPPDemoDataGenerator(models.Model):
             self.locked_reason = message
             kind = "success"
         else:
-            self._async_generate_demo_data(fake)
+            self._async_generate_demo_data()
             message = "The data generation has been started and is running in the background."
             kind = "info"
 
@@ -161,7 +161,7 @@ class SPPDemoDataGenerator(models.Model):
                 membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
             self.env["g2p.group.membership"].create(membership_vals)
 
-    def _async_generate_demo_data(self, fake):
+    def _async_generate_demo_data(self):
         jobs = []
         batch_size = self.batch_size
         batches = [
@@ -169,13 +169,15 @@ class SPPDemoDataGenerator(models.Model):
             for start in range(0, self.number_of_groups, batch_size)
         ]
         for batch in batches:
-            jobs.append(self.delayable()._process_batch(batch, fake))
+            jobs.append(self.delayable()._process_batch(batch))
         main_job = group(*jobs)
         main_job.on_done(self.delayable()._mark_done())
         main_job.delay()
 
-    def _process_batch(self, batch, fake):
+    def _process_batch(self, batch):
         self.ensure_one()
+        faker_code = self.locale_origin.faker_locale or "en_US"
+        fake = Faker(faker_code)
         for _ in range(batch[0], batch[1]):
             self._generate_demo_data(fake)
 
