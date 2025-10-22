@@ -195,6 +195,6 @@
         parent="g2p_registry_base.g2p_configuration_menu_root"
         action="action_spp_farm_season"
         sequence="15"
-        groups="base.group_no_one"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
     />
 </odoo>
