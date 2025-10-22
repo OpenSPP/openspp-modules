@@ -23,7 +23,7 @@ class OpenSPPAreaImport(models.Model):
     _users_model = "res.users"
 
     MIN_ROW_JOB_QUEUE = 400
-    JOB_QUEUE_BATCH_SIZE = 10
+    JOB_QUEUE_BATCH_SIZE = 100
 
     NEW = "New"
     UPLOADED = "Uploaded"
@@ -296,8 +296,8 @@ class OpenSPPAreaImport(models.Model):
             nrows = self.get_nrows_openpyxl(sheet)
             batches = math.ceil(nrows / self.JOB_QUEUE_BATCH_SIZE)
             for i in range(batches):
-                start = 2 if i == 0 else i * 1000
-                end = min((i + 1) * 1000, nrows)
+                start = 2 if i == 0 else i * self.JOB_QUEUE_BATCH_SIZE
+                end = min((i + 1) * self.JOB_QUEUE_BATCH_SIZE, nrows)
                 jobs.append(
                     self.delayable(channel=_area_import_channel)._import_data(
                         sheet_name, column_indexes, start, end, area_level
