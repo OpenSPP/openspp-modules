@@ -105,7 +105,7 @@ class SPPFarmSeason(models.Model):
                 return
             # Show normal close button when season has ended or is ending today
             record.show_close_button = record.date_end <= fields.Date.today()
-    
+
     @api.depends("date_end")
     def _compute_show_force_close_button(self):
         for record in self:
@@ -173,12 +173,13 @@ class SPPFarmSeason(models.Model):
         for record in self:
             if record.state == "closed":
                 # Check if season has ended (date validation) unless force close is enabled
-                if (record.date_end and record.date_end > fields.Date.today() 
-                    and not record.force_close):
+                if record.date_end and record.date_end > fields.Date.today() and not record.force_close:
                     raise ValidationError(
-                        _("Cannot close season before the end date. "
-                          "Please wait until the season end date, adjust the end date, "
-                          "or enable 'Force Close' to override this restriction.")
+                        _(
+                            "Cannot close season before the end date. "
+                            "Please wait until the season end date, adjust the end date, "
+                            "or enable 'Force Close' to override this restriction."
+                        )
                     )
 
     @api.constrains("date_start", "date_end", "state")

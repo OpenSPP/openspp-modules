@@ -239,10 +239,7 @@
                         <tree editable="bottom">
                             <field name="crop_farm_id" column_invisible="1" />
                             <field name="activity_type" column_invisible="1" />
-                            <field
-                                name="species_id"
-                                context="{'default_species_type': 'crop'}"
-                            />
+                            <field name="species_id" context="{'default_species_type': 'crop'}" />
                             <field name="purpose" />
                             <field name="season_id" />
                         </tree>
@@ -257,10 +254,7 @@
                         <tree editable="bottom">
                             <field name="live_farm_id" column_invisible="1" />
                             <field name="activity_type" column_invisible="1" />
-                            <field
-                                name="species_id"
-                                context="{'default_species_type': 'livestock'}"
-                            />
+                            <field name="species_id" context="{'default_species_type': 'livestock'}" />
                             <field name="season_id" />
                         </tree>
                     </field>

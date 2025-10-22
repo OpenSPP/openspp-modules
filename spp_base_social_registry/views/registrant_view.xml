@@ -32,13 +32,19 @@
             <xpath expr="//field[@name='related_2_ids']/tree/field[@name='disabled']" position="attributes">
                 <attribute name="column_invisible">1</attribute>
             </xpath>
-            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='disabled_by']" position="attributes">
+            <xpath
+                expr="//field[@name='related_2_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
                 <attribute name="column_invisible">1</attribute>
             </xpath>
             <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled']" position="attributes">
                 <attribute name="column_invisible">1</attribute>
             </xpath>
-            <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']" position="attributes">
+            <xpath
+                expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
                 <attribute name="column_invisible">1</attribute>
             </xpath>
             <xpath expr="//page[@name='relationships']" position="attributes">
@@ -78,13 +84,19 @@
             <xpath expr="//field[@name='related_2_ids']/tree/field[@name='disabled']" position="attributes">
                 <attribute name="column_invisible">1</attribute>
             </xpath>
-            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='disabled_by']" position="attributes">
+            <xpath
+                expr="//field[@name='related_2_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
                 <attribute name="column_invisible">1</attribute>
             </xpath>
             <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled']" position="attributes">
                 <attribute name="column_invisible">1</attribute>
             </xpath>
-            <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']" position="attributes">
+            <xpath
+                expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
                 <attribute name="column_invisible">1</attribute>
             </xpath>
             <xpath expr="//page[@name='relationships']" position="attributes">

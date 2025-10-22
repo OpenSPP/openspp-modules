@@ -374,11 +374,12 @@ class OpenSPPAreaImport(models.Model):
         for rec in self:
             rec.locked = True
             rec.locked_reason = _("Fixing area level.")
-            batches = math.ceil(len(rec.raw_data_ids) / 1000)
+            ceiling = self.JOB_QUEUE_BATCH_SIZE
+            batches = math.ceil(len(rec.raw_data_ids) / ceiling)
             jobs = []
             for i in range(batches):
-                start = i * 1000
-                end = min((i + 1) * 1000, len(rec.raw_data_ids))
+                start = i * ceiling
+                end = min((i + 1) * ceiling, len(rec.raw_data_ids))
                 jobs.append(
                     rec.delayable(channel=_area_import_channel)._fix_area_level_and_kind(rec.raw_data_ids[start:end])
                 )
@@ -423,14 +424,15 @@ class OpenSPPAreaImport(models.Model):
         """
         self.ensure_one()
         jobs = []
-        jobs.append(self.delayable(channel=_area_import_channel)._save_to_area(raw_data_ids[:1000]))
+        ceiling = self.JOB_QUEUE_BATCH_SIZE
+        jobs.append(self.delayable(channel=_area_import_channel)._save_to_area(raw_data_ids[:ceiling]))
         main_job = group(*jobs)
         count = len(raw_data_ids)
-        if count <= 1000:
+        if count <= ceiling:
             main_job.on_done(self.delayable(channel=_area_import_channel)._save_to_area_mark_done())
         else:
             main_job.on_done(
-                self.delayable(channel=_area_import_channel)._async_recursive_save_to_area(raw_data_ids[1000:])
+                self.delayable(channel=_area_import_channel)._async_recursive_save_to_area(raw_data_ids[ceiling:])
             )
         main_job.delay()
 

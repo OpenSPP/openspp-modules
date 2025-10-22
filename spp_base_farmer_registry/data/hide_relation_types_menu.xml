@@ -5,9 +5,9 @@
         <field name="name" ref="g2p_registry_base.menu_relationship" />
         <field name="xml_id">g2p_registry_base.menu_relationship</field>
     </record>
-    
+
     <!-- Function to hide the menu -->
     <function model="spp.hide.menu" name="hide_menu">
-        <value model="spp.hide.menu" search="[('xml_id', '=', 'g2p_registry_base.menu_relationship')]"/>
+        <value model="spp.hide.menu" search="[('xml_id', '=', 'g2p_registry_base.menu_relationship')]" />
     </function>
 </odoo>
