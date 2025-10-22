@@ -224,6 +224,9 @@ class SPPDemoDataGenerator(models.Model):
         """Generate farm details for a group"""
         # Create farm details
         farm_detail_vals = self._get_farm_details_vals(fake)
+        farm_detail_vals.update({
+            "details_farm_id": group.id,
+        })
         farm_detail = self.env["spp.farm.details"].create(farm_detail_vals)
         
         # Link to group
@@ -250,7 +253,7 @@ class SPPDemoDataGenerator(models.Model):
         farm_type = random.choice(self.FARM_TYPES)
         farm_size = round(random.uniform(self.min_farm_size, self.max_farm_size), 2)
         
-        return {
+        vals = {
             "details_farm_type": farm_type[0],
             "farm_total_size": farm_size,
             "farm_size_under_crops": round(farm_size * random.uniform(0.1, 0.8), 2),
@@ -259,6 +262,190 @@ class SPPDemoDataGenerator(models.Model):
             "farm_size_idle": round(farm_size * random.uniform(0, 0.2), 2),
             "details_legal_status": random.choice(self.LEGAL_STATUSES)[0],
         }
+        
+        # Add demo-specific farm details fields
+        vals.update(self._get_demo_farm_details_vals(fake, farm_type[0]))
+        
+        return vals
+
+    def _get_demo_farm_details_vals(self, fake, farm_type):
+        """Get demo-specific farm details values"""
+        vals = {}
+        
+        # Lease information
+        if random.choice([True, False]):
+            vals.update({
+                "lease_term": random.randint(1, 20),
+                "lease_agreement_number": fake.bothify(text="LR-#######"),
+            })
+        
+        # Farm operations
+        vals.update({
+            "another_farm": random.choice([True, False]),
+            "growing_crops_subsistence": random.choice([True, False]),
+            "growing_crops_sale": random.choice([True, False]),
+            "rearing_livestock_subsistence": random.choice([True, False]),
+            "rearing_livestock_sale": random.choice([True, False]),
+            "tree_farming": random.choice([True, False]),
+        })
+        
+        # Livestock-specific fields
+        if farm_type in ["livestock", "mixed"]:
+            vals.update({
+                "livestock_fertilizer_for_fodder": random.choice([True, False]),
+                "livestock_certified_pasture": random.choice([True, False]),
+                "livestock_assisted_reproductive_health_technology_ai": random.choice([True, False]),
+                "livestock_assisted_reproductive_health_technology_animal_horm": random.choice([True, False]),
+                "livestock_assisted_reproductive_health_technology_embryo_transf": random.choice([True, False]),
+                "livestock_animal_health_services_routine_vaccination": random.choice([True, False]),
+                "livestock_animal_health_services_disease_control": random.choice([True, False]),
+            })
+        
+        # Aquaculture-specific fields
+        if farm_type in ["aquaculture", "mixed"]:
+            vals.update({
+                "aquaculture_type": random.choice(["freshwater", "marine", "brackish"]),
+                "aquaculture_subsistence": random.choice([True, False]),
+                "aquaculture_sale": random.choice([True, False]),
+                "aquaculture_main_inputs_fingerlings": random.choice([True, False]),
+                "aquaculture_main_inputs_feeds": random.choice([True, False]),
+                "aquaculture_main_inputs_fertilizers": random.choice([True, False]),
+                "aquaculture_utilize_fertilizer": random.choice([True, False]),
+                "aquaculture_production_level": random.choice(["extensive", "semi-intensive", "intensive"]),
+                "aquaculture_beneficiary_esp": random.choice([True, False]),
+            })
+        
+        # Farm technology
+        vals.update({
+            "farm_technology_power_source": random.choice([
+                "manual labor", "animal drought", "motorized", "wind", 
+                "solar", "grid electricity", "other"
+            ]),
+            "farm_technology_labor_source": random.choice([
+                "family members", "temporary hired help", "permanent hired help"
+            ]),
+            "farm_technology_own_equipment": random.choice([
+                "self", "community", "hirer"
+            ]),
+        })
+        
+        # Farm structures (randomly select some)
+        structure_fields = [
+            "farm_technology_structure_spray_race", "farm_technology_structure_animal_dip",
+            "farm_technology_structure_loading_ramp", "farm_technology_structure_zero_grazing_unit",
+            "farm_technology_structure_hay_store", "farm_technology_structure_feed_store",
+            "farm_technology_structure_sick_bay", "farm_technology_structure_cattle_boma",
+            "farm_technology_structure_milking_parlor", "farm_technology_structure_animal_crush",
+            "farm_technology_structure_traditional_granary", "farm_technology_structure_modern_granary",
+            "farm_technology_structure_general_store", "farm_technology_structure_hay_bailers",
+            "farm_technology_structure_green_house", "farm_technology_structure_bee_house",
+            "farm_technology_structure_hatchery", "farm_technology_structure_apriary",
+        ]
+        for field in structure_fields:
+            vals[field] = random.choice([True, False])
+        
+        # Land and water management
+        land_management_fields = [
+            "land_water_management_crop_rotation", "land_water_management_green_cover_crop",
+            "land_water_management_contour_ploughing", "land_water_management_deep_ripping",
+            "land_water_management_grass_strips", "land_water_management_trash_line",
+            "land_water_management_cambered_beds", "land_water_management_biogas_production",
+            "land_water_management_mulching", "land_water_management_minimum_tillage",
+            "land_water_management_manuring_composting", "land_water_management_organic_farming",
+            "land_water_management_terracing", "land_water_management_water_harvesting",
+            "land_water_management_zai_pits", "land_water_management_cut_off_drains",
+            "land_water_management_conservation_agriculture", "land_water_management_integrated_pest_management",
+        ]
+        for field in land_management_fields:
+            vals[field] = random.choice([True, False])
+        
+        # Additional land management fields
+        vals.update({
+            "land_water_management_subsidized_fertilizer": random.choice([True, False]),
+            "land_water_management_use_lime": random.choice([True, False]),
+            "land_water_management_soil_testing": random.choice([True, False]),
+            "land_water_management_undertake_irrigation": random.choice([True, False]),
+        })
+        
+        # Irrigation details (if irrigation is undertaken)
+        if vals.get("land_water_management_undertake_irrigation"):
+            vals.update({
+                "land_water_management_irrigation_type": random.choice([
+                    "furrow_canal", "basin", "bucket", "centre_pivot", "drip", 
+                    "furrow", "sprinkler", "flooding", "other"
+                ]),
+                "land_water_management_irrigation_source": random.choice([
+                    "locality water supply", "water trucking", "rain", 
+                    "natural rivers and streams", "man made dam", 
+                    "shallow well or borehole", "adjacent water body", 
+                    "harvested water", "road runoff", "water pan"
+                ]),
+                "land_water_management_total_irrigated_area": round(random.uniform(0.1, 10), 2),
+                "land_water_management_type_of_irrigation_project": random.choice([
+                    "public irrigation scheme", "private on farm initiative", "community scheme"
+                ]),
+                "land_water_management_type_of_irrigation_project_name": fake.company(),
+                "land_water_management_implementing_body": random.choice([
+                    "county government", "national government", "implementing agents",
+                    "national govt ministry", "self", "other"
+                ]),
+                "land_water_management_irrigation_scheme_membership": random.choice([
+                    "full member", "out grower"
+                ]),
+            })
+        
+        # Financial services
+        vals.update({
+            "financial_services_main_income_source": random.choice([
+                "sale of farming produce", "non-farm trading", "salary from employment elsewhere",
+                "casual labor elsewhere", "pension", "remittances", "cash transfer", "other"
+            ]),
+            "financial_services_percentage_of_income_from_farming": round(random.uniform(0, 100), 1),
+        })
+        
+        # Organization memberships
+        org_fields = [
+            "financial_services_vulnerable_marginalized_group", "financial_services_faith_based_organization",
+            "financial_services_community_based_organization", "financial_services_producer_group",
+            "financial_services_marketing_group", "financial_services_table_banking_group",
+            "financial_services_common_interest_group",
+        ]
+        for field in org_fields:
+            vals[field] = random.choice([True, False])
+        
+        # Financial services
+        financial_fields = [
+            "financial_services_mobile_money_saving_loans", "financial_services_farmer_organization",
+            "financial_services_other_money_lenders", "financial_services_self_salary_or_savings",
+            "financial_services_family", "financial_services_commercial_bank",
+            "financial_services_business_partners", "financial_services_savings_credit_groups",
+            "financial_services_cooperatives", "financial_services_micro_finance_institutions",
+            "financial_services_non_governmental_donors",
+        ]
+        for field in financial_fields:
+            vals[field] = random.choice([True, False])
+        
+        # Insurance and records
+        vals.update({
+            "financial_services_crop_insurance": random.choice([True, False]),
+            "financial_services_livestock_insurance": random.choice([True, False]),
+            "financial_services_fish_insurance": random.choice([True, False]),
+            "financial_services_farm_building_insurance": random.choice([True, False]),
+            "financial_services_written_farm_records": random.choice([True, False]),
+            "financial_services_main_source_of_information_on_good_agricultu": random.choice([
+                "newspaper", "extension services", "internet", "radio", 
+                "television", "public gatherings", "relatives"
+            ]),
+            "financial_services_mode_of_extension_service": random.choice([
+                "e-extension", "face-to-face", "farmer field schools", 
+                "group demonstrations", "peer-to-peer", "other"
+            ]),
+            "financial_services_main_extension_service_provider": random.choice([
+                "private", "national government", "county government", "ngo", "other"
+            ]),
+        })
+        
+        return vals
 
     def _generate_land_records(self, fake, group):
         """Generate land records for a farm"""
