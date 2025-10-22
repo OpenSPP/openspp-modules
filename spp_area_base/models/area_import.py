@@ -340,11 +340,12 @@ class OpenSPPAreaImport(models.Model):
         for rec in self:
             rec.locked = True
             rec.locked_reason = _("Validating data.")
-            batches = math.ceil(len(rec.raw_data_ids) / 1000)
+            ceiling = 10
+            batches = math.ceil(len(rec.raw_data_ids) / ceiling)
             jobs = []
             for i in range(batches):
-                start = i * 1000
-                end = min((i + 1) * 1000, len(rec.raw_data_ids))
+                start = i * ceiling
+                end = min((i + 1) * ceiling, len(rec.raw_data_ids))
                 jobs.append(rec.delayable(channel=_area_import_channel)._validate_raw_data(rec.raw_data_ids[start:end]))
             main_job = group(*jobs)
             main_job.on_done(rec.delayable(channel=_area_import_channel)._validate_mark_done())
