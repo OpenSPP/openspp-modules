@@ -146,6 +146,7 @@ class SPPDemoDataGenerator(models.Model):
         have_head_member = False
         new_group_name = False
         for _ in range(num_members):
+            head_membership = self.head_member_getter(group)
             is_head_member = random.choice([True, False]) if not have_head_member else False
 
             # Check if last member and no head member assigned yet
@@ -154,15 +155,20 @@ class SPPDemoDataGenerator(models.Model):
 
             individual = self.generate_individuals(fake)
             membership_vals = self.get_group_membership_vals(fake, group, individual)
-            if is_head_member:
-                # Check if the group doesn't have a head member before proceeding
-                if not group.group_membership_ids.filtered(lambda x: x.kind in [self.env.ref("g2p_registry_membership.group_membership_kind_head").id]):
-                    have_head_member = True
-                    new_group_name = individual.family_name
-                    group.name = new_group_name
-                    membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
+            if is_head_member and not head_membership:
+                have_head_member = True
+                new_group_name = individual.family_name
+                group.name = new_group_name
+                membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
+                
+            have_head_member = True if head_membership else False
 
             self.env["g2p.group.membership"].create(membership_vals)
+    
+    def head_member_getter(self, group):
+        memberships = self.env["g2p.group.membership"].search([("group", "=", group.id)])
+        head_membership = memberships.filtered(lambda x: x.kind in [self.env.ref("g2p_registry_membership.group_membership_kind_head").id])
+        return head_membership
 
     def _async_generate_demo_data(self):
         jobs = []

@@ -187,6 +187,9 @@ class SPPDemoDataGenerator(models.Model):
         })
         
         return individual_vals
+    
+    def head_member_getter(self, group):
+        return True
 
     def generate_groups(self, fake):
         """Override to include farmer registry related data creation"""
