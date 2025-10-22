@@ -144,7 +144,7 @@ class SPPDemoDataGenerator(models.Model):
             "farmer_family_name": fake.last_name(),
             "farmer_given_name": fake.first_name(),
             "farmer_addtnl_name": fake.first_name() if random.choice([True, False]) else None,
-            "farmer_mobile_tel": fake.phone_number(),
+            "farmer_mobile_tel": self.generate_phone_number(fake),
             "farmer_sex": self.get_gender_id(random.choice(self.GENDERS)),
             "farmer_birthdate": self.get_random_date(
                 fake,

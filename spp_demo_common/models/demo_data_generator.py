@@ -504,7 +504,7 @@ class SPPDemoDataGenerator(models.Model):
             }
             self.env["res.partner.bank"].create(bank_account_vals)
 
-    def create_phone_numbers(self, fake, registrant):
+    def generate_phone_number(self, fake):
         while True:
             try:
                 phone_number = fake.phone_number()
@@ -520,6 +520,10 @@ class SPPDemoDataGenerator(models.Model):
                 cleaned = cleaned[1:]
             if cleaned.isdigit():
                 break
+        return cleaned
+
+    def create_phone_numbers(self, fake, registrant):
+        phone_number = self.generate_phone_number(fake)
         date_collected = self.get_random_date(
             fake,
             datefrom=registrant.registration_date,
