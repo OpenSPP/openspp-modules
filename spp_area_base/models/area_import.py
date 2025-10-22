@@ -316,6 +316,7 @@ class OpenSPPAreaImport(models.Model):
         book = self._get_book()
 
         sheet = self.get_sheet_openpyxl(book, sheet_name)
+        _logger.info(f"Area Import: Importing data from row {start} to {end} for area level {area_level}")
         for row in range(start, end):
             import_raw_vals = self.get_area_vals(column_indexes, row, sheet, area_level)
             self.create_import_raw(import_raw_vals, column_indexes, row, sheet)
