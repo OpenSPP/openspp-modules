@@ -177,6 +177,7 @@ class OpenSPPAreaImport(models.Model):
 
     def get_area_vals(self, column_indexes, row, sheet, area_level):
         self.ensure_one()
+        _logger.info(f"Area Import: Getting area values for row {row} for area level {area_level}")
         default_lang = self.env.context.get("lang", "en_US")
         if default_lang not in column_indexes["name_indexes"]:
             default_lang = "en_US"
