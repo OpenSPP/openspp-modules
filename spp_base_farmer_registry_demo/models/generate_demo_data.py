@@ -272,7 +272,6 @@ class SPPDemoDataGenerator(models.Model):
     def _get_land_record_vals(self, fake, group):
         """Get land record values"""
         land_use = random.choice(self.LAND_USES)
-        cultivation_method = random.choice(self.CULTIVATION_METHODS) if land_use[0] in ["cultivation", "mixed"] else None
         
         # Get species based on land use
         species_ids = []
@@ -301,7 +300,6 @@ class SPPDemoDataGenerator(models.Model):
             "land_name": f"Parcel-{fake.bothify(text='??###')}",
             "land_acreage": round(random.uniform(0.1, 50), 2),
             "land_use": land_use[0],
-            "cultivation_method": cultivation_method,
             "species": [(6, 0, species_ids)] if species_ids else [(6, 0, [])],
             "owner_id": group.id,
             "lease_start": fake.date_between_dates(
