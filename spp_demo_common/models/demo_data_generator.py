@@ -528,18 +528,20 @@ class SPPDemoDataGenerator(models.Model):
         return cleaned
 
     def create_phone_numbers(self, fake, registrant):
-        phone_number = self.generate_phone_number(fake)
-        date_collected = self.get_random_date(
-            fake,
-            datefrom=registrant.registration_date,
-            dateto=fields.Date.today(),
-        )
-        phone_vals = {
-            "partner_id": registrant.id,
-            "phone_no": phone_number,
-            "date_collected": date_collected,
-        }
-        self.env["g2p.phone.number"].create(phone_vals)
+        num_phone_numbers = random.randint(1, 5)
+        for _ in range(num_phone_numbers):
+            phone_number = self.generate_phone_number(fake)
+            date_collected = self.get_random_date(
+                fake,
+                datefrom=registrant.registration_date,
+                dateto=fields.Date.today(),
+            )
+            phone_vals = {
+                "partner_id": registrant.id,
+                "phone_no": phone_number,
+                "date_collected": date_collected,
+            }
+            self.env["g2p.phone.number"].create(phone_vals)
         registrant.phone_number_ids_change()
 
     def create_gps_coordinates(self, fake, registrant):
