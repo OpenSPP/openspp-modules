@@ -293,7 +293,10 @@ class SPPFarmSeason(models.Model):
         result = []
         for record in self:
             if record.date_start and record.date_end:
-                name = f"{record.name} ({record.date_start.strftime('%Y-%m-%d')} to {record.date_end.strftime('%Y-%m-%d')})"
+                name = (
+                    f"{record.name} ({record.date_start.strftime('%Y-%m-%d')} to "
+                    f"{record.date_end.strftime('%Y-%m-%d')})"
+                )
             elif record.date_start:
                 name = f"{record.name} (from {record.date_start.strftime('%Y-%m-%d')})"
             elif record.date_end:

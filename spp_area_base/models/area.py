@@ -179,21 +179,17 @@ class OpenSPPArea(models.Model):
         :raises ValidationError: If an area with the same name and code already exists.
         """
         for rec in self:
-            area_name = rec.name
+            domain = []
             if "name" in vals:
-                area_name = vals["name"]
-            area_code = rec.code
+                domain.append(("name", "=", vals["name"]))
             if "code" in vals:
-                area_code = vals["code"]
-            curr_area = self.env[self._name].search(
-                [
-                    ("name", "=", area_name),
-                    ("code", "=", area_code),
-                    ("id", "!=", rec.id),
-                ]
-            )
-            if curr_area:
-                raise ValidationError(_("Area already exist!"))
+                domain.append(("code", "=", vals["code"]))
+
+            if domain:
+                domain.append(("id", "!=", rec.id))
+                curr_area = self.env[self._name].search(domain)
+                if curr_area:
+                    raise ValidationError(_("Area already exist!"))
             else:
                 return super().write(vals)
 
