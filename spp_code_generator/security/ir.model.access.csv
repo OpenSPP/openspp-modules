@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_spp_code_generator_system,Code Generator System Access,model_spp_code_generator,base.group_system,1,1,1,1
+access_spp_code_generator_admin,Code Generator Admin Access,model_spp_code_generator,g2p_registry_base.group_g2p_admin,1,1,1,1
+access_spp_code_generator_user,Code Generator User Access,model_spp_code_generator,base.group_user,1,0,0,0
