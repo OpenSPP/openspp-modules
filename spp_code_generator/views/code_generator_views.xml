@@ -19,14 +19,25 @@
         <field name="arch" type="xml">
             <form string="Code Generator">
                 <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field
+                                name="name"
+                                readonly="1"
+                                force_save="1"
+                                placeholder="Filename will appear here..."
+                            />
+                        </h1>
+                    </div>
                     <group>
                         <group>
                             <field name="yaml_file" filename="name" />
-                            <field name="name" readonly="1" force_save="1" />
                         </group>
-                        <group>
-                            <field name="description" placeholder="Add a description..." />
-                        </group>
+                        <group />
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Add a description..." />
                     </group>
                 </sheet>
             </form>
