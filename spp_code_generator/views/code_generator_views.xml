@@ -8,6 +8,12 @@
             <tree string="Code Generators">
                 <field name="name" string="YAML Filename" />
                 <field name="description" optional="show" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-success="state == 'processed'"
+                    decoration-info="state == 'draft'"
+                />
             </tree>
         </field>
     </record>
@@ -18,6 +24,16 @@
         <field name="model">spp.code.generator</field>
         <field name="arch" type="xml">
             <form string="Code Generator">
+                <header>
+                    <button
+                        name="action_process_entities"
+                        type="object"
+                        string="Process Entities"
+                        class="oe_highlight"
+                        invisible="state == 'processed'"
+                    />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,processed" />
+                </header>
                 <sheet>
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
@@ -39,6 +55,11 @@
                     <group>
                         <field name="description" placeholder="Add a description..." />
                     </group>
+                    <notebook>
+                        <page string="Processing Log" invisible="not processing_log">
+                            <field name="processing_log" widget="text" />
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" />
@@ -57,6 +78,12 @@
             <search string="Search Code Generators">
                 <field name="name" string="Filename" filter_domain="[('name', 'ilike', self)]" />
                 <field name="description" />
+                <separator />
+                <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]" />
+                <filter string="Processed" name="filter_processed" domain="[('state', '=', 'processed')]" />
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="group_by_state" context="{'group_by': 'state'}" />
+                </group>
             </search>
         </field>
     </record>
