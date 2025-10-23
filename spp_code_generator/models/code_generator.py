@@ -9,10 +9,11 @@ from odoo.exceptions import ValidationError
 class CodeGenerator(models.Model):
     _name = "spp.code.generator"
     _description = "Code Generator"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(string="YAML Filename", required=True, index=True)
     description = fields.Text(string="Description")
-    yaml_file = fields.Binary(string="YAML File", attachment=True)
+    yaml_file = fields.Binary(string="YAML File", attachment=True, tracking=True)
 
     _sql_constraints = [
         ("name_unique", "UNIQUE(name)", "The YAML filename must be unique!"),
