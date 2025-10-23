@@ -540,6 +540,7 @@ class SPPDemoDataGenerator(models.Model):
             "date_collected": date_collected,
         }
         self.env["g2p.phone.number"].create(phone_vals)
+        registrant.phone_number_ids_change()
 
     def create_gps_coordinates(self, fake, registrant):
         if random.uniform(0, 100) > self.percentage_with_gps:
