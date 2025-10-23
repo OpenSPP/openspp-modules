@@ -165,7 +165,8 @@ class SPPDemoDataGenerator(models.Model):
     
     def head_member_getter(self, group):
         memberships = self.env["g2p.group.membership"].search([("group", "=", group.id)])
-        head_membership = memberships.filtered(lambda x: x.kind in [self.env.ref("g2p_registry_membership.group_membership_kind_head").id])
+        head_kind = self.env.ref("g2p_registry_membership.group_membership_kind_head")
+        head_membership = memberships.filtered(lambda x: head_kind in x.kind)
         return head_membership
 
     def _async_generate_demo_data(self):
