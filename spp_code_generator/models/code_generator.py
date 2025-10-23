@@ -100,6 +100,35 @@ class CodeGenerator(models.Model):
         }
         return type_mapping.get(yaml_field_type, "char")
 
+    def _get_entity_prefix(self, entity_name):
+        """
+        Determine the field prefix based on entity type.
+
+        Args:
+            entity_name (str): Name of the entity (e.g., 'Household', 'Individual')
+
+        Returns:
+            str: Field prefix following OpenSPP conventions
+                - 'x_cst_grp_' for groups/households
+                - 'x_cst_indv_' for individuals
+        """
+        entity_lower = entity_name.lower()
+
+        # Check if entity is a group/household
+        if any(keyword in entity_lower for keyword in ["household", "group", "family"]):
+            return "x_cst_grp"
+        # Check if entity is an individual
+        elif any(keyword in entity_lower for keyword in ["individual", "member", "person"]):
+            return "x_cst_indv"
+        else:
+            # Default to group if uncertain
+            _logger.warning(
+                "Unknown entity type '%s', defaulting to group prefix. "
+                "Consider using 'Household' or 'Individual' as entity names.",
+                entity_name,
+            )
+            return "x_cst_grp"
+
     def _create_field_from_spec(self, entity_name, field_spec):
         """
         Create an Odoo field in res.partner based on field specification from YAML.
@@ -120,6 +149,10 @@ class CodeGenerator(models.Model):
                 'values': [...],              # Optional: For enum types, list of allowed values
                 'description': '...'          # Optional: Help text for the field
             }
+
+        Field Naming Convention (matching spp_custom_fields_ui):
+            - Groups/Households: x_cst_grp_{field_id}
+            - Individuals: x_cst_indv_{field_id}
         """
         self.ensure_one()
 
@@ -135,9 +168,10 @@ class CodeGenerator(models.Model):
             _logger.warning("Skipping field with incomplete specification: %s", field_spec)
             return None
 
-        # Prepare field name with prefix based on OpenSPP conventions
-        # z_cst_ prefix for custom fields
-        field_name = f"z_cst_{field_id}"
+        # Prepare field name with prefix based on entity type
+        # Follows spp_custom_fields_ui convention: x_cst_grp_ or x_cst_indv_
+        prefix = self._get_entity_prefix(entity_name)
+        field_name = f"{prefix}_{field_id}"
 
         # Check if field already exists
         IrModelFields = self.env["ir.model.fields"]
@@ -155,6 +189,9 @@ class CodeGenerator(models.Model):
         # Map YAML type to Odoo type
         odoo_field_type = self._get_odoo_field_type(field_type)
 
+        # Determine target type for spp_custom_fields_ui integration
+        target_type = "grp" if "grp" in prefix else "indv"
+
         # Prepare field values
         field_values = {
             "name": field_name,
@@ -165,6 +202,9 @@ class CodeGenerator(models.Model):
             "required": is_required,
             "help": field_description or f"Custom field for {entity_name}: {field_label}",
             "state": "manual",  # Manual fields can be deleted
+            "target_type": target_type,  # For spp_custom_fields_ui: 'grp' or 'indv'
+            "field_category": "cst",  # For spp_custom_fields_ui: 'cst' (custom)
+            "draft_name": field_id,  # Original field ID from YAML
         }
 
         # Handle selection/enum fields

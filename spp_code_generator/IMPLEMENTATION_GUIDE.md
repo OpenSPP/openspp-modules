@@ -103,13 +103,20 @@ YAML File Upload → Validation → Parse → Extract Entities → Create Fields
 **Field Naming Convention**:
 
 ```
-YAML: "hh_id"
-Odoo: "z_cst_hh_id"
+YAML Entity: "Household", Field: "hh_id"
+Odoo: "x_cst_grp_hh_id"
+
+YAML Entity: "Individual", Field: "person_id"
+Odoo: "x_cst_indv_person_id"
 
 Prefix breakdown:
-- z_     : OpenSPP custom field prefix
+- x_     : Odoo custom field prefix
 - cst_   : Custom (not indicator)
-- hh_id  : Original field ID from YAML
+- grp_   : Group/Household fields
+- indv_  : Individual fields
+- field_id : Original field ID from YAML
+
+This matches the spp_custom_fields_ui module conventions for proper UI integration.
 ```
 
 **Args**:
@@ -207,22 +214,24 @@ entities:
 
 For the above YAML, the following fields would be created in `res.partner`:
 
-| YAML Field ID | Odoo Field Name | Type      | Required |
-| ------------- | --------------- | --------- | -------- |
-| hh_id         | z_cst_hh_id     | Char      | Yes      |
-| province      | z_cst_province  | Char      | No       |
-| person_id     | z_cst_person_id | Char      | Yes      |
-| birthdate     | z_cst_birthdate | Date      | Yes      |
-| gender        | z_cst_gender    | Selection | Yes      |
+| Entity     | YAML Field ID | Odoo Field Name      | Type      | Required |
+| ---------- | ------------- | -------------------- | --------- | -------- |
+| Household  | hh_id         | x_cst_grp_hh_id      | Char      | Yes      |
+| Household  | province      | x_cst_grp_province   | Char      | No       |
+| Individual | person_id     | x_cst_indv_person_id | Char      | Yes      |
+| Individual | birthdate     | x_cst_indv_birthdate | Date      | Yes      |
+| Individual | gender        | x_cst_indv_gender    | Selection | Yes      |
 
 ### Selection Field Example
 
-For `gender` enum field:
+For `gender` enum field in Individual entity:
 
 ```python
-Field: z_cst_gender
+Field: x_cst_indv_gender
 Type: Selection
 Values: [('Female', 'Female'), ('Male', 'Male')]
+Target Type: indv
+Field Category: cst
 ```
 
 ---
@@ -324,17 +333,39 @@ Completed at: 2025-10-23 10:30:15
 
 ### Field Naming
 
-Follows OpenSPP field naming patterns:
+Follows `spp_custom_fields_ui` field naming patterns:
 
-- `z_`: General prefix for custom fields
-- `cst_`: Custom/arbitrary fields (not indicators)
-- Example: `z_cst_hh_id`
+- `x_`: Odoo custom field prefix (standard)
+- `cst_`: Custom/arbitrary fields (not indicators `ind_`)
+- `grp_`: Group/Household entity fields
+- `indv_`: Individual entity fields
+
+**Examples**:
+
+- Group field: `x_cst_grp_hh_id`
+- Individual field: `x_cst_indv_person_id`
 
 ### Why This Pattern?
 
-1. **z\_**: Groups all custom fields together
-2. **cst\_**: Distinguishes from indicators (`ind_`)
-3. **Prevents conflicts**: With standard Odoo fields
+1. **x\_**: Standard Odoo prefix for custom fields
+2. **cst\_**: Distinguishes from computed indicators (`ind_`)
+3. **grp\_/indv\_**: Entity-specific prefix for UI filtering
+4. **Integration**: Matches `spp_custom_fields_ui` for proper display in registry UIs
+5. **Prevents conflicts**: With standard Odoo and OpenSPP fields
+
+### spp_custom_fields_ui Integration
+
+Created fields include metadata for `spp_custom_fields_ui`:
+
+- `target_type`: "grp" or "indv"
+- `field_category`: "cst" (custom)
+- `draft_name`: Original field ID from YAML
+
+This ensures fields appear correctly in:
+
+- Group/Household forms
+- Individual forms
+- Custom field management UI
 
 ---
 

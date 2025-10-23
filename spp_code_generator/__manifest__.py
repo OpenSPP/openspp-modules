@@ -18,7 +18,12 @@
         "g2p_registry_group",
         "g2p_registry_membership",
         "g2p_programs",
+        "spp_custom_field",
+        "spp_custom_fields_ui",
     ],
+    "external_dependencies": {
+        "python": ["PyYAML"],
+    },
     "data": [
         "security/ir.model.access.csv",
         "views/code_generator_views.xml",
