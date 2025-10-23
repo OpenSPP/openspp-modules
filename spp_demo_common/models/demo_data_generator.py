@@ -162,7 +162,7 @@ class SPPDemoDataGenerator(models.Model):
                 membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
 
             self.env["g2p.group.membership"].create(membership_vals)
-    
+
     def head_member_getter(self, group):
         memberships = self.env["g2p.group.membership"].search([("group", "=", group.id)])
         head_kind = self.env.ref("g2p_registry_membership.group_membership_kind_head")
