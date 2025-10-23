@@ -147,6 +147,7 @@ class SPPDemoDataGenerator(models.Model):
         new_group_name = False
         for _ in range(num_members):
             head_membership = self.head_member_getter(group)
+            have_head_member = bool(head_membership)
             is_head_member = random.choice([True, False]) if not have_head_member else False
 
             # Check if last member and no head member assigned yet
@@ -160,8 +161,6 @@ class SPPDemoDataGenerator(models.Model):
                 new_group_name = individual.family_name
                 group.name = new_group_name
                 membership_vals["kind"] = [(4, self.env.ref("g2p_registry_membership.group_membership_kind_head").id)]
-                
-            have_head_member = True if head_membership else False
 
             self.env["g2p.group.membership"].create(membership_vals)
     
