@@ -118,7 +118,6 @@ All Python functions and methods in the following models are covered:
 
 All tests follow OpenSPP testing best practices:
 
-- Use `@tagged("post_install", "-at_install")` decorator
 - Extend `TransactionCase` for database transactions
 - Set up test data in `setUpClass` method
 - Use descriptive test names with `test_XX_` prefix

@@ -21,8 +21,8 @@ class TestResCountry(TransactionCase):
         """Test that custom country fields exist"""
         country = self.env["res.country"].create(
             {
-                "name": "Test Country",
-                "code": "TC",
+                "name": "Test Country Fields",
+                "code": "T2",
             }
         )
 
@@ -39,7 +39,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "GPS Bounds Country",
-                "code": "GB",
+                "code": "T3",
                 "lat_min": -10.5,
                 "lat_max": 10.5,
                 "lon_min": -20.5,
@@ -57,7 +57,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Faker Locale Country",
-                "code": "FL",
+                "code": "T4",
                 "faker_locale": "en_US",
                 "faker_locale_available": True,
             }
@@ -71,7 +71,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Update GPS Country",
-                "code": "UG",
+                "code": "T5",
             }
         )
 
@@ -94,7 +94,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Update Faker Country",
-                "code": "UF",
+                "code": "T6",
                 "faker_locale": "en_US",
             }
         )
@@ -114,7 +114,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Negative GPS Country",
-                "code": "NG",
+                "code": "T7",
                 "lat_min": -50.0,
                 "lat_max": -30.0,
                 "lon_min": -100.0,
@@ -132,7 +132,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Zero GPS Country",
-                "code": "ZG",
+                "code": "T8",
                 "lat_min": 0.0,
                 "lat_max": 0.0,
                 "lon_min": 0.0,
@@ -150,7 +150,7 @@ class TestResCountry(TransactionCase):
         us_country = self.env["res.country"].create(
             {
                 "name": "Test United States",
-                "code": "TU",
+                "code": "T9",
                 "faker_locale": "en_US",
                 "faker_locale_available": True,
             }
@@ -159,7 +159,7 @@ class TestResCountry(TransactionCase):
         fr_country = self.env["res.country"].create(
             {
                 "name": "Test France",
-                "code": "TF",
+                "code": "TA",
                 "faker_locale": "fr_FR",
                 "faker_locale_available": True,
             }
@@ -168,7 +168,7 @@ class TestResCountry(TransactionCase):
         de_country = self.env["res.country"].create(
             {
                 "name": "Test Germany",
-                "code": "TG",
+                "code": "TB",
                 "faker_locale": "de_DE",
                 "faker_locale_available": True,
             }
@@ -183,7 +183,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Minimal Country",
-                "code": "MC",
+                "code": "TD",
             }
         )
 
@@ -200,7 +200,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Inherit Test Country",
-                "code": "IT",
+                "code": "TE",
             }
         )
 
@@ -245,7 +245,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Precision GPS Country",
-                "code": "PG",
+                "code": "TH",
                 "lat_min": 12.345678,
                 "lat_max": 12.876543,
                 "lon_min": -98.765432,

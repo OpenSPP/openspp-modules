@@ -20,8 +20,8 @@ class TestResPartner(TransactionCase):
         # Create a demo data generator for testing
         cls.test_country = cls.env["res.country"].create(
             {
-                "name": "Test Country",
-                "code": "TC",
+                "name": "Test Country Partner",
+                "code": "TP",
                 "faker_locale": "en_US",
             }
         )
