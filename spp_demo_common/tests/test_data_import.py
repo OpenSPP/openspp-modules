@@ -4,7 +4,6 @@ import json
 import logging
 
 from odoo.exceptions import ValidationError
-from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)

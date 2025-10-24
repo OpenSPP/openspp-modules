@@ -3,7 +3,6 @@ import base64
 import json
 import logging
 
-from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
