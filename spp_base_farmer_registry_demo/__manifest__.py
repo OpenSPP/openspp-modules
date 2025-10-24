@@ -23,6 +23,7 @@
     ],
     "excludes": [
         "spp_base_spmis",
+        "spp_base_social_registry",
     ],
     "data": [
         "security/ir.model.access.csv",
