@@ -7,7 +7,6 @@ from odoo.tests.common import TransactionCase
 _logger = logging.getLogger(__name__)
 
 
-@tagged("post_install", "-at_install")
 class TestResConfigSettings(TransactionCase):
     @classmethod
     def setUpClass(cls):
