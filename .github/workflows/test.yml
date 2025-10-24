@@ -91,6 +91,7 @@ jobs:
       - name: Remove g2p_connect_demo from openspp-modules as it is not compatible with all OpenSPP variants
         run: |
           rm -rf g2p_connect_demo
+          rm -rf spp_farmer_registry_base
       - name: Create temporary test-requirement.txt
         run: |
           touch spp-test-requirements.txt
