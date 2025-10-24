@@ -58,19 +58,23 @@ class TestDemoDataGenerator(TransactionCase):
             }
         )
 
-        # Create test gender types
-        cls.gender_male = cls.env["gender.type"].create(
-            {
-                "value": "Male",
-                "code": "Male",
-            }
-        )
-        cls.gender_female = cls.env["gender.type"].create(
-            {
-                "value": "Female",
-                "code": "Female",
-            }
-        )
+        # Create test gender types (search first to avoid duplicates)
+        cls.gender_male = cls.env["gender.type"].search([("code", "=", "Male")], limit=1)
+        if not cls.gender_male:
+            cls.gender_male = cls.env["gender.type"].create(
+                {
+                    "value": "Male",
+                    "code": "Male",
+                }
+            )
+        cls.gender_female = cls.env["gender.type"].search([("code", "=", "Female")], limit=1)
+        if not cls.gender_female:
+            cls.gender_female = cls.env["gender.type"].create(
+                {
+                    "value": "Female",
+                    "code": "Female",
+                }
+            )
 
     def test_01_default_methods(self):
         """Test all default value methods"""
