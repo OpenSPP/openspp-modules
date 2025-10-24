@@ -148,6 +148,7 @@
                                                 name="locale_origin"
                                                 options="{'no_create': True}"
                                                 readonly="locked or state != 'draft'"
+                                                domain="[('faker_locale_available', '=', True)]"
                                             />
                                         </div>
                                     </div>
