@@ -159,7 +159,7 @@ class TestResCountry(TransactionCase):
         fr_country = self.env["res.country"].create(
             {
                 "name": "Test France",
-                "code": "TA",
+                "code": "V1",
                 "faker_locale": "fr_FR",
                 "faker_locale_available": True,
             }
@@ -168,7 +168,7 @@ class TestResCountry(TransactionCase):
         de_country = self.env["res.country"].create(
             {
                 "name": "Test Germany",
-                "code": "TB",
+                "code": "V2",
                 "faker_locale": "de_DE",
                 "faker_locale_available": True,
             }
@@ -183,7 +183,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Minimal Country",
-                "code": "TD",
+                "code": "V3",
             }
         )
 
@@ -200,7 +200,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Inherit Test Country",
-                "code": "TE",
+                "code": "V4",
             }
         )
 
@@ -245,7 +245,7 @@ class TestResCountry(TransactionCase):
         country = self.env["res.country"].create(
             {
                 "name": "Precision GPS Country",
-                "code": "TH",
+                "code": "V5",
                 "lat_min": 12.345678,
                 "lat_max": 12.876543,
                 "lon_min": -98.765432,

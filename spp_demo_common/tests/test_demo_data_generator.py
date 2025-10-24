@@ -40,7 +40,6 @@ class TestDemoDataGenerator(TransactionCase):
         cls.group_type = cls.env["g2p.group.kind"].create(
             {
                 "name": "Test Group Type",
-                "code": "TGT",
             }
         )
 
@@ -48,7 +47,6 @@ class TestDemoDataGenerator(TransactionCase):
         cls.id_type = cls.env["g2p.id.type"].create(
             {
                 "name": "Test ID Type",
-                "code": "TID",
                 "id_validation": r"^[A-Z]{2}\d{6}$",
             }
         )

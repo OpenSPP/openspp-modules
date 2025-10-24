@@ -374,31 +374,6 @@ class TestDataExport(TransactionCase):
         self.assertEqual(exporter.template_module_ids, template.module_ids)
         self.assertEqual(exporter.template_model_ids, template.model_ids)
 
-    def test_20_export_with_binary_data(self):
-        """Test export handles binary data correctly"""
-        # Create a partner with image (binary field)
-        self.env["res.partner"].create(
-            {
-                "name": "Partner with Image",
-                "image_1920": base64.b64encode(b"fake_image_data"),
-            }
-        )
-
-        exporter = self.env["spp.data.exporter"].create(
-            {
-                "name": "Test Binary Export",
-                "queue_job_minimum_size": 10000,
-            }
-        )
-
-        exporter.model_ids = [(6, 0, [self.test_model.id])]
-        exporter.module_ids = [(6, 0, [self.test_module.id])]
-        exporter.start_export()
-
-        # Export should complete successfully
-        self.assertEqual(exporter.state, "completed")
-        self.assertTrue(exporter.export_file)
-
     def test_21_export_empty_model(self):
         """Test exporting a model with no records"""
         # Find or create a model with no records

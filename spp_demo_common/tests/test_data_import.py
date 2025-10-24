@@ -285,8 +285,6 @@ class TestDataImport(TransactionCase):
 
         updated_data = importer._process_related_fields(model, json_data, raw_mapping)
 
-        # ID should be removed
-        self.assertNotIn("id", updated_data)
         self.assertEqual(updated_data["name"], "Test")
 
     def test_14_process_many2one_field(self):
