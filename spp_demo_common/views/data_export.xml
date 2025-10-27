@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_data_exporter_tree" model="ir.ui.view">
+        <field name="name">view_data_exporter_tree</field>
+        <field name="model">spp.data.exporter</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree delete="true">
+                <field name="name" />
+                <field name="template_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_data_exporter_form" model="ir.ui.view">
+        <field name="name">view_data_exporter_form</field>
+        <field name="model">spp.data.exporter</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Export Data">
+                <header>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,in_progress,completed,cancelled"
+                    />
+                </header>
+                <field name="locked" invisible="1" />
+                <field name="include_all_data" invisible="1" />
+
+                <div
+                    class="alert alert-warning text-center o_form_header"
+                    role="status"
+                    invisible="not locked"
+                >
+                    <span>Warning: Operation in progress: </span>
+                    <field name="locked_reason" class="o_stat_value" />
+                    <button
+                        name="refresh_page"
+                        type="object"
+                        class="btn_warning"
+                        icon="fa-refresh"
+                        title="Refresh Page"
+                        string="Refresh"
+                    />
+                </div>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" invisible="locked">
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-thumbs-o-up"
+                            name="start_export"
+                            invisible="state != 'draft'"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Start</span>
+                                <span class="o_stat_text">Export</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div style="width: 100%; padding-top: 10px; padding-left: 10px;">
+                        <div style="display: flex; gap: 20px;">
+                            <field name="name" invisible="1" />
+                            <field name="export_filename" invisible="1" />
+                            <!-- Data Exporter Section -->
+                            <div style="flex: 1;">
+                                <h3>Data Exporter</h3>
+                                <hr />
+                                <div name="div_name" style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                    <div style="flex: 1;">
+                                        <h4><label for="name" string="Description" class="o_form_label" /><div
+                                            /></h4>
+                                        <field
+                                            name="name"
+                                            required="1"
+                                            readonly="state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                    <div style="flex: 1;" invisible="include_all_data">
+                                        <h4><label
+                                                for="template_id"
+                                                string="Export Template"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="template_id"
+                                            required="not include_all_data"
+                                            style="width: 90%;"
+                                            options="{'no_create': True}"
+                                            readonly="state != 'draft'"
+                                        />
+                                    </div>
+                                </div>
+                                <div
+                                    name="div_export_file"
+                                    style="display: flex; gap: 20px; margin-bottom: 10px;"
+                                >
+                                    <div style="flex: 1;">
+                                        <h4><label
+                                                for="export_file"
+                                                string="Exported File"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="export_file"
+                                            readonly="1"
+                                            widget="binary"
+                                            filename="export_filename"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Other Details Section -->
+                            <div style="flex: 1;">
+                                <h3>Other Details</h3>
+                                <hr />
+                                <div
+                                    name="div_other_details_1"
+                                    style="display: flex; gap: 20px; margin-bottom: 10px;"
+                                >
+                                    <div style="flex: 1;">
+                                        <h4><field
+                                                name="include_installed_modules"
+                                                readonly="include_all_data or state != 'draft'"
+                                                force_save="1"
+                                            />
+                                        <label
+                                                for="include_installed_modules"
+                                                string="Include Installed Modules"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4>
+                                            <label
+                                                for="total_number_of_records"
+                                                string=" No. of Records"
+                                                class="o_form_label"
+                                            /><div />
+                                            <field name="total_number_of_records" />
+                                        </h4>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4>
+                                            <label
+                                                for="total_number_of_models"
+                                                string=" No. of Models"
+                                                class="o_form_label"
+                                            /><div />
+                                            <field name="total_number_of_models" />
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Modules" name="module_ids" invisible="1">
+                            <field name="module_ids" readonly="1">
+                                <tree>
+                                    <field name="shortdesc" />
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Models" name="model_ids">
+                            <field name="model_ids" readonly="1">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="model" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page
+                            string="Summary"
+                            name="raw_ids"
+                            invisible="state not in ['in_progress','completed']"
+                        >
+                            <field name="raw_ids" readonly="1">
+                                <tree>
+                                    <field name="model_name" />
+                                    <field name="name" />
+                                    <field name="record_count" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_data_exporter" model="ir.actions.act_window">
+        <field name="name">Data Exporter</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.data.exporter</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Export data from the system using predefined templates.
+            </p><p>
+                Click the create button to set up a new data export task.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_data_exporter_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_data_exporter_tree" />
+        <field name="act_window_id" ref="action_data_exporter" />
+    </record>
+
+    <record id="action_data_exporter_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_data_exporter_form" />
+        <field name="act_window_id" ref="action_data_exporter" />
+    </record>
+
+    <menuitem
+        id="menu_data_exporter"
+        name="Export Data"
+        action="action_data_exporter"
+        parent="spp_demo_common.menu_import_export"
+        sequence="50"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
+    />
+
+</odoo>

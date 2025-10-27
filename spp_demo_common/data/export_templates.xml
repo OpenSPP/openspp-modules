@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="default_spp_exporter_template" model="spp.data.exporter.templates">
+        <field name="name">Default OpenSPP Export Template</field>
+        <field
+            name="model_ids"
+            eval="[(6, 0, [
+            ref('base.model_res_users'),
+            ref('base.model_res_partner'),
+            ref('base.model_res_company'),
+            ref('g2p_registry_base.model_g2p_district'),
+            ref('g2p_registry_base.model_g2p_phone_number'),
+            ref('g2p_registry_base.model_g2p_reg_id'),
+            ref('g2p_registry_base.model_g2p_id_type'),
+            ref('g2p_registry_base.model_g2p_reg_rel'),
+            ref('g2p_registry_base.model_g2p_relationship'),
+            ref('g2p_registry_base.model_g2p_registrant_tags'),
+            ref('g2p_registry_group.model_g2p_group_kind'),
+            ref('g2p_registry_individual.model_gender_type'),
+            ref('g2p_registry_membership.model_g2p_group_membership'),
+            ref('g2p_registry_membership.model_g2p_group_membership_kind'),
+        ])]"
+        />
+    </record>
+</odoo>

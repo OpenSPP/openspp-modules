@@ -1,0 +1,37 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+demo_data_generator_read_registry_access,Demo Data Generator Read Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.read_registry,1,0,0,0
+data_exporter_read_access,Data Exporter Read Access,spp_demo_common.model_spp_data_exporter,spp_base_common.read_registry,1,0,0,0
+data_exporter_templates_read_access,Data Exporter Templates Read Access,spp_demo_common.model_spp_data_exporter_templates,spp_base_common.read_registry,1,0,0,0
+data_exporter_raw_read_access,Data Exporter Raw Read Access,spp_demo_common.model_spp_data_exporter_raw,spp_base_common.read_registry,1,0,0,0
+data_importer_read_access,Data Importer Read Access,spp_demo_common.model_spp_data_importer,spp_base_common.read_registry,1,0,0,0
+data_importer_raw_read_access,Data Importer Raw Read Access,spp_demo_common.model_spp_data_importer_raw,spp_base_common.read_registry,1,0,0,0
+data_importer_summary_read_access,Data Importer Summary Read Access,spp_demo_common.model_spp_data_importer_summary,spp_base_common.read_registry,1,0,0,0
+demo_id_types_read_access,Demo ID Types Read Access,spp_demo_common.model_spp_demo_data_id_types,spp_base_common.read_registry,1,0,0,0
+demo_bank_types_read_access,Demo Bank Types Read Access,spp_demo_common.model_spp_demo_data_bank_types,spp_base_common.read_registry,1,0,0,0
+apps_wizard_read_access,Apps Wizard Read Access,spp_demo_common.model_spp_apps_wizard,spp_base_common.read_registry,1,0,0,0
+missing_module_read_access,Apps Missing Modules Read Access,spp_demo_common.model_spp_missing_module,spp_base_common.read_registry,1,0,0,0
+
+demo_data_generator_write_registry_access,Demo Data Generator Write Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.write_registry,1,1,0,0
+data_exporter_write_access,Data Exporter Write Access,spp_demo_common.model_spp_data_exporter,spp_base_common.write_registry,1,1,0,0
+data_exporter_templates_write_access,Data Exporter Templates Write Access,spp_demo_common.model_spp_data_exporter_templates,spp_base_common.write_registry,1,1,0,0
+data_exporter_raw_write_access,Data Exporter Raw Write Access,spp_demo_common.model_spp_data_exporter_raw,spp_base_common.write_registry,1,1,0,0
+data_importer_write_access,Data Importer Write Access,spp_demo_common.model_spp_data_importer,spp_base_common.write_registry,1,1,0,0
+data_importer_raw_write_access,Data Importer Raw Write Access,spp_demo_common.model_spp_data_importer_raw,spp_base_common.write_registry,1,1,0,0
+data_importer_summary_write_access,Data Importer Summary Write Access,spp_demo_common.model_spp_data_importer_summary,spp_base_common.write_registry,1,1,0,0
+demo_id_types_write_access,Demo ID Types Write Access,spp_demo_common.model_spp_demo_data_id_types,spp_base_common.write_registry,1,1,0,1
+demo_bank_types_write_access,Demo Bank Types Write Access,spp_demo_common.model_spp_demo_data_bank_types,spp_base_common.write_registry,1,1,0,1
+apps_wizard_write_access,Apps Wizard Write Access,spp_demo_common.model_spp_apps_wizard,spp_base_common.write_registry,1,1,0,0
+missing_module_write_access,Apps Missing Modules Write Access,spp_demo_common.model_spp_missing_module,spp_base_common.write_registry,1,1,0,0
+
+demo_data_generator_create_registry_access,Demo Data Generator Create Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.create_registry,1,0,1,0
+data_exporter_create_access,Data Exporter Create Access,spp_demo_common.model_spp_data_exporter,spp_base_common.create_registry,1,0,1,0
+data_exporter_templates_create_access,Data Exporter Templates Create Access,spp_demo_common.model_spp_data_exporter_templates,spp_base_common.create_registry,1,0,1,0
+data_exporter_raw_create_access,Data Exporter Raw Create Access,spp_demo_common.model_spp_data_exporter_raw,spp_base_common.create_registry,1,0,1,0
+data_importer_create_access,Data Importer Create Access,spp_demo_common.model_spp_data_importer,spp_base_common.create_registry,1,0,1,0
+data_importer_raw_create_access,Data Importer Raw Create Access,spp_demo_common.model_spp_data_importer_raw,spp_base_common.create_registry,1,0,1,0
+data_importer_summary_create_access,Data Importer Summary Create Access,spp_demo_common.model_spp_data_importer_summary,spp_base_common.create_registry,1,0,1,0
+demo_id_types_create_access,Demo ID Types Create Access,spp_demo_common.model_spp_demo_data_id_types,spp_base_common.create_registry,1,0,1,1
+demo_bank_types_create_access,Demo Bank Types Create Access,spp_demo_common.model_spp_demo_data_bank_types,spp_base_common.create_registry,1,0,1,1
+apps_wizard_create_access,Apps Wizard Create Access,spp_demo_common.model_spp_apps_wizard,spp_base_common.create_registry,1,0,1,0
+missing_module_create_access,Apps Missing Modules Create Access,spp_demo_common.model_spp_missing_module,spp_base_common.create_registry,1,0,1,0
