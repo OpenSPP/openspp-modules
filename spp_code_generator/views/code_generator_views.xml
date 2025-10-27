@@ -32,6 +32,12 @@
                         class="oe_highlight"
                         invisible="state == 'processed'"
                     />
+                    <button
+                        name="action_process_derived_fields"
+                        type="object"
+                        string="Process Derived Fields"
+                        class="btn-secondary"
+                    />
                     <field name="state" widget="statusbar" statusbar_visible="draft,processed" />
                 </header>
                 <sheet>
