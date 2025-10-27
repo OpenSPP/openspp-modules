@@ -312,9 +312,9 @@ class CodeGenerator(models.Model):
         # Post message in chatter
         self.message_post(
             body=_(
-                "Entity processing completed successfully.<br/>"
-                "Fields created: <b>%s</b><br/>"
-                "Fields skipped: <b>%s</b>"
+                "Entity processing completed successfully.\n"
+                "Fields created: %s\n"
+                "Fields skipped: %s"
             )
             % (created_fields_count, skipped_fields_count),
             subject="YAML Processing Complete",

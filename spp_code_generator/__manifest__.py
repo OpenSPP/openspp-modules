@@ -20,6 +20,7 @@
         "g2p_programs",
         "spp_custom_field",
         "spp_custom_fields_ui",
+        "spp_cel_domain",
     ],
     "external_dependencies": {
         "python": ["PyYAML"],
