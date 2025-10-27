@@ -147,9 +147,11 @@ class SPPDemoDataGenerator(models.Model):
         )
 
         # Specific Head Farmer details on Group
+        farmer_family_name = fake.last_name()
         group_vals.update(
             {
-                "farmer_family_name": fake.last_name(),
+                "farmer_family_name": farmer_family_name,
+                "name": farmer_family_name,
                 "farmer_given_name": fake.first_name(),
                 "farmer_addtnl_name": fake.first_name() if random.choice([True, False]) else None,
                 "farmer_mobile_tel": self.generate_phone_number(fake),
