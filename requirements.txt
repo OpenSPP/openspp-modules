@@ -10,6 +10,7 @@ jsonschema
 jwcrypto>=1.5.6
 numpy>=1.22.2
 openpyxl
+pandas
 pyjwt>=2.4.0
 pyproj
 python-magic
