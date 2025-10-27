@@ -209,7 +209,12 @@
                     </div>
                     <notebook>
                         <page string="Generated Groups" invisible="not generated_group_ids">
-                            <field name="generated_group_ids" readonly="1" force_save="1">
+                            <field
+                                name="generated_group_ids"
+                                context="{'form_view_ref': 'g2p_registry_group.view_groups_form'}"
+                                readonly="1"
+                                force_save="1"
+                            >
                                 <tree>
                                     <field name="name" />
                                     <field name="kind" />
@@ -221,7 +226,12 @@
                             </field>
                         </page>
                         <page string="Generated Individuals" invisible="not generated_individual_ids">
-                            <field name="generated_individual_ids" readonly="1" force_save="1">
+                            <field
+                                name="generated_individual_ids"
+                                context="{'form_view_ref': 'g2p_registry_individual.view_individuals_form'}"
+                                readonly="1"
+                                force_save="1"
+                            >
                                 <tree>
                                     <field name="name" />
                                     <field name="individual_membership_ids" />
