@@ -18,6 +18,9 @@ class SPPDemoDataGenerator(models.Model):
     _name = "spp.demo.data.generator"
     _description = "SPP Demo Data Generator"
 
+    # Cache for compiled regex patterns to avoid recompilation
+    _regex_cache = {}
+
     def _default_number_of_groups(self):
         default_settings = self.env["ir.config_parameter"].sudo()
         return int(default_settings.get_param("spp_demo_common.number_of_groups", 10))
@@ -97,6 +100,20 @@ class SPPDemoDataGenerator(models.Model):
         string="Generated Individuals",
         readonly=True,
     )
+    generation_log_ids = fields.One2many(
+        "spp.demo.data.generation.log",
+        "demo_data_generator_id",
+        string="Generation Logs",
+        readonly=True,
+    )
+    generation_log_count = fields.Integer(
+        string="Failed Generations",
+        compute="_compute_generation_log_count",
+    )
+
+    def _compute_generation_log_count(self):
+        for rec in self:
+            rec.generation_log_count = len(rec.generation_log_ids)
 
     def generate_demo_data(self):
         self.ensure_one()
@@ -297,6 +314,34 @@ class SPPDemoDataGenerator(models.Model):
     def get_random_date(self, fake, datefrom, dateto):
         return fake.date_between_dates(date_start=datefrom, date_end=dateto)
 
+    def _log_generation_failure(
+        self,
+        registrant,
+        operation_type,
+        failure_reason,
+        error_message,
+        attempts=0,
+        validation_regex=None,
+        generated_value=None,
+        exception_details=None,
+    ):
+        """
+        Log a generation failure to the database for tracking and debugging.
+        """
+        log_vals = {
+            "demo_data_generator_id": self.id,
+            "registrant_id": registrant.id if registrant else None,
+            "registrant_type": "group" if registrant and registrant.is_group else "individual",
+            "operation_type": operation_type,
+            "failure_reason": failure_reason,
+            "error_message": error_message,
+            "attempts": attempts,
+            "validation_regex": validation_regex,
+            "generated_value": generated_value,
+            "exception_details": exception_details,
+        }
+        self.env["spp.demo.data.generation.log"].create(log_vals)
+
     def get_id_type(self, target_type):
         if self.id_type_ids:
             id_type = self.env["spp.demo.data.id.types"].search(
@@ -449,17 +494,55 @@ class SPPDemoDataGenerator(models.Model):
             # Generate ID number based on regex or fallback to default
             if id_validation_regex:
                 try:
-                    while True:
-                        id_number = self.generate_id_from_regex(id_validation_regex)
+                    # Use cached compiled regex for performance
+                    if id_validation_regex not in self._regex_cache:
+                        self._regex_cache[id_validation_regex] = re.compile(id_validation_regex)
+                    compiled_regex = self._regex_cache[id_validation_regex]
 
-                        # Validate generated ID against the regex
-                        if not re.match(id_validation_regex, id_number):
-                            continue
+                    max_attempts = 10  # Prevent infinite loops
+                    attempt = 0
+                    id_number = None
+                    last_generated = None
 
-                        break
-                except Exception:
-                    # Fallback if generation failed
-                    id_number = fake.bothify(text="??######")
+                    while attempt < max_attempts:
+                        last_generated = self.generate_id_from_regex(id_validation_regex)
+
+                        # Validate generated ID against the compiled regex
+                        if compiled_regex.match(last_generated):
+                            id_number = last_generated
+                            break
+                        attempt += 1
+
+                    if id_number is None:
+                        # If we exhausted attempts, log to database and skip creation
+                        self._log_generation_failure(
+                            registrant=registrant,
+                            operation_type="id_generation",
+                            failure_reason="max_attempts_reached",
+                            error_message=f"Failed to generate valid ID after {max_attempts} attempts for regex: {id_validation_regex}",
+                            attempts=max_attempts,
+                            validation_regex=id_validation_regex,
+                            generated_value=last_generated,
+                        )
+                        _logger.warning(
+                            f"Failed to generate valid ID after {max_attempts} attempts "
+                            f"for regex: {id_validation_regex}. No record created."
+                        )
+                        return
+                except Exception as e:
+                    # Log exception to database and skip creation
+                    self._log_generation_failure(
+                        registrant=registrant,
+                        operation_type="id_generation",
+                        failure_reason="generation_error",
+                        error_message=f"Error generating ID from regex {id_validation_regex}",
+                        attempts=attempt if "attempt" in locals() else 0,
+                        validation_regex=id_validation_regex,
+                        generated_value=last_generated if "last_generated" in locals() else None,
+                        exception_details=str(e),
+                    )
+                    _logger.error(f"Error generating ID from regex {id_validation_regex}: {e}. No record created.")
+                    return
             else:
                 # No regex provided, use default generation
                 id_number = fake.bothify(text="??######")
@@ -510,7 +593,10 @@ class SPPDemoDataGenerator(models.Model):
             self.env["res.partner.bank"].create(bank_account_vals)
 
     def generate_phone_number(self, fake):
-        while True:
+        max_attempts = 10  # Prevent infinite loops
+        attempt = 0
+
+        while attempt < max_attempts:
             try:
                 phone_number = fake.phone_number()
             except Exception:
@@ -524,24 +610,53 @@ class SPPDemoDataGenerator(models.Model):
             if cleaned.startswith("+"):
                 cleaned = cleaned[1:]
             if cleaned.isdigit():
-                break
-        return cleaned
+                return cleaned
+            attempt += 1
+
+        # Return None if we couldn't generate a valid phone number
+        _logger.warning("Failed to generate valid phone number after %s attempts. Returning None.", max_attempts)
+        return None
 
     def create_phone_numbers(self, fake, registrant):
         num_phone_numbers = random.randint(1, 5)
+        phone_vals_list = []
+        failed_count = 0
+
         for _ in range(num_phone_numbers):
             phone_number = self.generate_phone_number(fake)
+
+            if phone_number is None:
+                # Log failure to database
+                failed_count += 1
+                self._log_generation_failure(
+                    registrant=registrant,
+                    operation_type="phone_generation",
+                    failure_reason="max_attempts_reached",
+                    error_message="Failed to generate valid phone number after 10 attempts",
+                    attempts=10,
+                )
+                continue
+
             date_collected = self.get_random_date(
                 fake,
                 datefrom=registrant.registration_date,
                 dateto=fields.Date.today(),
             )
-            phone_vals = {
-                "partner_id": registrant.id,
-                "phone_no": phone_number,
-                "date_collected": date_collected,
-            }
-            self.env["g2p.phone.number"].create(phone_vals)
+            phone_vals_list.append(
+                {
+                    "partner_id": registrant.id,
+                    "phone_no": phone_number,
+                    "date_collected": date_collected,
+                }
+            )
+
+        # Batch create all phone numbers for this registrant
+        if phone_vals_list:
+            self.env["g2p.phone.number"].create(phone_vals_list)
+
+        if failed_count > 0:
+            _logger.warning(f"Failed to generate {failed_count} phone number(s) for registrant {registrant.name}")
+
         registrant.phone_number_ids_change()
 
     def create_gps_coordinates(self, fake, registrant):
