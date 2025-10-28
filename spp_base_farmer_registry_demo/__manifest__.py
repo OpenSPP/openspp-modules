@@ -35,6 +35,7 @@
         "data/chemical_data.xml",
         "data/fertilizer_data.xml",
         "data/feed_items_data.xml",
+        "views/demo_data_generator_view.xml",
         "views/group_view.xml",
         "views/individual_view.xml",
     ],
