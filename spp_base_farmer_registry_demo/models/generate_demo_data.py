@@ -151,7 +151,7 @@ class SPPDemoDataGenerator(models.Model):
         
         # Pre-initialize the season early (will be cached and reused by _get_random_season)
         season_id = self._get_random_season()
-        if not season_id:
+        if not season_id or not hasattr(self, '_active_season') or not self._active_season:
             raise ValidationError(
                 _("Failed to create or find an active agricultural season. "
                   "Please check the season configuration and try again.")
@@ -975,19 +975,32 @@ class SPPDemoDataGenerator(models.Model):
 
     def _get_random_season(self):
         """Get the configured active season, creating it if necessary"""
+        # Initialize _active_season if not already set
+        if not hasattr(self, '_active_season'):
+            self._active_season = None
+            
         # Use cached season if available
-        if hasattr(self, '_active_season') and self._active_season:
+        if self._active_season:
             _logger.debug(f"Using cached season: {self._active_season.name} (ID: {self._active_season.id})")
             return self._active_season.id
         
         # Generate/find the season if not already cached
         _logger.info("Season not cached, generating/finding season now")
-        fake = Faker(self.locale_origin.faker_locale or "en_US") if self.locale_origin else Faker("en_US")
-        self._active_season = self._generate_season_data(fake)
-        
-        if self._active_season:
-            _logger.info(f"Using season: {self._active_season.name} (ID: {self._active_season.id})")
-            return self._active_season.id
+        try:
+            # Get faker locale safely
+            faker_locale = "en_US"
+            if hasattr(self, 'locale_origin') and self.locale_origin:
+                faker_locale = self.locale_origin.faker_locale or "en_US"
+            
+            fake = Faker(faker_locale)
+            self._active_season = self._generate_season_data(fake)
+            
+            if self._active_season:
+                _logger.info(f"Using season: {self._active_season.name} (ID: {self._active_season.id})")
+                return self._active_season.id
+        except Exception as e:
+            _logger.error(f"Exception while generating season: {str(e)}", exc_info=True)
+            self._active_season = None
         
         _logger.error("Failed to generate/find active season! Agricultural activities cannot be created.")
         return None
