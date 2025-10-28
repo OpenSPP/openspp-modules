@@ -9,6 +9,38 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Other Configuration">
                     <div style="width: 100%; padding-top: 10px; padding-left: 10px;">
+                        <!-- Season Configuration Section -->
+                        <div style="margin-bottom: 20px;">
+                            <h3>Season Configuration</h3>
+                            <hr />
+                            <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                <div style="flex: 1;">
+                                    <h4><label for="season_name" class="o_form_label" /><div /></h4>
+                                    <field
+                                        name="season_name"
+                                        readonly="locked or state != 'draft'"
+                                        style="width: 90%;"
+                                    />
+                                </div>
+                                <div style="flex: 1;">
+                                    <h4><label for="season_start_date" class="o_form_label" /><div /></h4>
+                                    <field
+                                        name="season_start_date"
+                                        readonly="locked or state != 'draft'"
+                                        style="width: 90%;"
+                                    />
+                                </div>
+                                <div style="flex: 1;">
+                                    <h4><label for="season_end_date" class="o_form_label" /><div /></h4>
+                                    <field
+                                        name="season_end_date"
+                                        readonly="locked or state != 'draft'"
+                                        style="width: 90%;"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div style="display: flex; gap: 20px;">
                             <!-- Percentage Settings Section -->
                             <div style="flex: 1;">
