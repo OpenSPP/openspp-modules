@@ -381,8 +381,35 @@ class SPPDemoDataGenerator(models.Model):
         while i < len(pattern):
             char = pattern[i]
 
+            # Handle groups with alternation (...)
+            if char == "(":
+                # Find the matching closing parenthesis
+                depth = 1
+                end = i + 1
+                while end < len(pattern) and depth > 0:
+                    if pattern[end] == "(":
+                        depth += 1
+                    elif pattern[end] == ")":
+                        depth -= 1
+                    end += 1
+                
+                group_content = pattern[i + 1 : end - 1]
+                i = end
+                
+                # Check for alternation (|)
+                if "|" in group_content:
+                    # Split by | and choose one randomly
+                    alternatives = group_content.split("|")
+                    chosen = random.choice(alternatives)
+                    result.append(chosen)
+                else:
+                    # No alternation, just recursively generate from the group content
+                    generated = self.generate_id_from_regex("^" + group_content + "$")
+                    if generated:
+                        result.append(generated)
+
             # Handle character classes [...]
-            if char == "[":
+            elif char == "[":
                 end = pattern.index("]", i)
                 char_class = pattern[i + 1 : end]
                 i = end + 1
@@ -408,11 +435,23 @@ class SPPDemoDataGenerator(models.Model):
                     # Handle negation [^...]
                     if char_class.startswith("^"):
                         result.append(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"))
-                    # Handle ranges like [A-Z], [0-9], [a-z]
-                    elif "-" in char_class and len(char_class) == 3 and char_class[1] == "-":
-                        start_char = ord(char_class[0])
-                        end_char = ord(char_class[2])
-                        result.append(chr(random.randint(start_char, end_char)))
+                    # Handle character classes with ranges (parse them properly)
+                    elif "-" in char_class:
+                        # Expand all ranges in the character class
+                        chars = []
+                        j = 0
+                        while j < len(char_class):
+                            # Check if this is a range (e.g., A-Z or 0-9)
+                            if j + 2 < len(char_class) and char_class[j + 1] == "-":
+                                start_char = ord(char_class[j])
+                                end_char = ord(char_class[j + 2])
+                                chars.extend([chr(c) for c in range(start_char, end_char + 1)])
+                                j += 3
+                            else:
+                                # Single character (not part of a range)
+                                chars.append(char_class[j])
+                                j += 1
+                        result.append(random.choice(chars))
                     # Handle explicit character list [ABC123]
                     else:
                         result.append(random.choice(char_class))
