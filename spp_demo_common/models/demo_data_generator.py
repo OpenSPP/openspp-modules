@@ -392,16 +392,19 @@ class SPPDemoDataGenerator(models.Model):
                     elif pattern[end] == ")":
                         depth -= 1
                     end += 1
-                
+
                 group_content = pattern[i + 1 : end - 1]
                 i = end
-                
+
                 # Check for alternation (|)
                 if "|" in group_content:
                     # Split by | and choose one randomly
                     alternatives = group_content.split("|")
                     chosen = random.choice(alternatives)
-                    result.append(chosen)
+                    # Recursively generate from the chosen alternative
+                    generated = self.generate_id_from_regex("^" + chosen + "$")
+                    if generated:
+                        result.append(generated)
                 else:
                     # No alternation, just recursively generate from the group content
                     generated = self.generate_id_from_regex("^" + group_content + "$")
@@ -644,11 +647,11 @@ class SPPDemoDataGenerator(models.Model):
                 except Exception:
                     phone_number = f"+{random.randint(1000000000, 9999999999)}"
 
-            # Accept only numbers, spaces, dashes, parentheses, and leading +
-            cleaned = phone_number.replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
-            if cleaned.startswith("+"):
-                cleaned = cleaned[1:]
-            if cleaned.isdigit():
+            # Extract only digits from the phone number (remove all non-digit characters)
+            cleaned = re.sub(r"\D", "", phone_number)
+
+            # Ensure we have a valid length (at least 10 digits for most phone numbers)
+            if cleaned and len(cleaned) >= 10:
                 return cleaned
             attempt += 1
 
