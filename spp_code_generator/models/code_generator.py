@@ -283,7 +283,7 @@ for record in self:
     try:
         if record.is_group:
             # This is an individual indicator, skip groups
-            record.{field_name} = None
+            record.write({{'{field_name}': None}})
             continue
 
         # Execute CEL expression using _exec helper
@@ -291,20 +291,18 @@ for record in self:
             '''{expression}''',
             profile='registry_individuals'
         )
-
-        # Check if current record matches the expression
 """
             if field_type == "integer":
                 code += f"""
-        record.{field_name} = result
+        record.write({{'{field_name}': result}})
 """
             else:
                 code += f"""
-        record.{field_name} = bool(record.id in result.get('ids', []))
+        record.write({{'{field_name}': bool(record.id in result.get('ids', []))}})
 """
             code += f"""
     except Exception as e:
-        record.{field_name} = None
+        record.write({{'{field_name}': None}})
 """
             return code
 
