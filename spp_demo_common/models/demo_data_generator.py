@@ -647,11 +647,18 @@ class SPPDemoDataGenerator(models.Model):
                 except Exception:
                     phone_number = f"+{random.randint(1000000000, 9999999999)}"
 
-            # Extract only digits from the phone number (remove all non-digit characters)
+            # Preserve the leading '+' if present, then remove all non-digit characters
+            has_plus = phone_number.startswith('+')
             cleaned = re.sub(r"\D", "", phone_number)
+            
+            # Add back the '+' prefix if it was originally there
+            if has_plus:
+                cleaned = f"+{cleaned}"
 
             # Ensure we have a valid length (at least 10 digits for most phone numbers)
-            if cleaned and len(cleaned) >= 10:
+            # Check digit count (excluding the + sign)
+            digit_count = len(cleaned.lstrip('+'))
+            if cleaned and digit_count >= 10:
                 return cleaned
             attempt += 1
 
