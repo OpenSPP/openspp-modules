@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="spp_registry_search.PartnerSearchWidget" owl="1">
+        <div class="o_partner_search_widget">
+            <div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0">
+                                    <i class="fa fa-search mr-2" /> Registry Search
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="search_field" class="form-label">
+                                            Search By
+                                        </label>
+                                        <select
+                                            id="search_field"
+                                            class="form-select"
+                                            t-model="state.selectedField"
+                                            t-on-change="onFieldChange"
+                                        >
+                                            <t t-foreach="state.searchFields" t-as="field" t-key="field.id">
+                                                <option t-att-value="field.field_name">
+                                                    <t t-esc="field.name" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="search_value" class="form-label">
+                                            Search Value
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="search_value"
+                                            class="form-control"
+                                            placeholder="Enter search value..."
+                                            t-model="state.searchValue"
+                                            t-on-input="onSearchValueChange"
+                                            t-on-keypress="onKeyPress"
+                                        />
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-end">
+                                        <button
+                                            class="btn btn-primary w-100"
+                                            t-on-click="onSearch"
+                                            t-att-disabled="state.searching or !state.selectedField or !state.searchValue"
+                                        >
+                                            <i class="fa fa-search" />
+                                            <t t-if="!state.searching">Search</t>
+                                            <t t-else="">Searching...</t>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <small class="text-muted">
+                                        <i class="fa fa-info-circle" />
+                                        Select a field from the dropdown and enter a search value to find matching partners.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
+

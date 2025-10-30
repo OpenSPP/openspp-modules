@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <!-- Custom Partner Search Form View -->
+    <record id="view_partner_custom_search_form" model="ir.ui.view">
+        <field name="name">partner.custom.search.form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <form string="Partner Search" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field
+                                name="id"
+                                invisible="1"
+                                options="{'spp_custom_search': True}"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Custom Partner Search Tree View -->
+    <record id="view_partner_custom_search_tree" model="ir.ui.view">
+        <field name="name">partner.custom.search.tree</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <tree string="Search Results" create="false" edit="false">
+                <field name="name" />
+                <field name="email" />
+                <field name="phone" />
+                <field name="mobile" />
+                <field name="city" />
+                <field name="country_id" />
+                <field name="is_group" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Custom Partner Search Client Action -->
+    <record id="action_partner_custom_search" model="ir.actions.client">
+        <field name="name">Search</field>
+        <field name="tag">partner_search_action</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem
+        id="menu_partner_custom_search"
+        name="Search"
+        parent="g2p_registry_base.g2p_main_menu_root"
+        action="action_partner_custom_search"
+        sequence="-1"
+    />
+</odoo>
+

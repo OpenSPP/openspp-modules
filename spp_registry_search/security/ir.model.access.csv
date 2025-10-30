@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+spp_partner_search_field_read_access,Partner Search Field Read Access,model_spp_partner_search_field,spp_base_common.read_registry,1,0,0,0
+spp_partner_search_field_write_access,Partner Search Field Write Access,model_spp_partner_search_field,spp_base_common.write_registry,1,1,0,0
+spp_partner_search_field_create_access,Partner Search Field Create Access,model_spp_partner_search_field,spp_base_common.create_registry,1,1,1,0
+spp_partner_search_field_admin_access,Partner Search Field Admin Access,model_spp_partner_search_field,base.group_system,1,1,1,1
+

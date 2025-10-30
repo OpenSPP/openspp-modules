@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <data noupdate="0">
+        <!-- Default searchable registry fields configuration -->
+        <record id="registry_search_field_name" model="spp.partner.search.field">
+            <field name="name">Name</field>
+            <field name="field_id" ref="base.field_res_partner__name" />
+            <field name="target_type">both</field>
+            <field name="sequence">10</field>
+            <field name="active" eval="True" />
+        </record>
+
+        <record id="registry_search_field_email" model="spp.partner.search.field">
+            <field name="name">Email</field>
+            <field name="field_id" ref="base.field_res_partner__email" />
+            <field name="target_type">both</field>
+            <field name="sequence">20</field>
+            <field name="active" eval="True" />
+        </record>
+
+        <record id="registry_search_field_phone" model="spp.partner.search.field">
+            <field name="name">Phone</field>
+            <field name="field_id" ref="base.field_res_partner__phone" />
+            <field name="target_type">both</field>
+            <field name="sequence">30</field>
+            <field name="active" eval="True" />
+        </record>
+
+        <record id="registry_search_field_mobile" model="spp.partner.search.field">
+            <field name="name">Mobile</field>
+            <field name="field_id" ref="base.field_res_partner__mobile" />
+            <field name="target_type">individual</field>
+            <field name="sequence">40</field>
+            <field name="active" eval="True" />
+        </record>
+
+        <record id="registry_search_field_ref" model="spp.partner.search.field">
+            <field name="name">Reference</field>
+            <field name="field_id" ref="base.field_res_partner__ref" />
+            <field name="target_type">both</field>
+            <field name="sequence">50</field>
+            <field name="active" eval="True" />
+        </record>
+
+        <record id="registry_search_field_vat" model="spp.partner.search.field">
+            <field name="name">Tax ID</field>
+            <field name="field_id" ref="base.field_res_partner__vat" />
+            <field name="target_type">group</field>
+            <field name="sequence">60</field>
+            <field name="active" eval="True" />
+        </record>
+
+        <record id="registry_search_field_street" model="spp.partner.search.field">
+            <field name="name">Street</field>
+            <field name="field_id" ref="base.field_res_partner__street" />
+            <field name="target_type">both</field>
+            <field name="sequence">70</field>
+            <field name="active" eval="False" />
+        </record>
+
+        <record id="registry_search_field_city" model="spp.partner.search.field">
+            <field name="name">City</field>
+            <field name="field_id" ref="base.field_res_partner__city" />
+            <field name="target_type">both</field>
+            <field name="sequence">80</field>
+            <field name="active" eval="False" />
+        </record>
+
+        <record id="registry_search_field_zip" model="spp.partner.search.field">
+            <field name="name">ZIP/Postal Code</field>
+            <field name="field_id" ref="base.field_res_partner__zip" />
+            <field name="target_type">both</field>
+            <field name="sequence">90</field>
+            <field name="active" eval="False" />
+        </record>
+    </data>
+</odoo>
+

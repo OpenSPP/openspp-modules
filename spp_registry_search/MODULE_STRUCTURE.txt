@@ -1,0 +1,87 @@
+spp_registry_search/
+├── __init__.py                                    # Module entry point
+├── __manifest__.py                                # Module manifest with dependencies and assets
+├── README.rst                                     # Official module documentation
+├── pyproject.toml                                 # Build configuration
+│
+├── models/
+│   ├── __init__.py                               # Models package
+│   ├── partner_search_field.py                   # Search field configuration model
+│   └── res_partner.py                            # Extended res.partner with search methods
+│
+├── views/
+│   ├── partner_search_field_view.xml            # Admin configuration interface
+│   └── partner_custom_search_view.xml           # User search interface (client action + menu)
+│
+├── data/
+│   └── partner_search_field_data.xml            # Default searchable fields
+│
+├── security/
+│   └── ir.model.access.csv                      # Access control rules
+│
+├── static/
+│   └── src/
+│       ├── js/
+│       │   ├── partner_search_view.js           # Main OWL search component
+│       │   └── partner_search_widget.js         # Alternative widget component
+│       └── xml/
+│           ├── partner_search_view.xml          # Main search template
+│           └── partner_search_widget.xml        # Widget template
+│
+├── tests/
+│   ├── __init__.py                              # Tests package
+│   └── test_partner_search.py                   # Comprehensive test suite (11 tests)
+│
+└── Documentation/
+    ├── MIGRATION_SUMMARY.md                      # Migration guide from spp_base_common
+    ├── PARTNER_TYPE_FILTER.md                    # Partner type filtering documentation
+    ├── TARGET_TYPE_FEATURE.md                    # Target type feature documentation
+    ├── TROUBLESHOOTING.md                        # Troubleshooting guide
+    ├── QUICK_REFERENCE.md                        # Quick reference guide
+    └── IMPLEMENTATION_SUMMARY.md                 # Implementation details
+
+FEATURES:
+=========
+1. Configurable search fields for res.partner
+2. Dynamic field filtering by registrant type (Individual/Group)
+3. Target type support (Individual/Group/Both)
+4. Full-width modern search interface
+5. Type-aware search strategies
+6. Always filters by is_registrant=True
+7. Comprehensive test coverage
+
+MENU LOCATIONS:
+===============
+User Interface:
+  Registry → Registry Search
+
+Admin Configuration:
+  Settings → Administration → Registry Search Fields
+
+API USAGE:
+==========
+Python:
+  # Get searchable fields
+  fields = env['res.partner'].get_searchable_fields('individual')
+  
+  # Search by field
+  results = env['res.partner'].search_by_field('name', 'John', is_group=False)
+
+JavaScript:
+  // Load fields
+  await this.orm.call('res.partner', 'get_searchable_fields', ['individual'])
+  
+  // Search
+  await this.orm.call('res.partner', 'search_by_field', [fieldName, searchValue, isGroup])
+
+DEPENDENCIES:
+=============
+- base
+- g2p_registry_base
+
+MODULE TYPE:
+============
+- Application: False
+- Installable: True
+- Auto Install: False
+
