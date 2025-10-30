@@ -2,4 +2,3 @@
 
 from . import partner_search_field
 from . import res_partner
-

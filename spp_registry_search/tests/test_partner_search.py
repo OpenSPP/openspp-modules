@@ -2,12 +2,16 @@
 
 import logging
 
+from psycopg2 import IntegrityError
+
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
 
 _logger = logging.getLogger(__name__)
 
 
 # Tests for spp_registry_search module
+
 
 class TestPartnerSearch(TransactionCase):
     @classmethod
@@ -154,9 +158,7 @@ class TestPartnerSearch(TransactionCase):
         )
 
         # Search for partial name (individuals)
-        partner_ids = self.env["res.partner"].search_by_field(
-            "name", "Test Partner", is_group=False
-        )
+        partner_ids = self.env["res.partner"].search_by_field("name", "Test Partner", is_group=False)
 
         self.assertIn(self.partner_1.id, partner_ids)
         self.assertIn(self.partner_2.id, partner_ids)
@@ -164,9 +166,7 @@ class TestPartnerSearch(TransactionCase):
         self.assertNotIn(self.group_1.id, partner_ids)
 
         # Search for groups
-        group_ids = self.env["res.partner"].search_by_field(
-            "name", "Test Group", is_group=True
-        )
+        group_ids = self.env["res.partner"].search_by_field("name", "Test Group", is_group=True)
         self.assertIn(self.group_1.id, group_ids)
         self.assertNotIn(self.partner_1.id, group_ids)
 
@@ -184,9 +184,7 @@ class TestPartnerSearch(TransactionCase):
         )
 
         # Search for specific email (individuals)
-        partner_ids = self.env["res.partner"].search_by_field(
-            "email", "alpha@test.com", is_group=False
-        )
+        partner_ids = self.env["res.partner"].search_by_field("email", "alpha@test.com", is_group=False)
 
         self.assertIn(self.partner_1.id, partner_ids)
         self.assertNotIn(self.partner_2.id, partner_ids)
@@ -207,9 +205,7 @@ class TestPartnerSearch(TransactionCase):
         )
 
         # Search for specific phone (individuals)
-        partner_ids = self.env["res.partner"].search_by_field(
-            "phone", "+1234567890", is_group=False
-        )
+        partner_ids = self.env["res.partner"].search_by_field("phone", "+1234567890", is_group=False)
 
         self.assertIn(self.partner_1.id, partner_ids)
         self.assertNotIn(self.partner_2.id, partner_ids)
@@ -251,11 +247,10 @@ class TestPartnerSearch(TransactionCase):
         )
 
         # Search should not work for inactive field
-        results = self.env["res.partner"].search_by_field(
-            "name", "Test Partner", is_group=False
-        )
+        results = self.env["res.partner"].search_by_field("name", "Test Partner", is_group=False)
         self.assertEqual(len(results), 0)
 
+    @mute_logger("odoo.sql_db")
     def test_09_unique_field_constraint(self):
         """Test unique field per company constraint"""
         # Create first search field
@@ -269,8 +264,8 @@ class TestPartnerSearch(TransactionCase):
             }
         )
 
-        # Try to create duplicate - should fail
-        with self.assertRaises(Exception):
+        # Try to create duplicate - should fail with IntegrityError
+        with self.assertRaises(IntegrityError), self.cr.savepoint():
             self.env["spp.partner.search.field"].create(
                 {
                     "name": "Name Duplicate",
@@ -322,14 +317,9 @@ class TestPartnerSearch(TransactionCase):
         )
 
         # Search should not return non-registrant partners
-        partner_ids = self.env["res.partner"].search_by_field(
-            "name", "Non Registrant", is_group=False
-        )
+        partner_ids = self.env["res.partner"].search_by_field("name", "Non Registrant", is_group=False)
         self.assertNotIn(non_registrant.id, partner_ids)
 
         # But registrants should be found
-        partner_ids = self.env["res.partner"].search_by_field(
-            "name", "Test Partner", is_group=False
-        )
+        partner_ids = self.env["res.partner"].search_by_field("name", "Test Partner", is_group=False)
         self.assertIn(self.partner_1.id, partner_ids)
-

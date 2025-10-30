@@ -88,9 +88,7 @@ class PartnerSearchField(models.Model):
         ]
         for record in self:
             if record.field_type not in searchable_types:
-                raise models.ValidationError(
-                    f"Field type '{record.field_type}' is not supported for searching."
-                )
+                raise models.ValidationError(f"Field type '{record.field_type}' is not supported for searching.")
 
     def name_get(self):
         """Custom name display"""
@@ -99,4 +97,3 @@ class PartnerSearchField(models.Model):
             name = f"{record.name} ({record.field_name})"
             result.append((record.id, name))
         return result
-

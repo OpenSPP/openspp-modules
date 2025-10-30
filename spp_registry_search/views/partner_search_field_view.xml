@@ -8,7 +8,7 @@
         <field name="name">spp.partner.search.field.tree</field>
         <field name="model">spp.partner.search.field</field>
         <field name="arch" type="xml">
-            <tree string="Partner Search Fields">
+            <tree>
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="field_name" />
@@ -27,20 +27,12 @@
             <form string="Partner Search Field">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <widget
-                            name="web_ribbon"
-                            title="Archived"
-                            bg_color="bg-danger"
-                            invisible="active"
-                        />
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active" />
                     </div>
                     <group>
                         <group>
                             <field name="name" placeholder="e.g. Name, Phone, Email..." />
-                            <field
-                                name="field_id"
-                                options="{'no_create': True, 'no_create_edit': True}"
-                            />
+                            <field name="field_id" options="{'no_create': True, 'no_create_edit': True}" />
                             <field name="field_name" invisible="1" />
                         </group>
                         <group>
@@ -65,16 +57,8 @@
                 <field name="name" />
                 <field name="field_name" />
                 <field name="field_type" />
-                <filter
-                    string="Active"
-                    name="active"
-                    domain="[('active', '=', True)]"
-                />
-                <filter
-                    string="Inactive"
-                    name="inactive"
-                    domain="[('active', '=', False)]"
-                />
+                <filter string="Active" name="active" domain="[('active', '=', True)]" />
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]" />
                 <group expand="0" string="Group By">
                     <filter
                         string="Field Type"
@@ -111,4 +95,3 @@
         sequence="100"
     />
 </odoo>
-

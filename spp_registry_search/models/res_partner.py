@@ -1,6 +1,6 @@
 import logging
 
-from odoo import api, fields, models
+from odoo import api, models
 
 _logger = logging.getLogger(__name__)
 
@@ -56,7 +56,7 @@ class SPPResPartner(models.Model):
 
         # Add partner type filter (is_group)
         domain.append(("is_group", "=", is_group))
-        
+
         # Always filter by is_registrant = True
         domain.append(("is_registrant", "=", True))
 
@@ -70,17 +70,15 @@ class SPPResPartner(models.Model):
         :return: List of dictionaries with field information
         """
         domain = [("active", "=", True)]
-        
+
         # Filter by target_type based on partner_type
         if partner_type == "individual":
             domain.append(("target_type", "in", ["individual", "both"]))
         elif partner_type == "group":
             domain.append(("target_type", "in", ["group", "both"]))
         # If partner_type is None, return all active fields
-        
-        search_fields = self.env["spp.partner.search.field"].search(
-            domain, order="sequence, name"
-        )
+
+        search_fields = self.env["spp.partner.search.field"].search(domain, order="sequence, name")
 
         return [
             {

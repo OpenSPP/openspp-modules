@@ -1,8 +1,8 @@
 /** @odoo-module **/
 
-import { Component, useState, onWillStart } from "@odoo/owl";
-import { registry } from "@web/core/registry";
-import { useService } from "@web/core/utils/hooks";
+import {Component, onWillStart, useState} from "@odoo/owl";
+import {registry} from "@web/core/registry";
+import {useService} from "@web/core/utils/hooks";
 
 export class PartnerSearchWidget extends Component {
     static template = "spp_registry_search.PartnerSearchWidget";
@@ -24,11 +24,7 @@ export class PartnerSearchWidget extends Component {
 
     async loadSearchFields() {
         try {
-            const fields = await this.orm.call(
-                "res.partner",
-                "get_searchable_fields",
-                []
-            );
+            const fields = await this.orm.call("res.partner", "get_searchable_fields", []);
             this.state.searchFields = fields;
             if (fields.length > 0) {
                 this.state.selectedField = fields[0].field_name;
@@ -53,18 +49,20 @@ export class PartnerSearchWidget extends Component {
 
         this.state.searching = true;
         try {
-            const results = await this.orm.call(
-                "res.partner",
-                "search_by_field",
-                [this.state.selectedField, this.state.searchValue]
-            );
+            const results = await this.orm.call("res.partner", "search_by_field", [
+                this.state.selectedField,
+                this.state.searchValue,
+            ]);
 
             // Open the partner list with the search results
             await this.action.doAction({
                 type: "ir.actions.act_window",
                 name: "Search Results",
                 res_model: "res.partner",
-                views: [[false, "list"], [false, "form"]],
+                views: [
+                    [false, "list"],
+                    [false, "form"],
+                ],
                 domain: [["id", "in", results]],
                 target: "current",
             });
@@ -83,4 +81,3 @@ export class PartnerSearchWidget extends Component {
 }
 
 registry.category("actions").add("partner_search_widget", PartnerSearchWidget);
-

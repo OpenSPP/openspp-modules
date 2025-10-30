@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="spp_registry_search.PartnerSearchAction" owl="1">
         <div class="o_partner_search_action vh-100 overflow-auto">
@@ -9,26 +9,38 @@
                         <div class="card shadow-sm border-0">
                             <div class="card-header bg-primary text-white py-3">
                                 <h4 class="mb-0">
-                                    <i class="fa fa-search me-2" /> Registry Search
+                                    <t t-if="state.partnerType === 'individual'">
+                                        <i class="fa fa-search me-2" /> Individual Search
+                                    </t>
+                                    <t t-elif="state.partnerType === 'group'">
+                                        <i class="fa fa-search me-2" /> Group Search
+                                    </t>
+                                    <t t-else="">
+                                        <i class="fa fa-search me-2" /> Registry Search
+                                    </t>
                                 </h4>
                             </div>
                             <div class="card-body p-4">
                                 <div class="row g-3 align-items-end">
-                                    <div class="col-lg-2 col-md-3">
-                                        <label for="partner_type" class="form-label fw-bold">
-                                            <i class="fa fa-users me-1" /> Registrant Type
-                                        </label>
-                                        <select
-                                            id="partner_type"
-                                            class="form-select form-select-lg"
-                                            t-model="state.partnerType"
-                                            t-on-change="onPartnerTypeChange"
-                                        >
-                                            <option value="individual">Individual</option>
-                                            <option value="group">Group</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-2 col-md-3">
+                                    <t t-if="!this.hidePartnerType">
+                                        <div class="col-lg-2 col-md-3">
+                                            <label for="partner_type" class="form-label fw-bold">
+                                                <i class="fa fa-users me-1" /> Registrant Type
+                                            </label>
+                                            <select
+                                                id="partner_type"
+                                                class="form-select form-select-lg"
+                                                t-model="state.partnerType"
+                                                t-on-change="onPartnerTypeChange"
+                                            >
+                                                <option value="individual">Individual</option>
+                                                <option value="group">Group</option>
+                                            </select>
+                                        </div>
+                                    </t>
+                                    <div
+                                        t-attf-class="col-lg-{{ this.hidePartnerType ? '3' : '2' }} col-md-3"
+                                    >
                                         <label for="search_field" class="form-label fw-bold">
                                             <i class="fa fa-filter me-1" /> Search By
                                         </label>
@@ -45,7 +57,9 @@
                                             </t>
                                         </select>
                                     </div>
-                                    <div class="col-lg-6 col-md-4">
+                                    <div
+                                        t-attf-class="col-lg-{{ this.hidePartnerType ? '5' : '6' }} col-md-4"
+                                    >
                                         <label for="search_value" class="form-label fw-bold">
                                             <i class="fa fa-keyboard-o me-1" /> Search Value
                                         </label>
@@ -64,7 +78,7 @@
                                             <button
                                                 class="btn btn-primary btn-lg"
                                                 t-on-click="onSearch"
-                                                t-att-disabled="state.searching or !state.selectedField or !state.searchValue"
+                                                t-att-disabled="state.searching or !state.selectedField"
                                             >
                                                 <i class="fa fa-search me-1" />
                                                 <t t-if="!state.searching">Search</t>
@@ -75,10 +89,42 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Action Buttons Row -->
+                                <div class="row g-3 mt-2">
+                                    <div class="col-12">
+                                        <div class="btn-group" role="group">
+                                            <button
+                                                class="btn btn-success"
+                                                t-on-click="onCreate"
+                                                title="Create New Registrant"
+                                            >
+                                                <i class="fa fa-plus me-1" /> Create
+                                            </button>
+                                            <button
+                                                class="btn btn-outline-secondary"
+                                                t-on-click="onImport"
+                                                title="Import Registrants"
+                                            >
+                                                <i class="fa fa-upload me-1" /> Import
+                                            </button>
+                                            <button
+                                                class="btn btn-outline-secondary"
+                                                t-on-click="onExport"
+                                                t-att-disabled="!this.hasSelections"
+                                                title="Export Selected Records"
+                                            >
+                                                <i class="fa fa-download me-1" /> Export
+                                                <t t-if="this.hasSelections">
+                                                    (<t t-esc="state.selectedIds.size" />)
+                                                </t>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="mt-3 text-muted">
                                     <small>
                                         <i class="fa fa-info-circle me-1" />
-                                        Select registrant type (Individual or Group), choose a field from the dropdown, and enter a search value. Press Enter or click Search button.
+                                        Select a field from the dropdown and enter a search value. Leave search value empty to list all registrants. Press Enter or click Search button.
                                     </small>
                                 </div>
                             </div>
@@ -90,19 +136,42 @@
                 <div class="row" t-if="state.showResults">
                     <div class="col-12">
                         <div class="card shadow-sm border-0">
-                            <div class="card-header bg-light d-flex justify-content-between align-items-center py-3">
+                            <div
+                                class="card-header bg-light d-flex justify-content-between align-items-center py-3"
+                            >
                                 <h5 class="mb-0">
                                     <i class="fa fa-list me-2" /> Search Results
                                     <span class="badge bg-primary ms-2">
                                         <t t-esc="state.results.length" />
                                     </span>
+                                    <t t-if="this.hasSelections">
+                                        <span class="badge bg-success ms-2">
+                                            <t t-esc="state.selectedIds.size" /> selected
+                                        </span>
+                                    </t>
                                 </h5>
-                                <button
-                                    class="btn btn-sm btn-outline-secondary"
-                                    t-on-click="onClearSearch"
-                                >
-                                    <i class="fa fa-times me-1" /> Clear
-                                </button>
+                                <div class="btn-group">
+                                    <button
+                                        class="btn btn-sm btn-outline-primary"
+                                        t-on-click="onSelectAll"
+                                        t-att-disabled="state.results.length === 0"
+                                    >
+                                        <i class="fa fa-check-square-o me-1" /> Select All
+                                    </button>
+                                    <button
+                                        class="btn btn-sm btn-outline-secondary"
+                                        t-on-click="onDeselectAll"
+                                        t-att-disabled="!this.hasSelections"
+                                    >
+                                        <i class="fa fa-square-o me-1" /> Deselect All
+                                    </button>
+                                    <button
+                                        class="btn btn-sm btn-outline-secondary"
+                                        t-on-click="onClearSearch"
+                                    >
+                                        <i class="fa fa-times me-1" /> Clear
+                                    </button>
+                                </div>
                             </div>
                             <div class="card-body p-0">
                                 <t t-if="state.results.length > 0">
@@ -110,6 +179,14 @@
                                         <table class="table table-hover mb-0">
                                             <thead class="table-light">
                                                 <tr>
+                                                    <th style="width: 40px;">
+                                                        <input
+                                                            type="checkbox"
+                                                            class="form-check-input"
+                                                            t-att-checked="this.allSelected"
+                                                            t-on-change="this.allSelected ? onDeselectAll : onSelectAll"
+                                                        />
+                                                    </th>
                                                     <th>Type</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
@@ -117,14 +194,32 @@
                                                     <th>Mobile</th>
                                                     <th>City</th>
                                                     <th>Country</th>
-                                                    <th class="text-end">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <t t-foreach="state.results" t-as="partner" t-key="partner.id">
-                                                    <tr>
+                                                <t
+                                                    t-foreach="state.results"
+                                                    t-as="partner"
+                                                    t-key="partner.id"
+                                                >
+                                                    <tr
+                                                        class="o_data_row cursor-pointer"
+                                                        t-on-click="(ev) => this.onRowClick(ev, partner.id, partner.is_group)"
+                                                        style="cursor: pointer;"
+                                                    >
+                                                        <td t-on-click.stop="">
+                                                            <input
+                                                                type="checkbox"
+                                                                class="form-check-input"
+                                                                t-att-checked="this.isSelected(partner.id)"
+                                                                t-on-change="() => this.onSelectRecord(partner.id)"
+                                                            />
+                                                        </td>
                                                         <td>
-                                                            <span t-if="partner.is_group" class="badge bg-info">
+                                                            <span
+                                                                t-if="partner.is_group"
+                                                                class="badge bg-info"
+                                                            >
                                                                 <i class="fa fa-users me-1" /> Group
                                                             </span>
                                                             <span t-else="" class="badge bg-success">
@@ -147,15 +242,9 @@
                                                             <t t-esc="partner.city or '-'" />
                                                         </td>
                                                         <td>
-                                                            <t t-esc="partner.country_id ? partner.country_id[1] : '-'" />
-                                                        </td>
-                                                        <td class="text-end">
-                                                            <button
-                                                                class="btn btn-sm btn-primary"
-                                                                t-on-click="() => this.openPartner(partner.id)"
-                                                            >
-                                                                <i class="fa fa-external-link me-1" /> Open
-                                                            </button>
+                                                            <t
+                                                                t-esc="partner.country_id ? partner.country_id[1] : '-'"
+                                                            />
                                                         </td>
                                                     </tr>
                                                 </t>
@@ -178,4 +267,3 @@
         </div>
     </t>
 </templates>
-

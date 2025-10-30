@@ -41,4 +41,3 @@
     "auto_install": False,
     "summary": "Provides advanced search capabilities for the OpenSPP Registry. Features include configurable search fields, dynamic field filtering by registrant type (Individual/Group), and an intuitive search interface with real-time results.",
 }
-
