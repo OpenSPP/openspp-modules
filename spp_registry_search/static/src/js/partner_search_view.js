@@ -139,7 +139,7 @@ export class PartnerSearchAction extends Component {
                 this.state.results = await this.orm.searchRead(
                     "res.partner",
                     [["id", "in", results]],
-                    ["name", "email", "phone", "mobile", "city", "country_id", "is_group"]
+                    ["name", "address", "phone", "tags_ids", "birthdate", "registration_date", "is_group"]
                 );
                 this.state.showResults = true;
                 // Clear previous selections

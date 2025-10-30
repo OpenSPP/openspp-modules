@@ -187,13 +187,14 @@
                                                             t-on-change="this.allSelected ? onDeselectAll : onSelectAll"
                                                         />
                                                     </th>
-                                                    <th>Type</th>
                                                     <th>Name</th>
-                                                    <th>Email</th>
+                                                    <th>Address</th>
                                                     <th>Phone</th>
-                                                    <th>Mobile</th>
-                                                    <th>City</th>
-                                                    <th>Country</th>
+                                                    <th>Tags</th>
+                                                    <th
+                                                        t-if="state.partnerType === 'individual'"
+                                                    >Birthdate</th>
+                                                    <th>Registration Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -215,36 +216,36 @@
                                                                 t-on-change="() => this.onSelectRecord(partner.id)"
                                                             />
                                                         </td>
-                                                        <td>
-                                                            <span
-                                                                t-if="partner.is_group"
-                                                                class="badge bg-info"
-                                                            >
-                                                                <i class="fa fa-users me-1" /> Group
-                                                            </span>
-                                                            <span t-else="" class="badge bg-success">
-                                                                <i class="fa fa-user me-1" /> Individual
-                                                            </span>
-                                                        </td>
                                                         <td class="fw-bold">
                                                             <t t-esc="partner.name" />
                                                         </td>
                                                         <td>
-                                                            <t t-esc="partner.email or '-'" />
+                                                            <t t-esc="partner.address or '-'" />
                                                         </td>
                                                         <td>
                                                             <t t-esc="partner.phone or '-'" />
                                                         </td>
                                                         <td>
-                                                            <t t-esc="partner.mobile or '-'" />
-                                                        </td>
-                                                        <td>
-                                                            <t t-esc="partner.city or '-'" />
-                                                        </td>
-                                                        <td>
                                                             <t
-                                                                t-esc="partner.country_id ? partner.country_id[1] : '-'"
-                                                            />
+                                                                t-if="partner.tags_ids and partner.tags_ids.length > 0"
+                                                            >
+                                                                <t
+                                                                    t-foreach="partner.tags_ids"
+                                                                    t-as="tag"
+                                                                    t-key="tag[0]"
+                                                                >
+                                                                    <span class="badge bg-secondary me-1">
+                                                                        <t t-esc="tag[1]" />
+                                                                    </span>
+                                                                </t>
+                                                            </t>
+                                                            <t t-else="">-</t>
+                                                        </td>
+                                                        <td t-if="state.partnerType === 'individual'">
+                                                            <t t-esc="partner.birthdate or '-'" />
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="partner.registration_date or '-'" />
                                                         </td>
                                                     </tr>
                                                 </t>
