@@ -86,12 +86,20 @@
         </field>
     </record>
 
+    <!-- Configuration Parent Menu -->
+    <menuitem
+        id="menu_partner_search_config"
+        name="Registry Search Configuration"
+        parent="base.menu_administration"
+        sequence="100"
+    />
+
     <!-- Menu Item -->
     <menuitem
         id="menu_partner_search_field"
-        name="Registry Search Fields"
-        parent="base.menu_administration"
+        name="Search Fields"
+        parent="menu_partner_search_config"
         action="action_partner_search_field"
-        sequence="100"
+        sequence="10"
     />
 </odoo>

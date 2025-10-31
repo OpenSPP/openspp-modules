@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Partner Search Filter Form View -->
+    <record id="view_partner_search_filter_form" model="ir.ui.view">
+        <field name="name">spp.partner.search.filter.form</field>
+        <field name="model">spp.partner.search.filter</field>
+        <field name="arch" type="xml">
+            <form string="Search Filter">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Filter Name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="sequence" />
+                            <field name="target_type" />
+                            <field name="active" />
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company" />
+                        </group>
+                    </group>
+                    <group>
+                        <field
+                            name="domain"
+                            widget="domain"
+                            options="{'model': 'res.partner', 'in_dialog': true}"
+                        />
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Optional description..." />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Partner Search Filter Tree View -->
+    <record id="view_partner_search_filter_tree" model="ir.ui.view">
+        <field name="name">spp.partner.search.filter.tree</field>
+        <field name="model">spp.partner.search.filter</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="target_type" />
+                <field name="description" />
+                <field name="active" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Partner Search Filter Search View -->
+    <record id="view_partner_search_filter_search" model="ir.ui.view">
+        <field name="name">spp.partner.search.filter.search</field>
+        <field name="model">spp.partner.search.filter</field>
+        <field name="arch" type="xml">
+            <search string="Search Filters">
+                <field name="name" />
+                <field name="target_type" />
+                <field name="description" />
+                <filter string="Active" name="active" domain="[('active', '=', True)]" />
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Target Type"
+                        name="group_target_type"
+                        context="{'group_by': 'target_type'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Partner Search Filter Action -->
+    <record id="action_partner_search_filter" model="ir.actions.act_window">
+        <field name="name">Search Filters</field>
+        <field name="res_model">spp.partner.search.filter</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first search filter
+            </p>
+            <p>
+                Search filters allow you to define predefined domain filters
+                for searching partners. For example, you can create a filter
+                to show only female registrants, or registrants from a specific region.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem
+        id="menu_partner_search_filter"
+        name="Search Filters"
+        parent="menu_partner_search_config"
+        action="action_partner_search_filter"
+        sequence="20"
+    />
+</odoo>

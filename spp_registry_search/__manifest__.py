@@ -23,7 +23,9 @@
     "data": [
         "security/ir.model.access.csv",
         "data/partner_search_field_data.xml",
+        "data/partner_search_filter_data.xml",
         "views/partner_search_field_view.xml",
+        "views/partner_search_filter_view.xml",
         "views/partner_custom_search_view.xml",
     ],
     "assets": {

@@ -11,6 +11,7 @@ export class PartnerSearchAction extends Component {
     setup() {
         this.orm = useService("orm");
         this.action = useService("action");
+        this.notification = useService("notification");
 
         // Get context from action props
         const context = this.props.action?.context || {};
@@ -21,18 +22,23 @@ export class PartnerSearchAction extends Component {
         this.state = useState({
             searchFields: [],
             selectedField: "",
+            selectedFieldInfo: null,
             searchValue: "",
+            fieldOptions: [],
             partnerType: defaultPartnerType,
             searching: false,
             results: [],
             showResults: false,
             selectedIds: new Set(),
+            searchFilters: [],
+            selectedFilterIds: new Set(),
         });
 
         onWillStart(async () => {
             await this.loadSearchFields(this.state.partnerType);
+            await this.loadSearchFilters(this.state.partnerType);
             // Try to restore previous search state
-            this.restoreSearchState();
+            await this.restoreSearchState();
         });
     }
 
@@ -49,11 +55,12 @@ export class PartnerSearchAction extends Component {
             results: this.state.results,
             showResults: this.state.showResults,
             selectedIds: Array.from(this.state.selectedIds),
+            selectedFilterIds: Array.from(this.state.selectedFilterIds),
         };
         sessionStorage.setItem(this.getSearchStateKey(), JSON.stringify(searchState));
     }
 
-    restoreSearchState() {
+    async restoreSearchState() {
         const savedState = sessionStorage.getItem(this.getSearchStateKey());
         if (savedState) {
             try {
@@ -65,6 +72,30 @@ export class PartnerSearchAction extends Component {
                     this.state.results = state.results || [];
                     this.state.showResults = state.showResults || false;
                     this.state.selectedIds = new Set(state.selectedIds || []);
+                    this.state.selectedFilterIds = new Set(state.selectedFilterIds || []);
+
+                    // Restore field info and options for relational fields
+                    if (this.state.selectedField) {
+                        const fieldInfo = this.state.searchFields.find(
+                            (f) => f.field_name === this.state.selectedField
+                        );
+                        this.state.selectedFieldInfo = fieldInfo;
+
+                        if (fieldInfo) {
+                            if (fieldInfo.field_type === "selection" && fieldInfo.selection) {
+                                this.state.fieldOptions = fieldInfo.selection;
+                            } else if (fieldInfo.field_type === "many2one" && fieldInfo.relation) {
+                                try {
+                                    const options = await this.orm.call("res.partner", "get_field_options", [
+                                        fieldInfo.relation,
+                                    ]);
+                                    this.state.fieldOptions = options;
+                                } catch (error) {
+                                    console.error("Error loading field options during restore:", error);
+                                }
+                            }
+                        }
+                    }
                 }
             } catch (error) {
                 console.error("Error restoring search state:", error);
@@ -86,18 +117,144 @@ export class PartnerSearchAction extends Component {
         }
     }
 
-    onFieldChange(event) {
+    async loadSearchFilters(partnerType = null) {
+        try {
+            const filters = await this.orm.call("res.partner", "get_search_filters", [partnerType]);
+            this.state.searchFilters = filters;
+            // Don't auto-select any filters by default
+            this.state.selectedFilterIds.clear();
+        } catch (error) {
+            console.error("Error loading search filters:", error);
+        }
+    }
+
+    async onFieldChange(event) {
         this.state.selectedField = event.target.value;
+        this.state.searchValue = "";
+        this.state.fieldOptions = [];
+
+        // Find the selected field info
+        const fieldInfo = this.state.searchFields.find((f) => f.field_name === this.state.selectedField);
+        this.state.selectedFieldInfo = fieldInfo;
+
+        // Load options for relational fields
+        if (fieldInfo) {
+            if (fieldInfo.field_type === "selection" && fieldInfo.selection) {
+                // Selection field - options are already loaded
+                this.state.fieldOptions = fieldInfo.selection;
+            } else if (fieldInfo.field_type === "many2one" && fieldInfo.relation) {
+                // Many2one field - load options from related model
+                try {
+                    const options = await this.orm.call("res.partner", "get_field_options", [
+                        fieldInfo.relation,
+                    ]);
+                    this.state.fieldOptions = options;
+                } catch (error) {
+                    console.error("Error loading field options:", error);
+                }
+            }
+        }
     }
 
     onSearchValueChange(event) {
         this.state.searchValue = event.target.value;
     }
 
+    get isArchivedFilterSelected() {
+        // Check if any selected filter is for archived records
+        const selectedFilters = this.state.searchFilters.filter((f) =>
+            this.state.selectedFilterIds.has(f.id)
+        );
+
+        return selectedFilters.some((filter) => {
+            try {
+                const domain = JSON.parse(filter.domain || "[]");
+                // Check if domain contains active = False in any format
+                return domain.some((condition) => {
+                    if (Array.isArray(condition) && condition.length === 3) {
+                        return condition[0] === "active" && condition[1] === "=" && condition[2] === false;
+                    }
+                    return false;
+                });
+            } catch (error) {
+                console.error("Error parsing filter domain for archive check:", error);
+                return false;
+            }
+        });
+    }
+
+    get combinedFilterDomain() {
+        // Combine all selected filter domains
+        const selectedFilters = this.state.searchFilters.filter((f) =>
+            this.state.selectedFilterIds.has(f.id)
+        );
+
+        if (selectedFilters.length === 0) {
+            return "[]";
+        }
+
+        // Parse all filter domains
+        const parsedDomains = [];
+        for (const filter of selectedFilters) {
+            try {
+                const domain = JSON.parse(filter.domain || "[]");
+                if (domain && domain.length > 0) {
+                    parsedDomains.push(domain);
+                }
+            } catch (error) {
+                console.error("Error parsing filter domain:", error);
+            }
+        }
+
+        if (parsedDomains.length === 0) {
+            return "[]";
+        }
+
+        // Single filter - just return it
+        if (parsedDomains.length === 1) {
+            return JSON.stringify(parsedDomains[0]);
+        }
+
+        // Multiple filters - combine with OR logic
+        // Odoo domain syntax: ['|', cond1, cond2] for OR
+        // For n conditions, we need (n-1) '|' operators at the beginning
+        const combinedDomain = [];
+
+        // Add (n-1) OR operators at the beginning
+        for (let i = 0; i < parsedDomains.length - 1; i++) {
+            combinedDomain.push("|");
+        }
+
+        // Add all conditions (flattened)
+        for (const domain of parsedDomains) {
+            for (const condition of domain) {
+                combinedDomain.push(condition);
+            }
+        }
+
+        return JSON.stringify(combinedDomain);
+    }
+
+    onFilterChange(event) {
+        // Handle multiple select
+        const selectedOptions = Array.from(event.target.selectedOptions);
+        this.state.selectedFilterIds.clear();
+
+        selectedOptions.forEach((option) => {
+            this.state.selectedFilterIds.add(parseInt(option.value));
+        });
+    }
+
+    removeFilter(filterId) {
+        // Remove a specific filter from selection
+        this.state.selectedFilterIds.delete(filterId);
+    }
+
     async onPartnerTypeChange(event) {
         this.state.partnerType = event.target.value;
-        // Reload fields based on selected partner type
+        // Reload fields and filters based on selected partner type
         await this.loadSearchFields(this.state.partnerType);
+        await this.loadSearchFilters(this.state.partnerType);
         // Clear search value when partner type changes
         this.state.searchValue = "";
         this.state.showResults = false;
@@ -117,30 +274,42 @@ export class PartnerSearchAction extends Component {
 
             let results = [];
 
-            if (!this.state.searchValue) {
-                // Empty search value - get all records of this type
-                const domain = [
-                    ["is_group", "=", isGroup],
-                    ["is_registrant", "=", true],
-                ];
-
-                results = await this.orm.search("res.partner", domain);
-            } else {
-                // Normal field search with value
-                results = await this.orm.call("res.partner", "search_by_field", [
-                    this.state.selectedField,
-                    this.state.searchValue,
-                    isGroup,
-                ]);
-            }
+            // Always use backend method for consistency
+            results = await this.orm.call("res.partner", "search_by_field", [
+                this.state.selectedField,
+                this.state.searchValue || "", // Pass empty string for "search all"
+                isGroup,
+                this.combinedFilterDomain,
+            ]);
 
             if (results && results.length > 0) {
-                // Load partner details
-                this.state.results = await this.orm.searchRead(
-                    "res.partner",
-                    [["id", "in", results]],
-                    ["name", "address", "phone", "tags_ids", "birthdate", "registration_date", "is_group"]
-                );
+                // Load partner details with proper context for archived records
+                const searchReadDomain = [["id", "in", results]];
+                const searchReadFields = [
+                    "name",
+                    "address",
+                    "phone",
+                    "tags_ids",
+                    "birthdate",
+                    "registration_date",
+                    "is_group",
+                    "active",
+                ];
+
+                if (this.isArchivedFilterSelected) {
+                    // Use webSearchRead with context for archived records
+                    this.state.results = await this.orm.call("res.partner", "search_read", [], {
+                        domain: searchReadDomain,
+                        fields: searchReadFields,
+                        context: {active_test: false},
+                    });
+                } else {
+                    this.state.results = await this.orm.searchRead(
+                        "res.partner",
+                        searchReadDomain,
+                        searchReadFields
+                    );
+                }
                 this.state.showResults = true;
                 // Clear previous selections
                 this.state.selectedIds.clear();
@@ -210,8 +379,63 @@ export class PartnerSearchAction extends Component {
         this.state.results = [];
         this.state.showResults = false;
         this.state.selectedIds.clear();
+        this.state.selectedFilterIds.clear();
         // Clear saved state for current partner type
         sessionStorage.removeItem(this.getSearchStateKey());
+    }
+
+    async onArchiveSelected() {
+        // Archive selected records
+        if (this.state.selectedIds.size === 0) {
+            return;
+        }
+
+        const ids = Array.from(this.state.selectedIds);
+
+        try {
+            // Call Odoo's action_archive method
+            await this.orm.call("res.partner", "action_archive", [ids]);
+
+            // Refresh the search
+            await this.onSearch();
+
+            // Show success notification
+            this.notification.add(`${ids.length} record(s) archived successfully`, {
+                type: "success",
+            });
+        } catch (error) {
+            console.error("Error archiving records:", error);
+            this.notification.add("Failed to archive records", {
+                type: "danger",
+            });
+        }
+    }
+
+    async onUnarchiveSelected() {
+        // Unarchive selected records
+        if (this.state.selectedIds.size === 0) {
+            return;
+        }
+
+        const ids = Array.from(this.state.selectedIds);
+
+        try {
+            // Call Odoo's action_unarchive method
+            await this.orm.call("res.partner", "action_unarchive", [ids]);
+
+            // Refresh the search
+            await this.onSearch();
+
+            // Show success notification
+            this.notification.add(`${ids.length} record(s) unarchived successfully`, {
+                type: "success",
+            });
+        } catch (error) {
+            console.error("Error unarchiving records:", error);
+            this.notification.add("Failed to unarchive records", {
+                type: "danger",
+            });
+        }
     }
 
     onRowClick(event, partnerId, isGroup) {

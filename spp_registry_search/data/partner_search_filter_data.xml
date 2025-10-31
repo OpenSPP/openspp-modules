@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="0">
+    <!-- Demo Search Filters -->
+    <record id="registry_search_filter_female" model="spp.partner.search.filter">
+        <field name="name">Female Registrants</field>
+        <field name="sequence">10</field>
+        <field name="target_type">individual</field>
+        <field name="domain">[('gender', '=', 'Female')]</field>
+        <field name="description">Show only female individuals</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="registry_search_filter_male" model="spp.partner.search.filter">
+        <field name="name">Male Registrants</field>
+        <field name="sequence">20</field>
+        <field name="target_type">individual</field>
+        <field name="domain">[('gender', '=', 'Male')]</field>
+        <field name="description">Show only male individuals</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="registry_search_filter_archived" model="spp.partner.search.filter">
+        <field name="name">Archived Registrants</field>
+        <field name="sequence">90</field>
+        <field name="target_type">both</field>
+        <field name="domain">[('active', '=', False)]</field>
+        <field name="description">Show only archived registrants</field>
+        <field name="active" eval="True" />
+    </record>
+</odoo>

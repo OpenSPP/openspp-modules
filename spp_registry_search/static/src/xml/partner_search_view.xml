@@ -21,7 +21,7 @@
                                 </h4>
                             </div>
                             <div class="card-body p-4">
-                                <div class="row g-3 align-items-end">
+                                <div class="row g-3 align-items-start">
                                     <t t-if="!this.hidePartnerType">
                                         <div class="col-lg-2 col-md-3">
                                             <label for="partner_type" class="form-label fw-bold">
@@ -38,11 +38,39 @@
                                             </select>
                                         </div>
                                     </t>
+                                    <div class="col-lg-3 col-md-4">
+                                        <label for="search_filter" class="form-label fw-bold">
+                                            <i class="fa fa-filter me-1" /> Filters
+                                            <small class="text-muted">(Hold Ctrl/Cmd for multiple)</small>
+                                        </label>
+                                        <select
+                                            id="search_filter"
+                                            class="form-select"
+                                            multiple="true"
+                                            size="4"
+                                            t-on-change="onFilterChange"
+                                            style="height: 46px; overflow-y: auto;"
+                                        >
+                                            <t
+                                                t-foreach="state.searchFilters"
+                                                t-as="filter"
+                                                t-key="filter.id"
+                                            >
+                                                <option
+                                                    t-att-value="filter.id"
+                                                    t-att-selected="state.selectedFilterIds.has(filter.id) ? 'selected' : undefined"
+                                                    style="padding: 4px 8px;"
+                                                >
+                                                    <t t-esc="filter.name" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
                                     <div
-                                        t-attf-class="col-lg-{{ this.hidePartnerType ? '3' : '2' }} col-md-3"
+                                        t-attf-class="col-lg-{{ this.hidePartnerType ? '2' : '2' }} col-md-2"
                                     >
                                         <label for="search_field" class="form-label fw-bold">
-                                            <i class="fa fa-filter me-1" /> Search By
+                                            <i class="fa fa-search me-1" /> Search By
                                         </label>
                                         <select
                                             id="search_field"
@@ -58,22 +86,54 @@
                                         </select>
                                     </div>
                                     <div
-                                        t-attf-class="col-lg-{{ this.hidePartnerType ? '5' : '6' }} col-md-4"
+                                        t-attf-class="col-lg-{{ this.hidePartnerType ? '3' : '3' }} col-md-3"
                                     >
                                         <label for="search_value" class="form-label fw-bold">
                                             <i class="fa fa-keyboard-o me-1" /> Search Value
                                         </label>
-                                        <input
-                                            type="text"
-                                            id="search_value"
-                                            class="form-control form-control-lg"
-                                            placeholder="Enter search value..."
-                                            t-model="state.searchValue"
-                                            t-on-input="onSearchValueChange"
-                                            t-on-keypress="onKeyPress"
-                                        />
+                                        <!-- Show selection dropdown for relational fields -->
+                                        <t
+                                            t-if="state.selectedFieldInfo and (state.selectedFieldInfo.field_type === 'selection' or state.selectedFieldInfo.field_type === 'many2one') and state.fieldOptions.length > 0"
+                                        >
+                                            <select
+                                                id="search_value"
+                                                class="form-select form-select-lg"
+                                                t-model="state.searchValue"
+                                                t-on-change="onSearchValueChange"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <t
+                                                    t-foreach="state.fieldOptions"
+                                                    t-as="option"
+                                                    t-key="option[0]"
+                                                >
+                                                    <option
+                                                        t-att-value="option[0]"
+                                                        t-att-selected="state.searchValue == option[0] ? 'selected' : undefined"
+                                                    >
+                                                        <t t-esc="option[1]" />
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </t>
+                                        <!-- Show text input for other field types -->
+                                        <t t-else="">
+                                            <input
+                                                type="text"
+                                                id="search_value"
+                                                class="form-control form-control-lg"
+                                                placeholder="Enter search value..."
+                                                t-model="state.searchValue"
+                                                t-on-input="onSearchValueChange"
+                                                t-on-keypress="onKeyPress"
+                                            />
+                                        </t>
                                     </div>
                                     <div class="col-lg-2 col-md-2">
+                                        <label
+                                            class="form-label fw-bold"
+                                            style="visibility: hidden;"
+                                        >Action</label>
                                         <div class="d-grid gap-2">
                                             <button
                                                 class="btn btn-primary btn-lg"
@@ -86,6 +146,39 @@
                                                     <i class="fa fa-spinner fa-spin" /> Searching...
                                                 </t>
                                             </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Selected Filters Badges Row -->
+                                <div class="row mt-2" t-if="state.selectedFilterIds.size > 0">
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center flex-wrap">
+                                            <span class="me-2 text-muted">
+                                                <small>
+                                                    <i class="fa fa-filter me-1" />Active Filters:
+                                                </small>
+                                            </span>
+                                            <t
+                                                t-foreach="Array.from(state.selectedFilterIds)"
+                                                t-as="filterId"
+                                                t-key="filterId"
+                                            >
+                                                <t
+                                                    t-set="filter"
+                                                    t-value="state.searchFilters.find(f => f.id === filterId)"
+                                                />
+                                                <t t-if="filter">
+                                                    <span class="badge bg-primary me-1 mb-1">
+                                                        <t t-esc="filter.name" />
+                                                        <i
+                                                            class="fa fa-times ms-1"
+                                                            style="cursor: pointer;"
+                                                            t-on-click="() => this.removeFilter(filterId)"
+                                                            title="Remove filter"
+                                                        />
+                                                    </span>
+                                                </t>
+                                            </t>
                                         </div>
                                     </div>
                                 </div>
@@ -107,24 +200,13 @@
                                             >
                                                 <i class="fa fa-upload me-1" /> Import
                                             </button>
-                                            <button
-                                                class="btn btn-outline-secondary"
-                                                t-on-click="onExport"
-                                                t-att-disabled="!this.hasSelections"
-                                                title="Export Selected Records"
-                                            >
-                                                <i class="fa fa-download me-1" /> Export
-                                                <t t-if="this.hasSelections">
-                                                    (<t t-esc="state.selectedIds.size" />)
-                                                </t>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mt-3 text-muted">
                                     <small>
                                         <i class="fa fa-info-circle me-1" />
-                                        Select a field from the dropdown and enter a search value. Leave search value empty to list all registrants. Press Enter or click Search button.
+                                        Select filters (Ctrl+Click for multiple - uses OR logic), choose a search field, and enter a value. Leave search value empty to list all. No filters = active registrants only.
                                     </small>
                                 </div>
                             </div>
@@ -150,27 +232,81 @@
                                         </span>
                                     </t>
                                 </h5>
-                                <div class="btn-group">
-                                    <button
-                                        class="btn btn-sm btn-outline-primary"
-                                        t-on-click="onSelectAll"
-                                        t-att-disabled="state.results.length === 0"
-                                    >
-                                        <i class="fa fa-check-square-o me-1" /> Select All
-                                    </button>
-                                    <button
-                                        class="btn btn-sm btn-outline-secondary"
-                                        t-on-click="onDeselectAll"
-                                        t-att-disabled="!this.hasSelections"
-                                    >
-                                        <i class="fa fa-square-o me-1" /> Deselect All
-                                    </button>
-                                    <button
-                                        class="btn btn-sm btn-outline-secondary"
-                                        t-on-click="onClearSearch"
-                                    >
-                                        <i class="fa fa-times me-1" /> Clear
-                                    </button>
+                                <div>
+                                    <div class="btn-group me-2">
+                                        <div class="dropdown">
+                                            <button
+                                                class="btn btn-sm btn-primary dropdown-toggle"
+                                                type="button"
+                                                id="actionDropdown"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
+                                                t-att-disabled="!this.hasSelections"
+                                            >
+                                                <i class="fa fa-cog me-1" /> Action
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="actionDropdown">
+                                                <li>
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="#"
+                                                        t-on-click.prevent="onExport"
+                                                    >
+                                                        <i class="fa fa-download me-2" />
+                                                        Export
+                                                    </a>
+                                                </li>
+                                                <t t-if="this.isArchivedFilterSelected">
+                                                    <li><hr class="dropdown-divider" /></li>
+                                                    <li>
+                                                        <a
+                                                            class="dropdown-item text-success"
+                                                            href="#"
+                                                            t-on-click.prevent="onUnarchiveSelected"
+                                                        >
+                                                            <i class="fa fa-folder-open me-2" />
+                                                            Unarchive
+                                                        </a>
+                                                    </li>
+                                                </t>
+                                                <t t-else="">
+                                                    <li><hr class="dropdown-divider" /></li>
+                                                    <li>
+                                                        <a
+                                                            class="dropdown-item text-danger"
+                                                            href="#"
+                                                            t-on-click.prevent="onArchiveSelected"
+                                                        >
+                                                            <i class="fa fa-archive me-2" />
+                                                            Archive
+                                                        </a>
+                                                    </li>
+                                                </t>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button
+                                            class="btn btn-sm btn-outline-primary"
+                                            t-on-click="onSelectAll"
+                                            t-att-disabled="state.results.length === 0"
+                                        >
+                                            <i class="fa fa-check-square-o me-1" /> Select All
+                                        </button>
+                                        <button
+                                            class="btn btn-sm btn-outline-secondary"
+                                            t-on-click="onDeselectAll"
+                                            t-att-disabled="!this.hasSelections"
+                                        >
+                                            <i class="fa fa-square-o me-1" /> Deselect All
+                                        </button>
+                                        <button
+                                            class="btn btn-sm btn-outline-secondary"
+                                            t-on-click="onClearSearch"
+                                        >
+                                            <i class="fa fa-times me-1" /> Clear
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body p-0">
@@ -216,8 +352,18 @@
                                                                 t-on-change="() => this.onSelectRecord(partner.id)"
                                                             />
                                                         </td>
-                                                        <td class="fw-bold">
-                                                            <t t-esc="partner.name" />
+                                                        <td>
+                                                            <span
+                                                                class="fw-bold"
+                                                                t-att-class="{ 'text-muted': !partner.active }"
+                                                            >
+                                                                <t t-esc="partner.name" />
+                                                            </span>
+                                                            <t t-if="!partner.active">
+                                                                <span class="badge bg-secondary ms-2">
+                                                                    <i class="fa fa-archive" /> Archived
+                                                                </span>
+                                                            </t>
                                                         </td>
                                                         <td>
                                                             <t t-esc="partner.address or '-'" />
