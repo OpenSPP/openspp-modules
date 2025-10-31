@@ -17,28 +17,28 @@ class SPPDemoDataGenerator(models.Model):
     # Farmer Registry specific fields
     percentage_with_farm_details = fields.Integer(
         string="% with Farm Details",
-        default=80,
+        default=100,
         required=True,
         help="Percentage of farmers that will have farm details",
     )
     percentage_with_land_records = fields.Integer(
         string="% with Land Records",
-        default=70,
+        default=100,
         required=True,
         help="Percentage of farmers that will have land records",
     )
     percentage_with_farm_assets = fields.Integer(
-        string="% with Farm Assets", default=60, required=True, help="Percentage of farmers that will have farm assets"
+        string="% with Farm Assets", default=100, required=True, help="Percentage of farmers that will have farm assets"
     )
     percentage_with_agricultural_activities = fields.Integer(
         string="% with Agricultural Activities",
-        default=85,
+        default=100,
         required=True,
         help="Percentage of farmers that will have agricultural activities",
     )
     percentage_with_extension_services = fields.Integer(
         string="% with Extension Services",
-        default=40,
+        default=100,
         required=True,
         help="Percentage of farmers that will have extension services",
     )
