@@ -34,4 +34,11 @@
     </record>
 
 
+    <menuitem
+        id="spp_bank_types_config_menu"
+        action="base.action_res_bank_form"
+        name="Banks"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="50"
+    />
 </odoo>

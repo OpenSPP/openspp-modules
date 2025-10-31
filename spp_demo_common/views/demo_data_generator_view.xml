@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_demo_data_generator_tree" model="ir.ui.view">
+        <field name="name">view_demo_data_generator_tree</field>
+        <field name="model">spp.demo.data.generator</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="number_of_groups" />
+                <field name="locale_origin" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_demo_data_generator_form" model="ir.ui.view">
+        <field name="name">view_demo_data_generator_form</field>
+        <field name="model">spp.demo.data.generator</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Generate Demo Data">
+                <header>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,in_progress,completed,cancelled"
+                    />
+                </header>
+                <field name="locked" invisible="True" />
+                <div
+                    class="alert alert-warning text-center o_form_header"
+                    role="status"
+                    invisible="not locked"
+                >
+                    <span>Warning: Operation in progress: </span>
+                    <field name="locked_reason" class="o_stat_value" />
+                    <button
+                        name="refresh_page"
+                        type="object"
+                        class="btn_warning"
+                        icon="fa-refresh"
+                        title="Refresh Page"
+                        string="Refresh"
+                    />
+                </div>
+                <field name="locale_origin_faker_locale" invisible="1" />
+                <div
+                    class="alert alert-warning text-center o_form_header"
+                    role="status"
+                    invisible="locale_origin_faker_locale or not locale_origin"
+                >
+                    <span>
+                    Warning: There's no generation locale available for this country.
+                    Defaulting to 'en_US' locale.
+                    </span>
+                </div>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" invisible="locked">
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-thumbs-o-up"
+                            name="generate_demo_data"
+                            invisible="state != 'draft'"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Generate</span>
+                                <span class="o_stat_text">Demo Data</span>
+                            </div>
+                        </button>
+                    </div>
+                     <div style="width: 100%; padding-top: 10px; padding-left: 10px;">
+                        <field name="name" invisible="1" />
+                        <field name="queue_job_minimum_size" invisible="1" />
+                        <div style="display: flex; gap: 20px;">
+                            <field name="name" invisible="1" />
+                            <!-- Demo Data Generator Section -->
+                            <div style="flex: 1;">
+                                <h3>Demo Data Generator</h3>
+                                <hr />
+                                <div name="div_name" style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                    <div style="flex: 1;">
+                                        <h4><label for="name" string="Description" class="o_form_label" /><div
+                                            /></h4>
+                                        <field
+                                            name="name"
+                                            required="1"
+                                            style="width: 90%;"
+                                            readonly="locked or state != 'draft'"
+                                        />
+                                    </div>
+                                </div>
+                                <div
+                                    name="div_number_of_groups"
+                                    style="display: flex; gap: 20px; margin-bottom: 10px;"
+                                >
+                                    <div style="flex: 1;">
+                                        <h4><label
+                                                for="number_of_groups"
+                                                string="Number of Groups"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="number_of_groups"
+                                            readonly="locked or state != 'draft'"
+                                            required="1"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4><label for="group_type_id" class="o_form_label" /><div /></h4>
+                                        <field
+                                            name="group_type_id"
+                                            options="{'no_create': True}"
+                                            readonly="locked or state != 'draft'"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Other Details Section -->
+                            <div style="flex: 1;">
+                                <h3>Other Details</h3>
+                                <hr />
+                                <div style="display: flex; flex-direction: column; gap: 20px;">
+                                    <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                        <div style="flex: 1;">
+                                            <h4><label for="members_range_from" class="o_form_label" /><div
+                                                /></h4>
+                                            <field
+                                                name="members_range_from"
+                                                readonly="locked or state != 'draft'"
+                                            />
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <h4><label for="members_range_to" class="o_form_label" /><div
+                                                /></h4>
+                                            <field
+                                                name="members_range_to"
+                                                readonly="locked or state != 'draft'"
+                                            />
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <h4><label for="locale_origin" class="o_form_label" /><div /></h4>
+                                            <field
+                                                name="locale_origin"
+                                                options="{'no_create': True}"
+                                                readonly="locked or state != 'draft'"
+                                                domain="[('faker_locale_available', '=', True)]"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 20px;">
+                                    <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                        <div style="flex: 1;">
+                                            <h4><label for="percentage_with_gps" class="o_form_label" /><div
+                                                /></h4>
+                                            <field
+                                                name="percentage_with_gps"
+                                                readonly="locked or state != 'draft'"
+                                            />
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <h4><label
+                                                    for="percentage_with_bank_account"
+                                                    class="o_form_label"
+                                                /><div /></h4>
+                                            <field
+                                                name="percentage_with_bank_account"
+                                                readonly="locked or state != 'draft'"
+                                            />
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <h4><label for="percentage_with_ids" class="o_form_label" /><div
+                                                /></h4>
+                                            <field
+                                                name="percentage_with_ids"
+                                                readonly="locked or state != 'draft'"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    style="display: flex; flex-direction: column; gap: 20px;"
+                                    invisible="number_of_groups &lt; queue_job_minimum_size"
+                                >
+                                    <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                        <div style="flex: 1;">
+                                            <p>Job Queue will be used in this Generation</p>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <h4><label
+                                                    for="queue_job_minimum_size"
+                                                    class="o_form_label"
+                                                /><div /></h4>
+                                            <field name="queue_job_minimum_size" readonly="1" />
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <h4><label for="batch_size" class="o_form_label" /><div /></h4>
+                                            <field name="batch_size" readonly="locked or state != 'draft'" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Generated Groups" invisible="not generated_group_ids">
+                            <field name="generated_group_ids" readonly="1" force_save="1">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="kind" />
+                                    <field name="group_membership_ids" />
+                                    <field name="reg_ids" />
+                                    <field name="phone_number_ids" />
+                                    <field name="gps_coordinates" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Generated Individuals" invisible="not generated_individual_ids">
+                            <field name="generated_individual_ids" readonly="1" force_save="1">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="individual_membership_ids" />
+                                    <field name="reg_ids" />
+                                    <field name="phone_number_ids" />
+                                    <field name="gps_coordinates" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="ID Types">
+                            <field name="id_type_ids" readonly="locked or state != 'draft'">
+                                <tree editable="bottom" delete="true">
+                                    <field name="name" options="{'no_create': True}" />
+                                    <field name="target_type" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Bank Types">
+                            <field name="bank_type_ids" readonly="locked or state != 'draft'">
+                                <tree editable="bottom" delete="true">
+                                    <field name="name" options="{'no_create': True}" />
+                                    <field name="target_type" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_demo_data_generator" model="ir.actions.act_window">
+        <field name="name">Generate Demo Data</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.demo.data.generator</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Generate Demo Data
+            </p><p>
+                Click the create button to enter the new record.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_demo_data_generator_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_demo_data_generator_tree" />
+        <field name="act_window_id" ref="action_demo_data_generator" />
+    </record>
+
+    <record id="action_demo_data_generator_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_demo_data_generator_form" />
+        <field name="act_window_id" ref="action_demo_data_generator" />
+    </record>
+
+    <menuitem
+        id="menu_generate_demo_data"
+        name="Generate Demo Data"
+        action="action_demo_data_generator"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="110"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
+    />
+
+</odoo>

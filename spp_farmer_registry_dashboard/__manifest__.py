@@ -19,7 +19,6 @@
         "g2p_registry_group",
         "g2p_registry_membership",
         "spp_base_farmer_registry",
-        "spp_farmer_registry_demo",
         "spreadsheet_dashboard",
     ],
     "excludes": [
