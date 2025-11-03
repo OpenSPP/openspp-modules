@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div style="display: flex; gap: 20px;">
                             <!-- Percentage Settings Section -->
                             <div style="flex: 1;">
@@ -48,7 +48,10 @@
                                 <hr />
                                 <div style="display: flex; gap: 20px; margin-bottom: 10px;">
                                     <div style="flex: 1;">
-                                        <h4><label for="percentage_with_farm_details" class="o_form_label" /><div /></h4>
+                                        <h4><label
+                                                for="percentage_with_farm_details"
+                                                class="o_form_label"
+                                            /><div /></h4>
                                         <field
                                             name="percentage_with_farm_details"
                                             readonly="locked or state != 'draft'"
@@ -56,7 +59,10 @@
                                         />
                                     </div>
                                     <div style="flex: 1;">
-                                        <h4><label for="percentage_with_land_records" class="o_form_label" /><div /></h4>
+                                        <h4><label
+                                                for="percentage_with_land_records"
+                                                class="o_form_label"
+                                            /><div /></h4>
                                         <field
                                             name="percentage_with_land_records"
                                             readonly="locked or state != 'draft'"
@@ -64,7 +70,10 @@
                                         />
                                     </div>
                                     <div style="flex: 1;">
-                                        <h4><label for="percentage_with_farm_assets" class="o_form_label" /><div /></h4>
+                                        <h4><label
+                                                for="percentage_with_farm_assets"
+                                                class="o_form_label"
+                                            /><div /></h4>
                                         <field
                                             name="percentage_with_farm_assets"
                                             readonly="locked or state != 'draft'"
@@ -74,7 +83,10 @@
                                 </div>
                                 <div style="display: flex; gap: 20px; margin-bottom: 10px;">
                                     <div style="flex: 1;">
-                                        <h4><label for="percentage_with_agricultural_activities" class="o_form_label" /><div /></h4>
+                                        <h4><label
+                                                for="percentage_with_agricultural_activities"
+                                                class="o_form_label"
+                                            /><div /></h4>
                                         <field
                                             name="percentage_with_agricultural_activities"
                                             readonly="locked or state != 'draft'"
@@ -82,7 +94,10 @@
                                         />
                                     </div>
                                     <div style="flex: 1;">
-                                        <h4><label for="percentage_with_extension_services" class="o_form_label" /><div /></h4>
+                                        <h4><label
+                                                for="percentage_with_extension_services"
+                                                class="o_form_label"
+                                            /><div /></h4>
                                         <field
                                             name="percentage_with_extension_services"
                                             readonly="locked or state != 'draft'"
@@ -119,7 +134,8 @@
                                 </div>
                                 <div style="display: flex; gap: 20px; margin-bottom: 10px;">
                                     <div style="flex: 1;">
-                                        <h4><label for="max_land_parcels_per_farm" class="o_form_label" /><div /></h4>
+                                        <h4><label for="max_land_parcels_per_farm" class="o_form_label" /><div
+                                            /></h4>
                                         <field
                                             name="max_land_parcels_per_farm"
                                             readonly="locked or state != 'draft'"
@@ -127,7 +143,8 @@
                                         />
                                     </div>
                                     <div style="flex: 1;">
-                                        <h4><label for="max_assets_per_farm" class="o_form_label" /><div /></h4>
+                                        <h4><label for="max_assets_per_farm" class="o_form_label" /><div
+                                            /></h4>
                                         <field
                                             name="max_assets_per_farm"
                                             readonly="locked or state != 'draft'"
@@ -137,7 +154,8 @@
                                 </div>
                                 <div style="display: flex; gap: 20px; margin-bottom: 10px;">
                                     <div style="flex: 1;">
-                                        <h4><label for="max_activities_per_farm" class="o_form_label" /><div /></h4>
+                                        <h4><label for="max_activities_per_farm" class="o_form_label" /><div
+                                            /></h4>
                                         <field
                                             name="max_activities_per_farm"
                                             readonly="locked or state != 'draft'"
@@ -157,4 +175,3 @@
     </record>
 
 </odoo>
-

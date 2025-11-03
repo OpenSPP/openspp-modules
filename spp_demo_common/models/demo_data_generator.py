@@ -561,7 +561,11 @@ class SPPDemoDataGenerator(models.Model):
                             registrant=registrant,
                             operation_type="id_generation",
                             failure_reason="max_attempts_reached",
-                            error_message=f"Failed to generate valid ID after {max_attempts} attempts for regex: {id_validation_regex}",
+                            error_message=(
+                                f"Failed to generate valid ID after "
+                                f"{max_attempts} attempts for regex: "
+                                f"{id_validation_regex}"
+                            ),
                             attempts=max_attempts,
                             validation_regex=id_validation_regex,
                             generated_value=last_generated,
@@ -648,16 +652,16 @@ class SPPDemoDataGenerator(models.Model):
                     phone_number = f"+{random.randint(1000000000, 9999999999)}"
 
             # Preserve the leading '+' if present, then remove all non-digit characters
-            has_plus = phone_number.startswith('+')
+            has_plus = phone_number.startswith("+")
             cleaned = re.sub(r"\D", "", phone_number)
-            
+
             # Add back the '+' prefix if it was originally there
             if has_plus:
                 cleaned = f"+{cleaned}"
 
             # Ensure we have a valid length (at least 10 digits for most phone numbers)
             # Check digit count (excluding the + sign)
-            digit_count = len(cleaned.lstrip('+'))
+            digit_count = len(cleaned.lstrip("+"))
             if cleaned and digit_count >= 10:
                 return cleaned
             attempt += 1
