@@ -554,7 +554,7 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
             }
         )
 
-        season_id = generator._get_random_season()
+        season_id = generator.with_user(self.farm_manager)._get_random_season()
 
         self.assertIsNotNone(season_id)
 
