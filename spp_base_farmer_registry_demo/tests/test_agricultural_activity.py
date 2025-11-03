@@ -474,15 +474,19 @@ class TestAgriculturalActivity(TransactionCase):
 
     def test_19_activities_with_different_seasons(self):
         """Test activities with different seasons"""
-        season2 = self.env["spp.farm.season"].create(
-            {
-                "name": "Test Season 2025",
-                "date_start": datetime.date(2025, 1, 1),
-                "date_end": datetime.date(2025, 12, 31),
-                "state": "draft",
-            }
+        season2 = (
+            self.env["spp.farm.season"]
+            .with_user(self.farm_manager)
+            .create(
+                {
+                    "name": "Test Season 2025",
+                    "date_start": datetime.date(2025, 1, 1),
+                    "date_end": datetime.date(2025, 12, 31),
+                    "state": "draft",
+                }
+            )
         )
-        season2.action_activate()
+        season2.with_user(self.farm_manager).action_activate()
 
         activity1 = self.env["spp.farm.activity"].create(
             {

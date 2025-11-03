@@ -22,6 +22,15 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
             )
         )
 
+        # Create test user with farm manager role
+        cls.farm_manager = cls.env["res.users"].create(
+            {
+                "name": "Farm Manager",
+                "login": "farm_manager_test",
+                "groups_id": [(4, cls.env.ref("spp_base_farmer_registry.group_spp_farm_manager").id)],
+            }
+        )
+
         # Create test country with faker locale
         cls.test_country = cls.env["res.country"].create(
             {
@@ -235,7 +244,7 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
         if test_season:
             test_season.unlink()
 
-        season = generator._generate_season_data(fake)
+        season = generator.with_user(self.farm_manager)._generate_season_data(fake)
 
         self.assertIsNotNone(season)
         self.assertEqual(season.name, "Test Season 2024")
@@ -369,8 +378,11 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
 
         fake = Faker("en_US")
 
+        # Use farm manager for season operations
+        generator_with_user = generator.with_user(self.farm_manager)
+
         # Create season
-        season = generator._generate_season_data(fake)
+        season = generator_with_user._generate_season_data(fake)
 
         # Ensure species data exists
         generator._generate_species_data(fake)
@@ -564,9 +576,12 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
 
         fake = Faker("en_US")
 
+        # Use farm manager for season operations
+        generator_with_user = generator.with_user(self.farm_manager)
+
         # Generate required reference data
         generator._generate_species_data(fake)
-        generator._generate_season_data(fake)
+        generator_with_user._generate_season_data(fake)
 
         group = generator.generate_groups(fake)
 
@@ -678,12 +693,15 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
 
         fake = Faker("en_US")
 
+        # Use farm manager for season-related operations
+        generator_with_user = generator.with_user(self.farm_manager)
+
         # Generate required reference data
-        generator._generate_species_data(fake)
-        generator._generate_chemical_data(fake)
-        generator._generate_fertilizer_data(fake)
-        generator._generate_feed_items_data(fake)
-        generator._generate_season_data(fake)
+        generator_with_user._generate_species_data(fake)
+        generator_with_user._generate_chemical_data(fake)
+        generator_with_user._generate_fertilizer_data(fake)
+        generator_with_user._generate_feed_items_data(fake)
+        generator_with_user._generate_season_data(fake)
 
         # Create a test group
         group = self.env["res.partner"].create(
@@ -694,7 +712,7 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
             }
         )
 
-        generator._generate_agricultural_activities(fake, group)
+        generator_with_user._generate_agricultural_activities(fake, group)
 
         # Verify agricultural activities were created
         activities = self.env["spp.farm.activity"].search(
@@ -808,11 +826,14 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
 
         fake = Faker("en_US")
 
+        # Use farm manager for season operations
+        generator_with_user = generator.with_user(self.farm_manager)
+
         # Generate season first time
-        season1 = generator._generate_season_data(fake)
+        season1 = generator_with_user._generate_season_data(fake)
 
         # Generate season second time
-        season2 = generator._generate_season_data(fake)
+        season2 = generator_with_user._generate_season_data(fake)
 
         # Should be the same season
         self.assertEqual(season1.id, season2.id)
@@ -832,8 +853,8 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
 
         fake = Faker("en_US")
 
-        # Generate season
-        generator._generate_season_data(fake)
+        # Generate season with farm manager
+        generator.with_user(self.farm_manager)._generate_season_data(fake)
 
         # Create group - should not have farm details
         group = generator.generate_groups(fake)
