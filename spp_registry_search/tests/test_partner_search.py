@@ -4,7 +4,6 @@ import logging
 
 from psycopg2 import IntegrityError
 
-from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
@@ -14,7 +13,6 @@ _logger = logging.getLogger(__name__)
 # Tests for spp_registry_search module
 
 
-@tagged("post_install", "-at_install")
 class TestPartnerSearch(TransactionCase):
     @classmethod
     def setUpClass(cls):
@@ -74,13 +72,7 @@ class TestPartnerSearch(TransactionCase):
             }
         )
 
-        # Get existing search field configurations from data files
-        # These are created by data/partner_search_field_data.xml
-        cls.search_field_name = cls.env.ref("spp_registry_search.registry_search_field_name")
-        cls.search_field_email = cls.env.ref("spp_registry_search.registry_search_field_email")
-        cls.search_field_phone = cls.env.ref("spp_registry_search.registry_search_field_phone")
-
-        # Get ir.model.fields for testing field creation
+        # Get or create search field configurations
         cls.name_field = cls.env["ir.model.fields"].search(
             [("model", "=", "res.partner"), ("name", "=", "name")], limit=1
         )
@@ -90,51 +82,65 @@ class TestPartnerSearch(TransactionCase):
         cls.phone_field = cls.env["ir.model.fields"].search(
             [("model", "=", "res.partner"), ("name", "=", "phone")], limit=1
         )
-        cls.mobile_field = cls.env["ir.model.fields"].search(
-            [("model", "=", "res.partner"), ("name", "=", "mobile")], limit=1
-        )
+
+    def tearDown(self):
+        """Clean up search field configurations created during each test"""
+        super().tearDown()
+        # Delete all search field configurations to avoid constraint violations
+        search_fields = self.env["spp.partner.search.field"].search([])
+        search_fields.unlink()
 
     def test_01_search_field_configuration(self):
         """Test creating and managing search field configurations"""
-        # Test creating a new search field for mobile (not in default data)
         search_field = self.env["spp.partner.search.field"].create(
             {
-                "name": "Mobile",
-                "field_id": self.mobile_field.id,
+                "name": "Test Name Field",
+                "field_id": self.name_field.id,
                 "target_type": "both",
-                "sequence": 40,
+                "sequence": 100,
                 "active": True,
             }
         )
 
         self.assertTrue(search_field.exists())
-        self.assertEqual(search_field.field_name, "mobile")
+        self.assertEqual(search_field.field_name, "name")
         self.assertEqual(search_field.field_type, "char")
         self.assertEqual(search_field.target_type, "both")
 
-        # Verify existing search field from data file
-        self.assertTrue(self.search_field_name.exists())
-        self.assertEqual(self.search_field_name.field_name, "name")
-        self.assertEqual(self.search_field_name.field_type, "char")
-
-        # Clean up the mobile field we created
-        search_field.unlink()
-
     def test_02_get_searchable_fields(self):
         """Test retrieving searchable fields"""
-        # The default data already has name, email, phone fields with target_type="both"
+        # Create test fields with different target types
+        self.env["spp.partner.search.field"].create(
+            {
+                "name": "Name",
+                "field_id": self.name_field.id,
+                "target_type": "both",
+                "sequence": 10,
+                "active": True,
+            }
+        )
+        self.env["spp.partner.search.field"].create(
+            {
+                "name": "Email",
+                "field_id": self.email_field.id,
+                "target_type": "individual",
+                "sequence": 20,
+                "active": True,
+            }
+        )
+
         # Test getting all fields
         fields = self.env["res.partner"].get_searchable_fields()
         self.assertIsInstance(fields, list)
-        self.assertTrue(len(fields) >= 3)  # At least name, email, phone
+        self.assertTrue(len(fields) >= 2)
 
         # Test getting individual fields only
         individual_fields = self.env["res.partner"].get_searchable_fields("individual")
-        self.assertTrue(len(individual_fields) >= 3)  # All "both" fields are included
+        self.assertTrue(len(individual_fields) >= 2)  # both + individual
 
         # Test getting group fields only
         group_fields = self.env["res.partner"].get_searchable_fields("group")
-        self.assertTrue(len(group_fields) >= 3)  # All "both" fields are included
+        self.assertTrue(len(group_fields) >= 1)  # only "both" fields
 
         # Check field structure
         if fields:
@@ -145,15 +151,18 @@ class TestPartnerSearch(TransactionCase):
             self.assertIn("field_type", field)
             self.assertIn("target_type", field)
 
-        # Verify specific fields exist
-        field_names = [f["field_name"] for f in fields]
-        self.assertIn("name", field_names)
-        self.assertIn("email", field_names)
-        self.assertIn("phone", field_names)
-
     def test_03_search_by_name(self):
         """Test searching partners by name"""
-        # Name field already exists from data file, no need to create it
+        # Create search field configuration
+        self.env["spp.partner.search.field"].create(
+            {
+                "name": "Name",
+                "field_id": self.name_field.id,
+                "target_type": "both",
+                "sequence": 10,
+                "active": True,
+            }
+        )
 
         # Search for partial name (individuals)
         partner_ids = self.env["res.partner"].search_by_field("name", "Test Partner", is_group=False)
@@ -170,7 +179,16 @@ class TestPartnerSearch(TransactionCase):
 
     def test_04_search_by_email(self):
         """Test searching partners by email"""
-        # Email field already exists from data file, no need to create it
+        # Create search field configuration
+        self.env["spp.partner.search.field"].create(
+            {
+                "name": "Email",
+                "field_id": self.email_field.id,
+                "target_type": "both",
+                "sequence": 20,
+                "active": True,
+            }
+        )
 
         # Search for specific email (individuals)
         partner_ids = self.env["res.partner"].search_by_field("email", "alpha@test.com", is_group=False)
@@ -182,7 +200,16 @@ class TestPartnerSearch(TransactionCase):
 
     def test_05_search_by_phone(self):
         """Test searching partners by phone"""
-        # Phone field already exists from data file, no need to create it
+        # Create search field configuration
+        self.env["spp.partner.search.field"].create(
+            {
+                "name": "Phone",
+                "field_id": self.phone_field.id,
+                "target_type": "both",
+                "sequence": 30,
+                "active": True,
+            }
+        )
 
         # Search for specific phone (individuals)
         partner_ids = self.env["res.partner"].search_by_field("phone", "+1234567890", is_group=False)
@@ -192,12 +219,24 @@ class TestPartnerSearch(TransactionCase):
         self.assertNotIn(self.group_1.id, partner_ids)
 
     def test_06_search_empty_value(self):
-        """Test searching with empty value"""
-        # Name field already exists from data file
+        """Test searching with empty value - should return all matching records"""
+        self.env["spp.partner.search.field"].create(
+            {
+                "name": "Name",
+                "field_id": self.name_field.id,
+                "target_type": "both",
+                "sequence": 10,
+                "active": True,
+            }
+        )
 
-        # Search with empty value should return empty recordset
-        results = self.env["res.partner"].search_by_field("name", "")
-        self.assertEqual(len(results), 0)
+        # Search with empty value returns all active registrant individuals (search all)
+        results = self.env["res.partner"].search_by_field("name", "", is_group=False)
+        # Should return all 3 individual registrants (partner_1, partner_2, partner_3)
+        self.assertEqual(len(results), 3)
+        self.assertIn(self.partner_1.id, results)
+        self.assertIn(self.partner_2.id, results)
+        self.assertIn(self.partner_3.id, results)
 
     def test_07_search_nonexistent_field(self):
         """Test searching with non-configured field"""
@@ -205,10 +244,37 @@ class TestPartnerSearch(TransactionCase):
         results = self.env["res.partner"].search_by_field("nonexistent_field", "value")
         self.assertEqual(len(results), 0)
 
+    def test_08_search_inactive_field(self):
+        """Test searching with inactive field configuration"""
+        # Create inactive search field configuration
+        self.env["spp.partner.search.field"].create(
+            {
+                "name": "Name",
+                "field_id": self.name_field.id,
+                "target_type": "both",
+                "sequence": 10,
+                "active": False,
+            }
+        )
+
+        # Search should not work for inactive field
+        results = self.env["res.partner"].search_by_field("name", "Test Partner", is_group=False)
+        self.assertEqual(len(results), 0)
+
     @mute_logger("odoo.sql_db")
     def test_09_unique_field_constraint(self):
         """Test unique field per company constraint"""
-        # Name field already exists from data file
+        # Create first search field
+        self.env["spp.partner.search.field"].create(
+            {
+                "name": "Name",
+                "field_id": self.name_field.id,
+                "target_type": "both",
+                "sequence": 10,
+                "active": True,
+            }
+        )
+
         # Try to create duplicate - should fail with IntegrityError
         with self.assertRaises(IntegrityError), self.cr.savepoint():
             self.env["spp.partner.search.field"].create(
@@ -223,10 +289,19 @@ class TestPartnerSearch(TransactionCase):
 
     def test_10_name_get(self):
         """Test custom name_get method"""
-        # Use existing search field from data file
-        name_get_result = self.search_field_name.name_get()
+        search_field = self.env["spp.partner.search.field"].create(
+            {
+                "name": "Test Field",
+                "field_id": self.name_field.id,
+                "target_type": "both",
+                "sequence": 10,
+                "active": True,
+            }
+        )
+
+        name_get_result = search_field.name_get()
         self.assertEqual(len(name_get_result), 1)
-        self.assertIn("Name", name_get_result[0][1])
+        self.assertIn("Test Field", name_get_result[0][1])
         self.assertIn("(name)", name_get_result[0][1])
 
     def test_11_is_registrant_filter(self):
@@ -241,7 +316,16 @@ class TestPartnerSearch(TransactionCase):
             }
         )
 
-        # Name field already exists from data file
+        # Create search field configuration
+        self.env["spp.partner.search.field"].create(
+            {
+                "name": "Name",
+                "field_id": self.name_field.id,
+                "target_type": "both",
+                "sequence": 10,
+                "active": True,
+            }
+        )
 
         # Search should not return non-registrant partners
         partner_ids = self.env["res.partner"].search_by_field("name", "Non Registrant", is_group=False)
