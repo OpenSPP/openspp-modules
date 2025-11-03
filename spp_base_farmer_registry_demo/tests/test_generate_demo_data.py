@@ -27,7 +27,9 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
             {
                 "name": "Farm Manager",
                 "login": "farm_manager_test",
-                "groups_id": [(4, cls.env.ref("spp_base_farmer_registry.group_spp_farm_manager").id)],
+                "groups_id": [
+                    (4, cls.env.ref("spp_base_farmer_registry.group_spp_farm_manager").id),
+                    (4. cls.env.ref("g2p_registry_base.group_g2p_admin"))],
             }
         )
 
