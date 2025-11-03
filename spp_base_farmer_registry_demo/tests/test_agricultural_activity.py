@@ -27,16 +27,29 @@ class TestAgriculturalActivity(TransactionCase):
             }
         )
 
-        # Create test season
-        cls.season = cls.env["spp.farm.season"].create(
+        # Create test user with farm manager role
+        cls.farm_manager = cls.env["res.users"].create(
             {
-                "name": "Test Season 2024",
-                "date_start": datetime.date(2024, 1, 1),
-                "date_end": datetime.date(2024, 12, 31),
-                "state": "draft",
+                "name": "Farm Manager",
+                "login": "farm_manager",
+                "groups_id": [(4, cls.env.ref("spp_base_farmer_registry.group_spp_farm_manager").id)],
             }
         )
-        cls.season.action_activate()
+
+        # Create test season
+        cls.season = (
+            cls.env["spp.farm.season"]
+            .with_user(cls.farm_manager)
+            .create(
+                {
+                    "name": "Test Season 2024",
+                    "date_start": datetime.date(2024, 1, 1),
+                    "date_end": datetime.date(2024, 12, 31),
+                    "state": "draft",
+                }
+            )
+        )
+        cls.season.with_user(cls.farm_manager).action_activate()
 
         # Create test species
         cls.crop_species = cls.env["spp.farm.species"].create(

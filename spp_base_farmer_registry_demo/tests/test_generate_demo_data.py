@@ -26,7 +26,7 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
         cls.test_country = cls.env["res.country"].create(
             {
                 "name": "Test Country Farmer Registry",
-                "code": "TF",
+                "code": "TF2",
                 "faker_locale": "en_US",
                 "faker_locale_available": True,
                 "lat_min": -10.0,
