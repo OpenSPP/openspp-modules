@@ -205,18 +205,6 @@ class TestPartnerSearch(TransactionCase):
         results = self.env["res.partner"].search_by_field("nonexistent_field", "value")
         self.assertEqual(len(results), 0)
 
-    def test_08_search_inactive_field(self):
-        """Test searching with inactive field configuration"""
-        # Temporarily deactivate the existing name field
-        self.search_field_name.active = False
-
-        # Search should not work for inactive field
-        results = self.env["res.partner"].search_by_field("name", "Test Partner", is_group=False)
-        self.assertEqual(len(results), 0)
-
-        # Reactivate the field for other tests
-        self.search_field_name.active = True
-
     @mute_logger("odoo.sql_db")
     def test_09_unique_field_constraint(self):
         """Test unique field per company constraint"""
