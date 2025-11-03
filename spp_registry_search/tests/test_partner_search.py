@@ -83,6 +83,13 @@ class TestPartnerSearch(TransactionCase):
             [("model", "=", "res.partner"), ("name", "=", "phone")], limit=1
         )
 
+    def tearDown(self):
+        """Clean up search field configurations created during each test"""
+        super().tearDown()
+        # Delete all search field configurations to avoid constraint violations
+        search_fields = self.env["spp.partner.search.field"].search([])
+        search_fields.unlink()
+
     def test_01_search_field_configuration(self):
         """Test creating and managing search field configurations"""
         search_field = self.env["spp.partner.search.field"].create(
