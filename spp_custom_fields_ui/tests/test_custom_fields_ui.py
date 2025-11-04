@@ -94,17 +94,18 @@ class TestCustomFieldsUI(TransactionCase):
         """Test that presence field creates boolean type"""
         field = self.field_model.create(
             {
-                "name": "x_temp",
+                "name": "x_ind_indv_has_disability",
                 "model_id": self.model_id.id,
                 "field_description": "Has Disability",
                 "draft_name": "has_disability",
+                "ttype": "boolean",
                 "state": "manual",
                 "target_type": "indv",
                 "field_category": "ind",
                 "has_presence": True,
             }
         )
-        field._onchange_has_presence()
+        field.set_compute()
 
         self.assertEqual(field.ttype, "boolean")
         self.assertTrue(field.compute)
@@ -114,20 +115,22 @@ class TestCustomFieldsUI(TransactionCase):
         """Test that calculated field without presence is integer"""
         field = self.field_model.create(
             {
-                "name": "x_temp",
+                "name": "x_ind_grp_member_count",
                 "model_id": self.model_id.id,
                 "field_description": "Member Count",
                 "draft_name": "member_count",
+                "ttype": "integer",
                 "state": "manual",
                 "target_type": "grp",
                 "field_category": "ind",
                 "has_presence": False,
             }
         )
-        field._onchange_field_category()
+        field.set_compute()
 
         self.assertEqual(field.ttype, "integer")
         self.assertTrue(field.compute)
+        self.assertIn("compute_count_and_set_indicator", field.compute)
 
     def test_07_field_group_assignment(self):
         """Test field can be assigned to field group"""
