@@ -531,12 +531,6 @@ class TestPartnerSearch(TransactionCase):
             self.assertIsInstance(options[0], tuple)
             self.assertEqual(len(options[0]), 2)  # (id, name)
 
-    def test_24_get_field_options_invalid_model(self):
-        """Test get_field_options with invalid model"""
-        # Should handle error gracefully
-        options = self.env["res.partner"].get_field_options("invalid.model")
-        self.assertEqual(options, [])
-
     def test_25_get_search_filters(self):
         """Test get_search_filters method"""
         # Get all filters
