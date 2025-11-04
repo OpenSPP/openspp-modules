@@ -379,27 +379,15 @@ class TestPartnerSearch(TransactionCase):
 
     def test_16_search_with_filter_domain(self):
         """Test searching with additional filter domain"""
-        # Create partners with specific attributes for filtering
-        female_partner = self.env["res.partner"].create(
-            {
-                "name": "Female Partner",
-                "email": "female@test.com",
-                "is_registrant": True,
-                "is_group": False,
-            }
-        )
+        # Test with email filter domain (always available)
+        # Search with filter domain that filters by email
+        filter_domain = '[["email", "=", "alpha@test.com"]]'
+        partner_ids = self.env["res.partner"].search_by_field("name", "", is_group=False, filter_domain=filter_domain)
 
-        # Add gender field if available
-        if "gender" in self.env["res.partner"]._fields:
-            female_partner.write({"gender": "Female"})
-
-            # Search with filter domain
-            filter_domain = '[["gender", "=", "Female"]]'
-            partner_ids = self.env["res.partner"].search_by_field(
-                "name", "Partner", is_group=False, filter_domain=filter_domain
-            )
-
-            self.assertIn(female_partner.id, partner_ids)
+        # Should find only partner_1 with alpha@test.com
+        self.assertIn(self.partner_1.id, partner_ids)
+        self.assertNotIn(self.partner_2.id, partner_ids)
+        self.assertNotIn(self.partner_3.id, partner_ids)
 
     def test_17_search_with_or_filter_domain(self):
         """Test searching with OR operator in filter domain"""
@@ -530,6 +518,12 @@ class TestPartnerSearch(TransactionCase):
         if options:
             self.assertIsInstance(options[0], tuple)
             self.assertEqual(len(options[0]), 2)  # (id, name)
+
+    def test_24_get_field_options_invalid_model(self):
+        """Test get_field_options with invalid model"""
+        # Should handle error gracefully
+        options = self.env["res.partner"].get_field_options("invalid.model")
+        self.assertEqual(options, [])
 
     def test_25_get_search_filters(self):
         """Test get_search_filters method"""
