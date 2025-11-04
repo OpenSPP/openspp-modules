@@ -47,15 +47,23 @@
             <search>
                 <field name="name" />
                 <field name="target_type" />
-                <separator/>
-                <filter string="Group Fields" name="filter_group" domain="[('target_type', '=', 'grp')]"/>
-                <filter string="Individual Fields" name="filter_individual" domain="[('target_type', '=', 'indv')]"/>
-                <separator/>
-                <filter string="Active" name="filter_active" domain="[('active', '=', True)]"/>
-                <filter string="Archived" name="filter_archived" domain="[('active', '=', False)]"/>
-                <separator/>
+                <separator />
+                <filter string="Group Fields" name="filter_group" domain="[('target_type', '=', 'grp')]" />
+                <filter
+                    string="Individual Fields"
+                    name="filter_individual"
+                    domain="[('target_type', '=', 'indv')]"
+                />
+                <separator />
+                <filter string="Active" name="filter_active" domain="[('active', '=', True)]" />
+                <filter string="Archived" name="filter_archived" domain="[('active', '=', False)]" />
+                <separator />
                 <group expand="1" string="Group By">
-                    <filter string="Target Type" name="group_by_target_type" context="{'group_by': 'target_type'}"/>
+                    <filter
+                        string="Target Type"
+                        name="group_by_target_type"
+                        context="{'group_by': 'target_type'}"
+                    />
                 </group>
             </search>
         </field>
@@ -66,7 +74,7 @@
         <field name="name">Field Groups</field>
         <field name="res_model">spp.custom.field.group</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="view_field_group_search"/>
+        <field name="search_view_id" ref="view_field_group_search" />
         <field name="context">{'search_default_filter_active': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
