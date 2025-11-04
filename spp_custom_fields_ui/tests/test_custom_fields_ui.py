@@ -9,7 +9,6 @@ class TestCustomFieldsUI(TransactionCase):
         cls.model_id = cls.env["ir.model"].search([("model", "=", "res.partner")], limit=1)
         cls.field_model = cls.env["ir.model.fields"]
         cls.kind_head = cls.env.ref("g2p_registry_membership.group_membership_kind_head")
-        cls.kind_principal = cls.env.ref("g2p_registry_membership.group_membership_kind_principal")
 
         # Create field group for testing
         cls.field_group = cls.env["spp.custom.field.group"].create(

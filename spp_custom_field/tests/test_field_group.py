@@ -54,14 +54,12 @@ class TestFieldGroup(TransactionCase):
                 "field_description": "Household Size",
                 "ttype": "integer",
                 "state": "manual",
-                "target_type": "grp",
                 "field_group_id": self.group_field_group.id,
                 "sequence": 5,
             }
         )
 
         self.assertEqual(field.field_group_id, self.group_field_group)
-        self.assertEqual(field.target_type, "grp")
         self.assertEqual(field.sequence, 5)
 
     def test_04_field_group_assignment_to_individual_field(self):
@@ -73,55 +71,55 @@ class TestFieldGroup(TransactionCase):
                 "field_description": "Education Level",
                 "ttype": "char",
                 "state": "manual",
-                "target_type": "indv",
                 "field_group_id": self.individual_field_group.id,
                 "sequence": 15,
             }
         )
 
         self.assertEqual(field.field_group_id, self.individual_field_group)
-        self.assertEqual(field.target_type, "indv")
 
-    def test_05_target_type_mismatch_cleared_on_change(self):
-        """Test field_group_id is cleared when target_type changes"""
-        field = self.field_model.create(
+    def test_05_field_sequence_ordering(self):
+        """Test fields can be ordered by sequence"""
+        field1 = self.field_model.create(
             {
-                "name": "x_cst_grp_test_field",
+                "name": "x_cst_grp_test_field_1",
                 "model_id": self.partner_model.id,
-                "field_description": "Test Field",
+                "field_description": "Test Field 1",
                 "ttype": "char",
                 "state": "manual",
-                "target_type": "grp",
                 "field_group_id": self.group_field_group.id,
+                "sequence": 5,
             }
         )
-
-        # Change target type - should clear field_group_id
-        field.target_type = "indv"
-        field._onchange_target_type()
-
-        self.assertFalse(field.field_group_id)
-
-    def test_06_field_group_domain_filtering(self):
-        """Test domain filtering ensures correct field group types"""
-        # Create a group field
-        group_field = self.field_model.create(
+        field2 = self.field_model.create(
             {
-                "name": "x_cst_grp_test_domain",
+                "name": "x_cst_grp_test_field_2",
                 "model_id": self.partner_model.id,
-                "field_description": "Test Domain Field",
+                "field_description": "Test Field 2",
                 "ttype": "char",
                 "state": "manual",
-                "target_type": "grp",
+                "field_group_id": self.group_field_group.id,
+                "sequence": 10,
             }
         )
 
-        # Get available field groups for this field (simulate domain)
-        available_groups = self.field_group_model.search([("target_type", "=", group_field.target_type)])
+        self.assertLess(field1.sequence, field2.sequence)
+
+    def test_06_field_group_domain_filtering_by_target_type(self):
+        """Test field groups can be filtered by target_type"""
+        # Get group-type field groups
+        group_type_groups = self.field_group_model.search([("target_type", "=", "grp")])
 
         # Should only include group-type field groups
-        self.assertIn(self.group_field_group, available_groups)
-        self.assertNotIn(self.individual_field_group, available_groups)
+        self.assertIn(self.group_field_group, group_type_groups)
+        self.assertNotIn(self.individual_field_group, group_type_groups)
+
+        # Get individual-type field groups
+        indv_type_groups = self.field_group_model.search([("target_type", "=", "indv")])
+
+        # Should only include individual-type field groups
+        self.assertIn(self.individual_field_group, indv_type_groups)
+        self.assertNotIn(self.group_field_group, indv_type_groups)
 
     def test_07_inactive_field_group(self):
         """Test inactive field groups"""

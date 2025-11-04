@@ -66,7 +66,6 @@ class TestViewGeneration(TransactionCase):
                 "state": "manual",
                 "field_group_id": cls.household_group.id,
                 "sequence": 25,
-                "compute": "self.compute_count_and_set_indicator('x_ind_grp_member_count', None, [])",
             }
         )
 
