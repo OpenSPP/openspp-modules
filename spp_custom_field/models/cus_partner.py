@@ -144,30 +144,46 @@ class OpenSPPResPartner(models.Model):
                 # Process custom fields with grouping
                 if custom_fields:
                     grouped_custom_fields = self._group_fields_by_group(custom_fields)
+                    
+                    # Create main container row for side-by-side layout
+                    main_row = etree.SubElement(custom_page, "div", {"class": "row"})
+                    
                     for group_record, fields_in_group in grouped_custom_fields:
                         if group_record:
-                            # Create a group tag with the group name
-                            group_element = etree.SubElement(
-                                custom_page,
-                                "group",
-                                {"string": group_record.name, "name": f"group_{group_record.id}"},
+                            # Create a half-width column for each group
+                            group_col = etree.SubElement(
+                                main_row,
+                                "div",
+                                {"class": "col-12 col-lg-6"},
                             )
+                            # Add group label/separator
+                            group_separator = etree.SubElement(
+                                group_col,
+                                "separator",
+                                {
+                                    "string": group_record.name,
+                                    "colspan": "2",
+                                },
+                            )
+                            # Create fields container
                             group_div = etree.SubElement(
-                                group_element, "div", {"class": "row mt16 o_settings_container"}
+                                group_col, "div", {"class": "row mt16 o_settings_container"}
                             )
                             for field in fields_in_group:
                                 self.create_field_element(group_div, field)
                         else:
-                            # Fields without a group go directly in the page
+                            # Fields without a group go in full width at the bottom
                             if not custom_page.xpath(
-                                ".//div[@class='row mt16 o_settings_container' and not(parent::group)]"
+                                ".//div[@class='row mt16 o_settings_container o_no_group']"
                             ):
                                 custom_div = etree.SubElement(
-                                    custom_page, "div", {"class": "row mt16 o_settings_container"}
+                                    custom_page, 
+                                    "div", 
+                                    {"class": "row mt16 o_settings_container o_no_group"}
                                 )
                             else:
                                 custom_div = custom_page.xpath(
-                                    ".//div[@class='row mt16 o_settings_container' and not(parent::group)]"
+                                    ".//div[@class='row mt16 o_settings_container o_no_group']"
                                 )[0]
                             for field in fields_in_group:
                                 self.create_field_element(custom_div, field)
@@ -175,30 +191,46 @@ class OpenSPPResPartner(models.Model):
                 # Process indicator fields with grouping
                 if indicator_fields:
                     grouped_indicator_fields = self._group_fields_by_group(indicator_fields)
+                    
+                    # Create main container row for side-by-side layout
+                    main_row = etree.SubElement(indicators_page, "div", {"class": "row"})
+                    
                     for group_record, fields_in_group in grouped_indicator_fields:
                         if group_record:
-                            # Create a group tag with the group name
-                            group_element = etree.SubElement(
-                                indicators_page,
-                                "group",
-                                {"string": group_record.name, "name": f"group_{group_record.id}"},
+                            # Create a half-width column for each group
+                            group_col = etree.SubElement(
+                                main_row,
+                                "div",
+                                {"class": "col-12 col-lg-6"},
                             )
+                            # Add group label/separator
+                            group_separator = etree.SubElement(
+                                group_col,
+                                "separator",
+                                {
+                                    "string": group_record.name,
+                                    "colspan": "2",
+                                },
+                            )
+                            # Create fields container
                             group_div = etree.SubElement(
-                                group_element, "div", {"class": "row mt16 o_settings_container"}
+                                group_col, "div", {"class": "row mt16 o_settings_container"}
                             )
                             for field in fields_in_group:
                                 self.create_field_element(group_div, field, is_ind=True)
                         else:
-                            # Fields without a group go directly in the page
+                            # Fields without a group go in full width at the bottom
                             if not indicators_page.xpath(
-                                ".//div[@class='row mt16 o_settings_container' and not(parent::group)]"
+                                ".//div[@class='row mt16 o_settings_container o_no_group']"
                             ):
                                 indicators_div = etree.SubElement(
-                                    indicators_page, "div", {"class": "row mt16 o_settings_container"}
+                                    indicators_page, 
+                                    "div", 
+                                    {"class": "row mt16 o_settings_container o_no_group"}
                                 )
                             else:
                                 indicators_div = indicators_page.xpath(
-                                    ".//div[@class='row mt16 o_settings_container' and not(parent::group)]"
+                                    ".//div[@class='row mt16 o_settings_container o_no_group']"
                                 )[0]
                             for field in fields_in_group:
                                 self.create_field_element(indicators_div, field, is_ind=True)
