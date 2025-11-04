@@ -253,15 +253,16 @@
         <field name="res_model">ir.model.fields</field>
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="view_custom_fields_ui_search" />
-        <field name="context">{
+        <field name="context" eval="{
             'default_model_id': ref('base.model_res_partner'),
             'default_model': 'res.partner',
             'default_target_type': 'grp',
             'search_default_group_by_field_group': 1,
-        }</field>
+        }"/>
         <field
             name="domain"
-        >[('model_id', '=', ref('base.model_res_partner')), ('state', '=', 'manual'), ('target_type', '=', 'grp')]</field>
+            eval="[('model_id', '=', ref('base.model_res_partner')), ('state', '=', 'manual'), ('target_type', '=', 'grp')]"
+        />
         <field
             name="view_ids"
             eval="[(5, 0, 0),
@@ -285,15 +286,16 @@
         <field name="res_model">ir.model.fields</field>
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="view_custom_fields_ui_search" />
-        <field name="context">{
+        <field name="context" eval="{
             'default_model_id': ref('base.model_res_partner'),
             'default_model': 'res.partner',
             'default_target_type': 'indv',
             'search_default_group_by_field_group': 1,
-        }</field>
+        }"/>
         <field
             name="domain"
-        >[('model_id', '=', ref('base.model_res_partner')), ('state', '=', 'manual'), ('target_type', '=', 'indv')]</field>
+            eval="[('model_id', '=', ref('base.model_res_partner')), ('state', '=', 'manual'), ('target_type', '=', 'indv')]"
+        />
         <field
             name="view_ids"
             eval="[(5, 0, 0),
@@ -341,6 +343,9 @@
     />
 
     <!-- Move Field Groups menu under Custom Fields parent -->
-    <menuitem id="spp_custom_field.menu_field_group" parent="menu_custom_fields_ui_root" sequence="30" />
+    <menuitem 
+    id="menu_field_group" 
+    name="Field Groups"
+    parent="menu_custom_fields_ui_root" sequence="30" />
 
 </odoo>
