@@ -246,3 +246,344 @@ class TestPartnerSearch(TransactionCase):
         # But registrants should be found
         partner_ids = self.env["res.partner"].search_by_field("name", "Test Partner", is_group=False)
         self.assertIn(self.partner_1.id, partner_ids)
+
+    def test_12_search_by_integer_field(self):
+        """Test searching by integer field"""
+        # Get an integer field (e.g., color)
+        color_field = self.env["ir.model.fields"].search(
+            [("model", "=", "res.partner"), ("name", "=", "color")], limit=1
+        )
+
+        # Create search configuration for integer field
+        int_search_field = self.env["spp.partner.search.field"].create(
+            {
+                "name": "Color",
+                "field_id": color_field.id,
+                "target_type": "both",
+                "sequence": 100,
+                "active": True,
+            }
+        )
+
+        # Set color on partner
+        self.partner_1.write({"color": 5})
+
+        try:
+            # Search by integer value
+            partner_ids = self.env["res.partner"].search_by_field("color", "5", is_group=False)
+            self.assertIn(self.partner_1.id, partner_ids)
+
+            # Search with invalid integer value
+            partner_ids = self.env["res.partner"].search_by_field("color", "invalid", is_group=False)
+            self.assertEqual(len(partner_ids), 0)
+        finally:
+            int_search_field.unlink()
+
+    def test_13_search_by_selection_field(self):
+        """Test searching by selection field"""
+        # Get a selection field (e.g., type)
+        type_field = self.env["ir.model.fields"].search([("model", "=", "res.partner"), ("name", "=", "type")], limit=1)
+
+        if not type_field:
+            self.skipTest("Type field not available")
+
+        # Create search configuration for selection field
+        sel_search_field = self.env["spp.partner.search.field"].create(
+            {
+                "name": "Type",
+                "field_id": type_field.id,
+                "target_type": "both",
+                "sequence": 101,
+                "active": True,
+            }
+        )
+
+        # Set type on partner
+        self.partner_1.write({"type": "contact"})
+
+        try:
+            # Search by selection value
+            partner_ids = self.env["res.partner"].search_by_field("type", "contact", is_group=False)
+            self.assertIn(self.partner_1.id, partner_ids)
+        finally:
+            sel_search_field.unlink()
+
+    def test_14_search_by_many2one_field(self):
+        """Test searching by many2one field"""
+        # Create a country for testing
+        test_country = self.env["res.country"].search([("code", "=", "US")], limit=1)
+        if not test_country:
+            test_country = self.env["res.country"].create({"name": "United States", "code": "US"})
+
+        # Get country_id field
+        country_field = self.env["ir.model.fields"].search(
+            [("model", "=", "res.partner"), ("name", "=", "country_id")], limit=1
+        )
+
+        # Create search configuration for many2one field
+        m2o_search_field = self.env["spp.partner.search.field"].create(
+            {
+                "name": "Country",
+                "field_id": country_field.id,
+                "target_type": "both",
+                "sequence": 102,
+                "active": True,
+            }
+        )
+
+        # Set country on partner
+        self.partner_1.write({"country_id": test_country.id})
+
+        try:
+            # Search by ID
+            partner_ids = self.env["res.partner"].search_by_field("country_id", str(test_country.id), is_group=False)
+            self.assertIn(self.partner_1.id, partner_ids)
+
+            # Search by name (fallback)
+            partner_ids = self.env["res.partner"].search_by_field("country_id", "United States", is_group=False)
+            self.assertIn(self.partner_1.id, partner_ids)
+        finally:
+            m2o_search_field.unlink()
+
+    def test_15_search_by_boolean_field(self):
+        """Test searching by boolean field"""
+        # Get a boolean field (e.g., active)
+        active_field = self.env["ir.model.fields"].search(
+            [("model", "=", "res.partner"), ("name", "=", "active")], limit=1
+        )
+
+        # Create search configuration for boolean field
+        bool_search_field = self.env["spp.partner.search.field"].create(
+            {
+                "name": "Active",
+                "field_id": active_field.id,
+                "target_type": "both",
+                "sequence": 103,
+                "active": True,
+            }
+        )
+
+        try:
+            # Search for active partners (true)
+            partner_ids = self.env["res.partner"].search_by_field("active", "true", is_group=False)
+            self.assertIn(self.partner_1.id, partner_ids)
+
+            # Search with different boolean representations
+            partner_ids = self.env["res.partner"].search_by_field("active", "1", is_group=False)
+            self.assertIn(self.partner_1.id, partner_ids)
+
+            partner_ids = self.env["res.partner"].search_by_field("active", "yes", is_group=False)
+            self.assertIn(self.partner_1.id, partner_ids)
+        finally:
+            bool_search_field.unlink()
+
+    def test_16_search_with_filter_domain(self):
+        """Test searching with additional filter domain"""
+        # Create partners with specific attributes for filtering
+        female_partner = self.env["res.partner"].create(
+            {
+                "name": "Female Partner",
+                "email": "female@test.com",
+                "is_registrant": True,
+                "is_group": False,
+            }
+        )
+
+        # Add gender field if available
+        if "gender" in self.env["res.partner"]._fields:
+            female_partner.write({"gender": "Female"})
+
+            # Search with filter domain
+            filter_domain = '[["gender", "=", "Female"]]'
+            partner_ids = self.env["res.partner"].search_by_field(
+                "name", "Partner", is_group=False, filter_domain=filter_domain
+            )
+
+            self.assertIn(female_partner.id, partner_ids)
+
+    def test_17_search_with_or_filter_domain(self):
+        """Test searching with OR operator in filter domain"""
+        # Search with complex domain using OR operator
+        filter_domain = '["|", ["email", "=", "alpha@test.com"], ["email", "=", "beta@test.com"]]'
+        partner_ids = self.env["res.partner"].search_by_field("name", "", is_group=False, filter_domain=filter_domain)
+
+        self.assertIn(self.partner_1.id, partner_ids)
+        self.assertIn(self.partner_2.id, partner_ids)
+
+    def test_18_search_archived_records(self):
+        """Test searching archived records with filter domain"""
+        # Archive a partner
+        self.partner_3.write({"active": False})
+
+        # Search without archived filter - should not find archived
+        partner_ids = self.env["res.partner"].search_by_field("name", "Another Partner", is_group=False)
+        self.assertNotIn(self.partner_3.id, partner_ids)
+
+        # Search with archived filter - should find archived
+        filter_domain = '[["active", "=", false]]'
+        partner_ids = self.env["res.partner"].search_by_field(
+            "name", "Another Partner", is_group=False, filter_domain=filter_domain
+        )
+        self.assertIn(self.partner_3.id, partner_ids)
+
+        # Restore partner
+        self.partner_3.write({"active": True})
+
+    def test_19_search_with_invalid_filter_domain(self):
+        """Test searching with invalid filter domain"""
+        # Search with invalid JSON domain - should default to active records
+        invalid_domain = "not valid json"
+        partner_ids = self.env["res.partner"].search_by_field(
+            "name", "Test Partner", is_group=False, filter_domain=invalid_domain
+        )
+
+        # Should still return results (with default active filter)
+        self.assertIn(self.partner_1.id, partner_ids)
+
+    def test_20_get_searchable_fields_with_selection(self):
+        """Test get_searchable_fields includes selection options"""
+        # Get a selection field
+        type_field = self.env["ir.model.fields"].search([("model", "=", "res.partner"), ("name", "=", "type")], limit=1)
+
+        if not type_field:
+            self.skipTest("Type field not available")
+
+        # Create search configuration for selection field
+        sel_search_field = self.env["spp.partner.search.field"].create(
+            {
+                "name": "Type",
+                "field_id": type_field.id,
+                "target_type": "both",
+                "sequence": 200,
+                "active": True,
+            }
+        )
+
+        try:
+            # Get searchable fields
+            fields = self.env["res.partner"].get_searchable_fields()
+
+            # Find the selection field
+            type_field_info = next((f for f in fields if f["field_name"] == "type"), None)
+            self.assertIsNotNone(type_field_info)
+
+            # Check that selection options are included
+            self.assertIn("selection", type_field_info)
+            self.assertIsInstance(type_field_info["selection"], (list, tuple))
+        finally:
+            sel_search_field.unlink()
+
+    def test_21_get_searchable_fields_with_many2one(self):
+        """Test get_searchable_fields includes many2one relation info"""
+        # Get country_id field
+        country_field = self.env["ir.model.fields"].search(
+            [("model", "=", "res.partner"), ("name", "=", "country_id")], limit=1
+        )
+
+        # Create search configuration for many2one field
+        m2o_search_field = self.env["spp.partner.search.field"].create(
+            {
+                "name": "Country",
+                "field_id": country_field.id,
+                "target_type": "both",
+                "sequence": 201,
+                "active": True,
+            }
+        )
+
+        try:
+            # Get searchable fields
+            fields = self.env["res.partner"].get_searchable_fields()
+
+            # Find the many2one field
+            country_field_info = next((f for f in fields if f["field_name"] == "country_id"), None)
+            self.assertIsNotNone(country_field_info)
+
+            # Check that relation info is included
+            self.assertIn("relation", country_field_info)
+            self.assertEqual(country_field_info["relation"], "res.country")
+            self.assertIn("relation_field", country_field_info)
+        finally:
+            m2o_search_field.unlink()
+
+    def test_22_get_searchable_fields_by_type(self):
+        """Test get_searchable_fields filtered by partner type"""
+        # Get all fields
+        all_fields = self.env["res.partner"].get_searchable_fields()
+        self.assertTrue(len(all_fields) >= 3)
+
+        # Get individual fields
+        individual_fields = self.env["res.partner"].get_searchable_fields("individual")
+        self.assertTrue(len(individual_fields) >= 3)
+
+        # Get group fields
+        group_fields = self.env["res.partner"].get_searchable_fields("group")
+        self.assertTrue(len(group_fields) >= 3)
+
+    def test_23_get_field_options(self):
+        """Test get_field_options method"""
+        # Get options for res.country
+        options = self.env["res.partner"].get_field_options("res.country")
+
+        # Should return list of tuples
+        self.assertIsInstance(options, list)
+        if options:
+            self.assertIsInstance(options[0], tuple)
+            self.assertEqual(len(options[0]), 2)  # (id, name)
+
+    def test_24_get_field_options_invalid_model(self):
+        """Test get_field_options with invalid model"""
+        # Should handle error gracefully
+        options = self.env["res.partner"].get_field_options("invalid.model")
+        self.assertEqual(options, [])
+
+    def test_25_get_search_filters(self):
+        """Test get_search_filters method"""
+        # Get all filters
+        filters = self.env["res.partner"].get_search_filters()
+
+        # Should return list of dictionaries
+        self.assertIsInstance(filters, list)
+
+        # Check filter structure if any exist
+        if filters:
+            filter_info = filters[0]
+            self.assertIn("id", filter_info)
+            self.assertIn("name", filter_info)
+            self.assertIn("domain", filter_info)
+            self.assertIn("description", filter_info)
+            self.assertIn("target_type", filter_info)
+
+            # Domain should be valid JSON
+            import json
+
+            domain = json.loads(filter_info["domain"])
+            self.assertIsInstance(domain, list)
+
+    def test_26_get_search_filters_by_type(self):
+        """Test get_search_filters filtered by partner type"""
+        # Get all filters
+        all_filters = self.env["res.partner"].get_search_filters()
+
+        # Get individual filters
+        individual_filters = self.env["res.partner"].get_search_filters("individual")
+
+        # Get group filters
+        group_filters = self.env["res.partner"].get_search_filters("group")
+
+        # All should return lists
+        self.assertIsInstance(all_filters, list)
+        self.assertIsInstance(individual_filters, list)
+        self.assertIsInstance(group_filters, list)
+
+    def test_27_search_with_empty_field_name(self):
+        """Test search_by_field with empty field name"""
+        # Should return empty list
+        results = self.env["res.partner"].search_by_field("", "value", is_group=False)
+        self.assertEqual(results, [])
+
+    def test_28_search_with_none_field_name(self):
+        """Test search_by_field with None field name"""
+        # Should return empty list
+        results = self.env["res.partner"].search_by_field(None, "value", is_group=False)
+        self.assertEqual(results, [])
