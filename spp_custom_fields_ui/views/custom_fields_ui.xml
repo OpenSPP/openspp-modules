@@ -344,8 +344,11 @@
 
     <!-- Move Field Groups menu under Custom Fields parent -->
     <menuitem 
-    id="menu_field_group" 
-    name="Field Groups"
-    parent="menu_custom_fields_ui_root" sequence="30" />
+        id="spp_custom_field.menu_field_group" 
+        name="Field Groups"
+        parent="menu_custom_fields_ui_root" 
+        sequence="30" 
+        groups="g2p_registry_base.group_g2p_admin" 
+    />
 
 </odoo>
