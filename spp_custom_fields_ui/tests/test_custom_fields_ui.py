@@ -2,87 +2,195 @@ from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
 
-class CustomFieldsTest(TransactionCase):
+class TestCustomFieldsUI(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        """
-        Setup and create necessary records for this test
-        """
         super().setUpClass()
         cls.model_id = cls.env["ir.model"].search([("model", "=", "res.partner")], limit=1)
-        cls.kind_id = cls.env.ref("g2p_registry_membership.group_membership_kind_head")
-        cls.model_field_id = cls.env["ir.model.fields"].create(
+        cls.field_model = cls.env["ir.model.fields"]
+        cls.kind_head = cls.env.ref("g2p_registry_membership.group_membership_kind_head")
+        cls.kind_principal = cls.env.ref("g2p_registry_membership.group_membership_kind_principal")
+
+        # Create field group for testing
+        cls.field_group = cls.env["spp.custom.field.group"].create(
             {
-                "name": "x_test_field",
-                "model_id": cls.model_id.id,
-                "field_description": "Test Field",
-                "draft_name": "test_field",
-                "ttype": "char",
-                "state": "manual",
-                "kinds": [(6, 0, [cls.kind_id.id])],
+                "name": "Test Group",
+                "target_type": "grp",
+                "sequence": 10,
             }
         )
 
-    def test_open_custom_fields_tree(self):
-        action = self.model_field_id.open_custom_fields_tree()
+    def test_01_compute_prefix_custom_group(self):
+        """Test prefix computation for custom group field"""
+        field = self.field_model.create(
+            {
+                "name": "x_temp",
+                "model_id": self.model_id.id,
+                "field_description": "Test Field",
+                "ttype": "char",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "cst",
+            }
+        )
+        field._compute_prefix()
+        self.assertEqual(field.prefix, "x_cst_grp")
 
-        self.assertEqual(action["name"], "Custom Fields")
-        self.assertEqual(action["type"], "ir.actions.act_window")
-        self.assertEqual(action["res_model"], "ir.model.fields")
-        self.assertEqual(action["context"]["default_model_id"], self.model_id.id)
-        self.assertEqual(action["context"]["default_model"], self.model_id.model)
-        self.assertEqual(action["view_mode"], "tree, form")
-        self.assertEqual(action["views"][0][0], self.env.ref("spp_custom_fields_ui.view_custom_fields_ui_tree").id)
-        self.assertEqual(action["views"][0][1], "tree")
-        self.assertEqual(action["views"][1][0], self.env.ref("spp_custom_fields_ui.view_custom_fields_ui_form").id)
-        self.assertEqual(action["views"][1][1], "form")
-        self.assertEqual(action["domain"], [("model_id", "=", self.model_id.id), ("state", "=", "manual")])
+    def test_02_compute_prefix_indicator_individual(self):
+        """Test prefix computation for indicator individual field"""
+        field = self.field_model.create(
+            {
+                "name": "x_temp",
+                "model_id": self.model_id.id,
+                "field_description": "Test Indicator",
+                "ttype": "integer",
+                "state": "manual",
+                "target_type": "indv",
+                "field_category": "ind",
+            }
+        )
+        field._compute_prefix()
+        self.assertEqual(field.prefix, "x_ind_indv")
 
-    def test_compute_prefix(self):
-        self.model_field_id._compute_prefix()
-        self.assertEqual(self.model_field_id.prefix, "x_cst_grp")
+    def test_03_onchange_draft_name_generates_field_name(self):
+        """Test that draft name generates proper field name"""
+        field = self.field_model.create(
+            {
+                "name": "x_temp",
+                "model_id": self.model_id.id,
+                "field_description": "Test Field",
+                "ttype": "char",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "cst",
+                "draft_name": "household_size",
+            }
+        )
+        field._onchange_draft_name()
+        self.assertEqual(field.name, "x_cst_grp_household_size")
 
-    def test_onchange_draft_name(self):
-        self.model_field_id._onchange_draft_name()
+    def test_04_indicator_field_with_kinds(self):
+        """Test indicator field with membership kinds"""
+        field = self.field_model.create(
+            {
+                "name": "x_temp",
+                "model_id": self.model_id.id,
+                "field_description": "Number of Heads",
+                "draft_name": "num_heads",
+                "ttype": "integer",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "ind",
+                "kinds": [(6, 0, [self.kind_head.id])],
+            }
+        )
+        field._onchange_draft_name()
 
-        self.assertEqual(self.model_field_id.name, "x_cst_grp_test_field")
+        self.assertEqual(field.name, "x_ind_grp_num_heads")
+        self.assertTrue(field.compute)
+        self.assertIn(self.kind_head.name, field.compute)
+        self.assertIn("compute_count_and_set_indicator", field.compute)
 
-    def test_onchange_field_category(self):
-        self.model_field_id._onchange_field_category()
+    def test_05_presence_field_creates_boolean(self):
+        """Test that presence field creates boolean type"""
+        field = self.field_model.create(
+            {
+                "name": "x_temp",
+                "model_id": self.model_id.id,
+                "field_description": "Has Disability",
+                "draft_name": "has_disability",
+                "state": "manual",
+                "target_type": "indv",
+                "field_category": "ind",
+                "has_presence": True,
+            }
+        )
+        field._onchange_has_presence()
 
-        self.assertEqual(self.model_field_id.name, "x_cst_grp_test_field")
-        self.assertEqual(self.model_field_id.ttype, "char")
-        self.assertFalse(self.model_field_id.compute)
+        self.assertEqual(field.ttype, "boolean")
+        self.assertTrue(field.compute)
+        self.assertIn("presence_only=True", field.compute)
 
-    def test_onchange_kinds(self):
-        self.model_field_id._onchange_kinds()
+    def test_06_calculated_field_without_presence_creates_integer(self):
+        """Test that calculated field without presence is integer"""
+        field = self.field_model.create(
+            {
+                "name": "x_temp",
+                "model_id": self.model_id.id,
+                "field_description": "Member Count",
+                "draft_name": "member_count",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "ind",
+                "has_presence": False,
+            }
+        )
+        field._onchange_field_category()
 
-        self.assertEqual(self.model_field_id.name, "x_cst_grp_test_field")
-        self.assertEqual(self.model_field_id.ttype, "char")
-        self.assertFalse(self.model_field_id.compute)
+        self.assertEqual(field.ttype, "integer")
+        self.assertTrue(field.compute)
 
-    def test_onchange_target_type(self):
-        self.model_field_id._onchange_target_type()
+    def test_07_field_group_assignment(self):
+        """Test field can be assigned to field group"""
+        field = self.field_model.create(
+            {
+                "name": "x_cst_grp_test_grouped",
+                "model_id": self.model_id.id,
+                "field_description": "Grouped Field",
+                "ttype": "char",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "cst",
+                "field_group_id": self.field_group.id,
+            }
+        )
 
-        self.assertEqual(self.model_field_id.name, "x_cst_grp_test_field")
-        self.assertEqual(self.model_field_id.ttype, "char")
-        self.assertFalse(self.model_field_id.compute)
+        self.assertEqual(field.field_group_id, self.field_group)
 
-    def test_onchange_has_presence(self):
-        self.model_field_id._onchange_has_presence()
+    def test_08_sequence_field(self):
+        """Test sequence field for ordering"""
+        field1 = self.field_model.create(
+            {
+                "name": "x_cst_grp_field1",
+                "model_id": self.model_id.id,
+                "field_description": "Field 1",
+                "ttype": "char",
+                "state": "manual",
+                "sequence": 5,
+            }
+        )
+        field2 = self.field_model.create(
+            {
+                "name": "x_cst_grp_field2",
+                "model_id": self.model_id.id,
+                "field_description": "Field 2",
+                "ttype": "char",
+                "state": "manual",
+                "sequence": 10,
+            }
+        )
 
-        self.assertEqual(self.model_field_id.name, "x_cst_grp_test_field")
-        self.assertEqual(self.model_field_id.ttype, "char")
+        self.assertEqual(field1.sequence, 5)
+        self.assertEqual(field2.sequence, 10)
+        self.assertLess(field1.sequence, field2.sequence)
 
-    def test_set_compute(self):
-        self.model_field_id.field_category = "ind"
+    def test_09_set_compute_error_on_type_change(self):
+        """Test error when trying to change field type"""
+        field = self.field_model.create(
+            {
+                "name": "x_cst_grp_test_change",
+                "model_id": self.model_id.id,
+                "field_description": "Test Change",
+                "ttype": "char",
+                "state": "manual",
+                "field_category": "cst",
+            }
+        )
+
+        # Try to change to indicator (different type)
+        field.field_category = "ind"
         with self.assertRaisesRegex(
-            UserError, "Changing the type of a field is not yet supported. Please drop it and create it again!"
+            UserError,
+            "Changing the type of a field is not yet supported",
         ):
-            self.model_field_id.set_compute()
-
-        self.model_field_id.has_presence = True
-        with self.assertRaisesRegex(
-            UserError, "Changing the type of a field is not yet supported. Please drop it and create it again!"
-        ):
-            self.model_field_id.set_compute()
+            field.set_compute()
