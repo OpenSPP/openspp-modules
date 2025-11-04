@@ -72,7 +72,12 @@ class TestPartnerSearch(TransactionCase):
             }
         )
 
-        # Get or create search field configurations
+        # Get predefined search field configurations
+        cls.search_field_name = cls.env.ref("spp_registry_search.registry_search_field_name")
+        cls.search_field_email = cls.env.ref("spp_registry_search.registry_search_field_email")
+        cls.search_field_phone = cls.env.ref("spp_registry_search.registry_search_field_phone")
+
+        # Get model fields for reference
         cls.name_field = cls.env["ir.model.fields"].search(
             [("model", "=", "res.partner"), ("name", "=", "name")], limit=1
         )
@@ -83,87 +88,53 @@ class TestPartnerSearch(TransactionCase):
             [("model", "=", "res.partner"), ("name", "=", "phone")], limit=1
         )
 
-    def tearDown(self):
-        """Clean up search field configurations created during each test"""
-        super().tearDown()
-        # Delete all search field configurations to avoid constraint violations
-        search_fields = self.env["spp.partner.search.field"].search([])
-        search_fields.unlink()
-
     def test_01_search_field_configuration(self):
-        """Test creating and managing search field configurations"""
-        search_field = self.env["spp.partner.search.field"].create(
-            {
-                "name": "Test Name Field",
-                "field_id": self.name_field.id,
-                "target_type": "both",
-                "sequence": 100,
-                "active": True,
-            }
-        )
+        """Test predefined search field configuration"""
+        # Use predefined name search field
+        search_field = self.search_field_name
 
         self.assertTrue(search_field.exists())
         self.assertEqual(search_field.field_name, "name")
         self.assertEqual(search_field.field_type, "char")
         self.assertEqual(search_field.target_type, "both")
+        self.assertTrue(search_field.active)
 
     def test_02_get_searchable_fields(self):
         """Test retrieving searchable fields"""
-        # Create test fields with different target types
-        self.env["spp.partner.search.field"].create(
-            {
-                "name": "Name",
-                "field_id": self.name_field.id,
-                "target_type": "both",
-                "sequence": 10,
-                "active": True,
-            }
-        )
-        self.env["spp.partner.search.field"].create(
-            {
-                "name": "Email",
-                "field_id": self.email_field.id,
-                "target_type": "individual",
-                "sequence": 20,
-                "active": True,
-            }
-        )
+        # Predefined fields use "both" target type
+        # Temporarily change email field to "individual" for testing
+        original_target = self.search_field_email.target_type
+        self.search_field_email.write({"target_type": "individual"})
 
-        # Test getting all fields
-        fields = self.env["res.partner"].get_searchable_fields()
-        self.assertIsInstance(fields, list)
-        self.assertTrue(len(fields) >= 2)
+        try:
+            # Test getting all fields
+            fields = self.env["res.partner"].get_searchable_fields()
+            self.assertIsInstance(fields, list)
+            self.assertTrue(len(fields) >= 2)
 
-        # Test getting individual fields only
-        individual_fields = self.env["res.partner"].get_searchable_fields("individual")
-        self.assertTrue(len(individual_fields) >= 2)  # both + individual
+            # Test getting individual fields only
+            individual_fields = self.env["res.partner"].get_searchable_fields("individual")
+            self.assertTrue(len(individual_fields) >= 2)  # both + individual
 
-        # Test getting group fields only
-        group_fields = self.env["res.partner"].get_searchable_fields("group")
-        self.assertTrue(len(group_fields) >= 1)  # only "both" fields
+            # Test getting group fields only
+            group_fields = self.env["res.partner"].get_searchable_fields("group")
+            self.assertTrue(len(group_fields) >= 1)  # only "both" fields
 
-        # Check field structure
-        if fields:
-            field = fields[0]
-            self.assertIn("id", field)
-            self.assertIn("name", field)
-            self.assertIn("field_name", field)
-            self.assertIn("field_type", field)
-            self.assertIn("target_type", field)
+            # Check field structure
+            if fields:
+                field = fields[0]
+                self.assertIn("id", field)
+                self.assertIn("name", field)
+                self.assertIn("field_name", field)
+                self.assertIn("field_type", field)
+                self.assertIn("target_type", field)
+        finally:
+            # Restore original target type
+            self.search_field_email.write({"target_type": original_target})
 
     def test_03_search_by_name(self):
         """Test searching partners by name"""
-        # Create search field configuration
-        self.env["spp.partner.search.field"].create(
-            {
-                "name": "Name",
-                "field_id": self.name_field.id,
-                "target_type": "both",
-                "sequence": 10,
-                "active": True,
-            }
-        )
-
+        # Use predefined name search field (already active)
         # Search for partial name (individuals)
         partner_ids = self.env["res.partner"].search_by_field("name", "Test Partner", is_group=False)
 
@@ -179,17 +150,7 @@ class TestPartnerSearch(TransactionCase):
 
     def test_04_search_by_email(self):
         """Test searching partners by email"""
-        # Create search field configuration
-        self.env["spp.partner.search.field"].create(
-            {
-                "name": "Email",
-                "field_id": self.email_field.id,
-                "target_type": "both",
-                "sequence": 20,
-                "active": True,
-            }
-        )
-
+        # Use predefined email search field (already active)
         # Search for specific email (individuals)
         partner_ids = self.env["res.partner"].search_by_field("email", "alpha@test.com", is_group=False)
 
@@ -200,17 +161,7 @@ class TestPartnerSearch(TransactionCase):
 
     def test_05_search_by_phone(self):
         """Test searching partners by phone"""
-        # Create search field configuration
-        self.env["spp.partner.search.field"].create(
-            {
-                "name": "Phone",
-                "field_id": self.phone_field.id,
-                "target_type": "both",
-                "sequence": 30,
-                "active": True,
-            }
-        )
-
+        # Use predefined phone search field (already active)
         # Search for specific phone (individuals)
         partner_ids = self.env["res.partner"].search_by_field("phone", "+1234567890", is_group=False)
 
@@ -220,16 +171,7 @@ class TestPartnerSearch(TransactionCase):
 
     def test_06_search_empty_value(self):
         """Test searching with empty value - should return all matching records"""
-        self.env["spp.partner.search.field"].create(
-            {
-                "name": "Name",
-                "field_id": self.name_field.id,
-                "target_type": "both",
-                "sequence": 10,
-                "active": True,
-            }
-        )
-
+        # Use predefined name search field (already active)
         # Search with empty value returns all active registrant individuals (search all)
         results = self.env["res.partner"].search_by_field("name", "", is_group=False)
         # Should return all 3 individual registrants (partner_1, partner_2, partner_3)
@@ -246,36 +188,23 @@ class TestPartnerSearch(TransactionCase):
 
     def test_08_search_inactive_field(self):
         """Test searching with inactive field configuration"""
-        # Create inactive search field configuration
-        self.env["spp.partner.search.field"].create(
-            {
-                "name": "Name",
-                "field_id": self.name_field.id,
-                "target_type": "both",
-                "sequence": 10,
-                "active": False,
-            }
-        )
+        # Temporarily deactivate predefined name field
+        original_active = self.search_field_name.active
+        self.search_field_name.write({"active": False})
 
-        # Search should not work for inactive field
-        results = self.env["res.partner"].search_by_field("name", "Test Partner", is_group=False)
-        self.assertEqual(len(results), 0)
+        try:
+            # Search should not work for inactive field
+            results = self.env["res.partner"].search_by_field("name", "Test Partner", is_group=False)
+            self.assertEqual(len(results), 0)
+        finally:
+            # Restore original active state
+            self.search_field_name.write({"active": original_active})
 
     @mute_logger("odoo.sql_db")
     def test_09_unique_field_constraint(self):
         """Test unique field per company constraint"""
-        # Create first search field
-        self.env["spp.partner.search.field"].create(
-            {
-                "name": "Name",
-                "field_id": self.name_field.id,
-                "target_type": "both",
-                "sequence": 10,
-                "active": True,
-            }
-        )
-
-        # Try to create duplicate - should fail with IntegrityError
+        # Predefined name field already exists
+        # Try to create duplicate of the same field - should fail with IntegrityError
         with self.assertRaises(IntegrityError), self.cr.savepoint():
             self.env["spp.partner.search.field"].create(
                 {
@@ -289,19 +218,12 @@ class TestPartnerSearch(TransactionCase):
 
     def test_10_name_get(self):
         """Test custom name_get method"""
-        search_field = self.env["spp.partner.search.field"].create(
-            {
-                "name": "Test Field",
-                "field_id": self.name_field.id,
-                "target_type": "both",
-                "sequence": 10,
-                "active": True,
-            }
-        )
+        # Use predefined name search field
+        search_field = self.search_field_name
 
         name_get_result = search_field.name_get()
         self.assertEqual(len(name_get_result), 1)
-        self.assertIn("Test Field", name_get_result[0][1])
+        self.assertIn("Name", name_get_result[0][1])
         self.assertIn("(name)", name_get_result[0][1])
 
     def test_11_is_registrant_filter(self):
@@ -316,17 +238,7 @@ class TestPartnerSearch(TransactionCase):
             }
         )
 
-        # Create search field configuration
-        self.env["spp.partner.search.field"].create(
-            {
-                "name": "Name",
-                "field_id": self.name_field.id,
-                "target_type": "both",
-                "sequence": 10,
-                "active": True,
-            }
-        )
-
+        # Use predefined name search field (already active)
         # Search should not return non-registrant partners
         partner_ids = self.env["res.partner"].search_by_field("name", "Non Registrant", is_group=False)
         self.assertNotIn(non_registrant.id, partner_ids)
