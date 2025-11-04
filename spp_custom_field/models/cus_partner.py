@@ -156,15 +156,17 @@ class OpenSPPResPartner(models.Model):
                                 "div",
                                 {"class": "col-12 col-lg-6"},
                             )
-                            # Add group label/separator
-                            group_separator = etree.SubElement(
+                            # Add group label/title
+                            group_label_div = etree.SubElement(
                                 group_col,
-                                "separator",
-                                {
-                                    "string": group_record.name,
-                                    "colspan": "2",
-                                },
+                                "div",
+                                {"class": "o_horizontal_separator mt-2 mb-3"},
                             )
+                            group_label = etree.SubElement(
+                                group_label_div,
+                                "strong",
+                            )
+                            group_label.text = group_record.name
                             # Create fields container
                             group_div = etree.SubElement(
                                 group_col, "div", {"class": "row mt16 o_settings_container"}
@@ -203,15 +205,17 @@ class OpenSPPResPartner(models.Model):
                                 "div",
                                 {"class": "col-12 col-lg-6"},
                             )
-                            # Add group label/separator
-                            group_separator = etree.SubElement(
+                            # Add group label/title
+                            group_label_div = etree.SubElement(
                                 group_col,
-                                "separator",
-                                {
-                                    "string": group_record.name,
-                                    "colspan": "2",
-                                },
+                                "div",
+                                {"class": "o_horizontal_separator mt-2 mb-3"},
                             )
+                            group_label = etree.SubElement(
+                                group_label_div,
+                                "strong",
+                            )
+                            group_label.text = group_record.name
                             # Create fields container
                             group_div = etree.SubElement(
                                 group_col, "div", {"class": "row mt16 o_settings_container"}
