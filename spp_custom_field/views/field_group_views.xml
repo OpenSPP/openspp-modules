@@ -1,0 +1,65 @@
+<odoo>
+    <!-- Field Group Tree View -->
+    <record id="view_field_group_tree" model="ir.ui.view">
+        <field name="name">spp.custom.field.group.tree</field>
+        <field name="model">spp.custom.field.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="description" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Field Group Form View -->
+    <record id="view_field_group_form" model="ir.ui.view">
+        <field name="name">spp.custom.field.group.form</field>
+        <field name="model">spp.custom.field.group</field>
+        <field name="arch" type="xml">
+            <form string="Field Group">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="sequence" />
+                        </group>
+                        <group>
+                            <field name="active" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Field Group Action -->
+    <record id="action_field_group" model="ir.actions.act_window">
+        <field name="name">Field Groups</field>
+        <field name="res_model">spp.custom.field.group</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Field Group
+            </p>
+            <p>
+                Field groups help organize custom fields in the user interface.
+                Fields can be assigned to groups for better visual organization.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item - Will be placed under Custom Fields parent if spp_custom_fields_ui is installed -->
+    <menuitem
+        id="menu_field_group"
+        name="Field Groups"
+        action="action_field_group"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="34"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+</odoo>

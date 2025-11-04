@@ -55,7 +55,55 @@ class OpenSPPResPartner(models.Model):
             modifiers = {"readonly": True}
             new_field.set("modifiers", json.dumps(modifiers))
 
-    def _get_view(self, view_id=None, view_type="form", **options):
+    def _group_fields_by_group(self, fields_list):
+        """
+        Group fields by their field_group_id and sort by sequence.
+        Returns a list of tuples (group_record, fields_in_group).
+        Fields without a group are returned with group_record=None.
+        """
+        from collections import defaultdict
+
+        grouped = defaultdict(list)
+
+        # Check if field_group_id exists on the model
+        has_group_field = hasattr(fields_list[0], "field_group_id") if fields_list else False
+        has_sequence_field = hasattr(fields_list[0], "sequence") if fields_list else False
+
+        for field in fields_list:
+            group_id = None
+            if has_group_field and field.field_group_id:
+                group_id = field.field_group_id.id
+            grouped[group_id].append(field)
+
+        # Sort fields within each group by sequence
+        for group_id in grouped:
+            if has_sequence_field:
+                grouped[group_id] = sorted(grouped[group_id], key=lambda f: (f.sequence, f.field_description))
+            else:
+                grouped[group_id] = sorted(grouped[group_id], key=lambda f: f.field_description)
+
+        # Get group records and sort groups by sequence
+        result = []
+        group_ids = [gid for gid in grouped.keys() if gid is not None]
+        if group_ids and "spp.custom.field.group" in self.env:
+            try:
+                group_records = self.env["spp.custom.field.group"].browse(group_ids)
+                group_records = group_records.sorted(key=lambda g: g.sequence)
+                for group in group_records:
+                    result.append((group, grouped[group.id]))
+            except KeyError:
+                # Model doesn't exist, treat all fields as ungrouped
+                _logger.warning("spp.custom.field.group model not found, ignoring field groups")
+                if None in grouped:
+                    result.append((None, grouped[None]))
+
+        # Add fields without a group at the end
+        if None in grouped:
+            result.append((None, grouped[None]))
+
+        return result
+
+    def _get_view(self, view_id=None, view_type="form", **options):  # noqa: C901
         arch, view = super()._get_view(view_id, view_type, **options)
 
         if view_type == "form":
@@ -69,7 +117,7 @@ class OpenSPPResPartner(models.Model):
 
             model_fields_id = self.env["ir.model.fields"].search(
                 [("model_id", "=", "res.partner")],
-                order="ttype, field_description",
+                order="sequence, ttype, field_description",
             )
             if basic_info_page:
                 if action_id.context:
@@ -79,22 +127,85 @@ class OpenSPPResPartner(models.Model):
                 custom_page = etree.Element("page", {"string": "Additional Details", "name": "additional_details"})
                 indicators_page = etree.Element("page", {"string": "Indicators", "name": "indicators"})
 
-                custom_div = etree.SubElement(custom_page, "div", {"class": "row mt16 o_settings_container"})
-                indicators_div = etree.SubElement(indicators_page, "div", {"class": "row mt16 o_settings_container"})
+                # Separate custom and indicator fields
+                custom_fields = []
+                indicator_fields = []
+
                 for rec in model_fields_id:
                     els = rec.name.split("_")
                     if len(els) >= 3 and (els[2] == "grp" and not is_group or els[2] == "indv" and is_group):
                         continue
 
                     if len(els) >= 2 and els[1] == "cst":
-                        self.create_field_element(custom_div, rec)
-
+                        custom_fields.append(rec)
                     elif len(els) >= 2 and els[1] == "ind":
-                        self.create_field_element(indicators_div, rec, is_ind=True)
+                        indicator_fields.append(rec)
 
-                if custom_div.getchildren():
+                # Process custom fields with grouping
+                if custom_fields:
+                    grouped_custom_fields = self._group_fields_by_group(custom_fields)
+                    for group_record, fields_in_group in grouped_custom_fields:
+                        if group_record:
+                            # Create a group tag with the group name
+                            group_element = etree.SubElement(
+                                custom_page,
+                                "group",
+                                {"string": group_record.name, "name": f"group_{group_record.id}"},
+                            )
+                            group_div = etree.SubElement(
+                                group_element, "div", {"class": "row mt16 o_settings_container"}
+                            )
+                            for field in fields_in_group:
+                                self.create_field_element(group_div, field)
+                        else:
+                            # Fields without a group go directly in the page
+                            if not custom_page.xpath(
+                                ".//div[@class='row mt16 o_settings_container' and not(parent::group)]"
+                            ):
+                                custom_div = etree.SubElement(
+                                    custom_page, "div", {"class": "row mt16 o_settings_container"}
+                                )
+                            else:
+                                custom_div = custom_page.xpath(
+                                    ".//div[@class='row mt16 o_settings_container' and not(parent::group)]"
+                                )[0]
+                            for field in fields_in_group:
+                                self.create_field_element(custom_div, field)
+
+                # Process indicator fields with grouping
+                if indicator_fields:
+                    grouped_indicator_fields = self._group_fields_by_group(indicator_fields)
+                    for group_record, fields_in_group in grouped_indicator_fields:
+                        if group_record:
+                            # Create a group tag with the group name
+                            group_element = etree.SubElement(
+                                indicators_page,
+                                "group",
+                                {"string": group_record.name, "name": f"group_{group_record.id}"},
+                            )
+                            group_div = etree.SubElement(
+                                group_element, "div", {"class": "row mt16 o_settings_container"}
+                            )
+                            for field in fields_in_group:
+                                self.create_field_element(group_div, field, is_ind=True)
+                        else:
+                            # Fields without a group go directly in the page
+                            if not indicators_page.xpath(
+                                ".//div[@class='row mt16 o_settings_container' and not(parent::group)]"
+                            ):
+                                indicators_div = etree.SubElement(
+                                    indicators_page, "div", {"class": "row mt16 o_settings_container"}
+                                )
+                            else:
+                                indicators_div = indicators_page.xpath(
+                                    ".//div[@class='row mt16 o_settings_container' and not(parent::group)]"
+                                )[0]
+                            for field in fields_in_group:
+                                self.create_field_element(indicators_div, field, is_ind=True)
+
+                if custom_page.getchildren():
                     basic_info_page[0].addnext(custom_page)
-                if indicators_div.getchildren():
+                if indicators_page.getchildren():
                     basic_info_page[0].addnext(indicators_page)
 
                 arch = doc

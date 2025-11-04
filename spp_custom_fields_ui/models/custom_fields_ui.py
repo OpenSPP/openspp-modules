@@ -1,6 +1,6 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 FIELD_TYPES = [(key, key) for key in sorted(fields.Field.by_type)]
 
@@ -20,39 +20,6 @@ class OpenSPPCustomFieldsUI(models.Model):
     draft_name = fields.Char(string="Field Draft Name", index=True)
     kinds = fields.Many2many("g2p.group.membership.kind", string="Kind")
     has_presence = fields.Boolean("Presence", default=False)
-
-    def open_custom_fields_tree(self):
-        """
-        This method is used to open custom field UI Tree.
-        :param model_id: The Model ID.
-        :param model: The Model.
-        :return: This will return the action based on the params.
-        """
-        res_model = self.env["ir.model"].search([("model", "=", "res.partner")])
-        action = {
-            "name": _("Custom Fields"),
-            "type": "ir.actions.act_window",
-            "res_model": "ir.model.fields",
-            "context": {
-                "default_model_id": res_model.id,
-                "default_model": res_model.model,
-                # "search_default_enrolled_state": 1,
-            },
-            "view_mode": "tree, form",
-            "views": [
-                (
-                    self.env.ref("spp_custom_fields_ui.view_custom_fields_ui_tree").id,
-                    "tree",
-                ),
-                (
-                    self.env.ref("spp_custom_fields_ui.view_custom_fields_ui_form").id,
-                    "form",
-                ),
-            ],
-            # "view_id": self.env.ref("spp_custom_fields_ui.view_custom_fields_ui_tree").id,
-            "domain": [("model_id", "=", res_model.id), ("state", "=", "manual")],
-        }
-        return action
 
     @api.depends("field_category", "target_type")
     def _compute_prefix(self):

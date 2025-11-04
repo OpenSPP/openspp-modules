@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_spp_custom_field_group_user,spp.custom.field.group.user,model_spp_custom_field_group,base.group_user,1,0,0,0
+access_spp_custom_field_group_admin,spp.custom.field.group.admin,model_spp_custom_field_group,base.group_system,1,1,1,1

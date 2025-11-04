@@ -11,7 +11,10 @@
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": ["base", "g2p_registry_base"],
-    "data": [],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/field_group_views.xml",
+    ],
     "assets": {},
     "demo": [],
     "images": [],
