@@ -57,17 +57,16 @@ class TestFarmerRegistryDemoDataGenerator(TransactionCase):
 
     def test_01_season_date_validation(self):
         """Test season date validation"""
-        generator = self.env["spp.demo.data.generator"].create(
-            {
-                "name": "Test Season Validation",
-                "locale_origin": self.test_country.id,
-                "season_start_date": datetime.date(2024, 12, 31),
-                "season_end_date": datetime.date(2024, 1, 1),
-            }
-        )
 
         with self.assertRaises(ValidationError):
-            generator._check_season_dates()
+            self.env["spp.demo.data.generator"].create(
+                {
+                    "name": "Test Season Validation",
+                    "locale_origin": self.test_country.id,
+                    "season_start_date": datetime.date(2024, 12, 31),
+                    "season_end_date": datetime.date(2024, 1, 1),
+                }
+            )
 
     def test_02_farmer_registry_specific_fields(self):
         """Test farmer registry specific fields exist"""
