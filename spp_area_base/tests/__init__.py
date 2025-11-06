@@ -3,4 +3,5 @@
 from . import common
 from . import test_area
 from . import test_area_import
+from . import test_area_import_integration
 from . import test_area_import_raw

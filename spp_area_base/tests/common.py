@@ -16,7 +16,15 @@ class AreaImportBaseTestMixin(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Greater than or equal to 400 rows
+        # Set context to avoid job queue delay for faster tests
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                test_queue_job_no_delay=True,
+            )
+        )
+
+        # Greater than or equal to 400 rows (Iraq file)
         xls_file = None
         xls_file_name = None
 
@@ -33,7 +41,7 @@ class AreaImportBaseTestMixin(TransactionCase):
             }
         )
 
-        # Less than 400 rows
+        # Less than 400 rows (Palestine file)
         xls_file_2 = None
         xls_file_name_2 = None
 
