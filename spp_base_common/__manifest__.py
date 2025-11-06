@@ -13,6 +13,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "emjay0921"],
     "depends": [
         "base",
+        "queue_job",
         "theme_openspp_muk",
         "spp_user_roles",
         "spp_area_base",
@@ -29,6 +30,7 @@
         "security/ir.model.access.csv",
         "views/main_view.xml",
         "views/phone_validation_view.xml",
+        "views/queue_job_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

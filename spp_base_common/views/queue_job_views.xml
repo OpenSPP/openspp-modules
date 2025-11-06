@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Part of OpenSPP. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+
+    <!-- Extend queue.job form view to show res_id and res_model -->
+    <record id="view_queue_job_form_inherit" model="ir.ui.view">
+        <field name="name">queue.job.form.inherit</field>
+        <field name="model">queue.job</field>
+        <field name="inherit_id" ref="queue_job.view_queue_job_form" />
+        <field name="arch" type="xml">
+            <!-- Add res_id and res_model after model_name -->
+            <field name="channel" position="after">
+                <field name="res_model" />
+                <field name="res_id" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Extend queue.job tree view to show res_id and res_model -->
+    <record id="view_queue_job_tree_inherit" model="ir.ui.view">
+        <field name="name">queue.job.tree.inherit</field>
+        <field name="model">queue.job</field>
+        <field name="inherit_id" ref="queue_job.view_queue_job_tree" />
+        <field name="arch" type="xml">
+            <!-- Add res_model and res_id after model_name -->
+            <field name="model_name" position="after">
+                <field name="res_model" optional="show" />
+                <field name="res_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Extend queue.job search view to add res_id and res_model filters -->
+    <record id="view_queue_job_search_inherit" model="ir.ui.view">
+        <field name="name">queue.job.search.inherit</field>
+        <field name="model">queue.job</field>
+        <field name="inherit_id" ref="queue_job.view_queue_job_search" />
+        <field name="arch" type="xml">
+            <!-- Add res_model and res_id as searchable fields -->
+            <field name="model_name" position="after">
+                <field name="res_model" />
+                <field name="res_id" />
+            </field>
+            <!-- Add group by for res_model -->
+            <filter name="group_by_model_name" position="after">
+                <filter
+                    name="group_by_res_model"
+                    string="Creator Model"
+                    context="{'group_by': 'res_model'}"
+                />
+            </filter>
+        </field>
+    </record>
+
+</odoo>
