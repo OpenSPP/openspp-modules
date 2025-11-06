@@ -111,10 +111,11 @@ class OpenSPPAreaImport(models.Model):
 
             row_time = time.time() - row_start
             if (idx + 1) % 10 == 0:  # Log every 10 rows
+                coordinates_status = "present" if latitude and longitude else "absent"
                 _logger.info(
                     f"Area Import (GIS): Processed {idx + 1}/{len(rows)} rows from batch "
                     f"{json_file_record.batch_number} (last row: {row_time:.4f}s, "
-                    f"translations: {len(translations)}, coordinates: {'present' if latitude and longitude else 'absent'})"
+                    f"translations: {len(translations)}, coordinates: {coordinates_status})"
                 )
 
         batch_time = time.time() - import_start
