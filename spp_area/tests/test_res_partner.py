@@ -7,6 +7,13 @@ class ResPartnerTest(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        # Set context to avoid job queue delay for faster tests
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                test_queue_job_no_delay=True,
+            )
+        )
         cls._create_test_data()
 
     @classmethod
