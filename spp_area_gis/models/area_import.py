@@ -114,7 +114,7 @@ class OpenSPPAreaImport(models.Model):
                 _logger.info(
                     f"Area Import (GIS): Processed {idx + 1}/{len(rows)} rows from batch "
                     f"{json_file_record.batch_number} (last row: {row_time:.4f}s, "
-                    f"translations: {len(translations)}, lat: {latitude}, lon: {longitude})"
+                    f"translations: {len(translations)}, coordinates: {'present' if latitude and longitude else 'absent'})"
                 )
 
         batch_time = time.time() - import_start
