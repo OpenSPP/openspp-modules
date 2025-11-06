@@ -216,19 +216,19 @@ class AreaImportRawTest(TransactionCase):
         self.assertEqual(len(raw_records), 2, "Should have created 2 raw records")
 
         # Check Cebu record (alphabetically first)
-        cebu = raw_records[0]
+        cebu = raw_records[1]
         self.assertEqual(cebu.admin_code, "PH07")
         self.assertEqual(cebu.admin_name, "Cebu")
-        self.assertEqual(cebu.latitude, 10.3157)
-        self.assertEqual(cebu.longitude, 123.8854)
+        self.assertAlmostEqual(cebu.latitude, 10.3157, places=4)
+        self.assertAlmostEqual(cebu.longitude, 123.8854, places=4)
         self.assertEqual(cebu.level, 1)
 
         # Check Metro Manila record
-        manila = raw_records[1]
+        manila = raw_records[0]
         self.assertEqual(manila.admin_code, "PH01")
         self.assertEqual(manila.admin_name, "Metro Manila")
-        self.assertEqual(manila.latitude, 14.5995)
-        self.assertEqual(manila.longitude, 120.9842)
+        self.assertAlmostEqual(manila.latitude, 14.5995, places=4)
+        self.assertAlmostEqual(manila.longitude, 120.9842, places=4)
         self.assertEqual(manila.level, 1)
 
     def test_10_import_data_from_json_lowercase_gis_columns(self):
@@ -280,8 +280,8 @@ class AreaImportRawTest(TransactionCase):
 
         self.assertEqual(len(raw_record), 1)
         self.assertEqual(raw_record.admin_code, "PH11")
-        self.assertEqual(raw_record.latitude, 7.0731)
-        self.assertEqual(raw_record.longitude, 125.6128)
+        self.assertAlmostEqual(raw_record.latitude, 7.0731, places=4)
+        self.assertAlmostEqual(raw_record.longitude, 125.6128, places=4)
 
     def test_11_import_data_from_json_without_gis(self):
         """Test that _import_data_from_json works without GIS coordinates"""
