@@ -74,13 +74,8 @@ class SPPBaseImport(models.TransientModel):
         if dryrun and batch_size > 0:
             # Convert import data first to get total record count
             try:
-                # Check if the parent module has _convert_import_data method
-                if hasattr(super(), "_convert_import_data"):
-                    input_file_data, import_fields = self._convert_import_data(fields, options)
-                else:
-                    # Fallback to standard data loading
-                    input_file_data = self._read_file(options)
-
+                # Use the parent's _convert_import_data method
+                input_file_data, import_fields = self._convert_import_data(fields, options)
                 total_records = len(input_file_data)
 
                 # Calculate batch information
@@ -110,43 +105,3 @@ class SPPBaseImport(models.TransientModel):
                 result["batch_info"] = options["_batch_info"]
 
         return result
-
-    def _read_file(self, options):
-        """
-        Helper method to read and parse the import file.
-
-        Returns:
-            list: Parsed data rows
-        """
-        # This is a simplified version - adjust based on your actual file reading logic
-        if not self.file:
-            return []
-
-        # Use Odoo's built-in CSV parsing
-
-        import base64
-        import csv
-        from io import StringIO
-
-        decoded_data = base64.b64decode(self.file)
-        # Handle empty string encoding (fallback to utf-8)
-        encoding = options.get("encoding") or "utf-8"
-
-        try:
-            data_string = decoded_data.decode(encoding)
-        except UnicodeDecodeError:
-            data_string = decoded_data.decode("latin-1")
-
-        # Parse CSV
-        separator = options.get("separator") or ","
-        quoting = options.get("quoting") or '"'
-
-        reader = csv.reader(StringIO(data_string), delimiter=separator, quotechar=quoting)
-
-        data = list(reader)
-
-        # Remove header if present
-        if options.get("headers", False):
-            data = data[1:]
-
-        return data
