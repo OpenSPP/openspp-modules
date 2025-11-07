@@ -15,7 +15,7 @@ import {_t} from "@web/core/l10n/translation";
 patch(BaseImportModel.prototype, {
     /**
      * Override executeImport to process all batches including remainder.
-     * 
+     *
      * Continue until backend signals completion (nextrow === 0).
      */
     async executeImport(isTest = false, totalSteps, importProgress) {
@@ -27,7 +27,6 @@ patch(BaseImportModel.prototype, {
         // Immediately set progress to initial state to prevent flashing wrong values
         let isResetting = false;
         if (!isTest && this.importOptions.skip > 0) {
-            console.log(`[SPP Base Import] Resetting skip from ${this.importOptions.skip} to 0 for actual import`);
             isResetting = true;
             // Set progress to starting state immediately
             if (importProgress) {
@@ -37,9 +36,8 @@ patch(BaseImportModel.prototype, {
             await this.setOption("skip", 0);
             // Recalculate totalSteps after reset
             totalSteps = this.totalSteps;
-            console.log(`[SPP Base Import] Recalculated totalSteps after reset: ${totalSteps}`);
             // Small delay to ensure UI updates
-            await new Promise(resolve => setTimeout(resolve, 50));
+            await new Promise((resolve) => setTimeout(resolve, 50));
             isResetting = false;
         }
 
@@ -51,37 +49,31 @@ patch(BaseImportModel.prototype, {
             hasError: false,
         };
 
-        console.log(`[SPP Base Import] Starting import - isTest: ${isTest}, totalSteps: ${totalSteps}, startRow: ${startRow}`);
-
         let stepNumber = 0;
         const maxSteps = totalSteps + 2; // Safety limit
-        
+
         // Continue looping until completion (nextrow === 0)
         while (stepNumber < maxSteps) {
             stepNumber++;
-            
+
             // Only honor interruption if error occurred or beyond calculated steps
             if (this.handleInterruption && (importRes.hasError || stepNumber > totalSteps)) {
-                console.log(`[SPP Base Import] Import interrupted at step ${stepNumber}`);
                 if (importRes.hasError || isTest) {
                     importRes.nextrow = startRow;
                     this.setOption("skip", startRow);
                 }
                 break;
             } else if (this.handleInterruption) {
-                console.log(`[SPP Base Import] Ignoring interruption at step ${stepNumber} - continuing`);
                 this.handleInterruption = false; // Reset to continue
             }
 
-            console.log(`[SPP Base Import] Executing step ${stepNumber} of ${totalSteps}`);
-            
             const error = await this._executeImportStep(isTest, importRes);
-            
+
             if (error) {
-                console.error(`[SPP Base Import] Error at step ${stepNumber}:`, error);
                 const errorData = error.data || {};
-                const message = errorData.arguments && (errorData.arguments[1] || errorData.arguments[0])
-                    || _t("An unknown issue occurred during import.");
+                const message =
+                    (errorData.arguments && (errorData.arguments[1] || errorData.arguments[0])) ||
+                    _t("An unknown issue occurred during import.");
 
                 if (error.message) {
                     this._addMessage("danger", [error.message, message]);
@@ -94,7 +86,6 @@ patch(BaseImportModel.prototype, {
             }
 
             const nextrow = importRes.nextrow || 0;
-            console.log(`[SPP Base Import] Step ${stepNumber} completed. Next row: ${nextrow}`);
 
             // Update progress UI (only after reset is complete)
             if (importProgress && !isResetting) {
@@ -106,7 +97,6 @@ patch(BaseImportModel.prototype, {
 
             // Check if import is complete (nextrow === 0)
             if (nextrow === 0) {
-                console.log(`[SPP Base Import] Import complete after ${stepNumber} steps`);
                 break;
             }
         }
@@ -118,14 +108,12 @@ patch(BaseImportModel.prototype, {
                 const totalRecords = this.previewData?.file_length || 10020;
                 if (importRes.nextrow < totalRecords) {
                     // Still have records to process
-                    console.warn(`[SPP Base Import] Stopped with nextrow: ${importRes.nextrow} of ${totalRecords}`);
                     this._addMessage("warning", [
                         _t("Click 'Resume' to proceed, resuming at line %s.", importRes.nextrow + 1),
                         _t("You can test or reload your file before resuming."),
                     ]);
                 } else {
                     // All records processed, clear nextrow
-                    console.log(`[SPP Base Import] Import complete - all ${totalRecords} records processed`);
                     importRes.nextrow = 0;
                     if (isTest) {
                         this._addMessage("info", [_t("Everything seems valid.")]);
@@ -141,37 +129,27 @@ patch(BaseImportModel.prototype, {
         }
 
         this._updateComments(importRes);
-        return { res: importRes };
+        return {res: importRes};
     },
 
     /**
      * Override get totalSteps to use Math.ceil for proper remainder handling.
-     * 
+     *
      * Always calculates based on total file records (not considering skip)
      * to avoid UI showing wrong step counts when resuming or restarting.
      */
     get totalSteps() {
         const limit = this.importOptions.limit || 2000;
-        
+
         // Get total from preview data if available
-        const totalRecords = this.previewData?.file_length || 10020; // fallback
-        
+        const totalRecords = this.previewData?.file_length || 10020; // Fallback
+
         if (!totalRecords || limit <= 0) {
             return 1;
         }
 
         // Always calculate from total records, ignoring skip
         // This ensures consistent step count whether starting fresh or resuming
-        const totalSteps = Math.ceil(totalRecords / limit);
-
-        console.log(
-            `[SPP Base Import] Step calculation - ` +
-                `Total records: ${totalRecords}, ` +
-                `Batch size: ${limit}, ` +
-                `Skip: ${this.importOptions.skip || 0}, ` +
-                `Total steps: ${totalSteps}`
-        );
-
-        return totalSteps;
+        return Math.ceil(totalRecords / limit);
     },
 });
