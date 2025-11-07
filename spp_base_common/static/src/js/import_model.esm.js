@@ -24,9 +24,18 @@ patch(BaseImportModel.prototype, {
         this.importMessages = [];
 
         // Reset skip to 0 when starting actual import (not test)
+        // Hide progress during reset to avoid showing wrong step count
+        let isResetting = false;
         if (!isTest && this.importOptions.skip > 0) {
             console.log(`[SPP Base Import] Resetting skip from ${this.importOptions.skip} to 0 for actual import`);
+            isResetting = true;
+            // Hide progress indicator during reset
+            if (importProgress) {
+                importProgress.step = 0;
+                importProgress.value = 0;
+            }
             await this.setOption("skip", 0);
+            isResetting = false;
         }
 
         const startRow = this.importOptions.skip || 0;
@@ -82,7 +91,8 @@ patch(BaseImportModel.prototype, {
             const nextrow = importRes.nextrow || 0;
             console.log(`[SPP Base Import] Step ${stepNumber} completed. Next row: ${nextrow}`);
 
-            if (importProgress) {
+            // Update progress UI (only after reset is complete)
+            if (importProgress && !isResetting) {
                 importProgress.step = Math.min(stepNumber, totalSteps);
                 importProgress.value = Math.round((100 * Math.min(stepNumber - 1, totalSteps)) / totalSteps);
             }
@@ -116,10 +126,12 @@ patch(BaseImportModel.prototype, {
 
     /**
      * Override get totalSteps to use Math.ceil for proper remainder handling.
+     * 
+     * Always calculates based on total file records (not considering skip)
+     * to avoid UI showing wrong step counts when resuming or restarting.
      */
     get totalSteps() {
         const limit = this.importOptions.limit || 2000;
-        const skip = this.importOptions.skip || 0;
         
         // Get total from preview data if available
         const totalRecords = this.previewData?.file_length || 10020; // fallback
@@ -128,12 +140,15 @@ patch(BaseImportModel.prototype, {
             return 1;
         }
 
+        // Always calculate from total records, ignoring skip
+        // This ensures consistent step count whether starting fresh or resuming
         const totalSteps = Math.ceil(totalRecords / limit);
 
         console.log(
             `[SPP Base Import] Step calculation - ` +
                 `Total records: ${totalRecords}, ` +
                 `Batch size: ${limit}, ` +
+                `Skip: ${this.importOptions.skip || 0}, ` +
                 `Total steps: ${totalSteps}`
         );
 
