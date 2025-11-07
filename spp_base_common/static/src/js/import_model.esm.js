@@ -23,7 +23,13 @@ patch(BaseImportModel.prototype, {
         this._updateComments();
         this.importMessages = [];
 
-        const startRow = this.importOptions.skip;
+        // Reset skip to 0 when starting actual import (not test)
+        if (!isTest && this.importOptions.skip > 0) {
+            console.log(`[SPP Base Import] Resetting skip from ${this.importOptions.skip} to 0 for actual import`);
+            await this.setOption("skip", 0);
+        }
+
+        const startRow = this.importOptions.skip || 0;
         const importRes = {
             ids: [],
             fields: this.columns.map((e) => Boolean(e.fieldInfo) && e.fieldInfo.fieldPath),
@@ -31,7 +37,7 @@ patch(BaseImportModel.prototype, {
             hasError: false,
         };
 
-        console.log(`[SPP Base Import] Starting import - isTest: ${isTest}, totalSteps: ${totalSteps}`);
+        console.log(`[SPP Base Import] Starting import - isTest: ${isTest}, totalSteps: ${totalSteps}, startRow: ${startRow}`);
 
         let stepNumber = 0;
         const maxSteps = totalSteps + 2; // Safety limit
