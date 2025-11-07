@@ -8,7 +8,19 @@
  */
 
 odoo.define("spp_base_common.ImportActionLegacy", function (require) {
-    const DataImport = require("base_import.import");
+    // Try to require base_import, return gracefully if not available
+    let DataImport;
+    try {
+        DataImport = require("base_import.import");
+    } catch (e) {
+        console.log("[SPP Base Import Legacy] base_import.import not available, skipping legacy patch");
+        return;
+    }
+    
+    if (!DataImport) {
+        console.log("[SPP Base Import Legacy] DataImport not found, skipping legacy patch");
+        return;
+    }
 
     /**
      * Override the call_import method to fix totalSteps calculation.
