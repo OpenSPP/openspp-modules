@@ -38,7 +38,8 @@ odoo.define("spp_base_common.ImportActionLegacy", function (require) {
 
             this.importStartTime = Date.now();
             this.stopImport = false;
-            this.totalToImport = this.fileLength - parseInt(this.$("#oe_import_row_start").val());
+            const skipRows = parseInt(this.$("#oe_import_row_start").val()) || 0;
+            this.totalToImport = this.fileLength - skipRows;
             this.batchSize = parseInt(this.$("#oe_import_batch_limit").val() || 0);
             const isBatch = this.batchSize !== 0 && this.totalToImport > this.batchSize;
 
@@ -46,14 +47,19 @@ odoo.define("spp_base_common.ImportActionLegacy", function (require) {
             // This properly handles remainder batches:
             // - 40100 / 2000 = 20.05 → ceil(20.05) = 21 ✓
             // - 40000 / 2000 = 20.0 → ceil(20.0) = 20 ✓
-            // Old approach (Math.floor + 1) would give 21 for both, which is wrong
-            const totalSteps = isBatch ? Math.ceil(this.totalToImport / this.batchSize) : 1;
+            // For resume: calculate based on fileLength, not remaining records
+            const totalRecords = this.fileLength;
+            const totalSteps = isBatch ? Math.ceil(totalRecords / this.batchSize) : 1;
 
             console.log(
                 "[SPP Base Import Legacy] Batch calculation - " +
                     "Total records: " +
+                    totalRecords +
+                    " (" +
                     this.totalToImport +
-                    ", " +
+                    " remaining + " +
+                    skipRows +
+                    " skipped), " +
                     "Batch size: " +
                     this.batchSize +
                     ", " +

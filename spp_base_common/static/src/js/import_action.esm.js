@@ -32,17 +32,21 @@ patch(ImportAction.prototype, {
 
         const totalToImport = this.totalToImport || 0;
         const batchSize = this.importOptions.limit || 2000;
+        const skip = this.importOptions.skip || 0;
 
         if (batchSize <= 0 || totalToImport <= 0) {
             return 1;
         }
 
+        // Calculate total including skipped records (for resume scenarios)
+        const totalRecords = totalToImport + skip;
+        
         // Use Math.ceil to properly include remainder in step count
-        const totalSteps = Math.ceil(totalToImport / batchSize);
+        const totalSteps = Math.ceil(totalRecords / batchSize);
 
         console.log(
             `[SPP Base Import] Batch calculation - ` +
-                `Total records: ${totalToImport}, ` +
+                `Total records: ${totalRecords} (${totalToImport} remaining + ${skip} skipped), ` +
                 `Batch size: ${batchSize}, ` +
                 `Total steps: ${totalSteps}`
         );
