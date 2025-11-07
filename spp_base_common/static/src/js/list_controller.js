@@ -46,7 +46,5 @@ ListController.include({
     },
 });
 
-return ListController;
-
 });
 
