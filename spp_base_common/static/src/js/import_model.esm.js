@@ -94,7 +94,9 @@ patch(BaseImportModel.prototype, {
             // Update progress UI (only after reset is complete)
             if (importProgress && !isResetting) {
                 importProgress.step = Math.min(stepNumber, totalSteps);
-                importProgress.value = Math.round((100 * Math.min(stepNumber - 1, totalSteps)) / totalSteps);
+                // Show progress based on current step being processed, not completed
+                // Step 4 of 6 should show 66.67% (4/6), not 50% (3/6)
+                importProgress.value = Math.round((100 * Math.min(stepNumber, totalSteps)) / totalSteps);
             }
 
             // Check if import is complete (nextrow === 0)
