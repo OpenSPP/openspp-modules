@@ -34,7 +34,7 @@
     "assets": {
         "web.assets_backend": [
             "spp_base_common/static/src/scss/navbar.scss",
-            "spp_base_common/static/src/legacy/js/import_action.js",
+            "spp_base_common/static/src/js/import_model.esm.js",
         ],
         "web._assets_primary_variables": [
             "spp_base_common/static/src/scss/colors.scss",
