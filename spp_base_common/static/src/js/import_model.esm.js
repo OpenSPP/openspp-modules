@@ -5,7 +5,8 @@
  * Override base_import to fix batch import remainder issue.
  *
  * Ensures proper step calculation and that remainder batches are processed
- * automatically without stopping.
+ * automatically without stopping. The loop continues until nextrow === 0
+ * which signals completion, not just for a fixed number of steps.
  */
 
 import {BaseImportModel} from "@base_import/import_model";
@@ -15,6 +16,9 @@ import {_t} from "@web/core/l10n/translation";
 patch(BaseImportModel.prototype, {
     /**
      * Override executeImport to ensure all batches including remainder execute.
+     * 
+     * The loop continues until the backend returns nextrow: 0, which signals
+     * that all records have been processed.
      */
     async executeImport(isTest = false, totalSteps, importProgress) {
         this.handleInterruption = false;
@@ -29,11 +33,17 @@ patch(BaseImportModel.prototype, {
             hasError: false,
         };
 
-        console.log(`[SPP Base Import] Starting import - isTest: ${isTest}, totalSteps: ${totalSteps}, startRow: ${startRow}`);
+        console.log(`[SPP Base Import] Starting import - isTest: ${isTest}, totalSteps: ${totalSteps}, startRow: ${startRow}, fileLength: ${this.fileLength}`);
 
-        for (let i = 1; i <= totalSteps; i++) {
+        let stepNumber = 0;
+        const maxSteps = totalSteps + 2; // Safety limit: allow 2 extra steps beyond calculated
+        
+        // Continue looping until backend signals completion (nextrow === 0) or error
+        while (stepNumber < maxSteps) {
+            stepNumber++;
+            
             if (this.handleInterruption) {
-                console.log(`[SPP Base Import] Import interrupted at step ${i}`);
+                console.log(`[SPP Base Import] Import interrupted at step ${stepNumber}`);
                 if (importRes.hasError || isTest) {
                     importRes.nextrow = startRow;
                     this.setOption("skip", startRow);
@@ -41,11 +51,11 @@ patch(BaseImportModel.prototype, {
                 break;
             }
 
-            console.log(`[SPP Base Import] Executing step ${i} of ${totalSteps}`);
+            console.log(`[SPP Base Import] Executing step ${stepNumber}, skip: ${this.importOptions.skip}`);
             const error = await this._executeImportStep(isTest, importRes);
             
             if (error) {
-                console.error(`[SPP Base Import] Error at step ${i}:`, error);
+                console.error(`[SPP Base Import] Error at step ${stepNumber}:`, error);
                 const errorData = error.data || {};
                 const message = errorData.arguments && (errorData.arguments[1] || errorData.arguments[0])
                     || _t("An unknown issue occurred during import (possibly lost connection, data limit exceeded or memory limits exceeded). Please retry in case the issue is transient. If the issue still occurs, try to split the file rather than import it at once.");
@@ -60,13 +70,23 @@ patch(BaseImportModel.prototype, {
                 break;
             }
 
-            // Log nextrow after each step
-            console.log(`[SPP Base Import] Step ${i} completed. Next row: ${importRes.nextrow || 'complete'}`);
+            const nextrow = importRes.nextrow || 0;
+            console.log(`[SPP Base Import] Step ${stepNumber} completed. Next row: ${nextrow}`);
 
             if (importProgress) {
-                importProgress.step = i;
-                importProgress.value = Math.round((100 * (i - 1)) / totalSteps);
+                importProgress.step = Math.min(stepNumber, totalSteps);
+                importProgress.value = Math.round((100 * Math.min(stepNumber - 1, totalSteps)) / totalSteps);
             }
+
+            // Check if import is complete (nextrow === 0 signals completion)
+            if (nextrow === 0) {
+                console.log(`[SPP Base Import] Import complete after ${stepNumber} steps`);
+                break;
+            }
+        }
+
+        if (stepNumber >= maxSteps) {
+            console.warn(`[SPP Base Import] Reached maximum steps (${maxSteps}), stopping`);
         }
 
         if (!importRes.hasError) {
