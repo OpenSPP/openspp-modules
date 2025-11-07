@@ -5,8 +5,7 @@
  * Override base_import to fix batch import remainder issue.
  *
  * Ensures proper step calculation and that remainder batches are processed
- * automatically without stopping. The loop continues until nextrow === 0
- * which signals completion, not just for a fixed number of steps.
+ * automatically without stopping.
  */
 
 import {BaseImportModel} from "@base_import/import_model";
@@ -17,8 +16,8 @@ patch(BaseImportModel.prototype, {
     /**
      * Override executeImport to ensure all batches including remainder execute.
      * 
-     * The loop continues until the backend returns nextrow: 0, which signals
-     * that all records have been processed.
+     * The loop continues until the backend signals completion (nextrow === 0)
+     * or we've processed all records (nextrow >= fileLength).
      */
     async executeImport(isTest = false, totalSteps, importProgress) {
         this.handleInterruption = false;
@@ -36,22 +35,28 @@ patch(BaseImportModel.prototype, {
         console.log(`[SPP Base Import] Starting import - isTest: ${isTest}, totalSteps: ${totalSteps}, startRow: ${startRow}, fileLength: ${this.fileLength}`);
 
         let stepNumber = 0;
-        const maxSteps = totalSteps + 2; // Safety limit: allow 2 extra steps beyond calculated
+        const maxSteps = totalSteps + 1; // Allow 1 extra step for safety
         
-        // Continue looping until backend signals completion (nextrow === 0) or error
+        // Continue looping until completion
         while (stepNumber < maxSteps) {
             stepNumber++;
             
-            if (this.handleInterruption) {
-                console.log(`[SPP Base Import] Import interrupted at step ${stepNumber}`);
+            // Only honor interruption if there was an error or user explicitly stopped
+            if (this.handleInterruption && (importRes.hasError || stepNumber > totalSteps)) {
+                console.log(`[SPP Base Import] Import interrupted at step ${stepNumber} (hasError: ${importRes.hasError})`);
                 if (importRes.hasError || isTest) {
                     importRes.nextrow = startRow;
                     this.setOption("skip", startRow);
                 }
                 break;
+            } else if (this.handleInterruption) {
+                console.log(`[SPP Base Import] Ignoring interruption at step ${stepNumber} - continuing to process remaining records`);
+                this.handleInterruption = false; // Reset to continue
             }
 
-            console.log(`[SPP Base Import] Executing step ${stepNumber}, skip: ${this.importOptions.skip}`);
+            const currentSkip = this.importOptions.skip || 0;
+            console.log(`[SPP Base Import] Executing step ${stepNumber}, skip: ${currentSkip}, remaining: ${this.fileLength - currentSkip}`);
+            
             const error = await this._executeImportStep(isTest, importRes);
             
             if (error) {
@@ -71,22 +76,24 @@ patch(BaseImportModel.prototype, {
             }
 
             const nextrow = importRes.nextrow || 0;
-            console.log(`[SPP Base Import] Step ${stepNumber} completed. Next row: ${nextrow}`);
+            console.log(`[SPP Base Import] Step ${stepNumber} completed. Next row: ${nextrow}, fileLength: ${this.fileLength}`);
 
             if (importProgress) {
                 importProgress.step = Math.min(stepNumber, totalSteps);
                 importProgress.value = Math.round((100 * Math.min(stepNumber - 1, totalSteps)) / totalSteps);
             }
 
-            // Check if import is complete (nextrow === 0 signals completion)
-            if (nextrow === 0) {
-                console.log(`[SPP Base Import] Import complete after ${stepNumber} steps`);
+            // Check if import is complete:
+            // - nextrow === 0 signals completion from backend
+            // - nextrow >= fileLength means we've processed all records
+            if (nextrow === 0 || nextrow >= this.fileLength) {
+                console.log(`[SPP Base Import] Import complete after ${stepNumber} steps (nextrow: ${nextrow}, fileLength: ${this.fileLength})`);
                 break;
             }
         }
 
-        if (stepNumber >= maxSteps) {
-            console.warn(`[SPP Base Import] Reached maximum steps (${maxSteps}), stopping`);
+        if (stepNumber >= maxSteps && !importRes.hasError) {
+            console.warn(`[SPP Base Import] Reached maximum steps (${maxSteps}), but no error - treating as complete`);
         }
 
         if (!importRes.hasError) {
