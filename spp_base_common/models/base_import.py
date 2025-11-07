@@ -8,7 +8,7 @@ from odoo import models
 _logger = logging.getLogger(__name__)
 
 
-class SPPMISBaseImport(models.TransientModel):
+class SPPBaseImport(models.TransientModel):
     """
     Override base_import to fix batch import remainder issue.
 

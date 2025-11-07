@@ -13,6 +13,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "emjay0921"],
     "depends": [
         "base",
+        "base_import",
         "theme_openspp_muk",
         "spp_user_roles",
         "spp_area_base",
@@ -33,6 +34,8 @@
     "assets": {
         "web.assets_backend": [
             "spp_base_common/static/src/scss/navbar.scss",
+            "spp_base_common/static/src/js/import_action.esm.js",
+            "spp_base_common/static/src/legacy/js/import_action.js",
         ],
         "web._assets_primary_variables": [
             "spp_base_common/static/src/scss/colors.scss",

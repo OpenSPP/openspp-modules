@@ -7,7 +7,7 @@
  * This handles the legacy implementation for backward compatibility.
  */
 
-odoo.define("spp_base_spmis.ImportActionLegacy", function (require) {
+odoo.define("spp_base_common.ImportActionLegacy", function (require) {
 
 
     const DataImport = require("base_import.import");

@@ -1,5 +1,5 @@
-Configuration
-=============
+Base Import Fix Configuration
+=============================
 
 No additional configuration is required. The module automatically overrides the
 base_import functionality once installed.
@@ -8,7 +8,7 @@ How to Use
 ----------
 
 1. **Install the Module**:
-   Navigate to Apps > Search "OpenSPP SPMIS Base" > Install
+   Navigate to Apps > Search "OpenSPP Base (Common)" > Install
 
 2. **Import Data with Batching**:
    - Go to any model's import view (e.g., Contacts > Favorites > Import records)

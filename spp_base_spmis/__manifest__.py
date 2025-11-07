@@ -13,7 +13,6 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "emjay0921"],
     "depends": [
         "base",
-        "base_import",
         "utm",
         "mail",
         "spp_base_common",
@@ -55,14 +54,8 @@
         "security/ir.model.access.csv",
         "views/registrant_view.xml",
         "views/users_view.xml",
-        "views/assets.xml",
     ],
-    "assets": {
-        "web.assets_backend": [
-            "spp_base_spmis/static/src/js/import_action.esm.js",
-            "spp_base_spmis/static/src/legacy/js/import_action.js",
-        ],
-    },
+    "assets": {},
     "demo": [],
     "images": [],
     "application": False,
