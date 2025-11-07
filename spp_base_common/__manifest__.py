@@ -34,7 +34,6 @@
     "assets": {
         "web.assets_backend": [
             "spp_base_common/static/src/scss/navbar.scss",
-            "spp_base_common/static/src/js/import_action.esm.js",
             "spp_base_common/static/src/legacy/js/import_action.js",
         ],
         "web._assets_primary_variables": [

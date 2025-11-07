@@ -8,17 +8,12 @@
  */
 
 odoo.define("spp_base_common.ImportActionLegacy", function (require) {
+    "use strict";
+
     // Try to require base_import, return gracefully if not available
-    let DataImport;
-    try {
-        DataImport = require("base_import.import");
-    } catch (e) {
-        console.log("[SPP Base Import Legacy] base_import.import not available, skipping legacy patch");
-        return;
-    }
-    
+    const DataImport = require("base_import.import");
     if (!DataImport) {
-        console.log("[SPP Base Import Legacy] DataImport not found, skipping legacy patch");
+        console.log("[SPP Base Import Legacy] base_import.import not found");
         return;
     }
 
