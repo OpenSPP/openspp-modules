@@ -129,7 +129,8 @@ class SPPBaseImport(models.TransientModel):
         from io import StringIO
 
         decoded_data = base64.b64decode(self.file)
-        encoding = options.get("encoding", "utf-8")
+        # Handle empty string encoding (fallback to utf-8)
+        encoding = options.get("encoding") or "utf-8"
 
         try:
             data_string = decoded_data.decode(encoding)
@@ -137,8 +138,8 @@ class SPPBaseImport(models.TransientModel):
             data_string = decoded_data.decode("latin-1")
 
         # Parse CSV
-        separator = options.get("separator", ",")
-        quoting = options.get("quoting", '"')
+        separator = options.get("separator") or ","
+        quoting = options.get("quoting") or '"'
 
         reader = csv.reader(StringIO(data_string), delimiter=separator, quotechar=quoting)
 

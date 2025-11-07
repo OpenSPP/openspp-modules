@@ -8,8 +8,6 @@
  */
 
 odoo.define("spp_base_common.ImportActionLegacy", function (require) {
-
-
     const DataImport = require("base_import.import");
 
     /**
