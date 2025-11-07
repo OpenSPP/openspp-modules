@@ -12,7 +12,7 @@
     "license": "LGPL-3",
     "development_status": "Production/Stable",
     "external_dependencies": {"python": ["faker"]},
-    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
+    "maintainers": ["jeremi", "gonzalesedwin1123", "emjay0921"],
     "depends": [
         "base",
         "g2p_registry_base",
