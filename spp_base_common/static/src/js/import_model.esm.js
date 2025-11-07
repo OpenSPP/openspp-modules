@@ -24,17 +24,22 @@ patch(BaseImportModel.prototype, {
         this.importMessages = [];
 
         // Reset skip to 0 when starting actual import (not test)
-        // Hide progress during reset to avoid showing wrong step count
+        // Immediately set progress to initial state to prevent flashing wrong values
         let isResetting = false;
         if (!isTest && this.importOptions.skip > 0) {
             console.log(`[SPP Base Import] Resetting skip from ${this.importOptions.skip} to 0 for actual import`);
             isResetting = true;
-            // Hide progress indicator during reset
+            // Set progress to starting state immediately
             if (importProgress) {
-                importProgress.step = 0;
+                importProgress.step = 1;
                 importProgress.value = 0;
             }
             await this.setOption("skip", 0);
+            // Recalculate totalSteps after reset
+            totalSteps = this.totalSteps;
+            console.log(`[SPP Base Import] Recalculated totalSteps after reset: ${totalSteps}`);
+            // Small delay to ensure UI updates
+            await new Promise(resolve => setTimeout(resolve, 50));
             isResetting = false;
         }
 
@@ -107,15 +112,27 @@ patch(BaseImportModel.prototype, {
         }
 
         if (!importRes.hasError) {
-            if (importRes.nextrow) {
-                // If there's still a nextrow, we stopped prematurely
-                console.warn(`[SPP Base Import] Stopped with nextrow: ${importRes.nextrow}`);
-                this._addMessage("warning", [
-                    _t("Click 'Resume' to proceed, resuming at line %s.", importRes.nextrow + 1),
-                    _t("You can test or reload your file before resuming."),
-                ]);
+            if (importRes.nextrow && importRes.nextrow > 0) {
+                // Check if nextrow indicates incomplete import
+                // nextrow should be 0 for complete, or >= fileLength means complete
+                const totalRecords = this.previewData?.file_length || 10020;
+                if (importRes.nextrow < totalRecords) {
+                    // Still have records to process
+                    console.warn(`[SPP Base Import] Stopped with nextrow: ${importRes.nextrow} of ${totalRecords}`);
+                    this._addMessage("warning", [
+                        _t("Click 'Resume' to proceed, resuming at line %s.", importRes.nextrow + 1),
+                        _t("You can test or reload your file before resuming."),
+                    ]);
+                } else {
+                    // All records processed, clear nextrow
+                    console.log(`[SPP Base Import] Import complete - all ${totalRecords} records processed`);
+                    importRes.nextrow = 0;
+                    if (isTest) {
+                        this._addMessage("info", [_t("Everything seems valid.")]);
+                    }
+                }
             } else if (isTest) {
-                // Only show success message if truly complete
+                // Test complete with no nextrow
                 this._addMessage("info", [_t("Everything seems valid.")]);
             }
             importProgress.value = 100;
@@ -123,6 +140,7 @@ patch(BaseImportModel.prototype, {
             importRes.nextrow = startRow;
         }
 
+        this._updateComments(importRes);
         return { res: importRes };
     },
 
