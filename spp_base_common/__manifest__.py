@@ -33,6 +33,7 @@
     "assets": {
         "web.assets_backend": [
             "spp_base_common/static/src/scss/navbar.scss",
+            "spp_base_common/static/src/js/list_controller.js",
         ],
         "web._assets_primary_variables": [
             "spp_base_common/static/src/scss/colors.scss",
