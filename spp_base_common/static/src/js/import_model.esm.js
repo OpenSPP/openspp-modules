@@ -4,16 +4,31 @@
  *
  * Override base_import to fix batch import remainder issue in the frontend.
  *
- * The goal is to ensure that when calculating total steps for batch imports,
- * the remainder is included properly. For example, 40100 records with batch
- * size 2000 should create 21 steps (20 batches of 2000 + 1 batch of 100),
- * not 20 or 22 steps.
+ * For TEST imports (dryrun), we process ALL records in one go to ensure
+ * the remainder is included in the test. For ACTUAL imports, we use proper
+ * batch calculation with Math.ceil to include remainders.
  */
 
 import {BaseImportModel} from "@base_import/import_model";
 import {patch} from "@web/core/utils/patch";
 
 patch(BaseImportModel.prototype, {
+    /**
+     * Override executeImport to handle test vs actual import differently.
+     */
+    async executeImport(isTest = false, totalSteps, importProgress) {
+        if (isTest) {
+            // For test imports, force single step to test ALL records at once
+            console.log("[SPP Base Import] Test mode - processing all records in one step");
+            return super.executeImport(isTest, 1, importProgress);
+        } else {
+            // For actual imports, use corrected totalSteps calculation
+            const correctedSteps = this.totalSteps;
+            console.log(`[SPP Base Import] Import mode - processing ${correctedSteps} steps`);
+            return super.executeImport(isTest, correctedSteps, importProgress);
+        }
+    },
+
     /**
      * Override get totalSteps to ensure proper calculation including remainder.
      *
@@ -24,20 +39,17 @@ patch(BaseImportModel.prototype, {
      */
     get totalSteps() {
         const limit = this.importOptions.limit || 2000;
-        const skip = this.importOptions.skip || 0;
         
         if (!this.fileLength || limit <= 0) {
             return 1;
         }
 
-        // Calculate total steps including any skipped rows (for resume)
-        const totalRecords = this.fileLength;
-        const totalSteps = Math.ceil(totalRecords / limit);
+        // Calculate total steps based on total file length
+        const totalSteps = Math.ceil(this.fileLength / limit);
 
         console.log(
             `[SPP Base Import] Batch calculation - ` +
-                `Total file records: ${totalRecords}, ` +
-                `Skip: ${skip}, ` +
+                `Total file records: ${this.fileLength}, ` +
                 `Batch size: ${limit}, ` +
                 `Total steps: ${totalSteps}`
         );
@@ -45,4 +57,3 @@ patch(BaseImportModel.prototype, {
         return totalSteps;
     },
 });
-
