@@ -1,8 +1,4 @@
-odoo.define('spp_base_common.ListController', [
-    'web.ListController',
-    'web.core',
-    'web.session',
-], function (require) {
+odoo.define('spp_base_common.ListController', function (require) {
 "use strict";
 
 /**
