@@ -1,0 +1,30 @@
+<odoo>
+    <record id="view_translation_wizard" model="ir.ui.view">
+        <field name="name">translation.wizard.form</field>
+        <field name="model">translation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="AI Translation Tool">
+                <group>
+                    <field name="source_text"/>
+                    <field name="translated_text" readonly="1"/>
+                </group>
+                <footer>
+                    <button name="translate_text" string="Translate" type="object" class="btn-primary"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_translation_wizard" model="ir.actions.act_window">
+        <field name="name">AI Translate</field>
+        <field name="res_model">translation.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_translation_root" name="Translation" sequence="10"/>
+    <menuitem id="menu_translation_tool" name="AI Translator" parent="menu_translation_root" action="action_translation_wizard"/>
+</odoo>
+o
+
