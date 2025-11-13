@@ -1,0 +1,31 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_translation_provider_form" model="ir.ui.view">
+        <field name="name">translation.provider.form</field>
+        <field name="model">translation.provider</field>
+        <field name="arch" type="xml">
+            <form string="AI Translation Provider">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="provider_type"/>
+                        <field name="api_key"/>
+                        <field name="endpoint"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_translation_provider" model="ir.actions.act_window">
+        <field name="name">AI Translation Providers</field>
+        <field name="res_model">translation.provider</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_translation_provider"
+              name="AI Translation Provider"
+              parent="base.menu_custom"
+              action="action_translation_provider"/>
+</odoo>
