@@ -1,4 +1,4 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
-from . import models
-from . import tests
+from . import test_field_group
+from . import test_view_generation
