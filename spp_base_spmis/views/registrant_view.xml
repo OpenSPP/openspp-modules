@@ -10,6 +10,39 @@
             <xpath expr="//field[@name='reg_ids']/tree[1]/field[@name='value']" position="after">
                 <field name="card_uid" required="id_type == %(spp_base_spmis.id_top_up_card)d" />
             </xpath>
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="after">
+                <field name="relation_inverse" />
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_1_ids']/tree/field[@name='relation']" position="attributes">
+                <attribute name="required">false</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='disabled']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='related_2_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='relationships']" position="attributes">
+                <attribute name="string">Relations</attribute>
+            </xpath>
         </field>
     </record>
 
@@ -21,6 +54,39 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='reg_ids']/tree[1]/field[@name='value']" position="after">
                 <field name="card_uid" required="id_type == %(spp_base_spmis.id_top_up_card)d" />
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="after">
+                <field name="relation_inverse" />
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_1_ids']/tree/field[@name='relation']" position="attributes">
+                <attribute name="required">false</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='disabled']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='related_2_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='relationships']" position="attributes">
+                <attribute name="string">Relations</attribute>
             </xpath>
         </field>
     </record>

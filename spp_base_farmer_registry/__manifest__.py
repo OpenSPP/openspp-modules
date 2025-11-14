@@ -39,6 +39,7 @@
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
+        "data/hide_relation_types_menu.xml",
         "views/farm_season_view.xml",
         "data/kind_data.xml",
         "views/res_partner.xml",

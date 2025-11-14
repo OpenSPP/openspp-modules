@@ -58,11 +58,25 @@ class SPPFarmSeason(models.Model):
         string="Can Close",
         compute="_compute_access_rights",
     )
+    show_close_button = fields.Boolean(
+        string="Show Close Button",
+        compute="_compute_show_close_button",
+    )
 
     allow_overlap = fields.Boolean(
         string="Allow Overlap with Other Seasons",
         default=False,
         help="If checked, this season can overlap with other active seasons",
+    )
+
+    force_close = fields.Boolean(
+        string="Force Close",
+        default=False,
+        help="If checked, allows closing the season before the end date",
+    )
+    show_force_close_button = fields.Boolean(
+        string="Show Force Close Button",
+        compute="_compute_show_force_close_button",
     )
 
     activity_type = fields.Selection(
@@ -79,6 +93,30 @@ class SPPFarmSeason(models.Model):
             record.can_edit = is_manager and record.state != "closed"
             record.can_activate = is_manager and record.state == "draft"
             record.can_close = is_manager and record.state == "active"
+
+    @api.depends("date_end")
+    def _compute_show_close_button(self):
+        for record in self:
+            if not record.date_end:
+                record.show_close_button = False
+                return
+            if record.state != "active":
+                record.show_close_button = False
+                return
+            # Show normal close button when season has ended or is ending today
+            record.show_close_button = record.date_end <= fields.Date.today()
+
+    @api.depends("date_end")
+    def _compute_show_force_close_button(self):
+        for record in self:
+            if not record.date_end:
+                record.show_force_close_button = False
+                return
+            if record.state != "active":
+                record.show_force_close_button = False
+                return
+            # Show force close button when season hasn't ended yet
+            record.show_force_close_button = record.date_end > fields.Date.today()
 
     @api.depends("activity_ids")
     def _compute_activity_count(self):
@@ -109,6 +147,15 @@ class SPPFarmSeason(models.Model):
             raise ValidationError(_("Only active seasons can be closed"))
         self.write({"state": "closed"})
 
+    def action_force_close(self):
+        """Force close the season even before end date"""
+        self.ensure_one()
+        if not self.can_close:
+            raise ValidationError(_("You don't have permission to close seasons"))
+        if self.state != "active":
+            raise ValidationError(_("Only active seasons can be closed"))
+        self.write({"state": "closed", "force_close": True})
+
     def action_draft(self):
         """Reset season to draft state with proper security checks"""
         self.ensure_one()
@@ -125,11 +172,14 @@ class SPPFarmSeason(models.Model):
         """Validate state transitions"""
         for record in self:
             if record.state == "closed":
-                # Check for ongoing activities
-                ongoing = self.env["spp.farm.activity"].search_count([("season_id", "=", record.id)])
-                if ongoing:
+                # Check if season has ended (date validation) unless force close is enabled
+                if record.date_end and record.date_end > fields.Date.today() and not record.force_close:
                     raise ValidationError(
-                        _("Cannot close season with ongoing activities. " "Please complete or cancel them first.")
+                        _(
+                            "Cannot close season before the end date. "
+                            "Please wait until the season end date, adjust the end date, "
+                            "or enable 'Force Close' to override this restriction."
+                        )
                     )
 
     @api.constrains("date_start", "date_end", "state")
@@ -229,13 +279,30 @@ class SPPFarmSeason(models.Model):
     def _compute_display_name(self):
         """Modern approach to custom display names"""
         for record in self:
-            record.display_name = f"{record.name} ({record.date_start} to {record.date_end})"
+            if record.date_start and record.date_end:
+                record.display_name = f"{record.name} ({record.date_start} to {record.date_end})"
+            elif record.date_start:
+                record.display_name = f"{record.name} (from {record.date_start})"
+            elif record.date_end:
+                record.display_name = f"{record.name} (until {record.date_end})"
+            else:
+                record.display_name = record.name if record.name else _("New Season")
 
     def name_get(self):
         """Custom name display including dates"""
         result = []
         for record in self:
-            name = f"{record.name} ({record.date_start.strftime('%Y-%m-%d')} to {record.date_end.strftime('%Y-%m-%d')})"
+            if record.date_start and record.date_end:
+                name = (
+                    f"{record.name} ({record.date_start.strftime('%Y-%m-%d')} to "
+                    f"{record.date_end.strftime('%Y-%m-%d')})"
+                )
+            elif record.date_start:
+                name = f"{record.name} (from {record.date_start.strftime('%Y-%m-%d')})"
+            elif record.date_end:
+                name = f"{record.name} (until {record.date_end.strftime('%Y-%m-%d')})"
+            else:
+                name = record.name if record.name else _("New Season")
             result.append((record.id, name))
         return result
 

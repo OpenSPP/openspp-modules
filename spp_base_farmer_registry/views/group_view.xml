@@ -24,7 +24,12 @@
             <xpath expr="//page[@name='other']" position="before">
                 <page string="Members" name="members_page">
                     <group col="4" colspan="4">
-                        <field name="group_membership_ids" readonly="disabled" nolabel="1" colspan="4">
+                        <field
+                            name="group_membership_ids"
+                            readonly="disabled or not create_date"
+                            nolabel="1"
+                            colspan="4"
+                        >
                             <tree default_order='status asc,ended_date asc'>
                                 <button
                                     name="open_individual_form"
@@ -276,7 +281,7 @@
                         <field name="farm_asset_ids">
                             <tree editable="bottom">
                                 <field name="asset_farm_id" column_invisible="1" />
-                                <field name="asset_type" width="40%" />
+                                <field name="asset_type" width="40%" required="1" />
                             </tree>
                         </field>
                     </div>
@@ -285,7 +290,7 @@
                     <field name="farm_machinery_ids">
                         <tree editable="bottom">
                             <field name="machinery_farm_id" column_invisible="1" />
-                            <field name="machinery_type" />
+                            <field name="machinery_type" required="1" />
                             <field name="quantity" width="20%" />
                             <field name="machine_working_status" />
                         </tree>

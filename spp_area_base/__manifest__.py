@@ -18,8 +18,9 @@
     ],
     "external_dependencies": {
         "python": [
-            "xlrd",
+            "pandas",
             "openpyxl",
+            "xlrd",
         ]
     },
     "data": [
