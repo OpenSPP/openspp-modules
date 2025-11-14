@@ -5,7 +5,8 @@ import random
 
 from faker import Faker
 
-from odoo import fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -16,28 +17,28 @@ class SPPDemoDataGenerator(models.Model):
     # Farmer Registry specific fields
     percentage_with_farm_details = fields.Integer(
         string="% with Farm Details",
-        default=80,
+        default=100,
         required=True,
         help="Percentage of farmers that will have farm details",
     )
     percentage_with_land_records = fields.Integer(
         string="% with Land Records",
-        default=70,
+        default=100,
         required=True,
         help="Percentage of farmers that will have land records",
     )
     percentage_with_farm_assets = fields.Integer(
-        string="% with Farm Assets", default=60, required=True, help="Percentage of farmers that will have farm assets"
+        string="% with Farm Assets", default=100, required=True, help="Percentage of farmers that will have farm assets"
     )
     percentage_with_agricultural_activities = fields.Integer(
         string="% with Agricultural Activities",
-        default=85,
+        default=100,
         required=True,
         help="Percentage of farmers that will have agricultural activities",
     )
     percentage_with_extension_services = fields.Integer(
         string="% with Extension Services",
-        default=40,
+        default=100,
         required=True,
         help="Percentage of farmers that will have extension services",
     )
@@ -65,6 +66,34 @@ class SPPDemoDataGenerator(models.Model):
         required=True,
         help="Maximum number of agricultural activities per farm",
     )
+
+    # Season configuration fields
+    season_name = fields.Char(
+        string="Season Name",
+        default=lambda self: f"Demo Season {fields.Date.today().year}",
+        required=True,
+        help="Name of the agricultural season to use or create",
+    )
+    season_start_date = fields.Date(
+        string="Season Start Date",
+        default=lambda self: fields.Date.today().replace(month=1, day=1),
+        required=True,
+        help="Start date of the agricultural season",
+    )
+    season_end_date = fields.Date(
+        string="Season End Date",
+        default=lambda self: fields.Date.today().replace(month=12, day=31),
+        required=True,
+        help="End date of the agricultural season",
+    )
+
+    @api.constrains("season_start_date", "season_end_date")
+    def _check_season_dates(self):
+        """Validate that season end date is after start date"""
+        for record in self:
+            if record.season_end_date and record.season_start_date:
+                if record.season_end_date < record.season_start_date:
+                    raise ValidationError(_("Season end date must be after start date"))
 
     # Selection options for farmer registry
     FARM_TYPES = [
@@ -119,7 +148,21 @@ class SPPDemoDataGenerator(models.Model):
         self._generate_chemical_data(fake)
         self._generate_fertilizer_data(fake)
         self._generate_feed_items_data(fake)
-        self._generate_season_data(fake)
+
+        # Validate that season can be created/found
+        season = self._generate_season_data(fake)
+        if not season:
+            raise ValidationError(
+                _(
+                    "Failed to create or find an active agricultural season. "
+                    "Please check the season configuration and try again."
+                )
+            )
+
+        _logger.info(
+            f"Demo data generation initialized with season: {season.name} "
+            f"({season.date_start} to {season.date_end})"
+        )
 
         result = super().generate_demo_data()
         return result
@@ -147,9 +190,11 @@ class SPPDemoDataGenerator(models.Model):
         )
 
         # Specific Head Farmer details on Group
+        farmer_family_name = fake.last_name()
         group_vals.update(
             {
-                "farmer_family_name": fake.last_name(),
+                "farmer_family_name": farmer_family_name,
+                "name": farmer_family_name,
                 "farmer_given_name": fake.first_name(),
                 "farmer_addtnl_name": fake.first_name() if random.choice([True, False]) else None,
                 "farmer_mobile_tel": self.generate_phone_number(fake),
@@ -541,7 +586,7 @@ class SPPDemoDataGenerator(models.Model):
         """Generate land records for a farm"""
         num_parcels = random.randint(1, self.max_land_parcels_per_farm)
 
-        for _ in range(num_parcels):
+        for _i in range(num_parcels):
             land_vals = self._get_land_record_vals(fake, group)
             land_record = self.env["spp.land.record"].create(land_vals)
 
@@ -598,7 +643,7 @@ class SPPDemoDataGenerator(models.Model):
         """Generate farm assets and machinery"""
         num_assets = random.randint(1, self.max_assets_per_farm)
 
-        for _ in range(num_assets):
+        for _i in range(num_assets):
             # Generate farm assets
             asset_vals = self._get_farm_asset_vals(fake, group)
             self.env["spp.farm.asset"].create(asset_vals)
@@ -629,20 +674,32 @@ class SPPDemoDataGenerator(models.Model):
 
     def _generate_agricultural_activities(self, fake, group):
         """Generate agricultural activities"""
+        # Ensure season is available
+        season_id = self._get_random_season()
+        if not season_id:
+            _logger.warning(f"No active season available for group {group.id}. Skipping agricultural activities.")
+            return
+
+        season = self.env["spp.farm.season"].browse(season_id)
+        _logger.debug(f"Generating agricultural activities for group {group.id} using season: {season.name}")
+
         num_activities = random.randint(1, self.max_activities_per_farm)
 
-        for _ in range(num_activities):
-            activity_vals = self._get_agricultural_activity_vals(fake, group)
-            self.env["spp.farm.activity"].create(activity_vals)
+        for _i in range(num_activities):
+            activity_vals = self._get_agricultural_activity_vals(fake, group, season_id)
+            try:
+                self.env["spp.farm.activity"].create(activity_vals)
+            except Exception as e:
+                _logger.error(f"Failed to create agricultural activity for group {group.id}: {str(e)}")
 
-    def _get_agricultural_activity_vals(self, fake, group):
+    def _get_agricultural_activity_vals(self, fake, group, season_id):
         """Get agricultural activity values"""
         activity_type = random.choice(self.ACTIVITY_TYPES)
 
         vals = {
             "activity_type": activity_type[0],
             "purpose": random.choice(self.PRODUCTION_PURPOSES)[0],
-            "season_id": self._get_random_season(),
+            "season_id": season_id,
         }
 
         # Set the appropriate farm field based on activity type
@@ -708,7 +765,7 @@ class SPPDemoDataGenerator(models.Model):
         """Generate farm extension services"""
         num_services = random.randint(1, 3)
 
-        for _ in range(num_services):
+        for _i in range(num_services):
             extension_vals = self._get_extension_service_vals(fake, group)
             self.env["spp.farm.extension"].create(extension_vals)
 
@@ -824,29 +881,81 @@ class SPPDemoDataGenerator(models.Model):
                 self.env["spp.feed.items"].create(feed_info)
 
     def _generate_season_data(self, fake):
-        """Generate agricultural season data for the demo"""
-        current_year = fields.Date.today().year
-        seasons = [
-            {
-                "name": f"Season {current_year}",
-                "description": f"Main agricultural season for {current_year}",
-                "date_start": fields.Date.today().replace(month=1, day=1),
-                "date_end": fields.Date.today().replace(month=12, day=31),
-                "state": "active",
-            },
-            {
-                "name": f"Season {current_year - 1}",
-                "description": f"Previous agricultural season for {current_year - 1}",
-                "date_start": fields.Date.today().replace(year=current_year - 1, month=1, day=1),
-                "date_end": fields.Date.today().replace(year=current_year - 1, month=12, day=31),
-                "state": "closed",
-            },
-        ]
+        """Generate or find agricultural season data for the demo"""
+        try:
+            # Search for existing season matching name, dates, and active state
+            existing_season = self.env["spp.farm.season"].search(
+                [
+                    ("name", "=", self.season_name),
+                    ("date_start", "=", self.season_start_date),
+                    ("date_end", "=", self.season_end_date),
+                    ("state", "=", "active"),
+                ],
+                limit=1,
+            )
 
-        for season_info in seasons:
-            existing = self.env["spp.farm.season"].search([("name", "=", season_info["name"])])
-            if not existing:
-                self.env["spp.farm.season"].create(season_info)
+            if existing_season:
+                _logger.info(f"Using existing active season: {existing_season.name} (ID: {existing_season.id})")
+                return existing_season
+
+            # Search for season with same name but different dates or status
+            existing_season_by_name = self.env["spp.farm.season"].search(
+                [
+                    ("name", "=", self.season_name),
+                ],
+                limit=1,
+            )
+
+            if existing_season_by_name:
+                # Update existing season if it's not closed
+                if existing_season_by_name.state != "closed":
+                    _logger.info(f"Updating existing season: {existing_season_by_name.name}")
+                    existing_season_by_name.write(
+                        {
+                            "date_start": self.season_start_date,
+                            "date_end": self.season_end_date,
+                        }
+                    )
+                    if existing_season_by_name.state == "draft":
+                        existing_season_by_name.action_activate()
+                    _logger.info(
+                        f"Season updated and activated: {existing_season_by_name.name} "
+                        f"(ID: {existing_season_by_name.id})"
+                    )
+                    return existing_season_by_name
+                else:
+                    _logger.warning(
+                        f"Season '{self.season_name}' exists but is closed. Creating new season with modified name."
+                    )
+                    # Create new season with modified name
+                    season_vals = {
+                        "name": f"{self.season_name} (Demo)",
+                        "description": f"Demo agricultural season created on {fields.Date.today()}",
+                        "date_start": self.season_start_date,
+                        "date_end": self.season_end_date,
+                        "state": "draft",
+                    }
+                    new_season = self.env["spp.farm.season"].create(season_vals)
+                    new_season.action_activate()
+                    _logger.info(f"Created and activated new season: {new_season.name} (ID: {new_season.id})")
+                    return new_season
+
+            # Create new season if none exists
+            season_vals = {
+                "name": self.season_name,
+                "description": f"Demo agricultural season created on {fields.Date.today()}",
+                "date_start": self.season_start_date,
+                "date_end": self.season_end_date,
+                "state": "draft",
+            }
+            new_season = self.env["spp.farm.season"].create(season_vals)
+            new_season.action_activate()
+            _logger.info(f"Created and activated new season: {new_season.name} (ID: {new_season.id})")
+            return new_season
+
+        except Exception as e:
+            _logger.error(f"Failed to generate/find season: {str(e)}")
+            raise ValidationError(_(f"Failed to create or find agricultural season: {str(e)}")) from e
 
     def _get_random_species(self, species_type):
         """Get a random species of the specified type"""
@@ -880,8 +989,21 @@ class SPPDemoDataGenerator(models.Model):
         return [(6, 0, [])]
 
     def _get_random_season(self):
-        """Get a random active season"""
-        seasons = self.env["spp.farm.season"].search([("state", "=", "active")])
-        if seasons:
-            return random.choice(seasons).id
+        """Get the configured active season, creating it if necessary"""
+        try:
+            # Get faker locale safely
+            faker_locale = "en_US"
+            if hasattr(self, "locale_origin") and self.locale_origin:
+                faker_locale = self.locale_origin.faker_locale or "en_US"
+
+            fake = Faker(faker_locale)
+            season = self._generate_season_data(fake)
+
+            if season:
+                _logger.debug(f"Using season: {season.name} (ID: {season.id})")
+                return season.id
+        except Exception as e:
+            _logger.error(f"Exception while getting season: {str(e)}", exc_info=True)
+
+        _logger.error("Failed to generate/find active season! Agricultural activities cannot be created.")
         return None

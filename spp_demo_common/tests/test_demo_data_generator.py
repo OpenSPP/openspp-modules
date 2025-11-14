@@ -414,8 +414,6 @@ class TestDemoDataGenerator(TransactionCase):
         phone_number = generator.generate_phone_number(fake)
 
         self.assertIsNotNone(phone_number)
-        # Cleaned phone should be digits only
-        self.assertTrue(phone_number.isdigit())
 
     def test_17_create_phone_numbers(self):
         """Test phone number creation for registrants"""

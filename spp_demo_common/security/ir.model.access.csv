@@ -1,6 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 demo_data_generator_read_registry_access,Demo Data Generator Read Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.read_registry,1,0,0,0
+demo_data_generation_log_read_access,Demo Data Generation Log Read Access,spp_demo_common.model_spp_demo_data_generation_log,spp_base_common.read_registry,1,0,0,0
 data_exporter_read_access,Data Exporter Read Access,spp_demo_common.model_spp_data_exporter,spp_base_common.read_registry,1,0,0,0
 data_exporter_templates_read_access,Data Exporter Templates Read Access,spp_demo_common.model_spp_data_exporter_templates,spp_base_common.read_registry,1,0,0,0
 data_exporter_raw_read_access,Data Exporter Raw Read Access,spp_demo_common.model_spp_data_exporter_raw,spp_base_common.read_registry,1,0,0,0
@@ -13,6 +14,7 @@ apps_wizard_read_access,Apps Wizard Read Access,spp_demo_common.model_spp_apps_w
 missing_module_read_access,Apps Missing Modules Read Access,spp_demo_common.model_spp_missing_module,spp_base_common.read_registry,1,0,0,0
 
 demo_data_generator_write_registry_access,Demo Data Generator Write Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.write_registry,1,1,0,0
+demo_data_generation_log_write_access,Demo Data Generation Log Write Access,spp_demo_common.model_spp_demo_data_generation_log,spp_base_common.write_registry,1,1,0,0
 data_exporter_write_access,Data Exporter Write Access,spp_demo_common.model_spp_data_exporter,spp_base_common.write_registry,1,1,0,0
 data_exporter_templates_write_access,Data Exporter Templates Write Access,spp_demo_common.model_spp_data_exporter_templates,spp_base_common.write_registry,1,1,0,0
 data_exporter_raw_write_access,Data Exporter Raw Write Access,spp_demo_common.model_spp_data_exporter_raw,spp_base_common.write_registry,1,1,0,0
@@ -25,6 +27,7 @@ apps_wizard_write_access,Apps Wizard Write Access,spp_demo_common.model_spp_apps
 missing_module_write_access,Apps Missing Modules Write Access,spp_demo_common.model_spp_missing_module,spp_base_common.write_registry,1,1,0,0
 
 demo_data_generator_create_registry_access,Demo Data Generator Create Access,spp_demo_common.model_spp_demo_data_generator,spp_base_common.create_registry,1,0,1,0
+demo_data_generation_log_create_access,Demo Data Generation Log Create Access,spp_demo_common.model_spp_demo_data_generation_log,spp_base_common.create_registry,1,0,1,0
 data_exporter_create_access,Data Exporter Create Access,spp_demo_common.model_spp_data_exporter,spp_base_common.create_registry,1,0,1,0
 data_exporter_templates_create_access,Data Exporter Templates Create Access,spp_demo_common.model_spp_data_exporter_templates,spp_base_common.create_registry,1,0,1,0
 data_exporter_raw_create_access,Data Exporter Raw Create Access,spp_demo_common.model_spp_data_exporter_raw,spp_base_common.create_registry,1,0,1,0

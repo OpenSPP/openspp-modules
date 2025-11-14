@@ -209,7 +209,12 @@
                     </div>
                     <notebook>
                         <page string="Generated Groups" invisible="not generated_group_ids">
-                            <field name="generated_group_ids" readonly="1" force_save="1">
+                            <field
+                                name="generated_group_ids"
+                                context="{'form_view_ref': 'g2p_registry_group.view_groups_form'}"
+                                readonly="1"
+                                force_save="1"
+                            >
                                 <tree>
                                     <field name="name" />
                                     <field name="kind" />
@@ -221,7 +226,12 @@
                             </field>
                         </page>
                         <page string="Generated Individuals" invisible="not generated_individual_ids">
-                            <field name="generated_individual_ids" readonly="1" force_save="1">
+                            <field
+                                name="generated_individual_ids"
+                                context="{'form_view_ref': 'g2p_registry_individual.view_individuals_form'}"
+                                readonly="1"
+                                force_save="1"
+                            >
                                 <tree>
                                     <field name="name" />
                                     <field name="individual_membership_ids" />
@@ -245,6 +255,51 @@
                                     <field name="name" options="{'no_create': True}" />
                                     <field name="target_type" />
                                 </tree>
+                            </field>
+                        </page>
+                        <page string="Generation Logs" invisible="not generation_log_ids">
+                            <field name="generation_log_count" invisible="1" />
+                            <group>
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Generation Failures:</strong>
+                                    <span>
+                                        <field name="generation_log_count" readonly="1" />
+                                        failed operation(s) recorded
+                                    </span>
+                                </div>
+                            </group>
+                            <field name="generation_log_ids" readonly="1">
+                                <tree create="false" edit="false" delete="false">
+                                    <field name="create_date" string="Date" />
+                                    <field name="registrant_id" />
+                                    <field name="registrant_type" />
+                                    <field name="operation_type" />
+                                    <field name="failure_reason" />
+                                    <field name="attempts" />
+                                    <field name="error_message" />
+                                </tree>
+                                <form create="false" edit="false" delete="false">
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="create_date" string="Date Created" />
+                                                <field name="registrant_id" />
+                                                <field name="registrant_type" />
+                                            </group>
+                                            <group>
+                                                <field name="operation_type" />
+                                                <field name="failure_reason" />
+                                                <field name="attempts" />
+                                            </group>
+                                        </group>
+                                        <group string="Details">
+                                            <field name="error_message" readonly="1" />
+                                            <field name="validation_regex" readonly="1" />
+                                            <field name="generated_value" readonly="1" />
+                                            <field name="exception_details" readonly="1" widget="text" />
+                                        </group>
+                                    </sheet>
+                                </form>
                             </field>
                         </page>
                     </notebook>
