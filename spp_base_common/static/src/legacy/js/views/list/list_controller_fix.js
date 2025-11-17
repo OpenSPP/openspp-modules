@@ -13,15 +13,15 @@
 import ListController from "web.ListController";
 import session from "web.session";
 import core from "web.core";
-import {patch} from "@web/core/utils/patch";
 
 const _t = core._t;
 
-patch(ListController.prototype, {
+// Use legacy .include() method for Backbone-style controllers
+ListController.include({
     /**
      * @override
      */
-    async _toggleArchiveState(archive) {
+    _toggleArchiveState: async function (archive) {
         const resIds = await this.getSelectedIdsWithDomain();
         const notif = this.isDomainSelected;
         await this._archive(resIds, archive);
@@ -34,7 +34,7 @@ patch(ListController.prototype, {
                 resIds.length,  // Total selected
                 total           // Actually processed
             );
-            this.displayNotification({ title: _t('OpenSPP Archive Fix'), message: msg, type: 'success' });
+            this.displayNotification({ title: _t('OpenSPP Archive Fix'), message: msg });
         }
     },
 });
