@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem
+        id="menu_spp_event_spec_loader_root"
+        name="Event Spec Loader"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="55"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+
+    <!-- Program Specifications Menu -->
+    <menuitem
+        id="menu_spp_program_spec"
+        name="Program Specifications"
+        action="action_spp_program_spec"
+        parent="menu_spp_event_spec_loader_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+
+    <!-- Event Type Definitions Menu -->
+    <menuitem
+        id="menu_spp_event_type_definition"
+        name="Event Type Definitions"
+        action="action_spp_event_type_definition"
+        parent="menu_spp_event_spec_loader_root"
+        sequence="20"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+</odoo>
+

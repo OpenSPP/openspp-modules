@@ -1,0 +1,453 @@
+# OpenSPP Program Specification Template
+# This is a template for creating program specifications that can be loaded
+# into the spp_event_spec_loader module to automatically generate event types.
+#
+# Usage:
+#   1. Copy this file and rename it (e.g., my_program.yaml)
+#   2. Fill in your program details
+#   3. Upload via Registry → Configuration → Event Spec Loader → Program Specifications
+#   4. Click Validate, then Deploy Event Types
+#
+# For a complete example, see: 4ps_best_practice_example_v7.yaml
+
+# ============================================================================
+# PROGRAM METADATA (Required)
+# ============================================================================
+program:
+  name: "Your Program Name"
+  # Example: "Conditional Cash Transfer Program"
+  
+  objectives:
+    - "Primary objective of the program"
+    - "Secondary objective"
+    - "Additional objectives as needed"
+  # Example objectives:
+  # - "Reduce poverty by investing in children's health and education"
+  # - "Increase school enrollment and attendance"
+  
+  coverage:
+    geographies: 
+      - "Country or region"
+    # Example: ["Philippines (national)", "Region IV-A"]
+    
+    populations: 
+      - "Target population description"
+    # Example: ["Households with children 0-18", "Poor and near-poor families"]
+  
+  legal_basis: "Legal reference or policy document"
+  # Example: "Republic Act 11310 (2019)"
+  
+  implementing_agencies:
+    - "Lead agency"
+    - "Partner agencies"
+  # Example: ["DSWD (lead)", "DepEd", "DOH", "LGUs"]
+  
+  localization:
+    languages: 
+      - "en"  # ISO 639-1 codes
+      - "fil"
+    # Common codes: en (English), fil (Filipino), es (Spanish), fr (French)
+  
+  currency: "USD"
+  # ISO 4217 codes: USD, PHP, EUR, GBP, etc.
+  
+  ann:
+    summary: "Brief summary of the program"
+    rationale:
+      - "Why this program exists"
+      - "Expected outcomes"
+
+# ============================================================================
+# GLOSSARY (Optional)
+# Define program-specific terms and acronyms
+# ============================================================================
+glossary:
+  - term: "HH"
+    definition: "Household"
+  - term: "CCT"
+    definition: "Conditional Cash Transfer"
+  # Add more terms as needed
+
+# ============================================================================
+# ENTITIES (Optional but Recommended)
+# Define data structures for households and individuals
+# ============================================================================
+entities:
+  - name: "Household"
+    label: "Program Household"
+    fields:
+      - id: "hh_id"
+        label: "Household ID"
+        type: "string"
+        required: true
+      - id: "province"
+        label: "Province"
+        type: "admin_code"
+      # Add more household-level fields
+    relationships:
+      - type: "one-to-many"
+        to: "Individual"
+        label: "Members"
+  
+  - name: "Individual"
+    label: "Household Member"
+    fields:
+      - id: "person_id"
+        label: "Member ID"
+        type: "string"
+        required: true
+      - id: "birthdate"
+        label: "Date of Birth"
+        type: "date"
+        required: true
+      - id: "gender"
+        label: "Gender"
+        type: "enum"
+        values: ["Female", "Male", "Other"]
+        required: true
+      # Add more individual-level fields
+
+# ============================================================================
+# EXTERNAL SYSTEMS (Creates Event Types)
+# These will generate event types like: spp.event.{domain}.{record_type}
+# ============================================================================
+external_systems:
+  # Example: Education system integration
+  - id: "EducationSystem"
+    role: "evidence_provider"
+    domain: "education"
+    interface:
+      type: "batch_file"
+      transport: "sftp"
+      format: "csv"
+      frequency: "monthly"
+    data_contract:
+      record_type: "attendance"
+      key_fields: ["school_id", "student_id", "month"]
+      required_fields:
+        - name: "attendance_pct"
+          type: "number"
+          description: "Attendance percentage (0-100)"
+        - name: "school_id"
+          type: "string"
+          description: "School identifier"
+        - name: "period"
+          type: "string"
+          description: "Reporting period (YYYY-MM)"
+      validation:
+        - "attendance_pct >= 0 and attendance_pct <= 100"
+    security_privacy:
+      legal_basis: "Data sharing agreement"
+      pii_fields: ["student_id"]
+      retention_months: 36
+  
+  # Example: Health system integration
+  - id: "HealthSystem"
+    role: "evidence_provider"
+    domain: "health"
+    data_contract:
+      record_type: "checkup"
+      required_fields:
+        - name: "checkup_completed"
+          type: "boolean"
+        - name: "facility_id"
+          type: "string"
+        - name: "checkup_date"
+          type: "date"
+
+# ============================================================================
+# COMPLIANCE CONDITIONS (Creates Event Types)
+# These will generate event types like: spp.event.compliance.{id}
+# ============================================================================
+compliance:
+  ann:
+    summary: "Compliance requirements for beneficiaries"
+  
+  conditions:
+    - id: "education_attendance"
+      description: "Child has minimum required school attendance"
+      check: "metric('education.attendance_pct', m, last_cycle()) >= 85"
+      measurement_window: "previous_month"
+      schedule: "monthly"
+      grace_period_days: 10
+      evidence_channels: ["school_upload", "csv_batch", "api"]
+    
+    - id: "health_checkup"
+      description: "Required health checkup completed"
+      check: "metric('health.checkup_completed', me, last_cycle()) == true"
+      measurement_window: "previous_quarter"
+      schedule: "quarterly"
+      grace_period_days: 15
+      evidence_channels: ["health_facility", "manual_entry"]
+    
+    # Add more compliance conditions as needed
+  
+  sanctions:
+    - id: "withhold_payment"
+      when:
+        condition_id: "education_attendance"
+        status: "breach"
+      effect:
+        type: "suspend"
+        target_components: ["education_grant"]
+        duration_cycles: 1
+
+# ============================================================================
+# CUSTOM EVENT TYPES (Creates Event Types)
+# Define your own event types with custom fields
+# Model naming: spp.event.{your_model_name}
+# ============================================================================
+event_types:
+  # Example 1: House Visit Assessment
+  - id: "house_visit"
+    name: "House Visit Assessment"
+    model: "spp.event.house.visit"
+    description: "Field assessment of household conditions and needs"
+    fields:
+      - name: "visit_date"
+        label: "Visit Date"
+        field_type: "date"
+      - name: "assessor_name"
+        label: "Assessor Name"
+        field_type: "char"
+      - name: "household_size"
+        label: "Household Size"
+        field_type: "float"
+      - name: "dwelling_type"
+        label: "Dwelling Type"
+        field_type: "char"
+      - name: "has_electricity"
+        label: "Has Electricity"
+        field_type: "boolean"
+      - name: "has_water"
+        label: "Has Water Access"
+        field_type: "boolean"
+      - name: "observations"
+        label: "Observations"
+        field_type: "text"
+      - name: "photo"
+        label: "Photo"
+        field_type: "binary"
+  
+  # Example 2: Phone Survey
+  - id: "phone_survey"
+    name: "Phone Survey"
+    model: "spp.event.phone.survey"
+    description: "Telephone survey with beneficiary"
+    fields:
+      - name: "call_date"
+        label: "Call Date"
+        field_type: "datetime"
+      - name: "caller_name"
+        label: "Caller Name"
+        field_type: "char"
+      - name: "call_duration_minutes"
+        label: "Call Duration (minutes)"
+        field_type: "float"
+      - name: "respondent"
+        label: "Respondent Name"
+        field_type: "char"
+      - name: "survey_completed"
+        label: "Survey Completed"
+        field_type: "boolean"
+      - name: "notes"
+        label: "Notes"
+        field_type: "text"
+  
+  # Example 3: Grievance/Complaint
+  - id: "grievance"
+    name: "Grievance Case"
+    model: "spp.event.grievance"
+    description: "Grievance or complaint from beneficiary"
+    fields:
+      - name: "grievance_date"
+        label: "Date Received"
+        field_type: "date"
+      - name: "grievance_type"
+        label: "Grievance Type"
+        field_type: "char"
+      - name: "channel"
+        label: "Channel"
+        field_type: "char"
+      - name: "description"
+        label: "Description"
+        field_type: "text"
+      - name: "resolution_status"
+        label: "Resolution Status"
+        field_type: "char"
+      - name: "resolved_date"
+        label: "Resolution Date"
+        field_type: "date"
+      - name: "resolution_notes"
+        label: "Resolution Notes"
+        field_type: "text"
+  
+  # Example 4: Training Attendance
+  - id: "training"
+    name: "Training Session"
+    model: "spp.event.training"
+    description: "Training or workshop attendance"
+    fields:
+      - name: "training_date"
+        label: "Training Date"
+        field_type: "date"
+      - name: "training_topic"
+        label: "Training Topic"
+        field_type: "char"
+      - name: "trainer_name"
+        label: "Trainer Name"
+        field_type: "char"
+      - name: "attended"
+        label: "Attended"
+        field_type: "boolean"
+      - name: "duration_hours"
+        label: "Duration (hours)"
+        field_type: "float"
+      - name: "location"
+        label: "Location"
+        field_type: "char"
+      - name: "certificate_issued"
+        label: "Certificate Issued"
+        field_type: "boolean"
+  
+  # Add more custom event types as needed
+
+# ============================================================================
+# ENTITLEMENTS (Optional)
+# Define benefits/grants for the program
+# ============================================================================
+entitlements:
+  ann:
+    summary: "Cash grants and benefits provided by the program"
+  
+  components:
+    - id: "education_grant"
+      label: "Education Cash Grant"
+      type: "cash"
+      basis: "per_household"
+      condition: "members.exists(m, age_years(m.birthdate) >= 6 and age_years(m.birthdate) <= 18)"
+      value:
+        fixed_amount: 500
+        currency: "PHP"
+      frequency: "monthly"
+      rounding: "round"
+    
+    # Add more entitlement components as needed
+
+# ============================================================================
+# ENROLLMENT WORKFLOW (Optional)
+# Define states and transitions for beneficiary enrollment
+# ============================================================================
+enrollment_workflow:
+  ann:
+    summary: "Beneficiary enrollment and lifecycle management"
+  
+  states:
+    - "Intake"
+    - "Verification"
+    - "Approval"
+    - "Active"
+    - "Suspended"
+    - "Exited"
+  
+  transitions:
+    - from: "Verification"
+      to: "Approval"
+      guard: "eligibility_check_passed"
+      sla_days: 7
+      roles_allowed: ["caseworker", "supervisor"]
+
+# ============================================================================
+# CALENDAR (Optional)
+# Define program cycles and payment schedules
+# ============================================================================
+calendar:
+  ann:
+    summary: "Program cycle and payment schedule"
+  
+  periods:
+    - id: "P1"
+      monitor_months: ["Jan", "Feb"]
+      processing_month: "Mar"
+      payout_month: "Mar"
+    - id: "P2"
+      monitor_months: ["Mar", "Apr"]
+      processing_month: "May"
+      payout_month: "May"
+    # Add more periods as needed
+
+# ============================================================================
+# SECURITY & PRIVACY (Optional but Recommended)
+# ============================================================================
+security_privacy:
+  ann:
+    summary: "Data protection and access control policies"
+  
+  roles_permissions:
+    - role: "caseworker"
+      permissions: ["read_hh", "update_roster", "record_events"]
+      record_rules: ["region_scope"]
+    - role: "supervisor"
+      permissions: ["read_hh", "update_roster", "record_events", "approve_enrollment"]
+      record_rules: ["region_scope"]
+  
+  retention_policy: "Event data retained for 36 months"
+  consent_text: "Beneficiaries consent to data processing for program purposes"
+
+# ============================================================================
+# TRACE/AUDIT (Optional)
+# Document sources and open questions
+# ============================================================================
+trace:
+  sources:
+    - id: "policy_doc"
+      doc: "Program Policy Document v1.0"
+      url: "https://example.com/policy.pdf"
+  
+  open_questions:
+    - "Confirm eligibility criteria for special cases"
+    - "Clarify payment schedule for holidays"
+
+# ============================================================================
+# OUT OF SCOPE (Optional)
+# Document what is NOT included in this specification
+# ============================================================================
+out_of_scope:
+  - item: "Financial management system integration"
+    reason: "Handled by separate finance module"
+  - item: "Detailed poverty scoring methodology"
+    reason: "Managed by targeting system"
+
+# ============================================================================
+# NOTES FOR DEVELOPERS
+# ============================================================================
+# Field Types Supported:
+#   - string/char: Text input (single line)
+#   - text: Multi-line text
+#   - number/float: Decimal numbers
+#   - boolean: True/False checkbox
+#   - date: Date picker
+#   - datetime: Date and time picker
+#   - binary: File upload
+#
+# Model Naming Convention:
+#   - Use lowercase with dots: spp.event.{domain}.{type}
+#   - Examples: spp.event.house.visit, spp.event.compliance.check
+#
+# Generated Event Types:
+#   1. From external_systems: spp.event.{domain}.{record_type}
+#   2. From compliance.conditions: spp.event.compliance.{id}
+#   3. From event_types: {model} (as specified)
+#
+# Best Practices:
+#   - Keep model names descriptive but concise
+#   - Use clear field labels for UI display
+#   - Add descriptions for complex fields
+#   - Validate YAML syntax before uploading
+#   - Test with a subset of event types first
+#   - Export and version control your specs
+#
+# For complete examples, see:
+#   - 4ps_best_practice_example_v7.yaml (comprehensive)
+#   - Documentation in README.rst and USAGE_GUIDE.md
+

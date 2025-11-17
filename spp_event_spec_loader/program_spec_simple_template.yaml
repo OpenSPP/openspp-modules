@@ -1,0 +1,55 @@
+# OpenSPP Program Specification - Simple Template
+# This is a minimal template to get you started quickly.
+# For a complete template with all options, see: program_spec_template.yaml
+
+# ============================================================================
+# BASIC PROGRAM INFORMATION (Required)
+# ============================================================================
+program:
+  name: "My Program Name"
+  currency: "USD"
+  localization:
+    languages: ["en"]
+
+# ============================================================================
+# CUSTOM EVENT TYPES
+# This is the simplest way to create event types for your program
+# ============================================================================
+event_types:
+  # Example 1: Simple data collection event
+  - id: "my_first_event"
+    name: "My First Event"
+    model: "spp.event.my.first.event"
+    description: "A simple event to track something"
+    fields:
+      - name: "event_date"
+        label: "Date"
+        field_type: "date"
+      - name: "notes"
+        label: "Notes"
+        field_type: "text"
+
+  # Example 2: Add more events as needed
+  # Copy the structure above and modify for your needs
+
+# ============================================================================
+# QUICK START GUIDE
+# ============================================================================
+# 1. Copy this file
+# 2. Change "My Program Name" to your actual program name
+# 3. Modify "my_first_event" section with your event details
+# 4. Add more event types by copying the event_types structure
+# 5. Upload to OpenSPP via: Registry → Configuration → Event Spec Loader
+# 6. Click "Validate" then "Deploy Event Types"
+#
+# Field types you can use:
+#   - char: Short text (name, title, etc.)
+#   - text: Long text (notes, description, etc.)
+#   - date: Date picker
+#   - datetime: Date and time picker
+#   - float: Decimal number
+#   - boolean: Yes/No checkbox
+#   - binary: File upload
+#
+# Need more examples? See program_spec_template.yaml
+

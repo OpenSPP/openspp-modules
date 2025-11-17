@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spp_program_spec_admin,Program Spec Admin Access,model_spp_program_spec,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_event_type_definition_admin,Event Type Definition Admin Access,model_spp_event_type_definition,g2p_registry_base.group_g2p_admin,1,1,1,1
+
+spp_program_spec_registrar,Program Spec Registrar Access,model_spp_program_spec,g2p_registry_base.group_g2p_registrar,1,0,0,0
+spp_event_type_definition_registrar,Event Type Definition Registrar Access,model_spp_event_type_definition,g2p_registry_base.group_g2p_registrar,1,0,0,0
+
+spp_read_program_spec,Program Spec Read Access,model_spp_program_spec,spp_base_common.read_registry,1,0,0,0
+spp_read_event_type_definition,Event Type Definition Read Access,model_spp_event_type_definition,spp_base_common.read_registry,1,0,0,0
+
