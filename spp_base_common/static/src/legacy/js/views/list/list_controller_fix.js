@@ -10,26 +10,33 @@
  * Fixed to show: "Of the 50,000 records selected, only the first 20,000 have been archived"
  */
 
-import {ListController} from "@web/views/list/list_controller";
+import ListController from "web.ListController";
+import session from "web.session";
+import core from "web.core";
 import {patch} from "@web/core/utils/patch";
+
+const _t = core._t;
 
 patch(ListController.prototype, {
     /**
      * @override
      */
-    async toggleArchiveState(archive) {
-        const resIds = await this.getSelectedResIds();
-        const total = this.model.root.count;
+    async _toggleArchiveState(archive) {
+        const resIds = await this.getSelectedIdsWithDomain();
+        const notif = this.isDomainSelected;
+        await this._archive(resIds, archive);
+        const total = this.model.get(this.handle, {raw: true}).count;
         
-        await this.model.root.archive(resIds, archive);
-        
-        if (this.model.root.isDomainSelected && resIds.length < total) {
-            const message = _.str.sprintf(
-                this.env._t("Of the %d records selected, only the first %d have been archived/unarchived."),
-                total,          // Fixed: swapped - total selected (larger)
-                resIds.length   // Fixed: swapped - actually processed (smaller)
+        // Fixed: Swapped parameters from original (total, resIds.length) to (resIds.length, total)
+        // Logic: resIds.length < total, so resIds.length is the smaller number (actually archived)
+        //        and total is the larger number (total selected)
+        if (notif && resIds.length === session.active_ids_limit && resIds.length < total) {
+            const msg = _.str.sprintf(
+                _t("Of the %d records selected, only the first %d have been archived/unarchived."),
+                resIds.length,  // Fixed: total selected (smaller due to active_ids_limit)
+                total           // Fixed: actually archived (larger - all that were selected)
             );
-            this.notification.add(message, { type: "warning" });
+            this.displayNotification({ title: _t('Warning'), message: msg });
         }
     },
 });
