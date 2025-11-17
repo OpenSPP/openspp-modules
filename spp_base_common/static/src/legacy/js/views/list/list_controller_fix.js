@@ -1,44 +1,30 @@
-odoo.define('spp_base_common.ListControllerPatch', ['web.ListController', 'web.session', 'web.core'], function (require) {
-'use strict';
+/** @odoo-module **/
 
 /**
- * Patch for Odoo bug: swapped parameters in archive notification message.
+ * Patch for Odoo: The archive notification is generated in the model layer.
  * 
- * Bug location: odoo/addons/web/static/src/legacy/js/views/list/list_controller.js:658-659
- * Reference: https://github.com/odoo/odoo/tree/17.0/odoo/addons/base
+ * Reference: https://github.com/odoo/odoo/blob/17.0/addons/web/static/src/views/list/list_controller.js
  * 
- * Original shows: "Of the 20,000 records selected, only the first 50,000 have been archived"
- * Fixed to show: "Of the 50,000 records selected, only the first 20,000 have been archived"
+ * The modern ListController just calls model.root.archive(), so we need to look elsewhere for the notification.
+ * This test will verify if we can patch the controller at all.
  */
 
-var ListController = require('web.ListController');
-var session = require('web.session');
-var core = require('web.core');
+import {ListController} from "@web/views/list/list_controller";
+import {patch} from "@web/core/utils/patch";
 
-var _t = core._t;
-
-// Patch the ListController using .include()
-ListController.include({
+patch(ListController.prototype, {
     /**
-     * @override
+     * @override - Test if patch works
      */
-    _toggleArchiveState: async function (archive) {
-        const resIds = await this.getSelectedIdsWithDomain();
-        const notif = this.isDomainSelected;
-        await this._archive(resIds, archive);
-        const total = this.model.get(this.handle, {raw: true}).count;
+    async toggleArchiveState(archive) {
+        console.log("🎯 OPENSPP PATCH IS BEING CALLED!");
+        this.notification.add("🎯 OpenSPP Patch Working!", {type: "success"});
         
-        // TEST: Completely change the message to verify patch is working
-        if (notif && resIds.length === session.active_ids_limit && resIds.length < total) {
-            const msg = _.str.sprintf(
-                _t("🎯 PATCH IS WORKING! Selected: %d, Processed: %d"),
-                resIds.length,  // Total selected
-                total           // Actually processed
-            );
-            this.displayNotification({ title: _t('OpenSPP Archive Fix'), message: msg });
+        // Call the original method
+        if (archive) {
+            return this.model.root.archive(true);
         }
+        return this.model.root.unarchive(true);
     },
-});
-
 });
 
