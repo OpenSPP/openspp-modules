@@ -16,7 +16,7 @@
 program:
   name: "Your Program Name"
   # Example: "Conditional Cash Transfer Program"
-  
+
   objectives:
     - "Primary objective of the program"
     - "Secondary objective"
@@ -24,33 +24,33 @@ program:
   # Example objectives:
   # - "Reduce poverty by investing in children's health and education"
   # - "Increase school enrollment and attendance"
-  
+
   coverage:
-    geographies: 
+    geographies:
       - "Country or region"
     # Example: ["Philippines (national)", "Region IV-A"]
-    
-    populations: 
+
+    populations:
       - "Target population description"
     # Example: ["Households with children 0-18", "Poor and near-poor families"]
-  
+
   legal_basis: "Legal reference or policy document"
   # Example: "Republic Act 11310 (2019)"
-  
+
   implementing_agencies:
     - "Lead agency"
     - "Partner agencies"
   # Example: ["DSWD (lead)", "DepEd", "DOH", "LGUs"]
-  
+
   localization:
-    languages: 
-      - "en"  # ISO 639-1 codes
+    languages:
+      - "en" # ISO 639-1 codes
       - "fil"
     # Common codes: en (English), fil (Filipino), es (Spanish), fr (French)
-  
+
   currency: "USD"
   # ISO 4217 codes: USD, PHP, EUR, GBP, etc.
-  
+
   ann:
     summary: "Brief summary of the program"
     rationale:
@@ -88,7 +88,7 @@ entities:
       - type: "one-to-many"
         to: "Individual"
         label: "Members"
-  
+
   - name: "Individual"
     label: "Household Member"
     fields:
@@ -140,7 +140,7 @@ external_systems:
       legal_basis: "Data sharing agreement"
       pii_fields: ["student_id"]
       retention_months: 36
-  
+
   # Example: Health system integration
   - id: "HealthSystem"
     role: "evidence_provider"
@@ -162,7 +162,7 @@ external_systems:
 compliance:
   ann:
     summary: "Compliance requirements for beneficiaries"
-  
+
   conditions:
     - id: "education_attendance"
       description: "Child has minimum required school attendance"
@@ -171,7 +171,7 @@ compliance:
       schedule: "monthly"
       grace_period_days: 10
       evidence_channels: ["school_upload", "csv_batch", "api"]
-    
+
     - id: "health_checkup"
       description: "Required health checkup completed"
       check: "metric('health.checkup_completed', me, last_cycle()) == true"
@@ -179,9 +179,9 @@ compliance:
       schedule: "quarterly"
       grace_period_days: 15
       evidence_channels: ["health_facility", "manual_entry"]
-    
+
     # Add more compliance conditions as needed
-  
+
   sanctions:
     - id: "withhold_payment"
       when:
@@ -228,7 +228,7 @@ event_types:
       - name: "photo"
         label: "Photo"
         field_type: "binary"
-  
+
   # Example 2: Phone Survey
   - id: "phone_survey"
     name: "Phone Survey"
@@ -253,7 +253,7 @@ event_types:
       - name: "notes"
         label: "Notes"
         field_type: "text"
-  
+
   # Example 3: Grievance/Complaint
   - id: "grievance"
     name: "Grievance Case"
@@ -281,7 +281,7 @@ event_types:
       - name: "resolution_notes"
         label: "Resolution Notes"
         field_type: "text"
-  
+
   # Example 4: Training Attendance
   - id: "training"
     name: "Training Session"
@@ -309,7 +309,7 @@ event_types:
       - name: "certificate_issued"
         label: "Certificate Issued"
         field_type: "boolean"
-  
+
   # Add more custom event types as needed
 
 # ============================================================================
@@ -319,7 +319,7 @@ event_types:
 entitlements:
   ann:
     summary: "Cash grants and benefits provided by the program"
-  
+
   components:
     - id: "education_grant"
       label: "Education Cash Grant"
@@ -331,7 +331,7 @@ entitlements:
         currency: "PHP"
       frequency: "monthly"
       rounding: "round"
-    
+
     # Add more entitlement components as needed
 
 # ============================================================================
@@ -341,7 +341,7 @@ entitlements:
 enrollment_workflow:
   ann:
     summary: "Beneficiary enrollment and lifecycle management"
-  
+
   states:
     - "Intake"
     - "Verification"
@@ -349,7 +349,7 @@ enrollment_workflow:
     - "Active"
     - "Suspended"
     - "Exited"
-  
+
   transitions:
     - from: "Verification"
       to: "Approval"
@@ -364,7 +364,7 @@ enrollment_workflow:
 calendar:
   ann:
     summary: "Program cycle and payment schedule"
-  
+
   periods:
     - id: "P1"
       monitor_months: ["Jan", "Feb"]
@@ -382,7 +382,7 @@ calendar:
 security_privacy:
   ann:
     summary: "Data protection and access control policies"
-  
+
   roles_permissions:
     - role: "caseworker"
       permissions: ["read_hh", "update_roster", "record_events"]
@@ -390,7 +390,7 @@ security_privacy:
     - role: "supervisor"
       permissions: ["read_hh", "update_roster", "record_events", "approve_enrollment"]
       record_rules: ["region_scope"]
-  
+
   retention_policy: "Event data retained for 36 months"
   consent_text: "Beneficiaries consent to data processing for program purposes"
 
@@ -403,7 +403,7 @@ trace:
     - id: "policy_doc"
       doc: "Program Policy Document v1.0"
       url: "https://example.com/policy.pdf"
-  
+
   open_questions:
     - "Confirm eligibility criteria for special cases"
     - "Clarify payment schedule for holidays"
@@ -417,7 +417,6 @@ out_of_scope:
     reason: "Handled by separate finance module"
   - item: "Detailed poverty scoring methodology"
     reason: "Managed by targeting system"
-
 # ============================================================================
 # NOTES FOR DEVELOPERS
 # ============================================================================
@@ -450,4 +449,3 @@ out_of_scope:
 # For complete examples, see:
 #   - 4ps_best_practice_example_v7.yaml (comprehensive)
 #   - Documentation in README.rst and USAGE_GUIDE.md
-

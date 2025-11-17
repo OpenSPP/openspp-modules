@@ -32,4 +32,3 @@
     "auto_install": False,
     "summary": "Dynamically generate event data types and components from YAML program specifications, enabling rapid deployment of event tracking for social protection programs.",
 }
-

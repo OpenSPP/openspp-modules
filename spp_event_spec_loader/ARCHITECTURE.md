@@ -4,64 +4,64 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         USER INTERFACE                           │
+│                         USER INTERFACE                          │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
+│                                                                 │
 │  Program Specifications          Event Type Definitions         │
-│  ┌──────────────────┐            ┌──────────────────┐          │
-│  │ Tree View        │            │ Tree View        │          │
-│  │ Form View        │            │ Form View        │          │
-│  │ YAML Editor      │            │ Deployment UI    │          │
-│  └──────────────────┘            └──────────────────┘          │
-│                                                                  │
+│  ┌──────────────────┐            ┌──────────────────┐           │
+│  │ Tree View        │            │ Tree View        │           │
+│  │ Form View        │            │ Form View        │           │
+│  │ YAML Editor      │            │ Deployment UI    │           │
+│  └──────────────────┘            └──────────────────┘           │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                      BUSINESS LOGIC LAYER                        │
+│                      BUSINESS LOGIC LAYER                       │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  ┌────────────────────────────────────────────────────────┐    │
-│  │  spp.program.spec                                      │    │
-│  │  ┌──────────────────────────────────────────────────┐ │    │
-│  │  │ • Parse YAML                                     │ │    │
-│  │  │ • Validate syntax                                │ │    │
-│  │  │ • Extract metadata                               │ │    │
-│  │  │ • Extract event type definitions                │ │    │
-│  │  │ • Manage deployment workflow                    │ │    │
-│  │  └──────────────────────────────────────────────────┘ │    │
-│  └────────────────────────────────────────────────────────┘    │
-│                            ▼                                     │
-│  ┌────────────────────────────────────────────────────────┐    │
-│  │  spp.event.type.definition                             │    │
-│  │  ┌──────────────────────────────────────────────────┐ │    │
-│  │  │ • Store field definitions (JSON)                │ │    │
-│  │  │ • Generate models (ir.model)                    │ │    │
-│  │  │ • Generate views (ir.ui.view)                   │ │    │
-│  │  │ • Track deployment status                       │ │    │
-│  │  └──────────────────────────────────────────────────┘ │    │
-│  └────────────────────────────────────────────────────────┘    │
-│                                                                  │
+│                                                                 │
+│  ┌────────────────────────────────────────────────────────┐     │
+│  │  spp.program.spec                                      │     │
+│  │  ┌──────────────────────────────────────────────────┐  │     │
+│  │  │ • Parse YAML                                     │  │     │
+│  │  │ • Validate syntax                                │  │     │
+│  │  │ • Extract metadata                               │  │     │
+│  │  │ • Extract event type definitions                 │  │     │
+│  │  │ • Manage deployment workflow                     │  │     │
+│  │  └──────────────────────────────────────────────────┘  │     │
+│  └────────────────────────────────────────────────────────┘     │
+│                            ▼                                    │
+│  ┌────────────────────────────────────────────────────────┐     │
+│  │  spp.event.type.definition                             │     │
+│  │  ┌──────────────────────────────────────────────────┐  │     │
+│  │  │ • Store field definitions (JSON)                 │  │     │
+│  │  │ • Generate models (ir.model)                     │  │     │
+│  │  │ • Generate views (ir.ui.view)                    │  │     │
+│  │  │ • Track deployment status                        │  │     │
+│  │  └──────────────────────────────────────────────────┘  │     │
+│  └────────────────────────────────────────────────────────┘     │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                        DATA LAYER                                │
+│                        DATA LAYER                               │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
+│                                                                 │
 │  Generated Models (Dynamic)         Base Framework              │
-│  ┌──────────────────────────┐      ┌──────────────────────┐   │
-│  │ spp.event.education.*    │◄─────┤ spp.event.data       │   │
-│  │ spp.event.compliance.*   │      │                      │   │
-│  │ spp.event.health.*       │      │ • Event metadata     │   │
-│  │ spp.event.custom.*       │      │ • Registrant link    │   │
-│  └──────────────────────────┘      │ • State management   │   │
-│                                     └──────────────────────┘   │
+│  ┌──────────────────────────┐      ┌──────────────────────┐     │
+│  │ spp.event.education.*    │◄─────┤ spp.event.data       │     │
+│  │ spp.event.compliance.*   │      │                      │     │
+│  │ spp.event.health.*       │      │ • Event metadata     │     │
+│  │ spp.event.custom.*       │      │ • Registrant link    │     │
+│  └──────────────────────────┘      │ • State management   │     │
+│                                    └──────────────────────┘     │
 │  Generated Views (Dynamic)                                      │
-│  ┌──────────────────────────┐                                  │
-│  │ • Tree views             │                                  │
-│  │ • Form views             │                                  │
-│  │ • Actions                │                                  │
-│  └──────────────────────────┘                                  │
-│                                                                  │
+│  ┌──────────────────────────┐                                   │
+│  │ • Tree views             │                                   │
+│  │ • Form views             │                                   │
+│  │ • Actions                │                                   │
+│  └──────────────────────────┘                                   │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -91,16 +91,16 @@
 │ │ _extract_event_types_from_spec()        │ │
 │ │                                         │ │
 │ │ Source 1: external_systems              │ │
-│ │ ├─ system.id + data_contract           │ │
-│ │ └─ → spp.event.{domain}.{record_type}  │ │
+│ │ ├─ system.id + data_contract            │ │
+│ │ └─ → spp.event.{domain}.{record_type}   │ │
 │ │                                         │ │
 │ │ Source 2: compliance.conditions         │ │
 │ │ ├─ condition.id + description           │ │
-│ │ └─ → spp.event.compliance.{id}         │ │
+│ │ └─ → spp.event.compliance.{id}          │ │
 │ │                                         │ │
 │ │ Source 3: event_types                   │ │
 │ │ ├─ Custom definitions                   │ │
-│ │ └─ → User-specified model name         │ │
+│ │ └─ → User-specified model name          │ │
 │ └─────────────────────────────────────────┘ │
 └──────────┬──────────────────────────────────┘
            │
@@ -155,20 +155,20 @@
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│                    YAML Specification                             │
-│  (Source of Truth - stored in spp.program.spec.yaml_content)    │
+│                    YAML Specification                            │
+│  (Source of Truth - stored in spp.program.spec.yaml_content)     │
 └────────┬─────────────────────────────────────────────────────────┘
          │
          │ parses into
          │
          ▼
 ┌──────────────────────────────────────────────────────────────────┐
-│                  Event Type Definitions                           │
+│                  Event Type Definitions                          │
 │              (spp.event.type.definition)                         │
-│  ┌────────────┐  ┌────────────┐  ┌────────────┐                │
-│  │ Education  │  │ Health     │  │ Compliance │  ...            │
-│  │ Attendance │  │ Checkup    │  │ Verify     │                 │
-│  └────┬───────┘  └────┬───────┘  └────┬───────┘                │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐                  │
+│  │ Education  │  │ Health     │  │ Compliance │  ...             │
+│  │ Attendance │  │ Checkup    │  │ Verify     │                  │
+│  └────┬───────┘  └────┬───────┘  └────┬───────┘                  │
 │       │               │               │                          │
 │       └───────────────┼───────────────┘                          │
 │                       │                                          │
@@ -176,44 +176,44 @@
                         │ generates
                         ▼
 ┌──────────────────────────────────────────────────────────────────┐
-│                    Dynamic Models                                 │
+│                    Dynamic Models                                │
 │  ┌──────────────────────────────────────────────────────┐        │
 │  │ ir.model (Odoo Model Registry)                       │        │
 │  │  ├─ spp.event.education.attendance                   │        │
 │  │  ├─ spp.event.health.checkup                         │        │
 │  │  └─ spp.event.compliance.verify                      │        │
 │  └──────────────────────────────────────────────────────┘        │
-│                                                                   │
+│                                                                  │
 │  ┌──────────────────────────────────────────────────────┐        │
 │  │ ir.model.fields (Field Definitions)                  │        │
 │  │  ├─ x_attendance_pct (float)                         │        │
 │  │  ├─ x_school_id (char)                               │        │
 │  │  └─ x_period (char)                                  │        │
 │  └──────────────────────────────────────────────────────┘        │
-│                                                                   │
+│                                                                  │
 │  ┌──────────────────────────────────────────────────────┐        │
 │  │ ir.ui.view (View Definitions)                        │        │
 │  │  ├─ Tree views                                       │        │
 │  │  └─ Form views                                       │        │
 │  └──────────────────────────────────────────────────────┘        │
-└─────────────────────────┬─────────────────────────────────────────┘
+└─────────────────────────┬────────────────────────────────────────┘
                           │
                           │ integrates with
                           ▼
 ┌──────────────────────────────────────────────────────────────────┐
-│              Base Event Data Framework                            │
+│              Base Event Data Framework                           │
 │                  (spp_event_data)                                │
 │  ┌──────────────────────────────────────────────────────┐        │
 │  │ spp.event.data                                       │        │
 │  │  ├─ model (Many2oneReference)                        │        │
 │  │  ├─ res_id (Many2oneReference)                       │        │
-│  │  ├─ partner_id (Many2one res.partner)               │        │
+│  │  ├─ partner_id (Many2one res.partner)                │        │
 │  │  ├─ collection_date                                  │        │
 │  │  ├─ state (active/inactive)                          │        │
 │  │  └─ ... (other metadata)                             │        │
 │  └──────────────────────────────────────────────────────┘        │
-│                                                                   │
-│  Provides:                                                        │
+│                                                                  │
+│  Provides:                                                       │
 │  • Event history tracking                                        │
 │  • Active/inactive state management                              │
 │  • Registrant association                                        │
@@ -257,8 +257,8 @@
 │ + action_deploy()               │
 │ + _deploy_model()               │
 │ + _deploy_views()               │
-│ + _generate_tree_view_xml()    │
-│ + _generate_form_view_xml()    │
+│ + _generate_tree_view_xml()     │
+│ + _generate_form_view_xml()     │
 └─────────────┬───────────────────┘
               │ creates
               ▼
@@ -340,32 +340,32 @@ User         ProgramSpec      EventTypeDef      IrModel      IrView
 
 ```
 ┌─────────────────────────────────────────────┐
-│          Frontend Layer                      │
+│          Frontend Layer                     │
 │  • Odoo Web Client (JavaScript)             │
-│  • QWeb Templates                            │
+│  • QWeb Templates                           │
 │  • ACE Editor (YAML syntax highlighting)    │
 └─────────────────────────────────────────────┘
                     ▼
 ┌─────────────────────────────────────────────┐
-│       Application Layer                      │
-│  • Python 3.8+                               │
-│  • Odoo 17 Framework                         │
+│       Application Layer                     │
+│  • Python 3.8+                              │
+│  • Odoo 17 Framework                        │
 │  • ORM (Object-Relational Mapping)          │
 └─────────────────────────────────────────────┘
                     ▼
 ┌─────────────────────────────────────────────┐
-│         Business Logic                       │
-│  • PyYAML (YAML parsing)                     │
+│         Business Logic                      │
+│  • PyYAML (YAML parsing)                    │
 │  • JSON (field definition storage)          │
-│  • XML (view generation)                     │
+│  • XML (view generation)                    │
 │  • Dynamic model creation (ir.model)        │
 └─────────────────────────────────────────────┘
                     ▼
 ┌─────────────────────────────────────────────┐
-│          Data Layer                          │
-│  • PostgreSQL Database                       │
-│  • Odoo ORM                                  │
-│  • Dynamic table creation                    │
+│          Data Layer                         │
+│  • PostgreSQL Database                      │
+│  • Odoo ORM                                 │
+│  • Dynamic table creation                   │
 └─────────────────────────────────────────────┘
 ```
 
@@ -373,29 +373,29 @@ User         ProgramSpec      EventTypeDef      IrModel      IrView
 
 ```
 ┌─────────────────────────────────────────────────┐
-│              User Roles                          │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐      │
-│  │  Admin   │  │Registrar │  │   User   │      │
-│  └────┬─────┘  └────┬─────┘  └────┬─────┘      │
+│              User Roles                         │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
+│  │  Admin   │  │Registrar │  │   User   │       │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘       │
 │       │             │              │            │
-└───────┼─────────────┼──────────────┼─────────────┘
+└───────┼─────────────┼──────────────┼────────────┘
         │             │              │
         ▼             ▼              ▼
 ┌─────────────────────────────────────────────────┐
-│          Access Control Layer                    │
+│          Access Control Layer                   │
 │  ┌─────────────────────────────────────────┐    │
 │  │ ir.model.access (CSV)                   │    │
 │  │  ├─ spp_program_spec_admin (CRUD)       │    │
 │  │  ├─ spp_program_spec_registrar (R)      │    │
 │  │  └─ spp_program_spec_user (R events)    │    │
 │  └─────────────────────────────────────────┘    │
-│                                                  │
+│                                                 │
 │  ┌─────────────────────────────────────────┐    │
 │  │ Record Rules (if needed)                │    │
 │  │  • Restrict by region                   │    │
 │  │  • Restrict by program                  │    │
 │  └─────────────────────────────────────────┘    │
-└──────────────────────────────────────────────────┘
+└─────────────────────────────────────────────────┘
 ```
 
 ## Deployment Architecture
@@ -418,24 +418,24 @@ Development → Validation → Deployment → Production
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                Performance Profile                       │
+│                Performance Profile                      │
 ├─────────────────────────────────────────────────────────┤
-│                                                          │
+│                                                         │
 │  YAML Parsing:              ~100ms for 500-line spec    │
 │  Model Creation:            ~500ms per model            │
 │  View Generation:           ~200ms per view             │
 │  Total Deployment:          ~2-5 seconds for 5 types    │
-│                                                          │
-│  Runtime Performance:                                    │
+│                                                         │
+│  Runtime Performance:                                   │
 │  • Dynamic models perform like standard models          │
 │  • No significant overhead after deployment             │
 │  • Views are cached normally                            │
-│                                                          │
-│  Recommended Limits:                                     │
+│                                                         │
+│  Recommended Limits:                                    │
 │  • Event types per program: 10-20                       │
 │  • Fields per event type: 10-15                         │
 │  • Total dynamic models: < 100                          │
-│                                                          │
+│                                                         │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -443,31 +443,27 @@ Development → Validation → Deployment → Production
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│              Module Extension Points                     │
+│              Module Extension Points                    │
 ├─────────────────────────────────────────────────────────┤
-│                                                          │
-│  1. Custom Field Types                                   │
-│     └─ Extend _extract_fields_from_data_contract()     │
-│                                                          │
-│  2. Custom View Templates                                │
-│     └─ Override _generate_form_view_xml()              │
-│                                                          │
-│  3. Custom Event Sources                                 │
-│     └─ Extend _extract_event_types_from_spec()         │
-│                                                          │
-│  4. Post-Deployment Hooks                                │
+│                                                         │
+│  1. Custom Field Types                                  │
+│     └─ Extend _extract_fields_from_data_contract()      │
+│                                                         │
+│  2. Custom View Templates                               │
+│     └─ Override _generate_form_view_xml()               │
+│                                                         │
+│  3. Custom Event Sources                                │
+│     └─ Extend _extract_event_types_from_spec()          │
+│                                                         │
+│  4. Post-Deployment Hooks                               │
 │     └─ Override action_deploy() in inherited model      │
-│                                                          │
-│  5. Custom Validation Rules                              │
+│                                                         │
+│  5. Custom Validation Rules                             │
 │     └─ Override action_validate()                       │
-│                                                          │
+│                                                         │
 └─────────────────────────────────────────────────────────┘
 ```
 
-This architecture enables:
-✓ **Separation of Concerns**: YAML specs separate from implementation
-✓ **Scalability**: Handle multiple programs independently
-✓ **Maintainability**: Update via configuration, not code
-✓ **Flexibility**: Easy to extend and customize
-✓ **Traceability**: Full audit trail of deployments
-
+This architecture enables: ✓ **Separation of Concerns**: YAML specs separate from implementation ✓
+**Scalability**: Handle multiple programs independently ✓ **Maintainability**: Update via configuration, not
+code ✓ **Flexibility**: Easy to extend and customize ✓ **Traceability**: Full audit trail of deployments

@@ -31,7 +31,6 @@ event_types:
 
   # Example 2: Add more events as needed
   # Copy the structure above and modify for your needs
-
 # ============================================================================
 # QUICK START GUIDE
 # ============================================================================
@@ -52,4 +51,3 @@ event_types:
 #   - binary: File upload
 #
 # Need more examples? See program_spec_template.yaml
-

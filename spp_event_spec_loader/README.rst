@@ -149,7 +149,7 @@ Usage Workflow
    
    - Navigate to: Registry → Configuration → Event Spec Loader → Program Specifications
    - Create new record
-   - Upload YAML file via "Upload YAML" tab OR manually enter in "YAML Specification" tab
+   - In "YAML Specification" tab: Upload YAML file using file upload button OR manually enter content
    - Click "Validate" button
 
 2. **Review Extracted Metadata**:

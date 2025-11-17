@@ -2,7 +2,9 @@
 
 ## What Was Created
 
-A complete OpenSPP module that dynamically generates event data types and their required components from YAML program specifications. This is a **meta-module** that automates the creation of event tracking infrastructure.
+A complete OpenSPP module that dynamically generates event data types and their required components from YAML
+program specifications. This is a **meta-module** that automates the creation of event tracking
+infrastructure.
 
 ## Module Location
 
@@ -23,6 +25,7 @@ A complete OpenSPP module that dynamically generates event data types and their 
 - Tracks deployment history and errors
 
 **Key Features**:
+
 - Built-in YAML editor with syntax highlighting
 - Automatic metadata extraction
 - JSON preview of parsed data
@@ -39,6 +42,7 @@ A complete OpenSPP module that dynamically generates event data types and their 
 - Manages event type lifecycle
 
 **Key Features**:
+
 - Auto-generation of technical names
 - Field definition storage and validation
 - Dynamic model creation
@@ -52,6 +56,7 @@ The module automatically creates event types from three sources:
 #### A. External Systems (Evidence Providers)
 
 From `external_systems` section in YAML:
+
 ```yaml
 external_systems:
   - id: "DepEd"
@@ -68,6 +73,7 @@ external_systems:
 #### B. Compliance Conditions
 
 From `compliance.conditions` section:
+
 ```yaml
 compliance:
   conditions:
@@ -80,6 +86,7 @@ compliance:
 #### C. Custom Event Types
 
 From `event_types` section:
+
 ```yaml
 event_types:
   - id: "house_visit"
@@ -97,15 +104,18 @@ event_types:
 For each event type, the module creates:
 
 1. **Odoo Model** (`ir.model`)
+
    - Dynamic model with custom fields
    - Standard fields: name, summary, description
    - Custom fields based on YAML definition
 
 2. **Tree View** (`ir.ui.view`)
+
    - List view with key fields
    - Sortable and searchable
 
 3. **Form View** (`ir.ui.view`)
+
    - Organized field layout
    - Grouped by related fields
 
@@ -248,15 +258,18 @@ self.env["ir.ui.view"].create({
 The included demo specification (`data/demo_program_spec.xml`) generates:
 
 ### From External Systems
+
 1. `spp.event.education.attendance` (DepEd integration)
 2. `spp.event.health.health_check` (DOH integration)
 
 ### From Compliance Conditions
+
 3. `spp.event.compliance.edu_attendance`
 4. `spp.event.compliance.health_comp`
 5. `spp.event.compliance.fds_attendance`
 
 ### From Custom Event Types
+
 6. `spp.event.house.visit.4ps`
 7. `spp.event.grievance.4ps`
 
@@ -269,6 +282,7 @@ The included demo specification (`data/demo_program_spec.xml`) generates:
 **Scenario**: New CCT program needs event tracking
 
 **Without this module**:
+
 - Manually create 10+ model files
 - Write view XML for each (20+ files)
 - Create wizard files
@@ -277,6 +291,7 @@ The included demo specification (`data/demo_program_spec.xml`) generates:
 - **Time**: 2-3 weeks
 
 **With this module**:
+
 - Write YAML specification
 - Upload and deploy
 - **Time**: 2-3 hours
@@ -286,6 +301,7 @@ The included demo specification (`data/demo_program_spec.xml`) generates:
 **Scenario**: Add new compliance condition
 
 **Without this module**:
+
 - Create new model file
 - Add views
 - Update wizards
@@ -293,6 +309,7 @@ The included demo specification (`data/demo_program_spec.xml`) generates:
 - **Time**: 1-2 days
 
 **With this module**:
+
 - Add condition to YAML
 - Redeploy specification
 - **Time**: 10 minutes
@@ -302,11 +319,13 @@ The included demo specification (`data/demo_program_spec.xml`) generates:
 **Scenario**: Organization manages 5 programs
 
 **Without this module**:
+
 - Maintain 5 separate modules
 - Complex dependency management
 - Version conflicts
 
 **With this module**:
+
 - 5 YAML specifications
 - One module manages all
 - Clean separation
@@ -315,25 +334,19 @@ The included demo specification (`data/demo_program_spec.xml`) generates:
 
 ### For Developers
 
-✅ **Rapid Development**: Generate models in minutes, not days
-✅ **Less Code**: No need to write repetitive model/view files
-✅ **Easy Maintenance**: Update YAML instead of Python code
-✅ **Version Control**: YAML specs are easy to diff and merge
-✅ **Documentation**: YAML serves as living documentation
+✅ **Rapid Development**: Generate models in minutes, not days ✅ **Less Code**: No need to write repetitive
+model/view files ✅ **Easy Maintenance**: Update YAML instead of Python code ✅ **Version Control**: YAML
+specs are easy to diff and merge ✅ **Documentation**: YAML serves as living documentation
 
 ### For Implementers
 
-✅ **Flexibility**: Adapt to program changes quickly
-✅ **Standardization**: Consistent event type structure
-✅ **Scalability**: Manage multiple programs easily
-✅ **Auditability**: Full deployment history tracking
+✅ **Flexibility**: Adapt to program changes quickly ✅ **Standardization**: Consistent event type structure
+✅ **Scalability**: Manage multiple programs easily ✅ **Auditability**: Full deployment history tracking
 
 ### For Program Managers
 
-✅ **Speed**: Deploy new programs faster
-✅ **Cost**: Reduce development time and cost
-✅ **Agility**: Respond to policy changes quickly
-✅ **Visibility**: See all event types in one place
+✅ **Speed**: Deploy new programs faster ✅ **Cost**: Reduce development time and cost ✅ **Agility**: Respond
+to policy changes quickly ✅ **Visibility**: See all event types in one place
 
 ## Limitations and Considerations
 
@@ -353,10 +366,8 @@ The included demo specification (`data/demo_program_spec.xml`) generates:
 
 ### When NOT to Use This Module
 
-❌ Complex event types withMany2one/One2many relationships
-❌ Event types needing heavy customization
-❌ Performance-critical applications with hundreds of models
-❌ When you need full control over every aspect
+❌ Complex event types withMany2one/One2many relationships ❌ Event types needing heavy customization ❌
+Performance-critical applications with hundreds of models ❌ When you need full control over every aspect
 
 ## Future Enhancements
 
@@ -379,6 +390,7 @@ Comprehensive test suite included:
 - **test_event_type_definition.py**: Tests event type creation, views, fields
 
 Run tests:
+
 ```bash
 odoo-bin -d test_db --test-tags=spp_event_spec_loader --stop-after-init
 ```
@@ -438,15 +450,14 @@ odoo-bin -d your_db -i spp_event_spec_loader --load-demo
 
 ## Credits
 
-**Authors**: OpenSPP.org  
-**Maintainers**: jeremi, gonzalesedwin1123, emjay0921  
-**License**: LGPL-3  
-**Version**: 17.0.1.0.0  
-**Status**: Alpha
+**Authors**: OpenSPP.org **Maintainers**: jeremi, gonzalesedwin1123, emjay0921 **License**: LGPL-3
+**Version**: 17.0.1.0.0 **Status**: Alpha
 
 ## Conclusion
 
-The `spp_event_spec_loader` module represents a significant advancement in OpenSPP's event tracking capabilities. By treating YAML program specifications as the source of truth, it enables rapid, consistent, and maintainable deployment of event tracking infrastructure for social protection programs.
+The `spp_event_spec_loader` module represents a significant advancement in OpenSPP's event tracking
+capabilities. By treating YAML program specifications as the source of truth, it enables rapid, consistent,
+and maintainable deployment of event tracking infrastructure for social protection programs.
 
-**Key Takeaway**: What previously took weeks of development can now be accomplished in hours through configuration.
-
+**Key Takeaway**: What previously took weeks of development can now be accomplished in hours through
+configuration.

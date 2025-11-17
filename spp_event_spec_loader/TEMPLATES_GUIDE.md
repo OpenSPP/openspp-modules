@@ -10,19 +10,22 @@ The `spp_event_spec_loader` module provides three levels of YAML templates to su
 
 **File**: `program_spec_simple_template.yaml`
 
-**Best for**: 
+**Best for**:
+
 - First-time users
 - Simple programs with basic event tracking
 - Quick prototyping
 - Learning the basics
 
 **What's included**:
+
 - ✅ Minimal program metadata
 - ✅ One example event type
 - ✅ Clear inline comments
 - ✅ Quick start guide
 
 **Example event generated**:
+
 ```
 spp.event.my.first.event
 ```
@@ -38,6 +41,7 @@ spp.event.my.first.event
 **File**: `program_spec_template.yaml`
 
 **Best for**:
+
 - Production programs
 - Programs with multiple event types
 - Integration with external systems
@@ -45,6 +49,7 @@ spp.event.my.first.event
 - Full-featured implementations
 
 **What's included**:
+
 - ✅ All YAML sections with examples
 - ✅ Multiple event type examples (4 types)
 - ✅ External system integration examples
@@ -53,6 +58,7 @@ spp.event.my.first.event
 - ✅ Best practices and tips
 
 **Example events generated**:
+
 ```
 spp.event.education.attendance (from external_systems)
 spp.event.health.checkup (from external_systems)
@@ -75,12 +81,14 @@ spp.event.training (from event_types)
 **File**: `4ps_best_practice_example_v7.yaml` (external reference)
 
 **Best for**:
+
 - Understanding a complete production specification
 - Learning advanced patterns
 - Reference for complex programs
 - Best practices demonstration
 
 **What's included**:
+
 - ✅ Complete 4Ps CCT program specification
 - ✅ Real-world eligibility rules
 - ✅ Entitlement calculations
@@ -96,23 +104,24 @@ spp.event.training (from event_types)
 
 ## Comparison Matrix
 
-| Feature | Simple | Complete | 4Ps Example |
-|---------|--------|----------|-------------|
-| **Program Metadata** | ✅ Basic | ✅ Full | ✅ Full |
-| **Event Types** | 1 example | 4 examples | 7+ types |
-| **External Systems** | ❌ | ✅ 2 examples | ✅ 2 systems |
-| **Compliance** | ❌ | ✅ 2 conditions | ✅ 3 conditions |
-| **Entitlements** | ❌ | ✅ 1 example | ✅ 4 components |
-| **Workflows** | ❌ | ✅ Basic | ✅ Complete |
-| **Documentation** | ✅ Inline | ✅ Extensive | ✅ Complete |
-| **Learning Curve** | Easy | Moderate | Advanced |
-| **Customization Time** | 5-10 min | 1-2 hours | Reference only |
+| Feature                | Simple    | Complete        | 4Ps Example     |
+| ---------------------- | --------- | --------------- | --------------- |
+| **Program Metadata**   | ✅ Basic  | ✅ Full         | ✅ Full         |
+| **Event Types**        | 1 example | 4 examples      | 7+ types        |
+| **External Systems**   | ❌        | ✅ 2 examples   | ✅ 2 systems    |
+| **Compliance**         | ❌        | ✅ 2 conditions | ✅ 3 conditions |
+| **Entitlements**       | ❌        | ✅ 1 example    | ✅ 4 components |
+| **Workflows**          | ❌        | ✅ Basic        | ✅ Complete     |
+| **Documentation**      | ✅ Inline | ✅ Extensive    | ✅ Complete     |
+| **Learning Curve**     | Easy      | Moderate        | Advanced        |
+| **Customization Time** | 5-10 min  | 1-2 hours       | Reference only  |
 
 ---
 
 ## How to Choose
 
 ### Choose **Simple Template** if:
+
 - ✅ You're new to the module
 - ✅ You need basic event tracking only
 - ✅ You want to get started quickly
@@ -120,6 +129,7 @@ spp.event.training (from event_types)
 - ✅ You don't need external integrations
 
 ### Choose **Complete Template** if:
+
 - ✅ You're building a production system
 - ✅ You need multiple event types (4+)
 - ✅ You need external system integration
@@ -128,6 +138,7 @@ spp.event.training (from event_types)
 - ✅ You need a comprehensive reference
 
 ### Use **4Ps Example** if:
+
 - ✅ You want to see a real-world implementation
 - ✅ You're building a CCT program
 - ✅ You need advanced patterns
@@ -166,6 +177,7 @@ vim my_program.yaml           # Vim
 ```
 
 **Key sections to modify**:
+
 1. `program.name` - Your program name
 2. `program.currency` - Your currency code
 3. `event_types` - Your event definitions
@@ -209,15 +221,15 @@ python -c "import yaml; yaml.safe_load(open('my_program.yaml'))"
 ```yaml
 # 1. Change program name
 program:
-  name: "My Program"  # ← Change this
-  
+  name: "My Program" # ← Change this
+
 # 2. Modify event type
 event_types:
-  - id: "my_event"  # ← Change this
-    name: "My Event"  # ← Change this
-    model: "spp.event.my_event"  # ← Change this
+  - id: "my_event" # ← Change this
+    name: "My Event" # ← Change this
+    model: "spp.event.my_event" # ← Change this
     fields:
-      - name: "my_field"  # ← Add your fields
+      - name: "my_field" # ← Add your fields
         label: "My Field"
         field_type: "char"
 ```
@@ -234,7 +246,7 @@ event_types:
       - name: "field1"
         label: "Field 1"
         field_type: "char"
-  
+
   # Add new event (copy structure above)
   - id: "event_2"
     name: "Second Event"
@@ -253,22 +265,22 @@ fields:
   - name: "text_field"
     label: "Text Field"
     field_type: "char"
-  
+
   # Number field
   - name: "number_field"
     label: "Number"
     field_type: "float"
-  
+
   # Date field
   - name: "date_field"
     label: "Date"
     field_type: "date"
-  
+
   # Yes/No field
   - name: "yes_no_field"
     label: "Yes/No"
     field_type: "boolean"
-  
+
   # Long text field
   - name: "notes_field"
     label: "Notes"
@@ -337,6 +349,7 @@ fields:
 ## Tips and Best Practices
 
 ### ✅ DO:
+
 1. Start with simple template for learning
 2. Use descriptive field names (e.g., `visit_date` not `date1`)
 3. Add comments to explain complex logic
@@ -347,6 +360,7 @@ fields:
 8. Use consistent naming conventions
 
 ### ❌ DON'T:
+
 1. Don't use spaces in model names (use dots: `spp.event.my.model`)
 2. Don't skip the `program` section
 3. Don't use special characters in IDs
@@ -360,15 +374,19 @@ fields:
 ## Troubleshooting
 
 ### Error: "Invalid YAML syntax"
+
 **Solution**: Check your indentation (use spaces, not tabs)
 
 ### Error: "Model already exists"
+
 **Solution**: This is OK - system updates existing model
 
 ### Fields not showing in UI
+
 **Solution**: Clear cache and restart Odoo
 
 ### Template seems overwhelming
+
 **Solution**: Start with simple template, ignore other sections
 
 ---
@@ -399,4 +417,3 @@ openspp-modules/spp_event_spec_loader/
 ---
 
 **Ready to get started?** Pick your template and follow the steps above! 🚀
-

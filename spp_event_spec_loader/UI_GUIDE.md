@@ -18,56 +18,36 @@
 
 **Available Actions by State:**
 
-| State | Validate | Deploy | Reset | Export |
-|-------|----------|--------|-------|--------|
-| Draft | ✅ | ❌ | ❌ | ✅ |
-| Validated | ❌ | ✅ | ✅ | ✅ |
-| Deployed | ❌ | ✅ | ✅ | ✅ |
-| Error | ✅ | ❌ | ✅ | ✅ |
+| State     | Validate | Deploy | Reset | Export |
+| --------- | -------- | ------ | ----- | ------ |
+| Draft     | ✅       | ❌     | ❌    | ✅     |
+| Validated | ❌       | ✅     | ✅    | ✅     |
+| Deployed  | ❌       | ✅     | ✅    | ✅     |
+| Error     | ✅       | ❌     | ✅    | ✅     |
+
+**Available Actions by State:**
+
+| State     | Validate | Deploy | Reset | Export |
+| --------- | -------- | ------ | ----- | ------ |
+| Draft     | ✅       | ❌     | ❌    | ✅     |
+| Validated | ❌       | ✅     | ✅    | ✅     |
+| Deployed  | ❌       | ✅     | ✅    | ✅     |
+| Error     | ✅       | ❌     | ✅    | ✅     |
 
 ---
 
-## Tab 1: Upload YAML (NEW!)
+## Tab 1: YAML Specification (with Integrated Upload)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ [Upload YAML] YAML Specification  Program Metadata  Parsed Data │
+│  [YAML Specification] Program Metadata  Parsed Data  Errors     │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │  Upload YAML File                                                │
-│  ┌────────────────────────────────┐                             │
-│  │ [Choose File] No file chosen   │                             │
-│  └────────────────────────────────┘                             │
+│  [Choose File] No file chosen                                    │
 │                                                                  │
-│  ╔═══════════════════════════════════════════════════════════╗ │
-│  ║ ℹ How to use:                                             ║ │
-│  ║                                                            ║ │
-│  ║ • Upload a YAML file using the button above, OR           ║ │
-│  ║ • Manually enter/edit YAML in the "YAML Specification"   ║ │
-│  ║   tab                                                     ║ │
-│  ║                                                            ║ │
-│  ║ The uploaded file will automatically populate the YAML    ║ │
-│  ║ Specification field.                                      ║ │
-│  ╚═══════════════════════════════════════════════════════════╝ │
+│  ──────────────────── YAML Content ────────────────────────     │
 │                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-**Features:**
-- ✅ Click "Choose File" to browse
-- ✅ Accepts `.yaml` and `.yml` files
-- ✅ Auto-populates "YAML Specification" tab
-- ✅ Shows filename after upload
-- ✅ Clear instructions
-
----
-
-## Tab 2: YAML Specification
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  Upload YAML  [YAML Specification] Program Metadata  Parsed Data│
-├─────────────────────────────────────────────────────────────────┤
 │ 1  program:                                                      │
 │ 2    name: "Pantawid Pamilyang Pilipino Program (4Ps)"         │
 │ 3    objectives:                                                 │
@@ -90,19 +70,23 @@
 ```
 
 **Features:**
+
+- ✅ File upload at top of page
+- ✅ Full-width YAML editor (uses entire page width)
 - ✅ Syntax highlighting (YAML mode)
 - ✅ Line numbers
 - ✅ Auto-indent
 - ✅ Search/replace
-- ✅ Read-only or editable based on state
+- ✅ Auto-populated from uploaded file
+- ✅ Can still manually edit after upload
 
 ---
 
-## Tab 3: Program Metadata (Auto-extracted)
+## Tab 2: Program Metadata (Auto-extracted)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Upload YAML  YAML Specification  [Program Metadata]  Parsed Data│
+│  YAML Specification  [Program Metadata]  Parsed Data  Errors    │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │  Program Objectives                                              │
@@ -125,6 +109,7 @@
 ```
 
 **Auto-extracted from YAML:**
+
 - ✅ Objectives
 - ✅ Implementing agencies
 - ✅ Currency
@@ -133,11 +118,11 @@
 
 ---
 
-## Tab 4: Parsed Data (JSON View)
+## Tab 3: Parsed Data (JSON View)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Upload YAML  YAML Specification  Program Metadata  [Parsed Data]│
+│  YAML Specification  Program Metadata  [Parsed Data]  Errors    │
 ├─────────────────────────────────────────────────────────────────┤
 │ 1  {                                                             │
 │ 2    "program": {                                                │
@@ -161,6 +146,7 @@
 ```
 
 **Features:**
+
 - ✅ JSON representation of parsed YAML
 - ✅ Syntax highlighting
 - ✅ Formatted/indented
@@ -185,6 +171,7 @@
 ```
 
 **Click to:**
+
 - View all generated event types
 - See deployment status
 - Access event type definitions
@@ -372,32 +359,37 @@ The interface adapts for smaller screens:
 
 ## Keyboard Shortcuts (in YAML editor)
 
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+F` | Find |
-| `Ctrl+H` | Find & Replace |
-| `Ctrl+/` | Toggle Comment |
-| `Ctrl+S` | Save (triggers validation) |
-| `Tab` | Indent |
-| `Shift+Tab` | Unindent |
+| Shortcut    | Action                     |
+| ----------- | -------------------------- |
+| `Ctrl+F`    | Find                       |
+| `Ctrl+H`    | Find & Replace             |
+| `Ctrl+/`    | Toggle Comment             |
+| `Ctrl+S`    | Save (triggers validation) |
+| `Tab`       | Indent                     |
+| `Shift+Tab` | Unindent                   |
 
 ---
 
 ## User Tips
 
 ### 💡 Tip 1: Quick Upload
+
 Drag and drop is supported! Just drag your `.yaml` file onto the upload button.
 
 ### 💡 Tip 2: Edit After Upload
+
 After uploading, you can still manually edit in the "YAML Specification" tab before validating.
 
 ### 💡 Tip 3: Export for Backup
+
 Use "Export YAML" regularly to keep backups of your specifications in version control.
 
 ### 💡 Tip 4: Use Editor Features
+
 The YAML editor supports search, replace, and syntax highlighting. Use them!
 
 ### 💡 Tip 5: Check Parsed Data
+
 Always check the "Parsed Data" tab to ensure your YAML was parsed correctly.
 
 ---
@@ -414,8 +406,7 @@ Always check the "Parsed Data" tab to ensure your YAML was parsed correctly.
 5. Deploy
 ```
 
-**Time**: ~5-10 minutes
-**Error Rate**: High (formatting issues)
+**Time**: ~5-10 minutes **Error Rate**: High (formatting issues)
 
 ### After (With Upload)
 
@@ -426,31 +417,28 @@ Always check the "Parsed Data" tab to ensure your YAML was parsed correctly.
 4. Deploy
 ```
 
-**Time**: ~1-2 minutes
-**Error Rate**: Low (file unchanged)
+**Time**: ~1-2 minutes **Error Rate**: Low (file unchanged)
 
 ---
 
 ## Accessibility Features
 
-✅ **Keyboard Navigation**: Full keyboard support
-✅ **Screen Readers**: Proper ARIA labels
-✅ **High Contrast**: Works in accessibility mode
-✅ **Focus Indicators**: Clear focus states
-✅ **Error Messages**: Descriptive and helpful
+✅ **Keyboard Navigation**: Full keyboard support ✅ **Screen Readers**: Proper ARIA labels ✅ **High
+Contrast**: Works in accessibility mode ✅ **Focus Indicators**: Clear focus states ✅ **Error Messages**:
+Descriptive and helpful
 
 ---
 
 ## Browser Compatibility
 
-| Browser | Version | Status |
-|---------|---------|--------|
-| Chrome | 90+ | ✅ Fully Supported |
-| Firefox | 88+ | ✅ Fully Supported |
-| Safari | 14+ | ✅ Fully Supported |
-| Edge | 90+ | ✅ Fully Supported |
+| Browser | Version | Status             |
+| ------- | ------- | ------------------ |
+| Chrome  | 90+     | ✅ Fully Supported |
+| Firefox | 88+     | ✅ Fully Supported |
+| Safari  | 14+     | ✅ Fully Supported |
+| Edge    | 90+     | ✅ Fully Supported |
 
 ---
 
-This UI guide shows all the new features and improvements for easy file upload and management of YAML program specifications!
-
+This UI guide shows all the new features and improvements for easy file upload and management of YAML program
+specifications!

@@ -91,28 +91,15 @@
                         </group>
                     </group>
                     <notebook>
-                        <page name="yaml_upload" string="Upload YAML">
+                        <page name="yaml_spec" string="YAML Specification">
                             <group>
-                                <group>
+                                <group colspan="2">
                                     <field name="yaml_file" filename="yaml_filename" />
                                     <field name="yaml_filename" invisible="1" />
                                 </group>
-                                <group>
-                                    <div class="alert alert-info" role="alert">
-                                        <strong>How to use:</strong>
-                                        <ul>
-                                            <li>Upload a YAML file using the button above, OR</li>
-                                            <li>Manually enter/edit YAML in the "YAML Specification" tab</li>
-                                        </ul>
-                                        <p>The uploaded file will automatically populate the YAML Specification field.</p>
-                                    </div>
-                                </group>
                             </group>
-                        </page>
-                        <page name="yaml_spec" string="YAML Specification">
-                            <group>
-                                <field name="yaml_content" widget="ace" options="{'mode': 'yaml'}" nolabel="1" />
-                            </group>
+                            <separator string="YAML Content" />
+                            <field name="yaml_content" widget="ace" options="{'mode': 'yaml'}" nolabel="1" />
                         </page>
                         <page name="metadata" string="Program Metadata">
                             <group>
@@ -124,7 +111,13 @@
                         </page>
                         <page name="parsed_data" string="Parsed Data">
                             <group>
-                                <field name="spec_data" widget="ace" options="{'mode': 'json'}" nolabel="1" readonly="1" />
+                                <field
+                                    name="spec_data"
+                                    widget="ace"
+                                    options="{'mode': 'json'}"
+                                    nolabel="1"
+                                    readonly="1"
+                                />
                             </group>
                         </page>
                         <page name="errors" string="Errors" invisible="not error_message">
@@ -175,4 +168,3 @@
         </field>
     </record>
 </odoo>
-

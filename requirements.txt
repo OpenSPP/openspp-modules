@@ -15,6 +15,7 @@ pyjwt>=2.4.0
 pyproj
 python-magic
 pytz
+pyyaml
 qrcode
 requests>=2.25.1
 shapely

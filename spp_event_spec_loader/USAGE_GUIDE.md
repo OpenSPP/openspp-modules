@@ -2,7 +2,8 @@
 
 ## Overview
 
-The `spp_event_spec_loader` module dynamically generates event data types from YAML program specifications. This guide explains how to use it effectively.
+The `spp_event_spec_loader` module dynamically generates event data types from YAML program specifications.
+This guide explains how to use it effectively.
 
 ## Quick Start
 
@@ -23,17 +24,19 @@ pip install pyyaml
 3. Fill in:
    - **Name**: Your program name (e.g., "4Ps Program")
    - **Code**: Unique code (e.g., "4PS")
-4. **Upload YAML File**:
-   - Go to "Upload YAML" tab
-   - Click "Upload your file" button
-   - Select your `.yaml` file
-   - The content will automatically populate
-   
-   OR
-   
-   **Enter Manually**:
+4. **Add YAML Content**:
+
+   **Option A - Upload File**:
+
    - Go to "YAML Specification" tab
-   - Paste or type your YAML content
+   - At the top, click "Upload your file" button
+   - Select your `.yaml` file
+   - The content will automatically populate in the editor below
+
+   **Option B - Enter Manually**:
+
+   - Go to "YAML Specification" tab
+   - Type or paste your YAML content directly in the editor
 
 ### 3. Validate the Specification
 
@@ -47,6 +50,7 @@ pip install pyyaml
 
 1. Click **Deploy Event Types** button
 2. System will:
+
    - Extract event types from YAML
    - Create models for each event type
    - Generate views (tree/form)
@@ -57,6 +61,7 @@ pip install pyyaml
 ### 5. Use Generated Event Types
 
 Generated event types are automatically available:
+
 - In registrant forms (via "Event Data" button)
 - In the event creation wizard
 - In event data management views
@@ -154,12 +159,15 @@ event_types:
 From the above example, the system generates:
 
 1. **spp.event.education.attendance** (from external_systems)
+
    - Fields: attendance_pct, school_id, period
 
 2. **spp.event.compliance.attendance_check** (from compliance.conditions)
+
    - Fields: verified_by, verification_date, result, notes
 
 3. **spp.event.compliance.health_checkup** (from compliance.conditions)
+
    - Fields: verified_by, verification_date, result, notes
 
 4. **spp.event.house.visit.custom** (from event_types)
@@ -167,14 +175,14 @@ From the above example, the system generates:
 
 ## Field Type Mapping
 
-| YAML Type | Odoo Field Type | Example |
-|-----------|----------------|---------|
-| `string` | `char` | Text input |
-| `number` | `float` | Decimal number |
-| `boolean` | `boolean` | Checkbox |
-| `date` | `date` | Date picker |
-| `datetime` | `datetime` | Date + time picker |
-| `text` | `text` | Multiline text |
+| YAML Type  | Odoo Field Type | Example            |
+| ---------- | --------------- | ------------------ |
+| `string`   | `char`          | Text input         |
+| `number`   | `float`         | Decimal number     |
+| `boolean`  | `boolean`       | Checkbox           |
+| `date`     | `date`          | Date picker        |
+| `datetime` | `datetime`      | Date + time picker |
+| `text`     | `text`          | Multiline text     |
 
 ## Using the 4Ps Example YAML
 
@@ -182,11 +190,12 @@ To use the 4Ps example specification:
 
 1. Download the example: `4ps_best_practice_example_v7.yaml`
 2. Create a new Program Specification
-3. Go to "Upload YAML" tab
-4. Upload the downloaded file
+3. Go to "YAML Specification" tab
+4. Upload the downloaded file using the file upload button
 5. Validate and deploy
 
 This will create event types for:
+
 - Education attendance tracking
 - Health checkups
 - Compliance verification
@@ -215,6 +224,7 @@ To remove views but preserve data:
 ### Managing Multiple Programs
 
 Each program specification is independent:
+
 - Create separate specs for different programs
 - Event types are namespaced by program
 - Deploy/undeploy independently
@@ -226,6 +236,7 @@ Each program specification is independent:
 **Problem**: YAML is not properly formatted
 
 **Solution**:
+
 - Check indentation (use spaces, not tabs)
 - Validate YAML at https://yamllint.com
 - Check for missing colons or quotes
@@ -235,6 +246,7 @@ Each program specification is independent:
 **Problem**: Dynamic selection field not updated
 
 **Solution**:
+
 - Restart Odoo service
 - Or manually add to `spp.create.event.wizard.event_data_model` selection
 
@@ -243,6 +255,7 @@ Each program specification is independent:
 **Problem**: Attempting to redeploy existing model
 
 **Solution**:
+
 - This is normal, the system updates the existing model
 - To start fresh, delete via: Settings → Technical → Database Structure → Models
 
@@ -251,6 +264,7 @@ Each program specification is independent:
 **Problem**: Generated views are cached
 
 **Solution**:
+
 - Clear browser cache
 - Restart Odoo
 - Or manually refresh views via Technical menu
@@ -276,6 +290,7 @@ git commit -m "Initial 4Ps specification"
 ### 2. Test with Sample Data
 
 Before deploying to production:
+
 - Create test registrants
 - Create test events using new types
 - Verify field validations
@@ -310,6 +325,7 @@ model: "spp.event.visit"
 ### 5. Incremental Deployment
 
 Start small:
+
 - Deploy with 1-2 event types
 - Test thoroughly
 - Add more event types gradually
@@ -319,6 +335,7 @@ Start small:
 ### With spp_event_demo
 
 Generated event types work alongside spp_event_demo:
+
 - Both appear in event creation wizard
 - Both use spp.event.data framework
 - Mix and match as needed
@@ -330,7 +347,7 @@ Extend generated event types:
 ```python
 class CustomEventExtension(models.Model):
     _inherit = "spp.event.education.attendance"
-    
+
     # Add custom fields or methods
     custom_field = fields.Char("Custom Data")
 ```
@@ -368,7 +385,7 @@ class CustomEventExtension(models.Model):
 1. Click "Export YAML" to download current specification
 2. Modify in your text editor
 3. Reset spec to draft
-4. Upload updated YAML file (or paste manually)
+4. In YAML Specification tab, upload updated file or paste changes
 5. Validate and review changes
 6. Deploy updates
 7. Test with sample data
@@ -387,6 +404,7 @@ class CustomEventExtension(models.Model):
 ## Appendix: Full YAML Schema
 
 See the `4ps_best_practice_example_v7.yaml` for a complete, production-ready example with:
+
 - Complex eligibility rules
 - Multiple entitlement components
 - External system integrations
@@ -396,4 +414,3 @@ See the `4ps_best_practice_example_v7.yaml` for a complete, production-ready exa
 - Security policies
 
 This file serves as the canonical template for program specifications.
-

@@ -25,6 +25,7 @@ The module includes template files you can copy and modify:
 **Location**: Module root directory
 
 **Quick Start Template**:
+
 ```yaml
 program:
   name: "My Program"
@@ -43,21 +44,21 @@ event_types:
 
 ## 🎯 YAML Sections That Generate Events
 
-| YAML Section | Generates | Example Model Name |
-|--------------|-----------|-------------------|
-| `external_systems` | Evidence provider events | `spp.event.education.attendance` |
-| `compliance.conditions` | Verification events | `spp.event.compliance.edu_attendance` |
-| `event_types` | Custom events | `spp.event.house.visit` |
+| YAML Section            | Generates                | Example Model Name                    |
+| ----------------------- | ------------------------ | ------------------------------------- |
+| `external_systems`      | Evidence provider events | `spp.event.education.attendance`      |
+| `compliance.conditions` | Verification events      | `spp.event.compliance.edu_attendance` |
+| `event_types`           | Custom events            | `spp.event.house.visit`               |
 
 ## 🔧 Field Types
 
-| YAML Type | Odoo Type | UI Widget |
-|-----------|-----------|-----------|
-| `string` | `char` | Text input |
-| `text` | `text` | Multi-line |
-| `number` | `float` | Number input |
-| `boolean` | `boolean` | Checkbox |
-| `date` | `date` | Date picker |
+| YAML Type  | Odoo Type  | UI Widget       |
+| ---------- | ---------- | --------------- |
+| `string`   | `char`     | Text input      |
+| `text`     | `text`     | Multi-line      |
+| `number`   | `float`    | Number input    |
+| `boolean`  | `boolean`  | Checkbox        |
+| `date`     | `date`     | Date picker     |
 | `datetime` | `datetime` | DateTime picker |
 
 ## 📍 Common Paths
@@ -79,12 +80,14 @@ Models:
 ## ⚡ Key Actions
 
 ### On Program Spec
+
 - **Validate**: Parse YAML and extract metadata
 - **Deploy Event Types**: Create all models/views
 - **Reset to Draft**: Allow re-editing
 - **View Event Types**: See generated types (smart button)
 
 ### On Event Type Definition
+
 - **Deploy**: Create model and views
 - **Undeploy**: Remove views (preserves data)
 
@@ -110,16 +113,17 @@ Models:
 
 ## 🐛 Quick Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| Invalid YAML | Check indentation, colons, brackets |
-| Events not in wizard | Restart Odoo service |
-| Views not showing | Clear cache, restart |
+| Problem              | Solution                              |
+| -------------------- | ------------------------------------- |
+| Invalid YAML         | Check indentation, colons, brackets   |
+| Events not in wizard | Restart Odoo service                  |
+| Views not showing    | Clear cache, restart                  |
 | Model already exists | Normal; system updates existing model |
 
 ## 📊 Example: From YAML to Models
 
 **Input YAML:**
+
 ```yaml
 external_systems:
   - id: "DepEd"
@@ -145,11 +149,13 @@ event_types:
 ```
 
 **Generated Models:**
+
 1. ✅ `spp.event.education.attendance`
 2. ✅ `spp.event.compliance.edu_attendance`
 3. ✅ `spp.event.house.visit`
 
 **Each model gets:**
+
 - ✅ Odoo model (ir.model)
 - ✅ Tree view
 - ✅ Form view
@@ -159,6 +165,7 @@ event_types:
 ## 💡 Pro Tips
 
 ### ✓ DO
+
 - ✅ Use version control for YAML files
 - ✅ Test with demo data first
 - ✅ Document fields with comments
@@ -166,6 +173,7 @@ event_types:
 - ✅ Start small, add incrementally
 
 ### ✗ DON'T
+
 - ❌ Deploy to production without testing
 - ❌ Use tabs for indentation (use spaces)
 - ❌ Create 100+ event types at once
@@ -189,11 +197,11 @@ event_types:
 
 ## ⚙️ Security Roles
 
-| Role | Can View | Can Create | Can Deploy |
-|------|----------|------------|------------|
-| Admin | ✅ | ✅ | ✅ |
-| Registrar | ✅ | ❌ | ❌ |
-| User | Event data | Event data | ❌ |
+| Role      | Can View   | Can Create | Can Deploy |
+| --------- | ---------- | ---------- | ---------- |
+| Admin     | ✅         | ✅         | ✅         |
+| Registrar | ✅         | ❌         | ❌         |
+| User      | Event data | Event data | ❌         |
 
 ## 📞 Support
 
@@ -204,4 +212,3 @@ event_types:
 ---
 
 **Version**: 17.0.1.0.0 | **License**: LGPL-3 | **Status**: Alpha
-
