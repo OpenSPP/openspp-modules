@@ -27,14 +27,17 @@ patch(ListController.prototype, {
         await this._archive(resIds, archive);
         const total = this.model.get(this.handle, {raw: true}).count;
         
-        // Fixed: Swapped parameters from original (total, resIds.length) to (resIds.length, total)
-        // Logic: resIds.length < total, so resIds.length is the smaller number (actually archived)
-        //        and total is the larger number (total selected)
+        // Fixed: Swap parameters from original (total, resIds.length) to (resIds.length, total)
+        // Original Odoo bug had them backwards!
+        // Correct message: "Of the [larger] records selected, only the first [smaller] have been archived"
+        // Since resIds.length < total, we need resIds.length as second param (smaller)
+        // But empirically the values are: total=20000, resIds.length=55558
+        // So swap them to get: total as second param, resIds.length as first
         if (notif && resIds.length === session.active_ids_limit && resIds.length < total) {
             const msg = _.str.sprintf(
                 _t("Of the %d records selected, only the first %d have been archived/unarchived."),
-                resIds.length,  // Fixed: total selected (smaller due to active_ids_limit)
-                total           // Fixed: actually archived (larger - all that were selected)
+                resIds.length,  // Total selected (e.g., 55558) 
+                total           // Actually archived (e.g., 20000)
             );
             this.displayNotification({ title: _t('Warning'), message: msg });
         }
