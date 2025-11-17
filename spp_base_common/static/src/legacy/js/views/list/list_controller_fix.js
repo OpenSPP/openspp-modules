@@ -1,30 +1,39 @@
 /** @odoo-module **/
 
-/**
- * Patch for Odoo: The archive notification is generated in the model layer.
- * 
- * Reference: https://github.com/odoo/odoo/blob/17.0/addons/web/static/src/views/list/list_controller.js
- * 
- * The modern ListController just calls model.root.archive(), so we need to look elsewhere for the notification.
- * This test will verify if we can patch the controller at all.
- */
+import { ListController } from "@web/views/list/list_controller";
+import { patch } from "@web/core/utils/patch";
+import { _t } from "@web/core/l10n/translation";
 
-import {ListController} from "@web/views/list/list_controller";
-import {patch} from "@web/core/utils/patch";
-
+// Patch for Odoo bug: swapped parameters in archive notification
 patch(ListController.prototype, {
-    /**
-     * @override - Test if patch works
-     */
-    async toggleArchiveState(archive) {
-        console.log("🎯 OPENSPP PATCH IS BEING CALLED!");
-        this.notification.add("🎯 OpenSPP Patch Working!", {type: "success"});
+    async _toggleArchive(isSelected, state) {
+        const method = state ? "action_archive" : "action_unarchive";
+        const context = this.context;
+        const resIds = await this.getResIds(isSelected);
+        const action = await this.model.orm.call(this.resModel, method, [resIds], {
+            context
+        });
         
-        // Call the original method
-        if (archive) {
-            return this.model.root.archive(true);
+        // FIXED: Swapped this.count and resIds.length
+        if (this.isDomainSelected && resIds.length === this.model.activeIdsLimit && resIds.length < this.count) {
+            const msg = _t(
+                "Of the %s records selected, only the first %s have been archived/unarchived.", 
+                this.count,      // FIXED: Total records selected (larger)
+                resIds.length    // FIXED: Actually processed (smaller)
+            );
+            this.model.notification.add(msg, {
+                title: _t("Warning")
+            });
         }
-        return this.model.root.unarchive(true);
-    },
+        
+        const reload = () => this.model.load();
+        if (action && Object.keys(action).length) {
+            this.model.action.doAction(action, {
+                onClose: reload,
+            });
+        } else {
+            return reload();
+        }
+    }
 });
 
