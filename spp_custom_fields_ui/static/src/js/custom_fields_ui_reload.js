@@ -9,20 +9,10 @@ patch(FormController.prototype, {
      * custom fields (ir.model.fields records with target_type).
      */
     async saveButtonClicked(params = {}) {
-        // Check if we're editing through the custom fields UI specifically:
-        // 1. Model is ir.model.fields
-        // 2. Has target_type (grp or indv)
-        // 3. Model is res.partner (the target of custom fields)
-        // 4. State is manual (not base fields)
-        // 5. Context has default_model = 'res.partner' (from the custom fields UI actions)
-        const isCustomFieldUI =
-            this.props.resModel === "ir.model.fields" &&
-            this.model.root.data.target_type &&
-            this.model.root.data.model === "res.partner" &&
-            this.model.root.data.state === "manual" &&
-            this.props.context?.default_model === "res.partner";
+        // Check if we're editing ir.model.fields with target_type (custom fields UI)
+        const isCustomField = this.props.resModel === "ir.model.fields" && this.model.root.data.target_type;
 
-        if (!isCustomFieldUI) {
+        if (!isCustomField) {
             return super.saveButtonClicked(params);
         }
 
