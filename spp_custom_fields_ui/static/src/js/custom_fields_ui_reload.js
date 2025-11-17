@@ -16,16 +16,25 @@ patch(FormController.prototype, {
             return super.saveButtonClicked(params);
         }
 
+        // Check if this is a new record (before save)
+        const isNewRecord = !this.model.root.resId;
+
         // Try to save
         try {
             const result = await super.saveButtonClicked(params);
 
             // Only reload if save was successful
-            // If result is defined and not false, save was successful
             if (result !== false) {
-                // Reload the page to refresh the model registry
-                // The URL will contain the record ID (for both new and existing records)
-                window.location.reload();
+                if (isNewRecord) {
+                    // For new records, wait a bit for URL to update, then reload
+                    // This ensures the URL contains the new record ID
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 100);
+                } else {
+                    // For existing records, reload immediately
+                    window.location.reload();
+                }
             }
 
             return result;
