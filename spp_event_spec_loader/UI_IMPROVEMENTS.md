@@ -24,11 +24,11 @@ Tabs: [YAML Specification] [Program Metadata] [Parsed Data] [Errors]
 
 ---
 
-### Issue #2: YAML Editor Not Using Full Width ✅
+### Issue #2: Editors Not Using Full Width ✅
 
-**Problem**: YAML editor was constrained within a group, not using available space
+**Problem**: YAML editor and Parsed Data viewer were constrained within groups, not using available space
 
-**Solution**: Removed constraining group wrapper, allowing ACE editor to expand to full width
+**Solution**: Removed constraining group wrappers, allowing ACE editors to expand to full width
 
 **Before**:
 
@@ -43,6 +43,7 @@ Tabs: [YAML Specification] [Program Metadata] [Parsed Data] [Errors]
 **After**:
 
 ```xml
+<!-- YAML Specification Tab -->
 <page name="yaml_spec">
     <group>
         <group colspan="2">
@@ -51,6 +52,12 @@ Tabs: [YAML Specification] [Program Metadata] [Parsed Data] [Errors]
     </group>
     <separator string="YAML Content" />
     <field name="yaml_content" widget="ace" nolabel="1" />
+    ↑ No wrapping group - uses full width
+</page>
+
+<!-- Parsed Data Tab -->
+<page name="parsed_data">
+    <field name="spec_data" widget="ace" nolabel="1" />
     ↑ No wrapping group - uses full width
 </page>
 ```
@@ -99,9 +106,10 @@ Tabs: [YAML Specification] [Program Metadata] [Parsed Data] [Errors]
 ### 2. Better Space Utilization
 
 - ✅ YAML editor expands to full width
-- ✅ More visible code
+- ✅ Parsed Data viewer expands to full width
+- ✅ More visible code/JSON
 - ✅ Less horizontal scrolling
-- ✅ Better for large YAML files
+- ✅ Better for large YAML files and complex JSON structures
 
 ### 3. Improved User Experience
 
@@ -119,7 +127,7 @@ Tabs: [YAML Specification] [Program Metadata] [Parsed Data] [Errors]
 
 1. **Removed**: Separate "Upload YAML" tab
 2. **Integrated**: File upload into YAML Specification tab
-3. **Restructured**: Layout to allow full-width editor
+3. **Restructured**: Layout to allow full-width editors (YAML and Parsed Data)
 
 ```xml
 <!-- NEW STRUCTURE -->
@@ -143,8 +151,9 @@ Tabs: [YAML Specification] [Program Metadata] [Parsed Data] [Errors]
 ### Key Changes:
 
 - `colspan="2"` on upload field group → stretches across available space
-- No wrapping `<group>` around ACE editor → allows full expansion
-- `nolabel="1"` on editor → no label = more space for content
+- No wrapping `<group>` around YAML ACE editor → allows full expansion
+- No wrapping `<group>` around Parsed Data ACE viewer → allows full expansion
+- `nolabel="1"` on editors → no label = more space for content
 - `separator` → visual distinction between upload and editor
 
 ---
@@ -206,6 +215,7 @@ Tested scenarios:
 - ✅ Manual entry without upload → works
 - ✅ Upload then edit → works
 - ✅ Large YAML files → full width utilized
+- ✅ Parsed Data tab → full width JSON display
 - ✅ Validate button → works
 - ✅ Export button → works
 - ✅ All tabs still accessible
@@ -268,16 +278,21 @@ Tab: YAML Specification
 
 ✅ **Feedback 2**: "Yaml Specifications are not using the entire block inside the page"
 
-- **Fixed**: Removed constraining wrappers, editor now full-width
+- **Fixed**: Removed constraining wrappers, YAML editor now full-width
+
+✅ **Feedback 3**: "Do the same for the parsed data on UI"
+
+- **Fixed**: Removed constraining wrapper, Parsed Data viewer now full-width
 
 ---
 
 ## Summary
 
-Two simple but impactful UI improvements that significantly enhance user experience:
+Three simple but impactful UI improvements that significantly enhance user experience:
 
 1. **Integrated Upload**: Reduced navigation complexity
-2. **Full-Width Editor**: Better space utilization
+2. **Full-Width YAML Editor**: Better space utilization for editing
+3. **Full-Width Parsed Data Viewer**: Better space utilization for reviewing JSON
 
 **Result**: Cleaner, more efficient, more professional interface! 🎉
 

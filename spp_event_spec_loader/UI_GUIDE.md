@@ -118,12 +118,13 @@
 
 ---
 
-## Tab 3: Parsed Data (JSON View)
+## Tab 3: Parsed Data (JSON View - Full Width)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │  YAML Specification  Program Metadata  [Parsed Data]  Errors    │
 ├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
 │ 1  {                                                             │
 │ 2    "program": {                                                │
 │ 3      "name": "Pantawid Pamilyang Pilipino Program (4Ps)",    │
@@ -141,17 +142,21 @@
 │15        "id": "DepEd",                                          │
 │   ...                                                            │
 │                                                                  │
+│  ← Full width JSON viewer, uses entire available space →        │
+│                                                                  │
 │                                           [Syntax: JSON] [▼]     │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 **Features:**
 
+- ✅ Full-width JSON viewer (uses entire page width)
 - ✅ JSON representation of parsed YAML
 - ✅ Syntax highlighting
 - ✅ Formatted/indented
 - ✅ Read-only
 - ✅ Useful for debugging
+- ✅ Better visibility for complex nested structures
 
 ---
 

@@ -110,15 +110,13 @@
                             </group>
                         </page>
                         <page name="parsed_data" string="Parsed Data">
-                            <group>
-                                <field
-                                    name="spec_data"
-                                    widget="ace"
-                                    options="{'mode': 'json'}"
-                                    nolabel="1"
-                                    readonly="1"
-                                />
-                            </group>
+                            <field
+                                name="spec_data"
+                                widget="ace"
+                                options="{'mode': 'json'}"
+                                nolabel="1"
+                                readonly="1"
+                            />
                         </page>
                         <page name="errors" string="Errors" invisible="not error_message">
                             <group>
