@@ -1,4 +1,5 @@
-/** @odoo-module **/
+odoo.define('spp_base_common.ListControllerPatch', function (require) {
+'use strict';
 
 /**
  * Patch for Odoo bug: swapped parameters in archive notification message.
@@ -10,13 +11,13 @@
  * Fixed to show: "Of the 50,000 records selected, only the first 20,000 have been archived"
  */
 
-import ListController from "web.ListController";
-import session from "web.session";
-import core from "web.core";
+var ListController = require('web.ListController');
+var session = require('web.session');
+var core = require('web.core');
 
-const _t = core._t;
+var _t = core._t;
 
-// Use legacy .include() method for Backbone-style controllers
+// Patch the ListController using .include()
 ListController.include({
     /**
      * @override
@@ -37,5 +38,7 @@ ListController.include({
             this.displayNotification({ title: _t('OpenSPP Archive Fix'), message: msg });
         }
     },
+});
+
 });
 
