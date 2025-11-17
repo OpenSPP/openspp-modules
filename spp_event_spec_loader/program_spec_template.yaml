@@ -196,12 +196,14 @@ compliance:
 # CUSTOM EVENT TYPES (Creates Event Types)
 # Define your own event types with custom fields
 # Model naming: spp.event.{your_model_name}
+# NOTE: Models will be automatically converted to x_spp_event_{name} format
+#       to comply with Odoo's manual model requirements
 # ============================================================================
 event_types:
   # Example 1: House Visit Assessment
   - id: "house_visit"
     name: "House Visit Assessment"
-    model: "spp.event.house.visit"
+    model: "spp.event.house.visit"  # Will become: x_spp_event_house_visit
     description: "Field assessment of household conditions and needs"
     fields:
       - name: "visit_date"
@@ -432,6 +434,8 @@ out_of_scope:
 # Model Naming Convention:
 #   - Use lowercase with dots: spp.event.{domain}.{type}
 #   - Examples: spp.event.house.visit, spp.event.compliance.check
+#   - These will be automatically converted to: x_spp_event_house_visit, x_spp_event_compliance_check
+#   - The x_ prefix and underscore conversion are required by Odoo for manual models
 #
 # Generated Event Types:
 #   1. From external_systems: spp.event.{domain}.{record_type}

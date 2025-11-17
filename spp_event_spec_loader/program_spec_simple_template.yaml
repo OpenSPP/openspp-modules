@@ -19,7 +19,7 @@ event_types:
   # Example 1: Simple data collection event
   - id: "my_first_event"
     name: "My First Event"
-    model: "spp.event.my.first.event"
+    model: "spp.event.my.first.event"  # Auto-converted to: x_spp_event_my_first_event
     description: "A simple event to track something"
     fields:
       - name: "event_date"
@@ -49,5 +49,10 @@ event_types:
 #   - float: Decimal number
 #   - boolean: Yes/No checkbox
 #   - binary: File upload
+#
+# Note: Model names are automatically converted to Odoo format
+#   Your name: spp.event.my_event
+#   Becomes:   x_spp_event_my_event
+#   (This is required by Odoo for manually created models)
 #
 # Need more examples? See program_spec_template.yaml

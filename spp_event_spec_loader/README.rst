@@ -183,7 +183,19 @@ Technical Notes
 Dynamic Model Creation
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The module uses Odoo's ``ir.model`` and ``ir.model.fields`` infrastructure to create models at runtime. Fields are prefixed with ``x_`` to indicate custom/dynamic fields.
+The module uses Odoo's ``ir.model`` and ``ir.model.fields`` infrastructure to create models at runtime.
+
+**Automatic Model Name Conversion**:
+
+- Model names are automatically converted to comply with Odoo requirements
+- Example: ``spp.event.house.visit`` becomes ``x_spp_event_house_visit``
+- The ``x_`` prefix is required by Odoo for manually created models
+- Dots are replaced with underscores
+- This conversion is automatic - use readable names in your YAML
+
+**Field Naming**:
+
+- Fields are automatically prefixed with ``x_`` to indicate custom/dynamic fields
 
 Field Type Mapping
 ~~~~~~~~~~~~~~~~~~

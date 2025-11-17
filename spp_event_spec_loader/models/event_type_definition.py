@@ -116,17 +116,25 @@ class EventTypeDefinition(models.Model):
     def _deploy_model(self):
         """Create the dynamic event model"""
         self.ensure_one()
-
+        
+        # Ensure model name starts with x_ for manual models (Odoo requirement)
+        model_name = self.technical_name
+        if not model_name.startswith("x_"):
+            # Convert spp.event.xxx to x_spp_event_xxx
+            model_name = "x_" + model_name.replace(".", "_")
+            _logger.info("Converting model name from %s to %s (Odoo requirement)", 
+                        self.technical_name, model_name)
+        
         # Check if model already exists
-        existing_model = self.env["ir.model"].search([("model", "=", self.technical_name)], limit=1)
-
+        existing_model = self.env["ir.model"].search([("model", "=", model_name)], limit=1)
+        
         if existing_model:
-            _logger.info("Model %s already exists, updating...", self.technical_name)
+            _logger.info("Model %s already exists, updating...", model_name)
         else:
             # Create the model
             model_vals = {
                 "name": self.name,
-                "model": self.technical_name,
+                "model": model_name,
                 "state": "manual",
                 "field_id": [],
             }
@@ -179,22 +187,31 @@ class EventTypeDefinition(models.Model):
                 field_commands.append((0, 0, field_data))
 
             model_vals["field_id"] = field_commands
-
+            
             new_model = self.env["ir.model"].sudo().create(model_vals)
-            _logger.info("Created model %s (ID: %s)", self.technical_name, new_model.id)
-
+            _logger.info("Created model %s (ID: %s)", model_name, new_model.id)
+        
+        # Store the actual deployed model name for later reference
+        if not self.technical_name.startswith("x_"):
+            self.technical_name = model_name
+        
         self.model_deployed = True
 
     def _deploy_views(self):
         """Create tree and form views for the event type"""
         self.ensure_one()
-
+        
+        # Ensure we're using the correct model name (with x_ prefix)
+        model_name = self.technical_name
+        if not model_name.startswith("x_"):
+            model_name = "x_" + model_name.replace(".", "_")
+        
         # Generate tree view
         tree_view_arch = self._generate_tree_view_xml()
         tree_view_vals = {
-            "name": f"view_{self.technical_name.replace('.', '_')}_tree",
-            "model": self.technical_name,
-            "type": "form",
+            "name": f"view_{model_name.replace('.', '_')}_tree",
+            "model": model_name,
+            "type": "tree",
             "arch": tree_view_arch,
             "mode": "primary",
         }
@@ -210,8 +227,8 @@ class EventTypeDefinition(models.Model):
         # Generate form view
         form_view_arch = self._generate_form_view_xml()
         form_view_vals = {
-            "name": f"view_{self.technical_name.replace('.', '_')}_form",
-            "model": self.technical_name,
+            "name": f"view_{model_name.replace('.', '_')}_form",
+            "model": model_name,
             "type": "form",
             "arch": form_view_arch,
             "mode": "primary",
