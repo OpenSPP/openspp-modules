@@ -196,3 +196,90 @@ class TestCustomFieldsUI(TransactionCase):
             "Changing the type of a field is not yet supported",
         ):
             field.set_compute()
+
+    def test_10_create_with_ui_context_returns_reload_action(self):
+        """Test that create with UI context returns reload action"""
+        # Simulate UI context with params
+        context = {"params": {"model": "ir.model.fields", "view_type": "form"}}
+        result = (
+            self.field_model.with_context(context)
+            .create(
+                {
+                    "name": "x_cst_grp_reload_test",
+                    "model_id": self.model_id.id,
+                    "field_description": "Reload Test",
+                    "ttype": "char",
+                    "state": "manual",
+                    "target_type": "grp",
+                    "field_category": "cst",
+                }
+            )
+        )
+
+        # When created in UI context with target_type, should return reload action
+        self.assertIsInstance(result, dict)
+        self.assertEqual(result.get("type"), "ir.actions.client")
+        self.assertEqual(result.get("tag"), "reload")
+
+    def test_11_create_without_ui_context_returns_recordset(self):
+        """Test that create without UI context returns normal recordset"""
+        # Create without params in context (programmatic call)
+        result = self.field_model.create(
+            {
+                "name": "x_cst_grp_no_reload",
+                "model_id": self.model_id.id,
+                "field_description": "No Reload Test",
+                "ttype": "char",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "cst",
+            }
+        )
+
+        # Should return recordset, not action dict
+        self.assertEqual(result._name, "ir.model.fields")
+        self.assertTrue(result.id)
+
+    def test_12_write_with_ui_context_returns_reload_action(self):
+        """Test that write with UI context returns reload action"""
+        field = self.field_model.create(
+            {
+                "name": "x_cst_grp_write_test",
+                "model_id": self.model_id.id,
+                "field_description": "Write Test",
+                "ttype": "char",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "cst",
+            }
+        )
+
+        # Update with UI context
+        context = {"params": {"model": "ir.model.fields", "view_type": "form"}}
+        result = field.with_context(context).write({"field_description": "Updated Description"})
+
+        # Should return reload action
+        self.assertIsInstance(result, dict)
+        self.assertEqual(result.get("type"), "ir.actions.client")
+        self.assertEqual(result.get("tag"), "reload")
+
+    def test_13_write_without_ui_context_returns_boolean(self):
+        """Test that write without UI context returns boolean"""
+        field = self.field_model.create(
+            {
+                "name": "x_cst_grp_write_no_reload",
+                "model_id": self.model_id.id,
+                "field_description": "Write No Reload",
+                "ttype": "char",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "cst",
+            }
+        )
+
+        # Update without UI context (programmatic call)
+        result = field.write({"field_description": "Updated Without Reload"})
+
+        # Should return boolean True
+        self.assertTrue(result)
+        self.assertIsInstance(result, bool)

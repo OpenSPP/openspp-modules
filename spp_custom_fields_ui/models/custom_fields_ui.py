@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 FIELD_TYPES = [(key, key) for key in sorted(fields.Field.by_type)]
 
@@ -118,3 +119,33 @@ class OpenSPPCustomFieldsUI(models.Model):
                 else:
                     rec.ttype = "integer"
                     rec.compute += "self.compute_count_and_set_indicator('%s', kinds, domain)" % name
+
+    def _should_reload_view(self):
+        """
+        Check if the view should be reloaded after creating/updating custom fields.
+        This is needed because custom fields modify the model registry.
+        """
+        return any(record.target_type for record in self)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Override create to trigger page reload after field creation"""
+        records = super().create(vals_list)
+        # Trigger reload only for custom fields with target_type in UI context
+        if self.env.context.get("params") and records._should_reload_view():
+            return {
+                "type": "ir.actions.client",
+                "tag": "reload",
+            }
+        return records
+
+    def write(self, vals):
+        """Override write to trigger page reload after field update"""
+        result = super().write(vals)
+        # Trigger reload only for custom fields with target_type in UI context
+        if self.env.context.get("params") and self._should_reload_view():
+            return {
+                "type": "ir.actions.client",
+                "tag": "reload",
+            }
+        return result
