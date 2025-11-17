@@ -10,7 +10,11 @@
     "maintainers": ["jeremi", "gonzalesedwin1123"],
     "depends": ["base", "g2p_registry_base", "g2p_registry_membership", "spp_custom_field"],
     "data": ["views/custom_fields_ui.xml"],
-    "assets": {},
+    "assets": {
+        "web.assets_backend": [
+            "spp_custom_fields_ui/static/src/js/custom_fields_ui_reload.js",
+        ],
+    },
     "demo": [],
     "images": [],
     "application": True,
