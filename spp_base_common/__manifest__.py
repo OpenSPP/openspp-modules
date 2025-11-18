@@ -31,6 +31,7 @@
         "views/main_view.xml",
         "views/phone_validation_view.xml",
         "views/queue_job_views.xml",
+        "views/area_import_view.xml",
     ],
     "assets": {
         "web.assets_backend": [
