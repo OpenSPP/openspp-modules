@@ -5,6 +5,31 @@
         <field name="model">spp.area.import</field>
         <field name="inherit_id" ref="spp_area_base.view_spparea_import_form" />
         <field name="arch" type="xml">
+            <!-- Add has_ongoing_jobs field for button visibility control -->
+            <xpath expr="//field[@name='locked']" position="after">
+                <field name="has_ongoing_jobs" invisible="1" />
+            </xpath>
+
+            <!-- Modify Parse button to check for ongoing jobs -->
+            <xpath expr="//button[@name='parse_excel_to_json']" position="attributes">
+                <attribute name="invisible">state not in ('New', 'Uploaded') or has_ongoing_jobs</attribute>
+            </xpath>
+
+            <!-- Modify Import button to check for ongoing jobs -->
+            <xpath expr="//button[@name='import_data']" position="attributes">
+                <attribute name="invisible">state not in ('New', 'Parsed') or has_ongoing_jobs</attribute>
+            </xpath>
+
+            <!-- Modify Save to Area button to check for ongoing jobs -->
+            <xpath expr="//button[@name='save_to_area']" position="attributes">
+                <attribute name="invisible">state != 'Validated' or has_ongoing_jobs</attribute>
+            </xpath>
+
+            <!-- Modify Validate Data button to check for ongoing jobs -->
+            <xpath expr="//button[@name='validate_raw_data']" position="attributes">
+                <attribute name="invisible">state != 'Imported' or has_ongoing_jobs</attribute>
+            </xpath>
+
             <xpath expr="//page[@name='json_data']" position="after">
                 <page string="Queue Jobs" name="queue_jobs" invisible="not job_ids">
                     <field name="job_ids" nolabel="1" readonly="1">
