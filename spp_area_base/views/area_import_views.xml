@@ -185,6 +185,50 @@
                                 </tree>
                             </field>
                         </page>
+                        <page string="Queue Jobs" name="queue_jobs" invisible="not job_ids">
+                            <field name="job_ids" nolabel="1" readonly="1">
+                                <tree>
+                                    <field name="name" />
+                                    <field
+                                        name="state"
+                                        decoration-info="state=='pending'"
+                                        decoration-warning="state=='enqueued'"
+                                        decoration-primary="state=='started'"
+                                        decoration-success="state=='done'"
+                                        decoration-danger="state=='failed'"
+                                        widget="badge"
+                                    />
+                                    <field name="date_created" />
+                                    <field name="date_started" />
+                                    <field name="date_done" />
+                                    <field name="exc_info" />
+                                </tree>
+                                <form>
+                                    <header>
+                                        <field name="state" widget="statusbar" />
+                                    </header>
+                                    <group>
+                                        <group>
+                                            <field name="name" />
+                                            <field name="model_name" />
+                                            <field name="method_name" />
+                                            <field name="res_model" />
+                                            <field name="res_id" />
+                                        </group>
+                                        <group>
+                                            <field name="date_created" />
+                                            <field name="date_enqueued" />
+                                            <field name="date_started" />
+                                            <field name="date_done" />
+                                            <field name="priority" />
+                                        </group>
+                                    </group>
+                                    <group string="Exception Information" invisible="not exc_info">
+                                        <field name="exc_info" nolabel="1" readonly="1" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>

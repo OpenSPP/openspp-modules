@@ -80,6 +80,26 @@ class OpenSPPAreaImport(models.Model):
     locked = fields.Boolean(default=False)
     locked_reason = fields.Char(readonly=True)
 
+    job_ids = fields.One2many(
+        "queue.job",
+        compute="_compute_job_ids",
+        string="Related Jobs",
+        help="Queue jobs related to this area import",
+    )
+
+    def _compute_job_ids(self):
+        """
+        Compute related queue jobs based on res_id and res_model fields.
+        """
+        for rec in self:
+            jobs = self.env["queue.job"].search(
+                [
+                    ("res_model", "=", "spp.area.import"),
+                    ("res_id", "=", rec.id),
+                ]
+            )
+            rec.job_ids = jobs
+
     @api.onchange("excel_file")
     def excel_file_change(self):
         """
