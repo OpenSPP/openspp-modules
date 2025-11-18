@@ -20,6 +20,7 @@
     },
     "data": [
         "security/ir.model.access.csv",
+        "wizard/create_dynamic_event_wizard.xml",
         "views/program_spec_view.xml",
         "views/event_type_definition_view.xml",
         "views/menu_views.xml",

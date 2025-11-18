@@ -19,7 +19,7 @@ event_types:
   # Example 1: Simple data collection event
   - id: "my_first_event"
     name: "My First Event"
-    model: "spp.event.my.first.event"  # Auto-converted to: x_spp_event_my_first_event
+    model: "spp.event.my.first.event" # Auto-converted to: x_spp_event_my_first_event
     description: "A simple event to track something"
     fields:
       - name: "event_date"

@@ -203,7 +203,7 @@ event_types:
   # Example 1: House Visit Assessment
   - id: "house_visit"
     name: "House Visit Assessment"
-    model: "spp.event.house.visit"  # Will become: x_spp_event_house_visit
+    model: "spp.event.house.visit" # Will become: x_spp_event_house_visit
     description: "Field assessment of household conditions and needs"
     fields:
       - name: "visit_date"

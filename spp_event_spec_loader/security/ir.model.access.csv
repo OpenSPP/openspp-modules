@@ -7,3 +7,7 @@ spp_event_type_definition_registrar,Event Type Definition Registrar Access,model
 
 spp_read_program_spec,Program Spec Read Access,model_spp_program_spec,spp_base_common.read_registry,1,0,0,0
 spp_read_event_type_definition,Event Type Definition Read Access,model_spp_event_type_definition,spp_base_common.read_registry,1,0,0,0
+
+spp_create_dynamic_event_wizard_admin,Dynamic Event Wizard Admin Access,model_spp_create_dynamic_event_wizard,g2p_registry_base.group_g2p_admin,1,1,1,1
+spp_create_dynamic_event_wizard_registrar,Dynamic Event Wizard Registrar Access,model_spp_create_dynamic_event_wizard,g2p_registry_base.group_g2p_registrar,1,1,1,1
+spp_create_dynamic_event_wizard_user,Dynamic Event Wizard User Access,model_spp_create_dynamic_event_wizard,spp_base_common.read_registry,1,1,1,1

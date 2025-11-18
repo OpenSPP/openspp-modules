@@ -116,18 +116,17 @@ class EventTypeDefinition(models.Model):
     def _deploy_model(self):
         """Create the dynamic event model"""
         self.ensure_one()
-        
+
         # Ensure model name starts with x_ for manual models (Odoo requirement)
         model_name = self.technical_name
         if not model_name.startswith("x_"):
             # Convert spp.event.xxx to x_spp_event_xxx
             model_name = "x_" + model_name.replace(".", "_")
-            _logger.info("Converting model name from %s to %s (Odoo requirement)", 
-                        self.technical_name, model_name)
-        
+            _logger.info("Converting model name from %s to %s (Odoo requirement)", self.technical_name, model_name)
+
         # Check if model already exists
         existing_model = self.env["ir.model"].search([("model", "=", model_name)], limit=1)
-        
+
         if existing_model:
             _logger.info("Model %s already exists, updating...", model_name)
         else:
@@ -187,25 +186,25 @@ class EventTypeDefinition(models.Model):
                 field_commands.append((0, 0, field_data))
 
             model_vals["field_id"] = field_commands
-            
+
             new_model = self.env["ir.model"].sudo().create(model_vals)
             _logger.info("Created model %s (ID: %s)", model_name, new_model.id)
-        
+
         # Store the actual deployed model name for later reference
         if not self.technical_name.startswith("x_"):
             self.technical_name = model_name
-        
+
         self.model_deployed = True
 
     def _deploy_views(self):
         """Create tree and form views for the event type"""
         self.ensure_one()
-        
+
         # Ensure we're using the correct model name (with x_ prefix)
         model_name = self.technical_name
         if not model_name.startswith("x_"):
             model_name = "x_" + model_name.replace(".", "_")
-        
+
         # Generate tree view
         tree_view_arch = self._generate_tree_view_xml()
         tree_view_vals = {
@@ -307,9 +306,10 @@ class EventTypeDefinition(models.Model):
         """Register this event type with the base event wizard"""
         self.ensure_one()
 
-        # This would extend the selection field on spp.create.event.wizard
-        # In practice, this requires module restart or dynamic field extension
-        _logger.info("Event type %s registered (selection update requires restart)", self.technical_name)
+        # Event types are now automatically registered via dynamic selection field
+        # in spp.create.event.wizard (see wizard/create_event_wizard.py)
+        # The wizard queries spp.event.type.definition for deployed event types
+        _logger.info("Event type %s is now available in the event wizard (dynamic selection)", self.technical_name)
 
     def action_undeploy(self):
         """Remove deployed components"""

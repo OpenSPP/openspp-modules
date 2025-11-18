@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Form view for dynamic event wizard -->
+    <record id="view_spp_create_dynamic_event_wizard_form" model="ir.ui.view">
+        <field name="name">spp.create.dynamic.event.wizard.form</field>
+        <field name="model">spp.create.dynamic.event.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Event">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="event_id" invisible="1" />
+                            <field name="event_type_definition_id" invisible="1" />
+                            <field name="x_name" />
+                            <field name="x_summary" />
+                        </group>
+                        <group>
+                            <field name="x_description" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Additional Information" name="additional_info">
+                            <group>
+                                <group>
+                                    <!-- Dynamic fields would go here -->
+                                    <!-- For now, users can add more fields via customization -->
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="create_event" string="Create Event" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
