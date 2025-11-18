@@ -75,7 +75,8 @@ class SPPCreateEventWizard(models.TransientModel):
                 # compute wizard model name
 
                 wizard_list = model_name.split(".")
-                wizard_model = "%s.create." % wizard_list[0]
+                first_part = wizard_list[0]  # Save first part before popping
+                wizard_model = "%s.create." % first_part
                 wizard_list.pop(0)
                 view_name = self.env["ir.model"].search([("model", "=", model_name)]).name
                 for split_wizard in wizard_list:
@@ -87,7 +88,12 @@ class SPPCreateEventWizard(models.TransientModel):
 
                 if not wizard_exists:
                     # Try to find a generic wizard (for dynamic models)
-                    generic_wizard = "%s.create.dynamic.event.wizard" % wizard_list[0]
+                    # Dynamic models start with x_ and use underscores, so use 'spp' prefix
+                    if first_part.startswith("x_"):
+                        generic_wizard = "spp.create.dynamic.event.wizard"
+                    else:
+                        generic_wizard = "%s.create.dynamic.event.wizard" % first_part
+
                     if generic_wizard in self.env:
                         wizard_model = generic_wizard
                         _logger.info(
