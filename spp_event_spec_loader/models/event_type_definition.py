@@ -132,6 +132,9 @@ class EventTypeDefinition(models.Model):
             # Ensure existing model is marked as event model
             if not existing_model.is_event_model:
                 existing_model.sudo().write({"is_event_model": True})
+
+            # Ensure security access exists for existing model
+            self._create_security_access(existing_model)
         else:
             # Create the model
             model_vals = {
@@ -194,11 +197,103 @@ class EventTypeDefinition(models.Model):
             new_model = self.env["ir.model"].sudo().create(model_vals)
             _logger.info("Created model %s (ID: %s)", model_name, new_model.id)
 
+            # Create security access records for the new model
+            self._create_security_access(new_model)
+
         # Store the actual deployed model name for later reference
         if not self.technical_name.startswith("x_"):
             self.technical_name = model_name
 
         self.model_deployed = True
+
+    def _create_security_access(self, model):
+        """
+        Create security access rules for a dynamic event model.
+        Applies the same security groups as spp_event_data:
+        - Admin (full access)
+        - Registrar (read, write, create)
+        - Read Registry (read only)
+        - Write Registry (read, write)
+        - Create Registry (read, write, create)
+        """
+        self.ensure_one()
+
+        # Get the model name for access rule naming
+        model_name_clean = model.model.replace(".", "_").replace("x_", "")
+
+        # Define security access rules
+        access_rules = [
+            {
+                "name": f"{model_name_clean}_admin",
+                "model_id": model.id,
+                "group_id": self.env.ref("g2p_registry_base.group_g2p_admin").id,
+                "perm_read": True,
+                "perm_write": True,
+                "perm_create": True,
+                "perm_unlink": True,
+            },
+            {
+                "name": f"{model_name_clean}_registrar",
+                "model_id": model.id,
+                "group_id": self.env.ref("g2p_registry_base.group_g2p_registrar").id,
+                "perm_read": True,
+                "perm_write": True,
+                "perm_create": True,
+                "perm_unlink": False,
+            },
+            {
+                "name": f"{model_name_clean}_read",
+                "model_id": model.id,
+                "group_id": self.env.ref("spp_base_common.read_registry").id,
+                "perm_read": True,
+                "perm_write": False,
+                "perm_create": False,
+                "perm_unlink": False,
+            },
+            {
+                "name": f"{model_name_clean}_write",
+                "model_id": model.id,
+                "group_id": self.env.ref("spp_base_common.write_registry").id,
+                "perm_read": True,
+                "perm_write": True,
+                "perm_create": False,
+                "perm_unlink": False,
+            },
+            {
+                "name": f"{model_name_clean}_create",
+                "model_id": model.id,
+                "group_id": self.env.ref("spp_base_common.create_registry").id,
+                "perm_read": True,
+                "perm_write": True,
+                "perm_create": True,
+                "perm_unlink": False,
+            },
+        ]
+
+        # Create access rules
+        for rule in access_rules:
+            # Check if rule already exists
+            existing_rule = self.env["ir.model.access"].search(
+                [
+                    ("name", "=", rule["name"]),
+                    ("model_id", "=", rule["model_id"]),
+                ],
+                limit=1,
+            )
+
+            if not existing_rule:
+                self.env["ir.model.access"].sudo().create(rule)
+                _logger.info(
+                    "Created security access rule: %s for model %s",
+                    rule["name"],
+                    model.model,
+                )
+            else:
+                _logger.debug(
+                    "Security access rule %s already exists for model %s",
+                    rule["name"],
+                    model.model,
+                )
 
     def _deploy_views(self):
         """Create tree and form views for the event type"""
