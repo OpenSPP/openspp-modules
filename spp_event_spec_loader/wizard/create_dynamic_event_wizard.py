@@ -99,6 +99,7 @@ class SPPCreateDynamicEventWizard(models.TransientModel):
 
             _logger.info("Created event record (ID: %s) for model %s", event.id, model_name)
 
+            # Close the wizard
             return {
                 "type": "ir.actions.client",
                 "tag": "display_notification",
@@ -107,6 +108,7 @@ class SPPCreateDynamicEventWizard(models.TransientModel):
                     "message": _("Event created successfully"),
                     "type": "success",
                     "sticky": False,
+                    "next": {"type": "ir.actions.act_window_close"},
                 },
             }
         except Exception as e:

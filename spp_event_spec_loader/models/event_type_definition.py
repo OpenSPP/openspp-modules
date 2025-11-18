@@ -105,6 +105,7 @@ class EventTypeDefinition(models.Model):
                     "message": _("Event type '%s' deployed successfully.", self.name),
                     "type": "success",
                     "sticky": False,
+                    "next": {"type": "ir.actions.act_window_close"},
                 },
             }
         except Exception as e:

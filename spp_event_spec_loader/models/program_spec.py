@@ -15,7 +15,7 @@ class ProgramSpec(models.Model):
     _description = "Program Specification"
     _order = "sequence, name"
 
-    name = fields.Char(string="Program Name", required=True)
+    name = fields.Char(string="Program Name", help="Auto-populated from YAML during validation")
     code = fields.Char(string="Program Code", required=True, help="Unique code for the program")
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
@@ -157,6 +157,7 @@ class ProgramSpec(models.Model):
                     "message": _("Program specification validated successfully."),
                     "type": "success",
                     "sticky": False,
+                    "next": {"type": "ir.actions.act_window_close"},
                 },
             }
         except Exception as e:
@@ -216,6 +217,7 @@ class ProgramSpec(models.Model):
                     ),
                     "type": "success",
                     "sticky": False,
+                    "next": {"type": "ir.actions.act_window_close"},
                 },
             }
         except Exception as e:
