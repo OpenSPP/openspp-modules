@@ -17,12 +17,18 @@ class SPPCreateEventWizard(models.TransientModel):
         """
         Dynamically get event types from models marked as event models.
         Returns a list of tuples (model_name, model_display_name).
+        Note: Mixins are prevented from registering via guards in their _register_hook.
         """
         # Start with default
         selection = [("default", "None")]
 
         # Query all models marked as event models
-        event_models = self.env["ir.model"].search([("is_event_model", "=", True)], order="name")
+        # Note: We don't filter by state since dynamic models are state='manual'
+        # Mixins are prevented from registering themselves via _register_hook guards
+        event_models = self.env["ir.model"].search(
+            [("is_event_model", "=", True)],
+            order="name",
+        )
 
         for event_model in event_models:
             selection.append((event_model.model, event_model.name))

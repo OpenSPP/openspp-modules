@@ -268,8 +268,5 @@ Document any known issues:
 
 ---
 
-**Test Date**: ******\_\_\_******
-**Tested By**: ******\_\_\_******
-**Database**: ******\_\_\_******
-**Status**: [ ] PASS [ ] FAIL
-**Notes**:
+**Test Date**: **\*\***\_\_\_**\*\*** **Tested By**: **\*\***\_\_\_**\*\*** **Database**:
+**\*\***\_\_\_**\*\*** **Status**: [ ] PASS [ ] FAIL **Notes**:

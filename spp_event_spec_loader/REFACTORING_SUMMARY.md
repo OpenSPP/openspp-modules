@@ -143,5 +143,4 @@ See **REFACTORING_v17.0.1.0.3.md** for:
 **TL;DR**: Moved wizard logic from `spp_event_spec_loader` to `spp_event_data` base module and used a simple
 boolean flag (`is_event_model`) for registration. Much cleaner! ✨
 
-**Status**: ✅ Ready to test
-**Version**: 17.0.1.0.3
+**Status**: ✅ Ready to test **Version**: 17.0.1.0.3

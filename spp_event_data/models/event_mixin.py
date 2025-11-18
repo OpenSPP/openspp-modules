@@ -17,8 +17,14 @@ class SPPEventMixin(models.AbstractModel):
         """
         Mark this model as an event model automatically.
         All models inheriting from this mixin will be registered as event types.
+        Note: The mixin itself (spp.event.mixin) is not registered.
         """
         super()._register_hook()
+
+        # Don't register the mixin itself as an event model
+        if self._name == "spp.event.mixin":
+            return
+
         ir_model = self.env["ir.model"].search([("model", "=", self._name)], limit=1)
         if ir_model and not ir_model.is_event_model:
             ir_model.sudo().write({"is_event_model": True})

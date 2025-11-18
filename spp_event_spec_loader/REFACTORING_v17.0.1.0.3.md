@@ -443,7 +443,5 @@ To:
 
 ---
 
-**Version**: 17.0.1.0.3
-**Date**: November 2024
-**Status**: ✅ Implemented and Tested
-**Breaking Changes**: None (backward compatible)
+**Version**: 17.0.1.0.3 **Date**: November 2024 **Status**: ✅ Implemented and Tested **Breaking Changes**:
+None (backward compatible)

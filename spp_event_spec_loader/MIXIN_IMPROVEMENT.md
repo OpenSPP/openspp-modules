@@ -329,7 +329,5 @@ model.is_event_model  # Should be True
 
 ---
 
-**Version**: 17.0.1.0.3
-**Date**: November 2024
-**Status**: ✅ Implemented
-**Impact**: All event modules (data, demo, spec_loader)
+**Version**: 17.0.1.0.3 **Date**: November 2024 **Status**: ✅ Implemented **Impact**: All event modules
+(data, demo, spec_loader)
