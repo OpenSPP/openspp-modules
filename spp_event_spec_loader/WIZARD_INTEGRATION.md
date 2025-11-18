@@ -327,6 +327,4 @@ For issues or questions:
 
 ---
 
-**Version**: 17.0.1.0.3
-**Date**: November 2024
-**Status**: ✅ Implemented and Tested
+**Version**: 17.0.1.0.3 **Date**: November 2024 **Status**: ✅ Implemented and Tested

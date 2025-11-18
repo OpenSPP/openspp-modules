@@ -129,12 +129,16 @@ class EventTypeDefinition(models.Model):
 
         if existing_model:
             _logger.info("Model %s already exists, updating...", model_name)
+            # Ensure existing model is marked as event model
+            if not existing_model.is_event_model:
+                existing_model.sudo().write({"is_event_model": True})
         else:
             # Create the model
             model_vals = {
                 "name": self.name,
                 "model": model_name,
                 "state": "manual",
+                "is_event_model": True,  # Mark as event model
                 "field_id": [],
             }
 

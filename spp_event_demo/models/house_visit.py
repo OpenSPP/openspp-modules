@@ -6,6 +6,7 @@ from odoo import fields, models
 
 class OpenSPPHouseVisit(models.Model):
     _name = "spp.event.house.visit"
+    _inherit = "spp.event.mixin"
     _description = "House Visit"
 
     summary = fields.Char()
@@ -17,9 +18,3 @@ class OpenSPPHouseVisit(models.Model):
     number_of_cows = fields.Integer()
     no_food_stock = fields.Integer()
     disabled = fields.Boolean(default=False)
-
-    def get_view_id(self):
-        """
-        This retrieves the View ID of this model
-        """
-        return self.env["ir.ui.view"].search([("model", "=", self._name), ("type", "=", "form")], limit=1).id

@@ -1,17 +1,42 @@
 # Part of OpenG2P. See LICENSE file for full copyright and licensing details.
 
+import logging
 from datetime import date
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class SPPCreateEventWizard(models.TransientModel):
     _name = "spp.create.event.wizard"
     _description = "Create Event Wizard"
 
+    @api.model
+    def _get_event_data_model_selection(self):
+        """
+        Dynamically get event types from models marked as event models.
+        Returns a list of tuples (model_name, model_display_name).
+        """
+        # Start with default
+        selection = [("default", "None")]
+
+        # Query all models marked as event models
+        event_models = self.env["ir.model"].search([("is_event_model", "=", True)], order="name")
+
+        for event_model in event_models:
+            selection.append((event_model.model, event_model.name))
+            _logger.debug(
+                "Added event type to wizard: %s (%s)",
+                event_model.model,
+                event_model.name,
+            )
+
+        return selection
+
     event_data_model = fields.Selection(
-        [("default", "None")],
-        "Event Type",
+        selection="_get_event_data_model_selection",
+        string="Event Type",
         default="default",
     )
     partner_id = fields.Many2one("res.partner", domain=[("is_registrant", "=", True)])
@@ -50,6 +75,27 @@ class SPPCreateEventWizard(models.TransientModel):
                 for split_wizard in wizard_list:
                     wizard_model += "%s." % split_wizard
                 wizard_model += "wizard"
+
+                # Check if specific wizard exists
+                wizard_exists = wizard_model in self.env
+
+                if not wizard_exists:
+                    # Try to find a generic wizard (for dynamic models)
+                    generic_wizard = "%s.create.dynamic.event.wizard" % wizard_list[0]
+                    if generic_wizard in self.env:
+                        wizard_model = generic_wizard
+                        _logger.info(
+                            "Using generic wizard %s for model %s",
+                            wizard_model,
+                            model_name,
+                        )
+                    else:
+                        _logger.warning(
+                            "No wizard found for model %s, skipping wizard step",
+                            model_name,
+                        )
+                        return
+
                 view_id = rec.get_view_id(wizard_model)
 
                 # create the event data and pass it to event_data_model wizard

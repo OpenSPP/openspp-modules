@@ -85,7 +85,16 @@ class OpenSPPEventData(models.Model):
                 "edit": False,
             }
             res_model = rec.model
-            view_id = self.env[res_model].get_view_id()
+
+            # Get view_id - check if model has get_view_id method or find it directly
+            view_id = False
+            if hasattr(self.env[res_model], "get_view_id"):
+                view_id = self.env[res_model].get_view_id()
+            else:
+                # Fallback for dynamic models without the mixin
+                view = self.env["ir.ui.view"].search([("model", "=", res_model), ("type", "=", "form")], limit=1)
+                view_id = view.id if view else False
+
             return {
                 "name": rec.name,
                 "view_mode": "form",

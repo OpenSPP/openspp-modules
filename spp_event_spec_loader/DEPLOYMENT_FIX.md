@@ -301,6 +301,4 @@ event_types:
 
 ---
 
-**Version**: 17.0.1.0.2
-**Date**: November 2024
-**Status**: ✅ Resolved
+**Version**: 17.0.1.0.2 **Date**: November 2024 **Status**: ✅ Resolved
