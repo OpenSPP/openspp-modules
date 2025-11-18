@@ -9,7 +9,7 @@
                 <page string="Queue Jobs" name="queue_jobs" invisible="not job_ids">
                     <field name="job_ids" nolabel="1" readonly="1">
                         <tree>
-                            <field name="name" />
+                            <field name="method_name" />
                             <field
                                 name="state"
                                 decoration-info="state=='pending'"
