@@ -70,6 +70,14 @@ class IrModuleModule(models.Model):
             "menu_xml_id": "fastapi.menu_fastapi_root",
             "icon": "spp_base_common,static/description/icon-fast-api.png",
         },
+        "spp_grm": {
+            "menu_xml_id": "spp_grm.spp_grm_ticket_main_menu",
+            "icon": "spp_base_common,static/description/Helpdesk.png",
+        },
+        "point_of_sale": {
+            "menu_xml_id": "point_of_sale.menu_point_root",
+            "icon": "spp_base_common,static/description/Point_of_Sale.png",
+        },
     }
 
     def update_menu_icons(self):
