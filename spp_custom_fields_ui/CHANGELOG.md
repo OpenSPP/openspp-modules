@@ -2,11 +2,12 @@
 
 ## 2025-11-20
 
-### 2025-11-20 15:30:00 - [FIX] remove ttype change from test_10_onchange_field_category
+### 2025-11-20 15:45:00 - [FIX] create test_10 field with correct type from start to avoid type change
 
-- Removed field.ttype = "integer" line that was causing type change errors
-- Simplified assertion to verify field_category is set
-- Focuses on codecov coverage without triggering type change errors
+- Changed test_10 to create field with ttype="integer" and field_category="ind" from start
+- Updated field name to x_ind_grp_test_category to match indicator type
+- Follows same pattern as test_11 to avoid type change errors
+- Proper assertion now verifies compute field is set correctly
 
 ### 2025-11-20 15:15:00 - [FIX] remove test_13_onchange_has_presence and add coverage call to test_12
 

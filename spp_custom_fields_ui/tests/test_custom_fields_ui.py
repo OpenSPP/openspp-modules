@@ -201,23 +201,20 @@ class TestCustomFieldsUI(TransactionCase):
         """Test _onchange_field_category updates compute field"""
         field = self.field_model.create(
             {
-                "name": "x_cst_grp_test_category",
+                "name": "x_ind_grp_test_category",
                 "model_id": self.model_id.id,
                 "field_description": "Test Category Change",
-                "ttype": "char",
+                "ttype": "integer",
                 "state": "manual",
                 "target_type": "grp",
-                "field_category": "cst",
+                "field_category": "ind",
             }
         )
-        self.assertFalse(field.compute)
 
-        # Change to indicator category and call onchange
-        field.field_category = "ind"
+        # Call onchange to ensure it executes set_compute
         field._onchange_field_category()
 
-        # Verify the method was called (may not set compute due to type mismatch, but ok for coverage)
-        self.assertIsNotNone(field.field_category)
+        self.assertTrue(field.compute, "Compute field should be set when field_category is indicator")
 
     def test_11_onchange_kinds(self):
         """Test _onchange_kinds updates compute field"""
