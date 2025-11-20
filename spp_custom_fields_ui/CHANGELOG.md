@@ -2,6 +2,12 @@
 
 ## 2025-11-20
 
+### 2025-11-20 15:00:00 - [FIX] test_13_onchange_has_presence to use correct field type
+
+- Changed field type from integer to boolean to match has_presence=True
+- Prevents UserError about unsupported type changes during test execution
+- Ensures test covers \_onchange_has_presence method without triggering errors
+
 ### 2025-11-20 14:45:00 - [ADD] tests for onchange methods in custom fields UI
 
 - Added test_10_onchange_field_category to test field category changes

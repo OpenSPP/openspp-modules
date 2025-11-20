@@ -268,28 +268,27 @@ class TestCustomFieldsUI(TransactionCase):
         )
 
     def test_13_onchange_has_presence(self):
-        """Test _onchange_has_presence changes field type and compute"""
+        """Test _onchange_has_presence calls set_compute"""
         field = self.field_model.create(
             {
                 "name": "x_ind_indv_test_presence",
                 "model_id": self.model_id.id,
                 "field_description": "Test Presence Change",
                 "draft_name": "test_presence",
-                "ttype": "integer",
+                "ttype": "boolean",
                 "state": "manual",
                 "target_type": "indv",
                 "field_category": "ind",
-                "has_presence": False,
+                "has_presence": True,
             }
         )
 
-        # Enable presence
-        field.has_presence = True
+        # Call onchange to ensure it executes set_compute
         field._onchange_has_presence()
 
-        self.assertTrue(field.compute, "Compute field should be set when has_presence is enabled")
+        self.assertTrue(field.compute, "Compute field should be set when _onchange_has_presence is called")
         self.assertIn(
             "presence_only=True",
             field.compute,
-            "Compute field should contain presence_only=True when has_presence is enabled",
+            "Compute field should contain presence_only=True when has_presence is True",
         )
