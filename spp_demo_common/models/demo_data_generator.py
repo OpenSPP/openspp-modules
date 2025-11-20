@@ -110,10 +110,33 @@ class SPPDemoDataGenerator(models.Model):
         string="Failed Generations",
         compute="_compute_generation_log_count",
     )
+    queue_job_ids = fields.One2many(
+        "queue.job",
+        compute="_compute_queue_job_ids",
+        string="Queue Jobs",
+        readonly=True,
+    )
+    queue_job_count = fields.Integer(
+        string="Queue Jobs",
+        compute="_compute_queue_job_count",
+    )
 
     def _compute_generation_log_count(self):
         for rec in self:
             rec.generation_log_count = len(rec.generation_log_ids)
+
+    def _compute_queue_job_ids(self):
+        for rec in self:
+            rec.queue_job_ids = self.env["queue.job"].search(
+                [
+                    ("res_model", "=", "spp.demo.data.generator"),
+                    ("res_id", "=", rec.id),
+                ]
+            )
+
+    def _compute_queue_job_count(self):
+        for rec in self:
+            rec.queue_job_count = len(rec.queue_job_ids)
 
     def generate_demo_data(self):
         self.ensure_one()

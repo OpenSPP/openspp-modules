@@ -302,6 +302,29 @@
                                 </form>
                             </field>
                         </page>
+                        <page string="Queue Jobs" invisible="not queue_job_ids">
+                            <field name="queue_job_count" invisible="1" />
+                            <group>
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Queue Jobs:</strong>
+                                    <span>
+                                        <field name="queue_job_count" readonly="1" />
+                                        job(s) created for this generation
+                                    </span>
+                                </div>
+                            </group>
+                            <field name="queue_job_ids" readonly="1">
+                                <tree create="false" edit="false" delete="false">
+                                    <field name="date_created" string="Created" />
+                                    <field name="date_started" string="Started" />
+                                    <field name="date_enqueued" string="Enqueued" />
+                                    <field name="date_done" string="Done" />
+                                    <field name="state" />
+                                    <field name="method_name" />
+                                    <field name="result" />
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
