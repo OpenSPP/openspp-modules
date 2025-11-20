@@ -29,6 +29,8 @@
                     />
                 </header>
                 <field name="locked" invisible="True" />
+                <field name="has_ongoing_jobs" invisible="1" />
+                <field name="ongoing_job_generator_id" invisible="1" />
                 <div
                     class="alert alert-warning text-center o_form_header"
                     role="status"
@@ -40,6 +42,22 @@
                         name="refresh_page"
                         type="object"
                         class="btn_warning"
+                        icon="fa-refresh"
+                        title="Refresh Page"
+                        string="Refresh"
+                    />
+                </div>
+                <div
+                    class="alert alert-info text-center o_form_header"
+                    role="status"
+                    invisible="not has_ongoing_jobs or id == ongoing_job_generator_id"
+                >
+                    <span>Info: Another demo data generation is currently in progress: </span>
+                    <field name="ongoing_job_generator_id" class="o_stat_value" readonly="1" />
+                    <button
+                        name="refresh_page"
+                        type="object"
+                        class="btn-link"
                         icon="fa-refresh"
                         title="Refresh Page"
                         string="Refresh"
@@ -63,7 +81,7 @@
                             class="oe_stat_button"
                             icon="fa-thumbs-o-up"
                             name="generate_demo_data"
-                            invisible="state != 'draft'"
+                            invisible="state != 'draft' or has_ongoing_jobs"
                         >
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Generate</span>
@@ -302,27 +320,48 @@
                                 </form>
                             </field>
                         </page>
-                        <page string="Queue Jobs" invisible="not queue_job_ids">
-                            <field name="queue_job_count" invisible="1" />
-                            <group>
-                                <div class="alert alert-info" role="alert">
-                                    <strong>Queue Jobs:</strong>
-                                    <span>
-                                        <field name="queue_job_count" readonly="1" />
-                                        job(s) created for this generation
-                                    </span>
-                                </div>
-                            </group>
-                            <field name="queue_job_ids" readonly="1">
-                                <tree create="false" edit="false" delete="false">
-                                    <field name="date_created" string="Created" />
-                                    <field name="date_started" string="Started" />
-                                    <field name="date_enqueued" string="Enqueued" />
-                                    <field name="date_done" string="Done" />
-                                    <field name="state" />
+                        <page string="Queue Jobs" name="queue_jobs" invisible="not queue_job_ids">
+                            <field name="queue_job_ids" nolabel="1" readonly="1">
+                                <tree>
                                     <field name="method_name" />
-                                    <field name="result" />
+                                    <field
+                                        name="state"
+                                        decoration-info="state=='pending'"
+                                        decoration-warning="state=='enqueued'"
+                                        decoration-primary="state=='started'"
+                                        decoration-success="state=='done'"
+                                        decoration-danger="state=='failed'"
+                                        widget="badge"
+                                    />
+                                    <field name="date_created" />
+                                    <field name="date_started" />
+                                    <field name="date_done" />
+                                    <field name="exc_info" />
                                 </tree>
+                                <form>
+                                    <header>
+                                        <field name="state" widget="statusbar" />
+                                    </header>
+                                    <group>
+                                        <group>
+                                            <field name="name" />
+                                            <field name="model_name" />
+                                            <field name="method_name" />
+                                            <field name="res_model" />
+                                            <field name="res_id" />
+                                        </group>
+                                        <group>
+                                            <field name="date_created" />
+                                            <field name="date_enqueued" />
+                                            <field name="date_started" />
+                                            <field name="date_done" />
+                                            <field name="priority" />
+                                        </group>
+                                    </group>
+                                    <group string="Exception Information" invisible="not exc_info">
+                                        <field name="exc_info" nolabel="1" readonly="1" />
+                                    </group>
+                                </form>
                             </field>
                         </page>
                     </notebook>

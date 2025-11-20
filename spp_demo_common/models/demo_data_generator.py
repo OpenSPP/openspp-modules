@@ -6,7 +6,7 @@ import re
 
 from faker import Faker
 
-from odoo import fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 from odoo.addons.queue_job.delay import group
@@ -120,6 +120,17 @@ class SPPDemoDataGenerator(models.Model):
         string="Queue Jobs",
         compute="_compute_queue_job_count",
     )
+    has_ongoing_jobs = fields.Boolean(
+        compute="_compute_ongoing_jobs_info",
+        string="Has Ongoing Jobs",
+        help="True if there are any ongoing queue jobs for this model",
+    )
+    ongoing_job_generator_id = fields.Many2one(
+        "spp.demo.data.generator",
+        compute="_compute_ongoing_jobs_info",
+        string="Generator with Ongoing Jobs",
+        help="Demo data generator record that currently has ongoing jobs",
+    )
 
     def _compute_generation_log_count(self):
         for rec in self:
@@ -137,6 +148,31 @@ class SPPDemoDataGenerator(models.Model):
     def _compute_queue_job_count(self):
         for rec in self:
             rec.queue_job_count = len(rec.queue_job_ids)
+
+    @api.depends("queue_job_ids", "queue_job_ids.state")
+    def _compute_ongoing_jobs_info(self):
+        """
+        Compute both has_ongoing_jobs and ongoing_job_generator_id fields.
+        Checks for any ongoing jobs across ALL demo data generator records
+        to prevent concurrent operations.
+        """
+        # Find any ongoing job for this model
+        ongoing_job = self.env["queue.job"].search(
+            [
+                ("res_model", "=", "spp.demo.data.generator"),
+                ("state", "in", ["pending", "enqueued", "started"]),
+            ],
+            limit=1,
+        )
+
+        # Determine values based on job existence
+        has_ongoing = bool(ongoing_job)
+        generator_id = ongoing_job.res_id if ongoing_job and ongoing_job.res_id else None
+
+        # Set the same values for all records
+        for rec in self:
+            rec.has_ongoing_jobs = has_ongoing
+            rec.ongoing_job_generator_id = generator_id
 
     def generate_demo_data(self):
         self.ensure_one()
