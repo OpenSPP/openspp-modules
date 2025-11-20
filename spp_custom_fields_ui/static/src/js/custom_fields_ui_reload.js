@@ -29,7 +29,11 @@ patch(FormController.prototype, {
                     // For new records, wait a bit for URL to update, then reload
                     // This ensures the URL contains the new record ID
                     setTimeout(() => {
-                        window.location.reload();
+                        // Safety check: only reload if still on ir.model.fields page
+                        // Prevents unwanted reloads if user navigated away during timeout
+                        if (window.location.href.includes("ir.model.fields")) {
+                            window.location.reload();
+                        }
                     }, 100);
                     // Don't return - page will reload soon, making return value meaningless
                 } else {
