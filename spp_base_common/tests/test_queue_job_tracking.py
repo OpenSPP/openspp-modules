@@ -1,5 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 
+import uuid
+
 from odoo.tests.common import TransactionCase
 
 
@@ -9,6 +11,9 @@ class TestQueueJobTracking(TransactionCase):
         super().setUpClass()
         cls.queue_job_model = cls.env["queue.job"]
         cls.area_import_model = cls.env["spp.area.import"]
+
+        # Get the EDIT_SENTINEL for protected fields
+        cls.job_edit_sentinel = cls.queue_job_model.EDIT_SENTINEL
 
         # Create test area import records
         cls.area_import_1 = cls.area_import_model.create(
@@ -22,17 +27,23 @@ class TestQueueJobTracking(TransactionCase):
             }
         )
 
-    def test_01_queue_job_res_fields(self):
-        """Test that queue.job model has res_id and res_model fields"""
-        job = self.queue_job_model.create(
+    def _create_test_job(self, name, res_model, res_id, state="done", method_name="test_method"):
+        """Helper method to create test queue jobs with proper sentinel context"""
+        return self.queue_job_model.with_context(_job_edit_sentinel=self.job_edit_sentinel).create(
             {
-                "name": "Test Job",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_1.id,
+                "uuid": str(uuid.uuid4()),
+                "name": name,
+                "model_name": res_model,
+                "method_name": method_name,
+                "res_model": res_model,
+                "res_id": res_id,
+                "state": state,
             }
         )
+
+    def test_01_queue_job_res_fields(self):
+        """Test that queue.job model has res_id and res_model fields"""
+        job = self._create_test_job("Test Job", "spp.area.import", self.area_import_1.id, state="done")
 
         self.assertEqual(job.res_model, "spp.area.import")
         self.assertEqual(job.res_id, self.area_import_1.id)
@@ -40,38 +51,11 @@ class TestQueueJobTracking(TransactionCase):
     def test_02_compute_job_ids(self):
         """Test that area import correctly computes related jobs"""
         # Create jobs for area_import_1
-        job1 = self.queue_job_model.create(
-            {
-                "name": "Job 1 for Import 1",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_1.id,
-                "state": "done",
-            }
-        )
-        job2 = self.queue_job_model.create(
-            {
-                "name": "Job 2 for Import 1",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_1.id,
-                "state": "pending",
-            }
-        )
+        job1 = self._create_test_job("Job 1 for Import 1", "spp.area.import", self.area_import_1.id, state="done")
+        job2 = self._create_test_job("Job 2 for Import 1", "spp.area.import", self.area_import_1.id, state="pending")
 
         # Create job for area_import_2
-        job3 = self.queue_job_model.create(
-            {
-                "name": "Job 1 for Import 2",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_2.id,
-                "state": "done",
-            }
-        )
+        job3 = self._create_test_job("Job 1 for Import 2", "spp.area.import", self.area_import_2.id, state="done")
 
         # Trigger compute
         self.area_import_1._compute_job_ids()
@@ -100,16 +84,7 @@ class TestQueueJobTracking(TransactionCase):
     def test_04_has_ongoing_jobs_with_pending_job(self):
         """Test has_ongoing_jobs when there is a pending job"""
         # Create a pending job
-        self.queue_job_model.create(
-            {
-                "name": "Pending Job",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_1.id,
-                "state": "pending",
-            }
-        )
+        self._create_test_job("Pending Job", "spp.area.import", self.area_import_1.id, state="pending")
 
         # Trigger compute on both records
         self.area_import_1._compute_has_ongoing_jobs()
@@ -125,16 +100,7 @@ class TestQueueJobTracking(TransactionCase):
         self.queue_job_model.search([("res_model", "=", "spp.area.import")]).unlink()
 
         # Create an enqueued job
-        self.queue_job_model.create(
-            {
-                "name": "Enqueued Job",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_2.id,
-                "state": "enqueued",
-            }
-        )
+        self._create_test_job("Enqueued Job", "spp.area.import", self.area_import_2.id, state="enqueued")
 
         # Trigger compute
         self.area_import_1._compute_has_ongoing_jobs()
@@ -150,16 +116,7 @@ class TestQueueJobTracking(TransactionCase):
         self.queue_job_model.search([("res_model", "=", "spp.area.import")]).unlink()
 
         # Create a started job
-        self.queue_job_model.create(
-            {
-                "name": "Started Job",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_1.id,
-                "state": "started",
-            }
-        )
+        self._create_test_job("Started Job", "spp.area.import", self.area_import_1.id, state="started")
 
         # Trigger compute
         self.area_import_1._compute_has_ongoing_jobs()
@@ -175,26 +132,8 @@ class TestQueueJobTracking(TransactionCase):
         self.queue_job_model.search([("res_model", "=", "spp.area.import")]).unlink()
 
         # Create only done/failed jobs
-        self.queue_job_model.create(
-            {
-                "name": "Done Job",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_1.id,
-                "state": "done",
-            }
-        )
-        self.queue_job_model.create(
-            {
-                "name": "Failed Job",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_2.id,
-                "state": "failed",
-            }
-        )
+        self._create_test_job("Done Job", "spp.area.import", self.area_import_1.id, state="done")
+        self._create_test_job("Failed Job", "spp.area.import", self.area_import_2.id, state="failed")
 
         # Trigger compute
         self.area_import_1._compute_has_ongoing_jobs()
@@ -210,26 +149,8 @@ class TestQueueJobTracking(TransactionCase):
         self.queue_job_model.search([("res_model", "=", "spp.area.import")]).unlink()
 
         # Create jobs with different states
-        self.queue_job_model.create(
-            {
-                "name": "Done Job",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_1.id,
-                "state": "done",
-            }
-        )
-        self.queue_job_model.create(
-            {
-                "name": "Pending Job",
-                "model_name": "spp.area.import",
-                "method_name": "test_method",
-                "res_model": "spp.area.import",
-                "res_id": self.area_import_2.id,
-                "state": "pending",
-            }
-        )
+        self._create_test_job("Done Job", "spp.area.import", self.area_import_1.id, state="done")
+        self._create_test_job("Pending Job", "spp.area.import", self.area_import_2.id, state="pending")
 
         # Trigger compute
         self.area_import_1._compute_has_ongoing_jobs()
@@ -242,16 +163,7 @@ class TestQueueJobTracking(TransactionCase):
     def test_09_job_ids_empty_for_different_model(self):
         """Test that job_ids is empty when jobs belong to different model"""
         # Create a job with different res_model
-        self.queue_job_model.create(
-            {
-                "name": "Job for different model",
-                "model_name": "res.partner",
-                "method_name": "test_method",
-                "res_model": "res.partner",
-                "res_id": 1,
-                "state": "done",
-            }
-        )
+        self._create_test_job("Job for different model", "res.partner", 1, state="done")
 
         # Trigger compute
         self.area_import_1._compute_job_ids()
@@ -265,16 +177,7 @@ class TestQueueJobTracking(TransactionCase):
         self.queue_job_model.search([("res_model", "=", "spp.area.import")]).unlink()
 
         # Create a pending job for a different model
-        self.queue_job_model.create(
-            {
-                "name": "Job for different model",
-                "model_name": "res.partner",
-                "method_name": "test_method",
-                "res_model": "res.partner",
-                "res_id": 1,
-                "state": "pending",
-            }
-        )
+        self._create_test_job("Job for different model", "res.partner", 1, state="pending")
 
         # Trigger compute
         self.area_import_1._compute_has_ongoing_jobs()

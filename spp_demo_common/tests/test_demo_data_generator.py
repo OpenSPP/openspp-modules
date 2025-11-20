@@ -1,6 +1,7 @@
 # Part of OpenSPP. See LICENSE file for full copyright and licensing details.
 import datetime
 import logging
+import uuid
 
 from dateutil.relativedelta import relativedelta
 
@@ -21,6 +22,10 @@ class TestDemoDataGenerator(TransactionCase):
                 test_queue_job_no_delay=True,
             )
         )
+
+        # Get the EDIT_SENTINEL for protected fields in queue.job
+        cls.queue_job_model = cls.env["queue.job"]
+        cls.job_edit_sentinel = cls.queue_job_model.EDIT_SENTINEL
 
         # Create test country with faker locale
         cls.test_country = cls.env["res.country"].create(
@@ -625,6 +630,20 @@ class TestDemoDataGenerator(TransactionCase):
         self.assertIsNotNone(result2)
         self.assertEqual(len(result2), 5)
 
+    def _create_test_job(self, name, res_model, res_id, state="done", method_name="_process_batch"):
+        """Helper method to create test queue jobs with proper sentinel context"""
+        return self.queue_job_model.with_context(_job_edit_sentinel=self.job_edit_sentinel).create(
+            {
+                "uuid": str(uuid.uuid4()),
+                "name": name,
+                "model_name": res_model,
+                "method_name": method_name,
+                "res_model": res_model,
+                "res_id": res_id,
+                "state": state,
+            }
+        )
+
     def test_28_compute_queue_job_ids(self):
         """Test that generator correctly computes related queue jobs"""
         generator1 = self.env["spp.demo.data.generator"].create(
@@ -641,26 +660,8 @@ class TestDemoDataGenerator(TransactionCase):
         )
 
         # Create jobs for generator1
-        job1 = self.env["queue.job"].create(
-            {
-                "name": "Job 1 for Generator 1",
-                "model_name": "spp.demo.data.generator",
-                "method_name": "_process_batch",
-                "res_model": "spp.demo.data.generator",
-                "res_id": generator1.id,
-                "state": "done",
-            }
-        )
-        job2 = self.env["queue.job"].create(
-            {
-                "name": "Job 2 for Generator 1",
-                "model_name": "spp.demo.data.generator",
-                "method_name": "_process_batch",
-                "res_model": "spp.demo.data.generator",
-                "res_id": generator1.id,
-                "state": "pending",
-            }
-        )
+        job1 = self._create_test_job("Job 1 for Generator 1", "spp.demo.data.generator", generator1.id, state="done")
+        job2 = self._create_test_job("Job 2 for Generator 1", "spp.demo.data.generator", generator1.id, state="pending")
 
         # Trigger compute
         generator1._compute_queue_job_ids()
@@ -690,16 +691,7 @@ class TestDemoDataGenerator(TransactionCase):
 
         # Create 3 jobs
         for i in range(3):
-            self.env["queue.job"].create(
-                {
-                    "name": f"Job {i+1}",
-                    "model_name": "spp.demo.data.generator",
-                    "method_name": "_process_batch",
-                    "res_model": "spp.demo.data.generator",
-                    "res_id": generator.id,
-                    "state": "done",
-                }
-            )
+            self._create_test_job(f"Job {i+1}", "spp.demo.data.generator", generator.id, state="done")
 
         # Recompute
         generator._compute_queue_job_ids()
@@ -735,16 +727,7 @@ class TestDemoDataGenerator(TransactionCase):
         )
 
         # Create a pending job
-        self.env["queue.job"].create(
-            {
-                "name": "Pending Job",
-                "model_name": "spp.demo.data.generator",
-                "method_name": "_process_batch",
-                "res_model": "spp.demo.data.generator",
-                "res_id": generator.id,
-                "state": "pending",
-            }
-        )
+        self._create_test_job("Pending Job", "spp.demo.data.generator", generator.id, state="pending")
 
         generator._compute_ongoing_jobs_info()
         self.assertTrue(generator.has_ongoing_jobs)
@@ -763,16 +746,7 @@ class TestDemoDataGenerator(TransactionCase):
         )
 
         # Create an enqueued job
-        self.env["queue.job"].create(
-            {
-                "name": "Enqueued Job",
-                "model_name": "spp.demo.data.generator",
-                "method_name": "_process_batch",
-                "res_model": "spp.demo.data.generator",
-                "res_id": generator.id,
-                "state": "enqueued",
-            }
-        )
+        self._create_test_job("Enqueued Job", "spp.demo.data.generator", generator.id, state="enqueued")
 
         generator._compute_ongoing_jobs_info()
         self.assertTrue(generator.has_ongoing_jobs)
@@ -791,16 +765,7 @@ class TestDemoDataGenerator(TransactionCase):
         )
 
         # Create a started job
-        self.env["queue.job"].create(
-            {
-                "name": "Started Job",
-                "model_name": "spp.demo.data.generator",
-                "method_name": "_process_batch",
-                "res_model": "spp.demo.data.generator",
-                "res_id": generator.id,
-                "state": "started",
-            }
-        )
+        self._create_test_job("Started Job", "spp.demo.data.generator", generator.id, state="started")
 
         generator._compute_ongoing_jobs_info()
         self.assertTrue(generator.has_ongoing_jobs)
@@ -819,16 +784,7 @@ class TestDemoDataGenerator(TransactionCase):
         )
 
         # Create only done jobs
-        self.env["queue.job"].create(
-            {
-                "name": "Done Job",
-                "model_name": "spp.demo.data.generator",
-                "method_name": "_process_batch",
-                "res_model": "spp.demo.data.generator",
-                "res_id": generator.id,
-                "state": "done",
-            }
-        )
+        self._create_test_job("Done Job", "spp.demo.data.generator", generator.id, state="done")
 
         generator._compute_ongoing_jobs_info()
         self.assertFalse(generator.has_ongoing_jobs)
@@ -853,16 +809,7 @@ class TestDemoDataGenerator(TransactionCase):
         )
 
         # Create a pending job for generator1 only
-        self.env["queue.job"].create(
-            {
-                "name": "Pending Job for Generator 1",
-                "model_name": "spp.demo.data.generator",
-                "method_name": "_process_batch",
-                "res_model": "spp.demo.data.generator",
-                "res_id": generator1.id,
-                "state": "pending",
-            }
-        )
+        self._create_test_job("Pending Job for Generator 1", "spp.demo.data.generator", generator1.id, state="pending")
 
         # Trigger compute on both
         generator1._compute_ongoing_jobs_info()
@@ -889,36 +836,9 @@ class TestDemoDataGenerator(TransactionCase):
         )
 
         # Create jobs with different states
-        self.env["queue.job"].create(
-            {
-                "name": "Done Job",
-                "model_name": "spp.demo.data.generator",
-                "method_name": "_process_batch",
-                "res_model": "spp.demo.data.generator",
-                "res_id": generator.id,
-                "state": "done",
-            }
-        )
-        self.env["queue.job"].create(
-            {
-                "name": "Failed Job",
-                "model_name": "spp.demo.data.generator",
-                "method_name": "_process_batch",
-                "res_model": "spp.demo.data.generator",
-                "res_id": generator.id,
-                "state": "failed",
-            }
-        )
-        self.env["queue.job"].create(
-            {
-                "name": "Pending Job",
-                "model_name": "spp.demo.data.generator",
-                "method_name": "_process_batch",
-                "res_model": "spp.demo.data.generator",
-                "res_id": generator.id,
-                "state": "pending",
-            }
-        )
+        self._create_test_job("Done Job", "spp.demo.data.generator", generator.id, state="done")
+        self._create_test_job("Failed Job", "spp.demo.data.generator", generator.id, state="failed")
+        self._create_test_job("Pending Job", "spp.demo.data.generator", generator.id, state="pending")
 
         generator._compute_ongoing_jobs_info()
 
@@ -939,16 +859,7 @@ class TestDemoDataGenerator(TransactionCase):
         )
 
         # Create a pending job for a different model
-        self.env["queue.job"].create(
-            {
-                "name": "Job for different model",
-                "model_name": "res.partner",
-                "method_name": "test_method",
-                "res_model": "res.partner",
-                "res_id": 1,
-                "state": "pending",
-            }
-        )
+        self._create_test_job("Job for different model", "res.partner", 1, state="pending", method_name="test_method")
 
         generator._compute_ongoing_jobs_info()
         generator._compute_queue_job_ids()

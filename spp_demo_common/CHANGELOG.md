@@ -2,6 +2,13 @@
 
 ## 2025-11-20
 
+### 2025-11-20 16:30:00 - [FIX] queue job test creation with proper sentinel context
+
+- Fixed test job creation to use `_job_edit_sentinel` context for protected fields
+- Added `_create_test_job` helper method to simplify job creation in tests
+- Updated all test methods (test_28 through test_37) to use helper instead of direct create() calls
+- Tests now properly respect queue.job model's protected fields constraint
+
 ### 2025-11-20 16:15:00 - [ADD] comprehensive tests for queue job tracking in demo data generator
 
 - Added test_28: Tests `_compute_queue_job_ids` correctly filters jobs by generator record
