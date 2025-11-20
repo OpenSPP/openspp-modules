@@ -196,3 +196,100 @@ class TestCustomFieldsUI(TransactionCase):
             "Changing the type of a field is not yet supported",
         ):
             field.set_compute()
+
+    def test_10_onchange_field_category(self):
+        """Test _onchange_field_category updates compute field"""
+        field = self.field_model.create(
+            {
+                "name": "x_cst_grp_test_category",
+                "model_id": self.model_id.id,
+                "field_description": "Test Category Change",
+                "ttype": "char",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "cst",
+            }
+        )
+        self.assertFalse(field.compute)
+
+        # Change to indicator category
+        field.field_category = "ind"
+        field.ttype = "integer"
+        field._onchange_field_category()
+
+        self.assertTrue(field.compute, "Compute field should be set when field_category changes to indicator")
+
+    def test_11_onchange_kinds(self):
+        """Test _onchange_kinds updates compute field"""
+        field = self.field_model.create(
+            {
+                "name": "x_ind_grp_test_kinds",
+                "model_id": self.model_id.id,
+                "field_description": "Test Kinds Change",
+                "draft_name": "test_kinds",
+                "ttype": "integer",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "ind",
+            }
+        )
+
+        # Add kinds
+        field.kinds = [(6, 0, [self.kind_head.id])]
+        field._onchange_kinds()
+
+        self.assertTrue(field.compute, "Compute field should be set when kinds are changed")
+        self.assertIn(self.kind_head.name, field.compute, "Kind name should be in compute field")
+
+    def test_12_onchange_target_type(self):
+        """Test _onchange_target_type updates compute field"""
+        field = self.field_model.create(
+            {
+                "name": "x_ind_grp_test_target",
+                "model_id": self.model_id.id,
+                "field_description": "Test Target Type Change",
+                "draft_name": "test_target",
+                "ttype": "integer",
+                "state": "manual",
+                "target_type": "grp",
+                "field_category": "ind",
+            }
+        )
+        field.set_compute()
+        initial_compute = field.compute
+
+        # Change target type
+        field.target_type = "indv"
+        field._onchange_target_type()
+
+        self.assertTrue(field.compute, "Compute field should be set when target_type changes")
+        self.assertNotEqual(
+            initial_compute, field.compute, "Compute field should be different after target_type change"
+        )
+
+    def test_13_onchange_has_presence(self):
+        """Test _onchange_has_presence changes field type and compute"""
+        field = self.field_model.create(
+            {
+                "name": "x_ind_indv_test_presence",
+                "model_id": self.model_id.id,
+                "field_description": "Test Presence Change",
+                "draft_name": "test_presence",
+                "ttype": "integer",
+                "state": "manual",
+                "target_type": "indv",
+                "field_category": "ind",
+                "has_presence": False,
+            }
+        )
+
+        # Enable presence
+        field.has_presence = True
+        field._onchange_has_presence()
+
+        self.assertTrue(field.compute, "Compute field should be set when has_presence is enabled")
+        self.assertIn(
+            "presence_only=True",
+            field.compute,
+            "Compute field should contain presence_only=True when has_presence is enabled",
+        )

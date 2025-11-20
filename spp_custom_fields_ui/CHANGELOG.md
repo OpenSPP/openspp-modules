@@ -2,6 +2,14 @@
 
 ## 2025-11-20
 
+### 2025-11-20 14:45:00 - [ADD] tests for onchange methods in custom fields UI
+
+- Added test_10_onchange_field_category to test field category changes
+- Added test_11_onchange_kinds to test kinds assignment updates
+- Added test_12_onchange_target_type to test target type changes
+- Added test_13_onchange_has_presence to test presence flag changes
+- Improves codecov coverage for onchange methods
+
 ### 2025-11-20 10:24:55 - [FIX] add safety check to prevent reload on wrong page after navigation
 
 - Added URL verification before executing scheduled page reload
