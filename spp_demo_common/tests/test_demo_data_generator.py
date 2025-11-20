@@ -624,3 +624,336 @@ class TestDemoDataGenerator(TransactionCase):
         result2 = generator.generate_id_from_regex(pattern2)
         self.assertIsNotNone(result2)
         self.assertEqual(len(result2), 5)
+
+    def test_28_compute_queue_job_ids(self):
+        """Test that generator correctly computes related queue jobs"""
+        generator1 = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator with Jobs",
+                "locale_origin": self.test_country.id,
+            }
+        )
+        generator2 = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator without Jobs",
+                "locale_origin": self.test_country.id,
+            }
+        )
+
+        # Create jobs for generator1
+        job1 = self.env["queue.job"].create(
+            {
+                "name": "Job 1 for Generator 1",
+                "model_name": "spp.demo.data.generator",
+                "method_name": "_process_batch",
+                "res_model": "spp.demo.data.generator",
+                "res_id": generator1.id,
+                "state": "done",
+            }
+        )
+        job2 = self.env["queue.job"].create(
+            {
+                "name": "Job 2 for Generator 1",
+                "model_name": "spp.demo.data.generator",
+                "method_name": "_process_batch",
+                "res_model": "spp.demo.data.generator",
+                "res_id": generator1.id,
+                "state": "pending",
+            }
+        )
+
+        # Trigger compute
+        generator1._compute_queue_job_ids()
+        generator2._compute_queue_job_ids()
+
+        # Assert generator1 has 2 jobs
+        self.assertEqual(len(generator1.queue_job_ids), 2)
+        self.assertIn(job1, generator1.queue_job_ids)
+        self.assertIn(job2, generator1.queue_job_ids)
+
+        # Assert generator2 has no jobs
+        self.assertEqual(len(generator2.queue_job_ids), 0)
+
+    def test_29_compute_queue_job_count(self):
+        """Test queue job count computation"""
+        generator = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator for Count Test",
+                "locale_origin": self.test_country.id,
+            }
+        )
+
+        # Initially no jobs
+        generator._compute_queue_job_ids()
+        generator._compute_queue_job_count()
+        self.assertEqual(generator.queue_job_count, 0)
+
+        # Create 3 jobs
+        for i in range(3):
+            self.env["queue.job"].create(
+                {
+                    "name": f"Job {i+1}",
+                    "model_name": "spp.demo.data.generator",
+                    "method_name": "_process_batch",
+                    "res_model": "spp.demo.data.generator",
+                    "res_id": generator.id,
+                    "state": "done",
+                }
+            )
+
+        # Recompute
+        generator._compute_queue_job_ids()
+        generator._compute_queue_job_count()
+        self.assertEqual(generator.queue_job_count, 3)
+
+    def test_30_has_ongoing_jobs_no_jobs(self):
+        """Test has_ongoing_jobs when there are no jobs"""
+        # Clean up any existing jobs
+        self.env["queue.job"].search([("res_model", "=", "spp.demo.data.generator")]).unlink()
+
+        generator = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator No Jobs",
+                "locale_origin": self.test_country.id,
+            }
+        )
+
+        generator._compute_ongoing_jobs_info()
+        self.assertFalse(generator.has_ongoing_jobs)
+        self.assertFalse(generator.ongoing_job_generator_id)
+
+    def test_31_has_ongoing_jobs_with_pending_job(self):
+        """Test has_ongoing_jobs detects pending jobs"""
+        # Clean up any existing jobs
+        self.env["queue.job"].search([("res_model", "=", "spp.demo.data.generator")]).unlink()
+
+        generator = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator with Pending Job",
+                "locale_origin": self.test_country.id,
+            }
+        )
+
+        # Create a pending job
+        self.env["queue.job"].create(
+            {
+                "name": "Pending Job",
+                "model_name": "spp.demo.data.generator",
+                "method_name": "_process_batch",
+                "res_model": "spp.demo.data.generator",
+                "res_id": generator.id,
+                "state": "pending",
+            }
+        )
+
+        generator._compute_ongoing_jobs_info()
+        self.assertTrue(generator.has_ongoing_jobs)
+        self.assertEqual(generator.ongoing_job_generator_id, generator)
+
+    def test_32_has_ongoing_jobs_with_enqueued_job(self):
+        """Test has_ongoing_jobs detects enqueued jobs"""
+        # Clean up any existing jobs
+        self.env["queue.job"].search([("res_model", "=", "spp.demo.data.generator")]).unlink()
+
+        generator = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator with Enqueued Job",
+                "locale_origin": self.test_country.id,
+            }
+        )
+
+        # Create an enqueued job
+        self.env["queue.job"].create(
+            {
+                "name": "Enqueued Job",
+                "model_name": "spp.demo.data.generator",
+                "method_name": "_process_batch",
+                "res_model": "spp.demo.data.generator",
+                "res_id": generator.id,
+                "state": "enqueued",
+            }
+        )
+
+        generator._compute_ongoing_jobs_info()
+        self.assertTrue(generator.has_ongoing_jobs)
+        self.assertEqual(generator.ongoing_job_generator_id, generator)
+
+    def test_33_has_ongoing_jobs_with_started_job(self):
+        """Test has_ongoing_jobs detects started jobs"""
+        # Clean up any existing jobs
+        self.env["queue.job"].search([("res_model", "=", "spp.demo.data.generator")]).unlink()
+
+        generator = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator with Started Job",
+                "locale_origin": self.test_country.id,
+            }
+        )
+
+        # Create a started job
+        self.env["queue.job"].create(
+            {
+                "name": "Started Job",
+                "model_name": "spp.demo.data.generator",
+                "method_name": "_process_batch",
+                "res_model": "spp.demo.data.generator",
+                "res_id": generator.id,
+                "state": "started",
+            }
+        )
+
+        generator._compute_ongoing_jobs_info()
+        self.assertTrue(generator.has_ongoing_jobs)
+        self.assertEqual(generator.ongoing_job_generator_id, generator)
+
+    def test_34_has_ongoing_jobs_with_done_job(self):
+        """Test has_ongoing_jobs with completed jobs"""
+        # Clean up any existing jobs
+        self.env["queue.job"].search([("res_model", "=", "spp.demo.data.generator")]).unlink()
+
+        generator = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator with Done Job",
+                "locale_origin": self.test_country.id,
+            }
+        )
+
+        # Create only done jobs
+        self.env["queue.job"].create(
+            {
+                "name": "Done Job",
+                "model_name": "spp.demo.data.generator",
+                "method_name": "_process_batch",
+                "res_model": "spp.demo.data.generator",
+                "res_id": generator.id,
+                "state": "done",
+            }
+        )
+
+        generator._compute_ongoing_jobs_info()
+        self.assertFalse(generator.has_ongoing_jobs)
+        self.assertFalse(generator.ongoing_job_generator_id)
+
+    def test_35_has_ongoing_jobs_cross_record(self):
+        """Test has_ongoing_jobs affects all records when any generator has ongoing jobs"""
+        # Clean up any existing jobs
+        self.env["queue.job"].search([("res_model", "=", "spp.demo.data.generator")]).unlink()
+
+        generator1 = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator 1",
+                "locale_origin": self.test_country.id,
+            }
+        )
+        generator2 = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator 2",
+                "locale_origin": self.test_country.id,
+            }
+        )
+
+        # Create a pending job for generator1 only
+        self.env["queue.job"].create(
+            {
+                "name": "Pending Job for Generator 1",
+                "model_name": "spp.demo.data.generator",
+                "method_name": "_process_batch",
+                "res_model": "spp.demo.data.generator",
+                "res_id": generator1.id,
+                "state": "pending",
+            }
+        )
+
+        # Trigger compute on both
+        generator1._compute_ongoing_jobs_info()
+        generator2._compute_ongoing_jobs_info()
+
+        # Both should show has_ongoing_jobs = True
+        self.assertTrue(generator1.has_ongoing_jobs)
+        self.assertTrue(generator2.has_ongoing_jobs)
+
+        # Both should point to generator1 as the one with ongoing jobs
+        self.assertEqual(generator1.ongoing_job_generator_id, generator1)
+        self.assertEqual(generator2.ongoing_job_generator_id, generator1)
+
+    def test_36_has_ongoing_jobs_mixed_states(self):
+        """Test has_ongoing_jobs with mixed job states"""
+        # Clean up any existing jobs
+        self.env["queue.job"].search([("res_model", "=", "spp.demo.data.generator")]).unlink()
+
+        generator = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator Mixed States",
+                "locale_origin": self.test_country.id,
+            }
+        )
+
+        # Create jobs with different states
+        self.env["queue.job"].create(
+            {
+                "name": "Done Job",
+                "model_name": "spp.demo.data.generator",
+                "method_name": "_process_batch",
+                "res_model": "spp.demo.data.generator",
+                "res_id": generator.id,
+                "state": "done",
+            }
+        )
+        self.env["queue.job"].create(
+            {
+                "name": "Failed Job",
+                "model_name": "spp.demo.data.generator",
+                "method_name": "_process_batch",
+                "res_model": "spp.demo.data.generator",
+                "res_id": generator.id,
+                "state": "failed",
+            }
+        )
+        self.env["queue.job"].create(
+            {
+                "name": "Pending Job",
+                "model_name": "spp.demo.data.generator",
+                "method_name": "_process_batch",
+                "res_model": "spp.demo.data.generator",
+                "res_id": generator.id,
+                "state": "pending",
+            }
+        )
+
+        generator._compute_ongoing_jobs_info()
+
+        # Should be True because there's one pending job
+        self.assertTrue(generator.has_ongoing_jobs)
+        self.assertEqual(generator.ongoing_job_generator_id, generator)
+
+    def test_37_queue_job_isolation_from_other_models(self):
+        """Test that jobs from other models don't affect demo generator"""
+        # Clean up any existing jobs
+        self.env["queue.job"].search([("res_model", "=", "spp.demo.data.generator")]).unlink()
+
+        generator = self.env["spp.demo.data.generator"].create(
+            {
+                "name": "Generator Isolation Test",
+                "locale_origin": self.test_country.id,
+            }
+        )
+
+        # Create a pending job for a different model
+        self.env["queue.job"].create(
+            {
+                "name": "Job for different model",
+                "model_name": "res.partner",
+                "method_name": "test_method",
+                "res_model": "res.partner",
+                "res_id": 1,
+                "state": "pending",
+            }
+        )
+
+        generator._compute_ongoing_jobs_info()
+        generator._compute_queue_job_ids()
+
+        # Should not be affected by jobs from other models
+        self.assertFalse(generator.has_ongoing_jobs)
+        self.assertFalse(generator.ongoing_job_generator_id)
+        self.assertEqual(len(generator.queue_job_ids), 0)
