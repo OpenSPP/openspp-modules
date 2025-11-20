@@ -31,13 +31,16 @@ patch(FormController.prototype, {
                     setTimeout(() => {
                         window.location.reload();
                     }, 100);
+                    // Don't return - page will reload soon, making return value meaningless
                 } else {
                     // For existing records, reload immediately
+                    // This destroys the page context, so no return is needed
                     window.location.reload();
                 }
+            } else {
+                // Save returned false, don't reload but propagate the result
+                return result;
             }
-
-            return result;
         } catch (error) {
             // Save failed (validation error, required fields missing, etc.)
             // Don't reload, let the user fix the errors
