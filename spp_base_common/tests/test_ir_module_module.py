@@ -14,4 +14,4 @@ class TestIRModuleModule(TransactionCase):
         # Verify that the icon was updated
         self.survey_module.next()
         menu = self.env.ref("mail.menu_root_discuss")
-        self.assertEqual(menu.web_icon, "spp_base_common,static/description/icon-Discuss-White-line.png")
+        self.assertEqual(menu.web_icon, "spp_base_common,static/description/openspp-icons-menu-discuss.png")
