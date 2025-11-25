@@ -12,10 +12,12 @@
     "depends": ["base", "mail", "g2p_registry_membership"],
     "external_dependencies": {},
     "data": [
+        "data/ir_config_parameter_data.xml",
         "security/audit_log_security.xml",
         "security/ir.model.access.csv",
         "views/spp_audit_rule_views.xml",
         "views/spp_audit_log_views.xml",
+        "views/res_config_settings_views.xml",
     ],
     "assets": {},
     "demo": [],

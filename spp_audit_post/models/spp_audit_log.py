@@ -1,6 +1,13 @@
 from odoo import _, api, fields, models
 from odoo.tools.safe_eval import datetime, safe_eval
 
+try:
+    from odoo.addons.spp_audit_log.tools import is_file_logging_enabled
+except ImportError:
+    # Fallback if spp_audit_log module not available
+    def is_file_logging_enabled(env):
+        return False
+
 
 class SppAuditLog(models.Model):
     _inherit = "spp.audit.log"
@@ -17,6 +24,10 @@ class SppAuditLog(models.Model):
     @api.model
     def create(self, vals):
         res = super().create(vals)
+
+        # Skip message posting when file logging is enabled
+        if is_file_logging_enabled(self.env):
+            return res
 
         records = []
         msg = ""

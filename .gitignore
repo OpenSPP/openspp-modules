@@ -79,3 +79,15 @@ docs/_build/
 
 # Local release planning files (ignored)
 .release/
+
+# Cursor generated files
+.cursor/generated/
+.cursor/notes/
+.cursor/temp/
+.cursor/chat/
+.cursor/composer/
+.cursor/generated/
+.cursor/memos/
+.cursor/*.db
+.cursor/*.json
+.cursor/*.md

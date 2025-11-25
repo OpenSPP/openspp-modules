@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_config_settings_view_form_inherit_spp_audit_log" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.spp.audit.log</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="999" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app
+                    string="Audit Log Settings"
+                    name="spp_audit_log_settings"
+                    logo="/spp_audit_log/static/description/icon.png"
+                >
+                    <block title="File Logging Configuration">
+                        <setting
+                            string="Enable File Logging"
+                            help="Enable logging audit records to JSON file instead of database to prevent DB bloat"
+                        >
+                            <field name="audit_log_to_file" />
+                        </setting>
+                        <setting
+                            string="Audit Log File Path"
+                            help="Full path to the audit log file (JSON Lines format)"
+                            invisible="not audit_log_to_file"
+                        >
+                            <field name="audit_log_file_path" placeholder="/var/log/odoo/audit.log" />
+                        </setting>
+                    </block>
+                    <block title="File Rotation Settings" invisible="not audit_log_to_file">
+                        <setting
+                            string="Max File Size (MB)"
+                            help="Maximum size of log file in megabytes before rotation"
+                        >
+                            <field name="audit_log_file_max_bytes" />
+                        </setting>
+                        <setting string="Backup Count" help="Number of backup files to keep during rotation">
+                            <field name="audit_log_file_backup_count" />
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

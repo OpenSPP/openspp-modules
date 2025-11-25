@@ -3,7 +3,7 @@ import json
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
-from ..tools import audit_decorator
+from ..tools import audit_decorator, is_file_logging_enabled, log_audit_to_file
 
 
 class SppAuditRule(models.Model):
@@ -255,8 +255,8 @@ class SppAuditRule(models.Model):
 
     def log(self, method, old_values=None, new_values=None):
         """
-        The function logs changes made to a model's records by creating an audit log entry with
-        information about the user, model, record, method, and data.
+        The function logs changes made to a model's records by creating an audit log entry.
+        Logs are written to file if file logging is enabled, otherwise to database.
 
         :param method: The "method" parameter is a string that represents the action or method being
         logged. It could be a create, write, or delete action, for example
@@ -272,9 +272,18 @@ class SppAuditRule(models.Model):
         if old_values or new_values:
             fields_to_log = self.field_to_log_ids.mapped("name")
             data = self._format_data_to_log(old_values, new_values, fields_to_log)
-            audit_log = self.env["spp.audit.log"].sudo()
-            for rec in self:
-                for res_id in data:
-                    audit_log_vals = rec.get_audit_log_vals(res_id, method, data)
-                    audit_log.create(audit_log_vals)
+
+            # Check if file logging is enabled
+            if is_file_logging_enabled(self.env):
+                # Write to file for each audit rule and resource
+                for rec in self:
+                    for res_id in data:
+                        log_audit_to_file(self.env, rec, method, res_id, data[res_id])
+            else:
+                # Fallback to database logging
+                audit_log = self.env["spp.audit.log"].sudo()
+                for rec in self:
+                    for res_id in data:
+                        audit_log_vals = rec.get_audit_log_vals(res_id, method, data)
+                        audit_log.create(audit_log_vals)
         return

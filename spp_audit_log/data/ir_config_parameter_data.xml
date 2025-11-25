@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Default configuration for audit log file settings -->
+    <record id="audit_log_to_file_default" model="ir.config_parameter">
+        <field name="key">spp.audit_log_to_file</field>
+        <field name="value">False</field>
+    </record>
+
+    <record id="audit_log_file_path_default" model="ir.config_parameter">
+        <field name="key">spp.audit_log_file_path</field>
+        <field name="value">/var/log/odoo/audit.log</field>
+    </record>
+
+    <record id="audit_log_file_max_bytes_default" model="ir.config_parameter">
+        <field name="key">spp.audit_log_file_max_bytes</field>
+        <field name="value">10</field>
+    </record>
+
+    <record id="audit_log_file_backup_count_default" model="ir.config_parameter">
+        <field name="key">spp.audit_log_file_backup_count</field>
+        <field name="value">5</field>
+    </record>
+
+</odoo>
