@@ -5,7 +5,7 @@
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="draft_name" />
+                <field name="draft_name" string="Name" />
                 <field name="altnames" />
                 <field name="code" />
                 <field name="parent_id" />

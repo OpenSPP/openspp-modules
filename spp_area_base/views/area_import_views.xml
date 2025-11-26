@@ -12,16 +12,9 @@
                     <button
                         name="parse_excel_to_json"
                         type="object"
-                        string="Parse"
+                        string="Process"
                         class="btn-primary"
                         invisible="state not in ('New', 'Uploaded')"
-                    />
-                    <button
-                        name="import_data"
-                        type="object"
-                        string="Import"
-                        class="btn-primary"
-                        invisible="state not in ('New', 'Parsed')"
                     />
                    <button
                         name="save_to_area"
@@ -36,13 +29,6 @@
                         string="Validate Data"
                         class="btn-success"
                         invisible="state != 'Imported'"
-                    />
-                    <button
-                        name="reset_to_uploaded"
-                        type="object"
-                        string="Reset to Uploaded"
-                        class="btn-primary"
-                        invisible="state not in ('Imported', 'Validated')"
                     />
                     <button
                         name="cancel_import"

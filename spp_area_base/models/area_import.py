@@ -177,6 +177,8 @@ class OpenSPPAreaImport(models.Model):
 
         # Create single job to parse Excel with pandas
         job = self.delayable(channel=_area_import_channel)._scan_and_create_parse_jobs()
+        # After parsing, import the data
+        job.on_done(self.delayable(channel=_area_import_channel).import_data())
         job.delay()
 
     def _scan_and_create_parse_jobs(self):
