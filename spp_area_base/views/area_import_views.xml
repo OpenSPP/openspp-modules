@@ -33,7 +33,7 @@
                     <button
                         name="cancel_import"
                         type="object"
-                        string="Cancel"
+                        string="Cancel and Re-import"
                         class="btn-danger"
                         invisible="state not in ('Uploaded', 'Imported', 'Validated')"
                     />

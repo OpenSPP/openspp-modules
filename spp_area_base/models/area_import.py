@@ -118,10 +118,29 @@ class OpenSPPAreaImport(models.Model):
 
     def cancel_import(self):
         """
-        The function cancels the import by updating the state of the record to "Cancelled".
+        Cancel the import and create a new import record to start fresh.
+        Redirects to the newly created record.
         """
         for rec in self:
             rec.update({"state": self.CANCELLED})
+
+        # Create a new area import record
+        new_record = self.env["spp.area.import"].create(
+            {
+                "name": _("New Area Import"),
+                "state": self.NEW,
+            }
+        )
+
+        # Return action to open the new record in form view
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "spp.area.import",
+            "res_id": new_record.id,
+            "view_mode": "form",
+            "target": "current",
+            "context": self.env.context,
+        }
 
     def reset_to_uploaded(self):
         """
