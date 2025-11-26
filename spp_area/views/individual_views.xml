@@ -8,12 +8,7 @@
         <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
         <field name="arch" type="xml">
             <xpath expr="//span[@name='address_name']" position="before">
-                <field
-                    name="area_id"
-                    placeholder="Area"
-                    options="{'no_create': True}"
-                    readonly="disabled"
-                />
+                <field name="area_id" placeholder="Area" options="{'no_create': True}" readonly="disabled" />
             </xpath>
         </field>
     </record>
