@@ -56,7 +56,7 @@ class OpenSPPArea(models.Model):
             name = rec.draft_name or ""
 
             if rec.code:
-                name = f"{rec.code} - {name}"
+                name = f"{name} ({rec.code})"
 
             rec.name = name
 

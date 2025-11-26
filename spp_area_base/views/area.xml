@@ -5,11 +5,11 @@
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="draft_name" />
+                <field name="altnames" />
+                <field name="code" />
                 <field name="parent_id" />
                 <field name="complete_name" string="Complete Name" />
-                <field name="name" />
-                <field name="code" />
-                <field name="altnames" />
                 <field name="area_level" />
                 <field name="kind" />
             </tree>
