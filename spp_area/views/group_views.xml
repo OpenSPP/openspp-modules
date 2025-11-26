@@ -11,7 +11,7 @@
                 <field
                     name="area_id"
                     placeholder="Area"
-                    options="{'no_open': True, 'no_create': True}"
+                    options="{'no_create': True}"
                     readonly="disabled"
                 />
             </xpath>

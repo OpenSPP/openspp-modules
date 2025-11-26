@@ -14,7 +14,7 @@
                         type="object"
                         string="Process"
                         class="btn-primary"
-                        invisible="state not in ('New', 'Uploaded')"
+                        invisible="state != 'Uploaded'"
                     />
                    <button
                         name="save_to_area"
