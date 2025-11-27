@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_data_importer_tree" model="ir.ui.view">
+        <field name="name">view_data_importer_tree</field>
+        <field name="model">spp.data.importer</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree delete="true">
+                <field name="name" />
+                <field name="import_file" widget="binary" filename="import_filename" />
+                <field name="import_filename" column_invisible="1" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_data_importer_form" model="ir.ui.view">
+        <field name="name">view_data_importer_form</field>
+        <field name="model">spp.data.importer</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Import Data">
+                <header>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,imported,completed,cancelled,error"
+                    />
+                </header>
+                <field name="locked" invisible="True" />
+                <div
+                    class="alert alert-warning text-center o_form_header"
+                    role="status"
+                    invisible="not locked and not locked_reason"
+                >
+                    <span>Warning: Operation in progress: </span>
+                    <field name="locked_reason" class="o_stat_value" readonly="1" />
+                    <button
+                        name="refresh_page"
+                        type="object"
+                        class="btn_warning"
+                        icon="fa-refresh"
+                        title="Refresh Page"
+                        string="Refresh"
+                    />
+                </div>
+                <div class="alert alert-info text-center o_form_header" role="status" invisible="not remarks">
+                    <field name="remarks" class="o_stat_value" readonly="1" />
+                </div>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" invisible="locked">
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check"
+                            name="start_import"
+                            invisible="state != 'draft'"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Start</span>
+                                <span class="o_stat_text">Import</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-refresh"
+                            name="validate_import"
+                            invisible="validated or state not in ['imported','error']"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Validate</span>
+                                <span class="o_stat_text">Import</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check-circle"
+                            name="create_records"
+                            invisible="state not in ['validated','error'] or not validated"
+                        >
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Create</span>
+                                <span class="o_stat_text">Imported</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div style="width: 100%; padding-top: 10px; padding-left: 10px;">
+                        <div style="display: flex; gap: 20px;">
+                            <field name="name" invisible="1" />
+                            <field name="import_filename" invisible="1" />
+                            <field name="module_list" invisible="1" force_save="1" />
+                            <field name="model_list" invisible="1" force_save="1" />
+                            <field name="validated" invisible="1" force_save="1" />
+                            <field name="remarks" invisible="1" force_save="1" />
+                            <!-- Data Importer Section -->
+                            <div style="flex: 1;">
+                                <h3>Data Importer</h3>
+                                <hr />
+                                <div name="div_name" style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                    <div style="flex: 1;">
+                                        <h4><label for="name" string="Description" class="o_form_label" /><div
+                                            /></h4>
+                                        <field
+                                            name="name"
+                                            required="1"
+                                            readonly="state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                </div>
+                                <div
+                                    name="div_import_file"
+                                    style="display: flex; gap: 20px; margin-bottom: 10px;"
+                                >
+                                    <div style="flex: 1;">
+                                        <h4><label
+                                                for="import_file"
+                                                string="Import File"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="import_file"
+                                            widget="binary"
+                                            filename="import_filename"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Other Details Section -->
+                            <div style="flex: 1;">
+                                <h3>Other Details</h3>
+                                <hr />
+                                <div
+                                    name="div_other_details_1"
+                                    style="display: flex; gap: 20px; margin-bottom: 10px;"
+                                >
+                                    <div style="flex: 1;">
+                                        <h4>
+                                            <label
+                                                for="total_number_of_records"
+                                                string=" No. of Records"
+                                                class="o_form_label"
+                                            /><div />
+                                            <field name="total_number_of_records" />
+                                        </h4>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4>
+                                            <label
+                                                for="total_number_of_models"
+                                                string=" No. of Models"
+                                                class="o_form_label"
+                                            /><div />
+                                            <field name="total_number_of_models" />
+                                        </h4>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Details" name="raw_ids" invisible="state in ['draft','cancelled']">
+                            <field name="raw_ids" readonly="1">
+                                <tree
+                                    decoration-danger="state=='error'"
+                                    decoration-info="state=='validated'"
+                                    decoration-success="state in ('completed','imported', 'saved')"
+                                    decoration-muted="state=='draft'"
+                                >
+                                    <field name="model_name" />
+                                    <field name="name" />
+                                    <field name="json_data" optional="hide" />
+                                    <field name="state" />
+                                    <field name="remarks" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Summary" name="summary_ids" invisible="state in ['draft','cancelled']">
+                            <field name="summary_ids" readonly="1">
+                                <tree
+                                    decoration-danger="state=='error'"
+                                    decoration-info="state=='partial'"
+                                    decoration-success="state=='completed'"
+                                    decoration-muted="state=='draft'"
+                                >
+                                    <field name="model_name" />
+                                    <field name="name" column_invisible="1" />
+                                    <field name="record_count" />
+                                    <field name="validated_count" />
+                                    <field name="success_count" />
+                                    <field name="error_count" />
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Modules" name="module_ids">
+                            <field name="module_ids" readonly="1">
+                                <tree>
+                                    <field name="shortdesc" />
+                                    <field name="name" />
+                                    <field name="state" />
+                                    <field name="to_buy" column_invisible="1" />
+                                    <button
+                                        name="button_immediate_install"
+                                        string="Activate"
+                                        invisible="to_buy or state != 'uninstalled'"
+                                        type="object"
+                                        class="btn btn-primary me-1"
+                                        groups="base.group_system"
+                                    />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Models" name="model_ids">
+                            <field name="model_ids" readonly="1">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="model" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_data_importer" model="ir.actions.act_window">
+        <field name="name">Data Importer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.data.importer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Import data into the system using exported file.
+            </p><p>
+                Click the create button to set up a new data import task.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_data_importer_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_data_importer_tree" />
+        <field name="act_window_id" ref="action_data_importer" />
+    </record>
+
+    <record id="action_data_importer_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_data_importer_form" />
+        <field name="act_window_id" ref="action_data_importer" />
+    </record>
+
+    <menuitem
+        id="menu_data_importer"
+        name="Import Data"
+        action="action_data_importer"
+        parent="spp_demo_common.menu_import_export"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
+    />
+
+</odoo>

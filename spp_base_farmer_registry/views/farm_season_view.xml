@@ -9,6 +9,8 @@
                 <field name="can_activate" invisible="1" />
                 <field name="can_close" invisible="1" />
                 <field name="can_edit" invisible="1" />
+                <field name="show_close_button" invisible="1" />
+                <field name="show_force_close_button" invisible="1" />
                 <header>
                     <button
                         name="action_activate"
@@ -22,7 +24,15 @@
                         string="Close"
                         type="object"
                         class="oe_highlight"
-                        invisible="not can_close"
+                        invisible="not can_close or not show_close_button"
+                    />
+                    <button
+                        name="action_force_close"
+                        string="Force Close"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="not can_close or not show_force_close_button"
+                        groups="spp_base_farmer_registry.group_spp_farm_manager"
                     />
                     <button
                         name="action_draft"
@@ -78,7 +88,7 @@
                             />
                         </page>
                         <page string="Activities" name="activities" invisible="state == 'draft'">
-                            <field name="activity_ids" readonly="1">
+                            <field name="activity_ids" readonly="1" force_save="1">
                                 <tree>
                                     <field name="activity_type" />
                                     <field name="species_id" />
@@ -185,5 +195,6 @@
         parent="g2p_registry_base.g2p_configuration_menu_root"
         action="action_spp_farm_season"
         sequence="15"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
     />
 </odoo>

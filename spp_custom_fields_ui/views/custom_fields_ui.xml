@@ -1,20 +1,85 @@
 <odoo>
-    <record id="view_custom_fields_ui_tree" model="ir.ui.view">
-        <field name="name">view_custom_fields_ui_tree</field>
+    <!-- Tree View for Group Fields with Grouping Support -->
+    <record id="view_custom_fields_ui_tree_group" model="ir.ui.view">
+        <field name="name">view_custom_fields_ui_tree_group</field>
         <field name="model">ir.model.fields</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree multi_edit="1">
+                <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="field_description" />
                 <field name="ttype" />
-                <field name="target_type" />
                 <field name="field_category" />
-                <field name="index" />
-                <field name="store" />
-                <field name="readonly" />
-                <field name="relation" />
+                <field name="field_group_id" />
+                <field name="target_type" column_invisible="1" />
+                <field name="index" optional="hide" />
+                <field name="store" optional="hide" />
+                <field name="readonly" optional="hide" />
+                <field name="relation" optional="hide" />
             </tree>
+        </field>
+    </record>
+
+    <!-- Tree View for Individual Fields with Grouping Support -->
+    <record id="view_custom_fields_ui_tree_individual" model="ir.ui.view">
+        <field name="name">view_custom_fields_ui_tree_individual</field>
+        <field name="model">ir.model.fields</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="field_description" />
+                <field name="ttype" />
+                <field name="field_category" />
+                <field name="field_group_id" />
+                <field name="target_type" column_invisible="1" />
+                <field name="index" optional="hide" />
+                <field name="store" optional="hide" />
+                <field name="readonly" optional="hide" />
+                <field name="relation" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View with Grouping Support -->
+    <record id="view_custom_fields_ui_search" model="ir.ui.view">
+        <field name="name">view_custom_fields_ui_search</field>
+        <field name="model">ir.model.fields</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="field_description" />
+                <field name="field_group_id" />
+                <field name="ttype" />
+                <field name="field_category" />
+                <separator />
+                <filter
+                    string="Custom Fields"
+                    name="filter_custom"
+                    domain="[('field_category', '=', 'cst')]"
+                />
+                <filter
+                    string="Calculated Fields"
+                    name="filter_calculated"
+                    domain="[('field_category', '=', 'ind')]"
+                />
+                <separator />
+                <group expand="1" string="Group By">
+                    <filter
+                        string="Field Group"
+                        name="group_by_field_group"
+                        context="{'group_by': 'field_group_id'}"
+                    />
+                    <filter
+                        string="Field Category"
+                        name="group_by_field_category"
+                        context="{'group_by': 'field_category'}"
+                    />
+                    <filter string="Field Type" name="group_by_ttype" context="{'group_by': 'ttype'}" />
+                </group>
+            </search>
         </field>
     </record>
 
@@ -32,12 +97,14 @@
                               <field name="draft_name" />
                               <field name="field_description" />
                               <field name="model_id" readonly="1" force_save="1" />
+                              <field name="sequence" />
                           </group>
                           <group>
                               <field name="ttype" readonly="field_category == 'ind'" />
-                              <field name="target_type" />
+                              <field name="target_type" readonly="1" force_save="1" />
                               <field name="field_category" />
                               <field name="has_presence" invisible="field_category != 'ind'" />
+                              <field name="field_group_id" />
                               <field name="help" />
                           </group>
                       </group>
@@ -180,34 +247,113 @@
         </field>
     </record>
 
-    <record id="action_custom_fields_ui" model="ir.actions.server">
-        <field name="name">Custom Fields</field>
-        <field name="type">ir.actions.server</field>
-        <field name="model_id" ref="model_ir_model_fields" />
-        <field name="state">code</field>
-        <field name="code">action = model.open_custom_fields_tree()</field>
+    <!-- Action for Group Custom Fields -->
+    <record id="action_custom_fields_ui_group" model="ir.actions.act_window">
+        <field name="name">Group Custom Fields</field>
+        <field name="res_model">ir.model.fields</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_custom_fields_ui_search" />
+        <field
+            name="context"
+            eval="{
+            'default_model_id': ref('base.model_res_partner'),
+            'default_model': 'res.partner',
+            'default_target_type': 'grp',
+            'search_default_group_by_field_group': 1,
+        }"
+        />
+        <field
+            name="domain"
+            eval="[('model_id', '=', ref('base.model_res_partner')), ('state', '=', 'manual'), ('target_type', '=', 'grp')]"
+        />
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_custom_fields_ui_tree_group')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_custom_fields_ui_form')})]"
+        />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Custom Field for Groups
+            </p>
+            <p>
+                Define custom fields that will appear on group registrant profiles.
+                You can organize fields into groups for better UI organization.
+            </p>
+        </field>
     </record>
 
-    <!--<record id="action_custom_fields_ui_tree_view" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1" />
-        <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_custom_fields_ui_tree" />
-        <field name="act_window_id" ref="action_custom_fields_ui" />
+    <!-- Action for Individual Custom Fields -->
+    <record id="action_custom_fields_ui_individual" model="ir.actions.act_window">
+        <field name="name">Individual Custom Fields</field>
+        <field name="res_model">ir.model.fields</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_custom_fields_ui_search" />
+        <field
+            name="context"
+            eval="{
+            'default_model_id': ref('base.model_res_partner'),
+            'default_model': 'res.partner',
+            'default_target_type': 'indv',
+            'search_default_group_by_field_group': 1,
+        }"
+        />
+        <field
+            name="domain"
+            eval="[('model_id', '=', ref('base.model_res_partner')), ('state', '=', 'manual'), ('target_type', '=', 'indv')]"
+        />
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_custom_fields_ui_tree_individual')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_custom_fields_ui_form')})]"
+        />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Custom Field for Individuals
+            </p>
+            <p>
+                Define custom fields that will appear on individual registrant profiles.
+                You can organize fields into groups for better UI organization.
+            </p>
+        </field>
     </record>
 
-    <record id="action_custom_fields_ui_form_view" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1" />
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="view_custom_fields_ui_form" />
-        <field name="act_window_id" ref="action_custom_fields_ui" />
-    </record>-->
-
+    <!-- Parent Menu for Custom Fields -->
     <menuitem
-        id="menu_custom_fields_ui"
+        id="menu_custom_fields_ui_root"
         name="Custom Fields"
-        action="action_custom_fields_ui"
         parent="g2p_registry_base.g2p_configuration_menu_root"
         sequence="33"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+
+    <!-- Menu Item for Group Fields -->
+    <menuitem
+        id="menu_custom_fields_ui_group"
+        name="Group Fields"
+        action="action_custom_fields_ui_group"
+        parent="menu_custom_fields_ui_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+
+    <!-- Menu Item for Individual Fields -->
+    <menuitem
+        id="menu_custom_fields_ui_individual"
+        name="Individual Fields"
+        action="action_custom_fields_ui_individual"
+        parent="menu_custom_fields_ui_root"
+        sequence="20"
+        groups="g2p_registry_base.group_g2p_admin"
+    />
+
+    <!-- Move Field Groups menu under Custom Fields parent -->
+    <menuitem
+        id="spp_custom_field.menu_field_group"
+        name="Field Groups"
+        parent="menu_custom_fields_ui_root"
+        sequence="30"
         groups="g2p_registry_base.group_g2p_admin"
     />
 

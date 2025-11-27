@@ -13,6 +13,7 @@
     "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
     "depends": [
         "base",
+        "spp_base_common",
         "spp_base_gis",
         "g2p_registry_base",
     ],

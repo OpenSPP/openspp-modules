@@ -1,0 +1,48 @@
+# Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+
+
+{
+    "name": "OpenSPP Farmer Registry Demo",
+    "summary": "Generates and populates the OpenSPP Farmer Registry with comprehensive, realistic sample data. It integrates with core registry models to provide diverse farmer profiles, farm details, and agricultural activities, facilitating system exploration, training, and testing.",
+    "category": "OpenSPP",
+    "version": "17.0.1.3.1",
+    "sequence": 1,
+    "author": "OpenSPP.org",
+    "website": "https://github.com/OpenSPP/openspp-modules",
+    "license": "LGPL-3",
+    "development_status": "Production/Stable",
+    "external_dependencies": {"python": ["faker"]},
+    "maintainers": ["jeremi", "gonzalesedwin1123", "reichie020212"],
+    "depends": [
+        "base",
+        "g2p_registry_base",
+        "spp_base_farmer_registry",
+        "spp_demo_common",
+        "queue_job",
+        "spp_custom_filter_farmer_registry",
+    ],
+    "excludes": [
+        "spp_base_spmis",
+        "spp_base_social_registry",
+    ],
+    "data": [
+        "security/ir.model.access.csv",
+        "data/asset_type_data.xml",
+        "data/machinery_type_data.xml",
+        "data/aqua_data.xml",
+        "data/crop_data.xml",
+        "data/livestock_data.xml",
+        "data/chemical_data.xml",
+        "data/fertilizer_data.xml",
+        "data/feed_items_data.xml",
+        "views/demo_data_generator_view.xml",
+        "views/group_view.xml",
+        "views/individual_view.xml",
+    ],
+    "assets": {},
+    "demo": [],
+    "images": [],
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+}

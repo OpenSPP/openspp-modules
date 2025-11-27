@@ -622,7 +622,7 @@
                 <filter
                     name="filter_validator"
                     string="Assigned to me"
-                    domain="[('change_request_id.validation_group_id.users', 'in', uid)]"
+                    domain="[('change_request_id.assign_to_id','=',uid),('change_request_id.assign_to_id','!=',False)]"
                 />
             </search>
         </field>

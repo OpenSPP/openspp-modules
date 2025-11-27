@@ -1,4 +1,8 @@
+import logging
+
 from odoo import api, models
+
+_logger = logging.getLogger(__name__)
 
 
 class CustomFilterMixin(models.AbstractModel):
@@ -46,11 +50,24 @@ class CustomFilterMixin(models.AbstractModel):
         res = super().fields_get(allfields, attributes)
         if self.user_has_groups("base.group_no_one"):
             return res
+        context = self.env.context.copy()
         for fname in res.keys():
             if fname == "id":
                 allow_filter = getattr(self._fields[fname], "allow_filter", True)
+                filter_target = getattr(self._fields[fname], "filter_target", "both")
             else:
                 allow_filter = getattr(self._fields[fname], "allow_filter", False)
+                filter_target = getattr(self._fields[fname], "filter_target", "both")
+
+            if filter_target == "individual" and context.get("is_group"):
+                allow_filter = False
+
+            if filter_target == "group" and not context.get("is_group"):
+                allow_filter = False
+
+            if filter_target == "both":
+                allow_filter = allow_filter
+
             if res[fname].get("searchable"):
                 res[fname]["searchable"] = allow_filter and res[fname]["searchable"]
             if res[fname].get("exportable"):
@@ -59,4 +76,4 @@ class CustomFilterMixin(models.AbstractModel):
         return res
 
     def _valid_field_parameter(self, field, name):
-        return name == "allow_filter" or super()._valid_field_parameter(field, name)
+        return name in ["allow_filter", "filter_target"] or super()._valid_field_parameter(field, name)

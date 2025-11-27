@@ -101,3 +101,33 @@ class TestPhoneValidation(TransactionCase):
             self.phone_model.create(phone_vals)
 
         self.assertIn("Phone number contains invalid special characters", str(cm.exception))
+
+    def test_06_activate_phone_validation(self):
+        """Test activating a phone validation record"""
+        phone_validation = self.phone_validation_model.create(
+            {
+                "number_of_digits": 9,
+                "with_prefix": False,
+                "state": "inactive",
+            }
+        )
+        self.assertEqual(phone_validation.state, "inactive")
+
+        phone_validation.activate_phone_validation()
+        self.assertEqual(phone_validation.state, "active", "Phone validation state should be 'active' after activation")
+
+    def test_07_deactivate_phone_validation(self):
+        """Test deactivating a phone validation record"""
+        phone_validation = self.phone_validation_model.create(
+            {
+                "number_of_digits": 8,
+                "with_prefix": False,
+                "state": "active",
+            }
+        )
+        self.assertEqual(phone_validation.state, "active")
+
+        phone_validation.deactivate_phone_validation()
+        self.assertEqual(
+            phone_validation.state, "inactive", "Phone validation state should be 'inactive' after deactivation"
+        )

@@ -18,4 +18,27 @@
         name="Settings"
         web_icon="spp_base_common,static/description/OpenSPP-Icons-Setting.png"
     />
+
+    <menuitem
+        id="g2p_registry_base.menu_relationship"
+        name="Relation Types"
+        action="g2p_registry_base.action_relationship"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="20"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
+    />
+
+    <!-- Override action name to match menu name -->
+    <record id="g2p_registry_base.action_relationship" model="ir.actions.act_window">
+        <field name="name">Relation Types</field>
+    </record>
+
+
+    <menuitem
+        id="spp_bank_types_config_menu"
+        action="base.action_res_bank_form"
+        name="Banks"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="50"
+    />
 </odoo>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_demo_data_generator_form_farmer" model="ir.ui.view">
+        <field name="name">view_demo_data_generator_form_farmer</field>
+        <field name="model">spp.demo.data.generator</field>
+        <field name="inherit_id" ref="spp_demo_common.view_demo_data_generator_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Other Configuration">
+                    <div style="width: 100%; padding-top: 10px; padding-left: 10px;">
+                        <!-- Season Configuration Section -->
+                        <div style="margin-bottom: 20px;">
+                            <h3>Season Configuration</h3>
+                            <hr />
+                            <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                <div style="flex: 1;">
+                                    <h4><label for="season_name" class="o_form_label" /><div /></h4>
+                                    <field
+                                        name="season_name"
+                                        readonly="locked or state != 'draft'"
+                                        style="width: 90%;"
+                                    />
+                                </div>
+                                <div style="flex: 1;">
+                                    <h4><label for="season_start_date" class="o_form_label" /><div /></h4>
+                                    <field
+                                        name="season_start_date"
+                                        readonly="locked or state != 'draft'"
+                                        style="width: 90%;"
+                                    />
+                                </div>
+                                <div style="flex: 1;">
+                                    <h4><label for="season_end_date" class="o_form_label" /><div /></h4>
+                                    <field
+                                        name="season_end_date"
+                                        readonly="locked or state != 'draft'"
+                                        style="width: 90%;"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 20px;">
+                            <!-- Percentage Settings Section -->
+                            <div style="flex: 1;">
+                                <h3>Percentage Settings</h3>
+                                <hr />
+                                <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                    <div style="flex: 1;">
+                                        <h4><label
+                                                for="percentage_with_farm_details"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="percentage_with_farm_details"
+                                            readonly="locked or state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4><label
+                                                for="percentage_with_land_records"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="percentage_with_land_records"
+                                            readonly="locked or state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4><label
+                                                for="percentage_with_farm_assets"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="percentage_with_farm_assets"
+                                            readonly="locked or state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                    <div style="flex: 1;">
+                                        <h4><label
+                                                for="percentage_with_agricultural_activities"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="percentage_with_agricultural_activities"
+                                            readonly="locked or state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4><label
+                                                for="percentage_with_extension_services"
+                                                class="o_form_label"
+                                            /><div /></h4>
+                                        <field
+                                            name="percentage_with_extension_services"
+                                            readonly="locked or state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <!-- Empty space for alignment -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Limits and Maximums Section -->
+                            <div style="flex: 1;">
+                                <h3>Limits and Maximums</h3>
+                                <hr />
+                                <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                    <div style="flex: 1;">
+                                        <h4><label for="min_farm_size" class="o_form_label" /><div /></h4>
+                                        <field
+                                            name="min_farm_size"
+                                            readonly="locked or state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4><label for="max_farm_size" class="o_form_label" /><div /></h4>
+                                        <field
+                                            name="max_farm_size"
+                                            readonly="locked or state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                    <div style="flex: 1;">
+                                        <h4><label for="max_land_parcels_per_farm" class="o_form_label" /><div
+                                            /></h4>
+                                        <field
+                                            name="max_land_parcels_per_farm"
+                                            readonly="locked or state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4><label for="max_assets_per_farm" class="o_form_label" /><div
+                                            /></h4>
+                                        <field
+                                            name="max_assets_per_farm"
+                                            readonly="locked or state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                                    <div style="flex: 1;">
+                                        <h4><label for="max_activities_per_farm" class="o_form_label" /><div
+                                            /></h4>
+                                        <field
+                                            name="max_activities_per_farm"
+                                            readonly="locked or state != 'draft'"
+                                            style="width: 90%;"
+                                        />
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <!-- Empty space for alignment -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

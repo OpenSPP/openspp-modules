@@ -47,6 +47,12 @@ class AgriculturalActivity(models.Model):
         for rec in self:
             rec.land_id = False
 
+    @api.constrains("species_id")
+    def _check_species_id(self):
+        for record in self:
+            if not record.species_id:
+                raise ValidationError(_("Species is required! Please select a species."))
+
     @api.constrains("season_id")
     def _check_season_state(self):
         for record in self:

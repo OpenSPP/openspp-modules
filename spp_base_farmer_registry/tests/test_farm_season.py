@@ -49,6 +49,7 @@ class TestSPPFarmSeason(TransactionCase):
         """Test season state workflow"""
         vals = dict(self.season_vals, allow_overlap=True)
         season = self.env["spp.farm.season"].with_user(self.farm_manager).create(vals)
+        season.force_close = True
 
         # Test draft to active
         season.action_activate()
@@ -66,6 +67,7 @@ class TestSPPFarmSeason(TransactionCase):
         """Test season integration with activities"""
         vals = dict(self.season_vals, allow_overlap=True)
         season = self.env["spp.farm.season"].with_user(self.farm_manager).create(vals)
+        season.force_close = True
         season.action_activate()
 
         # Create activity

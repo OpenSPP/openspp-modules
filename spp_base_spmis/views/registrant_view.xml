@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="view_group_spp_base_spmis_form" model="ir.ui.view">
+        <field name="name">view_group_spp_base_spmis_form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1000</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="after">
+                <field name="relation_inverse" />
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_1_ids']/tree/field[@name='relation']" position="attributes">
+                <attribute name="required">false</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='disabled']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='related_2_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='relationships']" position="attributes">
+                <attribute name="string">Relations</attribute>
+            </xpath>
+        </field>
+    </record>
 
+    <record id="view_individual_spp_base_spmis_form" model="ir.ui.view">
+        <field name="name">view_individual_spp_base_spmis_form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1000</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="after">
+                <field name="relation_inverse" />
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_1_ids']/tree/field[@name='relation']" position="attributes">
+                <attribute name="required">false</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_2_ids']/tree/field[@name='disabled']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='related_2_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='related_1_ids']/tree/field[@name='disabled']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='related_1_ids']/tree/field[@name='disabled_by']"
+                position="attributes"
+            >
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='relationships']" position="attributes">
+                <attribute name="string">Relations</attribute>
+            </xpath>
+        </field>
+    </record>
     <record id="view_individuals_list_spmis_tree" model="ir.ui.view">
         <field name="name">view_individuals_list_spmis_tree</field>
         <field name="model">res.partner</field>

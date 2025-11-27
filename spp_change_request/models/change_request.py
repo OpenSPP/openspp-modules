@@ -536,36 +536,6 @@ class ChangeRequestBase(models.Model):
             raise ValidationError(_("User is not allowed to approve CRs directly."))
         return self.request_type_ref_id._approve_cr(self)
 
-    # Override the create method to use the correct activity type
-    @api.model
-    def create(self, vals):
-        """
-        Creates a record for this model and generate activity
-
-        Usage:
-
-        - Add/Update key-value pair on vals before calling super
-        - Generate activity and add the activity to the result of super
-
-        :param dict vals: field name and value pair
-
-        :return recordset res:
-
-        :raise:
-        """
-
-        # Assign the CR to the current user by default
-        if "assign_to_id" not in vals or vals["assign_to_id"] is None:
-            vals["assign_to_id"] = self.env.user.id
-        vals["name"] = self.env["ir.sequence"].next_by_code("spp.change.request.num")
-        res = super().create(vals)
-        # Create pending validation activity
-        activity_type = "spp_change_request_base.pending_validation_activity"
-        summary = _("For Pending Validation")
-        note = _("A new change request was submitted. The next step will set this request to 'Pending Validation'.")
-        res._generate_activity(activity_type, summary, note)
-        return res
-
     # Override the action_cancel method to use the correct wizard reference
     def action_cancel(self):
         """

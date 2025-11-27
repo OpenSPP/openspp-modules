@@ -46,21 +46,5 @@
             <field name="perm_create" eval="True" />
             <field name="perm_unlink" eval="True" />
         </record>
-
-        <!-- Activity Rules -->
-        <record id="rule_spp_farm_activity_season_closed" model="ir.rule">
-            <field name="name">Farm Activity: Closed Season Protection</field>
-            <field name="model_id" ref="model_spp_farm_activity" />
-            <field name="domain_force">[
-                '|',
-                    ('season_id', '=', False),
-                    ('season_id.state', '!=', 'closed')
-            ]</field>
-            <field name="groups" eval="[(4, ref('group_spp_farm_user'))]" />
-            <field name="perm_read" eval="True" />
-            <field name="perm_write" eval="True" />
-            <field name="perm_create" eval="True" />
-            <field name="perm_unlink" eval="True" />
-        </record>
     </data>
 </odoo>

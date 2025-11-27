@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="spp_apps_wizard_view_form" model="ir.ui.view">
+        <field name="name">spp.apps.wizard.view.form</field>
+        <field name="model">spp.apps.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="not_installed_module_ids" invisible="1" />
+                <field name="missing_module_ids" invisible="1" />
+                <div
+                    class="alert alert-info text-center o_form_header"
+                    role="status"
+                    invisible="not not_installed_module_ids"
+                >
+                    <span
+                    >One or more modules are not yet installed. To proceed, please install the modules first.</span>
+                </div>
+                <div
+                    class="alert alert-danger text-center o_form_header"
+                    role="status"
+                    invisible="not missing_module_ids"
+                >
+                    <span
+                    >One or more modules are missing. To proceed, please add the missing modules first.</span>
+                </div>
+                <sheet>
+                    <notebook>
+                        <page
+                            string="Not Installed Modules"
+                            invisible="not not_installed_module_ids"
+                            name="not_installed_modules"
+                        >
+                            <field name="not_installed_module_ids" options="{'no_create': True}" readonly="1">
+                                <tree>
+                                    <field name="shortdesc" />
+                                    <field name="name" />
+                                    <field name="state" />
+                                    <field name="to_buy" column_invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page
+                            string="Missing Modules"
+                            invisible="not missing_module_ids"
+                            name="missing_modules"
+                        >
+                            <field name="missing_module_ids" options="{'no_create': True}" readonly="1">
+                                <tree>
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button
+                        string="Install Modules"
+                        name="install_modules"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" special="cancel" class="btn btn-danger" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="spp_apps_wizard_action" model="ir.actions.act_window">
+        <field name="name">Data Import: Module Installation</field>
+        <field name="res_model">spp.apps.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

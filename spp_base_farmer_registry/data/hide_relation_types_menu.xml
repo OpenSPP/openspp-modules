@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Hide Relation Types menu using OpenSPP hide menu system -->
+    <record id="hide_relation_types_menu" model="spp.hide.menu">
+        <field name="name" ref="g2p_registry_base.menu_relationship" />
+        <field name="xml_id">g2p_registry_base.menu_relationship</field>
+    </record>
+
+    <!-- Function to hide the menu -->
+    <function model="spp.hide.menu" name="hide_menu">
+        <value model="spp.hide.menu" search="[('xml_id', '=', 'g2p_registry_base.menu_relationship')]" />
+    </function>
+</odoo>

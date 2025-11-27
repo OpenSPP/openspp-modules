@@ -28,3 +28,39 @@ access_spp_farm_activity_user,spp.farm.activity.user,spp_base_farmer_registry.mo
 
 access_spp_farm_season_manager,spp.farm.season.manager,spp_base_farmer_registry.model_spp_farm_season,spp_base_farmer_registry.group_spp_farm_manager,1,1,1,1
 access_spp_farm_activity_manager,spp.farm.activity.manager,spp_base_farmer_registry.model_spp_farm_activity,spp_base_farmer_registry.group_spp_farm_manager,1,1,1,1
+
+spp_farm_activity_read_access,Agricultural Activities Read Access,spp_base_farmer_registry.model_spp_farm_activity,spp_base_common.read_registry,1,0,0,0
+spp_farm_extension_read_access,Extension Services Read Access,spp_base_farmer_registry.model_spp_farm_extension,spp_base_common.read_registry,1,0,0,0
+spp_farm_asset_read_access,Farm Assets and Technology Read Access,spp_base_farmer_registry.model_spp_farm_asset,spp_base_common.read_registry,1,0,0,0
+spp_asset_type_read_access,Asset Type Read Access,spp_base_farmer_registry.model_asset_type,spp_base_common.read_registry,1,0,0,0
+spp_machinery_type_read_access,Machinery Type Read Access,spp_base_farmer_registry.model_machinery_type,spp_base_common.read_registry,1,0,0,0
+spp_farm_details_read_access,Farm Details Read Access,spp_base_farmer_registry.model_spp_farm_details,spp_base_common.read_registry,1,0,0,0
+spp_farm_species_read_access,Species Read Access,spp_base_farmer_registry.model_spp_farm_species,spp_base_common.read_registry,1,0,0,0
+spp_farmer_read_access,Temporary Model for Farmer Read Access,spp_base_farmer_registry.model_spp_farmer,spp_base_common.read_registry,1,0,0,0
+spp_farm_chemical_read_access,Farm Chemical Interventions Types Read Access,spp_base_farmer_registry.model_spp_farm_chemical,spp_base_common.read_registry,1,0,0,0
+spp_fertilizer_read_access,Fertilizer Interventions Types Read Access,spp_base_farmer_registry.model_spp_fertilizer,spp_base_common.read_registry,1,0,0,0
+spp_feed_items_read_access,Feed Items Types Read Access,spp_base_farmer_registry.model_spp_feed_items,spp_base_common.read_registry,1,0,0,0
+
+spp_farm_activity_write_access,Agricultural Activities Write Access,spp_base_farmer_registry.model_spp_farm_activity,spp_base_common.write_registry,1,1,0,1
+spp_farm_extension_write_access,Extension Services Write Access,spp_base_farmer_registry.model_spp_farm_extension,spp_base_common.write_registry,1,1,0,1
+spp_farm_asset_write_access,Farm Assets and Technology Write Access,spp_base_farmer_registry.model_spp_farm_asset,spp_base_common.write_registry,1,1,0,1
+spp_asset_type_write_access,Asset Type Write Access,spp_base_farmer_registry.model_asset_type,spp_base_common.write_registry,1,1,0,1
+spp_machinery_type_write_access,Machinery Type Write Access,spp_base_farmer_registry.model_machinery_type,spp_base_common.write_registry,1,1,0,1
+spp_farm_details_write_access,Farm Details Write Access,spp_base_farmer_registry.model_spp_farm_details,spp_base_common.write_registry,1,1,0,1
+spp_farm_species_write_access,Species Write Access,spp_base_farmer_registry.model_spp_farm_species,spp_base_common.write_registry,1,1,0,1
+spp_farmer_write_access,Temporary Model for Farmer Write Access,spp_base_farmer_registry.model_spp_farmer,spp_base_common.write_registry,1,1,0,1
+spp_farm_chemical_write_access,Farm Chemical Interventions Types Write Access,spp_base_farmer_registry.model_spp_farm_chemical,spp_base_common.write_registry,1,1,0,1
+spp_fertilizer_write_access,Fertilizer Interventions Types Write Access,spp_base_farmer_registry.model_spp_fertilizer,spp_base_common.write_registry,1,1,0,1
+spp_feed_items_write_access,Feed Items Types Write Access,spp_base_farmer_registry.model_spp_feed_items,spp_base_common.write_registry,1,1,0,1
+
+spp_farm_activity_create_access,Agricultural Activities Create Access,spp_base_farmer_registry.model_spp_farm_activity,spp_base_common.create_registry,1,0,1,0
+spp_farm_extension_create_access,Extension Services Create Access,spp_base_farmer_registry.model_spp_farm_extension,spp_base_common.create_registry,1,0,1,0
+spp_farm_asset_create_access,Farm Assets and Technology Create Access,spp_base_farmer_registry.model_spp_farm_asset,spp_base_common.create_registry,1,0,1,0
+spp_asset_type_create_access,Asset Type Create Access,spp_base_farmer_registry.model_asset_type,spp_base_common.create_registry,1,0,1,0
+spp_machinery_type_create_access,Machinery Type Create Access,spp_base_farmer_registry.model_machinery_type,spp_base_common.create_registry,1,0,1,0
+spp_farm_details_create_access,Farm Details Create Access,spp_base_farmer_registry.model_spp_farm_details,spp_base_common.create_registry,1,0,1,0
+spp_farm_species_create_access,Species Create Access,spp_base_farmer_registry.model_spp_farm_species,spp_base_common.create_registry,1,0,1,0
+spp_farmer_create_access,Temporary Model for Farmer Create Access,spp_base_farmer_registry.model_spp_farmer,spp_base_common.create_registry,1,0,1,0
+spp_farm_chemical_create_access,Farm Chemical Interventions Types Create Access,spp_base_farmer_registry.model_spp_farm_chemical,spp_base_common.create_registry,1,0,1,0
+spp_fertilizer_create_access,Fertilizer Interventions Types Create Access,spp_base_farmer_registry.model_spp_fertilizer,spp_base_common.create_registry,1,0,1,0
+spp_feed_items_create_access,Feed Items Types Create Access,spp_base_farmer_registry.model_spp_feed_items,spp_base_common.create_registry,1,0,1,0
