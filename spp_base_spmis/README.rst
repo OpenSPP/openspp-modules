@@ -45,10 +45,6 @@ modules, offering:
    gender details, and a clear distinction of registrant type (e.g.,
    individual, group). This enables more comprehensive data capture and
    analysis for beneficiaries.
--  **Top-up Card Management**: Supports the integration and validation
-   of Top-up Cards as a specific form of identification within the
-   system. This is crucial for programs utilizing physical cards for
-   beneficiary interactions.
 -  **Core UI and Role Configuration**: Provides fundamental user
    interface elements and initial security configurations, including
    global and local user roles. This ensures a consistent look and feel
@@ -74,10 +70,6 @@ integrating their features and extending them for OpenSPP:
    like `OpenSPP Area <spp_area>`__ and `OpenSPP Service
    Points <spp_service_points>`__ by providing the underlying registrant
    framework and unique identifiers used across the system.
--  It supports identity management features such as
-   `spp_idpass <spp_idpass>`__ and `spp_idqueue <spp_idqueue>`__ by
-   defining the 'Top-up Card' ID type and its validation rules, crucial
-   for card issuance and tracking.
 -  OpenSPP Base underpins UI customization and filtering through
    `OpenSPP Custom Field <spp_custom_field>`__, `OpenSPP Custom Fields
    UI <spp_custom_fields_ui>`__, `OpenSPP Hide
@@ -114,15 +106,6 @@ easily see the ``String Kind`` of a registrant (e.g., individual,
 household). This module also integrates ``Gender`` information into
 individual and group membership records, allowing for more detailed
 demographic analysis of beneficiary populations.
-
-Top-Up Card Identification
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-OpenSPP Base manages the specific ``Top-up Card`` identification type,
-including its unique identifier (``Card UID``). The system ensures data
-accuracy by validating that all entered Top-up Card UIDs are exactly 10
-characters long. This standardization is essential for reliable card
-issuance, tracking, and usage in program distributions.
 
 Foundational UI and Role Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

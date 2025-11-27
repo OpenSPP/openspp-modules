@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
     <record id="view_group_spp_base_spmis_form" model="ir.ui.view">
         <field name="name">view_group_spp_base_spmis_form</field>
         <field name="model">res.partner</field>
         <field name="priority">1000</field>
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='reg_ids']/tree[1]/field[@name='value']" position="after">
-                <field name="card_uid" required="id_type == %(spp_base_spmis.id_top_up_card)d" />
-            </xpath>
             <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="after">
                 <field name="relation_inverse" />
             </xpath>
@@ -52,9 +48,6 @@
         <field name="priority">1000</field>
         <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='reg_ids']/tree[1]/field[@name='value']" position="after">
-                <field name="card_uid" required="id_type == %(spp_base_spmis.id_top_up_card)d" />
-            </xpath>
             <xpath expr="//field[@name='related_2_ids']/tree/field[@name='relation']" position="after">
                 <field name="relation_inverse" />
             </xpath>
@@ -90,7 +83,6 @@
             </xpath>
         </field>
     </record>
-
     <record id="view_individuals_list_spmis_tree" model="ir.ui.view">
         <field name="name">view_individuals_list_spmis_tree</field>
         <field name="model">res.partner</field>

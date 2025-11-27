@@ -14,11 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: spp_base_spmis
-#: model:ir.model.fields,field_description:spp_base_spmis.field_g2p_reg_id__card_uid
-msgid "Card UID"
-msgstr ""
-
-#. module: spp_base_spmis
 #: model:ir.model,name:spp_base_spmis.model_res_partner
 msgid "Contact"
 msgstr ""
@@ -56,13 +51,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:spp_base_spmis.field_res_users__kind_as_str
 #: model:ir.model.fields,field_description:spp_base_spmis.field_spp_attendance_subscriber__kind_as_str
 msgid "String Kind"
-msgstr ""
-
-#. module: spp_base_spmis
-#. odoo-python
-#: code:addons/spp_base/models/reg_id.py:0
-#, python-format
-msgid "Top-up Card UID should have 10 characters"
 msgstr ""
 
 #. module: spp_base_spmis

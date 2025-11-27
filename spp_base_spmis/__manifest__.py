@@ -50,7 +50,6 @@
         ]
     },  # not directly required, pinned by Snyk to avoid a vulnerability and for fastapi, compatibility issues.
     "data": [
-        "data/top_up_card.xml",
         "security/ir.model.access.csv",
         "views/registrant_view.xml",
         "views/users_view.xml",
@@ -61,5 +60,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
-    "summary": "Establishes core system settings and generates unique identifiers for records, enhancing registrant profiles with attributes like tags, gender, and type. The module also integrates Top-up Cards for identification and provides fundamental user interface elements with initial security configurations for user roles.",
+    "summary": "Establishes core system settings and generates unique identifiers for records, enhancing registrant profiles with attributes like tags, gender, and type.",
 }
