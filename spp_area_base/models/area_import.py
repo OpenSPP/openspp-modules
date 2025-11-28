@@ -222,15 +222,22 @@ class OpenSPPAreaImport(models.Model):
         Activate the languages found in the import file.
         """
         self.ensure_one()
-        missing_languages = list(set(self.missing_languages.split(", ").lower()))
-        languages = self.env[_res_lang_model].search([("iso_code", "in", missing_languages)])
-        if languages:
-            languages.write({"active": True})
+        missing_languages = list(set(self.missing_languages.split(", ")))
+        for lang in missing_languages:
+            lang = lang.strip().lower()
+            if lang:
+                language = self.env[_res_lang_model].search([("iso_code", "=", lang)])
+                if language:
+                    language.write({"active": True})
         self.update({
             "missing_languages": None,
             "locked_reason": None,
             "locked": False,
         })
+        return {
+            "type": "ir.actions.client",
+            "tag": "reload",
+        }
 
     def _scan_and_create_parse_jobs(self):
         """
