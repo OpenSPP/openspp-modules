@@ -208,10 +208,11 @@ class OpenSPPAreaImport(models.Model):
         self.ensure_one()
         with_missing_languages = self._validate_languages_activated()
         if with_missing_languages:
+            missing_languages = ", ".join(with_missing_languages)
             self.update({
                 "locked": True,
                 "locked_reason": None,
-                "missing_languages": with_missing_languages,
+                "missing_languages": missing_languages,
             })
             return
         self.import_data()
@@ -221,7 +222,8 @@ class OpenSPPAreaImport(models.Model):
         Activate the languages found in the import file.
         """
         self.ensure_one()
-        languages = self.env[_res_lang_model].search([("iso_code", "in", self.missing_languages)])
+        missing_languages = list(set(self.missing_languages.split(", ")))
+        languages = self.env[_res_lang_model].search([("iso_code", "in", missing_languages)])
         if languages:
             languages.write({"active": True})
         self.update({
