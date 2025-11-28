@@ -21,7 +21,7 @@
                         type="object"
                         string="Import"
                         class="btn-primary"
-                        invisible="state != 'Parsed'"
+                        invisible="state != 'Parsed' and missing_languages"
                     />
                    <button
                         name="save_to_area"
@@ -53,7 +53,7 @@
                 <div
                     class="alert alert-warning text-center o_form_header"
                     role="status"
-                    invisible="not locked"
+                    invisible="not locked_reason"
                 >
                     <span>Warning: Operation in progress: </span>
                     <field name="locked_reason" class="o_stat_value" />
@@ -64,6 +64,20 @@
                         icon="fa-refresh"
                         title="Refresh Page"
                         string="Refresh"
+                    />
+                </div>
+                <div
+                    class="alert alert-warning text-center o_form_header"
+                    role="status"
+                    invisible="not missing_languages"
+                >
+                    <span>Warning: Missing languages: </span>
+                    <field name="missing_languages" class="o_stat_value" />
+                    <button
+                        name="activate_languages"
+                        type="object"
+                        string="Activate Languages"
+                        class="btn-primary"
                     />
                 </div>
                 <sheet>

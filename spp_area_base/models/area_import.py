@@ -79,6 +79,7 @@ class OpenSPPAreaImport(models.Model):
 
     locked = fields.Boolean(default=False)
     locked_reason = fields.Text(readonly=True)
+    missing_languages = fields.Text(readonly=True)
 
     @api.onchange("excel_file")
     def excel_file_change(self):
@@ -207,11 +208,27 @@ class OpenSPPAreaImport(models.Model):
         self.ensure_one()
         with_missing_languages = self._validate_languages_activated()
         if with_missing_languages:
-            self.locked = True
-            self.locked_reason = with_missing_languages
+            self.update({
+                "locked": True,
+                "locked_reason": None,
+                "missing_languages": with_missing_languages,
+            })
             return
         self.import_data()
 
+    def activate_languages(self):
+        """
+        Activate the languages found in the import file.
+        """
+        self.ensure_one()
+        languages = self.env[_res_lang_model].search([("iso_code", "in", self.missing_languages)])
+        if languages:
+            languages.write({"active": True})
+        self.update({
+            "missing_languages": None,
+            "locked_reason": None,
+            "locked": False,
+        })
 
     def _scan_and_create_parse_jobs(self):
         """
@@ -383,10 +400,21 @@ class OpenSPPAreaImport(models.Model):
         # Validate languages before importing
         missing_languages = self._validate_languages_activated()
         if missing_languages:
-            raise ValidationError(missing_languages)
+            error_message = _(
+                "The following languages are found in the import file " "but not activated in the system:\n\n"
+            )
+            error_message += "\n".join([f"  • {lang}" for lang in missing_languages])
+            error_message += _("\n\nPlease activate these languages in the system before importing.\n")
+            self.update({
+                "locked": True,
+                "locked_reason": None,
+                "missing_languages": missing_languages,
+            })
+            raise ValidationError(error_message)
 
         self.locked = True
         self.locked_reason = _("Importing data from JSON files.")
+        self.missing_languages = None
         jobs = []
 
         # Create a job for each JSON file batch
@@ -440,20 +468,7 @@ class OpenSPPAreaImport(models.Model):
 
         # Check for missing languages
         missing_languages = found_languages - active_iso_codes
-
-        if missing_languages:
-            missing_list = sorted(missing_languages)
-            error_message = _(
-                "The following languages are found in the import file " "but not activated in the system:\n\n"
-            )
-            error_message += "\n".join([f"  • {lang}" for lang in missing_list])
-            error_message += _("\n\nPlease activate these languages in the system before importing.\n")
-            error_message += _("Go to: Settings > Translations > Languages")
-
-            _logger.error("Area Import: Missing languages: %s", ", ".join(missing_languages))
-            return error_message
-        
-        return None
+        return sorted(missing_languages)
 
     def _import_data_from_json(self, json_file_id):
         """
