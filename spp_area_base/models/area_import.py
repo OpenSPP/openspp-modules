@@ -227,9 +227,13 @@ class OpenSPPAreaImport(models.Model):
             lang = lang.strip().lower()
             _logger.info(f"Area Import: Activating language: {lang}")
             if lang:
-                language = self.env[_res_lang_model].search([("iso_code", "=", lang)])
+                domain = [("iso_code", "=", lang)]
+                _logger.info(f"Area Import: Domain: {domain}")  
+                language = self.env[_res_lang_model].search(domain)
+                _logger.info(f"Area Import: Language: {language}")
                 if language:
                     language.write({"active": True})
+                    _logger.info(f"Area Import: Language activated: {language.name}")
         self.update({
             "missing_languages": None,
             "locked_reason": None,
