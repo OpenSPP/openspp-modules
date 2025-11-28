@@ -381,7 +381,9 @@ class OpenSPPAreaImport(models.Model):
             raise ValidationError(_("No JSON files found. Please parse the Excel file first."))
 
         # Validate languages before importing
-        self._validate_languages_activated()
+        missing_languages = self._validate_languages_activated()
+        if missing_languages:
+            raise ValidationError(missing_languages)
 
         self.locked = True
         self.locked_reason = _("Importing data from JSON files.")
