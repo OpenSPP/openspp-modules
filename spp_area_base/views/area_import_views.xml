@@ -8,13 +8,20 @@
         <field name="arch" type="xml">
             <form string="Area Import">
                 <field name="locked" invisible="True" />
-                <header invisible="locked">
+                <header>
                     <button
                         name="parse_excel_to_json"
                         type="object"
                         string="Process"
                         class="btn-primary"
-                        invisible="state != 'Uploaded'"
+                        invisible="state != 'Uploaded' or locked"
+                    />
+                    <button
+                        name="import_data"
+                        type="object"
+                        string="Import"
+                        class="btn-primary"
+                        invisible="state != 'Parsed'"
                     />
                     <button
                         name="import_data"
@@ -28,21 +35,21 @@
                         type="object"
                         string="Save to Area"
                         class="btn-success"
-                        invisible="state != 'Validated'"
+                        invisible="state != 'Validated' or locked"
                     />
                    <button
                         name="validate_raw_data"
                         type="object"
                         string="Validate Data"
                         class="btn-success"
-                        invisible="state != 'Imported'"
+                        invisible="state != 'Imported' or locked"
                     />
                     <button
                         name="cancel_import"
                         type="object"
                         string="Cancel and Re-import"
                         class="btn-danger"
-                        invisible="state not in ('Uploaded', 'Imported', 'Validated')"
+                        invisible="state not in ('Uploaded', 'Imported', 'Validated') or locked"
                     />
                     <field
                         name="state"

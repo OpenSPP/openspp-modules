@@ -78,7 +78,7 @@ class OpenSPPAreaImport(models.Model):
     )
 
     locked = fields.Boolean(default=False)
-    locked_reason = fields.Char(readonly=True)
+    locked_reason = fields.Text(readonly=True)
 
     @api.onchange("excel_file")
     def excel_file_change(self):
