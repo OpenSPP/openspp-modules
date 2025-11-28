@@ -88,7 +88,7 @@ class OpenSPPAreaImport(models.Model):
         and state fields based on the value of the excel_file field.
         """
 
-        if self.name:
+        if self.excel_file and self.name:
             self.update(
                 {
                     "date_uploaded": fields.Datetime.now(),
@@ -96,8 +96,6 @@ class OpenSPPAreaImport(models.Model):
                     "state": self.UPLOADED,
                 }
             )
-        else:
-            self.update({"date_uploaded": None, "upload_id": None, "state": self.UPLOADED})
 
     @api.depends("raw_data_ids", "raw_data_ids.state")
     def _compute_get_total_rows(self):
