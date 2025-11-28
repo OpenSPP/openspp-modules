@@ -222,7 +222,7 @@ class OpenSPPAreaImport(models.Model):
         Activate the languages found in the import file.
         """
         self.ensure_one()
-        missing_languages = list(set(self.missing_languages.split(", ")))
+        missing_languages = list(set(self.missing_languages.split(", ").lower()))
         languages = self.env[_res_lang_model].search([("iso_code", "in", missing_languages)])
         if languages:
             languages.write({"active": True})
