@@ -70,7 +70,7 @@ class TestDmsDirectory(TransactionCase):
 
         self.assertEqual(action["res_model"], "spp.dms.directory")
         self.assertEqual(action["target"], "current")
-        self.assertEqual(action["view_mode"], "tree,form")
+        self.assertEqual(action["view_mode"], "list,form")
         self.assertEqual(action["context"]["default_parent_id"], self.dms_directry_id.id)
         self.assertEqual(action["context"]["searchpanel_default_parent_id"], self.dms_directry_id.id)
         self.assertEqual(action["domain"], [("parent_id", "child_of", self.dms_directry_id.id)])
@@ -86,7 +86,7 @@ class TestDmsDirectory(TransactionCase):
 
         self.assertEqual(action["res_model"], "spp.dms.file")
         self.assertEqual(action["target"], "current")
-        self.assertEqual(action["view_mode"], "tree,form")
+        self.assertEqual(action["view_mode"], "list,form")
         self.assertEqual(action["context"]["default_directory_id"], self.dms_directry_id.id)
         self.assertEqual(action["context"]["searchpanel_default_directory_id"], self.dms_directry_id.id)
         self.assertEqual(action["domain"], [("directory_id", "child_of", self.dms_directry_id.id)])

@@ -197,8 +197,21 @@ class OpenSPPAreaImport(models.Model):
         # Create single job to parse Excel with pandas
         job = self.delayable(channel=_area_import_channel)._scan_and_create_parse_jobs()
         # After parsing, import the data
-        job.on_done(self.delayable(channel=_area_import_channel).import_data())
+        job.on_done(self.delayable(channel=_area_import_channel).after_parse())
         job.delay()
+    
+    def after_parse(self):
+        """
+        After parsing, import the data.
+        """
+        self.ensure_one()
+        with_missing_languages = self._validate_languages_activated()
+        if with_missing_languages:
+            self.locked = True
+            self.locked_reason = with_missing_languages
+            return
+        self.import_data()
+
 
     def _scan_and_create_parse_jobs(self):
         """
@@ -436,7 +449,9 @@ class OpenSPPAreaImport(models.Model):
             error_message += _("Go to: Settings > Translations > Languages")
 
             _logger.error("Area Import: Missing languages: %s", ", ".join(missing_languages))
-            raise ValidationError(error_message)
+            return error_message
+        
+        return None
 
     def _import_data_from_json(self, json_file_id):
         """
