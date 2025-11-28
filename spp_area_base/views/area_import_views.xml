@@ -21,7 +21,7 @@
                         type="object"
                         string="Import"
                         class="btn-primary"
-                        invisible="state != 'Parsed' and missing_languages"
+                        invisible="state != 'Parsed' or missing_languages"
                     />
                    <button
                         name="save_to_area"
