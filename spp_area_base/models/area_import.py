@@ -225,6 +225,7 @@ class OpenSPPAreaImport(models.Model):
         missing_languages = list(set(self.missing_languages.split(", ")))
         for lang in missing_languages:
             lang = lang.strip().lower()
+            _logger.info(f"Area Import: Activating language: {lang}")
             if lang:
                 language = self.env[_res_lang_model].search([("iso_code", "=", lang)])
                 if language:
