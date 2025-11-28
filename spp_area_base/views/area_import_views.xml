@@ -23,13 +23,6 @@
                         class="btn-primary"
                         invisible="state != 'Parsed'"
                     />
-                    <button
-                        name="import_data"
-                        type="object"
-                        string="Import"
-                        class="btn-primary"
-                        invisible="state != 'Parsed'"
-                    />
                    <button
                         name="save_to_area"
                         type="object"
