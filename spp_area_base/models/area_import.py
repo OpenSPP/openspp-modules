@@ -229,31 +229,26 @@ class OpenSPPAreaImport(models.Model):
         for lang in missing_languages:
             lang_upper = lang.strip()
             lang_lower = lang_upper.lower()  # Convert to lowercase for iso_code search
-            _logger.info(f"Area Import: Activating language: {lang_upper}")
             if lang_lower:
                 # Search with active_test=False to find inactive languages
                 # iso_code in res.lang is stored in lowercase
                 language = self.env[_res_lang_model].with_context(active_test=False).search(
                     [("iso_code", "=", lang_lower)], limit=1
                 )
-                _logger.info(f"Area Import: Language found: {language}")
                 if language:
                     if not language.active:
                         language.write({"active": True})
                         activated_count += 1
-                        _logger.info(f"Area Import: Language activated: {language.name} ({language.iso_code})")
-                    else:
-                        _logger.info(f"Area Import: Language already active: {language.name} ({language.iso_code})")
                 else:
                     not_found.append(lang_upper)
-                    _logger.warning(f"Area Import: Language not found in system: {lang_upper}")
         
         if not_found:
             _logger.warning(
                 f"Area Import: {len(not_found)} language(s) not installed in Odoo: {', '.join(not_found)}"
             )
         
-        _logger.info(f"Area Import: Activated {activated_count} language(s)")
+        if activated_count > 0:
+            _logger.info(f"Area Import: Activated {activated_count} language(s)")
         
         self.update({
             "missing_languages": None,
