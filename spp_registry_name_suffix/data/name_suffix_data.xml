@@ -51,4 +51,26 @@
         <field name="description">The Fifth</field>
     </record>
 
+    <!-- Academic/Professional Suffixes -->
+    <record id="suffix_phd" model="spp.name.suffix">
+        <field name="name">PhD</field>
+        <field name="code">PHD</field>
+        <field name="sequence">100</field>
+        <field name="description">Doctor of Philosophy</field>
+    </record>
+
+    <record id="suffix_md" model="spp.name.suffix">
+        <field name="name">MD</field>
+        <field name="code">MD</field>
+        <field name="sequence">110</field>
+        <field name="description">Doctor of Medicine</field>
+    </record>
+
+    <record id="suffix_esq" model="spp.name.suffix">
+        <field name="name">Esq.</field>
+        <field name="code">ESQ</field>
+        <field name="sequence">120</field>
+        <field name="description">Esquire - typically used for attorneys</field>
+    </record>
+
 </odoo>
