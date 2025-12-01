@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <!-- Generational Suffixes -->
+    <record id="suffix_jr" model="spp.name.suffix">
+        <field name="name">Jr.</field>
+        <field name="code">JR</field>
+        <field name="sequence">10</field>
+        <field name="description">Junior - typically used for a son named after his father</field>
+    </record>
+
+    <record id="suffix_sr" model="spp.name.suffix">
+        <field name="name">Sr.</field>
+        <field name="code">SR</field>
+        <field name="sequence">20</field>
+        <field name="description">Senior - typically used for a father when a son has the same name</field>
+    </record>
+
+    <record id="suffix_i" model="spp.name.suffix">
+        <field name="name">I</field>
+        <field name="code">I</field>
+        <field name="sequence">30</field>
+        <field name="description">The First</field>
+    </record>
+
+    <record id="suffix_ii" model="spp.name.suffix">
+        <field name="name">II</field>
+        <field name="code">II</field>
+        <field name="sequence">40</field>
+        <field name="description">The Second</field>
+    </record>
+
+    <record id="suffix_iii" model="spp.name.suffix">
+        <field name="name">III</field>
+        <field name="code">III</field>
+        <field name="sequence">50</field>
+        <field name="description">The Third</field>
+    </record>
+
+    <record id="suffix_iv" model="spp.name.suffix">
+        <field name="name">IV</field>
+        <field name="code">IV</field>
+        <field name="sequence">60</field>
+        <field name="description">The Fourth</field>
+    </record>
+
+    <record id="suffix_v" model="spp.name.suffix">
+        <field name="name">V</field>
+        <field name="code">V</field>
+        <field name="sequence">70</field>
+        <field name="description">The Fifth</field>
+    </record>
+
+    <!-- Academic/Professional Suffixes -->
+    <record id="suffix_phd" model="spp.name.suffix">
+        <field name="name">PhD</field>
+        <field name="code">PHD</field>
+        <field name="sequence">100</field>
+        <field name="description">Doctor of Philosophy</field>
+    </record>
+
+    <record id="suffix_md" model="spp.name.suffix">
+        <field name="name">MD</field>
+        <field name="code">MD</field>
+        <field name="sequence">110</field>
+        <field name="description">Doctor of Medicine</field>
+    </record>
+
+    <record id="suffix_esq" model="spp.name.suffix">
+        <field name="name">Esq.</field>
+        <field name="code">ESQ</field>
+        <field name="sequence">120</field>
+        <field name="description">Esquire - typically used for attorneys</field>
+    </record>
+
+</odoo>

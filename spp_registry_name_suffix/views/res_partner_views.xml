@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Add suffix field to Individual registrant form view -->
+    <!-- Reference: https://github.com/OpenSPP/openg2p-registry/tree/17.0-develop-openspp/g2p_registry_individual -->
+    <record id="view_individuals_form_inherit_spp_registry_name_suffix" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.name.suffix</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='addl_name']" position="after">
+                <field
+                    name="suffix_id"
+                    placeholder="Select Suffix"
+                    options="{'no_create': True, 'no_open': True}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Optional: Add suffix to Individual tree view for quick reference -->
+    <record id="view_individuals_list_tree_inherit_spp_registry_name_suffix" model="ir.ui.view">
+        <field name="name">res.partner.view.tree.inherit.name.suffix</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_list_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="suffix_id" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>OpenSPP: Registry Name Suffix</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="openspp-registry-name-suffix">
+<h1 class="title">OpenSPP: Registry Name Suffix</h1>
+
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_registry_name_suffix"><img alt="OpenSPP/openspp-modules" src="https://img.shields.io/badge/github-OpenSPP%2Fopenspp--modules-lightgray.png?logo=github" /></a></p>
+<div class="section" id="openspp-registry-name-suffix-1">
+<h1>OpenSPP: Registry Name Suffix</h1>
+<p>This module adds a configurable suffix field to Individual registrant names in OpenSPP, enabling proper recording of name suffixes such as Jr., Sr., III, IV, PhD, MD, etc.</p>
+<div class="section" id="purpose">
+<h2>Purpose</h2>
+<p>The OpenSPP Registry Name Suffix module provides:</p>
+<ul class="simple">
+<li><strong>Configurable Suffixes</strong>: Administrators can manage available suffixes through the Registry Configuration menu.</li>
+<li><strong>Suffix Support</strong>: Record name suffixes using a standardized Many2one field reference.</li>
+<li><strong>Extended Name Generation</strong>: Automatically includes the suffix in the computed full name.</li>
+<li><strong>Data Integrity</strong>: The suffix is stored as a reference to a configurable suffix record.</li>
+</ul>
+</div>
+<div class="section" id="features">
+<h2>Features</h2>
+<div class="section" id="suffix-configuration">
+<h3>Suffix Configuration</h3>
+<p>A new "Name Suffixes" menu is available under Registry &gt; Configuration, allowing administrators to:</p>
+<ul class="simple">
+<li>Create, edit, and archive name suffixes</li>
+<li>Define suffix codes for data integration</li>
+<li>Set display order using sequence numbers</li>
+<li>Add descriptions for suffix usage guidance</li>
+</ul>
+</div>
+<div class="section" id="pre-configured-suffixes">
+<h3>Pre-configured Suffixes</h3>
+<p>The module comes with commonly used suffixes:</p>
+<ul class="simple">
+<li><strong>Generational</strong>: Jr., Sr., I, II, III, IV, V</li>
+<li><strong>Academic/Professional</strong>: PhD, MD, Esq.</li>
+</ul>
+</div>
+<div class="section" id="individual-registrant-integration">
+<h3>Individual Registrant Integration</h3>
+<p>The suffix field appears on the Individual registrant form after the "Additional Name" field. It uses a dropdown selection with the following features:</p>
+<ul class="simple">
+<li>Quick search by suffix name or code</li>
+<li>No inline creation (to maintain data quality)</li>
+<li>Optional display in the registrant list view</li>
+</ul>
+</div>
+<div class="section" id="automatic-name-generation">
+<h3>Automatic Name Generation</h3>
+<p>The suffix is automatically appended to the registrant's computed name in the format:
+<tt class="docutils literal">FAMILY_NAME, GIVEN_NAME, ADDL_NAME, SUFFIX</tt></p>
+<p>For example: "SMITH, JOHN, MICHAEL, JR."</p>
+</div>
+</div>
+<div class="section" id="dependencies">
+<h2>Dependencies</h2>
+<p>This module depends on:</p>
+<ul class="simple">
+<li><strong>spp_registrant_import</strong>: Provides the base name computation logic for registrants.</li>
+<li><strong>g2p_registry_individual</strong>: Provides the individual registrant views and model.</li>
+</ul>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration</h2>
+<ol class="arabic simple">
+<li>Navigate to Registry &gt; Configuration &gt; Name Suffixes</li>
+<li>Create additional suffixes as needed for your implementation</li>
+<li>Set the sequence to control display order in dropdowns</li>
+</ol>
+</div>
+<div class="section" id="usage">
+<h2>Usage</h2>
+<ol class="arabic simple">
+<li>Navigate to an Individual registrant form</li>
+<li>Select a suffix from the "Suffix" dropdown field</li>
+<li>The full name will automatically update to include the suffix</li>
+</ol>
+</div>
+</div>
+<div class="section" id="bug-tracker">
+<h1>Bug Tracker</h1>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues">GitHub Issues</a>.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us to smash it by providing a detailed and welcomed
+<a class="reference external" href="https://github.com/OpenSPP/openspp-modules/issues/new?body=module:%20spp_registry_name_suffix%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+<div class="section" id="credits">
+<h1>Credits</h1>
+<div class="section" id="authors">
+<h2>Authors</h2>
+<ul class="simple">
+<li>OpenSPP.org</li>
+</ul>
+</div>
+<div class="section" id="maintainers">
+<h2>Maintainers</h2>
+<p>Current maintainers:</p>
+<p><a class="reference external image-reference" href="https://github.com/jeremi"><img alt="jeremi" src="https://github.com/jeremi.png?size=40px" /></a> <a class="reference external image-reference" href="https://github.com/gonzalesedwin1123"><img alt="gonzalesedwin1123" src="https://github.com/gonzalesedwin1123.png?size=40px" /></a></p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OpenSPP/openspp-modules/tree/17.0/spp_registry_name_suffix">OpenSPP/openspp-modules</a> project on GitHub.</p>
+<p>You are welcome to contribute.</p>
+</div>
+</div>
+</div>
+</body>
+</html>
+
