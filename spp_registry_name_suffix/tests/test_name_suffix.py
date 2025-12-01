@@ -158,3 +158,44 @@ class TestNameSuffix(TransactionCase):
             "WILLIAMS, SARAH",
             "Name should update when suffix is removed",
         )
+
+    def test_09_name_get_with_different_code(self):
+        """Test name_get when code differs from name."""
+        # suffix_jr has name="Jr." and code="JR" (different)
+        result = self.suffix_jr.name_get()
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0][0], self.suffix_jr.id)
+        self.assertEqual(
+            result[0][1],
+            "Jr. (JR)",
+            "name_get should show name with code in parentheses",
+        )
+
+    def test_10_name_get_with_same_code(self):
+        """Test name_get when code equals name."""
+        # Create a suffix where name and code are the same
+        suffix_same = self.env["spp.name.suffix"].create(
+            {
+                "name": "SAME",
+                "code": "SAME",
+            }
+        )
+        result = suffix_same.name_get()
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0][0], suffix_same.id)
+        self.assertEqual(
+            result[0][1],
+            "SAME",
+            "name_get should show only name when code equals name",
+        )
+
+    def test_11_name_get_multiple_records(self):
+        """Test name_get with multiple records."""
+        # Get multiple suffixes at once
+        suffixes = self.suffix_jr | self.suffix_phd
+        result = suffixes.name_get()
+        self.assertEqual(len(result), 2)
+        # Check that all record IDs are in the result
+        result_ids = [r[0] for r in result]
+        self.assertIn(self.suffix_jr.id, result_ids)
+        self.assertIn(self.suffix_phd.id, result_ids)
