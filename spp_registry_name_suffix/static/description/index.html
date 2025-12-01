@@ -333,8 +333,8 @@ table.docutils.booktabs th {
   text-align: left;
 }
 
-h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
-h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+h1 code.docutils, h2 code.docutils, h3 code.docutils,
+h4 code.docutils, h5 code.docutils, h6 code.docutils {
   font-size: 100% }
 
 ul.auto-toc {
@@ -392,7 +392,7 @@ ul.auto-toc {
 <div class="section" id="automatic-name-generation">
 <h3>Automatic Name Generation</h3>
 <p>The suffix is automatically appended to the registrant's computed name in the format:
-<tt class="docutils literal">FAMILY_NAME, GIVEN_NAME, ADDL_NAME, SUFFIX</tt></p>
+<code class="docutils literal">FAMILY_NAME, GIVEN_NAME, ADDL_NAME, SUFFIX</code></p>
 <p>For example: "SMITH, JOHN, MICHAEL, JR."</p>
 </div>
 </div>
@@ -400,8 +400,7 @@ ul.auto-toc {
 <h2>Dependencies</h2>
 <p>This module depends on:</p>
 <ul class="simple">
-<li><strong>spp_registrant_import</strong>: Provides the base name computation logic for registrants.</li>
-<li><strong>g2p_registry_individual</strong>: Provides the individual registrant views and model.</li>
+<li><strong>g2p_registry_individual</strong>: Provides the individual registrant views, model, and the base name_change method.</li>
 </ul>
 </div>
 <div class="section" id="configuration">
