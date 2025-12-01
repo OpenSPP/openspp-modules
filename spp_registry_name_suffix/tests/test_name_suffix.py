@@ -17,21 +17,9 @@ class TestNameSuffix(TransactionCase):
             )
         )
 
-        # Create test suffix
-        cls.suffix_jr = cls.env["spp.name.suffix"].create(
-            {
-                "name": "Jr.",
-                "code": "JR",
-                "sequence": 10,
-            }
-        )
-        cls.suffix_phd = cls.env["spp.name.suffix"].create(
-            {
-                "name": "PhD",
-                "code": "PHD",
-                "sequence": 100,
-            }
-        )
+        # Use existing suffixes from data file
+        cls.suffix_jr = cls.env.ref("spp_registry_name_suffix.suffix_jr")
+        cls.suffix_phd = cls.env.ref("spp_registry_name_suffix.suffix_phd")
 
     def test_01_suffix_model_creation(self):
         """Test that suffix model can be created correctly."""
