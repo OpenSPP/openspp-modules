@@ -8,7 +8,7 @@ This module enhances individual registrant data by:
 
 * **Providing configurable suffixes**: Administrators can manage available suffixes through the Registry Configuration menu.
 * **Adding suffix support**: Record name suffixes using a standardized Many2one field reference.
-* **Extending name generation**: Automatically includes the suffix in the computed full name.
+* **Extending name generation**: Automatically includes the suffix in the generated full name.
 * **Maintaining data integrity**: The suffix is stored as a reference to a configurable suffix record.
 
 ## Features
@@ -32,16 +32,15 @@ The suffix field appears on the Individual registrant form after the "Additional
 - Optional display in the registrant list view
 
 ### Automatic Name Generation
-The suffix is automatically appended to the registrant's computed name in the format:
-`FAMILY_NAME, GIVEN_NAME, ADDL_NAME, SUFFIX`
+The suffix is automatically appended to the registrant's name when using the form. The module extends the `name_change` method from `g2p_registry_individual` to include the suffix in the generated name format:
+`FAMILY_NAME, GIVEN_NAME ADDL_NAME, SUFFIX`
 
-For example: "SMITH, JOHN, MICHAEL, JR."
+For example: "SMITH, JOHN MICHAEL, JR."
 
 ## Dependencies
 
 This module depends on:
-- **spp_registrant_import**: Provides the base name computation logic for registrants.
-- **g2p_registry_individual**: Provides the individual registrant views and model.
+- **g2p_registry_individual**: Provides the individual registrant views, model, and the base `name_change` method.
 
 ## Configuration
 
@@ -58,4 +57,3 @@ This module depends on:
 ## References
 
 - OpenG2P Registry Individual: https://github.com/OpenSPP/openg2p-registry/tree/17.0-develop-openspp/g2p_registry_individual
-

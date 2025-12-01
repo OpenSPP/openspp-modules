@@ -11,19 +11,9 @@ class ResPartner(models.Model):
         help="Name suffix such as Jr., Sr., III, IV, PhD, MD, etc.",
     )
 
-    @api.depends(
-        "is_registrant",
-        "is_group",
-        "family_name",
-        "given_name",
-        "addl_name",
-        "suffix_id",
-    )
-    def _compute_name(self):
-        """Extend name computation to include suffix for individuals."""
-        super()._compute_name()
-        for rec in self:
-            if not rec.is_registrant or rec.is_group:
-                continue
-            if rec.suffix_id:
-                rec.name = f"{rec.name}, {rec.suffix_id.name.upper()}"
+    @api.onchange("is_group", "family_name", "given_name", "addl_name", "suffix_id")
+    def name_change(self):
+        """Extend name change to include suffix for individuals."""
+        super().name_change()
+        if not self.is_group and self.suffix_id:
+            self.name = f"{self.name}, {self.suffix_id.name.upper()}"

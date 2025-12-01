@@ -2,7 +2,7 @@ from psycopg2 import IntegrityError
 
 from odoo.exceptions import ValidationError
 from odoo.tests import tagged
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import Form, TransactionCase
 
 
 @tagged("post_install", "-at_install")
@@ -61,44 +61,50 @@ class TestNameSuffix(TransactionCase):
                 }
             )
 
-    def test_03_name_with_suffix(self):
-        """Test that suffix is appended to the computed name."""
-        individual = self.env["res.partner"].create(
-            {
-                "family_name": "Doe",
-                "given_name": "John",
-                "suffix_id": self.suffix_jr.id,
-                "is_registrant": True,
-                "is_group": False,
-            }
+    def test_03_name_with_suffix_using_form(self):
+        """Test that suffix is appended to the name using form simulation."""
+        with Form(self.env["res.partner"]) as partner_form:
+            partner_form.is_registrant = True
+            partner_form.is_group = False
+            partner_form.family_name = "Doe"
+            partner_form.given_name = "John"
+            partner_form.suffix_id = self.suffix_jr
+        individual = partner_form.save()
+        self.assertEqual(
+            individual.name,
+            "DOE, JOHN, JR.",
+            "Name should include suffix",
         )
-        self.assertEqual(individual.name, "DOE, JOHN, JR.", "Name should include suffix")
 
-    def test_04_name_without_suffix(self):
-        """Test that name is computed correctly without suffix."""
-        individual = self.env["res.partner"].create(
-            {
-                "family_name": "Doe",
-                "given_name": "Jane",
-                "is_registrant": True,
-                "is_group": False,
-            }
+    def test_04_name_without_suffix_using_form(self):
+        """Test that name is generated correctly without suffix."""
+        with Form(self.env["res.partner"]) as partner_form:
+            partner_form.is_registrant = True
+            partner_form.is_group = False
+            partner_form.family_name = "Doe"
+            partner_form.given_name = "Jane"
+        individual = partner_form.save()
+        self.assertEqual(
+            individual.name,
+            "DOE, JANE",
+            "Name should not have trailing comma when no suffix",
         )
-        self.assertEqual(individual.name, "DOE, JANE", "Name should not have trailing comma when no suffix")
 
-    def test_05_name_with_all_fields(self):
+    def test_05_name_with_all_fields_using_form(self):
         """Test name with all fields including addl_name and suffix."""
-        individual = self.env["res.partner"].create(
-            {
-                "family_name": "Smith",
-                "given_name": "Robert",
-                "addl_name": "James",
-                "suffix_id": self.suffix_phd.id,
-                "is_registrant": True,
-                "is_group": False,
-            }
+        with Form(self.env["res.partner"]) as partner_form:
+            partner_form.is_registrant = True
+            partner_form.is_group = False
+            partner_form.family_name = "Smith"
+            partner_form.given_name = "Robert"
+            partner_form.addl_name = "James"
+            partner_form.suffix_id = self.suffix_phd
+        individual = partner_form.save()
+        self.assertEqual(
+            individual.name,
+            "SMITH, ROBERT JAMES, PHD",
+            "Name should include all parts including suffix",
         )
-        self.assertEqual(individual.name, "SMITH, ROBERT, JAMES, PHD", "Name should include all parts including suffix")
 
     def test_06_group_name_unaffected(self):
         """Test that group name is not affected by suffix logic."""
@@ -110,10 +116,16 @@ class TestNameSuffix(TransactionCase):
                 "is_group": True,
             }
         )
-        self.assertEqual(group.name, "Test Group", "Group name should not include suffix")
+        # Call name_change to simulate form behavior
+        group.name_change()
+        self.assertEqual(
+            group.name,
+            "Test Group",
+            "Group name should not include suffix",
+        )
 
-    def test_07_suffix_update_triggers_name_recompute(self):
-        """Test that updating suffix triggers name recomputation."""
+    def test_07_name_change_method_direct_call(self):
+        """Test name_change method called directly."""
         individual = self.env["res.partner"].create(
             {
                 "family_name": "Johnson",
@@ -122,10 +134,18 @@ class TestNameSuffix(TransactionCase):
                 "is_group": False,
             }
         )
+        # Call name_change to generate name
+        individual.name_change()
         self.assertEqual(individual.name, "JOHNSON, MICHAEL")
 
-        individual.write({"suffix_id": self.suffix_phd.id})
-        self.assertEqual(individual.name, "JOHNSON, MICHAEL, PHD", "Name should update when suffix is added")
+        # Add suffix and call name_change again
+        individual.suffix_id = self.suffix_phd.id
+        individual.name_change()
+        self.assertEqual(
+            individual.name,
+            "JOHNSON, MICHAEL, PHD",
+            "Name should update when suffix is added",
+        )
 
     def test_08_suffix_removal(self):
         """Test that removing suffix updates the name correctly."""
@@ -138,7 +158,13 @@ class TestNameSuffix(TransactionCase):
                 "is_group": False,
             }
         )
+        individual.name_change()
         self.assertEqual(individual.name, "WILLIAMS, SARAH, JR.")
 
-        individual.write({"suffix_id": False})
-        self.assertEqual(individual.name, "WILLIAMS, SARAH", "Name should update when suffix is removed")
+        individual.suffix_id = False
+        individual.name_change()
+        self.assertEqual(
+            individual.name,
+            "WILLIAMS, SARAH",
+            "Name should update when suffix is removed",
+        )
