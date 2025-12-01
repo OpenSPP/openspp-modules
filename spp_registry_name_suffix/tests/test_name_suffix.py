@@ -40,6 +40,7 @@ class TestNameSuffix(TransactionCase):
         """Test that suffix is appended to the computed name."""
         individual = self.env["res.partner"].create(
             {
+                "name": "Temp",  # Required by res_partner_check_name constraint
                 "family_name": "Doe",
                 "given_name": "John",
                 "suffix_id": self.suffix_jr.id,
@@ -59,6 +60,7 @@ class TestNameSuffix(TransactionCase):
         """Test that name is computed correctly without suffix."""
         individual = self.env["res.partner"].create(
             {
+                "name": "Temp",  # Required by res_partner_check_name constraint
                 "family_name": "Doe",
                 "given_name": "Jane",
                 "is_registrant": True,
@@ -76,6 +78,7 @@ class TestNameSuffix(TransactionCase):
         """Test name with all fields including addl_name and suffix."""
         individual = self.env["res.partner"].create(
             {
+                "name": "Temp",  # Required by res_partner_check_name constraint
                 "family_name": "Smith",
                 "given_name": "Robert",
                 "addl_name": "James",
@@ -113,6 +116,7 @@ class TestNameSuffix(TransactionCase):
         """Test that updating suffix and calling name_change updates name."""
         individual = self.env["res.partner"].create(
             {
+                "name": "Temp",  # Required by res_partner_check_name constraint
                 "family_name": "Johnson",
                 "given_name": "Michael",
                 "is_registrant": True,
@@ -136,6 +140,7 @@ class TestNameSuffix(TransactionCase):
         """Test that removing suffix updates the name correctly."""
         individual = self.env["res.partner"].create(
             {
+                "name": "Temp",  # Required by res_partner_check_name constraint
                 "family_name": "Williams",
                 "given_name": "Sarah",
                 "suffix_id": self.suffix_jr.id,
