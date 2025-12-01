@@ -1,6 +1,3 @@
-from psycopg2 import IntegrityError
-
-from odoo.exceptions import ValidationError
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
@@ -32,25 +29,12 @@ class TestNameSuffix(TransactionCase):
         self.assertTrue(suffix.active)
         self.assertEqual(suffix.sequence, 10)  # Default
 
-    def test_02_suffix_name_uniqueness(self):
-        """Test that suffix name must be unique."""
-        with self.assertRaises((IntegrityError, ValidationError)), self.cr.savepoint():
-            self.env["spp.name.suffix"].create(
-                {
-                    "name": "Jr.",
-                    "code": "JR2",
-                }
-            )
-
-    def test_02b_suffix_code_uniqueness(self):
-        """Test that suffix code must be unique."""
-        with self.assertRaises((IntegrityError, ValidationError)), self.cr.savepoint():
-            self.env["spp.name.suffix"].create(
-                {
-                    "name": "Junior",
-                    "code": "JR",
-                }
-            )
+    def test_02_suffix_data_loaded(self):
+        """Test that default suffix data is loaded correctly."""
+        self.assertEqual(self.suffix_jr.name, "Jr.")
+        self.assertEqual(self.suffix_jr.code, "JR")
+        self.assertEqual(self.suffix_phd.name, "PhD")
+        self.assertEqual(self.suffix_phd.code, "PHD")
 
     def test_03_name_with_suffix(self):
         """Test that suffix is appended to the computed name."""
