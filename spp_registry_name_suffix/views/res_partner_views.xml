@@ -10,8 +10,9 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='addl_name']" position="after">
                 <field
-                    name="suffix_id"
-                    placeholder="Select Suffix"
+                    name="suffix_ids"
+                    widget="many2many_tags"
+                    placeholder="Select Suffixes"
                     options="{'no_create': True, 'no_open': True}"
                 />
             </xpath>
@@ -25,7 +26,7 @@
         <field name="inherit_id" ref="g2p_registry_individual.view_individuals_list_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="suffix_id" optional="hide" />
+                <field name="suffix_ids" widget="many2many_tags" optional="hide" />
             </xpath>
         </field>
     </record>

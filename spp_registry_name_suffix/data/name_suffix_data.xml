@@ -16,6 +16,13 @@
         <field name="description">Senior - typically used for a father when a son has the same name</field>
     </record>
 
+    <record id="suffix_jra" model="spp.name.suffix">
+        <field name="name">Jra.</field>
+        <field name="code">JRA</field>
+        <field name="sequence">25</field>
+        <field name="description">JRA </field>
+    </record>
+
     <record id="suffix_i" model="spp.name.suffix">
         <field name="name">I</field>
         <field name="code">I</field>
@@ -49,6 +56,76 @@
         <field name="code">V</field>
         <field name="sequence">70</field>
         <field name="description">The Fifth</field>
+    </record>
+
+    <record id="suffix_vi" model="spp.name.suffix">
+        <field name="name">VI</field>
+        <field name="code">VI</field>
+        <field name="sequence">71</field>
+        <field name="description">The Sixth</field>
+    </record>
+
+    <record id="suffix_vii" model="spp.name.suffix">
+        <field name="name">VII</field>
+        <field name="code">VII</field>
+        <field name="sequence">72</field>
+        <field name="description">The Seventh</field>
+    </record>
+
+    <record id="suffix_viii" model="spp.name.suffix">
+        <field name="name">VIII</field>
+        <field name="code">VIII</field>
+        <field name="sequence">73</field>
+        <field name="description">The Eighth</field>
+    </record>
+
+    <record id="suffix_ix" model="spp.name.suffix">
+        <field name="name">IX</field>
+        <field name="code">IX</field>
+        <field name="sequence">74</field>
+        <field name="description">The Ninth</field>
+    </record>
+
+    <record id="suffix_x" model="spp.name.suffix">
+        <field name="name">X</field>
+        <field name="code">X</field>
+        <field name="sequence">75</field>
+        <field name="description">The Tenth</field>
+    </record>
+
+    <record id="suffix_xi" model="spp.name.suffix">
+        <field name="name">XI</field>
+        <field name="code">XI</field>
+        <field name="sequence">76</field>
+        <field name="description">The Eleventh</field>
+    </record>
+
+    <record id="suffix_xii" model="spp.name.suffix">
+        <field name="name">XII</field>
+        <field name="code">XII</field>
+        <field name="sequence">77</field>
+        <field name="description">The Twelfth</field>
+    </record>
+
+    <record id="suffix_xiii" model="spp.name.suffix">
+        <field name="name">XIII</field>
+        <field name="code">XIII</field>
+        <field name="sequence">78</field>
+        <field name="description">The Thirteenth</field>
+    </record>
+
+    <record id="suffix_xiv" model="spp.name.suffix">
+        <field name="name">XIV</field>
+        <field name="code">XIV</field>
+        <field name="sequence">79</field>
+        <field name="description">The Fourteenth</field>
+    </record>
+
+    <record id="suffix_xv" model="spp.name.suffix">
+        <field name="name">XV</field>
+        <field name="code">XV</field>
+        <field name="sequence">80</field>
+        <field name="description">The Fifteenth</field>
     </record>
 
     <!-- Academic/Professional Suffixes -->
