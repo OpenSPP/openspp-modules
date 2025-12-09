@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class ResPartner(models.Model):
@@ -10,8 +11,36 @@ class ResPartner(models.Model):
         column1="partner_id",
         column2="suffix_id",
         string="Suffixes",
-        help="Name suffixes such as Jr., Sr., III, IV, PhD, MD, etc.",
+        help="Name suffixes",
     )
+
+    @api.constrains("suffix_ids")
+    def _check_suffix_exclusion_groups(self):
+        """Validate that no two suffixes from the same exclusion group are selected."""
+        for record in self:
+            if not record.suffix_ids:
+                continue
+            # Get suffixes that have an exclusion group
+            suffixes_with_groups = record.suffix_ids.filtered(lambda s: s.exclusion_group)
+            # Group by exclusion_group
+            groups = {}
+            for suffix in suffixes_with_groups:
+                group = suffix.exclusion_group
+                if group not in groups:
+                    groups[group] = []
+                groups[group].append(suffix.name)
+            # Check for conflicts
+            for group, suffix_names in groups.items():
+                if len(suffix_names) > 1:
+                    raise ValidationError(
+                        _(
+                            "The following suffixes cannot be used together "
+                            "as they belong to the same exclusion group '%(group)s': "
+                            "%(suffixes)s",
+                            group=group,
+                            suffixes=", ".join(suffix_names),
+                        )
+                    )
 
     @api.onchange("is_group", "family_name", "given_name", "addl_name", "suffix_ids")
     def name_change(self):

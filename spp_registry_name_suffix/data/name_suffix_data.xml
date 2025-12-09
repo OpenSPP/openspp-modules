@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
 
-    <!-- Generational Suffixes -->
+    <!-- Generational Suffixes (mutually exclusive - only one can be used) -->
     <record id="suffix_jr" model="spp.name.suffix">
         <field name="name">Jr.</field>
         <field name="code">JR</field>
         <field name="sequence">10</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">Junior - typically used for a son named after his father</field>
     </record>
 
@@ -13,6 +14,7 @@
         <field name="name">Sr.</field>
         <field name="code">SR</field>
         <field name="sequence">20</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">Senior - typically used for a father when a son has the same name</field>
     </record>
 
@@ -20,13 +22,15 @@
         <field name="name">Jra.</field>
         <field name="code">JRA</field>
         <field name="sequence">25</field>
-        <field name="description">JRA </field>
+        <field name="exclusion_group">generational</field>
+        <field name="description">JRA</field>
     </record>
 
     <record id="suffix_i" model="spp.name.suffix">
         <field name="name">I</field>
         <field name="code">I</field>
         <field name="sequence">30</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The First</field>
     </record>
 
@@ -34,6 +38,7 @@
         <field name="name">II</field>
         <field name="code">II</field>
         <field name="sequence">40</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Second</field>
     </record>
 
@@ -41,6 +46,7 @@
         <field name="name">III</field>
         <field name="code">III</field>
         <field name="sequence">50</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Third</field>
     </record>
 
@@ -48,6 +54,7 @@
         <field name="name">IV</field>
         <field name="code">IV</field>
         <field name="sequence">60</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Fourth</field>
     </record>
 
@@ -55,6 +62,7 @@
         <field name="name">V</field>
         <field name="code">V</field>
         <field name="sequence">70</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Fifth</field>
     </record>
 
@@ -62,6 +70,7 @@
         <field name="name">VI</field>
         <field name="code">VI</field>
         <field name="sequence">71</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Sixth</field>
     </record>
 
@@ -69,6 +78,7 @@
         <field name="name">VII</field>
         <field name="code">VII</field>
         <field name="sequence">72</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Seventh</field>
     </record>
 
@@ -76,6 +86,7 @@
         <field name="name">VIII</field>
         <field name="code">VIII</field>
         <field name="sequence">73</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Eighth</field>
     </record>
 
@@ -83,6 +94,7 @@
         <field name="name">IX</field>
         <field name="code">IX</field>
         <field name="sequence">74</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Ninth</field>
     </record>
 
@@ -90,6 +102,7 @@
         <field name="name">X</field>
         <field name="code">X</field>
         <field name="sequence">75</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Tenth</field>
     </record>
 
@@ -97,6 +110,7 @@
         <field name="name">XI</field>
         <field name="code">XI</field>
         <field name="sequence">76</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Eleventh</field>
     </record>
 
@@ -104,6 +118,7 @@
         <field name="name">XII</field>
         <field name="code">XII</field>
         <field name="sequence">77</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Twelfth</field>
     </record>
 
@@ -111,6 +126,7 @@
         <field name="name">XIII</field>
         <field name="code">XIII</field>
         <field name="sequence">78</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Thirteenth</field>
     </record>
 
@@ -118,6 +134,7 @@
         <field name="name">XIV</field>
         <field name="code">XIV</field>
         <field name="sequence">79</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Fourteenth</field>
     </record>
 
@@ -125,6 +142,7 @@
         <field name="name">XV</field>
         <field name="code">XV</field>
         <field name="sequence">80</field>
+        <field name="exclusion_group">generational</field>
         <field name="description">The Fifteenth</field>
     </record>
 
