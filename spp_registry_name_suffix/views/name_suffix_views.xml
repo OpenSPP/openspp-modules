@@ -10,7 +10,7 @@
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="code" />
-                <field name="exclusion_group" optional="show" />
+                <field name="is_generational" />
                 <field name="active" />
             </tree>
         </field>
@@ -30,7 +30,7 @@
                         </group>
                         <group name="right_group">
                             <field name="sequence" />
-                            <field name="exclusion_group" />
+                            <field name="is_generational" />
                         </group>
                     </group>
                     <group name="description_group">
@@ -49,16 +49,13 @@
             <search>
                 <field name="name" />
                 <field name="code" />
-                <field name="exclusion_group" />
                 <filter name="filter_active" string="Active" domain="[('active', '=', True)]" />
                 <filter name="filter_inactive" string="Archived" domain="[('active', '=', False)]" />
-                <group expand="0" string="Group By">
-                    <filter
-                        name="groupby_exclusion"
-                        string="Exclusion Group"
-                        context="{'group_by': 'exclusion_group'}"
-                    />
-                </group>
+                <filter
+                    name="filter_generational"
+                    string="Generational"
+                    domain="[('is_generational', '=', True)]"
+                />
             </search>
         </field>
     </record>

@@ -15,32 +15,21 @@ class ResPartner(models.Model):
     )
 
     @api.constrains("suffix_ids")
-    def _check_suffix_exclusion_groups(self):
-        """Validate that no two suffixes from the same exclusion group are selected."""
+    def _check_generational_suffix_conflict(self):
+        """Validate that only one generational suffix is selected."""
         for record in self:
             if not record.suffix_ids:
                 continue
-            # Get suffixes that have an exclusion group
-            suffixes_with_groups = record.suffix_ids.filtered(lambda s: s.exclusion_group)
-            # Group by exclusion_group
-            groups = {}
-            for suffix in suffixes_with_groups:
-                group = suffix.exclusion_group
-                if group not in groups:
-                    groups[group] = []
-                groups[group].append(suffix.name)
-            # Check for conflicts
-            for group, suffix_names in groups.items():
-                if len(suffix_names) > 1:
-                    raise ValidationError(
-                        _(
-                            "The following suffixes cannot be used together "
-                            "as they belong to the same exclusion group '%(group)s': "
-                            "%(suffixes)s",
-                            group=group,
-                            suffixes=", ".join(suffix_names),
-                        )
+            generational_suffixes = record.suffix_ids.filtered(lambda s: s.is_generational)
+            if len(generational_suffixes) > 1:
+                suffix_names = ", ".join(generational_suffixes.mapped("name"))
+                raise ValidationError(
+                    _(
+                        "Only one generational suffix can be used at a time. "
+                        "The following are generational suffixes: %(suffixes)s",
+                        suffixes=suffix_names,
                     )
+                )
 
     @api.onchange("is_group", "family_name", "given_name", "addl_name", "suffix_ids")
     def name_change(self):

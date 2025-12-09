@@ -30,10 +30,11 @@ class SPPNameSuffix(models.Model):
         string="Description",
         help="Additional description or usage notes for this suffix",
     )
-    exclusion_group = fields.Char(
-        string="Exclusion Group",
-        help="Suffixes in the same exclusion group cannot be used together. "
-        "For example, 'generational' for Jr., Sr., I, II, III, etc.",
+    is_generational = fields.Boolean(
+        string="Generational Suffix",
+        default=False,
+        help="Check this for generational suffixes (Jr., Sr., I, II, III, etc.). "
+        "Only one generational suffix can be used per individual.",
     )
 
     _sql_constraints = [

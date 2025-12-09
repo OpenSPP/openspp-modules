@@ -244,30 +244,27 @@ class TestNameSuffix(TransactionCase):
         self.assertIn(self.suffix_jr.id, result_ids)
         self.assertIn(self.suffix_phd.id, result_ids)
 
-    def test_14_exclusion_group_set_on_generational_suffixes(self):
-        """Test that generational suffixes have exclusion group set."""
-        self.assertEqual(
-            self.suffix_jr.exclusion_group,
-            "generational",
-            "Jr. should have generational exclusion group",
+    def test_14_is_generational_set_on_generational_suffixes(self):
+        """Test that generational suffixes have is_generational flag set."""
+        self.assertTrue(
+            self.suffix_jr.is_generational,
+            "Jr. should be marked as generational",
         )
-        self.assertEqual(
-            self.suffix_sr.exclusion_group,
-            "generational",
-            "Sr. should have generational exclusion group",
+        self.assertTrue(
+            self.suffix_sr.is_generational,
+            "Sr. should be marked as generational",
         )
-        self.assertEqual(
-            self.suffix_iii.exclusion_group,
-            "generational",
-            "III should have generational exclusion group",
+        self.assertTrue(
+            self.suffix_iii.is_generational,
+            "III should be marked as generational",
         )
         self.assertFalse(
-            self.suffix_phd.exclusion_group,
-            "PhD should not have an exclusion group",
+            self.suffix_phd.is_generational,
+            "PhD should not be marked as generational",
         )
 
-    def test_15_exclusion_group_prevents_conflicting_suffixes(self):
-        """Test that two suffixes from same exclusion group cannot be selected."""
+    def test_15_generational_suffix_conflict_prevented(self):
+        """Test that two generational suffixes cannot be selected together."""
         individual = self.env["res.partner"].create(
             {
                 "name": "Temp",
@@ -277,14 +274,14 @@ class TestNameSuffix(TransactionCase):
                 "is_group": False,
             }
         )
-        # Try to add both Jr. and Sr. (both in 'generational' group)
+        # Try to add both Jr. and Sr. (both generational)
         with self.assertRaises(ValidationError) as context:
             individual.write({"suffix_ids": [(6, 0, [self.suffix_jr.id, self.suffix_sr.id])]})
-        self.assertIn("generational", str(context.exception))
+        self.assertIn("generational", str(context.exception).lower())
 
-    def test_16_exclusion_group_allows_different_groups(self):
-        """Test that suffixes from different groups can be selected together."""
-        # Jr. (generational) + PhD (no group) should work
+    def test_16_generational_with_non_generational_allowed(self):
+        """Test that generational + non-generational suffixes can be combined."""
+        # Jr. (generational) + PhD (non-generational) should work
         individual = self.env["res.partner"].create(
             {
                 "name": "Temp",
@@ -299,7 +296,7 @@ class TestNameSuffix(TransactionCase):
         individual.name_change()
         self.assertEqual(individual.name, "SMITH, JANE, JR., PHD")
 
-    def test_17_exclusion_group_roman_numerals_conflict(self):
+    def test_17_roman_numerals_conflict(self):
         """Test that two roman numeral suffixes cannot be selected together."""
         individual = self.env["res.partner"].create(
             {
@@ -311,11 +308,11 @@ class TestNameSuffix(TransactionCase):
             }
         )
         suffix_iv = self.env.ref("spp_registry_name_suffix.suffix_iv")
-        # Try to add both III and IV (both in 'generational' group)
+        # Try to add both III and IV (both generational)
         with self.assertRaises(ValidationError):
             individual.write({"suffix_ids": [(6, 0, [self.suffix_iii.id, suffix_iv.id])]})
 
-    def test_18_exclusion_group_jr_and_roman_numeral_conflict(self):
+    def test_18_jr_and_roman_numeral_conflict(self):
         """Test that Jr. and roman numerals cannot be selected together."""
         individual = self.env["res.partner"].create(
             {
@@ -326,6 +323,6 @@ class TestNameSuffix(TransactionCase):
                 "is_group": False,
             }
         )
-        # Try to add Jr. and III (both in 'generational' group)
+        # Try to add Jr. and III (both generational)
         with self.assertRaises(ValidationError):
             individual.write({"suffix_ids": [(6, 0, [self.suffix_jr.id, self.suffix_iii.id])]})
