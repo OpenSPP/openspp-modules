@@ -15,5 +15,9 @@ class ResPartner(models.Model):
     def name_change(self):
         """Extend name change to include suffix for individuals."""
         super().name_change()
-        if not self.is_group and self.suffix_id:
-            self.name = f"{self.name}, {self.suffix_id.name.upper()}"
+        if not self.is_group and self.suffix_id and self.name:
+            suffix_upper = self.suffix_id.name.upper()
+            suffix_str = f", {suffix_upper}"
+            # Only append suffix if not already present (avoid double-append)
+            if not self.name.endswith(suffix_str):
+                self.name = f"{self.name}{suffix_str}"
