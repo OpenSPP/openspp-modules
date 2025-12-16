@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="spp_name_suffix_tree" model="ir.ui.view">
+        <field name="name">spp.name.suffix.tree</field>
+        <field name="model">spp.name.suffix</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="code" />
+                <field name="is_generational" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="spp_name_suffix_form" model="ir.ui.view">
+        <field name="name">spp.name.suffix.form</field>
+        <field name="model">spp.name.suffix</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="main_group">
+                        <group name="left_group">
+                            <field name="name" />
+                            <field name="code" />
+                        </group>
+                        <group name="right_group">
+                            <field name="sequence" />
+                            <field name="is_generational" />
+                        </group>
+                    </group>
+                    <group name="description_group">
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="spp_name_suffix_search" model="ir.ui.view">
+        <field name="name">spp.name.suffix.search</field>
+        <field name="model">spp.name.suffix</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="code" />
+                <filter name="filter_active" string="Active" domain="[('active', '=', True)]" />
+                <filter name="filter_inactive" string="Archived" domain="[('active', '=', False)]" />
+                <filter
+                    name="filter_generational"
+                    string="Generational"
+                    domain="[('is_generational', '=', True)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_spp_name_suffix" model="ir.actions.act_window">
+        <field name="name">Name Suffixes</field>
+        <field name="res_model">spp.name.suffix</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="spp_name_suffix_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first name suffix
+            </p>
+            <p>
+                Name suffixes like Jr., Sr., III, PhD, MD can be configured here
+                and then selected on individual registrant records.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item under Registry Configuration -->
+    <menuitem
+        id="menu_spp_name_suffix"
+        name="Name Suffixes"
+        action="action_spp_name_suffix"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="25"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
+    />
+
+</odoo>

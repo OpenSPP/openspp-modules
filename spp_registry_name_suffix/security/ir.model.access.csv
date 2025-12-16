@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+spp_name_suffix_registrar,SPP Name Suffix Registrar Access,spp_registry_name_suffix.model_spp_name_suffix,g2p_registry_base.group_g2p_registrar,1,1,1,1
+spp_name_suffix_admin,SPP Name Suffix Admin Access,spp_registry_name_suffix.model_spp_name_suffix,g2p_registry_base.group_g2p_admin,1,1,1,1
