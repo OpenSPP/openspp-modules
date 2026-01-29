@@ -35,7 +35,7 @@ _logger = logging.getLogger(__name__)
 #################################################################
 
 API_ENDPOINT = "/api"
-SENSITIVE_KEYS = ["Authorization", "Cookie", "X-Api-Key", "X-Odoo-Session-Id"]
+SENSITIVE_KEYS = {"authorization", "cookie", "x-api-key", "x-odoo-session-id"}
 
 
 def create_api_log(func):
@@ -56,7 +56,11 @@ def create_api_log(func):
 
         namespace_id = False
         if namespace:
-            namespace_id = request.env["spp_api.namespace"].search([("name", "=", namespace)])
+            version = kwargs.get("version")
+            search_domain = [("name", "=", namespace)]
+            if version:
+                search_domain.append(("version_name", "=", version))
+            namespace_id = request.env["spp_api.namespace"].search(search_domain, limit=1)
 
         initial_val = {
             "method": path.method,
@@ -85,12 +89,10 @@ def create_api_log(func):
             request_log_val["request_data"] = request_data
 
         # Sanitize headers
-        safe_headers = {}
-        for key, value in request.httprequest.headers.items():
-            if key in SENSITIVE_KEYS:
-                safe_headers[key] = "REDACTED"
-            else:
-                safe_headers[key] = value
+        safe_headers = {
+            key: "REDACTED" if key.lower() in SENSITIVE_KEYS else value
+            for key, value in request.httprequest.headers.items()
+        }
         request_log_val["headers"] = json.dumps(safe_headers)
 
         request.env["spp_api.log"].create(request_log_val)
