@@ -35,6 +35,7 @@ _logger = logging.getLogger(__name__)
 #################################################################
 
 API_ENDPOINT = "/api"
+SENSITIVE_KEYS = ["Authorization", "Cookie", "X-Api-Key", "X-Odoo-Session-Id"]
 
 
 def create_api_log(func):
@@ -43,6 +44,7 @@ def create_api_log(func):
         # Request Log
         path = kwargs.get("path")
         request_id = kwargs.get("request_id", False)
+        namespace = kwargs.get("namespace", False)
         if not request_id:
             raise werkzeug.exceptions.HTTPException(
                 response=error_response(400, "Bad Request", "request_id is required.")
@@ -52,10 +54,15 @@ def create_api_log(func):
                 response=error_response(400, "Bad Request", "request_id is already taken.")
             )
 
+        namespace_id = False
+        if namespace:
+            namespace_id = request.env["spp_api.namespace"].search([("name", "=", namespace)])
+
         initial_val = {
             "method": path.method,
             "model": path.model,
             "request": http.request.httprequest.full_path,
+            "namespace_id": namespace_id.id if namespace_id else False,
         }
 
         request_log_val = initial_val.copy()
@@ -64,7 +71,27 @@ def create_api_log(func):
         if path.method in ["get"]:
             request_log_val["request_parameter"] = kwargs
         else:
-            request_log_val["request_data"] = kwargs
+            # Try to get parsed JSON first
+            # silent=True prevents Werkzeug from raising a 400 error on bad JSON
+            json_payload = request.httprequest.get_json(silent=True)
+
+            if json_payload:
+                request_data = json.dumps(json_payload)
+            else:
+                # Fallback to raw data if not JSON
+                # errors='replace' inserts a  character instead of crashing on bad bytes
+                request_data = request.httprequest.get_data().decode("utf-8", errors="replace")
+
+            request_log_val["request_data"] = request_data
+
+        # Sanitize headers
+        safe_headers = {}
+        for key, value in request.httprequest.headers.items():
+            if key in SENSITIVE_KEYS:
+                safe_headers[key] = "REDACTED"
+            else:
+                safe_headers[key] = value
+        request_log_val["headers"] = json.dumps(safe_headers)
 
         request.env["spp_api.log"].create(request_log_val)
         del request_log_val
