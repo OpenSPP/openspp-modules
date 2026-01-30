@@ -46,6 +46,7 @@
                     <field name="create_date" readonly="1" />
                     <field name="request" readonly="1" />
                     <field name="headers" readonly="1" />
+                    <field name="request_parameter" readonly="1" />
                     <field name="request_data" readonly="1" />
                     <field name="response_data" readonly="1" />
                 </group>

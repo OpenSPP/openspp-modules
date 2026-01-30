@@ -72,21 +72,21 @@ def create_api_log(func):
         request_log_val = initial_val.copy()
         request_log_val["http_type"] = "request"
         request_log_val["request_id"] = request_id
-        if path.method in ["get"]:
-            request_log_val["request_parameter"] = kwargs
+
+        request_log_val["request_parameter"] = request.httprequest.query_string.decode("utf-8", errors="replace")
+
+        # Try to get parsed JSON first
+        # silent=True prevents Werkzeug from raising a 400 error on bad JSON
+        json_payload = request.httprequest.get_json(silent=True)
+
+        if json_payload:
+            request_data = json.dumps(json_payload)
         else:
-            # Try to get parsed JSON first
-            # silent=True prevents Werkzeug from raising a 400 error on bad JSON
-            json_payload = request.httprequest.get_json(silent=True)
+            # Fallback to raw data if not JSON
+            # errors='replace' inserts a  character instead of crashing on bad bytes
+            request_data = request.httprequest.get_data().decode("utf-8", errors="replace")
 
-            if json_payload:
-                request_data = json.dumps(json_payload)
-            else:
-                # Fallback to raw data if not JSON
-                # errors='replace' inserts a  character instead of crashing on bad bytes
-                request_data = request.httprequest.get_data().decode("utf-8", errors="replace")
-
-            request_log_val["request_data"] = request_data
+        request_log_val["request_data"] = request_data
 
         # Sanitize headers
         safe_headers = {
