@@ -79,7 +79,7 @@ def create_api_log(func):
         # silent=True prevents Werkzeug from raising a 400 error on bad JSON
         json_payload = request.httprequest.get_json(silent=True)
 
-        if json_payload:
+        if json_payload is not None:
             request_data = json.dumps(json_payload)
         else:
             # Fallback to raw data if not JSON
