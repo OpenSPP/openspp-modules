@@ -45,6 +45,8 @@
                     <field name="create_uid" readonly="1" />
                     <field name="create_date" readonly="1" />
                     <field name="request" readonly="1" />
+                    <field name="headers" readonly="1" />
+                    <field name="request_parameter" readonly="1" />
                     <field name="request_data" readonly="1" />
                     <field name="response_data" readonly="1" />
                 </group>
@@ -302,7 +304,7 @@
     <record model="ir.actions.act_window" id="spp_api_log_list_action">
         <field name="name">API Logs</field>
         <field name="res_model">spp_api.log</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree,form</field>
         <field name="help">List of API Logs.</field>
     </record>
 
