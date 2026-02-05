@@ -89,7 +89,7 @@ class SPPAPIPath(models.Model):
     # Read
     filter_domain = fields.Char(default="[]")
     field_ids = fields.Many2many("ir.model.fields", domain="[('model_id', '=', model_id)]", string="Fields")
-    limit = fields.Integer(string="Limit of results", default=500)
+    limit = fields.Integer(string="Limit of results", default=80, help="Limit of results per page")
     # Create / Update
     warning_required = fields.Boolean(compute="_compute_warning_required", compute_sudo=True)
     api_field_ids = fields.One2many("spp_api.field", "path_id", string="API Fields", copy=True)
@@ -663,15 +663,24 @@ class SPPAPIPath(models.Model):
         """
         self.ensure_one()
 
-        # Limit
-        limit = kwargs.get("limit", 0)
-        max_limit = self.limit if self.limit else MAX_LIMIT
-        kwargs["limit"] = limit if (limit and limit <= max_limit) else max_limit
+        # Page
+        page = kwargs.get("page", 1)
+
+        # Get defined limit first in spp_api.path
+        # if limit is defined in kwargs (query parameter), use it; else use self.limit or MAX_LIMIT
+        limit = kwargs.get("limit", self.limit if self.limit else MAX_LIMIT)
+
+        # Validate limit
+        try:
+            limit = int(limit)
+        except (ValueError, TypeError):
+            limit = self.limit if self.limit else MAX_LIMIT
+
+        kwargs["limit"] = limit
 
         # Offset
-        kwargs["offset"] = kwargs.get("start_from", 0)
-        if "start_from" in kwargs:
-            del kwargs["start_from"]
+        offset = (page - 1) * limit if page > 1 else kwargs.get("offset", 0)
+        kwargs["offset"] = offset
 
         # Domain
         kwargs["domain"] = self.get_domain(kwargs)

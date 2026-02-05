@@ -7,7 +7,7 @@
     "images": [
         "images/icon.png",
     ],
-    "version": "17.0.1.3.1",
+    "version": "17.0.1.4.1",
     "application": False,
     "author": "OpenSPP.org",
     "development_status": "Production/Stable",

@@ -207,19 +207,29 @@ class ApiV1Controller(http.Controller):
         path = kw.get("path")
         del kw["path"]
 
+        page = kw.get("page", 1)
+
         kw = path.search_treatment_kwargs(kw)
+        limit = kw.get("limit")
+
         records = self.get_records(path.model, kw)
         records_data = records.search_read(**kw)
         records_all = records.search_count(kw.get("domain"))
         records_data = path._get_response_treatment(records_data)
+
+        pagination = {
+            "page": page,
+            "limit": limit,
+            "total_records": records_all,
+            "total_pages": (records_all + limit - 1) // limit,
+        }
+
         response_data = {
             "results": records_data,
-            "count": records_all,
-            "offset": kw.get("offset", 0),
-            "limit": kw.get("limit", 0),
             "version": version,
             "timestamp": datetime_format(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
+            "pagination": pagination,
         }
 
         return successful_response(200, response_data)
