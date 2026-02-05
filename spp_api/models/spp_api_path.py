@@ -89,7 +89,7 @@ class SPPAPIPath(models.Model):
     # Read
     filter_domain = fields.Char(default="[]")
     field_ids = fields.Many2many("ir.model.fields", domain="[('model_id', '=', model_id)]", string="Fields")
-    limit = fields.Integer(string="Limit of results", default=80, help="Limit of results per page")
+    limit = fields.Integer(string="Limit of results", default=500, help="Limit of results per page")
     # Create / Update
     warning_required = fields.Boolean(compute="_compute_warning_required", compute_sudo=True)
     api_field_ids = fields.One2many("spp_api.field", "path_id", string="API Fields", copy=True)
@@ -663,24 +663,43 @@ class SPPAPIPath(models.Model):
         """
         self.ensure_one()
 
-        # Page
-        page = kwargs.get("page", 1)
+        backward_compat = False
+        if "start_from" in kwargs:
+            backward_compat = True
 
-        # Get defined limit first in spp_api.path
-        # if limit is defined in kwargs (query parameter), use it; else use self.limit or MAX_LIMIT
-        limit = kwargs.get("limit", self.limit if self.limit else MAX_LIMIT)
+        if backward_compat:
+            limit = kwargs.get("limit", 0)
+            max_limit = self.limit if self.limit else MAX_LIMIT
+            kwargs["limit"] = limit if (limit and limit <= max_limit) else max_limit
+            kwargs["offset"] = kwargs.get("start_from", 0)
+            if "start_from" in kwargs:
+                del kwargs["start_from"]
+        else:
+            # Page
+            try:
+                page = int(kwargs.get("page", 1))
+            except (ValueError, TypeError):
+                page = 1
+            page = max(1, page)
 
-        # Validate limit
-        try:
-            limit = int(limit)
-        except (ValueError, TypeError):
-            limit = self.limit if self.limit else MAX_LIMIT
+            # Get defined limit first in spp_api.path
+            # if limit is defined in kwargs (query parameter), use it; else use self.limit or MAX_LIMIT
+            max_limit = self.limit if self.limit else MAX_LIMIT
+            limit = kwargs.get("limit", max_limit)
 
-        kwargs["limit"] = limit
+            # Validate limit
+            try:
+                limit = int(limit)
+                if limit <= 0 or limit > max_limit:
+                    limit = max_limit
+            except (ValueError, TypeError):
+                limit = max_limit
 
-        # Offset
-        offset = (page - 1) * limit if page > 1 else kwargs.get("offset", 0)
-        kwargs["offset"] = offset
+            kwargs["limit"] = limit
+
+            # Offset
+            offset = (page - 1) * limit
+            kwargs["offset"] = offset
 
         # Domain
         kwargs["domain"] = self.get_domain(kwargs)

@@ -207,7 +207,17 @@ class ApiV1Controller(http.Controller):
         path = kw.get("path")
         del kw["path"]
 
-        page = kw.get("page", 1)
+        # For backward compatibility
+        # Will not use pagination
+        backward_compat = False
+        if "start_from" in kw:
+            backward_compat = True
+
+        try:
+            page = int(kw.get("page", 1))
+        except (ValueError, TypeError):
+            page = 1
+        page = max(1, page)
 
         kw = path.search_treatment_kwargs(kw)
         limit = kw.get("limit")
@@ -217,20 +227,24 @@ class ApiV1Controller(http.Controller):
         records_all = records.search_count(kw.get("domain"))
         records_data = path._get_response_treatment(records_data)
 
-        pagination = {
-            "page": page,
-            "limit": limit,
-            "total_records": records_all,
-            "total_pages": (records_all + limit - 1) // limit,
-        }
-
         response_data = {
             "results": records_data,
             "version": version,
             "timestamp": datetime_format(datetime.datetime.now()),
             "reply_id": self.get_reply_id(),
-            "pagination": pagination,
         }
+
+        if backward_compat:
+            response_data["count"] = records_all
+            response_data["offset"] = kw.get("offset", 0)
+            response_data["limit"] = limit
+        else:
+            response_data["pagination"] = {
+                "page": page,
+                "limit": limit,
+                "total_records": records_all,
+                "total_pages": (records_all + limit - 1) // limit if limit > 0 else 1,
+            }
 
         return successful_response(200, response_data)
 
