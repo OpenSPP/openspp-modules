@@ -218,6 +218,7 @@ class ApiV1Controller(http.Controller):
         except (ValueError, TypeError):
             page = 1
         page = max(1, page)
+        kw["page"] = page
 
         kw = path.search_treatment_kwargs(kw)
         limit = kw.get("limit")
@@ -243,7 +244,7 @@ class ApiV1Controller(http.Controller):
                 "page": page,
                 "limit": limit,
                 "total_records": records_all,
-                "total_pages": (records_all + limit - 1) // limit if limit > 0 else 1,
+                "total_pages": max(1, (records_all + limit - 1) // limit if limit > 0 else 1),
             }
 
         return successful_response(200, response_data)

@@ -676,11 +676,7 @@ class SPPAPIPath(models.Model):
                 del kwargs["start_from"]
         else:
             # Page
-            try:
-                page = int(kwargs.get("page", 1))
-            except (ValueError, TypeError):
-                page = 1
-            page = max(1, page)
+            page = int(kwargs.get("page", 1))
 
             # Get defined limit first in spp_api.path
             # if limit is defined in kwargs (query parameter), use it; else use self.limit or MAX_LIMIT
