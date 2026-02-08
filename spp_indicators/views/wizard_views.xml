@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_openspp_metrics_prefetch_wizard" model="ir.ui.view">
+    <field name="name">openspp.indicator.prefetch.wizard.form</field>
+    <field name="model">openspp.indicator.prefetch.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Prefetch/Refresh Metrics">
+        <group>
+          <field name="metric_id" />
+          <field name="metric" invisible="1" />
+          <field name="subject_model" invisible="1" />
+          <field name="subject_model_code" readonly="1" string="Subject Model" />
+          <field name="period_key" />
+          <field name="domain_text" placeholder="[('is_registrant','=',True)]" />
+          <field name="enqueue" />
+          <field name="chunk_size" />
+          <field name="recent_push_summary" readonly="1" nolabel="1" />
+        </group>
+        <footer>
+          <button string="Run" type="object" name="action_run" class="btn-primary" />
+          <button string="Cancel" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_openspp_metrics_invalidate_wizard" model="ir.ui.view">
+    <field name="name">openspp.indicator.invalidate.wizard.form</field>
+    <field name="model">openspp.indicator.invalidate.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Invalidate Metrics Cache">
+        <group>
+          <field name="metric_id" />
+          <field name="metric" invisible="1" />
+          <field name="subject_model" invisible="1" />
+          <field name="subject_model_code" readonly="1" string="Subject Model" />
+          <field name="period_key" />
+          <field name="domain_text" placeholder="Optional domain to select subjects" />
+          <field name="recent_push_summary" readonly="1" nolabel="1" />
+        </group>
+        <footer>
+          <button string="Invalidate" type="object" name="action_run" class="btn-primary" />
+          <button string="Cancel" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
+</odoo>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Smart button on base partner form (fallback if used) -->
+    <record id="view_partner_form_metrics_button" model="ir.ui.view">
+        <field name="name">res.partner.form.metrics.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_metrics" type="object" class="oe_stat_button" icon="fa-bar-chart">
+                    <field name="metrics_count" widget="statinfo" string="Metrics" />
+                </button>
+                <button
+                    type="action"
+                    name="%(action_openspp_refresh_indicators_wizard)d"
+                    class="oe_stat_button"
+                    icon="fa-refresh"
+                    groups="base.group_system"
+                >
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Refresh</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Smart button on Individuals form (OpenG2P) -->
+    <record id="view_individuals_form_metrics_button" model="ir.ui.view">
+        <field name="name">res.partner.form.individuals.metrics.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_metrics" type="object" class="oe_stat_button" icon="fa-bar-chart">
+                    <field name="metrics_count" widget="statinfo" string="Metrics" />
+                </button>
+                <button
+                    type="action"
+                    name="%(action_openspp_refresh_indicators_wizard)d"
+                    class="oe_stat_button"
+                    icon="fa-refresh"
+                    groups="base.group_system"
+                >
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Refresh</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Smart button on Groups form (OpenG2P) -->
+    <record id="view_groups_form_metrics_button" model="ir.ui.view">
+        <field name="name">res.partner.form.groups.metrics.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_metrics" type="object" class="oe_stat_button" icon="fa-bar-chart">
+                    <field name="metrics_count" widget="statinfo" string="Metrics" />
+                </button>
+                <button
+                    type="action"
+                    name="%(action_openspp_refresh_indicators_wizard)d"
+                    class="oe_stat_button"
+                    icon="fa-refresh"
+                    groups="base.group_system"
+                >
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Refresh</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action to open metrics for a partner -->
+    <record id="action_openspp_partner_metrics" model="ir.actions.act_window">
+        <field name="name">Metrics</field>
+        <field name="res_model">openspp.indicator.value</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_my_subject": 1}</field>
+        <field name="domain">[("subject_model","=","res.partner"), ("subject_id","=", active_id)]</field>
+        <field name="target">current</field>
+        <field name="search_view_id" ref="spp_indicators_ui.view_openspp_feature_value_search" />
+    </record>
+
+</odoo>

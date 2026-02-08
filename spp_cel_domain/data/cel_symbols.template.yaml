@@ -1,0 +1,132 @@
+# CEL Domain Profile Configuration
+# This file defines symbol mappings for different registry profiles
+#
+# Configuration Precedence:
+# 1. System Parameters (ir.config_parameter: cel_domain.profile.<name>)
+# 2. This YAML file (merged with hardcoded defaults)
+# 3. Hardcoded defaults in cel_registry.py
+#
+# YAML values override hardcoded defaults.
+# To disable YAML loading, remove/rename this file.
+
+version: 1
+
+presets:
+  # Registry Profile: Individuals
+  # Root model: res.partner (registrants, non-groups)
+  registry_individuals:
+    root_model: "res.partner"
+    base_domain: [["is_registrant", "=", true], ["is_group", "=", false]]
+    m2o_name_match: "equals" # How to match many2one fields: equals|ilike|disabled
+    symbols:
+      me:
+        model: "res.partner"
+      groups:
+        relation: "rel"
+        through: "g2p.group.membership"
+        parent: "individual"
+        link_to: "group"
+        default_domain: [["is_ended", "=", false]] # Only active memberships by default
+      enrollments:
+        relation: "rel"
+        through: "g2p.program_membership"
+        parent: "partner_id"
+        link_field: "id"
+        child_model: "g2p.program_membership"
+      entitlements:
+        relation: "rel"
+        through: "g2p.entitlement"
+        parent: "partner_id"
+        link_field: "id"
+        child_model: "g2p.entitlement"
+
+  # Registry Profile: Groups (Households)
+  # Root model: res.partner (groups/households)
+  registry_groups:
+    root_model: "res.partner"
+    base_domain: [["is_registrant", "=", true], ["is_group", "=", true]]
+    m2o_name_match: "equals"
+    symbols:
+      me:
+        model: "res.partner"
+      members:
+        relation: "rel"
+        through: "g2p.group.membership"
+        parent: "group"
+        link_to: "individual"
+        default_domain: [["is_ended", "=", false]] # Active members by default
+        # To include ended members: override default_domain to []
+        # Or in expression: members.exists(m, m._link.is_ended or <condition>)
+      enrollments:
+        relation: "rel"
+        through: "g2p.program_membership"
+        parent: "partner_id"
+        link_field: "id"
+        child_model: "g2p.program_membership"
+      entitlements:
+        relation: "rel"
+        through: "g2p.entitlement"
+        parent: "partner_id"
+        link_field: "id"
+        child_model: "g2p.entitlement"
+    roles:
+      # Head-of-Household role names (used by head() function)
+      head: ["Head", "Household Head", "HoH"]
+
+  # Program Memberships Profile
+  # Root model: g2p.program_membership (enrollment records)
+  program_memberships:
+    root_model: "g2p.program_membership"
+    symbols:
+      me:
+        model: "g2p.program_membership"
+      registrant:
+        relation: "many2one"
+        field: "partner_id"
+        model: "res.partner"
+      program:
+        relation: "many2one"
+        field: "program_id"
+        model: "g2p.program"
+
+  # Entitlements Profile
+  # Root model: g2p.entitlement (benefit/payment records)
+  entitlements:
+    root_model: "g2p.entitlement"
+    symbols:
+      me:
+        model: "g2p.entitlement"
+      registrant:
+        relation: "many2one"
+        field: "partner_id"
+        model: "res.partner"
+      program:
+        relation: "many2one"
+        field: "program_id"
+        model: "g2p.program"
+# Customization Examples:
+#
+# Example 1: Add custom role names for your deployment
+# registry_groups:
+#   roles:
+#     head: ["Head", "Household Head", "HoH", "Chef de ménage"]  # Add French
+#     spouse: ["Spouse", "Partner", "Époux"]
+#
+# Example 2: Change default to include ended members
+# registry_groups:
+#   symbols:
+#     members:
+#       default_domain: []  # Empty = no filter, includes ended members
+#
+# Example 3: Add custom symbol for your specific field
+# registry_individuals:
+#   symbols:
+#     district:
+#       relation: "many2one"
+#       field: "district_id"
+#       model: "your.district.model"
+#
+# For system parameter configuration (highest priority):
+# Settings > Technical > Parameters > System Parameters
+# Key: cel_domain.profile.registry_groups
+# Value: {"root_model": "res.partner", "symbols": {...}}

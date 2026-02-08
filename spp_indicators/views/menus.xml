@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <menuitem
+        id="menu_openspp_metrics_definitions"
+        name="Definitions"
+        parent="menu_openspp_metrics_root"
+        action="spp_indicators.action_openspp_metrics_definitions"
+        sequence="5"
+        groups="base.group_system"
+    />
+  <menuitem
+        id="menu_openspp_metrics_feature_store"
+        name="Feature Store"
+        parent="menu_openspp_metrics_root"
+        action="spp_indicators.action_openspp_feature_value_inspector"
+        sequence="15"
+        groups="base.group_system"
+    />
+  <menuitem
+        id="menu_openspp_metrics_dashboard"
+        name="Dashboard"
+        parent="menu_openspp_metrics_root"
+        action="spp_indicators.action_openspp_feature_value_dashboard"
+        sequence="20"
+        groups="base.group_system"
+    />
+  <menuitem
+        id="menu_openspp_metrics_push_errors"
+        name="Push Errors"
+        parent="menu_openspp_metrics_root"
+        action="spp_indicators.action_openspp_metrics_push_errors"
+        sequence="30"
+        groups="base.group_system"
+    />
+  <menuitem
+        id="menu_openspp_metrics_credentials"
+        name="API Credentials"
+        parent="menu_openspp_metrics_root"
+        action="spp_indicators.action_openspp_metrics_api_credentials"
+        sequence="40"
+        groups="base.group_system"
+    />
+
+  <record id="action_openspp_metrics_prefetch" model="ir.actions.act_window">
+    <field name="name">Prefetch Metrics</field>
+    <field name="res_model">openspp.indicator.prefetch.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+  <menuitem
+        id="menu_openspp_metrics_prefetch"
+        name="Prefetch"
+        parent="menu_openspp_metrics_root"
+        action="action_openspp_metrics_prefetch"
+        sequence="50"
+        groups="base.group_system"
+    />
+
+  <record id="action_openspp_metrics_invalidate" model="ir.actions.act_window">
+    <field name="name">Invalidate Cache</field>
+    <field name="res_model">openspp.indicator.invalidate.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+  <menuitem
+        id="menu_openspp_metrics_invalidate"
+        name="Invalidate"
+        parent="menu_openspp_metrics_root"
+        action="action_openspp_metrics_invalidate"
+        sequence="60"
+        groups="base.group_system"
+    />
+</odoo>

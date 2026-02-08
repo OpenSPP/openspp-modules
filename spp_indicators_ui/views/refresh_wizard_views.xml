@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_openspp_indicators_refresh_wizard_form" model="ir.ui.view">
+        <field name="name">openspp.indicator.refresh.wizard.form</field>
+        <field name="model">openspp.indicator.refresh.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Refresh Indicators">
+                <sheet>
+                    <group>
+                        <field name="partner_id" readonly="1" />
+                        <field name="metric" placeholder="household.size" />
+                        <field name="period_key" />
+                    </group>
+                    <footer>
+                        <button string="Refresh" type="object" name="action_refresh" class="btn-primary" />
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_openspp_refresh_indicators_wizard" model="ir.actions.act_window">
+        <field name="name">Refresh Indicators</field>
+        <field name="res_model">openspp.indicator.refresh.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

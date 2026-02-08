@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <menuitem
+        id="menu_openspp_metrics_root"
+        name="Metrics"
+        parent="base.menu_administration"
+        sequence="70"
+        groups="base.group_system"
+    />
+</odoo>

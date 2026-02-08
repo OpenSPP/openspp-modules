@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <!-- Metric Definitions -->
+    <record id="view_openspp_metrics_definition_tree" model="ir.ui.view">
+      <field name="name">openspp.indicator.definition.tree</field>
+      <field name="model">openspp.indicator.definition</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+          <field name="subject_model" />
+          <field name="value_type" />
+          <field name="period_granularity" />
+          <field name="default_ttl_seconds" />
+          <field name="id_mapping_fields" />
+          <field name="id_mapping_required" />
+          <field name="active" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_openspp_metrics_definition_form" model="ir.ui.view">
+      <field name="name">openspp.indicator.definition.form</field>
+      <field name="model">openspp.indicator.definition</field>
+      <field name="arch" type="xml">
+        <form string="Metric Definition">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="description" />
+              <field name="subject_model" />
+              <field name="value_type" />
+              <field name="period_granularity" />
+              <field name="default_ttl_seconds" />
+              <field name="params_schema" widget="json" />
+            </group>
+            <group string="Ownership">
+              <field name="owner_group" />
+              <field name="company_id" />
+              <field name="active" />
+            </group>
+            <group string="Identifier Mapping">
+              <field name="id_mapping_fields" placeholder="external_id,national_id" />
+              <field name="id_mapping_required" />
+              <field name="id_mapping_namespace" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_openspp_metrics_definitions" model="ir.actions.act_window">
+      <field name="name">Metric Definitions</field>
+      <field name="res_model">openspp.indicator.definition</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- API Credentials -->
+    <record id="view_openspp_metrics_api_credential_tree" model="ir.ui.view">
+      <field name="name">openspp.indicator.api_credential.tree</field>
+      <field name="model">openspp.indicator.api_credential</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+          <field name="token_prefix" string="Token" />
+          <field name="allowed_metric_pattern" />
+          <field name="status" />
+          <field name="expires_at" />
+          <field name="request_limit" />
+          <field name="request_count" />
+          <field name="last_used_at" />
+          <field name="last_seen_ip" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_openspp_metrics_api_credential_form" model="ir.ui.view">
+      <field name="name">openspp.indicator.api_credential.form</field>
+      <field name="model">openspp.indicator.api_credential</field>
+      <field name="arch" type="xml">
+        <form string="Metrics API Credential">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="status" />
+              <field name="expires_at" />
+              <field name="company_id" />
+            </group>
+            <group string="Authentication">
+              <field name="token_prefix" readonly="1" />
+              <field name="token_plain" password="True" placeholder="Paste new token to rotate" />
+              <field name="allowed_metric_pattern" />
+            </group>
+            <group string="Usage">
+              <field name="request_limit" />
+              <field name="request_count" readonly="1" />
+              <field name="request_window_start" readonly="1" />
+              <field name="last_used_at" readonly="1" />
+              <field name="last_seen_ip" readonly="1" />
+            </group>
+            <group>
+              <field name="notes" colspan="2" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_openspp_metrics_api_credentials" model="ir.actions.act_window">
+      <field name="name">API Credentials</field>
+      <field name="res_model">openspp.indicator.api_credential</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Push Errors -->
+    <record id="view_openspp_metrics_push_error_tree" model="ir.ui.view">
+      <field name="name">openspp.indicator.push.error.tree</field>
+      <field name="model">openspp.indicator.push.error</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="create_date" />
+          <field name="metric" />
+          <field name="subject_reference" />
+          <field name="error_code" />
+          <field name="error_message" />
+          <field name="resolved" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_openspp_metrics_push_error_form" model="ir.ui.view">
+      <field name="name">openspp.indicator.push.error.form</field>
+      <field name="model">openspp.indicator.push.error</field>
+      <field name="arch" type="xml">
+        <form string="Push Error">
+          <sheet>
+            <group>
+              <field name="metric" readonly="1" />
+              <field name="subject_reference" readonly="1" />
+              <field name="error_code" readonly="1" />
+              <field name="error_message" readonly="1" widget="text" />
+              <field name="resolved" />
+              <field name="resolved_at" readonly="1" />
+              <field name="resolved_by" readonly="1" />
+              <field name="credential_id" readonly="1" />
+              <field name="payload" readonly="1" widget="json" />
+            </group>
+            <footer>
+              <button name="action_mark_resolved" string="Mark Resolved" type="object" class="btn-primary" />
+              <button string="Close" special="cancel" class="btn-secondary" />
+            </footer>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_openspp_metrics_push_errors" model="ir.actions.act_window">
+      <field name="name">Push Errors</field>
+      <field name="res_model">openspp.indicator.push.error</field>
+      <field name="view_mode">tree,form,pivot</field>
+      <field name="context">{"search_default_resolved": 0}</field>
+    </record>
+
+    <!-- Feature Store Inspection -->
+    <record id="view_openspp_feature_value_tree" model="ir.ui.view">
+      <field name="name">openspp.indicator.value.tree</field>
+      <field name="model">openspp.indicator.value</field>
+      <field name="arch" type="xml">
+        <tree create="false" delete="false">
+          <field name="metric" />
+          <field name="provider" />
+          <field name="subject_model" />
+          <field name="subject_id" />
+          <field name="period_key" />
+          <field name="value_json" />
+          <field name="value_type" />
+          <field name="coverage" />
+          <field name="as_of" />
+          <field name="fetched_at" />
+          <field name="expires_at" />
+          <field name="source" />
+          <field name="company_id" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_openspp_feature_value_search" model="ir.ui.view">
+      <field name="name">openspp.indicator.value.search</field>
+      <field name="model">openspp.indicator.value</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="metric" />
+          <field name="period_key" />
+          <field name="provider" />
+          <field name="subject_model" />
+          <field name="subject_id" />
+          <!-- Removed explicit context_today() filter for Odoo 17 compatibility; add later if needed -->
+        </search>
+      </field>
+    </record>
+
+    <record id="action_openspp_feature_value_inspector" model="ir.actions.act_window">
+      <field name="name">Feature Store</field>
+      <field name="res_model">openspp.indicator.value</field>
+      <field name="view_mode">tree</field>
+      <field name="search_view_id" ref="view_openspp_feature_value_search" />
+    </record>
+
+    <record id="action_openspp_feature_value_dashboard" model="ir.actions.act_window">
+      <field name="name">Metrics Dashboard</field>
+      <field name="res_model">openspp.indicator.value</field>
+      <field name="view_mode">graph,pivot,tree</field>
+      <field name="search_view_id" ref="view_openspp_feature_value_search" />
+    </record>
+</odoo>

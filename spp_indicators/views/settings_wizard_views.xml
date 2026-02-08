@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_openspp_metrics_settings_wizard_form" model="ir.ui.view">
+    <field name="name">openspp.indicator.settings.wizard.form</field>
+    <field name="model">openspp.indicator.settings.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Metrics Settings">
+        <sheet>
+          <group>
+            <field name="allow_any_provider_fallback" />
+          </group>
+          <footer>
+            <button string="Save" type="object" name="action_save" class="btn-primary" />
+            <button string="Cancel" special="cancel" class="btn-secondary" />
+          </footer>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_openspp_metrics_settings_wizard" model="ir.actions.act_window">
+    <field name="name">Settings</field>
+    <field name="res_model">openspp.indicator.settings.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+
+  <menuitem
+        id="menu_openspp_metrics_settings"
+        name="Settings"
+        parent="spp_indicators.menu_openspp_metrics_root"
+        action="action_openspp_metrics_settings_wizard"
+        sequence="50"
+        groups="base.group_system"
+    />
+</odoo>

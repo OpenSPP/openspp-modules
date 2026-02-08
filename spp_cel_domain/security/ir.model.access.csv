@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cel_rule_wizard,access_cel_rule_wizard,model_cel_rule_wizard,spp_cel_domain.group_cel_domain_manager,1,1,1,0
+access_cel_rule_wizard_metric,access_cel_rule_wizard_metric,model_cel_rule_wizard_metric,spp_cel_domain.group_cel_domain_manager,1,0,1,1

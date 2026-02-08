@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Tree/Form views for openspp.indicator.value tuned for partner context -->
+    <record id="view_openspp_feature_value_tree" model="ir.ui.view">
+        <field name="name">openspp.indicator.value.tree</field>
+        <field name="model">openspp.indicator.value</field>
+        <field name="arch" type="xml">
+            <tree create="0" delete="0" edit="0">
+                <field name="metric" />
+                <field name="provider" />
+                <field name="period_key" />
+                <field name="value_text" string="Value" />
+                <field name="value_type" />
+                <field name="coverage" />
+                <field name="as_of" />
+                <field name="fetched_at" />
+                <field name="expires_at" />
+                <field name="error_code" />
+                <field name="error_message" />
+                <field name="updated_at" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_openspp_feature_value_search" model="ir.ui.view">
+        <field name="name">openspp.indicator.value.search</field>
+        <field name="model">openspp.indicator.value</field>
+        <field name="arch" type="xml">
+            <search string="Search Metric Values">
+                <field name="metric" />
+                <field name="provider" />
+                <field name="period_key" />
+                <separator />
+                <filter string="Current" name="current" domain="[( 'period_key','=','current') ]" />
+                <filter
+                    string="Errors"
+                    name="has_error"
+                    domain="['|',('error_code','!=',False),('error_message','!=',False)]"
+                />
+            </search>
+        </field>
+    </record>
+    <record id="view_openspp_feature_value_form" model="ir.ui.view">
+        <field name="name">openspp.indicator.value.form</field>
+        <field name="model">openspp.indicator.value</field>
+        <field name="arch" type="xml">
+            <form string="Metric Value">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="metric" />
+                            <field name="provider" />
+                            <field name="period_key" />
+                            <field name="company_id" />
+                        </group>
+                        <group>
+                            <field name="value_type" />
+                            <field name="coverage" />
+                            <field name="as_of" />
+                            <field name="fetched_at" />
+                            <field name="expires_at" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Value">
+                            <group>
+                                <field
+                                    name="value_pretty"
+                                    nolabel="1"
+                                    readonly="1"
+                                    widget="text"
+                                    class="oe_inline oe_monospaced"
+                                />
+                            </group>
+                        </page>
+                        <page string="Subject">
+                            <group>
+                                <field name="subject_model" readonly="1" />
+                                <field name="subject_id" readonly="1" />
+                            </group>
+                        </page>
+                        <page string="Errors">
+                            <group>
+                                <field name="error_code" />
+                                <field name="error_message" widget="text" />
+                                <field name="source" />
+                                <field name="updated_at" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

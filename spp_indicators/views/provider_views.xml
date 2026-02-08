@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_openspp_metrics_provider_tree" model="ir.ui.view">
+    <field name="name">openspp.indicator.provider.tree</field>
+    <field name="model">openspp.indicator.provider</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="metric" />
+        <field name="default_ttl" />
+        <field name="max_batch_size" />
+        <field name="id_mapping_fields" />
+        <field name="id_mapping_required" />
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_openspp_metrics_provider_form" model="ir.ui.view">
+    <field name="name">openspp.indicator.provider.form</field>
+    <field name="model">openspp.indicator.provider</field>
+    <field name="arch" type="xml">
+      <form string="Metrics Provider">
+        <sheet>
+          <group>
+            <field name="name" />
+            <field name="metric" />
+          </group>
+          <group string="Runtime">
+            <field name="default_ttl" />
+            <field name="max_batch_size" />
+            <field name="recommended_concurrency" />
+            <field name="timeout_ms" />
+            <field name="retry_max" />
+          </group>
+          <group string="ID Mapping">
+            <field name="id_mapping_fields" placeholder="school_student_id,external_id" />
+            <field name="id_mapping_required" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_openspp_metrics_providers" model="ir.actions.act_window">
+    <field name="name">Providers</field>
+    <field name="res_model">openspp.indicator.provider</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem
+        id="menu_openspp_metrics_providers"
+        name="Providers"
+        parent="spp_indicators.menu_openspp_metrics_root"
+        action="action_openspp_metrics_providers"
+        sequence="30"
+        groups="base.group_system"
+    />
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_metrics_registry_inspect_form" model="ir.ui.view">
+    <field name="name">openspp.indicator.registry.inspect.form</field>
+    <field name="model">openspp.indicator.registry.inspect</field>
+    <field name="arch" type="xml">
+      <form string="Runtime Metrics Registry" create="0" edit="0">
+        <sheet>
+          <group>
+            <field name="line_ids" nolabel="1">
+              <tree editable="0">
+                <field name="name" />
+                <field name="provider" />
+                <field name="subject_model" />
+                <field name="return_type" />
+                <field name="id_mapping_fields" />
+                <field name="max_batch_size" />
+                <field name="default_ttl" />
+              </tree>
+            </field>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_metrics_registry_inspect" model="ir.actions.act_window">
+    <field name="name">Runtime Registry</field>
+    <field name="res_model">openspp.indicator.registry.inspect</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+
+  <menuitem
+        id="menu_openspp_metrics_registry_runtime"
+        name="Runtime Registry"
+        parent="spp_indicators.menu_openspp_metrics_root"
+        action="action_metrics_registry_inspect"
+        sequence="40"
+        groups="base.group_system"
+    />
+</odoo>
