@@ -207,7 +207,7 @@ jobs:
         run: oca_run_tests
       - name: Combine coverage data
         run: coverage combine .coverage-mis .coverage-farmer .coverage-social
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Update .pot files
