@@ -1,0 +1,8 @@
+{
+  "name": "openspp-modules-ci-extras",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "node ci-warm.js"
+  }
+}
